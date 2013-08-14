@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.lvl6</groupId>
+	<artifactId>utopia-server</artifactId>
+	<version>1.0-SNAPSHOT</version>
+
+	<name>Utopia Server</name>
+
+	<packaging>war</packaging>
+
+	<description>The Utopia Server</description>
+
+	<developers>
+		<developer>
+			<name>Conrad</name>
+			<email>conrad@lvl6.com</email>
+		</developer>
+		<developer>
+			<name>Kelly</name>
+		</developer>
+		<developer>
+			<name>Ashwin</name>
+		</developer>
+		<developer>
+			<name>Art</name>
+		</developer>
+	</developers>
+	<inceptionYear>2011</inceptionYear>
+	<organization>
+		<name>Lvl6</name>
+		<url>lvl6.com</url>
+	</organization>
+
+	<scm>
+		<url>https://github.com/levelsix/Utopia.git</url>
+	</scm>
+
+	<repositories>
+		<repository>
+			<id>sonatype-releases</id>
+			<name>Sonatype Releases</name>
+			<layout>default</layout>
+			<url>http://oss.sonatype.org/content/repositories/releases/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spy</id>
+			<name>Spy Repository</name>
+			<layout>default</layout>
+			<url>http://files.couchbase.com/maven2/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<properties>
+		<!-- <jdbc.url><![CDATA[jdbc:mysql://kingdom-dev-1.cv5kxrel3z7x.us-east-1.rds.amazonaws.com/kingdom?useLegacyDatetimeCode=false]]></jdbc.url> -->
+		<jdbc.url><![CDATA[jdbc:mysql://dev.lvl6.com/kingdom?useLegacyDatetimeCode=false]]></jdbc.url>
+		<jdbc.username>lvl6admin</jdbc.username>
+		<jdbc.password>robashen123</jdbc.password>
+		<jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+		<jdbc.idleConnectionTestPeriodInMinutes>1</jdbc.idleConnectionTestPeriodInMinutes>
+		<jdbc.idleMaxAgeInMinutes>5</jdbc.idleMaxAgeInMinutes>
+		<jdbc.maxConnectionsPerPartition>30</jdbc.maxConnectionsPerPartition>
+		<jdbc.minConnectionsPerPartition>2</jdbc.minConnectionsPerPartition>
+		<jdbc.partitionCount>3</jdbc.partitionCount>
+		<jdbc.acquireIncrement>2</jdbc.acquireIncrement>
+		<jdbc.statementsCacheSize>500</jdbc.statementsCacheSize>
+		<jdbc.releaseHelperThreads>3</jdbc.releaseHelperThreads>
+
+
+		<hazelcast.ec2.security.group></hazelcast.ec2.security.group>
+		<hazelcast.ec2.region></hazelcast.ec2.region>
+		<hazelcast.ec2.awsId></hazelcast.ec2.awsId>
+		<hazelcast.ec2.awsSecretKey></hazelcast.ec2.awsSecretKey>
+		<hazelcast.group>main</hazelcast.group>
+		<hazelcast.pass>lvl6</hazelcast.pass>
+		<hazelcast.config>dev</hazelcast.config>
+		<hazelcast.port>5701</hazelcast.port>
+		<hazelcast.dev.ips>5.9.28.212</hazelcast.dev.ips>
+		<server.ip>0.0.0.0</server.ip>
+		<server.port>10001</server.port>
+
+		<globals.isSandbox>true</globals.isSandbox>
+		<globals.iddictionOn>false</globals.iddictionOn>
+		<globals.kabamEnabled>true</globals.kabamEnabled>
+		<globals.offerChartEnabled>false</globals.offerChartEnabled>
+		<globals.appStoreUrl><![CDATA[itms-apps://itunes.com/apps/ageofchaos]]></globals.appStoreUrl>
+		<globals.appleBundleId>com.lvl6.kingdom</globals.appleBundleId>
+		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
+		<globals.initial.diamonds>20</globals.initial.diamonds>
+		
+		<lvl6.application.version>3.5f</lvl6.application.version>
+		<lvl6.application.healthcheck.timeout.seconds>6</lvl6.application.healthcheck.timeout.seconds>
+		<apns.path.to.cert>/usr/share/tomcat7/KingdomAPNSDevKey.p12</apns.path.to.cert>
+		<apns.cert.password>robashen123</apns.cert.password>
+		<lvl6.server.log.appender>R</lvl6.server.log.appender>
+		<lvl6.server.log.location>/var/log/tomcat7/kingdom</lvl6.server.log.location>
+		<lvl6.cassandra.hosts>robot.lvl6.com</lvl6.cassandra.hosts>
+		<lvl6.cassandra.keyspace>Logs</lvl6.cassandra.keyspace>
+		<lvl6.cassandra.stats.keyspace>stats</lvl6.cassandra.stats.keyspace>
+		<lvl6.cassandra.column.family>DevLogs</lvl6.cassandra.column.family>
+		<lvl6.cassandra.cluster.name>Test Cluster</lvl6.cassandra.cluster.name>
+		<lvl6.cassandra.replication.factor>1</lvl6.cassandra.replication.factor>
+
+		<lvl6.elastic.search.cluster.name>lvl6_robot</lvl6.elastic.search.cluster.name>
+		<lvl6.elastic.search.hosts>robot.lvl6.com</lvl6.elastic.search.hosts>
+
+		<maven.build.timestamp.format>yyyy-MM-dd-HH-mm-ss</maven.build.timestamp.format>
+		<beanstalk.versionLabel>${maven.build.timestamp}</beanstalk.versionLabel>
+		<application.release.name>Kingdom</application.release.name>
+		<wicket.mode>development</wicket.mode>
+		
+		<lvl6.jedis.host>robot.lvl6.com</lvl6.jedis.host>
+		<lvl6.jedis.auth>L3v3lS!x_K!ngd0m$</lvl6.jedis.auth>
+		<lvl6.jedis.database>0</lvl6.jedis.database>
+
+		<ec2.instance.size>m1.small</ec2.instance.size>
+		<ec2.instance.count.minimum>4</ec2.instance.count.minimum>
+		<ec2.instance.count.maximum>10</ec2.instance.count.maximum>
+		<ec2.tomcat.memory>1400m</ec2.tomcat.memory>
+		<ec2.tomcat.max.permsize>256m</ec2.tomcat.max.permsize>
+		<spring.version>3.1.2.RELEASE</spring.version>
+		<spring.security.version>3.1.1.RELEASE</spring.security.version>
+		<tests.fake.client.host>localhost</tests.fake.client.host>
+		<lvl6.smtp.host>smtp.gmail.com</lvl6.smtp.host>
+		<lvl6.smtp.port>587</lvl6.smtp.port>
+		<lvl6.smtp.username>lvl6sender@gmail.com</lvl6.smtp.username>
+		<lvl6.smtp.password>robashen123</lvl6.smtp.password>
+		<lvl6.smtp.contact1>5208206924@vtext.com</lvl6.smtp.contact1>
+
+		<amqp.host>robot.lvl6.com</amqp.host>
+		<amqp.user>lvl6server</amqp.user>
+		<amqp.pass>devserver</amqp.pass>
+		<amqp.vhost>devageofchaos</amqp.vhost>
+		<amqp.exchange>gamemessages</amqp.exchange>
+		<amqp.chat.exchange>chatmessages</amqp.chat.exchange>
+		<amqp.client.messages.routing.key>messagesFromPlayers</amqp.client.messages.routing.key>
+	</properties>
+
+	<profiles>
+		<!-- <profile> <id>lvl6prod</id> <build> <plugins> <plugin> <artifactId>maven-antrun-plugin</artifactId> 
+			<executions> <execution> <phase>generate-resources</phase> <goals> <goal>run</goal> 
+			</goals> <configuration> <tasks> <delete file="src/main/resources/${apns.path.to.cert}" 
+			/> <copy tofile="src/main/resources/${apns.path.to.cert}" file="/root/${apns.path.to.cert}" 
+			/> </tasks> </configuration> </execution> </executions> </plugin> </plugins> 
+			</build> </profile> -->
+		<profile>
+			<id>kellyrobot</id>
+			<properties>
+				<lvl6.server.log.location>/root/kelly/tomcat7/logs/kingdom</lvl6.server.log.location>
+				<server.port>10002</server.port>
+				<hazelcast.group>kelly</hazelcast.group>
+				<hazelcast.pass>lvl6</hazelcast.pass>
+				<hazelcast.config>dev</hazelcast.config>
+				<hazelcast.port>6702</hazelcast.port>
+				<lvl6.cassandra.hosts>localhost</lvl6.cassandra.hosts>
+				<hazelcast.dev.ips>5.9.28.212</hazelcast.dev.ips>
+			</properties>
+		</profile>
+		<profile>
+			<id>kellylocal</id>
+			<properties>
+				<lvl6.server.log.location>/tmp/kingdom</lvl6.server.log.location>
+				<server.port>10001</server.port>
+				<hazelcast.group>kelly1</hazelcast.group>
+				<hazelcast.pass>lvl6</hazelcast.pass>
+				<hazelcast.config>dev</hazelcast.config>
+				<hazelcast.port>6702</hazelcast.port>
+				<hazelcast.dev.ips>192.168.5.101</hazelcast.dev.ips>
+			</properties>
+		</profile>
+		<profile>
+			<id>ashwinlocal</id>
+			<properties>
+				<lvl6.server.log.location>/Users/Ashwin/utopia-server/log</lvl6.server.log.location>
+				<server.port>10001</server.port>
+				<hazelcast.group>conrad</hazelcast.group>
+				<hazelcast.pass>lvl6</hazelcast.pass>
+				<hazelcast.config>dev</hazelcast.config>
+				<hazelcast.port>6701</hazelcast.port>
+				<hazelcast.dev.ips>192.168.1.8, 192.168.1.7, 10.0.1.9</hazelcast.dev.ips>
+			</properties>
+		</profile>
+		<profile>
+			<id>arturolocal</id>
+			<properties>
+				<lvl6.server.log.location>/Users/coopermor/utopia-server/log</lvl6.server.log.location>
+				<server.port>10001</server.port>
+				<hazelcast.group>conrad</hazelcast.group>
+				<hazelcast.pass>lvl6</hazelcast.pass>
+				<hazelcast.config>dev</hazelcast.config>
+				<hazelcast.port>6701</hazelcast.port>
+				<hazelcast.dev.ips>192.168.105.119, 192.168.1.7, 10.0.1.18</hazelcast.dev.ips>
+			</properties>
+		</profile>
+	</profiles>
+
+
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>br.com.ingenieux</groupId>
+					<artifactId>beanstalk-maven-plugin</artifactId>
+					<version>0.2.7-RC5</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+<!-- 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.4.2</version>
+				<executions>
+					<execution>
+						<id>default-copy-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<outputDirectory>${project.build.directory}/${project.artifactId}-${project.version}/WEB-INF/classes</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/resources/</directory>
+									<includes>
+										<include>logback.xml</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin> -->
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/test/*.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<archiveClasses>true</archiveClasses>
+					<webResources>
+						<resource>
+							<directory>${basedir}/src/main/webapp/WEB-INF</directory>
+							<filtering>true</filtering>
+							<targetPath>WEB-INF</targetPath>
+							<includes>
+								<include>**/*.xml</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>br.com.ingenieux</groupId>
+				<artifactId>beanstalk-maven-plugin</artifactId>
+				<configuration>
+					<applicationName>${application.release.name}</applicationName>
+					<environmentName>${application.release.name}-${maven.build.timestamp}</environmentName>
+					<defaultEnvironmentName>default</defaultEnvironmentName>
+					<cnamePrefix>${application.release.name}-${maven.build.timestamp}</cnamePrefix>
+					<timeoutMins>80</timeoutMins>
+					<s3Bucket>prodWars</s3Bucket>
+					<s3Key>${application.release.name}/${application.release.name}-${maven.build.timestamp}.war</s3Key>
+					<!-- <configurationTemplate>lvl6prod-${maven.build.timestamp}</configurationTemplate> -->
+					<!-- <templateName>lvl6prod-${maven.build.timestamp}</templateName> -->
+					<solutionStack>64bit Amazon Linux running Tomcat 7</solutionStack>
+					<optionSettings>
+						<optionSetting>
+							<namespace>aws:autoscaling:launchconfiguration</namespace>
+							<optionName>EC2KeyName</optionName>
+							<value>lvl6-us-east</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:elasticbeanstalk:application</namespace>
+							<optionName>Application Healthcheck URL</optionName>
+							<value>/index.html</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
+							<optionName>Xms</optionName>
+							<value>${ec2.tomcat.memory}</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
+							<optionName>Xmx</optionName>
+							<value>${ec2.tomcat.memory}</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:elasticbeanstalk:container:tomcat:jvmoptions</namespace>
+							<optionName>XX:MaxPermSize</optionName>
+							<value>${ec2.tomcat.max.permsize}</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:launchconfiguration</namespace>
+							<optionName>SecurityGroups</optionName>
+							<value>elasticbeanstalk-default</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:asg</namespace>
+							<optionName>MinSize</optionName>
+							<value>${ec2.instance.count.minimum}</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:asg</namespace>
+							<optionName>MaxSize</optionName>
+							<value>${ec2.instance.count.maximum}</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:asg</namespace>
+							<optionName>Availability Zones</optionName>
+							<value>Any 2</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:trigger</namespace>
+							<optionName>Period</optionName>
+							<value>5</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:trigger</namespace>
+							<optionName>Statistic</optionName>
+							<value>Average</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:trigger</namespace>
+							<optionName>MeasureName</optionName>
+							<value>NetworkOut</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:trigger</namespace>
+							<optionName>Unit</optionName>
+							<value>Bytes</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:trigger</namespace>
+							<optionName>UpperThreshold</optionName>
+							<value>12000000</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:trigger</namespace>
+							<optionName>LowerThreshold</optionName>
+							<value>2000000</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:elb:loadbalancer</namespace>
+							<optionName>LoadBalancerHTTPPort</optionName>
+							<value>80</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:elb:policies</namespace>
+							<optionName>Stickiness Cookie Expiration</optionName>
+							<value>0</value>
+						</optionSetting>
+ 						<optionSetting>
+							<namespace>aws:elb:policies</namespace>
+							<optionName>Stickiness Policy</optionName>
+							<value>true</value>
+						</optionSetting> 
+						<optionSetting>
+							<namespace>aws:elasticbeanstalk:hostmanager</namespace>
+							<optionName>LogPublicationControl</optionName>
+							<value>true</value>
+						</optionSetting>
+						<optionSetting>
+							<namespace>aws:autoscaling:launchconfiguration</namespace>
+							<optionName>InstanceType</optionName>
+							<value>${ec2.instance.size}</value>
+						</optionSetting>
+					</optionSettings>
+					<!-- <configurationTemplates> -->
+					<!-- <configurationTemplate> -->
+					<!-- <id>lvl6prod-${maven.build.timestamp}</id> -->
+
+					<!-- </configurationTemplate> -->
+					<!-- </configurationTemplates> -->
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.html</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>*.p12</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>*.p12</include>
+				</includes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+				<filtering>true</filtering>
+			</testResource>
+		</testResources>
+	</build>
+
+
+
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.integration</groupId>
+				<artifactId>spring-integration-amqp</artifactId>
+				<version>2.1.3.RELEASE</version>
+			</dependency>
+			<dependency>
+       			<groupId>net.sf.opencsv</groupId>
+       			<artifactId>opencsv</artifactId>
+      			<version>2.3</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.20</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>1.6.6</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.protobuf</groupId>
+				<artifactId>protobuf-java</artifactId>
+				<version>2.4.1</version>
+			</dependency>
+			<dependency>
+				<groupId>spy</groupId>
+				<artifactId>spymemcached</artifactId>
+				<version>2.8.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
+				<version>1.2.16</version> </dependency> -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.6.6</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.0.7</version>
+			</dependency>
+			<dependency>
+				<groupId>c3p0</groupId>
+				<artifactId>c3p0</artifactId>
+				<version>0.9.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.jolbox</groupId>
+				<artifactId>bonecp</artifactId>
+				<version>0.7.1.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>com.notnoop.apns</groupId>
+				<artifactId>apns</artifactId>
+				<version>0.1.6</version>
+			</dependency>
+			<dependency>
+				<groupId>json-java</groupId>
+				<artifactId>json-java</artifactId>
+				<version>1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-servlet-api</artifactId>
+				<version>7.0.27</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-catalina</artifactId>
+				<version>7.0.27</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-annotations-api</artifactId>
+				<version>7.0.27</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-api</artifactId>
+				<version>7.0.27</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-juli</artifactId>
+				<version>7.0.27</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-util</artifactId>
+				<version>7.0.27</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-coyote</artifactId>
+				<version>7.0.27</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.hazelcast</groupId>
+				<artifactId>hazelcast-all</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<!-- <dependency> <groupId>com.hazelcast</groupId> <artifactId>hazelcast-wm</artifactId> 
+				<version>2.2</version> </dependency> -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.integration</groupId>
+				<artifactId>spring-integration-core</artifactId>
+				<version>2.1.3.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.integration</groupId>
+				<artifactId>spring-integration-ip</artifactId>
+				<version>2.1.3.RELEASE</version>
+			</dependency>
+			<!-- <dependency> -->
+			<!-- <groupId>org.springframework</groupId> -->
+			<!-- <artifactId>spring-aspects</artifactId> -->
+			<!-- <version>${spring.version}</version> -->
+			<!-- </dependency> -->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.1.1</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>12.0</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.scribe</groupId>
+				<artifactId>scribe</artifactId>
+				<version>1.3.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.mina</groupId>
+				<artifactId>mina-core</artifactId>
+				<version>2.0.4</version>
+			</dependency>
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-core</artifactId>
+				<version>1.5.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-datetime</artifactId>
+				<version>1.5.7</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-http</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<!-- <dependency> <groupId>me.prettyprint</groupId> <artifactId>hector-core</artifactId> 
+				<version>1.0-5</version> </dependency> -->
+			<dependency>
+				<groupId>org.hectorclient</groupId>
+				<artifactId>hector-core</artifactId>
+				<version>1.1-1</version>
+			</dependency>
+			<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
+				<version>1.6.6</version> </dependency> -->
+			<dependency>
+				<groupId>redis.clients</groupId>
+				<artifactId>jedis</artifactId>
+				<version>2.1.0</version>
+				<type>jar</type>
+				<!-- <scope>compile</scope> -->
+			</dependency>
+			<dependency>
+				<groupId>com.jayway.awaitility</groupId>
+				<artifactId>awaitility</artifactId>
+				<version>1.3.4</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>3.1.2.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>3.1.2.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>1.7.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>1.7.0</version>
+			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.elasticsearch</groupId>
+				<artifactId>elasticsearch</artifactId>
+				<version>0.19.8</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-support</artifactId>
+				<version>2.0.8</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4.5</version>
+			</dependency>
+			<dependency>
+				<groupId>com.googlecode.wicket-charts</groupId>
+				<artifactId>wicket-charts</artifactId>
+				<version>1.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>1.8.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>4.2.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<dependencies>
+	    <dependency>
+       		<groupId>net.sf.opencsv</groupId>
+      		<artifactId>opencsv</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-simple</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>spy</groupId>
+			<artifactId>spymemcached</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.jolbox</groupId>
+			<artifactId>bonecp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.notnoop.apns</groupId>
+			<artifactId>apns</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>json-java</groupId>
+			<artifactId>json-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.hazelcast</groupId>
+			<artifactId>hazelcast-all</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>com.hazelcast</groupId> <artifactId>hazelcast-wm</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-ip</artifactId>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework</groupId> -->
+		<!-- <artifactId>spring-aspects</artifactId> -->
+		<!-- </dependency> -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>javax.servlet-api</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.scribe</groupId>
+			<artifactId>scribe</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.mina</groupId>
+			<artifactId>mina-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>me.prettyprint</groupId> <artifactId>hector-core</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>org.hectorclient</groupId>
+			<artifactId>hector-core</artifactId>
+			<!-- <exclusions> <exclusion> <artifactId>log4j</artifactId> <groupId>log4j</groupId> 
+				</exclusion> <exclusion> <artifactId>slf4j-log4j12</artifactId> <groupId>org.slf4j</groupId> 
+				</exclusion> </exclusions> -->
+			<exclusions>
+				<exclusion>
+					<artifactId>slf4j-log4j12</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>servlet-api</artifactId>
+					<groupId>org.mortbay.jetty</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
+			</dependency> -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-datetime</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.wicket-charts</groupId>
+			<artifactId>wicket-charts</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-amqp</artifactId>
+		</dependency>
+		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
+			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjrt</artifactId> 
+			</dependency> <dependency> <groupId>org.aspectj</groupId> <artifactId>aspectjweaver</artifactId> 
+			</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.security</groupId> <artifactId>spring-security-http</artifactId> 
+			</dependency> -->
+	</dependencies>
+
+</project>

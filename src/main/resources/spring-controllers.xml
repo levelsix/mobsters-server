@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation=" 
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration 
+	http://www.springframework.org/schema/integration/spring-integration.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-3.0.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	
+
+	<context:component-scan base-package="com.lvl6" />
+<!-- 	<context:component-scan base-package="com.lvl6.retrieveutils" /> -->
+	
+
+	<task:annotation-driven executor="controllersExecutor" />
+
+	<task:executor id="controllersExecutor" 
+		pool-size="5-50"
+		queue-capacity="5" 
+		rejection-policy="CALLER_RUNS" />
+
+
+	<task:executor id="serverTasksExecutor" 
+		pool-size="5-15"
+		queue-capacity="5" 
+		rejection-policy="CALLER_RUNS" />
+	
+	
+	<bean id="apnsProperties" class="com.lvl6.properties.APNSProperties">
+		<property name="pathToCert" value="${apns.path.to.cert}"></property>
+		<property name="certPassword" value="${apns.cert.password}"></property>
+	</bean>
+	
+	<bean id="apnsWriter" class="com.lvl6.server.APNSWriter" />
+
+
+	<!-- bean id="eventWriter" class="com.lvl6.server.EventWriter" /-->
+	<bean id="eventWriter" class="com.lvl6.server.EventWriterAmqp" />
+	
+	<bean id="serverAdmin" class="com.lvl6.server.ServerAdmin" />
+	
+	<bean id="nameGeneratorElven" class="com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven" />
+	
+	<bean id="appGlobals" class="com.lvl6.properties.Globals" >
+		<property name="sandbox" value="${globals.isSandbox}" />
+		<property name="iddictionOn" value="${globals.iddictionOn}" />
+		<property name="kabamEnabled" value="${globals.kabamEnabled}" />
+		<property name="offerChartEnabled" value="${globals.offerChartEnabled}" />
+		<property name="appStoreUrl" ><value><![CDATA[${globals.appStoreUrl}]]></value></property>
+		<property name="reviewPageUrl" ><value><![CDATA[${globals.reviewPageUrl}]]></value></property>
+		<property name="appleBundleId" value="${globals.appleBundleId}" />
+		<property name="initialDiamonds" value="${globals.initial.diamonds}" />
+		<property name="versionNumber" value="${lvl6.application.version}" />
+		<property name="healthCheckTimeoutSeconds" value="${lvl6.application.healthcheck.timeout.seconds}" />
+	</bean>
+	
+	
+</beans>

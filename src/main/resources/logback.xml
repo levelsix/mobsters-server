@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d | %-5p | %X{playerId}%X{udid} | %t | %c{1} - %m%n</pattern>
+		</encoder>
+	</appender>
+ 
+	<appender name="elasticsearch"
+		class="com.lvl6.elasticsearch.LogBackElasticSearchAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<elasticHosts>${lvl6.elastic.search.hosts}</elasticHosts>
+		<elasticCluster>${lvl6.elastic.search.cluster.name}</elasticCluster>
+	</appender>
+
+	<appender name="file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>
+		<file>${lvl6.server.log.location}.log</file>
+		<Append>true</Append>
+		<Encoding>UTF-8</Encoding>
+		<ImmediateFlush>false</ImmediateFlush>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${lvl6.server.log.location}.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d | %-5p | %X{playerId}%X{udid} | %t | %c{1} - %m%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<appender name="errorfile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		<file>${lvl6.server.log.location}_errors.log</file>
+		<Append>true</Append>
+		<Encoding>UTF-8</Encoding>
+		<ImmediateFlush>false</ImmediateFlush>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${lvl6.server.log.location}_errors.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d | %-5p | %X{playerId}%X{udid} | %t | %c{1} - %m%n</pattern>
+		</encoder>
+	</appender>
+
+<!-- 	<logger name="com.lvl6.scheduledtasks" level="DEBUG" additivity="false">
+		<appender-ref ref="file" />
+	</logger> -->
+	
+
+	<root level="info">
+		<appender-ref ref="console" />
+		<appender-ref ref="file" />
+		<appender-ref ref="errorfile" />
+		<!-- <appender-ref ref="elasticsearch" />  -->
+	</root>
+</configuration>

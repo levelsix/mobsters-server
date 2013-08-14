@@ -1,0 +1,981 @@
+package com.lvl6.proto;
+
+option java_outer_classname = "InfoProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message UserCityGemProto {
+	optional int32 userId = 1;
+	optional int32 cityId = 2;
+	optional int32 gemId = 3;
+	optional int32 quantity = 4;
+}
+
+message CityGemProto {
+	optional int32 gemId = 1;
+	optional float dropRate = 2;
+	optional bool isActive = 3;
+	optional string gemImageName = 4;
+	optional bool droppedOnlyFromBosses = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
+message MentorshipProto {
+	optional int32 id = 1;
+	optional int32 mentorId = 2;
+	optional int32 menteeId = 3;
+	optional int64 startTime = 4;
+	optional int64 questOneCompleteTime = 5;
+	optional int64 questTwoCompleteTime = 6;
+	optional int64 questThreeCompleteTime = 7;
+	optional int64 questFourCompleteTime = 8;
+	optional int64 questFiveCompleteTime = 9;
+	optional bool isDropped = 10;
+}
+
+message MinimumUserProtoForMentorship {
+	optional MinimumUserProto mup = 1;
+	optional int64 createTime = 2; 
+	optional bool isGood = 3;
+}
+
+message PrivateChatPostProto {
+	optional int32 privateChatPostId = 1;
+	optional MinimumUserProto poster = 2;
+	optional MinimumUserProto recipient = 3;
+	optional int64 timeOfPost = 4;
+	optional string content = 5;
+}
+
+message RareBoosterPurchaseProto {
+	optional MinimumUserProto user = 1;
+	optional BoosterPackProto booster = 2;
+	optional FullEquipProto equip = 3;
+	optional uint64 timeOfPurchase = 4;
+}
+
+enum PurchaseOption {
+	//these specify quantity, e.g. 1 for ONE, and 10 for TWO
+	ONE = 0;	//Check ControllerConstants.BOOSTER_PACK__PURCHASE_OPTION_ONE;
+	TWO = 1;	//Check ControllerConstants.BOOSTER_PACK__PURCHASE_OPTION_TWO;
+}
+
+message UserBoosterPackProto {
+	optional int32 boosterPackId = 1;
+	optional int32 userId = 2;
+	repeated UserBoosterItemProto userBoosterItems = 3;
+}
+
+message UserBoosterItemProto {
+	optional int32 boosterItemId = 1;
+	optional int32 userId = 2;
+	optional int32 numReceived = 3;
+}
+
+message BoosterPackProto {
+	optional int32 boosterPackId = 1;
+	optional bool costsCoins = 2;
+	optional string name = 3;
+	optional string chestImage = 4;
+	optional string middleImage = 5;
+	optional string backgroundImage = 6;
+	optional int32 minLevel = 7;
+	optional int32 maxLevel = 8;
+	optional int32 dailyLimit = 9;
+	repeated BoosterItemProto boosterItems = 10;
+	optional int32 salePriceOne = 11;
+	optional int32 retailPriceOne = 12;
+	optional int32 salePriceTwo = 13;
+	optional int32 retailPriceTwo = 14; 
+	optional bool isStarterPack = 15;
+}
+
+message BoosterItemProto {
+	optional int32 boosterItemId = 1;
+	optional int32 equipId = 2;
+	optional int32 quantity = 3;
+	optional bool isSpecial = 4;
+}
+
+message MinimumUserProtoForClanTowerScores {
+	optional MinimumUserProtoWithLevel minUserProtoWithLevel = 1;
+	optional int32 pointsGained = 2;
+	optional int32 pointsLost = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message EquipEnhancementProto {
+	optional int32 enhancementId = 1;
+	optional int32 userId = 2;
+	optional EquipEnhancementItemProto enhancingEquip = 3;
+	repeated EquipEnhancementItemProto feederEquips = 4;
+	optional int64 startTime = 5;
+	optional int64 timeOfSpeedup = 6;
+}
+
+message EquipEnhancementItemProto {
+	optional int32 equipId = 1;
+	optional int32 level = 2;
+	optional int32 enhancementPercentage = 3;
+}
+
+message InAppPurchasePackageProto {
+	optional string packageId = 1;
+	optional int32 currencyAmount = 2;
+	optional bool isGold = 3;
+	optional string imageName = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ColorProto {
+	optional int32 red = 1;
+	optional int32 green = 2;
+	optional int32 blue = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message LeaderboardEventProto {
+	optional int32 eventId = 1;
+	optional int64 startDate = 2;
+	optional int64 endDate = 3;
+	optional string eventName = 4;
+	repeated LeaderboardEventRewardProto rewards = 5;
+	optional int64 lastShowDate = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
+message LeaderboardEventRewardProto {
+	optional int32 leaderboardEventId = 1;
+	optional int32 minRank = 2;
+	optional int32 maxRank = 3;
+	optional int32 goldRewarded = 4;
+	optional string backgroundImageName = 5;
+	optional string prizeImageName = 6;
+	optional ColorProto titleColor = 7;
+}
+
+//------------------------------------------------------------------------------------------
+
+message BossEventProto {
+	optional int32 cityId = 1;
+	optional int64 startDate = 2;
+	optional int64 endDate = 3;
+	optional string eventName = 4;
+	optional string headerImage = 5;
+	optional FullEquipProto leftEquip = 6;
+	optional string leftTagImage = 7;
+	optional FullEquipProto middleEquip = 8;
+	optional string middleTagImage = 9;
+	optional FullEquipProto rightEquip = 10;
+	optional string rightTagImage = 11;
+	optional string infoDescription = 12;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ClanTowerProto {
+	optional int32 towerId = 1;
+	optional string towerName = 2;
+	optional string towerImageName = 3;
+	optional MinimumClanProto towerOwner = 4;
+	optional int64 ownedStartTime = 5;
+	optional int32 silverReward = 6;
+	optional int32 goldReward = 7;
+	optional int32 numHoursToCollect = 8;
+	optional MinimumClanProto towerAttacker = 9;
+	optional int64 attackStartTime = 10;
+	optional int32 ownerBattlesWin = 11;
+	optional int32 attackerBattlesWin = 12;
+	optional int32 numHoursForBattle = 13;
+	optional int64 lastRewardGiven = 14;
+	optional ColorProto titleColor = 15;
+}
+
+//---------------------------------------------------------------------------------------
+
+message GoldSaleProto {
+	optional int32 saleId = 1;
+	optional int64 startDate = 2;
+	optional int64 endDate = 3;
+	optional string package1SaleIdentifier = 4;
+	optional string package2SaleIdentifier = 5;
+	optional string package3SaleIdentifier = 6;
+	optional string package4SaleIdentifier = 7;
+	optional string package5SaleIdentifier = 8;
+	optional string goldShoppeImageName = 9;
+	optional string goldBarImageName = 10;
+	optional string packageS1SaleIdentifier = 11;
+	optional string packageS2SaleIdentifier = 12;
+	optional string packageS3SaleIdentifier = 13;
+	optional string packageS4SaleIdentifier = 14;
+	optional string packageS5SaleIdentifier = 15;
+	optional bool isBeginnerSale = 16;
+}
+
+//-----------------------------------------------------------------------------------------
+
+message GroupChatMessageProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 timeOfChat = 2;
+	optional string content = 3;
+	optional bool isAdmin = 4;
+	optional int32 chatId = 5;
+}
+
+//-------------------------------------------------------------------------------------
+
+message LockBoxEventProto {
+	optional int32 lockBoxEventId = 1;
+	optional int64 startDate = 2;
+	optional int64 endDate = 3;
+	optional string lockBoxImageName = 4;
+	optional string eventName = 5;
+	optional FullEquipProto prizeEquip = 6;
+	repeated LockBoxItemProto items = 7;
+	optional string descriptionString = 8;
+	optional string descriptionImageName = 9;
+	optional string tagImageName = 10;
+}
+
+message LockBoxItemProto {
+	optional int32 lockBoxItemId = 1;
+	optional int32 lockBoxEventId = 2;
+	optional float chanceToUnlock = 3;
+	optional string name = 4;
+	optional EquipClassType type = 5;
+	optional string imageName = 6;
+	optional int32 redeemForNumBoosterItems = 7;
+	optional bool isGoldBoosterPack = 8;
+}
+
+message UserLockBoxEventProto {
+	optional int32 lockBoxEventId = 1;
+	optional int32 userId = 2;
+	optional int32 numLockBoxes = 3;
+	optional int32 numTimesCompleted = 4;
+	optional int64 lastPickTime = 5;
+	repeated UserLockBoxItemProto items = 6;
+	optional bool hasBeenRedeemed = 7;
+}
+
+message UserLockBoxItemProto {
+	optional int32 lockBoxItemId = 1;
+	optional int32 userId = 2;
+	optional int32 quantity = 3;
+}
+	
+enum EquipClassType {
+	WARRIOR = 0;
+	ARCHER = 1;
+	MAGE = 2;
+	ALL_AMULET = 3;	
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullBossProto {
+	optional int32 bossId = 1;
+	optional int32 cityId = 2;
+	optional int32 assetNumWithinCity = 3;
+	optional int32 regularAttackEnergyCost = 4;
+	optional int32 minutesToKill = 5;
+	optional float superAttackDamageMultiplier = 6;
+	optional int32 superAttackEnergyCost = 7;
+	optional string name = 8;
+	optional int32 expConstantA = 9;
+	optional int32 expConstantB = 10; 
+	optional int32 hpConstantA = 11;
+	optional int32 hpConstantB = 12;
+	optional int32 hpConstantC = 13;
+	optional int32 dmgConstantA = 14;
+	optional int32 dmgConstantB = 15;
+	optional string mapIconImageName = 16;
+	optional string unlockedBossImageName = 17;
+	
+	
+}
+
+message FullUserBossProto {
+	optional int32 bossId = 1;
+	optional int32 userId = 2;
+	optional int32 curHealth = 3;
+	optional int32 currentLevel = 4; //starts at 0
+	optional int64 startTime = 5;
+	//optional int64 lastKilledTime = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullClanProtoWithClanSize {
+	optional FullClanProto clan = 1;
+	optional int32 clanSize = 2;
+}
+
+message ClanBulletinPostProto {
+	optional int32 clanBulletinPostId = 5;
+	optional MinimumUserProto poster = 1;
+	optional int32 clanId = 2;
+	optional int64 timeOfPost = 3;
+	optional string content = 4;
+}
+
+message ClanTierLevelProto {
+	optional int32 tierLevel = 1;
+	optional int32 maxSize = 2;
+	optional int32 upgradeCost = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message MinimumUserProtoForClans {
+
+	optional MinimumUserProtoWithBattleHistory minUserProto = 1;
+	optional UserClanStatus clanStatus = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserClanProto {
+	optional int32 userId = 1;
+	optional int32 clanId = 2;
+	optional UserClanStatus status = 3;
+	optional int64 requestTime = 4;
+}
+
+enum UserClanStatus {
+	MEMBER = 0;
+	REQUESTING = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message MinimumUserProtoWithBattleHistory {
+	optional MinimumUserProtoWithLevel minUserProtoWithLevel = 1;
+	optional int32 battlesWon = 2;
+	optional int32 battlesLost = 3;
+	optional int32 battlesFled = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum GroupChatScope {
+	GLOBAL = 0;
+	ALLIANCE = 1;
+	LEGION = 2;
+	CLAN = 3;
+}
+
+message MonteCardProto {
+	optional int32 cardId = 1;
+     optional int32 diamondsGained = 2;
+     optional FullEquipProto equip = 3;
+     optional int32 equipLevel = 4;
+     optional int32 coinsGained = 5;
+}	
+
+//------------------------------------------------------------------------------------------
+
+message FullClanProto {
+	optional int32 clanId = 1;
+	optional string name = 2;
+	optional MinimumUserProto owner = 3;
+	optional int64 createTime = 4;
+	optional string description = 5;
+	optional string tag = 6;
+	optional bool isGood = 7;
+	optional int32 currentTierLevel = 8;
+	optional bool requestToJoinRequired = 9;
+}
+
+message MinimumClanProto {
+	optional int32 clanId = 1;
+	optional string name = 2;
+	optional int32 ownerId = 3;
+	optional int64 createTime = 4;
+	optional string description = 5;
+	optional string tag = 6;
+	optional bool isGood = 7;
+	optional int32 currentTierLevel = 8;
+	optional bool requestToJoinRequired = 9;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum LeaderboardType {
+	MOST_BATTLES_WON = 2;
+	MOST_COINS = 3;
+	MOST_EXP = 4;
+	BEST_KDR = 5;		//start counting only after x battles. so instead of displaying your rank, show that.
+	EVENT = 6;
+ }
+
+//------------------------------------------------------------------------------------------
+
+enum CharacterModType {
+	NEW_PLAYER = 1;
+	RESET_SKILL_POINTS = 2;
+	CHANGE_CHARACTER_TYPE = 3;
+	CHANGE_NAME = 4;			
+}
+	
+//------------------------------------------------------------------------------------------
+
+enum AnimationType {
+	GENERIC_ACTION = 1;
+	ATTACK = 2;
+	DRAGON = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum EarnFreeDiamondsType {
+	KIIP = 1;
+	ADCOLONY = 2;
+	FB_CONNECT = 3;
+	TAPJOY = 4;
+	FLURRY_VIDEO = 5;
+	TWITTER = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum SpecialQuestAction {
+	PURCHASE_FROM_ARMORY = 1;
+	PURCHASE_FROM_MARKETPLACE = 2;
+	SELL_TO_ARMORY = 3;
+	POST_TO_MARKETPLACE = 4;
+	DEPOSIT_IN_VAULT = 5;
+	WITHDRAW_FROM_VAULT = 6;
+	WRITE_ON_ENEMY_WALL = 7;
+	REQUEST_JOIN_CLAN = 8;
+	SUCCESSFULLY_FORGE_AN_ITEM = 9;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum UserType {
+	GOOD_WARRIOR = 0;
+	GOOD_ARCHER = 1;
+	GOOD_MAGE = 2;
+	BAD_WARRIOR = 3;
+	BAD_ARCHER = 4;
+	BAD_MAGE = 5;
+}
+
+message MinimumUserProto {
+	optional int32 userId = 1;
+	optional string name = 2;
+	optional UserType userType = 3;
+	optional MinimumClanProto clan = 4;
+}
+
+message MinimumUserProtoWithLevel {
+	optional MinimumUserProto minUserProto = 1;
+	optional int32 level = 2;
+}
+
+message MinimumUserProtoWithLevelForLeaderboard {
+	optional MinimumUserProto minUserProto = 1;
+	optional int32 level = 2;
+	optional LeaderboardType leaderboardType = 3;
+	optional int32 leaderboardRank = 4;
+	optional double leaderboardScore = 5;
+}
+
+message FullUserProto {
+	optional int32 userId = 1;
+	optional string name = 2;
+	optional int32 level = 3;
+	optional UserType userType = 4;
+	optional int32 attack = 5;
+	optional int32 defense = 6;
+	optional int32 stamina = 7;
+	optional int64 lastStaminaRefillTime = 8;
+	optional int32 energy = 10;
+	optional int64 lastEnergyRefillTime = 11;
+	optional int32 skillPoints = 13;
+	optional int32 energyMax = 15;
+	optional int32 staminaMax = 16;
+	optional int32 diamonds = 17;
+	optional int32 coins = 18;
+	optional int32 marketplaceDiamondsEarnings = 19;
+	optional int32 marketplaceCoinsEarnings = 20;
+	optional int32 vaultBalance = 21;
+	optional int32 experience = 22;
+	optional int32 tasksCompleted = 23;
+	optional int32 battlesWon = 24;
+	optional int32 battlesLost = 25;
+	optional int32 flees = 45;
+	optional string referralCode = 27;
+	optional int32 numReferrals = 28;
+	optional LocationProto userLocation = 30;
+	optional int32 numPostsInMarketplace = 31;
+	optional int32 numMarketplaceSalesUnredeemed = 32;
+	optional FullUserEquipProto weaponEquippedUserEquip = 33;
+	optional FullUserEquipProto armorEquippedUserEquip = 34;
+	optional FullUserEquipProto amuletEquippedUserEquip = 35;
+	optional int64 lastLoginTime = 36;
+	optional int64 lastLogoutTime = 37;
+	optional int64 lastShortLicensePurchaseTime = 43;
+	optional int64 lastLongLicensePurchaseTime = 44;
+	optional bool isFake = 46;
+	optional bool isAdmin = 48;
+	optional int32 numCoinsRetrievedFromStructs = 50;
+	optional int32 numAdColonyVideosWatched = 51;
+	optional int32 numGroupChatsRemaining = 54;
+	optional MinimumClanProto clan = 55;
+	optional int64 lastGoldmineRetrieval = 56;
+	optional bool hasReceivedfbReward = 57;
+	optional FullUserEquipProto weaponTwoEquippedUserEquip = 58;
+	optional FullUserEquipProto armorTwoEquippedUserEquip = 59;
+	optional FullUserEquipProto amuletTwoEquippedUserEquip = 60;
+	optional int32 prestigeLevel = 61;
+	optional int32 numAdditionalForgeSlots = 62;
+	optional int32 numBeginnerSalesPurchased = 63;
+	optional bool isMentor = 64;
+	optional bool hasActiveShield = 65;
+
+	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
+	//consider making other fields like this
+	optional string udid = 29;
+	optional string deviceToken = 38;
+	optional int64 lastBattleNotificationTime = 39;
+	optional int64 lastTimeAttacked = 40;
+	optional int32 numBadges = 42;
+	optional int64 createTime = 47;
+	optional int32 apsalarId = 49;
+	optional int32 numTimesKiipRewarded = 52;
+	optional int32 numConsecutiveDaysPlayed = 53;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullEquipProto {
+	optional int32 equipId = 1;
+	optional string name = 2;
+	optional EquipType equipType = 3;
+	optional string description = 4;
+	optional int32 attackBoost = 5;	
+	optional int32 defenseBoost = 6;
+	optional int32 minLevel = 7;
+	optional int32 coinPrice = 8;
+	optional int32 diamondPrice = 9;
+	optional float chanceOfLoss = 10;
+	optional EquipClassType classType = 11;
+	optional Rarity rarity = 12;
+	optional bool isBuyableInArmory = 13;
+	optional float chanceOfForgeFailureBase = 14;
+	optional int32 minutesToAttemptForgeBase = 15;
+	
+	enum Rarity {
+		COMMON = 0;
+		UNCOMMON = 1;
+		RARE = 2;
+		SUPERRARE = 3;
+		EPIC = 4;
+		LEGENDARY = 5;
+	}
+	
+	enum EquipType {
+		WEAPON = 0;
+		ARMOR = 1;
+		AMULET = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserStructureProto {
+	optional int32 userStructId = 1;
+	optional int32 userId = 2;
+	optional int32 structId = 3;
+	optional int64 lastRetrieved = 4;
+	optional CoordinateProto coordinates = 5;
+	optional int32 level = 6;
+	optional int64 purchaseTime = 7;
+	optional int64 lastUpgradeTime = 8;
+	optional bool isComplete = 9;
+	optional StructOrientation orientation = 10;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserEquipProto {
+	optional int32 userEquipId = 1;
+	optional int32 userId = 2;
+	optional int32 equipId = 3;
+	optional int32 level = 4;
+	optional int32 enhancementPercentage = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullStructureProto { 
+	optional int32 structId = 1;
+	optional string name = 2;
+	optional int32 income = 3;
+	optional int32 minutesToGain = 4;
+	optional int32 minutesToBuild = 5;
+	optional int32 minutesToUpgradeBase = 6;
+	optional int32 coinPrice = 7;
+	optional int32 diamondPrice = 8;
+	optional int32 minLevel = 9;
+	optional int32 xLength = 10;
+	optional int32 yLength = 11;
+	optional int32 instaBuildDiamondCost = 14;
+	optional int32 instaRetrieveDiamondCostBase = 15;
+	optional int32 instaUpgradeDiamondCostBase = 16;
+	optional int32 imgVerticalPixelOffset = 17;	
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullTaskProto {
+	optional int32 taskId = 1;
+	optional string name = 2;
+	optional int32 cityId = 3;
+	optional int32 numRequiredForCompletion = 4;
+	optional int32 energyCost = 5;
+	optional int32 minCoinsGained = 6;
+	optional int32 maxCoinsGained = 7;
+	optional float chanceOfEquipLoot = 8;
+	repeated int32 potentialLootEquipIds = 9;
+	optional int32 expGained = 10;
+	optional int32 assetNumWithinCity = 11;
+	optional string processingText = 12;
+	optional CoordinateProto spriteLandingCoords = 14;
+	optional AnimationType animationType = 15;
+	
+	repeated FullTaskEquipReqProto equipReqs = 13;
+	
+	message FullTaskEquipReqProto {
+		optional int32 taskId = 1;
+		optional int32 equipId = 2;
+		optional int32 quantity = 3;		
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullCityProto {
+	optional int32 cityId = 1;
+	optional string name = 2;
+	optional int32 minLevel = 3;
+	optional int32 expGainedBaseOnRankup = 4;
+	optional int32 coinsGainedBaseOnRankup = 5;
+	optional string mapImgName = 6;
+	optional CoordinateProto center = 7;
+	
+	repeated int32 taskIds = 10;
+	repeated int32 bossIds = 11;
+	optional int32 boosterPackId = 12;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserCityExpansionDataProto {
+	optional int32 userId = 1;
+	optional int32 farLeftExpansions = 2;
+	optional int32 farRightExpansions = 3;
+	optional int32 nearLeftExpansions = 4;
+	optional int32 nearRightExpansions = 5;
+	optional bool isExpanding = 6;
+	optional int64 lastExpandTime = 7;
+	optional ExpansionDirection lastExpandDirection = 8;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserCityProto {
+	optional int32 userId = 1;
+	optional int32 cityId = 2;
+	optional int32 currentRank = 3;
+	optional int32 numTasksCurrentlyCompleteInRank = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+message CoordinateProto {
+	optional float x = 1;
+	optional float y = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message LocationProto {
+	optional double latitude = 1;
+	optional double longitude = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum BattleResult {
+   	ATTACKER_WIN = 0;
+ 	DEFENDER_WIN = 1;
+ 	ATTACKER_FLEE = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message NeutralCityElementProto {
+	optional int32 cityId = 1;
+	optional int32 assetId = 2;
+	optional string name = 9;
+	optional NeutralCityElemType type = 3;
+	optional CoordinateProto coords = 4;
+	optional int32 xLength = 5;
+	optional int32 yLength = 6;
+	optional string imgId = 7;
+	optional StructOrientation orientation = 8;
+	
+	enum NeutralCityElemType {
+		PERSON_QUEST_GIVER = 0;
+		BUILDING = 1;
+		DECORATION = 2;
+		PERSON_NEUTRAL_ENEMY = 3;
+		BOSS = 4;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+enum MarketplacePostType {
+	PREMIUM_EQUIP_POST = 0;		//diamond, epics, and legendarys for diamonds
+	NORM_EQUIP_POST = 2;		//armory (so non epic and non legendar	y) coin items for coins
+}
+
+message FullMarketplacePostProto {
+	optional int32 marketplacePostId = 1;
+	optional MinimumUserProto poster = 2;
+	optional MarketplacePostType postType = 3;
+	optional int64 timeOfPost = 4;
+	optional FullEquipProto postedEquip = 5;
+	optional int32 diamondCost = 6;
+	optional int32 coinCost = 7;
+	optional int32 equipLevel = 8;
+	optional int32 equipEnhancementPercent = 9;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum MarketplaceJobRequirementType { 
+	BUY = 0;
+	SELL = 1;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum CritStructType {
+	AVIARY = 0;
+	CARPENTER = 2;
+	VAULT = 3;
+	ARMORY = 4;
+	MARKETPLACE = 5;
+	BLACKSMITH = 6;
+}
+
+message FullUserCritstructProto {
+	optional CritStructType type = 1;
+	optional CoordinateProto coords = 2;
+	optional StructOrientation orientation = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum StructOrientation {
+	POSITION_1 = 0;
+	POSITION_2 = 1;
+}
+
+enum ExpansionDirection {
+	FAR_LEFT = 0;
+	FAR_RIGHT = 1;
+	NEAR_LEFT = 2;
+	NEAR_RIGHT = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message MinimumUserTaskProto {
+     optional int32 userId = 1;
+     optional int32 taskId = 2;
+     optional int32 numTimesActed = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserQuestDataLargeProto {
+     optional int32 userId = 1;
+     optional int32 questId = 2;
+     optional bool isRedeemed = 3;
+     optional bool isComplete = 4;
+     repeated MinimumUserDefeatTypeJobProto requiredDefeatTypeJobProgress = 5;
+     repeated MinimumUserBuildStructJobProto requiredBuildStructJobProgress = 6;
+     repeated MinimumUserUpgradeStructJobProto requiredUpgradeStructJobProgress = 7;
+     repeated MinimumUserPossessEquipJobProto requiredPossessEquipJobProgress = 8;
+     repeated MinimumUserQuestTaskProto requiredTasksProgress = 9;
+     optional int32 coinsRetrievedForReq = 11;
+     optional int32 numComponentsComplete = 10;
+}
+
+message MinimumUserQuestTaskProto {
+     optional int32 userId = 1;
+     optional int32 questId = 2;
+     optional int32 taskId = 3;
+     optional int32 numTimesActed = 4;
+}
+
+message MinimumUserDefeatTypeJobProto {
+     optional int32 userId = 1;
+     optional int32 questId = 2;
+     optional int32 defeatTypeJobId = 3;
+     optional int32 numDefeated = 4;
+}
+
+message DefeatTypeJobProto {
+     optional int32 defeatTypeJobId = 1;
+     optional DefeatTypeJobEnemyType typeOfEnemy = 2;
+     optional int32 numEnemiesToDefeat = 3;
+     optional int32 cityId = 4;
+     
+     enum DefeatTypeJobEnemyType {
+     	GOOD_WARRIOR = 0;
+		GOOD_ARCHER = 1;
+		GOOD_MAGE = 2;
+		BAD_WARRIOR = 3;
+		BAD_ARCHER = 4;
+		BAD_MAGE = 5;
+		ALL_TYPES_FROM_OPPOSING_SIDE = 6;
+     }
+}
+
+message MinimumUserBuildStructJobProto {
+     optional int32 userId = 1;
+     optional int32 questId = 2;
+     optional int32 buildStructJobId = 3;
+     optional int32 numOfStructUserHas = 4;
+}
+
+message BuildStructJobProto {
+     optional int32 buildStructJobId = 1;
+     optional int32 structId = 2;
+     optional int32 quantityRequired = 3;
+}
+
+message MinimumUserUpgradeStructJobProto {
+     optional int32 userId = 1;
+     optional int32 questId = 2;
+     optional int32 upgradeStructJobId = 3;
+     optional int32 currentLevel = 4;		//0 if not built
+}
+
+message UpgradeStructJobProto {
+     optional int32 upgradeStructJobId = 1;
+     optional int32 structId = 2;
+     optional int32 levelReq = 3;
+}
+
+message MinimumUserPossessEquipJobProto {
+     optional int32 userId = 1;
+     optional int32 questId = 2;
+     optional int32 possessEquipJobId = 3;
+     optional int32 numEquipUserHas = 4;
+}
+
+message PossessEquipJobProto {
+     optional int32 possessEquipJobId = 1;
+     optional int32 equipId = 2;
+     optional int32 quantityReq = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullQuestProto {
+     optional int32 questId = 1;
+     optional int32 cityId = 2;
+     optional string name = 3;
+     optional string description = 4;
+     optional string doneResponse = 5;
+     optional int32 assetNumWithinCity = 7;
+     optional int32 coinsGained = 8;
+     optional int32 diamondsGained = 9;
+     optional int32 expGained = 10;
+     optional int32 equipIdGained = 11;
+     repeated int32 questsRequiredForThis = 12;
+     repeated int32 taskReqs = 13;
+     repeated int32 upgradeStructJobsReqs = 14;
+     repeated int32 buildStructJobsReqs = 15;
+     repeated int32 defeatTypeReqs = 16;
+     repeated int32 possessEquipJobReqs = 17;
+     optional int32 coinRetrievalReq = 22;
+     optional SpecialQuestAction specialQuestActionReq = 6; 
+     optional int32 numComponentsForGood = 18;
+     optional int32 numComponentsForBad = 19;
+     optional DialogueProto acceptDialogue = 20;
+     
+     optional string questGiverName = 21;
+     optional string questGiverImageSuffix = 23;
+     optional int32 priority = 24;
+}
+
+//------------------------------------------------------------------------------------------
+
+message DialogueProto { 
+	repeated SpeechSegmentProto speechSegment = 1;
+
+	message SpeechSegmentProto {
+		optional DialogueSpeaker speaker = 1;
+		optional string speakerText = 2;
+		
+		enum DialogueSpeaker {
+			PLAYER_TYPE = 1;
+			GOOD_WARRIOR = 2;
+			GOOD_ARCHER = 3;
+			GOOD_MAGE = 4;
+			BAD_WARRIOR = 5;
+			BAD_ARCHER = 6;
+			BAD_MAGE = 7;
+			GOOD_TUTORIAL_GIRL = 8;
+			BAD_TUTORIAL_GIRL = 9;
+
+			QUESTGIVER_1 = 10;		// Farmer Mitch
+			QUESTGIVER_2 = 11;		// Captain Riz
+			QUESTGIVER_3 = 12;		// Sean The Brave
+			QUESTGIVER_4 = 13;		// Captain Riz
+			QUESTGIVER_5 = 14; 		// Sailor Steve
+			BAZAAR = 25;		
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message PlayerWallPostProto {
+	optional int32 playerWallPostId = 1;
+	optional MinimumUserProto poster = 2;
+	optional int32 wallOwnerId = 3;
+	optional int64 timeOfPost = 4;
+	optional string content = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
+message UnhandledBlacksmithAttemptProto {
+	optional int32 blacksmithId = 1;
+	optional int32 userId = 2;
+	optional int32 equipId = 3;
+	optional int64 goalLevel = 4;
+	optional bool guaranteed = 5;
+	optional int64 startTime = 6;
+	optional int32 diamondGuaranteeCost = 8;
+	optional int64 timeOfSpeedup = 9;
+	optional bool attemptComplete = 10;
+	optional int32 equipOneEnhancementPercent = 11;
+	optional int32 equipTwoEnhancementPercent = 12;
+	optional int32 forgeSlotNumber = 13;
+}
+

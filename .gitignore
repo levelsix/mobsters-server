@@ -1,0 +1,36 @@
+#project specific
+src/com/lvl6/properties/DBProperties.java
+src/com/lvl6/properties/APNSProperties.java
+scripts/DBProperties.php
+scripts/referral_code_checks/referral_code_logs
+src/main/resources/KingdomAPNSProdKey.p12
+
+#java specific
+*.class
+
+#eclipse
+.project
+.classpath
+.settings/
+
+target/
+*/target/
+
+#generated files
+bin/
+gen/
+
+*/target/*
+target/
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+*.p12
+*.log*
+
+## 
+runOnTomcat.sh
