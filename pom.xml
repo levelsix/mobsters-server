@@ -5,14 +5,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.lvl6</groupId>
-	<artifactId>utopia-server</artifactId>
+	<artifactId>mobsters-server</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>Utopia Server</name>
+	<name>Mobster Server</name>
 
 	<packaging>war</packaging>
 
-	<description>The Utopia Server</description>
+	<description>The Mobster Server</description>
 
 	<developers>
 		<developer>
@@ -36,7 +36,7 @@
 	</organization>
 
 	<scm>
-		<url>https://github.com/levelsix/Utopia.git</url>
+		<url>https://github.com/levelsix/mobsters-server.git</url>
 	</scm>
 
 	<repositories>
@@ -191,7 +191,7 @@
 		<profile>
 			<id>arturolocal</id>
 			<properties>
-				<lvl6.server.log.location>/Users/coopermor/utopia-server/log</lvl6.server.log.location>
+				<lvl6.server.log.location>/Users/coopermor/mobsters-server/log</lvl6.server.log.location>
 				<server.port>10001</server.port>
 				<hazelcast.group>conrad</hazelcast.group>
 				<hazelcast.pass>lvl6</hazelcast.pass>
