@@ -502,6 +502,50 @@ public class DBConnection {
 		}
 		return generatedKey;
 	}
+	
+	/* returns 0 if error */
+	public long insertIntoTableBasicReturnLongId(String tablename, Map<String, Object> insertParams) {
+		List<String> questions = new LinkedList<String>();
+		List<String> columns = new LinkedList<String>();
+		List<Object> values = new LinkedList<Object>();
+
+		long generatedKey = 0;
+		if (insertParams != null && insertParams.size() > 0) {
+			for (String column : insertParams.keySet()) {
+				questions.add("?");
+				columns.add(column);
+				values.add(insertParams.get(column));
+			}
+			String query = "insert into " + tablename + "(" + StringUtils.getListInString(columns, ",")
+					+ ") VALUES (" + StringUtils.getListInString(questions, ",") + ")";
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			try {
+				conn = dataSource.getConnection();
+				stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+				if (values.size() > 0) {
+					int i = 1;
+					for (Object value : values) {
+						stmt.setObject(i, value);
+						i++;
+					}
+				}
+				int numUpdated = stmt.executeUpdate();
+				if (numUpdated == 1) {
+					ResultSet rs = stmt.getGeneratedKeys();
+					if (rs.next()) {
+						generatedKey = rs.getLong(1);
+					}
+				}
+			} catch (SQLException e) {
+				log.error("problem with " + query + ", values are " + values, e);
+				e.printStackTrace();
+			} finally {
+				close(null, stmt, conn);
+			}
+		}
+		return generatedKey;
+	}
 
 	/*
 	 * newRows should contain maps that are different only by the value in the

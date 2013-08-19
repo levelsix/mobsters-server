@@ -5,7 +5,7 @@ public class DBConstants {
   /* TABLENAMES*/
   public static final String TABLE_USER = "users";
   public static final String TABLE_USER_EQUIP = "user_equip";
-  public static final String TABLE_USER_TASKS = "user_tasks";
+  public static final String TABLE_USER_TASK = "user_task";
   public static final String TABLE_USER_CITIES = "user_cities";
   public static final String TABLE_USER_QUESTS = "user_quests";
   public static final String TABLE_USER_STRUCTS = "user_structs";
@@ -49,11 +49,11 @@ public class DBConstants {
   public static final String TABLE_CLAN_WALL_POSTS = "clan_wall_posts";
   public static final String TABLE_CLAN_BULLETIN_POSTS = "clan_bulletin_posts";
   public static final String TABLE_THREE_CARD_MONTE = "three_card_monte";
-  public static final String TABLE_BOSSES = "bosses";
+  public static final String TABLE_MONSTER = "monster";
+  public static final String TABLE_MONSTER_REWARD = "monster_reward";
   public static final String TABLE_USER_BOSSES = "user_bosses";
   public static final String TABLE_USER_BOSS_HISTORY = "user_boss_history";
   public static final String TABLE_BOSS_EVENTS = "boss_events";
-  public static final String TABLE_BOSS_REWARDS = "boss_rewards";
   //public static final String TABLE_BOSS_EQUIP_DROP_HISTORY = "boss_equip_drop_history";
   public static final String TABLE_BOSS_REWARD_DROP_HISTORY = "boss_reward_drop_history";
   public static final String TABLE_LOCK_BOX_EVENTS = "lock_box_events";
@@ -98,6 +98,9 @@ public class DBConstants {
   
   public static final String TABLE_CITY_GEMS = "city_gems";
   public static final String TABLE_USER_CITY_GEMS = "user_city_gems";
+  
+  public static final String TABLE_TASK_STAGE = "task_stage";
+  public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
   
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
@@ -220,9 +223,17 @@ public class DBConstants {
   public static final String DUEFE__EQUIP_ENHANCEMENT_ID = "equip_enhancement_id";
   
   /*USER TASK TABLE*/
+  public static final String USER_TASK__ID = GENERIC__ID;
   public static final String USER_TASK__USER_ID = GENERIC__USER_ID;
   public static final String USER_TASK__TASK_ID = "task_id";
-  public static final String USER_TASK__NUM_TIMES_ACTED_IN_RANK = "num_times_acted_in_rank";
+  public static final String USER_TASK__MONSTER_REWARD_EQUIP_IDS = "monster_reward_equip_ids";
+  public static final String USER_TASK__EXP_GAINED = "exp_gained";
+  public static final String USER_TASK__SILVER_GAINED = "silver_gained";
+  public static final String USER_TASK__NUM_REVIVES = "num_revives";
+  public static final String USER_TASK__START_TIME = "start_time";
+  public static final String USER_TASK__END_TIME = "end_time";
+  public static final String USER_TASK__STAGE_EXPS = "stage_exps";
+  public static final String USER_TASK__STAGE_SILVERS = "stage_silvers";
   
   /*USER CITY TABLE*/
   public static final String USER_CITIES__USER_ID = GENERIC__USER_ID;
@@ -457,31 +468,21 @@ public class DBConstants {
   public static final String STAT_REFILL_HISTORY__DIAMONDS_SPENT = "diamonds_spent";
   public static final String STAT_REFILL_HISTORY__REFILL_TIME = "refill_time";
   
-  /*BOSSES*/
-  public static final String BOSSES__ID = GENERIC__USER_ID;
-  public static final String BOSSES__CITY_ID = "city_id";
-  public static final String BOSSES__ASSET_NUM_WITHIN_CITY = "asset_num_within_city";
-  //public static final String BOSSES__BASE_HP = "base_hp";
-  public static final String BOSSES__REGULAR_ATTACK_ENERGY_COST = "regular_attack_energy_cost";
-  //public static final String BOSSES__MIN_ATTACK = "min_attack";
-  //public static final String BOSSES__MAX_ATTACK = "max_attack";
-  public static final String BOSSES__MINUTES_TO_KILL = "minutes_to_kill";
-  //public static final String BOSSES__MINUTES_TO_RESPAWN = "minutes_to_respawn";
-  //public static final String BOSSES__BASS_EXP = "bass_exp";
-  public static final String BOSSES__SUPER_ATTACK_DAMAGE_MULTIPLIER = "super_attack_damage_multiplier";
-  public static final String BOSSES__SUPER_ATTACK_ENERGY_COST = "super_attack_energy_cost";
-  //public static final String BOSSES__GOOD_NAME = "good_name";
-  //public static final String BOSSES__BAD_NAME = "bad_name";
-  public static final String BOSSES__NAME = "name";
-  public static final String BOSSES__EXP_CONSTANTS_A = "exp_constants_a";
-  public static final String BOSSES__EXP_CONSTANTS_B = "exp_constants_b";
-  public static final String BOSSES__HP_CONSTANTS_A = "hp_constants_a";
-  public static final String BOSSES__HP_CONSTANTS_B = "hp_constants_b";
-  public static final String BOSSES__HP_CONSTANTS_C = "hp_constants_c";
-  public static final String BOSSES__DMG_CONSTANTS_A = "dmg_constants_a";
-  public static final String BOSSES__DMG_CONSTANTS_B = "dmg_constants_b";
-  public static final String BOSSES__MAP_ICON_IMAGE_NAME = "map_icon_image_name";
-  public static final String BOSSES__UNLOCKED_BOSS_IMAGE_NAME = "unlocked_boss_image_name";
+  /*MONSTER*/
+  public static final String MONSTER__ID = GENERIC__USER_ID;
+  public static final String MONSTER__NAME = "name";
+  public static final String MONSTER__MAX_HP = "max_hp";
+  public static final String MONSTER__IMAGE_NAME = "image_name";
+  public static final String MONSTER__IS_BOSS = "is_boss";
+  public static final String MONSTER__WEAPON_ID = "weapon_id";
+  public static final String MONSTER__WEAPON_LVL = "weapon_lvl";
+  public static final String MONSTER__ARMOR_ID = "armor_id";
+  public static final String MONSTER__ARMOR_LVL = "armor_lvl";
+  public static final String MONSTER__AMULET_ID = "amulet_id";
+  public static final String MONSTER__AMULET_LVL = "amulet_lvl";
+  public static final String MONSTER__EXP_DROP = "exp_drop";
+  public static final String MONSTER__MIN_SILVER_DROP = "min_silver_drop";
+  public static final String MONSTER__MAX_SILVER_DROP = "max_silver_drop";
   
   /*USER BOSSES and USER BOSS HISTORY*/
   public static final String USER_BOSS_HISTORY__ID = GENERIC__ID;
@@ -506,16 +507,11 @@ public class DBConstants {
   public static final String BOSS_EVENTS__CHANCE_OF_EQUIP_LOOT = "chance_of_equip_loot";
   public static final String BOSS_EVENTS__POTENTIAL_LOOT_EQUIP_IDS = "potential_loot_equip_ids";
   
-  /*BOSS REWARDS*/
-  public static final String BOSS_REWARDS__ID = GENERIC__USER_ID;
-  public static final String BOSS_REWARDS__BOSS_ID = "boss_id";
-  public static final String BOSS_REWARDS__MIN_SILVER = "min_silver";
-  public static final String BOSS_REWARDS__MAX_SILVER = "max_silver";
-  public static final String BOSS_REWARDS__MIN_GOLD = "min_gold";
-  public static final String BOSS_REWARDS__MAX_GOLD = "max_gold";
-  public static final String BOSS_REWARDS__EQUIP_ID = "equip_id";
-  public static final String BOSS_REWARDS__PROBABILITY_TO_BE_REWARDED = "probability_to_be_rewarded";
-  public static final String BOSS_REWARDS__REWARD_GROUP = "reward_group";
+  /*MONSTER REWARD*/
+  public static final String MONSTER_REWARD__ID = GENERIC__ID;
+  public static final String MONSTER_REWARD__BOSS_ID = "monster_id";
+  public static final String MONSTER_REWARD__EQUIP_ID = "equip_id";
+  public static final String MONSTER_REWARD__DROP_RATE = "drop_rate";
   
   /*BOSS EQUIP DROP HISTORY*/
 //  public static final String BOSS_EQUIP_DROP_HISTORY__BOSS_REWARD_DROP_HISTORY_ID = "boss_reward_drop_history_id";
@@ -736,4 +732,13 @@ public class DBConstants {
   public static final String USER_CITY_GEMS__GEM_ID = "gem_id";
   public static final String USER_CITY_GEMS__QUANTITY = "quantity";
   
+  /*TASK STAGE*/
+  public static final String TASK_STAGE__ID = GENERIC__ID;
+  public static final String TASK_STAGE__TASK_ID = "task_id";
+  public static final String TASK_STAGE__STAGE_NUM = "stage_num";
+  public static final String TASK_STAGE__EQUIP_DROP_RATE = "equip_drop_rate";
+  
+  /*TASK STAGE*/
+  public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";
+  public static final String TASK_STAGE_MONSTER__MONSTER_ID = "monster_id";
 }

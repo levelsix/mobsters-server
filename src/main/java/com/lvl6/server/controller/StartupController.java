@@ -39,7 +39,7 @@ import com.lvl6.info.BattleDetails;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
-import com.lvl6.info.Boss;
+import com.lvl6.info.Monster;
 import com.lvl6.info.City;
 import com.lvl6.info.CityGem;
 import com.lvl6.info.Clan;
@@ -116,7 +116,7 @@ import com.lvl6.retrieveutils.UserLockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.UserTaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BossRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityGemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DailyBonusRewardRetrieveUtils;
@@ -273,7 +273,7 @@ public class StartupController extends EventController {
           setPrivateChatPosts(resBuilder, user);
           setCityGems(resBuilder);
           setLivingBossesForUser(resBuilder, user);
-          setAllBosses(resBuilder, user.getType());
+//          setAllBosses(resBuilder, user.getType());
 
           FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
           resBuilder.setSender(fup);
@@ -356,16 +356,16 @@ public class StartupController extends EventController {
     }
   }
 
-  private void setAllBosses(Builder resBuilder, UserType type) {
-    Map<Integer, Boss> bossIdsToBosses = 
-        BossRetrieveUtils.getBossIdsToBosses();
-
-    for (Boss b : bossIdsToBosses.values()) {
-      FullBossProto fbp =
-          CreateInfoProtoUtils.createFullBossProtoFromBoss(type, b);
-      resBuilder.addBosses(fbp);
-    }
-  }
+//  private void setAllBosses(Builder resBuilder, UserType type) {
+//    Map<Integer, Monster> bossIdsToBosses = 
+//        MonsterRetrieveUtils.getBossIdsToBosses();
+//
+//    for (Monster b : bossIdsToBosses.values()) {
+//      FullBossProto fbp =
+//          CreateInfoProtoUtils.createFullBossProtoFromBoss(type, b);
+//      resBuilder.addBosses(fbp);
+//    }
+//  }
 
   private void setPrivateChatPosts(Builder resBuilder, User aUser) {
     int userId = aUser.getId();
@@ -1453,8 +1453,8 @@ public class StartupController extends EventController {
   private void setCitiesAndUserCityInfos(Builder resBuilder, User user) {
     Map<Integer, Integer> cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
         .getCityIdToUserCityRank(user.getId());
-    Map<Integer, Integer> taskIdToNumTimesActedInRank = UserTaskRetrieveUtils
-        .getTaskIdToNumTimesActedInRankForUser(user.getId());
+//    Map<Integer, Integer> taskIdToNumTimesActedInRank = UserTaskRetrieveUtils
+//        .getTaskIdToNumTimesActedInRankForUser(user.getId());
 
     Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
     for (Integer cityId : cities.keySet()) {
@@ -1471,7 +1471,7 @@ public class StartupController extends EventController {
                 .getCityIdToUserCityRank(user.getId());
           }
         }
-        int numTasksComplete = getNumTasksCompleteForUserCity(user, city, taskIdToNumTimesActedInRank);
+        int numTasksComplete = 0; //getNumTasksCompleteForUserCity(user, city, taskIdToNumTimesActedInRank);
         resBuilder.addUserCityInfos(CreateInfoProtoUtils.createFullUserCityProto(user.getId(),
             city.getId(), cityIdsToUserCityRanks.get(city.getId()), numTasksComplete));
       }

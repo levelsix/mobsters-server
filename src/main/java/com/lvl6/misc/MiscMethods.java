@@ -30,7 +30,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
-import com.lvl6.info.Boss;
+import com.lvl6.info.Monster;
 import com.lvl6.info.BossEvent;
 import com.lvl6.info.City;
 import com.lvl6.info.CityGem;
@@ -109,8 +109,8 @@ import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BossEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BossRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BossRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityGemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
@@ -803,13 +803,13 @@ public class MiscMethods {
     LevelsRequiredExperienceRetrieveUtils.reload();
     NeutralCityElementsRetrieveUtils.reload(); 
     ThreeCardMonteRetrieveUtils.reload();
-    BossRetrieveUtils.reload();
+    MonsterRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
     LockBoxItemRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
     ClanTierLevelRetrieveUtils.reload();
     BossEventRetrieveUtils.reload();
-    BossRewardRetrieveUtils.reload();
+    MonsterRewardRetrieveUtils.reload();
     LeaderboardEventRetrieveUtils.reload();
     LeaderboardEventRewardRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
@@ -2240,79 +2240,62 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     return returnValue;
   }
   
-  /*
-   * Returns true if the user can attack, false otherwise. The user can attack if
-   * the time the user attacks is between start_time (in kingdom.user_bosses table)
-   * and start_time + minutes_to_kill (in kingdom.bosses table). 
-   */
-  public static boolean inBossAttackWindow(UserBoss aUserBoss, User u,
-      Boss b, long curTime) {
-    Date timeOfFirstHit = aUserBoss.getStartTime();
-    int attackWindow = b.getMinutesToKill();
-    DateTime timeForLastHit = new DateTime(timeOfFirstHit);
-    timeForLastHit = timeForLastHit.plusMinutes(attackWindow);
-
-    if (timeForLastHit.isBefore(curTime)) {
-      return false;
-    }
-    return true;
-  }
   
-  public static int calculateBossHealth(Boss b, int newLevel) {
-    int maxLevel = ControllerConstants.SOLO_BOSS__MAX_HEALTH_MULTIPLIER;
-    int levelCap = Math.min(newLevel, maxLevel);
-    int newHealth = b.getHpConstantA() *
-        (b.getHpConstantB() * levelCap + b.getHpConstantC());
-    return newHealth;
-  }
+//  public static int calculateBossHealth(Monster b, int newLevel) {
+//    int maxLevel = ControllerConstants.SOLO_BOSS__MAX_HEALTH_MULTIPLIER;
+//    int levelCap = Math.min(newLevel, maxLevel);
+//    int newHealth = b.getHpConstantA() *
+//        (b.getHpConstantB() * levelCap + b.getHpConstantC());
+//    return newHealth;
+//  }
+//  
+//  public static int calculateBossExpAwarded(Monster aBoss, UserBoss ub) {
+//    int expRewarded = 0;
+//    
+//    int health = ub.getCurrentHealth();
+//    if (0 >= health) {
+//      int a = aBoss.getExpConstantA();
+//      int b = aBoss.getExpConstantB();
+//      int ubLvl = ub.getCurrentLevel(); 
+//      expRewarded = a * ubLvl + b;
+//    }
+//    
+//    return expRewarded;
+//  }
   
-  public static int calculateBossExpAwarded(Boss aBoss, UserBoss ub) {
-    int expRewarded = 0;
-    
-    int health = ub.getCurrentHealth();
-    if (0 >= health) {
-      int a = aBoss.getExpConstantA();
-      int b = aBoss.getExpConstantB();
-      int ubLvl = ub.getCurrentLevel(); 
-      expRewarded = a * ubLvl + b;
-    }
-    
-    return expRewarded;
-  }
-  
-  public static int dealDamageToBoss(Boss aBoss, User u) {
-    ArrayList<Integer> userEquipIds = new ArrayList<Integer>();
-    if (u.getWeaponEquippedUserEquipId() > 0) userEquipIds.add(u.getWeaponEquippedUserEquipId());
-    if (u.getArmorEquippedUserEquipId() > 0) userEquipIds.add(u.getArmorEquippedUserEquipId());
-    if (u.getAmuletEquippedUserEquipId() > 0) userEquipIds.add(u.getAmuletEquippedUserEquipId());
-    if (u.getWeaponTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getWeaponTwoEquippedUserEquipId());
-    if (u.getArmorTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getArmorTwoEquippedUserEquipId());
-    if (u.getAmuletTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getAmuletTwoEquippedUserEquipId());
-    
-    List<UserEquip> userEquips = RetrieveUtils.userEquipRetrieveUtils()
-        .getSpecificUserEquips(userEquipIds);
-    
-    int equipAttackPower = 0;
-    for (UserEquip ue: userEquips) {
-      int equipId = ue.getEquipId();
-      int forgeLevel = ue.getLevel();
-      int enhanceLevel = ue.getEnhancementPercentage()/10000;
-      int equipIndivPower = attackPowerForEquip(equipId, forgeLevel, enhanceLevel);
-      equipAttackPower += equipIndivPower;
-      //log.info(equipId + ": " + equipIndivPower);
-      //log.info("equipAttackPower: " + equipAttackPower);
-    }
-    
-    int equipDamage = equipDamagePortionForBoss(equipAttackPower);
-    
-    int a = aBoss.getDmgConstantA();
-    int b = aBoss.getDmgConstantB();
-    
-    int totalDamage = a * (b + equipDamage);
-    totalDamage = new Random().nextInt((int)(totalDamage*0.2))+(int)(totalDamage*0.9);
-    //log.info("total damage: " + totalDamage);
-    return totalDamage;
-  }
+//  public static int dealDamageToBoss(Monster aBoss, User u) {
+//    ArrayList<Integer> userEquipIds = new ArrayList<Integer>();
+//    if (u.getWeaponEquippedUserEquipId() > 0) userEquipIds.add(u.getWeaponEquippedUserEquipId());
+//    if (u.getArmorEquippedUserEquipId() > 0) userEquipIds.add(u.getArmorEquippedUserEquipId());
+//    if (u.getAmuletEquippedUserEquipId() > 0) userEquipIds.add(u.getAmuletEquippedUserEquipId());
+//    if (u.getWeaponTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getWeaponTwoEquippedUserEquipId());
+//    if (u.getArmorTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getArmorTwoEquippedUserEquipId());
+//    if (u.getAmuletTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getAmuletTwoEquippedUserEquipId());
+//    
+//    List<UserEquip> userEquips = RetrieveUtils.userEquipRetrieveUtils()
+//        .getSpecificUserEquips(userEquipIds);
+//    
+//    int equipAttackPower = 0;
+//    for (UserEquip ue: userEquips) {
+//      int equipId = ue.getEquipId();
+//      int forgeLevel = ue.getLevel();
+//      int enhanceLevel = ue.getEnhancementPercentage()/10000;
+//      int equipIndivPower = attackPowerForEquip(equipId, forgeLevel, enhanceLevel);
+//      equipAttackPower += equipIndivPower;
+//      //log.info(equipId + ": " + equipIndivPower);
+//      //log.info("equipAttackPower: " + equipAttackPower);
+//    }
+//    
+//    int equipDamage = equipDamagePortionForBoss(equipAttackPower);
+//    
+//    int a = aBoss.getDmgConstantA();
+//    int b = aBoss.getDmgConstantB();
+//    
+//    int totalDamage = a * (b + equipDamage);
+//    totalDamage = new Random().nextInt((int)(totalDamage*0.2))+(int)(totalDamage*0.9);
+//    //log.info("total damage: " + totalDamage);
+//    return totalDamage;
+//  }
   
   private static int equipDamagePortionForBoss(int equipAttackPower) {
     if (equipAttackPower <= 0) {
@@ -2322,5 +2305,13 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     //log.info("attack power: " + equipAttackPower);
     //log.info("equip damage: " + equipDamage);
     return Math.max(0, equipDamage);
+  }
+  
+  public static int sumMap(Map<Integer, Integer> aMap) {
+	  int sum = 0;
+	  for (int i : aMap.keySet()) {
+		  sum += aMap.get(i); 
+	  }
+	  return sum;
   }
 }

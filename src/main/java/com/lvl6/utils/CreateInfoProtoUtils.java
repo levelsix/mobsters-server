@@ -17,7 +17,6 @@ import com.lvl6.info.BattleDetails;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
-import com.lvl6.info.Boss;
 import com.lvl6.info.BossEvent;
 import com.lvl6.info.City;
 import com.lvl6.info.CityGem;
@@ -40,6 +39,7 @@ import com.lvl6.info.LockBoxItem;
 import com.lvl6.info.MarketplacePost;
 import com.lvl6.info.MarketplaceTransaction;
 import com.lvl6.info.Mentorship;
+import com.lvl6.info.Monster;
 import com.lvl6.info.MonteCard;
 import com.lvl6.info.NeutralCityElement;
 import com.lvl6.info.PlayerWallPost;
@@ -48,6 +48,7 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.Referral;
 import com.lvl6.info.Structure;
 import com.lvl6.info.Task;
+import com.lvl6.info.TaskStage;
 import com.lvl6.info.User;
 import com.lvl6.info.UserBoss;
 import com.lvl6.info.UserCityExpansionData;
@@ -127,12 +128,14 @@ import com.lvl6.proto.InfoProto.MinimumUserProtoWithLevelForLeaderboard;
 import com.lvl6.proto.InfoProto.MinimumUserQuestTaskProto;
 import com.lvl6.proto.InfoProto.MinimumUserTaskProto;
 import com.lvl6.proto.InfoProto.MinimumUserUpgradeStructJobProto;
+import com.lvl6.proto.InfoProto.MonsterProto;
 import com.lvl6.proto.InfoProto.MonteCardProto;
 import com.lvl6.proto.InfoProto.NeutralCityElementProto;
 import com.lvl6.proto.InfoProto.PlayerWallPostProto;
 import com.lvl6.proto.InfoProto.PossessEquipJobProto;
 import com.lvl6.proto.InfoProto.PrivateChatPostProto;
 import com.lvl6.proto.InfoProto.RareBoosterPurchaseProto;
+import com.lvl6.proto.InfoProto.TaskStageProto;
 import com.lvl6.proto.InfoProto.UnhandledBlacksmithAttemptProto;
 import com.lvl6.proto.InfoProto.UpgradeStructJobProto;
 import com.lvl6.proto.InfoProto.UserBoosterItemProto;
@@ -146,15 +149,16 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.UserLockBoxItemRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestsDefeatTypeJobProgressRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestsTaskProgressRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BossRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PossessEquipJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskEquipReqRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
 
 public class CreateInfoProtoUtils {
@@ -598,12 +602,12 @@ public class CreateInfoProtoUtils {
         builder.addTaskIds(t.getId());
       }
     }
-    List<Boss> bosses = BossRetrieveUtils.getBossesForCityId(c.getId());
-    if (bosses != null) {
-      for (Boss b : bosses) {
-        builder.addBossIds(b.getId());
-      }
-    }
+//    List<Monster> bosses = MonsterRetrieveUtils.getBossesForCityId(c.getId());
+//    if (bosses != null) {
+//      for (Monster b : bosses) {
+//        builder.addBossIds(b.getId());
+//      }
+//    }
     
     builder.setBoosterPackId(c.getBoosterPackId());
 
@@ -1163,40 +1167,6 @@ public class CreateInfoProtoUtils {
     return b.build();
   }
 
-  public static FullBossProto createFullBossProtoFromBoss(UserType type, Boss boss) {
-    boolean goodSide = MiscMethods.checkIfGoodSide(type);
-    String mapIconImageName = null;
-    String unlockedBossImageName = null;
-
-    if (goodSide) {
-      mapIconImageName = boss.getMapIconImageNameGood();
-      unlockedBossImageName = boss.getUnlockedBossImageNameGood();
-    } else {
-      mapIconImageName = boss.getMapIconImageNameBad();
-      unlockedBossImageName = boss.getUnlockedBossImageNameBad();
-    }
-    
-    FullBossProto.Builder fbp = FullBossProto.newBuilder();
-    fbp.setBossId(boss.getId());
-    fbp.setCityId(boss.getCityId());
-    fbp.setAssetNumWithinCity(boss.getAssetNumberWithinCity());
-    fbp.setRegularAttackEnergyCost(boss.getRegularAttackEnergyCost());
-    fbp.setMinutesToKill(boss.getMinutesToKill());
-    fbp.setSuperAttackDamageMultiplier(boss.getSuperAttackDamageMultiplier());
-    fbp.setSuperAttackEnergyCost(boss.getSuperAttackEnergyCost());
-    fbp.setName(boss.getName());
-    fbp.setExpConstantA(boss.getExpConstantA());
-    fbp.setExpConstantB(boss.getExpConstantB());
-    fbp.setHpConstantA(boss.getHpConstantA());
-    fbp.setHpConstantB(boss.getHpConstantB());
-    fbp.setHpConstantC(boss.getHpConstantC());
-    fbp.setDmgConstantA(boss.getDmgConstantA());
-    fbp.setDmgConstantB(boss.getDmgConstantB());
-    fbp.setMapIconImageName(mapIconImageName);
-    fbp.setUnlockedBossImageName(unlockedBossImageName);
-    
-    return fbp.build();
-  }
 
   public static FullUserBossProto createFullUserBossProtoFromUserBoss(UserBoss b) {
     FullUserBossProto.Builder bu = FullUserBossProto.newBuilder()
@@ -1457,4 +1427,85 @@ public class CreateInfoProtoUtils {
     return cgpb.build();
   }
   
+  //individualSilvers should always be set, since silver dropped is within a range
+  public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
+		  List<Integer> monsterIds, Map<Integer, Monster> monsterIdsToMonsters,
+		  Map<Integer, Integer> monsterIdsToEquipIds, List<Integer> individualSilvers,
+		  boolean allowDuplicateMonsterToDropEquip) {
+	  
+	  TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
+	  if (null == ts) {
+		  ts = TaskStageRetrieveUtils.getTaskStageForTaskStageId(taskStageId);
+	  }
+	  
+	  tspb.setStageId(taskStageId);
+	  
+	  //holds all the monsterProtos
+	  List<MonsterProto> mpList = new ArrayList<MonsterProto>();
+
+	  Set<Integer> monsterIdsSoFar = new HashSet<Integer>();
+	  for (int i = 0; i < monsterIds.size(); i++) {
+		  int monsterId = monsterIds.get(i);
+		  int silverDrop = individualSilvers.get(i);
+		  Monster m;
+		  if (!monsterIdsToMonsters.containsKey(monsterId)) {
+			  m = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+		  } else {
+			  m = monsterIdsToMonsters.get(monsterId);
+		  }
+		  
+		  int equipId = ControllerConstants.NOT_SET;
+		  if (monsterIdsToEquipIds.containsKey(monsterId)) {
+			  
+			  //case occurs where we allow only one drop in a stage and
+			  //if stage has 2 of monster1, only one monster1 can drop an equip
+			  if (!allowDuplicateMonsterToDropEquip &&
+					  monsterIdsSoFar.contains(monsterIdsSoFar)) {
+				  //since we have seen this monster before, don't assign
+				  //an equip id to this duplicate monster
+				  
+			  } else {
+				  //we have not seen this monster before
+				  equipId = monsterIdsToEquipIds.get(monsterId);
+			  }
+		  }
+		  
+		  MonsterProto mp = createMonsterProto(monsterId, m, equipId, silverDrop);
+		  mpList.add(mp);
+		  monsterIdsSoFar.add(monsterId);
+	  }
+	  
+	  tspb.addAllMp(mpList);
+	  
+	  return tspb.build();
+  }
+  
+  // if caller wanted the silverDrop, then silverDrop should be set
+  public static MonsterProto createMonsterProto(int monsterId, Monster aMonster,
+		  int equipId, int silverDrop) {
+	  if (null == aMonster) {
+		  aMonster = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+	  }
+	  
+	  MonsterProto.Builder mpb = MonsterProto.newBuilder();
+	  mpb.setMonsterId(monsterId);
+	  mpb.setName(aMonster.getName());
+	  mpb.setMaxHp(aMonster.getMaxHp());
+	  mpb.setImageName(aMonster.getImageName());
+	  mpb.setIsBoss(aMonster.isBoss());
+	  mpb.setWeaponId(aMonster.getWeaponId());
+	  mpb.setWeaponLvl(aMonster.getWeaponLvl());
+	  mpb.setArmorId(aMonster.getArmorId());
+	  mpb.setArmorLvl(aMonster.getArmorLvl());
+	  mpb.setAmuletId(aMonster.getAmuletId());
+	  mpb.setAmuletLvl(aMonster.getAmuletLvl());
+	  mpb.setExpGained(aMonster.getExpDrop());
+	  mpb.setSilverGained(silverDrop);
+	  
+	  if (ControllerConstants.NOT_SET != equipId) {
+		  mpb.setEquipId(equipId);
+	  }
+	  
+	  return mpb.build();
+  }
 }

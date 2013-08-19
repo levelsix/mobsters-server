@@ -3,6 +3,7 @@ package com.lvl6.utils.utilmethods;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -190,4 +191,9 @@ public interface InsertUtil {
       List<Date> timeOfPosts);
   
   public abstract int insertIntoMentorships(int mentorId, int menteeId, Date startTime, List<MenteeQuestType> typeList);
+  
+  public abstract long insertIntoUserTask(int userId, int taskId, 
+		  Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
+		  Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
+		  Timestamp startTime, int stageNums); 
 }

@@ -303,7 +303,7 @@ public class DeleteUtils implements DeleteUtil {
     return numDeleted;
   }
   public int deleteAllUserTasksForUser(int userId) {
-    String tableName = DBConstants.TABLE_USER_TASKS;
+    String tableName = DBConstants.TABLE_USER_TASK;
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.USER_TASK__USER_ID, userId);

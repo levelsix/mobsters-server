@@ -927,19 +927,19 @@ public class InsertUtils implements InsertUtil{
 //	  
 //  }
   
-  private Map<Integer, Integer> generateEquipIdAndQuantitiesMap(List<Integer> equipIds) {
-    Map<Integer, Integer> equipIdsAndQuantities = new HashMap<Integer, Integer>();
-    for(Integer equipId: equipIds) {
-      Integer quantity = equipIdsAndQuantities.get(equipId);
-      
-      if(null == quantity) {
-        equipIdsAndQuantities.put(equipId, 0);
-        quantity = 0;
-      }
-      equipIdsAndQuantities.put(equipId, quantity+1);
-    }
-    return equipIdsAndQuantities;
-  }
+//  private Map<Integer, Integer> generateEquipIdAndQuantitiesMap(List<Integer> equipIds) {
+//    Map<Integer, Integer> equipIdsAndQuantities = new HashMap<Integer, Integer>();
+//    for(Integer equipId: equipIds) {
+//      Integer quantity = equipIdsAndQuantities.get(equipId);
+//      
+//      if(null == quantity) {
+//        equipIdsAndQuantities.put(equipId, 0);
+//        quantity = 0;
+//      }
+//      equipIdsAndQuantities.put(equipId, quantity+1);
+//    }
+//    return equipIdsAndQuantities;
+//  }
   
   public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, 
       int battlesWonChange, int battlesLostChange, int battlesFledChange) {
@@ -1210,5 +1210,52 @@ public class InsertUtils implements InsertUtil{
     }
     int mentorshipId = DBConnection.get().insertIntoTableBasicReturnId(tableName, insertParams);
     return mentorshipId;
+  }
+  
+  public long insertIntoUserTask(int userId, int taskId, 
+		  Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
+		  Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
+		  Timestamp startTime, int stageNums) {
+	  Map<String, Object> insertParams = new HashMap<String, Object>();
+	  
+	  //for recording what-dropped in which-stage
+	  StringBuffer equipSb = new StringBuffer();
+	  StringBuffer expSb = new StringBuffer();
+	  StringBuffer silverSb = new StringBuffer();
+	  String space = " ";
+	  for(int i = 0; i < stageNums; i++) {
+		  int equipId = ControllerConstants.NOT_SET;
+		  int exp = 0;
+		  int silver = 0;
+		  
+		  if (stageNumsToEquipIds.containsKey(i)) {
+			  equipId = stageNumsToEquipIds.get(i);
+		  }
+		  if (stageNumsToExps.containsKey(i)) {
+			  exp = stageNumsToExps.get(i);
+		  }
+		  if (stageNumsToSilvers.containsKey(i)) {
+			  silver = stageNumsToSilvers.get(i);
+		  }
+		  equipSb.append(equipId);
+		  equipSb.append(space);
+		  expSb.append(exp);
+		  expSb.append(space);
+		  silverSb.append(silver);
+		  silverSb.append(space);
+	  }
+	  insertParams.put(DBConstants.USER_TASK__USER_ID, userId);
+	  insertParams.put(DBConstants.USER_TASK__TASK_ID, taskId);
+	  insertParams.put(DBConstants.USER_TASK__MONSTER_REWARD_EQUIP_IDS, equipSb.toString());
+	  insertParams.put(DBConstants.USER_TASK__EXP_GAINED, expGained);
+	  insertParams.put(DBConstants.USER_TASK__SILVER_GAINED, silverGained);
+	  insertParams.put(DBConstants.USER_TASK__NUM_REVIVES, 0);
+	  insertParams.put(DBConstants.USER_TASK__START_TIME, startTime);
+	  insertParams.put(DBConstants.USER_TASK__STAGE_EXPS, expSb.toString());
+	  insertParams.put(DBConstants.USER_TASK__STAGE_SILVERS, silverSb.toString());
+	  
+	  long userTaskId = DBConnection.get().insertIntoTableBasicReturnLongId(
+			  DBConstants.TABLE_USER_TASK, insertParams);
+	  return userTaskId;
   }
 }

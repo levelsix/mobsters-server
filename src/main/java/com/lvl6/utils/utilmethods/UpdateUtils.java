@@ -580,21 +580,21 @@ public class UpdateUtils implements UpdateUtil {
    */
   @Override
   public boolean incrementTimesCompletedInRankForUserTask(int userId, int taskId, int increment) {
-    Map <String, Object> insertParams = new HashMap<String, Object>();
-
-    insertParams.put(DBConstants.USER_TASK__USER_ID, userId);
-    insertParams.put(DBConstants.USER_TASK__TASK_ID, taskId);
-    insertParams.put(DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
-
-    Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-    columnsToUpdate.put(DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
-
-    int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_TASKS, insertParams, 
-        columnsToUpdate, null);//DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
-
-    if (numUpdated >= 1) {
-      return true;
-    }
+//    Map <String, Object> insertParams = new HashMap<String, Object>();
+//
+//    insertParams.put(DBConstants.USER_TASK__USER_ID, userId);
+//    insertParams.put(DBConstants.USER_TASK__TASK_ID, taskId);
+//    insertParams.put(DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
+//
+//    Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
+//    columnsToUpdate.put(DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
+//
+//    int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_TASKS, insertParams, 
+//        columnsToUpdate, null);//DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
+//
+//    if (numUpdated >= 1) {
+//      return true;
+//    }
     return false;
   }  
 
@@ -705,26 +705,26 @@ public class UpdateUtils implements UpdateUtil {
 
   @Override
   public boolean resetTimesCompletedInRankForUserTasksInCity(int userId, List<Task> tasksInCity) {
-    String query = "update " + DBConstants.TABLE_USER_TASKS + " set " + DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK 
-        + "=? where " + DBConstants.USER_TASK__USER_ID + "=? and (" ;
-    List<Object> values = new ArrayList<Object>();
-    values.add(0);
-    values.add(userId);
-    List<String> condClauses = new ArrayList<String>();
-    for (Task task : tasksInCity) {
-      condClauses.add(DBConstants.USER_TASK__TASK_ID + "=?");
-      values.add(task.getId());
-    }
-    query += StringUtils.getListInString(condClauses, "or") + ")";
-    int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-    if (numUpdated == tasksInCity.size() ||
-        numUpdated == tasksInCity.size() - 1) {
-      //the minus one is for the case when the last thing user has to tap
-      //to rank up the city is something that needs only one tap
-      return true;
-    }
-    log.error("problem with resetting times completed in rank for userid " + userId + ". tasks are=" + tasksInCity
-        + ", numUpdated=" + numUpdated);
+//    String query = "update " + DBConstants.TABLE_USER_TASK + " set " + DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK 
+//        + "=? where " + DBConstants.USER_TASK__USER_ID + "=? and (" ;
+//    List<Object> values = new ArrayList<Object>();
+//    values.add(0);
+//    values.add(userId);
+//    List<String> condClauses = new ArrayList<String>();
+//    for (Task task : tasksInCity) {
+//      condClauses.add(DBConstants.USER_TASK__TASK_ID + "=?");
+//      values.add(task.getId());
+//    }
+//    query += StringUtils.getListInString(condClauses, "or") + ")";
+//    int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+//    if (numUpdated == tasksInCity.size() ||
+//        numUpdated == tasksInCity.size() - 1) {
+//      //the minus one is for the case when the last thing user has to tap
+//      //to rank up the city is something that needs only one tap
+//      return true;
+//    }
+//    log.error("problem with resetting times completed in rank for userid " + userId + ". tasks are=" + tasksInCity
+//        + ", numUpdated=" + numUpdated);
     return false;
   }
 

@@ -2887,3 +2887,56 @@ message RedeemUserCityGemsResponseProto {
 	}
 }
 
+//------------------------------------------------------------------------------------
+
+message BeginDungeonRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 clientTime = 2;
+	optional int32 taskId = 3; 
+}
+
+message BeginDungeonResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated TaskStageProto tsp = 2;
+	optional int64 userTaskId = 3;
+	optional BeginDungeonStatus status = 4;
+	
+	enum BeginDungeonStatus {
+		SUCCESS = 0;
+		FAIL_INSUFFICIENT_STAMERGY = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+message EndDungeonRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 userTaskId = 2;
+	optional bool userWon = 3; 
+}
+
+message EndDungeonResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated int64 userEquipIds = 2;
+	optional EndDungeonStatus status = 3;
+	
+	enum EndDungeonStatus {
+		SUCCESS = 0;
+		FAIL_OTHER = 1;
+	}
+}
+
+message ReviveInDungeonRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 userTaskId = 2; 
+}
+
+message ReviveInDungeonResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional EndDungeonStatus status = 2;
+	
+	enum EndDungeonStatus {
+		SUCCESS = 0;
+		FAIL_INSUFFICIENT_FUNDS = 1;
+		FAIL_OTHER = 2;
+	}
+}

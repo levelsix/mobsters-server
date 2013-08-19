@@ -3,6 +3,32 @@ package com.lvl6.proto;
 option java_outer_classname = "InfoProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
+message TaskStageProto {
+	optional int32 stageId = 1;
+	repeated MonsterProto mp = 2;
+}
+
+message MonsterProto {
+	optional int32 monsterId = 1;
+	optional string name = 2;
+	optional int32 maxHp = 3;
+	optional string imageName = 4;
+	optional bool isBoss = 5;
+	optional int32 weaponId = 6;
+	optional int32 weaponLvl = 7;
+	optional int32 armorId = 8;
+	optional int32 armorLvl = 9;
+	optional int32 amuletId = 10;
+	optional int32 amuletLvl = 11;
+	optional int32 expGained = 12;
+	optional int32 silverGained = 13;
+	
+	//set only if the monster drops it, otherwise don't set it
+	optional int32 equipId = 14; 
+}
+
+//------------------------------------------------------------------------------------------
+
 message UserCityGemProto {
 	optional int32 userId = 1;
 	optional int32 cityId = 2;
