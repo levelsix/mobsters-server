@@ -26,7 +26,7 @@ import com.lvl6.utils.DBConnection;
   
   private static final String TABLE_NAME = DBConstants.TABLE_USER_TASK;
   
-  public static UserTask getUserTaskForId(int userTaskId) {
+  public static UserTask getUserTaskForId(long userTaskId) {
     Connection conn = DBConnection.get().getConnection();
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
     absoluteConditionParams.put(DBConstants.USER_TASK__ID, userTaskId);

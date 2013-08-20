@@ -101,6 +101,7 @@ public class DBConstants {
   
   public static final String TABLE_TASK_STAGE = "task_stage";
   public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
+  public static final String TABLE_USER_TASK_HISTORY = "user_task_history";
   
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
@@ -234,6 +235,20 @@ public class DBConstants {
   public static final String USER_TASK__END_TIME = "end_time";
   public static final String USER_TASK__STAGE_EXPS = "stage_exps";
   public static final String USER_TASK__STAGE_SILVERS = "stage_silvers";
+  
+  /*USER TASK HISTORY TABLE*/
+  public static final String USER_TASK_HISTORY__ID = GENERIC__ID;
+  public static final String USER_TASK_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String USER_TASK_HISTORY__TASK_ID = "task_id";
+  public static final String USER_TASK_HISTORY__MONSTER_REWARD_EQUIP_IDS = "monster_reward_equip_ids";
+  public static final String USER_TASK_HISTORY__EXP_GAINED = "exp_gained";
+  public static final String USER_TASK_HISTORY__SILVER_GAINED = "silver_gained";
+  public static final String USER_TASK_HISTORY__NUM_REVIVES = "num_revives";
+  public static final String USER_TASK_HISTORY__STAGE_EXPS = "stage_exps";
+  public static final String USER_TASK_HISTORY__STAGE_SILVERS = "stage_silvers";
+  public static final String USER_TASK_HISTORY__START_TIME = "start_time";
+  public static final String USER_TASK_HISTORY__END_TIME = "end_time";
+  public static final String USER_TASK_HISTORY__USER_WON = "user_won";
   
   /*USER CITY TABLE*/
   public static final String USER_CITIES__USER_ID = GENERIC__USER_ID;

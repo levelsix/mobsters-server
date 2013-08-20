@@ -39928,9 +39928,9 @@ public final class InfoProto {
   public interface FullUserEquipProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 userEquipId = 1;
+    // optional int64 userEquipId = 1;
     boolean hasUserEquipId();
-    int getUserEquipId();
+    long getUserEquipId();
     
     // optional int32 userId = 2;
     boolean hasUserId();
@@ -39977,13 +39977,13 @@ public final class InfoProto {
     }
     
     private int bitField0_;
-    // optional int32 userEquipId = 1;
+    // optional int64 userEquipId = 1;
     public static final int USEREQUIPID_FIELD_NUMBER = 1;
-    private int userEquipId_;
+    private long userEquipId_;
     public boolean hasUserEquipId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getUserEquipId() {
+    public long getUserEquipId() {
       return userEquipId_;
     }
     
@@ -40028,7 +40028,7 @@ public final class InfoProto {
     }
     
     private void initFields() {
-      userEquipId_ = 0;
+      userEquipId_ = 0L;
       userId_ = 0;
       equipId_ = 0;
       level_ = 0;
@@ -40047,7 +40047,7 @@ public final class InfoProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userEquipId_);
+        output.writeInt64(1, userEquipId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, userId_);
@@ -40072,7 +40072,7 @@ public final class InfoProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userEquipId_);
+          .computeInt64Size(1, userEquipId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -40214,7 +40214,7 @@ public final class InfoProto {
       
       public Builder clear() {
         super.clear();
-        userEquipId_ = 0;
+        userEquipId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
         userId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -40346,7 +40346,7 @@ public final class InfoProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              userEquipId_ = input.readInt32();
+              userEquipId_ = input.readInt64();
               break;
             }
             case 16: {
@@ -40375,15 +40375,15 @@ public final class InfoProto {
       
       private int bitField0_;
       
-      // optional int32 userEquipId = 1;
-      private int userEquipId_ ;
+      // optional int64 userEquipId = 1;
+      private long userEquipId_ ;
       public boolean hasUserEquipId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getUserEquipId() {
+      public long getUserEquipId() {
         return userEquipId_;
       }
-      public Builder setUserEquipId(int value) {
+      public Builder setUserEquipId(long value) {
         bitField0_ |= 0x00000001;
         userEquipId_ = value;
         onChanged();
@@ -40391,7 +40391,7 @@ public final class InfoProto {
       }
       public Builder clearUserEquipId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userEquipId_ = 0;
+        userEquipId_ = 0L;
         onChanged();
         return this;
       }
@@ -61989,7 +61989,7 @@ public final class InfoProto {
       "tUpgradeTime\030\010 \001(\003\022\022\n\nisComplete\030\t \001(\010\0226" +
       "\n\013orientation\030\n \001(\0162!.com.lvl6.proto.Str",
       "uctOrientation\"x\n\022FullUserEquipProto\022\023\n\013" +
-      "userEquipId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\017\n\007equ" +
+      "userEquipId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\017\n\007equ" +
       "ipId\030\003 \001(\005\022\r\n\005level\030\004 \001(\005\022\035\n\025enhancement" +
       "Percentage\030\005 \001(\005\"\370\002\n\022FullStructureProto\022" +
       "\020\n\010structId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\016\n\006incom" +

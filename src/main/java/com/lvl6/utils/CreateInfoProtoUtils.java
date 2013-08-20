@@ -529,6 +529,18 @@ public class CreateInfoProtoUtils {
         .setEquipId(ue.getEquipId()).setLevel(ue.getLevel()).setEnhancementPercentage(ue.getEnhancementPercentage())
         .build();
   }
+  
+  public static FullUserEquipProto createFullUserEquipProto(long userEquipId,
+		  int uId, int equipId, int equipLevel, int enhancement) {
+	  FullUserEquipProto.Builder fuepb = FullUserEquipProto.newBuilder();
+	  fuepb.setUserEquipId(userEquipId);
+	  fuepb.setUserId(uId);
+	  fuepb.setEquipId(equipId);
+	  fuepb.setLevel(equipLevel);
+	  fuepb.setEnhancementPercentage(enhancement);
+	  
+	  return fuepb.build();
+  }
 
   public static FullUserCritstructProto createFullUserCritstructProtoFromUserCritstruct(UserCritstruct uc) {
     return FullUserCritstructProto.newBuilder().setType(uc.getType())

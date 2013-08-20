@@ -1212,6 +1212,7 @@ public class InsertUtils implements InsertUtil{
     return mentorshipId;
   }
   
+  //returns the id
   public long insertIntoUserTask(int userId, int taskId, 
 		  Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
 		  Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
@@ -1258,4 +1259,28 @@ public class InsertUtils implements InsertUtil{
 			  DBConstants.TABLE_USER_TASK, insertParams);
 	  return userTaskId;
   }
+  
+  public int insertIntoUserTaskHistory(int userId, int taskId,
+		  List<Integer> monsterRewardEquipIds, int expGained, int silverGained,
+		  int numRevives, String stageExps, String stageSilvers, Timestamp startTime,
+		  Timestamp endTime, boolean userWon) {
+	  Map<String, Object> insertParams = new HashMap<String, Object>();
+	  String equipStr = StringUtils.csvIntList(monsterRewardEquipIds);
+	  
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__USER_ID, userId);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__TASK_ID, taskId);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__MONSTER_REWARD_EQUIP_IDS, equipStr);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__EXP_GAINED, expGained);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__SILVER_GAINED, silverGained);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__NUM_REVIVES, numRevives);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__STAGE_EXPS, stageExps);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__STAGE_SILVERS, stageSilvers);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__END_TIME, endTime);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__USER_WON, userWon);
+	  
+	  int numInserted = DBConnection.get().insertIntoTableBasic(
+			  DBConstants.TABLE_USER_TASK_HISTORY, insertParams);
+	  return numInserted; 
+  }
+  
 }

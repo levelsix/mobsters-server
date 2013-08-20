@@ -2912,12 +2912,14 @@ message EndDungeonRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 userTaskId = 2;
 	optional bool userWon = 3; 
+	optional int64 clientTime = 4;
 }
 
 message EndDungeonResponseProto {
 	optional MinimumUserProto sender = 1;
-	repeated int64 userEquipIds = 2;
+	repeated FullUserEquipProto fueps = 2;
 	optional EndDungeonStatus status = 3;
+	
 	
 	enum EndDungeonStatus {
 		SUCCESS = 0;

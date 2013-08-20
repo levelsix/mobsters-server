@@ -196,4 +196,9 @@ public interface InsertUtil {
 		  Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
 		  Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
 		  Timestamp startTime, int stageNums); 
+  
+  public abstract int insertIntoUserTaskHistory(int userId, int taskId,
+		  List<Integer> monsterRewardEquipIds, int expGained, int silverGained,
+		  int numRevives, String stageExps, String stageSilvers, Timestamp startTime,
+		  Timestamp endTime, boolean userWon);
 }

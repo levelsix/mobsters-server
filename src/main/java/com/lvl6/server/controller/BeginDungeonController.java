@@ -205,18 +205,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  //calculate the silver that the user could gain for this task
 	  int silverGained = MiscMethods.sumMap(stageNumsToSilvers);
 	  
-	  //record silver and exp gain
+	  //charge the user's stamergy
 	  boolean simulateEnergyRefill =
 			  (u.getEnergy() == u.getEnergyMax());
 	  int energyChange = t.getEnergyCost() * -1;
 	  if (!u.updateRelativeCoinsExpTaskscompletedEnergySimulateenergyrefill(
-			  silverGained, expGained, 1, energyChange, simulateEnergyRefill,
-			  clientTime)) {
+			  0, 0, 0, energyChange, simulateEnergyRefill, clientTime)) {
 		  log.error("problem with updating user stats post-task. silverGained="
-				  + silverGained + ", expGained=" + expGained + ", increased" +
-				  " tasks completed by 1, energyChange=" + energyChange +
-				  ", clientTime=" + clientTime + ", simulateEnergyRefill=" +
-				  simulateEnergyRefill + ", user=" + u);
+				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
+				  " energyChange=" + energyChange + ", clientTime=" + clientTime +
+				  ", simulateEnergyRefill=" + simulateEnergyRefill + ", user=" + u);
 		  return false;
 	  }
 
