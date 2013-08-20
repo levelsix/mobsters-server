@@ -259,7 +259,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     int previousEnhancementPercentage = equipUnderEnhancement.getEnhancementPercentage();
     Timestamp timeOfEnhancement = null;
     Timestamp timeOfSpeedUp = null;
-    int userEquipId = userEquipBuilder.getUserEquipId();
+    long userEquipId = userEquipBuilder.getUserEquipId();
     
     //to prevent possible null pointer exception
     Date startDate = equipUnderEnhancement.getStartTimeOfEnhancement();

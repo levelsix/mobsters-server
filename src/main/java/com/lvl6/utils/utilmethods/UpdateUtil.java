@@ -216,4 +216,5 @@ public interface UpdateUtil {
   public abstract boolean incrementUserCityNumTimesRedeemedGems(int userId,
       int cityId, int newQuantity);
   
+  public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevives);
 }

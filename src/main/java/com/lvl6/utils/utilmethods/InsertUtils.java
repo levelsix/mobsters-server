@@ -157,7 +157,7 @@ public class InsertUtils implements InsertUtil{
   
   public int insertIntoEquipEnhancementHistory(int equipEnhancementId, int userId, int equipId, 
       int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
-      Timestamp startTimeOfEnhancement, Timestamp timeOfSpeedup, int userEquipId) {
+      Timestamp startTimeOfEnhancement, Timestamp timeOfSpeedup, long userEquipId) {
 
     String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT_HISTORY;
     Map<String, Object> insertParams = new HashMap<String, Object>();

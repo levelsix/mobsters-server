@@ -43,7 +43,7 @@ public interface InsertUtil {
   
   public abstract int insertIntoEquipEnhancementHistory(int equipEnhancementId, int userId, int equipId, 
       int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
-      Timestamp timeOfEnhancement, Timestamp timeOfSpeedup, int userEquipId);
+      Timestamp timeOfEnhancement, Timestamp timeOfSpeedup, long userEquipId);
   
   public abstract List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders);
   

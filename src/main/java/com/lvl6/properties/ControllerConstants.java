@@ -257,6 +257,7 @@ public class ControllerConstants {
   public static final float TASK_ACTION__GEM_DROP_RATE = Globals.IS_SANDBOX() ? 1.f : 0.1f; 
   public static final int TASK_ACTION__MAX_ENERGY_COST_MULTIPLIER = 5;
   public static final int TASK_ACTION__MAX_CITY_RANK_UP_REWARD_MULTIPLIER = 6;
+  public static final int TASK_ACTION__REVIVE_COST = 10;
   
   //PURCHASE NORM STRUCTURE
   public static final int PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE = 3;

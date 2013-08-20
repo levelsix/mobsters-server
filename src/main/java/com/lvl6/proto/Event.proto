@@ -2929,14 +2929,15 @@ message EndDungeonResponseProto {
 
 message ReviveInDungeonRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int64 userTaskId = 2; 
+	optional int64 userTaskId = 2;
+	optional int64 clientTime = 3; //tracking purposes 
 }
 
 message ReviveInDungeonResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional EndDungeonStatus status = 2;
+	optional ReviveInDungeonStatus status = 2;
 	
-	enum EndDungeonStatus {
+	enum ReviveInDungeonStatus {
 		SUCCESS = 0;
 		FAIL_INSUFFICIENT_FUNDS = 1;
 		FAIL_OTHER = 2;
