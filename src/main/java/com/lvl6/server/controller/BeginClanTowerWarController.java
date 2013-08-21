@@ -137,134 +137,135 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   //to be used as a second return value
   private boolean checkLegitBeginClanTowerWarRequest(Builder resBuilder, 
       User user, Clan clanOfRequester, boolean claiming, ClanTower aTower, Timestamp curTime) {
-    if (user == null) {
-      resBuilder.setStatus(BeginClanTowerWarStatus.OTHER_FAIL);
-      log.error("unexpected error: user is null");
-      return false;
-    }
-
-    //check if the tower is valid
-    if (null == aTower) {
-      //empty tower
-      resBuilder.setStatus(BeginClanTowerWarStatus.OTHER_FAIL);
-      log.error("unexpected error: tower requested is null.");
-      return false;
-    }
-
-    if (!MiscMethods.checkClientTimeAroundApproximateNow(curTime)) {
-      resBuilder.setStatus(BeginClanTowerWarStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-      log.error("user error: client time too apart of server time. client time=" + curTime + ", servertime~="
-          + new Date());
-      return false;
-    }
-
-    //check if the request sender is the clan leader or in a clan
-    if(null == clanOfRequester || clanOfRequester.getOwnerId() != user.getId()) {
-      //non-clan-leader, non-clanned person sent request
-      resBuilder.setStatus(BeginClanTowerWarStatus.NOT_CLAN_LEADER);
-      log.error("user error: user is not the clan leader or not in a clan. user=" + user);
-      return false;
-    }
-
-    int clanId = clanOfRequester.getId();
-    //check if clan has enough members
-    if (ControllerConstants.MIN_CLAN_MEMBERS_TO_HOLD_CLAN_TOWER >
-    RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clanId).size() ){
-      //not enough clan members
-      resBuilder.setStatus(BeginClanTowerWarStatus.NOT_ENOUGH_CLAN_MEMBERS);
-      log.error("user error: clan does not have enough members. clan=" + clanOfRequester);
-      return false;
-    }
-
-    //check if clan trying to claim a tower already has (a) tower(s)
-    int ownerId = clanId;
-    int attackerId = clanId;
-    boolean ownerAndAttackerAreEnemies = false;
-    List<ClanTower> possessedTowers = ClanTowerRetrieveUtils
-        .getAllClanTowersWithSpecificOwnerAndOrAttackerId(ownerId, attackerId, ownerAndAttackerAreEnemies);
-    int limit = ControllerConstants.CLAN_TOWER__MAX_NUM_TOWERS_CLAN_CAN_HOLD;
-    if (possessedTowers.size() >= limit) {
-      resBuilder.setStatus(BeginClanTowerWarStatus.ALREADY_OWNS_MAX_NUMBER_OF_TOWERS);
-      log.error("user error: clan reached max num towers owned=" + limit + " clan=" + 
-          clanOfRequester + ", towers=" + MiscMethods.shallowListToString(possessedTowers));
-      return false;
-    }
-    
-    //check if the clan tower has an owner (horribly named getter, supposed to mean get owning clan id)
-    if (ControllerConstants.NOT_SET == aTower.getClanOwnerId() ||
-        0 > aTower.getClanOwnerId()) {
-      ///no owner for tower, set owner and set empty attacker
-      //TODO: FIGURE OUT WHAT STATUS TO RETURN WHEN SETTING THE OWNER OF A TOWER
-      //logic here now will suffice
-      if(claiming) {
-        resBuilder.setStatus(BeginClanTowerWarStatus.SUCCESS);
-
-        aTower.setClanOwnerId(clanId); //set the owner id to use when writing to db
-        aTower.setOwnedStartTime(curTime);
-        aTower.setOwnerBattleWins(0);
-
-        aTower.setClanAttackerId(ControllerConstants.NOT_SET);
-        aTower.setAttackStartTime(null);
-        aTower.setAttackerBattleWins(0);
-
-        aTower.setLastRewardGiven(null);
-        return true;
-      } else {
-        resBuilder.setStatus(BeginClanTowerWarStatus.OTHER_FAIL);
-        log.error("claiming variable not set when tower has no owner. user="
-            + user + ", clan=" + clanOfRequester + ", clanTower=" + aTower);
-        return false;
-      }
-    }
-
-    //check if there already is a clan attacking the tower
-    if (ControllerConstants.NOT_SET == aTower.getClanAttackerId() || 
-        0 >= aTower.getClanAttackerId()) {
-      Clan clanForTower = ClanRetrieveUtils.getClanWithId(aTower.getClanOwnerId());
-      boolean towerOwnerClanGood = clanForTower.isGood();
-      boolean requesterClanGood = clanOfRequester.isGood();
-      boolean oppositeSides = (towerOwnerClanGood && !requesterClanGood)
-          || (!towerOwnerClanGood && requesterClanGood);
-      
-      if(oppositeSides) {
-        if(claiming) {
-          resBuilder.setStatus(BeginClanTowerWarStatus.TOWER_ALREADY_CLAIMED);
-
-          return false;
-        } else {
-          // Check if it has been long enough since last battle on this tower
-          ClanTowerHistory cth = ClanTowerHistoryRetrieveUtils.getMostRecentClanTowerHistoryForTower(clanId, aTower.getId(), 1);
-          if (cth != null && cth.getTimeOfEntry() != null && cth.getTimeOfEntry().getTime()+ControllerConstants.NUM_HOURS_BEFORE_REWAGING_WAR_ON_TOWER*3600000 > curTime.getTime()) {
-            resBuilder.setStatus(BeginClanTowerWarStatus.NOT_ENOUGH_TIME_SINCE_LAST_BATTLE);
-            
-            int minsTillRebattle = (int)Math.ceil((cth.getTimeOfEntry().getTime()+ControllerConstants.NUM_HOURS_BEFORE_REWAGING_WAR_ON_TOWER*3600000-curTime.getTime())/60000.);
-            resBuilder.setNumMinutesTillNextAttack(minsTillRebattle);
-
-            return false;
-          }
-
-          //no clan attacking tower, set only the attacker
-          //TODO: FIGURE OUT WHAT STATUS TO RETURN WHEN SETTING THE ATTACKER OF A TOWER
-          //logic here now will suffice
-          resBuilder.setStatus(BeginClanTowerWarStatus.SUCCESS);
-
-          aTower.setClanAttackerId(clanId);
-          aTower.setAttackStartTime(curTime);
-          aTower.setAttackerBattleWins(0);
-          aTower.setOwnerBattleWins(0);
-          aTower.setCurrentBattleId(ClanTowerRetrieveUtils.getMaxBattleId()+1);
-          return true;
-        } 
-      } else {
-        resBuilder.setStatus(BeginClanTowerWarStatus.SAME_SIDE);
-        log.error("clans are on the same side (both alliance or both legion");
-        return false;
-      }
-      
-    }
-
-    //tower has an owner and an attacker, so deny request
-    resBuilder.setStatus(BeginClanTowerWarStatus.TOWER_ALREADY_IN_BATTLE);
+//    if (user == null) {
+//      resBuilder.setStatus(BeginClanTowerWarStatus.OTHER_FAIL);
+//      log.error("unexpected error: user is null");
+//      return false;
+//    }
+//
+//    //check if the tower is valid
+//    if (null == aTower) {
+//      //empty tower
+//      resBuilder.setStatus(BeginClanTowerWarStatus.OTHER_FAIL);
+//      log.error("unexpected error: tower requested is null.");
+//      return false;
+//    }
+//
+//    if (!MiscMethods.checkClientTimeAroundApproximateNow(curTime)) {
+//      resBuilder.setStatus(BeginClanTowerWarStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
+//      log.error("user error: client time too apart of server time. client time=" + curTime + ", servertime~="
+//          + new Date());
+//      return false;
+//    }
+//
+//    //check if the request sender is the clan leader or in a clan
+//    if(null == clanOfRequester || clanOfRequester.getOwnerId() != user.getId()) {
+//      //non-clan-leader, non-clanned person sent request
+//      resBuilder.setStatus(BeginClanTowerWarStatus.NOT_CLAN_LEADER);
+//      log.error("user error: user is not the clan leader or not in a clan. user=" + user);
+//      return false;
+//    }
+//
+//    int clanId = clanOfRequester.getId();
+//    //check if clan has enough members
+//    if (ControllerConstants.MIN_CLAN_MEMBERS_TO_HOLD_CLAN_TOWER >
+//    RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clanId).size() ){
+//      //not enough clan members
+//      resBuilder.setStatus(BeginClanTowerWarStatus.NOT_ENOUGH_CLAN_MEMBERS);
+//      log.error("user error: clan does not have enough members. clan=" + clanOfRequester);
+//      return false;
+//    }
+//
+//    //check if clan trying to claim a tower already has (a) tower(s)
+//    int ownerId = clanId;
+//    int attackerId = clanId;
+//    boolean ownerAndAttackerAreEnemies = false;
+//    List<ClanTower> possessedTowers = ClanTowerRetrieveUtils
+//        .getAllClanTowersWithSpecificOwnerAndOrAttackerId(ownerId, attackerId, ownerAndAttackerAreEnemies);
+//    int limit = ControllerConstants.CLAN_TOWER__MAX_NUM_TOWERS_CLAN_CAN_HOLD;
+//    if (possessedTowers.size() >= limit) {
+//      resBuilder.setStatus(BeginClanTowerWarStatus.ALREADY_OWNS_MAX_NUMBER_OF_TOWERS);
+//      log.error("user error: clan reached max num towers owned=" + limit + " clan=" + 
+//          clanOfRequester + ", towers=" + MiscMethods.shallowListToString(possessedTowers));
+//      return false;
+//    }
+//    
+//    //check if the clan tower has an owner (horribly named getter, supposed to mean get owning clan id)
+//    if (ControllerConstants.NOT_SET == aTower.getClanOwnerId() ||
+//        0 > aTower.getClanOwnerId()) {
+//      ///no owner for tower, set owner and set empty attacker
+//      //TODO: FIGURE OUT WHAT STATUS TO RETURN WHEN SETTING THE OWNER OF A TOWER
+//      //logic here now will suffice
+//      if(claiming) {
+//        resBuilder.setStatus(BeginClanTowerWarStatus.SUCCESS);
+//
+//        aTower.setClanOwnerId(clanId); //set the owner id to use when writing to db
+//        aTower.setOwnedStartTime(curTime);
+//        aTower.setOwnerBattleWins(0);
+//
+//        aTower.setClanAttackerId(ControllerConstants.NOT_SET);
+//        aTower.setAttackStartTime(null);
+//        aTower.setAttackerBattleWins(0);
+//
+//        aTower.setLastRewardGiven(null);
+//        return true;
+//      } else {
+//        resBuilder.setStatus(BeginClanTowerWarStatus.OTHER_FAIL);
+//        log.error("claiming variable not set when tower has no owner. user="
+//            + user + ", clan=" + clanOfRequester + ", clanTower=" + aTower);
+//        return false;
+//      }
+//    }
+//
+//    //check if there already is a clan attacking the tower
+//    if (ControllerConstants.NOT_SET == aTower.getClanAttackerId() || 
+//        0 >= aTower.getClanAttackerId()) {
+//      Clan clanForTower = ClanRetrieveUtils.getClanWithId(aTower.getClanOwnerId());
+//      boolean towerOwnerClanGood = clanForTower.isGood();
+//      boolean requesterClanGood = clanOfRequester.isGood();
+//      boolean oppositeSides = (towerOwnerClanGood && !requesterClanGood)
+//          || (!towerOwnerClanGood && requesterClanGood);
+//      
+//      if(oppositeSides) {
+//        if(claiming) {
+//          resBuilder.setStatus(BeginClanTowerWarStatus.TOWER_ALREADY_CLAIMED);
+//
+//          return false;
+//        } else {
+//          // Check if it has been long enough since last battle on this tower
+//          ClanTowerHistory cth = ClanTowerHistoryRetrieveUtils.getMostRecentClanTowerHistoryForTower(clanId, aTower.getId(), 1);
+//          if (cth != null && cth.getTimeOfEntry() != null && cth.getTimeOfEntry().getTime()+ControllerConstants.NUM_HOURS_BEFORE_REWAGING_WAR_ON_TOWER*3600000 > curTime.getTime()) {
+//            resBuilder.setStatus(BeginClanTowerWarStatus.NOT_ENOUGH_TIME_SINCE_LAST_BATTLE);
+//            
+//            int minsTillRebattle = (int)Math.ceil((cth.getTimeOfEntry().getTime()+ControllerConstants.NUM_HOURS_BEFORE_REWAGING_WAR_ON_TOWER*3600000-curTime.getTime())/60000.);
+//            resBuilder.setNumMinutesTillNextAttack(minsTillRebattle);
+//
+//            return false;
+//          }
+//
+//          //no clan attacking tower, set only the attacker
+//          //TODO: FIGURE OUT WHAT STATUS TO RETURN WHEN SETTING THE ATTACKER OF A TOWER
+//          //logic here now will suffice
+//          resBuilder.setStatus(BeginClanTowerWarStatus.SUCCESS);
+//
+//          aTower.setClanAttackerId(clanId);
+//          aTower.setAttackStartTime(curTime);
+//          aTower.setAttackerBattleWins(0);
+//          aTower.setOwnerBattleWins(0);
+//          aTower.setCurrentBattleId(ClanTowerRetrieveUtils.getMaxBattleId()+1);
+//          return true;
+//        } 
+//      } else {
+//        resBuilder.setStatus(BeginClanTowerWarStatus.SAME_SIDE);
+//        log.error("clans are on the same side (both alliance or both legion");
+//        return false;
+//      }
+//      
+//    }
+//
+//    //tower has an owner and an attacker, so deny request
+//    resBuilder.setStatus(BeginClanTowerWarStatus.TOWER_ALREADY_IN_BATTLE);
+	  resBuilder.setStatus(BeginClanTowerWarStatus.OTHER_FAIL);
     return false;
   }
 

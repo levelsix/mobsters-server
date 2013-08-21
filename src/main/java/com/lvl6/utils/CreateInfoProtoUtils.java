@@ -506,7 +506,7 @@ public class CreateInfoProtoUtils {
     MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
     return FullClanProto.newBuilder().setClanId(c.getId()).setName(c.getName())
         .setOwner(mup).setCreateTime(c.getCreateTime().getTime())
-        .setDescription(c.getDescription()).setTag(c.getTag()).setIsGood(c.isGood())
+        .setDescription(c.getDescription()).setTag(c.getTag())
         .setCurrentTierLevel(c.getCurrentTierLevel())
         .setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
   }
@@ -515,7 +515,7 @@ public class CreateInfoProtoUtils {
     return MinimumClanProto.newBuilder()
         .setClanId(c.getId()).setName(c.getName()).setOwnerId(c.getOwnerId())
         .setCreateTime(c.getCreateTime().getTime()).setDescription(c.getDescription())
-        .setTag(c.getTag()).setIsGood(c.isGood()).setCurrentTierLevel(c.getCurrentTierLevel())
+        .setTag(c.getTag()).setCurrentTierLevel(c.getCurrentTierLevel())
         .setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
   }
 

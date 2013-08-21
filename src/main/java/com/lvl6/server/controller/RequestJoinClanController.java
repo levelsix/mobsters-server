@@ -136,11 +136,11 @@ import com.lvl6.utils.utilmethods.QuestUtils;
       log.error("user is already in clan with id " + user.getClanId());
       return false;      
     }
-    if (clan.isGood() != MiscMethods.checkIfGoodSide(user.getType())) {
-      resBuilder.setStatus(RequestJoinClanStatus.WRONG_SIDE);
-      log.error("user is good " + user.getType() + ", user type is good " + user.getType());
-      return false;      
-    }
+//    if (clan.isGood() != MiscMethods.checkIfGoodSide(user.getType())) {
+//      resBuilder.setStatus(RequestJoinClanStatus.WRONG_SIDE);
+//      log.error("user is good " + user.getType() + ", user type is good " + user.getType());
+//      return false;      
+//    }
     UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(user.getId(), clanId);
     if (uc != null) {
       resBuilder.setStatus(RequestJoinClanStatus.REQUEST_ALREADY_FILED);

@@ -106,8 +106,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
           resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(
               new Clan(
         		  clanId, clanName, user.getId(), createTime, description, tag, 
-        		  MiscMethods.checkIfGoodSide(user.getType()), initialClanLevel,
-        		  requestToJoinRequired)
+        		  initialClanLevel, requestToJoinRequired)
               ));
         }
       }

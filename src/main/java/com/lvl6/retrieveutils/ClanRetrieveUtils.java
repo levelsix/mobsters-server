@@ -197,6 +197,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     return new Clan(clanId, name, ownerId, clanCreateTime, description, tag,
-        isGood, currentTierLevel, requestToJoinRequired);
+        currentTierLevel, requestToJoinRequired);
   }
 }
