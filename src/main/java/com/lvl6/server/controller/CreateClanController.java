@@ -82,6 +82,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     String tag = reqProto.getTag();
     int initialClanLevel = ControllerConstants.CREATE_CLAN__INITIAL_CLAN_LEVEL; 
     boolean requestToJoinRequired = reqProto.getRequestToJoinClanRequired();
+    String description = reqProto.getDescription();
     
     CreateClanResponseProto.Builder resBuilder = CreateClanResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -96,7 +97,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
       int clanId = ControllerConstants.NOT_SET;
       if (legitCreate) {
-        String description = "Welcome to " + clanName + "!";
+      	
+      	//just in case user doesn't input one, set default description
+      	if (null == description || description.isEmpty()) {
+      		description = "Welcome to " + clanName + "!";
+      	}
+      	
         clanId = InsertUtils.get().insertClan(clanName, user.getId(), createTime, description,
             tag, MiscMethods.checkIfGoodSide(user.getType()), requestToJoinRequired);
         if (clanId <= 0) {
