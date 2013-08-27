@@ -2314,4 +2314,58 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
 	  }
 	  return sum;
   }
+  
+  public static void calculateEloChangeAfterBattle(User attacker, User defender, boolean attackerWon) {
+	  double probabilityOfAttackerWin = 1/(1+Math.pow(10, (defender.getElo() - attacker.getElo())/400));
+	  double probabilityOfDefenderWin = 1 - probabilityOfAttackerWin;
+	  int kFactor = 0;
+	  
+	  if(attacker.getElo() < 1900 || defender.getElo() < 2500) {
+		  kFactor = 32;
+	  }
+	  else if(attacker.getElo() < 2400 || defender.getElo() < 3500) {
+		  kFactor = 24;
+	  }
+	  else kFactor = 16;
+	  
+	  int newAttackerElo, newDefenderElo;
+	  //calculate change in elo
+	  if(attackerWon) {
+		  newAttackerElo = (int)(attacker.getElo() + kFactor*(1-probabilityOfAttackerWin));
+		  newDefenderElo = (int)(defender.getElo() + kFactor*(0-probabilityOfDefenderWin));
+	  }
+	  else {
+		  newAttackerElo = (int)(attacker.getElo() + kFactor*(0-probabilityOfAttackerWin));
+		  newDefenderElo = (int)(defender.getElo() + kFactor*(1-probabilityOfDefenderWin));
+	  }
+	  attacker.setElo(newAttackerElo);
+	  defender.setElo(newDefenderElo);
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }

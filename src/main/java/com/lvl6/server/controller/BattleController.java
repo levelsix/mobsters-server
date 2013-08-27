@@ -145,12 +145,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           if (result == BattleResult.ATTACKER_WIN) {
             winner = attacker;
             loser = defender;
-            List<UserEquip> defenderEquips = RetrieveUtils.userEquipRetrieveUtils().getUserEquipsForUser(defender.getId());
-            lostEquip = chooseLostEquip(defenderEquips, equipmentIdsToEquipment,
-                defender, oldDefenderUserEquipsList);
-            if (lostEquip != null) {
-              lostEquip = setLostEquip(resBuilder, lostEquip, winner, loser, battleTime);
-            }
+//            List<UserEquip> defenderEquips = RetrieveUtils.userEquipRetrieveUtils().getUserEquipsForUser(defender.getId());
+//            lostEquip = chooseLostEquip(defenderEquips, equipmentIdsToEquipment,
+//                defender, oldDefenderUserEquipsList);
+//            if (lostEquip != null) {
+//              lostEquip = setLostEquip(resBuilder, lostEquip, winner, loser, battleTime);
+//            }
           } else if (result == BattleResult.DEFENDER_WIN || result == BattleResult.ATTACKER_FLEE){
             winner = defender;
             loser = attacker;
@@ -190,16 +190,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
           //clan towers
           log.debug("BattleController... locking all clan towers");
-          if (server.lockClanTowersTable()) {
-        	  try {
-        		  writeChangesToDBForClanTowers(winner, loser, attacker, defender);
-        	  }catch(Exception e) {
-        		  log.error("Failed to write clanTower changes to DB", e);
-        		  throw e;
-        	  }finally {
-        		  server.unlockClanTowersTable();		  
-        	  }
-          }
+//          if (server.lockClanTowersTable()) {
+//        	  try {
+//        		  writeChangesToDBForClanTowers(winner, loser, attacker, defender);
+//        	  }catch(Exception e) {
+//        		  log.error("Failed to write clanTower changes to DB", e);
+//        		  throw e;
+//        	  }finally {
+//        		  server.unlockClanTowersTable();		  
+//        	  }
+//          }
 
           //user leaderboard event stuff
           leaderBoardEventStuff(winner, loser, attacker, defender, attackerFled);
@@ -302,7 +302,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean checkLegitBattle(Builder resBuilder, BattleResult result, User attacker, User defender, Timestamp battleTime) {
-    if (attacker == null || defender == null || attacker.getStamina() <= 0) {
+    if (attacker == null || defender == null || attacker.getEnergy() <= 0) {
       resBuilder.setStatus(BattleStatus.OTHER_FAIL);
       log.error("problem with battle- attacker or defender is null. attacker is " + attacker + " and defender is " + defender);
       return false;
@@ -312,7 +312,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("problem with battle- attacker and defender same side. attacker=" + attacker + ", defender=" + defender);
       return false;
     }
-    if (defender.isHasActiveShield() &&
+    if (defender.isHasBeginnerShield() &&
         battleTime.getTime() < defender.getCreateTime().getTime()+ControllerConstants.STARTUP__DEFAULT_DAYS_BATTLE_SHIELD_IS_ACTIVE*24*60*60*1000) {
       resBuilder.setStatus(BattleStatus.OPPONENT_HAS_ACTIVE_SHIELD);
       log.error("user error: user trying to attack a defender who has an active" +
@@ -415,7 +415,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       int expGained, int lostCoins, Timestamp battleTime, boolean isFlee, int lockBoxEventId,
       Map<String, Integer> attackerCurrencyChange, Map<String, Integer> defenderCurrencyChange, boolean isTutorialBattle) {
 
-    boolean simulateStaminaRefill = (attacker.getStamina() == attacker.getStaminaMax());
+    boolean simulateEnergyRefill = (attacker.getEnergy() == attacker.getEnergyMax());
     
     boolean attackerDeactivateShield = false;
     boolean defenderDeactivateShield = false;
@@ -430,16 +430,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     
     if (winner == attacker) {
-      if (!attacker.updateRelativeStaminaExperienceCoinsBattleswonBattleslostFleesSimulatestaminarefill(-1,
-          expGained, lostCoins, 1, 0, 0, simulateStaminaRefill, false, battleTime, attackerDeactivateShield,
+      if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
+          expGained, lostCoins, 1, 0, 0, simulateEnergyRefill, battleTime, attackerDeactivateShield, false,
           recordWinLossFlee)) {
         log.error("problem with updating info for winner/attacker " + attacker.getId() + " in battle at " 
             + battleTime + " vs " + loser.getId());
       } else {//for user currency history
         attackerCurrencyChange.put(MiscMethods.silver, lostCoins);
       }
-      if (!defender.updateRelativeStaminaExperienceCoinsBattleswonBattleslostFleesSimulatestaminarefill(0,
-          0, (defender.isFake()) ? 0 : lostCoins * -1, 0, 1, 0, false, true, battleTime, defenderDeactivateShield,
+      if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
+          0, (defender.isFake()) ? 0 : lostCoins * -1, 0, 1, 0, false, battleTime, defenderDeactivateShield, true,
               recordWinLossFlee)) {
         log.error("problem with updating info for defender/loser " + defender.getId() + " in battle at " 
             + battleTime + " vs " + winner.getId());
@@ -450,17 +450,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
     } else if (winner == defender) {
       if (isFlee) {
-        if (!attacker.updateRelativeStaminaExperienceCoinsBattleswonBattleslostFleesSimulatestaminarefill(-1,
-            0, lostCoins * -1, 0, 1, 1, simulateStaminaRefill, false, battleTime, attackerDeactivateShield,
+        if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
+            0, lostCoins * -1, 0, 1, 1, simulateEnergyRefill, battleTime, attackerDeactivateShield, false, 
             recordWinLossFlee)) {
           log.error("problem with updating info for loser/attacker/flee-er " + attacker.getId() + " in battle at " 
               + battleTime + " vs " + winner.getId());
         } else {//for user currency history
           attackerCurrencyChange.put(MiscMethods.silver, lostCoins * -1);
         }
-        if (!defender.updateRelativeStaminaExperienceCoinsBattleswonBattleslostFleesSimulatestaminarefill(0,
-            0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, false, battleTime, defenderDeactivateShield,
-                recordWinLossFlee)) {
+        if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
+            0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, battleTime, defenderDeactivateShield,
+                false, recordWinLossFlee)) {
           log.error("problem with updating info for winner/defender " + defender.getId() + " in battle at " 
               + battleTime + " vs " + loser.getId() + " who fled");
         } else {//for user currency history
@@ -469,17 +469,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           }
         }
       } else {
-        if (!attacker.updateRelativeStaminaExperienceCoinsBattleswonBattleslostFleesSimulatestaminarefill(-1,
-            0, lostCoins * -1, 0, 1, 0, simulateStaminaRefill, false, battleTime, attackerDeactivateShield,
-            recordWinLossFlee)) {
+        if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
+            0, lostCoins * -1, 0, 1, 0, simulateEnergyRefill, battleTime, attackerDeactivateShield,
+            false, recordWinLossFlee)) {
           log.error("problem with updating info for loser/attacker " + attacker.getId() + " in battle at " 
               + battleTime + " vs " + winner.getId());
         } else {//for user currency history
           attackerCurrencyChange.put(MiscMethods.silver, lostCoins * -1);
         }
-        if (!defender.updateRelativeStaminaExperienceCoinsBattleswonBattleslostFleesSimulatestaminarefill(0,
-            0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, true, battleTime, defenderDeactivateShield,
-                recordWinLossFlee)) {
+        if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
+            0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, battleTime, defenderDeactivateShield,
+                false, recordWinLossFlee)) {
           log.error("problem with updating info for winner/defender " + defender.getId() + " in battle at " 
               + battleTime + " vs " + loser.getId());
         } else {//for user currency history
@@ -499,61 +499,61 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   //if incrementOwnerBattleWins is true then the the owner's battle wins is incremented
   //else the attacker's battle wins is incremented, does nothing if list of towers is null/empty
   //returns changed towers
-  private List<ClanTower> incrementBattleWins(List<ClanTower> towers, boolean incrementOwnerBattleWins, int ownerUserId,
-      int attackerUserId, int pointsGained) {
-    List<ClanTower> changedTowers = new ArrayList<ClanTower>();
-    String ownerOrAttacker = incrementOwnerBattleWins ? "owner" : "attacker";
-    for(ClanTower aTower : towers) {
-      if(!UpdateUtils.get().updateClanTowerBattleWins(
-          aTower.getId(), aTower.getClanOwnerId(), aTower.getClanAttackerId(),
-          incrementOwnerBattleWins, pointsGained, aTower.getCurrentBattleId(), ownerUserId, attackerUserId)) {
-        log.error("(no rows updated) problem with updating tower's battle wins. " +
-            "tower=" + aTower + " The " + ownerOrAttacker + "'s " +
-            "battle wins were not incremented.");
-      } else {
-        if (incrementOwnerBattleWins) {
-          aTower.setOwnerBattleWins(aTower.getOwnerBattleWins()+pointsGained);
-        } else {
-          aTower.setAttackerBattleWins(aTower.getAttackerBattleWins()+pointsGained);
-        }
-      }
-    }
-    return changedTowers;
-  }
+//  private List<ClanTower> incrementBattleWins(List<ClanTower> towers, boolean incrementOwnerBattleWins, int ownerUserId,
+//      int attackerUserId, int pointsGained) {
+//    List<ClanTower> changedTowers = new ArrayList<ClanTower>();
+//    String ownerOrAttacker = incrementOwnerBattleWins ? "owner" : "attacker";
+//    for(ClanTower aTower : towers) {
+//      if(!UpdateUtils.get().updateClanTowerBattleWins(
+//          aTower.getId(), aTower.getClanOwnerId(), aTower.getClanAttackerId(),
+//          incrementOwnerBattleWins, pointsGained, aTower.getCurrentBattleId(), ownerUserId, attackerUserId)) {
+//        log.error("(no rows updated) problem with updating tower's battle wins. " +
+//            "tower=" + aTower + " The " + ownerOrAttacker + "'s " +
+//            "battle wins were not incremented.");
+//      } else {
+//        if (incrementOwnerBattleWins) {
+//          aTower.setOwnerBattleWins(aTower.getOwnerBattleWins()+pointsGained);
+//        } else {
+//          aTower.setAttackerBattleWins(aTower.getAttackerBattleWins()+pointsGained);
+//        }
+//      }
+//    }
+//    return changedTowers;
+//  }
 
-  private void writeChangesToDBForClanTowers(User winner, User loser, User attacker, User defender) {
-    List<ClanTower> attackerIsClanTowerOwner;
-    List<ClanTower> defenderIsClanTowerOwner;
-    int attackerId = attacker.getClanId();
-    int defenderId = defender.getClanId();
-    boolean ownerAndAttackerAreEnemies = true;
-    int pointsGained = MiscMethods.pointsGainedForClanTowerUserBattle(winner, loser);
-    
-    if (attackerId == ControllerConstants.NOT_SET || defenderId == ControllerConstants.NOT_SET) {
-      return;
-    }
-
-    //attacker is owner of tower
-    attackerIsClanTowerOwner = ClanTowerRetrieveUtils.getAllClanTowersWithSpecificOwnerAndOrAttackerId(
-        attackerId, defenderId, ownerAndAttackerAreEnemies);    
-    //defender is owner of tower
-    defenderIsClanTowerOwner = ClanTowerRetrieveUtils.getAllClanTowersWithSpecificOwnerAndOrAttackerId(
-        defenderId, attackerId, ownerAndAttackerAreEnemies);
-
-    if (winner == attacker) {
-      incrementBattleWins(attackerIsClanTowerOwner, true, attacker.getId(), defender.getId(), pointsGained);//increment clan tower's owner battle wins
-      incrementBattleWins(defenderIsClanTowerOwner, false, defender.getId(), attacker.getId(), pointsGained);//increment clan tower's attacker battle wins
-    } else if (winner == defender) {
-      incrementBattleWins(defenderIsClanTowerOwner, true, defender.getId(), attacker.getId(), pointsGained);//increment clan tower's owner battle wins
-      incrementBattleWins(attackerIsClanTowerOwner, false, attacker.getId(), defender.getId(), pointsGained);//increment clan tower's attacker battle wins
-    }
-    //defenderIsClanTowerOwner contains half of the towers, so add into it the other half
-    defenderIsClanTowerOwner.addAll(attackerIsClanTowerOwner);
-    if(!defenderIsClanTowerOwner.isEmpty()) { //send towers only if there are towers
-      MiscMethods.sendClanTowerProtosToClient(new HashSet<ClanTower>(defenderIsClanTowerOwner), server, ReasonForClanTowerChange.NUM_BATTLE_WINS_CHANGED, 
-          attacker, defender, winner==attacker, pointsGained);
-    }
-  }
+//  private void writeChangesToDBForClanTowers(User winner, User loser, User attacker, User defender) {
+//    List<ClanTower> attackerIsClanTowerOwner;
+//    List<ClanTower> defenderIsClanTowerOwner;
+//    int attackerId = attacker.getClanId();
+//    int defenderId = defender.getClanId();
+//    boolean ownerAndAttackerAreEnemies = true;
+//    int pointsGained = MiscMethods.pointsGainedForClanTowerUserBattle(winner, loser);
+//    
+//    if (attackerId == ControllerConstants.NOT_SET || defenderId == ControllerConstants.NOT_SET) {
+//      return;
+//    }
+//
+//    //attacker is owner of tower
+//    attackerIsClanTowerOwner = ClanTowerRetrieveUtils.getAllClanTowersWithSpecificOwnerAndOrAttackerId(
+//        attackerId, defenderId, ownerAndAttackerAreEnemies);    
+//    //defender is owner of tower
+//    defenderIsClanTowerOwner = ClanTowerRetrieveUtils.getAllClanTowersWithSpecificOwnerAndOrAttackerId(
+//        defenderId, attackerId, ownerAndAttackerAreEnemies);
+//
+//    if (winner == attacker) {
+//      incrementBattleWins(attackerIsClanTowerOwner, true, attacker.getId(), defender.getId(), pointsGained);//increment clan tower's owner battle wins
+//      incrementBattleWins(defenderIsClanTowerOwner, false, defender.getId(), attacker.getId(), pointsGained);//increment clan tower's attacker battle wins
+//    } else if (winner == defender) {
+//      incrementBattleWins(defenderIsClanTowerOwner, true, defender.getId(), attacker.getId(), pointsGained);//increment clan tower's owner battle wins
+//      incrementBattleWins(attackerIsClanTowerOwner, false, attacker.getId(), defender.getId(), pointsGained);//increment clan tower's attacker battle wins
+//    }
+//    //defenderIsClanTowerOwner contains half of the towers, so add into it the other half
+//    defenderIsClanTowerOwner.addAll(attackerIsClanTowerOwner);
+//    if(!defenderIsClanTowerOwner.isEmpty()) { //send towers only if there are towers
+//      MiscMethods.sendClanTowerProtosToClient(new HashSet<ClanTower>(defenderIsClanTowerOwner), server, ReasonForClanTowerChange.NUM_BATTLE_WINS_CHANGED, 
+//          attacker, defender, winner==attacker, pointsGained);
+//    }
+//  }
 
   private void leaderBoardEventStuff(User winner, User loser, User attacker, 
       User defender, boolean attackerFled) {
@@ -628,59 +628,59 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * min_level below the player's level can be stolen - attackers can't lose
    * items - min level applies for usage, not for holding
    */
-  private UserEquip chooseLostEquip(List<UserEquip> defenderEquips,
-      Map<Integer, Equipment> equipmentIdsToEquipment, User defender, List<FullUserEquipProto> oldDefenderUserEquipsList) {
-    if (Math.random() > ControllerConstants.BATTLE__CHANCE_OF_EQUIP_LOOT_INITIAL_WALL) {
-      return null;
-    }
-
-    Set<Integer> equippedEquips = MiscMethods.getEquippedEquips(defender);
-    
-    //get equips that can be stolen
-    List<UserEquip> potentialLosses = new ArrayList<UserEquip>();
-    if (defenderEquips != null) {
-      for (UserEquip defenderEquip : defenderEquips) {
-        int defenderEquipId = defenderEquip.getId();
-        boolean equipped = equippedEquips.contains(defenderEquipId); //check if user has it equipped
-        if (equipped) { //can't steal equipped equips
-          continue;
-        }
-//        if (defenderEquip.getId() == defender.getWeaponEquippedUserEquipId() || defenderEquip.getId() == defender.getArmorEquippedUserEquipId()
-//            || defenderEquip.getId() == defender.getAmuletEquippedUserEquipId()) {
+//  private UserEquip chooseLostEquip(List<UserEquip> defenderEquips,
+//      Map<Integer, Equipment> equipmentIdsToEquipment, User defender, List<FullUserEquipProto> oldDefenderUserEquipsList) {
+//    if (Math.random() > ControllerConstants.BATTLE__CHANCE_OF_EQUIP_LOOT_INITIAL_WALL) {
+//      return null;
+//    }
+//
+//    Set<Integer> equippedEquips = MiscMethods.getEquippedEquips(defender);
+//    
+//    //get equips that can be stolen
+//    List<UserEquip> potentialLosses = new ArrayList<UserEquip>();
+//    if (defenderEquips != null) {
+//      for (UserEquip defenderEquip : defenderEquips) {
+//        int defenderEquipId = defenderEquip.getId();
+//        boolean equipped = equippedEquips.contains(defenderEquipId); //check if user has it equipped
+//        if (equipped) { //can't steal equipped equips
 //          continue;
 //        }
-
-        int equipId = defenderEquip.getEquipId();
-        Equipment equip = equipmentIdsToEquipment.get(equipId);
-        if (equip.getMinLevel() < defender.getLevel() 
-            && defenderEquip.getLevel() < ControllerConstants.BATTLE__MAX_LEVEL_TO_STEAL
-            && equip.getRarity().getNumber() < Rarity.RARE_VALUE) {
-          double rand = Math.random();
-          if (rand <= equip.getChanceOfLoss() / defenderEquip.getLevel()) {
-            potentialLosses.add(defenderEquip);
-          }
-        }
-      }
-      //find out which equip will be stolen
-      if (potentialLosses.size() > 0) {
-        UserEquip lostUserEquip = potentialLosses.get((int) Math.rint(Math.random()
-            * (potentialLosses.size() - 1)));
-        if (oldDefenderUserEquipsList != null) {
-          for (FullUserEquipProto oldUserEquip : oldDefenderUserEquipsList) {
-            if (oldUserEquip.getEquipId() == lostUserEquip.getEquipId()) {
-              List<UserEquip> userEquipsWithEquipId = new ArrayList<UserEquip>();
-              for (UserEquip defenderEquip : defenderEquips) {
-                if (defenderEquip.getId() == lostUserEquip.getId()) userEquipsWithEquipId.add(defenderEquip);
-              }
-              return MiscMethods.chooseUserEquipWithEquipIdPreferrablyNonEquippedIgnoreLevel(defender, userEquipsWithEquipId);
-            }
-          }
-        }
-        return null;
-      }
-    }
-    return null;
-  }
+////        if (defenderEquip.getId() == defender.getWeaponEquippedUserEquipId() || defenderEquip.getId() == defender.getArmorEquippedUserEquipId()
+////            || defenderEquip.getId() == defender.getAmuletEquippedUserEquipId()) {
+////          continue;
+////        }
+//
+//        int equipId = defenderEquip.getEquipId();
+//        Equipment equip = equipmentIdsToEquipment.get(equipId);
+//        if (equip.getMinLevel() < defender.getLevel() 
+//            && defenderEquip.getLevel() < ControllerConstants.BATTLE__MAX_LEVEL_TO_STEAL
+//            && equip.getRarity().getNumber() < Rarity.RARE_VALUE) {
+//          double rand = Math.random();
+//          if (rand <= equip.getChanceOfLoss() / defenderEquip.getLevel()) {
+//            potentialLosses.add(defenderEquip);
+//          }
+//        }
+//      }
+//      //find out which equip will be stolen
+//      if (potentialLosses.size() > 0) {
+//        UserEquip lostUserEquip = potentialLosses.get((int) Math.rint(Math.random()
+//            * (potentialLosses.size() - 1)));
+//        if (oldDefenderUserEquipsList != null) {
+//          for (FullUserEquipProto oldUserEquip : oldDefenderUserEquipsList) {
+//            if (oldUserEquip.getEquipId() == lostUserEquip.getEquipId()) {
+//              List<UserEquip> userEquipsWithEquipId = new ArrayList<UserEquip>();
+//              for (UserEquip defenderEquip : defenderEquips) {
+//                if (defenderEquip.getId() == lostUserEquip.getId()) userEquipsWithEquipId.add(defenderEquip);
+//              }
+//              return MiscMethods.chooseUserEquipWithEquipIdPreferrablyNonEquippedIgnoreLevel(defender, userEquipsWithEquipId);
+//            }
+//          }
+//        }
+//        return null;
+//      }
+//    }
+//    return null;
+//  }
 
   private int checkIfUserAcquiresLockBox(User user, BattleResult result, Timestamp curTime) {
     if (result != BattleResult.ATTACKER_WIN) return ControllerConstants.NOT_SET;

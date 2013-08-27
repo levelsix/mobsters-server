@@ -287,7 +287,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     if (inactiveShield) {
-      query += DBConstants.USER__HAS_ACTIVE_SHIELD + "=? and ";
+      query += DBConstants.USER__HAS_BEGINNER_SHIELD + "=? and ";
       values.add(false);
     }
 
@@ -446,16 +446,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String name = rs.getString(i++);
     int level = rs.getInt(i++);
     UserType type = UserType.valueOf(rs.getInt(i++));
-    int attack = rs.getInt(i++);
-    int defense = rs.getInt(i++);
-    int stamina = rs.getInt(i++);
 
-    Date lastStaminaRefillTime = null;
     Timestamp ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastStaminaRefillTime = new Date(ts.getTime());
-    }
-
     int energy = rs.getInt(i++);
 
     Date lastEnergyRefillTime = null;
@@ -464,9 +456,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       lastEnergyRefillTime = new Date(ts.getTime());
     }
 
-    int skillPoints = rs.getInt(i++);
     int energyMax = rs.getInt(i++);
-    int staminaMax = rs.getInt(i++);
     int diamonds = rs.getInt(i++);
     int coins = rs.getInt(i++);
     int marketplaceDiamondsEarnings = rs.getInt(i++);
@@ -497,16 +487,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
       amuletEquippedUserEquipId = ControllerConstants.NOT_SET;
     }
 
-    Date lastLoginTime = null;
+    Date lastLogin = null;
     ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
-      lastLoginTime = new Date(ts.getTime());
+      lastLogin = new Date(ts.getTime());
     }
 
-    Date lastLogoutTime = null;
+    Date lastLogout = null;
     ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
-      lastLogoutTime = new Date(ts.getTime());
+      lastLogout = new Date(ts.getTime());
     }
 
     String deviceToken = rs.getString(i++);
@@ -515,12 +505,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
       lastBattleNotificationTime = new Date(ts.getTime());
-    }
-
-    Date lastTimeAttacked = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastTimeAttacked = new Date(ts.getTime());
     }
 
     int numBadges = rs.getInt(i++);
@@ -539,17 +523,17 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     boolean isFake = rs.getBoolean(i++);
     
-    Date userCreateTime = null;
+    Date createTime = null;
     ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
-      userCreateTime = new Date(ts.getTime());
+      createTime = new Date(ts.getTime());
     }
 
     boolean isAdmin = rs.getBoolean(i++);
     
     String apsalarId = rs.getString(i++);
     int numCoinsRetrievedFromStructs = rs.getInt(i++);
-    int numAdcolonyVideosWatched = rs.getInt(i++);
+    int numAdColonyVideosWatched = rs.getInt(i++);
     int numTimesKiipRewarded = rs.getInt(i++);
     int numConsecutiveDaysPlayed = rs.getInt(i++);
     int numGroupChatsRemaining = rs.getInt(i++);
@@ -565,16 +549,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
       lastGoldmineRetrieval = new Date(ts.getTime());
     }
 
-    Date lastMktNotificationTime = null;
+    Date lastMarketplaceNotificationTime = null;
     ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
-      lastMktNotificationTime = new Date(ts.getTime());
+    	lastMarketplaceNotificationTime = new Date(ts.getTime());
     }
 
-    Date lastWallNotificationTime = null;
+    Date lastWallPostNotificationTime = null;
     ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
-      lastWallNotificationTime = new Date(ts.getTime());
+    	lastWallPostNotificationTime = new Date(ts.getTime());
     }
     
     int kabamNaid = rs.getInt(i++);
@@ -599,18 +583,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int numAdditionalForgeSlots = rs.getInt(i++);
     int numBeginnerSalesPurchased = rs.getInt(i++);
     boolean isMentor = rs.getBoolean(i++);
-    boolean hasActiveShield = rs.getBoolean(i++);
+    boolean hasBeginnerShield = rs.getBoolean(i++);
+    Date shieldEndTime = rs.getDate(i++);
+    int elo = rs.getInt(i++);
+    String rank = rs.getString(i++);
     
-    User user = new User(userId, name, level, type, attack, defense, stamina, lastStaminaRefillTime, energy, lastEnergyRefillTime, 
-        skillPoints, energyMax, staminaMax, diamonds, coins, marketplaceDiamondsEarnings, marketplaceCoinsEarnings, 
-        vaultBalance, experience, tasksCompleted, battlesWon, battlesLost, flees,
-        referralCode, numReferrals, udid, userLocation, numPostsInMarketplace, numMarketplaceSalesUnredeemed, 
-        weaponEquippedUserEquipId, armorEquippedUserEquipId, amuletEquippedUserEquipId, lastLoginTime, lastLogoutTime, deviceToken, 
-        lastBattleNotificationTime, lastTimeAttacked, numBadges, lastShortLicensePurchaseTime, lastLongLicensePurchaseTime, isFake, userCreateTime, 
-        isAdmin, apsalarId, numCoinsRetrievedFromStructs, numAdcolonyVideosWatched, numTimesKiipRewarded, numConsecutiveDaysPlayed, 
-        numGroupChatsRemaining, clanId, lastGoldmineRetrieval, lastMktNotificationTime, lastWallNotificationTime, kabamNaid, hasReceivedfbReward,
-        weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId, amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots, 
-        numBeginnerSalesPurchased, isMentor, hasActiveShield);
+    User user = new User(userId, name, level, type, energy, lastEnergyRefillTime, energyMax, diamonds, coins, marketplaceDiamondsEarnings, marketplaceCoinsEarnings, vaultBalance, experience, tasksCompleted, battlesWon, battlesLost, flees, referralCode, numReferrals, udid, userLocation, numPostsInMarketplace, numMarketplaceSalesUnredeemed, weaponEquippedUserEquipId, armorEquippedUserEquipId, amuletEquippedUserEquipId, lastLogin, lastLogout, deviceToken, lastBattleNotificationTime, numBadges, lastShortLicensePurchaseTime, lastLongLicensePurchaseTime, isFake, createTime, isAdmin, apsalarId, numCoinsRetrievedFromStructs, numAdColonyVideosWatched, numTimesKiipRewarded, numConsecutiveDaysPlayed, numGroupChatsRemaining, clanId, lastGoldmineRetrieval, lastMarketplaceNotificationTime, lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward, weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId, amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots, numBeginnerSalesPurchased, isMentor, hasBeginnerShield, shieldEndTime, elo, rank);
     return user;
   }
 }

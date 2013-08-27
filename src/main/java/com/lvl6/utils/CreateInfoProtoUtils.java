@@ -376,11 +376,9 @@ public class CreateInfoProtoUtils {
 
   public static FullUserProto createFullUserProtoFromUser(User u) {
     FullUserProto.Builder builder = FullUserProto.newBuilder().setUserId(u.getId()).setName(u.getName())
-        .setLevel(u.getLevel()).setUserType(u.getType()).setAttack(u.getAttack())
-        .setDefense(u.getDefense()).setStamina(u.getStamina())
+        .setLevel(u.getLevel()).setUserType(u.getType())
         .setEnergy(u.getEnergy())
-        .setSkillPoints(u.getSkillPoints())
-        .setEnergyMax(u.getEnergyMax()).setStaminaMax(u.getStaminaMax()).setDiamonds(u.getDiamonds())
+        .setEnergyMax(u.getEnergyMax()).setDiamonds(u.getDiamonds())
         .setCoins(u.getCoins()).setMarketplaceDiamondsEarnings(u.getMarketplaceDiamondsEarnings())
         .setMarketplaceCoinsEarnings(u.getMarketplaceCoinsEarnings())
         .setVaultBalance(u.getVaultBalance()).setExperience(u.getExperience())
@@ -399,7 +397,13 @@ public class CreateInfoProtoUtils {
         .setNumAdditionalForgeSlots(u.getNumAdditionalForgeSlots())
         .setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased())
         .setIsMentor(u.isMentor())
-        .setHasActiveShield(u.isHasActiveShield());
+        .setHasActiveShield(u.isHasBeginnerShield())
+    	.setElo(u.getElo())
+    	.setRank(u.getRank());
+    
+    if(u.getShieldEndTime() != null) {
+    	builder.setShieldEndTime(u.getShieldEndTime().getTime());
+    }
     
     if (u.getReferralCode() != null) {
       builder.setReferralCode(u.getReferralCode());
@@ -463,9 +467,6 @@ public class CreateInfoProtoUtils {
     }
     if (u.getLastEnergyRefillTime() != null) {
       builder.setLastEnergyRefillTime(u.getLastEnergyRefillTime().getTime());
-    }
-    if (u.getLastStaminaRefillTime() != null) {
-      builder.setLastStaminaRefillTime(u.getLastStaminaRefillTime().getTime());
     }
     if (u.getLastLogout() != null) {
       builder.setLastLogoutTime(u.getLastLogout().getTime());

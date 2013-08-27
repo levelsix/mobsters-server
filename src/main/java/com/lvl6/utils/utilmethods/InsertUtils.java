@@ -690,12 +690,8 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER__NAME, name);
     insertParams.put(DBConstants.USER__TYPE, type.getNumber());
     insertParams.put(DBConstants.USER__LEVEL, level);
-    insertParams.put(DBConstants.USER__ATTACK, attack);
-    insertParams.put(DBConstants.USER__DEFENSE, defense);
     insertParams.put(DBConstants.USER__ENERGY, energy);
     insertParams.put(DBConstants.USER__ENERGY_MAX, energy);
-    insertParams.put(DBConstants.USER__STAMINA, stamina);
-    insertParams.put(DBConstants.USER__STAMINA_MAX, stamina);
     insertParams.put(DBConstants.USER__EXPERIENCE, experience);
     insertParams.put(DBConstants.USER__COINS, coins);
     insertParams.put(DBConstants.USER__DIAMONDS, diamonds);
@@ -713,12 +709,9 @@ public class InsertUtils implements InsertUtil{
         amuletEquipped);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
     insertParams.put(DBConstants.USER__NUM_GROUP_CHATS_REMAINING, 5);
-    insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
+    insertParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, activateShield);
     if (null != lastEnergyRefillTime) {
       insertParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, lastEnergyRefillTime);
-    }
-    if (null != lastStaminaRefillTime) {
-      insertParams.put(DBConstants.USER__LAST_STAMINA_REFILL_TIME, lastStaminaRefillTime);
     }
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
