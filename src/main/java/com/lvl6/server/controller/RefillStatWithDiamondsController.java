@@ -116,13 +116,7 @@ import com.lvl6.utils.RetrieveUtils;
             + user.getDiamonds() + ", needs " + ControllerConstants.REFILL_STAT_WITH_DIAMONDS__DIAMOND_COST_FOR_ENERGY_REFILL);
         return false;
       }
-    } else if (statType == StatType.STAMINA) {
-      if (user.getStamina() >= user.getStaminaMax()) {
-        resBuilder.setStatus(RefillStatStatus.ALREADY_MAX);
-        log.error("user stamina already at his max. user's stamina=" + user.getStamina()
-            + ", user's staminaMax=" + user.getStaminaMax());
-        return false;
-      }
+    
       if (user.getDiamonds() < ControllerConstants.REFILL_STAT_WITH_DIAMONDS__DIAMOND_COST_FOR_STAMINA_REFILL) {
         resBuilder.setStatus(RefillStatStatus.NOT_ENOUGH_DIAMONDS);
         log.error("user doesn't have enough diamonds to refill stamina. has "

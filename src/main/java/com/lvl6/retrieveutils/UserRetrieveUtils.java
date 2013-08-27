@@ -417,7 +417,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return null;
   }
 
-  private List<User> convertRSToUsers(ResultSet rs) {
+  public List<User> convertRSToUsers(ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
@@ -440,7 +440,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private User convertRSRowToUser(ResultSet rs) throws SQLException {
+  public User convertRSRowToUser(ResultSet rs) throws SQLException {
     int i = 1;
     int userId = rs.getInt(i++);
     String name = rs.getString(i++);

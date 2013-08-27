@@ -90,13 +90,6 @@ import com.lvl6.utils.RetrieveUtils;
       if (!user.updateLastenergyrefilltimeEnergy(newLastEnergyRefillTime, energyChange)) {
         log.error("problem with updating user's energy and lastenergyrefill time");
       }
-    } else if (type == RefillStatWaitCompleteType.STAMINA) {
-      int staminaChange = Math.min(user.getStaminaMax()-user.getStamina(), 
-          (int)((clientTime.getTime() - user.getLastStaminaRefillTime().getTime()) / (60000*ControllerConstants.REFILL_STAT_WAIT_COMPLETE__MINUTES_FOR_STAMINA)));
-      Timestamp newLastStaminaRefillTime = new Timestamp(user.getLastStaminaRefillTime().getTime() + 60000*staminaChange*ControllerConstants.REFILL_STAT_WAIT_COMPLETE__MINUTES_FOR_STAMINA);
-      if (!user.updateLaststaminarefilltimeStaminaIslaststaminastatefull(newLastStaminaRefillTime, staminaChange)) {
-        log.error("problem with updating user's stamina and laststaminarefill time");
-      }
     }
   }
 
@@ -125,18 +118,7 @@ import com.lvl6.utils.RetrieveUtils;
         log.error("user is already at max energy- " + user.getEnergy());
         return false;        
       }
-    } else if (type == RefillStatWaitCompleteType.STAMINA) { 
-      if (user.getLastStaminaRefillTime().getTime() + 60000*ControllerConstants.REFILL_STAT_WAIT_COMPLETE__MINUTES_FOR_STAMINA > clientTime.getTime()) {
-        resBuilder.setStatus(RefillStatWaitCompleteStatus.NOT_READY_YET);
-        log.error("stamina is not ready for refill yet. client time=" + clientTime + ", struct last refilled stamina at "
-            + user.getLastStaminaRefillTime() + ", num minutes for stamina refill =" + ControllerConstants.REFILL_STAT_WAIT_COMPLETE__MINUTES_FOR_STAMINA);
-        return false;
-      }    
-      if (user.getStamina() == user.getStaminaMax()) {
-        resBuilder.setStatus(RefillStatWaitCompleteStatus.ALREADY_MAX);
-        log.error("user is already at max stamina- " + user.getStamina());
-        return false;        
-      }
+    
     } else {
       resBuilder.setStatus(RefillStatWaitCompleteStatus.OTHER_FAIL);
       log.error("unknow refill stat wait type. refillstatwaitcompletetype=" + type);

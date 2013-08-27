@@ -27,6 +27,8 @@ message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
 	optional int32 elo = 2;
 	repeated int32 seenUserIds = 3;
+	optional int64 clientTime = 4;
+	
 }
 
 message QueueUpResponseProto {

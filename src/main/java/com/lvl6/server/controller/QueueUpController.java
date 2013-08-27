@@ -37,6 +37,7 @@ import com.lvl6.proto.EventProto.QueueUpResponseProto.Builder;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.retrieveutils.UserRetrieveUtils;
 
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.DBConnection;
@@ -52,6 +53,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 	@Autowired
 	protected InsertUtil insertUtils;
+	
+	@Autowired
+	protected UserRetrieveUtils userRetrieveUtils;
 
 	public void setInsertUtils(InsertUtil insertUtils) {
 		this.insertUtils = insertUtils;
@@ -87,7 +91,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		//client keeps adding to this list, prevents same users coming up in queue
 		List<Integer> seenUserIds = reqProto.getSeenUserIdsList();
 		Date clientDate = new Date();
-	    QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto.newBuilder();
+		Timestamp queueTime = new Timestamp(reqProto.getClientTime());
+		QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto.newBuilder();
 		resBuilder.setAttacker(attackerProto);
 		resBuilder.setStatus(QueueUpStatus.OTHER_FAIL);
 
@@ -101,7 +106,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			resEvent.setQueueUpResponseProto(resBuilder.build());  
 
 			if (legitQueueUp) {
-				writeChangesToDB(attacker, attackerElo);
+				writeChangesToDB(attacker, attackerElo, queueTime);
 				resEvent.setTag(event.getTag());
 				User defender = queuedOpponent(attacker, attackerElo, seenUserIds, clientDate);
 				resBuilder.setDefender(CreateInfoProtoUtils.createMinimumUserProtoFromUser(defender));
@@ -140,7 +145,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		//range of users -100 and +100 elo
-		List<User> usersList1 = convertRSToUsers(rs1);
+		List<User> usersList1 = getUserRetrieveUtils().convertRSToUsers(rs1);
 		DBConnection.get().close(rs1, null, conn);  
 
 		for(int i=0;i<usersList1.size();i++) {
@@ -190,8 +195,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		//range of users -200 and -100 and +100 to +200 elo
-		List<User> usersList2 = new ArrayList<User>(convertRSToUsers(rs2));
-		usersList2.addAll(convertRSToUsers(rs3));
+		List<User> usersList2 = new ArrayList<User>(getUserRetrieveUtils().convertRSToUsers(rs2));
+		usersList2.addAll(getUserRetrieveUtils().convertRSToUsers(rs3));
 
 		DBConnection.get().close(rs2, null, conn);
 		DBConnection.get().close(rs3, null, conn);
@@ -245,8 +250,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 
 		//range of users -200 and -100 and +100 to +200 elo
-		List<User> usersList3 = new ArrayList<User>(convertRSToUsers(rs4));
-		usersList3.addAll(convertRSToUsers(rs5));
+		List<User> usersList3 = new ArrayList<User>(getUserRetrieveUtils().convertRSToUsers(rs4));
+		usersList3.addAll(getUserRetrieveUtils().convertRSToUsers(rs5));
 
 		DBConnection.get().close(rs4, null, conn);
 		DBConnection.get().close(rs5, null, conn);
@@ -346,215 +351,21 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	}
 
 	// change user silver value and remove his shield if he has one
-	private boolean writeChangesToDB(User attacker, int elo) {
+	private boolean writeChangesToDB(User attacker, int elo, Timestamp queueTime) {
 		int queueCost = calculateQueueCost(attacker, elo);
-		return attacker.updateRelativeStaminaExperienceCoinsBattleswonBattleslostFleesSimulatestaminarefill (
-				0, 0, queueCost, 0, 0, 0,  false, false, null, true, false, false);  
-	}
-
-
-	private List<User> convertRSToUsers(ResultSet rs) {
-		if (rs != null) {
-			try {
-				rs.last();
-				rs.beforeFirst();
-				List<User> users = new ArrayList<User>();
-				while(rs.next()) {  //should only be one
-					users.add(convertRSRowToUser(rs));
-				}
-				return users;
-			} catch (SQLException e) {
-				log.error("problem with database call.", e);
-
-			}
-		}
-		return null;
+		return attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill (
+				0, 0, -1*queueCost, 0, 0, 0,  false, queueTime, true, false, false);  
 	}
 
 
 
-	/*
-	 * assumes the resultset is apprpriately set up. traverses the row it's on.
-	 */
-	private User convertRSRowToUser(ResultSet rs) throws SQLException {
-		int i = 1;
-		int userId = rs.getInt(i++);
-		String name = rs.getString(i++);
-		int level = rs.getInt(i++);
-		UserType type = UserType.valueOf(rs.getInt(i++));
-		int attack = rs.getInt(i++);
-		int defense = rs.getInt(i++);
-		int stamina = rs.getInt(i++);
-
-		Date lastStaminaRefillTime = null;
-		Timestamp ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastStaminaRefillTime = new Date(ts.getTime());
-		}
-
-		int energy = rs.getInt(i++);
-
-		Date lastEnergyRefillTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastEnergyRefillTime = new Date(ts.getTime());
-		}
-
-		int skillPoints = rs.getInt(i++);
-		int energyMax = rs.getInt(i++);
-		int staminaMax = rs.getInt(i++);
-		int diamonds = rs.getInt(i++);
-		int coins = rs.getInt(i++);
-		int marketplaceDiamondsEarnings = rs.getInt(i++);
-		int marketplaceCoinsEarnings = rs.getInt(i++);
-		int vaultBalance = rs.getInt(i++);
-		int experience = rs.getInt(i++);
-		int tasksCompleted = rs.getInt(i++);
-		int battlesWon = rs.getInt(i++);
-		int battlesLost = rs.getInt(i++);
-		int flees = rs.getInt(i++);
-		String referralCode = rs.getString(i++);
-		int numReferrals = rs.getInt(i++);
-		String udid = rs.getString(i++);
-		Location userLocation = new Location(rs.getDouble(i++), rs.getDouble(i++));
-		int numPostsInMarketplace = rs.getInt(i++);
-		int numMarketplaceSalesUnredeemed = rs.getInt(i++);
-
-		int weaponEquippedUserEquipId = rs.getInt(i++);
-		if (rs.wasNull()) {
-			weaponEquippedUserEquipId = ControllerConstants.NOT_SET;
-		}
-		int armorEquippedUserEquipId = rs.getInt(i++);
-		if (rs.wasNull()) {
-			armorEquippedUserEquipId = ControllerConstants.NOT_SET;
-		}
-		int amuletEquippedUserEquipId = rs.getInt(i++);
-		if (rs.wasNull()) {
-			amuletEquippedUserEquipId = ControllerConstants.NOT_SET;
-		}
-
-		Date lastLoginTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastLoginTime = new Date(ts.getTime());
-		}
-
-		Date lastLogoutTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastLogoutTime = new Date(ts.getTime());
-		}
-
-		String deviceToken = rs.getString(i++);
-
-		Date lastBattleNotificationTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastBattleNotificationTime = new Date(ts.getTime());
-		}
-
-		Date lastTimeAttacked = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastTimeAttacked = new Date(ts.getTime());
-		}
-
-		int numBadges = rs.getInt(i++);
-
-		Date lastShortLicensePurchaseTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastShortLicensePurchaseTime = new Date(ts.getTime());
-		}
-
-		Date lastLongLicensePurchaseTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastLongLicensePurchaseTime = new Date(ts.getTime());
-		}
-
-		boolean isFake = rs.getBoolean(i++);
-
-		Date userCreateTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			userCreateTime = new Date(ts.getTime());
-		}
-
-		boolean isAdmin = rs.getBoolean(i++);
-
-		String apsalarId = rs.getString(i++);
-		int numCoinsRetrievedFromStructs = rs.getInt(i++);
-		int numAdcolonyVideosWatched = rs.getInt(i++);
-		int numTimesKiipRewarded = rs.getInt(i++);
-		int numConsecutiveDaysPlayed = rs.getInt(i++);
-		int numGroupChatsRemaining = rs.getInt(i++);
-
-		int clanId = rs.getInt(i++);
-		if (rs.wasNull()) {
-			clanId = ControllerConstants.NOT_SET;
-		}
-
-		Date lastGoldmineRetrieval = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastGoldmineRetrieval = new Date(ts.getTime());
-		}
-
-		Date lastMktNotificationTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastMktNotificationTime = new Date(ts.getTime());
-		}
-
-		Date lastWallNotificationTime = null;
-		ts = rs.getTimestamp(i++);
-		if (!rs.wasNull()) {
-			lastWallNotificationTime = new Date(ts.getTime());
-		}
-
-		int kabamNaid = rs.getInt(i++);
-
-		boolean hasReceivedfbReward = rs.getBoolean(i++);
-
-		int weaponTwoEquippedUserEquipId = rs.getInt(i++);
-		if (rs.wasNull()) {
-			weaponTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-		}
-		int armorTwoEquippedUserEquipId = rs.getInt(i++);
-		if (rs.wasNull()) {
-			armorTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-		}
-		int amuletTwoEquippedUserEquipId = rs.getInt(i++);
-		if (rs.wasNull()) {
-			amuletTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-		} 
-
-		int prestigeLevel = rs.getInt(i++);
-
-		int numAdditionalForgeSlots = rs.getInt(i++);
-		int numBeginnerSalesPurchased = rs.getInt(i++);
-		boolean isMentor = rs.getBoolean(i++);
-		boolean hasBeginnerShield = rs.getBoolean(i++);
-		Date shieldStartTime = rs.getDate(i++);
-		int elo = rs.getInt(i++);
-		String rank = rs.getString(i++);
-
-		User user = new User(userId, name, level, type, attack, defense, stamina,
-				lastStaminaRefillTime, energy, lastEnergyRefillTime, skillPoints,
-				energyMax, staminaMax, diamonds, coins, marketplaceDiamondsEarnings, 
-				marketplaceCoinsEarnings, vaultBalance, experience, tasksCompleted, 
-				battlesWon, battlesLost, flees, referralCode, numReferrals, udid,
-				userLocation, numPostsInMarketplace, numMarketplaceSalesUnredeemed,
-				weaponEquippedUserEquipId, armorEquippedUserEquipId, amuletEquippedUserEquipId,
-				lastLoginTime, lastLogoutTime, deviceToken, lastBattleNotificationTime, lastTimeAttacked,
-				numBadges, lastShortLicensePurchaseTime, lastLongLicensePurchaseTime, isFake, 
-				userCreateTime, isAdmin, apsalarId, numCoinsRetrievedFromStructs, numAdcolonyVideosWatched, 
-				numTimesKiipRewarded, numConsecutiveDaysPlayed, numGroupChatsRemaining, clanId, 
-				lastGoldmineRetrieval, lastMktNotificationTime, lastWallNotificationTime, 
-				kabamNaid, hasReceivedfbReward, weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId, 
-				amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots, numBeginnerSalesPurchased, 
-				isMentor, hasBeginnerShield, shieldStartTime, elo, rank);
-		return user;
+	public UserRetrieveUtils getUserRetrieveUtils() {
+		return userRetrieveUtils;
 	}
+
+	public void setUserRetrieveUtils(UserRetrieveUtils userRetrieveUtils) {
+		this.userRetrieveUtils = userRetrieveUtils;
+	}
+	
+	
 }
