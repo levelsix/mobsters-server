@@ -2038,6 +2038,7 @@ message CreateClanRequestProto {
 	optional string name = 2;
 	optional string tag = 3;
 	optional bool requestToJoinClanRequired = 4;
+	optional string description = 5;
 }
 
 message CreateClanResponseProto {
