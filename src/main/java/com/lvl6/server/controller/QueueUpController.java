@@ -108,7 +108,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 			//check if user can search for a player to attack
 			if (legitQueueUp) {
-				writeChangesToDB(attacker, attackerElo, queueTime);
+				writeChangesToDB(attacker, attackerElo, seenUserIds, false, queueTime);
 				User defender = queuedOpponent(attacker, attackerElo, seenUserIds, clientDate);
 				resBuilder.setDefender(CreateInfoProtoUtils.createMinimumUserProtoFromUser(defender));
 			}
