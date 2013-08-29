@@ -122,11 +122,11 @@ public class UpdateUtils implements UpdateUtil {
     conditionParams.put(DBConstants.USER_EXPANSIONS__USER_ID, userId);
 
     Map <String, Object> absoluteParams = new HashMap<String, Object>();
-    absoluteParams.put(DBConstants.USER_EXPANSIONS__FAR_LEFT_EXPANSIONS, farLeftExpansionsChange);
-    absoluteParams.put(DBConstants.USER_EXPANSIONS__FAR_RIGHT_EXPANSIONS, farRightExpansionsChange);
-    absoluteParams.put(DBConstants.USER_EXPANSIONS__NEAR_LEFT_EXPANSIONS, nearLeftExpansionsChange);
-    absoluteParams.put(DBConstants.USER_EXPANSIONS__NEAR_RIGHT_EXPANSIONS, nearRightExpansionsChange);
-    absoluteParams.put(DBConstants.USER_EXPANSIONS__IS_EXPANDING, isExpanding);
+//    absoluteParams.put(DBConstants.USER_EXPANSIONS__FAR_LEFT_EXPANSIONS, farLeftExpansionsChange);
+//    absoluteParams.put(DBConstants.USER_EXPANSIONS__FAR_RIGHT_EXPANSIONS, farRightExpansionsChange);
+//    absoluteParams.put(DBConstants.USER_EXPANSIONS__NEAR_LEFT_EXPANSIONS, nearLeftExpansionsChange);
+//    absoluteParams.put(DBConstants.USER_EXPANSIONS__NEAR_RIGHT_EXPANSIONS, nearRightExpansionsChange);
+//    absoluteParams.put(DBConstants.USER_EXPANSIONS__IS_EXPANDING, isExpanding);
 
     int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_EXPANSIONS, null, absoluteParams, 
         conditionParams, "and");
@@ -148,12 +148,12 @@ public class UpdateUtils implements UpdateUtil {
     Map <String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER_EXPANSIONS__USER_ID, userId);
     insertParams.put(DBConstants.USER_EXPANSIONS__LAST_EXPAND_TIME, lastExpandTime);
-    insertParams.put(DBConstants.USER_EXPANSIONS__LAST_EXPAND_DIRECTION, lastExpansionDirection.getNumber());
+//    insertParams.put(DBConstants.USER_EXPANSIONS__LAST_EXPAND_DIRECTION, lastExpansionDirection.getNumber());
     insertParams.put(DBConstants.USER_EXPANSIONS__IS_EXPANDING, isExpanding);
 
     Map <String, Object> absoluteParams = new HashMap<String, Object>();
     absoluteParams.put(DBConstants.USER_EXPANSIONS__LAST_EXPAND_TIME, lastExpandTime);
-    absoluteParams.put(DBConstants.USER_EXPANSIONS__LAST_EXPAND_DIRECTION, lastExpansionDirection.getNumber());
+//    absoluteParams.put(DBConstants.USER_EXPANSIONS__LAST_EXPAND_DIRECTION, lastExpansionDirection.getNumber());
     absoluteParams.put(DBConstants.USER_EXPANSIONS__IS_EXPANDING, isExpanding);
 
     int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_EXPANSIONS, insertParams, null, absoluteParams);
