@@ -168,6 +168,7 @@ public class DBConstants {
   public static final String USER__SHIELD_END_TIME = "shield_start_time";
   public static final String USER__ELO = "elo";
   public static final String USER__RANK = "rank";
+  public static final String USER__LAST_QUEUE_TIME = "last_queue_time";
   
   /*USER EQUIP TABLE*/
   public static final String USER_EQUIP__ID = GENERIC__ID;

@@ -2343,8 +2343,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   
   }
   
-  
-  
+
   
   
   
