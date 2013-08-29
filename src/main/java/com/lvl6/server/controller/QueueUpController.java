@@ -21,14 +21,17 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.QueueUpRequestEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 
 import com.lvl6.info.Location;
 
 import com.lvl6.info.User;
 
 import com.lvl6.leaderboards.LeaderBoardUtil;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.proto.EventProto.QuestAcceptResponseProto.QuestAcceptStatus;
 import com.lvl6.proto.EventProto.QueueUpRequestProto;
 import com.lvl6.proto.EventProto.QueueUpResponseProto;
 import com.lvl6.proto.EventProto.QueueUpResponseProto.QueueUpStatus;
@@ -87,33 +90,49 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 				.getQueueUpRequestProto();
 
 		MinimumUserProto attackerProto = reqProto.getAttacker();
-		int attackerElo = reqProto.getElo();
+		int attackerId = attackerProto.getUserId();
 		//client keeps adding to this list, prevents same users coming up in queue
 		List<Integer> seenUserIds = reqProto.getSeenUserIdsList();
-		Date clientDate = new Date();
-		Timestamp queueTime = new Timestamp(reqProto.getClientTime());
+		long millis = reqProto.getClientTime();
+		Date clientDate = new Date(millis);
+		Timestamp queueTime = new Timestamp(millis);
+		
+		//set some values to send to the client
 		QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto.newBuilder();
 		resBuilder.setAttacker(attackerProto);
 		resBuilder.setStatus(QueueUpStatus.OTHER_FAIL);
 
 		try {
 			User attacker = RetrieveUtils.userRetrieveUtils().getUserById(attackerProto.getUserId());
-
+			int attackerElo = attacker.getElo();
+			
 			boolean legitQueueUp = checkLegitQueueUp(resBuilder, attacker, attackerElo, seenUserIds, clientDate);
 
-			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerProto.getUserId());
-
-			resEvent.setQueueUpResponseProto(resBuilder.build());  
-
+			//check if user can search for a player to attack
 			if (legitQueueUp) {
 				writeChangesToDB(attacker, attackerElo, queueTime);
-				resEvent.setTag(event.getTag());
 				User defender = queuedOpponent(attacker, attackerElo, seenUserIds, clientDate);
 				resBuilder.setDefender(CreateInfoProtoUtils.createMinimumUserProtoFromUser(defender));
-				server.writeEvent(resEvent);
 			}
+			
+			//write event to the client
+			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
+			resEvent.setTag(event.getTag());
+			resEvent.setQueueUpResponseProto(resBuilder.build());  
+			server.writeEvent(resEvent);
+			
+			//UPDATE CLIENT 
+			UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+          .createUpdateClientUserResponseEventAndUpdateLeaderboard(attacker);
+			resEventUpdate.setTag(event.getTag());
+      server.writeEvent(resEventUpdate);
+      
 		} catch (Exception e) {
 			log.error("exception in QueueUp processEvent", e);
+			resBuilder.setStatus(QueueUpStatus.OTHER_FAIL);
+			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
+			resEvent.setTag(event.getTag());
+			
 		} 
 	}
 
@@ -326,24 +345,16 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			return false;
 		}
 		if (attacker.getCoins() < calculateQueueCost(attacker, attacker.getElo())) {
-			resBuilder.setStatus(QueueUpStatus.NOT_ENOUGH_SILVER);
+			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_SILVER);
 			log.error("problem with QueueUp- attacker doesn't have enough silver to search queue");
 			return false;
 		}
 
 		User queuedOpponent = queuedOpponent(attacker, elo, seenUserIds, clientDate);
 		if(queuedOpponent==null) {
-			resBuilder.setStatus(QueueUpStatus.CANT_FIND_ANYONE);
+			resBuilder.setStatus(QueueUpStatus.FAIL_CANT_FIND_ANYONE);
 			log.error("no users to match up with");
 			return false;
-		}
-		if(queuedOpponent.getShieldEndTime() != null) {
-			if(queuedOpponent.isHasBeginnerShield() || 
-					queuedOpponent.getShieldEndTime().getTime() > clientDate.getTime()) {
-				resBuilder.setStatus(QueueUpStatus.HAS_SHIELD);
-				log.error("trying to queue with opponent with shield on");
-				return false;
-			}
 		}
 
 		resBuilder.setStatus(QueueUpStatus.SUCCESS);
