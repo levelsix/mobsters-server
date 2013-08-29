@@ -80,9 +80,11 @@ public class User implements Serializable {
 	private Date shieldEndTime;
 	private int elo;
 	private String rank;
+	private Date lastQueueTime;
 
 
 
+	
 	public User(int id, String name, int level, UserType type, int energy,
 			Date lastEnergyRefillTime, int energyMax, int diamonds, int coins,
 			int marketplaceDiamondsEarnings, int marketplaceCoinsEarnings,
@@ -105,7 +107,8 @@ public class User implements Serializable {
 			int armorTwoEquippedUserEquipId, int amuletTwoEquippedUserEquipId,
 			int prestigeLevel, int numAdditionalForgeSlots,
 			int numBeginnerSalesPurchased, boolean isMentor,
-			boolean hasBeginnerShield, Date shieldEndTime, int elo, String rank) {
+			boolean hasBeginnerShield, Date shieldEndTime, int elo,
+			String rank, Date lastQueueTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -166,6 +169,7 @@ public class User implements Serializable {
 		this.shieldEndTime = shieldEndTime;
 		this.elo = elo;
 		this.rank = rank;
+		this.lastQueueTime = lastQueueTime;
 	}
 
 
@@ -1419,56 +1423,92 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.lastLogout = lastLogout;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean updateLastQueueTime(Date lastQueueTime) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_QUEUE_TIME, lastQueueTime);
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
 			return true;
 		}
 		return false;
 	}
 
 
-
 	public int getId() {
 		return id;
 	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 
 	public String getName() {
 		return name;
 	}
 
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	public int getLevel() {
 		return level;
 	}
+
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
 
 	public UserType getType() {
 		return type;
 	}
 
-	public int getElo() {
-		return elo;
+
+	public void setType(UserType type) {
+		this.type = type;
 	}
 
-	public void setElo(int elo) {
-		this.elo = elo;
-	}
-
-	public String getRank() {
-		return rank;
-	}
-
-	public void setRank(String rank) {
-		this.rank = rank;
-	}
 
 	public int getEnergy() {
 		return energy;
 	}
 
+
+	public void setEnergy(int energy) {
+		this.energy = energy;
+	}
+
+
 	public Date getLastEnergyRefillTime() {
 		return lastEnergyRefillTime;
 	}
 
+
+	public void setLastEnergyRefillTime(Date lastEnergyRefillTime) {
+		this.lastEnergyRefillTime = lastEnergyRefillTime;
+	}
+
+
 	public int getEnergyMax() {
 		return energyMax;
+	}
+
+
+	public void setEnergyMax(int energyMax) {
+		this.energyMax = energyMax;
 	}
 
 
@@ -1476,213 +1516,492 @@ public class User implements Serializable {
 		return diamonds;
 	}
 
+
+	public void setDiamonds(int diamonds) {
+		this.diamonds = diamonds;
+	}
+
+
 	public int getCoins() {
 		return coins;
 	}
+
+
+	public void setCoins(int coins) {
+		this.coins = coins;
+	}
+
 
 	public int getMarketplaceDiamondsEarnings() {
 		return marketplaceDiamondsEarnings;
 	}
 
+
+	public void setMarketplaceDiamondsEarnings(int marketplaceDiamondsEarnings) {
+		this.marketplaceDiamondsEarnings = marketplaceDiamondsEarnings;
+	}
+
+
 	public int getMarketplaceCoinsEarnings() {
 		return marketplaceCoinsEarnings;
 	}
+
+
+	public void setMarketplaceCoinsEarnings(int marketplaceCoinsEarnings) {
+		this.marketplaceCoinsEarnings = marketplaceCoinsEarnings;
+	}
+
 
 	public int getVaultBalance() {
 		return vaultBalance;
 	}
 
+
+	public void setVaultBalance(int vaultBalance) {
+		this.vaultBalance = vaultBalance;
+	}
+
+
 	public int getExperience() {
 		return experience;
 	}
+
+
+	public void setExperience(int experience) {
+		this.experience = experience;
+	}
+
 
 	public int getTasksCompleted() {
 		return tasksCompleted;
 	}
 
+
+	public void setTasksCompleted(int tasksCompleted) {
+		this.tasksCompleted = tasksCompleted;
+	}
+
+
 	public int getBattlesWon() {
 		return battlesWon;
 	}
+
+
+	public void setBattlesWon(int battlesWon) {
+		this.battlesWon = battlesWon;
+	}
+
 
 	public int getBattlesLost() {
 		return battlesLost;
 	}
 
+
+	public void setBattlesLost(int battlesLost) {
+		this.battlesLost = battlesLost;
+	}
+
+
 	public int getFlees() {
 		return flees;
 	}
+
+
+	public void setFlees(int flees) {
+		this.flees = flees;
+	}
+
 
 	public String getReferralCode() {
 		return referralCode;
 	}
 
+
+	public void setReferralCode(String referralCode) {
+		this.referralCode = referralCode;
+	}
+
+
 	public int getNumReferrals() {
 		return numReferrals;
 	}
+
+
+	public void setNumReferrals(int numReferrals) {
+		this.numReferrals = numReferrals;
+	}
+
 
 	public String getUdid() {
 		return udid;
 	}
 
+
+	public void setUdid(String udid) {
+		this.udid = udid;
+	}
+
+
 	public Location getUserLocation() {
 		return userLocation;
 	}
+
+
+	public void setUserLocation(Location userLocation) {
+		this.userLocation = userLocation;
+	}
+
 
 	public int getNumPostsInMarketplace() {
 		return numPostsInMarketplace;
 	}
 
+
+	public void setNumPostsInMarketplace(int numPostsInMarketplace) {
+		this.numPostsInMarketplace = numPostsInMarketplace;
+	}
+
+
 	public int getNumMarketplaceSalesUnredeemed() {
 		return numMarketplaceSalesUnredeemed;
 	}
+
+
+	public void setNumMarketplaceSalesUnredeemed(int numMarketplaceSalesUnredeemed) {
+		this.numMarketplaceSalesUnredeemed = numMarketplaceSalesUnredeemed;
+	}
+
 
 	public int getWeaponEquippedUserEquipId() {
 		return weaponEquippedUserEquipId;
 	}
 
+
+	public void setWeaponEquippedUserEquipId(int weaponEquippedUserEquipId) {
+		this.weaponEquippedUserEquipId = weaponEquippedUserEquipId;
+	}
+
+
 	public int getArmorEquippedUserEquipId() {
 		return armorEquippedUserEquipId;
 	}
+
+
+	public void setArmorEquippedUserEquipId(int armorEquippedUserEquipId) {
+		this.armorEquippedUserEquipId = armorEquippedUserEquipId;
+	}
+
 
 	public int getAmuletEquippedUserEquipId() {
 		return amuletEquippedUserEquipId;
 	}
 
+
+	public void setAmuletEquippedUserEquipId(int amuletEquippedUserEquipId) {
+		this.amuletEquippedUserEquipId = amuletEquippedUserEquipId;
+	}
+
+
 	public Date getLastLogin() {
 		return lastLogin;
 	}
+
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
 
 	public Date getLastLogout() {
 		return lastLogout;
 	}
 
+
+	public void setLastLogout(Date lastLogout) {
+		this.lastLogout = lastLogout;
+	}
+
+
 	public String getDeviceToken() {
 		return deviceToken;
 	}
+
+
+	public void setDeviceToken(String deviceToken) {
+		this.deviceToken = deviceToken;
+	}
+
 
 	public Date getLastBattleNotificationTime() {
 		return lastBattleNotificationTime;
 	}
 
+
+	public void setLastBattleNotificationTime(Date lastBattleNotificationTime) {
+		this.lastBattleNotificationTime = lastBattleNotificationTime;
+	}
+
+
 	public int getNumBadges() {
 		return numBadges;
 	}
+
+
+	public void setNumBadges(int numBadges) {
+		this.numBadges = numBadges;
+	}
+
 
 	public Date getLastShortLicensePurchaseTime() {
 		return lastShortLicensePurchaseTime;
 	}
 
+
+	public void setLastShortLicensePurchaseTime(Date lastShortLicensePurchaseTime) {
+		this.lastShortLicensePurchaseTime = lastShortLicensePurchaseTime;
+	}
+
+
 	public Date getLastLongLicensePurchaseTime() {
 		return lastLongLicensePurchaseTime;
 	}
+
+
+	public void setLastLongLicensePurchaseTime(Date lastLongLicensePurchaseTime) {
+		this.lastLongLicensePurchaseTime = lastLongLicensePurchaseTime;
+	}
+
 
 	public boolean isFake() {
 		return isFake;
 	}
 
+
+	public void setFake(boolean isFake) {
+		this.isFake = isFake;
+	}
+
+
 	public Date getCreateTime() {
 		return createTime;
 	}
+
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
 
 	public boolean isAdmin() {
 		return isAdmin;
 	}
 
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+
 	public String getApsalarId() {
 		return apsalarId;
 	}
+
+
+	public void setApsalarId(String apsalarId) {
+		this.apsalarId = apsalarId;
+	}
+
 
 	public int getNumCoinsRetrievedFromStructs() {
 		return numCoinsRetrievedFromStructs;
 	}
 
+
+	public void setNumCoinsRetrievedFromStructs(int numCoinsRetrievedFromStructs) {
+		this.numCoinsRetrievedFromStructs = numCoinsRetrievedFromStructs;
+	}
+
+
 	public int getNumAdColonyVideosWatched() {
 		return numAdColonyVideosWatched;
 	}
+
+
+	public void setNumAdColonyVideosWatched(int numAdColonyVideosWatched) {
+		this.numAdColonyVideosWatched = numAdColonyVideosWatched;
+	}
+
 
 	public int getNumTimesKiipRewarded() {
 		return numTimesKiipRewarded;
 	}
 
+
+	public void setNumTimesKiipRewarded(int numTimesKiipRewarded) {
+		this.numTimesKiipRewarded = numTimesKiipRewarded;
+	}
+
+
 	public int getNumConsecutiveDaysPlayed() {
 		return numConsecutiveDaysPlayed;
 	}
+
+
+	public void setNumConsecutiveDaysPlayed(int numConsecutiveDaysPlayed) {
+		this.numConsecutiveDaysPlayed = numConsecutiveDaysPlayed;
+	}
+
 
 	public int getNumGroupChatsRemaining() {
 		return numGroupChatsRemaining;
 	}
 
+
+	public void setNumGroupChatsRemaining(int numGroupChatsRemaining) {
+		this.numGroupChatsRemaining = numGroupChatsRemaining;
+	}
+
+
 	public int getClanId() {
 		return clanId;
 	}
+
+
+	public void setClanId(int clanId) {
+		this.clanId = clanId;
+	}
+
+
+	public Date getLastGoldmineRetrieval() {
+		return lastGoldmineRetrieval;
+	}
+
+
+	public void setLastGoldmineRetrieval(Date lastGoldmineRetrieval) {
+		this.lastGoldmineRetrieval = lastGoldmineRetrieval;
+	}
+
 
 	public Date getLastMarketplaceNotificationTime() {
 		return lastMarketplaceNotificationTime;
 	}
 
+
+	public void setLastMarketplaceNotificationTime(
+			Date lastMarketplaceNotificationTime) {
+		this.lastMarketplaceNotificationTime = lastMarketplaceNotificationTime;
+	}
+
+
 	public Date getLastWallPostNotificationTime() {
 		return lastWallPostNotificationTime;
 	}
+
+
+	public void setLastWallPostNotificationTime(Date lastWallPostNotificationTime) {
+		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
+	}
+
 
 	public int getKabamNaid() {
 		return kabamNaid;
 	}
 
+
+	public void setKabamNaid(int kabamNaid) {
+		this.kabamNaid = kabamNaid;
+	}
+
+
 	public boolean isHasReceivedfbReward() {
 		return hasReceivedfbReward;
 	}
+
 
 	public void setHasReceivedfbReward(boolean hasReceivedfbReward) {
 		this.hasReceivedfbReward = hasReceivedfbReward;
 	}
 
+
 	public int getWeaponTwoEquippedUserEquipId() {
 		return weaponTwoEquippedUserEquipId;
 	}
+
 
 	public void setWeaponTwoEquippedUserEquipId(int weaponTwoEquippedUserEquipId) {
 		this.weaponTwoEquippedUserEquipId = weaponTwoEquippedUserEquipId;
 	}
 
+
 	public int getArmorTwoEquippedUserEquipId() {
 		return armorTwoEquippedUserEquipId;
 	}
+
 
 	public void setArmorTwoEquippedUserEquipId(int armorTwoEquippedUserEquipId) {
 		this.armorTwoEquippedUserEquipId = armorTwoEquippedUserEquipId;
 	}
 
+
 	public int getAmuletTwoEquippedUserEquipId() {
 		return amuletTwoEquippedUserEquipId;
 	}
+
 
 	public void setAmuletTwoEquippedUserEquipId(int amuletTwoEquippedUserEquipId) {
 		this.amuletTwoEquippedUserEquipId = amuletTwoEquippedUserEquipId;
 	}
 
+
 	public int getPrestigeLevel() {
 		return prestigeLevel;
 	}
+
 
 	public void setPrestigeLevel(int prestigeLevel) {
 		this.prestigeLevel = prestigeLevel;
 	}
 
+
 	public int getNumAdditionalForgeSlots() {
 		return numAdditionalForgeSlots;
 	}
+
 
 	public void setNumAdditionalForgeSlots(int numAdditionalForgeSlots) {
 		this.numAdditionalForgeSlots = numAdditionalForgeSlots;
 	}
 
+
 	public int getNumBeginnerSalesPurchased() {
 		return numBeginnerSalesPurchased;
 	}
 
+
 	public void setNumBeginnerSalesPurchased(int numBeginnerSalesPurchased) {
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 	}
+
+
+	public boolean isMentor() {
+		return isMentor;
+	}
+
+
+	public void setMentor(boolean isMentor) {
+		this.isMentor = isMentor;
+	}
+
+
+	public boolean isHasBeginnerShield() {
+		return hasBeginnerShield;
+	}
+
+
+	public void setHasBeginnerShield(boolean hasBeginnerShield) {
+		this.hasBeginnerShield = hasBeginnerShield;
+	}
+
 
 	public Date getShieldEndTime() {
 		return shieldEndTime;
@@ -1694,6 +2013,34 @@ public class User implements Serializable {
 	}
 
 
+	public int getElo() {
+		return elo;
+	}
+
+
+	public void setElo(int elo) {
+		this.elo = elo;
+	}
+
+
+	public String getRank() {
+		return rank;
+	}
+
+
+	public void setRank(String rank) {
+		this.rank = rank;
+	}
+
+
+	public Date getLastQueueTime() {
+		return lastQueueTime;
+	}
+
+
+	public void setLastQueueTime(Date lastQueueTime) {
+		this.lastQueueTime = lastQueueTime;
+	}
 
 
 	@Override
@@ -1749,34 +2096,10 @@ public class User implements Serializable {
 				+ numBeginnerSalesPurchased + ", isMentor=" + isMentor
 				+ ", hasBeginnerShield=" + hasBeginnerShield
 				+ ", shieldEndTime=" + shieldEndTime + ", elo=" + elo
-				+ ", rank=" + rank + "]";
+				+ ", rank=" + rank + ", lastQueueTime=" + lastQueueTime + "]";
 	}
 
 
-	public boolean isMentor() {
-		return isMentor;
-	}
 
-	public void setMentor(boolean isMentor) {
-		this.isMentor = isMentor;
-	}
-
-	public boolean isHasBeginnerShield() {
-		return hasBeginnerShield;
-	}
-
-
-	public void setHasBeginnerShield(boolean hasBeginnerShield) {
-		this.hasBeginnerShield = hasBeginnerShield;
-	}
-
-
-	public Date getLastGoldmineRetrieval() {
-		return lastGoldmineRetrieval;
-	}
-
-	public void setLastGoldmineRetrieval(Date lastGoldmineRetrieval) {
-		this.lastGoldmineRetrieval = lastGoldmineRetrieval;
-	}
 
 }

@@ -571,7 +571,7 @@ message FullUserProto {
 	optional int64 shieldEndTime = 66;
 	optional int32 elo = 67;
 	optional string rank = 68;
-	
+	optional int64 lastQueueTime = 69;
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this

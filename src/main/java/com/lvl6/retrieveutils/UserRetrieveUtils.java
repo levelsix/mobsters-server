@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Location;
 import com.lvl6.info.User;
+import com.lvl6.info.UserBoss;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
@@ -436,13 +437,223 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   
+  public List<User> retrieveUsersBasedOnElo1(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
+  		
+  		Connection conn = DBConnection.get().getConnection();
+	    List<String> columns = null; //all columns
+	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> relativeGreaterThanConditionParams =
+	        new HashMap<String, Object>();
+	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> likeCondParams = null;
+	    String tablename = TABLE_NAME;
+	    String conddelim = "AND";
+	    String orderByColumn = null;
+	    boolean orderByAsc = false;
+	    int limit = 68;
+	    boolean random = true;
+  
+	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo-100);
+	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo+100);
+	    Timestamp timestamp = new Timestamp(clientTime.getTime());
+	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
+	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
+	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
+	    
+	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
+	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
+	    absoluteConditionParams.put(seenUserIdsString, 1);
+
+	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
+		        absoluteConditionParams, relativeGreaterThanConditionParams,
+		        relativeLessThanConditionParams, likeCondParams,
+		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
+	    
+	    List<User> queueList = convertRSToUsers(rs);
+	    DBConnection.get().close(rs, null, conn);
+	    
+	    //make sure attacker himself not chosen
+	    for(User u : queueList) {
+	    	if(u.getId() == attacker.getId())
+	    		queueList.remove(u);
+	    }
+	    
+	    return queueList;
+  }
+  
+  
+  public List<User> retrieveUsersBasedOnElo2(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
+		
+		Connection conn = DBConnection.get().getConnection();
+	    List<String> columns = null; //all columns
+	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> relativeGreaterThanConditionParams =
+	        new HashMap<String, Object>();
+	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> likeCondParams = null;
+	    String tablename = TABLE_NAME;
+	    String conddelim = "AND";
+	    String orderByColumn = null;
+	    boolean orderByAsc = false;
+	    int limit = 13;
+	    boolean random = true;
+
+	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo-200);
+	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo-100);
+	    Timestamp timestamp = new Timestamp(clientTime.getTime());
+	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
+	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
+	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
+	    
+	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
+	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
+	    absoluteConditionParams.put(seenUserIdsString, 1);
+
+	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
+		        absoluteConditionParams, relativeGreaterThanConditionParams,
+		        relativeLessThanConditionParams, likeCondParams,
+		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
+	    
+	    List<User> queueList = convertRSToUsers(rs);
+	    DBConnection.get().close(rs, null, conn);
+	    
+	    return queueList;
+}
+  
+  public List<User> retrieveUsersBasedOnElo3(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
+		
+		Connection conn = DBConnection.get().getConnection();
+	    List<String> columns = null; //all columns
+	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> relativeGreaterThanConditionParams =
+	        new HashMap<String, Object>();
+	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> likeCondParams = null;
+	    String tablename = TABLE_NAME;
+	    String conddelim = "AND";
+	    String orderByColumn = null;
+	    boolean orderByAsc = false;
+	    int limit = 13;
+	    boolean random = true;
+
+	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo+100);
+	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo+200);
+	    Timestamp timestamp = new Timestamp(clientTime.getTime());
+	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
+	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
+	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
+	    
+	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
+	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
+	    absoluteConditionParams.put(seenUserIdsString, 1);
+
+	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
+		        absoluteConditionParams, relativeGreaterThanConditionParams,
+		        relativeLessThanConditionParams, likeCondParams,
+		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
+	    
+	    List<User> queueList = convertRSToUsers(rs);
+	    DBConnection.get().close(rs, null, conn);
+	    
+	    return queueList;
+}
+  
+  public List<User> retrieveUsersBasedOnElo4(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
+		
+		Connection conn = DBConnection.get().getConnection();
+	    List<String> columns = null; //all columns
+	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> relativeGreaterThanConditionParams =
+	        new HashMap<String, Object>();
+	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> likeCondParams = null;
+	    String tablename = TABLE_NAME;
+	    String conddelim = "AND";
+	    String orderByColumn = null;
+	    boolean orderByAsc = false;
+	    int limit = 3;
+	    boolean random = true;
+
+	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo-300);
+	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo-200);
+	    Timestamp timestamp = new Timestamp(clientTime.getTime());
+	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
+	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
+	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
+	    
+	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
+	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
+	    absoluteConditionParams.put(seenUserIdsString, 1);
+
+	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
+		        absoluteConditionParams, relativeGreaterThanConditionParams,
+		        relativeLessThanConditionParams, likeCondParams,
+		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
+	    
+	    List<User> queueList = convertRSToUsers(rs);
+	    DBConnection.get().close(rs, null, conn);
+	    
+	    return queueList;
+}
+  
+  public List<User> retrieveUsersBasedOnElo5(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
+		
+		Connection conn = DBConnection.get().getConnection();
+	    List<String> columns = null; //all columns
+	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> relativeGreaterThanConditionParams =
+	        new HashMap<String, Object>();
+	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
+	    Map<String, Object> likeCondParams = null;
+	    String tablename = TABLE_NAME;
+	    String conddelim = "AND";
+	    String orderByColumn = null;
+	    boolean orderByAsc = false;
+	    int limit = 13;
+	    boolean random = true;
+
+	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo+200);
+	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo+300);
+	    Timestamp timestamp = new Timestamp(clientTime.getTime());
+	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
+	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
+	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
+	    
+	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
+	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
+	    absoluteConditionParams.put(seenUserIdsString, 1);
+
+	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
+		        absoluteConditionParams, relativeGreaterThanConditionParams,
+		        relativeLessThanConditionParams, likeCondParams,
+		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
+	    
+	    List<User> queueList = convertRSToUsers(rs);
+	    DBConnection.get().close(rs, null, conn);
+	    
+	    return queueList;
+}
+  
+  public List<User> retrieveCompleteQueueList(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
+	  List<User> qList = retrieveUsersBasedOnElo1(attacker, elo, seenUserIds, clientTime);
+	  qList.addAll(retrieveUsersBasedOnElo2(attacker, elo, seenUserIds, clientTime));
+	  qList.addAll(retrieveUsersBasedOnElo3(attacker, elo, seenUserIds, clientTime));
+	  qList.addAll(retrieveUsersBasedOnElo4(attacker, elo, seenUserIds, clientTime));
+	  qList.addAll(retrieveUsersBasedOnElo5(attacker, elo, seenUserIds, clientTime));
+	  return qList;
+  }
   
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   public User convertRSRowToUser(ResultSet rs) throws SQLException {
     int i = 1;
-    int userId = rs.getInt(i++);
+    int id = rs.getInt(i++);
     String name = rs.getString(i++);
     int level = rs.getInt(i++);
     UserType type = UserType.valueOf(rs.getInt(i++));
@@ -587,8 +798,21 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Date shieldEndTime = rs.getDate(i++);
     int elo = rs.getInt(i++);
     String rank = rs.getString(i++);
+    Date lastQueueTime = rs.getDate(i++);
     
-    User user = new User(userId, name, level, type, energy, lastEnergyRefillTime, energyMax, diamonds, coins, marketplaceDiamondsEarnings, marketplaceCoinsEarnings, vaultBalance, experience, tasksCompleted, battlesWon, battlesLost, flees, referralCode, numReferrals, udid, userLocation, numPostsInMarketplace, numMarketplaceSalesUnredeemed, weaponEquippedUserEquipId, armorEquippedUserEquipId, amuletEquippedUserEquipId, lastLogin, lastLogout, deviceToken, lastBattleNotificationTime, numBadges, lastShortLicensePurchaseTime, lastLongLicensePurchaseTime, isFake, createTime, isAdmin, apsalarId, numCoinsRetrievedFromStructs, numAdColonyVideosWatched, numTimesKiipRewarded, numConsecutiveDaysPlayed, numGroupChatsRemaining, clanId, lastGoldmineRetrieval, lastMarketplaceNotificationTime, lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward, weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId, amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots, numBeginnerSalesPurchased, isMentor, hasBeginnerShield, shieldEndTime, elo, rank);
+    User user = new User(id, name, level, type, energy, lastEnergyRefillTime, 
+    		energyMax, diamonds, coins, marketplaceDiamondsEarnings, marketplaceCoinsEarnings,
+    		vaultBalance, experience, tasksCompleted, battlesWon, battlesLost, flees, referralCode, 
+    		numReferrals, udid, userLocation, numPostsInMarketplace, numMarketplaceSalesUnredeemed, 
+    		weaponEquippedUserEquipId, armorEquippedUserEquipId, amuletEquippedUserEquipId, lastLogin, 
+    		lastLogout, deviceToken, lastBattleNotificationTime, numBadges, lastShortLicensePurchaseTime, 
+    		lastLongLicensePurchaseTime, isFake, createTime, isAdmin, apsalarId, numCoinsRetrievedFromStructs, 
+    		numAdColonyVideosWatched, numTimesKiipRewarded, numConsecutiveDaysPlayed, numGroupChatsRemaining,
+    		clanId, lastGoldmineRetrieval, lastMarketplaceNotificationTime, lastWallPostNotificationTime,
+    		kabamNaid, hasReceivedfbReward, weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId, 
+    		amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots, numBeginnerSalesPurchased,
+    		isMentor, hasBeginnerShield, shieldEndTime, elo, rank, lastQueueTime);
+    		
     return user;
   }
 }
