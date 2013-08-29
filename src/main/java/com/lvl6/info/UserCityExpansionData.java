@@ -3,87 +3,71 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.lvl6.proto.InfoProto.ExpansionDirection;
-
 public class UserCityExpansionData implements Serializable {
   private static final long serialVersionUID = -3018246069873803048L;
   private int userId;
-  private int farLeftExpansions;
-  private int farRightExpansions;
-  private int nearLeftExpansions;
-  private int nearRightExpansions;
+  private int xPosition;
+  private int yPosition;
   private boolean isExpanding;
-  private Date lastExpandTime; // refers to last time the user clicks the
+  private Date expandStartTime; // refers to last time the user clicks the
   // upgrade button, not when the last upgrade
   // was complete
-  private ExpansionDirection lastExpandDirection;
+  
+	public UserCityExpansionData(int userId, int xPosition, int yPosition,
+			boolean isExpanding, Date expandStartTime) {
+		super();
+		this.userId = userId;
+		this.xPosition = xPosition;
+		this.yPosition = yPosition;
+		this.isExpanding = isExpanding;
+		this.expandStartTime = expandStartTime;
+	}
 
-  public UserCityExpansionData(int userId, int farLeftExpansions,
-      int farRightExpansions, int nearLeftExpansions,
-      int nearRightExpansions, boolean isExpanding, Date lastExpandTime,
-      ExpansionDirection lastExpandDirection) {
-    this.userId = userId;
-    this.farLeftExpansions = farLeftExpansions;
-    this.farRightExpansions = farRightExpansions;
-    this.nearLeftExpansions = nearLeftExpansions;
-    this.nearRightExpansions = nearRightExpansions;
-    this.isExpanding = isExpanding;
-    this.lastExpandTime = lastExpandTime;
-    this.lastExpandDirection = lastExpandDirection;
-  }
+	public int getUserId() {
+		return userId;
+	}
 
-  public int getNearLeftExpansions() {
-    return nearLeftExpansions;
-  }
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
-  public void setNearLeftExpansions(int nearLeftExpansions) {
-    this.nearLeftExpansions = nearLeftExpansions;
-  }
+	public int getxPosition() {
+		return xPosition;
+	}
 
-  public int getNearRightExpansions() {
-    return nearRightExpansions;
-  }
+	public void setxPosition(int xPosition) {
+		this.xPosition = xPosition;
+	}
 
-  public void setNearRightExpansions(int nearRightExpansions) {
-    this.nearRightExpansions = nearRightExpansions;
-  }
+	public int getyPosition() {
+		return yPosition;
+	}
 
-  public int getUserId() {
-    return userId;
-  }
+	public void setyPosition(int yPosition) {
+		this.yPosition = yPosition;
+	}
 
-  public int getFarLeftExpansions() {
-    return farLeftExpansions;
-  }
+	public boolean isExpanding() {
+		return isExpanding;
+	}
 
-  public int getFarRightExpansions() {
-    return farRightExpansions;
-  }
+	public void setExpanding(boolean isExpanding) {
+		this.isExpanding = isExpanding;
+	}
 
-  public boolean isExpanding() {
-    return isExpanding;
-  }
+	public Date getExpandStartTime() {
+		return expandStartTime;
+	}
 
-  public Date getLastExpandTime() {
-    return lastExpandTime;
-  }
+	public void setExpandStartTime(Date expandStartTime) {
+		this.expandStartTime = expandStartTime;
+	}
 
-  public ExpansionDirection getLastExpandDirection() {
-    return lastExpandDirection;
-  }
-
-  public int getTotalNumCompletedExpansions() {
-    return farLeftExpansions + farRightExpansions + nearLeftExpansions + nearRightExpansions;
-  }
-
-  @Override
-  public String toString() {
-    return "UserCityExpansionData [userId=" + userId + ", farLeftExpansions="
-        + farLeftExpansions + ", farRightExpansions=" + farRightExpansions
-        + ", nearLeftExpansions=" + nearLeftExpansions
-        + ", nearRightExpansions=" + nearRightExpansions + ", isExpanding="
-        + isExpanding + ", lastExpandTime=" + lastExpandTime
-        + ", lastExpandDirection=" + lastExpandDirection + "]";
-  }
+	@Override
+	public String toString() {
+		return "UserCityExpansionData [userId=" + userId + ", xPosition="
+				+ xPosition + ", yPosition=" + yPosition + ", isExpanding="
+				+ isExpanding + ", expandStartTime=" + expandStartTime + "]";
+	}
 
 }

@@ -25,9 +25,8 @@ message ChatResponseProto {
 
 message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
-	optional int32 elo = 2;
-	repeated int32 seenUserIds = 3;
-	optional int64 clientTime = 4;
+	repeated int32 seenUserIds = 2;
+	optional int64 clientTime = 3;
 	
 }
 
@@ -39,9 +38,8 @@ message QueueUpResponseProto {
 	enum QueueUpStatus {
 		SUCCESS = 0;
 		OTHER_FAIL = 1;
-		NOT_ENOUGH_SILVER = 2;
-		CANT_FIND_ANYONE = 3;
-		HAS_SHIELD = 4;
+		FAIL_NOT_ENOUGH_SILVER = 2;
+		FAIL_CANT_FIND_ANYONE = 3; //DON'T SUBTRACT SILVER
 	}
 }
 
@@ -1474,8 +1472,10 @@ message RetrieveStaticDataResponseProto {
 																						//DONE
 message PurchaseCityExpansionRequestProto {
     optional MinimumUserProto sender = 1;
-    optional ExpansionDirection direction = 2;
-    optional int64 timeOfPurchase = 3;
+    //optional ExpansionDirection direction = 2;
+    optional int32 xPosition = 2; //in relation to center square (the origin 0,0)
+    optional int32 yPosition = 3;
+    optional int64 timeOfPurchase = 4;
 }
 
 																						//DONE

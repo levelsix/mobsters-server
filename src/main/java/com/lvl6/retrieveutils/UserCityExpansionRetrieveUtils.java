@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.UserCityExpansionData;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.ExpansionDirection;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class UserCityExpansionRetrieveUtils {
@@ -54,21 +53,15 @@ import com.lvl6.utils.DBConnection;
   private static UserCityExpansionData getUserCityExpansionDataFromRSRow(ResultSet rs) throws SQLException {
     int i = 1;
     int userId = rs.getInt(i++);
-    int farLeftExpansions = rs.getInt(i++);
-    int farRightExpansions = rs.getInt(i++);
-    int nearLeftExpansions = rs.getInt(i++);
-    int nearRightExpansions = rs.getInt(i++);
+    int xPosition = rs.getInt(i++);
+    int yPosition = rs.getInt(i++);
     boolean isExpanding = rs.getBoolean(i++);
-
-    Date lastExpandTime = null;
+    Date expandStartTime = null;
     Timestamp ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
-      lastExpandTime = new Date(ts.getTime());
+    	expandStartTime = new Date(ts.getTime());
     }
     
-    int lastExpandDirectionInt = rs.getInt(i++);
-    ExpansionDirection lastExpandDirection = (rs.wasNull()) ? null : ExpansionDirection.valueOf(lastExpandDirectionInt);
-
-    return new UserCityExpansionData(userId, farLeftExpansions, farRightExpansions, nearLeftExpansions, nearRightExpansions, isExpanding, lastExpandTime, lastExpandDirection);
+    return new UserCityExpansionData(userId, xPosition, yPosition, isExpanding, expandStartTime);
   }
 }
