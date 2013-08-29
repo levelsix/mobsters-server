@@ -343,13 +343,10 @@ public class DBConstants {
   
   /*USER CRITSTRUCTS TABLE*/
   public static final String USER_EXPANSIONS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_EXPANSIONS__FAR_LEFT_EXPANSIONS = "far_left_expansions";
-  public static final String USER_EXPANSIONS__FAR_RIGHT_EXPANSIONS = "far_right_expansions";
-  public static final String USER_EXPANSIONS__NEAR_LEFT_EXPANSIONS = "near_left_expansions";
-  public static final String USER_EXPANSIONS__NEAR_RIGHT_EXPANSIONS = "near_right_expansions";
+  public static final String USER_EXPANSIONS__X_POSITION = "x_position";
+  public static final String USER_EXPANSIONS__Y_POSITION= "y_position";
   public static final String USER_EXPANSIONS__IS_EXPANDING = "is_expanding";
   public static final String USER_EXPANSIONS__LAST_EXPAND_TIME = "last_expand_time";
-  public static final String USER_EXPANSIONS__LAST_EXPAND_DIRECTION = "last_expand_direction";
     
   /*USER QUESTS TABLE*/
   public static final String USER_QUESTS__USER_ID = GENERIC__USER_ID;

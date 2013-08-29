@@ -67,21 +67,26 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     PurchaseCityExpansionRequestProto reqProto = ((PurchaseCityExpansionRequestEvent)event).getPurchaseCityExpansionRequestProto();
 
+    //variables client sent
     MinimumUserProto senderProto = reqProto.getSender();
-    ExpansionDirection direction = reqProto.getDirection();
+    //in relation to center square (the origin 0,0)
+    int xPosition = reqProto.getXPosition();
+    int yPosition = reqProto.getYPosition();
     Timestamp timeOfPurchase = new Timestamp(reqProto.getTimeOfPurchase());
 
     PurchaseCityExpansionResponseProto.Builder resBuilder = PurchaseCityExpansionResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
+    //so someone doesn't steal user's silver during transaction
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      UserCityExpansionData userCityExpansionData = UserCityExpansionRetrieveUtils.getUserCityExpansionDataForUser(senderProto.getUserId());
+      UserCityExpansionData userCityExpansionData =
+      		UserCityExpansionRetrieveUtils.getUserCityExpansionDataForUser(senderProto.getUserId());
       int previousSilver = 0;
       
-      boolean legitExpansion = checkLegitExpansion(resBuilder, direction, timeOfPurchase, user, userCityExpansionData);
+      boolean legitExpansion = checkLegitExpansion(resBuilder, xPosition, yPosition,
+      		timeOfPurchase, user, userCityExpansionData);
       
       PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
@@ -120,11 +125,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
 
-  private boolean checkLegitExpansion(Builder resBuilder, ExpansionDirection direction, Timestamp timeOfPurchase, User user, UserCityExpansionData userCityExpansionData) {
-    if (direction == null || timeOfPurchase == null || user == null) {
-      resBuilder.setStatus(PurchaseCityExpansionStatus.OTHER_FAIL);
-      return false;
-    }
+  private boolean checkLegitExpansion(Builder resBuilder, int xPosition,
+  		int yPosition, Timestamp timeOfPurchase, User user, 
+  		UserCityExpansionData userCityExpansionData) {
+  	
     if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfPurchase)) {
       resBuilder.setStatus(PurchaseCityExpansionStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
       return false;
