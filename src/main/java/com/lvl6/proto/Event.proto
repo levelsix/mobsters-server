@@ -34,6 +34,7 @@ message QueueUpResponseProto {
 	optional MinimumUserProto attacker = 1;
 	optional MinimumUserProto defender = 2;
 	optional QueueUpStatus status = 3;
+	optional int32 possibleCoinReward = 4;
 
 	enum QueueUpStatus {
 		SUCCESS = 0;

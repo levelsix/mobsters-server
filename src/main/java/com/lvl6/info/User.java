@@ -1163,9 +1163,11 @@ public class User implements Serializable {
 	 * used for battles
 	 */
 	public boolean updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill (
-			int energy, int experience, int coins, int battlesWon, int battlesLost,
-			int fleesChange,  boolean simulateEnergyRefill, 
-			Timestamp clientTime, boolean deactivateBeginnerShield, boolean activateShield, boolean recordWinLossFlee) {
+			int energy, int experience, int coins, int battlesWon, int battlesLost, int fleesChange,
+			boolean simulateEnergyRefill, Timestamp clientTime, boolean deactivateShield,
+			boolean activateShield, boolean recordWinLossFlee) {
+		Date shieldEndTimeTemp = this.shieldEndTime; //for changing this obj if endTime changes
+		
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -1183,18 +1185,23 @@ public class User implements Serializable {
 		if(simulateEnergyRefill) {
 			absoluteParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, clientTime);
 		}
-
-		if (hasBeginnerShield && deactivateBeginnerShield) {
-			absoluteParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+		//3 cases:deactivate a shield, activate a shield, do nothing
+		if (deactivateShield) {
+			if (hasBeginnerShield ) {
+				absoluteParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+			}
+			if (null != shieldEndTime && (shieldEndTime.getTime() > clientTime.getTime())) {
+				absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, null);
+			}
+		} else if (activateShield) {
+			if (shieldEndTime == null || shieldEndTime.getTime() < clientTime.getTime()) {
+				long time = clientTime.getTime()+43200000; //set shield end time to 12 hrs from now
+				Timestamp d = new Timestamp(time);
+				absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, d);
+				shieldEndTimeTemp = new Date(time);
+			}
 		}
-		if ((shieldEndTime.getTime() > clientTime.getTime()) && deactivateBeginnerShield) {
-			absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, null);
-		}
-		if ((shieldEndTime == null || shieldEndTime.getTime() < clientTime.getTime()) && activateShield) {
-			long l = clientTime.getTime()+43200000; //set shield end time to 12 hrs from now
-			Date d = new Date(l);
-			absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, d);
-		}
+		
 		if (absoluteParams.size() == 0) {
 			absoluteParams = null;
 		}
@@ -1210,9 +1217,17 @@ public class User implements Serializable {
 				this.battlesLost += battlesLost;
 				this.flees += fleesChange;
 			}
-			if (hasBeginnerShield && deactivateBeginnerShield) {
-				this.hasBeginnerShield = false;
+			if (deactivateShield) {
+				if (hasBeginnerShield) {
+					this.hasBeginnerShield = false;
+				}
+				if (null != shieldEndTime && (shieldEndTime.getTime() > clientTime.getTime())) {
+					this.shieldEndTime = null;
+				}
+			} else if (activateShield) {
+				this.shieldEndTime = shieldEndTimeTemp;
 			}
+			
 			return true;
 		}
 		return false;

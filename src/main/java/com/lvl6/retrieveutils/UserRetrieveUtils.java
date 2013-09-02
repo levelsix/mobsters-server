@@ -436,7 +436,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return null;
   }
   
-  
+  /*
   public List<User> retrieveUsersBasedOnElo1(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
   		
   		Connection conn = DBConnection.get().getConnection();
@@ -453,12 +453,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	    int limit = 68;
 	    boolean random = true;
   
+	    //trying to improve elo range calculation readability
+	    int distance = ControllerConstants.BATTLE__ELO_DISTANCE_ONE;
+	    int eloMin = elo - distance;
+	    int eloMax = elo + distance;
+	    int lastViewedTimeMillisBuffer = ControllerConstants.BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND;
+	    		
 	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
-	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo-100);
-	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo+100);
+	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, eloMin);
+	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, eloMax);
 	    Timestamp timestamp = new Timestamp(clientTime.getTime());
+	    
+	    //user's shield should have ended before now
 	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
-	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
+	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - lastViewedTimeMillisBuffer);
 	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
 	    
 	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
@@ -486,41 +494,41 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public List<User> retrieveUsersBasedOnElo2(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
 		
 		Connection conn = DBConnection.get().getConnection();
-	    List<String> columns = null; //all columns
-	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> relativeGreaterThanConditionParams =
-	        new HashMap<String, Object>();
-	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> likeCondParams = null;
-	    String tablename = TABLE_NAME;
-	    String conddelim = "AND";
-	    String orderByColumn = null;
-	    boolean orderByAsc = false;
-	    int limit = 13;
-	    boolean random = true;
+		List<String> columns = null; //all columns
+		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+		Map<String, Object> relativeGreaterThanConditionParams =
+				new HashMap<String, Object>();
+		Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
+		Map<String, Object> likeCondParams = null;
+		String tablename = TABLE_NAME;
+		String conddelim = "AND";
+		String orderByColumn = null;
+		boolean orderByAsc = false;
+		int limit = 13;
+		boolean random = true;
 
-	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
-	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo-200);
-	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo-100);
-	    Timestamp timestamp = new Timestamp(clientTime.getTime());
-	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
-	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
-	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
-	    
-	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
-	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
-	    absoluteConditionParams.put(seenUserIdsString, 1);
+		absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+		relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo-200);
+		relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo-100);
+		Timestamp timestamp = new Timestamp(clientTime.getTime());
+		relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
+		Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
+		relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
 
-	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
-		        absoluteConditionParams, relativeGreaterThanConditionParams,
-		        relativeLessThanConditionParams, likeCondParams,
-		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
-	    
-	    List<User> queueList = convertRSToUsers(rs);
-	    DBConnection.get().close(rs, null, conn);
-	    
-	    return queueList;
-}
+		String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
+		seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
+		absoluteConditionParams.put(seenUserIdsString, 1);
+
+		ResultSet rs = DBConnection.get().selectRows(conn, columns,
+				absoluteConditionParams, relativeGreaterThanConditionParams,
+				relativeLessThanConditionParams, likeCondParams,
+				tablename, conddelim, orderByColumn, orderByAsc, limit, random);
+
+		List<User> queueList = convertRSToUsers(rs);
+		DBConnection.get().close(rs, null, conn);
+
+		return queueList;
+  }
   
   public List<User> retrieveUsersBasedOnElo3(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
 		
@@ -637,15 +645,102 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	    DBConnection.get().close(rs, null, conn);
 	    
 	    return queueList;
-}
+  }*/
   
-  public List<User> retrieveCompleteQueueList(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
-	  List<User> qList = retrieveUsersBasedOnElo1(attacker, elo, seenUserIds, clientTime);
-	  qList.addAll(retrieveUsersBasedOnElo2(attacker, elo, seenUserIds, clientTime));
-	  qList.addAll(retrieveUsersBasedOnElo3(attacker, elo, seenUserIds, clientTime));
-	  qList.addAll(retrieveUsersBasedOnElo4(attacker, elo, seenUserIds, clientTime));
-	  qList.addAll(retrieveUsersBasedOnElo5(attacker, elo, seenUserIds, clientTime));
+  public List<User> retrieveCompleteQueueList(User attacker, int elo,
+  		List<Integer> seenUserIds, Date clientTime) {
+  	List<User> retVal = new ArrayList<User>();
+  	
+  	//shortening the names
+  	int distOne = ControllerConstants.BATTLE__ELO_DISTANCE_ONE;
+  	int distTwo = ControllerConstants.BATTLE__ELO_DISTANCE_TWO;
+  	int distThree = ControllerConstants.BATTLE__ELO_DISTANCE_THREE;
+  	int limitOne = ControllerConstants.BATTLE__ELO_USER_LIMIT_ONE;
+  	int limitTwo = ControllerConstants.BATTLE__ELO_USER_LIMIT_TWO;
+  	int limitThree = ControllerConstants.BATTLE__ELO_USER_LIMIT_THREE;
+  	
+  	//make sure attacker himself not chosen
+  	int attackerId = attacker.getId();
+  	seenUserIds.add(attackerId);
+  	//select users with elo above and below user's elo [elo - distOne, elo + distOne]
+  	int eloMax = elo + distOne + 1; 
+  	int eloMin = elo - distOne - 1;
+  	List<User> qList = retrieveUsersInEloRangeN(elo, seenUserIds, clientTime,
+  			eloMin, eloMax, limitOne);
+  	retVal.addAll(qList);
+  	//could take out attacker
+
+  	//get users with elo lower than all those above [elo - distTwo, elo - distOne)
+  	eloMax = elo - distOne; 
+  	eloMin = elo - distTwo - 1;
+  	qList = retrieveUsersInEloRangeN(elo, seenUserIds, clientTime, eloMin,
+  			eloMax, limitTwo);
+  	retVal.addAll(qList);
+  	
+  	//get users with elo lower than all those above [elo - distThree, elo - distTwo)
+  	eloMax = elo - distTwo;
+  	eloMin = elo - distThree;
+  	qList = retrieveUsersInEloRangeN(elo, seenUserIds, clientTime, eloMin,
+  			eloMax, limitThree);
+  	retVal.addAll(qList);
+  	
+  	//get users with elo higher than all those above (elo + distOne, elo + distTwo]
+  	eloMax = elo + distTwo + 1;
+  	eloMin = elo + distOne;
+  	qList = retrieveUsersInEloRangeN(elo, seenUserIds, clientTime, eloMin,
+  			eloMax, limitTwo);
+  	retVal.addAll(qList);
+  	
+  	//get users with elo higher than all those above (elo + distTwo, elo + distThree]
+  	eloMax = elo + distThree;
+  	eloMin = elo + distTwo;
+  	qList = retrieveUsersInEloRangeN(elo, seenUserIds, clientTime, eloMin,
+  			eloMax, limitThree);
+  	retVal.addAll(qList);
 	  return qList;
+  }
+  
+  private List<User> retrieveUsersInEloRangeN(int elo, List<Integer> seenUserIds,
+  		Date clientTime, int eloMin, int eloMax, int limit) {
+  	Connection conn = DBConnection.get().getConnection();
+    List<String> columns = null; //all columns
+    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+    Map<String, Object> relativeGreaterThanConditionParams =
+        new HashMap<String, Object>();
+    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
+    Map<String, Object> likeCondParams = null;
+    String tablename = TABLE_NAME;
+    String conddelim = "AND";
+    String orderByColumn = null;
+    boolean orderByAsc = false;
+    boolean random = true;
+
+    //trying to improve elo range calculation readability
+    int lastViewedTimeMillisBuffer = ControllerConstants.BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND;
+    		
+    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, eloMin);
+    relativeLessThanConditionParams.put(DBConstants.USER__ELO, eloMax);
+    Timestamp timestamp = new Timestamp(clientTime.getTime());
+    
+    //prospective users should have their shield ended before now
+    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
+    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - lastViewedTimeMillisBuffer);
+    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
+    
+    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
+    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
+    absoluteConditionParams.put(seenUserIdsString, 1);
+
+    ResultSet rs = DBConnection.get().selectRows(conn, columns,
+	        absoluteConditionParams, relativeGreaterThanConditionParams,
+	        relativeLessThanConditionParams, likeCondParams,
+	        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
+    
+    List<User> queueList = convertRSToUsers(rs);
+    DBConnection.get().close(rs, null, conn);
+    
+    return queueList;
   }
   
   /*
