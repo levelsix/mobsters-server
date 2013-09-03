@@ -1328,7 +1328,7 @@ message LoadPlayerCityResponseProto {
 	repeated FullUserProto ownerAllies = 5;			//only if owner is an enemy
 	repeated FullUserProto ownerEnemies = 6;		//only if owner is you or ally
 
-	optional FullUserCityExpansionDataProto userCityExpansionData = 12;
+	repeated UserCityExpansionDataProto userCityExpansionDataProtoList = 12;
      
     enum LoadPlayerCityStatus {
      	SUCCESS = 0;
@@ -1482,6 +1482,7 @@ message PurchaseCityExpansionRequestProto {
 message PurchaseCityExpansionResponseProto {
     optional MinimumUserProto sender = 1;
     optional PurchaseCityExpansionStatus status = 2;
+    optional UserCityExpansionDataProto ucedp = 3;
     
     enum PurchaseCityExpansionStatus {
     	SUCCESS = 0;
@@ -1499,12 +1500,14 @@ message ExpansionWaitCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 curTime = 2;						//used for checking
 	optional bool speedUp = 3;
+	optional UserCityExpansionDataProto ucedp = 4;
 }
 
 																						//DONE
 message ExpansionWaitCompleteResponseProto {
      optional MinimumUserProto sender = 1;
      optional ExpansionWaitCompleteStatus status = 2;
+     optional UserCityExpansionDataProto ucedp = 3;
      
      enum ExpansionWaitCompleteStatus {
      	SUCCESS = 0;
@@ -2548,7 +2551,8 @@ message SubmitEquipEnhancementRequestProto {
 message SubmitEquipEnhancementResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional EnhanceEquipStatus status = 2;
-	optional EquipEnhancementProto equipToEnhance = 3;
+	optional FullUserEquipProto resultingEquip = 3;
+	
 
 	enum EnhanceEquipStatus {
 		SUCCESS = 0;
@@ -2556,31 +2560,10 @@ message SubmitEquipEnhancementResponseProto {
 		CLIENT_TOO_APART_FROM_SERVER_TIME = 2;
 		MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT = 3;
 		TRYING_TO_SURPASS_MAX_LEVEL = 4;
-		ALREADY_ENHANCING = 5;
-		NOT_ENOUGH_SILVER = 6;
+		NOT_ENOUGH_SILVER = 5;
 	}
 }
 
-message CollectEquipEnhancementRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 equipEnhancementId = 2;
-	optional int64 clientTime = 3; //this will be the time of speed up if speedUp is true
-	optional bool speedUp = 4;
-}
-
-message CollectEquipEnhancementResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional CollectEquipStatus status = 2;
-	optional FullUserEquipProto resultingEquip = 3;
-	
-	enum CollectEquipStatus {
-		SUCCESS = 0;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 1;
-		ENHANCEMENT_NOT_COMPLETE = 2;
-		OTHER_FAIL = 3;
-		NOT_ENOUGH_GOLD = 4;
-	}
-}
 
 message RetrieveClanTowerScoresRequestProto {
 	optional MinimumUserProto sender = 1;
