@@ -110,6 +110,8 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BossEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanBossRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanBossRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
@@ -132,6 +134,8 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskEquipReqRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ThreeCardMonteRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
 import com.lvl6.server.GameServer;
@@ -821,6 +825,11 @@ public class MiscMethods {
     CityGemRetrieveUtils.reload();
     
     CityExpansionCostRetrieveUtils.reload();
+//    ClanBossRetrieveUtils.reload();
+//    ClanBossRewardRetrieveUtils.reload();
+    TaskStageMonsterRetrieveUtils.reload();
+    TaskStageRetrieveUtils.reload();
+    
   }
 
   public static UserType getUserTypeFromDefeatTypeJobUserType(
