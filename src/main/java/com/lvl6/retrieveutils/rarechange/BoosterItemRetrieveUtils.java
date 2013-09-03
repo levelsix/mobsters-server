@@ -82,10 +82,11 @@ import com.lvl6.utils.DBConnection;
   public static void setStaticBoosterItemIdsToBoosterItemsForBoosterPackIds() {
     try {
       log.debug("setting static map of boosterPackId to (boosterItemIds to boosterItems) ");
-      if (boosterItemIdsToBoosterItemsForBoosterPackIds == null) {
+      if (boosterItemIdsToBoosterItems == null) {
         setStaticBoosterItemIdsToBoosterItems();      
-        boosterItemIdsToBoosterItemsForBoosterPackIds = new HashMap<Integer, Map<Integer, BoosterItem>>();
       }
+      
+      boosterItemIdsToBoosterItemsForBoosterPackIds = new HashMap<Integer, Map<Integer, BoosterItem>>();
       List<BoosterItem> bis = new ArrayList<BoosterItem>(boosterItemIdsToBoosterItems.values());
       for(BoosterItem bi : bis) {
         int packId = bi.getBoosterPackId();

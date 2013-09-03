@@ -92,6 +92,13 @@ public class ControllerConstants {
   public static final double BATTLE__INDIVIDUAL_EQUIP_ATTACK_CAP = 5.0; 
   public static final double BATTLE__FAKE_PLAYER_COIN_GAIN_MULTIPLIER = 3;
   public static final double BATTLE__CHANCE_OF_ZERO_GAIN_FOR_SILVER = .2;
+  public static final int BATTLE__ELO_DISTANCE_ONE = 100;
+  public static final int BATTLE__ELO_DISTANCE_TWO = 200;
+  public static final int BATTLE__ELO_DISTANCE_THREE = 300;
+  public static final int BATTLE__ELO_USER_LIMIT_ONE = 68;
+  public static final int BATTLE__ELO_USER_LIMIT_TWO = 13;
+  public static final int BATTLE__ELO_USER_LIMIT_THREE = 3;  
+  public static final int BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND = 600000; //10 MINUTES
   
   //old boss constants
   public static final double BOSS_EVENT__SUPER_ATTACK = 3.0;

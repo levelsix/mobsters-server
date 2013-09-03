@@ -23,182 +23,186 @@ import com.lvl6.proto.InfoProto.UserType;
 
 public interface InsertUtil {
 
-  //	public abstract CacheManager getCache();
-  //
-  //	public abstract void setCache(CacheManager cache);
+	//	public abstract CacheManager getCache();
+	//
+	//	public abstract void setCache(CacheManager cache);
 
 
-  /*@Caching(evict = {
+	/*@Caching(evict = {
       //@CacheEvict(value = "userEquipsForUser", key = "#userId"),
       //@CacheEvict(value = "equipsToUserEquipsForUser", key = "#userId"),
       //@CacheEvict(value = "userEquipsWithEquipId", key = "#userId+':'+#equipId") })*/
-//  public abstract int insertUserEquip(int userId, int equipId, int level,
-//	  Timestamp now);
+	//  public abstract int insertUserEquip(int userId, int equipId, int level,
+	//	  Timestamp now);
 
-  public abstract int insertUserEquip(int userId, int equipId, int level,
-	  int enhancementPercentage, Timestamp now, String reason);
-  
-  public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
-      int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement);
-  
-  public abstract int insertIntoEquipEnhancementHistory(int equipEnhancementId, int userId, int equipId, 
-      int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
-      Timestamp timeOfEnhancement, Timestamp timeOfSpeedup, long userEquipId);
-  
-  public abstract List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders);
-  
-  public abstract int insertIntoEquipEnhancementFeedersHistory(int id, int equipEnhancementId,
-      int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement);
-  
-  public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(int equipEnhancementId, List<EquipEnhancementFeeder> feeders);
-  
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * com.lvl6.utils.utilmethods.InsertUtil#insertAviaryAndCarpenterCoords(int,
-   * com.lvl6.info.CoordinatePair, com.lvl6.info.CoordinatePair)
-   */
+	public abstract boolean insertUserCityExpansionData(int userId, Timestamp expandStartTime, 
+			int xPosition, int yPosition, boolean isExpanding);
 
-  public abstract boolean insertAdcolonyRecentHistory(int userId,
-      Timestamp timeOfReward, int amountEarned, AdColonyRewardType adColonyRewardType, String digest);
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.lvl6.utils.utilmethods.InsertUtil#insertBattleHistory(int, int,
-   * com.lvl6.proto.InfoProto.BattleResult, java.util.Date, int, int, int)
-   */
-  public abstract boolean insertBattleHistory(int attackerId, int defenderId,
-      BattleResult result, Date battleCompleteTime, int coinsStolen,
-      int stolenEquipId, int expGained, int stolenEquipLevel);
+	public abstract int insertUserEquip(int userId, int equipId, int level,
+			int enhancementPercentage, Timestamp now, String reason);
 
-  public abstract boolean insertUnredeemedUserQuest(int userId, int questId,
-      boolean hasNoRequiredTasks, boolean hasNoRequiredDefeatTypeJobs);
+	public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
+			int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement);
 
-  /* used for quest defeat type jobs */
-  public abstract boolean insertCompletedDefeatTypeJobIdForUserQuest(
-      int userId, int dtjId, int questId);
+	public abstract int insertIntoEquipEnhancementHistory(int equipEnhancementId, int userId, int equipId, 
+			int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
+			Timestamp startTimeOfEnhancement);
 
-  /* used for quest tasks */
-  public abstract boolean insertCompletedTaskIdForUserQuest(int userId,
-      int taskId, int questId);
+	public abstract List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders);
 
-  public abstract boolean insertUserStructJustBuilt(int userId, int structId,
-      Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
-      CoordinatePair structCoords);
+	public abstract int insertIntoEquipEnhancementFeedersHistory(int id, int equipEnhancementId,
+			int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement);
 
-  /*
-   * returns the id of the userstruct, -1 if none
-   */
-  public abstract int insertUserStruct(int userId, int structId,
-      CoordinatePair coordinates, Timestamp timeOfPurchase);
+	public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(int userEquipEnhancementId, List<UserEquip> feeders);
 
-  public abstract boolean insertIAPHistoryElem(JSONObject appleReceipt,
-      int diamondChange, int coinChange, User user, double cashCost);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.lvl6.utils.utilmethods.InsertUtil#insertAviaryAndCarpenterCoords(int,
+	 * com.lvl6.info.CoordinatePair, com.lvl6.info.CoordinatePair)
+	 */
 
-  public abstract boolean insertMarketplaceItem(int posterId,
-      MarketplacePostType postType, int postedEquipId, int diamondCost,
-      int coinCost, Timestamp timeOfPost, int equipLevel,
-      int enhancementPercent);
+	public abstract boolean insertAdcolonyRecentHistory(int userId,
+			Timestamp timeOfReward, int amountEarned, AdColonyRewardType adColonyRewardType, String digest);
 
-  public abstract boolean insertMarketplaceItemIntoHistory(
-      MarketplacePost mp, int buyerId, boolean sellerHasLicense, Timestamp timeOfPurchase);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.lvl6.utils.utilmethods.InsertUtil#insertBattleHistory(int, int,
+	 * com.lvl6.proto.InfoProto.BattleResult, java.util.Date, int, int, int)
+	 */
+	public abstract boolean insertBattleHistory(int attackerId, int defenderId,
+			BattleResult result, Date battleCompleteTime, int coinsStolen,
+			int stolenEquipId, int expGained, int stolenEquipLevel);
 
-  public abstract boolean insertReferral(int referrerId, int referredId,
-      int coinsGivenToReferrer);
+	public abstract boolean insertUnredeemedUserQuest(int userId, int questId,
+			boolean hasNoRequiredTasks, boolean hasNoRequiredDefeatTypeJobs);
 
-  // returns -1 if error
-  public abstract int insertUser(String udid, String name, UserType type,
-      Location location, String deviceToken, String newReferCode,
-      int level, int attack, int defense, int energy,
-      int stamina, int experience, int coins, int diamonds,
-      Integer weaponEquipped, Integer armorEquipped,
-      Integer amuletEquipped, boolean isFake, int numGroupChatsRemaining,
-      boolean activateShield, Timestamp createTime, Timestamp lastEnergyRefillTime,
-      Timestamp lastStaminaRefillTime);
+	/* used for quest defeat type jobs */
+	public abstract boolean insertCompletedDefeatTypeJobIdForUserQuest(
+			int userId, int dtjId, int questId);
 
-  /*
-   * returns the id of the post, -1 if none
-   */
-  public abstract int insertPlayerWallPost(int posterId, int wallOwnerId,
-      String content, Timestamp timeOfPost);
+	/* used for quest tasks */
+	public abstract boolean insertCompletedTaskIdForUserQuest(int userId,
+			int taskId, int questId);
 
-  public abstract boolean insertKiipHistory(int userId, Timestamp clientTime,
-      String content, String signature, int quantity, String transactionId);
+	public abstract boolean insertUserStructJustBuilt(int userId, int structId,
+			Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
+			CoordinatePair structCoords);
 
-  public abstract int insertIddictionIndentifier(String identifier, Date clickTime); 
+	/*
+	 * returns the id of the userstruct, -1 if none
+	 */
+	public abstract int insertUserStruct(int userId, int structId,
+			CoordinatePair coordinates, Timestamp timeOfPurchase);
 
-  public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
+	public abstract boolean insertIAPHistoryElem(JSONObject appleReceipt,
+			int diamondChange, int coinChange, User user, double cashCost);
 
-  public abstract int insertForgeAttemptIntoBlacksmith(int userId, int equipId,
-      int goalLevel, boolean paidToGuarantee, Timestamp startTime,
-      int diamondCostForGuarantee, Timestamp timeOfSpeedup, boolean attemptComplete, 
-      int enhancementPercentOne, int enhancementPercentTwo, int forgeSlotNumber);
+	public abstract boolean insertMarketplaceItem(int posterId,
+			MarketplacePostType postType, int postedEquipId, int diamondCost,
+			int coinCost, Timestamp timeOfPost, int equipLevel,
+			int enhancementPercent);
 
-  public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
-  
-  public abstract int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag, boolean isGood, boolean requestToJoinRequired);
+	public abstract boolean insertMarketplaceItemIntoHistory(
+			MarketplacePost mp, int buyerId, boolean sellerHasLicense, Timestamp timeOfPurchase);
 
-  public abstract boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime);
+	public abstract boolean insertReferral(int referrerId, int referredId,
+			int coinsGivenToReferrer);
 
-  public abstract boolean insertDiamondEquipPurchaseHistory(int buyerId, int equipId, int diamondsSpent, Timestamp purchaseTime);
+	// returns -1 if error
+	public abstract int insertUser(String udid, String name, UserType type,
+			Location location, String deviceToken, String newReferCode,
+			int level, int attack, int defense, int energy,
+			int stamina, int experience, int coins, int diamonds,
+			Integer weaponEquipped, Integer armorEquipped,
+			Integer amuletEquipped, boolean isFake, int numGroupChatsRemaining,
+			boolean activateShield, Timestamp createTime, Timestamp lastEnergyRefillTime,
+			Timestamp lastStaminaRefillTime);
 
-  public abstract int insertClanBulletinPost(int userId, int clanId, String content,
-      Timestamp timeOfPost);
+	/*
+	 * returns the id of the post, -1 if none
+	 */
+	public abstract int insertPlayerWallPost(int posterId, int wallOwnerId,
+			String content, Timestamp timeOfPost);
 
-  public abstract int insertClanChatPost(int userId, int clanId, String content,
-      Timestamp timeOfPost);
-  
-  public abstract List<Integer> insertUserEquips(int userId, List<Integer> equipIds,
-	  List<Integer> levels, List<Integer> enhancement, Timestamp now, String reason);
-  
-  public abstract int insertIntoBossRewardDropHistoryReturnId(int bossId, int userId, int silverDropped, int goldDropped, Timestamp timeOfDrop);
-  
-  public abstract int insertIntoUserBossHistory(int bossId, int userId,
-      Timestamp startTime, int curHealth, int currentLevel, int gemlessStreak);
-  //public abstract int insertIntoBossEquipDropHistory(int bossRewardDropHistoryId, List<Integer> equipIds);
+	public abstract boolean insertKiipHistory(int userId, Timestamp clientTime,
+			String content, String signature, int quantity, String transactionId);
 
-  public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, int battlesWonChange, int battlesLostChange, int battlesFledChange);
+	public abstract int insertIddictionIndentifier(String identifier, Date clickTime); 
 
-  public abstract int insertIntoRefillStatHistory(int userId, boolean staminaRefill, int staminaMax, int goldCost);
-  
-  public abstract int insertIntoUserCurrencyHistory (int userId, Timestamp date, int isSilver, 
-      int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange);
-  
-  public abstract int insertIntoUserCurrencyHistoryMultipleRows (List<Integer> userIds,
-      List<Timestamp> dates, List<Integer> areSilver, List<Integer> currenciesChange,
-      List<Integer> currenciesBefore, List<Integer> currentCurrencies, List<String> reasonsForChanges);
-  
-  public abstract int insertIntoLoginHistory(String udid, int userId, Timestamp now, boolean isLogin, boolean goingThroughTutorial);
-  
-  public abstract int insertIntoFirstTimeUsers(String openUdid, String udid, String mac, String advertiserId, Timestamp now);
-  
-  public abstract int insertIntoUserBoosterPackHistory(int userId, int boosterPackId, int numBought, Timestamp timeOfPurchase,
-      int rarityOneQuantity, int rarityTwoQuantity, int rarityThreeQuantity, boolean excludeFromLimitCheck, List<Integer> equipIds,
-      List<Integer> userEquipIds);
-  
-  public abstract int insertIntoUserDailyRewardHistory(int userId, int currencyRewarded, boolean isCoins, int boosterPackId, 
-      int equipIdRewarded, int nthConsecutiveDay, Date dateAwarded);
-  
-  public abstract int insertIntoPrestigeHistory(int userId, int preprestigeLevel, int preprestigePrestigeLevel, 
-      int newPrestigeLevel, int preprestigeAttackStat, int preprestigeDefenseStat,  int preprestigeStaminaStat,
-      int preprestigeEnergyStat, Date aDate, int preprestigeExperience, int preprestigeSkillPoints);
-  
-  public abstract int insertIntoPrivateChatPosts(int posterId, int recipientId, String content, Timestamp timeOfPost);
-  
-  public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
-      List<Date> timeOfPosts);
-  
-  public abstract int insertIntoMentorships(int mentorId, int menteeId, Date startTime, List<MenteeQuestType> typeList);
-  
-  public abstract long insertIntoUserTask(int userId, int taskId, 
-		  Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
-		  Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
-		  Timestamp startTime, int stageNums); 
-  
-  public abstract int insertIntoUserTaskHistory(int userId, int taskId,
-		  List<Integer> monsterRewardEquipIds, int expGained, int silverGained,
-		  int numRevives, String stageExps, String stageSilvers, Timestamp startTime,
-		  Timestamp endTime, boolean userWon);
+	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
+
+	public abstract int insertForgeAttemptIntoBlacksmith(int userId, int equipId,
+			int goalLevel, boolean paidToGuarantee, Timestamp startTime,
+			int diamondCostForGuarantee, Timestamp timeOfSpeedup, boolean attemptComplete, 
+			int enhancementPercentOne, int enhancementPercentTwo, int forgeSlotNumber);
+
+	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
+
+	public abstract int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag, boolean isGood, boolean requestToJoinRequired);
+
+	public abstract boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime);
+
+	public abstract boolean insertDiamondEquipPurchaseHistory(int buyerId, int equipId, int diamondsSpent, Timestamp purchaseTime);
+
+	public abstract int insertClanBulletinPost(int userId, int clanId, String content,
+			Timestamp timeOfPost);
+
+	public abstract int insertClanChatPost(int userId, int clanId, String content,
+			Timestamp timeOfPost);
+
+	public abstract List<Integer> insertUserEquips(int userId, List<Integer> equipIds,
+			List<Integer> levels, List<Integer> enhancement, Timestamp now, String reason);
+
+	public abstract int insertIntoBossRewardDropHistoryReturnId(int bossId, int userId, int silverDropped, int goldDropped, Timestamp timeOfDrop);
+
+	public abstract int insertIntoUserBossHistory(int bossId, int userId,
+			Timestamp startTime, int curHealth, int currentLevel, int gemlessStreak);
+	//public abstract int insertIntoBossEquipDropHistory(int bossRewardDropHistoryId, List<Integer> equipIds);
+
+	public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, int battlesWonChange, int battlesLostChange, int battlesFledChange);
+
+	public abstract int insertIntoRefillStatHistory(int userId, boolean staminaRefill, int staminaMax, int goldCost);
+
+	public abstract int insertIntoUserCurrencyHistory (int userId, Timestamp date, int isSilver, 
+			int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange);
+
+	public abstract int insertIntoUserCurrencyHistoryMultipleRows (List<Integer> userIds,
+			List<Timestamp> dates, List<Integer> areSilver, List<Integer> currenciesChange,
+			List<Integer> currenciesBefore, List<Integer> currentCurrencies, List<String> reasonsForChanges);
+
+	public abstract int insertIntoLoginHistory(String udid, int userId, Timestamp now, boolean isLogin, boolean goingThroughTutorial);
+
+	public abstract int insertIntoFirstTimeUsers(String openUdid, String udid, String mac, String advertiserId, Timestamp now);
+
+	public abstract int insertIntoUserBoosterPackHistory(int userId, int boosterPackId, int numBought, Timestamp timeOfPurchase,
+			int rarityOneQuantity, int rarityTwoQuantity, int rarityThreeQuantity, boolean excludeFromLimitCheck, List<Integer> equipIds,
+			List<Integer> userEquipIds);
+
+	public abstract int insertIntoUserDailyRewardHistory(int userId, int currencyRewarded, boolean isCoins, int boosterPackId, 
+			int equipIdRewarded, int nthConsecutiveDay, Date dateAwarded);
+
+	public abstract int insertIntoPrestigeHistory(int userId, int preprestigeLevel, int preprestigePrestigeLevel, 
+			int newPrestigeLevel, int preprestigeAttackStat, int preprestigeDefenseStat,  int preprestigeStaminaStat,
+			int preprestigeEnergyStat, Date aDate, int preprestigeExperience, int preprestigeSkillPoints);
+
+	public abstract int insertIntoPrivateChatPosts(int posterId, int recipientId, String content, Timestamp timeOfPost);
+
+	public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
+			List<Date> timeOfPosts);
+
+	public abstract int insertIntoMentorships(int mentorId, int menteeId, Date startTime, List<MenteeQuestType> typeList);
+
+	public abstract long insertIntoUserTask(int userId, int taskId, 
+			Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
+			Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
+			Timestamp startTime, int stageNums); 
+
+	public abstract int insertIntoUserTaskHistory(int userId, int taskId,
+			List<Integer> monsterRewardEquipIds, int expGained, int silverGained,
+			int numRevives, String stageExps, String stageSilvers, Timestamp startTime,
+			Timestamp endTime, boolean userWon);
 }

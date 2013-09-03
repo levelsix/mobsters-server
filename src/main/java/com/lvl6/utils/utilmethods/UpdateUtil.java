@@ -27,18 +27,9 @@ public interface UpdateUtil {
   public abstract void updateNullifyDeviceTokens(Set<String> deviceTokens);
 
   /*
-   * used when an expansion is complete
+   * used for collecting a city expansion
    */
-  public abstract boolean updateUserExpansionNumexpansionsIsexpanding(int userId,
-      int farLeftExpansionsChange, int farRightExpansionsChange, int nearLeftExpansionsChange, int nearRightExpansionsChange, 
-      boolean isExpanding);
-
-  /*
-   * used for purchasing a city expansion
-   */
-  public abstract boolean updateUserExpansionLastexpandtimeLastexpanddirectionIsexpanding(
-      int userId, Timestamp lastExpandTime,
-      ExpansionDirection lastExpansionDirection, boolean isExpanding);
+  public abstract boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition, boolean isExpanding);
 
   /*@Caching(evict = {
       //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),
@@ -162,6 +153,8 @@ public interface UpdateUtil {
       int userId, List<Task> tasksInCity);
 
   public abstract boolean updateUserEquipOwner(int userEquipId, int newOwnerId, String reason);
+  
+  public abstract boolean updateUserEquipEnhancementPercentage(int userEquipId, int newEnhancementPercentage);
 
   public abstract boolean updateAbsoluteBlacksmithAttemptcompleteTimeofspeedup(int blacksmithId, Date timeOfSpeedup, boolean attemptComplete);
 

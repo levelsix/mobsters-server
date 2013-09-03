@@ -57,6 +57,30 @@ public class InsertUtils implements InsertUtil{
   //		this.cache = cache;
   //	}
 
+	/*
+	 * used for purchasing a city expansion and completing one
+	 */
+	/* (non-Javadoc)
+	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserExpansionLastexpandtimeLastexpanddirectionIsexpanding(int, java.sql.Timestamp, com.lvl6.proto.InfoProto.ExpansionDirection, boolean)
+	 */
+	@Override
+	public boolean insertUserCityExpansionData(int userId, Timestamp expandStartTime, 
+			int xPosition, int yPosition, boolean isExpanding) {
+		Map <String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__USER_ID, userId);
+		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__EXPAND_START_TIME, expandStartTime);
+		//    insertParams.put(DBConstants.USER_EXPANSIONS__LAST_EXPAND_DIRECTION, lastExpansionDirection.getNumber());
+		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__IS_EXPANDING, isExpanding);
+		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__X_POSITION, xPosition);
+		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__Y_POSITION, yPosition);
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_USER_CITY_EXPANSION_DATA, insertParams);
+		if (numUpdated >= 1) {
+			return true;
+		}
+		return false;
+	}
+  
   public boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER_SESSIONS__USER_ID, userId);
@@ -157,7 +181,7 @@ public class InsertUtils implements InsertUtil{
   
   public int insertIntoEquipEnhancementHistory(int equipEnhancementId, int userId, int equipId, 
       int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
-      Timestamp startTimeOfEnhancement, Timestamp timeOfSpeedup, long userEquipId) {
+      Timestamp startTimeOfEnhancement) {
 
     String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT_HISTORY;
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -172,8 +196,7 @@ public class InsertUtils implements InsertUtil{
         previousEnhancementPercentage);
     insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__START_TIME_OF_ENHANCEMENT,
         startTimeOfEnhancement);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__TIME_OF_SPEED_UP, timeOfSpeedup);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__RESULTING_USER_EQUIP_ID, userEquipId);
+
     
     int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
     return numInserted;
@@ -218,20 +241,20 @@ public class InsertUtils implements InsertUtil{
     return numInserted;
   }
   
-  public int insertMultipleIntoEquipEnhancementFeedersHistory(int equipEnhancementId, List<EquipEnhancementFeeder> feeders) {
+  public int insertMultipleIntoEquipEnhancementFeedersHistory(int userEquipEnhancementId, List<UserEquip> feeders) {
     String tablename = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY;
     int amount = feeders.size();
     List<Object> equipEnhancementFeedersIds = new ArrayList<Object>(amount);
-    List<Object> equipEnhancementIds = new ArrayList<Object>(Collections.nCopies(amount, equipEnhancementId));
+    List<Object> equipEnhancementIds = new ArrayList<Object>(Collections.nCopies(amount, userEquipEnhancementId));
     List<Object> equipIds = new ArrayList<Object>(amount);
     List<Object> equipLevels = new ArrayList<Object>();
     List<Object> enhancementPercentages = new ArrayList<Object>();
     
-    for(EquipEnhancementFeeder aFeeder : feeders) {
+    for(UserEquip aFeeder : feeders) {
       equipEnhancementFeedersIds.add(aFeeder.getId());
       equipIds.add(aFeeder.getEquipId());
-      equipLevels.add(aFeeder.getEquipLevel());
-      enhancementPercentages.add(aFeeder.getEnhancementPercentageBeforeEnhancement());
+      equipLevels.add(aFeeder.getLevel());
+      enhancementPercentages.add(aFeeder.getEnhancementPercentage());
     }
     Map<String, List<Object>> insertParams = new HashMap<String, List<Object>>();
     

@@ -9,7 +9,6 @@ public class DBConstants {
   public static final String TABLE_USER_CITIES = "user_cities";
   public static final String TABLE_USER_QUESTS = "user_quests";
   public static final String TABLE_USER_STRUCTS = "user_structs";
-  public static final String TABLE_USER_EXPANSIONS = "user_expansions";
   public static final String TABLE_USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS = "user_quests_completed_defeat_type_jobs";
   public static final String TABLE_USER_QUESTS_COMPLETED_TASKS = "user_quests_completed_tasks";
   public static final String TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS = "user_quests_defeat_type_job_progress";
@@ -102,6 +101,8 @@ public class DBConstants {
   public static final String TABLE_TASK_STAGE = "task_stage";
   public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
   public static final String TABLE_USER_TASK_HISTORY = "user_task_history";
+  public static final String TABLE_CITY_EXPANSION_COST = "city_expansion_cost";
+  public static final String TABLE_USER_CITY_EXPANSION_DATA = "user_city_expansion_data";
   
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
@@ -188,15 +189,13 @@ public class DBConstants {
   public static final String EQUIP_ENHANCEMENT__START_TIME_OF_ENHANCEMENT = "start_time_of_enhancement";
   
   /*EQUIP ENHANCEMENT HISTORY*/
-  public static final String EQUIP_ENHANCEMENT_HISTORY__EQUIP_ENHANCEMENT_ID = "equip_enhancement_id";
+  public static final String EQUIP_ENHANCEMENT_HISTORY__EQUIP_ENHANCEMENT_ID = "equip_enhancement_id"; //the user equip id
   public static final String EQUIP_ENHANCEMENT_HISTORY__USER_ID = GENERIC__USER_ID;
   public static final String EQUIP_ENHANCEMENT_HISTORY__EQUIP_ID = "equip_id";
   public static final String EQUIP_ENHANCEMENT_HISTORY__EQUIP_LEVEL = "equip_level";
   public static final String EQUIP_ENHANCEMENT_HISTORY__CURRENT_ENHANCEMENT_PERCENTAGE = "current_enhancement_percentage";
   public static final String EQUIP_ENHANCEMENT_HISTORY__PREVIOUS_ENHANCEMENT_PERCENTAGE = "previous_enhancement_percentage";
   public static final String EQUIP_ENHANCEMENT_HISTORY__START_TIME_OF_ENHANCEMENT = "start_time_of_enhancement";
-  public static final String EQUIP_ENHANCEMENT_HISTORY__TIME_OF_SPEED_UP = "time_of_speed_up";
-  public static final String EQUIP_ENHANCEMENT_HISTORY__RESULTING_USER_EQUIP_ID = "resulting_user_equip_id";
   
   /*EQUIP ENHANCEMENT FEEDERS*/
   public static final String EQUIP_ENHANCEMENT_FEEDERS__ID = GENERIC__ID;
@@ -341,13 +340,7 @@ public class DBConstants {
   public static final String USER_STRUCTS__LAST_UPGRADE_TIME = "last_upgrade_time";
   public static final String USER_STRUCTS__ORIENTATION = "orientation";
   
-  /*USER CRITSTRUCTS TABLE*/
-  public static final String USER_EXPANSIONS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_EXPANSIONS__X_POSITION = "x_position";
-  public static final String USER_EXPANSIONS__Y_POSITION= "y_position";
-  public static final String USER_EXPANSIONS__IS_EXPANDING = "is_expanding";
-  public static final String USER_EXPANSIONS__LAST_EXPAND_TIME = "last_expand_time";
-    
+
   /*USER QUESTS TABLE*/
   public static final String USER_QUESTS__USER_ID = GENERIC__USER_ID;
   public static final String USER_QUESTS__QUEST_ID = "quest_id";
@@ -751,4 +744,20 @@ public class DBConstants {
   /*TASK STAGE*/
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";
   public static final String TASK_STAGE_MONSTER__MONSTER_ID = "monster_id";
+  
+  /*CITY EXPANSION COST*/
+  public static final String CITY_EXPANSION_COST__ID = GENERIC__ID;
+  public static final String CITY_EXPANSION_COST__EXPANSION_COST = "expansion_cost";
+
+  /*USER CITY EXPANSION DATA*/
+  public static final String USER_CITY_EXPANSION_DATA__USER_ID = GENERIC__ID;
+  public static final String USER_CITY_EXPANSION_DATA__X_POSITION = "x_position";
+  public static final String USER_CITY_EXPANSION_DATA__Y_POSITION = "y_position";
+  public static final String USER_CITY_EXPANSION_DATA__IS_EXPANDING = "is_expanding";
+  public static final String USER_CITY_EXPANSION_DATA__EXPAND_START_TIME = "expand_start_time";
+  
+  
+  
 }
+
+

@@ -712,15 +712,19 @@ message FullCityProto {
 
 //------------------------------------------------------------------------------------------
 
-message FullUserCityExpansionDataProto {
+message UserCityExpansionDataProto {
 	optional int32 userId = 1;
-	optional int32 farLeftExpansions = 2;
-	optional int32 farRightExpansions = 3;
-	optional int32 nearLeftExpansions = 4;
-	optional int32 nearRightExpansions = 5;
-	optional bool isExpanding = 6;
-	optional int64 lastExpandTime = 7;
-	optional ExpansionDirection lastExpandDirection = 8;
+	optional sint32 xPosition = 2;
+	optional sint32 yPosition = 3;
+	optional bool isExpanding = 4;
+	optional int64 expandStartTime = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
+message CityExpansionCostProto {
+	optional int32 id = 1;
+	optional int32 expansionCost = 2;
 }
 
 //------------------------------------------------------------------------------------------

@@ -21,9 +21,10 @@ import com.lvl6.proto.EventProto.LoadPlayerCityResponseProto;
 import com.lvl6.proto.EventProto.LoadPlayerCityResponseProto.Builder;
 import com.lvl6.proto.EventProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.InfoProto.UserCityExpansionDataProto;
 import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.UserCityExpansionRetrieveUtils;
+import com.lvl6.retrieveutils.UserCityExpansionDataRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -64,9 +65,13 @@ import com.lvl6.utils.RetrieveUtils;
       List<UserStruct> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(cityOwnerId);
       setResponseUserStructs(resBuilder, userStructs);
       
-      UserCityExpansionData userCityExpansionData = UserCityExpansionRetrieveUtils.getUserCityExpansionDataForUser(senderProto.getUserId());
-      if (userCityExpansionData != null) {
-        resBuilder.setUserCityExpansionData(CreateInfoProtoUtils.createFullUserCityExpansionDataProtoFromUserCityExpansionData(userCityExpansionData));
+      List<UserCityExpansionData> userCityExpansionDataList = UserCityExpansionDataRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserId());
+      List<UserCityExpansionDataProto> userCityExpansionDataProtoList = new ArrayList<UserCityExpansionDataProto>();
+      if (userCityExpansionDataList != null) {
+    	for(UserCityExpansionData uced : userCityExpansionDataList) {
+    		userCityExpansionDataProtoList.add(CreateInfoProtoUtils.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
+    	}
+        resBuilder.addAllUserCityExpansionDataProtoList(userCityExpansionDataProtoList);
       }
 
       if (owner == null) {

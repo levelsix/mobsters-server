@@ -34,6 +34,7 @@ message QueueUpResponseProto {
 	optional MinimumUserProto attacker = 1;
 	optional MinimumUserProto defender = 2;
 	optional QueueUpStatus status = 3;
+	optional int32 possibleCoinReward = 4;
 
 	enum QueueUpStatus {
 		SUCCESS = 0;
@@ -1473,8 +1474,9 @@ message RetrieveStaticDataResponseProto {
 message PurchaseCityExpansionRequestProto {
     optional MinimumUserProto sender = 1;
     //optional ExpansionDirection direction = 2;
-    optional int32 xPosition = 2; //in relation to center square (the origin 0,0)
-    optional int32 yPosition = 3;
+    //sint32 to be more efficient in storing negative numbers
+    optional sint32 xPosition = 2; //in relation to center square (the origin 0,0)
+    optional sint32 yPosition = 3;
     optional int64 timeOfPurchase = 4;
 }
 

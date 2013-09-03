@@ -2,8 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +15,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ReviveInDungeonRequestEvent;
 import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.info.UserTask;
 import com.lvl6.misc.MiscMethods;
@@ -26,13 +23,10 @@ import com.lvl6.proto.EventProto.ReviveInDungeonRequestProto;
 import com.lvl6.proto.EventProto.ReviveInDungeonResponseProto;
 import com.lvl6.proto.EventProto.ReviveInDungeonResponseProto.Builder;
 import com.lvl6.proto.EventProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus;
-import com.lvl6.proto.InfoProto.FullUserEquipProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.UserTaskRetrieveUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class ReviveInDungeonController extends EventController {

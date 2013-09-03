@@ -18,7 +18,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.SubmitEquipEnhancementRequestEvent;
 import com.lvl6.events.response.SubmitEquipEnhancementResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.EquipEnhancement;
 import com.lvl6.info.Equipment;
 import com.lvl6.info.User;
 import com.lvl6.info.UserEquip;
@@ -28,264 +27,276 @@ import com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto;
 import com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto;
 import com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.Builder;
 import com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus;
-import com.lvl6.proto.InfoProto.EquipEnhancementProto;
+import com.lvl6.proto.InfoProto.FullUserEquipProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.EquipEnhancementRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
-  @Component @DependsOn("gameServer") public class SubmitEquipEnhancementController extends EventController {
+@Component @DependsOn("gameServer") public class SubmitEquipEnhancementController extends EventController {
 
-  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  public SubmitEquipEnhancementController() {
-    numAllocatedThreads = 3;
-  }
-  
-  @Override
-  public RequestEvent createRequestEvent() {
-    return new SubmitEquipEnhancementRequestEvent();
-  }
+	public SubmitEquipEnhancementController() {
+		numAllocatedThreads = 3;
+	}
 
-  @Override
-  public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_SUBMIT_EQUIP_ENHANCEMENT_EVENT;
-  }
+	@Override
+	public RequestEvent createRequestEvent() {
+		return new SubmitEquipEnhancementRequestEvent();
+	}
 
-  @Override
-  protected void processRequestEvent(RequestEvent event) throws Exception {
-    SubmitEquipEnhancementRequestProto reqProto = ((SubmitEquipEnhancementRequestEvent)event)
-        .getSubmitEquipEnhancementRequestProto();
+	@Override
+	public EventProtocolRequest getEventType() {
+		return EventProtocolRequest.C_SUBMIT_EQUIP_ENHANCEMENT_EVENT;
+	}
 
-    MinimumUserProto senderProto = reqProto.getSender();
-    int enhancingUserEquipId = reqProto.getEnhancingUserEquipId(); 
-    List<Integer> feederUserEquipIds = reqProto.getFeederUserEquipIdsList();
-    Timestamp clientTime = new Timestamp(reqProto.getClientTime());
-    int userId = senderProto.getUserId();
-    
-    
-    SubmitEquipEnhancementResponseProto.Builder resBuilder = SubmitEquipEnhancementResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
+	@Override
+	protected void processRequestEvent(RequestEvent event) throws Exception {
+		SubmitEquipEnhancementRequestProto reqProto = ((SubmitEquipEnhancementRequestEvent)event)
+				.getSubmitEquipEnhancementRequestProto();
 
-    server.lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
+		MinimumUserProto senderProto = reqProto.getSender();
+		int enhancingUserEquipId = reqProto.getEnhancingUserEquipId(); 
+		List<Integer> feederUserEquipIds = reqProto.getFeederUserEquipIdsList();
+		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
+		int userId = senderProto.getUserId();
 
-    try {
-      //The main user equip to enhance.
-      UserEquip enhancingUserEquip = RetrieveUtils.userEquipRetrieveUtils()
-          .getSpecificUserEquip(enhancingUserEquipId);
 
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int previousSilver = 0;
-      
-      //The user equips to be sacrified for enhancing.
-      //this could be null, or does not contain null but could still be empty
-      List<UserEquip> feederUserEquips = RetrieveUtils.userEquipRetrieveUtils()
-          .getSpecificUserEquips(feederUserEquipIds);
-      
-      Map<Integer, Equipment> equipmentIdsToEquipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+		SubmitEquipEnhancementResponseProto.Builder resBuilder = SubmitEquipEnhancementResponseProto.newBuilder();
+		resBuilder.setSender(senderProto);
 
-      boolean legitEquip = checkEquip(resBuilder, user, userId, enhancingUserEquip, feederUserEquipIds, feederUserEquips, 
-          equipmentIdsToEquipment, clientTime);
+		server.lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
 
-      boolean successful = false;
-      List<Integer> enhancementInteger = new ArrayList<Integer>();
-      List<Integer> enhancementFeederIds = new ArrayList<Integer>(); 
-      Map<String, Integer> money = new HashMap<String, Integer>();
-      
-      if (legitEquip) {
-      	previousSilver = user.getCoins() + user.getVaultBalance();
-        successful = writeChangesToDB(resBuilder, user, enhancingUserEquipId, enhancingUserEquip,
-            feederUserEquipIds, feederUserEquips, clientTime, enhancementInteger, enhancementFeederIds, money);
-      }
-      int enhancementId = 0;
-      if (successful) {
-        enhancementId = enhancementInteger.get(0);
-        EquipEnhancementProto eep = CreateInfoProtoUtils.createEquipEnhancementProto(
-            enhancementId, userId, enhancingUserEquip, feederUserEquips, clientTime.getTime());
-        resBuilder.setEquipToEnhance(eep);
-      }
-      
-      SubmitEquipEnhancementResponseEvent resEvent = new SubmitEquipEnhancementResponseEvent(senderProto.getUserId());
-      resEvent.setTag(event.getTag());
-      resEvent.setSubmitEquipEnhancementResponseProto(resBuilder.build());  
-      server.writeEvent(resEvent);
-      
-      if (successful) {
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
-        
-        writeToUserCurrencyHistory(user, clientTime, money, previousSilver);
-        MiscMethods.writeIntoDUEFE(enhancingUserEquip, feederUserEquips, enhancementId, enhancementFeederIds);
-      }
-      
-    } catch (Exception e) {
-      log.error("exception in EnhanceEquip processEvent", e);
-    } finally {
-      server.unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
-    }
-  }
+		try {
+			//The main user equip to enhance.
+			UserEquip enhancingUserEquip = RetrieveUtils.userEquipRetrieveUtils()
+					.getSpecificUserEquip(enhancingUserEquipId);
 
-  //delete enhancing user equip; make entry in equip enhancement table
-  //delete all the feeder user equips; make entries in equip enhancement feeders table
-  //delete feederuserequip, write enhanceduserequip to the db
-  private boolean writeChangesToDB(Builder resBuilder, User user, int mainUserEquipId, UserEquip mainUserEquip,
-      List<Integer> feederUserEquipIds, List<UserEquip> feederUserEquips, Timestamp clientTime,
-      List<Integer> enhancementInteger, List<Integer> equipEnhancementFeederIds, Map<String, Integer> money) {
-    int userId = mainUserEquip.getUserId();
-    int equipId = mainUserEquip.getEquipId();
-    int equipLevel = mainUserEquip.getLevel();
-    int enhancementPercentageBeforeEnhancement = mainUserEquip.getEnhancementPercentage();
-    Timestamp startTimeOfEnhancement = clientTime;
-    int silverChange = -1*costOfEnhancement(feederUserEquips);
-    int goldChange = 0;
-    
-    if (!user.updateRelativeDiamondsCoinsExperienceNaive(goldChange, silverChange, 0)) {
-      log.error("problem with updating user stats: diamondChange=" + goldChange
-          + ", coinChange=" + silverChange + ", user is " + user);
-    } else {
-      //everything went well
-      if (0 != silverChange) {
-        money.put(MiscMethods.silver, silverChange);
-      }
-    }
-    
-    //make entry in equip enhancement table
-    int equipEnhancementId = InsertUtils.get().insertEquipEnhancement(userId, equipId, equipLevel, 
-        enhancementPercentageBeforeEnhancement, startTimeOfEnhancement); 
-    enhancementInteger.add(equipEnhancementId);
-    
-    if(1 > equipEnhancementId) { //this rarely happens...maybe
-      resBuilder.setStatus(EnhanceEquipStatus.OTHER_FAIL);
-      log.error("could not enhance equip=" + mainUserEquip + ". Id returned: " + equipEnhancementId);
-      return false;
-    }
-    //maybe there should be a check to see if this fails...eh
-    //make entries in equip enhancement feeders table
-    List<Integer> eeFeederIds = InsertUtils.get().insertEquipEnhancementFeeders(equipEnhancementId, feederUserEquips);
-    if (null != eeFeederIds && !eeFeederIds.isEmpty()) {
-      equipEnhancementFeederIds.addAll(eeFeederIds);
-    }
-    
-    //maybe there should be a check to see if this fails...eh
-    //unequip all the user equips
-    
-    List<UserEquip> userEquips = new ArrayList<UserEquip>(feederUserEquips);
-    userEquips.add(mainUserEquip);
-    for (UserEquip ue : userEquips) {
-      if (!MiscMethods.unequipUserEquipIfEquipped(user, ue)) {
-        resBuilder.setStatus(EnhanceEquipStatus.OTHER_FAIL);
-        log.error("problem with unequipping user equip" + ue.getId());
-        return false;
-      }
-    }
-    
-    //delete the user equips
-    List<Integer> allUserEquipIds = new ArrayList<Integer>(feederUserEquipIds);
-    allUserEquipIds.add(mainUserEquipId);
-    
-    if(!DeleteUtils.get().deleteUserEquips(allUserEquipIds)) {
-      resBuilder.setStatus(EnhanceEquipStatus.OTHER_FAIL);
-      log.error("could not delete user equips with ids: "
-                + MiscMethods.shallowListToString(allUserEquipIds));
-      return false;
-    }
-    return true;
-  }
+			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+			int previousSilver = 0;
 
-  //feederUserEquips could be null or empty
-  private List<Equipment> getFeederEquips(List<UserEquip> feederUserEquips, Map<Integer, Equipment> equipmentIdsToEquipment) {
-    List<Equipment> returnValue = new ArrayList<Equipment>();
-    
-    for(UserEquip feederUserEquip: feederUserEquips) {
-      int equipId = feederUserEquip.getEquipId();
-      Equipment e = equipmentIdsToEquipment.get(equipId);
-      returnValue.add(e);
-    }
-    
-    return returnValue;
-  }
-  
-  private boolean checkEquip(Builder resBuilder, User user, int userId, UserEquip enhancingUserEquip, List<Integer> feederUserEquipIds, 
-      List<UserEquip> feederUserEquips, Map<Integer, Equipment> equipmentIdsToEquipment, Timestamp startTime) {
-    //the case where client asked for a user equip and user equip is not there.
-    if (!MiscMethods.checkClientTimeAroundApproximateNow(startTime)) {
-      resBuilder.setStatus(EnhanceEquipStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-      log.error("client time too apart of server time. client time=" + startTime + ", servertime~="
-          + new Date());
-      return false;
-    }
-    
-    List<EquipEnhancement> enhancements = EquipEnhancementRetrieveUtils.getEquipEnhancementsForUser(userId); 
-    if (null != enhancements && !enhancements.isEmpty()) {
-      resBuilder.setStatus(EnhanceEquipStatus.ALREADY_ENHANCING);
-      log.error("user is already enhancing an equip:" + MiscMethods.shallowListToString(enhancements));
-      return false;
-    }
-    
-    if (null == enhancingUserEquip || null == feederUserEquips ||
-        feederUserEquipIds.size() != feederUserEquips.size()) {
-      resBuilder.setStatus(EnhanceEquipStatus.MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT);
-      log.error("main/feeder equips non existent: enhancingUserEquip=" + enhancingUserEquip
-          + ", feederUserEquips=" + MiscMethods.shallowListToString(feederUserEquips) + ", requested feederUserEquipIds="
-          + MiscMethods.shallowListToString(feederUserEquipIds));
-      return false;
-    }
-    //user equips exist, check if equips exist
-    int equipId = enhancingUserEquip.getEquipId();
-    Equipment anEquip = equipmentIdsToEquipment.get(equipId);
-    List<Equipment> feederEquips = getFeederEquips(feederUserEquips, equipmentIdsToEquipment);
-    if(null == anEquip || feederEquips.isEmpty() || feederEquips.size() != feederUserEquips.size()) {
-      resBuilder.setStatus(EnhanceEquipStatus.MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT);
-      log.error("equip to enhance=" + anEquip + ", feederEquips=" + MiscMethods.shallowListToString(feederEquips)
-          + ", feederUserEquips=" + MiscMethods.shallowListToString(feederUserEquips));
-      return false;
-    }
-    
-    if (MiscMethods.isEquipAtMaxEnhancementLevel(enhancingUserEquip)) {
-      resBuilder.setStatus(EnhanceEquipStatus.TRYING_TO_SURPASS_MAX_LEVEL);
-      log.error("user is trying to enhance equip past the max level. user equip to enhance = " 
-      + enhancingUserEquip);
-      return false;
-    }
-    
-    if(user.getCoins() < costOfEnhancement(feederUserEquips)) {
-    	resBuilder.setStatus(EnhanceEquipStatus.NOT_ENOUGH_SILVER);
-    	log.error("not enough silver to enhance, user has" + user.getCoins() + "silver but requires" + costOfEnhancement(feederUserEquips));
-    	return false;
-    }
-    
-    resBuilder.setStatus(EnhanceEquipStatus.SUCCESS);
-    return true;
-  }
-  
-  //based on total stats of feeder equips
-  private int costOfEnhancement(List<UserEquip> feederUserEquips) {
-  	Iterator<UserEquip> enhancementIterator = feederUserEquips.iterator();
-  	int totalStats=0;
-  	//calculate total stats of feeder equips
-  	while(enhancementIterator.hasNext()) {
-  		UserEquip feederEquip = enhancementIterator.next();
-  		totalStats += MiscMethods.attackPowerForEquip(feederEquip.getEquipId(), feederEquip.getLevel(), feederEquip.getEnhancementPercentage()) + MiscMethods.defensePowerForEquip(feederEquip.getEquipId(), feederEquip.getLevel(), feederEquip.getEnhancementPercentage());
-  	}
-  	return (int)Math.ceil(totalStats * ControllerConstants.ENHANCEMENT__COST_CONSTANT);
-  }
-  
-  public void writeToUserCurrencyHistory(User aUser, Timestamp date, Map<String, Integer> money,
-      int previousSilver) {
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String reasonForChange = ControllerConstants.UCHRFC__ENHANCING;
-    String silver = MiscMethods.silver;
-    
-    previousGoldSilver.put(silver, previousSilver);
-    reasonsForChanges.put(silver, reasonForChange);
-    
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money, previousGoldSilver, reasonsForChanges);
-  }
-  
+			//The user equips to be sacrified for enhancing.
+			//this could be null, or does not contain null but could still be empty
+			List<UserEquip> feederUserEquips = RetrieveUtils.userEquipRetrieveUtils()
+					.getSpecificUserEquips(feederUserEquipIds);
+
+			Map<Integer, Equipment> equipmentIdsToEquipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+
+			boolean legitEquip = checkEquip(resBuilder, user, userId, enhancingUserEquip, feederUserEquipIds, feederUserEquips, 
+					equipmentIdsToEquipment, clientTime);
+
+			boolean successful = false;
+			List<Integer> enhancementInteger = new ArrayList<Integer>();
+			List<Integer> enhancementFeederIds = new ArrayList<Integer>(); 
+			Map<String, Integer> money = new HashMap<String, Integer>();
+
+			int enhancementPercentageBeforeEnhancement = enhancingUserEquip.getEnhancementPercentage();
+			int enhancementPercentageAfterEnhancement = MiscMethods.calculateEnhancementForEquip(enhancingUserEquip,
+					feederUserEquips)+enhancementPercentageBeforeEnhancement;
+			
+			if (legitEquip) {
+				previousSilver = user.getCoins() + user.getVaultBalance();
+				successful = writeChangesToDB(resBuilder, user, enhancingUserEquip,
+						feederUserEquipIds, feederUserEquips, money, enhancementPercentageAfterEnhancement);
+			}
+		
+			int enhancementId = 0;
+			if (successful) {
+				enhancementId = enhancementInteger.get(0);
+				FullUserEquipProto fuep = CreateInfoProtoUtils.createFullUserEquipProto(enhancingUserEquip.getId(),
+						userId, enhancingUserEquip.getEquipId(), enhancingUserEquip.getLevel(), enhancementPercentageAfterEnhancement);
+				resBuilder.setResultingEquip(fuep);
+			}
+
+			SubmitEquipEnhancementResponseEvent resEvent = new SubmitEquipEnhancementResponseEvent(senderProto.getUserId());
+			resEvent.setTag(event.getTag());
+			resEvent.setSubmitEquipEnhancementResponseProto(resBuilder.build());  
+			server.writeEvent(resEvent);
+
+			if (successful) {
+				UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+				resEventUpdate.setTag(event.getTag());
+				server.writeEvent(resEventUpdate);
+
+				writeToUserCurrencyHistory(user, clientTime, money, previousSilver);
+				writeIntoEquipEnhancementHistory(enhancingUserEquip, feederUserEquips, false, clientTime);		      
+				writeIntoEquipEnhancementFeederHistory(enhancingUserEquip.getId(), feederUserEquips);
+				MiscMethods.writeIntoDUEFE(enhancingUserEquip, feederUserEquips, enhancementId, enhancementFeederIds);
+			}
+
+		} catch (Exception e) {
+			log.error("exception in EnhanceEquip processEvent", e);
+		} finally {
+			server.unlockPlayer(senderProto.getUserId(), getClass().getSimpleName());   
+		}
+	}
+
+	//delete enhancing user equip; make entry in equip enhancement table
+	//delete all the feeder user equips; make entries in equip enhancement feeders table
+	//delete feederuserequip, write enhanceduserequip to the db
+	private boolean writeChangesToDB(Builder resBuilder, User user, UserEquip mainUserEquip,
+			List<Integer> feederUserEquipIds, List<UserEquip> feederUserEquips, Map<String, Integer> money, int enhancementPercentageAfterEnhancement) {
+
+		int silverChange = -1*costOfEnhancement(feederUserEquips);
+		int goldChange = 0;
+
+		if (!user.updateRelativeDiamondsCoinsExperienceNaive(goldChange, silverChange, 0)) {
+			log.error("problem with updating user stats: diamondChange=" + goldChange
+					+ ", coinChange=" + silverChange + ", user is " + user);
+		} else {
+			//everything went well
+			if (0 != silverChange) {
+				money.put(MiscMethods.silver, silverChange);
+			}
+		}
+		
+		//update the main user equip's enhancement
+		if(!UpdateUtils.get().updateUserEquipEnhancementPercentage(mainUserEquip.getId(), enhancementPercentageAfterEnhancement)) {
+			log.error("problem updating user equip's enhancement");
+		}
+		
+		//unequip all the feeder user equips
+		List<UserEquip> userEquips = new ArrayList<UserEquip>(feederUserEquips);
+		for (UserEquip ue : userEquips) {
+			if (!MiscMethods.unequipUserEquipIfEquipped(user, ue)) {
+				resBuilder.setStatus(EnhanceEquipStatus.OTHER_FAIL);
+				log.error("problem with unequipping user equip" + ue.getId());
+				return false;
+			}
+		}
+
+		//delete the feeder user equips
+		List<Integer> allUserEquipIds = new ArrayList<Integer>(feederUserEquipIds);
+		if(!DeleteUtils.get().deleteUserEquips(allUserEquipIds)) {
+			resBuilder.setStatus(EnhanceEquipStatus.OTHER_FAIL);
+			log.error("could not delete user equips with ids: "
+					+ MiscMethods.shallowListToString(allUserEquipIds));
+			return false;
+		}
+		return true;
+	}
+
+	//feederUserEquips could be null or empty
+	private List<Equipment> getFeederEquips(List<UserEquip> feederUserEquips, Map<Integer, Equipment> equipmentIdsToEquipment) {
+		List<Equipment> returnValue = new ArrayList<Equipment>();
+
+		for(UserEquip feederUserEquip: feederUserEquips) {
+			int equipId = feederUserEquip.getEquipId();
+			Equipment e = equipmentIdsToEquipment.get(equipId);
+			returnValue.add(e);
+		}
+
+		return returnValue;
+	}
+
+	private boolean checkEquip(Builder resBuilder, User user, int userId, UserEquip enhancingUserEquip, List<Integer> feederUserEquipIds, 
+			List<UserEquip> feederUserEquips, Map<Integer, Equipment> equipmentIdsToEquipment, Timestamp startTime) {
+		//the case where client asked for a user equip and user equip is not there.
+		if (!MiscMethods.checkClientTimeAroundApproximateNow(startTime)) {
+			resBuilder.setStatus(EnhanceEquipStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
+			log.error("client time too apart of server time. client time=" + startTime + ", servertime~="
+					+ new Date());
+			return false;
+		}
+
+		if (null == enhancingUserEquip || null == feederUserEquips ||
+				feederUserEquipIds.size() != feederUserEquips.size()) {
+			resBuilder.setStatus(EnhanceEquipStatus.MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT);
+			log.error("main/feeder equips non existent: enhancingUserEquip=" + enhancingUserEquip
+					+ ", feederUserEquips=" + MiscMethods.shallowListToString(feederUserEquips) + ", requested feederUserEquipIds="
+					+ MiscMethods.shallowListToString(feederUserEquipIds));
+			return false;
+		}
+		//user equips exist, check if equips exist
+		int equipId = enhancingUserEquip.getEquipId();
+		Equipment anEquip = equipmentIdsToEquipment.get(equipId);
+		List<Equipment> feederEquips = getFeederEquips(feederUserEquips, equipmentIdsToEquipment);
+		if(null == anEquip || feederEquips.isEmpty() || feederEquips.size() != feederUserEquips.size()) {
+			resBuilder.setStatus(EnhanceEquipStatus.MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT);
+			log.error("equip to enhance=" + anEquip + ", feederEquips=" + MiscMethods.shallowListToString(feederEquips)
+					+ ", feederUserEquips=" + MiscMethods.shallowListToString(feederUserEquips));
+			return false;
+		}
+
+		if (MiscMethods.isEquipAtMaxEnhancementLevel(enhancingUserEquip)) {
+			resBuilder.setStatus(EnhanceEquipStatus.TRYING_TO_SURPASS_MAX_LEVEL);
+			log.error("user is trying to enhance equip past the max level. user equip to enhance = " 
+					+ enhancingUserEquip);
+			return false;
+		}
+
+		if(user.getCoins() < costOfEnhancement(feederUserEquips)) {
+			resBuilder.setStatus(EnhanceEquipStatus.NOT_ENOUGH_SILVER);
+			log.error("not enough silver to enhance, user has" + user.getCoins() + "silver but requires" + costOfEnhancement(feederUserEquips));
+			return false;
+		}
+
+		resBuilder.setStatus(EnhanceEquipStatus.SUCCESS);
+		return true;
+	}
+
+	//based on total stats of feeder equips
+	private int costOfEnhancement(List<UserEquip> feederUserEquips) {
+		Iterator<UserEquip> enhancementIterator = feederUserEquips.iterator();
+		int totalStats=0;
+		//calculate total stats of feeder equips
+		while(enhancementIterator.hasNext()) {
+			UserEquip feederEquip = enhancementIterator.next();
+			totalStats += MiscMethods.attackPowerForEquip(feederEquip.getEquipId(), feederEquip.getLevel(), feederEquip.getEnhancementPercentage()) + MiscMethods.defensePowerForEquip(feederEquip.getEquipId(), feederEquip.getLevel(), feederEquip.getEnhancementPercentage());
+		}
+		return (int)Math.ceil(totalStats * ControllerConstants.ENHANCEMENT__COST_CONSTANT);
+	}
+
+	public void writeToUserCurrencyHistory(User aUser, Timestamp date, Map<String, Integer> money,
+			int previousSilver) {
+		Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+		Map<String, String> reasonsForChanges = new HashMap<String, String>();
+		String reasonForChange = ControllerConstants.UCHRFC__ENHANCING;
+		String silver = MiscMethods.silver;
+
+		previousGoldSilver.put(silver, previousSilver);
+		reasonsForChanges.put(silver, reasonForChange);
+
+		MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money, previousGoldSilver, reasonsForChanges);
+	}
+
+	private void writeIntoEquipEnhancementHistory(UserEquip equipUnderEnhancement, List<UserEquip> feederUserEquips,
+			boolean speedUp, Timestamp clientTime) {
+		int equipEnhancementId = equipUnderEnhancement.getId();
+		int userId = equipUnderEnhancement.getUserId();
+		int equipId = equipUnderEnhancement.getEquipId();
+		int equipLevel = equipUnderEnhancement.getLevel();
+		int previousEnhancementPercentage = equipUnderEnhancement.getEnhancementPercentage();
+
+		int currentEnhancementPercentage = MiscMethods.calculateEnhancementForEquip(equipUnderEnhancement,
+				feederUserEquips)+previousEnhancementPercentage;
+
+		Timestamp timeOfEnhancement = clientTime;
+
+
+		int numInserted = InsertUtils.get().insertIntoEquipEnhancementHistory(equipEnhancementId,
+				userId, equipId, equipLevel, currentEnhancementPercentage, previousEnhancementPercentage,
+				timeOfEnhancement);
+
+		if(1 != numInserted) {
+			log.error("could not record equip enhancing collection. equipUnderEnhancement="
+					+ equipUnderEnhancement + ", speedUp=" + speedUp + ", clientTime=" + clientTime);
+		}
+	}
+
+	private void writeIntoEquipEnhancementFeederHistory(int userEquipEnhancementId, 
+			List<UserEquip> feeders) {
+		int size = feeders.size();
+		int numInserted = InsertUtils.get()
+				.insertMultipleIntoEquipEnhancementFeedersHistory(userEquipEnhancementId, feeders);
+		if(size != numInserted) {
+			log.error("numInserted into feeder history table: " + numInserted + ", should have been:" + size);
+		}
+	}
+
 }

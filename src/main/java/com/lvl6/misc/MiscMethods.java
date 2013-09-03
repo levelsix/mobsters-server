@@ -109,6 +109,7 @@ import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BossEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
@@ -818,6 +819,8 @@ public class MiscMethods {
     BannedUserRetrieveUtils.reload();
     DailyBonusRewardRetrieveUtils.reload();
     CityGemRetrieveUtils.reload();
+    
+    CityExpansionCostRetrieveUtils.reload();
   }
 
   public static UserType getUserTypeFromDefeatTypeJobUserType(
@@ -1486,11 +1489,11 @@ public class MiscMethods {
     return 0;
   }
 
-  private static int calculateEnhancementForEquip(EquipEnhancement mainEquip, EquipEnhancementFeeder feederEquip) {
-    int mainStats = attackPowerForEquip(mainEquip.getEquipId(), mainEquip.getEquipLevel(), mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL) +
-        defensePowerForEquip(mainEquip.getEquipId(), mainEquip.getEquipLevel(), mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL);
-    int feederStats = attackPowerForEquip(feederEquip.getEquipId(), feederEquip.getEquipLevel(), feederEquip.getEnhancementPercentageBeforeEnhancement()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL) +
-        defensePowerForEquip(feederEquip.getEquipId(), feederEquip.getEquipLevel(), feederEquip.getEnhancementPercentageBeforeEnhancement()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL);
+  private static int calculateEnhancementForEquip(UserEquip mainEquip, UserEquip feederUserEquip) {
+    int mainStats = attackPowerForEquip(mainEquip.getEquipId(), mainEquip.getLevel(), mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL) +
+        defensePowerForEquip(mainEquip.getEquipId(), mainEquip.getLevel(), mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL);
+    int feederStats = attackPowerForEquip(feederUserEquip.getEquipId(), feederUserEquip.getLevel(), feederUserEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL) +
+        defensePowerForEquip(feederUserEquip.getEquipId(), feederUserEquip.getLevel(), feederUserEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL);
     int result = (int)((((float)feederStats)/mainStats)/(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_A*
         Math.pow(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_B, mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL+1))*
         ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL);
@@ -1499,11 +1502,11 @@ public class MiscMethods {
     return result;
   }
 
-  public static int calculateEnhancementForEquip(EquipEnhancement mainEquip,
-      List<EquipEnhancementFeeder> feederEquips) {
+  public static int calculateEnhancementForEquip(UserEquip mainEquip,
+		  List<UserEquip> feederUserEquips) {
     int totalChange = 0;
-    for (EquipEnhancementFeeder f : feederEquips) {
-      totalChange += calculateEnhancementForEquip(mainEquip, f);
+    for (UserEquip ue : feederUserEquips) {
+      totalChange += calculateEnhancementForEquip(mainEquip, ue);
     }
 
     int maxChange = (mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL+1)*ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL-mainEquip.getEnhancementPercentage();
@@ -1512,24 +1515,25 @@ public class MiscMethods {
     return Math.min(maxChange, totalChange);
   }
 
-  public static int calculateMinutesToFinishEnhancing(EquipEnhancement mainEquip, List<EquipEnhancementFeeder> feederEquips) {
-    int pChange = calculateEnhancementForEquip(mainEquip, feederEquips);
-    float percent = ((float)pChange)/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
-    int totalTime = totalMinutesToLevelUpEnhancementEquip(mainEquip);
-    int result = (int)Math.ceil(percent*totalTime);
+//  public static int calculateMinutesToFinishEnhancing(UserEquip mainEquip,
+//		  List<UserEquip> feederUserEquips) {
+//    int pChange = calculateEnhancementForEquip(mainEquip, feederUserEquips);
+//    float percent = ((float)pChange)/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
+//    int totalTime = totalMinutesToLevelUpEnhancementEquip(mainEquip);
+//    int result = (int)Math.ceil(percent*totalTime);
+//
+//    //    log.info("time for enhance="+result);
+//    return result;
+//  }
 
-    //    log.info("time for enhance="+result);
-    return result;
-  }
-
-  public static int calculateCostToSpeedUpEnhancing(EquipEnhancement e, List<EquipEnhancementFeeder> feeder,
-      Timestamp timeOfSpeedUp) {
-    int mins = calculateMinutesToFinishEnhancing(e, feeder);
-    int result = (int)Math.ceil(((float)mins)/ControllerConstants.FORGE_BASE_MINUTES_TO_ONE_GOLD);
-
-    // log.info("diamonds="+result);
-    return result;
-  }
+//  public static int calculateCostToSpeedUpEnhancing(EquipEnhancement e, List<EquipEnhancementFeeder> feeder,
+//      Timestamp timeOfSpeedUp) {
+//    int mins = calculateMinutesToFinishEnhancing(e, feeder);
+//    int result = (int)Math.ceil(((float)mins)/ControllerConstants.FORGE_BASE_MINUTES_TO_ONE_GOLD);
+//
+//    // log.info("diamonds="+result);
+//    return result;
+//  }
 
   public static int pointsGainedForClanTowerUserBattle(User winner, User loser) {
     int d = winner.getLevel()-loser.getLevel();
