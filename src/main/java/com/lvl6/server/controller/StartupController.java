@@ -295,6 +295,10 @@ public class StartupController extends EventController {
         if (!userLoggedIn && 0 >= numOldAccounts && !alreadyInFirstTimeUsers) {
           isFirstTimeUser = true;
         }
+        
+        log.info("\n userLoggedIn=" + userLoggedIn + "\t numOldAccounts=" +
+        		numOldAccounts + "\t alreadyInFirstTimeUsers=" +
+        		alreadyInFirstTimeUsers + "\t isFirstTimeUser=" + isFirstTimeUser);
 
         if (isFirstTimeUser) {
           log.info("new player with udid " + udid);

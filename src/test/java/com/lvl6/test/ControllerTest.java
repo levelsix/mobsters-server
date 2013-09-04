@@ -23,7 +23,8 @@ import com.lvl6.server.controller.StartupController;
 @ContextConfiguration("/test-spring-application-context.xml")
 public class ControllerTest extends TestCase {
 	
-	private static Logger log = LoggerFactory.getLogger(StatsTest.class);
+	private static Logger log = LoggerFactory.getLogger(new Object() {
+  }.getClass().getEnclosingClass());
 	
 	
 	@Autowired
@@ -46,16 +47,25 @@ public class ControllerTest extends TestCase {
 	}
 
 	@Transactional
-	@Rollback(true)
+	@Rollback(false)
 	@Test
 	public void testStartup() {
-//		String udid = "blah";
-//		createUser(udid);
-//		
-//		User aUser = getUserRetrieveUtils().getUserByUDID(udid);
-//		assertTrue("Expected: not null. Actual=" + aUser, null != aUser);
-//		
+		String udid = "blah";
+		createUser(udid);
+		
+		User aUser = getUserRetrieveUtils().getUserByUDID(udid);
+		assertTrue("Expected: not null. Actual=" + aUser, null != aUser);
+		log.info("user=" + aUser);
+		log.info("\n\n\n\n\n\n");
 	}
+	
+//	@Transactional
+//	@Rollback(true)
+//	@Test
+//	public void testPurchaseCityExpansion() {
+//		
+//	}
+	
 
 	public StartupController getStartupController() {
 		return startupController;
