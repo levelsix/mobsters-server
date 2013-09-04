@@ -39,7 +39,6 @@ import com.lvl6.info.BattleDetails;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
-import com.lvl6.info.Monster;
 import com.lvl6.info.City;
 import com.lvl6.info.CityGem;
 import com.lvl6.info.Clan;
@@ -83,7 +82,6 @@ import com.lvl6.proto.EventProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.InfoProto.BoosterPackProto;
 import com.lvl6.proto.InfoProto.CityGemProto;
 import com.lvl6.proto.InfoProto.EquipEnhancementProto;
-import com.lvl6.proto.InfoProto.FullBossProto;
 import com.lvl6.proto.InfoProto.FullEquipProto.Rarity;
 import com.lvl6.proto.InfoProto.FullStructureProto;
 import com.lvl6.proto.InfoProto.FullTaskProto;
@@ -113,10 +111,8 @@ import com.lvl6.retrieveutils.UserBoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.UserBossRetrieveUtils;
 import com.lvl6.retrieveutils.UserDailyBonusRewardHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.UserLockBoxEventRetrieveUtils;
-import com.lvl6.retrieveutils.UserTaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityGemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DailyBonusRewardRetrieveUtils;
@@ -1478,20 +1474,20 @@ public class StartupController extends EventController {
     }
   }
 
-  private int getNumTasksCompleteForUserCity(User user, City city,
-      Map<Integer, Integer> taskIdToNumTimesActedInRank) {
-    List<Task> tasks = TaskRetrieveUtils.getAllTasksForCityId(city.getId());
-    int numCompletedTasks = 0;
-    if (tasks != null) {
-      for (Task t : tasks) {
-        if (taskIdToNumTimesActedInRank.containsKey(t.getId())
-            && taskIdToNumTimesActedInRank.get(t.getId()) >= t.getNumForCompletion()) {
-          numCompletedTasks++;
-        }
-      }
-    }
-    return numCompletedTasks;
-  }
+//  private int getNumTasksCompleteForUserCity(User user, City city,
+//      Map<Integer, Integer> taskIdToNumTimesActedInRank) {
+//    List<Task> tasks = TaskRetrieveUtils.getAllTasksForCityId(city.getId());
+//    int numCompletedTasks = 0;
+//    if (tasks != null) {
+//      for (Task t : tasks) {
+//        if (taskIdToNumTimesActedInRank.containsKey(t.getId())
+//            && taskIdToNumTimesActedInRank.get(t.getId()) >= t.getNumForCompletion()) {
+//          numCompletedTasks++;
+//        }
+//      }
+//    }
+//    return numCompletedTasks;
+//  }
 
   private void setConstants(Builder startupBuilder, StartupStatus startupStatus) {
     startupBuilder.setStartupConstants(MiscMethods.createStartupConstantsProto());
@@ -1507,12 +1503,13 @@ public class StartupController extends EventController {
     UserType aBadType = UserType.BAD_ARCHER;
 
     Task task = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FIRST_TASK_ID);
-    task.setPotentialLootEquipIds(new ArrayList<Integer>());
+//    task.setPotentialLootEquipIds(new ArrayList<Integer>());
+    
     FullTaskProto ftpGood = CreateInfoProtoUtils.createFullTaskProtoFromTask(aGoodType, task);
     FullTaskProto ftpBad = CreateInfoProtoUtils.createFullTaskProtoFromTask(aBadType, task);
 
     task = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
-    task.setPotentialLootEquipIds(new ArrayList<Integer>());
+//    task.setPotentialLootEquipIds(new ArrayList<Integer>());
     FullTaskProto questFtpGood = CreateInfoProtoUtils.createFullTaskProtoFromTask(aGoodType, task);
     FullTaskProto questFtpBad = CreateInfoProtoUtils.createFullTaskProtoFromTask(aBadType, task);
 
@@ -1537,7 +1534,7 @@ public class StartupController extends EventController {
             .setExpGained(ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED)
             .setTaskGood(questFtpGood)
             .setTaskBad(questFtpBad)
-            .setTaskCompleteCoinGain(MiscMethods.calculateCoinsGainedFromTutorialTask(task))
+//            .setTaskCompleteCoinGain(MiscMethods.calculateCoinsGainedFromTutorialTask(task))
             .setEquipReward(
                 CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
                     .get(ControllerConstants.TUTORIAL__FAKE_QUEST_AMULET_LOOT_EQUIP_ID))).build();

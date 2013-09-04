@@ -107,7 +107,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         if (equipIdToEquips != null) {
           for (Equipment e : equipIdToEquips.values()) {
             if (e != null && e.getMinLevel() == newLevel && 
-                e.getClassType() == MiscMethods.getClassTypeFromUserType(user.getType()) &&
                 (e.getRarity() == Rarity.EPIC || e.getRarity() == Rarity.LEGENDARY)) {
               resBuilder.addNewlyEquippableEpicsAndLegendaries(CreateInfoProtoUtils.createFullEquipProtoFromEquip(e));
             }

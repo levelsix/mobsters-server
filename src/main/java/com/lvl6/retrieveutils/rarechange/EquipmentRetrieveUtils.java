@@ -3,7 +3,6 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Equipment;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.EquipClassType;
 import com.lvl6.proto.InfoProto.FullEquipProto.EquipType;
 import com.lvl6.proto.InfoProto.FullEquipProto.Rarity;
 import com.lvl6.utils.DBConnection;
@@ -36,20 +34,20 @@ import com.lvl6.utils.DBConnection;
     return equipIdToEquipment;
   }
 
-  public static List<Equipment> getAllEquipmentForClassType(EquipClassType classtype) {
-    log.debug("retrieving all armory equipment for class type " + classtype);
-    if (equipIdToEquipment == null) {
-      setStaticEquipIdsToEquipment();
-    }
-    List <Equipment> equips = new ArrayList<Equipment>();
-    for (Integer equipId : equipIdToEquipment.keySet()) {
-      Equipment equip = equipIdToEquipment.get(equipId);
-      if (equip.getClassType() == classtype || equip.getClassType() == EquipClassType.ALL_AMULET) {
-        equips.add(equip);
-      }
-    }
-    return equips;
-  }
+//  public static List<Equipment> getAllEquipmentForClassType(EquipClassType classtype) {
+//    log.debug("retrieving all armory equipment for class type " + classtype);
+//    if (equipIdToEquipment == null) {
+//      setStaticEquipIdsToEquipment();
+//    }
+//    List <Equipment> equips = new ArrayList<Equipment>();
+//    for (Integer equipId : equipIdToEquipment.keySet()) {
+//      Equipment equip = equipIdToEquipment.get(equipId);
+//      if (equip.getClassType() == classtype || equip.getClassType() == EquipClassType.ALL_AMULET) {
+//        equips.add(equip);
+//      }
+//    }
+//    return equips;
+//  }
 
   public static Map<Integer, Equipment> getEquipmentIdsToEquipment(List<Integer> equipIds) {
     log.debug("retrieving equipment with ids " + equipIds);
@@ -107,28 +105,23 @@ import com.lvl6.utils.DBConnection;
     int attackBoost = rs.getInt(i++);
     int defenseBoost = rs.getInt(i++);
     int minLevel = rs.getInt(i++);
-    int coinPrice = rs.getInt(i++);
-    boolean coinPriceSet = !rs.wasNull();
-    int diamondPrice = rs.getInt(i++);
-    boolean diamondPriceSet = !rs.wasNull();
-    float chanceOfLoss = rs.getFloat(i++);
-    EquipClassType classType = EquipClassType.valueOf(rs.getInt(i++));
     Rarity rarity = Rarity.valueOf(rs.getInt(i++));
-    boolean isBuyableInArmory = rs.getBoolean(i++);
     float chanceOfForgeFailureBase = rs.getFloat(i++);
     int minutesToAttemptForgeBase = rs.getInt(i++);
     
-    Equipment equip = null;
-    if (coinPriceSet && !diamondPriceSet) {
-      equip = new Equipment(id, name, type, description, attackBoost, defenseBoost, minLevel, coinPrice, 
-          Equipment.NOT_SET, chanceOfLoss, classType, rarity, isBuyableInArmory, chanceOfForgeFailureBase, minutesToAttemptForgeBase);
-    } else if (diamondPriceSet && !coinPriceSet){
-      equip = new Equipment(id, name, type, description, attackBoost, defenseBoost, minLevel, Equipment.NOT_SET, 
-          diamondPrice, chanceOfLoss, classType, rarity, isBuyableInArmory, chanceOfForgeFailureBase, minutesToAttemptForgeBase);      
-    } else if (diamondPriceSet && coinPriceSet){
-      log.error("equipment should only have coin or diamond price, and this one doesnt: equip with id " + id);
-      return null;
-    } 
+    Equipment equip = new Equipment(id, name, type, description,
+    		attackBoost, defenseBoost, minLevel, rarity,
+    		chanceOfForgeFailureBase, minutesToAttemptForgeBase);
+//    if (coinPriceSet && !diamondPriceSet) {
+//      equip = new Equipment(id, name, type, description, attackBoost, defenseBoost, minLevel, coinPrice, 
+//          Equipment.NOT_SET, chanceOfLoss, classType, rarity, isBuyableInArmory, chanceOfForgeFailureBase, minutesToAttemptForgeBase);
+//    } else if (diamondPriceSet && !coinPriceSet){
+//      equip = new Equipment(id, name, type, description, attackBoost, defenseBoost, minLevel, Equipment.NOT_SET, 
+//          diamondPrice, chanceOfLoss, classType, rarity, isBuyableInArmory, chanceOfForgeFailureBase, minutesToAttemptForgeBase);      
+//    } else if (diamondPriceSet && coinPriceSet){
+//      log.error("equipment should only have coin or diamond price, and this one doesnt: equip with id " + id);
+//      return null;
+//    } 
 
     //3 types
     //1) sellable in armory, 2) not sellable in armory but sellable in marketplace, 3) never sellable

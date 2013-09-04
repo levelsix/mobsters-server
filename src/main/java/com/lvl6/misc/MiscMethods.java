@@ -30,7 +30,6 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
-import com.lvl6.info.Monster;
 import com.lvl6.info.BossEvent;
 import com.lvl6.info.City;
 import com.lvl6.info.CityGem;
@@ -39,7 +38,6 @@ import com.lvl6.info.ClanTierLevel;
 import com.lvl6.info.ClanTower;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EquipEnhancement;
-import com.lvl6.info.EquipEnhancementFeeder;
 import com.lvl6.info.Equipment;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.LeaderboardEvent;
@@ -50,7 +48,6 @@ import com.lvl6.info.MarketplacePost;
 import com.lvl6.info.Mentorship;
 import com.lvl6.info.Task;
 import com.lvl6.info.User;
-import com.lvl6.info.UserBoss;
 import com.lvl6.info.UserCityGem;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserEquip;
@@ -109,12 +106,8 @@ import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BossEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanBossRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanBossRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityGemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanTierLevelRetrieveUtils;
@@ -127,6 +120,8 @@ import com.lvl6.retrieveutils.rarechange.LeaderboardEventRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxItemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PossessEquipJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
@@ -227,10 +222,15 @@ public class MiscMethods {
    */
   public static boolean checkIfEquipIsEquippableOnUser(Equipment equip, User user) {
     if (equip == null || user == null) return false;
-    EquipClassType userClass = MiscMethods.getClassTypeFromUserType(user.getType());
-    if (user.getLevel() >= equip.getMinLevel() && 
-        (userClass == equip.getClassType() || equip.getClassType() == EquipClassType.ALL_AMULET)) {
-      return true;
+    
+    //figure out how to implement this
+//    EquipClassType userClass = MiscMethods.getClassTypeFromUserType(user.getType());
+//    if (user.getLevel() >= equip.getMinLevel() && 
+//        (userClass == equip.getClassType() || equip.getClassType() == EquipClassType.ALL_AMULET)) {
+//      return true;
+//    }
+    if (user.getLevel() >= equip.getMinLevel()) {
+    	return true;
     }
     return false;
   }
@@ -271,10 +271,10 @@ public class MiscMethods {
         ControllerConstants.USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER)));
   }
 
-  public static int calculateCoinsGainedFromTutorialTask(Task firstTaskToComplete) {
-    return ((firstTaskToComplete.getMinCoinsGained() + firstTaskToComplete.getMaxCoinsGained())/2)
-        * firstTaskToComplete.getNumForCompletion();
-  }
+//  public static int calculateCoinsGainedFromTutorialTask(Task firstTaskToComplete) {
+//    return ((firstTaskToComplete.getMinCoinsGained() + firstTaskToComplete.getMaxCoinsGained())/2)
+//        * firstTaskToComplete.getNumForCompletion();
+//  }
 
   public static boolean unequipUserEquipIfEquipped(User user, UserEquip userEquip) {
     int userEquipId = userEquip.getId();

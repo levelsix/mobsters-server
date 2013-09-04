@@ -13,125 +13,89 @@ public class Task implements Serializable {
 	private String badName;
 	private int cityId;
 	private int energyCost;
-	private int minCoinsGained;
-	private int maxCoinsGained;
-	private float chanceOfEquipFloat;
-	private List<Integer> potentialLootEquipIds;
-	private int expGained;
+//	private int minCoinsGained;
+//	private int maxCoinsGained;
+//	private float chanceOfEquipFloat;
+//	private List<Integer> potentialLootEquipIds;
+//	private int expGained;
 	private int assetNumberWithinCity;
-	private int numForCompletion;
-	private String goodProcessingText;
-	private String badProcessingText;
-	private CoordinatePair spriteLandingCoords;
-	private AnimationType animationType;
-
+//	private int numForCompletion;
+//	private String goodProcessingText;
+//	private String badProcessingText;
+//	private CoordinatePair spriteLandingCoords;
+//	private AnimationType animationType;
+	
+	
 	public Task(int id, String goodName, String badName, int cityId,
-			int energyCost, int minCoinsGained, int maxCoinsGained,
-			float chanceOfEquipFloat, List<Integer> potentialLootEquipIds,
-			int expGained, int assetNumberWithinCity, int numForCompletion,
-			String goodProcessingText, String badProcessingText,
-			CoordinatePair spriteLandingCoords, AnimationType animationType) {
+			int energyCost, int assetNumberWithinCity) {
 		super();
 		this.id = id;
 		this.goodName = goodName;
 		this.badName = badName;
 		this.cityId = cityId;
 		this.energyCost = energyCost;
-		this.minCoinsGained = minCoinsGained;
-		this.maxCoinsGained = maxCoinsGained;
-		this.chanceOfEquipFloat = chanceOfEquipFloat;
-		this.potentialLootEquipIds = potentialLootEquipIds;
-		this.expGained = expGained;
 		this.assetNumberWithinCity = assetNumberWithinCity;
-		this.numForCompletion = numForCompletion;
-		this.goodProcessingText = goodProcessingText;
-		this.badProcessingText = badProcessingText;
-		this.spriteLandingCoords = spriteLandingCoords;
-		this.animationType = animationType;
 	}
+
 
 	public int getId() {
 		return id;
 	}
 
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public String getGoodName() {
 		return goodName;
 	}
+
+
+	public void setGoodName(String goodName) {
+		this.goodName = goodName;
+	}
+
 
 	public String getBadName() {
 		return badName;
 	}
 
+
+	public void setBadName(String badName) {
+		this.badName = badName;
+	}
+
+
 	public int getCityId() {
 		return cityId;
 	}
+
+
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
 
 	public int getEnergyCost() {
 		return energyCost;
 	}
 
-	public int getMinCoinsGained() {
-		return minCoinsGained;
+
+	public void setEnergyCost(int energyCost) {
+		this.energyCost = energyCost;
 	}
 
-	public int getMaxCoinsGained() {
-		return maxCoinsGained;
-	}
-
-	public float getChanceOfEquipFloat() {
-		return chanceOfEquipFloat;
-	}
-
-	public List<Integer> getPotentialLootEquipIds() {
-		return potentialLootEquipIds;
-	}
-
-	public void setPotentialLootEquipIds(List<Integer> potentialLootEquipIds) {
-		this.potentialLootEquipIds = potentialLootEquipIds;
-	}
-
-	public int getExpGained() {
-		return expGained;
-	}
 
 	public int getAssetNumberWithinCity() {
 		return assetNumberWithinCity;
 	}
 
-	public int getNumForCompletion() {
-		return numForCompletion;
+
+	public void setAssetNumberWithinCity(int assetNumberWithinCity) {
+		this.assetNumberWithinCity = assetNumberWithinCity;
 	}
 
-	public String getGoodProcessingText() {
-		return goodProcessingText;
-	}
-
-	public String getBadProcessingText() {
-		return badProcessingText;
-	}
-
-	public CoordinatePair getSpriteLandingCoords() {
-		return spriteLandingCoords;
-	}
-
-	public AnimationType getAnimationType() {
-		return animationType;
-	}
-
-	@Override
-	public String toString() {
-		return "Task [id=" + id + ", goodName=" + goodName + ", badName="
-				+ badName + ", cityId=" + cityId + ", energyCost=" + energyCost
-				+ ", minCoinsGained=" + minCoinsGained + ", maxCoinsGained="
-				+ maxCoinsGained + ", chanceOfEquipFloat=" + chanceOfEquipFloat
-				+ ", potentialLootEquipIds=" + potentialLootEquipIds
-				+ ", expGained=" + expGained + ", assetNumberWithinCity="
-				+ assetNumberWithinCity + ", numForCompletion="
-				+ numForCompletion + ", goodProcessingText="
-				+ goodProcessingText + ", badProcessingText="
-				+ badProcessingText + ", spriteLandingCoords="
-				+ spriteLandingCoords + ", animationType=" + animationType
-				+ "]";
-	}
 
 }

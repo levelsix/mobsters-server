@@ -113,13 +113,13 @@ import com.lvl6.utils.RetrieveUtils;
           + user.getLevel() + ", equip minimum level is " + equip.getMinLevel());
       return false;
     }
-    EquipClassType userClass = MiscMethods.getClassTypeFromUserType(user.getType());
-    if (userClass != equip.getClassType() && equip.getClassType() != EquipClassType.ALL_AMULET) {
-      resBuilder.setStatus(EquipEquipmentStatus.INCORRECT_CLASS_TYPE);
-      log.error("problem with equipping equip" + equip.getId() + ": user not right class. user type is "
-          + user.getType() + ", equip class is " + equip.getClassType());
-      return false;      
-    }
+//    EquipClassType userClass = MiscMethods.getClassTypeFromUserType(user.getType());
+//    if (userClass != equip.getClassType() && equip.getClassType() != EquipClassType.ALL_AMULET) {
+//      resBuilder.setStatus(EquipEquipmentStatus.INCORRECT_CLASS_TYPE);
+//      log.error("problem with equipping equip" + equip.getId() + ": user not right class. user type is "
+//          + user.getType() + ", equip class is " + equip.getClassType());
+//      return false;      
+//    }
     boolean equippable = canEquip(user, ue, forPrestigeEquipSlot, equip);
     if (!equippable) {
       resBuilder.setStatus(EquipEquipmentStatus.ALREADY_AT_MAX_EQUIPPED_EQUIPS);

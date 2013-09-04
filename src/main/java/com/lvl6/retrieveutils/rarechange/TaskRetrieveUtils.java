@@ -7,17 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Task;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.AnimationType;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class TaskRetrieveUtils {
@@ -65,19 +62,19 @@ import com.lvl6.utils.DBConnection;
     return cityIdsToTasks.get(cityId);
   }
   
-  public static int getNumTapsToRankupCity(int cityId) {
-    if (cityIdsToTasks == null) {
-      setStaticCityIdsToTasks();
-    }
-    List<Task> tasksForCity = cityIdsToTasks.get(cityId);
-    
-    int numTaps = 0;
-    for (Task t : tasksForCity) {
-      numTaps += t.getNumForCompletion();
-    }
-    
-    return numTaps;
-  }
+//  public static int getNumTapsToRankupCity(int cityId) {
+//    if (cityIdsToTasks == null) {
+//      setStaticCityIdsToTasks();
+//    }
+//    List<Task> tasksForCity = cityIdsToTasks.get(cityId);
+//    
+//    int numTaps = 0;
+//    for (Task t : tasksForCity) {
+//      numTaps += t.getNumForCompletion();
+//    }
+//    
+//    return numTaps;
+//  }
 
   private static void setStaticCityIdsToTasks() {
     log.debug("setting static map of cityId to tasks");
@@ -153,35 +150,33 @@ import com.lvl6.utils.DBConnection;
     String badName = rs.getString(i++);
     int cityId = rs.getInt(i++);
     int energyCost = rs.getInt(i++);
-    int minCoinsGained = rs.getInt(i++);
-    int maxCoinsGained = rs.getInt(i++);
-    float chanceOfEquipLoot = rs.getFloat(i++);
-    String equipIdsString = rs.getString(i++);
-    List<Integer> equipIds = new ArrayList<Integer>();
-    if (equipIdsString != null) {
-      StringTokenizer st = new StringTokenizer(equipIdsString, ", ");
-      while (st.hasMoreTokens()) {
-        equipIds.add(Integer.parseInt(st.nextToken()));
-      }
-    }
-    int expGained = rs.getInt(i++);
-    int assetNumWithinCity = rs.getInt(i++);
-    int numForCompletion = rs.getInt(i++);
-    String goodProcessingText = rs.getString(i++);
-    String badProcessingText = rs.getString(i++);
+//    int minCoinsGained = rs.getInt(i++);
+//    int maxCoinsGained = rs.getInt(i++);
+//    float chanceOfEquipLoot = rs.getFloat(i++);
+//    String equipIdsString = rs.getString(i++);
+//    List<Integer> equipIds = new ArrayList<Integer>();
+//    if (equipIdsString != null) {
+//      StringTokenizer st = new StringTokenizer(equipIdsString, ", ");
+//      while (st.hasMoreTokens()) {
+//        equipIds.add(Integer.parseInt(st.nextToken()));
+//      }
+//    }
+//    int expGained = rs.getInt(i++);
+    int assetNumberWithinCity = rs.getInt(i++);
+//    int numForCompletion = rs.getInt(i++);
+//    String goodProcessingText = rs.getString(i++);
+//    String badProcessingText = rs.getString(i++);
     
-    float spriteLandingX = rs.getFloat(i++);
-    boolean spriteLandingXWasSet = !rs.wasNull();
-    float spriteLandingY = rs.getFloat(i++);
-    boolean spriteLandingYWasSet = !rs.wasNull();
+//    float spriteLandingX = rs.getFloat(i++);
+//    boolean spriteLandingXWasSet = !rs.wasNull();
+//    float spriteLandingY = rs.getFloat(i++);
+//    boolean spriteLandingYWasSet = !rs.wasNull();
     
-    CoordinatePair spriteLandingCoords = (spriteLandingXWasSet && spriteLandingYWasSet) ? new CoordinatePair(spriteLandingX, spriteLandingY) : null;
+//    CoordinatePair spriteLandingCoords = (spriteLandingXWasSet && spriteLandingYWasSet) ? new CoordinatePair(spriteLandingX, spriteLandingY) : null;
 
-    AnimationType at = AnimationType.valueOf(rs.getInt(i++));
+//    AnimationType at = AnimationType.valueOf(rs.getInt(i++));
     
-    Task task = new Task(id, goodName, badName, cityId, energyCost, minCoinsGained, maxCoinsGained, 
-        chanceOfEquipLoot, equipIds, expGained, assetNumWithinCity, numForCompletion, goodProcessingText, 
-        badProcessingText, spriteLandingCoords, at);
+    Task task = new Task(id, goodName, badName, cityId, energyCost, assetNumberWithinCity);
     return task;
   }
 }

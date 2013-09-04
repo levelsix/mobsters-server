@@ -88,7 +88,6 @@ import com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto;
 import com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.InfoProto.EquipEnhancementItemProto;
 import com.lvl6.proto.InfoProto.EquipEnhancementProto;
-import com.lvl6.proto.InfoProto.FullBossProto;
 import com.lvl6.proto.InfoProto.FullCityProto;
 import com.lvl6.proto.InfoProto.FullClanProto;
 import com.lvl6.proto.InfoProto.FullClanProtoWithClanSize;
@@ -506,17 +505,17 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static FullEquipProto createFullEquipProtoFromEquip(Equipment equip) {
-		FullEquipProto.Builder builder =  FullEquipProto.newBuilder().setEquipId(equip.getId()).setName(equip.getName())
-				.setEquipType(equip.getType()).setDescription(equip.getDescription()).setAttackBoost(equip.getAttackBoost()).setDefenseBoost(equip.getDefenseBoost())
-				.setMinLevel(equip.getMinLevel()).setChanceOfLoss(equip.getChanceOfLoss()).setClassType(equip.getClassType())
-				.setRarity(equip.getRarity()).setIsBuyableInArmory(equip.isBuyableInArmory()).setChanceOfForgeFailureBase(equip.getChanceOfForgeFailureBase())
-				.setMinutesToAttemptForgeBase(equip.getMinutesToAttemptForgeBase());
-		if (equip.getCoinPrice() != Equipment.NOT_SET) {
-			builder.setCoinPrice(equip.getCoinPrice());
-		}
-		if (equip.getDiamondPrice() != Equipment.NOT_SET) {
-			builder.setDiamondPrice(equip.getDiamondPrice());
-		}
+		FullEquipProto.Builder builder =  FullEquipProto.newBuilder();
+		builder.setEquipId(equip.getId());
+		builder.setName(equip.getName());
+		builder.setEquipType(equip.getType());
+		builder.setDescription(equip.getDescription());
+		builder.setAttackBoost(equip.getAttackBoost());
+		builder.setDefenseBoost(equip.getDefenseBoost());
+		builder.setMinLevel(equip.getMinLevel());
+		builder.setRarity(equip.getRarity());
+		builder.setChanceOfForgeFailureBase(equip.getChanceOfForgeFailureBase());
+		builder.setMinutesToAttemptForgeBase(equip.getMinutesToAttemptForgeBase());
 		return builder.build();
 	}
 
@@ -571,25 +570,33 @@ public class CreateInfoProtoUtils {
 		boolean goodSide = MiscMethods.checkIfGoodSide(userType);
 
 		String name = null;
-		String processingText = null;
+//		String processingText = null;
 
 		if (goodSide) {
 			name = task.getGoodName();
-			processingText = task.getGoodProcessingText();
+//			processingText = task.getGoodProcessingText();
 		} else {
 			name = task.getBadName();
-			processingText = task.getBadProcessingText();
+//			processingText = task.getBadProcessingText();
 		}
 
-		FullTaskProto.Builder builder = FullTaskProto.newBuilder().setTaskId(task.getId()).setName(name).setCityId(task.getCityId()).setEnergyCost(task.getEnergyCost()).setMinCoinsGained(task.getMinCoinsGained())
-				.setMaxCoinsGained(task.getMaxCoinsGained()).setChanceOfEquipLoot(task.getChanceOfEquipFloat())
-				.setExpGained(task.getExpGained()).setAssetNumWithinCity(task.getAssetNumberWithinCity()).
-				setNumRequiredForCompletion(task.getNumForCompletion()).addAllPotentialLootEquipIds(task.getPotentialLootEquipIds())
-				.setProcessingText(processingText).setAnimationType(task.getAnimationType());
+		FullTaskProto.Builder builder = FullTaskProto.newBuilder();
+		builder.setTaskId(task.getId());
+		builder.setName(name).setCityId(task.getCityId());
+		builder.setEnergyCost(task.getEnergyCost());
+//		builder.setMinCoinsGained(task.getMinCoinsGained());
+//		builder.setMaxCoinsGained(task.getMaxCoinsGained());
+//		builder.setChanceOfEquipLoot(task.getChanceOfEquipFloat());
+//		builder.setExpGained(task.getExpGained());
+		builder.setAssetNumWithinCity(task.getAssetNumberWithinCity());
+//		builder.setNumRequiredForCompletion(task.getNumForCompletion());
+//		builder.addAllPotentialLootEquipIds(task.getPotentialLootEquipIds());
+//		builder.setProcessingText(processingText);
+//		builder.setAnimationType(task.getAnimationType());
 
-		if (task.getSpriteLandingCoords() != null) {
-			builder.setSpriteLandingCoords(createCoordinateProtoFromCoordinatePair(task.getSpriteLandingCoords()));
-		}
+//		if (task.getSpriteLandingCoords() != null) {
+//			builder.setSpriteLandingCoords(createCoordinateProtoFromCoordinatePair(task.getSpriteLandingCoords()));
+//		}
 
 		Map<Integer, Integer> equipIdsToQuantity = TaskEquipReqRetrieveUtils.getEquipmentIdsToQuantityForTaskId(task.getId());
 		if (equipIdsToQuantity != null && equipIdsToQuantity.size() > 0) {
@@ -883,8 +890,9 @@ public class CreateInfoProtoUtils {
 	}
 
 	private static MinimumUserQuestTaskProto createMinimumUserQuestTaskProto(UserQuest userQuest, UserType userType, Integer requiredTaskId, boolean taskCompletedForQuest, Integer numTimesUserActed) {
+		//TODO:
 		Task task = TaskRetrieveUtils.getTaskForTaskId(requiredTaskId);
-		int numTimesCompleted = (taskCompletedForQuest) ? task.getNumForCompletion() : numTimesUserActed;
+		int numTimesCompleted = 1;//(taskCompletedForQuest) ? task.getNumForCompletion() : numTimesUserActed;
 		return MinimumUserQuestTaskProto.newBuilder().setUserId(userQuest.getUserId()).setTaskId(requiredTaskId).setNumTimesActed(numTimesCompleted).setQuestId(userQuest.getQuestId()).build();
 	}
 

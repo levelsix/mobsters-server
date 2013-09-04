@@ -1,6 +1,6 @@
 package com.lvl6.server.controller;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -56,12 +56,14 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     resBuilder.setStatus(RetrieveStaticDataForShopStatus.SUCCESS);
     
     if (type == RetrieveForShopType.EQUIPMENT_FOR_ARMORY) {
-      List<Equipment> equips = EquipmentRetrieveUtils.getAllEquipmentForClassType(MiscMethods.getClassTypeFromUserType(senderProto.getUserType()));
+    	//TODO: FIGURE OUT HOW THIS CONTROLLER WORKS
+      Collection<Equipment> equips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().values(); 
+      		//EquipmentRetrieveUtils.getAllEquipmentForClassType(MiscMethods.getClassTypeFromUserType(senderProto.getUserType()));
       if (equips != null) {
-        for (Equipment equip : equips) { 
-          FullEquipProto fep = CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip);
-          resBuilder.addEquips(fep);
-        }
+//        for (Equipment equip : equips) { 
+//          FullEquipProto fep = CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip);
+//          resBuilder.addEquips(fep);
+//        }
       } else {
         resBuilder.setStatus(RetrieveStaticDataForShopStatus.SOME_FAIL);
         log.error("no equips available in the armory for classtype=" + MiscMethods.getClassTypeFromUserType(senderProto.getUserType()));

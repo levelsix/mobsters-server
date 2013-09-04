@@ -2,7 +2,6 @@ package com.lvl6.scriptsjava.csvequipreplacement;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,9 +10,6 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-import com.lvl6.info.Task;
-import com.lvl6.properties.DBConstants;
-import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.utils.DBConnection;
 
 public class CSVEquipReplacement {
@@ -106,33 +102,33 @@ public class CSVEquipReplacement {
       }
       
       // Update tasks potential loot
-      for (Task t : TaskRetrieveUtils.getTaskIdsToTasks().values()) {
-        List<Integer> loot = t.getPotentialLootEquipIds();
-        if (loot != null && loot.size() > 0) {
-          System.out.println("Task "+t.getId()+" prior loot equips: "+loot);
-          boolean needsChange = false;
-          String newLoot = "";
-          for (Integer l : loot) {
-            Integer newId = dict.get(l);
-            if (newId == null) newId = l;
-            if (!newId.equals(l)) {
-              needsChange = true;
-            }
-            newLoot += newId + ", ";
-          }
-
-          newLoot = newLoot.substring(0, newLoot.length()-2);
-          System.out.println("Needs change: "+needsChange+" new loot: "+newLoot);
-          if (needsChange) {
-            ArrayList<Object> x = new ArrayList<Object>();
-            x.add(newLoot);
-            x.add(t.getId());
-            String query = "update "+DBConstants.TABLE_TASKS+" set potential_loot_equip_ids=? where id=?";
-            int rowsUpdated = DBConnection.get().updateDirectQueryNaive(query, x);
-            System.out.println("Updated tasks: "+rowsUpdated+" rows.");
-          }
-        }
-      }
+//      for (Task t : TaskRetrieveUtils.getTaskIdsToTasks().values()) {
+//        List<Integer> loot = t.getPotentialLootEquipIds();
+//        if (loot != null && loot.size() > 0) {
+//          System.out.println("Task "+t.getId()+" prior loot equips: "+loot);
+//          boolean needsChange = false;
+//          String newLoot = "";
+//          for (Integer l : loot) {
+//            Integer newId = dict.get(l);
+//            if (newId == null) newId = l;
+//            if (!newId.equals(l)) {
+//              needsChange = true;
+//            }
+//            newLoot += newId + ", ";
+//          }
+//
+//          newLoot = newLoot.substring(0, newLoot.length()-2);
+//          System.out.println("Needs change: "+needsChange+" new loot: "+newLoot);
+//          if (needsChange) {
+//            ArrayList<Object> x = new ArrayList<Object>();
+//            x.add(newLoot);
+//            x.add(t.getId());
+//            String query = "update "+DBConstants.TABLE_TASKS+" set potential_loot_equip_ids=? where id=?";
+//            int rowsUpdated = DBConnection.get().updateDirectQueryNaive(query, x);
+//            System.out.println("Updated tasks: "+rowsUpdated+" rows.");
+//          }
+//        }
+//      }
     } catch (Exception e) {
       e.printStackTrace();
     }

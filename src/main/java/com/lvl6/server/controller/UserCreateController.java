@@ -151,8 +151,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       taskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FIRST_TASK_ID);
       questTaskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
 
-      int playerExp = taskCompleted.getExpGained() * taskCompleted.getNumForCompletion() + questTaskCompleted.getExpGained() * questTaskCompleted.getNumForCompletion() + ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED;
-      playerCoins = ControllerConstants.TUTORIAL__INIT_COINS + MiscMethods.calculateCoinsGainedFromTutorialTask(taskCompleted) + questTaskCompleted.getMaxCoinsGained() + ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED
+      //TODO: FIX THESE NUMBERS
+      int playerExp = 19;//taskCompleted.getExpGained() * taskCompleted.getNumForCompletion() + questTaskCompleted.getExpGained() * questTaskCompleted.getNumForCompletion() + ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED;
+      playerCoins = 69     //ControllerConstants.TUTORIAL__INIT_COINS + MiscMethods.calculateCoinsGainedFromTutorialTask(taskCompleted) + questTaskCompleted.getMaxCoinsGained() + ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED
           - StructureRetrieveUtils.getStructForStructId(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD).getCoinPrice(); 
       if (referrer != null) playerCoins += ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED;
 
@@ -292,12 +293,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private void writeTaskCompleted(int userId, Task taskCompleted) {
-    if (taskCompleted != null) {
-      if (!UpdateUtils.get().incrementTimesCompletedInRankForUserTask(userId, taskCompleted.getId(), taskCompleted.getNumForCompletion())) {
-        log.error("problem with incrementing number of times user completed task in current rank for task " + taskCompleted.getId()
-            + " for player " + userId + " by " + taskCompleted.getNumForCompletion());
-      }
-    }
+  	//TODO: RECORD TASK SOMEHOW
+//    if (taskCompleted != null) {
+//      if (!UpdateUtils.get().incrementTimesCompletedInRankForUserTask(userId, taskCompleted.getId(), taskCompleted.getNumForCompletion())) {
+//        log.error("problem with incrementing number of times user completed task in current rank for task " + taskCompleted.getId()
+//            + " for player " + userId + " by " + taskCompleted.getNumForCompletion());
+//      }
+//    }
   }
 
   private Map<EquipType, Integer> writeUserEquips(int userId, List<Integer> equipIds,
