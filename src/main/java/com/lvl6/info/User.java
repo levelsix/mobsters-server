@@ -76,11 +76,11 @@ public class User implements Serializable {
 	private int numAdditionalForgeSlots;
 	private int numBeginnerSalesPurchased;
 	private boolean isMentor;
-	private boolean hasBeginnerShield;
+	private boolean hasActiveShield;
 	private Date shieldEndTime;
 	private int elo;
 	private String rank;
-	private Date lastQueueTime;
+	private Date lastTimeQueued;
 
 
 
@@ -107,8 +107,8 @@ public class User implements Serializable {
 			int armorTwoEquippedUserEquipId, int amuletTwoEquippedUserEquipId,
 			int prestigeLevel, int numAdditionalForgeSlots,
 			int numBeginnerSalesPurchased, boolean isMentor,
-			boolean hasBeginnerShield, Date shieldEndTime, int elo,
-			String rank, Date lastQueueTime) {
+			boolean hasActiveShield, Date shieldEndTime, int elo,
+			String rank, Date lastTimeQueued) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -165,11 +165,11 @@ public class User implements Serializable {
 		this.numAdditionalForgeSlots = numAdditionalForgeSlots;
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 		this.isMentor = isMentor;
-		this.hasBeginnerShield = hasBeginnerShield;
+		this.hasActiveShield = hasActiveShield;
 		this.shieldEndTime = shieldEndTime;
 		this.elo = elo;
 		this.rank = rank;
-		this.lastQueueTime = lastQueueTime;
+		this.lastTimeQueued = lastTimeQueued;
 	}
 
 
@@ -1187,8 +1187,8 @@ public class User implements Serializable {
 		}
 		//3 cases:deactivate a shield, activate a shield, do nothing
 		if (deactivateShield) {
-			if (hasBeginnerShield ) {
-				absoluteParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+			if (hasActiveShield ) {
+				absoluteParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, false);
 			}
 			if (null != shieldEndTime && (shieldEndTime.getTime() > clientTime.getTime())) {
 				absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, null);
@@ -1218,8 +1218,8 @@ public class User implements Serializable {
 				this.flees += fleesChange;
 			}
 			if (deactivateShield) {
-				if (hasBeginnerShield) {
-					this.hasBeginnerShield = false;
+				if (hasActiveShield) {
+					this.hasActiveShield = false;
 				}
 				if (null != shieldEndTime && (shieldEndTime.getTime() > clientTime.getTime())) {
 					this.shieldEndTime = null;
@@ -1443,11 +1443,11 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateLastQueueTime(Date lastQueueTime) {
+	public boolean updateLastTimeQueued(Date lastTimeQueued) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_QUEUE_TIME, lastQueueTime);
+		absoluteParams.put(DBConstants.USER__LAST_TIME_QUEUED, lastTimeQueued);
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
@@ -2008,13 +2008,13 @@ public class User implements Serializable {
 	}
 
 
-	public boolean isHasBeginnerShield() {
-		return hasBeginnerShield;
+	public boolean isHasActiveShield() {
+		return hasActiveShield;
 	}
 
 
-	public void setHasBeginnerShield(boolean hasBeginnerShield) {
-		this.hasBeginnerShield = hasBeginnerShield;
+	public void setHasActiveShield(boolean hasActiveShield) {
+		this.hasActiveShield = hasActiveShield;
 	}
 
 
@@ -2048,13 +2048,13 @@ public class User implements Serializable {
 	}
 
 
-	public Date getLastQueueTime() {
-		return lastQueueTime;
+	public Date getLastTimeQueued() {
+		return lastTimeQueued;
 	}
 
 
-	public void setLastQueueTime(Date lastQueueTime) {
-		this.lastQueueTime = lastQueueTime;
+	public void setLastTimeQueued(Date lastTimeQueued) {
+		this.lastTimeQueued = lastTimeQueued;
 	}
 
 
@@ -2109,9 +2109,9 @@ public class User implements Serializable {
 				+ prestigeLevel + ", numAdditionalForgeSlots="
 				+ numAdditionalForgeSlots + ", numBeginnerSalesPurchased="
 				+ numBeginnerSalesPurchased + ", isMentor=" + isMentor
-				+ ", hasBeginnerShield=" + hasBeginnerShield
+				+ ", hasBeginnerShield=" + hasActiveShield
 				+ ", shieldEndTime=" + shieldEndTime + ", elo=" + elo
-				+ ", rank=" + rank + ", lastQueueTime=" + lastQueueTime + "]";
+				+ ", rank=" + rank + ", lastTimeQueued=" + lastTimeQueued + "]";
 	}
 
 

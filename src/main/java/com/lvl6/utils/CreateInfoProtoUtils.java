@@ -391,39 +391,74 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static FullUserProto createFullUserProtoFromUser(User u) {
-		FullUserProto.Builder builder = FullUserProto.newBuilder().setUserId(u.getId()).setName(u.getName())
-				.setLevel(u.getLevel()).setUserType(u.getType())
-				.setEnergy(u.getEnergy())
-				.setEnergyMax(u.getEnergyMax()).setDiamonds(u.getDiamonds())
-				.setCoins(u.getCoins()).setMarketplaceDiamondsEarnings(u.getMarketplaceDiamondsEarnings())
-				.setMarketplaceCoinsEarnings(u.getMarketplaceCoinsEarnings())
-				.setVaultBalance(u.getVaultBalance()).setExperience(u.getExperience())
-				.setTasksCompleted(u.getTasksCompleted()).setBattlesWon(u.getBattlesWon())
-				.setBattlesLost(u.getBattlesLost()).setFlees(u.getFlees()).setNumReferrals(u.getNumReferrals())
-				.setUserLocation(createLocationProtoFromLocation(u.getUserLocation()))
-				.setNumPostsInMarketplace(u.getNumPostsInMarketplace()).setNumMarketplaceSalesUnredeemed(u.getNumMarketplaceSalesUnredeemed())
-				.setLastLoginTime(u.getLastLogin().getTime()).setIsFake(u.isFake())
-				.setCreateTime(u.getCreateTime().getTime())
-				.setIsAdmin(u.isAdmin())
-				.setNumCoinsRetrievedFromStructs(u.getNumCoinsRetrievedFromStructs())
-				.setNumAdColonyVideosWatched(u.getNumAdColonyVideosWatched())
-				.setNumGroupChatsRemaining(u.getNumGroupChatsRemaining())
-				.setHasReceivedfbReward(u.isHasReceivedfbReward())
-				.setPrestigeLevel(u.getPrestigeLevel())
-				.setNumAdditionalForgeSlots(u.getNumAdditionalForgeSlots())
-				.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased())
-				.setIsMentor(u.isMentor())
-				.setHasActiveShield(u.isHasBeginnerShield())
-				.setElo(u.getElo())
-				.setRank(u.getRank());
-
-		if(u.getShieldEndTime() != null) {
-			builder.setShieldEndTime(u.getShieldEndTime().getTime());
+		FullUserProto.Builder builder = FullUserProto.newBuilder();
+		builder.setUserId(u.getId());
+		builder.setName(u.getName());
+		builder.setLevel(u.getLevel());
+		builder.setUserType(u.getType());
+		builder.setEnergy(u.getEnergy());
+		if (u.getLastEnergyRefillTime() != null) {
+			builder.setLastEnergyRefillTime(u.getLastEnergyRefillTime().getTime());
 		}
-
+		builder.setEnergyMax(u.getEnergyMax());
+		builder.setDiamonds(u.getDiamonds());
+		builder.setCoins(u.getCoins());
+		builder.setMarketplaceDiamondsEarnings(u.getMarketplaceDiamondsEarnings());
+		builder.setMarketplaceCoinsEarnings(u.getMarketplaceCoinsEarnings());
+		builder.setVaultBalance(u.getVaultBalance());
+		builder.setExperience(u.getExperience());
+		builder.setTasksCompleted(u.getTasksCompleted());
+		builder.setBattlesWon(u.getBattlesWon());
+		builder.setBattlesLost(u.getBattlesLost());
+		builder.setFlees(u.getFlees());
 		if (u.getReferralCode() != null) {
 			builder.setReferralCode(u.getReferralCode());
 		}
+		builder.setNumReferrals(u.getNumReferrals());
+		builder.setUserLocation(createLocationProtoFromLocation(u.getUserLocation()));
+		builder.setNumPostsInMarketplace(u.getNumPostsInMarketplace());
+		builder.setNumMarketplaceSalesUnredeemed(u.getNumMarketplaceSalesUnredeemed());
+		if (u.getLastLogin() != null) {
+			builder.setLastLoginTime(u.getLastLogin().getTime());
+		}	
+		if (u.getLastLogout() != null) {
+			builder.setLastLogoutTime(u.getLastLogout().getTime());
+		}
+		if (u.getLastShortLicensePurchaseTime() != null) {
+			builder.setLastShortLicensePurchaseTime(u.getLastShortLicensePurchaseTime().getTime());
+		}
+		if (u.getLastLongLicensePurchaseTime() != null) {
+			builder.setLastLongLicensePurchaseTime(u.getLastLongLicensePurchaseTime().getTime());
+		}
+		builder.setIsFake(u.isFake());
+		builder.setCreateTime(u.getCreateTime().getTime());
+		builder.setIsAdmin(u.isAdmin());
+		builder.setNumCoinsRetrievedFromStructs(u.getNumCoinsRetrievedFromStructs());
+		builder.setNumAdColonyVideosWatched(u.getNumAdColonyVideosWatched());
+		builder.setNumGroupChatsRemaining(u.getNumGroupChatsRemaining());
+		if (u.getClanId() > 0) {
+			Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
+			builder.setClan(createMinimumClanProtoFromClan(clan));
+		}
+		if (u.getLastGoldmineRetrieval() != null) {
+			builder.setLastGoldmineRetrieval(u.getLastGoldmineRetrieval().getTime());
+		}
+		builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
+		builder.setPrestigeLevel(u.getPrestigeLevel());
+		builder.setNumAdditionalForgeSlots(u.getNumAdditionalForgeSlots());
+		builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
+		builder.setIsMentor(u.isMentor());
+		builder.setHasActiveShield(u.isHasActiveShield());
+		if(u.getShieldEndTime() != null) {
+			builder.setShieldEndTime(u.getShieldEndTime().getTime());
+		}
+		builder.setElo(u.getElo());
+		builder.setRank(u.getRank());
+		if (u.getLastTimeQueued() != null) {
+			builder.setLastTimeQueued(u.getLastTimeQueued().getTime());
+		}
+		//ADD NEW COLUMNS AFTER HERE, NOT BELOW THE IF, ELSE CASE
+		
 
 		if (u.isFake()) {
 			int equipmentLevel = u.getLevel();
@@ -481,25 +516,7 @@ public class CreateInfoProtoUtils {
 				}
 			}
 		}
-		if (u.getLastEnergyRefillTime() != null) {
-			builder.setLastEnergyRefillTime(u.getLastEnergyRefillTime().getTime());
-		}
-		if (u.getLastLogout() != null) {
-			builder.setLastLogoutTime(u.getLastLogout().getTime());
-		}
-		if (u.getLastShortLicensePurchaseTime() != null) {
-			builder.setLastShortLicensePurchaseTime(u.getLastShortLicensePurchaseTime().getTime());
-		}
-		if (u.getLastLongLicensePurchaseTime() != null) {
-			builder.setLastLongLicensePurchaseTime(u.getLastLongLicensePurchaseTime().getTime());
-		}
-		if (u.getLastGoldmineRetrieval() != null) {
-			builder.setLastGoldmineRetrieval(u.getLastGoldmineRetrieval().getTime());
-		}
-		if (u.getClanId() > 0) {
-			Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
-			builder.setClan(createMinimumClanProtoFromClan(clan));
-		}
+		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
 	}

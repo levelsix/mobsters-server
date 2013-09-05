@@ -520,15 +520,9 @@ message FullUserProto {
     optional string name = 2;
     optional int32 level = 3;
     optional UserType userType = 4;
-	optional int32 attack = 5;
-	optional int32 defense = 6;
-	optional int32 stamina = 7;
-	optional int64 lastStaminaRefillTime = 8;
 	optional int32 energy = 10;
 	optional int64 lastEnergyRefillTime = 11;
-	optional int32 skillPoints = 13;
 	optional int32 energyMax = 15;
-	optional int32 staminaMax = 16;
 	optional int32 diamonds = 17;
 	optional int32 coins = 18;
 	optional int32 marketplaceDiamondsEarnings = 19;
@@ -541,6 +535,7 @@ message FullUserProto {
 	optional int32 flees = 45;
 	optional string referralCode = 27;
 	optional int32 numReferrals = 28;
+	//optional string udid = 29; //defined below
 	optional LocationProto userLocation = 30;
 	optional int32 numPostsInMarketplace = 31;
 	optional int32 numMarketplaceSalesUnredeemed = 32;
@@ -549,15 +544,25 @@ message FullUserProto {
 	optional FullUserEquipProto amuletEquippedUserEquip = 35;
 	optional int64 lastLoginTime = 36;
 	optional int64 lastLogoutTime = 37;
+	//optional string deviceToken = 38; //defined below
+	//optional int64 lastBattleNotificationTime = 39; //defined below
+	//optional int32 numBadges = 42; //defined below
 	optional int64 lastShortLicensePurchaseTime = 43;
 	optional int64 lastLongLicensePurchaseTime = 44;
 	optional bool isFake = 46;
+	//optional int64 createTime = 47; //defined below
 	optional bool isAdmin = 48;
+	//optional int32 apsalarId = 49;
 	optional int32 numCoinsRetrievedFromStructs = 50;
 	optional int32 numAdColonyVideosWatched = 51;
+	//optional int32 numTimesKiipRewarded = 52; //defined below
+	//optional int32 numConsecutiveDaysPlayed = 53; defined below
 	optional int32 numGroupChatsRemaining = 54;
 	optional MinimumClanProto clan = 55;
 	optional int64 lastGoldmineRetrieval = 56;
+	//last marketplace notification time
+	//last wall post notification time
+	//kabam naid
 	optional bool hasReceivedfbReward = 57;
 	optional FullUserEquipProto weaponTwoEquippedUserEquip = 58;
 	optional FullUserEquipProto armorTwoEquippedUserEquip = 59;
@@ -566,12 +571,11 @@ message FullUserProto {
 	optional int32 numAdditionalForgeSlots = 62;
 	optional int32 numBeginnerSalesPurchased = 63;
 	optional bool isMentor = 64;
-	optional bool hasActiveShield = 65;
-	
+	optional bool hasActiveShield = 65; 
 	optional int64 shieldEndTime = 66;
 	optional int32 elo = 67;
 	optional string rank = 68;
-	optional int64 lastQueueTime = 69;
+	optional int64 lastTimeQueued = 69; 
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
@@ -585,6 +589,13 @@ message FullUserProto {
 	optional int32 numTimesKiipRewarded = 52;
 	optional int32 numConsecutiveDaysPlayed = 53;
 
+	//not needed in mobsters
+	//optional int32 attack = 5;
+	//optional int32 defense = 6;
+	//optional int32 stamina = 7;
+	//optional int64 lastStaminaRefillTime = 8;
+	//optional int32 skillPoints = 13;
+	//optional int32 staminaMax = 16;
 }
 
 //------------------------------------------------------------------------------------------

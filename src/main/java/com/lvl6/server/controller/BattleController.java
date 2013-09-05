@@ -315,7 +315,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			log.error("problem with battle- attacker and defender same side. attacker=" + attacker + ", defender=" + defender);
 			return false;
 		}
-		if (defender.isHasBeginnerShield() &&
+		if (defender.isHasActiveShield() &&
 				battleTime.getTime() < defender.getCreateTime().getTime()+ControllerConstants.STARTUP__DEFAULT_DAYS_BATTLE_SHIELD_IS_ACTIVE*24*60*60*1000) {
 			resBuilder.setStatus(BattleStatus.OPPONENT_HAS_ACTIVE_SHIELD);
 			log.error("user error: user trying to attack a defender who has an active" +

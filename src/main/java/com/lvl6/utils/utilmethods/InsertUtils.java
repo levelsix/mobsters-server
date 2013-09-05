@@ -732,7 +732,7 @@ public class InsertUtils implements InsertUtil{
         amuletEquipped);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
     insertParams.put(DBConstants.USER__NUM_GROUP_CHATS_REMAINING, 5);
-    insertParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, activateShield);
+    insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
     if (null != lastEnergyRefillTime) {
       insertParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, lastEnergyRefillTime);
     }

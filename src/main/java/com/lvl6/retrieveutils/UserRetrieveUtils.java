@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Location;
 import com.lvl6.info.User;
-import com.lvl6.info.UserBoss;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
@@ -263,11 +262,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
       values.add(longUpperBound);
     }
 
-    if (forBattle) {
-      query += "(" + DBConstants.USER__LAST_TIME_ATTACKED + "<=? or " +  DBConstants.USER__LAST_TIME_ATTACKED + " is ?) and ";
-      values.add(new Timestamp(new Date().getTime() - ControllerConstants.NUM_MINUTES_SINCE_LAST_BATTLE_BEFORE_APPEARANCE_IN_ATTACK_LISTS*60000));
-      values.add(null);
-    }
+//    if (forBattle) {
+//      query += "(" + DBConstants.USER__LAST_TIME_ATTACKED + "<=? or " +  DBConstants.USER__LAST_TIME_ATTACKED + " is ?) and ";
+//      values.add(new Timestamp(new Date().getTime() - ControllerConstants.NUM_MINUTES_SINCE_LAST_BATTLE_BEFORE_APPEARANCE_IN_ATTACK_LISTS*60000));
+//      values.add(null);
+//    }
     
     if (realPlayersOnly) {
       query += DBConstants.USER__IS_FAKE + "=? and ";
@@ -288,7 +287,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     if (inactiveShield) {
-      query += DBConstants.USER__HAS_BEGINNER_SHIELD + "=? and ";
+      query += DBConstants.USER__HAS_ACTIVE_SHIELD + "=? and ";
       values.add(false);
     }
 
@@ -718,7 +717,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     //trying to improve elo range calculation readability
     int lastViewedTimeMillisBuffer = ControllerConstants.BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND;
     		
-    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
+    absoluteConditionParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, false);
     relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, eloMin);
     relativeLessThanConditionParams.put(DBConstants.USER__ELO, eloMax);
     Timestamp timestamp = new Timestamp(clientTime.getTime());
@@ -726,7 +725,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     //prospective users should have their shield ended before now
     relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
     Timestamp timestamp2 = new Timestamp(clientTime.getTime() - lastViewedTimeMillisBuffer);
-    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
+    relativeLessThanConditionParams.put(DBConstants.USER__LAST_TIME_QUEUED, timestamp2);
     
     String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
     seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
@@ -753,11 +752,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int level = rs.getInt(i++);
     UserType type = UserType.valueOf(rs.getInt(i++));
 
-    Timestamp ts = rs.getTimestamp(i++);
     int energy = rs.getInt(i++);
+//    Timestamp ts = rs.getTimestamp(i++);
 
     Date lastEnergyRefillTime = null;
-    ts = rs.getTimestamp(i++);
+    Timestamp ts  = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
       lastEnergyRefillTime = new Date(ts.getTime());
     }
@@ -889,25 +888,40 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int numAdditionalForgeSlots = rs.getInt(i++);
     int numBeginnerSalesPurchased = rs.getInt(i++);
     boolean isMentor = rs.getBoolean(i++);
-    boolean hasBeginnerShield = rs.getBoolean(i++);
-    Date shieldEndTime = rs.getDate(i++);
+    boolean hasActiveShield = rs.getBoolean(i++);
+    
+    Date shieldEndTime = null;
+    ts = rs.getTimestamp(i++);
+    if (!rs.wasNull()) {
+    	shieldEndTime = new Date(ts.getTime());
+    }
+    
     int elo = rs.getInt(i++);
     String rank = rs.getString(i++);
-    Date lastQueueTime = rs.getDate(i++);
     
-    User user = new User(id, name, level, type, energy, lastEnergyRefillTime, 
-    		energyMax, diamonds, coins, marketplaceDiamondsEarnings, marketplaceCoinsEarnings,
-    		vaultBalance, experience, tasksCompleted, battlesWon, battlesLost, flees, referralCode, 
-    		numReferrals, udid, userLocation, numPostsInMarketplace, numMarketplaceSalesUnredeemed, 
-    		weaponEquippedUserEquipId, armorEquippedUserEquipId, amuletEquippedUserEquipId, lastLogin, 
-    		lastLogout, deviceToken, lastBattleNotificationTime, numBadges, lastShortLicensePurchaseTime, 
-    		lastLongLicensePurchaseTime, isFake, createTime, isAdmin, apsalarId, numCoinsRetrievedFromStructs, 
-    		numAdColonyVideosWatched, numTimesKiipRewarded, numConsecutiveDaysPlayed, numGroupChatsRemaining,
-    		clanId, lastGoldmineRetrieval, lastMarketplaceNotificationTime, lastWallPostNotificationTime,
-    		kabamNaid, hasReceivedfbReward, weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId, 
-    		amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots, numBeginnerSalesPurchased,
-    		isMentor, hasBeginnerShield, shieldEndTime, elo, rank, lastQueueTime);
-    		
+    Date lastTimeQueued = null;
+    ts = rs.getTimestamp(i++);
+    if (!rs.wasNull()) {
+    	lastTimeQueued = new Date(ts.getTime());
+    }
+    
+    User user = new User(id, name, level, type, energy, lastEnergyRefillTime,
+    		energyMax, diamonds, coins, marketplaceDiamondsEarnings,
+    		marketplaceCoinsEarnings, vaultBalance, experience, tasksCompleted,
+    		battlesWon, battlesLost, flees, referralCode, numReferrals, udid,
+    		userLocation, numPostsInMarketplace, numMarketplaceSalesUnredeemed,
+    		weaponEquippedUserEquipId, armorEquippedUserEquipId,
+    		amuletEquippedUserEquipId, lastLogin, lastLogout, deviceToken,
+    		lastBattleNotificationTime, numBadges, lastShortLicensePurchaseTime,
+    		lastLongLicensePurchaseTime, isFake, createTime, isAdmin, apsalarId,
+    		numCoinsRetrievedFromStructs, numAdColonyVideosWatched,
+    		numTimesKiipRewarded, numConsecutiveDaysPlayed, numGroupChatsRemaining,
+    		clanId, lastGoldmineRetrieval, lastMarketplaceNotificationTime,
+    		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
+    		weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId,
+    		amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots,
+    		numBeginnerSalesPurchased, isMentor, hasActiveShield, shieldEndTime,
+    		elo, rank, lastTimeQueued);
     return user;
   }
 }

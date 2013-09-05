@@ -153,8 +153,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       //TODO: FIX THESE NUMBERS
       int playerExp = 19;//taskCompleted.getExpGained() * taskCompleted.getNumForCompletion() + questTaskCompleted.getExpGained() * questTaskCompleted.getNumForCompletion() + ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED;
-      playerCoins = 69     //ControllerConstants.TUTORIAL__INIT_COINS + MiscMethods.calculateCoinsGainedFromTutorialTask(taskCompleted) + questTaskCompleted.getMaxCoinsGained() + ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED
-          - StructureRetrieveUtils.getStructForStructId(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD).getCoinPrice(); 
+//      playerCoins = ControllerConstants.TUTORIAL__INIT_COINS + MiscMethods.calculateCoinsGainedFromTutorialTask(taskCompleted) + questTaskCompleted.getMaxCoinsGained() + ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED
+//          - StructureRetrieveUtils.getStructForStructId(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD).getCoinPrice(); 
+      playerCoins = 69;
       if (referrer != null) playerCoins += ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED;
 
       playerDiamonds = Globals.INITIAL_DIAMONDS();

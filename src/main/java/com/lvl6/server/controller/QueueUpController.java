@@ -200,7 +200,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	private boolean writeChangesToDB(User attacker, int cost, Timestamp queueTime,
 			User queuedUser) {
 		
-		boolean success = queuedUser.updateLastQueueTime(queueTime);
+		boolean success = queuedUser.updateLastTimeQueued(queueTime);
 		if(success) {
 			return attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill (
 					0, 0, -1*cost, 0, 0, 0,  false, queueTime, true, false, false);  
