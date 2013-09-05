@@ -6,4 +6,8 @@ public abstract class PreDatabaseRequestEvent extends RequestEvent{
   public String getUdid() {
     return udid;
   }
+  
+  public void setUdid(String udid) {
+  	this.udid = udid;
+  }
 }

@@ -30,4 +30,8 @@ public class UserCreateRequestEvent extends PreDatabaseRequestEvent{
   public UserCreateRequestProto getUserCreateRequestProto() {
     return userCreateRequestProto;
   }
+  
+  public void setUserCreateRequestProto(UserCreateRequestProto ucrp) {
+  	this.userCreateRequestProto = ucrp;
+  }
 }
