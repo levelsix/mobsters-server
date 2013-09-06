@@ -120,7 +120,7 @@ public interface InsertUtil {
 			Integer weaponEquipped, Integer armorEquipped,
 			Integer amuletEquipped, boolean isFake, int numGroupChatsRemaining,
 			boolean activateShield, Timestamp createTime, Timestamp lastEnergyRefillTime,
-			Timestamp lastStaminaRefillTime);
+			Timestamp lastStaminaRefillTime, String rank);
 
 	/*
 	 * returns the id of the post, -1 if none

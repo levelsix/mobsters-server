@@ -26,4 +26,10 @@ public class PurchaseCityExpansionRequestEvent extends RequestEvent {
   public PurchaseCityExpansionRequestProto getPurchaseCityExpansionRequestProto() {
     return purchaseCityExpansionRequestProto;
   }
+  
+  public void setPurchaseCityExpansionRequestProto(
+  		PurchaseCityExpansionRequestProto purchaseCityExpansionRequestProto) {
+  	this.purchaseCityExpansionRequestProto = purchaseCityExpansionRequestProto;
+  	playerId = purchaseCityExpansionRequestProto.getSender().getUserId();
+  }
 }

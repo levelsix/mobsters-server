@@ -81,34 +81,35 @@ public class User implements Serializable {
 	private int elo;
 	private String rank;
 	private Date lastTimeQueued;
+	private int attacksWon;
+	private int defensesWon;
+	private int attacksLost;
+	private int defensesLost;
 
 
-
-	
 	public User(int id, String name, int level, UserType type, int energy,
 			Date lastEnergyRefillTime, int energyMax, int diamonds, int coins,
 			int marketplaceDiamondsEarnings, int marketplaceCoinsEarnings,
-			int vaultBalance, int experience, int tasksCompleted,
-			int battlesWon, int battlesLost, int flees, String referralCode,
-			int numReferrals, String udid, Location userLocation,
-			int numPostsInMarketplace, int numMarketplaceSalesUnredeemed,
-			int weaponEquippedUserEquipId, int armorEquippedUserEquipId,
-			int amuletEquippedUserEquipId, Date lastLogin, Date lastLogout,
-			String deviceToken, Date lastBattleNotificationTime, int numBadges,
-			Date lastShortLicensePurchaseTime,
-			Date lastLongLicensePurchaseTime, boolean isFake, Date createTime,
-			boolean isAdmin, String apsalarId,
+			int vaultBalance, int experience, int tasksCompleted, int battlesWon,
+			int battlesLost, int flees, String referralCode, int numReferrals,
+			String udid, Location userLocation, int numPostsInMarketplace,
+			int numMarketplaceSalesUnredeemed, int weaponEquippedUserEquipId,
+			int armorEquippedUserEquipId, int amuletEquippedUserEquipId,
+			Date lastLogin, Date lastLogout, String deviceToken,
+			Date lastBattleNotificationTime, int numBadges,
+			Date lastShortLicensePurchaseTime, Date lastLongLicensePurchaseTime,
+			boolean isFake, Date createTime, boolean isAdmin, String apsalarId,
 			int numCoinsRetrievedFromStructs, int numAdColonyVideosWatched,
 			int numTimesKiipRewarded, int numConsecutiveDaysPlayed,
 			int numGroupChatsRemaining, int clanId, Date lastGoldmineRetrieval,
-			Date lastMarketplaceNotificationTime,
-			Date lastWallPostNotificationTime, int kabamNaid,
-			boolean hasReceivedfbReward, int weaponTwoEquippedUserEquipId,
-			int armorTwoEquippedUserEquipId, int amuletTwoEquippedUserEquipId,
-			int prestigeLevel, int numAdditionalForgeSlots,
-			int numBeginnerSalesPurchased, boolean isMentor,
-			boolean hasActiveShield, Date shieldEndTime, int elo,
-			String rank, Date lastTimeQueued) {
+			Date lastMarketplaceNotificationTime, Date lastWallPostNotificationTime,
+			int kabamNaid, boolean hasReceivedfbReward,
+			int weaponTwoEquippedUserEquipId, int armorTwoEquippedUserEquipId,
+			int amuletTwoEquippedUserEquipId, int prestigeLevel,
+			int numAdditionalForgeSlots, int numBeginnerSalesPurchased,
+			boolean isMentor, boolean hasActiveShield, Date shieldEndTime, int elo,
+			String rank, Date lastTimeQueued, int attacksWon, int defensesWon,
+			int attacksLost, int defensesLost) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -170,8 +171,11 @@ public class User implements Serializable {
 		this.elo = elo;
 		this.rank = rank;
 		this.lastTimeQueued = lastTimeQueued;
+		this.attacksWon = attacksWon;
+		this.defensesWon = defensesWon;
+		this.attacksLost = attacksLost;
+		this.defensesLost = defensesLost;
 	}
-
 
 	public boolean updateAbsoluteUserLocation(Location location) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -1165,7 +1169,8 @@ public class User implements Serializable {
 	public boolean updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill (
 			int energy, int experience, int coins, int battlesWon, int battlesLost, int fleesChange,
 			boolean simulateEnergyRefill, Timestamp clientTime, boolean deactivateShield,
-			boolean activateShield, boolean recordWinLossFlee) {
+			boolean activateShield, boolean recordWinLossFlee, int attacksWonDelta, 
+			int defensesWonDelta, int attacksLostDelta, int defensesLostDelta) {
 		Date shieldEndTimeTemp = this.shieldEndTime; //for changing this obj if endTime changes
 		
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -1176,15 +1181,70 @@ public class User implements Serializable {
 		if (experience != 0) relativeParams.put(DBConstants.USER__EXPERIENCE, experience);
 		if (coins != 0) relativeParams.put(DBConstants.USER__COINS, coins);
 		if (recordWinLossFlee) {
-			if (battlesWon != 0) relativeParams.put(DBConstants.USER__BATTLES_WON, battlesWon);
-			if (battlesLost != 0) relativeParams.put(DBConstants.USER__BATTLES_LOST, battlesLost);
-			if (fleesChange != 0) relativeParams.put(DBConstants.USER__FLEES, fleesChange);
+			recordWinLossFlees(relativeParams, battlesWon, battlesLost, fleesChange,
+					attacksWonDelta, defensesWonDelta, attacksLostDelta, defensesLostDelta);
 		}
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		if(simulateEnergyRefill) {
 			absoluteParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, clientTime);
 		}
+		
+		//3 cases:deactivate a shield, activate a shield, do nothing
+		shieldEndTimeTemp = recordTurnOnOffShield(absoluteParams, deactivateShield,
+				clientTime, activateShield, shieldEndTimeTemp);
+		
+		if (absoluteParams.size() == 0) {
+			absoluteParams = null;
+		}
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.energy +=energy;
+			this.experience += experience;
+			this.coins += coins;
+			if (recordWinLossFlee) {
+				updateWinsLossFlees(battlesWon, battlesLost, fleesChange, attacksWonDelta,
+						defensesWonDelta, attacksLostDelta, defensesLostDelta);
+			}
+			turnOnOffShield(deactivateShield, activateShield, clientTime, shieldEndTimeTemp);
+			
+			return true;
+		}
+		return false;
+	}
+	
+	private void recordWinLossFlees(Map<String, Object> relativeParams,
+			int battlesWon, int battlesLost, int fleesChange, int attacksWonDelta,
+			int defensesWonDelta, int attacksLostDelta, int defensesLostDelta) {
+		if (battlesWon != 0) {
+			relativeParams.put(DBConstants.USER__BATTLES_WON, battlesWon);
+		}
+		if (battlesLost != 0) {
+			relativeParams.put(DBConstants.USER__BATTLES_LOST, battlesLost);
+		}
+		if (fleesChange != 0) {
+			relativeParams.put(DBConstants.USER__FLEES, fleesChange);
+		}
+		if (0 != attacksWonDelta) {
+			relativeParams.put(DBConstants.USER__ATTACKS_WON, attacksWonDelta);
+		}
+		if (0 != defensesWonDelta) {
+			relativeParams.put(DBConstants.USER__DEFENSES_WON, defensesWonDelta);
+		}
+		if (0 != attacksLostDelta) {
+			relativeParams.put(DBConstants.USER__ATTACKS_WON, attacksLostDelta);
+		}
+		if (0 != defensesLostDelta) {
+			relativeParams.put(DBConstants.USER__DEFENSES_WON, defensesLostDelta);
+		}
+	}
+	
+	//returns new shield end time if shield status changes
+	private Date recordTurnOnOffShield(Map<String, Object> absoluteParams, 
+			boolean deactivateShield, Timestamp clientTime, boolean activateShield,
+			Date shieldEndTimeTemp) {
 		//3 cases:deactivate a shield, activate a shield, do nothing
 		if (deactivateShield) {
 			if (hasActiveShield ) {
@@ -1201,36 +1261,33 @@ public class User implements Serializable {
 				shieldEndTimeTemp = new Date(time);
 			}
 		}
-		
-		if (absoluteParams.size() == 0) {
-			absoluteParams = null;
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.energy +=energy;
-			this.experience += experience;
-			this.coins += coins;
-			if (recordWinLossFlee) {
-				this.battlesWon += battlesWon;
-				this.battlesLost += battlesLost;
-				this.flees += fleesChange;
+		return shieldEndTimeTemp;
+	}
+	
+	private void updateWinsLossFlees(int battlesWon, int battlesLost, int fleesChange,
+			int attacksWonDelta, int defensesWonDelta, int attacksLostDelta,
+			int defensesLostDelta) {
+		this.battlesWon += battlesWon;
+		this.battlesLost += battlesLost;
+		this.flees += fleesChange;
+		this.attacksWon += attacksWonDelta;
+		this.defensesWon += defensesWonDelta;
+		this.attacksLost += attacksLostDelta;
+		this.defensesLost += defensesLostDelta;
+	}
+	
+	private void turnOnOffShield(boolean deactivateShield, boolean activateShield,
+			Timestamp clientTime, Date shieldEndTimeTemp) {
+		if (deactivateShield) {
+			if (hasActiveShield) {
+				this.hasActiveShield = false;
 			}
-			if (deactivateShield) {
-				if (hasActiveShield) {
-					this.hasActiveShield = false;
-				}
-				if (null != shieldEndTime && (shieldEndTime.getTime() > clientTime.getTime())) {
-					this.shieldEndTime = null;
-				}
-			} else if (activateShield) {
-				this.shieldEndTime = shieldEndTimeTemp;
+			if (null != shieldEndTime && (shieldEndTime.getTime() > clientTime.getTime())) {
+				this.shieldEndTime = null;
 			}
-			
-			return true;
+		} else if (activateShield) {
+			this.shieldEndTime = shieldEndTimeTemp;
 		}
-		return false;
 	}
 
 	public boolean updateRelativeDiamondsForFree(int diamondChange, EarnFreeDiamondsType freeDiamondsType) {
@@ -2058,63 +2115,84 @@ public class User implements Serializable {
 	}
 
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", level=" + level
-				+ ", type=" + type + ", energy=" + energy
-				+ ", lastEnergyRefillTime=" + lastEnergyRefillTime
-				+ ", energyMax=" + energyMax + ", diamonds=" + diamonds
-				+ ", coins=" + coins + ", marketplaceDiamondsEarnings="
-				+ marketplaceDiamondsEarnings + ", marketplaceCoinsEarnings="
-				+ marketplaceCoinsEarnings + ", vaultBalance=" + vaultBalance
-				+ ", experience=" + experience + ", tasksCompleted="
-				+ tasksCompleted + ", battlesWon=" + battlesWon
-				+ ", battlesLost=" + battlesLost + ", flees=" + flees
-				+ ", referralCode=" + referralCode + ", numReferrals="
-				+ numReferrals + ", udid=" + udid + ", userLocation="
-				+ userLocation + ", numPostsInMarketplace="
-				+ numPostsInMarketplace + ", numMarketplaceSalesUnredeemed="
-				+ numMarketplaceSalesUnredeemed
-				+ ", weaponEquippedUserEquipId=" + weaponEquippedUserEquipId
-				+ ", armorEquippedUserEquipId=" + armorEquippedUserEquipId
-				+ ", amuletEquippedUserEquipId=" + amuletEquippedUserEquipId
-				+ ", lastLogin=" + lastLogin + ", lastLogout=" + lastLogout
-				+ ", deviceToken=" + deviceToken
-				+ ", lastBattleNotificationTime=" + lastBattleNotificationTime
-				+ ", numBadges=" + numBadges
-				+ ", lastShortLicensePurchaseTime="
-				+ lastShortLicensePurchaseTime
-				+ ", lastLongLicensePurchaseTime="
-				+ lastLongLicensePurchaseTime + ", isFake=" + isFake
-				+ ", createTime=" + createTime + ", isAdmin=" + isAdmin
-				+ ", apsalarId=" + apsalarId
-				+ ", numCoinsRetrievedFromStructs="
-				+ numCoinsRetrievedFromStructs + ", numAdColonyVideosWatched="
-				+ numAdColonyVideosWatched + ", numTimesKiipRewarded="
-				+ numTimesKiipRewarded + ", numConsecutiveDaysPlayed="
-				+ numConsecutiveDaysPlayed + ", numGroupChatsRemaining="
-				+ numGroupChatsRemaining + ", clanId=" + clanId
-				+ ", lastGoldmineRetrieval=" + lastGoldmineRetrieval
-				+ ", lastMarketplaceNotificationTime="
-				+ lastMarketplaceNotificationTime
-				+ ", lastWallPostNotificationTime="
-				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
-				+ ", hasReceivedfbReward=" + hasReceivedfbReward
-				+ ", weaponTwoEquippedUserEquipId="
-				+ weaponTwoEquippedUserEquipId
-				+ ", armorTwoEquippedUserEquipId="
-				+ armorTwoEquippedUserEquipId
-				+ ", amuletTwoEquippedUserEquipId="
-				+ amuletTwoEquippedUserEquipId + ", prestigeLevel="
-				+ prestigeLevel + ", numAdditionalForgeSlots="
-				+ numAdditionalForgeSlots + ", numBeginnerSalesPurchased="
-				+ numBeginnerSalesPurchased + ", isMentor=" + isMentor
-				+ ", hasBeginnerShield=" + hasActiveShield
-				+ ", shieldEndTime=" + shieldEndTime + ", elo=" + elo
-				+ ", rank=" + rank + ", lastTimeQueued=" + lastTimeQueued + "]";
+	public int getAttacksWon() {
+		return attacksWon;
 	}
 
+	public void setAttacksWon(int attacksWon) {
+		this.attacksWon = attacksWon;
+	}
 
+	public int getDefensesWon() {
+		return defensesWon;
+	}
+
+	public void setDefensesWon(int defensesWon) {
+		this.defensesWon = defensesWon;
+	}
+
+	public int getAttacksLost() {
+		return attacksLost;
+	}
+
+	public void setAttacksLost(int attacksLost) {
+		this.attacksLost = attacksLost;
+	}
+
+	public int getDefensesLost() {
+		return defensesLost;
+	}
+
+	public void setDefensesLost(int defensesLost) {
+		this.defensesLost = defensesLost;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", level=" + level + ", type="
+				+ type + ", energy=" + energy + ", lastEnergyRefillTime="
+				+ lastEnergyRefillTime + ", energyMax=" + energyMax + ", diamonds="
+				+ diamonds + ", coins=" + coins + ", marketplaceDiamondsEarnings="
+				+ marketplaceDiamondsEarnings + ", marketplaceCoinsEarnings="
+				+ marketplaceCoinsEarnings + ", vaultBalance=" + vaultBalance
+				+ ", experience=" + experience + ", tasksCompleted=" + tasksCompleted
+				+ ", battlesWon=" + battlesWon + ", battlesLost=" + battlesLost
+				+ ", flees=" + flees + ", referralCode=" + referralCode
+				+ ", numReferrals=" + numReferrals + ", udid=" + udid
+				+ ", userLocation=" + userLocation + ", numPostsInMarketplace="
+				+ numPostsInMarketplace + ", numMarketplaceSalesUnredeemed="
+				+ numMarketplaceSalesUnredeemed + ", weaponEquippedUserEquipId="
+				+ weaponEquippedUserEquipId + ", armorEquippedUserEquipId="
+				+ armorEquippedUserEquipId + ", amuletEquippedUserEquipId="
+				+ amuletEquippedUserEquipId + ", lastLogin=" + lastLogin
+				+ ", lastLogout=" + lastLogout + ", deviceToken=" + deviceToken
+				+ ", lastBattleNotificationTime=" + lastBattleNotificationTime
+				+ ", numBadges=" + numBadges + ", lastShortLicensePurchaseTime="
+				+ lastShortLicensePurchaseTime + ", lastLongLicensePurchaseTime="
+				+ lastLongLicensePurchaseTime + ", isFake=" + isFake + ", createTime="
+				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId=" + apsalarId
+				+ ", numCoinsRetrievedFromStructs=" + numCoinsRetrievedFromStructs
+				+ ", numAdColonyVideosWatched=" + numAdColonyVideosWatched
+				+ ", numTimesKiipRewarded=" + numTimesKiipRewarded
+				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
+				+ ", numGroupChatsRemaining=" + numGroupChatsRemaining + ", clanId="
+				+ clanId + ", lastGoldmineRetrieval=" + lastGoldmineRetrieval
+				+ ", lastMarketplaceNotificationTime="
+				+ lastMarketplaceNotificationTime + ", lastWallPostNotificationTime="
+				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
+				+ ", hasReceivedfbReward=" + hasReceivedfbReward
+				+ ", weaponTwoEquippedUserEquipId=" + weaponTwoEquippedUserEquipId
+				+ ", armorTwoEquippedUserEquipId=" + armorTwoEquippedUserEquipId
+				+ ", amuletTwoEquippedUserEquipId=" + amuletTwoEquippedUserEquipId
+				+ ", prestigeLevel=" + prestigeLevel + ", numAdditionalForgeSlots="
+				+ numAdditionalForgeSlots + ", numBeginnerSalesPurchased="
+				+ numBeginnerSalesPurchased + ", isMentor=" + isMentor
+				+ ", hasActiveShield=" + hasActiveShield + ", shieldEndTime="
+				+ shieldEndTime + ", elo=" + elo + ", rank=" + rank
+				+ ", lastTimeQueued=" + lastTimeQueued + ", attacksWon=" + attacksWon
+				+ ", defensesWon=" + defensesWon + ", attacksLost=" + attacksLost
+				+ ", defensesLost=" + defensesLost + "]";
+	}
 
 
 }

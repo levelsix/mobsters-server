@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseCityExpansionRequestEvent;
+import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.PurchaseCityExpansionResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.CityExpansionCost;
@@ -120,10 +121,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
-				writeToUserCurrencyHistory(user, timeOfPurchase, xPosition, yPosition, currencyChange, previousSilver);
+				//writeToUserCurrencyHistory(user, timeOfPurchase, xPosition, yPosition, currencyChange, previousSilver);
 			}
 		} catch (Exception e) {
 			log.error("exception in PurchaseCityExpansion processEvent", e);
+			try {
+    	  resBuilder.setStatus(PurchaseCityExpansionStatus.OTHER_FAIL);
+    	  PurchaseCityExpansionResponseEvent resEvent = new PurchaseCityExpansionResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setPurchaseCityExpansionResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+      } catch (Exception e2) {
+    	  log.error("exception2 in BeginDungeonController processEvent", e);
+      }
 		} finally {
 			server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
 		}

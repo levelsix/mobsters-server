@@ -905,6 +905,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	lastTimeQueued = new Date(ts.getTime());
     }
     
+    int attacksWon = rs.getInt(i++);
+    int defensesWon = rs.getInt(i++);
+    int attacksLost = rs.getInt(i++);
+    int defensesLost = rs.getInt(i++);
+    
     User user = new User(id, name, level, type, energy, lastEnergyRefillTime,
     		energyMax, diamonds, coins, marketplaceDiamondsEarnings,
     		marketplaceCoinsEarnings, vaultBalance, experience, tasksCompleted,
@@ -914,14 +919,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		amuletEquippedUserEquipId, lastLogin, lastLogout, deviceToken,
     		lastBattleNotificationTime, numBadges, lastShortLicensePurchaseTime,
     		lastLongLicensePurchaseTime, isFake, createTime, isAdmin, apsalarId,
-    		numCoinsRetrievedFromStructs, numAdColonyVideosWatched,
-    		numTimesKiipRewarded, numConsecutiveDaysPlayed, numGroupChatsRemaining,
-    		clanId, lastGoldmineRetrieval, lastMarketplaceNotificationTime,
+    		numCoinsRetrievedFromStructs, numAdColonyVideosWatched, numTimesKiipRewarded,
+    		numConsecutiveDaysPlayed, numGroupChatsRemaining, clanId,
+    		lastGoldmineRetrieval, lastMarketplaceNotificationTime,
     		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
     		weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId,
     		amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots,
-    		numBeginnerSalesPurchased, isMentor, hasActiveShield, shieldEndTime,
-    		elo, rank, lastTimeQueued);
+    		numBeginnerSalesPurchased, isMentor, hasActiveShield, shieldEndTime, elo,
+    		rank, lastTimeQueued, attacksWon, defensesWon, attacksLost, defensesLost);
     return user;
   }
 }

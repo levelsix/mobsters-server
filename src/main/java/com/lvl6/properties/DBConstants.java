@@ -170,6 +170,10 @@ public class DBConstants {
   public static final String USER__ELO = "elo";
   public static final String USER__RANK = "rank";
   public static final String USER__LAST_TIME_QUEUED = "last_time_queued";
+  public static final String USER__ATTACKS_WON = "attacks_won";
+  public static final String USER__DEFENSES_WON = "defenses_won";
+  public static final String USER__ATTACKS_LOST = "attacks_lost";
+  public static final String USER__DEFENSES_LOST = "defenses_lost";
   
   /*USER EQUIP TABLE*/
   public static final String USER_EQUIP__ID = GENERIC__ID;

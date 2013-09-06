@@ -14,7 +14,6 @@ import org.mortbay.log.Log;
 
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.EquipEnhancementFeeder;
 import com.lvl6.info.Location;
 import com.lvl6.info.MarketplacePost;
 import com.lvl6.info.User;
@@ -706,36 +705,39 @@ public class InsertUtils implements InsertUtil{
       Integer weaponEquipped, Integer armorEquipped,
       Integer amuletEquipped, boolean isFake, int numGroupChatsRemaining,
       boolean activateShield, Timestamp createTime,
-      Timestamp lastEnergyRefillTime, Timestamp lastStaminaRefillTime) {
+      Timestamp lastEnergyRefillTime, Timestamp lastStaminaRefillTime,
+      String rank) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.USER__UDID, udid);
     insertParams.put(DBConstants.USER__NAME, name);
-    insertParams.put(DBConstants.USER__TYPE, type.getNumber());
     insertParams.put(DBConstants.USER__LEVEL, level);
+    insertParams.put(DBConstants.USER__TYPE, type.getNumber());
     insertParams.put(DBConstants.USER__ENERGY, energy);
+    if (null != lastEnergyRefillTime) {
+    	insertParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, lastEnergyRefillTime);
+    }
     insertParams.put(DBConstants.USER__ENERGY_MAX, energy);
-    insertParams.put(DBConstants.USER__EXPERIENCE, experience);
-    insertParams.put(DBConstants.USER__COINS, coins);
     insertParams.put(DBConstants.USER__DIAMONDS, diamonds);
+    insertParams.put(DBConstants.USER__COINS, coins);
+    insertParams.put(DBConstants.USER__EXPERIENCE, experience);
     insertParams.put(DBConstants.USER__REFERRAL_CODE, newReferCode);
+    insertParams.put(DBConstants.USER__UDID, udid);
     insertParams.put(DBConstants.USER__LATITUDE, location.getLatitude());
     insertParams.put(DBConstants.USER__LONGITUDE, location.getLongitude());
+    insertParams.put(DBConstants.USER__WEAPON_EQUIPPED_USER_EQUIP_ID,
+    		weaponEquipped);
+    insertParams.put(DBConstants.USER__ARMOR_EQUIPPED_USER_EQUIP_ID,
+    		armorEquipped);
+    insertParams.put(DBConstants.USER__AMULET_EQUIPPED_USER_EQUIP_ID,
+    		amuletEquipped);
     insertParams.put(DBConstants.USER__LAST_LOGIN, createTime);
     insertParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
     insertParams.put(DBConstants.USER__IS_FAKE, isFake);
-    insertParams.put(DBConstants.USER__WEAPON_EQUIPPED_USER_EQUIP_ID,
-        weaponEquipped);
-    insertParams.put(DBConstants.USER__ARMOR_EQUIPPED_USER_EQUIP_ID,
-        armorEquipped);
-    insertParams.put(DBConstants.USER__AMULET_EQUIPPED_USER_EQUIP_ID,
-        amuletEquipped);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
     insertParams.put(DBConstants.USER__NUM_GROUP_CHATS_REMAINING, 5);
     insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
-    if (null != lastEnergyRefillTime) {
-      insertParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, lastEnergyRefillTime);
-    }
+    insertParams.put(DBConstants.USER__RANK, rank);
+    
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
     return userId;

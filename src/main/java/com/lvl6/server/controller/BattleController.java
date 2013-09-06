@@ -435,7 +435,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		if (winner == attacker) {
 			if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
 					expGained, lostCoins, 1, 0, 0, simulateEnergyRefill, battleTime, attackerDeactivateShield, false,
-					recordWinLossFlee)) {
+					recordWinLossFlee, 1, 0, 0, 0)) {
 				log.error("problem with updating info for winner/attacker " + attacker.getId() + " in battle at " 
 						+ battleTime + " vs " + loser.getId());
 			} else {//for user currency history
@@ -443,7 +443,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 			if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
 					0, (defender.isFake()) ? 0 : lostCoins * -1, 0, 1, 0, false, battleTime, defenderDeactivateShield, true,
-							recordWinLossFlee)) {
+							recordWinLossFlee, 0, 0, 0, 1)) {
 				log.error("problem with updating info for defender/loser " + defender.getId() + " in battle at " 
 						+ battleTime + " vs " + winner.getId());
 			} else { 
@@ -454,45 +454,47 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 			MiscMethods.calculateEloChangeAfterBattle(attacker, defender, true);
 		} else if (winner == defender) {
-			if (isFlee) {
-				if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
-						0, lostCoins * -1, 0, 1, 1, simulateEnergyRefill, battleTime, attackerDeactivateShield, false, 
-						recordWinLossFlee)) {
-					log.error("problem with updating info for loser/attacker/flee-er " + attacker.getId() + " in battle at " 
-							+ battleTime + " vs " + winner.getId());
-				} else {//for user currency history
-					attackerCurrencyChange.put(MiscMethods.silver, lostCoins * -1);
-				}
-				if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
-						0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, battleTime, defenderDeactivateShield,
-								false, recordWinLossFlee)) {
-					log.error("problem with updating info for winner/defender " + defender.getId() + " in battle at " 
-							+ battleTime + " vs " + loser.getId() + " who fled");
-				} else {//for user currency history
-					if (!defender.isFake()) {
-						defenderCurrencyChange.put(MiscMethods.silver, lostCoins);
-					}
-				}
-			} else {
-				if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
-						0, lostCoins * -1, 0, 1, 0, simulateEnergyRefill, battleTime, attackerDeactivateShield,
-						false, recordWinLossFlee)) {
-					log.error("problem with updating info for loser/attacker " + attacker.getId() + " in battle at " 
-							+ battleTime + " vs " + winner.getId());
-				} else {//for user currency history
-					attackerCurrencyChange.put(MiscMethods.silver, lostCoins * -1);
-				}
-				if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
-						0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, battleTime, defenderDeactivateShield,
-								false, recordWinLossFlee)) {
-					log.error("problem with updating info for winner/defender " + defender.getId() + " in battle at " 
-							+ battleTime + " vs " + loser.getId());
-				} else {//for user currency history
-					if (!defender.isFake()) {
-						defenderCurrencyChange.put(MiscMethods.silver, lostCoins);
-					}
+			//no fleeing in mobsters
+//			if (isFlee) {
+//				if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
+//						0, lostCoins * -1, 0, 1, 1, simulateEnergyRefill, battleTime, attackerDeactivateShield, false, 
+//						recordWinLossFlee, 0, 0, 0, 0)) {
+//					log.error("problem with updating info for loser/attacker/flee-er " + attacker.getId() + " in battle at " 
+//							+ battleTime + " vs " + winner.getId());
+//				} else {//for user currency history
+//					attackerCurrencyChange.put(MiscMethods.silver, lostCoins * -1);
+//				}
+//				if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
+//						0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, battleTime, defenderDeactivateShield,
+//								false, recordWinLossFlee, 0, 0, 0, 0)) {
+//					log.error("problem with updating info for winner/defender " + defender.getId() + " in battle at " 
+//							+ battleTime + " vs " + loser.getId() + " who fled");
+//				} else {//for user currency history
+//					if (!defender.isFake()) {
+//						defenderCurrencyChange.put(MiscMethods.silver, lostCoins);
+//					}
+//				}
+//			} else { }
+			//attacker lost to defender
+			if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
+					0, lostCoins * -1, 0, 1, 0, simulateEnergyRefill, battleTime, attackerDeactivateShield,
+					false, recordWinLossFlee, 0, 0, 1, 0)) {
+				log.error("problem with updating info for loser/attacker " + attacker.getId() + " in battle at " 
+						+ battleTime + " vs " + winner.getId());
+			} else {//for user currency history
+				attackerCurrencyChange.put(MiscMethods.silver, lostCoins * -1);
+			}
+			if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
+					0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, battleTime, defenderDeactivateShield,
+							false, recordWinLossFlee, 0, 1, 0, 0)) {
+				log.error("problem with updating info for winner/defender " + defender.getId() + " in battle at " 
+						+ battleTime + " vs " + loser.getId());
+			} else {//for user currency history
+				if (!defender.isFake()) {
+					defenderCurrencyChange.put(MiscMethods.silver, lostCoins);
 				}
 			}
+			
 			MiscMethods.calculateEloChangeAfterBattle(attacker, defender, false);
 		}
 

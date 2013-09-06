@@ -457,7 +457,12 @@ public class CreateInfoProtoUtils {
 		if (u.getLastTimeQueued() != null) {
 			builder.setLastTimeQueued(u.getLastTimeQueued().getTime());
 		}
-		//ADD NEW COLUMNS AFTER HERE, NOT BELOW THE IF, ELSE CASE
+		builder.setAttacksWon(u.getAttacksWon());
+		builder.setDefensesWon(u.getAttacksWon());
+		builder.setAttacksLost(u.getAttacksLost());
+		builder.setDefensesLost(u.getDefensesLost());
+		
+		//ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE
 		
 
 		if (u.isFake()) {

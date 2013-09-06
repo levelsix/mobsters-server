@@ -576,6 +576,10 @@ message FullUserProto {
 	optional int32 elo = 67;
 	optional string rank = 68;
 	optional int64 lastTimeQueued = 69; 
+	optional int32 attacksWon = 70;
+	optional int32 defensesWon = 71;
+	optional int32 attacksLost = 72;
+	optional int32 defensesLost = 73;
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this

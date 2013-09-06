@@ -185,13 +185,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       //newbie protection
       boolean activateShield = true;
+      String rank = ControllerConstants.TUTORIAL__INIT_RANK;
       
       userId = insertUtils.insertUser(udid, name, type, loc, deviceToken,
           newReferCode, ControllerConstants.USER_CREATE__START_LEVEL, 
           attack, defense, energy, stamina, playerExp, playerCoins,
           playerDiamonds, null, null, null, false,
           ControllerConstants.PURCHASE_GROUP_CHAT__NUM_CHATS_GIVEN_FOR_PACKAGE,
-          activateShield, createTime, createTime, createTime);
+          activateShield, createTime, createTime, createTime, rank);
             
       if (userId > 0) {
         server.lockPlayer(userId, this.getClass().getSimpleName());
