@@ -259,6 +259,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	private UserEquip setLostEquip(BattleResponseProto.Builder resBuilder,
 			UserEquip lostEquip, User winner, User loser, Timestamp battleTime) {
+		int durability = ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY;
 		if (!loser.isFake()) { //real, unequip and transfer
 			if (!MiscMethods.unequipUserEquipIfEquipped(loser, lostEquip)) {
 				log.error("problem with unequipping userequip" + lostEquip.getId());
@@ -270,7 +271,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 					lostEquip = null;
 				} else {
 					resBuilder.setUserEquipGained(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(
-							new UserEquip(lostEquip.getId(), winner.getId(), lostEquip.getEquipId(), lostEquip.getLevel(), 0)));
+							new UserEquip(lostEquip.getId(), winner.getId(), lostEquip.getEquipId(),
+									lostEquip.getLevel(), 0, durability)));
 					resBuilder.setEquipGained(CreateInfoProtoUtils.createFullEquipProtoFromEquip(
 							EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(lostEquip.getEquipId())));
 				}
@@ -285,7 +287,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				lostEquip = null;
 			} else {
 				resBuilder.setUserEquipGained(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(
-						new UserEquip(lostEquip.getId(), winner.getId(), lostEquip.getEquipId(), lostEquip.getLevel(), 0)));
+						new UserEquip(lostEquip.getId(), winner.getId(), lostEquip.getEquipId(),
+								lostEquip.getLevel(), 0, durability)));
 				resBuilder.setEquipGained(CreateInfoProtoUtils.createFullEquipProtoFromEquip(
 						EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(lostEquip.getEquipId())));
 			}

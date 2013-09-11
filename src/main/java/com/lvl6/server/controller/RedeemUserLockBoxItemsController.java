@@ -572,9 +572,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       BoosterItem bi = biList.get(i);
       int userEquipId = userEquipIds.get(i);
       int equipId = bi.getEquipId();
+      int durability = ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY;
       
       UserEquip ue = new UserEquip(userEquipId, userId, equipId,
-          forgeLevel, enhancementLevel);
+          forgeLevel, enhancementLevel, durability);
       FullUserEquipProto fuep = CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(ue);
       returnValue.add(fuep);
     }

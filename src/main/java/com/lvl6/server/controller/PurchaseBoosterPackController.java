@@ -742,7 +742,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       int equipId = bi.getEquipId();
       int level = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
       int enhancement = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT; 
-      UserEquip ue = new UserEquip(ueId, userId, equipId, level, enhancement);
+      int durability = ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY;
+      UserEquip ue = new UserEquip(ueId, userId, equipId, level, enhancement,
+      		durability);
       
       FullUserEquipProto fuep = CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(ue);
       protos.add(fuep);

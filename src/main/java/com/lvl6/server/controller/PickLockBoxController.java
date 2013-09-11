@@ -223,7 +223,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
             ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT, curTime,
             ControllerConstants.UER__PICK_LOCK_BOX);
         if (userEquipId > 0) {
-          return new UserEquip(userEquipId, user.getId(), lockBoxEvent.getPrizeEquipId(), 1, 0);
+          return new UserEquip(userEquipId, user.getId(), lockBoxEvent.getPrizeEquipId(),
+          		1, 0, ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY);
         }
       }
     }
