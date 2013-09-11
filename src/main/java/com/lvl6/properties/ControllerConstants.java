@@ -39,6 +39,7 @@ public class ControllerConstants {
   
   public static final int DEFAULT_USER_EQUIP_LEVEL = 1;
   public static final int DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT = 0;
+  public static final int DEFAULT_USER_EQUIP_DURABILITY = 100;
   public static final String UER__BOSS_ACTION = "boss action";
   public static final String UER__BATTLE = "battle";
   public static final String UER__COLLECT_EQUIP_ENHANCEMENT = "collect equip enhancement";

@@ -471,10 +471,20 @@ public class CreateInfoProtoUtils {
 			UserEquip weaponUserEquip = null;
 			UserEquip armorUserEquip = null;
 			UserEquip amuletUserEquip = null;
+			
+			int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL; 
+			int enhancement = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
+			int durability = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
 
-			weaponUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(), ControllerConstants.ALL_CHARACTERS_WEAPON_ID_PER_LEVEL[equipmentLevel-1], ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, 0);
-			armorUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(), ControllerConstants.ALL_CHARACTERS_ARMOR_ID_PER_LEVEL[equipmentLevel-1], ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, 0);
-			amuletUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(), ControllerConstants.ALL_CHARACTERS_EQUIP_LEVEL[equipmentLevel-1], ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, 0);
+			weaponUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(),
+					ControllerConstants.ALL_CHARACTERS_WEAPON_ID_PER_LEVEL[equipmentLevel-1],
+					forgeLevel, enhancement, durability);
+			armorUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(),
+					ControllerConstants.ALL_CHARACTERS_ARMOR_ID_PER_LEVEL[equipmentLevel-1],
+					forgeLevel, enhancement, durability);
+			amuletUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(),
+					ControllerConstants.ALL_CHARACTERS_EQUIP_LEVEL[equipmentLevel-1],
+					forgeLevel, enhancement, durability);
 			/*//rendered useless by booster pack feature
       if (u.getType() == UserType.GOOD_WARRIOR || u.getType() == UserType.BAD_WARRIOR) {
         weaponUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(), ControllerConstants.WARRIOR_WEAPON_ID_LEVEL[equipmentLevel-1], ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, 0);
@@ -564,9 +574,14 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static FullUserEquipProto createFullUserEquipProtoFromUserEquip(UserEquip ue) {
-		return FullUserEquipProto.newBuilder().setUserEquipId(ue.getId()).setUserId(ue.getUserId())
-				.setEquipId(ue.getEquipId()).setLevel(ue.getLevel()).setEnhancementPercentage(ue.getEnhancementPercentage())
-				.build();
+		FullUserEquipProto.Builder fuepb = FullUserEquipProto.newBuilder();
+		fuepb.setUserEquipId(ue.getId());
+		fuepb.setUserId(ue.getUserId());
+		fuepb.setEquipId(ue.getEquipId());
+		fuepb.setLevel(ue.getLevel());
+		fuepb.setEnhancementPercentage(ue.getEnhancementPercentage());
+		fuepb.setCurrentDurability(ue.getCurrentDurability());
+		return fuepb.build();
 	}
 
 	public static FullUserEquipProto createFullUserEquipProto(long userEquipId,
@@ -913,7 +928,7 @@ public class CreateInfoProtoUtils {
 
 	private static MinimumUserQuestTaskProto createMinimumUserQuestTaskProto(UserQuest userQuest, UserType userType, Integer requiredTaskId, boolean taskCompletedForQuest, Integer numTimesUserActed) {
 		//TODO:
-		Task task = TaskRetrieveUtils.getTaskForTaskId(requiredTaskId);
+		//Task task = TaskRetrieveUtils.getTaskForTaskId(requiredTaskId);
 		int numTimesCompleted = 1;//(taskCompletedForQuest) ? task.getNumForCompletion() : numTimesUserActed;
 		return MinimumUserQuestTaskProto.newBuilder().setUserId(userQuest.getUserId()).setTaskId(requiredTaskId).setNumTimesActed(numTimesCompleted).setQuestId(userQuest.getQuestId()).build();
 	}

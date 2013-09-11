@@ -168,7 +168,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int equipId = rs.getInt(i++);
     int level = rs.getInt(i++);
     int enhancementPercentage = rs.getInt(i++);
-    UserEquip userEquip = new UserEquip(userEquipId, userId, equipId, level, enhancementPercentage);
+//    i += 2; //skip over to current durability
+//    int currentDurability = rs.getInt(i);
+    int currentDurability = rs.getInt(DBConstants.USER_EQUIP__CURRENT_DURABILITY);
+    UserEquip userEquip = new UserEquip(userEquipId, userId, equipId, level,
+    		enhancementPercentage, currentDurability);
     return userEquip;
   }
 

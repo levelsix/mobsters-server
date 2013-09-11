@@ -183,6 +183,7 @@ public class DBConstants {
   public static final String USER_EQUIP__ENHANCEMENT_PERCENT = "enhancement_percent";
   public static final String USER_EQUIP__CREATE_TIME = "create_time";
   public static final String USER_EQUIP__REASON = "reason";
+  public static final String USER_EQUIP__CURRENT_DURABILITY = "current_durability";
   
   /*EQUIP ENHANCEMENT*/
   public static final String EQUIP_ENHANCEMENT__ID = GENERIC__ID;
