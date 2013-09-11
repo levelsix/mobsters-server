@@ -108,10 +108,11 @@ import com.lvl6.utils.DBConnection;
     Rarity rarity = Rarity.valueOf(rs.getInt(i++));
     float chanceOfForgeFailureBase = rs.getFloat(i++);
     int minutesToAttemptForgeBase = rs.getInt(i++);
+    int maxDurability = rs.getInt(i++);
     
-    Equipment equip = new Equipment(id, name, type, description,
-    		attackBoost, defenseBoost, minLevel, rarity,
-    		chanceOfForgeFailureBase, minutesToAttemptForgeBase);
+    Equipment equip = new Equipment(id, name, type, description, attackBoost,
+    		defenseBoost, minLevel, rarity, chanceOfForgeFailureBase,
+    		minutesToAttemptForgeBase, maxDurability);
 //    if (coinPriceSet && !diamondPriceSet) {
 //      equip = new Equipment(id, name, type, description, attackBoost, defenseBoost, minLevel, coinPrice, 
 //          Equipment.NOT_SET, chanceOfLoss, classType, rarity, isBuyableInArmory, chanceOfForgeFailureBase, minutesToAttemptForgeBase);

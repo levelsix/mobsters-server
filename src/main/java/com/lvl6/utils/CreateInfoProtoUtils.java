@@ -548,6 +548,7 @@ public class CreateInfoProtoUtils {
 		builder.setRarity(equip.getRarity());
 		builder.setChanceOfForgeFailureBase(equip.getChanceOfForgeFailureBase());
 		builder.setMinutesToAttemptForgeBase(equip.getMinutesToAttemptForgeBase());
+		builder.setMaxDurability(equip.getMaxDurability());
 		return builder.build();
 	}
 

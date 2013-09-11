@@ -6,8 +6,8 @@ import com.lvl6.proto.InfoProto.FullEquipProto.EquipType;
 import com.lvl6.proto.InfoProto.FullEquipProto.Rarity;
 
 public class Equipment implements Serializable {
-	private static final long serialVersionUID = -4898540395387646721L;
 
+	private static final long serialVersionUID = 8482312656470872356L;
 	private int id;
 	private String name;
 	private EquipType type;
@@ -18,10 +18,13 @@ public class Equipment implements Serializable {
 	private Rarity rarity;
 	private float chanceOfForgeFailureBase;
   private int minutesToAttemptForgeBase;
+  private int maxDurability;
+  
   
 	public Equipment(int id, String name, EquipType type, String description,
 			int attackBoost, int defenseBoost, int minLevel, Rarity rarity,
-			float chanceOfForgeFailureBase, int minutesToAttemptForgeBase) {
+			float chanceOfForgeFailureBase, int minutesToAttemptForgeBase,
+			int maxDurability) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -33,87 +36,119 @@ public class Equipment implements Serializable {
 		this.rarity = rarity;
 		this.chanceOfForgeFailureBase = chanceOfForgeFailureBase;
 		this.minutesToAttemptForgeBase = minutesToAttemptForgeBase;
+		this.maxDurability = maxDurability;
 	}
+
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	public String getName() {
 		return name;
 	}
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public EquipType getType() {
 		return type;
 	}
 
+
 	public void setType(EquipType type) {
 		this.type = type;
 	}
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 
 	public int getAttackBoost() {
 		return attackBoost;
 	}
 
+
 	public void setAttackBoost(int attackBoost) {
 		this.attackBoost = attackBoost;
 	}
+
 
 	public int getDefenseBoost() {
 		return defenseBoost;
 	}
 
+
 	public void setDefenseBoost(int defenseBoost) {
 		this.defenseBoost = defenseBoost;
 	}
+
 
 	public int getMinLevel() {
 		return minLevel;
 	}
 
+
 	public void setMinLevel(int minLevel) {
 		this.minLevel = minLevel;
 	}
+
 
 	public Rarity getRarity() {
 		return rarity;
 	}
 
+
 	public void setRarity(Rarity rarity) {
 		this.rarity = rarity;
 	}
+
 
 	public float getChanceOfForgeFailureBase() {
 		return chanceOfForgeFailureBase;
 	}
 
+
 	public void setChanceOfForgeFailureBase(float chanceOfForgeFailureBase) {
 		this.chanceOfForgeFailureBase = chanceOfForgeFailureBase;
 	}
+
 
 	public int getMinutesToAttemptForgeBase() {
 		return minutesToAttemptForgeBase;
 	}
 
+
 	public void setMinutesToAttemptForgeBase(int minutesToAttemptForgeBase) {
 		this.minutesToAttemptForgeBase = minutesToAttemptForgeBase;
 	}
+
+
+	public int getMaxDurability() {
+		return maxDurability;
+	}
+
+
+	public void setMaxDurability(int maxDurability) {
+		this.maxDurability = maxDurability;
+	}
+
 
 	@Override
 	public String toString() {
@@ -122,7 +157,7 @@ public class Equipment implements Serializable {
 				+ ", defenseBoost=" + defenseBoost + ", minLevel=" + minLevel
 				+ ", rarity=" + rarity + ", chanceOfForgeFailureBase="
 				+ chanceOfForgeFailureBase + ", minutesToAttemptForgeBase="
-				+ minutesToAttemptForgeBase + "]";
+				+ minutesToAttemptForgeBase + ", maxDurability=" + maxDurability + "]";
 	}
 
 }

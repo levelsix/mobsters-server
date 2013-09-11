@@ -549,12 +549,16 @@ public class DBConstants {
   
   /*EQUIPMENT TABLE*/
   public static final String EQUIPMENT__EQUIP_ID = GENERIC__ID;
+  public static final String EQUIPMENT__NAME = "name";
+  public static final String EQUIPMENT__TYPE = "type";
+  public static final String EQUIPMENT__DESCRIPTION = "description";
   public static final String EQUIPMENT__ATK_BOOST = "atk_boost";
   public static final String EQUIPMENT__DEF_BOOST = "def_boost";
   public static final String EQUIPMENT__MIN_LEVEL = "min_level";
-  public static final String EQUIPMENT__NAME = "name";
   public static final String EQUIPMENT__RARITY = "rarity";
-  public static final String EQUIPMENT__TYPE = "type";
+  public static final String EQUIPMENT__CHANCE_OF_FORGE_FAILUE_BASE = "chance_of_forge_failure_base";
+  public static final String EQUIPMENT__MINUTES_TO_ATTEMPT_FORGE_BASE = "minutes_to_attempt_forge_base";
+  public static final String EQUIPMENT__MAX_DURABILITY = "max_durability";
   
   /*CLAN TOWERS*/
   public static final String CLAN_TOWERS__TOWER_ID = GENERIC__ID;
