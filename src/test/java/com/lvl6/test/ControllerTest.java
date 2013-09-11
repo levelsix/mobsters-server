@@ -188,42 +188,42 @@ public class ControllerTest extends TestCase {
 
 	@Test
 	public void testStartup() {
-		String udid = "blah";
-		//log.info("\n\n\n\n\n\n\n\n\n\n\n CREATING USER");
-		createUser(udid);
-		//log.info("CREATED USER\n\n\n\n\n\n\n\n\n\n\n");
-		
-		User aUser = getUserRetrieveUtils().getUserByUDID(udid);
-		assertTrue("Expected: not null. Actual=" + aUser, null != aUser);
-		//log.info("user=" + aUser);
-		//log.info("\n\n\n\n\n\n");
-		
-		loginUser(udid);
-		
-		//TODO: MAKE CLEAN UP FUNCTIONS TO DELETE EVERYTHING THIS METHOD DID
-		int userId = aUser.getId();
-		deleteUserById(userId);
-		deleteUserLoginHistory(userId, udid);
-		deleteFirstTimeUsers(udid);
+//		String udid = "blah";
+//		//log.info("\n\n\n\n\n\n\n\n\n\n\n CREATING USER");
+//		createUser(udid);
+//		//log.info("CREATED USER\n\n\n\n\n\n\n\n\n\n\n");
+//		
+//		User aUser = getUserRetrieveUtils().getUserByUDID(udid);
+//		assertTrue("Expected: not null. Actual=" + aUser, null != aUser);
+//		//log.info("user=" + aUser);
+//		//log.info("\n\n\n\n\n\n");
+//		
+//		loginUser(udid);
+//		
+//		//TODO: MAKE CLEAN UP FUNCTIONS TO DELETE EVERYTHING THIS METHOD DID
+//		int userId = aUser.getId();
+//		deleteUserById(userId);
+//		deleteUserLoginHistory(userId, udid);
+//		deleteFirstTimeUsers(udid);
 	}
 	
 	
 	@Test
 	public void testPurchaseCityExpansion() {
-		String udid = "udid";
-		createUser(udid);
-		User aUser = getUserRetrieveUtils().getUserByUDID(udid);
-		//increase the user's coins 
-		
-		log.info("\n\n\n\n\n\n\n\n\n\n\n PURCHASING EXPANSION");
-		purchaseCityExpansion(aUser);
-		log.info("\n\n\n\n\n\n\n\n\n\n\n PURCHASED EXPANSION");
-		//TODO: MAKE CLEAN UP FUNCTIONS TO DELETE EVERYTHING THIS METHOD DID
-		int userId = aUser.getId();
-		deleteUserById(userId);
-		deleteUserLoginHistory(userId, udid);
-		deleteFirstTimeUsers(udid);
-		deleteUserCityExpansionData(userId);
+//		String udid = "udid";
+//		createUser(udid);
+//		User aUser = getUserRetrieveUtils().getUserByUDID(udid);
+//		//increase the user's coins 
+//		
+//		log.info("\n\n\n\n\n\n\n\n\n\n\n PURCHASING EXPANSION");
+//		purchaseCityExpansion(aUser);
+//		log.info("\n\n\n\n\n\n\n\n\n\n\n PURCHASED EXPANSION");
+//		//TODO: MAKE CLEAN UP FUNCTIONS TO DELETE EVERYTHING THIS METHOD DID
+//		int userId = aUser.getId();
+//		deleteUserById(userId);
+//		deleteUserLoginHistory(userId, udid);
+//		deleteFirstTimeUsers(udid);
+//		deleteUserCityExpansionData(userId);
 	}
 	
 	
