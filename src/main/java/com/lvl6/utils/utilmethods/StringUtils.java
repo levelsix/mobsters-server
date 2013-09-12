@@ -34,4 +34,17 @@ public class StringUtils {
     }
     return toreturn.substring(0, toreturn.length() - 1);
   }
+
+	public static String csvLongList(List<Long> clauses) {
+		String toreturn = "";
+    if (clauses == null || clauses.size() < 1) {
+      log.error("invalid parameters passed into StringUtils csvIntList. clauses=" + clauses);
+      return "";
+    }
+    
+    for (Object clause : clauses) {
+      toreturn += clause + ",";
+    }
+    return toreturn.substring(0, toreturn.length() - 1);
+	}
 }

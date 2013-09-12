@@ -61,8 +61,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				.getSubmitEquipEnhancementRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
-		int enhancingUserEquipId = reqProto.getEnhancingUserEquipId(); 
-		List<Integer> feederUserEquipIds = reqProto.getFeederUserEquipIdsList();
+		long enhancingUserEquipId = reqProto.getEnhancingUserEquipId(); 
+		List<Long> feederUserEquipIds = reqProto.getFeederUserEquipIdsList();
 		Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 		int userId = senderProto.getUserId();
 
@@ -140,7 +140,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	//delete all the feeder user equips; make entries in equip enhancement feeders table
 	//delete feederuserequip, write enhanceduserequip to the db
 	private boolean writeChangesToDB(Builder resBuilder, User user, UserEquip mainUserEquip,
-			List<Integer> feederUserEquipIds, List<UserEquip> feederUserEquips, Map<String, Integer> money, int enhancementPercentageAfterEnhancement) {
+			List<Long> feederUserEquipIds, List<UserEquip> feederUserEquips, Map<String, Integer> money, int enhancementPercentageAfterEnhancement) {
 
 		int silverChange = -1*costOfEnhancement(feederUserEquips);
 		int goldChange = 0;
@@ -171,7 +171,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		//delete the feeder user equips
-		List<Integer> allUserEquipIds = new ArrayList<Integer>(feederUserEquipIds);
+		List<Long> allUserEquipIds = new ArrayList<Long>(feederUserEquipIds);
 		if(!DeleteUtils.get().deleteUserEquips(allUserEquipIds)) {
 			resBuilder.setStatus(EnhanceEquipStatus.OTHER_FAIL);
 			log.error("could not delete user equips with ids: "
@@ -194,7 +194,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return returnValue;
 	}
 
-	private boolean checkEquip(Builder resBuilder, User user, int userId, UserEquip enhancingUserEquip, List<Integer> feederUserEquipIds, 
+	private boolean checkEquip(Builder resBuilder, User user, int userId, UserEquip enhancingUserEquip, List<Long> feederUserEquipIds, 
 			List<UserEquip> feederUserEquips, Map<Integer, Equipment> equipmentIdsToEquipment, Timestamp startTime) {
 		//the case where client asked for a user equip and user equip is not there.
 		if (!MiscMethods.checkClientTimeAroundApproximateNow(startTime)) {
@@ -267,7 +267,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 	private void writeIntoEquipEnhancementHistory(UserEquip equipUnderEnhancement, List<UserEquip> feederUserEquips,
 			boolean speedUp, Timestamp clientTime) {
-		int equipEnhancementId = equipUnderEnhancement.getId();
+		long equipEnhancementId = equipUnderEnhancement.getId();
 		int userId = equipUnderEnhancement.getUserId();
 		int equipId = equipUnderEnhancement.getEquipId();
 		int equipLevel = equipUnderEnhancement.getLevel();
@@ -289,11 +289,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 	}
 
-	private void writeIntoEquipEnhancementFeederHistory(int userEquipEnhancementId, 
+	private void writeIntoEquipEnhancementFeederHistory(long l, 
 			List<UserEquip> feeders) {
 		int size = feeders.size();
 		int numInserted = InsertUtils.get()
-				.insertMultipleIntoEquipEnhancementFeedersHistory(userEquipEnhancementId, feeders);
+				.insertMultipleIntoEquipEnhancementFeedersHistory(l, feeders);
 		if(size != numInserted) {
 			log.error("numInserted into feeder history table: " + numInserted + ", should have been:" + size);
 		}

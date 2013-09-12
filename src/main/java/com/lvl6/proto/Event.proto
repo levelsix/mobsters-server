@@ -1826,8 +1826,8 @@ message LogoutRequestProto {
 
 message SubmitEquipsToBlacksmithRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 userEquipOne = 2;
-	optional int32 userEquipTwo = 3;
+	optional int64 userEquipOne = 2;
+	optional int64 userEquipTwo = 3;
 	optional bool paidToGuarantee = 4;
 	optional int64 startTime = 5;
 	optional int32 forgeSlotNumber = 6;
@@ -2545,8 +2545,8 @@ message GeneralNotificationResponseProto {
 
 message SubmitEquipEnhancementRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 enhancingUserEquipId = 2;
-	repeated int32 feederUserEquipIds = 3;
+	optional int64 enhancingUserEquipId = 2;
+	repeated int64 feederUserEquipIds = 3;
 	optional int64 clientTime = 4;
 }
 
@@ -2952,3 +2952,4 @@ message ReviveInDungeonResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+

@@ -16,13 +16,11 @@ import com.lvl6.info.ClanTower;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Structure;
 import com.lvl6.info.Task;
-import com.lvl6.info.UserEquip;
 import com.lvl6.info.UserStruct;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
-import com.lvl6.proto.InfoProto.ExpansionDirection;
 import com.lvl6.proto.InfoProto.StructOrientation;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
@@ -247,7 +245,7 @@ public class UpdateUtils implements UpdateUtil {
       //@CacheEvict(value="equipsToUserEquipsForUser", key="#newOwnerId"),
       //@CacheEvict(value="userEquipsWithEquipId", key="#newOwnerId+':'+#equipId")  
   })*/
-	public boolean updateUserEquipOwner(int userEquipId, int newOwnerId, String reason) {
+	public boolean updateUserEquipOwner(long userEquipId, int newOwnerId, String reason) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
 
@@ -265,7 +263,7 @@ public class UpdateUtils implements UpdateUtil {
 
 
 	//update a user equip after enhancing
-	public boolean updateUserEquipEnhancementPercentage(int userEquipId, int newEnhancementPercentage) {
+	public boolean updateUserEquipEnhancementPercentage(long userEquipId, int newEnhancementPercentage) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
 
@@ -1338,5 +1336,5 @@ public class UpdateUtils implements UpdateUtil {
 
 		return numUpdated;
 	}
-
+	
 }

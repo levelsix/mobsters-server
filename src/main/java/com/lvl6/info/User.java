@@ -44,9 +44,9 @@ public class User implements Serializable {
 	private Location userLocation;
 	private int numPostsInMarketplace;
 	private int numMarketplaceSalesUnredeemed;
-	private int weaponEquippedUserEquipId;
-	private int armorEquippedUserEquipId;
-	private int amuletEquippedUserEquipId;
+	private long weaponEquippedUserEquipId;
+	private long armorEquippedUserEquipId;
+	private long amuletEquippedUserEquipId;
 	private Date lastLogin;
 	private Date lastLogout;
 	private String deviceToken;
@@ -69,9 +69,9 @@ public class User implements Serializable {
 	private Date lastWallPostNotificationTime;
 	private int kabamNaid;
 	private boolean hasReceivedfbReward;
-	private int weaponTwoEquippedUserEquipId;
-	private int armorTwoEquippedUserEquipId;
-	private int amuletTwoEquippedUserEquipId;
+	private long weaponTwoEquippedUserEquipId;
+	private long armorTwoEquippedUserEquipId;
+	private long amuletTwoEquippedUserEquipId;
 	private int prestigeLevel;
 	private int numAdditionalForgeSlots;
 	private int numBeginnerSalesPurchased;
@@ -199,7 +199,7 @@ public class User implements Serializable {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
-		int userEquipId = ue.getId();
+		long userEquipId = ue.getId();
 		Equipment equipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(ue.getEquipId());
 
 		EquipType et = equipment.getType();
@@ -1744,32 +1744,32 @@ public class User implements Serializable {
 	}
 
 
-	public int getWeaponEquippedUserEquipId() {
+	public long getWeaponEquippedUserEquipId() {
 		return weaponEquippedUserEquipId;
 	}
 
 
-	public void setWeaponEquippedUserEquipId(int weaponEquippedUserEquipId) {
+	public void setWeaponEquippedUserEquipId(long weaponEquippedUserEquipId) {
 		this.weaponEquippedUserEquipId = weaponEquippedUserEquipId;
 	}
 
 
-	public int getArmorEquippedUserEquipId() {
+	public long getArmorEquippedUserEquipId() {
 		return armorEquippedUserEquipId;
 	}
 
 
-	public void setArmorEquippedUserEquipId(int armorEquippedUserEquipId) {
+	public void setArmorEquippedUserEquipId(long armorEquippedUserEquipId) {
 		this.armorEquippedUserEquipId = armorEquippedUserEquipId;
 	}
 
 
-	public int getAmuletEquippedUserEquipId() {
+	public long getAmuletEquippedUserEquipId() {
 		return amuletEquippedUserEquipId;
 	}
 
 
-	public void setAmuletEquippedUserEquipId(int amuletEquippedUserEquipId) {
+	public void setAmuletEquippedUserEquipId(long amuletEquippedUserEquipId) {
 		this.amuletEquippedUserEquipId = amuletEquippedUserEquipId;
 	}
 
@@ -1995,7 +1995,7 @@ public class User implements Serializable {
 	}
 
 
-	public int getWeaponTwoEquippedUserEquipId() {
+	public long getWeaponTwoEquippedUserEquipId() {
 		return weaponTwoEquippedUserEquipId;
 	}
 
@@ -2005,17 +2005,17 @@ public class User implements Serializable {
 	}
 
 
-	public int getArmorTwoEquippedUserEquipId() {
+	public long getArmorTwoEquippedUserEquipId() {
 		return armorTwoEquippedUserEquipId;
 	}
 
 
-	public void setArmorTwoEquippedUserEquipId(int armorTwoEquippedUserEquipId) {
+	public void setArmorTwoEquippedUserEquipId(long armorTwoEquippedUserEquipId) {
 		this.armorTwoEquippedUserEquipId = armorTwoEquippedUserEquipId;
 	}
 
 
-	public int getAmuletTwoEquippedUserEquipId() {
+	public long getAmuletTwoEquippedUserEquipId() {
 		return amuletTwoEquippedUserEquipId;
 	}
 

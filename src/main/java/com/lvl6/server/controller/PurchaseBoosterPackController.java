@@ -124,7 +124,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       //values to send to client
       List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
       Map<Integer, Integer> newBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
-      List<Integer> userEquipIds = new ArrayList<Integer>();
+      List<Long> userEquipIds = new ArrayList<Long>();
       
       List<Boolean> collectedBeforeReset = new ArrayList<Boolean>();
       
@@ -592,12 +592,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       Map<Integer, Integer> boosterItemIdsToNumCollected,
       Map<Integer, Integer> newBoosterItemIdsToNumCollected,
       List<BoosterItem> itemsUserReceives, List<Boolean> collectedBeforeReset,
-      Map<String, Integer> goldSilverChange, List<Integer> uEquipIds,
+      Map<String, Integer> goldSilverChange, List<Long> uEquipIds,
       boolean resetOccurred, Timestamp nowTimestamp) {
     //insert into user_equips, update user, update user_booster_items
     int userId = user.getId();
     String reason = ControllerConstants.UER__PURCHASE_BOOSTER_PACK;
-    List<Integer> userEquipIds = MiscMethods.insertNewUserEquips(userId,
+    List<Long> userEquipIds = MiscMethods.insertNewUserEquips(userId,
         itemsUserReceives, nowTimestamp, reason);
     if (null == userEquipIds || userEquipIds.isEmpty() 
         || userEquipIds.size() != itemsUserReceives.size()) {
@@ -732,12 +732,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
   }*/
   
-  private List<FullUserEquipProto> createFullUserEquipProtos(List<Integer> userEquipIds, 
+  private List<FullUserEquipProto> createFullUserEquipProtos(List<Long> userEquipIds, 
       int userId, List<BoosterItem> boosterItems) {
     List<FullUserEquipProto> protos = new ArrayList<FullUserEquipProto>();
     
     for(int i = 0; i < boosterItems.size(); i++) {
-      int ueId = userEquipIds.get(i);
+      long ueId = userEquipIds.get(i);
       BoosterItem bi = boosterItems.get(i);
       int equipId = bi.getEquipId();
       int level = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;

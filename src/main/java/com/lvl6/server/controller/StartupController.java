@@ -1047,7 +1047,7 @@ public class StartupController extends EventController {
       Map<Integer, Integer> newBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
       List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
       List<Boolean> collectedBeforeReset = new ArrayList<Boolean>();
-      List<Integer> userEquipIds = new ArrayList<Integer>();
+      List<Long> userEquipIds = new ArrayList<Long>();
 
       // actually selecting equips
       boolean resetOccurred = MiscMethods.getAllBoosterItemsForUser(boosterItemIdsToBoosterItems,
@@ -1085,9 +1085,9 @@ public class StartupController extends EventController {
   private boolean writeBoosterStuffToDB(User aUser, Map<Integer, Integer> boosterItemIdsToNumCollected,
       Map<Integer, Integer> newBoosterItemIdsToNumCollected, List<BoosterItem> itemsUserReceives,
       List<Boolean> collectedBeforeReset, boolean resetOccurred, Timestamp now,
-      List<Integer> userEquipIdsForHistoryTable) {
+      List<Long> userEquipIdsForHistoryTable) {
     int userId = aUser.getId();
-    List<Integer> userEquipIds = MiscMethods.insertNewUserEquips(userId,
+    List<Long> userEquipIds = MiscMethods.insertNewUserEquips(userId,
         itemsUserReceives, now, ControllerConstants.UER__DAILY_BONUS_REWARD);
     if (null == userEquipIds || userEquipIds.isEmpty() || userEquipIds.size() != itemsUserReceives.size()) {
       log.error("unexpected error: failed to insert equip for user. boosteritems="

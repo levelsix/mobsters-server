@@ -277,7 +277,7 @@ public class MiscMethods {
 //  }
 
   public static boolean unequipUserEquipIfEquipped(User user, UserEquip userEquip) {
-    int userEquipId = userEquip.getId();
+    long userEquipId = userEquip.getId();
     boolean isWeaponOne = user.getWeaponEquippedUserEquipId() == userEquipId;
     boolean isArmorOne = user.getArmorEquippedUserEquipId() == userEquipId; 
     boolean isAmuletOne = user.getAmuletEquippedUserEquipId() == userEquipId;
@@ -1595,7 +1595,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   
   public static void writeToUserBoosterPackHistoryOneUser(int userId, int packId,
       int numBought, Timestamp nowTimestamp, List<BoosterItem> itemsUserReceives,
-      boolean excludeFromLimitCheck, List<Integer> userEquipIds) {
+      boolean excludeFromLimitCheck, List<Long> userEquipIds) {
     List<Integer> equipIds = new ArrayList<Integer>();
     List<Integer> raritiesCollected = getRaritiesCollected(itemsUserReceives, equipIds);
     int rarityOne = raritiesCollected.get(0);
@@ -1935,7 +1935,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     return itemsUserReceives;
   }
   /*cut out from purchase booster pack controller*/
-  public static List<Integer> insertNewUserEquips(int userId,
+  public static List<Long> insertNewUserEquips(int userId,
       List<BoosterItem> itemsUserReceives, Timestamp now, String reason) {
     int amount = itemsUserReceives.size();
     int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
@@ -2019,8 +2019,8 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     }
   }
   
-  public static Set<Integer> getEquippedEquips(User aUser) {
-    Set<Integer> equippedUserEquipIds = new HashSet<Integer>();
+  public static Set<Long> getEquippedEquips(User aUser) {
+    Set<Long> equippedUserEquipIds = new HashSet<Long>();
     equippedUserEquipIds.add(aUser.getAmuletEquippedUserEquipId());
     equippedUserEquipIds.add(aUser.getAmuletTwoEquippedUserEquipId());
     equippedUserEquipIds.add(aUser.getArmorEquippedUserEquipId());

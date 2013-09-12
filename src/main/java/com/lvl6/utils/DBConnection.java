@@ -131,6 +131,10 @@ public class DBConnection {
 	public ResultSet selectRowsById(Connection conn, int id, String tablename) {
 		return selectRowsByIntAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
 	}
+	
+	public ResultSet selectRowsByLongId(Connection conn, long id, String tablename) {
+		return selectRowsByLongAttr(conn, null, DBConstants.GENERIC__ID, id, tablename);
+	}
 
 	public ResultSet selectWholeTable(Connection conn, String tablename) {
 		return selectRows(conn, null, null, null, null, null, tablename, null, null, false,
@@ -572,6 +576,23 @@ public class DBConnection {
 		}
 		return null;
 	}
+	
+	public List<Long> insertIntoTableBasicReturnLongIds(String tableName, List<Map<String, Object>> newRows) {
+		List<String> questions = new LinkedList<String>();
+		List<String> columns = new LinkedList<String>();
+		List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
+
+		populateQuestionsColumnsValuesListCollection(questions, columns, valuesListCollection, newRows);
+
+		if (0 <= columns.size()) {
+			boolean isInsert = true;
+			int numberOfQuestionLists = valuesListCollection.size();
+			String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName, columns, questions,
+					numberOfQuestionLists, isInsert);
+			return queryDBAndReturnAutoIncLongIds(query, valuesListCollection);
+		}
+		return null;
+	}
 
 	private void populateColumnsAndQuestions(List<String> columns, List<String> questions,
 			Map<String, Object> newRow) {
@@ -658,6 +679,27 @@ public class DBConnection {
 		return generatedKeys;
 	}
 
+	private List<Long> queryDBAndReturnAutoIncLongIds(String query, List<List<Object>> valuesListCollection) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		List<Long> generatedKeys = new ArrayList<Long>();
+		try {
+			conn = dataSource.getConnection();
+			stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			setValuesInPreparedStatement(stmt, valuesListCollection);
+			executeStmtReturnAutoIncLongIds(stmt, generatedKeys);
+
+		} catch (SQLException e) {
+			log.error("problem with " + query + ", values are " + valuesListCollection, e);
+			e.printStackTrace();
+		} catch (Exception e) {
+			log.error("DID NOT MODIFY DB", e);
+		} finally {
+			close(null, stmt, conn);
+		}
+		return generatedKeys;
+	}
+	
 	private void setValuesInPreparedStatement(PreparedStatement stmt, List<List<Object>> valuesListCollection)
 			throws Exception {
 		int i = 1;
@@ -680,6 +722,17 @@ public class DBConnection {
 			ResultSet rs = stmt.getGeneratedKeys();
 			while (rs.next()) {
 				generatedKeys.add(rs.getInt(1));
+			}
+		}
+	}
+	
+	private void executeStmtReturnAutoIncLongIds(PreparedStatement stmt, List<Long> generatedKeys)
+			throws SQLException {
+		int numUpdated = stmt.executeUpdate();
+		if (numUpdated > 0) {
+			ResultSet rs = stmt.getGeneratedKeys();
+			while (rs.next()) {
+				generatedKeys.add(rs.getLong(1));
 			}
 		}
 	}
@@ -929,6 +982,30 @@ public class DBConnection {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setInt(1, value);
+			rs = stmt.executeQuery();
+		} catch (SQLException e) {
+			log.error("problem with " + query + ", int is " + value, e);
+		} catch (NullPointerException e) {
+			log.error("problem with " + query, e);
+		}
+		return rs;
+	}
+	
+	//works with longs instead of int, like above
+	private ResultSet selectRowsByLongAttr(Connection conn, List<String> columns, String attr, long value,
+			String tablename) {
+		String query = "select ";
+		if (columns != null) {
+			query += StringUtils.getListInString(columns, ",");
+		} else {
+			query += "* ";
+		}
+		query += " from " + tablename + " where " + attr + "=?";
+
+		ResultSet rs = null;
+		try {
+			PreparedStatement stmt = conn.prepareStatement(query);
+			stmt.setLong(1, value);
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", int is " + value, e);

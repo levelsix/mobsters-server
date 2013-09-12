@@ -207,7 +207,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int numEquipsUserShouldHave = sumUpMapValues(boosterPackIdsToQuantities);
     
     //"buy" booster packs
-    List<Integer> userEquipIds = new ArrayList<Integer>();
+    List<Long> userEquipIds = new ArrayList<Long>();
     List<FullUserEquipProto> userEquipList = purchaseBoosterPacks(user,
         boosterPackIdsToQuantities, userEquipIds);
     
@@ -352,7 +352,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   //return list of full user equip protos and populate userEquipIds
   private List<FullUserEquipProto> purchaseBoosterPacks(User u,
-      Map<Integer, Integer> boosterPackIdsToQuantities, List<Integer> userEquipIds) {
+      Map<Integer, Integer> boosterPackIdsToQuantities, List<Long> userEquipIds) {
     
     List<FullUserEquipProto> returnValue = new ArrayList<FullUserEquipProto>();
     Timestamp now = new Timestamp((new Date()).getTime());
@@ -462,7 +462,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private void recordPurchases(int userId, Timestamp now,
       Map<Integer, List<BoosterItem>> packIdToItemsUserReceives,
       Map<Integer, Integer> boosterPackIdsToQuantities,
-      List<Integer> userEquipIds) {
+      List<Long> userEquipIds) {
     //this one won't count towards the daily limit
     boolean excludeFromLimitCheck = true;
 
@@ -537,11 +537,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private boolean writeBoosterStuffToDB(User aUser, Map<Integer, Integer> boosterItemIdsToNumCollected,
       Map<Integer, Integer> newBoosterItemIdsToNumCollected, List<BoosterItem> itemsUserReceives,
-      List<Boolean> collectedBeforeReset, boolean resetOccurred, List<Integer> newUserEquipIds,
+      List<Boolean> collectedBeforeReset, boolean resetOccurred, List<Long> newUserEquipIds,
       Timestamp now) {
     int userId = aUser.getId();
     String reason = ControllerConstants.UER__REDEEM_USER_LOCK_BOX_ITEMS;
-    List<Integer> userEquipIds = MiscMethods.insertNewUserEquips(userId, itemsUserReceives,
+    List<Long> userEquipIds = MiscMethods.insertNewUserEquips(userId, itemsUserReceives,
         now, reason);
     if (null == userEquipIds || userEquipIds.isEmpty() || userEquipIds.size() != itemsUserReceives.size()) {
       log.error("unexpected error: failed to insert equip for user. boosteritems="
@@ -563,14 +563,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private List<FullUserEquipProto> constructFullUserEquipProtos(int userId, 
-      List<BoosterItem> biList, List<Integer> userEquipIds) {
+      List<BoosterItem> biList, List<Long> userEquipIds) {
     List<FullUserEquipProto> returnValue = new ArrayList<FullUserEquipProto>();
     
     int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
     int enhancementLevel = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
     for (int i = 0; i < biList.size(); i++) {
       BoosterItem bi = biList.get(i);
-      int userEquipId = userEquipIds.get(i);
+      long userEquipId = userEquipIds.get(i);
       int equipId = bi.getEquipId();
       int durability = ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY;
       

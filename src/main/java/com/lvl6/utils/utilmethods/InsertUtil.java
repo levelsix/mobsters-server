@@ -45,7 +45,7 @@ public interface InsertUtil {
 	public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
 			int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement);
 
-	public abstract int insertIntoEquipEnhancementHistory(int equipEnhancementId, int userId, int equipId, 
+	public abstract int insertIntoEquipEnhancementHistory(long equipEnhancementId, int userId, int equipId, 
 			int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
 			Timestamp startTimeOfEnhancement);
 
@@ -54,7 +54,7 @@ public interface InsertUtil {
 	public abstract int insertIntoEquipEnhancementFeedersHistory(int id, int equipEnhancementId,
 			int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement);
 
-	public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(int userEquipEnhancementId, List<UserEquip> feeders);
+	public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(long l, List<UserEquip> feeders);
 
 	/*
 	 * (non-Javadoc)
@@ -154,7 +154,7 @@ public interface InsertUtil {
 	public abstract int insertClanChatPost(int userId, int clanId, String content,
 			Timestamp timeOfPost);
 
-	public abstract List<Integer> insertUserEquips(int userId, List<Integer> equipIds,
+	public abstract List<Long> insertUserEquips(int userId, List<Integer> equipIds,
 			List<Integer> levels, List<Integer> enhancement, Timestamp now, String reason);
 
 	public abstract int insertIntoBossRewardDropHistoryReturnId(int bossId, int userId, int silverDropped, int goldDropped, Timestamp timeOfDrop);
@@ -180,7 +180,7 @@ public interface InsertUtil {
 
 	public abstract int insertIntoUserBoosterPackHistory(int userId, int boosterPackId, int numBought, Timestamp timeOfPurchase,
 			int rarityOneQuantity, int rarityTwoQuantity, int rarityThreeQuantity, boolean excludeFromLimitCheck, List<Integer> equipIds,
-			List<Integer> userEquipIds);
+			List<Long> userEquipIds);
 
 	public abstract int insertIntoUserDailyRewardHistory(int userId, int currencyRewarded, boolean isCoins, int boosterPackId, 
 			int equipIdRewarded, int nthConsecutiveDay, Date dateAwarded);

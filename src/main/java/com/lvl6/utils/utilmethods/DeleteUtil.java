@@ -23,9 +23,9 @@ public interface DeleteUtil {
 			//@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
 	public abstract boolean deleteUserStruct(int userStructId);
 	
-  public abstract boolean deleteUserEquip(int userEquipId);
+  public abstract boolean deleteUserEquip(long l);
   
-  public abstract boolean deleteUserEquips(List<Integer> userEquipIds);
+  public abstract boolean deleteUserEquips(List<Long> userEquipIds);
   
   public abstract boolean deleteUserClanDataRelatedToClanId(int clanId, int numRowsToDelete);
 

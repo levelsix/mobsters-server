@@ -49,17 +49,17 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
 
   ////@Cacheable(value="specificUserEquip", key="#userEquipId")
-  public UserEquip getSpecificUserEquip(int userEquipId) {
+  public UserEquip getSpecificUserEquip(long userEquipId) {
     log.debug("retrieving user equip for userEquipId: " + userEquipId);
 
     Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsById(conn, userEquipId, TABLE_NAME);
+    ResultSet rs = DBConnection.get().selectRowsByLongId(conn, userEquipId, TABLE_NAME);
     UserEquip userEquip = convertRSSingleToUserEquips(rs);
     DBConnection.get().close(rs, null, conn);
     return userEquip;
   }
 
-  public List<UserEquip> getSpecificUserEquips(List<Integer> userEquipIds) {
+  public List<UserEquip> getSpecificUserEquips(List<Long> userEquipIds) {
     log.debug("retrieving user equip for userEquipIds: " + userEquipIds);
 
     if (userEquipIds == null || userEquipIds.size() <= 0 ) {
@@ -69,7 +69,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String query = "select * from " + TABLE_NAME + " where (";
     List<String> condClauses = new ArrayList<String>();
     List <Object> values = new ArrayList<Object>();
-    for (Integer userEquipId : userEquipIds) {
+    for (Long userEquipId : userEquipIds) {
       condClauses.add(DBConstants.USER_EQUIP__ID + "=?");
       values.add(userEquipId);
     }

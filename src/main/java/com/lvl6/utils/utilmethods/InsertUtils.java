@@ -178,7 +178,7 @@ public class InsertUtils implements InsertUtil{
     return equipEnhancementId;
   }
   
-  public int insertIntoEquipEnhancementHistory(int equipEnhancementId, int userId, int equipId, 
+  public int insertIntoEquipEnhancementHistory(long equipEnhancementId, int userId, int equipId, 
       int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
       Timestamp startTimeOfEnhancement) {
 
@@ -240,7 +240,7 @@ public class InsertUtils implements InsertUtil{
     return numInserted;
   }
   
-  public int insertMultipleIntoEquipEnhancementFeedersHistory(int userEquipEnhancementId, List<UserEquip> feeders) {
+  public int insertMultipleIntoEquipEnhancementFeedersHistory(long userEquipEnhancementId, List<UserEquip> feeders) {
     String tablename = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY;
     int amount = feeders.size();
     List<Object> equipEnhancementFeedersIds = new ArrayList<Object>(amount);
@@ -268,7 +268,7 @@ public class InsertUtils implements InsertUtil{
     return numInserted;
   }
   
-  public List<Integer> insertUserEquips(int userId, List<Integer> equipIds, List<Integer> levels,
+  public List<Long> insertUserEquips(int userId, List<Integer> equipIds, List<Integer> levels,
       List<Integer> enhancement, Timestamp now, String reason) {
 	  String tableName = DBConstants.TABLE_USER_EQUIP;
 	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
@@ -287,7 +287,7 @@ public class InsertUtils implements InsertUtil{
 		  row.put(DBConstants.USER_EQUIP__REASON, reason);
 		  newRows.add(row);
 	  }
-	  List<Integer> userEquipIds = DBConnection.get().insertIntoTableBasicReturnIds(tableName, newRows);
+	  List<Long> userEquipIds = DBConnection.get().insertIntoTableBasicReturnLongIds(tableName, newRows);
 	  Log.info("userEquipIds= " + userEquipIds);
 	  return userEquipIds;
   }
@@ -1091,7 +1091,7 @@ public class InsertUtils implements InsertUtil{
   public int insertIntoUserBoosterPackHistory(int userId, int boosterPackId, 
       int numBought, Timestamp timeOfPurchase, int rarityOneQuantity, 
       int rarityTwoQuantity, int rarityThreeQuantity, boolean excludeFromLimitCheck,
-      List<Integer> equipIds, List<Integer> userEquipIds) {
+      List<Integer> equipIds, List<Long> userEquipIds) {
     String tableName = DBConstants.TABLE_USER_BOOSTER_PACK_HISTORY;
     
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -1110,7 +1110,7 @@ public class InsertUtils implements InsertUtil{
       insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__EQUIP_IDS, ids);
     }
     if (null != userEquipIds && !userEquipIds.isEmpty()) {
-      String ids = StringUtils.csvIntList(userEquipIds);
+      String ids = StringUtils.csvLongList(userEquipIds);
       insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__USER_EQUIP_IDS, ids);
     }
     
@@ -1300,5 +1300,5 @@ public class InsertUtils implements InsertUtil{
 			  DBConstants.TABLE_USER_TASK_HISTORY, insertParams);
 	  return numInserted; 
   }
-  
+
 }

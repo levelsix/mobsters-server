@@ -58,8 +58,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     SubmitEquipsToBlacksmithRequestProto reqProto = ((SubmitEquipsToBlacksmithRequestEvent)event).getSubmitEquipsToBlacksmithRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
-    int userEquipOne = reqProto.getUserEquipOne();
-    int userEquipTwo = reqProto.getUserEquipTwo();
+    long userEquipOne = reqProto.getUserEquipOne();
+    long userEquipTwo = reqProto.getUserEquipTwo();
     boolean paidToGuarantee = reqProto.getPaidToGuarantee();
     Timestamp startTime = new Timestamp(reqProto.getStartTime());
     int forgeSlotNumber = reqProto.getForgeSlotNumber();
@@ -72,7 +72,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       int previousGold = 0;
-      List<Integer> userEquipIds = new ArrayList<Integer>();
+      List<Long> userEquipIds = new ArrayList<Long>();
       userEquipIds.add(userEquipOne);
       userEquipIds.add(userEquipTwo);
       List<UserEquip> userEquips = RetrieveUtils.userEquipRetrieveUtils().getSpecificUserEquips(userEquipIds);

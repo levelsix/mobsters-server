@@ -191,12 +191,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  String reason = ControllerConstants.UER__TASK_ACTION;
 
 	  //give user the equips
-	  List<Integer> userEquipIds = InsertUtils.get().insertUserEquips(uId,
+	  List<Long> userEquipIds = InsertUtils.get().insertUserEquips(uId,
 			  equipIds, levels, enhancement, now, reason);
 	  
 	  //construct the protos, now that the userEquipIds are known
 	  for (int i = 0; i < equipIds.size(); i++) {
-		  int userEquipId = userEquipIds.get(i);
+		  long userEquipId = userEquipIds.get(i);
 		  int equipId = equipIds.get(i);
 		  
 		  FullUserEquipProto fuep = CreateInfoProtoUtils.createFullUserEquipProto(

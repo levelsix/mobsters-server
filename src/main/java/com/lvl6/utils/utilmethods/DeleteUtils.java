@@ -33,7 +33,7 @@ public class DeleteUtils implements DeleteUtil {
 
   
   ////@CacheEvict(value ="specificUserEquip", key="#userEquipId")
-  public boolean deleteUserEquip(int userEquipId) {
+  public boolean deleteUserEquip(long userEquipId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
 
@@ -44,10 +44,10 @@ public class DeleteUtils implements DeleteUtil {
     return false;
   }
   
-  public boolean deleteUserEquips(List<Integer> userEquipIds) {
+  public boolean deleteUserEquips(List<Long> userEquipIds) {
     String tableName = DBConstants.TABLE_USER_EQUIP;
     List<String> questions = new ArrayList<String>();
-    for(int userEquipId : userEquipIds) {
+    for(long userEquipId : userEquipIds) {
       questions.add("?");
     }
     

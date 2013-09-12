@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class UserEquip implements Serializable {
 
 	private static final long serialVersionUID = -615566509185375627L;
-	private int id;
+	private long id;
 	private int userId;
 	private int equipId;
 	private int level;
   private int enhancementPercentage;
   private int currentDurability;
 
-  public UserEquip(int id, int userId, int equipId, int level,
+  public UserEquip(long id, int userId, int equipId, int level,
 			int enhancementPercentage, int currentDurability) {
 		super();
 		this.id = id;
@@ -23,9 +23,16 @@ public class UserEquip implements Serializable {
 		this.currentDurability = currentDurability;
 	}
 
-	public int getId() {
+
+	public long getId() {
 		return id;
 	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 
 	public void setId(int id) {
 		this.id = id;
