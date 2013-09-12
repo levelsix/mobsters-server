@@ -1337,4 +1337,41 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 	
+	public int updateUserEquipsDurability(List<Long> userEquipIds,
+			List<Integer> currentDurability,
+			Map<Long, Integer> userEquipIdsToDurabilities) {
+		Map<String, Object> relativeParams = null;
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		
+		if (null != userEquipIdsToDurabilities && !userEquipIdsToDurabilities.isEmpty()) {
+			for (long userEquipId : userEquipIdsToDurabilities.keySet()) {
+				int durability = userEquipIdsToDurabilities.get(userEquipId);
+				
+				conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
+				absoluteParams.put(DBConstants.USER_EQUIP__CURRENT_DURABILITY, durability);
+			}
+		} else {
+
+			for(int i = 0; i < userEquipIds.size(); i++) {
+				long userEquipId = userEquipIds.get(i);
+				int durability = currentDurability.get(i);
+
+				conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
+				absoluteParams.put(DBConstants.USER_EQUIP__CURRENT_DURABILITY, durability);
+			}
+		}
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_EQUIP,
+				relativeParams, absoluteParams, conditionParams, "AND");
+
+//		log.info("num userEquips updated: " + numUpdated 
+//				+ ". userEquipIds: " + userEquipIds);
+//		if (numUpdated == userEquipIds.size()*2) {
+//			return true;
+//		}
+//		return false;
+		return numUpdated;
+	}
+
 }

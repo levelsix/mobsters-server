@@ -2953,3 +2953,22 @@ message ReviveInDungeonResponseProto {
 	}
 }
 
+//mainly used during battle
+message UpdateEquipDurabilityRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated FullUserEquipProto fueps = 2; //contains new durabilities 
+	optional int64 clientTime = 3; //history, tracking purposes
+}
+
+message UpdateEquipDurabilityResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated FullUserEquipProto fueps = 2;
+	optional UpdateEquipDurabilityStatus status = 3;
+	
+	enum UpdateEquipDurabilityStatus {
+		SUCCESS = 0;
+		FAIL_INSUFFICIENT_FUNDS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
