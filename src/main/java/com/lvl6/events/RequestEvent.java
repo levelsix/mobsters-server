@@ -27,5 +27,9 @@ public abstract class RequestEvent extends GameEvent{
 	public void setTag(int tag) {
 		this.tag = tag;
 	}
+	
+	public String contents() {
+		return "";
+	}
 
 }// GameEvent

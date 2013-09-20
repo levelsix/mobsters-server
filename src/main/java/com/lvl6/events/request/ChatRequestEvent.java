@@ -31,5 +31,10 @@ public class ChatRequestEvent extends RequestEvent{
   public ChatRequestProto getChatRequestProto() {
     return chatRequestProto;
   }
+  
+  @Override
+  public String contents() {
+  	return chatRequestProto.toString();
+  }
     
 }// ChatEvent

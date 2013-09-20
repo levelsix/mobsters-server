@@ -44,6 +44,8 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     ChatRequestProto reqProto = ((ChatRequestEvent)event).getChatRequestProto();
+    log.info("reqProto=" + event.contents());
+    
     
     MinimumUserProto senderProto = reqProto.getSender();
     String message = reqProto.getMessage();
