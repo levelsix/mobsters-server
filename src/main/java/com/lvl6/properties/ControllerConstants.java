@@ -193,7 +193,8 @@ public class ControllerConstants {
   public static final String TUTORIAL__FAKE_QUEST_GOOD_DONE_RESPONSE = "Simply amazing! Your battle prowess makes our village seem safer already. ";
   public static final String TUTORIAL__FAKE_QUEST_BAD_DONE_RESPONSE = "Excellent work soldier. Good to know I have a competent ally watching my back.";
   public static final int TUTORIAL__FIRST_TASK_ID = 1;
-  public static final int TUTORIAL__FAKE_QUEST_TASK_ID = 168;
+  //in development select any task, doesn't matter for now
+  public static final int TUTORIAL__FAKE_QUEST_TASK_ID = Globals.IS_SANDBOX() ? 1 : 168;
   public static final int TUTORIAL__FAKE_QUEST_ASSET_NUM_WITHIN_CITY = 0;
   public static final int TUTORIAL__FAKE_QUEST_COINS_GAINED = 8;
   public static final int TUTORIAL__FAKE_QUEST_EXP_GAINED = 4;
