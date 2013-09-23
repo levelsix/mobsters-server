@@ -45,11 +45,15 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     ChatRequestProto reqProto = ((ChatRequestEvent)event).getChatRequestProto();
     log.info("reqProto=" + event.contents());
-    
+    log.info("reqProto2=" + reqProto);
     
     MinimumUserProto senderProto = reqProto.getSender();
     String message = reqProto.getMessage();
     ChatResponseProto resProto = ChatResponseProto.newBuilder().setMessage(message).setSender(senderProto).build();
+    log.info("senderProto=" + senderProto);
+    log.info("message=" + message);
+    log.info("event.getTag()=" + event.getTag());
+    log.info("recipients=" + reqProto.getRecipientsList());
     
     ChatResponseEvent resEvent = new ChatResponseEvent();
     resEvent.setTag(event.getTag());
