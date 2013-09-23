@@ -28,6 +28,7 @@ import com.lvl6.utils.DBConnection;
     if (levelsToRequiredExperienceForLevels == null) {
       setStaticLevelsToRequiredExperienceForLevels();
     }
+    log.info("levels required experience for levels. \t" + levelsToRequiredExperienceForLevels);
     return levelsToRequiredExperienceForLevels;
   }
 
