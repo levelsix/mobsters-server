@@ -742,7 +742,7 @@ message UserCityExpansionDataProto {
 //------------------------------------------------------------------------------------------
 
 message CityExpansionCostProto {
-	optional int32 id = 1;
+	optional int32 expansionNum = 1; //first, second,...or nth expansion
 	optional int32 expansionCost = 2;
 }
 

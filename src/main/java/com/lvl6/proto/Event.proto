@@ -219,6 +219,8 @@ message StartupResponseProto {
 	repeated FullUserBossProto livingBosses = 47;
 	repeated FullBossProto bosses = 48;
 	
+	repeated CityExpansionCostProto expansionCosts = 49;
+	
 	message DailyBonusInfo {
 		optional int32 numConsecutiveDaysPlayed = 1;
 		optional int32 dayOneCoins = 2;

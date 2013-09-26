@@ -40,6 +40,7 @@ import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
+import com.lvl6.info.CityExpansionCost;
 import com.lvl6.info.CityGem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
@@ -80,6 +81,7 @@ import com.lvl6.proto.EventProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.TutorialConstants.FullTutorialQuestProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.InfoProto.BoosterPackProto;
+import com.lvl6.proto.InfoProto.CityExpansionCostProto;
 import com.lvl6.proto.InfoProto.CityGemProto;
 import com.lvl6.proto.InfoProto.EquipEnhancementProto;
 import com.lvl6.proto.InfoProto.FullEquipProto;
@@ -114,6 +116,7 @@ import com.lvl6.retrieveutils.UserDailyBonusRewardHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.UserLockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityGemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DailyBonusRewardRetrieveUtils;
@@ -271,6 +274,7 @@ public class StartupController extends EventController {
           setCityGems(resBuilder);
           setLivingBossesForUser(resBuilder, user);
 //          setAllBosses(resBuilder, user.getType());
+          setExpansionCosts(resBuilder);
 
           FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
           resBuilder.setSender(fup);
@@ -342,6 +346,16 @@ public class StartupController extends EventController {
     // regardless of whether the user is new or restarting from an account
     // reset
     updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
+  }
+  
+  private void setExpansionCosts(Builder resBuilder) {
+  	Map<Integer, CityExpansionCost> expansionCosts =
+  			CityExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
+  	for (CityExpansionCost cec : expansionCosts.values()) {
+  		CityExpansionCostProto cecp = CreateInfoProtoUtils
+  				.createCityExpansionCostProtoFromCityExpansionCost(cec);
+  		resBuilder.addExpansionCosts(cecp);
+  	}
   }
 
   private void setLivingBossesForUser(Builder resBuilder, User aUser) {

@@ -22,6 +22,14 @@ import com.lvl6.utils.DBConnection;
   private static final String TABLE_NAME = DBConstants.TABLE_CITY_EXPANSION_COST;
   
   private static Map<Integer, CityExpansionCost> expansionNumToCityExpansionCost;
+  
+  public static Map<Integer, CityExpansionCost> getAllExpansionNumsToCosts() {
+  	if (null == expansionNumToCityExpansionCost) {
+		  setStaticExpansionNumToCityExpansionCost();
+	  }
+	  
+	  return expansionNumToCityExpansionCost;
+  }
 
   public static CityExpansionCost getCityExpansionCostById(int id) {
 	  if (null == expansionNumToCityExpansionCost) {
