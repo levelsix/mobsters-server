@@ -106,8 +106,8 @@ import com.lvl6.utils.RetrieveUtils;
       return false;
     }
     if (action == CritStructActionType.PLACE) {
-      if (cStructType != CritStructType.ARMORY && cStructType != CritStructType.VAULT
-          && cStructType != CritStructType.MARKETPLACE) {
+      if (cStructType != CritStructType.ARMORY && cStructType != CritStructType.VAULT) {
+//          && cStructType != CritStructType.MARKETPLACE) {
         resBuilder.setStatus(CritStructActionStatus.CANNOT_PLACE_NON_PLACEABLE_CRIT_STRUCT);
         return false;
       }

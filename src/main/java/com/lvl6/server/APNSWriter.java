@@ -21,7 +21,7 @@ import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.PostOnClanBulletinResponseEvent;
 import com.lvl6.events.response.PostOnPlayerWallResponseEvent;
 import com.lvl6.events.response.PrivateChatPostResponseEvent;
-import com.lvl6.events.response.PurchaseFromMarketplaceResponseEvent;
+//import com.lvl6.events.response.PurchaseFromMarketplaceResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.APNSProperties;
@@ -31,7 +31,7 @@ import com.lvl6.proto.EventProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventProto.PostOnClanBulletinResponseProto;
 import com.lvl6.proto.EventProto.PostOnPlayerWallResponseProto;
 import com.lvl6.proto.EventProto.PrivateChatPostResponseProto;
-import com.lvl6.proto.EventProto.PurchaseFromMarketplaceResponseProto;
+//import com.lvl6.proto.EventProto.PurchaseFromMarketplaceResponseProto;
 import com.lvl6.proto.InfoProto.BattleResult;
 import com.lvl6.proto.InfoProto.ClanBulletinPostProto;
 import com.lvl6.proto.InfoProto.MinimumClanProto;
@@ -157,10 +157,10 @@ public class APNSWriter extends Wrap {
 									user.getDeviceToken());
 						}
 
-						if (PurchaseFromMarketplaceResponseEvent.class.isInstance(event)) {
-							handlePurchaseFromMarketplaceNotification(service,
-									(PurchaseFromMarketplaceResponseEvent) event, user, user.getDeviceToken());
-						}
+//						if (PurchaseFromMarketplaceResponseEvent.class.isInstance(event)) {
+//							handlePurchaseFromMarketplaceNotification(service,
+//									(PurchaseFromMarketplaceResponseEvent) event, user, user.getDeviceToken());
+//						}
 
 						if (PostOnPlayerWallResponseEvent.class.isInstance(event)) {
 							handlePostOnPlayerWallNotification(service,
@@ -435,33 +435,33 @@ public class APNSWriter extends Wrap {
 		}
 	}
 
-	private void handlePurchaseFromMarketplaceNotification(ApnsService service,
-			PurchaseFromMarketplaceResponseEvent event, User user, String token) {
-		Date lastMarketplaceNotificationTime = user.getLastMarketplaceNotificationTime();
-		Date now = new Date();
-		if (user.getNumBadges() < SOFT_MAX_NOTIFICATION_BADGES
-				&& (lastMarketplaceNotificationTime == null || now.getTime()
-						- lastMarketplaceNotificationTime.getTime() > 60000 * MIN_MINUTES_BETWEEN_MARKETPLACE_NOTIFICATIONS)) {
-			PurchaseFromMarketplaceResponseProto p = event.getPurchaseFromMarketplaceResponseProto();
-            String clan = p.getPurchaser().getClan().getClanId() > 0 ? "[" + p.getPurchaser().getClan().getTag() + "] " : "";
-			String text = clan + p.getPurchaser().getName()
-					+ " has purchased your Level " + p.getMarketplacePost().getEquipLevel() + " "
-					+ p.getMarketplacePost().getPostedEquip().getName()
-					+ " in The Marketplace. Redeem your earnings!";
-			PayloadBuilder pb = APNS.newPayload().actionKey("Redeem").badge(1).alertBody(text);
-			log.info("PurchaseFromMarketplaceNotification for user: " + user.getId());
-			if (!pb.isTooLong()) {
-				log.info("Pushing apns message");
-				service.push(token, pb.build());
-				if (!user.updateRelativeBadgeAbsoluteLastMarketplaceNotificationTime(0,
-						new Timestamp(now.getTime()))) {
-					log.error("problem with updating marketplace notification time for user " + user);
-				}
-			} else {
-				log.error("PlayloadBuilder isTooLong to send apns message");
-			}
-		}
-	}
+//	private void handlePurchaseFromMarketplaceNotification(ApnsService service,
+//			PurchaseFromMarketplaceResponseEvent event, User user, String token) {
+//		Date lastMarketplaceNotificationTime = user.getLastMarketplaceNotificationTime();
+//		Date now = new Date();
+//		if (user.getNumBadges() < SOFT_MAX_NOTIFICATION_BADGES
+//				&& (lastMarketplaceNotificationTime == null || now.getTime()
+//						- lastMarketplaceNotificationTime.getTime() > 60000 * MIN_MINUTES_BETWEEN_MARKETPLACE_NOTIFICATIONS)) {
+//			PurchaseFromMarketplaceResponseProto p = event.getPurchaseFromMarketplaceResponseProto();
+//            String clan = p.getPurchaser().getClan().getClanId() > 0 ? "[" + p.getPurchaser().getClan().getTag() + "] " : "";
+//			String text = clan + p.getPurchaser().getName()
+//					+ " has purchased your Level " + p.getMarketplacePost().getEquipLevel() + " "
+//					+ p.getMarketplacePost().getPostedEquip().getName()
+//					+ " in The Marketplace. Redeem your earnings!";
+//			PayloadBuilder pb = APNS.newPayload().actionKey("Redeem").badge(1).alertBody(text);
+//			log.info("PurchaseFromMarketplaceNotification for user: " + user.getId());
+//			if (!pb.isTooLong()) {
+//				log.info("Pushing apns message");
+//				service.push(token, pb.build());
+//				if (!user.updateRelativeBadgeAbsoluteLastMarketplaceNotificationTime(0,
+//						new Timestamp(now.getTime()))) {
+//					log.error("problem with updating marketplace notification time for user " + user);
+//				}
+//			} else {
+//				log.error("PlayloadBuilder isTooLong to send apns message");
+//			}
+//		}
+//	}
 
 	private void handleBattleNotification(ApnsService service, BattleResponseEvent event, User user,
 			String token) {

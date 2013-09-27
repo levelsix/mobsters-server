@@ -11,13 +11,13 @@ import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.EquipEnhancementFeeder;
 import com.lvl6.info.Location;
-import com.lvl6.info.MarketplacePost;
+//import com.lvl6.info.MarketplacePost;
 import com.lvl6.info.User;
 import com.lvl6.info.UserEquip;
 import com.lvl6.proto.EventProto.EarnFreeDiamondsRequestProto.AdColonyRewardType;
 import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
 import com.lvl6.proto.InfoProto.BattleResult;
-import com.lvl6.proto.InfoProto.MarketplacePostType;
+//import com.lvl6.proto.InfoProto.MarketplacePostType;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 import com.lvl6.proto.InfoProto.UserType;
 
@@ -101,13 +101,13 @@ public interface InsertUtil {
 	public abstract boolean insertIAPHistoryElem(JSONObject appleReceipt,
 			int diamondChange, int coinChange, User user, double cashCost);
 
-	public abstract boolean insertMarketplaceItem(int posterId,
-			MarketplacePostType postType, int postedEquipId, int diamondCost,
-			int coinCost, Timestamp timeOfPost, int equipLevel,
-			int enhancementPercent);
+//	public abstract boolean insertMarketplaceItem(int posterId,
+//			MarketplacePostType postType, int postedEquipId, int diamondCost,
+//			int coinCost, Timestamp timeOfPost, int equipLevel,
+//			int enhancementPercent);
 
-	public abstract boolean insertMarketplaceItemIntoHistory(
-			MarketplacePost mp, int buyerId, boolean sellerHasLicense, Timestamp timeOfPurchase);
+//	public abstract boolean insertMarketplaceItemIntoHistory(
+//			MarketplacePost mp, int buyerId, boolean sellerHasLicense, Timestamp timeOfPurchase);
 
 	public abstract boolean insertReferral(int referrerId, int referredId,
 			int coinsGivenToReferrer);

@@ -15,7 +15,7 @@ import org.mortbay.log.Log;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Location;
-import com.lvl6.info.MarketplacePost;
+//import com.lvl6.info.MarketplacePost;
 import com.lvl6.info.User;
 import com.lvl6.info.UserEquip;
 import com.lvl6.properties.ControllerConstants;
@@ -24,7 +24,7 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventProto.EarnFreeDiamondsRequestProto.AdColonyRewardType;
 import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
 import com.lvl6.proto.InfoProto.BattleResult;
-import com.lvl6.proto.InfoProto.MarketplacePostType;
+//import com.lvl6.proto.InfoProto.MarketplacePostType;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.spring.AppContext;
@@ -571,47 +571,47 @@ public class InsertUtils implements InsertUtil{
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertMarketplaceItem(int, com.lvl6.proto.InfoProto.MarketplacePostType, int, int, int, java.sql.Timestamp)
    */
-  @Override
-  public boolean insertMarketplaceItem(int posterId,
-      MarketplacePostType postType, int postedEquipId, int diamondCost,
-      int coinCost, Timestamp timeOfPost, int equipLevel,
-      int equipEnhancementPercent) {
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-
-    insertParams.put(DBConstants.MARKETPLACE__POSTER_ID, posterId);
-    insertParams.put(DBConstants.MARKETPLACE__POST_TYPE,
-        postType.getNumber());
-    insertParams.put(DBConstants.MARKETPLACE__POSTED_EQUIP_ID,
-        postedEquipId);
-    insertParams.put(DBConstants.MARKETPLACE__TIME_OF_POST, timeOfPost);
-    insertParams.put(DBConstants.MARKETPLACE__EQUIP_LEVEL, equipLevel);
-
-    if (diamondCost > 0) {
-      insertParams
-      .put(DBConstants.MARKETPLACE__DIAMOND_COST, diamondCost);
-    }
-    if (coinCost > 0) {
-      insertParams.put(DBConstants.MARKETPLACE__COIN_COST, coinCost);
-    }
-    if(equipEnhancementPercent > 0) {
-      insertParams.put(
-          DBConstants.MARKETPLACE__EQUIP_ENHANCEMENT_PERCENT,
-          equipEnhancementPercent);
-    }
-
-    int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_MARKETPLACE, insertParams);
-    if (numInserted == 1) {
-      return true;
-    }
-
-    return false;
-  }
+//  @Override
+//  public boolean insertMarketplaceItem(int posterId,
+//      MarketplacePostType postType, int postedEquipId, int diamondCost,
+//      int coinCost, Timestamp timeOfPost, int equipLevel,
+//      int equipEnhancementPercent) {
+//    Map<String, Object> insertParams = new HashMap<String, Object>();
+//
+//    insertParams.put(DBConstants.MARKETPLACE__POSTER_ID, posterId);
+//    insertParams.put(DBConstants.MARKETPLACE__POST_TYPE,
+//        postType.getNumber());
+//    insertParams.put(DBConstants.MARKETPLACE__POSTED_EQUIP_ID,
+//        postedEquipId);
+//    insertParams.put(DBConstants.MARKETPLACE__TIME_OF_POST, timeOfPost);
+//    insertParams.put(DBConstants.MARKETPLACE__EQUIP_LEVEL, equipLevel);
+//
+//    if (diamondCost > 0) {
+//      insertParams
+//      .put(DBConstants.MARKETPLACE__DIAMOND_COST, diamondCost);
+//    }
+//    if (coinCost > 0) {
+//      insertParams.put(DBConstants.MARKETPLACE__COIN_COST, coinCost);
+//    }
+//    if(equipEnhancementPercent > 0) {
+//      insertParams.put(
+//          DBConstants.MARKETPLACE__EQUIP_ENHANCEMENT_PERCENT,
+//          equipEnhancementPercent);
+//    }
+//
+//    int numInserted = DBConnection.get().insertIntoTableBasic(
+//        DBConstants.TABLE_MARKETPLACE, insertParams);
+//    if (numInserted == 1) {
+//      return true;
+//    }
+//
+//    return false;
+//  }
 
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertMarketplaceItemIntoHistory(com.lvl6.info.MarketplacePost, int)
    */
-  @Override
+  /*@Override
   public boolean insertMarketplaceItemIntoHistory(MarketplacePost mp,
       int buyerId, boolean sellerHasLicense, Timestamp timeOfPurchase) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -668,7 +668,7 @@ public class InsertUtils implements InsertUtil{
     }
 
     return false;
-  }
+  }*/
 
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertReferral(int, int, int)

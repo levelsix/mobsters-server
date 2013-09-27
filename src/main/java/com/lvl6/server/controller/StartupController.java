@@ -51,7 +51,7 @@ import com.lvl6.info.EquipEnhancement;
 import com.lvl6.info.EquipEnhancementFeeder;
 import com.lvl6.info.Equipment;
 import com.lvl6.info.GoldSale;
-import com.lvl6.info.MarketplaceTransaction;
+//import com.lvl6.info.MarketplaceTransaction;
 import com.lvl6.info.NeutralCityElement;
 import com.lvl6.info.PlayerWallPost;
 import com.lvl6.info.PrivateChatPost;
@@ -106,7 +106,7 @@ import com.lvl6.retrieveutils.EquipEnhancementRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.MarketplaceTransactionRetrieveUtils;
+//import com.lvl6.retrieveutils.MarketplaceTransactionRetrieveUtils;
 import com.lvl6.retrieveutils.PlayerWallPostRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.UnhandledBlacksmithAttemptRetrieveUtils;
@@ -1295,14 +1295,14 @@ public class StartupController extends EventController {
   private void setNotifications(Builder resBuilder, User user) {
     List<Integer> userIds = new ArrayList<Integer>();
 
-    List<MarketplaceTransaction> marketplaceTransactions = MarketplaceTransactionRetrieveUtils
-        .getMostRecentMarketplaceTransactionsForPoster(user.getId(),
-            ControllerConstants.STARTUP__MAX_NUM_OF_STARTUP_NOTIFICATION_TYPE_TO_SEND);
-    if (marketplaceTransactions != null && marketplaceTransactions.size() > 0) {
-      for (MarketplaceTransaction mt : marketplaceTransactions) {
-        userIds.add(mt.getBuyerId());
-      }
-    }
+//    List<MarketplaceTransaction> marketplaceTransactions = MarketplaceTransactionRetrieveUtils
+//        .getMostRecentMarketplaceTransactionsForPoster(user.getId(),
+//            ControllerConstants.STARTUP__MAX_NUM_OF_STARTUP_NOTIFICATION_TYPE_TO_SEND);
+//    if (marketplaceTransactions != null && marketplaceTransactions.size() > 0) {
+//      for (MarketplaceTransaction mt : marketplaceTransactions) {
+//        userIds.add(mt.getBuyerId());
+//      }
+//    }
 
     Timestamp earliestBattleNotificationTimeToRetrieve = new Timestamp(new Date().getTime()
         - ControllerConstants.STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND * 3600000);
@@ -1339,13 +1339,13 @@ public class StartupController extends EventController {
       usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
     }
 
-    if (marketplaceTransactions != null && marketplaceTransactions.size() > 0) {
-      for (MarketplaceTransaction mt : marketplaceTransactions) {
-        resBuilder.addMarketplacePurchaseNotifications(CreateInfoProtoUtils
-            .createMarketplacePostPurchasedNotificationProtoFromMarketplaceTransaction(mt,
-                usersByIds.get(mt.getBuyerId()), user));
-      }
-    }
+//    if (marketplaceTransactions != null && marketplaceTransactions.size() > 0) {
+//      for (MarketplaceTransaction mt : marketplaceTransactions) {
+//        resBuilder.addMarketplacePurchaseNotifications(CreateInfoProtoUtils
+//            .createMarketplacePostPurchasedNotificationProtoFromMarketplaceTransaction(mt,
+//                usersByIds.get(mt.getBuyerId()), user));
+//      }
+//    }
     if (battleDetails != null && battleDetails.size() > 0) {
       for (BattleDetails bd : battleDetails) {
         resBuilder.addAttackNotifications(CreateInfoProtoUtils

@@ -44,7 +44,7 @@ import com.lvl6.info.LeaderboardEvent;
 import com.lvl6.info.LeaderboardEventReward;
 import com.lvl6.info.Location;
 import com.lvl6.info.LockBoxEvent;
-import com.lvl6.info.MarketplacePost;
+//import com.lvl6.info.MarketplacePost;
 import com.lvl6.info.Mentorship;
 import com.lvl6.info.Task;
 import com.lvl6.info.User;
@@ -100,7 +100,7 @@ import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanTowerRetrieveUtils;
-import com.lvl6.retrieveutils.MarketplacePostRetrieveUtils;
+//import com.lvl6.retrieveutils.MarketplacePostRetrieveUtils;
 import com.lvl6.retrieveutils.MentorshipRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
@@ -395,7 +395,7 @@ public class MiscMethods {
         .setMaxLevelDifferenceForBattle(ControllerConstants.BATTLE__MAX_LEVEL_DIFFERENCE)
         .setArmoryXLength(ControllerConstants.ARMORY_XLENGTH).setArmoryYLength(ControllerConstants.ARMORY_YLENGTH)
         .setVaultXLength(ControllerConstants.VAULT_XLENGTH).setVaultYLength(ControllerConstants.VAULT_YLENGTH)        
-        .setMarketplaceXLength(ControllerConstants.MARKETPLACE_XLENGTH).setMarketplaceYLength(ControllerConstants.MARKETPLACE_YLENGTH)        
+//        .setMarketplaceXLength(ControllerConstants.MARKETPLACE_XLENGTH).setMarketplaceYLength(ControllerConstants.MARKETPLACE_YLENGTH)        
         .setCarpenterXLength(ControllerConstants.CARPENTER_XLENGTH).setCarpenterYLength(ControllerConstants.CARPENTER_YLENGTH)        
         .setAviaryXLength(ControllerConstants.AVIARY_XLENGTH).setAviaryYLength(ControllerConstants.AVIARY_YLENGTH)
         .setAttackBaseGain(ControllerConstants.USE_SKILL_POINT__ATTACK_BASE_GAIN)
@@ -415,20 +415,20 @@ public class MiscMethods {
         .setMinutesToRefillAStamina(ControllerConstants.REFILL_STAT_WAIT_COMPLETE__MINUTES_FOR_STAMINA)
         .setDiamondCostForFullEnergyRefill(ControllerConstants.REFILL_STAT_WITH_DIAMONDS__DIAMOND_COST_FOR_ENERGY_REFILL)
         .setDiamondCostForFullStaminaRefill(ControllerConstants.REFILL_STAT_WITH_DIAMONDS__DIAMOND_COST_FOR_STAMINA_REFILL)
-        .setMaxNumberOfMarketplacePosts(ControllerConstants.POST_TO_MARKETPLACE__MAX_MARKETPLACE_POSTS_FROM_USER)
-        .setPercentOfSellingCostTakenFromSellerOnMarketplacePurchase(ControllerConstants.PURCHASE_FROM_MARKETPLACE__PERCENT_CUT_OF_SELLING_PRICE_TAKEN)
-        .setPercentOfSellingCostTakenFromSellerOnMarketplaceRetract(ControllerConstants.RETRACT_MARKETPLACE_POST__PERCENT_CUT_OF_SELLING_PRICE_TAKEN)
-        .setNumDaysLongMarketplaceLicenseLastsFor(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__DAYS_FOR_LONG_LICENSE)
-        .setNumDaysShortMarketplaceLicenseLastsFor(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__DAYS_FOR_SHORT_LICENSE)
-        .setDiamondCostOfLongMarketplaceLicense(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__LONG_DIAMOND_COST)
-        .setDiamondCostOfShortMarketplaceLicense(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__SHORT_DIAMOND_COST)
+//        .setMaxNumberOfMarketplacePosts(ControllerConstants.POST_TO_MARKETPLACE__MAX_MARKETPLACE_POSTS_FROM_USER)
+//        .setPercentOfSellingCostTakenFromSellerOnMarketplacePurchase(ControllerConstants.PURCHASE_FROM_MARKETPLACE__PERCENT_CUT_OF_SELLING_PRICE_TAKEN)
+//        .setPercentOfSellingCostTakenFromSellerOnMarketplaceRetract(ControllerConstants.RETRACT_MARKETPLACE_POST__PERCENT_CUT_OF_SELLING_PRICE_TAKEN)
+//        .setNumDaysLongMarketplaceLicenseLastsFor(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__DAYS_FOR_LONG_LICENSE)
+//        .setNumDaysShortMarketplaceLicenseLastsFor(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__DAYS_FOR_SHORT_LICENSE)
+//        .setDiamondCostOfLongMarketplaceLicense(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__LONG_DIAMOND_COST)
+//        .setDiamondCostOfShortMarketplaceLicense(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__SHORT_DIAMOND_COST)
         .setNumDaysUntilFreeRetract(ControllerConstants.RETRACT_MARKETPLACE_POST__MIN_NUM_DAYS_UNTIL_FREE_TO_RETRACT_ITEM)
         .setMaxNumbersOfEnemiesToGenerateAtOnce(ControllerConstants.GENERATE_ATTACK_LIST__NUM_ENEMIES_TO_GENERATE_MAX)
         .setPercentReturnedToUserForSellingEquipInArmory(ControllerConstants.ARMORY__SELL_RATIO)
         .setMaxCityRank(ControllerConstants.TASK_ACTION__MAX_CITY_RANK)
         .setArmoryImgVerticalPixelOffset(ControllerConstants.ARMORY_IMG_VERTICAL_PIXEL_OFFSET)
         .setVaultImgVerticalPixelOffset(ControllerConstants.VAULT_IMG_VERTICAL_PIXEL_OFFSET)
-        .setMarketplaceImgVerticalPixelOffset(ControllerConstants.MARKETPLACE_IMG_VERTICAL_PIXEL_OFFSET)
+//        .setMarketplaceImgVerticalPixelOffset(ControllerConstants.MARKETPLACE_IMG_VERTICAL_PIXEL_OFFSET)
         .setAviaryImgVerticalPixelOffset(ControllerConstants.AVIARY_IMG_VERTICAL_PIXEL_OFFSET)
         .setCarpenterImgVerticalPixelOffset(ControllerConstants.CARPENTER_IMG_VERTICAL_PIXEL_OFFSET)
         .setMaxCharLengthForWallPost(ControllerConstants.POST_ON_PLAYER_WALL__MAX_CHAR_LENGTH)
@@ -669,7 +669,7 @@ public class MiscMethods {
         .setClanHouseMinLevel(ControllerConstants.STARTUP__CLAN_HOUSE_MIN_LEVEL)
         .setVaultMinLevel(ControllerConstants.STARTUP__VAULT_MIN_LEVEL)
         .setArmoryMinLevel(ControllerConstants.STARTUP__ARMORY_MIN_LEVEL)
-        .setMarketplaceMinLevel(ControllerConstants.STARTUP__MARKETPLACE_MIN_LEVEL)
+//        .setMarketplaceMinLevel(ControllerConstants.STARTUP__MARKETPLACE_MIN_LEVEL)
         .setBlacksmithMinLevel(ControllerConstants.STARTUP__BLACKSMITH_MIN_LEVEL)
         .setLeaderboardMinLevel(ControllerConstants.STARTUP__LEADERBOARD_MIN_LEVEL)
         .setEnhancingMinLevel(ControllerConstants.STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK)
@@ -1237,13 +1237,13 @@ public class MiscMethods {
     return s;
   }
 
-  public static int getNumPostsInMarketPlaceForUser(int userId) {
-    List<MarketplacePost> posts = MarketplacePostRetrieveUtils
-        .getMostRecentActiveMarketplacePostsForPoster(
-            ControllerConstants.POST_TO_MARKETPLACE__MAX_MARKETPLACE_POSTS_FROM_USER, 
-            userId);
-    return posts.size();
-  }
+//  public static int getNumPostsInMarketPlaceForUser(int userId) {
+//    List<MarketplacePost> posts = MarketplacePostRetrieveUtils
+//        .getMostRecentActiveMarketplacePostsForPoster(
+//            ControllerConstants.POST_TO_MARKETPLACE__MAX_MARKETPLACE_POSTS_FROM_USER, 
+//            userId);
+//    return posts.size();
+//  }
 
   public static void writeToUserCurrencyOneUserGoldAndSilver(
       User aUser, Timestamp date, Map<String,Integer> goldSilverChange, 

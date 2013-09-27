@@ -37,8 +37,8 @@ import com.lvl6.info.LeaderboardEventReward;
 import com.lvl6.info.Location;
 import com.lvl6.info.LockBoxEvent;
 import com.lvl6.info.LockBoxItem;
-import com.lvl6.info.MarketplacePost;
-import com.lvl6.info.MarketplaceTransaction;
+//import com.lvl6.info.MarketplacePost;
+//import com.lvl6.info.MarketplaceTransaction;
 import com.lvl6.info.Mentorship;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonteCard;
@@ -68,7 +68,7 @@ import com.lvl6.info.jobs.UpgradeStructJob;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.AttackedNotificationProto;
-import com.lvl6.proto.EventProto.StartupResponseProto.MarketplacePostPurchasedNotificationProto;
+//import com.lvl6.proto.EventProto.StartupResponseProto.MarketplacePostPurchasedNotificationProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InfoProto.BoosterItemProto;
@@ -92,7 +92,7 @@ import com.lvl6.proto.InfoProto.FullCityProto;
 import com.lvl6.proto.InfoProto.FullClanProto;
 import com.lvl6.proto.InfoProto.FullClanProtoWithClanSize;
 import com.lvl6.proto.InfoProto.FullEquipProto;
-import com.lvl6.proto.InfoProto.FullMarketplacePostProto;
+//import com.lvl6.proto.InfoProto.FullMarketplacePostProto;
 import com.lvl6.proto.InfoProto.FullQuestProto;
 import com.lvl6.proto.InfoProto.FullStructureProto;
 import com.lvl6.proto.InfoProto.FullTaskProto;
@@ -179,12 +179,12 @@ public class CreateInfoProtoUtils {
 				.setRecruitTime(r.getTimeOfReferral().getTime()).setCoinsGivenToReferrer(r.getCoinsGivenToReferrer()).build();
 	}
 
-	public static MarketplacePostPurchasedNotificationProto createMarketplacePostPurchasedNotificationProtoFromMarketplaceTransaction(MarketplaceTransaction mt, User buyer, User seller) {
-		FullMarketplacePostProto fmpp = createFullMarketplacePostProtoFromMarketplacePost(mt.getPost(), seller);
-		return MarketplacePostPurchasedNotificationProto.newBuilder().setMarketplacePost(fmpp)
-				.setBuyer(createMinimumUserProtoFromUser(buyer)).setTimeOfPurchase(mt.getTimeOfPurchase().getTime())
-				.setSellerHadLicense(mt.getSellerHadLicense()).build();
-	}
+//	public static MarketplacePostPurchasedNotificationProto createMarketplacePostPurchasedNotificationProtoFromMarketplaceTransaction(MarketplaceTransaction mt, User buyer, User seller) {
+//		FullMarketplacePostProto fmpp = createFullMarketplacePostProtoFromMarketplacePost(mt.getPost(), seller);
+//		return MarketplacePostPurchasedNotificationProto.newBuilder().setMarketplacePost(fmpp)
+//				.setBuyer(createMinimumUserProtoFromUser(buyer)).setTimeOfPurchase(mt.getTimeOfPurchase().getTime())
+//				.setSellerHadLicense(mt.getSellerHadLicense()).build();
+//	}
 
 	public static AnimatedSpriteOffsetProto createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(AnimatedSpriteOffset aso) {
 		return AnimatedSpriteOffsetProto.newBuilder().setImageName(aso.getImgName())
@@ -356,22 +356,22 @@ public class CreateInfoProtoUtils {
 		return dp.build();
 	}
 
-	public static FullMarketplacePostProto createFullMarketplacePostProtoFromMarketplacePost(MarketplacePost mp, User poster) {
-		FullMarketplacePostProto.Builder builder = FullMarketplacePostProto.newBuilder().setMarketplacePostId(mp.getId())
-				.setPoster(createMinimumUserProtoFromUser(poster)).setPostType(mp.getPostType())
-				.setTimeOfPost(mp.getTimeOfPost().getTime())
-				.setPostedEquip(
-						createFullEquipProtoFromEquip(
-								EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(mp.getPostedEquipId())))
-								.setEquipLevel(mp.getEquipLevel()).setEquipEnhancementPercent(mp.getEquipEnhancementPercentage());
-		if (mp.getDiamondCost() != ControllerConstants.NOT_SET) {
-			builder.setDiamondCost(mp.getDiamondCost());
-		}
-		if (mp.getCoinCost() != ControllerConstants.NOT_SET) {
-			builder.setCoinCost(mp.getCoinCost());
-		}
-		return builder.build();
-	}
+//	public static FullMarketplacePostProto createFullMarketplacePostProtoFromMarketplacePost(MarketplacePost mp, User poster) {
+//		FullMarketplacePostProto.Builder builder = FullMarketplacePostProto.newBuilder().setMarketplacePostId(mp.getId())
+//				.setPoster(createMinimumUserProtoFromUser(poster)).setPostType(mp.getPostType())
+//				.setTimeOfPost(mp.getTimeOfPost().getTime())
+//				.setPostedEquip(
+//						createFullEquipProtoFromEquip(
+//								EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(mp.getPostedEquipId())))
+//								.setEquipLevel(mp.getEquipLevel()).setEquipEnhancementPercent(mp.getEquipEnhancementPercentage());
+//		if (mp.getDiamondCost() != ControllerConstants.NOT_SET) {
+//			builder.setDiamondCost(mp.getDiamondCost());
+//		}
+//		if (mp.getCoinCost() != ControllerConstants.NOT_SET) {
+//			builder.setCoinCost(mp.getCoinCost());
+//		}
+//		return builder.build();
+//	}
 
 	public static FullUserStructureProto createFullUserStructureProtoFromUserstruct(UserStruct userStruct) {
 		FullUserStructureProto.Builder builder = FullUserStructureProto.newBuilder().setUserStructId(userStruct.getId())
@@ -404,8 +404,8 @@ public class CreateInfoProtoUtils {
 		builder.setEnergyMax(u.getEnergyMax());
 		builder.setDiamonds(u.getDiamonds());
 		builder.setCoins(u.getCoins());
-		builder.setMarketplaceDiamondsEarnings(u.getMarketplaceDiamondsEarnings());
-		builder.setMarketplaceCoinsEarnings(u.getMarketplaceCoinsEarnings());
+//		builder.setMarketplaceDiamondsEarnings(u.getMarketplaceDiamondsEarnings());
+//		builder.setMarketplaceCoinsEarnings(u.getMarketplaceCoinsEarnings());
 		builder.setVaultBalance(u.getVaultBalance());
 		builder.setExperience(u.getExperience());
 		builder.setTasksCompleted(u.getTasksCompleted());
@@ -417,8 +417,8 @@ public class CreateInfoProtoUtils {
 		}
 		builder.setNumReferrals(u.getNumReferrals());
 		builder.setUserLocation(createLocationProtoFromLocation(u.getUserLocation()));
-		builder.setNumPostsInMarketplace(u.getNumPostsInMarketplace());
-		builder.setNumMarketplaceSalesUnredeemed(u.getNumMarketplaceSalesUnredeemed());
+//		builder.setNumPostsInMarketplace(u.getNumPostsInMarketplace());
+//		builder.setNumMarketplaceSalesUnredeemed(u.getNumMarketplaceSalesUnredeemed());
 		if (u.getLastLogin() != null) {
 			builder.setLastLoginTime(u.getLastLogin().getTime());
 		}	
