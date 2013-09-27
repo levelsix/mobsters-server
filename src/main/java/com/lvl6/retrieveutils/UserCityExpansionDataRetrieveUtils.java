@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,19 +51,35 @@ import com.lvl6.utils.DBConnection;
 				tablename, conddelim, orderByColumn, orderByAsc, limit, random); */
 		
 		Connection conn = DBConnection.get().getConnection();
-	    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+		ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
 		List<UserCityExpansionData> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
 		DBConnection.get().close(rs, null, conn);
 		return userCityExpansionDatas;
 	}
 	
 	public static UserCityExpansionData getSpecificUserCityExpansionDataForUserIdAndPosition(int userId, int xPosition, int yPosition) {
-		List<UserCityExpansionData> ucedList = getUserCityExpansionDatasForUserId(userId);
-		for(UserCityExpansionData uced : ucedList) {
-			if(uced.getxPosition() == xPosition && uced.getyPosition() == yPosition) 
-				return uced;
+//		List<UserCityExpansionData> ucedList = getUserCityExpansionDatasForUserId(userId);
+//		for(UserCityExpansionData uced : ucedList) {
+//			if(uced.getxPosition() == xPosition && uced.getyPosition() == yPosition) 
+//				return uced;
+//		}
+//		return null;
+		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+		absoluteConditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__USER_ID, userId);
+		absoluteConditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__X_POSITION, xPosition);
+		absoluteConditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__Y_POSITION, yPosition);
+		
+		Connection conn = DBConnection.get().getConnection();
+		ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn,
+				absoluteConditionParams, TABLE_NAME);
+		List<UserCityExpansionData> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
+		DBConnection.get().close(rs, null, conn);
+		
+		if (null != userCityExpansionDatas && !userCityExpansionDatas.isEmpty()) {
+			return userCityExpansionDatas.get(0);
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 	public static Integer numberOfUserExpansions(int userId){

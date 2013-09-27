@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -22,7 +21,6 @@ import com.lvl6.proto.EventProto.ExpansionWaitCompleteResponseProto;
 import com.lvl6.proto.EventProto.ExpansionWaitCompleteResponseProto.Builder;
 import com.lvl6.proto.EventProto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserCityExpansionDataProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.UserCityExpansionDataRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -56,11 +54,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		ExpansionWaitCompleteRequestProto reqProto = ((ExpansionWaitCompleteRequestEvent)event).getExpansionWaitCompleteRequestProto();
 
 		MinimumUserProto senderProto = reqProto.getSender();
+		int userId = senderProto.getUserId();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		boolean speedUp = reqProto.getSpeedUp();
-		UserCityExpansionDataProto ucedp = reqProto.getUcedp();
-		int xPosition = ucedp.getXPosition();
-		int yPosition = ucedp.getYPosition();
+		int xPosition = reqProto.getXPosition();
+		int yPosition = reqProto.getYPosition();
 
 		ExpansionWaitCompleteResponseProto.Builder resBuilder = ExpansionWaitCompleteResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
@@ -69,8 +67,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		try {
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-			List<UserCityExpansionData> userCityExpansionDataList = UserCityExpansionDataRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserId());
-			UserCityExpansionData uced = getUserCityExpansionDataCurrentlyExpanding(userCityExpansionDataList);
+//			List<UserCityExpansionData> userCityExpansionDataList = UserCityExpansionDataRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserId());
+			UserCityExpansionData uced = UserCityExpansionDataRetrieveUtils.getSpecificUserCityExpansionDataForUserIdAndPosition(userId, xPosition, yPosition);
 			boolean legitExpansionComplete = checkLegitExpansionComplete(user, resBuilder, uced, clientTime, speedUp, xPosition, yPosition);
 			int previousGold = 0;
 
@@ -141,16 +139,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;  
 	}
 
-	private UserCityExpansionData getUserCityExpansionDataCurrentlyExpanding(List<UserCityExpansionData> userCityExpansionDataList) {
-		UserCityExpansionData uced = null;
-		for(UserCityExpansionData uced2 : userCityExpansionDataList) {
-			if(uced2.isExpanding()) {
-				uced = uced2;
-				return uced;
-			}
-		}
-		return null;
-	}
+//	private UserCityExpansionData getUserCityExpansionDataCurrentlyExpanding(List<UserCityExpansionData> userCityExpansionDataList) {
+//		UserCityExpansionData uced = null;
+//		for(UserCityExpansionData uced2 : userCityExpansionDataList) {
+//			if(uced2.isExpanding()) {
+//				uced = uced2;
+//				return uced;
+//			}
+//		}
+//		return null;
+//	}
 	
 	private int calculateMinutesForCurrentExpansion(int userId, UserCityExpansionData userCityExpansionData) {
 		int numCompletedExpansionsSoFar = UserCityExpansionDataRetrieveUtils.numberOfUserExpansions(userId);

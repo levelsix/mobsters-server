@@ -1504,7 +1504,11 @@ message ExpansionWaitCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 curTime = 2;						//used for checking
 	optional bool speedUp = 3;
-	optional UserCityExpansionDataProto ucedp = 4;
+	
+	//the (x,y) coordinates in relation to the original plot of land
+	//sint32 because it's more efficient when google protocol buffers serializes/encodes the values
+	optional sint32 xPosition = 4; 
+	optional sint32 yPosition = 5;
 }
 
 																						//DONE
