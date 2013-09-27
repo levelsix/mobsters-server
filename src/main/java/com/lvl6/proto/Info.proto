@@ -473,9 +473,9 @@ enum EarnFreeDiamondsType {
 
 enum SpecialQuestAction {
 	PURCHASE_FROM_ARMORY = 1;
-	PURCHASE_FROM_MARKETPLACE = 2;
+	//PURCHASE_FROM_MARKETPLACE = 2;
 	SELL_TO_ARMORY = 3;
-	POST_TO_MARKETPLACE = 4;
+	//POST_TO_MARKETPLACE = 4;
 	DEPOSIT_IN_VAULT = 5;
 	WITHDRAW_FROM_VAULT = 6;
 	WRITE_ON_ENEMY_WALL = 7;
@@ -525,8 +525,8 @@ message FullUserProto {
 	optional int32 energyMax = 15;
 	optional int32 diamonds = 17;
 	optional int32 coins = 18;
-	optional int32 marketplaceDiamondsEarnings = 19;
-	optional int32 marketplaceCoinsEarnings = 20;
+	//optional int32 marketplaceDiamondsEarnings = 19;
+	//optional int32 marketplaceCoinsEarnings = 20;
 	optional int32 vaultBalance = 21;
 	optional int32 experience = 22;
 	optional int32 tasksCompleted = 23;
@@ -537,8 +537,8 @@ message FullUserProto {
 	optional int32 numReferrals = 28;
 	//optional string udid = 29; //defined below
 	optional LocationProto userLocation = 30;
-	optional int32 numPostsInMarketplace = 31;
-	optional int32 numMarketplaceSalesUnredeemed = 32;
+	//optional int32 numPostsInMarketplace = 31;
+	//optional int32 numMarketplaceSalesUnredeemed = 32;
 	optional FullUserEquipProto weaponEquippedUserEquip = 33;
 	optional FullUserEquipProto armorEquippedUserEquip = 34;
 	optional FullUserEquipProto amuletEquippedUserEquip = 35;
@@ -801,29 +801,29 @@ message NeutralCityElementProto {
 
 //------------------------------------------------------------------------------------------
 
-enum MarketplacePostType {
-	PREMIUM_EQUIP_POST = 0;		//diamond, epics, and legendarys for diamonds
-	NORM_EQUIP_POST = 2;		//armory (so non epic and non legendar	y) coin items for coins
-}
+//enum MarketplacePostType {
+//	PREMIUM_EQUIP_POST = 0;		//diamond, epics, and legendarys for diamonds
+//	NORM_EQUIP_POST = 2;		//armory (so non epic and non legendar	y) coin items for coins
+//}
 
-message FullMarketplacePostProto {
-	optional int32 marketplacePostId = 1;
-	optional MinimumUserProto poster = 2;
-	optional MarketplacePostType postType = 3;
-	optional int64 timeOfPost = 4;
-	optional FullEquipProto postedEquip = 5;
-	optional int32 diamondCost = 6;
-	optional int32 coinCost = 7;
-	optional int32 equipLevel = 8;
-	optional int32 equipEnhancementPercent = 9;
-}
+//message FullMarketplacePostProto {
+//	optional int32 marketplacePostId = 1;
+//	optional MinimumUserProto poster = 2;
+//	optional MarketplacePostType postType = 3;
+//	optional int64 timeOfPost = 4;
+//	optional FullEquipProto postedEquip = 5;
+//	optional int32 diamondCost = 6;
+//	optional int32 coinCost = 7;
+//	optional int32 equipLevel = 8;
+//	optional int32 equipEnhancementPercent = 9;
+//}
 
 //------------------------------------------------------------------------------------------
 
-enum MarketplaceJobRequirementType { 
-	BUY = 0;
-	SELL = 1;
-}
+//enum MarketplaceJobRequirementType { 
+//	BUY = 0;
+//	SELL = 1;
+//}
 
 //------------------------------------------------------------------------------------------
 
@@ -832,7 +832,7 @@ enum CritStructType {
 	CARPENTER = 2;
 	VAULT = 3;
 	ARMORY = 4;
-	MARKETPLACE = 5;
+	//MARKETPLACE = 5;
 	BLACKSMITH = 6;
 }
 
