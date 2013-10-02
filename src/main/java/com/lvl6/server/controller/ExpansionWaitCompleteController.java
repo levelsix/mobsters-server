@@ -52,6 +52,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		ExpansionWaitCompleteRequestProto reqProto = ((ExpansionWaitCompleteRequestEvent)event).getExpansionWaitCompleteRequestProto();
+		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();

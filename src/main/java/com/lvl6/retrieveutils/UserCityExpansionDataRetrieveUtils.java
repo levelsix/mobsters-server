@@ -75,6 +75,8 @@ import com.lvl6.utils.DBConnection;
 		List<UserCityExpansionData> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
 		DBConnection.get().close(rs, null, conn);
 		
+		log.info("userCityExpansionDatas=" + userCityExpansionDatas);
+		
 		if (null != userCityExpansionDatas && !userCityExpansionDatas.isEmpty()) {
 			return userCityExpansionDatas.get(0);
 		} else {
