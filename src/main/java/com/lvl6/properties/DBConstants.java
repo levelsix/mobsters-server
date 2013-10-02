@@ -759,7 +759,7 @@ public class DBConstants {
   public static final String CITY_EXPANSION_COST__EXPANSION_COST = "expansion_cost";
 
   /*USER CITY EXPANSION DATA*/
-  public static final String USER_CITY_EXPANSION_DATA__USER_ID = GENERIC__ID;
+  public static final String USER_CITY_EXPANSION_DATA__USER_ID = GENERIC__USER_ID;
   public static final String USER_CITY_EXPANSION_DATA__X_POSITION = "x_position";
   public static final String USER_CITY_EXPANSION_DATA__Y_POSITION = "y_position";
   public static final String USER_CITY_EXPANSION_DATA__IS_EXPANDING = "is_expanding";

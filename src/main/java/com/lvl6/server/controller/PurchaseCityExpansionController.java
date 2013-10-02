@@ -198,6 +198,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	
 	private int calculateExpansionCost(int numOfExpansions) {
 		CityExpansionCost cec = CityExpansionCostRetrieveUtils.getCityExpansionCostById(numOfExpansions);
+		//log.info("cec=" + cec);
+		//log.info("all expansion stuff" + CityExpansionCostRetrieveUtils.getAllExpansionNumsToCosts());
 		return cec.getExpansionCost();
 	}
 
