@@ -114,25 +114,36 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Timestamp clientTime, boolean speedUp, int xPosition, int yPosition) {
 		if (!MiscMethods.checkClientTimeAroundApproximateNow(clientTime)) {
 			resBuilder.setStatus(ExpansionWaitCompleteStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
+			log.error("user error: user deviates too much from current time.");
 			return false;
 		}
 		
 		if (userCityExpansionData==null) {
 			resBuilder.setStatus(ExpansionWaitCompleteStatus.WAS_NOT_EXPANDING);
+			log.error("unexpected error: user has no expansion pending");
 			return false;
 		}
 		if(userCityExpansionData.getxPosition() != xPosition || userCityExpansionData.getyPosition() != yPosition) {
 			resBuilder.setStatus(ExpansionWaitCompleteStatus.OTHER_FAIL);
+			log.error("unexpected error: x and y coordinates sent don't match db." +
+					" userCityExpansionData=" + userCityExpansionData + "x=" + xPosition +
+					" yPosition=" + yPosition);
 			return false;
 		}
 		
 		if (!speedUp && userCityExpansionData.getExpandStartTime().getTime() 
 				+ 60000*calculateMinutesForCurrentExpansion(user.getId(), userCityExpansionData) > clientTime.getTime()) {
 			resBuilder.setStatus(ExpansionWaitCompleteStatus.NOT_DONE_YET);
+			log.error("client error: time is out of sync. Client incorrectly thinks" +
+					" that the expansion is done. userCityExpansionData=" + 
+					userCityExpansionData);
 			return false;      
 		}
-		if (speedUp && user.getDiamonds() < expansionDiamondCost(user.getId(), userCityExpansionData, clientTime)) {
+		int cost = expansionDiamondCost(user.getId(), userCityExpansionData, clientTime);
+		if (speedUp && user.getDiamonds() < cost) {
 			resBuilder.setStatus(ExpansionWaitCompleteStatus.OTHER_FAIL);
+			log.error("user error: user does not have enough gold to speed up expansion." +
+					" userCityExpansionData=" + userCityExpansionData + "cost=" + cost);
 			return false;      
 		}
 		resBuilder.setStatus(ExpansionWaitCompleteStatus.SUCCESS);
