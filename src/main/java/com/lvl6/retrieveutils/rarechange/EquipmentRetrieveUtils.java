@@ -109,38 +109,24 @@ import com.lvl6.utils.DBConnection;
     float chanceOfForgeFailureBase = rs.getFloat(i++);
     int minutesToAttemptForgeBase = rs.getInt(i++);
     int maxDurability = rs.getInt(i++);
+    int constantOne = rs.getInt(i++);
+    int constantTwo = rs.getInt(i++);
+    int constantThree = rs.getInt(i++);
+    int constantFour = rs.getInt(i++);
+    int constantFive = rs.getInt(i++);
+    int constantSix = rs.getInt(i++);
+    int constantSeven = rs.getInt(i++);
+    int constantEight = rs.getInt(i++);
+    int constantNine =rs.getInt(i++);
     
-    Equipment equip = new Equipment(id, name, type, description, attackBoost,
-    		defenseBoost, minLevel, rarity, chanceOfForgeFailureBase,
-    		minutesToAttemptForgeBase, maxDurability);
-//    if (coinPriceSet && !diamondPriceSet) {
-//      equip = new Equipment(id, name, type, description, attackBoost, defenseBoost, minLevel, coinPrice, 
-//          Equipment.NOT_SET, chanceOfLoss, classType, rarity, isBuyableInArmory, chanceOfForgeFailureBase, minutesToAttemptForgeBase);
-//    } else if (diamondPriceSet && !coinPriceSet){
-//      equip = new Equipment(id, name, type, description, attackBoost, defenseBoost, minLevel, Equipment.NOT_SET, 
-//          diamondPrice, chanceOfLoss, classType, rarity, isBuyableInArmory, chanceOfForgeFailureBase, minutesToAttemptForgeBase);      
-//    } else if (diamondPriceSet && coinPriceSet){
-//      log.error("equipment should only have coin or diamond price, and this one doesnt: equip with id " + id);
-//      return null;
-//    } 
+    
+    Equipment equip = new Equipment(id, name, type, description,
+    		attackBoost, defenseBoost, minLevel, rarity,
+    		chanceOfForgeFailureBase, minutesToAttemptForgeBase,
+    		maxDurability, constantOne, constantTwo, constantThree,
+    		constantFour, constantFive, constantSix, constantSeven,
+    		constantEight, constantNine);
 
-    //3 types
-    //1) sellable in armory, 2) not sellable in armory but sellable in marketplace, 3) never sellable
-    //1) normal sword. 2) epics/legendaries. 3) bandanas
-
-    //all equips should have either diamondCost or coinCost set to be put in the hashmap.
-    //buyable in armory is now determined by flag
-
-    //bandanas are listed in the table with coinPrice = 0 and diamondPrice = null and not buyable
-    //same with epics and legendaries
-    //bandanas rarity is common
-
-    //all non epic, non legendary, need either diamondPrice > 0 or coinPrice > 0 to show up in marketplace
-    //this is why bandanas cant be sold in the marketplace, but epic/legendary can be sold for gold
-    //epic and legendary items not in armory
-
-    //if the item is coinPrice = 0 but diamondPrice = null, the item can be stolen
-    //if the other way around, the item cannot be stolen
     return equip;
   }
 }

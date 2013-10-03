@@ -19,12 +19,24 @@ public class Equipment implements Serializable {
 	private float chanceOfForgeFailureBase;
   private int minutesToAttemptForgeBase;
   private int maxDurability;
+  private int constantOne;
+  private int constantTwo;
+  private int constantThree;
+  private int constantFour;
+  private int constantFive;
+  private int constantSix;
+  private int constantSeven;
+  private int constantEight;
+  private int constantNine;
   
-  
+  //look at constant_one in equipment table in mysqlworkbench
+  //(click alter_table on equipment and then click constant_one)
 	public Equipment(int id, String name, EquipType type, String description,
 			int attackBoost, int defenseBoost, int minLevel, Rarity rarity,
 			float chanceOfForgeFailureBase, int minutesToAttemptForgeBase,
-			int maxDurability) {
+			int maxDurability, int constantOne, int constantTwo, int constantThree,
+			int constantFour, int constantFive, int constantSix, int constantSeven,
+			int constantEight, int constantNine) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -37,6 +49,15 @@ public class Equipment implements Serializable {
 		this.chanceOfForgeFailureBase = chanceOfForgeFailureBase;
 		this.minutesToAttemptForgeBase = minutesToAttemptForgeBase;
 		this.maxDurability = maxDurability;
+		this.constantOne = constantOne;
+		this.constantTwo = constantTwo;
+		this.constantThree = constantThree;
+		this.constantFour = constantFour;
+		this.constantFive = constantFive;
+		this.constantSix = constantSix;
+		this.constantSeven = constantSeven;
+		this.constantEight = constantEight;
+		this.constantNine = constantNine;
 	}
 
 
@@ -150,6 +171,96 @@ public class Equipment implements Serializable {
 	}
 
 
+	public int getConstantOne() {
+		return constantOne;
+	}
+
+
+	public void setConstantOne(int constantOne) {
+		this.constantOne = constantOne;
+	}
+
+
+	public int getConstantTwo() {
+		return constantTwo;
+	}
+
+
+	public void setConstantTwo(int constantTwo) {
+		this.constantTwo = constantTwo;
+	}
+
+
+	public int getConstantThree() {
+		return constantThree;
+	}
+
+
+	public void setConstantThree(int constantThree) {
+		this.constantThree = constantThree;
+	}
+
+
+	public int getConstantFour() {
+		return constantFour;
+	}
+
+
+	public void setConstantFour(int constantFour) {
+		this.constantFour = constantFour;
+	}
+
+
+	public int getConstantFive() {
+		return constantFive;
+	}
+
+
+	public void setConstantFive(int constantFive) {
+		this.constantFive = constantFive;
+	}
+
+
+	public int getConstantSix() {
+		return constantSix;
+	}
+
+
+	public void setConstantSix(int constantSix) {
+		this.constantSix = constantSix;
+	}
+
+
+	public int getConstantSeven() {
+		return constantSeven;
+	}
+
+
+	public void setConstantSeven(int constantSeven) {
+		this.constantSeven = constantSeven;
+	}
+
+
+	public int getConstantEight() {
+		return constantEight;
+	}
+
+
+	public void setConstantEight(int constantEight) {
+		this.constantEight = constantEight;
+	}
+
+
+	public int getConstantNine() {
+		return constantNine;
+	}
+
+
+	public void setConstantNine(int constantNine) {
+		this.constantNine = constantNine;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Equipment [id=" + id + ", name=" + name + ", type=" + type
@@ -157,7 +268,12 @@ public class Equipment implements Serializable {
 				+ ", defenseBoost=" + defenseBoost + ", minLevel=" + minLevel
 				+ ", rarity=" + rarity + ", chanceOfForgeFailureBase="
 				+ chanceOfForgeFailureBase + ", minutesToAttemptForgeBase="
-				+ minutesToAttemptForgeBase + ", maxDurability=" + maxDurability + "]";
+				+ minutesToAttemptForgeBase + ", maxDurability=" + maxDurability
+				+ ", constantOne=" + constantOne + ", constantTwo=" + constantTwo
+				+ ", constantThree=" + constantThree + ", constantFour=" + constantFour
+				+ ", constantFive=" + constantFive + ", constantSix=" + constantSix
+				+ ", constantSeven=" + constantSeven + ", constantEight="
+				+ constantEight + ", constantNine=" + constantNine + "]";
 	}
 
 }

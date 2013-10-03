@@ -559,6 +559,15 @@ public class DBConstants {
   public static final String EQUIPMENT__CHANCE_OF_FORGE_FAILUE_BASE = "chance_of_forge_failure_base";
   public static final String EQUIPMENT__MINUTES_TO_ATTEMPT_FORGE_BASE = "minutes_to_attempt_forge_base";
   public static final String EQUIPMENT__MAX_DURABILITY = "max_durability";
+  public static final String EQUIPMENT__CONSTANT_ONE = "constant_one";
+  public static final String EQUIPMENT__CONSTANT_TWO = "constant_two";
+  public static final String EQUIPMENT__CONSTANT_THREE = "constant_three";
+  public static final String EQUIPMENT__CONSTANT_FOUR = "constant_four";
+  public static final String EQUIPMENT__CONSTANT_FIVE = "constant_five";
+  public static final String EQUIPMENT__CONSTANT_SIX = "constant_six";
+  public static final String EQUIPMENT__CONSTANT_SEVEN = "constant_seven";
+  public static final String EQUIPMENT__CONSTANT_EIGHT = "constant_eight";
+  public static final String EQUIPMENT__CONSTANT_NINE = "constant_nine";
   
   /*CLAN TOWERS*/
   public static final String CLAN_TOWERS__TOWER_ID = GENERIC__ID;
