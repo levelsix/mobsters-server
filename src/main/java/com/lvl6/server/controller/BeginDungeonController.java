@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -240,8 +241,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  TaskStage ts = tsMap.get(tsId);
 		  int stageNum = ts.getStageNum();
 		  
-		  log.info("processing TaskStage=" + ts);
-		  
 		  //select one monster, at random. This is the ONE monster for this stage
 		  List<Integer> monsterIds = 
 				  TaskStageMonsterRetrieveUtils.getMonsterIdsForTaskStageId(tsId);
@@ -283,7 +282,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  stageNumsToEquipIds.put(stageNum, equipId);
 	  }
 	  
-	  log.info("all task stages processed. TaskStages=" + stageNumsToProtos);
 	  return stageNumsToProtos;
   }
   
@@ -350,7 +348,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  long userTaskId = userTaskIdList.get(0);
 	  resBuilder.setUserTaskId(userTaskId);
 	  
-	  for (int i = 0; i < stageNumsToProtos.size(); i++) {
+	  //to handle the case if there are gaps in stageNums for a task, we
+	  //order the available stage numbers. Then we give it all to the client
+	  //sequentially, just because.
+	  Set<Integer> stageNums = stageNumsToProtos.keySet();
+	  List<Integer> stageNumsOrdered = new ArrayList<Integer>(stageNums);
+	  Collections.sort(stageNumsOrdered);
+	  
+	  for (Integer i : stageNumsOrdered) {
 		  TaskStageProto tsp = stageNumsToProtos.get(i);
 		  resBuilder.addTsp(tsp);
 	  }
