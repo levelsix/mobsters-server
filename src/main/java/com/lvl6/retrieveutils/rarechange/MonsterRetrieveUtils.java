@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,6 +57,7 @@ import com.lvl6.utils.DBConnection;
   private static void setStaticMonsterIdsToMonsters() {
     log.debug("setting static map of monsterIds to monsters");
 
+    Random rand = new Random();
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
     if (conn != null) {
@@ -67,7 +69,7 @@ import com.lvl6.utils.DBConnection;
           rs.beforeFirst();
           HashMap<Integer, Monster> monsterIdsToMonstersTemp = new HashMap<Integer, Monster>();
           while(rs.next()) {  //should only be one
-            Monster monster = convertRSRowToMonster(rs);
+            Monster monster = convertRSRowToMonster(rs, rand);
             if (monster != null)
               monsterIdsToMonstersTemp.put(monster.getId(), monster);
           }
@@ -88,13 +90,13 @@ import com.lvl6.utils.DBConnection;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static Monster convertRSRowToMonster(ResultSet rs) throws SQLException {
+  private static Monster convertRSRowToMonster(ResultSet rs, Random rand) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
     int maxHp = rs.getInt(i++);
     String imageName = rs.getString(i++);
-    boolean isBoss = rs.getBoolean(i++);
+    int monsterType = rs.getInt(i++);
     int weaponId = rs.getInt(i++);
     int weaponLvl = rs.getInt(i++);
     int armorId = rs.getInt(i++);
@@ -105,10 +107,11 @@ import com.lvl6.utils.DBConnection;
     int minSilverDrop = rs.getInt(i++);
     int maxSilverDrop = rs.getInt(i++);
     
-    Monster monster = new Monster(id, name, maxHp, imageName, isBoss, weaponId,
-    		weaponLvl, armorId, armorLvl, amuletId, amuletLvl, expDrop,
+    Monster monster = new Monster(id, name, maxHp, imageName, monsterType,
+    		weaponId, weaponLvl, armorId, armorLvl, amuletId, amuletLvl, expDrop,
     		minSilverDrop, maxSilverDrop);
-        
+
+    monster.setRand(rand);
     return monster;
   }
 }

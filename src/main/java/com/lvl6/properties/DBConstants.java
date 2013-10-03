@@ -481,7 +481,7 @@ public class DBConstants {
   public static final String MONSTER__NAME = "name";
   public static final String MONSTER__MAX_HP = "max_hp";
   public static final String MONSTER__IMAGE_NAME = "image_name";
-  public static final String MONSTER__IS_BOSS = "is_boss";
+  public static final String MONSTER__MONSTER_TYPE = "monster_type";
   public static final String MONSTER__WEAPON_ID = "weapon_id";
   public static final String MONSTER__WEAPON_LVL = "weapon_lvl";
   public static final String MONSTER__ARMOR_ID = "armor_id";

@@ -129,6 +129,7 @@ import com.lvl6.proto.InfoProto.MinimumUserQuestTaskProto;
 import com.lvl6.proto.InfoProto.MinimumUserTaskProto;
 import com.lvl6.proto.InfoProto.MinimumUserUpgradeStructJobProto;
 import com.lvl6.proto.InfoProto.MonsterProto;
+import com.lvl6.proto.InfoProto.MonsterProto.MonsterType;
 import com.lvl6.proto.InfoProto.MonteCardProto;
 import com.lvl6.proto.InfoProto.NeutralCityElementProto;
 import com.lvl6.proto.InfoProto.PlayerWallPostProto;
@@ -1569,7 +1570,8 @@ public class CreateInfoProtoUtils {
 		mpb.setName(aMonster.getName());
 		mpb.setMaxHp(aMonster.getMaxHp());
 		mpb.setImageName(aMonster.getImageName());
-		mpb.setIsBoss(aMonster.isBoss());
+		MonsterType mt = MonsterType.valueOf(aMonster.getMonsterType());
+		mpb.setMonsterType(mt);
 		mpb.setWeaponId(aMonster.getWeaponId());
 		mpb.setWeaponLvl(aMonster.getWeaponLvl());
 		mpb.setArmorId(aMonster.getArmorId());

@@ -10,7 +10,7 @@ public class Monster implements Serializable {
 	private String name;
 	private int maxHp;
 	private String imageName;
-	private boolean isBoss;
+	private int monsterType;
 	private int weaponId;
 	private int weaponLvl;
 	private int armorId;
@@ -23,16 +23,17 @@ public class Monster implements Serializable {
 	
 	private Random rand;
 
+
 	public Monster(int id, String name, int maxHp, String imageName,
-			boolean isBoss, int weaponId, int weaponLvl, int armorId,
-			int armorLvl, int amuletId, int amuletLvl, int expDrop,
-			int minSilverDrop, int maxSilverDrop) {
+			int monsterType, int weaponId, int weaponLvl, int armorId, int armorLvl,
+			int amuletId, int amuletLvl, int expDrop, int minSilverDrop,
+			int maxSilverDrop) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.maxHp = maxHp;
 		this.imageName = imageName;
-		this.isBoss = isBoss;
+		this.monsterType = monsterType;
 		this.weaponId = weaponId;
 		this.weaponLvl = weaponLvl;
 		this.armorId = armorId;
@@ -76,12 +77,12 @@ public class Monster implements Serializable {
 		this.imageName = imageName;
 	}
 
-	public boolean isBoss() {
-		return isBoss;
+	public int getMonsterType() {
+		return monsterType;
 	}
 
-	public void setBoss(boolean isBoss) {
-		this.isBoss = isBoss;
+	public void setMonsterType(int monsterType) {
+		this.monsterType = monsterType;
 	}
 
 	public int getWeaponId() {
@@ -178,12 +179,12 @@ public class Monster implements Serializable {
 	@Override
 	public String toString() {
 		return "Monster [id=" + id + ", name=" + name + ", maxHp=" + maxHp
-				+ ", imageName=" + imageName + ", isBoss=" + isBoss
-				+ ", weaponId=" + weaponId + ", weaponLvl=" + weaponLvl
-				+ ", armorId=" + armorId + ", armorLvl=" + armorLvl
-				+ ", amuletId=" + amuletId + ", amuletLvl=" + amuletLvl
-				+ ", expDrop=" + expDrop + ", minSilverDrop=" + minSilverDrop
-				+ ", maxSilverDrop=" + maxSilverDrop + ", rand=" + rand + "]";
+				+ ", imageName=" + imageName + ", monsterType=" + monsterType
+				+ ", weaponId=" + weaponId + ", weaponLvl=" + weaponLvl + ", armorId="
+				+ armorId + ", armorLvl=" + armorLvl + ", amuletId=" + amuletId
+				+ ", amuletLvl=" + amuletLvl + ", expDrop=" + expDrop
+				+ ", minSilverDrop=" + minSilverDrop + ", maxSilverDrop="
+				+ maxSilverDrop + "]";
 	}
 
 }
