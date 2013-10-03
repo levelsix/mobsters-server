@@ -211,10 +211,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  }
 
 	  //record into user_task stage table	  
-	  int stageNums = tsMap.size();
 	  long userTaskId = InsertUtils.get().insertIntoUserTask(uId, tId,
 			  stageNumsToEquipIds, stageNumsToExps, stageNumsToSilvers,
-			  expGained, silverGained, clientTime, stageNums);
+			  expGained, silverGained, clientTime);
 	  
 	  //send stuff back up to caller
 	  utIdList.add(userTaskId);

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1234,7 +1235,7 @@ public class InsertUtils implements InsertUtil{
   public long insertIntoUserTask(int userId, int taskId, 
 		  Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
 		  Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
-		  Timestamp startTime, int stageNums) {
+		  Timestamp startTime) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
 	  //for recording what-dropped in which-stage
@@ -1242,7 +1243,13 @@ public class InsertUtils implements InsertUtil{
 	  StringBuffer expSb = new StringBuffer();
 	  StringBuffer silverSb = new StringBuffer();
 	  String space = " ";
-	  for(int i = 0; i < stageNums; i++) {
+	  
+	  //this is in order to record things in order
+	  Set<Integer> stageNums = stageNumsToEquipIds.keySet();
+	  List<Integer> stageNumsOrdered = new ArrayList<Integer>(stageNums);
+	  Collections.sort(stageNumsOrdered);
+	  
+	  for (Integer i : stageNumsOrdered) {
 		  int equipId = ControllerConstants.NOT_SET;
 		  int exp = 0;
 		  int silver = 0;

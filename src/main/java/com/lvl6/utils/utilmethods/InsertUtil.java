@@ -199,7 +199,7 @@ public interface InsertUtil {
 	public abstract long insertIntoUserTask(int userId, int taskId, 
 			Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
 			Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
-			Timestamp startTime, int stageNums); 
+			Timestamp startTime); 
 
 	public abstract int insertIntoUserTaskHistory(int userId, int taskId,
 			List<Integer> monsterRewardEquipIds, int expGained, int silverGained,
