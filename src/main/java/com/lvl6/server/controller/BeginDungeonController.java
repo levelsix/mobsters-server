@@ -90,19 +90,20 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     		  taskId, tsMap);
 
       List<Long> userTaskIdList = new ArrayList<Long>();
-      Map<Integer, TaskStageProto> monsterRewardIdsToProtos =
-    		  new HashMap<Integer, TaskStageProto>();
+      Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
       boolean successful = false;
       if(legit) {
     	  
 //        previousSilver = aUser.getCoins() + aUser.getVaultBalance();
 //        previousGold = aUser.getDiamonds();
+      	//determine the specifics for each stage (stored in stageNumsToProtos)
+      	//then record specifics in db
     	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap, curTime,
-    			  userTaskIdList, monsterRewardIdsToProtos);
+    			  userTaskIdList, stageNumsToProtos);
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
-    	  setResponseBuilder(resBuilder, userTaskIdList, monsterRewardIdsToProtos);
+    	  setResponseBuilder(resBuilder, userTaskIdList, stageNumsToProtos);
       }
       
       BeginDungeonResponseEvent resEvent = new BeginDungeonResponseEvent(userId);
@@ -190,15 +191,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
 		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, List<Long> utIdList,
-		  Map<Integer, TaskStageProto> monsterRewardIdsToProtos) {
+		  Map<Integer, TaskStageProto> stageNumsToProtos) {
 	  
 	  //local vars storing eventual db data
 	  Map<Integer, Integer> stageNumsToSilvers = new HashMap<Integer, Integer>();
 	  Map<Integer, Integer> stageNumsToExps = new HashMap<Integer, Integer>();
 	  Map<Integer, Integer> stageNumsToEquipIds= new HashMap<Integer, Integer>();
 	  
-	  //calculate the rewards that the user could gain for this task
-	  Map<Integer, TaskStageProto> monsterRewardIdsToProtosTemp = calculateRewards(
+	  //calculate the SINGLE monster the user fights in each stage
+	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(
 			  tsMap, stageNumsToSilvers, stageNumsToExps, stageNumsToEquipIds);
 	  //calculate the exp that the user could gain for this task
 	  int expGained = MiscMethods.sumMap(stageNumsToExps);
@@ -226,11 +227,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
 	  //send stuff back up to caller
 	  utIdList.add(userTaskId);
-	  monsterRewardIdsToProtos.putAll(monsterRewardIdsToProtosTemp);
+	  stageNumsToProtos.putAll(stageNumsToProtosTemp);
 	  return true;
   }
   
-  //stage can have multiple monsters; stage has a drop rate; 
+  //stage can have multiple monsters; stage has a drop rate (but is useless for now); 
   //for each stage do the following
   //1) generate random number (rn1), 
   //2) if it indicates gem dropped select one of the monsters fairly
@@ -238,30 +239,38 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   //4) go through rewards tied to that monster accumulating the drop rates
   //5) select current reward when accumulated drop rate exceeds random number
   //generated (rn2)
-  private Map<Integer, TaskStageProto> calculateRewards (Map<Integer, TaskStage> tsMap,
-		  Map<Integer, Integer> stageNumsToSilvers, Map<Integer, Integer> stageNumsToExps,
+  //1) select monster at random
+  //1a) determine if monster drops equip
+  //2) create MonsterProto
+  //3) create TaskStageProto with the MonsterProto
+  private Map<Integer, TaskStageProto> generateStage (
+  		Map<Integer, TaskStage> tsMap, Map<Integer, Integer> stageNumsToSilvers,
+  		Map<Integer, Integer> stageNumsToExps,
 		  Map<Integer, Integer> stageNumsToEquipIds) {
-	  Map<Integer, TaskStageProto> stageNumsToRewards = new HashMap<Integer, TaskStageProto>();
+	  Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
 	  Random rand = new Random();
-	  //for each stage, calculate the rewards that will be given if the user wins
+	  
+	  //for each stage, calculate the monster(s) the user will face and
+	  //reward(s) that might be given if the user wins
 	  for (int tsId : tsMap.keySet()) {
 		  TaskStage ts = tsMap.get(tsId);
 		  int stageNum = ts.getStageNum();
 		  
-		  boolean equipDropped = checkIfEquipDropped(ts, rand);
-		  if (!equipDropped) {
-			  //equip did not drop, go to next stage
-			  continue;
-		  }
-		  
-		  //select a monster, at random
+		  //select one monster, at random. This is the ONE monster for this stage
 		  List<Integer> monsterIds = 
 				  TaskStageMonsterRetrieveUtils.getMonsterIdsForTaskStageId(tsId);
 		  int monsterId = fairlyPickMonster(monsterIds, rand);
 		  
-		  //select a reward this monster can drop, at random
-		  int equipId = calculateStageReward(monsterId, rand);
+		  //randomly select a reward, IF ANY, that this monster can drop;
+		  int equipId = selectMonsterEquipReward(monsterId, rand);
 		  
+		  //don't do these two lines if we want to allow user to see more than
+		  //one monster
+		  monsterIds.clear();
+		  monsterIds.add(monsterId);
+		  /*Code below is done such that if more than one monster is generated
+		    above, then user has potential to get the silver and exp from all
+		    the monsters including the one above.*/
 		  //determine how much exp and silver the user gets
 		  Set<Integer> uniqMonsterIds = new HashSet<Integer>(monsterIds);
 		  Map<Integer, Monster> monsterIdsToMonsters =
@@ -282,23 +291,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				  individualSilvers, allowDuplicateMonsterToDropEquip);
 		  
 		  //update the protos to return to parent function
-		  stageNumsToRewards.put(stageNum, tsp);
+		  stageNumsToProtos.put(stageNum, tsp);
 		  stageNumsToSilvers.put(stageNum, silverGained);
 		  stageNumsToExps.put(stageNum, expGained);
 		  stageNumsToEquipIds.put(stageNum, equipId);
 	  }
-	  return stageNumsToRewards;
-  }
-  
-  private boolean checkIfEquipDropped(TaskStage ts, Random rand) {
-	  double randDouble = rand.nextDouble();
-	  double dropRate = ts.getEquipDropRate();
-
-	  if (randDouble >= dropRate) {
-		  return false;
-	  } else {
-		  return true;
-	  }
+	  return stageNumsToProtos;
   }
   
   private int fairlyPickMonster(List<Integer> monsterIds, Random rand) {
@@ -309,8 +307,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   //for a monster, choose the reward to give (equipId)
-  //assumption: sum of all the reward drop rates is at most 1
-  private int calculateStageReward(Integer monsterId, Random rand) {
+  //assumption: sum of all the reward drop rates is AT MOST 1
+  private int selectMonsterEquipReward(Integer monsterId, Random rand) {
 	  int equipId = ControllerConstants.NOT_SET;
 	  
 	  double randDouble = rand.nextDouble();
@@ -359,13 +357,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void setResponseBuilder(Builder resBuilder, List<Long> userTaskIdList,
-		  Map<Integer, TaskStageProto> monsterRewardIdsToProtos) {
+		  Map<Integer, TaskStageProto> stageNumsToProtos) {
 	  //stuff to send to the client
 	  long userTaskId = userTaskIdList.get(0);
 	  resBuilder.setUserTaskId(userTaskId);
 	  
-	  for (int i = 0; i < monsterRewardIdsToProtos.size(); i++) {
-		  TaskStageProto tsp = monsterRewardIdsToProtos.get(i);
+	  for (int i = 0; i < stageNumsToProtos.size(); i++) {
+		  TaskStageProto tsp = stageNumsToProtos.get(i);
 		  resBuilder.addTsp(tsp);
 	  }
   }
