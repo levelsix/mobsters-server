@@ -149,13 +149,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	return false;
     }
     
-    //copy pasted from PickLockBoxController.java Pick()
-//    if (!MiscMethods.checkClientTimeAroundApproximateNow(curTime)) {
-//      log.error("client time too apart of server time. client time =" + curTime + ", servertime~="
-//          + new Date());
-//      resBuilder.setStatus(BeginDungeonStatus.FAIL_CLIENT_TOO_APART_FROM_SERVER_TIME);
-//      return false;
-//    } 
     if(!userHasSufficientStamergy(u, aTask)) {
       log.error("user error: use does not have enough stamergy for task" +
           "user stamergy=" + u.getEnergy() + "\t task=" + aTask);
@@ -163,9 +156,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       return false;
     }
 
-    //In order to attack boss, user needs to rank up a city. When ranking
-    //up a city, a user_boss entry should be created/updated.
-    //Ergo entry in user_bosses should exist when this controller executes.
     UserTask aUserTask = UserTaskRetrieveUtils.getUserTaskForUserId(userId);
     if(null != aUserTask) {
       log.error("unexpected error: user has existing task when beginning another. " +
@@ -233,12 +223,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   //stage can have multiple monsters; stage has a drop rate (but is useless for now); 
   //for each stage do the following
-  //1) generate random number (rn1), 
-  //2) if it indicates gem dropped select one of the monsters fairly
-  //3) then for that monster generate random number (rn2), 
-  //4) go through rewards tied to that monster accumulating the drop rates
-  //5) select current reward when accumulated drop rate exceeds random number
-  //generated (rn2)
   //1) select monster at random
   //1a) determine if monster drops equip
   //2) create MonsterProto
