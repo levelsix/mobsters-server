@@ -29,7 +29,7 @@ public interface UpdateUtil {
   /*
    * used for collecting a city expansion
    */
-  public abstract boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition, boolean isExpanding);
+  public abstract boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition, boolean isExpanding, Timestamp expandStartTime);
 
   /*@Caching(evict = {
       //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),

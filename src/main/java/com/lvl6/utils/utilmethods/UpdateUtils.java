@@ -108,7 +108,8 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override 
-	public boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition, boolean isExpanding) {
+	public boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition,
+			boolean isExpanding, Timestamp expandStartTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__USER_ID, userId);
 		conditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__X_POSITION, xPosition);
@@ -116,9 +117,10 @@ public class UpdateUtils implements UpdateUtil {
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER_CITY_EXPANSION_DATA__IS_EXPANDING, isExpanding);
+		absoluteParams.put(DBConstants.USER_CITY_EXPANSION_DATA__EXPAND_START_TIME, expandStartTime);
 		
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_QUESTS, null, absoluteParams, 
-				conditionParams, "and");
+		int numUpdated = DBConnection.get().updateTableRows(
+				DBConstants.TABLE_USER_CITY_EXPANSION_DATA, null, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
 		}

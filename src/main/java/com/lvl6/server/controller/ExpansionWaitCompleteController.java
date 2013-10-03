@@ -96,7 +96,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	private void writeChangesToDB(User user, UserCityExpansionData userCityExpansionData, boolean speedUp, 
 			Map<String, Integer> money, Timestamp clientTime, int xPosition, int yPosition) {
 		
-		if (!UpdateUtils.get().updateUserCityExpansionData(user.getId(), xPosition, yPosition, false)) {
+		if (!UpdateUtils.get().updateUserCityExpansionData(user.getId(), xPosition, yPosition, false, clientTime)) {
 			log.error("problem with resolving expansion");
 		}
 
