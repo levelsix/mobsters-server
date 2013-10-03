@@ -166,14 +166,16 @@ public class Monster implements Serializable {
 	}
 	
 	public int getSilverDrop() {
-		//example goal: [5, 10]
-		//generate 6 random numbers [0, 5]
-		int range = getMaxSilverDrop() - getMinSilverDrop() + 1;
+		//example goal: [min,max]=[5, 10], transform range to start at 0.
+		//[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
+		//this means there are (10-5)+1 possible numbers
 		
-		//5 + [0, 5] = [5, 10]
-		int randSilver = rand.nextInt(range) + range; 
-		
-		return randSilver;
+		int minMaxDiff = getMaxSilverDrop() - getMinSilverDrop();
+		int randSilver = rand.nextInt(minMaxDiff + 1); 
+
+		//number generated in [0, max-min] range, but need to transform
+		//back to original range [min, max]. so add min. [0+min, max-min+min]
+		return randSilver + getMinSilverDrop();
 	}
 
 	@Override
