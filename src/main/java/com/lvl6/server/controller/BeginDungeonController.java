@@ -240,6 +240,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  TaskStage ts = tsMap.get(tsId);
 		  int stageNum = ts.getStageNum();
 		  
+		  log.info("processing TaskStage=" + ts);
+		  
 		  //select one monster, at random. This is the ONE monster for this stage
 		  List<Integer> monsterIds = 
 				  TaskStageMonsterRetrieveUtils.getMonsterIdsForTaskStageId(tsId);
@@ -280,6 +282,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  stageNumsToExps.put(stageNum, expGained);
 		  stageNumsToEquipIds.put(stageNum, equipId);
 	  }
+	  
+	  log.info("all task stages processed. TaskStages=" + stageNumsToProtos);
 	  return stageNumsToProtos;
   }
   
