@@ -303,9 +303,6 @@ public class CreateInfoProtoUtils {
 		}
 		questGiverImageSuffix = quest.getGoodQuestGiverImageSuffix();
 		defeatTypeReqs = quest.getDefeatGoodGuysJobsRequired();
-		if (nce != null) {
-			questGiverName = nce.getBadName();
-		}
 
 		FullQuestProto.Builder builder = FullQuestProto.newBuilder().setQuestId(quest.getId()).setCityId(quest.getCityId()).setName(name)
 				.setDescription(description).setDoneResponse(doneResponse).setAssetNumWithinCity(quest.getAssetNumWithinCity())
@@ -596,18 +593,11 @@ public class CreateInfoProtoUtils {
 
 	public static FullTaskProto createFullTaskProtoFromTask(UserType userType, Task task) {
 
-		boolean goodSide = MiscMethods.checkIfGoodSide(userType);
-
 		String name = null;
 //		String processingText = null;
 
-		if (goodSide) {
 			name = task.getGoodName();
 //			processingText = task.getGoodProcessingText();
-		} else {
-			name = task.getBadName();
-//			processingText = task.getBadProcessingText();
-		}
 
 		FullTaskProto.Builder builder = FullTaskProto.newBuilder();
 		builder.setTaskId(task.getId());
@@ -869,14 +859,9 @@ public class CreateInfoProtoUtils {
 		NeutralCityElementProto.Builder builder = NeutralCityElementProto.newBuilder().setCityId(nce.getCityId()).setAssetId(nce.getAssetId())
 				.setType(nce.getType())
 				.setCoords(createCoordinateProtoFromCoordinatePair(nce.getCoords()));
-		boolean goodSide = MiscMethods.checkIfGoodSide(type);
-		if (goodSide) {
-			builder.setName(nce.getGoodName());
-			builder.setImgId(nce.getImgGood());
-		} else {
-			builder.setName(nce.getBadName());
-			builder.setImgId(nce.getImgBad());      
-		}
+		builder.setName(nce.getGoodName());
+		builder.setImgId(nce.getImgGood());
+
 		if (nce.getOrientation() != null) {
 			builder.setOrientation(nce.getOrientation());
 		}

@@ -101,7 +101,6 @@ import com.lvl6.utils.DBConnection;
     int cityId = rs.getInt(i++);
     int assetId = rs.getInt(i++);
     String goodName = rs.getString(i++);
-    String badName = rs.getString(i++);
     NeutralCityElemType type = NeutralCityElemType.valueOf(rs.getInt(i++));
     CoordinatePair coords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
 
@@ -111,13 +110,12 @@ import com.lvl6.utils.DBConnection;
     int yLength = rs.getInt(i++);
     if (rs.wasNull()) yLength = ControllerConstants.NOT_SET;
 
-    String imgIdGood = rs.getString(i++);
-    String imgIdBad = rs.getString(i++);
+    String imgGood = rs.getString(i++);
 
     int orientationNum = rs.getInt(i++);
     StructOrientation orientation = (rs.wasNull()) ? null : StructOrientation.valueOf(orientationNum);
 
-    return new NeutralCityElement(cityId, assetId, goodName, badName, type, coords, xLength, yLength, imgIdGood, imgIdBad, orientation);
+    return new NeutralCityElement(cityId, assetId, goodName, type, coords, xLength, yLength, imgGood, orientation);
   }
 
 

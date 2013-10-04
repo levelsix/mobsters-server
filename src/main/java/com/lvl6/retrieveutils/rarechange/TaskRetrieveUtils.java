@@ -147,7 +147,6 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int id = rs.getInt(i++);
     String goodName = rs.getString(i++);
-    String badName = rs.getString(i++);
     int cityId = rs.getInt(i++);
     int energyCost = rs.getInt(i++);
 //    int minCoinsGained = rs.getInt(i++);
@@ -176,7 +175,7 @@ import com.lvl6.utils.DBConnection;
 
 //    AnimationType at = AnimationType.valueOf(rs.getInt(i++));
     
-    Task task = new Task(id, goodName, badName, cityId, energyCost, assetNumberWithinCity);
+    Task task = new Task(id, goodName, cityId, energyCost, assetNumberWithinCity);
     return task;
   }
 }
