@@ -103,6 +103,7 @@ public class DBConstants {
   public static final String TABLE_USER_TASK_HISTORY = "user_task_history";
   public static final String TABLE_CITY_EXPANSION_COST = "city_expansion_cost";
   public static final String TABLE_USER_CITY_EXPANSION_DATA = "user_city_expansion_data";
+  public static final String TABLE_USER_AND_EQUIP_FAIL = "user_and_equip_fail";
   
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
@@ -774,7 +775,10 @@ public class DBConstants {
   public static final String USER_CITY_EXPANSION_DATA__IS_EXPANDING = "is_expanding";
   public static final String USER_CITY_EXPANSION_DATA__EXPAND_START_TIME = "expand_start_time";
   
-  
+  /*USER AND EQUIP FAIL*///keeping track of user's failed forge attempts(?)
+  public static final String USER_AND_EQUIP_FAIL__USER_ID = GENERIC__USER_ID;
+  public static final String USER_AND_EQUIP_FAIL__EQUIP_ID = "equip_id";
+  public static final String USER_AND_EQUIP_FAIL__NUM_FAILS = "num_fails";
   
 }
 

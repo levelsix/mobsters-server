@@ -11,7 +11,6 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Task;
 import com.lvl6.info.UserStruct;
 import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
-import com.lvl6.proto.InfoProto.ExpansionDirection;
 import com.lvl6.proto.InfoProto.StructOrientation;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 
@@ -214,4 +213,7 @@ public interface UpdateUtil {
   public abstract int updateUserEquipsDurability(List<Long> userEquipIds,
   		List<Integer> currentDurability,
   		Map<Long, Integer> userEquipIdsToDurabilities); 
+  
+  public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);
+  
 }

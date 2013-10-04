@@ -1376,4 +1376,19 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 
+	public int updateUserAndEquipFail(int userId, int equipId, int failIncrement) {
+		Map <String, Object> insertParams = new HashMap<String, Object>();
+
+		insertParams.put(DBConstants.USER_AND_EQUIP_FAIL__USER_ID, userId);
+		insertParams.put(DBConstants.USER_AND_EQUIP_FAIL__EQUIP_ID, equipId);
+		insertParams.put(DBConstants.USER_AND_EQUIP_FAIL__NUM_FAILS, failIncrement);
+
+		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
+		insertParams.put(DBConstants.USER_AND_EQUIP_FAIL__NUM_FAILS, failIncrement);
+
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_AND_EQUIP_FAIL, insertParams, 
+				columnsToUpdate, null);//DBConstants.USER_CITIES__CURRENT_RANK, increment);
+
+		return numUpdated;
+	}
 }
