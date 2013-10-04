@@ -14,13 +14,10 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LoadNeutralCityRequestEvent;
 import com.lvl6.events.response.LoadNeutralCityResponseEvent;
-import com.lvl6.info.Monster;
 import com.lvl6.info.City;
 import com.lvl6.info.NeutralCityElement;
 import com.lvl6.info.Quest;
-import com.lvl6.info.Task;
 import com.lvl6.info.User;
-import com.lvl6.info.UserBoss;
 import com.lvl6.info.UserCityGem;
 import com.lvl6.info.UserQuest;
 import com.lvl6.info.jobs.DefeatTypeJob;
@@ -34,15 +31,11 @@ import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.InfoProto.UserCityGemProto;
 import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.UserBossRetrieveUtils;
 import com.lvl6.retrieveutils.UserCityGemRetrieveUtils;
-import com.lvl6.retrieveutils.UserTaskRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -145,12 +138,10 @@ import com.lvl6.utils.RetrieveUtils;
   }
 
   private void setResponseDefeatTypeJobEnemies(Builder resBuilder, List<Quest> questsInCity, User user, int cityId) {
-    boolean goodSide = MiscMethods.checkIfGoodSide(user.getType());
     Map<UserType, Integer> numToGenerate = new HashMap<UserType, Integer>();
 
     for (Quest quest : questsInCity) {
-      List<Integer> defeatTypeJobIds = (goodSide) ? quest.getDefeatBadGuysJobsRequired()
-          : quest.getDefeatGoodGuysJobsRequired();
+      List<Integer> defeatTypeJobIds = quest.getDefeatGoodGuysJobsRequired();
       if (defeatTypeJobIds != null && defeatTypeJobIds.size() > 0) {
         Map<Integer, DefeatTypeJob> defeatTypeJobIdsToDefeatTypeJobs = DefeatTypeJobRetrieveUtils.getDefeatTypeJobsForDefeatTypeJobIds(defeatTypeJobIds);
         if (defeatTypeJobIdsToDefeatTypeJobs != null) {
@@ -235,16 +226,16 @@ import com.lvl6.utils.RetrieveUtils;
 //  }
 
   //for each of this city's bosses send the corresponding user_bosses
-  private void setResponseUserBossInfos(Builder resBuilder, List<Integer> bossIds, int userId) {
-    boolean livingBossesOnly = false;
-    List<UserBoss> userBosses = UserBossRetrieveUtils
-        .getUserBossesForUserId(userId, livingBossesOnly);
-    for (UserBoss b : userBosses) {
-      if (bossIds.contains(b.getBossId())) {
-        resBuilder.addUserBosses(CreateInfoProtoUtils.createFullUserBossProtoFromUserBoss(b));
-      }
-    }
-  }
+//  private void setResponseUserBossInfos(Builder resBuilder, List<Integer> bossIds, int userId) {
+//    boolean livingBossesOnly = false;
+//    List<UserBoss> userBosses = UserBossRetrieveUtils
+//        .getUserBossesForUserId(userId, livingBossesOnly);
+//    for (UserBoss b : userBosses) {
+//      if (bossIds.contains(b.getBossId())) {
+//        resBuilder.addUserBosses(CreateInfoProtoUtils.createFullUserBossProtoFromUserBoss(b));
+//      }
+//    }
+//  }
 
   private boolean checkLegitCityLoad(Builder resBuilder, User user, City city, int currentCityRankForUser) {
     if (city == null || user == null) {

@@ -162,13 +162,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
             + ", num tasks it has is " + quest.getTasksRequired().size());
       }
     }
-    boolean goodSide = MiscMethods.checkIfGoodSide(userType);
     List<Integer> defeatTypeJobs = null;
-    if (goodSide) {
-      defeatTypeJobs = quest.getDefeatBadGuysJobsRequired();
-    } else {
-      defeatTypeJobs = quest.getDefeatGoodGuysJobsRequired();
-    }
+    defeatTypeJobs = quest.getDefeatGoodGuysJobsRequired();
     if (defeatTypeJobs != null && defeatTypeJobs.size() > 0) {
       if (!DeleteUtils.get().deleteUserQuestInfoInDefeatTypeJobProgressAndCompletedDefeatTypeJobs(userQuest.getUserId(), userQuest.getQuestId(), defeatTypeJobs.size())) {
         log.error("problem with deleting user quest info for defeat type job tables. questid=" + userQuest.getQuestId() 

@@ -1426,8 +1426,7 @@ public class StartupController extends EventController {
       } else {
         Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
 
-        if (quest.getDefeatBadGuysJobsRequired() == null
-            && quest.getDefeatGoodGuysJobsRequired() == null && !uq.isDefeatTypeJobsComplete()) {
+        if (quest.getDefeatGoodGuysJobsRequired() == null && !uq.isDefeatTypeJobsComplete()) {
           if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), false,
               true)) {
             log.error("problem with updating user quest data by marking defeat type jobs completed for user quest "

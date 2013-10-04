@@ -15,7 +15,6 @@ import com.lvl6.events.response.QuestAcceptResponseEvent;
 import com.lvl6.info.Quest;
 import com.lvl6.info.User;
 import com.lvl6.info.UserQuest;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventProto.QuestAcceptRequestProto;
 import com.lvl6.proto.EventProto.QuestAcceptResponseProto;
 import com.lvl6.proto.EventProto.QuestAcceptResponseProto.Builder;
@@ -84,9 +83,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
         boolean tasksComplete = (quest.getTasksRequired() == null || quest.getTasksRequired().size() == 0);
         
         boolean defeatTypeJobsComplete = true;
-        boolean goodSide = MiscMethods.checkIfGoodSide(user.getType());
-        List<Integer> defeatTypeJobIds = (goodSide) ? quest.getDefeatBadGuysJobsRequired()
-            : quest.getDefeatGoodGuysJobsRequired();
+        List<Integer> defeatTypeJobIds = quest.getDefeatGoodGuysJobsRequired();
         if (defeatTypeJobIds != null && defeatTypeJobIds.size() > 0) defeatTypeJobsComplete = false;
         
         if (quest.getSpecialQuestActionRequired() != null) {

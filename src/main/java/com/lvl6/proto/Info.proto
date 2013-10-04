@@ -978,7 +978,6 @@ message FullQuestProto {
      optional int32 coinRetrievalReq = 22;
      optional SpecialQuestAction specialQuestActionReq = 6; 
      optional int32 numComponentsForGood = 18;
-     optional int32 numComponentsForBad = 19;
      optional DialogueProto acceptDialogue = 20;
      
      optional string questGiverName = 21;

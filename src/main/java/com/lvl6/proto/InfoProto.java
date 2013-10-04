@@ -55372,10 +55372,6 @@ public final class InfoProto {
     boolean hasNumComponentsForGood();
     int getNumComponentsForGood();
     
-    // optional int32 numComponentsForBad = 19;
-    boolean hasNumComponentsForBad();
-    int getNumComponentsForBad();
-    
     // optional .com.lvl6.proto.DialogueProto acceptDialogue = 20;
     boolean hasAcceptDialogue();
     com.lvl6.proto.InfoProto.DialogueProto getAcceptDialogue();
@@ -55702,21 +55698,11 @@ public final class InfoProto {
       return numComponentsForGood_;
     }
     
-    // optional int32 numComponentsForBad = 19;
-    public static final int NUMCOMPONENTSFORBAD_FIELD_NUMBER = 19;
-    private int numComponentsForBad_;
-    public boolean hasNumComponentsForBad() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
-    }
-    public int getNumComponentsForBad() {
-      return numComponentsForBad_;
-    }
-    
     // optional .com.lvl6.proto.DialogueProto acceptDialogue = 20;
     public static final int ACCEPTDIALOGUE_FIELD_NUMBER = 20;
     private com.lvl6.proto.InfoProto.DialogueProto acceptDialogue_;
     public boolean hasAcceptDialogue() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     public com.lvl6.proto.InfoProto.DialogueProto getAcceptDialogue() {
       return acceptDialogue_;
@@ -55729,7 +55715,7 @@ public final class InfoProto {
     public static final int QUESTGIVERNAME_FIELD_NUMBER = 21;
     private java.lang.Object questGiverName_;
     public boolean hasQuestGiverName() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     public String getQuestGiverName() {
       java.lang.Object ref = questGiverName_;
@@ -55761,7 +55747,7 @@ public final class InfoProto {
     public static final int QUESTGIVERIMAGESUFFIX_FIELD_NUMBER = 23;
     private java.lang.Object questGiverImageSuffix_;
     public boolean hasQuestGiverImageSuffix() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     public String getQuestGiverImageSuffix() {
       java.lang.Object ref = questGiverImageSuffix_;
@@ -55793,7 +55779,7 @@ public final class InfoProto {
     public static final int PRIORITY_FIELD_NUMBER = 24;
     private int priority_;
     public boolean hasPriority() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     public int getPriority() {
       return priority_;
@@ -55819,7 +55805,6 @@ public final class InfoProto {
       coinRetrievalReq_ = 0;
       specialQuestActionReq_ = com.lvl6.proto.InfoProto.SpecialQuestAction.PURCHASE_FROM_ARMORY;
       numComponentsForGood_ = 0;
-      numComponentsForBad_ = 0;
       acceptDialogue_ = com.lvl6.proto.InfoProto.DialogueProto.getDefaultInstance();
       questGiverName_ = "";
       questGiverImageSuffix_ = "";
@@ -55892,21 +55877,18 @@ public final class InfoProto {
         output.writeInt32(18, numComponentsForGood_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeInt32(19, numComponentsForBad_);
-      }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeMessage(20, acceptDialogue_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeBytes(21, getQuestGiverNameBytes());
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeInt32(22, coinRetrievalReq_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         output.writeBytes(23, getQuestGiverImageSuffixBytes());
       }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         output.writeInt32(24, priority_);
       }
       getUnknownFields().writeTo(output);
@@ -56022,13 +56004,9 @@ public final class InfoProto {
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(19, numComponentsForBad_);
-      }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(20, acceptDialogue_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(21, getQuestGiverNameBytes());
       }
@@ -56036,11 +56014,11 @@ public final class InfoProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(22, coinRetrievalReq_);
       }
-      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(23, getQuestGiverImageSuffixBytes());
       }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(24, priority_);
       }
@@ -56207,20 +56185,18 @@ public final class InfoProto {
         bitField0_ = (bitField0_ & ~0x00020000);
         numComponentsForGood_ = 0;
         bitField0_ = (bitField0_ & ~0x00040000);
-        numComponentsForBad_ = 0;
-        bitField0_ = (bitField0_ & ~0x00080000);
         if (acceptDialogueBuilder_ == null) {
           acceptDialogue_ = com.lvl6.proto.InfoProto.DialogueProto.getDefaultInstance();
         } else {
           acceptDialogueBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         questGiverName_ = "";
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00100000);
         questGiverImageSuffix_ = "";
-        bitField0_ = (bitField0_ & ~0x00400000);
+        bitField0_ = (bitField0_ & ~0x00200000);
         priority_ = 0;
-        bitField0_ = (bitField0_ & ~0x00800000);
+        bitField0_ = (bitField0_ & ~0x00400000);
         return this;
       }
       
@@ -56344,25 +56320,21 @@ public final class InfoProto {
         if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.numComponentsForBad_ = numComponentsForBad_;
-        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
-          to_bitField0_ |= 0x00004000;
-        }
         if (acceptDialogueBuilder_ == null) {
           result.acceptDialogue_ = acceptDialogue_;
         } else {
           result.acceptDialogue_ = acceptDialogueBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.questGiverName_ = questGiverName_;
         if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.questGiverName_ = questGiverName_;
+        result.questGiverImageSuffix_ = questGiverImageSuffix_;
         if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
           to_bitField0_ |= 0x00010000;
-        }
-        result.questGiverImageSuffix_ = questGiverImageSuffix_;
-        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
-          to_bitField0_ |= 0x00020000;
         }
         result.priority_ = priority_;
         result.bitField0_ = to_bitField0_;
@@ -56479,9 +56451,6 @@ public final class InfoProto {
         }
         if (other.hasNumComponentsForGood()) {
           setNumComponentsForGood(other.getNumComponentsForGood());
-        }
-        if (other.hasNumComponentsForBad()) {
-          setNumComponentsForBad(other.getNumComponentsForBad());
         }
         if (other.hasAcceptDialogue()) {
           mergeAcceptDialogue(other.getAcceptDialogue());
@@ -56676,11 +56645,6 @@ public final class InfoProto {
               numComponentsForGood_ = input.readInt32();
               break;
             }
-            case 152: {
-              bitField0_ |= 0x00080000;
-              numComponentsForBad_ = input.readInt32();
-              break;
-            }
             case 162: {
               com.lvl6.proto.InfoProto.DialogueProto.Builder subBuilder = com.lvl6.proto.InfoProto.DialogueProto.newBuilder();
               if (hasAcceptDialogue()) {
@@ -56691,7 +56655,7 @@ public final class InfoProto {
               break;
             }
             case 170: {
-              bitField0_ |= 0x00200000;
+              bitField0_ |= 0x00100000;
               questGiverName_ = input.readBytes();
               break;
             }
@@ -56701,12 +56665,12 @@ public final class InfoProto {
               break;
             }
             case 186: {
-              bitField0_ |= 0x00400000;
+              bitField0_ |= 0x00200000;
               questGiverImageSuffix_ = input.readBytes();
               break;
             }
             case 192: {
-              bitField0_ |= 0x00800000;
+              bitField0_ |= 0x00400000;
               priority_ = input.readInt32();
               break;
             }
@@ -57307,33 +57271,12 @@ public final class InfoProto {
         return this;
       }
       
-      // optional int32 numComponentsForBad = 19;
-      private int numComponentsForBad_ ;
-      public boolean hasNumComponentsForBad() {
-        return ((bitField0_ & 0x00080000) == 0x00080000);
-      }
-      public int getNumComponentsForBad() {
-        return numComponentsForBad_;
-      }
-      public Builder setNumComponentsForBad(int value) {
-        bitField0_ |= 0x00080000;
-        numComponentsForBad_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearNumComponentsForBad() {
-        bitField0_ = (bitField0_ & ~0x00080000);
-        numComponentsForBad_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // optional .com.lvl6.proto.DialogueProto acceptDialogue = 20;
       private com.lvl6.proto.InfoProto.DialogueProto acceptDialogue_ = com.lvl6.proto.InfoProto.DialogueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.InfoProto.DialogueProto, com.lvl6.proto.InfoProto.DialogueProto.Builder, com.lvl6.proto.InfoProto.DialogueProtoOrBuilder> acceptDialogueBuilder_;
       public boolean hasAcceptDialogue() {
-        return ((bitField0_ & 0x00100000) == 0x00100000);
+        return ((bitField0_ & 0x00080000) == 0x00080000);
       }
       public com.lvl6.proto.InfoProto.DialogueProto getAcceptDialogue() {
         if (acceptDialogueBuilder_ == null) {
@@ -57352,7 +57295,7 @@ public final class InfoProto {
         } else {
           acceptDialogueBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00080000;
         return this;
       }
       public Builder setAcceptDialogue(
@@ -57363,12 +57306,12 @@ public final class InfoProto {
         } else {
           acceptDialogueBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00080000;
         return this;
       }
       public Builder mergeAcceptDialogue(com.lvl6.proto.InfoProto.DialogueProto value) {
         if (acceptDialogueBuilder_ == null) {
-          if (((bitField0_ & 0x00100000) == 0x00100000) &&
+          if (((bitField0_ & 0x00080000) == 0x00080000) &&
               acceptDialogue_ != com.lvl6.proto.InfoProto.DialogueProto.getDefaultInstance()) {
             acceptDialogue_ =
               com.lvl6.proto.InfoProto.DialogueProto.newBuilder(acceptDialogue_).mergeFrom(value).buildPartial();
@@ -57379,7 +57322,7 @@ public final class InfoProto {
         } else {
           acceptDialogueBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00080000;
         return this;
       }
       public Builder clearAcceptDialogue() {
@@ -57389,11 +57332,11 @@ public final class InfoProto {
         } else {
           acceptDialogueBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         return this;
       }
       public com.lvl6.proto.InfoProto.DialogueProto.Builder getAcceptDialogueBuilder() {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00080000;
         onChanged();
         return getAcceptDialogueFieldBuilder().getBuilder();
       }
@@ -57421,7 +57364,7 @@ public final class InfoProto {
       // optional string questGiverName = 21;
       private java.lang.Object questGiverName_ = "";
       public boolean hasQuestGiverName() {
-        return ((bitField0_ & 0x00200000) == 0x00200000);
+        return ((bitField0_ & 0x00100000) == 0x00100000);
       }
       public String getQuestGiverName() {
         java.lang.Object ref = questGiverName_;
@@ -57437,19 +57380,19 @@ public final class InfoProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00200000;
+  bitField0_ |= 0x00100000;
         questGiverName_ = value;
         onChanged();
         return this;
       }
       public Builder clearQuestGiverName() {
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00100000);
         questGiverName_ = getDefaultInstance().getQuestGiverName();
         onChanged();
         return this;
       }
       void setQuestGiverName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00100000;
         questGiverName_ = value;
         onChanged();
       }
@@ -57457,7 +57400,7 @@ public final class InfoProto {
       // optional string questGiverImageSuffix = 23;
       private java.lang.Object questGiverImageSuffix_ = "";
       public boolean hasQuestGiverImageSuffix() {
-        return ((bitField0_ & 0x00400000) == 0x00400000);
+        return ((bitField0_ & 0x00200000) == 0x00200000);
       }
       public String getQuestGiverImageSuffix() {
         java.lang.Object ref = questGiverImageSuffix_;
@@ -57473,19 +57416,19 @@ public final class InfoProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00400000;
+  bitField0_ |= 0x00200000;
         questGiverImageSuffix_ = value;
         onChanged();
         return this;
       }
       public Builder clearQuestGiverImageSuffix() {
-        bitField0_ = (bitField0_ & ~0x00400000);
+        bitField0_ = (bitField0_ & ~0x00200000);
         questGiverImageSuffix_ = getDefaultInstance().getQuestGiverImageSuffix();
         onChanged();
         return this;
       }
       void setQuestGiverImageSuffix(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00400000;
+        bitField0_ |= 0x00200000;
         questGiverImageSuffix_ = value;
         onChanged();
       }
@@ -57493,19 +57436,19 @@ public final class InfoProto {
       // optional int32 priority = 24;
       private int priority_ ;
       public boolean hasPriority() {
-        return ((bitField0_ & 0x00800000) == 0x00800000);
+        return ((bitField0_ & 0x00400000) == 0x00400000);
       }
       public int getPriority() {
         return priority_;
       }
       public Builder setPriority(int value) {
-        bitField0_ |= 0x00800000;
+        bitField0_ |= 0x00400000;
         priority_ = value;
         onChanged();
         return this;
       }
       public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00800000);
+        bitField0_ = (bitField0_ & ~0x00400000);
         priority_ = 0;
         onChanged();
         return this;
@@ -61007,7 +60950,7 @@ public final class InfoProto {
       "ssEquipJobId\030\003 \001(\005\022\027\n\017numEquipUserHas\030\004 ",
       "\001(\005\"W\n\024PossessEquipJobProto\022\031\n\021possessEq" +
       "uipJobId\030\001 \001(\005\022\017\n\007equipId\030\002 \001(\005\022\023\n\013quant" +
-      "ityReq\030\003 \001(\005\"\227\005\n\016FullQuestProto\022\017\n\007quest" +
+      "ityReq\030\003 \001(\005\"\372\004\n\016FullQuestProto\022\017\n\007quest" +
       "Id\030\001 \001(\005\022\016\n\006cityId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023" +
       "\n\013description\030\004 \001(\t\022\024\n\014doneResponse\030\005 \001(" +
       "\t\022\032\n\022assetNumWithinCity\030\007 \001(\005\022\023\n\013coinsGa" +
@@ -61020,65 +60963,64 @@ public final class InfoProto {
       "\n\020coinRetrievalReq\030\026 \001(\005\022A\n\025specialQuest" +
       "ActionReq\030\006 \001(\0162\".com.lvl6.proto.Special" +
       "QuestAction\022\034\n\024numComponentsForGood\030\022 \001(" +
-      "\005\022\033\n\023numComponentsForBad\030\023 \001(\005\0225\n\016accept" +
-      "Dialogue\030\024 \001(\0132\035.com.lvl6.proto.Dialogue" +
-      "Proto\022\026\n\016questGiverName\030\025 \001(\t\022\035\n\025questGi" +
-      "verImageSuffix\030\027 \001(\t\022\020\n\010priority\030\030 \001(\005\"\362" +
-      "\003\n\rDialogueProto\022G\n\rspeechSegment\030\001 \003(\0132",
-      "0.com.lvl6.proto.DialogueProto.SpeechSeg" +
-      "mentProto\032\227\003\n\022SpeechSegmentProto\022Q\n\007spea" +
-      "ker\030\001 \001(\0162@.com.lvl6.proto.DialogueProto" +
-      ".SpeechSegmentProto.DialogueSpeaker\022\023\n\013s" +
-      "peakerText\030\002 \001(\t\"\230\002\n\017DialogueSpeaker\022\017\n\013" +
-      "PLAYER_TYPE\020\001\022\020\n\014GOOD_WARRIOR\020\002\022\017\n\013GOOD_" +
-      "ARCHER\020\003\022\r\n\tGOOD_MAGE\020\004\022\017\n\013BAD_WARRIOR\020\005" +
-      "\022\016\n\nBAD_ARCHER\020\006\022\014\n\010BAD_MAGE\020\007\022\026\n\022GOOD_T" +
-      "UTORIAL_GIRL\020\010\022\025\n\021BAD_TUTORIAL_GIRL\020\t\022\020\n" +
-      "\014QUESTGIVER_1\020\n\022\020\n\014QUESTGIVER_2\020\013\022\020\n\014QUE",
-      "STGIVER_3\020\014\022\020\n\014QUESTGIVER_4\020\r\022\020\n\014QUESTGI" +
-      "VER_5\020\016\022\n\n\006BAZAAR\020\031\"\233\001\n\023PlayerWallPostPr" +
-      "oto\022\030\n\020playerWallPostId\030\001 \001(\005\0220\n\006poster\030" +
-      "\002 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\023\n\013wallOwnerId\030\003 \001(\005\022\022\n\ntimeOfPost\030\004 \001(\003" +
-      "\022\017\n\007content\030\005 \001(\t\"\301\002\n\037UnhandledBlacksmit" +
-      "hAttemptProto\022\024\n\014blacksmithId\030\001 \001(\005\022\016\n\006u" +
-      "serId\030\002 \001(\005\022\017\n\007equipId\030\003 \001(\005\022\021\n\tgoalLeve" +
-      "l\030\004 \001(\003\022\022\n\nguaranteed\030\005 \001(\010\022\021\n\tstartTime" +
-      "\030\006 \001(\003\022\034\n\024diamondGuaranteeCost\030\010 \001(\005\022\025\n\r",
-      "timeOfSpeedup\030\t \001(\003\022\027\n\017attemptComplete\030\n" +
-      " \001(\010\022\"\n\032equipOneEnhancementPercent\030\013 \001(\005" +
-      "\022\"\n\032equipTwoEnhancementPercent\030\014 \001(\005\022\027\n\017" +
-      "forgeSlotNumber\030\r \001(\005*\"\n\016PurchaseOption\022" +
-      "\007\n\003ONE\020\000\022\007\n\003TWO\020\001*C\n\016EquipClassType\022\013\n\007W" +
-      "ARRIOR\020\000\022\n\n\006ARCHER\020\001\022\010\n\004MAGE\020\002\022\016\n\nALL_AM" +
-      "ULET\020\003*,\n\016UserClanStatus\022\n\n\006MEMBER\020\000\022\016\n\n" +
-      "REQUESTING\020\002*@\n\016GroupChatScope\022\n\n\006GLOBAL" +
-      "\020\000\022\014\n\010ALLIANCE\020\001\022\n\n\006LEGION\020\002\022\010\n\004CLAN\020\003*^" +
-      "\n\017LeaderboardType\022\024\n\020MOST_BATTLES_WON\020\002\022",
-      "\016\n\nMOST_COINS\020\003\022\014\n\010MOST_EXP\020\004\022\014\n\010BEST_KD" +
-      "R\020\005\022\t\n\005EVENT\020\006*f\n\020CharacterModType\022\016\n\nNE" +
-      "W_PLAYER\020\001\022\026\n\022RESET_SKILL_POINTS\020\002\022\031\n\025CH" +
-      "ANGE_CHARACTER_TYPE\020\003\022\017\n\013CHANGE_NAME\020\004*;" +
-      "\n\rAnimationType\022\022\n\016GENERIC_ACTION\020\001\022\n\n\006A" +
-      "TTACK\020\002\022\n\n\006DRAGON\020\003*i\n\024EarnFreeDiamondsT" +
-      "ype\022\010\n\004KIIP\020\001\022\014\n\010ADCOLONY\020\002\022\016\n\nFB_CONNEC" +
-      "T\020\003\022\n\n\006TAPJOY\020\004\022\020\n\014FLURRY_VIDEO\020\005\022\013\n\007TWI" +
-      "TTER\020\006*\301\001\n\022SpecialQuestAction\022\030\n\024PURCHAS" +
-      "E_FROM_ARMORY\020\001\022\022\n\016SELL_TO_ARMORY\020\003\022\024\n\020D",
-      "EPOSIT_IN_VAULT\020\005\022\027\n\023WITHDRAW_FROM_VAULT" +
-      "\020\006\022\027\n\023WRITE_ON_ENEMY_WALL\020\007\022\025\n\021REQUEST_J" +
-      "OIN_CLAN\020\010\022\036\n\032SUCCESSFULLY_FORGE_AN_ITEM" +
-      "\020\t*k\n\010UserType\022\020\n\014GOOD_WARRIOR\020\000\022\017\n\013GOOD" +
-      "_ARCHER\020\001\022\r\n\tGOOD_MAGE\020\002\022\017\n\013BAD_WARRIOR\020" +
-      "\003\022\016\n\nBAD_ARCHER\020\004\022\014\n\010BAD_MAGE\020\005*E\n\014Battl" +
-      "eResult\022\020\n\014ATTACKER_WIN\020\000\022\020\n\014DEFENDER_WI" +
-      "N\020\001\022\021\n\rATTACKER_FLEE\020\002*R\n\016CritStructType" +
-      "\022\n\n\006AVIARY\020\000\022\r\n\tCARPENTER\020\002\022\t\n\005VAULT\020\003\022\n" +
-      "\n\006ARMORY\020\004\022\016\n\nBLACKSMITH\020\006*3\n\021StructOrie",
-      "ntation\022\016\n\nPOSITION_1\020\000\022\016\n\nPOSITION_2\020\001*" +
-      "P\n\022ExpansionDirection\022\014\n\010FAR_LEFT\020\000\022\r\n\tF" +
-      "AR_RIGHT\020\001\022\r\n\tNEAR_LEFT\020\002\022\016\n\nNEAR_RIGHT\020" +
-      "\003B\013B\tInfoProto"
+      "\005\0225\n\016acceptDialogue\030\024 \001(\0132\035.com.lvl6.pro" +
+      "to.DialogueProto\022\026\n\016questGiverName\030\025 \001(\t" +
+      "\022\035\n\025questGiverImageSuffix\030\027 \001(\t\022\020\n\010prior" +
+      "ity\030\030 \001(\005\"\362\003\n\rDialogueProto\022G\n\rspeechSeg" +
+      "ment\030\001 \003(\01320.com.lvl6.proto.DialogueProt",
+      "o.SpeechSegmentProto\032\227\003\n\022SpeechSegmentPr" +
+      "oto\022Q\n\007speaker\030\001 \001(\0162@.com.lvl6.proto.Di" +
+      "alogueProto.SpeechSegmentProto.DialogueS" +
+      "peaker\022\023\n\013speakerText\030\002 \001(\t\"\230\002\n\017Dialogue" +
+      "Speaker\022\017\n\013PLAYER_TYPE\020\001\022\020\n\014GOOD_WARRIOR" +
+      "\020\002\022\017\n\013GOOD_ARCHER\020\003\022\r\n\tGOOD_MAGE\020\004\022\017\n\013BA" +
+      "D_WARRIOR\020\005\022\016\n\nBAD_ARCHER\020\006\022\014\n\010BAD_MAGE\020" +
+      "\007\022\026\n\022GOOD_TUTORIAL_GIRL\020\010\022\025\n\021BAD_TUTORIA" +
+      "L_GIRL\020\t\022\020\n\014QUESTGIVER_1\020\n\022\020\n\014QUESTGIVER" +
+      "_2\020\013\022\020\n\014QUESTGIVER_3\020\014\022\020\n\014QUESTGIVER_4\020\r",
+      "\022\020\n\014QUESTGIVER_5\020\016\022\n\n\006BAZAAR\020\031\"\233\001\n\023Playe" +
+      "rWallPostProto\022\030\n\020playerWallPostId\030\001 \001(\005" +
+      "\0220\n\006poster\030\002 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\023\n\013wallOwnerId\030\003 \001(\005\022\022\n\ntimeO" +
+      "fPost\030\004 \001(\003\022\017\n\007content\030\005 \001(\t\"\301\002\n\037Unhandl" +
+      "edBlacksmithAttemptProto\022\024\n\014blacksmithId" +
+      "\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\017\n\007equipId\030\003 \001(\005\022" +
+      "\021\n\tgoalLevel\030\004 \001(\003\022\022\n\nguaranteed\030\005 \001(\010\022\021" +
+      "\n\tstartTime\030\006 \001(\003\022\034\n\024diamondGuaranteeCos" +
+      "t\030\010 \001(\005\022\025\n\rtimeOfSpeedup\030\t \001(\003\022\027\n\017attemp",
+      "tComplete\030\n \001(\010\022\"\n\032equipOneEnhancementPe" +
+      "rcent\030\013 \001(\005\022\"\n\032equipTwoEnhancementPercen" +
+      "t\030\014 \001(\005\022\027\n\017forgeSlotNumber\030\r \001(\005*\"\n\016Purc" +
+      "haseOption\022\007\n\003ONE\020\000\022\007\n\003TWO\020\001*C\n\016EquipCla" +
+      "ssType\022\013\n\007WARRIOR\020\000\022\n\n\006ARCHER\020\001\022\010\n\004MAGE\020" +
+      "\002\022\016\n\nALL_AMULET\020\003*,\n\016UserClanStatus\022\n\n\006M" +
+      "EMBER\020\000\022\016\n\nREQUESTING\020\002*@\n\016GroupChatScop" +
+      "e\022\n\n\006GLOBAL\020\000\022\014\n\010ALLIANCE\020\001\022\n\n\006LEGION\020\002\022" +
+      "\010\n\004CLAN\020\003*^\n\017LeaderboardType\022\024\n\020MOST_BAT" +
+      "TLES_WON\020\002\022\016\n\nMOST_COINS\020\003\022\014\n\010MOST_EXP\020\004",
+      "\022\014\n\010BEST_KDR\020\005\022\t\n\005EVENT\020\006*f\n\020CharacterMo" +
+      "dType\022\016\n\nNEW_PLAYER\020\001\022\026\n\022RESET_SKILL_POI" +
+      "NTS\020\002\022\031\n\025CHANGE_CHARACTER_TYPE\020\003\022\017\n\013CHAN" +
+      "GE_NAME\020\004*;\n\rAnimationType\022\022\n\016GENERIC_AC" +
+      "TION\020\001\022\n\n\006ATTACK\020\002\022\n\n\006DRAGON\020\003*i\n\024EarnFr" +
+      "eeDiamondsType\022\010\n\004KIIP\020\001\022\014\n\010ADCOLONY\020\002\022\016" +
+      "\n\nFB_CONNECT\020\003\022\n\n\006TAPJOY\020\004\022\020\n\014FLURRY_VID" +
+      "EO\020\005\022\013\n\007TWITTER\020\006*\301\001\n\022SpecialQuestAction" +
+      "\022\030\n\024PURCHASE_FROM_ARMORY\020\001\022\022\n\016SELL_TO_AR" +
+      "MORY\020\003\022\024\n\020DEPOSIT_IN_VAULT\020\005\022\027\n\023WITHDRAW",
+      "_FROM_VAULT\020\006\022\027\n\023WRITE_ON_ENEMY_WALL\020\007\022\025" +
+      "\n\021REQUEST_JOIN_CLAN\020\010\022\036\n\032SUCCESSFULLY_FO" +
+      "RGE_AN_ITEM\020\t*k\n\010UserType\022\020\n\014GOOD_WARRIO" +
+      "R\020\000\022\017\n\013GOOD_ARCHER\020\001\022\r\n\tGOOD_MAGE\020\002\022\017\n\013B" +
+      "AD_WARRIOR\020\003\022\016\n\nBAD_ARCHER\020\004\022\014\n\010BAD_MAGE" +
+      "\020\005*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\000\022\020\n\014" +
+      "DEFENDER_WIN\020\001\022\021\n\rATTACKER_FLEE\020\002*R\n\016Cri" +
+      "tStructType\022\n\n\006AVIARY\020\000\022\r\n\tCARPENTER\020\002\022\t" +
+      "\n\005VAULT\020\003\022\n\n\006ARMORY\020\004\022\016\n\nBLACKSMITH\020\006*3\n" +
+      "\021StructOrientation\022\016\n\nPOSITION_1\020\000\022\016\n\nPO",
+      "SITION_2\020\001*P\n\022ExpansionDirection\022\014\n\010FAR_" +
+      "LEFT\020\000\022\r\n\tFAR_RIGHT\020\001\022\r\n\tNEAR_LEFT\020\002\022\016\n\n" +
+      "NEAR_RIGHT\020\003B\013B\tInfoProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -61626,7 +61568,7 @@ public final class InfoProto {
           internal_static_com_lvl6_proto_FullQuestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullQuestProto_descriptor,
-              new java.lang.String[] { "QuestId", "CityId", "Name", "Description", "DoneResponse", "AssetNumWithinCity", "CoinsGained", "DiamondsGained", "ExpGained", "EquipIdGained", "QuestsRequiredForThis", "TaskReqs", "UpgradeStructJobsReqs", "BuildStructJobsReqs", "DefeatTypeReqs", "PossessEquipJobReqs", "CoinRetrievalReq", "SpecialQuestActionReq", "NumComponentsForGood", "NumComponentsForBad", "AcceptDialogue", "QuestGiverName", "QuestGiverImageSuffix", "Priority", },
+              new java.lang.String[] { "QuestId", "CityId", "Name", "Description", "DoneResponse", "AssetNumWithinCity", "CoinsGained", "DiamondsGained", "ExpGained", "EquipIdGained", "QuestsRequiredForThis", "TaskReqs", "UpgradeStructJobsReqs", "BuildStructJobsReqs", "DefeatTypeReqs", "PossessEquipJobReqs", "CoinRetrievalReq", "SpecialQuestActionReq", "NumComponentsForGood", "AcceptDialogue", "QuestGiverName", "QuestGiverImageSuffix", "Priority", },
               com.lvl6.proto.InfoProto.FullQuestProto.class,
               com.lvl6.proto.InfoProto.FullQuestProto.Builder.class);
           internal_static_com_lvl6_proto_DialogueProto_descriptor =

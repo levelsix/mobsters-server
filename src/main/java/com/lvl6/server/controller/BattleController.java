@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BattleRequestEvent;
 import com.lvl6.events.response.BattleResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.Equipment;
 import com.lvl6.info.LeaderboardEvent;
 import com.lvl6.info.LockBoxEvent;
 import com.lvl6.info.Quest;
@@ -37,7 +35,6 @@ import com.lvl6.proto.EventProto.BattleResponseProto.BattleStatus;
 import com.lvl6.proto.EventProto.BattleResponseProto.Builder;
 import com.lvl6.proto.InfoProto.BattleResult;
 import com.lvl6.proto.InfoProto.DefeatTypeJobProto.DefeatTypeJobEnemyType;
-import com.lvl6.proto.InfoProto.FullUserEquipProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -45,12 +42,10 @@ import com.lvl6.retrieveutils.UserLeaderboardEventRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestsDefeatTypeJobProgressRetrieveUtils;
 import com.lvl6.retrieveutils.UserStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LeaderboardEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -105,10 +100,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		Timestamp battleTime = new Timestamp(reqProto.getClientTime());
 
-		Map<Integer, Equipment> equipmentIdsToEquipment = EquipmentRetrieveUtils
-				.getEquipmentIdsToEquipment();
-
-		List<FullUserEquipProto> oldDefenderUserEquipsList = reqProto.getDefenderUserEquipsList();
+//		Map<Integer, Equipment> equipmentIdsToEquipment = EquipmentRetrieveUtils
+//				.getEquipmentIdsToEquipment();
+//
+//		List<FullUserEquipProto> oldDefenderUserEquipsList = reqProto.getDefenderUserEquipsList();
 
 		boolean isTutorialBattle = reqProto.getIsTutorialBattle();
 
@@ -158,7 +153,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 						loser = attacker;
 					}
 
-					Random random = new Random();
+//					Random random = new Random();
 					lostCoins = calculateLostCoins(loser);
 					resBuilder.setCoinsGained(lostCoins);
 
@@ -220,9 +215,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 							//server.unlockPlayer(defenderProto.getUserId());
 							checkQuestsPostBattle(winner, defender.getType(),
 									attackerProto, reqProto.getNeutralCityId(), lostEquip);
-						} else if (lostEquip != null) {
+						} /*else if (lostEquip != null) {
 							QuestUtils.checkAndSendQuestsCompleteBasic(server, attacker.getId(), attackerProto, null, false);
-						}
+						}*/
 					}
 
 					if (attacker != null && defender != null){
@@ -257,44 +252,44 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 	}
 
-	private UserEquip setLostEquip(BattleResponseProto.Builder resBuilder,
-			UserEquip lostEquip, User winner, User loser, Timestamp battleTime) {
-		int durability = ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY;
-		if (!loser.isFake()) { //real, unequip and transfer
-			if (!MiscMethods.unequipUserEquipIfEquipped(loser, lostEquip)) {
-				log.error("problem with unequipping userequip" + lostEquip.getId());
-				lostEquip = null;
-			} else {
-				if (!(UpdateUtils.get().updateUserEquipOwner(lostEquip.getId(), winner.getId(),
-						ControllerConstants.UER__BATTLE))) {
-					log.error("problem with giving equip " + lostEquip.getEquipId() + " to user " + winner.getId());
-					lostEquip = null;
-				} else {
-					resBuilder.setUserEquipGained(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(
-							new UserEquip(lostEquip.getId(), winner.getId(), lostEquip.getEquipId(),
-									lostEquip.getLevel(), 0, durability)));
-					resBuilder.setEquipGained(CreateInfoProtoUtils.createFullEquipProtoFromEquip(
-							EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(lostEquip.getEquipId())));
-				}
-			}
-		} else {  //fake, just insert
-			int userEquipId = InsertUtils.get().insertUserEquip(winner.getId(),
-					lostEquip.getEquipId(), lostEquip.getLevel(),
-					ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT, battleTime,
-					ControllerConstants.UER__BATTLE);
-			if (userEquipId < 0) {
-				log.error("problem with giving 1 of equip " + lostEquip.getEquipId() + " to winner " + winner.getId());
-				lostEquip = null;
-			} else {
-				resBuilder.setUserEquipGained(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(
-						new UserEquip(lostEquip.getId(), winner.getId(), lostEquip.getEquipId(),
-								lostEquip.getLevel(), 0, durability)));
-				resBuilder.setEquipGained(CreateInfoProtoUtils.createFullEquipProtoFromEquip(
-						EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(lostEquip.getEquipId())));
-			}
-		}
-		return lostEquip;
-	}
+//	private UserEquip setLostEquip(BattleResponseProto.Builder resBuilder,
+//			UserEquip lostEquip, User winner, User loser, Timestamp battleTime) {
+//		int durability = ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY;
+//		if (!loser.isFake()) { //real, unequip and transfer
+//			if (!MiscMethods.unequipUserEquipIfEquipped(loser, lostEquip)) {
+//				log.error("problem with unequipping userequip" + lostEquip.getId());
+//				lostEquip = null;
+//			} else {
+//				if (!(UpdateUtils.get().updateUserEquipOwner(lostEquip.getId(), winner.getId(),
+//						ControllerConstants.UER__BATTLE))) {
+//					log.error("problem with giving equip " + lostEquip.getEquipId() + " to user " + winner.getId());
+//					lostEquip = null;
+//				} else {
+//					resBuilder.setUserEquipGained(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(
+//							new UserEquip(lostEquip.getId(), winner.getId(), lostEquip.getEquipId(),
+//									lostEquip.getLevel(), 0, durability)));
+//					resBuilder.setEquipGained(CreateInfoProtoUtils.createFullEquipProtoFromEquip(
+//							EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(lostEquip.getEquipId())));
+//				}
+//			}
+//		} else {  //fake, just insert
+//			int userEquipId = InsertUtils.get().insertUserEquip(winner.getId(),
+//					lostEquip.getEquipId(), lostEquip.getLevel(),
+//					ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT, battleTime,
+//					ControllerConstants.UER__BATTLE);
+//			if (userEquipId < 0) {
+//				log.error("problem with giving 1 of equip " + lostEquip.getEquipId() + " to winner " + winner.getId());
+//				lostEquip = null;
+//			} else {
+//				resBuilder.setUserEquipGained(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(
+//						new UserEquip(lostEquip.getId(), winner.getId(), lostEquip.getEquipId(),
+//								lostEquip.getLevel(), 0, durability)));
+//				resBuilder.setEquipGained(CreateInfoProtoUtils.createFullEquipProtoFromEquip(
+//						EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(lostEquip.getEquipId())));
+//			}
+//		}
+//		return lostEquip;
+//	}
 
 	private int calculateExpGain(User winner, User loser) {
 		//TODO: figure out formula for this
@@ -346,11 +341,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 							.getQuestId());
 					if (quest != null) {
 						List<Integer> defeatTypeJobsRequired = null;
-						if (goodSide) {
-							defeatTypeJobsRequired = quest.getDefeatBadGuysJobsRequired();
-						} else {
-							defeatTypeJobsRequired = quest.getDefeatGoodGuysJobsRequired();
-						}
+						defeatTypeJobsRequired = quest.getDefeatGoodGuysJobsRequired();
 
 						if (defeatTypeJobsRequired != null) {
 							if (questIdToUserDefeatTypeJobsCompletedForQuestForUser == null) {

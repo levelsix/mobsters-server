@@ -86,7 +86,7 @@ import com.lvl6.utils.QuestGraph;
           while(rs.next()) {
             Quest quest = convertRSRowToQuest(rs);
             if (quest != null) {
-              if (quest.getNumComponents(true) > 1 && quest.getSpecialQuestActionRequired() != null) {
+              if (quest.getNumComponents() > 1 && quest.getSpecialQuestActionRequired() != null) {
                 log.error("problem with quest in the db- has a special quest, as well as other components. quest=" + quest);
               } else {
                 tmp.put(quest.getId(), quest);
@@ -119,7 +119,7 @@ import com.lvl6.utils.QuestGraph;
           while(rs.next()) {  //should only be one
             Quest quest = convertRSRowToQuest(rs);
             if (quest != null) {
-              if (quest.getNumComponents(true) > 1 && quest.getSpecialQuestActionRequired() != null) {
+              if (quest.getNumComponents() > 1 && quest.getSpecialQuestActionRequired() != null) {
                 log.error("problem with quest in the db- has a special quest, as well as other components. quest=" + quest);
               } else {
                 quests.add(quest);
@@ -153,16 +153,11 @@ import com.lvl6.utils.QuestGraph;
     int id = rs.getInt(i++);
     int cityId = rs.getInt(i++);
     String goodName = rs.getString(i++);
-    String badName = rs.getString(i++);
     String goodDescription = rs.getString(i++);
-    String badDescription = rs.getString(i++);
     String goodDoneResponse = rs.getString(i++);
-    String badDoneResponse = rs.getString(i++);
 
     String goodAcceptDialogueBlob = rs.getString(i++);
     Dialogue goodAcceptDialogue = MiscMethods.createDialogue(goodAcceptDialogueBlob);
-    String badAcceptDialogueBlob = rs.getString(i++);
-    Dialogue badAcceptDialogue = MiscMethods.createDialogue(badAcceptDialogueBlob);
 
     int assetNumWithinCity = rs.getInt(i++);
     int coinsGained = rs.getInt(i++);
@@ -207,20 +202,11 @@ import com.lvl6.utils.QuestGraph;
     }
 
     String defeatGoodGuysRequiredString = rs.getString(i++);
-    List<Integer> defeatGoodGuysRequired = new ArrayList<Integer>();
+    List<Integer> defeatGoodGuysJobsRequired = new ArrayList<Integer>();
     if (defeatGoodGuysRequiredString != null) {
       st = new StringTokenizer(defeatGoodGuysRequiredString, ", ");
       while (st.hasMoreTokens()) {
-        defeatGoodGuysRequired.add(Integer.parseInt(st.nextToken()));
-      }
-    }
-
-    String defeatBadGuysRequiredString = rs.getString(i++);
-    List<Integer> defeatBadGuysRequired = new ArrayList<Integer>();
-    if (defeatBadGuysRequiredString != null) {
-      st = new StringTokenizer(defeatBadGuysRequiredString, ", ");
-      while (st.hasMoreTokens()) {
-        defeatBadGuysRequired.add(Integer.parseInt(st.nextToken()));
+      	defeatGoodGuysJobsRequired.add(Integer.parseInt(st.nextToken()));
       }
     }
 
@@ -233,27 +219,25 @@ import com.lvl6.utils.QuestGraph;
       }
     }
 
-    int coinRetrievalReq = rs.getInt(i++);
+    int coinRetrievalAmountRequired = rs.getInt(i++);
 
-    SpecialQuestAction sqaReq = null;
+    SpecialQuestAction specialQuestActionRequired = null;
     int specialQuestActionInt = rs.getInt(i++);
     if (!rs.wasNull()) {
-      sqaReq = SpecialQuestAction.valueOf(specialQuestActionInt);
+    	specialQuestActionRequired = SpecialQuestAction.valueOf(specialQuestActionInt);
     }
     
     String goodQuestGiverImageSuffix = rs.getString(i++);
-    String badQuestGiverImageSuffix = rs.getString(i++);
     
     int priority = rs.getInt(i++);
     
-    Quest quest = new Quest(id, cityId, goodName, badName, goodDescription, badDescription, 
-        goodDoneResponse, badDoneResponse,
-        goodAcceptDialogue, badAcceptDialogue, assetNumWithinCity, 
-        coinsGained, diamondsGained, expGained, equipIdGained, questsRequiredForThis, 
-        tasksRequired, upgradeStructJobsRequired, 
-        buildStructJobsRequired, defeatGoodGuysRequired, 
-        defeatBadGuysRequired, possessEquipJobsRequired, coinRetrievalReq, sqaReq, 
-        goodQuestGiverImageSuffix, badQuestGiverImageSuffix, priority);
+    Quest quest = new Quest(id, cityId, goodName, goodDescription,
+    		goodDoneResponse, goodAcceptDialogue, assetNumWithinCity, coinsGained,
+    		diamondsGained, expGained, equipIdGained, questsRequiredForThis,
+    		tasksRequired, upgradeStructJobsRequired, buildStructJobsRequired,
+    		defeatGoodGuysJobsRequired, possessEquipJobsRequired,
+    		coinRetrievalAmountRequired, specialQuestActionRequired,
+    		goodQuestGiverImageSuffix, priority);
     return quest;
   }
 

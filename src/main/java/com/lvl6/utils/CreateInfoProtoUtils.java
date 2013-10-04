@@ -284,8 +284,6 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static FullQuestProto createFullQuestProtoFromQuest(UserType userType, Quest quest) {
-		boolean goodSide = MiscMethods.checkIfGoodSide(userType);
-
 		String name = null;
 		String description = null;
 		String doneResponse = null;
@@ -296,26 +294,17 @@ public class CreateInfoProtoUtils {
 		NeutralCityElement nce = NeutralCityElementsRetrieveUtils.getNeutralCityElement(quest.getCityId(), quest.getAssetNumWithinCity());
 
 		String questGiverImageSuffix = null;
-		if (goodSide) {
-			name = quest.getGoodName();
-			description = quest.getGoodDescription();
-			doneResponse = quest.getGoodDoneResponse();
-			defeatTypeReqs = quest.getDefeatBadGuysJobsRequired();
-			acceptDialogue = quest.getGoodAcceptDialogue();
-			if (nce != null) {
-				questGiverName = nce.getGoodName();
-			}
-			questGiverImageSuffix = quest.getGoodQuestGiverImageSuffix();
-		} else {
-			name = quest.getBadName();
-			description = quest.getBadDescription();
-			doneResponse = quest.getBadDoneResponse();
-			defeatTypeReqs = quest.getDefeatGoodGuysJobsRequired();
-			acceptDialogue = quest.getBadAcceptDialogue();
-			if (nce != null) {
-				questGiverName = nce.getBadName();
-			}
-			questGiverImageSuffix = quest.getBadQuestGiverImageSuffix();
+		name = quest.getGoodName();
+		description = quest.getGoodDescription();
+		doneResponse = quest.getGoodDoneResponse();
+		acceptDialogue = quest.getGoodAcceptDialogue();
+		if (nce != null) {
+			questGiverName = nce.getGoodName();
+		}
+		questGiverImageSuffix = quest.getGoodQuestGiverImageSuffix();
+		defeatTypeReqs = quest.getDefeatGoodGuysJobsRequired();
+		if (nce != null) {
+			questGiverName = nce.getBadName();
 		}
 
 		FullQuestProto.Builder builder = FullQuestProto.newBuilder().setQuestId(quest.getId()).setCityId(quest.getCityId()).setName(name)
@@ -325,7 +314,7 @@ public class CreateInfoProtoUtils {
 				.addAllTaskReqs(quest.getTasksRequired()).addAllUpgradeStructJobsReqs(quest.getUpgradeStructJobsRequired())
 				.addAllBuildStructJobsReqs(quest.getBuildStructJobsRequired())
 				.addAllDefeatTypeReqs(defeatTypeReqs).addAllPossessEquipJobReqs(quest.getPossessEquipJobsRequired())
-				.setNumComponentsForGood(quest.getNumComponents(true)).setNumComponentsForBad(quest.getNumComponents(false))
+				.setNumComponentsForGood(quest.getNumComponents())
 				.setCoinRetrievalReq(quest.getCoinRetrievalAmountRequired()).setQuestGiverImageSuffix(questGiverImageSuffix);
 		if (acceptDialogue != null) {
 			builder.setAcceptDialogue(createDialogueProtoFromDialogue(acceptDialogue));
@@ -724,7 +713,6 @@ public class CreateInfoProtoUtils {
 		Map<Integer, List<UserStruct>> structIdsToUserStructs = null;
 
 		Map<Integer, List<UserEquip>> equipIdsToUserEquips = null;
-		boolean goodSide = MiscMethods.checkIfGoodSide(userType);
 
 		for (UserQuest userQuest : userQuests) {
 			Quest quest = questIdsToQuests.get(userQuest.getQuestId());
@@ -772,11 +760,7 @@ public class CreateInfoProtoUtils {
 					}
 
 					List<Integer> defeatTypeJobsRequired; 
-					if (goodSide) {
-						defeatTypeJobsRequired = quest.getDefeatBadGuysJobsRequired();
-					} else {
-						defeatTypeJobsRequired = quest.getDefeatGoodGuysJobsRequired();
-					}
+					defeatTypeJobsRequired = quest.getDefeatGoodGuysJobsRequired();
 					if (defeatTypeJobsRequired != null && defeatTypeJobsRequired.size() > 0) {
 						if (questIdToUserDefeatTypeJobsCompletedForQuestForUser == null) {
 							questIdToUserDefeatTypeJobsCompletedForQuestForUser = RetrieveUtils.userQuestsCompletedDefeatTypeJobsRetrieveUtils().getQuestIdToUserDefeatTypeJobsCompletedForQuestForUser(userQuest.getUserId());
@@ -867,7 +851,7 @@ public class CreateInfoProtoUtils {
 						}
 					}
 				} else {
-					numComponentsComplete = quest.getNumComponents(goodSide);
+					numComponentsComplete = quest.getNumComponents();
 				}
 				fullUserQuestDataLargeProtos.add(builder.setNumComponentsComplete(numComponentsComplete).build());
 			} else {
