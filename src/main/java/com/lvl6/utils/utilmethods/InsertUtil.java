@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.User;
-import com.lvl6.proto.EventProto.EarnFreeDiamondsRequestProto.AdColonyRewardType;
 import com.lvl6.proto.InfoProto.BattleResult;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 
@@ -48,17 +47,6 @@ public interface InsertUtil {
 			int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement);
 
 //	public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(long l, List<UserEquip> feeders);
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.lvl6.utils.utilmethods.InsertUtil#insertAviaryAndCarpenterCoords(int,
-	 * com.lvl6.info.CoordinatePair, com.lvl6.info.CoordinatePair)
-	 */
-
-	public abstract boolean insertAdcolonyRecentHistory(int userId,
-			Timestamp timeOfReward, int amountEarned, AdColonyRewardType adColonyRewardType, String digest);
 
 	/*
 	 * (non-Javadoc)
@@ -117,9 +105,6 @@ public interface InsertUtil {
 	public abstract int insertPlayerWallPost(int posterId, int wallOwnerId,
 			String content, Timestamp timeOfPost);
 
-	public abstract boolean insertKiipHistory(int userId, Timestamp clientTime,
-			String content, String signature, int quantity, String transactionId);
-
 	public abstract int insertIddictionIndentifier(String identifier, Date clickTime); 
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
@@ -154,8 +139,6 @@ public interface InsertUtil {
 
 	public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, int battlesWonChange, int battlesLostChange, int battlesFledChange);
 
-	public abstract int insertIntoRefillStatHistory(int userId, boolean staminaRefill, int staminaMax, int goldCost);
-
 	public abstract int insertIntoUserCurrencyHistory (int userId, Timestamp date, int isSilver, 
 			int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange);
 
@@ -173,10 +156,6 @@ public interface InsertUtil {
 
 	public abstract int insertIntoUserDailyRewardHistory(int userId, int currencyRewarded, boolean isCoins, int boosterPackId, 
 			int equipIdRewarded, int nthConsecutiveDay, Date dateAwarded);
-
-	public abstract int insertIntoPrestigeHistory(int userId, int preprestigeLevel, int preprestigePrestigeLevel, 
-			int newPrestigeLevel, int preprestigeAttackStat, int preprestigeDefenseStat,  int preprestigeStaminaStat,
-			int preprestigeEnergyStat, Date aDate, int preprestigeExperience, int preprestigeSkillPoints);
 
 	public abstract int insertIntoPrivateChatPosts(int posterId, int recipientId, String content, Timestamp timeOfPost);
 

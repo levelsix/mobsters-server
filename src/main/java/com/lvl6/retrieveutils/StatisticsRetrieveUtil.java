@@ -77,21 +77,6 @@ public class StatisticsRetrieveUtil {
 	}
 	
 	//
-	public Long countNumberKiipRewardsRedeemed() {
-		return jdbcTemplate.queryForLong("select count(*) from " + DBConstants.TABLE_KIIP_REWARD_HISTORY);
-	}
-	
-	//
-	public Long countMarketplaceTransactions() {
-		return jdbcTemplate.queryForLong("select count(*) from " + DBConstants.TABLE_MARKETPLACE_TRANSACTION_HISTORY);
-	}
-	
-	//
-	public Long countMarketplacePosts() {
-		return jdbcTemplate.queryForLong("select count(*) from " + DBConstants.TABLE_MARKETPLACE);
-	}
-	
-	//
 	public Long sumOfSilverInWorld() {
 		return jdbcTemplate.queryForLong("select sum(" + DBConstants.USER__COINS +") + from " + DBConstants.TABLE_USER 
 		    + " where " + DBConstants.USER__IS_FAKE + "=0");

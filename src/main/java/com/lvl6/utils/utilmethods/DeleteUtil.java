@@ -15,8 +15,6 @@ public interface DeleteUtil {
 	public abstract boolean deleteUserQuestInfoInDefeatTypeJobProgressAndCompletedDefeatTypeJobs(
 			int userId, int questId, int numDefeatJobs);
 
-	public abstract boolean deleteMarketplacePost(int mpId);
-
 	/*@Caching(evict = {
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),

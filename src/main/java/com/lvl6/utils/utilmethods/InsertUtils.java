@@ -19,7 +19,6 @@ import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
-import com.lvl6.proto.EventProto.EarnFreeDiamondsRequestProto.AdColonyRewardType;
 import com.lvl6.proto.InfoProto.BattleResult;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 import com.lvl6.spring.AppContext;
@@ -317,33 +316,6 @@ public class InsertUtils implements InsertUtil{
     int blacksmithAttemptId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_BLACKSMITH, insertParams);
     return blacksmithAttemptId;
-  }
-
-  /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.InsertUtil#insertAdcolonyRecentHistory(int, java.sql.Timestamp, int, java.lang.String)
-   */
-  @Override
-  public boolean insertAdcolonyRecentHistory(int userId,
-      Timestamp timeOfReward, int amountEarned, AdColonyRewardType adColonyRewardType, String digest) {
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.ADCOLONY_RECENT_HISTORY__USER_ID, userId);
-    insertParams.put(DBConstants.ADCOLONY_RECENT_HISTORY__TIME_OF_REWARD,
-        timeOfReward);
-    if (adColonyRewardType==AdColonyRewardType.DIAMONDS) {
-      insertParams.put(DBConstants.ADCOLONY_RECENT_HISTORY__DIAMONDS_EARNED,
-          amountEarned);
-    } else if (adColonyRewardType==AdColonyRewardType.COINS) {
-      insertParams.put(DBConstants.ADCOLONY_RECENT_HISTORY__COINS_EARNED,
-          amountEarned);
-    }
-    insertParams.put(DBConstants.ADCOLONY_RECENT_HISTORY__DIGEST, digest);
-
-    int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_ADCOLONY_RECENT_HISTORY, insertParams);
-    if (numInserted == 1) {
-      return true;
-    }
-    return false;
   }
 
   /*
@@ -740,32 +712,6 @@ public class InsertUtils implements InsertUtil{
     return wallPostId;
   }
 
-  /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.InsertUtil#insertKiipHistory(int, java.sql.Timestamp, java.lang.String, java.lang.String, int, java.lang.String)
-   */
-  @Override
-  public boolean insertKiipHistory(int userId, Timestamp clientTime,
-      String content, String signature, int quantity, String transactionId) {
-
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.KIIP_REWARD_HISTORY__CONTENT, content);
-    insertParams.put(DBConstants.KIIP_REWARD_HISTORY__QUANTITY, quantity);
-    insertParams.put(DBConstants.KIIP_REWARD_HISTORY__SIGNATURE, signature);
-    insertParams.put(DBConstants.KIIP_REWARD_HISTORY__TIME_OF_REWARD,
-        clientTime);
-    insertParams.put(DBConstants.KIIP_REWARD_HISTORY__TRANSACTION_ID,
-        transactionId);
-    insertParams.put(DBConstants.KIIP_REWARD_HISTORY__USER_ID, userId);
-    insertParams.put(DBConstants.KIIP_REWARD_HISTORY__SIGNATURE, signature);
-
-    int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_KIIP_REWARD_HISTORY, insertParams);
-    if (numInserted == 1) {
-      return true;
-    }
-    return false;
-  }
-
   @Override
   public int insertIddictionIndentifier(String identifier, Date clickTime) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -956,23 +902,6 @@ public class InsertUtils implements InsertUtil{
     return 0;
   }
   
-  //at the time of this writing 12/19/12 only used to record when user spends diamonds to
-  //refill energy or stamina
-  public int insertIntoRefillStatHistory(int userId, boolean staminaRefill,
-      int staminaMax, int goldCost) {
-    String tablename = DBConstants.TABLE_REFILL_STAT_HISTORY;
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    
-    insertParams.put(DBConstants.REFILL_STAT_HISTORY__USER_ID, userId);
-    insertParams.put(DBConstants.REFILL_STAT_HISTORY__STAMINA_REFILL, staminaRefill);
-    insertParams.put(DBConstants.REFILL_STAT_HISTORY__STAMINA_MAX, staminaMax);
-    insertParams.put(DBConstants.REFILL_STAT_HISTORY__GOLD_COST, goldCost);
-    
-    //number of rows inserted (should be one)
-    int numUpdated =  DBConnection.get().insertIntoTableBasic(tablename, insertParams);
-    Log.info("number of rows inserted into refill_stat_history table: " + numUpdated);
-    return numUpdated;
-  }
   
   //0 for isSilver means currency is gold; 1 for isSilver means currency is silver
   public int insertIntoUserCurrencyHistory (int userId, Timestamp date, int isSilver, 
@@ -1114,29 +1043,6 @@ public class InsertUtils implements InsertUtil{
     
     Timestamp dateAwarded = new Timestamp(aDate.getTime());
     insertParams.put(DBConstants.USER_DAILY_BONUS_REWARD_HISTORY__DATE_AWARDED, dateAwarded);
-    
-    int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-    return numInserted;
-  }
-  
-  public int insertIntoPrestigeHistory(int userId, int preprestigeLevel, int preprestigePrestigeLevel, 
-      int newPrestigeLevel, int preprestigeAttackStat, int preprestigeDefenseStat,  int preprestigeStaminaStat,
-      int preprestigeEnergyStat, Date aDate, int preprestigeExperience, int preprestigeSkillPoints) {
-    String tableName = DBConstants.TABLE_PRESTIGE_HISTORY;
-    
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__USER_ID, userId);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PREPRESTIGE_LEVEL, preprestigeLevel);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PREPRESTIGE_PRESTIGE_LEVEL, preprestigePrestigeLevel);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__NEW_PRESTIGE_LEVEL, newPrestigeLevel);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PREPRESTIGE_ATTACK_STAT, preprestigeAttackStat);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PREPRESTIGE_DEFENSE_STAT, preprestigeDefenseStat);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PREPRESTIGE_STAMINA_STAT, preprestigeStaminaStat);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PREPRESTIGE_ENERGY_STAT, preprestigeEnergyStat);
-    Timestamp aTimestamp = new Timestamp(aDate.getTime());
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PRESTIGE_DATE, aTimestamp);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PREPRESTIGE_EXPERIENCE, preprestigeExperience);
-    insertParams.put(DBConstants.PRESTIGE_HISTORY__PREPRESTIGE_SKILL_POINTS, preprestigeSkillPoints);
     
     int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
     return numInserted;

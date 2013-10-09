@@ -127,22 +127,6 @@ public class DeleteUtils implements DeleteUtil {
   }
 
   /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteMarketplacePost(int)
-   */
-  @Override
-  public boolean deleteMarketplacePost(int mpId) {
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.MARKETPLACE__ID, mpId);
-
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MARKETPLACE, conditionParams, "and");
-    if (numDeleted == 1) {
-      return true;
-    }
-
-    return false;
-  }
-
-  /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteUserStruct(int)
    */
   @Override

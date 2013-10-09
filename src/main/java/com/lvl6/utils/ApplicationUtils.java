@@ -43,9 +43,6 @@ public class ApplicationUtils {
 		stats.setTotalPlayersCount(usersUtil.countUsers(false));
 		stats.setLoggedInToday(statsUtil.countLoginsToday());
 		stats.setLoggedInThisWeek(statsUtil.countLoginsThisWeek());
-		stats.setCountMarketplacePosts(statsUtil.countMarketplacePosts());
-		stats.setCountMarketplaceTransactions(statsUtil.countMarketplaceTransactions());
-		stats.setCountNumberKiipRewardsRedeemed(statsUtil.countNumberKiipRewardsRedeemed());
 		stats.setSumOfDiamondsInWorld(statsUtil.sumOfDiamondsInWorld());
 		stats.setSumOfInAppPurchases(statsUtil.sumOfInAppPurchases());
 		Double appleTx = stats.getSumOfInAppPurchases()*.7;
