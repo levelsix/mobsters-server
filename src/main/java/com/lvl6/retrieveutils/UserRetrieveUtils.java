@@ -656,34 +656,50 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int numReferrals = rs.getInt(i++);
     String udid = rs.getString(i++);
 
-    Timestamp ts = rs.getTimestamp(i++);
+    Timestamp ts;
     Date lastLogin = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastLogin = new Date(ts.getTime());
+    try {
+    	ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		lastLogin = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: last_login not set. user_id=" + id);
     }
 
     Date lastLogout = null;
     ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastLogout = new Date(ts.getTime());
+    try {
+    	if (!rs.wasNull()) {
+    		lastLogout = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: last_logout not set. user_id=" + id);
     }
 
     String deviceToken = rs.getString(i++);
 
     Date lastBattleNotificationTime = null;
     ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastBattleNotificationTime = new Date(ts.getTime());
+    try {
+    	if (!rs.wasNull()) {
+    		lastBattleNotificationTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: last_battle_notification_time not set. user_id=" + id);
     }
 
     int numBadges = rs.getInt(i++);
     boolean isFake = rs.getBoolean(i++);
     
     Date createTime = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      createTime = new Date(ts.getTime());
+    try {
+    	ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		createTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: create_time not set. user_id=" + id);
     }
 
     boolean isAdmin = rs.getBoolean(i++);
@@ -697,9 +713,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     Date lastWallPostNotificationTime = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-    	lastWallPostNotificationTime = new Date(ts.getTime());
+    try {
+    	ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		lastWallPostNotificationTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: last_wall_post_notification_time not set. user_id=" + id);
     }
     
     int kabamNaid = rs.getInt(i++);
@@ -710,18 +730,26 @@ import com.lvl6.utils.utilmethods.StringUtils;
     boolean hasActiveShield = rs.getBoolean(i++);
     
     Date shieldEndTime = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-    	shieldEndTime = new Date(ts.getTime());
+    try {
+    	ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		shieldEndTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: shield_end_time not set. user_id=" + id);
     }
     
     int elo = rs.getInt(i++);
     String rank = rs.getString(i++);
     
     Date lastTimeQueued = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-    	lastTimeQueued = new Date(ts.getTime());
+    try {
+    	ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		lastTimeQueued = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: last_time_queued not set. user_id=" + id);
     }
     
     int attacksWon = rs.getInt(i++);
