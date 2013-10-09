@@ -82,8 +82,7 @@ message PrivateChatPostProto {
 message RareBoosterPurchaseProto {
 	optional MinimumUserProto user = 1;
 	optional BoosterPackProto booster = 2;
-	optional FullEquipProto equip = 3;
-	optional uint64 timeOfPurchase = 4;
+	optional uint64 timeOfPurchase = 3;
 }
 
 enum PurchaseOption {
@@ -192,20 +191,19 @@ message LeaderboardEventRewardProto {
 
 //------------------------------------------------------------------------------------------
 
-message BossEventProto {
-	optional int32 cityId = 1;
-	optional int64 startDate = 2;
-	optional int64 endDate = 3;
-	optional string eventName = 4;
-	optional string headerImage = 5;
-	optional FullEquipProto leftEquip = 6;
-	optional string leftTagImage = 7;
-	optional FullEquipProto middleEquip = 8;
-	optional string middleTagImage = 9;
-	optional FullEquipProto rightEquip = 10;
-	optional string rightTagImage = 11;
-	optional string infoDescription = 12;
-}
+//message BossEventProto {
+//	optional int32 cityId = 1;
+//	optional int64 startDate = 2;
+//	optional int64 endDate = 3;
+//	optional string eventName = 4;
+//	optional string headerImage = 5;
+//	optional FullEquipProto leftEquip = 6;
+//	optional string leftTagImage = 7;
+//	optional FullEquipProto middleEquip = 8;
+//	optional string middleTagImage = 9;
+//	optional string rightTagImage = 11;
+//	optional string infoDescription = 12;
+//}
 
 //------------------------------------------------------------------------------------------
 
@@ -260,25 +258,23 @@ message GroupChatMessageProto {
 
 //-------------------------------------------------------------------------------------
 
-message LockBoxEventProto {
-	optional int32 lockBoxEventId = 1;
-	optional int64 startDate = 2;
-	optional int64 endDate = 3;
-	optional string lockBoxImageName = 4;
-	optional string eventName = 5;
-	optional FullEquipProto prizeEquip = 6;
-	repeated LockBoxItemProto items = 7;
-	optional string descriptionString = 8;
-	optional string descriptionImageName = 9;
-	optional string tagImageName = 10;
-}
+//message LockBoxEventProto {
+//	optional int32 lockBoxEventId = 1;
+//	optional int64 startDate = 2;
+//	optional int64 endDate = 3;
+//	optional string lockBoxImageName = 4;
+//	optional string eventName = 5;
+//	repeated LockBoxItemProto items = 7;
+//	optional string descriptionString = 8;
+//	optional string descriptionImageName = 9;
+//	optional string tagImageName = 10;
+//}
 
 message LockBoxItemProto {
 	optional int32 lockBoxItemId = 1;
 	optional int32 lockBoxEventId = 2;
 	optional float chanceToUnlock = 3;
 	optional string name = 4;
-	optional EquipClassType type = 5;
 	optional string imageName = 6;
 	optional int32 redeemForNumBoosterItems = 7;
 	optional bool isGoldBoosterPack = 8;
@@ -300,12 +296,6 @@ message UserLockBoxItemProto {
 	optional int32 quantity = 3;
 }
 	
-enum EquipClassType {
-	WARRIOR = 0;
-	ARCHER = 1;
-	MAGE = 2;
-	ALL_AMULET = 3;	
-}
 
 //------------------------------------------------------------------------------------------
 
@@ -404,9 +394,8 @@ enum GroupChatScope {
 message MonteCardProto {
 	optional int32 cardId = 1;
      optional int32 diamondsGained = 2;
-     optional FullEquipProto equip = 3;
-     optional int32 equipLevel = 4;
-     optional int32 coinsGained = 5;
+     optional int32 equipLevel = 3;
+     optional int32 coinsGained = 4;
 }	
 
 //------------------------------------------------------------------------------------------
@@ -467,12 +456,12 @@ enum AnimationType {
 //------------------------------------------------------------------------------------------
 
 enum EarnFreeDiamondsType {
-	KIIP = 1;
-	ADCOLONY = 2;
-	FB_CONNECT = 3;
-	TAPJOY = 4;
-	FLURRY_VIDEO = 5;
-	TWITTER = 6;
+	//KIIP = 1;
+	//ADCOLONY = 2;
+	FB_CONNECT = 1;
+	TAPJOY = 2;
+	FLURRY_VIDEO = 3;
+	TWITTER = 4;
 }
 
 //------------------------------------------------------------------------------------------
@@ -491,20 +480,10 @@ enum SpecialQuestAction {
 
 //------------------------------------------------------------------------------------------
 
-enum UserType {
-	GOOD_WARRIOR = 0;
-	GOOD_ARCHER = 1;
-	GOOD_MAGE = 2;
-	BAD_WARRIOR = 3;
-	BAD_ARCHER = 4;
-	BAD_MAGE = 5;
-}
-
 message MinimumUserProto {
 	optional int32 userId = 1;
 	optional string name = 2;
-	optional UserType userType = 3;
-	optional MinimumClanProto clan = 4;
+	optional MinimumClanProto clan = 3;
 }
 
 message MinimumUserProtoWithLevel {
@@ -525,123 +504,55 @@ message FullUserProto {
 	optional int32 userId = 1;
     optional string name = 2;
     optional int32 level = 3;
-    optional UserType userType = 4;
-	optional int32 energy = 10;
-	optional int64 lastEnergyRefillTime = 11;
-	optional int32 energyMax = 15;
-	optional int32 diamonds = 17;
-	optional int32 coins = 18;
-	//optional int32 marketplaceDiamondsEarnings = 19;
-	//optional int32 marketplaceCoinsEarnings = 20;
-	optional int32 vaultBalance = 21;
-	optional int32 experience = 22;
-	optional int32 tasksCompleted = 23;
-	optional int32 battlesWon = 24;
-	optional int32 battlesLost = 25;
-	optional int32 flees = 45;
-	optional string referralCode = 27;
-	optional int32 numReferrals = 28;
-	//optional string udid = 29; //defined below
-	optional LocationProto userLocation = 30;
-	//optional int32 numPostsInMarketplace = 31;
-	//optional int32 numMarketplaceSalesUnredeemed = 32;
-	optional FullUserEquipProto weaponEquippedUserEquip = 33;
-	optional FullUserEquipProto armorEquippedUserEquip = 34;
-	optional FullUserEquipProto amuletEquippedUserEquip = 35;
-	optional int64 lastLoginTime = 36;
-	optional int64 lastLogoutTime = 37;
-	//optional string deviceToken = 38; //defined below
-	//optional int64 lastBattleNotificationTime = 39; //defined below
-	//optional int32 numBadges = 42; //defined below
-	optional int64 lastShortLicensePurchaseTime = 43;
-	optional int64 lastLongLicensePurchaseTime = 44;
-	optional bool isFake = 46;
-	//optional int64 createTime = 47; //defined below
-	optional bool isAdmin = 48;
-	//optional int32 apsalarId = 49;
-	optional int32 numCoinsRetrievedFromStructs = 50;
-	optional int32 numAdColonyVideosWatched = 51;
-	//optional int32 numTimesKiipRewarded = 52; //defined below
-	//optional int32 numConsecutiveDaysPlayed = 53; defined below
-	optional int32 numGroupChatsRemaining = 54;
-	optional MinimumClanProto clan = 55;
-	optional int64 lastGoldmineRetrieval = 56;
-	//last marketplace notification time
-	//last wall post notification time
-	//kabam naid
-	optional bool hasReceivedfbReward = 57;
-	optional FullUserEquipProto weaponTwoEquippedUserEquip = 58;
-	optional FullUserEquipProto armorTwoEquippedUserEquip = 59;
-	optional FullUserEquipProto amuletTwoEquippedUserEquip = 60;
-	optional int32 prestigeLevel = 61;
-	optional int32 numAdditionalForgeSlots = 62;
-	optional int32 numBeginnerSalesPurchased = 63;
-	optional bool isMentor = 64;
-	optional bool hasActiveShield = 65; 
-	optional int64 shieldEndTime = 66;
-	optional int32 elo = 67;
-	optional string rank = 68;
-	optional int64 lastTimeQueued = 69; 
-	optional int32 attacksWon = 70;
-	optional int32 defensesWon = 71;
-	optional int32 attacksLost = 72;
-	optional int32 defensesLost = 73;
+	optional int32 diamonds = 4;
+	optional int32 coins = 5;
+	optional int32 experience = 6;
+	optional int32 tasksCompleted = 7;
+	optional int32 battlesWon = 8;
+	optional int32 battlesLost = 9;
+	optional int32 flees = 10;
+	optional string referralCode = 11;
+	optional int32 numReferrals = 12;
+	//optional string udid = 13; //defined below
+	optional int64 lastLoginTime = 14;
+	optional int64 lastLogoutTime = 15;
+	//optional string deviceToken = 16; //defined below
+	//optional int64 lastBattleNotificationTime = 17; //defined below
+	//optional int32 numBadges = 18; //defined below
+	optional bool isFake = 19;
+	//optional int64 createTime = 20; //defined below
+	optional bool isAdmin = 21;
+	//optional int32 apsalarId = 22; //defined below
+	optional int32 numCoinsRetrievedFromStructs = 23;
+	//optional int32 numConsecutiveDaysPlayed = 24; defined below
+	optional MinimumClanProto clan = 25;
+	//optional int64 lastWallPostNotificationTime lwpnt = 26;
+	//optional string kabamNaid = 27;
+	optional bool hasReceivedfbReward = 28;
+	optional int32 numAdditionalForgeSlots = 29;
+	optional int32 numBeginnerSalesPurchased = 30;
+	optional bool hasActiveShield = 31; 
+	optional int64 shieldEndTime = 32;
+	optional int32 elo = 33;
+	optional string rank = 34;
+	optional int64 lastTimeQueued = 35; 
+	optional int32 attacksWon = 36;
+	optional int32 defensesWon = 37;
+	optional int32 attacksLost = 38;
+	optional int32 defensesLost = 39;
+
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
-	optional string udid = 29;
-	optional string deviceToken = 38;
-	optional int64 lastBattleNotificationTime = 39;
-	optional int64 lastTimeAttacked = 40;
-	optional int32 numBadges = 42;
-	optional int64 createTime = 47;
-	optional int32 apsalarId = 49;
-	optional int32 numTimesKiipRewarded = 52;
-	optional int32 numConsecutiveDaysPlayed = 53;
-
-	//not needed in mobsters
-	//optional int32 attack = 5;
-	//optional int32 defense = 6;
-	//optional int32 stamina = 7;
-	//optional int64 lastStaminaRefillTime = 8;
-	//optional int32 skillPoints = 13;
-	//optional int32 staminaMax = 16;
-}
-
-//------------------------------------------------------------------------------------------
-
-message FullEquipProto {
-	optional int32 equipId = 1;
-	optional string name = 2;
-	optional EquipType equipType = 3;
-	optional string description = 4;
-	optional int32 attackBoost = 5;	
-	optional int32 defenseBoost = 6;
-	optional int32 minLevel = 7;
-	//optional int32 coinPrice = 8;
-	//optional int32 diamondPrice = 9;
-	//optional float chanceOfLoss = 10;
-	//optional EquipClassType classType = 11;
-	optional Rarity rarity = 12;
-	//optional bool isBuyableInArmory = 13;
-	optional float chanceOfForgeFailureBase = 14;
-	optional int32 minutesToAttemptForgeBase = 15;
-	optional int32 maxDurability = 16;
-	
-	enum Rarity {
-		COMMON = 0;
-		UNCOMMON = 1;
-		RARE = 2;
-		SUPERRARE = 3;
-		EPIC = 4;
-		LEGENDARY = 5;
-	}
-	
-	enum EquipType {
-		WEAPON = 0;
-		ARMOR = 1;
-		AMULET = 2;
-	}
+	optional string udid = 13;
+	optional string deviceToken = 16;
+	optional int64 lastBattleNotificationTime = 17;
+	optional int32 numBadges = 18;
+	optional int64 createTime = 20;
+	optional int32 apsalarId = 22;
+	optional int32 numConsecutiveDaysPlayed = 24;
+	optional int64 lastWallPostNotificationTime = 26;
+	optional string kabamNaid = 27;
 }
 
 //------------------------------------------------------------------------------------------
@@ -766,13 +677,6 @@ message FullUserCityProto {
 message CoordinateProto {
 	optional float x = 1;
 	optional float y = 2;
-}
-
-//------------------------------------------------------------------------------------------
-
-message LocationProto {
-	optional double latitude = 1;
-	optional double longitude = 2;
 }
 
 //------------------------------------------------------------------------------------------

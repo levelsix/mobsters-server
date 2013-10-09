@@ -161,7 +161,7 @@ public class QuestUtils {
         .setQuestId(quest.getId());
     NeutralCityElement neutralCityElement = NeutralCityElementsRetrieveUtils.getNeutralCityElement(quest.getCityId(), quest.getAssetNumWithinCity());
     if (neutralCityElement != null) {
-      builder.setNeutralCityElement(CreateInfoProtoUtils.createNeutralCityElementProtoFromNeutralCityElement(neutralCityElement, senderProto.getUserType()));
+      builder.setNeutralCityElement(CreateInfoProtoUtils.createNeutralCityElementProtoFromNeutralCityElement(neutralCityElement));
     }
     QuestCompleteResponseEvent event = new QuestCompleteResponseEvent(senderProto.getUserId());
     event.setQuestCompleteResponseProto(builder.build());

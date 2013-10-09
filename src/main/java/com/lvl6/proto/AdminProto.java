@@ -53,22 +53,20 @@ public final class AdminProto {
       BUILD_STRUCT_JOBS(1, 1),
       CITIES(2, 2),
       DEFEAT_TYPE_JOBS(3, 3),
-      EQUIPMENT(4, 4),
-      QUESTS(5, 5),
-      TASK_EQUIP_REQUIREMENTS(6, 6),
-      TASKS(7, 7),
-      UPGRADE_STRUCT_JOBS(8, 8),
-      STRUCTURES(9, 9),
-      POSSESS_EQUIP_JOBS(10, 10),
-      LEVELS_REQUIRED_EXPERIENCE(11, 11),
-      NEUTRAL_CITY_ELEMS(12, 12),
+      QUESTS(4, 5),
+      TASK_EQUIP_REQUIREMENTS(5, 6),
+      TASKS(6, 7),
+      UPGRADE_STRUCT_JOBS(7, 8),
+      STRUCTURES(8, 9),
+      POSSESS_EQUIP_JOBS(9, 10),
+      LEVELS_REQUIRED_EXPERIENCE(10, 11),
+      NEUTRAL_CITY_ELEMS(11, 12),
       ;
       
       public static final int ALL_VALUE = 0;
       public static final int BUILD_STRUCT_JOBS_VALUE = 1;
       public static final int CITIES_VALUE = 2;
       public static final int DEFEAT_TYPE_JOBS_VALUE = 3;
-      public static final int EQUIPMENT_VALUE = 4;
       public static final int QUESTS_VALUE = 5;
       public static final int TASK_EQUIP_REQUIREMENTS_VALUE = 6;
       public static final int TASKS_VALUE = 7;
@@ -87,7 +85,6 @@ public final class AdminProto {
           case 1: return BUILD_STRUCT_JOBS;
           case 2: return CITIES;
           case 3: return DEFEAT_TYPE_JOBS;
-          case 4: return EQUIPMENT;
           case 5: return QUESTS;
           case 6: return TASK_EQUIP_REQUIREMENTS;
           case 7: return TASKS;
@@ -126,7 +123,7 @@ public final class AdminProto {
       }
       
       private static final StaticDataReloadType[] VALUES = {
-        ALL, BUILD_STRUCT_JOBS, CITIES, DEFEAT_TYPE_JOBS, EQUIPMENT, QUESTS, TASK_EQUIP_REQUIREMENTS, TASKS, UPGRADE_STRUCT_JOBS, STRUCTURES, POSSESS_EQUIP_JOBS, LEVELS_REQUIRED_EXPERIENCE, NEUTRAL_CITY_ELEMS, 
+        ALL, BUILD_STRUCT_JOBS, CITIES, DEFEAT_TYPE_JOBS, QUESTS, TASK_EQUIP_REQUIREMENTS, TASKS, UPGRADE_STRUCT_JOBS, STRUCTURES, POSSESS_EQUIP_JOBS, LEVELS_REQUIRED_EXPERIENCE, NEUTRAL_CITY_ELEMS, 
       };
       
       public static StaticDataReloadType valueOf(
@@ -528,19 +525,18 @@ public final class AdminProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Admin.proto\022\016com.lvl6.proto\"\270\003\n\027AdminC" +
+      "\n\013Admin.proto\022\016com.lvl6.proto\"\251\003\n\027AdminC" +
       "hangeRequestProto\022Z\n\024staticDataReloadTyp" +
       "e\030\001 \001(\0162<.com.lvl6.proto.AdminChangeRequ" +
       "estProto.StaticDataReloadType\022*\n\"purgeSt" +
-      "aticDataForConnectedClients\030\002 \001(\010\"\224\002\n\024St" +
+      "aticDataForConnectedClients\030\002 \001(\010\"\205\002\n\024St" +
       "aticDataReloadType\022\007\n\003ALL\020\000\022\025\n\021BUILD_STR" +
       "UCT_JOBS\020\001\022\n\n\006CITIES\020\002\022\024\n\020DEFEAT_TYPE_JO" +
-      "BS\020\003\022\r\n\tEQUIPMENT\020\004\022\n\n\006QUESTS\020\005\022\033\n\027TASK_" +
-      "EQUIP_REQUIREMENTS\020\006\022\t\n\005TASKS\020\007\022\027\n\023UPGRA" +
-      "DE_STRUCT_JOBS\020\010\022\016\n\nSTRUCTURES\020\t\022\026\n\022POSS",
-      "ESS_EQUIP_JOBS\020\n\022\036\n\032LEVELS_REQUIRED_EXPE" +
-      "RIENCE\020\013\022\026\n\022NEUTRAL_CITY_ELEMS\020\014B\014B\nAdmi" +
-      "nProto"
+      "BS\020\003\022\n\n\006QUESTS\020\005\022\033\n\027TASK_EQUIP_REQUIREME" +
+      "NTS\020\006\022\t\n\005TASKS\020\007\022\027\n\023UPGRADE_STRUCT_JOBS\020" +
+      "\010\022\016\n\nSTRUCTURES\020\t\022\026\n\022POSSESS_EQUIP_JOBS\020",
+      "\n\022\036\n\032LEVELS_REQUIRED_EXPERIENCE\020\013\022\026\n\022NEU" +
+      "TRAL_CITY_ELEMS\020\014B\014B\nAdminProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

@@ -1,8 +1,6 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +14,6 @@ import com.lvl6.events.request.LevelUpRequestEvent;
 import com.lvl6.events.response.LevelUpResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.City;
-import com.lvl6.info.Equipment;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -25,11 +22,8 @@ import com.lvl6.proto.EventProto.LevelUpRequestProto;
 import com.lvl6.proto.EventProto.LevelUpResponseProto;
 import com.lvl6.proto.EventProto.LevelUpResponseProto.Builder;
 import com.lvl6.proto.EventProto.LevelUpResponseProto.LevelUpStatus;
-import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
-import com.lvl6.proto.InfoProto.FullEquipProto.Rarity;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -81,8 +75,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean legitLevelUp = checkLegitLevelUp(resBuilder, user);
       List<Integer> newlyUnlockedCityIds = null;
       
-      int levelBeforeLeveling = ControllerConstants.NOT_SET;
-      int levelAfterLeveling = ControllerConstants.NOT_SET;
+//      int levelBeforeLeveling = ControllerConstants.NOT_SET;
+//      int levelAfterLeveling = ControllerConstants.NOT_SET;
       if (legitLevelUp) {
         int newNextLevel = user.getLevel() + 2;
         int expRequiredForNewNextLevel = LevelsRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(newNextLevel);
@@ -91,8 +85,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
         int newLevel = user.getLevel() + 1;
         resBuilder.setNewLevel(newLevel);
-        levelBeforeLeveling = user.getLevel();
-        levelAfterLeveling = newLevel;
+//        levelBeforeLeveling = user.getLevel();
+//        levelAfterLeveling = newLevel;
 
         List<City> availCities = MiscMethods.getCitiesAvailableForUserLevel(newLevel);
         for (City city : availCities) {
@@ -103,15 +97,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           }
         }
 
-        Map<Integer, Equipment> equipIdToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-        if (equipIdToEquips != null) {
-          for (Equipment e : equipIdToEquips.values()) {
-            if (e != null && e.getMinLevel() == newLevel && 
-                (e.getRarity() == Rarity.EPIC || e.getRarity() == Rarity.LEGENDARY)) {
-              resBuilder.addNewlyEquippableEpicsAndLegendaries(CreateInfoProtoUtils.createFullEquipProtoFromEquip(e));
-            }
-          }
-        }
+//        Map<Integer, Equipment> equipIdToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+//        if (equipIdToEquips != null) {
+//          for (Equipment e : equipIdToEquips.values()) {
+//            if (e != null && e.getMinLevel() == newLevel && 
+//                (e.getRarity() == Rarity.EPIC || e.getRarity() == Rarity.LEGENDARY)) {
+//              resBuilder.addNewlyEquippableEpicsAndLegendaries(CreateInfoProtoUtils.createFullEquipProtoFromEquip(e));
+//            }
+//          }
+//        }
 
         Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
         if (structIdsToStructs != null) {
@@ -137,11 +131,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       resEventUpdate.setTag(event.getTag());
       server.writeEvent(resEventUpdate);
 
-      if (legitLevelUp) {
-        //check to see if user is a mentee and finished the mentee request
-//        updateMentorshipQuests(senderProto, levelBeforeLeveling,
-//            levelAfterLeveling, user);
-      }
       
     } catch (Exception e) {
       log.error("exception in LevelUpController processEvent", e);
@@ -161,9 +150,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         }
       }
     }
-    if (!user.updateAbsoluteRestoreEnergyStaminaRelativeUpdateSkillPoints(ControllerConstants.LEVEL_UP__SKILL_POINTS_GAINED, new Timestamp(new Date().getTime()))) {
-      log.error("problem with restoring energy and stamina and awarding skill points");
-    }
+//    if (!user.updateAbsoluteRestoreEnergyStaminaRelativeUpdateSkillPoints(ControllerConstants.LEVEL_UP__SKILL_POINTS_GAINED, new Timestamp(new Date().getTime()))) {
+//      log.error("problem with restoring energy and stamina and awarding skill points");
+//    }
   }
 
   private boolean checkLegitLevelUp(Builder resBuilder, User user) {
@@ -192,19 +181,4 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
   
-  private void updateMentorshipQuests(MinimumUserProto mup, int levelBeforeLeveling,
-      int levelAfterLeveling, User user) {
-    int levelRequirement = ControllerConstants.MENTORSHIPS__MENTEE_LEVEL_FOR_QUEST;
-    int levelRequirementTwo = ControllerConstants.MENTORSHIPS__MENTEE_LEVEL_FOR_SECOND_QUEST;
-    
-    if (levelRequirement == levelAfterLeveling && levelBeforeLeveling < levelAfterLeveling) {
-      MenteeQuestType type = MenteeQuestType.LEVELED_UP_TO_LEVEL_N;
-      MiscMethods.sendMenteeFinishedQuests(mup, type, server);
-      
-    } else if (levelRequirementTwo == levelAfterLeveling && levelBeforeLeveling < levelAfterLeveling) {
-      MenteeQuestType type = MenteeQuestType.LEVELED_UP_TO_LEVEL_X;
-      MiscMethods.sendMenteeFinishedQuests(mup, type, server);
-    }
-  }
-
 }

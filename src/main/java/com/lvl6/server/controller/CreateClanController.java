@@ -104,7 +104,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	}
       	
         clanId = InsertUtils.get().insertClan(clanName, user.getId(), createTime, description,
-            tag, MiscMethods.checkIfGoodSide(user.getType()), requestToJoinRequired);
+            tag, requestToJoinRequired);
         if (clanId <= 0) {
           legitCreate = false;
           resBuilder.setStatus(CreateClanStatus.OTHER_FAIL);

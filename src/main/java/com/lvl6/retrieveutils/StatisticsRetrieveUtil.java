@@ -93,7 +93,7 @@ public class StatisticsRetrieveUtil {
 	
 	//
 	public Long sumOfSilverInWorld() {
-		return jdbcTemplate.queryForLong("select sum(" + DBConstants.USER__COINS +") + sum(" + DBConstants.USER__VAULT_BALANCE + ") from " + DBConstants.TABLE_USER 
+		return jdbcTemplate.queryForLong("select sum(" + DBConstants.USER__COINS +") + from " + DBConstants.TABLE_USER 
 		    + " where " + DBConstants.USER__IS_FAKE + "=0");
 	}
 	

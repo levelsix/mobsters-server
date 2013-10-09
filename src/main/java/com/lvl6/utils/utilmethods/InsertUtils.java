@@ -15,19 +15,13 @@ import org.mortbay.log.Log;
 
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.Location;
-//import com.lvl6.info.MarketplacePost;
 import com.lvl6.info.User;
-import com.lvl6.info.UserEquip;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.EventProto.EarnFreeDiamondsRequestProto.AdColonyRewardType;
-import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
 import com.lvl6.proto.InfoProto.BattleResult;
-//import com.lvl6.proto.InfoProto.MarketplacePostType;
 import com.lvl6.proto.InfoProto.UserClanStatus;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
@@ -203,27 +197,27 @@ public class InsertUtils implements InsertUtil{
   }
   
   //many equip enhancement feeders to one equip enhancement id
-  public List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders) {
-    String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS;
-    List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-    for(UserEquip ue: feeders) {
-      int equipId = ue.getEquipId();
-      int equipLevel = ue.getLevel();
-      int enhancementPercentageBeforeEnhancement = ue.getEnhancementPercentage();
-          
-      Map<String, Object> oneRow = new HashMap<String, Object>();
-      oneRow.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__EQUIP_ENHANCEMENT_ID, equipEnhancementId);
-      oneRow.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__EQUIP_ID, equipId);
-      oneRow.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__EQUIP_LEVEL, equipLevel);
-      oneRow.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__ENHANCEMENT_PERCENTAGE_BEFORE_ENHANCEMENT, 
-          enhancementPercentageBeforeEnhancement);
-      
-      newRows.add(oneRow);
-    }
-    List<Integer> feederIds = DBConnection.get().insertIntoTableBasicReturnIds(tableName, newRows);
-    return feederIds;
-  }
-  
+//  public List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders) {
+//    String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS;
+//    List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+//    for(UserEquip ue: feeders) {
+//      int equipId = ue.getEquipId();
+//      int equipLevel = ue.getLevel();
+//      int enhancementPercentageBeforeEnhancement = ue.getEnhancementPercentage();
+//          
+//      Map<String, Object> oneRow = new HashMap<String, Object>();
+//      oneRow.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__EQUIP_ENHANCEMENT_ID, equipEnhancementId);
+//      oneRow.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__EQUIP_ID, equipId);
+//      oneRow.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__EQUIP_LEVEL, equipLevel);
+//      oneRow.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__ENHANCEMENT_PERCENTAGE_BEFORE_ENHANCEMENT, 
+//          enhancementPercentageBeforeEnhancement);
+//      
+//      newRows.add(oneRow);
+//    }
+//    List<Integer> feederIds = DBConnection.get().insertIntoTableBasicReturnIds(tableName, newRows);
+//    return feederIds;
+//  }
+//  
   public int insertIntoEquipEnhancementFeedersHistory(int id, int equipEnhancementId,
       int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement) {
 
@@ -241,57 +235,57 @@ public class InsertUtils implements InsertUtil{
     return numInserted;
   }
   
-  public int insertMultipleIntoEquipEnhancementFeedersHistory(long userEquipEnhancementId, List<UserEquip> feeders) {
-    String tablename = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY;
-    int amount = feeders.size();
-    List<Object> equipEnhancementFeedersIds = new ArrayList<Object>(amount);
-    List<Object> equipEnhancementIds = new ArrayList<Object>(Collections.nCopies(amount, userEquipEnhancementId));
-    List<Object> equipIds = new ArrayList<Object>(amount);
-    List<Object> equipLevels = new ArrayList<Object>();
-    List<Object> enhancementPercentages = new ArrayList<Object>();
-    
-    for(UserEquip aFeeder : feeders) {
-      equipEnhancementFeedersIds.add(aFeeder.getId());
-      equipIds.add(aFeeder.getEquipId());
-      equipLevels.add(aFeeder.getLevel());
-      enhancementPercentages.add(aFeeder.getEnhancementPercentage());
-    }
-    Map<String, List<Object>> insertParams = new HashMap<String, List<Object>>();
-    
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ID, equipEnhancementFeedersIds);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_ENHANCEMENT_ID, equipEnhancementIds);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_ID, equipIds);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_LEVEL, equipLevels);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ENHANCEMENT_PERCENTAGE,
-        enhancementPercentages);
-    
-    int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, insertParams, amount);
-    return numInserted;
-  }
+//  public int insertMultipleIntoEquipEnhancementFeedersHistory(long userEquipEnhancementId, List<UserEquip> feeders) {
+//    String tablename = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY;
+//    int amount = feeders.size();
+//    List<Object> equipEnhancementFeedersIds = new ArrayList<Object>(amount);
+//    List<Object> equipEnhancementIds = new ArrayList<Object>(Collections.nCopies(amount, userEquipEnhancementId));
+//    List<Object> equipIds = new ArrayList<Object>(amount);
+//    List<Object> equipLevels = new ArrayList<Object>();
+//    List<Object> enhancementPercentages = new ArrayList<Object>();
+//    
+//    for(UserEquip aFeeder : feeders) {
+//      equipEnhancementFeedersIds.add(aFeeder.getId());
+//      equipIds.add(aFeeder.getEquipId());
+//      equipLevels.add(aFeeder.getLevel());
+//      enhancementPercentages.add(aFeeder.getEnhancementPercentage());
+//    }
+//    Map<String, List<Object>> insertParams = new HashMap<String, List<Object>>();
+//    
+//    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ID, equipEnhancementFeedersIds);
+//    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_ENHANCEMENT_ID, equipEnhancementIds);
+//    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_ID, equipIds);
+//    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_LEVEL, equipLevels);
+//    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ENHANCEMENT_PERCENTAGE,
+//        enhancementPercentages);
+//    
+//    int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, insertParams, amount);
+//    return numInserted;
+//  }
   
-  public List<Long> insertUserEquips(int userId, List<Integer> equipIds, List<Integer> levels,
-      List<Integer> enhancement, Timestamp now, String reason) {
-	  String tableName = DBConstants.TABLE_USER_EQUIP;
-	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-	  for(int i = 0; i < equipIds.size(); i++){
-		  Map<String, Object> row = new HashMap<String, Object>();
-		  row.put(DBConstants.USER_EQUIP__USER_ID, userId);
-		  row.put(DBConstants.USER_EQUIP__EQUIP_ID, equipIds.get(i));
-		  row.put(DBConstants.USER_EQUIP__LEVEL, levels.get(i));
-		  int enhancementPercent = 
-		      ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
-		  if (null != enhancement && !enhancement.isEmpty()) {
-		    enhancementPercent = enhancement.get(i);
-		  }
-		  row.put(DBConstants.USER_EQUIP__ENHANCEMENT_PERCENT, enhancementPercent);
-		  row.put(DBConstants.USER_EQUIP__CREATE_TIME, now);
-		  row.put(DBConstants.USER_EQUIP__REASON, reason);
-		  newRows.add(row);
-	  }
-	  List<Long> userEquipIds = DBConnection.get().insertIntoTableBasicReturnLongIds(tableName, newRows);
-	  Log.info("userEquipIds= " + userEquipIds);
-	  return userEquipIds;
-  }
+//  public List<Long> insertUserEquips(int userId, List<Integer> equipIds, List<Integer> levels,
+//      List<Integer> enhancement, Timestamp now, String reason) {
+//	  String tableName = DBConstants.TABLE_USER_EQUIP;
+//	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+//	  for(int i = 0; i < equipIds.size(); i++){
+//		  Map<String, Object> row = new HashMap<String, Object>();
+//		  row.put(DBConstants.USER_EQUIP__USER_ID, userId);
+//		  row.put(DBConstants.USER_EQUIP__EQUIP_ID, equipIds.get(i));
+//		  row.put(DBConstants.USER_EQUIP__LEVEL, levels.get(i));
+//		  int enhancementPercent = 
+//		      ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
+//		  if (null != enhancement && !enhancement.isEmpty()) {
+//		    enhancementPercent = enhancement.get(i);
+//		  }
+//		  row.put(DBConstants.USER_EQUIP__ENHANCEMENT_PERCENT, enhancementPercent);
+//		  row.put(DBConstants.USER_EQUIP__CREATE_TIME, now);
+//		  row.put(DBConstants.USER_EQUIP__REASON, reason);
+//		  newRows.add(row);
+//	  }
+//	  List<Long> userEquipIds = DBConnection.get().insertIntoTableBasicReturnLongIds(tableName, newRows);
+//	  Log.info("userEquipIds= " + userEquipIds);
+//	  return userEquipIds;
+//  }
 
   public int insertForgeAttemptIntoBlacksmith(int userId, int equipId,
       int goalLevel, boolean paidToGuarantee, Timestamp startTime,
@@ -699,43 +693,23 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUser(java.lang.String, java.lang.String, com.lvl6.proto.InfoProto.UserType, com.lvl6.info.Location, java.lang.String, java.lang.String, int, int, int, int, int, int, int, int, int, java.lang.Integer, java.lang.Integer, java.lang.Integer, boolean)
    */
   @Override
-  public int insertUser(String udid, String name, UserType type,
-      Location location, String deviceToken, String newReferCode,
-      int level, int attack, int defense, int energy,
-      int stamina, int experience, int coins, int diamonds,
-      Integer weaponEquipped, Integer armorEquipped,
-      Integer amuletEquipped, boolean isFake, int numGroupChatsRemaining,
-      boolean activateShield, Timestamp createTime,
-      Timestamp lastEnergyRefillTime, Timestamp lastStaminaRefillTime,
-      String rank) {
+  public int insertUser(String udid, String name,
+			String deviceToken, String newReferCode, int level,
+			int experience, int coins, int diamonds, boolean isFake,
+			boolean activateShield, Timestamp createTime, String rank) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
     insertParams.put(DBConstants.USER__LEVEL, level);
-    insertParams.put(DBConstants.USER__TYPE, type.getNumber());
-    insertParams.put(DBConstants.USER__ENERGY, energy);
-    if (null != lastEnergyRefillTime) {
-    	insertParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, lastEnergyRefillTime);
-    }
-    insertParams.put(DBConstants.USER__ENERGY_MAX, energy);
     insertParams.put(DBConstants.USER__DIAMONDS, diamonds);
     insertParams.put(DBConstants.USER__COINS, coins);
     insertParams.put(DBConstants.USER__EXPERIENCE, experience);
     insertParams.put(DBConstants.USER__REFERRAL_CODE, newReferCode);
     insertParams.put(DBConstants.USER__UDID, udid);
-    insertParams.put(DBConstants.USER__LATITUDE, location.getLatitude());
-    insertParams.put(DBConstants.USER__LONGITUDE, location.getLongitude());
-    insertParams.put(DBConstants.USER__WEAPON_EQUIPPED_USER_EQUIP_ID,
-    		weaponEquipped);
-    insertParams.put(DBConstants.USER__ARMOR_EQUIPPED_USER_EQUIP_ID,
-    		armorEquipped);
-    insertParams.put(DBConstants.USER__AMULET_EQUIPPED_USER_EQUIP_ID,
-    		amuletEquipped);
     insertParams.put(DBConstants.USER__LAST_LOGIN, createTime);
     insertParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
     insertParams.put(DBConstants.USER__IS_FAKE, isFake);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
-    insertParams.put(DBConstants.USER__NUM_GROUP_CHATS_REMAINING, 5);
     insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
     insertParams.put(DBConstants.USER__RANK, rank);
     
@@ -804,7 +778,7 @@ public class InsertUtils implements InsertUtil{
   }
 
   @Override
-  public int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag, boolean isGood,
+  public int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag,
       boolean requestToJoinRequired) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.CLANS__NAME, name);
@@ -812,7 +786,6 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.CLANS__CREATE_TIME, createTime);
     insertParams.put(DBConstants.CLANS__DESCRIPTION, description);
     insertParams.put(DBConstants.CLANS__TAG, tag);
-    insertParams.put(DBConstants.CLANS__IS_GOOD, isGood);
     insertParams.put(DBConstants.CLANS__REQUEST_TO_JOIN_REQUIRED, requestToJoinRequired);
 
     int clanId = DBConnection.get().insertIntoTableBasicReturnId(
@@ -1201,34 +1174,6 @@ public class InsertUtils implements InsertUtil{
     }
     List<Integer> postIds = DBConnection.get().insertIntoTableBasicReturnIds(tableName, newRows);
     return postIds;
-  }
-  
-  public int insertIntoMentorships(int mentorId, int menteeId, Date startTime, List<MenteeQuestType> typeList) {
-    String tableName = DBConstants.TABLE_MENTORSHIPS;
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.MENTORSHIPS__MENTOR_ID, mentorId);
-    insertParams.put(DBConstants.MENTORSHIPS__MENTEE_ID, menteeId);
-    insertParams.put(DBConstants.MENTORSHIPS__START_TIME, startTime);
-    
-    for (MenteeQuestType type : typeList) {
-      if (MenteeQuestType.BOUGHT_A_PACKAGE == type) {
-        insertParams.put(DBConstants.MENTORSHIPS__QUEST_ONE_COMPLETE_TIME, startTime);
-
-      } else if (MenteeQuestType.FORGED_EQUIP_TO_LEVEL_N == type) {
-        insertParams.put(DBConstants.MENTORSHIPS__QUEST_TWO_COMPLETE_TIME, startTime);
-
-      } else if (MenteeQuestType.JOINED_A_CLAN == type) {
-        insertParams.put(DBConstants.MENTORSHIPS__QUEST_THREE_COMPLETE_TIME, startTime);
-
-      } else if (MenteeQuestType.LEVELED_UP_TO_LEVEL_N == type) {
-        insertParams.put(DBConstants.MENTORSHIPS__QUEST_FOUR_COMPLETE_TIME, startTime);
-
-      } else if (MenteeQuestType.LEVELED_UP_TO_LEVEL_X == type) {
-        insertParams.put(DBConstants.MENTORSHIPS__QUEST_FIVE_COMPLETE_TIME, startTime);
-      }
-    }
-    int mentorshipId = DBConnection.get().insertIntoTableBasicReturnId(tableName, insertParams);
-    return mentorshipId;
   }
   
   //returns the id

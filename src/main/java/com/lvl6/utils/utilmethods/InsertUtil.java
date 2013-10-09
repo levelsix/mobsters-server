@@ -9,17 +9,10 @@ import org.json.JSONObject;
 
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.EquipEnhancementFeeder;
-import com.lvl6.info.Location;
-//import com.lvl6.info.MarketplacePost;
 import com.lvl6.info.User;
-import com.lvl6.info.UserEquip;
 import com.lvl6.proto.EventProto.EarnFreeDiamondsRequestProto.AdColonyRewardType;
-import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
 import com.lvl6.proto.InfoProto.BattleResult;
-//import com.lvl6.proto.InfoProto.MarketplacePostType;
 import com.lvl6.proto.InfoProto.UserClanStatus;
-import com.lvl6.proto.InfoProto.UserType;
 
 public interface InsertUtil {
 
@@ -49,12 +42,12 @@ public interface InsertUtil {
 			int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
 			Timestamp startTimeOfEnhancement);
 
-	public abstract List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders);
+//	public abstract List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders);
 
 	public abstract int insertIntoEquipEnhancementFeedersHistory(int id, int equipEnhancementId,
 			int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement);
 
-	public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(long l, List<UserEquip> feeders);
+//	public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(long l, List<UserEquip> feeders);
 
 	/*
 	 * (non-Javadoc)
@@ -113,14 +106,10 @@ public interface InsertUtil {
 			int coinsGivenToReferrer);
 
 	// returns -1 if error
-	public abstract int insertUser(String udid, String name, UserType type,
-			Location location, String deviceToken, String newReferCode,
-			int level, int attack, int defense, int energy,
-			int stamina, int experience, int coins, int diamonds,
-			Integer weaponEquipped, Integer armorEquipped,
-			Integer amuletEquipped, boolean isFake, int numGroupChatsRemaining,
-			boolean activateShield, Timestamp createTime, Timestamp lastEnergyRefillTime,
-			Timestamp lastStaminaRefillTime, String rank);
+	public abstract int insertUser(String udid, String name,
+			String deviceToken, String newReferCode, int level,
+			int experience, int coins, int diamonds, boolean isFake,
+			boolean activateShield, Timestamp createTime, String rank);
 
 	/*
 	 * returns the id of the post, -1 if none
@@ -142,7 +131,7 @@ public interface InsertUtil {
 
 	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
 
-	public abstract int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag, boolean isGood, boolean requestToJoinRequired);
+	public abstract int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag, boolean requestToJoinRequired);
 
 	public abstract boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime);
 
@@ -154,8 +143,8 @@ public interface InsertUtil {
 	public abstract int insertClanChatPost(int userId, int clanId, String content,
 			Timestamp timeOfPost);
 
-	public abstract List<Long> insertUserEquips(int userId, List<Integer> equipIds,
-			List<Integer> levels, List<Integer> enhancement, Timestamp now, String reason);
+//	public abstract List<Long> insertUserEquips(int userId, List<Integer> equipIds,
+//			List<Integer> levels, List<Integer> enhancement, Timestamp now, String reason);
 
 	public abstract int insertIntoBossRewardDropHistoryReturnId(int bossId, int userId, int silverDropped, int goldDropped, Timestamp timeOfDrop);
 
@@ -193,8 +182,6 @@ public interface InsertUtil {
 
 	public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
 			List<Date> timeOfPosts);
-
-	public abstract int insertIntoMentorships(int mentorId, int menteeId, Date startTime, List<MenteeQuestType> typeList);
 
 	public abstract long insertIntoUserTask(int userId, int taskId, 
 			Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,

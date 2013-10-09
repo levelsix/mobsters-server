@@ -17,7 +17,6 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PossessEquipJobRetrieveUtils;
@@ -62,9 +61,6 @@ import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
         break;
       case DEFEAT_TYPE_JOBS:
         DefeatTypeJobRetrieveUtils.reload();
-        break;
-      case EQUIPMENT:
-        EquipmentRetrieveUtils.reload();
         break;
       case QUESTS:
         QuestRetrieveUtils.reload();

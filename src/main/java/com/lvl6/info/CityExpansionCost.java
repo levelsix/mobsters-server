@@ -1,10 +1,10 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class CityExpansionCost implements Serializable {
-	private static final long serialVersionUID = -3018246069873803048L; //???
+	
+	private static final long serialVersionUID = 4684737334322852956L;
 	private int id;
 	private int expansionCost;
 

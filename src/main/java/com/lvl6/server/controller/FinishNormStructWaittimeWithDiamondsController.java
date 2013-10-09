@@ -27,7 +27,6 @@ import com.lvl6.proto.EventProto.FinishNormStructWaittimeWithDiamondsResponsePro
 import com.lvl6.proto.EventProto.FinishNormStructWaittimeWithDiamondsResponseProto.FinishNormStructWaittimeStatus;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
@@ -84,7 +83,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       server.writeEvent(resEvent);
 
       if (legitSpeedup) {
-        previousSilver = user.getCoins() + user.getVaultBalance();
+        previousSilver = user.getCoins();
         previousGold = user.getDiamonds();
         
         Map<String, Integer> money = new HashMap<String, Integer>();

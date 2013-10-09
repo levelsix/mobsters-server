@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.MessageChannel;
 
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserType;
 
 public class UserQuestTask implements Runnable{
 	
@@ -46,20 +45,6 @@ public class UserQuestTask implements Runnable{
 	
 	
 	protected Integer userId;
-	protected UserType userType;
-	
-
-
-	public UserType getUserType() {
-		return userType;
-	}
-
-
-
-	public void setUserType(UserType userType) {
-		this.userType = userType;
-	}
-
 
 
 	public Integer getUserId() {
@@ -76,7 +61,7 @@ public class UserQuestTask implements Runnable{
 
 	@Override
 	public void run() {
-		MinimumUserProto.Builder user = lteg.minimumUserProto(userId, userType);
+		MinimumUserProto.Builder user = lteg.minimumUserProto(userId);
 		for(Integer i = 0; i< iterations; i++) {
 			outboundEvents.send(lteg.userQuestDetails(user));
 		}

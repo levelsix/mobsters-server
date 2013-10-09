@@ -65,7 +65,6 @@ message BattleResponseProto {
 
 	optional int32 coinsGained = 4;
 	optional FullUserEquipProto userEquipGained = 5;
-	optional FullEquipProto equipGained = 8;
     optional int32 expGained = 6;
     
     optional int32 eventIdOfLockBoxGained = 9;
@@ -77,61 +76,6 @@ message BattleResponseProto {
 		OTHER_FAIL = 1;
 		SAME_SIDE = 2;
 		OPPONENT_HAS_ACTIVE_SHIELD = 3;
-	} 
-}
-
-//------------------------------------------------------------------------------------------
-
-																						//DONE
-message VaultRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional VaultRequestType requestType = 2;
-	optional int32 amount = 3;
-	enum VaultRequestType {
-		DEPOSIT = 0; 
-		WITHDRAW = 1;
-	} 
-}
-
-																						//DONE
-message VaultResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional VaultStatus status = 2;	
-	optional int32 vaultAmount = 3;
-	optional int32 coinAmount = 4;
-	
-	enum VaultStatus {
-		SUCCESS = 0;
-		OTHER_FAIL = 2;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
-																						//DONE
-message ArmoryRequestProto {
-   enum ArmoryRequestType {
-		BUY = 0; 
-		SELL = 1;
-	} 
-	optional MinimumUserProto sender = 1;
-	optional ArmoryRequestType requestType = 2;
-	optional int32 quantity = 3;
-	optional int32 equipId = 4;	
-}
-
-																						//DONE
-message ArmoryResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional ArmoryStatus status = 2;
-	optional FullUserEquipProto fullUserEquipOfBoughtItem = 3;
-	
-	enum ArmoryStatus {
-		SUCCESS = 0; 
-		NOT_ENOUGH_EQUIP_TO_SELL = 1;
-		NOT_ENOUGH_CURRENCY_TO_BUY = 2;
-		CANNOT_SELL_DIAMOND_EQUIP = 3;
-		OTHER_FAIL = 5;
 	} 
 }
 
@@ -159,18 +103,16 @@ message StartupResponseProto {
     repeated FullQuestProto inProgressCompleteQuests = 20;
 	repeated FullQuestProto availableQuests = 7;   
 	repeated FullUserEquipProto userEquips = 8;
-    repeated FullEquipProto equips = 9;
 	optional int32 experienceRequiredForNextLevel = 10;
 	optional int32 experienceRequiredForCurrentLevel = 15;
 	repeated FullUserClanProto userClanInfo = 26;
 	
-	//repeated MarketplacePostPurchasedNotificationProto marketplacePurchaseNotifications = 12;
 	repeated AttackedNotificationProto attackNotifications = 13;
 	repeated ReferralNotificationProto referralNotifications = 14;
 	repeated PlayerWallPostProto playerWallPostNotifications = 19;
 	repeated ClanBulletinPostProto clanBulletinPostNotifications = 27;
 	
-	repeated LockBoxEventProto lockBoxEvents = 28;
+	//repeated LockBoxEventProto lockBoxEvents = 28;
 	repeated UserLockBoxEventProto userLockBoxEvents = 29;
 	
 	optional string appStoreURL = 17;
@@ -184,12 +126,8 @@ message StartupResponseProto {
 	optional bool playerHasBoughtInAppPurchase = 22;
 
 	repeated UnhandledBlacksmithAttemptProto unhandledForgeAttempt = 23;
-	repeated FullEquipProto forgeAttemptEquip = 25;
-	
 	repeated string noticesToPlayers = 24;
 		
-	repeated FullEquipProto mktSearchEquips = 30;
-	
 	repeated GroupChatMessageProto globalChats = 31;
 	repeated GroupChatMessageProto clanChats = 32;
 	
@@ -199,9 +137,7 @@ message StartupResponseProto {
 	repeated ClanTowerProto clanTowers = 39;
 	
 	repeated FullStructureProto staticStructs = 37;
-	repeated FullEquipProto staticEquips = 38;
-	
-	repeated BossEventProto bossEvents = 40;
+	//repeated BossEventProto bossEvents = 40;
 	
 	repeated LeaderboardEventProto leaderboardEvents = 41;
 	
@@ -232,13 +168,6 @@ message StartupResponseProto {
 		optional int64 timeAwarded = 8;
 	}
 
-	//message MarketplacePostPurchasedNotificationProto {
-	//	optional FullMarketplacePostProto marketplacePost = 1;
-	//	optional MinimumUserProto buyer = 2;
-	//	optional int64 timeOfPurchase = 3;
-	//	optional bool sellerHadLicense = 4;
-	//}
-
 	message AttackedNotificationProto {
 		optional MinimumUserProto attacker = 1;
 		optional BattleResult battleResult = 2;
@@ -266,8 +195,6 @@ message StartupResponseProto {
     	optional int32 armoryYLength = 8;
     	optional int32 vaultXLength = 9;
     	optional int32 vaultYLength = 10;
-    	//optional int32 marketplaceXLength = 11;
-    	//optional int32 marketplaceYLength = 12;
     	optional int32 carpenterXLength = 13;
     	optional int32 carpenterYLength = 14;
     	optional int32 aviaryXLength = 15;
@@ -295,13 +222,6 @@ message StartupResponseProto {
 		optional int32 diamondCostForFullStaminaRefill = 48;
 		optional int32 diamondCostForFullEnergyRefill = 49;
 		
-		//optional int32 maxNumberOfMarketplacePosts = 40;
-		//optional double percentOfSellingCostTakenFromSellerOnMarketplacePurchase = 41;
-   		//optional double percentOfSellingCostTakenFromSellerOnMarketplaceRetract = 42;
-		//optional int32 numDaysLongMarketplaceLicenseLastsFor = 43;
-		//optional int32 numDaysShortMarketplaceLicenseLastsFor = 44;
-		//optional int32 diamondCostOfLongMarketplaceLicense = 45;
-		//optional int32 diamondCostOfShortMarketplaceLicense = 46;
 		optional int32 numDaysUntilFreeRetract = 87;
 
 		optional int32 maxNumbersOfEnemiesToGenerateAtOnce = 4;
@@ -311,7 +231,6 @@ message StartupResponseProto {
 		
 		optional int32 armoryImgVerticalPixelOffset = 54;
 		optional int32 vaultImgVerticalPixelOffset = 55;
-		//optional int32 marketplaceImgVerticalPixelOffset = 56;
 		optional int32 carpenterImgVerticalPixelOffset = 57;
 		optional int32 aviaryImgVerticalPixelOffset = 58;
 		
@@ -596,28 +515,10 @@ message StartupResponseProto {
 	}
 	
 	message TutorialConstants {
-		optional int32 initEnergy = 1;
-		optional int32 initStamina = 2;
-		optional int32 initHealth = 3;
 		optional FullTutorialQuestProto tutorialQuest = 4;
 		optional int32 structToBuild = 5;
 		optional int32 diamondCostToInstabuildFirstStruct = 6;
 
-		optional int32 archerInitAttack = 17;
-		optional int32 archerInitDefense = 18;
-		optional FullEquipProto archerInitWeapon = 7;
-		optional FullEquipProto archerInitArmor = 8;
-		
-		optional int32 mageInitAttack = 9;
-		optional int32 mageInitDefense = 10;
-		optional FullEquipProto mageInitWeapon = 11;
-		optional FullEquipProto mageInitArmor = 12;
-		
-		optional int32 warriorInitAttack = 13;
-		optional int32 warriorInitDefense = 14;
-		optional FullEquipProto warriorInitWeapon = 15;
-		optional FullEquipProto warriorInitArmor = 16;
-		
 		optional int32 minNameLength = 19;
 		optional int32 maxNameLength = 20;
 
@@ -633,7 +534,6 @@ message StartupResponseProto {
 		optional int32 expRequiredForLevelTwo = 28;
      	optional int32 expRequiredForLevelThree = 29;
      	repeated FullCityProto citiesNewlyAvailableToUserAfterLevelup = 30;					//only new ones
-     	repeated FullEquipProto newlyEquippableEpicsAndLegendariesForAllClassesAfterLevelup = 31;			//only new ones
 	    repeated FullStructureProto newlyAvailableStructsAfterLevelup = 32;					//only new ones
      	
      	optional PlayerWallPostProto firstWallPost = 33;
@@ -665,7 +565,6 @@ message StartupResponseProto {
 			optional FullTaskProto taskBad = 13;
 			optional int32 taskCompleteCoinGain = 14;	//tasks coin gain should sum to this
 			
-			optional FullEquipProto equipReward = 15;
 		}
 	}
 		     
@@ -689,19 +588,13 @@ message StartupResponseProto {
 message UserCreateRequestProto {
      optional string udid = 1;
      optional string name = 2;
-     optional UserType type = 3;
-     optional LocationProto userLocation = 6;     
-     optional string referrerCode = 7;
-     optional string deviceToken = 8;
-     optional int32 attack = 9;
-     optional int32 defense = 10;
-     optional int32 energy = 12;
-     optional int32 stamina = 13;
+     optional string referrerCode = 3;
+     optional string deviceToken = 4;
      
-     optional int64 timeOfStructPurchase = 14;
-     optional int64 timeOfStructBuild = 15;
-     optional CoordinateProto structCoords = 4;
-     optional bool usedDiamondsToBuilt = 16;
+     optional int64 timeOfStructPurchase = 5;
+     optional int64 timeOfStructBuild = 6;
+     optional CoordinateProto structCoords = 7;
+     optional bool usedDiamondsToBuilt = 8;
 }
 
 message UserCreateResponseProto {
@@ -750,7 +643,6 @@ message RetrieveStaticDataForShopRequestProto {
 message RetrieveStaticDataForShopResponseProto {
      optional MinimumUserProto sender = 1;
      optional RetrieveStaticDataForShopStatus status = 2;
-     repeated FullEquipProto equips = 3;
      repeated FullStructureProto structs = 4;
      
      enum RetrieveStaticDataForShopStatus {
@@ -1032,7 +924,6 @@ message LevelUpResponseProto {
      optional int32 newNextLevel = 3;
      optional int32 experienceRequiredForNewNextLevel = 4;
 	 repeated FullCityProto citiesNewlyAvailableToUser = 5;					//only new ones
-     repeated FullEquipProto newlyEquippableEpicsAndLegendaries = 6;			//only new ones
      repeated FullStructureProto newlyAvailableStructs = 7;					//only new ones
 
 	enum LevelUpStatus {
@@ -1218,30 +1109,6 @@ message UpdateClientUserResponseProto {
 //}
 
 //------------------------------------------------------------------------------------------
-
-																						//DONE
-message UseSkillPointRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 attackIncrease = 2;
-	optional int32 defenseIncrease = 3;
-	optional int32 energyIncrease = 4;
-	optional int32 staminaIncrease = 5;
-}
-
-																						//DONE
-message UseSkillPointResponseProto {
-     optional MinimumUserProto sender = 1;
-     optional UseSkillPointStatus status = 2;
-     
-     enum UseSkillPointStatus {
-		SUCCESS = 0;
-		NOT_ENOUGH_SKILL_POINTS = 1;
-		OTHER_FAIL = 2;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
 																						//DONE
 message GenerateAttackListRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -1449,16 +1316,15 @@ message RetrieveStaticDataResponseProto {
 	repeated FullTaskProto tasks = 3;
 	repeated FullQuestProto quests = 4;
 	repeated FullCityProto cities = 5;
-	repeated FullEquipProto equips = 6;
 	repeated BuildStructJobProto buildStructJobs = 7;
 	repeated DefeatTypeJobProto defeatTypeJobs = 8;
 	repeated PossessEquipJobProto possessEquipJobs = 9;
 	repeated UpgradeStructJobProto upgradeStructJobs = 10;
 	optional int32 expRequiredForRequestedLevel = 11;
-	repeated LockBoxEventProto lockBoxEvents = 12;
+	//repeated LockBoxEventProto lockBoxEvents = 12;
 	repeated ClanTierLevelProto clanTierLevels = 14;
 	repeated FullBossProto bosses = 15;
-	repeated BossEventProto bossEvents = 16;
+	//repeated BossEventProto bossEvents = 16;
 	repeated LeaderboardEventProto leaderboardEvents = 17;
 	
 	optional RetrieveStaticDataStatus status = 13;
@@ -1633,26 +1499,6 @@ message EquipEquipmentResponseProto {
 		OTHER_FAIL = 5;
 		ALREADY_AT_MAX_EQUIPPED_EQUIPS = 6;
 	}
-}
-
-//------------------------------------------------------------------------------------------
-
-																						//DONE
-message ChangeUserLocationRequestProto {
-     optional MinimumUserProto sender = 1;
-     optional LocationProto userLocation = 2;    
-}
-
-																						//DONE
-message ChangeUserLocationResponseProto {
-     optional MinimumUserProto sender = 1;
-     optional ChangeUserLocationStatus status = 2;
-     
-     enum ChangeUserLocationStatus {
-     	SUCCESS = 0;
-     	INVALID_BOUNDS = 1;
-     	OTHER_FAIL = 2;
-     }    
 }
 
 //------------------------------------------------------------------------------------------
@@ -1928,8 +1774,7 @@ message CharacterModRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional CharacterModType modType = 2;
 	
-	optional UserType futureUserType = 3;
-	optional string futureName = 4;
+	optional string futureName = 3;
 }
 
 message CharacterModResponseProto {
@@ -2775,110 +2620,6 @@ message RedeemUserLockBoxItemsResponseProto {
 		FAIL_ALREADY_REDEEMED = 1;
 		FAIL_INVALID_EVENT_ID = 2;
 		FAIL_OTHER = 3;
-	}
-}
-
-//------------------------------------------------------------------------------------
-
-message BeginMentoringUserRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 menteeId = 2;
-	optional int64 clientTime = 3;
-}
-
-message BeginMentoringUserResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional BeginMentoringUserStatus status = 2;
-	repeated PrivateChatPostProto initialMessages = 3;
-	optional MentorshipProto mentorship = 4;
-	optional bool isGood = 5;
-	
-	enum BeginMentoringUserStatus {
-		SUCCESS = 0;
-		FAIL_OTHER = 1;
-		FAIL_ALREADY_AT_MAX_NUM_MENTEES = 2;
-		FAIL_TOO_EARLY_TO_ACQUIRE_MENTEE = 3;
-		FAIL_ALREADY_BEING_MENTORED = 4;
-		FAIL_NOT_MENTOR = 5;
-		FAIL_WRONG_SIDE = 6;
-	}
-}
-
-message MenteeBecameAvailableResponseProto {
-	optional MinimumUserProtoForMentorship mentee = 1;
-}
-
-message RetrieveAllMentorsRequestProto {
-	optional MinimumUserProto sender = 1;
-}
-
-message RetrieveAllMentorsResponseProto {
-	optional MinimumUserProto sender = 1;
-	repeated MinimumUserProto mentors = 2;
-	optional RetrieveAllMentorsStatus status = 3;
-	
-	enum RetrieveAllMentorsStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
-}
-
-message RetrieveAvailableMenteesRequestProto {
-	optional MinimumUserProto sender = 1;
-}
-
-message RetrieveAvailableMenteesResponseProto {
-	optional MinimumUserProto sender = 1;
-	repeated MinimumUserProtoForMentorship mentees = 2;
-	optional RetrieveAvailableMenteesStatus status = 3;
-	
-	enum RetrieveAvailableMenteesStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;	
-	}
-}
-
-message DropMenteeRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 menteeToDrop = 2;
-}
-
-message DropMenteeResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional DropMenteeStatus status = 2; 
-	
-	enum DropMenteeStatus {
-		SUCCESS = 1;
-		FAIL_NOT_MENTEE = 2;
-		FAIL_OTHER = 3;
-	}
-}
-
-message RetrieveMyMenteesRequestProto {
-	optional MinimumUserProto sender = 1;
-}
-
-message RetrieveMyMenteesResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional RetrieveMyMenteesStatus status = 2;
-	repeated MentorshipProto mentorships = 3;
-	
-	enum RetrieveMyMenteesStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
-}
-
-message MenteeFinishedQuestResponseProto {
-	optional MinimumUserProto mentee = 1;
-	optional MenteeQuestType questType = 2;
-	
-	enum MenteeQuestType {
-		BOUGHT_A_PACKAGE = 1;			//quest one
-		FORGED_EQUIP_TO_LEVEL_N = 2;	//quest two
-		JOINED_A_CLAN = 3;				//quest three
-		LEVELED_UP_TO_LEVEL_N = 4;		//quest four
-		LEVELED_UP_TO_LEVEL_X = 5;		//quest five
 	}
 }
 

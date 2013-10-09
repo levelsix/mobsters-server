@@ -111,7 +111,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       server.writeEvent(resEvent);
 
       if (legitPick) {
-        previousSilver = user.getCoins() + user.getVaultBalance();
+        previousSilver = user.getCoins();
         previousGold = user.getDiamonds();
         
         //stuff for tracking currency history
@@ -235,42 +235,42 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private void writeChangesToDB(User user, PickLockBoxMethod method, LockBoxEvent event, UserLockBoxEvent userEvent, 
       boolean successfulPick, boolean hadAllItems, Timestamp curTime, Map<String, Integer> money, List<String> rfcDetails) {
     //explaining why user was charged (user currency history table)
-    String rfcDetail = "";
+//    String rfcDetail = "";
+//    
+//    int diamondCost = 0;
+//    int coinCost = 0;
     
-    int diamondCost = 0;
-    int coinCost = 0;
+//    if (userEvent.getLastPickTime() != null && userEvent.getLastPickTime().getTime() + 60000*ControllerConstants.LOCK_BOXES__NUM_MINUTES_TO_REPICK > curTime.getTime()) {
+//      diamondCost += ControllerConstants.LOCK_BOXES__GOLD_COST_TO_RESET_PICK;
+//      rfcDetail += " reset &";
+//    }
+//
+//    if (PickLockBoxMethod.GOLD == method) {
+//      diamondCost += ControllerConstants.LOCK_BOXES__GOLD_COST_TO_PICK;
+//      rfcDetail += " pick method gold";
+//      
+//    } else if (PickLockBoxMethod.SILVER == method) {
+//      coinCost += ControllerConstants.LOCK_BOXES__SILVER_COST_TO_PICK;
+//      rfcDetail += " pick method silver";
+//      
+//    } else {
+//      rfcDetail += " pick method free";
+//    }
     
-    if (userEvent.getLastPickTime() != null && userEvent.getLastPickTime().getTime() + 60000*ControllerConstants.LOCK_BOXES__NUM_MINUTES_TO_REPICK > curTime.getTime()) {
-      diamondCost += ControllerConstants.LOCK_BOXES__GOLD_COST_TO_RESET_PICK;
-      rfcDetail += " reset &";
-    }
-
-    if (PickLockBoxMethod.GOLD == method) {
-      diamondCost += ControllerConstants.LOCK_BOXES__GOLD_COST_TO_PICK;
-      rfcDetail += " pick method gold";
-      
-    } else if (PickLockBoxMethod.SILVER == method) {
-      coinCost += ControllerConstants.LOCK_BOXES__SILVER_COST_TO_PICK;
-      rfcDetail += " pick method silver";
-      
-    } else {
-      rfcDetail += " pick method free";
-    }
-    
-    boolean changeNumPostsInMarketplace = false;
-    if (!user.updateRelativeDiamondsCoinsNumpostsinmarketplaceNaive(-diamondCost, -coinCost, 0, changeNumPostsInMarketplace)) {
-      log.error("problem with updating users currency.");
-      return;
-    } else {
-      if (0 != diamondCost) {
-        money.put(MiscMethods.gold, -diamondCost);
-      }
-      if (0 != coinCost) {
-        money.put(MiscMethods.silver, -coinCost);
-      }
-      //explaining why user was charged (user currency history table)
-      rfcDetails.add(rfcDetail);
-    }
+//    boolean changeNumPostsInMarketplace = false;
+//    if (!user.updateRelativeDiamondsCoinsNumpostsinmarketplaceNaive(-diamondCost, -coinCost, 0, changeNumPostsInMarketplace)) {
+//      log.error("problem with updating users currency.");
+//      return;
+//    } else {
+//      if (0 != diamondCost) {
+//        money.put(MiscMethods.gold, -diamondCost);
+//      }
+//      if (0 != coinCost) {
+//        money.put(MiscMethods.silver, -coinCost);
+//      }
+//      //explaining why user was charged (user currency history table)
+//      rfcDetails.add(rfcDetail);
+//    }
 
     if (!UpdateUtils.get().decrementNumLockBoxesIncrementNumTimesCompletedForUser(event.getId(), user.getId(), successfulPick ? 1 : 0, hadAllItems, curTime)) {
       log.error("problem with decrementing users lock boxes for event "+event.getId());

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.LockBoxItem;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.EquipClassType;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class LockBoxItemRetrieveUtils {
@@ -128,12 +127,11 @@ import com.lvl6.utils.DBConnection;
     int lockBoxEventId = rs.getInt(i++);
     float chanceToUnlock = rs.getFloat(i++);
     String name = rs.getString(i++);
-    EquipClassType type = EquipClassType.valueOf(rs.getInt(i++));
     String imageName = rs.getString(i++);
     int redeemForNumBoosterItems = rs.getInt(i++);
     boolean isGoldBoosterPack = rs.getBoolean(i++);
 
-    LockBoxItem lockBoxItem = new LockBoxItem(id, lockBoxEventId, chanceToUnlock, name, type,
+    LockBoxItem lockBoxItem = new LockBoxItem(id, lockBoxEventId, chanceToUnlock, name,
         imageName, redeemForNumBoosterItems, isGoldBoosterPack);
     return lockBoxItem;
   }

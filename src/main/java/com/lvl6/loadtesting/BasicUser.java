@@ -1,10 +1,8 @@
 package com.lvl6.loadtesting;
 
-import com.lvl6.proto.InfoProto.UserType;
 
 public class BasicUser {
 	protected Integer userId;
-	protected UserType userType;
 	protected String udid;
 
 	
@@ -19,11 +17,5 @@ public class BasicUser {
 	}
 	public void setUserId(Integer userId) {
 		this.userId = userId;
-	}
-	public UserType getUserType() {
-		return userType;
-	}
-	public void setUserType(UserType userType) {
-		this.userType = userType;
 	}
 }

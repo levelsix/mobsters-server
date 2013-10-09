@@ -19,7 +19,6 @@ import com.lvl6.proto.EventProto.UserQuestDetailsResponseProto;
 import com.lvl6.proto.EventProto.UserQuestDetailsResponseProto.Builder;
 import com.lvl6.proto.EventProto.UserQuestDetailsResponseProto.UserQuestDetailsStatus;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -70,7 +69,7 @@ import com.lvl6.utils.RetrieveUtils;
         questsToCheck = RetrieveUtils.userQuestRetrieveUtils().getUnredeemedUserQuestsForUser(senderProto.getUserId());
       }
       if (questsToCheck != null && questsToCheck.size() > 0) {
-        addFullUserQuestDataLarges(resBuilder, questsToCheck, senderProto.getUserType());
+        addFullUserQuestDataLarges(resBuilder, questsToCheck);
       }
       UserQuestDetailsResponseProto resProto = resBuilder.build();
       UserQuestDetailsResponseEvent resEvent = new UserQuestDetailsResponseEvent(senderProto.getUserId());
@@ -86,8 +85,8 @@ import com.lvl6.utils.RetrieveUtils;
     }
   }
 
-  private void addFullUserQuestDataLarges(Builder resBuilder, List<UserQuest> inProgressUserQuests, UserType userType) {
+  private void addFullUserQuestDataLarges(Builder resBuilder, List<UserQuest> inProgressUserQuests) {
     Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-    resBuilder.addAllInProgressUserQuestData(CreateInfoProtoUtils.createFullUserQuestDataLarges(inProgressUserQuests, questIdsToQuests, userType));
+    resBuilder.addAllInProgressUserQuestData(CreateInfoProtoUtils.createFullUserQuestDataLarges(inProgressUserQuests, questIdsToQuests));
   }
 }

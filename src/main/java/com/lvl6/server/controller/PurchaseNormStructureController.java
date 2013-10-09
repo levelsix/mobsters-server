@@ -96,7 +96,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       server.writeEvent(resEvent);
 
       if (legitPurchaseNorm) {
-        previousSilver = user.getCoins() + user.getVaultBalance();
+        previousSilver = user.getCoins();
         previousGold = user.getDiamonds();
         
         Map<String, Integer> money = new HashMap<String, Integer>();

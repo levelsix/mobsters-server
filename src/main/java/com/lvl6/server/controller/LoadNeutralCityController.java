@@ -1,10 +1,8 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,26 +13,19 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LoadNeutralCityRequestEvent;
 import com.lvl6.events.response.LoadNeutralCityResponseEvent;
 import com.lvl6.info.City;
-import com.lvl6.info.NeutralCityElement;
 import com.lvl6.info.Quest;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityGem;
 import com.lvl6.info.UserQuest;
-import com.lvl6.info.jobs.DefeatTypeJob;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventProto.LoadNeutralCityRequestProto;
 import com.lvl6.proto.EventProto.LoadNeutralCityResponseProto;
 import com.lvl6.proto.EventProto.LoadNeutralCityResponseProto.Builder;
 import com.lvl6.proto.EventProto.LoadNeutralCityResponseProto.LoadNeutralCityStatus;
-import com.lvl6.proto.InfoProto.DefeatTypeJobProto.DefeatTypeJobEnemyType;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.InfoProto.UserCityGemProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.UserCityGemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -80,12 +71,12 @@ import com.lvl6.utils.RetrieveUtils;
       boolean legitCityLoad = checkLegitCityLoad(resBuilder, user, city, currentCityRankForUser);
 
       if (legitCityLoad) {
-        List<NeutralCityElement> neutralCityElements = NeutralCityElementsRetrieveUtils.getNeutralCityElementsForCity(cityId);
-        if (neutralCityElements != null) {
-          for (NeutralCityElement nce : neutralCityElements) {
-            resBuilder.addCityElements(CreateInfoProtoUtils.createNeutralCityElementProtoFromNeutralCityElement(nce, user.getType()));
-          }
-        }
+//        List<NeutralCityElement> neutralCityElements = NeutralCityElementsRetrieveUtils.getNeutralCityElementsForCity(cityId);
+//        if (neutralCityElements != null) {
+//          for (NeutralCityElement nce : neutralCityElements) {
+//            resBuilder.addCityElements(CreateInfoProtoUtils.createNeutralCityElementProtoFromNeutralCityElement(nce, user.getType()));
+//          }
+//        }
 
 //        List<Task> tasks = TaskRetrieveUtils.getAllTasksForCityId(cityId);
 //        if (tasks != null && tasks.size() > 0) {
@@ -101,10 +92,10 @@ import com.lvl6.utils.RetrieveUtils;
 //          setResponseUserBossInfos(resBuilder, bossIds, user.getId());
 //        }
 
-        List<Quest> questsInCity = QuestRetrieveUtils.getQuestsInCity(cityId);
-        if (questsInCity != null && questsInCity.size() > 0) {
-          setResponseDefeatTypeJobEnemies(resBuilder, questsInCity, user, cityId);
-        }
+//        List<Quest> questsInCity = QuestRetrieveUtils.getQuestsInCity(cityId);
+//        if (questsInCity != null && questsInCity.size() > 0) {
+//          setResponseDefeatTypeJobEnemies(resBuilder, questsInCity, user, cityId);
+//        }
         
         List<UserQuest> allUnredeemedUserQuests = RetrieveUtils.userQuestRetrieveUtils().getUnredeemedUserQuestsForUser(senderProto.getUserId());
         List<UserQuest> userQuestsInCity = new ArrayList<UserQuest>();
@@ -115,7 +106,7 @@ import com.lvl6.utils.RetrieveUtils;
               userQuestsInCity.add(uq);
             }
           }
-          addFullUserQuestDataLarges(resBuilder, userQuestsInCity, senderProto.getUserType());
+//          addFullUserQuestDataLarges(resBuilder, userQuestsInCity, senderProto.getUserType());
         }
         addUserCityGems(resBuilder, userId, cityId);
       }
@@ -132,12 +123,12 @@ import com.lvl6.utils.RetrieveUtils;
     }
   }
   
-  private void addFullUserQuestDataLarges(Builder resBuilder, List<UserQuest> inProgressUserQuests, UserType userType) {
-    Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-    resBuilder.addAllInProgressUserQuestDataInCity(CreateInfoProtoUtils.createFullUserQuestDataLarges(inProgressUserQuests, questIdsToQuests, userType));
-  }
+//  private void addFullUserQuestDataLarges(Builder resBuilder, List<UserQuest> inProgressUserQuests, UserType userType) {
+//    Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
+//    resBuilder.addAllInProgressUserQuestDataInCity(CreateInfoProtoUtils.createFullUserQuestDataLarges(inProgressUserQuests, questIdsToQuests, userType));
+//  }
 
-  private void setResponseDefeatTypeJobEnemies(Builder resBuilder, List<Quest> questsInCity, User user, int cityId) {
+  /*private void setResponseDefeatTypeJobEnemies(Builder resBuilder, List<Quest> questsInCity, User user, int cityId) {
     Map<UserType, Integer> numToGenerate = new HashMap<UserType, Integer>();
 
     for (Quest quest : questsInCity) {
@@ -215,7 +206,7 @@ import com.lvl6.utils.RetrieveUtils;
         }
       }
     }
-  }
+  }*/
 
 //  private void setResponseUserTaskInfos(Builder resBuilder, List<Task> tasks, int userId, UserType userType) {
 //    Map<Integer, Integer> taskIdToNumTimesActedInRankForUser = UserTaskRetrieveUtils.getTaskIdToNumTimesActedInRankForUser(userId);

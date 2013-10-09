@@ -10,7 +10,6 @@ import com.lvl6.proto.EventProto.StartupRequestProto.Builder;
 import com.lvl6.proto.EventProto.UserCreateRequestProto;
 import com.lvl6.proto.EventProto.UserQuestDetailsRequestProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 
 public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {
@@ -48,10 +47,9 @@ public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {
 	}
 
 	@Override
-	public MinimumUserProto.Builder minimumUserProto(Integer userId, UserType type) {
+	public MinimumUserProto.Builder minimumUserProto(Integer userId) {
 		MinimumUserProto.Builder ubuild = MinimumUserProto.newBuilder();
 		ubuild.setUserId(userId);
-		ubuild.setUserType(type);
 		return ubuild;
 	}
 

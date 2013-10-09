@@ -10,7 +10,6 @@ import com.lvl6.info.ClanTower;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Task;
 import com.lvl6.info.UserStruct;
-import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
 import com.lvl6.proto.InfoProto.StructOrientation;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 
@@ -194,10 +193,6 @@ public interface UpdateUtil {
   public abstract boolean updateUserBoosterItemsForOneUser(int userId, Map<Integer, Integer> userBoosterItemIdsToQuantities);
   
   public abstract boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired);
-  
-  public abstract boolean updateMentorshipTerminate(int mentorshipId);
-  
-  public abstract boolean updateMentorshipQuestCompleteTime(int mentorshipId, Date timeCompleted, MenteeQuestType type);
   
   public abstract boolean updateUserCityGems(int userId, int cityId,
       Map<Integer, Integer> gemIdsToQuantities);

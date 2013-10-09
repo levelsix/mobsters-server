@@ -102,7 +102,7 @@ public class InAppPurchaseController extends EventController {
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int previousSilver = user.getCoins() + user.getVaultBalance();
+      int previousSilver = user.getCoins();
       int previousGold = user.getDiamonds();
 
       JSONObject response;

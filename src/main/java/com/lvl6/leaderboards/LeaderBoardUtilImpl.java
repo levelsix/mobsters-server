@@ -349,8 +349,7 @@ public class LeaderBoardUtilImpl implements LeaderBoardUtil {
 				} else {
 					setBattlesWonOverTotalBattlesRatioForUser(user.getId(), 0.0);
 				}
-				setTotalCoinValueForUser(user.getId(), (double) user.getCoins()
-						+ user.getVaultBalance());
+				setTotalCoinValueForUser(user.getId(), (double) user.getCoins());
 				setExperienceForUser(user.getId(),
 						(double) user.getExperience());
 

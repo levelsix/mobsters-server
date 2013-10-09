@@ -228,20 +228,6 @@ public class SendGroupChatController extends EventController {
       return false;
     }
 
-    boolean isAlliance = MiscMethods.checkIfGoodSide(user.getType());
-    if ((scope == GroupChatScope.ALLIANCE && !isAlliance)
-        || (scope == GroupChatScope.LEGION && isAlliance)) {
-      resBuilder.setStatus(SendGroupChatStatus.WRONG_SIDE);
-      log.error("user type is " + user.getType() + ", scope is " + scope);
-      return false;
-    }
-
-    // if (user.getNumGroupChatsRemaining() <= 0) {
-    // resBuilder.setStatus(SendGroupChatStatus.NOT_ENOUGH_GROUP_CHATS);
-    // log.error("user has no group chats remaining");
-    // return false;
-    // }
-
     if (chatMessage.length() > ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING) {
       resBuilder.setStatus(SendGroupChatStatus.TOO_LONG);
       log.error("chat message is too long. allowed is "

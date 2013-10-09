@@ -17,34 +17,23 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UserCreateRequestEvent;
-import com.lvl6.events.response.MenteeBecameAvailableResponseEvent;
 import com.lvl6.events.response.ReferralCodeUsedResponseEvent;
 import com.lvl6.events.response.UserCreateResponseEvent;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.Equipment;
-import com.lvl6.info.Location;
 import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
-import com.lvl6.proto.EventProto.MenteeBecameAvailableResponseProto;
 import com.lvl6.proto.EventProto.ReferralCodeUsedResponseProto;
 import com.lvl6.proto.EventProto.UserCreateRequestProto;
 import com.lvl6.proto.EventProto.UserCreateResponseProto;
 import com.lvl6.proto.EventProto.UserCreateResponseProto.Builder;
 import com.lvl6.proto.EventProto.UserCreateResponseProto.UserCreateStatus;
-import com.lvl6.proto.InfoProto.EquipClassType;
-import com.lvl6.proto.InfoProto.FullEquipProto.EquipType;
 import com.lvl6.proto.InfoProto.FullUserProto;
-import com.lvl6.proto.InfoProto.LocationProto;
-import com.lvl6.proto.InfoProto.MinimumUserProtoForMentorship;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.AvailableReferralCodeRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.EventWriter;
 import com.lvl6.spring.AppContext;
@@ -108,9 +97,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     UserCreateRequestProto reqProto = ((UserCreateRequestEvent)event).getUserCreateRequestProto();
     String udid = reqProto.getUdid();
     String name = reqProto.getName();
-    UserType type = reqProto.getType();
 
-    LocationProto locationProto = (reqProto.hasUserLocation()) ? reqProto.getUserLocation() : null;
     String referrerCode = (reqProto.hasReferrerCode()) ? reqProto.getReferrerCode() : null;
     String deviceToken = (reqProto.hasDeviceToken() && reqProto.getDeviceToken().length() > 0) ? reqProto.getDeviceToken() : null;
 
@@ -119,22 +106,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Timestamp timeOfStructBuild = createTime; //new Timestamp(reqProto.getTimeOfStructBuild());
     CoordinatePair structCoords = new CoordinatePair(reqProto.getStructCoords().getX(), reqProto.getStructCoords().getY());
 
-    int attack = reqProto.getAttack();
-    int defense = reqProto.getDefense();
-    int energy = reqProto.getEnergy();
-    int stamina = reqProto.getStamina();
-
     boolean usedDiamondsToBuild = reqProto.getUsedDiamondsToBuilt();
 
 
     UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto.newBuilder();
 
-    Location loc = (locationProto == null) ? MiscMethods.getRandomValidLocation() : new Location(locationProto.getLatitude(), locationProto.getLongitude());
-
     User referrer = (referrerCode != null && referrerCode.length() > 0) ? RetrieveUtils.userRetrieveUtils().getUserByReferralCode(referrerCode) : null;;
 
     boolean legitUserCreate = checkLegitUserCreate(resBuilder, udid, name, 
-        loc, type, attack, defense, energy, stamina, timeOfStructPurchase, timeOfStructBuild, structCoords, 
+       timeOfStructPurchase, timeOfStructBuild, structCoords, 
         referrer, reqProto.hasReferrerCode());
 
     User user = null;
@@ -164,48 +144,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       //automatically subtract cost to guarantee forge during tutorial
       playerDiamonds -= ControllerConstants.TUTORIAL__COST_TO_SPEED_UP_FORGE;
       
-      Integer amuletEquipped = ControllerConstants.TUTORIAL__FAKE_QUEST_AMULET_LOOT_EQUIP_ID;
-      Integer weaponEquipped = null, armorEquipped = null;
-      if (type == UserType.GOOD_ARCHER || type == UserType.BAD_ARCHER) {
-        weaponEquipped = ControllerConstants.TUTORIAL__ARCHER_INIT_WEAPON_ID;
-        armorEquipped = ControllerConstants.TUTORIAL__ARCHER_INIT_ARMOR_ID;
-      }
-      if (type == UserType.GOOD_WARRIOR || type == UserType.BAD_WARRIOR) {
-        weaponEquipped = ControllerConstants.TUTORIAL__WARRIOR_INIT_WEAPON_ID;
-        armorEquipped = ControllerConstants.TUTORIAL__WARRIOR_INIT_ARMOR_ID;
-      }
-      if (type == UserType.GOOD_MAGE || type == UserType.BAD_MAGE) {
-        weaponEquipped = ControllerConstants.TUTORIAL__MAGE_INIT_WEAPON_ID;
-        armorEquipped = ControllerConstants.TUTORIAL__MAGE_INIT_ARMOR_ID;
-      }
-
-      if (weaponEquipped > 0) equipIds.add(weaponEquipped);
-      if (armorEquipped > 0) equipIds.add(armorEquipped);
-      if (amuletEquipped > 0) equipIds.add(amuletEquipped);
-
       //newbie protection
       boolean activateShield = true;
       String rank = ControllerConstants.TUTORIAL__INIT_RANK;
       
-      userId = insertUtils.insertUser(udid, name, type, loc, deviceToken,
+      userId = insertUtils.insertUser(udid, name, deviceToken,
           newReferCode, ControllerConstants.USER_CREATE__START_LEVEL, 
-          attack, defense, energy, stamina, playerExp, playerCoins,
-          playerDiamonds, null, null, null, false,
-          ControllerConstants.PURCHASE_GROUP_CHAT__NUM_CHATS_GIVEN_FOR_PACKAGE,
-          activateShield, createTime, createTime, createTime, rank);
+          playerExp, playerCoins, playerDiamonds, false,
+          activateShield, createTime, rank);
             
       if (userId > 0) {
         server.lockPlayer(userId, this.getClass().getSimpleName());
         try {
           user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
-          Map<EquipType, Integer> userEquipIds = writeUserEquips(user.getId(),
-        	  equipIds, createTime);
-          if (!user.updateAbsoluteAllEquipped(userEquipIds.get(EquipType.WEAPON), 
-              userEquipIds.get(EquipType.ARMOR), userEquipIds.get(EquipType.AMULET))) {
-            log.error("problem with marking user's equipped userequips, weapon:" + userEquipIds.get(EquipType.WEAPON) +
-                ", armor: " + userEquipIds.get(EquipType.ARMOR) + ", amulet: " + userEquipIds.get(EquipType.AMULET));
-          }
+//          Map<EquipType, Integer> userEquipIds = writeUserEquips(user.getId(),
+//        	  equipIds, createTime);
+//          if (!user.updateAbsoluteAllEquipped(userEquipIds.get(EquipType.WEAPON), 
+//              userEquipIds.get(EquipType.ARMOR), userEquipIds.get(EquipType.AMULET))) {
+//            log.error("problem with marking user's equipped userequips, weapon:" + userEquipIds.get(EquipType.WEAPON) +
+//                ", armor: " + userEquipIds.get(EquipType.ARMOR) + ", amulet: " + userEquipIds.get(EquipType.AMULET));
+//          }
 
           FullUserProto userProto = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
           resBuilder.setSender(userProto);
@@ -216,12 +175,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         }
       } else {
         resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-        log.error("problem with trying to create user. udid=" + udid + ", name=" + name + ", type=" + type
-            + ", loc=" + loc + ", deviceToken=" + deviceToken + ", newReferCode=" + newReferCode + ", attack="
-            + attack + ", defense=" + defense + ", energy=" + energy + ", stamina=" + stamina
-            + ", playerExp=" + playerExp + ", playerCoins=" + playerCoins + ", playerDiamonds=" + playerDiamonds
-            + ", weaponEquipped=" + weaponEquipped + ", armorEquipped=" + armorEquipped + ", amuletEquipped=" 
-            + amuletEquipped); 
+        log.error("problem with trying to create user. udid="
+        		+ udid + ", name=" + name + ", deviceToken=" + deviceToken
+        		+ ", newReferCode=" + newReferCode + ", playerExp="
+        		+ playerExp + ", playerCoins=" + playerCoins
+        		+ ", playerDiamonds=" + playerDiamonds); 
       }
     }
 
@@ -265,9 +223,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         //CURRENCY CHANGE HISTORY
         writeToUserCurrencyHistory(user, playerCoins, playerDiamonds);
         
-        //send to mentors
-        //writeToMentors(user);
-
       } catch (Exception e) {
         log.error("exception in UserCreateController processEvent", e);
       } finally {
@@ -304,46 +259,46 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //    }
   }
 
-  private Map<EquipType, Integer> writeUserEquips(int userId, List<Integer> equipIds,
-	  Timestamp createTime) {
-    Map <EquipType, Integer> userEquipIds = new HashMap<EquipType, Integer>();
-    if (equipIds.size() > 0) {
-      int rustyDaggerId = 1;
-      String reason = ControllerConstants.UER__USER_CREATED;
-
-      for (int i = 0; i < equipIds.size(); i++) {
-        //since user create, equips should have no enhancement
-        int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
-        
-        //but rusty dagger should be forge level 2
-        if (equipIds.get(i) == rustyDaggerId) {
-          forgeLevel = 2;
-        }
-        int userEquipId = insertUtils.insertUserEquip(userId, equipIds.get(i),
-            forgeLevel, ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT,
-            createTime, reason); 
-        if (userEquipId < 0) {
-          log.error("problem with giving user " + userId + " 1 " + equipIds.get(i));
-        } else {
-          Equipment equip = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipIds.get(i));
-          userEquipIds.put(equip.getType(), userEquipId);
-        }
-      }
-      
-      if (Globals.IDDICTION_ON()) {
-        //since user create, equips should have no enhancement
-        int userEquipId = insertUtils.insertUserEquip(userId, ControllerConstants.IDDICTION__EQUIP_ID, 
-            ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT,
-            createTime, reason);
-        if (userEquipId < 0) {
-          log.error("problem with giving user iddiction reward to " + userId + " 1 " + ControllerConstants.IDDICTION__EQUIP_ID);
-        }
-      }
-      
-      return userEquipIds;
-    }
-    return userEquipIds;
-  }
+//  private Map<EquipType, Integer> writeUserEquips(int userId, List<Integer> equipIds,
+//	  Timestamp createTime) {
+//    Map <EquipType, Integer> userEquipIds = new HashMap<EquipType, Integer>();
+//    if (equipIds.size() > 0) {
+//      int rustyDaggerId = 1;
+//      String reason = ControllerConstants.UER__USER_CREATED;
+//
+//      for (int i = 0; i < equipIds.size(); i++) {
+//        //since user create, equips should have no enhancement
+//        int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
+//        
+//        //but rusty dagger should be forge level 2
+//        if (equipIds.get(i) == rustyDaggerId) {
+//          forgeLevel = 2;
+//        }
+//        int userEquipId = insertUtils.insertUserEquip(userId, equipIds.get(i),
+//            forgeLevel, ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT,
+//            createTime, reason); 
+//        if (userEquipId < 0) {
+//          log.error("problem with giving user " + userId + " 1 " + equipIds.get(i));
+//        } else {
+//          Equipment equip = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipIds.get(i));
+//          userEquipIds.put(equip.getType(), userEquipId);
+//        }
+//      }
+//      
+//      if (Globals.IDDICTION_ON()) {
+//        //since user create, equips should have no enhancement
+//        int userEquipId = insertUtils.insertUserEquip(userId, ControllerConstants.IDDICTION__EQUIP_ID, 
+//            ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT,
+//            createTime, reason);
+//        if (userEquipId < 0) {
+//          log.error("problem with giving user iddiction reward to " + userId + " 1 " + ControllerConstants.IDDICTION__EQUIP_ID);
+//        }
+//      }
+//      
+//      return userEquipIds;
+//    }
+//    return userEquipIds;
+//  }
   //
   //  private void writeUserCritstructs(int userId) {
   //    if (!insertUtils.insertAviaryAndCarpenterCoords(userId, ControllerConstants.AVIARY_COORDS, ControllerConstants.CARPENTER_COORDS)) {
@@ -367,7 +322,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (!referrer.isFake()) {
       server.lockPlayer(referrer.getId(), this.getClass().getSimpleName());
       try {
-        int previousSilver = referrer.getCoins() + referrer.getVaultBalance();
+        int previousSilver = referrer.getCoins();
         
         int coinsGivenToReferrer = MiscMethods.calculateCoinsGivenToReferrer(referrer);
         if (!referrer.updateRelativeCoinsNumreferrals(coinsGivenToReferrer, 1)) {
@@ -396,29 +351,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean checkLegitUserCreate(Builder resBuilder, String udid,
-      String name, Location loc, UserType type, int attack, int defense, int energy, int stamina, 
-      Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild, CoordinatePair coordinatePair, User referrer, 
-      boolean hasReferrerCode) {
+      String name, Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
+      CoordinatePair coordinatePair, User referrer, boolean hasReferrerCode) {
 
-    if (udid == null || name == null || timeOfStructPurchase == null || coordinatePair == null || type == null || timeOfStructBuild == null) {
+    if (udid == null || name == null || timeOfStructPurchase == null || coordinatePair == null || timeOfStructBuild == null) {
       resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
       log.error("parameter passed in is null. udid=" + udid + ", name=" + name + ", timeOfStructPurchase=" + timeOfStructPurchase
-          + ", coordinatePair=" + coordinatePair + ", type=" + type + ", timeOfStructBuild=" + timeOfStructBuild);
+          + ", coordinatePair=" + coordinatePair + ", timeOfStructBuild=" + timeOfStructBuild);
       return false;
     }
     if (hasReferrerCode && referrer == null) {
       resBuilder.setStatus(UserCreateStatus.INVALID_REFER_CODE);
       log.info("refer code passed in is invalid.");
-      return false;
-    }
-    int sumStat = attack + defense + energy + stamina;
-    int correctBaseSumStat = calculateCorrectSumStat(MiscMethods.getClassTypeFromUserType(type));
-    if (sumStat < correctBaseSumStat || sumStat > correctBaseSumStat + ControllerConstants.LEVEL_UP__SKILL_POINTS_GAINED*ControllerConstants.USE_SKILL_POINT__MAX_STAT_GAIN) {
-      resBuilder.setStatus(UserCreateStatus.INVALID_SKILL_POINT_ALLOCATION);
-      log.error("invalid skill point allocation. sum stat range should be between " + correctBaseSumStat
-          + " and " + (correctBaseSumStat + ControllerConstants.LEVEL_UP__SKILL_POINTS_GAINED*ControllerConstants.USE_SKILL_POINT__MAX_STAT_GAIN)
-          + ", but it's at " + sumStat + ". attack=" + attack + ", defense=" + defense + ", energy=" + energy
-          + ", stamina=" + stamina + ", type=" + type);
       return false;
     }
     if (RetrieveUtils.userRetrieveUtils().getUserByUDID(udid) != null) {
@@ -434,14 +378,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           + ", timeOfStructPurchase=" + timeOfStructPurchase);
       return false;
     }*/
-    if (loc.getLatitude() < ControllerConstants.LATITUDE_MIN || loc.getLatitude() > ControllerConstants.LATITUDE_MAX || 
-        loc.getLongitude() < ControllerConstants.LONGITUDE_MIN || loc.getLongitude() > ControllerConstants.LONGITUDE_MAX) {
-      resBuilder.setStatus(UserCreateStatus.INVALID_LOCATION);
-      log.error("location is out of bounds. location=" + loc + ". latitude is between " + ControllerConstants.LATITUDE_MIN
-          + " and " + ControllerConstants.LATITUDE_MAX + ". longitude is between " + ControllerConstants.LONGITUDE_MIN
-          + " and " + ControllerConstants.LONGITUDE_MAX);
-      return false;
-    }
     if (name.length() < ControllerConstants.USER_CREATE__MIN_NAME_LENGTH || 
         name.length() > ControllerConstants.USER_CREATE__MAX_NAME_LENGTH) {
       resBuilder.setStatus(UserCreateStatus.INVALID_NAME);
@@ -449,72 +385,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           + " and " + ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
       return false;
     }
-    if (type == UserType.GOOD_ARCHER || type == UserType.BAD_ARCHER) {
-      if (attack < ControllerConstants.TUTORIAL__ARCHER_INIT_ATTACK) {
-        resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-        log.error("archer attack too low. attack is " + attack + ", init attack is " + ControllerConstants.TUTORIAL__ARCHER_INIT_ATTACK);
-        return false;
-      }
-      if (defense < ControllerConstants.TUTORIAL__ARCHER_INIT_DEFENSE) {
-        resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-        log.error("archer defense too low. defense is " + defense + ", init defense is " + ControllerConstants.TUTORIAL__ARCHER_INIT_DEFENSE);
-        return false;
-      }
-    } else if (type == UserType.GOOD_WARRIOR || type == UserType.BAD_WARRIOR) {
-      if (attack < ControllerConstants.TUTORIAL__WARRIOR_INIT_ATTACK) {
-        resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-        log.error("warrior attack too low. attack is " + attack + ", init attack is " + ControllerConstants.TUTORIAL__WARRIOR_INIT_ATTACK);
-        return false;
-      }
-      if (defense < ControllerConstants.TUTORIAL__WARRIOR_INIT_DEFENSE) {
-        resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-        log.error("warrior defense too low. defense is " + defense + ", init defense is " + ControllerConstants.TUTORIAL__WARRIOR_INIT_DEFENSE);
-        return false;
-      }      
-    } else if (type == UserType.GOOD_MAGE || type == UserType.BAD_MAGE) {
-      if (attack < ControllerConstants.TUTORIAL__MAGE_INIT_ATTACK) {
-        resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-        log.error("mage attack too low. attack is " + attack + ", init attack is " + ControllerConstants.TUTORIAL__MAGE_INIT_ATTACK);
-        return false;
-      }
-      if (defense < ControllerConstants.TUTORIAL__MAGE_INIT_DEFENSE) {
-        resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-        log.error("mage defense too low. defense is " + defense + ", init defense is " + ControllerConstants.TUTORIAL__MAGE_INIT_DEFENSE);
-        return false;
-      }            
-    } else {
-      resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-      log.error("unkown user type. type=" + type);
-      return false;
-    }
-    if (energy < ControllerConstants.TUTORIAL__INIT_ENERGY) {
-      resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-      log.error("energy too low. energy is " + energy + ", init energy is " + ControllerConstants.TUTORIAL__INIT_ENERGY);
-      return false;      
-    }
-    if (stamina < ControllerConstants.TUTORIAL__INIT_STAMINA) {
-      resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
-      log.error("stamina too low. stamina is " + stamina + ", init stamina is " + ControllerConstants.TUTORIAL__INIT_STAMINA);
-      return false;
-    }
 
     resBuilder.setStatus(UserCreateStatus.SUCCESS);
     return true;
   }
 
-  private int calculateCorrectSumStat(EquipClassType classType) {
-    int sumStat = ControllerConstants.TUTORIAL__INIT_ENERGY 
-        + ControllerConstants.TUTORIAL__INIT_STAMINA;
-    if (classType == EquipClassType.WARRIOR) {
-      return sumStat + ControllerConstants.TUTORIAL__WARRIOR_INIT_ATTACK + ControllerConstants.TUTORIAL__WARRIOR_INIT_DEFENSE;
-    } else if (classType == EquipClassType.ARCHER) {
-      return sumStat + ControllerConstants.TUTORIAL__ARCHER_INIT_ATTACK + ControllerConstants.TUTORIAL__ARCHER_INIT_DEFENSE;
-    } else if (classType == EquipClassType.MAGE) {
-      return sumStat + ControllerConstants.TUTORIAL__MAGE_INIT_ATTACK + ControllerConstants.TUTORIAL__MAGE_INIT_DEFENSE;
-    }
-    return sumStat;
-  }
-  
   private void writeToUserCurrencyHistory(User aUser, int playerCoins, int playerDiamonds) {
     String gold = MiscMethods.gold;
     String silver = MiscMethods.silver;
@@ -553,22 +428,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, goldSilverChange,
         previousGoldSilver, reasonsForChanges);
-  }
-  
-  private void writeToMentors(User u) {
-    int userId = u.getId();
-    MinimumUserProtoForMentorship mupfm =
-        CreateInfoProtoUtils.createMinimumUserProtoForMentorship(u);
-    // create event to send to mentors
-    MenteeBecameAvailableResponseProto.Builder mbarpb =
-        MenteeBecameAvailableResponseProto.newBuilder();
-    mbarpb.setMentee(mupfm);
-    MenteeBecameAvailableResponseEvent mbare = new MenteeBecameAvailableResponseEvent(userId);
-    mbare.setMenteeBecameAvailableResponseProto(mbarpb.build());
-    
-    //send to everyone, client will display based on whether the user
-    //received it is a mentor
-    eventWriter.processGlobalChatResponseEvent(mbare);
   }
   
 }

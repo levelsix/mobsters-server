@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseCityExpansionRequestEvent;
-import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.PurchaseCityExpansionResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.CityExpansionCost;
@@ -107,7 +106,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 			if (legitExpansion) {
 				//update database tables
-				int previousSilver = user.getCoins() + user.getVaultBalance();
+//				int previousSilver = user.getCoins();
 				int cost = cityExpansionCostList.get(0);
 				
 				Map<String, Integer> currencyChange = new HashMap<String, Integer>();

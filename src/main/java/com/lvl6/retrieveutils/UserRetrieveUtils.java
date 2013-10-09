@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,12 +14,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.Location;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.StringUtils;
 
@@ -36,70 +33,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private final int MAX_BATTLE_DB_HITS = 5;
   private final int EXTREME_MAX_BATTLE_DB_HITS = 30;
   
-  public List<User> getMentees(List<Integer> blackList, Date lastLoginAfterNow,
-      int limit, boolean isGood) {
-    List<Object> values = new ArrayList<Object>();
-    
-    String query = "SELECT * FROM " + TABLE_NAME + " WHERE " +
-        DBConstants.USER__IS_MENTOR + "=? AND " + DBConstants.USER__IS_FAKE +
-        "=?"; 
-    values.add(false);
-    values.add(false);
-    
-    if (isGood) {
-      int amount = 3;
-      query += " AND " + DBConstants.USER__TYPE + " in (";
-      List<String> clauses = Collections.nCopies(amount, "?");
-      query += StringUtils.getListInString(clauses, ",") + ")";
-      values.add(UserType.GOOD_ARCHER_VALUE);
-      values.add(UserType.GOOD_MAGE_VALUE);
-      values.add(UserType.GOOD_WARRIOR_VALUE);
-    } else {
-      int amount = 3;
-      query += " AND " + DBConstants.USER__TYPE + " in (";
-      List<String> clauses = Collections.nCopies(amount, "?");
-      query += StringUtils.getListInString(clauses, ",") + ")";
-      values.add(UserType.BAD_ARCHER_VALUE);
-      values.add(UserType.BAD_MAGE_VALUE);
-      values.add(UserType.BAD_WARRIOR_VALUE);
-    }
-    
-    if (null != blackList && !blackList.isEmpty()) {
-      query += " AND " + DBConstants.USER__ID + "NOT IN (";
-      int amount = blackList.size();
-      List<String> clauses = Collections.nCopies(amount, "?");
-      query += StringUtils.getListInString(clauses, ",") + ")";
-      values.addAll(blackList);
-    }
-    
-    if (null != lastLoginAfterNow) {
-      query += " AND " + DBConstants.USER__LAST_LOGIN + " > ?";
-      values.add(new Timestamp(lastLoginAfterNow.getTime()));
-    }
-    
-    query += " ORDER BY " + DBConstants.USER__CREATE_TIME + " DESC " +
-    		"LIMIT " + limit;
-    
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    List<User> usersList = convertRSToUsers(rs);
-    DBConnection.get().close(rs, null, conn);
-    return usersList;
-  }
-  
-  public List<User> getAllMentors() {
-    log.debug("retrieving users that are mentors ");
-
-    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.USER__IS_MENTOR, true);
-
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, DBConstants.TABLE_USER);
-    List<User> usersList = convertRSToUsers(rs);
-    DBConnection.get().close(rs, null, conn);
-    return usersList;
-    
-  }
   
   public int numAccountsForUDID(String udid) {
     List<Object> params = new ArrayList<Object>();
@@ -201,14 +134,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return usersList;
   }
 
-  public List<User> getUsers(List<UserType> requestedTypes, int numUsers, int playerLevel, int userId, boolean guaranteeNum, 
-      Double latLowerBound, Double latUpperBound, Double longLowerBound, Double longUpperBound, boolean forBattle, 
-      boolean realPlayersOnly, boolean fakePlayersOnly, boolean offlinePlayersOnly, boolean prestigePlayersOnly,
+  public List<User> getUsers(int numUsers, int playerLevel, int userId, boolean guaranteeNum, 
+      boolean realPlayersOnly, boolean fakePlayersOnly, boolean offlinePlayersOnly,
       boolean inactiveShield, List<Integer> forbiddenPlayerIds) {
-    log.debug("retrieving list of users for user " + userId + " with requested types " + requestedTypes + 
-        " , " + numUsers + " users " + " around player level " + playerLevel + ", guaranteeNum="+guaranteeNum + 
-        ", latLowerBound=" + latLowerBound + ", latUpperBound=" + latUpperBound + 
-        ", longLowerBound=" + longLowerBound + ", longUpperBound=" + longUpperBound + ", forBattle=" + forBattle);
+    log.debug("retrieving list of users for user " + userId + " with " + 
+        numUsers + " users " + " around player level " + playerLevel + ", guaranteeNum="+guaranteeNum);
 
     //when there was a map in AoC, players displayed were +- 3,
     //hence use of -1 and +1
@@ -218,19 +148,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     List <Object> values = new ArrayList<Object>();
 
     String query = "select * from " + TABLE_NAME + " where ";
-
-    if (requestedTypes != null && requestedTypes.size() > 0) {
-      query += "(";
-      for (int i = 0; i < requestedTypes.size(); i++) {
-        values.add(requestedTypes.get(i).getNumber());
-        if (i == requestedTypes.size() - 1) {
-          query += DBConstants.USER__TYPE + "=?";
-        } else {
-          query += DBConstants.USER__TYPE + "=?  or ";
-        }
-      }
-      query += ") and ";
-    }
 
     if (forbiddenPlayerIds != null && forbiddenPlayerIds.size() > 0) {
       query += "(";
@@ -243,23 +160,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
         }
       }
       query += ") and ";
-    }
-    
-    if (latLowerBound != null) {
-      query += DBConstants.USER__LATITUDE + ">=? and ";
-      values.add(latLowerBound);
-    }
-    if (latUpperBound != null) {
-      query += DBConstants.USER__LATITUDE + "<=? and ";
-      values.add(latUpperBound);
-    }
-    if (longLowerBound != null) {
-      query += DBConstants.USER__LONGITUDE + ">=? and ";
-      values.add(longLowerBound);
-    }
-    if (longUpperBound != null) {
-      query += DBConstants.USER__LONGITUDE + "<=? and ";
-      values.add(longUpperBound);
     }
 
 //    if (forBattle) {
@@ -280,11 +180,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
       query += DBConstants.USER__IS_FAKE + "=? and ";
       values.add(1);
     } 
-    
-    if (prestigePlayersOnly) {
-      query += DBConstants.USER__PRESTIGE_LEVEL + ">? and ";
-      values.add(0);
-    }
     
     if (inactiveShield) {
       query += DBConstants.USER__HAS_ACTIVE_SHIELD + "=? and ";
@@ -750,23 +645,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
     int level = rs.getInt(i++);
-    UserType type = UserType.valueOf(rs.getInt(i++));
-
-    int energy = rs.getInt(i++);
-//    Timestamp ts = rs.getTimestamp(i++);
-
-    Date lastEnergyRefillTime = null;
-    Timestamp ts  = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastEnergyRefillTime = new Date(ts.getTime());
-    }
-
-    int energyMax = rs.getInt(i++);
     int diamonds = rs.getInt(i++);
     int coins = rs.getInt(i++);
-    int marketplaceDiamondsEarnings = rs.getInt(i++);
-    int marketplaceCoinsEarnings = rs.getInt(i++);
-    int vaultBalance = rs.getInt(i++);
     int experience = rs.getInt(i++);
     int tasksCompleted = rs.getInt(i++);
     int battlesWon = rs.getInt(i++);
@@ -775,23 +655,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String referralCode = rs.getString(i++);
     int numReferrals = rs.getInt(i++);
     String udid = rs.getString(i++);
-    Location userLocation = new Location(rs.getDouble(i++), rs.getDouble(i++));
-    int numPostsInMarketplace = rs.getInt(i++);
-    int numMarketplaceSalesUnredeemed = rs.getInt(i++);
 
-    int weaponEquippedUserEquipId = rs.getInt(i++);
-    if (rs.wasNull()) {
-      weaponEquippedUserEquipId = ControllerConstants.NOT_SET;
-    }
-    int armorEquippedUserEquipId = rs.getInt(i++);
-    if (rs.wasNull()) {
-      armorEquippedUserEquipId = ControllerConstants.NOT_SET;
-    }
-    int amuletEquippedUserEquipId = rs.getInt(i++);
-    if (rs.wasNull()) {
-      amuletEquippedUserEquipId = ControllerConstants.NOT_SET;
-    }
-
+    Timestamp ts = rs.getTimestamp(i++);
     Date lastLogin = null;
     ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
@@ -813,19 +678,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
 
     int numBadges = rs.getInt(i++);
-
-    Date lastShortLicensePurchaseTime = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastShortLicensePurchaseTime = new Date(ts.getTime());
-    }
-
-    Date lastLongLicensePurchaseTime = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastLongLicensePurchaseTime = new Date(ts.getTime());
-    }
-
     boolean isFake = rs.getBoolean(i++);
     
     Date createTime = null;
@@ -835,31 +687,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
 
     boolean isAdmin = rs.getBoolean(i++);
-    
     String apsalarId = rs.getString(i++);
     int numCoinsRetrievedFromStructs = rs.getInt(i++);
-    int numAdColonyVideosWatched = rs.getInt(i++);
-    int numTimesKiipRewarded = rs.getInt(i++);
     int numConsecutiveDaysPlayed = rs.getInt(i++);
-    int numGroupChatsRemaining = rs.getInt(i++);
     
     int clanId = rs.getInt(i++);
     if (rs.wasNull()) {
       clanId = ControllerConstants.NOT_SET;
     }
     
-    Date lastGoldmineRetrieval = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastGoldmineRetrieval = new Date(ts.getTime());
-    }
-
-    Date lastMarketplaceNotificationTime = null;
-    ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-    	lastMarketplaceNotificationTime = new Date(ts.getTime());
-    }
-
     Date lastWallPostNotificationTime = null;
     ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
@@ -869,25 +705,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int kabamNaid = rs.getInt(i++);
 
     boolean hasReceivedfbReward = rs.getBoolean(i++);
-
-    int weaponTwoEquippedUserEquipId = rs.getInt(i++);
-    if (rs.wasNull()) {
-      weaponTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-    }
-    int armorTwoEquippedUserEquipId = rs.getInt(i++);
-    if (rs.wasNull()) {
-      armorTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-    }
-    int amuletTwoEquippedUserEquipId = rs.getInt(i++);
-    if (rs.wasNull()) {
-      amuletTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-    } 
-    
-    int prestigeLevel = rs.getInt(i++);
-
     int numAdditionalForgeSlots = rs.getInt(i++);
     int numBeginnerSalesPurchased = rs.getInt(i++);
-    boolean isMentor = rs.getBoolean(i++);
     boolean hasActiveShield = rs.getBoolean(i++);
     
     Date shieldEndTime = null;
@@ -910,23 +729,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int attacksLost = rs.getInt(i++);
     int defensesLost = rs.getInt(i++);
     
-    User user = new User(id, name, level, type, energy, lastEnergyRefillTime,
-    		energyMax, diamonds, coins, marketplaceDiamondsEarnings,
-    		marketplaceCoinsEarnings, vaultBalance, experience, tasksCompleted,
-    		battlesWon, battlesLost, flees, referralCode, numReferrals, udid,
-    		userLocation, numPostsInMarketplace, numMarketplaceSalesUnredeemed,
-    		weaponEquippedUserEquipId, armorEquippedUserEquipId,
-    		amuletEquippedUserEquipId, lastLogin, lastLogout, deviceToken,
-    		lastBattleNotificationTime, numBadges, lastShortLicensePurchaseTime,
-    		lastLongLicensePurchaseTime, isFake, createTime, isAdmin, apsalarId,
-    		numCoinsRetrievedFromStructs, numAdColonyVideosWatched, numTimesKiipRewarded,
-    		numConsecutiveDaysPlayed, numGroupChatsRemaining, clanId,
-    		lastGoldmineRetrieval, lastMarketplaceNotificationTime,
-    		lastWallPostNotificationTime, kabamNaid, hasReceivedfbReward,
-    		weaponTwoEquippedUserEquipId, armorTwoEquippedUserEquipId,
-    		amuletTwoEquippedUserEquipId, prestigeLevel, numAdditionalForgeSlots,
-    		numBeginnerSalesPurchased, isMentor, hasActiveShield, shieldEndTime, elo,
-    		rank, lastTimeQueued, attacksWon, defensesWon, attacksLost, defensesLost);
+    User user = new User(id, name, level, diamonds, coins, experience,
+    		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
+    		numReferrals, udid, lastLogin, lastLogout, deviceToken,
+    		lastBattleNotificationTime, numBadges, isFake, createTime,
+    		isAdmin, apsalarId, numCoinsRetrievedFromStructs,
+    		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
+    		kabamNaid, hasReceivedfbReward, numAdditionalForgeSlots,
+    		numBeginnerSalesPurchased, hasActiveShield, shieldEndTime, elo,
+    		rank, lastTimeQueued, attacksWon, defensesWon, attacksLost,
+    		defensesLost);
     return user;
   }
 }

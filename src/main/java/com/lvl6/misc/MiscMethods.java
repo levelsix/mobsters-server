@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -25,27 +24,19 @@ import org.springframework.core.task.TaskExecutor;
 
 import com.lvl6.events.response.ChangedClanTowerResponseEvent;
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
-import com.lvl6.events.response.MenteeFinishedQuestResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterItem;
-import com.lvl6.info.BoosterPack;
-import com.lvl6.info.BossEvent;
 import com.lvl6.info.City;
 import com.lvl6.info.CityGem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanTierLevel;
 import com.lvl6.info.ClanTower;
 import com.lvl6.info.Dialogue;
-import com.lvl6.info.EquipEnhancement;
-import com.lvl6.info.Equipment;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.LeaderboardEvent;
 import com.lvl6.info.LeaderboardEventReward;
 import com.lvl6.info.Location;
-import com.lvl6.info.LockBoxEvent;
-//import com.lvl6.info.MarketplacePost;
-import com.lvl6.info.Mentorship;
 import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityGem;
@@ -61,8 +52,6 @@ import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.EventProto.ChangedClanTowerResponseProto;
 import com.lvl6.proto.EventProto.ChangedClanTowerResponseProto.ReasonForClanTowerChange;
 import com.lvl6.proto.EventProto.GeneralNotificationResponseProto;
-import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto;
-import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BattleConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BazaarMinLevelConstants;
@@ -84,24 +73,15 @@ import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.PrestigeC
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.SpeedupConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.ThreeCardMonteConstants;
 import com.lvl6.proto.EventProto.UpdateClientUserResponseProto;
-import com.lvl6.proto.InfoProto.BossEventProto;
 import com.lvl6.proto.InfoProto.ClanTierLevelProto;
 import com.lvl6.proto.InfoProto.ClanTowerProto;
-import com.lvl6.proto.InfoProto.DefeatTypeJobProto.DefeatTypeJobEnemyType;
 import com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
-import com.lvl6.proto.InfoProto.EquipClassType;
-import com.lvl6.proto.InfoProto.FullEquipProto.EquipType;
-import com.lvl6.proto.InfoProto.FullEquipProto.Rarity;
 import com.lvl6.proto.InfoProto.GoldSaleProto;
 import com.lvl6.proto.InfoProto.InAppPurchasePackageProto;
 import com.lvl6.proto.InfoProto.LeaderboardEventProto;
-import com.lvl6.proto.InfoProto.LockBoxEventProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanTowerRetrieveUtils;
-//import com.lvl6.retrieveutils.MarketplacePostRetrieveUtils;
-import com.lvl6.retrieveutils.MentorshipRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
@@ -113,7 +93,6 @@ import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanTierLevelRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DailyBonusRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LeaderboardEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LeaderboardEventRewardRetrieveUtils;
@@ -154,24 +133,24 @@ public class MiscMethods {
   public static final String coins = "coins";
   public static final String diamonds = "diamonds";
 
-  public static int calculateMinutesToFinishForgeAttempt(Equipment equipment, int goalLevel) {
-    return (int)
-        (equipment.getMinutesToAttemptForgeBase()*Math.pow(ControllerConstants.FORGE_TIME_BASE_FOR_EXPONENTIAL_MULTIPLIER, goalLevel));
-  }
+//  public static int calculateMinutesToFinishForgeAttempt(Equipment equipment, int goalLevel) {
+//    return (int)
+//        (equipment.getMinutesToAttemptForgeBase()*Math.pow(ControllerConstants.FORGE_TIME_BASE_FOR_EXPONENTIAL_MULTIPLIER, goalLevel));
+//  }
 
-  public static float calculateChanceOfSuccessForForge(Equipment equipment, int goalLevel) {
-    return  (1-equipment.getChanceOfForgeFailureBase()) - 
-        ((1-equipment.getChanceOfForgeFailureBase()) / (ControllerConstants.FORGE_MAX_EQUIP_LEVEL - 1)) * 
-        (goalLevel-2);
-  }
+//  public static float calculateChanceOfSuccessForForge(Equipment equipment, int goalLevel) {
+//    return  (1-equipment.getChanceOfForgeFailureBase()) - 
+//        ((1-equipment.getChanceOfForgeFailureBase()) / (ControllerConstants.FORGE_MAX_EQUIP_LEVEL - 1)) * 
+//        (goalLevel-2);
+//  }
 
-  public static int calculateDiamondCostToSpeedupForgeWaittime(Equipment equipment, int goalLevel) {
-    return (int) Math.max(1, Math.ceil(ControllerConstants.FORGE_SPEEDUP_CONSTANT_A * 
-        Math.log(calculateMinutesToFinishForgeAttempt(equipment, goalLevel)) + 
-        ControllerConstants.FORGE_SPEEDUP_CONSTANT_B));
-  }
+//  public static int calculateDiamondCostToSpeedupForgeWaittime(Equipment equipment, int goalLevel) {
+//    return (int) Math.max(1, Math.ceil(ControllerConstants.FORGE_SPEEDUP_CONSTANT_A * 
+//        Math.log(calculateMinutesToFinishForgeAttempt(equipment, goalLevel)) + 
+//        ControllerConstants.FORGE_SPEEDUP_CONSTANT_B));
+//  }
 
-  public static UserEquip chooseUserEquipWithEquipIdPreferrablyNonEquippedIgnoreLevel(User user, List<UserEquip> userEquipsForEquipId) {
+ /* public static UserEquip chooseUserEquipWithEquipIdPreferrablyNonEquippedIgnoreLevel(User user, List<UserEquip> userEquipsForEquipId) {
     if (user == null || userEquipsForEquipId == null || userEquipsForEquipId.size() <= 0) {
       return null;
     }
@@ -191,7 +170,7 @@ public class MiscMethods {
       }
     }
     return null;
-  }
+  }*/
 
   public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
@@ -220,7 +199,7 @@ public class MiscMethods {
   /*
    * doesn't check if the user has the equip or not
    */
-  public static boolean checkIfEquipIsEquippableOnUser(Equipment equip, User user) {
+  /*public static boolean checkIfEquipIsEquippableOnUser(Equipment equip, User user) {
     if (equip == null || user == null) return false;
     
     //figure out how to implement this
@@ -233,7 +212,7 @@ public class MiscMethods {
     	return true;
     }
     return false;
-  }
+  }*/
 
   public static String getIPOfPlayer(GameServer server, Integer playerId, String udid) {
     ConnectedPlayer player = null;
@@ -267,7 +246,7 @@ public class MiscMethods {
 
   public static int calculateCoinsGivenToReferrer(User referrer) {
     return Math.min(ControllerConstants.USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER, (int)(Math.ceil(
-        (referrer.getVaultBalance() + referrer.getCoins()) * 
+        (referrer.getCoins()) * 
         ControllerConstants.USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER)));
   }
 
@@ -276,7 +255,7 @@ public class MiscMethods {
 //        * firstTaskToComplete.getNumForCompletion();
 //  }
 
-  public static boolean unequipUserEquipIfEquipped(User user, UserEquip userEquip) {
+  /*public static boolean unequipUserEquipIfEquipped(User user, UserEquip userEquip) {
     long userEquipId = userEquip.getId();
     boolean isWeaponOne = user.getWeaponEquippedUserEquipId() == userEquipId;
     boolean isArmorOne = user.getArmorEquippedUserEquipId() == userEquipId; 
@@ -290,7 +269,7 @@ public class MiscMethods {
           isAmuletTwo);
     } 
     return true;
-  }
+  }*/
 
   public static boolean checkClientTimeAroundApproximateNow(Timestamp clientTime) {
     if (clientTime.getTime() < new Date().getTime() + Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME*60000 && 
@@ -341,25 +320,6 @@ public class MiscMethods {
     return resEvent;
   }
 
-  public static EquipClassType getClassTypeFromUserType(UserType userType) {
-    if (userType == UserType.BAD_MAGE || userType == UserType.GOOD_MAGE) {
-      return EquipClassType.MAGE;
-    }
-    if (userType == UserType.BAD_WARRIOR || userType == UserType.GOOD_WARRIOR) {
-      return EquipClassType.WARRIOR;
-    }
-    if (userType == UserType.BAD_ARCHER || userType == UserType.GOOD_ARCHER) {
-      return EquipClassType.ARCHER;
-    }
-    return null;
-  }
-
-  public static boolean checkIfGoodSide (UserType userType) {
-    if (userType == UserType.GOOD_MAGE || userType == UserType.GOOD_WARRIOR || userType == UserType.GOOD_ARCHER) {
-      return true;
-    }
-    return false;
-  }
 
   public static int getRowCount(ResultSet set) {
     int rowCount;
@@ -378,17 +338,17 @@ public class MiscMethods {
     }     
 
   }
-
-  public static Location getRandomValidLocation() {
-    ValidLocationBox[] vlbs = ControllerConstants.USER_CREATE__VALIDATION_BOXES;
-    if (vlbs != null && vlbs.length >= 1) {
-      ValidLocationBox vlb = vlbs[new Random().nextInt(vlbs.length)];
-      double latitude = vlb.getBotLeftY() + Math.random()*vlb.getHeight();
-      double longitude = vlb.getBotLeftX() + Math.random()*vlb.getWidth();
-      return new Location(latitude, longitude);
-    }
-    return new Location(-117.69765, 33.57793);    //ARBITRARY LAND SPOT
-  }
+//
+//  public static Location getRandomValidLocation() {
+//    ValidLocationBox[] vlbs = ControllerConstants.USER_CREATE__VALIDATION_BOXES;
+//    if (vlbs != null && vlbs.length >= 1) {
+//      ValidLocationBox vlb = vlbs[new Random().nextInt(vlbs.length)];
+//      double latitude = vlb.getBotLeftY() + Math.random()*vlb.getHeight();
+//      double longitude = vlb.getBotLeftX() + Math.random()*vlb.getWidth();
+//      return new Location(latitude, longitude);
+//    }
+//    return new Location(-117.69765, 33.57793);    //ARBITRARY LAND SPOT
+//  }
 
   public static StartupConstants createStartupConstantsProto() {
     StartupConstants.Builder cb = StartupConstants.newBuilder()
@@ -733,7 +693,7 @@ public class MiscMethods {
     return cb.build();  
   }
 
-  public static List<LockBoxEventProto> currentLockBoxEvents() {
+  /*public static List<LockBoxEventProto> currentLockBoxEvents() {
     Map<Integer, LockBoxEvent> events = LockBoxEventRetrieveUtils.getLockBoxEventIdsToLockBoxEvents();
     long curTime = new Date().getTime();
     List<LockBoxEventProto> toReturn = new ArrayList<LockBoxEventProto>();
@@ -762,7 +722,7 @@ public class MiscMethods {
       }
     }
     return toReturn;
-  }
+  }*/
 
   public static List<LeaderboardEventProto> currentLeaderboardEventProtos() {
     Map<Integer, LeaderboardEvent> idsToEvents = LeaderboardEventRetrieveUtils.getIdsToLeaderboardEvents(false);
@@ -798,7 +758,6 @@ public class MiscMethods {
     BuildStructJobRetrieveUtils.reload();
     CityRetrieveUtils.reload();
     DefeatTypeJobRetrieveUtils.reload();
-    EquipmentRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     TaskEquipReqRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
@@ -832,26 +791,6 @@ public class MiscMethods {
     
   }
 
-  public static UserType getUserTypeFromDefeatTypeJobUserType(
-      DefeatTypeJobEnemyType enemyType) {
-    switch (enemyType) {
-    case BAD_ARCHER:
-      return UserType.BAD_ARCHER;
-    case BAD_WARRIOR:
-      return UserType.BAD_WARRIOR;
-    case BAD_MAGE:
-      return UserType.BAD_MAGE;
-    case GOOD_ARCHER:
-      return UserType.GOOD_ARCHER;
-    case GOOD_WARRIOR:
-      return UserType.GOOD_WARRIOR;
-    case GOOD_MAGE:
-      return UserType.GOOD_MAGE;
-    default:
-      log.error("no usertype for this defeat type job enemy type: " + enemyType);
-      return null;
-    }
-  }
 
 //  public static int chooseMysteryBoxEquip(User user) {
 //    int userLevelMin = user.getLevel()-ControllerConstants.STARTUP__DAILY_BONUS_RECEIVE_EQUIP_LEVEL_RANGE;
@@ -919,7 +858,7 @@ public class MiscMethods {
   /*
    * Returns true if the user's (short or long) marketplace license is still in effect
    */
-  public static boolean validateMarketplaceLicense(User aUser, Timestamp timeActionBegan) {
+  /*public static boolean validateMarketplaceLicense(User aUser, Timestamp timeActionBegan) {
     Date longMarketplaceLicenseTimeOfPurchase = aUser.getLastLongLicensePurchaseTime();
     Date shortMarketplaceLicenseTimeOfPurchase = aUser.getLastShortLicensePurchaseTime();
 
@@ -963,7 +902,7 @@ public class MiscMethods {
     } else {
       return false;
     }
-  }
+  }*/
 
   public static List<ClanTierLevelProto> getAllClanTierLevelProtos() {
     ArrayList<ClanTierLevelProto> toRet = new ArrayList<ClanTierLevelProto>();
@@ -1264,8 +1203,8 @@ public class MiscMethods {
       int previousGold = 0;
       int previousSilver = 0;
       int currentGold = aUser.getDiamonds();
-      //recording total silver user has, including the vault
-      int currentSilver = aUser.getCoins() + aUser.getVaultBalance();
+      //recording total silver user has
+      int currentSilver = aUser.getCoins();
 
       //record gold change first
       if (0 != goldChange) {
@@ -1339,8 +1278,8 @@ public class MiscMethods {
       if (key.equals(gold)) {
         currentCurrency = aUser.getDiamonds();
       } else if(key.equals(silver)) {
-        //record total silver, including vault
-        currentCurrency = aUser.getCoins() + aUser.getVaultBalance();
+        //record total silver
+        currentCurrency = aUser.getCoins();
         isSilver = 1;
       } else {
         log.error("invalid key for map representing currency change. key=" + key);
@@ -1464,86 +1403,6 @@ public class MiscMethods {
     return currentEnhancementLevel >= maxEnhancementLevel;
   }
 
-  public static int attackPowerForEquip(int equipId, int forgeLevel, int enhanceLevel) {
-    Equipment eq = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipId);
-    double forge = Math.pow(ControllerConstants.LEVEL_EQUIP_BOOST_EXPONENT_BASE, forgeLevel-1);
-    double enhance = Math.pow(ControllerConstants.ENHANCEMENT__ENHANCE_LEVEL_EXPONENT_BASE, enhanceLevel);
-
-    int result = (int)Math.ceil(eq.getAttackBoost()*forge*enhance);
-    //    log.info("attack="+result);
-    return result;
-  }
-
-  public static int defensePowerForEquip(int equipId, int forgeLevel, int enhanceLevel) {
-    Equipment eq = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipId);
-    double forge = Math.pow(ControllerConstants.LEVEL_EQUIP_BOOST_EXPONENT_BASE, forgeLevel-1);
-    double enhance = Math.pow(ControllerConstants.ENHANCEMENT__ENHANCE_LEVEL_EXPONENT_BASE, enhanceLevel);
-
-    int result = (int)Math.ceil(eq.getDefenseBoost()*forge*enhance);
-    //    log.info("defense="+result);
-    return result;
-  }
-
-  private static int totalMinutesToLevelUpEnhancementEquip(EquipEnhancement e) {
-//    Equipment eq = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(e.getEquipId());
-//    double result = ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_A*Math.pow(e.getEquipLevel(), ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_B);
-//    result = Math.pow(result, (ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_C+ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_D*(eq.getRarity().getNumber()+1)));
-//    result *= Math.pow(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_E, (eq.getMinLevel()/ControllerConstants.AVERAGE_SIZE_OF_LEVEL_BRACKET*ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_F));
-//    result *= Math.pow(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_G, e.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL+1);
-
-    //    log.info("minutes="+result);
-    //return (int)Math.max(result, 1);
-    
-    //making enhancement instant
-    return 0;
-  }
-
-  private static int calculateEnhancementForEquip(UserEquip mainEquip, UserEquip feederUserEquip) {
-    int mainStats = attackPowerForEquip(mainEquip.getEquipId(), mainEquip.getLevel(), mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL) +
-        defensePowerForEquip(mainEquip.getEquipId(), mainEquip.getLevel(), mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL);
-    int feederStats = attackPowerForEquip(feederUserEquip.getEquipId(), feederUserEquip.getLevel(), feederUserEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL) +
-        defensePowerForEquip(feederUserEquip.getEquipId(), feederUserEquip.getLevel(), feederUserEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL);
-    int result = (int)((((float)feederStats)/mainStats)/(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_A*
-        Math.pow(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_B, mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL+1))*
-        ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL);
-
-    //    log.info("percentage="+result);
-    return result;
-  }
-
-  public static int calculateEnhancementForEquip(UserEquip mainEquip,
-		  List<UserEquip> feederUserEquips) {
-    int totalChange = 0;
-    for (UserEquip ue : feederUserEquips) {
-      totalChange += calculateEnhancementForEquip(mainEquip, ue);
-    }
-
-    int maxChange = (mainEquip.getEnhancementPercentage()/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL+1)*ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL-mainEquip.getEnhancementPercentage();
-    maxChange = Math.min(maxChange, ControllerConstants.MAX_ENHANCEMENT_LEVEL*ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL-mainEquip.getEnhancementPercentage());
-    //    log.info("totalChange="+totalChange+" maxChange="+maxChange);
-    return Math.min(maxChange, totalChange);
-  }
-
-//  public static int calculateMinutesToFinishEnhancing(UserEquip mainEquip,
-//		  List<UserEquip> feederUserEquips) {
-//    int pChange = calculateEnhancementForEquip(mainEquip, feederUserEquips);
-//    float percent = ((float)pChange)/ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
-//    int totalTime = totalMinutesToLevelUpEnhancementEquip(mainEquip);
-//    int result = (int)Math.ceil(percent*totalTime);
-//
-//    //    log.info("time for enhance="+result);
-//    return result;
-//  }
-
-//  public static int calculateCostToSpeedUpEnhancing(EquipEnhancement e, List<EquipEnhancementFeeder> feeder,
-//      Timestamp timeOfSpeedUp) {
-//    int mins = calculateMinutesToFinishEnhancing(e, feeder);
-//    int result = (int)Math.ceil(((float)mins)/ControllerConstants.FORGE_BASE_MINUTES_TO_ONE_GOLD);
-//
-//    // log.info("diamonds="+result);
-//    return result;
-//  }
-
   public static int pointsGainedForClanTowerUserBattle(User winner, User loser) {
     int d = winner.getLevel()-loser.getLevel();
     int pts;
@@ -1593,82 +1452,82 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     return days;
   }
   
-  public static void writeToUserBoosterPackHistoryOneUser(int userId, int packId,
-      int numBought, Timestamp nowTimestamp, List<BoosterItem> itemsUserReceives,
-      boolean excludeFromLimitCheck, List<Long> userEquipIds) {
-    List<Integer> equipIds = new ArrayList<Integer>();
-    List<Integer> raritiesCollected = getRaritiesCollected(itemsUserReceives, equipIds);
-    int rarityOne = raritiesCollected.get(0);
-    int rarityTwo = raritiesCollected.get(1);
-    int rarityThree = raritiesCollected.get(2);
-    
-    InsertUtils.get().insertIntoUserBoosterPackHistory(userId,
-        packId, numBought, nowTimestamp, rarityOne, rarityTwo,
-        rarityThree, excludeFromLimitCheck, equipIds, userEquipIds);
-  }
+//  public static void writeToUserBoosterPackHistoryOneUser(int userId, int packId,
+//      int numBought, Timestamp nowTimestamp, List<BoosterItem> itemsUserReceives,
+//      boolean excludeFromLimitCheck, List<Long> userEquipIds) {
+//    List<Integer> equipIds = new ArrayList<Integer>();
+//    List<Integer> raritiesCollected = getRaritiesCollected(itemsUserReceives, equipIds);
+//    int rarityOne = raritiesCollected.get(0);
+//    int rarityTwo = raritiesCollected.get(1);
+//    int rarityThree = raritiesCollected.get(2);
+//    
+//    InsertUtils.get().insertIntoUserBoosterPackHistory(userId,
+//        packId, numBought, nowTimestamp, rarityOne, rarityTwo,
+//        rarityThree, excludeFromLimitCheck, equipIds, userEquipIds);
+//  }
   
-  private static List<Integer> getRaritiesCollected(
-      List<BoosterItem> itemsUserReceives, List<Integer> equipIds) {
-    List<Integer> raritiesCollected = new ArrayList<Integer>();
-    
-    Map<Integer, Equipment> equipIdsToEquips = 
-        EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-    int rarityOne = 0;
-    int rarityTwo = 0;
-    int rarityThree = 0;
-    for (BoosterItem bi : itemsUserReceives) {
-      int equipId = bi.getEquipId();
-      Equipment tempEquip = null;
-      if (equipIdsToEquips.containsKey(equipId)) {
-        equipIds.add(equipId); //returning what equipIds this was
-        tempEquip = equipIdsToEquips.get(equipId);
-      } else {
-        log.error("No equiment exists for equipId=" + equipId
-            + ". BoosterItem has invalid equipId, boosterItem=" + bi);
-        continue;
-      }
-      Rarity equipRarity = tempEquip.getRarity();
-      if (isRarityOne(equipRarity)) {
-        rarityOne++;
-      } else if (isRarityTwo(equipRarity)) {
-        rarityTwo++;
-      } else if (isRarityThree(equipRarity)) {
-        rarityThree++;
-      } else {
-        log.error("unexpected_error: booster item has unknown equip rarity. " +
-        		"booster item=" + bi + ".  Equip rarity=" + equipRarity);
-      }
-    }
-    raritiesCollected.add(rarityOne);
-    raritiesCollected.add(rarityTwo);
-    raritiesCollected.add(rarityThree);
-    return raritiesCollected;
-  }
-  
-  private static boolean isRarityOne(Rarity equipRarity) {
-    if (Rarity.COMMON == equipRarity || Rarity.RARE == equipRarity) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
-  private static boolean isRarityTwo(Rarity equipRarity) {
-    if (Rarity.UNCOMMON == equipRarity || Rarity.SUPERRARE == equipRarity) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
-  private static boolean isRarityThree(Rarity equipRarity) {
-    if (Rarity.RARE == equipRarity || Rarity.EPIC == equipRarity) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
+//  private static List<Integer> getRaritiesCollected(
+//      List<BoosterItem> itemsUserReceives, List<Integer> equipIds) {
+//    List<Integer> raritiesCollected = new ArrayList<Integer>();
+//    
+//    Map<Integer, Equipment> equipIdsToEquips = 
+//        EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+//    int rarityOne = 0;
+//    int rarityTwo = 0;
+//    int rarityThree = 0;
+//    for (BoosterItem bi : itemsUserReceives) {
+//      int equipId = bi.getEquipId();
+//      Equipment tempEquip = null;
+//      if (equipIdsToEquips.containsKey(equipId)) {
+//        equipIds.add(equipId); //returning what equipIds this was
+//        tempEquip = equipIdsToEquips.get(equipId);
+//      } else {
+//        log.error("No equiment exists for equipId=" + equipId
+//            + ". BoosterItem has invalid equipId, boosterItem=" + bi);
+//        continue;
+//      }
+//      Rarity equipRarity = tempEquip.getRarity();
+//      if (isRarityOne(equipRarity)) {
+//        rarityOne++;
+//      } else if (isRarityTwo(equipRarity)) {
+//        rarityTwo++;
+//      } else if (isRarityThree(equipRarity)) {
+//        rarityThree++;
+//      } else {
+//        log.error("unexpected_error: booster item has unknown equip rarity. " +
+//        		"booster item=" + bi + ".  Equip rarity=" + equipRarity);
+//      }
+//    }
+//    raritiesCollected.add(rarityOne);
+//    raritiesCollected.add(rarityTwo);
+//    raritiesCollected.add(rarityThree);
+//    return raritiesCollected;
+//  }
+//  
+//  private static boolean isRarityOne(Rarity equipRarity) {
+//    if (Rarity.COMMON == equipRarity || Rarity.RARE == equipRarity) {
+//      return true;
+//    } else {
+//      return false;
+//    }
+//  }
+//  
+//  private static boolean isRarityTwo(Rarity equipRarity) {
+//    if (Rarity.UNCOMMON == equipRarity || Rarity.SUPERRARE == equipRarity) {
+//      return true;
+//    } else {
+//      return false;
+//    }
+//  }
+//  
+//  private static boolean isRarityThree(Rarity equipRarity) {
+//    if (Rarity.RARE == equipRarity || Rarity.EPIC == equipRarity) {
+//      return true;
+//    } else {
+//      return false;
+//    }
+//  }
+//  
   //csi: comma separated ints
   public static List<Integer> unCsvStringIntoIntList(String csi) {
     List<Integer> ints = new ArrayList<Integer>();
@@ -1731,70 +1590,70 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     return domainValuesToQuantities;
   }
   
-  /*cut out from purchase booster pack controller*/
-  //Returns all the booster items the user purchased and whether or not the use reset the chesst.
-  //If the user buys out deck start over from a fresh deck 
-  //(boosterItemIdsToNumCollected is changed to reflect none have been collected).
-  //Also, keep track of which items were purchased before and/or after the reset (via collectedBeforeReset)
-  public static boolean getAllBoosterItemsForUser(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
-      Map<Integer, Integer> boosterItemIdsToNumCollected, int numBoosterItemsUserWants, User aUser, 
-      BoosterPack aPack, List<BoosterItem> returnValue, List<Boolean> collectedBeforeReset) {
-    boolean resetOccurred = false;
-    int boosterPackId = aPack.getId();
-    
-    //the possible items user can get
-    List<Integer> boosterItemIdsUserCanGet = new ArrayList<Integer>();
-    List<Integer> quantitiesInStock = new ArrayList<Integer>();
-    
-    //populate boosterItemIdsUserCanGet, and quantitiesInStock
-    int sumQuantitiesInStock = determineBoosterItemsLeft(allBoosterItemIdsToBoosterItems, 
-        boosterItemIdsToNumCollected, boosterItemIdsUserCanGet, quantitiesInStock, aUser, boosterPackId);
-    
-    //just in case user is allowed to purchase a lot more than what is available in a chest
-    //should take care of the case where user buys out the exact amount remaining in the chest
-    while (numBoosterItemsUserWants >= sumQuantitiesInStock) {
-      resetOccurred = true;
-      //give all the remaining booster items to the user, 
-      for (int i = 0; i < boosterItemIdsUserCanGet.size(); i++) {
-        int bItemId = boosterItemIdsUserCanGet.get(i);
-        BoosterItem bi = allBoosterItemIdsToBoosterItems.get(bItemId);
-        int quantityInStock = quantitiesInStock.get(i);
-        for (int quant = 0; quant < quantityInStock; quant++) {
-          returnValue.add(bi);
-          collectedBeforeReset.add(true);
-        }
-      }
-      //decrement number user still needs to receive, and then reset deck
-      numBoosterItemsUserWants -= sumQuantitiesInStock;
-      
-      //start from a clean slate as if it is the first time user is purchasing
-      boosterItemIdsUserCanGet.clear();
-      boosterItemIdsToNumCollected.clear();
-      quantitiesInStock.clear();
-      sumQuantitiesInStock = 0;
-      for (int boosterItemId : allBoosterItemIdsToBoosterItems.keySet()) {
-        BoosterItem boosterItemUserCanGet = allBoosterItemIdsToBoosterItems.get(boosterItemId);
-        boosterItemIdsUserCanGet.add(boosterItemId);
-        boosterItemIdsToNumCollected.put(boosterItemId, 0);
-        int quantityInStock = boosterItemUserCanGet.getQuantity();
-        quantitiesInStock.add(quantityInStock);
-        sumQuantitiesInStock += quantityInStock;
-      }
-    }
-
-    //set the booster item(s) the user will receieve  
-    List<BoosterItem> itemUserReceives = new ArrayList<BoosterItem>();
-    if (aPack.isStarterPack()) {
-      itemUserReceives = determineStarterBoosterItemsUserReceives(boosterItemIdsUserCanGet,
-          quantitiesInStock, numBoosterItemsUserWants, sumQuantitiesInStock, allBoosterItemIdsToBoosterItems);
-    } else {
-      itemUserReceives = determineBoosterItemsUserReceives(boosterItemIdsUserCanGet, 
-          quantitiesInStock, numBoosterItemsUserWants, sumQuantitiesInStock, allBoosterItemIdsToBoosterItems);
-    }
-    returnValue.addAll(itemUserReceives);
-    collectedBeforeReset.addAll(Collections.nCopies(itemUserReceives.size(), false));
-    return resetOccurred;
-  }
+//  /*cut out from purchase booster pack controller*/
+//  //Returns all the booster items the user purchased and whether or not the use reset the chesst.
+//  //If the user buys out deck start over from a fresh deck 
+//  //(boosterItemIdsToNumCollected is changed to reflect none have been collected).
+//  //Also, keep track of which items were purchased before and/or after the reset (via collectedBeforeReset)
+//  public static boolean getAllBoosterItemsForUser(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
+//      Map<Integer, Integer> boosterItemIdsToNumCollected, int numBoosterItemsUserWants, User aUser, 
+//      BoosterPack aPack, List<BoosterItem> returnValue, List<Boolean> collectedBeforeReset) {
+//    boolean resetOccurred = false;
+//    int boosterPackId = aPack.getId();
+//    
+//    //the possible items user can get
+//    List<Integer> boosterItemIdsUserCanGet = new ArrayList<Integer>();
+//    List<Integer> quantitiesInStock = new ArrayList<Integer>();
+//    
+//    //populate boosterItemIdsUserCanGet, and quantitiesInStock
+//    int sumQuantitiesInStock = determineBoosterItemsLeft(allBoosterItemIdsToBoosterItems, 
+//        boosterItemIdsToNumCollected, boosterItemIdsUserCanGet, quantitiesInStock, aUser, boosterPackId);
+//    
+//    //just in case user is allowed to purchase a lot more than what is available in a chest
+//    //should take care of the case where user buys out the exact amount remaining in the chest
+//    while (numBoosterItemsUserWants >= sumQuantitiesInStock) {
+//      resetOccurred = true;
+//      //give all the remaining booster items to the user, 
+//      for (int i = 0; i < boosterItemIdsUserCanGet.size(); i++) {
+//        int bItemId = boosterItemIdsUserCanGet.get(i);
+//        BoosterItem bi = allBoosterItemIdsToBoosterItems.get(bItemId);
+//        int quantityInStock = quantitiesInStock.get(i);
+//        for (int quant = 0; quant < quantityInStock; quant++) {
+//          returnValue.add(bi);
+//          collectedBeforeReset.add(true);
+//        }
+//      }
+//      //decrement number user still needs to receive, and then reset deck
+//      numBoosterItemsUserWants -= sumQuantitiesInStock;
+//      
+//      //start from a clean slate as if it is the first time user is purchasing
+//      boosterItemIdsUserCanGet.clear();
+//      boosterItemIdsToNumCollected.clear();
+//      quantitiesInStock.clear();
+//      sumQuantitiesInStock = 0;
+//      for (int boosterItemId : allBoosterItemIdsToBoosterItems.keySet()) {
+//        BoosterItem boosterItemUserCanGet = allBoosterItemIdsToBoosterItems.get(boosterItemId);
+//        boosterItemIdsUserCanGet.add(boosterItemId);
+//        boosterItemIdsToNumCollected.put(boosterItemId, 0);
+//        int quantityInStock = boosterItemUserCanGet.getQuantity();
+//        quantitiesInStock.add(quantityInStock);
+//        sumQuantitiesInStock += quantityInStock;
+//      }
+//    }
+//
+//    //set the booster item(s) the user will receieve  
+//    List<BoosterItem> itemUserReceives = new ArrayList<BoosterItem>();
+//    if (aPack.isStarterPack()) {
+//      itemUserReceives = determineStarterBoosterItemsUserReceives(boosterItemIdsUserCanGet,
+//          quantitiesInStock, numBoosterItemsUserWants, sumQuantitiesInStock, allBoosterItemIdsToBoosterItems);
+//    } else {
+//      itemUserReceives = determineBoosterItemsUserReceives(boosterItemIdsUserCanGet, 
+//          quantitiesInStock, numBoosterItemsUserWants, sumQuantitiesInStock, allBoosterItemIdsToBoosterItems);
+//    }
+//    returnValue.addAll(itemUserReceives);
+//    collectedBeforeReset.addAll(Collections.nCopies(itemUserReceives.size(), false));
+//    return resetOccurred;
+//  }
 
   /*cut out from purchase booster pack controller*/
   //populates ids, quantitiesInStock; determines the remaining booster items the user can get
@@ -1837,52 +1696,52 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     return sumQuantitiesInStock;
   }
   
-  /*cut out from purchase booster pack controller*/
-  //no arguments are modified
-  private static List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
-      List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
-      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
-    //return value
-    List<BoosterItem> returnValue = new ArrayList<BoosterItem>();
-    if (0 == amountUserWantsToPurchase) {
-      return returnValue;
-    } else if (3 != amountUserWantsToPurchase) {
-      log.error("unexpected error: buying " + amountUserWantsToPurchase + " more equips instead of 3.");
-      return returnValue; 
-    } else if (0 != (sumOfQuantitiesInStock % 3)) {
-      log.error("unexpected error: num remaining equips, " + sumOfQuantitiesInStock
-          + ", for this chest is not a multiple of 3");
-      return returnValue;
-    }
-    
-    Map<Integer, Equipment> allEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-    Set<EquipType> receivedEquipTypes = new HashSet<EquipType>();
-    
-    //loop through equips user can get; select one weapon, one armor, one amulet
-    for (int boosterItemId : boosterItemIdsUserCanGet) {
-      BoosterItem bi = allBoosterItemIdsToBoosterItems.get(boosterItemId);
-      int equipId = bi.getEquipId();
-      Equipment equip = allEquips.get(equipId);
-      EquipType eType = equip.getType();
-      
-      if (receivedEquipTypes.contains(eType)) {
-        //user already got this equip type
-        continue;
-      } else {
-        //record user got a new equip type
-        returnValue.add(bi);
-        receivedEquipTypes.add(eType);
-      }
-    }
-    
-    if (3 != returnValue.size()) {
-      log.error("unexpected error: user did not receive one type of each equip."
-          + " User would have received (but now will not receive): " + MiscMethods.shallowListToString(returnValue) 
-          + ". Chest either intialized improperly or code assigns equips incorrectly.");
-      return new ArrayList<BoosterItem>();
-    }
-    return returnValue;
-  }
+//  /*cut out from purchase booster pack controller*/
+//  //no arguments are modified
+//  private static List<BoosterItem> determineStarterBoosterItemsUserReceives(List<Integer> boosterItemIdsUserCanGet, 
+//      List<Integer> quantitiesInStock, int amountUserWantsToPurchase, int sumOfQuantitiesInStock,
+//      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
+//    //return value
+//    List<BoosterItem> returnValue = new ArrayList<BoosterItem>();
+//    if (0 == amountUserWantsToPurchase) {
+//      return returnValue;
+//    } else if (3 != amountUserWantsToPurchase) {
+//      log.error("unexpected error: buying " + amountUserWantsToPurchase + " more equips instead of 3.");
+//      return returnValue; 
+//    } else if (0 != (sumOfQuantitiesInStock % 3)) {
+//      log.error("unexpected error: num remaining equips, " + sumOfQuantitiesInStock
+//          + ", for this chest is not a multiple of 3");
+//      return returnValue;
+//    }
+//    
+//    Map<Integer, Equipment> allEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+//    Set<EquipType> receivedEquipTypes = new HashSet<EquipType>();
+//    
+//    //loop through equips user can get; select one weapon, one armor, one amulet
+//    for (int boosterItemId : boosterItemIdsUserCanGet) {
+//      BoosterItem bi = allBoosterItemIdsToBoosterItems.get(boosterItemId);
+//      int equipId = bi.getEquipId();
+//      Equipment equip = allEquips.get(equipId);
+//      EquipType eType = equip.getType();
+//      
+//      if (receivedEquipTypes.contains(eType)) {
+//        //user already got this equip type
+//        continue;
+//      } else {
+//        //record user got a new equip type
+//        returnValue.add(bi);
+//        receivedEquipTypes.add(eType);
+//      }
+//    }
+//    
+//    if (3 != returnValue.size()) {
+//      log.error("unexpected error: user did not receive one type of each equip."
+//          + " User would have received (but now will not receive): " + MiscMethods.shallowListToString(returnValue) 
+//          + ". Chest either intialized improperly or code assigns equips incorrectly.");
+//      return new ArrayList<BoosterItem>();
+//    }
+//    return returnValue;
+//  }
   
   /*cut out from purchase booster pack controller*/
   //no arguments are modified
@@ -1934,24 +1793,24 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     
     return itemsUserReceives;
   }
-  /*cut out from purchase booster pack controller*/
-  public static List<Long> insertNewUserEquips(int userId,
-      List<BoosterItem> itemsUserReceives, Timestamp now, String reason) {
-    int amount = itemsUserReceives.size();
-    int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
-    int enhancementLevel = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
-    List<Integer> equipIds = new ArrayList<Integer>();
-    List<Integer> levels = new ArrayList<Integer>(Collections.nCopies(amount, forgeLevel));
-    List<Integer> enhancement = new ArrayList<Integer>(Collections.nCopies(amount, enhancementLevel));
-    
-    for(BoosterItem bi : itemsUserReceives) {
-      int equipId = bi.getEquipId();
-      equipIds.add(equipId);
-    }
-    
-    return InsertUtils.get().insertUserEquips(userId, equipIds, levels,
-        enhancement, now, reason);
-  }
+//  /*cut out from purchase booster pack controller*/
+//  public static List<Long> insertNewUserEquips(int userId,
+//      List<BoosterItem> itemsUserReceives, Timestamp now, String reason) {
+//    int amount = itemsUserReceives.size();
+//    int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
+//    int enhancementLevel = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
+//    List<Integer> equipIds = new ArrayList<Integer>();
+//    List<Integer> levels = new ArrayList<Integer>(Collections.nCopies(amount, forgeLevel));
+//    List<Integer> enhancement = new ArrayList<Integer>(Collections.nCopies(amount, enhancementLevel));
+//    
+//    for(BoosterItem bi : itemsUserReceives) {
+//      int equipId = bi.getEquipId();
+//      equipIds.add(equipId);
+//    }
+//    
+//    return InsertUtils.get().insertUserEquips(userId, equipIds, levels,
+//        enhancement, now, reason);
+//  }
   /*cut out from purchase booster pack controller*/
   public static boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives, 
       List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected, 
@@ -2019,7 +1878,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     }
   }
   
-  public static Set<Long> getEquippedEquips(User aUser) {
+ /* public static Set<Long> getEquippedEquips(User aUser) {
     Set<Long> equippedUserEquipIds = new HashSet<Long>();
     equippedUserEquipIds.add(aUser.getAmuletEquippedUserEquipId());
     equippedUserEquipIds.add(aUser.getAmuletTwoEquippedUserEquipId());
@@ -2031,7 +1890,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     equippedUserEquipIds.remove(ControllerConstants.NOT_SET);
     
     return equippedUserEquipIds;
-  }
+  }*/
   
   //arguments don't take into account the 1 forge slot the user has by default
   public static int costToBuyForgeSlot(int goalNumAdditionalForgeSlots,
@@ -2048,7 +1907,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     }
   }
   
-  public static void sendMenteeFinishedQuests(MinimumUserProto menteeMup, MenteeQuestType type,
+  /*public static void sendMenteeFinishedQuests(MinimumUserProto menteeMup, MenteeQuestType type,
       GameServer server) {
     int menteeId = menteeMup.getUserId();
     
@@ -2103,7 +1962,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     mfqre.setMenteeFinishedQuestResponseProto(mfqrpb.build());
     
     server.writeAPNSNotificationOrEvent(mfqre);
-  }
+  }*/
   
   public static boolean doesUserHaveAllGemTypes(
       Map<Integer, UserCityGem> gemIdsToUserCityGems,
@@ -2310,7 +2169,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
 //    return totalDamage;
 //  }
   
-  private static int equipDamagePortionForBoss(int equipAttackPower) {
+  /*private static int equipDamagePortionForBoss(int equipAttackPower) {
     if (equipAttackPower <= 0) {
       return 0;
     }
@@ -2318,7 +2177,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     //log.info("attack power: " + equipAttackPower);
     //log.info("equip damage: " + equipDamage);
     return Math.max(0, equipDamage);
-  }
+  }*/
   
   public static int sumMap(Map<Integer, Integer> aMap) {
 	  int sum = 0;
@@ -2355,29 +2214,5 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
 	  defender.setElo(newDefenderElo);
   
   }
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
 }

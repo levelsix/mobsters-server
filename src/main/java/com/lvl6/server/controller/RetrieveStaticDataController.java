@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveStaticDataRequestEvent;
 import com.lvl6.events.response.RetrieveStaticDataResponseEvent;
-import com.lvl6.info.Monster;
 import com.lvl6.info.City;
-import com.lvl6.info.Equipment;
 import com.lvl6.info.Quest;
 import com.lvl6.info.Structure;
 import com.lvl6.info.Task;
@@ -28,13 +26,10 @@ import com.lvl6.proto.EventProto.RetrieveStaticDataResponseProto;
 import com.lvl6.proto.EventProto.RetrieveStaticDataResponseProto.Builder;
 import com.lvl6.proto.EventProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PossessEquipJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -71,7 +66,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(RetrieveStaticDataStatus.SUCCESS);
 
-    populateResBuilder(resBuilder, reqProto, senderProto.getUserType());
+    populateResBuilder(resBuilder, reqProto);
     RetrieveStaticDataResponseProto resProto = resBuilder.build();
 
     RetrieveStaticDataResponseEvent resEvent = new RetrieveStaticDataResponseEvent(senderProto.getUserId());
@@ -81,7 +76,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     server.writeEvent(resEvent);
   }
 
-  private void populateResBuilder(Builder resBuilder, RetrieveStaticDataRequestProto reqProto, UserType type) {
+  private void populateResBuilder(Builder resBuilder, RetrieveStaticDataRequestProto reqProto) {
     List <Integer> structIds = reqProto.getStructIdsList();
     if (structIds != null && structIds.size() > 0) {
       Map<Integer, Structure> structIdsToStructures = StructureRetrieveUtils.getStructIdsToStructs();
@@ -102,7 +97,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       for (Integer taskId :  taskIds) {
         Task task = taskIdsToTasks.get(taskId);
         if (task != null) {
-          resBuilder.addTasks(CreateInfoProtoUtils.createFullTaskProtoFromTask(reqProto.getSender().getUserType(), task));
+          resBuilder.addTasks(CreateInfoProtoUtils.createFullTaskProtoFromTask(task));
         } else {
           resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
           log.error("problem with retrieving task with id " + taskId);
@@ -116,7 +111,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       for (Integer questId :  questIds) {
         Quest quest = questIdsToQuests.get(questId);
         if (quest != null) {
-          resBuilder.addQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(reqProto.getSender().getUserType(), quest));
+          resBuilder.addQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest));
         } else {
           resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
           log.error("problem with retrieving quest with id " + quest);
@@ -138,19 +133,19 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       }
     }
 
-    List <Integer> equipIds = reqProto.getEquipIdsList();
-    if (equipIds != null && equipIds.size() > 0) {
-      Map<Integer, Equipment> equipIdsToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-      for (Integer equipId :  equipIds) {
-        Equipment equip = equipIdsToEquips.get(equipId);
-        if (equip != null) {
-          resBuilder.addEquips(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving equip with id " + equipId);
-        }
-      }
-    }
+//    List <Integer> equipIds = reqProto.getEquipIdsList();
+//    if (equipIds != null && equipIds.size() > 0) {
+//      Map<Integer, Equipment> equipIdsToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+//      for (Integer equipId :  equipIds) {
+//        Equipment equip = equipIdsToEquips.get(equipId);
+//        if (equip != null) {
+//          resBuilder.addEquips(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip));
+//        } else {
+//          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
+//          log.error("problem with retrieving equip with id " + equipId);
+//        }
+//      }
+//    }
 
     List <Integer> buildStructJobIds = reqProto.getBuildStructJobIdsList();
     if (buildStructJobIds != null && buildStructJobIds.size() > 0) {
@@ -222,17 +217,17 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       }
     }
 
-    if (reqProto.getCurrentLockBoxEvents()) {
-      resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
-    }
-    
+//    if (reqProto.getCurrentLockBoxEvents()) {
+//      resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
+//    }
+//    
     if (reqProto.getClanTierLevels()) {
       resBuilder.addAllClanTierLevels(MiscMethods.getAllClanTierLevelProtos());
     }
 
-    if (reqProto.getCurrentBossEvents()) {
-      resBuilder.addAllBossEvents(MiscMethods.currentBossEvents());
-    }
+//    if (reqProto.getCurrentBossEvents()) {
+//      resBuilder.addAllBossEvents(MiscMethods.currentBossEvents());
+//    }
 
 //    List <Integer> bossIds = reqProto.getBossIdsList();
 //    if (bossIds != null && bossIds.size() > 0) {

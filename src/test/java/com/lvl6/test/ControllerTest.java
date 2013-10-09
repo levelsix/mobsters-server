@@ -29,9 +29,7 @@ import com.lvl6.proto.EventProto.PurchaseCityExpansionRequestProto;
 import com.lvl6.proto.EventProto.StartupRequestProto;
 import com.lvl6.proto.EventProto.UserCreateRequestProto;
 import com.lvl6.proto.InfoProto.CoordinateProto;
-import com.lvl6.proto.InfoProto.LocationProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.controller.PurchaseCityExpansionController;
@@ -105,19 +103,8 @@ public class ControllerTest extends TestCase {
 		getPlayersPreDatabaseByUDID().put(newp.getUdid(), newp, DEFAULT_TTL, TimeUnit.MINUTES);
 		
 		String name = "bob";
-		UserType ut = UserType.BAD_ARCHER;
-		
-		LocationProto.Builder lpb = LocationProto.newBuilder();
-		lpb.setLatitude(1.1D);
-		lpb.setLongitude(1.1D);
-		LocationProto lp = lpb.build();
 		
 		String deviceToken = "deviceToken";
-		int attack = 12;
-		int defense = 12;
-		int energy = 50;
-		int stamina = 3;
-		
 		long timeOfStructPurchase = (new Date()).getTime();
 		long timeOfStructBuild = timeOfStructPurchase;
 		
@@ -130,13 +117,7 @@ public class ControllerTest extends TestCase {
 		UserCreateRequestProto.Builder ucrpb = UserCreateRequestProto.newBuilder();
 		ucrpb.setUdid(udid);
 		ucrpb.setName(name);
-		ucrpb.setType(ut);
-		ucrpb.setUserLocation(lp);
 		ucrpb.setDeviceToken(deviceToken);
-		ucrpb.setAttack(attack);
-		ucrpb.setDefense(defense);
-		ucrpb.setEnergy(energy);
-		ucrpb.setStamina(stamina);
 		ucrpb.setTimeOfStructPurchase(timeOfStructPurchase);
 		ucrpb.setTimeOfStructBuild(timeOfStructBuild);
 		ucrpb.setStructCoords(cp);

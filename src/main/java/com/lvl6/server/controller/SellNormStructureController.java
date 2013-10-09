@@ -72,7 +72,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
         int previousSilver = 0;
         int previousGold = 0;
         if (user != null && struct != null && user.getId() == userStruct.getUserId()) {
-          previousSilver = user.getCoins() + user.getVaultBalance();
+          previousSilver = user.getCoins();
           previousGold = user.getDiamonds();
           
           int diamondChange = Math.max(0,  (int)Math.ceil(struct.getDiamondPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));

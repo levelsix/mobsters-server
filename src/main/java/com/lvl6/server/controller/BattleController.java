@@ -36,7 +36,6 @@ import com.lvl6.proto.EventProto.BattleResponseProto.Builder;
 import com.lvl6.proto.InfoProto.BattleResult;
 import com.lvl6.proto.InfoProto.DefeatTypeJobProto.DefeatTypeJobEnemyType;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.UserLeaderboardEventRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestsDefeatTypeJobProgressRetrieveUtils;
@@ -137,8 +136,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				int defenderPreviousSilver = 0;
 
 				if (legitBattle) {
-					attackerPreviousSilver = attacker.getCoins() + attacker.getVaultBalance();
-					defenderPreviousSilver = defender.getCoins() + defender.getVaultBalance();
+					attackerPreviousSilver = attacker.getCoins();
+					defenderPreviousSilver = defender.getCoins();
 					if (result == BattleResult.ATTACKER_WIN) {
 						winner = attacker;
 						loser = defender;
@@ -213,7 +212,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 					if (winner != null && attacker != null && winner == attacker) {
 						if (reqProto.hasNeutralCityId() && reqProto.getNeutralCityId() >= 0) {
 							//server.unlockPlayer(defenderProto.getUserId());
-							checkQuestsPostBattle(winner, defender.getType(),
+							checkQuestsPostBattle(winner,
 									attackerProto, reqProto.getNeutralCityId(), lostEquip);
 						} /*else if (lostEquip != null) {
 							QuestUtils.checkAndSendQuestsCompleteBasic(server, attacker.getId(), attackerProto, null, false);
@@ -303,16 +302,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private boolean checkLegitBattle(Builder resBuilder, BattleResult result, User attacker, User defender, Timestamp battleTime) {
-		if (attacker == null || defender == null || attacker.getEnergy() <= 0) {
-			resBuilder.setStatus(BattleStatus.OTHER_FAIL);
-			log.error("problem with battle- attacker or defender is null. attacker is " + attacker + " and defender is " + defender);
-			return false;
-		}
-		if (MiscMethods.checkIfGoodSide(attacker.getType()) == MiscMethods.checkIfGoodSide(defender.getType())) {
-			resBuilder.setStatus(BattleStatus.SAME_SIDE);
-			log.error("problem with battle- attacker and defender same side. attacker=" + attacker + ", defender=" + defender);
-			return false;
-		}
+//		if (attacker == null || defender == null || attacker.getEnergy() <= 0) {
+//			resBuilder.setStatus(BattleStatus.OTHER_FAIL);
+//			log.error("problem with battle- attacker or defender is null. attacker is " + attacker + " and defender is " + defender);
+//			return false;
+//		}
+//		if (MiscMethods.checkIfGoodSide(attacker.getType()) == MiscMethods.checkIfGoodSide(defender.getType())) {
+//			resBuilder.setStatus(BattleStatus.SAME_SIDE);
+//			log.error("problem with battle- attacker and defender same side. attacker=" + attacker + ", defender=" + defender);
+//			return false;
+//		}
 		if (defender.isHasActiveShield() &&
 				battleTime.getTime() < defender.getCreateTime().getTime()+ControllerConstants.STARTUP__DEFAULT_DAYS_BATTLE_SHIELD_IS_ACTIVE*24*60*60*1000) {
 			resBuilder.setStatus(BattleStatus.OPPONENT_HAS_ACTIVE_SHIELD);
@@ -324,9 +323,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private void checkQuestsPostBattle(User attacker, UserType enemyType,
+	private void checkQuestsPostBattle(User attacker,
 			MinimumUserProto attackerProto, int cityId, UserEquip lostEquip) {
-		boolean goodSide = MiscMethods.checkIfGoodSide(attacker.getType());
+//		boolean goodSide = MiscMethods.checkIfGoodSide(attacker.getType());
 
 		List<UserQuest> inProgressUserQuests = RetrieveUtils.userQuestRetrieveUtils()
 				.getIncompleteUserQuestsForUser(attacker.getId());
@@ -358,8 +357,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 							if (remainingDTJMap != null && remainingDTJMap.size() > 0) {
 								for (DefeatTypeJob remainingDTJ : remainingDTJMap.values()) {
 									if (remainingDTJ.getCityId() == cityId) {
-										if (remainingDTJ.getEnemyType() == DefeatTypeJobEnemyType.ALL_TYPES_FROM_OPPOSING_SIDE || 
-												enemyType == MiscMethods.getUserTypeFromDefeatTypeJobUserType(remainingDTJ.getEnemyType())) {
+										if (remainingDTJ.getEnemyType() == DefeatTypeJobEnemyType.ALL_TYPES_FROM_OPPOSING_SIDE){// || 
+//												enemyType == MiscMethods.getUserTypeFromDefeatTypeJobUserType(remainingDTJ.getEnemyType())) {
 
 											if (questIdToDefeatTypeJobIdsToNumDefeated == null) {
 												questIdToDefeatTypeJobIdsToNumDefeated = UserQuestsDefeatTypeJobProgressRetrieveUtils.getQuestIdToDefeatTypeJobIdsToNumDefeated(userQuest.getUserId());
@@ -412,8 +411,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			int expGained, int lostCoins, Timestamp battleTime, boolean isFlee, int lockBoxEventId,
 			Map<String, Integer> attackerCurrencyChange, Map<String, Integer> defenderCurrencyChange, boolean isTutorialBattle) {
 
-		boolean simulateEnergyRefill = (attacker.getEnergy() == attacker.getEnergyMax());
-
 		boolean attackerDeactivateShield = false;
 		boolean defenderDeactivateShield = false;
 		//turn off attacker's shield if defender is real
@@ -427,16 +424,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 
 		if (winner == attacker) {
-			if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
-					expGained, lostCoins, 1, 0, 0, simulateEnergyRefill, battleTime, attackerDeactivateShield, false,
+			if (!attacker.updateRelativeExperienceCoinsBattlesWonBattlesLostFlees(
+					expGained, lostCoins, 1, 0, 0, battleTime, attackerDeactivateShield, false,
 					recordWinLossFlee, 1, 0, 0, 0)) {
 				log.error("problem with updating info for winner/attacker " + attacker.getId() + " in battle at " 
 						+ battleTime + " vs " + loser.getId());
 			} else {//for user currency history
 				attackerCurrencyChange.put(MiscMethods.silver, lostCoins);
 			}
-			if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
-					0, (defender.isFake()) ? 0 : lostCoins * -1, 0, 1, 0, false, battleTime, defenderDeactivateShield, true,
+			if (!defender.updateRelativeExperienceCoinsBattlesWonBattlesLostFlees(
+					0, (defender.isFake()) ? 0 : lostCoins * -1, 0, 1, 0, battleTime, defenderDeactivateShield, true,
 							recordWinLossFlee, 0, 0, 0, 1)) {
 				log.error("problem with updating info for defender/loser " + defender.getId() + " in battle at " 
 						+ battleTime + " vs " + winner.getId());
@@ -470,16 +467,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //				}
 //			} else { }
 			//attacker lost to defender
-			if (!attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(-1,
-					0, lostCoins * -1, 0, 1, 0, simulateEnergyRefill, battleTime, attackerDeactivateShield,
+			if (!attacker.updateRelativeExperienceCoinsBattlesWonBattlesLostFlees(
+					0, lostCoins * -1, 0, 1, 0, battleTime, attackerDeactivateShield,
 					false, recordWinLossFlee, 0, 0, 1, 0)) {
 				log.error("problem with updating info for loser/attacker " + attacker.getId() + " in battle at " 
 						+ battleTime + " vs " + winner.getId());
 			} else {//for user currency history
 				attackerCurrencyChange.put(MiscMethods.silver, lostCoins * -1);
 			}
-			if (!defender.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill(0,
-					0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, false, battleTime, defenderDeactivateShield,
+			if (!defender.updateRelativeExperienceCoinsBattlesWonBattlesLostFlees(
+					0, (defender.isFake()) ? 0 : lostCoins, 1, 0, 0, battleTime, defenderDeactivateShield,
 							false, recordWinLossFlee, 0, 1, 0, 0)) {
 				log.error("problem with updating info for winner/defender " + defender.getId() + " in battle at " 
 						+ battleTime + " vs " + loser.getId());
@@ -740,12 +737,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				if(attackerCurrencyChange.containsKey(silver)) {
 					attackerSilverChange = attackerCurrencyChange.get(silver);
 				}
-				int attackerCurrentSilver = attacker.getCoins() + attacker.getVaultBalance();
+				int attackerCurrentSilver = attacker.getCoins();
 				int defenderSilverChange = 0;
 				if(defenderCurrencyChange.containsKey(silver)) {
 					defenderSilverChange = defenderCurrencyChange.get(silver);
 				}
-				int defenderCurrentSilver = defender.getCoins() + defender.getVaultBalance(); 
+				int defenderCurrentSilver = defender.getCoins(); 
 				String won = ControllerConstants.UCHRFC__BATTLE_WON;
 				String lost = ControllerConstants.UCHRFC__BATTLE_LOST;
 

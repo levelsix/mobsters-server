@@ -14,15 +14,12 @@ import com.lvl6.events.response.LoadPlayerCityResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
 import com.lvl6.info.UserStruct;
-import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventProto.LoadPlayerCityRequestProto;
 import com.lvl6.proto.EventProto.LoadPlayerCityResponseProto;
 import com.lvl6.proto.EventProto.LoadPlayerCityResponseProto.Builder;
 import com.lvl6.proto.EventProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.InfoProto.UserCityExpansionDataProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.UserCityExpansionDataRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -79,45 +76,32 @@ import com.lvl6.utils.RetrieveUtils;
       } else {
         resBuilder.setCityOwner(CreateInfoProtoUtils.createMinimumUserProtoFromUser(owner));
 
-        boolean ownerIsGood = MiscMethods.checkIfGoodSide(owner.getType());
-        boolean senderIsGood = MiscMethods.checkIfGoodSide(senderProto.getUserType());
 
-        List<UserType> userTypes = new ArrayList<UserType>();
-        if (senderIsGood) {
-          userTypes.add(UserType.BAD_ARCHER);
-          userTypes.add(UserType.BAD_MAGE);
-          userTypes.add(UserType.BAD_WARRIOR);
-        } else {
-          userTypes.add(UserType.GOOD_ARCHER);
-          userTypes.add(UserType.GOOD_MAGE);
-          userTypes.add(UserType.GOOD_WARRIOR);
-        }
-
-        boolean realPlayersOnly = false;
-        boolean fakePlayersOnly = false;
-        boolean offlinePlayersOnly = false;
-        boolean prestigePlayersOnly = false;
-        boolean inactiveShield = true;
-        
-        if (ownerIsGood != senderIsGood) {    //loading enemy city, load some of owners allies (more enemies from your POV)
-          List<User> ownerAllies = RetrieveUtils.userRetrieveUtils().getUsers(
-              userTypes, ControllerConstants.LOAD_PLAYER_CITY__APPROX_NUM_USERS_IN_CITY,
-              owner.getLevel(), owner.getId(), false, null, null, null, null, false,
-              realPlayersOnly, fakePlayersOnly, offlinePlayersOnly, prestigePlayersOnly,
-              inactiveShield, null);
-          
-          setResponseOwnerAlliesOrEnemies(resBuilder, ownerAllies, true);
-          
-        } else {                              //loading ally city or your city, creating some of owners enemies
-          List<User> ownerEnemies = RetrieveUtils.userRetrieveUtils().getUsers(userTypes,
-              ControllerConstants.LOAD_PLAYER_CITY__APPROX_NUM_USERS_IN_CITY,
-              owner.getLevel(), owner.getId(), false, null, null, null, null, false,
-              realPlayersOnly, fakePlayersOnly, offlinePlayersOnly, prestigePlayersOnly,
-              inactiveShield, null);
-          
-          setResponseOwnerAlliesOrEnemies(resBuilder, ownerEnemies, false);
-          
-        }
+//        boolean realPlayersOnly = false;
+//        boolean fakePlayersOnly = false;
+//        boolean offlinePlayersOnly = false;
+//        boolean prestigePlayersOnly = false;
+//        boolean inactiveShield = true;
+//        
+//        if (ownerIsGood != senderIsGood) {    //loading enemy city, load some of owners allies (more enemies from your POV)
+//          List<User> ownerAllies = RetrieveUtils.userRetrieveUtils().getUsers(
+//              ControllerConstants.LOAD_PLAYER_CITY__APPROX_NUM_USERS_IN_CITY,
+//              owner.getLevel(), owner.getId(), false,
+//              realPlayersOnly, fakePlayersOnly, offlinePlayersOnly,
+//              inactiveShield, null);
+//          
+//          setResponseOwnerAlliesOrEnemies(resBuilder, ownerAllies, true);
+//          
+//        } else {                              //loading ally city or your city, creating some of owners enemies
+//          List<User> ownerEnemies = RetrieveUtils.userRetrieveUtils().getUsers(
+//              ControllerConstants.LOAD_PLAYER_CITY__APPROX_NUM_USERS_IN_CITY,
+//              owner.getLevel(), owner.getId(), false,
+//              realPlayersOnly, fakePlayersOnly, offlinePlayersOnly,
+//              inactiveShield, null);
+//          
+//          setResponseOwnerAlliesOrEnemies(resBuilder, ownerEnemies, false);
+//          
+//        }
 
         LoadPlayerCityResponseEvent resEvent = new LoadPlayerCityResponseEvent(senderProto.getUserId());
         resEvent.setTag(event.getTag());

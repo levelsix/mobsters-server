@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +18,9 @@ import com.lvl6.events.request.BeginClanTowerWarRequestEvent;
 import com.lvl6.events.response.BeginClanTowerWarResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanTower;
-import com.lvl6.info.ClanTowerHistory;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventProto.BeginClanTowerWarRequestProto;
 import com.lvl6.proto.EventProto.BeginClanTowerWarResponseProto;
 import com.lvl6.proto.EventProto.BeginClanTowerWarResponseProto.BeginClanTowerWarStatus;
@@ -32,7 +29,6 @@ import com.lvl6.proto.EventProto.ChangedClanTowerResponseProto.ReasonForClanTowe
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.ClanTowerHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ClanTowerRetrieveUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;

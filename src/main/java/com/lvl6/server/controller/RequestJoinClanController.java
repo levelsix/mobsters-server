@@ -19,7 +19,6 @@ import com.lvl6.info.UserClan;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.MenteeFinishedQuestResponseProto.MenteeQuestType;
 import com.lvl6.proto.EventProto.RequestJoinClanRequestProto;
 import com.lvl6.proto.EventProto.RequestJoinClanResponseProto;
 import com.lvl6.proto.EventProto.RequestJoinClanResponseProto.Builder;
@@ -115,7 +114,6 @@ import com.lvl6.utils.utilmethods.QuestUtils;
         notifyClan(user, clan, requestToJoinRequired); //write to clan leader or clan
         QuestUtils.checkAndSendQuestsCompleteBasic(server, user.getId(), senderProto, SpecialQuestAction.REQUEST_JOIN_CLAN, true);
         
-        //checkMenteeFinishedQuests(senderProto, requestToJoinRequired);
       }
     } catch (Exception e) {
       log.error("exception in RequestJoinClan processEvent", e);
@@ -147,10 +145,9 @@ import com.lvl6.utils.utilmethods.QuestUtils;
       log.error("user clan already exists for this: " + uc);
       return false;      
     }
-    //level limit does not apply to people who have prestiged 
-    //(reached lvl 60 or something and went back down to 1 or something)
+
     int minLevel = ControllerConstants.STARTUP__CLAN_HOUSE_MIN_LEVEL;
-    if (user.getLevel() < minLevel && user.getPrestigeLevel() <= 0) {
+    if (user.getLevel() < minLevel) {
       resBuilder.setStatus(RequestJoinClanStatus.OTHER_FAIL);
       log.error("user error: Attemped to send join request to clan, but too low level and not prestiged. "
           + "min level to join clan=" + minLevel + ", user=" + user);
@@ -243,16 +240,6 @@ import com.lvl6.utils.utilmethods.QuestUtils;
 //    aNotification.setGeneralNotificationResponseProto(notificationProto.build());
 //    
 //    server.writeAPNSNotificationOrEvent(aNotification);
-  }
-  
-  private void checkMenteeFinishedQuests(MinimumUserProto mup, boolean requestToJoinRequired) {
-    if (requestToJoinRequired) {
-      return;
-    }
-    
-    MenteeQuestType type = MenteeQuestType.JOINED_A_CLAN;
-    MiscMethods.sendMenteeFinishedQuests(mup, type, server);
-   
   }
   
 }

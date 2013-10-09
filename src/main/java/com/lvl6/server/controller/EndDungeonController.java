@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +16,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.info.UserTask;
 import com.lvl6.misc.MiscMethods;
@@ -30,7 +28,6 @@ import com.lvl6.proto.InfoProto.FullUserEquipProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.UserTaskRetrieveUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -148,7 +145,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
 	  if (userWon) {
 		  //insert the equips into user_equip
-		  meteEquips(uId, clientTime, ut, protos);
+//		  meteEquips(uId, clientTime, ut, protos);
 		  
 		  //update user silver and experience
 		  if (!updateUser(u, silverGained, expGained, clientTime)) {
@@ -178,7 +175,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   //fill up 'protos' with the equips the user gets after writing to db
-  private void meteEquips(int uId, Timestamp now, UserTask ut,
+  /*private void meteEquips(int uId, Timestamp now, UserTask ut,
 		  List<FullUserEquipProto> protos) {
 	  List<Integer> equipIds = ut.getMonsterRewardEquipIds();
 	  
@@ -203,14 +200,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				  userEquipId, uId, equipId, forgeLevel, enhancementLevel);
 		  protos.add(fuep);
 	  }
-  }
+  }*/
   
   private boolean updateUser(User u, int silverGained, int expGained,
 		  Timestamp clientTime) {
 	  int energyChange = 0;
 	  boolean simulateEnergyRefill = false;
-	  if (!u.updateRelativeCoinsExpTaskscompletedEnergySimulateenergyrefill(
-			  silverGained, expGained, 1, energyChange, simulateEnergyRefill, clientTime)) {
+	  if (!u.updateRelativeCoinsExpTaskscompleted(silverGained,
+	  		expGained, 1, clientTime)) {
 		  log.error("problem with updating user stats post-task. silverGained="
 				  + silverGained + ", expGained=" + expGained + ", increased" +
 				  " tasks completed by 1, energyChange=" + energyChange +

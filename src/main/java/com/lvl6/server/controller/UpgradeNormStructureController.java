@@ -82,7 +82,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       server.writeEvent(resEvent);
 
       if (legitUpgrade) {
-        previousSilver = user.getCoins() + user.getVaultBalance();
+        previousSilver = user.getCoins();
         previousGold = user.getDiamonds();
         
         Map<String, Integer> money = new HashMap<String, Integer>();

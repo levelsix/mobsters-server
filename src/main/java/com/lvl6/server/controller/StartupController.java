@@ -36,7 +36,6 @@ import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.RetrieveStaticDataResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BattleDetails;
-import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
@@ -46,24 +45,17 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanTower;
 import com.lvl6.info.DailyBonusReward;
-import com.lvl6.info.Dialogue;
 import com.lvl6.info.EquipEnhancement;
 import com.lvl6.info.EquipEnhancementFeeder;
-import com.lvl6.info.Equipment;
 import com.lvl6.info.GoldSale;
-//import com.lvl6.info.MarketplaceTransaction;
-import com.lvl6.info.NeutralCityElement;
 import com.lvl6.info.PlayerWallPost;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Quest;
 import com.lvl6.info.Structure;
-import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.info.UserBoss;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserDailyBonusRewardHistory;
-import com.lvl6.info.UserEquip;
-import com.lvl6.info.UserLockBoxEvent;
 import com.lvl6.info.UserQuest;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
@@ -77,25 +69,17 @@ import com.lvl6.proto.EventProto.StartupResponseProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.Builder;
 import com.lvl6.proto.EventProto.StartupResponseProto.DailyBonusInfo;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupStatus;
-import com.lvl6.proto.EventProto.StartupResponseProto.TutorialConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.TutorialConstants.FullTutorialQuestProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.InfoProto.BoosterPackProto;
 import com.lvl6.proto.InfoProto.CityExpansionCostProto;
 import com.lvl6.proto.InfoProto.CityGemProto;
 import com.lvl6.proto.InfoProto.EquipEnhancementProto;
-import com.lvl6.proto.InfoProto.FullEquipProto;
-import com.lvl6.proto.InfoProto.FullEquipProto.Rarity;
-import com.lvl6.proto.InfoProto.FullStructureProto;
-import com.lvl6.proto.InfoProto.FullTaskProto;
 import com.lvl6.proto.InfoProto.FullUserBossProto;
 import com.lvl6.proto.InfoProto.FullUserProto;
 import com.lvl6.proto.InfoProto.GoldSaleProto;
 import com.lvl6.proto.InfoProto.GroupChatMessageProto;
-import com.lvl6.proto.InfoProto.LockBoxEventProto;
 import com.lvl6.proto.InfoProto.PrivateChatPostProto;
 import com.lvl6.proto.InfoProto.RareBoosterPurchaseProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.BattleDetailsRetrieveUtils;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
@@ -106,33 +90,25 @@ import com.lvl6.retrieveutils.EquipEnhancementRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
-//import com.lvl6.retrieveutils.MarketplaceTransactionRetrieveUtils;
 import com.lvl6.retrieveutils.PlayerWallPostRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
-import com.lvl6.retrieveutils.UnhandledBlacksmithAttemptRetrieveUtils;
-import com.lvl6.retrieveutils.UserBoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.UserBossRetrieveUtils;
 import com.lvl6.retrieveutils.UserDailyBonusRewardHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.UserLockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityGemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DailyBonusRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -256,7 +232,6 @@ public class StartupController extends EventController {
           setNoticesToPlayers(resBuilder, user);
           setUserClanInfos(resBuilder, user);
           setLockBoxEvents(resBuilder, user);
-          setMarketplaceSearchEquips(resBuilder);
           setStaticEquipsAndStructs(resBuilder);
           setChatMessages(resBuilder, user);
           setBoosterPurchases(resBuilder);
@@ -733,18 +708,12 @@ public class StartupController extends EventController {
     }
   }
 
-  private void setMarketplaceSearchEquips(StartupResponseProto.Builder resBuilder) {
-    Collection<Equipment> equips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().values();
-    for (Equipment equip : equips) {
-      resBuilder.addMktSearchEquips(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip));
-    }
-  }
 
   private void setStaticEquipsAndStructs(StartupResponseProto.Builder resBuilder) {
-    Collection<Equipment> equips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().values();
-    for (Equipment equip : equips) {
-      resBuilder.addStaticEquips(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip));
-    }
+//    Collection<Equipment> equips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().values();
+//    for (Equipment equip : equips) {
+//      resBuilder.addStaticEquips(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip));
+//    }
 
     Collection<Structure> structs = StructureRetrieveUtils.getStructIdsToStructs().values();
     for (Structure struct : structs) {
@@ -753,16 +722,16 @@ public class StartupController extends EventController {
   }
 
   private void setLockBoxEvents(StartupResponseProto.Builder resBuilder, User user) {
-    resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
-    Map<Integer, UserLockBoxEvent> map = UserLockBoxEventRetrieveUtils
-        .getLockBoxEventIdsToLockBoxEventsForUser(user.getId());
-    for (LockBoxEventProto p : resBuilder.getLockBoxEventsList()) {
-      UserLockBoxEvent e = map.get(p.getLockBoxEventId());
-      if (e != null) {
-        resBuilder.addUserLockBoxEvents(CreateInfoProtoUtils.createUserLockBoxEventProto(e,
-            user.getType()));
-      }
-    }
+//    resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
+//    Map<Integer, UserLockBoxEvent> map = UserLockBoxEventRetrieveUtils
+//        .getLockBoxEventIdsToLockBoxEventsForUser(user.getId());
+//    for (LockBoxEventProto p : resBuilder.getLockBoxEventsList()) {
+//      UserLockBoxEvent e = map.get(p.getLockBoxEventId());
+//      if (e != null) {
+//        resBuilder.addUserLockBoxEvents(CreateInfoProtoUtils.createUserLockBoxEventProto(e,
+//            user.getType()));
+//      }
+//    }
   }
 
   private void setGoldSales(StartupResponseProto.Builder resBuilder, User user) {
@@ -828,33 +797,33 @@ public class StartupController extends EventController {
   }
 
   private void setUnhandledForgeAttempts(Builder resBuilder, User user) {
-    Map<Integer, BlacksmithAttempt> blacksmithIdToBlacksmithAttempt = 
-        UnhandledBlacksmithAttemptRetrieveUtils.getUnhandledBlacksmithAttemptsForUser(user.getId());
-    int numEquipsBeingForged = blacksmithIdToBlacksmithAttempt.size();
-    int numEquipsUserCanForge = ControllerConstants.FORGE_DEFAULT_NUMBER_OF_FORGE_SLOTS
-        + user.getNumAdditionalForgeSlots();
-
-    if (blacksmithIdToBlacksmithAttempt != null && numEquipsBeingForged <= numEquipsUserCanForge) {
-      for (BlacksmithAttempt ba : blacksmithIdToBlacksmithAttempt.values()) {
-
-        int baId = ba.getId();
-        resBuilder.addUnhandledForgeAttempt(
-            CreateInfoProtoUtils.createUnhandledBlacksmithAttemptProtoFromBlacksmithAttempt(
-                blacksmithIdToBlacksmithAttempt.get(baId))
-            );
-
-        int equipId = ba.getEquipId();
-        Equipment e = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipId);
-        resBuilder.addForgeAttemptEquip(
-            CreateInfoProtoUtils.createFullEquipProtoFromEquip(e)
-            );
-      }
-    }
-
-    if (blacksmithIdToBlacksmithAttempt != null && numEquipsBeingForged > numEquipsUserCanForge) {
-      log.error("user has too many blacksmith attempts, should only have " + numEquipsUserCanForge + 
-          ". blacksmith attempts = " + blacksmithIdToBlacksmithAttempt);
-    }
+//    Map<Integer, BlacksmithAttempt> blacksmithIdToBlacksmithAttempt = 
+//        UnhandledBlacksmithAttemptRetrieveUtils.getUnhandledBlacksmithAttemptsForUser(user.getId());
+//    int numEquipsBeingForged = blacksmithIdToBlacksmithAttempt.size();
+//    int numEquipsUserCanForge = ControllerConstants.FORGE_DEFAULT_NUMBER_OF_FORGE_SLOTS
+//        + user.getNumAdditionalForgeSlots();
+//
+//    if (blacksmithIdToBlacksmithAttempt != null && numEquipsBeingForged <= numEquipsUserCanForge) {
+//      for (BlacksmithAttempt ba : blacksmithIdToBlacksmithAttempt.values()) {
+//
+//        int baId = ba.getId();
+//        resBuilder.addUnhandledForgeAttempt(
+//            CreateInfoProtoUtils.createUnhandledBlacksmithAttemptProtoFromBlacksmithAttempt(
+//                blacksmithIdToBlacksmithAttempt.get(baId))
+//            );
+//
+//        int equipId = ba.getEquipId();
+//        Equipment e = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipId);
+//        resBuilder.addForgeAttemptEquip(
+//            CreateInfoProtoUtils.createFullEquipProtoFromEquip(e)
+//            );
+//      }
+//    }
+//
+//    if (blacksmithIdToBlacksmithAttempt != null && numEquipsBeingForged > numEquipsUserCanForge) {
+//      log.error("user has too many blacksmith attempts, should only have " + numEquipsUserCanForge + 
+//          ". blacksmith attempts = " + blacksmithIdToBlacksmithAttempt);
+//    }
   }
 
   private void setWhetherPlayerCompletedInAppPurchase(Builder resBuilder, User user) {
@@ -1051,39 +1020,39 @@ public class StartupController extends EventController {
   // dealing with money
   private int purchaseBoosterPack(int boosterPackId, User aUser, int numBoosterItemsUserWants, Timestamp now) {
     int equipId = ControllerConstants.NOT_SET;
-    try {
-      // local vars
-      int userId = aUser.getId();
-      BoosterPack aPack = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(boosterPackId);
-      Map<Integer, BoosterItem> boosterItemIdsToBoosterItems = BoosterItemRetrieveUtils
-          .getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
-      Map<Integer, Integer> boosterItemIdsToNumCollected = UserBoosterItemRetrieveUtils
-          .getBoosterItemIdsToQuantityForUser(userId);
-      Map<Integer, Integer> newBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
-      List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
-      List<Boolean> collectedBeforeReset = new ArrayList<Boolean>();
-      List<Long> userEquipIds = new ArrayList<Long>();
-
-      // actually selecting equips
-      boolean resetOccurred = MiscMethods.getAllBoosterItemsForUser(boosterItemIdsToBoosterItems,
-          boosterItemIdsToNumCollected, numBoosterItemsUserWants, aUser, aPack, itemsUserReceives,
-          collectedBeforeReset);
-      newBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>(boosterItemIdsToNumCollected);
-      boolean successful = writeBoosterStuffToDB(aUser, boosterItemIdsToNumCollected,
-          newBoosterItemIdsToNumCollected, itemsUserReceives, collectedBeforeReset,
-          resetOccurred, now, userEquipIds);
-      if (successful) {
-        //exclude from daily limit check in PurchaseBoosterPackController
-        boolean excludeFromLimitCheck = true;
-        MiscMethods.writeToUserBoosterPackHistoryOneUser(userId, boosterPackId,
-            numBoosterItemsUserWants, now, itemsUserReceives, excludeFromLimitCheck,
-            userEquipIds);
-        equipId = getEquipId(numBoosterItemsUserWants, itemsUserReceives);
-      }
-
-    } catch (Exception e) {
-      log.error("unexpected error: ", e);
-    }
+//    try {
+//      // local vars
+//      int userId = aUser.getId();
+//      BoosterPack aPack = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(boosterPackId);
+//      Map<Integer, BoosterItem> boosterItemIdsToBoosterItems = BoosterItemRetrieveUtils
+//          .getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
+//      Map<Integer, Integer> boosterItemIdsToNumCollected = UserBoosterItemRetrieveUtils
+//          .getBoosterItemIdsToQuantityForUser(userId);
+//      Map<Integer, Integer> newBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
+//      List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
+//      List<Boolean> collectedBeforeReset = new ArrayList<Boolean>();
+//      List<Long> userEquipIds = new ArrayList<Long>();
+//
+//      // actually selecting equips
+//      boolean resetOccurred = MiscMethods.getAllBoosterItemsForUser(boosterItemIdsToBoosterItems,
+//          boosterItemIdsToNumCollected, numBoosterItemsUserWants, aUser, aPack, itemsUserReceives,
+//          collectedBeforeReset);
+//      newBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>(boosterItemIdsToNumCollected);
+//      boolean successful = writeBoosterStuffToDB(aUser, boosterItemIdsToNumCollected,
+//          newBoosterItemIdsToNumCollected, itemsUserReceives, collectedBeforeReset,
+//          resetOccurred, now, userEquipIds);
+//      if (successful) {
+//        //exclude from daily limit check in PurchaseBoosterPackController
+//        boolean excludeFromLimitCheck = true;
+//        MiscMethods.writeToUserBoosterPackHistoryOneUser(userId, boosterPackId,
+//            numBoosterItemsUserWants, now, itemsUserReceives, excludeFromLimitCheck,
+//            userEquipIds);
+//        equipId = getEquipId(numBoosterItemsUserWants, itemsUserReceives);
+//      }
+//
+//    } catch (Exception e) {
+//      log.error("unexpected error: ", e);
+//    }
     return equipId;
   }
 
@@ -1101,24 +1070,24 @@ public class StartupController extends EventController {
       Map<Integer, Integer> newBoosterItemIdsToNumCollected, List<BoosterItem> itemsUserReceives,
       List<Boolean> collectedBeforeReset, boolean resetOccurred, Timestamp now,
       List<Long> userEquipIdsForHistoryTable) {
-    int userId = aUser.getId();
-    List<Long> userEquipIds = MiscMethods.insertNewUserEquips(userId,
-        itemsUserReceives, now, ControllerConstants.UER__DAILY_BONUS_REWARD);
-    if (null == userEquipIds || userEquipIds.isEmpty() || userEquipIds.size() != itemsUserReceives.size()) {
-      log.error("unexpected error: failed to insert equip for user. boosteritems="
-          + MiscMethods.shallowListToString(itemsUserReceives) + "\t userEquipIds="+ userEquipIds);
-      return false;
-    }
-
-    if (!MiscMethods.updateUserBoosterItems(itemsUserReceives, collectedBeforeReset,
-        boosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, userId, resetOccurred)) {
-      // failed to update user_booster_items
-      log.error("unexpected error: failed to update user_booster_items for userId: " + userId
-          + " attempting to delete equips given: " + MiscMethods.shallowListToString(userEquipIds));
-      DeleteUtils.get().deleteUserEquips(userEquipIds);
-      return false;
-    }
-    userEquipIdsForHistoryTable.addAll(userEquipIds);
+//    int userId = aUser.getId();
+//    List<Long> userEquipIds = MiscMethods.insertNewUserEquips(userId,
+//        itemsUserReceives, now, ControllerConstants.UER__DAILY_BONUS_REWARD);
+//    if (null == userEquipIds || userEquipIds.isEmpty() || userEquipIds.size() != itemsUserReceives.size()) {
+//      log.error("unexpected error: failed to insert equip for user. boosteritems="
+//          + MiscMethods.shallowListToString(itemsUserReceives) + "\t userEquipIds="+ userEquipIds);
+//      return false;
+//    }
+//
+//    if (!MiscMethods.updateUserBoosterItems(itemsUserReceives, collectedBeforeReset,
+//        boosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, userId, resetOccurred)) {
+//      // failed to update user_booster_items
+//      log.error("unexpected error: failed to update user_booster_items for userId: " + userId
+//          + " attempting to delete equips given: " + MiscMethods.shallowListToString(userEquipIds));
+//      DeleteUtils.get().deleteUserEquips(userEquipIds);
+//      return false;
+//    }
+//    userEquipIdsForHistoryTable.addAll(userEquipIds);
     return true;
   }
 
@@ -1142,7 +1111,7 @@ public class StartupController extends EventController {
       return false;
     }
 
-    int previousSilver = aUser.getCoins() + aUser.getVaultBalance();
+    int previousSilver = aUser.getCoins();
     int previousGold = aUser.getDiamonds();
     if (key.equals(MiscMethods.boosterPackId)) {
       // since user got a booster pack id as reward, need to "buy it" for
@@ -1365,29 +1334,17 @@ public class StartupController extends EventController {
   }
 
   private void setAllies(Builder resBuilder, User user) {
-    List<UserType> userTypes = new ArrayList<UserType>();
-    if (MiscMethods.checkIfGoodSide(user.getType())) {
-      userTypes.add(UserType.GOOD_ARCHER);
-      userTypes.add(UserType.GOOD_MAGE);
-      userTypes.add(UserType.GOOD_WARRIOR);
-    } else {
-      userTypes.add(UserType.BAD_ARCHER);
-      userTypes.add(UserType.BAD_MAGE);
-      userTypes.add(UserType.BAD_WARRIOR);
-    }
-
     boolean realPlayersOnly = false;
     boolean fakePlayersOnly = false;
     boolean offlinePlayersOnly = false; //does not include fake players
-    boolean prestigePlayersOnly = false;
     boolean inactiveShield = false;
     List<Integer> forbiddenUserIds = new ArrayList<Integer>();
     forbiddenUserIds.add(user.getId());
 
-    List<User> allies = RetrieveUtils.userRetrieveUtils().getUsers(userTypes,
+    List<User> allies = RetrieveUtils.userRetrieveUtils().getUsers(
         ControllerConstants.STARTUP__APPROX_NUM_ALLIES_TO_SEND, user.getLevel(),
-        user.getId(), false, null, null, null, null, false, realPlayersOnly,
-        fakePlayersOnly, offlinePlayersOnly, prestigePlayersOnly,
+        user.getId(), false, realPlayersOnly,
+        fakePlayersOnly, offlinePlayersOnly,
         inactiveShield, forbiddenUserIds);
     if (allies != null && allies.size() > 0) {
       for (User ally : allies) {
@@ -1397,20 +1354,20 @@ public class StartupController extends EventController {
   }
 
   private void setUserEquipsAndEquips(Builder resBuilder, User user) {
-    List<UserEquip> userEquips = RetrieveUtils.userEquipRetrieveUtils()
-        .getUserEquipsForUser(user.getId());
-    if (userEquips != null) {
-      Map<Integer, Equipment> equipIdsToEquipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-      Set<Integer> equipsGivenAlready = new HashSet<Integer>();
-      for (UserEquip ue : userEquips) {
-        resBuilder.addUserEquips(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(ue));
-        if (!equipsGivenAlready.contains(ue.getEquipId())) {
-          resBuilder.addEquips(CreateInfoProtoUtils
-              .createFullEquipProtoFromEquip(equipIdsToEquipment.get(ue.getEquipId())));
-          equipsGivenAlready.add(ue.getEquipId());
-        }
-      }
-    }
+//    List<UserEquip> userEquips = RetrieveUtils.userEquipRetrieveUtils()
+//        .getUserEquipsForUser(user.getId());
+//    if (userEquips != null) {
+//      Map<Integer, Equipment> equipIdsToEquipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+//      Set<Integer> equipsGivenAlready = new HashSet<Integer>();
+//      for (UserEquip ue : userEquips) {
+//        resBuilder.addUserEquips(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(ue));
+//        if (!equipsGivenAlready.contains(ue.getEquipId())) {
+//          resBuilder.addEquips(CreateInfoProtoUtils
+//              .createFullEquipProtoFromEquip(equipIdsToEquipment.get(ue.getEquipId())));
+//          equipsGivenAlready.add(ue.getEquipId());
+//        }
+//      }
+//    }
   }
 
   private void setInProgressAndAvailableQuests(Builder resBuilder, User user) {
@@ -1444,11 +1401,11 @@ public class StartupController extends EventController {
         inProgressQuestIds.add(uq.getQuestId());
         if (uq.isComplete()) {
           resBuilder.addInProgressCompleteQuests(CreateInfoProtoUtils
-              .createFullQuestProtoFromQuest(user.getType(),
+              .createFullQuestProtoFromQuest(
                   questIdToQuests.get(uq.getQuestId())));
         } else {
           resBuilder.addInProgressIncompleteQuests(CreateInfoProtoUtils
-              .createFullQuestProtoFromQuest(user.getType(),
+              .createFullQuestProtoFromQuest(
                   questIdToQuests.get(uq.getQuestId())));
         }
       }
@@ -1459,7 +1416,7 @@ public class StartupController extends EventController {
     if (availableQuestIds != null) {
       for (Integer questId : availableQuestIds) {
         resBuilder.addAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(
-            user.getType(), questIdToQuests.get(questId)));
+            questIdToQuests.get(questId)));
       }
     }
   }
@@ -1515,155 +1472,155 @@ public class StartupController extends EventController {
   }
 
   private void setTutorialConstants(Builder resBuilder) {
-    Map<Integer, Equipment> equipmentIdsToEquipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-
-    UserType aGoodType = UserType.GOOD_ARCHER;
-    UserType aBadType = UserType.BAD_ARCHER;
-
-    Task task = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FIRST_TASK_ID);
-//    task.setPotentialLootEquipIds(new ArrayList<Integer>());
-    
-    FullTaskProto ftpGood = CreateInfoProtoUtils.createFullTaskProtoFromTask(aGoodType, task);
-    FullTaskProto ftpBad = CreateInfoProtoUtils.createFullTaskProtoFromTask(aBadType, task);
-
-    task = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
-//    task.setPotentialLootEquipIds(new ArrayList<Integer>());
-    FullTaskProto questFtpGood = CreateInfoProtoUtils.createFullTaskProtoFromTask(aGoodType, task);
-    FullTaskProto questFtpBad = CreateInfoProtoUtils.createFullTaskProtoFromTask(aBadType, task);
-
-    Dialogue goodAcceptDialogue = MiscMethods
-        .createDialogue(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_ACCEPT_DIALOGUE);
-    Dialogue badAcceptDialogue = MiscMethods
-        .createDialogue(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_ACCEPT_DIALOGUE);
-
-    FullTutorialQuestProto tqbp = FullTutorialQuestProto
-        .newBuilder()
-        .setGoodName(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_NAME)
-        .setBadName(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_NAME)
-        .setGoodDescription(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_DESCRIPTION)
-        .setBadDescription(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_DESCRIPTION)
-        .setGoodDoneResponse(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_DONE_RESPONSE)
-        .setBadDoneResponse(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_DONE_RESPONSE)
-        .setGoodAcceptDialogue(
-            CreateInfoProtoUtils.createDialogueProtoFromDialogue(goodAcceptDialogue))
-            .setBadAcceptDialogue(CreateInfoProtoUtils.createDialogueProtoFromDialogue(badAcceptDialogue))
-            .setAssetNumWithinCity(ControllerConstants.TUTORIAL__FAKE_QUEST_ASSET_NUM_WITHIN_CITY)
-            .setCoinsGained(ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED)
-            .setExpGained(ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED)
-            .setTaskGood(questFtpGood)
-            .setTaskBad(questFtpBad)
-//            .setTaskCompleteCoinGain(MiscMethods.calculateCoinsGainedFromTutorialTask(task))
-            .setEquipReward(
-                CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-                    .get(ControllerConstants.TUTORIAL__FAKE_QUEST_AMULET_LOOT_EQUIP_ID))).build();
-
-    PlayerWallPost pwp = new PlayerWallPost(-1,
-        ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL, -1, new Date(),
-        ControllerConstants.USER_CREATE__FIRST_WALL_POST_TEXT);
-    User poster = RetrieveUtils.userRetrieveUtils().getUserById(
-        ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
-
-    String name = "";
-    int syllablesInName = (Math.random() < .5) ? syllablesInName1 : syllablesInName2;
-    name = nameGeneratorElven.compose(syllablesInName);
-
-
-    TutorialConstants.Builder builder = TutorialConstants
-    		.newBuilder();
-    builder.setInitEnergy(ControllerConstants.TUTORIAL__INIT_ENERGY);
-    builder.setInitStamina(ControllerConstants.TUTORIAL__INIT_STAMINA)
-    .setInitHealth(ControllerConstants.TUTORIAL__INIT_HEALTH);
-    builder.setStructToBuild(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD);
-    builder.setDiamondCostToInstabuildFirstStruct(ControllerConstants.TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT);
-    builder.setArcherInitAttack(ControllerConstants.TUTORIAL__ARCHER_INIT_ATTACK);
-    builder.setArcherInitDefense(ControllerConstants.TUTORIAL__ARCHER_INIT_DEFENSE);
-    FullEquipProto fep = CreateInfoProtoUtils.createFullEquipProtoFromEquip(
-    		equipmentIdsToEquipment.get(ControllerConstants.TUTORIAL__ARCHER_INIT_WEAPON_ID));
-    builder.setArcherInitWeapon(fep);
-    builder.setArcherInitArmor(
-    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-    				.get(ControllerConstants.TUTORIAL__ARCHER_INIT_ARMOR_ID)));
-    builder.setMageInitAttack(ControllerConstants.TUTORIAL__MAGE_INIT_ATTACK);
-    builder.setMageInitDefense(ControllerConstants.TUTORIAL__MAGE_INIT_DEFENSE);
-    builder.setMageInitWeapon(
-    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-    				.get(ControllerConstants.TUTORIAL__MAGE_INIT_WEAPON_ID)));
-    builder.setMageInitArmor(
-    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-    				.get(ControllerConstants.TUTORIAL__MAGE_INIT_ARMOR_ID)));
-    builder.setWarriorInitAttack(ControllerConstants.TUTORIAL__WARRIOR_INIT_ATTACK);
-    builder.setWarriorInitDefense(ControllerConstants.TUTORIAL__WARRIOR_INIT_DEFENSE);
-    builder.setWarriorInitWeapon(
-    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-    				.get(ControllerConstants.TUTORIAL__WARRIOR_INIT_WEAPON_ID)));
-    builder.setWarriorInitArmor(
-    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
-    				.get(ControllerConstants.TUTORIAL__WARRIOR_INIT_ARMOR_ID)));
-    builder.setTutorialQuest(tqbp);
-    builder.setMinNameLength(ControllerConstants.USER_CREATE__MIN_NAME_LENGTH);
-    builder.setTutorialQuest(tqbp);
-    builder.setMaxNameLength(ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
-    builder.setCoinRewardForBeingReferred(
-    		ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED);
-    builder.setInitDiamonds(Globals.INITIAL_DIAMONDS());
-    builder.setInitCoins(ControllerConstants.TUTORIAL__INIT_COINS);
-    builder.setFirstBattleCoinGain(ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN);
-    builder.setFirstBattleExpGain(ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN);
-    builder.setFirstTaskGood(ftpGood);
-    builder.setFirstTaskBad(ftpBad);
-    builder.setExpRequiredForLevelTwo(
-    		LevelsRequiredExperienceRetrieveUtils.getLevelsToRequiredExperienceForLevels().get(2));
-    builder.setExpRequiredForLevelThree(
-    		LevelsRequiredExperienceRetrieveUtils.getLevelsToRequiredExperienceForLevels().get(3));
-    builder.setFirstWallPost(
-    		CreateInfoProtoUtils.createPlayerWallPostProtoFromPlayerWallPost(pwp, poster));
-    builder.setDefaultName(name);
-    builder.setCostToSpeedUpForge(ControllerConstants.TUTORIAL__COST_TO_SPEED_UP_FORGE);
-
-
-    List<NeutralCityElement> neutralCityElements = NeutralCityElementsRetrieveUtils
-    		.getNeutralCityElementsForCity(ControllerConstants.TUTORIAL__FIRST_NEUTRAL_CITY_ID);
-    if (neutralCityElements != null) {
-    	for (NeutralCityElement nce : neutralCityElements) {
-        builder.addFirstCityElementsForGood(CreateInfoProtoUtils
-            .createNeutralCityElementProtoFromNeutralCityElement(nce, aGoodType));
-        builder.addFirstCityElementsForBad(CreateInfoProtoUtils
-            .createNeutralCityElementProtoFromNeutralCityElement(nce, aBadType));
-      }
-    }
-
-    Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
-    for (Structure struct : structIdsToStructs.values()) {
-      if (struct != null) {
-        FullStructureProto fsp = CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct);
-        builder.addCarpenterStructs(fsp);
-        if (struct.getMinLevel() == 2) {
-          builder.addNewlyAvailableStructsAfterLevelup(CreateInfoProtoUtils
-              .createFullStructureProtoFromStructure(struct));
-        }
-      }
-    }
-
-    List<City> availCities = MiscMethods
-        .getCitiesAvailableForUserLevel(ControllerConstants.USER_CREATE__START_LEVEL);
-    for (City city : availCities) {
-      if (city.getMinLevel() == ControllerConstants.USER_CREATE__START_LEVEL) {
-        builder.addCitiesNewlyAvailableToUserAfterLevelup(CreateInfoProtoUtils
-            .createFullCityProtoFromCity(city));
-      }
-    }
-
-    Map<Integer, Equipment> equipIdToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-    if (equipIdToEquips != null) {
-      for (Equipment e : equipIdToEquips.values()) {
-        if (e != null && e.getMinLevel() == ControllerConstants.USER_CREATE__START_LEVEL
-            && (e.getRarity() == Rarity.EPIC || e.getRarity() == Rarity.LEGENDARY)) {
-          builder.addNewlyEquippableEpicsAndLegendariesForAllClassesAfterLevelup(CreateInfoProtoUtils
-              .createFullEquipProtoFromEquip(e));
-        }
-      }
-    }
-    resBuilder.setTutorialConstants(builder.build());
+//    Map<Integer, Equipment> equipmentIdsToEquipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+//
+//    UserType aGoodType = UserType.GOOD_ARCHER;
+//    UserType aBadType = UserType.BAD_ARCHER;
+//
+//    Task task = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FIRST_TASK_ID);
+////    task.setPotentialLootEquipIds(new ArrayList<Integer>());
+//    
+//    FullTaskProto ftpGood = CreateInfoProtoUtils.createFullTaskProtoFromTask(aGoodType, task);
+//    FullTaskProto ftpBad = CreateInfoProtoUtils.createFullTaskProtoFromTask(aBadType, task);
+//
+//    task = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
+////    task.setPotentialLootEquipIds(new ArrayList<Integer>());
+//    FullTaskProto questFtpGood = CreateInfoProtoUtils.createFullTaskProtoFromTask(aGoodType, task);
+//    FullTaskProto questFtpBad = CreateInfoProtoUtils.createFullTaskProtoFromTask(aBadType, task);
+//
+//    Dialogue goodAcceptDialogue = MiscMethods
+//        .createDialogue(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_ACCEPT_DIALOGUE);
+//    Dialogue badAcceptDialogue = MiscMethods
+//        .createDialogue(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_ACCEPT_DIALOGUE);
+//
+//    FullTutorialQuestProto tqbp = FullTutorialQuestProto
+//        .newBuilder()
+//        .setGoodName(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_NAME)
+//        .setBadName(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_NAME)
+//        .setGoodDescription(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_DESCRIPTION)
+//        .setBadDescription(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_DESCRIPTION)
+//        .setGoodDoneResponse(ControllerConstants.TUTORIAL__FAKE_QUEST_GOOD_DONE_RESPONSE)
+//        .setBadDoneResponse(ControllerConstants.TUTORIAL__FAKE_QUEST_BAD_DONE_RESPONSE)
+//        .setGoodAcceptDialogue(
+//            CreateInfoProtoUtils.createDialogueProtoFromDialogue(goodAcceptDialogue))
+//            .setBadAcceptDialogue(CreateInfoProtoUtils.createDialogueProtoFromDialogue(badAcceptDialogue))
+//            .setAssetNumWithinCity(ControllerConstants.TUTORIAL__FAKE_QUEST_ASSET_NUM_WITHIN_CITY)
+//            .setCoinsGained(ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED)
+//            .setExpGained(ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED)
+//            .setTaskGood(questFtpGood)
+//            .setTaskBad(questFtpBad)
+////            .setTaskCompleteCoinGain(MiscMethods.calculateCoinsGainedFromTutorialTask(task))
+//            .setEquipReward(
+//                CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
+//                    .get(ControllerConstants.TUTORIAL__FAKE_QUEST_AMULET_LOOT_EQUIP_ID))).build();
+//
+//    PlayerWallPost pwp = new PlayerWallPost(-1,
+//        ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL, -1, new Date(),
+//        ControllerConstants.USER_CREATE__FIRST_WALL_POST_TEXT);
+//    User poster = RetrieveUtils.userRetrieveUtils().getUserById(
+//        ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
+//
+//    String name = "";
+//    int syllablesInName = (Math.random() < .5) ? syllablesInName1 : syllablesInName2;
+//    name = nameGeneratorElven.compose(syllablesInName);
+//
+//
+//    TutorialConstants.Builder builder = TutorialConstants
+//    		.newBuilder();
+//    builder.setInitEnergy(ControllerConstants.TUTORIAL__INIT_ENERGY);
+//    builder.setInitStamina(ControllerConstants.TUTORIAL__INIT_STAMINA)
+//    .setInitHealth(ControllerConstants.TUTORIAL__INIT_HEALTH);
+//    builder.setStructToBuild(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD);
+//    builder.setDiamondCostToInstabuildFirstStruct(ControllerConstants.TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT);
+//    builder.setArcherInitAttack(ControllerConstants.TUTORIAL__ARCHER_INIT_ATTACK);
+//    builder.setArcherInitDefense(ControllerConstants.TUTORIAL__ARCHER_INIT_DEFENSE);
+//    FullEquipProto fep = CreateInfoProtoUtils.createFullEquipProtoFromEquip(
+//    		equipmentIdsToEquipment.get(ControllerConstants.TUTORIAL__ARCHER_INIT_WEAPON_ID));
+//    builder.setArcherInitWeapon(fep);
+//    builder.setArcherInitArmor(
+//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
+//    				.get(ControllerConstants.TUTORIAL__ARCHER_INIT_ARMOR_ID)));
+//    builder.setMageInitAttack(ControllerConstants.TUTORIAL__MAGE_INIT_ATTACK);
+//    builder.setMageInitDefense(ControllerConstants.TUTORIAL__MAGE_INIT_DEFENSE);
+//    builder.setMageInitWeapon(
+//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
+//    				.get(ControllerConstants.TUTORIAL__MAGE_INIT_WEAPON_ID)));
+//    builder.setMageInitArmor(
+//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
+//    				.get(ControllerConstants.TUTORIAL__MAGE_INIT_ARMOR_ID)));
+//    builder.setWarriorInitAttack(ControllerConstants.TUTORIAL__WARRIOR_INIT_ATTACK);
+//    builder.setWarriorInitDefense(ControllerConstants.TUTORIAL__WARRIOR_INIT_DEFENSE);
+//    builder.setWarriorInitWeapon(
+//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
+//    				.get(ControllerConstants.TUTORIAL__WARRIOR_INIT_WEAPON_ID)));
+//    builder.setWarriorInitArmor(
+//    		CreateInfoProtoUtils.createFullEquipProtoFromEquip(equipmentIdsToEquipment
+//    				.get(ControllerConstants.TUTORIAL__WARRIOR_INIT_ARMOR_ID)));
+//    builder.setTutorialQuest(tqbp);
+//    builder.setMinNameLength(ControllerConstants.USER_CREATE__MIN_NAME_LENGTH);
+//    builder.setTutorialQuest(tqbp);
+//    builder.setMaxNameLength(ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
+//    builder.setCoinRewardForBeingReferred(
+//    		ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED);
+//    builder.setInitDiamonds(Globals.INITIAL_DIAMONDS());
+//    builder.setInitCoins(ControllerConstants.TUTORIAL__INIT_COINS);
+//    builder.setFirstBattleCoinGain(ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN);
+//    builder.setFirstBattleExpGain(ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN);
+//    builder.setFirstTaskGood(ftpGood);
+//    builder.setFirstTaskBad(ftpBad);
+//    builder.setExpRequiredForLevelTwo(
+//    		LevelsRequiredExperienceRetrieveUtils.getLevelsToRequiredExperienceForLevels().get(2));
+//    builder.setExpRequiredForLevelThree(
+//    		LevelsRequiredExperienceRetrieveUtils.getLevelsToRequiredExperienceForLevels().get(3));
+//    builder.setFirstWallPost(
+//    		CreateInfoProtoUtils.createPlayerWallPostProtoFromPlayerWallPost(pwp, poster));
+//    builder.setDefaultName(name);
+//    builder.setCostToSpeedUpForge(ControllerConstants.TUTORIAL__COST_TO_SPEED_UP_FORGE);
+//
+//
+//    List<NeutralCityElement> neutralCityElements = NeutralCityElementsRetrieveUtils
+//    		.getNeutralCityElementsForCity(ControllerConstants.TUTORIAL__FIRST_NEUTRAL_CITY_ID);
+//    if (neutralCityElements != null) {
+//    	for (NeutralCityElement nce : neutralCityElements) {
+//        builder.addFirstCityElementsForGood(CreateInfoProtoUtils
+//            .createNeutralCityElementProtoFromNeutralCityElement(nce, aGoodType));
+//        builder.addFirstCityElementsForBad(CreateInfoProtoUtils
+//            .createNeutralCityElementProtoFromNeutralCityElement(nce, aBadType));
+//      }
+//    }
+//
+//    Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
+//    for (Structure struct : structIdsToStructs.values()) {
+//      if (struct != null) {
+//        FullStructureProto fsp = CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct);
+//        builder.addCarpenterStructs(fsp);
+//        if (struct.getMinLevel() == 2) {
+//          builder.addNewlyAvailableStructsAfterLevelup(CreateInfoProtoUtils
+//              .createFullStructureProtoFromStructure(struct));
+//        }
+//      }
+//    }
+//
+//    List<City> availCities = MiscMethods
+//        .getCitiesAvailableForUserLevel(ControllerConstants.USER_CREATE__START_LEVEL);
+//    for (City city : availCities) {
+//      if (city.getMinLevel() == ControllerConstants.USER_CREATE__START_LEVEL) {
+//        builder.addCitiesNewlyAvailableToUserAfterLevelup(CreateInfoProtoUtils
+//            .createFullCityProtoFromCity(city));
+//      }
+//    }
+//
+//    Map<Integer, Equipment> equipIdToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+//    if (equipIdToEquips != null) {
+//      for (Equipment e : equipIdToEquips.values()) {
+//        if (e != null && e.getMinLevel() == ControllerConstants.USER_CREATE__START_LEVEL
+//            && (e.getRarity() == Rarity.EPIC || e.getRarity() == Rarity.LEGENDARY)) {
+//          builder.addNewlyEquippableEpicsAndLegendariesForAllClassesAfterLevelup(CreateInfoProtoUtils
+//              .createFullEquipProtoFromEquip(e));
+//        }
+//      }
+//    }
+//    resBuilder.setTutorialConstants(builder.build());
   }
 
   public void writeToUserCurrencyHistory(User aUser, String goldSilver, int previousMoney,

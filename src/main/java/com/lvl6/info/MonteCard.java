@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.InfoProto.UserType;
 
 
 public class MonteCard implements Serializable {
-  private static final long serialVersionUID = -980514205850473476L;
-  private int id;
+	private static final long serialVersionUID = -1414716849966937403L;
+	private int id;
   private int diamondGained = ControllerConstants.NOT_SET;
   private int coinsGained = ControllerConstants.NOT_SET;
   private int warriorEquipId = ControllerConstants.NOT_SET;
@@ -137,17 +136,6 @@ public class MonteCard implements Serializable {
     this.minLevel = minLevel;
   }
   
-  public int getEquipIdForUserType(UserType type) {
-    if (type == UserType.GOOD_WARRIOR || type == UserType.BAD_WARRIOR) {
-      return getWarriorEquipId();
-    } else if (type == UserType.GOOD_ARCHER || type == UserType.BAD_ARCHER) {
-      return getArcherEquipId();
-    } else if (type == UserType.GOOD_MAGE || type == UserType.BAD_MAGE) {
-      return getMageEquipId();
-    }
-    return ControllerConstants.NOT_SET;
-  }
-  
   @Override
   public String toString() {
     return "MonteCard [id=" + id + ", diamondGained=" + diamondGained
@@ -157,17 +145,6 @@ public class MonteCard implements Serializable {
         + ", mageEquipId=" + mageEquipId + ", mageEquipLevel=" + mageEquipLevel
         + ", startDate=" + startDate + ", cardType=" + cardType
         + ", minLevel=" + minLevel + "]";
-  }
-
-  public int getEquipLevelForUserType(UserType type) {
-    if (type == UserType.GOOD_WARRIOR || type == UserType.BAD_WARRIOR) {
-      return getWarriorEquipLevel();
-    } else if (type == UserType.GOOD_ARCHER || type == UserType.BAD_ARCHER) {
-      return getArcherEquipLevel();
-    } else if (type == UserType.GOOD_MAGE || type == UserType.BAD_MAGE) {
-      return getMageEquipLevel();
-    }
-    return ControllerConstants.NOT_SET;
   }
 
   public enum MonteCardType {

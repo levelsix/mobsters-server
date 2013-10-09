@@ -26,13 +26,11 @@ import com.lvl6.proto.EventProto.PostOnPlayerWallResponseProto.Builder;
 import com.lvl6.proto.EventProto.PostOnPlayerWallResponseProto.PostOnPlayerWallStatus;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.InfoProto.PlayerWallPostProto;
-import com.lvl6.proto.InfoProto.SpecialQuestAction;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.QuestUtils;
 
   @Component @DependsOn("gameServer") public class PostOnPlayerWallController extends EventController {
 
@@ -107,11 +105,11 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     server.writeEvent(resEvent);
 
     if (legitPost && wallOwnerId != posterId) {
-      User wallOwner = users.get(wallOwnerId);
-      User poster = users.get(posterId);
-      if (MiscMethods.checkIfGoodSide(wallOwner.getType()) == !MiscMethods.checkIfGoodSide(poster.getType())) {
-        QuestUtils.checkAndSendQuestsCompleteBasic(server, posterId, senderProto, SpecialQuestAction.WRITE_ON_ENEMY_WALL, true);
-      }
+//      User wallOwner = users.get(wallOwnerId);
+//      User poster = users.get(posterId);
+//      if (MiscMethods.checkIfGoodSide(wallOwner.getType()) == !MiscMethods.checkIfGoodSide(poster.getType())) {
+//        QuestUtils.checkAndSendQuestsCompleteBasic(server, posterId, senderProto, SpecialQuestAction.WRITE_ON_ENEMY_WALL, true);
+//      }
     }
 
   }

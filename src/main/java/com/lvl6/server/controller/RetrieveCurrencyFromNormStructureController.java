@@ -86,7 +86,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           userStructIdsToStructures, userStructIdsToTimesOfRetrieval, duplicates, coinGain);
       
       if (legitRetrieval) {
-        previousSilver = user.getCoins() + user.getVaultBalance();
+        previousSilver = user.getCoins();
         
         if (!user.updateRelativeCoinsCoinsretrievedfromstructs(coinGain)) {
           log.error("problem with updating user stats after retrieving " + coinGain + " silver");

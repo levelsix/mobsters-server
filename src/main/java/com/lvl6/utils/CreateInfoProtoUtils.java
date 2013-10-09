@@ -17,7 +17,6 @@ import com.lvl6.info.BattleDetails;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
-import com.lvl6.info.BossEvent;
 import com.lvl6.info.City;
 import com.lvl6.info.CityExpansionCost;
 import com.lvl6.info.CityGem;
@@ -30,15 +29,10 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EquipEnhancement;
 import com.lvl6.info.EquipEnhancementFeeder;
-import com.lvl6.info.Equipment;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.LeaderboardEvent;
 import com.lvl6.info.LeaderboardEventReward;
-import com.lvl6.info.Location;
-import com.lvl6.info.LockBoxEvent;
 import com.lvl6.info.LockBoxItem;
-//import com.lvl6.info.MarketplacePost;
-//import com.lvl6.info.MarketplaceTransaction;
 import com.lvl6.info.Mentorship;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonteCard;
@@ -68,12 +62,10 @@ import com.lvl6.info.jobs.UpgradeStructJob;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.AttackedNotificationProto;
-//import com.lvl6.proto.EventProto.StartupResponseProto.MarketplacePostPurchasedNotificationProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InfoProto.BoosterItemProto;
 import com.lvl6.proto.InfoProto.BoosterPackProto;
-import com.lvl6.proto.InfoProto.BossEventProto;
 import com.lvl6.proto.InfoProto.BuildStructJobProto;
 import com.lvl6.proto.InfoProto.CityExpansionCostProto;
 import com.lvl6.proto.InfoProto.CityGemProto;
@@ -91,8 +83,6 @@ import com.lvl6.proto.InfoProto.EquipEnhancementProto;
 import com.lvl6.proto.InfoProto.FullCityProto;
 import com.lvl6.proto.InfoProto.FullClanProto;
 import com.lvl6.proto.InfoProto.FullClanProtoWithClanSize;
-import com.lvl6.proto.InfoProto.FullEquipProto;
-//import com.lvl6.proto.InfoProto.FullMarketplacePostProto;
 import com.lvl6.proto.InfoProto.FullQuestProto;
 import com.lvl6.proto.InfoProto.FullStructureProto;
 import com.lvl6.proto.InfoProto.FullTaskProto;
@@ -110,8 +100,6 @@ import com.lvl6.proto.InfoProto.GroupChatMessageProto;
 import com.lvl6.proto.InfoProto.LeaderboardEventProto;
 import com.lvl6.proto.InfoProto.LeaderboardEventRewardProto;
 import com.lvl6.proto.InfoProto.LeaderboardType;
-import com.lvl6.proto.InfoProto.LocationProto;
-import com.lvl6.proto.InfoProto.LockBoxEventProto;
 import com.lvl6.proto.InfoProto.LockBoxItemProto;
 import com.lvl6.proto.InfoProto.MentorshipProto;
 import com.lvl6.proto.InfoProto.MinimumClanProto;
@@ -121,7 +109,6 @@ import com.lvl6.proto.InfoProto.MinimumUserPossessEquipJobProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.InfoProto.MinimumUserProtoForClanTowerScores;
 import com.lvl6.proto.InfoProto.MinimumUserProtoForClans;
-import com.lvl6.proto.InfoProto.MinimumUserProtoForMentorship;
 import com.lvl6.proto.InfoProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.InfoProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.InfoProto.MinimumUserProtoWithLevelForLeaderboard;
@@ -146,14 +133,12 @@ import com.lvl6.proto.InfoProto.UserCityGemProto;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 import com.lvl6.proto.InfoProto.UserLockBoxEventProto;
 import com.lvl6.proto.InfoProto.UserLockBoxItemProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.UserLockBoxItemRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestsDefeatTypeJobProgressRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestsTaskProgressRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
@@ -206,7 +191,7 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static MinimumUserProto createMinimumUserProtoFromUser(User u) {
-		MinimumUserProto.Builder builder = MinimumUserProto.newBuilder().setName(u.getName()).setUserId(u.getId()).setUserType(u.getType());
+		MinimumUserProto.Builder builder = MinimumUserProto.newBuilder().setName(u.getName()).setUserId(u.getId());
 		if (u.getClanId() > 0) {
 			Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
 			builder.setClan(createMinimumClanProtoFromClan(clan));
@@ -216,7 +201,7 @@ public class CreateInfoProtoUtils {
 
 	public static MinimumUserProto createMinimumUserProtoFromUserAndClan(User u, Clan c) {
 		MinimumUserProto.Builder builder = MinimumUserProto.newBuilder().setName(u.getName())
-				.setUserId(u.getId()).setUserType(u.getType()).setClan(createMinimumClanProtoFromClan(c));
+				.setUserId(u.getId()).setClan(createMinimumClanProtoFromClan(c));
 		return builder.build();
 	}
 
@@ -241,17 +226,6 @@ public class CreateInfoProtoUtils {
 		return MinimumUserProtoWithBattleHistory.newBuilder().setMinUserProtoWithLevel(mup).setBattlesWon(u.getBattlesWon()).setBattlesLost(u.getBattlesLost()).setBattlesFled(u.getFlees()).build();
 	}
 
-	public static MinimumUserProtoForMentorship createMinimumUserProtoForMentorship(User u) {
-		MinimumUserProtoForMentorship.Builder mupfm = MinimumUserProtoForMentorship.newBuilder();
-		MinimumUserProto mup = createMinimumUserProtoFromUser(u);
-		Date createTime = u.getCreateTime();
-		boolean isGood = MiscMethods.checkIfGoodSide(u.getType());
-
-		mupfm.setCreateTime(createTime.getTime());
-		mupfm.setMup(mup);
-		mupfm.setIsGood(isGood);
-		return mupfm.build();
-	}
 
 //	public static FullUserCityExpansionDataProto createFullUserCityExpansionDataProtoFromUserCityExpansionData(UserCityExpansionData uced) {
 //		FullUserCityExpansionDataProto.Builder builder = FullUserCityExpansionDataProto.newBuilder().setUserId(uced.getUserId())
@@ -283,7 +257,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public static FullQuestProto createFullQuestProtoFromQuest(UserType userType, Quest quest) {
+	public static FullQuestProto createFullQuestProtoFromQuest(Quest quest) {
 		String name = null;
 		String description = null;
 		String doneResponse = null;
@@ -383,17 +357,8 @@ public class CreateInfoProtoUtils {
 		builder.setUserId(u.getId());
 		builder.setName(u.getName());
 		builder.setLevel(u.getLevel());
-		builder.setUserType(u.getType());
-		builder.setEnergy(u.getEnergy());
-		if (u.getLastEnergyRefillTime() != null) {
-			builder.setLastEnergyRefillTime(u.getLastEnergyRefillTime().getTime());
-		}
-		builder.setEnergyMax(u.getEnergyMax());
 		builder.setDiamonds(u.getDiamonds());
 		builder.setCoins(u.getCoins());
-//		builder.setMarketplaceDiamondsEarnings(u.getMarketplaceDiamondsEarnings());
-//		builder.setMarketplaceCoinsEarnings(u.getMarketplaceCoinsEarnings());
-		builder.setVaultBalance(u.getVaultBalance());
 		builder.setExperience(u.getExperience());
 		builder.setTasksCompleted(u.getTasksCompleted());
 		builder.setBattlesWon(u.getBattlesWon());
@@ -403,39 +368,23 @@ public class CreateInfoProtoUtils {
 			builder.setReferralCode(u.getReferralCode());
 		}
 		builder.setNumReferrals(u.getNumReferrals());
-		builder.setUserLocation(createLocationProtoFromLocation(u.getUserLocation()));
-//		builder.setNumPostsInMarketplace(u.getNumPostsInMarketplace());
-//		builder.setNumMarketplaceSalesUnredeemed(u.getNumMarketplaceSalesUnredeemed());
 		if (u.getLastLogin() != null) {
 			builder.setLastLoginTime(u.getLastLogin().getTime());
 		}	
 		if (u.getLastLogout() != null) {
 			builder.setLastLogoutTime(u.getLastLogout().getTime());
 		}
-		if (u.getLastShortLicensePurchaseTime() != null) {
-			builder.setLastShortLicensePurchaseTime(u.getLastShortLicensePurchaseTime().getTime());
-		}
-		if (u.getLastLongLicensePurchaseTime() != null) {
-			builder.setLastLongLicensePurchaseTime(u.getLastLongLicensePurchaseTime().getTime());
-		}
 		builder.setIsFake(u.isFake());
 		builder.setCreateTime(u.getCreateTime().getTime());
 		builder.setIsAdmin(u.isAdmin());
 		builder.setNumCoinsRetrievedFromStructs(u.getNumCoinsRetrievedFromStructs());
-		builder.setNumAdColonyVideosWatched(u.getNumAdColonyVideosWatched());
-		builder.setNumGroupChatsRemaining(u.getNumGroupChatsRemaining());
 		if (u.getClanId() > 0) {
 			Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
 			builder.setClan(createMinimumClanProtoFromClan(clan));
 		}
-		if (u.getLastGoldmineRetrieval() != null) {
-			builder.setLastGoldmineRetrieval(u.getLastGoldmineRetrieval().getTime());
-		}
 		builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
-		builder.setPrestigeLevel(u.getPrestigeLevel());
 		builder.setNumAdditionalForgeSlots(u.getNumAdditionalForgeSlots());
 		builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
-		builder.setIsMentor(u.isMentor());
 		builder.setHasActiveShield(u.isHasActiveShield());
 		if(u.getShieldEndTime() != null) {
 			builder.setShieldEndTime(u.getShieldEndTime().getTime());
@@ -490,55 +439,27 @@ public class CreateInfoProtoUtils {
         amuletUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(), ControllerConstants.ALL_CHARACTERS_EQUIP_LEVEL[equipmentLevel-1], ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, 0);
       }*/
 
-			builder.setWeaponEquippedUserEquip(createFullUserEquipProtoFromUserEquip(weaponUserEquip));
-			builder.setArmorEquippedUserEquip(createFullUserEquipProtoFromUserEquip(armorUserEquip));
-			builder.setAmuletEquippedUserEquip(createFullUserEquipProtoFromUserEquip(amuletUserEquip));
-		} else {
-			List<UserEquip> userEquipsForUser = RetrieveUtils.userEquipRetrieveUtils().getUserEquipsForUser(u.getId());
-			if (userEquipsForUser != null) {
-				for (UserEquip ue : userEquipsForUser) {
-					if (u.getWeaponEquippedUserEquipId() == ue.getId()) {
-						builder.setWeaponEquippedUserEquip(createFullUserEquipProtoFromUserEquip(ue));
-					}
-					if (u.getArmorEquippedUserEquipId() == ue.getId()) {
-						builder.setArmorEquippedUserEquip(createFullUserEquipProtoFromUserEquip(ue));
-					}
-					if (u.getAmuletEquippedUserEquipId() == ue.getId()) {
-						builder.setAmuletEquippedUserEquip(createFullUserEquipProtoFromUserEquip(ue));
-					}
-					//equips when user has prestige
-					if (u.getWeaponTwoEquippedUserEquipId() == ue.getId()) {
-						builder.setWeaponTwoEquippedUserEquip(createFullUserEquipProtoFromUserEquip(ue));
-					}
-					if (u.getArmorTwoEquippedUserEquipId() == ue.getId()) {
-						builder.setArmorTwoEquippedUserEquip(createFullUserEquipProtoFromUserEquip(ue));
-					}
-					if (u.getAmuletTwoEquippedUserEquipId() == ue.getId()) {
-						builder.setAmuletTwoEquippedUserEquip(createFullUserEquipProtoFromUserEquip(ue));
-					}
-				}
-			}
 		}
 		//don't add setting new columns/properties here, add up above
 
 		return builder.build();
 	}
 
-	public static FullEquipProto createFullEquipProtoFromEquip(Equipment equip) {
-		FullEquipProto.Builder builder =  FullEquipProto.newBuilder();
-		builder.setEquipId(equip.getId());
-		builder.setName(equip.getName());
-		builder.setEquipType(equip.getType());
-		builder.setDescription(equip.getDescription());
-		builder.setAttackBoost(equip.getAttackBoost());
-		builder.setDefenseBoost(equip.getDefenseBoost());
-		builder.setMinLevel(equip.getMinLevel());
-		builder.setRarity(equip.getRarity());
-		builder.setChanceOfForgeFailureBase(equip.getChanceOfForgeFailureBase());
-		builder.setMinutesToAttemptForgeBase(equip.getMinutesToAttemptForgeBase());
-		builder.setMaxDurability(equip.getMaxDurability());
-		return builder.build();
-	}
+//	public static FullEquipProto createFullEquipProtoFromEquip(Equipment equip) {
+//		FullEquipProto.Builder builder =  FullEquipProto.newBuilder();
+//		builder.setEquipId(equip.getId());
+//		builder.setName(equip.getName());
+//		builder.setEquipType(equip.getType());
+//		builder.setDescription(equip.getDescription());
+//		builder.setAttackBoost(equip.getAttackBoost());
+//		builder.setDefenseBoost(equip.getDefenseBoost());
+//		builder.setMinLevel(equip.getMinLevel());
+//		builder.setRarity(equip.getRarity());
+//		builder.setChanceOfForgeFailureBase(equip.getChanceOfForgeFailureBase());
+//		builder.setMinutesToAttemptForgeBase(equip.getMinutesToAttemptForgeBase());
+//		builder.setMaxDurability(equip.getMaxDurability());
+//		return builder.build();
+//	}
 
 	public static FullClanProto createFullClanProtoFromClan(Clan c) {
 		MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
@@ -591,7 +512,7 @@ public class CreateInfoProtoUtils {
 				.setOrientation(uc.getOrientation()).build();
 	}
 
-	public static FullTaskProto createFullTaskProtoFromTask(UserType userType, Task task) {
+	public static FullTaskProto createFullTaskProtoFromTask(Task task) {
 
 		String name = null;
 //		String processingText = null;
@@ -625,11 +546,6 @@ public class CreateInfoProtoUtils {
 			}
 		}
 		return builder.build();
-	}
-
-	public static LocationProto createLocationProtoFromLocation(Location location) {
-		LocationProto lp = LocationProto.newBuilder().setLatitude(location.getLatitude()).setLongitude(location.getLongitude()).build();
-		return lp;
 	}
 
 	public static CoordinateProto createCoordinateProtoFromCoordinatePair(CoordinatePair cp) {
@@ -691,7 +607,7 @@ public class CreateInfoProtoUtils {
 		return PossessEquipJobProto.newBuilder().setPossessEquipJobId(j.getId()).setEquipId(j.getEquipId()).setQuantityReq(j.getQuantity()).build();
 	}
 
-	public static List<FullUserQuestDataLargeProto> createFullUserQuestDataLarges(List<UserQuest> userQuests, Map<Integer, Quest> questIdsToQuests, UserType userType) {
+	public static List<FullUserQuestDataLargeProto> createFullUserQuestDataLarges(List<UserQuest> userQuests, Map<Integer, Quest> questIdsToQuests) {
 		List<FullUserQuestDataLargeProto> fullUserQuestDataLargeProtos = new ArrayList<FullUserQuestDataLargeProto>();
 
 		Map<Integer, List<Integer>> questIdToUserTasksCompletedForQuestForUser = null;
@@ -745,7 +661,7 @@ public class CreateInfoProtoUtils {
 									numTimesActed = 0;
 								}
 							}
-							builder.addRequiredTasksProgress(createMinimumUserQuestTaskProto(userQuest, userType, requiredTaskId, taskCompletedForQuest, numTimesActed));
+							builder.addRequiredTasksProgress(createMinimumUserQuestTaskProto(userQuest, requiredTaskId, taskCompletedForQuest, numTimesActed));
 						}
 					}
 
@@ -776,7 +692,7 @@ public class CreateInfoProtoUtils {
 									numTimesUserDidJob = 0;
 								}
 							}
-							builder.addRequiredDefeatTypeJobProgress(createMinimumUserDefeatTypeJobProto(userQuest, userType, requiredDefeatTypeJobId, defeatJobCompletedForQuest, numTimesUserDidJob));
+							builder.addRequiredDefeatTypeJobProgress(createMinimumUserDefeatTypeJobProto(userQuest, requiredDefeatTypeJobId, defeatJobCompletedForQuest, numTimesUserDidJob));
 						}
 					}
 					if (quest.getBuildStructJobsRequired() != null && quest.getBuildStructJobsRequired().size() > 0) {
@@ -851,11 +767,11 @@ public class CreateInfoProtoUtils {
 		return fullUserQuestDataLargeProtos;
 	}
 
-	public static MinimumUserTaskProto createMinimumUserTaskProto(UserType userType, Integer userId, int taskId, Integer numTimesUserActed) {
+	public static MinimumUserTaskProto createMinimumUserTaskProto(Integer userId, int taskId, Integer numTimesUserActed) {
 		return MinimumUserTaskProto.newBuilder().setUserId(userId).setTaskId(taskId).setNumTimesActed(numTimesUserActed).build();
 	}
 
-	public static NeutralCityElementProto createNeutralCityElementProtoFromNeutralCityElement(NeutralCityElement nce, UserType type) {
+	public static NeutralCityElementProto createNeutralCityElementProtoFromNeutralCityElement(NeutralCityElement nce) {
 		NeutralCityElementProto.Builder builder = NeutralCityElementProto.newBuilder().setCityId(nce.getCityId()).setAssetId(nce.getAssetId())
 				.setType(nce.getType())
 				.setCoords(createCoordinateProtoFromCoordinatePair(nce.getCoords()));
@@ -891,14 +807,14 @@ public class CreateInfoProtoUtils {
 		return MinimumUserBuildStructJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setBuildStructJobId(buildStructJob.getId()).setNumOfStructUserHas(quantityOwned).build();
 	}
 
-	private static MinimumUserDefeatTypeJobProto createMinimumUserDefeatTypeJobProto(UserQuest userQuest, UserType userType, Integer requiredDefeatTypeJobId, boolean defeatJobCompletedForQuest, 
+	private static MinimumUserDefeatTypeJobProto createMinimumUserDefeatTypeJobProto(UserQuest userQuest, Integer requiredDefeatTypeJobId, boolean defeatJobCompletedForQuest, 
 			Integer numTimesUserDidJob) {
 		DefeatTypeJob dtj = DefeatTypeJobRetrieveUtils.getDefeatTypeJobForDefeatTypeJobId(requiredDefeatTypeJobId);
 		int numDefeated = (defeatJobCompletedForQuest) ? dtj.getNumEnemiesToDefeat() : numTimesUserDidJob;
 		return MinimumUserDefeatTypeJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setDefeatTypeJobId(requiredDefeatTypeJobId).setNumDefeated(numDefeated).build();
 	}
 
-	private static MinimumUserQuestTaskProto createMinimumUserQuestTaskProto(UserQuest userQuest, UserType userType, Integer requiredTaskId, boolean taskCompletedForQuest, Integer numTimesUserActed) {
+	private static MinimumUserQuestTaskProto createMinimumUserQuestTaskProto(UserQuest userQuest, Integer requiredTaskId, boolean taskCompletedForQuest, Integer numTimesUserActed) {
 		//TODO:
 		//Task task = TaskRetrieveUtils.getTaskForTaskId(requiredTaskId);
 		int numTimesCompleted = 1;//(taskCompletedForQuest) ? task.getNumForCompletion() : numTimesUserActed;
@@ -1062,7 +978,7 @@ public class CreateInfoProtoUtils {
 				.setRequestTime(uc.getRequestTime().getTime()).build();
 	}
 
-	public static MonteCardProto createMonteCardProtoFromMonteCard(MonteCard mc, UserType type) {
+	public static MonteCardProto createMonteCardProtoFromMonteCard(MonteCard mc) {
 		MonteCardProto.Builder b = MonteCardProto.newBuilder();
 
 		b.setCardId(mc.getId());
@@ -1074,48 +990,38 @@ public class CreateInfoProtoUtils {
 			b.setCoinsGained(mc.getCoinsGained());
 		}
 
-		int equipGainedId = mc.getEquipIdForUserType(type);
-		int equipGainedLevel = mc.getEquipLevelForUserType(type);
-
-		if (equipGainedId != ControllerConstants.NOT_SET) {
-			b.setEquip(createFullEquipProtoFromEquip(EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipGainedId)));
-		}
-		if (equipGainedLevel != ControllerConstants.NOT_SET) {
-			b.setEquipLevel(equipGainedLevel);
-		}
-
 		return b.build();
 	}
 
-	public static LockBoxEventProto createLockBoxEventProtoFromLockBoxEvent(LockBoxEvent event) {
-		LockBoxEventProto.Builder b = LockBoxEventProto.newBuilder().setLockBoxEventId(event.getId())
-				.setStartDate(event.getStartDate().getTime()).setEndDate(event.getEndDate().getTime())
-				.setLockBoxImageName(event.getLockBoxImageName()).setEventName(event.getEventName())
-				.setDescriptionImageName(event.getDescriptionImageName()).setDescriptionString(event.getDescriptionString())
-				.setTagImageName(event.getTagImageName());
-
-		b.setPrizeEquip(createFullEquipProtoFromEquip(EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(event.getPrizeEquipId())));
-
-		List<LockBoxItem> items = LockBoxItemRetrieveUtils.getLockBoxItemsForLockBoxEvent(event.getId());
-
-		for (LockBoxItem item : items) {
-			b.addItems(createLockBoxItemProtoFromLockBoxItem(item));
-		}
-
-		return b.build();
-	}
+//	public static LockBoxEventProto createLockBoxEventProtoFromLockBoxEvent(LockBoxEvent event) {
+//		LockBoxEventProto.Builder b = LockBoxEventProto.newBuilder().setLockBoxEventId(event.getId())
+//				.setStartDate(event.getStartDate().getTime()).setEndDate(event.getEndDate().getTime())
+//				.setLockBoxImageName(event.getLockBoxImageName()).setEventName(event.getEventName())
+//				.setDescriptionImageName(event.getDescriptionImageName()).setDescriptionString(event.getDescriptionString())
+//				.setTagImageName(event.getTagImageName());
+//
+//		b.setPrizeEquip(createFullEquipProtoFromEquip(EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(event.getPrizeEquipId())));
+//
+//		List<LockBoxItem> items = LockBoxItemRetrieveUtils.getLockBoxItemsForLockBoxEvent(event.getId());
+//
+//		for (LockBoxItem item : items) {
+//			b.addItems(createLockBoxItemProtoFromLockBoxItem(item));
+//		}
+//
+//		return b.build();
+//	}
 
 	public static LockBoxItemProto createLockBoxItemProtoFromLockBoxItem(LockBoxItem item) {
 		LockBoxItemProto.Builder b = LockBoxItemProto.newBuilder().setLockBoxItemId(item.getId())
 				.setLockBoxEventId(item.getLockBoxEventId()).setChanceToUnlock(item.getChanceToUnlock())
-				.setImageName(item.getImageName()).setName(item.getName()).setType(item.getClassType())
+				.setImageName(item.getImageName()).setName(item.getName())
 				.setRedeemForNumBoosterItems(item.getRedeemForNumBoosterItems())
 				.setIsGoldBoosterPack(item.isGoldBoosterPack());
 
 		return b.build();
 	}
 
-	public static UserLockBoxEventProto createUserLockBoxEventProto(UserLockBoxEvent event, UserType type) {
+	public static UserLockBoxEventProto createUserLockBoxEventProto(UserLockBoxEvent event) {
 		UserLockBoxEventProto.Builder b = UserLockBoxEventProto.newBuilder().setUserId(event.getUserId()).setLockBoxEventId(event.getLockBoxId())
 				.setNumLockBoxes(event.getNumLockBoxes()).setNumTimesCompleted(event.getNumTimesCompleted())
 				.setHasBeenRedeemed(event.isHasBeenRedeemed());
@@ -1229,19 +1135,19 @@ public class CreateInfoProtoUtils {
 		return bu.build();
 	}
 
-	public static BossEventProto createBossEventProtoFromBossEvent(BossEvent e) {
-		BossEventProto.Builder b = BossEventProto.newBuilder().setCityId(e.getCityId()).setStartDate(e.getStartDate().getTime())
-				.setEndDate(e.getEndDate().getTime()).setEventName(e.getEventName()).setHeaderImage(e.getHeaderImage())
-				.setLeftTagImage(e.getLeftTag()).setMiddleTagImage(e.getMiddleTag()).setRightTagImage(e.getRightTag())
-				.setInfoDescription(e.getInfoDescription());
-
-		Map<Integer, Equipment> equips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-		b.setLeftEquip(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equips.get(e.getLeftEquipId())));
-		b.setMiddleEquip(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equips.get(e.getMiddleEquipId())));
-		b.setRightEquip(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equips.get(e.getRightEquipId())));
-
-		return b.build();
-	}
+//	public static BossEventProto createBossEventProtoFromBossEvent(BossEvent e) {
+//		BossEventProto.Builder b = BossEventProto.newBuilder().setCityId(e.getCityId()).setStartDate(e.getStartDate().getTime())
+//				.setEndDate(e.getEndDate().getTime()).setEventName(e.getEventName()).setHeaderImage(e.getHeaderImage())
+//				.setLeftTagImage(e.getLeftTag()).setMiddleTagImage(e.getMiddleTag()).setRightTagImage(e.getRightTag())
+//				.setInfoDescription(e.getInfoDescription());
+//
+//		Map<Integer, Equipment> equips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
+//		b.setLeftEquip(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equips.get(e.getLeftEquipId())));
+//		b.setMiddleEquip(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equips.get(e.getMiddleEquipId())));
+//		b.setRightEquip(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equips.get(e.getRightEquipId())));
+//
+//		return b.build();
+//	}
 
 	public static LeaderboardEventProto createLeaderboardEventProtoFromLeaderboardEvent(
 			LeaderboardEvent e, List<LeaderboardEventReward> rList) {
@@ -1417,9 +1323,9 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Equipment e, Date d) {
+	public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {
 		return RareBoosterPurchaseProto.newBuilder().setBooster(createBoosterPackProto(bp, null))
-				.setUser(createMinimumUserProtoFromUser(u)).setEquip(createFullEquipProtoFromEquip(e))
+				.setUser(createMinimumUserProtoFromUser(u))
 				.setTimeOfPurchase(d.getTime()).build();
 	}
 

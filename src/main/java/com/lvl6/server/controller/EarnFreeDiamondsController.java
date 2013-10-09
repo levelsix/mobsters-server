@@ -41,7 +41,6 @@ import com.lvl6.proto.EventProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsS
 import com.lvl6.proto.InfoProto.EarnFreeDiamondsType;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.AdColonyRecentHistoryRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -118,21 +117,21 @@ public class EarnFreeDiamondsController extends EventController {
       if (legitFreeDiamondsEarn) {
         resBuilder.setFreeDiamondsType(freeDiamondsType);
 
-        if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
-          kiipConfirmationReceipt = getLegitKiipRewardReceipt(resBuilder, user, kiipReceiptString);
-          if (kiipConfirmationReceipt == null) legitFreeDiamondsEarn = false;
-          else {
-            invalidateKiipTransaction(kiipConfirmationReceipt);
-          }
-        }
-        if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
-          if (!signaturesAreEqual(resBuilder, user, adColonyDigest, adColonyAmountEarned, adColonyRewardType, clientTime)) {
-            legitFreeDiamondsEarn = false;
-          } else if (AdColonyRecentHistoryRetrieveUtils.checkIfDuplicateDigest(adColonyDigest)) {
-            resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
-            legitFreeDiamondsEarn = false;
-          }
-        }
+//        if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
+//          kiipConfirmationReceipt = getLegitKiipRewardReceipt(resBuilder, user, kiipReceiptString);
+//          if (kiipConfirmationReceipt == null) legitFreeDiamondsEarn = false;
+//          else {
+//            invalidateKiipTransaction(kiipConfirmationReceipt);
+//          }
+//        }
+//        if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
+//          if (!signaturesAreEqual(resBuilder, user, adColonyDigest, adColonyAmountEarned, adColonyRewardType, clientTime)) {
+//            legitFreeDiamondsEarn = false;
+//          } else if (AdColonyRecentHistoryRetrieveUtils.checkIfDuplicateDigest(adColonyDigest)) {
+//            resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
+//            legitFreeDiamondsEarn = false;
+//          }
+//        }
       }
 
       EarnFreeDiamondsResponseEvent resEvent = new EarnFreeDiamondsResponseEvent(senderProto.getUserId());
@@ -238,38 +237,38 @@ public class EarnFreeDiamondsController extends EventController {
 
   private void writeChangesToDB(User user, EarnFreeDiamondsType freeDiamondsType, JSONObject kiipReceipt, int adColonyAmountEarned, 
       AdColonyRewardType adColonyRewardType, Map<String, Integer> money, List<String> keys) throws JSONException {
-    if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
-      int diamondChange = kiipReceipt.getInt(KIIP_JSON_QUANTITY_KEY);
-      if (!user.updateRelativeDiamondsForFree(diamondChange, freeDiamondsType)) {
-        log.error("problem with updating diamonds. diamondChange=" + diamondChange
-            + ", freeDiamondsType=" + freeDiamondsType);
-      } else {
-        String key = MiscMethods.gold;
-        money.put(key, diamondChange);
-        keys.add(key);
-      }
-    }
-    if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
-      if (adColonyRewardType == AdColonyRewardType.DIAMONDS) {
-        if (!user.updateRelativeDiamondsForFree(adColonyAmountEarned, freeDiamondsType)) {
-          log.error("problem with updating diamonds. diamondChange=" + adColonyAmountEarned
-              + ", freeDiamondsType=" + freeDiamondsType);
-        } else {
-          String key = MiscMethods.gold;
-          money.put(key, adColonyAmountEarned);
-          keys.add(key);
-        }
-      } else if (adColonyRewardType == AdColonyRewardType.COINS) {
-        if (!user.updateRelativeCoinsAdcolonyvideoswatched(adColonyAmountEarned, 1)) {
-          log.error("problem with updating coins. coin change=" + adColonyAmountEarned
-              + ", Adcolonyvideoswatched=" + 1);
-        } else {
-          String key = MiscMethods.silver;
-          money.put(key, adColonyAmountEarned);
-          keys.add(key);
-        }
-      }
-    }
+//    if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
+//      int diamondChange = kiipReceipt.getInt(KIIP_JSON_QUANTITY_KEY);
+//      if (!user.updateRelativeDiamondsForFree(diamondChange, freeDiamondsType)) {
+//        log.error("problem with updating diamonds. diamondChange=" + diamondChange
+//            + ", freeDiamondsType=" + freeDiamondsType);
+//      } else {
+//        String key = MiscMethods.gold;
+//        money.put(key, diamondChange);
+//        keys.add(key);
+//      }
+//    }
+//    if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
+//      if (adColonyRewardType == AdColonyRewardType.DIAMONDS) {
+//        if (!user.updateRelativeDiamondsForFree(adColonyAmountEarned, freeDiamondsType)) {
+//          log.error("problem with updating diamonds. diamondChange=" + adColonyAmountEarned
+//              + ", freeDiamondsType=" + freeDiamondsType);
+//        } else {
+//          String key = MiscMethods.gold;
+//          money.put(key, adColonyAmountEarned);
+//          keys.add(key);
+//        }
+//      } else if (adColonyRewardType == AdColonyRewardType.COINS) {
+//        if (!user.updateRelativeCoinsAdcolonyvideoswatched(adColonyAmountEarned, 1)) {
+//          log.error("problem with updating coins. coin change=" + adColonyAmountEarned
+//              + ", Adcolonyvideoswatched=" + 1);
+//        } else {
+//          String key = MiscMethods.silver;
+//          money.put(key, adColonyAmountEarned);
+//          keys.add(key);
+//        }
+//      }
+//    }
     if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
       int diamondChange = ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD;
       if (!user.updateRelativeDiamondsForFree(diamondChange, freeDiamondsType)) {
@@ -284,27 +283,27 @@ public class EarnFreeDiamondsController extends EventController {
 
   private void writeToDBHistory(User user, EarnFreeDiamondsType freeDiamondsType, Timestamp clientTime, JSONObject kiipConfirmationReceipt, String adColonyDigest,
       AdColonyRewardType adColonyRewardType, int adColonyAmountEarned) {
-    if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
-      try {
-        String content = kiipConfirmationReceipt.getString(KIIP_JSON_CONTENT_KEY);
-        String signature = kiipConfirmationReceipt.getString(KIIP_JSON_SIGNATURE_KEY);
-        int quantity = kiipConfirmationReceipt.getInt(KIIP_JSON_QUANTITY_KEY);
-        String transactionId = kiipConfirmationReceipt.getString(KIIP_JSON_TRANSACTION_ID_KEY);
-
-        if (!InsertUtils.get().insertKiipHistory(user.getId(), clientTime, content, signature, quantity, transactionId)) {
-          log.error("problem with saving kiip reward into history. user=" + user + ", clientTime=" + clientTime
-              + ", kiipConfirmationReceipt=" + kiipConfirmationReceipt);
-        }
-      } catch (Exception e) {
-        log.error("problem with trying to save kiip reward in db. kiipConfirmationReceipt=" + kiipConfirmationReceipt);
-      }
-    }
-    if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
-      if (!InsertUtils.get().insertAdcolonyRecentHistory(user.getId(), clientTime, adColonyAmountEarned, adColonyRewardType, adColonyDigest)) {
-        log.error("problem with saving adcolony rewarding into recent history. user=" + user + ", clientTime=" + clientTime
-            + ", amountEarned=" + adColonyAmountEarned + ", adColonyRewardType=" + adColonyRewardType + ", digest=" + adColonyDigest);
-      }
-    }
+//    if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
+//      try {
+//        String content = kiipConfirmationReceipt.getString(KIIP_JSON_CONTENT_KEY);
+//        String signature = kiipConfirmationReceipt.getString(KIIP_JSON_SIGNATURE_KEY);
+//        int quantity = kiipConfirmationReceipt.getInt(KIIP_JSON_QUANTITY_KEY);
+//        String transactionId = kiipConfirmationReceipt.getString(KIIP_JSON_TRANSACTION_ID_KEY);
+//
+//        if (!InsertUtils.get().insertKiipHistory(user.getId(), clientTime, content, signature, quantity, transactionId)) {
+//          log.error("problem with saving kiip reward into history. user=" + user + ", clientTime=" + clientTime
+//              + ", kiipConfirmationReceipt=" + kiipConfirmationReceipt);
+//        }
+//      } catch (Exception e) {
+//        log.error("problem with trying to save kiip reward in db. kiipConfirmationReceipt=" + kiipConfirmationReceipt);
+//      }
+//    }
+//    if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
+//      if (!InsertUtils.get().insertAdcolonyRecentHistory(user.getId(), clientTime, adColonyAmountEarned, adColonyRewardType, adColonyDigest)) {
+//        log.error("problem with saving adcolony rewarding into recent history. user=" + user + ", clientTime=" + clientTime
+//            + ", amountEarned=" + adColonyAmountEarned + ", adColonyRewardType=" + adColonyRewardType + ", digest=" + adColonyDigest);
+//      }
+//    }
   }
 
   private boolean checkLegitFreeDiamondsEarnBasic(Builder resBuilder, EarnFreeDiamondsType freeDiamondsType, Timestamp clientTime, User user, 
@@ -320,7 +319,7 @@ public class EarnFreeDiamondsController extends EventController {
           + new Date());
       return false;
     }
-    if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
+    /*if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
       if (!checkLegitKiipRedeem(resBuilder, kiipReceiptString)) {
         return false;
       }
@@ -332,7 +331,8 @@ public class EarnFreeDiamondsController extends EventController {
       //    } else if (freeDiamondsType == EarnFreeDiamondsType.TAPJOY) {
       //    } else if (freeDiamondsType == EarnFreeDiamondsType.FLURRY_VIDEO) {
       //    } else if (freeDiamondsType == EarnFreeDiamondsType.TWITTER) {
-    } else if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
+    } else */
+    if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
       if (user.isHasReceivedfbReward()) {
         log.error("user error: user already received fb connect diamonds");
         return false;
@@ -346,26 +346,26 @@ public class EarnFreeDiamondsController extends EventController {
     return true;  
   }
 
-  private boolean checkLegitAdColonyRedeem(Builder resBuilder, String adColonyDigest, int adColonyAmountEarned, AdColonyRewardType adColonyRewardType, User user, Timestamp clientTime) {
-    if (adColonyDigest == null || (adColonyRewardType != AdColonyRewardType.DIAMONDS && adColonyRewardType != AdColonyRewardType.COINS)) {
-      resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
-      log.error("no digest given for AdColony");
-      return false;
-    }
-    if (adColonyRewardType == AdColonyRewardType.DIAMONDS) {
-      if ((user.getNumAdColonyVideosWatched()+1) % ControllerConstants.EARN_FREE_DIAMONDS__NUM_VIDEOS_FOR_DIAMOND_REWARD != 0) {
-        resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
-        log.error("not supposed to get diamonds yet, user before this try has only watched " + user.getNumAdColonyVideosWatched() + " videos");
-        return false;
-      }
-    }
-    if (adColonyAmountEarned <= 0) {
-      resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
-      log.error("<= 0 diamonds given from AdColony");
-      return false;
-    }
-    return true;
-  }
+//  private boolean checkLegitAdColonyRedeem(Builder resBuilder, String adColonyDigest, int adColonyAmountEarned, AdColonyRewardType adColonyRewardType, User user, Timestamp clientTime) {
+//    if (adColonyDigest == null || (adColonyRewardType != AdColonyRewardType.DIAMONDS && adColonyRewardType != AdColonyRewardType.COINS)) {
+//      resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
+//      log.error("no digest given for AdColony");
+//      return false;
+//    }
+//    if (adColonyRewardType == AdColonyRewardType.DIAMONDS) {
+//      if ((user.getNumAdColonyVideosWatched()+1) % ControllerConstants.EARN_FREE_DIAMONDS__NUM_VIDEOS_FOR_DIAMOND_REWARD != 0) {
+//        resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
+//        log.error("not supposed to get diamonds yet, user before this try has only watched " + user.getNumAdColonyVideosWatched() + " videos");
+//        return false;
+//      }
+//    }
+//    if (adColonyAmountEarned <= 0) {
+//      resBuilder.setStatus(EarnFreeDiamondsStatus.OTHER_FAIL);
+//      log.error("<= 0 diamonds given from AdColony");
+//      return false;
+//    }
+//    return true;
+//  }
 
   private boolean checkLegitKiipRedeem(Builder resBuilder, String kiipReceiptString) {
     if (kiipReceiptString == null) {
@@ -461,11 +461,12 @@ public class EarnFreeDiamondsController extends EventController {
         currencyAfter = aUser.getDiamonds();
       }
       
-      if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
+      /*if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
         reasonForChange = ControllerConstants.UCHRFC__EARN_FREE_DIAMONDS_KIIP;
       } else if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
         reasonForChange = ControllerConstants.UCHRFC__EARN_FREE_DIAMONDS_ADCOLONY;
-      } else if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
+      } else */ 
+      if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
         reasonForChange = ControllerConstants.UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT;
       }
       

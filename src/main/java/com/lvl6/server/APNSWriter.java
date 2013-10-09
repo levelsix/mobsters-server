@@ -83,7 +83,6 @@ public class APNSWriter extends Wrap {
 
 	private static final int MIN_MINUTES_BETWEEN_BATTLE_NOTIFICATIONS = 180; // 3
 																				// hours
-	private static final int MIN_MINUTES_BETWEEN_MARKETPLACE_NOTIFICATIONS = 0;//30;
 	private static final int MIN_MINUTES_BETWEEN_WALL_POST_NOTIFICATIONS = 0;//15;
 
 	private static final int MAX_NUM_CHARACTERS_TO_SEND_FOR_WALL_POST = 120;
@@ -478,10 +477,10 @@ public class APNSWriter extends Wrap {
 
 			BattleResponseProto battleResponseProto = event.getBattleResponseProto();
 
-			boolean equipStolen = false;
+//			boolean equipStolen = false;
 			if (battleResponseProto.hasUserEquipGained()
 					&& battleResponseProto.getUserEquipGained().getEquipId() > 0) {
-				equipStolen = true;
+//				equipStolen = true;
 			}
 			MinimumUserProto att = battleResponseProto.getAttacker();
 
@@ -493,13 +492,13 @@ public class APNSWriter extends Wrap {
 
 			if (battleResult == BattleResult.ATTACKER_WIN) {
 				alertBody = attacker;
-				if (equipStolen) {
-					alertBody += " has stolen your Level "
-							+ battleResponseProto.getUserEquipGained().getLevel() + " "
-							+ battleResponseProto.getEquipGained().getName() + ". Fight back strong!";
-				} else {
-					alertBody += " just humiliated you in battle. Fight back and defend your honor!";
-				}
+//				if (equipStolen) {
+//					alertBody += " has stolen your Level "
+//							+ battleResponseProto.getUserEquipGained().getLevel() + " "
+//							+ battleResponseProto.getEquipGained().getName() + ". Fight back strong!";
+//				} else {
+//				}
+				alertBody += " just humiliated you in battle. Fight back and defend your honor!";
 			} else if (battleResult == BattleResult.ATTACKER_FLEE) {
 				alertBody = attacker
 						+ " has just fled from you after initiating battle. Chase the coward down!";

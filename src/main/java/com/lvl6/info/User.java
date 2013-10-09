@@ -6,33 +6,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.mortbay.log.Log;
-
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.EventProto.RefillStatWithDiamondsRequestProto.StatType;
 import com.lvl6.proto.InfoProto.EarnFreeDiamondsType;
-import com.lvl6.proto.InfoProto.FullEquipProto.EquipType;
-import com.lvl6.proto.InfoProto.UserType;
-import com.lvl6.retrieveutils.rarechange.EquipmentRetrieveUtils;
 import com.lvl6.utils.DBConnection;
-import com.lvl6.utils.utilmethods.InsertUtils;
 
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 3977950828952678163L;
+	private static final long serialVersionUID = -2819418420486930959L;
 	private int id;
 	private String name;
 	private int level;
-	private UserType type;
-	private int energy;
-	private Date lastEnergyRefillTime;
-	private int energyMax;
 	private int diamonds;
 	private int coins;
-	private int marketplaceDiamondsEarnings;
-	private int marketplaceCoinsEarnings;
-	private int vaultBalance;
 	private int experience;
 	private int tasksCompleted;
 	private int battlesWon;
@@ -41,41 +27,23 @@ public class User implements Serializable {
 	private String referralCode;
 	private int numReferrals;
 	private String udid;
-	private Location userLocation;
-	private int numPostsInMarketplace;
-	private int numMarketplaceSalesUnredeemed;
-	private long weaponEquippedUserEquipId;
-	private long armorEquippedUserEquipId;
-	private long amuletEquippedUserEquipId;
 	private Date lastLogin;
 	private Date lastLogout;
 	private String deviceToken;
 	private Date lastBattleNotificationTime;
 	private int numBadges;
-	private Date lastShortLicensePurchaseTime;
-	private Date lastLongLicensePurchaseTime;
 	private boolean isFake;
 	private Date createTime;
 	private boolean isAdmin;
 	private String apsalarId;
 	private int numCoinsRetrievedFromStructs;
-	private int numAdColonyVideosWatched;
-	private int numTimesKiipRewarded;
 	private int numConsecutiveDaysPlayed;
-	private int numGroupChatsRemaining;
 	private int clanId;
-	private Date lastGoldmineRetrieval;
-	private Date lastMarketplaceNotificationTime;
 	private Date lastWallPostNotificationTime;
 	private int kabamNaid;
 	private boolean hasReceivedfbReward;
-	private long weaponTwoEquippedUserEquipId;
-	private long armorTwoEquippedUserEquipId;
-	private long amuletTwoEquippedUserEquipId;
-	private int prestigeLevel;
 	private int numAdditionalForgeSlots;
 	private int numBeginnerSalesPurchased;
-	private boolean isMentor;
 	private boolean hasActiveShield;
 	private Date shieldEndTime;
 	private int elo;
@@ -87,42 +55,25 @@ public class User implements Serializable {
 	private int defensesLost;
 
 
-	public User(int id, String name, int level, UserType type, int energy,
-			Date lastEnergyRefillTime, int energyMax, int diamonds, int coins,
-			int marketplaceDiamondsEarnings, int marketplaceCoinsEarnings,
-			int vaultBalance, int experience, int tasksCompleted, int battlesWon,
-			int battlesLost, int flees, String referralCode, int numReferrals,
-			String udid, Location userLocation, int numPostsInMarketplace,
-			int numMarketplaceSalesUnredeemed, int weaponEquippedUserEquipId,
-			int armorEquippedUserEquipId, int amuletEquippedUserEquipId,
+
+	public User(int id, String name, int level, int diamonds, int coins,
+			int experience, int tasksCompleted, int battlesWon, int battlesLost,
+			int flees, String referralCode, int numReferrals, String udid,
 			Date lastLogin, Date lastLogout, String deviceToken,
-			Date lastBattleNotificationTime, int numBadges,
-			Date lastShortLicensePurchaseTime, Date lastLongLicensePurchaseTime,
-			boolean isFake, Date createTime, boolean isAdmin, String apsalarId,
-			int numCoinsRetrievedFromStructs, int numAdColonyVideosWatched,
-			int numTimesKiipRewarded, int numConsecutiveDaysPlayed,
-			int numGroupChatsRemaining, int clanId, Date lastGoldmineRetrieval,
-			Date lastMarketplaceNotificationTime, Date lastWallPostNotificationTime,
-			int kabamNaid, boolean hasReceivedfbReward,
-			int weaponTwoEquippedUserEquipId, int armorTwoEquippedUserEquipId,
-			int amuletTwoEquippedUserEquipId, int prestigeLevel,
-			int numAdditionalForgeSlots, int numBeginnerSalesPurchased,
-			boolean isMentor, boolean hasActiveShield, Date shieldEndTime, int elo,
-			String rank, Date lastTimeQueued, int attacksWon, int defensesWon,
-			int attacksLost, int defensesLost) {
+			Date lastBattleNotificationTime, int numBadges, boolean isFake,
+			Date createTime, boolean isAdmin, String apsalarId,
+			int numCoinsRetrievedFromStructs, int numConsecutiveDaysPlayed,
+			int clanId, Date lastWallPostNotificationTime, int kabamNaid,
+			boolean hasReceivedfbReward, int numAdditionalForgeSlots,
+			int numBeginnerSalesPurchased, boolean hasActiveShield,
+			Date shieldEndTime, int elo, String rank, Date lastTimeQueued,
+			int attacksWon, int defensesWon, int attacksLost, int defensesLost) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.level = level;
-		this.type = type;
-		this.energy = energy;
-		this.lastEnergyRefillTime = lastEnergyRefillTime;
-		this.energyMax = energyMax;
 		this.diamonds = diamonds;
 		this.coins = coins;
-		this.marketplaceDiamondsEarnings = marketplaceDiamondsEarnings;
-		this.marketplaceCoinsEarnings = marketplaceCoinsEarnings;
-		this.vaultBalance = vaultBalance;
 		this.experience = experience;
 		this.tasksCompleted = tasksCompleted;
 		this.battlesWon = battlesWon;
@@ -131,41 +82,23 @@ public class User implements Serializable {
 		this.referralCode = referralCode;
 		this.numReferrals = numReferrals;
 		this.udid = udid;
-		this.userLocation = userLocation;
-		this.numPostsInMarketplace = numPostsInMarketplace;
-		this.numMarketplaceSalesUnredeemed = numMarketplaceSalesUnredeemed;
-		this.weaponEquippedUserEquipId = weaponEquippedUserEquipId;
-		this.armorEquippedUserEquipId = armorEquippedUserEquipId;
-		this.amuletEquippedUserEquipId = amuletEquippedUserEquipId;
 		this.lastLogin = lastLogin;
 		this.lastLogout = lastLogout;
 		this.deviceToken = deviceToken;
 		this.lastBattleNotificationTime = lastBattleNotificationTime;
 		this.numBadges = numBadges;
-		this.lastShortLicensePurchaseTime = lastShortLicensePurchaseTime;
-		this.lastLongLicensePurchaseTime = lastLongLicensePurchaseTime;
 		this.isFake = isFake;
 		this.createTime = createTime;
 		this.isAdmin = isAdmin;
 		this.apsalarId = apsalarId;
 		this.numCoinsRetrievedFromStructs = numCoinsRetrievedFromStructs;
-		this.numAdColonyVideosWatched = numAdColonyVideosWatched;
-		this.numTimesKiipRewarded = numTimesKiipRewarded;
 		this.numConsecutiveDaysPlayed = numConsecutiveDaysPlayed;
-		this.numGroupChatsRemaining = numGroupChatsRemaining;
 		this.clanId = clanId;
-		this.lastGoldmineRetrieval = lastGoldmineRetrieval;
-		this.lastMarketplaceNotificationTime = lastMarketplaceNotificationTime;
 		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
 		this.kabamNaid = kabamNaid;
 		this.hasReceivedfbReward = hasReceivedfbReward;
-		this.weaponTwoEquippedUserEquipId = weaponTwoEquippedUserEquipId;
-		this.armorTwoEquippedUserEquipId = armorTwoEquippedUserEquipId;
-		this.amuletTwoEquippedUserEquipId = amuletTwoEquippedUserEquipId;
-		this.prestigeLevel = prestigeLevel;
 		this.numAdditionalForgeSlots = numAdditionalForgeSlots;
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
-		this.isMentor = isMentor;
 		this.hasActiveShield = hasActiveShield;
 		this.shieldEndTime = shieldEndTime;
 		this.elo = elo;
@@ -177,7 +110,8 @@ public class User implements Serializable {
 		this.defensesLost = defensesLost;
 	}
 
-	public boolean updateAbsoluteUserLocation(Location location) {
+
+	/*public boolean updateAbsoluteUserLocation(Location location) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -192,10 +126,10 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 
-	public boolean updateEquipped(UserEquip ue, boolean isPrestigeEquip) {
+	/*public boolean updateEquipped(UserEquip ue, boolean isPrestigeEquip) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -250,9 +184,9 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
-	public boolean updateAbsoluteAllEquipped(int weaponEquippedUserEquipId, int armorEquippedUserEquipId, 
+	/*public boolean updateAbsoluteAllEquipped(int weaponEquippedUserEquipId, int armorEquippedUserEquipId, 
 			int amuletEquippedUserequipId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -271,9 +205,9 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
-	public boolean updateUnequip(boolean isWeapon, boolean isArmor, boolean isAmulet,
+	/*public boolean updateUnequip(boolean isWeapon, boolean isArmor, boolean isAmulet,
 			boolean isWeaponTwo, boolean isArmorTwo, boolean isAmuletTwo) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -328,9 +262,9 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
-	public boolean updateRelativeDiamondsAbsoluteLastshortlicensepurchasetimeLastlonglicensepurchasetime(int diamondChange, 
+	/*public boolean updateRelativeDiamondsAbsoluteLastshortlicensepurchasetimeLastlonglicensepurchasetime(int diamondChange, 
 			Timestamp lastShortLicensePurchaseTime, Timestamp lastLongLicensePurchaseTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -359,7 +293,7 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	public boolean updateSetdevicetoken(String deviceToken) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -431,7 +365,7 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateRelativeNumGroupChatsRemainingAndDiamonds(int numGroupChatsRemainingChange, int diamondChange) {
+	/*public boolean updateRelativeNumGroupChatsRemainingAndDiamonds(int numGroupChatsRemainingChange, int diamondChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -447,7 +381,7 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	public boolean updateRelativeBadgeAbsoluteLastBattleNotificationTime(int badgeChange, Timestamp newLastBattleNotificationTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -469,7 +403,7 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateRelativeBadgeAbsoluteLastMarketplaceNotificationTime(int badgeChange, Timestamp newLastMktNotificationTime) {
+	/*public boolean updateRelativeBadgeAbsoluteLastMarketplaceNotificationTime(int badgeChange, Timestamp newLastMktNotificationTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -487,7 +421,7 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	public boolean updateRelativeBadgeAbsoluteLastWallPostNotificationTime(int badgeChange, Timestamp newLastWallNotificationTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -568,7 +502,7 @@ public class User implements Serializable {
 	/*
 	 * used for reducing stamina and increasing silver and gold after attacking a boss
 	 */
-	public boolean updateUserAfterAttackingBoss(int energyChange,
+	/*public boolean updateUserAfterAttackingBoss(int energyChange,
 			int silverChange, int goldChange, boolean simulateEnergyRefill,
 			Timestamp clientTime, int expChange) {
 		String tableName = DBConstants.TABLE_USER;
@@ -609,13 +543,13 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*;
 
 
 	/*
 	 * used for refilling energy
 	 */
-	public boolean updateLastenergyrefilltimeEnergy(Timestamp lastEnergyRefillTime, int energyChange) {
+	/*public boolean updateLastenergyrefilltimeEnergy(Timestamp lastEnergyRefillTime, int energyChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -637,12 +571,12 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	/*
 	 * used for using diamonds to refill stat
 	 */
-	public boolean updateRelativeDiamondsRestoreStat (int diamondChange, StatType statType) {
+	/*public boolean updateRelativeDiamondsRestoreStat (int diamondChange, StatType statType) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -671,12 +605,12 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	/*
 	 * used for leveling up
 	 */
-	public boolean updateAbsoluteRestoreEnergyStaminaRelativeUpdateSkillPoints(int skillPointsChange, Timestamp levelUpTime) {
+	/*public boolean updateAbsoluteRestoreEnergyStaminaRelativeUpdateSkillPoints(int skillPointsChange, Timestamp levelUpTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -699,12 +633,12 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	/*
 	 * used for using skill points
 	 */
-	public boolean updateRelativeEnergyEnergyMax(int energyChange) {
+	/*public boolean updateRelativeEnergyEnergyMax(int energyChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -723,7 +657,7 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 
 	//  /*
@@ -811,7 +745,7 @@ public class User implements Serializable {
 	/*
 	 * used for marketplace purchase
 	 */
-	public boolean updateMoveMarketplaceEarningsToRealStatResetNummarketplacesalesunredeemed() {
+	/*public boolean updateMoveMarketplaceEarningsToRealStatResetNummarketplacesalesunredeemed() {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -836,12 +770,12 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	/*
 	 * used for marketplace purchase
 	 */
-	public boolean updateRelativeDiamondsearningsCoinsearningsNumpostsinmarketplaceNummarketplacesalesunredeemedNaive 
+	/*public boolean updateRelativeDiamondsearningsCoinsearningsNumpostsinmarketplaceNummarketplacesalesunredeemedNaive 
 	(int diamondEarningsChange, int coinEarningsChange, 
 			int numPostsInMarketplaceChange, int numMarketplaceSalesUnredeemedChange, boolean changeNumPostsInMarketplace) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -869,13 +803,13 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 
 	/*
 	 * used for marketplace
 	 */
-	public boolean updateRelativeDiamondsCoinsNumpostsinmarketplaceNaive (int diamondChange, int coinChange, 
+	/*public boolean updateRelativeDiamondsCoinsNumpostsinmarketplaceNaive (int diamondChange, int coinChange, 
 			int numPostsInMarketplaceChange, boolean changeNumPostsInMarketplace) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -900,15 +834,16 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 
 	/*
 	 * used for tasks
-	 *        * user- coins/exp/tasks_completed increase, energy decrease
+	 *        * user- coins/exp/tasks_completed increase
 	 */
-	public boolean updateRelativeCoinsExpTaskscompletedEnergySimulateenergyrefill (int coinChange, int expChange, int tasksCompletedChange, 
-			int energyChange, boolean simulateEnergyRefill, Timestamp clientTime) {
+	public boolean updateRelativeCoinsExpTaskscompleted (
+			int coinChange, int expChange, int tasksCompletedChange,
+			Timestamp clientTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -917,12 +852,8 @@ public class User implements Serializable {
 		relativeParams.put(DBConstants.USER__COINS, coinChange);
 		relativeParams.put(DBConstants.USER__EXPERIENCE, expChange);
 		relativeParams.put(DBConstants.USER__TASKS_COMPLETED, tasksCompletedChange);
-		relativeParams.put(DBConstants.USER__ENERGY, energyChange);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (simulateEnergyRefill) {
-			absoluteParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, clientTime);
-		}
 		if (absoluteParams.size() == 0) {
 			absoluteParams = null;
 		}
@@ -930,13 +861,9 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			if (simulateEnergyRefill) {
-				this.lastEnergyRefillTime = clientTime;
-			}
 			this.coins += coinChange;
 			this.experience += expChange;
 			this.tasksCompleted += tasksCompletedChange;
-			this.energy += energyChange;
 			return true;
 		}
 		return false;
@@ -965,7 +892,7 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateRelativeCoinsAdcolonyvideoswatched (int coinChange, int numAdColonyVideosWatched) {
+	/*public boolean updateRelativeCoinsAdcolonyvideoswatched (int coinChange, int numAdColonyVideosWatched) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -986,7 +913,7 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	/*
 	 * used for in app purchases, armory, finishingnormstructbuild
@@ -1056,7 +983,7 @@ public class User implements Serializable {
 	}
 
 
-	public boolean updateLastGoldmineRetrieval (int diamondChange, Timestamp lastGoldRetrieval) {
+	/*public boolean updateLastGoldmineRetrieval (int diamondChange, Timestamp lastGoldRetrieval) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -1074,7 +1001,7 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 
 	public boolean updateRelativeCoinsCoinsretrievedfromstructs (int coinChange) {
@@ -1145,7 +1072,7 @@ public class User implements Serializable {
 	/*
 	 * used for vault transactions
 	 */
-	public boolean updateRelativeCoinsVault (int coinsChange, int vaultChange) {
+	/*public boolean updateRelativeCoinsVault (int coinsChange, int vaultChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -1161,14 +1088,14 @@ public class User implements Serializable {
 			return true;
 		}
 		return false;
-	}
+	}*/
 
 	/*
 	 * used for battles
 	 */
-	public boolean updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill (
-			int energy, int experience, int coins, int battlesWon, int battlesLost, int fleesChange,
-			boolean simulateEnergyRefill, Timestamp clientTime, boolean deactivateShield,
+	public boolean updateRelativeExperienceCoinsBattlesWonBattlesLostFlees (
+			int experience, int coins, int battlesWon, int battlesLost, int fleesChange,
+			Timestamp clientTime, boolean deactivateShield,
 			boolean activateShield, boolean recordWinLossFlee, int attacksWonDelta, 
 			int defensesWonDelta, int attacksLostDelta, int defensesLostDelta) {
 		Date shieldEndTimeTemp = this.shieldEndTime; //for changing this obj if endTime changes
@@ -1177,7 +1104,6 @@ public class User implements Serializable {
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		if (energy != 0) relativeParams.put(DBConstants.USER__ENERGY, energy);
 		if (experience != 0) relativeParams.put(DBConstants.USER__EXPERIENCE, experience);
 		if (coins != 0) relativeParams.put(DBConstants.USER__COINS, coins);
 		if (recordWinLossFlee) {
@@ -1186,9 +1112,6 @@ public class User implements Serializable {
 		}
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if(simulateEnergyRefill) {
-			absoluteParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, clientTime);
-		}
 		
 		//3 cases:deactivate a shield, activate a shield, do nothing
 		shieldEndTimeTemp = recordTurnOnOffShield(absoluteParams, deactivateShield,
@@ -1201,7 +1124,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.energy +=energy;
+//			this.energy +=energy;
 			this.experience += experience;
 			this.coins += coins;
 			if (recordWinLossFlee) {
@@ -1299,12 +1222,6 @@ public class User implements Serializable {
 		if (diamondChange <= 0) return false;
 
 		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
-		if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
-			relativeParams.put(DBConstants.USER__NUM_TIMES_KIIP_REWARDED, 1);
-		}
-		if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
-			relativeParams.put(DBConstants.USER__NUM_ADCOLONY_VIDEOS_WATCHED, 1);
-		}
 		if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
 			absoluteParams = new HashMap<String, Object>();
 			absoluteParams.put(DBConstants.USER__HAS_RECEIVED_FB_REWARD, 1);
@@ -1314,12 +1231,6 @@ public class User implements Serializable {
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.diamonds += diamondChange;
-			if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {
-				this.numTimesKiipRewarded++;
-			}
-			if (freeDiamondsType == EarnFreeDiamondsType.ADCOLONY) {
-				this.numAdColonyVideosWatched++;
-			}
 			if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
 				this.hasReceivedfbReward = true;
 			}
@@ -1328,13 +1239,13 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateNameUserTypeUdid(UserType newUserType, String newName,
+	public boolean updateNameUserTypeUdid(String newName,
 			String newUdid, int relativeDiamondCost) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (newUserType != null) absoluteParams.put(DBConstants.USER__TYPE, newUserType.getNumber());
+		//if (newUserType != null) absoluteParams.put(DBConstants.USER__TYPE, newUserType.getNumber());
 		if (newName != null) absoluteParams.put(DBConstants.USER__NAME, newName);
 		if (newUdid != null) absoluteParams.put(DBConstants.USER__UDID, newUdid);
 
@@ -1344,7 +1255,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
 				relativeParams, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
-			if (newUserType != null) this.type = newUserType;
+			//if (newUserType != null) this.type = newUserType;
 			if (newName != null) this.name = newName;
 			if (newUdid != null) this.udid = newUdid;
 			this.diamonds += relativeDiamondCost;
@@ -1544,46 +1455,6 @@ public class User implements Serializable {
 	}
 
 
-	public UserType getType() {
-		return type;
-	}
-
-
-	public void setType(UserType type) {
-		this.type = type;
-	}
-
-
-	public int getEnergy() {
-		return energy;
-	}
-
-
-	public void setEnergy(int energy) {
-		this.energy = energy;
-	}
-
-
-	public Date getLastEnergyRefillTime() {
-		return lastEnergyRefillTime;
-	}
-
-
-	public void setLastEnergyRefillTime(Date lastEnergyRefillTime) {
-		this.lastEnergyRefillTime = lastEnergyRefillTime;
-	}
-
-
-	public int getEnergyMax() {
-		return energyMax;
-	}
-
-
-	public void setEnergyMax(int energyMax) {
-		this.energyMax = energyMax;
-	}
-
-
 	public int getDiamonds() {
 		return diamonds;
 	}
@@ -1601,36 +1472,6 @@ public class User implements Serializable {
 
 	public void setCoins(int coins) {
 		this.coins = coins;
-	}
-
-
-	public int getMarketplaceDiamondsEarnings() {
-		return marketplaceDiamondsEarnings;
-	}
-
-
-	public void setMarketplaceDiamondsEarnings(int marketplaceDiamondsEarnings) {
-		this.marketplaceDiamondsEarnings = marketplaceDiamondsEarnings;
-	}
-
-
-	public int getMarketplaceCoinsEarnings() {
-		return marketplaceCoinsEarnings;
-	}
-
-
-	public void setMarketplaceCoinsEarnings(int marketplaceCoinsEarnings) {
-		this.marketplaceCoinsEarnings = marketplaceCoinsEarnings;
-	}
-
-
-	public int getVaultBalance() {
-		return vaultBalance;
-	}
-
-
-	public void setVaultBalance(int vaultBalance) {
-		this.vaultBalance = vaultBalance;
 	}
 
 
@@ -1714,66 +1555,6 @@ public class User implements Serializable {
 	}
 
 
-	public Location getUserLocation() {
-		return userLocation;
-	}
-
-
-	public void setUserLocation(Location userLocation) {
-		this.userLocation = userLocation;
-	}
-
-
-	public int getNumPostsInMarketplace() {
-		return numPostsInMarketplace;
-	}
-
-
-	public void setNumPostsInMarketplace(int numPostsInMarketplace) {
-		this.numPostsInMarketplace = numPostsInMarketplace;
-	}
-
-
-	public int getNumMarketplaceSalesUnredeemed() {
-		return numMarketplaceSalesUnredeemed;
-	}
-
-
-	public void setNumMarketplaceSalesUnredeemed(int numMarketplaceSalesUnredeemed) {
-		this.numMarketplaceSalesUnredeemed = numMarketplaceSalesUnredeemed;
-	}
-
-
-	public long getWeaponEquippedUserEquipId() {
-		return weaponEquippedUserEquipId;
-	}
-
-
-	public void setWeaponEquippedUserEquipId(long weaponEquippedUserEquipId) {
-		this.weaponEquippedUserEquipId = weaponEquippedUserEquipId;
-	}
-
-
-	public long getArmorEquippedUserEquipId() {
-		return armorEquippedUserEquipId;
-	}
-
-
-	public void setArmorEquippedUserEquipId(long armorEquippedUserEquipId) {
-		this.armorEquippedUserEquipId = armorEquippedUserEquipId;
-	}
-
-
-	public long getAmuletEquippedUserEquipId() {
-		return amuletEquippedUserEquipId;
-	}
-
-
-	public void setAmuletEquippedUserEquipId(long amuletEquippedUserEquipId) {
-		this.amuletEquippedUserEquipId = amuletEquippedUserEquipId;
-	}
-
-
 	public Date getLastLogin() {
 		return lastLogin;
 	}
@@ -1821,26 +1602,6 @@ public class User implements Serializable {
 
 	public void setNumBadges(int numBadges) {
 		this.numBadges = numBadges;
-	}
-
-
-	public Date getLastShortLicensePurchaseTime() {
-		return lastShortLicensePurchaseTime;
-	}
-
-
-	public void setLastShortLicensePurchaseTime(Date lastShortLicensePurchaseTime) {
-		this.lastShortLicensePurchaseTime = lastShortLicensePurchaseTime;
-	}
-
-
-	public Date getLastLongLicensePurchaseTime() {
-		return lastLongLicensePurchaseTime;
-	}
-
-
-	public void setLastLongLicensePurchaseTime(Date lastLongLicensePurchaseTime) {
-		this.lastLongLicensePurchaseTime = lastLongLicensePurchaseTime;
 	}
 
 
@@ -1894,26 +1655,6 @@ public class User implements Serializable {
 	}
 
 
-	public int getNumAdColonyVideosWatched() {
-		return numAdColonyVideosWatched;
-	}
-
-
-	public void setNumAdColonyVideosWatched(int numAdColonyVideosWatched) {
-		this.numAdColonyVideosWatched = numAdColonyVideosWatched;
-	}
-
-
-	public int getNumTimesKiipRewarded() {
-		return numTimesKiipRewarded;
-	}
-
-
-	public void setNumTimesKiipRewarded(int numTimesKiipRewarded) {
-		this.numTimesKiipRewarded = numTimesKiipRewarded;
-	}
-
-
 	public int getNumConsecutiveDaysPlayed() {
 		return numConsecutiveDaysPlayed;
 	}
@@ -1924,16 +1665,6 @@ public class User implements Serializable {
 	}
 
 
-	public int getNumGroupChatsRemaining() {
-		return numGroupChatsRemaining;
-	}
-
-
-	public void setNumGroupChatsRemaining(int numGroupChatsRemaining) {
-		this.numGroupChatsRemaining = numGroupChatsRemaining;
-	}
-
-
 	public int getClanId() {
 		return clanId;
 	}
@@ -1941,27 +1672,6 @@ public class User implements Serializable {
 
 	public void setClanId(int clanId) {
 		this.clanId = clanId;
-	}
-
-
-	public Date getLastGoldmineRetrieval() {
-		return lastGoldmineRetrieval;
-	}
-
-
-	public void setLastGoldmineRetrieval(Date lastGoldmineRetrieval) {
-		this.lastGoldmineRetrieval = lastGoldmineRetrieval;
-	}
-
-
-	public Date getLastMarketplaceNotificationTime() {
-		return lastMarketplaceNotificationTime;
-	}
-
-
-	public void setLastMarketplaceNotificationTime(
-			Date lastMarketplaceNotificationTime) {
-		this.lastMarketplaceNotificationTime = lastMarketplaceNotificationTime;
 	}
 
 
@@ -1995,46 +1705,6 @@ public class User implements Serializable {
 	}
 
 
-	public long getWeaponTwoEquippedUserEquipId() {
-		return weaponTwoEquippedUserEquipId;
-	}
-
-
-	public void setWeaponTwoEquippedUserEquipId(int weaponTwoEquippedUserEquipId) {
-		this.weaponTwoEquippedUserEquipId = weaponTwoEquippedUserEquipId;
-	}
-
-
-	public long getArmorTwoEquippedUserEquipId() {
-		return armorTwoEquippedUserEquipId;
-	}
-
-
-	public void setArmorTwoEquippedUserEquipId(long armorTwoEquippedUserEquipId) {
-		this.armorTwoEquippedUserEquipId = armorTwoEquippedUserEquipId;
-	}
-
-
-	public long getAmuletTwoEquippedUserEquipId() {
-		return amuletTwoEquippedUserEquipId;
-	}
-
-
-	public void setAmuletTwoEquippedUserEquipId(int amuletTwoEquippedUserEquipId) {
-		this.amuletTwoEquippedUserEquipId = amuletTwoEquippedUserEquipId;
-	}
-
-
-	public int getPrestigeLevel() {
-		return prestigeLevel;
-	}
-
-
-	public void setPrestigeLevel(int prestigeLevel) {
-		this.prestigeLevel = prestigeLevel;
-	}
-
-
 	public int getNumAdditionalForgeSlots() {
 		return numAdditionalForgeSlots;
 	}
@@ -2052,16 +1722,6 @@ public class User implements Serializable {
 
 	public void setNumBeginnerSalesPurchased(int numBeginnerSalesPurchased) {
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
-	}
-
-
-	public boolean isMentor() {
-		return isMentor;
-	}
-
-
-	public void setMentor(boolean isMentor) {
-		this.isMentor = isMentor;
 	}
 
 
@@ -2147,52 +1807,31 @@ public class User implements Serializable {
 		this.defensesLost = defensesLost;
 	}
 
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", level=" + level + ", type="
-				+ type + ", energy=" + energy + ", lastEnergyRefillTime="
-				+ lastEnergyRefillTime + ", energyMax=" + energyMax + ", diamonds="
-				+ diamonds + ", coins=" + coins + ", marketplaceDiamondsEarnings="
-				+ marketplaceDiamondsEarnings + ", marketplaceCoinsEarnings="
-				+ marketplaceCoinsEarnings + ", vaultBalance=" + vaultBalance
-				+ ", experience=" + experience + ", tasksCompleted=" + tasksCompleted
-				+ ", battlesWon=" + battlesWon + ", battlesLost=" + battlesLost
-				+ ", flees=" + flees + ", referralCode=" + referralCode
-				+ ", numReferrals=" + numReferrals + ", udid=" + udid
-				+ ", userLocation=" + userLocation + ", numPostsInMarketplace="
-				+ numPostsInMarketplace + ", numMarketplaceSalesUnredeemed="
-				+ numMarketplaceSalesUnredeemed + ", weaponEquippedUserEquipId="
-				+ weaponEquippedUserEquipId + ", armorEquippedUserEquipId="
-				+ armorEquippedUserEquipId + ", amuletEquippedUserEquipId="
-				+ amuletEquippedUserEquipId + ", lastLogin=" + lastLogin
-				+ ", lastLogout=" + lastLogout + ", deviceToken=" + deviceToken
+		return "User [id=" + id + ", name=" + name + ", level=" + level
+				+ ", diamonds=" + diamonds + ", coins=" + coins + ", experience="
+				+ experience + ", tasksCompleted=" + tasksCompleted + ", battlesWon="
+				+ battlesWon + ", battlesLost=" + battlesLost + ", flees=" + flees
+				+ ", referralCode=" + referralCode + ", numReferrals=" + numReferrals
+				+ ", udid=" + udid + ", lastLogin=" + lastLogin + ", lastLogout="
+				+ lastLogout + ", deviceToken=" + deviceToken
 				+ ", lastBattleNotificationTime=" + lastBattleNotificationTime
-				+ ", numBadges=" + numBadges + ", lastShortLicensePurchaseTime="
-				+ lastShortLicensePurchaseTime + ", lastLongLicensePurchaseTime="
-				+ lastLongLicensePurchaseTime + ", isFake=" + isFake + ", createTime="
+				+ ", numBadges=" + numBadges + ", isFake=" + isFake + ", createTime="
 				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId=" + apsalarId
 				+ ", numCoinsRetrievedFromStructs=" + numCoinsRetrievedFromStructs
-				+ ", numAdColonyVideosWatched=" + numAdColonyVideosWatched
-				+ ", numTimesKiipRewarded=" + numTimesKiipRewarded
 				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
-				+ ", numGroupChatsRemaining=" + numGroupChatsRemaining + ", clanId="
-				+ clanId + ", lastGoldmineRetrieval=" + lastGoldmineRetrieval
-				+ ", lastMarketplaceNotificationTime="
-				+ lastMarketplaceNotificationTime + ", lastWallPostNotificationTime="
+				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
 				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
 				+ ", hasReceivedfbReward=" + hasReceivedfbReward
-				+ ", weaponTwoEquippedUserEquipId=" + weaponTwoEquippedUserEquipId
-				+ ", armorTwoEquippedUserEquipId=" + armorTwoEquippedUserEquipId
-				+ ", amuletTwoEquippedUserEquipId=" + amuletTwoEquippedUserEquipId
-				+ ", prestigeLevel=" + prestigeLevel + ", numAdditionalForgeSlots="
-				+ numAdditionalForgeSlots + ", numBeginnerSalesPurchased="
-				+ numBeginnerSalesPurchased + ", isMentor=" + isMentor
+				+ ", numAdditionalForgeSlots=" + numAdditionalForgeSlots
+				+ ", numBeginnerSalesPurchased=" + numBeginnerSalesPurchased
 				+ ", hasActiveShield=" + hasActiveShield + ", shieldEndTime="
 				+ shieldEndTime + ", elo=" + elo + ", rank=" + rank
 				+ ", lastTimeQueued=" + lastTimeQueued + ", attacksWon=" + attacksWon
 				+ ", defensesWon=" + defensesWon + ", attacksLost=" + attacksLost
 				+ ", defensesLost=" + defensesLost + "]";
 	}
-
 
 }

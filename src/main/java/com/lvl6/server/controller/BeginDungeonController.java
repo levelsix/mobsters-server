@@ -150,12 +150,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	return false;
     }
     
-    if(!userHasSufficientStamergy(u, aTask)) {
-      log.error("user error: use does not have enough stamergy for task" +
-          "user stamergy=" + u.getEnergy() + "\t task=" + aTask);
-      resBuilder.setStatus(BeginDungeonStatus.FAIL_INSUFFICIENT_STAMERGY);
-      return false;
-    }
+//    if(!userHasSufficientStamergy(u, aTask)) {
+//      log.error("user error: use does not have enough stamergy for task" +
+//          "user stamergy=" + u.getEnergy() + "\t task=" + aTask);
+//      resBuilder.setStatus(BeginDungeonStatus.FAIL_INSUFFICIENT_STAMERGY);
+//      return false;
+//    }
 
     UserTask aUserTask = UserTaskRetrieveUtils.getUserTaskForUserId(userId);
     if(null != aUserTask) {
@@ -172,13 +172,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   /* 
    * Return true if user has energy >= to energy cost to attack boss
    */
-  private boolean userHasSufficientStamergy(User u, Task t) {
-    int stamergyCost = t.getEnergyCost();
-    int userEnergy = u.getEnergy();
-    
-    boolean enoughStamergy = userEnergy >= stamergyCost;
-    return enoughStamergy;
-  }
+//  private boolean userHasSufficientStamergy(User u, Task t) {
+//    int stamergyCost = t.getEnergyCost();
+//    int userEnergy = u.getEnergy();
+//    
+//    boolean enoughStamergy = userEnergy >= stamergyCost;
+//    return enoughStamergy;
+//  }
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
 		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, List<Long> utIdList,
@@ -197,16 +197,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  //calculate the silver that the user could gain for this task
 	  int silverGained = MiscMethods.sumMap(stageNumsToSilvers);
 	  
-	  //charge the user's stamergy
-	  boolean simulateEnergyRefill =
-			  (u.getEnergy() == u.getEnergyMax());
-	  int energyChange = t.getEnergyCost() * -1;
-	  if (!u.updateRelativeCoinsExpTaskscompletedEnergySimulateenergyrefill(
-			  0, 0, 0, energyChange, simulateEnergyRefill, clientTime)) {
+	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
 		  log.error("problem with updating user stats post-task. silverGained="
 				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
-				  " energyChange=" + energyChange + ", clientTime=" + clientTime +
-				  ", simulateEnergyRefill=" + simulateEnergyRefill + ", user=" + u);
+				  ", clientTime=" + clientTime + ", user=" + u);
 		  return false;
 	  }
 

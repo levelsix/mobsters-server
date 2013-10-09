@@ -204,8 +204,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		boolean success = queuedUser.updateLastTimeQueued(queueTime);
 		if(success) {
 			//only change user shield stuff, no wins, loss flees
-			return attacker.updateRelativeEnergyExperienceCoinsBattlesWonBattlesLostFleesSimulateEnergyRefill (
-					0, 0, -1*cost, 0, 0, 0,  false, queueTime, true, false, false, 0, 0, 0, 0);  
+			return attacker.updateRelativeExperienceCoinsBattlesWonBattlesLostFlees (
+					0, -1*cost, 0, 0, 0, queueTime, true, false, false, 0, 0, 0, 0);  
 		}
 		else {
 			log.error("unexpected error: could not update user's last queue time");

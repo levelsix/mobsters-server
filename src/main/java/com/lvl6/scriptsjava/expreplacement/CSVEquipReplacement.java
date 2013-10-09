@@ -2,7 +2,6 @@ package com.lvl6.scriptsjava.expreplacement;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,9 +10,6 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-import com.lvl6.info.Task;
-import com.lvl6.properties.DBConstants;
-import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.utils.DBConnection;
 
 public class CSVEquipReplacement {

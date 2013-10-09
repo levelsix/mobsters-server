@@ -27,7 +27,6 @@ import com.lvl6.proto.EventProto.QuestRedeemResponseProto;
 import com.lvl6.proto.EventProto.QuestRedeemResponseProto.Builder;
 import com.lvl6.proto.EventProto.QuestRedeemResponseProto.QuestRedeemStatus;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserType;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -100,7 +99,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           for (Integer availableQuestId : availableQuestIds) {
             Quest q = questIdsToQuests.get(availableQuestId);
             if (q.getQuestsRequiredForThis().contains(questId)) {
-              resBuilder.addNewlyAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(senderProto.getUserType(), q));
+              resBuilder.addNewlyAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(q));
             }
           }
         }
@@ -130,7 +129,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       if (legitRedeem) {
         User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-        int previousSilver = user.getCoins() + user.getVaultBalance();
+        int previousSilver = user.getCoins();
         int previousGold = user.getDiamonds();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
@@ -149,13 +148,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
-    if (legitRedeem && quest != null && userQuest != null && senderProto.getUserType() != null) {
-      clearUserQuestData(quest, userQuest, senderProto.getUserType());
+    if (legitRedeem && quest != null && userQuest != null) {
+      clearUserQuestData(quest, userQuest);
     }
 
   }
 
-  private void clearUserQuestData(Quest quest, UserQuest userQuest, UserType userType) {
+  private void clearUserQuestData(Quest quest, UserQuest userQuest) {
     if (quest.getTasksRequired() != null && quest.getTasksRequired().size() > 0) {
       if (!DeleteUtils.get().deleteUserQuestInfoInTaskProgressAndCompletedTasks(userQuest.getUserId(), userQuest.getQuestId(), quest.getTasksRequired().size())) {
         log.error("problem with deleting user quest info in user quest task tables. questid=" + userQuest.getQuestId() 

@@ -353,7 +353,7 @@ public class ClanTowersScheduledTasks {
 		  int currentCurrency = 0;
 		  if(isSilver) {
 		    //record total silver, including silver in the vault
-		    currentCurrency = u.getCoins() + u.getVaultBalance(); 
+		    currentCurrency = u.getCoins(); 
 		  } else {
 		    currentCurrency = u.getDiamonds();
 		  }
