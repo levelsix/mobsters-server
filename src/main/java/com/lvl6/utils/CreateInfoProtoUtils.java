@@ -116,6 +116,8 @@ import com.lvl6.proto.InfoProto.MinimumUserQuestTaskProto;
 import com.lvl6.proto.InfoProto.MinimumUserTaskProto;
 import com.lvl6.proto.InfoProto.MinimumUserUpgradeStructJobProto;
 import com.lvl6.proto.InfoProto.MonsterProto;
+import com.lvl6.proto.InfoProto.MonsterProto.MonsterElement;
+import com.lvl6.proto.InfoProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.InfoProto.MonsterProto.MonsterType;
 import com.lvl6.proto.InfoProto.MonteCardProto;
 import com.lvl6.proto.InfoProto.NeutralCityElementProto;
@@ -1383,8 +1385,7 @@ public class CreateInfoProtoUtils {
 	//individualSilvers should always be set, since silver dropped is within a range
 	public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
 			List<Integer> monsterIds, Map<Integer, Monster> monsterIdsToMonsters,
-			Map<Integer, Integer> monsterIdsToEquipIds, List<Integer> individualSilvers,
-			boolean allowDuplicateMonsterToDropEquip) {
+			List<Boolean> puzzlePiecesDropped, List<Integer> individualSilvers) {
 
 		TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
 		if (null == ts) {
@@ -1396,36 +1397,21 @@ public class CreateInfoProtoUtils {
 		//holds all the monsterProtos
 		List<MonsterProto> mpList = new ArrayList<MonsterProto>();
 
-		Set<Integer> monsterIdsSoFar = new HashSet<Integer>();
 		for (int i = 0; i < monsterIds.size(); i++) {
 			int monsterId = monsterIds.get(i);
-			int silverDrop = individualSilvers.get(i);
 			Monster m;
+			//retrieve monster if not given
 			if (!monsterIdsToMonsters.containsKey(monsterId)) {
 				m = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
 			} else {
 				m = monsterIdsToMonsters.get(monsterId);
 			}
+			
+			boolean puzzlePieceDropped = puzzlePiecesDropped.get(i);
+			int silverDrop = individualSilvers.get(i);
 
-			int equipId = ControllerConstants.NOT_SET;
-			if (monsterIdsToEquipIds.containsKey(monsterId)) {
-
-				//case occurs where we allow only one drop in a stage and
-				//if stage has 2 of monster1, only one monster1 can drop an equip
-				if (!allowDuplicateMonsterToDropEquip &&
-						monsterIdsSoFar.contains(monsterIdsSoFar)) {
-					//since we have seen this monster before, don't assign
-					//an equip id to this duplicate monster
-
-				} else {
-					//we have not seen this monster before
-					equipId = monsterIdsToEquipIds.get(monsterId);
-				}
-			}
-
-			MonsterProto mp = createMonsterProto(monsterId, m, equipId, silverDrop);
+			MonsterProto mp = createMonsterProto(monsterId, m, puzzlePieceDropped, silverDrop);
 			mpList.add(mp);
-			monsterIdsSoFar.add(monsterId);
 		}
 
 		tspb.addAllMp(mpList);
@@ -1435,31 +1421,41 @@ public class CreateInfoProtoUtils {
 
 	// if caller wanted the silverDrop, then silverDrop should be set
 	public static MonsterProto createMonsterProto(int monsterId, Monster aMonster,
-			int equipId, int silverDrop) {
+			boolean puzzlePieceDropped, int silverDrop) {
 		if (null == aMonster) {
 			aMonster = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
 		}
-
 		MonsterProto.Builder mpb = MonsterProto.newBuilder();
+		
+		
 		mpb.setMonsterId(monsterId);
 		mpb.setName(aMonster.getName());
+		
+		int val = aMonster.getQuality();
+		if (val > 0) {
+			MonsterQuality mq = MonsterQuality.valueOf(val);
+			mpb.setQuality(mq);
+		}
+		mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
+		mpb.setDisplayName(aMonster.getDisplayName());
+		
+		val = aMonster.getElement();
+		if (val > 0) {
+			MonsterElement me = MonsterElement.valueOf(val);
+			mpb.setElement(me);
+		}
 		mpb.setMaxHp(aMonster.getMaxHp());
 		mpb.setImageName(aMonster.getImageName());
-		MonsterType mt = MonsterType.valueOf(aMonster.getMonsterType());
-		mpb.setMonsterType(mt);
-		mpb.setWeaponId(aMonster.getWeaponId());
-		mpb.setWeaponLvl(aMonster.getWeaponLvl());
-		mpb.setArmorId(aMonster.getArmorId());
-		mpb.setArmorLvl(aMonster.getArmorLvl());
-		mpb.setAmuletId(aMonster.getAmuletId());
-		mpb.setAmuletLvl(aMonster.getAmuletLvl());
-		mpb.setExpGained(aMonster.getExpDrop());
-		mpb.setSilverGained(silverDrop);
-
-		if (ControllerConstants.NOT_SET != equipId) {
-			mpb.setEquipId(equipId);
+		
+		val = aMonster.getMonsterType();
+		if (val > 0) {
+			MonsterType mt = MonsterType.valueOf(val);
+			mpb.setMonsterType(mt);
 		}
-
+		mpb.setExpReward(aMonster.getExpReward());
+		mpb.setSilverReward(silverDrop);
+		
+		mpb.setPuzzlePieceDropped(puzzlePieceDropped);
 		return mpb.build();
 	}
 }

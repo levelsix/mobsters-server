@@ -48,7 +48,11 @@ import com.lvl6.utils.DBConnection;
     }
     Map<Integer, Monster> toreturn = new HashMap<Integer, Monster>();
     for (Integer id : ids) {
-      toreturn.put(id,  monsterIdsToMonsters.get(id));
+    	if (monsterIdsToMonsters.containsKey(id)) {
+    		toreturn.put(id,  monsterIdsToMonsters.get(id));
+    	} else {
+    		log.error("db error: no monster exists with id=" +id);
+    	}
     }
     return toreturn;
   }
@@ -94,22 +98,22 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
+    int quality = rs.getInt(i++);
+    int evolutionLevel = rs.getInt(i++);
+    String displayName = rs.getString(i++);
+    int element = rs.getInt(i++);
     int maxHp = rs.getInt(i++);
     String imageName = rs.getString(i++);
     int monsterType = rs.getInt(i++);
-    int weaponId = rs.getInt(i++);
-    int weaponLvl = rs.getInt(i++);
-    int armorId = rs.getInt(i++);
-    int armorLvl = rs.getInt(i++);
-    int amuletId = rs.getInt(i++);
-    int amuletLvl = rs.getInt(i++);
-    int expDrop = rs.getInt(i++);
+    int expReward = rs.getInt(i++);
     int minSilverDrop = rs.getInt(i++);
     int maxSilverDrop = rs.getInt(i++);
+    int numPuzzlePieces = rs.getInt(i++);
+    float puzzlePieceDropRate = rs.getFloat(i++);
     
-    Monster monster = new Monster(id, name, maxHp, imageName, monsterType,
-    		weaponId, weaponLvl, armorId, armorLvl, amuletId, amuletLvl, expDrop,
-    		minSilverDrop, maxSilverDrop);
+    Monster monster = new Monster(id, name, quality, evolutionLevel,
+    		displayName, element, maxHp, imageName, monsterType, expReward,
+    		minSilverDrop, maxSilverDrop, numPuzzlePieces, puzzlePieceDropRate);
 
     monster.setRand(rand);
     return monster;

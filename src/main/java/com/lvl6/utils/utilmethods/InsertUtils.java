@@ -2,12 +2,10 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -939,7 +937,7 @@ public class InsertUtils implements InsertUtil{
     int numRows = userIds.size();
 
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__USER_ID,
-        userIds);
+        userIds);														
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__DATE, dates);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__IS_SILVER, areSilver);
     if(null != changesToCurrencies && 0 < changesToCurrencies.size()) {
@@ -1083,74 +1081,35 @@ public class InsertUtils implements InsertUtil{
   }
   
   //returns the id
-  public long insertIntoUserTask(int userId, int taskId, 
-		  Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
-		  Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
-		  Timestamp startTime) {
+  public long insertIntoUserTaskReturnId(int userId, int taskId, int expGained,
+  		int silverGained, Timestamp startTime) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
 	  //for recording what-dropped in which-stage
-	  StringBuffer equipSb = new StringBuffer();
-	  StringBuffer expSb = new StringBuffer();
-	  StringBuffer silverSb = new StringBuffer();
-	  String space = " ";
-	  
-	  //this is in order to record things in order
-	  Set<Integer> stageNums = stageNumsToEquipIds.keySet();
-	  List<Integer> stageNumsOrdered = new ArrayList<Integer>(stageNums);
-	  Collections.sort(stageNumsOrdered);
-	  
-	  for (Integer i : stageNumsOrdered) {
-		  int equipId = ControllerConstants.NOT_SET;
-		  int exp = 0;
-		  int silver = 0;
-		  
-		  if (stageNumsToEquipIds.containsKey(i)) {
-			  equipId = stageNumsToEquipIds.get(i);
-		  }
-		  if (stageNumsToExps.containsKey(i)) {
-			  exp = stageNumsToExps.get(i);
-		  }
-		  if (stageNumsToSilvers.containsKey(i)) {
-			  silver = stageNumsToSilvers.get(i);
-		  }
-		  equipSb.append(equipId);
-		  equipSb.append(space);
-		  expSb.append(exp);
-		  expSb.append(space);
-		  silverSb.append(silver);
-		  silverSb.append(space);
-	  }
 	  insertParams.put(DBConstants.USER_TASK__USER_ID, userId);
 	  insertParams.put(DBConstants.USER_TASK__TASK_ID, taskId);
-	  insertParams.put(DBConstants.USER_TASK__MONSTER_REWARD_EQUIP_IDS, equipSb.toString());
 	  insertParams.put(DBConstants.USER_TASK__EXP_GAINED, expGained);
 	  insertParams.put(DBConstants.USER_TASK__SILVER_GAINED, silverGained);
 	  insertParams.put(DBConstants.USER_TASK__NUM_REVIVES, 0);
 	  insertParams.put(DBConstants.USER_TASK__START_TIME, startTime);
-	  insertParams.put(DBConstants.USER_TASK__STAGE_EXPS, expSb.toString());
-	  insertParams.put(DBConstants.USER_TASK__STAGE_SILVERS, silverSb.toString());
 	  
 	  long userTaskId = DBConnection.get().insertIntoTableBasicReturnLongId(
 			  DBConstants.TABLE_USER_TASK, insertParams);
 	  return userTaskId;
   }
   
-  public int insertIntoUserTaskHistory(int userId, int taskId,
-		  List<Integer> monsterRewardEquipIds, int expGained, int silverGained,
-		  int numRevives, String stageExps, String stageSilvers, Timestamp startTime,
+  public int insertIntoUserTaskHistory(long userTaskId, int userId, int taskId,
+		  int expGained, int silverGained, int numRevives, Timestamp startTime,
 		  Timestamp endTime, boolean userWon) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
-	  String equipStr = StringUtils.csvIntList(monsterRewardEquipIds);
 	  
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__USER_TASK_ID, userTaskId);
 	  insertParams.put(DBConstants.USER_TASK_HISTORY__USER_ID, userId);
 	  insertParams.put(DBConstants.USER_TASK_HISTORY__TASK_ID, taskId);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__MONSTER_REWARD_EQUIP_IDS, equipStr);
 	  insertParams.put(DBConstants.USER_TASK_HISTORY__EXP_GAINED, expGained);
 	  insertParams.put(DBConstants.USER_TASK_HISTORY__SILVER_GAINED, silverGained);
 	  insertParams.put(DBConstants.USER_TASK_HISTORY__NUM_REVIVES, numRevives);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__STAGE_EXPS, stageExps);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__STAGE_SILVERS, stageSilvers);
+	  insertParams.put(DBConstants.USER_TASK_HISTORY__START_TIME, startTime);
 	  insertParams.put(DBConstants.USER_TASK_HISTORY__END_TIME, endTime);
 	  insertParams.put(DBConstants.USER_TASK_HISTORY__USER_WON, userWon);
 	  
@@ -1159,4 +1118,53 @@ public class InsertUtils implements InsertUtil{
 	  return numInserted; 
   }
 
+	@Override
+	@SuppressWarnings("unchecked")
+	public int insertIntoUserTaskStage(List<Long> userTaskIds,
+			List<Integer> stageNums, List<Integer> monsterIds, List<Integer> expsGained,
+			List<Integer> silversGained, List<Boolean> monsterPiecesDropped) {
+		String tablename = DBConstants.TABLE_USER_TASK_STAGE;
+
+		@SuppressWarnings("rawtypes")
+    Map insertParams = new HashMap<String, List<Object>>();
+		int numRows = stageNums.size();
+
+		insertParams.put(DBConstants.USER_TASK_STAGE__USER_TASK_ID, userTaskIds);
+    insertParams.put(DBConstants.USER_TASK_STAGE__STAGE_NUM, stageNums);
+    insertParams.put(DBConstants.USER_TASK_STAGE__MONSTER_ID, monsterIds);
+    insertParams.put(DBConstants.USER_TASK_STAGE__EXP_GAINED, expsGained);
+    insertParams.put(DBConstants.USER_TASK_STAGE__SILVER_GAINED, silversGained);
+    insertParams.put(DBConstants.USER_TASK_STAGE__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
+    
+    
+    int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
+        insertParams, numRows);
+    
+    return numInserted;
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public int insertIntoUserTaskStageHistory(List<Long> userTaskId,
+			List<Integer> stageNum, List<Integer> monsterId, List<Integer> expGained,
+			List<Integer> silverGained, List<Boolean> monsterPieceDropped) {
+		String tablename = DBConstants.TABLE_USER_TASK_STAGE_HISTORY;
+		int numRows = stageNum.size();
+		
+		@SuppressWarnings("rawtypes")
+    Map insertParams = new HashMap<String, List<Object>>();
+    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__USER_TASK_ID, userTaskId);
+    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__STAGE_NUM, stageNum);
+    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__MONSTER_ID, monsterId);
+    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__EXP_GAINED, expGained);
+    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__SILVER_GAINED, silverGained);
+    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPieceDropped);
+    
+    int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
+        insertParams, numRows);
+    
+    return numInserted;
+	}
+
+  
 }

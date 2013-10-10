@@ -2,37 +2,28 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 public class UserTask implements Serializable {
 
-	private static final long serialVersionUID = 523973952772559434L;
+	private static final long serialVersionUID = -3612315843594872687L;
 	private long id;
 	private int userId;
 	private int taskId;
-	private List<Integer> monsterRewardEquipIds;
 	public int expGained;
 	public int silverGained;
 	public int numRevives;
 	private Date startDate;
-	private String stageExps;
-	private String stageSilvers;
 	
-	public UserTask(long id, int userId, int taskId,
-			List<Integer> monsterRewardEquipIds, int expGained,
-			int silverGained, int numRevives, Date startDate, String stageExps,
-			String stageSilvers) {
+	public UserTask(long id, int userId, int taskId, int expGained,
+			int silverGained, int numRevives, Date startDate) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.taskId = taskId;
-		this.monsterRewardEquipIds = monsterRewardEquipIds;
 		this.expGained = expGained;
 		this.silverGained = silverGained;
 		this.numRevives = numRevives;
 		this.startDate = startDate;
-		this.stageExps = stageExps;
-		this.stageSilvers = stageSilvers;
 	}
 
 	public long getId() {
@@ -57,14 +48,6 @@ public class UserTask implements Serializable {
 
 	public void setTaskId(int taskId) {
 		this.taskId = taskId;
-	}
-
-	public List<Integer> getMonsterRewardEquipIds() {
-		return monsterRewardEquipIds;
-	}
-
-	public void setMonsterRewardEquipIds(List<Integer> monsterRewardEquipIds) {
-		this.monsterRewardEquipIds = monsterRewardEquipIds;
 	}
 
 	public int getExpGained() {
@@ -99,30 +82,11 @@ public class UserTask implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public String getStageExps() {
-		return stageExps;
-	}
-
-	public void setStageExps(String stageExps) {
-		this.stageExps = stageExps;
-	}
-
-	public String getStageSilvers() {
-		return stageSilvers;
-	}
-
-	public void setStageSilvers(String stageSilvers) {
-		this.stageSilvers = stageSilvers;
-	}
-
 	@Override
 	public String toString() {
-		return "UserTask [id=" + id + ", userId=" + userId + ", taskId="
-				+ taskId + ", monsterRewardEquipIds=" + monsterRewardEquipIds
+		return "UserTask [id=" + id + ", userId=" + userId + ", taskId=" + taskId
 				+ ", expGained=" + expGained + ", silverGained=" + silverGained
-				+ ", numRevives=" + numRevives + ", startDate=" + startDate
-				+ ", stageExps=" + stageExps + ", stageSilvers=" + stageSilvers
-				+ "]";
+				+ ", numRevives=" + numRevives + ", startDate=" + startDate + "]";
 	}
 	
 }

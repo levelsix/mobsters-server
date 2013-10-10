@@ -78,29 +78,21 @@ import com.lvl6.utils.DBConnection;
     int userId = rs.getInt(i++);
     int taskId = rs.getInt(i++);
     
-    String monsterRewardEquipIdsStr = rs.getString(i++);
-    List<Integer> monsterRewardEquipIds = new ArrayList<Integer>();
-    if (monsterRewardEquipIdsStr != null) {
-      StringTokenizer st = new StringTokenizer(monsterRewardEquipIdsStr, ", ");
-      while (st.hasMoreTokens()) {
-        monsterRewardEquipIds.add(Integer.parseInt(st.nextToken()));
-      }
-    }
-    
     int expGained = rs.getInt(i++);
     int silverGained = rs.getInt(i++);
     int numRevives = rs.getInt(i++);
     
     Date startDate = null;
-    Timestamp ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-    	startDate = new Date(ts.getTime());
+    try {
+    	Timestamp ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		startDate = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: start_date is null. userId=" + userId, e);
     }
     
-    String stageExps = rs.getString(i++);
-    String stageSilvers = rs.getString(i++);
-    
-    return new UserTask(id, userId, taskId, monsterRewardEquipIds, expGained,
-    		silverGained, numRevives, startDate, stageExps, stageSilvers);
+    return new UserTask(id, userId, taskId, expGained, silverGained,
+    		numRevives, startDate);
   }
 }

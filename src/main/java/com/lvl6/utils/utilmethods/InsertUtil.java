@@ -3,7 +3,6 @@ package com.lvl6.utils.utilmethods;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -162,13 +161,18 @@ public interface InsertUtil {
 	public abstract List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds, List<String> contents,
 			List<Date> timeOfPosts);
 
-	public abstract long insertIntoUserTask(int userId, int taskId, 
-			Map<Integer, Integer> stageNumsToEquipIds, Map<Integer, Integer> stageNumsToExps,
-			Map<Integer, Integer> stageNumsToSilvers, int expGained, int silverGained,
-			Timestamp startTime); 
+	public abstract long insertIntoUserTaskReturnId(int userId, int taskId, 
+			int expGained, int silverGained, Timestamp startTime); 
 
-	public abstract int insertIntoUserTaskHistory(int userId, int taskId,
-			List<Integer> monsterRewardEquipIds, int expGained, int silverGained,
-			int numRevives, String stageExps, String stageSilvers, Timestamp startTime,
-			Timestamp endTime, boolean userWon);
+	public abstract int insertIntoUserTaskHistory(long userTaskId, int userId,
+			int taskId, int expGained, int silverGained, int numRevives,
+			Timestamp startTime, Timestamp endTime, boolean userWon);
+	
+	public abstract int insertIntoUserTaskStage(List<Long> userTaskId, List<Integer> stageNum,
+			List<Integer> monsterId, List<Integer> expGained, List<Integer> silverGained,
+			List<Boolean> monsterPieceDropped);
+	
+	public abstract int insertIntoUserTaskStageHistory(List<Long> userTaskId, List<Integer> stageNum,
+			List<Integer> monsterId, List<Integer> expGained, List<Integer> silverGained,
+			List<Boolean> monsterPieceDropped);
 }

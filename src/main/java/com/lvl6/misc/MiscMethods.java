@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -36,13 +35,11 @@ import com.lvl6.info.Dialogue;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.LeaderboardEvent;
 import com.lvl6.info.LeaderboardEventReward;
-import com.lvl6.info.Location;
 import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityGem;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserEquip;
-import com.lvl6.info.ValidLocationBox;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
@@ -2179,10 +2176,13 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     return Math.max(0, equipDamage);
   }*/
   
-  public static int sumMap(Map<Integer, Integer> aMap) {
+  public static int sumListsInMap(Map<Integer, List<Integer>> aMap) {
 	  int sum = 0;
 	  for (int i : aMap.keySet()) {
-		  sum += aMap.get(i); 
+	  	
+	  	for (Integer value : aMap.get(i)) {
+	  		sum += value;
+	  	}
 	  }
 	  return sum;
   }

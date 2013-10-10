@@ -150,13 +150,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	return false;
     }
     
-//    if(!userHasSufficientStamergy(u, aTask)) {
-//      log.error("user error: use does not have enough stamergy for task" +
-//          "user stamergy=" + u.getEnergy() + "\t task=" + aTask);
-//      resBuilder.setStatus(BeginDungeonStatus.FAIL_INSUFFICIENT_STAMERGY);
-//      return false;
-//    }
-
     UserTask aUserTask = UserTaskRetrieveUtils.getUserTaskForUserId(userId);
     if(null != aUserTask) {
       log.error("unexpected error: user has existing task when beginning another. " +
@@ -168,34 +161,27 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setStatus(BeginDungeonStatus.SUCCESS);
     return true;
   }
-
-  /* 
-   * Return true if user has energy >= to energy cost to attack boss
-   */
-//  private boolean userHasSufficientStamergy(User u, Task t) {
-//    int stamergyCost = t.getEnergyCost();
-//    int userEnergy = u.getEnergy();
-//    
-//    boolean enoughStamergy = userEnergy >= stamergyCost;
-//    return enoughStamergy;
-//  }
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
 		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, List<Long> utIdList,
 		  Map<Integer, TaskStageProto> stageNumsToProtos) {
 	  
-	  //local vars storing eventual db data
-	  Map<Integer, Integer> stageNumsToSilvers = new HashMap<Integer, Integer>();
-	  Map<Integer, Integer> stageNumsToExps = new HashMap<Integer, Integer>();
-	  Map<Integer, Integer> stageNumsToEquipIds= new HashMap<Integer, Integer>();
+	  //local vars storing eventual db data (accounting for multiple monsters in stage)
+	  Map<Integer, List<Integer>> stageNumsToSilvers = new HashMap<Integer, List<Integer>>();
+	  Map<Integer, List<Integer>> stageNumsToExps = new HashMap<Integer, List<Integer>>();
+	  Map<Integer, List<Boolean>> stageNumsToPuzzlePiecesDropped = new HashMap<Integer, List<Boolean>>();
+	  Map<Integer, List<Integer>> stageNumsToMonsterIds = new HashMap<Integer, List<Integer>>();
 	  
 	  //calculate the SINGLE monster the user fights in each stage
 	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(
-			  tsMap, stageNumsToSilvers, stageNumsToExps, stageNumsToEquipIds);
+			  tsMap, stageNumsToSilvers, stageNumsToExps,
+			  stageNumsToPuzzlePiecesDropped, stageNumsToMonsterIds);
+	  
 	  //calculate the exp that the user could gain for this task
-	  int expGained = MiscMethods.sumMap(stageNumsToExps);
+	  int expGained = MiscMethods.sumListsInMap(stageNumsToExps);
 	  //calculate the silver that the user could gain for this task
-	  int silverGained = MiscMethods.sumMap(stageNumsToSilvers);
+	  int silverGained = MiscMethods.sumListsInMap(stageNumsToSilvers);
+	  
 	  
 	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
 		  log.error("problem with updating user stats post-task. silverGained="
@@ -204,10 +190,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  return false;
 	  }
 
-	  //record into user_task stage table	  
-	  long userTaskId = InsertUtils.get().insertIntoUserTask(uId, tId,
-			  stageNumsToEquipIds, stageNumsToExps, stageNumsToSilvers,
+	  //record into user_task table	  
+	  long userTaskId = InsertUtils.get().insertIntoUserTaskReturnId(uId, tId,
 			  expGained, silverGained, clientTime);
+	  
+	  //record into user_task stage table
+	  recordStages(userTaskId, stageNumsToSilvers, stageNumsToExps,
+	  		stageNumsToPuzzlePiecesDropped, stageNumsToMonsterIds);
 	  
 	  //send stuff back up to caller
 	  utIdList.add(userTaskId);
@@ -218,13 +207,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   //stage can have multiple monsters; stage has a drop rate (but is useless for now); 
   //for each stage do the following
   //1) select monster at random
-  //1a) determine if monster drops equip
+  //1a) determine if monster drops a puzzle piece
   //2) create MonsterProto
   //3) create TaskStageProto with the MonsterProto
   private Map<Integer, TaskStageProto> generateStage (
-  		Map<Integer, TaskStage> tsMap, Map<Integer, Integer> stageNumsToSilvers,
-  		Map<Integer, Integer> stageNumsToExps,
-		  Map<Integer, Integer> stageNumsToEquipIds) {
+  		Map<Integer, TaskStage> tsMap, Map<Integer, List<Integer>> stageNumsToSilvers,
+  		Map<Integer, List<Integer>> stageNumsToExps,
+		  Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
+		  Map<Integer, List<Integer>> stageNumsToMonsterIds) {
 	  Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
 	  Random rand = new Random();
 	  
@@ -237,102 +227,138 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  //select one monster, at random. This is the ONE monster for this stage
 		  List<Integer> monsterIds = 
 				  TaskStageMonsterRetrieveUtils.getMonsterIdsForTaskStageId(tsId);
-		  int monsterId = fairlyPickMonster(monsterIds, rand);
+		  int quantity = 1; //change value to increase monsters spawned
+		  List<Integer> spawnedMonsterIds = fairlyPickMonsters(monsterIds, rand, quantity);
 		  
-		  //randomly select a reward, IF ANY, that this monster can drop;
-		  int equipId = selectMonsterEquipReward(monsterId, rand);
 		  
-		  //don't do these two lines if we want to allow user to see more than
-		  //one monster
-		  monsterIds.clear();
-		  monsterIds.add(monsterId);
 		  /*Code below is done such that if more than one monster is generated
 		    above, then user has potential to get the silver and exp from all
 		    the monsters including the one above.*/
+		  
+		  //randomly select a reward, IF ANY, that this monster can drop;
+		  List<Boolean> puzzlePiecesDropped = generatePuzzlePieces(spawnedMonsterIds);
+		  
 		  //determine how much exp and silver the user gets
 		  Set<Integer> uniqMonsterIds = new HashSet<Integer>(monsterIds);
 		  Map<Integer, Monster> monsterIdsToMonsters =
 				  MonsterRetrieveUtils.getMonstersForMonsterIds(uniqMonsterIds);
 		  
-		  int expGained = calculateExpGained(monsterIds, monsterIdsToMonsters);
-		  List<Integer> individualSilvers = new ArrayList<Integer>();
-		  int silverGained = calculateSilverGained(monsterIds, monsterIdsToMonsters,
-				  individualSilvers);
+		  List<Integer> individualExps = calculateExpGained(monsterIds, monsterIdsToMonsters);
+		  List<Integer> individualSilvers =  calculateSilverGained(monsterIds, monsterIdsToMonsters);
 		  
 		  //create the proto
-		  Map<Integer, Integer> monsterIdsToEquipIds = new HashMap<Integer, Integer>();
-		  monsterIdsToEquipIds.put(monsterId, equipId);
-		  //if stage has 2 of monster1, only one monster1 drops an equip
-		  boolean allowDuplicateMonsterToDropEquip = false;
 		  TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(tsId,
-				  ts, monsterIds, monsterIdsToMonsters, monsterIdsToEquipIds,
-				  individualSilvers, allowDuplicateMonsterToDropEquip);
+				  ts, monsterIds, monsterIdsToMonsters, puzzlePiecesDropped,
+				  individualSilvers);
 		  
 		  //update the protos to return to parent function
 		  stageNumsToProtos.put(stageNum, tsp);
-		  stageNumsToSilvers.put(stageNum, silverGained);
-		  stageNumsToExps.put(stageNum, expGained);
-		  stageNumsToEquipIds.put(stageNum, equipId);
+		  stageNumsToSilvers.put(stageNum, individualSilvers);
+		  stageNumsToExps.put(stageNum, individualExps);
+		  stageNumsToPuzzlePieceDropped.put(stageNum, puzzlePiecesDropped);
+		  stageNumsToMonsterIds.put(stageNum, spawnedMonsterIds);
 	  }
 	  
 	  return stageNumsToProtos;
   }
   
-  private int fairlyPickMonster(List<Integer> monsterIds, Random rand) {
-	  int randInt = rand.nextInt(monsterIds.size());
-	  
-	  int luckyId = monsterIds.get(randInt);
-	  return luckyId;
+  private List<Integer> fairlyPickMonsters(List<Integer> monsterIds,
+  		Random rand, int quantity) {
+  	//efficiency check. If only n monsters and want n, return input.
+  	if (monsterIds.size() == quantity) {
+  		return monsterIds;
+  	}
+  	
+  	//return value
+  	List<Integer> selectedMonsterIds = new ArrayList<Integer>();
+  	
+  	List<Integer> copyMonsterIds = new ArrayList<Integer>(monsterIds);
+  	for (int i = 0; i < quantity; i++) {
+  		//select random index
+  		int randInt = rand.nextInt(copyMonsterIds.size());
+  		int luckyId = copyMonsterIds.get(randInt);
+  		
+  		//remove the selected id
+  		copyMonsterIds.remove(randInt);
+  		selectedMonsterIds.add(luckyId);
+  		
+  	}
+	  return selectedMonsterIds;
   }
   
-  //for a monster, choose the reward to give (equipId)
-  //assumption: sum of all the reward drop rates is AT MOST 1
-  private int selectMonsterEquipReward(Integer monsterId, Random rand) {
-	  int equipId = ControllerConstants.NOT_SET;
-	  
-	  double randDouble = rand.nextDouble();
-	  double probabilitySoFar = 0.0d;
-
-	  //get rewards this monster can drop
-	  List<MonsterReward> rewards = MonsterRewardRetrieveUtils.
-			  getMonsterRewardForMonsterId(monsterId);
-	  
-	  //choose a reward, if any
-	  for (MonsterReward mr: rewards) {
-		  probabilitySoFar += mr.getDropRate();
-		  
-		  if (randDouble < probabilitySoFar) {
-			  equipId = mr.getEquipId();
-			  break;
-		  }
-	  }
-	  
-	  return equipId;
+  //for a monster, choose the reward to give (monster puzzle piece)
+  private List<Boolean> generatePuzzlePieces(List<Integer> monsterIds) {
+  	List<Boolean> piecesDropped = new ArrayList<Boolean>();
+  	
+  	Map<Integer, Monster> monsterIdsToMonsters =
+  			MonsterRetrieveUtils.getMonstersForMonsterIds(monsterIds);
+  	
+  	//ostensibly and explicitly preserve ordering in monsterIds
+  	for (int i = 0; i < monsterIds.size(); i++) {
+  		boolean pieceDropped = false;
+  		
+  		int id = monsterIds.get(i);
+  		//to protect against a nonexistent monster, thus null pointer
+  		if (monsterIdsToMonsters.containsKey(id)) {
+  			Monster m = monsterIdsToMonsters.get(id);
+  			pieceDropped = m.didPuzzlePieceDrop();
+  		}
+  		piecesDropped.add(pieceDropped);
+  	}
+  	
+  	return piecesDropped;
   }
   
-  private int calculateExpGained(List<Integer> monsterIds,
+  private List<Integer> calculateExpGained(List<Integer> monsterIds,
 		  Map<Integer, Monster> monsterIdsToMonsters) {
-	  int totalExp = 0;
+  	
+  	List<Integer> individualExps = new ArrayList<Integer>();
+  	
 	  for (int monsterId : monsterIds) {
 		  Monster m = monsterIdsToMonsters.get(monsterId);
-		  totalExp += m.getExpDrop();
+		  int expReward = m.getExpReward();
+		  individualExps.add(expReward);
 	  }
-	  return totalExp;
+	  return individualExps;
   }
   
-  private int calculateSilverGained(List<Integer> monsterIds,
-		  Map<Integer, Monster> monsterIdsToMonsters, List<Integer> individualSilvers) {
-	  int totalSilver = 0;
+  private List<Integer> calculateSilverGained(List<Integer> monsterIds,
+		  Map<Integer, Monster> monsterIdsToMonsters) {
+  	
+  	List<Integer> individualSilvers = new ArrayList<Integer>();
+  	
 	  for (int i = 0; i < monsterIds.size(); i++) {
 		  int monsterId = monsterIds.get(i);
 		  Monster m = monsterIdsToMonsters.get(monsterId);
 		  int silverDrop = m.getSilverDrop(); 
-		  totalSilver += silverDrop;
-		  
-		  //store for the caller's use
 		  individualSilvers.add(silverDrop);
 	  }
-	  return totalSilver;
+	  return individualSilvers;
+  }
+  
+  private void recordStages(long userTaskId, Map<Integer, List<Integer>> stageNumsToSilvers,
+  		Map<Integer, List<Integer>> stageNumsToExps,
+  		Map<Integer, List<Boolean>> stageNumsToPuzzlePiecesDropped,
+  		Map<Integer, List<Integer>> stageNumsToMonsterIds) {
+  	Set<Integer> stageNums = stageNumsToExps.keySet();
+	  List<Integer> stageNumList = new ArrayList<Integer>(stageNums);
+	  Collections.sort(stageNumList);
+	  int size = stageNumList.size();
+	  
+	  
+	  List<Long> userTaskIds = Collections.nCopies(size, userTaskId);
+	  //loop through the individual stages, saving each to the db.
+	  for (int i = 0; i < size; i++) {
+	  	int stageNum = stageNumList.get(i);
+	  	List<Integer> repeatedStageNum = Collections.nCopies(size, stageNum);
+	  	List<Integer> monsterIds = stageNumsToMonsterIds.get(stageNum);
+	  	List<Integer> expsGained = stageNumsToExps.get(stageNum);
+	  	List<Integer> silverGained = stageNumsToSilvers.get(stageNum);
+	  	List<Boolean> monsterPiecesDropped = stageNumsToPuzzlePiecesDropped.get(stageNum);
+	  	
+	  	InsertUtils.get().insertIntoUserTaskStage(userTaskIds, repeatedStageNum,
+	  			monsterIds, expsGained, silverGained, monsterPiecesDropped);
+	  }
   }
   
   private void setResponseBuilder(Builder resBuilder, List<Long> userTaskIdList,

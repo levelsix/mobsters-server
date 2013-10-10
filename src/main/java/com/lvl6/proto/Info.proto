@@ -10,26 +10,39 @@ message TaskStageProto {
 
 message MonsterProto {
 	optional int32 monsterId = 1;
-	optional string name = 2;
-	optional int32 maxHp = 3;
-	optional string imageName = 4;
-	optional MonsterType monsterType = 5;
-	optional int32 weaponId = 6;
-	optional int32 weaponLvl = 7;
-	optional int32 armorId = 8;
-	optional int32 armorLvl = 9;
-	optional int32 amuletId = 10;
-	optional int32 amuletLvl = 11;
-	optional int32 expGained = 12;
-	optional int32 silverGained = 13;
-	
-	//set only if the monster drops it, otherwise don't set it
-	optional int32 equipId = 14; 
+	optional string name = 2; //for grouping purposes
+	optional MonsterQuality quality = 3;
+	optional int32 evolutionLevel = 4;
+	optional string displayName = 5;
+	optional MonsterElement element = 6;
+	optional int32 maxHp = 7;
+	optional string imageName = 8;
+	optional MonsterType monsterType = 9;
+	optional int32 expReward = 10;
+	optional int32 silverReward = 11;
+	optional bool puzzlePieceDropped = 12; 
 	
 	enum MonsterType {
 		REGULAR = 1;
 		MINI_BOSS = 2;
 		BOSS = 3;
+	}
+	
+	enum MonsterQuality {
+		COMMON = 1;
+		UNCOMMON = 2;
+		RARE = 3;
+		ULTRA = 4;
+		EPIC = 5;
+		LEGENDARY = 6;
+	}
+	
+	enum MonsterElement {
+		FIRE = 1;
+		GRASS = 2;
+		WATER = 3;
+		LIGHTNING = 4;
+		DARKNESS = 5;
 	}
 }
 

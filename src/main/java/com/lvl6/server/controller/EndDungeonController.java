@@ -154,17 +154,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  }
 	  
 	  //delete from user_task and insert it into user_task_history
+	  long utId = ut.getId();
 	  int tId = ut.getTaskId();
-	  List<Integer> monsterRewardEquipIds = ut.getMonsterRewardEquipIds();
 	  int numRevives = ut.getNumRevives();
-	  String stageExps = ut.getStageExps();
-	  String stageSilvers = ut.getStageSilvers();
 	  Date startDate = ut.getStartDate();
 	  long startMillis = startDate.getTime();
 	  Timestamp startTime = new Timestamp(startMillis);
-	  int numInserted = InsertUtils.get().insertIntoUserTaskHistory(uId, tId,
-			  monsterRewardEquipIds, expGained, silverGained, numRevives,
-			  stageExps, stageSilvers, startTime, clientTime, userWon);
+	  int numInserted = InsertUtils.get().insertIntoUserTaskHistory(utId,uId, tId,
+			  expGained, silverGained, numRevives, startTime, clientTime, userWon);
 	  if (1 != numInserted) {
 		  log.error("unexpected error: error when inserting into user_task_history. " +
 		  		"numInserted=" + numInserted + " Attempting to undo shi");
