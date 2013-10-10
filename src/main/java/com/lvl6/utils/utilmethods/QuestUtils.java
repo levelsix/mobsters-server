@@ -80,7 +80,6 @@ public class QuestUtils {
 
       List<Integer> buildStructJobsRequired = quest.getBuildStructJobsRequired();
       List<Integer> upgradeStructJobsRequired = quest.getUpgradeStructJobsRequired();
-      List<Integer> possessEquipJobsRequired = quest.getPossessEquipJobsRequired();
 
       if ((buildStructJobsRequired != null && buildStructJobsRequired.size()>0) || 
           (upgradeStructJobsRequired != null && upgradeStructJobsRequired.size()>0)) {
@@ -125,18 +124,18 @@ public class QuestUtils {
           }
         }
       }
-      if (possessEquipJobsRequired != null && possessEquipJobsRequired.size() > 0) {
-        Map<Integer, List<UserEquip>> equipIdsToUserEquips = RetrieveUtils.userEquipRetrieveUtils().getEquipIdsToUserEquipsForUser(userQuest.getUserId());
-        if (equipIdsToUserEquips == null || equipIdsToUserEquips.size() <= 0) {
-          return false;
-        }
-        Map<Integer, PossessEquipJob> pejs = PossessEquipJobRetrieveUtils.getPossessEquipJobsForPossessEquipJobIds(possessEquipJobsRequired);
-        for (PossessEquipJob pej : pejs.values()) {
-          if (equipIdsToUserEquips.get(pej.getEquipId()) == null || equipIdsToUserEquips.get(pej.getEquipId()).size() < pej.getQuantity()) {
-            return false;
-          } 
-        }
-      }
+//      if (possessEquipJobsRequired != null && possessEquipJobsRequired.size() > 0) {
+//        Map<Integer, List<UserEquip>> equipIdsToUserEquips = RetrieveUtils.userEquipRetrieveUtils().getEquipIdsToUserEquipsForUser(userQuest.getUserId());
+//        if (equipIdsToUserEquips == null || equipIdsToUserEquips.size() <= 0) {
+//          return false;
+//        }
+//        Map<Integer, PossessEquipJob> pejs = PossessEquipJobRetrieveUtils.getPossessEquipJobsForPossessEquipJobIds(possessEquipJobsRequired);
+//        for (PossessEquipJob pej : pejs.values()) {
+//          if (equipIdsToUserEquips.get(pej.getEquipId()) == null || equipIdsToUserEquips.get(pej.getEquipId()).size() < pej.getQuantity()) {
+//            return false;
+//          } 
+//        }
+//      }
       sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(server, quest, userQuest, senderProto,
           sendCompleteMessageIfJustCompleted);
       return true;

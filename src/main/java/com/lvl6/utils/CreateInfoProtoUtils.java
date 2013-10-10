@@ -278,7 +278,6 @@ public class CreateInfoProtoUtils {
 			questGiverName = nce.getGoodName();
 		}
 		questGiverImageSuffix = quest.getGoodQuestGiverImageSuffix();
-		defeatTypeReqs = quest.getDefeatGoodGuysJobsRequired();
 
 		FullQuestProto.Builder builder = FullQuestProto.newBuilder().setQuestId(quest.getId()).setCityId(quest.getCityId()).setName(name)
 				.setDescription(description).setDoneResponse(doneResponse).setAssetNumWithinCity(quest.getAssetNumWithinCity())
@@ -286,7 +285,7 @@ public class CreateInfoProtoUtils {
 				.setExpGained(quest.getExpGained()).setEquipIdGained(quest.getEquipIdGained()).addAllQuestsRequiredForThis(quest.getQuestsRequiredForThis())
 				.addAllTaskReqs(quest.getTasksRequired()).addAllUpgradeStructJobsReqs(quest.getUpgradeStructJobsRequired())
 				.addAllBuildStructJobsReqs(quest.getBuildStructJobsRequired())
-				.addAllDefeatTypeReqs(defeatTypeReqs).addAllPossessEquipJobReqs(quest.getPossessEquipJobsRequired())
+				.addAllDefeatTypeReqs(defeatTypeReqs)
 				.setNumComponentsForGood(quest.getNumComponents())
 				.setCoinRetrievalReq(quest.getCoinRetrievalAmountRequired()).setQuestGiverImageSuffix(questGiverImageSuffix);
 		if (acceptDialogue != null) {
@@ -668,35 +667,34 @@ public class CreateInfoProtoUtils {
 					}
 
 					List<Integer> defeatTypeJobsRequired; 
-					defeatTypeJobsRequired = quest.getDefeatGoodGuysJobsRequired();
-					if (defeatTypeJobsRequired != null && defeatTypeJobsRequired.size() > 0) {
-						if (questIdToUserDefeatTypeJobsCompletedForQuestForUser == null) {
-							questIdToUserDefeatTypeJobsCompletedForQuestForUser = RetrieveUtils.userQuestsCompletedDefeatTypeJobsRetrieveUtils().getQuestIdToUserDefeatTypeJobsCompletedForQuestForUser(userQuest.getUserId());
-						}
-						List<Integer> userDefeatTypeJobsCompletedForQuest = questIdToUserDefeatTypeJobsCompletedForQuestForUser.get(userQuest.getQuestId());
-						for (Integer requiredDefeatTypeJobId : defeatTypeJobsRequired) {
-							boolean defeatJobCompletedForQuest = false;
-							Integer numTimesUserDidJob = null;
-							if (userQuest.isDefeatTypeJobsComplete() || (userDefeatTypeJobsCompletedForQuest != null && userDefeatTypeJobsCompletedForQuest.contains(requiredDefeatTypeJobId))) {
-								defeatJobCompletedForQuest = true;
-								numComponentsComplete++;
-							} else {
-								if (questIdToDefeatTypeJobIdsToNumDefeated == null) {
-									questIdToDefeatTypeJobIdsToNumDefeated = UserQuestsDefeatTypeJobProgressRetrieveUtils.getQuestIdToDefeatTypeJobIdsToNumDefeated(userQuest.getUserId());
-								}
-								Map<Integer, Integer> defeatTypeJobIdsToNumDefeatedForUserQuest = questIdToDefeatTypeJobIdsToNumDefeated.get(userQuest.getQuestId());
-								if (defeatTypeJobIdsToNumDefeatedForUserQuest != null) {
-									numTimesUserDidJob = defeatTypeJobIdsToNumDefeatedForUserQuest.get(requiredDefeatTypeJobId);
-									if (numTimesUserDidJob == null) {
-										numTimesUserDidJob = 0;
-									}
-								} else {
-									numTimesUserDidJob = 0;
-								}
-							}
-							builder.addRequiredDefeatTypeJobProgress(createMinimumUserDefeatTypeJobProto(userQuest, requiredDefeatTypeJobId, defeatJobCompletedForQuest, numTimesUserDidJob));
-						}
-					}
+//					if (defeatTypeJobsRequired != null && defeatTypeJobsRequired.size() > 0) {
+//						if (questIdToUserDefeatTypeJobsCompletedForQuestForUser == null) {
+//							questIdToUserDefeatTypeJobsCompletedForQuestForUser = RetrieveUtils.userQuestsCompletedDefeatTypeJobsRetrieveUtils().getQuestIdToUserDefeatTypeJobsCompletedForQuestForUser(userQuest.getUserId());
+//						}
+//						List<Integer> userDefeatTypeJobsCompletedForQuest = questIdToUserDefeatTypeJobsCompletedForQuestForUser.get(userQuest.getQuestId());
+//						for (Integer requiredDefeatTypeJobId : defeatTypeJobsRequired) {
+//							boolean defeatJobCompletedForQuest = false;
+//							Integer numTimesUserDidJob = null;
+//							if (userQuest.isDefeatTypeJobsComplete() || (userDefeatTypeJobsCompletedForQuest != null && userDefeatTypeJobsCompletedForQuest.contains(requiredDefeatTypeJobId))) {
+//								defeatJobCompletedForQuest = true;
+//								numComponentsComplete++;
+//							} else {
+//								if (questIdToDefeatTypeJobIdsToNumDefeated == null) {
+//									questIdToDefeatTypeJobIdsToNumDefeated = UserQuestsDefeatTypeJobProgressRetrieveUtils.getQuestIdToDefeatTypeJobIdsToNumDefeated(userQuest.getUserId());
+//								}
+//								Map<Integer, Integer> defeatTypeJobIdsToNumDefeatedForUserQuest = questIdToDefeatTypeJobIdsToNumDefeated.get(userQuest.getQuestId());
+//								if (defeatTypeJobIdsToNumDefeatedForUserQuest != null) {
+//									numTimesUserDidJob = defeatTypeJobIdsToNumDefeatedForUserQuest.get(requiredDefeatTypeJobId);
+//									if (numTimesUserDidJob == null) {
+//										numTimesUserDidJob = 0;
+//									}
+//								} else {
+//									numTimesUserDidJob = 0;
+//								}
+//							}
+//							builder.addRequiredDefeatTypeJobProgress(createMinimumUserDefeatTypeJobProto(userQuest, requiredDefeatTypeJobId, defeatJobCompletedForQuest, numTimesUserDidJob));
+//						}
+//					}
 					if (quest.getBuildStructJobsRequired() != null && quest.getBuildStructJobsRequired().size() > 0) {
 						if (structIdsToUserStructs == null) {
 							structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(userQuest.getUserId());              
@@ -739,20 +737,20 @@ public class CreateInfoProtoUtils {
 							builder.addRequiredUpgradeStructJobProgress(createMinimumUserUpgradeStructJobProto(userQuest, upgradeStructJob, currentLevel));
 						}
 					}
-					if (quest.getPossessEquipJobsRequired() != null && quest.getPossessEquipJobsRequired().size() > 0) {
-						if (equipIdsToUserEquips == null) {
-							equipIdsToUserEquips = RetrieveUtils.userEquipRetrieveUtils().getEquipIdsToUserEquipsForUser(userQuest.getUserId());
-						}
-						for (Integer possessEquipJobId : quest.getPossessEquipJobsRequired()) {
-							PossessEquipJob possessEquipJob = PossessEquipJobRetrieveUtils.getPossessEquipJobForPossessEquipJobId(possessEquipJobId);
-							List<UserEquip> userEquips = equipIdsToUserEquips.get(possessEquipJob.getEquipId());
-							int quantityOwned = (userEquips != null) ? userEquips.size() : 0;
-							if (quantityOwned >= possessEquipJob.getQuantity()) {
-								numComponentsComplete++;
-							}
-							builder.addRequiredPossessEquipJobProgress(createMinimumUserPossessEquipJobProto(userQuest, possessEquipJob, quantityOwned));
-						}
-					}
+//					if (quest.getPossessEquipJobsRequired() != null && quest.getPossessEquipJobsRequired().size() > 0) {
+//						if (equipIdsToUserEquips == null) {
+//							equipIdsToUserEquips = RetrieveUtils.userEquipRetrieveUtils().getEquipIdsToUserEquipsForUser(userQuest.getUserId());
+//						}
+//						for (Integer possessEquipJobId : quest.getPossessEquipJobsRequired()) {
+//							PossessEquipJob possessEquipJob = PossessEquipJobRetrieveUtils.getPossessEquipJobForPossessEquipJobId(possessEquipJobId);
+//							List<UserEquip> userEquips = equipIdsToUserEquips.get(possessEquipJob.getEquipId());
+//							int quantityOwned = (userEquips != null) ? userEquips.size() : 0;
+//							if (quantityOwned >= possessEquipJob.getQuantity()) {
+//								numComponentsComplete++;
+//							}
+//							builder.addRequiredPossessEquipJobProgress(createMinimumUserPossessEquipJobProto(userQuest, possessEquipJob, quantityOwned));
+//						}
+//					}
 					if (quest.getCoinRetrievalAmountRequired() > 0) {
 						if (userQuest.getCoinsRetrievedForReq() >= quest.getCoinRetrievalAmountRequired()) {
 							numComponentsComplete++;
