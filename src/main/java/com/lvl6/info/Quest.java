@@ -7,7 +7,7 @@ import com.lvl6.proto.InfoProto.SpecialQuestAction;
 
 public class Quest implements Serializable {
 
-	private static final long serialVersionUID = -2565433324227071902L;
+	private static final long serialVersionUID = 4887558885396417181L;
 	private int id;
   private int cityId;
   private String goodName;
@@ -23,21 +23,18 @@ public class Quest implements Serializable {
   private List<Integer> tasksRequired;
   private List<Integer> upgradeStructJobsRequired;
   private List<Integer> buildStructJobsRequired;
-  private List<Integer> defeatGoodGuysJobsRequired;
-  private List<Integer> possessEquipJobsRequired;
   private int coinRetrievalAmountRequired;
   private SpecialQuestAction specialQuestActionRequired;
   private String goodQuestGiverImageSuffix;
   private int priority;
 
-  public Quest(int id, int cityId, String goodName, String goodDescription,
+
+	public Quest(int id, int cityId, String goodName, String goodDescription,
 			String goodDoneResponse, Dialogue goodAcceptDialogue,
 			int assetNumWithinCity, int coinsGained, int diamondsGained,
 			int expGained, int equipIdGained, List<Integer> questsRequiredForThis,
 			List<Integer> tasksRequired, List<Integer> upgradeStructJobsRequired,
-			List<Integer> buildStructJobsRequired,
-			List<Integer> defeatGoodGuysJobsRequired,
-			List<Integer> possessEquipJobsRequired, int coinRetrievalAmountRequired,
+			List<Integer> buildStructJobsRequired, int coinRetrievalAmountRequired,
 			SpecialQuestAction specialQuestActionRequired,
 			String goodQuestGiverImageSuffix, int priority) {
 		super();
@@ -56,8 +53,6 @@ public class Quest implements Serializable {
 		this.tasksRequired = tasksRequired;
 		this.upgradeStructJobsRequired = upgradeStructJobsRequired;
 		this.buildStructJobsRequired = buildStructJobsRequired;
-		this.defeatGoodGuysJobsRequired = defeatGoodGuysJobsRequired;
-		this.possessEquipJobsRequired = possessEquipJobsRequired;
 		this.coinRetrievalAmountRequired = coinRetrievalAmountRequired;
 		this.specialQuestActionRequired = specialQuestActionRequired;
 		this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
@@ -132,14 +127,6 @@ public class Quest implements Serializable {
     return buildStructJobsRequired;
   }
 
-  public List<Integer> getDefeatGoodGuysJobsRequired() {
-    return defeatGoodGuysJobsRequired;
-  }
-
-  public List<Integer> getPossessEquipJobsRequired() {
-    return possessEquipJobsRequired;
-  }
-
   public int getCoinRetrievalAmountRequired() {
     return coinRetrievalAmountRequired;
   }
@@ -163,33 +150,82 @@ public class Quest implements Serializable {
       numComponents += upgradeStructJobsRequired.size();
     if (buildStructJobsRequired != null)
       numComponents += buildStructJobsRequired.size();
-    if (defeatGoodGuysJobsRequired != null)
-    	numComponents += defeatGoodGuysJobsRequired.size();
-    if (possessEquipJobsRequired != null)
-      numComponents += possessEquipJobsRequired.size();
     if (coinRetrievalAmountRequired > 0)
       numComponents++;
     return numComponents;
   }
 
-	@Override
-	public String toString() {
-		return "Quest [id=" + id + ", cityId=" + cityId + ", goodName=" + goodName
-				+ ", goodDescription=" + goodDescription + ", goodDoneResponse="
-				+ goodDoneResponse + ", goodAcceptDialogue=" + goodAcceptDialogue
-				+ ", assetNumWithinCity=" + assetNumWithinCity + ", coinsGained="
-				+ coinsGained + ", diamondsGained=" + diamondsGained + ", expGained="
-				+ expGained + ", equipIdGained=" + equipIdGained
-				+ ", questsRequiredForThis=" + questsRequiredForThis
-				+ ", tasksRequired=" + tasksRequired + ", upgradeStructJobsRequired="
-				+ upgradeStructJobsRequired + ", buildStructJobsRequired="
-				+ buildStructJobsRequired + ", defeatGoodGuysJobsRequired="
-				+ defeatGoodGuysJobsRequired + ", possessEquipJobsRequired="
-				+ possessEquipJobsRequired + ", coinRetrievalAmountRequired="
-				+ coinRetrievalAmountRequired + ", specialQuestActionRequired="
-				+ specialQuestActionRequired + ", goodQuestGiverImageSuffix="
-				+ goodQuestGiverImageSuffix + ", priority=" + priority + "]";
+	public void setId(int id) {
+		this.id = id;
 	}
 
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
+	public void setGoodName(String goodName) {
+		this.goodName = goodName;
+	}
+
+	public void setGoodDescription(String goodDescription) {
+		this.goodDescription = goodDescription;
+	}
+
+	public void setGoodDoneResponse(String goodDoneResponse) {
+		this.goodDoneResponse = goodDoneResponse;
+	}
+
+	public void setGoodAcceptDialogue(Dialogue goodAcceptDialogue) {
+		this.goodAcceptDialogue = goodAcceptDialogue;
+	}
+
+	public void setAssetNumWithinCity(int assetNumWithinCity) {
+		this.assetNumWithinCity = assetNumWithinCity;
+	}
+
+	public void setCoinsGained(int coinsGained) {
+		this.coinsGained = coinsGained;
+	}
+
+	public void setDiamondsGained(int diamondsGained) {
+		this.diamondsGained = diamondsGained;
+	}
+
+	public void setExpGained(int expGained) {
+		this.expGained = expGained;
+	}
+
+	public void setEquipIdGained(int equipIdGained) {
+		this.equipIdGained = equipIdGained;
+	}
+
+	public void setQuestsRequiredForThis(List<Integer> questsRequiredForThis) {
+		this.questsRequiredForThis = questsRequiredForThis;
+	}
+
+	public void setTasksRequired(List<Integer> tasksRequired) {
+		this.tasksRequired = tasksRequired;
+	}
+
+	public void setUpgradeStructJobsRequired(List<Integer> upgradeStructJobsRequired) {
+		this.upgradeStructJobsRequired = upgradeStructJobsRequired;
+	}
+
+	public void setBuildStructJobsRequired(List<Integer> buildStructJobsRequired) {
+		this.buildStructJobsRequired = buildStructJobsRequired;
+	}
+
+	public void setCoinRetrievalAmountRequired(int coinRetrievalAmountRequired) {
+		this.coinRetrievalAmountRequired = coinRetrievalAmountRequired;
+	}
+
+	public void setSpecialQuestActionRequired(
+			SpecialQuestAction specialQuestActionRequired) {
+		this.specialQuestActionRequired = specialQuestActionRequired;
+	}
+
+	public void setGoodQuestGiverImageSuffix(String goodQuestGiverImageSuffix) {
+		this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
+	}
 
 }

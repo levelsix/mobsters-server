@@ -124,13 +124,16 @@ import com.lvl6.utils.DBConnection;
   }
 
   private List<UserQuest> convertRSToUserQuests(ResultSet rs) {
+  	List<UserQuest> userQuests = new ArrayList<UserQuest>();
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
-        List<UserQuest> userQuests = new ArrayList<UserQuest>();
         while(rs.next()) {
-          userQuests.add(convertRSRowToUserQuest(rs));
+        	UserQuest uq = convertRSRowToUserQuest(rs);
+        	if (null != uq) {
+        		userQuests.add(uq);
+        	}
         }
         return userQuests;
       } catch (SQLException e) {
@@ -138,7 +141,7 @@ import com.lvl6.utils.DBConnection;
         
       }
     }
-    return null;
+    return userQuests;
   }
   
   /*

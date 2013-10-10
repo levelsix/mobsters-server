@@ -201,24 +201,6 @@ import com.lvl6.utils.QuestGraph;
       }
     }
 
-    String defeatGoodGuysRequiredString = rs.getString(i++);
-    List<Integer> defeatGoodGuysJobsRequired = new ArrayList<Integer>();
-    if (defeatGoodGuysRequiredString != null) {
-      st = new StringTokenizer(defeatGoodGuysRequiredString, ", ");
-      while (st.hasMoreTokens()) {
-      	defeatGoodGuysJobsRequired.add(Integer.parseInt(st.nextToken()));
-      }
-    }
-
-    String possessEquipJobsRequiredString = rs.getString(i++);
-    List<Integer> possessEquipJobsRequired = new ArrayList<Integer>();
-    if (possessEquipJobsRequiredString != null) {
-      st = new StringTokenizer(possessEquipJobsRequiredString, ", ");
-      while (st.hasMoreTokens()) {
-        possessEquipJobsRequired.add(Integer.parseInt(st.nextToken()));
-      }
-    }
-
     int coinRetrievalAmountRequired = rs.getInt(i++);
 
     SpecialQuestAction specialQuestActionRequired = null;
@@ -232,12 +214,11 @@ import com.lvl6.utils.QuestGraph;
     int priority = rs.getInt(i++);
     
     Quest quest = new Quest(id, cityId, goodName, goodDescription,
-    		goodDoneResponse, goodAcceptDialogue, assetNumWithinCity, coinsGained,
-    		diamondsGained, expGained, equipIdGained, questsRequiredForThis,
-    		tasksRequired, upgradeStructJobsRequired, buildStructJobsRequired,
-    		defeatGoodGuysJobsRequired, possessEquipJobsRequired,
-    		coinRetrievalAmountRequired, specialQuestActionRequired,
-    		goodQuestGiverImageSuffix, priority);
+    		goodDoneResponse, goodAcceptDialogue, assetNumWithinCity,
+    		coinsGained, diamondsGained, expGained, equipIdGained,
+    		questsRequiredForThis, tasksRequired, upgradeStructJobsRequired,
+    		buildStructJobsRequired, coinRetrievalAmountRequired,
+    		specialQuestActionRequired, goodQuestGiverImageSuffix, priority);
     return quest;
   }
 
