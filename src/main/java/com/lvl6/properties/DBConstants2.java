@@ -1,6 +1,6 @@
 package com.lvl6.properties;
 
-public class DBConstants {
+public class DBConstants2 {
 
   /* TABLENAMES*/
 	public static final String TABLE_AVAILABLE_REFERRAL_CODE = "available_referral_code";

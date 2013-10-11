@@ -3,6 +3,16 @@ package com.lvl6.properties;
 public class DBConstants {
 
   /* TABLENAMES*/
+	public static final String TABLE_AVAILABLE_REFERRAL_CODES = "available_referral_code";
+	public static final String TABLE_BATTLE_HISTORY = "battle_history";
+	public static final String TABLE_BOOSTER_PACK = "booster_pack";
+	public static final String TABLE_USER_BOOSTER_PACK_HISTORY = "booster_pack_history_for_user";
+	public static final String TABLE_BOOSTER_ITEM = "booster_item";
+	public static final String TABLE_CITIES = "city";
+	public static final String TABLE_NEUTRAL_CITY_ELEMENTS = "city_element";
+	public static final String TABLE_CLANS = "clan";
+	
+	
   public static final String TABLE_USER = "users";
   public static final String TABLE_USER_EQUIP = "user_equip";
   public static final String TABLE_USER_CITIES = "user_cities";
@@ -15,7 +25,6 @@ public class DBConstants {
   public static final String TABLE_EQUIPMENT = "equipment";
   public static final String TABLE_TASKS = "tasks";
   public static final String TABLE_TASKS_EQUIPREQS = "tasks_equipreqs";
-  public static final String TABLE_CITIES = "cities";
   public static final String TABLE_IAP_HISTORY = "iap_history";
   public static final String TABLE_BLACKSMITH = "blacksmith";
   public static final String TABLE_BLACKSMITH_HISTORY = "blacksmith_history";
@@ -26,15 +35,11 @@ public class DBConstants {
   public static final String TABLE_QUESTS = "quests";
   public static final String TABLE_STRUCTURES = "structures";
   public static final String TABLE_LEVELS_REQUIRED_EXPERIENCE = "levels_required_experience";
-  public static final String TABLE_BATTLE_HISTORY = "battle_history";
   public static final String TABLE_REFERRALS = "referrals";
-  public static final String TABLE_AVAILABLE_REFERRAL_CODES = "available_referral_codes";
-  public static final String TABLE_NEUTRAL_CITY_ELEMENTS = "neutral_city_elems";
   public static final String TABLE_PLAYER_WALL_POSTS = "player_wall_posts";
   public static final String TABLE_C3P0_TEST = "c3p0_test_table";
   public static final String TABLE_IDDICTION_IDENTIFIERS = "iddiction_identifiers";
   public static final String TABLE_USER_SESSIONS = "user_sessions";
-  public static final String TABLE_CLANS = "clans";
   public static final String TABLE_USER_CLANS = "user_clans";
   public static final String TABLE_DIAMOND_EQUIP_PURCHASE_HISTORY = "diamond_equip_purchase_history";
   public static final String TABLE_CLAN_WALL_POSTS = "clan_wall_posts";
@@ -68,9 +73,6 @@ public class DBConstants {
   public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY = "equip_enhancement_feeders_history";
   public static final String TABLE_DELETED_USER_EQUIPS_FOR_ENHANCING = "deleted_user_equips_for_enhancing";
   
-  public static final String TABLE_BOOSTER_PACK = "booster_pack";
-  public static final String TABLE_BOOSTER_ITEM = "booster_item";
-  public static final String TABLE_USER_BOOSTER_PACK_HISTORY = "user_booster_pack_history";
   public static final String TABLE_USER_BOOSTER_ITEMS = "user_booster_items";
   
   public static final String TABLE_BANNED_USER = "banned_user";

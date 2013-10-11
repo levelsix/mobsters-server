@@ -1,4 +1,26 @@
+//NEED TO IMPORT EVERY *.PROTO FILE INTO HERE!!!!!!
+
+import "Battle.proto";
+import "BoosterPackStuff.proto";
+import "Chat.proto";
+import "City.proto";
+import "Clan.proto";
 import "Event.proto";
+import "EventCity.proto";
+import "EventPvp.proto";
+import "EventQuest.proto";
+import "EventStartup.proto";
+import "EventStructure.proto";
+import "EventUser.proto";
+import "Info.proto";
+import "Job.proto";
+import "MonsterStuff.proto";
+import "Quest.proto";
+import "Structure.proto";
+import "Task.proto";
+import "TournamentStuff.proto";
+import "User.proto";
+
 
 package com.lvl6.proto;
 
