@@ -7,22 +7,6 @@ package com.lvl6.proto;
 option java_outer_classname = "EventProto";
 
 //------------------------------------------------------------------------------------------
-
-																						//DONE
-message ChatRequestProto {
-    optional MinimumUserProto sender = 1; 
-	repeated MinimumUserProto recipients = 2;
-	optional string message = 3;
-}
-
-																						//DONE
-message ChatResponseProto {
-    optional MinimumUserProto sender = 1; 
-	optional string message = 2;
-}
-
-//------------------------------------------------------------------------------------------
-
 message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
 	repeated int32 seenUserIds = 2;
@@ -74,8 +58,6 @@ message StartupResponseProto {
 	
 	repeated AttackedNotificationProto attackNotifications = 13;
 	repeated ReferralNotificationProto referralNotifications = 14;
-	repeated PlayerWallPostProto playerWallPostNotifications = 19;
-	repeated ClanBulletinPostProto clanBulletinPostNotifications = 27;
 	
 	//repeated LockBoxEventProto lockBoxEvents = 28;
 	repeated UserLockBoxEventProto userLockBoxEvents = 29;
@@ -204,8 +186,6 @@ message StartupResponseProto {
 		
 		repeated AnimatedSpriteOffsetProto animatedSpriteOffsets = 60;
 		
-		optional KiipRewardConditions kiipRewardConditions = 61;
-		
 		optional int32 averageSizeOfLevelBracket = 63;
 		optional ForgeConstants forgeConstants = 64;
 		
@@ -213,7 +193,6 @@ message StartupResponseProto {
 		
 		optional int32 adColonyVideosRequiredToRedeemDiamonds = 67;
 
-		optional CharacterModConstants charModConstants = 68;
 		
 		optional int32 minNameLength = 69;
 		optional int32 maxNameLength = 70;
@@ -406,17 +385,6 @@ message StartupResponseProto {
 			optional int32 maxCharLengthForClanTag = 4;
 		}
 		
-		message CharacterModConstants {
-			optional int32 diamondCostToChangeCharacterType = 1;
-			optional int32 diamondCostToChangeName = 2;
-			optional int32 diamondCostToResetCharacter = 3;
-			optional int32 diamondCostToResetSkillPoints = 4;
-		}
-		
-		message KiipRewardConditions {
-			repeated int32 levelUpConditions = 1;
-			repeated int32 questRedeemConditions = 2;
-		}
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 55;
@@ -498,8 +466,6 @@ message StartupResponseProto {
      	repeated FullCityProto citiesNewlyAvailableToUserAfterLevelup = 30;					//only new ones
 	    repeated FullStructureProto newlyAvailableStructsAfterLevelup = 32;					//only new ones
      	
-     	optional PlayerWallPostProto firstWallPost = 33;
-
 		optional FullTaskProto firstTaskGood = 34;
 		optional FullTaskProto firstTaskBad = 35;
 		optional int32 firstBattleCoinGain = 36;
@@ -590,31 +556,6 @@ message RetrieveTasksForCityResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
-																						//DONE
-message RetrieveStaticDataForShopRequestProto {
-     optional MinimumUserProto sender = 1;
-	optional RetrieveForShopType type = 2;
-		
-	enum RetrieveForShopType {
-		EQUIPMENT_FOR_ARMORY = 0;
-		ALL_STRUCTURES = 1;
-	}
-}
-																						//DONE
-message RetrieveStaticDataForShopResponseProto {
-     optional MinimumUserProto sender = 1;
-     optional RetrieveStaticDataForShopStatus status = 2;
-     repeated FullStructureProto structs = 4;
-     
-     enum RetrieveStaticDataForShopStatus {
-     	SUCCESS = 0;
-     	SOME_FAIL = 1;
-     }
-}
-
-//------------------------------------------------------------------------------------------
-
 																						//DONE
 message TaskActionRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -775,36 +716,6 @@ message RetrieveCurrencyFromNormStructureResponseProto {
 		SUCCESS = 2;
 		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
 		NOT_LONG_ENOUGH = 4;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
-																						//DONE
-message CriticalStructureActionRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional CritStructActionType actionType = 2;
-	optional CritStructType critStructType = 3;
-	optional CoordinateProto critStructCoordinates = 4;
-	optional StructOrientation orientation = 5;
-	
-	enum CritStructActionType {
-		PLACE = 0;
-		MOVE = 1;
-		ROTATE = 2;
-	}
-}
-
-																						//DONE
-message CriticalStructureActionResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional CritStructActionStatus status = 3;
-	
-	enum CritStructActionStatus {
-		SUCCESS = 0;
-		CANNOT_PLACE_NON_PLACEABLE_CRIT_STRUCT = 1;	//we only place armory/vault/marketplace 
-		CANNOT_MOVE_AVIARY = 3;
-		OTHER_FAIL = 4;	
 	}
 }
 
@@ -1069,36 +980,6 @@ message UpdateClientUserResponseProto {
 //		OTHER_FAIL = 5;
 //	}
 //}
-
-//------------------------------------------------------------------------------------------
-																						//DONE
-message GenerateAttackListRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 numEnemies = 2;
-	optional double latLowerBound = 3;
-	optional double latUpperBound = 4;
-	optional double longLowerBound = 5;
-	optional double longUpperBound = 6;
-	optional bool forMap = 7;
-	optional bool showRealPlayers = 8;
-}
-
-																						//DONE
-message GenerateAttackListResponseProto {
-     optional MinimumUserProto sender = 1;
-     repeated FullUserProto enemies = 2;
-     optional GenerateAttackListStatus status = 3;
-     optional bool forMap = 4;
-     optional bool showRealPlayers = 5;
-     
-     enum GenerateAttackListStatus {
-     	SUCCESS = 0;
-     	SOME_FAIL = 1;
-     	INVALID_NUM_ENEMIES_COUNT = 2;
-     	INVALID_BOUND = 3;
-     }
-}
-
 //------------------------------------------------------------------------------------------
 
 																						//DONE
@@ -1303,7 +1184,6 @@ message RetrieveStaticDataResponseProto {
 																						//DONE
 message PurchaseCityExpansionRequestProto {
     optional MinimumUserProto sender = 1;
-    //optional ExpansionDirection direction = 2;
     //sint32 to be more efficient in storing negative numbers
     optional sint32 xPosition = 2; //in relation to center square (the origin 0,0)
     optional sint32 yPosition = 3;
@@ -1439,32 +1319,6 @@ message ReferralCodeUsedResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
-																						//DONE
-message EquipEquipmentRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 userEquipId = 2;
-	optional bool forPrestigeEquipSlot = 3; 
-}
-
-																						//DONE
-message EquipEquipmentResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional EquipEquipmentStatus status = 2;
-	
-	enum EquipEquipmentStatus {
-		SUCCESS = 0;
-		NOT_HIGH_ENOUGH_LEVEL = 1;
-		DOES_NOT_HAVE_THIS_EQUIP = 2;
-		NOT_AN_EQUIP = 3;
-		INCORRECT_CLASS_TYPE = 4;
-		OTHER_FAIL = 5;
-		ALREADY_AT_MAX_EQUIPPED_EQUIPS = 6;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
 																						//DONE
 message LoadNeutralCityRequestProto {
      optional MinimumUserProto sender = 1;
@@ -1493,22 +1347,6 @@ message LoadNeutralCityResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
-																						//DONE
-message RetrieveUserEquipForUserRequestProto {
-     optional MinimumUserProto sender = 1;
-     optional int32 relevantUserId = 2;
-}
-
-																						//DONE
-message RetrieveUserEquipForUserResponseProto {
-    optional MinimumUserProto sender = 1;
-    optional int32 relevantUserId = 2;
-	repeated FullUserEquipProto userEquips = 3;
-}
-
-//------------------------------------------------------------------------------------------
-
 																						//DONE
 message PurgeClientStaticDataResponseProto {
      optional int32 senderId = 1;
@@ -1539,55 +1377,6 @@ message RetrieveUsersForUserIdsResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-																						//DONE
-message PostOnPlayerWallRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 wallOwnerId = 2;
-	optional string content = 3;
-}
-
-																						//DONE
-message PostOnPlayerWallResponseProto {
-	 optional MinimumUserProto sender = 1;
-     optional PostOnPlayerWallStatus status = 2;
-	 optional PlayerWallPostProto post = 3;
-	
-     enum PostOnPlayerWallStatus {
-     	SUCCESS = 0;
-     	NO_CONTENT_SENT = 1;
-     	POST_TOO_LARGE = 2;
-     	OTHER_FAIL = 3;
-     	BANNED = 4;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
-																						//DONE
-message RetrievePlayerWallPostsRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 relevantUserId = 2;
-	optional int32 beforeThisPostId = 3;
-}
-
-																						//DONE
-message RetrievePlayerWallPostsResponseProto {
-     optional MinimumUserProto sender = 1;
-     optional int32 relevantUserId = 2;
-     optional int32 beforeThisPostId = 3;
-	 optional RetrievePlayerWallPostsStatus status = 4;
-     
-     repeated PlayerWallPostProto playerWallPosts = 5;
-     
-     enum RetrievePlayerWallPostsStatus {
-     	SUCCESS = 0;
-     	OTHER_FAIL = 1;
-     }
-}
-
-//------------------------------------------------------------------------------------------
-
-																						//DONE
 message EarnFreeDiamondsRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional EarnFreeDiamondsType freeDiamondsType = 2;
@@ -1618,17 +1407,6 @@ message EarnFreeDiamondsResponseProto {
 	}
 }
 
-
-//------------------------------------------------------------------------------------------
-
-message ReconnectRequestProto {
-	optional MinimumUserProto sender = 1;
-}
-
-message ReconnectResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional bool incomingResponseMessages = 2;
-}
 
 //------------------------------------------------------------------------------------------
 
@@ -1665,123 +1443,8 @@ message SubmitEquipsToBlacksmithResponseProto {
 	}
 }
 
-//------------------------------------------------------------------------------------------
-
-message ForgeAttemptWaitCompleteRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 blacksmithId = 2;
-	optional int64 curTime = 3;
-}
-
-message ForgeAttemptWaitCompleteResponseProto {
-	optional MinimumUserProto sender = 1;
-    optional ForgeAttemptWaitCompleteStatus status = 2;
-   
-    enum ForgeAttemptWaitCompleteStatus {
-	  	SUCCESS = 0;
-    	NOT_DONE_YET = 1;
-     	OTHER_FAIL = 2;
-     	CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
-     	ALREADY_COMPLETE = 4;
-    }
-}
 
 //------------------------------------------------------------------------------------------
-
-message FinishForgeAttemptWaittimeWithDiamondsRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 blacksmithId = 2;
-	optional int64 timeOfSpeedup = 3; 
-}
-
-message FinishForgeAttemptWaittimeWithDiamondsResponseProto {
-	optional MinimumUserProto sender = 1;
-    optional FinishForgeAttemptWaittimeWithDiamondsStatus status = 2;
-     
-    enum FinishForgeAttemptWaittimeWithDiamondsStatus {
-     	SUCCESS = 0;
-     	NOT_ENOUGH_DIAMONDS = 1;
-     	OTHER_FAIL = 2;
-    	CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
-    	ALREADY_COMPLETE = 4;
-    }
-}
-
-//------------------------------------------------------------------------------------------
-
-message CollectForgeEquipsRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 blacksmithId = 2;
-}
-
-message CollectForgeEquipsResponseProto {
-	optional MinimumUserProto sender = 1;
-	repeated FullUserEquipProto userEquips = 2;
-	optional int32 blacksmithId = 4;
-	
-	optional CollectForgeEquipsStatus status = 3;
-	
-	enum CollectForgeEquipsStatus {
-		SUCCESS = 0;
-		OTHER_FAIL = 1;
-		NOT_DONE_YET = 2;
-		//the user is over the limit on number of equips being forged
-		TOO_MANY_EQUIPS_BEING_FORGED = 3;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
-message CharacterModRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional CharacterModType modType = 2;
-	
-	optional string futureName = 3;
-}
-
-message CharacterModResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional CharacterModStatus status = 2;
-	optional CharacterModType modType = 3;
-	
-	optional int32 skillPointsNew = 4;
-	optional int32 attackNew = 5;
-	optional int32 defenseNew = 6;
-	optional int32 staminaNew = 7;
-	optional int32 energyNew = 8;
-	
-	enum CharacterModStatus {
-		SUCCESS = 0;
-		INVALID_NAME = 1;
-		NOT_ENOUGH_DIAMONDS = 2;
-		OTHER_FAIL = 3;
-		CANNOT_CHANGE_TO_OPPOSING_SIDE_WHEN_IN_CLAN = 4;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
-message RetrieveLeaderboardRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional LeaderboardType leaderboardType = 2;
-	optional int32 afterThisRank = 3;
-}
-
-message RetrieveLeaderboardResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional RetrieveLeaderboardStatus status = 2;
-	optional LeaderboardType leaderboardType = 5;
-	optional int32 afterThisRank = 6;
-
-	optional MinimumUserProtoWithLevelForLeaderboard retriever = 3;
-	repeated MinimumUserProtoWithLevelForLeaderboard resultPlayers = 4;
-	
-	enum RetrieveLeaderboardStatus {
-		SUCCESS = 0;
-		OTHER_FAIL = 1;
-	}
-}
-
 message RetrieveLeaderboardRankingsRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 eventId = 2;
@@ -2074,50 +1737,6 @@ message ChangeClanDescriptionResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-message PostOnClanBulletinRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional string content = 3;
-}
-
-																						//DONE
-message PostOnClanBulletinResponseProto {
-	 optional MinimumUserProto sender = 1;
-     optional PostOnClanBulletinStatus status = 2;
-	 optional ClanBulletinPostProto post = 3;
-	
-     enum PostOnClanBulletinStatus {
-     	SUCCESS = 0;
-     	NO_CONTENT_SENT = 1;
-     	POST_TOO_LARGE = 2;
-     	OTHER_FAIL = 3;
-     	NOT_IN_CLAN = 4;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
-message RetrieveClanBulletinPostsRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 beforeThisPostId = 2;
-}
-
-																						//DONE
-message RetrieveClanBulletinPostsResponseProto {
-     optional MinimumUserProto sender = 1;
-     optional int32 beforeThisPostId = 2;
-	 optional RetrieveClanBulletinPostsStatus status = 4;
-     
-     repeated ClanBulletinPostProto clanBulletinPosts = 5;
-     
-     enum RetrieveClanBulletinPostsStatus {
-     	SUCCESS = 0;
-     	OTHER_FAIL = 1;
-     	NOT_IN_CLAN = 2;
-     }
-}
-
-//------------------------------------------------------------------------------------------
-
 message BootPlayerFromClanRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 playerToBoot = 2;
@@ -2137,46 +1756,6 @@ message BootPlayerFromClanResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
-message RetrieveThreeCardMonteRequestProto {
-	 optional MinimumUserProto sender = 1;
-}
-
-message RetrieveThreeCardMonteResponseProto {
-     optional MinimumUserProto sender = 1;
-
-	optional MonteCardProto badMonteCard = 2;
-	optional MonteCardProto mediumMonteCard = 3;
-	optional MonteCardProto goodMonteCard = 4;
-     
-     optional RetrieveThreeCardMonteStatus status = 14;;
-     
-     enum RetrieveThreeCardMonteStatus {
-     	SUCCESS = 0;
-     	SOME_FAIL = 1;
-     }
-}
-
-//------------------------------------------------------------------------------------------
-
-message PlayThreeCardMonteRequestProto {
-	 optional MinimumUserProto sender = 1;
-	
-	 optional int32 cardId = 2;
-}
-
-message PlayThreeCardMonteResponseProto {
-     optional MinimumUserProto sender = 1;
-	 
-	 optional FullUserEquipProto userEquip = 3;
-	 optional PlayThreeCardMonteStatus status = 2;
-     
-     enum PlayThreeCardMonteStatus {
-     	SUCCESS = 0;
-     	OTHER_FAIL = 1;
-     	NOT_ENOUGH_DIAMONDS = 2;
-     }
-}
 
 message BeginGoldmineTimerRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -2282,26 +1861,6 @@ message BossActionResponseProto {
 	} 
 }
 
-message ConcedeClanTowerWarRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 towerId = 2;
-	optional int64 curTime = 3;
-}
-
-message ConcedeClanTowerWarResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional ConcedeClanTowerWarStatus status = 2;
-	
-	enum ConcedeClanTowerWarStatus {
-		SUCCESS = 0;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 1;
-		NOT_CLAN_TOWER_WAR_PARTICIPANT = 2;
-		NOT_CLAN_LEADER = 3;
-		OTHER_FAIL = 4;
-		NO_ATTACKER = 5;
-	}
-}
-
 message ChangedClanTowerResponseProto {
 	repeated ClanTowerProto clanTowers = 1;
 	optional ReasonForClanTowerChange reason = 2;
@@ -2354,23 +1913,6 @@ message SubmitEquipEnhancementResponseProto {
 }
 
 
-message RetrieveClanTowerScoresRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 towerId = 2;
-}
-
-message RetrieveClanTowerScoresResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional RetrieveClanTowerScoresStatus status = 2;
-	repeated MinimumUserProtoForClanTowerScores ownerMembers = 3;
-	repeated MinimumUserProtoForClanTowerScores attackerMembers = 4;
-	optional int32 towerId = 5;
-	
-	enum RetrieveClanTowerScoresStatus {
-		SUCCESS = 0;
-		OTHER_FAIL = 1;
-	}
-}
 
 //requesting all booster packs and related booster items
 message RetrieveBoosterPackRequestProto {
@@ -2459,42 +2001,6 @@ message ChangeClanJoinTypeResponseProto {
 
 //------------------------------------------------------------------------------------
 
-message PrestigeRequestProto {
-	optional MinimumUserProto sender = 1;
-}
-
-message PrestigeResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional PrestigeStatus status = 2;
-	
-	enum PrestigeStatus {
-		SUCCESS = 0;
-		BELOW_MIN_LEVEL_FOR_PRESTIGE = 1;
-		ALREADY_AT_MAX_PRESTIGE_LEVEL = 2;
-		FAIL_OTHER = 3;
-	} 
-}
-
-//------------------------------------------------------------------------------------
-
-message PurchaseForgeSlotRequestProto {
-	optional MinimumUserProto sender = 1;
-}
-
-message PurchaseForgeSlotResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional PurchaseForgeSlotStatus status = 2;
-	enum PurchaseForgeSlotStatus {
-		SUCCESS = 0;
-		FAIL_ALREADY_AT_MAX_FORGE_SLOTS = 1;
-		FAIL_NOT_ENOUGH_GOLD = 2;
-		FAIL_OTHER = 3;	
-		FAIL_USER_HAS_MORE_THAN_MAX_FORGE_SLOTS = 4;	
-	}
-}
-
-//------------------------------------------------------------------------------------
-
 message PrivateChatPostRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 recipientId = 2;
@@ -2558,28 +2064,6 @@ message RedeemUserLockBoxItemsResponseProto {
 		FAIL_OTHER = 3;
 	}
 }
-
-//------------------------------------------------------------------------------------
-
-message RedeemUserCityGemsRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 cityId = 2;
-}
-
-message RedeemUserCityGemsResponseProto {
-	optional MinimumUserProto sender = 1;
-	repeated FullUserEquipProto equips = 2; 	
-	optional RedeemUserCityGemsStatus status = 3;
-	optional UserBoosterPackProto userBoosterPack = 4;
-	
-	enum RedeemUserCityGemsStatus {
-		SUCCESS = 0;
-		FAIL_INSUFFICIENT_GEMS = 1;
-		FAIL_OTHER = 2;
-	}
-}
-
-//------------------------------------------------------------------------------------
 
 message BeginDungeonRequestProto {
 	optional MinimumUserProto sender = 1;

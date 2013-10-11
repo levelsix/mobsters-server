@@ -141,12 +141,6 @@ message BoosterItemProto {
 	optional bool isSpecial = 4;
 }
 
-message MinimumUserProtoForClanTowerScores {
-	optional MinimumUserProtoWithLevel minUserProtoWithLevel = 1;
-	optional int32 pointsGained = 2;
-	optional int32 pointsLost = 3;
-}
-
 //------------------------------------------------------------------------------------------
 
 message InAppPurchasePackageProto {
@@ -335,14 +329,6 @@ message FullClanProtoWithClanSize {
 	optional int32 clanSize = 2;
 }
 
-message ClanBulletinPostProto {
-	optional int32 clanBulletinPostId = 5;
-	optional MinimumUserProto poster = 1;
-	optional int32 clanId = 2;
-	optional int64 timeOfPost = 3;
-	optional string content = 4;
-}
-
 message ClanTierLevelProto {
 	optional int32 tierLevel = 1;
 	optional int32 maxSize = 2;
@@ -389,13 +375,6 @@ enum GroupChatScope {
 	CLAN = 3;
 }
 
-message MonteCardProto {
-	optional int32 cardId = 1;
-     optional int32 diamondsGained = 2;
-     optional int32 equipLevel = 3;
-     optional int32 coinsGained = 4;
-}	
-
 //------------------------------------------------------------------------------------------
 
 message FullClanProto {
@@ -424,25 +403,6 @@ message MinimumClanProto {
 
 }
 
-//------------------------------------------------------------------------------------------
-
-enum LeaderboardType {
-	MOST_BATTLES_WON = 2;
-	MOST_COINS = 3;
-	MOST_EXP = 4;
-	BEST_KDR = 5;		//start counting only after x battles. so instead of displaying your rank, show that.
-	EVENT = 6;
- }
-
-//------------------------------------------------------------------------------------------
-
-enum CharacterModType {
-	NEW_PLAYER = 1;
-	RESET_SKILL_POINTS = 2;
-	CHANGE_CHARACTER_TYPE = 3;
-	CHANGE_NAME = 4;			
-}
-	
 //------------------------------------------------------------------------------------------
 
 enum AnimationType {
@@ -488,15 +448,6 @@ message MinimumUserProtoWithLevel {
 	optional MinimumUserProto minUserProto = 1;
 	optional int32 level = 2;
 }
-
-message MinimumUserProtoWithLevelForLeaderboard {
-	optional MinimumUserProto minUserProto = 1;
-	optional int32 level = 2;
-	optional LeaderboardType leaderboardType = 3;
-	optional int32 leaderboardRank = 4;
-	optional double leaderboardScore = 5;
-}
-
 
 message FullUserProto {
 	optional int32 userId = 1;
@@ -727,35 +678,10 @@ message NeutralCityElementProto {
 
 //------------------------------------------------------------------------------------------
 
-enum CritStructType {
-	AVIARY = 0;
-	CARPENTER = 2;
-	VAULT = 3;
-	ARMORY = 4;
-	//MARKETPLACE = 5;
-	BLACKSMITH = 6;
-}
-
-message FullUserCritstructProto {
-	optional CritStructType type = 1;
-	optional CoordinateProto coords = 2;
-	optional StructOrientation orientation = 3;
-}
-
-//------------------------------------------------------------------------------------------
-
 enum StructOrientation {
 	POSITION_1 = 0;
 	POSITION_2 = 1;
 }
-
-enum ExpansionDirection {
-	FAR_LEFT = 0;
-	FAR_RIGHT = 1;
-	NEAR_LEFT = 2;
-	NEAR_RIGHT = 3;
-}
-
 //------------------------------------------------------------------------------------------
 
 message MinimumUserTaskProto {
@@ -907,16 +833,6 @@ message DialogueProto {
 			BAZAAR = 25;		
 		}
 	}
-}
-
-//------------------------------------------------------------------------------------------
-
-message PlayerWallPostProto {
-	optional int32 playerWallPostId = 1;
-	optional MinimumUserProto poster = 2;
-	optional int32 wallOwnerId = 3;
-	optional int64 timeOfPost = 4;
-	optional string content = 5;
 }
 
 //------------------------------------------------------------------------------------------

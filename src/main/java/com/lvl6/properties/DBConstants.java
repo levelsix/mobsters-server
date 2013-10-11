@@ -26,7 +26,6 @@ public class DBConstants {
   public static final String TABLE_QUESTS = "quests";
   public static final String TABLE_STRUCTURES = "structures";
   public static final String TABLE_LEVELS_REQUIRED_EXPERIENCE = "levels_required_experience";
-  public static final String TABLE_BATTLE_HISTORY = "battle_history";
   public static final String TABLE_REFERRALS = "referrals";
   public static final String TABLE_AVAILABLE_REFERRAL_CODES = "available_referral_codes";
   public static final String TABLE_NEUTRAL_CITY_ELEMENTS = "neutral_city_elems";
@@ -331,15 +330,6 @@ public class DBConstants {
   public static final String USER_SESSIONS__LOGIN_TIME = "login_time";
   public static final String USER_SESSIONS__LOGOUT_TIME = "logout_time";
 
-  /*BATTLE HISTORY*/
-  public static final String BATTLE_HISTORY__ATTACKER_ID = "attacker_id";
-  public static final String BATTLE_HISTORY__DEFENDER_ID = "defender_id";
-  public static final String BATTLE_HISTORY__RESULT = "result";
-  public static final String BATTLE_HISTORY__BATTLE_COMPLETE_TIME = "battle_complete_time";
-  public static final String BATTLE_HISTORY__COINS_STOLEN = "coins_stolen";
-  public static final String BATTLE_HISTORY__EQUIP_STOLEN = "equip_stolen";
-  public static final String BATTLE_HISTORY__EXP_GAINED = "exp_gained";
-  public static final String BATTLE_HISTORY__STOLEN_EQUIP_LEVEL = "stolen_equip_level";
   
   /*REFERRALS*/
   public static final String REFERRALS__REFERRER_ID = "referrer_id";
