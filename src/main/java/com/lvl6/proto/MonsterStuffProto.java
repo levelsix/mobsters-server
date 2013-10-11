@@ -1414,11 +1414,11 @@ public final class MonsterStuffProto {
     boolean hasMonsterId();
     int getMonsterId();
     
-    // optional int32 enhancementPercentage = 5;
+    // optional int32 enhancementPercentage = 4;
     boolean hasEnhancementPercentage();
     int getEnhancementPercentage();
     
-    // optional int32 currentDurability = 6;
+    // optional int32 currentDurability = 5;
     boolean hasCurrentDurability();
     int getCurrentDurability();
   }
@@ -1481,8 +1481,8 @@ public final class MonsterStuffProto {
       return monsterId_;
     }
     
-    // optional int32 enhancementPercentage = 5;
-    public static final int ENHANCEMENTPERCENTAGE_FIELD_NUMBER = 5;
+    // optional int32 enhancementPercentage = 4;
+    public static final int ENHANCEMENTPERCENTAGE_FIELD_NUMBER = 4;
     private int enhancementPercentage_;
     public boolean hasEnhancementPercentage() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
@@ -1491,8 +1491,8 @@ public final class MonsterStuffProto {
       return enhancementPercentage_;
     }
     
-    // optional int32 currentDurability = 6;
-    public static final int CURRENTDURABILITY_FIELD_NUMBER = 6;
+    // optional int32 currentDurability = 5;
+    public static final int CURRENTDURABILITY_FIELD_NUMBER = 5;
     private int currentDurability_;
     public boolean hasCurrentDurability() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
@@ -1530,10 +1530,10 @@ public final class MonsterStuffProto {
         output.writeInt32(3, monsterId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(5, enhancementPercentage_);
+        output.writeInt32(4, enhancementPercentage_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(6, currentDurability_);
+        output.writeInt32(5, currentDurability_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1558,11 +1558,11 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, enhancementPercentage_);
+          .computeInt32Size(4, enhancementPercentage_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, currentDurability_);
+          .computeInt32Size(5, currentDurability_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1833,12 +1833,12 @@ public final class MonsterStuffProto {
               monsterId_ = input.readInt32();
               break;
             }
-            case 40: {
+            case 32: {
               bitField0_ |= 0x00000008;
               enhancementPercentage_ = input.readInt32();
               break;
             }
-            case 48: {
+            case 40: {
               bitField0_ |= 0x00000010;
               currentDurability_ = input.readInt32();
               break;
@@ -1912,7 +1912,7 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional int32 enhancementPercentage = 5;
+      // optional int32 enhancementPercentage = 4;
       private int enhancementPercentage_ ;
       public boolean hasEnhancementPercentage() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
@@ -1933,7 +1933,7 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional int32 currentDurability = 6;
+      // optional int32 currentDurability = 5;
       private int currentDurability_ ;
       public boolean hasCurrentDurability() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
@@ -1965,458 +1965,6 @@ public final class MonsterStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserMonsterProto)
   }
   
-  public interface FullBossProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 bossId = 1;
-    boolean hasBossId();
-    int getBossId();
-    
-    // optional int32 cityId = 2;
-    boolean hasCityId();
-    int getCityId();
-    
-    // optional int32 assetNumWithinCity = 3;
-    boolean hasAssetNumWithinCity();
-    int getAssetNumWithinCity();
-  }
-  public static final class FullBossProto extends
-      com.google.protobuf.GeneratedMessage
-      implements FullBossProtoOrBuilder {
-    // Use FullBossProto.newBuilder() to construct.
-    private FullBossProto(Builder builder) {
-      super(builder);
-    }
-    private FullBossProto(boolean noInit) {}
-    
-    private static final FullBossProto defaultInstance;
-    public static FullBossProto getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public FullBossProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_FullBossProto_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_FullBossProto_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // optional int32 bossId = 1;
-    public static final int BOSSID_FIELD_NUMBER = 1;
-    private int bossId_;
-    public boolean hasBossId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public int getBossId() {
-      return bossId_;
-    }
-    
-    // optional int32 cityId = 2;
-    public static final int CITYID_FIELD_NUMBER = 2;
-    private int cityId_;
-    public boolean hasCityId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public int getCityId() {
-      return cityId_;
-    }
-    
-    // optional int32 assetNumWithinCity = 3;
-    public static final int ASSETNUMWITHINCITY_FIELD_NUMBER = 3;
-    private int assetNumWithinCity_;
-    public boolean hasAssetNumWithinCity() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public int getAssetNumWithinCity() {
-      return assetNumWithinCity_;
-    }
-    
-    private void initFields() {
-      bossId_ = 0;
-      cityId_ = 0;
-      assetNumWithinCity_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, bossId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, cityId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, assetNumWithinCity_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, bossId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, cityId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, assetNumWithinCity_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-    
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.MonsterStuffProto.FullBossProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.MonsterStuffProto.FullBossProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.MonsterStuffProto.FullBossProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_FullBossProto_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_FullBossProto_fieldAccessorTable;
-      }
-      
-      // Construct using com.lvl6.proto.MonsterStuffProto.FullBossProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        bossId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        cityId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        assetNumWithinCity_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.MonsterStuffProto.FullBossProto.getDescriptor();
-      }
-      
-      public com.lvl6.proto.MonsterStuffProto.FullBossProto getDefaultInstanceForType() {
-        return com.lvl6.proto.MonsterStuffProto.FullBossProto.getDefaultInstance();
-      }
-      
-      public com.lvl6.proto.MonsterStuffProto.FullBossProto build() {
-        com.lvl6.proto.MonsterStuffProto.FullBossProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.lvl6.proto.MonsterStuffProto.FullBossProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.MonsterStuffProto.FullBossProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.MonsterStuffProto.FullBossProto buildPartial() {
-        com.lvl6.proto.MonsterStuffProto.FullBossProto result = new com.lvl6.proto.MonsterStuffProto.FullBossProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.bossId_ = bossId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.cityId_ = cityId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.assetNumWithinCity_ = assetNumWithinCity_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.MonsterStuffProto.FullBossProto) {
-          return mergeFrom((com.lvl6.proto.MonsterStuffProto.FullBossProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.FullBossProto other) {
-        if (other == com.lvl6.proto.MonsterStuffProto.FullBossProto.getDefaultInstance()) return this;
-        if (other.hasBossId()) {
-          setBossId(other.getBossId());
-        }
-        if (other.hasCityId()) {
-          setCityId(other.getCityId());
-        }
-        if (other.hasAssetNumWithinCity()) {
-          setAssetNumWithinCity(other.getAssetNumWithinCity());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              bossId_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              cityId_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              assetNumWithinCity_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      }
-      
-      private int bitField0_;
-      
-      // optional int32 bossId = 1;
-      private int bossId_ ;
-      public boolean hasBossId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public int getBossId() {
-        return bossId_;
-      }
-      public Builder setBossId(int value) {
-        bitField0_ |= 0x00000001;
-        bossId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearBossId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        bossId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 cityId = 2;
-      private int cityId_ ;
-      public boolean hasCityId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public int getCityId() {
-        return cityId_;
-      }
-      public Builder setCityId(int value) {
-        bitField0_ |= 0x00000002;
-        cityId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCityId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        cityId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 assetNumWithinCity = 3;
-      private int assetNumWithinCity_ ;
-      public boolean hasAssetNumWithinCity() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public int getAssetNumWithinCity() {
-        return assetNumWithinCity_;
-      }
-      public Builder setAssetNumWithinCity(int value) {
-        bitField0_ |= 0x00000004;
-        assetNumWithinCity_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearAssetNumWithinCity() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        assetNumWithinCity_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullBossProto)
-    }
-    
-    static {
-      defaultInstance = new FullBossProto(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullBossProto)
-  }
-  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MonsterProto_descriptor;
   private static
@@ -2427,11 +1975,6 @@ public final class MonsterStuffProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_FullBossProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_FullBossProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2460,10 +2003,8 @@ public final class MonsterStuffProto {
       "\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\"\212\001\n\024Full" +
       "UserMonsterProto\022\025\n\ruserMonsterId\030\001 \001(\003\022" +
       "\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\035\n\025en" +
-      "hancementPercentage\030\005 \001(\005\022\031\n\021currentDura",
-      "bility\030\006 \001(\005\"K\n\rFullBossProto\022\016\n\006bossId\030" +
-      "\001 \001(\005\022\016\n\006cityId\030\002 \001(\005\022\032\n\022assetNumWithinC" +
-      "ity\030\003 \001(\005B\023B\021MonsterStuffProto"
+      "hancementPercentage\030\004 \001(\005\022\031\n\021currentDura",
+      "bility\030\005 \001(\005B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2486,14 +2027,6 @@ public final class MonsterStuffProto {
               new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "EnhancementPercentage", "CurrentDurability", },
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder.class);
-          internal_static_com_lvl6_proto_FullBossProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_FullBossProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FullBossProto_descriptor,
-              new java.lang.String[] { "BossId", "CityId", "AssetNumWithinCity", },
-              com.lvl6.proto.MonsterStuffProto.FullBossProto.class,
-              com.lvl6.proto.MonsterStuffProto.FullBossProto.Builder.class);
           return null;
         }
       };

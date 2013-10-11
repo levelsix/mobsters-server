@@ -48,17 +48,9 @@ message FullUserMonsterProto {
 	optional int64 userMonsterId = 1;
 	optional int32 userId = 2;
 	optional int32 monsterId = 3;
-	optional int32 enhancementPercentage = 5;
+	optional int32 enhancementPercentage = 4;
 	//create time
 	//reason
-	optional int32 currentDurability = 6; 
+	optional int32 currentDurability = 5; 
 }
-//------------------------------------------------------------------------------------------
-
-message FullBossProto {
-	optional int32 bossId = 1;
-	optional int32 cityId = 2;
-	optional int32 assetNumWithinCity = 3;
-}
-
 //------------------------------------------------------------------------------------------
