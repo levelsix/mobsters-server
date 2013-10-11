@@ -2231,10 +2231,10 @@ public final class EventStartupProto {
       boolean hasMaxNumOfSingleStruct();
       int getMaxNumOfSingleStruct();
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants formulaConstants = 4;
-      boolean hasFormulaConstants();
-      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getFormulaConstants();
-      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getFormulaConstantsOrBuilder();
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants = 4;
+      boolean hasNormStructConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getNormStructConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getNormStructConstantsOrBuilder();
       
       // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
       java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto> 
@@ -2276,10 +2276,10 @@ public final class EventStartupProto {
       boolean hasLevelToShowRateUsPopup();
       int getLevelToShowRateUsPopup();
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.LeaderboardEventConstants leaderboardConstants = 13;
-      boolean hasLeaderboardConstants();
-      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants getLeaderboardConstants();
-      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstantsOrBuilder getLeaderboardConstantsOrBuilder();
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 13;
+      boolean hasTouramentConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getTouramentConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder getTouramentConstantsOrBuilder();
       
       // optional int32 fbConnectRewardDiamonds = 14;
       boolean hasFbConnectRewardDiamonds();
@@ -2326,7 +2326,7 @@ public final class EventStartupProto {
         return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable;
       }
       
-      public interface LeaderboardEventConstantsOrBuilder
+      public interface TournamentConstantsOrBuilder
           extends com.google.protobuf.MessageOrBuilder {
         
         // optional int32 winsWeight = 1;
@@ -2345,32 +2345,32 @@ public final class EventStartupProto {
         boolean hasNumHoursToShowAfterEventEnd();
         int getNumHoursToShowAfterEventEnd();
       }
-      public static final class LeaderboardEventConstants extends
+      public static final class TournamentConstants extends
           com.google.protobuf.GeneratedMessage
-          implements LeaderboardEventConstantsOrBuilder {
-        // Use LeaderboardEventConstants.newBuilder() to construct.
-        private LeaderboardEventConstants(Builder builder) {
+          implements TournamentConstantsOrBuilder {
+        // Use TournamentConstants.newBuilder() to construct.
+        private TournamentConstants(Builder builder) {
           super(builder);
         }
-        private LeaderboardEventConstants(boolean noInit) {}
+        private TournamentConstants(boolean noInit) {}
         
-        private static final LeaderboardEventConstants defaultInstance;
-        public static LeaderboardEventConstants getDefaultInstance() {
+        private static final TournamentConstants defaultInstance;
+        public static TournamentConstants getDefaultInstance() {
           return defaultInstance;
         }
         
-        public LeaderboardEventConstants getDefaultInstanceForType() {
+        public TournamentConstants getDefaultInstanceForType() {
           return defaultInstance;
         }
         
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_descriptor;
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
         }
         
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_fieldAccessorTable;
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
         }
         
         private int bitField0_;
@@ -2481,41 +2481,41 @@ public final class EventStartupProto {
           return super.writeReplace();
         }
         
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseFrom(
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
             com.google.protobuf.ByteString data)
             throws com.google.protobuf.InvalidProtocolBufferException {
           return newBuilder().mergeFrom(data).buildParsed();
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseFrom(
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
             com.google.protobuf.ByteString data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
           return newBuilder().mergeFrom(data, extensionRegistry)
                    .buildParsed();
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseFrom(byte[] data)
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(byte[] data)
             throws com.google.protobuf.InvalidProtocolBufferException {
           return newBuilder().mergeFrom(data).buildParsed();
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseFrom(
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
             byte[] data,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws com.google.protobuf.InvalidProtocolBufferException {
           return newBuilder().mergeFrom(data, extensionRegistry)
                    .buildParsed();
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseFrom(java.io.InputStream input)
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(java.io.InputStream input)
             throws java.io.IOException {
           return newBuilder().mergeFrom(input).buildParsed();
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseFrom(
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
           return newBuilder().mergeFrom(input, extensionRegistry)
                    .buildParsed();
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseDelimitedFrom(java.io.InputStream input)
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseDelimitedFrom(java.io.InputStream input)
             throws java.io.IOException {
           Builder builder = newBuilder();
           if (builder.mergeDelimitedFrom(input)) {
@@ -2524,7 +2524,7 @@ public final class EventStartupProto {
             return null;
           }
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseDelimitedFrom(
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseDelimitedFrom(
             java.io.InputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -2535,12 +2535,12 @@ public final class EventStartupProto {
             return null;
           }
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseFrom(
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
             com.google.protobuf.CodedInputStream input)
             throws java.io.IOException {
           return newBuilder().mergeFrom(input).buildParsed();
         }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants parseFrom(
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
@@ -2550,7 +2550,7 @@ public final class EventStartupProto {
         
         public static Builder newBuilder() { return Builder.create(); }
         public Builder newBuilderForType() { return newBuilder(); }
-        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants prototype) {
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants prototype) {
           return newBuilder().mergeFrom(prototype);
         }
         public Builder toBuilder() { return newBuilder(this); }
@@ -2563,18 +2563,18 @@ public final class EventStartupProto {
         }
         public static final class Builder extends
             com.google.protobuf.GeneratedMessage.Builder<Builder>
-           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstantsOrBuilder {
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder {
           public static final com.google.protobuf.Descriptors.Descriptor
               getDescriptor() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_descriptor;
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
           }
           
           protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
               internalGetFieldAccessorTable() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_fieldAccessorTable;
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
           }
           
-          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.newBuilder()
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.newBuilder()
           private Builder() {
             maybeForceBuilderInitialization();
           }
@@ -2610,24 +2610,24 @@ public final class EventStartupProto {
           
           public com.google.protobuf.Descriptors.Descriptor
               getDescriptorForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.getDescriptor();
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDescriptor();
           }
           
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants getDefaultInstanceForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.getDefaultInstance();
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
           }
           
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants build() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants result = buildPartial();
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = buildPartial();
             if (!result.isInitialized()) {
               throw newUninitializedMessageException(result);
             }
             return result;
           }
           
-          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants buildParsed()
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants buildParsed()
               throws com.google.protobuf.InvalidProtocolBufferException {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants result = buildPartial();
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = buildPartial();
             if (!result.isInitialized()) {
               throw newUninitializedMessageException(
                 result).asInvalidProtocolBufferException();
@@ -2635,8 +2635,8 @@ public final class EventStartupProto {
             return result;
           }
           
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants buildPartial() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants(this);
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants(this);
             int from_bitField0_ = bitField0_;
             int to_bitField0_ = 0;
             if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2661,16 +2661,16 @@ public final class EventStartupProto {
           }
           
           public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants) {
-              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants)other);
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants)other);
             } else {
               super.mergeFrom(other);
               return this;
             }
           }
           
-          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants other) {
-            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.getDefaultInstance()) return this;
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance()) return this;
             if (other.hasWinsWeight()) {
               setWinsWeight(other.getWinsWeight());
             }
@@ -2824,15 +2824,15 @@ public final class EventStartupProto {
             return this;
           }
           
-          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.LeaderboardEventConstants)
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
         }
         
         static {
-          defaultInstance = new LeaderboardEventConstants(true);
+          defaultInstance = new TournamentConstants(true);
           defaultInstance.initFields();
         }
         
-        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.LeaderboardEventConstants)
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
       }
       
       public interface DownloadableNibConstantsOrBuilder
@@ -5033,17 +5033,17 @@ public final class EventStartupProto {
         return maxNumOfSingleStruct_;
       }
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants formulaConstants = 4;
-      public static final int FORMULACONSTANTS_FIELD_NUMBER = 4;
-      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants formulaConstants_;
-      public boolean hasFormulaConstants() {
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants = 4;
+      public static final int NORMSTRUCTCONSTANTS_FIELD_NUMBER = 4;
+      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants_;
+      public boolean hasNormStructConstants() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getFormulaConstants() {
-        return formulaConstants_;
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getNormStructConstants() {
+        return normStructConstants_;
       }
-      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getFormulaConstantsOrBuilder() {
-        return formulaConstants_;
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getNormStructConstantsOrBuilder() {
+        return normStructConstants_;
       }
       
       // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
@@ -5143,17 +5143,17 @@ public final class EventStartupProto {
         return levelToShowRateUsPopup_;
       }
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.LeaderboardEventConstants leaderboardConstants = 13;
-      public static final int LEADERBOARDCONSTANTS_FIELD_NUMBER = 13;
-      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants leaderboardConstants_;
-      public boolean hasLeaderboardConstants() {
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 13;
+      public static final int TOURAMENTCONSTANTS_FIELD_NUMBER = 13;
+      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants_;
+      public boolean hasTouramentConstants() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
-      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants getLeaderboardConstants() {
-        return leaderboardConstants_;
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getTouramentConstants() {
+        return touramentConstants_;
       }
-      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstantsOrBuilder getLeaderboardConstantsOrBuilder() {
-        return leaderboardConstants_;
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder getTouramentConstantsOrBuilder() {
+        return touramentConstants_;
       }
       
       // optional int32 fbConnectRewardDiamonds = 14;
@@ -5225,7 +5225,7 @@ public final class EventStartupProto {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
         maxNumOfSingleStruct_ = 0;
-        formulaConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
+        normStructConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
         animatedSpriteOffsets_ = java.util.Collections.emptyList();
         minNameLength_ = 0;
         maxNameLength_ = 0;
@@ -5234,7 +5234,7 @@ public final class EventStartupProto {
         downloadableNibConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance();
         numHoursBeforeReshowingGoldSale_ = 0;
         levelToShowRateUsPopup_ = 0;
-        leaderboardConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.getDefaultInstance();
+        touramentConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
         fbConnectRewardDiamonds_ = 0;
         faqFileName_ = "";
         adminChatUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
@@ -5262,7 +5262,7 @@ public final class EventStartupProto {
           output.writeInt32(3, maxNumOfSingleStruct_);
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          output.writeMessage(4, formulaConstants_);
+          output.writeMessage(4, normStructConstants_);
         }
         for (int i = 0; i < animatedSpriteOffsets_.size(); i++) {
           output.writeMessage(5, animatedSpriteOffsets_.get(i));
@@ -5289,7 +5289,7 @@ public final class EventStartupProto {
           output.writeInt32(12, levelToShowRateUsPopup_);
         }
         if (((bitField0_ & 0x00000400) == 0x00000400)) {
-          output.writeMessage(13, leaderboardConstants_);
+          output.writeMessage(13, touramentConstants_);
         }
         if (((bitField0_ & 0x00000800) == 0x00000800)) {
           output.writeInt32(14, fbConnectRewardDiamonds_);
@@ -5326,7 +5326,7 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(4, formulaConstants_);
+            .computeMessageSize(4, normStructConstants_);
         }
         for (int i = 0; i < animatedSpriteOffsets_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
@@ -5362,7 +5362,7 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00000400) == 0x00000400)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(13, leaderboardConstants_);
+            .computeMessageSize(13, touramentConstants_);
         }
         if (((bitField0_ & 0x00000800) == 0x00000800)) {
           size += com.google.protobuf.CodedOutputStream
@@ -5497,11 +5497,11 @@ public final class EventStartupProto {
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
             getInAppPurchasePackagesFieldBuilder();
-            getFormulaConstantsFieldBuilder();
+            getNormStructConstantsFieldBuilder();
             getAnimatedSpriteOffsetsFieldBuilder();
             getClanConstantsFieldBuilder();
             getDownloadableNibConstantsFieldBuilder();
-            getLeaderboardConstantsFieldBuilder();
+            getTouramentConstantsFieldBuilder();
             getAdminChatUserProtoFieldBuilder();
           }
         }
@@ -5521,10 +5521,10 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000002);
           maxNumOfSingleStruct_ = 0;
           bitField0_ = (bitField0_ & ~0x00000004);
-          if (formulaConstantsBuilder_ == null) {
-            formulaConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
+          if (normStructConstantsBuilder_ == null) {
+            normStructConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
           } else {
-            formulaConstantsBuilder_.clear();
+            normStructConstantsBuilder_.clear();
           }
           bitField0_ = (bitField0_ & ~0x00000008);
           if (animatedSpriteOffsetsBuilder_ == null) {
@@ -5555,10 +5555,10 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000400);
           levelToShowRateUsPopup_ = 0;
           bitField0_ = (bitField0_ & ~0x00000800);
-          if (leaderboardConstantsBuilder_ == null) {
-            leaderboardConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.getDefaultInstance();
+          if (touramentConstantsBuilder_ == null) {
+            touramentConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
           } else {
-            leaderboardConstantsBuilder_.clear();
+            touramentConstantsBuilder_.clear();
           }
           bitField0_ = (bitField0_ & ~0x00001000);
           fbConnectRewardDiamonds_ = 0;
@@ -5631,10 +5631,10 @@ public final class EventStartupProto {
           if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
             to_bitField0_ |= 0x00000004;
           }
-          if (formulaConstantsBuilder_ == null) {
-            result.formulaConstants_ = formulaConstants_;
+          if (normStructConstantsBuilder_ == null) {
+            result.normStructConstants_ = normStructConstants_;
           } else {
-            result.formulaConstants_ = formulaConstantsBuilder_.build();
+            result.normStructConstants_ = normStructConstantsBuilder_.build();
           }
           if (animatedSpriteOffsetsBuilder_ == null) {
             if (((bitField0_ & 0x00000010) == 0x00000010)) {
@@ -5684,10 +5684,10 @@ public final class EventStartupProto {
           if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
             to_bitField0_ |= 0x00000400;
           }
-          if (leaderboardConstantsBuilder_ == null) {
-            result.leaderboardConstants_ = leaderboardConstants_;
+          if (touramentConstantsBuilder_ == null) {
+            result.touramentConstants_ = touramentConstants_;
           } else {
-            result.leaderboardConstants_ = leaderboardConstantsBuilder_.build();
+            result.touramentConstants_ = touramentConstantsBuilder_.build();
           }
           if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
             to_bitField0_ |= 0x00000800;
@@ -5757,8 +5757,8 @@ public final class EventStartupProto {
           if (other.hasMaxNumOfSingleStruct()) {
             setMaxNumOfSingleStruct(other.getMaxNumOfSingleStruct());
           }
-          if (other.hasFormulaConstants()) {
-            mergeFormulaConstants(other.getFormulaConstants());
+          if (other.hasNormStructConstants()) {
+            mergeNormStructConstants(other.getNormStructConstants());
           }
           if (animatedSpriteOffsetsBuilder_ == null) {
             if (!other.animatedSpriteOffsets_.isEmpty()) {
@@ -5807,8 +5807,8 @@ public final class EventStartupProto {
           if (other.hasLevelToShowRateUsPopup()) {
             setLevelToShowRateUsPopup(other.getLevelToShowRateUsPopup());
           }
-          if (other.hasLeaderboardConstants()) {
-            mergeLeaderboardConstants(other.getLeaderboardConstants());
+          if (other.hasTouramentConstants()) {
+            mergeTouramentConstants(other.getTouramentConstants());
           }
           if (other.hasFbConnectRewardDiamonds()) {
             setFbConnectRewardDiamonds(other.getFbConnectRewardDiamonds());
@@ -5871,11 +5871,11 @@ public final class EventStartupProto {
               }
               case 34: {
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.newBuilder();
-                if (hasFormulaConstants()) {
-                  subBuilder.mergeFrom(getFormulaConstants());
+                if (hasNormStructConstants()) {
+                  subBuilder.mergeFrom(getNormStructConstants());
                 }
                 input.readMessage(subBuilder, extensionRegistry);
-                setFormulaConstants(subBuilder.buildPartial());
+                setNormStructConstants(subBuilder.buildPartial());
                 break;
               }
               case 42: {
@@ -5928,12 +5928,12 @@ public final class EventStartupProto {
                 break;
               }
               case 106: {
-                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.newBuilder();
-                if (hasLeaderboardConstants()) {
-                  subBuilder.mergeFrom(getLeaderboardConstants());
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.newBuilder();
+                if (hasTouramentConstants()) {
+                  subBuilder.mergeFrom(getTouramentConstants());
                 }
                 input.readMessage(subBuilder, extensionRegistry);
-                setLeaderboardConstants(subBuilder.buildPartial());
+                setTouramentConstants(subBuilder.buildPartial());
                 break;
               }
               case 112: {
@@ -6194,94 +6194,94 @@ public final class EventStartupProto {
           return this;
         }
         
-        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants formulaConstants = 4;
-        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants formulaConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants = 4;
+        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder> formulaConstantsBuilder_;
-        public boolean hasFormulaConstants() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder> normStructConstantsBuilder_;
+        public boolean hasNormStructConstants() {
           return ((bitField0_ & 0x00000008) == 0x00000008);
         }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getFormulaConstants() {
-          if (formulaConstantsBuilder_ == null) {
-            return formulaConstants_;
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getNormStructConstants() {
+          if (normStructConstantsBuilder_ == null) {
+            return normStructConstants_;
           } else {
-            return formulaConstantsBuilder_.getMessage();
+            return normStructConstantsBuilder_.getMessage();
           }
         }
-        public Builder setFormulaConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants value) {
-          if (formulaConstantsBuilder_ == null) {
+        public Builder setNormStructConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants value) {
+          if (normStructConstantsBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            formulaConstants_ = value;
+            normStructConstants_ = value;
             onChanged();
           } else {
-            formulaConstantsBuilder_.setMessage(value);
+            normStructConstantsBuilder_.setMessage(value);
           }
           bitField0_ |= 0x00000008;
           return this;
         }
-        public Builder setFormulaConstants(
+        public Builder setNormStructConstants(
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder builderForValue) {
-          if (formulaConstantsBuilder_ == null) {
-            formulaConstants_ = builderForValue.build();
+          if (normStructConstantsBuilder_ == null) {
+            normStructConstants_ = builderForValue.build();
             onChanged();
           } else {
-            formulaConstantsBuilder_.setMessage(builderForValue.build());
+            normStructConstantsBuilder_.setMessage(builderForValue.build());
           }
           bitField0_ |= 0x00000008;
           return this;
         }
-        public Builder mergeFormulaConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants value) {
-          if (formulaConstantsBuilder_ == null) {
+        public Builder mergeNormStructConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants value) {
+          if (normStructConstantsBuilder_ == null) {
             if (((bitField0_ & 0x00000008) == 0x00000008) &&
-                formulaConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance()) {
-              formulaConstants_ =
-                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.newBuilder(formulaConstants_).mergeFrom(value).buildPartial();
+                normStructConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance()) {
+              normStructConstants_ =
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.newBuilder(normStructConstants_).mergeFrom(value).buildPartial();
             } else {
-              formulaConstants_ = value;
+              normStructConstants_ = value;
             }
             onChanged();
           } else {
-            formulaConstantsBuilder_.mergeFrom(value);
+            normStructConstantsBuilder_.mergeFrom(value);
           }
           bitField0_ |= 0x00000008;
           return this;
         }
-        public Builder clearFormulaConstants() {
-          if (formulaConstantsBuilder_ == null) {
-            formulaConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
+        public Builder clearNormStructConstants() {
+          if (normStructConstantsBuilder_ == null) {
+            normStructConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
             onChanged();
           } else {
-            formulaConstantsBuilder_.clear();
+            normStructConstantsBuilder_.clear();
           }
           bitField0_ = (bitField0_ & ~0x00000008);
           return this;
         }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder getFormulaConstantsBuilder() {
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder getNormStructConstantsBuilder() {
           bitField0_ |= 0x00000008;
           onChanged();
-          return getFormulaConstantsFieldBuilder().getBuilder();
+          return getNormStructConstantsFieldBuilder().getBuilder();
         }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getFormulaConstantsOrBuilder() {
-          if (formulaConstantsBuilder_ != null) {
-            return formulaConstantsBuilder_.getMessageOrBuilder();
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getNormStructConstantsOrBuilder() {
+          if (normStructConstantsBuilder_ != null) {
+            return normStructConstantsBuilder_.getMessageOrBuilder();
           } else {
-            return formulaConstants_;
+            return normStructConstants_;
           }
         }
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder> 
-            getFormulaConstantsFieldBuilder() {
-          if (formulaConstantsBuilder_ == null) {
-            formulaConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+            getNormStructConstantsFieldBuilder() {
+          if (normStructConstantsBuilder_ == null) {
+            normStructConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder>(
-                    formulaConstants_,
+                    normStructConstants_,
                     getParentForChildren(),
                     isClean());
-            formulaConstants_ = null;
+            normStructConstants_ = null;
           }
-          return formulaConstantsBuilder_;
+          return normStructConstantsBuilder_;
         }
         
         // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
@@ -6755,94 +6755,94 @@ public final class EventStartupProto {
           return this;
         }
         
-        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.LeaderboardEventConstants leaderboardConstants = 13;
-        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants leaderboardConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.getDefaultInstance();
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 13;
+        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstantsOrBuilder> leaderboardConstantsBuilder_;
-        public boolean hasLeaderboardConstants() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder> touramentConstantsBuilder_;
+        public boolean hasTouramentConstants() {
           return ((bitField0_ & 0x00001000) == 0x00001000);
         }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants getLeaderboardConstants() {
-          if (leaderboardConstantsBuilder_ == null) {
-            return leaderboardConstants_;
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getTouramentConstants() {
+          if (touramentConstantsBuilder_ == null) {
+            return touramentConstants_;
           } else {
-            return leaderboardConstantsBuilder_.getMessage();
+            return touramentConstantsBuilder_.getMessage();
           }
         }
-        public Builder setLeaderboardConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants value) {
-          if (leaderboardConstantsBuilder_ == null) {
+        public Builder setTouramentConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants value) {
+          if (touramentConstantsBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            leaderboardConstants_ = value;
+            touramentConstants_ = value;
             onChanged();
           } else {
-            leaderboardConstantsBuilder_.setMessage(value);
+            touramentConstantsBuilder_.setMessage(value);
           }
           bitField0_ |= 0x00001000;
           return this;
         }
-        public Builder setLeaderboardConstants(
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.Builder builderForValue) {
-          if (leaderboardConstantsBuilder_ == null) {
-            leaderboardConstants_ = builderForValue.build();
+        public Builder setTouramentConstants(
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder builderForValue) {
+          if (touramentConstantsBuilder_ == null) {
+            touramentConstants_ = builderForValue.build();
             onChanged();
           } else {
-            leaderboardConstantsBuilder_.setMessage(builderForValue.build());
+            touramentConstantsBuilder_.setMessage(builderForValue.build());
           }
           bitField0_ |= 0x00001000;
           return this;
         }
-        public Builder mergeLeaderboardConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants value) {
-          if (leaderboardConstantsBuilder_ == null) {
+        public Builder mergeTouramentConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants value) {
+          if (touramentConstantsBuilder_ == null) {
             if (((bitField0_ & 0x00001000) == 0x00001000) &&
-                leaderboardConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.getDefaultInstance()) {
-              leaderboardConstants_ =
-                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.newBuilder(leaderboardConstants_).mergeFrom(value).buildPartial();
+                touramentConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance()) {
+              touramentConstants_ =
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.newBuilder(touramentConstants_).mergeFrom(value).buildPartial();
             } else {
-              leaderboardConstants_ = value;
+              touramentConstants_ = value;
             }
             onChanged();
           } else {
-            leaderboardConstantsBuilder_.mergeFrom(value);
+            touramentConstantsBuilder_.mergeFrom(value);
           }
           bitField0_ |= 0x00001000;
           return this;
         }
-        public Builder clearLeaderboardConstants() {
-          if (leaderboardConstantsBuilder_ == null) {
-            leaderboardConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.getDefaultInstance();
+        public Builder clearTouramentConstants() {
+          if (touramentConstantsBuilder_ == null) {
+            touramentConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
             onChanged();
           } else {
-            leaderboardConstantsBuilder_.clear();
+            touramentConstantsBuilder_.clear();
           }
           bitField0_ = (bitField0_ & ~0x00001000);
           return this;
         }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.Builder getLeaderboardConstantsBuilder() {
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder getTouramentConstantsBuilder() {
           bitField0_ |= 0x00001000;
           onChanged();
-          return getLeaderboardConstantsFieldBuilder().getBuilder();
+          return getTouramentConstantsFieldBuilder().getBuilder();
         }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstantsOrBuilder getLeaderboardConstantsOrBuilder() {
-          if (leaderboardConstantsBuilder_ != null) {
-            return leaderboardConstantsBuilder_.getMessageOrBuilder();
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder getTouramentConstantsOrBuilder() {
+          if (touramentConstantsBuilder_ != null) {
+            return touramentConstantsBuilder_.getMessageOrBuilder();
           } else {
-            return leaderboardConstants_;
+            return touramentConstants_;
           }
         }
         private com.google.protobuf.SingleFieldBuilder<
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstantsOrBuilder> 
-            getLeaderboardConstantsFieldBuilder() {
-          if (leaderboardConstantsBuilder_ == null) {
-            leaderboardConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstantsOrBuilder>(
-                    leaderboardConstants_,
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder> 
+            getTouramentConstantsFieldBuilder() {
+          if (touramentConstantsBuilder_ == null) {
+            touramentConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder>(
+                    touramentConstants_,
                     getParentForChildren(),
                     isClean());
-            leaderboardConstants_ = null;
+            touramentConstants_ = null;
           }
-          return leaderboardConstantsBuilder_;
+          return touramentConstantsBuilder_;
         }
         
         // optional int32 fbConnectRewardDiamonds = 14;
@@ -11901,10 +11901,10 @@ public final class EventStartupProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_descriptor;
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_fieldAccessorTable;
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
   private static
@@ -11941,7 +11941,7 @@ public final class EventStartupProto {
       "upRequestProto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionN" +
       "um\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddres" +
       "s\030\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForce" +
-      "Tutorial\030\006 \001(\010\"\211\033\n\024StartupResponseProto\022" +
+      "Tutorial\030\006 \001(\010\"\376\032\n\024StartupResponseProto\022" +
       "-\n\006sender\030\001 \001(\0132\035.com.lvl6.proto.FullUse" +
       "rProto\022I\n\rstartupStatus\030\002 \001(\01622.com.lvl6",
       ".proto.StartupResponseProto.StartupStatu" +
@@ -11982,53 +11982,53 @@ public final class EventStartupProto {
       "ferralNotificationProto\0222\n\010referred\030\001 \001(" +
       "\0132 .com.lvl6.proto.MinimumUserProto\022\023\n\013r" +
       "ecruitTime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer" +
-      "\030\003 \001(\005\032\261\r\n\020StartupConstants\022H\n\025inAppPurc" +
+      "\030\003 \001(\005\032\246\r\n\020StartupConstants\022H\n\025inAppPurc" +
       "hasePackages\030\001 \003(\0132).com.lvl6.proto.InAp",
       "pPurchasePackageProto\022\027\n\017maxLevelForUser" +
-      "\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022c\n\020" +
-      "formulaConstants\030\004 \001(\0132I.com.lvl6.proto." +
-      "StartupResponseProto.StartupConstants.No" +
-      "rmStructConstants\022n\n\025animatedSpriteOffse" +
-      "ts\030\005 \003(\0132O.com.lvl6.proto.StartupRespons" +
-      "eProto.StartupConstants.AnimatedSpriteOf" +
-      "fsetProto\022\025\n\rminNameLength\030\006 \001(\005\022\025\n\rmaxN" +
-      "ameLength\030\007 \001(\005\022\035\n\025maxLengthOfChatString" +
-      "\030\010 \001(\005\022Z\n\rclanConstants\030\t \001(\0132C.com.lvl6",
-      ".proto.StartupResponseProto.StartupConst" +
-      "ants.ClanConstants\022p\n\030downloadableNibCon" +
-      "stants\030\n \001(\0132N.com.lvl6.proto.StartupRes" +
-      "ponseProto.StartupConstants.Downloadable" +
-      "NibConstants\022\'\n\037numHoursBeforeReshowingG" +
-      "oldSale\030\013 \001(\005\022\036\n\026levelToShowRateUsPopup\030" +
-      "\014 \001(\005\022m\n\024leaderboardConstants\030\r \001(\0132O.co" +
-      "m.lvl6.proto.StartupResponseProto.Startu" +
-      "pConstants.LeaderboardEventConstants\022\037\n\027" +
-      "fbConnectRewardDiamonds\030\016 \001(\005\022\023\n\013faqFile",
-      "Name\030\017 \001(\t\022<\n\022adminChatUserProto\030\020 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\037\n\027numB" +
-      "eginnerSalesAllowed\030\021 \001(\005\032\177\n\031Leaderboard" +
-      "EventConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lo" +
-      "ssesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n" +
-      "\033numHoursToShowAfterEventEnd\030\004 \001(\005\032c\n\030Do" +
-      "wnloadableNibConstants\022\022\n\nmapNibName\030\001 \001" +
-      "(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShop" +
-      "peNibName\030\003 \001(\t\032\235\001\n\rClanConstants\022 \n\030dia" +
-      "mondPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharLe",
-      "ngthForClanName\030\002 \001(\005\022\'\n\037maxCharLengthFo" +
-      "rClanDescription\030\003 \001(\005\022\037\n\027maxCharLengthF" +
-      "orClanTag\030\004 \001(\005\032_\n\031AnimatedSpriteOffsetP" +
-      "roto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132" +
-      "\037.com.lvl6.proto.CoordinateProto\032\367\001\n\023Nor" +
-      "mStructConstants\022/\n\'minutesToUpgradeForN" +
-      "ormStructMultiplier\030\001 \001(\001\022&\n\036incomeFromN" +
-      "ormStructMultiplier\030\002 \001(\001\022)\n!upgradeStru" +
-      "ctCoinCostExponentBase\030\003 \001(\001\022,\n$upgradeS" +
-      "tructDiamondCostExponentBase\030\004 \001(\001\022.\n&di",
-      "amondCostForInstantUpgradeMultiplier\030\005 \001" +
-      "(\001\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MIN" +
-      "OR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartup" +
-      "Status\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB" +
-      "\020\002B\023B\021EventStartupProto"
+      "\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022f\n\023" +
+      "normStructConstants\030\004 \001(\0132I.com.lvl6.pro" +
+      "to.StartupResponseProto.StartupConstants" +
+      ".NormStructConstants\022n\n\025animatedSpriteOf" +
+      "fsets\030\005 \003(\0132O.com.lvl6.proto.StartupResp" +
+      "onseProto.StartupConstants.AnimatedSprit" +
+      "eOffsetProto\022\025\n\rminNameLength\030\006 \001(\005\022\025\n\rm" +
+      "axNameLength\030\007 \001(\005\022\035\n\025maxLengthOfChatStr" +
+      "ing\030\010 \001(\005\022Z\n\rclanConstants\030\t \001(\0132C.com.l",
+      "vl6.proto.StartupResponseProto.StartupCo" +
+      "nstants.ClanConstants\022p\n\030downloadableNib" +
+      "Constants\030\n \001(\0132N.com.lvl6.proto.Startup" +
+      "ResponseProto.StartupConstants.Downloada" +
+      "bleNibConstants\022\'\n\037numHoursBeforeReshowi" +
+      "ngGoldSale\030\013 \001(\005\022\036\n\026levelToShowRateUsPop" +
+      "up\030\014 \001(\005\022e\n\022touramentConstants\030\r \001(\0132I.c" +
+      "om.lvl6.proto.StartupResponseProto.Start" +
+      "upConstants.TournamentConstants\022\037\n\027fbCon" +
+      "nectRewardDiamonds\030\016 \001(\005\022\023\n\013faqFileName\030",
+      "\017 \001(\t\022<\n\022adminChatUserProto\030\020 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022\037\n\027numBeginn" +
+      "erSalesAllowed\030\021 \001(\005\032y\n\023TournamentConsta" +
+      "nts\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030" +
+      "\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursTo" +
+      "ShowAfterEventEnd\030\004 \001(\005\032c\n\030DownloadableN" +
+      "ibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expan" +
+      "sionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003" +
+      " \001(\t\032\235\001\n\rClanConstants\022 \n\030diamondPriceTo" +
+      "CreateClan\030\001 \001(\005\022 \n\030maxCharLengthForClan",
+      "Name\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescri" +
+      "ption\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004" +
+      " \001(\005\032_\n\031AnimatedSpriteOffsetProto\022\021\n\tima" +
+      "geName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6." +
+      "proto.CoordinateProto\032\367\001\n\023NormStructCons" +
+      "tants\022/\n\'minutesToUpgradeForNormStructMu" +
+      "ltiplier\030\001 \001(\001\022&\n\036incomeFromNormStructMu" +
+      "ltiplier\030\002 \001(\001\022)\n!upgradeStructCoinCostE" +
+      "xponentBase\030\003 \001(\001\022,\n$upgradeStructDiamon" +
+      "dCostExponentBase\030\004 \001(\001\022.\n&diamondCostFo",
+      "rInstantUpgradeMultiplier\030\005 \001(\001\"A\n\014Updat" +
+      "eStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002" +
+      "\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nU" +
+      "SER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021Event" +
+      "StartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12072,17 +12072,17 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "FormulaConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "LeaderboardConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_descriptor =
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_LeaderboardEventConstants_descriptor,
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor,
               new java.lang.String[] { "WinsWeight", "LossesWeight", "FleesWeight", "NumHoursToShowAfterEventEnd", },
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.class,
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants.Builder.class);
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(1);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable = new

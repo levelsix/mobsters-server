@@ -11,93 +11,88 @@ public class DBConstants {
 	public static final String TABLE_CITIES = "city";
 	public static final String TABLE_NEUTRAL_CITY_ELEMENTS = "city_element";
 	public static final String TABLE_CLANS = "clan";
+	public static final String TABLE_CLAN_WALL_POSTS = "clan_chat_post";
+	public static final String TABLE_USER_CLANS = "clan_for_user";
+	public static final String TABLE_CITY_EXPANSION_COST = "expansion_cost";
+	public static final String TABLE_USER_CITY_EXPANSION_DATA = "expansion_purchase_for_user";
+	public static final String TABLE_GOLD_SALES = "gold_sale_event";	
+	public static final String TABLE_IAP_HISTORY = "iap_history_for_user";
+	public static final String TABLE_JOBS_BUILD_STRUCT = "job_build_struct";
+	public static final String TABLE_JOBS_UPGRADE_STRUCT = "job_upgrade_struct";
+	public static final String TABLE_LEADERBOARD_EVENTS = "leaderboard_event";	
+	public static final String TABLE_USER_LEADERBOARD_EVENTS = "leaderboard_event_for_user";
+	public static final String TABLE_LEADERBOARD_EVENT_REWARDS = "leaderboard_event_reward";
+  public static final String TABLE_LEVELS_REQUIRED_EXPERIENCE = "level_required_experience";
+  public static final String TABLE_LOCK_BOX_EVENTS = "lock_box_event";
+  public static final String TABLE_USER_LOCK_BOX_EVENTS = "lock_box_event_for_user";
+  public static final String TABLE_LOCK_BOX_ITEMS = "lock_box_item";
+  public static final String TABLE_USER_LOCK_BOX_ITEMS = "lock_box_item_for_user";
+  public static final String TABLE_LOGIN_HISTORY = "login_history_for_user";	
+  public static final String TABLE_EQUIPMENT = "monster";
+  public static final String TABLE_DELETED_USER_EQUIPS_FOR_ENHANCING = "monster_for_user_deleted";
+  public static final String TABLE_EQUIP_ENHANCEMENT_HISTORY = "monster_enhancement_history_for_user";  
+  public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY = "monster_enhancement_feeder_history";  
+  public static final String TABLE_BLACKSMITH_HISTORY = "monster_evolution_history_for_user";
+  public static final String TABLE_USER_EQUIP = "monster_for_user";
+  public static final String TABLE_MONSTER_REWARD = "monster_reward";
+  public static final String TABLE_PRIVATE_CHAT_POSTS = "private_chat_post";
+  public static final String TABLE_PROFANITY = "profanity";
+  public static final String TABLE_QUESTS = "quest";
+  public static final String TABLE_USER_QUESTS = "quest_for_user";
+  public static final String TABLE_REFERRALS = "referral";
+  public static final String TABLE_USER_SESSIONS = "session_for_user";
+  public static final String TABLE_STRUCTURES = "structure";
+  public static final String TABLE_USER_STRUCTS = "structure_for_user";
+  public static final String TABLE_USER_TASK = "task_for_user";
+  public static final String TABLE_USER_TASK_HISTORY = "task_history_for_user";
+  public static final String TABLE_TASK_STAGE = "task_stage";
+  public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
+  public static final String TABLE_USER = "user";
+  public static final String TABLE_FIRST_TIME_USERS = "user_pretutorial";
+  public static final String TABLE_BANNED_USER = "user_banned";
+  public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
+  
 	
-	
-  public static final String TABLE_USER = "users";
-  public static final String TABLE_USER_EQUIP = "user_equip";
   public static final String TABLE_USER_CITIES = "user_cities";
-  public static final String TABLE_USER_QUESTS = "user_quests";
-  public static final String TABLE_USER_STRUCTS = "user_structs";
   public static final String TABLE_USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS = "user_quests_completed_defeat_type_jobs";
   public static final String TABLE_USER_QUESTS_COMPLETED_TASKS = "user_quests_completed_tasks";
   public static final String TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS = "user_quests_defeat_type_job_progress";
   public static final String TABLE_USER_QUESTS_TASK_PROGRESS = "user_quests_task_progress";
-  public static final String TABLE_EQUIPMENT = "equipment";
   public static final String TABLE_TASKS = "tasks";
   public static final String TABLE_TASKS_EQUIPREQS = "tasks_equipreqs";
-  public static final String TABLE_IAP_HISTORY = "iap_history";
-  public static final String TABLE_BLACKSMITH = "blacksmith";
-  public static final String TABLE_BLACKSMITH_HISTORY = "blacksmith_history";
-  public static final String TABLE_JOBS_BUILD_STRUCT = "jobs_build_struct";
-  public static final String TABLE_JOBS_UPGRADE_STRUCT = "jobs_upgrade_struct";
   public static final String TABLE_JOBS_DEFEAT_TYPE = "jobs_defeat_type";
   public static final String TABLE_JOBS_POSSESS_EQUIP = "jobs_possess_equip";
-  public static final String TABLE_QUESTS = "quests";
-  public static final String TABLE_STRUCTURES = "structures";
-  public static final String TABLE_LEVELS_REQUIRED_EXPERIENCE = "levels_required_experience";
-  public static final String TABLE_REFERRALS = "referrals";
   public static final String TABLE_PLAYER_WALL_POSTS = "player_wall_posts";
   public static final String TABLE_C3P0_TEST = "c3p0_test_table";
   public static final String TABLE_IDDICTION_IDENTIFIERS = "iddiction_identifiers";
-  public static final String TABLE_USER_SESSIONS = "user_sessions";
-  public static final String TABLE_USER_CLANS = "user_clans";
   public static final String TABLE_DIAMOND_EQUIP_PURCHASE_HISTORY = "diamond_equip_purchase_history";
-  public static final String TABLE_CLAN_WALL_POSTS = "clan_wall_posts";
-  public static final String TABLE_CLAN_BULLETIN_POSTS = "clan_bulletin_posts";
   public static final String TABLE_THREE_CARD_MONTE = "three_card_monte";
   public static final String TABLE_MONSTER = "monster";
-  public static final String TABLE_MONSTER_REWARD = "monster_reward";
   public static final String TABLE_USER_BOSSES = "user_bosses";
   public static final String TABLE_USER_BOSS_HISTORY = "user_boss_history";
   public static final String TABLE_BOSS_EVENTS = "boss_events";
   //public static final String TABLE_BOSS_EQUIP_DROP_HISTORY = "boss_equip_drop_history";
   public static final String TABLE_BOSS_REWARD_DROP_HISTORY = "boss_reward_drop_history";
-  public static final String TABLE_LOCK_BOX_EVENTS = "lock_box_events";
-  public static final String TABLE_LOCK_BOX_ITEMS = "lock_box_items";
-  public static final String TABLE_USER_LOCK_BOX_EVENTS = "user_lock_box_events";
-  public static final String TABLE_USER_LOCK_BOX_ITEMS = "user_lock_box_items";
-  public static final String TABLE_GOLD_SALES = "gold_sales";
+  
   public static final String TABLE_CLAN_TOWERS = "clan_towers";
   public static final String TABLE_CLAN_TOWERS_HISTORY = "clan_towers_history";
   public static final String TABLE_CLAN_TOWER_USERS = "clan_tower_users";
   public static final String TABLE_CLAN_TIER_LEVELS = "clan_tier_levels";
-  public static final String TABLE_LEADERBOARD_EVENTS = "leaderboard_events";
-  public static final String TABLE_USER_LEADERBOARD_EVENTS = "user_leaderboard_events";
-  public static final String TABLE_LEADERBOARD_EVENT_REWARDS = "leaderboard_event_rewards";
-  public static final String TABLE_PROFANITY = "profanity";
-  public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
-  
-  public static final String TABLE_EQUIP_ENHANCEMENT = "equip_enhancement";
-  public static final String TABLE_EQUIP_ENHANCEMENT_HISTORY = "equip_enhancement_history";
-  public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS = "equip_enhancement_feeders";
-  public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY = "equip_enhancement_feeders_history";
-  public static final String TABLE_DELETED_USER_EQUIPS_FOR_ENHANCING = "deleted_user_equips_for_enhancing";
-  
   public static final String TABLE_USER_BOOSTER_ITEMS = "user_booster_items";
   
-  public static final String TABLE_BANNED_USER = "banned_user";
   
-  public static final String TABLE_LOGIN_HISTORY = "login_history";
-  public static final String TABLE_FIRST_TIME_USERS = "first_time_users";
   
   public static final String TABLE_DAILY_BONUS_REWARD = "daily_bonus_reward";
   public static final String TABLE_USER_DAILY_BONUS_REWARD_HISTORY = "user_daily_bonus_reward_history";
   
   public static final String TABLE_PRESTIGE_HISTORY = "prestige_history";
   
-  public static final String TABLE_PRIVATE_CHAT_POSTS = "private_chat_posts";
   
   public static final String TABLE_CITY_GEMS = "city_gems";
   public static final String TABLE_USER_CITY_GEMS = "user_city_gems";
-  
-  public static final String TABLE_TASK_STAGE = "task_stage";
-  public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
-  public static final String TABLE_USER_TASK = "user_task";
-  public static final String TABLE_USER_TASK_HISTORY = "user_task_history";
   public static final String TABLE_USER_TASK_STAGE = "user_task_stage";
   public static final String TABLE_USER_TASK_STAGE_HISTORY = "user_task_stage_history";
-  public static final String TABLE_CITY_EXPANSION_COST = "city_expansion_cost";
-  public static final String TABLE_USER_CITY_EXPANSION_DATA = "user_city_expansion_data";
+  
   public static final String TABLE_USER_AND_EQUIP_FAIL = "user_and_equip_fail";
   
   /*COLUMNNAMES*/
@@ -254,20 +249,6 @@ public class DBConstants {
   public static final String IAP_HISTORY__BID = "bid";
   public static final String IAP_HISTORY__BVRS = "bvrs";
   public static final String IAP_HISTORY__APP_ITEM_ID = "app_item_id";
-  
-  /*BLACKSMITH TABLE*/
-  public static final String BLACKSMITH__ID = GENERIC__ID;
-  public static final String BLACKSMITH__USER_ID = GENERIC__USER_ID;
-  public static final String BLACKSMITH__EQUIP_ID = "equip_id";
-  public static final String BLACKSMITH__GOAL_LEVEL = "goal_level";
-  public static final String BLACKSMITH__GUARANTEED = "guaranteed";
-  public static final String BLACKSMITH__START_TIME = "start_time";
-  public static final String BLACKSMITH__DIAMOND_GUARANTEE_COST = "diamond_guarantee_cost";
-  public static final String BLACKSMITH__TIME_OF_SPEEDUP = "time_of_speedup";
-  public static final String BLACKSMITH__ATTEMPT_COMPLETE = "attempt_complete";
-  public static final String BLACKSMITH__EQUIP_ONE_ENHANCEMENT_PERCENT = "equip_one_enhancement_percent";
-  public static final String BLACKSMITH__EQUIP_TWO_ENHANCEMENT_PERCENT = "equip_two_enhancement_percent";
-  public static final String BLACKSMITH__FORGE_SLOT_NUMBER = "forge_slot_number";
   
   /*BLACKSMITH HISTORY TABLE*/
   public static final String BLACKSMITH_HISTORY__ID = "blacksmith_id";

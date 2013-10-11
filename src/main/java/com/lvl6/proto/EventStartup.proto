@@ -82,7 +82,7 @@ message StartupResponseProto {
     	optional int32 maxLevelForUser = 2;
     	
 		optional int32 maxNumOfSingleStruct = 3;
-		optional NormStructConstants formulaConstants = 4;
+		optional NormStructConstants normStructConstants = 4;
 
 		repeated AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
 		optional int32 minNameLength = 6;
@@ -93,13 +93,13 @@ message StartupResponseProto {
 		
 		optional int32 numHoursBeforeReshowingGoldSale = 11;
 		optional int32 levelToShowRateUsPopup = 12;
-		optional LeaderboardEventConstants leaderboardConstants = 13;
+		optional TournamentConstants touramentConstants = 13;
 		optional int32 fbConnectRewardDiamonds = 14;
 		optional string faqFileName = 15;
 		optional MinimumUserProto adminChatUserProto = 16;
 		optional int32 numBeginnerSalesAllowed = 17;
 		
-		message LeaderboardEventConstants {
+		message TournamentConstants {
 			optional int32 winsWeight = 1;
 			optional int32 lossesWeight = 2;
 			optional int32 fleesWeight = 3;

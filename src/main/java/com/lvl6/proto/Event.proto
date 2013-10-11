@@ -464,19 +464,19 @@ message GeneralNotificationResponseProto {
 	optional ColorProto rgb = 3;
 }
 
-message SubmitEquipEnhancementRequestProto {
+message SubmitMonsterEnhancementRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 enhancingUserMonsterId = 2;
 	repeated int64 feederUserMonsterIds = 3;
 	optional int64 clientTime = 4;
 }
 
-message SubmitEquipEnhancementResponseProto {
+message SubmitMonsterEnhancementResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional EnhanceEquipStatus status = 2;
+	optional EnhanceMonsterStatus status = 2;
 	
 
-	enum EnhanceEquipStatus {
+	enum EnhanceMonsterStatus {
 		SUCCESS = 1;
 		OTHER_FAIL = 2;
 		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
@@ -652,18 +652,18 @@ message ReviveInDungeonResponseProto {
 }
 
 //mainly used during battle
-message UpdateEquipDurabilityRequestProto {
+message UpdateMonsterDurabilityRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated FullUserEquipProto fueps = 2; //contains new durabilities 
+	repeated FullUserMonsterProto fueps = 2; //contains new durabilities 
 	optional int64 clientTime = 3; //history, tracking purposes
 }
 
-message UpdateEquipDurabilityResponseProto {
+message UpdateMonsterDurabilityResponseProto {
 	optional MinimumUserProto sender = 1;
-	repeated FullUserEquipProto fueps = 2;
-	optional UpdateEquipDurabilityStatus status = 3;
+	repeated FullUserMonsterProto fueps = 2;
+	optional UpdateMonsterDurabilityStatus status = 3;
 	
-	enum UpdateEquipDurabilityStatus {
+	enum UpdateMonsterDurabilityStatus {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_FUNDS = 2;
 		FAIL_OTHER = 3;

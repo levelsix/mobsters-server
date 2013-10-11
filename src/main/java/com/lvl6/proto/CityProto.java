@@ -584,6 +584,10 @@ public final class CityProto {
     // optional int32 expansionCost = 2;
     boolean hasExpansionCost();
     int getExpansionCost();
+    
+    // optional int32 numMinutesToExpand = 3;
+    boolean hasNumMinutesToExpand();
+    int getNumMinutesToExpand();
   }
   public static final class CityExpansionCostProto extends
       com.google.protobuf.GeneratedMessage
@@ -634,9 +638,20 @@ public final class CityProto {
       return expansionCost_;
     }
     
+    // optional int32 numMinutesToExpand = 3;
+    public static final int NUMMINUTESTOEXPAND_FIELD_NUMBER = 3;
+    private int numMinutesToExpand_;
+    public boolean hasNumMinutesToExpand() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getNumMinutesToExpand() {
+      return numMinutesToExpand_;
+    }
+    
     private void initFields() {
       expansionNum_ = 0;
       expansionCost_ = 0;
+      numMinutesToExpand_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -656,6 +671,9 @@ public final class CityProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, expansionCost_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, numMinutesToExpand_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -672,6 +690,10 @@ public final class CityProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, expansionCost_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, numMinutesToExpand_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -801,6 +823,8 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         expansionCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        numMinutesToExpand_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -847,6 +871,10 @@ public final class CityProto {
           to_bitField0_ |= 0x00000002;
         }
         result.expansionCost_ = expansionCost_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.numMinutesToExpand_ = numMinutesToExpand_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -868,6 +896,9 @@ public final class CityProto {
         }
         if (other.hasExpansionCost()) {
           setExpansionCost(other.getExpansionCost());
+        }
+        if (other.hasNumMinutesToExpand()) {
+          setNumMinutesToExpand(other.getNumMinutesToExpand());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -908,6 +939,11 @@ public final class CityProto {
             case 16: {
               bitField0_ |= 0x00000002;
               expansionCost_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              numMinutesToExpand_ = input.readInt32();
               break;
             }
           }
@@ -954,6 +990,27 @@ public final class CityProto {
       public Builder clearExpansionCost() {
         bitField0_ = (bitField0_ & ~0x00000002);
         expansionCost_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 numMinutesToExpand = 3;
+      private int numMinutesToExpand_ ;
+      public boolean hasNumMinutesToExpand() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getNumMinutesToExpand() {
+        return numMinutesToExpand_;
+      }
+      public Builder setNumMinutesToExpand(int value) {
+        bitField0_ |= 0x00000004;
+        numMinutesToExpand_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumMinutesToExpand() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        numMinutesToExpand_ = 0;
         onChanged();
         return this;
       }
@@ -2826,22 +2883,23 @@ public final class CityProto {
       "proto\032\nUser.proto\"\200\001\n\032UserCityExpansionD" +
       "ataProto\022\016\n\006userId\030\001 \001(\005\022\021\n\txPosition\030\002 " +
       "\001(\021\022\021\n\tyPosition\030\003 \001(\021\022\023\n\013isExpanding\030\004 " +
-      "\001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"E\n\026CityExpa" +
+      "\001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"a\n\026CityExpa" +
       "nsionCostProto\022\024\n\014expansionNum\030\001 \001(\005\022\025\n\r" +
-      "expansionCost\030\002 \001(\005\"\370\002\n\020CityElementProto" +
-      "\022\016\n\006cityId\030\001 \001(\005\022\017\n\007assetId\030\002 \001(\005\022\014\n\004nam" +
-      "e\030\003 \001(\t\022B\n\004type\030\004 \001(\01624.com.lvl6.proto.C" +
-      "ityElementProto.NeutralCityElemType\022/\n\006c",
-      "oords\030\005 \001(\0132\037.com.lvl6.proto.CoordinateP" +
-      "roto\022\017\n\007xLength\030\006 \001(\005\022\017\n\007yLength\030\007 \001(\005\022\r" +
-      "\n\005imgId\030\010 \001(\t\0226\n\013orientation\030\t \001(\0162!.com" +
-      ".lvl6.proto.StructOrientation\"W\n\023Neutral" +
-      "CityElemType\022\014\n\010BUILDING\020\001\022\016\n\nDECORATION" +
-      "\020\002\022\030\n\024PERSON_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203" +
-      "\001\n\rFullCityProto\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name" +
-      "\030\002 \001(\t\022\022\n\nmapImgName\030\003 \001(\t\022/\n\006center\030\004 \001" +
-      "(\0132\037.com.lvl6.proto.CoordinateProto\022\017\n\007t" +
-      "askIds\030\005 \003(\005B\013B\tCityProto"
+      "expansionCost\030\002 \001(\005\022\032\n\022numMinutesToExpan" +
+      "d\030\003 \001(\005\"\370\002\n\020CityElementProto\022\016\n\006cityId\030\001" +
+      " \001(\005\022\017\n\007assetId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022B\n\004t" +
+      "ype\030\004 \001(\01624.com.lvl6.proto.CityElementPr",
+      "oto.NeutralCityElemType\022/\n\006coords\030\005 \001(\0132" +
+      "\037.com.lvl6.proto.CoordinateProto\022\017\n\007xLen" +
+      "gth\030\006 \001(\005\022\017\n\007yLength\030\007 \001(\005\022\r\n\005imgId\030\010 \001(" +
+      "\t\0226\n\013orientation\030\t \001(\0162!.com.lvl6.proto." +
+      "StructOrientation\"W\n\023NeutralCityElemType" +
+      "\022\014\n\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON" +
+      "_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\001\n\rFullCityP" +
+      "roto\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nma" +
+      "pImgName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\022\017\n\007taskIds\030\005 \003(\005",
+      "B\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2861,7 +2919,7 @@ public final class CityProto {
           internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor,
-              new java.lang.String[] { "ExpansionNum", "ExpansionCost", },
+              new java.lang.String[] { "ExpansionNum", "ExpansionCost", "NumMinutesToExpand", },
               com.lvl6.proto.CityProto.CityExpansionCostProto.class,
               com.lvl6.proto.CityProto.CityExpansionCostProto.Builder.class);
           internal_static_com_lvl6_proto_CityElementProto_descriptor =

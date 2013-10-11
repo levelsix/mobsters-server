@@ -29184,7 +29184,7 @@ public final class EventProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.GeneralNotificationResponseProto)
   }
   
-  public interface SubmitEquipEnhancementRequestProtoOrBuilder
+  public interface SubmitMonsterEnhancementRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional .com.lvl6.proto.MinimumUserProto sender = 1;
@@ -29205,32 +29205,32 @@ public final class EventProto {
     boolean hasClientTime();
     long getClientTime();
   }
-  public static final class SubmitEquipEnhancementRequestProto extends
+  public static final class SubmitMonsterEnhancementRequestProto extends
       com.google.protobuf.GeneratedMessage
-      implements SubmitEquipEnhancementRequestProtoOrBuilder {
-    // Use SubmitEquipEnhancementRequestProto.newBuilder() to construct.
-    private SubmitEquipEnhancementRequestProto(Builder builder) {
+      implements SubmitMonsterEnhancementRequestProtoOrBuilder {
+    // Use SubmitMonsterEnhancementRequestProto.newBuilder() to construct.
+    private SubmitMonsterEnhancementRequestProto(Builder builder) {
       super(builder);
     }
-    private SubmitEquipEnhancementRequestProto(boolean noInit) {}
+    private SubmitMonsterEnhancementRequestProto(boolean noInit) {}
     
-    private static final SubmitEquipEnhancementRequestProto defaultInstance;
-    public static SubmitEquipEnhancementRequestProto getDefaultInstance() {
+    private static final SubmitMonsterEnhancementRequestProto defaultInstance;
+    public static SubmitMonsterEnhancementRequestProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public SubmitEquipEnhancementRequestProto getDefaultInstanceForType() {
+    public SubmitMonsterEnhancementRequestProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_descriptor;
+      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_fieldAccessorTable;
+      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -29353,41 +29353,41 @@ public final class EventProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -29396,7 +29396,7 @@ public final class EventProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -29407,12 +29407,12 @@ public final class EventProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -29422,7 +29422,7 @@ public final class EventProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -29435,18 +29435,18 @@ public final class EventProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProtoOrBuilder {
+       implements com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_descriptor;
+        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_fieldAccessorTable;
+        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto.newBuilder()
+      // Construct using com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -29487,24 +29487,24 @@ public final class EventProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto.getDescriptor();
+        return com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto.getDescriptor();
       }
       
-      public com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto.getDefaultInstance();
+      public com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto build() {
-        com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto result = buildPartial();
+      public com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto build() {
+        com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto buildParsed()
+      private com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto result = buildPartial();
+        com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -29512,8 +29512,8 @@ public final class EventProto {
         return result;
       }
       
-      public com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto buildPartial() {
-        com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto result = new com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto(this);
+      public com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto buildPartial() {
+        com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto result = new com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -29543,16 +29543,16 @@ public final class EventProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto) {
-          return mergeFrom((com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto)other);
+        if (other instanceof com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto other) {
-        if (other == com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto other) {
+        if (other == com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -29819,18 +29819,18 @@ public final class EventProto {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SubmitEquipEnhancementRequestProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SubmitMonsterEnhancementRequestProto)
     }
     
     static {
-      defaultInstance = new SubmitEquipEnhancementRequestProto(true);
+      defaultInstance = new SubmitMonsterEnhancementRequestProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.SubmitEquipEnhancementRequestProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.SubmitMonsterEnhancementRequestProto)
   }
   
-  public interface SubmitEquipEnhancementResponseProtoOrBuilder
+  public interface SubmitMonsterEnhancementResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional .com.lvl6.proto.MinimumUserProto sender = 1;
@@ -29838,39 +29838,39 @@ public final class EventProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional .com.lvl6.proto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus status = 2;
+    // optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus status = 2;
     boolean hasStatus();
-    com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus getStatus();
+    com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus getStatus();
   }
-  public static final class SubmitEquipEnhancementResponseProto extends
+  public static final class SubmitMonsterEnhancementResponseProto extends
       com.google.protobuf.GeneratedMessage
-      implements SubmitEquipEnhancementResponseProtoOrBuilder {
-    // Use SubmitEquipEnhancementResponseProto.newBuilder() to construct.
-    private SubmitEquipEnhancementResponseProto(Builder builder) {
+      implements SubmitMonsterEnhancementResponseProtoOrBuilder {
+    // Use SubmitMonsterEnhancementResponseProto.newBuilder() to construct.
+    private SubmitMonsterEnhancementResponseProto(Builder builder) {
       super(builder);
     }
-    private SubmitEquipEnhancementResponseProto(boolean noInit) {}
+    private SubmitMonsterEnhancementResponseProto(boolean noInit) {}
     
-    private static final SubmitEquipEnhancementResponseProto defaultInstance;
-    public static SubmitEquipEnhancementResponseProto getDefaultInstance() {
+    private static final SubmitMonsterEnhancementResponseProto defaultInstance;
+    public static SubmitMonsterEnhancementResponseProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public SubmitEquipEnhancementResponseProto getDefaultInstanceForType() {
+    public SubmitMonsterEnhancementResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_descriptor;
+      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_fieldAccessorTable;
+      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_fieldAccessorTable;
     }
     
-    public enum EnhanceEquipStatus
+    public enum EnhanceMonsterStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       OTHER_FAIL(1, 2),
@@ -29890,7 +29890,7 @@ public final class EventProto {
       
       public final int getNumber() { return value; }
       
-      public static EnhanceEquipStatus valueOf(int value) {
+      public static EnhanceMonsterStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return OTHER_FAIL;
@@ -29902,15 +29902,15 @@ public final class EventProto {
         }
       }
       
-      public static com.google.protobuf.Internal.EnumLiteMap<EnhanceEquipStatus>
+      public static com.google.protobuf.Internal.EnumLiteMap<EnhanceMonsterStatus>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<EnhanceEquipStatus>
+      private static com.google.protobuf.Internal.EnumLiteMap<EnhanceMonsterStatus>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EnhanceEquipStatus>() {
-              public EnhanceEquipStatus findValueByNumber(int number) {
-                return EnhanceEquipStatus.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<EnhanceMonsterStatus>() {
+              public EnhanceMonsterStatus findValueByNumber(int number) {
+                return EnhanceMonsterStatus.valueOf(number);
               }
             };
       
@@ -29924,14 +29924,14 @@ public final class EventProto {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.getDescriptor().getEnumTypes().get(0);
+        return com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.getDescriptor().getEnumTypes().get(0);
       }
       
-      private static final EnhanceEquipStatus[] VALUES = {
+      private static final EnhanceMonsterStatus[] VALUES = {
         SUCCESS, OTHER_FAIL, CLIENT_TOO_APART_FROM_SERVER_TIME, MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT, TRYING_TO_SURPASS_MAX_LEVEL, NOT_ENOUGH_SILVER, 
       };
       
-      public static EnhanceEquipStatus valueOf(
+      public static EnhanceMonsterStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -29943,12 +29943,12 @@ public final class EventProto {
       private final int index;
       private final int value;
       
-      private EnhanceEquipStatus(int index, int value) {
+      private EnhanceMonsterStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
       
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus)
     }
     
     private int bitField0_;
@@ -29965,19 +29965,19 @@ public final class EventProto {
       return sender_;
     }
     
-    // optional .com.lvl6.proto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus status = 2;
+    // optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus status_;
+    private com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus status_;
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus getStatus() {
+    public com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus getStatus() {
       return status_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus.SUCCESS;
+      status_ = com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -30026,41 +30026,41 @@ public final class EventProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -30069,7 +30069,7 @@ public final class EventProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -30080,12 +30080,12 @@ public final class EventProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -30095,7 +30095,7 @@ public final class EventProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -30108,18 +30108,18 @@ public final class EventProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProtoOrBuilder {
+       implements com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_descriptor;
+        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_fieldAccessorTable;
+        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.newBuilder()
+      // Construct using com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -30145,7 +30145,7 @@ public final class EventProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -30156,24 +30156,24 @@ public final class EventProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.getDescriptor();
+        return com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.getDescriptor();
       }
       
-      public com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.getDefaultInstance();
+      public com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto build() {
-        com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto result = buildPartial();
+      public com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto build() {
+        com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto buildParsed()
+      private com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto result = buildPartial();
+        com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -30181,8 +30181,8 @@ public final class EventProto {
         return result;
       }
       
-      public com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto buildPartial() {
-        com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto result = new com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto(this);
+      public com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto buildPartial() {
+        com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto result = new com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -30203,16 +30203,16 @@ public final class EventProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto)other);
+        if (other instanceof com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto other) {
-        if (other == com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto other) {
+        if (other == com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -30261,7 +30261,7 @@ public final class EventProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus value = com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus.valueOf(rawValue);
+              com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus value = com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -30366,15 +30366,15 @@ public final class EventProto {
         return senderBuilder_;
       }
       
-      // optional .com.lvl6.proto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus status = 2;
-      private com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus status_ = com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus.SUCCESS;
+      // optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus status = 2;
+      private com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus status_ = com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus.SUCCESS;
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus getStatus() {
+      public com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus getStatus() {
         return status_;
       }
-      public Builder setStatus(com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus value) {
+      public Builder setStatus(com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -30385,20 +30385,20 @@ public final class EventProto {
       }
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.EnhanceEquipStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.EnhanceMonsterStatus.SUCCESS;
         onChanged();
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SubmitEquipEnhancementResponseProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SubmitMonsterEnhancementResponseProto)
     }
     
     static {
-      defaultInstance = new SubmitEquipEnhancementResponseProto(true);
+      defaultInstance = new SubmitMonsterEnhancementResponseProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.SubmitEquipEnhancementResponseProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.SubmitMonsterEnhancementResponseProto)
   }
   
   public interface RetrieveBoosterPackRequestProtoOrBuilder
@@ -40973,7 +40973,7 @@ public final class EventProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ReviveInDungeonResponseProto)
   }
   
-  public interface UpdateEquipDurabilityRequestProtoOrBuilder
+  public interface UpdateMonsterDurabilityRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional .com.lvl6.proto.MinimumUserProto sender = 1;
@@ -40981,46 +40981,46 @@ public final class EventProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // repeated .com.lvl6.proto.FullUserEquipProto fueps = 2;
-    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> 
+    // repeated .com.lvl6.proto.FullUserMonsterProto fueps = 2;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
         getFuepsList();
-    com.lvl6.proto.MonsterStuffProto.FullUserEquipProto getFueps(int index);
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFueps(int index);
     int getFuepsCount();
-    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
         getFuepsOrBuilderList();
-    com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder getFuepsOrBuilder(
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFuepsOrBuilder(
         int index);
     
     // optional int64 clientTime = 3;
     boolean hasClientTime();
     long getClientTime();
   }
-  public static final class UpdateEquipDurabilityRequestProto extends
+  public static final class UpdateMonsterDurabilityRequestProto extends
       com.google.protobuf.GeneratedMessage
-      implements UpdateEquipDurabilityRequestProtoOrBuilder {
-    // Use UpdateEquipDurabilityRequestProto.newBuilder() to construct.
-    private UpdateEquipDurabilityRequestProto(Builder builder) {
+      implements UpdateMonsterDurabilityRequestProtoOrBuilder {
+    // Use UpdateMonsterDurabilityRequestProto.newBuilder() to construct.
+    private UpdateMonsterDurabilityRequestProto(Builder builder) {
       super(builder);
     }
-    private UpdateEquipDurabilityRequestProto(boolean noInit) {}
+    private UpdateMonsterDurabilityRequestProto(boolean noInit) {}
     
-    private static final UpdateEquipDurabilityRequestProto defaultInstance;
-    public static UpdateEquipDurabilityRequestProto getDefaultInstance() {
+    private static final UpdateMonsterDurabilityRequestProto defaultInstance;
+    public static UpdateMonsterDurabilityRequestProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public UpdateEquipDurabilityRequestProto getDefaultInstanceForType() {
+    public UpdateMonsterDurabilityRequestProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_descriptor;
+      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_fieldAccessorTable;
+      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -41037,23 +41037,23 @@ public final class EventProto {
       return sender_;
     }
     
-    // repeated .com.lvl6.proto.FullUserEquipProto fueps = 2;
+    // repeated .com.lvl6.proto.FullUserMonsterProto fueps = 2;
     public static final int FUEPS_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> fueps_;
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> getFuepsList() {
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fueps_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getFuepsList() {
       return fueps_;
     }
-    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
         getFuepsOrBuilderList() {
       return fueps_;
     }
     public int getFuepsCount() {
       return fueps_.size();
     }
-    public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto getFueps(int index) {
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFueps(int index) {
       return fueps_.get(index);
     }
-    public com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder getFuepsOrBuilder(
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFuepsOrBuilder(
         int index) {
       return fueps_.get(index);
     }
@@ -41127,41 +41127,41 @@ public final class EventProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -41170,7 +41170,7 @@ public final class EventProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -41181,12 +41181,12 @@ public final class EventProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -41196,7 +41196,7 @@ public final class EventProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -41209,18 +41209,18 @@ public final class EventProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProtoOrBuilder {
+       implements com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_descriptor;
+        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_fieldAccessorTable;
+        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto.newBuilder()
+      // Construct using com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -41264,24 +41264,24 @@ public final class EventProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto.getDescriptor();
+        return com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto.getDescriptor();
       }
       
-      public com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto.getDefaultInstance();
+      public com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto build() {
-        com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto result = buildPartial();
+      public com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto build() {
+        com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto buildParsed()
+      private com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto result = buildPartial();
+        com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -41289,8 +41289,8 @@ public final class EventProto {
         return result;
       }
       
-      public com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto buildPartial() {
-        com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto result = new com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto(this);
+      public com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto buildPartial() {
+        com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto result = new com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -41320,16 +41320,16 @@ public final class EventProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto) {
-          return mergeFrom((com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto)other);
+        if (other instanceof com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto other) {
-        if (other == com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto other) {
+        if (other == com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -41403,7 +41403,7 @@ public final class EventProto {
               break;
             }
             case 18: {
-              com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.newBuilder();
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addFueps(subBuilder.buildPartial());
               break;
@@ -41509,20 +41509,20 @@ public final class EventProto {
         return senderBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullUserEquipProto fueps = 2;
-      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> fueps_ =
+      // repeated .com.lvl6.proto.FullUserMonsterProto fueps = 2;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fueps_ =
         java.util.Collections.emptyList();
       private void ensureFuepsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          fueps_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto>(fueps_);
+          fueps_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(fueps_);
           bitField0_ |= 0x00000002;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.FullUserEquipProto, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> fuepsBuilder_;
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fuepsBuilder_;
       
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> getFuepsList() {
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getFuepsList() {
         if (fuepsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(fueps_);
         } else {
@@ -41536,7 +41536,7 @@ public final class EventProto {
           return fuepsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto getFueps(int index) {
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFueps(int index) {
         if (fuepsBuilder_ == null) {
           return fueps_.get(index);
         } else {
@@ -41544,7 +41544,7 @@ public final class EventProto {
         }
       }
       public Builder setFueps(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto value) {
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fuepsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -41558,7 +41558,7 @@ public final class EventProto {
         return this;
       }
       public Builder setFueps(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder builderForValue) {
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
         if (fuepsBuilder_ == null) {
           ensureFuepsIsMutable();
           fueps_.set(index, builderForValue.build());
@@ -41568,7 +41568,7 @@ public final class EventProto {
         }
         return this;
       }
-      public Builder addFueps(com.lvl6.proto.MonsterStuffProto.FullUserEquipProto value) {
+      public Builder addFueps(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fuepsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -41582,7 +41582,7 @@ public final class EventProto {
         return this;
       }
       public Builder addFueps(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto value) {
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fuepsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -41596,7 +41596,7 @@ public final class EventProto {
         return this;
       }
       public Builder addFueps(
-          com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder builderForValue) {
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
         if (fuepsBuilder_ == null) {
           ensureFuepsIsMutable();
           fueps_.add(builderForValue.build());
@@ -41607,7 +41607,7 @@ public final class EventProto {
         return this;
       }
       public Builder addFueps(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder builderForValue) {
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
         if (fuepsBuilder_ == null) {
           ensureFuepsIsMutable();
           fueps_.add(index, builderForValue.build());
@@ -41618,7 +41618,7 @@ public final class EventProto {
         return this;
       }
       public Builder addAllFueps(
-          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (fuepsBuilder_ == null) {
           ensureFuepsIsMutable();
           super.addAll(values, fueps_);
@@ -41648,18 +41648,18 @@ public final class EventProto {
         }
         return this;
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder getFuepsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getFuepsBuilder(
           int index) {
         return getFuepsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder getFuepsOrBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFuepsOrBuilder(
           int index) {
         if (fuepsBuilder_ == null) {
           return fueps_.get(index);  } else {
           return fuepsBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
            getFuepsOrBuilderList() {
         if (fuepsBuilder_ != null) {
           return fuepsBuilder_.getMessageOrBuilderList();
@@ -41667,25 +41667,25 @@ public final class EventProto {
           return java.util.Collections.unmodifiableList(fueps_);
         }
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder addFuepsBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addFuepsBuilder() {
         return getFuepsFieldBuilder().addBuilder(
-            com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.getDefaultInstance());
+            com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder addFuepsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addFuepsBuilder(
           int index) {
         return getFuepsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.getDefaultInstance());
+            index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder> 
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
            getFuepsBuilderList() {
         return getFuepsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.FullUserEquipProto, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> 
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
           getFuepsFieldBuilder() {
         if (fuepsBuilder_ == null) {
           fuepsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.MonsterStuffProto.FullUserEquipProto, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder>(
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
                   fueps_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -41716,18 +41716,18 @@ public final class EventProto {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UpdateEquipDurabilityRequestProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UpdateMonsterDurabilityRequestProto)
     }
     
     static {
-      defaultInstance = new UpdateEquipDurabilityRequestProto(true);
+      defaultInstance = new UpdateMonsterDurabilityRequestProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpdateEquipDurabilityRequestProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpdateMonsterDurabilityRequestProto)
   }
   
-  public interface UpdateEquipDurabilityResponseProtoOrBuilder
+  public interface UpdateMonsterDurabilityResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional .com.lvl6.proto.MinimumUserProto sender = 1;
@@ -41735,49 +41735,49 @@ public final class EventProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // repeated .com.lvl6.proto.FullUserEquipProto fueps = 2;
-    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> 
+    // repeated .com.lvl6.proto.FullUserMonsterProto fueps = 2;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
         getFuepsList();
-    com.lvl6.proto.MonsterStuffProto.FullUserEquipProto getFueps(int index);
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFueps(int index);
     int getFuepsCount();
-    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
         getFuepsOrBuilderList();
-    com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder getFuepsOrBuilder(
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFuepsOrBuilder(
         int index);
     
-    // optional .com.lvl6.proto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus status = 3;
+    // optional .com.lvl6.proto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus status = 3;
     boolean hasStatus();
-    com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus getStatus();
+    com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus getStatus();
   }
-  public static final class UpdateEquipDurabilityResponseProto extends
+  public static final class UpdateMonsterDurabilityResponseProto extends
       com.google.protobuf.GeneratedMessage
-      implements UpdateEquipDurabilityResponseProtoOrBuilder {
-    // Use UpdateEquipDurabilityResponseProto.newBuilder() to construct.
-    private UpdateEquipDurabilityResponseProto(Builder builder) {
+      implements UpdateMonsterDurabilityResponseProtoOrBuilder {
+    // Use UpdateMonsterDurabilityResponseProto.newBuilder() to construct.
+    private UpdateMonsterDurabilityResponseProto(Builder builder) {
       super(builder);
     }
-    private UpdateEquipDurabilityResponseProto(boolean noInit) {}
+    private UpdateMonsterDurabilityResponseProto(boolean noInit) {}
     
-    private static final UpdateEquipDurabilityResponseProto defaultInstance;
-    public static UpdateEquipDurabilityResponseProto getDefaultInstance() {
+    private static final UpdateMonsterDurabilityResponseProto defaultInstance;
+    public static UpdateMonsterDurabilityResponseProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public UpdateEquipDurabilityResponseProto getDefaultInstanceForType() {
+    public UpdateMonsterDurabilityResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_descriptor;
+      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_fieldAccessorTable;
+      return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_fieldAccessorTable;
     }
     
-    public enum UpdateEquipDurabilityStatus
+    public enum UpdateMonsterDurabilityStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_INSUFFICIENT_FUNDS(1, 2),
@@ -41791,7 +41791,7 @@ public final class EventProto {
       
       public final int getNumber() { return value; }
       
-      public static UpdateEquipDurabilityStatus valueOf(int value) {
+      public static UpdateMonsterDurabilityStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_INSUFFICIENT_FUNDS;
@@ -41800,15 +41800,15 @@ public final class EventProto {
         }
       }
       
-      public static com.google.protobuf.Internal.EnumLiteMap<UpdateEquipDurabilityStatus>
+      public static com.google.protobuf.Internal.EnumLiteMap<UpdateMonsterDurabilityStatus>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<UpdateEquipDurabilityStatus>
+      private static com.google.protobuf.Internal.EnumLiteMap<UpdateMonsterDurabilityStatus>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<UpdateEquipDurabilityStatus>() {
-              public UpdateEquipDurabilityStatus findValueByNumber(int number) {
-                return UpdateEquipDurabilityStatus.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<UpdateMonsterDurabilityStatus>() {
+              public UpdateMonsterDurabilityStatus findValueByNumber(int number) {
+                return UpdateMonsterDurabilityStatus.valueOf(number);
               }
             };
       
@@ -41822,14 +41822,14 @@ public final class EventProto {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.getDescriptor().getEnumTypes().get(0);
+        return com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.getDescriptor().getEnumTypes().get(0);
       }
       
-      private static final UpdateEquipDurabilityStatus[] VALUES = {
+      private static final UpdateMonsterDurabilityStatus[] VALUES = {
         SUCCESS, FAIL_INSUFFICIENT_FUNDS, FAIL_OTHER, 
       };
       
-      public static UpdateEquipDurabilityStatus valueOf(
+      public static UpdateMonsterDurabilityStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -41841,12 +41841,12 @@ public final class EventProto {
       private final int index;
       private final int value;
       
-      private UpdateEquipDurabilityStatus(int index, int value) {
+      private UpdateMonsterDurabilityStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
       
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus)
     }
     
     private int bitField0_;
@@ -41863,41 +41863,41 @@ public final class EventProto {
       return sender_;
     }
     
-    // repeated .com.lvl6.proto.FullUserEquipProto fueps = 2;
+    // repeated .com.lvl6.proto.FullUserMonsterProto fueps = 2;
     public static final int FUEPS_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> fueps_;
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> getFuepsList() {
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fueps_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getFuepsList() {
       return fueps_;
     }
-    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
         getFuepsOrBuilderList() {
       return fueps_;
     }
     public int getFuepsCount() {
       return fueps_.size();
     }
-    public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto getFueps(int index) {
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFueps(int index) {
       return fueps_.get(index);
     }
-    public com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder getFuepsOrBuilder(
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFuepsOrBuilder(
         int index) {
       return fueps_.get(index);
     }
     
-    // optional .com.lvl6.proto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus status = 3;
+    // optional .com.lvl6.proto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus status = 3;
     public static final int STATUS_FIELD_NUMBER = 3;
-    private com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus status_;
+    private com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus status_;
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus getStatus() {
+    public com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus getStatus() {
       return status_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       fueps_ = java.util.Collections.emptyList();
-      status_ = com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus.SUCCESS;
+      status_ = com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -41953,41 +41953,41 @@ public final class EventProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -41996,7 +41996,7 @@ public final class EventProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -42007,12 +42007,12 @@ public final class EventProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto parseFrom(
+    public static com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -42022,7 +42022,7 @@ public final class EventProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -42035,18 +42035,18 @@ public final class EventProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProtoOrBuilder {
+       implements com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_descriptor;
+        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_fieldAccessorTable;
+        return com.lvl6.proto.EventProto.internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.newBuilder()
+      // Construct using com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -42079,7 +42079,7 @@ public final class EventProto {
         } else {
           fuepsBuilder_.clear();
         }
-        status_ = com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -42090,24 +42090,24 @@ public final class EventProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.getDescriptor();
+        return com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.getDescriptor();
       }
       
-      public com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.getDefaultInstance();
+      public com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto build() {
-        com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto result = buildPartial();
+      public com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto build() {
+        com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto buildParsed()
+      private com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto result = buildPartial();
+        com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -42115,8 +42115,8 @@ public final class EventProto {
         return result;
       }
       
-      public com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto buildPartial() {
-        com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto result = new com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto(this);
+      public com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto buildPartial() {
+        com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto result = new com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -42146,16 +42146,16 @@ public final class EventProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto)other);
+        if (other instanceof com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto other) {
-        if (other == com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto other) {
+        if (other == com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -42229,14 +42229,14 @@ public final class EventProto {
               break;
             }
             case 18: {
-              com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.newBuilder();
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addFueps(subBuilder.buildPartial());
               break;
             }
             case 24: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus value = com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus.valueOf(rawValue);
+              com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus value = com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(3, rawValue);
               } else {
@@ -42341,20 +42341,20 @@ public final class EventProto {
         return senderBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullUserEquipProto fueps = 2;
-      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> fueps_ =
+      // repeated .com.lvl6.proto.FullUserMonsterProto fueps = 2;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fueps_ =
         java.util.Collections.emptyList();
       private void ensureFuepsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          fueps_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto>(fueps_);
+          fueps_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(fueps_);
           bitField0_ |= 0x00000002;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.FullUserEquipProto, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> fuepsBuilder_;
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fuepsBuilder_;
       
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> getFuepsList() {
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getFuepsList() {
         if (fuepsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(fueps_);
         } else {
@@ -42368,7 +42368,7 @@ public final class EventProto {
           return fuepsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto getFueps(int index) {
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFueps(int index) {
         if (fuepsBuilder_ == null) {
           return fueps_.get(index);
         } else {
@@ -42376,7 +42376,7 @@ public final class EventProto {
         }
       }
       public Builder setFueps(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto value) {
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fuepsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -42390,7 +42390,7 @@ public final class EventProto {
         return this;
       }
       public Builder setFueps(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder builderForValue) {
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
         if (fuepsBuilder_ == null) {
           ensureFuepsIsMutable();
           fueps_.set(index, builderForValue.build());
@@ -42400,7 +42400,7 @@ public final class EventProto {
         }
         return this;
       }
-      public Builder addFueps(com.lvl6.proto.MonsterStuffProto.FullUserEquipProto value) {
+      public Builder addFueps(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fuepsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -42414,7 +42414,7 @@ public final class EventProto {
         return this;
       }
       public Builder addFueps(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto value) {
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
         if (fuepsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -42428,7 +42428,7 @@ public final class EventProto {
         return this;
       }
       public Builder addFueps(
-          com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder builderForValue) {
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
         if (fuepsBuilder_ == null) {
           ensureFuepsIsMutable();
           fueps_.add(builderForValue.build());
@@ -42439,7 +42439,7 @@ public final class EventProto {
         return this;
       }
       public Builder addFueps(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder builderForValue) {
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
         if (fuepsBuilder_ == null) {
           ensureFuepsIsMutable();
           fueps_.add(index, builderForValue.build());
@@ -42450,7 +42450,7 @@ public final class EventProto {
         return this;
       }
       public Builder addAllFueps(
-          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserEquipProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
         if (fuepsBuilder_ == null) {
           ensureFuepsIsMutable();
           super.addAll(values, fueps_);
@@ -42480,18 +42480,18 @@ public final class EventProto {
         }
         return this;
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder getFuepsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getFuepsBuilder(
           int index) {
         return getFuepsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder getFuepsOrBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFuepsOrBuilder(
           int index) {
         if (fuepsBuilder_ == null) {
           return fueps_.get(index);  } else {
           return fuepsBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
            getFuepsOrBuilderList() {
         if (fuepsBuilder_ != null) {
           return fuepsBuilder_.getMessageOrBuilderList();
@@ -42499,25 +42499,25 @@ public final class EventProto {
           return java.util.Collections.unmodifiableList(fueps_);
         }
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder addFuepsBuilder() {
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addFuepsBuilder() {
         return getFuepsFieldBuilder().addBuilder(
-            com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.getDefaultInstance());
+            com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder addFuepsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addFuepsBuilder(
           int index) {
         return getFuepsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.getDefaultInstance());
+            index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder> 
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
            getFuepsBuilderList() {
         return getFuepsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.FullUserEquipProto, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder> 
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
           getFuepsFieldBuilder() {
         if (fuepsBuilder_ == null) {
           fuepsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.MonsterStuffProto.FullUserEquipProto, com.lvl6.proto.MonsterStuffProto.FullUserEquipProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserEquipProtoOrBuilder>(
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
                   fueps_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
@@ -42527,15 +42527,15 @@ public final class EventProto {
         return fuepsBuilder_;
       }
       
-      // optional .com.lvl6.proto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus status = 3;
-      private com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus status_ = com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus.SUCCESS;
+      // optional .com.lvl6.proto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus status = 3;
+      private com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus status_ = com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus.SUCCESS;
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus getStatus() {
+      public com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus getStatus() {
         return status_;
       }
-      public Builder setStatus(com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus value) {
+      public Builder setStatus(com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -42546,20 +42546,20 @@ public final class EventProto {
       }
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.UpdateMonsterDurabilityStatus.SUCCESS;
         onChanged();
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UpdateEquipDurabilityResponseProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UpdateMonsterDurabilityResponseProto)
     }
     
     static {
-      defaultInstance = new UpdateEquipDurabilityResponseProto(true);
+      defaultInstance = new UpdateMonsterDurabilityResponseProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpdateEquipDurabilityResponseProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UpdateMonsterDurabilityResponseProto)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -42763,15 +42763,15 @@ public final class EventProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_GeneralNotificationResponseProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_descriptor;
+    internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_descriptor;
+    internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RetrieveBoosterPackRequestProto_descriptor;
   private static
@@ -42858,15 +42858,15 @@ public final class EventProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_descriptor;
+    internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_descriptor;
+    internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -43111,120 +43111,121 @@ public final class EventProto {
       "OOTED_NOT_IN_CLAN\020\004\"l\n GeneralNotificati" +
       "onResponseProto\022\r\n\005title\030\001 \001(\t\022\020\n\010subtit" +
       "le\030\002 \001(\t\022\'\n\003rgb\030\003 \001(\0132\032.com.lvl6.proto.C" +
-      "olorProto\"\250\001\n\"SubmitEquipEnhancementRequ" +
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\036\n\026enhancingUserMonst" +
-      "erId\030\002 \001(\003\022\034\n\024feederUserMonsterIds\030\003 \003(\003" +
-      "\022\022\n\nclientTime\030\004 \001(\003\"\354\002\n#SubmitEquipEnha",
-      "ncementResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022V\n\006status" +
-      "\030\002 \001(\0162F.com.lvl6.proto.SubmitEquipEnhan" +
-      "cementResponseProto.EnhanceEquipStatus\"\272" +
-      "\001\n\022EnhanceEquipStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOT" +
-      "HER_FAIL\020\002\022%\n!CLIENT_TOO_APART_FROM_SERV" +
-      "ER_TIME\020\003\022(\n$MAIN_OR_FEEDER_OR_EQUIPS_NO" +
-      "NEXISTENT\020\004\022\037\n\033TRYING_TO_SURPASS_MAX_LEV" +
-      "EL\020\005\022\025\n\021NOT_ENOUGH_SILVER\020\006\"S\n\037RetrieveB" +
-      "oosterPackRequestProto\0220\n\006sender\030\001 \001(\0132 ",
-      ".com.lvl6.proto.MinimumUserProto\"\232\002\n Ret" +
-      "rieveBoosterPackResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "/\n\005packs\030\002 \003(\0132 .com.lvl6.proto.BoosterP" +
-      "ackProto\022Z\n\006status\030\003 \001(\0162J.com.lvl6.prot" +
-      "o.RetrieveBoosterPackResponseProto.Retri" +
-      "eveBoosterPackStatus\"7\n\031RetrieveBoosterP" +
-      "ackStatus\022\013\n\007SUCCESS\020\001\022\r\n\tSOME_FAIL\020\002\"~\n" +
-      "\037PurchaseBoosterPackRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
-      "to\022\025\n\rboosterPackId\030\002 \001(\005\022\022\n\nclientTime\030" +
-      "\003 \001(\003\"\276\002\n PurchaseBoosterPackResponsePro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022Z\n\006status\030\002 \001(\0162J.com.lvl6." +
-      "proto.PurchaseBoosterPackResponseProto.P" +
-      "urchaseBoosterPackStatus\"\213\001\n\031PurchaseBoo" +
-      "sterPackStatus\022\013\n\007SUCCESS\020\001\022\023\n\017NOT_ENOUG" +
-      "H_GOLD\020\002\022\025\n\021NOT_ENOUGH_SILVER\020\003\022\016\n\nOTHER" +
-      "_FAIL\020\004\022%\n!CLIENT_TOO_APART_FROM_SERVER_" +
-      "TIME\020\005\"q\n(ReceivedRareBoosterPurchaseRes",
-      "ponseProto\022E\n\023rareBoosterPurchase\030\001 \001(\0132" +
-      "(.com.lvl6.proto.RareBoosterPurchaseProt" +
-      "o\"q\n\036ChangeClanJoinTypeRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\035\n\025requestToJoinRequired\030\002 \001(\010\"\366\002\n" +
-      "\037ChangeClanJoinTypeResponseProto\0220\n\006send" +
+      "olorProto\"\252\001\n$SubmitMonsterEnhancementRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\022\036\n\026enhancingUserMon" +
+      "sterId\030\002 \001(\003\022\034\n\024feederUserMonsterIds\030\003 \003" +
+      "(\003\022\022\n\nclientTime\030\004 \001(\003\"\364\002\n%SubmitMonster",
+      "EnhancementResponseProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022Z\n\006st" +
+      "atus\030\002 \001(\0162J.com.lvl6.proto.SubmitMonste" +
+      "rEnhancementResponseProto.EnhanceMonster" +
+      "Status\"\274\001\n\024EnhanceMonsterStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\016\n\nOTHER_FAIL\020\002\022%\n!CLIENT_TOO_APART" +
+      "_FROM_SERVER_TIME\020\003\022(\n$MAIN_OR_FEEDER_OR" +
+      "_EQUIPS_NONEXISTENT\020\004\022\037\n\033TRYING_TO_SURPA" +
+      "SS_MAX_LEVEL\020\005\022\025\n\021NOT_ENOUGH_SILVER\020\006\"S\n" +
+      "\037RetrieveBoosterPackRequestProto\0220\n\006send",
       "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022X\n\006status\030\002 \001(\0162H.com.lvl6.proto.Chan" +
-      "geClanJoinTypeResponseProto.ChangeClanJo" +
-      "inTypeStatus\0221\n\007minClan\030\003 \001(\0132 .com.lvl6",
-      ".proto.MinimumClanProto\022;\n\010fullClan\030\004 \001(" +
-      "\0132).com.lvl6.proto.FullClanProtoWithClan" +
-      "Size\"W\n\030ChangeClanJoinTypeStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\016\n\nOTHER_FAIL\020\002\022\017\n\013NOT_IN_CLAN\020\003\022\r" +
-      "\n\tNOT_OWNER\020\004\"u\n\033PrivateChatPostRequestP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\023\n\013recipientId\030\002 \001(\005\022\017\n\007c" +
-      "ontent\030\003 \001(\t\"\303\002\n\034PrivateChatPostResponse" +
+      "to\"\232\002\n RetrieveBoosterPackResponseProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022/\n\005packs\030\002 \003(\0132 .com.lvl6.prot" +
+      "o.BoosterPackProto\022Z\n\006status\030\003 \001(\0162J.com" +
+      ".lvl6.proto.RetrieveBoosterPackResponseP" +
+      "roto.RetrieveBoosterPackStatus\"7\n\031Retrie" +
+      "veBoosterPackStatus\022\013\n\007SUCCESS\020\001\022\r\n\tSOME" +
+      "_FAIL\020\002\"~\n\037PurchaseBoosterPackRequestPro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini",
+      "mumUserProto\022\025\n\rboosterPackId\030\002 \001(\005\022\022\n\nc" +
+      "lientTime\030\003 \001(\003\"\276\002\n PurchaseBoosterPackR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022Z\n\006status\030\002 \001(\0162J" +
+      ".com.lvl6.proto.PurchaseBoosterPackRespo" +
+      "nseProto.PurchaseBoosterPackStatus\"\213\001\n\031P" +
+      "urchaseBoosterPackStatus\022\013\n\007SUCCESS\020\001\022\023\n" +
+      "\017NOT_ENOUGH_GOLD\020\002\022\025\n\021NOT_ENOUGH_SILVER\020" +
+      "\003\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_APART_FR" +
+      "OM_SERVER_TIME\020\005\"q\n(ReceivedRareBoosterP",
+      "urchaseResponseProto\022E\n\023rareBoosterPurch" +
+      "ase\030\001 \001(\0132(.com.lvl6.proto.RareBoosterPu" +
+      "rchaseProto\"q\n\036ChangeClanJoinTypeRequest" +
       "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022R\n\006status\030\002 \001(\0162B.com.lv",
-      "l6.proto.PrivateChatPostResponseProto.Pr" +
-      "ivateChatPostStatus\0222\n\004post\030\003 \001(\0132$.com." +
-      "lvl6.proto.PrivateChatPostProto\"i\n\025Priva" +
-      "teChatPostStatus\022\013\n\007SUCCESS\020\001\022\023\n\017NO_CONT" +
-      "ENT_SENT\020\002\022\022\n\016POST_TOO_LARGE\020\003\022\016\n\nOTHER_" +
-      "FAIL\020\004\022\n\n\006BANNED\020\005\"\212\001\n$RetrievePrivateCh" +
-      "atPostsRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022\023\n\013otherUs" +
-      "erId\030\002 \001(\005\022\033\n\023beforePrivateChatId\030\003 \001(\005\"" +
-      "\340\002\n%RetrievePrivateChatPostsResponseProt",
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\0224\n\005posts\030\002 \003(\0132%.com.lvl6.pr" +
-      "oto.GroupChatMessageProto\022\033\n\023beforePriva" +
-      "teChatId\030\003 \001(\005\022d\n\006status\030\004 \001(\0162T.com.lvl" +
-      "6.proto.RetrievePrivateChatPostsResponse" +
-      "Proto.RetrievePrivateChatPostsStatus\022\023\n\013" +
-      "otherUserId\030\005 \001(\005\"7\n\036RetrievePrivateChat" +
-      "PostsStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"p\n\030Be" +
-      "ginDungeonRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\022\n\nclie",
-      "ntTime\030\002 \001(\003\022\016\n\006taskId\030\003 \001(\005\"\257\002\n\031BeginDu" +
-      "ngeonResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022+\n\003tsp\030\002 \003(" +
-      "\0132\036.com.lvl6.proto.TaskStageProto\022\022\n\nuse" +
-      "rTaskId\030\003 \001(\003\022L\n\006status\030\004 \001(\0162<.com.lvl6" +
-      ".proto.BeginDungeonResponseProto.BeginDu" +
-      "ngeonStatus\"Q\n\022BeginDungeonStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\036\n\032FAIL_INSUFFICIENT_STAMERGY\020\002\022\016" +
-      "\n\nFAIL_OTHER\020\003\"\203\001\n\026EndDungeonRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim",
-      "umUserProto\022\022\n\nuserTaskId\030\002 \001(\003\022\017\n\007userW" +
-      "on\030\003 \001(\010\022\022\n\nclientTime\030\004 \001(\003\"\306\001\n\027EndDung" +
-      "eonResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022H\n\006status\030\002 \001" +
-      "(\01628.com.lvl6.proto.EndDungeonResponsePr" +
-      "oto.EndDungeonStatus\"/\n\020EndDungeonStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"w\n\033ReviveI" +
-      "nDungeonRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\022\n\nuserTa" +
-      "skId\030\002 \001(\003\022\022\n\nclientTime\030\003 \001(\003\"\367\001\n\034Reviv",
-      "eInDungeonResponseProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022R\n\006sta" +
-      "tus\030\002 \001(\0162B.com.lvl6.proto.ReviveInDunge" +
-      "onResponseProto.ReviveInDungeonStatus\"Q\n" +
-      "\025ReviveInDungeonStatus\022\013\n\007SUCCESS\020\001\022\033\n\027F" +
-      "AIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003" +
-      "\"\234\001\n!UpdateEquipDurabilityRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\0221\n\005fueps\030\002 \003(\0132\".com.lvl6.proto" +
-      ".FullUserEquipProto\022\022\n\nclientTime\030\003 \001(\003\"",
-      "\302\002\n\"UpdateEquipDurabilityResponseProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\0221\n\005fueps\030\002 \003(\0132\".com.lvl6.proto" +
-      ".FullUserEquipProto\022^\n\006status\030\003 \001(\0162N.co" +
-      "m.lvl6.proto.UpdateEquipDurabilityRespon" +
-      "seProto.UpdateEquipDurabilityStatus\"W\n\033U" +
-      "pdateEquipDurabilityStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTH" +
-      "ER\020\003B\014B\nEventProto"
+      "inimumUserProto\022\035\n\025requestToJoinRequired" +
+      "\030\002 \001(\010\"\366\002\n\037ChangeClanJoinTypeResponsePro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022X\n\006status\030\002 \001(\0162H.com.lvl6." +
+      "proto.ChangeClanJoinTypeResponseProto.Ch" +
+      "angeClanJoinTypeStatus\0221\n\007minClan\030\003 \001(\0132",
+      " .com.lvl6.proto.MinimumClanProto\022;\n\010ful" +
+      "lClan\030\004 \001(\0132).com.lvl6.proto.FullClanPro" +
+      "toWithClanSize\"W\n\030ChangeClanJoinTypeStat" +
+      "us\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002\022\017\n\013NOT_I" +
+      "N_CLAN\020\003\022\r\n\tNOT_OWNER\020\004\"u\n\033PrivateChatPo" +
+      "stRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\023\n\013recipientId\030" +
+      "\002 \001(\005\022\017\n\007content\030\003 \001(\t\"\303\002\n\034PrivateChatPo" +
+      "stResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022R\n\006status\030\002 \001(",
+      "\0162B.com.lvl6.proto.PrivateChatPostRespon" +
+      "seProto.PrivateChatPostStatus\0222\n\004post\030\003 " +
+      "\001(\0132$.com.lvl6.proto.PrivateChatPostProt" +
+      "o\"i\n\025PrivateChatPostStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\023\n\017NO_CONTENT_SENT\020\002\022\022\n\016POST_TOO_LARGE\020\003" +
+      "\022\016\n\nOTHER_FAIL\020\004\022\n\n\006BANNED\020\005\"\212\001\n$Retriev" +
+      "ePrivateChatPostsRequestProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\023\n\013otherUserId\030\002 \001(\005\022\033\n\023beforePrivateCha" +
+      "tId\030\003 \001(\005\"\340\002\n%RetrievePrivateChatPostsRe",
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\0224\n\005posts\030\002 \003(\0132%.c" +
+      "om.lvl6.proto.GroupChatMessageProto\022\033\n\023b" +
+      "eforePrivateChatId\030\003 \001(\005\022d\n\006status\030\004 \001(\016" +
+      "2T.com.lvl6.proto.RetrievePrivateChatPos" +
+      "tsResponseProto.RetrievePrivateChatPosts" +
+      "Status\022\023\n\013otherUserId\030\005 \001(\005\"7\n\036RetrieveP" +
+      "rivateChatPostsStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FA" +
+      "IL\020\002\"p\n\030BeginDungeonRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
+      "to\022\022\n\nclientTime\030\002 \001(\003\022\016\n\006taskId\030\003 \001(\005\"\257" +
+      "\002\n\031BeginDungeonResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022+" +
+      "\n\003tsp\030\002 \003(\0132\036.com.lvl6.proto.TaskStagePr" +
+      "oto\022\022\n\nuserTaskId\030\003 \001(\003\022L\n\006status\030\004 \001(\0162" +
+      "<.com.lvl6.proto.BeginDungeonResponsePro" +
+      "to.BeginDungeonStatus\"Q\n\022BeginDungeonSta" +
+      "tus\022\013\n\007SUCCESS\020\001\022\036\n\032FAIL_INSUFFICIENT_ST" +
+      "AMERGY\020\002\022\016\n\nFAIL_OTHER\020\003\"\203\001\n\026EndDungeonR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p",
+      "roto.MinimumUserProto\022\022\n\nuserTaskId\030\002 \001(" +
+      "\003\022\017\n\007userWon\030\003 \001(\010\022\022\n\nclientTime\030\004 \001(\003\"\306" +
+      "\001\n\027EndDungeonResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022H\n\006" +
+      "status\030\002 \001(\01628.com.lvl6.proto.EndDungeon" +
+      "ResponseProto.EndDungeonStatus\"/\n\020EndDun" +
+      "geonStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"" +
+      "w\n\033ReviveInDungeonRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\022\n\nuserTaskId\030\002 \001(\003\022\022\n\nclientTime\030\003 \001(\003",
+      "\"\367\001\n\034ReviveInDungeonResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Rev" +
+      "iveInDungeonResponseProto.ReviveInDungeo" +
+      "nStatus\"Q\n\025ReviveInDungeonStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFA" +
+      "IL_OTHER\020\003\"\240\001\n#UpdateMonsterDurabilityRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\0223\n\005fueps\030\002 \003(\0132$.co" +
+      "m.lvl6.proto.FullUserMonsterProto\022\022\n\ncli",
+      "entTime\030\003 \001(\003\"\314\002\n$UpdateMonsterDurabilit" +
+      "yResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\0223\n\005fueps\030\002 \003(\0132" +
+      "$.com.lvl6.proto.FullUserMonsterProto\022b\n" +
+      "\006status\030\003 \001(\0162R.com.lvl6.proto.UpdateMon" +
+      "sterDurabilityResponseProto.UpdateMonste" +
+      "rDurabilityStatus\"Y\n\035UpdateMonsterDurabi" +
+      "lityStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFIC" +
+      "IENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\014B\nEventPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -43551,22 +43552,22 @@ public final class EventProto {
               new java.lang.String[] { "Title", "Subtitle", "Rgb", },
               com.lvl6.proto.EventProto.GeneralNotificationResponseProto.class,
               com.lvl6.proto.EventProto.GeneralNotificationResponseProto.Builder.class);
-          internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_descriptor =
+          internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor =
             getDescriptor().getMessageTypes().get(40);
-          internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SubmitEquipEnhancementRequestProto_descriptor,
+              internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor,
               new java.lang.String[] { "Sender", "EnhancingUserMonsterId", "FeederUserMonsterIds", "ClientTime", },
-              com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto.class,
-              com.lvl6.proto.EventProto.SubmitEquipEnhancementRequestProto.Builder.class);
-          internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_descriptor =
+              com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto.class,
+              com.lvl6.proto.EventProto.SubmitMonsterEnhancementRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor =
             getDescriptor().getMessageTypes().get(41);
-          internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SubmitEquipEnhancementResponseProto_descriptor,
+              internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor,
               new java.lang.String[] { "Sender", "Status", },
-              com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.class,
-              com.lvl6.proto.EventProto.SubmitEquipEnhancementResponseProto.Builder.class);
+              com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.class,
+              com.lvl6.proto.EventProto.SubmitMonsterEnhancementResponseProto.Builder.class);
           internal_static_com_lvl6_proto_RetrieveBoosterPackRequestProto_descriptor =
             getDescriptor().getMessageTypes().get(42);
           internal_static_com_lvl6_proto_RetrieveBoosterPackRequestProto_fieldAccessorTable = new
@@ -43703,22 +43704,22 @@ public final class EventProto {
               new java.lang.String[] { "Sender", "Status", },
               com.lvl6.proto.EventProto.ReviveInDungeonResponseProto.class,
               com.lvl6.proto.EventProto.ReviveInDungeonResponseProto.Builder.class);
-          internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_descriptor =
+          internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_descriptor =
             getDescriptor().getMessageTypes().get(59);
-          internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UpdateEquipDurabilityRequestProto_descriptor,
+              internal_static_com_lvl6_proto_UpdateMonsterDurabilityRequestProto_descriptor,
               new java.lang.String[] { "Sender", "Fueps", "ClientTime", },
-              com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto.class,
-              com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto.Builder.class);
-          internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_descriptor =
+              com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto.class,
+              com.lvl6.proto.EventProto.UpdateMonsterDurabilityRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_descriptor =
             getDescriptor().getMessageTypes().get(60);
-          internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_UpdateEquipDurabilityResponseProto_descriptor,
+              internal_static_com_lvl6_proto_UpdateMonsterDurabilityResponseProto_descriptor,
               new java.lang.String[] { "Sender", "Fueps", "Status", },
-              com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.class,
-              com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.Builder.class);
+              com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.class,
+              com.lvl6.proto.EventProto.UpdateMonsterDurabilityResponseProto.Builder.class);
           return null;
         }
       };

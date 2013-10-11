@@ -11,7 +11,6 @@ public class DBConstants2 {
   public static final String TABLE_CITY = "city";
   public static final String TABLE_CITY_ELEMENT = "city_element";
   public static final String TABLE_CLAN = "clan";
-  public static final String TABLE_CLAN_BULLETIN_POST = "clan_bulletin_post";
   public static final String TABLE_CLAN_CHAT_POST = "clan_chat_post";
   public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
   public static final String TABLE_EXPANSION_COST = "expansion_cost";
