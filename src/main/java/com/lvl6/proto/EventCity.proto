@@ -1,0 +1,59 @@
+
+import "City.proto";
+import "Structure.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventCityProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+message LoadPlayerCityRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 cityOwnerId = 2;
+}
+
+																						//DONE
+message LoadPlayerCityResponseProto {
+    optional MinimumUserProto sender = 1;
+    optional MinimumUserProto cityOwner = 2;
+	optional LoadPlayerCityStatus status = 3;
+	repeated FullUserStructureProto ownerNormStructs = 4;
+
+	repeated UserCityExpansionDataProto userCityExpansionDataProtoList = 5;
+     
+    enum LoadPlayerCityStatus {
+     	SUCCESS = 1;
+     	NO_SUCH_PLAYER = 2;
+     	OTHER_FAIL = 3;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+
+																					//DONE
+message PurchaseCityExpansionRequestProto {
+    optional MinimumUserProto sender = 1;
+    //sint32 to be more efficient in storing negative numbers
+    optional sint32 xPosition = 2; //in relation to center square (the origin 0,0)
+    optional sint32 yPosition = 3;
+    optional int64 timeOfPurchase = 4;
+}
+
+																						//DONE
+message PurchaseCityExpansionResponseProto {
+    optional MinimumUserProto sender = 1;
+    optional PurchaseCityExpansionStatus status = 2;
+    optional UserCityExpansionDataProto ucedp = 3;
+    
+    enum PurchaseCityExpansionStatus {
+    	SUCCESS = 1;
+    	NOT_ENOUGH_COINS = 2;
+    	ALREADY_EXPANDING = 3;
+    	OTHER_FAIL = 4;
+    	CLIENT_TOO_APART_FROM_SERVER_TIME = 5;
+    }
+}
+
+//------------------------------------------------------------------------------------------

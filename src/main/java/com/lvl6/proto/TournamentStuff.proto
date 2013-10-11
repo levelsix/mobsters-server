@@ -1,0 +1,28 @@
+
+import "Chat.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "TournamentStuffProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message TournamentProto {
+	optional int32 eventId = 1;
+	optional int64 startDate = 2;
+	optional int64 endDate = 3;
+	optional string eventName = 4;
+	repeated TournamentRewardProto rewards = 5;
+	optional int64 lastShowDate = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
+message TournamentRewardProto {
+	optional int32 leaderboardEventId = 1;
+	optional int32 minRank = 2;
+	optional int32 maxRank = 3;
+	optional int32 goldRewarded = 4;
+	optional string backgroundImageName = 5;
+	optional string prizeImageName = 6;
+	optional ColorProto titleColor = 7;
+}

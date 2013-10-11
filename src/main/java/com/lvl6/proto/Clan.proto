@@ -1,0 +1,51 @@
+
+
+import "Battle.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "ClanProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+message FullClanProto {
+	optional int32 clanId = 1;
+	optional string name = 2;
+	optional MinimumUserProto owner = 3;
+	optional int64 createTime = 4;
+	optional string description = 5;
+	optional string tag = 6;
+	optional bool requestToJoinRequired = 7;
+
+}
+
+//------------------------------------------------------------------------------------------
+
+enum UserClanStatus {
+	MEMBER = 1;
+	REQUESTING = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserClanProto {
+	optional int32 userId = 1;
+	optional int32 clanId = 2;
+	optional UserClanStatus status = 3;
+	optional int64 requestTime = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullClanProtoWithClanSize {
+	optional FullClanProto clan = 1;
+	optional int32 clanSize = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message MinimumUserProtoForClans {
+	optional MinimumUserProtoWithBattleHistory minUserProto = 1;
+	optional UserClanStatus clanStatus = 2;
+}

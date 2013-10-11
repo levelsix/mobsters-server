@@ -1,0 +1,148 @@
+
+import "BoosterPackStuff.proto";
+import "Chat.proto";
+import "City.proto";
+import "Clan.proto";
+import "Info.proto";
+import "Quest.proto";
+import "Structure.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventStartupProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message StartupRequestProto {				//client will also send ChangeUserLocationRequestProto
+     optional string udid = 1;
+     optional float versionNum = 2;			//1.0->2.0 critical, 1.0->1.1 minor. server checks db for latest vnum
+     optional string apsalarId = 3;
+     optional string macAddress = 4;
+     optional string advertiserId = 5;
+     optional bool isForceTutorial = 6;
+}
+
+message StartupResponseProto {
+    optional FullUserProto sender = 1;
+    optional StartupStatus startupStatus= 2;
+    optional UpdateStatus updateStatus= 3;
+    optional StartupConstants startupConstants = 4;
+    repeated FullCityProto allCities = 5;
+    
+    repeated FullQuestProto inProgressIncompleteQuests = 6;
+    repeated FullQuestProto inProgressCompleteQuests = 7;
+	repeated FullQuestProto availableQuests = 8;   
+	repeated FullUserClanProto userClanInfo = 9;
+	
+	repeated AttackedNotificationProto attackNotifications = 10;
+	repeated ReferralNotificationProto referralNotifications = 11;
+	
+	//repeated LockBoxEventProto lockBoxEvents = 12;
+	//repeated UserLockBoxEventProto userLockBoxEvents = 13;
+	
+	optional string appStoreURL = 14;
+	optional string reviewPageURL = 15;
+	optional string reviewPageConfirmationMessage = 16;
+	
+	optional bool playerHasBoughtInAppPurchase = 17;
+
+	repeated string noticesToPlayers = 18;
+		
+	repeated GroupChatMessageProto globalChats = 19;
+	repeated GroupChatMessageProto clanChats = 20;
+	
+	repeated GoldSaleProto goldSales = 21;
+	
+	repeated FullStructureProto staticStructs = 22;
+	
+	repeated RareBoosterPurchaseProto rareBoosterPurchases = 23;
+	
+	optional string kabamNaid = 24;
+	
+	//repeated most recent private chat posts regarding this user
+	repeated PrivateChatPostProto pcpp = 25;
+	
+	repeated CityExpansionCostProto expansionCosts = 26;
+	
+
+	message AttackedNotificationProto {
+		optional MinimumUserProto attacker = 1;
+		optional int64 battleCompleteTime = 2;
+		optional int32 coinsStolen = 3;
+	}
+	
+	message ReferralNotificationProto {
+		optional MinimumUserProto referred = 1;
+		optional int64 recruitTime = 2;
+		optional int32 coinsGivenToReferrer = 3;
+	}
+		  
+	message StartupConstants {
+		repeated InAppPurchasePackageProto inAppPurchasePackages = 1;
+    	optional int32 maxLevelForUser = 2;
+    	
+		optional int32 maxNumOfSingleStruct = 3;
+		optional NormStructConstants formulaConstants = 4;
+
+		repeated AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
+		optional int32 minNameLength = 6;
+		optional int32 maxNameLength = 7;
+		optional int32 maxLengthOfChatString = 8;
+		optional ClanConstants clanConstants = 9;
+		optional DownloadableNibConstants downloadableNibConstants = 10;
+		
+		optional int32 numHoursBeforeReshowingGoldSale = 11;
+		optional int32 levelToShowRateUsPopup = 12;
+		optional LeaderboardEventConstants leaderboardConstants = 13;
+		optional int32 fbConnectRewardDiamonds = 14;
+		optional string faqFileName = 15;
+		optional MinimumUserProto adminChatUserProto = 16;
+		optional int32 numBeginnerSalesAllowed = 17;
+		
+		message LeaderboardEventConstants {
+			optional int32 winsWeight = 1;
+			optional int32 lossesWeight = 2;
+			optional int32 fleesWeight = 3;
+			optional int32 numHoursToShowAfterEventEnd = 4;
+		}
+		message DownloadableNibConstants {
+			optional string mapNibName = 1;
+			optional string expansionNibName = 2;
+			optional string goldShoppeNibName = 3;
+		}
+		
+		message ClanConstants {
+			optional int32 diamondPriceToCreateClan = 1;
+			optional int32 maxCharLengthForClanName = 2;
+			optional int32 maxCharLengthForClanDescription = 3;
+			optional int32 maxCharLengthForClanTag = 4;
+		}
+		
+		
+		message AnimatedSpriteOffsetProto {
+			optional string imageName = 1;
+			optional CoordinateProto offSet = 2;
+		}
+		
+		message NormStructConstants {
+			optional double minutesToUpgradeForNormStructMultiplier = 1;
+			optional double incomeFromNormStructMultiplier = 2;
+			optional double upgradeStructCoinCostExponentBase = 3;
+			optional double upgradeStructDiamondCostExponentBase = 4;
+			optional double diamondCostForInstantUpgradeMultiplier = 5;
+		}
+	}
+	
+    enum UpdateStatus {
+     	NO_UPDATE = 1;
+     	MINOR_UPDATE = 2;			//NOTIFY USER OF NEW FEATURES AND/OR ASK USER IF HE WANTS TO UPDATE NOW
+     	MAJOR_UPDATE = 3;			//NOT ALLOWED TO PLAY
+     }
+     
+	enum StartupStatus {
+		USER_IN_DB = 1; 
+		USER_NOT_IN_DB = 2;
+	}    
+}
+
+//------------------------------------------------------------------------------------------

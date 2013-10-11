@@ -1,0 +1,31 @@
+
+import "MonsterStuff.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "TaskProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message TaskStageProto {
+	optional int32 stageId = 1;
+	repeated MonsterProto mp = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullTaskProto {
+	optional int32 taskId = 1;
+	optional string name = 2;
+	optional int32 cityId = 3;
+	optional int32 assetNumWithinCity = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+message MinimumUserTaskProto {
+     optional int32 userId = 1;
+     optional int32 taskId = 2;
+     optional int32 numTimesActed = 3;
+}
+
+//------------------------------------------------------------------------------------------

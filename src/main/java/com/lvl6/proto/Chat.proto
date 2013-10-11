@@ -1,0 +1,43 @@
+
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "ChatProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message PrivateChatPostProto {
+	optional int32 privateChatPostId = 1;
+	optional MinimumUserProto poster = 2;
+	optional MinimumUserProto recipient = 3;
+	optional int64 timeOfPost = 4;
+	optional string content = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ColorProto {
+	optional int32 red = 1;
+	optional int32 green = 2;
+	optional int32 blue = 3;
+}
+
+//-----------------------------------------------------------------------------------------
+
+message GroupChatMessageProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 timeOfChat = 2;
+	optional string content = 3;
+	optional bool isAdmin = 4;
+	optional int32 chatId = 5;
+}
+
+//-------------------------------------------------------------------------------------
+
+enum GroupChatScope {
+	GLOBAL = 1;
+	CLAN = 2;
+}
+
+//------------------------------------------------------------------------------------------
+

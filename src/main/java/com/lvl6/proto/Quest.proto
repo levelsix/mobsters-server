@@ -1,0 +1,86 @@
+
+import "Job.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "QuestProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message FullQuestProto {
+     optional int32 questId = 1;
+     optional int32 cityId = 2;
+     optional string name = 3;
+     optional string description = 4;
+     optional string doneResponse = 5;
+     optional int32 assetNumWithinCity = 6;
+     optional int32 coinsGained = 7;
+     optional int32 diamondsGained = 8;
+     optional int32 expGained = 9;
+     optional int32 monsterId = 10;
+     repeated int32 questsRequiredForThis = 11;
+     repeated int32 taskReqs = 12;
+     repeated int32 upgradeStructJobsReqs = 13;
+     repeated int32 buildStructJobsReqs = 14;
+     repeated int32 defeatTypeReqs = 15;
+     repeated int32 possessEquipJobReqs = 16;
+     optional int32 coinRetrievalReq = 17;
+     optional SpecialQuestAction specialQuestActionReq = 18; 
+     optional int32 numComponentsForGood = 19;
+     optional DialogueProto acceptDialogue = 20;
+     
+     optional string questGiverName = 21;
+     optional string questGiverImageSuffix = 22;
+     optional int32 priority = 23;
+}
+
+//------------------------------------------------------------------------------------------
+
+message DialogueProto { 
+	repeated SpeechSegmentProto speechSegment = 1;
+
+	message SpeechSegmentProto {
+		optional DialogueSpeaker speaker = 1;
+		optional string speakerText = 2;
+		
+		enum DialogueSpeaker {
+			PLAYER_TYPE = 1;
+			TUTORIAL_GIRL = 2;
+
+			QUESTGIVER_1 = 3;		// Farmer Mitch
+			QUESTGIVER_2 = 4;		// Captain Riz
+			QUESTGIVER_3 = 5;		// Sean The Brave
+			QUESTGIVER_4 = 6;		// Captain Riz
+			QUESTGIVER_5 = 7; 		// Sailor Steve
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+enum SpecialQuestAction {
+	REQUEST_JOIN_CLAN = 1;
+	SUCCESSFULLY_FORGE_AN_ITEM = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserQuestDataLargeProto {
+     optional int32 userId = 1;
+     optional int32 questId = 2;
+     optional bool isRedeemed = 3;
+     optional bool isComplete = 4;
+     repeated MinimumUserBuildStructJobProto requiredBuildStructJobProgress = 5;
+     repeated MinimumUserUpgradeStructJobProto requiredUpgradeStructJobProgress = 6;
+     repeated MinimumUserQuestTaskProto requiredTasksProgress = 7;
+     optional int32 coinsRetrievedForReq = 8;
+     optional int32 numComponentsComplete = 9;
+}
+
+message MinimumUserQuestTaskProto {
+     optional int32 userId = 1;
+     optional int32 questId = 2;
+     optional int32 taskId = 3;
+     optional int32 numTimesActed = 4;
+}
+
+//------------------------------------------------------------------------------------------

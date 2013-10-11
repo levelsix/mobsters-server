@@ -1,0 +1,65 @@
+package com.lvl6.proto;
+
+option java_outer_classname = "MonsterStuffProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message MonsterProto {
+	optional int32 monsterId = 1;
+	optional string name = 2; //for grouping purposes
+	optional MonsterQuality quality = 3;
+	optional int32 evolutionLevel = 4;
+	optional string displayName = 5;
+	optional MonsterElement element = 6;
+	optional int32 maxHp = 7;
+	optional string imageName = 8;
+	optional MonsterType monsterType = 9;
+	optional int32 expReward = 10;
+	optional int32 silverReward = 11;
+	optional int32 monsterIdSuccessor = 12;
+	optional bool puzzlePieceDropped = 13; 
+	
+	enum MonsterType {
+		REGULAR = 1;
+		MINI_BOSS = 2;
+		BOSS = 3;
+	}
+	
+	enum MonsterQuality {
+		COMMON = 1;
+		UNCOMMON = 2;
+		RARE = 3;
+		ULTRA = 4;
+		EPIC = 5;
+		LEGENDARY = 6;
+	}
+	
+	enum MonsterElement {
+		FIRE = 1;
+		GRASS = 2;
+		WATER = 3;
+		LIGHTNING = 4;
+		DARKNESS = 5;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserEquipProto {
+	optional int64 userEquipId = 1;
+	optional int32 userId = 2;
+	optional int32 equipId = 3;
+	optional int32 level = 4;
+	optional int32 enhancementPercentage = 5;
+	//create time
+	//reason
+	optional int32 currentDurability = 6; 
+}
+//------------------------------------------------------------------------------------------
+
+message FullBossProto {
+	optional int32 bossId = 1;
+	optional int32 cityId = 2;
+	optional int32 assetNumWithinCity = 3;
+}
+
+//------------------------------------------------------------------------------------------

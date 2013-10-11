@@ -1,0 +1,84 @@
+
+import "City.proto";
+import "Quest.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventQuestProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+message QuestAcceptRequestProto {
+     optional MinimumUserProto sender = 1;
+     optional int32 questId = 2;
+}
+
+																						//DONE
+message QuestAcceptResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional QuestAcceptStatus status = 2;
+     optional int32 cityIdOfAcceptedQuest = 3;
+
+     enum QuestAcceptStatus {
+          SUCCESS = 1;
+          NOT_AVAIL_TO_USER = 2;
+          OTHER_FAIL = 3;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+																						//DONE
+message QuestCompleteResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional int32 questId = 2;
+     optional CityElementProto CityElement = 3;
+}
+
+
+//------------------------------------------------------------------------------------------
+
+//delete all userquest data besides the one in user_quests
+//client should also take away all the quests' requiredequips
+																						//DONE
+message QuestRedeemRequestProto {                         
+     optional MinimumUserProto sender = 1;
+     optional int32 questId = 2;
+}
+
+																						//DONE
+message QuestRedeemResponseProto {
+     optional MinimumUserProto sender = 1;
+     repeated FullQuestProto newlyAvailableQuests = 2;
+     optional QuestRedeemStatus status = 3;    
+     optional int32 monsterId = 4;
+     
+     enum QuestRedeemStatus {
+          SUCCESS = 1;
+          NOT_COMPLETE = 2;
+          OTHER_FAIL = 3;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+
+//if no questId supplied, returns userquestdetails for all in progress quests
+message UserQuestDetailsRequestProto {
+     optional MinimumUserProto sender = 1;
+     optional int32 questId = 2;
+}
+
+message UserQuestDetailsResponseProto {
+     optional MinimumUserProto sender = 1;
+     repeated FullUserQuestDataLargeProto inProgressUserQuestData = 2;
+
+    optional UserQuestDetailsStatus status = 3;    
+
+     enum UserQuestDetailsStatus {
+          SUCCESS = 1;
+          SUPPLIED_QUESTID_CURRENTLY_NOT_IN_PROGRESS = 2;
+          SOME_FAIL = 3;
+     }
+}
+
+//------------------------------------------------------------------------------------------

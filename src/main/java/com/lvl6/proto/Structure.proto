@@ -1,0 +1,53 @@
+package com.lvl6.proto;
+
+option java_outer_classname = "StructureProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message FullStructureProto { 
+	optional int32 structId = 1;
+	optional string name = 2;
+	optional int32 income = 3;
+	optional int32 minutesToGain = 4;
+	optional int32 minutesToBuild = 5;
+	optional int32 minutesToUpgradeBase = 6;
+	optional int32 coinPrice = 7;
+	optional int32 diamondPrice = 8;
+	optional int32 minLevel = 9;
+	optional int32 xLength = 10;
+	optional int32 yLength = 11;
+	optional int32 instaUpgradeDiamondCostBase = 12;
+	optional int32 imgVerticalPixelOffset = 13;	
+}
+
+//------------------------------------------------------------------------------------------
+
+message FullUserStructureProto {
+	optional int32 userStructId = 1;
+	optional int32 userId = 2;
+	optional int32 structId = 3;
+	optional int64 lastRetrieved = 4;
+	optional CoordinateProto coordinates = 5;
+	optional int32 level = 6;
+	optional int64 purchaseTime = 7;
+	optional int64 lastUpgradeTime = 8;
+	optional bool isComplete = 9;
+	optional StructOrientation orientation = 10;
+}
+
+//------------------------------------------------------------------------------------------
+
+
+message CoordinateProto {
+	optional float x = 1;
+	optional float y = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+enum StructOrientation {
+	POSITION_1 = 1;
+	POSITION_2 = 2;
+}
+
+//------------------------------------------------------------------------------------------
+

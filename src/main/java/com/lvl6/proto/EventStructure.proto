@@ -1,0 +1,214 @@
+
+import "City.proto";
+import "Structure.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventStructureProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+																						//DONE
+message PurchaseNormStructureRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional CoordinateProto structCoordinates = 2;
+	optional int32 structId = 3;
+	optional int64 timeOfPurchase = 4;
+}
+
+																						//DONE
+message PurchaseNormStructureResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional PurchaseNormStructureStatus status = 2;
+	optional int32 userStructId = 3;
+	
+	enum PurchaseNormStructureStatus {
+		SUCCESS = 1;
+		NOT_ENOUGH_MATERIALS = 2;
+		LEVEL_TOO_LOW = 3;
+		ANOTHER_STRUCT_STILL_BUILDING = 4;
+		ALREADY_HAVE_MAX_OF_THIS_STRUCT = 5;
+		OTHER_FAIL = 6;
+		CLIENT_TOO_APART_FROM_SERVER_TIME = 7;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+																						//DONE
+message MoveOrRotateNormStructureRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 userStructId = 2;
+	optional MoveOrRotateNormStructType type = 3;
+	optional CoordinateProto curStructCoordinates = 4;
+	optional StructOrientation newOrientation = 5;
+	
+	enum MoveOrRotateNormStructType {
+		MOVE = 1;
+		ROTATE = 2;
+	}
+}
+																						//DONE
+message MoveOrRotateNormStructureResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional MoveOrRotateNormStructureStatus status = 2;
+	
+	enum MoveOrRotateNormStructureStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+																						//DONE
+message SellNormStructureRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 userStructId = 2;
+}
+
+																						//DONE
+message SellNormStructureResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional SellNormStructureStatus status = 2;
+	
+	enum SellNormStructureStatus {
+		SUCCESS = 1;
+		FAIL = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+																						//DONE
+message UpgradeNormStructureRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 userStructId = 2;
+	optional int64 timeOfUpgrade = 3;	
+}
+
+																						//DONE
+message UpgradeNormStructureResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional UpgradeNormStructureStatus status = 2;
+	
+	enum UpgradeNormStructureStatus {
+		SUCCESS = 1;
+		NOT_ENOUGH_MATERIALS = 2;
+		NOT_BUILT_YET = 3;
+		NOT_USERS_STRUCT = 4;
+		ANOTHER_STRUCT_STILL_UPGRADING = 5;
+		OTHER_FAIL = 6;
+		CLIENT_TOO_APART_FROM_SERVER_TIME = 7;
+		AT_MAX_LEVEL_ALREADY = 8;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+																						//DONE
+message RetrieveCurrencyFromNormStructureRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated StructRetrieval structRetrievals = 2;
+	
+	message StructRetrieval {
+		optional int32 userStructId = 1;
+		optional int64 timeOfRetrieval = 2;
+	}
+}
+
+																						//DONE
+message RetrieveCurrencyFromNormStructureResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RetrieveCurrencyFromNormStructureStatus status = 2;
+	
+	enum RetrieveCurrencyFromNormStructureStatus {
+		OTHER_FAIL = 1;
+		SUCCESS = 2;
+		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
+		NOT_LONG_ENOUGH = 4;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+					//DONE
+					//rename to speed up norm struct 
+message FinishNormStructWaittimeWithDiamondsRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 userStructId = 2;
+	optional int64 timeOfSpeedup = 3;			//lastRetrieved will start with this date
+}
+
+																						//DONE
+message FinishNormStructWaittimeWithDiamondsResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional FinishNormStructWaittimeStatus status = 2;
+     
+     enum FinishNormStructWaittimeStatus {
+     	SUCCESS = 1;
+     	NOT_ENOUGH_DIAMONDS = 2;
+     	OTHER_FAIL = 3;
+     	CLIENT_TOO_APART_FROM_SERVER_TIME = 4;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+
+//this message sent to server after a player's homepage is loaded and client checks which structs 
+//have been built but not reflected in db yet (so when is_complete=0 but the purchase_time 
+//implies that it should be)
+//this message is also sent whenever the player is on the screen and the build completes
+//i would set last_retrieved manually to when it should have completed, and is_complete=1
+											
+																						//DONE
+//NOT VERY EFFICIENT..extra db call. and for every newly built building, new db call. but w/e for now.																						
+message NormStructWaitCompleteRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated int32 userStructId = 2;
+	optional int64 curTime = 3;						//used for checking
+}
+
+																						//DONE
+message NormStructWaitCompleteResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional NormStructWaitCompleteStatus status = 2;
+     repeated FullUserStructureProto userStruct = 3;
+     
+     enum NormStructWaitCompleteStatus {
+     	SUCCESS = 1;
+     	NOT_DONE_YET = 2;
+     	OTHER_FAIL = 3;
+     	CLIENT_TOO_APART_FROM_SERVER_TIME = 4;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+																						//DONE
+message ExpansionWaitCompleteRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 curTime = 2;						//used for checking
+	optional bool speedUp = 3;
+	
+	//the (x,y) coordinates in relation to the original plot of land
+	//sint32 because it's more efficient when google protocol buffers serializes/encodes the values
+	optional sint32 xPosition = 4; 
+	optional sint32 yPosition = 5;
+}
+
+																						//DONE
+message ExpansionWaitCompleteResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional ExpansionWaitCompleteStatus status = 2;
+     optional UserCityExpansionDataProto ucedp = 3;
+     
+     enum ExpansionWaitCompleteStatus {
+     	SUCCESS = 1;
+     	WAS_NOT_EXPANDING = 2;
+     	NOT_DONE_YET = 3;
+     	OTHER_FAIL = 4;
+     	CLIENT_TOO_APART_FROM_SERVER_TIME = 5;
+     }
+}
+
+//------------------------------------------------------------------------------------------
+

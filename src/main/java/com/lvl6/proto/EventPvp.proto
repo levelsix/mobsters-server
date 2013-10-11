@@ -1,0 +1,30 @@
+
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventPvpProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message QueueUpRequestProto {
+	optional MinimumUserProto attacker = 1;
+	repeated int32 seenUserIds = 2;
+	optional int64 clientTime = 3;
+	
+}
+
+message QueueUpResponseProto {
+	optional MinimumUserProto attacker = 1;
+	optional MinimumUserProto defender = 2;
+	optional QueueUpStatus status = 3;
+	optional int32 possibleCoinReward = 4;
+
+	enum QueueUpStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		FAIL_NOT_ENOUGH_SILVER = 3;
+		FAIL_CANT_FIND_ANYONE = 4; //DON'T SUBTRACT SILVER
+	}
+}
+
+//------------------------------------------------------------------------------------------
