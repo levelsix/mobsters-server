@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_WALL_POSTS;
+  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_CHAT_POST;
 
   public static ClanChatPost getSpecificActiveClanChatPost(int wallPostId) {
     log.debug("retrieving wall post with id " + wallPostId);

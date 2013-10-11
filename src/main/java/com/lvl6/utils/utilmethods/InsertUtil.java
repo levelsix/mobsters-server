@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.User;
-import com.lvl6.proto.InfoProto.BattleResult;
 import com.lvl6.proto.InfoProto.UserClanStatus;
 
 public interface InsertUtil {
@@ -47,15 +46,6 @@ public interface InsertUtil {
 
 //	public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(long l, List<UserEquip> feeders);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.lvl6.utils.utilmethods.InsertUtil#insertBattleHistory(int, int,
-	 * com.lvl6.proto.InfoProto.BattleResult, java.util.Date, int, int, int)
-	 */
-	public abstract boolean insertBattleHistory(int attackerId, int defenderId,
-			BattleResult result, Date battleCompleteTime, int coinsStolen,
-			int stolenEquipId, int expGained, int stolenEquipLevel);
 
 	public abstract boolean insertUnredeemedUserQuest(int userId, int questId,
 			boolean hasNoRequiredTasks, boolean hasNoRequiredDefeatTypeJobs);

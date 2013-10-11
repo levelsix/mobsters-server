@@ -14,7 +14,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.FinishNormStructWaittimeWithDiamondsRequestEvent;
 import com.lvl6.events.response.FinishNormStructWaittimeWithDiamondsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.info.UserStruct;

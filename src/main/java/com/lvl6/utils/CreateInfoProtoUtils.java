@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.AnimatedSpriteOffset;
-import com.lvl6.info.BattleDetails;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
@@ -27,8 +26,6 @@ import com.lvl6.info.ClanTierLevel;
 import com.lvl6.info.ClanTower;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
-import com.lvl6.info.EquipEnhancement;
-import com.lvl6.info.EquipEnhancementFeeder;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.LeaderboardEvent;
 import com.lvl6.info.LeaderboardEventReward;
@@ -61,7 +58,6 @@ import com.lvl6.info.jobs.PossessEquipJob;
 import com.lvl6.info.jobs.UpgradeStructJob;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.AttackedNotificationProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InfoProto.BoosterItemProto;
@@ -78,8 +74,6 @@ import com.lvl6.proto.InfoProto.DefeatTypeJobProto;
 import com.lvl6.proto.InfoProto.DialogueProto;
 import com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto;
 import com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
-import com.lvl6.proto.InfoProto.EquipEnhancementItemProto;
-import com.lvl6.proto.InfoProto.EquipEnhancementProto;
 import com.lvl6.proto.InfoProto.FullCityProto;
 import com.lvl6.proto.InfoProto.FullClanProto;
 import com.lvl6.proto.InfoProto.FullClanProtoWithClanSize;
@@ -137,14 +131,12 @@ import com.lvl6.proto.InfoProto.UserLockBoxEventProto;
 import com.lvl6.proto.InfoProto.UserLockBoxItemProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.UserLockBoxItemRetrieveUtils;
-import com.lvl6.retrieveutils.UserQuestsDefeatTypeJobProgressRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestsTaskProgressRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.PossessEquipJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskEquipReqRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -177,19 +169,6 @@ public class CreateInfoProtoUtils {
 	public static AnimatedSpriteOffsetProto createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(AnimatedSpriteOffset aso) {
 		return AnimatedSpriteOffsetProto.newBuilder().setImageName(aso.getImgName())
 				.setOffSet(createCoordinateProtoFromCoordinatePair(aso.getOffSet())).build();
-	}
-
-	public static AttackedNotificationProto createAttackedNotificationProtoFromBattleHistory(BattleDetails bd, User attacker) {
-		AttackedNotificationProto.Builder builder = AttackedNotificationProto.newBuilder();
-		builder.setAttacker(createMinimumUserProtoFromUser(attacker)).setBattleResult(bd.getResult())
-		.setBattleCompleteTime(bd.getBattleCompleteTime().getTime()).setStolenEquipLevel(bd.getStolenEquipLevel());
-		if (bd.getCoinsStolen() != ControllerConstants.NOT_SET && bd.getCoinsStolen() > 0) {
-			builder.setCoinsStolen(bd.getCoinsStolen());
-		}
-		if (bd.getEquipStolen() != ControllerConstants.NOT_SET && bd.getEquipStolen() > 0) {
-			builder.setStolenEquipId(bd.getEquipStolen());
-		}
-		return builder.build();
 	}
 
 	public static MinimumUserProto createMinimumUserProtoFromUser(User u) {
@@ -795,10 +774,6 @@ public class CreateInfoProtoUtils {
 				.build();
 	}
 
-	private static MinimumUserPossessEquipJobProto createMinimumUserPossessEquipJobProto(UserQuest userQuest, PossessEquipJob possessEquipJob, int quantityOwned) {
-		return MinimumUserPossessEquipJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setPossessEquipJobId(possessEquipJob.getId()).setNumEquipUserHas(quantityOwned).build();
-	}
-
 	private static MinimumUserUpgradeStructJobProto createMinimumUserUpgradeStructJobProto(UserQuest userQuest, UpgradeStructJob upgradeStructJob, int currentLevel) {
 		return MinimumUserUpgradeStructJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setUpgradeStructJobId(upgradeStructJob.getId()).setCurrentLevel(currentLevel).build();
 	}
@@ -807,12 +782,6 @@ public class CreateInfoProtoUtils {
 		return MinimumUserBuildStructJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setBuildStructJobId(buildStructJob.getId()).setNumOfStructUserHas(quantityOwned).build();
 	}
 
-	private static MinimumUserDefeatTypeJobProto createMinimumUserDefeatTypeJobProto(UserQuest userQuest, Integer requiredDefeatTypeJobId, boolean defeatJobCompletedForQuest, 
-			Integer numTimesUserDidJob) {
-		DefeatTypeJob dtj = DefeatTypeJobRetrieveUtils.getDefeatTypeJobForDefeatTypeJobId(requiredDefeatTypeJobId);
-		int numDefeated = (defeatJobCompletedForQuest) ? dtj.getNumEnemiesToDefeat() : numTimesUserDidJob;
-		return MinimumUserDefeatTypeJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setDefeatTypeJobId(requiredDefeatTypeJobId).setNumDefeated(numDefeated).build();
-	}
 
 	private static MinimumUserQuestTaskProto createMinimumUserQuestTaskProto(UserQuest userQuest, Integer requiredTaskId, boolean taskCompletedForQuest, Integer numTimesUserActed) {
 		//TODO:
@@ -1181,66 +1150,6 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public static EquipEnhancementItemProto createEquipEnhancementItemProtoFromUserEquip(UserEquip ue) {
-		EquipEnhancementItemProto.Builder b = EquipEnhancementItemProto.newBuilder()
-				.setEquipId(ue.getEquipId()).setLevel(ue.getLevel()).setEnhancementPercentage(ue.getEnhancementPercentage());
-
-		return b.build();
-	}
-
-	public static EquipEnhancementProto createEquipEnhancementProto(int enhancementId,  
-			int userId, UserEquip mainUserEquip, List<UserEquip> feederUserEquips, long startTime) {
-		EquipEnhancementProto.Builder b = EquipEnhancementProto.newBuilder()
-				.setEnhancementId(enhancementId).setUserId(userId).setStartTime(startTime);
-
-		EquipEnhancementItemProto enhancingEquipProto = createEquipEnhancementItemProtoFromUserEquip(mainUserEquip);
-		b.setEnhancingEquip(enhancingEquipProto);
-
-		List<EquipEnhancementItemProto> itemProtoList = new ArrayList<EquipEnhancementItemProto>();
-		for(UserEquip ue : feederUserEquips) {
-			EquipEnhancementItemProto feederEquipProto = createEquipEnhancementItemProtoFromUserEquip(ue);
-			itemProtoList.add(feederEquipProto);
-		}
-		b.addAllFeederEquips(itemProtoList);
-
-		return b.build();
-	}
-
-	public static EquipEnhancementItemProto createEquipEnhancementItemProtoFromEquipEnhacementFeeder(
-			EquipEnhancementFeeder aFeeder) {
-		EquipEnhancementItemProto.Builder b = EquipEnhancementItemProto.newBuilder()
-				.setEquipId(aFeeder.getEquipId()).setLevel(aFeeder.getEquipLevel())
-				.setEnhancementPercentage(aFeeder.getEnhancementPercentageBeforeEnhancement());
-
-		return b.build();
-	}
-
-	public static EquipEnhancementProto createEquipEnhancementProto(EquipEnhancement ee, 
-			List<EquipEnhancementFeeder> feeders) {
-		EquipEnhancementProto.Builder b = EquipEnhancementProto.newBuilder()
-				.setEnhancementId(ee.getId()).setUserId(ee.getUserId());
-
-		Date start = ee.getStartTimeOfEnhancement();
-		if(null != start) {
-			b.setStartTime(start.getTime());
-		}
-
-		EquipEnhancementItemProto enhancingEquipProto = EquipEnhancementItemProto.newBuilder()
-				.setEquipId(ee.getEquipId()).setLevel(ee.getEquipLevel())
-				.setEnhancementPercentage(ee.getEnhancementPercentage())
-				.build();
-		b.setEnhancingEquip(enhancingEquipProto);
-
-		List<EquipEnhancementItemProto> itemProtoList = new ArrayList<EquipEnhancementItemProto>();
-		for(EquipEnhancementFeeder aFeeder : feeders) {
-			EquipEnhancementItemProto feederEquipProto = 
-					createEquipEnhancementItemProtoFromEquipEnhacementFeeder(aFeeder);
-			itemProtoList.add(feederEquipProto);
-		}
-		b.addAllFeederEquips(itemProtoList);
-
-		return b.build();
-	}
 
 	public static MinimumUserProtoForClanTowerScores createMinUserProtoForClanTowerScores(User user, int pointsGained, int pointsLost) {
 		MinimumUserProtoForClanTowerScores.Builder bldr = MinimumUserProtoForClanTowerScores.newBuilder();

@@ -72,7 +72,6 @@ message StartupResponseProto {
 	
 	optional bool playerHasBoughtInAppPurchase = 22;
 
-	repeated UnhandledBlacksmithAttemptProto unhandledForgeAttempt = 23;
 	repeated string noticesToPlayers = 24;
 		
 	repeated GroupChatMessageProto globalChats = 31;
@@ -80,13 +79,7 @@ message StartupResponseProto {
 	
 	repeated GoldSaleProto goldSales = 33;
 	
-	repeated ClanTierLevelProto clanTierLevels = 36;
-	repeated ClanTowerProto clanTowers = 39;
-	
 	repeated FullStructureProto staticStructs = 37;
-	//repeated BossEventProto bossEvents = 40;
-	
-	repeated LeaderboardEventProto leaderboardEvents = 41;
 	
 	repeated RareBoosterPurchaseProto rareBoosterPurchases = 43;
 	
@@ -94,11 +87,6 @@ message StartupResponseProto {
 	
 	//repeated most recent private chat posts regarding this user
 	repeated PrivateChatPostProto pcpp = 45;
-	
-	repeated CityGemProto gemsForAllCities = 46;
-	
-	repeated FullUserBossProto livingBosses = 47;
-	repeated FullBossProto bosses = 48;
 	
 	repeated CityExpansionCostProto expansionCosts = 49;
 	
@@ -556,46 +544,6 @@ message RetrieveTasksForCityResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-																						//DONE
-message TaskActionRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 taskId = 2;
-	optional int64 curTime = 3;
-}
-
-																						//DONE
-message TaskActionResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional TaskActionStatus status = 2;
-	optional bool taskCompleted = 3;
-	optional bool cityRankedUp = 4;
-	optional FullUserEquipProto lootUserEquip = 5;
-	optional int32 coinsGained = 6;
-	
-	optional int32 coinBonusIfCityRankup = 7;
-	optional int32 expBonusIfCityRankup = 8;
-	optional int32 cityId = 9;
-	
-	optional int32 eventIdOfLockBoxGained = 10;
-	
-	//a gem if dropped
-	optional UserCityGemProto gem = 11;
-	
-	//send this if city ranked up and no active bosses
-	optional FullUserBossProto boss = 12; 
-	optional bool isFirstGem = 13;
-	
-	enum TaskActionStatus {
-		SUCCESS = 0; 
-		USER_NOT_ENOUGH_ENERGY = 1;
-		USER_NOT_ALL_REQUIRED_ITEMS = 2;
-		OTHER_FAIL = 3;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 4;
-	} 
-}
-
-//------------------------------------------------------------------------------------------
-
 																						//DONE
 message PurchaseNormStructureRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -1160,15 +1108,9 @@ message RetrieveStaticDataResponseProto {
 	repeated FullQuestProto quests = 4;
 	repeated FullCityProto cities = 5;
 	repeated BuildStructJobProto buildStructJobs = 7;
-	repeated DefeatTypeJobProto defeatTypeJobs = 8;
-	repeated PossessEquipJobProto possessEquipJobs = 9;
 	repeated UpgradeStructJobProto upgradeStructJobs = 10;
 	optional int32 expRequiredForRequestedLevel = 11;
 	//repeated LockBoxEventProto lockBoxEvents = 12;
-	repeated ClanTierLevelProto clanTierLevels = 14;
-	repeated FullBossProto bosses = 15;
-	//repeated BossEventProto bossEvents = 16;
-	repeated LeaderboardEventProto leaderboardEvents = 17;
 	
 	optional RetrieveStaticDataStatus status = 13;
 	
@@ -1329,15 +1271,11 @@ message LoadNeutralCityRequestProto {
 message LoadNeutralCityResponseProto {
      optional MinimumUserProto sender = 1;
      optional LoadNeutralCityStatus status = 2;
-     repeated MinimumUserTaskProto userTasksInfo = 3;
+
 	     //client shouldnt show bars if already at max city level
-     repeated FullUserProto defeatTypeJobEnemies = 4;
      repeated NeutralCityElementProto cityElements = 5;
      optional int32 cityId = 6;
      repeated FullUserQuestDataLargeProto inProgressUserQuestDataInCity = 7;
-     
-     repeated FullUserBossProto userBosses = 8;
-     repeated UserCityGemProto myGems = 9; //gems for requested city
      
      enum LoadNeutralCityStatus {
      	SUCCESS = 0;
@@ -1413,36 +1351,6 @@ message EarnFreeDiamondsResponseProto {
 message LogoutRequestProto {
 	optional MinimumUserProto sender = 1;
 }
-
-//------------------------------------------------------------------------------------------
-
-message SubmitEquipsToBlacksmithRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int64 userEquipOne = 2;
-	optional int64 userEquipTwo = 3;
-	optional bool paidToGuarantee = 4;
-	optional int64 startTime = 5;
-	optional int32 forgeSlotNumber = 6;
-}
-
-message SubmitEquipsToBlacksmithResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional SubmitEquipsToBlacksmithStatus status = 2;
-	optional UnhandledBlacksmithAttemptProto unhandledBlacksmithAttempt = 3;
-	
-	enum SubmitEquipsToBlacksmithStatus {
-		SUCCESS = 0;
-		NOT_ENOUGH_DIAMONDS_FOR_GUARANTEE = 2;
-		SUBMITTED_EQUIPS_NOT_SAME_LEVEL = 4;
-		TRYING_TO_SURPASS_MAX_LEVEL = 5;
-		ALREADY_FORGING_MAX_NUM_OF_EQUIPS = 6;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 7;
-		OTHER_FAIL = 8;
-		FORGE_SLOT_IN_USE = 9;
-		FORGE_SLOT_NOT_YET_UNLOCKED = 10;
-	}
-}
-
 
 //------------------------------------------------------------------------------------------
 message RetrieveLeaderboardRankingsRequestProto {
@@ -1609,28 +1517,6 @@ message RetractRequestJoinClanResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-message UpgradeClanTierLevelRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 clanId = 2;
-}
-
-message UpgradeClanTierLevelResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional UpgradeClanTierLevelStatus status = 2;
-	optional FullClanProtoWithClanSize fullClan = 3;
-	optional MinimumClanProto minClan = 4;
-	
-	enum UpgradeClanTierLevelStatus {
-		SUCCESS = 0;
-		NOT_ENOUGH_GOLD = 1;
-		NOT_CLAN_LEADER = 2;
-		ALREADY_AT_MAX_TIER = 3;
-		OTHER_FAIL = 4;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-
 //can request as many as you like. wipe out other ones
 message ApproveOrRejectRequestToJoinClanRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -1756,44 +1642,6 @@ message BootPlayerFromClanResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
-message BeginGoldmineTimerRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional bool reset = 2;
-    optional int64 clientTime = 3;
-}
-
-message BeginGoldmineTimerResponseProto {
-	optional MinimumUserProto sender = 1;
-	
-	optional BeginGoldmineTimerStatus status = 2;
-	
-	enum BeginGoldmineTimerStatus {
-		SUCCESS = 0;
-		NOT_ENOUGH_DIAMONDS = 1;
-		STILL_COLLECTING = 2;
-		OTHER_FAIL = 3;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 4;
-	}
-}
-
-message CollectFromGoldmineRequestProto {
-	optional MinimumUserProto sender = 1;
-    optional int64 clientTime = 2;
-}
-
-message CollectFromGoldmineResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional CollectFromGoldmineStatus status = 3;
-	
-	enum CollectFromGoldmineStatus {
-		SUCCESS = 0;
-		NOT_YET_STARTED = 1;
-		STILL_COLLECTING = 2;
-		OTHER_FAIL = 3;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 4;
-	}
-}
 
 message PickLockBoxRequestProto {
 	optional MinimumUserProto sender = 1;

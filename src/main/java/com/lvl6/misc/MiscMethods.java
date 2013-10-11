@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.core.task.TaskExecutor;
 
-import com.lvl6.events.response.ChangedClanTowerResponseEvent;
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.AnimatedSpriteOffset;
@@ -38,7 +37,6 @@ import com.lvl6.info.LeaderboardEventReward;
 import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityGem;
-import com.lvl6.info.UserClan;
 import com.lvl6.info.UserEquip;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
@@ -46,15 +44,12 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
-import com.lvl6.proto.EventProto.ChangedClanTowerResponseProto;
-import com.lvl6.proto.EventProto.ChangedClanTowerResponseProto.ReasonForClanTowerChange;
 import com.lvl6.proto.EventProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BattleConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BazaarMinLevelConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BoosterPackConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BossConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.CharacterModConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.ClanConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.EnhancementConstants;
@@ -63,7 +58,6 @@ import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.ForgeCons
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.FormulaConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.GoldmineConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.HealthConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.KiipRewardConditions;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.LockBoxConstants;
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.PrestigeConstants;
@@ -71,14 +65,12 @@ import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.SpeedupCo
 import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.ThreeCardMonteConstants;
 import com.lvl6.proto.EventProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InfoProto.ClanTierLevelProto;
-import com.lvl6.proto.InfoProto.ClanTowerProto;
 import com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.InfoProto.GoldSaleProto;
 import com.lvl6.proto.InfoProto.InAppPurchasePackageProto;
 import com.lvl6.proto.InfoProto.LeaderboardEventProto;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.ClanTowerRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
@@ -122,8 +114,6 @@ public class MiscMethods {
 
 
   private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
-  public static final String clanTowersClanAttacked = "clanTowersClanAttacked";
-  public static final String clanTowersClanOwned = "clanTowersClanOwned";
   public static final String gold = "gold";
   public static final String silver = "silver";
   public static final String boosterPackId = "boosterPackId";
@@ -422,24 +412,6 @@ public class MiscMethods {
       }
     }
 
-    KiipRewardConditions.Builder krcb = KiipRewardConditions.newBuilder();
-
-    int[] levelsThatTriggerKiipRewards = ControllerConstants.STARTUP__LEVELS_THAT_TRIGGER_KIIP_REWARDS;
-    if (levelsThatTriggerKiipRewards != null) { 
-      for (int i = 0; i < levelsThatTriggerKiipRewards.length; i++) {
-        krcb.addLevelUpConditions(levelsThatTriggerKiipRewards[i]);
-      }
-    }
-
-    int[] questsThatTriggerKiipRewardsOnRedeem = ControllerConstants.STARTUP__QUESTS_THAT_TRIGGER_KIIP_REWARDS_ON_REDEEM;
-    if (questsThatTriggerKiipRewardsOnRedeem != null) { 
-      for (int i = 0; i < questsThatTriggerKiipRewardsOnRedeem.length; i++) {
-        krcb.addQuestRedeemConditions(questsThatTriggerKiipRewardsOnRedeem[i]);
-      }
-    }
-
-    cb.setKiipRewardConditions(krcb.build());
-    
     HealthConstants hc = HealthConstants.newBuilder()
         .setHealthFormulaExponentBase(ControllerConstants.HEALTH__FORMULA_EXPONENT_BASE)
         .setHealthFormulaLinearA(ControllerConstants.HEALTH__FORMULA_LINEAR_A)
@@ -447,15 +419,6 @@ public class MiscMethods {
         .setHealthFormulaLevelCutoff(ControllerConstants.HEALTH__FORMULA_LEVEL_CUTOFF)
         .build();
     cb.setHealthConstants(hc);
-
-    CharacterModConstants charModConstants = CharacterModConstants.newBuilder()
-        .setDiamondCostToChangeCharacterType(ControllerConstants.CHARACTER_MOD__DIAMOND_COST_OF_CHANGE_CHARACTER_TYPE)
-        .setDiamondCostToChangeName(ControllerConstants.CHARACTER_MOD__DIAMOND_COST_OF_CHANGE_NAME)
-        .setDiamondCostToResetCharacter(ControllerConstants.CHARACTER_MOD__DIAMOND_COST_OF_NEW_PLAYER)
-        .setDiamondCostToResetSkillPoints(ControllerConstants.CHARACTER_MOD__DIAMOND_COST_OF_RESET_SKILL_POINTS)
-        .build();
-
-    cb.setCharModConstants(charModConstants);
 
     FormulaConstants formulaConstants = FormulaConstants.newBuilder()
         .setMinutesToUpgradeForNormStructMultiplier(ControllerConstants.MINUTES_TO_UPGRADE_FOR_NORM_STRUCT_MULTIPLIER)
@@ -910,94 +873,6 @@ public class MiscMethods {
     return toRet;
   }
 
-  //The lock for clan_towers table must be acquired before calling this function.
-  //Makes 7 db calls:
-  //One to retrieve clan size
-  //Two to retrieve the towers the clan owns and is attacking
-  //Two to write to the clan_towers_history table: towers the clan owns and is attacking
-  //Two to write to the clan_towers table
-  //returns ids of clan towers that the clan owned and attacked
-  public static Map<String, List<Integer>> updateClanTowersAfterClanSizeDecrease(Clan aClan) {
-    int clanId = aClan.getId();
-
-    //can be null if the clan was just deleted, otherwise a list of all members in the clan
-    List<UserClan> userClanList = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clanId);
-
-    int clanSize = 0;
-
-    if(null == userClanList || userClanList.isEmpty()) {
-      clanSize = 0;
-    } else {
-      clanSize = userClanList.size(); 
-    }
-
-    int minSize = ControllerConstants.MIN_CLAN_MEMBERS_TO_HOLD_CLAN_TOWER;
-
-    if (clanSize < minSize) {
-      //since member left,
-      //need to see if clan loses the towers they own, making the attacker the new owner,
-      //or make the tower owner-less; and making the towers they are attacking, attacker-less
-
-      List<ClanTower> towersOwned = ClanTowerRetrieveUtils.getAllClanTowersWithSpecificOwnerAndOrAttackerId(
-          clanId, ControllerConstants.NOT_SET, false);
-      List<ClanTower> towersAttacked = ClanTowerRetrieveUtils.getAllClanTowersWithSpecificOwnerAndOrAttackerId(
-          ControllerConstants.NOT_SET, clanId, false);
-
-      //return value
-      Map<String, List<Integer>> towersBeforeUpdate = new HashMap<String, List<Integer>>();
-
-      if(null == towersOwned) {
-        towersOwned = new ArrayList<ClanTower>();
-      }
-      if(null == towersAttacked) {
-        towersAttacked = new ArrayList<ClanTower>();
-      }
-
-      //if the clan has towers do something.
-      if(0 < towersOwned.size() || 0 < towersAttacked.size()) {
-        List<Integer> ownedIds = new ArrayList<Integer>();
-        List<Integer> attackedIds = new ArrayList<Integer>();
-        List<Integer> wOwnedList = new ArrayList<Integer>();
-        List<Integer> wAttackedList = new ArrayList<Integer>();
-        for(ClanTower ct: towersOwned) {
-          ownedIds.add(ct.getId());
-          wOwnedList.add(ct.getClanAttackerId());
-        }
-        for(ClanTower ct: towersAttacked) {
-          attackedIds.add(ct.getId());
-          wAttackedList.add(ct.getClanOwnerId());
-        }
-
-        //update clan_towers_history table
-        if(!UpdateUtils.get().updateTowerHistory(towersOwned, Notification.OWNER_NOT_ENOUGH_MEMBERS, wOwnedList)) {
-          log.error("Added more/less towers than the clan owned to clan_towers_history table, when clan " +
-              "size decreased below the minimum limit. clan=" + aClan + " towersOwned=" + towersOwned);
-        }
-        if(!UpdateUtils.get().updateTowerHistory(towersAttacked, Notification.ATTACKER_NOT_ENOUGH_MEMBERS, wAttackedList)) {
-          log.error("Added more/less towers than the clan attacked to clan_towers_history table, when clan " +
-              "size decreased below the minimum limit. clan=" + aClan + " towersAttacked=" + towersAttacked);
-        }
-
-        //update clan_towers table
-        if(!UpdateUtils.get().resetClanTowerOwnerOrAttacker(ownedIds, true)) { //reset the towers where this clan is the owner
-          log.error("reset more/less towers than the clan owned in clan_towers table. clan=" + 
-              aClan + "towersOwned=" + towersOwned);
-        }
-        if(!UpdateUtils.get().resetClanTowerOwnerOrAttacker(attackedIds, false)) {//reset the towers where this clan is the attacker
-          log.error("reset more/less towers than the clan attacked in clan_towers table. clan=" + 
-              aClan + "towersAttacked=" + towersAttacked);
-        }
-
-        //return clan towers that changed
-        towersBeforeUpdate.put(clanTowersClanOwned, ownedIds);
-        towersBeforeUpdate.put(clanTowersClanAttacked, attackedIds);
-      }
-      return towersBeforeUpdate;
-    }
-    return null;
-
-  }
-
   //returns the clan towers that changed
   public static void sendClanTowerWarNotEnoughMembersNotification(
       Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Integer> towersAttacked,
@@ -1048,55 +923,6 @@ public class MiscMethods {
       clanTowerWarNotification.setAsClanTowerWarClanConceded(
           losingClanName, winningClanName, towerName);
       notificationsToSend.add(clanTowerWarNotification);
-    }
-  }
-
-  //converts the ClanTower objects into ClanTowerProto objects,
-  //then sends them all to the client
-  public static void sendClanTowerProtosToClient(Collection<ClanTower> changedTowers,
-      GameServer server, ReasonForClanTowerChange reason) {
-    if(null != changedTowers && 0 < changedTowers.size()) {
-      ArrayList<ClanTowerProto> toSend = new ArrayList<ClanTowerProto>();
-      for(ClanTower tower: changedTowers) {
-        ClanTowerProto towerProto = 
-            CreateInfoProtoUtils.createClanTowerProtoFromClanTower(tower);
-        toSend.add(towerProto);
-      }
-
-      ChangedClanTowerResponseProto.Builder t = ChangedClanTowerResponseProto.newBuilder();
-      t.addAllClanTowers(toSend);
-      t.setReason(reason);
-
-      ChangedClanTowerResponseEvent e = new ChangedClanTowerResponseEvent(0);
-      e.setChangedClanTowerResponseProto(t.build());
-
-      server.writeGlobalEvent(e);
-    }
-  }
-
-  public static void sendClanTowerProtosToClient(Collection<ClanTower> changedTowers,
-      GameServer server, ReasonForClanTowerChange reason, User attacker, User defender,
-      boolean attackerWon, int pointsGained) {
-    if(null != changedTowers && 0 < changedTowers.size()) {
-      ArrayList<ClanTowerProto> toSend = new ArrayList<ClanTowerProto>();
-      for(ClanTower tower: changedTowers) {
-        ClanTowerProto towerProto = 
-            CreateInfoProtoUtils.createClanTowerProtoFromClanTower(tower);
-        toSend.add(towerProto);
-      }
-
-      ChangedClanTowerResponseProto.Builder t = ChangedClanTowerResponseProto.newBuilder();
-      t.addAllClanTowers(toSend);
-      t.setAttackerUser(CreateInfoProtoUtils.createMinimumUserProtoFromUser(attacker));
-      t.setDefenderUser(CreateInfoProtoUtils.createMinimumUserProtoFromUser(defender));
-      t.setAttackerWon(attackerWon);
-      t.setPointsGained(pointsGained);
-      t.setReason(reason);
-
-      ChangedClanTowerResponseEvent e = new ChangedClanTowerResponseEvent(0);
-      e.setChangedClanTowerResponseProto(t.build());
-
-      server.writeGlobalEvent(e);
     }
   }
 

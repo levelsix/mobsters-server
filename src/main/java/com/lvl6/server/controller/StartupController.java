@@ -35,7 +35,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.RetrieveStaticDataResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
-import com.lvl6.info.BattleDetails;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
@@ -45,18 +44,14 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanTower;
 import com.lvl6.info.DailyBonusReward;
-import com.lvl6.info.EquipEnhancement;
-import com.lvl6.info.EquipEnhancementFeeder;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.PlayerWallPost;
 import com.lvl6.info.PrivateChatPost;
-import com.lvl6.info.Quest;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.info.UserBoss;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserDailyBonusRewardHistory;
-import com.lvl6.info.UserQuest;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -73,7 +68,6 @@ import com.lvl6.proto.EventProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.InfoProto.BoosterPackProto;
 import com.lvl6.proto.InfoProto.CityExpansionCostProto;
 import com.lvl6.proto.InfoProto.CityGemProto;
-import com.lvl6.proto.InfoProto.EquipEnhancementProto;
 import com.lvl6.proto.InfoProto.FullUserBossProto;
 import com.lvl6.proto.InfoProto.FullUserProto;
 import com.lvl6.proto.InfoProto.GoldSaleProto;
@@ -81,12 +75,9 @@ import com.lvl6.proto.InfoProto.GroupChatMessageProto;
 import com.lvl6.proto.InfoProto.PrivateChatPostProto;
 import com.lvl6.proto.InfoProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.BattleDetailsRetrieveUtils;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanTowerRetrieveUtils;
-import com.lvl6.retrieveutils.EquipEnhancementFeederRetrieveUtils;
-import com.lvl6.retrieveutils.EquipEnhancementRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
@@ -102,7 +93,6 @@ import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.DailyBonusRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
@@ -110,7 +100,6 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
@@ -243,7 +232,6 @@ public class StartupController extends EventController {
           //resBuilder.addAllBossEvents(MiscMethods.currentBossEvents());
 
           setLeaderboardEventStuff(resBuilder);
-          setEquipEnhancementStuff(resBuilder, user);
           setAllies(resBuilder, user);
           setPrivateChatPosts(resBuilder, user);
           setCityGems(resBuilder);
@@ -518,25 +506,6 @@ public class StartupController extends EventController {
       }
     }
     return clanIdsToUserIdSet;
-  }
-
-  private void setEquipEnhancementStuff(StartupResponseProto.Builder resBuilder, User aUser) {
-    int userId = aUser.getId();
-    List<EquipEnhancement> equipUnderEnhancements = EquipEnhancementRetrieveUtils
-        .getEquipEnhancementsForUser(userId);
-    if (null == equipUnderEnhancements || equipUnderEnhancements.isEmpty()) {
-      return;
-    }
-
-    EquipEnhancement equipUnderEnhancement = equipUnderEnhancements.get(0);
-
-    int equipEnhancementId = equipUnderEnhancement.getId();
-    List<EquipEnhancementFeeder> feeders = EquipEnhancementFeederRetrieveUtils
-        .getEquipEnhancementFeedersForEquipEnhancementId(equipEnhancementId);
-
-    EquipEnhancementProto eeProto = CreateInfoProtoUtils.createEquipEnhancementProto(
-        equipUnderEnhancement, feeders);
-    resBuilder.setEquipEnhancement(eeProto);
   }
 
   private void setClanTowers(StartupResponseProto.Builder resBuilder) {
@@ -1275,15 +1244,6 @@ public class StartupController extends EventController {
 
     Timestamp earliestBattleNotificationTimeToRetrieve = new Timestamp(new Date().getTime()
         - ControllerConstants.STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND * 3600000);
-    List<BattleDetails> battleDetails = BattleDetailsRetrieveUtils
-        .getMostRecentBattleDetailsForDefenderAfterTime(user.getId(),
-            ControllerConstants.STARTUP__MAX_NUM_OF_STARTUP_NOTIFICATION_TYPE_TO_SEND,
-            earliestBattleNotificationTimeToRetrieve);
-    if (battleDetails != null && battleDetails.size() > 0) {
-      for (BattleDetails bd : battleDetails) {
-        userIds.add(bd.getAttackerId());
-      }
-    }
 
     List<PlayerWallPost> wallPosts = PlayerWallPostRetrieveUtils
         .getMostRecentPlayerWallPostsForWallOwner(
@@ -1315,13 +1275,6 @@ public class StartupController extends EventController {
 //                usersByIds.get(mt.getBuyerId()), user));
 //      }
 //    }
-    if (battleDetails != null && battleDetails.size() > 0) {
-      for (BattleDetails bd : battleDetails) {
-        resBuilder.addAttackNotifications(CreateInfoProtoUtils
-            .createAttackedNotificationProtoFromBattleHistory(bd,
-                usersByIds.get(bd.getAttackerId())));
-      }
-    }
     if (wallPosts != null && wallPosts.size() > 0) {
       for (PlayerWallPost p : wallPosts) {
         resBuilder.addPlayerWallPostNotifications(CreateInfoProtoUtils

@@ -1,7 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -17,18 +15,15 @@ import com.lvl6.events.request.BootPlayerFromClanRequestEvent;
 import com.lvl6.events.response.BootPlayerFromClanResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
-import com.lvl6.info.ClanTower;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventProto.BootPlayerFromClanRequestProto;
 import com.lvl6.proto.EventProto.BootPlayerFromClanResponseProto;
 import com.lvl6.proto.EventProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus;
 import com.lvl6.proto.EventProto.BootPlayerFromClanResponseProto.Builder;
-import com.lvl6.proto.EventProto.ChangedClanTowerResponseProto.ReasonForClanTowerChange;
 import com.lvl6.proto.InfoProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.ClanTowerRetrieveUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -103,19 +98,6 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
 
-        //clan tower stuff
-        log.debug("BootPlayerFromClan... locking all clan towers");
-        if(server.lockClanTowersTable()) {
-        	try {
-	          Clan aClan = ClanRetrieveUtils.getClanWithId(user.getClanId());
-	          sendTowersAndNotifications(aClan);
-        	}catch(Exception e) {
-        		log.error("Failed to update clan tower and send notification", e);
-        		throw e;
-        	}finally {
-        		server.unlockClanTowersTable();
-        	}
-        }
       } else {
         server.writeEvent(resEvent);
       }
@@ -157,48 +139,4 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
   }
 
-  private void sendTowersAndNotifications(Clan aClan) {
-    //after user is disassociated with his clan, see if the clan's towers (if any) should be opened to
-    //new ownership or to be attacked
-    Map<String, List<Integer>> towersClanOwnedAndAttacked = 
-        MiscMethods.updateClanTowersAfterClanSizeDecrease(aClan);
-    log.info("the towers that changed: " + towersClanOwnedAndAttacked 
-        + ". The clan who lost a member: " + aClan);
-
-    if(null != towersClanOwnedAndAttacked && 0 < towersClanOwnedAndAttacked.size()) {
-      List<Integer> towersAttacked = new ArrayList<Integer>();
-      List<Integer> towersOwned = new ArrayList<Integer>();
-      Map<Integer, ClanTower> clanTowerIdsToClanTowers =
-          getClanTowerIdsToClanTowers(towersClanOwnedAndAttacked, 
-              towersAttacked, towersOwned);
-
-      //send the towers that changed
-      MiscMethods.sendClanTowerProtosToClient(clanTowerIdsToClanTowers.values(), 
-          server, ReasonForClanTowerChange.NOT_ENOUGH_MEMBERS);
-
-      //send notifications to everyone online that clan towers changed
-      MiscMethods.sendClanTowerWarNotEnoughMembersNotification(
-          clanTowerIdsToClanTowers, towersAttacked, towersOwned, 
-          aClan, executor, playersByPlayerId.values(), server);
-    }
-  }
-
-  private Map<Integer, ClanTower> getClanTowerIdsToClanTowers(
-      Map<String, List<Integer>> towersClanOwnedAndAttacked,
-      List<Integer> towersAttacked, List<Integer> towersOwned) {
-    if(null != towersClanOwnedAndAttacked && !towersClanOwnedAndAttacked.isEmpty()) {
-      String attacked = MiscMethods.clanTowersClanAttacked;
-      String owned = MiscMethods.clanTowersClanOwned;
-
-      towersAttacked.addAll(towersClanOwnedAndAttacked.get(attacked));
-      towersOwned.addAll(towersClanOwnedAndAttacked.get(owned));
-
-      //get all the clan tower objects that were reset
-      List<Integer> towerIds = new ArrayList<Integer>();
-      towerIds.addAll(towersAttacked);
-      towerIds.addAll(towersOwned);
-      return ClanTowerRetrieveUtils.getClanTowersForClanTowerIds(towerIds);
-    }
-    return null;
-  }
 }
