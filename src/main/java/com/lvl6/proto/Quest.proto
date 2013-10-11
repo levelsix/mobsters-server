@@ -21,8 +21,6 @@ message FullQuestProto {
      repeated int32 taskReqs = 12;
      repeated int32 upgradeStructJobsReqs = 13;
      repeated int32 buildStructJobsReqs = 14;
-     repeated int32 defeatTypeReqs = 15;
-     repeated int32 possessEquipJobReqs = 16;
      optional int32 coinRetrievalReq = 17;
      optional SpecialQuestAction specialQuestActionReq = 18; 
      optional int32 numComponentsForGood = 19;
@@ -59,7 +57,7 @@ message DialogueProto {
 
 enum SpecialQuestAction {
 	REQUEST_JOIN_CLAN = 1;
-	SUCCESSFULLY_FORGE_AN_ITEM = 2;
+	EVOLVE_A_MONSTER = 2;
 }
 
 //------------------------------------------------------------------------------------------
