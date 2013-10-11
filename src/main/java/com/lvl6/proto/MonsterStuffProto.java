@@ -1414,10 +1414,6 @@ public final class MonsterStuffProto {
     boolean hasMonsterId();
     int getMonsterId();
     
-    // optional int32 level = 4;
-    boolean hasLevel();
-    int getLevel();
-    
     // optional int32 enhancementPercentage = 5;
     boolean hasEnhancementPercentage();
     int getEnhancementPercentage();
@@ -1485,21 +1481,11 @@ public final class MonsterStuffProto {
       return monsterId_;
     }
     
-    // optional int32 level = 4;
-    public static final int LEVEL_FIELD_NUMBER = 4;
-    private int level_;
-    public boolean hasLevel() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public int getLevel() {
-      return level_;
-    }
-    
     // optional int32 enhancementPercentage = 5;
     public static final int ENHANCEMENTPERCENTAGE_FIELD_NUMBER = 5;
     private int enhancementPercentage_;
     public boolean hasEnhancementPercentage() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public int getEnhancementPercentage() {
       return enhancementPercentage_;
@@ -1509,7 +1495,7 @@ public final class MonsterStuffProto {
     public static final int CURRENTDURABILITY_FIELD_NUMBER = 6;
     private int currentDurability_;
     public boolean hasCurrentDurability() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public int getCurrentDurability() {
       return currentDurability_;
@@ -1519,7 +1505,6 @@ public final class MonsterStuffProto {
       userMonsterId_ = 0L;
       userId_ = 0;
       monsterId_ = 0;
-      level_ = 0;
       enhancementPercentage_ = 0;
       currentDurability_ = 0;
     }
@@ -1545,12 +1530,9 @@ public final class MonsterStuffProto {
         output.writeInt32(3, monsterId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, level_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(5, enhancementPercentage_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(6, currentDurability_);
       }
       getUnknownFields().writeTo(output);
@@ -1576,13 +1558,9 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, level_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, enhancementPercentage_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, currentDurability_);
       }
@@ -1716,12 +1694,10 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         monsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        level_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
         enhancementPercentage_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         currentDurability_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -1775,13 +1751,9 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.level_ = level_;
+        result.enhancementPercentage_ = enhancementPercentage_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
-        }
-        result.enhancementPercentage_ = enhancementPercentage_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
         }
         result.currentDurability_ = currentDurability_;
         result.bitField0_ = to_bitField0_;
@@ -1808,9 +1780,6 @@ public final class MonsterStuffProto {
         }
         if (other.hasMonsterId()) {
           setMonsterId(other.getMonsterId());
-        }
-        if (other.hasLevel()) {
-          setLevel(other.getLevel());
         }
         if (other.hasEnhancementPercentage()) {
           setEnhancementPercentage(other.getEnhancementPercentage());
@@ -1864,18 +1833,13 @@ public final class MonsterStuffProto {
               monsterId_ = input.readInt32();
               break;
             }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              level_ = input.readInt32();
-              break;
-            }
             case 40: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               enhancementPercentage_ = input.readInt32();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000010;
               currentDurability_ = input.readInt32();
               break;
             }
@@ -1948,43 +1912,22 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional int32 level = 4;
-      private int level_ ;
-      public boolean hasLevel() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public int getLevel() {
-        return level_;
-      }
-      public Builder setLevel(int value) {
-        bitField0_ |= 0x00000008;
-        level_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearLevel() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        level_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // optional int32 enhancementPercentage = 5;
       private int enhancementPercentage_ ;
       public boolean hasEnhancementPercentage() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getEnhancementPercentage() {
         return enhancementPercentage_;
       }
       public Builder setEnhancementPercentage(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         enhancementPercentage_ = value;
         onChanged();
         return this;
       }
       public Builder clearEnhancementPercentage() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         enhancementPercentage_ = 0;
         onChanged();
         return this;
@@ -1993,19 +1936,19 @@ public final class MonsterStuffProto {
       // optional int32 currentDurability = 6;
       private int currentDurability_ ;
       public boolean hasCurrentDurability() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getCurrentDurability() {
         return currentDurability_;
       }
       public Builder setCurrentDurability(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         currentDurability_ = value;
         onChanged();
         return this;
       }
       public Builder clearCurrentDurability() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         currentDurability_ = 0;
         onChanged();
         return this;
@@ -2514,14 +2457,13 @@ public final class MonsterStuffProto {
       "\022\n\n\006COMMON\020\001\022\014\n\010UNCOMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005" +
       "ULTRA\020\004\022\010\n\004EPIC\020\005\022\r\n\tLEGENDARY\020\006\"M\n\016Mons" +
       "terElement\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER" +
-      "\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\"\231\001\n\024Full" +
+      "\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\"\212\001\n\024Full" +
       "UserMonsterProto\022\025\n\ruserMonsterId\030\001 \001(\003\022" +
-      "\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\r\n\005le" +
-      "vel\030\004 \001(\005\022\035\n\025enhancementPercentage\030\005 \001(\005",
-      "\022\031\n\021currentDurability\030\006 \001(\005\"K\n\rFullBossP" +
-      "roto\022\016\n\006bossId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(\005\022\032\n\022" +
-      "assetNumWithinCity\030\003 \001(\005B\023B\021MonsterStuff" +
-      "Proto"
+      "\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\035\n\025en" +
+      "hancementPercentage\030\005 \001(\005\022\031\n\021currentDura",
+      "bility\030\006 \001(\005\"K\n\rFullBossProto\022\016\n\006bossId\030" +
+      "\001 \001(\005\022\016\n\006cityId\030\002 \001(\005\022\032\n\022assetNumWithinC" +
+      "ity\030\003 \001(\005B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2541,7 +2483,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor,
-              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "Level", "EnhancementPercentage", "CurrentDurability", },
+              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "EnhancementPercentage", "CurrentDurability", },
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_FullBossProto_descriptor =

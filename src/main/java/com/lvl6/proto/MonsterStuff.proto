@@ -48,7 +48,6 @@ message FullUserMonsterProto {
 	optional int64 userMonsterId = 1;
 	optional int32 userId = 2;
 	optional int32 monsterId = 3;
-	optional int32 level = 4;
 	optional int32 enhancementPercentage = 5;
 	//create time
 	//reason
