@@ -141,8 +141,6 @@ message StartupResponseProto {
 	
 	repeated LeaderboardEventProto leaderboardEvents = 41;
 	
-	optional EquipEnhancementProto equipEnhancement = 42;
-	
 	repeated RareBoosterPurchaseProto rareBoosterPurchases = 43;
 	
 	optional string kabamNaid = 44;
