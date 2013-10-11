@@ -18333,6 +18333,1201 @@ public final class InfoProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.GroupChatMessageProto)
   }
   
+  public interface LockBoxEventProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 lockBoxEventId = 1;
+    boolean hasLockBoxEventId();
+    int getLockBoxEventId();
+    
+    // optional int64 startDate = 2;
+    boolean hasStartDate();
+    long getStartDate();
+    
+    // optional int64 endDate = 3;
+    boolean hasEndDate();
+    long getEndDate();
+    
+    // optional string lockBoxImageName = 4;
+    boolean hasLockBoxImageName();
+    String getLockBoxImageName();
+    
+    // optional string eventName = 5;
+    boolean hasEventName();
+    String getEventName();
+    
+    // repeated .com.lvl6.proto.LockBoxItemProto items = 7;
+    java.util.List<com.lvl6.proto.InfoProto.LockBoxItemProto> 
+        getItemsList();
+    com.lvl6.proto.InfoProto.LockBoxItemProto getItems(int index);
+    int getItemsCount();
+    java.util.List<? extends com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder> 
+        getItemsOrBuilderList();
+    com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder getItemsOrBuilder(
+        int index);
+    
+    // optional string descriptionString = 8;
+    boolean hasDescriptionString();
+    String getDescriptionString();
+    
+    // optional string descriptionImageName = 9;
+    boolean hasDescriptionImageName();
+    String getDescriptionImageName();
+    
+    // optional string tagImageName = 10;
+    boolean hasTagImageName();
+    String getTagImageName();
+  }
+  public static final class LockBoxEventProto extends
+      com.google.protobuf.GeneratedMessage
+      implements LockBoxEventProtoOrBuilder {
+    // Use LockBoxEventProto.newBuilder() to construct.
+    private LockBoxEventProto(Builder builder) {
+      super(builder);
+    }
+    private LockBoxEventProto(boolean noInit) {}
+    
+    private static final LockBoxEventProto defaultInstance;
+    public static LockBoxEventProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public LockBoxEventProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.InfoProto.internal_static_com_lvl6_proto_LockBoxEventProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.InfoProto.internal_static_com_lvl6_proto_LockBoxEventProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 lockBoxEventId = 1;
+    public static final int LOCKBOXEVENTID_FIELD_NUMBER = 1;
+    private int lockBoxEventId_;
+    public boolean hasLockBoxEventId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getLockBoxEventId() {
+      return lockBoxEventId_;
+    }
+    
+    // optional int64 startDate = 2;
+    public static final int STARTDATE_FIELD_NUMBER = 2;
+    private long startDate_;
+    public boolean hasStartDate() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getStartDate() {
+      return startDate_;
+    }
+    
+    // optional int64 endDate = 3;
+    public static final int ENDDATE_FIELD_NUMBER = 3;
+    private long endDate_;
+    public boolean hasEndDate() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public long getEndDate() {
+      return endDate_;
+    }
+    
+    // optional string lockBoxImageName = 4;
+    public static final int LOCKBOXIMAGENAME_FIELD_NUMBER = 4;
+    private java.lang.Object lockBoxImageName_;
+    public boolean hasLockBoxImageName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getLockBoxImageName() {
+      java.lang.Object ref = lockBoxImageName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          lockBoxImageName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getLockBoxImageNameBytes() {
+      java.lang.Object ref = lockBoxImageName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        lockBoxImageName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string eventName = 5;
+    public static final int EVENTNAME_FIELD_NUMBER = 5;
+    private java.lang.Object eventName_;
+    public boolean hasEventName() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getEventName() {
+      java.lang.Object ref = eventName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          eventName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getEventNameBytes() {
+      java.lang.Object ref = eventName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        eventName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // repeated .com.lvl6.proto.LockBoxItemProto items = 7;
+    public static final int ITEMS_FIELD_NUMBER = 7;
+    private java.util.List<com.lvl6.proto.InfoProto.LockBoxItemProto> items_;
+    public java.util.List<com.lvl6.proto.InfoProto.LockBoxItemProto> getItemsList() {
+      return items_;
+    }
+    public java.util.List<? extends com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder> 
+        getItemsOrBuilderList() {
+      return items_;
+    }
+    public int getItemsCount() {
+      return items_.size();
+    }
+    public com.lvl6.proto.InfoProto.LockBoxItemProto getItems(int index) {
+      return items_.get(index);
+    }
+    public com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder getItemsOrBuilder(
+        int index) {
+      return items_.get(index);
+    }
+    
+    // optional string descriptionString = 8;
+    public static final int DESCRIPTIONSTRING_FIELD_NUMBER = 8;
+    private java.lang.Object descriptionString_;
+    public boolean hasDescriptionString() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public String getDescriptionString() {
+      java.lang.Object ref = descriptionString_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          descriptionString_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDescriptionStringBytes() {
+      java.lang.Object ref = descriptionString_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        descriptionString_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string descriptionImageName = 9;
+    public static final int DESCRIPTIONIMAGENAME_FIELD_NUMBER = 9;
+    private java.lang.Object descriptionImageName_;
+    public boolean hasDescriptionImageName() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public String getDescriptionImageName() {
+      java.lang.Object ref = descriptionImageName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          descriptionImageName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDescriptionImageNameBytes() {
+      java.lang.Object ref = descriptionImageName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        descriptionImageName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string tagImageName = 10;
+    public static final int TAGIMAGENAME_FIELD_NUMBER = 10;
+    private java.lang.Object tagImageName_;
+    public boolean hasTagImageName() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public String getTagImageName() {
+      java.lang.Object ref = tagImageName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          tagImageName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getTagImageNameBytes() {
+      java.lang.Object ref = tagImageName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        tagImageName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    private void initFields() {
+      lockBoxEventId_ = 0;
+      startDate_ = 0L;
+      endDate_ = 0L;
+      lockBoxImageName_ = "";
+      eventName_ = "";
+      items_ = java.util.Collections.emptyList();
+      descriptionString_ = "";
+      descriptionImageName_ = "";
+      tagImageName_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, lockBoxEventId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, startDate_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, endDate_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getLockBoxImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getEventNameBytes());
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        output.writeMessage(7, items_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(8, getDescriptionStringBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(9, getDescriptionImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(10, getTagImageNameBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, lockBoxEventId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, startDate_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, endDate_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getLockBoxImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getEventNameBytes());
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, items_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getDescriptionStringBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getDescriptionImageNameBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getTagImageNameBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.InfoProto.LockBoxEventProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.InfoProto.LockBoxEventProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.InfoProto.LockBoxEventProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.InfoProto.internal_static_com_lvl6_proto_LockBoxEventProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.InfoProto.internal_static_com_lvl6_proto_LockBoxEventProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.InfoProto.LockBoxEventProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getItemsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        lockBoxEventId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        startDate_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        endDate_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        lockBoxImageName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        eventName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+        } else {
+          itemsBuilder_.clear();
+        }
+        descriptionString_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        descriptionImageName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        tagImageName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.InfoProto.LockBoxEventProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.InfoProto.LockBoxEventProto getDefaultInstanceForType() {
+        return com.lvl6.proto.InfoProto.LockBoxEventProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.InfoProto.LockBoxEventProto build() {
+        com.lvl6.proto.InfoProto.LockBoxEventProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.InfoProto.LockBoxEventProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.InfoProto.LockBoxEventProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.InfoProto.LockBoxEventProto buildPartial() {
+        com.lvl6.proto.InfoProto.LockBoxEventProto result = new com.lvl6.proto.InfoProto.LockBoxEventProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.lockBoxEventId_ = lockBoxEventId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.startDate_ = startDate_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.endDate_ = endDate_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.lockBoxImageName_ = lockBoxImageName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.eventName_ = eventName_;
+        if (itemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            items_ = java.util.Collections.unmodifiableList(items_);
+            bitField0_ = (bitField0_ & ~0x00000020);
+          }
+          result.items_ = items_;
+        } else {
+          result.items_ = itemsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.descriptionString_ = descriptionString_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.descriptionImageName_ = descriptionImageName_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.tagImageName_ = tagImageName_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.InfoProto.LockBoxEventProto) {
+          return mergeFrom((com.lvl6.proto.InfoProto.LockBoxEventProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.InfoProto.LockBoxEventProto other) {
+        if (other == com.lvl6.proto.InfoProto.LockBoxEventProto.getDefaultInstance()) return this;
+        if (other.hasLockBoxEventId()) {
+          setLockBoxEventId(other.getLockBoxEventId());
+        }
+        if (other.hasStartDate()) {
+          setStartDate(other.getStartDate());
+        }
+        if (other.hasEndDate()) {
+          setEndDate(other.getEndDate());
+        }
+        if (other.hasLockBoxImageName()) {
+          setLockBoxImageName(other.getLockBoxImageName());
+        }
+        if (other.hasEventName()) {
+          setEventName(other.getEventName());
+        }
+        if (itemsBuilder_ == null) {
+          if (!other.items_.isEmpty()) {
+            if (items_.isEmpty()) {
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+            } else {
+              ensureItemsIsMutable();
+              items_.addAll(other.items_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.items_.isEmpty()) {
+            if (itemsBuilder_.isEmpty()) {
+              itemsBuilder_.dispose();
+              itemsBuilder_ = null;
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00000020);
+              itemsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getItemsFieldBuilder() : null;
+            } else {
+              itemsBuilder_.addAllMessages(other.items_);
+            }
+          }
+        }
+        if (other.hasDescriptionString()) {
+          setDescriptionString(other.getDescriptionString());
+        }
+        if (other.hasDescriptionImageName()) {
+          setDescriptionImageName(other.getDescriptionImageName());
+        }
+        if (other.hasTagImageName()) {
+          setTagImageName(other.getTagImageName());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              lockBoxEventId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              startDate_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              endDate_ = input.readInt64();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              lockBoxImageName_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              eventName_ = input.readBytes();
+              break;
+            }
+            case 58: {
+              com.lvl6.proto.InfoProto.LockBoxItemProto.Builder subBuilder = com.lvl6.proto.InfoProto.LockBoxItemProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addItems(subBuilder.buildPartial());
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000040;
+              descriptionString_ = input.readBytes();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000080;
+              descriptionImageName_ = input.readBytes();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000100;
+              tagImageName_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 lockBoxEventId = 1;
+      private int lockBoxEventId_ ;
+      public boolean hasLockBoxEventId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getLockBoxEventId() {
+        return lockBoxEventId_;
+      }
+      public Builder setLockBoxEventId(int value) {
+        bitField0_ |= 0x00000001;
+        lockBoxEventId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLockBoxEventId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        lockBoxEventId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 startDate = 2;
+      private long startDate_ ;
+      public boolean hasStartDate() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getStartDate() {
+        return startDate_;
+      }
+      public Builder setStartDate(long value) {
+        bitField0_ |= 0x00000002;
+        startDate_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStartDate() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        startDate_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 endDate = 3;
+      private long endDate_ ;
+      public boolean hasEndDate() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public long getEndDate() {
+        return endDate_;
+      }
+      public Builder setEndDate(long value) {
+        bitField0_ |= 0x00000004;
+        endDate_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearEndDate() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        endDate_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional string lockBoxImageName = 4;
+      private java.lang.Object lockBoxImageName_ = "";
+      public boolean hasLockBoxImageName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public String getLockBoxImageName() {
+        java.lang.Object ref = lockBoxImageName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          lockBoxImageName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setLockBoxImageName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        lockBoxImageName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLockBoxImageName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        lockBoxImageName_ = getDefaultInstance().getLockBoxImageName();
+        onChanged();
+        return this;
+      }
+      void setLockBoxImageName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000008;
+        lockBoxImageName_ = value;
+        onChanged();
+      }
+      
+      // optional string eventName = 5;
+      private java.lang.Object eventName_ = "";
+      public boolean hasEventName() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getEventName() {
+        java.lang.Object ref = eventName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          eventName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setEventName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        eventName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearEventName() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        eventName_ = getDefaultInstance().getEventName();
+        onChanged();
+        return this;
+      }
+      void setEventName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        eventName_ = value;
+        onChanged();
+      }
+      
+      // repeated .com.lvl6.proto.LockBoxItemProto items = 7;
+      private java.util.List<com.lvl6.proto.InfoProto.LockBoxItemProto> items_ =
+        java.util.Collections.emptyList();
+      private void ensureItemsIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          items_ = new java.util.ArrayList<com.lvl6.proto.InfoProto.LockBoxItemProto>(items_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.InfoProto.LockBoxItemProto, com.lvl6.proto.InfoProto.LockBoxItemProto.Builder, com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder> itemsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.InfoProto.LockBoxItemProto> getItemsList() {
+        if (itemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(items_);
+        } else {
+          return itemsBuilder_.getMessageList();
+        }
+      }
+      public int getItemsCount() {
+        if (itemsBuilder_ == null) {
+          return items_.size();
+        } else {
+          return itemsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.InfoProto.LockBoxItemProto getItems(int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);
+        } else {
+          return itemsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setItems(
+          int index, com.lvl6.proto.InfoProto.LockBoxItemProto value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.set(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setItems(
+          int index, com.lvl6.proto.InfoProto.LockBoxItemProto.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addItems(com.lvl6.proto.InfoProto.LockBoxItemProto value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addItems(
+          int index, com.lvl6.proto.InfoProto.LockBoxItemProto value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addItems(
+          com.lvl6.proto.InfoProto.LockBoxItemProto.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addItems(
+          int index, com.lvl6.proto.InfoProto.LockBoxItemProto.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllItems(
+          java.lang.Iterable<? extends com.lvl6.proto.InfoProto.LockBoxItemProto> values) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          super.addAll(values, items_);
+          onChanged();
+        } else {
+          itemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearItems() {
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000020);
+          onChanged();
+        } else {
+          itemsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeItems(int index) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.remove(index);
+          onChanged();
+        } else {
+          itemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.InfoProto.LockBoxItemProto.Builder getItemsBuilder(
+          int index) {
+        return getItemsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder getItemsOrBuilder(
+          int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);  } else {
+          return itemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder> 
+           getItemsOrBuilderList() {
+        if (itemsBuilder_ != null) {
+          return itemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(items_);
+        }
+      }
+      public com.lvl6.proto.InfoProto.LockBoxItemProto.Builder addItemsBuilder() {
+        return getItemsFieldBuilder().addBuilder(
+            com.lvl6.proto.InfoProto.LockBoxItemProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.InfoProto.LockBoxItemProto.Builder addItemsBuilder(
+          int index) {
+        return getItemsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.InfoProto.LockBoxItemProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.InfoProto.LockBoxItemProto.Builder> 
+           getItemsBuilderList() {
+        return getItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.InfoProto.LockBoxItemProto, com.lvl6.proto.InfoProto.LockBoxItemProto.Builder, com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder> 
+          getItemsFieldBuilder() {
+        if (itemsBuilder_ == null) {
+          itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.InfoProto.LockBoxItemProto, com.lvl6.proto.InfoProto.LockBoxItemProto.Builder, com.lvl6.proto.InfoProto.LockBoxItemProtoOrBuilder>(
+                  items_,
+                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  getParentForChildren(),
+                  isClean());
+          items_ = null;
+        }
+        return itemsBuilder_;
+      }
+      
+      // optional string descriptionString = 8;
+      private java.lang.Object descriptionString_ = "";
+      public boolean hasDescriptionString() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public String getDescriptionString() {
+        java.lang.Object ref = descriptionString_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          descriptionString_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDescriptionString(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        descriptionString_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDescriptionString() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        descriptionString_ = getDefaultInstance().getDescriptionString();
+        onChanged();
+        return this;
+      }
+      void setDescriptionString(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000040;
+        descriptionString_ = value;
+        onChanged();
+      }
+      
+      // optional string descriptionImageName = 9;
+      private java.lang.Object descriptionImageName_ = "";
+      public boolean hasDescriptionImageName() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public String getDescriptionImageName() {
+        java.lang.Object ref = descriptionImageName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          descriptionImageName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDescriptionImageName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        descriptionImageName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDescriptionImageName() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        descriptionImageName_ = getDefaultInstance().getDescriptionImageName();
+        onChanged();
+        return this;
+      }
+      void setDescriptionImageName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000080;
+        descriptionImageName_ = value;
+        onChanged();
+      }
+      
+      // optional string tagImageName = 10;
+      private java.lang.Object tagImageName_ = "";
+      public boolean hasTagImageName() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public String getTagImageName() {
+        java.lang.Object ref = tagImageName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          tagImageName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setTagImageName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        tagImageName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTagImageName() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        tagImageName_ = getDefaultInstance().getTagImageName();
+        onChanged();
+        return this;
+      }
+      void setTagImageName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000100;
+        tagImageName_ = value;
+        onChanged();
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.LockBoxEventProto)
+    }
+    
+    static {
+      defaultInstance = new LockBoxEventProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.LockBoxEventProto)
+  }
+  
   public interface LockBoxItemProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -53862,6 +55057,11 @@ public final class InfoProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_GroupChatMessageProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_LockBoxEventProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_LockBoxEventProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_LockBoxItemProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -54211,274 +55411,280 @@ public final class InfoProto {
       "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
       "inimumUserProto\022\022\n\ntimeOfChat\030\002 \001(\003\022\017\n\007c",
       "ontent\030\003 \001(\t\022\017\n\007isAdmin\030\004 \001(\010\022\016\n\006chatId\030" +
-      "\005 \001(\005\"\267\001\n\020LockBoxItemProto\022\025\n\rlockBoxIte" +
-      "mId\030\001 \001(\005\022\026\n\016lockBoxEventId\030\002 \001(\005\022\026\n\016cha" +
-      "nceToUnlock\030\003 \001(\002\022\014\n\004name\030\004 \001(\t\022\021\n\timage" +
-      "Name\030\006 \001(\t\022 \n\030redeemForNumBoosterItems\030\007" +
-      " \001(\005\022\031\n\021isGoldBoosterPack\030\010 \001(\010\"\324\001\n\025User" +
-      "LockBoxEventProto\022\026\n\016lockBoxEventId\030\001 \001(" +
-      "\005\022\016\n\006userId\030\002 \001(\005\022\024\n\014numLockBoxes\030\003 \001(\005\022" +
-      "\031\n\021numTimesCompleted\030\004 \001(\005\022\024\n\014lastPickTi" +
-      "me\030\005 \001(\003\0223\n\005items\030\006 \003(\0132$.com.lvl6.proto",
-      ".UserLockBoxItemProto\022\027\n\017hasBeenRedeemed" +
-      "\030\007 \001(\010\"O\n\024UserLockBoxItemProto\022\025\n\rlockBo" +
-      "xItemId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010quantit" +
-      "y\030\003 \001(\005\"\245\003\n\rFullBossProto\022\016\n\006bossId\030\001 \001(" +
-      "\005\022\016\n\006cityId\030\002 \001(\005\022\032\n\022assetNumWithinCity\030" +
-      "\003 \001(\005\022\037\n\027regularAttackEnergyCost\030\004 \001(\005\022\025" +
-      "\n\rminutesToKill\030\005 \001(\005\022#\n\033superAttackDama" +
-      "geMultiplier\030\006 \001(\002\022\035\n\025superAttackEnergyC" +
-      "ost\030\007 \001(\005\022\014\n\004name\030\010 \001(\t\022\024\n\014expConstantA\030" +
-      "\t \001(\005\022\024\n\014expConstantB\030\n \001(\005\022\023\n\013hpConstan",
-      "tA\030\013 \001(\005\022\023\n\013hpConstantB\030\014 \001(\005\022\023\n\013hpConst" +
-      "antC\030\r \001(\005\022\024\n\014dmgConstantA\030\016 \001(\005\022\024\n\014dmgC" +
-      "onstantB\030\017 \001(\005\022\030\n\020mapIconImageName\030\020 \001(\t" +
-      "\022\035\n\025unlockedBossImageName\030\021 \001(\t\"o\n\021FullU" +
-      "serBossProto\022\016\n\006bossId\030\001 \001(\005\022\016\n\006userId\030\002" +
-      " \001(\005\022\021\n\tcurHealth\030\003 \001(\005\022\024\n\014currentLevel\030" +
-      "\004 \001(\005\022\021\n\tstartTime\030\005 \001(\003\"Z\n\031FullClanProt" +
-      "oWithClanSize\022+\n\004clan\030\001 \001(\0132\035.com.lvl6.p" +
-      "roto.FullClanProto\022\020\n\010clanSize\030\002 \001(\005\"\232\001\n" +
-      "\025ClanBulletinPostProto\022\032\n\022clanBulletinPo",
-      "stId\030\005 \001(\005\0220\n\006poster\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022\016\n\006clanId\030\002 \001(\005\022\022\n\n" +
-      "timeOfPost\030\003 \001(\003\022\017\n\007content\030\004 \001(\t\"M\n\022Cla" +
-      "nTierLevelProto\022\021\n\ttierLevel\030\001 \001(\005\022\017\n\007ma" +
-      "xSize\030\002 \001(\005\022\023\n\013upgradeCost\030\003 \001(\005\"\227\001\n\030Min" +
-      "imumUserProtoForClans\022G\n\014minUserProto\030\001 " +
-      "\001(\01321.com.lvl6.proto.MinimumUserProtoWit" +
-      "hBattleHistory\0222\n\nclanStatus\030\002 \001(\0162\036.com" +
-      ".lvl6.proto.UserClanStatus\"x\n\021FullUserCl" +
-      "anProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006clanId\030\002 \001(\005\022",
-      ".\n\006status\030\003 \001(\0162\036.com.lvl6.proto.UserCla" +
-      "nStatus\022\023\n\013requestTime\030\004 \001(\003\"\253\001\n!Minimum" +
-      "UserProtoWithBattleHistory\022H\n\025minUserPro" +
-      "toWithLevel\030\001 \001(\0132).com.lvl6.proto.Minim" +
-      "umUserProtoWithLevel\022\022\n\nbattlesWon\030\002 \001(\005" +
-      "\022\023\n\013battlesLost\030\003 \001(\005\022\023\n\013battlesFled\030\004 \001" +
-      "(\005\"a\n\016MonteCardProto\022\016\n\006cardId\030\001 \001(\005\022\026\n\016" +
-      "diamondsGained\030\002 \001(\005\022\022\n\nequipLevel\030\003 \001(\005" +
-      "\022\023\n\013coinsGained\030\004 \001(\005\"\335\001\n\rFullClanProto\022" +
-      "\016\n\006clanId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022/\n\005owner\030\003",
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\022" +
-      "\n\ncreateTime\030\004 \001(\003\022\023\n\013description\030\005 \001(\t\022" +
-      "\013\n\003tag\030\006 \001(\t\022\016\n\006isGood\030\007 \001(\010\022\030\n\020currentT" +
-      "ierLevel\030\010 \001(\005\022\035\n\025requestToJoinRequired\030" +
-      "\t \001(\010\"\300\001\n\020MinimumClanProto\022\016\n\006clanId\030\001 \001" +
-      "(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007ownerId\030\003 \001(\005\022\022\n\ncre" +
-      "ateTime\030\004 \001(\003\022\023\n\013description\030\005 \001(\t\022\013\n\003ta" +
-      "g\030\006 \001(\t\022\016\n\006isGood\030\007 \001(\010\022\030\n\020currentTierLe" +
-      "vel\030\010 \001(\005\022\035\n\025requestToJoinRequired\030\t \001(\010" +
-      "\"`\n\020MinimumUserProto\022\016\n\006userId\030\001 \001(\005\022\014\n\004",
-      "name\030\002 \001(\t\022.\n\004clan\030\003 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumClanProto\"b\n\031MinimumUserProtoWi" +
-      "thLevel\0226\n\014minUserProto\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\r\n\005level\030\002 \001(\005\"\335" +
-      "\001\n\'MinimumUserProtoWithLevelForLeaderboa" +
-      "rd\0226\n\014minUserProto\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\r\n\005level\030\002 \001(\005\0228\n\017lea" +
-      "derboardType\030\003 \001(\0162\037.com.lvl6.proto.Lead" +
-      "erboardType\022\027\n\017leaderboardRank\030\004 \001(\005\022\030\n\020" +
-      "leaderboardScore\030\005 \001(\001\"\207\007\n\rFullUserProto",
-      "\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030" +
-      "\003 \001(\005\022\020\n\010diamonds\030\004 \001(\005\022\r\n\005coins\030\005 \001(\005\022\022" +
-      "\n\nexperience\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001" +
-      "(\005\022\022\n\nbattlesWon\030\010 \001(\005\022\023\n\013battlesLost\030\t " +
-      "\001(\005\022\r\n\005flees\030\n \001(\005\022\024\n\014referralCode\030\013 \001(\t" +
-      "\022\024\n\014numReferrals\030\014 \001(\005\022\025\n\rlastLoginTime\030" +
-      "\016 \001(\003\022\026\n\016lastLogoutTime\030\017 \001(\003\022\016\n\006isFake\030" +
-      "\023 \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetrie" +
-      "vedFromStructs\030\027 \001(\005\022.\n\004clan\030\031 \001(\0132 .com" +
-      ".lvl6.proto.MinimumClanProto\022\033\n\023hasRecei",
-      "vedfbReward\030\034 \001(\010\022\037\n\027numAdditionalForgeS" +
-      "lots\030\035 \001(\005\022!\n\031numBeginnerSalesPurchased\030" +
-      "\036 \001(\005\022\027\n\017hasActiveShield\030\037 \001(\010\022\025\n\rshield" +
-      "EndTime\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004rank\030\" \001(\t" +
-      "\022\026\n\016lastTimeQueued\030# \001(\003\022\022\n\nattacksWon\030$" +
-      " \001(\005\022\023\n\013defensesWon\030% \001(\005\022\023\n\013attacksLost" +
-      "\030& \001(\005\022\024\n\014defensesLost\030\' \001(\005\022\014\n\004udid\030\r \001" +
-      "(\t\022\023\n\013deviceToken\030\020 \001(\t\022\"\n\032lastBattleNot" +
-      "ificationTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022" +
-      "\n\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n",
-      "\030numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastW" +
-      "allPostNotificationTime\030\032 \001(\003\022\021\n\tkabamNa" +
-      "id\030\033 \001(\t\"\247\002\n\026FullUserStructureProto\022\024\n\014u" +
-      "serStructId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010str" +
-      "uctId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\0224\n\013co" +
-      "ordinates\030\005 \001(\0132\037.com.lvl6.proto.Coordin" +
-      "ateProto\022\r\n\005level\030\006 \001(\005\022\024\n\014purchaseTime\030" +
-      "\007 \001(\003\022\027\n\017lastUpgradeTime\030\010 \001(\003\022\022\n\nisComp" +
-      "lete\030\t \001(\010\0226\n\013orientation\030\n \001(\0162!.com.lv" +
-      "l6.proto.StructOrientation\"\223\001\n\022FullUserE",
-      "quipProto\022\023\n\013userEquipId\030\001 \001(\003\022\016\n\006userId" +
-      "\030\002 \001(\005\022\017\n\007equipId\030\003 \001(\005\022\r\n\005level\030\004 \001(\005\022\035" +
-      "\n\025enhancementPercentage\030\005 \001(\005\022\031\n\021current" +
-      "Durability\030\006 \001(\005\"\370\002\n\022FullStructureProto\022" +
-      "\020\n\010structId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\016\n\006incom" +
-      "e\030\003 \001(\005\022\025\n\rminutesToGain\030\004 \001(\005\022\026\n\016minute" +
-      "sToBuild\030\005 \001(\005\022\034\n\024minutesToUpgradeBase\030\006" +
-      " \001(\005\022\021\n\tcoinPrice\030\007 \001(\005\022\024\n\014diamondPrice\030" +
-      "\010 \001(\005\022\020\n\010minLevel\030\t \001(\005\022\017\n\007xLength\030\n \001(\005" +
-      "\022\017\n\007yLength\030\013 \001(\005\022\035\n\025instaBuildDiamondCo",
-      "st\030\016 \001(\005\022$\n\034instaRetrieveDiamondCostBase" +
-      "\030\017 \001(\005\022#\n\033instaUpgradeDiamondCostBase\030\020 " +
-      "\001(\005\022\036\n\026imgVerticalPixelOffset\030\021 \001(\005\"\254\004\n\r" +
-      "FullTaskProto\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 " +
-      "\001(\t\022\016\n\006cityId\030\003 \001(\005\022 \n\030numRequiredForCom" +
-      "pletion\030\004 \001(\005\022\022\n\nenergyCost\030\005 \001(\005\022\026\n\016min" +
-      "CoinsGained\030\006 \001(\005\022\026\n\016maxCoinsGained\030\007 \001(" +
-      "\005\022\031\n\021chanceOfEquipLoot\030\010 \001(\002\022\035\n\025potentia" +
-      "lLootEquipIds\030\t \003(\005\022\021\n\texpGained\030\n \001(\005\022\032" +
-      "\n\022assetNumWithinCity\030\013 \001(\005\022\026\n\016processing",
-      "Text\030\014 \001(\t\022<\n\023spriteLandingCoords\030\016 \001(\0132" +
-      "\037.com.lvl6.proto.CoordinateProto\0224\n\ranim" +
-      "ationType\030\017 \001(\0162\035.com.lvl6.proto.Animati" +
-      "onType\022F\n\tequipReqs\030\r \003(\01323.com.lvl6.pro" +
-      "to.FullTaskProto.FullTaskEquipReqProto\032J" +
-      "\n\025FullTaskEquipReqProto\022\016\n\006taskId\030\001 \001(\005\022" +
-      "\017\n\007equipId\030\002 \001(\005\022\020\n\010quantity\030\003 \001(\005\"\375\001\n\rF" +
-      "ullCityProto\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001" +
-      "(\t\022\020\n\010minLevel\030\003 \001(\005\022\035\n\025expGainedBaseOnR" +
-      "ankup\030\004 \001(\005\022\037\n\027coinsGainedBaseOnRankup\030\005",
-      " \001(\005\022\022\n\nmapImgName\030\006 \001(\t\022/\n\006center\030\007 \001(\013" +
-      "2\037.com.lvl6.proto.CoordinateProto\022\017\n\007tas" +
-      "kIds\030\n \003(\005\022\017\n\007bossIds\030\013 \003(\005\022\025\n\rboosterPa" +
-      "ckId\030\014 \001(\005\"\200\001\n\032UserCityExpansionDataProt" +
-      "o\022\016\n\006userId\030\001 \001(\005\022\021\n\txPosition\030\002 \001(\021\022\021\n\t" +
-      "yPosition\030\003 \001(\021\022\023\n\013isExpanding\030\004 \001(\010\022\027\n\017" +
-      "expandStartTime\030\005 \001(\003\"E\n\026CityExpansionCo" +
-      "stProto\022\024\n\014expansionNum\030\001 \001(\005\022\025\n\rexpansi" +
-      "onCost\030\002 \001(\005\"q\n\021FullUserCityProto\022\016\n\006use" +
-      "rId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(\005\022\023\n\013currentRank",
-      "\030\003 \001(\005\022\'\n\037numTasksCurrentlyCompleteInRan" +
-      "k\030\004 \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n" +
-      "\001y\030\002 \001(\002\"\236\003\n\027NeutralCityElementProto\022\016\n\006" +
-      "cityId\030\001 \001(\005\022\017\n\007assetId\030\002 \001(\005\022\014\n\004name\030\t " +
-      "\001(\t\022I\n\004type\030\003 \001(\0162;.com.lvl6.proto.Neutr" +
-      "alCityElementProto.NeutralCityElemType\022/" +
-      "\n\006coords\030\004 \001(\0132\037.com.lvl6.proto.Coordina" +
-      "teProto\022\017\n\007xLength\030\005 \001(\005\022\017\n\007yLength\030\006 \001(" +
-      "\005\022\r\n\005imgId\030\007 \001(\t\0226\n\013orientation\030\010 \001(\0162!." +
-      "com.lvl6.proto.StructOrientation\"o\n\023Neut",
-      "ralCityElemType\022\026\n\022PERSON_QUEST_GIVER\020\000\022" +
-      "\014\n\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_" +
-      "NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\260\001\n\027FullUserCr" +
-      "itstructProto\022,\n\004type\030\001 \001(\0162\036.com.lvl6.p" +
-      "roto.CritStructType\022/\n\006coords\030\002 \001(\0132\037.co" +
-      "m.lvl6.proto.CoordinateProto\0226\n\013orientat" +
-      "ion\030\003 \001(\0162!.com.lvl6.proto.StructOrienta" +
-      "tion\"M\n\024MinimumUserTaskProto\022\016\n\006userId\030\001" +
-      " \001(\005\022\016\n\006taskId\030\002 \001(\005\022\025\n\rnumTimesActed\030\003 " +
-      "\001(\005\"\321\004\n\033FullUserQuestDataLargeProto\022\016\n\006u",
-      "serId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedeem" +
-      "ed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022T\n\035required" +
-      "DefeatTypeJobProgress\030\005 \003(\0132-.com.lvl6.p" +
-      "roto.MinimumUserDefeatTypeJobProto\022V\n\036re" +
-      "quiredBuildStructJobProgress\030\006 \003(\0132..com" +
-      ".lvl6.proto.MinimumUserBuildStructJobPro" +
-      "to\022Z\n requiredUpgradeStructJobProgress\030\007" +
-      " \003(\01320.com.lvl6.proto.MinimumUserUpgrade" +
-      "StructJobProto\022X\n\037requiredPossessEquipJo" +
-      "bProgress\030\010 \003(\0132/.com.lvl6.proto.Minimum",
-      "UserPossessEquipJobProto\022H\n\025requiredTask" +
-      "sProgress\030\t \003(\0132).com.lvl6.proto.Minimum" +
-      "UserQuestTaskProto\022\034\n\024coinsRetrievedForR" +
-      "eq\030\013 \001(\005\022\035\n\025numComponentsComplete\030\n \001(\005\"" +
-      "c\n\031MinimumUserQuestTaskProto\022\016\n\006userId\030\001" +
-      " \001(\005\022\017\n\007questId\030\002 \001(\005\022\016\n\006taskId\030\003 \001(\005\022\025\n" +
-      "\rnumTimesActed\030\004 \001(\005\"n\n\035MinimumUserDefea" +
-      "tTypeJobProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId" +
-      "\030\002 \001(\005\022\027\n\017defeatTypeJobId\030\003 \001(\005\022\023\n\013numDe" +
-      "feated\030\004 \001(\005\"\307\002\n\022DefeatTypeJobProto\022\027\n\017d",
-      "efeatTypeJobId\030\001 \001(\005\022N\n\013typeOfEnemy\030\002 \001(" +
-      "\01629.com.lvl6.proto.DefeatTypeJobProto.De" +
-      "featTypeJobEnemyType\022\032\n\022numEnemiesToDefe" +
-      "at\030\003 \001(\005\022\016\n\006cityId\030\004 \001(\005\"\233\001\n\026DefeatTypeJ" +
-      "obEnemyType\022\020\n\014GOOD_WARRIOR\020\000\022\017\n\013GOOD_AR" +
-      "CHER\020\001\022\r\n\tGOOD_MAGE\020\002\022\017\n\013BAD_WARRIOR\020\003\022\016" +
-      "\n\nBAD_ARCHER\020\004\022\014\n\010BAD_MAGE\020\005\022 \n\034ALL_TYPE" +
-      "S_FROM_OPPOSING_SIDE\020\006\"w\n\036MinimumUserBui" +
-      "ldStructJobProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007ques" +
-      "tId\030\002 \001(\005\022\030\n\020buildStructJobId\030\003 \001(\005\022\032\n\022n",
-      "umOfStructUserHas\030\004 \001(\005\"[\n\023BuildStructJo" +
-      "bProto\022\030\n\020buildStructJobId\030\001 \001(\005\022\020\n\010stru" +
-      "ctId\030\002 \001(\005\022\030\n\020quantityRequired\030\003 \001(\005\"u\n " +
-      "MinimumUserUpgradeStructJobProto\022\016\n\006user" +
-      "Id\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\032\n\022upgradeStru" +
-      "ctJobId\030\003 \001(\005\022\024\n\014currentLevel\030\004 \001(\005\"W\n\025U" +
-      "pgradeStructJobProto\022\032\n\022upgradeStructJob" +
-      "Id\030\001 \001(\005\022\020\n\010structId\030\002 \001(\005\022\020\n\010levelReq\030\003" +
-      " \001(\005\"v\n\037MinimumUserPossessEquipJobProto\022" +
-      "\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\031\n\021poss",
-      "essEquipJobId\030\003 \001(\005\022\027\n\017numEquipUserHas\030\004" +
-      " \001(\005\"W\n\024PossessEquipJobProto\022\031\n\021possessE" +
-      "quipJobId\030\001 \001(\005\022\017\n\007equipId\030\002 \001(\005\022\023\n\013quan" +
-      "tityReq\030\003 \001(\005\"\372\004\n\016FullQuestProto\022\017\n\007ques" +
-      "tId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022" +
-      "\023\n\013description\030\004 \001(\t\022\024\n\014doneResponse\030\005 \001" +
-      "(\t\022\032\n\022assetNumWithinCity\030\007 \001(\005\022\023\n\013coinsG" +
-      "ained\030\010 \001(\005\022\026\n\016diamondsGained\030\t \001(\005\022\021\n\te" +
-      "xpGained\030\n \001(\005\022\025\n\requipIdGained\030\013 \001(\005\022\035\n" +
-      "\025questsRequiredForThis\030\014 \003(\005\022\020\n\010taskReqs",
-      "\030\r \003(\005\022\035\n\025upgradeStructJobsReqs\030\016 \003(\005\022\033\n" +
-      "\023buildStructJobsReqs\030\017 \003(\005\022\026\n\016defeatType" +
-      "Reqs\030\020 \003(\005\022\033\n\023possessEquipJobReqs\030\021 \003(\005\022" +
-      "\030\n\020coinRetrievalReq\030\026 \001(\005\022A\n\025specialQues" +
-      "tActionReq\030\006 \001(\0162\".com.lvl6.proto.Specia" +
-      "lQuestAction\022\034\n\024numComponentsForGood\030\022 \001" +
-      "(\005\0225\n\016acceptDialogue\030\024 \001(\0132\035.com.lvl6.pr" +
-      "oto.DialogueProto\022\026\n\016questGiverName\030\025 \001(" +
-      "\t\022\035\n\025questGiverImageSuffix\030\027 \001(\t\022\020\n\010prio" +
-      "rity\030\030 \001(\005\"\362\003\n\rDialogueProto\022G\n\rspeechSe",
-      "gment\030\001 \003(\01320.com.lvl6.proto.DialoguePro" +
-      "to.SpeechSegmentProto\032\227\003\n\022SpeechSegmentP" +
-      "roto\022Q\n\007speaker\030\001 \001(\0162@.com.lvl6.proto.D" +
-      "ialogueProto.SpeechSegmentProto.Dialogue" +
-      "Speaker\022\023\n\013speakerText\030\002 \001(\t\"\230\002\n\017Dialogu" +
-      "eSpeaker\022\017\n\013PLAYER_TYPE\020\001\022\020\n\014GOOD_WARRIO" +
-      "R\020\002\022\017\n\013GOOD_ARCHER\020\003\022\r\n\tGOOD_MAGE\020\004\022\017\n\013B" +
-      "AD_WARRIOR\020\005\022\016\n\nBAD_ARCHER\020\006\022\014\n\010BAD_MAGE" +
-      "\020\007\022\026\n\022GOOD_TUTORIAL_GIRL\020\010\022\025\n\021BAD_TUTORI" +
-      "AL_GIRL\020\t\022\020\n\014QUESTGIVER_1\020\n\022\020\n\014QUESTGIVE",
-      "R_2\020\013\022\020\n\014QUESTGIVER_3\020\014\022\020\n\014QUESTGIVER_4\020" +
-      "\r\022\020\n\014QUESTGIVER_5\020\016\022\n\n\006BAZAAR\020\031\"\233\001\n\023Play" +
-      "erWallPostProto\022\030\n\020playerWallPostId\030\001 \001(" +
-      "\005\0220\n\006poster\030\002 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\023\n\013wallOwnerId\030\003 \001(\005\022\022\n\ntime" +
-      "OfPost\030\004 \001(\003\022\017\n\007content\030\005 \001(\t\"\301\002\n\037Unhand" +
-      "ledBlacksmithAttemptProto\022\024\n\014blacksmithI" +
-      "d\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\017\n\007equipId\030\003 \001(\005" +
-      "\022\021\n\tgoalLevel\030\004 \001(\003\022\022\n\nguaranteed\030\005 \001(\010\022" +
-      "\021\n\tstartTime\030\006 \001(\003\022\034\n\024diamondGuaranteeCo",
-      "st\030\010 \001(\005\022\025\n\rtimeOfSpeedup\030\t \001(\003\022\027\n\017attem" +
-      "ptComplete\030\n \001(\010\022\"\n\032equipOneEnhancementP" +
-      "ercent\030\013 \001(\005\022\"\n\032equipTwoEnhancementPerce" +
-      "nt\030\014 \001(\005\022\027\n\017forgeSlotNumber\030\r \001(\005*\"\n\016Pur" +
-      "chaseOption\022\007\n\003ONE\020\000\022\007\n\003TWO\020\001*,\n\016UserCla" +
-      "nStatus\022\n\n\006MEMBER\020\000\022\016\n\nREQUESTING\020\002*@\n\016G" +
-      "roupChatScope\022\n\n\006GLOBAL\020\000\022\014\n\010ALLIANCE\020\001\022" +
-      "\n\n\006LEGION\020\002\022\010\n\004CLAN\020\003*^\n\017LeaderboardType" +
-      "\022\024\n\020MOST_BATTLES_WON\020\002\022\016\n\nMOST_COINS\020\003\022\014" +
-      "\n\010MOST_EXP\020\004\022\014\n\010BEST_KDR\020\005\022\t\n\005EVENT\020\006*f\n",
-      "\020CharacterModType\022\016\n\nNEW_PLAYER\020\001\022\026\n\022RES" +
-      "ET_SKILL_POINTS\020\002\022\031\n\025CHANGE_CHARACTER_TY" +
-      "PE\020\003\022\017\n\013CHANGE_NAME\020\004*;\n\rAnimationType\022\022" +
-      "\n\016GENERIC_ACTION\020\001\022\n\n\006ATTACK\020\002\022\n\n\006DRAGON" +
-      "\020\003*Q\n\024EarnFreeDiamondsType\022\016\n\nFB_CONNECT" +
-      "\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FLURRY_VIDEO\020\003\022\013\n\007TWIT" +
-      "TER\020\004*\301\001\n\022SpecialQuestAction\022\030\n\024PURCHASE" +
-      "_FROM_ARMORY\020\001\022\022\n\016SELL_TO_ARMORY\020\003\022\024\n\020DE" +
-      "POSIT_IN_VAULT\020\005\022\027\n\023WITHDRAW_FROM_VAULT\020" +
-      "\006\022\027\n\023WRITE_ON_ENEMY_WALL\020\007\022\025\n\021REQUEST_JO",
-      "IN_CLAN\020\010\022\036\n\032SUCCESSFULLY_FORGE_AN_ITEM\020" +
-      "\t*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\000\022\020\n\014D" +
-      "EFENDER_WIN\020\001\022\021\n\rATTACKER_FLEE\020\002*R\n\016Crit" +
-      "StructType\022\n\n\006AVIARY\020\000\022\r\n\tCARPENTER\020\002\022\t\n" +
-      "\005VAULT\020\003\022\n\n\006ARMORY\020\004\022\016\n\nBLACKSMITH\020\006*3\n\021" +
-      "StructOrientation\022\016\n\nPOSITION_1\020\000\022\016\n\nPOS" +
-      "ITION_2\020\001*P\n\022ExpansionDirection\022\014\n\010FAR_L" +
-      "EFT\020\000\022\r\n\tFAR_RIGHT\020\001\022\r\n\tNEAR_LEFT\020\002\022\016\n\nN" +
-      "EAR_RIGHT\020\003B\013B\tInfoProto"
+      "\005 \001(\005\"\374\001\n\021LockBoxEventProto\022\026\n\016lockBoxEv" +
+      "entId\030\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003\022\017\n\007endDat" +
+      "e\030\003 \001(\003\022\030\n\020lockBoxImageName\030\004 \001(\t\022\021\n\teve" +
+      "ntName\030\005 \001(\t\022/\n\005items\030\007 \003(\0132 .com.lvl6.p" +
+      "roto.LockBoxItemProto\022\031\n\021descriptionStri" +
+      "ng\030\010 \001(\t\022\034\n\024descriptionImageName\030\t \001(\t\022\024" +
+      "\n\014tagImageName\030\n \001(\t\"\267\001\n\020LockBoxItemProt" +
+      "o\022\025\n\rlockBoxItemId\030\001 \001(\005\022\026\n\016lockBoxEvent" +
+      "Id\030\002 \001(\005\022\026\n\016chanceToUnlock\030\003 \001(\002\022\014\n\004name",
+      "\030\004 \001(\t\022\021\n\timageName\030\006 \001(\t\022 \n\030redeemForNu" +
+      "mBoosterItems\030\007 \001(\005\022\031\n\021isGoldBoosterPack" +
+      "\030\010 \001(\010\"\324\001\n\025UserLockBoxEventProto\022\026\n\016lock" +
+      "BoxEventId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\024\n\014numL" +
+      "ockBoxes\030\003 \001(\005\022\031\n\021numTimesCompleted\030\004 \001(" +
+      "\005\022\024\n\014lastPickTime\030\005 \001(\003\0223\n\005items\030\006 \003(\0132$" +
+      ".com.lvl6.proto.UserLockBoxItemProto\022\027\n\017" +
+      "hasBeenRedeemed\030\007 \001(\010\"O\n\024UserLockBoxItem" +
+      "Proto\022\025\n\rlockBoxItemId\030\001 \001(\005\022\016\n\006userId\030\002" +
+      " \001(\005\022\020\n\010quantity\030\003 \001(\005\"\245\003\n\rFullBossProto",
+      "\022\016\n\006bossId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(\005\022\032\n\022asse" +
+      "tNumWithinCity\030\003 \001(\005\022\037\n\027regularAttackEne" +
+      "rgyCost\030\004 \001(\005\022\025\n\rminutesToKill\030\005 \001(\005\022#\n\033" +
+      "superAttackDamageMultiplier\030\006 \001(\002\022\035\n\025sup" +
+      "erAttackEnergyCost\030\007 \001(\005\022\014\n\004name\030\010 \001(\t\022\024" +
+      "\n\014expConstantA\030\t \001(\005\022\024\n\014expConstantB\030\n \001" +
+      "(\005\022\023\n\013hpConstantA\030\013 \001(\005\022\023\n\013hpConstantB\030\014" +
+      " \001(\005\022\023\n\013hpConstantC\030\r \001(\005\022\024\n\014dmgConstant" +
+      "A\030\016 \001(\005\022\024\n\014dmgConstantB\030\017 \001(\005\022\030\n\020mapIcon" +
+      "ImageName\030\020 \001(\t\022\035\n\025unlockedBossImageName",
+      "\030\021 \001(\t\"o\n\021FullUserBossProto\022\016\n\006bossId\030\001 " +
+      "\001(\005\022\016\n\006userId\030\002 \001(\005\022\021\n\tcurHealth\030\003 \001(\005\022\024" +
+      "\n\014currentLevel\030\004 \001(\005\022\021\n\tstartTime\030\005 \001(\003\"" +
+      "Z\n\031FullClanProtoWithClanSize\022+\n\004clan\030\001 \001" +
+      "(\0132\035.com.lvl6.proto.FullClanProto\022\020\n\010cla" +
+      "nSize\030\002 \001(\005\"\232\001\n\025ClanBulletinPostProto\022\032\n" +
+      "\022clanBulletinPostId\030\005 \001(\005\0220\n\006poster\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\016\n\006c" +
+      "lanId\030\002 \001(\005\022\022\n\ntimeOfPost\030\003 \001(\003\022\017\n\007conte" +
+      "nt\030\004 \001(\t\"M\n\022ClanTierLevelProto\022\021\n\ttierLe",
+      "vel\030\001 \001(\005\022\017\n\007maxSize\030\002 \001(\005\022\023\n\013upgradeCos" +
+      "t\030\003 \001(\005\"\227\001\n\030MinimumUserProtoForClans\022G\n\014" +
+      "minUserProto\030\001 \001(\01321.com.lvl6.proto.Mini" +
+      "mumUserProtoWithBattleHistory\0222\n\nclanSta" +
+      "tus\030\002 \001(\0162\036.com.lvl6.proto.UserClanStatu" +
+      "s\"x\n\021FullUserClanProto\022\016\n\006userId\030\001 \001(\005\022\016" +
+      "\n\006clanId\030\002 \001(\005\022.\n\006status\030\003 \001(\0162\036.com.lvl" +
+      "6.proto.UserClanStatus\022\023\n\013requestTime\030\004 " +
+      "\001(\003\"\253\001\n!MinimumUserProtoWithBattleHistor" +
+      "y\022H\n\025minUserProtoWithLevel\030\001 \001(\0132).com.l",
+      "vl6.proto.MinimumUserProtoWithLevel\022\022\n\nb" +
+      "attlesWon\030\002 \001(\005\022\023\n\013battlesLost\030\003 \001(\005\022\023\n\013" +
+      "battlesFled\030\004 \001(\005\"a\n\016MonteCardProto\022\016\n\006c" +
+      "ardId\030\001 \001(\005\022\026\n\016diamondsGained\030\002 \001(\005\022\022\n\ne" +
+      "quipLevel\030\003 \001(\005\022\023\n\013coinsGained\030\004 \001(\005\"\335\001\n" +
+      "\rFullClanProto\022\016\n\006clanId\030\001 \001(\005\022\014\n\004name\030\002" +
+      " \001(\t\022/\n\005owner\030\003 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022\022\n\ncreateTime\030\004 \001(\003\022\023\n\013des" +
+      "cription\030\005 \001(\t\022\013\n\003tag\030\006 \001(\t\022\016\n\006isGood\030\007 " +
+      "\001(\010\022\030\n\020currentTierLevel\030\010 \001(\005\022\035\n\025request",
+      "ToJoinRequired\030\t \001(\010\"\300\001\n\020MinimumClanProt" +
+      "o\022\016\n\006clanId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\017\n\007owner" +
+      "Id\030\003 \001(\005\022\022\n\ncreateTime\030\004 \001(\003\022\023\n\013descript" +
+      "ion\030\005 \001(\t\022\013\n\003tag\030\006 \001(\t\022\016\n\006isGood\030\007 \001(\010\022\030" +
+      "\n\020currentTierLevel\030\010 \001(\005\022\035\n\025requestToJoi" +
+      "nRequired\030\t \001(\010\"`\n\020MinimumUserProto\022\016\n\006u" +
+      "serId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022.\n\004clan\030\003 \001(\0132" +
+      " .com.lvl6.proto.MinimumClanProto\"b\n\031Min" +
+      "imumUserProtoWithLevel\0226\n\014minUserProto\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\r",
+      "\n\005level\030\002 \001(\005\"\335\001\n\'MinimumUserProtoWithLe" +
+      "velForLeaderboard\0226\n\014minUserProto\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\r\n\005lev" +
+      "el\030\002 \001(\005\0228\n\017leaderboardType\030\003 \001(\0162\037.com." +
+      "lvl6.proto.LeaderboardType\022\027\n\017leaderboar" +
+      "dRank\030\004 \001(\005\022\030\n\020leaderboardScore\030\005 \001(\001\"\207\007" +
+      "\n\rFullUserProto\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030" +
+      "\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\020\n\010diamonds\030\004 \001(\005\022\r" +
+      "\n\005coins\030\005 \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016tas" +
+      "ksCompleted\030\007 \001(\005\022\022\n\nbattlesWon\030\010 \001(\005\022\023\n",
+      "\013battlesLost\030\t \001(\005\022\r\n\005flees\030\n \001(\005\022\024\n\014ref" +
+      "erralCode\030\013 \001(\t\022\024\n\014numReferrals\030\014 \001(\005\022\025\n" +
+      "\rlastLoginTime\030\016 \001(\003\022\026\n\016lastLogoutTime\030\017" +
+      " \001(\003\022\016\n\006isFake\030\023 \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n" +
+      "\034numCoinsRetrievedFromStructs\030\027 \001(\005\022.\n\004c" +
+      "lan\030\031 \001(\0132 .com.lvl6.proto.MinimumClanPr" +
+      "oto\022\033\n\023hasReceivedfbReward\030\034 \001(\010\022\037\n\027numA" +
+      "dditionalForgeSlots\030\035 \001(\005\022!\n\031numBeginner" +
+      "SalesPurchased\030\036 \001(\005\022\027\n\017hasActiveShield\030" +
+      "\037 \001(\010\022\025\n\rshieldEndTime\030  \001(\003\022\013\n\003elo\030! \001(",
+      "\005\022\014\n\004rank\030\" \001(\t\022\026\n\016lastTimeQueued\030# \001(\003\022" +
+      "\022\n\nattacksWon\030$ \001(\005\022\023\n\013defensesWon\030% \001(\005" +
+      "\022\023\n\013attacksLost\030& \001(\005\022\024\n\014defensesLost\030\' " +
+      "\001(\005\022\014\n\004udid\030\r \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\"" +
+      "\n\032lastBattleNotificationTime\030\021 \001(\003\022\021\n\tnu" +
+      "mBadges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\taps" +
+      "alarId\030\026 \001(\005\022 \n\030numConsecutiveDaysPlayed" +
+      "\030\030 \001(\005\022$\n\034lastWallPostNotificationTime\030\032" +
+      " \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\"\247\002\n\026FullUserStru" +
+      "ctureProto\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006user",
+      "Id\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrie" +
+      "ved\030\004 \001(\003\0224\n\013coordinates\030\005 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\022\r\n\005level\030\006 \001(\005\022\024" +
+      "\n\014purchaseTime\030\007 \001(\003\022\027\n\017lastUpgradeTime\030" +
+      "\010 \001(\003\022\022\n\nisComplete\030\t \001(\010\0226\n\013orientation" +
+      "\030\n \001(\0162!.com.lvl6.proto.StructOrientatio" +
+      "n\"\223\001\n\022FullUserEquipProto\022\023\n\013userEquipId\030" +
+      "\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\017\n\007equipId\030\003 \001(\005\022\r" +
+      "\n\005level\030\004 \001(\005\022\035\n\025enhancementPercentage\030\005" +
+      " \001(\005\022\031\n\021currentDurability\030\006 \001(\005\"\370\002\n\022Full",
+      "StructureProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004name" +
+      "\030\002 \001(\t\022\016\n\006income\030\003 \001(\005\022\025\n\rminutesToGain\030" +
+      "\004 \001(\005\022\026\n\016minutesToBuild\030\005 \001(\005\022\034\n\024minutes" +
+      "ToUpgradeBase\030\006 \001(\005\022\021\n\tcoinPrice\030\007 \001(\005\022\024" +
+      "\n\014diamondPrice\030\010 \001(\005\022\020\n\010minLevel\030\t \001(\005\022\017" +
+      "\n\007xLength\030\n \001(\005\022\017\n\007yLength\030\013 \001(\005\022\035\n\025inst" +
+      "aBuildDiamondCost\030\016 \001(\005\022$\n\034instaRetrieve" +
+      "DiamondCostBase\030\017 \001(\005\022#\n\033instaUpgradeDia" +
+      "mondCostBase\030\020 \001(\005\022\036\n\026imgVerticalPixelOf" +
+      "fset\030\021 \001(\005\"\254\004\n\rFullTaskProto\022\016\n\006taskId\030\001",
+      " \001(\005\022\014\n\004name\030\002 \001(\t\022\016\n\006cityId\030\003 \001(\005\022 \n\030nu" +
+      "mRequiredForCompletion\030\004 \001(\005\022\022\n\nenergyCo" +
+      "st\030\005 \001(\005\022\026\n\016minCoinsGained\030\006 \001(\005\022\026\n\016maxC" +
+      "oinsGained\030\007 \001(\005\022\031\n\021chanceOfEquipLoot\030\010 " +
+      "\001(\002\022\035\n\025potentialLootEquipIds\030\t \003(\005\022\021\n\tex" +
+      "pGained\030\n \001(\005\022\032\n\022assetNumWithinCity\030\013 \001(" +
+      "\005\022\026\n\016processingText\030\014 \001(\t\022<\n\023spriteLandi" +
+      "ngCoords\030\016 \001(\0132\037.com.lvl6.proto.Coordina" +
+      "teProto\0224\n\ranimationType\030\017 \001(\0162\035.com.lvl" +
+      "6.proto.AnimationType\022F\n\tequipReqs\030\r \003(\013",
+      "23.com.lvl6.proto.FullTaskProto.FullTask" +
+      "EquipReqProto\032J\n\025FullTaskEquipReqProto\022\016" +
+      "\n\006taskId\030\001 \001(\005\022\017\n\007equipId\030\002 \001(\005\022\020\n\010quant" +
+      "ity\030\003 \001(\005\"\375\001\n\rFullCityProto\022\016\n\006cityId\030\001 " +
+      "\001(\005\022\014\n\004name\030\002 \001(\t\022\020\n\010minLevel\030\003 \001(\005\022\035\n\025e" +
+      "xpGainedBaseOnRankup\030\004 \001(\005\022\037\n\027coinsGaine" +
+      "dBaseOnRankup\030\005 \001(\005\022\022\n\nmapImgName\030\006 \001(\t\022" +
+      "/\n\006center\030\007 \001(\0132\037.com.lvl6.proto.Coordin" +
+      "ateProto\022\017\n\007taskIds\030\n \003(\005\022\017\n\007bossIds\030\013 \003" +
+      "(\005\022\025\n\rboosterPackId\030\014 \001(\005\"\200\001\n\032UserCityEx",
+      "pansionDataProto\022\016\n\006userId\030\001 \001(\005\022\021\n\txPos" +
+      "ition\030\002 \001(\021\022\021\n\tyPosition\030\003 \001(\021\022\023\n\013isExpa" +
+      "nding\030\004 \001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"E\n\026" +
+      "CityExpansionCostProto\022\024\n\014expansionNum\030\001" +
+      " \001(\005\022\025\n\rexpansionCost\030\002 \001(\005\"q\n\021FullUserC" +
+      "ityProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(\005" +
+      "\022\023\n\013currentRank\030\003 \001(\005\022\'\n\037numTasksCurrent" +
+      "lyCompleteInRank\030\004 \001(\005\"\'\n\017CoordinateProt" +
+      "o\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\236\003\n\027NeutralCityE" +
+      "lementProto\022\016\n\006cityId\030\001 \001(\005\022\017\n\007assetId\030\002",
+      " \001(\005\022\014\n\004name\030\t \001(\t\022I\n\004type\030\003 \001(\0162;.com.l" +
+      "vl6.proto.NeutralCityElementProto.Neutra" +
+      "lCityElemType\022/\n\006coords\030\004 \001(\0132\037.com.lvl6" +
+      ".proto.CoordinateProto\022\017\n\007xLength\030\005 \001(\005\022" +
+      "\017\n\007yLength\030\006 \001(\005\022\r\n\005imgId\030\007 \001(\t\0226\n\013orien" +
+      "tation\030\010 \001(\0162!.com.lvl6.proto.StructOrie" +
+      "ntation\"o\n\023NeutralCityElemType\022\026\n\022PERSON" +
+      "_QUEST_GIVER\020\000\022\014\n\010BUILDING\020\001\022\016\n\nDECORATI" +
+      "ON\020\002\022\030\n\024PERSON_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004" +
+      "\"\260\001\n\027FullUserCritstructProto\022,\n\004type\030\001 \001",
+      "(\0162\036.com.lvl6.proto.CritStructType\022/\n\006co" +
+      "ords\030\002 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
+      "oto\0226\n\013orientation\030\003 \001(\0162!.com.lvl6.prot" +
+      "o.StructOrientation\"M\n\024MinimumUserTaskPr" +
+      "oto\022\016\n\006userId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\025\n\rn" +
+      "umTimesActed\030\003 \001(\005\"\321\004\n\033FullUserQuestData" +
+      "LargeProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 " +
+      "\001(\005\022\022\n\nisRedeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 " +
+      "\001(\010\022T\n\035requiredDefeatTypeJobProgress\030\005 \003" +
+      "(\0132-.com.lvl6.proto.MinimumUserDefeatTyp",
+      "eJobProto\022V\n\036requiredBuildStructJobProgr" +
+      "ess\030\006 \003(\0132..com.lvl6.proto.MinimumUserBu" +
+      "ildStructJobProto\022Z\n requiredUpgradeStru" +
+      "ctJobProgress\030\007 \003(\01320.com.lvl6.proto.Min" +
+      "imumUserUpgradeStructJobProto\022X\n\037require" +
+      "dPossessEquipJobProgress\030\010 \003(\0132/.com.lvl" +
+      "6.proto.MinimumUserPossessEquipJobProto\022" +
+      "H\n\025requiredTasksProgress\030\t \003(\0132).com.lvl" +
+      "6.proto.MinimumUserQuestTaskProto\022\034\n\024coi" +
+      "nsRetrievedForReq\030\013 \001(\005\022\035\n\025numComponents",
+      "Complete\030\n \001(\005\"c\n\031MinimumUserQuestTaskPr" +
+      "oto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\016\n\006" +
+      "taskId\030\003 \001(\005\022\025\n\rnumTimesActed\030\004 \001(\005\"n\n\035M" +
+      "inimumUserDefeatTypeJobProto\022\016\n\006userId\030\001" +
+      " \001(\005\022\017\n\007questId\030\002 \001(\005\022\027\n\017defeatTypeJobId" +
+      "\030\003 \001(\005\022\023\n\013numDefeated\030\004 \001(\005\"\307\002\n\022DefeatTy" +
+      "peJobProto\022\027\n\017defeatTypeJobId\030\001 \001(\005\022N\n\013t" +
+      "ypeOfEnemy\030\002 \001(\01629.com.lvl6.proto.Defeat" +
+      "TypeJobProto.DefeatTypeJobEnemyType\022\032\n\022n" +
+      "umEnemiesToDefeat\030\003 \001(\005\022\016\n\006cityId\030\004 \001(\005\"",
+      "\233\001\n\026DefeatTypeJobEnemyType\022\020\n\014GOOD_WARRI" +
+      "OR\020\000\022\017\n\013GOOD_ARCHER\020\001\022\r\n\tGOOD_MAGE\020\002\022\017\n\013" +
+      "BAD_WARRIOR\020\003\022\016\n\nBAD_ARCHER\020\004\022\014\n\010BAD_MAG" +
+      "E\020\005\022 \n\034ALL_TYPES_FROM_OPPOSING_SIDE\020\006\"w\n" +
+      "\036MinimumUserBuildStructJobProto\022\016\n\006userI" +
+      "d\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\030\n\020buildStructJ" +
+      "obId\030\003 \001(\005\022\032\n\022numOfStructUserHas\030\004 \001(\005\"[" +
+      "\n\023BuildStructJobProto\022\030\n\020buildStructJobI" +
+      "d\030\001 \001(\005\022\020\n\010structId\030\002 \001(\005\022\030\n\020quantityReq" +
+      "uired\030\003 \001(\005\"u\n MinimumUserUpgradeStructJ",
+      "obProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005" +
+      "\022\032\n\022upgradeStructJobId\030\003 \001(\005\022\024\n\014currentL" +
+      "evel\030\004 \001(\005\"W\n\025UpgradeStructJobProto\022\032\n\022u" +
+      "pgradeStructJobId\030\001 \001(\005\022\020\n\010structId\030\002 \001(" +
+      "\005\022\020\n\010levelReq\030\003 \001(\005\"v\n\037MinimumUserPosses" +
+      "sEquipJobProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questI" +
+      "d\030\002 \001(\005\022\031\n\021possessEquipJobId\030\003 \001(\005\022\027\n\017nu" +
+      "mEquipUserHas\030\004 \001(\005\"W\n\024PossessEquipJobPr" +
+      "oto\022\031\n\021possessEquipJobId\030\001 \001(\005\022\017\n\007equipI" +
+      "d\030\002 \001(\005\022\023\n\013quantityReq\030\003 \001(\005\"\372\004\n\016FullQue",
+      "stProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(\005" +
+      "\022\014\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\024\n\014d" +
+      "oneResponse\030\005 \001(\t\022\032\n\022assetNumWithinCity\030" +
+      "\007 \001(\005\022\023\n\013coinsGained\030\010 \001(\005\022\026\n\016diamondsGa" +
+      "ined\030\t \001(\005\022\021\n\texpGained\030\n \001(\005\022\025\n\requipId" +
+      "Gained\030\013 \001(\005\022\035\n\025questsRequiredForThis\030\014 " +
+      "\003(\005\022\020\n\010taskReqs\030\r \003(\005\022\035\n\025upgradeStructJo" +
+      "bsReqs\030\016 \003(\005\022\033\n\023buildStructJobsReqs\030\017 \003(" +
+      "\005\022\026\n\016defeatTypeReqs\030\020 \003(\005\022\033\n\023possessEqui" +
+      "pJobReqs\030\021 \003(\005\022\030\n\020coinRetrievalReq\030\026 \001(\005",
+      "\022A\n\025specialQuestActionReq\030\006 \001(\0162\".com.lv" +
+      "l6.proto.SpecialQuestAction\022\034\n\024numCompon" +
+      "entsForGood\030\022 \001(\005\0225\n\016acceptDialogue\030\024 \001(" +
+      "\0132\035.com.lvl6.proto.DialogueProto\022\026\n\016ques" +
+      "tGiverName\030\025 \001(\t\022\035\n\025questGiverImageSuffi" +
+      "x\030\027 \001(\t\022\020\n\010priority\030\030 \001(\005\"\362\003\n\rDialoguePr" +
+      "oto\022G\n\rspeechSegment\030\001 \003(\01320.com.lvl6.pr" +
+      "oto.DialogueProto.SpeechSegmentProto\032\227\003\n" +
+      "\022SpeechSegmentProto\022Q\n\007speaker\030\001 \001(\0162@.c" +
+      "om.lvl6.proto.DialogueProto.SpeechSegmen",
+      "tProto.DialogueSpeaker\022\023\n\013speakerText\030\002 " +
+      "\001(\t\"\230\002\n\017DialogueSpeaker\022\017\n\013PLAYER_TYPE\020\001" +
+      "\022\020\n\014GOOD_WARRIOR\020\002\022\017\n\013GOOD_ARCHER\020\003\022\r\n\tG" +
+      "OOD_MAGE\020\004\022\017\n\013BAD_WARRIOR\020\005\022\016\n\nBAD_ARCHE" +
+      "R\020\006\022\014\n\010BAD_MAGE\020\007\022\026\n\022GOOD_TUTORIAL_GIRL\020" +
+      "\010\022\025\n\021BAD_TUTORIAL_GIRL\020\t\022\020\n\014QUESTGIVER_1" +
+      "\020\n\022\020\n\014QUESTGIVER_2\020\013\022\020\n\014QUESTGIVER_3\020\014\022\020" +
+      "\n\014QUESTGIVER_4\020\r\022\020\n\014QUESTGIVER_5\020\016\022\n\n\006BA" +
+      "ZAAR\020\031\"\233\001\n\023PlayerWallPostProto\022\030\n\020player" +
+      "WallPostId\030\001 \001(\005\0220\n\006poster\030\002 \001(\0132 .com.l",
+      "vl6.proto.MinimumUserProto\022\023\n\013wallOwnerI" +
+      "d\030\003 \001(\005\022\022\n\ntimeOfPost\030\004 \001(\003\022\017\n\007content\030\005" +
+      " \001(\t\"\301\002\n\037UnhandledBlacksmithAttemptProto" +
+      "\022\024\n\014blacksmithId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\017" +
+      "\n\007equipId\030\003 \001(\005\022\021\n\tgoalLevel\030\004 \001(\003\022\022\n\ngu" +
+      "aranteed\030\005 \001(\010\022\021\n\tstartTime\030\006 \001(\003\022\034\n\024dia" +
+      "mondGuaranteeCost\030\010 \001(\005\022\025\n\rtimeOfSpeedup" +
+      "\030\t \001(\003\022\027\n\017attemptComplete\030\n \001(\010\022\"\n\032equip" +
+      "OneEnhancementPercent\030\013 \001(\005\022\"\n\032equipTwoE" +
+      "nhancementPercent\030\014 \001(\005\022\027\n\017forgeSlotNumb",
+      "er\030\r \001(\005*\"\n\016PurchaseOption\022\007\n\003ONE\020\000\022\007\n\003T" +
+      "WO\020\001*,\n\016UserClanStatus\022\n\n\006MEMBER\020\000\022\016\n\nRE" +
+      "QUESTING\020\002*@\n\016GroupChatScope\022\n\n\006GLOBAL\020\000" +
+      "\022\014\n\010ALLIANCE\020\001\022\n\n\006LEGION\020\002\022\010\n\004CLAN\020\003*^\n\017" +
+      "LeaderboardType\022\024\n\020MOST_BATTLES_WON\020\002\022\016\n" +
+      "\nMOST_COINS\020\003\022\014\n\010MOST_EXP\020\004\022\014\n\010BEST_KDR\020" +
+      "\005\022\t\n\005EVENT\020\006*f\n\020CharacterModType\022\016\n\nNEW_" +
+      "PLAYER\020\001\022\026\n\022RESET_SKILL_POINTS\020\002\022\031\n\025CHAN" +
+      "GE_CHARACTER_TYPE\020\003\022\017\n\013CHANGE_NAME\020\004*;\n\r" +
+      "AnimationType\022\022\n\016GENERIC_ACTION\020\001\022\n\n\006ATT",
+      "ACK\020\002\022\n\n\006DRAGON\020\003*Q\n\024EarnFreeDiamondsTyp" +
+      "e\022\016\n\nFB_CONNECT\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FLURRY_" +
+      "VIDEO\020\003\022\013\n\007TWITTER\020\004*\301\001\n\022SpecialQuestAct" +
+      "ion\022\030\n\024PURCHASE_FROM_ARMORY\020\001\022\022\n\016SELL_TO" +
+      "_ARMORY\020\003\022\024\n\020DEPOSIT_IN_VAULT\020\005\022\027\n\023WITHD" +
+      "RAW_FROM_VAULT\020\006\022\027\n\023WRITE_ON_ENEMY_WALL\020" +
+      "\007\022\025\n\021REQUEST_JOIN_CLAN\020\010\022\036\n\032SUCCESSFULLY" +
+      "_FORGE_AN_ITEM\020\t*E\n\014BattleResult\022\020\n\014ATTA" +
+      "CKER_WIN\020\000\022\020\n\014DEFENDER_WIN\020\001\022\021\n\rATTACKER" +
+      "_FLEE\020\002*R\n\016CritStructType\022\n\n\006AVIARY\020\000\022\r\n",
+      "\tCARPENTER\020\002\022\t\n\005VAULT\020\003\022\n\n\006ARMORY\020\004\022\016\n\nB" +
+      "LACKSMITH\020\006*3\n\021StructOrientation\022\016\n\nPOSI" +
+      "TION_1\020\000\022\016\n\nPOSITION_2\020\001*P\n\022ExpansionDir" +
+      "ection\022\014\n\010FAR_LEFT\020\000\022\r\n\tFAR_RIGHT\020\001\022\r\n\tN" +
+      "EAR_LEFT\020\002\022\016\n\nNEAR_RIGHT\020\003B\013B\tInfoProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -54661,8 +55867,16 @@ public final class InfoProto {
               new java.lang.String[] { "Sender", "TimeOfChat", "Content", "IsAdmin", "ChatId", },
               com.lvl6.proto.InfoProto.GroupChatMessageProto.class,
               com.lvl6.proto.InfoProto.GroupChatMessageProto.Builder.class);
-          internal_static_com_lvl6_proto_LockBoxItemProto_descriptor =
+          internal_static_com_lvl6_proto_LockBoxEventProto_descriptor =
             getDescriptor().getMessageTypes().get(22);
+          internal_static_com_lvl6_proto_LockBoxEventProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_LockBoxEventProto_descriptor,
+              new java.lang.String[] { "LockBoxEventId", "StartDate", "EndDate", "LockBoxImageName", "EventName", "Items", "DescriptionString", "DescriptionImageName", "TagImageName", },
+              com.lvl6.proto.InfoProto.LockBoxEventProto.class,
+              com.lvl6.proto.InfoProto.LockBoxEventProto.Builder.class);
+          internal_static_com_lvl6_proto_LockBoxItemProto_descriptor =
+            getDescriptor().getMessageTypes().get(23);
           internal_static_com_lvl6_proto_LockBoxItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_LockBoxItemProto_descriptor,
@@ -54670,7 +55884,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.LockBoxItemProto.class,
               com.lvl6.proto.InfoProto.LockBoxItemProto.Builder.class);
           internal_static_com_lvl6_proto_UserLockBoxEventProto_descriptor =
-            getDescriptor().getMessageTypes().get(23);
+            getDescriptor().getMessageTypes().get(24);
           internal_static_com_lvl6_proto_UserLockBoxEventProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserLockBoxEventProto_descriptor,
@@ -54678,7 +55892,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.UserLockBoxEventProto.class,
               com.lvl6.proto.InfoProto.UserLockBoxEventProto.Builder.class);
           internal_static_com_lvl6_proto_UserLockBoxItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(24);
+            getDescriptor().getMessageTypes().get(25);
           internal_static_com_lvl6_proto_UserLockBoxItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserLockBoxItemProto_descriptor,
@@ -54686,7 +55900,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.UserLockBoxItemProto.class,
               com.lvl6.proto.InfoProto.UserLockBoxItemProto.Builder.class);
           internal_static_com_lvl6_proto_FullBossProto_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_com_lvl6_proto_FullBossProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullBossProto_descriptor,
@@ -54694,7 +55908,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullBossProto.class,
               com.lvl6.proto.InfoProto.FullBossProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserBossProto_descriptor =
-            getDescriptor().getMessageTypes().get(26);
+            getDescriptor().getMessageTypes().get(27);
           internal_static_com_lvl6_proto_FullUserBossProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserBossProto_descriptor,
@@ -54702,7 +55916,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullUserBossProto.class,
               com.lvl6.proto.InfoProto.FullUserBossProto.Builder.class);
           internal_static_com_lvl6_proto_FullClanProtoWithClanSize_descriptor =
-            getDescriptor().getMessageTypes().get(27);
+            getDescriptor().getMessageTypes().get(28);
           internal_static_com_lvl6_proto_FullClanProtoWithClanSize_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullClanProtoWithClanSize_descriptor,
@@ -54710,7 +55924,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullClanProtoWithClanSize.class,
               com.lvl6.proto.InfoProto.FullClanProtoWithClanSize.Builder.class);
           internal_static_com_lvl6_proto_ClanBulletinPostProto_descriptor =
-            getDescriptor().getMessageTypes().get(28);
+            getDescriptor().getMessageTypes().get(29);
           internal_static_com_lvl6_proto_ClanBulletinPostProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ClanBulletinPostProto_descriptor,
@@ -54718,7 +55932,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.ClanBulletinPostProto.class,
               com.lvl6.proto.InfoProto.ClanBulletinPostProto.Builder.class);
           internal_static_com_lvl6_proto_ClanTierLevelProto_descriptor =
-            getDescriptor().getMessageTypes().get(29);
+            getDescriptor().getMessageTypes().get(30);
           internal_static_com_lvl6_proto_ClanTierLevelProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ClanTierLevelProto_descriptor,
@@ -54726,7 +55940,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.ClanTierLevelProto.class,
               com.lvl6.proto.InfoProto.ClanTierLevelProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserProtoForClans_descriptor =
-            getDescriptor().getMessageTypes().get(30);
+            getDescriptor().getMessageTypes().get(31);
           internal_static_com_lvl6_proto_MinimumUserProtoForClans_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserProtoForClans_descriptor,
@@ -54734,7 +55948,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserProtoForClans.class,
               com.lvl6.proto.InfoProto.MinimumUserProtoForClans.Builder.class);
           internal_static_com_lvl6_proto_FullUserClanProto_descriptor =
-            getDescriptor().getMessageTypes().get(31);
+            getDescriptor().getMessageTypes().get(32);
           internal_static_com_lvl6_proto_FullUserClanProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserClanProto_descriptor,
@@ -54742,7 +55956,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullUserClanProto.class,
               com.lvl6.proto.InfoProto.FullUserClanProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserProtoWithBattleHistory_descriptor =
-            getDescriptor().getMessageTypes().get(32);
+            getDescriptor().getMessageTypes().get(33);
           internal_static_com_lvl6_proto_MinimumUserProtoWithBattleHistory_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserProtoWithBattleHistory_descriptor,
@@ -54750,7 +55964,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserProtoWithBattleHistory.class,
               com.lvl6.proto.InfoProto.MinimumUserProtoWithBattleHistory.Builder.class);
           internal_static_com_lvl6_proto_MonteCardProto_descriptor =
-            getDescriptor().getMessageTypes().get(33);
+            getDescriptor().getMessageTypes().get(34);
           internal_static_com_lvl6_proto_MonteCardProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonteCardProto_descriptor,
@@ -54758,7 +55972,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MonteCardProto.class,
               com.lvl6.proto.InfoProto.MonteCardProto.Builder.class);
           internal_static_com_lvl6_proto_FullClanProto_descriptor =
-            getDescriptor().getMessageTypes().get(34);
+            getDescriptor().getMessageTypes().get(35);
           internal_static_com_lvl6_proto_FullClanProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullClanProto_descriptor,
@@ -54766,7 +55980,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullClanProto.class,
               com.lvl6.proto.InfoProto.FullClanProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumClanProto_descriptor =
-            getDescriptor().getMessageTypes().get(35);
+            getDescriptor().getMessageTypes().get(36);
           internal_static_com_lvl6_proto_MinimumClanProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumClanProto_descriptor,
@@ -54774,7 +55988,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumClanProto.class,
               com.lvl6.proto.InfoProto.MinimumClanProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserProto_descriptor =
-            getDescriptor().getMessageTypes().get(36);
+            getDescriptor().getMessageTypes().get(37);
           internal_static_com_lvl6_proto_MinimumUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserProto_descriptor,
@@ -54782,7 +55996,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserProto.class,
               com.lvl6.proto.InfoProto.MinimumUserProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor =
-            getDescriptor().getMessageTypes().get(37);
+            getDescriptor().getMessageTypes().get(38);
           internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_descriptor,
@@ -54790,7 +56004,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserProtoWithLevel.class,
               com.lvl6.proto.InfoProto.MinimumUserProtoWithLevel.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForLeaderboard_descriptor =
-            getDescriptor().getMessageTypes().get(38);
+            getDescriptor().getMessageTypes().get(39);
           internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForLeaderboard_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForLeaderboard_descriptor,
@@ -54798,7 +56012,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserProtoWithLevelForLeaderboard.class,
               com.lvl6.proto.InfoProto.MinimumUserProtoWithLevelForLeaderboard.Builder.class);
           internal_static_com_lvl6_proto_FullUserProto_descriptor =
-            getDescriptor().getMessageTypes().get(39);
+            getDescriptor().getMessageTypes().get(40);
           internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserProto_descriptor,
@@ -54806,7 +56020,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullUserProto.class,
               com.lvl6.proto.InfoProto.FullUserProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =
-            getDescriptor().getMessageTypes().get(40);
+            getDescriptor().getMessageTypes().get(41);
           internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserStructureProto_descriptor,
@@ -54814,7 +56028,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullUserStructureProto.class,
               com.lvl6.proto.InfoProto.FullUserStructureProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserEquipProto_descriptor =
-            getDescriptor().getMessageTypes().get(41);
+            getDescriptor().getMessageTypes().get(42);
           internal_static_com_lvl6_proto_FullUserEquipProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserEquipProto_descriptor,
@@ -54822,7 +56036,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullUserEquipProto.class,
               com.lvl6.proto.InfoProto.FullUserEquipProto.Builder.class);
           internal_static_com_lvl6_proto_FullStructureProto_descriptor =
-            getDescriptor().getMessageTypes().get(42);
+            getDescriptor().getMessageTypes().get(43);
           internal_static_com_lvl6_proto_FullStructureProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullStructureProto_descriptor,
@@ -54830,7 +56044,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullStructureProto.class,
               com.lvl6.proto.InfoProto.FullStructureProto.Builder.class);
           internal_static_com_lvl6_proto_FullTaskProto_descriptor =
-            getDescriptor().getMessageTypes().get(43);
+            getDescriptor().getMessageTypes().get(44);
           internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullTaskProto_descriptor,
@@ -54846,7 +56060,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullTaskProto.FullTaskEquipReqProto.class,
               com.lvl6.proto.InfoProto.FullTaskProto.FullTaskEquipReqProto.Builder.class);
           internal_static_com_lvl6_proto_FullCityProto_descriptor =
-            getDescriptor().getMessageTypes().get(44);
+            getDescriptor().getMessageTypes().get(45);
           internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullCityProto_descriptor,
@@ -54854,7 +56068,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullCityProto.class,
               com.lvl6.proto.InfoProto.FullCityProto.Builder.class);
           internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor =
-            getDescriptor().getMessageTypes().get(45);
+            getDescriptor().getMessageTypes().get(46);
           internal_static_com_lvl6_proto_UserCityExpansionDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserCityExpansionDataProto_descriptor,
@@ -54862,7 +56076,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.UserCityExpansionDataProto.class,
               com.lvl6.proto.InfoProto.UserCityExpansionDataProto.Builder.class);
           internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor =
-            getDescriptor().getMessageTypes().get(46);
+            getDescriptor().getMessageTypes().get(47);
           internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor,
@@ -54870,7 +56084,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.CityExpansionCostProto.class,
               com.lvl6.proto.InfoProto.CityExpansionCostProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserCityProto_descriptor =
-            getDescriptor().getMessageTypes().get(47);
+            getDescriptor().getMessageTypes().get(48);
           internal_static_com_lvl6_proto_FullUserCityProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserCityProto_descriptor,
@@ -54878,7 +56092,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullUserCityProto.class,
               com.lvl6.proto.InfoProto.FullUserCityProto.Builder.class);
           internal_static_com_lvl6_proto_CoordinateProto_descriptor =
-            getDescriptor().getMessageTypes().get(48);
+            getDescriptor().getMessageTypes().get(49);
           internal_static_com_lvl6_proto_CoordinateProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_CoordinateProto_descriptor,
@@ -54886,7 +56100,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.CoordinateProto.class,
               com.lvl6.proto.InfoProto.CoordinateProto.Builder.class);
           internal_static_com_lvl6_proto_NeutralCityElementProto_descriptor =
-            getDescriptor().getMessageTypes().get(49);
+            getDescriptor().getMessageTypes().get(50);
           internal_static_com_lvl6_proto_NeutralCityElementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_NeutralCityElementProto_descriptor,
@@ -54894,7 +56108,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.NeutralCityElementProto.class,
               com.lvl6.proto.InfoProto.NeutralCityElementProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserCritstructProto_descriptor =
-            getDescriptor().getMessageTypes().get(50);
+            getDescriptor().getMessageTypes().get(51);
           internal_static_com_lvl6_proto_FullUserCritstructProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserCritstructProto_descriptor,
@@ -54902,7 +56116,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullUserCritstructProto.class,
               com.lvl6.proto.InfoProto.FullUserCritstructProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor =
-            getDescriptor().getMessageTypes().get(51);
+            getDescriptor().getMessageTypes().get(52);
           internal_static_com_lvl6_proto_MinimumUserTaskProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor,
@@ -54910,7 +56124,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserTaskProto.class,
               com.lvl6.proto.InfoProto.MinimumUserTaskProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_descriptor =
-            getDescriptor().getMessageTypes().get(52);
+            getDescriptor().getMessageTypes().get(53);
           internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_descriptor,
@@ -54918,7 +56132,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullUserQuestDataLargeProto.class,
               com.lvl6.proto.InfoProto.FullUserQuestDataLargeProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_descriptor =
-            getDescriptor().getMessageTypes().get(53);
+            getDescriptor().getMessageTypes().get(54);
           internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_descriptor,
@@ -54926,7 +56140,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserQuestTaskProto.class,
               com.lvl6.proto.InfoProto.MinimumUserQuestTaskProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserDefeatTypeJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(54);
+            getDescriptor().getMessageTypes().get(55);
           internal_static_com_lvl6_proto_MinimumUserDefeatTypeJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserDefeatTypeJobProto_descriptor,
@@ -54934,7 +56148,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserDefeatTypeJobProto.class,
               com.lvl6.proto.InfoProto.MinimumUserDefeatTypeJobProto.Builder.class);
           internal_static_com_lvl6_proto_DefeatTypeJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(55);
+            getDescriptor().getMessageTypes().get(56);
           internal_static_com_lvl6_proto_DefeatTypeJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_DefeatTypeJobProto_descriptor,
@@ -54942,7 +56156,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.DefeatTypeJobProto.class,
               com.lvl6.proto.InfoProto.DefeatTypeJobProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserBuildStructJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(56);
+            getDescriptor().getMessageTypes().get(57);
           internal_static_com_lvl6_proto_MinimumUserBuildStructJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserBuildStructJobProto_descriptor,
@@ -54950,7 +56164,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserBuildStructJobProto.class,
               com.lvl6.proto.InfoProto.MinimumUserBuildStructJobProto.Builder.class);
           internal_static_com_lvl6_proto_BuildStructJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(57);
+            getDescriptor().getMessageTypes().get(58);
           internal_static_com_lvl6_proto_BuildStructJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BuildStructJobProto_descriptor,
@@ -54958,7 +56172,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.BuildStructJobProto.class,
               com.lvl6.proto.InfoProto.BuildStructJobProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserUpgradeStructJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(58);
+            getDescriptor().getMessageTypes().get(59);
           internal_static_com_lvl6_proto_MinimumUserUpgradeStructJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserUpgradeStructJobProto_descriptor,
@@ -54966,7 +56180,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserUpgradeStructJobProto.class,
               com.lvl6.proto.InfoProto.MinimumUserUpgradeStructJobProto.Builder.class);
           internal_static_com_lvl6_proto_UpgradeStructJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(59);
+            getDescriptor().getMessageTypes().get(60);
           internal_static_com_lvl6_proto_UpgradeStructJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UpgradeStructJobProto_descriptor,
@@ -54974,7 +56188,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.UpgradeStructJobProto.class,
               com.lvl6.proto.InfoProto.UpgradeStructJobProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserPossessEquipJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(60);
+            getDescriptor().getMessageTypes().get(61);
           internal_static_com_lvl6_proto_MinimumUserPossessEquipJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserPossessEquipJobProto_descriptor,
@@ -54982,7 +56196,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.MinimumUserPossessEquipJobProto.class,
               com.lvl6.proto.InfoProto.MinimumUserPossessEquipJobProto.Builder.class);
           internal_static_com_lvl6_proto_PossessEquipJobProto_descriptor =
-            getDescriptor().getMessageTypes().get(61);
+            getDescriptor().getMessageTypes().get(62);
           internal_static_com_lvl6_proto_PossessEquipJobProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PossessEquipJobProto_descriptor,
@@ -54990,7 +56204,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.PossessEquipJobProto.class,
               com.lvl6.proto.InfoProto.PossessEquipJobProto.Builder.class);
           internal_static_com_lvl6_proto_FullQuestProto_descriptor =
-            getDescriptor().getMessageTypes().get(62);
+            getDescriptor().getMessageTypes().get(63);
           internal_static_com_lvl6_proto_FullQuestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullQuestProto_descriptor,
@@ -54998,7 +56212,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.FullQuestProto.class,
               com.lvl6.proto.InfoProto.FullQuestProto.Builder.class);
           internal_static_com_lvl6_proto_DialogueProto_descriptor =
-            getDescriptor().getMessageTypes().get(63);
+            getDescriptor().getMessageTypes().get(64);
           internal_static_com_lvl6_proto_DialogueProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_DialogueProto_descriptor,
@@ -55014,7 +56228,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto.class,
               com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto.Builder.class);
           internal_static_com_lvl6_proto_PlayerWallPostProto_descriptor =
-            getDescriptor().getMessageTypes().get(64);
+            getDescriptor().getMessageTypes().get(65);
           internal_static_com_lvl6_proto_PlayerWallPostProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PlayerWallPostProto_descriptor,
@@ -55022,7 +56236,7 @@ public final class InfoProto {
               com.lvl6.proto.InfoProto.PlayerWallPostProto.class,
               com.lvl6.proto.InfoProto.PlayerWallPostProto.Builder.class);
           internal_static_com_lvl6_proto_UnhandledBlacksmithAttemptProto_descriptor =
-            getDescriptor().getMessageTypes().get(65);
+            getDescriptor().getMessageTypes().get(66);
           internal_static_com_lvl6_proto_UnhandledBlacksmithAttemptProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UnhandledBlacksmithAttemptProto_descriptor,
