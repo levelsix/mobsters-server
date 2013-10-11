@@ -605,78 +605,6 @@ public final class InfoProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SpecialQuestAction)
   }
   
-  public enum BattleResult
-      implements com.google.protobuf.ProtocolMessageEnum {
-    ATTACKER_WIN(0, 0),
-    DEFENDER_WIN(1, 1),
-    ATTACKER_FLEE(2, 2),
-    ;
-    
-    public static final int ATTACKER_WIN_VALUE = 0;
-    public static final int DEFENDER_WIN_VALUE = 1;
-    public static final int ATTACKER_FLEE_VALUE = 2;
-    
-    
-    public final int getNumber() { return value; }
-    
-    public static BattleResult valueOf(int value) {
-      switch (value) {
-        case 0: return ATTACKER_WIN;
-        case 1: return DEFENDER_WIN;
-        case 2: return ATTACKER_FLEE;
-        default: return null;
-      }
-    }
-    
-    public static com.google.protobuf.Internal.EnumLiteMap<BattleResult>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<BattleResult>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<BattleResult>() {
-            public BattleResult findValueByNumber(int number) {
-              return BattleResult.valueOf(number);
-            }
-          };
-    
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.lvl6.proto.InfoProto.getDescriptor().getEnumTypes().get(8);
-    }
-    
-    private static final BattleResult[] VALUES = {
-      ATTACKER_WIN, DEFENDER_WIN, ATTACKER_FLEE, 
-    };
-    
-    public static BattleResult valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-    
-    private final int index;
-    private final int value;
-    
-    private BattleResult(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-    
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BattleResult)
-  }
-  
   public enum CritStructType
       implements com.google.protobuf.ProtocolMessageEnum {
     AVIARY(0, 0),
@@ -728,7 +656,7 @@ public final class InfoProto {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.lvl6.proto.InfoProto.getDescriptor().getEnumTypes().get(9);
+      return com.lvl6.proto.InfoProto.getDescriptor().getEnumTypes().get(8);
     }
     
     private static final CritStructType[] VALUES = {
@@ -797,7 +725,7 @@ public final class InfoProto {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.lvl6.proto.InfoProto.getDescriptor().getEnumTypes().get(10);
+      return com.lvl6.proto.InfoProto.getDescriptor().getEnumTypes().get(9);
     }
     
     private static final StructOrientation[] VALUES = {
@@ -872,7 +800,7 @@ public final class InfoProto {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.lvl6.proto.InfoProto.getDescriptor().getEnumTypes().get(11);
+      return com.lvl6.proto.InfoProto.getDescriptor().getEnumTypes().get(10);
     }
     
     private static final ExpansionDirection[] VALUES = {
@@ -54282,14 +54210,12 @@ public final class InfoProto {
       "\n\020DEPOSIT_IN_VAULT\020\005\022\027\n\023WITHDRAW_FROM_VA" +
       "ULT\020\006\022\027\n\023WRITE_ON_ENEMY_WALL\020\007\022\025\n\021REQUES" +
       "T_JOIN_CLAN\020\010\022\036\n\032SUCCESSFULLY_FORGE_AN_I" +
-      "TEM\020\t*E\n\014BattleResult\022\020\n\014ATTACKER_WIN\020\000\022",
-      "\020\n\014DEFENDER_WIN\020\001\022\021\n\rATTACKER_FLEE\020\002*R\n\016" +
-      "CritStructType\022\n\n\006AVIARY\020\000\022\r\n\tCARPENTER\020" +
-      "\002\022\t\n\005VAULT\020\003\022\n\n\006ARMORY\020\004\022\016\n\nBLACKSMITH\020\006" +
-      "*3\n\021StructOrientation\022\016\n\nPOSITION_1\020\000\022\016\n" +
-      "\nPOSITION_2\020\001*P\n\022ExpansionDirection\022\014\n\010F" +
-      "AR_LEFT\020\000\022\r\n\tFAR_RIGHT\020\001\022\r\n\tNEAR_LEFT\020\002\022" +
-      "\016\n\nNEAR_RIGHT\020\003B\013B\tInfoProto"
+      "TEM\020\t*R\n\016CritStructType\022\n\n\006AVIARY\020\000\022\r\n\tC",
+      "ARPENTER\020\002\022\t\n\005VAULT\020\003\022\n\n\006ARMORY\020\004\022\016\n\nBLA" +
+      "CKSMITH\020\006*3\n\021StructOrientation\022\016\n\nPOSITI" +
+      "ON_1\020\000\022\016\n\nPOSITION_2\020\001*P\n\022ExpansionDirec" +
+      "tion\022\014\n\010FAR_LEFT\020\000\022\r\n\tFAR_RIGHT\020\001\022\r\n\tNEA" +
+      "R_LEFT\020\002\022\016\n\nNEAR_RIGHT\020\003B\013B\tInfoProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

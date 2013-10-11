@@ -679,14 +679,6 @@ message CoordinateProto {
 
 //------------------------------------------------------------------------------------------
 
-enum BattleResult {
-   	ATTACKER_WIN = 0;
- 	DEFENDER_WIN = 1;
- 	ATTACKER_FLEE = 2;
-}
-
-//------------------------------------------------------------------------------------------
-
 message NeutralCityElementProto {
 	optional int32 cityId = 1;
 	optional int32 assetId = 2;

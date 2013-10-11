@@ -45,41 +45,6 @@ message QueueUpResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-																						//DONE
-message BattleRequestProto {
-    optional MinimumUserProto attacker = 1; 
-    optional MinimumUserProto defender = 2; 
-    optional BattleResult battleResult = 3;
-    optional int64 clientTime = 4;
-    optional int32 neutralCityId = 5;
-    repeated FullUserEquipProto defenderUserEquips = 6;
-    optional bool isTutorialBattle = 7;
-}
-
-																						//DONE
-message BattleResponseProto {
-    optional MinimumUserProto attacker = 1;
-    optional MinimumUserProto defender = 2;
-	optional BattleStatus status = 3;
-	optional BattleResult battleResult = 7;
-
-	optional int32 coinsGained = 4;
-	optional FullUserEquipProto userEquipGained = 5;
-    optional int32 expGained = 6;
-    
-    optional int32 eventIdOfLockBoxGained = 9;
-    
-    optional bool shouldGiveKiipReward = 10;
-    
-    enum BattleStatus {
-		SUCCESS = 0;
-		OTHER_FAIL = 1;
-		SAME_SIDE = 2;
-		OPPONENT_HAS_ACTIVE_SHIELD = 3;
-	} 
-}
-
-//------------------------------------------------------------------------------------------
 
 message StartupRequestProto {				//client will also send ChangeUserLocationRequestProto
      optional string udid = 1;
@@ -168,7 +133,6 @@ message StartupResponseProto {
 
 	message AttackedNotificationProto {
 		optional MinimumUserProto attacker = 1;
-		optional BattleResult battleResult = 2;
 		optional int64 battleCompleteTime = 3;
 		optional int32 coinsStolen = 4;
 		optional int32 stolenEquipId = 5;
