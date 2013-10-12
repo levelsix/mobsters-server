@@ -29,9 +29,10 @@ public class DBConstants {
   public static final String TABLE_USER_LOCK_BOX_ITEMS = "lock_box_item_for_user";
   public static final String TABLE_LOGIN_HISTORY = "login_history_for_user";	
   public static final String TABLE_EQUIPMENT = "monster";
-  public static final String TABLE_DELETED_USER_EQUIPS_FOR_ENHANCING = "monster_for_user_deleted";
+  public static final String TABLE_DELETED_USER_EQUIPS_FOR_ENHANCING = "monster_deleted_for_enhancing_for_user";
   public static final String TABLE_EQUIP_ENHANCEMENT_HISTORY = "monster_enhancement_history_for_user";  
   public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY = "monster_enhancement_feeder_history";  
+  public static final String TABLE_BLACKSMITH = "monster_evolution_for_user";
   public static final String TABLE_BLACKSMITH_HISTORY = "monster_evolution_history_for_user";
   public static final String TABLE_USER_EQUIP = "monster_for_user";
   public static final String TABLE_MONSTER_REWARD = "monster_reward";
@@ -61,40 +62,16 @@ public class DBConstants {
   public static final String TABLE_TASKS = "tasks";
   public static final String TABLE_TASKS_EQUIPREQS = "tasks_equipreqs";
   public static final String TABLE_JOBS_DEFEAT_TYPE = "jobs_defeat_type";
-  public static final String TABLE_JOBS_POSSESS_EQUIP = "jobs_possess_equip";
-  public static final String TABLE_PLAYER_WALL_POSTS = "player_wall_posts";
-  public static final String TABLE_C3P0_TEST = "c3p0_test_table";
-  public static final String TABLE_IDDICTION_IDENTIFIERS = "iddiction_identifiers";
-  public static final String TABLE_DIAMOND_EQUIP_PURCHASE_HISTORY = "diamond_equip_purchase_history";
   public static final String TABLE_THREE_CARD_MONTE = "three_card_monte";
   public static final String TABLE_MONSTER = "monster";
   public static final String TABLE_USER_BOSSES = "user_bosses";
   public static final String TABLE_USER_BOSS_HISTORY = "user_boss_history";
-  public static final String TABLE_BOSS_EVENTS = "boss_events";
-  //public static final String TABLE_BOSS_EQUIP_DROP_HISTORY = "boss_equip_drop_history";
-  public static final String TABLE_BOSS_REWARD_DROP_HISTORY = "boss_reward_drop_history";
-  
-  public static final String TABLE_CLAN_TOWERS = "clan_towers";
-  public static final String TABLE_CLAN_TOWERS_HISTORY = "clan_towers_history";
-  public static final String TABLE_CLAN_TOWER_USERS = "clan_tower_users";
-  public static final String TABLE_CLAN_TIER_LEVELS = "clan_tier_levels";
   public static final String TABLE_USER_BOOSTER_ITEMS = "user_booster_items";
-  
-  
-  
-  public static final String TABLE_DAILY_BONUS_REWARD = "daily_bonus_reward";
   public static final String TABLE_USER_DAILY_BONUS_REWARD_HISTORY = "user_daily_bonus_reward_history";
-  
-  public static final String TABLE_PRESTIGE_HISTORY = "prestige_history";
-  
-  
-  public static final String TABLE_CITY_GEMS = "city_gems";
   public static final String TABLE_USER_CITY_GEMS = "user_city_gems";
   public static final String TABLE_USER_TASK_STAGE = "user_task_stage";
   public static final String TABLE_USER_TASK_STAGE_HISTORY = "user_task_stage_history";
-  
   public static final String TABLE_USER_AND_EQUIP_FAIL = "user_and_equip_fail";
-  
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
   public static final String GENERIC__ID = "id";
@@ -334,30 +311,12 @@ public class DBConstants {
   public static final String AVAILABLE_REFERRAL_CODES__ID = GENERIC__ID;
   public static final String AVAILABLE_REFERRAL_CODES__CODE = "code";
 
-  /*PLAYER_WALL_POSTS*/
-  public static final String PLAYER_WALL_POSTS__ID = GENERIC__ID;
-  public static final String PLAYER_WALL_POSTS__POSTER_ID = "poster_id";
-  public static final String PLAYER_WALL_POSTS__WALL_OWNER_ID = "wall_owner_id";
-  public static final String PLAYER_WALL_POSTS__TIME_OF_POST = "time_of_post";
-  public static final String PLAYER_WALL_POSTS__CONTENT = "content";
-
-  /*CLAN_WALL_POSTS*/
-  public static final String CLAN_BULLETIN_POSTS__ID = GENERIC__ID;
-  public static final String CLAN_BULLETIN_POSTS__POSTER_ID = "poster_id";
-  public static final String CLAN_BULLETIN_POSTS__CLAN_ID = "clan_id";
-  public static final String CLAN_BULLETIN_POSTS__TIME_OF_POST = "time_of_post";
-  public static final String CLAN_BULLETIN_POSTS__CONTENT = "content";
-
   /*CLAN_WALL_POSTS*/
   public static final String CLAN_WALL_POSTS__ID = GENERIC__ID;
   public static final String CLAN_WALL_POSTS__POSTER_ID = "poster_id";
   public static final String CLAN_WALL_POSTS__CLAN_ID = "clan_id";
   public static final String CLAN_WALL_POSTS__TIME_OF_POST = "time_of_post";
   public static final String CLAN_WALL_POSTS__CONTENT = "content";
-  
-  /*IDDICTION*/
-  public static final String IDDICTION_IDENTIFIERS__IDENTIFIER = "identifier";
-  public static final String IDDICTION_IDENTIFIERS__CLICK_TIME = "click_time";
   
   /*CLANS*/
   public static final String CLANS__ID = "id";
@@ -366,26 +325,13 @@ public class DBConstants {
   public static final String CLANS__CREATE_TIME = "create_time";
   public static final String CLANS__DESCRIPTION = "description";
   public static final String CLANS__TAG = "tag";
-  public static final String CLANS__IS_GOOD = "is_good";
-  public static final String CLANS__CURRENT_TIER_LEVEL = "current_tier_level";
   public static final String CLANS__REQUEST_TO_JOIN_REQUIRED = "request_to_join_required";
-  
-  /*CLAN TIER LEVELS*/
-  public static final String CLAN_TIER_LEVELS__TIER_LEVEL = "tier_level";
-  public static final String CLAN_TIER_LEVELS__MAX_CLAN_SIZE = "max_clan_size";
-  public static final String CLAN_TIER_LEVELS__GOLD_COST_TO_UPGRADE_TO_NEXT_TIER_LEVEL = "gold_cost_to_upgrade_to_next_tier_level";
   
   /*USER CLANS*/
   public static final String USER_CLANS__USER_ID = "user_id";
   public static final String USER_CLANS__CLAN_ID = "clan_id";
   public static final String USER_CLANS__STATUS = "status";
   public static final String USER_CLANS__REQUEST_TIME = "request_time";
-  
-  /*DIAMOND EQUIP PURCHASE HISTORY*/
-  public static final String DIAMOND_EQUIP_PURCHASE_HISTORY__BUYER_ID = "buyer_id";
-  public static final String DIAMOND_EQUIP_PURCHASE_HISTORY__EQUIP_ID = "equip_id";
-  public static final String DIAMOND_EQUIP_PURCHASE_HISTORY__DIAMONDS_SPENT = "diamonds_spent";
-  public static final String DIAMOND_EQUIP_PURCHASE_HISTORY__PURCHASE_TIME = "purchase_time";
   
   /*MONSTER*/
   public static final String MONSTER__ID = GENERIC__USER_ID;
@@ -453,38 +399,6 @@ public class DBConstants {
   public static final String USER_LOCK_BOX_ITEMS__ITEM_ID = "lock_box_item_id";
   public static final String USER_LOCK_BOX_ITEMS__USER_ID = "user_id";
   public static final String USER_LOCK_BOX_ITEMS__QUANTITY = "quantity";
-  
-  /*CLAN TOWERS*/
-  public static final String CLAN_TOWERS__TOWER_ID = GENERIC__ID;
-  public static final String CLAN_TOWERS__CLAN_OWNER_ID = "clan_owner_id";
-  public static final String CLAN_TOWERS__OWNED_START_TIME = "owned_start_time";
-  public static final String CLAN_TOWERS__CLAN_ATTACKER_ID = "clan_attacker_id";
-  public static final String CLAN_TOWERS__ATTACK_START_TIME = "attack_start_time";
-  public static final String CLAN_TOWERS__OWNER_BATTLE_WINS = "owner_battle_wins";
-  public static final String CLAN_TOWERS__ATTACKER_BATTLE_WINS = "attacker_battle_wins";
-  public static final String CLAN_TOWERS__LAST_REWARD_GIVEN = "last_reward_given";
-  public static final String CLAN_TOWERS__CURRENT_BATTLE_ID = "current_battle_id";
-  
-  /*CLAN TOWERS HISTORY*/
-  public static final String CLAN_TOWERS_HISTORY__OWNER_CLAN_ID = "owner_clan_id";
-  public static final String CLAN_TOWERS_HISTORY__ATTACKER_CLAN_ID = "attacker_clan_id";
-  public static final String CLAN_TOWERS_HISTORY__TOWER_ID = "tower_id";
-  public static final String CLAN_TOWERS_HISTORY__WINNER_ID = "winner_id";
-  public static final String CLAN_TOWERS_HISTORY__OWNER_BATTLE_WINS = "owner_battle_wins";
-  public static final String CLAN_TOWERS_HISTORY__ATTACKER_BATTLE_WINS = "attacker_battle_wins";
-  public static final String CLAN_TOWERS_HISTORY__ATTACK_START_TIME = "attack_start_time";
-  public static final String CLAN_TOWERS_HISTORY__NUM_HOURS_FOR_BATTLE = "num_hours_for_battle";
-  public static final String CLAN_TOWERS_HISTORY__LAST_REWARD_GIVEN = "last_reward_given";
-  public static final String CLAN_TOWERS_HISTORY__TIME_OF_ENTRY = "time_of_entry";
-  public static final String CLAN_TOWERS_HISTORY__REASON_FOR_ENTRY = "reason_for_entry";
-  public static final String CLAN_TOWERS_HISTORY__CURRENT_BATTLE_ID = "current_battle_id";
-
-  /*CLAN TOWER USERS*/
-  public static final String CLAN_TOWER_USERS__BATTLE_ID = "battle_id";
-  public static final String CLAN_TOWER_USERS__USER_ID = "user_id";
-  public static final String CLAN_TOWER_USERS__IS_IN_OWNER_CLAN = "is_in_owner_clan";
-  public static final String CLAN_TOWER_USERS__POINTS_GAINED = "points_gained";
-  public static final String CLAN_TOWER_USERS__POINTS_LOST = "points_lost";
   
   /*LEADERBOARD EVENTS*/
   public static final String LEADERBOARD_EVENTS__ID = GENERIC__ID;
@@ -572,16 +486,6 @@ public class DBConstants {
   public static final String FIRST_TIME_USERS__ADVERTISER_ID = "advertiser_id";
   public static final String FIRST_TIME_USERS__CREATE_TIME = "create_time";
 
-  /*DAILY BONUS REWARD*/
-  public static final String DAILY_BONUS_REWARD__ID = GENERIC__ID;
-  public static final String DAILY_BONUS_REWARD__MIN_LEVEL = "min_level";
-  public static final String DAILY_BONUS_REWARD__MAX_LEVEL = "max_level";
-  public static final String DAILY_BONUS_REWARD__DAY_ONE_COINS = "day_one_coins";
-  public static final String DAILY_BONUS_REWARD__DAY_TWO_COINS = "day_two_coins"; 
-  public static final String DAILY_BONUS_REWARD__DAY_THREE_DIAMONDS = "day_three_diamonds";
-  public static final String DAILY_BONUS_REWARD__DAY_FOUR_COINS = "day_four_coins";
-  public static final String DAILY_BONUS_REWARD__DAY_FIVE_BOOSTER_PACK_IDS = "day_five_booster_pack_ids";
-  
   /*USER DAILY BONUS REWARD HISTORY*/
   public static final String USER_DAILY_BONUS_REWARD_HISTORY__ID = GENERIC__ID;
   public static final String USER_DAILY_BONUS_REWARD_HISTORY__USER_ID = GENERIC__USER_ID;
