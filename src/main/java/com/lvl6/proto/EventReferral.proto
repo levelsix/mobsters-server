@@ -1,0 +1,15 @@
+
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventReferralProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message ReferralCodeUsedResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional MinimumUserProto referredPlayer = 2;
+	optional int32 coinsGivenToReferrer = 3;
+}
+
+//------------------------------------------------------------------------------------------

@@ -1,0 +1,25 @@
+
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventApnsProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message EnableAPNSRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string deviceToken = 2;
+}
+
+																						//DONE
+message EnableAPNSResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional EnableAPNSStatus status = 2;
+	
+	enum EnableAPNSStatus {
+		SUCCESS = 1;
+		NOT_ENABLED = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------

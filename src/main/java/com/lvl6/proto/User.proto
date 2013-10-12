@@ -88,13 +88,5 @@ message FullUserProto {
 	optional string kabamNaid = 27;
 }
 
-//------------------------------------------------------------------------------------------
-
-message MinimumUserProtoWithLevelForLeaderboard {
-       optional MinimumUserProto minUserProto = 1;
-       optional int32 level = 2;
-       optional int32 leaderboardRank = 3;
-       optional double leaderboardScore = 4;
-}
 
 //------------------------------------------------------------------------------------------

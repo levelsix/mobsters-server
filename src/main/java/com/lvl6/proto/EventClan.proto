@@ -1,0 +1,249 @@
+
+import "Clan.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventClanProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+
+message CreateClanRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string name = 2;
+	optional string tag = 3;
+	optional bool requestToJoinClanRequired = 4;
+	optional string description = 5;
+}
+
+message CreateClanResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional CreateClanStatus status = 2;
+	optional MinimumClanProto clanInfo = 3;
+	
+	enum CreateClanStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		NOT_ENOUGH_DIAMONDS = 3;
+		NAME_TAKEN = 4;
+		ALREADY_IN_CLAN = 5;
+		INVALID_TAG_LENGTH = 6;
+		TAG_TAKEN = 7;
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+
+//if no newOwner set, assume wanting to delete
+message LeaveClanRequestProto {
+	optional MinimumUserProto sender = 1;
+}
+
+message LeaveClanResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional LeaveClanStatus status = 2;
+	
+	enum LeaveClanStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		NOT_IN_CLAN = 3;
+		OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 4;
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+
+message RequestJoinClanRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 clanId = 2;
+}
+
+//since clanless user can directly join open clan,
+//two successes: request_success, join_success
+message RequestJoinClanResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RequestJoinClanStatus status = 2;
+	optional int32 clanId = 3;
+	optional MinimumUserProtoForClans requester = 4;
+	optional MinimumClanProto minClan = 5;
+	optional FullClanProtoWithClanSize fullClan = 6;
+	
+	enum RequestJoinClanStatus {
+		REQUEST_SUCCESS = 1;
+		OTHER_FAIL = 2;
+		ALREADY_IN_CLAN = 3;
+		REQUEST_ALREADY_FILED = 4;
+		JOIN_SUCCESS = 5;
+		CLAN_IS_FULL = 6;
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+
+message RetractRequestJoinClanRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 clanId = 2;
+}
+
+message RetractRequestJoinClanResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RetractRequestJoinClanStatus status = 2;
+	optional int32 clanId = 3;
+	
+	enum RetractRequestJoinClanStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		ALREADY_IN_CLAN = 3;
+		DID_NOT_REQUEST = 4;
+	}	
+}	
+
+//------------------------------------------------------------------------------------------
+
+//can request as many as you like. wipe out other ones
+message ApproveOrRejectRequestToJoinClanRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 requesterId = 2;
+	optional bool accept = 3;
+}
+
+message ApproveOrRejectRequestToJoinClanResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional ApproveOrRejectRequestToJoinClanStatus status = 2;
+	optional int32 requesterId = 3;
+	optional bool accept = 4;
+	optional MinimumClanProto minClan = 5;
+	optional FullClanProtoWithClanSize fullClan = 6;
+	
+	enum ApproveOrRejectRequestToJoinClanStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		NOT_OWNER = 3;
+		NOT_A_REQUESTER = 4;
+		ALREADY_IN_A_CLAN = 5;
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+
+message RetrieveClanInfoRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 clanId = 2;
+	optional string clanName = 3;
+	optional ClanInfoGrabType grabType = 4;
+	optional int32 beforeThisClanId = 5;
+	optional bool isForBrowsingList = 6;
+	
+	enum ClanInfoGrabType {
+		ALL = 1;
+		CLAN_INFO = 2;
+		MEMBERS = 3;
+	}
+
+}
+
+message RetrieveClanInfoResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated MinimumUserProtoForClans members = 2;
+	repeated FullClanProtoWithClanSize clanInfo = 3;
+	optional RetrieveClanInfoStatus status = 4;
+	optional bool isForSearch = 5;
+	optional bool isForBrowsingList = 6;
+	optional int32 clanId = 7;
+	optional string clanName = 8;
+	optional int32 beforeThisClanId = 9;
+	
+	
+	enum RetrieveClanInfoStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+
+message TransferClanOwnershipRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 newClanOwnerId = 2;
+}
+
+message TransferClanOwnershipResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional TransferClanOwnershipStatus status = 2;
+	optional MinimumClanProto minClan = 3;
+	optional FullClanProtoWithClanSize fullClan = 4;
+	
+	enum TransferClanOwnershipStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		NOT_OWNER = 3;
+		NEW_OWNER_NOT_IN_CLAN = 4;
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+
+message ChangeClanDescriptionRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string description = 2;
+}
+
+message ChangeClanDescriptionResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional ChangeClanDescriptionStatus status = 2;
+	optional MinimumClanProto minClan = 3;
+	optional FullClanProtoWithClanSize fullClan = 4;
+	
+	
+	enum ChangeClanDescriptionStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		TOO_LONG = 3;
+		NOT_IN_CLAN = 4;
+		NOT_OWNER = 5;
+	}	
+}
+
+//------------------------------------------------------------------------------------------
+
+message BootPlayerFromClanRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 playerToBoot = 2;
+}
+
+message BootPlayerFromClanResponseProto {
+     optional MinimumUserProto sender = 1;
+	 optional int32 playerToBoot = 2;
+	 optional BootPlayerFromClanStatus status = 3;
+     
+     enum BootPlayerFromClanStatus {
+     	SUCCESS = 1;
+     	OTHER_FAIL = 2;
+     	NOT_OWNER_OF_CLAN = 3;
+     	BOOTED_NOT_IN_CLAN = 4;
+     }
+}
+
+//------------------------------------------------------------------------------------
+
+message ChangeClanJoinTypeRequestProto {
+	//from an open (no request to join necessary) to request to join necessary
+	optional MinimumUserProto sender = 1;
+	optional bool requestToJoinRequired = 2;
+}
+
+message ChangeClanJoinTypeResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional ChangeClanJoinTypeStatus status = 2;
+	optional MinimumClanProto minClan = 3;
+	optional FullClanProtoWithClanSize fullClan = 4;
+	
+	enum ChangeClanJoinTypeStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		NOT_IN_CLAN = 3;
+		NOT_OWNER = 4;
+	}
+}
+
+//------------------------------------------------------------------------------------------

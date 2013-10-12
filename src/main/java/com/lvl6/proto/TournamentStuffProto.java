@@ -887,9 +887,9 @@ public final class TournamentStuffProto {
   public interface TournamentRewardProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 leaderboardEventId = 1;
-    boolean hasLeaderboardEventId();
-    int getLeaderboardEventId();
+    // optional int32 tournamentEventId = 1;
+    boolean hasTournamentEventId();
+    int getTournamentEventId();
     
     // optional int32 minRank = 2;
     boolean hasMinRank();
@@ -945,14 +945,14 @@ public final class TournamentStuffProto {
     }
     
     private int bitField0_;
-    // optional int32 leaderboardEventId = 1;
-    public static final int LEADERBOARDEVENTID_FIELD_NUMBER = 1;
-    private int leaderboardEventId_;
-    public boolean hasLeaderboardEventId() {
+    // optional int32 tournamentEventId = 1;
+    public static final int TOURNAMENTEVENTID_FIELD_NUMBER = 1;
+    private int tournamentEventId_;
+    public boolean hasTournamentEventId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getLeaderboardEventId() {
-      return leaderboardEventId_;
+    public int getTournamentEventId() {
+      return tournamentEventId_;
     }
     
     // optional int32 minRank = 2;
@@ -1063,7 +1063,7 @@ public final class TournamentStuffProto {
     }
     
     private void initFields() {
-      leaderboardEventId_ = 0;
+      tournamentEventId_ = 0;
       minRank_ = 0;
       maxRank_ = 0;
       goldRewarded_ = 0;
@@ -1084,7 +1084,7 @@ public final class TournamentStuffProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, leaderboardEventId_);
+        output.writeInt32(1, tournamentEventId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, minRank_);
@@ -1115,7 +1115,7 @@ public final class TournamentStuffProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, leaderboardEventId_);
+          .computeInt32Size(1, tournamentEventId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1266,7 +1266,7 @@ public final class TournamentStuffProto {
       
       public Builder clear() {
         super.clear();
-        leaderboardEventId_ = 0;
+        tournamentEventId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         minRank_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1325,7 +1325,7 @@ public final class TournamentStuffProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.leaderboardEventId_ = leaderboardEventId_;
+        result.tournamentEventId_ = tournamentEventId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -1370,8 +1370,8 @@ public final class TournamentStuffProto {
       
       public Builder mergeFrom(com.lvl6.proto.TournamentStuffProto.TournamentRewardProto other) {
         if (other == com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.getDefaultInstance()) return this;
-        if (other.hasLeaderboardEventId()) {
-          setLeaderboardEventId(other.getLeaderboardEventId());
+        if (other.hasTournamentEventId()) {
+          setTournamentEventId(other.getTournamentEventId());
         }
         if (other.hasMinRank()) {
           setMinRank(other.getMinRank());
@@ -1424,7 +1424,7 @@ public final class TournamentStuffProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              leaderboardEventId_ = input.readInt32();
+              tournamentEventId_ = input.readInt32();
               break;
             }
             case 16: {
@@ -1467,23 +1467,23 @@ public final class TournamentStuffProto {
       
       private int bitField0_;
       
-      // optional int32 leaderboardEventId = 1;
-      private int leaderboardEventId_ ;
-      public boolean hasLeaderboardEventId() {
+      // optional int32 tournamentEventId = 1;
+      private int tournamentEventId_ ;
+      public boolean hasTournamentEventId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getLeaderboardEventId() {
-        return leaderboardEventId_;
+      public int getTournamentEventId() {
+        return tournamentEventId_;
       }
-      public Builder setLeaderboardEventId(int value) {
+      public Builder setTournamentEventId(int value) {
         bitField0_ |= 0x00000001;
-        leaderboardEventId_ = value;
+        tournamentEventId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearLeaderboardEventId() {
+      public Builder clearTournamentEventId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        leaderboardEventId_ = 0;
+        tournamentEventId_ = 0;
         onChanged();
         return this;
       }
@@ -1724,6 +1724,601 @@ public final class TournamentStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TournamentRewardProto)
   }
   
+  public interface MinimumUserProtoWithLevelForTournamentOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
+    boolean hasMinUserProto();
+    com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder();
+    
+    // optional int32 level = 2;
+    boolean hasLevel();
+    int getLevel();
+    
+    // optional int32 tournamentRank = 3;
+    boolean hasTournamentRank();
+    int getTournamentRank();
+    
+    // optional double tournamentScore = 4;
+    boolean hasTournamentScore();
+    double getTournamentScore();
+  }
+  public static final class MinimumUserProtoWithLevelForTournament extends
+      com.google.protobuf.GeneratedMessage
+      implements MinimumUserProtoWithLevelForTournamentOrBuilder {
+    // Use MinimumUserProtoWithLevelForTournament.newBuilder() to construct.
+    private MinimumUserProtoWithLevelForTournament(Builder builder) {
+      super(builder);
+    }
+    private MinimumUserProtoWithLevelForTournament(boolean noInit) {}
+    
+    private static final MinimumUserProtoWithLevelForTournament defaultInstance;
+    public static MinimumUserProtoWithLevelForTournament getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MinimumUserProtoWithLevelForTournament getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
+    public static final int MINUSERPROTO_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_;
+    public boolean hasMinUserProto() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto() {
+      return minUserProto_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder() {
+      return minUserProto_;
+    }
+    
+    // optional int32 level = 2;
+    public static final int LEVEL_FIELD_NUMBER = 2;
+    private int level_;
+    public boolean hasLevel() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getLevel() {
+      return level_;
+    }
+    
+    // optional int32 tournamentRank = 3;
+    public static final int TOURNAMENTRANK_FIELD_NUMBER = 3;
+    private int tournamentRank_;
+    public boolean hasTournamentRank() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getTournamentRank() {
+      return tournamentRank_;
+    }
+    
+    // optional double tournamentScore = 4;
+    public static final int TOURNAMENTSCORE_FIELD_NUMBER = 4;
+    private double tournamentScore_;
+    public boolean hasTournamentScore() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public double getTournamentScore() {
+      return tournamentScore_;
+    }
+    
+    private void initFields() {
+      minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      level_ = 0;
+      tournamentRank_ = 0;
+      tournamentScore_ = 0D;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, minUserProto_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, level_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, tournamentRank_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, tournamentScore_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, minUserProto_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, level_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, tournamentRank_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, tournamentScore_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournamentOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getMinUserProtoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (minUserProtoBuilder_ == null) {
+          minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          minUserProtoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        level_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        tournamentRank_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        tournamentScore_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.getDescriptor();
+      }
+      
+      public com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament getDefaultInstanceForType() {
+        return com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament build() {
+        com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament buildPartial() {
+        com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament result = new com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (minUserProtoBuilder_ == null) {
+          result.minUserProto_ = minUserProto_;
+        } else {
+          result.minUserProto_ = minUserProtoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.level_ = level_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.tournamentRank_ = tournamentRank_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.tournamentScore_ = tournamentScore_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament) {
+          return mergeFrom((com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament other) {
+        if (other == com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.getDefaultInstance()) return this;
+        if (other.hasMinUserProto()) {
+          mergeMinUserProto(other.getMinUserProto());
+        }
+        if (other.hasLevel()) {
+          setLevel(other.getLevel());
+        }
+        if (other.hasTournamentRank()) {
+          setTournamentRank(other.getTournamentRank());
+        }
+        if (other.hasTournamentScore()) {
+          setTournamentScore(other.getTournamentScore());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasMinUserProto()) {
+                subBuilder.mergeFrom(getMinUserProto());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setMinUserProto(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              level_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              tournamentRank_ = input.readInt32();
+              break;
+            }
+            case 33: {
+              bitField0_ |= 0x00000008;
+              tournamentScore_ = input.readDouble();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> minUserProtoBuilder_;
+      public boolean hasMinUserProto() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto() {
+        if (minUserProtoBuilder_ == null) {
+          return minUserProto_;
+        } else {
+          return minUserProtoBuilder_.getMessage();
+        }
+      }
+      public Builder setMinUserProto(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (minUserProtoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          minUserProto_ = value;
+          onChanged();
+        } else {
+          minUserProtoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setMinUserProto(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (minUserProtoBuilder_ == null) {
+          minUserProto_ = builderForValue.build();
+          onChanged();
+        } else {
+          minUserProtoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeMinUserProto(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (minUserProtoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              minUserProto_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            minUserProto_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(minUserProto_).mergeFrom(value).buildPartial();
+          } else {
+            minUserProto_ = value;
+          }
+          onChanged();
+        } else {
+          minUserProtoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearMinUserProto() {
+        if (minUserProtoBuilder_ == null) {
+          minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          minUserProtoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getMinUserProtoBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getMinUserProtoFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder() {
+        if (minUserProtoBuilder_ != null) {
+          return minUserProtoBuilder_.getMessageOrBuilder();
+        } else {
+          return minUserProto_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getMinUserProtoFieldBuilder() {
+        if (minUserProtoBuilder_ == null) {
+          minUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  minUserProto_,
+                  getParentForChildren(),
+                  isClean());
+          minUserProto_ = null;
+        }
+        return minUserProtoBuilder_;
+      }
+      
+      // optional int32 level = 2;
+      private int level_ ;
+      public boolean hasLevel() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getLevel() {
+        return level_;
+      }
+      public Builder setLevel(int value) {
+        bitField0_ |= 0x00000002;
+        level_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLevel() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        level_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 tournamentRank = 3;
+      private int tournamentRank_ ;
+      public boolean hasTournamentRank() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getTournamentRank() {
+        return tournamentRank_;
+      }
+      public Builder setTournamentRank(int value) {
+        bitField0_ |= 0x00000004;
+        tournamentRank_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTournamentRank() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        tournamentRank_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional double tournamentScore = 4;
+      private double tournamentScore_ ;
+      public boolean hasTournamentScore() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public double getTournamentScore() {
+        return tournamentScore_;
+      }
+      public Builder setTournamentScore(double value) {
+        bitField0_ |= 0x00000008;
+        tournamentScore_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTournamentScore() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        tournamentScore_ = 0D;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MinimumUserProtoWithLevelForTournament)
+    }
+    
+    static {
+      defaultInstance = new MinimumUserProtoWithLevelForTournament(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithLevelForTournament)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TournamentProto_descriptor;
   private static
@@ -1734,6 +2329,11 @@ public final class TournamentStuffProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TournamentRewardProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1744,17 +2344,21 @@ public final class TournamentStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\025TournamentStuff.proto\022\016com.lvl6.proto\032" +
-      "\nChat.proto\"\247\001\n\017TournamentProto\022\017\n\007event" +
-      "Id\030\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003\022\017\n\007endDate\030\003" +
-      " \001(\003\022\021\n\teventName\030\004 \001(\t\0226\n\007rewards\030\005 \003(\013" +
-      "2%.com.lvl6.proto.TournamentRewardProto\022" +
-      "\024\n\014lastShowDate\030\006 \001(\003\"\320\001\n\025TournamentRewa" +
-      "rdProto\022\032\n\022leaderboardEventId\030\001 \001(\005\022\017\n\007m" +
-      "inRank\030\002 \001(\005\022\017\n\007maxRank\030\003 \001(\005\022\024\n\014goldRew" +
-      "arded\030\004 \001(\005\022\033\n\023backgroundImageName\030\005 \001(\t" +
-      "\022\026\n\016prizeImageName\030\006 \001(\t\022.\n\ntitleColor\030\007",
-      " \001(\0132\032.com.lvl6.proto.ColorProtoB\026B\024Tour" +
-      "namentStuffProto"
+      "\nChat.proto\032\nUser.proto\"\247\001\n\017TournamentPr" +
+      "oto\022\017\n\007eventId\030\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003\022" +
+      "\017\n\007endDate\030\003 \001(\003\022\021\n\teventName\030\004 \001(\t\0226\n\007r" +
+      "ewards\030\005 \003(\0132%.com.lvl6.proto.Tournament" +
+      "RewardProto\022\024\n\014lastShowDate\030\006 \001(\003\"\317\001\n\025To" +
+      "urnamentRewardProto\022\031\n\021tournamentEventId" +
+      "\030\001 \001(\005\022\017\n\007minRank\030\002 \001(\005\022\017\n\007maxRank\030\003 \001(\005" +
+      "\022\024\n\014goldRewarded\030\004 \001(\005\022\033\n\023backgroundImag" +
+      "eName\030\005 \001(\t\022\026\n\016prizeImageName\030\006 \001(\t\022.\n\nt",
+      "itleColor\030\007 \001(\0132\032.com.lvl6.proto.ColorPr" +
+      "oto\"\240\001\n&MinimumUserProtoWithLevelForTour" +
+      "nament\0226\n\014minUserProto\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022\r\n\005level\030\002 \001(\005\022\026\n" +
+      "\016tournamentRank\030\003 \001(\005\022\027\n\017tournamentScore" +
+      "\030\004 \001(\001B\026B\024TournamentStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1774,9 +2378,17 @@ public final class TournamentStuffProto {
           internal_static_com_lvl6_proto_TournamentRewardProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TournamentRewardProto_descriptor,
-              new java.lang.String[] { "LeaderboardEventId", "MinRank", "MaxRank", "GoldRewarded", "BackgroundImageName", "PrizeImageName", "TitleColor", },
+              new java.lang.String[] { "TournamentEventId", "MinRank", "MaxRank", "GoldRewarded", "BackgroundImageName", "PrizeImageName", "TitleColor", },
               com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.class,
               com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder.class);
+          internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor,
+              new java.lang.String[] { "MinUserProto", "Level", "TournamentRank", "TournamentScore", },
+              com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.class,
+              com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament.Builder.class);
           return null;
         }
       };
@@ -1784,6 +2396,7 @@ public final class TournamentStuffProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.ChatProto.getDescriptor(),
+          com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
   }
   

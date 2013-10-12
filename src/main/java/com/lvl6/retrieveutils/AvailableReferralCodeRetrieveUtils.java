@@ -16,7 +16,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_AVAILABLE_REFERRAL_CODE;
+  private static final String TABLE_NAME = DBConstants.TABLE_AVAILABLE_REFERRAL_CODES;
 
   public static String getAvailableReferralCode() {
     log.debug("generating available referral code");

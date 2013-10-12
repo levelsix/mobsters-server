@@ -912,13 +912,13 @@ public final class EventStartupProto {
         int index);
     
     // repeated .com.lvl6.proto.GoldSaleProto goldSales = 21;
-    java.util.List<com.lvl6.proto.InfoProto.GoldSaleProto> 
+    java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> 
         getGoldSalesList();
-    com.lvl6.proto.InfoProto.GoldSaleProto getGoldSales(int index);
+    com.lvl6.proto.InAppPurchaseProto.GoldSaleProto getGoldSales(int index);
     int getGoldSalesCount();
-    java.util.List<? extends com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder> 
         getGoldSalesOrBuilderList();
-    com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder getGoldSalesOrBuilder(
+    com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder getGoldSalesOrBuilder(
         int index);
     
     // repeated .com.lvl6.proto.FullStructureProto staticStructs = 22;
@@ -2214,13 +2214,13 @@ public final class EventStartupProto {
         extends com.google.protobuf.MessageOrBuilder {
       
       // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
-      java.util.List<com.lvl6.proto.InfoProto.InAppPurchasePackageProto> 
+      java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> 
           getInAppPurchasePackagesList();
-      com.lvl6.proto.InfoProto.InAppPurchasePackageProto getInAppPurchasePackages(int index);
+      com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto getInAppPurchasePackages(int index);
       int getInAppPurchasePackagesCount();
-      java.util.List<? extends com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder> 
+      java.util.List<? extends com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder> 
           getInAppPurchasePackagesOrBuilderList();
-      com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder getInAppPurchasePackagesOrBuilder(
+      com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder getInAppPurchasePackagesOrBuilder(
           int index);
       
       // optional int32 maxLevelForUser = 2;
@@ -4994,21 +4994,21 @@ public final class EventStartupProto {
       private int bitField0_;
       // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
       public static final int INAPPPURCHASEPACKAGES_FIELD_NUMBER = 1;
-      private java.util.List<com.lvl6.proto.InfoProto.InAppPurchasePackageProto> inAppPurchasePackages_;
-      public java.util.List<com.lvl6.proto.InfoProto.InAppPurchasePackageProto> getInAppPurchasePackagesList() {
+      private java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> inAppPurchasePackages_;
+      public java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> getInAppPurchasePackagesList() {
         return inAppPurchasePackages_;
       }
-      public java.util.List<? extends com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder> 
           getInAppPurchasePackagesOrBuilderList() {
         return inAppPurchasePackages_;
       }
       public int getInAppPurchasePackagesCount() {
         return inAppPurchasePackages_.size();
       }
-      public com.lvl6.proto.InfoProto.InAppPurchasePackageProto getInAppPurchasePackages(int index) {
+      public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto getInAppPurchasePackages(int index) {
         return inAppPurchasePackages_.get(index);
       }
-      public com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder getInAppPurchasePackagesOrBuilder(
+      public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder getInAppPurchasePackagesOrBuilder(
           int index) {
         return inAppPurchasePackages_.get(index);
       }
@@ -5854,7 +5854,7 @@ public final class EventStartupProto {
                 break;
               }
               case 10: {
-                com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder subBuilder = com.lvl6.proto.InfoProto.InAppPurchasePackageProto.newBuilder();
+                com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder subBuilder = com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.newBuilder();
                 input.readMessage(subBuilder, extensionRegistry);
                 addInAppPurchasePackages(subBuilder.buildPartial());
                 break;
@@ -5967,19 +5967,19 @@ public final class EventStartupProto {
         private int bitField0_;
         
         // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
-        private java.util.List<com.lvl6.proto.InfoProto.InAppPurchasePackageProto> inAppPurchasePackages_ =
+        private java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> inAppPurchasePackages_ =
           java.util.Collections.emptyList();
         private void ensureInAppPurchasePackagesIsMutable() {
           if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-            inAppPurchasePackages_ = new java.util.ArrayList<com.lvl6.proto.InfoProto.InAppPurchasePackageProto>(inAppPurchasePackages_);
+            inAppPurchasePackages_ = new java.util.ArrayList<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto>(inAppPurchasePackages_);
             bitField0_ |= 0x00000001;
            }
         }
         
         private com.google.protobuf.RepeatedFieldBuilder<
-            com.lvl6.proto.InfoProto.InAppPurchasePackageProto, com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder, com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder> inAppPurchasePackagesBuilder_;
+            com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder> inAppPurchasePackagesBuilder_;
         
-        public java.util.List<com.lvl6.proto.InfoProto.InAppPurchasePackageProto> getInAppPurchasePackagesList() {
+        public java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> getInAppPurchasePackagesList() {
           if (inAppPurchasePackagesBuilder_ == null) {
             return java.util.Collections.unmodifiableList(inAppPurchasePackages_);
           } else {
@@ -5993,7 +5993,7 @@ public final class EventStartupProto {
             return inAppPurchasePackagesBuilder_.getCount();
           }
         }
-        public com.lvl6.proto.InfoProto.InAppPurchasePackageProto getInAppPurchasePackages(int index) {
+        public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto getInAppPurchasePackages(int index) {
           if (inAppPurchasePackagesBuilder_ == null) {
             return inAppPurchasePackages_.get(index);
           } else {
@@ -6001,7 +6001,7 @@ public final class EventStartupProto {
           }
         }
         public Builder setInAppPurchasePackages(
-            int index, com.lvl6.proto.InfoProto.InAppPurchasePackageProto value) {
+            int index, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto value) {
           if (inAppPurchasePackagesBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
@@ -6015,7 +6015,7 @@ public final class EventStartupProto {
           return this;
         }
         public Builder setInAppPurchasePackages(
-            int index, com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder builderForValue) {
+            int index, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder builderForValue) {
           if (inAppPurchasePackagesBuilder_ == null) {
             ensureInAppPurchasePackagesIsMutable();
             inAppPurchasePackages_.set(index, builderForValue.build());
@@ -6025,7 +6025,7 @@ public final class EventStartupProto {
           }
           return this;
         }
-        public Builder addInAppPurchasePackages(com.lvl6.proto.InfoProto.InAppPurchasePackageProto value) {
+        public Builder addInAppPurchasePackages(com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto value) {
           if (inAppPurchasePackagesBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
@@ -6039,7 +6039,7 @@ public final class EventStartupProto {
           return this;
         }
         public Builder addInAppPurchasePackages(
-            int index, com.lvl6.proto.InfoProto.InAppPurchasePackageProto value) {
+            int index, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto value) {
           if (inAppPurchasePackagesBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
@@ -6053,7 +6053,7 @@ public final class EventStartupProto {
           return this;
         }
         public Builder addInAppPurchasePackages(
-            com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder builderForValue) {
+            com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder builderForValue) {
           if (inAppPurchasePackagesBuilder_ == null) {
             ensureInAppPurchasePackagesIsMutable();
             inAppPurchasePackages_.add(builderForValue.build());
@@ -6064,7 +6064,7 @@ public final class EventStartupProto {
           return this;
         }
         public Builder addInAppPurchasePackages(
-            int index, com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder builderForValue) {
+            int index, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder builderForValue) {
           if (inAppPurchasePackagesBuilder_ == null) {
             ensureInAppPurchasePackagesIsMutable();
             inAppPurchasePackages_.add(index, builderForValue.build());
@@ -6075,7 +6075,7 @@ public final class EventStartupProto {
           return this;
         }
         public Builder addAllInAppPurchasePackages(
-            java.lang.Iterable<? extends com.lvl6.proto.InfoProto.InAppPurchasePackageProto> values) {
+            java.lang.Iterable<? extends com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto> values) {
           if (inAppPurchasePackagesBuilder_ == null) {
             ensureInAppPurchasePackagesIsMutable();
             super.addAll(values, inAppPurchasePackages_);
@@ -6105,18 +6105,18 @@ public final class EventStartupProto {
           }
           return this;
         }
-        public com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder getInAppPurchasePackagesBuilder(
+        public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder getInAppPurchasePackagesBuilder(
             int index) {
           return getInAppPurchasePackagesFieldBuilder().getBuilder(index);
         }
-        public com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder getInAppPurchasePackagesOrBuilder(
+        public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder getInAppPurchasePackagesOrBuilder(
             int index) {
           if (inAppPurchasePackagesBuilder_ == null) {
             return inAppPurchasePackages_.get(index);  } else {
             return inAppPurchasePackagesBuilder_.getMessageOrBuilder(index);
           }
         }
-        public java.util.List<? extends com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder> 
+        public java.util.List<? extends com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder> 
              getInAppPurchasePackagesOrBuilderList() {
           if (inAppPurchasePackagesBuilder_ != null) {
             return inAppPurchasePackagesBuilder_.getMessageOrBuilderList();
@@ -6124,25 +6124,25 @@ public final class EventStartupProto {
             return java.util.Collections.unmodifiableList(inAppPurchasePackages_);
           }
         }
-        public com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder addInAppPurchasePackagesBuilder() {
+        public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder addInAppPurchasePackagesBuilder() {
           return getInAppPurchasePackagesFieldBuilder().addBuilder(
-              com.lvl6.proto.InfoProto.InAppPurchasePackageProto.getDefaultInstance());
+              com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.getDefaultInstance());
         }
-        public com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder addInAppPurchasePackagesBuilder(
+        public com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder addInAppPurchasePackagesBuilder(
             int index) {
           return getInAppPurchasePackagesFieldBuilder().addBuilder(
-              index, com.lvl6.proto.InfoProto.InAppPurchasePackageProto.getDefaultInstance());
+              index, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.getDefaultInstance());
         }
-        public java.util.List<com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder> 
+        public java.util.List<com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder> 
              getInAppPurchasePackagesBuilderList() {
           return getInAppPurchasePackagesFieldBuilder().getBuilderList();
         }
         private com.google.protobuf.RepeatedFieldBuilder<
-            com.lvl6.proto.InfoProto.InAppPurchasePackageProto, com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder, com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder> 
+            com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder> 
             getInAppPurchasePackagesFieldBuilder() {
           if (inAppPurchasePackagesBuilder_ == null) {
             inAppPurchasePackagesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-                com.lvl6.proto.InfoProto.InAppPurchasePackageProto, com.lvl6.proto.InfoProto.InAppPurchasePackageProto.Builder, com.lvl6.proto.InfoProto.InAppPurchasePackageProtoOrBuilder>(
+                com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder, com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProtoOrBuilder>(
                     inAppPurchasePackages_,
                     ((bitField0_ & 0x00000001) == 0x00000001),
                     getParentForChildren(),
@@ -7382,21 +7382,21 @@ public final class EventStartupProto {
     
     // repeated .com.lvl6.proto.GoldSaleProto goldSales = 21;
     public static final int GOLDSALES_FIELD_NUMBER = 21;
-    private java.util.List<com.lvl6.proto.InfoProto.GoldSaleProto> goldSales_;
-    public java.util.List<com.lvl6.proto.InfoProto.GoldSaleProto> getGoldSalesList() {
+    private java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> goldSales_;
+    public java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> getGoldSalesList() {
       return goldSales_;
     }
-    public java.util.List<? extends com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder> 
         getGoldSalesOrBuilderList() {
       return goldSales_;
     }
     public int getGoldSalesCount() {
       return goldSales_.size();
     }
-    public com.lvl6.proto.InfoProto.GoldSaleProto getGoldSales(int index) {
+    public com.lvl6.proto.InAppPurchaseProto.GoldSaleProto getGoldSales(int index) {
       return goldSales_.get(index);
     }
-    public com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder getGoldSalesOrBuilder(
+    public com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder getGoldSalesOrBuilder(
         int index) {
       return goldSales_.get(index);
     }
@@ -8771,7 +8771,7 @@ public final class EventStartupProto {
               break;
             }
             case 170: {
-              com.lvl6.proto.InfoProto.GoldSaleProto.Builder subBuilder = com.lvl6.proto.InfoProto.GoldSaleProto.newBuilder();
+              com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder subBuilder = com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addGoldSales(subBuilder.buildPartial());
               break;
@@ -10899,19 +10899,19 @@ public final class EventStartupProto {
       }
       
       // repeated .com.lvl6.proto.GoldSaleProto goldSales = 21;
-      private java.util.List<com.lvl6.proto.InfoProto.GoldSaleProto> goldSales_ =
+      private java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> goldSales_ =
         java.util.Collections.emptyList();
       private void ensureGoldSalesIsMutable() {
         if (!((bitField0_ & 0x00040000) == 0x00040000)) {
-          goldSales_ = new java.util.ArrayList<com.lvl6.proto.InfoProto.GoldSaleProto>(goldSales_);
+          goldSales_ = new java.util.ArrayList<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto>(goldSales_);
           bitField0_ |= 0x00040000;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.InfoProto.GoldSaleProto, com.lvl6.proto.InfoProto.GoldSaleProto.Builder, com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder> goldSalesBuilder_;
+          com.lvl6.proto.InAppPurchaseProto.GoldSaleProto, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder, com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder> goldSalesBuilder_;
       
-      public java.util.List<com.lvl6.proto.InfoProto.GoldSaleProto> getGoldSalesList() {
+      public java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> getGoldSalesList() {
         if (goldSalesBuilder_ == null) {
           return java.util.Collections.unmodifiableList(goldSales_);
         } else {
@@ -10925,7 +10925,7 @@ public final class EventStartupProto {
           return goldSalesBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.InfoProto.GoldSaleProto getGoldSales(int index) {
+      public com.lvl6.proto.InAppPurchaseProto.GoldSaleProto getGoldSales(int index) {
         if (goldSalesBuilder_ == null) {
           return goldSales_.get(index);
         } else {
@@ -10933,7 +10933,7 @@ public final class EventStartupProto {
         }
       }
       public Builder setGoldSales(
-          int index, com.lvl6.proto.InfoProto.GoldSaleProto value) {
+          int index, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto value) {
         if (goldSalesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10947,7 +10947,7 @@ public final class EventStartupProto {
         return this;
       }
       public Builder setGoldSales(
-          int index, com.lvl6.proto.InfoProto.GoldSaleProto.Builder builderForValue) {
+          int index, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder builderForValue) {
         if (goldSalesBuilder_ == null) {
           ensureGoldSalesIsMutable();
           goldSales_.set(index, builderForValue.build());
@@ -10957,7 +10957,7 @@ public final class EventStartupProto {
         }
         return this;
       }
-      public Builder addGoldSales(com.lvl6.proto.InfoProto.GoldSaleProto value) {
+      public Builder addGoldSales(com.lvl6.proto.InAppPurchaseProto.GoldSaleProto value) {
         if (goldSalesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10971,7 +10971,7 @@ public final class EventStartupProto {
         return this;
       }
       public Builder addGoldSales(
-          int index, com.lvl6.proto.InfoProto.GoldSaleProto value) {
+          int index, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto value) {
         if (goldSalesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -10985,7 +10985,7 @@ public final class EventStartupProto {
         return this;
       }
       public Builder addGoldSales(
-          com.lvl6.proto.InfoProto.GoldSaleProto.Builder builderForValue) {
+          com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder builderForValue) {
         if (goldSalesBuilder_ == null) {
           ensureGoldSalesIsMutable();
           goldSales_.add(builderForValue.build());
@@ -10996,7 +10996,7 @@ public final class EventStartupProto {
         return this;
       }
       public Builder addGoldSales(
-          int index, com.lvl6.proto.InfoProto.GoldSaleProto.Builder builderForValue) {
+          int index, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder builderForValue) {
         if (goldSalesBuilder_ == null) {
           ensureGoldSalesIsMutable();
           goldSales_.add(index, builderForValue.build());
@@ -11007,7 +11007,7 @@ public final class EventStartupProto {
         return this;
       }
       public Builder addAllGoldSales(
-          java.lang.Iterable<? extends com.lvl6.proto.InfoProto.GoldSaleProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> values) {
         if (goldSalesBuilder_ == null) {
           ensureGoldSalesIsMutable();
           super.addAll(values, goldSales_);
@@ -11037,18 +11037,18 @@ public final class EventStartupProto {
         }
         return this;
       }
-      public com.lvl6.proto.InfoProto.GoldSaleProto.Builder getGoldSalesBuilder(
+      public com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder getGoldSalesBuilder(
           int index) {
         return getGoldSalesFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder getGoldSalesOrBuilder(
+      public com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder getGoldSalesOrBuilder(
           int index) {
         if (goldSalesBuilder_ == null) {
           return goldSales_.get(index);  } else {
           return goldSalesBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder> 
            getGoldSalesOrBuilderList() {
         if (goldSalesBuilder_ != null) {
           return goldSalesBuilder_.getMessageOrBuilderList();
@@ -11056,25 +11056,25 @@ public final class EventStartupProto {
           return java.util.Collections.unmodifiableList(goldSales_);
         }
       }
-      public com.lvl6.proto.InfoProto.GoldSaleProto.Builder addGoldSalesBuilder() {
+      public com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder addGoldSalesBuilder() {
         return getGoldSalesFieldBuilder().addBuilder(
-            com.lvl6.proto.InfoProto.GoldSaleProto.getDefaultInstance());
+            com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.getDefaultInstance());
       }
-      public com.lvl6.proto.InfoProto.GoldSaleProto.Builder addGoldSalesBuilder(
+      public com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder addGoldSalesBuilder(
           int index) {
         return getGoldSalesFieldBuilder().addBuilder(
-            index, com.lvl6.proto.InfoProto.GoldSaleProto.getDefaultInstance());
+            index, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.InfoProto.GoldSaleProto.Builder> 
+      public java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder> 
            getGoldSalesBuilderList() {
         return getGoldSalesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.InfoProto.GoldSaleProto, com.lvl6.proto.InfoProto.GoldSaleProto.Builder, com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder> 
+          com.lvl6.proto.InAppPurchaseProto.GoldSaleProto, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder, com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder> 
           getGoldSalesFieldBuilder() {
         if (goldSalesBuilder_ == null) {
           goldSalesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.InfoProto.GoldSaleProto, com.lvl6.proto.InfoProto.GoldSaleProto.Builder, com.lvl6.proto.InfoProto.GoldSaleProtoOrBuilder>(
+              com.lvl6.proto.InAppPurchaseProto.GoldSaleProto, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder, com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder>(
                   goldSales_,
                   ((bitField0_ & 0x00040000) == 0x00040000),
                   getParentForChildren(),
@@ -11936,99 +11936,99 @@ public final class EventStartupProto {
     java.lang.String[] descriptorData = {
       "\n\022EventStartup.proto\022\016com.lvl6.proto\032\026Bo" +
       "osterPackStuff.proto\032\nChat.proto\032\nCity.p" +
-      "roto\032\nClan.proto\032\nInfo.proto\032\013Quest.prot" +
-      "o\032\017Structure.proto\032\nUser.proto\"\215\001\n\023Start" +
-      "upRequestProto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionN" +
-      "um\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddres" +
-      "s\030\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForce" +
-      "Tutorial\030\006 \001(\010\"\376\032\n\024StartupResponseProto\022" +
-      "-\n\006sender\030\001 \001(\0132\035.com.lvl6.proto.FullUse" +
-      "rProto\022I\n\rstartupStatus\030\002 \001(\01622.com.lvl6",
-      ".proto.StartupResponseProto.StartupStatu" +
-      "s\022G\n\014updateStatus\030\003 \001(\01621.com.lvl6.proto" +
-      ".StartupResponseProto.UpdateStatus\022O\n\020st" +
-      "artupConstants\030\004 \001(\01325.com.lvl6.proto.St" +
-      "artupResponseProto.StartupConstants\0220\n\ta" +
-      "llCities\030\005 \003(\0132\035.com.lvl6.proto.FullCity" +
-      "Proto\022B\n\032inProgressIncompleteQuests\030\006 \003(" +
-      "\0132\036.com.lvl6.proto.FullQuestProto\022@\n\030inP" +
-      "rogressCompleteQuests\030\007 \003(\0132\036.com.lvl6.p" +
-      "roto.FullQuestProto\0227\n\017availableQuests\030\010",
-      " \003(\0132\036.com.lvl6.proto.FullQuestProto\0227\n\014" +
-      "userClanInfo\030\t \003(\0132!.com.lvl6.proto.Full" +
-      "UserClanProto\022[\n\023attackNotifications\030\n \003" +
-      "(\0132>.com.lvl6.proto.StartupResponseProto" +
-      ".AttackedNotificationProto\022]\n\025referralNo" +
-      "tifications\030\013 \003(\0132>.com.lvl6.proto.Start" +
-      "upResponseProto.ReferralNotificationProt" +
-      "o\022\023\n\013appStoreURL\030\016 \001(\t\022\025\n\rreviewPageURL\030" +
-      "\017 \001(\t\022%\n\035reviewPageConfirmationMessage\030\020" +
-      " \001(\t\022$\n\034playerHasBoughtInAppPurchase\030\021 \001",
-      "(\010\022\030\n\020noticesToPlayers\030\022 \003(\t\022:\n\013globalCh" +
-      "ats\030\023 \003(\0132%.com.lvl6.proto.GroupChatMess" +
-      "ageProto\0228\n\tclanChats\030\024 \003(\0132%.com.lvl6.p" +
-      "roto.GroupChatMessageProto\0220\n\tgoldSales\030" +
-      "\025 \003(\0132\035.com.lvl6.proto.GoldSaleProto\0229\n\r" +
-      "staticStructs\030\026 \003(\0132\".com.lvl6.proto.Ful" +
-      "lStructureProto\022F\n\024rareBoosterPurchases\030" +
-      "\027 \003(\0132(.com.lvl6.proto.RareBoosterPurcha" +
-      "seProto\022\021\n\tkabamNaid\030\030 \001(\t\0222\n\004pcpp\030\031 \003(\013" +
-      "2$.com.lvl6.proto.PrivateChatPostProto\022>",
-      "\n\016expansionCosts\030\032 \003(\0132&.com.lvl6.proto." +
-      "CityExpansionCostProto\032\200\001\n\031AttackedNotif" +
-      "icationProto\0222\n\010attacker\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\032\n\022battleComple" +
-      "teTime\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031Re" +
-      "ferralNotificationProto\0222\n\010referred\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022\023\n\013r" +
-      "ecruitTime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer" +
-      "\030\003 \001(\005\032\246\r\n\020StartupConstants\022H\n\025inAppPurc" +
-      "hasePackages\030\001 \003(\0132).com.lvl6.proto.InAp",
-      "pPurchasePackageProto\022\027\n\017maxLevelForUser" +
-      "\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022f\n\023" +
-      "normStructConstants\030\004 \001(\0132I.com.lvl6.pro" +
-      "to.StartupResponseProto.StartupConstants" +
-      ".NormStructConstants\022n\n\025animatedSpriteOf" +
-      "fsets\030\005 \003(\0132O.com.lvl6.proto.StartupResp" +
-      "onseProto.StartupConstants.AnimatedSprit" +
-      "eOffsetProto\022\025\n\rminNameLength\030\006 \001(\005\022\025\n\rm" +
-      "axNameLength\030\007 \001(\005\022\035\n\025maxLengthOfChatStr" +
-      "ing\030\010 \001(\005\022Z\n\rclanConstants\030\t \001(\0132C.com.l",
-      "vl6.proto.StartupResponseProto.StartupCo" +
-      "nstants.ClanConstants\022p\n\030downloadableNib" +
-      "Constants\030\n \001(\0132N.com.lvl6.proto.Startup" +
-      "ResponseProto.StartupConstants.Downloada" +
-      "bleNibConstants\022\'\n\037numHoursBeforeReshowi" +
-      "ngGoldSale\030\013 \001(\005\022\036\n\026levelToShowRateUsPop" +
-      "up\030\014 \001(\005\022e\n\022touramentConstants\030\r \001(\0132I.c" +
-      "om.lvl6.proto.StartupResponseProto.Start" +
-      "upConstants.TournamentConstants\022\037\n\027fbCon" +
-      "nectRewardDiamonds\030\016 \001(\005\022\023\n\013faqFileName\030",
-      "\017 \001(\t\022<\n\022adminChatUserProto\030\020 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022\037\n\027numBeginn" +
-      "erSalesAllowed\030\021 \001(\005\032y\n\023TournamentConsta" +
-      "nts\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030" +
-      "\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursTo" +
-      "ShowAfterEventEnd\030\004 \001(\005\032c\n\030DownloadableN" +
-      "ibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expan" +
-      "sionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003" +
-      " \001(\t\032\235\001\n\rClanConstants\022 \n\030diamondPriceTo" +
-      "CreateClan\030\001 \001(\005\022 \n\030maxCharLengthForClan",
-      "Name\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescri" +
-      "ption\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004" +
-      " \001(\005\032_\n\031AnimatedSpriteOffsetProto\022\021\n\tima" +
-      "geName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6." +
-      "proto.CoordinateProto\032\367\001\n\023NormStructCons" +
-      "tants\022/\n\'minutesToUpgradeForNormStructMu" +
-      "ltiplier\030\001 \001(\001\022&\n\036incomeFromNormStructMu" +
-      "ltiplier\030\002 \001(\001\022)\n!upgradeStructCoinCostE" +
-      "xponentBase\030\003 \001(\001\022,\n$upgradeStructDiamon" +
-      "dCostExponentBase\030\004 \001(\001\022.\n&diamondCostFo",
-      "rInstantUpgradeMultiplier\030\005 \001(\001\"A\n\014Updat" +
-      "eStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002" +
-      "\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nU" +
-      "SER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021Event" +
-      "StartupProto"
+      "roto\032\nClan.proto\032\023InAppPurchase.proto\032\013Q" +
+      "uest.proto\032\017Structure.proto\032\nUser.proto\"" +
+      "\215\001\n\023StartupRequestProto\022\014\n\004udid\030\001 \001(\t\022\022\n" +
+      "\nversionNum\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\n" +
+      "macAddress\030\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022\027" +
+      "\n\017isForceTutorial\030\006 \001(\010\"\376\032\n\024StartupRespo" +
+      "nseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.prot" +
+      "o.FullUserProto\022I\n\rstartupStatus\030\002 \001(\01622",
+      ".com.lvl6.proto.StartupResponseProto.Sta" +
+      "rtupStatus\022G\n\014updateStatus\030\003 \001(\01621.com.l" +
+      "vl6.proto.StartupResponseProto.UpdateSta" +
+      "tus\022O\n\020startupConstants\030\004 \001(\01325.com.lvl6" +
+      ".proto.StartupResponseProto.StartupConst" +
+      "ants\0220\n\tallCities\030\005 \003(\0132\035.com.lvl6.proto" +
+      ".FullCityProto\022B\n\032inProgressIncompleteQu" +
+      "ests\030\006 \003(\0132\036.com.lvl6.proto.FullQuestPro" +
+      "to\022@\n\030inProgressCompleteQuests\030\007 \003(\0132\036.c" +
+      "om.lvl6.proto.FullQuestProto\0227\n\017availabl",
+      "eQuests\030\010 \003(\0132\036.com.lvl6.proto.FullQuest" +
+      "Proto\0227\n\014userClanInfo\030\t \003(\0132!.com.lvl6.p" +
+      "roto.FullUserClanProto\022[\n\023attackNotifica" +
+      "tions\030\n \003(\0132>.com.lvl6.proto.StartupResp" +
+      "onseProto.AttackedNotificationProto\022]\n\025r" +
+      "eferralNotifications\030\013 \003(\0132>.com.lvl6.pr" +
+      "oto.StartupResponseProto.ReferralNotific" +
+      "ationProto\022\023\n\013appStoreURL\030\016 \001(\t\022\025\n\rrevie" +
+      "wPageURL\030\017 \001(\t\022%\n\035reviewPageConfirmation" +
+      "Message\030\020 \001(\t\022$\n\034playerHasBoughtInAppPur",
+      "chase\030\021 \001(\010\022\030\n\020noticesToPlayers\030\022 \003(\t\022:\n" +
+      "\013globalChats\030\023 \003(\0132%.com.lvl6.proto.Grou" +
+      "pChatMessageProto\0228\n\tclanChats\030\024 \003(\0132%.c" +
+      "om.lvl6.proto.GroupChatMessageProto\0220\n\tg" +
+      "oldSales\030\025 \003(\0132\035.com.lvl6.proto.GoldSale" +
+      "Proto\0229\n\rstaticStructs\030\026 \003(\0132\".com.lvl6." +
+      "proto.FullStructureProto\022F\n\024rareBoosterP" +
+      "urchases\030\027 \003(\0132(.com.lvl6.proto.RareBoos" +
+      "terPurchaseProto\022\021\n\tkabamNaid\030\030 \001(\t\0222\n\004p" +
+      "cpp\030\031 \003(\0132$.com.lvl6.proto.PrivateChatPo",
+      "stProto\022>\n\016expansionCosts\030\032 \003(\0132&.com.lv" +
+      "l6.proto.CityExpansionCostProto\032\200\001\n\031Atta" +
+      "ckedNotificationProto\0222\n\010attacker\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\032\n\022bat" +
+      "tleCompleteTime\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001" +
+      "(\005\032\202\001\n\031ReferralNotificationProto\0222\n\010refe" +
+      "rred\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenT" +
+      "oReferrer\030\003 \001(\005\032\246\r\n\020StartupConstants\022H\n\025" +
+      "inAppPurchasePackages\030\001 \003(\0132).com.lvl6.p",
+      "roto.InAppPurchasePackageProto\022\027\n\017maxLev" +
+      "elForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030" +
+      "\003 \001(\005\022f\n\023normStructConstants\030\004 \001(\0132I.com" +
+      ".lvl6.proto.StartupResponseProto.Startup" +
+      "Constants.NormStructConstants\022n\n\025animate" +
+      "dSpriteOffsets\030\005 \003(\0132O.com.lvl6.proto.St" +
+      "artupResponseProto.StartupConstants.Anim" +
+      "atedSpriteOffsetProto\022\025\n\rminNameLength\030\006" +
+      " \001(\005\022\025\n\rmaxNameLength\030\007 \001(\005\022\035\n\025maxLength" +
+      "OfChatString\030\010 \001(\005\022Z\n\rclanConstants\030\t \001(",
+      "\0132C.com.lvl6.proto.StartupResponseProto." +
+      "StartupConstants.ClanConstants\022p\n\030downlo" +
+      "adableNibConstants\030\n \001(\0132N.com.lvl6.prot" +
+      "o.StartupResponseProto.StartupConstants." +
+      "DownloadableNibConstants\022\'\n\037numHoursBefo" +
+      "reReshowingGoldSale\030\013 \001(\005\022\036\n\026levelToShow" +
+      "RateUsPopup\030\014 \001(\005\022e\n\022touramentConstants\030" +
+      "\r \001(\0132I.com.lvl6.proto.StartupResponsePr" +
+      "oto.StartupConstants.TournamentConstants" +
+      "\022\037\n\027fbConnectRewardDiamonds\030\016 \001(\005\022\023\n\013faq",
+      "FileName\030\017 \001(\t\022<\n\022adminChatUserProto\030\020 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\037\n\027" +
+      "numBeginnerSalesAllowed\030\021 \001(\005\032y\n\023Tournam" +
+      "entConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014loss" +
+      "esWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033n" +
+      "umHoursToShowAfterEventEnd\030\004 \001(\005\032c\n\030Down" +
+      "loadableNibConstants\022\022\n\nmapNibName\030\001 \001(\t" +
+      "\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShoppe" +
+      "NibName\030\003 \001(\t\032\235\001\n\rClanConstants\022 \n\030diamo" +
+      "ndPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharLeng",
+      "thForClanName\030\002 \001(\005\022\'\n\037maxCharLengthForC" +
+      "lanDescription\030\003 \001(\005\022\037\n\027maxCharLengthFor" +
+      "ClanTag\030\004 \001(\005\032_\n\031AnimatedSpriteOffsetPro" +
+      "to\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037." +
+      "com.lvl6.proto.CoordinateProto\032\367\001\n\023NormS" +
+      "tructConstants\022/\n\'minutesToUpgradeForNor" +
+      "mStructMultiplier\030\001 \001(\001\022&\n\036incomeFromNor" +
+      "mStructMultiplier\030\002 \001(\001\022)\n!upgradeStruct" +
+      "CoinCostExponentBase\030\003 \001(\001\022,\n$upgradeStr" +
+      "uctDiamondCostExponentBase\030\004 \001(\001\022.\n&diam",
+      "ondCostForInstantUpgradeMultiplier\030\005 \001(\001" +
+      "\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR" +
+      "_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupSt" +
+      "atus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002" +
+      "B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12125,7 +12125,7 @@ public final class EventStartupProto {
           com.lvl6.proto.ChatProto.getDescriptor(),
           com.lvl6.proto.CityProto.getDescriptor(),
           com.lvl6.proto.ClanProto.getDescriptor(),
-          com.lvl6.proto.InfoProto.getDescriptor(),
+          com.lvl6.proto.InAppPurchaseProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),

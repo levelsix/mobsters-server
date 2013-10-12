@@ -1,0 +1,54 @@
+
+import "MonsterStuff.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventMonsterProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message SubmitMonsterEnhancementRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 enhancingUserMonsterId = 2;
+	repeated int64 feederUserMonsterIds = 3;
+	optional int64 clientTime = 4;
+}
+
+message SubmitMonsterEnhancementResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional EnhanceMonsterStatus status = 2;
+	
+
+	enum EnhanceMonsterStatus {
+		SUCCESS = 1;
+		OTHER_FAIL = 2;
+		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
+		MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT = 4;
+		TRYING_TO_SURPASS_MAX_LEVEL = 5;
+		NOT_ENOUGH_SILVER = 6;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+//mainly used during battle
+message UpdateMonsterHealthRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated FullUserMonsterProto fumps = 2; //contains new durabilities 
+	optional int64 clientTime = 3; //history, tracking purposes
+}
+
+message UpdateMonsterHealthResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated FullUserMonsterProto fums = 2;
+	optional UpdateMonsterHealthStatus status = 3;
+	
+	enum UpdateMonsterHealthStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_FUNDS = 2;
+		FAIL_OTHER = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+

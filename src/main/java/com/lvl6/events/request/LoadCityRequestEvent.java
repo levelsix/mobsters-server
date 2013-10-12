@@ -5,25 +5,25 @@ import java.nio.ByteBuffer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.EventUserProto.LevelUpRequestProto;
+import com.lvl6.proto.EventProto.LoadCityRequestProto;
 
-public class LevelUpRequestEvent extends RequestEvent {
+public class LoadCityRequestEvent extends RequestEvent {
 
-  private LevelUpRequestProto levelUpRequestProto;
+  private LoadCityRequestProto loadCityRequestProto;
   
   /**
    * read the event from the given ByteBuffer to populate this event
    */
   public void read(ByteBuffer buff) {
     try {
-      levelUpRequestProto = LevelUpRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = levelUpRequestProto.getSender().getUserId();
+      loadCityRequestProto = LoadCityRequestProto.parseFrom(ByteString.copyFrom(buff));
+      playerId = loadCityRequestProto.getSender().getUserId();
     } catch (InvalidProtocolBufferException e) {
       e.printStackTrace();
     }
   }
 
-  public LevelUpRequestProto getLevelUpRequestProto() {
-    return levelUpRequestProto;
+  public LoadCityRequestProto getLoadCityRequestProto() {
+    return loadCityRequestProto;
   }
 }

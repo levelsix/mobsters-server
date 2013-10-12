@@ -140,32 +140,32 @@ public final class QuestProto {
     int getBuildStructJobsReqsCount();
     int getBuildStructJobsReqs(int index);
     
-    // optional int32 coinRetrievalReq = 17;
+    // optional int32 coinRetrievalReq = 15;
     boolean hasCoinRetrievalReq();
     int getCoinRetrievalReq();
     
-    // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 18;
+    // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 16;
     boolean hasSpecialQuestActionReq();
     com.lvl6.proto.QuestProto.SpecialQuestAction getSpecialQuestActionReq();
     
-    // optional int32 numComponentsForGood = 19;
+    // optional int32 numComponentsForGood = 17;
     boolean hasNumComponentsForGood();
     int getNumComponentsForGood();
     
-    // optional .com.lvl6.proto.DialogueProto acceptDialogue = 20;
+    // optional .com.lvl6.proto.DialogueProto acceptDialogue = 18;
     boolean hasAcceptDialogue();
     com.lvl6.proto.QuestProto.DialogueProto getAcceptDialogue();
     com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getAcceptDialogueOrBuilder();
     
-    // optional string questGiverName = 21;
+    // optional string questGiverName = 19;
     boolean hasQuestGiverName();
     String getQuestGiverName();
     
-    // optional string questGiverImageSuffix = 22;
+    // optional string questGiverImageSuffix = 20;
     boolean hasQuestGiverImageSuffix();
     String getQuestGiverImageSuffix();
     
-    // optional int32 priority = 23;
+    // optional int32 priority = 21;
     boolean hasPriority();
     int getPriority();
   }
@@ -420,8 +420,8 @@ public final class QuestProto {
       return buildStructJobsReqs_.get(index);
     }
     
-    // optional int32 coinRetrievalReq = 17;
-    public static final int COINRETRIEVALREQ_FIELD_NUMBER = 17;
+    // optional int32 coinRetrievalReq = 15;
+    public static final int COINRETRIEVALREQ_FIELD_NUMBER = 15;
     private int coinRetrievalReq_;
     public boolean hasCoinRetrievalReq() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
@@ -430,8 +430,8 @@ public final class QuestProto {
       return coinRetrievalReq_;
     }
     
-    // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 18;
-    public static final int SPECIALQUESTACTIONREQ_FIELD_NUMBER = 18;
+    // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 16;
+    public static final int SPECIALQUESTACTIONREQ_FIELD_NUMBER = 16;
     private com.lvl6.proto.QuestProto.SpecialQuestAction specialQuestActionReq_;
     public boolean hasSpecialQuestActionReq() {
       return ((bitField0_ & 0x00000800) == 0x00000800);
@@ -440,8 +440,8 @@ public final class QuestProto {
       return specialQuestActionReq_;
     }
     
-    // optional int32 numComponentsForGood = 19;
-    public static final int NUMCOMPONENTSFORGOOD_FIELD_NUMBER = 19;
+    // optional int32 numComponentsForGood = 17;
+    public static final int NUMCOMPONENTSFORGOOD_FIELD_NUMBER = 17;
     private int numComponentsForGood_;
     public boolean hasNumComponentsForGood() {
       return ((bitField0_ & 0x00001000) == 0x00001000);
@@ -450,8 +450,8 @@ public final class QuestProto {
       return numComponentsForGood_;
     }
     
-    // optional .com.lvl6.proto.DialogueProto acceptDialogue = 20;
-    public static final int ACCEPTDIALOGUE_FIELD_NUMBER = 20;
+    // optional .com.lvl6.proto.DialogueProto acceptDialogue = 18;
+    public static final int ACCEPTDIALOGUE_FIELD_NUMBER = 18;
     private com.lvl6.proto.QuestProto.DialogueProto acceptDialogue_;
     public boolean hasAcceptDialogue() {
       return ((bitField0_ & 0x00002000) == 0x00002000);
@@ -463,8 +463,8 @@ public final class QuestProto {
       return acceptDialogue_;
     }
     
-    // optional string questGiverName = 21;
-    public static final int QUESTGIVERNAME_FIELD_NUMBER = 21;
+    // optional string questGiverName = 19;
+    public static final int QUESTGIVERNAME_FIELD_NUMBER = 19;
     private java.lang.Object questGiverName_;
     public boolean hasQuestGiverName() {
       return ((bitField0_ & 0x00004000) == 0x00004000);
@@ -495,8 +495,8 @@ public final class QuestProto {
       }
     }
     
-    // optional string questGiverImageSuffix = 22;
-    public static final int QUESTGIVERIMAGESUFFIX_FIELD_NUMBER = 22;
+    // optional string questGiverImageSuffix = 20;
+    public static final int QUESTGIVERIMAGESUFFIX_FIELD_NUMBER = 20;
     private java.lang.Object questGiverImageSuffix_;
     public boolean hasQuestGiverImageSuffix() {
       return ((bitField0_ & 0x00008000) == 0x00008000);
@@ -527,8 +527,8 @@ public final class QuestProto {
       }
     }
     
-    // optional int32 priority = 23;
-    public static final int PRIORITY_FIELD_NUMBER = 23;
+    // optional int32 priority = 21;
+    public static final int PRIORITY_FIELD_NUMBER = 21;
     private int priority_;
     public boolean hasPriority() {
       return ((bitField0_ & 0x00010000) == 0x00010000);
@@ -615,25 +615,25 @@ public final class QuestProto {
         output.writeInt32(14, buildStructJobsReqs_.get(i));
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(17, coinRetrievalReq_);
+        output.writeInt32(15, coinRetrievalReq_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeEnum(18, specialQuestActionReq_.getNumber());
+        output.writeEnum(16, specialQuestActionReq_.getNumber());
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeInt32(19, numComponentsForGood_);
+        output.writeInt32(17, numComponentsForGood_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeMessage(20, acceptDialogue_);
+        output.writeMessage(18, acceptDialogue_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        output.writeBytes(21, getQuestGiverNameBytes());
+        output.writeBytes(19, getQuestGiverNameBytes());
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        output.writeBytes(22, getQuestGiverImageSuffixBytes());
+        output.writeBytes(20, getQuestGiverImageSuffixBytes());
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeInt32(23, priority_);
+        output.writeInt32(21, priority_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -722,31 +722,31 @@ public final class QuestProto {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(17, coinRetrievalReq_);
+          .computeInt32Size(15, coinRetrievalReq_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(18, specialQuestActionReq_.getNumber());
+          .computeEnumSize(16, specialQuestActionReq_.getNumber());
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(19, numComponentsForGood_);
+          .computeInt32Size(17, numComponentsForGood_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(20, acceptDialogue_);
+          .computeMessageSize(18, acceptDialogue_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(21, getQuestGiverNameBytes());
+          .computeBytesSize(19, getQuestGiverNameBytes());
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(22, getQuestGiverImageSuffixBytes());
+          .computeBytesSize(20, getQuestGiverImageSuffixBytes());
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(23, priority_);
+          .computeInt32Size(21, priority_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1293,28 +1293,28 @@ public final class QuestProto {
               input.popLimit(limit);
               break;
             }
-            case 136: {
+            case 120: {
               bitField0_ |= 0x00004000;
               coinRetrievalReq_ = input.readInt32();
               break;
             }
-            case 144: {
+            case 128: {
               int rawValue = input.readEnum();
               com.lvl6.proto.QuestProto.SpecialQuestAction value = com.lvl6.proto.QuestProto.SpecialQuestAction.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(18, rawValue);
+                unknownFields.mergeVarintField(16, rawValue);
               } else {
                 bitField0_ |= 0x00008000;
                 specialQuestActionReq_ = value;
               }
               break;
             }
-            case 152: {
+            case 136: {
               bitField0_ |= 0x00010000;
               numComponentsForGood_ = input.readInt32();
               break;
             }
-            case 162: {
+            case 146: {
               com.lvl6.proto.QuestProto.DialogueProto.Builder subBuilder = com.lvl6.proto.QuestProto.DialogueProto.newBuilder();
               if (hasAcceptDialogue()) {
                 subBuilder.mergeFrom(getAcceptDialogue());
@@ -1323,17 +1323,17 @@ public final class QuestProto {
               setAcceptDialogue(subBuilder.buildPartial());
               break;
             }
-            case 170: {
+            case 154: {
               bitField0_ |= 0x00040000;
               questGiverName_ = input.readBytes();
               break;
             }
-            case 178: {
+            case 162: {
               bitField0_ |= 0x00080000;
               questGiverImageSuffix_ = input.readBytes();
               break;
             }
-            case 184: {
+            case 168: {
               bitField0_ |= 0x00100000;
               priority_ = input.readInt32();
               break;
@@ -1779,7 +1779,7 @@ public final class QuestProto {
         return this;
       }
       
-      // optional int32 coinRetrievalReq = 17;
+      // optional int32 coinRetrievalReq = 15;
       private int coinRetrievalReq_ ;
       public boolean hasCoinRetrievalReq() {
         return ((bitField0_ & 0x00004000) == 0x00004000);
@@ -1800,7 +1800,7 @@ public final class QuestProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 18;
+      // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 16;
       private com.lvl6.proto.QuestProto.SpecialQuestAction specialQuestActionReq_ = com.lvl6.proto.QuestProto.SpecialQuestAction.REQUEST_JOIN_CLAN;
       public boolean hasSpecialQuestActionReq() {
         return ((bitField0_ & 0x00008000) == 0x00008000);
@@ -1824,7 +1824,7 @@ public final class QuestProto {
         return this;
       }
       
-      // optional int32 numComponentsForGood = 19;
+      // optional int32 numComponentsForGood = 17;
       private int numComponentsForGood_ ;
       public boolean hasNumComponentsForGood() {
         return ((bitField0_ & 0x00010000) == 0x00010000);
@@ -1845,7 +1845,7 @@ public final class QuestProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.DialogueProto acceptDialogue = 20;
+      // optional .com.lvl6.proto.DialogueProto acceptDialogue = 18;
       private com.lvl6.proto.QuestProto.DialogueProto acceptDialogue_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.QuestProto.DialogueProto, com.lvl6.proto.QuestProto.DialogueProto.Builder, com.lvl6.proto.QuestProto.DialogueProtoOrBuilder> acceptDialogueBuilder_;
@@ -1935,7 +1935,7 @@ public final class QuestProto {
         return acceptDialogueBuilder_;
       }
       
-      // optional string questGiverName = 21;
+      // optional string questGiverName = 19;
       private java.lang.Object questGiverName_ = "";
       public boolean hasQuestGiverName() {
         return ((bitField0_ & 0x00040000) == 0x00040000);
@@ -1971,7 +1971,7 @@ public final class QuestProto {
         onChanged();
       }
       
-      // optional string questGiverImageSuffix = 22;
+      // optional string questGiverImageSuffix = 20;
       private java.lang.Object questGiverImageSuffix_ = "";
       public boolean hasQuestGiverImageSuffix() {
         return ((bitField0_ & 0x00080000) == 0x00080000);
@@ -2007,7 +2007,7 @@ public final class QuestProto {
         onChanged();
       }
       
-      // optional int32 priority = 23;
+      // optional int32 priority = 21;
       private int priority_ ;
       public boolean hasPriority() {
         return ((bitField0_ & 0x00100000) == 0x00100000);
@@ -5109,13 +5109,13 @@ public final class QuestProto {
       "\005\022\021\n\tmonsterId\030\n \001(\005\022\035\n\025questsRequiredFo" +
       "rThis\030\013 \003(\005\022\020\n\010taskReqs\030\014 \003(\005\022\035\n\025upgrade" +
       "StructJobsReqs\030\r \003(\005\022\033\n\023buildStructJobsR" +
-      "eqs\030\016 \003(\005\022\030\n\020coinRetrievalReq\030\021 \001(\005\022A\n\025s",
-      "pecialQuestActionReq\030\022 \001(\0162\".com.lvl6.pr" +
+      "eqs\030\016 \003(\005\022\030\n\020coinRetrievalReq\030\017 \001(\005\022A\n\025s",
+      "pecialQuestActionReq\030\020 \001(\0162\".com.lvl6.pr" +
       "oto.SpecialQuestAction\022\034\n\024numComponentsF" +
-      "orGood\030\023 \001(\005\0225\n\016acceptDialogue\030\024 \001(\0132\035.c" +
+      "orGood\030\021 \001(\005\0225\n\016acceptDialogue\030\022 \001(\0132\035.c" +
       "om.lvl6.proto.DialogueProto\022\026\n\016questGive" +
-      "rName\030\025 \001(\t\022\035\n\025questGiverImageSuffix\030\026 \001" +
-      "(\t\022\020\n\010priority\030\027 \001(\005\"\351\002\n\rDialogueProto\022G" +
+      "rName\030\023 \001(\t\022\035\n\025questGiverImageSuffix\030\024 \001" +
+      "(\t\022\020\n\010priority\030\025 \001(\005\"\351\002\n\rDialogueProto\022G" +
       "\n\rspeechSegment\030\001 \003(\01320.com.lvl6.proto.D" +
       "ialogueProto.SpeechSegmentProto\032\216\002\n\022Spee" +
       "chSegmentProto\022Q\n\007speaker\030\001 \001(\0162@.com.lv" +

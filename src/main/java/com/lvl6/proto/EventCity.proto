@@ -1,5 +1,6 @@
 
 import "City.proto";
+import "Quest.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -57,3 +58,28 @@ message PurchaseCityExpansionResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+message LoadCityRequestProto {
+     optional MinimumUserProto sender = 1;
+     optional int32 cityId = 2;    
+}
+
+																						//DONE
+message LoadCityResponseProto {
+     optional MinimumUserProto sender = 1;
+     optional LoadCityStatus status = 2;
+
+	     //client shouldnt show bars if already at max city level
+     repeated CityElementProto cityElements = 3;
+     optional int32 cityId = 4;
+     repeated FullUserQuestDataLargeProto inProgressUserQuestDataInCity = 5;
+     
+     enum LoadCityStatus {
+     	SUCCESS = 1;
+     	NOT_ACCESSIBLE_TO_USER = 2;
+     	OTHER_FAIL = 3;
+     }    
+}
+
+//------------------------------------------------------------------------------------------
+			

@@ -21,14 +21,13 @@ message FullQuestProto {
      repeated int32 taskReqs = 12;
      repeated int32 upgradeStructJobsReqs = 13;
      repeated int32 buildStructJobsReqs = 14;
-     optional int32 coinRetrievalReq = 17;
-     optional SpecialQuestAction specialQuestActionReq = 18; 
-     optional int32 numComponentsForGood = 19;
-     optional DialogueProto acceptDialogue = 20;
-     
-     optional string questGiverName = 21;
-     optional string questGiverImageSuffix = 22;
-     optional int32 priority = 23;
+     optional int32 coinRetrievalReq = 15;
+     optional SpecialQuestAction specialQuestActionReq = 16; 
+     optional int32 numComponentsForGood = 17;
+     optional DialogueProto acceptDialogue = 18;
+     optional string questGiverName = 19;
+     optional string questGiverImageSuffix = 20;
+     optional int32 priority = 21;
 }
 
 //------------------------------------------------------------------------------------------
@@ -43,7 +42,6 @@ message DialogueProto {
 		enum DialogueSpeaker {
 			PLAYER_TYPE = 1;
 			TUTORIAL_GIRL = 2;
-
 			QUESTGIVER_1 = 3;		// Farmer Mitch
 			QUESTGIVER_2 = 4;		// Captain Riz
 			QUESTGIVER_3 = 5;		// Sean The Brave

@@ -1,0 +1,59 @@
+
+import "InAppPurchase.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventInAppPurchaseProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+message InAppPurchaseRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string receipt = 2;
+	optional string localcents = 3;
+	optional string localcurrency = 4;
+	optional string locale = 5;
+	optional string ipaddr = 6;
+}
+
+																						//DONE
+message InAppPurchaseResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional InAppPurchaseStatus status = 2;
+	optional int32 diamondsGained = 3;
+	optional int32 coinsGained = 4;
+	optional string packageName = 5;
+	optional double packagePrice = 6;
+	optional string receipt = 7;
+	
+	enum InAppPurchaseStatus {
+		SUCCESS = 1;
+		FAIL = 2;
+		DUPLICATE_RECEIPT = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message EarnFreeDiamondsRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional EarnFreeDiamondsType freeDiamondsType = 2;
+	optional int64 clientTime = 3;
+		
+}
+
+message EarnFreeDiamondsResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional EarnFreeDiamondsStatus status = 2;
+	optional EarnFreeDiamondsType freeDiamondsType = 3;
+	
+	enum EarnFreeDiamondsStatus {
+		SUCCESS = 1;
+		CLIENT_TOO_APART_FROM_SERVER_TIME = 2;
+		METHOD_NOT_SUPPORTED = 3;
+		OTHER_FAIL = 4;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+

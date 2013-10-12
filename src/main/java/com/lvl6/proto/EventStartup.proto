@@ -3,7 +3,7 @@ import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
-import "Info.proto";
+import "InAppPurchase.proto";
 import "Quest.proto";
 import "Structure.proto";
 import "User.proto";

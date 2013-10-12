@@ -17,7 +17,6 @@ message UserCreateRequestProto {
      optional string name = 2;
      optional string referrerCode = 3;
      optional string deviceToken = 4;
-     
      optional int64 timeOfStructPurchase = 5;
      optional int64 timeOfStructBuild = 6;
      optional CoordinateProto structCoords = 7;
@@ -50,7 +49,6 @@ message LevelUpRequestProto {
 message LevelUpResponseProto {
      optional MinimumUserProto sender = 1;
      optional LevelUpStatus status = 2;
-     
      repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
 
 	enum LevelUpStatus {
@@ -63,10 +61,29 @@ message LevelUpResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-message UpdateClientUserResponseProto {
-     optional FullUserProto sender = 1;
-     optional int64 timeOfUserUpdate = 2;				//new Date().getTime(); milliseconds since 1/1/70
+message RetrieveUsersForUserIdsRequestProto {
+    optional MinimumUserProto sender = 1;
+	repeated int32 requestedUserIds = 2;
+}
+
+																						//DONE
+message RetrieveUsersForUserIdsResponseProto {
+    optional MinimumUserProto sender = 1;
+	repeated FullUserProto requestedUsers = 2;
 }
 
 //------------------------------------------------------------------------------------------
 
+message LogoutRequestProto {
+	optional MinimumUserProto sender = 1;
+}
+
+//------------------------------------------------------------------------------------------
+	
+message UpdateClientUserResponseProto {
+     optional FullUserProto sender = 1;
+     optional int64 timeOfUserUpdate = 2;                               //new Date().getTime(); milliseconds since 1/1/70
+}
+
+//------------------------------------------------------------------------------------------
+	

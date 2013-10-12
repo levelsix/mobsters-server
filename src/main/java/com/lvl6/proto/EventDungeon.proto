@@ -1,0 +1,69 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS REQUIRED that represents which client sent it/triggered it 
+
+import "MonsterStuff.proto";
+import "Task.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventDungeonProto";
+
+message BeginDungeonRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 clientTime = 2;
+	optional int32 taskId = 3; 
+}
+
+message BeginDungeonResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated TaskStageProto tsp = 2;
+	optional int64 userTaskId = 3;
+	optional BeginDungeonStatus status = 4;
+	
+	enum BeginDungeonStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_STAMERGY = 2;
+		FAIL_OTHER = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message EndDungeonRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 userTaskId = 2;
+	optional bool userWon = 3; 
+	optional int64 clientTime = 4;
+}
+
+message EndDungeonResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional EndDungeonStatus status = 2;
+	
+	
+	enum EndDungeonStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message ReviveInDungeonRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 userTaskId = 2;
+	optional int64 clientTime = 3; //tracking purposes 
+}
+
+message ReviveInDungeonResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional ReviveInDungeonStatus status = 2;
+	
+	enum ReviveInDungeonStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_FUNDS = 2;
+		FAIL_OTHER = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------

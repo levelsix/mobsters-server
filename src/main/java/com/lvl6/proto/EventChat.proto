@@ -1,0 +1,101 @@
+
+import "Chat.proto";
+import "User.proto";
+
+package com.lvl6.proto;
+
+option java_outer_classname = "EventChatProto";
+//DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
+
+																				//DONE
+message SendAdminMessageResponseProto {
+     optional int32 senderId = 1;
+     optional string message = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message GeneralNotificationResponseProto {
+	optional string title = 1;
+	optional string subtitle = 2;
+	optional ColorProto rgb = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message SendGroupChatRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional GroupChatScope scope = 2;
+	optional string chatMessage = 3;
+	optional int64 clientTime = 4;
+}
+
+message SendGroupChatResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional SendGroupChatStatus status = 2;
+	
+	enum SendGroupChatStatus {
+		SUCCESS = 1;
+		TOO_LONG = 2;
+		OTHER_FAIL = 3;
+		BANNED = 4;
+	}
+}
+
+message ReceivedGroupChatResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional string chatMessage = 2;
+	optional GroupChatScope scope = 3;
+	optional bool isAdmin = 4;
+}
+
+//------------------------------------------------------------------------------------
+
+message PrivateChatPostRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 recipientId = 2;
+	optional string content = 3;
+}
+
+																						//DONE
+message PrivateChatPostResponseProto {
+	 optional MinimumUserProto sender = 1;
+     optional PrivateChatPostStatus status = 2;
+	 optional PrivateChatPostProto post = 3;
+	
+     enum PrivateChatPostStatus {
+     	SUCCESS = 1;
+     	NO_CONTENT_SENT = 2;
+     	POST_TOO_LARGE = 3;
+     	OTHER_FAIL = 4;
+     	BANNED = 5;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message RetrievePrivateChatPostsRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 otherUserId = 2;
+	
+	//all prior posts not including this id
+	//if this is not set then return most recent ones
+	optional int32 beforePrivateChatId = 3;
+	
+}
+
+message RetrievePrivateChatPostsResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated GroupChatMessageProto posts = 2;
+	optional int32 beforePrivateChatId = 3;
+	optional RetrievePrivateChatPostsStatus status = 4;
+	optional int32 otherUserId = 5;
+
+	enum RetrievePrivateChatPostsStatus {
+		SUCCESS = 1;
+		FAIL = 2;
+	}	
+}
+
+//------------------------------------------------------------------------------------
+

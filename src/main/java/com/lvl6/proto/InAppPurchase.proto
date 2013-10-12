@@ -1,10 +1,10 @@
 package com.lvl6.proto;
 
-option java_outer_classname = "InfoProto";
+option java_outer_classname = "InAppPurchaseProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 message InAppPurchasePackageProto {
-	optional string packageId = 1;
+	optional string iapPackageId = 1;
 	optional int32 currencyAmount = 2;
 	optional bool isGold = 3;
 	optional string imageName = 4;
@@ -30,47 +30,6 @@ message GoldSaleProto {
 	optional string packageS5SaleIdentifier = 15;
 	optional bool isBeginnerSale = 16;
 }
-
-//-------------------------------------------------------------------------------------
-/*comment these out
-message LockBoxEventProto {
-	optional int32 lockBoxEventId = 1;
-	optional int64 startDate = 2;
-	optional int64 endDate = 3;
-	optional string lockBoxImageName = 4;
-	optional string eventName = 5;
-	repeated LockBoxItemProto items = 6;
-	optional string descriptionString = 7;
-	optional string descriptionImageName = 8;
-	optional string tagImageName = 9;
-}
-
-message LockBoxItemProto {
-	optional int32 lockBoxItemId = 1;
-	optional int32 lockBoxEventId = 2;
-	optional float chanceToUnlock = 3;
-	optional string name = 4;
-	optional string imageName = 5;
-	optional int32 redeemForNumBoosterItems = 6;
-	optional bool isGoldBoosterPack = 7;
-}
-
-message UserLockBoxEventProto {
-	optional int32 lockBoxEventId = 1;
-	optional int32 userId = 2;
-	optional int32 numLockBoxes = 3;
-	optional int32 numTimesCompleted = 4;
-	optional int64 lastPickTime = 5;
-	repeated UserLockBoxItemProto items = 6;
-	optional bool hasBeenRedeemed = 7;
-}
-
-message UserLockBoxItemProto {
-	optional int32 lockBoxItemId = 1;
-	optional int32 userId = 2;
-	optional int32 quantity = 3;
-}
-	*/
 
 //------------------------------------------------------------------------------------------
 

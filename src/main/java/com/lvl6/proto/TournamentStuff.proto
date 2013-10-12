@@ -1,5 +1,6 @@
 
 import "Chat.proto";
+import "User.proto";
 
 package com.lvl6.proto;
 
@@ -18,7 +19,7 @@ message TournamentProto {
 //------------------------------------------------------------------------------------------
 
 message TournamentRewardProto {
-	optional int32 leaderboardEventId = 1;
+	optional int32 tournamentEventId = 1;
 	optional int32 minRank = 2;
 	optional int32 maxRank = 3;
 	optional int32 goldRewarded = 4;
@@ -26,3 +27,14 @@ message TournamentRewardProto {
 	optional string prizeImageName = 6;
 	optional ColorProto titleColor = 7;
 }
+
+//------------------------------------------------------------------------------------------
+
+message MinimumUserProtoWithLevelForTournament {
+       optional MinimumUserProto minUserProto = 1;
+       optional int32 level = 2;
+       optional int32 tournamentRank = 3;
+       optional double tournamentScore = 4;
+}
+
+//------------------------------------------------------------------------------------------
