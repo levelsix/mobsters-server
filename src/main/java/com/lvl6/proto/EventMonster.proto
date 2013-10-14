@@ -40,7 +40,7 @@ message UpdateMonsterHealthRequestProto {
 
 message UpdateMonsterHealthResponseProto {
 	optional MinimumUserProto sender = 1;
-	repeated FullUserMonsterProto fums = 2;
+	repeated FullUserMonsterProto fumps = 2;
 	optional UpdateMonsterHealthStatus status = 3;
 	
 	enum UpdateMonsterHealthStatus {

@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.EventProto.RetrieveCurrencyFromNormStructureRequestProto;
+import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
 
 public class RetrieveCurrencyFromNormStructureRequestEvent extends RequestEvent{
   private RetrieveCurrencyFromNormStructureRequestProto retrieveCurrencyFromNormStructureRequestProto;

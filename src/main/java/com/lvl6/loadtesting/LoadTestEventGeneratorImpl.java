@@ -5,11 +5,11 @@ import java.nio.ByteBuffer;
 import org.springframework.integration.Message;
 import org.springframework.integration.message.GenericMessage;
 
-import com.lvl6.proto.EventProto.StartupRequestProto;
-import com.lvl6.proto.EventProto.StartupRequestProto.Builder;
-import com.lvl6.proto.EventProto.UserCreateRequestProto;
-import com.lvl6.proto.EventProto.UserQuestDetailsRequestProto;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto.Builder;
+import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
+import com.lvl6.proto.EventQuestProto.UserQuestDetailsRequestProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 
 public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {

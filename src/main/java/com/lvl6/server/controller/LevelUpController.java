@@ -18,11 +18,11 @@ import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.LevelUpRequestProto;
-import com.lvl6.proto.EventProto.LevelUpResponseProto;
-import com.lvl6.proto.EventProto.LevelUpResponseProto.Builder;
-import com.lvl6.proto.EventProto.LevelUpResponseProto.LevelUpStatus;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventUserProto.LevelUpRequestProto;
+import com.lvl6.proto.EventUserProto.LevelUpResponseProto;
+import com.lvl6.proto.EventUserProto.LevelUpResponseProto.Builder;
+import com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
@@ -80,11 +80,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (legitLevelUp) {
         int newNextLevel = user.getLevel() + 2;
         int expRequiredForNewNextLevel = LevelsRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(newNextLevel);
-        resBuilder.setNewNextLevel(newNextLevel);
-        resBuilder.setExperienceRequiredForNewNextLevel(expRequiredForNewNextLevel);
 
         int newLevel = user.getLevel() + 1;
-        resBuilder.setNewLevel(newLevel);
 //        levelBeforeLeveling = user.getLevel();
 //        levelAfterLeveling = newLevel;
 

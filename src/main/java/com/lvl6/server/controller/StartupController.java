@@ -36,63 +36,44 @@ import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.RetrieveStaticDataResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
-import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
 import com.lvl6.info.CityExpansionCost;
-import com.lvl6.info.CityGem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
-import com.lvl6.info.ClanTower;
-import com.lvl6.info.DailyBonusReward;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.PlayerWallPost;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
-import com.lvl6.info.UserBoss;
 import com.lvl6.info.UserClan;
-import com.lvl6.info.UserDailyBonusRewardHistory;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.KabamProperties;
-import com.lvl6.proto.EventProto.RetrieveStaticDataResponseProto;
-import com.lvl6.proto.EventProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
-import com.lvl6.proto.EventProto.StartupRequestProto;
-import com.lvl6.proto.EventProto.StartupResponseProto;
-import com.lvl6.proto.EventProto.StartupResponseProto.Builder;
-import com.lvl6.proto.EventProto.StartupResponseProto.DailyBonusInfo;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupStatus;
-import com.lvl6.proto.EventProto.StartupResponseProto.UpdateStatus;
-import com.lvl6.proto.InfoProto.BoosterPackProto;
-import com.lvl6.proto.InfoProto.CityExpansionCostProto;
-import com.lvl6.proto.InfoProto.CityGemProto;
-import com.lvl6.proto.InfoProto.FullUserBossProto;
-import com.lvl6.proto.InfoProto.FullUserProto;
-import com.lvl6.proto.InfoProto.GoldSaleProto;
-import com.lvl6.proto.InfoProto.GroupChatMessageProto;
-import com.lvl6.proto.InfoProto.PrivateChatPostProto;
-import com.lvl6.proto.InfoProto.RareBoosterPurchaseProto;
+import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
+import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.ChatProto.PrivateChatPostProto;
+import com.lvl6.proto.CityProto.CityExpansionCostProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
+import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto;
+import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
+import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.ClanTowerRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.PlayerWallPostRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
-import com.lvl6.retrieveutils.UserBossRetrieveUtils;
-import com.lvl6.retrieveutils.UserDailyBonusRewardHistoryRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityGemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.DailyBonusRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
@@ -211,10 +192,6 @@ public class StartupController extends EventController {
           setCitiesAndUserCityInfos(resBuilder, user);
           setInProgressAndAvailableQuests(resBuilder, user);
           setUserEquipsAndEquips(resBuilder, user);
-          resBuilder.setExperienceRequiredForNextLevel(LevelsRequiredExperienceRetrieveUtils
-              .getRequiredExperienceForLevel(user.getLevel() + 1));
-          resBuilder.setExperienceRequiredForCurrentLevel(LevelsRequiredExperienceRetrieveUtils
-              .getRequiredExperienceForLevel(user.getLevel()));
           setNotifications(resBuilder, user);
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
@@ -225,7 +202,6 @@ public class StartupController extends EventController {
           setChatMessages(resBuilder, user);
           setBoosterPurchases(resBuilder);
           setGoldSales(resBuilder, user);
-          resBuilder.addAllClanTierLevels(MiscMethods.getAllClanTierLevelProtos());
           // if(server.lockClanTowersTable()) {
           setClanTowers(resBuilder);
           // }
@@ -321,18 +297,18 @@ public class StartupController extends EventController {
   	}
   }
 
-  private void setLivingBossesForUser(Builder resBuilder, User aUser) {
-    int userId = aUser.getId();
-    boolean livingBossesOnly = true;
-    List<UserBoss> userBosses = UserBossRetrieveUtils
-        .getUserBossesForUserId(userId, livingBossesOnly);
-
-    for (UserBoss ub : userBosses) {
-      FullUserBossProto ubp = CreateInfoProtoUtils
-          .createFullUserBossProtoFromUserBoss(ub);
-      resBuilder.addLivingBosses(ubp);
-    }
-  }
+//  private void setLivingBossesForUser(Builder resBuilder, User aUser) {
+//    int userId = aUser.getId();
+//    boolean livingBossesOnly = true;
+//    List<UserBoss> userBosses = UserBossRetrieveUtils
+//        .getUserBossesForUserId(userId, livingBossesOnly);
+//
+//    for (UserBoss ub : userBosses) {
+//      FullUserBossProto ubp = CreateInfoProtoUtils
+//          .createFullUserBossProtoFromUserBoss(ub);
+//      resBuilder.addLivingBosses(ubp);
+//    }
+//  }
 
 //  private void setAllBosses(Builder resBuilder, UserType type) {
 //    Map<Integer, Monster> bossIdsToBosses = 
@@ -416,18 +392,6 @@ public class StartupController extends EventController {
     resBuilder.addAllPcpp(pcppList);
   }
 
-  private void setCityGems(Builder b) {
-    //sending to the client all the active city gems
-    Map<Integer, CityGem> activeGemsForAllCities = 
-        CityGemRetrieveUtils.getActiveCityGemIdsToCityGems();
-
-    for (CityGem cg : activeGemsForAllCities.values()) {
-      CityGemProto cgp = CreateInfoProtoUtils.createCityGemProto(cg);
-      b.addGemsForAllCities(cgp);
-    }
-
-  }
-
   private Map<Integer, Integer> aggregateOtherUserIdsAndPrivateChatPost(
       Map<Integer, PrivateChatPost> postsUserReceived, Map<Integer, PrivateChatPost> postsUserSent,
       Map<Integer, PrivateChatPost> postIdsToPrivateChatPosts) {
@@ -506,14 +470,6 @@ public class StartupController extends EventController {
       }
     }
     return clanIdsToUserIdSet;
-  }
-
-  private void setClanTowers(StartupResponseProto.Builder resBuilder) {
-    List<ClanTower> towers = ClanTowerRetrieveUtils.getAllClanTowers();
-
-    for (ClanTower tower : towers) {
-      resBuilder.addClanTowers(CreateInfoProtoUtils.createClanTowerProtoFromClanTower(tower));
-    }
   }
 
   // retrieve's the active leaderboard event prizes and rewards for the events
@@ -802,187 +758,187 @@ public class StartupController extends EventController {
 
   // returns the total number of consecutive days the user logged in,
   // awards user if user logged in for an additional consecutive day
-  private int setDailyBonusInfo(Builder resBuilder, User user, Timestamp now) {
-    // will keep track of total consecutive days user has logged in, just
-    // for funzies
-    List<Integer> numConsecDaysList = new ArrayList<Integer>();
-    int totalConsecutiveDaysPlayed = 1;
-    List<Boolean> rewardUserList = new ArrayList<Boolean>();
-    boolean rewardUser = false;
-
-    int consecutiveDaysPlayed = determineCurrentConsecutiveDay(user, now, numConsecDaysList,
-        rewardUserList);
-    if (!numConsecDaysList.isEmpty()) {
-      totalConsecutiveDaysPlayed = numConsecDaysList.get(0);
-      rewardUser = rewardUserList.get(0);
-    }
-
-    DailyBonusReward rewardForUser = determineRewardForUser(user);
-    // function does nothing if null reward was returned from
-    // determineRewardForUser
-    Map<String, Integer> currentDayReward = selectRewardFromDailyBonusReward(rewardForUser,
-        consecutiveDaysPlayed);
-
-    List<Integer> equipIdRewardedList = new ArrayList<Integer>();
-    // function does nothing if previous function returned null, or
-    // either updates user's money or "purchases" booster pack for user
-    boolean successful = writeDailyBonusRewardToDB(user, currentDayReward, rewardUser, now,
-        equipIdRewardedList);
-    if (successful) {
-      int equipIdRewarded = equipIdRewardedList.get(0);
-      writeToUserDailyBonusRewardHistory(user, currentDayReward, consecutiveDaysPlayed, now,
-          equipIdRewarded);
-    }
-    setDailyBonusStuff(resBuilder, user, rewardUser, rewardForUser);
-    return totalConsecutiveDaysPlayed;
-  }
+//  private int setDailyBonusInfo(Builder resBuilder, User user, Timestamp now) {
+//    // will keep track of total consecutive days user has logged in, just
+//    // for funzies
+//    List<Integer> numConsecDaysList = new ArrayList<Integer>();
+//    int totalConsecutiveDaysPlayed = 1;
+//    List<Boolean> rewardUserList = new ArrayList<Boolean>();
+//    boolean rewardUser = false;
+//
+//    int consecutiveDaysPlayed = determineCurrentConsecutiveDay(user, now, numConsecDaysList,
+//        rewardUserList);
+//    if (!numConsecDaysList.isEmpty()) {
+//      totalConsecutiveDaysPlayed = numConsecDaysList.get(0);
+//      rewardUser = rewardUserList.get(0);
+//    }
+//
+//    DailyBonusReward rewardForUser = determineRewardForUser(user);
+//    // function does nothing if null reward was returned from
+//    // determineRewardForUser
+//    Map<String, Integer> currentDayReward = selectRewardFromDailyBonusReward(rewardForUser,
+//        consecutiveDaysPlayed);
+//
+//    List<Integer> equipIdRewardedList = new ArrayList<Integer>();
+//    // function does nothing if previous function returned null, or
+//    // either updates user's money or "purchases" booster pack for user
+//    boolean successful = writeDailyBonusRewardToDB(user, currentDayReward, rewardUser, now,
+//        equipIdRewardedList);
+//    if (successful) {
+//      int equipIdRewarded = equipIdRewardedList.get(0);
+//      writeToUserDailyBonusRewardHistory(user, currentDayReward, consecutiveDaysPlayed, now,
+//          equipIdRewarded);
+//    }
+//    setDailyBonusStuff(resBuilder, user, rewardUser, rewardForUser);
+//    return totalConsecutiveDaysPlayed;
+//  }
 
   // totalConsecutiveDaysList will contain one element the actual number of
   // consecutive
   // days the user has logged into our game, not really necessary to keep
   // track...
-  private int determineCurrentConsecutiveDay(User user, Timestamp now,
-      List<Integer> totalConsecutiveDaysList, List<Boolean> rewardUserList) {
-    // SETTING STUFF UP
-    int userId = user.getId();
-    UserDailyBonusRewardHistory lastReward = UserDailyBonusRewardHistoryRetrieveUtils
-        .getLastDailyRewardAwardedForUserId(userId);
-    Date nowDate = new Date(now.getTime());
-    long nowDateMillis = nowDate.getTime();
+//  private int determineCurrentConsecutiveDay(User user, Timestamp now,
+//      List<Integer> totalConsecutiveDaysList, List<Boolean> rewardUserList) {
+//    // SETTING STUFF UP
+//    int userId = user.getId();
+//    UserDailyBonusRewardHistory lastReward = UserDailyBonusRewardHistoryRetrieveUtils
+//        .getLastDailyRewardAwardedForUserId(userId);
+//    Date nowDate = new Date(now.getTime());
+//    long nowDateMillis = nowDate.getTime();
+//
+//    if (null == lastReward) {
+//      log.info("user has never received a daily bonus reward. Setting consecutive days played to 1.");
+//      totalConsecutiveDaysList.add(1);
+//      rewardUserList.add(true);
+//      return 1;
+//    }
+//    // let days = consecutive day amount corresponding to the reward user
+//    // was given
+//    // if reward was more than one day ago (in past), return 1
+//    // else if user was rewarded yesterday return the (1 + days)
+//    // else reward was today return days
+//    int nthConsecutiveDay = lastReward.getNthConsecutiveDay();
+//    Date dateLastAwarded = lastReward.getDateAwarded();
+//    long dateLastMillis = dateLastAwarded.getTime();
+//    boolean awardedInThePast = nowDateMillis > dateLastMillis;
+//
+//    int dayDiff = MiscMethods.dateDifferenceInDays(dateLastAwarded, nowDate);
+//    // log.info("dateLastAwarded=" + dateLastAwarded + ", nowDate=" +
+//    // nowDate + ", day difference=" + dayDiff);
+//    if (1 < dayDiff && awardedInThePast) {
+//      // log.info("user broke their logging in streak. previous daily bonus reward: "
+//      // + lastReward
+//      // + ", now=" + now);
+//      // been a while since user last logged in
+//      totalConsecutiveDaysList.add(1);
+//      rewardUserList.add(true);
+//      return 1;
+//    } else if (1 == dayDiff && awardedInThePast) {
+//      // log.info("awarding user. previous daily bonus reward: " +
+//      // lastReward + ", now=" + now);
+//      // user logged in yesterday
+//      totalConsecutiveDaysList.add(user.getNumConsecutiveDaysPlayed() + 1);
+//      rewardUserList.add(true);
+//      return nthConsecutiveDay % ControllerConstants.STARTUP__DAILY_BONUS_MAX_CONSECUTIVE_DAYS + 1;
+//    } else {
+//      // either user logged in today or user tried faking time, but who
+//      // cares...
+//      totalConsecutiveDaysList.add(user.getNumConsecutiveDaysPlayed());
+//      rewardUserList.add(false);
+//      // log.info("user already collected his daily reward. previous daily bonus reward: "
+//      // + lastReward + ", now=" + now);
+//      return nthConsecutiveDay;
+//    }
+//  }
 
-    if (null == lastReward) {
-      log.info("user has never received a daily bonus reward. Setting consecutive days played to 1.");
-      totalConsecutiveDaysList.add(1);
-      rewardUserList.add(true);
-      return 1;
-    }
-    // let days = consecutive day amount corresponding to the reward user
-    // was given
-    // if reward was more than one day ago (in past), return 1
-    // else if user was rewarded yesterday return the (1 + days)
-    // else reward was today return days
-    int nthConsecutiveDay = lastReward.getNthConsecutiveDay();
-    Date dateLastAwarded = lastReward.getDateAwarded();
-    long dateLastMillis = dateLastAwarded.getTime();
-    boolean awardedInThePast = nowDateMillis > dateLastMillis;
+//  private DailyBonusReward determineRewardForUser(User aUser) {
+//    Map<Integer, DailyBonusReward> allDailyRewards = DailyBonusRewardRetrieveUtils
+//        .getDailyBonusRewardIdsToDailyBonusRewards();
+//    // sanity check, exit if it fails
+//    if (null == allDailyRewards || allDailyRewards.isEmpty()) {
+//      log.error("unexpected error: There are no daily bonus rewards set up in the daily_bonus_reward table");
+//      return null;
+//    }
+//
+//    int level = aUser.getLevel();
+//    // determine daily bonus reward for this user's level, exit if there it
+//    // doesn't exist
+//    DailyBonusReward reward = selectDailyBonusRewardForLevel(allDailyRewards, level);
+//    if (null == reward) {
+//      log.error("unexpected error: no daily bonus rewards available for level=" + level);
+//    }
+//    return reward;
+//  }
 
-    int dayDiff = MiscMethods.dateDifferenceInDays(dateLastAwarded, nowDate);
-    // log.info("dateLastAwarded=" + dateLastAwarded + ", nowDate=" +
-    // nowDate + ", day difference=" + dayDiff);
-    if (1 < dayDiff && awardedInThePast) {
-      // log.info("user broke their logging in streak. previous daily bonus reward: "
-      // + lastReward
-      // + ", now=" + now);
-      // been a while since user last logged in
-      totalConsecutiveDaysList.add(1);
-      rewardUserList.add(true);
-      return 1;
-    } else if (1 == dayDiff && awardedInThePast) {
-      // log.info("awarding user. previous daily bonus reward: " +
-      // lastReward + ", now=" + now);
-      // user logged in yesterday
-      totalConsecutiveDaysList.add(user.getNumConsecutiveDaysPlayed() + 1);
-      rewardUserList.add(true);
-      return nthConsecutiveDay % ControllerConstants.STARTUP__DAILY_BONUS_MAX_CONSECUTIVE_DAYS + 1;
-    } else {
-      // either user logged in today or user tried faking time, but who
-      // cares...
-      totalConsecutiveDaysList.add(user.getNumConsecutiveDaysPlayed());
-      rewardUserList.add(false);
-      // log.info("user already collected his daily reward. previous daily bonus reward: "
-      // + lastReward + ", now=" + now);
-      return nthConsecutiveDay;
-    }
-  }
-
-  private DailyBonusReward determineRewardForUser(User aUser) {
-    Map<Integer, DailyBonusReward> allDailyRewards = DailyBonusRewardRetrieveUtils
-        .getDailyBonusRewardIdsToDailyBonusRewards();
-    // sanity check, exit if it fails
-    if (null == allDailyRewards || allDailyRewards.isEmpty()) {
-      log.error("unexpected error: There are no daily bonus rewards set up in the daily_bonus_reward table");
-      return null;
-    }
-
-    int level = aUser.getLevel();
-    // determine daily bonus reward for this user's level, exit if there it
-    // doesn't exist
-    DailyBonusReward reward = selectDailyBonusRewardForLevel(allDailyRewards, level);
-    if (null == reward) {
-      log.error("unexpected error: no daily bonus rewards available for level=" + level);
-    }
-    return reward;
-  }
-
-  private DailyBonusReward selectDailyBonusRewardForLevel(Map<Integer, DailyBonusReward> allRewards,
-      int userLevel) {
-    DailyBonusReward returnValue = null;
-    for (int id : allRewards.keySet()) {
-      DailyBonusReward dbr = allRewards.get(id);
-      int minLevel = dbr.getMinLevel();
-      int maxLevel = dbr.getMaxLevel();
-      if (minLevel <= userLevel && userLevel <= maxLevel) {
-        // we found the reward to return
-        returnValue = dbr;
-        break;
-      }
-    }
-    return returnValue;
-  }
-
-  private Map<String, Integer> selectRewardFromDailyBonusReward(DailyBonusReward rewardForUser,
-      int numConsecutiveDaysPlayed) {
-    if (null == rewardForUser) {
-      return null;
-    }
-    if (5 < numConsecutiveDaysPlayed || 0 >= numConsecutiveDaysPlayed) {
-      log.error("unexpected error: number of consecutive days played is not in the range [1,5]. "
-          + "numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed);
-      return null;
-    }
-    Map<String, Integer> reward = getCurrentDailyReward(rewardForUser, numConsecutiveDaysPlayed);
-    return reward;
-  }
+//  private DailyBonusReward selectDailyBonusRewardForLevel(Map<Integer, DailyBonusReward> allRewards,
+//      int userLevel) {
+//    DailyBonusReward returnValue = null;
+//    for (int id : allRewards.keySet()) {
+//      DailyBonusReward dbr = allRewards.get(id);
+//      int minLevel = dbr.getMinLevel();
+//      int maxLevel = dbr.getMaxLevel();
+//      if (minLevel <= userLevel && userLevel <= maxLevel) {
+//        // we found the reward to return
+//        returnValue = dbr;
+//        break;
+//      }
+//    }
+//    return returnValue;
+//  }
+//
+//  private Map<String, Integer> selectRewardFromDailyBonusReward(DailyBonusReward rewardForUser,
+//      int numConsecutiveDaysPlayed) {
+//    if (null == rewardForUser) {
+//      return null;
+//    }
+//    if (5 < numConsecutiveDaysPlayed || 0 >= numConsecutiveDaysPlayed) {
+//      log.error("unexpected error: number of consecutive days played is not in the range [1,5]. "
+//          + "numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed);
+//      return null;
+//    }
+//    Map<String, Integer> reward = getCurrentDailyReward(rewardForUser, numConsecutiveDaysPlayed);
+//    return reward;
+//  }
 
   // sets the rewards the user gets/ will get in the daily bonus info builder
-  private Map<String, Integer> getCurrentDailyReward(DailyBonusReward reward, int numConsecutiveDaysPlayed) {
-    Map<String, Integer> returnValue = new HashMap<String, Integer>();
-    String key = "";
-    int value = ControllerConstants.NOT_SET;
-
-    String silver = MiscMethods.silver;
-    String gold = MiscMethods.gold;
-    String boosterPackIdString = MiscMethods.boosterPackId;
-
-    // mimicking fall through in switch statement, setting reward user just
-    // got
-    // today and will get in future logins in 5 consecutive day spans
-    if (5 == numConsecutiveDaysPlayed) {
-      // can't set reward in the builder; currently have booster pack id
-      // need equip id
-      key = boosterPackIdString;
-      List<Integer> boosterPackIds = reward.getDayFiveBoosterPackIds();
-      value = MiscMethods.getRandomIntFromList(boosterPackIds);
-    }
-    if (4 == numConsecutiveDaysPlayed) {
-      key = silver;
-      value = reward.getDayFourCoins();
-    }
-    if (3 == numConsecutiveDaysPlayed) {
-      key = gold;
-      value = reward.getDayThreeDiamonds();
-    }
-    if (2 == numConsecutiveDaysPlayed) {
-      key = silver;
-      value = reward.getDayTwoCoins();
-    }
-    if (1 == numConsecutiveDaysPlayed) {
-      key = silver;
-      value = reward.getDayOneCoins();
-    }
-    returnValue.put(key, value);
-    return returnValue;
-  }
+//  private Map<String, Integer> getCurrentDailyReward(DailyBonusReward reward, int numConsecutiveDaysPlayed) {
+//    Map<String, Integer> returnValue = new HashMap<String, Integer>();
+//    String key = "";
+//    int value = ControllerConstants.NOT_SET;
+//
+//    String silver = MiscMethods.silver;
+//    String gold = MiscMethods.gold;
+//    String boosterPackIdString = MiscMethods.boosterPackId;
+//
+//    // mimicking fall through in switch statement, setting reward user just
+//    // got
+//    // today and will get in future logins in 5 consecutive day spans
+//    if (5 == numConsecutiveDaysPlayed) {
+//      // can't set reward in the builder; currently have booster pack id
+//      // need equip id
+//      key = boosterPackIdString;
+//      List<Integer> boosterPackIds = reward.getDayFiveBoosterPackIds();
+//      value = MiscMethods.getRandomIntFromList(boosterPackIds);
+//    }
+//    if (4 == numConsecutiveDaysPlayed) {
+//      key = silver;
+//      value = reward.getDayFourCoins();
+//    }
+//    if (3 == numConsecutiveDaysPlayed) {
+//      key = gold;
+//      value = reward.getDayThreeDiamonds();
+//    }
+//    if (2 == numConsecutiveDaysPlayed) {
+//      key = silver;
+//      value = reward.getDayTwoCoins();
+//    }
+//    if (1 == numConsecutiveDaysPlayed) {
+//      key = silver;
+//      value = reward.getDayOneCoins();
+//    }
+//    returnValue.put(key, value);
+//    return returnValue;
+//  }
 
   // returns the equip id user "purchased" by logging in
   // mimics purchase booster pack controller except the argument checking and
@@ -1141,60 +1097,60 @@ public class StartupController extends EventController {
     }
   }
 
-  private void setDailyBonusStuff(Builder resBuilder, User aUser, boolean rewardUser,
-      DailyBonusReward rewardForUser) {
-    // log.info("rewardUser=" + rewardUser + "rewardForUser=" +
-    // rewardForUser + "user=" + aUser);
-
-    int userId = aUser.getId();
-    // there should be a reward inserted if things saved sans a hitch
-    UserDailyBonusRewardHistory udbrh = UserDailyBonusRewardHistoryRetrieveUtils
-        .getLastDailyRewardAwardedForUserId(userId);
-
-    if (null == udbrh || null == rewardForUser) {
-      log.error("unexpected error: no daily bonus reward history exists for user=" + aUser);
-      return;
-    }
-    int consecutiveDaysPlayed = udbrh.getNthConsecutiveDay();
-
-    DailyBonusInfo.Builder dbib = DailyBonusInfo.newBuilder();
-    if (5 == consecutiveDaysPlayed) {
-      // user just got an equip
-      int boosterPackId = udbrh.getBoosterPackIdRewarded();
-      BoosterPack bp = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(boosterPackId);
-      Map<Integer, BoosterItem> biMap = BoosterItemRetrieveUtils
-          .getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
-      Collection<BoosterItem> biList = biMap.values();
-      BoosterPackProto aBoosterPackProto = CreateInfoProtoUtils.createBoosterPackProto(bp, biList);
-      dbib.setBoosterPack(aBoosterPackProto);
-
-      // log.info("setting 5th consecutive day reward");
-      int equipId = udbrh.getEquipIdRewarded();
-      dbib.setEquipId(equipId);
-    }
-    if (4 >= consecutiveDaysPlayed) {
-      // log.info("setting 4th consecutive day reward");
-      dbib.setDayFourCoins(rewardForUser.getDayFourCoins());
-    }
-    if (3 >= consecutiveDaysPlayed) {
-      // log.info("setting 3rd consecutive day reward");
-      dbib.setDayThreeDiamonds(rewardForUser.getDayThreeDiamonds());
-    }
-    if (2 >= consecutiveDaysPlayed) {
-      // log.info("setting 2nd consecutive day reward");
-      dbib.setDayTwoCoins(rewardForUser.getDayTwoCoins());
-    }
-    if (1 == consecutiveDaysPlayed) {
-      // log.info("setting first consecutive day reward");
-      dbib.setDayOneCoins(rewardForUser.getDayOneCoins());
-    }
-    // log.info("nth consecutive day=" + consecutiveDaysPlayed);
-    Date dateAwarded = udbrh.getDateAwarded();
-    long dateAwardedMillis = dateAwarded.getTime();
-    dbib.setTimeAwarded(dateAwardedMillis);
-    dbib.setNumConsecutiveDaysPlayed(consecutiveDaysPlayed);
-    resBuilder.setDailyBonusInfo(dbib.build());
-  }
+//  private void setDailyBonusStuff(Builder resBuilder, User aUser, boolean rewardUser,
+//      DailyBonusReward rewardForUser) {
+//    // log.info("rewardUser=" + rewardUser + "rewardForUser=" +
+//    // rewardForUser + "user=" + aUser);
+//
+//    int userId = aUser.getId();
+//    // there should be a reward inserted if things saved sans a hitch
+//    UserDailyBonusRewardHistory udbrh = UserDailyBonusRewardHistoryRetrieveUtils
+//        .getLastDailyRewardAwardedForUserId(userId);
+//
+//    if (null == udbrh || null == rewardForUser) {
+//      log.error("unexpected error: no daily bonus reward history exists for user=" + aUser);
+//      return;
+//    }
+//    int consecutiveDaysPlayed = udbrh.getNthConsecutiveDay();
+//
+//    DailyBonusInfo.Builder dbib = DailyBonusInfo.newBuilder();
+//    if (5 == consecutiveDaysPlayed) {
+//      // user just got an equip
+//      int boosterPackId = udbrh.getBoosterPackIdRewarded();
+//      BoosterPack bp = BoosterPackRetrieveUtils.getBoosterPackForBoosterPackId(boosterPackId);
+//      Map<Integer, BoosterItem> biMap = BoosterItemRetrieveUtils
+//          .getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
+//      Collection<BoosterItem> biList = biMap.values();
+//      BoosterPackProto aBoosterPackProto = CreateInfoProtoUtils.createBoosterPackProto(bp, biList);
+//      dbib.setBoosterPack(aBoosterPackProto);
+//
+//      // log.info("setting 5th consecutive day reward");
+//      int equipId = udbrh.getEquipIdRewarded();
+//      dbib.setEquipId(equipId);
+//    }
+//    if (4 >= consecutiveDaysPlayed) {
+//      // log.info("setting 4th consecutive day reward");
+//      dbib.setDayFourCoins(rewardForUser.getDayFourCoins());
+//    }
+//    if (3 >= consecutiveDaysPlayed) {
+//      // log.info("setting 3rd consecutive day reward");
+//      dbib.setDayThreeDiamonds(rewardForUser.getDayThreeDiamonds());
+//    }
+//    if (2 >= consecutiveDaysPlayed) {
+//      // log.info("setting 2nd consecutive day reward");
+//      dbib.setDayTwoCoins(rewardForUser.getDayTwoCoins());
+//    }
+//    if (1 == consecutiveDaysPlayed) {
+//      // log.info("setting first consecutive day reward");
+//      dbib.setDayOneCoins(rewardForUser.getDayOneCoins());
+//    }
+//    // log.info("nth consecutive day=" + consecutiveDaysPlayed);
+//    Date dateAwarded = udbrh.getDateAwarded();
+//    long dateAwardedMillis = dateAwarded.getTime();
+//    dbib.setTimeAwarded(dateAwardedMillis);
+//    dbib.setNumConsecutiveDaysPlayed(consecutiveDaysPlayed);
+//    resBuilder.setDailyBonusInfo(dbib.build());
+//  }
 
   private void syncApsalaridLastloginConsecutivedaysloggedinResetBadges(User user, String apsalarId,
       Timestamp loginTime, int newNumConsecutiveDaysLoggedIn) {

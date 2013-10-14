@@ -13,38 +13,38 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.CityElement;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.NeutralCityElement;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.NeutralCityElementProto.NeutralCityElemType;
-import com.lvl6.proto.InfoProto.StructOrientation;
+import com.lvl6.proto.CityProto.CityElementProto.CityElemType;
+import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class NeutralCityElementsRetrieveUtils {
+@Component @DependsOn("gameServer") public class CityElementsRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static Map<Integer, List<NeutralCityElement>> cityIdToNeutralCityElements;
+  private static Map<Integer, List<CityElement>> cityIdToCityElements;
 
   private static final String TABLE_NAME = DBConstants.TABLE_NEUTRAL_CITY_ELEMENTS;
 
-  public static Map<Integer, List<NeutralCityElement>> getCityIdToNeutralCityElements() {
+  public static Map<Integer, List<CityElement>> getCityIdToCityElements() {
     log.debug("retrieving all city id to neutral city elements data");
-    if (cityIdToNeutralCityElements == null) {
-      setStaticCityIdToNeutralCityElements();
+    if (cityIdToCityElements == null) {
+      setStaticCityIdToCityElements();
     }
-    return cityIdToNeutralCityElements;
+    return cityIdToCityElements;
   }
 
-  public static NeutralCityElement getNeutralCityElement(int cityId, int assetId) {
+  public static CityElement getCityElement(int cityId, int assetId) {
     log.debug("retrieving neutral city element with assetId " + assetId + " in cityId " + cityId);
-    if (cityIdToNeutralCityElements == null) {
-      setStaticCityIdToNeutralCityElements();
+    if (cityIdToCityElements == null) {
+      setStaticCityIdToCityElements();
     }
-    List<NeutralCityElement> ncesForCity = cityIdToNeutralCityElements.get(cityId);
+    List<CityElement> ncesForCity = cityIdToCityElements.get(cityId);
     if (ncesForCity != null) {
-      for (NeutralCityElement nce : ncesForCity) {
+      for (CityElement nce : ncesForCity) {
         if (nce.getAssetId() == assetId) {
           return nce;
         }
@@ -53,19 +53,19 @@ import com.lvl6.utils.DBConnection;
     return null;
   }
 
-  public static List<NeutralCityElement> getNeutralCityElementsForCity(int cityId) {
+  public static List<CityElement> getCityElementsForCity(int cityId) {
     log.debug("retrieving neutral city elements for city " + cityId);
-    if (cityIdToNeutralCityElements == null) {
-      setStaticCityIdToNeutralCityElements();
+    if (cityIdToCityElements == null) {
+      setStaticCityIdToCityElements();
     }
-    return cityIdToNeutralCityElements.get(cityId);
+    return cityIdToCityElements.get(cityId);
   }
 
   public static void reload() {
-    setStaticCityIdToNeutralCityElements();
+    setStaticCityIdToCityElements();
   }
 
-  private static void setStaticCityIdToNeutralCityElements() {
+  private static void setStaticCityIdToCityElements() {
     log.debug("setting static map of city id to neutral city elements for city");
 
     Connection conn = DBConnection.get().getConnection();
@@ -76,17 +76,17 @@ import com.lvl6.utils.DBConnection;
         try {
           rs.last();
           rs.beforeFirst();
-          Map <Integer, List<NeutralCityElement>> cityIdToNeutralCityElementsTemp = new HashMap<Integer, List<NeutralCityElement>>();
+          Map <Integer, List<CityElement>> cityIdToCityElementsTemp = new HashMap<Integer, List<CityElement>>();
           while(rs.next()) {
-            NeutralCityElement nce = convertRSRowToNeutralCityElement(rs);
+            CityElement nce = convertRSRowToCityElement(rs);
             if (nce != null) {
-              if (cityIdToNeutralCityElementsTemp.get(nce.getCityId()) == null) {
-                cityIdToNeutralCityElementsTemp.put(nce.getCityId(), new ArrayList<NeutralCityElement>());
+              if (cityIdToCityElementsTemp.get(nce.getCityId()) == null) {
+                cityIdToCityElementsTemp.put(nce.getCityId(), new ArrayList<CityElement>());
               }
-              cityIdToNeutralCityElementsTemp.get(nce.getCityId()).add(nce);
+              cityIdToCityElementsTemp.get(nce.getCityId()).add(nce);
             }
           }
-          cityIdToNeutralCityElements = cityIdToNeutralCityElementsTemp;
+          cityIdToCityElements = cityIdToCityElementsTemp;
         } catch (SQLException e) {
           log.error("problem with database call.", e);
           
@@ -96,12 +96,12 @@ import com.lvl6.utils.DBConnection;
     DBConnection.get().close(rs, null, conn);
   }
 
-  private static NeutralCityElement convertRSRowToNeutralCityElement(ResultSet rs) throws SQLException {
+  private static CityElement convertRSRowToCityElement(ResultSet rs) throws SQLException {
     int i = 1;
     int cityId = rs.getInt(i++);
     int assetId = rs.getInt(i++);
     String goodName = rs.getString(i++);
-    NeutralCityElemType type = NeutralCityElemType.valueOf(rs.getInt(i++));
+    CityElemType type = CityElemType.valueOf(rs.getInt(i++));
     CoordinatePair coords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
 
     int xLength = rs.getInt(i++);
@@ -115,7 +115,7 @@ import com.lvl6.utils.DBConnection;
     int orientationNum = rs.getInt(i++);
     StructOrientation orientation = (rs.wasNull()) ? null : StructOrientation.valueOf(orientationNum);
 
-    return new NeutralCityElement(cityId, assetId, goodName, type, coords, xLength, yLength, imgGood, orientation);
+    return new CityElement(cityId, assetId, goodName, type, coords, xLength, yLength, imgGood, orientation);
   }
 
 

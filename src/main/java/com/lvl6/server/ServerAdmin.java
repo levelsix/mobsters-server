@@ -28,7 +28,7 @@ import com.lvl6.events.response.PurgeClientStaticDataResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.EventProto.PurgeClientStaticDataResponseProto;
+import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;

@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.EventProto.RetrieveClanInfoRequestProto;
+import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
 
 public class RetrieveClanInfoRequestEvent extends RequestEvent {
 

@@ -67,9 +67,9 @@ public class DeleteUtils implements DeleteUtil {
   
   public boolean deleteBlacksmithAttempt(int blacksmithId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.BLACKSMITH__ID, blacksmithId);
+    conditionParams.put(DBConstants.MONSTER_EVOLUTION__ID, blacksmithId);
 
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_BLACKSMITH, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_EVOLUTION, conditionParams, "and");
     if (numDeleted == 1) {
       return true;
     }
@@ -232,15 +232,6 @@ public class DeleteUtils implements DeleteUtil {
     }
   }
 
-  public int deleteAllUserCitiesForUser(int userId) {
-    String tableName = DBConstants.TABLE_USER_CITIES;
-    String condDelim = "and";
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_CITIES__USER_ID, userId);
-    int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
-    
-    return numDeleted;
-  }
   public int deleteAllUserQuestsForUser(int userId) {
     String tableName = DBConstants.TABLE_USER_QUESTS;
     String condDelim = "and";

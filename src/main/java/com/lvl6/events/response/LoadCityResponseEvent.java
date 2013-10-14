@@ -4,16 +4,16 @@ import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.events.NormalResponseEvent;
-import com.lvl6.proto.EventProto.LoadNeutralCityResponseProto;
+import com.lvl6.proto.EventCityProto.LoadCityResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class LoadNeutralCityResponseEvent extends NormalResponseEvent{
+public class LoadCityResponseEvent extends NormalResponseEvent{
 
-  private LoadNeutralCityResponseProto loadNeutralCityResponseProto;
+  private LoadCityResponseProto loadCityResponseProto;
   
-  public LoadNeutralCityResponseEvent(int playerId) {
+  public LoadCityResponseEvent(int playerId) {
     super(playerId);
-    eventType = EventProtocolResponse.S_LOAD_NEUTRAL_CITY_EVENT;
+    eventType = EventProtocolResponse.S_LOAD_CITY_EVENT;
   }
   
   /** 
@@ -24,14 +24,14 @@ public class LoadNeutralCityResponseEvent extends NormalResponseEvent{
    * versions on the client and use old-style socket input/output streams
    */
   public int write(ByteBuffer buff) {
-    ByteString b = loadNeutralCityResponseProto.toByteString();
+    ByteString b = loadCityResponseProto.toByteString();
     b.copyTo(buff);
     return b.size();
   }
 
-  public void setLoadNeutralCityResponseProto(
-      LoadNeutralCityResponseProto loadNeutralCityResponseProto) {
-    this.loadNeutralCityResponseProto = loadNeutralCityResponseProto;
+  public void setLoadCityResponseProto(
+      LoadCityResponseProto loadCityResponseProto) {
+    this.loadCityResponseProto = loadCityResponseProto;
   }
   
   

@@ -29,14 +29,14 @@ message CityElementProto {
 	optional int32 cityId = 1;
 	optional int32 assetId = 2;
 	optional string name = 3;
-	optional NeutralCityElemType type = 4;
+	optional CityElemType type = 4;
 	optional CoordinateProto coords = 5;
 	optional int32 xLength = 6;
 	optional int32 yLength = 7;
 	optional string imgId = 8;
 	optional StructOrientation orientation = 9;
 	
-	enum NeutralCityElemType {
+	enum CityElemType {
 		BUILDING = 1;
 		DECORATION = 2;
 		PERSON_NEUTRAL_ENEMY = 3;

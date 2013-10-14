@@ -39,7 +39,7 @@ import com.lvl6.utils.DBConnection;
     lessThanParamsToVals.put(DBConstants.CLAN_WALL_POSTS__ID, postId);
     
     TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
-    absoluteParams.put(DBConstants.CLAN_WALL_POSTS__CLAN_ID, clanId);
+    absoluteParams.put(DBConstants.CLAN_CHAT_POSTS__CLAN_ID, clanId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimitLessthan(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_WALL_POSTS__ID, limit, lessThanParamsToVals);
@@ -52,7 +52,7 @@ import com.lvl6.utils.DBConnection;
     log.debug("retrieving " + limit + " clan wall posts for clan " + clanId);
     
     TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
-    absoluteParams.put(DBConstants.CLAN_WALL_POSTS__CLAN_ID, clanId);
+    absoluteParams.put(DBConstants.CLAN_CHAT_POSTS__CLAN_ID, clanId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimit(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_WALL_POSTS__ID, limit);

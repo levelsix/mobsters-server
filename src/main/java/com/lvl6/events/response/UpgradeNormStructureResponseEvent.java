@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.events.NormalResponseEvent;
-import com.lvl6.proto.EventProto.UpgradeNormStructureResponseProto;
+import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UpgradeNormStructureResponseEvent extends NormalResponseEvent {

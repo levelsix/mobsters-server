@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.EventProto.RetractRequestJoinClanRequestProto;
+import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
 
 public class RetractRequestJoinClanRequestEvent extends RequestEvent {
 

@@ -20,13 +20,13 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserTask;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.EndDungeonRequestProto;
-import com.lvl6.proto.EventProto.EndDungeonResponseProto;
-import com.lvl6.proto.EventProto.EndDungeonResponseProto.Builder;
-import com.lvl6.proto.EventProto.EndDungeonResponseProto.EndDungeonStatus;
-import com.lvl6.proto.InfoProto.FullUserEquipProto;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
+import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto;
+import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.Builder;
+import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserTaskRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 
       boolean successful = false;
-      List<FullUserEquipProto> protos = new ArrayList<FullUserEquipProto>();
+      List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
       if(legit) {
     	  UserTask ut = userTaskList.get(0);
 //        previousSilver = aUser.getCoins() + aUser.getVaultBalance();
@@ -139,7 +139,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
 
   private boolean writeChangesToDb(User u, int uId, UserTask ut, boolean userWon,
-		  Timestamp clientTime, List<FullUserEquipProto> protos) {
+		  Timestamp clientTime, List<FullUserMonsterProto> protos) {
 	  int silverGained = ut.getSilverGained();
 	  int expGained = ut.getExpGained();
 	  
@@ -216,8 +216,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void setResponseBuilder(Builder resBuilder,
-		  List<FullUserEquipProto> protos) {
-	  resBuilder.addAllFueps(protos);
+		  List<FullUserMonsterProto> protos) {
 	  resBuilder.setStatus(EndDungeonStatus.SUCCESS);
   }
   

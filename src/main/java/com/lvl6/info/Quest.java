@@ -3,7 +3,7 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.List;
 
-import com.lvl6.proto.InfoProto.SpecialQuestAction;
+import com.lvl6.proto.QuestProto.SpecialQuestAction;
 
 public class Quest implements Serializable {
 

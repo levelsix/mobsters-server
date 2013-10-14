@@ -2,7 +2,6 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,16 +11,13 @@ import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.info.ClanTower;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Structure;
-import com.lvl6.info.Task;
 import com.lvl6.info.UserStruct;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.StructOrientation;
-import com.lvl6.proto.InfoProto.UserClanStatus;
+import com.lvl6.proto.ClanProto.UserClanStatus;
+import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
@@ -66,25 +62,25 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	@Override
-	public boolean updateAbsoluteBlacksmithAttemptcompleteTimeofspeedup(int blacksmithId, Date timeOfSpeedup, boolean attemptComplete) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.BLACKSMITH__ID, blacksmithId);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.BLACKSMITH__ATTEMPT_COMPLETE, attemptComplete);
-
-		if (timeOfSpeedup != null) {
-			absoluteParams.put(DBConstants.BLACKSMITH__TIME_OF_SPEEDUP, timeOfSpeedup);
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_BLACKSMITH, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public boolean updateAbsoluteBlacksmithAttemptcompleteTimeofspeedup(int blacksmithId, Date timeOfSpeedup, boolean attemptComplete) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.BLACKSMITH__ID, blacksmithId);
+//
+//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+//		absoluteParams.put(DBConstants.BLACKSMITH__ATTEMPT_COMPLETE, attemptComplete);
+//
+//		if (timeOfSpeedup != null) {
+//			absoluteParams.put(DBConstants.BLACKSMITH__TIME_OF_SPEEDUP, timeOfSpeedup);
+//		}
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_EVOLUTION, null, absoluteParams, 
+//				conditionParams, "and");
+//		if (numUpdated == 1) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	/* (non-Javadoc)
 	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateNullifyDeviceTokens(java.util.Set)
@@ -485,34 +481,6 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	/*
-	 * used for tasks
-	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#incrementCityRankForUserCity(int, int, int)
-	 */
-	@Override
-	//@Caching(evict={//@CacheEvict(value="cityIdToUserCityRankCache", key="#userId"),
-	//@CacheEvict(value="currentCityRankForUserCache", key="#userId+':'+#cityId")})
-	public boolean incrementCityRankForUserCity(int userId, int cityId, int increment) {
-		Map <String, Object> insertParams = new HashMap<String, Object>();
-
-		insertParams.put(DBConstants.USER_CITIES__USER_ID, userId);
-		insertParams.put(DBConstants.USER_CITIES__CITY_ID, cityId);
-		insertParams.put(DBConstants.USER_CITIES__CURRENT_RANK, increment);
-
-		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-		columnsToUpdate.put(DBConstants.USER_CITIES__CURRENT_RANK, increment);
-
-		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_CITIES, insertParams, 
-				columnsToUpdate, null);//DBConstants.USER_CITIES__CURRENT_RANK, increment);
-
-		if (numUpdated >= 1) {
-			return true;
-		}
-		return false;
-	}
-
 	@Override
 	public boolean incrementNumberOfLockBoxesForLockBoxEvent(int userId, int eventId, int increment) {
 		Map <String, Object> insertParams = new HashMap<String, Object>();
@@ -533,53 +501,6 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
-
-	@Override
-	public boolean incrementQuantityForLockBoxItem(int userId, int itemId, int increment) {
-		Map <String, Object> insertParams = new HashMap<String, Object>();
-
-		insertParams.put(DBConstants.USER_LOCK_BOX_ITEMS__USER_ID, userId);
-		insertParams.put(DBConstants.USER_LOCK_BOX_ITEMS__ITEM_ID, itemId);
-		insertParams.put(DBConstants.USER_LOCK_BOX_ITEMS__QUANTITY, increment);
-
-		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-		columnsToUpdate.put(DBConstants.USER_LOCK_BOX_ITEMS__QUANTITY, increment);
-
-		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_LOCK_BOX_ITEMS, insertParams, 
-				columnsToUpdate, null);//DBConstants.USER_LOCK_BOX_ITEMS__QUANTITY, increment);
-
-		if (numUpdated >= 1) {
-			return true;
-		}
-		return false;
-	} 
-
-	/*
-	 * used for tasks
-	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#incrementTimesCompletedInRankForUserTask(int, int, int)
-	 */
-	@Override
-	public boolean incrementTimesCompletedInRankForUserTask(int userId, int taskId, int increment) {
-		//    Map <String, Object> insertParams = new HashMap<String, Object>();
-		//
-		//    insertParams.put(DBConstants.USER_TASK__USER_ID, userId);
-		//    insertParams.put(DBConstants.USER_TASK__TASK_ID, taskId);
-		//    insertParams.put(DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
-		//
-		//    Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-		//    columnsToUpdate.put(DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
-		//
-		//    int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_TASKS, insertParams, 
-		//        columnsToUpdate, null);//DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK, increment);
-		//
-		//    if (numUpdated >= 1) {
-		//      return true;
-		//    }
-		return false;
-	}  
-
 
 	/* (non-Javadoc)
 	 * @see com.lvl6.utils.utilmethods.UpdateUtil#incrementUserQuestDefeatTypeJobProgress(int, int, int, int)
@@ -685,454 +606,6 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	@Override
-	public boolean resetTimesCompletedInRankForUserTasksInCity(int userId, List<Task> tasksInCity) {
-		//    String query = "update " + DBConstants.TABLE_USER_TASK + " set " + DBConstants.USER_TASK__NUM_TIMES_ACTED_IN_RANK 
-		//        + "=? where " + DBConstants.USER_TASK__USER_ID + "=? and (" ;
-		//    List<Object> values = new ArrayList<Object>();
-		//    values.add(0);
-		//    values.add(userId);
-		//    List<String> condClauses = new ArrayList<String>();
-		//    for (Task task : tasksInCity) {
-		//      condClauses.add(DBConstants.USER_TASK__TASK_ID + "=?");
-		//      values.add(task.getId());
-		//    }
-		//    query += StringUtils.getListInString(condClauses, "or") + ")";
-		//    int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-		//    if (numUpdated == tasksInCity.size() ||
-		//        numUpdated == tasksInCity.size() - 1) {
-		//      //the minus one is for the case when the last thing user has to tap
-		//      //to rank up the city is something that needs only one tap
-		//      return true;
-		//    }
-		//    log.error("problem with resetting times completed in rank for userid " + userId + ". tasks are=" + tasksInCity
-		//        + ", numUpdated=" + numUpdated);
-		return false;
-	}
-
-	public boolean decrementLockBoxItemsForUser(Map<Integer, Integer> itemIdsToQuantity, int userId, int decrement) {
-		String query = "update " + DBConstants.TABLE_USER_LOCK_BOX_ITEMS + " set " + DBConstants.USER_LOCK_BOX_ITEMS__QUANTITY 
-				+ "="+DBConstants.USER_LOCK_BOX_ITEMS__QUANTITY+"-? where " + DBConstants.USER_LOCK_BOX_ITEMS__USER_ID + "=? and " + 
-				DBConstants.USER_LOCK_BOX_ITEMS__ITEM_ID+ " in (" ;
-		List<Object> values = new ArrayList<Object>();
-		values.add(decrement);
-		values.add(userId);
-
-		List<String> stringItems = new ArrayList<String>();
-		for (Integer itemId : itemIdsToQuantity.keySet()) {
-			stringItems.add("?");
-			values.add(itemId);
-		}
-		query += StringUtils.getListInString(stringItems, ",") + ")";
-
-		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-		if (numUpdated != stringItems.size()) {
-			return false;
-		}
-
-		values = new ArrayList<Object>();
-		stringItems = new ArrayList<String>();
-		for (Integer itemId : itemIdsToQuantity.keySet()) {
-			int quantity = itemIdsToQuantity.get(itemId);
-			if (quantity-decrement <= 0) {
-				stringItems.add("?");
-				values.add(itemId);
-			}
-		}
-
-		if (stringItems.size() > 0) {
-			query = "delete from " + DBConstants.TABLE_USER_LOCK_BOX_ITEMS + " where " +  DBConstants.USER_LOCK_BOX_ITEMS__ITEM_ID+ 
-					" in (" + StringUtils.getListInString(stringItems, ",") + ") and " + DBConstants.USER_LOCK_BOX_ITEMS__USER_ID + "=?";
-			values.add(userId);
-
-			numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-			if (numUpdated == stringItems.size()) {
-				return true;
-			}
-		} else {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean decrementNumLockBoxesIncrementNumTimesCompletedForUser(int eventId, int userId, int decrement, boolean completed, Timestamp curTime) {
-		String query = "update " + DBConstants.TABLE_USER_LOCK_BOX_EVENTS + " set " + DBConstants.USER_LOCK_BOX_EVENTS__NUM_BOXES 
-				+ "="+DBConstants.USER_LOCK_BOX_EVENTS__NUM_BOXES +"-?, last_opening_time=?";
-
-		List<Object> values = new ArrayList<Object>();
-		values.add(decrement);
-		values.add(curTime);
-		if (completed) {
-			query += ", "+DBConstants.USER_LOCK_BOX_EVENTS__NUM_TIMES_COMPLETED+ "="+DBConstants.USER_LOCK_BOX_EVENTS__NUM_TIMES_COMPLETED +"+?";
-			values.add(1);
-		}
-
-		query += " where " + DBConstants.USER_LOCK_BOX_EVENTS__EVENT_ID + "=? and " + 
-				DBConstants.USER_LOCK_BOX_EVENTS__USER_ID+ "=?" ;
-		values.add(eventId);
-		values.add(userId);
-
-		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-		if (numUpdated != 1) {
-			return false;
-		}
-		return true;
-	}
-
-	//  public boolean updateRedeemLockBoxItems(int eventId, int userId, List<Integer> lockBoxItemIds,
-	//      boolean redeem) {
-	//    int numLockBoxItems = lockBoxItemIds.size();
-	//    List<Object> values = new ArrayList<Object>();
-	//    List<String> questionMarks = Collections.nCopies(numLockBoxItems, "?");
-	//
-	//    String query = "UPDATE " + DBConstants.TABLE_USER_LOCK_BOX_ITEMS + " SET " +
-	//        DBConstants.USER_LOCK_BOX_ITEMS__HAS_BEEN_REDEEMED + "=" + "?";
-	//    values.add(redeem);
-	//
-	//    query += " where " + DBConstants.USER_LOCK_BOX_ITEMS__USER_ID + "=?";
-	//    values.add(userId);
-	//    
-	//    query += " and " + DBConstants.USER_LOCK_BOX_ITEMS__ITEM_ID + " in (";
-	//    query += StringUtils.getListInString(questionMarks, ",") + ")";
-	//    values.addAll(lockBoxItemIds);
-	//    
-	//    
-	//    int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-	//    if (numLockBoxItems != numUpdated) {
-	//      return false;
-	//    }
-	//    return true;
-	//  }
-
-	public boolean updateRedeemLockBoxEvent(int eventId, int userId, boolean redeem) {
-		String tableName = DBConstants.TABLE_USER_LOCK_BOX_EVENTS;
-
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_LOCK_BOX_EVENTS__EVENT_ID, eventId);
-		conditionParams.put(DBConstants.USER_LOCK_BOX_EVENTS__USER_ID, userId);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_LOCK_BOX_EVENTS__HAS_BEEN_REDEEMED, redeem);
-
-		int numUpdated = DBConnection.get().updateTableRows(tableName, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
-	}
-
-	//updating user_boss table
-	public boolean replaceUserBoss(int userId, int bossId, Date startTime, 
-			int currentHealth, int currentLevel, int gemlessStreak) { 
-		String tableName = DBConstants.TABLE_USER_BOSSES;
-		Map<String, Object> columnsAndValues = new HashMap<String, Object>();
-
-		columnsAndValues.put(DBConstants.USER_BOSSES__USER_ID, userId);
-		columnsAndValues.put(DBConstants.USER_BOSSES__BOSS_ID, bossId);
-		columnsAndValues.put(DBConstants.USER_BOSSES__START_TIME, new Timestamp(startTime.getTime()));
-		columnsAndValues.put(DBConstants.USER_BOSSES__CUR_HEALTH, currentHealth);
-		columnsAndValues.put(DBConstants.USER_BOSSES__CURRENT_LEVEL, currentLevel);
-		//    columnsAndValues.put(DBConstants.USER_BOSSES__LAST_TIME_KILLED, lastTimeKilled);
-		columnsAndValues.put(DBConstants.USER_BOSSES__GEMLESS_STREAK, gemlessStreak);
-
-		int numUpdated = DBConnection.get().replace(tableName, columnsAndValues);
-
-		//1 means one row inserted, 2 means one row deleted and one row inserted 
-		if (1 == numUpdated || 2 == numUpdated) {
-			return true; //successful update
-		}
-		return false; //something unexpected happened
-	}
-
-	//incrementing the current tier level column in clans table
-	//@CacheEvict(value="clanById", key="#clanId")
-	public boolean incrementCurrentTierLevelForClan(int clanId) {
-		String tableName = DBConstants.TABLE_CLANS;
-
-		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		//the level should increment by one only
-		relativeParams.put(DBConstants.CLANS__CURRENT_TIER_LEVEL, 1);
-
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.CLANS__ID, clanId);
-
-		Map<String, Object> absoluteParams = null;
-		String condDelim = "";
-
-		int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams, absoluteParams, conditionParams, condDelim);
-		if(1 == numUpdated) {
-			return true;
-		}
-		return false;
-	}
-
-	/*
-	 * This function serves two purposes, modifying the owner part or the attacker part of
-	 * the table named clan_towers, since both parts are basically the same except in name.
-	 */
-	public boolean updateClanTowerOwnerAndOrAttacker(int clanTowerId, 
-			int ownerId, Date ownedStartTime, int ownerBattleWins,
-			int attackerId, Date attackStartTime, int attackerBattleWins,
-			Date lastRewardGiven, int battleId) {
-		String tablename = DBConstants.TABLE_CLAN_TOWERS;
-		String owner = DBConstants.CLAN_TOWERS__CLAN_OWNER_ID;
-		String ownedTime = DBConstants.CLAN_TOWERS__OWNED_START_TIME;
-		String ownerWins = DBConstants.CLAN_TOWERS__OWNER_BATTLE_WINS;
-
-		String attacker = DBConstants.CLAN_TOWERS__CLAN_ATTACKER_ID;
-		String attackTime = DBConstants.CLAN_TOWERS__ATTACK_START_TIME;
-		String attackerWins = DBConstants.CLAN_TOWERS__ATTACKER_BATTLE_WINS;
-
-		String lastRewardTime = DBConstants.CLAN_TOWERS__LAST_REWARD_GIVEN;
-		String currentBattle = DBConstants.CLAN_TOWERS__CURRENT_BATTLE_ID;
-
-		//the fields to change
-		Map<String, Object> absoluteParams = new HashMap<String,Object>();
-		absoluteParams.put(owner, ownerId == ControllerConstants.NOT_SET ? null : ownerId);
-		absoluteParams.put(ownedTime, ownedStartTime);
-		absoluteParams.put(ownerWins, ownerBattleWins);
-
-		absoluteParams.put(attacker, attackerId == ControllerConstants.NOT_SET ? null : attackerId);
-		absoluteParams.put(attackTime, attackStartTime);
-		absoluteParams.put(attackerWins, attackerBattleWins);
-
-		absoluteParams.put(lastRewardTime, lastRewardGiven);
-		absoluteParams.put(currentBattle, battleId);
-
-		//the tower being modified
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.CLAN_TOWERS__TOWER_ID, clanTowerId);
-
-		Map<String, Object> relativeParams = null;
-		String condDelim = "";
-
-		int numUpdated = DBConnection.get().updateTableRows(tablename, relativeParams, 
-				absoluteParams, conditionParams, condDelim);
-
-		if (1 != numUpdated) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
-	//either updates the battle_wins for the owner of a clan tower
-	//or the battle_wins for the attacker of a clan tower
-	public boolean updateClanTowerBattleWins(int clanTowerId, int ownerId, int attackerId,
-			boolean ownerWon, int amountToIncrementBattleWinsBy, int battleId, int ownerUserId, 
-			int attackerUserId) {
-		String tableName = DBConstants.TABLE_CLAN_TOWERS;
-
-		String ownerOrAttackerBattleWins = "";
-
-		if (ownerWon) {
-			ownerOrAttackerBattleWins = DBConstants.CLAN_TOWERS__OWNER_BATTLE_WINS;
-		}
-		else {
-			ownerOrAttackerBattleWins = DBConstants.CLAN_TOWERS__ATTACKER_BATTLE_WINS;
-		}
-
-		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(ownerOrAttackerBattleWins, amountToIncrementBattleWinsBy);
-
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.CLAN_TOWERS__TOWER_ID, clanTowerId);
-		conditionParams.put(DBConstants.CLAN_TOWERS__CLAN_OWNER_ID, ownerId == ControllerConstants.NOT_SET ? null : ownerId);
-		conditionParams.put(DBConstants.CLAN_TOWERS__CLAN_ATTACKER_ID, attackerId == ControllerConstants.NOT_SET ? null : attackerId);
-
-		Map<String, Object> absoluteParams = null;
-		String condDelim = "AND";
-
-		int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams, 
-				absoluteParams, conditionParams, condDelim);
-
-		//a clan can own multiple towers with another clan being the same attacker for all of them
-		if (0 == numUpdated) {
-			return false; //there should be a tower with an owner and an attacker with the specified ids 
-		} else {
-			String changeKey = ownerWon ? DBConstants.CLAN_TOWER_USERS__POINTS_GAINED : DBConstants.CLAN_TOWER_USERS__POINTS_LOST;
-			Map <String, Object> insertParams = new HashMap<String, Object>();
-			insertParams.put(DBConstants.CLAN_TOWER_USERS__BATTLE_ID, battleId);
-			insertParams.put(DBConstants.CLAN_TOWER_USERS__USER_ID, ownerUserId);
-			insertParams.put(DBConstants.CLAN_TOWER_USERS__IS_IN_OWNER_CLAN, true);
-			insertParams.put(changeKey, amountToIncrementBattleWinsBy);
-
-			Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-			columnsToUpdate.put(changeKey, amountToIncrementBattleWinsBy);
-
-			numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_CLAN_TOWER_USERS, insertParams, 
-					columnsToUpdate, null);
-
-			if (numUpdated >= 1) {
-				changeKey = !ownerWon ? DBConstants.CLAN_TOWER_USERS__POINTS_GAINED : DBConstants.CLAN_TOWER_USERS__POINTS_LOST;
-				insertParams = new HashMap<String, Object>();
-				insertParams.put(DBConstants.CLAN_TOWER_USERS__BATTLE_ID, battleId);
-				insertParams.put(DBConstants.CLAN_TOWER_USERS__USER_ID, attackerUserId);
-				insertParams.put(DBConstants.CLAN_TOWER_USERS__IS_IN_OWNER_CLAN, false);
-				insertParams.put(changeKey, amountToIncrementBattleWinsBy);
-
-				columnsToUpdate = new HashMap<String, Object>();
-				columnsToUpdate.put(changeKey, amountToIncrementBattleWinsBy);
-
-				numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_CLAN_TOWER_USERS, insertParams, 
-						columnsToUpdate, null);
-
-				if (numUpdated >= 1) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean resetClanTowerOwnerOrAttacker(List<Integer> clanTowerOwnerOrAttackerIds, boolean resetOwner) {
-		if(null == clanTowerOwnerOrAttackerIds || clanTowerOwnerOrAttackerIds.isEmpty()) {
-			return true;
-		}
-		String tableName = DBConstants.TABLE_CLAN_TOWERS;
-
-		List<Object> values = new ArrayList<Object>();
-		String ownerOrAttacker = "";
-		String ownedStartTime = "";
-		String ownerBattleWins = "";
-		String attackStartTime = "";
-		String attackerBattleWins = "";
-		String lastRewardTime = "";
-		String whereClause = "";
-
-		String delimiter = ", ";
-		String listOfIds = "";
-		for(Integer i : clanTowerOwnerOrAttackerIds) {
-			listOfIds += i + delimiter;
-		}
-		listOfIds = listOfIds.substring(0, listOfIds.length() - delimiter.length());
-
-		if(resetOwner) {
-			//if the clan_towers.clanOwnerId = (clan id of clan who lost a member) 
-			//set the clanOwnerId to the clanAttackerId, regardless of whether it is set
-			ownerOrAttacker = DBConstants.CLAN_TOWERS__CLAN_OWNER_ID + "=" +
-					DBConstants.CLAN_TOWERS__CLAN_ATTACKER_ID + ",";
-			ownerOrAttacker += " " + DBConstants.CLAN_TOWERS__CLAN_ATTACKER_ID + "=?,";
-			values.add(null);
-
-			//changed ownership, reset time and battle wins
-			ownedStartTime = " " + DBConstants.CLAN_TOWERS__OWNED_START_TIME + "=?,";
-			//if there is no attacker to take ownership this should be null, but doesn't harm anything
-			values.add(new Timestamp(new Date().getTime()));
-			ownerBattleWins = " " + DBConstants.CLAN_TOWERS__OWNER_BATTLE_WINS + "=?,";
-			values.add(0);
-
-			attackStartTime = " " + DBConstants.CLAN_TOWERS__ATTACK_START_TIME + "=?,";
-			values.add(null);
-			attackerBattleWins = " " + DBConstants.CLAN_TOWERS__ATTACKER_BATTLE_WINS + "=?,";
-			values.add(0);
-
-			//reset last reward given
-			lastRewardTime = " " + DBConstants.CLAN_TOWERS__LAST_REWARD_GIVEN + "=?";
-			values.add(null);
-
-			whereClause = " where " + DBConstants.CLAN_TOWERS__TOWER_ID + " in (" +
-					listOfIds + ")";
-		}
-		else {
-			ownerOrAttacker = DBConstants.CLAN_TOWERS__CLAN_ATTACKER_ID + "=?,";
-			values.add(null);
-
-			//no attacker means reset battle wins
-			ownerBattleWins = " " + DBConstants.CLAN_TOWERS__OWNER_BATTLE_WINS + "=?,";
-			values.add(0);
-
-			attackStartTime = " " + DBConstants.CLAN_TOWERS__ATTACK_START_TIME + "=?,";
-			values.add(null);
-			attackerBattleWins = " " + DBConstants.CLAN_TOWERS__ATTACKER_BATTLE_WINS + "=?,";
-			values.add(0);
-
-			//reset last reward given
-			lastRewardTime = " " + DBConstants.CLAN_TOWERS__LAST_REWARD_GIVEN + "=?";
-			values.add(null);
-
-			whereClause = " where " + DBConstants.CLAN_TOWERS__TOWER_ID + " in (" +
-					listOfIds + ")";
-		}
-		String query = "update " + tableName + " set "  
-				+ ownerOrAttacker
-				+ ownedStartTime + ownerBattleWins
-				+ attackStartTime + attackerBattleWins
-				+ lastRewardTime
-				+ whereClause ;
-
-		int numTowers = clanTowerOwnerOrAttackerIds.size();
-		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-		if (numTowers != numUpdated) {
-			return false;
-		}
-		else {
-			return true;
-		}
-
-	}
-
-	public boolean updateTowerHistory(List<ClanTower> towers, String reasonForEntry, List<Integer> winnerIds) {
-		if (null == towers || towers.isEmpty()) {
-			return true;
-		}
-
-		List<Object> values = new ArrayList<Object>();
-
-		String tableName = DBConstants.TABLE_CLAN_TOWERS_HISTORY;
-		String query = "insert into " + tableName 
-				+" ("
-				+DBConstants.CLAN_TOWERS_HISTORY__OWNER_CLAN_ID+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__ATTACKER_CLAN_ID+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__TOWER_ID+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__ATTACK_START_TIME+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__OWNER_BATTLE_WINS+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__ATTACKER_BATTLE_WINS+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__NUM_HOURS_FOR_BATTLE+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__LAST_REWARD_GIVEN+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__REASON_FOR_ENTRY+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__WINNER_ID+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__TIME_OF_ENTRY+", "
-				+DBConstants.CLAN_TOWERS_HISTORY__CURRENT_BATTLE_ID
-				+") VALUES ";
-		for(int i = 0; i < towers.size(); i++) {
-			ClanTower tower = towers.get(i);
-			String ownerId = tower.getClanOwnerId() != ControllerConstants.NOT_SET ? ""+tower.getClanOwnerId() : "null";
-			String attackerId = tower.getClanAttackerId() != ControllerConstants.NOT_SET ? ""+tower.getClanAttackerId() : "null";
-			String winnerId = winnerIds.get(i) > 0 ? ""+winnerIds.get(i) : "null";
-			query += "(" 
-					+ownerId+", "
-					+attackerId+","
-					+tower.getId()+", "
-					+"?, "
-					+tower.getOwnerBattleWins()+", "
-					+tower.getAttackerBattleWins()+", "
-					+tower.getNumHoursForBattle()+", "
-					+"?, "
-					+"\""+reasonForEntry+"\", "
-					+winnerId+", "
-					+"?, "
-					+tower.getCurrentBattleId()
-					+"), ";
-			values.add(tower.getAttackStartTime());
-			values.add(tower.getLastRewardGiven());
-			values.add(new Timestamp(new Date().getTime()));
-		}
-		int commaEnding = 2;
-		query = query.substring(0, query.length()-commaEnding);
-
-		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-		if(towers.size() != numUpdated) {
-			return false;
-		}
-		else {
-			return true;
-		}
-
-	}
-
 	public boolean updateUsersAddDiamonds(List<Integer> userIds, int diamonds) {
 		if (userIds == null || userIds.size() <= 0) return true;
 
@@ -1175,28 +648,28 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	//this method replaces existing rows with the same (single/composite) primary key
-	public boolean updateUserBoosterItemsForOneUser(int userId, 
-			Map<Integer, Integer> userBoosterItemIdsToQuantities) {
-		String tableName = DBConstants.TABLE_USER_BOOSTER_ITEMS;
-		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-		for (Integer biId : userBoosterItemIdsToQuantities.keySet()) {
-			int newQuantity = userBoosterItemIdsToQuantities.get(biId);
-			Map<String, Object> row = new HashMap<String, Object>();
-			row.put(DBConstants.USER_BOOSTER_ITEMS__BOOSTER_ITEM_ID, biId);
-			row.put(DBConstants.USER_BOOSTER_ITEMS__USER_ID, userId);
-			row.put(DBConstants.USER_BOOSTER_ITEMS__NUM_COLLECTED, newQuantity);
-			newRows.add(row);
-		}
-
-		int numInserted = DBConnection.get().replaceIntoTableValues(tableName, newRows);
-		log.info("num inserted: "+numInserted);
-		if(userBoosterItemIdsToQuantities.size()*2 >= numInserted) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+//	//this method replaces existing rows with the same (single/composite) primary key
+//	public boolean updateUserBoosterItemsForOneUser(int userId, 
+//			Map<Integer, Integer> userBoosterItemIdsToQuantities) {
+//		String tableName = DBConstants.TABLE_USER_BOOSTER_ITEMS;
+//		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+//		for (Integer biId : userBoosterItemIdsToQuantities.keySet()) {
+//			int newQuantity = userBoosterItemIdsToQuantities.get(biId);
+//			Map<String, Object> row = new HashMap<String, Object>();
+//			row.put(DBConstants.USER_BOOSTER_ITEMS__BOOSTER_ITEM_ID, biId);
+//			row.put(DBConstants.USER_BOOSTER_ITEMS__USER_ID, userId);
+//			row.put(DBConstants.USER_BOOSTER_ITEMS__NUM_COLLECTED, newQuantity);
+//			newRows.add(row);
+//		}
+//
+//		int numInserted = DBConnection.get().replaceIntoTableValues(tableName, newRows);
+//		log.info("num inserted: "+numInserted);
+//		if(userBoosterItemIdsToQuantities.size()*2 >= numInserted) {
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 
 	public boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -1207,68 +680,6 @@ public class UpdateUtils implements UpdateUtil {
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_CLANS, null, absoluteParams, 
 				conditionParams, "or");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean updateUserCityGems(int userId, int cityId, 
-			Map<Integer, Integer> gemIdsToQuantities) {
-		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-
-		for(Integer gemId : gemIdsToQuantities.keySet()) {
-			int quantity = gemIdsToQuantities.get(gemId);
-			Map <String, Object> aRow = new HashMap<String, Object>();
-
-			aRow.put(DBConstants.USER_CITY_GEMS__USER_ID, userId);
-			aRow.put(DBConstants.USER_CITY_GEMS__CITY_ID, cityId);
-			aRow.put(DBConstants.USER_CITY_GEMS__GEM_ID, gemId);
-			aRow.put(DBConstants.USER_CITY_GEMS__QUANTITY, quantity);
-
-			newRows.add(aRow);
-		}
-
-		int numUpdated = DBConnection.get().replaceIntoTableValues(
-				DBConstants.TABLE_USER_CITY_GEMS, newRows);
-
-		log.info("num userCityGems updated: " + numUpdated 
-				+ ". userCityGems: " + gemIdsToQuantities);
-		if (numUpdated == gemIdsToQuantities.size()*2) {
-			return true;
-		}
-		return false;
-	}
-
-	public boolean updateUserCityGem(int userId, int cityId, int gemId,
-			int quantity) {
-		String tableName = DBConstants.TABLE_USER_CITY_GEMS;
-		Map<String, Object> columnsAndValues = new HashMap<String, Object>();
-
-		columnsAndValues.put(DBConstants.USER_CITY_GEMS__USER_ID, userId);
-		columnsAndValues.put(DBConstants.USER_CITY_GEMS__CITY_ID, cityId);
-		columnsAndValues.put(DBConstants.USER_CITY_GEMS__GEM_ID, gemId);
-		columnsAndValues.put(DBConstants.USER_CITY_GEMS__QUANTITY, quantity);
-		int numUpdated = DBConnection.get().replace(tableName, columnsAndValues);
-		if (numUpdated >= 1) {
-			return true; 
-		}
-		return false;
-	}
-
-	public boolean incrementUserCityNumTimesRedeemedGems(int userId, int cityId,
-			int newQuantity) {
-		String tableName = DBConstants.TABLE_USER_CITIES;
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_CITIES__USER_ID, userId);
-		conditionParams.put(DBConstants.USER_CITIES__CITY_ID, cityId);
-
-		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_CITIES__NUM_TIMES_REDEEMED_GEMS,
-				newQuantity);
-
-		int numUpdated = DBConnection.get().updateTableRows(tableName, null, absoluteParams, 
-				conditionParams, "AND");
 		if (numUpdated == 1) {
 			return true;
 		}

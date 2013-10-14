@@ -16,11 +16,11 @@ import com.lvl6.events.response.ReceivedGroupChatResponseEvent;
 import com.lvl6.events.response.SendAdminMessageResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.ReceivedGroupChatResponseProto;
-import com.lvl6.proto.EventProto.SendAdminMessageResponseProto;
-import com.lvl6.proto.InfoProto.GroupChatMessageProto;
-import com.lvl6.proto.InfoProto.GroupChatScope;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.ChatProto.GroupChatScope;
+import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
+import com.lvl6.proto.EventChatProto.SendAdminMessageResponseProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.EventWriter;
 
 @Component

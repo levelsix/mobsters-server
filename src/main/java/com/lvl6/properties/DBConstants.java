@@ -26,14 +26,14 @@ public class DBConstants {
   public static final String TABLE_LOCK_BOX_EVENTS = "lock_box_event";
   public static final String TABLE_USER_LOCK_BOX_EVENTS = "lock_box_event_for_user";
   public static final String TABLE_LOGIN_HISTORY = "login_history_for_user";	
-  public static final String TABLE_EQUIPMENT = "monster";
+  public static final String TABLE_MONSTER = "monster";
   public static final String TABLE_DELETED_USER_EQUIPS_FOR_ENHANCING = "monster_deleted_for_enhancing_for_user";
   public static final String TABLE_EQUIP_ENHANCEMENT= "monster_enhancing_for_user";
   public static final String TABLE_EQUIP_ENHANCEMENT_HISTORY = "monster_enhancing_history_for_user";
   public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS = "monster_enhancing_feeder_for_user";  
   public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY = "monster_enhancing_feeder_history_for_user";  
-  public static final String TABLE_BLACKSMITH = "monster_evolution_for_user";
-  public static final String TABLE_BLACKSMITH_HISTORY = "monster_evolution_history_for_user";
+  public static final String TABLE_MONSTER_EVOLUTION = "monster_evolution_for_user";
+  public static final String TABLE_MONSTER_EVOLUTION_HISTORY = "monster_evolution_history_for_user";
   public static final String TABLE_USER_AND_EQUIP_FAIL = "monster_evolution_fail_for_user";
   public static final String TABLE_USER_EQUIP = "monster_for_user";
   public static final String TABLE_MONSTER_REWARD = "monster_reward";
@@ -124,10 +124,10 @@ public class DBConstants {
   
   /*CLAN_WALL_POSTS*/
   public static final String CLAN_WALL_POSTS__ID = GENERIC__ID;
-  public static final String CLAN_WALL_POSTS__POSTER_ID = "poster_id";
-  public static final String CLAN_WALL_POSTS__CLAN_ID = "clan_id";
-  public static final String CLAN_WALL_POSTS__TIME_OF_POST = "time_of_post";
-  public static final String CLAN_WALL_POSTS__CONTENT = "content";
+  public static final String CLAN_CHAT_POSTS__POSTER_ID = "poster_id";
+  public static final String CLAN_CHAT_POSTS__CLAN_ID = "clan_id";
+  public static final String CLAN_CHAT_POSTS__TIME_OF_POST = "time_of_post";
+  public static final String CLAN_CHAT_POSTS__CONTENT = "content";
 
   /*USER CLANS*/
   public static final String USER_CLANS__USER_ID = "user_id";
@@ -241,19 +241,22 @@ public class DBConstants {
   public static final String EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_LEVEL = "equip_level";
   public static final String EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ENHANCEMENT_PERCENTAGE = "enhancement_percentage";
 
-  /*BLACKSMITH HISTORY TABLE*/
-  public static final String BLACKSMITH_HISTORY__ID = "blacksmith_id";
-  public static final String BLACKSMITH_HISTORY__USER_ID = GENERIC__USER_ID;
-  public static final String BLACKSMITH_HISTORY__EQUIP_ID = "equip_id";
-  public static final String BLACKSMITH_HISTORY__GOAL_LEVEL = "goal_level";
-  public static final String BLACKSMITH_HISTORY__GUARANTEED = "guaranteed";
-  public static final String BLACKSMITH_HISTORY__START_TIME = "start_time";
-  public static final String BLACKSMITH_HISTORY__DIAMOND_GUARANTEE_COST = "diamond_guarantee_cost";
-  public static final String BLACKSMITH_HISTORY__TIME_OF_SPEEDUP = "time_of_speedup";
-  public static final String BLACKSMITH_HISTORY__SUCCESS = "success";
-  public static final String BLACKSMITH_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT = "equip_one_enhancement_percent";
-  public static final String BLACKSMITH_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT = "equip_two_enhancement_percent";
-  public static final String BLACKSMITH_HISTORY__FORGE_SLOT_NUMBER = "forge_slot_number";
+  /*MONSTER EVOLUTION FOR USER TABLE*/
+  public static final String MONSTER_EVOLUTION__ID = "id";
+  
+  /*MONSTER EVOLUTION HISTORY FOR USER TABLE*/
+  public static final String MONSTER_EVOLUTION_HISTORY__ID = "monster_evolution_id";
+  public static final String MONSTER_EVOLUTION_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_EVOLUTION_HISTORY__MONSTER_ID = "monster_id";
+  public static final String MONSTER_EVOLUTION_HISTORY__GOAL_LEVEL = "goal_level";
+  public static final String MONSTER_EVOLUTION_HISTORY__GUARANTEED = "guaranteed";
+  public static final String MONSTER_EVOLUTION_HISTORY__START_TIME = "start_time";
+  public static final String MONSTER_EVOLUTION_HISTORY__DIAMOND_GUARANTEE_COST = "diamond_guarantee_cost";
+  public static final String MONSTER_EVOLUTION_HISTORY__TIME_OF_SPEEDUP = "time_of_speedup";
+  public static final String MONSTER_EVOLUTION_HISTORY__SUCCESS = "success";
+  public static final String MONSTER_EVOLUTION_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT = "equip_one_enhancement_percent";
+  public static final String MONSTER_EVOLUTION_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT = "equip_two_enhancement_percent";
+  public static final String MONSTER_EVOLUTION_HISTORY__FORGE_SLOT_NUMBER = "forge_slot_number";
 
   /*USER AND EQUIP FAIL*///keeping track of user's failed monster evolution attempts
   public static final String USER_AND_EQUIP_FAIL__USER_ID = GENERIC__USER_ID;

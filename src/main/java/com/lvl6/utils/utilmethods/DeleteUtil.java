@@ -39,8 +39,6 @@ public interface DeleteUtil {
   
   public abstract boolean deleteEquipEnhancementFeeders(List<Integer> equipEnhancementFeederIds);
   
-  public abstract int deleteAllUserCitiesForUser(int userId);
-  
   public abstract int deleteAllUserQuestsForUser(int userId);
   
   public abstract int deleteAllUserQuestsCompletedDefeatTypeJobsForUser(int userId);

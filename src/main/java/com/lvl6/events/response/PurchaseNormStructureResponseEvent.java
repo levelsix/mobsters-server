@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.events.NormalResponseEvent;
-import com.lvl6.proto.EventProto.PurchaseNormStructureResponseProto;
+import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurchaseNormStructureResponseEvent extends NormalResponseEvent {

@@ -2,7 +2,7 @@ package com.lvl6.loadtesting;
 
 import org.springframework.integration.Message;
 
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 
 
 public interface LoadTestEventGenerator {

@@ -18,13 +18,13 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.RetrieveClanInfoRequestProto;
-import com.lvl6.proto.EventProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
-import com.lvl6.proto.EventProto.RetrieveClanInfoResponseProto;
-import com.lvl6.proto.EventProto.RetrieveClanInfoResponseProto.Builder;
-import com.lvl6.proto.EventProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.MinimumUserProtoForClans;
+import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto;
+import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabType;
+import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto;
+import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.Builder;
+import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus;
+import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -67,7 +67,7 @@ import com.lvl6.utils.RetrieveUtils;
     if (reqProto.hasClanId()) resBuilder.setClanId(clanId);
 
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      //User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
 
       boolean legitCreate = checkLegitCreate(resBuilder, clanName, clanId);
 

@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.events.NormalResponseEvent;
-import com.lvl6.proto.EventProto.ReferralCodeUsedResponseProto;
+import com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class ReferralCodeUsedResponseEvent extends NormalResponseEvent{

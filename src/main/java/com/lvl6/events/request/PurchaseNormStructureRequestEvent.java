@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.EventProto.PurchaseNormStructureRequestProto;
+import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 
 public class PurchaseNormStructureRequestEvent extends RequestEvent {
 

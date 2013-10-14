@@ -17,24 +17,23 @@ import org.springframework.stereotype.Component;
 import redis.clients.jedis.Tuple;
 
 import com.lvl6.events.RequestEvent;
-import com.lvl6.events.request.RetrieveLeaderboardRankingsRequestEvent;
-import com.lvl6.events.response.RetrieveLeaderboardRankingsResponseEvent;
+import com.lvl6.events.request.RetrieveTournamentRankingsRequestEvent;
+import com.lvl6.events.response.RetrieveTournamentRankingsResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtilImpl;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.RetrieveLeaderboardRankingsRequestProto;
-import com.lvl6.proto.EventProto.RetrieveLeaderboardRankingsResponseProto;
-import com.lvl6.proto.EventProto.RetrieveLeaderboardRankingsResponseProto.Builder;
-import com.lvl6.proto.EventProto.RetrieveLeaderboardRankingsResponseProto.RetrieveLeaderboardStatus;
-import com.lvl6.proto.InfoProto.LeaderboardType;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsRequestProto;
+import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto;
+import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.Builder;
+import com.lvl6.proto.EventTournamentProto.RetrieveTournamentRankingsResponseProto.RetrieveTournamentStatus;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
 @Component
 @DependsOn("gameServer")
-public class RetrieveLeaderboardRankingsController extends EventController {
+public class RetrieveTournamentRankingsController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() {
   }.getClass().getEnclosingClass());
@@ -42,31 +41,31 @@ public class RetrieveLeaderboardRankingsController extends EventController {
   @Autowired
   public LeaderBoardUtilImpl leader;
 
-  public RetrieveLeaderboardRankingsController() {
+  public RetrieveTournamentRankingsController() {
     numAllocatedThreads = 5;
   }
 
   @Override
   public RequestEvent createRequestEvent() {
-    return new RetrieveLeaderboardRankingsRequestEvent();
+    return new RetrieveTournamentRankingsRequestEvent();
   }
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_RETRIEVE_LEADERBOARD_RANKINGS_EVENT;
+    return EventProtocolRequest.C_RETRIEVE_TOURNAMENT_RANKINGS_EVENT;
   }
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
-    RetrieveLeaderboardRankingsRequestProto reqProto = ((RetrieveLeaderboardRankingsRequestEvent) event)
-        .getRetrieveLeaderboardRankingsRequestProto();
+    RetrieveTournamentRankingsRequestProto reqProto = ((RetrieveTournamentRankingsRequestEvent) event)
+        .getRetrieveTournamentRankingsRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
 
     int eventId = reqProto.getEventId();
     int afterThisRank = reqProto.getAfterThisRank();
 
-    RetrieveLeaderboardRankingsResponseProto.Builder resBuilder = RetrieveLeaderboardRankingsResponseProto
+    RetrieveTournamentRankingsResponseProto.Builder resBuilder = RetrieveTournamentRankingsResponseProto
         .newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setEventId(eventId);
@@ -74,7 +73,6 @@ public class RetrieveLeaderboardRankingsController extends EventController {
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      LeaderboardType leaderboardType = LeaderboardType.EVENT;
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       int userId = user.getId();
       boolean legitRetrieval = checkLegitRetrieval(resBuilder, user,	eventId);
@@ -83,8 +81,8 @@ public class RetrieveLeaderboardRankingsController extends EventController {
         int rank = (int) leader.getRankForEventAndUser(eventId, userId);
         double score = leader.getScoreForEventAndUser(eventId, userId);
 
-        resBuilder.setRetriever(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForLeaderboard(
-            user, LeaderboardType.EVENT, rank, score));
+        resBuilder.setRetriever(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForTournament(
+            user,  rank, score));
 
         //TODO: FIX THIS IMPLEMENTATION
         lurs = getUsersAfterThisRank(eventId, afterThisRank);
@@ -94,21 +92,21 @@ public class RetrieveLeaderboardRankingsController extends EventController {
           log.debug("Populating leaderboard results for event: "+eventId+" after this rank: "+afterThisRank+" found results: "+resultUsers.size());
           for (User u : resultUsers) {
             UserRankScore urs = lurs.get(u.getId());
-            resBuilder.addResultPlayers(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForLeaderboard(u, leaderboardType, urs.rank, urs.score));
+            resBuilder.addResultPlayers(CreateInfoProtoUtils.createMinimumUserProtoWithLevelForTournament(u, urs.rank, urs.score));
             resBuilder.addFullUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(u));
           }
         }
       }
 
-      RetrieveLeaderboardRankingsResponseProto resProto = resBuilder.build();
-      RetrieveLeaderboardRankingsResponseEvent resEvent = new RetrieveLeaderboardRankingsResponseEvent(senderProto.getUserId());
+      RetrieveTournamentRankingsResponseProto resProto = resBuilder.build();
+      RetrieveTournamentRankingsResponseEvent resEvent = new RetrieveTournamentRankingsResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
-      resEvent.setRetrieveLeaderboardRankingsResponseProto(resProto);
+      resEvent.setRetrieveTournamentRankingsResponseProto(resProto);
 
       server.writeEvent(resEvent);
     } catch (Exception e) {
       log.error(
-          "exception in RetrieveLeaderboardController processEvent",
+          "exception in RetrieveTournamentController processEvent",
           e);
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -138,12 +136,12 @@ public class RetrieveLeaderboardRankingsController extends EventController {
   private boolean checkLegitRetrieval(Builder resBuilder, User user,
       int eventId) {
     if (user == null || 0 >= eventId) {
-      resBuilder.setStatus(RetrieveLeaderboardStatus.OTHER_FAIL);
+      resBuilder.setStatus(RetrieveTournamentStatus.OTHER_FAIL);
       log.error("user is " + user + ", event id="
           + eventId);
       return false;
     }
-    resBuilder.setStatus(RetrieveLeaderboardStatus.SUCCESS);
+    resBuilder.setStatus(RetrieveTournamentStatus.SUCCESS);
     return true;
   }
 

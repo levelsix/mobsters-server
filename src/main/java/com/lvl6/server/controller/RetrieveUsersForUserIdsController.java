@@ -13,9 +13,9 @@ import com.lvl6.events.request.RetrieveUsersForUserIdsRequestEvent;
 import com.lvl6.events.response.RetrieveUsersForUserIdsResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.EventProto.RetrieveUsersForUserIdsRequestProto;
-import com.lvl6.proto.EventProto.RetrieveUsersForUserIdsResponseProto;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsRequestProto;
+import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -48,19 +48,19 @@ import com.lvl6.utils.RetrieveUtils;
     RetrieveUsersForUserIdsResponseProto.Builder resBuilder = RetrieveUsersForUserIdsResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
-    boolean includePotentialPoints = reqProto.getIncludePotentialPointsForClanTowers();
-    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId()) : null;
+//    boolean includePotentialPoints = reqProto.getIncludePotentialPointsForClanTowers();
+//    User sender = includePotentialPoints ? RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId()) : null;
     Map<Integer, User> usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(requestedUserIds);
     if (usersByIds != null) {
       for (User user : usersByIds.values()) {
         resBuilder.addRequestedUsers(CreateInfoProtoUtils.createFullUserProtoFromUser(user));
         
-        if (includePotentialPoints) {
-          int pointsGained = MiscMethods.pointsGainedForClanTowerUserBattle(sender, user);
-          int pointsLost = MiscMethods.pointsGainedForClanTowerUserBattle(user, sender);
-          resBuilder.addPotentialPointsGained(pointsGained);
-          resBuilder.addPotentialPointsLost(pointsLost);
-        }
+//        if (includePotentialPoints) {
+//          int pointsGained = MiscMethods.pointsGainedForClanTowerUserBattle(sender, user);
+//          int pointsLost = MiscMethods.pointsGainedForClanTowerUserBattle(user, sender);
+//          resBuilder.addPotentialPointsGained(pointsGained);
+//          resBuilder.addPotentialPointsLost(pointsLost);
+//        }
       }
     } else {
       log.error("no users with the ids " + requestedUserIds);

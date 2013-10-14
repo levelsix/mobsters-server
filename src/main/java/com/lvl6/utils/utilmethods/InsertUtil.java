@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.User;
-import com.lvl6.proto.InfoProto.UserClanStatus;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 
 public interface InsertUtil {
 
@@ -88,20 +88,7 @@ public interface InsertUtil {
 			int experience, int coins, int diamonds, boolean isFake,
 			boolean activateShield, Timestamp createTime, String rank);
 
-	/*
-	 * returns the id of the post, -1 if none
-	 */
-	public abstract int insertPlayerWallPost(int posterId, int wallOwnerId,
-			String content, Timestamp timeOfPost);
-
-	public abstract int insertIddictionIndentifier(String identifier, Date clickTime); 
-
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
-
-	public abstract int insertForgeAttemptIntoBlacksmith(int userId, int equipId,
-			int goalLevel, boolean paidToGuarantee, Timestamp startTime,
-			int diamondCostForGuarantee, Timestamp timeOfSpeedup, boolean attemptComplete, 
-			int enhancementPercentOne, int enhancementPercentTwo, int forgeSlotNumber);
 
 	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
 
@@ -109,22 +96,11 @@ public interface InsertUtil {
 
 	public abstract boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime);
 
-	public abstract boolean insertDiamondEquipPurchaseHistory(int buyerId, int equipId, int diamondsSpent, Timestamp purchaseTime);
-
-	public abstract int insertClanBulletinPost(int userId, int clanId, String content,
-			Timestamp timeOfPost);
-
 	public abstract int insertClanChatPost(int userId, int clanId, String content,
 			Timestamp timeOfPost);
 
 //	public abstract List<Long> insertUserEquips(int userId, List<Integer> equipIds,
 //			List<Integer> levels, List<Integer> enhancement, Timestamp now, String reason);
-
-	public abstract int insertIntoBossRewardDropHistoryReturnId(int bossId, int userId, int silverDropped, int goldDropped, Timestamp timeOfDrop);
-
-	public abstract int insertIntoUserBossHistory(int bossId, int userId,
-			Timestamp startTime, int curHealth, int currentLevel, int gemlessStreak);
-	//public abstract int insertIntoBossEquipDropHistory(int bossRewardDropHistoryId, List<Integer> equipIds);
 
 	public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, int battlesWonChange, int battlesLostChange, int battlesFledChange);
 
@@ -142,9 +118,6 @@ public interface InsertUtil {
 	public abstract int insertIntoUserBoosterPackHistory(int userId, int boosterPackId, int numBought, Timestamp timeOfPurchase,
 			int rarityOneQuantity, int rarityTwoQuantity, int rarityThreeQuantity, boolean excludeFromLimitCheck, List<Integer> equipIds,
 			List<Long> userEquipIds);
-
-	public abstract int insertIntoUserDailyRewardHistory(int userId, int currencyRewarded, boolean isCoins, int boosterPackId, 
-			int equipIdRewarded, int nthConsecutiveDay, Date dateAwarded);
 
 	public abstract int insertIntoPrivateChatPosts(int posterId, int recipientId, String content, Timestamp timeOfPost);
 

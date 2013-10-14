@@ -30,7 +30,7 @@ import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.GeneralNotificationResponseProto;
+import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.retrieveutils.rarechange.LeaderboardEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LeaderboardEventRewardRetrieveUtils;
 import com.lvl6.server.GameServer;
@@ -39,8 +39,8 @@ import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-public class LeaderboardEventScheduledTasks {
-	private static Logger log = LoggerFactory.getLogger(LeaderboardEventScheduledTasks.class);
+public class TournamentEventScheduledTasks {
+	private static Logger log = LoggerFactory.getLogger(TournamentEventScheduledTasks.class);
 
 	@Autowired
 	protected HazelcastInstance hazel;

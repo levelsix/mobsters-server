@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.events.NormalResponseEvent;
-import com.lvl6.proto.EventProto.PurchaseBoosterPackResponseProto;
+import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class PurchaseBoosterPackResponseEvent extends NormalResponseEvent {

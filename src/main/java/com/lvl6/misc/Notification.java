@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.properties.NotificationConstants;
-import com.lvl6.proto.EventProto.GeneralNotificationResponseProto;
-import com.lvl6.proto.InfoProto.ColorProto;
+import com.lvl6.proto.ChatProto.ColorProto;
+import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 
 public class Notification {
 

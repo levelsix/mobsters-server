@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.events.PreDatabaseResponseEvent;
-import com.lvl6.proto.EventProto.UserCreateResponseProto;
+import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class UserCreateResponseEvent extends PreDatabaseResponseEvent{

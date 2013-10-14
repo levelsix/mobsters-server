@@ -41,7 +41,7 @@ public class AppODayUserTrackerServlet extends HttpServlet {
 	
 	protected void trackMacAddress(String macAddress) {
 		//log.info("Iddiction tracking: " + macAddress);
-		InsertUtils.get().insertIddictionIndentifier(macAddress, new Date());
+//		InsertUtils.get().insertIddictionIndentifier(macAddress, new Date());
 	}
 	
 	private static final long serialVersionUID = -3045402726876117659L;

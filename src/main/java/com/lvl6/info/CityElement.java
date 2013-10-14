@@ -2,16 +2,16 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-import com.lvl6.proto.InfoProto.NeutralCityElementProto.NeutralCityElemType;
-import com.lvl6.proto.InfoProto.StructOrientation;
+import com.lvl6.proto.CityProto.CityElementProto.CityElemType;
+import com.lvl6.proto.StructureProto.StructOrientation;
 
-public class NeutralCityElement implements Serializable {
+public class CityElement implements Serializable {
 	
 	private static final long serialVersionUID = -907736005921382685L;
 	private int cityId;
 	private int assetId;
 	private String goodName;
-	private NeutralCityElemType type;
+	private CityElemType type;
 	private CoordinatePair coords;
 	private int xLength;
 	private int yLength;
@@ -19,8 +19,8 @@ public class NeutralCityElement implements Serializable {
 	private StructOrientation orientation;
 
 
-	public NeutralCityElement(int cityId, int assetId, String goodName,
-			NeutralCityElemType type, CoordinatePair coords, int xLength,
+	public CityElement(int cityId, int assetId, String goodName,
+			CityElemType type, CoordinatePair coords, int xLength,
 			int yLength, String imgGood, StructOrientation orientation) {
 		super();
 		this.cityId = cityId;
@@ -46,7 +46,7 @@ public class NeutralCityElement implements Serializable {
 		return goodName;
 	}
 
-	public NeutralCityElemType getType() {
+	public CityElemType getType() {
 		return type;
 	}
 
@@ -72,7 +72,7 @@ public class NeutralCityElement implements Serializable {
 
 	@Override
 	public String toString() {
-		return "NeutralCityElement [cityId=" + cityId + ", assetId=" + assetId
+		return "CityElement [cityId=" + cityId + ", assetId=" + assetId
 				+ ", goodName=" + goodName + ", type=" + type + ", coords=" + coords
 				+ ", xLength=" + xLength + ", yLength=" + yLength + ", imgGood="
 				+ imgGood + ", orientation=" + orientation + "]";

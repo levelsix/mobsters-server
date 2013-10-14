@@ -4,7 +4,7 @@ import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
 import com.lvl6.events.NormalResponseEvent;
-import com.lvl6.proto.EventProto.LoadPlayerCityResponseProto;
+import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
 public class LoadPlayerCityResponseEvent extends NormalResponseEvent{

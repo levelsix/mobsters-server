@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.UserClanStatus;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class UserClanRetrieveUtils {

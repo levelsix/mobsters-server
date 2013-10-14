@@ -1,17 +1,14 @@
 package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.lvl6.info.ClanTower;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.Task;
 import com.lvl6.info.UserStruct;
-import com.lvl6.proto.InfoProto.StructOrientation;
-import com.lvl6.proto.InfoProto.UserClanStatus;
+import com.lvl6.proto.ClanProto.UserClanStatus;
+import com.lvl6.proto.StructureProto.StructOrientation;
 
 public interface UpdateUtil {
 
@@ -124,22 +121,7 @@ public interface UpdateUtil {
   public abstract boolean updateUserStructCoord(int userStructId,
       CoordinatePair coordinates);
 
-  /*
-   * used for tasks
-   */
-  /*@Caching(evict = {
-      //@CacheEvict(value = "cityIdToUserCityRankCache", key = "#userId"),
-      //@CacheEvict(value = "currentCityRankForUserCache", key = "#userId+':'+#cityId") })*/
-  public abstract boolean incrementCityRankForUserCity(int userId,
-      int cityId, int increment);
-
   public abstract boolean updateClanOwnerDescriptionForClan(int clanId, int ownerId, String description);
-
-  /*
-   * used for tasks
-   */
-  public abstract boolean incrementTimesCompletedInRankForUserTask(
-      int userId, int taskId, int increment);
 
   public abstract boolean incrementUserQuestDefeatTypeJobProgress(int userId,
       int questId, int defeatTypeJobId, int increment);
@@ -147,14 +129,9 @@ public interface UpdateUtil {
   public abstract boolean incrementUserQuestTaskProgress(int userId,
       int questId, int taskId, int increment);
 
-  public abstract boolean resetTimesCompletedInRankForUserTasksInCity(
-      int userId, List<Task> tasksInCity);
-
   public abstract boolean updateUserEquipOwner(long userEquipId, int newOwnerId, String reason);
   
   public abstract boolean updateUserEquipEnhancementPercentage(long l, int newEnhancementPercentage);
-
-  public abstract boolean updateAbsoluteBlacksmithAttemptcompleteTimeofspeedup(int blacksmithId, Date timeOfSpeedup, boolean attemptComplete);
 
   public abstract boolean updateUsersClanId(Integer clanId, List<Integer> userIds);
 
@@ -163,45 +140,11 @@ public interface UpdateUtil {
   public abstract boolean incrementNumberOfLockBoxesForLockBoxEvent(int userId, int eventId,
       int increment);
 
-  public abstract boolean incrementQuantityForLockBoxItem(int userId, int itemId, int increment);
-  
-  public abstract boolean decrementLockBoxItemsForUser(Map<Integer, Integer> itemIdsToQuantity, int userId, int decrement);
-  
-  public abstract boolean decrementNumLockBoxesIncrementNumTimesCompletedForUser(int eventId, int userId, int decrement, boolean completed, Timestamp curTime);
-
-  //public abstract boolean updateRedeemLockBoxItems(int eventId, int userId, List<Integer> lockBoxItemIds, boolean redeem);
-  public abstract boolean updateRedeemLockBoxEvent(int eventId, int userId, boolean redeem);
-  
-  public boolean replaceUserBoss(int userId, int bossId, Date startTime, int currentHealth, 
-      int currentLevel, int gemlessStreak);
-  
-  public boolean incrementCurrentTierLevelForClan(int clanId);
-  public abstract boolean updateClanTowerOwnerAndOrAttacker(int clanTowerId, int ownerId, Date ownedStartTime, int ownerBattleWins, 
-		  int attackerId, Date attackStartTime, int attackerBattleWins, Date lastRewardGiven, int battleId);
-  
-  public abstract boolean updateClanTowerBattleWins(int clanTowerId, int ownerId, int attackerId, boolean ownerWon, int amountToIncrementBattleWinsBy, int battleId, int ownerUserId, 
-      int attackerUserId);
-  
-  public abstract boolean resetClanTowerOwnerOrAttacker(List<Integer> clanTowerOwnerOrAttackerIds, boolean resetOwner);
-  
-  public abstract boolean updateTowerHistory(List<ClanTower> towers, String reasonForEntry, List<Integer> winnerIds);
-  
   public boolean updateUsersAddDiamonds(List<Integer> userIds, int diamonds) ;
   
   public boolean updateLeaderboardEventSetRewardGivenOut(int eventId);
 
-  public abstract boolean updateUserBoosterItemsForOneUser(int userId, Map<Integer, Integer> userBoosterItemIdsToQuantities);
-  
   public abstract boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired);
-  
-  public abstract boolean updateUserCityGems(int userId, int cityId,
-      Map<Integer, Integer> gemIdsToQuantities);
-  
-  public abstract boolean updateUserCityGem(int userId, int cityId,
-      int gemId, int newQuantity);
-  
-  public abstract boolean incrementUserCityNumTimesRedeemedGems(int userId,
-      int cityId, int newQuantity);
   
   public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevives);
   

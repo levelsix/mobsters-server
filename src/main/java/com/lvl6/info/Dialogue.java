@@ -3,7 +3,7 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.List;
 
-import com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
+import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 
 public class Dialogue implements Serializable {
 

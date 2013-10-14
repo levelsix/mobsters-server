@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.PreDatabaseRequestEvent;
-import com.lvl6.proto.EventProto.StartupRequestProto;
+import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 
 public class StartupRequestEvent extends PreDatabaseRequestEvent{
 

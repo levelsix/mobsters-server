@@ -1041,9 +1041,9 @@ public final class CityProto {
     boolean hasName();
     String getName();
     
-    // optional .com.lvl6.proto.CityElementProto.NeutralCityElemType type = 4;
+    // optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;
     boolean hasType();
-    com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType getType();
+    com.lvl6.proto.CityProto.CityElementProto.CityElemType getType();
     
     // optional .com.lvl6.proto.CoordinateProto coords = 5;
     boolean hasCoords();
@@ -1094,7 +1094,7 @@ public final class CityProto {
       return com.lvl6.proto.CityProto.internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable;
     }
     
-    public enum NeutralCityElemType
+    public enum CityElemType
         implements com.google.protobuf.ProtocolMessageEnum {
       BUILDING(0, 1),
       DECORATION(1, 2),
@@ -1110,7 +1110,7 @@ public final class CityProto {
       
       public final int getNumber() { return value; }
       
-      public static NeutralCityElemType valueOf(int value) {
+      public static CityElemType valueOf(int value) {
         switch (value) {
           case 1: return BUILDING;
           case 2: return DECORATION;
@@ -1120,15 +1120,15 @@ public final class CityProto {
         }
       }
       
-      public static com.google.protobuf.Internal.EnumLiteMap<NeutralCityElemType>
+      public static com.google.protobuf.Internal.EnumLiteMap<CityElemType>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<NeutralCityElemType>
+      private static com.google.protobuf.Internal.EnumLiteMap<CityElemType>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<NeutralCityElemType>() {
-              public NeutralCityElemType findValueByNumber(int number) {
-                return NeutralCityElemType.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<CityElemType>() {
+              public CityElemType findValueByNumber(int number) {
+                return CityElemType.valueOf(number);
               }
             };
       
@@ -1145,11 +1145,11 @@ public final class CityProto {
         return com.lvl6.proto.CityProto.CityElementProto.getDescriptor().getEnumTypes().get(0);
       }
       
-      private static final NeutralCityElemType[] VALUES = {
+      private static final CityElemType[] VALUES = {
         BUILDING, DECORATION, PERSON_NEUTRAL_ENEMY, BOSS, 
       };
       
-      public static NeutralCityElemType valueOf(
+      public static CityElemType valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -1161,12 +1161,12 @@ public final class CityProto {
       private final int index;
       private final int value;
       
-      private NeutralCityElemType(int index, int value) {
+      private CityElemType(int index, int value) {
         this.index = index;
         this.value = value;
       }
       
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CityElementProto.NeutralCityElemType)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.CityElementProto.CityElemType)
     }
     
     private int bitField0_;
@@ -1222,13 +1222,13 @@ public final class CityProto {
       }
     }
     
-    // optional .com.lvl6.proto.CityElementProto.NeutralCityElemType type = 4;
+    // optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;
     public static final int TYPE_FIELD_NUMBER = 4;
-    private com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType type_;
+    private com.lvl6.proto.CityProto.CityElementProto.CityElemType type_;
     public boolean hasType() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType getType() {
+    public com.lvl6.proto.CityProto.CityElementProto.CityElemType getType() {
       return type_;
     }
     
@@ -1311,7 +1311,7 @@ public final class CityProto {
       cityId_ = 0;
       assetId_ = 0;
       name_ = "";
-      type_ = com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType.BUILDING;
+      type_ = com.lvl6.proto.CityProto.CityElementProto.CityElemType.BUILDING;
       coords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       xLength_ = 0;
       yLength_ = 0;
@@ -1533,7 +1533,7 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        type_ = com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType.BUILDING;
+        type_ = com.lvl6.proto.CityProto.CityElementProto.CityElemType.BUILDING;
         bitField0_ = (bitField0_ & ~0x00000008);
         if (coordsBuilder_ == null) {
           coords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
@@ -1718,7 +1718,7 @@ public final class CityProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType value = com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType.valueOf(rawValue);
+              com.lvl6.proto.CityProto.CityElementProto.CityElemType value = com.lvl6.proto.CityProto.CityElementProto.CityElemType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -1846,15 +1846,15 @@ public final class CityProto {
         onChanged();
       }
       
-      // optional .com.lvl6.proto.CityElementProto.NeutralCityElemType type = 4;
-      private com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType type_ = com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType.BUILDING;
+      // optional .com.lvl6.proto.CityElementProto.CityElemType type = 4;
+      private com.lvl6.proto.CityProto.CityElementProto.CityElemType type_ = com.lvl6.proto.CityProto.CityElementProto.CityElemType.BUILDING;
       public boolean hasType() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType getType() {
+      public com.lvl6.proto.CityProto.CityElementProto.CityElemType getType() {
         return type_;
       }
-      public Builder setType(com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType value) {
+      public Builder setType(com.lvl6.proto.CityProto.CityElementProto.CityElemType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1865,7 +1865,7 @@ public final class CityProto {
       }
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        type_ = com.lvl6.proto.CityProto.CityElementProto.NeutralCityElemType.BUILDING;
+        type_ = com.lvl6.proto.CityProto.CityElementProto.CityElemType.BUILDING;
         onChanged();
         return this;
       }
@@ -2886,20 +2886,19 @@ public final class CityProto {
       "\001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"a\n\026CityExpa" +
       "nsionCostProto\022\024\n\014expansionNum\030\001 \001(\005\022\025\n\r" +
       "expansionCost\030\002 \001(\005\022\032\n\022numMinutesToExpan" +
-      "d\030\003 \001(\005\"\370\002\n\020CityElementProto\022\016\n\006cityId\030\001" +
-      " \001(\005\022\017\n\007assetId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022B\n\004t" +
-      "ype\030\004 \001(\01624.com.lvl6.proto.CityElementPr",
-      "oto.NeutralCityElemType\022/\n\006coords\030\005 \001(\0132" +
-      "\037.com.lvl6.proto.CoordinateProto\022\017\n\007xLen" +
-      "gth\030\006 \001(\005\022\017\n\007yLength\030\007 \001(\005\022\r\n\005imgId\030\010 \001(" +
-      "\t\0226\n\013orientation\030\t \001(\0162!.com.lvl6.proto." +
-      "StructOrientation\"W\n\023NeutralCityElemType" +
-      "\022\014\n\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON" +
-      "_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\001\n\rFullCityP" +
-      "roto\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nma" +
-      "pImgName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl" +
-      "6.proto.CoordinateProto\022\017\n\007taskIds\030\005 \003(\005",
-      "B\013B\tCityProto"
+      "d\030\003 \001(\005\"\352\002\n\020CityElementProto\022\016\n\006cityId\030\001" +
+      " \001(\005\022\017\n\007assetId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022;\n\004t" +
+      "ype\030\004 \001(\0162-.com.lvl6.proto.CityElementPr",
+      "oto.CityElemType\022/\n\006coords\030\005 \001(\0132\037.com.l" +
+      "vl6.proto.CoordinateProto\022\017\n\007xLength\030\006 \001" +
+      "(\005\022\017\n\007yLength\030\007 \001(\005\022\r\n\005imgId\030\010 \001(\t\0226\n\013or" +
+      "ientation\030\t \001(\0162!.com.lvl6.proto.StructO" +
+      "rientation\"P\n\014CityElemType\022\014\n\010BUILDING\020\001" +
+      "\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_NEUTRAL_ENEMY" +
+      "\020\003\022\010\n\004BOSS\020\004\"\203\001\n\rFullCityProto\022\016\n\006cityId" +
+      "\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapImgName\030\003 \001(\t" +
+      "\022/\n\006center\030\004 \001(\0132\037.com.lvl6.proto.Coordi" +
+      "nateProto\022\017\n\007taskIds\030\005 \003(\005B\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

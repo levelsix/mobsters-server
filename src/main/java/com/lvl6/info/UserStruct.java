@@ -3,7 +3,7 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.lvl6.proto.InfoProto.StructOrientation;
+import com.lvl6.proto.StructureProto.StructOrientation;
 
 public class UserStruct implements Serializable {
   //any change in this class should also change the UpdateUtils.java method updateUserStructsLastretrieved()

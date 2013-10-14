@@ -9,11 +9,11 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EnableAPNSRequestEvent;
 import com.lvl6.events.response.EnableAPNSResponseEvent;
 import com.lvl6.info.User;
-import com.lvl6.proto.EventProto.EnableAPNSRequestProto;
-import com.lvl6.proto.EventProto.EnableAPNSResponseProto;
-import com.lvl6.proto.EventProto.EnableAPNSResponseProto.EnableAPNSStatus;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventApnsProto.EnableAPNSRequestProto;
+import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto;
+import com.lvl6.proto.EventApnsProto.EnableAPNSResponseProto.EnableAPNSStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class EnableAPNSController extends EventController {

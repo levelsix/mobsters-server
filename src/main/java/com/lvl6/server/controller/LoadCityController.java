@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,71 +9,67 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
-import com.lvl6.events.request.LoadNeutralCityRequestEvent;
-import com.lvl6.events.response.LoadNeutralCityResponseEvent;
+import com.lvl6.events.request.LoadCityRequestEvent;
+import com.lvl6.events.response.LoadCityResponseEvent;
 import com.lvl6.info.City;
 import com.lvl6.info.Quest;
 import com.lvl6.info.User;
-import com.lvl6.info.UserCityGem;
 import com.lvl6.info.UserQuest;
-import com.lvl6.proto.EventProto.LoadNeutralCityRequestProto;
-import com.lvl6.proto.EventProto.LoadNeutralCityResponseProto;
-import com.lvl6.proto.EventProto.LoadNeutralCityResponseProto.Builder;
-import com.lvl6.proto.EventProto.LoadNeutralCityResponseProto.LoadNeutralCityStatus;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
-import com.lvl6.proto.InfoProto.UserCityGemProto;
+import com.lvl6.proto.EventCityProto.LoadCityRequestProto;
+import com.lvl6.proto.EventCityProto.LoadCityResponseProto;
+import com.lvl6.proto.EventCityProto.LoadCityResponseProto.Builder;
+import com.lvl6.proto.EventCityProto.LoadCityResponseProto.LoadCityStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.UserCityGemRetrieveUtils;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
-  @Component @DependsOn("gameServer") public class LoadNeutralCityController extends EventController {
+  @Component @DependsOn("gameServer") public class LoadCityController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  public LoadNeutralCityController() {
+  public LoadCityController() {
     numAllocatedThreads = 3;
   }
 
   @Override
   public RequestEvent createRequestEvent() {
-    return new LoadNeutralCityRequestEvent();
+    return new LoadCityRequestEvent();
   }
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_LOAD_NEUTRAL_CITY_EVENT;
+    return EventProtocolRequest.C_LOAD_CITY_EVENT;
   }
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
-    LoadNeutralCityRequestProto reqProto = ((LoadNeutralCityRequestEvent)event).getLoadNeutralCityRequestProto();
+    LoadCityRequestProto reqProto = ((LoadCityRequestEvent)event).getLoadCityRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     int cityId = reqProto.getCityId();
     City city = CityRetrieveUtils.getCityForCityId(cityId);
 
-    LoadNeutralCityResponseProto.Builder resBuilder = LoadNeutralCityResponseProto.newBuilder();
+    LoadCityResponseProto.Builder resBuilder = LoadCityResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setCityId(cityId);
 
-    resBuilder.setStatus(LoadNeutralCityStatus.SUCCESS);
+    resBuilder.setStatus(LoadCityStatus.SUCCESS);
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int currentCityRankForUser = RetrieveUtils.userCityRetrieveUtils().getCurrentCityRankForUser(senderProto.getUserId(), cityId);
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+//      int currentCityRankForUser = RetrieveUtils.userCityRetrieveUtils().getCurrentCityRankForUser(senderProto.getUserId(), cityId);
 
-      boolean legitCityLoad = checkLegitCityLoad(resBuilder, user, city, currentCityRankForUser);
+      boolean legitCityLoad = checkLegitCityLoad(resBuilder, user, city);//, currentCityRankForUser);
 
       if (legitCityLoad) {
-//        List<NeutralCityElement> neutralCityElements = NeutralCityElementsRetrieveUtils.getNeutralCityElementsForCity(cityId);
+//        List<CityElement> neutralCityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
 //        if (neutralCityElements != null) {
-//          for (NeutralCityElement nce : neutralCityElements) {
-//            resBuilder.addCityElements(CreateInfoProtoUtils.createNeutralCityElementProtoFromNeutralCityElement(nce, user.getType()));
+//          for (CityElement nce : neutralCityElements) {
+//            resBuilder.addCityElements(CreateInfoProtoUtils.createCityElementProtoFromCityElement(nce, user.getType()));
 //          }
 //        }
 
@@ -108,16 +103,15 @@ import com.lvl6.utils.RetrieveUtils;
           }
 //          addFullUserQuestDataLarges(resBuilder, userQuestsInCity, senderProto.getUserType());
         }
-        addUserCityGems(resBuilder, userId, cityId);
       }
 
-      LoadNeutralCityResponseEvent resEvent = new LoadNeutralCityResponseEvent(senderProto.getUserId());
+      LoadCityResponseEvent resEvent = new LoadCityResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
-      resEvent.setLoadNeutralCityResponseProto(resBuilder.build());  
+      resEvent.setLoadCityResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
 
     } catch (Exception e) {
-      log.error("exception in LoadNeutralCity processEvent", e);
+      log.error("exception in LoadCity processEvent", e);
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
@@ -228,28 +222,18 @@ import com.lvl6.utils.RetrieveUtils;
 //    }
 //  }
 
-  private boolean checkLegitCityLoad(Builder resBuilder, User user, City city, int currentCityRankForUser) {
+  private boolean checkLegitCityLoad(Builder resBuilder, User user, City city) {//, int currentCityRankForUser) {
     if (city == null || user == null) {
-      resBuilder.setStatus(LoadNeutralCityStatus.OTHER_FAIL);
+      resBuilder.setStatus(LoadCityStatus.OTHER_FAIL);
       log.error("city or user is null. city=" + city + ", user=" + user);
       return false;
     }
-    if (currentCityRankForUser < 1) {
-      resBuilder.setStatus(LoadNeutralCityStatus.NOT_ACCESSIBLE_TO_USER);
-      log.error("city " + city + "is not unlocked for user");
-      return false;
-    }
-    resBuilder.setStatus(LoadNeutralCityStatus.SUCCESS);
+//    if (currentCityRankForUser < 1) {
+//      resBuilder.setStatus(LoadCityStatus.NOT_ACCESSIBLE_TO_USER);
+//      log.error("city " + city + "is not unlocked for user");
+//      return false;
+//    }
+    resBuilder.setStatus(LoadCityStatus.SUCCESS);
     return true;
-  }
-  
-  private void addUserCityGems(Builder resBuilder, int userId, int cityId) {
-    Map<Integer, UserCityGem> gemIdsToUserCityGems =
-        UserCityGemRetrieveUtils.getGemIdsToGemsForUserAndCity(userId, cityId);
-    
-    for (UserCityGem ucg : gemIdsToUserCityGems.values()) {
-      UserCityGemProto ucgp = CreateInfoProtoUtils.createUserCityGemProto(ucg);
-      resBuilder.addMyGems(ucgp);
-    }
   }
 }

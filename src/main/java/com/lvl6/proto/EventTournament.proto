@@ -7,13 +7,13 @@ package com.lvl6.proto;
 option java_outer_classname = "EventTournamentProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
-message RetrieveTournamentEventRankingsRequestProto {
+message RetrieveTournamentRankingsRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 eventId = 2;
 	optional int32 afterThisRank = 3;
 }
 
-message RetrieveTournamentEventRankingsResponseProto {
+message RetrieveTournamentRankingsResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional RetrieveTournamentStatus status = 2;
 	optional int32 eventId = 3;

@@ -1987,14 +1987,14 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // repeated .com.lvl6.proto.FullUserMonsterProto fums = 2;
+    // repeated .com.lvl6.proto.FullUserMonsterProto fumps = 2;
     java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
-        getFumsList();
-    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFums(int index);
-    int getFumsCount();
+        getFumpsList();
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFumps(int index);
+    int getFumpsCount();
     java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-        getFumsOrBuilderList();
-    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumsOrBuilder(
+        getFumpsOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpsOrBuilder(
         int index);
     
     // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 3;
@@ -2115,25 +2115,25 @@ public final class EventMonsterProto {
       return sender_;
     }
     
-    // repeated .com.lvl6.proto.FullUserMonsterProto fums = 2;
-    public static final int FUMS_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fums_;
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getFumsList() {
-      return fums_;
+    // repeated .com.lvl6.proto.FullUserMonsterProto fumps = 2;
+    public static final int FUMPS_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fumps_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getFumpsList() {
+      return fumps_;
     }
     public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-        getFumsOrBuilderList() {
-      return fums_;
+        getFumpsOrBuilderList() {
+      return fumps_;
     }
-    public int getFumsCount() {
-      return fums_.size();
+    public int getFumpsCount() {
+      return fumps_.size();
     }
-    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFums(int index) {
-      return fums_.get(index);
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFumps(int index) {
+      return fumps_.get(index);
     }
-    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumsOrBuilder(
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpsOrBuilder(
         int index) {
-      return fums_.get(index);
+      return fumps_.get(index);
     }
     
     // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 3;
@@ -2148,7 +2148,7 @@ public final class EventMonsterProto {
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      fums_ = java.util.Collections.emptyList();
+      fumps_ = java.util.Collections.emptyList();
       status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -2166,8 +2166,8 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < fums_.size(); i++) {
-        output.writeMessage(2, fums_.get(i));
+      for (int i = 0; i < fumps_.size(); i++) {
+        output.writeMessage(2, fumps_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(3, status_.getNumber());
@@ -2185,9 +2185,9 @@ public final class EventMonsterProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      for (int i = 0; i < fums_.size(); i++) {
+      for (int i = 0; i < fumps_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, fums_.get(i));
+          .computeMessageSize(2, fumps_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2310,7 +2310,7 @@ public final class EventMonsterProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getFumsFieldBuilder();
+          getFumpsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2325,11 +2325,11 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (fumsBuilder_ == null) {
-          fums_ = java.util.Collections.emptyList();
+        if (fumpsBuilder_ == null) {
+          fumps_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
-          fumsBuilder_.clear();
+          fumpsBuilder_.clear();
         }
         status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -2379,14 +2379,14 @@ public final class EventMonsterProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (fumsBuilder_ == null) {
+        if (fumpsBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            fums_ = java.util.Collections.unmodifiableList(fums_);
+            fumps_ = java.util.Collections.unmodifiableList(fumps_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
-          result.fums_ = fums_;
+          result.fumps_ = fumps_;
         } else {
-          result.fums_ = fumsBuilder_.build();
+          result.fumps_ = fumpsBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000002;
@@ -2411,29 +2411,29 @@ public final class EventMonsterProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (fumsBuilder_ == null) {
-          if (!other.fums_.isEmpty()) {
-            if (fums_.isEmpty()) {
-              fums_ = other.fums_;
+        if (fumpsBuilder_ == null) {
+          if (!other.fumps_.isEmpty()) {
+            if (fumps_.isEmpty()) {
+              fumps_ = other.fumps_;
               bitField0_ = (bitField0_ & ~0x00000002);
             } else {
-              ensureFumsIsMutable();
-              fums_.addAll(other.fums_);
+              ensureFumpsIsMutable();
+              fumps_.addAll(other.fumps_);
             }
             onChanged();
           }
         } else {
-          if (!other.fums_.isEmpty()) {
-            if (fumsBuilder_.isEmpty()) {
-              fumsBuilder_.dispose();
-              fumsBuilder_ = null;
-              fums_ = other.fums_;
+          if (!other.fumps_.isEmpty()) {
+            if (fumpsBuilder_.isEmpty()) {
+              fumpsBuilder_.dispose();
+              fumpsBuilder_ = null;
+              fumps_ = other.fumps_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              fumsBuilder_ = 
+              fumpsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getFumsFieldBuilder() : null;
+                   getFumpsFieldBuilder() : null;
             } else {
-              fumsBuilder_.addAllMessages(other.fums_);
+              fumpsBuilder_.addAllMessages(other.fumps_);
             }
           }
         }
@@ -2483,7 +2483,7 @@ public final class EventMonsterProto {
             case 18: {
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addFums(subBuilder.buildPartial());
+              addFumps(subBuilder.buildPartial());
               break;
             }
             case 24: {
@@ -2593,190 +2593,190 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullUserMonsterProto fums = 2;
-      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fums_ =
+      // repeated .com.lvl6.proto.FullUserMonsterProto fumps = 2;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> fumps_ =
         java.util.Collections.emptyList();
-      private void ensureFumsIsMutable() {
+      private void ensureFumpsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          fums_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(fums_);
+          fumps_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(fumps_);
           bitField0_ |= 0x00000002;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fumsBuilder_;
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fumpsBuilder_;
       
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getFumsList() {
-        if (fumsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(fums_);
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getFumpsList() {
+        if (fumpsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(fumps_);
         } else {
-          return fumsBuilder_.getMessageList();
+          return fumpsBuilder_.getMessageList();
         }
       }
-      public int getFumsCount() {
-        if (fumsBuilder_ == null) {
-          return fums_.size();
+      public int getFumpsCount() {
+        if (fumpsBuilder_ == null) {
+          return fumps_.size();
         } else {
-          return fumsBuilder_.getCount();
+          return fumpsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFums(int index) {
-        if (fumsBuilder_ == null) {
-          return fums_.get(index);
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFumps(int index) {
+        if (fumpsBuilder_ == null) {
+          return fumps_.get(index);
         } else {
-          return fumsBuilder_.getMessage(index);
+          return fumpsBuilder_.getMessage(index);
         }
       }
-      public Builder setFums(
+      public Builder setFumps(
           int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
-        if (fumsBuilder_ == null) {
+        if (fumpsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureFumsIsMutable();
-          fums_.set(index, value);
+          ensureFumpsIsMutable();
+          fumps_.set(index, value);
           onChanged();
         } else {
-          fumsBuilder_.setMessage(index, value);
+          fumpsBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setFums(
+      public Builder setFumps(
           int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
-        if (fumsBuilder_ == null) {
-          ensureFumsIsMutable();
-          fums_.set(index, builderForValue.build());
+        if (fumpsBuilder_ == null) {
+          ensureFumpsIsMutable();
+          fumps_.set(index, builderForValue.build());
           onChanged();
         } else {
-          fumsBuilder_.setMessage(index, builderForValue.build());
+          fumpsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addFums(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
-        if (fumsBuilder_ == null) {
+      public Builder addFumps(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (fumpsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureFumsIsMutable();
-          fums_.add(value);
+          ensureFumpsIsMutable();
+          fumps_.add(value);
           onChanged();
         } else {
-          fumsBuilder_.addMessage(value);
+          fumpsBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addFums(
+      public Builder addFumps(
           int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
-        if (fumsBuilder_ == null) {
+        if (fumpsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureFumsIsMutable();
-          fums_.add(index, value);
+          ensureFumpsIsMutable();
+          fumps_.add(index, value);
           onChanged();
         } else {
-          fumsBuilder_.addMessage(index, value);
+          fumpsBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addFums(
+      public Builder addFumps(
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
-        if (fumsBuilder_ == null) {
-          ensureFumsIsMutable();
-          fums_.add(builderForValue.build());
+        if (fumpsBuilder_ == null) {
+          ensureFumpsIsMutable();
+          fumps_.add(builderForValue.build());
           onChanged();
         } else {
-          fumsBuilder_.addMessage(builderForValue.build());
+          fumpsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addFums(
+      public Builder addFumps(
           int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
-        if (fumsBuilder_ == null) {
-          ensureFumsIsMutable();
-          fums_.add(index, builderForValue.build());
+        if (fumpsBuilder_ == null) {
+          ensureFumpsIsMutable();
+          fumps_.add(index, builderForValue.build());
           onChanged();
         } else {
-          fumsBuilder_.addMessage(index, builderForValue.build());
+          fumpsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllFums(
+      public Builder addAllFumps(
           java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
-        if (fumsBuilder_ == null) {
-          ensureFumsIsMutable();
-          super.addAll(values, fums_);
+        if (fumpsBuilder_ == null) {
+          ensureFumpsIsMutable();
+          super.addAll(values, fumps_);
           onChanged();
         } else {
-          fumsBuilder_.addAllMessages(values);
+          fumpsBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearFums() {
-        if (fumsBuilder_ == null) {
-          fums_ = java.util.Collections.emptyList();
+      public Builder clearFumps() {
+        if (fumpsBuilder_ == null) {
+          fumps_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
-          fumsBuilder_.clear();
+          fumpsBuilder_.clear();
         }
         return this;
       }
-      public Builder removeFums(int index) {
-        if (fumsBuilder_ == null) {
-          ensureFumsIsMutable();
-          fums_.remove(index);
+      public Builder removeFumps(int index) {
+        if (fumpsBuilder_ == null) {
+          ensureFumpsIsMutable();
+          fumps_.remove(index);
           onChanged();
         } else {
-          fumsBuilder_.remove(index);
+          fumpsBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getFumsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getFumpsBuilder(
           int index) {
-        return getFumsFieldBuilder().getBuilder(index);
+        return getFumpsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumsOrBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpsOrBuilder(
           int index) {
-        if (fumsBuilder_ == null) {
-          return fums_.get(index);  } else {
-          return fumsBuilder_.getMessageOrBuilder(index);
+        if (fumpsBuilder_ == null) {
+          return fumps_.get(index);  } else {
+          return fumpsBuilder_.getMessageOrBuilder(index);
         }
       }
       public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-           getFumsOrBuilderList() {
-        if (fumsBuilder_ != null) {
-          return fumsBuilder_.getMessageOrBuilderList();
+           getFumpsOrBuilderList() {
+        if (fumpsBuilder_ != null) {
+          return fumpsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(fums_);
+          return java.util.Collections.unmodifiableList(fumps_);
         }
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addFumsBuilder() {
-        return getFumsFieldBuilder().addBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addFumpsBuilder() {
+        return getFumpsFieldBuilder().addBuilder(
             com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addFumsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addFumpsBuilder(
           int index) {
-        return getFumsFieldBuilder().addBuilder(
+        return getFumpsFieldBuilder().addBuilder(
             index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
       }
       public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
-           getFumsBuilderList() {
-        return getFumsFieldBuilder().getBuilderList();
+           getFumpsBuilderList() {
+        return getFumpsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-          getFumsFieldBuilder() {
-        if (fumsBuilder_ == null) {
-          fumsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getFumpsFieldBuilder() {
+        if (fumpsBuilder_ == null) {
+          fumpsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
-                  fums_,
+                  fumps_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
-          fums_ = null;
+          fumps_ = null;
         }
-        return fumsBuilder_;
+        return fumpsBuilder_;
       }
       
       // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 3;
@@ -2862,15 +2862,15 @@ public final class EventMonsterProto {
       "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
       "proto.MinimumUserProto\0223\n\005fumps\030\002 \003(\0132$." +
       "com.lvl6.proto.FullUserMonsterProto\022\022\n\nc" +
-      "lientTime\030\003 \001(\003\"\273\002\n UpdateMonsterHealthR",
+      "lientTime\030\003 \001(\003\"\274\002\n UpdateMonsterHealthR",
       "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\0222\n\004fums\030\002 \003(\0132$.c" +
-      "om.lvl6.proto.FullUserMonsterProto\022Z\n\006st" +
-      "atus\030\003 \001(\0162J.com.lvl6.proto.UpdateMonste" +
-      "rHealthResponseProto.UpdateMonsterHealth" +
-      "Status\"U\n\031UpdateMonsterHealthStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n" +
-      "\nFAIL_OTHER\020\003B\023B\021EventMonsterProto"
+      "proto.MinimumUserProto\0223\n\005fumps\030\002 \003(\0132$." +
+      "com.lvl6.proto.FullUserMonsterProto\022Z\n\006s" +
+      "tatus\030\003 \001(\0162J.com.lvl6.proto.UpdateMonst" +
+      "erHealthResponseProto.UpdateMonsterHealt" +
+      "hStatus\"U\n\031UpdateMonsterHealthStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016" +
+      "\n\nFAIL_OTHER\020\003B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2906,7 +2906,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Fums", "Status", },
+              new java.lang.String[] { "Sender", "Fumps", "Status", },
               com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.class,
               com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder.class);
           return null;

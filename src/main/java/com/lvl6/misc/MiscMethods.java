@@ -44,32 +44,15 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
-import com.lvl6.proto.EventProto.GeneralNotificationResponseProto;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BattleConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BazaarMinLevelConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BoosterPackConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.BossConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.ClanConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.EnhancementConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.ExpansionConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.ForgeConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.FormulaConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.GoldmineConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.HealthConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.LeaderboardEventConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.LockBoxConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.PrestigeConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.SpeedupConstants;
-import com.lvl6.proto.EventProto.StartupResponseProto.StartupConstants.ThreeCardMonteConstants;
-import com.lvl6.proto.EventProto.UpdateClientUserResponseProto;
-import com.lvl6.proto.InfoProto.ClanTierLevelProto;
-import com.lvl6.proto.InfoProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
-import com.lvl6.proto.InfoProto.GoldSaleProto;
-import com.lvl6.proto.InfoProto.InAppPurchasePackageProto;
-import com.lvl6.proto.InfoProto.LeaderboardEventProto;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
+import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
+import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
+import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
+import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
@@ -90,7 +73,7 @@ import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.NeutralCityElementsRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.PossessEquipJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -339,10 +322,6 @@ public class MiscMethods {
 
   public static StartupConstants createStartupConstantsProto() {
     StartupConstants.Builder cb = StartupConstants.newBuilder()
-        .setMaxLevelDifferenceForBattle(ControllerConstants.BATTLE__MAX_LEVEL_DIFFERENCE)
-        .setArmoryXLength(ControllerConstants.ARMORY_XLENGTH).setArmoryYLength(ControllerConstants.ARMORY_YLENGTH)
-        .setVaultXLength(ControllerConstants.VAULT_XLENGTH).setVaultYLength(ControllerConstants.VAULT_YLENGTH)        
-//        .setMarketplaceXLength(ControllerConstants.MARKETPLACE_XLENGTH).setMarketplaceYLength(ControllerConstants.MARKETPLACE_YLENGTH)        
         .setCarpenterXLength(ControllerConstants.CARPENTER_XLENGTH).setCarpenterYLength(ControllerConstants.CARPENTER_YLENGTH)        
         .setAviaryXLength(ControllerConstants.AVIARY_XLENGTH).setAviaryYLength(ControllerConstants.AVIARY_YLENGTH)
         .setAttackBaseGain(ControllerConstants.USE_SKILL_POINT__ATTACK_BASE_GAIN)
@@ -725,7 +704,7 @@ public class MiscMethods {
     StructureRetrieveUtils.reload();
     PossessEquipJobRetrieveUtils.reload();
     LevelsRequiredExperienceRetrieveUtils.reload();
-    NeutralCityElementsRetrieveUtils.reload(); 
+    CityElementsRetrieveUtils.reload(); 
     ThreeCardMonteRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();

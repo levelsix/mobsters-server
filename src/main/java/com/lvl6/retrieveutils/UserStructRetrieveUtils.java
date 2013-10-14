@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.UserStruct;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.InfoProto.StructOrientation;
+import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.StringUtils;
 

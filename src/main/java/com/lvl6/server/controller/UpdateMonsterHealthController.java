@@ -12,52 +12,52 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
-import com.lvl6.events.request.UpdateEquipDurabilityRequestEvent;
-import com.lvl6.events.response.UpdateEquipDurabilityResponseEvent;
+import com.lvl6.events.request.UpdateMonsterHealthRequestEvent;
+import com.lvl6.events.response.UpdateMonsterHealthResponseEvent;
 import com.lvl6.info.UserEquip;
-import com.lvl6.proto.EventProto.UpdateEquipDurabilityRequestProto;
-import com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto;
-import com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.Builder;
-import com.lvl6.proto.EventProto.UpdateEquipDurabilityResponseProto.UpdateEquipDurabilityStatus;
-import com.lvl6.proto.InfoProto.FullUserEquipProto;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProto;
+import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto;
+import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder;
+import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class UpdateEquipDurabilityController extends EventController {
+@Component @DependsOn("gameServer") public class UpdateMonsterHealthController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 
-  public UpdateEquipDurabilityController() {
+  public UpdateMonsterHealthController() {
     numAllocatedThreads = 4;
   }
 
   @Override
   public RequestEvent createRequestEvent() {
-    return new UpdateEquipDurabilityRequestEvent();
+    return new UpdateMonsterHealthRequestEvent();
   }
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_UPDATE_EQUIP_DURABILITY_EVENT;
+    return EventProtocolRequest.C_UPDATE_MONSTER_HEALTH_EVENT;
   }
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
-    UpdateEquipDurabilityRequestProto reqProto = ((UpdateEquipDurabilityRequestEvent)event).getUpdateEquipDurabilityRequestProto();
+    UpdateMonsterHealthRequestProto reqProto = ((UpdateMonsterHealthRequestEvent)event).getUpdateMonsterHealthRequestProto();
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
-    List<FullUserEquipProto> fuepList = reqProto.getFuepsList();
+    List<FullUserMonsterProto> fumpList = reqProto.getFumpsList();
 
     //set some values to send to the client (the response proto)
-    UpdateEquipDurabilityResponseProto.Builder resBuilder = UpdateEquipDurabilityResponseProto.newBuilder();
+    UpdateMonsterHealthResponseProto.Builder resBuilder = UpdateMonsterHealthResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
-    resBuilder.setStatus(UpdateEquipDurabilityStatus.FAIL_OTHER); //default
+    resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER); //default
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
@@ -65,7 +65,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     	Map<Long, Integer> userEquipIdToExpectedDurability = new HashMap<Long, Integer>();
     	
-      boolean legit = checkLegit(resBuilder, userId, fuepList, 
+      boolean legit = checkLegit(resBuilder, userId, fumpList, 
       		userEquipIdToExpectedDurability);
 
       boolean successful = false;
@@ -77,13 +77,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	//send back the equip protos that updated
       	//no reason to believe some equip will not be updated so
       	//send back what client gave
-      	resBuilder.addAllFueps(fuepList);
-    	  resBuilder.setStatus(UpdateEquipDurabilityStatus.SUCCESS);
+      	resBuilder.addAllFumps(fumpList);
+    	  resBuilder.setStatus(UpdateMonsterHealthStatus.SUCCESS);
       }
       
-      UpdateEquipDurabilityResponseEvent resEvent = new UpdateEquipDurabilityResponseEvent(userId);
+      UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(userId);
       resEvent.setTag(event.getTag());
-      resEvent.setUpdateEquipDurabilityResponseProto(resBuilder.build());
+      resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 //
 //      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
@@ -91,16 +91,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //      resEventUpdate.setTag(event.getTag());
 //      server.writeEvent(resEventUpdate);
     } catch (Exception e) {
-      log.error("exception in UpdateEquipDurabilityController processEvent", e);
+      log.error("exception in UpdateMonsterHealthController processEvent", e);
       //don't let the client hang
       try {
-    	  resBuilder.setStatus(UpdateEquipDurabilityStatus.FAIL_OTHER);
-    	  UpdateEquipDurabilityResponseEvent resEvent = new UpdateEquipDurabilityResponseEvent(userId);
+    	  resBuilder.setStatus(UpdateMonsterHealthStatus.FAIL_OTHER);
+    	  UpdateMonsterHealthResponseEvent resEvent = new UpdateMonsterHealthResponseEvent(userId);
     	  resEvent.setTag(event.getTag());
-    	  resEvent.setUpdateEquipDurabilityResponseProto(resBuilder.build());
+    	  resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
     	  server.writeEvent(resEvent);
       } catch (Exception e2) {
-    	  log.error("exception2 in UpdateEquipDurabilityController processEvent", e);
+    	  log.error("exception2 in UpdateMonsterHealthController processEvent", e);
       }
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -114,7 +114,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Also, returns the expected durabilities for the new equips
    */
   private boolean checkLegit(Builder resBuilder, int userId,
-		  List<FullUserEquipProto> fuepList, 
+		  List<FullUserMonsterProto> fuepList, 
 		  Map<Long, Integer> userEquipIdToExpectedDurability) {
   	
   	if (null == fuepList || fuepList.isEmpty()) {
@@ -123,9 +123,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//extract the ids so it's easier to get userEquips from db
-  	List<Long> userEquipIds = getUserEquipIds(fuepList, userEquipIdToExpectedDurability);
-  	List<UserEquip> userEquips = RetrieveUtils.userEquipRetrieveUtils()
-  			.getSpecificUserEquips(userEquipIds);
+  	List<Long> userEquipIds = getUserMonsterIds(fuepList, userEquipIdToExpectedDurability);
+  	List<UserMonster> userEquips = RetrieveUtils.userEquipRetrieveUtils()
+  			.getSpecificUserMonsters(userEquipIds);
   	
   	if (null == userEquips || userEquips.isEmpty()) {
   		log.error("unexpected error: userEquipIds don't exist. ids=" + userEquipIds);
@@ -135,21 +135,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//see if the user has the equips
   	if (userEquips.size() != fuepList.size()) {
   		log.error("unexpected error: mismatch between user equips client sent and " +
-  				"what is in the db. clientUserEquipIds=" + userEquipIds + "\t inDb=" +
+  				"what is in the db. clientUserMonsterIds=" + userEquipIds + "\t inDb=" +
   				userEquips + "\t continuing the processing");
   	}
   	
   	return true;
-  	//resBuilder.setStatus(UpdateEquipDurabilityStatus.SUCCESS);
+  	//resBuilder.setStatus(UpdateMonsterHealthStatus.SUCCESS);
   }
   
   //extract the ids from the protos
-  private List<Long> getUserEquipIds(List<FullUserEquipProto> fuepList,
+  private List<Long> getUserMonsterIds(List<FullUserMonsterProto> fuepList,
   		Map<Long, Integer> userEquipIdToExpectedDurability) {
   	List<Long> idList = new ArrayList<Long>();
   	
-  	for(FullUserEquipProto fuep : fuepList) {
-  		long id = fuep.getUserEquipId();
+  	for(FullUserMonsterProto fuep : fuepList) {
+  		long id = fuep.getUserMonsterId();
   		idList.add(id);
   		int durability = fuep.getCurrentDurability();
   		userEquipIdToExpectedDurability.put(id, durability);
@@ -162,7 +162,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//replace existing durability for these user equips w/ new values 
   	List<Long> userEquipIds = null;
   	List<Integer> currentDurability = null;
-  	int numUpdated = UpdateUtils.get().updateUserEquipsDurability(
+  	int numUpdated = UpdateUtils.get().updateUserMonstersDurability(
   			userEquipIds, currentDurability, userEquipIdToExpectedDurability);
   	
   	if (numUpdated >= userEquipIdToExpectedDurability.size()) {

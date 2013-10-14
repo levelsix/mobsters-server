@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.EventProto.PrivateChatPostRequestProto;
+import com.lvl6.proto.EventChatProto.PrivateChatPostRequestProto;
 
 public class PrivateChatPostRequestEvent extends RequestEvent {
 

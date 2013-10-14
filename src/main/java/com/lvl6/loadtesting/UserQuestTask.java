@@ -5,7 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.MessageChannel;
 
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 
 public class UserQuestTask implements Runnable{
 	
