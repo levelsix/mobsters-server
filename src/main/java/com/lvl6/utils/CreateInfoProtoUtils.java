@@ -88,7 +88,6 @@ import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.UserQuestsTaskProgressRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -113,12 +112,6 @@ public class CreateInfoProtoUtils {
 				.setRecruitTime(r.getTimeOfReferral().getTime()).setCoinsGivenToReferrer(r.getCoinsGivenToReferrer()).build();
 	}
 
-//	public static MarketplacePostPurchasedNotificationProto createMarketplacePostPurchasedNotificationProtoFromMarketplaceTransaction(MarketplaceTransaction mt, User buyer, User seller) {
-//		FullMarketplacePostProto fmpp = createFullMarketplacePostProtoFromMarketplacePost(mt.getPost(), seller);
-//		return MarketplacePostPurchasedNotificationProto.newBuilder().setMarketplacePost(fmpp)
-//				.setBuyer(createMinimumUserProtoFromUser(buyer)).setTimeOfPurchase(mt.getTimeOfPurchase().getTime())
-//				.setSellerHadLicense(mt.getSellerHadLicense()).build();
-//	}
 
 	public static AnimatedSpriteOffsetProto createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(AnimatedSpriteOffset aso) {
 		return AnimatedSpriteOffsetProto.newBuilder().setImageName(aso.getImgName())
@@ -314,7 +307,7 @@ public class CreateInfoProtoUtils {
 			builder.setClan(createMinimumClanProtoFromClan(clan));
 		}
 		builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
-		builder.setNumAdditionalForgeSlots(u.getNumAdditionalMonsterSlots());
+		builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
 		builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
 		builder.setHasActiveShield(u.isHasActiveShield());
 		if(u.getShieldEndTime() != null) {
@@ -487,36 +480,36 @@ public class CreateInfoProtoUtils {
 
 				if (!userQuest.isRedeemed() && !userQuest.isComplete()) {
 					List<Integer> tasksRequired = quest.getTasksRequired(); 
-					if (tasksRequired != null && tasksRequired.size() > 0) {
-
-						if (questIdToUserTasksCompletedForQuestForUser == null) {
-							questIdToUserTasksCompletedForQuestForUser = RetrieveUtils.userQuestsCompletedTasksRetrieveUtils().getQuestIdToUserTasksCompletedForQuestForUser(userQuest.getUserId());
-						}
-						List<Integer> userTasksCompletedForQuest = questIdToUserTasksCompletedForQuestForUser.get(userQuest.getQuestId());
-
-						for (Integer requiredTaskId : tasksRequired) {
-							boolean taskCompletedForQuest = false;
-							Integer numTimesActed = null;
-							if (userQuest.isTasksComplete() || (userTasksCompletedForQuest != null && userTasksCompletedForQuest.contains(requiredTaskId))) {
-								taskCompletedForQuest = true;
-								numComponentsComplete++;
-							} else {
-								if (questIdToTaskIdsToNumTimesActedInQuest == null) {
-									questIdToTaskIdsToNumTimesActedInQuest = UserQuestsTaskProgressRetrieveUtils.getQuestIdToTaskIdsToNumTimesActedInQuest(userQuest.getUserId());
-								}
-								Map<Integer, Integer> taskIdsToNumTimesActedForUserQuest = questIdToTaskIdsToNumTimesActedInQuest.get(userQuest.getQuestId());
-								if (taskIdsToNumTimesActedForUserQuest != null) {
-									numTimesActed = taskIdsToNumTimesActedForUserQuest.get(requiredTaskId);
-									if (numTimesActed == null) {
-										numTimesActed = 0;
-									}
-								} else {
-									numTimesActed = 0;
-								}
-							}
-							builder.addRequiredTasksProgress(createMinimumUserQuestTaskProto(userQuest, requiredTaskId, taskCompletedForQuest, numTimesActed));
-						}
-					}
+//					if (tasksRequired != null && tasksRequired.size() > 0) {
+//
+//						if (questIdToUserTasksCompletedForQuestForUser == null) {
+//							questIdToUserTasksCompletedForQuestForUser = RetrieveUtils.userQuestsCompletedTasksRetrieveUtils().getQuestIdToUserTasksCompletedForQuestForUser(userQuest.getUserId());
+//						}
+//						List<Integer> userTasksCompletedForQuest = questIdToUserTasksCompletedForQuestForUser.get(userQuest.getQuestId());
+//
+//						for (Integer requiredTaskId : tasksRequired) {
+//							boolean taskCompletedForQuest = false;
+//							Integer numTimesActed = null;
+//							if (userQuest.isTasksComplete() || (userTasksCompletedForQuest != null && userTasksCompletedForQuest.contains(requiredTaskId))) {
+//								taskCompletedForQuest = true;
+//								numComponentsComplete++;
+//							} else {
+//								if (questIdToTaskIdsToNumTimesActedInQuest == null) {
+//									questIdToTaskIdsToNumTimesActedInQuest = UserQuestsTaskProgressRetrieveUtils.getQuestIdToTaskIdsToNumTimesActedInQuest(userQuest.getUserId());
+//								}
+//								Map<Integer, Integer> taskIdsToNumTimesActedForUserQuest = questIdToTaskIdsToNumTimesActedInQuest.get(userQuest.getQuestId());
+//								if (taskIdsToNumTimesActedForUserQuest != null) {
+//									numTimesActed = taskIdsToNumTimesActedForUserQuest.get(requiredTaskId);
+//									if (numTimesActed == null) {
+//										numTimesActed = 0;
+//									}
+//								} else {
+//									numTimesActed = 0;
+//								}
+//							}
+//							builder.addRequiredTasksProgress(createMinimumUserQuestTaskProto(userQuest, requiredTaskId, taskCompletedForQuest, numTimesActed));
+//						}
+//					}
 
 					List<Integer> defeatTypeJobsRequired; 
 //					if (defeatTypeJobsRequired != null && defeatTypeJobsRequired.size() > 0) {

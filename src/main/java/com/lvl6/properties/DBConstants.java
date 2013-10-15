@@ -3,6 +3,7 @@ package com.lvl6.properties;
 //SPECIFYING COLUMNS OF STATIC DATA TABLES UNNECESSARY
 public class DBConstants {
   /* TABLENAMES*/
+	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
 	public static final String TABLE_BATTLE_HISTORY = "battle_history";
 	public static final String TABLE_BOOSTER_ITEM = "booster_item";
 	public static final String TABLE_BOOSTER_PACK = "booster_pack";
@@ -67,6 +68,12 @@ public class DBConstants {
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
   public static final String GENERIC__ID = "id";
+  
+  /*ALERT ON STARTUP*/
+  public static final String ALERT_ON_STARTUP__ID = GENERIC__ID;
+  public static final String ALERT_ON_STARTUP__MESSAGE = "message";
+  public static final String ALERT_ON_STARTUP__IS_ACTIVE = "is_active";
+  
   
   /*AVAILABLE REFERRAL CODES*/
   public static final String AVAILABLE_REFERRAL_CODES__ID = GENERIC__ID;

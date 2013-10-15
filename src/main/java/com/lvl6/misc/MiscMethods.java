@@ -46,6 +46,7 @@ import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.rarechange.AlertOnStartupRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
@@ -530,6 +531,7 @@ public class MiscMethods {
 
   public static void reloadAllRareChangeStaticData() {
     log.info("Reloading rare change static data");
+    AlertOnStartupRetrieveUtils.reload();
     CityRetrieveUtils.reload();
     BuildStructJobRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
