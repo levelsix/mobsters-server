@@ -6,8 +6,8 @@ import java.util.List;
 import com.lvl6.proto.QuestProto.SpecialQuestAction;
 
 public class Quest implements Serializable {
-
-	private static final long serialVersionUID = 4887558885396417181L;
+	
+	private static final long serialVersionUID = -6765884357882058627L;
 	private int id;
   private int cityId;
   private String goodName;
@@ -27,6 +27,8 @@ public class Quest implements Serializable {
   private SpecialQuestAction specialQuestActionRequired;
   private String goodQuestGiverImageSuffix;
   private int priority;
+  private String carrotId;
+
 
 
 	public Quest(int id, int cityId, String goodName, String goodDescription,
@@ -36,7 +38,7 @@ public class Quest implements Serializable {
 			List<Integer> tasksRequired, List<Integer> upgradeStructJobsRequired,
 			List<Integer> buildStructJobsRequired, int coinRetrievalAmountRequired,
 			SpecialQuestAction specialQuestActionRequired,
-			String goodQuestGiverImageSuffix, int priority) {
+			String goodQuestGiverImageSuffix, int priority, String carrotId) {
 		super();
 		this.id = id;
 		this.cityId = cityId;
@@ -57,6 +59,7 @@ public class Quest implements Serializable {
 		this.specialQuestActionRequired = specialQuestActionRequired;
 		this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
 		this.priority = priority;
+		this.carrotId = carrotId;
 	}
 
 	public int getPriority() {
@@ -226,6 +229,32 @@ public class Quest implements Serializable {
 
 	public void setGoodQuestGiverImageSuffix(String goodQuestGiverImageSuffix) {
 		this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
+	}
+
+	public String getCarrotId() {
+		return carrotId;
+	}
+
+	public void setCarrotId(String carrotId) {
+		this.carrotId = carrotId;
+	}
+
+	@Override
+	public String toString() {
+		return "Quest [id=" + id + ", cityId=" + cityId + ", goodName=" + goodName
+				+ ", goodDescription=" + goodDescription + ", goodDoneResponse="
+				+ goodDoneResponse + ", goodAcceptDialogue=" + goodAcceptDialogue
+				+ ", assetNumWithinCity=" + assetNumWithinCity + ", coinsGained="
+				+ coinsGained + ", diamondsGained=" + diamondsGained + ", expGained="
+				+ expGained + ", equipIdGained=" + equipIdGained
+				+ ", questsRequiredForThis=" + questsRequiredForThis
+				+ ", tasksRequired=" + tasksRequired + ", upgradeStructJobsRequired="
+				+ upgradeStructJobsRequired + ", buildStructJobsRequired="
+				+ buildStructJobsRequired + ", coinRetrievalAmountRequired="
+				+ coinRetrievalAmountRequired + ", specialQuestActionRequired="
+				+ specialQuestActionRequired + ", goodQuestGiverImageSuffix="
+				+ goodQuestGiverImageSuffix + ", priority=" + priority + ", carrotId="
+				+ carrotId + "]";
 	}
 
 }

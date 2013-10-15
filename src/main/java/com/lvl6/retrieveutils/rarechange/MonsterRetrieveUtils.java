@@ -110,10 +110,12 @@ import com.lvl6.utils.DBConnection;
     int maxSilverDrop = rs.getInt(i++);
     int numPuzzlePieces = rs.getInt(i++);
     float puzzlePieceDropRate = rs.getFloat(i++);
+    String carrotId = rs.getString(i++); 
     
     Monster monster = new Monster(id, name, quality, evolutionLevel,
     		displayName, element, maxHp, imageName, monsterType, expReward,
-    		minSilverDrop, maxSilverDrop, numPuzzlePieces, puzzlePieceDropRate);
+    		minSilverDrop, maxSilverDrop, numPuzzlePieces, puzzlePieceDropRate,
+    		carrotId);
 
     monster.setRand(rand);
     return monster;

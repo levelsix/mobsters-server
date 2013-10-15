@@ -53,10 +53,11 @@ public class TournamentEvent implements Serializable {
     this.rewardsGivenOut = rewardsGivenOut;
   }
 
-  @Override
-  public String toString() {
-    return "LeaderboardEvent [id=" + id + ", startDate=" + startDate
-        + ", endDate=" + endDate + ", eventName=" + eventName
-        + ", rewardsGivenOut=" + rewardsGivenOut + "]";
-  }
+	@Override
+	public String toString() {
+		return "TournamentEvent [id=" + id + ", startDate=" + startDate
+				+ ", endDate=" + endDate + ", eventName=" + eventName
+				+ ", rewardsGivenOut=" + rewardsGivenOut + "]";
+	}
+
 }

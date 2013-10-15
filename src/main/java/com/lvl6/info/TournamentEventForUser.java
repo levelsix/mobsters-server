@@ -2,28 +2,28 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-public class UserLeaderboardEvent implements Serializable {
+public class TournamentEventForUser implements Serializable {
   private static final long serialVersionUID = -4146319195339195482L;
-  private int leaderboardEventId;
+  private int tournamentEventId;
   private int userId;
   private int battlesWon;
   private int battlesLost;
   private int battlesFled;
   
-  public UserLeaderboardEvent(int leaderboardEventId, int userId, int battlesWon,
+  public TournamentEventForUser(int tournamentEventId, int userId, int battlesWon,
       int battlesLost, int battlesFled) {
     super();
-    this.leaderboardEventId = leaderboardEventId;
+    this.tournamentEventId = tournamentEventId;
     this.userId = userId;
     this.battlesWon = battlesWon;
     this.battlesLost = battlesLost;
     this.battlesFled = battlesFled;
   }
-  public int getLeaderboardEventId() {
-    return leaderboardEventId;
+  public int getTournamentEventId() {
+    return tournamentEventId;
   }
-  public void setLeaderboardEventId(int leaderboardEventId) {
-    this.leaderboardEventId = leaderboardEventId;
+  public void setTournamentEventId(int tournamentEventId) {
+    this.tournamentEventId = tournamentEventId;
   }
   public int getUserId() {
     return userId;
@@ -51,7 +51,7 @@ public class UserLeaderboardEvent implements Serializable {
   }
   @Override
   public String toString() {
-    return "BossEvent [leaderboardEventId=" + leaderboardEventId + ", userId="
+    return "BossEvent [tournamentEventId=" + tournamentEventId + ", userId="
         + userId + ", battlesWon=" + battlesWon + ", battlesLost=" + battlesLost
         + ", battlesFled=" + battlesFled + "]";
   }

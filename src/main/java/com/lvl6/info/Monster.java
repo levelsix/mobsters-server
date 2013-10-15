@@ -20,6 +20,7 @@ public class Monster implements Serializable {
 	private int maxSilverDrop;
 	private int numPuzzlePieces;
 	private float puzzlePieceDropRate;
+	private String carrotId;
 	
 	private Random rand;
 
@@ -27,7 +28,7 @@ public class Monster implements Serializable {
 	public Monster(int id, String name, int quality, int evolutionLevel,
 			String displayName, int element, int maxHp, String imageName,
 			int monsterType, int expReward, int minSilverDrop, int maxSilverDrop,
-			int numPuzzlePieces, float puzzlePieceDropRate) {
+			int numPuzzlePieces, float puzzlePieceDropRate, String carrotId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,6 +44,7 @@ public class Monster implements Serializable {
 		this.maxSilverDrop = maxSilverDrop;
 		this.numPuzzlePieces = numPuzzlePieces;
 		this.puzzlePieceDropRate = puzzlePieceDropRate;
+		this.carrotId = carrotId;
 	}
 
 
@@ -186,6 +188,16 @@ public class Monster implements Serializable {
 	}
 
 
+	public String getCarrotId() {
+		return carrotId;
+	}
+
+
+	public void setCarrotId(String carrotId) {
+		this.carrotId = carrotId;
+	}
+
+
 	public Random getRand() {
 		return rand;
 	}
@@ -226,7 +238,9 @@ public class Monster implements Serializable {
 				+ imageName + ", monsterType=" + monsterType + ", expReward="
 				+ expReward + ", minSilverDrop=" + minSilverDrop + ", maxSilverDrop="
 				+ maxSilverDrop + ", numPuzzlePieces=" + numPuzzlePieces
-				+ ", puzzlePieceDropRate=" + puzzlePieceDropRate + "]";
+				+ ", puzzlePieceDropRate=" + puzzlePieceDropRate + ", carrotId="
+				+ carrotId + ", rand=" + rand + "]";
 	}
+
 
 }

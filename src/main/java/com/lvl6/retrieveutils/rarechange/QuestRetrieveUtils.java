@@ -210,15 +210,16 @@ import com.lvl6.utils.QuestGraph;
     }
     
     String goodQuestGiverImageSuffix = rs.getString(i++);
-    
     int priority = rs.getInt(i++);
+    String carrotId = rs.getString(i++);
     
     Quest quest = new Quest(id, cityId, goodName, goodDescription,
     		goodDoneResponse, goodAcceptDialogue, assetNumWithinCity,
     		coinsGained, diamondsGained, expGained, equipIdGained,
     		questsRequiredForThis, tasksRequired, upgradeStructJobsRequired,
     		buildStructJobsRequired, coinRetrievalAmountRequired,
-    		specialQuestActionRequired, goodQuestGiverImageSuffix, priority);
+    		specialQuestActionRequired, goodQuestGiverImageSuffix, priority,
+    		carrotId);
     return quest;
   }
 

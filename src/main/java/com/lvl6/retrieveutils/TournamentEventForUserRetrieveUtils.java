@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.TournamentEvent;
-import com.lvl6.info.UserLeaderboardEvent;
+import com.lvl6.info.TournamentEventForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
 import com.lvl6.utils.DBConnection;
@@ -23,7 +23,7 @@ public class TournamentEventForUserRetrieveUtils {
 
   private static final String TABLE_NAME = DBConstants.TABLE_TOURNAMENT_EVENT_FOR_USER;
 
-  public static UserLeaderboardEvent getSpecificUserLeaderboardEvent(
+  public static TournamentEventForUser getSpecificUserLeaderboardEvent(
       int leaderboardEventId, int userId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID, leaderboardEventId);
@@ -31,29 +31,29 @@ public class TournamentEventForUserRetrieveUtils {
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    UserLeaderboardEvent ulbe = grabUserLeaderboardEventFromRS(rs);
+    TournamentEventForUser ulbe = grabUserLeaderboardEventFromRS(rs);
     DBConnection.get().close(rs, null, conn);
     return ulbe;
   }
   
-  public static List<UserLeaderboardEvent> getUserLeaderboardEventsForUserId(int userId) {
+  public static List<TournamentEventForUser> getUserLeaderboardEventsForUserId(int userId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
-    List<UserLeaderboardEvent> userLeaderboardEvents = grabUserLeaderboardEventsFromRS(rs);
+    List<TournamentEventForUser> userLeaderboardEvents = grabUserLeaderboardEventsFromRS(rs);
     DBConnection.get().close(rs, null, conn);
     return userLeaderboardEvents;
   }
 
-  public static List<UserLeaderboardEvent> getActiveUserLeaderboardEventsForUserId(int userId){
-    List<UserLeaderboardEvent> events = getUserLeaderboardEventsForUserId(userId);
-    List<UserLeaderboardEvent> toReturn = new ArrayList<UserLeaderboardEvent>();
+  public static List<TournamentEventForUser> getActiveUserLeaderboardEventsForUserId(int userId){
+    List<TournamentEventForUser> events = getUserLeaderboardEventsForUserId(userId);
+    List<TournamentEventForUser> toReturn = new ArrayList<TournamentEventForUser>();
     
     long curTime = new Date().getTime();
-    for (UserLeaderboardEvent e : events) {
-      TournamentEvent l = TournamentEventRetrieveUtils.getTournamentEventForId(e.getLeaderboardEventId());
+    for (TournamentEventForUser e : events) {
+      TournamentEvent l = TournamentEventRetrieveUtils.getTournamentEventForId(e.getTournamentEventId());
       if(l.getEndDate().getTime() > curTime) {
         toReturn.add(e);
       }
@@ -62,13 +62,13 @@ public class TournamentEventForUserRetrieveUtils {
     return toReturn.size() > 0 ? toReturn : null;
   }
 
-  private static UserLeaderboardEvent grabUserLeaderboardEventFromRS(ResultSet rs) {
+  private static TournamentEventForUser grabUserLeaderboardEventFromRS(ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
         while(rs.next()) {
-          UserLeaderboardEvent ulbe = convertRSRowToUserLeaderboardEvent(rs);
+          TournamentEventForUser ulbe = convertRSRowToUserLeaderboardEvent(rs);
           return ulbe;
         }
       } catch (SQLException e) {
@@ -79,14 +79,14 @@ public class TournamentEventForUserRetrieveUtils {
     return null;
   }
   
-  private static List<UserLeaderboardEvent> grabUserLeaderboardEventsFromRS(ResultSet rs) {
+  private static List<TournamentEventForUser> grabUserLeaderboardEventsFromRS(ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
-        List<UserLeaderboardEvent> userLeaderboardEvents = new ArrayList<UserLeaderboardEvent>();
+        List<TournamentEventForUser> userLeaderboardEvents = new ArrayList<TournamentEventForUser>();
         while(rs.next()) {
-          UserLeaderboardEvent ulbe = convertRSRowToUserLeaderboardEvent(rs);
+          TournamentEventForUser ulbe = convertRSRowToUserLeaderboardEvent(rs);
           userLeaderboardEvents.add(ulbe);
         }
         return userLeaderboardEvents;
@@ -101,7 +101,7 @@ public class TournamentEventForUserRetrieveUtils {
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static UserLeaderboardEvent convertRSRowToUserLeaderboardEvent(ResultSet rs) throws SQLException {
+  private static TournamentEventForUser convertRSRowToUserLeaderboardEvent(ResultSet rs) throws SQLException {
     int i = 1;
     int leaderboardEventId = rs.getInt(i++);
     int userId = rs.getInt(i++);
@@ -109,7 +109,7 @@ public class TournamentEventForUserRetrieveUtils {
     int battlesLost = rs.getInt(i++);
     int battlesFled = rs.getInt(i++);
     
-    return new UserLeaderboardEvent(leaderboardEventId, userId, battlesWon, battlesLost, battlesFled);
+    return new TournamentEventForUser(leaderboardEventId, userId, battlesWon, battlesLost, battlesFled);
   }
   
 }
