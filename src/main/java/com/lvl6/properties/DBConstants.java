@@ -55,7 +55,7 @@ public class DBConstants {
   public static final String TABLE_USER_TASK_HISTORY = "task_history";
   public static final String TABLE_USER_TASK_STAGE = "task_stage_for_user";
   public static final String TABLE_USER_TASK_STAGE_HISTORY = "task_stage_history_for_user";
-  public static final String TABLE_USER = "user";
+  public static final String TABLE_USER = "users";
   public static final String TABLE_BANNED_USER = "user_banned";
   public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
   public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
