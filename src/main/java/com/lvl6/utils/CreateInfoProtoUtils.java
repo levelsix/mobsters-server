@@ -12,21 +12,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.AnimatedSpriteOffset;
-import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
 import com.lvl6.info.CityElement;
-import com.lvl6.info.CityExpansionCost;
-import com.lvl6.info.CityGem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
+import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
-import com.lvl6.info.LeaderboardEvent;
-import com.lvl6.info.LeaderboardEventReward;
-import com.lvl6.info.Mentorship;
 import com.lvl6.info.Monster;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Quest;
@@ -34,16 +29,16 @@ import com.lvl6.info.Referral;
 import com.lvl6.info.Structure;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskStage;
+import com.lvl6.info.TournamentEvent;
+import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
-import com.lvl6.info.UserCityGem;
 import com.lvl6.info.UserClan;
-import com.lvl6.info.UserEquip;
+import com.lvl6.info.UserMonster;
 import com.lvl6.info.UserQuest;
 import com.lvl6.info.UserStruct;
 import com.lvl6.info.jobs.BuildStructJob;
 import com.lvl6.info.jobs.UpgradeStructJob;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
@@ -68,6 +63,7 @@ import com.lvl6.proto.JobProto.BuildStructJobProto;
 import com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto;
 import com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto;
 import com.lvl6.proto.JobProto.UpgradeStructJobProto;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
@@ -85,8 +81,8 @@ import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament;
-import com.lvl6.proto.TournamentStuffProto.TournamentProto;
-import com.lvl6.proto.TournamentStuffProto.TournamentRewardProto;
+import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
+import com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -194,7 +190,7 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 	
-	public static CityExpansionCostProto createCityExpansionCostProtoFromCityExpansionCost(CityExpansionCost cec) {
+	public static CityExpansionCostProto createCityExpansionCostProtoFromCityExpansionCost(ExpansionCost cec) {
 		CityExpansionCostProto.Builder builder = CityExpansionCostProto.newBuilder();
 		builder.setExpansionNum(cec.getId())
 				.setExpansionCost(cec.getExpansionCost());
@@ -231,7 +227,7 @@ public class CreateInfoProtoUtils {
 		builder.setCoinsGained(quest.getCoinsGained());
 		builder.setDiamondsGained(quest.getDiamondsGained());
 		builder.setExpGained(quest.getExpGained());
-		builder.setMonsterIdGained(quest.getEquipIdGained());
+//		builder.setMonsterIdGained(quest.getEquipIdGained());
 		builder.addAllQuestsRequiredForThis(quest.getQuestsRequiredForThis());
 		builder.addAllTaskReqs(quest.getTasksRequired());
 		builder.addAllUpgradeStructJobsReqs(quest.getUpgradeStructJobsRequired());
@@ -338,25 +334,7 @@ public class CreateInfoProtoUtils {
 		
 
 		if (u.isFake()) {
-			int equipmentLevel = u.getLevel();
 
-			UserEquip weaponUserEquip = null;
-			UserEquip armorUserEquip = null;
-			UserEquip amuletUserEquip = null;
-			
-			int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL; 
-			int enhancement = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
-			int durability = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
-
-			weaponUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(),
-					ControllerConstants.ALL_CHARACTERS_WEAPON_ID_PER_LEVEL[equipmentLevel-1],
-					forgeLevel, enhancement, durability);
-			armorUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(),
-					ControllerConstants.ALL_CHARACTERS_ARMOR_ID_PER_LEVEL[equipmentLevel-1],
-					forgeLevel, enhancement, durability);
-			amuletUserEquip = new UserEquip(ControllerConstants.NOT_SET, u.getId(),
-					ControllerConstants.ALL_CHARACTERS_EQUIP_LEVEL[equipmentLevel-1],
-					forgeLevel, enhancement, durability);
 		}
 		//don't add setting new columns/properties here, add up above
 
@@ -388,34 +366,35 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static MinimumClanProto createMinimumClanProtoFromClan(Clan c) {
-		return MinimumClanProto.newBuilder()
-				.setClanId(c.getId()).setName(c.getName()).setOwnerId(c.getOwnerId())
-				.setCreateTime(c.getCreateTime().getTime()).setDescription(c.getDescription())
-				.setTag(c.getTag()).setCurrentTierLevel(c.getCurrentTierLevel())
-				.setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
+		MinimumClanProto.Builder mcp = MinimumClanProto.newBuilder();
+		mcp.setClanId(c.getId());
+		mcp.setName(c.getName());
+		mcp.setOwnerId(c.getOwnerId());
+		mcp.setCreateTime(c.getCreateTime().getTime());
+		mcp.setDescription(c.getDescription());
+		mcp.setTag(c.getTag());
+		return mcp.setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
 	}
 
-	public static FullUserEquipProto createFullUserEquipProtoFromUserEquip(UserEquip ue) {
-		FullUserEquipProto.Builder fuepb = FullUserEquipProto.newBuilder();
-		fuepb.setUserEquipId(ue.getId());
+	public static FullUserMonsterProto createFullUserEquipProtoFromUserEquip(UserMonster ue) {
+		FullUserMonsterProto.Builder fuepb = FullUserMonsterProto.newBuilder();
+		fuepb.setUserMonsterId(ue.getId());
 		fuepb.setUserId(ue.getUserId());
-		fuepb.setEquipId(ue.getEquipId());
-		fuepb.setLevel(ue.getLevel());
+		fuepb.setMonsterId(ue.getMonsterId());
 		fuepb.setEnhancementPercentage(ue.getEnhancementPercentage());
-		fuepb.setCurrentDurability(ue.getCurrentDurability());
+		fuepb.setCurrentDurability(ue.getCurrentHealth());
 		return fuepb.build();
 	}
 
-	public static FullUserEquipProto createFullUserEquipProto(long userEquipId,
-			int uId, int equipId, int equipLevel, int enhancement) {
-		FullUserEquipProto.Builder fuepb = FullUserEquipProto.newBuilder();
-		fuepb.setUserEquipId(userEquipId);
-		fuepb.setUserId(uId);
-		fuepb.setEquipId(equipId);
-		fuepb.setLevel(equipLevel);
-		fuepb.setEnhancementPercentage(enhancement);
+	public static FullUserMonsterProto createFullUserEquipProto(long userMonsterId,
+			int uId, int equipId, int evolutionLevel, int enhancement) {
+		FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
+		fumpb.setUserMonsterId(userMonsterId);
+		fumpb.setUserId(uId);
+		fumpb.setMonsterId(equipId);
+		fumpb.setEnhancementPercentage(enhancement);
 
-		return fuepb.build();
+		return fumpb.build();
 	}
 
 
@@ -432,13 +411,6 @@ public class CreateInfoProtoUtils {
 		builder.setName(name).setCityId(task.getCityId());
 		builder.setAssetNumWithinCity(task.getAssetNumberWithinCity());
 		
-		Map<Integer, Integer> equipIdsToQuantity = TaskEquipReqRetrieveUtils.getEquipmentIdsToQuantityForTaskId(task.getId());
-		if (equipIdsToQuantity != null && equipIdsToQuantity.size() > 0) {
-			for (Integer equipId : equipIdsToQuantity.keySet()) {
-				FullTaskEquipReqProto fterp = FullTaskEquipReqProto.newBuilder().setTaskId(task.getId()).setEquipId(equipId).setQuantity(equipIdsToQuantity.get(equipId)).build();
-				builder.addEquipReqs(fterp);
-			}
-		}
 		return builder.build();
 	}
 
@@ -447,21 +419,26 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static FullStructureProto createFullStructureProtoFromStructure(Structure s) {
-		return FullStructureProto.newBuilder().setStructId(s.getId()).setName(s.getName()).setIncome(s.getIncome())
-				.setMinutesToGain(s.getMinutesToGain()).setMinutesToBuild(MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(s.getMinutesToUpgradeBase(), 0))
-				.setMinutesToUpgradeBase(s.getMinutesToUpgradeBase()).setCoinPrice(s.getCoinPrice())
-				.setDiamondPrice(s.getDiamondPrice()).setMinLevel(s.getMinLevel())
-				.setXLength(s.getxLength()).setYLength(s.getyLength())
-				.setInstaBuildDiamondCost(s.getInstaBuildDiamondCost())
-				.setInstaRetrieveDiamondCostBase(s.getInstaRetrieveDiamondCostBase())
-				.setInstaUpgradeDiamondCostBase(s.getInstaUpgradeDiamondCostBase())
-				.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset()).build();
+		FullStructureProto.Builder builder = FullStructureProto.newBuilder();
+		builder.setStructId(s.getId());
+		builder.setName(s.getName());
+		builder.setIncome(s.getIncome());
+		builder.setMinutesToGain(s.getMinutesToGain());
+		builder.setMinutesToBuild(1234567890);
+		builder.setMinutesToUpgradeBase(s.getMinutesToUpgradeBase()).setCoinPrice(s.getCoinPrice());
+		builder.setDiamondPrice(s.getDiamondPrice()).setMinLevel(s.getMinLevel());
+		builder.setXLength(s.getxLength()).setYLength(s.getyLength());
+		builder.setInstaUpgradeDiamondCostBase(s.getInstaUpgradeDiamondCostBase());
+		builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
+
+		return builder.build();
 	}
 
 	public static FullCityProto createFullCityProtoFromCity(City c) {
-		FullCityProto.Builder builder = FullCityProto.newBuilder().setCityId(c.getId()).setName(c.getName()).setMinLevel(c.getMinLevel())
-				.setExpGainedBaseOnRankup(c.getExpGainedBaseOnRankup()).setCoinsGainedBaseOnRankup(c.getCoinsGainedBaseOnRankup())
-				.setMapImgName(c.getMapImgName()).setCenter(createCoordinateProtoFromCoordinatePair(c.getCenter()));
+		FullCityProto.Builder builder = FullCityProto.newBuilder();
+		builder.setCityId(c.getId());
+		builder.setName(c.getName());
+		builder.setMapImgName(c.getMapImgName()).setCenter(createCoordinateProtoFromCoordinatePair(c.getCenter()));
 		List<Task> tasks = TaskRetrieveUtils.getAllTasksForCityId(c.getId());
 		if (tasks != null) {
 			for (Task t : tasks) {
@@ -494,7 +471,7 @@ public class CreateInfoProtoUtils {
 
 		Map<Integer, List<UserStruct>> structIdsToUserStructs = null;
 
-		Map<Integer, List<UserEquip>> equipIdsToUserEquips = null;
+		Map<Integer, List<UserMonster>> equipIdsToUserEquips = null;
 
 		for (UserQuest userQuest : userQuests) {
 			Quest quest = questIdsToQuests.get(userQuest.getQuestId());
@@ -665,11 +642,6 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	public static FullUserCityProto createFullUserCityProto(int userId, int cityId, int currentRank, int numTasksCurrentlyCompleteInRank) {
-		return FullUserCityProto.newBuilder().setUserId(userId).setCityId(cityId).setCurrentRank(currentRank).setNumTasksCurrentlyCompleteInRank(numTasksCurrentlyCompleteInRank)
-				.build();
-	}
-
 	private static MinimumUserUpgradeStructJobProto createMinimumUserUpgradeStructJobProto(UserQuest userQuest, UpgradeStructJob upgradeStructJob, int currentLevel) {
 		return MinimumUserUpgradeStructJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setUpgradeStructJobId(upgradeStructJob.getId()).setCurrentLevel(currentLevel).build();
 	}
@@ -798,22 +770,22 @@ public class CreateInfoProtoUtils {
 		}
 	}
 
-	public static UnhandledBlacksmithAttemptProto createUnhandledBlacksmithAttemptProtoFromBlacksmithAttempt(BlacksmithAttempt ba) {
-		UnhandledBlacksmithAttemptProto.Builder builder = UnhandledBlacksmithAttemptProto.newBuilder().setBlacksmithId(ba.getId()).setUserId(ba.getUserId())
-				.setEquipId(ba.getEquipId()).setGoalLevel(ba.getGoalLevel()).setGuaranteed(ba.isGuaranteed()).setStartTime(ba.getStartTime().getTime())
-				.setAttemptComplete(ba.isAttemptComplete()).setEquipOneEnhancementPercent(ba.getEquipOneEnhancementPercent())
-				.setEquipTwoEnhancementPercent(ba.getEquipTwoEnhancementPercent()).setForgeSlotNumber(ba.getForgeSlotNumber());
-
-		if (ba.getDiamondGuaranteeCost() > 0) {
-			builder.setDiamondGuaranteeCost(ba.getDiamondGuaranteeCost());
-		}
-
-		if (ba.getTimeOfSpeedup() != null) {
-			builder.setTimeOfSpeedup(ba.getTimeOfSpeedup().getTime());
-		}
-
-		return builder.build();
-	}
+//	public static UnhandledBlacksmithAttemptProto createUnhandledBlacksmithAttemptProtoFromBlacksmithAttempt(BlacksmithAttempt ba) {
+//		UnhandledBlacksmithAttemptProto.Builder builder = UnhandledBlacksmithAttemptProto.newBuilder().setBlacksmithId(ba.getId()).setUserId(ba.getUserId())
+//				.setEquipId(ba.getEquipId()).setGoalLevel(ba.getGoalLevel()).setGuaranteed(ba.isGuaranteed()).setStartTime(ba.getStartTime().getTime())
+//				.setAttemptComplete(ba.isAttemptComplete()).setEquipOneEnhancementPercent(ba.getEquipOneEnhancementPercent())
+//				.setEquipTwoEnhancementPercent(ba.getEquipTwoEnhancementPercent()).setForgeSlotNumber(ba.getForgeSlotNumber());
+//
+//		if (ba.getDiamondGuaranteeCost() > 0) {
+//			builder.setDiamondGuaranteeCost(ba.getDiamondGuaranteeCost());
+//		}
+//
+//		if (ba.getTimeOfSpeedup() != null) {
+//			builder.setTimeOfSpeedup(ba.getTimeOfSpeedup().getTime());
+//		}
+//
+//		return builder.build();
+//	}
 
 	public static GroupChatMessageProto createGroupChatMessageProtoFromClanChatPost(
 			ClanChatPost p, User user) {
@@ -823,13 +795,6 @@ public class CreateInfoProtoUtils {
 
 	public static GroupChatMessageProto createGroupChatMessageProto(long time, MinimumUserProto user, String content, boolean isAdmin, int chatId) {
 		return GroupChatMessageProto.newBuilder().setSender(user).setTimeOfChat(time).setContent(content).setIsAdmin(isAdmin).setChatId(chatId).build();
-	}
-
-
-	public static ClanBulletinPostProto createClanBulletinPostProtoFromClanBulletinPost(
-			ClanBulletinPost p, User user) {
-		return ClanBulletinPostProto.newBuilder().setClanBulletinPostId(p.getId()).setPoster(createMinimumUserProtoFromUser(user)).setClanId(user.getClanId())
-				.setTimeOfPost(p.getTimeOfPost().getTime()).setContent(p.getContent()).build();
 	}
 
 	public static FullUserClanProto createFullUserClanProtoFromUserClan(UserClan uc) {
@@ -856,16 +821,16 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 	
-	public static TournamentProto createTournamentProtoFromTournament(
-			LeaderboardEvent e, List<LeaderboardEventReward> rList) {
+	public static TournamentEventProto createTournamentEventProtoFromTournamentEvent(
+			TournamentEvent e, List<TournamentEventReward> rList) {
 
-		TournamentProto.Builder b = TournamentProto.newBuilder().setEventId(e.getId()).setStartDate(e.getStartDate().getTime())
+		TournamentEventProto.Builder b = TournamentEventProto.newBuilder().setEventId(e.getId()).setStartDate(e.getStartDate().getTime())
 				.setEndDate(e.getEndDate().getTime()).setEventName(e.getEventName())
-				.setLastShowDate(e.getEndDate().getTime()+ControllerConstants.LEADERBOARD_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END*3600000L);
+				.setLastShowDate(e.getEndDate().getTime()+ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END*3600000L);
 
-		List<TournamentRewardProto> rProtosList = new ArrayList<TournamentRewardProto>();
-		for(TournamentReward r : rList) {
-			TournamentRewardProto rProto = createLeaderboardEventRewardProtoFromLeaderboardEventReward(r);
+		List<TournamentEventRewardProto> rProtosList = new ArrayList<TournamentEventRewardProto>();
+		for(TournamentEventReward r : rList) {
+			TournamentEventRewardProto rProto = createTournamentEventRewardProtoFromTournamentEventReward(r);
 			rProtosList.add(rProto);
 		}
 
@@ -874,10 +839,10 @@ public class CreateInfoProtoUtils {
 		return b.build();
 	}
 
-	public static TournamentRewardProto createTournamentRewardProtoFromTournamentReward(TournamentReward r) {
+	public static TournamentEventRewardProto createTournamentEventRewardProtoFromTournamentEventReward(TournamentEventReward r) {
 
-		TournamentRewardProto.Builder b = TournamentRewardProto.newBuilder()
-				.setLeaderboardEventId(r.getLeaderboardEventId()).setMinRank(r.getMinRank()).setMaxRank(r.getMaxRank())
+		TournamentEventRewardProto.Builder b = TournamentEventRewardProto.newBuilder()
+				.setTournamentEventId(r.getTournamentEventId()).setMinRank(r.getMinRank()).setMaxRank(r.getMaxRank())
 				.setGoldRewarded(r.getGoldRewarded()).setBackgroundImageName(r.getBackgroundImageName())
 				.setPrizeImageName(r.getPrizeImageName());
 
@@ -901,7 +866,7 @@ public class CreateInfoProtoUtils {
 		b.setBoosterPackId(bp.getId());
 		b.setCostsCoins(bp.isCostsCoins());
 		b.setName(bp.getName());
-		b.setPrice(value);
+		b.setPrice(1234567890);
 		if (biList != null) {
 			List<BoosterItemProto> biProtos = new ArrayList<BoosterItemProto>();
 			for(BoosterItem bi : biList) {

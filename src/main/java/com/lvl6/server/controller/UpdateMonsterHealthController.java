@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMonsterHealthRequestEvent;
 import com.lvl6.events.response.UpdateMonsterHealthResponseEvent;
-import com.lvl6.info.UserEquip;
+import com.lvl6.info.UserMonster;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder;
@@ -124,7 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	//extract the ids so it's easier to get userEquips from db
   	List<Long> userEquipIds = getUserMonsterIds(fuepList, userEquipIdToExpectedDurability);
-  	List<UserMonster> userEquips = RetrieveUtils.userEquipRetrieveUtils()
+  	List<UserMonster> userEquips = RetrieveUtils.monsterForUserRetrieveUtils()
   			.getSpecificUserMonsters(userEquipIds);
   	
   	if (null == userEquips || userEquips.isEmpty()) {

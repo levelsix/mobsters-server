@@ -8,7 +8,7 @@ public final class TournamentStuffProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface TournamentProtoOrBuilder
+  public interface TournamentEventProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional int32 eventId = 1;
@@ -27,46 +27,46 @@ public final class TournamentStuffProto {
     boolean hasEventName();
     String getEventName();
     
-    // repeated .com.lvl6.proto.TournamentRewardProto rewards = 5;
-    java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentRewardProto> 
+    // repeated .com.lvl6.proto.TournamentEventRewardProto rewards = 5;
+    java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> 
         getRewardsList();
-    com.lvl6.proto.TournamentStuffProto.TournamentRewardProto getRewards(int index);
+    com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto getRewards(int index);
     int getRewardsCount();
-    java.util.List<? extends com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder> 
         getRewardsOrBuilderList();
-    com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder getRewardsOrBuilder(
+    com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder getRewardsOrBuilder(
         int index);
     
     // optional int64 lastShowDate = 6;
     boolean hasLastShowDate();
     long getLastShowDate();
   }
-  public static final class TournamentProto extends
+  public static final class TournamentEventProto extends
       com.google.protobuf.GeneratedMessage
-      implements TournamentProtoOrBuilder {
-    // Use TournamentProto.newBuilder() to construct.
-    private TournamentProto(Builder builder) {
+      implements TournamentEventProtoOrBuilder {
+    // Use TournamentEventProto.newBuilder() to construct.
+    private TournamentEventProto(Builder builder) {
       super(builder);
     }
-    private TournamentProto(boolean noInit) {}
+    private TournamentEventProto(boolean noInit) {}
     
-    private static final TournamentProto defaultInstance;
-    public static TournamentProto getDefaultInstance() {
+    private static final TournamentEventProto defaultInstance;
+    public static TournamentEventProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public TournamentProto getDefaultInstanceForType() {
+    public TournamentEventProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentProto_descriptor;
+      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentProto_fieldAccessorTable;
+      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventProto_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -132,23 +132,23 @@ public final class TournamentStuffProto {
       }
     }
     
-    // repeated .com.lvl6.proto.TournamentRewardProto rewards = 5;
+    // repeated .com.lvl6.proto.TournamentEventRewardProto rewards = 5;
     public static final int REWARDS_FIELD_NUMBER = 5;
-    private java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentRewardProto> rewards_;
-    public java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentRewardProto> getRewardsList() {
+    private java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> rewards_;
+    public java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> getRewardsList() {
       return rewards_;
     }
-    public java.util.List<? extends com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder> 
         getRewardsOrBuilderList() {
       return rewards_;
     }
     public int getRewardsCount() {
       return rewards_.size();
     }
-    public com.lvl6.proto.TournamentStuffProto.TournamentRewardProto getRewards(int index) {
+    public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto getRewards(int index) {
       return rewards_.get(index);
     }
-    public com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder getRewardsOrBuilder(
+    public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder getRewardsOrBuilder(
         int index) {
       return rewards_.get(index);
     }
@@ -246,41 +246,41 @@ public final class TournamentStuffProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseFrom(byte[] data)
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -289,7 +289,7 @@ public final class TournamentStuffProto {
         return null;
       }
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseDelimitedFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -300,12 +300,12 @@ public final class TournamentStuffProto {
         return null;
       }
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -315,7 +315,7 @@ public final class TournamentStuffProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.TournamentStuffProto.TournamentProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.TournamentStuffProto.TournamentEventProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -328,18 +328,18 @@ public final class TournamentStuffProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.TournamentStuffProto.TournamentProtoOrBuilder {
+       implements com.lvl6.proto.TournamentStuffProto.TournamentEventProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentProto_descriptor;
+        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentProto_fieldAccessorTable;
+        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.TournamentStuffProto.TournamentProto.newBuilder()
+      // Construct using com.lvl6.proto.TournamentStuffProto.TournamentEventProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -384,24 +384,24 @@ public final class TournamentStuffProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.TournamentStuffProto.TournamentProto.getDescriptor();
+        return com.lvl6.proto.TournamentStuffProto.TournamentEventProto.getDescriptor();
       }
       
-      public com.lvl6.proto.TournamentStuffProto.TournamentProto getDefaultInstanceForType() {
-        return com.lvl6.proto.TournamentStuffProto.TournamentProto.getDefaultInstance();
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventProto getDefaultInstanceForType() {
+        return com.lvl6.proto.TournamentStuffProto.TournamentEventProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.TournamentStuffProto.TournamentProto build() {
-        com.lvl6.proto.TournamentStuffProto.TournamentProto result = buildPartial();
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventProto build() {
+        com.lvl6.proto.TournamentStuffProto.TournamentEventProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.TournamentStuffProto.TournamentProto buildParsed()
+      private com.lvl6.proto.TournamentStuffProto.TournamentEventProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.TournamentStuffProto.TournamentProto result = buildPartial();
+        com.lvl6.proto.TournamentStuffProto.TournamentEventProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -409,8 +409,8 @@ public final class TournamentStuffProto {
         return result;
       }
       
-      public com.lvl6.proto.TournamentStuffProto.TournamentProto buildPartial() {
-        com.lvl6.proto.TournamentStuffProto.TournamentProto result = new com.lvl6.proto.TournamentStuffProto.TournamentProto(this);
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventProto buildPartial() {
+        com.lvl6.proto.TournamentStuffProto.TournamentEventProto result = new com.lvl6.proto.TournamentStuffProto.TournamentEventProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -448,16 +448,16 @@ public final class TournamentStuffProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.TournamentStuffProto.TournamentProto) {
-          return mergeFrom((com.lvl6.proto.TournamentStuffProto.TournamentProto)other);
+        if (other instanceof com.lvl6.proto.TournamentStuffProto.TournamentEventProto) {
+          return mergeFrom((com.lvl6.proto.TournamentStuffProto.TournamentEventProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.TournamentStuffProto.TournamentProto other) {
-        if (other == com.lvl6.proto.TournamentStuffProto.TournamentProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.TournamentStuffProto.TournamentEventProto other) {
+        if (other == com.lvl6.proto.TournamentStuffProto.TournamentEventProto.getDefaultInstance()) return this;
         if (other.hasEventId()) {
           setEventId(other.getEventId());
         }
@@ -551,7 +551,7 @@ public final class TournamentStuffProto {
               break;
             }
             case 42: {
-              com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder subBuilder = com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.newBuilder();
+              com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder subBuilder = com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addRewards(subBuilder.buildPartial());
               break;
@@ -666,20 +666,20 @@ public final class TournamentStuffProto {
         onChanged();
       }
       
-      // repeated .com.lvl6.proto.TournamentRewardProto rewards = 5;
-      private java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentRewardProto> rewards_ =
+      // repeated .com.lvl6.proto.TournamentEventRewardProto rewards = 5;
+      private java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> rewards_ =
         java.util.Collections.emptyList();
       private void ensureRewardsIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          rewards_ = new java.util.ArrayList<com.lvl6.proto.TournamentStuffProto.TournamentRewardProto>(rewards_);
+          rewards_ = new java.util.ArrayList<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto>(rewards_);
           bitField0_ |= 0x00000010;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.TournamentStuffProto.TournamentRewardProto, com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder, com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder> rewardsBuilder_;
+          com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder> rewardsBuilder_;
       
-      public java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentRewardProto> getRewardsList() {
+      public java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> getRewardsList() {
         if (rewardsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(rewards_);
         } else {
@@ -693,7 +693,7 @@ public final class TournamentStuffProto {
           return rewardsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.TournamentStuffProto.TournamentRewardProto getRewards(int index) {
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto getRewards(int index) {
         if (rewardsBuilder_ == null) {
           return rewards_.get(index);
         } else {
@@ -701,7 +701,7 @@ public final class TournamentStuffProto {
         }
       }
       public Builder setRewards(
-          int index, com.lvl6.proto.TournamentStuffProto.TournamentRewardProto value) {
+          int index, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto value) {
         if (rewardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -715,7 +715,7 @@ public final class TournamentStuffProto {
         return this;
       }
       public Builder setRewards(
-          int index, com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder builderForValue) {
+          int index, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder builderForValue) {
         if (rewardsBuilder_ == null) {
           ensureRewardsIsMutable();
           rewards_.set(index, builderForValue.build());
@@ -725,7 +725,7 @@ public final class TournamentStuffProto {
         }
         return this;
       }
-      public Builder addRewards(com.lvl6.proto.TournamentStuffProto.TournamentRewardProto value) {
+      public Builder addRewards(com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto value) {
         if (rewardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -739,7 +739,7 @@ public final class TournamentStuffProto {
         return this;
       }
       public Builder addRewards(
-          int index, com.lvl6.proto.TournamentStuffProto.TournamentRewardProto value) {
+          int index, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto value) {
         if (rewardsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -753,7 +753,7 @@ public final class TournamentStuffProto {
         return this;
       }
       public Builder addRewards(
-          com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder builderForValue) {
+          com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder builderForValue) {
         if (rewardsBuilder_ == null) {
           ensureRewardsIsMutable();
           rewards_.add(builderForValue.build());
@@ -764,7 +764,7 @@ public final class TournamentStuffProto {
         return this;
       }
       public Builder addRewards(
-          int index, com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder builderForValue) {
+          int index, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder builderForValue) {
         if (rewardsBuilder_ == null) {
           ensureRewardsIsMutable();
           rewards_.add(index, builderForValue.build());
@@ -775,7 +775,7 @@ public final class TournamentStuffProto {
         return this;
       }
       public Builder addAllRewards(
-          java.lang.Iterable<? extends com.lvl6.proto.TournamentStuffProto.TournamentRewardProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto> values) {
         if (rewardsBuilder_ == null) {
           ensureRewardsIsMutable();
           super.addAll(values, rewards_);
@@ -805,18 +805,18 @@ public final class TournamentStuffProto {
         }
         return this;
       }
-      public com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder getRewardsBuilder(
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder getRewardsBuilder(
           int index) {
         return getRewardsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder getRewardsOrBuilder(
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder getRewardsOrBuilder(
           int index) {
         if (rewardsBuilder_ == null) {
           return rewards_.get(index);  } else {
           return rewardsBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder> 
            getRewardsOrBuilderList() {
         if (rewardsBuilder_ != null) {
           return rewardsBuilder_.getMessageOrBuilderList();
@@ -824,25 +824,25 @@ public final class TournamentStuffProto {
           return java.util.Collections.unmodifiableList(rewards_);
         }
       }
-      public com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder addRewardsBuilder() {
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder addRewardsBuilder() {
         return getRewardsFieldBuilder().addBuilder(
-            com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.getDefaultInstance());
+            com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.getDefaultInstance());
       }
-      public com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder addRewardsBuilder(
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder addRewardsBuilder(
           int index) {
         return getRewardsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.getDefaultInstance());
+            index, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder> 
+      public java.util.List<com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder> 
            getRewardsBuilderList() {
         return getRewardsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.TournamentStuffProto.TournamentRewardProto, com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder, com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder> 
+          com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder> 
           getRewardsFieldBuilder() {
         if (rewardsBuilder_ == null) {
           rewardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.TournamentStuffProto.TournamentRewardProto, com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder, com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder>(
+              com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder, com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder>(
                   rewards_,
                   ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
@@ -873,18 +873,18 @@ public final class TournamentStuffProto {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TournamentProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TournamentEventProto)
     }
     
     static {
-      defaultInstance = new TournamentProto(true);
+      defaultInstance = new TournamentEventProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TournamentProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TournamentEventProto)
   }
   
-  public interface TournamentRewardProtoOrBuilder
+  public interface TournamentEventRewardProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional int32 tournamentEventId = 1;
@@ -916,32 +916,32 @@ public final class TournamentStuffProto {
     com.lvl6.proto.ChatProto.ColorProto getTitleColor();
     com.lvl6.proto.ChatProto.ColorProtoOrBuilder getTitleColorOrBuilder();
   }
-  public static final class TournamentRewardProto extends
+  public static final class TournamentEventRewardProto extends
       com.google.protobuf.GeneratedMessage
-      implements TournamentRewardProtoOrBuilder {
-    // Use TournamentRewardProto.newBuilder() to construct.
-    private TournamentRewardProto(Builder builder) {
+      implements TournamentEventRewardProtoOrBuilder {
+    // Use TournamentEventRewardProto.newBuilder() to construct.
+    private TournamentEventRewardProto(Builder builder) {
       super(builder);
     }
-    private TournamentRewardProto(boolean noInit) {}
+    private TournamentEventRewardProto(boolean noInit) {}
     
-    private static final TournamentRewardProto defaultInstance;
-    public static TournamentRewardProto getDefaultInstance() {
+    private static final TournamentEventRewardProto defaultInstance;
+    public static TournamentEventRewardProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public TournamentRewardProto getDefaultInstanceForType() {
+    public TournamentEventRewardProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentRewardProto_descriptor;
+      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentRewardProto_fieldAccessorTable;
+      return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventRewardProto_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -1153,41 +1153,41 @@ public final class TournamentStuffProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseFrom(byte[] data)
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -1196,7 +1196,7 @@ public final class TournamentStuffProto {
         return null;
       }
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseDelimitedFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1207,12 +1207,12 @@ public final class TournamentStuffProto {
         return null;
       }
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.TournamentStuffProto.TournamentRewardProto parseFrom(
+    public static com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1222,7 +1222,7 @@ public final class TournamentStuffProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.TournamentStuffProto.TournamentRewardProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -1235,18 +1235,18 @@ public final class TournamentStuffProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.TournamentStuffProto.TournamentRewardProtoOrBuilder {
+       implements com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentRewardProto_descriptor;
+        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentRewardProto_fieldAccessorTable;
+        return com.lvl6.proto.TournamentStuffProto.internal_static_com_lvl6_proto_TournamentEventRewardProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.newBuilder()
+      // Construct using com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1293,24 +1293,24 @@ public final class TournamentStuffProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.getDescriptor();
+        return com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.getDescriptor();
       }
       
-      public com.lvl6.proto.TournamentStuffProto.TournamentRewardProto getDefaultInstanceForType() {
-        return com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.getDefaultInstance();
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto getDefaultInstanceForType() {
+        return com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.TournamentStuffProto.TournamentRewardProto build() {
-        com.lvl6.proto.TournamentStuffProto.TournamentRewardProto result = buildPartial();
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto build() {
+        com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.TournamentStuffProto.TournamentRewardProto buildParsed()
+      private com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.TournamentStuffProto.TournamentRewardProto result = buildPartial();
+        com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -1318,8 +1318,8 @@ public final class TournamentStuffProto {
         return result;
       }
       
-      public com.lvl6.proto.TournamentStuffProto.TournamentRewardProto buildPartial() {
-        com.lvl6.proto.TournamentStuffProto.TournamentRewardProto result = new com.lvl6.proto.TournamentStuffProto.TournamentRewardProto(this);
+      public com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto buildPartial() {
+        com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto result = new com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1360,16 +1360,16 @@ public final class TournamentStuffProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.TournamentStuffProto.TournamentRewardProto) {
-          return mergeFrom((com.lvl6.proto.TournamentStuffProto.TournamentRewardProto)other);
+        if (other instanceof com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto) {
+          return mergeFrom((com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.TournamentStuffProto.TournamentRewardProto other) {
-        if (other == com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto other) {
+        if (other == com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.getDefaultInstance()) return this;
         if (other.hasTournamentEventId()) {
           setTournamentEventId(other.getTournamentEventId());
         }
@@ -1713,15 +1713,15 @@ public final class TournamentStuffProto {
         return titleColorBuilder_;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TournamentRewardProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.TournamentEventRewardProto)
     }
     
     static {
-      defaultInstance = new TournamentRewardProto(true);
+      defaultInstance = new TournamentEventRewardProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TournamentRewardProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.TournamentEventRewardProto)
   }
   
   public interface MinimumUserProtoWithLevelForTournamentOrBuilder
@@ -2320,15 +2320,15 @@ public final class TournamentStuffProto {
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_TournamentProto_descriptor;
+    internal_static_com_lvl6_proto_TournamentEventProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_TournamentProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_TournamentEventProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_TournamentRewardProto_descriptor;
+    internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_TournamentRewardProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_TournamentEventRewardProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor;
   private static
@@ -2344,43 +2344,44 @@ public final class TournamentStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\025TournamentStuff.proto\022\016com.lvl6.proto\032" +
-      "\nChat.proto\032\nUser.proto\"\247\001\n\017TournamentPr" +
-      "oto\022\017\n\007eventId\030\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003\022" +
-      "\017\n\007endDate\030\003 \001(\003\022\021\n\teventName\030\004 \001(\t\0226\n\007r" +
-      "ewards\030\005 \003(\0132%.com.lvl6.proto.Tournament" +
-      "RewardProto\022\024\n\014lastShowDate\030\006 \001(\003\"\317\001\n\025To" +
-      "urnamentRewardProto\022\031\n\021tournamentEventId" +
-      "\030\001 \001(\005\022\017\n\007minRank\030\002 \001(\005\022\017\n\007maxRank\030\003 \001(\005" +
-      "\022\024\n\014goldRewarded\030\004 \001(\005\022\033\n\023backgroundImag" +
-      "eName\030\005 \001(\t\022\026\n\016prizeImageName\030\006 \001(\t\022.\n\nt",
-      "itleColor\030\007 \001(\0132\032.com.lvl6.proto.ColorPr" +
-      "oto\"\240\001\n&MinimumUserProtoWithLevelForTour" +
-      "nament\0226\n\014minUserProto\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022\r\n\005level\030\002 \001(\005\022\026\n" +
-      "\016tournamentRank\030\003 \001(\005\022\027\n\017tournamentScore" +
-      "\030\004 \001(\001B\026B\024TournamentStuffProto"
+      "\nChat.proto\032\nUser.proto\"\261\001\n\024TournamentEv" +
+      "entProto\022\017\n\007eventId\030\001 \001(\005\022\021\n\tstartDate\030\002" +
+      " \001(\003\022\017\n\007endDate\030\003 \001(\003\022\021\n\teventName\030\004 \001(\t" +
+      "\022;\n\007rewards\030\005 \003(\0132*.com.lvl6.proto.Tourn" +
+      "amentEventRewardProto\022\024\n\014lastShowDate\030\006 " +
+      "\001(\003\"\324\001\n\032TournamentEventRewardProto\022\031\n\021to" +
+      "urnamentEventId\030\001 \001(\005\022\017\n\007minRank\030\002 \001(\005\022\017" +
+      "\n\007maxRank\030\003 \001(\005\022\024\n\014goldRewarded\030\004 \001(\005\022\033\n" +
+      "\023backgroundImageName\030\005 \001(\t\022\026\n\016prizeImage",
+      "Name\030\006 \001(\t\022.\n\ntitleColor\030\007 \001(\0132\032.com.lvl" +
+      "6.proto.ColorProto\"\240\001\n&MinimumUserProtoW" +
+      "ithLevelForTournament\0226\n\014minUserProto\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\r\n" +
+      "\005level\030\002 \001(\005\022\026\n\016tournamentRank\030\003 \001(\005\022\027\n\017" +
+      "tournamentScore\030\004 \001(\001B\026B\024TournamentStuff" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_com_lvl6_proto_TournamentProto_descriptor =
+          internal_static_com_lvl6_proto_TournamentEventProto_descriptor =
             getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_TournamentProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_TournamentEventProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_TournamentProto_descriptor,
+              internal_static_com_lvl6_proto_TournamentEventProto_descriptor,
               new java.lang.String[] { "EventId", "StartDate", "EndDate", "EventName", "Rewards", "LastShowDate", },
-              com.lvl6.proto.TournamentStuffProto.TournamentProto.class,
-              com.lvl6.proto.TournamentStuffProto.TournamentProto.Builder.class);
-          internal_static_com_lvl6_proto_TournamentRewardProto_descriptor =
+              com.lvl6.proto.TournamentStuffProto.TournamentEventProto.class,
+              com.lvl6.proto.TournamentStuffProto.TournamentEventProto.Builder.class);
+          internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor =
             getDescriptor().getMessageTypes().get(1);
-          internal_static_com_lvl6_proto_TournamentRewardProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_TournamentEventRewardProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_TournamentRewardProto_descriptor,
+              internal_static_com_lvl6_proto_TournamentEventRewardProto_descriptor,
               new java.lang.String[] { "TournamentEventId", "MinRank", "MaxRank", "GoldRewarded", "BackgroundImageName", "PrizeImageName", "TitleColor", },
-              com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.class,
-              com.lvl6.proto.TournamentStuffProto.TournamentRewardProto.Builder.class);
+              com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.class,
+              com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_com_lvl6_proto_MinimumUserProtoWithLevelForTournament_fieldAccessorTable = new

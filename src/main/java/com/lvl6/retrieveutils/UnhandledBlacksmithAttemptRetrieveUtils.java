@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_EVOLUTION;
+  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER;
 
   public static Map<Integer, BlacksmithAttempt> getUnhandledBlacksmithAttemptsForUser(int userId) {
     log.debug("retrieving unhandled blacksmith attempts for user " + userId);

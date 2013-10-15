@@ -20,7 +20,7 @@ import com.lvl6.utils.DBConnection;
 
   private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
-  private final String TABLE_NAME = DBConstants.TABLE_USER_QUESTS;
+  private final String TABLE_NAME = DBConstants.TABLE_QUEST_FOR_USER;
   
   //only used in script
   public List<UserQuest> getUnredeemedIncompleteUserQuests() {

@@ -176,26 +176,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private static Clan convertRSRowToClan(ResultSet rs) throws SQLException {
     int i = 1;
 
-    int clanId = rs.getInt(i++);
+    int id = rs.getInt(i++);
     int ownerId = rs.getInt(i++);
     String name = rs.getString(i++);
     
-    Date clanCreateTime = null;
+    Date createTime = null;
     Timestamp ts = rs.getTimestamp(i++);
     if (!rs.wasNull()) {
-      clanCreateTime = new Date(ts.getTime());
+      createTime = new Date(ts.getTime());
     }
     
     String description = rs.getString(i++);
     String tag = rs.getString(i++);
-    int currentTierLevel = rs.getInt(i++);
     boolean requestToJoinRequired = rs.getBoolean(i++);
     if (rs.wasNull()) {
       //for legacy clans, they were by default a request to join was required
       requestToJoinRequired = true;
     }
     
-    return new Clan(clanId, name, ownerId, clanCreateTime, description, tag,
-        currentTierLevel, requestToJoinRequired);
+    return new Clan(id, ownerId, name, createTime, description,
+    		tag, requestToJoinRequired);
   }
 }

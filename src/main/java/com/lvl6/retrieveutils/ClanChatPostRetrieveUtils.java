@@ -24,7 +24,7 @@ import com.lvl6.utils.DBConnection;
   private static final String TABLE_NAME = DBConstants.TABLE_CLAN_CHAT_POST;
 
   public static ClanChatPost getSpecificActiveClanChatPost(int wallPostId) {
-    log.debug("retrieving wall post with id " + wallPostId);
+    log.debug("retrieving clan chat post with id " + wallPostId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsById(conn, wallPostId, TABLE_NAME);
@@ -36,13 +36,13 @@ import com.lvl6.utils.DBConnection;
   public static List<ClanChatPost> getMostRecentActiveClanChatPostsForClanBeforePostId(int limit, int postId, int clanId) {
     log.debug("retrieving " + limit + " player wall posts before certain postId " + postId + " for clan " + clanId);
     TreeMap <String, Object> lessThanParamsToVals = new TreeMap<String, Object>();
-    lessThanParamsToVals.put(DBConstants.CLAN_WALL_POSTS__ID, postId);
+    lessThanParamsToVals.put(DBConstants.CLAN_CHAT_POST__ID, postId);
     
     TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
-    absoluteParams.put(DBConstants.CLAN_CHAT_POSTS__CLAN_ID, clanId);
+    absoluteParams.put(DBConstants.CLAN_CHAT_POST__CLAN_ID, clanId);
     
     Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimitLessthan(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_WALL_POSTS__ID, limit, lessThanParamsToVals);
+    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimitLessthan(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_CHAT_POST__ID, limit, lessThanParamsToVals);
     List<ClanChatPost> clanChatPosts = convertRSToClanChatPosts(rs);
     DBConnection.get().close(rs, null, conn);
     return clanChatPosts;
@@ -52,10 +52,10 @@ import com.lvl6.utils.DBConnection;
     log.debug("retrieving " + limit + " clan wall posts for clan " + clanId);
     
     TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
-    absoluteParams.put(DBConstants.CLAN_CHAT_POSTS__CLAN_ID, clanId);
+    absoluteParams.put(DBConstants.CLAN_CHAT_POST__CLAN_ID, clanId);
     
     Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimit(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_WALL_POSTS__ID, limit);
+    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimit(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_CHAT_POST__ID, limit);
     List<ClanChatPost> clanChatPosts = convertRSToClanChatPosts(rs);
     DBConnection.get().close(rs, null, conn);
     return clanChatPosts;

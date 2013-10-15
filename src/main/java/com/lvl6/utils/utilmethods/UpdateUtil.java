@@ -148,7 +148,7 @@ public interface UpdateUtil {
   
   public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevives);
   
-  public abstract int updateUserEquipsDurability(List<Long> userEquipIds,
+  public abstract int updateUserMonstersDurability(List<Long> userEquipIds,
   		List<Integer> currentDurability,
   		Map<Long, Integer> userEquipIdsToDurabilities); 
   

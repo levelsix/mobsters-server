@@ -1,0 +1,179 @@
+package com.lvl6.retrieveutils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
+
+import com.lvl6.info.UserMonster;
+import com.lvl6.properties.DBConstants;
+import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.utilmethods.StringUtils;
+
+@Component @DependsOn("gameServer") public class MonsterForUserRetrieveUtils {
+
+  private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  private final String TABLE_NAME = DBConstants.TABLE_MONSTER_FOR_USER;
+
+
+  ////@Cacheable(value="userMonstersForUser", key="#userId")
+  public List<UserMonster> getMonstersForUser(int userId) {
+    log.debug("retrieving user monsters for userId " + userId);
+
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+    List<UserMonster> userMonsters = convertRSToMonsters(rs);
+    DBConnection.get().close(rs, null, conn);
+    return userMonsters;
+  }
+
+  ////@Cacheable(value="monstersToMonstersForUser", key="#userId")
+  public Map<Integer, List<UserMonster>> getMonsterIdsToMonstersForUser(int userId) {
+    log.debug("retrieving map of monster id to usermonsters for userId " + userId);
+
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+    Map<Integer, List<UserMonster>> monsterIdsToMonsters = convertRSToMonsterIdsToMonsters(rs);
+    DBConnection.get().close(rs, null, conn);
+    return monsterIdsToMonsters;
+  }
+
+  ////@Cacheable(value="specificMonster", key="#userMonsterId")
+  public UserMonster getSpecificUserMonster(long userMonsterId) {
+    log.debug("retrieving user monster for userMonsterId: " + userMonsterId);
+
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectRowsByLongId(conn, userMonsterId, TABLE_NAME);
+    UserMonster userMonster = convertRSSingleToMonsters(rs);
+    DBConnection.get().close(rs, null, conn);
+    return userMonster;
+  }
+
+  public List<UserMonster> getSpecificUserMonsters(List<Long> userMonsterIds) {
+    log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
+
+    if (userMonsterIds == null || userMonsterIds.size() <= 0 ) {
+      return new ArrayList<UserMonster>();
+    }
+
+    String query = "select * from " + TABLE_NAME + " where (";
+    List<String> condClauses = new ArrayList<String>();
+    List <Object> values = new ArrayList<Object>();
+    for (Long userMonsterId : userMonsterIds) {
+      condClauses.add(DBConstants.MONSTER_FOR_USER__ID + "=?");
+      values.add(userMonsterId);
+    }
+    query += StringUtils.getListInString(condClauses, "or") + ")";
+
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+    List<UserMonster> userMonsters = convertRSToMonsters(rs);
+    DBConnection.get().close(rs, null, conn);
+    return userMonsters;
+  }
+
+  ////@Cacheable(value="userMonstersWithMonsterId", key="#userId+':'+#monsterId")
+  public List<UserMonster> getMonstersWithMonsterId(int userId, int monsterId) {
+    log.debug("retrieving user monster for user: " + userId + ", monsterId: " + monsterId);
+
+    TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
+    paramsToVals.put(DBConstants.MONSTER_FOR_USER__USER_ID, userId);
+    paramsToVals.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
+
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+    List<UserMonster> userMonsters = convertRSToMonsters(rs);
+    DBConnection.get().close(rs, null, conn);
+    return userMonsters;
+  }
+
+  private Map<Integer, List<UserMonster>> convertRSToMonsterIdsToMonsters(
+      ResultSet rs) {
+    if (rs != null) {
+      try {
+        rs.last();
+        rs.beforeFirst();
+        Map<Integer, List<UserMonster>> monsterIdsToMonsters = new HashMap<Integer, List<UserMonster>>();
+        while(rs.next()) {
+          UserMonster userMonster = convertRSRowToMonster(rs);
+          List<UserMonster> userMonstersForMonsterId = monsterIdsToMonsters.get(userMonster.getMonsterId());
+          if (userMonstersForMonsterId != null) {
+            userMonstersForMonsterId.add(userMonster);
+          } else {
+            List<UserMonster> userMonsters = new ArrayList<UserMonster>();
+            userMonsters.add(userMonster);
+            monsterIdsToMonsters.put(userMonster.getMonsterId(), userMonsters);
+          }
+        }
+        return monsterIdsToMonsters;
+      } catch (SQLException e) {
+        log.error("problem with database call.", e);
+        
+      }
+    }
+    return null;
+  }
+
+  private List<UserMonster> convertRSToMonsters(ResultSet rs) {
+    if (rs != null) {
+      try {
+        rs.last();
+        rs.beforeFirst();
+        List<UserMonster> userMonsters = new ArrayList<UserMonster>();
+        while(rs.next()) {  //should only be one
+          userMonsters.add(convertRSRowToMonster(rs));
+        }
+        return userMonsters;
+      } catch (SQLException e) {
+        log.error("problem with database call.", e);
+        
+      }
+    }
+    return null;
+  }
+
+  private UserMonster convertRSSingleToMonsters(ResultSet rs) {
+    if (rs != null) {
+      try {
+        rs.last();
+        rs.beforeFirst();
+        while(rs.next()) {  //should only be one
+          return convertRSRowToMonster(rs);
+        }
+      } catch (SQLException e) {
+        log.error("problem with database call.", e);
+        
+      }
+    }
+    return null;
+  }
+
+  /*
+   * assumes the resultset is apprpriately set up. traverses the row it's on.
+   */
+  private UserMonster convertRSRowToMonster(ResultSet rs) throws SQLException {
+    int i = 1;
+    int userMonsterId = rs.getInt(i++);
+    int userId = rs.getInt(i++);
+    int monsterId = rs.getInt(i++);
+    int evolutionLevel = rs.getInt(i++);
+    int enhancementPercentage = rs.getInt(i++);
+//    i += 2; //skip over to current durability
+//    int currentDurability = rs.getInt(i);
+    int currentDurability = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH);
+    UserMonster userMonster = new UserMonster(userMonsterId, userId, monsterId, evolutionLevel,
+    		enhancementPercentage, currentDurability);
+    return userMonster;
+  }
+
+}

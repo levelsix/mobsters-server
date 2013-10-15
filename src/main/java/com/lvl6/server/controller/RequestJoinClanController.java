@@ -145,13 +145,6 @@ import com.lvl6.utils.utilmethods.QuestUtils;
       return false;      
     }
 
-    int minLevel = ControllerConstants.STARTUP__CLAN_HOUSE_MIN_LEVEL;
-    if (user.getLevel() < minLevel) {
-      resBuilder.setStatus(RequestJoinClanStatus.OTHER_FAIL);
-      log.error("user error: Attemped to send join request to clan, but too low level and not prestiged. "
-          + "min level to join clan=" + minLevel + ", user=" + user);
-      return false;
-    }
     if (ControllerConstants.CLAN__ALLIANCE_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId ||
         ControllerConstants.CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId) {
       return true;

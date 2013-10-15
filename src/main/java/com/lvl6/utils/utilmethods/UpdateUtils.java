@@ -43,7 +43,7 @@ public class UpdateUtils implements UpdateUtil {
       //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
       //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
 	public boolean updateUserQuestsCoinsretrievedforreq(int userId, List <Integer> questIds, int coinGain) {
-		String query = "update " + DBConstants.TABLE_USER_QUESTS + " set " + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ
+		String query = "update " + DBConstants.TABLE_QUEST_FOR_USER + " set " + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ
 				+ "=" + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ + "+? where " 
 				+ DBConstants.USER_QUESTS__USER_ID + "=? and (";
 		List<Object> values = new ArrayList<Object>();
@@ -106,16 +106,16 @@ public class UpdateUtils implements UpdateUtil {
 	public boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition,
 			boolean isExpanding, Timestamp expandStartTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__USER_ID, userId);
-		conditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__X_POSITION, xPosition);
-		conditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__Y_POSITION, yPosition);
+		conditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__USER_ID, userId);
+		conditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__X_POSITION, xPosition);
+		conditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__Y_POSITION, yPosition);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_CITY_EXPANSION_DATA__IS_EXPANDING, isExpanding);
-		absoluteParams.put(DBConstants.USER_CITY_EXPANSION_DATA__EXPAND_START_TIME, expandStartTime);
+		absoluteParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__IS_EXPANDING, isExpanding);
+		absoluteParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__EXPAND_START_TIME, expandStartTime);
 		
 		int numUpdated = DBConnection.get().updateTableRows(
-				DBConstants.TABLE_USER_CITY_EXPANSION_DATA, null, absoluteParams, conditionParams, "and");
+				DBConstants.TABLE_EXPANSION_PURCHASE_FOR_USER, null, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
 		}
@@ -140,7 +140,7 @@ public class UpdateUtils implements UpdateUtil {
 		absoluteParams.put(DBConstants.USER_QUESTS__IS_COMPLETE, true);
 		absoluteParams.put(DBConstants.USER_QUESTS__DEFEAT_TYPE_JOBS_COMPLETE, true);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_QUESTS, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_QUEST_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
@@ -168,7 +168,7 @@ public class UpdateUtils implements UpdateUtil {
 		absoluteParams.put(DBConstants.USER_QUESTS__IS_COMPLETE, true);
 		absoluteParams.put(DBConstants.USER_QUESTS__DEFEAT_TYPE_JOBS_COMPLETE, true);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_QUESTS, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_QUEST_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
@@ -226,7 +226,7 @@ public class UpdateUtils implements UpdateUtil {
 			absoluteParams.put(DBConstants.USER_QUESTS__DEFEAT_TYPE_JOBS_COMPLETE, true); 
 		}
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_QUESTS, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_QUEST_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
@@ -244,13 +244,13 @@ public class UpdateUtils implements UpdateUtil {
   })*/
 	public boolean updateUserEquipOwner(long userEquipId, int newOwnerId, String reason) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
+		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_EQUIP__USER_ID, newOwnerId); 
-		absoluteParams.put(DBConstants.USER_EQUIP__REASON, reason);
+		absoluteParams.put(DBConstants.MONSTER_FOR_USER__USER_ID, newOwnerId); 
+		absoluteParams.put(DBConstants.MONSTER_FOR_USER__REASON, reason);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_EQUIP, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
@@ -262,12 +262,12 @@ public class UpdateUtils implements UpdateUtil {
 	//update a user equip after enhancing
 	public boolean updateUserEquipEnhancementPercentage(long userEquipId, int newEnhancementPercentage) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
+		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_EQUIP__ENHANCEMENT_PERCENT, newEnhancementPercentage); 
+		absoluteParams.put(DBConstants.MONSTER_FOR_USER__ENHANCEMENT_PERCENT, newEnhancementPercentage); 
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_EQUIP, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
@@ -287,17 +287,18 @@ public class UpdateUtils implements UpdateUtil {
 	public boolean updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(List<UserStruct> userStructs, int levelChange) {
 		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
 
-		for (UserStruct userStruct : userStructs) {
-			Structure structure = structures.get(userStruct.getStructId());
-			if (structure == null) {
-				return false;
-			}
-			Timestamp lastRetrievedTime = new Timestamp(userStruct.getLastUpgradeTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), userStruct.getLevel()));
-			if (!updateUserStructLastretrievedIscompleteLevelchange(userStruct.getId(), lastRetrievedTime, true, levelChange)) {
-				return false;
-			}
-		}
-		return true;
+//		for (UserStruct userStruct : userStructs) {
+//			Structure structure = structures.get(userStruct.getStructId());
+//			if (structure == null) {
+//				return false;
+//			}
+//			Timestamp lastRetrievedTime = new Timestamp(userStruct.getLastUpgradeTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), userStruct.getLevel()));
+//			if (!updateUserStructLastretrievedIscompleteLevelchange(userStruct.getId(), lastRetrievedTime, true, levelChange)) {
+//				return false;
+//			}
+//		}
+//		return true;
+		return false;
 	}
 
 	/*
@@ -341,17 +342,18 @@ public class UpdateUtils implements UpdateUtil {
 	public boolean updateUserStructsLastretrievedpostbuildIscomplete(List<UserStruct> userStructs) {
 		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
 
-		for (UserStruct userStruct : userStructs) {
-			Structure structure = structures.get(userStruct.getStructId());
-			if (structure == null) {
-				return false;
-			}
-			Timestamp lastRetrievedTime = new Timestamp(userStruct.getPurchaseTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), 0));
-			if (!updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), lastRetrievedTime, null, true)) {
-				return false;
-			}
-		}
-		return true;
+//		for (UserStruct userStruct : userStructs) {
+//			Structure structure = structures.get(userStruct.getStructId());
+//			if (structure == null) {
+//				return false;
+//			}
+//			Timestamp lastRetrievedTime = new Timestamp(userStruct.getPurchaseTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), 0));
+//			if (!updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), lastRetrievedTime, null, true)) {
+//				return false;
+//			}
+//		}
+//		return true;
+		return false;
 	}
 
 	/*
@@ -485,15 +487,15 @@ public class UpdateUtils implements UpdateUtil {
 	public boolean incrementNumberOfLockBoxesForLockBoxEvent(int userId, int eventId, int increment) {
 		Map <String, Object> insertParams = new HashMap<String, Object>();
 
-		insertParams.put(DBConstants.USER_LOCK_BOX_EVENTS__USER_ID, userId);
-		insertParams.put(DBConstants.USER_LOCK_BOX_EVENTS__EVENT_ID, eventId);
-		insertParams.put(DBConstants.USER_LOCK_BOX_EVENTS__NUM_BOXES, increment);
-		insertParams.put(DBConstants.USER_LOCK_BOX_EVENTS__NUM_TIMES_COMPLETED, 0);
+		insertParams.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__USER_ID, userId);
+		insertParams.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__EVENT_ID, eventId);
+		insertParams.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__NUM_BOXES, increment);
+		insertParams.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__NUM_TIMES_COMPLETED, 0);
 
 		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-		columnsToUpdate.put(DBConstants.USER_LOCK_BOX_EVENTS__NUM_BOXES, increment);
+		columnsToUpdate.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__NUM_BOXES, increment);
 
-		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_LOCK_BOX_EVENTS, insertParams, 
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_LOCK_BOX_EVENT_FOR_USER, insertParams, 
 				columnsToUpdate, null);//DBConstants.USER_LOCK_BOX_EVENTS__NUM_BOXES, increment);
 
 		if (numUpdated >= 1) {
@@ -592,13 +594,13 @@ public class UpdateUtils implements UpdateUtil {
 	@Override
 	public boolean updateUserClanStatus(int userId, int clanId, UserClanStatus status) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_CLANS__USER_ID, userId);
-		conditionParams.put(DBConstants.USER_CLANS__CLAN_ID, clanId);
+		conditionParams.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
+		conditionParams.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_CLANS__STATUS, status.getNumber());
+		absoluteParams.put(DBConstants.CLAN_FOR_USER__STATUS, status.getNumber());
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_CLANS, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_CLAN_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			return true;
@@ -635,12 +637,12 @@ public class UpdateUtils implements UpdateUtil {
 
 	public boolean updateLeaderboardEventSetRewardGivenOut(int eventId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.LEADERBOARD_EVENTS__ID, eventId);
+		conditionParams.put(DBConstants.TOURNAMENT_EVENT__ID, eventId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.LEADERBOARD_EVENTS__REWARDS_GIVEN_OUT, 1);
+		absoluteParams.put(DBConstants.TOURNAMENT_EVENT__REWARDS_GIVEN_OUT, 1);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_LEADERBOARD_EVENTS, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_TOURNAMENT_EVENT, null, absoluteParams, 
 				conditionParams, "or");
 		if (numUpdated == 1) {
 			return true;
@@ -700,7 +702,7 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 	
-	public int updateUserEquipsDurability(List<Long> userEquipIds,
+	public int updateUserMonstersDurability(List<Long> userEquipIds,
 			List<Integer> currentDurability,
 			Map<Long, Integer> userEquipIdsToDurabilities) {
 		Map<String, Object> relativeParams = null;
@@ -711,8 +713,8 @@ public class UpdateUtils implements UpdateUtil {
 			for (long userEquipId : userEquipIdsToDurabilities.keySet()) {
 				int durability = userEquipIdsToDurabilities.get(userEquipId);
 				
-				conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
-				absoluteParams.put(DBConstants.USER_EQUIP__CURRENT_DURABILITY, durability);
+				conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
+				absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, durability);
 			}
 		} else {
 
@@ -720,12 +722,12 @@ public class UpdateUtils implements UpdateUtil {
 				long userEquipId = userEquipIds.get(i);
 				int durability = currentDurability.get(i);
 
-				conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
-				absoluteParams.put(DBConstants.USER_EQUIP__CURRENT_DURABILITY, durability);
+				conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
+				absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, durability);
 			}
 		}
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_EQUIP,
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER,
 				relativeParams, absoluteParams, conditionParams, "AND");
 
 //		log.info("num userEquips updated: " + numUpdated 
@@ -740,14 +742,14 @@ public class UpdateUtils implements UpdateUtil {
 	public int updateUserAndEquipFail(int userId, int equipId, int failIncrement) {
 		Map <String, Object> insertParams = new HashMap<String, Object>();
 
-		insertParams.put(DBConstants.USER_AND_EQUIP_FAIL__USER_ID, userId);
-		insertParams.put(DBConstants.USER_AND_EQUIP_FAIL__EQUIP_ID, equipId);
-		insertParams.put(DBConstants.USER_AND_EQUIP_FAIL__NUM_FAILS, failIncrement);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID, userId);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID, equipId);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS, failIncrement);
 
 		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-		insertParams.put(DBConstants.USER_AND_EQUIP_FAIL__NUM_FAILS, failIncrement);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS, failIncrement);
 
-		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_AND_EQUIP_FAIL, insertParams, 
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_MONSTER_EVOLVING_FAIL_FOR_USER, insertParams, 
 				columnsToUpdate, null);//DBConstants.USER_CITIES__CURRENT_RANK, increment);
 
 		return numUpdated;

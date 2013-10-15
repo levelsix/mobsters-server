@@ -20,14 +20,14 @@ import com.lvl6.utils.DBConnection;
 
   private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private final String TABLE_NAME = DBConstants.TABLE_USER_AND_EQUIP_FAIL;
+  private final String TABLE_NAME = DBConstants.TABLE_MONSTER_EVOLVING_FAIL_FOR_USER;
 
 
   ////@Cacheable(value="specificUserAndEquipFail")
   public UserAndEquipFail getSpecificFail(int userId, int equipId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_AND_EQUIP_FAIL__EQUIP_ID, equipId);
-    paramsToVals.put(DBConstants.USER_AND_EQUIP_FAIL__USER_ID, userId);
+    paramsToVals.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID, equipId);
+    paramsToVals.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID, userId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -55,7 +55,7 @@ import com.lvl6.utils.DBConnection;
 
   public List<UserAndEquipFail> getUserAndEquipFailsRelatedToUser(int userId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_AND_EQUIP_FAIL__USER_ID, userId);
+    paramsToVals.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID, userId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);

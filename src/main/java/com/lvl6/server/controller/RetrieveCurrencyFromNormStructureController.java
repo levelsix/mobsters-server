@@ -193,8 +193,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       int structIncome = struct.getIncome();
       int userStructureLevel = userStructure.getLevel();
       
-      totalCoinsGained += MiscMethods.calculateIncomeGainedFromUserStruct(
-          structIncome, userStructureLevel);
+//      totalCoinsGained += MiscMethods.calculateIncomeGainedFromUserStruct(
+//          structIncome, userStructureLevel);
     }
     
     return totalCoinsGained;
@@ -228,51 +228,52 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       Map<Integer, UserStruct> userStructIdsToUserStructs, Map<Integer, Structure> userStructIdsToStructures,
       Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval, List<Integer> duplicates, int coinGain) {
 
-    int userId = user.getId();
-    
-    if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
-        || userStructIdsToStructures.isEmpty() || userStructIdsToTimesOfRetrieval.isEmpty()) { //|| timeOfRetrieval == null || userStruct.getLastRetrieved() == null) {
-      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-      log.error("user is null, or no struct ids, or no user structs, or no structures, or no retrieval times . user=" + user
-          + MiscMethods.shallowListToString(userStructIds) + " " + MiscMethods.shallowMapToString(userStructIdsToUserStructs) + " " 
-          + MiscMethods.shallowMapToString(userStructIdsToStructures) + MiscMethods.shallowMapToString(userStructIdsToTimesOfRetrieval));
-      return false;
-    }
-    if (!duplicates.isEmpty()) {
-      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-      log.error("duplicate struct ids in request. ids=" + MiscMethods.shallowListToString(duplicates));
-      return false;
-    }
-    for (Integer id : userStructIds) {
-      UserStruct userStruct = userStructIdsToUserStructs.get(id);
-      Timestamp timeOfRetrieval = userStructIdsToTimesOfRetrieval.get(id);
-      Structure struct = userStructIdsToStructures.get(id);
-      
-      if (userId != userStruct.getUserId() || !userStruct.isComplete()) {
-        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-        log.error("struct owner is not user, or struct is not complete yet. userStruct=" + userStruct);
-        return false;
-      }
-      if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfRetrieval)) {
-        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-        log.error("client time too apart of server time. client time=" + timeOfRetrieval + ", servertime~="
-            + new Date());
-        return false;
-      }
-      if ((timeOfRetrieval.getTime() - userStruct.getLastRetrieved().getTime())  < 60000*struct.getMinutesToGain()) {
-        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.NOT_LONG_ENOUGH);
-        log.error("struct not ready for retrieval yet. time of retrieval=" + timeOfRetrieval
-            + ", userStruct=" + userStruct + ", takes this many minutes to gain:" + struct.getMinutesToGain()); 
-        return false;
-      }
-    }
-    if (coinGain <= 0) {
-      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-      log.error("coinGain <= 0. coinGain is " + coinGain);
-      return false;
-    }
-    resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
-    return true;
+//    int userId = user.getId();
+//    
+//    if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
+//        || userStructIdsToStructures.isEmpty() || userStructIdsToTimesOfRetrieval.isEmpty()) { //|| timeOfRetrieval == null || userStruct.getLastRetrieved() == null) {
+//      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
+//      log.error("user is null, or no struct ids, or no user structs, or no structures, or no retrieval times . user=" + user
+//          + MiscMethods.shallowListToString(userStructIds) + " " + MiscMethods.shallowMapToString(userStructIdsToUserStructs) + " " 
+//          + MiscMethods.shallowMapToString(userStructIdsToStructures) + MiscMethods.shallowMapToString(userStructIdsToTimesOfRetrieval));
+//      return false;
+//    }
+//    if (!duplicates.isEmpty()) {
+//      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
+//      log.error("duplicate struct ids in request. ids=" + MiscMethods.shallowListToString(duplicates));
+//      return false;
+//    }
+//    for (Integer id : userStructIds) {
+//      UserStruct userStruct = userStructIdsToUserStructs.get(id);
+//      Timestamp timeOfRetrieval = userStructIdsToTimesOfRetrieval.get(id);
+//      Structure struct = userStructIdsToStructures.get(id);
+//      
+//      if (userId != userStruct.getUserId() || !userStruct.isComplete()) {
+//        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
+//        log.error("struct owner is not user, or struct is not complete yet. userStruct=" + userStruct);
+//        return false;
+//      }
+//      if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfRetrieval)) {
+//        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
+//        log.error("client time too apart of server time. client time=" + timeOfRetrieval + ", servertime~="
+//            + new Date());
+//        return false;
+//      }
+//      if ((timeOfRetrieval.getTime() - userStruct.getLastRetrieved().getTime())  < 60000*struct.getMinutesToGain()) {
+//        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.NOT_LONG_ENOUGH);
+//        log.error("struct not ready for retrieval yet. time of retrieval=" + timeOfRetrieval
+//            + ", userStruct=" + userStruct + ", takes this many minutes to gain:" + struct.getMinutesToGain()); 
+//        return false;
+//      }
+//    }
+//    if (coinGain <= 0) {
+//      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
+//      log.error("coinGain <= 0. coinGain is " + coinGain);
+//      return false;
+//    }
+//    resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
+    resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
+    return false;
     
   }
   

@@ -19,12 +19,12 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
-  private static final String TABLE_NAME = DBConstants.TABLE_FIRST_TIME_USERS;
+  private static final String TABLE_NAME = DBConstants.TABLE_USER_BEFORE_TUTORIAL_COMPLETION;
   
   public static boolean userExistsWithUDID(String UDID) { 
     log.debug("Checking open udid in first time users for user with udid " + UDID);
     Map <String, Object> paramsToVals = new HashMap<String, Object>();
-    paramsToVals.put(DBConstants.FIRST_TIME_USERS__OPEN_UDID, UDID);
+    paramsToVals.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__OPEN_UDID, UDID);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);

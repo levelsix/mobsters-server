@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_EQUIP_ENHANCEMENT;
+  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
 
   public static List<EquipEnhancement> getEquipEnhancementsForUser(int userId) {
     log.debug("retrieving equip enhancements for user " + userId);
@@ -39,7 +39,7 @@ import com.lvl6.utils.DBConnection;
     
     Connection conn = DBConnection.get().getConnection();
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.EQUIP_ENHANCEMENT__ID, equipEnhancementId);
+    absoluteConditionParams.put(DBConstants.MONSTER_ENHANCING__ID, equipEnhancementId);
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
     EquipEnhancement equipEnhancement = null;

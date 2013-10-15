@@ -186,11 +186,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private int calculateUpgradeCoinCost(int oldLevel, Structure struct) {
-    return Math.max(0, (int)(struct.getCoinPrice() * Math.pow(ControllerConstants.UPGRADE_NORM_STRUCTURE__UPGRADE_STRUCT_COIN_COST_EXPONENT_BASE, oldLevel)));
+//    return Math.max(0, (int)(struct.getCoinPrice() * Math.pow(ControllerConstants.UPGRADE_NORM_STRUCTURE__UPGRADE_STRUCT_COIN_COST_EXPONENT_BASE, oldLevel)));
+  	return 1234567890;
   }
   
   private int calculateUpgradeDiamondCost(int oldLevel, Structure struct) {
-    return Math.max(0, (int)(struct.getDiamondPrice() * Math.pow(ControllerConstants.UPGRADE_NORM_STRUCTURE__UPGRADE_STRUCT_DIAMOND_COST_EXPONENT_BASE, oldLevel)));
+  	return 123457890;
+//    return Math.max(0, (int)(struct.getDiamondPrice() * Math.pow(ControllerConstants.UPGRADE_NORM_STRUCTURE__UPGRADE_STRUCT_DIAMOND_COST_EXPONENT_BASE, oldLevel)));
   }
   
   private void writeToUserCurrencyHistory(User aUser, UserStruct userStruct, Timestamp timeOfUpgrade, 

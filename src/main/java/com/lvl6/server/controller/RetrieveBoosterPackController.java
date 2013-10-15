@@ -61,33 +61,33 @@ import com.lvl6.utils.CreateInfoProtoUtils;
         resBuilder.setStatus(RetrieveBoosterPackStatus.SOME_FAIL);
         log.error("no booster packs available");
       } else {
-        //get map of booster pack id to [map of booster item id to booster item]
-        Map<Integer, Map<Integer, BoosterItem>> bItemIdsToBItemsForBPackIds = 
-            BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
-        //get map of all booster item ids to quantities for a user
-        Map<Integer, Integer> boosterItemIdsToQuantitiesForAUser = 
-            UserBoosterItemRetrieveUtils.getBoosterItemIdsToQuantityForUser(userId);
-
-        //protos to insert into builder
-        List<BoosterPackProto> boosterPackProtos = new ArrayList<BoosterPackProto>();
-        List<UserBoosterPackProto> userBoosterPackProtos = new ArrayList<UserBoosterPackProto>();
-        
-        for (Integer boosterPackId : packs.keySet()) {
-          BoosterPack bp = packs.get(boosterPackId);
-          if(!bItemIdsToBItemsForBPackIds.containsKey(boosterPackId)) {
-            log.error("booster pack does not have any items associated with it. bp=" + bp);
-            continue;
-          }
-          Map<Integer, BoosterItem> boosterItemIdsToBoosterItems = bItemIdsToBItemsForBPackIds.get(boosterPackId); 
-          generateBoosterPackProto(bp, boosterItemIdsToBoosterItems, boosterPackProtos);
-         
-          generateUserBoosterPackProto(boosterPackId, userId, boosterItemIdsToBoosterItems,
-              boosterItemIdsToQuantitiesForAUser, userBoosterPackProtos);
-        }
-        
-        resBuilder.addAllPacks(boosterPackProtos);
-        resBuilder.addAllUserPacks(userBoosterPackProtos);
-        resBuilder.setStatus(RetrieveBoosterPackStatus.SUCCESS);
+//        //get map of booster pack id to [map of booster item id to booster item]
+//        Map<Integer, Map<Integer, BoosterItem>> bItemIdsToBItemsForBPackIds = 
+//            BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
+//        //get map of all booster item ids to quantities for a user
+//        Map<Integer, Integer> boosterItemIdsToQuantitiesForAUser = 
+//            UserBoosterItemRetrieveUtils.getBoosterItemIdsToQuantityForUser(userId);
+//
+//        //protos to insert into builder
+//        List<BoosterPackProto> boosterPackProtos = new ArrayList<BoosterPackProto>();
+//        List<UserBoosterPackProto> userBoosterPackProtos = new ArrayList<UserBoosterPackProto>();
+//        
+//        for (Integer boosterPackId : packs.keySet()) {
+//          BoosterPack bp = packs.get(boosterPackId);
+//          if(!bItemIdsToBItemsForBPackIds.containsKey(boosterPackId)) {
+//            log.error("booster pack does not have any items associated with it. bp=" + bp);
+//            continue;
+//          }
+//          Map<Integer, BoosterItem> boosterItemIdsToBoosterItems = bItemIdsToBItemsForBPackIds.get(boosterPackId); 
+//          generateBoosterPackProto(bp, boosterItemIdsToBoosterItems, boosterPackProtos);
+//         
+//          generateUserBoosterPackProto(boosterPackId, userId, boosterItemIdsToBoosterItems,
+//              boosterItemIdsToQuantitiesForAUser, userBoosterPackProtos);
+//        }
+//        
+//        resBuilder.addAllPacks(boosterPackProtos);
+//        resBuilder.addAllUserPacks(userBoosterPackProtos);
+        resBuilder.setStatus(RetrieveBoosterPackStatus.SOME_FAIL);
       }
       //for each boosterpack, get all the booster items for it
       RetrieveBoosterPackResponseProto resProto = resBuilder.build();
@@ -110,23 +110,23 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     boosterPackProtos.add(bpProto);
   }
   
-  public void generateUserBoosterPackProto(int boosterPackId, int userId, 
-      Map<Integer, BoosterItem> boosterItemIdsToBoosterItems,  
-      Map<Integer, Integer> boosterItemIdsToQuantitiesForAUser,
-      List<UserBoosterPackProto> userBoosterPackProtos) {
-    Map<Integer, Integer> bItemIdToQuantity = new HashMap<Integer, Integer>();
-    
-    //for each booster item in a pack, check if the user has any
-    for(Integer bItemId : boosterItemIdsToBoosterItems.keySet()) {
-      if(!boosterItemIdsToQuantitiesForAUser.containsKey(bItemId)) {
-        //log.info("user does not have booster item: " + boosterItemIdsToBoosterItems.get(bItemId));
-        continue;
-      }
-      int quantity = boosterItemIdsToQuantitiesForAUser.get(bItemId);
-      bItemIdToQuantity.put(bItemId, quantity);
-    }
-    UserBoosterPackProto ubpProto = 
-        CreateInfoProtoUtils.createUserBoosterPackProto(boosterPackId, userId, bItemIdToQuantity);
-    userBoosterPackProtos.add(ubpProto);
-  }
+//  public void generateUserBoosterPackProto(int boosterPackId, int userId, 
+//      Map<Integer, BoosterItem> boosterItemIdsToBoosterItems,  
+//      Map<Integer, Integer> boosterItemIdsToQuantitiesForAUser,
+//      List<UserBoosterPackProto> userBoosterPackProtos) {
+//    Map<Integer, Integer> bItemIdToQuantity = new HashMap<Integer, Integer>();
+//    
+//    //for each booster item in a pack, check if the user has any
+//    for(Integer bItemId : boosterItemIdsToBoosterItems.keySet()) {
+//      if(!boosterItemIdsToQuantitiesForAUser.containsKey(bItemId)) {
+//        //log.info("user does not have booster item: " + boosterItemIdsToBoosterItems.get(bItemId));
+//        continue;
+//      }
+//      int quantity = boosterItemIdsToQuantitiesForAUser.get(bItemId);
+//      bItemIdToQuantity.put(bItemId, quantity);
+//    }
+//    UserBoosterPackProto ubpProto = 
+//        CreateInfoProtoUtils.createUserBoosterPackProto(boosterPackId, userId, bItemIdToQuantity);
+//    userBoosterPackProtos.add(ubpProto);
+//  }
 }

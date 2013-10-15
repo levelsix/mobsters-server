@@ -117,7 +117,7 @@ public class RetrieveTournamentRankingsController extends EventController {
   private Map<Integer, UserRankScore> getUsersAfterThisRank(int eventId,	int afterThisRank) {
     Set<Tuple> usrs = new HashSet<Tuple>();
 
-    usrs = leader.getEventTopN(eventId, afterThisRank, afterThisRank+ControllerConstants.LEADERBOARD_EVENT__MAX_PLAYERS_SENT_AT_ONCE);
+    usrs = leader.getEventTopN(eventId, afterThisRank, afterThisRank+ControllerConstants.TOURNAMENT_EVENT__MAX_PLAYERS_SENT_AT_ONCE);
 
     Map<Integer, UserRankScore> lurs = new LinkedHashMap<Integer, UserRankScore>();
     Iterator<Tuple> it = usrs.iterator();

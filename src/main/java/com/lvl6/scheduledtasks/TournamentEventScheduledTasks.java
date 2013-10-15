@@ -23,16 +23,16 @@ import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.ILock;
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.LeaderboardEvent;
-import com.lvl6.info.LeaderboardEventReward;
+import com.lvl6.info.TournamentEvent;
+import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
-import com.lvl6.retrieveutils.rarechange.LeaderboardEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LeaderboardEventRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TournamentEventRewardRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
@@ -94,13 +94,13 @@ public class TournamentEventScheduledTasks {
 		try {
 			if (lock.tryLock()) {
 				gotLock = true;
-				Collection<LeaderboardEvent> events = LeaderboardEventRetrieveUtils
-						.getIdsToLeaderboardEvents(true).values();
+				Collection<TournamentEvent> events = TournamentEventRetrieveUtils
+						.getIdsToTournamentEvents(true).values();
 				if (events == null) {
 					//log.debug("There are no events to check");
 					return;
 				}
-				for (LeaderboardEvent event : events) {
+				for (TournamentEvent event : events) {
 					checkEndOfEvent(event);
 				}
 			} else {
@@ -114,7 +114,7 @@ public class TournamentEventScheduledTasks {
 		}
 	}
 
-	public void checkEndOfEvent(LeaderboardEvent event) {
+	public void checkEndOfEvent(TournamentEvent event) {
 		if (event.isRewardsGivenOut()) {
 			//log.debug("Reward already given out for event: {}", event.getEventName());
 			return;
@@ -137,9 +137,9 @@ public class TournamentEventScheduledTasks {
 		List<Integer> currentGoldSilver = new ArrayList<Integer>();
 		List<String> reasonsForChanges = new ArrayList<String>();
 
-		List<LeaderboardEventReward> rewards = LeaderboardEventRewardRetrieveUtils
+		List<TournamentEventReward> rewards = TournamentEventRewardRetrieveUtils
 				.getLeaderboardEventRewardsForId(event.getId());
-		for (LeaderboardEventReward reward : rewards) {
+		for (TournamentEventReward reward : rewards) {
 			Set<Tuple> set = new HashSet<Tuple>();
 			set = leader.getEventTopN(event.getId(), reward.getMinRank() - 1, reward.getMaxRank() - 1);
 
@@ -218,11 +218,11 @@ public class TournamentEventScheduledTasks {
 		}
 	}
 
-	private void notificationStuff(LeaderboardEvent event, List<LeaderboardEventReward> rewards,
+	private void notificationStuff(TournamentEvent event, List<TournamentEventReward> rewards,
 			Map<Integer, User> userIdsToUsers) {
 		int eventId = event.getId();
 
-		LeaderboardEventReward r = getFirstPlaceReward(rewards);
+		TournamentEventReward r = getFirstPlaceReward(rewards);
 		if (null == r) {
 			log.error("first place leader board event reward does not exist.");
 			return;
@@ -234,7 +234,7 @@ public class TournamentEventScheduledTasks {
 
 	}
 
-	private void sendGlobalNotification(int eventId, LeaderboardEventReward r,
+	private void sendGlobalNotification(int eventId, TournamentEventReward r,
 			Map<Integer, User> userIdsToUsers) {
 
 		Set<Tuple> set = new HashSet<Tuple>();
@@ -259,8 +259,8 @@ public class TournamentEventScheduledTasks {
 		}
 	}
 
-	private LeaderboardEventReward getFirstPlaceReward(List<LeaderboardEventReward> rList) {
-		for (LeaderboardEventReward r : rList) {
+	private TournamentEventReward getFirstPlaceReward(List<TournamentEventReward> rList) {
+		for (TournamentEventReward r : rList) {
 			if (1 >= r.getMinRank() && 1 <= r.getMaxRank()) {
 				return r;
 			}
@@ -269,7 +269,7 @@ public class TournamentEventScheduledTasks {
 	}
 
 	private GeneralNotificationResponseEvent generateGlobalNotificationResponseEvent(User firstPlaceWinner,
-			LeaderboardEventReward reward) {
+			TournamentEventReward reward) {
 		String firstPlaceWinnerName = firstPlaceWinner.getName();
 		int gold = reward.getGoldRewarded();
 
@@ -286,9 +286,9 @@ public class TournamentEventScheduledTasks {
 		return resEvent;
 	}
 
-	private void sendIndividualNotifications(int eventId, List<LeaderboardEventReward> rList,
+	private void sendIndividualNotifications(int eventId, List<TournamentEventReward> rList,
 			Map<Integer, User> userIdsToUsers) {
-		for (LeaderboardEventReward reward : rList) {
+		for (TournamentEventReward reward : rList) {
 			Set<Tuple> set = new HashSet<Tuple>();
 			int gold = reward.getGoldRewarded();
 			int minRank = reward.getMinRank();

@@ -117,18 +117,18 @@ import com.lvl6.utils.RetrieveUtils;
   }
 
   private void setResponseOwnerAlliesOrEnemies(Builder resBuilder, List<User> users, boolean ownerAllies) {
-    if (users != null) {
-      for (User user : users) {
-        if (ownerAllies) {
-          resBuilder.addOwnerAllies(CreateInfoProtoUtils.createFullUserProtoFromUser(user));
-        } else {
-          resBuilder.addOwnerEnemies(CreateInfoProtoUtils.createFullUserProtoFromUser(user));          
-        }
-      }
-    } else {
-      resBuilder.setStatus(LoadPlayerCityStatus.OTHER_FAIL);
-      log.error("no users found when loading city owner's allies/enemies, ownerAllies="+ownerAllies);
-    }    
+//    if (users != null) {
+//      for (User user : users) {
+//        if (ownerAllies) {
+//          resBuilder.addOwnerAllies(CreateInfoProtoUtils.createFullUserProtoFromUser(user));
+//        } else {
+//          resBuilder.addOwnerEnemies(CreateInfoProtoUtils.createFullUserProtoFromUser(user));          
+//        }
+//      }
+//    } else {
+//      resBuilder.setStatus(LoadPlayerCityStatus.OTHER_FAIL);
+//      log.error("no users found when loading city owner's allies/enemies, ownerAllies="+ownerAllies);
+//    }    
   }
 
   private void setResponseUserStructs(Builder resBuilder,

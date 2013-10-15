@@ -157,33 +157,33 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       }
     }
 
-    List <Integer> defeatTypeJobIds = reqProto.getDefeatTypeJobIdsList();
-    if (defeatTypeJobIds != null && defeatTypeJobIds.size() > 0) {
-      Map<Integer, DefeatTypeJob> defeatTypeJobIdsToDefeatTypeJobs = DefeatTypeJobRetrieveUtils.getDefeatTypeJobIdsToDefeatTypeJobs();
-      for (Integer defeatTypeJobId :  defeatTypeJobIds) {
-        DefeatTypeJob defeatTypeJob = defeatTypeJobIdsToDefeatTypeJobs.get(defeatTypeJobId);
-        if (defeatTypeJob != null) {
-          resBuilder.addDefeatTypeJobs(CreateInfoProtoUtils.createFullDefeatTypeJobProtoFromDefeatTypeJob(defeatTypeJob));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving defeat type job with id " + defeatTypeJobId);
-        }
-      }
-    }
-
-    List <Integer> possessEquipJobIds = reqProto.getPossessEquipJobIdsList();
-    if (possessEquipJobIds != null && possessEquipJobIds.size() > 0) {
-      Map<Integer, PossessEquipJob> possessEquipJobIdsToPossessEquipJobs = PossessEquipJobRetrieveUtils.getPossessEquipJobIdsToPossessEquipJobs();
-      for (Integer possessEquipJobId :  possessEquipJobIds) {
-        PossessEquipJob possessEquipJob = possessEquipJobIdsToPossessEquipJobs.get(possessEquipJobId);
-        if (possessEquipJob != null) {
-          resBuilder.addPossessEquipJobs(CreateInfoProtoUtils.createFullPossessEquipJobProtoFromPossessEquipJob(possessEquipJob));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving possess equip job with id " + possessEquipJobId);
-        }
-      }
-    }
+//    List <Integer> defeatTypeJobIds = reqProto.getDefeatTypeJobIdsList();
+//    if (defeatTypeJobIds != null && defeatTypeJobIds.size() > 0) {
+//      Map<Integer, DefeatTypeJob> defeatTypeJobIdsToDefeatTypeJobs = DefeatTypeJobRetrieveUtils.getDefeatTypeJobIdsToDefeatTypeJobs();
+//      for (Integer defeatTypeJobId :  defeatTypeJobIds) {
+//        DefeatTypeJob defeatTypeJob = defeatTypeJobIdsToDefeatTypeJobs.get(defeatTypeJobId);
+//        if (defeatTypeJob != null) {
+//          resBuilder.addDefeatTypeJobs(CreateInfoProtoUtils.createFullDefeatTypeJobProtoFromDefeatTypeJob(defeatTypeJob));
+//        } else {
+//          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
+//          log.error("problem with retrieving defeat type job with id " + defeatTypeJobId);
+//        }
+//      }
+//    }
+//
+//    List <Integer> possessEquipJobIds = reqProto.getPossessEquipJobIdsList();
+//    if (possessEquipJobIds != null && possessEquipJobIds.size() > 0) {
+//      Map<Integer, PossessEquipJob> possessEquipJobIdsToPossessEquipJobs = PossessEquipJobRetrieveUtils.getPossessEquipJobIdsToPossessEquipJobs();
+//      for (Integer possessEquipJobId :  possessEquipJobIds) {
+//        PossessEquipJob possessEquipJob = possessEquipJobIdsToPossessEquipJobs.get(possessEquipJobId);
+//        if (possessEquipJob != null) {
+//          resBuilder.addPossessEquipJobs(CreateInfoProtoUtils.createFullPossessEquipJobProtoFromPossessEquipJob(possessEquipJob));
+//        } else {
+//          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
+//          log.error("problem with retrieving possess equip job with id " + possessEquipJobId);
+//        }
+//      }
+//    }
 
     List <Integer> upgradeStructJobIds = reqProto.getUpgradeStructJobIdsList();
     if (upgradeStructJobIds != null && upgradeStructJobIds.size() > 0) {
@@ -199,51 +199,29 @@ import com.lvl6.utils.CreateInfoProtoUtils;
       }
     }
 
-    if (reqProto.hasLevelForExpRequiredRequest()) {
-      int level = reqProto.getLevelForExpRequiredRequest();
-      if (level > ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER || level < 2) {
-        resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-        log.error("no exp data stored for levels < 2 and levels > " + ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
-      } else {
-        int expRequired = LevelsRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(level);
-        if (expRequired > 0)
-          resBuilder.setExpRequiredForRequestedLevel(expRequired);
-        else
-          log.error("problem with retrieving exp required for level " + level);
-      }
-    }
+//    if (reqProto.hasLevelForExpRequiredRequest()) {
+//      int level = reqProto.getLevelForExpRequiredRequest();
+//      if (level > ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER || level < 2) {
+//        resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
+//        log.error("no exp data stored for levels < 2 and levels > " + ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
+//      } else {
+//        int expRequired = LevelsRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(level);
+//        if (expRequired > 0)
+//          resBuilder.setExpRequiredForRequestedLevel(expRequired);
+//        else
+//          log.error("problem with retrieving exp required for level " + level);
+//      }
+//    }
 
 //    if (reqProto.getCurrentLockBoxEvents()) {
 //      resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
 //    }
-//    
-    if (reqProto.getClanTierLevels()) {
-      resBuilder.addAllClanTierLevels(MiscMethods.getAllClanTierLevelProtos());
-    }
-
-//    if (reqProto.getCurrentBossEvents()) {
-//      resBuilder.addAllBossEvents(MiscMethods.currentBossEvents());
-//    }
-
-//    List <Integer> bossIds = reqProto.getBossIdsList();
-//    if (bossIds != null && bossIds.size() > 0) {
-//      Map<Integer, Monster> bosses = MonsterRetrieveUtils.getBossIdsToBosses();
-//      for (Integer bossId :  bossIds) {
-//        Monster boss = bosses.get(bossId);
-//        if (boss != null) {
-//          resBuilder.addBosses(CreateInfoProtoUtils.createFullBossProtoFromBoss(type, boss));
-//        } else {
-//          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-//          log.error("problem with retrieving boss with id " + boss);
-//        }
-//      }
-//    }
     
-    //sets the leaderboard stuff: events and rewards
-    if(reqProto.getCurrentLeaderboardEvents()) {
-      resBuilder.addAllLeaderboardEvents(MiscMethods.currentLeaderboardEventProtos());
-      //TODO: SET THE REWARD STUFF
-    }
+//    //sets the leaderboard stuff: events and rewards
+//    if(reqProto.getCurrentLeaderboardEvents()) {
+//      resBuilder.addAllLeaderboardEvents(MiscMethods.currentLeaderboardEventProtos());
+//      //TODO: SET THE REWARD STUFF
+//    }
   }
 
 }

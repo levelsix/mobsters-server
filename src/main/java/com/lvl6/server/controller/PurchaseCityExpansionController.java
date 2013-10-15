@@ -16,7 +16,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseCityExpansionRequestEvent;
 import com.lvl6.events.response.PurchaseCityExpansionResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.CityExpansionCost;
+import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
 import com.lvl6.leaderboards.LeaderBoardUtil;
@@ -28,7 +28,7 @@ import com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto.Purchase
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserCityExpansionDataRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -196,7 +196,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	}
 	
 	private int calculateExpansionCost(int numOfExpansions) {
-		CityExpansionCost cec = CityExpansionCostRetrieveUtils.getCityExpansionCostById(numOfExpansions);
+		ExpansionCost cec = ExpansionCostRetrieveUtils.getCityExpansionCostById(numOfExpansions);
 		//log.info("cec=" + cec);
 		//log.info("all expansion stuff" + CityExpansionCostRetrieveUtils.getAllExpansionNumsToCosts());
 		return cec.getExpansionCost();

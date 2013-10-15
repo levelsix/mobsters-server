@@ -21,13 +21,13 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS;
+  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_ENHANCING_FEEDER;
 
   public static List<EquipEnhancementFeeder> getEquipEnhancementFeedersForEquipEnhancementId(int equipEnhancementId) {
     log.debug("retrieving equip enhancement feeders for equip enhancement id " + equipEnhancementId);
     
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS__EQUIP_ENHANCEMENT_ID, equipEnhancementId);
+    absoluteConditionParams.put(DBConstants.MONSTER_ENHANCING_FEEDER__MONSTER_ENHANCING_ID, equipEnhancementId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);

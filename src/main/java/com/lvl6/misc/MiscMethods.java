@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,25 +18,18 @@ import org.joda.time.Days;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-import org.springframework.core.task.TaskExecutor;
 
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.City;
-import com.lvl6.info.CityGem;
-import com.lvl6.info.Clan;
-import com.lvl6.info.ClanTierLevel;
-import com.lvl6.info.ClanTower;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.GoldSale;
-import com.lvl6.info.LeaderboardEvent;
-import com.lvl6.info.LeaderboardEventReward;
-import com.lvl6.info.Task;
+import com.lvl6.info.TournamentEventReward;
+import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.User;
-import com.lvl6.info.UserCityGem;
-import com.lvl6.info.UserEquip;
+import com.lvl6.info.UserMonster;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
@@ -52,37 +44,28 @@ import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
+import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BossEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityGemRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ClanTierLevelRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.DailyBonusRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.DefeatTypeJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LeaderboardEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LeaderboardEventRewardRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TournamentEventRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LockBoxItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.PossessEquipJobRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TaskEquipReqRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ThreeCardMonteRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.spring.AppContext;
@@ -91,7 +74,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 public class MiscMethods {
 
@@ -254,23 +236,21 @@ public class MiscMethods {
     Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
     for (Integer cityId : cities.keySet()) {
       City city = cities.get(cityId);
-      if (userLevel >= city.getMinLevel()) {
-        availCities.add(city);
-      }
+      availCities.add(city);
     }
     return availCities;
   }
 
-  public static int calculateMinutesToBuildOrUpgradeForUserStruct(int minutesToUpgradeBase, int userStructLevel) {
-    if(userStructLevel==0) {
-    	return minutesToUpgradeBase;
-    }
-  	return Math.max(1, (int)(minutesToUpgradeBase * (userStructLevel+1) * ControllerConstants.MINUTES_TO_UPGRADE_FOR_NORM_STRUCT_MULTIPLIER));
-  }
-
-  public static int calculateIncomeGainedFromUserStruct(int structIncomeBase, int userStructLevel) {
-    return Math.max(1, (int)(userStructLevel * structIncomeBase * ControllerConstants.INCOME_FROM_NORM_STRUCT_MULTIPLIER));
-  }
+//  public static int calculateMinutesToBuildOrUpgradeForUserStruct(int minutesToUpgradeBase, int userStructLevel) {
+//    if(userStructLevel==0) {
+//    	return minutesToUpgradeBase;
+//    }
+//  	return Math.max(1, (int)(minutesToUpgradeBase * (userStructLevel+1) * ControllerConstants.MINUTES_TO_UPGRADE_FOR_NORM_STRUCT_MULTIPLIER));
+//  }
+//
+//  public static int calculateIncomeGainedFromUserStruct(int structIncomeBase, int userStructLevel) {
+//    return Math.max(1, (int)(userStructLevel * structIncomeBase * ControllerConstants.INCOME_FROM_NORM_STRUCT_MULTIPLIER));
+//  }
 
   public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(User user) {
     try {
@@ -322,67 +302,18 @@ public class MiscMethods {
 
   public static StartupConstants createStartupConstantsProto() {
     StartupConstants.Builder cb = StartupConstants.newBuilder()
-        .setCarpenterXLength(ControllerConstants.CARPENTER_XLENGTH).setCarpenterYLength(ControllerConstants.CARPENTER_YLENGTH)        
-        .setAviaryXLength(ControllerConstants.AVIARY_XLENGTH).setAviaryYLength(ControllerConstants.AVIARY_YLENGTH)
-        .setAttackBaseGain(ControllerConstants.USE_SKILL_POINT__ATTACK_BASE_GAIN)
-        .setDefenseBaseGain(ControllerConstants.USE_SKILL_POINT__DEFENSE_BASE_GAIN)
-        .setEnergyBaseGain(ControllerConstants.USE_SKILL_POINT__ENERGY_BASE_GAIN)
-        .setStaminaBaseGain(ControllerConstants.USE_SKILL_POINT__STAMINA_BASE_GAIN)
-        .setAttackBaseCost(ControllerConstants.USE_SKILL_POINT__ATTACK_BASE_COST)
-        .setDefenseBaseCost(ControllerConstants.USE_SKILL_POINT__DEFENSE_BASE_COST)
-        .setEnergyBaseCost(ControllerConstants.USE_SKILL_POINT__ENERGY_BASE_COST)
-        .setStaminaBaseCost(ControllerConstants.USE_SKILL_POINT__STAMINA_BASE_COST)
-        .setSkillPointsGainedOnLevelup(ControllerConstants.LEVEL_UP__SKILL_POINTS_GAINED)
-        .setCutOfVaultDepositTaken(ControllerConstants.VAULT__DEPOSIT_PERCENT_CUT)
-        .setMaxLevelForStruct(ControllerConstants.UPGRADE_NORM_STRUCTURE__MAX_STRUCT_LEVEL)
         .setMaxNumOfSingleStruct(ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE)
-        .setPercentReturnedToUserForSellingNormStructure(ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER)
-        .setMinutesToRefillAEnergy(ControllerConstants.REFILL_STAT_WAIT_COMPLETE__MINUTES_FOR_ENERGY)
-        .setMinutesToRefillAStamina(ControllerConstants.REFILL_STAT_WAIT_COMPLETE__MINUTES_FOR_STAMINA)
-        .setDiamondCostForFullEnergyRefill(ControllerConstants.REFILL_STAT_WITH_DIAMONDS__DIAMOND_COST_FOR_ENERGY_REFILL)
-        .setDiamondCostForFullStaminaRefill(ControllerConstants.REFILL_STAT_WITH_DIAMONDS__DIAMOND_COST_FOR_STAMINA_REFILL)
-//        .setMaxNumberOfMarketplacePosts(ControllerConstants.POST_TO_MARKETPLACE__MAX_MARKETPLACE_POSTS_FROM_USER)
-//        .setPercentOfSellingCostTakenFromSellerOnMarketplacePurchase(ControllerConstants.PURCHASE_FROM_MARKETPLACE__PERCENT_CUT_OF_SELLING_PRICE_TAKEN)
-//        .setPercentOfSellingCostTakenFromSellerOnMarketplaceRetract(ControllerConstants.RETRACT_MARKETPLACE_POST__PERCENT_CUT_OF_SELLING_PRICE_TAKEN)
-//        .setNumDaysLongMarketplaceLicenseLastsFor(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__DAYS_FOR_LONG_LICENSE)
-//        .setNumDaysShortMarketplaceLicenseLastsFor(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__DAYS_FOR_SHORT_LICENSE)
-//        .setDiamondCostOfLongMarketplaceLicense(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__LONG_DIAMOND_COST)
-//        .setDiamondCostOfShortMarketplaceLicense(ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__SHORT_DIAMOND_COST)
-        .setNumDaysUntilFreeRetract(ControllerConstants.RETRACT_MARKETPLACE_POST__MIN_NUM_DAYS_UNTIL_FREE_TO_RETRACT_ITEM)
-        .setMaxNumbersOfEnemiesToGenerateAtOnce(ControllerConstants.GENERATE_ATTACK_LIST__NUM_ENEMIES_TO_GENERATE_MAX)
-        .setPercentReturnedToUserForSellingEquipInArmory(ControllerConstants.ARMORY__SELL_RATIO)
-        .setMaxCityRank(ControllerConstants.TASK_ACTION__MAX_CITY_RANK)
-        .setArmoryImgVerticalPixelOffset(ControllerConstants.ARMORY_IMG_VERTICAL_PIXEL_OFFSET)
-        .setVaultImgVerticalPixelOffset(ControllerConstants.VAULT_IMG_VERTICAL_PIXEL_OFFSET)
-//        .setMarketplaceImgVerticalPixelOffset(ControllerConstants.MARKETPLACE_IMG_VERTICAL_PIXEL_OFFSET)
-        .setAviaryImgVerticalPixelOffset(ControllerConstants.AVIARY_IMG_VERTICAL_PIXEL_OFFSET)
-        .setCarpenterImgVerticalPixelOffset(ControllerConstants.CARPENTER_IMG_VERTICAL_PIXEL_OFFSET)
-        .setMaxCharLengthForWallPost(ControllerConstants.POST_ON_PLAYER_WALL__MAX_CHAR_LENGTH)
-        .setPlayerWallPostsRetrieveCap(ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP)
         .setMaxLevelForUser(ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER)
-        .setAverageSizeOfLevelBracket(ControllerConstants.AVERAGE_SIZE_OF_LEVEL_BRACKET)
-        .setLevelEquipBoostExponentBase(ControllerConstants.LEVEL_EQUIP_BOOST_EXPONENT_BASE)
-        .setAdColonyVideosRequiredToRedeemDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__NUM_VIDEOS_FOR_DIAMOND_REWARD)
         .setMinNameLength(ControllerConstants.USER_CREATE__MIN_NAME_LENGTH)
         .setMaxNameLength(ControllerConstants.USER_CREATE__MAX_NAME_LENGTH)
-        .setSizeOfAttackList(ControllerConstants.SIZE_OF_ATTACK_LIST)
-        .setHoursInAttackedByOneProtectionPeriod(ControllerConstants.BATTLE__HOURS_IN_ATTACKED_BY_ONE_PROTECTION_PERIOD)
-        .setMaxNumTimesAttackedByOneInProtectionPeriod(ControllerConstants.BATTLE__MAX_NUM_TIMES_ATTACKED_BY_ONE_IN_PROTECTION_PERIOD)
-        .setMinBattlesRequiredForKDRConsideration(ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION)
+//        .setHoursInAttackedByOneProtectionPeriod(ControllerConstants.BATTLE__HOURS_IN_ATTACKED_BY_ONE_PROTECTION_PERIOD)
+//        .setMaxNumTimesAttackedByOneInProtectionPeriod(ControllerConstants.BATTLE__MAX_NUM_TIMES_ATTACKED_BY_ONE_IN_PROTECTION_PERIOD)
+//        .setMinBattlesRequiredForKDRConsideration(ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION)
         .setMaxLengthOfChatString(ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING)
-        .setNumChatsGivenPerGroupChatPurchasePackage(ControllerConstants.PURCHASE_GROUP_CHAT__NUM_CHATS_GIVEN_FOR_PACKAGE)
-        .setDiamondPriceForGroupChatPurchasePackage(ControllerConstants.PURCHASE_GROUP_CHAT__DIAMOND_PRICE_FOR_PACKAGE)
         .setNumHoursBeforeReshowingGoldSale(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_GOLD_SALE)
-        .setNumHoursBeforeReshowingLockBox(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_LOCK_BOX)
-        .setNumHoursBeforeReshowingBossEvent(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_BOSS_EVENT)
+//        .setNumHoursBeforeReshowingLockBox(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_LOCK_BOX)
         .setLevelToShowRateUsPopup(ControllerConstants.LEVEL_TO_SHOW_RATE_US_POPUP)
-        .setBossEventNumberOfAttacksUntilSuperAttack(ControllerConstants.BOSS_EVENT__NUMBER_OF_ATTACKS_UNTIL_SUPER_ATTACK)
-        .setBossEventSuperAttack(ControllerConstants.BOSS_EVENT__SUPER_ATTACK)
-        .setInitStamina(ControllerConstants.TUTORIAL__INIT_STAMINA)
-        .setMinClanMembersToHoldClanTower(ControllerConstants.MIN_CLAN_MEMBERS_TO_HOLD_CLAN_TOWER)
-        .setUseOldBattleFormula(ControllerConstants.STARTUP__USE_OLD_BATTLE_FORMULA)
-        .setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED)
-        .setDefaultDaysBattleShieldIsActive(ControllerConstants.STARTUP__DEFAULT_DAYS_BATTLE_SHIELD_IS_ACTIVE);
+        .setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
 
     if (ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS != null) {
       for (int i = 0; i < ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS.length; i++) {
@@ -390,24 +321,6 @@ public class MiscMethods {
         cb.addAnimatedSpriteOffsets(CreateInfoProtoUtils.createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(aso));
       }
     }
-
-    HealthConstants hc = HealthConstants.newBuilder()
-        .setHealthFormulaExponentBase(ControllerConstants.HEALTH__FORMULA_EXPONENT_BASE)
-        .setHealthFormulaLinearA(ControllerConstants.HEALTH__FORMULA_LINEAR_A)
-        .setHealthFormulaLinearB(ControllerConstants.HEALTH__FORMULA_LINEAR_B)
-        .setHealthFormulaLevelCutoff(ControllerConstants.HEALTH__FORMULA_LEVEL_CUTOFF)
-        .build();
-    cb.setHealthConstants(hc);
-
-    FormulaConstants formulaConstants = FormulaConstants.newBuilder()
-        .setMinutesToUpgradeForNormStructMultiplier(ControllerConstants.MINUTES_TO_UPGRADE_FOR_NORM_STRUCT_MULTIPLIER)
-        .setIncomeFromNormStructMultiplier(ControllerConstants.INCOME_FROM_NORM_STRUCT_MULTIPLIER)
-        .setUpgradeStructCoinCostExponentBase(ControllerConstants.UPGRADE_NORM_STRUCTURE__UPGRADE_STRUCT_COIN_COST_EXPONENT_BASE)
-        .setUpgradeStructDiamondCostExponentBase(ControllerConstants.UPGRADE_NORM_STRUCTURE__UPGRADE_STRUCT_DIAMOND_COST_EXPONENT_BASE)
-        .setDiamondCostForInstantUpgradeMultiplier(ControllerConstants.FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS__DIAMOND_COST_FOR_INSTANT_UPGRADE_MULTIPLIER)
-        .build();
-
-    cb.setFormulaConstants(formulaConstants);
 
     ClanConstants clanConstants = ClanConstants.newBuilder()
         .setMaxCharLengthForClanDescription(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION)
@@ -418,138 +331,80 @@ public class MiscMethods {
 
     cb.setClanConstants(clanConstants);
 
-    ForgeConstants forgeConstants = ForgeConstants.newBuilder()
-        .setForgeTimeBaseForExponentialMultiplier(ControllerConstants.FORGE_TIME_BASE_FOR_EXPONENTIAL_MULTIPLIER)
-        .setForgeMinDiamondCostForGuarantee(ControllerConstants.FORGE_MIN_DIAMOND_COST_FOR_GUARANTEE)
-        .setForgeDiamondCostForGuaranteeExponentialMultiplier(ControllerConstants.FORGE_DIAMOND_COST_FOR_GUARANTEE_EXPONENTIAL_MULTIPLIER)
-        .setForgeBaseMinutesToOneGold(ControllerConstants.FORGE_BASE_MINUTES_TO_ONE_GOLD)
-        .setForgeMaxEquipLevel(ControllerConstants.FORGE_MAX_EQUIP_LEVEL)
-        .setForgeMaxForgeSlots(ControllerConstants.FORGE__ADDITIONAL_MAX_FORGE_SLOTS)
-        .setCostOfPurchasingSlotTwo(ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_TWO)
-        .setCostOfPurchasingSlotThree(ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_THREE)
-        .setForgeSpeedupConstantA(ControllerConstants.FORGE_SPEEDUP_CONSTANT_A)
-        .setForgeSpeedupConstantB(ControllerConstants.FORGE_SPEEDUP_CONSTANT_B)
-        .build();
+//    BattleConstants battleConstants = BattleConstants.newBuilder()
+//        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
+//        .setBattleWeightGivenToAttackStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_STAT)
+//        .setBattleWeightGivenToAttackEquipSum(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_EQUIP_SUM)
+//        .setBattleWeightGivenToDefenseStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_DEFENSE_STAT)
+//        .setBattleWeightGivenToDefenseEquipSum(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_DEFENSE_EQUIP_SUM)
+//        .setBattleWeightGivenToLevel(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_LEVEL)
+//        .setBattlePerfectPercentThreshold(ControllerConstants.BATTLE_PERFECT_PERCENT_THRESHOLD)
+//        .setBattleGreatPercentThreshold(ControllerConstants.BATTLE_GREAT_PERCENT_THRESHOLD)
+//        .setBattleGoodPercentThreshold(ControllerConstants.BATTLE_GOOD_PERCENT_THRESHOLD)
+//        .setBattlePerfectMultiplier(ControllerConstants.BATTLE_PERFECT_MULTIPLIER)
+//        .setBattleGreatMultiplier(ControllerConstants.BATTLE_GREAT_MULTIPLIER)
+//        .setBattleGoodMultiplier(ControllerConstants.BATTLE_GOOD_MULTIPLIER)
+//        .setBattleImbalancePercent(ControllerConstants.BATTLE_IMBALANCE_PERCENT)
+//        .setBattlePerfectLikelihood(ControllerConstants.BATTLE_PERFECT_LIKELIHOOD)
+//        .setBattleGreatLikelihood(ControllerConstants.BATTLE_GREAT_LIKELIHOOD)
+//        .setBattleGoodLikelihood(ControllerConstants.BATTLE_GOOD_LIKELIHOOD)
+//        .setBattleMissLikelihood(ControllerConstants.BATTLE_MISS_LIKELIHOOD)
+//        .setBattleHitAttackerPercentOfHealth(ControllerConstants.BATTLE__HIT_ATTACKER_PERCENT_OF_HEALTH)
+//        .setBattleHitDefenderPercentOfHealth(ControllerConstants.BATTLE__HIT_DEFENDER_PERCENT_OF_HEALTH)
+//        .setBattlePercentOfWeapon(ControllerConstants.BATTLE__PERCENT_OF_WEAPON)
+//        .setBattlePercentOfArmor(ControllerConstants.BATTLE__PERCENT_OF_ARMOR)
+//        .setBattlePercentOfAmulet(ControllerConstants.BATTLE__PERCENT_OF_AMULET)
+//        .setBattlePercentOfPlayerStats(ControllerConstants.BATTLE__PERCENT_OF_PLAYER_STATS)
+//        .setBattleAttackExpoMultiplier(ControllerConstants.BATTLE__ATTACK_EXPO_MULTIPLIER)
+//        .setBattlePercentOfEquipment(ControllerConstants.BATTLE__PERCENT_OF_EQUIPMENT)
+//        .setBattleIndividualEquipAttackCap(ControllerConstants.BATTLE__INDIVIDUAL_EQUIP_ATTACK_CAP)
+//        .setBattleEquipAndStatsWeight(ControllerConstants.BATTLE__EQUIP_AND_STATS_WEIGHT)
+//        .build();
+//
+//    cb = cb.setBattleConstants(battleConstants);
 
-    cb.setForgeConstants(forgeConstants);
-
-    BattleConstants battleConstants = BattleConstants.newBuilder()
-        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
-        .setBattleWeightGivenToAttackStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_STAT)
-        .setBattleWeightGivenToAttackEquipSum(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_EQUIP_SUM)
-        .setBattleWeightGivenToDefenseStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_DEFENSE_STAT)
-        .setBattleWeightGivenToDefenseEquipSum(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_DEFENSE_EQUIP_SUM)
-        .setBattleWeightGivenToLevel(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_LEVEL)
-        .setBattlePerfectPercentThreshold(ControllerConstants.BATTLE_PERFECT_PERCENT_THRESHOLD)
-        .setBattleGreatPercentThreshold(ControllerConstants.BATTLE_GREAT_PERCENT_THRESHOLD)
-        .setBattleGoodPercentThreshold(ControllerConstants.BATTLE_GOOD_PERCENT_THRESHOLD)
-        .setBattlePerfectMultiplier(ControllerConstants.BATTLE_PERFECT_MULTIPLIER)
-        .setBattleGreatMultiplier(ControllerConstants.BATTLE_GREAT_MULTIPLIER)
-        .setBattleGoodMultiplier(ControllerConstants.BATTLE_GOOD_MULTIPLIER)
-        .setBattleImbalancePercent(ControllerConstants.BATTLE_IMBALANCE_PERCENT)
-        .setBattlePerfectLikelihood(ControllerConstants.BATTLE_PERFECT_LIKELIHOOD)
-        .setBattleGreatLikelihood(ControllerConstants.BATTLE_GREAT_LIKELIHOOD)
-        .setBattleGoodLikelihood(ControllerConstants.BATTLE_GOOD_LIKELIHOOD)
-        .setBattleMissLikelihood(ControllerConstants.BATTLE_MISS_LIKELIHOOD)
-        .setBattleHitAttackerPercentOfHealth(ControllerConstants.BATTLE__HIT_ATTACKER_PERCENT_OF_HEALTH)
-        .setBattleHitDefenderPercentOfHealth(ControllerConstants.BATTLE__HIT_DEFENDER_PERCENT_OF_HEALTH)
-        .setBattlePercentOfWeapon(ControllerConstants.BATTLE__PERCENT_OF_WEAPON)
-        .setBattlePercentOfArmor(ControllerConstants.BATTLE__PERCENT_OF_ARMOR)
-        .setBattlePercentOfAmulet(ControllerConstants.BATTLE__PERCENT_OF_AMULET)
-        .setBattlePercentOfPlayerStats(ControllerConstants.BATTLE__PERCENT_OF_PLAYER_STATS)
-        .setBattleAttackExpoMultiplier(ControllerConstants.BATTLE__ATTACK_EXPO_MULTIPLIER)
-        .setBattlePercentOfEquipment(ControllerConstants.BATTLE__PERCENT_OF_EQUIPMENT)
-        .setBattleIndividualEquipAttackCap(ControllerConstants.BATTLE__INDIVIDUAL_EQUIP_ATTACK_CAP)
-        .setBattleEquipAndStatsWeight(ControllerConstants.BATTLE__EQUIP_AND_STATS_WEIGHT)
-        .build();
-
-    cb = cb.setBattleConstants(battleConstants);
-
-    GoldmineConstants gc = GoldmineConstants.newBuilder()
-        .setNumHoursBeforeGoldmineRetrieval(ControllerConstants.GOLDMINE__NUM_HOURS_BEFORE_RETRIEVAL)
-        .setNumHoursForGoldminePickup(ControllerConstants.GOLDMINE__NUM_HOURS_TO_PICK_UP)
-        .setGoldAmountFromGoldminePickup(ControllerConstants.GOLDMINE__GOLD_AMOUNT_FROM_PICK_UP)
-        .setGoldCostForGoldmineRestart(ControllerConstants.GOLDMINE__GOLD_COST_TO_RESTART)
-        .build();
-
-    cb = cb.setGoldmineConstants(gc);
-
-    LockBoxConstants lbc = LockBoxConstants.newBuilder()
-        .setFreeChanceToPickLockBox(ControllerConstants.LOCK_BOXES__FREE_CHANCE_TO_PICK)
-        .setGoldChanceToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_CHANCE_TO_PICK)
-        .setNumMinutesToRepickLockBox(ControllerConstants.LOCK_BOXES__NUM_MINUTES_TO_REPICK)
-        .setGoldCostToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_PICK)
-        .setGoldCostToResetPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_RESET_PICK)
-        .setSilverChanceToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_CHANCE_TO_PICK)
-        .setSilverCostToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_COST_TO_PICK)
-        .setNumDaysToShowAfterEventEnded(ControllerConstants.LOCK_BOXES__NUM_DAYS_AFTER_END_DATE_TO_KEEP_SENDING_PROTOS)
-        .build();
-
-    cb = cb.setLockBoxConstants(lbc);
-
-    ExpansionConstants ec = ExpansionConstants.newBuilder()
-        .setExpansionPurchaseCostConstant(ControllerConstants.PURCHASE_EXPANSION__COST_CONSTANT)
-        .setExpansionPurchaseCostExponentBase(ControllerConstants.PURCHASE_EXPANSION__COST_EXPONENT_BASE)
-        .setExpansionWaitCompleteBaseMinutesToOneGold(ControllerConstants.EXPANSION_WAIT_COMPLETE__BASE_MINUTES_TO_ONE_GOLD)
-        .setExpansionWaitCompleteHourConstant(ControllerConstants.EXPANSION_WAIT_COMPLETE__HOUR_CONSTANT)
-        .setExpansionWaitCompleteHourIncrementBase(ControllerConstants.EXPANSION_WAIT_COMPLETE__HOUR_INCREMENT_BASE)
-        .build();
-
-    cb = cb.setExpansionConstants(ec);
-
-    ThreeCardMonteConstants tc = ThreeCardMonteConstants.newBuilder()
-        .setDiamondCostToPlayThreeCardMonte(ControllerConstants.THREE_CARD_MONTE__DIAMOND_PRICE_TO_PLAY)
-        .setMinLevelToDisplayThreeCardMonte(ControllerConstants.THREE_CARD_MONTE__MIN_LEVEL)
-        .setBadMonteCardPercentageChance(ControllerConstants.THREE_CARD_MONTE__BAD_PERCENTAGE)
-        .setMediumMonteCardPercentageChance(ControllerConstants.THREE_CARD_MONTE__MEDIUM_PERCENTAGE)
-        .setGoodMonteCardPercentageChance(ControllerConstants.THREE_CARD_MONTE__GOOD_PERCENTAGE)
-        .build();
-
-    cb = cb.setThreeCardMonteConstants(tc);
+//    LockBoxConstants lbc = LockBoxConstants.newBuilder()
+//        .setFreeChanceToPickLockBox(ControllerConstants.LOCK_BOXES__FREE_CHANCE_TO_PICK)
+//        .setGoldChanceToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_CHANCE_TO_PICK)
+//        .setNumMinutesToRepickLockBox(ControllerConstants.LOCK_BOXES__NUM_MINUTES_TO_REPICK)
+//        .setGoldCostToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_PICK)
+//        .setGoldCostToResetPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_RESET_PICK)
+//        .setSilverChanceToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_CHANCE_TO_PICK)
+//        .setSilverCostToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_COST_TO_PICK)
+//        .setNumDaysToShowAfterEventEnded(ControllerConstants.LOCK_BOXES__NUM_DAYS_AFTER_END_DATE_TO_KEEP_SENDING_PROTOS)
+//        .build();
+//
+//    cb = cb.setLockBoxConstants(lbc);
 
     DownloadableNibConstants dnc = DownloadableNibConstants.newBuilder()
-        .setThreeCardMonteNibName(ControllerConstants.NIB_NAME__THREE_CARD_MONTE)
-        .setLockBoxNibName(ControllerConstants.NIB_NAME__LOCK_BOX)
         .setMapNibName(ControllerConstants.NIB_NAME__TRAVELING_MAP)
-        .setGoldMineNibName(ControllerConstants.NIB_NAME__GOLD_MINE)
         .setExpansionNibName(ControllerConstants.NIB_NAME__EXPANSION)
-        .setFiltersNibName(ControllerConstants.NIB_NAME__MARKET_FILTERS)
-        .setBlacksmithNibName(ControllerConstants.NIB_NAME__BLACKSMITH)
         .setGoldShoppeNibName(ControllerConstants.NIB_NAME__GOLD_SHOPPE)
-        .setBossEventNibName(ControllerConstants.NIB_NAME__BOSS_EVENT)
-        .setDailyBonusNibName(ControllerConstants.NIB_NAME__DAILY_BONUS)
         .build();
 
     cb = cb.setDownloadableNibConstants(dnc);
 
-    EnhancementConstants enc = EnhancementConstants.newBuilder()
-        .setMaxEnhancementLevel(ControllerConstants.MAX_ENHANCEMENT_LEVEL)
-        .setEnhanceLevelExponentBase(ControllerConstants.ENHANCEMENT__ENHANCE_LEVEL_EXPONENT_BASE)
-        .setEnhancePercentPerLevel(ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL)
-        .setEnhanceTimeConstantA(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_A)
-        .setEnhanceTimeConstantB(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_B)
-        .setEnhanceTimeConstantC(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_C)
-        .setEnhanceTimeConstantD(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_D)
-        .setEnhanceTimeConstantE(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_E)
-        .setEnhanceTimeConstantF(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_F)
-        .setEnhanceTimeConstantG(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_G)
-        .setEnhancePercentConstantA(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_A)
-        .setEnhancePercentConstantB(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_B)
-        .setDefaultSecondsToEnhance(ControllerConstants.ENHANCEMENT__DEFAULT_SECONDS_TO_ENHANCE)
-        .setEnhancingCost(ControllerConstants.ENHANCEMENT__COST_CONSTANT)
-        .build();
-
-    cb = cb.setEnhanceConstants(enc);
-
-    // For legacy purposes
-    for (int i = 0; i < IAPValues.packageNames.size(); i++) {
-      cb.addProductIds(IAPValues.packageNames.get(i));
-      cb.addProductDiamondsGiven(IAPValues.packageGivenDiamonds.get(i));
-    }
+//    EnhancementConstants enc = EnhancementConstants.newBuilder()
+//        .setMaxEnhancementLevel(ControllerConstants.MAX_ENHANCEMENT_LEVEL)
+//        .setEnhanceLevelExponentBase(ControllerConstants.ENHANCEMENT__ENHANCE_LEVEL_EXPONENT_BASE)
+//        .setEnhancePercentPerLevel(ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL)
+//        .setEnhanceTimeConstantA(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_A)
+//        .setEnhanceTimeConstantB(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_B)
+//        .setEnhanceTimeConstantC(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_C)
+//        .setEnhanceTimeConstantD(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_D)
+//        .setEnhanceTimeConstantE(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_E)
+//        .setEnhanceTimeConstantF(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_F)
+//        .setEnhanceTimeConstantG(ControllerConstants.ENHANCEMENT__TIME_FORMULA_CONSTANT_G)
+//        .setEnhancePercentConstantA(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_A)
+//        .setEnhancePercentConstantB(ControllerConstants.ENHANCEMENT__PERCENT_FORMULA_CONSTANT_B)
+//        .setDefaultSecondsToEnhance(ControllerConstants.ENHANCEMENT__DEFAULT_SECONDS_TO_ENHANCE)
+//        .setEnhancingCost(ControllerConstants.ENHANCEMENT__COST_CONSTANT)
+//        .build();
+//
+//    cb = cb.setEnhanceConstants(enc);
 
     for (String id : IAPValues.iapPackageNames) {
       InAppPurchasePackageProto.Builder iapb = InAppPurchasePackageProto.newBuilder();
-      iapb.setPackageId(id);
       iapb.setImageName(IAPValues.getImageNameForPackageName(id));
 
       int diamondAmt = IAPValues.getDiamondsForPackageName(id);
@@ -564,70 +419,51 @@ public class MiscMethods {
       cb.addInAppPurchasePackages(iapb.build());
     }
 
-    BazaarMinLevelConstants bmlc = BazaarMinLevelConstants.newBuilder()
-        .setClanHouseMinLevel(ControllerConstants.STARTUP__CLAN_HOUSE_MIN_LEVEL)
-        .setVaultMinLevel(ControllerConstants.STARTUP__VAULT_MIN_LEVEL)
-        .setArmoryMinLevel(ControllerConstants.STARTUP__ARMORY_MIN_LEVEL)
-//        .setMarketplaceMinLevel(ControllerConstants.STARTUP__MARKETPLACE_MIN_LEVEL)
-        .setBlacksmithMinLevel(ControllerConstants.STARTUP__BLACKSMITH_MIN_LEVEL)
-        .setLeaderboardMinLevel(ControllerConstants.STARTUP__LEADERBOARD_MIN_LEVEL)
-        .setEnhancingMinLevel(ControllerConstants.STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK)
-        .build();
-    cb = cb.setMinLevelConstants(bmlc);
+//    BazaarMinLevelConstants bmlc = BazaarMinLevelConstants.newBuilder()
+//        .setLeaderboardMinLevel(ControllerConstants.STARTUP__LEADERBOARD_MIN_LEVEL)
+//        .setEnhancingMinLevel(ControllerConstants.STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK)
+//        .build();
+//    cb = cb.setMinLevelConstants(bmlc);
 
-    LeaderboardEventConstants lec =LeaderboardEventConstants.newBuilder()
-        .setWinsWeight(ControllerConstants.LEADERBOARD_EVENT__WINS_WEIGHT)
-        .setLossesWeight(ControllerConstants.LEADERBOARD_EVENT__LOSSES_WEIGHT)
-        .setFleesWeight(ControllerConstants.LEADERBOARD_EVENT__FLEES_WEIGHT)
-        .setNumHoursToShowAfterEventEnd(ControllerConstants.LEADERBOARD_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END)
-        .build();
-    cb = cb.setLeaderboardConstants(lec);
-    
-    BoosterPackConstants bpc = BoosterPackConstants.newBuilder()
-        .setPurchaseOptionOneNumBoosterItems(ControllerConstants.BOOSTER_PACK__PURCHASE_OPTION_ONE_NUM_BOOSTER_ITEMS)
-        .setPurchaseOptionTwoNumBoosterItems(ControllerConstants.BOOSTER_PACK__PURCHASE_OPTION_TWO_NUM_BOOSTER_ITEMS)
-        .setInfoImageName(ControllerConstants.BOOSTER_PACK__INFO_IMAGE_NAME)
-        .setNumTimesToBuyStarterPack(ControllerConstants.BOOSTER_PACK__NUM_TIMES_TO_BUY_STARTER_PACK)
-        .setNumDaysToBuyStarterPack(ControllerConstants.BOOSTER_PACK__NUM_DAYS_TO_BUY_STARTER_PACK)
-        .build();
-    cb = cb.setBoosterPackConstants(bpc);
+//    LeaderboardEventConstants lec =LeaderboardEventConstants.newBuilder()
+//        .setWinsWeight(ControllerConstants.TOURNAMENT_EVENT__WINS_WEIGHT)
+//        .setLossesWeight(ControllerConstants.TOURNAMENT_EVENT__LOSSES_WEIGHT)
+//        .setFleesWeight(ControllerConstants.TOURNAMENT_EVENT__FLEES_WEIGHT)
+//        .setNumHoursToShowAfterEventEnd(ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END)
+//        .build();
+//    cb = cb.setLeaderboardConstants(lec);
+//    
+//    BoosterPackConstants bpc = BoosterPackConstants.newBuilder()
+//        .setPurchaseOptionOneNumBoosterItems(ControllerConstants.BOOSTER_PACK__PURCHASE_OPTION_ONE_NUM_BOOSTER_ITEMS)
+//        .setPurchaseOptionTwoNumBoosterItems(ControllerConstants.BOOSTER_PACK__PURCHASE_OPTION_TWO_NUM_BOOSTER_ITEMS)
+//        .setInfoImageName(ControllerConstants.BOOSTER_PACK__INFO_IMAGE_NAME)
+//        .setNumTimesToBuyStarterPack(ControllerConstants.BOOSTER_PACK__NUM_TIMES_TO_BUY_STARTER_PACK)
+//        .setNumDaysToBuyStarterPack(ControllerConstants.BOOSTER_PACK__NUM_DAYS_TO_BUY_STARTER_PACK)
+//        .build();
+//    cb = cb.setBoosterPackConstants(bpc);
 
-    cb.setQuestIdForFirstLossTutorial(ControllerConstants.STARTUP__QUEST_ID_FOR_FIRST_LOSS_TUTORIAL);
     List<Integer> questIdsGuaranteedWin = new ArrayList<Integer>();
     int[] questIdsForWin = ControllerConstants.STARTUP__QUEST_IDS_FOR_GUARANTEED_WIN; 
     for(int i = 0; i < questIdsForWin.length; i++) {
       questIdsGuaranteedWin.add(questIdsForWin[i]);
     }
-    cb.addAllQuestIdsGuaranteedWin(questIdsGuaranteedWin);
-    
     cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
     
-    cb.setMaxNumTowersClanCanHold(ControllerConstants.CLAN_TOWER__MAX_NUM_TOWERS_CLAN_CAN_HOLD);
-    
-    PrestigeConstants pc = PrestigeConstants.newBuilder()
-        .setMaxPrestigeLevel(ControllerConstants.PRESTIGE__MAX_PRESTIGE_LEVEL)
-        .setMinLevelForPrestige(ControllerConstants.PRESTIGE__MIN_LEVEL_FOR_PRESTIGE)
-        .build();
-    cb.setPrestigeConstants(pc);
-    
     cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
-    cb.setPrestigeFaqFileName(ControllerConstants.STARTUP__PRESTIGE_FAQ_FILE_NAME);
     
     User adminChatUser = RetrieveUtils.userRetrieveUtils()
         .getUserById(ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID);
     MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
     cb.setAdminChatUserProto(adminChatUserProto);
     
-    BossConstants.Builder bc = BossConstants.newBuilder();
-    bc.setMaxHealthMultiplier(ControllerConstants.SOLO_BOSS__MAX_HEALTH_MULTIPLIER);
-    cb.setBossConstants(bc.build());
+//    BossConstants.Builder bc = BossConstants.newBuilder();
+//    bc.setMaxHealthMultiplier(ControllerConstants.SOLO_BOSS__MAX_HEALTH_MULTIPLIER);
+//    cb.setBossConstants(bc.build());
     
-    SpeedupConstants.Builder scb = SpeedupConstants.newBuilder();
-    scb.setBuildLateSpeedupConstant(ControllerConstants.BUILD_LATE_SPEEDUP_CONSTANT);
-    scb.setExpansionLateSpeedupConstant(ControllerConstants.EXPANSION_LATE_SPEEDUP_CONSTANT);
-    scb.setForgeLateSpeedupConstant(ControllerConstants.FORGE_LATE_SPEEDUP_CONSTANT);
-    scb.setUpgradeLateSpeedupConstant(ControllerConstants.UPGRADE_LATE_SPEEDUP_CONSTANT);
-    cb.setSpeedupConstants(scb.build());
+//    SpeedupConstants.Builder scb = SpeedupConstants.newBuilder();
+//    scb.setBuildLateSpeedupConstant(ControllerConstants.BUILD_LATE_SPEEDUP_CONSTANT);
+//    scb.setUpgradeLateSpeedupConstant(ControllerConstants.UPGRADE_LATE_SPEEDUP_CONSTANT);
+//    cb.setSpeedupConstants(scb.build());
     
     return cb.build();  
   }
@@ -663,66 +499,56 @@ public class MiscMethods {
     return toReturn;
   }*/
 
-  public static List<LeaderboardEventProto> currentLeaderboardEventProtos() {
-    Map<Integer, LeaderboardEvent> idsToEvents = LeaderboardEventRetrieveUtils.getIdsToLeaderboardEvents(false);
+  public static List<TournamentEventProto> currentTournamentEventProtos() {
+    Map<Integer, TournamentEvent> idsToEvents = TournamentEventRetrieveUtils.getIdsToTournamentEvents(false);
     long curTime = (new Date()).getTime();
     List<Integer> activeEventIds = new ArrayList<Integer>();
 
     //return value
-    List<LeaderboardEventProto> protos = new ArrayList<LeaderboardEventProto>();
+    List<TournamentEventProto> protos = new ArrayList<TournamentEventProto>();
 
     //get the ids of active leader board events
-    for(LeaderboardEvent e : idsToEvents.values()) {
-      if (e.getEndDate().getTime()+ControllerConstants.LEADERBOARD_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END*3600000L > curTime) {
+    for(TournamentEvent e : idsToEvents.values()) {
+      if (e.getEndDate().getTime()+ControllerConstants.TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END*3600000L > curTime) {
         activeEventIds.add(e.getId());
       }
     }
 
     //get all the rewards for all the current leaderboard events
-    Map<Integer, List<LeaderboardEventReward>> eventIdsToRewards = 
-        LeaderboardEventRewardRetrieveUtils.getLeaderboardEventRewardsForIds(activeEventIds);
+    Map<Integer, List<TournamentEventReward>> eventIdsToRewards = 
+        TournamentEventRewardRetrieveUtils.getLeaderboardEventRewardsForIds(activeEventIds);
 
     //create the protos
     for(Integer i: activeEventIds) {
-      LeaderboardEvent e = idsToEvents.get(i);
-      List<LeaderboardEventReward> rList = eventIdsToRewards.get(e.getId()); //rewards for the active event
+      TournamentEvent e = idsToEvents.get(i);
+      List<TournamentEventReward> rList = eventIdsToRewards.get(e.getId()); //rewards for the active event
 
-      protos.add(CreateInfoProtoUtils.createLeaderboardEventProtoFromLeaderboardEvent(e, rList));
+      protos.add(CreateInfoProtoUtils.createTournamentEventProtoFromTournamentEvent(e, rList));
     }
     return protos;
   }
 
   public static void reloadAllRareChangeStaticData() {
     log.info("Reloading rare change static data");
-    BuildStructJobRetrieveUtils.reload();
     CityRetrieveUtils.reload();
-    DefeatTypeJobRetrieveUtils.reload();
+    BuildStructJobRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
-    TaskEquipReqRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
     UpgradeStructJobRetrieveUtils.reload();
     StructureRetrieveUtils.reload();
-    PossessEquipJobRetrieveUtils.reload();
     LevelsRequiredExperienceRetrieveUtils.reload();
     CityElementsRetrieveUtils.reload(); 
-    ThreeCardMonteRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
-    LockBoxItemRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
-    ClanTierLevelRetrieveUtils.reload();
-    BossEventRetrieveUtils.reload();
     MonsterRewardRetrieveUtils.reload();
-    LeaderboardEventRetrieveUtils.reload();
-    LeaderboardEventRewardRetrieveUtils.reload();
+    TournamentEventRetrieveUtils.reload();
+    TournamentEventRewardRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
     BoosterPackRetrieveUtils.reload();
     BoosterItemRetrieveUtils.reload();
     BannedUserRetrieveUtils.reload();
-    DailyBonusRewardRetrieveUtils.reload();
-    CityGemRetrieveUtils.reload();
-    
-    CityExpansionCostRetrieveUtils.reload();
+    ExpansionCostRetrieveUtils.reload();
 //    ClanBossRetrieveUtils.reload();
 //    ClanBossRewardRetrieveUtils.reload();
     TaskStageMonsterRetrieveUtils.reload();
@@ -843,67 +669,58 @@ public class MiscMethods {
     }
   }*/
 
-  public static List<ClanTierLevelProto> getAllClanTierLevelProtos() {
-    ArrayList<ClanTierLevelProto> toRet = new ArrayList<ClanTierLevelProto>();
-    Map<Integer, ClanTierLevel> l = ClanTierLevelRetrieveUtils.getAllClanTierLevels();
-    for (ClanTierLevel t : l.values()) {
-      toRet.add(CreateInfoProtoUtils.createClanTierLevelProtoFromClanTierLevel(t));
-    }
-    return toRet;
-  }
+//  //returns the clan towers that changed
+//  public static void sendClanTowerWarNotEnoughMembersNotification(
+//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Integer> towersAttacked,
+//      List<Integer> towersOwned, Clan aClan, TaskExecutor executor, 
+//      Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
+//
+//    if(null != clanTowerIdsToClanTowers && !clanTowerIdsToClanTowers.isEmpty()) {
+//
+//      List<Notification> notificationsToSend = new ArrayList<Notification>();
+//      //make notifications for the towers the clan was attacking
+//      boolean attackerWon = false;
+//      generateClanTowerNotEnoughMembersNotification(aClan, towersAttacked, clanTowerIdsToClanTowers, 
+//          notificationsToSend, attackerWon, onlinePlayers, server);
+//
+//      //make notifications for the towers the clan owned
+//      attackerWon = true;
+//      generateClanTowerNotEnoughMembersNotification(aClan, towersOwned, clanTowerIdsToClanTowers,
+//          notificationsToSend, attackerWon, onlinePlayers, server);
+//
+//      for(Notification n: notificationsToSend) {
+//        writeGlobalNotification(n, server);
+//      }
+//      return;
+//    }
+//    log.info("no towers changed");
+//    return;
+//  }
 
-  //returns the clan towers that changed
-  public static void sendClanTowerWarNotEnoughMembersNotification(
-      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Integer> towersAttacked,
-      List<Integer> towersOwned, Clan aClan, TaskExecutor executor, 
-      Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
-
-    if(null != clanTowerIdsToClanTowers && !clanTowerIdsToClanTowers.isEmpty()) {
-
-      List<Notification> notificationsToSend = new ArrayList<Notification>();
-      //make notifications for the towers the clan was attacking
-      boolean attackerWon = false;
-      generateClanTowerNotEnoughMembersNotification(aClan, towersAttacked, clanTowerIdsToClanTowers, 
-          notificationsToSend, attackerWon, onlinePlayers, server);
-
-      //make notifications for the towers the clan owned
-      attackerWon = true;
-      generateClanTowerNotEnoughMembersNotification(aClan, towersOwned, clanTowerIdsToClanTowers,
-          notificationsToSend, attackerWon, onlinePlayers, server);
-
-      for(Notification n: notificationsToSend) {
-        writeGlobalNotification(n, server);
-      }
-      return;
-    }
-    log.info("no towers changed");
-    return;
-  }
-
-  private static void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds, 
-      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Notification> notificationsToSend,
-      boolean isTowerOwner, Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
-
-    //for each tower make a notification for it
-    for(Integer towerId: towerIds) {
-      ClanTower aTower = clanTowerIdsToClanTowers.get(towerId);
-      String towerName = aTower.getTowerName();
-      Notification clanTowerWarNotification = new Notification ();
-      Clan losingClan;
-      Clan winningClan;
-      String losingClanName;
-      String winningClanName;
-
-      losingClan = aClan;
-      winningClan = ClanRetrieveUtils.getClanWithId(aTower.getClanOwnerId());
-
-      losingClanName = losingClan.getName();
-      winningClanName = winningClan != null ? winningClan.getName() : null;
-      clanTowerWarNotification.setAsClanTowerWarClanConceded(
-          losingClanName, winningClanName, towerName);
-      notificationsToSend.add(clanTowerWarNotification);
-    }
-  }
+//  private static void generateClanTowerNotEnoughMembersNotification(Clan aClan, List<Integer> towerIds, 
+//      Map<Integer, ClanTower> clanTowerIdsToClanTowers, List<Notification> notificationsToSend,
+//      boolean isTowerOwner, Collection<ConnectedPlayer> onlinePlayers, GameServer server) {
+//
+//    //for each tower make a notification for it
+//    for(Integer towerId: towerIds) {
+//      ClanTower aTower = clanTowerIdsToClanTowers.get(towerId);
+//      String towerName = aTower.getTowerName();
+//      Notification clanTowerWarNotification = new Notification ();
+//      Clan losingClan;
+//      Clan winningClan;
+//      String losingClanName;
+//      String winningClanName;
+//
+//      losingClan = aClan;
+//      winningClan = ClanRetrieveUtils.getClanWithId(aTower.getClanOwnerId());
+//
+//      losingClanName = losingClan.getName();
+//      winningClanName = winningClan != null ? winningClan.getName() : null;
+//      clanTowerWarNotification.setAsClanTowerWarClanConceded(
+//          losingClanName, winningClanName, towerName);
+//      notificationsToSend.add(clanTowerWarNotification);
+//    }
+//  }
 
   public static void writeGlobalNotification(Notification n, GameServer server) {
     GeneralNotificationResponseProto.Builder notificationProto = 
@@ -1145,9 +962,9 @@ public class MiscMethods {
     return returnValue.toString();
   }
 
-  public static void writeIntoDUEFE(UserEquip mainUserEquip, List<UserEquip> feederUserEquips,
+  public static void writeIntoDUEFE(UserMonster mainUserEquip, List<UserMonster> feederUserEquips,
       int enhancementId, List<Integer> enhancementFeederIds) {
-    String tableName = DBConstants.TABLE_DELETED_USER_EQUIPS_FOR_ENHANCING;
+    String tableName = DBConstants.TABLE_MONSTER_4USER_DELETED_4ENHANCING;
     try {
       //log.info("writing into deleted user equips for enhancing");
       int numRows = 1 + feederUserEquips.size();
@@ -1164,18 +981,18 @@ public class MiscMethods {
 
       userEquipIds.add(mainUserEquip.getId());
       userIds.add(mainUserEquip.getUserId());
-      equipIds.add(mainUserEquip.getEquipId());
-      levels.add(mainUserEquip.getLevel());
+      equipIds.add(mainUserEquip.getMonsterId());
+      levels.add(mainUserEquip.getEvolutionLevel());
       enhancementPercents.add(mainUserEquip.getEnhancementPercentage());
       areFeeders.add(0);
       equipEnhancementIds.add(enhancementId);
 
       for(int i = 0; i < feederUserEquips.size(); i++) {
-        UserEquip ue = feederUserEquips.get(i);
+        UserMonster ue = feederUserEquips.get(i);
         userEquipIds.add(ue.getId());
         userIds.add(ue.getUserId());
-        equipIds.add(ue.getEquipId());
-        levels.add(ue.getLevel());
+        equipIds.add(ue.getMonsterId());
+        levels.add(ue.getEvolutionLevel());
         enhancementPercents.add(ue.getEnhancementPercentage());
         areFeeders.add(1);
         
@@ -1183,13 +1000,13 @@ public class MiscMethods {
         equipEnhancementIds.add(enhancementFeederId);
       }
 
-      insertParams.put(DBConstants.DUEFE__USER_EQUIP__ID, userEquipIds);
-      insertParams.put(DBConstants.DUEFE__USER_EQUIP__USER_ID, userIds);
-      insertParams.put(DBConstants.DUEFE__USER_EQUIP__EQUIP_ID, equipIds);
-      insertParams.put(DBConstants.DUEFE__USER_EQUIP__LEVEL, levels);
-      insertParams.put(DBConstants.DUEFE__USER_EQUIP__ENHANCEMENT_PERCENT, enhancementPercents);
-      insertParams.put(DBConstants.DUEFE__IS_FEEDER, areFeeders);
-      insertParams.put(DBConstants.DUEFE__EQUIP_ENHANCEMENT_ID, equipEnhancementIds);
+      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__ID, userEquipIds);
+      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__USER_ID, userIds);
+      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__MONSTER_ID, equipIds);
+      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__EVOLUTION_LEVEL, levels);
+      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__ENHANCEMENT_PERCENT, enhancementPercents);
+      insertParams.put(DBConstants.DM4U4E__IS_FEEDER, areFeeders);
+      insertParams.put(DBConstants.DM4U4E__MONSTER_ENHANCING_FOR_USER__ID, equipEnhancementIds);
 
       int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, insertParams, numRows);
     } catch (Exception e) {
@@ -1197,7 +1014,7 @@ public class MiscMethods {
     }
   }
 
-  public static boolean isEquipAtMaxEnhancementLevel(UserEquip enhancingUserEquip) {
+  public static boolean isEquipAtMaxEnhancementLevel(UserMonster enhancingUserEquip) {
     int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
     int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL 
         * ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
@@ -1614,57 +1431,57 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
 //        enhancement, now, reason);
 //  }
   /*cut out from purchase booster pack controller*/
-  public static boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives, 
-      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected, 
-      Map<Integer, Integer> newBoosterItemIdsToNumCollected, int userId, boolean resetOccurred) {
-    
-    Map<Integer, Integer> changedBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
-    int numCollectedBeforeReset = 0;
-
-    //for each booster item received record it in the map above, and record how many
-    //booster items user has in aggregate
-    for (int i = 0; i < itemsUserReceives.size(); i++) {
-      boolean beforeReset = collectedBeforeReset.get(i);
-      if (!beforeReset) {
-        BoosterItem received = itemsUserReceives.get(i);
-        int boosterItemId = received.getId();
-        
-        //default quantity user gets if user has no quantity of specific boosterItem
-        int newQuantity = 1; 
-        if(newBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
-          newQuantity = newBoosterItemIdsToNumCollected.get(boosterItemId) + 1;
-        }
-        changedBoosterItemIdsToNumCollected.put(boosterItemId, newQuantity);
-        newBoosterItemIdsToNumCollected.put(boosterItemId, newQuantity);
-      } else {
-        numCollectedBeforeReset++;
-      }
-    }
-    
-    //loop through newBoosterItemIdsToNumCollected and make sure the quantities
-    //collected is itemsUserReceives.size() amount more than boosterItemIdsToNumCollected
-    int changeInCollectedQuantity = 0;
-    for (int id : changedBoosterItemIdsToNumCollected.keySet()) {
-      int newAmount = newBoosterItemIdsToNumCollected.get(id);
-      int oldAmount = 0;
-      if (boosterItemIdsToNumCollected.containsKey(id)) {
-        oldAmount = boosterItemIdsToNumCollected.get(id);
-      }
-      changeInCollectedQuantity += newAmount - oldAmount;
-    }
-    //for when user buys out a pack and then some
-    changeInCollectedQuantity += numCollectedBeforeReset;
-    if (itemsUserReceives.size() != changeInCollectedQuantity) {
-      log.error("quantities of booster items do not match how many items user receives. "
-          + "amount user receives that is recorded (user_booster_items table): " + changeInCollectedQuantity
-          + ", amount user receives (unrecorded): " + itemsUserReceives.size());
-      return false;
-    }
-
-    recordBoosterItemsThatReset(changedBoosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, resetOccurred);
-    
-    return UpdateUtils.get().updateUserBoosterItemsForOneUser(userId, changedBoosterItemIdsToNumCollected);
-  }
+//  public static boolean updateUserBoosterItems(List<BoosterItem> itemsUserReceives, 
+//      List<Boolean> collectedBeforeReset, Map<Integer, Integer> boosterItemIdsToNumCollected, 
+//      Map<Integer, Integer> newBoosterItemIdsToNumCollected, int userId, boolean resetOccurred) {
+//    
+//    Map<Integer, Integer> changedBoosterItemIdsToNumCollected = new HashMap<Integer, Integer>();
+//    int numCollectedBeforeReset = 0;
+//
+//    //for each booster item received record it in the map above, and record how many
+//    //booster items user has in aggregate
+//    for (int i = 0; i < itemsUserReceives.size(); i++) {
+//      boolean beforeReset = collectedBeforeReset.get(i);
+//      if (!beforeReset) {
+//        BoosterItem received = itemsUserReceives.get(i);
+//        int boosterItemId = received.getId();
+//        
+//        //default quantity user gets if user has no quantity of specific boosterItem
+//        int newQuantity = 1; 
+//        if(newBoosterItemIdsToNumCollected.containsKey(boosterItemId)) {
+//          newQuantity = newBoosterItemIdsToNumCollected.get(boosterItemId) + 1;
+//        }
+//        changedBoosterItemIdsToNumCollected.put(boosterItemId, newQuantity);
+//        newBoosterItemIdsToNumCollected.put(boosterItemId, newQuantity);
+//      } else {
+//        numCollectedBeforeReset++;
+//      }
+//    }
+//    
+//    //loop through newBoosterItemIdsToNumCollected and make sure the quantities
+//    //collected is itemsUserReceives.size() amount more than boosterItemIdsToNumCollected
+//    int changeInCollectedQuantity = 0;
+//    for (int id : changedBoosterItemIdsToNumCollected.keySet()) {
+//      int newAmount = newBoosterItemIdsToNumCollected.get(id);
+//      int oldAmount = 0;
+//      if (boosterItemIdsToNumCollected.containsKey(id)) {
+//        oldAmount = boosterItemIdsToNumCollected.get(id);
+//      }
+//      changeInCollectedQuantity += newAmount - oldAmount;
+//    }
+//    //for when user buys out a pack and then some
+//    changeInCollectedQuantity += numCollectedBeforeReset;
+//    if (itemsUserReceives.size() != changeInCollectedQuantity) {
+//      log.error("quantities of booster items do not match how many items user receives. "
+//          + "amount user receives that is recorded (user_booster_items table): " + changeInCollectedQuantity
+//          + ", amount user receives (unrecorded): " + itemsUserReceives.size());
+//      return false;
+//    }
+//
+//    recordBoosterItemsThatReset(changedBoosterItemIdsToNumCollected, newBoosterItemIdsToNumCollected, resetOccurred);
+//    
+//    return UpdateUtils.get().updateUserBoosterItemsForOneUser(userId, changedBoosterItemIdsToNumCollected);
+//  }
   /*cut out from purchase booster pack controller*/
   //if the user has bought out the whole deck, then for the booster items
   //the user did not get, record in the db that the user has 0 of them collected
@@ -1695,291 +1512,20 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   }*/
   
   //arguments don't take into account the 1 forge slot the user has by default
-  public static int costToBuyForgeSlot(int goalNumAdditionalForgeSlots,
-      int currentNumAdditionalForgeSlots) {
-    int goalNumForgeSlots = goalNumAdditionalForgeSlots + ControllerConstants.FORGE_DEFAULT_NUMBER_OF_FORGE_SLOTS;
-    log.info("goalNumForgeSlots=" + goalNumForgeSlots);
-    if (2 == goalNumForgeSlots) {
-      return ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_TWO;
-    } else if (3 == goalNumForgeSlots) {
-      return ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_THREE;
-    } else {
-      log.error("unexpected error: goalNumForgeSlots=" + goalNumForgeSlots);
-      return 500;
-    }
-  }
-  
-  /*public static void sendMenteeFinishedQuests(MinimumUserProto menteeMup, MenteeQuestType type,
-      GameServer server) {
-    int menteeId = menteeMup.getUserId();
-    
-    Mentorship ms = MentorshipRetrieveUtils.getActiveMentorshipForMentee(menteeId);
-    if (null == ms) {
-      return;
-    }
-    int mentorId = ms.getMentorId();
-    
-    //user is mentee, check if user finished it before
-    if (MenteeQuestType.BOUGHT_A_PACKAGE == type) {
-      if (null != ms.getQuestOneCompleteTime()) {
-        return;
-      }
-      
-    } else if (MenteeQuestType.FORGED_EQUIP_TO_LEVEL_N == type) {
-      if (null != ms.getQuestTwoCompleteTime()) {
-        return;
-      }
-      
-    } else if (MenteeQuestType.JOINED_A_CLAN == type) {
-      if (null != ms.getQuestThreeCompleteTime()) {
-        return;
-      }
-      
-    } else if (MenteeQuestType.LEVELED_UP_TO_LEVEL_N == type) {
-      if (null != ms.getQuestFourCompleteTime()) {
-        return;
-      }
-    } else if (MenteeQuestType.LEVELED_UP_TO_LEVEL_X == type) {
-      if (null != ms.getQuestFiveCompleteTime()) {
-        return;
-      }
-    }
-    //don't forget quest five
-    
-    int mentorshipId = ms.getId(); 
-    //update user to reflect he finished it
-    boolean b = UpdateUtils.get().updateMentorshipQuestCompleteTime(mentorshipId,
-        new Date(), type);
-    if (!b) {
-      log.error("unexpected error: could not update mentee quest status." +
-      		" mentorship=" + ms + "; type=" + type + "; value=" +
-          + type.getNumber());
-    }
-    
-    //send to mentor that mentee finished
-    MenteeFinishedQuestResponseProto.Builder mfqrpb = MenteeFinishedQuestResponseProto.newBuilder();
-    mfqrpb.setMentee(menteeMup).setQuestType(type);
-    
-    MenteeFinishedQuestResponseEvent mfqre = new MenteeFinishedQuestResponseEvent(mentorId);
-    mfqre.setMenteeFinishedQuestResponseProto(mfqrpb.build());
-    
-    server.writeAPNSNotificationOrEvent(mfqre);
-  }*/
-  
-  public static boolean doesUserHaveAllGemTypes(
-      Map<Integer, UserCityGem> gemIdsToUserCityGems,
-      Map<Integer, CityGem> cityGemIdsToActiveCityGems) {
-    int numDistinctGems = cityGemIdsToActiveCityGems.size();
-    int numUserCityGems = gemIdsToUserCityGems.size();
-    
-    //if user doesn't have all gems return null;
-    if (numDistinctGems != numUserCityGems) {
-      return false;
-    }
-
-    //user has a quantity for each gem
-    //make sure user has at least one of each gem
-    boolean hasNonzeroGems = true;
-    for (int gemId : gemIdsToUserCityGems.keySet()) {
-      UserCityGem ucg = gemIdsToUserCityGems.get(gemId);
-      if (ucg.getQuantity() <= 0) {
-        hasNonzeroGems = false;
-        break;
-      }
-    }
-    return hasNonzeroGems;
-  }
-  
-  public static int taskEnergyCostForCityRank (Task aTask, int cityRank) {
-    int cost = aTask.getEnergyCost();
-    if (ControllerConstants.NOT_SET == cityRank) {
-      return cost;
-    }
-    int maxEnergyCost = cost *
-        ControllerConstants.TASK_ACTION__MAX_ENERGY_COST_MULTIPLIER;
-    
-    //TODO: CALCULATE THE COST
-    int calculatedCost = cost;
-    
-    return Math.min(maxEnergyCost, calculatedCost);
-  }
-  
-  //the user can only get one of each gem until the full set is acquired
-  //or the user gets gems regardless if the full set is acquired
-  public static  CityGem selectCityGemOne(boolean allowDuplicates,
-      boolean getBossGem, Map<Integer, UserCityGem> gemIdsToUserCityGems,
-      Map<Integer, CityGem> gemIdsToActiveCityGems, Random rand) {
-    CityGem returnValue = null;
-    List<CityGem> potentialGems = getPotentialGems(allowDuplicates,
-        getBossGem, gemIdsToUserCityGems, gemIdsToActiveCityGems);   
-    
-    //efficiency check, if <= 1 gem left return returnValue
-    int size = potentialGems.size();
-    if (1 == size) {
-      returnValue = potentialGems.get(0);
-      return returnValue;
-    } else if (0 == size) {
-      return returnValue;
-    }
-    
-    float probabilityForNoGem = getProbabilityForNoGem(potentialGems);
-    float randFloat = rand.nextFloat();
-    if (randFloat < probabilityForNoGem) {
-      //user gets nothing
-      return returnValue;
-    }
-    
-    returnValue = selectFromGems(randFloat,
-        probabilityForNoGem, potentialGems);
-    return returnValue;
-  }
-  
-  public static List<CityGem> getPotentialGems(boolean allowDuplicates,
-      boolean getBossGem, Map<Integer, UserCityGem> gemIdsToUserCityGems,
-      Map<Integer, CityGem> gemIdsToActiveCityGems) {
-    List<CityGem> potentialGems =  new ArrayList<CityGem>();
-    
-    for (int gemId : gemIdsToActiveCityGems.keySet()) {
-      CityGem cg = gemIdsToActiveCityGems.get(gemId);
-      
-      //if nonboss gems are requested exclude gems dropped from bosses
-      //if boss gems are requested exclude gems not dropped from bosses 
-      boolean droppedFromBosses = cg.isDroppedOnlyFromBosses();
-      if (droppedFromBosses != getBossGem) {
-        continue;
-      }
-      
-      //maybe exclude this gem if user already has one
-      UserCityGem ucg = gemIdsToUserCityGems.get(gemId);
-      int quantityUserHas = 0;
-      if (null != ucg) {
-        quantityUserHas = ucg.getQuantity();
-      }
-      
-      if (allowDuplicates) {
-        //don't care if the user has this gem already.
-        potentialGems.add(cg);
-        
-      } else if (!allowDuplicates && 0 == quantityUserHas) {
-        //since only allow user to have one set of gems,
-        //get only those with 0 quantity
-        potentialGems.add(cg);
-      }
-      
-    }
-    
-    return potentialGems;
-  }
-  
-  public static float getProbabilityForNoGem(List<CityGem> potentialGems) {
-    float probabilityForNoGem = 1.0f;
-    
-    for (CityGem cg : potentialGems) {
-      float dropRate = cg.getDropRate();
-      probabilityForNoGem -= dropRate;
-    }
-    
-    return probabilityForNoGem;
-  }
-  
-  
-  public static CityGem selectFromGems(float randFloat,
-      float probabilityForNoGem, List<CityGem> potentialGems) {
-    CityGem returnValue = null;
-    //loop through potential gems and choose a gem to give out
-    float probabilityForCurrentGem = probabilityForNoGem;
-    for (CityGem cg : potentialGems) {
-      float dropRate = cg.getDropRate();
-      probabilityForCurrentGem += dropRate;
-      if (randFloat < probabilityForCurrentGem) {
-        returnValue = cg;
-        break;
-      }
-    }
-    return returnValue;
-  }
-  
-  //the user can get as many gems as he wants
-  public static CityGem selectCityGemTwo(boolean allowDuplicates,
-      boolean getBossGem, Map<Integer, UserCityGem> gemIdsToUserCityGems,
-      Map<Integer, CityGem> gemIdsToActiveCityGems, Random rand) {
-    CityGem returnValue = null;
-    List<CityGem> potentialGems = getPotentialGems(allowDuplicates,
-        getBossGem, gemIdsToUserCityGems, gemIdsToActiveCityGems);
-
-    float probabilityForNoGem = 0.0f;
-    float randFloat = rand.nextFloat();
-    returnValue = selectFromGems(randFloat,
-        probabilityForNoGem, potentialGems);
-    return returnValue;
-  }
-  
-  
-//  public static int calculateBossHealth(Monster b, int newLevel) {
-//    int maxLevel = ControllerConstants.SOLO_BOSS__MAX_HEALTH_MULTIPLIER;
-//    int levelCap = Math.min(newLevel, maxLevel);
-//    int newHealth = b.getHpConstantA() *
-//        (b.getHpConstantB() * levelCap + b.getHpConstantC());
-//    return newHealth;
-//  }
-//  
-//  public static int calculateBossExpAwarded(Monster aBoss, UserBoss ub) {
-//    int expRewarded = 0;
-//    
-//    int health = ub.getCurrentHealth();
-//    if (0 >= health) {
-//      int a = aBoss.getExpConstantA();
-//      int b = aBoss.getExpConstantB();
-//      int ubLvl = ub.getCurrentLevel(); 
-//      expRewarded = a * ubLvl + b;
+//  public static int costToBuyForgeSlot(int goalNumAdditionalForgeSlots,
+//      int currentNumAdditionalForgeSlots) {
+//    int goalNumForgeSlots = goalNumAdditionalForgeSlots + ControllerConstants.FORGE_DEFAULT_NUMBER_OF_FORGE_SLOTS;
+//    log.info("goalNumForgeSlots=" + goalNumForgeSlots);
+//    if (2 == goalNumForgeSlots) {
+//      return ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_TWO;
+//    } else if (3 == goalNumForgeSlots) {
+//      return ControllerConstants.FORGE_COST_OF_PURCHASING_SLOT_THREE;
+//    } else {
+//      log.error("unexpected error: goalNumForgeSlots=" + goalNumForgeSlots);
+//      return 500;
 //    }
-//    
-//    return expRewarded;
 //  }
   
-//  public static int dealDamageToBoss(Monster aBoss, User u) {
-//    ArrayList<Integer> userEquipIds = new ArrayList<Integer>();
-//    if (u.getWeaponEquippedUserEquipId() > 0) userEquipIds.add(u.getWeaponEquippedUserEquipId());
-//    if (u.getArmorEquippedUserEquipId() > 0) userEquipIds.add(u.getArmorEquippedUserEquipId());
-//    if (u.getAmuletEquippedUserEquipId() > 0) userEquipIds.add(u.getAmuletEquippedUserEquipId());
-//    if (u.getWeaponTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getWeaponTwoEquippedUserEquipId());
-//    if (u.getArmorTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getArmorTwoEquippedUserEquipId());
-//    if (u.getAmuletTwoEquippedUserEquipId() > 0) userEquipIds.add(u.getAmuletTwoEquippedUserEquipId());
-//    
-//    List<UserEquip> userEquips = RetrieveUtils.userEquipRetrieveUtils()
-//        .getSpecificUserEquips(userEquipIds);
-//    
-//    int equipAttackPower = 0;
-//    for (UserEquip ue: userEquips) {
-//      int equipId = ue.getEquipId();
-//      int forgeLevel = ue.getLevel();
-//      int enhanceLevel = ue.getEnhancementPercentage()/10000;
-//      int equipIndivPower = attackPowerForEquip(equipId, forgeLevel, enhanceLevel);
-//      equipAttackPower += equipIndivPower;
-//      //log.info(equipId + ": " + equipIndivPower);
-//      //log.info("equipAttackPower: " + equipAttackPower);
-//    }
-//    
-//    int equipDamage = equipDamagePortionForBoss(equipAttackPower);
-//    
-//    int a = aBoss.getDmgConstantA();
-//    int b = aBoss.getDmgConstantB();
-//    
-//    int totalDamage = a * (b + equipDamage);
-//    totalDamage = new Random().nextInt((int)(totalDamage*0.2))+(int)(totalDamage*0.9);
-//    //log.info("total damage: " + totalDamage);
-//    return totalDamage;
-//  }
-  
-  /*private static int equipDamagePortionForBoss(int equipAttackPower) {
-    if (equipAttackPower <= 0) {
-      return 0;
-    }
-    int equipDamage = (int) (10.613 * Math.log(equipAttackPower) - 45.091);
-    //log.info("attack power: " + equipAttackPower);
-    //log.info("equip damage: " + equipDamage);
-    return Math.max(0, equipDamage);
-  }*/
   
   public static int sumListsInMap(Map<Integer, List<Integer>> aMap) {
 	  int sum = 0;

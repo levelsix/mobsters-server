@@ -2,7 +2,7 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-public class CityExpansionCost implements Serializable {
+public class ExpansionCost implements Serializable {
 	
 	private static final long serialVersionUID = 4684737334322852956L;
 	private int id;
@@ -23,7 +23,7 @@ public class CityExpansionCost implements Serializable {
 	}
 	
 
-	public CityExpansionCost(int id, int expansionCost) {
+	public ExpansionCost(int id, int expansionCost) {
 		super();
 		this.id = id;
 		this.expansionCost = expansionCost;
@@ -32,12 +32,9 @@ public class CityExpansionCost implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CityExpansionCost [id=" + id + ", expansionCost="
+		return "ExpansionCost [id=" + id + ", expansionCost="
 				+ expansionCost + "]";
 	}
-
-
-
 
 }
 

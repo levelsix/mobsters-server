@@ -2,9 +2,9 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-public class LeaderboardEventReward implements Serializable {
+public class TournamentEventReward implements Serializable {
   private static final long serialVersionUID = -7235506292340192848L;
-  private int leaderboardEventId;
+  private int tournamentEventId;
   private int minRank;
   private int maxRank;
   private int goldRewarded;
@@ -14,10 +14,10 @@ public class LeaderboardEventReward implements Serializable {
   private int green;
   private int red;
   
-  public LeaderboardEventReward(int leaderboardEventId, int minRank, int maxRank, int goldRewarded,
+  public TournamentEventReward(int tournamentEventId, int minRank, int maxRank, int goldRewarded,
       String backgroundImageName, String prizeImageName, int blue, int green, int red) {
     super();
-    this.leaderboardEventId = leaderboardEventId;
+    this.tournamentEventId = tournamentEventId;
     this.minRank = minRank;
     this.maxRank = maxRank;
     this.goldRewarded = goldRewarded;
@@ -28,11 +28,11 @@ public class LeaderboardEventReward implements Serializable {
     this.red = red;
   }
 
-  public int getLeaderboardEventId() {
-    return leaderboardEventId;
+  public int getTournamentEventId() {
+    return tournamentEventId;
   }
-  public void setLeaderboardEventId(int leaderboardEventId) {
-    this.leaderboardEventId = leaderboardEventId;
+  public void setTournamentEventId(int tournamentEventId) {
+    this.tournamentEventId = tournamentEventId;
   }
   public int getMinRank() {
     return minRank;
@@ -85,7 +85,7 @@ public class LeaderboardEventReward implements Serializable {
 
   @Override
   public String toString() {
-    return "LeaderboardEvent [leaderboardEventId=" + leaderboardEventId + ", minRank=" + minRank 
+    return "TournamentEvent [tournamentEventId=" + tournamentEventId + ", minRank=" + minRank 
         + ", maxRank=" + maxRank + ", goldRewarded=" + goldRewarded
         + ", backgroundImageName=" + backgroundImageName + ", prizeImageName=" + prizeImageName
         + ", blue=" + blue + ", green=" + green + ", red=" + red + "]";

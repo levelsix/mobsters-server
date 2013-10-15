@@ -11,32 +11,32 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.CityExpansionCost;
+import com.lvl6.info.ExpansionCost;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class CityExpansionCostRetrieveUtils {
+@Component @DependsOn("gameServer") public class ExpansionCostRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_CITY_EXPANSION_COST;
+  private static final String TABLE_NAME = DBConstants.TABLE_EXPANSION_COST;
   
-  private static Map<Integer, CityExpansionCost> expansionNumToCityExpansionCost;
+  private static Map<Integer, ExpansionCost> expansionNumToExpansionCost;
   
-  public static Map<Integer, CityExpansionCost> getAllExpansionNumsToCosts() {
-  	if (null == expansionNumToCityExpansionCost) {
+  public static Map<Integer, ExpansionCost> getAllExpansionNumsToCosts() {
+  	if (null == expansionNumToExpansionCost) {
 		  setStaticExpansionNumToCityExpansionCost();
 	  }
 	  
-	  return expansionNumToCityExpansionCost;
+	  return expansionNumToExpansionCost;
   }
 
-  public static CityExpansionCost getCityExpansionCostById(int id) {
-	  if (null == expansionNumToCityExpansionCost) {
+  public static ExpansionCost getCityExpansionCostById(int id) {
+	  if (null == expansionNumToExpansionCost) {
 		  setStaticExpansionNumToCityExpansionCost();
 	  }
 	  
-	  return expansionNumToCityExpansionCost.get(id);
+	  return expansionNumToExpansionCost.get(id);
   	}
   
 
@@ -46,7 +46,7 @@ import com.lvl6.utils.DBConnection;
   }
   
   private static void setStaticExpansionNumToCityExpansionCost() {
-	  log.debug("setting static map of expansion num to CityExpansionCost");
+	  log.debug("setting static map of expansion num to ExpansionCost");
 
 	    Connection conn = DBConnection.get().getConnection();
 	    ResultSet rs = null;
@@ -57,13 +57,13 @@ import com.lvl6.utils.DBConnection;
 	        try {
 	          rs.last();
 	          rs.beforeFirst();
-	          Map<Integer, CityExpansionCost> expansionNumToCost = new HashMap<Integer, CityExpansionCost>();
+	          Map<Integer, ExpansionCost> expansionNumToCost = new HashMap<Integer, ExpansionCost>();
 	          while(rs.next()) {  //should only be one
-	            CityExpansionCost cec = convertRSRowToCityExpansionCost(rs);
+	            ExpansionCost cec = convertRSRowToCityExpansionCost(rs);
 	            if (null != cec)
 	            	expansionNumToCost.put(cec.getId(), cec);
 	          }
-	          expansionNumToCityExpansionCost = expansionNumToCost;
+	          expansionNumToExpansionCost = expansionNumToCost;
 	        } catch (SQLException e) {
 	          log.error("problem with database call.", e);
 	          
@@ -73,11 +73,11 @@ import com.lvl6.utils.DBConnection;
 	    DBConnection.get().close(rs, null, conn);
   }
   
-  private static CityExpansionCost convertRSRowToCityExpansionCost(ResultSet rs) throws SQLException {
+  private static ExpansionCost convertRSRowToCityExpansionCost(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     int expansionCost = rs.getInt(i++);
 
-    return new CityExpansionCost(id, expansionCost);
+    return new ExpansionCost(id, expansionCost);
   }
 }

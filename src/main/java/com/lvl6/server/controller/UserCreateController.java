@@ -206,14 +206,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (legitUserCreate && userId > 0) {
       server.lockPlayer(userId, this.getClass().getSimpleName());
       try {
-        writeFirstWallPost(userId);
         writeUserStruct(userId, ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD, timeOfStructPurchase, timeOfStructBuild, structCoords);
         //        writeUserCritstructs(user.getId());
         writeTaskCompleted(user.getId(), taskCompleted);
         writeTaskCompleted(user.getId(), questTaskCompleted);
-        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), 1, 1)) {
-          log.error("problem with giving user access to first city (city with id 1)");
-        }
+//        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), 1, 1)) {
+//          log.error("problem with giving user access to first city (city with id 1)");
+//        }
         if (referrer != null && user != null) {
           rewardReferrer(referrer, user);        
         }
@@ -230,15 +229,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
     }
     
-  }
-
-  private void writeFirstWallPost(int newPlayerId) {
-    Timestamp timeOfPost = new Timestamp(new Date().getTime());
-    if (insertUtils.insertPlayerWallPost(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL, 
-        newPlayerId, ControllerConstants.USER_CREATE__FIRST_WALL_POST_TEXT, timeOfPost) < 0) {
-      log.error("problem with writing wall post from user " + ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL
-          + " for player " + newPlayerId + " at " + timeOfPost);
-    }
   }
 
   private void writeUserStruct(int userId, int structId, Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild, CoordinatePair structCoords) {

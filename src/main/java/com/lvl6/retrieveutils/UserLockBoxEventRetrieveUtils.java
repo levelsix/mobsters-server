@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
-  private static final String TABLE_NAME = DBConstants.TABLE_USER_LOCK_BOX_EVENTS;
+  private static final String TABLE_NAME = DBConstants.TABLE_LOCK_BOX_EVENT_FOR_USER;
   
   public static Map<Integer, UserLockBoxEvent> getLockBoxEventIdsToLockBoxEventsForUser(int userId) {
     log.debug("retrieving lock box event ids to num lock boxes map for userId " + userId);
@@ -37,8 +37,8 @@ import com.lvl6.utils.DBConnection;
   public static UserLockBoxEvent getUserLockBoxEventForUserAndEventId(int userId, int lockBoxEventId) {
     log.debug("retrieving num lock boxes map for userId " + userId + " lockBoxEventId " + lockBoxEventId);
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_LOCK_BOX_EVENTS__USER_ID, userId);
-    paramsToVals.put(DBConstants.USER_LOCK_BOX_EVENTS__EVENT_ID, lockBoxEventId);
+    paramsToVals.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__USER_ID, userId);
+    paramsToVals.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__EVENT_ID, lockBoxEventId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);

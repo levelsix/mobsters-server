@@ -138,6 +138,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         log.error("no struct in db exists with id " + us.getStructId());
         return false;        
       }
+      /*
       if (us.getLastUpgradeTime() != null) {
         if (us.getLastUpgradeTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(struct.getMinutesToUpgradeBase(), us.getLevel()) > clientTime.getTime()) {
           resBuilder.setStatus(NormStructWaitCompleteStatus.NOT_DONE_YET);
@@ -153,11 +154,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
               + ", client time is " + clientTime + ", purchase time was " + us.getPurchaseTime());
           return false;
         }        
-      } else {
+      } else {*/
         resBuilder.setStatus(NormStructWaitCompleteStatus.OTHER_FAIL);
         log.error("user struct has never been bought or purchased according to db. " + us);
         return false;                
-      }
+      //}
     }
     resBuilder.setStatus(NormStructWaitCompleteStatus.SUCCESS);
     return true;  

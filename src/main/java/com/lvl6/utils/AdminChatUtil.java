@@ -79,7 +79,7 @@ public class AdminChatUtil {
 
 	public List<AdminChatPost> getMessagesToAndFromAdmin(int offset, int limit) {
 		String query = "SELECT * FROM "
-				+ DBConstants.TABLE_PRIVATE_CHAT_POSTS + " as chat where (chat."
+				+ DBConstants.TABLE_USER_PRIVATE_CHAT_POST + " as chat where (chat."
 				+ DBConstants.PRIVATE_CHAT_POSTS__RECIPIENT_ID + "="
 				+ ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID + " or chat."
 				+ DBConstants.PRIVATE_CHAT_POSTS__POSTER_ID + "="

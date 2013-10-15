@@ -13,56 +13,56 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.LeaderboardEvent;
+import com.lvl6.info.TournamentEvent;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class LeaderboardEventRetrieveUtils {
+@Component @DependsOn("gameServer") public class TournamentEventRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static Map<Integer, LeaderboardEvent> idsToLeaderBoardEvents;
+  private static Map<Integer, TournamentEvent> idsToLeaderBoardEvents;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_LEADERBOARD_EVENTS;
+  private static final String TABLE_NAME = DBConstants.TABLE_TOURNAMENT_EVENT;
 
-  public static Map<Integer, LeaderboardEvent> getIdsToLeaderboardEvents(Boolean reloadStaticData) {
-    log.debug("retrieving leaderboard event data");
+  public static Map<Integer, TournamentEvent> getIdsToTournamentEvents(Boolean reloadStaticData) {
+    log.debug("retrieving tournament event data");
     if (idsToLeaderBoardEvents == null || reloadStaticData) {
-      setStaticIdsToLeaderboardEvents();
+      setStaticIdsToTournamentEvents();
     }
     return idsToLeaderBoardEvents;
   }
 
-  public static Map<Integer, LeaderboardEvent> getLeaderboardEventsForIds(List<Integer> ids) {
-    log.debug("retrieving LeaderboardEvents with ids " + ids);
+  public static Map<Integer, TournamentEvent> getTournamentEventsForIds(List<Integer> ids) {
+    log.debug("retrieving TournamentEvents with ids " + ids);
     if (idsToLeaderBoardEvents == null) {
-      setStaticIdsToLeaderboardEvents();
+      setStaticIdsToTournamentEvents();
     }
-    Map<Integer, LeaderboardEvent> toreturn = new HashMap<Integer, LeaderboardEvent>();
+    Map<Integer, TournamentEvent> toreturn = new HashMap<Integer, TournamentEvent>();
     for (Integer id : ids) {
       toreturn.put(id,  idsToLeaderBoardEvents.get(id));
     }
     return toreturn;
   }
 
-  public static LeaderboardEvent getLeaderboardEventForId(int id) {
-    log.debug("retrieving LeaderboardEvent for id " + id);
+  public static TournamentEvent getTournamentEventForId(int id) {
+    log.debug("retrieving TournamentEvent for id " + id);
     if (idsToLeaderBoardEvents == null) {
-      setStaticIdsToLeaderboardEvents();
+      setStaticIdsToTournamentEvents();
     }
     return idsToLeaderBoardEvents.get(id);
   }
 
-//  decided to get the active leaderboard events in MiscMethods.currentLeaderboardEventProtos()
-//  public static List<LeaderboardEvent> getActiveLeaderboardEvents() {
+//  decided to get the active tournament events in MiscMethods.currentTournamentEventProtos()
+//  public static List<TournamentEvent> getActiveTournamentEvents() {
 //    long curTime = (new Date()).getTime();
 //    String now = "\"" + new Timestamp(curTime) + "\"";
 //
-//    List<LeaderboardEvent> toReturn = new ArrayList<LeaderboardEvent>();
+//    List<TournamentEvent> toReturn = new ArrayList<TournamentEvent>();
 //    
 //    if(null != idsToLeaderBoardEvents) {
 //      //go through local copy of db, instead of going to db
-//      for(LeaderboardEvent e : idsToLeaderBoardEvents.values()) {
+//      for(TournamentEvent e : idsToLeaderBoardEvents.values()) {
 //        if(e.getEndDate().getTime() > curTime && curTime >= e.getStartDate().getTime()) {
 //          toReturn.add(e);
 //        }
@@ -96,13 +96,13 @@ import com.lvl6.utils.DBConnection;
 //            rs.last();
 //            rs.beforeFirst();
 //            while(rs.next()) {
-//              LeaderboardEvent le = convertRSRowToLeaderboardEvent(rs);
+//              TournamentEvent le = convertRSRowToTournamentEvent(rs);
 //              if(null != le) {
 //                toReturn.add(le);
 //              }
 //            }
 //          } catch (SQLException e) {
-//            log.error("problem with leaderboard event db call.", e);
+//            log.error("problem with tournament event db call.", e);
 //          }
 //        }
 //      }
@@ -112,7 +112,7 @@ import com.lvl6.utils.DBConnection;
 //    return toReturn;
 //  }
   
-  private static void setStaticIdsToLeaderboardEvents() {
+  private static void setStaticIdsToTournamentEvents() {
     log.debug("setting static map of upgrade struct job id to upgrade struct job");
 
     Connection conn = DBConnection.get().getConnection();
@@ -123,13 +123,13 @@ import com.lvl6.utils.DBConnection;
         try {
           rs.last();
           rs.beforeFirst();
-          Map <Integer, LeaderboardEvent> idsToLeaderboardEventTemp = new HashMap<Integer, LeaderboardEvent>();
+          Map <Integer, TournamentEvent> idsToTournamentEventTemp = new HashMap<Integer, TournamentEvent>();
           while(rs.next()) {  //should only be one
-            LeaderboardEvent le = convertRSRowToLeaderboardEvent(rs);
+            TournamentEvent le = convertRSRowToTournamentEvent(rs);
             if (le != null)
-              idsToLeaderboardEventTemp.put(le.getId(), le);
+              idsToTournamentEventTemp.put(le.getId(), le);
           }
-          idsToLeaderBoardEvents = idsToLeaderboardEventTemp;
+          idsToLeaderBoardEvents = idsToTournamentEventTemp;
         } catch (SQLException e) {
           log.error("problem with database call.", e);
           
@@ -140,19 +140,19 @@ import com.lvl6.utils.DBConnection;
   }
 
   public static void reload() {
-    setStaticIdsToLeaderboardEvents();
+    setStaticIdsToTournamentEvents();
   }
 
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static LeaderboardEvent convertRSRowToLeaderboardEvent(ResultSet rs) throws SQLException {
+  private static TournamentEvent convertRSRowToTournamentEvent(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     Date startDate = new Date(rs.getTimestamp(i++).getTime());
     Date endDate = new Date(rs.getTimestamp(i++).getTime());
     String eventName = rs.getString(i++);
     boolean rewardsGivenOut = rs.getBoolean(i++);
-    return new LeaderboardEvent(id, startDate, endDate, eventName, rewardsGivenOut);
+    return new TournamentEvent(id, startDate, endDate, eventName, rewardsGivenOut);
   }
 }

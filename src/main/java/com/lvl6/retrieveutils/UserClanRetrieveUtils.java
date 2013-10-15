@@ -24,12 +24,12 @@ import com.lvl6.utils.DBConnection;
 
   private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private final String TABLE_NAME = DBConstants.TABLE_USER_CLANS;
+  private final String TABLE_NAME = DBConstants.TABLE_CLAN_FOR_USER;
 
   public List<UserClan> getUserClanMembersInClan(int clanId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_CLANS__CLAN_ID, clanId);
-    paramsToVals.put(DBConstants.USER_CLANS__STATUS, UserClanStatus.MEMBER.getNumber());
+    paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
+    paramsToVals.put(DBConstants.CLAN_FOR_USER__STATUS, UserClanStatus.MEMBER.getNumber());
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -39,8 +39,8 @@ import com.lvl6.utils.DBConnection;
   }
 
   public List<UserClan> getUserClanMembersInClanOr(int clanId1, int clanId2) {
-    String query = "select * from " + TABLE_NAME + " where (" + DBConstants.USER_CLANS__CLAN_ID +
-        " = ? or " + DBConstants.USER_CLANS__CLAN_ID + " = ? ) and " + DBConstants.USER_CLANS__STATUS +
+    String query = "select * from " + TABLE_NAME + " where (" + DBConstants.CLAN_FOR_USER__CLAN_ID +
+        " = ? or " + DBConstants.CLAN_FOR_USER__CLAN_ID + " = ? ) and " + DBConstants.CLAN_FOR_USER__STATUS +
         " = ?";
     
     List<Object> values = new ArrayList<Object>();
@@ -57,7 +57,7 @@ import com.lvl6.utils.DBConnection;
 
   public List<UserClan> getUserClansRelatedToUser(int userId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_CLANS__USER_ID, userId);
+    paramsToVals.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -68,7 +68,7 @@ import com.lvl6.utils.DBConnection;
 
   public List<UserClan> getUserClansRelatedToClan(int clanId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_CLANS__CLAN_ID, clanId);
+    paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
@@ -89,8 +89,8 @@ import com.lvl6.utils.DBConnection;
   ////@Cacheable(value="specificUserClan")
   public UserClan getSpecificUserClan(int userId, int clanId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_CLANS__CLAN_ID, clanId);
-    paramsToVals.put(DBConstants.USER_CLANS__USER_ID, userId);
+    paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
+    paramsToVals.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);

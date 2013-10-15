@@ -61,50 +61,50 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setOtherUserId(otherUserId);
 
     try {
-      resBuilder.setStatus(RetrievePrivateChatPostsStatus.SUCCESS);
+      resBuilder.setStatus(RetrievePrivateChatPostsStatus.FAIL);
 
       List <PrivateChatPost> recentPrivateChatPosts;
       if (beforePrivateChatId > 0) {
         //if client specified a private chat id
-        recentPrivateChatPosts = PrivateChatPostRetrieveUtils.getPrivateChatPostsBetweenUsersBeforePostId(
-            ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, beforePrivateChatId, userId, otherUserId);        
+//        recentPrivateChatPosts = PrivateChatPostRetrieveUtils.getPrivateChatPostsBetweenUsersBeforePostId(
+//            ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, beforePrivateChatId, userId, otherUserId);        
       } else {
-        //if client didn't specify a private chat id
-        recentPrivateChatPosts = PrivateChatPostRetrieveUtils.getPrivateChatPostsBetweenUsersBeforePostId(
-            ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP,
-            ControllerConstants.NOT_SET, userId, otherUserId);
+//        //if client didn't specify a private chat id
+//        recentPrivateChatPosts = PrivateChatPostRetrieveUtils.getPrivateChatPostsBetweenUsersBeforePostId(
+//            ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP,
+//            ControllerConstants.NOT_SET, userId, otherUserId);
       }
-      if (recentPrivateChatPosts != null) {
-        if (recentPrivateChatPosts != null && recentPrivateChatPosts.size() > 0) {
-          List <Integer> userIds = new ArrayList<Integer>();
-          userIds.add(userId);
-          userIds.add(otherUserId);
-          Map<Integer, User> usersByIds = null;
-          if (userIds.size() > 0) {
-            usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-            
-            //for not hitting the db for every private chat post
-            Map<Integer, MinimumUserProto> userIdsToMups =
-                generateUserIdsToMups(usersByIds, userId, otherUserId);
-            
-            //convert private chat post to group chat message proto
-            for (PrivateChatPost pwp : recentPrivateChatPosts) {
-              int posterId = pwp.getPosterId();
-              
-              long time = pwp.getTimeOfPost().getTime();
-              MinimumUserProto user = userIdsToMups.get(posterId);
-              String content = pwp.getContent();
-              boolean isAdmin = false;
-              
-              GroupChatMessageProto gcmp = 
-                  CreateInfoProtoUtils.createGroupChatMessageProto(time, user, content, isAdmin, pwp.getId());
-              resBuilder.addPosts(gcmp);
-            }
-          }
-        }
-      } else {
-        log.info("No private chat posts found for userId=" + userId + " and otherUserId=" + otherUserId); 
-      }
+//      if (recentPrivateChatPosts != null) {
+//        if (recentPrivateChatPosts != null && recentPrivateChatPosts.size() > 0) {
+//          List <Integer> userIds = new ArrayList<Integer>();
+//          userIds.add(userId);
+//          userIds.add(otherUserId);
+//          Map<Integer, User> usersByIds = null;
+//          if (userIds.size() > 0) {
+//            usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+//            
+//            //for not hitting the db for every private chat post
+//            Map<Integer, MinimumUserProto> userIdsToMups =
+//                generateUserIdsToMups(usersByIds, userId, otherUserId);
+//            
+//            //convert private chat post to group chat message proto
+//            for (PrivateChatPost pwp : recentPrivateChatPosts) {
+//              int posterId = pwp.getPosterId();
+//              
+//              long time = pwp.getTimeOfPost().getTime();
+//              MinimumUserProto user = userIdsToMups.get(posterId);
+//              String content = pwp.getContent();
+//              boolean isAdmin = false;
+//              
+//              GroupChatMessageProto gcmp = 
+//                  CreateInfoProtoUtils.createGroupChatMessageProto(time, user, content, isAdmin, pwp.getId());
+//              resBuilder.addPosts(gcmp);
+//            }
+//          }
+//        }
+//      } else {
+//        log.info("No private chat posts found for userId=" + userId + " and otherUserId=" + otherUserId); 
+//      }
 
       RetrievePrivateChatPostsResponseProto resProto = resBuilder.build();
 

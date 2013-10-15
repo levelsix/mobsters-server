@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_PRIVATE_CHAT_POSTS;
+  private static final String TABLE_NAME = DBConstants.TABLE_USER_PRIVATE_CHAT_POST;
 
   
   public static List<PrivateChatPost> getPrivateChatPostsBetweenUsersBeforePostId(

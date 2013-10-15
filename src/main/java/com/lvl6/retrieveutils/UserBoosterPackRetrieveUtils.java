@@ -34,15 +34,15 @@ import com.lvl6.utils.DBConnection;
     String orderByColumn = null;
     Map<String, Object> greaterThanConditionParams = new HashMap<String, Object>();
     
-    columns.add(DBConstants.USER_BOOSTER_PACK_HISTORY__NUM_BOUGHT);
+    columns.add(DBConstants.BOOSTER_PACK_HISTORY__NUM_BOUGHT);
     absoluteConditionParams.put(
-        DBConstants.USER_BOOSTER_PACK_HISTORY__USER_ID, userId);
+        DBConstants.BOOSTER_PACK_HISTORY__USER_ID, userId);
     absoluteConditionParams.put(
-        DBConstants.USER_BOOSTER_PACK_HISTORY__BOOSTER_PACK_ID, packId);
+        DBConstants.BOOSTER_PACK_HISTORY__BOOSTER_PACK_ID, packId);
     absoluteConditionParams.put(
-        DBConstants.USER_BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK, false);
+        DBConstants.BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK, false);
     greaterThanConditionParams.put(
-        DBConstants.USER_BOOSTER_PACK_HISTORY__TIME_OF_PURCHASE,
+        DBConstants.BOOSTER_PACK_HISTORY__TIME_OF_PURCHASE,
         now);
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescGreaterthan(
@@ -60,7 +60,7 @@ import com.lvl6.utils.DBConnection;
         rs.beforeFirst();
         int numPurchased = 0;
         while(rs.next()) {
-          int numBought = rs.getInt(DBConstants.USER_BOOSTER_PACK_HISTORY__NUM_BOUGHT);
+          int numBought = rs.getInt(DBConstants.BOOSTER_PACK_HISTORY__NUM_BOUGHT);
           numPurchased += numBought;
         }
         return numPurchased;

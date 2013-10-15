@@ -3,58 +3,60 @@ package com.lvl6.properties;
 //SPECIFYING COLUMNS OF STATIC DATA TABLES UNNECESSARY
 public class DBConstants {
   /* TABLENAMES*/
-	public static final String TABLE_AVAILABLE_REFERRAL_CODES = "available_referral_code";
 	public static final String TABLE_BATTLE_HISTORY = "battle_history";
-	public static final String TABLE_BOOSTER_PACK = "booster_pack";
-	public static final String TABLE_USER_BOOSTER_PACK_HISTORY = "booster_pack_history_for_user";
 	public static final String TABLE_BOOSTER_ITEM = "booster_item";
-	public static final String TABLE_CITIES = "city";
-	public static final String TABLE_NEUTRAL_CITY_ELEMENTS = "city_element";
+	public static final String TABLE_BOOSTER_PACK = "booster_pack";
+	public static final String TABLE_USER_BOOSTER_PACK_HISTORY = "booster_pack_history";
+	public static final String TABLE_CITY = "city";
+	public static final String TABLE_CITY_ELEMENT = "city_element";
 	public static final String TABLE_CLANS = "clan";
 	public static final String TABLE_CLAN_CHAT_POST = "clan_chat_post";
-	public static final String TABLE_USER_CLANS = "clan_for_user";
-	public static final String TABLE_CITY_EXPANSION_COST = "expansion_cost";
-	public static final String TABLE_USER_CITY_EXPANSION_DATA = "expansion_purchase_for_user";
-	public static final String TABLE_GOLD_SALES = "gold_sale_event";	
-	public static final String TABLE_IAP_HISTORY = "iap_history_for_user";
-	public static final String TABLE_JOBS_BUILD_STRUCT = "job_build_struct";
-	public static final String TABLE_JOBS_UPGRADE_STRUCT = "job_upgrade_struct";
-	public static final String TABLE_LEADERBOARD_EVENTS = "leaderboard_event";	
-	public static final String TABLE_USER_LEADERBOARD_EVENTS = "leaderboard_event_for_user";
-	public static final String TABLE_LEADERBOARD_EVENT_REWARDS = "leaderboard_event_reward";
-  public static final String TABLE_LEVELS_REQUIRED_EXPERIENCE = "level_required_experience";
-  public static final String TABLE_LOCK_BOX_EVENTS = "lock_box_event";
-  public static final String TABLE_USER_LOCK_BOX_EVENTS = "lock_box_event_for_user";
-  public static final String TABLE_LOGIN_HISTORY = "login_history_for_user";	
+	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
+	public static final String TABLE_EXPANSION_COST = "expansion_cost";
+	public static final String TABLE_EXPANSION_PURCHASE_FOR_USER = "expansion_purchase_for_user";
+	public static final String TABLE_GOLD_SALE = "gold_sale";	
+	public static final String TABLE_IAP_HISTORY = "iap_history";
+	public static final String TABLE_JOB_BUILD_STRUCT = "job_build_struct";
+	public static final String TABLE_JOB_KILL_MONSTER = "job_kill_monster";
+	public static final String TABLE_JOB_UPGRADE_STRUCT = "job_upgrade_struct";
+  public static final String TABLE_LEVEL_REQUIRED_EXPERIENCE = "level_required_experience";
+  public static final String TABLE_LOCK_BOX_EVENT = "lock_box_event";
+  public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";
+  public static final String TABLE_LOGIN_HISTORY = "login_history";	
   public static final String TABLE_MONSTER = "monster";
-  public static final String TABLE_DELETED_USER_EQUIPS_FOR_ENHANCING = "monster_deleted_for_enhancing_for_user";
-  public static final String TABLE_EQUIP_ENHANCEMENT= "monster_enhancing_for_user";
-  public static final String TABLE_EQUIP_ENHANCEMENT_HISTORY = "monster_enhancing_history_for_user";
-  public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS = "monster_enhancing_feeder_for_user";  
-  public static final String TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY = "monster_enhancing_feeder_history_for_user";  
-  public static final String TABLE_MONSTER_EVOLUTION = "monster_evolution_for_user";
-  public static final String TABLE_MONSTER_EVOLUTION_HISTORY = "monster_evolution_history_for_user";
-  public static final String TABLE_USER_AND_EQUIP_FAIL = "monster_evolution_fail_for_user";
-  public static final String TABLE_USER_EQUIP = "monster_for_user";
+	public static final String TABLE_MONSTER_4USER_DELETED_4ENHANCING = "monster_4user_deleted_4enhancing";
+	public static final String TABLE_MONSTER_ENHANCING_FEEDER = "monster_enhancing_feeder";  
+  public static final String TABLE_MONSTER_ENHANCING_FOR_USER= "monster_enhancing_for_user";
+  public static final String TABLE_MONSTER_ENHANCING_HISTORY = "monster_enhancing_history";
+  public static final String TABLE_MONSTER_ENHANCING_FEEDER_HISTORY = "monster_enhancing_feeder_history";  
+  public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";
+  public static final String TABLE_MONSTER_EVOLVING_HISTORY = "monster_evolving_history";
+  public static final String TABLE_MONSTER_EVOLVING_FAIL_FOR_USER = "monster_evolving_fail_for_user";
+  public static final String TABLE_MONSTER_FOR_USER = "monster_for_user";
   public static final String TABLE_MONSTER_REWARD = "monster_reward";
-  public static final String TABLE_PRIVATE_CHAT_POSTS = "private_chat_post";
+  public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
   public static final String TABLE_PROFANITY = "profanity";
-  public static final String TABLE_QUESTS = "quest";
-  public static final String TABLE_USER_QUESTS = "quest_for_user";
-  public static final String TABLE_REFERRALS = "referral";
-  public static final String TABLE_USER_SESSIONS = "session_for_user";
-  public static final String TABLE_STRUCTURES = "structure";
+  public static final String TABLE_QUEST = "quest";
+  public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
+	public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
+	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";
+  public static final String TABLE_REFERRAL = "referral";
+  public static final String TABLE_STRUCTURE = "structure";
+  public static final String TABLE_USER_SESSION = "user_session";
   public static final String TABLE_USER_STRUCTS = "structure_for_user";
-  public static final String TABLE_TASKS = "task";
-  public static final String TABLE_USER_TASK = "task_for_user";
-  public static final String TABLE_USER_TASK_HISTORY = "task_history_for_user";
+  public static final String TABLE_TASK = "task";
   public static final String TABLE_TASK_STAGE = "task_stage";
+  public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
+	public static final String TABLE_TOURNAMENT_EVENT = "tournament_event";	
+	public static final String TABLE_TOURNAMENT_EVENT_FOR_USER = "tournament_event_for_user";
+	public static final String TABLE_TOURNAMENT_REWARD = "tournament_reward";
+  public static final String TABLE_USER_TASK = "task_for_user";
+  public static final String TABLE_USER_TASK_HISTORY = "task_history";
   public static final String TABLE_USER_TASK_STAGE = "task_stage_for_user";
   public static final String TABLE_USER_TASK_STAGE_HISTORY = "task_stage_history_for_user";
-  public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
   public static final String TABLE_USER = "user";
-  public static final String TABLE_FIRST_TIME_USERS = "user_pretutorial";
   public static final String TABLE_BANNED_USER = "user_banned";
+  public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
   public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
   
 	
@@ -62,7 +64,6 @@ public class DBConstants {
   public static final String TABLE_USER_QUESTS_COMPLETED_TASKS = "user_quests_completed_tasks";
   public static final String TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS = "user_quests_defeat_type_job_progress";
   public static final String TABLE_USER_QUESTS_TASK_PROGRESS = "user_quests_task_progress";
-  public static final String TABLE_JOBS_DEFEAT_TYPE = "jobs_defeat_type";
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
   public static final String GENERIC__ID = "id";
@@ -94,17 +95,17 @@ public class DBConstants {
   public static final String BOOSTER_PACK__MAX_LEVEL = "max_level";
 
   /*USER BOOSTER PACK HISTORY*/
-  public static final String USER_BOOSTER_PACK_HISTORY__ID = GENERIC__ID;
-  public static final String USER_BOOSTER_PACK_HISTORY__USER_ID = GENERIC__USER_ID;
-  public static final String USER_BOOSTER_PACK_HISTORY__BOOSTER_PACK_ID = "booster_pack_id"; 
-  public static final String USER_BOOSTER_PACK_HISTORY__NUM_BOUGHT = "num_bought";
-  public static final String USER_BOOSTER_PACK_HISTORY__TIME_OF_PURCHASE = "time_of_purchase";
-  public static final String USER_BOOSTER_PACK_HISTORY__RARITY_ONE_QUANTITY = "rarity_one_quantity";
-  public static final String USER_BOOSTER_PACK_HISTORY__RARITY_TWO_QUANTITY = "rarity_two_quantity";
-  public static final String USER_BOOSTER_PACK_HISTORY__RARITY_THREE_QUANTITY = "rarity_three_quantity";
-  public static final String USER_BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK = "exclude_from_limit_check";
-  public static final String USER_BOOSTER_PACK_HISTORY__EQUIP_IDS = "equip_ids";
-  public static final String USER_BOOSTER_PACK_HISTORY__USER_EQUIP_IDS = "user_equip_ids";
+  public static final String BOOSTER_PACK_HISTORY__ID = GENERIC__ID;
+  public static final String BOOSTER_PACK_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String BOOSTER_PACK_HISTORY__BOOSTER_PACK_ID = "booster_pack_id"; 
+  public static final String BOOSTER_PACK_HISTORY__NUM_BOUGHT = "num_bought";
+  public static final String BOOSTER_PACK_HISTORY__TIME_OF_PURCHASE = "time_of_purchase";
+  public static final String BOOSTER_PACK_HISTORY__RARITY_ONE_QUANTITY = "rarity_one_quantity";
+  public static final String BOOSTER_PACK_HISTORY__RARITY_TWO_QUANTITY = "rarity_two_quantity";
+  public static final String BOOSTER_PACK_HISTORY__RARITY_THREE_QUANTITY = "rarity_three_quantity";
+  public static final String BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK = "exclude_from_limit_check";
+  public static final String BOOSTER_PACK_HISTORY__MONSTER_IDS = "monster_ids";
+  public static final String BOOSTER_PACK_HISTORY__MONSTER_FOR_USER_IDS = "monster_for_user_ids";
   
   /*BOOSTER ITEM*/
   public static final String BOOSTER_ITEM__ID = GENERIC__ID;
@@ -122,29 +123,25 @@ public class DBConstants {
   public static final String CLANS__TAG = "tag";
   public static final String CLANS__REQUEST_TO_JOIN_REQUIRED = "request_to_join_required";
   
-  /*CLAN_WALL_POSTS*/
-  public static final String CLAN_WALL_POSTS__ID = GENERIC__ID;
-  public static final String CLAN_CHAT_POSTS__POSTER_ID = "poster_id";
-  public static final String CLAN_CHAT_POSTS__CLAN_ID = "clan_id";
-  public static final String CLAN_CHAT_POSTS__TIME_OF_POST = "time_of_post";
-  public static final String CLAN_CHAT_POSTS__CONTENT = "content";
+  /*CLAN_CHAT_POSTS*/
+  public static final String CLAN_CHAT_POST__ID = GENERIC__ID;
+  public static final String CLAN_CHAT_POST__POSTER_ID = "poster_id";
+  public static final String CLAN_CHAT_POST__CLAN_ID = "clan_id";
+  public static final String CLAN_CHAT_POST__TIME_OF_POST = "time_of_post";
+  public static final String CLAN_CHAT_POST__CONTENT = "content";
 
   /*USER CLANS*/
-  public static final String USER_CLANS__USER_ID = "user_id";
-  public static final String USER_CLANS__CLAN_ID = "clan_id";
-  public static final String USER_CLANS__STATUS = "status";
-  public static final String USER_CLANS__REQUEST_TIME = "request_time";
+  public static final String CLAN_FOR_USER__USER_ID = "user_id";
+  public static final String CLAN_FOR_USER__CLAN_ID = "clan_id";
+  public static final String CLAN_FOR_USER__STATUS = "status";
+  public static final String CLAN_FOR_USER__REQUEST_TIME = "request_time";
 
-  /*CITY EXPANSION COST*/
-  public static final String CITY_EXPANSION_COST__ID = GENERIC__ID;
-  public static final String CITY_EXPANSION_COST__EXPANSION_COST = "expansion_cost";
-
-  /*USER CITY EXPANSION DATA*/
-  public static final String USER_CITY_EXPANSION_DATA__USER_ID = GENERIC__USER_ID;
-  public static final String USER_CITY_EXPANSION_DATA__X_POSITION = "x_position";
-  public static final String USER_CITY_EXPANSION_DATA__Y_POSITION = "y_position";
-  public static final String USER_CITY_EXPANSION_DATA__IS_EXPANDING = "is_expanding";
-  public static final String USER_CITY_EXPANSION_DATA__EXPAND_START_TIME = "expand_start_time";
+  /*EXPANSION PURCHASE FOR USER*/
+  public static final String EXPANSION_PURCHASE_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String EXPANSION_PURCHASE_FOR_USER__X_POSITION = "x_position";
+  public static final String EXPANSION_PURCHASE_FOR_USER__Y_POSITION = "y_position";
+  public static final String EXPANSION_PURCHASE_FOR_USER__IS_EXPANDING = "is_expanding";
+  public static final String EXPANSION_PURCHASE_FOR_USER__EXPAND_START_TIME = "expand_start_time";
 
   /*IAP TABLE*/
   public static final String IAP_HISTORY__ID = GENERIC__ID;
@@ -161,38 +158,38 @@ public class DBConstants {
   public static final String IAP_HISTORY__BVRS = "bvrs";
   public static final String IAP_HISTORY__APP_ITEM_ID = "app_item_id";
 
-  /*LEADERBOARD EVENTS*/
-  public static final String LEADERBOARD_EVENTS__ID = GENERIC__ID;
-  public static final String LEADERBOARD_EVENTS__START_TIME = "start_time";
-  public static final String LEADERBOARD_EVENTS__END_TIME = "end_time";
-  public static final String LEADERBOARD_EVENTS__EVENT_NAME = "event_time";
-  public static final String LEADERBOARD_EVENTS__REWARDS_GIVEN_OUT = "rewards_given_out";
+  /*TOURNAMENT EVENT*/
+  public static final String TOURNAMENT_EVENT__ID = GENERIC__ID;
+  public static final String TOURNAMENT_EVENT__START_TIME = "start_time";
+  public static final String TOURNAMENT_EVENT__END_TIME = "end_time";
+  public static final String TOURNAMENT_EVENT__EVENT_NAME = "event_time";
+  public static final String TOURNAMENT_EVENT__REWARDS_GIVEN_OUT = "rewards_given_out";
   
-  /*USER LEADERBOARD EVENTS*/
-  public static final String USER_LEADERBOARD_EVENTS__LEADERBOARD_EVENT_ID = "leaderboard_event_id";
-  public static final String USER_LEADERBOARD_EVENTS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_LEADERBOARD_EVENTS__BATTLES_WON = "battles_won";
-  public static final String USER_LEADERBOARD_EVENTS__BATTLES_LOST = "battles_lost";
-  public static final String USER_LEADERBOARD_EVENTS__BATTLES_FLED = "battles_fled";
+  /*TOURNAMENT EVENT FOR USER*/
+  public static final String TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID = "tournament_event_id";
+  public static final String TOURNAMENT_EVENT_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_WON = "battles_won";
+  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_LOST = "battles_lost";
+  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_FLED = "battles_fled";
   
-  /*LEADERBOARD EVENT REWARDS*/
-  public static final String LEADERBOARD_EVENT_REWARDS__ID = "leaderboard_event_id";
-  public static final String LEADERBOARD_EVENT_REWARDS__MIN_RANK = "min_rank";
-  public static final String LEADERBOARD_EVENT_REWARDS__MAX_RANK = "max_rank";
-  public static final String LEADERBOARD_EVENT_REWARDS__GOLD_REWARDED = "gold_rewarded";
-  public static final String LEADERBOARD_EVENT_REWARDS__BACKGROUND_IMAGE_NAME = "background_image_name";
-  public static final String LEADERBOARD_EVENT_REWARDS__PRIZE_IMAGE_NAME = "prize_image_name";
-  public static final String LEADERBOARD_EVENT_REWARDS__BLUE = "blue";
-  public static final String LEADERBOARD_EVENT_REWARDS__GREEN = "green";
-  public static final String LEADERBOARD_EVENT_REWARDS__RED = "red";
+  /*TOURNAMENT REWARD*/
+  public static final String TOURNAMENT_REWARD__ID = "tournament_event_id";
+  public static final String TOURNAMENT_REWARD__MIN_RANK = "min_rank";
+  public static final String TOURNAMENT_REWARD__MAX_RANK = "max_rank";
+  public static final String TOURNAMENT_REWARD__GOLD_REWARDED = "gold_rewarded";
+  public static final String TOURNAMENT_REWARD__BACKGROUND_IMAGE_NAME = "background_image_name";
+  public static final String TOURNAMENT_REWARD__PRIZE_IMAGE_NAME = "prize_image_name";
+  public static final String TOURNAMENT_REWARD__BLUE = "blue";
+  public static final String TOURNAMENT_REWARD__GREEN = "green";
+  public static final String TOURNAMENT_REWARD__RED = "red";
 
-  /*USER LOCK BOX EVENTS*/
-  public static final String USER_LOCK_BOX_EVENTS__EVENT_ID = "lock_box_event_id";
-  public static final String USER_LOCK_BOX_EVENTS__USER_ID = "user_id";
-  public static final String USER_LOCK_BOX_EVENTS__NUM_BOXES = "num_boxes";
-  public static final String USER_LOCK_BOX_EVENTS__LAST_OPENING_TIME = "last_opening_time";
-  public static final String USER_LOCK_BOX_EVENTS__NUM_TIMES_COMPLETED = "num_times_completed";
-  public static final String USER_LOCK_BOX_EVENTS__HAS_BEEN_REDEEMED = "has_been_redeemed";
+  /*LOCK BOX EVENT FOR USER*/
+  public static final String LOCK_BOX_EVENT_FOR_USER__EVENT_ID = "lock_box_event_id";
+  public static final String LOCK_BOX_EVENT_FOR_USER__USER_ID = "user_id";
+  public static final String LOCK_BOX_EVENT_FOR_USER__NUM_BOXES = "num_boxes";
+  public static final String LOCK_BOX_EVENT_FOR_USER__LAST_OPENING_TIME = "last_opening_time";
+  public static final String LOCK_BOX_EVENT_FOR_USER__NUM_TIMES_COMPLETED = "num_times_completed";
+  public static final String LOCK_BOX_EVENT_FOR_USER__HAS_BEEN_REDEEMED = "has_been_redeemed";
 
   /*LOGIN HISTORY*/
   public static final String LOGIN_HISTORY__ID = GENERIC__ID;
@@ -201,77 +198,77 @@ public class DBConstants {
   public static final String LOGIN_HISTORY__DATE = "date";
   public static final String LOGIN_HISTORY__IS_LOGIN = "is_login";
 
-  /*DELETED USER EQUIPS FOR ENHANCING*/
-  public static final String DUEFE__USER_EQUIP__ID = "user_equip_id";
-  public static final String DUEFE__USER_EQUIP__USER_ID = GENERIC__USER_ID;
-  public static final String DUEFE__USER_EQUIP__EQUIP_ID = "equip_id";
-  public static final String DUEFE__USER_EQUIP__LEVEL = "level";
-  public static final String DUEFE__USER_EQUIP__ENHANCEMENT_PERCENT = "enhancement_percent";
-  public static final String DUEFE__IS_FEEDER = "is_feeder";
-  public static final String DUEFE__EQUIP_ENHANCEMENT_ID = "equip_enhancement_id";
+  /*MONSTER 4USER DELETED 4ENHANCING*/
+  public static final String DM4U4E__MONSTER_FOR_USER__ID = "monster_for_user_id";
+  public static final String DM4U4E__MONSTER_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String DM4U4E__MONSTER_FOR_USER__MONSTER_ID = "monster_id";
+  public static final String DM4U4E__MONSTER_FOR_USER__EVOLUTION_LEVEL = "evolution_level";
+  public static final String DM4U4E__MONSTER_FOR_USER__ENHANCEMENT_PERCENT = "enhancement_percent";
+  public static final String DM4U4E__IS_FEEDER = "is_feeder";
+  public static final String DM4U4E__MONSTER_ENHANCING_FOR_USER__ID = "monster_enhancing_id";
 
-  /*EQUIP ENHANCEMENT*/
-  public static final String EQUIP_ENHANCEMENT__ID = GENERIC__ID;
-  public static final String EQUIP_ENHANCEMENT__USER_ID = GENERIC__USER_ID;
-  public static final String EQUIP_ENHANCEMENT__EQUIP_ID = "equip_id";
-  public static final String EQUIP_ENHANCEMENT__EQUIP_LEVEL = "equip_level";
-  public static final String EQUIP_ENHANCEMENT__ENHANCEMENT_PERCENTAGE_BEFORE_ENHANCEMENT = "enhancement_percentage";
-  public static final String EQUIP_ENHANCEMENT__START_TIME_OF_ENHANCEMENT = "start_time_of_enhancement";
+  /*MONSTER ENHANCING FOR USER*/
+  public static final String MONSTER_ENHANCING__ID = GENERIC__ID;
+  public static final String MONSTER_ENHANCING__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_ENHANCING__MONSTER_ID = "monster_id";
+  public static final String MONSTER_ENHANCING__MONSTER_LEVEL = "monster_level";
+  public static final String MONSTER_ENHANCING__ENHANCEMENT_PERCENT_BEFORE_ENHANCING = "enhancement_percent";
+  public static final String MONSTER_ENHANCING__ENHANCING_START_TIME = "enhancing_start_time";
 
-  /*EQUIP ENHANCEMENT HISTORY*/
-  public static final String EQUIP_ENHANCEMENT_HISTORY__EQUIP_ENHANCEMENT_ID = "equip_enhancement_id"; //the user equip id
-  public static final String EQUIP_ENHANCEMENT_HISTORY__USER_ID = GENERIC__USER_ID;
-  public static final String EQUIP_ENHANCEMENT_HISTORY__EQUIP_ID = "equip_id";
-  public static final String EQUIP_ENHANCEMENT_HISTORY__EQUIP_LEVEL = "equip_level";
-  public static final String EQUIP_ENHANCEMENT_HISTORY__CURRENT_ENHANCEMENT_PERCENTAGE = "current_enhancement_percentage";
-  public static final String EQUIP_ENHANCEMENT_HISTORY__PREVIOUS_ENHANCEMENT_PERCENTAGE = "previous_enhancement_percentage";
-  public static final String EQUIP_ENHANCEMENT_HISTORY__START_TIME_OF_ENHANCEMENT = "start_time_of_enhancement";
+  /*MONSTER ENHANCING HISTORY*/
+  public static final String MONSTER_ENHANCING_HISTORY__MONSTER_ENHANCING_ID = "monster_enhancing_id";
+  public static final String MONSTER_ENHANCING_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_ENHANCING_HISTORY__MONSTER_ID = "monster_id";
+  public static final String MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL = "evolution_level";
+  public static final String MONSTER_ENHANCING_HISTORY__CURRENT_ENHANCEMENT_PERCENT = "current_enhancement_percent";
+  public static final String MONSTER_ENHANCING_HISTORY__PREVIOUS_ENHANCEMENT_PERCENT = "previous_enhancement_percent";
+  public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME = "enhancing_start_time";
 
-  /*EQUIP ENHANCEMENT FEEDERS*/
-  public static final String EQUIP_ENHANCEMENT_FEEDERS__ID = GENERIC__ID;
-  public static final String EQUIP_ENHANCEMENT_FEEDERS__EQUIP_ENHANCEMENT_ID = "equip_enhancement_id";
-  public static final String EQUIP_ENHANCEMENT_FEEDERS__EQUIP_ID = "equip_id";
-  public static final String EQUIP_ENHANCEMENT_FEEDERS__EQUIP_LEVEL = "equip_level";
-  public static final String EQUIP_ENHANCEMENT_FEEDERS__ENHANCEMENT_PERCENTAGE_BEFORE_ENHANCEMENT = "enhancement_percentage_before_enhancement";
+  /*MONSTER ENHANCING FEEDER*/
+  public static final String MONSTER_ENHANCING_FEEDER__ID = GENERIC__ID;
+  public static final String MONSTER_ENHANCING_FEEDER__MONSTER_ENHANCING_ID = "monster_enhancing_id";
+  public static final String MONSTER_ENHANCING_FEEDER__MONSTER_ID = "monster_id";
+  public static final String MONSTER_ENHANCING_FEEDER__EVOLUTION_LEVEL = "evolution_level";
+  public static final String MONSTER_ENHANCING_FEEDER__ENHANCEMENT_PERCENTAGE_BEFORE_ENHANCING = "enhancement_percentage_before_enhancing";
 
-  /*EQUIP ENHANCEMENT FEEDERS HISTORY*/
-  public static final String EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ID = "equip_enhancement_feeders_id";
-  public static final String EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_ENHANCEMENT_ID = "equip_enhancement_id";
-  public static final String EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_ID = "equip_id";
-  public static final String EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_LEVEL = "equip_level";
-  public static final String EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ENHANCEMENT_PERCENTAGE = "enhancement_percentage";
+  /*MONSTER ENHANCING FEEDERS HISTORY*/
+  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__ID = "monster_enhancing_feeder_id";
+  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__MONSTER_ENHANCING_ID = "monster_enhancing_id";
+  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__MONSTER_ID = "monster_id";
+  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__EVOLUTION_LEVEL = "evolution_level";
+  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__ENHANCEMENT_PERCENTAGE = "enhancement_percentage";
 
-  /*MONSTER EVOLUTION FOR USER TABLE*/
-  public static final String MONSTER_EVOLUTION__ID = "id";
+  /*MONSTER EVOLVING FOR USER TABLE*/
+  public static final String MONSTER_EVOLVING__ID = "id";
   
-  /*MONSTER EVOLUTION HISTORY FOR USER TABLE*/
-  public static final String MONSTER_EVOLUTION_HISTORY__ID = "monster_evolution_id";
-  public static final String MONSTER_EVOLUTION_HISTORY__USER_ID = GENERIC__USER_ID;
-  public static final String MONSTER_EVOLUTION_HISTORY__MONSTER_ID = "monster_id";
-  public static final String MONSTER_EVOLUTION_HISTORY__GOAL_LEVEL = "goal_level";
-  public static final String MONSTER_EVOLUTION_HISTORY__GUARANTEED = "guaranteed";
-  public static final String MONSTER_EVOLUTION_HISTORY__START_TIME = "start_time";
-  public static final String MONSTER_EVOLUTION_HISTORY__DIAMOND_GUARANTEE_COST = "diamond_guarantee_cost";
-  public static final String MONSTER_EVOLUTION_HISTORY__TIME_OF_SPEEDUP = "time_of_speedup";
-  public static final String MONSTER_EVOLUTION_HISTORY__SUCCESS = "success";
-  public static final String MONSTER_EVOLUTION_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT = "equip_one_enhancement_percent";
-  public static final String MONSTER_EVOLUTION_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT = "equip_two_enhancement_percent";
-  public static final String MONSTER_EVOLUTION_HISTORY__FORGE_SLOT_NUMBER = "forge_slot_number";
+  /*MONSTER EVOLVING HISTORY TABLE*/
+  public static final String MONSTER_EVOLVING_HISTORY__ID = "monster_evolving_id";
+  public static final String MONSTER_EVOLVING_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_EVOLVING_HISTORY__MONSTER_ID = "monster_id";
+  public static final String MONSTER_EVOLVING_HISTORY__GOAL_LEVEL = "goal_level";
+  public static final String MONSTER_EVOLVING_HISTORY__GUARANTEED = "guaranteed";
+  public static final String MONSTER_EVOLVING_HISTORY__START_TIME = "start_time";
+  public static final String MONSTER_EVOLVING_HISTORY__DIAMOND_GUARANTEE_COST = "diamond_guarantee_cost";
+  public static final String MONSTER_EVOLVING_HISTORY__TIME_OF_SPEEDUP = "time_of_speedup";
+  public static final String MONSTER_EVOLVING_HISTORY__SUCCESS = "success";
+  public static final String MONSTER_EVOLVING_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT = "equip_one_enhancement_percent";
+  public static final String MONSTER_EVOLVING_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT = "equip_two_enhancement_percent";
+  public static final String MONSTER_EVOLVING_HISTORY__FORGE_SLOT_NUMBER = "forge_slot_number";
 
-  /*USER AND EQUIP FAIL*///keeping track of user's failed monster evolution attempts
-  public static final String USER_AND_EQUIP_FAIL__USER_ID = GENERIC__USER_ID;
-  public static final String USER_AND_EQUIP_FAIL__EQUIP_ID = "equip_id";
-  public static final String USER_AND_EQUIP_FAIL__NUM_FAILS = "num_fails";
+  /*MONSTER EVOLVING FAIL FOR USER*///keeping track of user's failed monster evolution attempts
+  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID = "monster_id";
+  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS = "num_fails";
 
   /*USER EQUIP TABLE*/
-  public static final String USER_EQUIP__ID = GENERIC__ID;
-  public static final String USER_EQUIP__USER_ID = GENERIC__USER_ID;
-  public static final String USER_EQUIP__EQUIP_ID = "equip_id";
-  public static final String USER_EQUIP__LEVEL = "level";
-  public static final String USER_EQUIP__ENHANCEMENT_PERCENT = "enhancement_percent";
-  public static final String USER_EQUIP__CREATE_TIME = "create_time";
-  public static final String USER_EQUIP__REASON = "reason";
-  public static final String USER_EQUIP__CURRENT_DURABILITY = "current_durability";
+  public static final String MONSTER_FOR_USER__ID = GENERIC__ID;
+  public static final String MONSTER_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_FOR_USER__MONSTER_ID = "monster_id";
+  public static final String MONSTER_FOR_USER__EVOLUTION_LEVEL = "evolution_level";
+  public static final String MONSTER_FOR_USER__ENHANCEMENT_PERCENT = "enhancement_percent";
+  public static final String MONSTER_FOR_USER__CREATE_TIME = "create_time";
+  public static final String MONSTER_FOR_USER__REASON = "reason";
+  public static final String MONSTER_FOR_USER__CURRENT_HEALTH = "current_health";
 
   /*MONSTER REWARD*/
   public static final String MONSTER_REWARD__ID = GENERIC__ID;
@@ -408,13 +405,13 @@ public class DBConstants {
   public static final String USER__ATTACKS_LOST = "attacks_lost";
   public static final String USER__DEFENSES_LOST = "defenses_lost";
 
-  /*FIRST TIME USERS*/
-  public static final String FIRST_TIME_USERS__ID = GENERIC__ID;
-  public static final String FIRST_TIME_USERS__OPEN_UDID = "open_udid";
-  public static final String FIRST_TIME_USERS__UDID = "udid";
-  public static final String FIRST_TIME_USERS__MAC = "mac";
-  public static final String FIRST_TIME_USERS__ADVERTISER_ID = "advertiser_id";
-  public static final String FIRST_TIME_USERS__CREATE_TIME = "create_time";
+  /* USER BEFORE TUTORIAL COMPLETION*/
+  public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;
+  public static final String USER_BEFORE_TUTORIAL_COMPLETION__OPEN_UDID = "open_udid";
+  public static final String USER_BEFORE_TUTORIAL_COMPLETION__UDID = "udid";
+  public static final String USER_BEFORE_TUTORIAL_COMPLETION__MAC = "mac";
+  public static final String USER_BEFORE_TUTORIAL_COMPLETION__ADVERTISER_ID = "advertiser_id";
+  public static final String USER_BEFORE_TUTORIAL_COMPLETION__CREATE_TIME = "create_time";
 
   /*USER CURRENCY HISTORY (FOR GOLD/DIAMONDS AND SILVER/COINS*/
   public static final String USER_CURRENCY_HISTORY__USER_ID = GENERIC__USER_ID;

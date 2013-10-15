@@ -21,7 +21,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, Integer> levelsToRequiredExperienceForLevels;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_LEVELS_REQUIRED_EXPERIENCE;
+  private static final String TABLE_NAME = DBConstants.TABLE_LEVEL_REQUIRED_EXPERIENCE;
 
   public static Map<Integer, Integer> getLevelsToRequiredExperienceForLevels() {
     log.debug("retrieving all exp-requirements-for-level data");

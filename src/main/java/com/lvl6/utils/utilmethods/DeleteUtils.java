@@ -24,7 +24,7 @@ public class DeleteUtils implements DeleteUtil {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.AVAILABLE_REFERRAL_CODES__CODE, referralCode);
 
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_AVAILABLE_REFERRAL_CODES, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_REFERRAL_CODE_AVAILABLE, conditionParams, "and");
     if (numDeleted != 1) {
       return false;
     }
@@ -35,9 +35,9 @@ public class DeleteUtils implements DeleteUtil {
   ////@CacheEvict(value ="specificUserEquip", key="#userEquipId")
   public boolean deleteUserEquip(long userEquipId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_EQUIP__ID, userEquipId);
+    conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
 
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_USER_EQUIP, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_FOR_USER, conditionParams, "and");
     if (numDeleted == 1) {
       return true;
     }
@@ -45,14 +45,14 @@ public class DeleteUtils implements DeleteUtil {
   }
   
   public boolean deleteUserEquips(List<Long> userEquipIds) {
-    String tableName = DBConstants.TABLE_USER_EQUIP;
+    String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
     List<String> questions = new ArrayList<String>();
     for(long userEquipId : userEquipIds) {
       questions.add("?");
     }
     
     String delimiter = ",";
-    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.USER_EQUIP__ID
+    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_FOR_USER__ID
     + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
     
     List values = userEquipIds; //adding generics will throw (type mismatch?) errors
@@ -67,9 +67,9 @@ public class DeleteUtils implements DeleteUtil {
   
   public boolean deleteBlacksmithAttempt(int blacksmithId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.MONSTER_EVOLUTION__ID, blacksmithId);
+    conditionParams.put(DBConstants.MONSTER_EVOLVING__ID, blacksmithId);
 
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_EVOLUTION, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER, conditionParams, "and");
     if (numDeleted == 1) {
       return true;
     }
@@ -145,8 +145,8 @@ public class DeleteUtils implements DeleteUtil {
   
   public boolean deleteUserClanDataRelatedToClanId(int clanId, int numRowsToDelete) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_CLANS__CLAN_ID, clanId);
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_USER_CLANS, conditionParams, "and");
+    conditionParams.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_CLAN_FOR_USER, conditionParams, "and");
     if (numDeleted == numRowsToDelete) {
       return true;
     }
@@ -154,8 +154,8 @@ public class DeleteUtils implements DeleteUtil {
   }
   
   public void deleteUserClansForUserExceptSpecificClan(int userId, int clanId) {
-    String query = "delete from " + DBConstants.TABLE_USER_CLANS + " where " + DBConstants.USER_CLANS__USER_ID + "=? and " +
-        DBConstants.USER_CLANS__CLAN_ID + "!=?";
+    String query = "delete from " + DBConstants.TABLE_CLAN_FOR_USER + " where " + DBConstants.CLAN_FOR_USER__USER_ID + "=? and " +
+        DBConstants.CLAN_FOR_USER__CLAN_ID + "!=?";
     
     List<Object> values = new ArrayList<Object>();
     values.add(userId);
@@ -167,10 +167,10 @@ public class DeleteUtils implements DeleteUtil {
   
   public boolean deleteUserClan(int userId, int clanId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_CLANS__CLAN_ID, clanId);
-    conditionParams.put(DBConstants.USER_CLANS__USER_ID, userId);
+    conditionParams.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
+    conditionParams.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
     
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_USER_CLANS, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_CLAN_FOR_USER, conditionParams, "and");
     if (numDeleted == 1) {
       return true;
     }
@@ -190,14 +190,14 @@ public class DeleteUtils implements DeleteUtil {
   }
   
   public boolean deleteEquipEnhancements(List<Integer> equipEnhancementIds) {
-    String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT;
+    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
     List<String> questions = new ArrayList<String>();
     for(int id : equipEnhancementIds) {
       questions.add("?");
     }
     
     String delimiter = ",";
-    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.EQUIP_ENHANCEMENT__ID 
+    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_ENHANCING__ID 
     + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
     
     List values = equipEnhancementIds; //adding generics will throw (type mismatch?) errors
@@ -212,14 +212,14 @@ public class DeleteUtils implements DeleteUtil {
   
   //since many EquipEnhancementFeeders point to one EquipEnhancement, could just delete by EnhancementId
   public boolean deleteEquipEnhancementFeeders(List<Integer> equipEnhancementFeederIds) {
-    String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS;
+    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FEEDER;
     List<String> questions = new ArrayList<String>();
     for(int id : equipEnhancementFeederIds) {
       questions.add("?");
     }
     
     String delimiter = ",";
-    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.EQUIP_ENHANCEMENT__ID 
+    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_ENHANCING__ID 
     + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
     
     List values = equipEnhancementFeederIds; //adding generics will throw (type mismatch?) errors
@@ -233,7 +233,7 @@ public class DeleteUtils implements DeleteUtil {
   }
 
   public int deleteAllUserQuestsForUser(int userId) {
-    String tableName = DBConstants.TABLE_USER_QUESTS;
+    String tableName = DBConstants.TABLE_QUEST_FOR_USER;
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.USER_QUESTS__USER_ID, userId);

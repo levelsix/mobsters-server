@@ -11,23 +11,23 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.info.LeaderboardEvent;
+import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.UserLeaderboardEvent;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.retrieveutils.rarechange.LeaderboardEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
 import com.lvl6.utils.DBConnection;
 
-public class UserLeaderboardEventRetrieveUtils {
+public class TournamentEventForUserRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_USER_LEADERBOARD_EVENTS;
+  private static final String TABLE_NAME = DBConstants.TABLE_TOURNAMENT_EVENT_FOR_USER;
 
   public static UserLeaderboardEvent getSpecificUserLeaderboardEvent(
       int leaderboardEventId, int userId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_LEADERBOARD_EVENTS__LEADERBOARD_EVENT_ID, leaderboardEventId);
-    paramsToVals.put(DBConstants.USER_LEADERBOARD_EVENTS__USER_ID, userId);
+    paramsToVals.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID, leaderboardEventId);
+    paramsToVals.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -38,7 +38,7 @@ public class UserLeaderboardEventRetrieveUtils {
   
   public static List<UserLeaderboardEvent> getUserLeaderboardEventsForUserId(int userId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_LEADERBOARD_EVENTS__USER_ID, userId);
+    paramsToVals.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
@@ -53,7 +53,7 @@ public class UserLeaderboardEventRetrieveUtils {
     
     long curTime = new Date().getTime();
     for (UserLeaderboardEvent e : events) {
-      LeaderboardEvent l = LeaderboardEventRetrieveUtils.getLeaderboardEventForId(e.getLeaderboardEventId());
+      TournamentEvent l = TournamentEventRetrieveUtils.getTournamentEventForId(e.getLeaderboardEventId());
       if(l.getEndDate().getTime() > curTime) {
         toReturn.add(e);
       }

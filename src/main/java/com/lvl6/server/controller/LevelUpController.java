@@ -85,14 +85,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //        levelBeforeLeveling = user.getLevel();
 //        levelAfterLeveling = newLevel;
 
-        List<City> availCities = MiscMethods.getCitiesAvailableForUserLevel(newLevel);
-        for (City city : availCities) {
-          if (city.getMinLevel() == newLevel) {
-            resBuilder.addCitiesNewlyAvailableToUser(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-            if (newlyUnlockedCityIds == null) newlyUnlockedCityIds = new ArrayList<Integer>();
-            newlyUnlockedCityIds.add(city.getId());
-          }
-        }
+//        List<City> availCities = MiscMethods.getCitiesAvailableForUserLevel(newLevel);
+//        for (City city : availCities) {
+//          if (city.getMinLevel() == newLevel) {
+//            resBuilder.addCitiesNewlyAvailableToUser(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+//            if (newlyUnlockedCityIds == null) newlyUnlockedCityIds = new ArrayList<Integer>();
+//            newlyUnlockedCityIds.add(city.getId());
+//          }
+//        }
 
 //        Map<Integer, Equipment> equipIdToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
 //        if (equipIdToEquips != null) {
@@ -140,13 +140,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (!user.updateLevel(1)) {
       log.error("problem in changing the user's level");
     }
-    if (newlyUnlockedCityIds != null && newlyUnlockedCityIds.size() > 0) {
-      for (Integer cityId : newlyUnlockedCityIds) {
-        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), cityId, 1)) {
-          log.error("problem with unlocking city for user");
-        }
-      }
-    }
+//    if (newlyUnlockedCityIds != null && newlyUnlockedCityIds.size() > 0) {
+//      for (Integer cityId : newlyUnlockedCityIds) {
+//        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), cityId, 1)) {
+//          log.error("problem with unlocking city for user");
+//        }
+//      }
+//    }
 //    if (!user.updateAbsoluteRestoreEnergyStaminaRelativeUpdateSkillPoints(ControllerConstants.LEVEL_UP__SKILL_POINTS_GAINED, new Timestamp(new Date().getTime()))) {
 //      log.error("problem with restoring energy and stamina and awarding skill points");
 //    }

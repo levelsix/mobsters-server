@@ -30,7 +30,7 @@ import com.lvl6.utils.QuestGraph;
   private static Map<Integer, Quest> questIdsToQuests;
   private static QuestGraph questGraph;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_QUESTS;
+  private static final String TABLE_NAME = DBConstants.TABLE_QUEST;
 
   public static Map<Integer, Quest> getQuestIdsToQuests() {
     log.debug("retrieving all quest data");

@@ -56,13 +56,13 @@ public class InsertUtils implements InsertUtil{
 	public boolean insertUserCityExpansionData(int userId, Timestamp expandStartTime, 
 			int xPosition, int yPosition, boolean isExpanding) {
 		Map <String, Object> insertParams = new HashMap<String, Object>();
-		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__USER_ID, userId);
-		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__EXPAND_START_TIME, expandStartTime);
-		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__IS_EXPANDING, isExpanding);
-		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__X_POSITION, xPosition);
-		insertParams.put(DBConstants.USER_CITY_EXPANSION_DATA__Y_POSITION, yPosition);
+		insertParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__USER_ID, userId);
+		insertParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__EXPAND_START_TIME, expandStartTime);
+		insertParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__IS_EXPANDING, isExpanding);
+		insertParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__X_POSITION, xPosition);
+		insertParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__Y_POSITION, yPosition);
 
-		int numUpdated = DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_USER_CITY_EXPANSION_DATA, insertParams);
+		int numUpdated = DBConnection.get().insertIntoTableBasic(DBConstants.TABLE_EXPANSION_PURCHASE_FOR_USER, insertParams);
 		if (numUpdated >= 1) {
 			return true;
 		}
@@ -76,7 +76,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER_SESSIONS__LOGOUT_TIME, logoutTime);
 
     int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_USER_SESSIONS, insertParams);
+        DBConstants.TABLE_USER_SESSION, insertParams);
     if (numInserted == 1) {
       return true;
     }
@@ -85,31 +85,31 @@ public class InsertUtils implements InsertUtil{
 
   public boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__ID, ba.getId());
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__USER_ID, ba.getUserId());
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__MONSTER_ID, ba.getEquipId());
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__GOAL_LEVEL, ba.getGoalLevel());
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__GUARANTEED, ba.isGuaranteed());
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__START_TIME, ba.getStartTime());
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__ID, ba.getId());
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_ID, ba.getUserId());
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__MONSTER_ID, ba.getEquipId());
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__GOAL_LEVEL, ba.getGoalLevel());
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__GUARANTEED, ba.isGuaranteed());
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__START_TIME, ba.getStartTime());
 
     if (ba.getDiamondGuaranteeCost() > 0) {
-      insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__DIAMOND_GUARANTEE_COST, ba.getDiamondGuaranteeCost());
+      insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__DIAMOND_GUARANTEE_COST, ba.getDiamondGuaranteeCost());
     }
 
     if (ba.getTimeOfSpeedup() != null) {
-      insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__TIME_OF_SPEEDUP, ba.getTimeOfSpeedup());
+      insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__TIME_OF_SPEEDUP, ba.getTimeOfSpeedup());
     }
 
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__SUCCESS, successfulForge);
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__SUCCESS, successfulForge);
 
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT,
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT,
         ba.getEquipOneEnhancementPercent());
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT,
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT,
         ba.getEquipTwoEnhancementPercent());
-    insertParams.put(DBConstants.MONSTER_EVOLUTION_HISTORY__FORGE_SLOT_NUMBER, ba.getForgeSlotNumber());
+    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__FORGE_SLOT_NUMBER, ba.getForgeSlotNumber());
     
     int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_MONSTER_EVOLUTION_HISTORY, insertParams);
+        DBConstants.TABLE_MONSTER_EVOLVING_HISTORY, insertParams);
     if (numInserted == 1) {
       return true;
     }
@@ -139,29 +139,29 @@ public class InsertUtils implements InsertUtil{
   public int insertUserEquip(int userId, int equipId, int level,
 	  int enhancementPercentage, Timestamp now, String reason) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.USER_EQUIP__USER_ID, userId);
-    insertParams.put(DBConstants.USER_EQUIP__EQUIP_ID, equipId);
-    insertParams.put(DBConstants.USER_EQUIP__LEVEL, level);
-    insertParams.put(DBConstants.USER_EQUIP__ENHANCEMENT_PERCENT, enhancementPercentage);
-    insertParams.put(DBConstants.USER_EQUIP__CREATE_TIME, now);
-    insertParams.put(DBConstants.USER_EQUIP__REASON, reason);
+    insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID, userId);
+    insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, equipId);
+    insertParams.put(DBConstants.MONSTER_FOR_USER__EVOLUTION_LEVEL, level);
+    insertParams.put(DBConstants.MONSTER_FOR_USER__ENHANCEMENT_PERCENT, enhancementPercentage);
+    insertParams.put(DBConstants.MONSTER_FOR_USER__CREATE_TIME, now);
+    insertParams.put(DBConstants.MONSTER_FOR_USER__REASON, reason);
 
     int userEquipId = DBConnection.get().insertIntoTableBasicReturnId(
-        DBConstants.TABLE_USER_EQUIP, insertParams);
+        DBConstants.TABLE_MONSTER_FOR_USER, insertParams);
     return userEquipId;
   }
   
   public int insertEquipEnhancement(int userId, int equipId, int equipLevel,
       int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement) {
-    String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT;
+    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
     Map<String, Object> insertParams = new HashMap<String, Object>();
     
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT__USER_ID, userId);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT__EQUIP_ID, equipId);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT__EQUIP_LEVEL, equipLevel);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT__ENHANCEMENT_PERCENTAGE_BEFORE_ENHANCEMENT,
+    insertParams.put(DBConstants.MONSTER_ENHANCING__USER_ID, userId);
+    insertParams.put(DBConstants.MONSTER_ENHANCING__MONSTER_ID, equipId);
+    insertParams.put(DBConstants.MONSTER_ENHANCING__MONSTER_LEVEL, equipLevel);
+    insertParams.put(DBConstants.MONSTER_ENHANCING__ENHANCEMENT_PERCENT_BEFORE_ENHANCING,
         enhancementPercentageBeforeEnhancement);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT__START_TIME_OF_ENHANCEMENT, startTimeOfEnhancement);
+    insertParams.put(DBConstants.MONSTER_ENHANCING__ENHANCING_START_TIME, startTimeOfEnhancement);
     
     int equipEnhancementId = DBConnection.get().insertIntoTableBasicReturnId(tableName, insertParams);
     return equipEnhancementId;
@@ -171,18 +171,18 @@ public class InsertUtils implements InsertUtil{
       int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
       Timestamp startTimeOfEnhancement) {
 
-    String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT_HISTORY;
+    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_HISTORY;
     Map<String, Object> insertParams = new HashMap<String, Object>();
     
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__EQUIP_ENHANCEMENT_ID, equipEnhancementId);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__USER_ID, userId);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__EQUIP_ID, equipId);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__EQUIP_LEVEL, equipLevel);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__CURRENT_ENHANCEMENT_PERCENTAGE, 
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MONSTER_ENHANCING_ID, equipEnhancementId);
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__USER_ID, userId);
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MONSTER_ID, equipId);
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL, equipLevel);
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__CURRENT_ENHANCEMENT_PERCENT, 
         currentEnhancementPercentage);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__PREVIOUS_ENHANCEMENT_PERCENTAGE, 
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__PREVIOUS_ENHANCEMENT_PERCENT, 
         previousEnhancementPercentage);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__START_TIME_OF_ENHANCEMENT,
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME,
         startTimeOfEnhancement);
 
     
@@ -215,14 +215,14 @@ public class InsertUtils implements InsertUtil{
   public int insertIntoEquipEnhancementFeedersHistory(int id, int equipEnhancementId,
       int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement) {
 
-    String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY;
+    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FEEDER_HISTORY;
     Map<String, Object> insertParams = new HashMap<String, Object>();
     
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ID, id);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__EQUIP_ENHANCEMENT_ID, equipEnhancementId);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__EQUIP_ID, equipId);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_HISTORY__EQUIP_LEVEL, equipLevel);
-    insertParams.put(DBConstants.EQUIP_ENHANCEMENT_FEEDERS_HISTORY__ENHANCEMENT_PERCENTAGE,
+    insertParams.put(DBConstants.MONSTER_ENHANCING_FEEDER_HISTORY__ID, id);
+    insertParams.put(DBConstants.MONSTER_ENHANCING_FEEDER_HISTORY__MONSTER_ENHANCING_ID, equipEnhancementId);
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MONSTER_ID, equipId);
+    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL, equipLevel);
+    insertParams.put(DBConstants.MONSTER_ENHANCING_FEEDER_HISTORY__ENHANCEMENT_PERCENTAGE,
         enhancementPercentageBeforeEnhancement);
     
     int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
@@ -333,7 +333,7 @@ public class InsertUtils implements InsertUtil{
         hasNoRequiredDefeatTypeJobs);
 
     int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_USER_QUESTS, insertParams);
+        DBConstants.TABLE_QUEST_FOR_USER, insertParams);
     if (numInserted == 1) {
       return true;
     }
@@ -504,7 +504,7 @@ public class InsertUtils implements InsertUtil{
         new Timestamp(new Date().getTime()));
 
     int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_REFERRALS, insertParams);
+        DBConstants.TABLE_REFERRAL, insertParams);
     if (numInserted == 1) {
       return true;
     }
@@ -561,13 +561,13 @@ public class InsertUtils implements InsertUtil{
   @Override
   public boolean insertUserClan(int userId, int clanId, UserClanStatus status, Timestamp requestTime) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.USER_CLANS__USER_ID, userId);
-    insertParams.put(DBConstants.USER_CLANS__CLAN_ID, clanId);
-    insertParams.put(DBConstants.USER_CLANS__STATUS, status.getNumber());
-    insertParams.put(DBConstants.USER_CLANS__REQUEST_TIME, requestTime);
+    insertParams.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
+    insertParams.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
+    insertParams.put(DBConstants.CLAN_FOR_USER__STATUS, status.getNumber());
+    insertParams.put(DBConstants.CLAN_FOR_USER__REQUEST_TIME, requestTime);
 
     int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_USER_CLANS, insertParams);
+        DBConstants.TABLE_CLAN_FOR_USER, insertParams);
     if (numInserted == 1) {
       return true;
     }
@@ -578,12 +578,12 @@ public class InsertUtils implements InsertUtil{
   public int insertClanChatPost(int userId, int clanId, String content,
       Timestamp timeOfPost) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.CLAN_CHAT_POSTS__POSTER_ID, userId);
-    insertParams.put(DBConstants.CLAN_CHAT_POSTS__CLAN_ID,
+    insertParams.put(DBConstants.CLAN_CHAT_POST__POSTER_ID, userId);
+    insertParams.put(DBConstants.CLAN_CHAT_POST__CLAN_ID,
         clanId);
-    insertParams.put(DBConstants.CLAN_CHAT_POSTS__TIME_OF_POST,
+    insertParams.put(DBConstants.CLAN_CHAT_POST__TIME_OF_POST,
         timeOfPost);
-    insertParams.put(DBConstants.CLAN_CHAT_POSTS__CONTENT, content);
+    insertParams.put(DBConstants.CLAN_CHAT_POST__CONTENT, content);
 
     int wallPostId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_CLAN_CHAT_POST, insertParams);
@@ -592,23 +592,23 @@ public class InsertUtils implements InsertUtil{
   
   public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, 
       int battlesWonChange, int battlesLostChange, int battlesFledChange) {
-    String tablename = DBConstants.TABLE_USER_LEADERBOARD_EVENTS;
+    String tablename = DBConstants.TABLE_TOURNAMENT_EVENT_FOR_USER;
     Map<String, Object> insertParams = new HashMap<String, Object>();
     Map<String, Object> relativeUpdates = new HashMap<String, Object>();
     Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
     
-    insertParams.put(DBConstants.USER_LEADERBOARD_EVENTS__LEADERBOARD_EVENT_ID, leaderboardEventId);
-    insertParams.put(DBConstants.USER_LEADERBOARD_EVENTS__USER_ID, userId);
+    insertParams.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID, leaderboardEventId);
+    insertParams.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
     //as long as there is an existing row, setting these three values doesn't matter
     //this is here just for the initial insert
-    insertParams.put(DBConstants.USER_LEADERBOARD_EVENTS__BATTLES_WON, battlesWonChange);
-    insertParams.put(DBConstants.USER_LEADERBOARD_EVENTS__BATTLES_LOST, battlesLostChange);
-    insertParams.put(DBConstants.USER_LEADERBOARD_EVENTS__BATTLES_FLED, battlesFledChange);
+    insertParams.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__BATTLES_WON, battlesWonChange);
+    insertParams.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__BATTLES_LOST, battlesLostChange);
+    insertParams.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__BATTLES_FLED, battlesFledChange);
     
     //this is for the case when there is already an existing row
-    relativeUpdates.put(DBConstants.USER_LEADERBOARD_EVENTS__BATTLES_WON, battlesWonChange);
-    relativeUpdates.put(DBConstants.USER_LEADERBOARD_EVENTS__BATTLES_LOST, battlesLostChange);
-    relativeUpdates.put(DBConstants.USER_LEADERBOARD_EVENTS__BATTLES_FLED, battlesFledChange);
+    relativeUpdates.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__BATTLES_WON, battlesWonChange);
+    relativeUpdates.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__BATTLES_LOST, battlesLostChange);
+    relativeUpdates.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__BATTLES_FLED, battlesFledChange);
     DBConnection.get().insertOnDuplicateKeyUpdate(tablename, insertParams, relativeUpdates, absoluteUpdates);
     return 0;
   }
@@ -688,14 +688,14 @@ public class InsertUtils implements InsertUtil{
   
   public int insertIntoFirstTimeUsers(String openUdid, String udid, String mac, String advertiserId,
       Timestamp now) {
-    String tableName = DBConstants.TABLE_FIRST_TIME_USERS;
+    String tableName = DBConstants.TABLE_USER_BEFORE_TUTORIAL_COMPLETION;
     Map<String, Object> insertParams = new HashMap<String, Object>();
     
-    insertParams.put(DBConstants.FIRST_TIME_USERS__OPEN_UDID, openUdid);
-    insertParams.put(DBConstants.FIRST_TIME_USERS__UDID, udid);
-    insertParams.put(DBConstants.FIRST_TIME_USERS__MAC, mac);
-    insertParams.put(DBConstants.FIRST_TIME_USERS__ADVERTISER_ID, advertiserId);
-    insertParams.put(DBConstants.FIRST_TIME_USERS__CREATE_TIME, now);
+    insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__OPEN_UDID, openUdid);
+    insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__UDID, udid);
+    insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__MAC, mac);
+    insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__ADVERTISER_ID, advertiserId);
+    insertParams.put(DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__CREATE_TIME, now);
     
     int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
     
@@ -710,22 +710,22 @@ public class InsertUtils implements InsertUtil{
     
     Map<String, Object> insertParams = new HashMap<String, Object>();
     
-    insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__USER_ID, userId);
-    insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__BOOSTER_PACK_ID, boosterPackId);
-    insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__NUM_BOUGHT, numBought);
-    insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__TIME_OF_PURCHASE, timeOfPurchase);
-    insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__RARITY_ONE_QUANTITY, rarityOneQuantity);
-    insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__RARITY_TWO_QUANTITY, rarityTwoQuantity);
-    insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__RARITY_THREE_QUANTITY, rarityThreeQuantity);
-    insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK, excludeFromLimitCheck);
+    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__USER_ID, userId);
+    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__BOOSTER_PACK_ID, boosterPackId);
+    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__NUM_BOUGHT, numBought);
+    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__TIME_OF_PURCHASE, timeOfPurchase);
+    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__RARITY_ONE_QUANTITY, rarityOneQuantity);
+    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__RARITY_TWO_QUANTITY, rarityTwoQuantity);
+    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__RARITY_THREE_QUANTITY, rarityThreeQuantity);
+    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK, excludeFromLimitCheck);
     
-    if (null != equipIds && !equipIds.isEmpty()) {
-      String ids = StringUtils.csvIntList(equipIds);
-      insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__EQUIP_IDS, ids);
-    }
+//    if (null != equipIds && !equipIds.isEmpty()) {
+//      String ids = StringUtils.csvIntList(equipIds);
+//      insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__EQUIP_IDS, ids);
+//    }
     if (null != userEquipIds && !userEquipIds.isEmpty()) {
       String ids = StringUtils.csvLongList(userEquipIds);
-      insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__USER_EQUIP_IDS, ids);
+      insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__MONSTER_FOR_USER_IDS, ids);
     }
     
     int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
@@ -741,13 +741,13 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.PRIVATE_CHAT_POSTS__TIME_OF_POST, timeOfPost);
 
     int wallPostId = DBConnection.get().insertIntoTableBasicReturnId(
-        DBConstants.TABLE_PRIVATE_CHAT_POSTS, insertParams);
+        DBConstants.TABLE_USER_PRIVATE_CHAT_POST, insertParams);
     return wallPostId;
   }
   
   public List<Integer> insertIntoPrivateChatPosts(List<Integer> posterIds, List<Integer> recipientIds,
       List<String> contents, List<Date> timeOfPosts) {
-    String tableName = DBConstants.TABLE_PRIVATE_CHAT_POSTS;
+    String tableName = DBConstants.TABLE_USER_PRIVATE_CHAT_POST;
     List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
     for(int i = 0; i < posterIds.size(); i++){
       int posterId = posterIds.get(i);

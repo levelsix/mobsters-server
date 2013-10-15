@@ -16,11 +16,11 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventProto.ExpansionWaitCompleteRequestProto;
-import com.lvl6.proto.EventProto.ExpansionWaitCompleteResponseProto;
-import com.lvl6.proto.EventProto.ExpansionWaitCompleteResponseProto.Builder;
-import com.lvl6.proto.EventProto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus;
-import com.lvl6.proto.InfoProto.MinimumUserProto;
+import com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteRequestProto;
+import com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto;
+import com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto.Builder;
+import com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteResponseProto.ExpansionWaitCompleteStatus;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.UserCityExpansionDataRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -162,24 +162,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //	}
 	
 	private int calculateMinutesForCurrentExpansion(int userId, UserCityExpansionData userCityExpansionData) {
-		int numCompletedExpansionsSoFar = UserCityExpansionDataRetrieveUtils.numberOfUserExpansions(userId);
-		return (ControllerConstants.EXPANSION_WAIT_COMPLETE__HOUR_CONSTANT + 
-				ControllerConstants.EXPANSION_WAIT_COMPLETE__HOUR_INCREMENT_BASE*(numCompletedExpansionsSoFar + 1))*60;
-	}
-
-	private int calculateExpansionSpeedupCost(int userId, UserCityExpansionData userCityExpansionData) {
-		return calculateMinutesForCurrentExpansion(userId, userCityExpansionData)/ControllerConstants.EXPANSION_WAIT_COMPLETE__BASE_MINUTES_TO_ONE_GOLD;
+//		int numCompletedExpansionsSoFar = UserCityExpansionDataRetrieveUtils.numberOfUserExpansions(userId);
+//		return (ControllerConstants.EXPANSION_WAIT_COMPLETE__HOUR_CONSTANT + 
+//				ControllerConstants.EXPANSION_WAIT_COMPLETE__HOUR_INCREMENT_BASE*(numCompletedExpansionsSoFar + 1))*60;
+		return 123456789;
 	}
 
 	private int expansionDiamondCost(int userId, UserCityExpansionData userCityExpansionData, Timestamp clientTime) {
-		long timePassed = (clientTime.getTime() - userCityExpansionData.getExpandStartTime().getTime())/1000;
-		long timeRemaining = calculateMinutesForCurrentExpansion(userId, userCityExpansionData)*60;
-		double percentRemaining = timeRemaining/(double)(timeRemaining+timePassed);
-		double speedUpConstant = 1+ControllerConstants.EXPANSION_LATE_SPEEDUP_CONSTANT*(1-percentRemaining);
-
-		int diamondCost = (int)Math.ceil(speedUpConstant*percentRemaining*calculateExpansionSpeedupCost(userId, userCityExpansionData));
-		return diamondCost;
-
+//		long timePassed = (clientTime.getTime() - userCityExpansionData.getExpandStartTime().getTime())/1000;
+//		long timeRemaining = calculateMinutesForCurrentExpansion(userId, userCityExpansionData)*60;
+//		double percentRemaining = timeRemaining/(double)(timeRemaining+timePassed);
+//		double speedUpConstant = 1+ControllerConstants.EXPANSION_LATE_SPEEDUP_CONSTANT*(1-percentRemaining);
+//
+//		int diamondCost = (int)Math.ceil(speedUpConstant*percentRemaining*calculateExpansionSpeedupCost(userId, userCityExpansionData));
+//		return diamondCost;
+		return 123456789;
 	}
 
 	private void writeToUserCurrencyHistory(User aUser, Timestamp date, Map<String, Integer> money,

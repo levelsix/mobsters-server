@@ -3,7 +3,7 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-public class LeaderboardEvent implements Serializable {
+public class TournamentEvent implements Serializable {
   private static final long serialVersionUID = -3130246899148578214L;
   private int id;
   private Date startDate;
@@ -11,7 +11,7 @@ public class LeaderboardEvent implements Serializable {
   private String eventName;
   private boolean rewardsGivenOut;
   
-  public LeaderboardEvent(int id, Date startDate, Date endDate, String eventName, boolean rewardsGivenOut) {
+  public TournamentEvent(int id, Date startDate, Date endDate, String eventName, boolean rewardsGivenOut) {
     super();
     this.id = id;
     this.startDate = startDate;

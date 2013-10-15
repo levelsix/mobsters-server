@@ -24,7 +24,7 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, List<Task>> cityIdsToTasks;
   private static Map<Integer, Task> taskIdsToTasks;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_TASKS;
+  private static final String TABLE_NAME = DBConstants.TABLE_TASK;
 
   public static Map<Integer, Task> getTaskIdsToTasks() {
     log.debug("retrieving all tasks data map");

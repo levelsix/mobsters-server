@@ -27,7 +27,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, List<CityElement>> cityIdToCityElements;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_NEUTRAL_CITY_ELEMENTS;
+  private static final String TABLE_NAME = DBConstants.TABLE_CITY_ELEMENT;
 
   public static Map<Integer, List<CityElement>> getCityIdToCityElements() {
     log.debug("retrieving all city id to neutral city elements data");

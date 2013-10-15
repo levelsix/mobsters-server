@@ -172,10 +172,10 @@ public class PrivateChatPostController extends EventController {
 			return false;
 		}
 		// maybe use different controller constants...
-		if (content.length() >= ControllerConstants.POST_ON_PLAYER_WALL__MAX_CHAR_LENGTH) {
+		if (content.length() >= ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING) {
 			resBuilder.setStatus(PrivateChatPostStatus.POST_TOO_LARGE);
 			log.error("wall post is too long. content length is " + content.length() + ", max post length="
-					+ ControllerConstants.POST_ON_PLAYER_WALL__MAX_CHAR_LENGTH + ", posterId " + posterId
+					+ ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING + ", posterId " + posterId
 					+ " tries to post on wall with owner " + recipientId);
 			return false;
 		}

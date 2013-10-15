@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, BuildStructJob> buildStructJobIdsToBuildStructJobs;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_JOBS_BUILD_STRUCT;
+  private static final String TABLE_NAME = DBConstants.TABLE_JOB_KILL_MONSTER;
 
   public static Map<Integer, BuildStructJob> getBuildStructJobIdsToBuildStructJobs() {
     log.debug("retrieving all build struct job data");

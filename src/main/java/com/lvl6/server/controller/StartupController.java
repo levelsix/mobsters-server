@@ -36,12 +36,9 @@ import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.RetrieveStaticDataResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
-import com.lvl6.info.City;
-import com.lvl6.info.CityExpansionCost;
 import com.lvl6.info.Clan;
-import com.lvl6.info.ClanChatPost;
+import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
-import com.lvl6.info.PlayerWallPost;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
@@ -65,14 +62,12 @@ import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.Retri
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.FullUserProto;
-import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityExpansionCostRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
@@ -81,7 +76,6 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -188,7 +182,7 @@ public class StartupController extends EventController {
         try {
           startupStatus = StartupStatus.USER_IN_DB;
           log.info("No major update... getting user info");
-          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
+//          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
           setCitiesAndUserCityInfos(resBuilder, user);
           setInProgressAndAvailableQuests(resBuilder, user);
           setUserEquipsAndEquips(resBuilder, user);
@@ -202,16 +196,10 @@ public class StartupController extends EventController {
           setChatMessages(resBuilder, user);
           setBoosterPurchases(resBuilder);
           setGoldSales(resBuilder, user);
-          // if(server.lockClanTowersTable()) {
-          setClanTowers(resBuilder);
-          // }
-          //resBuilder.addAllBossEvents(MiscMethods.currentBossEvents());
 
-          setLeaderboardEventStuff(resBuilder);
+//          setLeaderboardEventStuff(resBuilder);
           setAllies(resBuilder, user);
           setPrivateChatPosts(resBuilder, user);
-          setCityGems(resBuilder);
-          setLivingBossesForUser(resBuilder, user);
 //          setAllBosses(resBuilder, user.getType());
           setExpansionCosts(resBuilder);
 
@@ -288,27 +276,14 @@ public class StartupController extends EventController {
   }
   
   private void setExpansionCosts(Builder resBuilder) {
-  	Map<Integer, CityExpansionCost> expansionCosts =
-  			CityExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
-  	for (CityExpansionCost cec : expansionCosts.values()) {
+  	Map<Integer, ExpansionCost> expansionCosts =
+  			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
+  	for (ExpansionCost cec : expansionCosts.values()) {
   		CityExpansionCostProto cecp = CreateInfoProtoUtils
   				.createCityExpansionCostProtoFromCityExpansionCost(cec);
   		resBuilder.addExpansionCosts(cecp);
   	}
   }
-
-//  private void setLivingBossesForUser(Builder resBuilder, User aUser) {
-//    int userId = aUser.getId();
-//    boolean livingBossesOnly = true;
-//    List<UserBoss> userBosses = UserBossRetrieveUtils
-//        .getUserBossesForUserId(userId, livingBossesOnly);
-//
-//    for (UserBoss ub : userBosses) {
-//      FullUserBossProto ubp = CreateInfoProtoUtils
-//          .createFullUserBossProtoFromUserBoss(ub);
-//      resBuilder.addLivingBosses(ubp);
-//    }
-//  }
 
 //  private void setAllBosses(Builder resBuilder, UserType type) {
 //    Map<Integer, Monster> bossIdsToBosses = 
@@ -473,9 +448,9 @@ public class StartupController extends EventController {
   }
 
   // retrieve's the active leaderboard event prizes and rewards for the events
-  private void setLeaderboardEventStuff(StartupResponseProto.Builder resBuilder) {
-    resBuilder.addAllLeaderboardEvents(MiscMethods.currentLeaderboardEventProtos());
-  }
+//  private void setLeaderboardEventStuff(StartupResponseProto.Builder resBuilder) {
+//    resBuilder.addAllLeaderboardEvents(MiscMethods.currentTournamentEventProtos());
+//  }
 
   private void sendOfferChartInstall(Date installTime, String advertiserId) {
     String clientId = "15";
@@ -557,54 +532,54 @@ public class StartupController extends EventController {
   }
 
   private void setChatMessages(StartupResponseProto.Builder resBuilder, User user) {
-    if (user.getClanId() > 0) {
-      List<ClanChatPost> activeClanChatPosts;
-      activeClanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
-          ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
-
-      if (activeClanChatPosts != null) {
-        if (activeClanChatPosts != null && activeClanChatPosts.size() > 0) {
-          List<Integer> userIds = new ArrayList<Integer>();
-          for (ClanChatPost p : activeClanChatPosts) {
-            userIds.add(p.getPosterId());
-          }
-          Map<Integer, User> usersByIds = null;
-          if (userIds.size() > 0) {
-            usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-            for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
-              ClanChatPost pwp = activeClanChatPosts.get(i);
-              resBuilder.addClanChats(CreateInfoProtoUtils
-                  .createGroupChatMessageProtoFromClanChatPost(pwp,
-                      usersByIds.get(pwp.getPosterId())));
-            }
-          }
-        }
-      }
-    }
-
-    Iterator<GroupChatMessageProto> it = chatMessages.iterator();
-    List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
-    while (it.hasNext()) {
-      globalChats.add(it.next());
-    }
-
-    Comparator<GroupChatMessageProto> c = new Comparator<GroupChatMessageProto>() {
-      @Override
-      public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
-        if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
-          return -1;
-        } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-    };
-    Collections.sort(globalChats, c);
-    // Need to add them in reverse order
-    for (int i = 0; i < globalChats.size(); i++) {
-      resBuilder.addGlobalChats(globalChats.get(i));
-    }
+//    if (user.getClanId() > 0) {
+//      List<ClanChatPost> activeClanChatPosts;
+//      activeClanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
+//          ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
+//
+//      if (activeClanChatPosts != null) {
+//        if (activeClanChatPosts != null && activeClanChatPosts.size() > 0) {
+//          List<Integer> userIds = new ArrayList<Integer>();
+//          for (ClanChatPost p : activeClanChatPosts) {
+//            userIds.add(p.getPosterId());
+//          }
+//          Map<Integer, User> usersByIds = null;
+//          if (userIds.size() > 0) {
+//            usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+//            for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
+//              ClanChatPost pwp = activeClanChatPosts.get(i);
+//              resBuilder.addClanChats(CreateInfoProtoUtils
+//                  .createGroupChatMessageProtoFromClanChatPost(pwp,
+//                      usersByIds.get(pwp.getPosterId())));
+//            }
+//          }
+//        }
+//      }
+//    }
+//
+//    Iterator<GroupChatMessageProto> it = chatMessages.iterator();
+//    List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
+//    while (it.hasNext()) {
+//      globalChats.add(it.next());
+//    }
+//
+//    Comparator<GroupChatMessageProto> c = new Comparator<GroupChatMessageProto>() {
+//      @Override
+//      public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
+//        if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
+//          return -1;
+//        } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
+//          return 1;
+//        } else {
+//          return 0;
+//        }
+//      }
+//    };
+//    Collections.sort(globalChats, c);
+//    // Need to add them in reverse order
+//    for (int i = 0; i < globalChats.size(); i++) {
+//      resBuilder.addGlobalChats(globalChats.get(i));
+//    }
   }
 
   private void setBoosterPurchases(StartupResponseProto.Builder resBuilder) {
@@ -715,9 +690,6 @@ public class StartupController extends EventController {
       for (int i = 0; i < ControllerConstants.STARTUP__NOTICES_TO_PLAYERS.length; i++) {
         resBuilder.addNoticesToPlayers(ControllerConstants.STARTUP__NOTICES_TO_PLAYERS[i]);
       }
-    }
-    if (user.getLastLogout() == null && Globals.IDDICTION_ON()) {
-      resBuilder.addNoticesToPlayers(ControllerConstants.IDDICTION__NOTICE);
     }
   }
 
@@ -1072,29 +1044,29 @@ public class StartupController extends EventController {
 
   private void writeToUserDailyBonusRewardHistory(User aUser, Map<String, Integer> rewardForUser,
       int nthConsecutiveDay, Timestamp now, int equipIdRewarded) {
-    int userId = aUser.getId();
-    int currencyRewarded = ControllerConstants.NOT_SET;
-    boolean isCoins = false;
-    int boosterPackIdRewarded = ControllerConstants.NOT_SET;
-
-    String boosterPackId = MiscMethods.boosterPackId;
-    String silver = MiscMethods.silver;
-    String gold = MiscMethods.gold;
-    if (rewardForUser.containsKey(boosterPackId)) {
-      boosterPackIdRewarded = rewardForUser.get(boosterPackId);
-    }
-    if (rewardForUser.containsKey(silver)) {
-      currencyRewarded = rewardForUser.get(silver);
-      isCoins = true;
-    }
-    if (rewardForUser.containsKey(gold)) {
-      currencyRewarded = rewardForUser.get(gold);
-    }
-    int numInserted = InsertUtils.get().insertIntoUserDailyRewardHistory(userId, currencyRewarded,
-        isCoins, boosterPackIdRewarded, equipIdRewarded, nthConsecutiveDay, now);
-    if (1 != numInserted) {
-      log.error("unexpected error: could not record that user got a reward for this day: " + now);
-    }
+//    int userId = aUser.getId();
+//    int currencyRewarded = ControllerConstants.NOT_SET;
+//    boolean isCoins = false;
+//    int boosterPackIdRewarded = ControllerConstants.NOT_SET;
+//
+//    String boosterPackId = MiscMethods.boosterPackId;
+//    String silver = MiscMethods.silver;
+//    String gold = MiscMethods.gold;
+//    if (rewardForUser.containsKey(boosterPackId)) {
+//      boosterPackIdRewarded = rewardForUser.get(boosterPackId);
+//    }
+//    if (rewardForUser.containsKey(silver)) {
+//      currencyRewarded = rewardForUser.get(silver);
+//      isCoins = true;
+//    }
+//    if (rewardForUser.containsKey(gold)) {
+//      currencyRewarded = rewardForUser.get(gold);
+//    }
+//    int numInserted = InsertUtils.get().insertIntoUserDailyRewardHistory(userId, currencyRewarded,
+//        isCoins, boosterPackIdRewarded, equipIdRewarded, nthConsecutiveDay, now);
+//    if (1 != numInserted) {
+//      log.error("unexpected error: could not record that user got a reward for this day: " + now);
+//    }
   }
 
 //  private void setDailyBonusStuff(Builder resBuilder, User aUser, boolean rewardUser,
@@ -1197,69 +1169,47 @@ public class StartupController extends EventController {
 //        userIds.add(mt.getBuyerId());
 //      }
 //    }
-
-    Timestamp earliestBattleNotificationTimeToRetrieve = new Timestamp(new Date().getTime()
-        - ControllerConstants.STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND * 3600000);
-
-    List<PlayerWallPost> wallPosts = PlayerWallPostRetrieveUtils
-        .getMostRecentPlayerWallPostsForWallOwner(
-            ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getId());
-    if (wallPosts != null && wallPosts.size() > 0) {
-      for (PlayerWallPost p : wallPosts) {
-        userIds.add(p.getPosterId());
-      }
-    }
-
-    List<ClanChatPost> clanChatPosts = null;
-    if (user.getClanId() > 0) {
-      clanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
-          ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
-      for (ClanChatPost p : clanChatPosts) {
-        userIds.add(p.getPosterId());
-      }
-    }
-
-    Map<Integer, User> usersByIds = null;
-    if (userIds.size() > 0) {
-      usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-    }
-
-//    if (marketplaceTransactions != null && marketplaceTransactions.size() > 0) {
-//      for (MarketplaceTransaction mt : marketplaceTransactions) {
-//        resBuilder.addMarketplacePurchaseNotifications(CreateInfoProtoUtils
-//            .createMarketplacePostPurchasedNotificationProtoFromMarketplaceTransaction(mt,
-//                usersByIds.get(mt.getBuyerId()), user));
+//
+//    Timestamp earliestBattleNotificationTimeToRetrieve = new Timestamp(new Date().getTime()
+//        - ControllerConstants.STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND * 3600000);
+//
+//    List<ClanChatPost> clanChatPosts = null;
+//    if (user.getClanId() > 0) {
+//      clanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
+//          ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
+//      for (ClanChatPost p : clanChatPosts) {
+//        userIds.add(p.getPosterId());
 //      }
 //    }
-    if (wallPosts != null && wallPosts.size() > 0) {
-      for (PlayerWallPost p : wallPosts) {
-        resBuilder.addPlayerWallPostNotifications(CreateInfoProtoUtils
-            .createPlayerWallPostProtoFromPlayerWallPost(p, usersByIds.get(p.getPosterId())));
-      }
-    }
-    if (clanChatPosts != null && clanChatPosts.size() > 0) {
-
-    }
+//
+//    Map<Integer, User> usersByIds = null;
+//    if (userIds.size() > 0) {
+//      usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+//    }
+//
+//    if (clanChatPosts != null && clanChatPosts.size() > 0) {
+//
+//    }
   }
 
   private void setAllies(Builder resBuilder, User user) {
-    boolean realPlayersOnly = false;
-    boolean fakePlayersOnly = false;
-    boolean offlinePlayersOnly = false; //does not include fake players
-    boolean inactiveShield = false;
-    List<Integer> forbiddenUserIds = new ArrayList<Integer>();
-    forbiddenUserIds.add(user.getId());
-
-    List<User> allies = RetrieveUtils.userRetrieveUtils().getUsers(
-        ControllerConstants.STARTUP__APPROX_NUM_ALLIES_TO_SEND, user.getLevel(),
-        user.getId(), false, realPlayersOnly,
-        fakePlayersOnly, offlinePlayersOnly,
-        inactiveShield, forbiddenUserIds);
-    if (allies != null && allies.size() > 0) {
-      for (User ally : allies) {
-        resBuilder.addAllies(CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(ally));
-      }
-    }
+//    boolean realPlayersOnly = false;
+//    boolean fakePlayersOnly = false;
+//    boolean offlinePlayersOnly = false; //does not include fake players
+//    boolean inactiveShield = false;
+//    List<Integer> forbiddenUserIds = new ArrayList<Integer>();
+//    forbiddenUserIds.add(user.getId());
+//
+//    List<User> allies = RetrieveUtils.userRetrieveUtils().getUsers(
+//        ControllerConstants.STARTUP__APPROX_NUM_ALLIES_TO_SEND, user.getLevel(),
+//        user.getId(), false, realPlayersOnly,
+//        fakePlayersOnly, offlinePlayersOnly,
+//        inactiveShield, forbiddenUserIds);
+//    if (allies != null && allies.size() > 0) {
+//      for (User ally : allies) {
+//        resBuilder.addAllies(CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(ally));
+//      }
+//    }
   }
 
   private void setUserEquipsAndEquips(Builder resBuilder, User user) {
@@ -1331,31 +1281,31 @@ public class StartupController extends EventController {
   }
 
   private void setCitiesAndUserCityInfos(Builder resBuilder, User user) {
-    Map<Integer, Integer> cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
-        .getCityIdToUserCityRank(user.getId());
-//    Map<Integer, Integer> taskIdToNumTimesActedInRank = UserTaskRetrieveUtils
-//        .getTaskIdToNumTimesActedInRankForUser(user.getId());
-
-    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-    for (Integer cityId : cities.keySet()) {
-      City city = cities.get(cityId);
-      resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-      if (user.getLevel() >= city.getMinLevel()) {
-
-        if (!cityIdsToUserCityRanks.containsKey(city.getId())) {
-          if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), cityId, 1)) {
-            log.error("problem with unlocking city for user, city Id is " + cityId
-                + ", and user is " + user);
-          } else {
-            cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
-                .getCityIdToUserCityRank(user.getId());
-          }
-        }
-        int numTasksComplete = 0; //getNumTasksCompleteForUserCity(user, city, taskIdToNumTimesActedInRank);
-        resBuilder.addUserCityInfos(CreateInfoProtoUtils.createFullUserCityProto(user.getId(),
-            city.getId(), cityIdsToUserCityRanks.get(city.getId()), numTasksComplete));
-      }
-    }
+//    Map<Integer, Integer> cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
+//        .getCityIdToUserCityRank(user.getId());
+////    Map<Integer, Integer> taskIdToNumTimesActedInRank = UserTaskRetrieveUtils
+////        .getTaskIdToNumTimesActedInRankForUser(user.getId());
+//
+//    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+//    for (Integer cityId : cities.keySet()) {
+//      City city = cities.get(cityId);
+//      resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+//      if (user.getLevel() >= city.getMinLevel()) {
+//
+//        if (!cityIdsToUserCityRanks.containsKey(city.getId())) {
+//          if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), cityId, 1)) {
+//            log.error("problem with unlocking city for user, city Id is " + cityId
+//                + ", and user is " + user);
+//          } else {
+//            cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
+//                .getCityIdToUserCityRank(user.getId());
+//          }
+//        }
+//        int numTasksComplete = 0; //getNumTasksCompleteForUserCity(user, city, taskIdToNumTimesActedInRank);
+//        resBuilder.addUserCityInfos(CreateInfoProtoUtils.createFullUserCityProto(user.getId(),
+//            city.getId(), cityIdsToUserCityRanks.get(city.getId()), numTasksComplete));
+//      }
+//    }
   }
 
 //  private int getNumTasksCompleteForUserCity(User user, City city,

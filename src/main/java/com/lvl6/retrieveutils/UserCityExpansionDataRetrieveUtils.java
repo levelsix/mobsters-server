@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-	private static final String TABLE_NAME = DBConstants.TABLE_USER_CITY_EXPANSION_DATA;
+	private static final String TABLE_NAME = DBConstants.TABLE_EXPANSION_PURCHASE_FOR_USER;
 
 
 
@@ -65,9 +65,9 @@ import com.lvl6.utils.DBConnection;
 //		}
 //		return null;
 		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-		absoluteConditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__USER_ID, userId);
-		absoluteConditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__X_POSITION, xPosition);
-		absoluteConditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__Y_POSITION, yPosition);
+		absoluteConditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__USER_ID, userId);
+		absoluteConditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__X_POSITION, xPosition);
+		absoluteConditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__Y_POSITION, yPosition);
 		
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn,

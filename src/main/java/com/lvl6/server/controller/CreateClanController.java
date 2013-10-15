@@ -80,7 +80,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     String clanName = reqProto.getName();
     String tag = reqProto.getTag();
-    int initialClanLevel = ControllerConstants.CREATE_CLAN__INITIAL_CLAN_LEVEL; 
     boolean requestToJoinRequired = reqProto.getRequestToJoinClanRequired();
     String description = reqProto.getDescription();
     
@@ -109,11 +108,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
           legitCreate = false;
           resBuilder.setStatus(CreateClanStatus.OTHER_FAIL);
         } else {
-          resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(
-              new Clan(
-        		  clanId, clanName, user.getId(), createTime, description, tag, 
-        		  initialClanLevel, requestToJoinRequired)
-              ));
+        	Clan newClan = new Clan(clanId, user.getId(), clanName,
+        			createTime, description, tag, requestToJoinRequired);
+          resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(newClan));
         }
       }
       

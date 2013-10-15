@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Map<Integer, UpgradeStructJob> upgradeStructJobIdsToUpgradeStructJobs;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_JOBS_UPGRADE_STRUCT;
+  private static final String TABLE_NAME = DBConstants.TABLE_JOB_UPGRADE_STRUCT;
 
   public static Map<Integer, UpgradeStructJob> getUpgradeStructJobIdsToUpgradeStructJobs() {
     log.debug("retrieving all upgrade struct job data");

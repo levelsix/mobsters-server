@@ -237,11 +237,11 @@ public class ControllerTest extends TestCase {
 	}
 	
 	public void deleteFirstTimeUsers(String openUdid) {
-		String tableName = DBConstants.TABLE_FIRST_TIME_USERS;
+		String tableName = DBConstants.TABLE_USER_BEFORE_TUTORIAL_COMPLETION;
 		
 		String query = " DELETE FROM " + tableName + " WHERE " +
-				DBConstants.FIRST_TIME_USERS__ID + " > ? and " + 
-				DBConstants.FIRST_TIME_USERS__OPEN_UDID + " = ?;";
+				DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__ID + " > ? and " + 
+				DBConstants.USER_BEFORE_TUTORIAL_COMPLETION__OPEN_UDID + " = ?;";
 		
 		List<Object> values = new ArrayList<Object>();
 		values.add(0); //for 
@@ -253,10 +253,10 @@ public class ControllerTest extends TestCase {
 	}
 	
 	public void deleteUserCityExpansionData(int userId) {
-		String tableName = DBConstants.TABLE_USER_CITY_EXPANSION_DATA;
+		String tableName = DBConstants.TABLE_EXPANSION_PURCHASE_FOR_USER;
 
 		String query = " DELETE FROM " + tableName + " WHERE " +
-				DBConstants.USER_CITY_EXPANSION_DATA__USER_ID + " = ?;";
+				DBConstants.EXPANSION_PURCHASE_FOR_USER__USER_ID + " = ?;";
 		
 		List<Object> values = new ArrayList<Object>();
 		values.add(userId); //for 

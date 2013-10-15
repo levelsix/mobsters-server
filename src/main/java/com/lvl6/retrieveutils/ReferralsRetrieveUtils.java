@@ -22,7 +22,7 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_REFERRALS;
+  private static final String TABLE_NAME = DBConstants.TABLE_REFERRAL;
 
   //TODO: when we actually impl referrals, dont base it on last logout. get the most recent ones. like BattleDetails
   public static List<Referral> getAllReferralsAfterLastlogoutForReferrer(Timestamp lastLogout, int referrerId) {
