@@ -42,7 +42,7 @@ public class User implements Serializable {
 	private Date lastWallPostNotificationTime;
 	private int kabamNaid;
 	private boolean hasReceivedfbReward;
-	private int numAdditionalForgeSlots;
+	private int numAdditionalMonsterSlots;
 	private int numBeginnerSalesPurchased;
 	private boolean hasActiveShield;
 	private Date shieldEndTime;
@@ -64,7 +64,7 @@ public class User implements Serializable {
 			Date createTime, boolean isAdmin, String apsalarId,
 			int numCoinsRetrievedFromStructs, int numConsecutiveDaysPlayed,
 			int clanId, Date lastWallPostNotificationTime, int kabamNaid,
-			boolean hasReceivedfbReward, int numAdditionalForgeSlots,
+			boolean hasReceivedfbReward, int numAdditionalMonsterSlots,
 			int numBeginnerSalesPurchased, boolean hasActiveShield,
 			Date shieldEndTime, int elo, String rank, Date lastTimeQueued,
 			int attacksWon, int defensesWon, int attacksLost, int defensesLost) {
@@ -97,7 +97,7 @@ public class User implements Serializable {
 		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
 		this.kabamNaid = kabamNaid;
 		this.hasReceivedfbReward = hasReceivedfbReward;
-		this.numAdditionalForgeSlots = numAdditionalForgeSlots;
+		this.numAdditionalMonsterSlots = numAdditionalMonsterSlots;
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 		this.hasActiveShield = hasActiveShield;
 		this.shieldEndTime = shieldEndTime;
@@ -1312,12 +1312,12 @@ public class User implements Serializable {
 	//    return false;
 	//  }
 
-	public boolean updateNumAdditionalForgeSlotsAndDiamonds(int newAdditionalForgeSlots, int cost) {
+	public boolean updateNumAdditionalMonsterSlotsAndDiamonds(int newAdditionalMonsterSlots, int cost) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__NUM_ADDITIONAL_FORGE_SLOTS, newAdditionalForgeSlots);
+		absoluteParams.put(DBConstants.USER__NUM_ADDITIONAL_FORGE_SLOTS, newAdditionalMonsterSlots);
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 		relativeParams.put(DBConstants.USER__DIAMONDS, cost);
 
@@ -1325,7 +1325,7 @@ public class User implements Serializable {
 				relativeParams, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
 			this.diamonds += cost;
-			this.numAdditionalForgeSlots = newAdditionalForgeSlots;
+			this.numAdditionalMonsterSlots = newAdditionalMonsterSlots;
 			return true;
 		}
 
@@ -1705,13 +1705,13 @@ public class User implements Serializable {
 	}
 
 
-	public int getNumAdditionalForgeSlots() {
-		return numAdditionalForgeSlots;
+	public int getNumAdditionalMonsterSlots() {
+		return numAdditionalMonsterSlots;
 	}
 
 
-	public void setNumAdditionalForgeSlots(int numAdditionalForgeSlots) {
-		this.numAdditionalForgeSlots = numAdditionalForgeSlots;
+	public void setNumAdditionalMonsterSlots(int numAdditionalMonsterSlots) {
+		this.numAdditionalMonsterSlots = numAdditionalMonsterSlots;
 	}
 
 
@@ -1825,7 +1825,7 @@ public class User implements Serializable {
 				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
 				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
 				+ ", hasReceivedfbReward=" + hasReceivedfbReward
-				+ ", numAdditionalForgeSlots=" + numAdditionalForgeSlots
+				+ ", numAdditionalMonsterSlots=" + numAdditionalMonsterSlots
 				+ ", numBeginnerSalesPurchased=" + numBeginnerSalesPurchased
 				+ ", hasActiveShield=" + hasActiveShield + ", shieldEndTime="
 				+ shieldEndTime + ", elo=" + elo + ", rank=" + rank

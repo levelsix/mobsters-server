@@ -725,7 +725,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int kabamNaid = rs.getInt(i++);
 
     boolean hasReceivedfbReward = rs.getBoolean(i++);
-    int numAdditionalForgeSlots = rs.getInt(i++);
+    int numAdditionalMonsterSlots = rs.getInt(i++);
     int numBeginnerSalesPurchased = rs.getInt(i++);
     boolean hasActiveShield = rs.getBoolean(i++);
     
@@ -763,7 +763,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		lastBattleNotificationTime, numBadges, isFake, createTime,
     		isAdmin, apsalarId, numCoinsRetrievedFromStructs,
     		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
-    		kabamNaid, hasReceivedfbReward, numAdditionalForgeSlots,
+    		kabamNaid, hasReceivedfbReward, numAdditionalMonsterSlots,
     		numBeginnerSalesPurchased, hasActiveShield, shieldEndTime, elo,
     		rank, lastTimeQueued, attacksWon, defensesWon, attacksLost,
     		defensesLost);

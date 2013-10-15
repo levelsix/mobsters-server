@@ -62,7 +62,7 @@ message FullUserProto {
 	//optional int64 lastWallPostNotificationTime lwpnt = 26;
 	//optional string kabamNaid = 27;
 	optional bool hasReceivedfbReward = 28;
-	optional int32 numAdditionalForgeSlots = 29;
+	optional int32 numAdditionalMonsterSlots = 29;
 	optional int32 numBeginnerSalesPurchased = 30;
 	optional bool hasActiveShield = 31; 
 	optional int64 shieldEndTime = 32;

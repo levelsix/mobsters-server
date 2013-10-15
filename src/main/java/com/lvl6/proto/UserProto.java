@@ -1935,9 +1935,9 @@ public final class UserProto {
     boolean hasHasReceivedfbReward();
     boolean getHasReceivedfbReward();
     
-    // optional int32 numAdditionalForgeSlots = 29;
-    boolean hasNumAdditionalForgeSlots();
-    int getNumAdditionalForgeSlots();
+    // optional int32 numAdditionalMonsterSlots = 29;
+    boolean hasNumAdditionalMonsterSlots();
+    int getNumAdditionalMonsterSlots();
     
     // optional int32 numBeginnerSalesPurchased = 30;
     boolean hasNumBeginnerSalesPurchased();
@@ -2282,14 +2282,14 @@ public final class UserProto {
       return hasReceivedfbReward_;
     }
     
-    // optional int32 numAdditionalForgeSlots = 29;
-    public static final int NUMADDITIONALFORGESLOTS_FIELD_NUMBER = 29;
-    private int numAdditionalForgeSlots_;
-    public boolean hasNumAdditionalForgeSlots() {
+    // optional int32 numAdditionalMonsterSlots = 29;
+    public static final int NUMADDITIONALMONSTERSLOTS_FIELD_NUMBER = 29;
+    private int numAdditionalMonsterSlots_;
+    public boolean hasNumAdditionalMonsterSlots() {
       return ((bitField0_ & 0x00080000) == 0x00080000);
     }
-    public int getNumAdditionalForgeSlots() {
-      return numAdditionalForgeSlots_;
+    public int getNumAdditionalMonsterSlots() {
+      return numAdditionalMonsterSlots_;
     }
     
     // optional int32 numBeginnerSalesPurchased = 30;
@@ -2590,7 +2590,7 @@ public final class UserProto {
       numCoinsRetrievedFromStructs_ = 0;
       clan_ = com.lvl6.proto.UserProto.MinimumClanProto.getDefaultInstance();
       hasReceivedfbReward_ = false;
-      numAdditionalForgeSlots_ = 0;
+      numAdditionalMonsterSlots_ = 0;
       numBeginnerSalesPurchased_ = 0;
       hasActiveShield_ = false;
       shieldEndTime_ = 0L;
@@ -2708,7 +2708,7 @@ public final class UserProto {
         output.writeBool(28, hasReceivedfbReward_);
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
-        output.writeInt32(29, numAdditionalForgeSlots_);
+        output.writeInt32(29, numAdditionalMonsterSlots_);
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         output.writeInt32(30, numBeginnerSalesPurchased_);
@@ -2863,7 +2863,7 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(29, numAdditionalForgeSlots_);
+          .computeInt32Size(29, numAdditionalMonsterSlots_);
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3072,7 +3072,7 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00020000);
         hasReceivedfbReward_ = false;
         bitField0_ = (bitField0_ & ~0x00040000);
-        numAdditionalForgeSlots_ = 0;
+        numAdditionalMonsterSlots_ = 0;
         bitField0_ = (bitField0_ & ~0x00080000);
         numBeginnerSalesPurchased_ = 0;
         bitField0_ = (bitField0_ & ~0x00100000);
@@ -3235,7 +3235,7 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
           to_bitField0_ |= 0x00080000;
         }
-        result.numAdditionalForgeSlots_ = numAdditionalForgeSlots_;
+        result.numAdditionalMonsterSlots_ = numAdditionalMonsterSlots_;
         if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
           to_bitField0_ |= 0x00100000;
         }
@@ -3386,8 +3386,8 @@ public final class UserProto {
         if (other.hasHasReceivedfbReward()) {
           setHasReceivedfbReward(other.getHasReceivedfbReward());
         }
-        if (other.hasNumAdditionalForgeSlots()) {
-          setNumAdditionalForgeSlots(other.getNumAdditionalForgeSlots());
+        if (other.hasNumAdditionalMonsterSlots()) {
+          setNumAdditionalMonsterSlots(other.getNumAdditionalMonsterSlots());
         }
         if (other.hasNumBeginnerSalesPurchased()) {
           setNumBeginnerSalesPurchased(other.getNumBeginnerSalesPurchased());
@@ -3623,7 +3623,7 @@ public final class UserProto {
             }
             case 232: {
               bitField0_ |= 0x00080000;
-              numAdditionalForgeSlots_ = input.readInt32();
+              numAdditionalMonsterSlots_ = input.readInt32();
               break;
             }
             case 240: {
@@ -4181,23 +4181,23 @@ public final class UserProto {
         return this;
       }
       
-      // optional int32 numAdditionalForgeSlots = 29;
-      private int numAdditionalForgeSlots_ ;
-      public boolean hasNumAdditionalForgeSlots() {
+      // optional int32 numAdditionalMonsterSlots = 29;
+      private int numAdditionalMonsterSlots_ ;
+      public boolean hasNumAdditionalMonsterSlots() {
         return ((bitField0_ & 0x00080000) == 0x00080000);
       }
-      public int getNumAdditionalForgeSlots() {
-        return numAdditionalForgeSlots_;
+      public int getNumAdditionalMonsterSlots() {
+        return numAdditionalMonsterSlots_;
       }
-      public Builder setNumAdditionalForgeSlots(int value) {
+      public Builder setNumAdditionalMonsterSlots(int value) {
         bitField0_ |= 0x00080000;
-        numAdditionalForgeSlots_ = value;
+        numAdditionalMonsterSlots_ = value;
         onChanged();
         return this;
       }
-      public Builder clearNumAdditionalForgeSlots() {
+      public Builder clearNumAdditionalMonsterSlots() {
         bitField0_ = (bitField0_ & ~0x00080000);
-        numAdditionalForgeSlots_ = 0;
+        numAdditionalMonsterSlots_ = 0;
         onChanged();
         return this;
       }
@@ -4710,7 +4710,7 @@ public final class UserProto {
       "\003 \001(\0132 .com.lvl6.proto.MinimumClanProto\"" +
       "b\n\031MinimumUserProtoWithLevel\0226\n\014minUserP" +
       "roto\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\r\n\005level\030\002 \001(\005\"\207\007\n\rFullUserProto\022\016\n",
+      "roto\022\r\n\005level\030\002 \001(\005\"\211\007\n\rFullUserProto\022\016\n",
       "\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001" +
       "(\005\022\020\n\010diamonds\030\004 \001(\005\022\r\n\005coins\030\005 \001(\005\022\022\n\ne" +
       "xperience\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001(\005\022" +
@@ -4721,19 +4721,19 @@ public final class UserProto {
       "(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetrieved" +
       "FromStructs\030\027 \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lv" +
       "l6.proto.MinimumClanProto\022\033\n\023hasReceived",
-      "fbReward\030\034 \001(\010\022\037\n\027numAdditionalForgeSlot" +
-      "s\030\035 \001(\005\022!\n\031numBeginnerSalesPurchased\030\036 \001" +
-      "(\005\022\027\n\017hasActiveShield\030\037 \001(\010\022\025\n\rshieldEnd" +
-      "Time\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004rank\030\" \001(\t\022\026\n" +
-      "\016lastTimeQueued\030# \001(\003\022\022\n\nattacksWon\030$ \001(" +
-      "\005\022\023\n\013defensesWon\030% \001(\005\022\023\n\013attacksLost\030& " +
-      "\001(\005\022\024\n\014defensesLost\030\' \001(\005\022\014\n\004udid\030\r \001(\t\022" +
-      "\023\n\013deviceToken\030\020 \001(\t\022\"\n\032lastBattleNotifi" +
-      "cationTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\nc" +
-      "reateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030nu",
-      "mConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWall" +
-      "PostNotificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030" +
-      "\033 \001(\tB\013B\tUserProto"
+      "fbReward\030\034 \001(\010\022!\n\031numAdditionalMonsterSl" +
+      "ots\030\035 \001(\005\022!\n\031numBeginnerSalesPurchased\030\036" +
+      " \001(\005\022\027\n\017hasActiveShield\030\037 \001(\010\022\025\n\rshieldE" +
+      "ndTime\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004rank\030\" \001(\t\022" +
+      "\026\n\016lastTimeQueued\030# \001(\003\022\022\n\nattacksWon\030$ " +
+      "\001(\005\022\023\n\013defensesWon\030% \001(\005\022\023\n\013attacksLost\030" +
+      "& \001(\005\022\024\n\014defensesLost\030\' \001(\005\022\014\n\004udid\030\r \001(" +
+      "\t\022\023\n\013deviceToken\030\020 \001(\t\022\"\n\032lastBattleNoti" +
+      "ficationTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n" +
+      "\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030",
+      "numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWa" +
+      "llPostNotificationTime\030\032 \001(\003\022\021\n\tkabamNai" +
+      "d\030\033 \001(\tB\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4769,7 +4769,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserProto_descriptor,
-              new java.lang.String[] { "UserId", "Name", "Level", "Diamonds", "Coins", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalForgeSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", },
+              new java.lang.String[] { "UserId", "Name", "Level", "Diamonds", "Coins", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalMonsterSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", },
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
           return null;
