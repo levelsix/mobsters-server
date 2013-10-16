@@ -343,19 +343,29 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Collections.sort(stageNumList);
 	  int size = stageNumList.size();
 	  
+	  log.info("inserting task_stage_for_user: userTaskId="
+	  		+ userTaskId + "\t stageNumsToSilvers=" + stageNumsToSilvers
+	  		+ "\t stageNumsToExps=" + stageNumsToExps
+	  		+ "\t stageNumsToPuzzlePiecesDropped=" + stageNumsToPuzzlePiecesDropped
+	  		+ "\t stageNumsToMonsterIds=" + stageNumsToMonsterIds);
 	  
-	  List<Long> userTaskIds = Collections.nCopies(size, userTaskId);
+	  
 	  //loop through the individual stages, saving each to the db.
 	  for (int i = 0; i < size; i++) {
 	  	int stageNum = stageNumList.get(i);
-	  	List<Integer> repeatedStageNum = Collections.nCopies(size, stageNum);
 	  	List<Integer> monsterIds = stageNumsToMonsterIds.get(stageNum);
 	  	List<Integer> expsGained = stageNumsToExps.get(stageNum);
 	  	List<Integer> silverGained = stageNumsToSilvers.get(stageNum);
 	  	List<Boolean> monsterPiecesDropped = stageNumsToPuzzlePiecesDropped.get(stageNum);
 	  	
-	  	InsertUtils.get().insertIntoUserTaskStage(userTaskIds, repeatedStageNum,
-	  			monsterIds, expsGained, silverGained, monsterPiecesDropped);
+	  	int numStageRows = monsterIds.size();
+	  	List<Long> userTaskIds = Collections.nCopies(numStageRows, userTaskId);
+	  	List<Integer> repeatedStageNum = Collections.nCopies(numStageRows, stageNum);
+	  	
+	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds,
+	  			repeatedStageNum, monsterIds, expsGained, silverGained,
+	  			monsterPiecesDropped);
+	  	log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
 	  }
   }
   
