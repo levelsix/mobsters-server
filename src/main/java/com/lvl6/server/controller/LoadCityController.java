@@ -14,7 +14,7 @@ import com.lvl6.events.response.LoadCityResponseEvent;
 import com.lvl6.info.City;
 import com.lvl6.info.Quest;
 import com.lvl6.info.User;
-import com.lvl6.info.UserQuest;
+import com.lvl6.info.QuestForUser;
 import com.lvl6.proto.EventCityProto.LoadCityRequestProto;
 import com.lvl6.proto.EventCityProto.LoadCityResponseProto;
 import com.lvl6.proto.EventCityProto.LoadCityResponseProto.Builder;
@@ -92,10 +92,10 @@ import com.lvl6.utils.RetrieveUtils;
 //          setResponseDefeatTypeJobEnemies(resBuilder, questsInCity, user, cityId);
 //        }
         
-        List<UserQuest> allUnredeemedUserQuests = RetrieveUtils.userQuestRetrieveUtils().getUnredeemedUserQuestsForUser(senderProto.getUserId());
-        List<UserQuest> userQuestsInCity = new ArrayList<UserQuest>();
+        List<QuestForUser> allUnredeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils().getUnredeemedUserQuestsForUser(senderProto.getUserId());
+        List<QuestForUser> userQuestsInCity = new ArrayList<QuestForUser>();
         if (allUnredeemedUserQuests != null && allUnredeemedUserQuests.size() > 0) {
-          for (UserQuest uq : allUnredeemedUserQuests) {
+          for (QuestForUser uq : allUnredeemedUserQuests) {
             Quest q = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
             if (q.getCityId() == cityId) {
               userQuestsInCity.add(uq);
