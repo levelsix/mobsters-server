@@ -25,7 +25,7 @@ import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.Build
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -145,7 +145,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
     List <Integer> buildStructJobIds = reqProto.getBuildStructJobIdsList();
     if (buildStructJobIds != null && buildStructJobIds.size() > 0) {
-      Map<Integer, BuildStructJob> buildStructJobIdsToBuildStructJobs = BuildStructJobRetrieveUtils.getBuildStructJobIdsToBuildStructJobs();
+      Map<Integer, BuildStructJob> buildStructJobIdsToBuildStructJobs = QuestJobBuildStructRetrieveUtils.getBuildStructJobIdsToBuildStructJobs();
       for (Integer buildStructJobId :  buildStructJobIds) {
         BuildStructJob buildStructJob = buildStructJobIdsToBuildStructJobs.get(buildStructJobId);
         if (buildStructJob != null) {

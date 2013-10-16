@@ -17,54 +17,55 @@ public class DBConstants {
 	public static final String TABLE_EXPANSION_PURCHASE_FOR_USER = "expansion_purchase_for_user";
 	public static final String TABLE_GOLD_SALE = "gold_sale";	
 	public static final String TABLE_IAP_HISTORY = "iap_history";
-	public static final String TABLE_JOB_BUILD_STRUCT = "job_build_struct";
-	public static final String TABLE_JOB_KILL_MONSTER = "job_kill_monster";
-	public static final String TABLE_JOB_UPGRADE_STRUCT = "job_upgrade_struct";
   public static final String TABLE_LEVEL_REQUIRED_EXPERIENCE = "level_required_experience";
   public static final String TABLE_LOCK_BOX_EVENT = "lock_box_event";
   public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";
+  public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
   public static final String TABLE_LOGIN_HISTORY = "login_history";	
   public static final String TABLE_MONSTER = "monster";
 	public static final String TABLE_MONSTER_4USER_DELETED_4ENHANCING = "monster_4user_deleted_4enhancing";
 	public static final String TABLE_MONSTER_ENHANCING_FEEDER = "monster_enhancing_feeder";  
+	public static final String TABLE_MONSTER_ENHANCING_FEEDER_HISTORY = "monster_enhancing_feeder_history";  
   public static final String TABLE_MONSTER_ENHANCING_FOR_USER= "monster_enhancing_for_user";
   public static final String TABLE_MONSTER_ENHANCING_HISTORY = "monster_enhancing_history";
-  public static final String TABLE_MONSTER_ENHANCING_FEEDER_HISTORY = "monster_enhancing_feeder_history";  
+  public static final String TABLE_MONSTER_EVOLVING_FAIL_FOR_USER = "monster_evolving_fail_for_user";
   public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";
   public static final String TABLE_MONSTER_EVOLVING_HISTORY = "monster_evolving_history";
-  public static final String TABLE_MONSTER_EVOLVING_FAIL_FOR_USER = "monster_evolving_fail_for_user";
   public static final String TABLE_MONSTER_FOR_USER = "monster_for_user";
   public static final String TABLE_MONSTER_REWARD = "monster_reward";
-  public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
-	public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
-	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";
+  public static final String TABLE_QUEST_JOB_BUILD_STRUCT = "quest_job_build_struct";
+  public static final String TABLE_QUEST_JOB_MONSTER = "quest_job_monster";
+  public static final String TABLE_QUEST_JOB_UPGRADE_STRUCT = "quest_job_upgrade_struct";
+  public static final String TABLE_QUEST_TASK_HISTORY = "quest_task_history";
   public static final String TABLE_REFERRAL = "referral";
+  public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
+	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";
   public static final String TABLE_STRUCTURE = "structure";
-  public static final String TABLE_USER_SESSION = "user_session";
-  public static final String TABLE_USER_STRUCTS = "structure_for_user";
+  public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
   public static final String TABLE_TASK = "task";
+  public static final String TABLE_TASK_FOR_USER = "task_for_user";
+  public static final String TABLE_TASK_HISTORY = "task_history";
   public static final String TABLE_TASK_STAGE = "task_stage";
+  public static final String TABLE_USER_TASK_STAGE = "task_stage_for_user";
   public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
 	public static final String TABLE_TOURNAMENT_EVENT = "tournament_event";	
 	public static final String TABLE_TOURNAMENT_EVENT_FOR_USER = "tournament_event_for_user";
 	public static final String TABLE_TOURNAMENT_REWARD = "tournament_reward";
-  public static final String TABLE_USER_TASK = "task_for_user";
-  public static final String TABLE_USER_TASK_HISTORY = "task_history";
-  public static final String TABLE_USER_TASK_STAGE = "task_stage_for_user";
+	public static final String TABLE_USER = "user";
+	public static final String TABLE_BANNED_USER = "user_banned";
+	public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
+	public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
+	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
+  public static final String TABLE_USER_SESSION = "user_session";
   public static final String TABLE_USER_TASK_STAGE_HISTORY = "task_stage_history_for_user";
-  public static final String TABLE_USER = "users";
-  public static final String TABLE_BANNED_USER = "user_banned";
-  public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
-  public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
   
 	
   public static final String TABLE_USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS = "user_quests_completed_defeat_type_jobs";
-  public static final String TABLE_USER_QUESTS_COMPLETED_TASKS = "user_quests_completed_tasks";
   public static final String TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS = "user_quests_defeat_type_job_progress";
-  public static final String TABLE_USER_QUESTS_TASK_PROGRESS = "user_quests_task_progress";
+  
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
   public static final String GENERIC__ID = "id";
@@ -317,13 +318,13 @@ public class DBConstants {
   public static final String USER_STRUCTS__LAST_RETRIEVED = "last_retrieved";
   public static final String USER_STRUCTS__X_COORD = "xcoord";
   public static final String USER_STRUCTS__Y_COORD = "ycoord";
-  public static final String USER_STRUCTS__IS_COMPLETE = "is_complete";
   public static final String USER_STRUCTS__LEVEL = "level";
   public static final String USER_STRUCTS__PURCHASE_TIME = "purchase_time";
   public static final String USER_STRUCTS__LAST_UPGRADE_TIME = "last_upgrade_time";
+  public static final String USER_STRUCTS__IS_COMPLETE = "is_complete";
   public static final String USER_STRUCTS__ORIENTATION = "orientation";
 
-  /*USER TASK TABLE*/
+  /*TASK FOR USER TABLE*/
   public static final String USER_TASK__ID = GENERIC__ID;
   public static final String USER_TASK__USER_ID = GENERIC__USER_ID;
   public static final String USER_TASK__TASK_ID = "task_id";
@@ -332,16 +333,16 @@ public class DBConstants {
   public static final String USER_TASK__NUM_REVIVES = "num_revives";
   public static final String USER_TASK__START_TIME = "start_time";
 
-  /*USER TASK HISTORY TABLE*/
-  public static final String USER_TASK_HISTORY__USER_TASK_ID = "user_task_id";
-  public static final String USER_TASK_HISTORY__USER_ID = GENERIC__USER_ID;
-  public static final String USER_TASK_HISTORY__TASK_ID = "task_id";
-  public static final String USER_TASK_HISTORY__EXP_GAINED = "exp_gained";
-  public static final String USER_TASK_HISTORY__SILVER_GAINED = "silver_gained";
-  public static final String USER_TASK_HISTORY__NUM_REVIVES = "num_revives";
-  public static final String USER_TASK_HISTORY__START_TIME = "start_time";
-  public static final String USER_TASK_HISTORY__END_TIME = "end_time";
-  public static final String USER_TASK_HISTORY__USER_WON = "user_won";
+  /*TASK HISTORY TABLE*/
+  public static final String TASK_HISTORY__USER_TASK_ID = "task_for_user_id";
+  public static final String TASK_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String TASK_HISTORY__TASK_ID = "task_id";
+  public static final String TASK_HISTORY__EXP_GAINED = "exp_gained";
+  public static final String TASK_HISTORY__SILVER_GAINED = "silver_gained";
+  public static final String TASK_HISTORY__NUM_REVIVES = "num_revives";
+  public static final String TASK_HISTORY__START_TIME = "start_time";
+  public static final String TASK_HISTORY__END_TIME = "end_time";
+  public static final String TASK_HISTORY__USER_WON = "user_won";
 
   /*TASK STAGE*/
   public static final String TASK_STAGE__ID = GENERIC__ID;
@@ -447,12 +448,6 @@ public class DBConstants {
   public static final String USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__QUEST_ID = "quest_id";
   public static final String USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__DEFEAT_TYPE_JOB_ID = "defeat_type_job_id";
   public static final String USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__NUM_DEFEATED = "num_defeated";
-  
-  /*USER QUESTS DEFEAT TYPE JOB PROGRESS*/
-  public static final String USER_QUESTS_TASK_PROGRESS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_QUESTS_TASK_PROGRESS__QUEST_ID = "quest_id";
-  public static final String USER_QUESTS_TASK_PROGRESS__TASK_ID = "task_id";
-  public static final String USER_QUESTS_TASK_PROGRESS__NUM_TIMES_ACTED = "num_times_acted";
   
 }
 

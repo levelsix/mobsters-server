@@ -8,6 +8,78 @@ public final class JobProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  public enum MonsterJobType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    COLLECT(0, 1),
+    DONATE(1, 2),
+    KILL(2, 3),
+    ;
+    
+    public static final int COLLECT_VALUE = 1;
+    public static final int DONATE_VALUE = 2;
+    public static final int KILL_VALUE = 3;
+    
+    
+    public final int getNumber() { return value; }
+    
+    public static MonsterJobType valueOf(int value) {
+      switch (value) {
+        case 1: return COLLECT;
+        case 2: return DONATE;
+        case 3: return KILL;
+        default: return null;
+      }
+    }
+    
+    public static com.google.protobuf.Internal.EnumLiteMap<MonsterJobType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<MonsterJobType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<MonsterJobType>() {
+            public MonsterJobType findValueByNumber(int number) {
+              return MonsterJobType.valueOf(number);
+            }
+          };
+    
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.lvl6.proto.JobProto.getDescriptor().getEnumTypes().get(0);
+    }
+    
+    private static final MonsterJobType[] VALUES = {
+      COLLECT, DONATE, KILL, 
+    };
+    
+    public static MonsterJobType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+    
+    private final int index;
+    private final int value;
+    
+    private MonsterJobType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+    
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.MonsterJobType)
+  }
+  
   public interface BuildStructJobProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -1970,7 +2042,8 @@ public final class JobProto {
       "lReq\030\003 \001(\005\"u\n MinimumUserUpgradeStructJo" +
       "bProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022",
       "\032\n\022upgradeStructJobId\030\003 \001(\005\022\024\n\014currentLe" +
-      "vel\030\004 \001(\005B\nB\010JobProto"
+      "vel\030\004 \001(\005*3\n\016MonsterJobType\022\013\n\007COLLECT\020\001" +
+      "\022\n\n\006DONATE\020\002\022\010\n\004KILL\020\003B\nB\010JobProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

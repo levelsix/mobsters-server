@@ -16,13 +16,13 @@ import com.lvl6.info.jobs.BuildStructJob;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class BuildStructJobRetrieveUtils {
+@Component @DependsOn("gameServer") public class QuestJobBuildStructRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static Map<Integer, BuildStructJob> buildStructJobIdsToBuildStructJobs;
 
-  private static final String TABLE_NAME = DBConstants.TABLE_JOB_KILL_MONSTER;
+  private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_BUILD_STRUCT;
 
   public static Map<Integer, BuildStructJob> getBuildStructJobIdsToBuildStructJobs() {
     log.debug("retrieving all build struct job data");

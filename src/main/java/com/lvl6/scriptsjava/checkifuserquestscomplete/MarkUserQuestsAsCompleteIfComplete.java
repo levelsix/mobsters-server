@@ -8,7 +8,7 @@ import com.lvl6.info.UserQuest;
 import com.lvl6.info.UserStruct;
 import com.lvl6.info.jobs.BuildStructJob;
 import com.lvl6.info.jobs.UpgradeStructJob;
-import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
 import com.lvl6.utils.DBConnection;
@@ -37,7 +37,7 @@ public class MarkUserQuestsAsCompleteIfComplete {
 						continue;
 					}
 					if (buildStructJobsRequired != null && buildStructJobsRequired.size()>0) {
-						Map<Integer, BuildStructJob> bsjs = BuildStructJobRetrieveUtils.getBuildStructJobsForBuildStructJobIds(buildStructJobsRequired);
+						Map<Integer, BuildStructJob> bsjs = QuestJobBuildStructRetrieveUtils.getBuildStructJobsForBuildStructJobIds(buildStructJobsRequired);
 						for (BuildStructJob bsj : bsjs.values()) {
 							int quantityBuilt = 0;
 							if (structIdsToUserStructs.get(bsj.getStructId()) != null) {

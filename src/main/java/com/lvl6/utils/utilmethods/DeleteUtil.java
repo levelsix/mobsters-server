@@ -7,9 +7,7 @@ public interface DeleteUtil {
 
 	public abstract boolean deleteAvailableReferralCode(String referralCode);
 
-	////@CacheEvict(value = "questIdToUserTasksCompletedForQuestForUserCache", key = "#userId")
-	public abstract boolean deleteUserQuestInfoInTaskProgressAndCompletedTasks(
-			int userId, int questId, int numTasks);
+	public abstract boolean deleteQuestTaskCompletedForUser(int userId, int questId, int numTasks);
 
 	////@CacheEvict(value = "questIdToUserDefeatTypeJobsCompletedForQuestForUserCache", key = "#userId")
 	public abstract boolean deleteUserQuestInfoInDefeatTypeJobProgressAndCompletedDefeatTypeJobs(
@@ -46,8 +44,6 @@ public interface DeleteUtil {
   public abstract int deleteAllUserQuestsCompletedTasksForUser(int userId);
   
   public abstract int deleteAllUserQuestsDefeatTypeJobProgressForUser(int userId);
-  
-  public abstract int deleteAllUserQuestsTaskProgress(int userId);
   
   public abstract int deleteAllUserTasksForUser(int userId);
 }

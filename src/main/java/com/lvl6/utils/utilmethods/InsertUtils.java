@@ -386,7 +386,7 @@ public class InsertUtils implements InsertUtil{
         taskId);
 
     int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_USER_QUESTS_COMPLETED_TASKS, insertParams);
+        DBConstants.TABLE_QUEST_TASK_HISTORY, insertParams);
     if (numInserted == 1) {
       return true;
     }
@@ -414,7 +414,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER_STRUCTS__IS_COMPLETE, true);
 
     int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_USER_STRUCTS, insertParams);
+        DBConstants.TABLE_STRUCTURE_FOR_USER, insertParams);
     if (numInserted == 1) {
       return true;
     }
@@ -439,7 +439,7 @@ public class InsertUtils implements InsertUtil{
         timeOfPurchase);
 
     int userStructId = DBConnection.get().insertIntoTableBasicReturnId(
-        DBConstants.TABLE_USER_STRUCTS, insertParams);
+        DBConstants.TABLE_STRUCTURE_FOR_USER, insertParams);
     return userStructId;
   }
 
@@ -781,7 +781,7 @@ public class InsertUtils implements InsertUtil{
 	  insertParams.put(DBConstants.USER_TASK__START_TIME, startTime);
 	  
 	  long userTaskId = DBConnection.get().insertIntoTableBasicReturnLongId(
-			  DBConstants.TABLE_USER_TASK, insertParams);
+			  DBConstants.TABLE_TASK_FOR_USER, insertParams);
 	  return userTaskId;
   }
   
@@ -790,18 +790,18 @@ public class InsertUtils implements InsertUtil{
 		  Timestamp endTime, boolean userWon) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__USER_TASK_ID, userTaskId);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__USER_ID, userId);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__TASK_ID, taskId);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__EXP_GAINED, expGained);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__SILVER_GAINED, silverGained);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__NUM_REVIVES, numRevives);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__START_TIME, startTime);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__END_TIME, endTime);
-	  insertParams.put(DBConstants.USER_TASK_HISTORY__USER_WON, userWon);
+	  insertParams.put(DBConstants.TASK_HISTORY__USER_TASK_ID, userTaskId);
+	  insertParams.put(DBConstants.TASK_HISTORY__USER_ID, userId);
+	  insertParams.put(DBConstants.TASK_HISTORY__TASK_ID, taskId);
+	  insertParams.put(DBConstants.TASK_HISTORY__EXP_GAINED, expGained);
+	  insertParams.put(DBConstants.TASK_HISTORY__SILVER_GAINED, silverGained);
+	  insertParams.put(DBConstants.TASK_HISTORY__NUM_REVIVES, numRevives);
+	  insertParams.put(DBConstants.TASK_HISTORY__START_TIME, startTime);
+	  insertParams.put(DBConstants.TASK_HISTORY__END_TIME, endTime);
+	  insertParams.put(DBConstants.TASK_HISTORY__USER_WON, userWon);
 	  
 	  int numInserted = DBConnection.get().insertIntoTableBasic(
-			  DBConstants.TABLE_USER_TASK_HISTORY, insertParams);
+			  DBConstants.TABLE_TASK_HISTORY, insertParams);
 	  return numInserted; 
   }
 

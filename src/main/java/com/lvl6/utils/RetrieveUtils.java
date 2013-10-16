@@ -5,9 +5,9 @@ import com.lvl6.retrieveutils.UserClanRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestRetrieveUtils;
 import com.lvl6.retrieveutils.UserQuestsCompletedDefeatTypeJobsRetrieveUtils;
-import com.lvl6.retrieveutils.UserQuestsCompletedTasksRetrieveUtils;
+import com.lvl6.retrieveutils.QuestTaskHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
-import com.lvl6.retrieveutils.UserStructRetrieveUtils;
+import com.lvl6.retrieveutils.StructureForUserRetrieveUtils;
 import com.lvl6.spring.AppContext;
 
 public class RetrieveUtils {
@@ -32,9 +32,9 @@ public class RetrieveUtils {
 				UserQuestRetrieveUtils.class);
 	}
 
-	public static UserStructRetrieveUtils userStructRetrieveUtils() {
+	public static StructureForUserRetrieveUtils userStructRetrieveUtils() {
 		return AppContext.getApplicationContext().getBean(
-				UserStructRetrieveUtils.class);
+				StructureForUserRetrieveUtils.class);
 	}
 
 	public static UserQuestsCompletedDefeatTypeJobsRetrieveUtils userQuestsCompletedDefeatTypeJobsRetrieveUtils() {
@@ -42,9 +42,9 @@ public class RetrieveUtils {
 				UserQuestsCompletedDefeatTypeJobsRetrieveUtils.class);
 	}
 	
-	public static UserQuestsCompletedTasksRetrieveUtils userQuestsCompletedTasksRetrieveUtils() {
+	public static QuestTaskHistoryRetrieveUtils userQuestsCompletedTasksRetrieveUtils() {
 		return AppContext.getApplicationContext().getBean(
-				UserQuestsCompletedTasksRetrieveUtils.class);
+				QuestTaskHistoryRetrieveUtils.class);
 	}
 	
 	public static StatisticsRetrieveUtil statisticsRetrieveUtils() {

@@ -45,10 +45,15 @@ public class QuestGraph {
     ArrayList<Integer> available = new ArrayList<Integer>();
 
     for (Vertex v : questVertices) {
+    	//search for quests the user has not redeemed nor is in
+    	//the process of completing
       if (redeemed == null || !redeemed.contains(v.getNodeId())) {
         if (inProgress == null || !inProgress.contains(v.getNodeId())) {
+        	
           if (v.getRequiredVertices().isEmpty() || 
               (redeemed != null && redeemed.containsAll(v.getRequiredVertices()))) {
+          	//for all stand alone quests (quests with no prerequisites) OR
+          	//quests that the user has finished all the prerequisites, return these
             available.add(v.getNodeId());
           }
         }
