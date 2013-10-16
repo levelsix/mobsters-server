@@ -2002,6 +2002,524 @@ public final class JobProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserUpgradeStructJobProto)
   }
   
+  public interface MonsterJobProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 monsterJobId = 1;
+    boolean hasMonsterJobId();
+    int getMonsterJobId();
+    
+    // optional int32 monsterId = 2;
+    boolean hasMonsterId();
+    int getMonsterId();
+    
+    // optional int32 quanity = 3;
+    boolean hasQuanity();
+    int getQuanity();
+    
+    // optional .com.lvl6.proto.MonsterJobType monsterJobType = 4;
+    boolean hasMonsterJobType();
+    com.lvl6.proto.JobProto.MonsterJobType getMonsterJobType();
+  }
+  public static final class MonsterJobProto extends
+      com.google.protobuf.GeneratedMessage
+      implements MonsterJobProtoOrBuilder {
+    // Use MonsterJobProto.newBuilder() to construct.
+    private MonsterJobProto(Builder builder) {
+      super(builder);
+    }
+    private MonsterJobProto(boolean noInit) {}
+    
+    private static final MonsterJobProto defaultInstance;
+    public static MonsterJobProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MonsterJobProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.JobProto.internal_static_com_lvl6_proto_MonsterJobProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.JobProto.internal_static_com_lvl6_proto_MonsterJobProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 monsterJobId = 1;
+    public static final int MONSTERJOBID_FIELD_NUMBER = 1;
+    private int monsterJobId_;
+    public boolean hasMonsterJobId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getMonsterJobId() {
+      return monsterJobId_;
+    }
+    
+    // optional int32 monsterId = 2;
+    public static final int MONSTERID_FIELD_NUMBER = 2;
+    private int monsterId_;
+    public boolean hasMonsterId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getMonsterId() {
+      return monsterId_;
+    }
+    
+    // optional int32 quanity = 3;
+    public static final int QUANITY_FIELD_NUMBER = 3;
+    private int quanity_;
+    public boolean hasQuanity() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getQuanity() {
+      return quanity_;
+    }
+    
+    // optional .com.lvl6.proto.MonsterJobType monsterJobType = 4;
+    public static final int MONSTERJOBTYPE_FIELD_NUMBER = 4;
+    private com.lvl6.proto.JobProto.MonsterJobType monsterJobType_;
+    public boolean hasMonsterJobType() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public com.lvl6.proto.JobProto.MonsterJobType getMonsterJobType() {
+      return monsterJobType_;
+    }
+    
+    private void initFields() {
+      monsterJobId_ = 0;
+      monsterId_ = 0;
+      quanity_ = 0;
+      monsterJobType_ = com.lvl6.proto.JobProto.MonsterJobType.COLLECT;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, monsterJobId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, monsterId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, quanity_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, monsterJobType_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, monsterJobId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, monsterId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, quanity_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, monsterJobType_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.JobProto.MonsterJobProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.JobProto.MonsterJobProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.JobProto.MonsterJobProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.JobProto.internal_static_com_lvl6_proto_MonsterJobProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.JobProto.internal_static_com_lvl6_proto_MonsterJobProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.JobProto.MonsterJobProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        monsterJobId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        monsterId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        quanity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        monsterJobType_ = com.lvl6.proto.JobProto.MonsterJobType.COLLECT;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.JobProto.MonsterJobProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.JobProto.MonsterJobProto getDefaultInstanceForType() {
+        return com.lvl6.proto.JobProto.MonsterJobProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.JobProto.MonsterJobProto build() {
+        com.lvl6.proto.JobProto.MonsterJobProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.JobProto.MonsterJobProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.JobProto.MonsterJobProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.JobProto.MonsterJobProto buildPartial() {
+        com.lvl6.proto.JobProto.MonsterJobProto result = new com.lvl6.proto.JobProto.MonsterJobProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.monsterJobId_ = monsterJobId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.monsterId_ = monsterId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.quanity_ = quanity_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.monsterJobType_ = monsterJobType_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.JobProto.MonsterJobProto) {
+          return mergeFrom((com.lvl6.proto.JobProto.MonsterJobProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.JobProto.MonsterJobProto other) {
+        if (other == com.lvl6.proto.JobProto.MonsterJobProto.getDefaultInstance()) return this;
+        if (other.hasMonsterJobId()) {
+          setMonsterJobId(other.getMonsterJobId());
+        }
+        if (other.hasMonsterId()) {
+          setMonsterId(other.getMonsterId());
+        }
+        if (other.hasQuanity()) {
+          setQuanity(other.getQuanity());
+        }
+        if (other.hasMonsterJobType()) {
+          setMonsterJobType(other.getMonsterJobType());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              monsterJobId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              monsterId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              quanity_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.JobProto.MonsterJobType value = com.lvl6.proto.JobProto.MonsterJobType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                monsterJobType_ = value;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 monsterJobId = 1;
+      private int monsterJobId_ ;
+      public boolean hasMonsterJobId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getMonsterJobId() {
+        return monsterJobId_;
+      }
+      public Builder setMonsterJobId(int value) {
+        bitField0_ |= 0x00000001;
+        monsterJobId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterJobId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        monsterJobId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 monsterId = 2;
+      private int monsterId_ ;
+      public boolean hasMonsterId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getMonsterId() {
+        return monsterId_;
+      }
+      public Builder setMonsterId(int value) {
+        bitField0_ |= 0x00000002;
+        monsterId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        monsterId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 quanity = 3;
+      private int quanity_ ;
+      public boolean hasQuanity() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getQuanity() {
+        return quanity_;
+      }
+      public Builder setQuanity(int value) {
+        bitField0_ |= 0x00000004;
+        quanity_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearQuanity() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        quanity_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.MonsterJobType monsterJobType = 4;
+      private com.lvl6.proto.JobProto.MonsterJobType monsterJobType_ = com.lvl6.proto.JobProto.MonsterJobType.COLLECT;
+      public boolean hasMonsterJobType() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public com.lvl6.proto.JobProto.MonsterJobType getMonsterJobType() {
+        return monsterJobType_;
+      }
+      public Builder setMonsterJobType(com.lvl6.proto.JobProto.MonsterJobType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        monsterJobType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterJobType() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        monsterJobType_ = com.lvl6.proto.JobProto.MonsterJobType.COLLECT;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MonsterJobProto)
+    }
+    
+    static {
+      defaultInstance = new MonsterJobProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MonsterJobProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_BuildStructJobProto_descriptor;
   private static
@@ -2022,6 +2540,11 @@ public final class JobProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserUpgradeStructJobProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_MonsterJobProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_MonsterJobProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2042,8 +2565,12 @@ public final class JobProto {
       "lReq\030\003 \001(\005\"u\n MinimumUserUpgradeStructJo" +
       "bProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022",
       "\032\n\022upgradeStructJobId\030\003 \001(\005\022\024\n\014currentLe" +
-      "vel\030\004 \001(\005*3\n\016MonsterJobType\022\013\n\007COLLECT\020\001" +
-      "\022\n\n\006DONATE\020\002\022\010\n\004KILL\020\003B\nB\010JobProto"
+      "vel\030\004 \001(\005\"\203\001\n\017MonsterJobProto\022\024\n\014monster" +
+      "JobId\030\001 \001(\005\022\021\n\tmonsterId\030\002 \001(\005\022\017\n\007quanit" +
+      "y\030\003 \001(\005\0226\n\016monsterJobType\030\004 \001(\0162\036.com.lv" +
+      "l6.proto.MonsterJobType*3\n\016MonsterJobTyp" +
+      "e\022\013\n\007COLLECT\020\001\022\n\n\006DONATE\020\002\022\010\n\004KILL\020\003B\nB\010" +
+      "JobProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2082,6 +2609,14 @@ public final class JobProto {
               new java.lang.String[] { "UserId", "QuestId", "UpgradeStructJobId", "CurrentLevel", },
               com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.class,
               com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder.class);
+          internal_static_com_lvl6_proto_MonsterJobProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_MonsterJobProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MonsterJobProto_descriptor,
+              new java.lang.String[] { "MonsterJobId", "MonsterId", "Quanity", "MonsterJobType", },
+              com.lvl6.proto.JobProto.MonsterJobProto.class,
+              com.lvl6.proto.JobProto.MonsterJobProto.Builder.class);
           return null;
         }
       };

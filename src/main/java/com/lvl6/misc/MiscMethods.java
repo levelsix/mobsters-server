@@ -55,6 +55,7 @@ import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TournamentEventRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
@@ -297,18 +298,7 @@ public class MiscMethods {
     }     
 
   }
-//
-//  public static Location getRandomValidLocation() {
-//    ValidLocationBox[] vlbs = ControllerConstants.USER_CREATE__VALIDATION_BOXES;
-//    if (vlbs != null && vlbs.length >= 1) {
-//      ValidLocationBox vlb = vlbs[new Random().nextInt(vlbs.length)];
-//      double latitude = vlb.getBotLeftY() + Math.random()*vlb.getHeight();
-//      double longitude = vlb.getBotLeftX() + Math.random()*vlb.getWidth();
-//      return new Location(latitude, longitude);
-//    }
-//    return new Location(-117.69765, 33.57793);    //ARBITRARY LAND SPOT
-//  }
-
+  
   public static StartupConstants createStartupConstantsProto() {
     StartupConstants.Builder cb = StartupConstants.newBuilder()
         .setMaxNumOfSingleStruct(ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE)
@@ -429,12 +419,6 @@ public class MiscMethods {
       cb.addInAppPurchasePackages(iapb.build());
     }
 
-//    BazaarMinLevelConstants bmlc = BazaarMinLevelConstants.newBuilder()
-//        .setLeaderboardMinLevel(ControllerConstants.STARTUP__LEADERBOARD_MIN_LEVEL)
-//        .setEnhancingMinLevel(ControllerConstants.STARTUP__ENHANCING_MIN_LEVEL_TO_UNLOCK)
-//        .build();
-//    cb = cb.setMinLevelConstants(bmlc);
-
 //    LeaderboardEventConstants lec =LeaderboardEventConstants.newBuilder()
 //        .setWinsWeight(ControllerConstants.TOURNAMENT_EVENT__WINS_WEIGHT)
 //        .setLossesWeight(ControllerConstants.TOURNAMENT_EVENT__LOSSES_WEIGHT)
@@ -541,19 +525,22 @@ public class MiscMethods {
   public static void reloadAllRareChangeStaticData() {
     log.info("Reloading rare change static data");
     AlertOnStartupRetrieveUtils.reload();
-    BoosterPackRetrieveUtils.reload();
-    BoosterItemRetrieveUtils.reload();
     BannedUserRetrieveUtils.reload();
-    CityRetrieveUtils.reload();
+    BoosterItemRetrieveUtils.reload();
+    BoosterPackRetrieveUtils.reload();
     CityElementsRetrieveUtils.reload(); 
+    CityRetrieveUtils.reload();
+//    ClanBossRetrieveUtils.reload();
+//    ClanBossRewardRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
     LevelsRequiredExperienceRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
-    MonsterRewardRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
+    MonsterRewardRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
     QuestJobBuildStructRetrieveUtils.reload();
+    QuestJobMonsterRetrieveUtils.reload();
     QuestJobUpgradeStructRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     StructureRetrieveUtils.reload();
@@ -562,123 +549,9 @@ public class MiscMethods {
     TaskStageRetrieveUtils.reload();
     TournamentEventRetrieveUtils.reload();
     TournamentEventRewardRetrieveUtils.reload();
-//    ClanBossRetrieveUtils.reload();
-//    ClanBossRewardRetrieveUtils.reload();
     
   }
 
-
-//  public static int chooseMysteryBoxEquip(User user) {
-//    int userLevelMin = user.getLevel()-ControllerConstants.STARTUP__DAILY_BONUS_RECEIVE_EQUIP_LEVEL_RANGE;
-//    int userLevelMax = user.getLevel()+ControllerConstants.STARTUP__DAILY_BONUS_RECEIVE_EQUIP_LEVEL_RANGE;
-//    double randItem = Math.random();
-//    double randSelection = Math.random();
-//    double totalPercentage = 0;
-//    int retEquipId = ControllerConstants.TUTORIAL__FAKE_QUEST_AMULET_LOOT_EQUIP_ID;
-//
-//    List<Equipment> allEquipment = EquipmentRetrieveUtils.getAllEquipmentForClassType(getClassTypeFromUserType(user.getType()));
-//    List<Equipment> commonEquips = new ArrayList<Equipment>();
-//    List<Equipment> uncommonEquips = new ArrayList<Equipment>();
-//    List<Equipment> rareEquips = new ArrayList<Equipment>();
-//    List<Equipment> epicEquips = new ArrayList<Equipment>();
-//    List<Equipment> legendaryEquips = new ArrayList<Equipment>();
-//
-//    for (Equipment e:allEquipment) {
-//      if (e.getMinLevel()>=userLevelMin && e.getMinLevel()<=userLevelMax) {
-//        //the equipment is at the right level	
-//        if (e.getRarity().equals(Rarity.COMMON)) {
-//          commonEquips.add(e);
-//        } else if (e.getRarity().equals(Rarity.UNCOMMON)) {
-//          uncommonEquips.add(e);
-//        } else if (e.getRarity().equals(Rarity.RARE)) {
-//          rareEquips.add(e);
-//        } else if (e.getRarity().equals(Rarity.EPIC)) {
-//          epicEquips.add(e);
-//        } else if (e.getRarity().equals(Rarity.LEGENDARY)) {
-//          legendaryEquips.add(e);
-//        } else {
-//          log.error("ERROR! equipment " + e + " has no rarity");
-//        }
-//      }
-//    }
-//    if (randItem<=(totalPercentage+=ControllerConstants.STARTUP__DAILY_BONUS_PERCENTAGE_CHANCE_COMMON_EQUIP)) {
-//      if (commonEquips !=  null) {
-//        int selection = (int) randSelection*commonEquips.size();
-//        retEquipId = commonEquips.get(selection).getId();
-//      }
-//    } else if (randItem<=(totalPercentage+=ControllerConstants.STARTUP__DAILY_BONUS_PERCENTAGE_CHANCE_UNCOMMON_EQUIP)) {
-//      if (uncommonEquips != null) {
-//        int selection = (int) randSelection*uncommonEquips.size();	
-//        retEquipId = uncommonEquips.get(selection).getId();
-//      }
-//    } else if (randItem<=(totalPercentage+=ControllerConstants.STARTUP__DAILY_BONUS_PERCENTAGE_CHANCE_RARE_EQUIP)) {
-//      if (rareEquips != null) {
-//        int selection = (int) randSelection*rareEquips.size();	
-//        retEquipId = rareEquips.get(selection).getId();
-//      }
-//    } else if (randItem<=(totalPercentage+=ControllerConstants.STARTUP__DAILY_BONUS_PERCENTAGE_CHANCE_EPIC_EQUIP)) {
-//      if (epicEquips != null) {
-//        int selection = (int) randSelection*epicEquips.size();	
-//        retEquipId = epicEquips.get(selection).getId();
-//      }
-//    } else if (randItem<=(totalPercentage+=ControllerConstants.STARTUP__DAILY_BONUS_PERCENTAGE_CHANCE_LEGENDARY_EQUIP)) {
-//      if (legendaryEquips != null) {
-//        int selection = (int) randSelection*legendaryEquips.size();
-//        retEquipId = legendaryEquips.get(selection).getId();
-//      }
-//    } 
-//
-//    return retEquipId;
-//  }
-
-  /*
-   * Returns true if the user's (short or long) marketplace license is still in effect
-   */
-  /*public static boolean validateMarketplaceLicense(User aUser, Timestamp timeActionBegan) {
-    Date longMarketplaceLicenseTimeOfPurchase = aUser.getLastLongLicensePurchaseTime();
-    Date shortMarketplaceLicenseTimeOfPurchase = aUser.getLastShortLicensePurchaseTime();
-
-    boolean longLicenseValid = false;
-    boolean shortLicenseValid = false;
-
-    double daysToMilliseconds = 24 * 60 * 60 * 1000;
-
-    double startTime = timeActionBegan.getTime();
-
-    //check if long license valid
-    if (null != longMarketplaceLicenseTimeOfPurchase) {
-      //time long license was bought
-      double timeLicensePurchased = longMarketplaceLicenseTimeOfPurchase.getTime();
-      double timeLongLicenseIsEffective = 
-          ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__DAYS_FOR_LONG_LICENSE *
-          daysToMilliseconds;
-      double timeLongLicenseEnds = timeLicensePurchased + timeLongLicenseIsEffective;
-
-      if(startTime < timeLongLicenseEnds) {
-        longLicenseValid = true;
-      }
-    }
-
-    //check if short license valid
-    if (null != shortMarketplaceLicenseTimeOfPurchase) {
-      //time short license was bought
-      double timeLicensePurchased = shortMarketplaceLicenseTimeOfPurchase.getTime();
-      double timeShortLicenseIsEffective = 
-          ControllerConstants.PURCHASE_MARKETPLACE_LICENSE__DAYS_FOR_SHORT_LICENSE *
-          daysToMilliseconds;
-      double timeShortLicenseEnds = timeLicensePurchased + timeShortLicenseIsEffective;
-
-      if(startTime < timeShortLicenseEnds) {
-        shortLicenseValid = true;
-      }
-    }	  
-
-    if(longLicenseValid || shortLicenseValid) {
-      return true;
-    } else {
-      return false;
-    }
-  }*/
 
 //  //returns the clan towers that changed
 //  public static void sendClanTowerWarNotEnoughMembersNotification(
@@ -805,14 +678,6 @@ public class MiscMethods {
     }
     return s;
   }
-
-//  public static int getNumPostsInMarketPlaceForUser(int userId) {
-//    List<MarketplacePost> posts = MarketplacePostRetrieveUtils
-//        .getMostRecentActiveMarketplacePostsForPoster(
-//            ControllerConstants.POST_TO_MARKETPLACE__MAX_MARKETPLACE_POSTS_FROM_USER, 
-//            userId);
-//    return posts.size();
-//  }
 
   public static void writeToUserCurrencyOneUserGoldAndSilver(
       User aUser, Timestamp date, Map<String,Integer> goldSilverChange, 
@@ -1169,27 +1034,6 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     }
     return ints;
   }
-  
-//  //one of the arguments will be set and the other one will be null
-//  public static long getDateDMYinMillis(Timestamp nowTimestamp, Date nowDate) {
-//    Date nowTemp = null;
-//    
-//    if (null == nowTimestamp) {
-//      nowTemp = nowDate;
-//    } else {
-//      nowTemp = new Date(nowTimestamp.getTime());
-//    }
-//    Calendar curDate = Calendar.getInstance();
-//    curDate.setTime(nowTemp);
-//    curDate.set(Calendar.HOUR_OF_DAY, 0);
-//    curDate.set(Calendar.HOUR, 0);
-//    curDate.set(Calendar.MINUTE, 0);
-//    curDate.set(Calendar.SECOND, 0);
-//    curDate.set(Calendar.MILLISECOND, 0);
-//    curDate.set(Calendar.AM_PM, 0);
-//    
-//    return curDate.getTimeInMillis();
-//  }
   
   public static int getRandomIntFromList(List<Integer> numList) {
     int upperBound = numList.size();

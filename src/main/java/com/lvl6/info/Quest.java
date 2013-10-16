@@ -18,7 +18,7 @@ public class Quest implements Serializable {
   private int coinsGained;
   private int diamondsGained;
   private int expGained;
-  private int equipIdGained;
+  private int monsterIdGained;
   private List<Integer> questsRequiredForThis;
   private List<Integer> tasksRequired;
   private List<Integer> upgradeStructJobsRequired;
@@ -35,7 +35,7 @@ public class Quest implements Serializable {
 	public Quest(int id, int cityId, String goodName, String goodDescription,
 			String goodDoneResponse, Dialogue goodAcceptDialogue,
 			int assetNumWithinCity, int coinsGained, int diamondsGained,
-			int expGained, int equipIdGained, List<Integer> questsRequiredForThis,
+			int expGained, int monsterIdGained, List<Integer> questsRequiredForThis,
 			List<Integer> tasksRequired, List<Integer> upgradeStructJobsRequired,
 			List<Integer> buildStructJobsRequired, List<Integer> monsterJobsRequired,
 			int coinRetrievalAmountRequired,
@@ -52,7 +52,7 @@ public class Quest implements Serializable {
 		this.coinsGained = coinsGained;
 		this.diamondsGained = diamondsGained;
 		this.expGained = expGained;
-		this.equipIdGained = equipIdGained;
+		this.monsterIdGained = monsterIdGained;
 		this.questsRequiredForThis = questsRequiredForThis;
 		this.tasksRequired = tasksRequired;
 		this.upgradeStructJobsRequired = upgradeStructJobsRequired;
@@ -188,12 +188,12 @@ public class Quest implements Serializable {
 		this.expGained = expGained;
 	}
 
-	public int getEquipIdGained() {
-		return equipIdGained;
+	public int getMonsterIdGained() {
+		return monsterIdGained;
 	}
 
-	public void setEquipIdGained(int equipIdGained) {
-		this.equipIdGained = equipIdGained;
+	public void setMonsterIdGained(int monsterIdGained) {
+		this.monsterIdGained = monsterIdGained;
 	}
 
 	public List<Integer> getQuestsRequiredForThis() {
@@ -226,6 +226,14 @@ public class Quest implements Serializable {
 
 	public void setBuildStructJobsRequired(List<Integer> buildStructJobsRequired) {
 		this.buildStructJobsRequired = buildStructJobsRequired;
+	}
+
+	public List<Integer> getMonsterJobsRequired() {
+		return monsterJobsRequired;
+	}
+
+	public void setMonsterJobsRequired(List<Integer> monsterJobsRequired) {
+		this.monsterJobsRequired = monsterJobsRequired;
 	}
 
 	public int getCoinRetrievalAmountRequired() {
@@ -276,7 +284,7 @@ public class Quest implements Serializable {
 				+ goodDoneResponse + ", goodAcceptDialogue=" + goodAcceptDialogue
 				+ ", assetNumWithinCity=" + assetNumWithinCity + ", coinsGained="
 				+ coinsGained + ", diamondsGained=" + diamondsGained + ", expGained="
-				+ expGained + ", equipIdGained=" + equipIdGained
+				+ expGained + ", monsterIdGained=" + monsterIdGained
 				+ ", questsRequiredForThis=" + questsRequiredForThis
 				+ ", tasksRequired=" + tasksRequired + ", upgradeStructJobsRequired="
 				+ upgradeStructJobsRequired + ", buildStructJobsRequired="

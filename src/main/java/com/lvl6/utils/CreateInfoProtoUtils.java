@@ -25,8 +25,10 @@ import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Quest;
+import com.lvl6.info.QuestForUser;
 import com.lvl6.info.Referral;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskStage;
 import com.lvl6.info.TournamentEvent;
@@ -35,9 +37,8 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserMonster;
-import com.lvl6.info.QuestForUser;
-import com.lvl6.info.StructureForUser;
 import com.lvl6.info.jobs.QuestJobBuildStruct;
+import com.lvl6.info.jobs.QuestJobMonster;
 import com.lvl6.info.jobs.QuestJobUpgradeStruct;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
@@ -62,6 +63,8 @@ import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.JobProto.BuildStructJobProto;
 import com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto;
 import com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto;
+import com.lvl6.proto.JobProto.MonsterJobProto;
+import com.lvl6.proto.JobProto.MonsterJobType;
 import com.lvl6.proto.JobProto.UpgradeStructJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
@@ -88,12 +91,12 @@ import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 
 public class CreateInfoProtoUtils {
 
@@ -215,27 +218,28 @@ public class CreateInfoProtoUtils {
 		builder.setName(name);
 		builder.setDescription(description);
 		builder.setDoneResponse(doneResponse);
+		if (acceptDialogue != null) {
+			builder.setAcceptDialogue(createDialogueProtoFromDialogue(acceptDialogue));
+		}
 		builder.setAssetNumWithinCity(quest.getAssetNumWithinCity());
 		builder.setCoinsGained(quest.getCoinsGained());
 		builder.setDiamondsGained(quest.getDiamondsGained());
 		builder.setExpGained(quest.getExpGained());
-//		builder.setMonsterIdGained(quest.getEquipIdGained());
+		builder.setMonsterId(quest.getMonsterIdGained());
 		builder.addAllQuestsRequiredForThis(quest.getQuestsRequiredForThis());
 		builder.addAllTaskReqs(quest.getTasksRequired());
 		builder.addAllUpgradeStructJobsReqs(quest.getUpgradeStructJobsRequired());
 		builder.addAllBuildStructJobsReqs(quest.getBuildStructJobsRequired());
-		builder.setNumComponentsForGood(quest.getNumComponents());
+		builder.addAllMonsterJobsReqs(quest.getMonsterJobsRequired());
 		builder.setCoinRetrievalReq(quest.getCoinRetrievalAmountRequired());
-		builder.setQuestGiverImageSuffix(questGiverImageSuffix);
-		if (acceptDialogue != null) {
-			builder.setAcceptDialogue(createDialogueProtoFromDialogue(acceptDialogue));
-		}
-		if (questGiverName != null) {
-			builder.setQuestGiverName(questGiverName);
-		}
 		if (quest.getSpecialQuestActionRequired() != null) {
 			builder.setSpecialQuestActionReq(quest.getSpecialQuestActionRequired());
 		}
+		builder.setNumComponentsForGood(quest.getNumComponents());
+		if (questGiverName != null) {
+			builder.setQuestGiverName(questGiverName);
+		}
+		builder.setQuestGiverImageSuffix(questGiverImageSuffix);
 		if (quest.getPriority() > 0) {
 			builder.setPriority(quest.getPriority());
 		}
@@ -452,6 +456,20 @@ public class CreateInfoProtoUtils {
 	public static UpgradeStructJobProto createFullUpgradeStructJobProtoFromUpgradeStructJob(
 			QuestJobUpgradeStruct j) {
 		return UpgradeStructJobProto.newBuilder().setUpgradeStructJobId(j.getId()).setStructId(j.getStructId()).setLevelReq(j.getLevelReq()).build();
+	}
+	
+	public static MonsterJobProto createFullMonsterJobProtoFromQuestJobMonster(QuestJobMonster qjm) {
+		MonsterJobProto.Builder mjpb = MonsterJobProto.newBuilder();
+		mjpb.setMonsterJobId(qjm.getId());
+		mjpb.setMonsterId(qjm.getMonsterId());
+		mjpb.setQuanity(qjm.getQuantity());
+		int val = qjm.getMonsterJobType();
+		if (val > 0) {
+			MonsterJobType mjt = MonsterJobType.valueOf(val);
+			mjpb.setMonsterJobType(mjt);
+		}
+		
+		return mjpb.build();
 	}
 
 
@@ -953,4 +971,7 @@ public class CreateInfoProtoUtils {
 		mpb.setPuzzlePieceDropped(puzzlePieceDropped);
 		return mpb.build();
 	}
+	
+	
+	
 }
