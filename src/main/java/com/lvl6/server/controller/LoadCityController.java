@@ -12,6 +12,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LoadCityRequestEvent;
 import com.lvl6.events.response.LoadCityResponseEvent;
 import com.lvl6.info.City;
+import com.lvl6.info.CityElement;
 import com.lvl6.info.Quest;
 import com.lvl6.info.User;
 import com.lvl6.info.QuestForUser;
@@ -21,8 +22,10 @@ import com.lvl6.proto.EventCityProto.LoadCityResponseProto.Builder;
 import com.lvl6.proto.EventCityProto.LoadCityResponseProto.LoadCityStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class LoadCityController extends EventController {
@@ -66,12 +69,12 @@ import com.lvl6.utils.RetrieveUtils;
       boolean legitCityLoad = checkLegitCityLoad(resBuilder, user, city);//, currentCityRankForUser);
 
       if (legitCityLoad) {
-//        List<CityElement> neutralCityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
-//        if (neutralCityElements != null) {
-//          for (CityElement nce : neutralCityElements) {
-//            resBuilder.addCityElements(CreateInfoProtoUtils.createCityElementProtoFromCityElement(nce, user.getType()));
-//          }
-//        }
+        List<CityElement> neutralCityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
+        if (neutralCityElements != null) {
+          for (CityElement nce : neutralCityElements) {
+            resBuilder.addCityElements(CreateInfoProtoUtils.createCityElementProtoFromCityElement(nce));
+          }
+        }
 
 //        List<Task> tasks = TaskRetrieveUtils.getAllTasksForCityId(cityId);
 //        if (tasks != null && tasks.size() > 0) {
