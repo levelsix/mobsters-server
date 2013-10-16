@@ -54,16 +54,16 @@ public class IAPValues {
   public static final String PACKAGES4BSALE = Globals.APPLE_BUNDLE_ID() + ".packageS4bsale";
   public static final String PACKAGES5BSALE = Globals.APPLE_BUNDLE_ID() + ".packageS5bsale";
 
-  public static final String PACKAGE1IMG = "goldstack1.png";
-  public static final String PACKAGE2IMG = "goldstack2.png";
-  public static final String PACKAGE3IMG = "goldstack3.png";
-  public static final String PACKAGE4IMG = "goldstack4.png";
-  public static final String PACKAGE5IMG = "goldstack5.png";
-  public static final String PACKAGES1IMG = "silverstack1.png";
-  public static final String PACKAGES2IMG = "silverstack2.png";
-  public static final String PACKAGES3IMG = "silverstack3.png";
-  public static final String PACKAGES4IMG = "silverstack4.png";
-  public static final String PACKAGES5IMG = "silverstack5.png";
+  public static final String PACKAGE1IMG = "pilegems.png";
+  public static final String PACKAGE2IMG = "baggems.png";
+  public static final String PACKAGE3IMG = "casegems.png";
+  public static final String PACKAGE4IMG = "safegems.png";
+  public static final String PACKAGE5IMG = "vaultgems.png";
+  public static final String PACKAGES1IMG = "stackcash.png";
+  public static final String PACKAGES2IMG = "bagcash.png";
+  public static final String PACKAGES3IMG = "casecash.png";
+  public static final String PACKAGES4IMG = "safecash.png";
+  public static final String PACKAGES5IMG = "vaultcash.png";
 
   /*
    * 1- $1 for 10 diamonds
