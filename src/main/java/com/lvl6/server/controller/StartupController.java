@@ -36,6 +36,7 @@ import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.RetrieveStaticDataResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.City;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
@@ -68,6 +69,7 @@ import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.AlertOnStartupRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
@@ -1289,10 +1291,10 @@ public class StartupController extends EventController {
 ////    Map<Integer, Integer> taskIdToNumTimesActedInRank = UserTaskRetrieveUtils
 ////        .getTaskIdToNumTimesActedInRankForUser(user.getId());
 //
-//    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-//    for (Integer cityId : cities.keySet()) {
-//      City city = cities.get(cityId);
-//      resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+    for (Integer cityId : cities.keySet()) {
+      City city = cities.get(cityId);
+      resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
 //      if (user.getLevel() >= city.getMinLevel()) {
 //
 //        if (!cityIdsToUserCityRanks.containsKey(city.getId())) {
@@ -1308,7 +1310,7 @@ public class StartupController extends EventController {
 //        resBuilder.addUserCityInfos(CreateInfoProtoUtils.createFullUserCityProto(user.getId(),
 //            city.getId(), cityIdsToUserCityRanks.get(city.getId()), numTasksComplete));
 //      }
-//    }
+    }
   }
 
 //  private int getNumTasksCompleteForUserCity(User user, City city,
