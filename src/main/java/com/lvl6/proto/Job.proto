@@ -34,3 +34,8 @@ message MinimumUserUpgradeStructJobProto {
 
 //------------------------------------------------------------------------------------------
 
+enum MonsterJobType {
+	COLLECT = 1;
+	DONATE = 2;
+	KILL = 3;
+}

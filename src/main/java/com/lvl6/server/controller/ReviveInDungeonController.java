@@ -25,7 +25,7 @@ import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.Builder;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.UserTaskRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -123,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     
     //make sure user task exists
-    UserTask ut = UserTaskRetrieveUtils.getUserTaskForId(userTaskId);
+    UserTask ut = TaskForUserRetrieveUtils.getUserTaskForId(userTaskId);
     if (null == ut) {
     	log.error("unexpected error: no user task for id userTaskId=" + userTaskId);
     	return false;

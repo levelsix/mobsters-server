@@ -22,11 +22,11 @@ import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.StringUtils;
 
-@Component @DependsOn("gameServer") public class UserStructRetrieveUtils {
+@Component @DependsOn("gameServer") public class StructureForUserRetrieveUtils {
 
   private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private final String TABLE_NAME = DBConstants.TABLE_USER_STRUCTS;
+  private final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_FOR_USER;
 
   public List<UserStruct> getUserStructsForUser(int userId) {
     log.debug("retrieving user structs for userId " + userId);

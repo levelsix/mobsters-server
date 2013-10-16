@@ -33,7 +33,7 @@ import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.Builder;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.UserTaskRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -148,7 +148,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	return false;
     }
     
-    UserTask aUserTask = UserTaskRetrieveUtils.getUserTaskForUserId(userId);
+    UserTask aUserTask = TaskForUserRetrieveUtils.getUserTaskForUserId(userId);
     if(null != aUserTask) {
       log.error("unexpected error: user has existing task when beginning another. " +
       		"No task should exist. user=" + u + "\t task=" + aTask + "\t userTask=" + aUserTask);

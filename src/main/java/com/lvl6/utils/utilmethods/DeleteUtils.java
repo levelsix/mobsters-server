@@ -76,29 +76,17 @@ public class DeleteUtils implements DeleteUtil {
     return false;
   }
 
-  /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteUserQuestInfoInTaskProgressAndCompletedTasks(int, int, int)
-   */
   @Override
- // //@CacheEvict(value = "questIdToUserTasksCompletedForQuestForUserCache", key="#userId")
-  public boolean deleteUserQuestInfoInTaskProgressAndCompletedTasks(int userId, int questId, int numTasks) {
+  public boolean deleteQuestTaskCompletedForUser(int userId, int questId, int numTasks) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__USER_ID, userId);
     conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__QUEST_ID, questId);
 
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_USER_QUESTS_COMPLETED_TASKS, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_QUEST_TASK_HISTORY, conditionParams, "and");
     if (numDeleted != numTasks) {
       return false;
     }
-
-    conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS_TASK_PROGRESS__USER_ID, userId);
-    conditionParams.put(DBConstants.USER_QUESTS_TASK_PROGRESS__QUEST_ID, questId);
-
-    numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_USER_QUESTS_TASK_PROGRESS, conditionParams, "and");
-    if (numDeleted != numTasks) {
-      return false;
-    }
+    
     return true;  
   }
 
@@ -136,7 +124,7 @@ public class DeleteUtils implements DeleteUtil {
   public boolean deleteUserStruct(int userStructId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.USER_STRUCTS__ID, userStructId);
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_USER_STRUCTS, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_STRUCTURE_FOR_USER, conditionParams, "and");
     if (numDeleted == 1) {
       return true;
     }
@@ -251,7 +239,7 @@ public class DeleteUtils implements DeleteUtil {
     return numDeleted;
   }
   public int deleteAllUserQuestsCompletedTasksForUser(int userId) {
-    String tableName = DBConstants.TABLE_USER_QUESTS_COMPLETED_TASKS;
+    String tableName = DBConstants.TABLE_QUEST_TASK_HISTORY;
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__USER_ID, userId);
@@ -268,17 +256,8 @@ public class DeleteUtils implements DeleteUtil {
     
     return numDeleted;
   }
-  public int deleteAllUserQuestsTaskProgress(int userId) {
-    String tableName = DBConstants.TABLE_USER_QUESTS_TASK_PROGRESS;
-    String condDelim = "and";
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS_TASK_PROGRESS__USER_ID, userId);
-    int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
-    
-    return numDeleted;
-  }
   public int deleteAllUserTasksForUser(int userId) {
-    String tableName = DBConstants.TABLE_USER_TASK;
+    String tableName = DBConstants.TABLE_TASK_FOR_USER;
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.USER_TASK__USER_ID, userId);

@@ -16,11 +16,11 @@ import org.springframework.stereotype.Component;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class UserQuestsCompletedTasksRetrieveUtils {
+@Component @DependsOn("gameServer") public class QuestTaskHistoryRetrieveUtils {
 
   private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private final String TABLE_NAME = DBConstants.TABLE_USER_QUESTS_COMPLETED_TASKS;
+  private final String TABLE_NAME = DBConstants.TABLE_QUEST_TASK_HISTORY;
 
   
   ////@Cacheable(value="questIdToUserTasksCompletedForQuestForUserCache", key="#userId")

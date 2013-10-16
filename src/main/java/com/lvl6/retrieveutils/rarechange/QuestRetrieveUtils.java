@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -147,7 +146,7 @@ import com.lvl6.utils.QuestGraph;
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
   private static Quest convertRSRowToQuest(ResultSet rs) throws SQLException {
-    StringTokenizer st;
+    String delimiter = ", ";
 
     int i = 1;
     int id = rs.getInt(i++);
@@ -164,43 +163,41 @@ import com.lvl6.utils.QuestGraph;
     int diamondsGained = rs.getInt(i++);
     int expGained = rs.getInt(i++);
     int equipIdGained = rs.getInt(i++);
-
+    
     String questsRequiredForThisString = rs.getString(i++);
     List<Integer> questsRequiredForThis = new ArrayList<Integer>();
     if (questsRequiredForThisString != null) {
-      st = new StringTokenizer(questsRequiredForThisString, ", ");
-      while (st.hasMoreTokens()) {
-        questsRequiredForThis.add(Integer.parseInt(st.nextToken()));
-      }
+      MiscMethods.explodeIntoInts(questsRequiredForThisString,
+      		delimiter, questsRequiredForThis);
     }
 
     String tasksRequiredString = rs.getString(i++);
     List<Integer> tasksRequired = new ArrayList<Integer>();
     if (tasksRequiredString != null) {
-      st = new StringTokenizer(tasksRequiredString, ", ");
-      while (st.hasMoreTokens()) {
-        tasksRequired.add(Integer.parseInt(st.nextToken()));
-      }
+      MiscMethods.explodeIntoInts(tasksRequiredString, delimiter, tasksRequired);
     }
 
     String upgradeStructJobsRequiredString = rs.getString(i++);
     List<Integer> upgradeStructJobsRequired = new ArrayList<Integer>();
     if (upgradeStructJobsRequiredString != null) {
-      st = new StringTokenizer(upgradeStructJobsRequiredString, ", ");
-      while (st.hasMoreTokens()) {
-        upgradeStructJobsRequired.add(Integer.parseInt(st.nextToken()));
-      }
+      MiscMethods.explodeIntoInts(upgradeStructJobsRequiredString,
+      		delimiter, upgradeStructJobsRequired);
     }
 
     String buildStructJobsRequiredString = rs.getString(i++);
     List<Integer> buildStructJobsRequired = new ArrayList<Integer>();
     if (buildStructJobsRequiredString != null) {
-      st = new StringTokenizer(buildStructJobsRequiredString, ", ");
-      while (st.hasMoreTokens()) {
-        buildStructJobsRequired.add(Integer.parseInt(st.nextToken()));
-      }
+      MiscMethods.explodeIntoInts(buildStructJobsRequiredString,
+      		delimiter, buildStructJobsRequired);
     }
 
+    String monsterJobsString = rs.getString(i++);
+    List<Integer> monsterJobsRequired = new ArrayList<Integer>();
+    if (null != monsterJobsString) {
+    	MiscMethods.explodeIntoInts(monsterJobsString,
+    			delimiter, monsterJobsRequired);
+    }
+    
     int coinRetrievalAmountRequired = rs.getInt(i++);
 
     SpecialQuestAction specialQuestActionRequired = null;
@@ -217,9 +214,9 @@ import com.lvl6.utils.QuestGraph;
     		goodDoneResponse, goodAcceptDialogue, assetNumWithinCity,
     		coinsGained, diamondsGained, expGained, equipIdGained,
     		questsRequiredForThis, tasksRequired, upgradeStructJobsRequired,
-    		buildStructJobsRequired, coinRetrievalAmountRequired,
-    		specialQuestActionRequired, goodQuestGiverImageSuffix, priority,
-    		carrotId);
+    		buildStructJobsRequired, monsterJobsRequired,
+    		coinRetrievalAmountRequired, specialQuestActionRequired,
+    		goodQuestGiverImageSuffix, priority, carrotId);
     return quest;
   }
 

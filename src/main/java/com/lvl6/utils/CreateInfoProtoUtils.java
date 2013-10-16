@@ -88,7 +88,7 @@ import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
@@ -259,11 +259,14 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static FullUserStructureProto createFullUserStructureProtoFromUserstruct(UserStruct userStruct) {
-		FullUserStructureProto.Builder builder = FullUserStructureProto.newBuilder().setUserStructId(userStruct.getId())
-				.setUserId(userStruct.getUserId()).setStructId(userStruct.getStructId()).setLevel(userStruct.getLevel())
-				.setIsComplete(userStruct.isComplete())
-				.setCoordinates(createCoordinateProtoFromCoordinatePair(userStruct.getCoordinates()))
-				.setOrientation(userStruct.getOrientation());
+		FullUserStructureProto.Builder builder = FullUserStructureProto.newBuilder();
+		builder.setUserStructId(userStruct.getId());
+		builder.setUserId(userStruct.getUserId());
+		builder.setStructId(userStruct.getStructId());
+		builder.setLevel(userStruct.getLevel());
+		builder.setIsComplete(userStruct.isComplete());
+		builder.setCoordinates(createCoordinateProtoFromCoordinatePair(userStruct.getCoordinates()));
+		builder.setOrientation(userStruct.getOrientation());
 		if (userStruct.getPurchaseTime() != null) {
 			builder.setPurchaseTime(userStruct.getPurchaseTime().getTime());
 		}
@@ -545,7 +548,7 @@ public class CreateInfoProtoUtils {
 							structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(userQuest.getUserId());              
 						}
 						for (Integer buildStructJobId : quest.getBuildStructJobsRequired()) {
-							BuildStructJob buildStructJob = BuildStructJobRetrieveUtils.getBuildStructJobForBuildStructJobId(buildStructJobId);
+							BuildStructJob buildStructJob = QuestJobBuildStructRetrieveUtils.getBuildStructJobForBuildStructJobId(buildStructJobId);
 							List<UserStruct> userStructs = structIdsToUserStructs.get(buildStructJob.getStructId());
 							int quantityBuilt = 0;
 							if (userStructs != null) {

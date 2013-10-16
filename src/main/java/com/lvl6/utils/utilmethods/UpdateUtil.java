@@ -126,9 +126,6 @@ public interface UpdateUtil {
   public abstract boolean incrementUserQuestDefeatTypeJobProgress(int userId,
       int questId, int defeatTypeJobId, int increment);
 
-  public abstract boolean incrementUserQuestTaskProgress(int userId,
-      int questId, int taskId, int increment);
-
   public abstract boolean updateUserEquipOwner(long userEquipId, int newOwnerId, String reason);
   
   public abstract boolean updateUserEquipEnhancementPercentage(long l, int newEnhancementPercentage);

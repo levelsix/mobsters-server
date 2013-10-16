@@ -194,7 +194,7 @@ public class UpdateUtils implements UpdateUtil {
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER_STRUCTS__ORIENTATION, orientation.getNumber());
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_STRUCTS, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, null, absoluteParams, 
 				conditionParams, "or");
 		if (numUpdated == 1) {
 			return true;
@@ -324,7 +324,7 @@ public class UpdateUtils implements UpdateUtil {
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 		relativeParams.put(DBConstants.USER_STRUCTS__LEVEL, levelChange);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_STRUCTS, relativeParams, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
 				conditionParams, "or");
 		if (numUpdated == 1) {
 			return true;
@@ -379,7 +379,7 @@ public class UpdateUtils implements UpdateUtil {
 
 		absoluteParams.put(DBConstants.USER_STRUCTS__IS_COMPLETE, isComplete);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_STRUCTS, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, null, absoluteParams, 
 				conditionParams, "or");
 		if (numUpdated == 1) {
 			return true;
@@ -422,7 +422,7 @@ public class UpdateUtils implements UpdateUtil {
 			newRows.add(aRow);
 		}
 
-		int numUpdated = DBConnection.get().replaceIntoTableValues(DBConstants.TABLE_USER_STRUCTS, newRows);
+		int numUpdated = DBConnection.get().replaceIntoTableValues(DBConstants.TABLE_STRUCTURE_FOR_USER, newRows);
 
 		Log.info("num userStructs updated: " + numUpdated 
 				+ ". Number of userStructs: " + userStructIdsToLastRetrievedTime.size());
@@ -449,7 +449,7 @@ public class UpdateUtils implements UpdateUtil {
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 		relativeParams.put(DBConstants.USER_STRUCTS__LEVEL, levelChange);
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_STRUCTS, relativeParams, null, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, null, 
 				conditionParams, "or");
 		if (numUpdated == 1) {
 			return true;
@@ -475,7 +475,7 @@ public class UpdateUtils implements UpdateUtil {
 		absoluteParams.put(DBConstants.USER_STRUCTS__X_COORD, coordinates.getX());
 		absoluteParams.put(DBConstants.USER_STRUCTS__Y_COORD, coordinates.getY());
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER_STRUCTS, null, absoluteParams, 
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, null, absoluteParams, 
 				conditionParams, "or");
 		if (numUpdated == 1) {
 			return true;
@@ -521,30 +521,6 @@ public class UpdateUtils implements UpdateUtil {
 
 		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS, insertParams, 
 				columnsToUpdate, null);//DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__NUM_DEFEATED, increment);
-
-		if (numUpdated >= 1) {
-			return true;
-		}
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#incrementUserQuestTaskProgress(int, int, int, int)
-	 */
-	@Override
-	public boolean incrementUserQuestTaskProgress(int userId, int questId, int taskId, int increment) {
-		Map <String, Object> insertParams = new HashMap<String, Object>();
-
-		insertParams.put(DBConstants.USER_QUESTS_TASK_PROGRESS__USER_ID, userId);
-		insertParams.put(DBConstants.USER_QUESTS_TASK_PROGRESS__QUEST_ID, questId);
-		insertParams.put(DBConstants.USER_QUESTS_TASK_PROGRESS__TASK_ID, taskId);
-		insertParams.put(DBConstants.USER_QUESTS_TASK_PROGRESS__NUM_TIMES_ACTED, increment);
-
-		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-		columnsToUpdate.put(DBConstants.USER_QUESTS_TASK_PROGRESS__NUM_TIMES_ACTED, increment);
-
-		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_QUESTS_TASK_PROGRESS, insertParams, 
-				columnsToUpdate, null);//DBConstants.USER_QUESTS_TASK_PROGRESS__NUM_TIMES_ACTED, increment);
 
 		if (numUpdated >= 1) {
 			return true;
@@ -689,7 +665,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 	public int incrementUserTaskNumRevives(long userTaskId, int numRevives) {
-		String tableName = DBConstants.TABLE_USER_TASK;
+		String tableName = DBConstants.TABLE_TASK_FOR_USER;
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER_TASK__ID, userTaskId);
 

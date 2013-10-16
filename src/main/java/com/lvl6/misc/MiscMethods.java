@@ -50,7 +50,7 @@ import com.lvl6.retrieveutils.rarechange.AlertOnStartupRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.BuildStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
@@ -147,6 +147,14 @@ public class MiscMethods {
       return new Dialogue(speakers, speakerTexts);
     }
     return null;
+  }
+  
+  public static void explodeIntoInts(String stringToExplode, 
+  		String delimiter, List<Integer> returnValue) {
+  	StringTokenizer st = new StringTokenizer(stringToExplode, ", ");
+  	while (st.hasMoreTokens()) {
+  		returnValue.add(Integer.parseInt(st.nextToken()));
+  	}
   }
 
   /*
@@ -533,7 +541,7 @@ public class MiscMethods {
     log.info("Reloading rare change static data");
     AlertOnStartupRetrieveUtils.reload();
     CityRetrieveUtils.reload();
-    BuildStructJobRetrieveUtils.reload();
+    QuestJobBuildStructRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
     UpgradeStructJobRetrieveUtils.reload();
@@ -940,7 +948,7 @@ public class MiscMethods {
     }
   }
 
-  public static String shallowListToString(List aList) {
+  public static String shallowListToString(List<?> aList) {
     StringBuilder returnValue = new StringBuilder();
     for(Object o : aList) {
       returnValue.append(" ");
@@ -949,7 +957,7 @@ public class MiscMethods {
     return returnValue.toString();
   }
 
-  public static String shallowMapToString(Map aMap) {
+  public static String shallowMapToString(Map<?, ?> aMap) {
     StringBuilder returnValue = new StringBuilder();
     if (null != aMap && !aMap.isEmpty()) {
       returnValue.append("[");

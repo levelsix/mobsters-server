@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +19,11 @@ import com.lvl6.info.UserTask;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class UserTaskRetrieveUtils {
+@Component @DependsOn("gameServer") public class TaskForUserRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
-  private static final String TABLE_NAME = DBConstants.TABLE_USER_TASK;
+  private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER;
   
   public static UserTask getUserTaskForId(long userTaskId) {
     Connection conn = DBConnection.get().getConnection();
