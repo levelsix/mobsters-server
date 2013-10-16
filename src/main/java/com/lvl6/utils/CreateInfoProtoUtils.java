@@ -424,10 +424,11 @@ public class CreateInfoProtoUtils {
 		builder.setIncome(s.getIncome());
 		builder.setMinutesToGain(s.getMinutesToGain());
 		builder.setMinutesToBuild(1234567890);
-		builder.setMinutesToUpgradeBase(s.getMinutesToUpgradeBase()).setCoinPrice(s.getCoinPrice());
-		builder.setDiamondPrice(s.getDiamondPrice()).setMinLevel(s.getMinLevel());
-		builder.setXLength(s.getxLength()).setYLength(s.getyLength());
-		builder.setInstaUpgradeDiamondCostBase(s.getInstaUpgradeDiamondCostBase());
+		builder.setCoinPrice(s.getCoinPrice());
+		builder.setDiamondPrice(s.getDiamondPrice());
+		builder.setMinLevel(s.getMinLevel());
+		builder.setXLength(s.getxLength());
+		builder.setYLength(s.getyLength());
 		builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
 
 		return builder.build();

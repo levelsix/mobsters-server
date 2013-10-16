@@ -123,7 +123,7 @@ public interface InsertUtil {
 	public abstract long insertIntoUserTaskReturnId(int userId, int taskId, 
 			int expGained, int silverGained, Timestamp startTime); 
 
-	public abstract int insertIntoUserTaskHistory(long userTaskId, int userId,
+	public abstract int insertIntoTaskHistory(long userTaskId, int userId,
 			int taskId, int expGained, int silverGained, int numRevives,
 			Timestamp startTime, Timestamp endTime, boolean userWon);
 	
@@ -131,7 +131,8 @@ public interface InsertUtil {
 			List<Integer> monsterId, List<Integer> expGained, List<Integer> silverGained,
 			List<Boolean> monsterPieceDropped);
 	
-	public abstract int insertIntoUserTaskStageHistory(List<Long> userTaskId, List<Integer> stageNum,
-			List<Integer> monsterId, List<Integer> expGained, List<Integer> silverGained,
+	public abstract int insertIntoTaskStageHistory(List<Long> userTaskStageId,
+			List<Long> userTaskId, List<Integer> stageNum, List<Integer> monsterId,
+			List<Integer> expGained, List<Integer> silverGained,
 			List<Boolean> monsterPieceDropped);
 }

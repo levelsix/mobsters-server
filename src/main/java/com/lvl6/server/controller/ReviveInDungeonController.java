@@ -16,7 +16,7 @@ import com.lvl6.events.request.ReviveInDungeonRequestEvent;
 import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
-import com.lvl6.info.UserTask;
+import com.lvl6.info.TaskForUser;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
@@ -69,13 +69,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //      int previousSilver = 0;
 //      int previousGold = 0;
 
-      List<UserTask> userTaskList = new ArrayList<UserTask>();
+      List<TaskForUser> userTaskList = new ArrayList<TaskForUser>();
       boolean legit = checkLegit(resBuilder, aUser, userId, userTaskId, userTaskList);
 
 
       boolean successful = false;
       if(legit) {
-    	  UserTask ut = userTaskList.get(0);
+    	  TaskForUser ut = userTaskList.get(0);
 //        previousSilver = aUser.getCoins() + aUser.getVaultBalance();
 //        previousGold = aUser.getDiamonds();
     	  successful = writeChangesToDb(aUser, userId, ut, userTaskId, curTime);
@@ -116,14 +116,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * builder status to the appropriate value.
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
-		  long userTaskId, List<UserTask> userTaskList) {
+		  long userTaskId, List<TaskForUser> userTaskList) {
     if (null == u) {
       log.error("unexpected error: user is null. user=" + u);
       return false;
     }
     
     //make sure user task exists
-    UserTask ut = TaskForUserRetrieveUtils.getUserTaskForId(userTaskId);
+    TaskForUser ut = TaskForUserRetrieveUtils.getUserTaskForId(userTaskId);
     if (null == ut) {
     	log.error("unexpected error: no user task for id userTaskId=" + userTaskId);
     	return false;
@@ -144,7 +144,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
 
-  private boolean writeChangesToDb(User u, int uId, UserTask ut, long userTaskId, 
+  private boolean writeChangesToDb(User u, int uId, TaskForUser ut, long userTaskId, 
 		  Timestamp clientTime) {
 	  
 	  //update user diamonds

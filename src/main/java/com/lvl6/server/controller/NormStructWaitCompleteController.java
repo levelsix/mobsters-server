@@ -138,27 +138,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         log.error("no struct in db exists with id " + us.getStructId());
         return false;        
       }
-      /*
+      
       if (us.getLastUpgradeTime() != null) {
-        if (us.getLastUpgradeTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(struct.getMinutesToUpgradeBase(), us.getLevel()) > clientTime.getTime()) {
+        if (us.getLastUpgradeTime().getTime() + 60000*struct.getMinutesToBuild() > clientTime.getTime()) {
           resBuilder.setStatus(NormStructWaitCompleteStatus.NOT_DONE_YET);
-          log.error("the upgrading is not done yet. userstruct=" + us + ", and minutes to upgrade user struct is "
-              + MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(struct.getMinutesToUpgradeBase(), us.getLevel())
-              + ", client time is " + clientTime + ", upgrade time was " + us.getLastUpgradeTime());
+          log.error("the upgrading is not done yet. userstruct=" + us
+          		+ ", and minutes to upgrade user struct is "
+              + 60000*struct.getMinutesToBuild() + ", client time is " +
+          		clientTime + ", upgrade time was " + us.getLastUpgradeTime());
           return false;
         }
       } else if (us.getPurchaseTime() != null) {
-        if (us.getPurchaseTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(struct.getMinutesToUpgradeBase(), 0) > clientTime.getTime()) {
+        if (us.getPurchaseTime().getTime() + 60000*struct.getMinutesToBuild() > clientTime.getTime()) {
           resBuilder.setStatus(NormStructWaitCompleteStatus.NOT_DONE_YET);
           log.error("the building is not done yet. userstruct="
               + ", client time is " + clientTime + ", purchase time was " + us.getPurchaseTime());
           return false;
         }        
-      } else {*/
+      } else {
         resBuilder.setStatus(NormStructWaitCompleteStatus.OTHER_FAIL);
         log.error("user struct has never been bought or purchased according to db. " + us);
         return false;                
-      //}
+      }
     }
     resBuilder.setStatus(NormStructWaitCompleteStatus.SUCCESS);
     return true;  

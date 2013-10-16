@@ -49,7 +49,7 @@ public class DBConstants {
   public static final String TABLE_TASK_FOR_USER = "task_for_user";
   public static final String TABLE_TASK_HISTORY = "task_history";
   public static final String TABLE_TASK_STAGE = "task_stage";
-  public static final String TABLE_USER_TASK_STAGE = "task_stage_for_user";
+  public static final String TABLE_TASK_STAGE_FOR_USER = "task_stage_for_user";
   public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
 	public static final String TABLE_TOURNAMENT_EVENT = "tournament_event";	
 	public static final String TABLE_TOURNAMENT_EVENT_FOR_USER = "tournament_event_for_user";
@@ -60,7 +60,7 @@ public class DBConstants {
 	public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
 	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
   public static final String TABLE_USER_SESSION = "user_session";
-  public static final String TABLE_USER_TASK_STAGE_HISTORY = "task_stage_history_for_user";
+  public static final String TABLE_TASK_STAGE_HISTORY = "task_stage_history";
   
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
@@ -321,16 +321,16 @@ public class DBConstants {
   public static final String USER_STRUCTS__ORIENTATION = "orientation";
 
   /*TASK FOR USER TABLE*/
-  public static final String USER_TASK__ID = GENERIC__ID;
-  public static final String USER_TASK__USER_ID = GENERIC__USER_ID;
-  public static final String USER_TASK__TASK_ID = "task_id";
-  public static final String USER_TASK__EXP_GAINED = "exp_gained";
-  public static final String USER_TASK__SILVER_GAINED = "silver_gained";
-  public static final String USER_TASK__NUM_REVIVES = "num_revives";
-  public static final String USER_TASK__START_TIME = "start_time";
+  public static final String TASK_FOR_USER__ID = GENERIC__ID;
+  public static final String TASK_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String TASK_FOR_USER__TASK_ID = "task_id";
+  public static final String TASK_FOR_USER__EXP_GAINED = "exp_gained";
+  public static final String TASK_FOR_USER__SILVER_GAINED = "silver_gained";
+  public static final String TASK_FOR_USER__NUM_REVIVES = "num_revives";
+  public static final String TASK_FOR_USER__START_TIME = "start_time";
 
   /*TASK HISTORY TABLE*/
-  public static final String TASK_HISTORY__USER_TASK_ID = "task_for_user_id";
+  public static final String TASK_HISTORY__TASK_FOR_USER_ID = "task_for_user_id";
   public static final String TASK_HISTORY__USER_ID = GENERIC__USER_ID;
   public static final String TASK_HISTORY__TASK_ID = "task_id";
   public static final String TASK_HISTORY__EXP_GAINED = "exp_gained";
@@ -346,23 +346,23 @@ public class DBConstants {
   public static final String TASK_STAGE__STAGE_NUM = "stage_num";
   public static final String TASK_STAGE__EQUIP_DROP_RATE = "equip_drop_rate";
   
-  /*USER TASK STAGE TABLE*/
-  public static final String USER_TASK_STAGE__ID = GENERIC__ID;
-  public static final String USER_TASK_STAGE__USER_TASK_ID = "user_task_id";
-  public static final String USER_TASK_STAGE__STAGE_NUM = "stage_num";
-  public static final String USER_TASK_STAGE__MONSTER_ID = "monster_id";
-  public static final String USER_TASK_STAGE__EXP_GAINED = "exp_gained";
-  public static final String USER_TASK_STAGE__SILVER_GAINED = "silver_gained";
-  public static final String USER_TASK_STAGE__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
+  /*TASK STAGE FOR USER TABLE*/
+  public static final String TASK_STAGE_FOR_USER__ID = GENERIC__ID;
+  public static final String TASK_STAGE_FOR_USER__TASK_FOR_USER_ID = "task_for_user_id";
+  public static final String TASK_STAGE_FOR_USER__STAGE_NUM = "stage_num";
+  public static final String TASK_STAGE_FOR_USER__MONSTER_ID = "monster_id";
+  public static final String TASK_STAGE_FOR_USER__EXP_GAINED = "exp_gained";
+  public static final String TASK_STAGE_FOR_USER__SILVER_GAINED = "silver_gained";
+  public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   
   /*USER TASK STAGE HISTORY TABLE*/
-  public static final String USER_TASK_STAGE_HISTORY__ID = GENERIC__ID;
-  public static final String USER_TASK_STAGE_HISTORY__USER_TASK_ID = "user_task_id";
-  public static final String USER_TASK_STAGE_HISTORY__STAGE_NUM = "stage_num";
-  public static final String USER_TASK_STAGE_HISTORY__MONSTER_ID = "monster_id";
-  public static final String USER_TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";
-  public static final String USER_TASK_STAGE_HISTORY__SILVER_GAINED = "silver_gained";
-  public static final String USER_TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
+  public static final String TASK_STAGE_HISTORY__ID = GENERIC__ID;
+  public static final String TASK_STAGE_HISTORY__TASK_STAGE_FOR_USER_ID = "task_stage_for_user_id";
+  public static final String TASK_STAGE_HISTORY__STAGE_NUM = "stage_num";
+  public static final String TASK_STAGE_HISTORY__MONSTER_ID = "monster_id";
+  public static final String TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";
+  public static final String TASK_STAGE_HISTORY__SILVER_GAINED = "silver_gained";
+  public static final String TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   
   /*TASK STAGE*/
   public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";

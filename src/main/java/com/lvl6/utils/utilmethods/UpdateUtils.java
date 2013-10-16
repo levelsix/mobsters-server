@@ -642,10 +642,10 @@ public class UpdateUtils implements UpdateUtil {
 	public int incrementUserTaskNumRevives(long userTaskId, int numRevives) {
 		String tableName = DBConstants.TABLE_TASK_FOR_USER;
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_TASK__ID, userTaskId);
+		conditionParams.put(DBConstants.TASK_FOR_USER__ID, userTaskId);
 
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_TASK__NUM_REVIVES, numRevives);
+		absoluteParams.put(DBConstants.TASK_FOR_USER__NUM_REVIVES, numRevives);
 
 		int numUpdated = DBConnection.get().updateTableRows(tableName, null,
 				absoluteParams, conditionParams, "AND");

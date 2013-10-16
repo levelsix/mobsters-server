@@ -81,26 +81,17 @@ import com.lvl6.utils.DBConnection;
     int income = rs.getInt(i++);
     int minutesToGain = rs.getInt(i++);
     int minutesToBuild = rs.getInt(i++);
-    int minutesToUpgradeBase = rs.getInt(i++);
     int coinPrice = rs.getInt(i++);
-    boolean coinPriceSet = !rs.wasNull();
     int diamondPrice = rs.getInt(i++);
-    boolean diamondPriceSet = !rs.wasNull();
     int minLevel = rs.getInt(i++);
     int xLength = rs.getInt(i++);
     int yLength = rs.getInt(i++);
     int instaBuildDiamondCost = rs.getInt(i++);
-    int instaRetrieveDiamondCostBase = rs.getInt(i++);
-    int instaUpgradeDiamondCostBase = rs.getInt(i++);
     int imgVerticalPixelOffset = rs.getInt(i++);
+    int successorStructId = rs.getInt(i++);
     
-    if (coinPriceSet && diamondPriceSet) {
-      log.error("struct cannot have coin price and diamond price, and this structId violates it: " + id);
-      return null;
-    }
-
-    return new Structure(id, name, income, minutesToGain, minutesToBuild, minutesToUpgradeBase, coinPrice, 
-        diamondPrice, minLevel, xLength, yLength, instaBuildDiamondCost, instaRetrieveDiamondCostBase, 
-        instaUpgradeDiamondCostBase, imgVerticalPixelOffset);
+    return new Structure(id, name, income, minutesToGain, minutesToBuild,
+    		coinPrice, diamondPrice, minLevel, xLength, yLength,
+    		instaBuildDiamondCost, imgVerticalPixelOffset, successorStructId);
   }
 }

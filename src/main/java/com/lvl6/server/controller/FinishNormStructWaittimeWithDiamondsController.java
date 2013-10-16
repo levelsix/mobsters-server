@@ -183,10 +183,6 @@ import com.lvl6.utils.RetrieveUtils;
     return true;  
   }
   
-  private int calculateDiamondCostForInstaRetrieve(StructureForUser userStruct, Structure struct) {
-    int result = struct.getInstaRetrieveDiamondCostBase() * userStruct.getLevel();
-    return Math.max(1, result);
-  }
   
 //  private int calculateDiamondCostForInstaUpgrade(UserStruct userStruct, Structure struct) {
 //    int result = (int)(struct.getInstaUpgradeDiamondCostBase() * userStruct.getLevel() * 

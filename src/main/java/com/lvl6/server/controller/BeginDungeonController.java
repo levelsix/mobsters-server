@@ -23,7 +23,7 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskStage;
 import com.lvl6.info.User;
-import com.lvl6.info.UserTask;
+import com.lvl6.info.TaskForUser;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
@@ -148,7 +148,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	return false;
     }
     
-    UserTask aUserTask = TaskForUserRetrieveUtils.getUserTaskForUserId(userId);
+    TaskForUser aUserTask = TaskForUserRetrieveUtils.getUserTaskForUserId(userId);
     if(null != aUserTask) {
       log.error("unexpected error: user has existing task when beginning another. " +
       		"No task should exist. user=" + u + "\t task=" + aTask + "\t userTask=" + aUserTask);
@@ -343,11 +343,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Collections.sort(stageNumList);
 	  int size = stageNumList.size();
 	  
-	  log.info("inserting task_stage_for_user: userTaskId="
-	  		+ userTaskId + "\t stageNumsToSilvers=" + stageNumsToSilvers
-	  		+ "\t stageNumsToExps=" + stageNumsToExps
-	  		+ "\t stageNumsToPuzzlePiecesDropped=" + stageNumsToPuzzlePiecesDropped
-	  		+ "\t stageNumsToMonsterIds=" + stageNumsToMonsterIds);
+//	  log.info("inserting task_stage_for_user: userTaskId="
+//	  		+ userTaskId + "\t stageNumsToSilvers=" + stageNumsToSilvers
+//	  		+ "\t stageNumsToExps=" + stageNumsToExps
+//	  		+ "\t stageNumsToPuzzlePiecesDropped=" + stageNumsToPuzzlePiecesDropped
+//	  		+ "\t stageNumsToMonsterIds=" + stageNumsToMonsterIds);
 	  
 	  
 	  //loop through the individual stages, saving each to the db.
@@ -365,7 +365,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds,
 	  			repeatedStageNum, monsterIds, expsGained, silverGained,
 	  			monsterPiecesDropped);
-	  	log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
+	  	//log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
 	  }
   }
   

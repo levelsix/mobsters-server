@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.UserTask;
+import com.lvl6.info.TaskForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -25,32 +25,32 @@ import com.lvl6.utils.DBConnection;
   
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER;
   
-  public static UserTask getUserTaskForId(long userTaskId) {
+  public static TaskForUser getUserTaskForId(long userTaskId) {
     Connection conn = DBConnection.get().getConnection();
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.USER_TASK__ID, userTaskId);
+    absoluteConditionParams.put(DBConstants.TASK_FOR_USER__ID, userTaskId);
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
-    UserTask ut = convertRSToUserTask(rs);
+    TaskForUser ut = convertRSToUserTask(rs);
     return ut;
   }
   
-  public static UserTask getUserTaskForUserId(int userId) {
+  public static TaskForUser getUserTaskForUserId(int userId) {
     Connection conn = DBConnection.get().getConnection();
     
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    UserTask ut = convertRSToUserTask(rs);
+    TaskForUser ut = convertRSToUserTask(rs);
     return ut;
   }
   
-  private static UserTask convertRSToUserTask(ResultSet rs) {
-    List<UserTask> utList = new ArrayList<UserTask>();
+  private static TaskForUser convertRSToUserTask(ResultSet rs) {
+    List<TaskForUser> utList = new ArrayList<TaskForUser>();
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
         while(rs.next()) {  //should only be one
-          UserTask ut = convertRSRowToUserTask(rs);
+          TaskForUser ut = convertRSRowToUserTask(rs);
           utList.add(ut);
         }
       } catch (SQLException e) {
@@ -71,7 +71,7 @@ import com.lvl6.utils.DBConnection;
     }
   }
   
-  private static UserTask convertRSRowToUserTask(ResultSet rs) throws SQLException {
+  private static TaskForUser convertRSRowToUserTask(ResultSet rs) throws SQLException {
     int i = 1;
     long id = rs.getLong(i++);
     int userId = rs.getInt(i++);
@@ -91,7 +91,7 @@ import com.lvl6.utils.DBConnection;
     	log.error("db error: start_date is null. userId=" + userId, e);
     }
     
-    return new UserTask(id, userId, taskId, expGained, silverGained,
+    return new TaskForUser(id, userId, taskId, expGained, silverGained,
     		numRevives, startDate);
   }
 }

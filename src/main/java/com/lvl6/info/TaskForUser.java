@@ -3,7 +3,7 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserTask implements Serializable {
+public class TaskForUser implements Serializable {
 
 	private static final long serialVersionUID = -3612315843594872687L;
 	private long id;
@@ -14,7 +14,7 @@ public class UserTask implements Serializable {
 	public int numRevives;
 	private Date startDate;
 	
-	public UserTask(long id, int userId, int taskId, int expGained,
+	public TaskForUser(long id, int userId, int taskId, int expGained,
 			int silverGained, int numRevives, Date startDate) {
 		super();
 		this.id = id;
@@ -84,9 +84,10 @@ public class UserTask implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserTask [id=" + id + ", userId=" + userId + ", taskId=" + taskId
-				+ ", expGained=" + expGained + ", silverGained=" + silverGained
-				+ ", numRevives=" + numRevives + ", startDate=" + startDate + "]";
+		return "TaskForUser [id=" + id + ", userId=" + userId + ", taskId="
+				+ taskId + ", expGained=" + expGained + ", silverGained="
+				+ silverGained + ", numRevives=" + numRevives + ", startDate="
+				+ startDate + "]";
 	}
 	
 }

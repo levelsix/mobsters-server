@@ -745,24 +745,24 @@ public class InsertUtils implements InsertUtil{
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
 	  //for recording what-dropped in which-stage
-	  insertParams.put(DBConstants.USER_TASK__USER_ID, userId);
-	  insertParams.put(DBConstants.USER_TASK__TASK_ID, taskId);
-	  insertParams.put(DBConstants.USER_TASK__EXP_GAINED, expGained);
-	  insertParams.put(DBConstants.USER_TASK__SILVER_GAINED, silverGained);
-	  insertParams.put(DBConstants.USER_TASK__NUM_REVIVES, 0);
-	  insertParams.put(DBConstants.USER_TASK__START_TIME, startTime);
+	  insertParams.put(DBConstants.TASK_FOR_USER__USER_ID, userId);
+	  insertParams.put(DBConstants.TASK_FOR_USER__TASK_ID, taskId);
+	  insertParams.put(DBConstants.TASK_FOR_USER__EXP_GAINED, expGained);
+	  insertParams.put(DBConstants.TASK_FOR_USER__SILVER_GAINED, silverGained);
+	  insertParams.put(DBConstants.TASK_FOR_USER__NUM_REVIVES, 0);
+	  insertParams.put(DBConstants.TASK_FOR_USER__START_TIME, startTime);
 	  
 	  long userTaskId = DBConnection.get().insertIntoTableBasicReturnLongId(
 			  DBConstants.TABLE_TASK_FOR_USER, insertParams);
 	  return userTaskId;
   }
   
-  public int insertIntoUserTaskHistory(long userTaskId, int userId, int taskId,
+  public int insertIntoTaskHistory(long userTaskId, int userId, int taskId,
 		  int expGained, int silverGained, int numRevives, Timestamp startTime,
 		  Timestamp endTime, boolean userWon) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
-	  insertParams.put(DBConstants.TASK_HISTORY__USER_TASK_ID, userTaskId);
+	  insertParams.put(DBConstants.TASK_HISTORY__TASK_FOR_USER_ID, userTaskId);
 	  insertParams.put(DBConstants.TASK_HISTORY__USER_ID, userId);
 	  insertParams.put(DBConstants.TASK_HISTORY__TASK_ID, taskId);
 	  insertParams.put(DBConstants.TASK_HISTORY__EXP_GAINED, expGained);
@@ -782,18 +782,18 @@ public class InsertUtils implements InsertUtil{
 	public int insertIntoUserTaskStage(List<Long> userTaskIds,
 			List<Integer> stageNums, List<Integer> monsterIds, List<Integer> expsGained,
 			List<Integer> silversGained, List<Boolean> monsterPiecesDropped) {
-		String tablename = DBConstants.TABLE_USER_TASK_STAGE;
+		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
 
 		@SuppressWarnings("rawtypes")
     Map insertParams = new HashMap<String, List<Object>>();
 		int numRows = stageNums.size();
 
-		insertParams.put(DBConstants.USER_TASK_STAGE__USER_TASK_ID, userTaskIds);
-    insertParams.put(DBConstants.USER_TASK_STAGE__STAGE_NUM, stageNums);
-    insertParams.put(DBConstants.USER_TASK_STAGE__MONSTER_ID, monsterIds);
-    insertParams.put(DBConstants.USER_TASK_STAGE__EXP_GAINED, expsGained);
-    insertParams.put(DBConstants.USER_TASK_STAGE__SILVER_GAINED, silversGained);
-    insertParams.put(DBConstants.USER_TASK_STAGE__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
+		insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, userTaskIds);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, stageNums);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_ID, monsterIds);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__EXP_GAINED, expsGained);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__SILVER_GAINED, silversGained);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
     
     
     int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
@@ -804,20 +804,21 @@ public class InsertUtils implements InsertUtil{
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public int insertIntoUserTaskStageHistory(List<Long> userTaskId,
+	public int insertIntoTaskStageHistory(
+			List<Long> userTaskStageId, List<Long> userTaskId,
 			List<Integer> stageNum, List<Integer> monsterId, List<Integer> expGained,
 			List<Integer> silverGained, List<Boolean> monsterPieceDropped) {
-		String tablename = DBConstants.TABLE_USER_TASK_STAGE_HISTORY;
+		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
 		int numRows = stageNum.size();
 		
 		@SuppressWarnings("rawtypes")
     Map insertParams = new HashMap<String, List<Object>>();
-    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__USER_TASK_ID, userTaskId);
-    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__STAGE_NUM, stageNum);
-    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__MONSTER_ID, monsterId);
-    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__EXP_GAINED, expGained);
-    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__SILVER_GAINED, silverGained);
-    insertParams.put(DBConstants.USER_TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPieceDropped);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_FOR_USER_ID, userTaskId);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNum);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_ID, monsterId);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expGained);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__SILVER_GAINED, silverGained);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPieceDropped);
     
     int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
         insertParams, numRows);

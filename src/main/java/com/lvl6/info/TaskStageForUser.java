@@ -2,7 +2,7 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-public class UserTaskStage implements Serializable {
+public class TaskStageForUser implements Serializable {
 
 	private static final long serialVersionUID = 5794056622341011286L;
 	private long id;
@@ -13,7 +13,7 @@ public class UserTaskStage implements Serializable {
 	public int silverGained;
 	public boolean monsterPieceDropped;
 	
-	public UserTaskStage(long id, long userTaskId, int stageNum, int monsterId,
+	public TaskStageForUser(long id, long userTaskId, int stageNum, int monsterId,
 			int expGained, int silverGained, boolean monsterPieceDropped) {
 		super();
 		this.id = id;
@@ -83,10 +83,10 @@ public class UserTaskStage implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserTaskStage [id=" + id + ", userTaskId=" + userTaskId
+		return "TaskStageForUser [id=" + id + ", userTaskId=" + userTaskId
 				+ ", stageNum=" + stageNum + ", monsterId=" + monsterId
 				+ ", expGained=" + expGained + ", silverGained=" + silverGained
 				+ ", monsterPieceDropped=" + monsterPieceDropped + "]";
 	}
-	
+
 }

@@ -16,8 +16,9 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.TaskForUser;
+import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
-import com.lvl6.info.UserTask;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.EndDungeonRequestProto;
@@ -28,6 +29,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserRetrieveUtils;
+import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -72,14 +74,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //      int previousSilver = 0;
 //      int previousGold = 0;
 
-      List<UserTask> userTaskList = new ArrayList<UserTask>();
+      List<TaskForUser> userTaskList = new ArrayList<TaskForUser>();
+      TaskForUser ut = null;
       boolean legit = checkLegit(resBuilder, aUser, userId, userTaskId, userTaskList);
 
 
       boolean successful = false;
       List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
       if(legit) {
-    	  UserTask ut = userTaskList.get(0);
+    	  ut = userTaskList.get(0);
 //        previousSilver = aUser.getCoins() + aUser.getVaultBalance();
 //        previousGold = aUser.getDiamonds();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
@@ -99,6 +102,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
           .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
       resEventUpdate.setTag(event.getTag());
       server.writeEvent(resEventUpdate);
+      
+      if (successful) {
+      	long taskForUserId = ut.getId(); 
+      	List<TaskStageForUser> tsfuList = TaskStageForUserRetrieveUtils
+      			.getTaskStagesForUserWithTaskStageForUserId(taskForUserId);
+      	//delete from task_stage_for_user and put into task_stage_history
+      	recordStageHistory(tsfuList);
+      	//update quests
+      }
+      
     } catch (Exception e) {
       log.error("exception in EndDungeonController processEvent", e);
       //don't let the client hang
@@ -121,13 +134,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    * builder status to the appropriate value.
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
-		  long userTaskId, List<UserTask> userTaskList) {
+		  long userTaskId, List<TaskForUser> userTaskList) {
     if (null == u) {
       log.error("unexpected error: user is null. user=" + u);
       return false;
     }
     
-    UserTask ut = TaskForUserRetrieveUtils.getUserTaskForId(userTaskId);
+    TaskForUser ut = TaskForUserRetrieveUtils.getUserTaskForId(userTaskId);
     if (null == ut) {
     	log.error("unexpected error: no user task for id userTaskId=" + userTaskId);
     	return false;
@@ -138,7 +151,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     return true;
   }
 
-  private boolean writeChangesToDb(User u, int uId, UserTask ut, boolean userWon,
+  private boolean writeChangesToDb(User u, int uId, TaskForUser ut, boolean userWon,
 		  Timestamp clientTime, List<FullUserMonsterProto> protos) {
 	  int silverGained = ut.getSilverGained();
 	  int expGained = ut.getExpGained();
@@ -160,7 +173,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Date startDate = ut.getStartDate();
 	  long startMillis = startDate.getTime();
 	  Timestamp startTime = new Timestamp(startMillis);
-	  int numInserted = InsertUtils.get().insertIntoUserTaskHistory(utId,uId, tId,
+	  int numInserted = InsertUtils.get().insertIntoTaskHistory(utId,uId, tId,
 			  expGained, silverGained, numRevives, startTime, clientTime, userWon);
 	  if (1 != numInserted) {
 		  log.error("unexpected error: error when inserting into user_task_history. " +
@@ -218,6 +231,33 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private void setResponseBuilder(Builder resBuilder,
 		  List<FullUserMonsterProto> protos) {
 	  resBuilder.setStatus(EndDungeonStatus.SUCCESS);
+  }
+  
+  private void recordStageHistory(List<TaskStageForUser> tsfuList) {
+  	List<Long> userTaskStageId = new ArrayList<Long>();
+  	List<Long> userTaskId = new ArrayList<Long>();
+  	List<Integer> stageNum = new ArrayList<Integer>();
+  	List<Integer> monsterId = new ArrayList<Integer>();
+  	List<Integer> expGained = new ArrayList<Integer>();
+  	List<Integer> silverGained = new ArrayList<Integer>();
+  	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
+  	
+  	for (int i = 0; i < tsfuList.size(); i++) {
+  		TaskStageForUser tsfu = tsfuList.get(i);
+  		userTaskStageId.add(tsfu.getId());
+  		userTaskId.add(tsfu.getUserTaskId());
+  		stageNum.add(tsfu.getStageNum());
+  		monsterId.add(tsfu.getMonsterId());
+  		expGained.add(tsfu.getExpGained());
+  		silverGained.add(tsfu.getSilverGained());
+  		monsterPieceDropped.add(tsfu.isMonsterPieceDropped());
+  	}
+  	
+  	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
+  			userTaskId, stageNum, monsterId, expGained, silverGained,
+  			monsterPieceDropped);
+  	log.info("num task stage history rows inserted: num=" + num +
+  			"taskStageForUser=" + tsfuList);
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
