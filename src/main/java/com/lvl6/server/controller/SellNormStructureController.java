@@ -16,7 +16,7 @@ import com.lvl6.events.response.SellNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto;
@@ -56,7 +56,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     SellNormStructureResponseProto.Builder resBuilder = SellNormStructureResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
-    UserStruct userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
+    StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
     Structure struct = null;
 
     if (userStruct != null) {
@@ -118,7 +118,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
   }
   
-  public void writeToUserCurrencyHistory(User aUser, UserStruct userStruct, int diamondChange, 
+  public void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct, int diamondChange, 
       int coinChange, int previousSilver, int previousGold) {
     int userStructId = userStruct.getId();
     int structId = userStruct.getStructId();

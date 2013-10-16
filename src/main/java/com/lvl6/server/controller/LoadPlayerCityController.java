@@ -13,7 +13,7 @@ import com.lvl6.events.request.LoadPlayerCityRequestEvent;
 import com.lvl6.events.response.LoadPlayerCityResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto;
@@ -59,7 +59,7 @@ import com.lvl6.utils.RetrieveUtils;
     try {
       User owner = RetrieveUtils.userRetrieveUtils().getUserById(cityOwnerId);
 
-      List<UserStruct> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(cityOwnerId);
+      List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(cityOwnerId);
       setResponseUserStructs(resBuilder, userStructs);
       
       List<UserCityExpansionData> userCityExpansionDataList = UserCityExpansionDataRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserId());
@@ -132,9 +132,9 @@ import com.lvl6.utils.RetrieveUtils;
   }
 
   private void setResponseUserStructs(Builder resBuilder,
-      List<UserStruct> userStructs) {
+      List<StructureForUser> userStructs) {
     if (userStructs != null) {
-      for (UserStruct userStruct : userStructs) {
+      for (StructureForUser userStruct : userStructs) {
         resBuilder.addOwnerNormStructs(CreateInfoProtoUtils.createFullUserStructureProtoFromUserstruct(userStruct));
       }
     } else {

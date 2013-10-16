@@ -15,7 +15,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.NormStructWaitCompleteRequestEvent;
 import com.lvl6.events.response.NormStructWaitCompleteResponseEvent;
 import com.lvl6.info.Structure;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto;
 import com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto;
@@ -61,18 +61,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
     try {
-      List<UserStruct> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructs(userStructIds);
+      List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructs(userStructIds);
 
       boolean legitWaitComplete = checkLegitWaitComplete(resBuilder, userStructs, userStructIds, senderProto.getUserId(), clientTime);
 
       NormStructWaitCompleteResponseEvent resEvent = new NormStructWaitCompleteResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
 
-      List<UserStruct> upgradesDone = new ArrayList<UserStruct>();
-      List<UserStruct> buildsDone = new ArrayList<UserStruct>();
+      List<StructureForUser> upgradesDone = new ArrayList<StructureForUser>();
+      List<StructureForUser> buildsDone = new ArrayList<StructureForUser>();
 
       if (legitWaitComplete) {
-        for (UserStruct userStruct : userStructs) {
+        for (StructureForUser userStruct : userStructs) {
           if (userStruct.getLastUpgradeTime() != null) {
             upgradesDone.add(userStruct);
           } else {
@@ -83,8 +83,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         writeChangesToDB(upgradesDone, buildsDone);
       }
 
-      List<UserStruct> newUserStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructs(userStructIds);
-      for (UserStruct userStruct : newUserStructs) {
+      List<StructureForUser> newUserStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructs(userStructIds);
+      for (StructureForUser userStruct : newUserStructs) {
         resBuilder.addUserStruct(CreateInfoProtoUtils.createFullUserStructureProtoFromUserstruct(userStruct));
       }
       resEvent.setNormStructWaitCompleteResponseProto(resBuilder.build());  
@@ -101,7 +101,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
 
-  private void writeChangesToDB(List<UserStruct> upgradesDone, List<UserStruct> buildsDone) {
+  private void writeChangesToDB(List<StructureForUser> upgradesDone, List<StructureForUser> buildsDone) {
     if (!UpdateUtils.get().updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(upgradesDone, 1)) {
       log.error("problem with marking norm struct upgrade as complete for one of these structs: " + upgradesDone);
     }    
@@ -111,7 +111,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean checkLegitWaitComplete(Builder resBuilder,
-      List<UserStruct> userStructs, List<Integer> userStructIds, int userId, Timestamp clientTime) {
+      List<StructureForUser> userStructs, List<Integer> userStructIds, int userId, Timestamp clientTime) {
     if (userStructs == null || userStructIds == null || clientTime == null || userStructIds.size() != userStructs.size()) {
       resBuilder.setStatus(NormStructWaitCompleteStatus.OTHER_FAIL);
       log.error("userStructs is null, userStructIds is null, clientTime is null, or array lengths different. userStructs="
@@ -126,7 +126,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
 
     Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
-    for (UserStruct us : userStructs) {
+    for (StructureForUser us : userStructs) {
       if (us.getUserId() != userId) {
         resBuilder.setStatus(NormStructWaitCompleteStatus.OTHER_FAIL);
         log.error("user struct's owner's id is " + us.getUserId() + ", and user id is " + userId);

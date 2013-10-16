@@ -2,7 +2,7 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-public class UserQuest implements Serializable {
+public class QuestForUser implements Serializable {
 
 	private static final long serialVersionUID = 6402831762354203777L;
 	private int userId;
@@ -13,7 +13,7 @@ public class UserQuest implements Serializable {
 	private boolean defeatTypeJobsComplete;
 	private int coinsRetrievedForReq;
 
-	public UserQuest(int userId, int questId, boolean isRedeemed,
+	public QuestForUser(int userId, int questId, boolean isRedeemed,
 			boolean isComplete, boolean tasksComplete,
 			boolean defeatTypeJobsComplete, int coinsRetrievedForReq) {
 		super();

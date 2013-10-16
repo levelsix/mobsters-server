@@ -9,7 +9,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.MoveOrRotateNormStructureRequestEvent;
 import com.lvl6.events.response.MoveOrRotateNormStructureResponseEvent;
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto.MoveOrRotateNormStructType;
 import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto;
@@ -65,7 +65,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean legit = true;
       resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);
       
-      UserStruct userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
+      StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
       if (userStruct == null) {
         legit = false;
         resBuilder.setStatus(MoveOrRotateNormStructureStatus.SUCCESS);

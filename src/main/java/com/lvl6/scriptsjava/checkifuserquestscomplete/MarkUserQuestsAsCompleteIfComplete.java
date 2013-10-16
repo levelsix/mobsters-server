@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.lvl6.info.Quest;
-import com.lvl6.info.UserQuest;
-import com.lvl6.info.UserStruct;
-import com.lvl6.info.jobs.BuildStructJob;
-import com.lvl6.info.jobs.UpgradeStructJob;
+import com.lvl6.info.QuestForUser;
+import com.lvl6.info.StructureForUser;
+import com.lvl6.info.jobs.QuestJobBuildStruct;
+import com.lvl6.info.jobs.QuestJobUpgradeStruct;
 import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -20,8 +20,8 @@ public class MarkUserQuestsAsCompleteIfComplete {
 	public static void main(String[] args) {
 		//BasicConfigurator.configure();
 		DBConnection.get().init();
-		List<UserQuest> userQuests = RetrieveUtils.userQuestRetrieveUtils().getUnredeemedIncompleteUserQuests();
-		for (UserQuest userQuest : userQuests) {
+		List<QuestForUser> userQuests = RetrieveUtils.questForUserRetrieveUtils().getUnredeemedIncompleteUserQuests();
+		for (QuestForUser userQuest : userQuests) {
 			Quest quest = QuestRetrieveUtils.getQuestForQuestId(userQuest.getQuestId());
 			if (null == quest) {
 				continue;
@@ -32,16 +32,16 @@ public class MarkUserQuestsAsCompleteIfComplete {
 
 				if ((buildStructJobsRequired != null && buildStructJobsRequired.size()>0) || 
 						(upgradeStructJobsRequired != null && upgradeStructJobsRequired.size()>0)) {
-					Map<Integer, List<UserStruct>> structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(userQuest.getUserId());
+					Map<Integer, List<StructureForUser>> structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(userQuest.getUserId());
 					if (structIdsToUserStructs == null || structIdsToUserStructs.size() <= 0) {
 						continue;
 					}
 					if (buildStructJobsRequired != null && buildStructJobsRequired.size()>0) {
-						Map<Integer, BuildStructJob> bsjs = QuestJobBuildStructRetrieveUtils.getBuildStructJobsForBuildStructJobIds(buildStructJobsRequired);
-						for (BuildStructJob bsj : bsjs.values()) {
+						Map<Integer, QuestJobBuildStruct> bsjs = QuestJobBuildStructRetrieveUtils.getBuildStructJobsForBuildStructJobIds(buildStructJobsRequired);
+						for (QuestJobBuildStruct bsj : bsjs.values()) {
 							int quantityBuilt = 0;
 							if (structIdsToUserStructs.get(bsj.getStructId()) != null) {
-								for (UserStruct us : structIdsToUserStructs.get(bsj.getStructId())) {
+								for (StructureForUser us : structIdsToUserStructs.get(bsj.getStructId())) {
 									if (us.getLastRetrieved() != null) {
 										quantityBuilt++;
 									}
@@ -54,13 +54,13 @@ public class MarkUserQuestsAsCompleteIfComplete {
 					}
 
 					if (upgradeStructJobsRequired != null && upgradeStructJobsRequired.size()>0) {
-						Map<Integer, UpgradeStructJob> usjs = UpgradeStructJobRetrieveUtils.getUpgradeStructJobsForUpgradeStructJobIds(upgradeStructJobsRequired);
-						for (UpgradeStructJob usj : usjs.values()) {
+						Map<Integer, QuestJobUpgradeStruct> usjs = QuestJobUpgradeStructRetrieveUtils.getUpgradeStructJobsForUpgradeStructJobIds(upgradeStructJobsRequired);
+						for (QuestJobUpgradeStruct usj : usjs.values()) {
 							if (structIdsToUserStructs.get(usj.getStructId()) == null) {
 								continue;
 							}
 							boolean usjComplete = false;
-							for (UserStruct us : structIdsToUserStructs.get(usj.getStructId())) {
+							for (StructureForUser us : structIdsToUserStructs.get(usj.getStructId())) {
 								if (us.getLevel() >= usj.getLevelReq()) {
 									usjComplete = true;
 								}

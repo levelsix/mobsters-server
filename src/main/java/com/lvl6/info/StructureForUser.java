@@ -5,7 +5,7 @@ import java.util.Date;
 
 import com.lvl6.proto.StructureProto.StructOrientation;
 
-public class UserStruct implements Serializable {
+public class StructureForUser implements Serializable {
   //any change in this class should also change the UpdateUtils.java method updateUserStructsLastretrieved()
 	private static final long serialVersionUID = 117707363672187583L;
 	private int id;
@@ -19,7 +19,7 @@ public class UserStruct implements Serializable {
 	private boolean isComplete;
 	private StructOrientation orientation;
 
-	public UserStruct(int id, int userId, int structId, Date lastRetrieved,
+	public StructureForUser(int id, int userId, int structId, Date lastRetrieved,
 			CoordinatePair coordinates, int level, Date purchaseTime,
 			Date lastUpgradeTime, boolean isComplete,
 			StructOrientation orientation) {

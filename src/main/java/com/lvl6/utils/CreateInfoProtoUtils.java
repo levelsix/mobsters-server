@@ -35,10 +35,10 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserMonster;
-import com.lvl6.info.UserQuest;
-import com.lvl6.info.UserStruct;
-import com.lvl6.info.jobs.BuildStructJob;
-import com.lvl6.info.jobs.UpgradeStructJob;
+import com.lvl6.info.QuestForUser;
+import com.lvl6.info.StructureForUser;
+import com.lvl6.info.jobs.QuestJobBuildStruct;
+import com.lvl6.info.jobs.QuestJobUpgradeStruct;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
@@ -93,7 +93,7 @@ import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 
 public class CreateInfoProtoUtils {
 
@@ -194,7 +194,6 @@ public class CreateInfoProtoUtils {
 		String name = null;
 		String description = null;
 		String doneResponse = null;
-		List<Integer> defeatTypeReqs = null;
 		Dialogue acceptDialogue = null;
 
 		String questGiverName = null;
@@ -258,7 +257,7 @@ public class CreateInfoProtoUtils {
 		return dp.build();
 	}
 
-	public static FullUserStructureProto createFullUserStructureProtoFromUserstruct(UserStruct userStruct) {
+	public static FullUserStructureProto createFullUserStructureProtoFromUserstruct(StructureForUser userStruct) {
 		FullUserStructureProto.Builder builder = FullUserStructureProto.newBuilder();
 		builder.setUserStructId(userStruct.getId());
 		builder.setUserId(userStruct.getUserId());
@@ -446,30 +445,28 @@ public class CreateInfoProtoUtils {
 	}
 
 	public static BuildStructJobProto createFullBuildStructJobProtoFromBuildStructJob(
-			BuildStructJob j) {
+			QuestJobBuildStruct j) {
 		return BuildStructJobProto.newBuilder().setBuildStructJobId(j.getId()).setStructId(j.getStructId()).setQuantityRequired(j.getQuantity()).build();
 	}
 
 	public static UpgradeStructJobProto createFullUpgradeStructJobProtoFromUpgradeStructJob(
-			UpgradeStructJob j) {
+			QuestJobUpgradeStruct j) {
 		return UpgradeStructJobProto.newBuilder().setUpgradeStructJobId(j.getId()).setStructId(j.getStructId()).setLevelReq(j.getLevelReq()).build();
 	}
 
 
-	public static List<FullUserQuestDataLargeProto> createFullUserQuestDataLarges(List<UserQuest> userQuests, Map<Integer, Quest> questIdsToQuests) {
+	public static List<FullUserQuestDataLargeProto> createFullUserQuestDataLarges(List<QuestForUser> userQuests, Map<Integer, Quest> questIdsToQuests) {
 		List<FullUserQuestDataLargeProto> fullUserQuestDataLargeProtos = new ArrayList<FullUserQuestDataLargeProto>();
 
 		Map<Integer, List<Integer>> questIdToUserTasksCompletedForQuestForUser = null;
 		Map<Integer, Map<Integer, Integer>> questIdToTaskIdsToNumTimesActedInQuest = null;
 
-		Map<Integer, List<Integer>> questIdToUserDefeatTypeJobsCompletedForQuestForUser = null;
-		Map<Integer, Map<Integer, Integer>> questIdToDefeatTypeJobIdsToNumDefeated = null;
 
-		Map<Integer, List<UserStruct>> structIdsToUserStructs = null;
+		Map<Integer, List<StructureForUser>> structIdsToUserStructs = null;
 
 		Map<Integer, List<UserMonster>> equipIdsToUserEquips = null;
 
-		for (UserQuest userQuest : userQuests) {
+		for (QuestForUser userQuest : userQuests) {
 			Quest quest = questIdsToQuests.get(userQuest.getQuestId());
 			FullUserQuestDataLargeProto.Builder builder = FullUserQuestDataLargeProto.newBuilder();
 
@@ -548,11 +545,11 @@ public class CreateInfoProtoUtils {
 							structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(userQuest.getUserId());              
 						}
 						for (Integer buildStructJobId : quest.getBuildStructJobsRequired()) {
-							BuildStructJob buildStructJob = QuestJobBuildStructRetrieveUtils.getBuildStructJobForBuildStructJobId(buildStructJobId);
-							List<UserStruct> userStructs = structIdsToUserStructs.get(buildStructJob.getStructId());
+							QuestJobBuildStruct buildStructJob = QuestJobBuildStructRetrieveUtils.getBuildStructJobForBuildStructJobId(buildStructJobId);
+							List<StructureForUser> userStructs = structIdsToUserStructs.get(buildStructJob.getStructId());
 							int quantityBuilt = 0;
 							if (userStructs != null) {
-								for (UserStruct us : userStructs) {
+								for (StructureForUser us : userStructs) {
 									if (us.getLastRetrieved() != null) {
 										quantityBuilt++;
 									}
@@ -569,11 +566,11 @@ public class CreateInfoProtoUtils {
 							structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(userQuest.getUserId());              
 						}
 						for (Integer upgradeStructJobId : quest.getUpgradeStructJobsRequired()) {
-							UpgradeStructJob upgradeStructJob = UpgradeStructJobRetrieveUtils.getUpgradeStructJobForUpgradeStructJobId(upgradeStructJobId);
-							List<UserStruct> userStructs = structIdsToUserStructs.get(upgradeStructJob.getStructId());
+							QuestJobUpgradeStruct upgradeStructJob = QuestJobUpgradeStructRetrieveUtils.getUpgradeStructJobForUpgradeStructJobId(upgradeStructJobId);
+							List<StructureForUser> userStructs = structIdsToUserStructs.get(upgradeStructJob.getStructId());
 							int currentLevel = 0;
 							if (userStructs != null) {
-								for (UserStruct us : userStructs) {
+								for (StructureForUser us : userStructs) {
 									if (us.getLevel() > currentLevel) {
 										currentLevel = us.getLevel();
 									}
@@ -638,16 +635,16 @@ public class CreateInfoProtoUtils {
 		return builder.build();
 	}
 
-	private static MinimumUserUpgradeStructJobProto createMinimumUserUpgradeStructJobProto(UserQuest userQuest, UpgradeStructJob upgradeStructJob, int currentLevel) {
+	private static MinimumUserUpgradeStructJobProto createMinimumUserUpgradeStructJobProto(QuestForUser userQuest, QuestJobUpgradeStruct upgradeStructJob, int currentLevel) {
 		return MinimumUserUpgradeStructJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setUpgradeStructJobId(upgradeStructJob.getId()).setCurrentLevel(currentLevel).build();
 	}
 
-	private static MinimumUserBuildStructJobProto createMinimumUserBuildStructJobProto(UserQuest userQuest, BuildStructJob buildStructJob, int quantityOwned) {
+	private static MinimumUserBuildStructJobProto createMinimumUserBuildStructJobProto(QuestForUser userQuest, QuestJobBuildStruct buildStructJob, int quantityOwned) {
 		return MinimumUserBuildStructJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setBuildStructJobId(buildStructJob.getId()).setNumOfStructUserHas(quantityOwned).build();
 	}
 
 
-	private static MinimumUserQuestTaskProto createMinimumUserQuestTaskProto(UserQuest userQuest, Integer requiredTaskId, boolean taskCompletedForQuest, Integer numTimesUserActed) {
+	private static MinimumUserQuestTaskProto createMinimumUserQuestTaskProto(QuestForUser userQuest, Integer requiredTaskId, boolean taskCompletedForQuest, Integer numTimesUserActed) {
 		//TODO:
 		//Task task = TaskRetrieveUtils.getTaskForTaskId(requiredTaskId);
 		int numTimesCompleted = 1;//(taskCompletedForQuest) ? task.getNumForCompletion() : numTimesUserActed;

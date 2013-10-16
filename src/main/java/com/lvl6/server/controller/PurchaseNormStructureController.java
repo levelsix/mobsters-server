@@ -19,7 +19,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
@@ -161,10 +161,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       return false;
     }
 
-    Map<Integer, List<UserStruct>> structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(user.getId());
+    Map<Integer, List<StructureForUser>> structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(user.getId());
     if (structIdsToUserStructs != null) {
       for (Integer structId : structIdsToUserStructs.keySet()) {
-        List<UserStruct> userStructsOfSameStructId = structIdsToUserStructs.get(structId);
+        List<StructureForUser> userStructsOfSameStructId = structIdsToUserStructs.get(structId);
         if (userStructsOfSameStructId != null) {
           if (structId == struct.getId() && userStructsOfSameStructId.size() >= ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE) {
             resBuilder.setStatus(PurchaseNormStructureStatus.ALREADY_HAVE_MAX_OF_THIS_STRUCT);
@@ -172,7 +172,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
                 + ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE);
             return false;
           }
-          for (UserStruct us : userStructsOfSameStructId) {
+          for (StructureForUser us : userStructsOfSameStructId) {
             if (!us.isComplete() && us.getLastRetrieved() == null) {
               resBuilder.setStatus(PurchaseNormStructureStatus.ANOTHER_STRUCT_STILL_BUILDING);
               log.error("another struct still building: " + us); 

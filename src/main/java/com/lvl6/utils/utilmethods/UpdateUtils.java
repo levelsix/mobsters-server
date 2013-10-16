@@ -13,8 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Structure;
-import com.lvl6.info.UserStruct;
-import com.lvl6.misc.MiscMethods;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
@@ -284,7 +283,7 @@ public class UpdateUtils implements UpdateUtil {
 	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(java.util.List, int)
 	 */
 	@Override
-	public boolean updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(List<UserStruct> userStructs, int levelChange) {
+	public boolean updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(List<StructureForUser> userStructs, int levelChange) {
 		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
 
 //		for (UserStruct userStruct : userStructs) {
@@ -339,7 +338,7 @@ public class UpdateUtils implements UpdateUtil {
 	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructsLastretrievedpostbuildIscomplete(java.util.List)
 	 */
 	@Override
-	public boolean updateUserStructsLastretrievedpostbuildIscomplete(List<UserStruct> userStructs) {
+	public boolean updateUserStructsLastretrievedpostbuildIscomplete(List<StructureForUser> userStructs) {
 		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
 
 //		for (UserStruct userStruct : userStructs) {
@@ -398,13 +397,13 @@ public class UpdateUtils implements UpdateUtil {
       //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
       //@CacheEvict(value="specificUserStruct", key="#userStructId")}) */
 	public boolean updateUserStructsLastretrieved(Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
-			Map<Integer, UserStruct> structIdsToUserStructs) {
+			Map<Integer, StructureForUser> structIdsToUserStructs) {
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 
 		for(Integer userStructId : userStructIdsToLastRetrievedTime.keySet()) {
 			Map <String, Object> aRow = new HashMap<String, Object>();
 			Timestamp lastRetrievedTime = userStructIdsToLastRetrievedTime.get(userStructId);
-			UserStruct us = structIdsToUserStructs.get(userStructId);
+			StructureForUser us = structIdsToUserStructs.get(userStructId);
 
 			aRow.put(DBConstants.USER_STRUCTS__ID, userStructId);
 			aRow.put(DBConstants.USER_STRUCTS__USER_ID, us.getUserId());
@@ -497,30 +496,6 @@ public class UpdateUtils implements UpdateUtil {
 
 		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_LOCK_BOX_EVENT_FOR_USER, insertParams, 
 				columnsToUpdate, null);//DBConstants.USER_LOCK_BOX_EVENTS__NUM_BOXES, increment);
-
-		if (numUpdated >= 1) {
-			return true;
-		}
-		return false;
-	}
-
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#incrementUserQuestDefeatTypeJobProgress(int, int, int, int)
-	 */
-	@Override
-	public boolean incrementUserQuestDefeatTypeJobProgress(int userId, int questId, int defeatTypeJobId, int increment) {
-		Map <String, Object> insertParams = new HashMap<String, Object>();
-
-		insertParams.put(DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__USER_ID, userId);
-		insertParams.put(DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__QUEST_ID, questId);
-		insertParams.put(DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__DEFEAT_TYPE_JOB_ID, defeatTypeJobId);
-		insertParams.put(DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__NUM_DEFEATED, increment);
-
-		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-		columnsToUpdate.put(DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__NUM_DEFEATED, increment);
-
-		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS, insertParams, 
-				columnsToUpdate, null);//DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__NUM_DEFEATED, increment);
 
 		if (numUpdated >= 1) {
 			return true;

@@ -13,7 +13,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UserQuestDetailsRequestEvent;
 import com.lvl6.events.response.UserQuestDetailsResponseEvent;
 import com.lvl6.info.Quest;
-import com.lvl6.info.UserQuest;
+import com.lvl6.info.QuestForUser;
 import com.lvl6.proto.EventQuestProto.UserQuestDetailsRequestProto;
 import com.lvl6.proto.EventQuestProto.UserQuestDetailsResponseProto;
 import com.lvl6.proto.EventQuestProto.UserQuestDetailsResponseProto.Builder;
@@ -55,18 +55,18 @@ import com.lvl6.utils.RetrieveUtils;
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      List<UserQuest> questsToCheck = null;
+      List<QuestForUser> questsToCheck = null;
       if (questId > 0) {
-        UserQuest questToCheck = RetrieveUtils.userQuestRetrieveUtils().getSpecificUnredeemedUserQuest(senderProto.getUserId(), questId);
+        QuestForUser questToCheck = RetrieveUtils.questForUserRetrieveUtils().getSpecificUnredeemedUserQuest(senderProto.getUserId(), questId);
         if (questToCheck != null) {
-          questsToCheck = new ArrayList<UserQuest>();
+          questsToCheck = new ArrayList<QuestForUser>();
           questsToCheck.add(questToCheck);
         } else {
           resBuilder.setStatus(UserQuestDetailsStatus.SUPPLIED_QUESTID_CURRENTLY_NOT_IN_PROGRESS);
           log.error("questId " + questId + "wasn't in progress for user before redeem attempt");
         }
       } else {
-        questsToCheck = RetrieveUtils.userQuestRetrieveUtils().getUnredeemedUserQuestsForUser(senderProto.getUserId());
+        questsToCheck = RetrieveUtils.questForUserRetrieveUtils().getUnredeemedUserQuestsForUser(senderProto.getUserId());
       }
       if (questsToCheck != null && questsToCheck.size() > 0) {
         addFullUserQuestDataLarges(resBuilder, questsToCheck);
@@ -85,7 +85,7 @@ import com.lvl6.utils.RetrieveUtils;
     }
   }
 
-  private void addFullUserQuestDataLarges(Builder resBuilder, List<UserQuest> inProgressUserQuests) {
+  private void addFullUserQuestDataLarges(Builder resBuilder, List<QuestForUser> inProgressUserQuests) {
     Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
     resBuilder.addAllInProgressUserQuestData(CreateInfoProtoUtils.createFullUserQuestDataLarges(inProgressUserQuests, questIdsToQuests));
   }

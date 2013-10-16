@@ -50,10 +50,6 @@ public interface InsertUtil {
 	public abstract boolean insertUnredeemedUserQuest(int userId, int questId,
 			boolean hasNoRequiredTasks, boolean hasNoRequiredDefeatTypeJobs);
 
-	/* used for quest defeat type jobs */
-	public abstract boolean insertCompletedDefeatTypeJobIdForUserQuest(
-			int userId, int dtjId, int questId);
-
 	/* used for quest tasks */
 	public abstract boolean insertCompletedTaskIdForUserQuest(int userId,
 			int taskId, int questId);

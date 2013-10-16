@@ -12,18 +12,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.UserQuest;
+import com.lvl6.info.QuestForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class UserQuestRetrieveUtils {
+@Component @DependsOn("gameServer") public class QuestForUserRetrieveUtils {
 
   private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
   private final String TABLE_NAME = DBConstants.TABLE_QUEST_FOR_USER;
   
   //only used in script
-  public List<UserQuest> getUnredeemedIncompleteUserQuests() {
+  public List<QuestForUser> getUnredeemedIncompleteUserQuests() {
     log.debug("retrieving unredeemed and incomplete user quests");
     
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
@@ -32,14 +32,14 @@ import com.lvl6.utils.DBConnection;
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<UserQuest> userQuests = convertRSToUserQuests(rs);
+    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
     DBConnection.get().close(rs, null, conn);
     return userQuests;
   }
   
   
   ////@Cacheable(value="incompleteUserQuestsForUser", key="#userId")
-  public List<UserQuest> getIncompleteUserQuestsForUser(int userId) {
+  public List<QuestForUser> getIncompleteUserQuestsForUser(int userId) {
     log.debug("retrieving incomplete user quests for userId " + userId);
     
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
@@ -49,26 +49,26 @@ import com.lvl6.utils.DBConnection;
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<UserQuest> userQuests = convertRSToUserQuests(rs);
+    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
     DBConnection.get().close(rs, null, conn);
     return userQuests;
   }
   
   
   ////@Cacheable(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId")
-  public List<UserQuest> getUnredeemedAndRedeemedUserQuestsForUser(int userId) {
+  public List<QuestForUser> getUnredeemedAndRedeemedUserQuestsForUser(int userId) {
     log.debug("retrieving unredeemed and redeemed user quests for userId " + userId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    List<UserQuest> userQuests = convertRSToUserQuests(rs);
+    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
     DBConnection.get().close(rs, null, conn);
     return userQuests;
   }
   
   
   ////@Cacheable(value="unredeemedUserQuestsForUser", key="#userId")
-  public List<UserQuest> getUnredeemedUserQuestsForUser(int userId) {
+  public List<QuestForUser> getUnredeemedUserQuestsForUser(int userId) {
     log.debug("retrieving unredeemed user quests for userId " + userId);
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.USER_QUESTS__USER_ID, userId);
@@ -76,24 +76,24 @@ import com.lvl6.utils.DBConnection;
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<UserQuest> userQuests = convertRSToUserQuests(rs);
+    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
     DBConnection.get().close(rs, null, conn);
     return userQuests;
   }
   
   
   ////@Cacheable(value="userQuestsForUser", key="#userId")
-  public List<UserQuest> getUserQuestsForUser(int userId) {
+  public List<QuestForUser> getUserQuestsForUser(int userId) {
     log.debug("retrieving user quests for userId " + userId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    List<UserQuest> userQuests = convertRSToUserQuests(rs);
+    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
     DBConnection.get().close(rs, null, conn);
     return userQuests;
   }
   
-  public UserQuest getSpecificUnredeemedUserQuest(int userId, int questId) {
+  public QuestForUser getSpecificUnredeemedUserQuest(int userId, int questId) {
     log.debug("retrieving specific unredeemed user quest for userid " + userId + " and questId " + questId);
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.USER_QUESTS__USER_ID, userId);
@@ -102,12 +102,12 @@ import com.lvl6.utils.DBConnection;
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    UserQuest userQuest = convertRSToSingleUserQuest(rs);
+    QuestForUser userQuest = convertRSToSingleUserQuest(rs);
     DBConnection.get().close(rs, null, conn);
     return userQuest;
   }
   
-  private UserQuest convertRSToSingleUserQuest(ResultSet rs) {
+  private QuestForUser convertRSToSingleUserQuest(ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
@@ -123,14 +123,14 @@ import com.lvl6.utils.DBConnection;
     return null;
   }
 
-  private List<UserQuest> convertRSToUserQuests(ResultSet rs) {
-  	List<UserQuest> userQuests = new ArrayList<UserQuest>();
+  private List<QuestForUser> convertRSToUserQuests(ResultSet rs) {
+  	List<QuestForUser> userQuests = new ArrayList<QuestForUser>();
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
         while(rs.next()) {
-        	UserQuest uq = convertRSRowToUserQuest(rs);
+        	QuestForUser uq = convertRSRowToUserQuest(rs);
         	if (null != uq) {
         		userQuests.add(uq);
         	}
@@ -147,7 +147,7 @@ import com.lvl6.utils.DBConnection;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private UserQuest convertRSRowToUserQuest(ResultSet rs) throws SQLException {
+  private QuestForUser convertRSRowToUserQuest(ResultSet rs) throws SQLException {
     int i = 1;
     int userId = rs.getInt(i++);
     int questId = rs.getInt(i++);
@@ -157,7 +157,7 @@ import com.lvl6.utils.DBConnection;
     boolean defeatTypeJobsComplete = rs.getBoolean(i++);
     int coinsRetrievedForReq = rs.getInt(i++);
     
-    UserQuest userQuest = new UserQuest(userId, questId, isRedeemed, isComplete, tasksComplete, 
+    QuestForUser userQuest = new QuestForUser(userId, questId, isRedeemed, isComplete, tasksComplete, 
         defeatTypeJobsComplete, coinsRetrievedForReq);
     return userQuest;
   }

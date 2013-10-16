@@ -340,34 +340,6 @@ public class InsertUtils implements InsertUtil{
     return false;
   }
 
-  /* used for quest defeat type jobs */
-  /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.InsertUtil#insertCompletedDefeatTypeJobIdForUserQuest(int, int, int)
-   */
-  @Override
-  ////@CacheEvict(value="questIdToUserTasksCompletedForQuestForUserCache", key="#userId")
-  public boolean insertCompletedDefeatTypeJobIdForUserQuest(int userId,
-      int dtjId, int questId) {
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(
-        DBConstants.USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__USER_ID,
-        userId);
-    insertParams.put(
-        DBConstants.USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__QUEST_ID,
-        questId);
-    insertParams
-    .put(DBConstants.USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__COMPLETED_DEFEAT_TYPE_JOB_ID,
-        dtjId);
-
-    int numInserted = DBConnection.get().insertIntoTableIgnore(
-        DBConstants.TABLE_USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS,
-        insertParams);
-    if (numInserted == 1) {
-      return true;
-    }
-    return false;
-  }
-
   /* used for quest tasks */
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertCompletedTaskIdForUserQuest(int, int, int)

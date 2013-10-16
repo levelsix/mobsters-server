@@ -15,8 +15,8 @@ import com.lvl6.info.City;
 import com.lvl6.info.Quest;
 import com.lvl6.info.Structure;
 import com.lvl6.info.Task;
-import com.lvl6.info.jobs.BuildStructJob;
-import com.lvl6.info.jobs.UpgradeStructJob;
+import com.lvl6.info.jobs.QuestJobBuildStruct;
+import com.lvl6.info.jobs.QuestJobUpgradeStruct;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataRequestProto;
@@ -31,7 +31,7 @@ import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
   @Component @DependsOn("gameServer") public class RetrieveStaticDataController extends EventController{
@@ -145,9 +145,9 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
     List <Integer> buildStructJobIds = reqProto.getBuildStructJobIdsList();
     if (buildStructJobIds != null && buildStructJobIds.size() > 0) {
-      Map<Integer, BuildStructJob> buildStructJobIdsToBuildStructJobs = QuestJobBuildStructRetrieveUtils.getBuildStructJobIdsToBuildStructJobs();
+      Map<Integer, QuestJobBuildStruct> buildStructJobIdsToBuildStructJobs = QuestJobBuildStructRetrieveUtils.getBuildStructJobIdsToBuildStructJobs();
       for (Integer buildStructJobId :  buildStructJobIds) {
-        BuildStructJob buildStructJob = buildStructJobIdsToBuildStructJobs.get(buildStructJobId);
+        QuestJobBuildStruct buildStructJob = buildStructJobIdsToBuildStructJobs.get(buildStructJobId);
         if (buildStructJob != null) {
           resBuilder.addBuildStructJobs(CreateInfoProtoUtils.createFullBuildStructJobProtoFromBuildStructJob(buildStructJob));
         } else {
@@ -187,9 +187,9 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 
     List <Integer> upgradeStructJobIds = reqProto.getUpgradeStructJobIdsList();
     if (upgradeStructJobIds != null && upgradeStructJobIds.size() > 0) {
-      Map<Integer, UpgradeStructJob> upgradeStructJobIdsToUpgradeStructJobs = UpgradeStructJobRetrieveUtils.getUpgradeStructJobIdsToUpgradeStructJobs();
+      Map<Integer, QuestJobUpgradeStruct> upgradeStructJobIdsToUpgradeStructJobs = QuestJobUpgradeStructRetrieveUtils.getUpgradeStructJobIdsToUpgradeStructJobs();
       for (Integer upgradeStructJobId :  upgradeStructJobIds) {
-        UpgradeStructJob upgradeStructJob = upgradeStructJobIdsToUpgradeStructJobs.get(upgradeStructJobId);
+        QuestJobUpgradeStruct upgradeStructJob = upgradeStructJobIdsToUpgradeStructJobs.get(upgradeStructJobId);
         if (upgradeStructJob != null) {
           resBuilder.addUpgradeStructJobs(CreateInfoProtoUtils.createFullUpgradeStructJobProtoFromUpgradeStructJob(upgradeStructJob));
         } else {

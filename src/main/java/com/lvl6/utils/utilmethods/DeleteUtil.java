@@ -9,10 +9,6 @@ public interface DeleteUtil {
 
 	public abstract boolean deleteQuestTaskCompletedForUser(int userId, int questId, int numTasks);
 
-	////@CacheEvict(value = "questIdToUserDefeatTypeJobsCompletedForQuestForUserCache", key = "#userId")
-	public abstract boolean deleteUserQuestInfoInDefeatTypeJobProgressAndCompletedDefeatTypeJobs(
-			int userId, int questId, int numDefeatJobs);
-
 	/*@Caching(evict = {
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
@@ -39,11 +35,7 @@ public interface DeleteUtil {
   
   public abstract int deleteAllUserQuestsForUser(int userId);
   
-  public abstract int deleteAllUserQuestsCompletedDefeatTypeJobsForUser(int userId);
-  
   public abstract int deleteAllUserQuestsCompletedTasksForUser(int userId);
-  
-  public abstract int deleteAllUserQuestsDefeatTypeJobProgressForUser(int userId);
   
   public abstract int deleteAllUserTasksForUser(int userId);
 }

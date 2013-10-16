@@ -10,17 +10,17 @@ import org.slf4j.LoggerFactory;
 import com.lvl6.events.response.QuestCompleteResponseEvent;
 import com.lvl6.info.CityElement;
 import com.lvl6.info.Quest;
-import com.lvl6.info.UserQuest;
-import com.lvl6.info.UserStruct;
-import com.lvl6.info.jobs.BuildStructJob;
-import com.lvl6.info.jobs.UpgradeStructJob;
+import com.lvl6.info.QuestForUser;
+import com.lvl6.info.StructureForUser;
+import com.lvl6.info.jobs.QuestJobBuildStruct;
+import com.lvl6.info.jobs.QuestJobUpgradeStruct;
 import com.lvl6.proto.EventQuestProto.QuestCompleteResponseProto;
 import com.lvl6.proto.QuestProto.SpecialQuestAction;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.QuestGraph;
@@ -35,10 +35,10 @@ public class QuestUtils {
       SpecialQuestAction justCompletedSpecialQuestAction, boolean checkOnlySpecialQuests) {
   	
   	//list of user quest will never be null
-    List<UserQuest> inProgressUserQuests = RetrieveUtils
-    		.userQuestRetrieveUtils().getIncompleteUserQuestsForUser(userId);
+    List<QuestForUser> inProgressUserQuests = RetrieveUtils
+    		.questForUserRetrieveUtils().getIncompleteUserQuestsForUser(userId);
     
-    for (UserQuest userQuest : inProgressUserQuests) {
+    for (QuestForUser userQuest : inProgressUserQuests) {
     	//user quest will never be null
     	Quest quest = QuestRetrieveUtils.getQuestForQuestId(userQuest.getQuestId());
     	if (null == quest) {
@@ -59,7 +59,7 @@ public class QuestUtils {
   }
 
   public static boolean checkQuestCompleteAndMaybeSendIfJustCompleted(
-  		GameServer server, Quest quest, UserQuest userQuest,
+  		GameServer server, Quest quest, QuestForUser userQuest,
       MinimumUserProto senderProto, boolean sendCompleteMessageIfJustCompleted,
       SpecialQuestAction justCompletedSpecialQuestAction) {
   	if (null == userQuest) {
@@ -91,8 +91,8 @@ public class QuestUtils {
     boolean upgradeStructJobsExist = quest.hasUpgradeStructJobs();
     
     int userId = userQuest.getUserId();
-    Map<Integer, List<UserStruct>> structIdsToUserStructs =
-        new HashMap<Integer, List<UserStruct>>();
+    Map<Integer, List<StructureForUser>> structIdsToUserStructs =
+        new HashMap<Integer, List<StructureForUser>>();
     //completedBuildStructJobs() might populate structIdsToUserStructs
     //if build struct jobs exist and user has not finished it all, exit
     if (!completedBuildStructJobs(userId, buildStructJobsExist,
@@ -126,7 +126,7 @@ public class QuestUtils {
   // compare random quest with quest user completed
   // return true if random quest matches quest user completed
   private static boolean recordSpecialQuestAsCompleted(GameServer server,
-  		Quest quest, UserQuest userQuest, MinimumUserProto senderProto,
+  		Quest quest, QuestForUser userQuest, MinimumUserProto senderProto,
   		SpecialQuestAction justCompletedSpecialQuestAction,
   		boolean sendCompleteMessageIfJustCompleted) {
 
@@ -149,23 +149,23 @@ public class QuestUtils {
   //return false otherwise
   private static boolean completedBuildStructJobs(int userId,
       boolean buildStructJobsExist, List<Integer> buildStructJobsRequired,
-      Map<Integer, List<UserStruct>> structIdsToUserStructs) {
+      Map<Integer, List<StructureForUser>> structIdsToUserStructs) {
     if (!buildStructJobsExist) {
       return true;
     }
 
-    Map<Integer, List<UserStruct>> structIdsToUserStructsTemp =
+    Map<Integer, List<StructureForUser>> structIdsToUserStructsTemp =
         RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(userId);
     if (structIdsToUserStructsTemp == null || structIdsToUserStructsTemp.size() <= 0) {
       //quest has build struct jobs but user has not done any, exit
       return false;
     }
 
-    Map<Integer, BuildStructJob> bsjs = QuestJobBuildStructRetrieveUtils
+    Map<Integer, QuestJobBuildStruct> bsjs = QuestJobBuildStructRetrieveUtils
         .getBuildStructJobsForBuildStructJobIds(buildStructJobsRequired);
 
     //see if the user completed each build struct job, if not then exit
-    for (BuildStructJob bsj : bsjs.values()) {
+    for (QuestJobBuildStruct bsj : bsjs.values()) {
       if (!completedBuildStructJob(bsj, structIdsToUserStructsTemp)) {
         return false;
       }
@@ -174,13 +174,13 @@ public class QuestUtils {
     return true;
   }
   //helper function for completedBuildStructJobs
-  private static boolean completedBuildStructJob(BuildStructJob bsj,
-      Map<Integer, List<UserStruct>> structIdsToUserStructs) {
+  private static boolean completedBuildStructJob(QuestJobBuildStruct bsj,
+      Map<Integer, List<StructureForUser>> structIdsToUserStructs) {
     int bsjStructId = bsj.getStructId();
     int quantityBuilt = 0;
 
     if (structIdsToUserStructs.get(bsjStructId) != null) {
-      for (UserStruct us : structIdsToUserStructs.get(bsjStructId)) {
+      for (StructureForUser us : structIdsToUserStructs.get(bsjStructId)) {
         if (us.getLastRetrieved() != null) {
         	//not being null indicates the user FINISHED BUILDING the building
           quantityBuilt++;
@@ -197,12 +197,12 @@ public class QuestUtils {
 
   private static boolean completedUpgradeStructJobs(int userId,
       boolean upgradeStructJobsExist, List<Integer> upgradeStructJobsRequired,
-      Map<Integer, List<UserStruct>> structIdsToUserStructs) {
+      Map<Integer, List<StructureForUser>> structIdsToUserStructs) {
     if (!upgradeStructJobsExist) {
       return true;
     }
 
-    Map<Integer, List<UserStruct>> structIdsToUserStructsTemp =
+    Map<Integer, List<StructureForUser>> structIdsToUserStructsTemp =
         structIdsToUserStructs;
     if (null == structIdsToUserStructsTemp || structIdsToUserStructsTemp.isEmpty()) {
       //set it now because probably parent calling function didn't set it
@@ -214,10 +214,10 @@ public class QuestUtils {
       return false;
     }
 
-    Map<Integer, UpgradeStructJob> usjs = UpgradeStructJobRetrieveUtils
+    Map<Integer, QuestJobUpgradeStruct> usjs = QuestJobUpgradeStructRetrieveUtils
         .getUpgradeStructJobsForUpgradeStructJobIds(upgradeStructJobsRequired);
 
-    for (UpgradeStructJob usj : usjs.values()) {
+    for (QuestJobUpgradeStruct usj : usjs.values()) {
       if (!completedUpgradeStructJob(usj, structIdsToUserStructsTemp)) {
         return false;
       }
@@ -226,8 +226,8 @@ public class QuestUtils {
     return true;
   }
   //helper method for completedUpgradeStructJobs
-  private static boolean completedUpgradeStructJob(UpgradeStructJob usj,
-      Map<Integer, List<UserStruct>> structIdsToUserStructs) {
+  private static boolean completedUpgradeStructJob(QuestJobUpgradeStruct usj,
+      Map<Integer, List<StructureForUser>> structIdsToUserStructs) {
     int usjStructId = usj.getStructId();
     if (structIdsToUserStructs.get(usjStructId) == null) {
       return false;
@@ -236,7 +236,7 @@ public class QuestUtils {
 
     //see if user upgraded any buildings to required level
     //user can build multiple instances of a building
-    for (UserStruct us : structIdsToUserStructs.get(usj.getStructId())) {
+    for (StructureForUser us : structIdsToUserStructs.get(usj.getStructId())) {
       if (us.getLevel() >= usj.getLevelReq()) {
         usjComplete = true;
       }
@@ -248,7 +248,7 @@ public class QuestUtils {
   
 
   private static void sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(GameServer server, Quest quest,
-      UserQuest userQuest, MinimumUserProto senderProto,
+      QuestForUser userQuest, MinimumUserProto senderProto,
       boolean sendCompleteMessageIfJustCompleted) {
     if (server != null && senderProto != null && sendCompleteMessageIfJustCompleted) {
       sendQuestCompleteResponse(server, senderProto, quest);

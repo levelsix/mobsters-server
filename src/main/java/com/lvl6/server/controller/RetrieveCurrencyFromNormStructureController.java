@@ -20,8 +20,8 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Quest;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
-import com.lvl6.info.UserQuest;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.QuestForUser;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
@@ -78,7 +78,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       int previousSilver = 0;
       List<Integer> userStructIds = new ArrayList<Integer>(userStructIdsToTimesOfRetrieval.keySet());
       
-      Map<Integer, UserStruct> userStructIdsToUserStructs = getUserStructIdsToUserStructs(userStructIds);
+      Map<Integer, StructureForUser> userStructIdsToUserStructs = getUserStructIdsToUserStructs(userStructIds);
       Map<Integer, Structure> userStructIdsToStructures = getUserStructIdsToStructs(userStructIdsToUserStructs.values());
       
       int coinGain = calculateMoneyGainedFromStructs(userStructIds, userStructIdsToUserStructs, userStructIdsToStructures);
@@ -139,28 +139,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
   
-  private Map<Integer, UserStruct> getUserStructIdsToUserStructs(List<Integer> userStructIds) {
-    Map<Integer, UserStruct> returnValue = new HashMap<Integer, UserStruct>();
+  private Map<Integer, StructureForUser> getUserStructIdsToUserStructs(List<Integer> userStructIds) {
+    Map<Integer, StructureForUser> returnValue = new HashMap<Integer, StructureForUser>();
     if(null == userStructIds || userStructIds.isEmpty()) {
       log.error("no user struct ids!");
     }
     
-    List<UserStruct> userStructList = RetrieveUtils.userStructRetrieveUtils()
+    List<StructureForUser> userStructList = RetrieveUtils.userStructRetrieveUtils()
         .getUserStructs(userStructIds);
-    for(UserStruct us : userStructList) {
+    for(StructureForUser us : userStructList) {
       if(null != us) {
         returnValue.put(us.getId(), us);
       } else {
         log.error("could not retrieve one of the user structs. userStructIds to retrieve="
             + MiscMethods.shallowListToString(userStructIds) + ". user structs retrieved=" 
             + MiscMethods.shallowListToString(userStructList) + ". Continuing with processing.");
-        return new HashMap<Integer, UserStruct>();
+        return new HashMap<Integer, StructureForUser>();
       }
     }
     return returnValue;
   }
   
-  private Map<Integer, Structure> getUserStructIdsToStructs(Collection<UserStruct> userStructs) {
+  private Map<Integer, Structure> getUserStructIdsToStructs(Collection<StructureForUser> userStructs) {
     Map<Integer, Structure> returnValue = new HashMap<Integer, Structure>();
     Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
     
@@ -168,7 +168,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("There are no user structs.");
     }
     
-    for(UserStruct us : userStructs) {
+    for(StructureForUser us : userStructs) {
       int structId = us.getStructId();
       int userStructId = us.getId();
       
@@ -184,11 +184,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private int calculateMoneyGainedFromStructs(List<Integer> userStructIds,
-      Map<Integer, UserStruct> userStructIdsToUserStructs, Map<Integer, Structure> userStructIdsToStructures) {
+      Map<Integer, StructureForUser> userStructIdsToUserStructs, Map<Integer, Structure> userStructIdsToStructures) {
     int totalCoinsGained = 0;
     
     for(Integer i : userStructIds) {
-      UserStruct userStructure = userStructIdsToUserStructs.get(i);
+      StructureForUser userStructure = userStructIdsToUserStructs.get(i);
       Structure struct = userStructIdsToStructures.get(i);
       int structIncome = struct.getIncome();
       int userStructureLevel = userStructure.getLevel();
@@ -201,10 +201,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private void updateAndCheckUserQuests(GameServer server, int coinGain, MinimumUserProto senderProto) {
-    List<UserQuest> inProgressUserQuests = RetrieveUtils.userQuestRetrieveUtils().getIncompleteUserQuestsForUser(senderProto.getUserId());
+    List<QuestForUser> inProgressUserQuests = RetrieveUtils.questForUserRetrieveUtils().getIncompleteUserQuestsForUser(senderProto.getUserId());
     if (inProgressUserQuests != null) {
       List<Integer> relevantQuests = new ArrayList<Integer>();
-      for (UserQuest userQuest : inProgressUserQuests) {
+      for (QuestForUser userQuest : inProgressUserQuests) {
         if (!userQuest.isComplete()) {
           Quest quest = QuestRetrieveUtils.getQuestForQuestId(userQuest.getQuestId());
           if (quest != null) {
@@ -225,7 +225,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean checkLegitRetrieval(Builder resBuilder, User user, List<Integer> userStructIds, 
-      Map<Integer, UserStruct> userStructIdsToUserStructs, Map<Integer, Structure> userStructIdsToStructures,
+      Map<Integer, StructureForUser> userStructIdsToUserStructs, Map<Integer, Structure> userStructIdsToStructures,
       Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval, List<Integer> duplicates, int coinGain) {
 
 //    int userId = user.getId();

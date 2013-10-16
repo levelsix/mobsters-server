@@ -16,7 +16,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.utils.DBConnection;
@@ -28,45 +28,45 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   private final String TABLE_NAME = DBConstants.TABLE_STRUCTURE_FOR_USER;
 
-  public List<UserStruct> getUserStructsForUser(int userId) {
+  public List<StructureForUser> getUserStructsForUser(int userId) {
     log.debug("retrieving user structs for userId " + userId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    List<UserStruct> userStructs = convertRSToUserStructs(rs);
+    List<StructureForUser> userStructs = convertRSToUserStructs(rs);
     DBConnection.get().close(rs, null, conn);
     return userStructs;
   }
 
   
   ////@Cacheable(value="structIdsToUserStructsForUser", key="#userId")
-  public Map<Integer, List<UserStruct>> getStructIdsToUserStructsForUser(int userId) {
+  public Map<Integer, List<StructureForUser>> getStructIdsToUserStructsForUser(int userId) {
     log.debug("retrieving map of struct id to userstructs for userId " + userId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    Map<Integer, List<UserStruct>> structIdToUserStructs = convertRSToStructIdsToUserStructs(rs);
+    Map<Integer, List<StructureForUser>> structIdToUserStructs = convertRSToStructIdsToUserStructs(rs);
     DBConnection.get().close(rs, null, conn);
     return structIdToUserStructs;
   }
 
   ////@Cacheable(value="specificUserStruct", key="#userStructId")
-  public UserStruct getSpecificUserStruct(int userStructId) {
+  public StructureForUser getSpecificUserStruct(int userStructId) {
     log.debug("retrieving user struct with id " + userStructId);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsById(conn, userStructId, TABLE_NAME);
-    UserStruct userStruct = convertRSSingleToUserStructs(rs);
+    StructureForUser userStruct = convertRSSingleToUserStructs(rs);
     DBConnection.get().close(rs, null, conn);
     return userStruct;
   }
 
   
-  public List<UserStruct> getUserStructs(List<Integer> userStructIds) {
+  public List<StructureForUser> getUserStructs(List<Integer> userStructIds) {
     log.debug("retrieving userStructs with ids " + userStructIds);
     
     if (userStructIds == null || userStructIds.size() <= 0 ) {
-      return new ArrayList<UserStruct>();
+      return new ArrayList<StructureForUser>();
     }
     
     String query = "select * from " + TABLE_NAME + " where (";
@@ -80,17 +80,17 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    List<UserStruct> userStructs = convertRSToUserStructs(rs);
+    List<StructureForUser> userStructs = convertRSToUserStructs(rs);
     DBConnection.get().close(rs, null, conn);
     return userStructs;
   }
 
-  private List<UserStruct> convertRSToUserStructs(ResultSet rs) {
+  private List<StructureForUser> convertRSToUserStructs(ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
-        List<UserStruct> userStructs = new ArrayList<UserStruct>();
+        List<StructureForUser> userStructs = new ArrayList<StructureForUser>();
         while(rs.next()) {
           userStructs.add(convertRSRowToUserStruct(rs));
         }
@@ -104,20 +104,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
 
 
-  private Map<Integer, List<UserStruct>> convertRSToStructIdsToUserStructs(
+  private Map<Integer, List<StructureForUser>> convertRSToStructIdsToUserStructs(
       ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
-        Map<Integer, List<UserStruct>> structIdsToUserStructs = new HashMap<Integer, List<UserStruct>>();
+        Map<Integer, List<StructureForUser>> structIdsToUserStructs = new HashMap<Integer, List<StructureForUser>>();
         while(rs.next()) {
-          UserStruct userStruct = convertRSRowToUserStruct(rs);
-          List<UserStruct> userStructsForStructId = structIdsToUserStructs.get(userStruct.getStructId());
+          StructureForUser userStruct = convertRSRowToUserStruct(rs);
+          List<StructureForUser> userStructsForStructId = structIdsToUserStructs.get(userStruct.getStructId());
           if (userStructsForStructId != null) {
             userStructsForStructId.add(userStruct);
           } else {
-            List<UserStruct> userStructs = new ArrayList<UserStruct>();
+            List<StructureForUser> userStructs = new ArrayList<StructureForUser>();
             userStructs.add(userStruct);
             structIdsToUserStructs.put(userStruct.getStructId(), userStructs);
           }
@@ -131,7 +131,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return null;
   }
 
-  private UserStruct convertRSSingleToUserStructs(ResultSet rs) {
+  private StructureForUser convertRSSingleToUserStructs(ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
@@ -150,7 +150,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private UserStruct convertRSRowToUserStruct(ResultSet rs) throws SQLException {
+  private StructureForUser convertRSRowToUserStruct(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     int userId = rs.getInt(i++);
@@ -175,7 +175,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     boolean isComplete = rs.getBoolean(i++);
     StructOrientation orientation = StructOrientation.valueOf(rs.getInt(i++));
 
-    return new UserStruct(id, userId, structId, lastRetrieved, coordinates, level, purchaseTime, lastUpgradeTime, isComplete, orientation);
+    return new StructureForUser(id, userId, structId, lastRetrieved, coordinates, level, purchaseTime, lastUpgradeTime, isComplete, orientation);
   }
 
 }

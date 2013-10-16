@@ -62,10 +62,6 @@ public class DBConstants {
   public static final String TABLE_USER_SESSION = "user_session";
   public static final String TABLE_USER_TASK_STAGE_HISTORY = "task_stage_history_for_user";
   
-	
-  public static final String TABLE_USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS = "user_quests_completed_defeat_type_jobs";
-  public static final String TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS = "user_quests_defeat_type_job_progress";
-  
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";
   public static final String GENERIC__ID = "id";
@@ -431,24 +427,9 @@ public class DBConstants {
   public static final String USER_CURRENCY_HISTORY__REASON_FOR_CHANGE = "reason_for_change";
  
   
-  
-  
   /*USER QUESTS COMPLETED TASKS TABLE*/
   public static final String USER_QUESTS_COMPLETED_TASKS__USER_ID = GENERIC__USER_ID;
   public static final String USER_QUESTS_COMPLETED_TASKS__QUEST_ID = "quest_id";
   public static final String USER_QUESTS_COMPLETED_TASKS__COMPLETED_TASK_ID = "completed_task_id";
 
-  /*USER QUESTS COMPLETED DEFEAT TYPE JOBS TABLE*/
-  public static final String USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__QUEST_ID = "quest_id";
-  public static final String USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__COMPLETED_DEFEAT_TYPE_JOB_ID = "completed_defeat_type_job_id";
-
-  /*USER QUESTS DEFEAT TYPE JOB PROGRESS*/
-  public static final String USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__QUEST_ID = "quest_id";
-  public static final String USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__DEFEAT_TYPE_JOB_ID = "defeat_type_job_id";
-  public static final String USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__NUM_DEFEATED = "num_defeated";
-  
 }
-
-

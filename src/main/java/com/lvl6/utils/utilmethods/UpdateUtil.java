@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
 
@@ -60,7 +60,7 @@ public interface UpdateUtil {
    * used for updating is_complete=true and last_retrieved to upgrade_time+minutestogain for a userstruct
    */
   public abstract boolean updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(
-      List<UserStruct> userStructs, int levelChange);
+      List<StructureForUser> userStructs, int levelChange);
 
   /*
    * used for updating last retrieved and/or last upgrade user struct time and is_complete
@@ -77,7 +77,7 @@ public interface UpdateUtil {
    * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
    */
   public abstract boolean updateUserStructsLastretrievedpostbuildIscomplete(
-      List<UserStruct> userStructs);
+      List<StructureForUser> userStructs);
 
   /*
    * used for updating last retrieved and/or last upgrade user struct time and is_complete
@@ -99,7 +99,7 @@ public interface UpdateUtil {
       //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
   public abstract boolean updateUserStructsLastretrieved(
       Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
-      Map<Integer, UserStruct> structIdsToUserStructs);
+      Map<Integer, StructureForUser> structIdsToUserStructs);
 
   /*
    * used for upgrading user structs level
@@ -122,9 +122,6 @@ public interface UpdateUtil {
       CoordinatePair coordinates);
 
   public abstract boolean updateClanOwnerDescriptionForClan(int clanId, int ownerId, String description);
-
-  public abstract boolean incrementUserQuestDefeatTypeJobProgress(int userId,
-      int questId, int defeatTypeJobId, int increment);
 
   public abstract boolean updateUserEquipOwner(long userEquipId, int newOwnerId, String reason);
   

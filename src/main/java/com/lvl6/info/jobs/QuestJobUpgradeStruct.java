@@ -1,11 +1,11 @@
 package com.lvl6.info.jobs;
 
-public class UpgradeStructJob {
+public class QuestJobUpgradeStruct {
   private int id;
   private int structId;
   private int levelReq;
   
-  public UpgradeStructJob(int id, int structId, int levelReq) {
+  public QuestJobUpgradeStruct(int id, int structId, int levelReq) {
     this.id = id;
     this.structId = structId;
     this.levelReq = levelReq;
@@ -19,9 +19,10 @@ public class UpgradeStructJob {
   public int getLevelReq() {
     return levelReq;
   }
-  @Override
-  public String toString() {
-    return "UpgradeStructJob [id=" + id + ", structId=" + structId
-        + ", levelReq=" + levelReq + "]";
-  }
+	@Override
+	public String toString() {
+		return "QuestJobUpgradeStruct [id=" + id + ", structId=" + structId
+				+ ", levelReq=" + levelReq + "]";
+	}
+  
 }

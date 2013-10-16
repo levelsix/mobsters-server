@@ -91,30 +91,6 @@ public class DeleteUtils implements DeleteUtil {
   }
 
   /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteUserQuestInfoInDefeatTypeJobProgressAndCompletedDefeatTypeJobs(int, int, int)
-   */
-  @Override
-  ////@CacheEvict(value="questIdToUserDefeatTypeJobsCompletedForQuestForUserCache", key="#userId")
-  public boolean deleteUserQuestInfoInDefeatTypeJobProgressAndCompletedDefeatTypeJobs(int userId, int questId, int numDefeatJobs) {
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__USER_ID, userId);
-    conditionParams.put(DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__QUEST_ID, questId);
-
-    //trust?
-    DBConnection.get().deleteRows(DBConstants.TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS, conditionParams, "and");
-
-    conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__USER_ID, userId);
-    conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__QUEST_ID, questId);
-
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS, conditionParams, "and");
-    if (numDeleted != numDefeatJobs) {
-      return false;
-    }
-    return true;  
-  }
-
-  /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteUserStruct(int)
    */
   @Override
@@ -229,29 +205,11 @@ public class DeleteUtils implements DeleteUtil {
     
     return numDeleted;
   }
-  public int deleteAllUserQuestsCompletedDefeatTypeJobsForUser(int userId) {
-    String tableName = DBConstants.TABLE_USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS;
-    String condDelim = "and";
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_DEFEAT_TYPE_JOBS__USER_ID, userId);
-    int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
-    
-    return numDeleted;
-  }
   public int deleteAllUserQuestsCompletedTasksForUser(int userId) {
     String tableName = DBConstants.TABLE_QUEST_TASK_HISTORY;
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__USER_ID, userId);
-    int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
-    
-    return numDeleted;
-  }
-  public int deleteAllUserQuestsDefeatTypeJobProgressForUser(int userId) {
-    String tableName = DBConstants.TABLE_USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS;
-    String condDelim = "and";
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS_DEFEAT_TYPE_JOB_PROGRESS__USER_ID, userId);
     int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
     
     return numDeleted;

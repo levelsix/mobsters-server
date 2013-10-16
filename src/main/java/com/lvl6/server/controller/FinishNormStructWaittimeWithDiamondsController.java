@@ -16,7 +16,7 @@ import com.lvl6.events.response.FinishNormStructWaittimeWithDiamondsResponseEven
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
-import com.lvl6.info.UserStruct;
+import com.lvl6.info.StructureForUser;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRequestProto;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto;
@@ -63,7 +63,7 @@ import com.lvl6.utils.RetrieveUtils;
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       int previousSilver = 0;
       int previousGold = 0;
-      UserStruct userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
+      StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
       Structure struct = null;
       if (userStruct != null) {
         struct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
@@ -100,7 +100,7 @@ import com.lvl6.utils.RetrieveUtils;
     }
   }
 
-  private void writeChangesToDB(User user, UserStruct userStruct,
+  private void writeChangesToDB(User user, StructureForUser userStruct,
   		Timestamp timeOfPurchase, Structure struct, Map<String, Integer> money) {
 //    if (waitTimeType == NormStructWaitTimeType.FINISH_CONSTRUCTION) {
 //      int goldCost = buildDiamondCost(userStruct, struct, timeOfPurchase) * -1;
@@ -140,7 +140,7 @@ import com.lvl6.utils.RetrieveUtils;
   }
 
   private boolean checkLegitSpeedup(Builder resBuilder, User user,
-  		UserStruct userStruct, Timestamp timeOfSpeedup, Structure struct) {
+  		StructureForUser userStruct, Timestamp timeOfSpeedup, Structure struct) {
     if (user == null || userStruct == null || struct == null || userStruct.getUserId() != user.getId() || userStruct.isComplete()) {
       resBuilder.setStatus(FinishNormStructWaittimeStatus.OTHER_FAIL);
       log.error("something passed in is null. user=" + user + ", userStruct=" + userStruct +
@@ -183,7 +183,7 @@ import com.lvl6.utils.RetrieveUtils;
     return true;  
   }
   
-  private int calculateDiamondCostForInstaRetrieve(UserStruct userStruct, Structure struct) {
+  private int calculateDiamondCostForInstaRetrieve(StructureForUser userStruct, Structure struct) {
     int result = struct.getInstaRetrieveDiamondCostBase() * userStruct.getLevel();
     return Math.max(1, result);
   }

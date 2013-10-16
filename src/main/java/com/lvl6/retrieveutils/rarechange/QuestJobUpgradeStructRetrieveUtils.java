@@ -12,19 +12,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.jobs.UpgradeStructJob;
+import com.lvl6.info.jobs.QuestJobUpgradeStruct;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class UpgradeStructJobRetrieveUtils {
+@Component @DependsOn("gameServer") public class QuestJobUpgradeStructRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static Map<Integer, UpgradeStructJob> upgradeStructJobIdsToUpgradeStructJobs;
+  private static Map<Integer, QuestJobUpgradeStruct> upgradeStructJobIdsToUpgradeStructJobs;
 
   private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_UPGRADE_STRUCT;
 
-  public static Map<Integer, UpgradeStructJob> getUpgradeStructJobIdsToUpgradeStructJobs() {
+  public static Map<Integer, QuestJobUpgradeStruct> getUpgradeStructJobIdsToUpgradeStructJobs() {
     log.debug("retrieving all upgrade struct job data");
     if (upgradeStructJobIdsToUpgradeStructJobs == null) {
       setStaticUpgradeStructJobIdsToUpgradeStructJobs();
@@ -32,19 +32,19 @@ import com.lvl6.utils.DBConnection;
     return upgradeStructJobIdsToUpgradeStructJobs;
   }
 
-  public static Map<Integer, UpgradeStructJob> getUpgradeStructJobsForUpgradeStructJobIds(List<Integer> ids) {
+  public static Map<Integer, QuestJobUpgradeStruct> getUpgradeStructJobsForUpgradeStructJobIds(List<Integer> ids) {
     log.debug("retrieving upgrade struct jobs with ids " + ids);
     if (upgradeStructJobIdsToUpgradeStructJobs == null) {
       setStaticUpgradeStructJobIdsToUpgradeStructJobs();
     }
-    Map<Integer, UpgradeStructJob> toreturn = new HashMap<Integer, UpgradeStructJob>();
+    Map<Integer, QuestJobUpgradeStruct> toreturn = new HashMap<Integer, QuestJobUpgradeStruct>();
     for (Integer id : ids) {
       toreturn.put(id,  upgradeStructJobIdsToUpgradeStructJobs.get(id));
     }
     return toreturn;
   }
 
-  public static UpgradeStructJob getUpgradeStructJobForUpgradeStructJobId(int upgradeStructJobId) {
+  public static QuestJobUpgradeStruct getUpgradeStructJobForUpgradeStructJobId(int upgradeStructJobId) {
     log.debug("retrieving upgrade struct job data for upgrade struct job id " + upgradeStructJobId);
     if (upgradeStructJobIdsToUpgradeStructJobs == null) {
       setStaticUpgradeStructJobIdsToUpgradeStructJobs();
@@ -63,9 +63,9 @@ import com.lvl6.utils.DBConnection;
         try {
           rs.last();
           rs.beforeFirst();
-          Map <Integer, UpgradeStructJob> upgradeStructJobIdsToUpgradeStructJobsTemp = new HashMap<Integer, UpgradeStructJob>();
+          Map <Integer, QuestJobUpgradeStruct> upgradeStructJobIdsToUpgradeStructJobsTemp = new HashMap<Integer, QuestJobUpgradeStruct>();
           while(rs.next()) {  //should only be one
-            UpgradeStructJob usj = convertRSRowToUpgradeStructJob(rs);
+            QuestJobUpgradeStruct usj = convertRSRowToUpgradeStructJob(rs);
             if (usj != null)
               upgradeStructJobIdsToUpgradeStructJobsTemp.put(usj.getId(), usj);
           }
@@ -86,12 +86,12 @@ import com.lvl6.utils.DBConnection;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static UpgradeStructJob convertRSRowToUpgradeStructJob(ResultSet rs) throws SQLException {
+  private static QuestJobUpgradeStruct convertRSRowToUpgradeStructJob(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     int structId = rs.getInt(i++);
     int levelReq = rs.getInt(i++);
 
-    return new UpgradeStructJob(id, structId, levelReq);
+    return new QuestJobUpgradeStruct(id, structId, levelReq);
   }
 }

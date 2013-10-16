@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.jobs.BuildStructJob;
+import com.lvl6.info.jobs.QuestJobBuildStruct;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -20,11 +20,11 @@ import com.lvl6.utils.DBConnection;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static Map<Integer, BuildStructJob> buildStructJobIdsToBuildStructJobs;
+  private static Map<Integer, QuestJobBuildStruct> buildStructJobIdsToBuildStructJobs;
 
   private static final String TABLE_NAME = DBConstants.TABLE_QUEST_JOB_BUILD_STRUCT;
 
-  public static Map<Integer, BuildStructJob> getBuildStructJobIdsToBuildStructJobs() {
+  public static Map<Integer, QuestJobBuildStruct> getBuildStructJobIdsToBuildStructJobs() {
     log.debug("retrieving all build struct job data");
     if (buildStructJobIdsToBuildStructJobs == null) {
       setStaticBuildStructJobIdsToBuildStructJobs();
@@ -32,19 +32,19 @@ import com.lvl6.utils.DBConnection;
     return buildStructJobIdsToBuildStructJobs;
   }
 
-  public static Map<Integer, BuildStructJob> getBuildStructJobsForBuildStructJobIds(List<Integer> ids) {
+  public static Map<Integer, QuestJobBuildStruct> getBuildStructJobsForBuildStructJobIds(List<Integer> ids) {
     log.debug("retrieving map of build struct jobs with ids " + ids);
     if (buildStructJobIdsToBuildStructJobs == null) {
       setStaticBuildStructJobIdsToBuildStructJobs();
     }
-    Map<Integer, BuildStructJob> toreturn = new HashMap<Integer, BuildStructJob>();
+    Map<Integer, QuestJobBuildStruct> toreturn = new HashMap<Integer, QuestJobBuildStruct>();
     for (Integer id : ids) {
       toreturn.put(id,  buildStructJobIdsToBuildStructJobs.get(id));
     }
     return toreturn;
   }
 
-  public static BuildStructJob getBuildStructJobForBuildStructJobId(int buildStructJobId) {
+  public static QuestJobBuildStruct getBuildStructJobForBuildStructJobId(int buildStructJobId) {
     log.debug("retrieving build struct job data for build struct job id " + buildStructJobId);
     if (buildStructJobIdsToBuildStructJobs == null) {
       setStaticBuildStructJobIdsToBuildStructJobs();
@@ -64,9 +64,9 @@ import com.lvl6.utils.DBConnection;
         try {
           rs.last();
           rs.beforeFirst();
-          Map <Integer, BuildStructJob> buildStructJobIdsToBuildStructJobsTemp = new HashMap<Integer, BuildStructJob>();
+          Map <Integer, QuestJobBuildStruct> buildStructJobIdsToBuildStructJobsTemp = new HashMap<Integer, QuestJobBuildStruct>();
           while(rs.next()) {  //should only be one
-            BuildStructJob bsj = convertRSRowToBuildStructJob(rs);
+            QuestJobBuildStruct bsj = convertRSRowToBuildStructJob(rs);
             if (bsj != null)
               buildStructJobIdsToBuildStructJobsTemp.put(bsj.getId(), bsj);
           }
@@ -87,11 +87,11 @@ import com.lvl6.utils.DBConnection;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static BuildStructJob convertRSRowToBuildStructJob(ResultSet rs) throws SQLException {
+  private static QuestJobBuildStruct convertRSRowToBuildStructJob(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     int structId = rs.getInt(i++);
     int quantity = rs.getInt(i++);
-    return new BuildStructJob(id, structId, quantity);
+    return new QuestJobBuildStruct(id, structId, quantity);
   }
 }

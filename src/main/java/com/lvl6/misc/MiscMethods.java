@@ -67,7 +67,7 @@ import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TournamentEventRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.UpgradeStructJobRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 import com.lvl6.server.GameServer;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.ConnectedPlayer;
@@ -541,29 +541,29 @@ public class MiscMethods {
   public static void reloadAllRareChangeStaticData() {
     log.info("Reloading rare change static data");
     AlertOnStartupRetrieveUtils.reload();
-    CityRetrieveUtils.reload();
-    QuestJobBuildStructRetrieveUtils.reload();
-    QuestRetrieveUtils.reload();
-    TaskRetrieveUtils.reload();
-    UpgradeStructJobRetrieveUtils.reload();
-    StructureRetrieveUtils.reload();
-    LevelsRequiredExperienceRetrieveUtils.reload();
-    CityElementsRetrieveUtils.reload(); 
-    MonsterRetrieveUtils.reload();
-    LockBoxEventRetrieveUtils.reload();
-    GoldSaleRetrieveUtils.reload();
-    MonsterRewardRetrieveUtils.reload();
-    TournamentEventRetrieveUtils.reload();
-    TournamentEventRewardRetrieveUtils.reload();
-    ProfanityRetrieveUtils.reload();
     BoosterPackRetrieveUtils.reload();
     BoosterItemRetrieveUtils.reload();
     BannedUserRetrieveUtils.reload();
+    CityRetrieveUtils.reload();
+    CityElementsRetrieveUtils.reload(); 
     ExpansionCostRetrieveUtils.reload();
-//    ClanBossRetrieveUtils.reload();
-//    ClanBossRewardRetrieveUtils.reload();
+    GoldSaleRetrieveUtils.reload();
+    LevelsRequiredExperienceRetrieveUtils.reload();
+    LockBoxEventRetrieveUtils.reload();
+    MonsterRewardRetrieveUtils.reload();
+    MonsterRetrieveUtils.reload();
+    ProfanityRetrieveUtils.reload();
+    QuestJobBuildStructRetrieveUtils.reload();
+    QuestJobUpgradeStructRetrieveUtils.reload();
+    QuestRetrieveUtils.reload();
+    StructureRetrieveUtils.reload();
+    TaskRetrieveUtils.reload();
     TaskStageMonsterRetrieveUtils.reload();
     TaskStageRetrieveUtils.reload();
+    TournamentEventRetrieveUtils.reload();
+    TournamentEventRewardRetrieveUtils.reload();
+//    ClanBossRetrieveUtils.reload();
+//    ClanBossRewardRetrieveUtils.reload();
     
   }
 
