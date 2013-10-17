@@ -107,8 +107,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	long taskForUserId = ut.getId(); 
       	List<TaskStageForUser> tsfuList = TaskStageForUserRetrieveUtils
       			.getTaskStagesForUserWithTaskStageForUserId(taskForUserId);
+      	
       	//delete from task_stage_for_user and put into task_stage_history
-      	recordStageHistory(tsfuList);
+      	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+      	recordStageHistory(tsfuList, monsterIdToNumPieces);
+      	
+      	//update user's monsters
+//      	udpateUserMonsters()
+      	
       	//update quests
       }
       
@@ -233,7 +239,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  resBuilder.setStatus(EndDungeonStatus.SUCCESS);
   }
   
-  private void recordStageHistory(List<TaskStageForUser> tsfuList) {
+  private void recordStageHistory(List<TaskStageForUser> tsfuList,
+  		Map<Integer, Integer> monsterIdToNumPieces) {
   	List<Long> userTaskStageId = new ArrayList<Long>();
   	List<Long> userTaskId = new ArrayList<Long>();
   	List<Integer> stageNum = new ArrayList<Integer>();

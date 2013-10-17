@@ -38,6 +38,11 @@ public class DBConstants {
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
   public static final String TABLE_QUEST_JOB_BUILD_STRUCT = "quest_job_build_struct";
   public static final String TABLE_QUEST_JOB_MONSTER = "quest_job_monster";
+  public static final String TABLE_QUEST_JOB_MONSTER_KILL_FOR_USER = "quest_job_monster_kill_for_user";
+  public static final String TABLE_QUEST_JOB_MONSTER_KILL_HISTORY = "quest_job_monster_kill_history";
+  //links up rows in task_history (thus task_stage_history where monster info resides)
+  //to monster kill jobs
+  public static final String TABLE_QUEST_JOB_MONSTER_KILL_HISTORY_PROOF = "quest_job_monster_kill_history_proof";
   public static final String TABLE_QUEST_JOB_UPGRADE_STRUCT = "quest_job_upgrade_struct";
   public static final String TABLE_QUEST_TASK_HISTORY = "quest_task_history";
   public static final String TABLE_REFERRAL = "referral";
@@ -206,7 +211,6 @@ public class DBConstants {
   public static final String DM4U4E__MONSTER_FOR_USER__ID = "monster_for_user_id";
   public static final String DM4U4E__MONSTER_FOR_USER__USER_ID = GENERIC__USER_ID;
   public static final String DM4U4E__MONSTER_FOR_USER__MONSTER_ID = "monster_id";
-  public static final String DM4U4E__MONSTER_FOR_USER__EVOLUTION_LEVEL = "evolution_level";
   public static final String DM4U4E__MONSTER_FOR_USER__ENHANCEMENT_PERCENT = "enhancement_percent";
   public static final String DM4U4E__IS_FEEDER = "is_feeder";
   public static final String DM4U4E__MONSTER_ENHANCING_FOR_USER__ID = "monster_enhancing_id";
@@ -264,15 +268,14 @@ public class DBConstants {
   public static final String MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID = "monster_id";
   public static final String MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS = "num_fails";
 
-  /*USER EQUIP TABLE*/
+  /*MONSTER FOR USER*/
   public static final String MONSTER_FOR_USER__ID = GENERIC__ID;
   public static final String MONSTER_FOR_USER__USER_ID = GENERIC__USER_ID;
   public static final String MONSTER_FOR_USER__MONSTER_ID = "monster_id";
-  public static final String MONSTER_FOR_USER__EVOLUTION_LEVEL = "evolution_level";
   public static final String MONSTER_FOR_USER__ENHANCEMENT_PERCENT = "enhancement_percent";
-  public static final String MONSTER_FOR_USER__CREATE_TIME = "create_time";
-  public static final String MONSTER_FOR_USER__REASON = "reason";
   public static final String MONSTER_FOR_USER__CURRENT_HEALTH = "current_health";
+  public static final String MONSTER_FOR_USER__NUM_PIECES = "num_pieces";
+  public static final String MONSTER_FOR_USER__IS_COMPLETE = "is_complete";
 
   /*MONSTER REWARD*/
   public static final String MONSTER_REWARD__ID = GENERIC__ID;

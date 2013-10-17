@@ -36,7 +36,7 @@ import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
 import com.lvl6.info.UserClan;
-import com.lvl6.info.UserMonster;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.jobs.QuestJobBuildStruct;
 import com.lvl6.info.jobs.QuestJobMonster;
 import com.lvl6.info.jobs.QuestJobUpgradeStruct;
@@ -375,14 +375,16 @@ public class CreateInfoProtoUtils {
 		return mcp.setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
 	}
 
-	public static FullUserMonsterProto createFullUserEquipProtoFromUserEquip(UserMonster ue) {
-		FullUserMonsterProto.Builder fuepb = FullUserMonsterProto.newBuilder();
-		fuepb.setUserMonsterId(ue.getId());
-		fuepb.setUserId(ue.getUserId());
-		fuepb.setMonsterId(ue.getMonsterId());
-		fuepb.setEnhancementPercentage(ue.getEnhancementPercentage());
-		fuepb.setCurrentDurability(ue.getCurrentHealth());
-		return fuepb.build();
+	public static FullUserMonsterProto createFullUserEquipProtoFromUserEquip(MonsterForUser ue) {
+		FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
+		fumpb.setUserMonsterId(ue.getId());
+		fumpb.setUserId(ue.getUserId());
+		fumpb.setMonsterId(ue.getMonsterId());
+		fumpb.setEnhancementPercentage(ue.getEnhancementPercentage());
+		fumpb.setCurrentHealth(ue.getCurrentHealth());
+		fumpb.setNumPieces(ue.getNumPieces());
+		fumpb.setIsComplete(ue.isComplete());
+		return fumpb.build();
 	}
 
 	public static FullUserMonsterProto createFullUserEquipProto(long userMonsterId,
@@ -483,7 +485,7 @@ public class CreateInfoProtoUtils {
 
 		Map<Integer, List<StructureForUser>> structIdsToUserStructs = null;
 
-		Map<Integer, List<UserMonster>> equipIdsToUserEquips = null;
+		Map<Integer, List<MonsterForUser>> equipIdsToUserEquips = null;
 
 		for (QuestForUser userQuest : userQuests) {
 			Quest quest = questIdsToQuests.get(userQuest.getQuestId());

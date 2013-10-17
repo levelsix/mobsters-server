@@ -2,25 +2,29 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-public class UserMonster implements Serializable {
+public class MonsterForUser implements Serializable {
 
-	private static final long serialVersionUID = 4791630361324859273L;
+	private static final long serialVersionUID = 5090246072941512785L;
 	private long id;
 	private int userId;
 	private int monsterId;
-	private int evolutionLevel;
   private int enhancementPercentage;
   private int currentHealth;
+  private int numPieces;
+  private boolean isComplete;
   
-	public UserMonster(long id, int userId, int monsterId, int evolutionLevel,
-			int enhancementPercentage, int currentHealth) {
+
+	public MonsterForUser(long id, int userId, int monsterId,
+			int enhancementPercentage, int currentHealth, int numPieces,
+			boolean isComplete) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.monsterId = monsterId;
-		this.evolutionLevel = evolutionLevel;
 		this.enhancementPercentage = enhancementPercentage;
 		this.currentHealth = currentHealth;
+		this.numPieces = numPieces;
+		this.isComplete = isComplete;
 	}
 
 	public long getId() {
@@ -47,14 +51,6 @@ public class UserMonster implements Serializable {
 		this.monsterId = monsterId;
 	}
 
-	public int getEvolutionLevel() {
-		return evolutionLevel;
-	}
-
-	public void setEvolutionLevel(int evolutionLevel) {
-		this.evolutionLevel = evolutionLevel;
-	}
-
 	public int getEnhancementPercentage() {
 		return enhancementPercentage;
 	}
@@ -71,12 +67,28 @@ public class UserMonster implements Serializable {
 		this.currentHealth = currentHealth;
 	}
 
+	public int getNumPieces() {
+		return numPieces;
+	}
+
+	public void setNumPieces(int numPieces) {
+		this.numPieces = numPieces;
+	}
+
+	public boolean isComplete() {
+		return isComplete;
+	}
+
+	public void setComplete(boolean isComplete) {
+		this.isComplete = isComplete;
+	}
+
 	@Override
 	public String toString() {
-		return "UserMonster [id=" + id + ", userId=" + userId + ", monsterId="
-				+ monsterId + ", evolutionLevel=" + evolutionLevel
-				+ ", enhancementPercentage=" + enhancementPercentage
-				+ ", currentHealth=" + currentHealth + "]";
+		return "MonsterForUser [id=" + id + ", userId=" + userId + ", monsterId="
+				+ monsterId + ", enhancementPercentage=" + enhancementPercentage
+				+ ", currentHealth=" + currentHealth + ", numPieces=" + numPieces
+				+ ", isComplete=" + isComplete + "]";
 	}
 
 }

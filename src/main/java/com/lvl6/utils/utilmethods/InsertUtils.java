@@ -136,15 +136,11 @@ public class InsertUtils implements InsertUtil{
 //    return userEquipId;
 //  }
   
-  public int insertUserEquip(int userId, int equipId, int level,
-	  int enhancementPercentage, Timestamp now, String reason) {
+  public int insertUserEquip(int userId, int equipId, int enhancementPercentage) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID, userId);
     insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, equipId);
-    insertParams.put(DBConstants.MONSTER_FOR_USER__EVOLUTION_LEVEL, level);
     insertParams.put(DBConstants.MONSTER_FOR_USER__ENHANCEMENT_PERCENT, enhancementPercentage);
-    insertParams.put(DBConstants.MONSTER_FOR_USER__CREATE_TIME, now);
-    insertParams.put(DBConstants.MONSTER_FOR_USER__REASON, reason);
 
     int userEquipId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_MONSTER_FOR_USER, insertParams);

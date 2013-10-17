@@ -247,7 +247,6 @@ public class UpdateUtils implements UpdateUtil {
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.MONSTER_FOR_USER__USER_ID, newOwnerId); 
-		absoluteParams.put(DBConstants.MONSTER_FOR_USER__REASON, reason);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
@@ -653,7 +652,7 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 	
-	public int updateUserMonstersDurability(List<Long> userEquipIds,
+	public int updateUserMonstersHealth(List<Long> userEquipIds,
 			List<Integer> currentDurability,
 			Map<Long, Integer> userEquipIdsToDurabilities) {
 		Map<String, Object> relativeParams = null;

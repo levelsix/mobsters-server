@@ -29,7 +29,7 @@ import com.lvl6.info.GoldSale;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.User;
-import com.lvl6.info.UserMonster;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
@@ -838,7 +838,7 @@ public class MiscMethods {
     return returnValue.toString();
   }
 
-  public static void writeIntoDUEFE(UserMonster mainUserEquip, List<UserMonster> feederUserEquips,
+  public static void writeIntoDUEFE(MonsterForUser mainUserEquip, List<MonsterForUser> feederUserEquips,
       int enhancementId, List<Integer> enhancementFeederIds) {
     String tableName = DBConstants.TABLE_MONSTER_4USER_DELETED_4ENHANCING;
     try {
@@ -850,7 +850,6 @@ public class MiscMethods {
       List<Object> userEquipIds = new ArrayList<Object>();
       List<Object> userIds = new ArrayList<Object>();
       List<Object> equipIds = new ArrayList<Object>();
-      List<Object> levels = new ArrayList<Object>();
       List<Object> enhancementPercents = new ArrayList<Object>();
       List<Object> areFeeders = new ArrayList<Object>();
       List<Object> equipEnhancementIds = new ArrayList<Object>();
@@ -858,17 +857,15 @@ public class MiscMethods {
       userEquipIds.add(mainUserEquip.getId());
       userIds.add(mainUserEquip.getUserId());
       equipIds.add(mainUserEquip.getMonsterId());
-      levels.add(mainUserEquip.getEvolutionLevel());
       enhancementPercents.add(mainUserEquip.getEnhancementPercentage());
       areFeeders.add(0);
       equipEnhancementIds.add(enhancementId);
 
       for(int i = 0; i < feederUserEquips.size(); i++) {
-        UserMonster ue = feederUserEquips.get(i);
+        MonsterForUser ue = feederUserEquips.get(i);
         userEquipIds.add(ue.getId());
         userIds.add(ue.getUserId());
         equipIds.add(ue.getMonsterId());
-        levels.add(ue.getEvolutionLevel());
         enhancementPercents.add(ue.getEnhancementPercentage());
         areFeeders.add(1);
         
@@ -879,7 +876,6 @@ public class MiscMethods {
       insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__ID, userEquipIds);
       insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__USER_ID, userIds);
       insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__MONSTER_ID, equipIds);
-      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__EVOLUTION_LEVEL, levels);
       insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__ENHANCEMENT_PERCENT, enhancementPercents);
       insertParams.put(DBConstants.DM4U4E__IS_FEEDER, areFeeders);
       insertParams.put(DBConstants.DM4U4E__MONSTER_ENHANCING_FOR_USER__ID, equipEnhancementIds);
@@ -890,7 +886,7 @@ public class MiscMethods {
     }
   }
 
-  public static boolean isEquipAtMaxEnhancementLevel(UserMonster enhancingUserEquip) {
+  public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
     int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
     int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL 
         * ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;

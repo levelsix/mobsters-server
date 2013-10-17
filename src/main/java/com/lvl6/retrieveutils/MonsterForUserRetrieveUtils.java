@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.UserMonster;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.utilmethods.StringUtils;
@@ -27,43 +27,43 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
 
   ////@Cacheable(value="userMonstersForUser", key="#userId")
-  public List<UserMonster> getMonstersForUser(int userId) {
+  public List<MonsterForUser> getMonstersForUser(int userId) {
     log.debug("retrieving user monsters for userId " + userId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    List<UserMonster> userMonsters = convertRSToMonsters(rs);
+    List<MonsterForUser> userMonsters = convertRSToMonsters(rs);
     DBConnection.get().close(rs, null, conn);
     return userMonsters;
   }
 
   ////@Cacheable(value="monstersToMonstersForUser", key="#userId")
-  public Map<Integer, List<UserMonster>> getMonsterIdsToMonstersForUser(int userId) {
+  public Map<Integer, List<MonsterForUser>> getMonsterIdsToMonstersForUser(int userId) {
     log.debug("retrieving map of monster id to usermonsters for userId " + userId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    Map<Integer, List<UserMonster>> monsterIdsToMonsters = convertRSToMonsterIdsToMonsters(rs);
+    Map<Integer, List<MonsterForUser>> monsterIdsToMonsters = convertRSToMonsterIdsToMonsters(rs);
     DBConnection.get().close(rs, null, conn);
     return monsterIdsToMonsters;
   }
 
   ////@Cacheable(value="specificMonster", key="#userMonsterId")
-  public UserMonster getSpecificUserMonster(long userMonsterId) {
+  public MonsterForUser getSpecificUserMonster(long userMonsterId) {
     log.debug("retrieving user monster for userMonsterId: " + userMonsterId);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsByLongId(conn, userMonsterId, TABLE_NAME);
-    UserMonster userMonster = convertRSSingleToMonsters(rs);
+    MonsterForUser userMonster = convertRSSingleToMonsters(rs);
     DBConnection.get().close(rs, null, conn);
     return userMonster;
   }
 
-  public List<UserMonster> getSpecificUserMonsters(List<Long> userMonsterIds) {
+  public List<MonsterForUser> getSpecificUserMonsters(List<Long> userMonsterIds) {
     log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
 
     if (userMonsterIds == null || userMonsterIds.size() <= 0 ) {
-      return new ArrayList<UserMonster>();
+      return new ArrayList<MonsterForUser>();
     }
 
     String query = "select * from " + TABLE_NAME + " where (";
@@ -77,13 +77,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    List<UserMonster> userMonsters = convertRSToMonsters(rs);
+    List<MonsterForUser> userMonsters = convertRSToMonsters(rs);
     DBConnection.get().close(rs, null, conn);
     return userMonsters;
   }
 
   ////@Cacheable(value="userMonstersWithMonsterId", key="#userId+':'+#monsterId")
-  public List<UserMonster> getMonstersWithMonsterId(int userId, int monsterId) {
+  public List<MonsterForUser> getMonstersWithMonsterId(int userId, int monsterId) {
     log.debug("retrieving user monster for user: " + userId + ", monsterId: " + monsterId);
 
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
@@ -92,25 +92,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<UserMonster> userMonsters = convertRSToMonsters(rs);
+    List<MonsterForUser> userMonsters = convertRSToMonsters(rs);
     DBConnection.get().close(rs, null, conn);
     return userMonsters;
   }
 
-  private Map<Integer, List<UserMonster>> convertRSToMonsterIdsToMonsters(
+  private Map<Integer, List<MonsterForUser>> convertRSToMonsterIdsToMonsters(
       ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
-        Map<Integer, List<UserMonster>> monsterIdsToMonsters = new HashMap<Integer, List<UserMonster>>();
+        Map<Integer, List<MonsterForUser>> monsterIdsToMonsters = new HashMap<Integer, List<MonsterForUser>>();
         while(rs.next()) {
-          UserMonster userMonster = convertRSRowToMonster(rs);
-          List<UserMonster> userMonstersForMonsterId = monsterIdsToMonsters.get(userMonster.getMonsterId());
+          MonsterForUser userMonster = convertRSRowToMonster(rs);
+          List<MonsterForUser> userMonstersForMonsterId = monsterIdsToMonsters.get(userMonster.getMonsterId());
           if (userMonstersForMonsterId != null) {
             userMonstersForMonsterId.add(userMonster);
           } else {
-            List<UserMonster> userMonsters = new ArrayList<UserMonster>();
+            List<MonsterForUser> userMonsters = new ArrayList<MonsterForUser>();
             userMonsters.add(userMonster);
             monsterIdsToMonsters.put(userMonster.getMonsterId(), userMonsters);
           }
@@ -124,12 +124,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return null;
   }
 
-  private List<UserMonster> convertRSToMonsters(ResultSet rs) {
+  private List<MonsterForUser> convertRSToMonsters(ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
-        List<UserMonster> userMonsters = new ArrayList<UserMonster>();
+        List<MonsterForUser> userMonsters = new ArrayList<MonsterForUser>();
         while(rs.next()) {  //should only be one
           userMonsters.add(convertRSRowToMonster(rs));
         }
@@ -142,7 +142,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return null;
   }
 
-  private UserMonster convertRSSingleToMonsters(ResultSet rs) {
+  private MonsterForUser convertRSSingleToMonsters(ResultSet rs) {
     if (rs != null) {
       try {
         rs.last();
@@ -161,18 +161,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private UserMonster convertRSRowToMonster(ResultSet rs) throws SQLException {
+  private MonsterForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
     int i = 1;
-    int userMonsterId = rs.getInt(i++);
+    int id = rs.getInt(i++);
     int userId = rs.getInt(i++);
     int monsterId = rs.getInt(i++);
-    int evolutionLevel = rs.getInt(i++);
     int enhancementPercentage = rs.getInt(i++);
-//    i += 2; //skip over to current durability
-//    int currentDurability = rs.getInt(i);
-    int currentDurability = rs.getInt(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH);
-    UserMonster userMonster = new UserMonster(userMonsterId, userId, monsterId, evolutionLevel,
-    		enhancementPercentage, currentDurability);
+    int currentHealth = rs.getInt(i++);
+    int numPieces = rs.getInt(i++);
+    boolean isComplete = rs.getBoolean(i++);
+    
+    MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
+    		enhancementPercentage, currentHealth, numPieces, isComplete);
     return userMonster;
   }
 

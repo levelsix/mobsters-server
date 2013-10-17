@@ -29,8 +29,8 @@ public interface InsertUtil {
 			int xPosition, int yPosition, boolean isExpanding);
 
 
-	public abstract int insertUserEquip(int userId, int equipId, int level,
-			int enhancementPercentage, Timestamp now, String reason);
+	public abstract int insertUserEquip(int userId, int equipId,
+			int enhancementPercentage);
 
 	public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
 			int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement);

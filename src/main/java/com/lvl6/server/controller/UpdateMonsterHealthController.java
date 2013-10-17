@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateMonsterHealthRequestEvent;
 import com.lvl6.events.response.UpdateMonsterHealthResponseEvent;
-import com.lvl6.info.UserMonster;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder;
@@ -63,14 +63,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     try {
       //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	
-    	Map<Long, Integer> userEquipIdToExpectedDurability = new HashMap<Long, Integer>();
+    	Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
     	
       boolean legit = checkLegit(resBuilder, userId, fumpList, 
-      		userEquipIdToExpectedDurability);
+      		userMonsterIdToExpectedHealth);
 
       boolean successful = false;
       if(legit) {
-    	  successful = writeChangesToDb(userId, curTime, userEquipIdToExpectedDurability);
+    	  successful = writeChangesToDb(userId, curTime, userMonsterIdToExpectedHealth);
       }
       
       if (successful) {
@@ -115,28 +115,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    */
   private boolean checkLegit(Builder resBuilder, int userId,
 		  List<FullUserMonsterProto> fuepList, 
-		  Map<Long, Integer> userEquipIdToExpectedDurability) {
+		  Map<Long, Integer> userMonsterIdToExpectedHealth) {
   	
   	if (null == fuepList || fuepList.isEmpty()) {
   		log.error("client error: no user equips sent.");
   		return false;
   	}
   	
-  	//extract the ids so it's easier to get userEquips from db
-  	List<Long> userEquipIds = getUserMonsterIds(fuepList, userEquipIdToExpectedDurability);
-  	List<UserMonster> userEquips = RetrieveUtils.monsterForUserRetrieveUtils()
-  			.getSpecificUserMonsters(userEquipIds);
+  	//extract the ids so it's easier to get userMonsters from db
+  	List<Long> userMonsterIds = getUserMonsterIds(fuepList, userMonsterIdToExpectedHealth);
+  	List<MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+  			.getSpecificUserMonsters(userMonsterIds);
   	
-  	if (null == userEquips || userEquips.isEmpty()) {
-  		log.error("unexpected error: userEquipIds don't exist. ids=" + userEquipIds);
+  	if (null == userMonsters || userMonsters.isEmpty()) {
+  		log.error("unexpected error: userMonsterIds don't exist. ids=" + userMonsterIds);
   		return false;
   	}
 
   	//see if the user has the equips
-  	if (userEquips.size() != fuepList.size()) {
+  	if (userMonsters.size() != fuepList.size()) {
   		log.error("unexpected error: mismatch between user equips client sent and " +
-  				"what is in the db. clientUserMonsterIds=" + userEquipIds + "\t inDb=" +
-  				userEquips + "\t continuing the processing");
+  				"what is in the db. clientUserMonsterIds=" + userMonsterIds + "\t inDb=" +
+  				userMonsters + "\t continuing the processing");
   	}
   	
   	return true;
@@ -145,32 +145,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   //extract the ids from the protos
   private List<Long> getUserMonsterIds(List<FullUserMonsterProto> fuepList,
-  		Map<Long, Integer> userEquipIdToExpectedDurability) {
+  		Map<Long, Integer> userMonsterIdToExpectedHealth) {
   	List<Long> idList = new ArrayList<Long>();
   	
   	for(FullUserMonsterProto fuep : fuepList) {
   		long id = fuep.getUserMonsterId();
   		idList.add(id);
-  		int durability = fuep.getCurrentDurability();
-  		userEquipIdToExpectedDurability.put(id, durability);
+  		int health = fuep.getCurrentHealth();
+  		userMonsterIdToExpectedHealth.put(id, health);
   	}
   	return idList;
   }
   
   private boolean writeChangesToDb(int uId, Timestamp clientTime, 
-  		Map<Long, Integer> userEquipIdToExpectedDurability) {
+  		Map<Long, Integer> userMonsterIdToExpectedHealth) {
   	//replace existing durability for these user equips w/ new values 
-  	List<Long> userEquipIds = null;
-  	List<Integer> currentDurability = null;
-  	int numUpdated = UpdateUtils.get().updateUserMonstersDurability(
-  			userEquipIds, currentDurability, userEquipIdToExpectedDurability);
+  	List<Long> userMonsterIds = null;
+  	List<Integer> currentHealth = null;
+  	int numUpdated = UpdateUtils.get().updateUserMonstersHealth(
+  			userMonsterIds, currentHealth, userMonsterIdToExpectedHealth);
   	
-  	if (numUpdated >= userEquipIdToExpectedDurability.size()) {
+  	if (numUpdated >= userMonsterIdToExpectedHealth.size()) {
   		return true;
   	}
   	log.warn("unexpected error: not all user equips were updated. " +
   			"actual numUpdated=" + numUpdated + "expected: " +
-  			"userEquipIdToExpectedDurability=" + userEquipIdToExpectedDurability);
+  			"userMonsterIdToExpectedHealth=" + userMonsterIdToExpectedHealth);
 	  return true;
   }
   
