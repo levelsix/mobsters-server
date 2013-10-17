@@ -59,7 +59,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonster;
   }
 
-  public List<MonsterForUser> getSpecificUserMonsters(List<Long> userMonsterIds) {
+  public List<MonsterForUser> getSpecificUserMonsters(List<Long> userMonsterIds,
+  		boolean isComplete) {
     log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
 
     if (userMonsterIds == null || userMonsterIds.size() <= 0 ) {
@@ -73,7 +74,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
       condClauses.add(DBConstants.MONSTER_FOR_USER__ID + "=?");
       values.add(userMonsterId);
     }
-    query += StringUtils.getListInString(condClauses, "or") + ")";
+    query += StringUtils.getListInString(condClauses, "or") + ") and " +
+    		DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
+    values.add(isComplete);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);

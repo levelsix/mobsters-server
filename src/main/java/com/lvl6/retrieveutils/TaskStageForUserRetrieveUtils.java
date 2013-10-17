@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
   
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_FOR_USER;
   
-  public static TaskStageForUser getTaskStageForUserForId(long taskStageForUserId) {
+  public static TaskStageForUser getTaskStageForUserWithId(long taskStageForUserId) {
     Connection conn = DBConnection.get().getConnection();
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
     absoluteConditionParams.put(DBConstants.TASK_STAGE_FOR_USER__ID, taskStageForUserId);
@@ -33,7 +33,7 @@ import com.lvl6.utils.DBConnection;
     return tsfu;
   }
   
-  public static List<TaskStageForUser> getTaskStagesForUserWithTaskStageForUserId (long taskForUserId) {
+  public static List<TaskStageForUser> getTaskStagesForUserWithTaskForUserId (long taskForUserId) {
   	Connection conn = DBConnection.get().getConnection();
   	Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
   	absoluteConditionParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, taskForUserId);

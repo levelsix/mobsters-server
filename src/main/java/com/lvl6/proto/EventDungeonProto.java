@@ -2044,6 +2044,16 @@ public final class EventDungeonProto {
     // optional .com.lvl6.proto.EndDungeonResponseProto.EndDungeonStatus status = 2;
     boolean hasStatus();
     com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus getStatus();
+    
+    // repeated .com.lvl6.proto.FullUserMonsterProto newOrUpdated = 3;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
+        getNewOrUpdatedList();
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getNewOrUpdated(int index);
+    int getNewOrUpdatedCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getNewOrUpdatedOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getNewOrUpdatedOrBuilder(
+        int index);
   }
   public static final class EndDungeonResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -2166,9 +2176,31 @@ public final class EventDungeonProto {
       return status_;
     }
     
+    // repeated .com.lvl6.proto.FullUserMonsterProto newOrUpdated = 3;
+    public static final int NEWORUPDATED_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> newOrUpdated_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getNewOrUpdatedList() {
+      return newOrUpdated_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getNewOrUpdatedOrBuilderList() {
+      return newOrUpdated_;
+    }
+    public int getNewOrUpdatedCount() {
+      return newOrUpdated_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getNewOrUpdated(int index) {
+      return newOrUpdated_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getNewOrUpdatedOrBuilder(
+        int index) {
+      return newOrUpdated_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
+      newOrUpdated_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2188,6 +2220,9 @@ public final class EventDungeonProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, status_.getNumber());
       }
+      for (int i = 0; i < newOrUpdated_.size(); i++) {
+        output.writeMessage(3, newOrUpdated_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -2204,6 +2239,10 @@ public final class EventDungeonProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, status_.getNumber());
+      }
+      for (int i = 0; i < newOrUpdated_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, newOrUpdated_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2322,6 +2361,7 @@ public final class EventDungeonProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getNewOrUpdatedFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2338,6 +2378,12 @@ public final class EventDungeonProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
+        if (newOrUpdatedBuilder_ == null) {
+          newOrUpdated_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          newOrUpdatedBuilder_.clear();
+        }
         return this;
       }
       
@@ -2388,6 +2434,15 @@ public final class EventDungeonProto {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
+        if (newOrUpdatedBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            newOrUpdated_ = java.util.Collections.unmodifiableList(newOrUpdated_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.newOrUpdated_ = newOrUpdated_;
+        } else {
+          result.newOrUpdated_ = newOrUpdatedBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2409,6 +2464,32 @@ public final class EventDungeonProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
+        }
+        if (newOrUpdatedBuilder_ == null) {
+          if (!other.newOrUpdated_.isEmpty()) {
+            if (newOrUpdated_.isEmpty()) {
+              newOrUpdated_ = other.newOrUpdated_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureNewOrUpdatedIsMutable();
+              newOrUpdated_.addAll(other.newOrUpdated_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.newOrUpdated_.isEmpty()) {
+            if (newOrUpdatedBuilder_.isEmpty()) {
+              newOrUpdatedBuilder_.dispose();
+              newOrUpdatedBuilder_ = null;
+              newOrUpdated_ = other.newOrUpdated_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              newOrUpdatedBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getNewOrUpdatedFieldBuilder() : null;
+            } else {
+              newOrUpdatedBuilder_.addAllMessages(other.newOrUpdated_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2459,6 +2540,12 @@ public final class EventDungeonProto {
                 bitField0_ |= 0x00000002;
                 status_ = value;
               }
+              break;
+            }
+            case 26: {
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addNewOrUpdated(subBuilder.buildPartial());
               break;
             }
           }
@@ -2579,6 +2666,192 @@ public final class EventDungeonProto {
         status_ = com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus.SUCCESS;
         onChanged();
         return this;
+      }
+      
+      // repeated .com.lvl6.proto.FullUserMonsterProto newOrUpdated = 3;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> newOrUpdated_ =
+        java.util.Collections.emptyList();
+      private void ensureNewOrUpdatedIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          newOrUpdated_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(newOrUpdated_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> newOrUpdatedBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getNewOrUpdatedList() {
+        if (newOrUpdatedBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(newOrUpdated_);
+        } else {
+          return newOrUpdatedBuilder_.getMessageList();
+        }
+      }
+      public int getNewOrUpdatedCount() {
+        if (newOrUpdatedBuilder_ == null) {
+          return newOrUpdated_.size();
+        } else {
+          return newOrUpdatedBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getNewOrUpdated(int index) {
+        if (newOrUpdatedBuilder_ == null) {
+          return newOrUpdated_.get(index);
+        } else {
+          return newOrUpdatedBuilder_.getMessage(index);
+        }
+      }
+      public Builder setNewOrUpdated(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (newOrUpdatedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNewOrUpdatedIsMutable();
+          newOrUpdated_.set(index, value);
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setNewOrUpdated(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (newOrUpdatedBuilder_ == null) {
+          ensureNewOrUpdatedIsMutable();
+          newOrUpdated_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addNewOrUpdated(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (newOrUpdatedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNewOrUpdatedIsMutable();
+          newOrUpdated_.add(value);
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addNewOrUpdated(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (newOrUpdatedBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureNewOrUpdatedIsMutable();
+          newOrUpdated_.add(index, value);
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addNewOrUpdated(
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (newOrUpdatedBuilder_ == null) {
+          ensureNewOrUpdatedIsMutable();
+          newOrUpdated_.add(builderForValue.build());
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addNewOrUpdated(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (newOrUpdatedBuilder_ == null) {
+          ensureNewOrUpdatedIsMutable();
+          newOrUpdated_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllNewOrUpdated(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
+        if (newOrUpdatedBuilder_ == null) {
+          ensureNewOrUpdatedIsMutable();
+          super.addAll(values, newOrUpdated_);
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearNewOrUpdated() {
+        if (newOrUpdatedBuilder_ == null) {
+          newOrUpdated_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeNewOrUpdated(int index) {
+        if (newOrUpdatedBuilder_ == null) {
+          ensureNewOrUpdatedIsMutable();
+          newOrUpdated_.remove(index);
+          onChanged();
+        } else {
+          newOrUpdatedBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getNewOrUpdatedBuilder(
+          int index) {
+        return getNewOrUpdatedFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getNewOrUpdatedOrBuilder(
+          int index) {
+        if (newOrUpdatedBuilder_ == null) {
+          return newOrUpdated_.get(index);  } else {
+          return newOrUpdatedBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+           getNewOrUpdatedOrBuilderList() {
+        if (newOrUpdatedBuilder_ != null) {
+          return newOrUpdatedBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(newOrUpdated_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addNewOrUpdatedBuilder() {
+        return getNewOrUpdatedFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addNewOrUpdatedBuilder(
+          int index) {
+        return getNewOrUpdatedFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
+           getNewOrUpdatedBuilderList() {
+        return getNewOrUpdatedFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+          getNewOrUpdatedFieldBuilder() {
+        if (newOrUpdatedBuilder_ == null) {
+          newOrUpdatedBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
+                  newOrUpdated_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          newOrUpdated_ = null;
+        }
+        return newOrUpdatedBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.EndDungeonResponseProto)
@@ -3746,22 +4019,24 @@ public final class EventDungeonProto {
       "GY\020\002\022\016\n\nFAIL_OTHER\020\003\"\203\001\n\026EndDungeonReque" +
       "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
       ".MinimumUserProto\022\022\n\nuserTaskId\030\002 \001(\003\022\017\n" +
-      "\007userWon\030\003 \001(\010\022\022\n\nclientTime\030\004 \001(\003\"\306\001\n\027E" +
+      "\007userWon\030\003 \001(\010\022\022\n\nclientTime\030\004 \001(\003\"\202\002\n\027E" +
       "ndDungeonResponseProto\0220\n\006sender\030\001 \001(\0132 " +
       ".com.lvl6.proto.MinimumUserProto\022H\n\006stat" +
       "us\030\002 \001(\01628.com.lvl6.proto.EndDungeonResp" +
-      "onseProto.EndDungeonStatus\"/\n\020EndDungeon",
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"w\n\033R" +
-      "eviveInDungeonRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\022\n\n" +
-      "userTaskId\030\002 \001(\003\022\022\n\nclientTime\030\003 \001(\003\"\367\001\n" +
-      "\034ReviveInDungeonResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.ReviveI" +
-      "nDungeonResponseProto.ReviveInDungeonSta" +
-      "tus\"Q\n\025ReviveInDungeonStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_O",
-      "THER\020\003B\023B\021EventDungeonProto"
+      "onseProto.EndDungeonStatus\022:\n\014newOrUpdat",
+      "ed\030\003 \003(\0132$.com.lvl6.proto.FullUserMonste" +
+      "rProto\"/\n\020EndDungeonStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\016\n\nFAIL_OTHER\020\002\"w\n\033ReviveInDungeonReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\022\n\nuserTaskId\030\002 \001(\003\022\022\n\n" +
+      "clientTime\030\003 \001(\003\"\367\001\n\034ReviveInDungeonResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022R\n\006status\030\002 \001(\0162B.co" +
+      "m.lvl6.proto.ReviveInDungeonResponseProt" +
+      "o.ReviveInDungeonStatus\"Q\n\025ReviveInDunge",
+      "onStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIE" +
+      "NT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021EventDunge" +
+      "onProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3797,7 +4072,7 @@ public final class EventDungeonProto {
           internal_static_com_lvl6_proto_EndDungeonResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_EndDungeonResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", },
+              new java.lang.String[] { "Sender", "Status", "NewOrUpdated", },
               com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.class,
               com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.Builder.class);
           internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor =

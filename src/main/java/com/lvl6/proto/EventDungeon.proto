@@ -39,6 +39,7 @@ message EndDungeonRequestProto {
 message EndDungeonResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional EndDungeonStatus status = 2;
+	repeated FullUserMonsterProto newOrUpdated = 3;
 	
 	
 	enum EndDungeonStatus {

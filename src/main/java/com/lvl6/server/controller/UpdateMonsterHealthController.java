@@ -123,9 +123,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//extract the ids so it's easier to get userMonsters from db
+  	boolean isComplete = true;
   	List<Long> userMonsterIds = getUserMonsterIds(fuepList, userMonsterIdToExpectedHealth);
   	List<MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
-  			.getSpecificUserMonsters(userMonsterIds);
+  			.getSpecificUserMonsters(userMonsterIds, isComplete);
   	
   	if (null == userMonsters || userMonsters.isEmpty()) {
   		log.error("unexpected error: userMonsterIds don't exist. ids=" + userMonsterIds);

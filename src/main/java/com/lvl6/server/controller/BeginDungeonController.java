@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,25 +22,28 @@ import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.Task;
-import com.lvl6.info.TaskStage;
-import com.lvl6.info.User;
 import com.lvl6.info.TaskForUser;
+import com.lvl6.info.TaskStage;
+import com.lvl6.info.TaskStageForUser;
+import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.Builder;
-import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.TaskProto.TaskStageProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserRetrieveUtils;
+import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class BeginDungeonController extends EventController {
@@ -148,16 +152,81 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	return false;
     }
     
-    TaskForUser aUserTask = TaskForUserRetrieveUtils.getUserTaskForUserId(userId);
-    if(null != aUserTask) {
-      log.error("unexpected error: user has existing task when beginning another. " +
-      		"No task should exist. user=" + u + "\t task=" + aTask + "\t userTask=" + aUserTask);
-      //TODO: DELETE TASK AND PUT IT INTO USER TASK HISTORY
+    TaskForUser aTaskForUser = TaskForUserRetrieveUtils.getUserTaskForUserId(userId);
+    if(null != aTaskForUser) {
+      log.warn("(will continue processing, but) user has existing task when" +
+      		" beginning another. No task should exist. user=" + u + "\t task=" +
+      		aTask + "\t userTask=" + aTaskForUser);
+      //DELETE TASK AND PUT IT INTO TASK HISTORY
+      long userTaskId = aTaskForUser.getId();
+      deleteExistingTaskForUser(userTaskId, aTaskForUser);
+      //DELETE FROM TASK STAGE FOR USER AND PUT IT INTO TASK STAGE HISTORY 
+      deleteExistingTaskStagesForUser(userTaskId);
     }
     
     tsMap.putAll(ts);
     resBuilder.setStatus(BeginDungeonStatus.SUCCESS);
     return true;
+  }
+  
+  //TODO: MOVE THESE METHODS INTO A UTILS FOR TASK
+  private void deleteExistingTaskForUser(long taskForUserId, TaskForUser aTaskForUser) {
+  	DeleteUtils.get().deleteTaskForUserWithTaskForUserId(taskForUserId);
+  	int userId = aTaskForUser.getUserId();
+  	int taskId = aTaskForUser.getTaskId();
+  	int expGained = aTaskForUser.getExpGained();
+  	int silverGained = aTaskForUser.getSilverGained();
+  	int numRevives = aTaskForUser.getNumRevives();
+  	Date aDate = aTaskForUser.getStartDate(); //shouldn't null
+  	Timestamp startTime = null;
+  	if (null != aDate) {
+  		startTime = new Timestamp(aDate.getTime());
+  	}
+  	Timestamp endTime = null;
+  	boolean userWon = false;
+  	
+  	int num = DeleteUtils.get().deleteTaskForUserWithTaskForUserId(taskForUserId);
+  	log.warn("deleted existing task_for_user. taskForUser=" + aTaskForUser +
+  			"\t (should be 1) numDeleted=" + num);
+  	//meh, fogedaboudit 
+    InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId, taskId,
+    		expGained, silverGained, numRevives, startTime, endTime, userWon);
+  }
+  
+  private void deleteExistingTaskStagesForUser(long taskForUserId) {
+  	List<TaskStageForUser> taskStages = TaskStageForUserRetrieveUtils
+  			.getTaskStagesForUserWithTaskForUserId(taskForUserId);
+
+  	List<Long> userTaskStageId = new ArrayList<Long>();
+  	List<Long> userTaskId = new ArrayList<Long>();
+  	List<Integer> stageNum = new ArrayList<Integer>();
+  	List<Integer> monsterIdList = new ArrayList<Integer>();
+  	List<Integer> expGained = new ArrayList<Integer>();
+  	List<Integer> silverGained = new ArrayList<Integer>();
+  	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
+
+  	for (int i = 0; i < taskStages.size(); i++) {
+  		TaskStageForUser tsfu = taskStages.get(i);
+  		userTaskStageId.add(tsfu.getId());
+  		userTaskId.add(tsfu.getUserTaskId());
+  		stageNum.add(tsfu.getStageNum());
+
+  		int monsterId = tsfu.getMonsterId();
+  		monsterIdList.add(monsterId);
+  		expGained.add(tsfu.getExpGained());
+  		silverGained.add(tsfu.getSilverGained());
+  		boolean dropped = tsfu.isMonsterPieceDropped();
+  		monsterPieceDropped.add(dropped);
+
+  	}
+  	
+  	int num = DeleteUtils.get().deleteTaskStagesForIds(userTaskStageId);
+  	log.warn("num task stage history rows inserted: num=" + num +
+  			"taskStageForUser=" + taskStages);
+
+  	InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
+  			userTaskId, stageNum, monsterIdList, expGained, silverGained,
+  			monsterPieceDropped);
   }
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
@@ -237,16 +306,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  List<Boolean> puzzlePiecesDropped = generatePuzzlePieces(spawnedMonsterIds);
 		  
 		  //determine how much exp and silver the user gets
-		  Set<Integer> uniqMonsterIds = new HashSet<Integer>(monsterIds);
-		  Map<Integer, Monster> monsterIdsToMonsters =
+		  Set<Integer> uniqMonsterIds = new HashSet<Integer>(spawnedMonsterIds);
+		  Map<Integer, Monster> monsterIdsToSpawnedMonsters =
 				  MonsterRetrieveUtils.getMonstersForMonsterIds(uniqMonsterIds);
 		  
-		  List<Integer> individualExps = calculateExpGained(monsterIds, monsterIdsToMonsters);
-		  List<Integer> individualSilvers =  calculateSilverGained(monsterIds, monsterIdsToMonsters);
+		  List<Integer> individualExps = calculateExpGained(spawnedMonsterIds, monsterIdsToSpawnedMonsters);
+		  List<Integer> individualSilvers =  calculateSilverGained(spawnedMonsterIds, monsterIdsToSpawnedMonsters);
 		  
 		  //create the proto
 		  TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(tsId,
-				  ts, monsterIds, monsterIdsToMonsters, puzzlePiecesDropped,
+				  ts, spawnedMonsterIds, monsterIdsToSpawnedMonsters, puzzlePiecesDropped,
 				  individualSilvers);
 		  
 		  //update the protos to return to parent function

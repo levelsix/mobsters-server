@@ -90,7 +90,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
-    	  setResponseBuilder(resBuilder, protos);
+      	long taskForUserId = ut.getId(); 
+      	List<TaskStageForUser> tsfuList = TaskStageForUserRetrieveUtils
+      			.getTaskStagesForUserWithTaskForUserId(taskForUserId);
+      	
+      	//delete from task_stage_for_user and put into task_stage_history
+      	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+      	recordStageHistory(tsfuList, monsterIdToNumPieces);
+      	
+      	//update user's monsters
+      	List<FullUserMonsterProto> newOrUpdated = updateUserMonsters(userId,
+      			monsterIdToNumPieces);
+
+    	  setResponseBuilder(resBuilder, newOrUpdated);
       }
       
       EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(userId);
@@ -104,17 +116,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       server.writeEvent(resEventUpdate);
       
       if (successful) {
-      	long taskForUserId = ut.getId(); 
-      	List<TaskStageForUser> tsfuList = TaskStageForUserRetrieveUtils
-      			.getTaskStagesForUserWithTaskStageForUserId(taskForUserId);
-      	
-      	//delete from task_stage_for_user and put into task_stage_history
-      	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-      	recordStageHistory(tsfuList, monsterIdToNumPieces);
-      	
-      	//update user's monsters
-//      	udpateUserMonsters()
-      	
       	//update quests
       }
       
@@ -172,6 +173,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  }
 	  }
 	  
+	  //TODO: MOVE THIS INTO A UTIL METHOD FOR TASK 
 	  //delete from user_task and insert it into user_task_history
 	  long utId = ut.getId();
 	  int tId = ut.getTaskId();
@@ -233,18 +235,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  }
 	  return true;
   }
-  
-  private void setResponseBuilder(Builder resBuilder,
-		  List<FullUserMonsterProto> protos) {
-	  resBuilder.setStatus(EndDungeonStatus.SUCCESS);
-  }
-  
+  //
   private void recordStageHistory(List<TaskStageForUser> tsfuList,
   		Map<Integer, Integer> monsterIdToNumPieces) {
   	List<Long> userTaskStageId = new ArrayList<Long>();
   	List<Long> userTaskId = new ArrayList<Long>();
   	List<Integer> stageNum = new ArrayList<Integer>();
-  	List<Integer> monsterId = new ArrayList<Integer>();
+  	List<Integer> monsterIdList = new ArrayList<Integer>();
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> silverGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
@@ -254,17 +251,41 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		userTaskStageId.add(tsfu.getId());
   		userTaskId.add(tsfu.getUserTaskId());
   		stageNum.add(tsfu.getStageNum());
-  		monsterId.add(tsfu.getMonsterId());
+  		
+  		int monsterId = tsfu.getMonsterId();
+  		monsterIdList.add(monsterId);
   		expGained.add(tsfu.getExpGained());
   		silverGained.add(tsfu.getSilverGained());
-  		monsterPieceDropped.add(tsfu.isMonsterPieceDropped());
+  		boolean dropped = tsfu.isMonsterPieceDropped();
+  		monsterPieceDropped.add(dropped);
+  		
+  		//possible multiple same monsters dropped a piece
+  		if (dropped) {
+  			int num = 1;
+  			if (monsterIdToNumPieces.containsKey(monsterId)) {
+  				num += monsterIdToNumPieces.get(monsterId);
+  			}
+  			monsterIdToNumPieces.put(monsterId, num);
+  		}
   	}
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
-  			userTaskId, stageNum, monsterId, expGained, silverGained,
+  			userTaskId, stageNum, monsterIdList, expGained, silverGained,
   			monsterPieceDropped);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);
+  }
+  
+  private List<FullUserMonsterProto> updateUserMonsters(int userId,
+  		Map<Integer, Integer> monsterIdToNumPieces) {
+  	
+  	return null;
+  }
+  
+  private void setResponseBuilder(Builder resBuilder,
+		  List<FullUserMonsterProto> protos) {
+	  resBuilder.setStatus(EndDungeonStatus.SUCCESS);
+	  resBuilder.addAllNewOrUpdated(protos);
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,

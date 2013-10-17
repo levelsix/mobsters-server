@@ -1,6 +1,7 @@
 package com.lvl6.utils.utilmethods;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -214,14 +215,32 @@ public class DeleteUtils implements DeleteUtil {
     
     return numDeleted;
   }
-  public int deleteAllUserTasksForUser(int userId) {
+  
+  @Override
+  public int deleteTaskForUserWithTaskForUserId(long taskForUserId) {
     String tableName = DBConstants.TABLE_TASK_FOR_USER;
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.TASK_FOR_USER__USER_ID, userId);
+    conditionParams.put(DBConstants.TASK_FOR_USER__ID, taskForUserId);
     int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
+    
     
     return numDeleted;
   }
   
+  @Override
+  public int deleteTaskStagesForIds(List<Long> taskStageForUserIds) {
+  	String tableName = DBConstants.TABLE_TASK_STAGE_FOR_USER;
+  	int size = taskStageForUserIds.size();
+    List<String> questions = Collections.nCopies(size, "?");
+    
+    String delimiter = ",";
+    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.TASK_STAGE_FOR_USER__ID
+    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
+    
+    List values = taskStageForUserIds; //adding generics will throw (type mismatch?) errors
+    
+    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
+    return numDeleted;
+  }
 }
