@@ -105,7 +105,7 @@ import com.lvl6.utils.DBConnection;
     int stageId = rs.getInt(i++);
     int monsterId = rs.getInt(i++);
     
-    TaskStageMonster taskStageMonster = new TaskStageMonster(monsterId, stageId);
+    TaskStageMonster taskStageMonster = new TaskStageMonster(stageId, monsterId);
         
     return taskStageMonster;
   }
