@@ -52,3 +52,32 @@ message UpdateMonsterHealthResponseProto {
 
 //------------------------------------------------------------------------------------------
 
+message HealMonsterRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//what user deleted from the queue, the ones the server already knows about
+	repeated UserMonsterHealingProto umhDelete = 2; 
+	
+	//the ones the server already knows about
+	//only set if the queue time or start time changes
+	repeated UserMonsterHealingProto umhUpdate = 3;
+	
+	//the ones the server doesn't know about
+	repeated UserMonsterHealingProto umhNew = 4;
+	
+}
+
+message HealMonsterResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional HealMonsterStatus status = 2;
+	
+	enum HealMonsterStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_FUNDS = 2;
+		FAIL_ALL_MONSTERS_ALREADY_HEALING = 3;
+		FAIL_ALL_MONSTERS_NONEXISTENT = 4;
+		FAIL_OTHER = 5;
+	}
+}
+
+//------------------------------------------------------------------------------------------

@@ -55,3 +55,12 @@ message FullUserMonsterProto {
 	optional int32 teamSlotNum = 8;
 }
 //------------------------------------------------------------------------------------------
+
+message UserMonsterHealingProto {
+	optional int32 userId = 1;
+	optional int64 userMonsterId = 2;
+	optional int64 expectedStartTimeMillis = 3;
+	optional int64 queuedTimeMillis = 4;
+}
+
+//------------------------------------------------------------------------------------------
