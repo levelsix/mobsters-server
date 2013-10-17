@@ -40,7 +40,10 @@ import com.lvl6.utils.DBConnection;
       setStaticTaskStageIdsToMonsterIds();      
     }
     List<Integer> monsterIds = new ArrayList<Integer>();
+    
     Map<Integer, Integer> monsterIdsToQuantity = taskStageIdsToMonsterIdsToQuantity.get(taskStageId);
+    log.info("for taskStageId= " + taskStageId + ", monsterIdsToQuantity=" + 
+    		taskStageIdsToMonsterIdsToQuantity);
     for (int monsterId : monsterIdsToQuantity.keySet()) {
     	int quantity = monsterIdsToQuantity.get(monsterId);
     	List<Integer> ids = Collections.nCopies(quantity, monsterId);
