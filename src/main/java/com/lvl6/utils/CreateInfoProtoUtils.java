@@ -384,6 +384,7 @@ public class CreateInfoProtoUtils {
 		fumpb.setCurrentHealth(ue.getCurrentHealth());
 		fumpb.setNumPieces(ue.getNumPieces());
 		fumpb.setIsComplete(ue.isComplete());
+		fumpb.setTeamSlotNum(ue.getTeamSlotNum());
 		return fumpb.build();
 	}
 

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +45,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    Map<Integer, List<MonsterForUser>> monsterIdsToMonsters = convertRSToMonsterIdsToMonsters(rs);
+    Map<Integer, List<MonsterForUser>> monsterIdsToMonsters = convertRSToMonsterIdsToMonsterList(rs);
     DBConnection.get().close(rs, null, conn);
     return monsterIdsToMonsters;
   }
@@ -59,8 +61,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonster;
   }
 
-  public List<MonsterForUser> getSpecificUserMonsters(List<Long> userMonsterIds,
-  		boolean isComplete) {
+  public List<MonsterForUser> getSpecificUserMonsters(List<Long> userMonsterIds) {
     log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
 
     if (userMonsterIds == null || userMonsterIds.size() <= 0 ) {
@@ -74,9 +75,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
       condClauses.add(DBConstants.MONSTER_FOR_USER__ID + "=?");
       values.add(userMonsterId);
     }
-    query += StringUtils.getListInString(condClauses, "or") + ") and " +
-    		DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
-    values.add(isComplete);
+//    query += StringUtils.getListInString(condClauses, "or") + ") and " +
+//    		DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
+//    values.add(isComplete);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
@@ -99,8 +100,35 @@ import com.lvl6.utils.utilmethods.StringUtils;
     DBConnection.get().close(rs, null, conn);
     return userMonsters;
   }
+  
+  public Map<Integer, MonsterForUser> getIncompleteMonstersWithUserAndMonsterIds(
+  		int userId, Collection<Integer> monsterIds) {
+  	int size = monsterIds.size();
+  	List<String> questions = Collections.nCopies(size, "?");
+  	String delimiter = ",";
+  	
+  	String query = "select * from " + TABLE_NAME + " where ";
+    List <Object> values = new ArrayList<Object>();
 
-  private Map<Integer, List<MonsterForUser>> convertRSToMonsterIdsToMonsters(
+    //creating a "column in (value1,value2,...,value)" condition, prefer this over
+    //chained "or"s  e.g. (column=value1 or column=value2 or...column=value);
+    query += DBConstants.MONSTER_FOR_USER__USER_ID + "=? and ";
+    values.add(userId);
+    query += DBConstants.MONSTER_FOR_USER__MONSTER_ID + " in (" +
+    StringUtils.getListInString(questions, delimiter) + ") and ";
+    values.add(monsterIds);
+    
+    query += DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
+    values.add(false);
+
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+    Map<Integer, MonsterForUser> incompleteMonsters = convertRSToMonsterIdsToMonsters(rs);
+    DBConnection.get().close(rs, null, conn);
+    return incompleteMonsters;
+  }
+
+  private Map<Integer, List<MonsterForUser>> convertRSToMonsterIdsToMonsterList(
       ResultSet rs) {
     if (rs != null) {
       try {
@@ -125,6 +153,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
       }
     }
     return null;
+  }
+  
+  private Map<Integer, MonsterForUser> convertRSToMonsterIdsToMonsters(ResultSet rs) {
+  	Map<Integer, MonsterForUser> monsterIdsToMonsters = new HashMap<Integer, MonsterForUser>();
+  	if (rs != null) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			while(rs.next()) {
+  				MonsterForUser userMonster = convertRSRowToMonster(rs);
+  				if (userMonster != null) {
+  					monsterIdsToMonsters.put(userMonster.getMonsterId(), userMonster);
+  				}
+  			}
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+  		}
+  	}
+  	return monsterIdsToMonsters;
   }
 
   private List<MonsterForUser> convertRSToMonsters(ResultSet rs) {
@@ -173,9 +220,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int currentHealth = rs.getInt(i++);
     int numPieces = rs.getInt(i++);
     boolean isComplete = rs.getBoolean(i++);
+    int teamSlotNum = rs.getInt(i++);
     
     MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
-    		enhancementPercentage, currentHealth, numPieces, isComplete);
+    		enhancementPercentage, currentHealth, numPieces, isComplete, teamSlotNum);
     return userMonster;
   }
 

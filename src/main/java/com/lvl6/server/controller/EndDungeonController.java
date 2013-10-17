@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.TaskForUser;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.User;
@@ -278,6 +280,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private List<FullUserMonsterProto> updateUserMonsters(int userId,
   		Map<Integer, Integer> monsterIdToNumPieces) {
+  	//for all the monster pieces the user got, see if he already has any
+  	Set<Integer> monsterIds = monsterIdToNumPieces.keySet();
+  	Map<Integer, MonsterForUser> monsterIdsToIncompletes = 
+  			RetrieveUtils.monsterForUserRetrieveUtils()
+  			.getIncompleteMonstersWithUserAndMonsterIds(userId, monsterIds);
+  	
+  	
+  	//for the monsterIds not in the map, just insert them into the table
+  	
+  	//for the monsterIds in the map, retrieve monsters, 
   	
   	return null;
   }

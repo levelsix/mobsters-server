@@ -52,5 +52,6 @@ message FullUserMonsterProto {
 	optional int32 currentHealth = 5;
 	optional int32 numPieces = 6;
 	optional bool isComplete = 7; 
+	optional int32 teamSlotNum = 8;
 }
 //------------------------------------------------------------------------------------------

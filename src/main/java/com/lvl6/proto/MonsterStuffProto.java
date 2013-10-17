@@ -1429,6 +1429,10 @@ public final class MonsterStuffProto {
     // optional bool isComplete = 7;
     boolean hasIsComplete();
     boolean getIsComplete();
+    
+    // optional int32 teamSlotNum = 8;
+    boolean hasTeamSlotNum();
+    int getTeamSlotNum();
   }
   public static final class FullUserMonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -1529,6 +1533,16 @@ public final class MonsterStuffProto {
       return isComplete_;
     }
     
+    // optional int32 teamSlotNum = 8;
+    public static final int TEAMSLOTNUM_FIELD_NUMBER = 8;
+    private int teamSlotNum_;
+    public boolean hasTeamSlotNum() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public int getTeamSlotNum() {
+      return teamSlotNum_;
+    }
+    
     private void initFields() {
       userMonsterId_ = 0L;
       userId_ = 0;
@@ -1537,6 +1551,7 @@ public final class MonsterStuffProto {
       currentHealth_ = 0;
       numPieces_ = 0;
       isComplete_ = false;
+      teamSlotNum_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1570,6 +1585,9 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBool(7, isComplete_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, teamSlotNum_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1607,6 +1625,10 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(7, isComplete_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, teamSlotNum_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1746,6 +1768,8 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         isComplete_ = false;
         bitField0_ = (bitField0_ & ~0x00000040);
+        teamSlotNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       
@@ -1812,6 +1836,10 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000040;
         }
         result.isComplete_ = isComplete_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.teamSlotNum_ = teamSlotNum_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1848,6 +1876,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasIsComplete()) {
           setIsComplete(other.getIsComplete());
+        }
+        if (other.hasTeamSlotNum()) {
+          setTeamSlotNum(other.getTeamSlotNum());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1913,6 +1944,11 @@ public final class MonsterStuffProto {
             case 56: {
               bitField0_ |= 0x00000040;
               isComplete_ = input.readBool();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              teamSlotNum_ = input.readInt32();
               break;
             }
           }
@@ -2068,6 +2104,27 @@ public final class MonsterStuffProto {
         return this;
       }
       
+      // optional int32 teamSlotNum = 8;
+      private int teamSlotNum_ ;
+      public boolean hasTeamSlotNum() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public int getTeamSlotNum() {
+        return teamSlotNum_;
+      }
+      public Builder setTeamSlotNum(int value) {
+        bitField0_ |= 0x00000080;
+        teamSlotNum_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTeamSlotNum() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        teamSlotNum_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullUserMonsterProto)
     }
     
@@ -2114,12 +2171,13 @@ public final class MonsterStuffProto {
       "\022\n\n\006COMMON\020\001\022\014\n\010UNCOMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005" +
       "ULTRA\020\004\022\010\n\004EPIC\020\005\022\r\n\tLEGENDARY\020\006\"M\n\016Mons" +
       "terElement\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER" +
-      "\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\"\255\001\n\024Full" +
+      "\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\"\302\001\n\024Full" +
       "UserMonsterProto\022\025\n\ruserMonsterId\030\001 \001(\003\022" +
       "\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\035\n\025en" +
       "hancementPercentage\030\004 \001(\005\022\025\n\rcurrentHeal",
       "th\030\005 \001(\005\022\021\n\tnumPieces\030\006 \001(\005\022\022\n\nisComplet" +
-      "e\030\007 \001(\010B\023B\021MonsterStuffProto"
+      "e\030\007 \001(\010\022\023\n\013teamSlotNum\030\010 \001(\005B\023B\021MonsterS" +
+      "tuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2139,7 +2197,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor,
-              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "EnhancementPercentage", "CurrentHealth", "NumPieces", "IsComplete", },
+              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "EnhancementPercentage", "CurrentHealth", "NumPieces", "IsComplete", "TeamSlotNum", },
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder.class);
           return null;
