@@ -359,8 +359,8 @@ public class DBConstants {
   public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   
   /*USER TASK STAGE HISTORY TABLE*/
-  public static final String TASK_STAGE_HISTORY__ID = GENERIC__ID;
-  public static final String TASK_STAGE_HISTORY__TASK_STAGE_FOR_USER_ID = "task_stage_for_user_id";
+  public static final String TASK_STAGE_HISTORY__ID = "task_stage_for_user_id";
+  public static final String TASK_STAGE_HISTORY__TASK_FOR_USER_ID = "task_for_user_id";
   public static final String TASK_STAGE_HISTORY__STAGE_NUM = "stage_num";
   public static final String TASK_STAGE_HISTORY__MONSTER_ID = "monster_id";
   public static final String TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";

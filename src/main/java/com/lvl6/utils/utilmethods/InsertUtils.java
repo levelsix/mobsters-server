@@ -809,7 +809,8 @@ public class InsertUtils implements InsertUtil{
 		
 		@SuppressWarnings("rawtypes")
     Map insertParams = new HashMap<String, List<Object>>();
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_FOR_USER_ID, userTaskId);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageId);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskId);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNum);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_ID, monsterId);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expGained);
