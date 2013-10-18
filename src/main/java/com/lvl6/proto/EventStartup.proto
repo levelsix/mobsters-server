@@ -7,6 +7,7 @@ import "InAppPurchase.proto";
 import "Quest.proto";
 import "Structure.proto";
 import "User.proto";
+import "MonsterStuff.proto";
 
 package com.lvl6.proto;
 
@@ -63,6 +64,8 @@ message StartupResponseProto {
 	repeated PrivateChatPostProto pcpp = 25;
 	
 	repeated CityExpansionCostProto expansionCosts = 26;
+	
+	repeated MonsterProto staticMonsters = 27;
 	
 
 	message AttackedNotificationProto {

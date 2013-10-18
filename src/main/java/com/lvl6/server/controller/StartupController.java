@@ -40,6 +40,7 @@ import com.lvl6.info.City;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
+import com.lvl6.info.Monster;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
@@ -68,10 +69,11 @@ import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
@@ -613,10 +615,10 @@ public class StartupController extends EventController {
 
 
   private void setStaticEquipsAndStructs(StartupResponseProto.Builder resBuilder) {
-//    Collection<Equipment> equips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().values();
-//    for (Equipment equip : equips) {
-//      resBuilder.addStaticEquips(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip));
-//    }
+    Collection<Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters().values();
+    for (Monster monster : monsters) {
+      resBuilder.addStaticMonsters(CreateInfoProtoUtils.createMonsterProto(0, monster, false, 0));
+    }
 
     Collection<Structure> structs = StructureRetrieveUtils.getStructIdsToStructs().values();
     for (Structure struct : structs) {
