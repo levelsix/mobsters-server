@@ -59,7 +59,7 @@ message StartupResponseProto {
 	optional string kabamNaid = 26;
 	
 	repeated UserMonsterHealingProto monstersHealing = 27;
-	
+	repeated FullUserMonsterProto usersMonsters = 28;
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
