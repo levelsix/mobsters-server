@@ -2298,9 +2298,10 @@ public final class EventStartupProto {
       boolean hasNumBeginnerSalesAllowed();
       int getNumBeginnerSalesAllowed();
       
-      // optional int32 maxNumTeamSlots = 18;
-      boolean hasMaxNumTeamSlots();
-      int getMaxNumTeamSlots();
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 18;
+      boolean hasUserMonsterConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants getUserMonsterConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder getUserMonsterConstantsOrBuilder();
     }
     public static final class StartupConstants extends
         com.google.protobuf.GeneratedMessage
@@ -2328,2105 +2329,6 @@ public final class EventStartupProto {
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable;
-      }
-      
-      public interface TournamentConstantsOrBuilder
-          extends com.google.protobuf.MessageOrBuilder {
-        
-        // optional int32 winsWeight = 1;
-        boolean hasWinsWeight();
-        int getWinsWeight();
-        
-        // optional int32 lossesWeight = 2;
-        boolean hasLossesWeight();
-        int getLossesWeight();
-        
-        // optional int32 fleesWeight = 3;
-        boolean hasFleesWeight();
-        int getFleesWeight();
-        
-        // optional int32 numHoursToShowAfterEventEnd = 4;
-        boolean hasNumHoursToShowAfterEventEnd();
-        int getNumHoursToShowAfterEventEnd();
-      }
-      public static final class TournamentConstants extends
-          com.google.protobuf.GeneratedMessage
-          implements TournamentConstantsOrBuilder {
-        // Use TournamentConstants.newBuilder() to construct.
-        private TournamentConstants(Builder builder) {
-          super(builder);
-        }
-        private TournamentConstants(boolean noInit) {}
-        
-        private static final TournamentConstants defaultInstance;
-        public static TournamentConstants getDefaultInstance() {
-          return defaultInstance;
-        }
-        
-        public TournamentConstants getDefaultInstanceForType() {
-          return defaultInstance;
-        }
-        
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
-        }
-        
-        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
-        }
-        
-        private int bitField0_;
-        // optional int32 winsWeight = 1;
-        public static final int WINSWEIGHT_FIELD_NUMBER = 1;
-        private int winsWeight_;
-        public boolean hasWinsWeight() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        public int getWinsWeight() {
-          return winsWeight_;
-        }
-        
-        // optional int32 lossesWeight = 2;
-        public static final int LOSSESWEIGHT_FIELD_NUMBER = 2;
-        private int lossesWeight_;
-        public boolean hasLossesWeight() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        public int getLossesWeight() {
-          return lossesWeight_;
-        }
-        
-        // optional int32 fleesWeight = 3;
-        public static final int FLEESWEIGHT_FIELD_NUMBER = 3;
-        private int fleesWeight_;
-        public boolean hasFleesWeight() {
-          return ((bitField0_ & 0x00000004) == 0x00000004);
-        }
-        public int getFleesWeight() {
-          return fleesWeight_;
-        }
-        
-        // optional int32 numHoursToShowAfterEventEnd = 4;
-        public static final int NUMHOURSTOSHOWAFTEREVENTEND_FIELD_NUMBER = 4;
-        private int numHoursToShowAfterEventEnd_;
-        public boolean hasNumHoursToShowAfterEventEnd() {
-          return ((bitField0_ & 0x00000008) == 0x00000008);
-        }
-        public int getNumHoursToShowAfterEventEnd() {
-          return numHoursToShowAfterEventEnd_;
-        }
-        
-        private void initFields() {
-          winsWeight_ = 0;
-          lossesWeight_ = 0;
-          fleesWeight_ = 0;
-          numHoursToShowAfterEventEnd_ = 0;
-        }
-        private byte memoizedIsInitialized = -1;
-        public final boolean isInitialized() {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized != -1) return isInitialized == 1;
-          
-          memoizedIsInitialized = 1;
-          return true;
-        }
-        
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
-                            throws java.io.IOException {
-          getSerializedSize();
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            output.writeInt32(1, winsWeight_);
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            output.writeInt32(2, lossesWeight_);
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            output.writeInt32(3, fleesWeight_);
-          }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            output.writeInt32(4, numHoursToShowAfterEventEnd_);
-          }
-          getUnknownFields().writeTo(output);
-        }
-        
-        private int memoizedSerializedSize = -1;
-        public int getSerializedSize() {
-          int size = memoizedSerializedSize;
-          if (size != -1) return size;
-        
-          size = 0;
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(1, winsWeight_);
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(2, lossesWeight_);
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(3, fleesWeight_);
-          }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(4, numHoursToShowAfterEventEnd_);
-          }
-          size += getUnknownFields().getSerializedSize();
-          memoizedSerializedSize = size;
-          return size;
-        }
-        
-        private static final long serialVersionUID = 0L;
-        @java.lang.Override
-        protected java.lang.Object writeReplace()
-            throws java.io.ObjectStreamException {
-          return super.writeReplace();
-        }
-        
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
-            com.google.protobuf.ByteString data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
-            com.google.protobuf.ByteString data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(byte[] data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
-            byte[] data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseDelimitedFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseDelimitedFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
-            com.google.protobuf.CodedInputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        
-        public static Builder newBuilder() { return Builder.create(); }
-        public Builder newBuilderForType() { return newBuilder(); }
-        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants prototype) {
-          return newBuilder().mergeFrom(prototype);
-        }
-        public Builder toBuilder() { return newBuilder(this); }
-        
-        @java.lang.Override
-        protected Builder newBuilderForType(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          Builder builder = new Builder(parent);
-          return builder;
-        }
-        public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder>
-           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder {
-          public static final com.google.protobuf.Descriptors.Descriptor
-              getDescriptor() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
-          }
-          
-          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-              internalGetFieldAccessorTable() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
-          }
-          
-          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.newBuilder()
-          private Builder() {
-            maybeForceBuilderInitialization();
-          }
-          
-          private Builder(BuilderParent parent) {
-            super(parent);
-            maybeForceBuilderInitialization();
-          }
-          private void maybeForceBuilderInitialization() {
-            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-            }
-          }
-          private static Builder create() {
-            return new Builder();
-          }
-          
-          public Builder clear() {
-            super.clear();
-            winsWeight_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000001);
-            lossesWeight_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000002);
-            fleesWeight_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000004);
-            numHoursToShowAfterEventEnd_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000008);
-            return this;
-          }
-          
-          public Builder clone() {
-            return create().mergeFrom(buildPartial());
-          }
-          
-          public com.google.protobuf.Descriptors.Descriptor
-              getDescriptorForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDescriptor();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getDefaultInstanceForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants build() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(result);
-            }
-            return result;
-          }
-          
-          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants buildParsed()
-              throws com.google.protobuf.InvalidProtocolBufferException {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(
-                result).asInvalidProtocolBufferException();
-            }
-            return result;
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants buildPartial() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants(this);
-            int from_bitField0_ = bitField0_;
-            int to_bitField0_ = 0;
-            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-              to_bitField0_ |= 0x00000001;
-            }
-            result.winsWeight_ = winsWeight_;
-            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-              to_bitField0_ |= 0x00000002;
-            }
-            result.lossesWeight_ = lossesWeight_;
-            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-              to_bitField0_ |= 0x00000004;
-            }
-            result.fleesWeight_ = fleesWeight_;
-            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-              to_bitField0_ |= 0x00000008;
-            }
-            result.numHoursToShowAfterEventEnd_ = numHoursToShowAfterEventEnd_;
-            result.bitField0_ = to_bitField0_;
-            onBuilt();
-            return result;
-          }
-          
-          public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants) {
-              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants)other);
-            } else {
-              super.mergeFrom(other);
-              return this;
-            }
-          }
-          
-          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants other) {
-            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance()) return this;
-            if (other.hasWinsWeight()) {
-              setWinsWeight(other.getWinsWeight());
-            }
-            if (other.hasLossesWeight()) {
-              setLossesWeight(other.getLossesWeight());
-            }
-            if (other.hasFleesWeight()) {
-              setFleesWeight(other.getFleesWeight());
-            }
-            if (other.hasNumHoursToShowAfterEventEnd()) {
-              setNumHoursToShowAfterEventEnd(other.getNumHoursToShowAfterEventEnd());
-            }
-            this.mergeUnknownFields(other.getUnknownFields());
-            return this;
-          }
-          
-          public final boolean isInitialized() {
-            return true;
-          }
-          
-          public Builder mergeFrom(
-              com.google.protobuf.CodedInputStream input,
-              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws java.io.IOException {
-            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder(
-                this.getUnknownFields());
-            while (true) {
-              int tag = input.readTag();
-              switch (tag) {
-                case 0:
-                  this.setUnknownFields(unknownFields.build());
-                  onChanged();
-                  return this;
-                default: {
-                  if (!parseUnknownField(input, unknownFields,
-                                         extensionRegistry, tag)) {
-                    this.setUnknownFields(unknownFields.build());
-                    onChanged();
-                    return this;
-                  }
-                  break;
-                }
-                case 8: {
-                  bitField0_ |= 0x00000001;
-                  winsWeight_ = input.readInt32();
-                  break;
-                }
-                case 16: {
-                  bitField0_ |= 0x00000002;
-                  lossesWeight_ = input.readInt32();
-                  break;
-                }
-                case 24: {
-                  bitField0_ |= 0x00000004;
-                  fleesWeight_ = input.readInt32();
-                  break;
-                }
-                case 32: {
-                  bitField0_ |= 0x00000008;
-                  numHoursToShowAfterEventEnd_ = input.readInt32();
-                  break;
-                }
-              }
-            }
-          }
-          
-          private int bitField0_;
-          
-          // optional int32 winsWeight = 1;
-          private int winsWeight_ ;
-          public boolean hasWinsWeight() {
-            return ((bitField0_ & 0x00000001) == 0x00000001);
-          }
-          public int getWinsWeight() {
-            return winsWeight_;
-          }
-          public Builder setWinsWeight(int value) {
-            bitField0_ |= 0x00000001;
-            winsWeight_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearWinsWeight() {
-            bitField0_ = (bitField0_ & ~0x00000001);
-            winsWeight_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 lossesWeight = 2;
-          private int lossesWeight_ ;
-          public boolean hasLossesWeight() {
-            return ((bitField0_ & 0x00000002) == 0x00000002);
-          }
-          public int getLossesWeight() {
-            return lossesWeight_;
-          }
-          public Builder setLossesWeight(int value) {
-            bitField0_ |= 0x00000002;
-            lossesWeight_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearLossesWeight() {
-            bitField0_ = (bitField0_ & ~0x00000002);
-            lossesWeight_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 fleesWeight = 3;
-          private int fleesWeight_ ;
-          public boolean hasFleesWeight() {
-            return ((bitField0_ & 0x00000004) == 0x00000004);
-          }
-          public int getFleesWeight() {
-            return fleesWeight_;
-          }
-          public Builder setFleesWeight(int value) {
-            bitField0_ |= 0x00000004;
-            fleesWeight_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearFleesWeight() {
-            bitField0_ = (bitField0_ & ~0x00000004);
-            fleesWeight_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 numHoursToShowAfterEventEnd = 4;
-          private int numHoursToShowAfterEventEnd_ ;
-          public boolean hasNumHoursToShowAfterEventEnd() {
-            return ((bitField0_ & 0x00000008) == 0x00000008);
-          }
-          public int getNumHoursToShowAfterEventEnd() {
-            return numHoursToShowAfterEventEnd_;
-          }
-          public Builder setNumHoursToShowAfterEventEnd(int value) {
-            bitField0_ |= 0x00000008;
-            numHoursToShowAfterEventEnd_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearNumHoursToShowAfterEventEnd() {
-            bitField0_ = (bitField0_ & ~0x00000008);
-            numHoursToShowAfterEventEnd_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
-        }
-        
-        static {
-          defaultInstance = new TournamentConstants(true);
-          defaultInstance.initFields();
-        }
-        
-        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
-      }
-      
-      public interface DownloadableNibConstantsOrBuilder
-          extends com.google.protobuf.MessageOrBuilder {
-        
-        // optional string mapNibName = 1;
-        boolean hasMapNibName();
-        String getMapNibName();
-        
-        // optional string expansionNibName = 2;
-        boolean hasExpansionNibName();
-        String getExpansionNibName();
-        
-        // optional string goldShoppeNibName = 3;
-        boolean hasGoldShoppeNibName();
-        String getGoldShoppeNibName();
-      }
-      public static final class DownloadableNibConstants extends
-          com.google.protobuf.GeneratedMessage
-          implements DownloadableNibConstantsOrBuilder {
-        // Use DownloadableNibConstants.newBuilder() to construct.
-        private DownloadableNibConstants(Builder builder) {
-          super(builder);
-        }
-        private DownloadableNibConstants(boolean noInit) {}
-        
-        private static final DownloadableNibConstants defaultInstance;
-        public static DownloadableNibConstants getDefaultInstance() {
-          return defaultInstance;
-        }
-        
-        public DownloadableNibConstants getDefaultInstanceForType() {
-          return defaultInstance;
-        }
-        
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
-        }
-        
-        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable;
-        }
-        
-        private int bitField0_;
-        // optional string mapNibName = 1;
-        public static final int MAPNIBNAME_FIELD_NUMBER = 1;
-        private java.lang.Object mapNibName_;
-        public boolean hasMapNibName() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        public String getMapNibName() {
-          java.lang.Object ref = mapNibName_;
-          if (ref instanceof String) {
-            return (String) ref;
-          } else {
-            com.google.protobuf.ByteString bs = 
-                (com.google.protobuf.ByteString) ref;
-            String s = bs.toStringUtf8();
-            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-              mapNibName_ = s;
-            }
-            return s;
-          }
-        }
-        private com.google.protobuf.ByteString getMapNibNameBytes() {
-          java.lang.Object ref = mapNibName_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-            mapNibName_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        
-        // optional string expansionNibName = 2;
-        public static final int EXPANSIONNIBNAME_FIELD_NUMBER = 2;
-        private java.lang.Object expansionNibName_;
-        public boolean hasExpansionNibName() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        public String getExpansionNibName() {
-          java.lang.Object ref = expansionNibName_;
-          if (ref instanceof String) {
-            return (String) ref;
-          } else {
-            com.google.protobuf.ByteString bs = 
-                (com.google.protobuf.ByteString) ref;
-            String s = bs.toStringUtf8();
-            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-              expansionNibName_ = s;
-            }
-            return s;
-          }
-        }
-        private com.google.protobuf.ByteString getExpansionNibNameBytes() {
-          java.lang.Object ref = expansionNibName_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-            expansionNibName_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        
-        // optional string goldShoppeNibName = 3;
-        public static final int GOLDSHOPPENIBNAME_FIELD_NUMBER = 3;
-        private java.lang.Object goldShoppeNibName_;
-        public boolean hasGoldShoppeNibName() {
-          return ((bitField0_ & 0x00000004) == 0x00000004);
-        }
-        public String getGoldShoppeNibName() {
-          java.lang.Object ref = goldShoppeNibName_;
-          if (ref instanceof String) {
-            return (String) ref;
-          } else {
-            com.google.protobuf.ByteString bs = 
-                (com.google.protobuf.ByteString) ref;
-            String s = bs.toStringUtf8();
-            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-              goldShoppeNibName_ = s;
-            }
-            return s;
-          }
-        }
-        private com.google.protobuf.ByteString getGoldShoppeNibNameBytes() {
-          java.lang.Object ref = goldShoppeNibName_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-            goldShoppeNibName_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        
-        private void initFields() {
-          mapNibName_ = "";
-          expansionNibName_ = "";
-          goldShoppeNibName_ = "";
-        }
-        private byte memoizedIsInitialized = -1;
-        public final boolean isInitialized() {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized != -1) return isInitialized == 1;
-          
-          memoizedIsInitialized = 1;
-          return true;
-        }
-        
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
-                            throws java.io.IOException {
-          getSerializedSize();
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            output.writeBytes(1, getMapNibNameBytes());
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            output.writeBytes(2, getExpansionNibNameBytes());
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            output.writeBytes(3, getGoldShoppeNibNameBytes());
-          }
-          getUnknownFields().writeTo(output);
-        }
-        
-        private int memoizedSerializedSize = -1;
-        public int getSerializedSize() {
-          int size = memoizedSerializedSize;
-          if (size != -1) return size;
-        
-          size = 0;
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeBytesSize(1, getMapNibNameBytes());
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeBytesSize(2, getExpansionNibNameBytes());
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeBytesSize(3, getGoldShoppeNibNameBytes());
-          }
-          size += getUnknownFields().getSerializedSize();
-          memoizedSerializedSize = size;
-          return size;
-        }
-        
-        private static final long serialVersionUID = 0L;
-        @java.lang.Override
-        protected java.lang.Object writeReplace()
-            throws java.io.ObjectStreamException {
-          return super.writeReplace();
-        }
-        
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
-            com.google.protobuf.ByteString data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
-            com.google.protobuf.ByteString data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(byte[] data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
-            byte[] data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseDelimitedFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseDelimitedFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
-            com.google.protobuf.CodedInputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        
-        public static Builder newBuilder() { return Builder.create(); }
-        public Builder newBuilderForType() { return newBuilder(); }
-        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants prototype) {
-          return newBuilder().mergeFrom(prototype);
-        }
-        public Builder toBuilder() { return newBuilder(this); }
-        
-        @java.lang.Override
-        protected Builder newBuilderForType(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          Builder builder = new Builder(parent);
-          return builder;
-        }
-        public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder>
-           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder {
-          public static final com.google.protobuf.Descriptors.Descriptor
-              getDescriptor() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
-          }
-          
-          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-              internalGetFieldAccessorTable() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable;
-          }
-          
-          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.newBuilder()
-          private Builder() {
-            maybeForceBuilderInitialization();
-          }
-          
-          private Builder(BuilderParent parent) {
-            super(parent);
-            maybeForceBuilderInitialization();
-          }
-          private void maybeForceBuilderInitialization() {
-            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-            }
-          }
-          private static Builder create() {
-            return new Builder();
-          }
-          
-          public Builder clear() {
-            super.clear();
-            mapNibName_ = "";
-            bitField0_ = (bitField0_ & ~0x00000001);
-            expansionNibName_ = "";
-            bitField0_ = (bitField0_ & ~0x00000002);
-            goldShoppeNibName_ = "";
-            bitField0_ = (bitField0_ & ~0x00000004);
-            return this;
-          }
-          
-          public Builder clone() {
-            return create().mergeFrom(buildPartial());
-          }
-          
-          public com.google.protobuf.Descriptors.Descriptor
-              getDescriptorForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDescriptor();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants getDefaultInstanceForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants build() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(result);
-            }
-            return result;
-          }
-          
-          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants buildParsed()
-              throws com.google.protobuf.InvalidProtocolBufferException {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(
-                result).asInvalidProtocolBufferException();
-            }
-            return result;
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants buildPartial() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants(this);
-            int from_bitField0_ = bitField0_;
-            int to_bitField0_ = 0;
-            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-              to_bitField0_ |= 0x00000001;
-            }
-            result.mapNibName_ = mapNibName_;
-            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-              to_bitField0_ |= 0x00000002;
-            }
-            result.expansionNibName_ = expansionNibName_;
-            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-              to_bitField0_ |= 0x00000004;
-            }
-            result.goldShoppeNibName_ = goldShoppeNibName_;
-            result.bitField0_ = to_bitField0_;
-            onBuilt();
-            return result;
-          }
-          
-          public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants) {
-              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants)other);
-            } else {
-              super.mergeFrom(other);
-              return this;
-            }
-          }
-          
-          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants other) {
-            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance()) return this;
-            if (other.hasMapNibName()) {
-              setMapNibName(other.getMapNibName());
-            }
-            if (other.hasExpansionNibName()) {
-              setExpansionNibName(other.getExpansionNibName());
-            }
-            if (other.hasGoldShoppeNibName()) {
-              setGoldShoppeNibName(other.getGoldShoppeNibName());
-            }
-            this.mergeUnknownFields(other.getUnknownFields());
-            return this;
-          }
-          
-          public final boolean isInitialized() {
-            return true;
-          }
-          
-          public Builder mergeFrom(
-              com.google.protobuf.CodedInputStream input,
-              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws java.io.IOException {
-            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder(
-                this.getUnknownFields());
-            while (true) {
-              int tag = input.readTag();
-              switch (tag) {
-                case 0:
-                  this.setUnknownFields(unknownFields.build());
-                  onChanged();
-                  return this;
-                default: {
-                  if (!parseUnknownField(input, unknownFields,
-                                         extensionRegistry, tag)) {
-                    this.setUnknownFields(unknownFields.build());
-                    onChanged();
-                    return this;
-                  }
-                  break;
-                }
-                case 10: {
-                  bitField0_ |= 0x00000001;
-                  mapNibName_ = input.readBytes();
-                  break;
-                }
-                case 18: {
-                  bitField0_ |= 0x00000002;
-                  expansionNibName_ = input.readBytes();
-                  break;
-                }
-                case 26: {
-                  bitField0_ |= 0x00000004;
-                  goldShoppeNibName_ = input.readBytes();
-                  break;
-                }
-              }
-            }
-          }
-          
-          private int bitField0_;
-          
-          // optional string mapNibName = 1;
-          private java.lang.Object mapNibName_ = "";
-          public boolean hasMapNibName() {
-            return ((bitField0_ & 0x00000001) == 0x00000001);
-          }
-          public String getMapNibName() {
-            java.lang.Object ref = mapNibName_;
-            if (!(ref instanceof String)) {
-              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-              mapNibName_ = s;
-              return s;
-            } else {
-              return (String) ref;
-            }
-          }
-          public Builder setMapNibName(String value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-            mapNibName_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearMapNibName() {
-            bitField0_ = (bitField0_ & ~0x00000001);
-            mapNibName_ = getDefaultInstance().getMapNibName();
-            onChanged();
-            return this;
-          }
-          void setMapNibName(com.google.protobuf.ByteString value) {
-            bitField0_ |= 0x00000001;
-            mapNibName_ = value;
-            onChanged();
-          }
-          
-          // optional string expansionNibName = 2;
-          private java.lang.Object expansionNibName_ = "";
-          public boolean hasExpansionNibName() {
-            return ((bitField0_ & 0x00000002) == 0x00000002);
-          }
-          public String getExpansionNibName() {
-            java.lang.Object ref = expansionNibName_;
-            if (!(ref instanceof String)) {
-              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-              expansionNibName_ = s;
-              return s;
-            } else {
-              return (String) ref;
-            }
-          }
-          public Builder setExpansionNibName(String value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-            expansionNibName_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearExpansionNibName() {
-            bitField0_ = (bitField0_ & ~0x00000002);
-            expansionNibName_ = getDefaultInstance().getExpansionNibName();
-            onChanged();
-            return this;
-          }
-          void setExpansionNibName(com.google.protobuf.ByteString value) {
-            bitField0_ |= 0x00000002;
-            expansionNibName_ = value;
-            onChanged();
-          }
-          
-          // optional string goldShoppeNibName = 3;
-          private java.lang.Object goldShoppeNibName_ = "";
-          public boolean hasGoldShoppeNibName() {
-            return ((bitField0_ & 0x00000004) == 0x00000004);
-          }
-          public String getGoldShoppeNibName() {
-            java.lang.Object ref = goldShoppeNibName_;
-            if (!(ref instanceof String)) {
-              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-              goldShoppeNibName_ = s;
-              return s;
-            } else {
-              return (String) ref;
-            }
-          }
-          public Builder setGoldShoppeNibName(String value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-            goldShoppeNibName_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearGoldShoppeNibName() {
-            bitField0_ = (bitField0_ & ~0x00000004);
-            goldShoppeNibName_ = getDefaultInstance().getGoldShoppeNibName();
-            onChanged();
-            return this;
-          }
-          void setGoldShoppeNibName(com.google.protobuf.ByteString value) {
-            bitField0_ |= 0x00000004;
-            goldShoppeNibName_ = value;
-            onChanged();
-          }
-          
-          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants)
-        }
-        
-        static {
-          defaultInstance = new DownloadableNibConstants(true);
-          defaultInstance.initFields();
-        }
-        
-        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants)
-      }
-      
-      public interface ClanConstantsOrBuilder
-          extends com.google.protobuf.MessageOrBuilder {
-        
-        // optional int32 diamondPriceToCreateClan = 1;
-        boolean hasDiamondPriceToCreateClan();
-        int getDiamondPriceToCreateClan();
-        
-        // optional int32 maxCharLengthForClanName = 2;
-        boolean hasMaxCharLengthForClanName();
-        int getMaxCharLengthForClanName();
-        
-        // optional int32 maxCharLengthForClanDescription = 3;
-        boolean hasMaxCharLengthForClanDescription();
-        int getMaxCharLengthForClanDescription();
-        
-        // optional int32 maxCharLengthForClanTag = 4;
-        boolean hasMaxCharLengthForClanTag();
-        int getMaxCharLengthForClanTag();
-      }
-      public static final class ClanConstants extends
-          com.google.protobuf.GeneratedMessage
-          implements ClanConstantsOrBuilder {
-        // Use ClanConstants.newBuilder() to construct.
-        private ClanConstants(Builder builder) {
-          super(builder);
-        }
-        private ClanConstants(boolean noInit) {}
-        
-        private static final ClanConstants defaultInstance;
-        public static ClanConstants getDefaultInstance() {
-          return defaultInstance;
-        }
-        
-        public ClanConstants getDefaultInstanceForType() {
-          return defaultInstance;
-        }
-        
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor;
-        }
-        
-        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable;
-        }
-        
-        private int bitField0_;
-        // optional int32 diamondPriceToCreateClan = 1;
-        public static final int DIAMONDPRICETOCREATECLAN_FIELD_NUMBER = 1;
-        private int diamondPriceToCreateClan_;
-        public boolean hasDiamondPriceToCreateClan() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        public int getDiamondPriceToCreateClan() {
-          return diamondPriceToCreateClan_;
-        }
-        
-        // optional int32 maxCharLengthForClanName = 2;
-        public static final int MAXCHARLENGTHFORCLANNAME_FIELD_NUMBER = 2;
-        private int maxCharLengthForClanName_;
-        public boolean hasMaxCharLengthForClanName() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        public int getMaxCharLengthForClanName() {
-          return maxCharLengthForClanName_;
-        }
-        
-        // optional int32 maxCharLengthForClanDescription = 3;
-        public static final int MAXCHARLENGTHFORCLANDESCRIPTION_FIELD_NUMBER = 3;
-        private int maxCharLengthForClanDescription_;
-        public boolean hasMaxCharLengthForClanDescription() {
-          return ((bitField0_ & 0x00000004) == 0x00000004);
-        }
-        public int getMaxCharLengthForClanDescription() {
-          return maxCharLengthForClanDescription_;
-        }
-        
-        // optional int32 maxCharLengthForClanTag = 4;
-        public static final int MAXCHARLENGTHFORCLANTAG_FIELD_NUMBER = 4;
-        private int maxCharLengthForClanTag_;
-        public boolean hasMaxCharLengthForClanTag() {
-          return ((bitField0_ & 0x00000008) == 0x00000008);
-        }
-        public int getMaxCharLengthForClanTag() {
-          return maxCharLengthForClanTag_;
-        }
-        
-        private void initFields() {
-          diamondPriceToCreateClan_ = 0;
-          maxCharLengthForClanName_ = 0;
-          maxCharLengthForClanDescription_ = 0;
-          maxCharLengthForClanTag_ = 0;
-        }
-        private byte memoizedIsInitialized = -1;
-        public final boolean isInitialized() {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized != -1) return isInitialized == 1;
-          
-          memoizedIsInitialized = 1;
-          return true;
-        }
-        
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
-                            throws java.io.IOException {
-          getSerializedSize();
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            output.writeInt32(1, diamondPriceToCreateClan_);
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            output.writeInt32(2, maxCharLengthForClanName_);
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            output.writeInt32(3, maxCharLengthForClanDescription_);
-          }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            output.writeInt32(4, maxCharLengthForClanTag_);
-          }
-          getUnknownFields().writeTo(output);
-        }
-        
-        private int memoizedSerializedSize = -1;
-        public int getSerializedSize() {
-          int size = memoizedSerializedSize;
-          if (size != -1) return size;
-        
-          size = 0;
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(1, diamondPriceToCreateClan_);
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(2, maxCharLengthForClanName_);
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(3, maxCharLengthForClanDescription_);
-          }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(4, maxCharLengthForClanTag_);
-          }
-          size += getUnknownFields().getSerializedSize();
-          memoizedSerializedSize = size;
-          return size;
-        }
-        
-        private static final long serialVersionUID = 0L;
-        @java.lang.Override
-        protected java.lang.Object writeReplace()
-            throws java.io.ObjectStreamException {
-          return super.writeReplace();
-        }
-        
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
-            com.google.protobuf.ByteString data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
-            com.google.protobuf.ByteString data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(byte[] data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
-            byte[] data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseDelimitedFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseDelimitedFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
-            com.google.protobuf.CodedInputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        
-        public static Builder newBuilder() { return Builder.create(); }
-        public Builder newBuilderForType() { return newBuilder(); }
-        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants prototype) {
-          return newBuilder().mergeFrom(prototype);
-        }
-        public Builder toBuilder() { return newBuilder(this); }
-        
-        @java.lang.Override
-        protected Builder newBuilderForType(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          Builder builder = new Builder(parent);
-          return builder;
-        }
-        public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder>
-           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder {
-          public static final com.google.protobuf.Descriptors.Descriptor
-              getDescriptor() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor;
-          }
-          
-          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-              internalGetFieldAccessorTable() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable;
-          }
-          
-          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.newBuilder()
-          private Builder() {
-            maybeForceBuilderInitialization();
-          }
-          
-          private Builder(BuilderParent parent) {
-            super(parent);
-            maybeForceBuilderInitialization();
-          }
-          private void maybeForceBuilderInitialization() {
-            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-            }
-          }
-          private static Builder create() {
-            return new Builder();
-          }
-          
-          public Builder clear() {
-            super.clear();
-            diamondPriceToCreateClan_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000001);
-            maxCharLengthForClanName_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000002);
-            maxCharLengthForClanDescription_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000004);
-            maxCharLengthForClanTag_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000008);
-            return this;
-          }
-          
-          public Builder clone() {
-            return create().mergeFrom(buildPartial());
-          }
-          
-          public com.google.protobuf.Descriptors.Descriptor
-              getDescriptorForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDescriptor();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants getDefaultInstanceForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants build() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(result);
-            }
-            return result;
-          }
-          
-          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants buildParsed()
-              throws com.google.protobuf.InvalidProtocolBufferException {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(
-                result).asInvalidProtocolBufferException();
-            }
-            return result;
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants buildPartial() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants(this);
-            int from_bitField0_ = bitField0_;
-            int to_bitField0_ = 0;
-            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-              to_bitField0_ |= 0x00000001;
-            }
-            result.diamondPriceToCreateClan_ = diamondPriceToCreateClan_;
-            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-              to_bitField0_ |= 0x00000002;
-            }
-            result.maxCharLengthForClanName_ = maxCharLengthForClanName_;
-            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-              to_bitField0_ |= 0x00000004;
-            }
-            result.maxCharLengthForClanDescription_ = maxCharLengthForClanDescription_;
-            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-              to_bitField0_ |= 0x00000008;
-            }
-            result.maxCharLengthForClanTag_ = maxCharLengthForClanTag_;
-            result.bitField0_ = to_bitField0_;
-            onBuilt();
-            return result;
-          }
-          
-          public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants) {
-              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants)other);
-            } else {
-              super.mergeFrom(other);
-              return this;
-            }
-          }
-          
-          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants other) {
-            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance()) return this;
-            if (other.hasDiamondPriceToCreateClan()) {
-              setDiamondPriceToCreateClan(other.getDiamondPriceToCreateClan());
-            }
-            if (other.hasMaxCharLengthForClanName()) {
-              setMaxCharLengthForClanName(other.getMaxCharLengthForClanName());
-            }
-            if (other.hasMaxCharLengthForClanDescription()) {
-              setMaxCharLengthForClanDescription(other.getMaxCharLengthForClanDescription());
-            }
-            if (other.hasMaxCharLengthForClanTag()) {
-              setMaxCharLengthForClanTag(other.getMaxCharLengthForClanTag());
-            }
-            this.mergeUnknownFields(other.getUnknownFields());
-            return this;
-          }
-          
-          public final boolean isInitialized() {
-            return true;
-          }
-          
-          public Builder mergeFrom(
-              com.google.protobuf.CodedInputStream input,
-              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws java.io.IOException {
-            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder(
-                this.getUnknownFields());
-            while (true) {
-              int tag = input.readTag();
-              switch (tag) {
-                case 0:
-                  this.setUnknownFields(unknownFields.build());
-                  onChanged();
-                  return this;
-                default: {
-                  if (!parseUnknownField(input, unknownFields,
-                                         extensionRegistry, tag)) {
-                    this.setUnknownFields(unknownFields.build());
-                    onChanged();
-                    return this;
-                  }
-                  break;
-                }
-                case 8: {
-                  bitField0_ |= 0x00000001;
-                  diamondPriceToCreateClan_ = input.readInt32();
-                  break;
-                }
-                case 16: {
-                  bitField0_ |= 0x00000002;
-                  maxCharLengthForClanName_ = input.readInt32();
-                  break;
-                }
-                case 24: {
-                  bitField0_ |= 0x00000004;
-                  maxCharLengthForClanDescription_ = input.readInt32();
-                  break;
-                }
-                case 32: {
-                  bitField0_ |= 0x00000008;
-                  maxCharLengthForClanTag_ = input.readInt32();
-                  break;
-                }
-              }
-            }
-          }
-          
-          private int bitField0_;
-          
-          // optional int32 diamondPriceToCreateClan = 1;
-          private int diamondPriceToCreateClan_ ;
-          public boolean hasDiamondPriceToCreateClan() {
-            return ((bitField0_ & 0x00000001) == 0x00000001);
-          }
-          public int getDiamondPriceToCreateClan() {
-            return diamondPriceToCreateClan_;
-          }
-          public Builder setDiamondPriceToCreateClan(int value) {
-            bitField0_ |= 0x00000001;
-            diamondPriceToCreateClan_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearDiamondPriceToCreateClan() {
-            bitField0_ = (bitField0_ & ~0x00000001);
-            diamondPriceToCreateClan_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 maxCharLengthForClanName = 2;
-          private int maxCharLengthForClanName_ ;
-          public boolean hasMaxCharLengthForClanName() {
-            return ((bitField0_ & 0x00000002) == 0x00000002);
-          }
-          public int getMaxCharLengthForClanName() {
-            return maxCharLengthForClanName_;
-          }
-          public Builder setMaxCharLengthForClanName(int value) {
-            bitField0_ |= 0x00000002;
-            maxCharLengthForClanName_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearMaxCharLengthForClanName() {
-            bitField0_ = (bitField0_ & ~0x00000002);
-            maxCharLengthForClanName_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 maxCharLengthForClanDescription = 3;
-          private int maxCharLengthForClanDescription_ ;
-          public boolean hasMaxCharLengthForClanDescription() {
-            return ((bitField0_ & 0x00000004) == 0x00000004);
-          }
-          public int getMaxCharLengthForClanDescription() {
-            return maxCharLengthForClanDescription_;
-          }
-          public Builder setMaxCharLengthForClanDescription(int value) {
-            bitField0_ |= 0x00000004;
-            maxCharLengthForClanDescription_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearMaxCharLengthForClanDescription() {
-            bitField0_ = (bitField0_ & ~0x00000004);
-            maxCharLengthForClanDescription_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 maxCharLengthForClanTag = 4;
-          private int maxCharLengthForClanTag_ ;
-          public boolean hasMaxCharLengthForClanTag() {
-            return ((bitField0_ & 0x00000008) == 0x00000008);
-          }
-          public int getMaxCharLengthForClanTag() {
-            return maxCharLengthForClanTag_;
-          }
-          public Builder setMaxCharLengthForClanTag(int value) {
-            bitField0_ |= 0x00000008;
-            maxCharLengthForClanTag_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearMaxCharLengthForClanTag() {
-            bitField0_ = (bitField0_ & ~0x00000008);
-            maxCharLengthForClanTag_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants)
-        }
-        
-        static {
-          defaultInstance = new ClanConstants(true);
-          defaultInstance.initFields();
-        }
-        
-        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants)
-      }
-      
-      public interface AnimatedSpriteOffsetProtoOrBuilder
-          extends com.google.protobuf.MessageOrBuilder {
-        
-        // optional string imageName = 1;
-        boolean hasImageName();
-        String getImageName();
-        
-        // optional .com.lvl6.proto.CoordinateProto offSet = 2;
-        boolean hasOffSet();
-        com.lvl6.proto.StructureProto.CoordinateProto getOffSet();
-        com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getOffSetOrBuilder();
-      }
-      public static final class AnimatedSpriteOffsetProto extends
-          com.google.protobuf.GeneratedMessage
-          implements AnimatedSpriteOffsetProtoOrBuilder {
-        // Use AnimatedSpriteOffsetProto.newBuilder() to construct.
-        private AnimatedSpriteOffsetProto(Builder builder) {
-          super(builder);
-        }
-        private AnimatedSpriteOffsetProto(boolean noInit) {}
-        
-        private static final AnimatedSpriteOffsetProto defaultInstance;
-        public static AnimatedSpriteOffsetProto getDefaultInstance() {
-          return defaultInstance;
-        }
-        
-        public AnimatedSpriteOffsetProto getDefaultInstanceForType() {
-          return defaultInstance;
-        }
-        
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor;
-        }
-        
-        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable;
-        }
-        
-        private int bitField0_;
-        // optional string imageName = 1;
-        public static final int IMAGENAME_FIELD_NUMBER = 1;
-        private java.lang.Object imageName_;
-        public boolean hasImageName() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        public String getImageName() {
-          java.lang.Object ref = imageName_;
-          if (ref instanceof String) {
-            return (String) ref;
-          } else {
-            com.google.protobuf.ByteString bs = 
-                (com.google.protobuf.ByteString) ref;
-            String s = bs.toStringUtf8();
-            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-              imageName_ = s;
-            }
-            return s;
-          }
-        }
-        private com.google.protobuf.ByteString getImageNameBytes() {
-          java.lang.Object ref = imageName_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-            imageName_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        
-        // optional .com.lvl6.proto.CoordinateProto offSet = 2;
-        public static final int OFFSET_FIELD_NUMBER = 2;
-        private com.lvl6.proto.StructureProto.CoordinateProto offSet_;
-        public boolean hasOffSet() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        public com.lvl6.proto.StructureProto.CoordinateProto getOffSet() {
-          return offSet_;
-        }
-        public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getOffSetOrBuilder() {
-          return offSet_;
-        }
-        
-        private void initFields() {
-          imageName_ = "";
-          offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-        }
-        private byte memoizedIsInitialized = -1;
-        public final boolean isInitialized() {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized != -1) return isInitialized == 1;
-          
-          memoizedIsInitialized = 1;
-          return true;
-        }
-        
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
-                            throws java.io.IOException {
-          getSerializedSize();
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            output.writeBytes(1, getImageNameBytes());
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            output.writeMessage(2, offSet_);
-          }
-          getUnknownFields().writeTo(output);
-        }
-        
-        private int memoizedSerializedSize = -1;
-        public int getSerializedSize() {
-          int size = memoizedSerializedSize;
-          if (size != -1) return size;
-        
-          size = 0;
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeBytesSize(1, getImageNameBytes());
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeMessageSize(2, offSet_);
-          }
-          size += getUnknownFields().getSerializedSize();
-          memoizedSerializedSize = size;
-          return size;
-        }
-        
-        private static final long serialVersionUID = 0L;
-        @java.lang.Override
-        protected java.lang.Object writeReplace()
-            throws java.io.ObjectStreamException {
-          return super.writeReplace();
-        }
-        
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
-            com.google.protobuf.ByteString data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
-            com.google.protobuf.ByteString data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(byte[] data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
-            byte[] data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseDelimitedFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseDelimitedFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
-            com.google.protobuf.CodedInputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        
-        public static Builder newBuilder() { return Builder.create(); }
-        public Builder newBuilderForType() { return newBuilder(); }
-        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto prototype) {
-          return newBuilder().mergeFrom(prototype);
-        }
-        public Builder toBuilder() { return newBuilder(this); }
-        
-        @java.lang.Override
-        protected Builder newBuilderForType(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          Builder builder = new Builder(parent);
-          return builder;
-        }
-        public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder>
-           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProtoOrBuilder {
-          public static final com.google.protobuf.Descriptors.Descriptor
-              getDescriptor() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor;
-          }
-          
-          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-              internalGetFieldAccessorTable() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable;
-          }
-          
-          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.newBuilder()
-          private Builder() {
-            maybeForceBuilderInitialization();
-          }
-          
-          private Builder(BuilderParent parent) {
-            super(parent);
-            maybeForceBuilderInitialization();
-          }
-          private void maybeForceBuilderInitialization() {
-            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-              getOffSetFieldBuilder();
-            }
-          }
-          private static Builder create() {
-            return new Builder();
-          }
-          
-          public Builder clear() {
-            super.clear();
-            imageName_ = "";
-            bitField0_ = (bitField0_ & ~0x00000001);
-            if (offSetBuilder_ == null) {
-              offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-            } else {
-              offSetBuilder_.clear();
-            }
-            bitField0_ = (bitField0_ & ~0x00000002);
-            return this;
-          }
-          
-          public Builder clone() {
-            return create().mergeFrom(buildPartial());
-          }
-          
-          public com.google.protobuf.Descriptors.Descriptor
-              getDescriptorForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.getDescriptor();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto getDefaultInstanceForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.getDefaultInstance();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto build() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(result);
-            }
-            return result;
-          }
-          
-          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto buildParsed()
-              throws com.google.protobuf.InvalidProtocolBufferException {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(
-                result).asInvalidProtocolBufferException();
-            }
-            return result;
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto buildPartial() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto(this);
-            int from_bitField0_ = bitField0_;
-            int to_bitField0_ = 0;
-            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-              to_bitField0_ |= 0x00000001;
-            }
-            result.imageName_ = imageName_;
-            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-              to_bitField0_ |= 0x00000002;
-            }
-            if (offSetBuilder_ == null) {
-              result.offSet_ = offSet_;
-            } else {
-              result.offSet_ = offSetBuilder_.build();
-            }
-            result.bitField0_ = to_bitField0_;
-            onBuilt();
-            return result;
-          }
-          
-          public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto) {
-              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)other);
-            } else {
-              super.mergeFrom(other);
-              return this;
-            }
-          }
-          
-          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto other) {
-            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.getDefaultInstance()) return this;
-            if (other.hasImageName()) {
-              setImageName(other.getImageName());
-            }
-            if (other.hasOffSet()) {
-              mergeOffSet(other.getOffSet());
-            }
-            this.mergeUnknownFields(other.getUnknownFields());
-            return this;
-          }
-          
-          public final boolean isInitialized() {
-            return true;
-          }
-          
-          public Builder mergeFrom(
-              com.google.protobuf.CodedInputStream input,
-              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws java.io.IOException {
-            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder(
-                this.getUnknownFields());
-            while (true) {
-              int tag = input.readTag();
-              switch (tag) {
-                case 0:
-                  this.setUnknownFields(unknownFields.build());
-                  onChanged();
-                  return this;
-                default: {
-                  if (!parseUnknownField(input, unknownFields,
-                                         extensionRegistry, tag)) {
-                    this.setUnknownFields(unknownFields.build());
-                    onChanged();
-                    return this;
-                  }
-                  break;
-                }
-                case 10: {
-                  bitField0_ |= 0x00000001;
-                  imageName_ = input.readBytes();
-                  break;
-                }
-                case 18: {
-                  com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
-                  if (hasOffSet()) {
-                    subBuilder.mergeFrom(getOffSet());
-                  }
-                  input.readMessage(subBuilder, extensionRegistry);
-                  setOffSet(subBuilder.buildPartial());
-                  break;
-                }
-              }
-            }
-          }
-          
-          private int bitField0_;
-          
-          // optional string imageName = 1;
-          private java.lang.Object imageName_ = "";
-          public boolean hasImageName() {
-            return ((bitField0_ & 0x00000001) == 0x00000001);
-          }
-          public String getImageName() {
-            java.lang.Object ref = imageName_;
-            if (!(ref instanceof String)) {
-              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-              imageName_ = s;
-              return s;
-            } else {
-              return (String) ref;
-            }
-          }
-          public Builder setImageName(String value) {
-            if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-            imageName_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearImageName() {
-            bitField0_ = (bitField0_ & ~0x00000001);
-            imageName_ = getDefaultInstance().getImageName();
-            onChanged();
-            return this;
-          }
-          void setImageName(com.google.protobuf.ByteString value) {
-            bitField0_ |= 0x00000001;
-            imageName_ = value;
-            onChanged();
-          }
-          
-          // optional .com.lvl6.proto.CoordinateProto offSet = 2;
-          private com.lvl6.proto.StructureProto.CoordinateProto offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-          private com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> offSetBuilder_;
-          public boolean hasOffSet() {
-            return ((bitField0_ & 0x00000002) == 0x00000002);
-          }
-          public com.lvl6.proto.StructureProto.CoordinateProto getOffSet() {
-            if (offSetBuilder_ == null) {
-              return offSet_;
-            } else {
-              return offSetBuilder_.getMessage();
-            }
-          }
-          public Builder setOffSet(com.lvl6.proto.StructureProto.CoordinateProto value) {
-            if (offSetBuilder_ == null) {
-              if (value == null) {
-                throw new NullPointerException();
-              }
-              offSet_ = value;
-              onChanged();
-            } else {
-              offSetBuilder_.setMessage(value);
-            }
-            bitField0_ |= 0x00000002;
-            return this;
-          }
-          public Builder setOffSet(
-              com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
-            if (offSetBuilder_ == null) {
-              offSet_ = builderForValue.build();
-              onChanged();
-            } else {
-              offSetBuilder_.setMessage(builderForValue.build());
-            }
-            bitField0_ |= 0x00000002;
-            return this;
-          }
-          public Builder mergeOffSet(com.lvl6.proto.StructureProto.CoordinateProto value) {
-            if (offSetBuilder_ == null) {
-              if (((bitField0_ & 0x00000002) == 0x00000002) &&
-                  offSet_ != com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance()) {
-                offSet_ =
-                  com.lvl6.proto.StructureProto.CoordinateProto.newBuilder(offSet_).mergeFrom(value).buildPartial();
-              } else {
-                offSet_ = value;
-              }
-              onChanged();
-            } else {
-              offSetBuilder_.mergeFrom(value);
-            }
-            bitField0_ |= 0x00000002;
-            return this;
-          }
-          public Builder clearOffSet() {
-            if (offSetBuilder_ == null) {
-              offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-              onChanged();
-            } else {
-              offSetBuilder_.clear();
-            }
-            bitField0_ = (bitField0_ & ~0x00000002);
-            return this;
-          }
-          public com.lvl6.proto.StructureProto.CoordinateProto.Builder getOffSetBuilder() {
-            bitField0_ |= 0x00000002;
-            onChanged();
-            return getOffSetFieldBuilder().getBuilder();
-          }
-          public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getOffSetOrBuilder() {
-            if (offSetBuilder_ != null) {
-              return offSetBuilder_.getMessageOrBuilder();
-            } else {
-              return offSet_;
-            }
-          }
-          private com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
-              getOffSetFieldBuilder() {
-            if (offSetBuilder_ == null) {
-              offSetBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-                  com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                      offSet_,
-                      getParentForChildren(),
-                      isClean());
-              offSet_ = null;
-            }
-            return offSetBuilder_;
-          }
-          
-          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)
-        }
-        
-        static {
-          defaultInstance = new AnimatedSpriteOffsetProto(true);
-          defaultInstance.initFields();
-        }
-        
-        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)
       }
       
       public interface NormStructConstantsOrBuilder
@@ -4995,6 +2897,2500 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants)
       }
       
+      public interface AnimatedSpriteOffsetProtoOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+        
+        // optional string imageName = 1;
+        boolean hasImageName();
+        String getImageName();
+        
+        // optional .com.lvl6.proto.CoordinateProto offSet = 2;
+        boolean hasOffSet();
+        com.lvl6.proto.StructureProto.CoordinateProto getOffSet();
+        com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getOffSetOrBuilder();
+      }
+      public static final class AnimatedSpriteOffsetProto extends
+          com.google.protobuf.GeneratedMessage
+          implements AnimatedSpriteOffsetProtoOrBuilder {
+        // Use AnimatedSpriteOffsetProto.newBuilder() to construct.
+        private AnimatedSpriteOffsetProto(Builder builder) {
+          super(builder);
+        }
+        private AnimatedSpriteOffsetProto(boolean noInit) {}
+        
+        private static final AnimatedSpriteOffsetProto defaultInstance;
+        public static AnimatedSpriteOffsetProto getDefaultInstance() {
+          return defaultInstance;
+        }
+        
+        public AnimatedSpriteOffsetProto getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+        
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable;
+        }
+        
+        private int bitField0_;
+        // optional string imageName = 1;
+        public static final int IMAGENAME_FIELD_NUMBER = 1;
+        private java.lang.Object imageName_;
+        public boolean hasImageName() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public String getImageName() {
+          java.lang.Object ref = imageName_;
+          if (ref instanceof String) {
+            return (String) ref;
+          } else {
+            com.google.protobuf.ByteString bs = 
+                (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+              imageName_ = s;
+            }
+            return s;
+          }
+        }
+        private com.google.protobuf.ByteString getImageNameBytes() {
+          java.lang.Object ref = imageName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            imageName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        
+        // optional .com.lvl6.proto.CoordinateProto offSet = 2;
+        public static final int OFFSET_FIELD_NUMBER = 2;
+        private com.lvl6.proto.StructureProto.CoordinateProto offSet_;
+        public boolean hasOffSet() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public com.lvl6.proto.StructureProto.CoordinateProto getOffSet() {
+          return offSet_;
+        }
+        public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getOffSetOrBuilder() {
+          return offSet_;
+        }
+        
+        private void initFields() {
+          imageName_ = "";
+          offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+          
+          memoizedIsInitialized = 1;
+          return true;
+        }
+        
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeBytes(1, getImageNameBytes());
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeMessage(2, offSet_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+        
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+        
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeBytesSize(1, getImageNameBytes());
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeMessageSize(2, offSet_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+        
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+        
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+        
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProtoOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor;
+          }
+          
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable;
+          }
+          
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+          
+          private Builder(BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+              getOffSetFieldBuilder();
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+          
+          public Builder clear() {
+            super.clear();
+            imageName_ = "";
+            bitField0_ = (bitField0_ & ~0x00000001);
+            if (offSetBuilder_ == null) {
+              offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+            } else {
+              offSetBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+          
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+          
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.getDescriptor();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.getDefaultInstance();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+          
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto buildParsed()
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(
+                result).asInvalidProtocolBufferException();
+            }
+            return result;
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.imageName_ = imageName_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            if (offSetBuilder_ == null) {
+              result.offSet_ = offSet_;
+            } else {
+              result.offSet_ = offSetBuilder_.build();
+            }
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+          
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+          
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.getDefaultInstance()) return this;
+            if (other.hasImageName()) {
+              setImageName(other.getImageName());
+            }
+            if (other.hasOffSet()) {
+              mergeOffSet(other.getOffSet());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+          
+          public final boolean isInitialized() {
+            return true;
+          }
+          
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder(
+                this.getUnknownFields());
+            while (true) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    this.setUnknownFields(unknownFields.build());
+                    onChanged();
+                    return this;
+                  }
+                  break;
+                }
+                case 10: {
+                  bitField0_ |= 0x00000001;
+                  imageName_ = input.readBytes();
+                  break;
+                }
+                case 18: {
+                  com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
+                  if (hasOffSet()) {
+                    subBuilder.mergeFrom(getOffSet());
+                  }
+                  input.readMessage(subBuilder, extensionRegistry);
+                  setOffSet(subBuilder.buildPartial());
+                  break;
+                }
+              }
+            }
+          }
+          
+          private int bitField0_;
+          
+          // optional string imageName = 1;
+          private java.lang.Object imageName_ = "";
+          public boolean hasImageName() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          public String getImageName() {
+            java.lang.Object ref = imageName_;
+            if (!(ref instanceof String)) {
+              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+              imageName_ = s;
+              return s;
+            } else {
+              return (String) ref;
+            }
+          }
+          public Builder setImageName(String value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+            imageName_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearImageName() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            imageName_ = getDefaultInstance().getImageName();
+            onChanged();
+            return this;
+          }
+          void setImageName(com.google.protobuf.ByteString value) {
+            bitField0_ |= 0x00000001;
+            imageName_ = value;
+            onChanged();
+          }
+          
+          // optional .com.lvl6.proto.CoordinateProto offSet = 2;
+          private com.lvl6.proto.StructureProto.CoordinateProto offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+          private com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> offSetBuilder_;
+          public boolean hasOffSet() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          public com.lvl6.proto.StructureProto.CoordinateProto getOffSet() {
+            if (offSetBuilder_ == null) {
+              return offSet_;
+            } else {
+              return offSetBuilder_.getMessage();
+            }
+          }
+          public Builder setOffSet(com.lvl6.proto.StructureProto.CoordinateProto value) {
+            if (offSetBuilder_ == null) {
+              if (value == null) {
+                throw new NullPointerException();
+              }
+              offSet_ = value;
+              onChanged();
+            } else {
+              offSetBuilder_.setMessage(value);
+            }
+            bitField0_ |= 0x00000002;
+            return this;
+          }
+          public Builder setOffSet(
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
+            if (offSetBuilder_ == null) {
+              offSet_ = builderForValue.build();
+              onChanged();
+            } else {
+              offSetBuilder_.setMessage(builderForValue.build());
+            }
+            bitField0_ |= 0x00000002;
+            return this;
+          }
+          public Builder mergeOffSet(com.lvl6.proto.StructureProto.CoordinateProto value) {
+            if (offSetBuilder_ == null) {
+              if (((bitField0_ & 0x00000002) == 0x00000002) &&
+                  offSet_ != com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance()) {
+                offSet_ =
+                  com.lvl6.proto.StructureProto.CoordinateProto.newBuilder(offSet_).mergeFrom(value).buildPartial();
+              } else {
+                offSet_ = value;
+              }
+              onChanged();
+            } else {
+              offSetBuilder_.mergeFrom(value);
+            }
+            bitField0_ |= 0x00000002;
+            return this;
+          }
+          public Builder clearOffSet() {
+            if (offSetBuilder_ == null) {
+              offSet_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+              onChanged();
+            } else {
+              offSetBuilder_.clear();
+            }
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+          public com.lvl6.proto.StructureProto.CoordinateProto.Builder getOffSetBuilder() {
+            bitField0_ |= 0x00000002;
+            onChanged();
+            return getOffSetFieldBuilder().getBuilder();
+          }
+          public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getOffSetOrBuilder() {
+            if (offSetBuilder_ != null) {
+              return offSetBuilder_.getMessageOrBuilder();
+            } else {
+              return offSet_;
+            }
+          }
+          private com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
+              getOffSetFieldBuilder() {
+            if (offSetBuilder_ == null) {
+              offSetBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                  com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
+                      offSet_,
+                      getParentForChildren(),
+                      isClean());
+              offSet_ = null;
+            }
+            return offSetBuilder_;
+          }
+          
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)
+        }
+        
+        static {
+          defaultInstance = new AnimatedSpriteOffsetProto(true);
+          defaultInstance.initFields();
+        }
+        
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto)
+      }
+      
+      public interface ClanConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+        
+        // optional int32 diamondPriceToCreateClan = 1;
+        boolean hasDiamondPriceToCreateClan();
+        int getDiamondPriceToCreateClan();
+        
+        // optional int32 maxCharLengthForClanName = 2;
+        boolean hasMaxCharLengthForClanName();
+        int getMaxCharLengthForClanName();
+        
+        // optional int32 maxCharLengthForClanDescription = 3;
+        boolean hasMaxCharLengthForClanDescription();
+        int getMaxCharLengthForClanDescription();
+        
+        // optional int32 maxCharLengthForClanTag = 4;
+        boolean hasMaxCharLengthForClanTag();
+        int getMaxCharLengthForClanTag();
+      }
+      public static final class ClanConstants extends
+          com.google.protobuf.GeneratedMessage
+          implements ClanConstantsOrBuilder {
+        // Use ClanConstants.newBuilder() to construct.
+        private ClanConstants(Builder builder) {
+          super(builder);
+        }
+        private ClanConstants(boolean noInit) {}
+        
+        private static final ClanConstants defaultInstance;
+        public static ClanConstants getDefaultInstance() {
+          return defaultInstance;
+        }
+        
+        public ClanConstants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+        
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable;
+        }
+        
+        private int bitField0_;
+        // optional int32 diamondPriceToCreateClan = 1;
+        public static final int DIAMONDPRICETOCREATECLAN_FIELD_NUMBER = 1;
+        private int diamondPriceToCreateClan_;
+        public boolean hasDiamondPriceToCreateClan() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public int getDiamondPriceToCreateClan() {
+          return diamondPriceToCreateClan_;
+        }
+        
+        // optional int32 maxCharLengthForClanName = 2;
+        public static final int MAXCHARLENGTHFORCLANNAME_FIELD_NUMBER = 2;
+        private int maxCharLengthForClanName_;
+        public boolean hasMaxCharLengthForClanName() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public int getMaxCharLengthForClanName() {
+          return maxCharLengthForClanName_;
+        }
+        
+        // optional int32 maxCharLengthForClanDescription = 3;
+        public static final int MAXCHARLENGTHFORCLANDESCRIPTION_FIELD_NUMBER = 3;
+        private int maxCharLengthForClanDescription_;
+        public boolean hasMaxCharLengthForClanDescription() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public int getMaxCharLengthForClanDescription() {
+          return maxCharLengthForClanDescription_;
+        }
+        
+        // optional int32 maxCharLengthForClanTag = 4;
+        public static final int MAXCHARLENGTHFORCLANTAG_FIELD_NUMBER = 4;
+        private int maxCharLengthForClanTag_;
+        public boolean hasMaxCharLengthForClanTag() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        public int getMaxCharLengthForClanTag() {
+          return maxCharLengthForClanTag_;
+        }
+        
+        private void initFields() {
+          diamondPriceToCreateClan_ = 0;
+          maxCharLengthForClanName_ = 0;
+          maxCharLengthForClanDescription_ = 0;
+          maxCharLengthForClanTag_ = 0;
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+          
+          memoizedIsInitialized = 1;
+          return true;
+        }
+        
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt32(1, diamondPriceToCreateClan_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeInt32(2, maxCharLengthForClanName_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            output.writeInt32(3, maxCharLengthForClanDescription_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            output.writeInt32(4, maxCharLengthForClanTag_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+        
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+        
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(1, diamondPriceToCreateClan_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, maxCharLengthForClanName_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(3, maxCharLengthForClanDescription_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(4, maxCharLengthForClanTag_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+        
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+        
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+        
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor;
+          }
+          
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable;
+          }
+          
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+          
+          private Builder(BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+          
+          public Builder clear() {
+            super.clear();
+            diamondPriceToCreateClan_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            maxCharLengthForClanName_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            maxCharLengthForClanDescription_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            maxCharLengthForClanTag_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000008);
+            return this;
+          }
+          
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+          
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDescriptor();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+          
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants buildParsed()
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(
+                result).asInvalidProtocolBufferException();
+            }
+            return result;
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.diamondPriceToCreateClan_ = diamondPriceToCreateClan_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.maxCharLengthForClanName_ = maxCharLengthForClanName_;
+            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+              to_bitField0_ |= 0x00000004;
+            }
+            result.maxCharLengthForClanDescription_ = maxCharLengthForClanDescription_;
+            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+              to_bitField0_ |= 0x00000008;
+            }
+            result.maxCharLengthForClanTag_ = maxCharLengthForClanTag_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+          
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+          
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance()) return this;
+            if (other.hasDiamondPriceToCreateClan()) {
+              setDiamondPriceToCreateClan(other.getDiamondPriceToCreateClan());
+            }
+            if (other.hasMaxCharLengthForClanName()) {
+              setMaxCharLengthForClanName(other.getMaxCharLengthForClanName());
+            }
+            if (other.hasMaxCharLengthForClanDescription()) {
+              setMaxCharLengthForClanDescription(other.getMaxCharLengthForClanDescription());
+            }
+            if (other.hasMaxCharLengthForClanTag()) {
+              setMaxCharLengthForClanTag(other.getMaxCharLengthForClanTag());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+          
+          public final boolean isInitialized() {
+            return true;
+          }
+          
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder(
+                this.getUnknownFields());
+            while (true) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    this.setUnknownFields(unknownFields.build());
+                    onChanged();
+                    return this;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  diamondPriceToCreateClan_ = input.readInt32();
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  maxCharLengthForClanName_ = input.readInt32();
+                  break;
+                }
+                case 24: {
+                  bitField0_ |= 0x00000004;
+                  maxCharLengthForClanDescription_ = input.readInt32();
+                  break;
+                }
+                case 32: {
+                  bitField0_ |= 0x00000008;
+                  maxCharLengthForClanTag_ = input.readInt32();
+                  break;
+                }
+              }
+            }
+          }
+          
+          private int bitField0_;
+          
+          // optional int32 diamondPriceToCreateClan = 1;
+          private int diamondPriceToCreateClan_ ;
+          public boolean hasDiamondPriceToCreateClan() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          public int getDiamondPriceToCreateClan() {
+            return diamondPriceToCreateClan_;
+          }
+          public Builder setDiamondPriceToCreateClan(int value) {
+            bitField0_ |= 0x00000001;
+            diamondPriceToCreateClan_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearDiamondPriceToCreateClan() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            diamondPriceToCreateClan_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 maxCharLengthForClanName = 2;
+          private int maxCharLengthForClanName_ ;
+          public boolean hasMaxCharLengthForClanName() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          public int getMaxCharLengthForClanName() {
+            return maxCharLengthForClanName_;
+          }
+          public Builder setMaxCharLengthForClanName(int value) {
+            bitField0_ |= 0x00000002;
+            maxCharLengthForClanName_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMaxCharLengthForClanName() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            maxCharLengthForClanName_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 maxCharLengthForClanDescription = 3;
+          private int maxCharLengthForClanDescription_ ;
+          public boolean hasMaxCharLengthForClanDescription() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+          }
+          public int getMaxCharLengthForClanDescription() {
+            return maxCharLengthForClanDescription_;
+          }
+          public Builder setMaxCharLengthForClanDescription(int value) {
+            bitField0_ |= 0x00000004;
+            maxCharLengthForClanDescription_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMaxCharLengthForClanDescription() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            maxCharLengthForClanDescription_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 maxCharLengthForClanTag = 4;
+          private int maxCharLengthForClanTag_ ;
+          public boolean hasMaxCharLengthForClanTag() {
+            return ((bitField0_ & 0x00000008) == 0x00000008);
+          }
+          public int getMaxCharLengthForClanTag() {
+            return maxCharLengthForClanTag_;
+          }
+          public Builder setMaxCharLengthForClanTag(int value) {
+            bitField0_ |= 0x00000008;
+            maxCharLengthForClanTag_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMaxCharLengthForClanTag() {
+            bitField0_ = (bitField0_ & ~0x00000008);
+            maxCharLengthForClanTag_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants)
+        }
+        
+        static {
+          defaultInstance = new ClanConstants(true);
+          defaultInstance.initFields();
+        }
+        
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants)
+      }
+      
+      public interface DownloadableNibConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+        
+        // optional string mapNibName = 1;
+        boolean hasMapNibName();
+        String getMapNibName();
+        
+        // optional string expansionNibName = 2;
+        boolean hasExpansionNibName();
+        String getExpansionNibName();
+        
+        // optional string goldShoppeNibName = 3;
+        boolean hasGoldShoppeNibName();
+        String getGoldShoppeNibName();
+      }
+      public static final class DownloadableNibConstants extends
+          com.google.protobuf.GeneratedMessage
+          implements DownloadableNibConstantsOrBuilder {
+        // Use DownloadableNibConstants.newBuilder() to construct.
+        private DownloadableNibConstants(Builder builder) {
+          super(builder);
+        }
+        private DownloadableNibConstants(boolean noInit) {}
+        
+        private static final DownloadableNibConstants defaultInstance;
+        public static DownloadableNibConstants getDefaultInstance() {
+          return defaultInstance;
+        }
+        
+        public DownloadableNibConstants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+        
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable;
+        }
+        
+        private int bitField0_;
+        // optional string mapNibName = 1;
+        public static final int MAPNIBNAME_FIELD_NUMBER = 1;
+        private java.lang.Object mapNibName_;
+        public boolean hasMapNibName() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public String getMapNibName() {
+          java.lang.Object ref = mapNibName_;
+          if (ref instanceof String) {
+            return (String) ref;
+          } else {
+            com.google.protobuf.ByteString bs = 
+                (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+              mapNibName_ = s;
+            }
+            return s;
+          }
+        }
+        private com.google.protobuf.ByteString getMapNibNameBytes() {
+          java.lang.Object ref = mapNibName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            mapNibName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        
+        // optional string expansionNibName = 2;
+        public static final int EXPANSIONNIBNAME_FIELD_NUMBER = 2;
+        private java.lang.Object expansionNibName_;
+        public boolean hasExpansionNibName() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public String getExpansionNibName() {
+          java.lang.Object ref = expansionNibName_;
+          if (ref instanceof String) {
+            return (String) ref;
+          } else {
+            com.google.protobuf.ByteString bs = 
+                (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+              expansionNibName_ = s;
+            }
+            return s;
+          }
+        }
+        private com.google.protobuf.ByteString getExpansionNibNameBytes() {
+          java.lang.Object ref = expansionNibName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            expansionNibName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        
+        // optional string goldShoppeNibName = 3;
+        public static final int GOLDSHOPPENIBNAME_FIELD_NUMBER = 3;
+        private java.lang.Object goldShoppeNibName_;
+        public boolean hasGoldShoppeNibName() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public String getGoldShoppeNibName() {
+          java.lang.Object ref = goldShoppeNibName_;
+          if (ref instanceof String) {
+            return (String) ref;
+          } else {
+            com.google.protobuf.ByteString bs = 
+                (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+              goldShoppeNibName_ = s;
+            }
+            return s;
+          }
+        }
+        private com.google.protobuf.ByteString getGoldShoppeNibNameBytes() {
+          java.lang.Object ref = goldShoppeNibName_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            goldShoppeNibName_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        
+        private void initFields() {
+          mapNibName_ = "";
+          expansionNibName_ = "";
+          goldShoppeNibName_ = "";
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+          
+          memoizedIsInitialized = 1;
+          return true;
+        }
+        
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeBytes(1, getMapNibNameBytes());
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeBytes(2, getExpansionNibNameBytes());
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            output.writeBytes(3, getGoldShoppeNibNameBytes());
+          }
+          getUnknownFields().writeTo(output);
+        }
+        
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+        
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeBytesSize(1, getMapNibNameBytes());
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeBytesSize(2, getExpansionNibNameBytes());
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeBytesSize(3, getGoldShoppeNibNameBytes());
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+        
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+        
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+        
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
+          }
+          
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable;
+          }
+          
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+          
+          private Builder(BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+          
+          public Builder clear() {
+            super.clear();
+            mapNibName_ = "";
+            bitField0_ = (bitField0_ & ~0x00000001);
+            expansionNibName_ = "";
+            bitField0_ = (bitField0_ & ~0x00000002);
+            goldShoppeNibName_ = "";
+            bitField0_ = (bitField0_ & ~0x00000004);
+            return this;
+          }
+          
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+          
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDescriptor();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+          
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants buildParsed()
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(
+                result).asInvalidProtocolBufferException();
+            }
+            return result;
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.mapNibName_ = mapNibName_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.expansionNibName_ = expansionNibName_;
+            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+              to_bitField0_ |= 0x00000004;
+            }
+            result.goldShoppeNibName_ = goldShoppeNibName_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+          
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+          
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance()) return this;
+            if (other.hasMapNibName()) {
+              setMapNibName(other.getMapNibName());
+            }
+            if (other.hasExpansionNibName()) {
+              setExpansionNibName(other.getExpansionNibName());
+            }
+            if (other.hasGoldShoppeNibName()) {
+              setGoldShoppeNibName(other.getGoldShoppeNibName());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+          
+          public final boolean isInitialized() {
+            return true;
+          }
+          
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder(
+                this.getUnknownFields());
+            while (true) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    this.setUnknownFields(unknownFields.build());
+                    onChanged();
+                    return this;
+                  }
+                  break;
+                }
+                case 10: {
+                  bitField0_ |= 0x00000001;
+                  mapNibName_ = input.readBytes();
+                  break;
+                }
+                case 18: {
+                  bitField0_ |= 0x00000002;
+                  expansionNibName_ = input.readBytes();
+                  break;
+                }
+                case 26: {
+                  bitField0_ |= 0x00000004;
+                  goldShoppeNibName_ = input.readBytes();
+                  break;
+                }
+              }
+            }
+          }
+          
+          private int bitField0_;
+          
+          // optional string mapNibName = 1;
+          private java.lang.Object mapNibName_ = "";
+          public boolean hasMapNibName() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          public String getMapNibName() {
+            java.lang.Object ref = mapNibName_;
+            if (!(ref instanceof String)) {
+              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+              mapNibName_ = s;
+              return s;
+            } else {
+              return (String) ref;
+            }
+          }
+          public Builder setMapNibName(String value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+            mapNibName_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMapNibName() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            mapNibName_ = getDefaultInstance().getMapNibName();
+            onChanged();
+            return this;
+          }
+          void setMapNibName(com.google.protobuf.ByteString value) {
+            bitField0_ |= 0x00000001;
+            mapNibName_ = value;
+            onChanged();
+          }
+          
+          // optional string expansionNibName = 2;
+          private java.lang.Object expansionNibName_ = "";
+          public boolean hasExpansionNibName() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          public String getExpansionNibName() {
+            java.lang.Object ref = expansionNibName_;
+            if (!(ref instanceof String)) {
+              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+              expansionNibName_ = s;
+              return s;
+            } else {
+              return (String) ref;
+            }
+          }
+          public Builder setExpansionNibName(String value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+            expansionNibName_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearExpansionNibName() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            expansionNibName_ = getDefaultInstance().getExpansionNibName();
+            onChanged();
+            return this;
+          }
+          void setExpansionNibName(com.google.protobuf.ByteString value) {
+            bitField0_ |= 0x00000002;
+            expansionNibName_ = value;
+            onChanged();
+          }
+          
+          // optional string goldShoppeNibName = 3;
+          private java.lang.Object goldShoppeNibName_ = "";
+          public boolean hasGoldShoppeNibName() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+          }
+          public String getGoldShoppeNibName() {
+            java.lang.Object ref = goldShoppeNibName_;
+            if (!(ref instanceof String)) {
+              String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+              goldShoppeNibName_ = s;
+              return s;
+            } else {
+              return (String) ref;
+            }
+          }
+          public Builder setGoldShoppeNibName(String value) {
+            if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+            goldShoppeNibName_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearGoldShoppeNibName() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            goldShoppeNibName_ = getDefaultInstance().getGoldShoppeNibName();
+            onChanged();
+            return this;
+          }
+          void setGoldShoppeNibName(com.google.protobuf.ByteString value) {
+            bitField0_ |= 0x00000004;
+            goldShoppeNibName_ = value;
+            onChanged();
+          }
+          
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants)
+        }
+        
+        static {
+          defaultInstance = new DownloadableNibConstants(true);
+          defaultInstance.initFields();
+        }
+        
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants)
+      }
+      
+      public interface TournamentConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+        
+        // optional int32 winsWeight = 1;
+        boolean hasWinsWeight();
+        int getWinsWeight();
+        
+        // optional int32 lossesWeight = 2;
+        boolean hasLossesWeight();
+        int getLossesWeight();
+        
+        // optional int32 fleesWeight = 3;
+        boolean hasFleesWeight();
+        int getFleesWeight();
+        
+        // optional int32 numHoursToShowAfterEventEnd = 4;
+        boolean hasNumHoursToShowAfterEventEnd();
+        int getNumHoursToShowAfterEventEnd();
+      }
+      public static final class TournamentConstants extends
+          com.google.protobuf.GeneratedMessage
+          implements TournamentConstantsOrBuilder {
+        // Use TournamentConstants.newBuilder() to construct.
+        private TournamentConstants(Builder builder) {
+          super(builder);
+        }
+        private TournamentConstants(boolean noInit) {}
+        
+        private static final TournamentConstants defaultInstance;
+        public static TournamentConstants getDefaultInstance() {
+          return defaultInstance;
+        }
+        
+        public TournamentConstants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+        
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
+        }
+        
+        private int bitField0_;
+        // optional int32 winsWeight = 1;
+        public static final int WINSWEIGHT_FIELD_NUMBER = 1;
+        private int winsWeight_;
+        public boolean hasWinsWeight() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public int getWinsWeight() {
+          return winsWeight_;
+        }
+        
+        // optional int32 lossesWeight = 2;
+        public static final int LOSSESWEIGHT_FIELD_NUMBER = 2;
+        private int lossesWeight_;
+        public boolean hasLossesWeight() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public int getLossesWeight() {
+          return lossesWeight_;
+        }
+        
+        // optional int32 fleesWeight = 3;
+        public static final int FLEESWEIGHT_FIELD_NUMBER = 3;
+        private int fleesWeight_;
+        public boolean hasFleesWeight() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public int getFleesWeight() {
+          return fleesWeight_;
+        }
+        
+        // optional int32 numHoursToShowAfterEventEnd = 4;
+        public static final int NUMHOURSTOSHOWAFTEREVENTEND_FIELD_NUMBER = 4;
+        private int numHoursToShowAfterEventEnd_;
+        public boolean hasNumHoursToShowAfterEventEnd() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        public int getNumHoursToShowAfterEventEnd() {
+          return numHoursToShowAfterEventEnd_;
+        }
+        
+        private void initFields() {
+          winsWeight_ = 0;
+          lossesWeight_ = 0;
+          fleesWeight_ = 0;
+          numHoursToShowAfterEventEnd_ = 0;
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+          
+          memoizedIsInitialized = 1;
+          return true;
+        }
+        
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt32(1, winsWeight_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeInt32(2, lossesWeight_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            output.writeInt32(3, fleesWeight_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            output.writeInt32(4, numHoursToShowAfterEventEnd_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+        
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+        
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(1, winsWeight_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, lossesWeight_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(3, fleesWeight_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(4, numHoursToShowAfterEventEnd_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+        
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+        
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+        
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
+          }
+          
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
+          }
+          
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+          
+          private Builder(BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+          
+          public Builder clear() {
+            super.clear();
+            winsWeight_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            lossesWeight_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            fleesWeight_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            numHoursToShowAfterEventEnd_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000008);
+            return this;
+          }
+          
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+          
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDescriptor();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+          
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants buildParsed()
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(
+                result).asInvalidProtocolBufferException();
+            }
+            return result;
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.winsWeight_ = winsWeight_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.lossesWeight_ = lossesWeight_;
+            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+              to_bitField0_ |= 0x00000004;
+            }
+            result.fleesWeight_ = fleesWeight_;
+            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+              to_bitField0_ |= 0x00000008;
+            }
+            result.numHoursToShowAfterEventEnd_ = numHoursToShowAfterEventEnd_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+          
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+          
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance()) return this;
+            if (other.hasWinsWeight()) {
+              setWinsWeight(other.getWinsWeight());
+            }
+            if (other.hasLossesWeight()) {
+              setLossesWeight(other.getLossesWeight());
+            }
+            if (other.hasFleesWeight()) {
+              setFleesWeight(other.getFleesWeight());
+            }
+            if (other.hasNumHoursToShowAfterEventEnd()) {
+              setNumHoursToShowAfterEventEnd(other.getNumHoursToShowAfterEventEnd());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+          
+          public final boolean isInitialized() {
+            return true;
+          }
+          
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder(
+                this.getUnknownFields());
+            while (true) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    this.setUnknownFields(unknownFields.build());
+                    onChanged();
+                    return this;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  winsWeight_ = input.readInt32();
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  lossesWeight_ = input.readInt32();
+                  break;
+                }
+                case 24: {
+                  bitField0_ |= 0x00000004;
+                  fleesWeight_ = input.readInt32();
+                  break;
+                }
+                case 32: {
+                  bitField0_ |= 0x00000008;
+                  numHoursToShowAfterEventEnd_ = input.readInt32();
+                  break;
+                }
+              }
+            }
+          }
+          
+          private int bitField0_;
+          
+          // optional int32 winsWeight = 1;
+          private int winsWeight_ ;
+          public boolean hasWinsWeight() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          public int getWinsWeight() {
+            return winsWeight_;
+          }
+          public Builder setWinsWeight(int value) {
+            bitField0_ |= 0x00000001;
+            winsWeight_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearWinsWeight() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            winsWeight_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 lossesWeight = 2;
+          private int lossesWeight_ ;
+          public boolean hasLossesWeight() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          public int getLossesWeight() {
+            return lossesWeight_;
+          }
+          public Builder setLossesWeight(int value) {
+            bitField0_ |= 0x00000002;
+            lossesWeight_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearLossesWeight() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            lossesWeight_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 fleesWeight = 3;
+          private int fleesWeight_ ;
+          public boolean hasFleesWeight() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+          }
+          public int getFleesWeight() {
+            return fleesWeight_;
+          }
+          public Builder setFleesWeight(int value) {
+            bitField0_ |= 0x00000004;
+            fleesWeight_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearFleesWeight() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            fleesWeight_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 numHoursToShowAfterEventEnd = 4;
+          private int numHoursToShowAfterEventEnd_ ;
+          public boolean hasNumHoursToShowAfterEventEnd() {
+            return ((bitField0_ & 0x00000008) == 0x00000008);
+          }
+          public int getNumHoursToShowAfterEventEnd() {
+            return numHoursToShowAfterEventEnd_;
+          }
+          public Builder setNumHoursToShowAfterEventEnd(int value) {
+            bitField0_ |= 0x00000008;
+            numHoursToShowAfterEventEnd_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearNumHoursToShowAfterEventEnd() {
+            bitField0_ = (bitField0_ & ~0x00000008);
+            numHoursToShowAfterEventEnd_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
+        }
+        
+        static {
+          defaultInstance = new TournamentConstants(true);
+          defaultInstance.initFields();
+        }
+        
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants)
+      }
+      
+      public interface UserMonsterConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+        
+        // optional int32 maxNumTeamSlots = 1;
+        boolean hasMaxNumTeamSlots();
+        int getMaxNumTeamSlots();
+        
+        // optional int32 initialMaxNumMonsterLimit = 2;
+        boolean hasInitialMaxNumMonsterLimit();
+        int getInitialMaxNumMonsterLimit();
+      }
+      public static final class UserMonsterConstants extends
+          com.google.protobuf.GeneratedMessage
+          implements UserMonsterConstantsOrBuilder {
+        // Use UserMonsterConstants.newBuilder() to construct.
+        private UserMonsterConstants(Builder builder) {
+          super(builder);
+        }
+        private UserMonsterConstants(boolean noInit) {}
+        
+        private static final UserMonsterConstants defaultInstance;
+        public static UserMonsterConstants getDefaultInstance() {
+          return defaultInstance;
+        }
+        
+        public UserMonsterConstants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+        
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable;
+        }
+        
+        private int bitField0_;
+        // optional int32 maxNumTeamSlots = 1;
+        public static final int MAXNUMTEAMSLOTS_FIELD_NUMBER = 1;
+        private int maxNumTeamSlots_;
+        public boolean hasMaxNumTeamSlots() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public int getMaxNumTeamSlots() {
+          return maxNumTeamSlots_;
+        }
+        
+        // optional int32 initialMaxNumMonsterLimit = 2;
+        public static final int INITIALMAXNUMMONSTERLIMIT_FIELD_NUMBER = 2;
+        private int initialMaxNumMonsterLimit_;
+        public boolean hasInitialMaxNumMonsterLimit() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public int getInitialMaxNumMonsterLimit() {
+          return initialMaxNumMonsterLimit_;
+        }
+        
+        private void initFields() {
+          maxNumTeamSlots_ = 0;
+          initialMaxNumMonsterLimit_ = 0;
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+          
+          memoizedIsInitialized = 1;
+          return true;
+        }
+        
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt32(1, maxNumTeamSlots_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeInt32(2, initialMaxNumMonsterLimit_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+        
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+        
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(1, maxNumTeamSlots_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, initialMaxNumMonsterLimit_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+        
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+        
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+        
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor;
+          }
+          
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable;
+          }
+          
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+          
+          private Builder(BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+          
+          public Builder clear() {
+            super.clear();
+            maxNumTeamSlots_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            initialMaxNumMonsterLimit_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+          
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+          
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDescriptor();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+          
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants buildParsed()
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(
+                result).asInvalidProtocolBufferException();
+            }
+            return result;
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.maxNumTeamSlots_ = maxNumTeamSlots_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.initialMaxNumMonsterLimit_ = initialMaxNumMonsterLimit_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+          
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+          
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance()) return this;
+            if (other.hasMaxNumTeamSlots()) {
+              setMaxNumTeamSlots(other.getMaxNumTeamSlots());
+            }
+            if (other.hasInitialMaxNumMonsterLimit()) {
+              setInitialMaxNumMonsterLimit(other.getInitialMaxNumMonsterLimit());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+          
+          public final boolean isInitialized() {
+            return true;
+          }
+          
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder(
+                this.getUnknownFields());
+            while (true) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    this.setUnknownFields(unknownFields.build());
+                    onChanged();
+                    return this;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  maxNumTeamSlots_ = input.readInt32();
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  initialMaxNumMonsterLimit_ = input.readInt32();
+                  break;
+                }
+              }
+            }
+          }
+          
+          private int bitField0_;
+          
+          // optional int32 maxNumTeamSlots = 1;
+          private int maxNumTeamSlots_ ;
+          public boolean hasMaxNumTeamSlots() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          public int getMaxNumTeamSlots() {
+            return maxNumTeamSlots_;
+          }
+          public Builder setMaxNumTeamSlots(int value) {
+            bitField0_ |= 0x00000001;
+            maxNumTeamSlots_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMaxNumTeamSlots() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            maxNumTeamSlots_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 initialMaxNumMonsterLimit = 2;
+          private int initialMaxNumMonsterLimit_ ;
+          public boolean hasInitialMaxNumMonsterLimit() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          public int getInitialMaxNumMonsterLimit() {
+            return initialMaxNumMonsterLimit_;
+          }
+          public Builder setInitialMaxNumMonsterLimit(int value) {
+            bitField0_ |= 0x00000002;
+            initialMaxNumMonsterLimit_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearInitialMaxNumMonsterLimit() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            initialMaxNumMonsterLimit_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants)
+        }
+        
+        static {
+          defaultInstance = new UserMonsterConstants(true);
+          defaultInstance.initFields();
+        }
+        
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants)
+      }
+      
       private int bitField0_;
       // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
       public static final int INAPPPURCHASEPACKAGES_FIELD_NUMBER = 1;
@@ -5225,14 +5621,17 @@ public final class EventStartupProto {
         return numBeginnerSalesAllowed_;
       }
       
-      // optional int32 maxNumTeamSlots = 18;
-      public static final int MAXNUMTEAMSLOTS_FIELD_NUMBER = 18;
-      private int maxNumTeamSlots_;
-      public boolean hasMaxNumTeamSlots() {
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 18;
+      public static final int USERMONSTERCONSTANTS_FIELD_NUMBER = 18;
+      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants_;
+      public boolean hasUserMonsterConstants() {
         return ((bitField0_ & 0x00008000) == 0x00008000);
       }
-      public int getMaxNumTeamSlots() {
-        return maxNumTeamSlots_;
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants getUserMonsterConstants() {
+        return userMonsterConstants_;
+      }
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder getUserMonsterConstantsOrBuilder() {
+        return userMonsterConstants_;
       }
       
       private void initFields() {
@@ -5253,7 +5652,7 @@ public final class EventStartupProto {
         faqFileName_ = "";
         adminChatUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         numBeginnerSalesAllowed_ = 0;
-        maxNumTeamSlots_ = 0;
+        userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -5319,7 +5718,7 @@ public final class EventStartupProto {
           output.writeInt32(17, numBeginnerSalesAllowed_);
         }
         if (((bitField0_ & 0x00008000) == 0x00008000)) {
-          output.writeInt32(18, maxNumTeamSlots_);
+          output.writeMessage(18, userMonsterConstants_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -5400,7 +5799,7 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00008000) == 0x00008000)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(18, maxNumTeamSlots_);
+            .computeMessageSize(18, userMonsterConstants_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -5525,6 +5924,7 @@ public final class EventStartupProto {
             getDownloadableNibConstantsFieldBuilder();
             getTouramentConstantsFieldBuilder();
             getAdminChatUserProtoFieldBuilder();
+            getUserMonsterConstantsFieldBuilder();
           }
         }
         private static Builder create() {
@@ -5595,7 +5995,11 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00008000);
           numBeginnerSalesAllowed_ = 0;
           bitField0_ = (bitField0_ & ~0x00010000);
-          maxNumTeamSlots_ = 0;
+          if (userMonsterConstantsBuilder_ == null) {
+            userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
+          } else {
+            userMonsterConstantsBuilder_.clear();
+          }
           bitField0_ = (bitField0_ & ~0x00020000);
           return this;
         }
@@ -5736,7 +6140,11 @@ public final class EventStartupProto {
           if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
             to_bitField0_ |= 0x00008000;
           }
-          result.maxNumTeamSlots_ = maxNumTeamSlots_;
+          if (userMonsterConstantsBuilder_ == null) {
+            result.userMonsterConstants_ = userMonsterConstants_;
+          } else {
+            result.userMonsterConstants_ = userMonsterConstantsBuilder_.build();
+          }
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -5850,8 +6258,8 @@ public final class EventStartupProto {
           if (other.hasNumBeginnerSalesAllowed()) {
             setNumBeginnerSalesAllowed(other.getNumBeginnerSalesAllowed());
           }
-          if (other.hasMaxNumTeamSlots()) {
-            setMaxNumTeamSlots(other.getMaxNumTeamSlots());
+          if (other.hasUserMonsterConstants()) {
+            mergeUserMonsterConstants(other.getUserMonsterConstants());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -5991,9 +6399,13 @@ public final class EventStartupProto {
                 numBeginnerSalesAllowed_ = input.readInt32();
                 break;
               }
-              case 144: {
-                bitField0_ |= 0x00020000;
-                maxNumTeamSlots_ = input.readInt32();
+              case 146: {
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.newBuilder();
+                if (hasUserMonsterConstants()) {
+                  subBuilder.mergeFrom(getUserMonsterConstants());
+                }
+                input.readMessage(subBuilder, extensionRegistry);
+                setUserMonsterConstants(subBuilder.buildPartial());
                 break;
               }
             }
@@ -7049,25 +7461,94 @@ public final class EventStartupProto {
           return this;
         }
         
-        // optional int32 maxNumTeamSlots = 18;
-        private int maxNumTeamSlots_ ;
-        public boolean hasMaxNumTeamSlots() {
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 18;
+        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder> userMonsterConstantsBuilder_;
+        public boolean hasUserMonsterConstants() {
           return ((bitField0_ & 0x00020000) == 0x00020000);
         }
-        public int getMaxNumTeamSlots() {
-          return maxNumTeamSlots_;
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants getUserMonsterConstants() {
+          if (userMonsterConstantsBuilder_ == null) {
+            return userMonsterConstants_;
+          } else {
+            return userMonsterConstantsBuilder_.getMessage();
+          }
         }
-        public Builder setMaxNumTeamSlots(int value) {
+        public Builder setUserMonsterConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants value) {
+          if (userMonsterConstantsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            userMonsterConstants_ = value;
+            onChanged();
+          } else {
+            userMonsterConstantsBuilder_.setMessage(value);
+          }
           bitField0_ |= 0x00020000;
-          maxNumTeamSlots_ = value;
-          onChanged();
           return this;
         }
-        public Builder clearMaxNumTeamSlots() {
-          bitField0_ = (bitField0_ & ~0x00020000);
-          maxNumTeamSlots_ = 0;
-          onChanged();
+        public Builder setUserMonsterConstants(
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder builderForValue) {
+          if (userMonsterConstantsBuilder_ == null) {
+            userMonsterConstants_ = builderForValue.build();
+            onChanged();
+          } else {
+            userMonsterConstantsBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x00020000;
           return this;
+        }
+        public Builder mergeUserMonsterConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants value) {
+          if (userMonsterConstantsBuilder_ == null) {
+            if (((bitField0_ & 0x00020000) == 0x00020000) &&
+                userMonsterConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance()) {
+              userMonsterConstants_ =
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.newBuilder(userMonsterConstants_).mergeFrom(value).buildPartial();
+            } else {
+              userMonsterConstants_ = value;
+            }
+            onChanged();
+          } else {
+            userMonsterConstantsBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x00020000;
+          return this;
+        }
+        public Builder clearUserMonsterConstants() {
+          if (userMonsterConstantsBuilder_ == null) {
+            userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
+            onChanged();
+          } else {
+            userMonsterConstantsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00020000);
+          return this;
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder getUserMonsterConstantsBuilder() {
+          bitField0_ |= 0x00020000;
+          onChanged();
+          return getUserMonsterConstantsFieldBuilder().getBuilder();
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder getUserMonsterConstantsOrBuilder() {
+          if (userMonsterConstantsBuilder_ != null) {
+            return userMonsterConstantsBuilder_.getMessageOrBuilder();
+          } else {
+            return userMonsterConstants_;
+          }
+        }
+        private com.google.protobuf.SingleFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder> 
+            getUserMonsterConstantsFieldBuilder() {
+          if (userMonsterConstantsBuilder_ == null) {
+            userMonsterConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder>(
+                    userMonsterConstants_,
+                    getParentForChildren(),
+                    isClean());
+            userMonsterConstants_ = null;
+          }
+          return userMonsterConstantsBuilder_;
         }
         
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
@@ -11958,30 +12439,35 @@ public final class EventStartupProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable;
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor;
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_fieldAccessorTable;
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -11998,7 +12484,7 @@ public final class EventStartupProto {
       "\215\001\n\023StartupRequestProto\022\014\n\004udid\030\001 \001(\t\022\022\n" +
       "\nversionNum\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\n" +
       "macAddress\030\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022\027" +
-      "\n\017isForceTutorial\030\006 \001(\010\"\227\033\n\024StartupRespo" +
+      "\n\017isForceTutorial\030\006 \001(\010\"\274\034\n\024StartupRespo" +
       "nseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.prot" +
       "o.FullUserProto\022I\n\rstartupStatus\030\002 \001(\01622",
       ".com.lvl6.proto.StartupResponseProto.Sta" +
@@ -12039,7 +12525,7 @@ public final class EventStartupProto {
       "(\005\032\202\001\n\031ReferralNotificationProto\0222\n\010refe" +
       "rred\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
       "roto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenT" +
-      "oReferrer\030\003 \001(\005\032\277\r\n\020StartupConstants\022H\n\025" +
+      "oReferrer\030\003 \001(\005\032\344\016\n\020StartupConstants\022H\n\025" +
       "inAppPurchasePackages\030\001 \003(\0132).com.lvl6.p",
       "roto.InAppPurchasePackageProto\022\027\n\017maxLev" +
       "elForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030" +
@@ -12063,30 +12549,34 @@ public final class EventStartupProto {
       "\022\037\n\027fbConnectRewardDiamonds\030\016 \001(\005\022\023\n\013faq",
       "FileName\030\017 \001(\t\022<\n\022adminChatUserProto\030\020 \001" +
       "(\0132 .com.lvl6.proto.MinimumUserProto\022\037\n\027" +
-      "numBeginnerSalesAllowed\030\021 \001(\005\022\027\n\017maxNumT" +
-      "eamSlots\030\022 \001(\005\032y\n\023TournamentConstants\022\022\n" +
-      "\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022" +
-      "\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowAf" +
-      "terEventEnd\030\004 \001(\005\032c\n\030DownloadableNibCons" +
-      "tants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNi" +
-      "bName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032\235" +
-      "\001\n\rClanConstants\022 \n\030diamondPriceToCreate",
-      "Clan\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002" +
-      " \001(\005\022\'\n\037maxCharLengthForClanDescription\030" +
-      "\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\032_" +
-      "\n\031AnimatedSpriteOffsetProto\022\021\n\timageName" +
-      "\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto." +
-      "CoordinateProto\032\367\001\n\023NormStructConstants\022" +
+      "numBeginnerSalesAllowed\030\021 \001(\005\022h\n\024userMon" +
+      "sterConstants\030\022 \001(\0132J.com.lvl6.proto.Sta" +
+      "rtupResponseProto.StartupConstants.UserM" +
+      "onsterConstants\032\367\001\n\023NormStructConstants\022" +
       "/\n\'minutesToUpgradeForNormStructMultipli" +
       "er\030\001 \001(\001\022&\n\036incomeFromNormStructMultipli" +
       "er\030\002 \001(\001\022)\n!upgradeStructCoinCostExponen" +
       "tBase\030\003 \001(\001\022,\n$upgradeStructDiamondCostE",
       "xponentBase\030\004 \001(\001\022.\n&diamondCostForInsta" +
-      "ntUpgradeMultiplier\030\005 \001(\001\"A\n\014UpdateStatu" +
-      "s\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MA" +
-      "JOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN" +
-      "_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStartu" +
-      "pProto"
+      "ntUpgradeMultiplier\030\005 \001(\001\032_\n\031AnimatedSpr" +
+      "iteOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006off" +
+      "Set\030\002 \001(\0132\037.com.lvl6.proto.CoordinatePro" +
+      "to\032\235\001\n\rClanConstants\022 \n\030diamondPriceToCr" +
+      "eateClan\030\001 \001(\005\022 \n\030maxCharLengthForClanNa" +
+      "me\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescript" +
+      "ion\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001" +
+      "(\005\032c\n\030DownloadableNibConstants\022\022\n\nmapNib" +
+      "Name\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021",
+      "goldShoppeNibName\030\003 \001(\t\032y\n\023TournamentCon" +
+      "stants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeig" +
+      "ht\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHour" +
+      "sToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMonste" +
+      "rConstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031i" +
+      "nitialMaxNumMonsterLimit\030\002 \001(\005\"A\n\014Update" +
+      "Status\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022" +
+      "\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUS" +
+      "ER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventS" +
+      "tartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12130,25 +12620,25 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "MaxNumTeamSlots", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor =
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor,
-              new java.lang.String[] { "WinsWeight", "LossesWeight", "FleesWeight", "NumHoursToShowAfterEventEnd", },
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.class,
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder.class);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor,
+              new java.lang.String[] { "MinutesToUpgradeForNormStructMultiplier", "IncomeFromNormStructMultiplier", "UpgradeStructCoinCostExponentBase", "UpgradeStructDiamondCostExponentBase", "DiamondCostForInstantUpgradeMultiplier", },
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder.class);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(1);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor,
-              new java.lang.String[] { "MapNibName", "ExpansionNibName", "GoldShoppeNibName", },
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.class,
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.Builder.class);
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor,
+              new java.lang.String[] { "ImageName", "OffSet", },
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(2);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable = new
@@ -12157,22 +12647,30 @@ public final class EventStartupProto {
               new java.lang.String[] { "DiamondPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder.class);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(3);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor,
-              new java.lang.String[] { "ImageName", "OffSet", },
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.class,
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.Builder.class);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor =
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor,
+              new java.lang.String[] { "MapNibName", "ExpansionNibName", "GoldShoppeNibName", },
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.Builder.class);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(4);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor,
-              new java.lang.String[] { "MinutesToUpgradeForNormStructMultiplier", "IncomeFromNormStructMultiplier", "UpgradeStructCoinCostExponentBase", "UpgradeStructDiamondCostExponentBase", "DiamondCostForInstantUpgradeMultiplier", },
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.class,
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder.class);
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor,
+              new java.lang.String[] { "WinsWeight", "LossesWeight", "FleesWeight", "NumHoursToShowAfterEventEnd", },
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder.class);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(5);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor,
+              new java.lang.String[] { "MaxNumTeamSlots", "InitialMaxNumMonsterLimit", },
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder.class);
           return null;
         }
       };

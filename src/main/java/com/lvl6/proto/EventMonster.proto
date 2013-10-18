@@ -65,6 +65,8 @@ message HealMonsterRequestProto {
 	//the ones the server doesn't know about
 	repeated UserMonsterHealingProto umhNew = 4;
 	
+	//take away all cash/silver then take away gems
+	optional int32 gemCost = 5;
 }
 
 message HealMonsterResponseProto {
@@ -77,6 +79,28 @@ message HealMonsterResponseProto {
 		FAIL_ALL_MONSTERS_ALREADY_HEALING = 3;
 		FAIL_ALL_MONSTERS_NONEXISTENT = 4;
 		FAIL_OTHER = 5;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message HealMonsterWaitTimeCompleteRequestProto {
+	optional MinimumUserProto sender = 1;
+	//speeds up all or nothing, 
+	optional bool isSpeedup = 2; 
+	repeated int64 userMonsterIds = 3;
+	
+}
+
+message HealMonsterWaitTimeCompleteResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional HealMonsterWaitTimeCompleteStatus status = 2;
+	
+	enum HealMonsterWaitTimeCompleteStatus {
+		SUCCESS = 1;
+		FAIL_HEALING_NOT_COMPLETE = 2;
+		FAIL_INSUFFICIENT_FUNDS = 3;
+		FAIL_OTHER = 4;
 	}
 }
 

@@ -2851,6 +2851,10 @@ public final class EventMonsterProto {
         getUmhNewOrBuilderList();
     com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getUmhNewOrBuilder(
         int index);
+    
+    // optional int32 gemCost = 5;
+    boolean hasGemCost();
+    int getGemCost();
   }
   public static final class HealMonsterRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -2957,11 +2961,22 @@ public final class EventMonsterProto {
       return umhNew_.get(index);
     }
     
+    // optional int32 gemCost = 5;
+    public static final int GEMCOST_FIELD_NUMBER = 5;
+    private int gemCost_;
+    public boolean hasGemCost() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getGemCost() {
+      return gemCost_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       umhDelete_ = java.util.Collections.emptyList();
       umhUpdate_ = java.util.Collections.emptyList();
       umhNew_ = java.util.Collections.emptyList();
+      gemCost_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2987,6 +3002,9 @@ public final class EventMonsterProto {
       for (int i = 0; i < umhNew_.size(); i++) {
         output.writeMessage(4, umhNew_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(5, gemCost_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -3011,6 +3029,10 @@ public final class EventMonsterProto {
       for (int i = 0; i < umhNew_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, umhNew_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemCost_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3164,6 +3186,8 @@ public final class EventMonsterProto {
         } else {
           umhNewBuilder_.clear();
         }
+        gemCost_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -3237,6 +3261,10 @@ public final class EventMonsterProto {
         } else {
           result.umhNew_ = umhNewBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.gemCost_ = gemCost_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3334,6 +3362,9 @@ public final class EventMonsterProto {
             }
           }
         }
+        if (other.hasGemCost()) {
+          setGemCost(other.getGemCost());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -3390,6 +3421,11 @@ public final class EventMonsterProto {
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUmhNew(subBuilder.buildPartial());
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              gemCost_ = input.readInt32();
               break;
             }
           }
@@ -4046,6 +4082,27 @@ public final class EventMonsterProto {
         return umhNewBuilder_;
       }
       
+      // optional int32 gemCost = 5;
+      private int gemCost_ ;
+      public boolean hasGemCost() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getGemCost() {
+        return gemCost_;
+      }
+      public Builder setGemCost(int value) {
+        bitField0_ |= 0x00000010;
+        gemCost_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemCost() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemCost_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.HealMonsterRequestProto)
     }
     
@@ -4625,6 +4682,1160 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.HealMonsterResponseProto)
   }
   
+  public interface HealMonsterWaitTimeCompleteRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional bool isSpeedup = 2;
+    boolean hasIsSpeedup();
+    boolean getIsSpeedup();
+    
+    // repeated int64 userMonsterIds = 3;
+    java.util.List<java.lang.Long> getUserMonsterIdsList();
+    int getUserMonsterIdsCount();
+    long getUserMonsterIds(int index);
+  }
+  public static final class HealMonsterWaitTimeCompleteRequestProto extends
+      com.google.protobuf.GeneratedMessage
+      implements HealMonsterWaitTimeCompleteRequestProtoOrBuilder {
+    // Use HealMonsterWaitTimeCompleteRequestProto.newBuilder() to construct.
+    private HealMonsterWaitTimeCompleteRequestProto(Builder builder) {
+      super(builder);
+    }
+    private HealMonsterWaitTimeCompleteRequestProto(boolean noInit) {}
+    
+    private static final HealMonsterWaitTimeCompleteRequestProto defaultInstance;
+    public static HealMonsterWaitTimeCompleteRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public HealMonsterWaitTimeCompleteRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional bool isSpeedup = 2;
+    public static final int ISSPEEDUP_FIELD_NUMBER = 2;
+    private boolean isSpeedup_;
+    public boolean hasIsSpeedup() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public boolean getIsSpeedup() {
+      return isSpeedup_;
+    }
+    
+    // repeated int64 userMonsterIds = 3;
+    public static final int USERMONSTERIDS_FIELD_NUMBER = 3;
+    private java.util.List<java.lang.Long> userMonsterIds_;
+    public java.util.List<java.lang.Long>
+        getUserMonsterIdsList() {
+      return userMonsterIds_;
+    }
+    public int getUserMonsterIdsCount() {
+      return userMonsterIds_.size();
+    }
+    public long getUserMonsterIds(int index) {
+      return userMonsterIds_.get(index);
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      isSpeedup_ = false;
+      userMonsterIds_ = java.util.Collections.emptyList();;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, isSpeedup_);
+      }
+      for (int i = 0; i < userMonsterIds_.size(); i++) {
+        output.writeInt64(3, userMonsterIds_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, isSpeedup_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < userMonsterIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt64SizeNoTag(userMonsterIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getUserMonsterIdsList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        isSpeedup_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userMonsterIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto build() {
+        com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto buildPartial() {
+        com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto result = new com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.isSpeedup_ = isSpeedup_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.userMonsterIds_ = userMonsterIds_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto other) {
+        if (other == com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasIsSpeedup()) {
+          setIsSpeedup(other.getIsSpeedup());
+        }
+        if (!other.userMonsterIds_.isEmpty()) {
+          if (userMonsterIds_.isEmpty()) {
+            userMonsterIds_ = other.userMonsterIds_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureUserMonsterIdsIsMutable();
+            userMonsterIds_.addAll(other.userMonsterIds_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              isSpeedup_ = input.readBool();
+              break;
+            }
+            case 24: {
+              ensureUserMonsterIdsIsMutable();
+              userMonsterIds_.add(input.readInt64());
+              break;
+            }
+            case 26: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addUserMonsterIds(input.readInt64());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional bool isSpeedup = 2;
+      private boolean isSpeedup_ ;
+      public boolean hasIsSpeedup() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public boolean getIsSpeedup() {
+        return isSpeedup_;
+      }
+      public Builder setIsSpeedup(boolean value) {
+        bitField0_ |= 0x00000002;
+        isSpeedup_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsSpeedup() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        isSpeedup_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // repeated int64 userMonsterIds = 3;
+      private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();;
+      private void ensureUserMonsterIdsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      public java.util.List<java.lang.Long>
+          getUserMonsterIdsList() {
+        return java.util.Collections.unmodifiableList(userMonsterIds_);
+      }
+      public int getUserMonsterIdsCount() {
+        return userMonsterIds_.size();
+      }
+      public long getUserMonsterIds(int index) {
+        return userMonsterIds_.get(index);
+      }
+      public Builder setUserMonsterIds(
+          int index, long value) {
+        ensureUserMonsterIdsIsMutable();
+        userMonsterIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addUserMonsterIds(long value) {
+        ensureUserMonsterIdsIsMutable();
+        userMonsterIds_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllUserMonsterIds(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureUserMonsterIdsIsMutable();
+        super.addAll(values, userMonsterIds_);
+        onChanged();
+        return this;
+      }
+      public Builder clearUserMonsterIds() {
+        userMonsterIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.HealMonsterWaitTimeCompleteRequestProto)
+    }
+    
+    static {
+      defaultInstance = new HealMonsterWaitTimeCompleteRequestProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.HealMonsterWaitTimeCompleteRequestProto)
+  }
+  
+  public interface HealMonsterWaitTimeCompleteResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional .com.lvl6.proto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus status = 2;
+    boolean hasStatus();
+    com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus getStatus();
+  }
+  public static final class HealMonsterWaitTimeCompleteResponseProto extends
+      com.google.protobuf.GeneratedMessage
+      implements HealMonsterWaitTimeCompleteResponseProtoOrBuilder {
+    // Use HealMonsterWaitTimeCompleteResponseProto.newBuilder() to construct.
+    private HealMonsterWaitTimeCompleteResponseProto(Builder builder) {
+      super(builder);
+    }
+    private HealMonsterWaitTimeCompleteResponseProto(boolean noInit) {}
+    
+    private static final HealMonsterWaitTimeCompleteResponseProto defaultInstance;
+    public static HealMonsterWaitTimeCompleteResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public HealMonsterWaitTimeCompleteResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_fieldAccessorTable;
+    }
+    
+    public enum HealMonsterWaitTimeCompleteStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      SUCCESS(0, 1),
+      FAIL_HEALING_NOT_COMPLETE(1, 2),
+      FAIL_INSUFFICIENT_FUNDS(2, 3),
+      FAIL_OTHER(3, 4),
+      ;
+      
+      public static final int SUCCESS_VALUE = 1;
+      public static final int FAIL_HEALING_NOT_COMPLETE_VALUE = 2;
+      public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 3;
+      public static final int FAIL_OTHER_VALUE = 4;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static HealMonsterWaitTimeCompleteStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_HEALING_NOT_COMPLETE;
+          case 3: return FAIL_INSUFFICIENT_FUNDS;
+          case 4: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<HealMonsterWaitTimeCompleteStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<HealMonsterWaitTimeCompleteStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<HealMonsterWaitTimeCompleteStatus>() {
+              public HealMonsterWaitTimeCompleteStatus findValueByNumber(int number) {
+                return HealMonsterWaitTimeCompleteStatus.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final HealMonsterWaitTimeCompleteStatus[] VALUES = {
+        SUCCESS, FAIL_HEALING_NOT_COMPLETE, FAIL_INSUFFICIENT_FUNDS, FAIL_OTHER, 
+      };
+      
+      public static HealMonsterWaitTimeCompleteStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private HealMonsterWaitTimeCompleteStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus)
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional .com.lvl6.proto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus status = 2;
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus status_;
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus getStatus() {
+      return status_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto build() {
+        com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto buildPartial() {
+        com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto result = new com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto other) {
+        if (other == com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus value = com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus status = 2;
+      private com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus status_ = com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus.SUCCESS;
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus getStatus() {
+        return status_;
+      }
+      public Builder setStatus(com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.HealMonsterWaitTimeCompleteResponseProto)
+    }
+    
+    static {
+      defaultInstance = new HealMonsterWaitTimeCompleteResponseProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.HealMonsterWaitTimeCompleteResponseProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor;
   private static
@@ -4655,6 +5866,16 @@ public final class EventMonsterProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_HealMonsterResponseProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4691,21 +5912,34 @@ public final class EventMonsterProto {
       "erHealthResponseProto.UpdateMonsterHealt" +
       "hStatus\"U\n\031UpdateMonsterHealthStatus\022\013\n\007" +
       "SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016" +
-      "\n\nFAIL_OTHER\020\003\"\374\001\n\027HealMonsterRequestPro" +
+      "\n\nFAIL_OTHER\020\003\"\215\002\n\027HealMonsterRequestPro" +
       "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
       "mumUserProto\022:\n\tumhDelete\030\002 \003(\0132\'.com.lv",
       "l6.proto.UserMonsterHealingProto\022:\n\tumhU" +
       "pdate\030\003 \003(\0132\'.com.lvl6.proto.UserMonster" +
       "HealingProto\0227\n\006umhNew\030\004 \003(\0132\'.com.lvl6." +
-      "proto.UserMonsterHealingProto\"\262\002\n\030HealMo" +
-      "nsterResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022J\n\006status\030\002" +
-      " \001(\0162:.com.lvl6.proto.HealMonsterRespons" +
-      "eProto.HealMonsterStatus\"\227\001\n\021HealMonster" +
-      "Status\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT" +
-      "_FUNDS\020\002\022%\n!FAIL_ALL_MONSTERS_ALREADY_HE",
-      "ALING\020\003\022!\n\035FAIL_ALL_MONSTERS_NONEXISTENT" +
-      "\020\004\022\016\n\nFAIL_OTHER\020\005B\023B\021EventMonsterProto"
+      "proto.UserMonsterHealingProto\022\017\n\007gemCost" +
+      "\030\005 \001(\005\"\262\002\n\030HealMonsterResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022J\n\006status\030\002 \001(\0162:.com.lvl6.proto.H" +
+      "ealMonsterResponseProto.HealMonsterStatu" +
+      "s\"\227\001\n\021HealMonsterStatus\022\013\n\007SUCCESS\020\001\022\033\n\027" +
+      "FAIL_INSUFFICIENT_FUNDS\020\002\022%\n!FAIL_ALL_MO",
+      "NSTERS_ALREADY_HEALING\020\003\022!\n\035FAIL_ALL_MON" +
+      "STERS_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\"\206\001\n\'" +
+      "HealMonsterWaitTimeCompleteRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016userMons" +
+      "terIds\030\003 \003(\003\"\306\002\n(HealMonsterWaitTimeComp" +
+      "leteResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022j\n\006status\030\002 " +
+      "\001(\0162Z.com.lvl6.proto.HealMonsterWaitTime" +
+      "CompleteResponseProto.HealMonsterWaitTim",
+      "eCompleteStatus\"|\n!HealMonsterWaitTimeCo" +
+      "mpleteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_HEALIN" +
+      "G_NOT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFICIENT_FU" +
+      "NDS\020\003\022\016\n\nFAIL_OTHER\020\004B\023B\021EventMonsterPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4749,7 +5983,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_HealMonsterRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", },
+              new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "GemCost", },
               com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto.class,
               com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto.Builder.class);
           internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor =
@@ -4760,6 +5994,22 @@ public final class EventMonsterProto {
               new java.lang.String[] { "Sender", "Status", },
               com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.class,
               com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.Builder.class);
+          internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "IsSpeedup", "UserMonsterIds", },
+              com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto.class,
+              com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+          internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", },
+              com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.class,
+              com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.Builder.class);
           return null;
         }
       };

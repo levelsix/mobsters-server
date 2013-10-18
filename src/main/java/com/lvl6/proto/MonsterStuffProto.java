@@ -166,19 +166,17 @@ public final class MonsterStuffProto {
     public enum MonsterQuality
         implements com.google.protobuf.ProtocolMessageEnum {
       COMMON(0, 1),
-      UNCOMMON(1, 2),
-      RARE(2, 3),
-      ULTRA(3, 4),
-      EPIC(4, 5),
-      LEGENDARY(5, 6),
+      RARE(1, 2),
+      ULTRA(2, 3),
+      EPIC(3, 4),
+      LEGENDARY(4, 5),
       ;
       
       public static final int COMMON_VALUE = 1;
-      public static final int UNCOMMON_VALUE = 2;
-      public static final int RARE_VALUE = 3;
-      public static final int ULTRA_VALUE = 4;
-      public static final int EPIC_VALUE = 5;
-      public static final int LEGENDARY_VALUE = 6;
+      public static final int RARE_VALUE = 2;
+      public static final int ULTRA_VALUE = 3;
+      public static final int EPIC_VALUE = 4;
+      public static final int LEGENDARY_VALUE = 5;
       
       
       public final int getNumber() { return value; }
@@ -186,11 +184,10 @@ public final class MonsterStuffProto {
       public static MonsterQuality valueOf(int value) {
         switch (value) {
           case 1: return COMMON;
-          case 2: return UNCOMMON;
-          case 3: return RARE;
-          case 4: return ULTRA;
-          case 5: return EPIC;
-          case 6: return LEGENDARY;
+          case 2: return RARE;
+          case 3: return ULTRA;
+          case 4: return EPIC;
+          case 5: return LEGENDARY;
           default: return null;
         }
       }
@@ -221,7 +218,7 @@ public final class MonsterStuffProto {
       }
       
       private static final MonsterQuality[] VALUES = {
-        COMMON, UNCOMMON, RARE, ULTRA, EPIC, LEGENDARY, 
+        COMMON, RARE, ULTRA, EPIC, LEGENDARY, 
       };
       
       public static MonsterQuality valueOf(
@@ -2669,7 +2666,7 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\370\004\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\352\004\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
       "\030\002 \001(\t\022<\n\007quality\030\003 \001(\0162+.com.lvl6.proto" +
       ".MonsterProto.MonsterQuality\022\026\n\016evolutio" +
@@ -2681,20 +2678,19 @@ public final class MonsterStuffProto {
       "eward\030\n \001(\005\022\024\n\014silverReward\030\013 \001(\005\022\032\n\022mon",
       "sterIdSuccessor\030\014 \001(\005\022\032\n\022puzzlePieceDrop" +
       "ped\030\r \001(\010\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
-      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"X\n\016MonsterQuality" +
-      "\022\n\n\006COMMON\020\001\022\014\n\010UNCOMMON\020\002\022\010\n\004RARE\020\003\022\t\n\005" +
-      "ULTRA\020\004\022\010\n\004EPIC\020\005\022\r\n\tLEGENDARY\020\006\"M\n\016Mons" +
-      "terElement\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER" +
-      "\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\"\302\001\n\024Full" +
-      "UserMonsterProto\022\025\n\ruserMonsterId\030\001 \001(\003\022" +
-      "\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\035\n\025en" +
-      "hancementPercentage\030\004 \001(\005\022\025\n\rcurrentHeal",
-      "th\030\005 \001(\005\022\021\n\tnumPieces\030\006 \001(\005\022\022\n\nisComplet" +
-      "e\030\007 \001(\010\022\023\n\013teamSlotNum\030\010 \001(\005\"{\n\027UserMons" +
-      "terHealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserM" +
-      "onsterId\030\002 \001(\003\022\037\n\027expectedStartTimeMilli" +
-      "s\030\003 \001(\003\022\030\n\020queuedTimeMillis\030\004 \001(\003B\023B\021Mon" +
-      "sterStuffProto"
+      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"J\n\016MonsterQuality" +
+      "\022\n\n\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPI" +
+      "C\020\004\022\r\n\tLEGENDARY\020\005\"M\n\016MonsterElement\022\010\n\004" +
+      "FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTNIN" +
+      "G\020\004\022\014\n\010DARKNESS\020\005\"\302\001\n\024FullUserMonsterPro" +
+      "to\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(" +
+      "\005\022\021\n\tmonsterId\030\003 \001(\005\022\035\n\025enhancementPerce" +
+      "ntage\030\004 \001(\005\022\025\n\rcurrentHealth\030\005 \001(\005\022\021\n\tnu",
+      "mPieces\030\006 \001(\005\022\022\n\nisComplete\030\007 \001(\010\022\023\n\013tea" +
+      "mSlotNum\030\010 \001(\005\"{\n\027UserMonsterHealingProt" +
+      "o\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003" +
+      "\022\037\n\027expectedStartTimeMillis\030\003 \001(\003\022\030\n\020que" +
+      "uedTimeMillis\030\004 \001(\003B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
