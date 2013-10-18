@@ -945,7 +945,7 @@ public class CreateInfoProtoUtils {
     MonsterProto.Builder mpb = MonsterProto.newBuilder();
 
 
-    mpb.setMonsterId(monsterId);
+    mpb.setMonsterId(aMonster.getId());
     mpb.setName(aMonster.getName());
 
     int val = aMonster.getQuality();
