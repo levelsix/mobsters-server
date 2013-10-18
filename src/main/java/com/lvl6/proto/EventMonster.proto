@@ -86,10 +86,11 @@ message HealMonsterResponseProto {
 
 message HealMonsterWaitTimeCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
-	//speeds up all or nothing, 
+	//speeds up all or some monsters finished healing by waiting 
 	optional bool isSpeedup = 2; 
-	repeated int64 userMonsterIds = 3;
-	
+	//will be set if isSpeedup is true
+	optional int32 gemsForSpeedup = 3;
+	repeated int64 userMonsterIds = 4;
 }
 
 message HealMonsterWaitTimeCompleteResponseProto {

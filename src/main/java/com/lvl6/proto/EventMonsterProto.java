@@ -4694,7 +4694,11 @@ public final class EventMonsterProto {
     boolean hasIsSpeedup();
     boolean getIsSpeedup();
     
-    // repeated int64 userMonsterIds = 3;
+    // optional int32 gemsForSpeedup = 3;
+    boolean hasGemsForSpeedup();
+    int getGemsForSpeedup();
+    
+    // repeated int64 userMonsterIds = 4;
     java.util.List<java.lang.Long> getUserMonsterIdsList();
     int getUserMonsterIdsCount();
     long getUserMonsterIds(int index);
@@ -4751,8 +4755,18 @@ public final class EventMonsterProto {
       return isSpeedup_;
     }
     
-    // repeated int64 userMonsterIds = 3;
-    public static final int USERMONSTERIDS_FIELD_NUMBER = 3;
+    // optional int32 gemsForSpeedup = 3;
+    public static final int GEMSFORSPEEDUP_FIELD_NUMBER = 3;
+    private int gemsForSpeedup_;
+    public boolean hasGemsForSpeedup() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getGemsForSpeedup() {
+      return gemsForSpeedup_;
+    }
+    
+    // repeated int64 userMonsterIds = 4;
+    public static final int USERMONSTERIDS_FIELD_NUMBER = 4;
     private java.util.List<java.lang.Long> userMonsterIds_;
     public java.util.List<java.lang.Long>
         getUserMonsterIdsList() {
@@ -4768,6 +4782,7 @@ public final class EventMonsterProto {
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       isSpeedup_ = false;
+      gemsForSpeedup_ = 0;
       userMonsterIds_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
@@ -4788,8 +4803,11 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBool(2, isSpeedup_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, gemsForSpeedup_);
+      }
       for (int i = 0; i < userMonsterIds_.size(); i++) {
-        output.writeInt64(3, userMonsterIds_.get(i));
+        output.writeInt64(4, userMonsterIds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -4807,6 +4825,10 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(2, isSpeedup_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, gemsForSpeedup_);
       }
       {
         int dataSize = 0;
@@ -4950,8 +4972,10 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         isSpeedup_ = false;
         bitField0_ = (bitField0_ & ~0x00000002);
-        userMonsterIds_ = java.util.Collections.emptyList();;
+        gemsForSpeedup_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        userMonsterIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -5002,9 +5026,13 @@ public final class EventMonsterProto {
           to_bitField0_ |= 0x00000002;
         }
         result.isSpeedup_ = isSpeedup_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.gemsForSpeedup_ = gemsForSpeedup_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
           userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.userMonsterIds_ = userMonsterIds_;
         result.bitField0_ = to_bitField0_;
@@ -5029,10 +5057,13 @@ public final class EventMonsterProto {
         if (other.hasIsSpeedup()) {
           setIsSpeedup(other.getIsSpeedup());
         }
+        if (other.hasGemsForSpeedup()) {
+          setGemsForSpeedup(other.getGemsForSpeedup());
+        }
         if (!other.userMonsterIds_.isEmpty()) {
           if (userMonsterIds_.isEmpty()) {
             userMonsterIds_ = other.userMonsterIds_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000008);
           } else {
             ensureUserMonsterIdsIsMutable();
             userMonsterIds_.addAll(other.userMonsterIds_);
@@ -5085,11 +5116,16 @@ public final class EventMonsterProto {
               break;
             }
             case 24: {
+              bitField0_ |= 0x00000004;
+              gemsForSpeedup_ = input.readInt32();
+              break;
+            }
+            case 32: {
               ensureUserMonsterIdsIsMutable();
               userMonsterIds_.add(input.readInt64());
               break;
             }
-            case 26: {
+            case 34: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -5215,12 +5251,33 @@ public final class EventMonsterProto {
         return this;
       }
       
-      // repeated int64 userMonsterIds = 3;
+      // optional int32 gemsForSpeedup = 3;
+      private int gemsForSpeedup_ ;
+      public boolean hasGemsForSpeedup() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getGemsForSpeedup() {
+        return gemsForSpeedup_;
+      }
+      public Builder setGemsForSpeedup(int value) {
+        bitField0_ |= 0x00000004;
+        gemsForSpeedup_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemsForSpeedup() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        gemsForSpeedup_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // repeated int64 userMonsterIds = 4;
       private java.util.List<java.lang.Long> userMonsterIds_ = java.util.Collections.emptyList();;
       private void ensureUserMonsterIdsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           userMonsterIds_ = new java.util.ArrayList<java.lang.Long>(userMonsterIds_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000008;
          }
       }
       public java.util.List<java.lang.Long>
@@ -5255,7 +5312,7 @@ public final class EventMonsterProto {
       }
       public Builder clearUserMonsterIds() {
         userMonsterIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -5926,20 +5983,20 @@ public final class EventMonsterProto {
       "s\"\227\001\n\021HealMonsterStatus\022\013\n\007SUCCESS\020\001\022\033\n\027" +
       "FAIL_INSUFFICIENT_FUNDS\020\002\022%\n!FAIL_ALL_MO",
       "NSTERS_ALREADY_HEALING\020\003\022!\n\035FAIL_ALL_MON" +
-      "STERS_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\"\206\001\n\'" +
+      "STERS_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\"\236\001\n\'" +
       "HealMonsterWaitTimeCompleteRequestProto\022" +
       "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016userMons" +
-      "terIds\030\003 \003(\003\"\306\002\n(HealMonsterWaitTimeComp" +
-      "leteResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022j\n\006status\030\002 " +
-      "\001(\0162Z.com.lvl6.proto.HealMonsterWaitTime" +
-      "CompleteResponseProto.HealMonsterWaitTim",
-      "eCompleteStatus\"|\n!HealMonsterWaitTimeCo" +
-      "mpleteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_HEALIN" +
-      "G_NOT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFICIENT_FU" +
-      "NDS\020\003\022\016\n\nFAIL_OTHER\020\004B\023B\021EventMonsterPro" +
-      "to"
+      "UserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsForS" +
+      "peedup\030\003 \001(\005\022\026\n\016userMonsterIds\030\004 \003(\003\"\306\002\n" +
+      "(HealMonsterWaitTimeCompleteResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022j\n\006status\030\002 \001(\0162Z.com.lvl6.p" +
+      "roto.HealMonsterWaitTimeCompleteResponse",
+      "Proto.HealMonsterWaitTimeCompleteStatus\"" +
+      "|\n!HealMonsterWaitTimeCompleteStatus\022\013\n\007" +
+      "SUCCESS\020\001\022\035\n\031FAIL_HEALING_NOT_COMPLETE\020\002" +
+      "\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\003\022\016\n\nFAIL_OT" +
+      "HER\020\004B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5999,7 +6056,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "IsSpeedup", "UserMonsterIds", },
+              new java.lang.String[] { "Sender", "IsSpeedup", "GemsForSpeedup", "UserMonsterIds", },
               com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto.class,
               com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto.Builder.class);
           internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteResponseProto_descriptor =

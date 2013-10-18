@@ -24,49 +24,46 @@ message StartupRequestProto {				//client will also send ChangeUserLocationReque
 }
 
 message StartupResponseProto {
-    optional FullUserProto sender = 1;
-    optional StartupStatus startupStatus= 2;
-    optional UpdateStatus updateStatus= 3;
-    optional StartupConstants startupConstants = 4;
-    repeated FullCityProto allCities = 5;
+	optional int64 serverTimeMillis = 1;
+    optional FullUserProto sender = 2;
+    optional StartupStatus startupStatus= 3;
+    optional UpdateStatus updateStatus= 4;
+    optional StartupConstants startupConstants = 5;
+    repeated FullCityProto allCities = 6;
     
-    repeated FullQuestProto inProgressIncompleteQuests = 6;
-    repeated FullQuestProto inProgressCompleteQuests = 7;
-	repeated FullQuestProto availableQuests = 8;   
-	repeated FullUserClanProto userClanInfo = 9;
+    repeated FullQuestProto inProgressIncompleteQuests = 7;
+    repeated FullQuestProto inProgressCompleteQuests = 8;
+	repeated FullQuestProto availableQuests = 9;   
+	repeated FullUserClanProto userClanInfo = 10;
 	
-	repeated AttackedNotificationProto attackNotifications = 10;
-	repeated ReferralNotificationProto referralNotifications = 11;
+	optional string appStoreURL = 11;
+	optional string reviewPageURL = 12;
+	optional string reviewPageConfirmationMessage = 13;
+	optional bool playerHasBoughtInAppPurchase = 14;
+	repeated GoldSaleProto goldSales = 15;
 	
-	//repeated LockBoxEventProto lockBoxEvents = 12;
-	//repeated UserLockBoxEventProto userLockBoxEvents = 13;
-	
-	optional string appStoreURL = 14;
-	optional string reviewPageURL = 15;
-	optional string reviewPageConfirmationMessage = 16;
-	
-	optional bool playerHasBoughtInAppPurchase = 17;
-
+	repeated AttackedNotificationProto attackNotifications = 16;
+	repeated ReferralNotificationProto referralNotifications = 17;
 	repeated string noticesToPlayers = 18;
-		
 	repeated GroupChatMessageProto globalChats = 19;
 	repeated GroupChatMessageProto clanChats = 20;
-	
-	repeated GoldSaleProto goldSales = 21;
+	//repeated most recent private chat posts regarding this user
+	repeated PrivateChatPostProto pcpp = 21;
 	
 	repeated FullStructureProto staticStructs = 22;
+	repeated CityExpansionCostProto expansionCosts = 23;
+	repeated MonsterProto staticMonsters = 24;
 	
-	repeated RareBoosterPurchaseProto rareBoosterPurchases = 23;
+	repeated RareBoosterPurchaseProto rareBoosterPurchases = 25;
 	
-	optional string kabamNaid = 24;
+	optional string kabamNaid = 26;
 	
-	//repeated most recent private chat posts regarding this user
-	repeated PrivateChatPostProto pcpp = 25;
+	repeated UserMonsterHealingProto monstersHealing = 27;
 	
-	repeated CityExpansionCostProto expansionCosts = 26;
 	
-	repeated MonsterProto staticMonsters = 27;
 	
+	//repeated LockBoxEventProto lockBoxEvents = ;
+	//repeated UserLockBoxEventProto userLockBoxEvents = ;
 
 	message AttackedNotificationProto {
 		optional MinimumUserProto attacker = 1;

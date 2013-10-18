@@ -190,23 +190,25 @@ public class StartupController extends EventController {
 //          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
           setCitiesAndUserCityInfos(resBuilder, user);
           setInProgressAndAvailableQuests(resBuilder, user);
-          setUserEquipsAndEquips(resBuilder, user);
+          setUserClanInfos(resBuilder, user);
           setNotifications(resBuilder, user);
+          setChatMessages(resBuilder, user);
+          setPrivateChatPosts(resBuilder, user);
+          setStaticEquipsAndStructs(resBuilder);
+          setExpansionCosts(resBuilder);
+          
+          
+          setUserEquipsAndEquips(resBuilder, user);
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
           setNoticesToPlayers(resBuilder, user);
-          setUserClanInfos(resBuilder, user);
           setLockBoxEvents(resBuilder, user);
-          setStaticEquipsAndStructs(resBuilder);
-          setChatMessages(resBuilder, user);
           setBoosterPurchases(resBuilder);
           setGoldSales(resBuilder, user);
 
 //          setLeaderboardEventStuff(resBuilder);
           setAllies(resBuilder, user);
-          setPrivateChatPosts(resBuilder, user);
 //          setAllBosses(resBuilder, user.getType());
-          setExpansionCosts(resBuilder);
 
           FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
           resBuilder.setSender(fup);
@@ -259,6 +261,8 @@ public class StartupController extends EventController {
           reqProto.getAdvertiserId());
       resBuilder.setKabamNaid(naid);
     }
+    
+    //startup time
 
     StartupResponseProto resProto = resBuilder.build();
     StartupResponseEvent resEvent = new StartupResponseEvent(udid);
@@ -279,27 +283,178 @@ public class StartupController extends EventController {
     // reset
     updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
   }
-  
-  private void setExpansionCosts(Builder resBuilder) {
-  	Map<Integer, ExpansionCost> expansionCosts =
-  			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
-  	for (ExpansionCost cec : expansionCosts.values()) {
-  		CityExpansionCostProto cecp = CreateInfoProtoUtils
-  				.createCityExpansionCostProtoFromCityExpansionCost(cec);
-  		resBuilder.addExpansionCosts(cecp);
-  	}
+
+  private void setCitiesAndUserCityInfos(Builder resBuilder, User user) {
+//    Map<Integer, Integer> cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
+//        .getCityIdToUserCityRank(user.getId());
+////    Map<Integer, Integer> taskIdToNumTimesActedInRank = UserTaskRetrieveUtils
+////        .getTaskIdToNumTimesActedInRankForUser(user.getId());
+//
+    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+    for (Integer cityId : cities.keySet()) {
+      City city = cities.get(cityId);
+      resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+//      if (user.getLevel() >= city.getMinLevel()) {
+//
+//        if (!cityIdsToUserCityRanks.containsKey(city.getId())) {
+//          if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), cityId, 1)) {
+//            log.error("problem with unlocking city for user, city Id is " + cityId
+//                + ", and user is " + user);
+//          } else {
+//            cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
+//                .getCityIdToUserCityRank(user.getId());
+//          }
+//        }
+//        int numTasksComplete = 0; //getNumTasksCompleteForUserCity(user, city, taskIdToNumTimesActedInRank);
+//        resBuilder.addUserCityInfos(CreateInfoProtoUtils.createFullUserCityProto(user.getId(),
+//            city.getId(), cityIdsToUserCityRanks.get(city.getId()), numTasksComplete));
+//      }
+    }
   }
 
-//  private void setAllBosses(Builder resBuilder, UserType type) {
-//    Map<Integer, Monster> bossIdsToBosses = 
-//        MonsterRetrieveUtils.getBossIdsToBosses();
-//
-//    for (Monster b : bossIdsToBosses.values()) {
-//      FullBossProto fbp =
-//          CreateInfoProtoUtils.createFullBossProtoFromBoss(type, b);
-//      resBuilder.addBosses(fbp);
+  private void setInProgressAndAvailableQuests(Builder resBuilder, User user) {
+  	//  List<UserQuest> inProgressAndRedeemedUserQuests = RetrieveUtils.userQuestRetrieveUtils()
+  	//      .getUnredeemedAndRedeemedUserQuestsForUser(user.getId());
+  	//  List<Integer> inProgressQuestIds = new ArrayList<Integer>();
+  	//  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
+  	//
+  	//  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
+  	//  for (UserQuest uq : inProgressAndRedeemedUserQuests) {
+  	//    if (uq.isRedeemed()) {
+  	//      redeemedQuestIds.add(uq.getQuestId());
+  	//    } else {
+  	//      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
+  	//
+  	//      if (quest.getDefeatGoodGuysJobsRequired() == null && !uq.isDefeatTypeJobsComplete()) {
+  	//        if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), false,
+  	//            true)) {
+  	//          log.error("problem with updating user quest data by marking defeat type jobs completed for user quest "
+  	//              + uq);
+  	//        }
+  	//      }
+  	//      if (quest.getTasksRequired() == null && !uq.isTasksComplete()) {
+  	//        if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), true,
+  	//            false)) {
+  	//          log.error("problem with updating user quest data by marking tasks completed for user quest "
+  	//              + uq);
+  	//        }
+  	//      }
+  	//
+  	//      inProgressQuestIds.add(uq.getQuestId());
+  	//      if (uq.isComplete()) {
+  	//        resBuilder.addInProgressCompleteQuests(CreateInfoProtoUtils
+  	//            .createFullQuestProtoFromQuest(
+  	//                questIdToQuests.get(uq.getQuestId())));
+  	//      } else {
+  	//        resBuilder.addInProgressIncompleteQuests(CreateInfoProtoUtils
+  	//            .createFullQuestProtoFromQuest(
+  	//                questIdToQuests.get(uq.getQuestId())));
+  	//      }
+  	//    }
+  	//  }
+  	//
+  	//  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
+  	//      inProgressQuestIds);
+  	//  if (availableQuestIds != null) {
+  	//    for (Integer questId : availableQuestIds) {
+  	//      resBuilder.addAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(
+  	//          questIdToQuests.get(questId)));
+  	//    }
+  	//  }
+  }
+  
+  private void setUserClanInfos(StartupResponseProto.Builder resBuilder, User user) {
+    List<UserClan> userClans = RetrieveUtils.userClanRetrieveUtils().getUserClansRelatedToUser(
+        user.getId());
+    for (UserClan uc : userClans) {
+      resBuilder.addUserClanInfo(CreateInfoProtoUtils.createFullUserClanProtoFromUserClan(uc));
+    }
+  }
+  
+  private void setNotifications(Builder resBuilder, User user) {
+    List<Integer> userIds = new ArrayList<Integer>();
+
+//    List<MarketplaceTransaction> marketplaceTransactions = MarketplaceTransactionRetrieveUtils
+//        .getMostRecentMarketplaceTransactionsForPoster(user.getId(),
+//            ControllerConstants.STARTUP__MAX_NUM_OF_STARTUP_NOTIFICATION_TYPE_TO_SEND);
+//    if (marketplaceTransactions != null && marketplaceTransactions.size() > 0) {
+//      for (MarketplaceTransaction mt : marketplaceTransactions) {
+//        userIds.add(mt.getBuyerId());
+//      }
 //    }
-//  }
+//
+//    Timestamp earliestBattleNotificationTimeToRetrieve = new Timestamp(new Date().getTime()
+//        - ControllerConstants.STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND * 3600000);
+//
+//    List<ClanChatPost> clanChatPosts = null;
+//    if (user.getClanId() > 0) {
+//      clanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
+//          ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
+//      for (ClanChatPost p : clanChatPosts) {
+//        userIds.add(p.getPosterId());
+//      }
+//    }
+//
+//    Map<Integer, User> usersByIds = null;
+//    if (userIds.size() > 0) {
+//      usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+//    }
+//
+//    if (clanChatPosts != null && clanChatPosts.size() > 0) {
+//
+//    }
+  }
+  
+  private void setChatMessages(StartupResponseProto.Builder resBuilder, User user) {
+  	//  if (user.getClanId() > 0) {
+  	//    List<ClanChatPost> activeClanChatPosts;
+  	//    activeClanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
+  	//        ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
+  	//
+  	//    if (activeClanChatPosts != null) {
+  	//      if (activeClanChatPosts != null && activeClanChatPosts.size() > 0) {
+  	//        List<Integer> userIds = new ArrayList<Integer>();
+  	//        for (ClanChatPost p : activeClanChatPosts) {
+  	//          userIds.add(p.getPosterId());
+  	//        }
+  	//        Map<Integer, User> usersByIds = null;
+  	//        if (userIds.size() > 0) {
+  	//          usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+  	//          for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
+  	//            ClanChatPost pwp = activeClanChatPosts.get(i);
+  	//            resBuilder.addClanChats(CreateInfoProtoUtils
+  	//                .createGroupChatMessageProtoFromClanChatPost(pwp,
+  	//                    usersByIds.get(pwp.getPosterId())));
+  	//          }
+  	//        }
+  	//      }
+  	//    }
+  	//  }
+  	//
+  	//  Iterator<GroupChatMessageProto> it = chatMessages.iterator();
+  	//  List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
+  	//  while (it.hasNext()) {
+  	//    globalChats.add(it.next());
+  	//  }
+  	//
+  	//  Comparator<GroupChatMessageProto> c = new Comparator<GroupChatMessageProto>() {
+  	//    @Override
+  	//    public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
+  	//      if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
+  	//        return -1;
+  	//      } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
+  	//        return 1;
+  	//      } else {
+  	//        return 0;
+  	//      }
+  	//    }
+  	//  };
+  	//  Collections.sort(globalChats, c);
+  	//  // Need to add them in reverse order
+  	//  for (int i = 0; i < globalChats.size(); i++) {
+  	//    resBuilder.addGlobalChats(globalChats.get(i));
+  	//  }
+  }
 
   private void setPrivateChatPosts(Builder resBuilder, User aUser) {
     int userId = aUser.getId();
@@ -371,7 +526,7 @@ public class StartupController extends EventController {
 
     resBuilder.addAllPcpp(pcppList);
   }
-
+  
   private Map<Integer, Integer> aggregateOtherUserIdsAndPrivateChatPost(
       Map<Integer, PrivateChatPost> postsUserReceived, Map<Integer, PrivateChatPost> postsUserSent,
       Map<Integer, PrivateChatPost> postIdsToPrivateChatPosts) {
@@ -421,7 +576,7 @@ public class StartupController extends EventController {
     }
     return userIdsToPrivateChatPostIds;
   }
-
+  
   private Map<Integer, Set<Integer>> determineClanIdsToUserIdSet(Map<Integer, User> userIdsToUsers,
       List<Integer> clanlessUserUserIds) {
     Map<Integer, Set<Integer>> clanIdsToUserIdSet = new HashMap<Integer, Set<Integer>>();
@@ -451,6 +606,39 @@ public class StartupController extends EventController {
     }
     return clanIdsToUserIdSet;
   }
+
+  private void setStaticEquipsAndStructs(StartupResponseProto.Builder resBuilder) {
+    Collection<Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters().values();
+    for (Monster monster : monsters) {
+      resBuilder.addStaticMonsters(CreateInfoProtoUtils.createMonsterProto(0, monster, false, 0));
+    }
+
+    Collection<Structure> structs = StructureRetrieveUtils.getStructIdsToStructs().values();
+    for (Structure struct : structs) {
+      resBuilder.addStaticStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
+    }
+  }
+  
+  private void setExpansionCosts(Builder resBuilder) {
+  	Map<Integer, ExpansionCost> expansionCosts =
+  			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
+  	for (ExpansionCost cec : expansionCosts.values()) {
+  		CityExpansionCostProto cecp = CreateInfoProtoUtils
+  				.createCityExpansionCostProtoFromCityExpansionCost(cec);
+  		resBuilder.addExpansionCosts(cecp);
+  	}
+  }
+
+//  private void setAllBosses(Builder resBuilder, UserType type) {
+//    Map<Integer, Monster> bossIdsToBosses = 
+//        MonsterRetrieveUtils.getBossIdsToBosses();
+//
+//    for (Monster b : bossIdsToBosses.values()) {
+//      FullBossProto fbp =
+//          CreateInfoProtoUtils.createFullBossProtoFromBoss(type, b);
+//      resBuilder.addBosses(fbp);
+//    }
+//  }
 
   // retrieve's the active leaderboard event prizes and rewards for the events
 //  private void setLeaderboardEventStuff(StartupResponseProto.Builder resBuilder) {
@@ -536,57 +724,6 @@ public class StartupController extends EventController {
     return "";
   }
 
-  private void setChatMessages(StartupResponseProto.Builder resBuilder, User user) {
-//    if (user.getClanId() > 0) {
-//      List<ClanChatPost> activeClanChatPosts;
-//      activeClanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
-//          ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
-//
-//      if (activeClanChatPosts != null) {
-//        if (activeClanChatPosts != null && activeClanChatPosts.size() > 0) {
-//          List<Integer> userIds = new ArrayList<Integer>();
-//          for (ClanChatPost p : activeClanChatPosts) {
-//            userIds.add(p.getPosterId());
-//          }
-//          Map<Integer, User> usersByIds = null;
-//          if (userIds.size() > 0) {
-//            usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-//            for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
-//              ClanChatPost pwp = activeClanChatPosts.get(i);
-//              resBuilder.addClanChats(CreateInfoProtoUtils
-//                  .createGroupChatMessageProtoFromClanChatPost(pwp,
-//                      usersByIds.get(pwp.getPosterId())));
-//            }
-//          }
-//        }
-//      }
-//    }
-//
-//    Iterator<GroupChatMessageProto> it = chatMessages.iterator();
-//    List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
-//    while (it.hasNext()) {
-//      globalChats.add(it.next());
-//    }
-//
-//    Comparator<GroupChatMessageProto> c = new Comparator<GroupChatMessageProto>() {
-//      @Override
-//      public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
-//        if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
-//          return -1;
-//        } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
-//          return 1;
-//        } else {
-//          return 0;
-//        }
-//      }
-//    };
-//    Collections.sort(globalChats, c);
-//    // Need to add them in reverse order
-//    for (int i = 0; i < globalChats.size(); i++) {
-//      resBuilder.addGlobalChats(globalChats.get(i));
-//    }
-  }
-
   private void setBoosterPurchases(StartupResponseProto.Builder resBuilder) {
     Iterator<RareBoosterPurchaseProto> it = goodEquipsRecievedFromBoosterPacks.iterator();
     List<RareBoosterPurchaseProto> boosterPurchases = new ArrayList<RareBoosterPurchaseProto>();
@@ -613,18 +750,6 @@ public class StartupController extends EventController {
     }
   }
 
-
-  private void setStaticEquipsAndStructs(StartupResponseProto.Builder resBuilder) {
-    Collection<Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters().values();
-    for (Monster monster : monsters) {
-      resBuilder.addStaticMonsters(CreateInfoProtoUtils.createMonsterProto(0, monster, false, 0));
-    }
-
-    Collection<Structure> structs = StructureRetrieveUtils.getStructIdsToStructs().values();
-    for (Structure struct : structs) {
-      resBuilder.addStaticStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
-    }
-  }
 
   private void setLockBoxEvents(StartupResponseProto.Builder resBuilder, User user) {
 //    resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
@@ -680,14 +805,6 @@ public class StartupController extends EventController {
     resEvent1.setRetrieveStaticDataResponseProto(resProto1.build());
     server.writePreDBEvent(resEvent1, udid);
     log.info("Structs sent");
-  }
-
-  private void setUserClanInfos(StartupResponseProto.Builder resBuilder, User user) {
-    List<UserClan> userClans = RetrieveUtils.userClanRetrieveUtils().getUserClansRelatedToUser(
-        user.getId());
-    for (UserClan uc : userClans) {
-      resBuilder.addUserClanInfo(CreateInfoProtoUtils.createFullUserClanProtoFromUserClan(uc));
-    }
   }
 
   private void setNoticesToPlayers(Builder resBuilder, User user) {
@@ -1165,40 +1282,6 @@ public class StartupController extends EventController {
     }
   }
 
-  private void setNotifications(Builder resBuilder, User user) {
-    List<Integer> userIds = new ArrayList<Integer>();
-
-//    List<MarketplaceTransaction> marketplaceTransactions = MarketplaceTransactionRetrieveUtils
-//        .getMostRecentMarketplaceTransactionsForPoster(user.getId(),
-//            ControllerConstants.STARTUP__MAX_NUM_OF_STARTUP_NOTIFICATION_TYPE_TO_SEND);
-//    if (marketplaceTransactions != null && marketplaceTransactions.size() > 0) {
-//      for (MarketplaceTransaction mt : marketplaceTransactions) {
-//        userIds.add(mt.getBuyerId());
-//      }
-//    }
-//
-//    Timestamp earliestBattleNotificationTimeToRetrieve = new Timestamp(new Date().getTime()
-//        - ControllerConstants.STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND * 3600000);
-//
-//    List<ClanChatPost> clanChatPosts = null;
-//    if (user.getClanId() > 0) {
-//      clanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
-//          ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
-//      for (ClanChatPost p : clanChatPosts) {
-//        userIds.add(p.getPosterId());
-//      }
-//    }
-//
-//    Map<Integer, User> usersByIds = null;
-//    if (userIds.size() > 0) {
-//      usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-//    }
-//
-//    if (clanChatPosts != null && clanChatPosts.size() > 0) {
-//
-//    }
-  }
-
   private void setAllies(Builder resBuilder, User user) {
 //    boolean realPlayersOnly = false;
 //    boolean fakePlayersOnly = false;
@@ -1234,85 +1317,6 @@ public class StartupController extends EventController {
 //        }
 //      }
 //    }
-  }
-
-  private void setInProgressAndAvailableQuests(Builder resBuilder, User user) {
-//    List<UserQuest> inProgressAndRedeemedUserQuests = RetrieveUtils.userQuestRetrieveUtils()
-//        .getUnredeemedAndRedeemedUserQuestsForUser(user.getId());
-//    List<Integer> inProgressQuestIds = new ArrayList<Integer>();
-//    List<Integer> redeemedQuestIds = new ArrayList<Integer>();
-//
-//    Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-//    for (UserQuest uq : inProgressAndRedeemedUserQuests) {
-//      if (uq.isRedeemed()) {
-//        redeemedQuestIds.add(uq.getQuestId());
-//      } else {
-//        Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
-//
-//        if (quest.getDefeatGoodGuysJobsRequired() == null && !uq.isDefeatTypeJobsComplete()) {
-//          if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), false,
-//              true)) {
-//            log.error("problem with updating user quest data by marking defeat type jobs completed for user quest "
-//                + uq);
-//          }
-//        }
-//        if (quest.getTasksRequired() == null && !uq.isTasksComplete()) {
-//          if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), true,
-//              false)) {
-//            log.error("problem with updating user quest data by marking tasks completed for user quest "
-//                + uq);
-//          }
-//        }
-//
-//        inProgressQuestIds.add(uq.getQuestId());
-//        if (uq.isComplete()) {
-//          resBuilder.addInProgressCompleteQuests(CreateInfoProtoUtils
-//              .createFullQuestProtoFromQuest(
-//                  questIdToQuests.get(uq.getQuestId())));
-//        } else {
-//          resBuilder.addInProgressIncompleteQuests(CreateInfoProtoUtils
-//              .createFullQuestProtoFromQuest(
-//                  questIdToQuests.get(uq.getQuestId())));
-//        }
-//      }
-//    }
-//
-//    List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
-//        inProgressQuestIds);
-//    if (availableQuestIds != null) {
-//      for (Integer questId : availableQuestIds) {
-//        resBuilder.addAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(
-//            questIdToQuests.get(questId)));
-//      }
-//    }
-  }
-
-  private void setCitiesAndUserCityInfos(Builder resBuilder, User user) {
-//    Map<Integer, Integer> cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
-//        .getCityIdToUserCityRank(user.getId());
-////    Map<Integer, Integer> taskIdToNumTimesActedInRank = UserTaskRetrieveUtils
-////        .getTaskIdToNumTimesActedInRankForUser(user.getId());
-//
-    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-    for (Integer cityId : cities.keySet()) {
-      City city = cities.get(cityId);
-      resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-//      if (user.getLevel() >= city.getMinLevel()) {
-//
-//        if (!cityIdsToUserCityRanks.containsKey(city.getId())) {
-//          if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), cityId, 1)) {
-//            log.error("problem with unlocking city for user, city Id is " + cityId
-//                + ", and user is " + user);
-//          } else {
-//            cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
-//                .getCityIdToUserCityRank(user.getId());
-//          }
-//        }
-//        int numTasksComplete = 0; //getNumTasksCompleteForUserCity(user, city, taskIdToNumTimesActedInRank);
-//        resBuilder.addUserCityInfos(CreateInfoProtoUtils.createFullUserCityProto(user.getId(),
-//            city.getId(), cityIdsToUserCityRanks.get(city.getId()), numTasksComplete));
-//      }
-    }
   }
 
 //  private int getNumTasksCompleteForUserCity(User user, City city,
