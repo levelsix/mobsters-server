@@ -13,20 +13,42 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import com.lvl6.info.User;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.RetrieveUtils;
 
-@Component @DependsOn("gameServer") public class AlertOnStartupRetrieveUtils {
+@Component @DependsOn("gameServer") public class StartupStuffRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static List<String> notices;
 
   private static final String TABLE_NAME = DBConstants.TABLE_ALERT_ON_STARTUP;
+  
+  private static User adminChatUser;
+  
+  public static User getAdminChatUser() {
+  	log.debug("retrieving adminChatUserProto");
+  	if (null == adminChatUser) {
+  		setStaticAdminChatUser();
+  	}
+  	
+  	return adminChatUser;
+  }
+  
+  private static void setStaticAdminChatUser() {
+  	User adminChatUserTemp = RetrieveUtils.userRetrieveUtils().getUserById(
+  			ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID);
+  	adminChatUser = adminChatUserTemp;
+  }
 
+  
+  
   public static List<String> getAllActiveAlerts() {
     log.debug("retrieving all alerts placed in a set");
-    if (notices == null) {
+    if (null == notices) {
       setStaticActiveAlerts();
     }
     return notices;
@@ -64,6 +86,7 @@ import com.lvl6.utils.DBConnection;
   }
 
   public static void reload() {
+  	setStaticAdminChatUser();
     setStaticActiveAlerts();
   }
 

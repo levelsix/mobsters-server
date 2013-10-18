@@ -46,7 +46,7 @@ import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.rarechange.AlertOnStartupRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
@@ -300,35 +300,72 @@ public class MiscMethods {
   }
   
   public static StartupConstants createStartupConstantsProto() {
-    StartupConstants.Builder cb = StartupConstants.newBuilder()
-        .setMaxNumOfSingleStruct(ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE)
-        .setMaxLevelForUser(ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER)
-        .setMinNameLength(ControllerConstants.USER_CREATE__MIN_NAME_LENGTH)
-        .setMaxNameLength(ControllerConstants.USER_CREATE__MAX_NAME_LENGTH)
+    StartupConstants.Builder cb = StartupConstants.newBuilder();
+
+    for (String id : IAPValues.iapPackageNames) {
+      InAppPurchasePackageProto.Builder iapb = InAppPurchasePackageProto.newBuilder();
+      iapb.setImageName(IAPValues.getImageNameForPackageName(id));
+      iapb.setIapPackageId(id);
+
+      int diamondAmt = IAPValues.getDiamondsForPackageName(id);
+      if (diamondAmt > 0) {
+        iapb.setCurrencyAmount(diamondAmt);
+        iapb.setIsGold(true);
+      } else {
+        int coinAmt = IAPValues.getCoinsForPackageName(id);
+        iapb.setCurrencyAmount(coinAmt);
+        iapb.setIsGold(false);
+      }
+      cb.addInAppPurchasePackages(iapb.build());
+    }
+    
+    cb.setMaxLevelForUser(ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
+    cb.setMaxNumOfSingleStruct(ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE);
+    
+    //norm struct constants go here
+    
+    if (ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS != null) {
+    	for (int i = 0; i < ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS.length; i++) {
+    		AnimatedSpriteOffset aso = ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS[i];
+    		cb.addAnimatedSpriteOffsets(CreateInfoProtoUtils.createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(aso));
+    	}
+    }
+    
+    cb.setMinNameLength(ControllerConstants.USER_CREATE__MIN_NAME_LENGTH);
+    cb.setMaxNameLength(ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
+    cb.setMaxLengthOfChatString(ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING);
+    
+    ClanConstants.Builder clanConstantsBuilder = ClanConstants.newBuilder();
+    clanConstantsBuilder.setMaxCharLengthForClanDescription(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION);
+    clanConstantsBuilder.setMaxCharLengthForClanName(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME);
+    clanConstantsBuilder.setDiamondPriceToCreateClan(ControllerConstants.CREATE_CLAN__DIAMOND_PRICE_TO_CREATE_CLAN);
+    clanConstantsBuilder.setMaxCharLengthForClanTag(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG);
+    cb.setClanConstants(clanConstantsBuilder.build());
+    
+    
+    DownloadableNibConstants.Builder dncb = DownloadableNibConstants.newBuilder();
+    dncb.setMapNibName(ControllerConstants.NIB_NAME__TRAVELING_MAP);
+    dncb.setExpansionNibName(ControllerConstants.NIB_NAME__EXPANSION);
+    dncb.setGoldShoppeNibName(ControllerConstants.NIB_NAME__GOLD_SHOPPE);
+    cb.setDownloadableNibConstants(dncb.build());
+    
+    cb.setNumHoursBeforeReshowingGoldSale(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_GOLD_SALE);
+    cb.setLevelToShowRateUsPopup(ControllerConstants.LEVEL_TO_SHOW_RATE_US_POPUP);
 //        .setHoursInAttackedByOneProtectionPeriod(ControllerConstants.BATTLE__HOURS_IN_ATTACKED_BY_ONE_PROTECTION_PERIOD)
 //        .setMaxNumTimesAttackedByOneInProtectionPeriod(ControllerConstants.BATTLE__MAX_NUM_TIMES_ATTACKED_BY_ONE_IN_PROTECTION_PERIOD)
 //        .setMinBattlesRequiredForKDRConsideration(ControllerConstants.LEADERBOARD__MIN_BATTLES_REQUIRED_FOR_KDR_CONSIDERATION)
-        .setMaxLengthOfChatString(ControllerConstants.SEND_GROUP_CHAT__MAX_LENGTH_OF_CHAT_STRING)
-        .setNumHoursBeforeReshowingGoldSale(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_GOLD_SALE)
 //        .setNumHoursBeforeReshowingLockBox(ControllerConstants.NUM_HOURS_BEFORE_RESHOWING_LOCK_BOX)
-        .setLevelToShowRateUsPopup(ControllerConstants.LEVEL_TO_SHOW_RATE_US_POPUP)
-        .setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
-
-    if (ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS != null) {
-      for (int i = 0; i < ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS.length; i++) {
-        AnimatedSpriteOffset aso = ControllerConstants.STARTUP__ANIMATED_SPRITE_OFFSETS[i];
-        cb.addAnimatedSpriteOffsets(CreateInfoProtoUtils.createAnimatedSpriteOffsetProtoFromAnimatedSpriteOffset(aso));
-      }
-    }
-
-    ClanConstants clanConstants = ClanConstants.newBuilder()
-        .setMaxCharLengthForClanDescription(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION)
-        .setMaxCharLengthForClanName(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME)
-        .setDiamondPriceToCreateClan(ControllerConstants.CREATE_CLAN__DIAMOND_PRICE_TO_CREATE_CLAN)
-        .setMaxCharLengthForClanTag(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG)
-        .build();
-
-    cb.setClanConstants(clanConstants);
+    
+    //SET TOURNAMENT CONSTANTS HERE 
+    
+    cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
+    cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
+    User adminChatUser = StartupStuffRetrieveUtils.getAdminChatUser();
+    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
+    cb.setAdminChatUserProto(adminChatUserProto);
+    cb.setNumBeginnerSalesAllowed(ControllerConstants.NUM_BEGINNER_SALES_ALLOWED);
+    
+    cb.setMaxNumTeamSlots(ControllerConstants.MONSTER_FOR_USER__MAX_TEAM_SIZE);
 
 //    BattleConstants battleConstants = BattleConstants.newBuilder()
 //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
@@ -375,13 +412,6 @@ public class MiscMethods {
 //
 //    cb = cb.setLockBoxConstants(lbc);
 
-    DownloadableNibConstants dnc = DownloadableNibConstants.newBuilder()
-        .setMapNibName(ControllerConstants.NIB_NAME__TRAVELING_MAP)
-        .setExpansionNibName(ControllerConstants.NIB_NAME__EXPANSION)
-        .setGoldShoppeNibName(ControllerConstants.NIB_NAME__GOLD_SHOPPE)
-        .build();
-
-    cb = cb.setDownloadableNibConstants(dnc);
 
 //    EnhancementConstants enc = EnhancementConstants.newBuilder()
 //        .setMaxEnhancementLevel(ControllerConstants.MAX_ENHANCEMENT_LEVEL)
@@ -402,22 +432,6 @@ public class MiscMethods {
 //
 //    cb = cb.setEnhanceConstants(enc);
 
-    for (String id : IAPValues.iapPackageNames) {
-      InAppPurchasePackageProto.Builder iapb = InAppPurchasePackageProto.newBuilder();
-      iapb.setImageName(IAPValues.getImageNameForPackageName(id));
-      iapb.setIapPackageId(id);
-
-      int diamondAmt = IAPValues.getDiamondsForPackageName(id);
-      if (diamondAmt > 0) {
-        iapb.setCurrencyAmount(diamondAmt);
-        iapb.setIsGold(true);
-      } else {
-        int coinAmt = IAPValues.getCoinsForPackageName(id);
-        iapb.setCurrencyAmount(coinAmt);
-        iapb.setIsGold(false);
-      }
-      cb.addInAppPurchasePackages(iapb.build());
-    }
 
 //    LeaderboardEventConstants lec =LeaderboardEventConstants.newBuilder()
 //        .setWinsWeight(ControllerConstants.TOURNAMENT_EVENT__WINS_WEIGHT)
@@ -435,20 +449,15 @@ public class MiscMethods {
 //        .setNumDaysToBuyStarterPack(ControllerConstants.BOOSTER_PACK__NUM_DAYS_TO_BUY_STARTER_PACK)
 //        .build();
 //    cb = cb.setBoosterPackConstants(bpc);
-
-    List<Integer> questIdsGuaranteedWin = new ArrayList<Integer>();
-    int[] questIdsForWin = ControllerConstants.STARTUP__QUEST_IDS_FOR_GUARANTEED_WIN; 
-    for(int i = 0; i < questIdsForWin.length; i++) {
-      questIdsGuaranteedWin.add(questIdsForWin[i]);
-    }
-    cb.setFbConnectRewardDiamonds(ControllerConstants.EARN_FREE_DIAMONDS__FB_CONNECT_REWARD);
+//
+//    List<Integer> questIdsGuaranteedWin = new ArrayList<Integer>();
+//    int[] questIdsForWin = ControllerConstants.STARTUP__QUEST_IDS_FOR_GUARANTEED_WIN; 
+//    for(int i = 0; i < questIdsForWin.length; i++) {
+//      questIdsGuaranteedWin.add(questIdsForWin[i]);
+//    }
     
-    cb.setFaqFileName(ControllerConstants.STARTUP__FAQ_FILE_NAME);
     
-    User adminChatUser = RetrieveUtils.userRetrieveUtils()
-        .getUserById(ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID);
-    MinimumUserProto adminChatUserProto = CreateInfoProtoUtils.createMinimumUserProtoFromUser(adminChatUser);
-    cb.setAdminChatUserProto(adminChatUserProto);
+    
     
 //    BossConstants.Builder bc = BossConstants.newBuilder();
 //    bc.setMaxHealthMultiplier(ControllerConstants.SOLO_BOSS__MAX_HEALTH_MULTIPLIER);
@@ -524,7 +533,7 @@ public class MiscMethods {
 
   public static void reloadAllRareChangeStaticData() {
     log.info("Reloading rare change static data");
-    AlertOnStartupRetrieveUtils.reload();
+    StartupStuffRetrieveUtils.reload();
     BannedUserRetrieveUtils.reload();
     BoosterItemRetrieveUtils.reload();
     BoosterPackRetrieveUtils.reload();

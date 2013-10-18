@@ -61,11 +61,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonster;
   }
 
-  public List<MonsterForUser> getSpecificUserMonsters(List<Long> userMonsterIds) {
+  public Map<Long, MonsterForUser> getSpecificUserMonsters(Collection<Long> userMonsterIds) {
     log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
 
     if (userMonsterIds == null || userMonsterIds.size() <= 0 ) {
-      return new ArrayList<MonsterForUser>();
+      return new HashMap<Long, MonsterForUser>();
     }
 
     String query = "select * from " + TABLE_NAME + " where (";
@@ -81,7 +81,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    List<MonsterForUser> userMonsters = convertRSToMonsters(rs);
+    Map<Long, MonsterForUser> userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
     DBConnection.get().close(rs, null, conn);
     return userMonsters;
   }
@@ -165,6 +165,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
   				MonsterForUser userMonster = convertRSRowToMonster(rs);
   				if (userMonster != null) {
   					monsterIdsToMonsters.put(userMonster.getMonsterId(), userMonster);
+  				}
+  			}
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+  		}
+  	}
+  	return monsterIdsToMonsters;
+  }
+  
+  private Map<Long, MonsterForUser> convertRSToUserMonsterIdsToMonsters(ResultSet rs) {
+  	Map<Long, MonsterForUser> monsterIdsToMonsters = new HashMap<Long, MonsterForUser>();
+  	if (rs != null) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			while(rs.next()) {
+  				MonsterForUser userMonster = convertRSRowToMonster(rs);
+  				if (userMonster != null) {
+  					monsterIdsToMonsters.put(userMonster.getId(), userMonster);
   				}
   			}
   		} catch (SQLException e) {

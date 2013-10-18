@@ -942,7 +942,7 @@ public class DBConnection {
 	}
 
 	/* assumes number of ? in the query = values.size() */
-	public int deleteDirectQueryNaive(String query, List<Object> values) {
+	public int deleteDirectQueryNaive(String query, List<?> values) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 

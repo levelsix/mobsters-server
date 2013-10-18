@@ -1,5 +1,6 @@
 package com.lvl6.utils.utilmethods;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -40,4 +41,6 @@ public interface DeleteUtil {
   public abstract int deleteTaskForUserWithTaskForUserId(long taskForUserId);
   
   public abstract int deleteTaskStagesForIds(List<Long> taskStageForUserIds);
+  
+  public abstract int deleteMonsterHealingForUser(int userId, List<Long> userMonsterIds);
 }

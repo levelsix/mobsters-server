@@ -1,0 +1,110 @@
+package com.lvl6.retrieveutils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Component;
+
+import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.properties.DBConstants;
+import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.utilmethods.StringUtils;
+
+@Component @DependsOn("gameServer") public class MonsterHealingForUserRetrieveUtils {
+
+  private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+
+  private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_HEALING_FOR_USER;
+
+
+  ////@Cacheable(value="userMonstersForUser", key="#userId")
+  public static Map<Long, MonsterHealingForUser> getMonstersForUser(int userId) {
+    log.debug("retrieving user monsters being healined for userId " + userId);
+
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+    Map<Long, MonsterHealingForUser> userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+    DBConnection.get().close(rs, null, conn);
+    return userMonsters;
+  }
+
+  public static Map<Long, MonsterHealingForUser> getMonstersWithUserAndMonsterIds(
+  		int userId, Collection<Long> userMonsterIds) {
+  	int size = userMonsterIds.size();
+  	List<String> questions = Collections.nCopies(size, "?");
+  	String delimiter = ",";
+  	
+  	String query = "select * from " + TABLE_NAME + " where ";
+    List <Object> values = new ArrayList<Object>();
+
+    //creating a "column in (value1,value2,...,value)" condition, prefer this over
+    //chained "or"s  e.g. (column=value1 or column=value2 or...column=value);
+    query += DBConstants.MONSTER_HEALING_FOR_USER__USER_ID + "=? and ";
+    values.add(userId);
+    query += DBConstants.MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID + " in (" +
+    StringUtils.getListInString(questions, delimiter) + ") and ";
+    values.add(userMonsterIds);
+    
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+    Map<Long, MonsterHealingForUser> incompleteMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+    DBConnection.get().close(rs, null, conn);
+    return incompleteMonsters;
+  }
+  
+  private static Map<Long, MonsterHealingForUser> convertRSToUserMonsterIdsToMonsters(ResultSet rs) {
+  	Map<Long, MonsterHealingForUser> monsterIdsToMonsters = new HashMap<Long, MonsterHealingForUser>();
+  	if (rs != null) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			while(rs.next()) {
+  				MonsterHealingForUser userMonster = convertRSRowToMonster(rs);
+  				if (userMonster != null) {
+  					monsterIdsToMonsters.put(userMonster.getMonsterForUserId(), userMonster);
+  				}
+  			}
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+  		}
+  	}
+  	return monsterIdsToMonsters;
+  }
+
+  /*
+   * assumes the resultset is apprpriately set up. traverses the row it's on.
+   */
+  private static MonsterHealingForUser convertRSRowToMonster(ResultSet rs) throws SQLException {
+    int i = 1;
+    int userId = rs.getInt(i++);
+    long monsterForUserId = rs.getLong(i++);
+    Date expectedStartTime = null;
+    try {
+    	expectedStartTime = rs.getTimestamp(i++);
+    } catch (SQLException e) {
+    	log.error("expected start time might be null userId=" + userId, e);
+    }
+    Date queuedTime = null;
+    try {
+    	queuedTime = rs.getTimestamp(i++);
+    } catch (SQLException e) {
+    	log.error("expected start time might be null userId=" + userId, e);
+    }
+    
+    MonsterHealingForUser userMonster = new MonsterHealingForUser(userId,
+    		monsterForUserId, expectedStartTime, queuedTime);
+    return userMonster;
+  }
+
+}

@@ -32,6 +32,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";
   public static final String TABLE_MONSTER_EVOLVING_HISTORY = "monster_evolving_history";
   public static final String TABLE_MONSTER_FOR_USER = "monster_for_user";
+  public static final String TABLE_MONSTER_HEALING_FOR_USER = "monster_healing_for_user";
   public static final String TABLE_MONSTER_REWARD = "monster_reward";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_QUEST = "quest";
@@ -277,6 +278,12 @@ public class DBConstants {
   public static final String MONSTER_FOR_USER__NUM_PIECES = "num_pieces";
   public static final String MONSTER_FOR_USER__IS_COMPLETE = "is_complete";
 
+  /*MONSTER HEALING FOR USER*/
+  public static final String MONSTER_HEALING_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
+  public static final String MONSTER_HEALING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
+  public static final String MONSTER_HEALING_FOR_USER__QUEUED_TIME = "queued_time";
+  
   /*MONSTER REWARD*/
   public static final String MONSTER_REWARD__ID = GENERIC__ID;
   public static final String MONSTER_REWARD__BOSS_ID = "monster_id";

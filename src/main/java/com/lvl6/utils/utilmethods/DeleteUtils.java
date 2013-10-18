@@ -1,6 +1,7 @@
 package com.lvl6.utils.utilmethods;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -165,9 +166,7 @@ public class DeleteUtils implements DeleteUtil {
     String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_ENHANCING__ID 
     + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
     
-    List values = equipEnhancementIds; //adding generics will throw (type mismatch?) errors
-    
-    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
+    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, equipEnhancementIds);
     if(equipEnhancementIds.size() == numDeleted) {
       return true;
     } else {
@@ -187,9 +186,7 @@ public class DeleteUtils implements DeleteUtil {
     String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_ENHANCING__ID 
     + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
     
-    List values = equipEnhancementFeederIds; //adding generics will throw (type mismatch?) errors
-    
-    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
+    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, equipEnhancementFeederIds);
     if(equipEnhancementFeederIds.size() == numDeleted) {
       return true;
     } else {
@@ -236,11 +233,26 @@ public class DeleteUtils implements DeleteUtil {
     
     String delimiter = ",";
     String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.TASK_STAGE_FOR_USER__ID
-    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
+    + " IN (" + StringUtils.getListInString(questions, delimiter) + ");";
     
-    List values = taskStageForUserIds; //adding generics will throw (type mismatch?) errors
-    
-    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
+    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, taskStageForUserIds);
+    return numDeleted;
+  }
+  
+  @Override
+  public int deleteMonsterHealingForUser(int userId, List<Long> userMonsterIds) {
+  	String tableName = DBConstants.TABLE_MONSTER_HEALING_FOR_USER;
+  	int size = userMonsterIds.size();
+  	
+  	List<String> questions = Collections.nCopies(size, "?");
+  	
+  	String delimiter = ",";
+  	String query = " DELETE FROM " + tableName + " WHERE " +
+  			DBConstants.MONSTER_HEALING_FOR_USER__USER_ID + "=?" + userId +
+  			" and " + DBConstants.MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID +
+  			" IN (" + StringUtils.getListInString(questions, delimiter) + ");";
+  	
+  	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, userMonsterIds);
     return numDeleted;
   }
 }

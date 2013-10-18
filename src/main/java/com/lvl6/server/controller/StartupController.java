@@ -68,7 +68,7 @@ import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.AlertOnStartupRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -689,7 +689,7 @@ public class StartupController extends EventController {
   }
 
   private void setNoticesToPlayers(Builder resBuilder, User user) {
-  	List<String> notices = AlertOnStartupRetrieveUtils.getAllActiveAlerts();
+  	List<String> notices = StartupStuffRetrieveUtils.getAllActiveAlerts();
   	if (null != notices) {
   	  for (String notice : notices) {
   	    resBuilder.addNoticesToPlayers(notice);
