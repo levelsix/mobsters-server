@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,6 +34,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class HealMonsterController extends EventController {
 
@@ -219,18 +221,30 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 	  //delete the selected monsters from  the healing table
 	  List<Long> deleteIds = new ArrayList<Long>(protoDeleteMap.keySet());
-	  int numDeleted = DeleteUtils.get().deleteMonsterHealingForUser(
+	  int num = DeleteUtils.get().deleteMonsterHealingForUser(
 	  		uId, deleteIds);
-	  log.info("deleted monster healing rows. numDeleted=" + numDeleted);
+	  log.info("deleted monster healing rows. numDeleted=" + num);
 	  
 	  //convert protos to java counterparts
 	  List<MonsterHealingForUser> updateMap = convertToMonsterHealingForUser(
 	  		uId, protoUpdateMap);
-	  //update and insert the new monsters
+	  List<MonsterHealingForUser> newMap = convertToMonsterHealingForUser(
+	  		uId, protoNewMap);
 	  
+	  List<MonsterHealingForUser> updateAndNewMap = new ArrayList<MonsterHealingForUser>();
+	  updateAndNewMap.addAll(updateMap);
+	  updateAndNewMap.addAll(newMap);
+	  
+	  //update and insert the new monsters
+	  num = UpdateUtils.get().updateUserMonsterHealing(uId, updateAndNewMap);
+	  log.info("updated monster healing rows. numUpdated=" + num);
 	  
 	  //for the new monsters, set the teamSlotNum to 0
-	 
+	  int size = protoNewMap.size();
+	  List<Long> userMonsterIdList = new ArrayList<Long>(protoNewMap.keySet());
+	  List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
+	  num = UpdateUtils.get().updateUserMonsterTeamSlotNum(userMonsterIdList, teamSlotNumList);
+	  log.info("updated user monster rows. numUpdated=" + num);
 	  
 	  return true;
   }

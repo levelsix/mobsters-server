@@ -2,22 +2,21 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.Structure;
+import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
-import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
@@ -283,7 +282,7 @@ public class UpdateUtils implements UpdateUtil {
 	 */
 	@Override
 	public boolean updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(List<StructureForUser> userStructs, int levelChange) {
-		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
+//		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
 
 //		for (UserStruct userStruct : userStructs) {
 //			Structure structure = structures.get(userStruct.getStructId());
@@ -338,7 +337,7 @@ public class UpdateUtils implements UpdateUtil {
 	 */
 	@Override
 	public boolean updateUserStructsLastretrievedpostbuildIscomplete(List<StructureForUser> userStructs) {
-		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
+//		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
 
 //		for (UserStruct userStruct : userStructs) {
 //			Structure structure = structures.get(userStruct.getStructId());
@@ -422,7 +421,7 @@ public class UpdateUtils implements UpdateUtil {
 
 		int numUpdated = DBConnection.get().replaceIntoTableValues(DBConstants.TABLE_STRUCTURE_FOR_USER, newRows);
 
-		Log.info("num userStructs updated: " + numUpdated 
+		log.info("num userStructs updated: " + numUpdated 
 				+ ". Number of userStructs: " + userStructIdsToLastRetrievedTime.size());
 		if (numUpdated == userStructIdsToLastRetrievedTime.size()*2) {
 			return true;
@@ -701,6 +700,52 @@ public class UpdateUtils implements UpdateUtil {
 
 		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_MONSTER_EVOLVING_FAIL_FOR_USER, insertParams, 
 				columnsToUpdate, null);//DBConstants.USER_CITIES__CURRENT_RANK, increment);
+
+		return numUpdated;
+	}
+	
+	public int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters) {
+		String tableName = DBConstants.TABLE_MONSTER_HEALING_FOR_USER;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		for (MonsterHealingForUser mhfu : monsters) {
+			Map <String, Object> aRow = new HashMap<String, Object>();
+			
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__USER_ID, userId);
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID, mhfu.getMonsterForUserId());
+			
+			Date d = mhfu.getExpectedStartTime();
+			Timestamp startTime = new Timestamp(d.getTime());
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__EXPECTED_START_TIME, startTime);
+			
+			d = mhfu.getQueuedTime();
+			Timestamp queuedTime = new Timestamp(d.getTime());
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME, queuedTime);
+		}
+		
+		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
+
+		log.info("num monster_healing updated: " + numUpdated 
+				+ ". Number of monster_healing: " + monsters.size());
+		return 0;
+	}
+	
+	@Override
+	public int updateUserMonsterTeamSlotNum(List<Long> userMonsterIdList, List<Integer> teamSlotNum) {
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		
+		int size = userMonsterIdList.size();
+		
+		for (int i = 0; i < size; i++) {
+			long userMonsterId = userMonsterIdList.get(i);
+			conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userMonsterId);
+			absoluteParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
+		}
+
+		int numUpdated = DBConnection.get().updateTableRows(tableName, null,
+				absoluteParams, conditionParams, "AND");
 
 		return numUpdated;
 	}

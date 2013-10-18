@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
@@ -147,5 +148,10 @@ public interface UpdateUtil {
   		Map<Long, Integer> userEquipIdsToDurabilities); 
   
   public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);
+  
+  public abstract int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters);
+  
+  public abstract int updateUserMonsterTeamSlotNum(List<Long> userMonsterIdList,
+  		List<Integer> teamSlotNumList);
   
 }
