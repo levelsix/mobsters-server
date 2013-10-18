@@ -2297,6 +2297,10 @@ public final class EventStartupProto {
       // optional int32 numBeginnerSalesAllowed = 17;
       boolean hasNumBeginnerSalesAllowed();
       int getNumBeginnerSalesAllowed();
+      
+      // optional int32 maxNumTeamSlots = 18;
+      boolean hasMaxNumTeamSlots();
+      int getMaxNumTeamSlots();
     }
     public static final class StartupConstants extends
         com.google.protobuf.GeneratedMessage
@@ -5221,6 +5225,16 @@ public final class EventStartupProto {
         return numBeginnerSalesAllowed_;
       }
       
+      // optional int32 maxNumTeamSlots = 18;
+      public static final int MAXNUMTEAMSLOTS_FIELD_NUMBER = 18;
+      private int maxNumTeamSlots_;
+      public boolean hasMaxNumTeamSlots() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      public int getMaxNumTeamSlots() {
+        return maxNumTeamSlots_;
+      }
+      
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -5239,6 +5253,7 @@ public final class EventStartupProto {
         faqFileName_ = "";
         adminChatUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         numBeginnerSalesAllowed_ = 0;
+        maxNumTeamSlots_ = 0;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -5302,6 +5317,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00004000) == 0x00004000)) {
           output.writeInt32(17, numBeginnerSalesAllowed_);
+        }
+        if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          output.writeInt32(18, maxNumTeamSlots_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -5379,6 +5397,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00004000) == 0x00004000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(17, numBeginnerSalesAllowed_);
+        }
+        if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(18, maxNumTeamSlots_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -5573,6 +5595,8 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00008000);
           numBeginnerSalesAllowed_ = 0;
           bitField0_ = (bitField0_ & ~0x00010000);
+          maxNumTeamSlots_ = 0;
+          bitField0_ = (bitField0_ & ~0x00020000);
           return this;
         }
         
@@ -5709,6 +5733,10 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00004000;
           }
           result.numBeginnerSalesAllowed_ = numBeginnerSalesAllowed_;
+          if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+            to_bitField0_ |= 0x00008000;
+          }
+          result.maxNumTeamSlots_ = maxNumTeamSlots_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -5821,6 +5849,9 @@ public final class EventStartupProto {
           }
           if (other.hasNumBeginnerSalesAllowed()) {
             setNumBeginnerSalesAllowed(other.getNumBeginnerSalesAllowed());
+          }
+          if (other.hasMaxNumTeamSlots()) {
+            setMaxNumTeamSlots(other.getMaxNumTeamSlots());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -5958,6 +5989,11 @@ public final class EventStartupProto {
               case 136: {
                 bitField0_ |= 0x00010000;
                 numBeginnerSalesAllowed_ = input.readInt32();
+                break;
+              }
+              case 144: {
+                bitField0_ |= 0x00020000;
+                maxNumTeamSlots_ = input.readInt32();
                 break;
               }
             }
@@ -7009,6 +7045,27 @@ public final class EventStartupProto {
         public Builder clearNumBeginnerSalesAllowed() {
           bitField0_ = (bitField0_ & ~0x00010000);
           numBeginnerSalesAllowed_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // optional int32 maxNumTeamSlots = 18;
+        private int maxNumTeamSlots_ ;
+        public boolean hasMaxNumTeamSlots() {
+          return ((bitField0_ & 0x00020000) == 0x00020000);
+        }
+        public int getMaxNumTeamSlots() {
+          return maxNumTeamSlots_;
+        }
+        public Builder setMaxNumTeamSlots(int value) {
+          bitField0_ |= 0x00020000;
+          maxNumTeamSlots_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearMaxNumTeamSlots() {
+          bitField0_ = (bitField0_ & ~0x00020000);
+          maxNumTeamSlots_ = 0;
           onChanged();
           return this;
         }
@@ -11941,7 +11998,7 @@ public final class EventStartupProto {
       "\215\001\n\023StartupRequestProto\022\014\n\004udid\030\001 \001(\t\022\022\n" +
       "\nversionNum\030\002 \001(\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\n" +
       "macAddress\030\004 \001(\t\022\024\n\014advertiserId\030\005 \001(\t\022\027" +
-      "\n\017isForceTutorial\030\006 \001(\010\"\376\032\n\024StartupRespo" +
+      "\n\017isForceTutorial\030\006 \001(\010\"\227\033\n\024StartupRespo" +
       "nseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.prot" +
       "o.FullUserProto\022I\n\rstartupStatus\030\002 \001(\01622",
       ".com.lvl6.proto.StartupResponseProto.Sta" +
@@ -11982,7 +12039,7 @@ public final class EventStartupProto {
       "(\005\032\202\001\n\031ReferralNotificationProto\0222\n\010refe" +
       "rred\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
       "roto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenT" +
-      "oReferrer\030\003 \001(\005\032\246\r\n\020StartupConstants\022H\n\025" +
+      "oReferrer\030\003 \001(\005\032\277\r\n\020StartupConstants\022H\n\025" +
       "inAppPurchasePackages\030\001 \003(\0132).com.lvl6.p",
       "roto.InAppPurchasePackageProto\022\027\n\017maxLev" +
       "elForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030" +
@@ -12006,29 +12063,30 @@ public final class EventStartupProto {
       "\022\037\n\027fbConnectRewardDiamonds\030\016 \001(\005\022\023\n\013faq",
       "FileName\030\017 \001(\t\022<\n\022adminChatUserProto\030\020 \001" +
       "(\0132 .com.lvl6.proto.MinimumUserProto\022\037\n\027" +
-      "numBeginnerSalesAllowed\030\021 \001(\005\032y\n\023Tournam" +
-      "entConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014loss" +
-      "esWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033n" +
-      "umHoursToShowAfterEventEnd\030\004 \001(\005\032c\n\030Down" +
-      "loadableNibConstants\022\022\n\nmapNibName\030\001 \001(\t" +
-      "\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShoppe" +
-      "NibName\030\003 \001(\t\032\235\001\n\rClanConstants\022 \n\030diamo" +
-      "ndPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharLeng",
-      "thForClanName\030\002 \001(\005\022\'\n\037maxCharLengthForC" +
-      "lanDescription\030\003 \001(\005\022\037\n\027maxCharLengthFor" +
-      "ClanTag\030\004 \001(\005\032_\n\031AnimatedSpriteOffsetPro" +
-      "to\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037." +
-      "com.lvl6.proto.CoordinateProto\032\367\001\n\023NormS" +
-      "tructConstants\022/\n\'minutesToUpgradeForNor" +
-      "mStructMultiplier\030\001 \001(\001\022&\n\036incomeFromNor" +
-      "mStructMultiplier\030\002 \001(\001\022)\n!upgradeStruct" +
-      "CoinCostExponentBase\030\003 \001(\001\022,\n$upgradeStr" +
-      "uctDiamondCostExponentBase\030\004 \001(\001\022.\n&diam",
-      "ondCostForInstantUpgradeMultiplier\030\005 \001(\001" +
-      "\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR" +
-      "_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupSt" +
-      "atus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002" +
-      "B\023B\021EventStartupProto"
+      "numBeginnerSalesAllowed\030\021 \001(\005\022\027\n\017maxNumT" +
+      "eamSlots\030\022 \001(\005\032y\n\023TournamentConstants\022\022\n" +
+      "\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022" +
+      "\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowAf" +
+      "terEventEnd\030\004 \001(\005\032c\n\030DownloadableNibCons" +
+      "tants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNi" +
+      "bName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032\235" +
+      "\001\n\rClanConstants\022 \n\030diamondPriceToCreate",
+      "Clan\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002" +
+      " \001(\005\022\'\n\037maxCharLengthForClanDescription\030" +
+      "\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\032_" +
+      "\n\031AnimatedSpriteOffsetProto\022\021\n\timageName" +
+      "\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto." +
+      "CoordinateProto\032\367\001\n\023NormStructConstants\022" +
+      "/\n\'minutesToUpgradeForNormStructMultipli" +
+      "er\030\001 \001(\001\022&\n\036incomeFromNormStructMultipli" +
+      "er\030\002 \001(\001\022)\n!upgradeStructCoinCostExponen" +
+      "tBase\030\003 \001(\001\022,\n$upgradeStructDiamondCostE",
+      "xponentBase\030\004 \001(\001\022.\n&diamondCostForInsta" +
+      "ntUpgradeMultiplier\030\005 \001(\001\"A\n\014UpdateStatu" +
+      "s\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MA" +
+      "JOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN" +
+      "_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStartu" +
+      "pProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12072,7 +12130,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "MaxNumTeamSlots", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor =

@@ -5,6 +5,11 @@ import com.lvl6.info.CoordinatePair;
 
 public class ControllerConstants {
 
+	//MOBSTERS CONSTANTS
+	public static final int MONSTER_FOR_USER__MAX_TEAM_SIZE = 3;
+	
+	
+	
   public static final int NOT_SET = -1;
   
   //GENERATING LISTS OF ENEMIES

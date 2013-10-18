@@ -99,6 +99,8 @@ message StartupResponseProto {
 		optional MinimumUserProto adminChatUserProto = 16;
 		optional int32 numBeginnerSalesAllowed = 17;
 		
+		optional int32 maxNumTeamSlots = 18;
+		
 		message TournamentConstants {
 			optional int32 winsWeight = 1;
 			optional int32 lossesWeight = 2;
