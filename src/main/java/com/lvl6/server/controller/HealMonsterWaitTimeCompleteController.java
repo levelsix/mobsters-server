@@ -177,26 +177,33 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
    * selected monsters (the second argument) might be modified
    */
   private void retainValidMonsters(Set<Long> existing, List<Long> ids) {
+  	ids.add(123456789L);
   	log.info("existing=" + existing + "\t ids=" + ids);
   	
   	List<Long> copyIds = new ArrayList<Long>(ids);
   	List<Long> invalidIds = new ArrayList<Long>();
   	
+  	int copySize = copyIds.size() - 1;
   	//go through the ids client sent, store into invalidIds the ids
   	//that are not in the set "existing"
-  	for(long id : ids) {
-  		if (!existing.contains(id)) {
-  			invalidIds.add(id);
+  	//iterating from back to front in order to modify the "ids" list more easily
+  	for(int index = copySize; index >= 0; index--) {
+  		long idClientAskedFor = copyIds.get(index);
+  		
+  		if (!existing.contains(idClientAskedFor)) {
+  			invalidIds.add(idClientAskedFor);
+  			// remove the invalid ids from ids client sent
+  			ids.remove(index); 
   		}
   	}
   	
   	// remove the invalid ids from ids client sent 
   	// (modifying argument so calling function doesn't have to do it)
-  	ids.removeAll(invalidIds);
+//  	ids.removeAll(invalidIds); unsupported GRRRRRRR!!! >:|
   	
-  	if (copyIds.size() != ids.size()) {
+  	if (copySize != ids.size()) {
   		//client asked for invalid ids
-  		log.error("client asked for some invalid ids. asked for ids=" + copyIds + 
+  		log.warn("client asked for some invalid ids. asked for ids=" + copyIds + 
   				"\t invalidIds=" + invalidIds + "\t existingIds=" + existing +
   				"\t remainingIds after purge =" + ids);
   	}
