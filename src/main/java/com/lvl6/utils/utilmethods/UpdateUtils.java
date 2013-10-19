@@ -724,6 +724,9 @@ public class UpdateUtils implements UpdateUtil {
 			newRows.add(aRow);
 		}
 		
+		log.info("newRows=" + newRows);
+		
+		
 		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
 
 		log.info("num monster_healing updated: " + numUpdated 

@@ -177,6 +177,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
    * selected monsters (the second argument) might be modified
    */
   private void retainValidMonsters(Set<Long> existing, List<Long> ids) {
+  	log.info("existing=" + existing + "\t ids=" + ids);
+  	
   	List<Long> copyIds = new ArrayList<Long>(ids);
   	ids.retainAll(existing);
   	

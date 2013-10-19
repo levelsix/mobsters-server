@@ -75,7 +75,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       condClauses.add(DBConstants.MONSTER_FOR_USER__ID + "=?");
       values.add(userMonsterId);
     }
-//    query += StringUtils.getListInString(condClauses, "or") + ") and " +
+    query += StringUtils.getListInString(condClauses, "or") + ");"; // +
 //    		DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
 //    values.add(isComplete);
 

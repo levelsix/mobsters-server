@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.mortbay.log.Log;
+
 import com.lvl6.properties.DBConstants;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
@@ -255,6 +257,8 @@ public class DeleteUtils implements DeleteUtil {
   	List<Object> values = new ArrayList<Object>();
   	values.add(userId);
   	values.addAll(userMonsterIds);
+  	
+  	Log.info("userMonsterIds=" + userMonsterIds + "\t values sent to db: " + values);
   	
   	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
     return numDeleted;
