@@ -24,7 +24,6 @@ import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
@@ -59,6 +58,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     int userId = senderProto.getUserId();
     boolean isSpeedUp = reqProto.getIsSpeedup();
     List<Long> userMonsterIds = reqProto.getUserMonsterIdsList();
+    userMonsterIds = new ArrayList<Long>(userMonsterIds);
     int gemsForSpeedUp = reqProto.getGemsForSpeedup();
 
     //set some values to send to the client (the response proto)
@@ -115,20 +115,6 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
-  
-  private Map<Long, UserMonsterHealingProto> convertIntoUserMonsterIdToProtoMap(
-  		List<UserMonsterHealingProto> umhpList) {
-  	Map<Long, UserMonsterHealingProto> returnMap = new HashMap<Long, UserMonsterHealingProto>();
-  	if (null == umhpList) {
-  		return returnMap;
-  	}
-  	for (UserMonsterHealingProto umhp : umhpList) {
-  		long id = umhp.getUserMonsterId();
-  		returnMap.put(id, umhp);
-  	}
-  	
-  	return returnMap;
-  }
 
   /**
    * Return true if user request is valid; false otherwise and set the
@@ -181,31 +167,14 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   	log.info("existing=" + existing + "\t ids=" + ids);
   	
   	List<Long> copyIds = new ArrayList<Long>(ids);
-  	List<Long> invalidIds = new ArrayList<Long>();
-  	
-  	int copySize = copyIds.size() - 1;
-  	//go through the ids client sent, store into invalidIds the ids
-  	//that are not in the set "existing"
-  	//iterating from back to front in order to modify the "ids" list more easily
-  	for(int index = copySize; index >= 0; index--) {
-  		long idClientAskedFor = copyIds.get(index);
-  		
-  		if (!existing.contains(idClientAskedFor)) {
-  			invalidIds.add(idClientAskedFor);
-  			// remove the invalid ids from ids client sent
-  			ids.remove(index); 
-  		}
-  	}
-  	
   	// remove the invalid ids from ids client sent 
   	// (modifying argument so calling function doesn't have to do it)
-//  	ids.removeAll(invalidIds); unsupported GRRRRRRR!!! >:|
+  	ids.retainAll(existing);
   	
-  	if (copySize != ids.size()) {
+  	if (copyIds.size() != ids.size()) {
   		//client asked for invalid ids
   		log.warn("client asked for some invalid ids. asked for ids=" + copyIds + 
-  				"\t invalidIds=" + invalidIds + "\t existingIds=" + existing +
-  				"\t remainingIds after purge =" + ids);
+  				"\t existingIds=" + existing + "\t remainingIds after purge =" + ids);
   	}
   }
   
