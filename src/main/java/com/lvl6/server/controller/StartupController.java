@@ -654,6 +654,8 @@ public class StartupController extends EventController {
   	int userId = user.getId();
     List<MonsterForUser> userMonsters= RetrieveUtils.monsterForUserRetrieveUtils()
         .getMonstersForUser(userId);
+    
+    log.info("\n USER MONSTERS=" + userMonsters);
     if (null != userMonsters && !userMonsters.isEmpty()) {
     	for (MonsterForUser mfu : userMonsters) {
     		FullUserMonsterProto fump = CreateInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu);
