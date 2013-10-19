@@ -4672,6 +4672,401 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserProto)
   }
   
+  public interface LevelAndRequiredExpProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 level = 1;
+    boolean hasLevel();
+    int getLevel();
+    
+    // optional int32 requiredExperience = 2;
+    boolean hasRequiredExperience();
+    int getRequiredExperience();
+  }
+  public static final class LevelAndRequiredExpProto extends
+      com.google.protobuf.GeneratedMessage
+      implements LevelAndRequiredExpProtoOrBuilder {
+    // Use LevelAndRequiredExpProto.newBuilder() to construct.
+    private LevelAndRequiredExpProto(Builder builder) {
+      super(builder);
+    }
+    private LevelAndRequiredExpProto(boolean noInit) {}
+    
+    private static final LevelAndRequiredExpProto defaultInstance;
+    public static LevelAndRequiredExpProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public LevelAndRequiredExpProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_LevelAndRequiredExpProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 level = 1;
+    public static final int LEVEL_FIELD_NUMBER = 1;
+    private int level_;
+    public boolean hasLevel() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getLevel() {
+      return level_;
+    }
+    
+    // optional int32 requiredExperience = 2;
+    public static final int REQUIREDEXPERIENCE_FIELD_NUMBER = 2;
+    private int requiredExperience_;
+    public boolean hasRequiredExperience() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getRequiredExperience() {
+      return requiredExperience_;
+    }
+    
+    private void initFields() {
+      level_ = 0;
+      requiredExperience_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, level_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, requiredExperience_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, level_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, requiredExperience_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.UserProto.LevelAndRequiredExpProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_LevelAndRequiredExpProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.UserProto.LevelAndRequiredExpProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        level_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        requiredExperience_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.UserProto.LevelAndRequiredExpProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto getDefaultInstanceForType() {
+        return com.lvl6.proto.UserProto.LevelAndRequiredExpProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto build() {
+        com.lvl6.proto.UserProto.LevelAndRequiredExpProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.UserProto.LevelAndRequiredExpProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.UserProto.LevelAndRequiredExpProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto buildPartial() {
+        com.lvl6.proto.UserProto.LevelAndRequiredExpProto result = new com.lvl6.proto.UserProto.LevelAndRequiredExpProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.level_ = level_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.requiredExperience_ = requiredExperience_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.UserProto.LevelAndRequiredExpProto) {
+          return mergeFrom((com.lvl6.proto.UserProto.LevelAndRequiredExpProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.UserProto.LevelAndRequiredExpProto other) {
+        if (other == com.lvl6.proto.UserProto.LevelAndRequiredExpProto.getDefaultInstance()) return this;
+        if (other.hasLevel()) {
+          setLevel(other.getLevel());
+        }
+        if (other.hasRequiredExperience()) {
+          setRequiredExperience(other.getRequiredExperience());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              level_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              requiredExperience_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 level = 1;
+      private int level_ ;
+      public boolean hasLevel() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getLevel() {
+        return level_;
+      }
+      public Builder setLevel(int value) {
+        bitField0_ |= 0x00000001;
+        level_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLevel() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        level_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 requiredExperience = 2;
+      private int requiredExperience_ ;
+      public boolean hasRequiredExperience() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getRequiredExperience() {
+        return requiredExperience_;
+      }
+      public Builder setRequiredExperience(int value) {
+        bitField0_ |= 0x00000002;
+        requiredExperience_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRequiredExperience() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        requiredExperience_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.LevelAndRequiredExpProto)
+    }
+    
+    static {
+      defaultInstance = new LevelAndRequiredExpProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.LevelAndRequiredExpProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumClanProto_descriptor;
   private static
@@ -4692,6 +5087,11 @@ public final class UserProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_LevelAndRequiredExpProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4733,7 +5133,9 @@ public final class UserProto {
       "\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030",
       "numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWa" +
       "llPostNotificationTime\030\032 \001(\003\022\021\n\tkabamNai" +
-      "d\030\033 \001(\tB\013B\tUserProto"
+      "d\030\033 \001(\t\"E\n\030LevelAndRequiredExpProto\022\r\n\005l" +
+      "evel\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005B\013" +
+      "B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4772,6 +5174,14 @@ public final class UserProto {
               new java.lang.String[] { "UserId", "Name", "Level", "Diamonds", "Coins", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalMonsterSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", },
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
+          internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_LevelAndRequiredExpProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor,
+              new java.lang.String[] { "Level", "RequiredExperience", },
+              com.lvl6.proto.UserProto.LevelAndRequiredExpProto.class,
+              com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder.class);
           return null;
         }
       };

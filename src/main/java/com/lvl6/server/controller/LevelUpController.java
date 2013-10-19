@@ -24,7 +24,7 @@ import com.lvl6.proto.EventUserProto.LevelUpResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.LevelRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -79,7 +79,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //      int levelAfterLeveling = ControllerConstants.NOT_SET;
       if (legitLevelUp) {
         int newNextLevel = user.getLevel() + 2;
-        int expRequiredForNewNextLevel = LevelsRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(newNextLevel);
+        int expRequiredForNewNextLevel = LevelRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(newNextLevel);
 
         int newLevel = user.getLevel() + 1;
 //        levelBeforeLeveling = user.getLevel();
@@ -163,7 +163,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("user is already at server's allowed max level: " + ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
       return false;
     }
-    Integer expRequiredForNextLevel = LevelsRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(user.getLevel() + 1);
+    Integer expRequiredForNextLevel = LevelRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(user.getLevel() + 1);
     if (expRequiredForNextLevel == null) {
       resBuilder.setStatus(LevelUpStatus.OTHER_FAIL);
       log.error("no experience required inputted for level: " + user.getLevel() + 1);

@@ -41,6 +41,8 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
@@ -62,16 +64,21 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.FullUserProto;
+import com.lvl6.proto.UserProto.LevelAndRequiredExpProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.LevelRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
@@ -191,20 +198,20 @@ public class StartupController extends EventController {
           setCitiesAndUserCityInfos(resBuilder, user);
           setInProgressAndAvailableQuests(resBuilder, user);
           setUserClanInfos(resBuilder, user);
+          setGoldSales(resBuilder, user);
           setNotifications(resBuilder, user);
+          setNoticesToPlayers(resBuilder, user);
           setChatMessages(resBuilder, user);
           setPrivateChatPosts(resBuilder, user);
-          setStaticEquipsAndStructs(resBuilder);
+          setStaticMonstersAndStructs(resBuilder);
+          setUserMonstersAndUserMonstersHealing(resBuilder, user);
           setExpansionCosts(resBuilder);
+          setBoosterPurchases(resBuilder);
+          setLevelAndRequiredExperience(resBuilder);
           
-          
-          setUserEquipsAndEquips(resBuilder, user);
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
-          setNoticesToPlayers(resBuilder, user);
           setLockBoxEvents(resBuilder, user);
-          setBoosterPurchases(resBuilder);
-          setGoldSales(resBuilder, user);
 
 //          setLeaderboardEventStuff(resBuilder);
           setAllies(resBuilder, user);
@@ -370,6 +377,20 @@ public class StartupController extends EventController {
       resBuilder.addUserClanInfo(CreateInfoProtoUtils.createFullUserClanProtoFromUserClan(uc));
     }
   }
+
+  private void setGoldSales(StartupResponseProto.Builder resBuilder, User user) {
+    GoldSaleProto sale = MiscMethods.createFakeGoldSaleForNewPlayer(user);
+    if (sale != null) {
+      resBuilder.addGoldSales(sale);
+    }
+
+    List<GoldSale> sales = GoldSaleRetrieveUtils.getCurrentAndFutureGoldSales();
+    if (sales != null && sales.size() > 0) {
+      for (GoldSale s : sales) {
+        resBuilder.addGoldSales(CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(s));
+      }
+    }
+  }
   
   private void setNotifications(Builder resBuilder, User user) {
     List<Integer> userIds = new ArrayList<Integer>();
@@ -403,6 +424,16 @@ public class StartupController extends EventController {
 //    if (clanChatPosts != null && clanChatPosts.size() > 0) {
 //
 //    }
+  }
+  
+  private void setNoticesToPlayers(Builder resBuilder, User user) {
+  	List<String> notices = StartupStuffRetrieveUtils.getAllActiveAlerts();
+  	if (null != notices) {
+  	  for (String notice : notices) {
+  	    resBuilder.addNoticesToPlayers(notice);
+  	  }
+  	}
+
   }
   
   private void setChatMessages(StartupResponseProto.Builder resBuilder, User user) {
@@ -607,7 +638,7 @@ public class StartupController extends EventController {
     return clanIdsToUserIdSet;
   }
 
-  private void setStaticEquipsAndStructs(StartupResponseProto.Builder resBuilder) {
+  private void setStaticMonstersAndStructs(StartupResponseProto.Builder resBuilder) {
     Collection<Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters().values();
     for (Monster monster : monsters) {
       resBuilder.addStaticMonsters(CreateInfoProtoUtils.createMonsterProto(0, monster, false, 0));
@@ -616,6 +647,30 @@ public class StartupController extends EventController {
     Collection<Structure> structs = StructureRetrieveUtils.getStructIdsToStructs().values();
     for (Structure struct : structs) {
       resBuilder.addStaticStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
+    }
+  }
+
+  private void setUserMonstersAndUserMonstersHealing(Builder resBuilder, User user) {
+  	int userId = user.getId();
+    List<MonsterForUser> userMonsters= RetrieveUtils.monsterForUserRetrieveUtils()
+        .getMonstersForUser(userId);
+    if (null != userMonsters && !userMonsters.isEmpty()) {
+    	for (MonsterForUser mfu : userMonsters) {
+    		FullUserMonsterProto fump = CreateInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu);
+    		resBuilder.addUsersMonsters(fump);
+    	}
+    }
+    
+    Map<Long, MonsterHealingForUser> userMonstersHealing = MonsterHealingForUserRetrieveUtils
+    		.getMonstersForUser(userId);
+    if (null == userMonstersHealing || userMonstersHealing.isEmpty()) {
+    	return;
+    }
+    
+    Collection<MonsterHealingForUser> healingMonsters = userMonstersHealing.values();
+    for (MonsterHealingForUser mhfu : healingMonsters) {
+    	UserMonsterHealingProto umhp = CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
+    	resBuilder.addMonstersHealing(umhp);
     }
   }
   
@@ -629,6 +684,82 @@ public class StartupController extends EventController {
   	}
   }
 
+  private void setBoosterPurchases(StartupResponseProto.Builder resBuilder) {
+    Iterator<RareBoosterPurchaseProto> it = goodEquipsRecievedFromBoosterPacks.iterator();
+    List<RareBoosterPurchaseProto> boosterPurchases = new ArrayList<RareBoosterPurchaseProto>();
+    while (it.hasNext()) {
+      boosterPurchases.add(it.next());
+    }
+
+    Comparator<RareBoosterPurchaseProto> c = new Comparator<RareBoosterPurchaseProto>() {
+      @Override
+      public int compare(RareBoosterPurchaseProto o1, RareBoosterPurchaseProto o2) {
+        if (o1.getTimeOfPurchase() < o2.getTimeOfPurchase()) {
+          return -1;
+        } else if (o1.getTimeOfPurchase() > o2.getTimeOfPurchase()) {
+          return 1;
+        } else {
+          return 0;
+        }
+      }
+    };
+    Collections.sort(boosterPurchases, c);
+    // Need to add them in reverse order
+    for (int i = 0; i < boosterPurchases.size(); i++) {
+      resBuilder.addRareBoosterPurchases(boosterPurchases.get(i));
+    }
+  }  
+  
+  
+  private void setLevelAndRequiredExperience(Builder resBuilder) {
+  	Map<Integer, Integer> levelToRequiredExp =
+  			LevelRequiredExperienceRetrieveUtils.getLevelToRequiredExperienceForLevel();
+  	
+  	for (int lvl : levelToRequiredExp.keySet())  {
+  		int exp = levelToRequiredExp.get(lvl);
+  		LevelAndRequiredExpProto.Builder larepb = LevelAndRequiredExpProto.newBuilder();
+  		larepb.setLevel(lvl);
+  		larepb.setRequiredExperience(exp);
+  		resBuilder.addLarep(larepb.build());
+  	}
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 //  private void setAllBosses(Builder resBuilder, UserType type) {
 //    Map<Integer, Monster> bossIdsToBosses = 
 //        MonsterRetrieveUtils.getBossIdsToBosses();
@@ -724,33 +855,6 @@ public class StartupController extends EventController {
     return "";
   }
 
-  private void setBoosterPurchases(StartupResponseProto.Builder resBuilder) {
-    Iterator<RareBoosterPurchaseProto> it = goodEquipsRecievedFromBoosterPacks.iterator();
-    List<RareBoosterPurchaseProto> boosterPurchases = new ArrayList<RareBoosterPurchaseProto>();
-    while (it.hasNext()) {
-      boosterPurchases.add(it.next());
-    }
-
-    Comparator<RareBoosterPurchaseProto> c = new Comparator<RareBoosterPurchaseProto>() {
-      @Override
-      public int compare(RareBoosterPurchaseProto o1, RareBoosterPurchaseProto o2) {
-        if (o1.getTimeOfPurchase() < o2.getTimeOfPurchase()) {
-          return -1;
-        } else if (o1.getTimeOfPurchase() > o2.getTimeOfPurchase()) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }
-    };
-    Collections.sort(boosterPurchases, c);
-    // Need to add them in reverse order
-    for (int i = 0; i < boosterPurchases.size(); i++) {
-      resBuilder.addRareBoosterPurchases(boosterPurchases.get(i));
-    }
-  }
-
-
   private void setLockBoxEvents(StartupResponseProto.Builder resBuilder, User user) {
 //    resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
 //    Map<Integer, UserLockBoxEvent> map = UserLockBoxEventRetrieveUtils
@@ -762,20 +866,6 @@ public class StartupController extends EventController {
 //            user.getType()));
 //      }
 //    }
-  }
-
-  private void setGoldSales(StartupResponseProto.Builder resBuilder, User user) {
-    GoldSaleProto sale = MiscMethods.createFakeGoldSaleForNewPlayer(user);
-    if (sale != null) {
-      resBuilder.addGoldSales(sale);
-    }
-
-    List<GoldSale> sales = GoldSaleRetrieveUtils.getCurrentAndFutureGoldSales();
-    if (sales != null && sales.size() > 0) {
-      for (GoldSale s : sales) {
-        resBuilder.addGoldSales(CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(s));
-      }
-    }
   }
 
   protected void updateLeaderboard(String apsalarId, User user, Timestamp now,
@@ -805,16 +895,6 @@ public class StartupController extends EventController {
     resEvent1.setRetrieveStaticDataResponseProto(resProto1.build());
     server.writePreDBEvent(resEvent1, udid);
     log.info("Structs sent");
-  }
-
-  private void setNoticesToPlayers(Builder resBuilder, User user) {
-  	List<String> notices = StartupStuffRetrieveUtils.getAllActiveAlerts();
-  	if (null != notices) {
-  	  for (String notice : notices) {
-  	    resBuilder.addNoticesToPlayers(notice);
-  	  }
-  	}
-
   }
 
   private void setUnhandledForgeAttempts(Builder resBuilder, User user) {
@@ -1298,23 +1378,6 @@ public class StartupController extends EventController {
 //    if (allies != null && allies.size() > 0) {
 //      for (User ally : allies) {
 //        resBuilder.addAllies(CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(ally));
-//      }
-//    }
-  }
-
-  private void setUserEquipsAndEquips(Builder resBuilder, User user) {
-//    List<UserEquip> userEquips = RetrieveUtils.userEquipRetrieveUtils()
-//        .getUserEquipsForUser(user.getId());
-//    if (userEquips != null) {
-//      Map<Integer, Equipment> equipIdsToEquipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-//      Set<Integer> equipsGivenAlready = new HashSet<Integer>();
-//      for (UserEquip ue : userEquips) {
-//        resBuilder.addUserEquips(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(ue));
-//        if (!equipsGivenAlready.contains(ue.getEquipId())) {
-//          resBuilder.addEquips(CreateInfoProtoUtils
-//              .createFullEquipProtoFromEquip(equipIdsToEquipment.get(ue.getEquipId())));
-//          equipsGivenAlready.add(ue.getEquipId());
-//        }
 //      }
 //    }
   }

@@ -27,7 +27,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.LevelRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;

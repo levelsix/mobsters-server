@@ -53,13 +53,14 @@ message StartupResponseProto {
 	repeated FullStructureProto staticStructs = 22;
 	repeated CityExpansionCostProto expansionCosts = 23;
 	repeated MonsterProto staticMonsters = 24;
+	repeated FullUserMonsterProto usersMonsters = 25;
+	repeated UserMonsterHealingProto monstersHealing = 26;
 	
-	repeated RareBoosterPurchaseProto rareBoosterPurchases = 25;
+	repeated RareBoosterPurchaseProto rareBoosterPurchases = 27;
 	
-	optional string kabamNaid = 26;
+	optional string kabamNaid = 28;
 	
-	repeated UserMonsterHealingProto monstersHealing = 27;
-	repeated FullUserMonsterProto usersMonsters = 28;
+	repeated LevelAndRequiredExpProto larep = 29;
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;

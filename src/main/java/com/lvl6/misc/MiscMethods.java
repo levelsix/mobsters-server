@@ -54,7 +54,7 @@ import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LevelsRequiredExperienceRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.LevelRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
@@ -546,7 +546,7 @@ public class MiscMethods {
 //    ClanBossRewardRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
-    LevelsRequiredExperienceRetrieveUtils.reload();
+    LevelRequiredExperienceRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
     MonsterRewardRetrieveUtils.reload();

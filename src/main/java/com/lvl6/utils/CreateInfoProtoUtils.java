@@ -24,6 +24,7 @@ import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
@@ -71,6 +72,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterType;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
@@ -375,7 +377,7 @@ public class CreateInfoProtoUtils {
     return mcp.setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
   }
 
-  public static FullUserMonsterProto createFullUserEquipProtoFromUserEquip(MonsterForUser ue) {
+  public static FullUserMonsterProto createFullUserMonsterProtoFromUserMonster(MonsterForUser ue) {
     FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
     fumpb.setUserMonsterId(ue.getId());
     fumpb.setUserId(ue.getUserId());
@@ -387,18 +389,25 @@ public class CreateInfoProtoUtils {
     fumpb.setTeamSlotNum(ue.getTeamSlotNum());
     return fumpb.build();
   }
-
-  public static FullUserMonsterProto createFullUserEquipProto(long userMonsterId,
-      int uId, int equipId, int evolutionLevel, int enhancement) {
-    FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
-    fumpb.setUserMonsterId(userMonsterId);
-    fumpb.setUserId(uId);
-    fumpb.setMonsterId(equipId);
-    fumpb.setEnhancementPercentage(enhancement);
-
-    return fumpb.build();
+  
+  public static UserMonsterHealingProto createUserMonsterHealingProtoFromObj(
+  		MonsterHealingForUser mhfu) {
+  	UserMonsterHealingProto.Builder umhpb = UserMonsterHealingProto.newBuilder();
+  	umhpb.setUserId(mhfu.getUserId());
+  	umhpb.setUserMonsterId(mhfu.getMonsterForUserId());
+  	
+  	Date aDate = mhfu.getExpectedStartTime();
+  	if (null != aDate) {
+  		umhpb.setExpectedStartTimeMillis(aDate.getTime());
+  	}
+  	
+  	aDate = mhfu.getQueuedTime();
+  	if (null != aDate) {
+  		umhpb.setQueuedTimeMillis(aDate.getTime());
+  	}
+  	
+  	return umhpb.build();
   }
-
 
   public static FullTaskProto createFullTaskProtoFromTask(Task task) {
 

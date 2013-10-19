@@ -88,5 +88,11 @@ message FullUserProto {
 	optional string kabamNaid = 27;
 }
 
+//------------------------------------------------------------------------------------------
+
+message LevelAndRequiredExpProto {
+	optional int32 level = 1;
+	optional int32 requiredExperience = 2; 
+}
 
 //------------------------------------------------------------------------------------------
