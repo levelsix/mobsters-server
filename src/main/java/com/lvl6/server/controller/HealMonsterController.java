@@ -32,6 +32,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -101,7 +102,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
-    	  setResponseBuilder(resBuilder);
+    	  setResponseBuilder(resBuilder, userId);
       }
       
       HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(userId);
@@ -266,7 +267,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return nonProtos;
   }
   
-  private void setResponseBuilder(Builder resBuilder) {
+  private void setResponseBuilder(Builder resBuilder, int userId) {
+  	Map<Long, MonsterHealingForUser> alreadyHealing =
+  			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
+  	
+  	for(MonsterHealingForUser mhfu : alreadyHealing.values()) {
+  		UserMonsterHealingProto umhp =
+  				CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
+  		resBuilder.addUmhp(umhp);
+  	}
+  	
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
