@@ -110,12 +110,21 @@ import com.lvl6.utils.DBConnection;
     int maxSilverDrop = rs.getInt(i++);
     int numPuzzlePieces = rs.getInt(i++);
     float puzzlePieceDropRate = rs.getFloat(i++);
-    String carrotId = rs.getString(i++); 
+    String carrotDefeated = rs.getString(i++);
+    String carrotRecruited = rs.getString(i++);
+    String carrotEvolved = rs.getString(i++);
+    int elementOneDmg = rs.getInt(i++);
+    int elementTwoDmg = rs.getInt(i++);
+    int elementThreeDmg = rs.getInt(i++);
+    int elementFourDmg = rs.getInt(i++);
+    int elementFiveDmg = rs.getInt(i++);
+    
     
     Monster monster = new Monster(id, name, quality, evolutionLevel,
     		displayName, element, maxHp, imageName, monsterType, expReward,
     		minSilverDrop, maxSilverDrop, numPuzzlePieces, puzzlePieceDropRate,
-    		carrotId);
+    		carrotDefeated, carrotRecruited, carrotEvolved, elementOneDmg,
+    		elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg);
 
     monster.setRand(rand);
     return monster;
