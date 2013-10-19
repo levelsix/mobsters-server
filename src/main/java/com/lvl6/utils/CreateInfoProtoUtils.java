@@ -401,10 +401,10 @@ public class CreateInfoProtoUtils {
   		umhpb.setExpectedStartTimeMillis(aDate.getTime());
   	}
   	
-  	aDate = mhfu.getQueuedTime();
-  	if (null != aDate) {
-  		umhpb.setQueuedTimeMillis(aDate.getTime());
-  	}
+//  	aDate = mhfu.getQueuedTime();
+//  	if (null != aDate) {
+//  		umhpb.setQueuedTimeMillis(aDate.getTime());
+//  	}
   	
   	return umhpb.build();
   }

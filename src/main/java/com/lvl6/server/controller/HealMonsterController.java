@@ -258,9 +258,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	for(UserMonsterHealingProto umhp: protos.values()) {
   		Long monsterForUserId = umhp.getUserMonsterId();
   		Date expectedStartTime = new Date(umhp.getExpectedStartTimeMillis());
-  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
+//  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
   		MonsterHealingForUser mhfu = new MonsterHealingForUser(userId,
-  				monsterForUserId, expectedStartTime, queuedTime);
+  				monsterForUserId, expectedStartTime);//, queuedTime);
   		nonProtos.add(mhfu);
   	}
   	

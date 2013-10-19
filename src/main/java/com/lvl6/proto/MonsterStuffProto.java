@@ -2147,10 +2147,6 @@ public final class MonsterStuffProto {
     // optional int64 expectedStartTimeMillis = 3;
     boolean hasExpectedStartTimeMillis();
     long getExpectedStartTimeMillis();
-    
-    // optional int64 queuedTimeMillis = 4;
-    boolean hasQueuedTimeMillis();
-    long getQueuedTimeMillis();
   }
   public static final class UserMonsterHealingProto extends
       com.google.protobuf.GeneratedMessage
@@ -2211,21 +2207,10 @@ public final class MonsterStuffProto {
       return expectedStartTimeMillis_;
     }
     
-    // optional int64 queuedTimeMillis = 4;
-    public static final int QUEUEDTIMEMILLIS_FIELD_NUMBER = 4;
-    private long queuedTimeMillis_;
-    public boolean hasQueuedTimeMillis() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public long getQueuedTimeMillis() {
-      return queuedTimeMillis_;
-    }
-    
     private void initFields() {
       userId_ = 0;
       userMonsterId_ = 0L;
       expectedStartTimeMillis_ = 0L;
-      queuedTimeMillis_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2248,9 +2233,6 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, expectedStartTimeMillis_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(4, queuedTimeMillis_);
-      }
       getUnknownFields().writeTo(output);
     }
     
@@ -2271,10 +2253,6 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, expectedStartTimeMillis_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, queuedTimeMillis_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2406,8 +2384,6 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         expectedStartTimeMillis_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
-        queuedTimeMillis_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -2458,10 +2434,6 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000004;
         }
         result.expectedStartTimeMillis_ = expectedStartTimeMillis_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.queuedTimeMillis_ = queuedTimeMillis_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2486,9 +2458,6 @@ public final class MonsterStuffProto {
         }
         if (other.hasExpectedStartTimeMillis()) {
           setExpectedStartTimeMillis(other.getExpectedStartTimeMillis());
-        }
-        if (other.hasQueuedTimeMillis()) {
-          setQueuedTimeMillis(other.getQueuedTimeMillis());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2534,11 +2503,6 @@ public final class MonsterStuffProto {
             case 24: {
               bitField0_ |= 0x00000004;
               expectedStartTimeMillis_ = input.readInt64();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              queuedTimeMillis_ = input.readInt64();
               break;
             }
           }
@@ -2610,27 +2574,6 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional int64 queuedTimeMillis = 4;
-      private long queuedTimeMillis_ ;
-      public boolean hasQueuedTimeMillis() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public long getQueuedTimeMillis() {
-        return queuedTimeMillis_;
-      }
-      public Builder setQueuedTimeMillis(long value) {
-        bitField0_ |= 0x00000008;
-        queuedTimeMillis_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearQueuedTimeMillis() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        queuedTimeMillis_ = 0L;
-        onChanged();
-        return this;
-      }
-      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMonsterHealingProto)
     }
     
@@ -2687,10 +2630,10 @@ public final class MonsterStuffProto {
       "\005\022\021\n\tmonsterId\030\003 \001(\005\022\035\n\025enhancementPerce" +
       "ntage\030\004 \001(\005\022\025\n\rcurrentHealth\030\005 \001(\005\022\021\n\tnu",
       "mPieces\030\006 \001(\005\022\022\n\nisComplete\030\007 \001(\010\022\023\n\013tea" +
-      "mSlotNum\030\010 \001(\005\"{\n\027UserMonsterHealingProt" +
+      "mSlotNum\030\010 \001(\005\"a\n\027UserMonsterHealingProt" +
       "o\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003" +
-      "\022\037\n\027expectedStartTimeMillis\030\003 \001(\003\022\030\n\020que" +
-      "uedTimeMillis\030\004 \001(\003B\023B\021MonsterStuffProto"
+      "\022\037\n\027expectedStartTimeMillis\030\003 \001(\003B\023B\021Mon" +
+      "sterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2718,7 +2661,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor,
-              new java.lang.String[] { "UserId", "UserMonsterId", "ExpectedStartTimeMillis", "QueuedTimeMillis", },
+              new java.lang.String[] { "UserId", "UserMonsterId", "ExpectedStartTimeMillis", },
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder.class);
           return null;

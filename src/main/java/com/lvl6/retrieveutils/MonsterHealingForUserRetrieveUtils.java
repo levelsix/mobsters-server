@@ -3,6 +3,7 @@ package com.lvl6.retrieveutils;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -89,21 +90,26 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int i = 1;
     int userId = rs.getInt(i++);
     long monsterForUserId = rs.getLong(i++);
+    
+    Timestamp ts = null;
     Date expectedStartTime = null;
     try {
-    	expectedStartTime = rs.getTimestamp(i++);
-    } catch (SQLException e) {
-    	log.error("expected start time might be null userId=" + userId, e);
-    }
-    Date queuedTime = null;
-    try {
-    	queuedTime = rs.getTimestamp(i++);
+    	ts = rs.getTimestamp(i++);
+    	expectedStartTime = new Date(ts.getTime());
     } catch (SQLException e) {
     	log.error("expected start time might be null userId=" + userId, e);
     }
     
+//    Date queuedTime = null;
+//    try {
+//    	ts = rs.getTimestamp(i++);
+//    	queuedTime = new Date(ts.getTime());
+//    } catch (SQLException e) {
+//    	log.error("expected start time might be null userId=" + userId, e);
+//    }
+    
     MonsterHealingForUser userMonster = new MonsterHealingForUser(userId,
-    		monsterForUserId, expectedStartTime, queuedTime);
+    		monsterForUserId, expectedStartTime);//, queuedTime);
     return userMonster;
   }
 
