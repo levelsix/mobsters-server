@@ -219,12 +219,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //				  ", clientTime=" + clientTime + ", user=" + u);
 //		  return false;
 //	  }
-
-	  //delete the selected monsters from  the healing table
-	  List<Long> deleteIds = new ArrayList<Long>(protoDeleteMap.keySet());
-	  int num = DeleteUtils.get().deleteMonsterHealingForUser(
-	  		uId, deleteIds);
-	  log.info("deleted monster healing rows. numDeleted=" + num);
+  	
+  	int num = 0;
+	  //delete the selected monsters from  the healing table, if there are
+  	//any to delete
+  	if (!protoDeleteMap.isEmpty()) {
+  		List<Long> deleteIds = new ArrayList<Long>(protoDeleteMap.keySet());
+  		num = DeleteUtils.get().deleteMonsterHealingForUser(
+  				uId, deleteIds);
+  		log.info("deleted monster healing rows. numDeleted=" + num);
+  	}
 	  
 	  //convert protos to java counterparts
 	  List<MonsterHealingForUser> updateMap = convertToMonsterHealingForUser(
@@ -236,16 +240,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  updateAndNewMap.addAll(updateMap);
 	  updateAndNewMap.addAll(newMap);
 	  
-	  //update and insert the new monsters
-	  num = UpdateUtils.get().updateUserMonsterHealing(uId, updateAndNewMap);
-	  log.info("updated monster healing rows. numUpdated=" + num);
+	  //client could have just asked to delete queue with one thing
+	  if (!updateAndNewMap.isEmpty()) {
+	  	//update and insert the new monsters
+	  	num = UpdateUtils.get().updateUserMonsterHealing(uId, updateAndNewMap);
+	  	log.info("updated monster healing rows. numUpdated=" + num);
+	  }
 	  
-	  //for the new monsters, set the teamSlotNum to 0
-	  int size = protoNewMap.size();
-	  List<Long> userMonsterIdList = new ArrayList<Long>(protoNewMap.keySet());
-	  List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
-	  num = UpdateUtils.get().updateUserMonsterTeamSlotNum(userMonsterIdList, teamSlotNumList);
-	  log.info("updated user monster rows. numUpdated=" + num);
+	  //client could have deleted queue with one element and then added it
+	  //back in
+	  if (!protoNewMap.isEmpty()) {
+	  	//for the new monsters, set the teamSlotNum to 0
+	  	int size = protoNewMap.size();
+	  	List<Long> userMonsterIdList = new ArrayList<Long>(protoNewMap.keySet());
+	  	List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
+	  	num = UpdateUtils.get().updateUserMonsterTeamSlotNum(userMonsterIdList, teamSlotNumList);
+	  	log.info("updated user monster rows. numUpdated=" + num);
+	  }
 	  
 	  return true;
   }

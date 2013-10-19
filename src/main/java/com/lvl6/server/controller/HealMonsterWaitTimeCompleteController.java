@@ -180,12 +180,25 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   	log.info("existing=" + existing + "\t ids=" + ids);
   	
   	List<Long> copyIds = new ArrayList<Long>(ids);
-  	ids.retainAll(existing);
+  	List<Long> invalidIds = new ArrayList<Long>();
+  	
+  	//go through the ids client sent, store into invalidIds the ids
+  	//that are not in the set "existing"
+  	for(long id : ids) {
+  		if (!existing.contains(id)) {
+  			invalidIds.add(id);
+  		}
+  	}
+  	
+  	// remove the invalid ids from ids client sent 
+  	// (modifying argument so calling function doesn't have to do it)
+  	ids.removeAll(invalidIds);
   	
   	if (copyIds.size() != ids.size()) {
   		//client asked for invalid ids
-  		log.error("client asked for some invalid ids. ids=" + copyIds + 
-  				"\t validIds=" + existing);
+  		log.error("client asked for some invalid ids. asked for ids=" + copyIds + 
+  				"\t invalidIds=" + invalidIds + "\t existingIds=" + existing +
+  				"\t remainingIds after purge =" + ids);
   	}
   }
   
