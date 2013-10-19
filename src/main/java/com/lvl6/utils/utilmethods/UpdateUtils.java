@@ -721,6 +721,7 @@ public class UpdateUtils implements UpdateUtil {
 //			d = mhfu.getQueuedTime();
 //			Timestamp queuedTime = new Timestamp(d.getTime());
 //			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME, queuedTime);
+			newRows.add(aRow);
 		}
 		
 		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);

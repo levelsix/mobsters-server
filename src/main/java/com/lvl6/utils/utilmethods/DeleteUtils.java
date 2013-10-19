@@ -248,11 +248,15 @@ public class DeleteUtils implements DeleteUtil {
   	
   	String delimiter = ",";
   	String query = " DELETE FROM " + tableName + " WHERE " +
-  			DBConstants.MONSTER_HEALING_FOR_USER__USER_ID + "=?" + userId +
+  			DBConstants.MONSTER_HEALING_FOR_USER__USER_ID + "=?" +
   			" and " + DBConstants.MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID +
   			" IN (" + StringUtils.getListInString(questions, delimiter) + ");";
   	
-  	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, userMonsterIds);
+  	List<Object> values = new ArrayList<Object>();
+  	values.add(userId);
+  	values.addAll(userMonsterIds);
+  	
+  	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
     return numDeleted;
   }
 }
