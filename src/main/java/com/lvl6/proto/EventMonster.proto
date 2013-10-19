@@ -109,3 +109,57 @@ message HealMonsterWaitTimeCompleteResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+message AddMonsterToBattleTeamRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 teamSlotNum = 2;
+	optional int64 userMonsterId = 3;
+}
+
+message AddMonsterToBattleTeamResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional AddMonsterToBattleTeamStatus status = 2;
+	
+	enum AddMonsterToBattleTeamStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message RemoveMonsterFromBattleTeamRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 userMonsterId = 3;
+}
+
+message RemoveMonsterFromBattleTeamResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional AddMonsterToBattleTeamStatus status = 2;
+	
+	enum AddMonsterToBattleTeamStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message BuyMonsterInventorySlotRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 numPurchases = 2;
+}	
+
+message BuyMonsterInventorySlotResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional BuyMonsterInventorySlotStatus status = 2;
+	
+	 enum BuyMonsterInventorySlotStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_FUNDS = 2;
+		FAIL_OTHER = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
