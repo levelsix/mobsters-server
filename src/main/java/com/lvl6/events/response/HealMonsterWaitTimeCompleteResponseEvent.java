@@ -13,7 +13,7 @@ public class HealMonsterWaitTimeCompleteResponseEvent extends NormalResponseEven
   
   public HealMonsterWaitTimeCompleteResponseEvent(int playerId){
     super(playerId);
-    eventType = EventProtocolResponse.S_HEAL_MONSTER_EVENT;
+    eventType = EventProtocolResponse.S_HEAL_MONSTER_WAIT_TIME_COMPLETE;
   }
   
   @Override

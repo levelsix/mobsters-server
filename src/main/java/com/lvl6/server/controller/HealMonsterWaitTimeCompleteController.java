@@ -47,7 +47,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_HEAL_MONSTER_EVENT;
+    return EventProtocolRequest.C_HEAL_MONSTER_WAIT_TIME_COMPLETE;
   }
 
   @Override

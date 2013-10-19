@@ -62,6 +62,38 @@ public final class MonsterStuffProto {
     // optional bool puzzlePieceDropped = 13;
     boolean hasPuzzlePieceDropped();
     boolean getPuzzlePieceDropped();
+    
+    // optional string carrotDefeated = 14;
+    boolean hasCarrotDefeated();
+    String getCarrotDefeated();
+    
+    // optional string carrotRecruited = 15;
+    boolean hasCarrotRecruited();
+    String getCarrotRecruited();
+    
+    // optional string carrotEvolved = 16;
+    boolean hasCarrotEvolved();
+    String getCarrotEvolved();
+    
+    // optional int32 elementOneDmg = 18;
+    boolean hasElementOneDmg();
+    int getElementOneDmg();
+    
+    // optional int32 elementTwoDmg = 19;
+    boolean hasElementTwoDmg();
+    int getElementTwoDmg();
+    
+    // optional int32 elementThreeDmg = 20;
+    boolean hasElementThreeDmg();
+    int getElementThreeDmg();
+    
+    // optional int32 elementFourDmg = 21;
+    boolean hasElementFourDmg();
+    int getElementFourDmg();
+    
+    // optional int32 elementFiveDmg = 22;
+    boolean hasElementFiveDmg();
+    int getElementFiveDmg();
   }
   public static final class MonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -516,6 +548,152 @@ public final class MonsterStuffProto {
       return puzzlePieceDropped_;
     }
     
+    // optional string carrotDefeated = 14;
+    public static final int CARROTDEFEATED_FIELD_NUMBER = 14;
+    private java.lang.Object carrotDefeated_;
+    public boolean hasCarrotDefeated() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    public String getCarrotDefeated() {
+      java.lang.Object ref = carrotDefeated_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          carrotDefeated_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getCarrotDefeatedBytes() {
+      java.lang.Object ref = carrotDefeated_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        carrotDefeated_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string carrotRecruited = 15;
+    public static final int CARROTRECRUITED_FIELD_NUMBER = 15;
+    private java.lang.Object carrotRecruited_;
+    public boolean hasCarrotRecruited() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    public String getCarrotRecruited() {
+      java.lang.Object ref = carrotRecruited_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          carrotRecruited_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getCarrotRecruitedBytes() {
+      java.lang.Object ref = carrotRecruited_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        carrotRecruited_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string carrotEvolved = 16;
+    public static final int CARROTEVOLVED_FIELD_NUMBER = 16;
+    private java.lang.Object carrotEvolved_;
+    public boolean hasCarrotEvolved() {
+      return ((bitField0_ & 0x00008000) == 0x00008000);
+    }
+    public String getCarrotEvolved() {
+      java.lang.Object ref = carrotEvolved_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          carrotEvolved_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getCarrotEvolvedBytes() {
+      java.lang.Object ref = carrotEvolved_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        carrotEvolved_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional int32 elementOneDmg = 18;
+    public static final int ELEMENTONEDMG_FIELD_NUMBER = 18;
+    private int elementOneDmg_;
+    public boolean hasElementOneDmg() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    public int getElementOneDmg() {
+      return elementOneDmg_;
+    }
+    
+    // optional int32 elementTwoDmg = 19;
+    public static final int ELEMENTTWODMG_FIELD_NUMBER = 19;
+    private int elementTwoDmg_;
+    public boolean hasElementTwoDmg() {
+      return ((bitField0_ & 0x00020000) == 0x00020000);
+    }
+    public int getElementTwoDmg() {
+      return elementTwoDmg_;
+    }
+    
+    // optional int32 elementThreeDmg = 20;
+    public static final int ELEMENTTHREEDMG_FIELD_NUMBER = 20;
+    private int elementThreeDmg_;
+    public boolean hasElementThreeDmg() {
+      return ((bitField0_ & 0x00040000) == 0x00040000);
+    }
+    public int getElementThreeDmg() {
+      return elementThreeDmg_;
+    }
+    
+    // optional int32 elementFourDmg = 21;
+    public static final int ELEMENTFOURDMG_FIELD_NUMBER = 21;
+    private int elementFourDmg_;
+    public boolean hasElementFourDmg() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    public int getElementFourDmg() {
+      return elementFourDmg_;
+    }
+    
+    // optional int32 elementFiveDmg = 22;
+    public static final int ELEMENTFIVEDMG_FIELD_NUMBER = 22;
+    private int elementFiveDmg_;
+    public boolean hasElementFiveDmg() {
+      return ((bitField0_ & 0x00100000) == 0x00100000);
+    }
+    public int getElementFiveDmg() {
+      return elementFiveDmg_;
+    }
+    
     private void initFields() {
       monsterId_ = 0;
       name_ = "";
@@ -530,6 +708,14 @@ public final class MonsterStuffProto {
       silverReward_ = 0;
       monsterIdSuccessor_ = 0;
       puzzlePieceDropped_ = false;
+      carrotDefeated_ = "";
+      carrotRecruited_ = "";
+      carrotEvolved_ = "";
+      elementOneDmg_ = 0;
+      elementTwoDmg_ = 0;
+      elementThreeDmg_ = 0;
+      elementFourDmg_ = 0;
+      elementFiveDmg_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -581,6 +767,30 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeBool(13, puzzlePieceDropped_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeBytes(14, getCarrotDefeatedBytes());
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeBytes(15, getCarrotRecruitedBytes());
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        output.writeBytes(16, getCarrotEvolvedBytes());
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        output.writeInt32(18, elementOneDmg_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        output.writeInt32(19, elementTwoDmg_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeInt32(20, elementThreeDmg_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeInt32(21, elementFourDmg_);
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        output.writeInt32(22, elementFiveDmg_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -642,6 +852,38 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(13, puzzlePieceDropped_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(14, getCarrotDefeatedBytes());
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(15, getCarrotRecruitedBytes());
+      }
+      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(16, getCarrotEvolvedBytes());
+      }
+      if (((bitField0_ & 0x00010000) == 0x00010000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(18, elementOneDmg_);
+      }
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(19, elementTwoDmg_);
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(20, elementThreeDmg_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(21, elementFourDmg_);
+      }
+      if (((bitField0_ & 0x00100000) == 0x00100000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(22, elementFiveDmg_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -793,6 +1035,22 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000800);
         puzzlePieceDropped_ = false;
         bitField0_ = (bitField0_ & ~0x00001000);
+        carrotDefeated_ = "";
+        bitField0_ = (bitField0_ & ~0x00002000);
+        carrotRecruited_ = "";
+        bitField0_ = (bitField0_ & ~0x00004000);
+        carrotEvolved_ = "";
+        bitField0_ = (bitField0_ & ~0x00008000);
+        elementOneDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00010000);
+        elementTwoDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00020000);
+        elementThreeDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00040000);
+        elementFourDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00080000);
+        elementFiveDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00100000);
         return this;
       }
       
@@ -883,6 +1141,38 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00001000;
         }
         result.puzzlePieceDropped_ = puzzlePieceDropped_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.carrotDefeated_ = carrotDefeated_;
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        result.carrotRecruited_ = carrotRecruited_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+          to_bitField0_ |= 0x00008000;
+        }
+        result.carrotEvolved_ = carrotEvolved_;
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+          to_bitField0_ |= 0x00010000;
+        }
+        result.elementOneDmg_ = elementOneDmg_;
+        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+          to_bitField0_ |= 0x00020000;
+        }
+        result.elementTwoDmg_ = elementTwoDmg_;
+        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+          to_bitField0_ |= 0x00040000;
+        }
+        result.elementThreeDmg_ = elementThreeDmg_;
+        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        result.elementFourDmg_ = elementFourDmg_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00100000;
+        }
+        result.elementFiveDmg_ = elementFiveDmg_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -937,6 +1227,30 @@ public final class MonsterStuffProto {
         }
         if (other.hasPuzzlePieceDropped()) {
           setPuzzlePieceDropped(other.getPuzzlePieceDropped());
+        }
+        if (other.hasCarrotDefeated()) {
+          setCarrotDefeated(other.getCarrotDefeated());
+        }
+        if (other.hasCarrotRecruited()) {
+          setCarrotRecruited(other.getCarrotRecruited());
+        }
+        if (other.hasCarrotEvolved()) {
+          setCarrotEvolved(other.getCarrotEvolved());
+        }
+        if (other.hasElementOneDmg()) {
+          setElementOneDmg(other.getElementOneDmg());
+        }
+        if (other.hasElementTwoDmg()) {
+          setElementTwoDmg(other.getElementTwoDmg());
+        }
+        if (other.hasElementThreeDmg()) {
+          setElementThreeDmg(other.getElementThreeDmg());
+        }
+        if (other.hasElementFourDmg()) {
+          setElementFourDmg(other.getElementFourDmg());
+        }
+        if (other.hasElementFiveDmg()) {
+          setElementFiveDmg(other.getElementFiveDmg());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1050,6 +1364,46 @@ public final class MonsterStuffProto {
             case 104: {
               bitField0_ |= 0x00001000;
               puzzlePieceDropped_ = input.readBool();
+              break;
+            }
+            case 114: {
+              bitField0_ |= 0x00002000;
+              carrotDefeated_ = input.readBytes();
+              break;
+            }
+            case 122: {
+              bitField0_ |= 0x00004000;
+              carrotRecruited_ = input.readBytes();
+              break;
+            }
+            case 130: {
+              bitField0_ |= 0x00008000;
+              carrotEvolved_ = input.readBytes();
+              break;
+            }
+            case 144: {
+              bitField0_ |= 0x00010000;
+              elementOneDmg_ = input.readInt32();
+              break;
+            }
+            case 152: {
+              bitField0_ |= 0x00020000;
+              elementTwoDmg_ = input.readInt32();
+              break;
+            }
+            case 160: {
+              bitField0_ |= 0x00040000;
+              elementThreeDmg_ = input.readInt32();
+              break;
+            }
+            case 168: {
+              bitField0_ |= 0x00080000;
+              elementFourDmg_ = input.readInt32();
+              break;
+            }
+            case 176: {
+              bitField0_ |= 0x00100000;
+              elementFiveDmg_ = input.readInt32();
               break;
             }
           }
@@ -1381,6 +1735,219 @@ public final class MonsterStuffProto {
       public Builder clearPuzzlePieceDropped() {
         bitField0_ = (bitField0_ & ~0x00001000);
         puzzlePieceDropped_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional string carrotDefeated = 14;
+      private java.lang.Object carrotDefeated_ = "";
+      public boolean hasCarrotDefeated() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      public String getCarrotDefeated() {
+        java.lang.Object ref = carrotDefeated_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          carrotDefeated_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setCarrotDefeated(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00002000;
+        carrotDefeated_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCarrotDefeated() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        carrotDefeated_ = getDefaultInstance().getCarrotDefeated();
+        onChanged();
+        return this;
+      }
+      void setCarrotDefeated(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00002000;
+        carrotDefeated_ = value;
+        onChanged();
+      }
+      
+      // optional string carrotRecruited = 15;
+      private java.lang.Object carrotRecruited_ = "";
+      public boolean hasCarrotRecruited() {
+        return ((bitField0_ & 0x00004000) == 0x00004000);
+      }
+      public String getCarrotRecruited() {
+        java.lang.Object ref = carrotRecruited_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          carrotRecruited_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setCarrotRecruited(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00004000;
+        carrotRecruited_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCarrotRecruited() {
+        bitField0_ = (bitField0_ & ~0x00004000);
+        carrotRecruited_ = getDefaultInstance().getCarrotRecruited();
+        onChanged();
+        return this;
+      }
+      void setCarrotRecruited(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00004000;
+        carrotRecruited_ = value;
+        onChanged();
+      }
+      
+      // optional string carrotEvolved = 16;
+      private java.lang.Object carrotEvolved_ = "";
+      public boolean hasCarrotEvolved() {
+        return ((bitField0_ & 0x00008000) == 0x00008000);
+      }
+      public String getCarrotEvolved() {
+        java.lang.Object ref = carrotEvolved_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          carrotEvolved_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setCarrotEvolved(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00008000;
+        carrotEvolved_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCarrotEvolved() {
+        bitField0_ = (bitField0_ & ~0x00008000);
+        carrotEvolved_ = getDefaultInstance().getCarrotEvolved();
+        onChanged();
+        return this;
+      }
+      void setCarrotEvolved(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00008000;
+        carrotEvolved_ = value;
+        onChanged();
+      }
+      
+      // optional int32 elementOneDmg = 18;
+      private int elementOneDmg_ ;
+      public boolean hasElementOneDmg() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      public int getElementOneDmg() {
+        return elementOneDmg_;
+      }
+      public Builder setElementOneDmg(int value) {
+        bitField0_ |= 0x00010000;
+        elementOneDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearElementOneDmg() {
+        bitField0_ = (bitField0_ & ~0x00010000);
+        elementOneDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 elementTwoDmg = 19;
+      private int elementTwoDmg_ ;
+      public boolean hasElementTwoDmg() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      public int getElementTwoDmg() {
+        return elementTwoDmg_;
+      }
+      public Builder setElementTwoDmg(int value) {
+        bitField0_ |= 0x00020000;
+        elementTwoDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearElementTwoDmg() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        elementTwoDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 elementThreeDmg = 20;
+      private int elementThreeDmg_ ;
+      public boolean hasElementThreeDmg() {
+        return ((bitField0_ & 0x00040000) == 0x00040000);
+      }
+      public int getElementThreeDmg() {
+        return elementThreeDmg_;
+      }
+      public Builder setElementThreeDmg(int value) {
+        bitField0_ |= 0x00040000;
+        elementThreeDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearElementThreeDmg() {
+        bitField0_ = (bitField0_ & ~0x00040000);
+        elementThreeDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 elementFourDmg = 21;
+      private int elementFourDmg_ ;
+      public boolean hasElementFourDmg() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      public int getElementFourDmg() {
+        return elementFourDmg_;
+      }
+      public Builder setElementFourDmg(int value) {
+        bitField0_ |= 0x00080000;
+        elementFourDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearElementFourDmg() {
+        bitField0_ = (bitField0_ & ~0x00080000);
+        elementFourDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 elementFiveDmg = 22;
+      private int elementFiveDmg_ ;
+      public boolean hasElementFiveDmg() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      public int getElementFiveDmg() {
+        return elementFiveDmg_;
+      }
+      public Builder setElementFiveDmg(int value) {
+        bitField0_ |= 0x00100000;
+        elementFiveDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearElementFiveDmg() {
+        bitField0_ = (bitField0_ & ~0x00100000);
+        elementFiveDmg_ = 0;
         onChanged();
         return this;
       }
@@ -2609,7 +3176,7 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\352\004\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\251\006\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
       "\030\002 \001(\t\022<\n\007quality\030\003 \001(\0162+.com.lvl6.proto" +
       ".MonsterProto.MonsterQuality\022\026\n\016evolutio" +
@@ -2620,20 +3187,25 @@ public final class MonsterStuffProto {
       "6.proto.MonsterProto.MonsterType\022\021\n\texpR" +
       "eward\030\n \001(\005\022\024\n\014silverReward\030\013 \001(\005\022\032\n\022mon",
       "sterIdSuccessor\030\014 \001(\005\022\032\n\022puzzlePieceDrop" +
-      "ped\030\r \001(\010\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
-      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"J\n\016MonsterQuality" +
-      "\022\n\n\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPI" +
-      "C\020\004\022\r\n\tLEGENDARY\020\005\"M\n\016MonsterElement\022\010\n\004" +
-      "FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTNIN" +
-      "G\020\004\022\014\n\010DARKNESS\020\005\"\302\001\n\024FullUserMonsterPro" +
-      "to\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(" +
-      "\005\022\021\n\tmonsterId\030\003 \001(\005\022\035\n\025enhancementPerce" +
-      "ntage\030\004 \001(\005\022\025\n\rcurrentHealth\030\005 \001(\005\022\021\n\tnu",
-      "mPieces\030\006 \001(\005\022\022\n\nisComplete\030\007 \001(\010\022\023\n\013tea" +
-      "mSlotNum\030\010 \001(\005\"a\n\027UserMonsterHealingProt" +
-      "o\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003" +
-      "\022\037\n\027expectedStartTimeMillis\030\003 \001(\003B\023B\021Mon" +
-      "sterStuffProto"
+      "ped\030\r \001(\010\022\026\n\016carrotDefeated\030\016 \001(\t\022\027\n\017car" +
+      "rotRecruited\030\017 \001(\t\022\025\n\rcarrotEvolved\030\020 \001(" +
+      "\t\022\025\n\relementOneDmg\030\022 \001(\005\022\025\n\relementTwoDm" +
+      "g\030\023 \001(\005\022\027\n\017elementThreeDmg\030\024 \001(\005\022\026\n\016elem" +
+      "entFourDmg\030\025 \001(\005\022\026\n\016elementFiveDmg\030\026 \001(\005" +
+      "\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOS" +
+      "S\020\002\022\010\n\004BOSS\020\003\"J\n\016MonsterQuality\022\n\n\006COMMO" +
+      "N\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\tLE" +
+      "GENDARY\020\005\"M\n\016MonsterElement\022\010\n\004FIRE\020\001\022\t\n",
+      "\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DA" +
+      "RKNESS\020\005\"\302\001\n\024FullUserMonsterProto\022\025\n\ruse" +
+      "rMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmons" +
+      "terId\030\003 \001(\005\022\035\n\025enhancementPercentage\030\004 \001" +
+      "(\005\022\025\n\rcurrentHealth\030\005 \001(\005\022\021\n\tnumPieces\030\006" +
+      " \001(\005\022\022\n\nisComplete\030\007 \001(\010\022\023\n\013teamSlotNum\030" +
+      "\010 \001(\005\"a\n\027UserMonsterHealingProto\022\016\n\006user" +
+      "Id\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\037\n\027expec" +
+      "tedStartTimeMillis\030\003 \001(\003B\023B\021MonsterStuff" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2645,7 +3217,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_MonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "Name", "Quality", "EvolutionLevel", "DisplayName", "Element", "MaxHp", "ImageName", "MonsterType", "ExpReward", "SilverReward", "MonsterIdSuccessor", "PuzzlePieceDropped", },
+              new java.lang.String[] { "MonsterId", "Name", "Quality", "EvolutionLevel", "DisplayName", "Element", "MaxHp", "ImageName", "MonsterType", "ExpReward", "SilverReward", "MonsterIdSuccessor", "PuzzlePieceDropped", "CarrotDefeated", "CarrotRecruited", "CarrotEvolved", "ElementOneDmg", "ElementTwoDmg", "ElementThreeDmg", "ElementFourDmg", "ElementFiveDmg", },
               com.lvl6.proto.MonsterStuffProto.MonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor =
