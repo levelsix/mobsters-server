@@ -73,6 +73,9 @@ message HealMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional HealMonsterStatus status = 2;
 	
+	//these are the monsters in the table 
+	repeated UserMonsterHealingProto umhp = 3;
+	
 	enum HealMonsterStatus {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_FUNDS = 2;
