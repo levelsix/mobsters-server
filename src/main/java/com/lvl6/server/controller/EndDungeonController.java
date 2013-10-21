@@ -243,7 +243,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Long> userTaskStageId = new ArrayList<Long>();
   	List<Long> userTaskId = new ArrayList<Long>();
   	List<Integer> stageNum = new ArrayList<Integer>();
-  	List<Integer> monsterIdList = new ArrayList<Integer>();
+  	List<Integer> taskStageMonsterIdList = new ArrayList<Integer>();
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> silverGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
@@ -254,25 +254,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		userTaskId.add(tsfu.getUserTaskId());
   		stageNum.add(tsfu.getStageNum());
   		
-  		int monsterId = tsfu.getMonsterId();
-  		monsterIdList.add(monsterId);
+  		int taskStageMonsterId = tsfu.getTaskStageMonsterId();
+  		taskStageMonsterIdList.add(taskStageMonsterId);
   		expGained.add(tsfu.getExpGained());
   		silverGained.add(tsfu.getSilverGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
-  		
-  		//possible multiple same monsters dropped a piece
-  		if (dropped) {
-  			int num = 1;
-  			if (monsterIdToNumPieces.containsKey(monsterId)) {
-  				num += monsterIdToNumPieces.get(monsterId);
-  			}
-  			monsterIdToNumPieces.put(monsterId, num);
-  		}
   	}
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
-  			userTaskId, stageNum, monsterIdList, expGained, silverGained,
+  			userTaskId, stageNum, taskStageMonsterIdList, expGained, silverGained,
   			monsterPieceDropped);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);

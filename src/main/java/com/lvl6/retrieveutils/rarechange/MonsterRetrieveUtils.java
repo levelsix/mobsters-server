@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.Monster;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class MonsterRetrieveUtils {
@@ -97,11 +99,11 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
-    int quality = rs.getInt(i++);
+    MonsterQuality quality = MonsterQuality.valueOf(rs.getInt(i++));
     int evolutionLevel = rs.getInt(i++);
     String displayName = rs.getString(i++);
-    int element = rs.getInt(i++);
-    int maxHp = rs.getInt(i++);
+    MonsterElement element = MonsterElement.valueOf(rs.getInt(i++));
+    int baseHp = rs.getInt(i++);
     String imageName = rs.getString(i++);
     int numPuzzlePieces = rs.getInt(i++);
     int elementOneDmg = rs.getInt(i++);
@@ -118,7 +120,7 @@ import com.lvl6.utils.DBConnection;
     String carrotDefeated = rs.getString(i++);
     String carrotEvolved = rs.getString(i++);
     
-    Monster monster = new Monster(id, name, quality, evolutionLevel, displayName, element, maxHp, imageName, numPuzzlePieces, elementOneDmg, elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg, hpLevelMultiplier, attackLevelMultiplier, maxLevel, evolutionMonsterId, carrotRecruited, carrotDefeated, carrotEvolved);
+    Monster monster = new Monster(id, name, quality, evolutionLevel, displayName, element, baseHp, imageName, numPuzzlePieces, elementOneDmg, elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg, hpLevelMultiplier, attackLevelMultiplier, maxLevel, evolutionMonsterId, carrotRecruited, carrotDefeated, carrotEvolved);
 
     return monster;
   }
