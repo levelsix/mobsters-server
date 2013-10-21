@@ -19,9 +19,9 @@ import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthRequestProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus;
-import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
-import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -52,7 +52,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
-    List<FullUserMonsterProto> fumpList = reqProto.getFumpsList();
+    List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
 
     //set some values to send to the client (the response proto)
     UpdateMonsterHealthResponseProto.Builder resBuilder = UpdateMonsterHealthResponseProto.newBuilder();
@@ -65,7 +65,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     	Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
     	
-      boolean legit = checkLegit(resBuilder, userId, fumpList, 
+      boolean legit = checkLegit(resBuilder, userId, umchpList, 
       		userMonsterIdToExpectedHealth);
 
       boolean successful = false;
@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	//send back the equip protos that updated
       	//no reason to believe some equip will not be updated so
       	//send back what client gave
-      	resBuilder.addAllFumps(fumpList);
+      	resBuilder.addAllUmchp(umchpList);
     	  resBuilder.setStatus(UpdateMonsterHealthStatus.SUCCESS);
       }
       
@@ -114,16 +114,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Also, returns the expected durabilities for the new equips
    */
   private boolean checkLegit(Builder resBuilder, int userId,
-		  List<FullUserMonsterProto> fuepList, 
+		  List<UserMonsterCurrentHealthProto> umchpList, 
 		  Map<Long, Integer> userMonsterIdToExpectedHealth) {
   	
-  	if (null == fuepList || fuepList.isEmpty()) {
+  	if (null == umchpList || umchpList.isEmpty()) {
   		log.error("client error: no user equips sent.");
   		return false;
   	}
   	
   	//extract the ids so it's easier to get userMonsters from db
-  	List<Long> userMonsterIds = getUserMonsterIds(fuepList, userMonsterIdToExpectedHealth);
+  	List<Long> userMonsterIds = getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
   	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
   			.getSpecificUserMonsters(userMonsterIds);
   	
@@ -133,7 +133,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
 
   	//see if the user has the equips
-  	if (userMonsters.size() != fuepList.size()) {
+  	if (userMonsters.size() != umchpList.size()) {
   		log.error("unexpected error: mismatch between user equips client sent and " +
   				"what is in the db. clientUserMonsterIds=" + userMonsterIds + "\t inDb=" +
   				userMonsters + "\t continuing the processing");
@@ -144,14 +144,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //extract the ids from the protos
-  private List<Long> getUserMonsterIds(List<FullUserMonsterProto> fuepList,
+  private List<Long> getUserMonsterIds(List<UserMonsterCurrentHealthProto> umchpList,
   		Map<Long, Integer> userMonsterIdToExpectedHealth) {
   	List<Long> idList = new ArrayList<Long>();
   	
-  	for(FullUserMonsterProto fuep : fuepList) {
-  		long id = fuep.getUserMonsterId();
+  	for(UserMonsterCurrentHealthProto umchp : umchpList) {
+  		long id = umchp.getUserMonsterId();
   		idList.add(id);
-  		int health = fuep.getCurrentHealth();
+  		int health = umchp.getCurrentHealth();
   		userMonsterIdToExpectedHealth.put(id, health);
   	}
   	return idList;

@@ -65,3 +65,23 @@ message UserMonsterHealingProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+message UserMonsterCurrentHealthProto {
+	optional int64 userMonsterId = 1;
+	optional int32 currentHealth = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message BaseEnhancementProto {
+	optional int32 userId = 1;
+	optional int64 userMonsterId = 2;
+	repeated FeederEnhancementProto feeders = 3;
+}
+
+message FeederEnhancementProto {
+	optional int64 userMonsterId = 1;
+	optional int64 expectedStartTime = 2;
+}
+
+//------------------------------------------------------------------------------------------

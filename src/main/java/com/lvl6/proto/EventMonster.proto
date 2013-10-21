@@ -34,13 +34,13 @@ message SubmitMonsterEnhancementResponseProto {
 //mainly used during battle
 message UpdateMonsterHealthRequestProto {
 	optional MinimumUserProto sender = 1;
-	repeated FullUserMonsterProto fumps = 2; //contains new durabilities 
+	repeated UserMonsterCurrentHealthProto umchp = 2; //contains new health 
 	optional int64 clientTime = 3; //history, tracking purposes
 }
 
 message UpdateMonsterHealthResponseProto {
 	optional MinimumUserProto sender = 1;
-	repeated FullUserMonsterProto fumps = 2;
+	repeated UserMonsterCurrentHealthProto umchp = 2;
 	optional UpdateMonsterHealthStatus status = 3;
 	
 	enum UpdateMonsterHealthStatus {
@@ -89,11 +89,13 @@ message HealMonsterResponseProto {
 
 message HealMonsterWaitTimeCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
+	
 	//speeds up all or some monsters finished healing by waiting 
 	optional bool isSpeedup = 2; 
 	//will be set if isSpeedup is true
 	optional int32 gemsForSpeedup = 3;
-	repeated int64 userMonsterIds = 4;
+	
+	repeated UserMonsterCurrentHealthProto umchp = 4;
 }
 
 message HealMonsterWaitTimeCompleteResponseProto {

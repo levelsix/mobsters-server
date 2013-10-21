@@ -3071,6 +3071,1464 @@ public final class MonsterStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMonsterHealingProto)
   }
   
+  public interface UserMonsterCurrentHealthProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int64 userMonsterId = 1;
+    boolean hasUserMonsterId();
+    long getUserMonsterId();
+    
+    // optional int32 currentHealth = 2;
+    boolean hasCurrentHealth();
+    int getCurrentHealth();
+  }
+  public static final class UserMonsterCurrentHealthProto extends
+      com.google.protobuf.GeneratedMessage
+      implements UserMonsterCurrentHealthProtoOrBuilder {
+    // Use UserMonsterCurrentHealthProto.newBuilder() to construct.
+    private UserMonsterCurrentHealthProto(Builder builder) {
+      super(builder);
+    }
+    private UserMonsterCurrentHealthProto(boolean noInit) {}
+    
+    private static final UserMonsterCurrentHealthProto defaultInstance;
+    public static UserMonsterCurrentHealthProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public UserMonsterCurrentHealthProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int64 userMonsterId = 1;
+    public static final int USERMONSTERID_FIELD_NUMBER = 1;
+    private long userMonsterId_;
+    public boolean hasUserMonsterId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public long getUserMonsterId() {
+      return userMonsterId_;
+    }
+    
+    // optional int32 currentHealth = 2;
+    public static final int CURRENTHEALTH_FIELD_NUMBER = 2;
+    private int currentHealth_;
+    public boolean hasCurrentHealth() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getCurrentHealth() {
+      return currentHealth_;
+    }
+    
+    private void initFields() {
+      userMonsterId_ = 0L;
+      currentHealth_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, userMonsterId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, currentHealth_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, userMonsterId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, currentHealth_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        userMonsterId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        currentHealth_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getDefaultInstanceForType() {
+        return com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto build() {
+        com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto buildPartial() {
+        com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto result = new com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userMonsterId_ = userMonsterId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.currentHealth_ = currentHealth_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto) {
+          return mergeFrom((com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto other) {
+        if (other == com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance()) return this;
+        if (other.hasUserMonsterId()) {
+          setUserMonsterId(other.getUserMonsterId());
+        }
+        if (other.hasCurrentHealth()) {
+          setCurrentHealth(other.getCurrentHealth());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userMonsterId_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              currentHealth_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int64 userMonsterId = 1;
+      private long userMonsterId_ ;
+      public boolean hasUserMonsterId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public long getUserMonsterId() {
+        return userMonsterId_;
+      }
+      public Builder setUserMonsterId(long value) {
+        bitField0_ |= 0x00000001;
+        userMonsterId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userMonsterId_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 currentHealth = 2;
+      private int currentHealth_ ;
+      public boolean hasCurrentHealth() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getCurrentHealth() {
+        return currentHealth_;
+      }
+      public Builder setCurrentHealth(int value) {
+        bitField0_ |= 0x00000002;
+        currentHealth_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCurrentHealth() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        currentHealth_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserMonsterCurrentHealthProto)
+    }
+    
+    static {
+      defaultInstance = new UserMonsterCurrentHealthProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMonsterCurrentHealthProto)
+  }
+  
+  public interface BaseEnhancementProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 userId = 1;
+    boolean hasUserId();
+    int getUserId();
+    
+    // optional int64 userMonsterId = 2;
+    boolean hasUserMonsterId();
+    long getUserMonsterId();
+    
+    // repeated .com.lvl6.proto.FeederEnhancementProto feeders = 3;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto> 
+        getFeedersList();
+    com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto getFeeders(int index);
+    int getFeedersCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder> 
+        getFeedersOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder getFeedersOrBuilder(
+        int index);
+  }
+  public static final class BaseEnhancementProto extends
+      com.google.protobuf.GeneratedMessage
+      implements BaseEnhancementProtoOrBuilder {
+    // Use BaseEnhancementProto.newBuilder() to construct.
+    private BaseEnhancementProto(Builder builder) {
+      super(builder);
+    }
+    private BaseEnhancementProto(boolean noInit) {}
+    
+    private static final BaseEnhancementProto defaultInstance;
+    public static BaseEnhancementProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public BaseEnhancementProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_BaseEnhancementProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_BaseEnhancementProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 userId = 1;
+    public static final int USERID_FIELD_NUMBER = 1;
+    private int userId_;
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getUserId() {
+      return userId_;
+    }
+    
+    // optional int64 userMonsterId = 2;
+    public static final int USERMONSTERID_FIELD_NUMBER = 2;
+    private long userMonsterId_;
+    public boolean hasUserMonsterId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getUserMonsterId() {
+      return userMonsterId_;
+    }
+    
+    // repeated .com.lvl6.proto.FeederEnhancementProto feeders = 3;
+    public static final int FEEDERS_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto> feeders_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto> getFeedersList() {
+      return feeders_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder> 
+        getFeedersOrBuilderList() {
+      return feeders_;
+    }
+    public int getFeedersCount() {
+      return feeders_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto getFeeders(int index) {
+      return feeders_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder getFeedersOrBuilder(
+        int index) {
+      return feeders_.get(index);
+    }
+    
+    private void initFields() {
+      userId_ = 0;
+      userMonsterId_ = 0L;
+      feeders_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, userMonsterId_);
+      }
+      for (int i = 0; i < feeders_.size(); i++) {
+        output.writeMessage(3, feeders_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, userId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, userMonsterId_);
+      }
+      for (int i = 0; i < feeders_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, feeders_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MonsterStuffProto.BaseEnhancementProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_BaseEnhancementProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_BaseEnhancementProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getFeedersFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        userId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userMonsterId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (feedersBuilder_ == null) {
+          feeders_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          feedersBuilder_.clear();
+        }
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto getDefaultInstanceForType() {
+        return com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto build() {
+        com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto buildPartial() {
+        com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto result = new com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.userMonsterId_ = userMonsterId_;
+        if (feedersBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            feeders_ = java.util.Collections.unmodifiableList(feeders_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.feeders_ = feeders_;
+        } else {
+          result.feeders_ = feedersBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto) {
+          return mergeFrom((com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto other) {
+        if (other == com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasUserMonsterId()) {
+          setUserMonsterId(other.getUserMonsterId());
+        }
+        if (feedersBuilder_ == null) {
+          if (!other.feeders_.isEmpty()) {
+            if (feeders_.isEmpty()) {
+              feeders_ = other.feeders_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureFeedersIsMutable();
+              feeders_.addAll(other.feeders_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.feeders_.isEmpty()) {
+            if (feedersBuilder_.isEmpty()) {
+              feedersBuilder_.dispose();
+              feedersBuilder_ = null;
+              feeders_ = other.feeders_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              feedersBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getFeedersFieldBuilder() : null;
+            } else {
+              feedersBuilder_.addAllMessages(other.feeders_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              userMonsterId_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addFeeders(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 userId = 1;
+      private int userId_ ;
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getUserId() {
+        return userId_;
+      }
+      public Builder setUserId(int value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 userMonsterId = 2;
+      private long userMonsterId_ ;
+      public boolean hasUserMonsterId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getUserMonsterId() {
+        return userMonsterId_;
+      }
+      public Builder setUserMonsterId(long value) {
+        bitField0_ |= 0x00000002;
+        userMonsterId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        userMonsterId_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // repeated .com.lvl6.proto.FeederEnhancementProto feeders = 3;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto> feeders_ =
+        java.util.Collections.emptyList();
+      private void ensureFeedersIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          feeders_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto>(feeders_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder> feedersBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto> getFeedersList() {
+        if (feedersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(feeders_);
+        } else {
+          return feedersBuilder_.getMessageList();
+        }
+      }
+      public int getFeedersCount() {
+        if (feedersBuilder_ == null) {
+          return feeders_.size();
+        } else {
+          return feedersBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto getFeeders(int index) {
+        if (feedersBuilder_ == null) {
+          return feeders_.get(index);
+        } else {
+          return feedersBuilder_.getMessage(index);
+        }
+      }
+      public Builder setFeeders(
+          int index, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto value) {
+        if (feedersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeedersIsMutable();
+          feeders_.set(index, value);
+          onChanged();
+        } else {
+          feedersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setFeeders(
+          int index, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder builderForValue) {
+        if (feedersBuilder_ == null) {
+          ensureFeedersIsMutable();
+          feeders_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          feedersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addFeeders(com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto value) {
+        if (feedersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeedersIsMutable();
+          feeders_.add(value);
+          onChanged();
+        } else {
+          feedersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addFeeders(
+          int index, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto value) {
+        if (feedersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFeedersIsMutable();
+          feeders_.add(index, value);
+          onChanged();
+        } else {
+          feedersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addFeeders(
+          com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder builderForValue) {
+        if (feedersBuilder_ == null) {
+          ensureFeedersIsMutable();
+          feeders_.add(builderForValue.build());
+          onChanged();
+        } else {
+          feedersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addFeeders(
+          int index, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder builderForValue) {
+        if (feedersBuilder_ == null) {
+          ensureFeedersIsMutable();
+          feeders_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          feedersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllFeeders(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto> values) {
+        if (feedersBuilder_ == null) {
+          ensureFeedersIsMutable();
+          super.addAll(values, feeders_);
+          onChanged();
+        } else {
+          feedersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearFeeders() {
+        if (feedersBuilder_ == null) {
+          feeders_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          feedersBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeFeeders(int index) {
+        if (feedersBuilder_ == null) {
+          ensureFeedersIsMutable();
+          feeders_.remove(index);
+          onChanged();
+        } else {
+          feedersBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder getFeedersBuilder(
+          int index) {
+        return getFeedersFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder getFeedersOrBuilder(
+          int index) {
+        if (feedersBuilder_ == null) {
+          return feeders_.get(index);  } else {
+          return feedersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder> 
+           getFeedersOrBuilderList() {
+        if (feedersBuilder_ != null) {
+          return feedersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(feeders_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder addFeedersBuilder() {
+        return getFeedersFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder addFeedersBuilder(
+          int index) {
+        return getFeedersFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder> 
+           getFeedersBuilderList() {
+        return getFeedersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder> 
+          getFeedersFieldBuilder() {
+        if (feedersBuilder_ == null) {
+          feedersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder>(
+                  feeders_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          feeders_ = null;
+        }
+        return feedersBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BaseEnhancementProto)
+    }
+    
+    static {
+      defaultInstance = new BaseEnhancementProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BaseEnhancementProto)
+  }
+  
+  public interface FeederEnhancementProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int64 userMonsterId = 1;
+    boolean hasUserMonsterId();
+    long getUserMonsterId();
+    
+    // optional int64 expectedStartTime = 2;
+    boolean hasExpectedStartTime();
+    long getExpectedStartTime();
+  }
+  public static final class FeederEnhancementProto extends
+      com.google.protobuf.GeneratedMessage
+      implements FeederEnhancementProtoOrBuilder {
+    // Use FeederEnhancementProto.newBuilder() to construct.
+    private FeederEnhancementProto(Builder builder) {
+      super(builder);
+    }
+    private FeederEnhancementProto(boolean noInit) {}
+    
+    private static final FeederEnhancementProto defaultInstance;
+    public static FeederEnhancementProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public FeederEnhancementProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_FeederEnhancementProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_FeederEnhancementProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int64 userMonsterId = 1;
+    public static final int USERMONSTERID_FIELD_NUMBER = 1;
+    private long userMonsterId_;
+    public boolean hasUserMonsterId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public long getUserMonsterId() {
+      return userMonsterId_;
+    }
+    
+    // optional int64 expectedStartTime = 2;
+    public static final int EXPECTEDSTARTTIME_FIELD_NUMBER = 2;
+    private long expectedStartTime_;
+    public boolean hasExpectedStartTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getExpectedStartTime() {
+      return expectedStartTime_;
+    }
+    
+    private void initFields() {
+      userMonsterId_ = 0L;
+      expectedStartTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt64(1, userMonsterId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, expectedStartTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, userMonsterId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, expectedStartTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MonsterStuffProto.FeederEnhancementProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_FeederEnhancementProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_FeederEnhancementProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        userMonsterId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        expectedStartTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto getDefaultInstanceForType() {
+        return com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto build() {
+        com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto buildPartial() {
+        com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto result = new com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userMonsterId_ = userMonsterId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.expectedStartTime_ = expectedStartTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto) {
+          return mergeFrom((com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto other) {
+        if (other == com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.getDefaultInstance()) return this;
+        if (other.hasUserMonsterId()) {
+          setUserMonsterId(other.getUserMonsterId());
+        }
+        if (other.hasExpectedStartTime()) {
+          setExpectedStartTime(other.getExpectedStartTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              userMonsterId_ = input.readInt64();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              expectedStartTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int64 userMonsterId = 1;
+      private long userMonsterId_ ;
+      public boolean hasUserMonsterId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public long getUserMonsterId() {
+        return userMonsterId_;
+      }
+      public Builder setUserMonsterId(long value) {
+        bitField0_ |= 0x00000001;
+        userMonsterId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userMonsterId_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 expectedStartTime = 2;
+      private long expectedStartTime_ ;
+      public boolean hasExpectedStartTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getExpectedStartTime() {
+        return expectedStartTime_;
+      }
+      public Builder setExpectedStartTime(long value) {
+        bitField0_ |= 0x00000002;
+        expectedStartTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearExpectedStartTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        expectedStartTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FeederEnhancementProto)
+    }
+    
+    static {
+      defaultInstance = new FeederEnhancementProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.FeederEnhancementProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MonsterProto_descriptor;
   private static
@@ -3086,6 +4544,21 @@ public final class MonsterStuffProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BaseEnhancementProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BaseEnhancementProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_FeederEnhancementProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_FeederEnhancementProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3121,8 +4594,14 @@ public final class MonsterStuffProto {
       "\005\022\022\n\nisComplete\030\007 \001(\010\022\023\n\013teamSlotNum\030\010 \001" +
       "(\005\"a\n\027UserMonsterHealingProto\022\016\n\006userId\030" +
       "\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\037\n\027expected" +
-      "StartTimeMillis\030\003 \001(\003B\023B\021MonsterStuffPro" +
-      "to"
+      "StartTimeMillis\030\003 \001(\003\"M\n\035UserMonsterCurr" +
+      "entHealthProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n" +
+      "\rcurrentHealth\030\002 \001(\005\"v\n\024BaseEnhancementP" +
+      "roto\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 ",
+      "\001(\003\0227\n\007feeders\030\003 \003(\0132&.com.lvl6.proto.Fe" +
+      "ederEnhancementProto\"J\n\026FeederEnhancemen" +
+      "tProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\031\n\021expecte" +
+      "dStartTime\030\002 \001(\003B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3153,6 +4632,30 @@ public final class MonsterStuffProto {
               new java.lang.String[] { "UserId", "UserMonsterId", "ExpectedStartTimeMillis", },
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder.class);
+          internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor,
+              new java.lang.String[] { "UserMonsterId", "CurrentHealth", },
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.class,
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder.class);
+          internal_static_com_lvl6_proto_BaseEnhancementProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_BaseEnhancementProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BaseEnhancementProto_descriptor,
+              new java.lang.String[] { "UserId", "UserMonsterId", "Feeders", },
+              com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto.class,
+              com.lvl6.proto.MonsterStuffProto.BaseEnhancementProto.Builder.class);
+          internal_static_com_lvl6_proto_FeederEnhancementProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_FeederEnhancementProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_FeederEnhancementProto_descriptor,
+              new java.lang.String[] { "UserMonsterId", "ExpectedStartTime", },
+              com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.class,
+              com.lvl6.proto.MonsterStuffProto.FeederEnhancementProto.Builder.class);
           return null;
         }
       };

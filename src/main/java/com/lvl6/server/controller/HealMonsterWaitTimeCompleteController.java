@@ -16,6 +16,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.HealMonsterWaitTimeCompleteRequestEvent;
 import com.lvl6.events.response.HealMonsterWaitTimeCompleteResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -24,6 +25,7 @@ import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
@@ -57,8 +59,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     boolean isSpeedUp = reqProto.getIsSpeedup();
-    List<Long> userMonsterIds = reqProto.getUserMonsterIdsList();
-    userMonsterIds = new ArrayList<Long>(userMonsterIds);
+    List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
+    List<Long> userMonsterIds = new ArrayList<Long>();
+//    userMonsterIds = new ArrayList<Long>(userMonsterIds);
     int gemsForSpeedUp = reqProto.getGemsForSpeedup();
 
     //set some values to send to the client (the response proto)
@@ -80,10 +83,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
       boolean successful = false;
       if(legit) {
-    	  
+    	  //get the user_monsters for these monsterForUserIds
+//      	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+//      			.getSpecificUserMonsters(userMonsterIds);
 //        previousSilver = aUser.getCoins();
 //        previousGold = aUser.getDiamonds();
-    	  successful = writeChangesToDb(aUser, userId, userMonsterIds, isSpeedUp, gemsForSpeedUp);
+//    	  successful = writeChangesToDb(aUser, userId, userMonsterIds, isSpeedUp, gemsForSpeedUp);
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
@@ -154,6 +159,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     if (speedUp) {
     	
     }
+    //TODO:update monster's healths
     	
     resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.SUCCESS);
     return true;
@@ -189,6 +195,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 //				  ", clientTime=" + clientTime + ", user=" + u);
 //		  return false;
 //	  }
+  	
+  	//HEAL THE MONSTER
+  	
 
 	  //delete the selected monsters from  the healing table
 	  int num = DeleteUtils.get().deleteMonsterHealingForUser(
