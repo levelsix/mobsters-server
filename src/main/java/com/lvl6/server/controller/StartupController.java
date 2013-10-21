@@ -641,7 +641,7 @@ public class StartupController extends EventController {
   private void setStaticMonstersAndStructs(StartupResponseProto.Builder resBuilder) {
     Collection<Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters().values();
     for (Monster monster : monsters) {
-      resBuilder.addStaticMonsters(CreateInfoProtoUtils.createMonsterProto(0, monster, false, 0));
+      resBuilder.addStaticMonsters(CreateInfoProtoUtils.createMonsterProto(monster));
     }
 
     Collection<Structure> structs = StructureRetrieveUtils.getStructIdsToStructs().values();
