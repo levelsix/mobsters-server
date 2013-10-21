@@ -139,12 +139,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
 
   private void writeChangesToDB(User user, int clanId, Map<String, Integer> money) {
-    int goldChange = -1*ControllerConstants.CREATE_CLAN__DIAMOND_PRICE_TO_CREATE_CLAN;
-    if (!user.updateRelativeDiamondsAbsoluteClan(goldChange, clanId)) {
+    int coinChange = -1*ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN;
+    if (!user.updateRelativeCoinsAbsoluteClan(coinChange, clanId)) {
       log.error("problem with decreasing user diamonds for creating clan");
     } else {
       //everything went well
-      money.put(MiscMethods.gold, goldChange);
+      money.put(MiscMethods.silver, coinChange);
     }
     if (!InsertUtils.get().insertUserClan(user.getId(), clanId, UserClanStatus.MEMBER, new Timestamp(new Date().getTime()))) {
       log.error("problem with inserting user clan data for user " + user + ", and clan id " + clanId);
@@ -158,9 +158,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       log.error("user is null");
       return false;      
     }
-    if (user.getDiamonds() < ControllerConstants.CREATE_CLAN__DIAMOND_PRICE_TO_CREATE_CLAN) {
-      resBuilder.setStatus(CreateClanStatus.NOT_ENOUGH_DIAMONDS);
-      log.error("user only has " + user.getDiamonds() + ", needs " + ControllerConstants.CREATE_CLAN__DIAMOND_PRICE_TO_CREATE_CLAN);
+    if (user.getCoins() < ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN) {
+      resBuilder.setStatus(CreateClanStatus.NOT_ENOUGH_COINS);
+      log.error("user only has " + user.getCoins() + ", needs " + ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
       return false;
     }
     if (clanName.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME) {

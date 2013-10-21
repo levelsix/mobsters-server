@@ -106,7 +106,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private void writeChangesToDB(User user, User requester, boolean accept) {
     if (accept) {
-      if (!requester.updateRelativeDiamondsAbsoluteClan(0, user.getClanId())) {
+      if (!requester.updateRelativeCoinsAbsoluteClan(0, user.getClanId())) {
         log.error("problem with change requester " + requester + " clan id to " + user.getClanId());
       }
       if (!UpdateUtils.get().updateUserClanStatus(requester.getId(), user.getClanId(), UserClanStatus.MEMBER)) {

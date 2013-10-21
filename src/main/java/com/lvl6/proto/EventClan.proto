@@ -24,7 +24,7 @@ message CreateClanResponseProto {
 	enum CreateClanStatus {
 		SUCCESS = 1;
 		OTHER_FAIL = 2;
-		NOT_ENOUGH_DIAMONDS = 3;
+		NOT_ENOUGH_COINS = 3;
 		NAME_TAKEN = 4;
 		ALREADY_IN_CLAN = 5;
 		INVALID_TAG_LENGTH = 6;

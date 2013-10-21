@@ -116,7 +116,7 @@ message StartupResponseProto {
 		}
 		
 		message ClanConstants {
-			optional int32 diamondPriceToCreateClan = 1;
+			optional int32 coinPriceToCreateClan = 1;
 			optional int32 maxCharLengthForClanName = 2;
 			optional int32 maxCharLengthForClanDescription = 3;
 			optional int32 maxCharLengthForClanTag = 4;

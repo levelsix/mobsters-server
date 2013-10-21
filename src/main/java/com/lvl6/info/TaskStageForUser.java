@@ -8,18 +8,18 @@ public class TaskStageForUser implements Serializable {
 	private long id;
 	private long userTaskId;
 	private int stageNum;
-	public int monsterId;
+	public int taskStageMonsterId;
 	public int expGained;
 	public int silverGained;
 	public boolean monsterPieceDropped;
 	
-	public TaskStageForUser(long id, long userTaskId, int stageNum, int monsterId,
+	public TaskStageForUser(long id, long userTaskId, int stageNum, int taskStageMonsterId,
 			int expGained, int silverGained, boolean monsterPieceDropped) {
 		super();
 		this.id = id;
 		this.userTaskId = userTaskId;
 		this.stageNum = stageNum;
-		this.monsterId = monsterId;
+		this.taskStageMonsterId = taskStageMonsterId;
 		this.expGained = expGained;
 		this.silverGained = silverGained;
 		this.monsterPieceDropped = monsterPieceDropped;
@@ -49,12 +49,12 @@ public class TaskStageForUser implements Serializable {
 		this.stageNum = stageNum;
 	}
 
-	public int getMonsterId() {
-		return monsterId;
+	public int getTaskStageMonsterId() {
+		return taskStageMonsterId;
 	}
 
-	public void setMonsterId(int monsterId) {
-		this.monsterId = monsterId;
+	public void setTaskStageMonsterId(int taskStageMonsterId) {
+		this.taskStageMonsterId = taskStageMonsterId;
 	}
 
 	public int getExpGained() {
@@ -84,7 +84,7 @@ public class TaskStageForUser implements Serializable {
 	@Override
 	public String toString() {
 		return "TaskStageForUser [id=" + id + ", userTaskId=" + userTaskId
-				+ ", stageNum=" + stageNum + ", monsterId=" + monsterId
+				+ ", stageNum=" + stageNum + ", taskStageMonsterId=" + taskStageMonsterId
 				+ ", expGained=" + expGained + ", silverGained=" + silverGained
 				+ ", monsterPieceDropped=" + monsterPieceDropped + "]";
 	}

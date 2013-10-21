@@ -3462,9 +3462,9 @@ public final class EventStartupProto {
       public interface ClanConstantsOrBuilder
           extends com.google.protobuf.MessageOrBuilder {
         
-        // optional int32 diamondPriceToCreateClan = 1;
-        boolean hasDiamondPriceToCreateClan();
-        int getDiamondPriceToCreateClan();
+        // optional int32 coinPriceToCreateClan = 1;
+        boolean hasCoinPriceToCreateClan();
+        int getCoinPriceToCreateClan();
         
         // optional int32 maxCharLengthForClanName = 2;
         boolean hasMaxCharLengthForClanName();
@@ -3507,14 +3507,14 @@ public final class EventStartupProto {
         }
         
         private int bitField0_;
-        // optional int32 diamondPriceToCreateClan = 1;
-        public static final int DIAMONDPRICETOCREATECLAN_FIELD_NUMBER = 1;
-        private int diamondPriceToCreateClan_;
-        public boolean hasDiamondPriceToCreateClan() {
+        // optional int32 coinPriceToCreateClan = 1;
+        public static final int COINPRICETOCREATECLAN_FIELD_NUMBER = 1;
+        private int coinPriceToCreateClan_;
+        public boolean hasCoinPriceToCreateClan() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
-        public int getDiamondPriceToCreateClan() {
-          return diamondPriceToCreateClan_;
+        public int getCoinPriceToCreateClan() {
+          return coinPriceToCreateClan_;
         }
         
         // optional int32 maxCharLengthForClanName = 2;
@@ -3548,7 +3548,7 @@ public final class EventStartupProto {
         }
         
         private void initFields() {
-          diamondPriceToCreateClan_ = 0;
+          coinPriceToCreateClan_ = 0;
           maxCharLengthForClanName_ = 0;
           maxCharLengthForClanDescription_ = 0;
           maxCharLengthForClanTag_ = 0;
@@ -3566,7 +3566,7 @@ public final class EventStartupProto {
                             throws java.io.IOException {
           getSerializedSize();
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            output.writeInt32(1, diamondPriceToCreateClan_);
+            output.writeInt32(1, coinPriceToCreateClan_);
           }
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             output.writeInt32(2, maxCharLengthForClanName_);
@@ -3588,7 +3588,7 @@ public final class EventStartupProto {
           size = 0;
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(1, diamondPriceToCreateClan_);
+              .computeInt32Size(1, coinPriceToCreateClan_);
           }
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             size += com.google.protobuf.CodedOutputStream
@@ -3726,7 +3726,7 @@ public final class EventStartupProto {
           
           public Builder clear() {
             super.clear();
-            diamondPriceToCreateClan_ = 0;
+            coinPriceToCreateClan_ = 0;
             bitField0_ = (bitField0_ & ~0x00000001);
             maxCharLengthForClanName_ = 0;
             bitField0_ = (bitField0_ & ~0x00000002);
@@ -3775,7 +3775,7 @@ public final class EventStartupProto {
             if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
               to_bitField0_ |= 0x00000001;
             }
-            result.diamondPriceToCreateClan_ = diamondPriceToCreateClan_;
+            result.coinPriceToCreateClan_ = coinPriceToCreateClan_;
             if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
               to_bitField0_ |= 0x00000002;
             }
@@ -3804,8 +3804,8 @@ public final class EventStartupProto {
           
           public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants other) {
             if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance()) return this;
-            if (other.hasDiamondPriceToCreateClan()) {
-              setDiamondPriceToCreateClan(other.getDiamondPriceToCreateClan());
+            if (other.hasCoinPriceToCreateClan()) {
+              setCoinPriceToCreateClan(other.getCoinPriceToCreateClan());
             }
             if (other.hasMaxCharLengthForClanName()) {
               setMaxCharLengthForClanName(other.getMaxCharLengthForClanName());
@@ -3849,7 +3849,7 @@ public final class EventStartupProto {
                 }
                 case 8: {
                   bitField0_ |= 0x00000001;
-                  diamondPriceToCreateClan_ = input.readInt32();
+                  coinPriceToCreateClan_ = input.readInt32();
                   break;
                 }
                 case 16: {
@@ -3873,23 +3873,23 @@ public final class EventStartupProto {
           
           private int bitField0_;
           
-          // optional int32 diamondPriceToCreateClan = 1;
-          private int diamondPriceToCreateClan_ ;
-          public boolean hasDiamondPriceToCreateClan() {
+          // optional int32 coinPriceToCreateClan = 1;
+          private int coinPriceToCreateClan_ ;
+          public boolean hasCoinPriceToCreateClan() {
             return ((bitField0_ & 0x00000001) == 0x00000001);
           }
-          public int getDiamondPriceToCreateClan() {
-            return diamondPriceToCreateClan_;
+          public int getCoinPriceToCreateClan() {
+            return coinPriceToCreateClan_;
           }
-          public Builder setDiamondPriceToCreateClan(int value) {
+          public Builder setCoinPriceToCreateClan(int value) {
             bitField0_ |= 0x00000001;
-            diamondPriceToCreateClan_ = value;
+            coinPriceToCreateClan_ = value;
             onChanged();
             return this;
           }
-          public Builder clearDiamondPriceToCreateClan() {
+          public Builder clearCoinPriceToCreateClan() {
             bitField0_ = (bitField0_ & ~0x00000001);
-            diamondPriceToCreateClan_ = 0;
+            coinPriceToCreateClan_ = 0;
             onChanged();
             return this;
           }
@@ -13634,7 +13634,7 @@ public final class EventStartupProto {
       "oto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n" +
       "\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014" +
       "advertiserId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 " +
-      "\001(\010\"\304\036\n\024StartupResponseProto\022\030\n\020serverTi" +
+      "\001(\010\"\301\036\n\024StartupResponseProto\022\030\n\020serverTi" +
       "meMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl",
       "6.proto.FullUserProto\022I\n\rstartupStatus\030\003" +
       " \001(\01622.com.lvl6.proto.StartupResponsePro" +
@@ -13681,7 +13681,7 @@ public final class EventStartupProto {
       "\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto\0222\n\010" +
       "referred\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
       "serProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coinsGi" +
-      "venToReferrer\030\003 \001(\005\032\344\016\n\020StartupConstants" +
+      "venToReferrer\030\003 \001(\005\032\341\016\n\020StartupConstants" +
       "\022H\n\025inAppPurchasePackages\030\001 \003(\0132).com.lv" +
       "l6.proto.InAppPurchasePackageProto\022\027\n\017ma" +
       "xLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleStr" +
@@ -13717,22 +13717,22 @@ public final class EventStartupProto {
       "nstantUpgradeMultiplier\030\005 \001(\001\032_\n\031Animate" +
       "dSpriteOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n",
       "\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coordinat" +
-      "eProto\032\235\001\n\rClanConstants\022 \n\030diamondPrice" +
-      "ToCreateClan\030\001 \001(\005\022 \n\030maxCharLengthForCl" +
-      "anName\030\002 \001(\005\022\'\n\037maxCharLengthForClanDesc" +
-      "ription\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag" +
-      "\030\004 \001(\005\032c\n\030DownloadableNibConstants\022\022\n\nma" +
-      "pNibName\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t" +
-      "\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023Tournamen" +
-      "tConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014losses" +
-      "Weight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033num",
-      "HoursToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMo" +
-      "nsterConstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022" +
-      "!\n\031initialMaxNumMonsterLimit\030\002 \001(\005\"A\n\014Up" +
-      "dateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDAT" +
-      "E\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016" +
-      "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021Ev" +
-      "entStartupProto"
+      "eProto\032\232\001\n\rClanConstants\022\035\n\025coinPriceToC" +
+      "reateClan\030\001 \001(\005\022 \n\030maxCharLengthForClanN" +
+      "ame\030\002 \001(\005\022\'\n\037maxCharLengthForClanDescrip" +
+      "tion\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 " +
+      "\001(\005\032c\n\030DownloadableNibConstants\022\022\n\nmapNi" +
+      "bName\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n" +
+      "\021goldShoppeNibName\030\003 \001(\t\032y\n\023TournamentCo" +
+      "nstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWei" +
+      "ght\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHou",
+      "rsToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMonst" +
+      "erConstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031" +
+      "initialMaxNumMonsterLimit\030\002 \001(\005\"A\n\014Updat" +
+      "eStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002" +
+      "\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nU" +
+      "SER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021Event" +
+      "StartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13800,7 +13800,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor,
-              new java.lang.String[] { "DiamondPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", },
+              new java.lang.String[] { "CoinPriceToCreateClan", "MaxCharLengthForClanName", "MaxCharLengthForClanDescription", "MaxCharLengthForClanTag", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =

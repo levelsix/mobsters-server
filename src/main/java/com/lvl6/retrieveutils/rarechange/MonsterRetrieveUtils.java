@@ -61,7 +61,6 @@ import com.lvl6.utils.DBConnection;
   private static void setStaticMonsterIdsToMonsters() {
     log.debug("setting static map of monsterIds to monsters");
 
-    Random rand = new Random();
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
     if (conn != null) {
@@ -73,7 +72,7 @@ import com.lvl6.utils.DBConnection;
           rs.beforeFirst();
           HashMap<Integer, Monster> monsterIdsToMonstersTemp = new HashMap<Integer, Monster>();
           while(rs.next()) {  //should only be one
-            Monster monster = convertRSRowToMonster(rs, rand);
+            Monster monster = convertRSRowToMonster(rs);
             if (monster != null)
               monsterIdsToMonstersTemp.put(monster.getId(), monster);
           }
@@ -94,7 +93,7 @@ import com.lvl6.utils.DBConnection;
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static Monster convertRSRowToMonster(ResultSet rs, Random rand) throws SQLException {
+  private static Monster convertRSRowToMonster(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
@@ -104,29 +103,23 @@ import com.lvl6.utils.DBConnection;
     int element = rs.getInt(i++);
     int maxHp = rs.getInt(i++);
     String imageName = rs.getString(i++);
-    int monsterType = rs.getInt(i++);
-    int expReward = rs.getInt(i++);
-    int minSilverDrop = rs.getInt(i++);
-    int maxSilverDrop = rs.getInt(i++);
     int numPuzzlePieces = rs.getInt(i++);
-    float puzzlePieceDropRate = rs.getFloat(i++);
-    String carrotDefeated = rs.getString(i++);
-    String carrotRecruited = rs.getString(i++);
-    String carrotEvolved = rs.getString(i++);
     int elementOneDmg = rs.getInt(i++);
     int elementTwoDmg = rs.getInt(i++);
     int elementThreeDmg = rs.getInt(i++);
     int elementFourDmg = rs.getInt(i++);
     int elementFiveDmg = rs.getInt(i++);
-    
-    
-    Monster monster = new Monster(id, name, quality, evolutionLevel,
-    		displayName, element, maxHp, imageName, monsterType, expReward,
-    		minSilverDrop, maxSilverDrop, numPuzzlePieces, puzzlePieceDropRate,
-    		carrotDefeated, carrotRecruited, carrotEvolved, elementOneDmg,
-    		elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg);
+    float hpLevelMultiplier = rs.getFloat(i++);
+    float attackLevelMultiplier = rs.getInt(i++);
+    int maxLevel = rs.getInt(i++);
+    int evolutionMonsterId = rs.getInt(i++);
 
-    monster.setRand(rand);
+    String carrotRecruited = rs.getString(i++);
+    String carrotDefeated = rs.getString(i++);
+    String carrotEvolved = rs.getString(i++);
+    
+    Monster monster = new Monster(id, name, quality, evolutionLevel, displayName, element, maxHp, imageName, numPuzzlePieces, elementOneDmg, elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg, hpLevelMultiplier, attackLevelMultiplier, maxLevel, evolutionMonsterId, carrotRecruited, carrotDefeated, carrotEvolved);
+
     return monster;
   }
 }

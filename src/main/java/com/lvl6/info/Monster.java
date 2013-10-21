@@ -1,69 +1,99 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
-import java.util.Random;
+
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 
 public class Monster implements Serializable {
 
 	private static final long serialVersionUID = 5982658575244016351L;
 	private int id;
 	private String name;
-	private int quality;
+	private MonsterQuality quality;
 	private int evolutionLevel;
 	private String displayName;
-	private int element;
-	private int maxHp;
+	private MonsterElement element;
+	private int baseHp;
 	private String imageName;
-	private int monsterType;
-	private int expReward;
-	private int minSilverDrop;
-	private int maxSilverDrop;
 	private int numPuzzlePieces;
-	private float puzzlePieceDropRate;
-	private String carrotDefeated;
-	private String carrotRecruited;
-	private String carrotEvolved;
 	private int elementOneDmg;
 	private int elementTwoDmg;
 	private int elementThreeDmg;
 	private int elementFourDmg;
-	private int elementFiveDmg;
-	
-	private Random rand;
-	
-	public Monster(int id, String name, int quality, int evolutionLevel,
-			String displayName, int element, int maxHp, String imageName,
-			int monsterType, int expReward, int minSilverDrop, int maxSilverDrop,
-			int numPuzzlePieces, float puzzlePieceDropRate, String carrotDefeated,
-			String carrotRecruited, String carrotEvolved, int elementOneDmg,
-			int elementTwoDmg, int elementThreeDmg, int elementFourDmg,
-			int elementFiveDmg) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.quality = quality;
-		this.evolutionLevel = evolutionLevel;
-		this.displayName = displayName;
-		this.element = element;
-		this.maxHp = maxHp;
-		this.imageName = imageName;
-		this.monsterType = monsterType;
-		this.expReward = expReward;
-		this.minSilverDrop = minSilverDrop;
-		this.maxSilverDrop = maxSilverDrop;
-		this.numPuzzlePieces = numPuzzlePieces;
-		this.puzzlePieceDropRate = puzzlePieceDropRate;
-		this.carrotDefeated = carrotDefeated;
-		this.carrotRecruited = carrotRecruited;
-		this.carrotEvolved = carrotEvolved;
-		this.elementOneDmg = elementOneDmg;
-		this.elementTwoDmg = elementTwoDmg;
-		this.elementThreeDmg = elementThreeDmg;
-		this.elementFourDmg = elementFourDmg;
-		this.elementFiveDmg = elementFiveDmg;
-	}
+  private int elementFiveDmg;
+  private float hpLevelMultiplier;
+  private float attackLevelMultiplier;
+  private int maxLevel;
+  private int evolutionMonsterId;
+  private String carrotRecruited;
+  private String carrotDefeated;
+  private String carrotEvolved;
 
-	public int getId() {
+	public Monster(int id, String name, MonsterQuality quality, int evolutionLevel,
+      String displayName, MonsterElement element, int baseHp, String imageName,
+      int numPuzzlePieces, int elementOneDmg, int elementTwoDmg,
+      int elementThreeDmg, int elementFourDmg, int elementFiveDmg,
+      float hpLevelMultiplier, float attackLevelMultiplier, int maxLevel,
+      int evolutionMonsterId, String carrotRecruited, String carrotDefeated,
+      String carrotEvolved) {
+    super();
+    this.id = id;
+    this.name = name;
+    this.quality = quality;
+    this.evolutionLevel = evolutionLevel;
+    this.displayName = displayName;
+    this.element = element;
+    this.baseHp = baseHp;
+    this.imageName = imageName;
+    this.numPuzzlePieces = numPuzzlePieces;
+    this.elementOneDmg = elementOneDmg;
+    this.elementTwoDmg = elementTwoDmg;
+    this.elementThreeDmg = elementThreeDmg;
+    this.elementFourDmg = elementFourDmg;
+    this.elementFiveDmg = elementFiveDmg;
+    this.hpLevelMultiplier = hpLevelMultiplier;
+    this.attackLevelMultiplier = attackLevelMultiplier;
+    this.maxLevel = maxLevel;
+    this.evolutionMonsterId = evolutionMonsterId;
+    this.carrotRecruited = carrotRecruited;
+    this.carrotDefeated = carrotDefeated;
+    this.carrotEvolved = carrotEvolved;
+  }
+
+  public float getHpLevelMultiplier() {
+    return hpLevelMultiplier;
+  }
+
+  public void setHpLevelMultiplier(float hpLevelMultiplier) {
+    this.hpLevelMultiplier = hpLevelMultiplier;
+  }
+
+  public float getAttackLevelMultiplier() {
+    return attackLevelMultiplier;
+  }
+
+  public void setAttackLevelMultiplier(float attackLevelMultiplier) {
+    this.attackLevelMultiplier = attackLevelMultiplier;
+  }
+
+  public int getMaxLevel() {
+    return maxLevel;
+  }
+
+  public void setMaxLevel(int maxLevel) {
+    this.maxLevel = maxLevel;
+  }
+
+  public int getEvolutionMonsterId() {
+    return evolutionMonsterId;
+  }
+
+  public void setEvolutionMonsterId(int evolutionMonsterId) {
+    this.evolutionMonsterId = evolutionMonsterId;
+  }
+
+  public int getId() {
 		return id;
 	}
 
@@ -79,11 +109,11 @@ public class Monster implements Serializable {
 		this.name = name;
 	}
 
-	public int getQuality() {
+	public MonsterQuality getQuality() {
 		return quality;
 	}
 
-	public void setQuality(int quality) {
+	public void setQuality(MonsterQuality quality) {
 		this.quality = quality;
 	}
 
@@ -103,20 +133,20 @@ public class Monster implements Serializable {
 		this.displayName = displayName;
 	}
 
-	public int getElement() {
+	public MonsterElement getElement() {
 		return element;
 	}
 
-	public void setElement(int element) {
+	public void setElement(MonsterElement element) {
 		this.element = element;
 	}
 
-	public int getMaxHp() {
-		return maxHp;
+	public int getBaseHp() {
+		return baseHp;
 	}
 
-	public void setMaxHp(int maxHp) {
-		this.maxHp = maxHp;
+	public void setBaseHp(int baseHp) {
+		this.baseHp = baseHp;
 	}
 
 	public String getImageName() {
@@ -127,52 +157,12 @@ public class Monster implements Serializable {
 		this.imageName = imageName;
 	}
 
-	public int getMonsterType() {
-		return monsterType;
-	}
-
-	public void setMonsterType(int monsterType) {
-		this.monsterType = monsterType;
-	}
-
-	public int getExpReward() {
-		return expReward;
-	}
-
-	public void setExpReward(int expReward) {
-		this.expReward = expReward;
-	}
-
-	public int getMinSilverDrop() {
-		return minSilverDrop;
-	}
-
-	public void setMinSilverDrop(int minSilverDrop) {
-		this.minSilverDrop = minSilverDrop;
-	}
-
-	public int getMaxSilverDrop() {
-		return maxSilverDrop;
-	}
-
-	public void setMaxSilverDrop(int maxSilverDrop) {
-		this.maxSilverDrop = maxSilverDrop;
-	}
-
 	public int getNumPuzzlePieces() {
 		return numPuzzlePieces;
 	}
 
 	public void setNumPuzzlePieces(int numPuzzlePieces) {
 		this.numPuzzlePieces = numPuzzlePieces;
-	}
-
-	public float getPuzzlePieceDropRate() {
-		return puzzlePieceDropRate;
-	}
-
-	public void setPuzzlePieceDropRate(float puzzlePieceDropRate) {
-		this.puzzlePieceDropRate = puzzlePieceDropRate;
 	}
 
 	public String getCarrotDefeated() {
@@ -239,51 +229,20 @@ public class Monster implements Serializable {
 		this.elementFiveDmg = elementFiveDmg;
 	}
 
-	public Random getRand() {
-		return rand;
-	}
-
-	public void setRand(Random rand) {
-		this.rand = rand;
-	}
-	
-	public int getSilverDrop() {
-		//example goal: [min,max]=[5, 10], transform range to start at 0.
-		//[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
-		//this means there are (10-5)+1 possible numbers
-		
-		int minMaxDiff = getMaxSilverDrop() - getMinSilverDrop();
-		int randSilver = rand.nextInt(minMaxDiff + 1); 
-
-		//number generated in [0, max-min] range, but need to transform
-		//back to original range [min, max]. so add min. [0+min, max-min+min]
-		return randSilver + getMinSilverDrop();
-	}
-
-	public boolean didPuzzlePieceDrop() {
-		float randFloat = this.rand.nextFloat();
-		
-		if (randFloat < this.puzzlePieceDropRate) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	@Override
-	public String toString() {
-		return "Monster [id=" + id + ", name=" + name + ", quality=" + quality
-				+ ", evolutionLevel=" + evolutionLevel + ", displayName=" + displayName
-				+ ", element=" + element + ", maxHp=" + maxHp + ", imageName="
-				+ imageName + ", monsterType=" + monsterType + ", expReward="
-				+ expReward + ", minSilverDrop=" + minSilverDrop + ", maxSilverDrop="
-				+ maxSilverDrop + ", numPuzzlePieces=" + numPuzzlePieces
-				+ ", puzzlePieceDropRate=" + puzzlePieceDropRate + ", carrotDefeated="
-				+ carrotDefeated + ", carrotRecruited=" + carrotRecruited
-				+ ", carrotEvolved=" + carrotEvolved + ", elementOneDmg="
-				+ elementOneDmg + ", elementTwoDmg=" + elementTwoDmg
-				+ ", elementThreeDmg=" + elementThreeDmg + ", elementFourDmg="
-				+ elementFourDmg + ", elementFiveDmg=" + elementFiveDmg + "]";
-	}
+  public String toString() {
+    return "Monster [id=" + id + ", name=" + name + ", quality=" + quality
+        + ", evolutionLevel=" + evolutionLevel + ", displayName=" + displayName
+        + ", element=" + element + ", baseHp=" + baseHp + ", imageName="
+        + imageName + ", numPuzzlePieces=" + numPuzzlePieces
+        + ", elementOneDmg=" + elementOneDmg + ", elementTwoDmg="
+        + elementTwoDmg + ", elementThreeDmg=" + elementThreeDmg
+        + ", elementFourDmg=" + elementFourDmg + ", elementFiveDmg="
+        + elementFiveDmg + ", hpLevelMultiplier=" + hpLevelMultiplier
+        + ", attackLevelMultiplier=" + attackLevelMultiplier + ", maxLevel="
+        + maxLevel + ", evolutionMonsterId=" + evolutionMonsterId
+        + ", carrotRecruited=" + carrotRecruited + ", carrotDefeated="
+        + carrotDefeated + ", carrotEvolved=" + carrotEvolved + "]";
+  }
 
 }

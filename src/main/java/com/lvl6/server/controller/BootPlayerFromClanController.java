@@ -134,7 +134,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     if (!DeleteUtils.get().deleteUserClan(playerToBoot.getId(), playerToBoot.getClanId())) {
       log.error("problem with deleting user clan info for playerToBoot with id " + playerToBoot.getId() + " and clan id " + playerToBoot.getClanId()); 
     }
-    if (!playerToBoot.updateRelativeDiamondsAbsoluteClan(0, null)) {
+    if (!playerToBoot.updateRelativeCoinsAbsoluteClan(0, null)) {
       log.error("problem with change playerToBoot " + playerToBoot + " clan id to nothing");
     }
   }

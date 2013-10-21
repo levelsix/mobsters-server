@@ -338,7 +338,7 @@ public class MiscMethods {
     ClanConstants.Builder clanConstantsBuilder = ClanConstants.newBuilder();
     clanConstantsBuilder.setMaxCharLengthForClanDescription(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION);
     clanConstantsBuilder.setMaxCharLengthForClanName(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME);
-    clanConstantsBuilder.setDiamondPriceToCreateClan(ControllerConstants.CREATE_CLAN__DIAMOND_PRICE_TO_CREATE_CLAN);
+    clanConstantsBuilder.setCoinPriceToCreateClan(ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
     clanConstantsBuilder.setMaxCharLengthForClanTag(ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG);
     cb.setClanConstants(clanConstantsBuilder.build());
     

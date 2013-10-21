@@ -776,7 +776,7 @@ public class InsertUtils implements InsertUtil{
 	@Override
 	@SuppressWarnings("unchecked")
 	public int insertIntoUserTaskStage(List<Long> userTaskIds,
-			List<Integer> stageNums, List<Integer> monsterIds, List<Integer> expsGained,
+			List<Integer> stageNums, List<Integer> taskStageMonsterIds, List<Integer> expsGained,
 			List<Integer> silversGained, List<Boolean> monsterPiecesDropped) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
 
@@ -786,7 +786,7 @@ public class InsertUtils implements InsertUtil{
 
 		insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, userTaskIds);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, stageNums);
-    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_ID, monsterIds);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, taskStageMonsterIds);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__EXP_GAINED, expsGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__SILVER_GAINED, silversGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
@@ -802,7 +802,7 @@ public class InsertUtils implements InsertUtil{
 	@SuppressWarnings("unchecked")
 	public int insertIntoTaskStageHistory(
 			List<Long> userTaskStageId, List<Long> userTaskId,
-			List<Integer> stageNum, List<Integer> monsterId, List<Integer> expGained,
+			List<Integer> stageNum, List<Integer> taskStageMonsterId, List<Integer> expGained,
 			List<Integer> silverGained, List<Boolean> monsterPieceDropped) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
 		int numRows = stageNum.size();
@@ -812,7 +812,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageId);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskId);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNum);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_ID, monsterId);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, taskStageMonsterId);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expGained);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__SILVER_GAINED, silverGained);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPieceDropped);

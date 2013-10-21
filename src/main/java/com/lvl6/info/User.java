@@ -961,12 +961,12 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateRelativeDiamondsAbsoluteClan (int diamondChange, Integer clanId) {
+	public boolean updateRelativeCoinsAbsoluteClan (int coinChange, Integer clanId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
+		relativeParams.put(DBConstants.USER__COINS, coinChange);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__CLAN_ID, clanId);
@@ -974,7 +974,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.diamonds += diamondChange;
+			this.coins += coinChange;
 			if (clanId == null) this.clanId = ControllerConstants.NOT_SET;
 			else this.clanId = clanId;
 			return true;

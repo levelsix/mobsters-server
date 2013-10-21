@@ -183,7 +183,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     boolean deleteUserClanInserted = false;
     //update user to reflect he joined clan if the clan does not require a request to join
     if (!requestToJoinRequired) {
-      if (!user.updateRelativeDiamondsAbsoluteClan(0, clanId)) {
+      if (!user.updateRelativeCoinsAbsoluteClan(0, clanId)) {
         //could not change clan_id for user
         log.error("unexpected error: could not change clan id for requester " + user + " to " + clanId 
             + ". Deleting user clan that was just created.");

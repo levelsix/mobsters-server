@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,44 +16,38 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class TaskStageMonsterRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static Map<Integer, Map<Integer, Integer>> taskStageIdsToMonsterIdsToQuantity;
+  private static Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonsters;
 
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_MONSTER;
 
-  public static Map<Integer, Map<Integer, Integer>> getTaskStageIdsToMonsterIds() {
+  public static Map<Integer, List<TaskStageMonster>> getTaskStageIdsToTaskStageMonsters() {
     log.debug("retrieving all task stage monster data map");
-    if (taskStageIdsToMonsterIdsToQuantity == null) {
-      setStaticTaskStageIdsToMonsterIds();
+    if (taskStageIdsToTaskStageMonsters == null) {
+      setStaticTaskStageIdsToTaskStageMonster();
     }
-    return taskStageIdsToMonsterIdsToQuantity;
+    return taskStageIdsToTaskStageMonsters;
   }
 
-  public static List<Integer> getMonsterIdsForTaskStageId(int taskStageId) {
-    log.debug("retrieve monster data for monster " + taskStageId);
-    if (taskStageIdsToMonsterIdsToQuantity == null) {
-      setStaticTaskStageIdsToMonsterIds();      
+  public static List<TaskStageMonster> getTaskStagesForTaskStageId(int taskStageId) {
+    log.debug("retrieve task stage data for stage " + taskStageId);
+    if (taskStageIdsToTaskStageMonsters == null) {
+      setStaticTaskStageIdsToTaskStageMonster();      
     }
-    List<Integer> monsterIds = new ArrayList<Integer>();
-    
-    Map<Integer, Integer> monsterIdsToQuantity = taskStageIdsToMonsterIdsToQuantity.get(taskStageId);
-    for (int monsterId : monsterIdsToQuantity.keySet()) {
-    	int quantity = monsterIdsToQuantity.get(monsterId);
-    	List<Integer> ids = Collections.nCopies(quantity, monsterId);
-    	monsterIds.addAll(ids);
-    }
-    return monsterIds;
+    return taskStageIdsToTaskStageMonsters.get(taskStageId);
   }
 
 
-  private static void setStaticTaskStageIdsToMonsterIds() {
+  private static void setStaticTaskStageIdsToTaskStageMonster() {
     log.debug("setting static map of taskStageIds to monsterIds");
 
+    Random rand = new Random();
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
     if (conn != null) {
@@ -63,26 +57,22 @@ import com.lvl6.utils.DBConnection;
         try {
           rs.last();
           rs.beforeFirst();
-          Map<Integer, Map<Integer, Integer>> taskStageIdsToMonsterIdsTemp =
-              new HashMap<Integer, Map<Integer, Integer>>();
+          Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonstersTemp =
+              new HashMap<Integer, List<TaskStageMonster>>();
           
           //loop through each row and convert it into a java object
           while(rs.next()) {  
-            TaskStageMonster taskStageMonster = convertRSRowToTaskStageMonster(rs);
-            if (taskStageMonster == null) {
-              continue;
-            }
+            TaskStageMonster taskStageMonster = convertRSRowToTaskStageMonster(rs, rand);
             
             int stageId = taskStageMonster.getStageId();
-            int monsterId = taskStageMonster.getMonsterId();
-            if (!taskStageIdsToMonsterIdsTemp.containsKey(stageId)) {
-              taskStageIdsToMonsterIdsTemp.put(stageId, new HashMap<Integer, Integer>());
+            if (!taskStageIdsToTaskStageMonstersTemp.containsKey(stageId)) {
+              taskStageIdsToTaskStageMonstersTemp.put(stageId, new ArrayList<TaskStageMonster>());
             }
 
-            Map<Integer, Integer> monsterIds = taskStageIdsToMonsterIdsTemp.get(stageId);
-            monsterIds.put(monsterId, 1);
+            List<TaskStageMonster> monsters = taskStageIdsToTaskStageMonstersTemp.get(stageId);
+            monsters.add(taskStageMonster);
           }
-          taskStageIdsToMonsterIdsToQuantity = taskStageIdsToMonsterIdsTemp;
+          taskStageIdsToTaskStageMonsters = taskStageIdsToTaskStageMonstersTemp;
           
         } catch (SQLException e) {
           log.error("problem with database call.", e);
@@ -94,19 +84,28 @@ import com.lvl6.utils.DBConnection;
   }
 
   public static void reload() {
-    setStaticTaskStageIdsToMonsterIds();
+    setStaticTaskStageIdsToTaskStageMonster();
   }
 
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.
    */
-  private static TaskStageMonster convertRSRowToTaskStageMonster(ResultSet rs) throws SQLException {
+  private static TaskStageMonster convertRSRowToTaskStageMonster(ResultSet rs, Random rand) throws SQLException {
     int i = 1;
+    int id = rs.getInt(i++);
     int stageId = rs.getInt(i++);
     int monsterId = rs.getInt(i++);
+    MonsterType monsterType = MonsterType.valueOf(rs.getInt(i++));
+    int expReward = rs.getInt(i++);
+    int minSilverDrop = rs.getInt(i++);
+    int maxSilverDrop = rs.getInt(i++);
+    float puzzlePieceDropRate = rs.getFloat(i++);
+    int level = rs.getInt(i++);
+    float chanceToAppear = rs.getFloat(i++);
     
-    TaskStageMonster taskStageMonster = new TaskStageMonster(stageId, monsterId);
+    TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId, monsterType, expReward, minSilverDrop, maxSilverDrop, puzzlePieceDropRate, level, chanceToAppear);
         
+    taskStageMonster.setRand(rand);
     return taskStageMonster;
   }
 }

@@ -33,6 +33,7 @@ import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskStage;
+import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
@@ -71,7 +72,6 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterType;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
@@ -84,6 +84,8 @@ import com.lvl6.proto.StructureProto.FullStructureProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
+import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
+import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
@@ -910,7 +912,7 @@ public class CreateInfoProtoUtils {
 
   //individualSilvers should always be set, since silver dropped is within a range
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
-      List<Integer> monsterIds, Map<Integer, Monster> monsterIdsToMonsters,
+      List<TaskStageMonster> taskStageMonsters,
       List<Boolean> puzzlePiecesDropped, List<Integer> individualSilvers) {
 
     TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
@@ -921,70 +923,59 @@ public class CreateInfoProtoUtils {
     tspb.setStageId(taskStageId);
 
     //holds all the monsterProtos
-    List<MonsterProto> mpList = new ArrayList<MonsterProto>();
+    List<TaskStageMonsterProto> mpList = new ArrayList<TaskStageMonsterProto>();
 
-    for (int i = 0; i < monsterIds.size(); i++) {
-      int monsterId = monsterIds.get(i);
-      Monster m;
-      //retrieve monster if not given
-      if (!monsterIdsToMonsters.containsKey(monsterId)) {
-        m = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
-      } else {
-        m = monsterIdsToMonsters.get(monsterId);
-      }
+    for (int i = 0; i < taskStageMonsters.size(); i++) {
+      TaskStageMonster tsm = taskStageMonsters.get(i);
 
       boolean puzzlePieceDropped = puzzlePiecesDropped.get(i);
       int silverDrop = individualSilvers.get(i);
 
-      MonsterProto mp = createMonsterProto(monsterId, m, puzzlePieceDropped, silverDrop);
+      TaskStageMonsterProto mp = createTaskStageMonsterProto(tsm, silverDrop, puzzlePieceDropped);
       mpList.add(mp);
     }
 
-    tspb.addAllMp(mpList);
+    tspb.addAllStageMonsters(mpList);
 
     return tspb.build();
   }
+  
+  public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
+      int silverReward, boolean pieceDropped) {
+    TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
+    bldr.setMonsterId(tsm.getMonsterId());
+    bldr.setMonsterType(tsm.getMonsterType());
+    bldr.setSilverReward(silverReward);
+    bldr.setPuzzlePieceDropped(pieceDropped);
+    bldr.setExpReward(tsm.getExpReward());
+    bldr.setLevel(tsm.getLevel());
+    
+    return bldr.build();
+  }
 
   // if caller wanted the silverDrop, then silverDrop should be set
-  public static MonsterProto createMonsterProto(int monsterId, Monster aMonster,
-      boolean puzzlePieceDropped, int silverDrop) {
-    if (null == aMonster) {
-      aMonster = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
-    }
+  public static MonsterProto createMonsterProto(Monster aMonster) {
     MonsterProto.Builder mpb = MonsterProto.newBuilder();
-
 
     mpb.setMonsterId(aMonster.getId());
     mpb.setName(aMonster.getName());
-
-    int val = aMonster.getQuality();
-    if (val > 0) {
-      MonsterQuality mq = MonsterQuality.valueOf(val);
-      mpb.setQuality(mq);
-    }
+    mpb.setQuality(aMonster.getQuality());
     mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
     mpb.setDisplayName(aMonster.getDisplayName());
-
-    val = aMonster.getElement();
-    if (val > 0) {
-      MonsterElement me = MonsterElement.valueOf(val);
-      mpb.setElement(me);
-    }
-    mpb.setMaxHp(aMonster.getMaxHp());
-
-    if (aMonster.getImageName() != null) {
-      mpb.setImageName(aMonster.getImageName());
-    }
-
-    val = aMonster.getMonsterType();
-    if (val > 0) {
-      MonsterType mt = MonsterType.valueOf(val);
-      mpb.setMonsterType(mt);
-    }
-    mpb.setExpReward(aMonster.getExpReward());
-    mpb.setSilverReward(silverDrop);
-
-    mpb.setPuzzlePieceDropped(puzzlePieceDropped);
+    mpb.setElement(aMonster.getElement());
+    mpb.setBaseHp(aMonster.getBaseHp());
+    mpb.setImageName(aMonster.getImageName());
+    mpb.setNumPuzzlePieces(aMonster.getNumPuzzlePieces());
+    mpb.setElementOneDmg(aMonster.getElementOneDmg());
+    mpb.setElementTwoDmg(aMonster.getElementTwoDmg());
+    mpb.setElementThreeDmg(aMonster.getElementThreeDmg());
+    mpb.setElementFourDmg(aMonster.getElementFourDmg());
+    mpb.setElementFiveDmg(aMonster.getElementFiveDmg());
+    mpb.setHpLevelMultiplier(aMonster.getHpLevelMultiplier());
+    mpb.setAttackLevelMultiplier(aMonster.getAttackLevelMultiplier());
+    mpb.setMaxLevel(aMonster.getMaxLevel());
+    mpb.setEvolutionMonsterId(aMonster.getEvolutionMonsterId());
+    
     return mpb.build();
   }
 

@@ -120,14 +120,14 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       if (!DeleteUtils.get().deleteUserClan(userId, clanId)) {
         log.error("problem with deleting user clan for " + user + " and clan " + clan);
       }
-      if (!user.updateRelativeDiamondsAbsoluteClan(0, null)) {
+      if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
         log.error("problem with making clanid for user null");
       }
     }
   }
 
   private void deleteClan(Clan clan, List<Integer> userIds, User user) {
-    if (!user.updateRelativeDiamondsAbsoluteClan(0, null)) {
+    if (!user.updateRelativeCoinsAbsoluteClan(0, null)) {
       log.error("problem with marking clan id null for users with ids in " + userIds);
     } else {
       if (!DeleteUtils.get().deleteUserClanDataRelatedToClanId(clan.getId(), userIds.size())) {

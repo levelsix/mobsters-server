@@ -8,7 +8,7 @@ option java_outer_classname = "TaskProto";
 
 message TaskStageProto {
 	optional int32 stageId = 1;
-	repeated MonsterProto mp = 2;
+	repeated TaskStageMonsterProto stageMonsters = 2;
 }
 
 //------------------------------------------------------------------------------------------
@@ -29,3 +29,18 @@ message MinimumUserTaskProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+message TaskStageMonsterProto {
+	optional int32 monsterId = 1;
+	optional MonsterType monsterType = 2;
+	optional int32 expReward = 3;
+	optional int32 silverReward = 4;
+	optional bool puzzlePieceDropped = 5;
+	optional int32 level = 6;
+	
+	enum MonsterType {
+		REGULAR = 1;
+		MINI_BOSS = 2;
+		BOSS = 3;
+	}
+}
