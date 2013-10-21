@@ -44,6 +44,8 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.Quest;
+import com.lvl6.info.QuestForUser;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
@@ -80,6 +82,7 @@ import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LevelRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
@@ -88,6 +91,8 @@ import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.QuestUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -320,54 +325,46 @@ public class StartupController extends EventController {
   }
 
   private void setInProgressAndAvailableQuests(Builder resBuilder, User user) {
-  	//  List<UserQuest> inProgressAndRedeemedUserQuests = RetrieveUtils.userQuestRetrieveUtils()
-  	//      .getUnredeemedAndRedeemedUserQuestsForUser(user.getId());
-  	//  List<Integer> inProgressQuestIds = new ArrayList<Integer>();
-  	//  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
-  	//
-  	//  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-  	//  for (UserQuest uq : inProgressAndRedeemedUserQuests) {
-  	//    if (uq.isRedeemed()) {
-  	//      redeemedQuestIds.add(uq.getQuestId());
-  	//    } else {
-  	//      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
-  	//
-  	//      if (quest.getDefeatGoodGuysJobsRequired() == null && !uq.isDefeatTypeJobsComplete()) {
-  	//        if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), false,
-  	//            true)) {
-  	//          log.error("problem with updating user quest data by marking defeat type jobs completed for user quest "
-  	//              + uq);
-  	//        }
-  	//      }
-  	//      if (quest.getTasksRequired() == null && !uq.isTasksComplete()) {
-  	//        if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), true,
-  	//            false)) {
-  	//          log.error("problem with updating user quest data by marking tasks completed for user quest "
-  	//              + uq);
-  	//        }
-  	//      }
-  	//
-  	//      inProgressQuestIds.add(uq.getQuestId());
-  	//      if (uq.isComplete()) {
-  	//        resBuilder.addInProgressCompleteQuests(CreateInfoProtoUtils
-  	//            .createFullQuestProtoFromQuest(
-  	//                questIdToQuests.get(uq.getQuestId())));
-  	//      } else {
-  	//        resBuilder.addInProgressIncompleteQuests(CreateInfoProtoUtils
-  	//            .createFullQuestProtoFromQuest(
-  	//                questIdToQuests.get(uq.getQuestId())));
-  	//      }
-  	//    }
-  	//  }
-  	//
-  	//  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
-  	//      inProgressQuestIds);
-  	//  if (availableQuestIds != null) {
-  	//    for (Integer questId : availableQuestIds) {
-  	//      resBuilder.addAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(
-  	//          questIdToQuests.get(questId)));
-  	//    }
-  	//  }
+  	  List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
+  	      .getUnredeemedAndRedeemedUserQuestsForUser(user.getId());
+  	  List<Integer> inProgressQuestIds = new ArrayList<Integer>();
+  	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
+  	
+  	  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
+  	  for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
+  	    if (uq.isRedeemed()) {
+  	      redeemedQuestIds.add(uq.getQuestId());
+  	    } else {
+  	      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
+  	      if (quest.getTasksRequired() == null && !uq.isTasksComplete()) {
+  	        if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), true,
+  	            false)) {
+  	          log.error("problem with updating user quest data by marking tasks completed for user quest "
+  	              + uq);
+  	        }
+  	      }
+  	
+  	      inProgressQuestIds.add(uq.getQuestId());
+  	      if (uq.isComplete()) {
+  	        resBuilder.addInProgressCompleteQuests(CreateInfoProtoUtils
+  	            .createFullQuestProtoFromQuest(
+  	                questIdToQuests.get(uq.getQuestId())));
+  	      } else {
+  	        resBuilder.addInProgressIncompleteQuests(CreateInfoProtoUtils
+  	            .createFullQuestProtoFromQuest(
+  	                questIdToQuests.get(uq.getQuestId())));
+  	      }
+  	    }
+  	  }
+  	
+  	  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
+  	      inProgressQuestIds);
+  	  if (availableQuestIds != null) {
+  	    for (Integer questId : availableQuestIds) {
+  	      resBuilder.addAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(
+  	          questIdToQuests.get(questId)));
+  	    }
+  	  }
   }
   
   private void setUserClanInfos(StartupResponseProto.Builder resBuilder, User user) {
