@@ -703,7 +703,7 @@ public class StartupController extends EventController {
     		
     		//search for the monster that is being enhanced, the one with null start time
     		Date startTime = mefu.getExpectedStartTime();
-    		if(null != startTime) {
+    		if(null == startTime) {
     			//found him
     			baseMonster = ueip;
     		} else {
