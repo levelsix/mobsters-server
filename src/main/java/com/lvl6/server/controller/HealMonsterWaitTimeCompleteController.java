@@ -85,12 +85,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       boolean successful = false;
       if(legit) {
-    	  //get the user_monsters for these monsterForUserIds
-      	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
-      			.getSpecificUserMonsters(userMonsterIds);
-      	//get the monsters for user_monsters
-      	
-      	
 //        previousSilver = aUser.getCoins();
 //        previousGold = aUser.getDiamonds();
     	  successful = writeChangesToDb(aUser, userId, userMonsterIds, userMonsterIdToExpectedHealth,

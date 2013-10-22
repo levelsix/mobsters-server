@@ -3,6 +3,7 @@ package com.lvl6.server.controller.utils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -75,6 +76,7 @@ public class MonsterStuffUtils {
   public static void retainValidMonsters(Set<Long> domain,  Map<Long, ?> selectedMonsters,
   		boolean keepThingsInDomain, boolean keepThingsNotInDomain) {
   	Set<Long> selectedIds = selectedMonsters.keySet();
+  	selectedIds = new HashSet<Long>(selectedIds);
   	
   	for (Long selectedId : selectedIds) {
   		if (domain.contains(selectedId) && keepThingsInDomain) {
