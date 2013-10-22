@@ -721,19 +721,13 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public int updateUserMonsterTeamSlotNum(List<Long> userMonsterIdList, List<Integer> teamSlotNumList) {
+	public int updateUserMonsterTeamSlotNum(long userMonsterId, int teamSlotNum) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
 		
-		int size = userMonsterIdList.size();
-		
-		for (int i = 0; i < size; i++) {
-			long userMonsterId = userMonsterIdList.get(i);
-			int teamSlotNum = teamSlotNumList.get(i);
-			conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userMonsterId);
-			absoluteParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
-		}
+		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userMonsterId);
+		absoluteParams.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
 
 		int numUpdated = DBConnection.get().updateTableRows(tableName, null,
 				absoluteParams, conditionParams, "AND");
