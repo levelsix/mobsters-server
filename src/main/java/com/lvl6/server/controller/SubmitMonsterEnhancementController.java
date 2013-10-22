@@ -240,7 +240,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  	int size = protoNewMap.size();
 	  	List<Long> userMonsterIdList = new ArrayList<Long>(protoNewMap.keySet());
 	  	List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
-	  	num = UpdateUtils.get().updateUserMonsterTeamSlotNum(userMonsterIdList, teamSlotNumList);
+	  	num = UpdateUtils.get().updateNullifyUserMonstersTeamSlotNum(userMonsterIdList, teamSlotNumList);
 	  	log.info("updated user monster rows. numUpdated=" + num);
 	  }
 		

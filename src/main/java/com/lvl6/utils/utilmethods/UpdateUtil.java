@@ -150,6 +150,9 @@ public interface UpdateUtil {
   
   public abstract int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters);
   
+  public abstract int updateNullifyUserMonstersTeamSlotNum(List<Long> userMonsterIdList,
+  		List<Integer> teamSlotNumList);
+  
   public abstract int updateUserMonsterTeamSlotNum(long userMonsterId,
   		int teamSlotNum);
   
