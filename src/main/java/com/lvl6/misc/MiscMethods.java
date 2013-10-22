@@ -551,9 +551,9 @@ public class MiscMethods {
     MonsterRetrieveUtils.reload();
     MonsterRewardRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
-    QuestJobBuildStructRetrieveUtils.reload();
-    QuestJobMonsterRetrieveUtils.reload();
-    QuestJobUpgradeStructRetrieveUtils.reload();
+//    QuestJobBuildStructRetrieveUtils.reload();
+//    QuestJobMonsterRetrieveUtils.reload();
+//    QuestJobUpgradeStructRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     StructureRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
