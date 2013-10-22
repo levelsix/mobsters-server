@@ -50,17 +50,18 @@ message StartupResponseProto {
 	//repeated most recent private chat posts regarding this user
 	repeated PrivateChatPostProto pcpp = 21;
 	
-	repeated FullStructureProto staticStructs = 22;
-	repeated CityExpansionCostProto expansionCosts = 23;
-	repeated MonsterProto staticMonsters = 24;
-	repeated FullUserMonsterProto usersMonsters = 25;
-	repeated UserMonsterHealingProto monstersHealing = 26;
+	repeated LevelAndRequiredExpProto larep = 22;
+	repeated FullStructureProto staticStructs = 23;
+	repeated CityExpansionCostProto expansionCosts = 24;
+	repeated MonsterProto staticMonsters = 25;
+	repeated FullUserMonsterProto usersMonsters = 26;
+	repeated UserMonsterHealingProto monstersHealing = 27;
+	optional UserEnhancementProto enhancements = 28;
 	
-	repeated RareBoosterPurchaseProto rareBoosterPurchases = 27;
+	repeated RareBoosterPurchaseProto rareBoosterPurchases = 29;
 	
-	optional string kabamNaid = 28;
+	optional string kabamNaid = 30;
 	
-	repeated LevelAndRequiredExpProto larep = 29;
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;

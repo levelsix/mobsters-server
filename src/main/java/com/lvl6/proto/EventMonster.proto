@@ -42,7 +42,9 @@ message EnhancementWaitTimeCompleteRequestProto {
 	optional int32 gemsForSpeedup = 3;
 	
 	optional UserMonsterCurrentExpProto umcep = 4;
-	repeated int64 userMonsterIds = 5;
+	
+	//ids of monster_enhancing_for_user to delete
+	repeated int64 userMonsterIds = 5; 
 }
 
 message EnhancementWaitTimeCompleteResponseProto {

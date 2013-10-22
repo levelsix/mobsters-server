@@ -41,6 +41,7 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
@@ -67,6 +68,7 @@ import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.FullUserProto;
@@ -75,6 +77,7 @@ import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
@@ -206,13 +209,13 @@ public class StartupController extends EventController {
           setGoldSales(resBuilder, user);
           setNotifications(resBuilder, user);
           setNoticesToPlayers(resBuilder, user);
+          setLevelAndRequiredExperience(resBuilder);
           setChatMessages(resBuilder, user);
           setPrivateChatPosts(resBuilder, user);
           setStaticMonstersAndStructs(resBuilder);
-          setUserMonstersAndUserMonstersHealing(resBuilder, user);
+          setUserMonsterStuff(resBuilder, user);
           setExpansionCosts(resBuilder);
           setBoosterPurchases(resBuilder);
-          setLevelAndRequiredExperience(resBuilder);
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
@@ -433,6 +436,19 @@ public class StartupController extends EventController {
 
   }
   
+  private void setLevelAndRequiredExperience(Builder resBuilder) {
+  	Map<Integer, Integer> levelToRequiredExp =
+  			LevelRequiredExperienceRetrieveUtils.getLevelToRequiredExperienceForLevel();
+  	
+  	for (int lvl : levelToRequiredExp.keySet())  {
+  		int exp = levelToRequiredExp.get(lvl);
+  		LevelAndRequiredExpProto.Builder larepb = LevelAndRequiredExpProto.newBuilder();
+  		larepb.setLevel(lvl);
+  		larepb.setRequiredExperience(exp);
+  		resBuilder.addLarep(larepb.build());
+  	}
+  }
+  
   private void setChatMessages(StartupResponseProto.Builder resBuilder, User user) {
   	//  if (user.getClanId() > 0) {
   	//    List<ClanChatPost> activeClanChatPosts;
@@ -647,12 +663,11 @@ public class StartupController extends EventController {
     }
   }
 
-  private void setUserMonstersAndUserMonstersHealing(Builder resBuilder, User user) {
+  private void setUserMonsterStuff(Builder resBuilder, User user) {
   	int userId = user.getId();
     List<MonsterForUser> userMonsters= RetrieveUtils.monsterForUserRetrieveUtils()
         .getMonstersForUser(userId);
     
-    log.info("\n USER MONSTERS=" + userMonsters);
     if (null != userMonsters && !userMonsters.isEmpty()) {
     	for (MonsterForUser mfu : userMonsters) {
     		FullUserMonsterProto fump = CreateInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu);
@@ -662,15 +677,35 @@ public class StartupController extends EventController {
     
     Map<Long, MonsterHealingForUser> userMonstersHealing = MonsterHealingForUserRetrieveUtils
     		.getMonstersForUser(userId);
-    if (null == userMonstersHealing || userMonstersHealing.isEmpty()) {
-    	return;
+    if (null != userMonstersHealing && !userMonstersHealing.isEmpty()) {
+
+    	Collection<MonsterHealingForUser> healingMonsters = userMonstersHealing.values();
+    	for (MonsterHealingForUser mhfu : healingMonsters) {
+    		UserMonsterHealingProto umhp = CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
+    		resBuilder.addMonstersHealing(umhp);
+    	}
     }
     
-    Collection<MonsterHealingForUser> healingMonsters = userMonstersHealing.values();
-    for (MonsterHealingForUser mhfu : healingMonsters) {
-    	UserMonsterHealingProto umhp = CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
-    	resBuilder.addMonstersHealing(umhp);
+    Map<Long, MonsterEnhancingForUser> userMonstersEnhancing = MonsterEnhancingForUserRetrieveUtils
+    		.getMonstersForUser(userId);
+    if (null != userMonstersEnhancing && !userMonstersEnhancing.isEmpty()) {
+    	//find the monster that is being enhanced
+    	Collection<MonsterEnhancingForUser> enhancingMonsters = userMonstersEnhancing.values();
+    	UserEnhancementItemProto baseMonster = null;
+    	
+//    	List<User>
+    	for (MonsterEnhancingForUser mefu : enhancingMonsters) {
+    		UserEnhancementItemProto ueip = CreateInfoProtoUtils.createUserMonsterEnhancingProtoFromObj(mefu);
+    		
+    		//search for the monster that is being enhanced, the one with null start time
+    		Date startTime = mefu.getExpectedStartTime();
+    		if(null != startTime) {
+    			baseMonster = ueip;
+    		}
+    		
+    	}
     }
+    
   }
   
   private void setExpansionCosts(Builder resBuilder) {
@@ -709,19 +744,6 @@ public class StartupController extends EventController {
     }
   }  
   
-  
-  private void setLevelAndRequiredExperience(Builder resBuilder) {
-  	Map<Integer, Integer> levelToRequiredExp =
-  			LevelRequiredExperienceRetrieveUtils.getLevelToRequiredExperienceForLevel();
-  	
-  	for (int lvl : levelToRequiredExp.keySet())  {
-  		int exp = levelToRequiredExp.get(lvl);
-  		LevelAndRequiredExpProto.Builder larepb = LevelAndRequiredExpProto.newBuilder();
-  		larepb.setLevel(lvl);
-  		larepb.setRequiredExperience(exp);
-  		resBuilder.addLarep(larepb.build());
-  	}
-  }
   
   
   

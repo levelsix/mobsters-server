@@ -17,6 +17,7 @@ import com.lvl6.events.request.EnhancementWaitTimeCompleteRequestEvent;
 import com.lvl6.events.response.EnhancementWaitTimeCompleteResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -59,8 +60,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     boolean isSpeedUp = reqProto.getIsSpeedup();
-    UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
     int gemsForSpeedUp = reqProto.getGemsForSpeedup();
+    UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
+    List<Long> userMonsterIdsThatFinished = reqProto.getUserMonsterIdsList();
 
     //set some values to send to the client (the response proto)
     EnhancementWaitTimeCompleteResponseProto.Builder resBuilder = EnhancementWaitTimeCompleteResponseProto.newBuilder();
@@ -83,16 +85,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean successful = false;
       if(legit) {
     	  //get the user_monsters for these monsterForUserIds
-//      	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
-//      			.getSpecificUserMonsters(userMonsterIds);
-//      	//get the monsters for user_monsters
-//      	
-//      	
+      	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+      			.getSpecificUserMonsters(userMonsterIdsThatFinished);
+      	//get the monsters for user_monsters
+      	
+      	
 ////        previousSilver = aUser.getCoins();
 ////        previousGold = aUser.getDiamonds();
-//    	  successful = writeChangesToDb(aUser, userId, userMonsterIds, userMonsterIdToExpectedHealth,
+//    	  successful = writeChangesToDb(aUser, userId, userMonsterIdsThatFinished, userMonsterIdToExpectedHealth,
 //    	  		isSpeedUp, gemsForSpeedUp);
-////        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
+//        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
     	  setResponseBuilder(resBuilder);

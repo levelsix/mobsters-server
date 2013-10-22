@@ -84,6 +84,8 @@ message UserEnhancementItemProto {
 	optional int64 expectedStartTimeMillis = 2;
 }
 
+//------------------------------------------------------------------------------------------
+
 //when user enhances a monster, it gains "experience" 
 //(before it was termed enhancement or enhancement percentage)
 message UserMonsterCurrentExpProto {

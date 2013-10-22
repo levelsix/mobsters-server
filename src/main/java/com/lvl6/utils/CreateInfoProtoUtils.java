@@ -23,6 +23,7 @@ import com.lvl6.info.Dialogue;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
@@ -70,8 +71,7 @@ import com.lvl6.proto.JobProto.MonsterJobType;
 import com.lvl6.proto.JobProto.UpgradeStructJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
-import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
@@ -85,7 +85,6 @@ import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
-import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
@@ -96,7 +95,6 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
@@ -409,6 +407,20 @@ public class CreateInfoProtoUtils {
 //  	}
   	
   	return umhpb.build();
+  }
+  
+  public static UserEnhancementItemProto createUserMonsterEnhancingProtoFromObj(
+  		MonsterEnhancingForUser mefu) {
+  	
+  	UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();
+  	ueipb.setUserMonsterId(mefu.getMonsterForUserId());
+  	
+  	Date startTime = mefu.getExpectedStartTime();
+  	if (null != startTime) {
+  		ueipb.setExpectedStartTimeMillis(startTime.getTime());
+  	}
+  	
+  	return ueipb.build();
   }
 
   public static FullTaskProto createFullTaskProtoFromTask(Task task) {
