@@ -1,7 +1,6 @@
 package com.lvl6.utils.utilmethods;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -35,40 +34,6 @@ public class DeleteUtils implements DeleteUtil {
     return true;  
   }
 
-  
-  ////@CacheEvict(value ="specificUserEquip", key="#userEquipId")
-  public boolean deleteUserEquip(long userEquipId) {
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
-
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_FOR_USER, conditionParams, "and");
-    if (numDeleted == 1) {
-      return true;
-    }
-    return false;
-  }
-  
-  public boolean deleteUserEquips(List<Long> userEquipIds) {
-    String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
-    List<String> questions = new ArrayList<String>();
-    for(long userEquipId : userEquipIds) {
-      questions.add("?");
-    }
-    
-    String delimiter = ",";
-    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_FOR_USER__ID
-    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
-    
-    List values = userEquipIds; //adding generics will throw (type mismatch?) errors
-    
-    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
-    if(userEquipIds.size() == numDeleted) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
   public boolean deleteBlacksmithAttempt(int blacksmithId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.MONSTER_EVOLVING__ID, blacksmithId);
@@ -245,6 +210,32 @@ public class DeleteUtils implements DeleteUtil {
   	Log.info("userMonsterIds=" + userMonsterIds + "\t values sent to db: " + values);
   	
   	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
+    return numDeleted;
+  }
+
+  ////@CacheEvict(value ="specificUserEquip", key="#userEquipId")
+  @Override
+  public int deleteMonsterForUser(long userMonsterId) {
+    Map <String, Object> conditionParams = new HashMap<String, Object>();
+    conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userMonsterId);
+
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_FOR_USER, conditionParams, "and");
+    return numDeleted;
+  }
+  
+  @Override
+  public int deleteMonstersForUser(List<Long> userMonsterIds) {
+    String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+    List<String> questions = new ArrayList<String>();
+    for(long userEquipId : userMonsterIds) {
+      questions.add("?");
+    }
+    
+    String delimiter = ",";
+    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_FOR_USER__ID
+    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
+    
+    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, userMonsterIds);
     return numDeleted;
   }
   

@@ -15,10 +15,6 @@ public interface DeleteUtil {
 			//@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
 	public abstract boolean deleteUserStruct(int userStructId);
 	
-  public abstract boolean deleteUserEquip(long l);
-  
-  public abstract boolean deleteUserEquips(List<Long> userEquipIds);
-  
   public abstract boolean deleteUserClanDataRelatedToClanId(int clanId, int numRowsToDelete);
 
   public abstract boolean deleteClanWithClanId(int clanId);
@@ -40,4 +36,9 @@ public interface DeleteUtil {
   public abstract int deleteMonsterHealingForUser(int userId, List<Long> userMonsterIds);
   
   public abstract int deleteMonsterEnhancingForUser(int userId, List<Long> userMonsterIds);
+
+  public abstract int deleteMonsterForUser(long l);
+  
+  public abstract int deleteMonstersForUser(List<Long> userMonsterIds);
+  
 }

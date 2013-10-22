@@ -88,8 +88,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if(legit) {
 //        previousSilver = aUser.getCoins();
 //        previousGold = aUser.getDiamonds();
-    	  successful = writeChangesToDb(aUser, userId, umcep, userMonsterIdsThatFinished,
-    	  		isSpeedUp, gemsForSpeedUp);
+    	  successful = writeChangesToDb(aUser, userId, alreadyEnhancing, umcep,
+    	  		userMonsterIdsThatFinished, isSpeedUp, gemsForSpeedUp);
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
@@ -175,7 +175,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
   
-  private boolean writeChangesToDb(User u, int uId, UserMonsterCurrentExpProto umcep,
+  private boolean writeChangesToDb(User u, int uId,
+  		Map<Long, MonsterEnhancingForUser> alreadyEnhancing, UserMonsterCurrentExpProto umcep,
   		List<Long> userMonsterIds, boolean isSpeedUp, int gemsForSpeedUp) {
 
 
@@ -201,6 +202,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  		uId, userMonsterIds);
 	  log.info("deleted monster healing rows. numDeleted=" + num +
 	  		"\t userMonsterIds=" + userMonsterIds);
+	  
+	  //delete the userMonsterIds from the monster_for_user table, but don't delete
+	  //the monster user is enhancing
+	  num = DeleteUtils.get().deleteMonstersForUser(userMonsterIds);
+	  log.info("defeated monster_for_user rows. numDeleted=" + num);
 	  
 	  return true;
   }
