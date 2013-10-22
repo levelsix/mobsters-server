@@ -219,8 +219,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//convert protos to java cou
 		List<MonsterEnhancingForUser> updateMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
 	  		uId, protoUpdateMap);
+		log.info("updateMap=" + updateMap);
+		
 	  List<MonsterEnhancingForUser> newMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
 	  		uId, protoNewMap);
+	  log.info("newMap=" + newMap);
 	  
 	  List<MonsterEnhancingForUser> updateAndNew = new ArrayList<MonsterEnhancingForUser>();
 	  updateAndNew.addAll(updateMap);

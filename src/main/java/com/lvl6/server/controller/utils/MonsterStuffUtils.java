@@ -123,7 +123,7 @@ public class MonsterStuffUtils {
   		if (!ueip.hasExpectedStartTimeMillis() || startTimeMillis <= 0) {
   			expectedStartTime = null;
   		} else {
-  			expectedStartTime = new Date(ueip.getExpectedStartTimeMillis());
+  			expectedStartTime = new Date(startTimeMillis);
   		}
 //  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
   		MonsterEnhancingForUser mefu = new MonsterEnhancingForUser(userId,
