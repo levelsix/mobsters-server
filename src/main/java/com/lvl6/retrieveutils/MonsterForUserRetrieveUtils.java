@@ -235,14 +235,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int id = rs.getInt(i++);
     int userId = rs.getInt(i++);
     int monsterId = rs.getInt(i++);
-    int enhancementPercentage = rs.getInt(i++);
+    int currentExp = rs.getInt(i++);
+    int currentLvl = rs.getInt(i++);
     int currentHealth = rs.getInt(i++);
     int numPieces = rs.getInt(i++);
     boolean isComplete = rs.getBoolean(i++);
     int teamSlotNum = rs.getInt(i++);
     
-    MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
-    		enhancementPercentage, currentHealth, numPieces, isComplete, teamSlotNum);
+    MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId, currentExp,
+    		currentLvl, currentHealth, numPieces, isComplete, teamSlotNum);
     return userMonster;
   }
 

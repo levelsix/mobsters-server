@@ -127,8 +127,6 @@ public interface UpdateUtil {
 
   public abstract boolean updateUserEquipOwner(long userEquipId, int newOwnerId, String reason);
   
-  public abstract boolean updateUserEquipEnhancementPercentage(long l, int newEnhancementPercentage);
-
   public abstract boolean updateUsersClanId(Integer clanId, List<Integer> userIds);
 
   public abstract boolean updateUserClanStatus(int userId, int clanId, UserClanStatus status);
@@ -156,5 +154,8 @@ public interface UpdateUtil {
   		List<Integer> teamSlotNumList);
   
   public abstract int updateUserMonsterEnhancing(int userId, List<MonsterEnhancingForUser> monsters);
+  
+  public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl);
+
   
 }

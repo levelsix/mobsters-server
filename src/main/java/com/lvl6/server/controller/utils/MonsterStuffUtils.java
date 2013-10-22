@@ -92,6 +92,25 @@ public class MonsterStuffUtils {
   				"; keepThingsNotInDomain=" + keepThingsNotInDomain);
   	}
   }
+  
+  /*
+   * selected monsters (the second argument) might be modified
+   */
+  public static void retainValidMonsterIds(Set<Long> existing, List<Long> ids) {
+//  	ids.add(123456789L);
+//  	log.info("existing=" + existing + "\t ids=" + ids);
+  	
+  	List<Long> copyIds = new ArrayList<Long>(ids);
+  	// remove the invalid ids from ids client sent 
+  	// (modifying argument so calling function doesn't have to do it)
+  	ids.retainAll(existing);
+  	
+  	if (copyIds.size() != ids.size()) {
+  		//client asked for invalid ids
+  		log.warn("client asked for some invalid ids. asked for ids=" + copyIds + 
+  				"\t existingIds=" + existing + "\t remainingIds after purge =" + ids);
+  	}
+  }
 
   public static List<MonsterHealingForUser> convertToMonsterHealingForUser(
   		int userId, Map<Long, UserMonsterHealingProto> protos) {

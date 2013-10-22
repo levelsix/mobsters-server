@@ -378,16 +378,17 @@ public class CreateInfoProtoUtils {
     return mcp.setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
   }
 
-  public static FullUserMonsterProto createFullUserMonsterProtoFromUserMonster(MonsterForUser ue) {
+  public static FullUserMonsterProto createFullUserMonsterProtoFromUserMonster(MonsterForUser mfu) {
     FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
-    fumpb.setUserMonsterId(ue.getId());
-    fumpb.setUserId(ue.getUserId());
-    fumpb.setMonsterId(ue.getMonsterId());
-    fumpb.setEnhancementPercentage(ue.getEnhancementPercentage());
-    fumpb.setCurrentHealth(ue.getCurrentHealth());
-    fumpb.setNumPieces(ue.getNumPieces());
-    fumpb.setIsComplete(ue.isComplete());
-    fumpb.setTeamSlotNum(ue.getTeamSlotNum());
+    fumpb.setUserMonsterId(mfu.getId());
+    fumpb.setUserId(mfu.getUserId());
+    fumpb.setMonsterId(mfu.getMonsterId());
+    fumpb.setCurrentExp(mfu.getCurrentExp());
+    fumpb.setCurrentLvl(mfu.getCurrentLvl());
+    fumpb.setCurrentHealth(mfu.getCurrentHealth());
+    fumpb.setNumPieces(mfu.getNumPieces());
+    fumpb.setIsComplete(mfu.isComplete());
+    fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
     return fumpb.build();
   }
   

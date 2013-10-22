@@ -1897,23 +1897,27 @@ public final class MonsterStuffProto {
     boolean hasMonsterId();
     int getMonsterId();
     
-    // optional int32 enhancementPercentage = 4;
-    boolean hasEnhancementPercentage();
-    int getEnhancementPercentage();
+    // optional int32 currentExp = 4;
+    boolean hasCurrentExp();
+    int getCurrentExp();
     
-    // optional int32 currentHealth = 5;
+    // optional int32 currentLvl = 5;
+    boolean hasCurrentLvl();
+    int getCurrentLvl();
+    
+    // optional int32 currentHealth = 6;
     boolean hasCurrentHealth();
     int getCurrentHealth();
     
-    // optional int32 numPieces = 6;
+    // optional int32 numPieces = 7;
     boolean hasNumPieces();
     int getNumPieces();
     
-    // optional bool isComplete = 7;
+    // optional bool isComplete = 8;
     boolean hasIsComplete();
     boolean getIsComplete();
     
-    // optional int32 teamSlotNum = 8;
+    // optional int32 teamSlotNum = 9;
     boolean hasTeamSlotNum();
     int getTeamSlotNum();
   }
@@ -1976,51 +1980,61 @@ public final class MonsterStuffProto {
       return monsterId_;
     }
     
-    // optional int32 enhancementPercentage = 4;
-    public static final int ENHANCEMENTPERCENTAGE_FIELD_NUMBER = 4;
-    private int enhancementPercentage_;
-    public boolean hasEnhancementPercentage() {
+    // optional int32 currentExp = 4;
+    public static final int CURRENTEXP_FIELD_NUMBER = 4;
+    private int currentExp_;
+    public boolean hasCurrentExp() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public int getEnhancementPercentage() {
-      return enhancementPercentage_;
+    public int getCurrentExp() {
+      return currentExp_;
     }
     
-    // optional int32 currentHealth = 5;
-    public static final int CURRENTHEALTH_FIELD_NUMBER = 5;
+    // optional int32 currentLvl = 5;
+    public static final int CURRENTLVL_FIELD_NUMBER = 5;
+    private int currentLvl_;
+    public boolean hasCurrentLvl() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getCurrentLvl() {
+      return currentLvl_;
+    }
+    
+    // optional int32 currentHealth = 6;
+    public static final int CURRENTHEALTH_FIELD_NUMBER = 6;
     private int currentHealth_;
     public boolean hasCurrentHealth() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public int getCurrentHealth() {
       return currentHealth_;
     }
     
-    // optional int32 numPieces = 6;
-    public static final int NUMPIECES_FIELD_NUMBER = 6;
+    // optional int32 numPieces = 7;
+    public static final int NUMPIECES_FIELD_NUMBER = 7;
     private int numPieces_;
     public boolean hasNumPieces() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public int getNumPieces() {
       return numPieces_;
     }
     
-    // optional bool isComplete = 7;
-    public static final int ISCOMPLETE_FIELD_NUMBER = 7;
+    // optional bool isComplete = 8;
+    public static final int ISCOMPLETE_FIELD_NUMBER = 8;
     private boolean isComplete_;
     public boolean hasIsComplete() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public boolean getIsComplete() {
       return isComplete_;
     }
     
-    // optional int32 teamSlotNum = 8;
-    public static final int TEAMSLOTNUM_FIELD_NUMBER = 8;
+    // optional int32 teamSlotNum = 9;
+    public static final int TEAMSLOTNUM_FIELD_NUMBER = 9;
     private int teamSlotNum_;
     public boolean hasTeamSlotNum() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     public int getTeamSlotNum() {
       return teamSlotNum_;
@@ -2030,7 +2044,8 @@ public final class MonsterStuffProto {
       userMonsterId_ = 0L;
       userId_ = 0;
       monsterId_ = 0;
-      enhancementPercentage_ = 0;
+      currentExp_ = 0;
+      currentLvl_ = 0;
       currentHealth_ = 0;
       numPieces_ = 0;
       isComplete_ = false;
@@ -2058,19 +2073,22 @@ public final class MonsterStuffProto {
         output.writeInt32(3, monsterId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, enhancementPercentage_);
+        output.writeInt32(4, currentExp_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, currentHealth_);
+        output.writeInt32(5, currentLvl_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, numPieces_);
+        output.writeInt32(6, currentHealth_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBool(7, isComplete_);
+        output.writeInt32(7, numPieces_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, teamSlotNum_);
+        output.writeBool(8, isComplete_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(9, teamSlotNum_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2095,23 +2113,27 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, enhancementPercentage_);
+          .computeInt32Size(4, currentExp_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, currentHealth_);
+          .computeInt32Size(5, currentLvl_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, numPieces_);
+          .computeInt32Size(6, currentHealth_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(7, isComplete_);
+          .computeInt32Size(7, numPieces_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, teamSlotNum_);
+          .computeBoolSize(8, isComplete_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, teamSlotNum_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2243,16 +2265,18 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         monsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        enhancementPercentage_ = 0;
+        currentExp_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        currentHealth_ = 0;
+        currentLvl_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        numPieces_ = 0;
+        currentHealth_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        isComplete_ = false;
+        numPieces_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        teamSlotNum_ = 0;
+        isComplete_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
+        teamSlotNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       
@@ -2306,21 +2330,25 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.enhancementPercentage_ = enhancementPercentage_;
+        result.currentExp_ = currentExp_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.currentHealth_ = currentHealth_;
+        result.currentLvl_ = currentLvl_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.numPieces_ = numPieces_;
+        result.currentHealth_ = currentHealth_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.isComplete_ = isComplete_;
+        result.numPieces_ = numPieces_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
+        }
+        result.isComplete_ = isComplete_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
         }
         result.teamSlotNum_ = teamSlotNum_;
         result.bitField0_ = to_bitField0_;
@@ -2348,8 +2376,11 @@ public final class MonsterStuffProto {
         if (other.hasMonsterId()) {
           setMonsterId(other.getMonsterId());
         }
-        if (other.hasEnhancementPercentage()) {
-          setEnhancementPercentage(other.getEnhancementPercentage());
+        if (other.hasCurrentExp()) {
+          setCurrentExp(other.getCurrentExp());
+        }
+        if (other.hasCurrentLvl()) {
+          setCurrentLvl(other.getCurrentLvl());
         }
         if (other.hasCurrentHealth()) {
           setCurrentHealth(other.getCurrentHealth());
@@ -2411,26 +2442,31 @@ public final class MonsterStuffProto {
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              enhancementPercentage_ = input.readInt32();
+              currentExp_ = input.readInt32();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              currentHealth_ = input.readInt32();
+              currentLvl_ = input.readInt32();
               break;
             }
             case 48: {
               bitField0_ |= 0x00000020;
-              numPieces_ = input.readInt32();
+              currentHealth_ = input.readInt32();
               break;
             }
             case 56: {
               bitField0_ |= 0x00000040;
-              isComplete_ = input.readBool();
+              numPieces_ = input.readInt32();
               break;
             }
             case 64: {
               bitField0_ |= 0x00000080;
+              isComplete_ = input.readBool();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
               teamSlotNum_ = input.readInt32();
               break;
             }
@@ -2503,106 +2539,127 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional int32 enhancementPercentage = 4;
-      private int enhancementPercentage_ ;
-      public boolean hasEnhancementPercentage() {
+      // optional int32 currentExp = 4;
+      private int currentExp_ ;
+      public boolean hasCurrentExp() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public int getEnhancementPercentage() {
-        return enhancementPercentage_;
+      public int getCurrentExp() {
+        return currentExp_;
       }
-      public Builder setEnhancementPercentage(int value) {
+      public Builder setCurrentExp(int value) {
         bitField0_ |= 0x00000008;
-        enhancementPercentage_ = value;
+        currentExp_ = value;
         onChanged();
         return this;
       }
-      public Builder clearEnhancementPercentage() {
+      public Builder clearCurrentExp() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        enhancementPercentage_ = 0;
+        currentExp_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 currentHealth = 5;
+      // optional int32 currentLvl = 5;
+      private int currentLvl_ ;
+      public boolean hasCurrentLvl() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getCurrentLvl() {
+        return currentLvl_;
+      }
+      public Builder setCurrentLvl(int value) {
+        bitField0_ |= 0x00000010;
+        currentLvl_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCurrentLvl() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        currentLvl_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 currentHealth = 6;
       private int currentHealth_ ;
       public boolean hasCurrentHealth() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getCurrentHealth() {
         return currentHealth_;
       }
       public Builder setCurrentHealth(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         currentHealth_ = value;
         onChanged();
         return this;
       }
       public Builder clearCurrentHealth() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         currentHealth_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 numPieces = 6;
+      // optional int32 numPieces = 7;
       private int numPieces_ ;
       public boolean hasNumPieces() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public int getNumPieces() {
         return numPieces_;
       }
       public Builder setNumPieces(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         numPieces_ = value;
         onChanged();
         return this;
       }
       public Builder clearNumPieces() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         numPieces_ = 0;
         onChanged();
         return this;
       }
       
-      // optional bool isComplete = 7;
+      // optional bool isComplete = 8;
       private boolean isComplete_ ;
       public boolean hasIsComplete() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public boolean getIsComplete() {
         return isComplete_;
       }
       public Builder setIsComplete(boolean value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         isComplete_ = value;
         onChanged();
         return this;
       }
       public Builder clearIsComplete() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         isComplete_ = false;
         onChanged();
         return this;
       }
       
-      // optional int32 teamSlotNum = 8;
+      // optional int32 teamSlotNum = 9;
       private int teamSlotNum_ ;
       public boolean hasTeamSlotNum() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public int getTeamSlotNum() {
         return teamSlotNum_;
       }
       public Builder setTeamSlotNum(int value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         teamSlotNum_ = value;
         onChanged();
         return this;
       }
       public Builder clearTeamSlotNum() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         teamSlotNum_ = 0;
         onChanged();
         return this;
@@ -5130,25 +5187,26 @@ public final class MonsterStuffProto {
       "\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEGEN" +
       "DARY\020\005\"M\n\016MonsterElement\022\010\n\004FIRE\020\001\022\t\n\005GR" +
       "ASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKN" +
-      "ESS\020\005\"\302\001\n\024FullUserMonsterProto\022\025\n\ruserMo",
+      "ESS\020\005\"\313\001\n\024FullUserMonsterProto\022\025\n\ruserMo",
       "nsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonster" +
-      "Id\030\003 \001(\005\022\035\n\025enhancementPercentage\030\004 \001(\005\022" +
-      "\025\n\rcurrentHealth\030\005 \001(\005\022\021\n\tnumPieces\030\006 \001(" +
-      "\005\022\022\n\nisComplete\030\007 \001(\010\022\023\n\013teamSlotNum\030\010 \001" +
-      "(\005\"a\n\027UserMonsterHealingProto\022\016\n\006userId\030" +
-      "\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\037\n\027expected" +
-      "StartTimeMillis\030\003 \001(\003\"M\n\035UserMonsterCurr" +
-      "entHealthProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n" +
-      "\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhancement" +
-      "Proto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001",
-      "(\0132(.com.lvl6.proto.UserEnhancementItemP" +
-      "roto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.proto.U" +
-      "serEnhancementItemProto\"R\n\030UserEnhanceme" +
-      "ntItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027ex" +
-      "pectedStartTimeMillis\030\002 \001(\003\"f\n\032UserMonst" +
-      "erCurrentExpProto\022\025\n\ruserMonsterId\030\001 \001(\003" +
-      "\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n\rexpected" +
-      "Level\030\003 \001(\005B\023B\021MonsterStuffProto"
+      "Id\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurrentL" +
+      "vl\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tnumPi" +
+      "eces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\023\n\013teamSl" +
+      "otNum\030\t \001(\005\"a\n\027UserMonsterHealingProto\022\016" +
+      "\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\037\n" +
+      "\027expectedStartTimeMillis\030\003 \001(\003\"M\n\035UserMo" +
+      "nsterCurrentHealthProto\022\025\n\ruserMonsterId" +
+      "\030\001 \001(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEn" +
+      "hancementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMo",
+      "nster\030\002 \001(\0132(.com.lvl6.proto.UserEnhance" +
+      "mentItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl" +
+      "6.proto.UserEnhancementItemProto\"R\n\030User" +
+      "EnhancementItemProto\022\025\n\ruserMonsterId\030\001 " +
+      "\001(\003\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\"f\n\032" +
+      "UserMonsterCurrentExpProto\022\025\n\ruserMonste" +
+      "rId\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n" +
+      "\rexpectedLevel\030\003 \001(\005B\023B\021MonsterStuffProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5168,7 +5226,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor,
-              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "EnhancementPercentage", "CurrentHealth", "NumPieces", "IsComplete", "TeamSlotNum", },
+              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "CurrentExp", "CurrentLvl", "CurrentHealth", "NumPieces", "IsComplete", "TeamSlotNum", },
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor =

@@ -851,13 +851,13 @@ public class MiscMethods {
   }
 
 
-  public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
-    int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
-    int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL 
-        * ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
-
-    return currentEnhancementLevel >= maxEnhancementLevel;
-  }
+//  public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
+//    int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
+//    int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL 
+//        * ControllerConstants.ENHANCEMENT__PERCENTAGE_PER_LEVEL;
+//
+//    return currentEnhancementLevel >= maxEnhancementLevel;
+//  }
 
   public static int pointsGainedForClanTowerUserBattle(User winner, User loser) {
     int d = winner.getLevel()-loser.getLevel();

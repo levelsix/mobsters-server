@@ -154,7 +154,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     log.info("alreadyHealing=" + alreadyHealing);
     
     Set<Long> alreadyHealingIds = alreadyHealing.keySet();
-    retainValidMonsters(alreadyHealingIds, healedUp);
+    MonsterStuffUtils.retainValidMonsterIds(alreadyHealingIds, healedUp);
     
     //TODO: CHECK MONEY and CHECK SPEEDUP
     if (speedUp) {
@@ -164,25 +164,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.SUCCESS);
     return true;
-  }
-  
-  /*
-   * selected monsters (the second argument) might be modified
-   */
-  private void retainValidMonsters(Set<Long> existing, List<Long> ids) {
-//  	ids.add(123456789L);
-//  	log.info("existing=" + existing + "\t ids=" + ids);
-  	
-  	List<Long> copyIds = new ArrayList<Long>(ids);
-  	// remove the invalid ids from ids client sent 
-  	// (modifying argument so calling function doesn't have to do it)
-  	ids.retainAll(existing);
-  	
-  	if (copyIds.size() != ids.size()) {
-  		//client asked for invalid ids
-  		log.warn("client asked for some invalid ids. asked for ids=" + copyIds + 
-  				"\t existingIds=" + existing + "\t remainingIds after purge =" + ids);
-  	}
   }
   
   private boolean writeChangesToDb(User u, int uId, List<Long> userMonsterIds,
@@ -197,7 +178,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //		  return false;
 //	  }
   	
-  	//TODO: HEAL THE MONSTER
+  	//HEAL THE MONSTER
   	List<Integer> currentHealths = new ArrayList<Integer>();
   	int num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIds,
   			currentHealths, userMonsterIdsToHealths);

@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import com.lvl6.events.request.EnhancementWaitTimeCompleteRequestEvent;
 import com.lvl6.events.response.EnhancementWaitTimeCompleteResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
-import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -29,6 +27,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -62,6 +61,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     boolean isSpeedUp = reqProto.getIsSpeedup();
     int gemsForSpeedUp = reqProto.getGemsForSpeedup();
     UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
+    //user monster ids that will be deleted from monster enhancing for user table
     List<Long> userMonsterIdsThatFinished = reqProto.getUserMonsterIdsList();
 
     //set some values to send to the client (the response proto)
@@ -75,25 +75,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       //int previousGold = 0;
     	//get whatever we need from the database
     	User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-    	Map<Long, MonsterEnhancingForUser> alreadyHealing =
+    	Map<Long, MonsterEnhancingForUser> alreadyEnhancing =
     			MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
     	
     	//do check to make sure one monster has a null start time
-      boolean legit = checkLegit(resBuilder, aUser, userId, alreadyHealing,
-      		umcep, isSpeedUp, gemsForSpeedUp);
+      boolean legit = checkLegit(resBuilder, aUser, userId, alreadyEnhancing,
+      		umcep, userMonsterIdsThatFinished, isSpeedUp, gemsForSpeedUp);
 
       boolean successful = false;
       if(legit) {
-    	  //get the user_monsters for these monsterForUserIds
-      	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
-      			.getSpecificUserMonsters(userMonsterIdsThatFinished);
-      	//get the monsters for user_monsters
-      	
-      	
-////        previousSilver = aUser.getCoins();
-////        previousGold = aUser.getDiamonds();
-//    	  successful = writeChangesToDb(aUser, userId, userMonsterIdsThatFinished, userMonsterIdToExpectedHealth,
-//    	  		isSpeedUp, gemsForSpeedUp);
+//        previousSilver = aUser.getCoins();
+//        previousGold = aUser.getDiamonds();
+    	  successful = writeChangesToDb(aUser, userId, umcep, userMonsterIdsThatFinished,
+    	  		isSpeedUp, gemsForSpeedUp);
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
@@ -135,61 +129,52 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Answer: For @healedUp, the monsters the client thinks completed healing,
    * only existing/valid ids will be taken off the healing queue.
    * 
-   * Ex. Queue is (a,b,c,d). If user says monster (a,b,e) finished healing, 
-   * only the valid monsters (a,b) will be removed from the queue.
+   * Ex. Queue is (a,b,c,d). a is the base monster, b,c,d are the feeders.
+   * If user says monster (b, e) finished enhancing a, 
+   * only the valid monsters (b) will be removed from the queue, leaving (a,c,d)
    * 
    * @param resBuilder
    * @param u
    * @param userId
-   * @param alreadyHealing - the monsters that are in the healing queue
-   * @param healedUp - userMonsterIds the user thinks has finished healing
+   * @param alreadyEnhancing - the monsters that are in the enhancing queue
+   * @param umcep - the base monster that is updated from using up some of the feeders
+   * @param usedUpUserMonsterIds - userMonsterIds the user thinks has finished being enhanced
    * @param speedUUp
    * @param gemsForSpeedUp
    * @return
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
-  		Map<Long, MonsterEnhancingForUser> alreadyHealing, UserMonsterCurrentExpProto umcep,
-  		boolean speedUp, int gemsForSpeedUp) {
-//    if (null == u || null == healedUp || healedUp.isEmpty()) {
-//      log.error("unexpected error: user or idList is null. user=" + u +
-//      		"\t healedUp="+ healedUp + "\t speedUp=" + speedUp);
-//      return false;
-//    }
-//    
-//    Set<Long> alreadyHealingIds = alreadyHealing.keySet();
-//    retainValidMonsters(alreadyHealingIds, healedUp);
-//    
-//    //TODO: CHECK MONEY and CHECK SPEEDUP
-//    if (speedUp) {
-//    	
-//    }
-//    //TODO:update monster's healths
+  		Map<Long, MonsterEnhancingForUser> alreadyEnhancing, UserMonsterCurrentExpProto umcep,
+  		List<Long> usedUpMonsterIds, boolean speedUp, int gemsForSpeedUp) {
+  	
+    if (null == u || null == umcep || usedUpMonsterIds.isEmpty()) {
+      log.error("unexpected error: user or idList is null. user=" + u +
+      		"\t umcep="+ umcep + "usedUpMonsterIds=" + usedUpMonsterIds +
+      		"\t speedUp=" + speedUp + "\t gemsForSpeedUp=" + gemsForSpeedUp);
+      return false;
+    }
+    log.info("alreadyEnhancing=" + alreadyEnhancing);
+    
+    Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
+    MonsterStuffUtils.retainValidMonsterIds(alreadyEnhancingIds, usedUpMonsterIds);
+    
+    //check to make sure the base monsterId is in enhancing
+    if (!alreadyEnhancingIds.contains(umcep.getUserMonsterId())) {
+    	log.error("client did not send updated base monster specifying what new exp and lvl are");
+    	return false;
+    }
+    
+    //TODO: CHECK MONEY and CHECK SPEEDUP
+    if (speedUp) {
+    	
+    }
     	
     resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.SUCCESS);
     return true;
   }
   
-  /*
-   * selected monsters (the second argument) might be modified
-   */
-  private void retainValidMonsters(Set<Long> existing, List<Long> ids) {
-  	ids.add(123456789L);
-  	log.info("existing=" + existing + "\t ids=" + ids);
-  	
-  	List<Long> copyIds = new ArrayList<Long>(ids);
-  	// remove the invalid ids from ids client sent 
-  	// (modifying argument so calling function doesn't have to do it)
-  	ids.retainAll(existing);
-  	
-  	if (copyIds.size() != ids.size()) {
-  		//client asked for invalid ids
-  		log.warn("client asked for some invalid ids. asked for ids=" + copyIds + 
-  				"\t existingIds=" + existing + "\t remainingIds after purge =" + ids);
-  	}
-  }
-  
-  private boolean writeChangesToDb(User u, int uId, List<Long> userMonsterIds,
-  		Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedUp, int gemsForSpeedUp) {
+  private boolean writeChangesToDb(User u, int uId, UserMonsterCurrentExpProto umcep,
+  		List<Long> userMonsterIds, boolean isSpeedUp, int gemsForSpeedUp) {
 
 
   	//TODO: CHARGE THE USER
@@ -200,10 +185,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //		  return false;
 //	  }
   	
-  	//TODO: HEAL THE MONSTER
-  	List<Integer> currentHealths = new ArrayList<Integer>();
-  	int num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIds,
-  			currentHealths, userMonsterIdsToHealths);
+  	long userMonsterIdBeingEnhanced = umcep.getUserMonsterId();
+  	int newExp = umcep.getExpectedExperience();
+  	int newLvl = umcep.getExpectedLevel();
+  	
+  	//TODO: GIVE THE MONSTER EXP
+  	int num = UpdateUtils.get().updateUserMonsterExpAndLvl(userMonsterIdBeingEnhanced,
+  			newExp, newLvl);
   	log.info("num updated=" + num);
 
 	  //delete the selected monsters from  the healing table

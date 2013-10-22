@@ -49,11 +49,12 @@ message FullUserMonsterProto {
 	optional int64 userMonsterId = 1;
 	optional int32 userId = 2;
 	optional int32 monsterId = 3;
-	optional int32 enhancementPercentage = 4;
-	optional int32 currentHealth = 5;
-	optional int32 numPieces = 6;
-	optional bool isComplete = 7; 
-	optional int32 teamSlotNum = 8;
+	optional int32 currentExp = 4;
+	optional int32 currentLvl = 5;
+	optional int32 currentHealth = 6;
+	optional int32 numPieces = 7;
+	optional bool isComplete = 8; 
+	optional int32 teamSlotNum = 9;
 }
 //------------------------------------------------------------------------------------------
 

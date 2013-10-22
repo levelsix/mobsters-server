@@ -242,7 +242,8 @@ public class DBConstants {
   public static final String MONSTER_FOR_USER__ID = GENERIC__ID;
   public static final String MONSTER_FOR_USER__USER_ID = GENERIC__USER_ID;
   public static final String MONSTER_FOR_USER__MONSTER_ID = "monster_id";
-  public static final String MONSTER_FOR_USER__ENHANCEMENT_PERCENT = "enhancement_percent";
+  public static final String MONSTER_FOR_USER__CURRENT_EXPERIENCE = "current_experience";
+  public static final String MONSTER_FOR_USER__CURRENT_LEVEL = "current_level";
   public static final String MONSTER_FOR_USER__CURRENT_HEALTH = "current_health";
   public static final String MONSTER_FOR_USER__NUM_PIECES = "num_pieces";
   public static final String MONSTER_FOR_USER__IS_COMPLETE = "is_complete";

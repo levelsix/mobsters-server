@@ -256,25 +256,6 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-
-	//update a user equip after enhancing
-	public boolean updateUserEquipEnhancementPercentage(long userEquipId, int newEnhancementPercentage) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.MONSTER_FOR_USER__ENHANCEMENT_PERCENT, newEnhancementPercentage); 
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
-	}
-
-
-
 	/*
 	 * used for updating is_complete=true and last_retrieved to upgrade_time+minutestogain for a userstruct
 	 */
@@ -795,5 +776,21 @@ public class UpdateUtils implements UpdateUtil {
 				+ ". Number of monster_enhancing: " + monsters.size());
 		return numUpdated;
 	}
-  
+	
+//	update a user equip after enhancing
+		@Override
+	public int updateUserMonsterExpAndLvl(long userEquipId, int newExp, int newLvl) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, newExp);
+		absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, newLvl);
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER, null, absoluteParams, 
+				conditionParams, "and");
+		return numUpdated;
+	}
+
+
 }
