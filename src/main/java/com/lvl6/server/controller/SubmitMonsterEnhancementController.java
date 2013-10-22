@@ -37,11 +37,11 @@ import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class SubmitMontserEnhancementController extends EventController {
+@Component @DependsOn("gameServer") public class SubmitMonsterEnhancementController extends EventController {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-	public SubmitMontserEnhancementController() {
+	public SubmitMonsterEnhancementController() {
 		numAllocatedThreads = 3;
 	}
 
@@ -229,13 +229,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  updateAndNew.addAll(updateMap);
 	  updateAndNew.addAll(newMap);
 		//update everything in enhancing table that is in update and new map
-		if (null != updateAndNew) {
+		if (null != updateAndNew && !updateAndNew.isEmpty()) {
 			num = UpdateUtils.get().updateUserMonsterEnhancing(uId, updateAndNew);
 			log.info("updated monster enhancing rows. numUpdated/inserted=" + num);
 		}
 		
 		//for the new monsters, ensure that the monsters are "unequipped"
-	  if (!protoNewMap.isEmpty()) {
+	  if (null != protoNewMap && !protoNewMap.isEmpty()) {
 	  	//for the new monsters, set the teamSlotNum to 0
 	  	int size = protoNewMap.size();
 	  	List<Long> userMonsterIdList = new ArrayList<Long>(protoNewMap.keySet());
