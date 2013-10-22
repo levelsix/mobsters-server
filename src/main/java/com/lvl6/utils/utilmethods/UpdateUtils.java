@@ -777,6 +777,8 @@ public class UpdateUtils implements UpdateUtil {
 			if (null != d) {
 				Timestamp startTime = new Timestamp(d.getTime());
 				aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME, startTime);
+			} else {
+				aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME, null);
 			}
 //			d = mhfu.getQueuedTime();
 //			Timestamp queuedTime = new Timestamp(d.getTime());
