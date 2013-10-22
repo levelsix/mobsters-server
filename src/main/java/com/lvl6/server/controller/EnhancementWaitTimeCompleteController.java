@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
     //user monster ids that will be deleted from monster enhancing for user table
     List<Long> userMonsterIdsThatFinished = reqProto.getUserMonsterIdsList();
+    userMonsterIdsThatFinished = new ArrayList<Long>(userMonsterIdsThatFinished);
 
     //set some values to send to the client (the response proto)
     EnhancementWaitTimeCompleteResponseProto.Builder resBuilder = EnhancementWaitTimeCompleteResponseProto.newBuilder();
