@@ -175,8 +175,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * selected monsters (the second argument) might be modified
    */
   private void retainValidMonsters(Set<Long> existing, List<Long> ids) {
-  	ids.add(123456789L);
-  	log.info("existing=" + existing + "\t ids=" + ids);
+//  	ids.add(123456789L);
+//  	log.info("existing=" + existing + "\t ids=" + ids);
   	
   	List<Long> copyIds = new ArrayList<Long>(ids);
   	// remove the invalid ids from ids client sent 
