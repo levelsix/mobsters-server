@@ -9868,9 +9868,9 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;
+    // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;
     boolean hasStatus();
-    com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus getStatus();
+    com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus getStatus();
   }
   public static final class RemoveMonsterFromBattleTeamResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -9900,7 +9900,7 @@ public final class EventMonsterProto {
       return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_fieldAccessorTable;
     }
     
-    public enum AddMonsterToBattleTeamStatus
+    public enum RemoveMonsterFromBattleTeamStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_OTHER(1, 2),
@@ -9912,7 +9912,7 @@ public final class EventMonsterProto {
       
       public final int getNumber() { return value; }
       
-      public static AddMonsterToBattleTeamStatus valueOf(int value) {
+      public static RemoveMonsterFromBattleTeamStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
@@ -9920,15 +9920,15 @@ public final class EventMonsterProto {
         }
       }
       
-      public static com.google.protobuf.Internal.EnumLiteMap<AddMonsterToBattleTeamStatus>
+      public static com.google.protobuf.Internal.EnumLiteMap<RemoveMonsterFromBattleTeamStatus>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<AddMonsterToBattleTeamStatus>
+      private static com.google.protobuf.Internal.EnumLiteMap<RemoveMonsterFromBattleTeamStatus>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<AddMonsterToBattleTeamStatus>() {
-              public AddMonsterToBattleTeamStatus findValueByNumber(int number) {
-                return AddMonsterToBattleTeamStatus.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<RemoveMonsterFromBattleTeamStatus>() {
+              public RemoveMonsterFromBattleTeamStatus findValueByNumber(int number) {
+                return RemoveMonsterFromBattleTeamStatus.valueOf(number);
               }
             };
       
@@ -9945,11 +9945,11 @@ public final class EventMonsterProto {
         return com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.getDescriptor().getEnumTypes().get(0);
       }
       
-      private static final AddMonsterToBattleTeamStatus[] VALUES = {
+      private static final RemoveMonsterFromBattleTeamStatus[] VALUES = {
         SUCCESS, FAIL_OTHER, 
       };
       
-      public static AddMonsterToBattleTeamStatus valueOf(
+      public static RemoveMonsterFromBattleTeamStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -9961,12 +9961,12 @@ public final class EventMonsterProto {
       private final int index;
       private final int value;
       
-      private AddMonsterToBattleTeamStatus(int index, int value) {
+      private RemoveMonsterFromBattleTeamStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
       
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus)
     }
     
     private int bitField0_;
@@ -9983,19 +9983,19 @@ public final class EventMonsterProto {
       return sender_;
     }
     
-    // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;
+    // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus status_;
+    private com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status_;
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus getStatus() {
+    public com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus getStatus() {
       return status_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
+      status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10163,7 +10163,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -10279,7 +10279,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus value = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus.valueOf(rawValue);
+              com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus value = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -10384,15 +10384,15 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
       
-      // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus status = 2;
-      private com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
+      // optional .com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status = 2;
+      private com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus getStatus() {
+      public com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus getStatus() {
         return status_;
       }
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus value) {
+      public Builder setStatus(com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -10403,7 +10403,7 @@ public final class EventMonsterProto {
       }
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.AddMonsterToBattleTeamStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.RemoveMonsterFromBattleTeamStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -11637,23 +11637,24 @@ public final class EventMonsterProto {
       "_OTHER\020\002\"r\n\'RemoveMonsterFromBattleTeamR" +
       "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
       "roto.MinimumUserProto\022\025\n\ruserMonsterId\030\003" +
-      " \001(\003\"\200\002\n(RemoveMonsterFromBattleTeamResp" +
+      " \001(\003\"\212\002\n(RemoveMonsterFromBattleTeamResp" +
       "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022e\n\006status\030\002 \001(\0162U.co" +
+      "to.MinimumUserProto\022j\n\006status\030\002 \001(\0162Z.co" +
       "m.lvl6.proto.RemoveMonsterFromBattleTeam",
-      "ResponseProto.AddMonsterToBattleTeamStat" +
-      "us\";\n\034AddMonsterToBattleTeamStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"m\n#BuyMonsterInv" +
-      "entorySlotRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\024\n\014numP" +
-      "urchases\030\002 \001(\005\"\227\002\n$BuyMonsterInventorySl" +
-      "otResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022b\n\006status\030\002 \001(" +
-      "\0162R.com.lvl6.proto.BuyMonsterInventorySl" +
-      "otResponseProto.BuyMonsterInventorySlotS",
-      "tatus\"Y\n\035BuyMonsterInventorySlotStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002" +
-      "\022\016\n\nFAIL_OTHER\020\003B\023B\021EventMonsterProto"
+      "ResponseProto.RemoveMonsterFromBattleTea" +
+      "mStatus\"@\n!RemoveMonsterFromBattleTeamSt" +
+      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"m\n#Buy" +
+      "MonsterInventorySlotRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022\024\n\014numPurchases\030\002 \001(\005\"\227\002\n$BuyMonsterI" +
+      "nventorySlotResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022b\n\006s" +
+      "tatus\030\002 \001(\0162R.com.lvl6.proto.BuyMonsterI" +
+      "nventorySlotResponseProto.BuyMonsterInve",
+      "ntorySlotStatus\"Y\n\035BuyMonsterInventorySl" +
+      "otStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIE" +
+      "NT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021EventMonst" +
+      "erProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

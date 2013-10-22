@@ -168,9 +168,9 @@ message RemoveMonsterFromBattleTeamRequestProto {
 
 message RemoveMonsterFromBattleTeamResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional AddMonsterToBattleTeamStatus status = 2;
+	optional RemoveMonsterFromBattleTeamStatus status = 2;
 	
-	enum AddMonsterToBattleTeamStatus {
+	enum RemoveMonsterFromBattleTeamStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}
