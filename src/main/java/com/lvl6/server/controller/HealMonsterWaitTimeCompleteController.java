@@ -151,6 +151,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       		"\t healedUp="+ healedUp + "\t speedUp=" + speedUp);
       return false;
     }
+    log.info("alreadyHealing=" + alreadyHealing);
     
     Set<Long> alreadyHealingIds = alreadyHealing.keySet();
     retainValidMonsters(alreadyHealingIds, healedUp);
