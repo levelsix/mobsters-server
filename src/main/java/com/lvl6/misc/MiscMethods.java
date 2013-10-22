@@ -850,53 +850,6 @@ public class MiscMethods {
     return returnValue.toString();
   }
 
-  public static void writeIntoDUEFE(MonsterForUser mainUserEquip, List<MonsterForUser> feederUserEquips,
-      int enhancementId, List<Integer> enhancementFeederIds) {
-    String tableName = DBConstants.TABLE_MONSTER_4USER_DELETED_4ENHANCING;
-    try {
-      //log.info("writing into deleted user equips for enhancing");
-      int numRows = 1 + feederUserEquips.size();
-
-      Map<String, List<Object>> insertParams = new HashMap<String, List<Object>>();
-
-      List<Object> userEquipIds = new ArrayList<Object>();
-      List<Object> userIds = new ArrayList<Object>();
-      List<Object> equipIds = new ArrayList<Object>();
-      List<Object> enhancementPercents = new ArrayList<Object>();
-      List<Object> areFeeders = new ArrayList<Object>();
-      List<Object> equipEnhancementIds = new ArrayList<Object>();
-
-      userEquipIds.add(mainUserEquip.getId());
-      userIds.add(mainUserEquip.getUserId());
-      equipIds.add(mainUserEquip.getMonsterId());
-      enhancementPercents.add(mainUserEquip.getEnhancementPercentage());
-      areFeeders.add(0);
-      equipEnhancementIds.add(enhancementId);
-
-      for(int i = 0; i < feederUserEquips.size(); i++) {
-        MonsterForUser ue = feederUserEquips.get(i);
-        userEquipIds.add(ue.getId());
-        userIds.add(ue.getUserId());
-        equipIds.add(ue.getMonsterId());
-        enhancementPercents.add(ue.getEnhancementPercentage());
-        areFeeders.add(1);
-        
-        int enhancementFeederId = enhancementFeederIds.get(i);
-        equipEnhancementIds.add(enhancementFeederId);
-      }
-
-      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__ID, userEquipIds);
-      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__USER_ID, userIds);
-      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__MONSTER_ID, equipIds);
-      insertParams.put(DBConstants.DM4U4E__MONSTER_FOR_USER__ENHANCEMENT_PERCENT, enhancementPercents);
-      insertParams.put(DBConstants.DM4U4E__IS_FEEDER, areFeeders);
-      insertParams.put(DBConstants.DM4U4E__MONSTER_ENHANCING_FOR_USER__ID, equipEnhancementIds);
-
-      int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, insertParams, numRows);
-    } catch (Exception e) {
-      log.error("could not write into " + tableName, e);
-    }
-  }
 
   public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
     int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();

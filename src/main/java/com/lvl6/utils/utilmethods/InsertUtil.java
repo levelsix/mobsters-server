@@ -31,20 +31,13 @@ public interface InsertUtil {
 
 	public abstract int insertUserEquip(int userId, int equipId,
 			int enhancementPercentage);
+//
+//	public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
+//			int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement);
 
-	public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
-			int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement);
-
-	public abstract int insertIntoEquipEnhancementHistory(long equipEnhancementId, int userId, int equipId, 
-			int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
-			Timestamp startTimeOfEnhancement);
-
-//	public abstract List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders);
-
-	public abstract int insertIntoEquipEnhancementFeedersHistory(int id, int equipEnhancementId,
-			int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement);
-
-//	public abstract int insertMultipleIntoEquipEnhancementFeedersHistory(long l, List<UserEquip> feeders);
+//	public abstract int insertIntoEquipEnhancementHistory(long equipEnhancementId, int userId, int equipId, 
+//			int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
+//			Timestamp startTimeOfEnhancement);
 
 
 	public abstract boolean insertUnredeemedUserQuest(int userId, int questId,

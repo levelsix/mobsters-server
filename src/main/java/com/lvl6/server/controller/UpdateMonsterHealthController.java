@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,7 @@ import com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateM
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -111,7 +111,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   /*
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
-   * Also, returns the expected durabilities for the new equips
+   * Also, returns the expected health for the user monsters
    */
   private boolean checkLegit(Builder resBuilder, int userId,
 		  List<UserMonsterCurrentHealthProto> umchpList, 
@@ -123,7 +123,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//extract the ids so it's easier to get userMonsters from db
-  	List<Long> userMonsterIds = getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
+  	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
   	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
   			.getSpecificUserMonsters(userMonsterIds);
   	
@@ -141,20 +141,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	return true;
   	//resBuilder.setStatus(UpdateMonsterHealthStatus.SUCCESS);
-  }
-  
-  //extract the ids from the protos
-  private List<Long> getUserMonsterIds(List<UserMonsterCurrentHealthProto> umchpList,
-  		Map<Long, Integer> userMonsterIdToExpectedHealth) {
-  	List<Long> idList = new ArrayList<Long>();
-  	
-  	for(UserMonsterCurrentHealthProto umchp : umchpList) {
-  		long id = umchp.getUserMonsterId();
-  		idList.add(id);
-  		int health = umchp.getCurrentHealth();
-  		userMonsterIdToExpectedHealth.put(id, health);
-  	}
-  	return idList;
   }
   
   private boolean writeChangesToDb(int uId, Timestamp clientTime, 

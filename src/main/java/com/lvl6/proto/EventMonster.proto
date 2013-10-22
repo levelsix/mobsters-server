@@ -9,17 +9,19 @@ option java_outer_classname = "EventMonsterProto";
 
 message SubmitMonsterEnhancementRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int64 enhancingUserMonsterId = 2;
-	repeated int64 feederUserMonsterIds = 3;
-	optional int64 clientTime = 4;
+	
+	//monster being enhanced will have null for expectedStartTime
+	repeated UserEnhancementItemProto ueipDelete = 2;
+	repeated UserEnhancementItemProto ueipUpdate = 3;
+	repeated UserEnhancementItemProto ueipNew = 4;
 }
 
 message SubmitMonsterEnhancementResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional EnhanceMonsterStatus status = 2;
+	optional SubmitMonsterEnhancementStatus status = 2;
 	
 
-	enum EnhanceMonsterStatus {
+	enum SubmitMonsterEnhancementStatus {
 		SUCCESS = 1;
 		OTHER_FAIL = 2;
 		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
@@ -28,6 +30,33 @@ message SubmitMonsterEnhancementResponseProto {
 		NOT_ENOUGH_SILVER = 6;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message EnhancementWaitTimeCompleteRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//speeds up all or some monsters finished healing by waiting 
+	optional bool isSpeedup = 2; 
+	//will be set if isSpeedup is true
+	optional int32 gemsForSpeedup = 3;
+	
+	optional UserMonsterCurrentExpProto umcep = 4;
+	repeated int64 userMonsterIds = 5;
+}
+
+message EnhancementWaitTimeCompleteResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional EnhancementWaitTimeCompleteStatus status = 2;
+	
+	enum EnhancementWaitTimeCompleteStatus {
+		SUCCESS = 1;
+		FAIL_HEALING_NOT_COMPLETE = 2;
+		FAIL_INSUFFICIENT_FUNDS = 3;
+		FAIL_OTHER = 4;
+	}
+}
+
 
 //------------------------------------------------------------------------------------------
 

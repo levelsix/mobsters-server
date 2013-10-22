@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.properties.DBConstants;
@@ -651,37 +652,41 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 	
-	public int updateUserMonstersHealth(List<Long> userEquipIds,
-			List<Integer> currentDurability,
-			Map<Long, Integer> userEquipIdsToDurabilities) {
+	public int updateUserMonstersHealth(List<Long> userMonsterIds,
+			List<Integer> currentHealths,
+			Map<Long, Integer> userMonsterIdsToHealths) {
 		Map<String, Object> relativeParams = null;
 		Map<String, Object> absoluteParams = new HashMap<String, Object>();
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		
-		if (null != userEquipIdsToDurabilities && !userEquipIdsToDurabilities.isEmpty()) {
-			for (long userEquipId : userEquipIdsToDurabilities.keySet()) {
-				int durability = userEquipIdsToDurabilities.get(userEquipId);
+		//if map(userMonsterId -> expectedHealth) is set then use it
+		if (null != userMonsterIdsToHealths && !userMonsterIdsToHealths.isEmpty()) {
+			for (long userMonsterId : userMonsterIdsToHealths.keySet()) {
+				int health = userMonsterIdsToHealths.get(userMonsterId);
 				
-				conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
-				absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, durability);
+				conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userMonsterId);
+				absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, health);
 			}
 		} else {
-
-			for(int i = 0; i < userEquipIds.size(); i++) {
-				long userEquipId = userEquipIds.get(i);
-				int durability = currentDurability.get(i);
+			//since map is not set, go through the list
+			for(int i = 0; i < userMonsterIds.size(); i++) {
+				long userEquipId = userMonsterIds.get(i);
+				int health = currentHealths.get(i);
 
 				conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
-				absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, durability);
+				absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, health);
 			}
 		}
 
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER,
-				relativeParams, absoluteParams, conditionParams, "AND");
-
+		//to prevent db update query that updates nothing
+		int numUpdated = 0;
+		if (!absoluteParams.isEmpty()) {
+			numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER,
+					relativeParams, absoluteParams, conditionParams, "AND");
+		}
 //		log.info("num userEquips updated: " + numUpdated 
-//				+ ". userEquipIds: " + userEquipIds);
-//		if (numUpdated == userEquipIds.size()*2) {
+//				+ ". userMonsterIds: " + userMonsterIds);
+//		if (numUpdated == userMonsterIds.size()*2) {
 //			return true;
 //		}
 //		return false;
@@ -731,7 +736,7 @@ public class UpdateUtils implements UpdateUtil {
 
 		log.info("num monster_healing updated: " + numUpdated 
 				+ ". Number of monster_healing: " + monsters.size());
-		return 0;
+		return numUpdated;
 	}
 	
 	@Override
@@ -754,4 +759,37 @@ public class UpdateUtils implements UpdateUtil {
 
 		return numUpdated;
 	}
+	
+	@Override
+	public int updateUserMonsterEnhancing(int userId, List<MonsterEnhancingForUser> monsters) {
+		String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+
+		for (MonsterEnhancingForUser mhfu : monsters) {
+			Map <String, Object> aRow = new HashMap<String, Object>();
+			
+			aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, userId);
+			aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, mhfu.getMonsterForUserId());
+			
+			Date d = mhfu.getExpectedStartTime();
+			if (null != d) {
+				Timestamp startTime = new Timestamp(d.getTime());
+				aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME, startTime);
+			}
+//			d = mhfu.getQueuedTime();
+//			Timestamp queuedTime = new Timestamp(d.getTime());
+//			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME, queuedTime);
+			newRows.add(aRow);
+		}
+		
+		log.info("newRows=" + newRows);
+		
+		
+		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
+
+		log.info("num monster_enhancing updated: " + numUpdated 
+				+ ". Number of monster_enhancing: " + monsters.size());
+		return numUpdated;
+	}
+  
 }

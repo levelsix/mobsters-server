@@ -19,6 +19,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.HealMonsterRequestEvent;
 import com.lvl6.events.response.HealMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
@@ -31,7 +32,9 @@ import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStat
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -67,9 +70,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<UserMonsterHealingProto> umhUpdate = reqProto.getUmhUpdateList();
     List<UserMonsterHealingProto> umhNew = reqProto.getUmhNewList();
 
-    Map<Long, UserMonsterHealingProto> deleteMap = convertIntoUserMonsterIdToProtoMap(umhDelete);
-    Map<Long, UserMonsterHealingProto> updateMap = convertIntoUserMonsterIdToProtoMap(umhUpdate);
-    Map<Long, UserMonsterHealingProto> newMap = convertIntoUserMonsterIdToProtoMap(umhNew); 
+    Map<Long, UserMonsterHealingProto> deleteMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);
+    Map<Long, UserMonsterHealingProto> updateMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
+    Map<Long, UserMonsterHealingProto> newMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhNew); 
     //set some values to send to the client (the response proto)
     HealMonsterResponseProto.Builder resBuilder = HealMonsterResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -83,15 +86,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	Map<Long, MonsterHealingForUser> alreadyHealing =
     			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
+    	Map<Long, MonsterEnhancingForUser> alreadyEnhancing =
+					MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
     	
-    	//retrieve only the monsters that will be healed
+    	
+    	//retrieve only the new monsters that will be healed
     	Set<Long> newIds = new HashSet<Long>();
     	newIds.addAll(newMap.keySet());
     	Map<Long, MonsterForUser> existingUserMonsters = RetrieveUtils
     			.monsterForUserRetrieveUtils().getSpecificUserMonsters(newIds);
     	
       boolean legit = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
-      		alreadyHealing, deleteMap, updateMap, newMap);
+      		alreadyHealing, alreadyEnhancing, deleteMap, updateMap, newMap);
 
       boolean successful = false;
       if(legit) {
@@ -131,20 +137,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
   
-  private Map<Long, UserMonsterHealingProto> convertIntoUserMonsterIdToProtoMap(
-  		List<UserMonsterHealingProto> umhpList) {
-  	Map<Long, UserMonsterHealingProto> returnMap = new HashMap<Long, UserMonsterHealingProto>();
-  	if (null == umhpList) {
-  		return returnMap;
-  	}
-  	for (UserMonsterHealingProto umhp : umhpList) {
-  		long id = umhp.getUserMonsterId();
-  		returnMap.put(id, umhp);
-  	}
-  	
-  	return returnMap;
-  }
-
   /*
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value. delete, update, new maps
@@ -167,6 +159,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private boolean checkLegit(Builder resBuilder, User u, int userId,
   		Map<Long, MonsterForUser> existingUserMonsters,
   		Map<Long, MonsterHealingForUser> alreadyHealing,
+  		Map<Long, MonsterEnhancingForUser> alreadyEnhancing,
   		Map<Long, UserMonsterHealingProto> deleteMap,
   		Map<Long, UserMonsterHealingProto> updateMap,
   		Map<Long, UserMonsterHealingProto> newMap) {
@@ -176,34 +169,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     
+    //retain only the userMonsters, the client sent, that are in healing
+    boolean keepThingsInDomain = true;
+    boolean keepThingsNotInDomain = false;
     Set<Long> alreadyHealingIds = alreadyHealing.keySet();
-    retainValidMonsters(alreadyHealingIds, deleteMap);
-    retainValidMonsters(alreadyHealingIds, updateMap);
+    MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, deleteMap, keepThingsInDomain, keepThingsNotInDomain);
+    MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, updateMap, keepThingsInDomain, keepThingsNotInDomain);
     
+    //retain only the userMonsters, the client sent, that are in the db
     Set<Long> existingIds = existingUserMonsters.keySet();
-    retainValidMonsters(existingIds, newMap);
+    MonsterStuffUtils.retainValidMonsters(existingIds, newMap, keepThingsInDomain, keepThingsNotInDomain);
+    
+    //retain only the userMonsters, the client sent, that are not in enhancing
+    keepThingsInDomain = false;
+    keepThingsNotInDomain = true;
+    Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
+    MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap, keepThingsInDomain, keepThingsNotInDomain);
     
     //TODO: CHECK MONEY
     	
     resBuilder.setStatus(HealMonsterStatus.SUCCESS);
     return true;
-  }
-  
-  /*
-   * selected monsters (the second argument) might be modified
-   */
-  private void retainValidMonsters(Set<Long> existing, 
-  		Map<Long, ?> selectedMonsters) {
-  	Set<Long> selectedIds = selectedMonsters.keySet();
-  	
-  	for (Long selectedId : selectedIds) {
-  		if (existing.contains(selectedId)) {
-  			continue;
-  		}
-  		//since selectedId isn't in existing, remove it
-  		Object umhp = selectedMonsters.remove(selectedId);
-  		log.warn("Not valid. object=" + umhp);
-  	}
   }
   
   private boolean writeChangesToDb(User u, int uId, 
@@ -227,28 +213,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		List<Long> deleteIds = new ArrayList<Long>(protoDeleteMap.keySet());
   		num = DeleteUtils.get().deleteMonsterHealingForUser(
   				uId, deleteIds);
-  		log.info("deleted monster healing rows. numDeleted=" + num);
+  		log.info("deleted monster healing rows. numDeleted=" + num +
+  				"\t protoDeleteMap=" + protoDeleteMap);
   	}
 	  
 	  //convert protos to java counterparts
-	  List<MonsterHealingForUser> updateMap = convertToMonsterHealingForUser(
+	  List<MonsterHealingForUser> updateMap = MonsterStuffUtils.convertToMonsterHealingForUser(
 	  		uId, protoUpdateMap);
-	  List<MonsterHealingForUser> newMap = convertToMonsterHealingForUser(
+	  List<MonsterHealingForUser> newMap = MonsterStuffUtils.convertToMonsterHealingForUser(
 	  		uId, protoNewMap);
 	  
-	  List<MonsterHealingForUser> updateAndNewMap = new ArrayList<MonsterHealingForUser>();
-	  updateAndNewMap.addAll(updateMap);
-	  updateAndNewMap.addAll(newMap);
+	  List<MonsterHealingForUser> updateAndNew = new ArrayList<MonsterHealingForUser>();
+	  updateAndNew.addAll(updateMap);
+	  updateAndNew.addAll(newMap);
 	  
-	  //client could have just asked to delete queue with one thing
-	  if (!updateAndNewMap.isEmpty()) {
+	  //client could have deleted one item from two item queue, or added at least one item
+	  if (!updateAndNew.isEmpty()) {
 	  	//update and insert the new monsters
-	  	num = UpdateUtils.get().updateUserMonsterHealing(uId, updateAndNewMap);
-	  	log.info("updated monster healing rows. numUpdated=" + num);
+	  	num = UpdateUtils.get().updateUserMonsterHealing(uId, updateAndNew);
+	  	log.info("updated monster healing rows. numUpdated/inserted=" + num);
 	  }
 	  
-	  //client could have deleted queue with one element and then added it
-	  //back in
+	  //for the new monsters, ensure that the monsters are "unequipped"
 	  if (!protoNewMap.isEmpty()) {
 	  	//for the new monsters, set the teamSlotNum to 0
 	  	int size = protoNewMap.size();
@@ -259,23 +245,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  }
 	  
 	  return true;
-  }
-  
-  private List<MonsterHealingForUser> convertToMonsterHealingForUser(
-  		int userId, Map<Long, UserMonsterHealingProto> protos) {
-  	
-  	List<MonsterHealingForUser> nonProtos = new ArrayList<MonsterHealingForUser>();
-  	
-  	for(UserMonsterHealingProto umhp: protos.values()) {
-  		Long monsterForUserId = umhp.getUserMonsterId();
-  		Date expectedStartTime = new Date(umhp.getExpectedStartTimeMillis());
-//  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
-  		MonsterHealingForUser mhfu = new MonsterHealingForUser(userId,
-  				monsterForUserId, expectedStartTime);//, queuedTime);
-  		nonProtos.add(mhfu);
-  	}
-  	
-  	return nonProtos;
   }
   
   private void setResponseBuilder(Builder resBuilder, int userId) {

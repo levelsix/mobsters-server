@@ -68,20 +68,28 @@ message UserMonsterHealingProto {
 
 message UserMonsterCurrentHealthProto {
 	optional int64 userMonsterId = 1;
-	optional int32 currentHealth = 2;
+	optional int32 currentHealth = 2; //what the health should be
 }
 
 //------------------------------------------------------------------------------------------
 
-message BaseEnhancementProto {
+message UserEnhancementProto {
 	optional int32 userId = 1;
-	optional int64 userMonsterId = 2;
-	repeated FeederEnhancementProto feeders = 3;
+	optional UserEnhancementItemProto baseMonster = 2;
+	repeated UserEnhancementItemProto feeders = 3;
 }
 
-message FeederEnhancementProto {
+message UserEnhancementItemProto {
 	optional int64 userMonsterId = 1;
-	optional int64 expectedStartTime = 2;
+	optional int64 expectedStartTimeMillis = 2;
+}
+
+//when user enhances a monster, it gains "experience" 
+//(before it was termed enhancement or enhancement percentage)
+message UserMonsterCurrentExpProto {
+	optional int64 userMonsterId = 1;
+	optional int32 expectedExperience = 2;
+	optional int32 expectedLevel = 3;
 }
 
 //------------------------------------------------------------------------------------------

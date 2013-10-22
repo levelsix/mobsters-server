@@ -156,45 +156,6 @@ public class DeleteUtils implements DeleteUtil {
     }
     return false;
   }
-  
-  public boolean deleteEquipEnhancements(List<Integer> equipEnhancementIds) {
-    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
-    List<String> questions = new ArrayList<String>();
-    for(int id : equipEnhancementIds) {
-      questions.add("?");
-    }
-    
-    String delimiter = ",";
-    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_ENHANCING__ID 
-    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
-    
-    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, equipEnhancementIds);
-    if(equipEnhancementIds.size() == numDeleted) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  
-  //since many EquipEnhancementFeeders point to one EquipEnhancement, could just delete by EnhancementId
-  public boolean deleteEquipEnhancementFeeders(List<Integer> equipEnhancementFeederIds) {
-    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FEEDER;
-    List<String> questions = new ArrayList<String>();
-    for(int id : equipEnhancementFeederIds) {
-      questions.add("?");
-    }
-    
-    String delimiter = ",";
-    String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_ENHANCING__ID 
-    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
-    
-    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, equipEnhancementFeederIds);
-    if(equipEnhancementFeederIds.size() == numDeleted) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   public int deleteAllUserQuestsForUser(int userId) {
     String tableName = DBConstants.TABLE_QUEST_FOR_USER;
@@ -263,4 +224,28 @@ public class DeleteUtils implements DeleteUtil {
   	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
     return numDeleted;
   }
+  
+  @Override
+  public int deleteMonsterEnhancingForUser(int userId, List<Long> userMonsterIds) {
+  	String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
+  	int size = userMonsterIds.size();
+  	
+  	List<String> questions = Collections.nCopies(size, "?");
+  	
+  	String delimiter = ",";
+  	String query = " DELETE FROM " + tableName + " WHERE " +
+  			DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID + "=?" +
+  			" and " + DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID +
+  			" IN (" + StringUtils.getListInString(questions, delimiter) + ");";
+  	
+  	List<Object> values = new ArrayList<Object>();
+  	values.add(userId);
+  	values.addAll(userMonsterIds);
+  	
+  	Log.info("userMonsterIds=" + userMonsterIds + "\t values sent to db: " + values);
+  	
+  	int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
+    return numDeleted;
+  }
+  
 }

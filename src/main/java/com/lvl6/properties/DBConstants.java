@@ -23,9 +23,6 @@ public class DBConstants {
   public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
   public static final String TABLE_LOGIN_HISTORY = "login_history";	
   public static final String TABLE_MONSTER = "monster";
-	public static final String TABLE_MONSTER_4USER_DELETED_4ENHANCING = "monster_4user_deleted_4enhancing";
-	public static final String TABLE_MONSTER_ENHANCING_FEEDER = "monster_enhancing_feeder";  
-	public static final String TABLE_MONSTER_ENHANCING_FEEDER_HISTORY = "monster_enhancing_feeder_history";  
   public static final String TABLE_MONSTER_ENHANCING_FOR_USER= "monster_enhancing_for_user";
   public static final String TABLE_MONSTER_ENHANCING_HISTORY = "monster_enhancing_history";
   public static final String TABLE_MONSTER_EVOLVING_FAIL_FOR_USER = "monster_evolving_fail_for_user";
@@ -208,44 +205,16 @@ public class DBConstants {
   public static final String LOGIN_HISTORY__DATE = "date";
   public static final String LOGIN_HISTORY__IS_LOGIN = "is_login";
 
-  /*MONSTER 4USER DELETED 4ENHANCING*/
-  public static final String DM4U4E__MONSTER_FOR_USER__ID = "monster_for_user_id";
-  public static final String DM4U4E__MONSTER_FOR_USER__USER_ID = GENERIC__USER_ID;
-  public static final String DM4U4E__MONSTER_FOR_USER__MONSTER_ID = "monster_id";
-  public static final String DM4U4E__MONSTER_FOR_USER__ENHANCEMENT_PERCENT = "enhancement_percent";
-  public static final String DM4U4E__IS_FEEDER = "is_feeder";
-  public static final String DM4U4E__MONSTER_ENHANCING_FOR_USER__ID = "monster_enhancing_id";
-
   /*MONSTER ENHANCING FOR USER*/
-  public static final String MONSTER_ENHANCING__ID = GENERIC__ID;
-  public static final String MONSTER_ENHANCING__USER_ID = GENERIC__USER_ID;
-  public static final String MONSTER_ENHANCING__MONSTER_ID = "monster_id";
-  public static final String MONSTER_ENHANCING__MONSTER_LEVEL = "monster_level";
-  public static final String MONSTER_ENHANCING__ENHANCEMENT_PERCENT_BEFORE_ENHANCING = "enhancement_percent";
-  public static final String MONSTER_ENHANCING__ENHANCING_START_TIME = "enhancing_start_time";
+  public static final String MONSTER_ENHANCING_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
+  public static final String MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 
   /*MONSTER ENHANCING HISTORY*/
-  public static final String MONSTER_ENHANCING_HISTORY__MONSTER_ENHANCING_ID = "monster_enhancing_id";
   public static final String MONSTER_ENHANCING_HISTORY__USER_ID = GENERIC__USER_ID;
-  public static final String MONSTER_ENHANCING_HISTORY__MONSTER_ID = "monster_id";
-  public static final String MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL = "evolution_level";
-  public static final String MONSTER_ENHANCING_HISTORY__CURRENT_ENHANCEMENT_PERCENT = "current_enhancement_percent";
-  public static final String MONSTER_ENHANCING_HISTORY__PREVIOUS_ENHANCEMENT_PERCENT = "previous_enhancement_percent";
-  public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME = "enhancing_start_time";
+  public static final String MONSTER_ENHANCING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
+  public static final String MONSTER_ENHANCING_HISTORY__EXPECTED_START_TIME = "expected_start_time";
 
-  /*MONSTER ENHANCING FEEDER*/
-  public static final String MONSTER_ENHANCING_FEEDER__ID = GENERIC__ID;
-  public static final String MONSTER_ENHANCING_FEEDER__MONSTER_ENHANCING_ID = "monster_enhancing_id";
-  public static final String MONSTER_ENHANCING_FEEDER__MONSTER_ID = "monster_id";
-  public static final String MONSTER_ENHANCING_FEEDER__EVOLUTION_LEVEL = "evolution_level";
-  public static final String MONSTER_ENHANCING_FEEDER__ENHANCEMENT_PERCENTAGE_BEFORE_ENHANCING = "enhancement_percentage_before_enhancing";
-
-  /*MONSTER ENHANCING FEEDERS HISTORY*/
-  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__ID = "monster_enhancing_feeder_id";
-  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__MONSTER_ENHANCING_ID = "monster_enhancing_id";
-  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__MONSTER_ID = "monster_id";
-  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__EVOLUTION_LEVEL = "evolution_level";
-  public static final String MONSTER_ENHANCING_FEEDER_HISTORY__ENHANCEMENT_PERCENTAGE = "enhancement_percentage";
 
   /*MONSTER EVOLVING FOR USER TABLE*/
   public static final String MONSTER_EVOLVING__ID = "id";

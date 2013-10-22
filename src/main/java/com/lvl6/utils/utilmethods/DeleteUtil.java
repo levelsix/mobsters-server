@@ -1,6 +1,5 @@
 package com.lvl6.utils.utilmethods;
 
-import java.util.Collection;
 import java.util.List;
 
 
@@ -30,10 +29,6 @@ public interface DeleteUtil {
 
   public void deleteUserClansForUserExceptSpecificClan(int userId, int clanId);
   
-  public abstract boolean deleteEquipEnhancements(List<Integer> equipEnhancementIds);
-  
-  public abstract boolean deleteEquipEnhancementFeeders(List<Integer> equipEnhancementFeederIds);
-  
   public abstract int deleteAllUserQuestsForUser(int userId);
   
   public abstract int deleteAllUserQuestsCompletedTasksForUser(int userId);
@@ -43,4 +38,6 @@ public interface DeleteUtil {
   public abstract int deleteTaskStagesForIds(List<Long> taskStageForUserIds);
   
   public abstract int deleteMonsterHealingForUser(int userId, List<Long> userMonsterIds);
+  
+  public abstract int deleteMonsterEnhancingForUser(int userId, List<Long> userMonsterIds);
 }

@@ -13,63 +13,59 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
-import com.lvl6.events.request.HealMonsterWaitTimeCompleteRequestEvent;
-import com.lvl6.events.response.HealMonsterWaitTimeCompleteResponseEvent;
+import com.lvl6.events.request.EnhancementWaitTimeCompleteRequestEvent;
+import com.lvl6.events.response.EnhancementWaitTimeCompleteResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.MonsterForUser;
-import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto;
-import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto;
-import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.HealMonsterWaitTimeCompleteStatus;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
+import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteRequestProto;
+import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto;
+import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.Builder;
+import com.lvl6.proto.EventMonsterProto.EnhancementWaitTimeCompleteResponseProto.EnhancementWaitTimeCompleteStatus;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class HealMonsterWaitTimeCompleteController extends EventController {
+@Component @DependsOn("gameServer") public class EnhancementWaitTimeCompleteController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 
-  public HealMonsterWaitTimeCompleteController() {
+  public EnhancementWaitTimeCompleteController() {
     numAllocatedThreads = 4;
   }
 
   @Override
   public RequestEvent createRequestEvent() {
-    return new HealMonsterWaitTimeCompleteRequestEvent();
+    return new EnhancementWaitTimeCompleteRequestEvent();
   }
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_HEAL_MONSTER_WAIT_TIME_COMPLETE_EVENT;
+    return EventProtocolRequest.C_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT;
   }
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
-    HealMonsterWaitTimeCompleteRequestProto reqProto = ((HealMonsterWaitTimeCompleteRequestEvent)event).getHealMonsterWaitTimeCompleteRequestProto();
+    EnhancementWaitTimeCompleteRequestProto reqProto = ((EnhancementWaitTimeCompleteRequestEvent)event).getEnhancementWaitTimeCompleteRequestProto();
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     boolean isSpeedUp = reqProto.getIsSpeedup();
-    List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
-    Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
-    List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
+    UserMonsterCurrentExpProto umcep = reqProto.getUmcep();
     int gemsForSpeedUp = reqProto.getGemsForSpeedup();
 
     //set some values to send to the client (the response proto)
-    HealMonsterWaitTimeCompleteResponseProto.Builder resBuilder = HealMonsterWaitTimeCompleteResponseProto.newBuilder();
+    EnhancementWaitTimeCompleteResponseProto.Builder resBuilder = EnhancementWaitTimeCompleteResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
-    resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.FAIL_OTHER); //default
+    resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER); //default
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
@@ -77,33 +73,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       //int previousGold = 0;
     	//get whatever we need from the database
     	User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-    	Map<Long, MonsterHealingForUser> alreadyHealing =
-    			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
+    	Map<Long, MonsterEnhancingForUser> alreadyHealing =
+    			MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
     	
+    	//do check to make sure one monster has a null start time
       boolean legit = checkLegit(resBuilder, aUser, userId, alreadyHealing,
-      		userMonsterIds, isSpeedUp, gemsForSpeedUp);
+      		umcep, isSpeedUp, gemsForSpeedUp);
 
       boolean successful = false;
       if(legit) {
     	  //get the user_monsters for these monsterForUserIds
-      	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
-      			.getSpecificUserMonsters(userMonsterIds);
-      	//get the monsters for user_monsters
-      	
-      	
-//        previousSilver = aUser.getCoins();
-//        previousGold = aUser.getDiamonds();
-    	  successful = writeChangesToDb(aUser, userId, userMonsterIds, userMonsterIdToExpectedHealth,
-    	  		isSpeedUp, gemsForSpeedUp);
-//        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
+//      	Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+//      			.getSpecificUserMonsters(userMonsterIds);
+//      	//get the monsters for user_monsters
+//      	
+//      	
+////        previousSilver = aUser.getCoins();
+////        previousGold = aUser.getDiamonds();
+//    	  successful = writeChangesToDb(aUser, userId, userMonsterIds, userMonsterIdToExpectedHealth,
+//    	  		isSpeedUp, gemsForSpeedUp);
+////        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
     	  setResponseBuilder(resBuilder);
       }
       
-      HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
+      EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(userId);
       resEvent.setTag(event.getTag());
-      resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
+      resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 
       UpdateClientUserResponseEvent resEventUpdate = MiscMethods
@@ -111,16 +108,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       resEventUpdate.setTag(event.getTag());
       server.writeEvent(resEventUpdate);
     } catch (Exception e) {
-      log.error("exception in HealMonsterWaitTimeCompleteController processEvent", e);
+      log.error("exception in EnhancementWaitTimeCompleteController processEvent", e);
       //don't let the client hang
       try {
-    	  resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.FAIL_OTHER);
-    	  HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
+    	  resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.FAIL_OTHER);
+    	  EnhancementWaitTimeCompleteResponseEvent resEvent = new EnhancementWaitTimeCompleteResponseEvent(userId);
     	  resEvent.setTag(event.getTag());
-    	  resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
+    	  resEvent.setEnhancementWaitTimeCompleteResponseProto(resBuilder.build());
     	  server.writeEvent(resEvent);
       } catch (Exception e2) {
-    	  log.error("exception2 in HealMonsterWaitTimeCompleteController processEvent", e);
+    	  log.error("exception2 in EnhancementWaitTimeCompleteController processEvent", e);
       }
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -129,8 +126,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   /**
    * Return true if user request is valid; false otherwise and set the
-   * builder status to the appropriate value. @healedUp
-   * MIGHT BE MODIFIED.
+   * builder status to the appropriate value.
    * 
    * Will return fail if user does not have enough funds. 
    * For the most part, will always return success. Why?
@@ -150,24 +146,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * @return
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
-  		Map<Long, MonsterHealingForUser> alreadyHealing, List<Long> healedUp,
+  		Map<Long, MonsterEnhancingForUser> alreadyHealing, UserMonsterCurrentExpProto umcep,
   		boolean speedUp, int gemsForSpeedUp) {
-    if (null == u || null == healedUp || healedUp.isEmpty()) {
-      log.error("unexpected error: user or idList is null. user=" + u +
-      		"\t healedUp="+ healedUp + "\t speedUp=" + speedUp);
-      return false;
-    }
-    
-    Set<Long> alreadyHealingIds = alreadyHealing.keySet();
-    retainValidMonsters(alreadyHealingIds, healedUp);
-    
-    //TODO: CHECK MONEY and CHECK SPEEDUP
-    if (speedUp) {
+//    if (null == u || null == healedUp || healedUp.isEmpty()) {
+//      log.error("unexpected error: user or idList is null. user=" + u +
+//      		"\t healedUp="+ healedUp + "\t speedUp=" + speedUp);
+//      return false;
+//    }
+//    
+//    Set<Long> alreadyHealingIds = alreadyHealing.keySet();
+//    retainValidMonsters(alreadyHealingIds, healedUp);
+//    
+//    //TODO: CHECK MONEY and CHECK SPEEDUP
+//    if (speedUp) {
+//    	
+//    }
+//    //TODO:update monster's healths
     	
-    }
-    //TODO:update monster's healths
-    	
-    resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.SUCCESS);
+    resBuilder.setStatus(EnhancementWaitTimeCompleteStatus.SUCCESS);
     return true;
   }
   
@@ -209,7 +205,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	log.info("num updated=" + num);
 
 	  //delete the selected monsters from  the healing table
-	  num = DeleteUtils.get().deleteMonsterHealingForUser(
+	  num = DeleteUtils.get().deleteMonsterEnhancingForUser(
 	  		uId, userMonsterIds);
 	  log.info("deleted monster healing rows. numDeleted=" + num +
 	  		"\t userMonsterIds=" + userMonsterIds);

@@ -147,45 +147,45 @@ public class InsertUtils implements InsertUtil{
     return userEquipId;
   }
   
-  public int insertEquipEnhancement(int userId, int equipId, int equipLevel,
-      int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement) {
-    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    
-    insertParams.put(DBConstants.MONSTER_ENHANCING__USER_ID, userId);
-    insertParams.put(DBConstants.MONSTER_ENHANCING__MONSTER_ID, equipId);
-    insertParams.put(DBConstants.MONSTER_ENHANCING__MONSTER_LEVEL, equipLevel);
-    insertParams.put(DBConstants.MONSTER_ENHANCING__ENHANCEMENT_PERCENT_BEFORE_ENHANCING,
-        enhancementPercentageBeforeEnhancement);
-    insertParams.put(DBConstants.MONSTER_ENHANCING__ENHANCING_START_TIME, startTimeOfEnhancement);
-    
-    int equipEnhancementId = DBConnection.get().insertIntoTableBasicReturnId(tableName, insertParams);
-    return equipEnhancementId;
-  }
+//  public int insertEquipEnhancement(int userId, int equipId, int equipLevel,
+//      int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement) {
+//    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
+//    Map<String, Object> insertParams = new HashMap<String, Object>();
+//    
+//    insertParams.put(DBConstants.MONSTER_ENHANCING__USER_ID, userId);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING__MONSTER_ID, equipId);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING__MONSTER_LEVEL, equipLevel);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING__ENHANCEMENT_PERCENT_BEFORE_ENHANCING,
+//        enhancementPercentageBeforeEnhancement);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING__ENHANCING_START_TIME, startTimeOfEnhancement);
+//    
+//    int equipEnhancementId = DBConnection.get().insertIntoTableBasicReturnId(tableName, insertParams);
+//    return equipEnhancementId;
+//  }
   
-  public int insertIntoEquipEnhancementHistory(long equipEnhancementId, int userId, int equipId, 
-      int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
-      Timestamp startTimeOfEnhancement) {
-
-    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_HISTORY;
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MONSTER_ENHANCING_ID, equipEnhancementId);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__USER_ID, userId);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MONSTER_ID, equipId);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL, equipLevel);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__CURRENT_ENHANCEMENT_PERCENT, 
-        currentEnhancementPercentage);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__PREVIOUS_ENHANCEMENT_PERCENT, 
-        previousEnhancementPercentage);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME,
-        startTimeOfEnhancement);
-
-    
-    int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-    return numInserted;
-  }
-  
+//  public int insertIntoEquipEnhancementHistory(long equipEnhancementId, int userId, int equipId, 
+//      int equipLevel, int currentEnhancementPercentage, int previousEnhancementPercentage, 
+//      Timestamp startTimeOfEnhancement) {
+//
+//    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_HISTORY;
+//    Map<String, Object> insertParams = new HashMap<String, Object>();
+//    
+//    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MONSTER_ENHANCING_ID, equipEnhancementId);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__USER_ID, userId);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MONSTER_ID, equipId);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL, equipLevel);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__CURRENT_ENHANCEMENT_PERCENT, 
+//        currentEnhancementPercentage);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__PREVIOUS_ENHANCEMENT_PERCENT, 
+//        previousEnhancementPercentage);
+//    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__EXPECTED_START_TIME,
+//        startTimeOfEnhancement);
+//
+//    
+//    int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+//    return numInserted;
+//  }
+//  
   //many equip enhancement feeders to one equip enhancement id
 //  public List<Integer> insertEquipEnhancementFeeders(int equipEnhancementId, List<UserEquip> feeders) {
 //    String tableName = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS;
@@ -208,22 +208,6 @@ public class InsertUtils implements InsertUtil{
 //    return feederIds;
 //  }
 //  
-  public int insertIntoEquipEnhancementFeedersHistory(int id, int equipEnhancementId,
-      int equipId, int equipLevel, int enhancementPercentageBeforeEnhancement) {
-
-    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FEEDER_HISTORY;
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    
-    insertParams.put(DBConstants.MONSTER_ENHANCING_FEEDER_HISTORY__ID, id);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_FEEDER_HISTORY__MONSTER_ENHANCING_ID, equipEnhancementId);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__MONSTER_ID, equipId);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL, equipLevel);
-    insertParams.put(DBConstants.MONSTER_ENHANCING_FEEDER_HISTORY__ENHANCEMENT_PERCENTAGE,
-        enhancementPercentageBeforeEnhancement);
-    
-    int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-    return numInserted;
-  }
   
 //  public int insertMultipleIntoEquipEnhancementFeedersHistory(long userEquipEnhancementId, List<UserEquip> feeders) {
 //    String tablename = DBConstants.TABLE_EQUIP_ENHANCEMENT_FEEDERS_HISTORY;
