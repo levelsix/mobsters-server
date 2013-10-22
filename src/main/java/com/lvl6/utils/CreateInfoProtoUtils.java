@@ -72,6 +72,7 @@ import com.lvl6.proto.JobProto.UpgradeStructJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
@@ -409,7 +410,19 @@ public class CreateInfoProtoUtils {
   	return umhpb.build();
   }
   
-  public static UserEnhancementItemProto createUserMonsterEnhancingProtoFromObj(
+  public static UserEnhancementProto createUserEnhancementProtoFromObj(
+  		int userId, UserEnhancementItemProto baseMonster, List<UserEnhancementItemProto> feeders) {
+  	
+  	UserEnhancementProto.Builder uepb = UserEnhancementProto.newBuilder();
+  	
+  	uepb.setUserId(userId);
+  	uepb.setBaseMonster(baseMonster);
+  	uepb.addAllFeeders(feeders);
+  	
+  	return uepb.build();
+  }
+  
+  public static UserEnhancementItemProto createUserEnhancementItemProtoFromObj(
   		MonsterEnhancingForUser mefu) {
   	
   	UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();

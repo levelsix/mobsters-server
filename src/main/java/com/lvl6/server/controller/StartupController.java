@@ -69,6 +69,7 @@ import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.Retri
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.FullUserProto;
@@ -693,17 +694,28 @@ public class StartupController extends EventController {
     	Collection<MonsterEnhancingForUser> enhancingMonsters = userMonstersEnhancing.values();
     	UserEnhancementItemProto baseMonster = null;
     	
-//    	List<User>
+    	List<UserEnhancementItemProto> feeders = new ArrayList<UserEnhancementItemProto>();
     	for (MonsterEnhancingForUser mefu : enhancingMonsters) {
-    		UserEnhancementItemProto ueip = CreateInfoProtoUtils.createUserMonsterEnhancingProtoFromObj(mefu);
+    		UserEnhancementItemProto ueip = CreateInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu);
+    		
+    		//TODO: if user has no monsters with null start time, or if user has more than one
+    		//STORE THEM AND DELETE THEM OR SOMETHING
     		
     		//search for the monster that is being enhanced, the one with null start time
     		Date startTime = mefu.getExpectedStartTime();
     		if(null != startTime) {
+    			//found him
     			baseMonster = ueip;
+    		} else {
+    			//just a feeder, add him to the list
+    			feeders.add(ueip);
     		}
-    		
     	}
+    	
+    	UserEnhancementProto uep = CreateInfoProtoUtils.createUserEnhancementProtoFromObj(
+    			userId, baseMonster, feeders);
+    	
+    	resBuilder.setEnhancements(uep);
     }
     
   }
