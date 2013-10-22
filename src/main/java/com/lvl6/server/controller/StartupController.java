@@ -205,7 +205,7 @@ public class StartupController extends EventController {
           log.info("No major update... getting user info");
 //          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
           setCitiesAndUserCityInfos(resBuilder, user);
-          setInProgressAndAvailableQuests(resBuilder, user);
+//          setInProgressAndAvailableQuests(resBuilder, user);
           setUserClanInfos(resBuilder, user);
           setGoldSales(resBuilder, user);
           setNotifications(resBuilder, user);
