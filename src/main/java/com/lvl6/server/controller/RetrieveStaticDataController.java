@@ -15,23 +15,16 @@ import com.lvl6.info.City;
 import com.lvl6.info.Quest;
 import com.lvl6.info.Structure;
 import com.lvl6.info.Task;
-import com.lvl6.info.jobs.QuestJobBuildStruct;
-import com.lvl6.info.jobs.QuestJobUpgradeStruct;
-import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataRequestProto;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.Builder;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LevelRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 
   @Component @DependsOn("gameServer") public class RetrieveStaticDataController extends EventController{
@@ -142,62 +135,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 //        }
 //      }
 //    }
-
-    List <Integer> buildStructJobIds = reqProto.getBuildStructJobIdsList();
-    if (buildStructJobIds != null && buildStructJobIds.size() > 0) {
-      Map<Integer, QuestJobBuildStruct> buildStructJobIdsToBuildStructJobs = QuestJobBuildStructRetrieveUtils.getBuildStructJobIdsToBuildStructJobs();
-      for (Integer buildStructJobId :  buildStructJobIds) {
-        QuestJobBuildStruct buildStructJob = buildStructJobIdsToBuildStructJobs.get(buildStructJobId);
-        if (buildStructJob != null) {
-          resBuilder.addBuildStructJobs(CreateInfoProtoUtils.createFullBuildStructJobProtoFromBuildStructJob(buildStructJob));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving build struct job with id " + buildStructJobId);
-        }
-      }
-    }
-
-//    List <Integer> defeatTypeJobIds = reqProto.getDefeatTypeJobIdsList();
-//    if (defeatTypeJobIds != null && defeatTypeJobIds.size() > 0) {
-//      Map<Integer, DefeatTypeJob> defeatTypeJobIdsToDefeatTypeJobs = DefeatTypeJobRetrieveUtils.getDefeatTypeJobIdsToDefeatTypeJobs();
-//      for (Integer defeatTypeJobId :  defeatTypeJobIds) {
-//        DefeatTypeJob defeatTypeJob = defeatTypeJobIdsToDefeatTypeJobs.get(defeatTypeJobId);
-//        if (defeatTypeJob != null) {
-//          resBuilder.addDefeatTypeJobs(CreateInfoProtoUtils.createFullDefeatTypeJobProtoFromDefeatTypeJob(defeatTypeJob));
-//        } else {
-//          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-//          log.error("problem with retrieving defeat type job with id " + defeatTypeJobId);
-//        }
-//      }
-//    }
-//
-//    List <Integer> possessEquipJobIds = reqProto.getPossessEquipJobIdsList();
-//    if (possessEquipJobIds != null && possessEquipJobIds.size() > 0) {
-//      Map<Integer, PossessEquipJob> possessEquipJobIdsToPossessEquipJobs = PossessEquipJobRetrieveUtils.getPossessEquipJobIdsToPossessEquipJobs();
-//      for (Integer possessEquipJobId :  possessEquipJobIds) {
-//        PossessEquipJob possessEquipJob = possessEquipJobIdsToPossessEquipJobs.get(possessEquipJobId);
-//        if (possessEquipJob != null) {
-//          resBuilder.addPossessEquipJobs(CreateInfoProtoUtils.createFullPossessEquipJobProtoFromPossessEquipJob(possessEquipJob));
-//        } else {
-//          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-//          log.error("problem with retrieving possess equip job with id " + possessEquipJobId);
-//        }
-//      }
-//    }
-
-    List <Integer> upgradeStructJobIds = reqProto.getUpgradeStructJobIdsList();
-    if (upgradeStructJobIds != null && upgradeStructJobIds.size() > 0) {
-      Map<Integer, QuestJobUpgradeStruct> upgradeStructJobIdsToUpgradeStructJobs = QuestJobUpgradeStructRetrieveUtils.getUpgradeStructJobIdsToUpgradeStructJobs();
-      for (Integer upgradeStructJobId :  upgradeStructJobIds) {
-        QuestJobUpgradeStruct upgradeStructJob = upgradeStructJobIdsToUpgradeStructJobs.get(upgradeStructJobId);
-        if (upgradeStructJob != null) {
-          resBuilder.addUpgradeStructJobs(CreateInfoProtoUtils.createFullUpgradeStructJobProtoFromUpgradeStructJob(upgradeStructJob));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving upgrade struct job with id " + upgradeStructJob);
-        }
-      }
-    }
 
 //    if (reqProto.hasLevelForExpRequiredRequest()) {
 //      int level = reqProto.getLevelForExpRequiredRequest();

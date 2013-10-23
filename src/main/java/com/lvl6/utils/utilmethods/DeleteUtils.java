@@ -126,7 +126,7 @@ public class DeleteUtils implements DeleteUtil {
     String tableName = DBConstants.TABLE_QUEST_FOR_USER;
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS__USER_ID, userId);
+    conditionParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
     int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
     
     return numDeleted;

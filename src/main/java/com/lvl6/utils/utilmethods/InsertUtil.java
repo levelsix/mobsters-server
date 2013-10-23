@@ -40,9 +40,11 @@ public interface InsertUtil {
 //			Timestamp startTimeOfEnhancement);
 
 
-	public abstract boolean insertUnredeemedUserQuest(int userId, int questId,
-			boolean hasNoRequiredTasks, boolean hasNoRequiredDefeatTypeJobs);
+//	public abstract boolean insertUnredeemedUserQuest(int userId, int questId);
 
+	public abstract int insertUpdateUnredeemedUserQuest(int userId, int questId,
+      int progress, boolean isComplete);
+	
 	/* used for quest tasks */
 	public abstract boolean insertCompletedTaskIdForUserQuest(int userId,
 			int taskId, int questId);

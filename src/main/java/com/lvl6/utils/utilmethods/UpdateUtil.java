@@ -18,8 +18,8 @@ public interface UpdateUtil {
       //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),
       //@CacheEvict(value = "incompleteUserQuestsForUser", key = "#userId"),
       //@CacheEvict(value = "unredeemedUserQuestsForUser", key = "#userId") })*/
-  public abstract boolean updateUserQuestsCoinsretrievedforreq(int userId,
-      List<Integer> questIds, int coinGain);
+//  public abstract boolean updateUserQuestsCoinsretrievedforreq(int userId,
+//      List<Integer> questIds, int coinGain);
 
   public abstract void updateNullifyDeviceTokens(Set<String> deviceTokens);
 
@@ -54,9 +54,9 @@ public interface UpdateUtil {
       //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),
       //@CacheEvict(value = "incompleteUserQuestsForUser", key = "#userId"),
       //@CacheEvict(value = "unredeemedUserQuestsForUser", key = "#userId") })*/
-  public abstract boolean updateUserQuestsSetCompleted(int userId,
-      int questId, boolean setTasksCompleteTrue,
-      boolean setDefeatTypeJobsCompleteTrue);
+//  public abstract boolean updateUserQuestsSetCompleted(int userId,
+//      int questId, boolean setTasksCompleteTrue,
+//      boolean setDefeatTypeJobsCompleteTrue);
 
   /*
    * used for updating is_complete=true and last_retrieved to upgrade_time+minutestogain for a userstruct

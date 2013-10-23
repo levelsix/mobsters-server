@@ -34,14 +34,9 @@ public class DBConstants {
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
-  public static final String TABLE_QUEST_JOB_BUILD_STRUCT = "quest_job_build_struct";
-  public static final String TABLE_QUEST_JOB_MONSTER = "quest_job_monster";
-  public static final String TABLE_QUEST_JOB_MONSTER_KILL_FOR_USER = "quest_job_monster_kill_for_user";
-  public static final String TABLE_QUEST_JOB_MONSTER_KILL_HISTORY = "quest_job_monster_kill_history";
   //links up rows in task_history (thus task_stage_history where monster info resides)
   //to monster kill jobs
   public static final String TABLE_QUEST_JOB_MONSTER_KILL_HISTORY_PROOF = "quest_job_monster_kill_history_proof";
-  public static final String TABLE_QUEST_JOB_UPGRADE_STRUCT = "quest_job_upgrade_struct";
   public static final String TABLE_QUEST_TASK_HISTORY = "quest_task_history";
   public static final String TABLE_REFERRAL = "referral";
   public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
@@ -269,13 +264,11 @@ public class DBConstants {
   public static final String PRIVATE_CHAT_POSTS__CONTENT = "content";
   
   /*USER QUESTS TABLE*/
-  public static final String USER_QUESTS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_QUESTS__QUEST_ID = "quest_id";
-  public static final String USER_QUESTS__IS_REDEEMED = "is_redeemed"; 
-  public static final String USER_QUESTS__IS_COMPLETE = "is_complete";
-  public static final String USER_QUESTS__TASKS_COMPLETE = "tasks_complete"; 
-  public static final String USER_QUESTS__DEFEAT_TYPE_JOBS_COMPLETE = "defeat_type_jobs_complete"; 
-  public static final String USER_QUESTS__COINS_RETRIEVED_FOR_REQ = "coins_retrieved_for_req";
+  public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
+  public static final String QUEST_FOR_USER__QUEST_ID = "quest_id";
+  public static final String QUEST_FOR_USER__IS_REDEEMED = "is_redeemed"; 
+  public static final String QUEST_FOR_USER__IS_COMPLETE = "is_complete";
+  public static final String QUEST_FOR_USER__PROGRESS = "progress"; 
 
   /*REFERRALS*/
   public static final String REFERRALS__REFERRER_ID = "referrer_id";

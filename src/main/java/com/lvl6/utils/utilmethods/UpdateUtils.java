@@ -37,29 +37,29 @@ public class UpdateUtils implements UpdateUtil {
 	/* (non-Javadoc)
 	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserQuestsCoinsretrievedforreq(int, java.util.List, int)
 	 */
-	@Override
+//	@Override
 	/*@Caching(evict={//@CacheEvict(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId"),
       //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
       //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
-	public boolean updateUserQuestsCoinsretrievedforreq(int userId, List <Integer> questIds, int coinGain) {
-		String query = "update " + DBConstants.TABLE_QUEST_FOR_USER + " set " + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ
-				+ "=" + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ + "+? where " 
-				+ DBConstants.USER_QUESTS__USER_ID + "=? and (";
-		List<Object> values = new ArrayList<Object>();
-		values.add(coinGain);
-		values.add(userId);
-		List<String> condClauses = new ArrayList<String>();
-		for (Integer questId : questIds) {
-			condClauses.add(DBConstants.USER_QUESTS__QUEST_ID + "=?");
-			values.add(questId);
-		}
-		query += StringUtils.getListInString(condClauses, "or") + ")";
-		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-		if (numUpdated == questIds.size()) {
-			return true;
-		}
-		return false;
-	}
+//	public boolean updateUserQuestsCoinsretrievedforreq(int userId, List <Integer> questIds, int coinGain) {
+//		String query = "update " + DBConstants.TABLE_QUEST_FOR_USER + " set " + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ
+//				+ "=" + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ + "+? where " 
+//				+ DBConstants.QUEST_FOR_USER___USER_ID + "=? and (";
+//		List<Object> values = new ArrayList<Object>();
+//		values.add(coinGain);
+//		values.add(userId);
+//		List<String> condClauses = new ArrayList<String>();
+//		for (Integer questId : questIds) {
+//			condClauses.add(DBConstants.QUEST_FOR_USER__QUEST_ID + "=?");
+//			values.add(questId);
+//		}
+//		query += StringUtils.getListInString(condClauses, "or") + ")";
+//		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+//		if (numUpdated == questIds.size()) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 //	@Override
 //	public boolean updateAbsoluteBlacksmithAttemptcompleteTimeofspeedup(int blacksmithId, Date timeOfSpeedup, boolean attemptComplete) {
@@ -131,13 +131,11 @@ public class UpdateUtils implements UpdateUtil {
       //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
 	public boolean updateUserQuestIscomplete(int userId, int questId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_QUESTS__USER_ID, userId);
-		conditionParams.put(DBConstants.USER_QUESTS__QUEST_ID, questId);
+		conditionParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+		conditionParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_QUESTS__TASKS_COMPLETE, true);
-		absoluteParams.put(DBConstants.USER_QUESTS__IS_COMPLETE, true);
-		absoluteParams.put(DBConstants.USER_QUESTS__DEFEAT_TYPE_JOBS_COMPLETE, true);
+		absoluteParams.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, true);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_QUEST_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
@@ -158,14 +156,12 @@ public class UpdateUtils implements UpdateUtil {
       //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
 	public boolean updateRedeemUserQuest(int userId, int questId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_QUESTS__USER_ID, userId);
-		conditionParams.put(DBConstants.USER_QUESTS__QUEST_ID, questId);
+		conditionParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+		conditionParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_QUESTS__IS_REDEEMED, true);
-		absoluteParams.put(DBConstants.USER_QUESTS__TASKS_COMPLETE, true);
-		absoluteParams.put(DBConstants.USER_QUESTS__IS_COMPLETE, true);
-		absoluteParams.put(DBConstants.USER_QUESTS__DEFEAT_TYPE_JOBS_COMPLETE, true);
+		absoluteParams.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, true);
+//		absoluteParams.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, true);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_QUEST_FOR_USER, null, absoluteParams, 
 				conditionParams, "and");
@@ -208,30 +204,30 @@ public class UpdateUtils implements UpdateUtil {
 	/* (non-Javadoc)
 	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserQuestsSetCompleted(int, int, boolean, boolean)
 	 */
-	@Override
+//	@Override
 	/*@Caching(evict={//@CacheEvict(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId"),
       //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
       //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
-	public boolean updateUserQuestsSetCompleted(int userId, int questId, boolean setTasksCompleteTrue, boolean setDefeatTypeJobsCompleteTrue) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_QUESTS__USER_ID, userId);
-		conditionParams.put(DBConstants.USER_QUESTS__QUEST_ID, questId);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (setTasksCompleteTrue) {
-			absoluteParams.put(DBConstants.USER_QUESTS__TASKS_COMPLETE, true); 
-		}
-		if (setDefeatTypeJobsCompleteTrue) {
-			absoluteParams.put(DBConstants.USER_QUESTS__DEFEAT_TYPE_JOBS_COMPLETE, true); 
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_QUEST_FOR_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
-	}
+//	public boolean updateUserQuestsSetCompleted(int userId, int questId, boolean setTasksCompleteTrue, boolean setDefeatTypeJobsCompleteTrue) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+//		conditionParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
+//
+//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+//		if (setTasksCompleteTrue) {
+//			absoluteParams.put(DBConstants.QUEST_FOR_USER__TASKS_COMPLETE, true); 
+//		}
+//		if (setDefeatTypeJobsCompleteTrue) {
+//			absoluteParams.put(DBConstants.QUEST_FOR_USER__DEFEAT_TYPE_JOBS_COMPLETE, true); 
+//		}
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_QUEST_FOR_USER, null, absoluteParams, 
+//				conditionParams, "and");
+//		if (numUpdated == 1) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 
 

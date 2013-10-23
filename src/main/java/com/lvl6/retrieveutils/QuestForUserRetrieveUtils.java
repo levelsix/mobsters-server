@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
@@ -27,9 +29,9 @@ import com.lvl6.utils.DBConnection;
     log.debug("retrieving unredeemed and incomplete user quests");
     
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_QUESTS__USER_ID, userId);
-    paramsToVals.put(DBConstants.USER_QUESTS__IS_REDEEMED, false);
-    paramsToVals.put(DBConstants.USER_QUESTS__IS_COMPLETE, false);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, false);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -44,9 +46,9 @@ import com.lvl6.utils.DBConnection;
     log.debug("retrieving incomplete user quests for userId " + userId);
     
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_QUESTS__IS_REDEEMED, false);
-    paramsToVals.put(DBConstants.USER_QUESTS__USER_ID, userId);
-    paramsToVals.put(DBConstants.USER_QUESTS__IS_COMPLETE, false);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, false);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -59,14 +61,27 @@ import com.lvl6.utils.DBConnection;
   public List<QuestForUser> getUnredeemedUserQuestsForUser(int userId) {
     log.debug("retrieving unredeemed user quests for userId " + userId);
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_QUESTS__USER_ID, userId);
-    paramsToVals.put(DBConstants.USER_QUESTS__IS_REDEEMED, false);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
     List<QuestForUser> userQuests = convertRSToUserQuests(rs);
     DBConnection.get().close(rs, null, conn);
     return userQuests;
+  }
+  
+  public Map<Integer, QuestForUser> getQuestIdToUnredeemedUserQuests(int userId) {
+  	log.debug("retrieving unredeemed user quests map for userId " + userId);
+  	TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
+  	paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+  	paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
+    
+  	Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+    Map<Integer, QuestForUser> questIdsToUnredeemedUserQuests = convertRSToUserQuestsMap(rs);
+    DBConnection.get().close(rs, null, conn);
+    return questIdsToUnredeemedUserQuests;
   }
   
   ////@Cacheable(value="userQuestsForUser", key="#userId")
@@ -83,9 +98,9 @@ import com.lvl6.utils.DBConnection;
   public QuestForUser getSpecificUnredeemedUserQuest(int userId, int questId) {
     log.debug("retrieving specific unredeemed user quest for userid " + userId + " and questId " + questId);
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.USER_QUESTS__USER_ID, userId);
-    paramsToVals.put(DBConstants.USER_QUESTS__QUEST_ID, questId);
-    paramsToVals.put(DBConstants.USER_QUESTS__IS_REDEEMED, false);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
+    paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -129,6 +144,27 @@ import com.lvl6.utils.DBConnection;
       }
     }
     return userQuests;
+  }
+  
+  private Map<Integer, QuestForUser> convertRSToUserQuestsMap(ResultSet rs) {
+  	Map<Integer, QuestForUser> idToUserQuests = new HashMap<Integer, QuestForUser>();
+    if (rs != null) {
+      try {
+        rs.last();
+        rs.beforeFirst();
+        while(rs.next()) {
+        	QuestForUser uq = convertRSRowToUserQuest(rs);
+        	if (null != uq) {
+        		int questId = uq.getQuestId();
+        		idToUserQuests.put(questId, uq);
+        	}
+        }
+      } catch (SQLException e) {
+        log.error("problem with database call.", e);
+        
+      }
+    }
+    return idToUserQuests;
   }
   
   /*

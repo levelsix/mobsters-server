@@ -296,27 +296,44 @@ public class InsertUtils implements InsertUtil{
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUnredeemedUserQuest(int, int, boolean, boolean)
    */
-  @Override
+//  @Override
   /*@Caching(evict={//@CacheEvict(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId"),
       //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
       //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
-  public boolean insertUnredeemedUserQuest(int userId, int questId,
-      boolean hasNoRequiredTasks, boolean hasNoRequiredDefeatTypeJobs) {
+//  public boolean insertUnredeemedUserQuest(int userId, int questId,
+//      boolean hasNoRequiredTasks, boolean hasNoRequiredDefeatTypeJobs) {
+//    Map<String, Object> insertParams = new HashMap<String, Object>();
+//    insertParams.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
+//    insertParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+//    insertParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
+//
+//    int numInserted = DBConnection.get().insertIntoTableBasic(
+//        DBConstants.TABLE_QUEST_FOR_USER, insertParams);
+//    if (numInserted == 1) {
+//      return true;
+//    }
+//    return false;
+//  }
+  
+  @Override
+  public int insertUpdateUnredeemedUserQuest(int userId, int questId,
+      int progress, boolean isComplete) {
+  	String tablename = DBConstants.TABLE_QUEST_FOR_USER;
+  	
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.USER_QUESTS__IS_REDEEMED, false);
-    insertParams.put(DBConstants.USER_QUESTS__USER_ID, userId);
-    insertParams.put(DBConstants.USER_QUESTS__QUEST_ID, questId);
-    insertParams.put(DBConstants.USER_QUESTS__TASKS_COMPLETE,
-        hasNoRequiredTasks);
-    insertParams.put(DBConstants.USER_QUESTS__DEFEAT_TYPE_JOBS_COMPLETE,
-        hasNoRequiredDefeatTypeJobs);
+    insertParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
+    insertParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
+    
+    Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+    Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
+    absoluteUpdates.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
+    absoluteUpdates.put(DBConstants.QUEST_FOR_USER__PROGRESS, progress);
+    absoluteUpdates.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, isComplete);
+    
 
-    int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_QUEST_FOR_USER, insertParams);
-    if (numInserted == 1) {
-      return true;
-    }
-    return false;
+    int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tablename,
+    		insertParams, relativeUpdates, absoluteUpdates);
+    return numInserted;
   }
 
   /* used for quest tasks */
