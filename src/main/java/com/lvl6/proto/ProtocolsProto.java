@@ -289,12 +289,12 @@ public final class ProtocolsProto {
     S_BUY_MONSTER_INVENTORY_SLOT_EVENT(51, 52),
     S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT(52, 53),
     S_UPDATE_CLIENT_USER_EVENT(53, 101),
-    S_REFERRAL_CODE_USED_EVENT(54, 103),
-    S_PURGE_STATIC_DATA_EVENT(55, 104),
-    S_RECEIVED_GROUP_CHAT_EVENT(56, 105),
-    S_SEND_ADMIN_MESSAGE_EVENT(57, 106),
-    S_GENERAL_NOTIFICATION_EVENT(58, 107),
-    S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT(59, 108),
+    S_REFERRAL_CODE_USED_EVENT(54, 102),
+    S_PURGE_STATIC_DATA_EVENT(55, 103),
+    S_RECEIVED_GROUP_CHAT_EVENT(56, 104),
+    S_SEND_ADMIN_MESSAGE_EVENT(57, 105),
+    S_GENERAL_NOTIFICATION_EVENT(58, 106),
+    S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT(59, 107),
     ;
     
     public static final int S_STARTUP_EVENT_VALUE = 1;
@@ -351,12 +351,12 @@ public final class ProtocolsProto {
     public static final int S_BUY_MONSTER_INVENTORY_SLOT_EVENT_VALUE = 52;
     public static final int S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT_VALUE = 53;
     public static final int S_UPDATE_CLIENT_USER_EVENT_VALUE = 101;
-    public static final int S_REFERRAL_CODE_USED_EVENT_VALUE = 103;
-    public static final int S_PURGE_STATIC_DATA_EVENT_VALUE = 104;
-    public static final int S_RECEIVED_GROUP_CHAT_EVENT_VALUE = 105;
-    public static final int S_SEND_ADMIN_MESSAGE_EVENT_VALUE = 106;
-    public static final int S_GENERAL_NOTIFICATION_EVENT_VALUE = 107;
-    public static final int S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT_VALUE = 108;
+    public static final int S_REFERRAL_CODE_USED_EVENT_VALUE = 102;
+    public static final int S_PURGE_STATIC_DATA_EVENT_VALUE = 103;
+    public static final int S_RECEIVED_GROUP_CHAT_EVENT_VALUE = 104;
+    public static final int S_SEND_ADMIN_MESSAGE_EVENT_VALUE = 105;
+    public static final int S_GENERAL_NOTIFICATION_EVENT_VALUE = 106;
+    public static final int S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT_VALUE = 107;
     
     
     public final int getNumber() { return value; }
@@ -417,12 +417,12 @@ public final class ProtocolsProto {
         case 52: return S_BUY_MONSTER_INVENTORY_SLOT_EVENT;
         case 53: return S_ENHANCEMENT_WAIT_TIME_COMPLETE_EVENT;
         case 101: return S_UPDATE_CLIENT_USER_EVENT;
-        case 103: return S_REFERRAL_CODE_USED_EVENT;
-        case 104: return S_PURGE_STATIC_DATA_EVENT;
-        case 105: return S_RECEIVED_GROUP_CHAT_EVENT;
-        case 106: return S_SEND_ADMIN_MESSAGE_EVENT;
-        case 107: return S_GENERAL_NOTIFICATION_EVENT;
-        case 108: return S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT;
+        case 102: return S_REFERRAL_CODE_USED_EVENT;
+        case 103: return S_PURGE_STATIC_DATA_EVENT;
+        case 104: return S_RECEIVED_GROUP_CHAT_EVENT;
+        case 105: return S_SEND_ADMIN_MESSAGE_EVENT;
+        case 106: return S_GENERAL_NOTIFICATION_EVENT;
+        case 107: return S_RECEIVED_RARE_BOOSTER_PURCHASE_EVENT;
         default: return null;
       }
     }
@@ -592,11 +592,11 @@ public final class ProtocolsProto {
       "ER_INVENTORY_SLOT_EVENT\0204\022*\n&S_ENHANCEME" +
       "NT_WAIT_TIME_COMPLETE_EVENT\0205\022\036\n\032S_UPDAT" +
       "E_CLIENT_USER_EVENT\020e\022\036\n\032S_REFERRAL_CODE" +
-      "_USED_EVENT\020g\022\035\n\031S_PURGE_STATIC_DATA_EVE" +
-      "NT\020h\022\037\n\033S_RECEIVED_GROUP_CHAT_EVENT\020i\022\036\n" +
-      "\032S_SEND_ADMIN_MESSAGE_EVENT\020j\022 \n\034S_GENER",
-      "AL_NOTIFICATION_EVENT\020k\022*\n&S_RECEIVED_RA" +
-      "RE_BOOSTER_PURCHASE_EVENT\020lB\020B\016Protocols" +
+      "_USED_EVENT\020f\022\035\n\031S_PURGE_STATIC_DATA_EVE" +
+      "NT\020g\022\037\n\033S_RECEIVED_GROUP_CHAT_EVENT\020h\022\036\n" +
+      "\032S_SEND_ADMIN_MESSAGE_EVENT\020i\022 \n\034S_GENER",
+      "AL_NOTIFICATION_EVENT\020j\022*\n&S_RECEIVED_RA" +
+      "RE_BOOSTER_PURCHASE_EVENT\020kB\020B\016Protocols" +
       "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

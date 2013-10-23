@@ -31,12 +31,12 @@ message StartupResponseProto {
     optional StartupConstants startupConstants = 5;
     repeated FullCityProto allCities = 6;
     
-    repeated FullQuestProto inProgressQuests = 7;
-    repeated FullQuestProto unredeemedQuests = 8;
+    repeated FullQuestProto inProgressQuests = 7; //has not been completed
+    repeated FullQuestProto unredeemedQuests = 8; //is complete
 	repeated FullQuestProto availableQuests = 9;   
 	
 	//only send the ones that are not redeemed, (incomplete and complete)
-	repeated FullUserQuestDataLargeProto userQuests = 10;
+	repeated FullUserQuestProto userQuests = 10;
 	repeated FullUserClanProto userClanInfo = 11;
 	
 	optional string appStoreURL = 12;

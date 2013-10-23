@@ -72,6 +72,7 @@ import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.LevelAndRequiredExpProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
@@ -204,7 +205,7 @@ public class StartupController extends EventController {
           log.info("No major update... getting user info");
 //          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
           setCitiesAndUserCityInfos(resBuilder, user);
-//          setInProgressAndAvailableQuests(resBuilder, user);
+          setInProgressAndAvailableQuests(resBuilder, user);
           setUserClanInfos(resBuilder, user);
           setGoldSales(resBuilder, user);
           setNotifications(resBuilder, user);
@@ -278,7 +279,7 @@ public class StartupController extends EventController {
     }
     
     //startup time
-
+    resBuilder.setServerTimeMillis((new Date()).getTime());
     StartupResponseProto resProto = resBuilder.build();
     StartupResponseEvent resEvent = new StartupResponseEvent(udid);
     resEvent.setTag(event.getTag());
@@ -300,73 +301,53 @@ public class StartupController extends EventController {
   }
 
   private void setCitiesAndUserCityInfos(Builder resBuilder, User user) {
-//    Map<Integer, Integer> cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
-//        .getCityIdToUserCityRank(user.getId());
-////    Map<Integer, Integer> taskIdToNumTimesActedInRank = UserTaskRetrieveUtils
-////        .getTaskIdToNumTimesActedInRankForUser(user.getId());
-//
     Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
     for (Integer cityId : cities.keySet()) {
       City city = cities.get(cityId);
       resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-//      if (user.getLevel() >= city.getMinLevel()) {
-//
-//        if (!cityIdsToUserCityRanks.containsKey(city.getId())) {
-//          if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), cityId, 1)) {
-//            log.error("problem with unlocking city for user, city Id is " + cityId
-//                + ", and user is " + user);
-//          } else {
-//            cityIdsToUserCityRanks = RetrieveUtils.userCityRetrieveUtils()
-//                .getCityIdToUserCityRank(user.getId());
-//          }
-//        }
-//        int numTasksComplete = 0; //getNumTasksCompleteForUserCity(user, city, taskIdToNumTimesActedInRank);
-//        resBuilder.addUserCityInfos(CreateInfoProtoUtils.createFullUserCityProto(user.getId(),
-//            city.getId(), cityIdsToUserCityRanks.get(city.getId()), numTasksComplete));
-//      }
     }
   }
 
   private void setInProgressAndAvailableQuests(Builder resBuilder, User user) {
   	  List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
-  	      .getUnredeemedAndRedeemedUserQuestsForUser(user.getId());
+  	      .getUserQuestsForUser(user.getId());
+  	  
   	  List<Integer> inProgressQuestIds = new ArrayList<Integer>();
   	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
-  	
+  	  
   	  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-  	  /*for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
+  	  for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
+  	  	
   	    if (uq.isRedeemed()) {
   	      redeemedQuestIds.add(uq.getQuestId());
+  	      
   	    } else {
+  	    	//unredeemed quest section
   	      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
-  	      if (quest.getTasksRequired() == null && !uq.isTasksComplete()) {
-  	        if (!UpdateUtils.get().updateUserQuestsSetCompleted(user.getId(), quest.getId(), true,
-  	            false)) {
-  	          log.error("problem with updating user quest data by marking tasks completed for user quest "
-  	              + uq);
-  	        }
-  	      }
-  	
+  	      FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);
+  	      
   	      inProgressQuestIds.add(uq.getQuestId());
-  	      if (uq.isComplete()) {
-  	        resBuilder.addInProgressCompleteQuests(CreateInfoProtoUtils
-  	            .createFullQuestProtoFromQuest(
-  	                questIdToQuests.get(uq.getQuestId())));
+  	      if (uq.isComplete()) { 
+  	      	//complete and unredeemed userQuest, so quest goes in unredeemedQuest
+  	        resBuilder.addUnredeemedQuests(questProto);
   	      } else {
-  	        resBuilder.addInProgressIncompleteQuests(CreateInfoProtoUtils
-  	            .createFullQuestProtoFromQuest(
-  	                questIdToQuests.get(uq.getQuestId())));
+  	      	//incomplete and unredeemed userQuest, so quest goes in inProgressQuest
+  	        resBuilder.addInProgressQuests(questProto);
   	      }
   	    }
-  	  }*/
+  	  }
   	
   	  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
   	      inProgressQuestIds);
-  	  if (availableQuestIds != null) {
-  	    for (Integer questId : availableQuestIds) {
-  	      resBuilder.addAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(
-  	          questIdToQuests.get(questId)));
-  	    }
+  	  if (availableQuestIds == null) {
+  	  	return;
+  	  }
+  	  
+  	  //from the available quest ids generate the available quest protos
+  	  for (Integer questId : availableQuestIds) {
+  	  	FullQuestProto fqp = CreateInfoProtoUtils.createFullQuestProtoFromQuest(
+  	  			questIdToQuests.get(questId));
+  	  	resBuilder.addAvailableQuests(fqp);
   	  }
   }
   

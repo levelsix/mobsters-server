@@ -79,7 +79,7 @@ import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullQuestProto.QuestType;
-import com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto;
+import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullStructureProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
@@ -505,12 +505,12 @@ public class CreateInfoProtoUtils {
   }
 
 
-  public static List<FullUserQuestDataLargeProto> createFullUserQuestDataLarges(List<QuestForUser> userQuests, Map<Integer, Quest> questIdsToQuests) {
-    List<FullUserQuestDataLargeProto> fullUserQuestDataLargeProtos = new ArrayList<FullUserQuestDataLargeProto>();
+  public static List<FullUserQuestProto> createFullUserQuestDataLarges(List<QuestForUser> userQuests, Map<Integer, Quest> questIdsToQuests) {
+    List<FullUserQuestProto> fullUserQuestDataLargeProtos = new ArrayList<FullUserQuestProto>();
 
     for (QuestForUser userQuest : userQuests) {
       Quest quest = questIdsToQuests.get(userQuest.getQuestId());
-      FullUserQuestDataLargeProto.Builder builder = FullUserQuestDataLargeProto.newBuilder();
+      FullUserQuestProto.Builder builder = FullUserQuestProto.newBuilder();
 
       if (quest != null) {
         builder.setUserId(userQuest.getUserId());

@@ -56,21 +56,12 @@ message DialogueProto {
 
 //------------------------------------------------------------------------------------------
 
-//this is incorporated into QuestType
-//enum SpecialQuestAction {
-//	REQUEST_JOIN_CLAN = 1;
-//  EVOLVE_A_MONSTER = 2;
-//}
-
-//------------------------------------------------------------------------------------------
-
-message FullUserQuestDataLargeProto {
+message FullUserQuestProto {
      optional int32 userId = 1;
      optional int32 questId = 2;
      optional bool isRedeemed = 3;
      optional bool isComplete = 4;
      optional int32 progress = 5;
-     
 }
 
 //------------------------------------------------------------------------------------------

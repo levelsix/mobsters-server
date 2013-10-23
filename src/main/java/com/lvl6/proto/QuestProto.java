@@ -2794,7 +2794,7 @@ public final class QuestProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.DialogueProto)
   }
   
-  public interface FullUserQuestDataLargeProtoOrBuilder
+  public interface FullUserQuestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional int32 userId = 1;
@@ -2817,32 +2817,32 @@ public final class QuestProto {
     boolean hasProgress();
     int getProgress();
   }
-  public static final class FullUserQuestDataLargeProto extends
+  public static final class FullUserQuestProto extends
       com.google.protobuf.GeneratedMessage
-      implements FullUserQuestDataLargeProtoOrBuilder {
-    // Use FullUserQuestDataLargeProto.newBuilder() to construct.
-    private FullUserQuestDataLargeProto(Builder builder) {
+      implements FullUserQuestProtoOrBuilder {
+    // Use FullUserQuestProto.newBuilder() to construct.
+    private FullUserQuestProto(Builder builder) {
       super(builder);
     }
-    private FullUserQuestDataLargeProto(boolean noInit) {}
+    private FullUserQuestProto(boolean noInit) {}
     
-    private static final FullUserQuestDataLargeProto defaultInstance;
-    public static FullUserQuestDataLargeProto getDefaultInstance() {
+    private static final FullUserQuestProto defaultInstance;
+    public static FullUserQuestProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public FullUserQuestDataLargeProto getDefaultInstanceForType() {
+    public FullUserQuestProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_descriptor;
+      return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullUserQuestProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_fieldAccessorTable;
+      return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullUserQuestProto_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -2971,41 +2971,41 @@ public final class QuestProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseFrom(
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseFrom(
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseFrom(byte[] data)
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseFrom(
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseFrom(
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -3014,7 +3014,7 @@ public final class QuestProto {
         return null;
       }
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseDelimitedFrom(
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3025,12 +3025,12 @@ public final class QuestProto {
         return null;
       }
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseFrom(
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto parseFrom(
+    public static com.lvl6.proto.QuestProto.FullUserQuestProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -3040,7 +3040,7 @@ public final class QuestProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.QuestProto.FullUserQuestProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -3053,18 +3053,18 @@ public final class QuestProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder {
+       implements com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_descriptor;
+        return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullUserQuestProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_fieldAccessorTable;
+        return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullUserQuestProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.newBuilder()
+      // Construct using com.lvl6.proto.QuestProto.FullUserQuestProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -3102,24 +3102,24 @@ public final class QuestProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.getDescriptor();
+        return com.lvl6.proto.QuestProto.FullUserQuestProto.getDescriptor();
       }
       
-      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto getDefaultInstanceForType() {
-        return com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.getDefaultInstance();
+      public com.lvl6.proto.QuestProto.FullUserQuestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.QuestProto.FullUserQuestProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto build() {
-        com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto result = buildPartial();
+      public com.lvl6.proto.QuestProto.FullUserQuestProto build() {
+        com.lvl6.proto.QuestProto.FullUserQuestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto buildParsed()
+      private com.lvl6.proto.QuestProto.FullUserQuestProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto result = buildPartial();
+        com.lvl6.proto.QuestProto.FullUserQuestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -3127,8 +3127,8 @@ public final class QuestProto {
         return result;
       }
       
-      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto buildPartial() {
-        com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto result = new com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto(this);
+      public com.lvl6.proto.QuestProto.FullUserQuestProto buildPartial() {
+        com.lvl6.proto.QuestProto.FullUserQuestProto result = new com.lvl6.proto.QuestProto.FullUserQuestProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -3157,16 +3157,16 @@ public final class QuestProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto) {
-          return mergeFrom((com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto)other);
+        if (other instanceof com.lvl6.proto.QuestProto.FullUserQuestProto) {
+          return mergeFrom((com.lvl6.proto.QuestProto.FullUserQuestProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto other) {
-        if (other == com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.QuestProto.FullUserQuestProto other) {
+        if (other == com.lvl6.proto.QuestProto.FullUserQuestProto.getDefaultInstance()) return this;
         if (other.hasUserId()) {
           setUserId(other.getUserId());
         }
@@ -3349,15 +3349,15 @@ public final class QuestProto {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullUserQuestDataLargeProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullUserQuestProto)
     }
     
     static {
-      defaultInstance = new FullUserQuestDataLargeProto(true);
+      defaultInstance = new FullUserQuestProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserQuestDataLargeProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserQuestProto)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -3376,10 +3376,10 @@ public final class QuestProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_DialogueProto_SpeechSegmentProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_descriptor;
+    internal_static_com_lvl6_proto_FullUserQuestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_FullUserQuestProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3413,10 +3413,10 @@ public final class QuestProto {
       "\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTORIAL_GIRL\020\002\022\020\n\014Q" +
       "UESTGIVER_1\020\003\022\020\n\014QUESTGIVER_2\020\004\022\020\n\014QUEST" +
       "GIVER_3\020\005\022\020\n\014QUESTGIVER_4\020\006\022\020\n\014QUESTGIVE" +
-      "R_5\020\007\"x\n\033FullUserQuestDataLargeProto\022\016\n\006" +
-      "userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedee" +
-      "med\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010progres" +
-      "s\030\005 \001(\005B\014B\nQuestProto"
+      "R_5\020\007\"o\n\022FullUserQuestProto\022\016\n\006userId\030\001 " +
+      "\001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedeemed\030\003 \001(\010" +
+      "\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010progress\030\005 \001(\005B\014" +
+      "B\nQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3447,14 +3447,14 @@ public final class QuestProto {
               new java.lang.String[] { "Speaker", "SpeakerText", },
               com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.class,
               com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.Builder.class);
-          internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_descriptor =
+          internal_static_com_lvl6_proto_FullUserQuestProto_descriptor =
             getDescriptor().getMessageTypes().get(2);
-          internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_FullUserQuestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_descriptor,
+              internal_static_com_lvl6_proto_FullUserQuestProto_descriptor,
               new java.lang.String[] { "UserId", "QuestId", "IsRedeemed", "IsComplete", "Progress", },
-              com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.class,
-              com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder.class);
+              com.lvl6.proto.QuestProto.FullUserQuestProto.class,
+              com.lvl6.proto.QuestProto.FullUserQuestProto.Builder.class);
           return null;
         }
       };

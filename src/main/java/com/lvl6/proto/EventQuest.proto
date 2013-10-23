@@ -31,13 +31,20 @@ message QuestAcceptResponseProto {
 
 message QuestProgressRequestProto {
 	optional MinimumUserProto sender = 1;
+	optional int32 questId = 2;
+	optional int32 currentProgress = 3;
 }
 
 																						//DONE
 message QuestProgressResponseProto {
      optional MinimumUserProto sender = 1;
-     optional int32 questId = 2;
-     optional CityElementProto CityElement = 3;
+     optional QuestProgressStatus status = 2;
+     
+     enum QuestProgressStatus {
+     	SUCCESS = 1;
+     	FAIL_NO_QUEST_EXISTS = 2;
+     	FAIL_OTHER = 3;
+     }
 }
 
 

@@ -3553,14 +3553,14 @@ public final class EventCityProto {
     boolean hasCityId();
     int getCityId();
     
-    // repeated .com.lvl6.proto.FullUserQuestDataLargeProto inProgressUserQuestDataInCity = 5;
-    java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> 
+    // repeated .com.lvl6.proto.FullUserQuestProto inProgressUserQuestDataInCity = 5;
+    java.util.List<com.lvl6.proto.QuestProto.FullUserQuestProto> 
         getInProgressUserQuestDataInCityList();
-    com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto getInProgressUserQuestDataInCity(int index);
+    com.lvl6.proto.QuestProto.FullUserQuestProto getInProgressUserQuestDataInCity(int index);
     int getInProgressUserQuestDataInCityCount();
-    java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> 
+    java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder> 
         getInProgressUserQuestDataInCityOrBuilderList();
-    com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder getInProgressUserQuestDataInCityOrBuilder(
+    com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder getInProgressUserQuestDataInCityOrBuilder(
         int index);
   }
   public static final class LoadCityResponseProto extends
@@ -3718,23 +3718,23 @@ public final class EventCityProto {
       return cityId_;
     }
     
-    // repeated .com.lvl6.proto.FullUserQuestDataLargeProto inProgressUserQuestDataInCity = 5;
+    // repeated .com.lvl6.proto.FullUserQuestProto inProgressUserQuestDataInCity = 5;
     public static final int INPROGRESSUSERQUESTDATAINCITY_FIELD_NUMBER = 5;
-    private java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> inProgressUserQuestDataInCity_;
-    public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> getInProgressUserQuestDataInCityList() {
+    private java.util.List<com.lvl6.proto.QuestProto.FullUserQuestProto> inProgressUserQuestDataInCity_;
+    public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestProto> getInProgressUserQuestDataInCityList() {
       return inProgressUserQuestDataInCity_;
     }
-    public java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> 
+    public java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder> 
         getInProgressUserQuestDataInCityOrBuilderList() {
       return inProgressUserQuestDataInCity_;
     }
     public int getInProgressUserQuestDataInCityCount() {
       return inProgressUserQuestDataInCity_.size();
     }
-    public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto getInProgressUserQuestDataInCity(int index) {
+    public com.lvl6.proto.QuestProto.FullUserQuestProto getInProgressUserQuestDataInCity(int index) {
       return inProgressUserQuestDataInCity_.get(index);
     }
-    public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder getInProgressUserQuestDataInCityOrBuilder(
+    public com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder getInProgressUserQuestDataInCityOrBuilder(
         int index) {
       return inProgressUserQuestDataInCity_.get(index);
     }
@@ -4163,7 +4163,7 @@ public final class EventCityProto {
               break;
             }
             case 42: {
-              com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.newBuilder();
+              com.lvl6.proto.QuestProto.FullUserQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullUserQuestProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addInProgressUserQuestDataInCity(subBuilder.buildPartial());
               break;
@@ -4495,20 +4495,20 @@ public final class EventCityProto {
         return this;
       }
       
-      // repeated .com.lvl6.proto.FullUserQuestDataLargeProto inProgressUserQuestDataInCity = 5;
-      private java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> inProgressUserQuestDataInCity_ =
+      // repeated .com.lvl6.proto.FullUserQuestProto inProgressUserQuestDataInCity = 5;
+      private java.util.List<com.lvl6.proto.QuestProto.FullUserQuestProto> inProgressUserQuestDataInCity_ =
         java.util.Collections.emptyList();
       private void ensureInProgressUserQuestDataInCityIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          inProgressUserQuestDataInCity_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto>(inProgressUserQuestDataInCity_);
+          inProgressUserQuestDataInCity_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullUserQuestProto>(inProgressUserQuestDataInCity_);
           bitField0_ |= 0x00000010;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> inProgressUserQuestDataInCityBuilder_;
+          com.lvl6.proto.QuestProto.FullUserQuestProto, com.lvl6.proto.QuestProto.FullUserQuestProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder> inProgressUserQuestDataInCityBuilder_;
       
-      public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> getInProgressUserQuestDataInCityList() {
+      public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestProto> getInProgressUserQuestDataInCityList() {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           return java.util.Collections.unmodifiableList(inProgressUserQuestDataInCity_);
         } else {
@@ -4522,7 +4522,7 @@ public final class EventCityProto {
           return inProgressUserQuestDataInCityBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto getInProgressUserQuestDataInCity(int index) {
+      public com.lvl6.proto.QuestProto.FullUserQuestProto getInProgressUserQuestDataInCity(int index) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           return inProgressUserQuestDataInCity_.get(index);
         } else {
@@ -4530,7 +4530,7 @@ public final class EventCityProto {
         }
       }
       public Builder setInProgressUserQuestDataInCity(
-          int index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto value) {
+          int index, com.lvl6.proto.QuestProto.FullUserQuestProto value) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4544,7 +4544,7 @@ public final class EventCityProto {
         return this;
       }
       public Builder setInProgressUserQuestDataInCity(
-          int index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder builderForValue) {
+          int index, com.lvl6.proto.QuestProto.FullUserQuestProto.Builder builderForValue) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           ensureInProgressUserQuestDataInCityIsMutable();
           inProgressUserQuestDataInCity_.set(index, builderForValue.build());
@@ -4554,7 +4554,7 @@ public final class EventCityProto {
         }
         return this;
       }
-      public Builder addInProgressUserQuestDataInCity(com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto value) {
+      public Builder addInProgressUserQuestDataInCity(com.lvl6.proto.QuestProto.FullUserQuestProto value) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4568,7 +4568,7 @@ public final class EventCityProto {
         return this;
       }
       public Builder addInProgressUserQuestDataInCity(
-          int index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto value) {
+          int index, com.lvl6.proto.QuestProto.FullUserQuestProto value) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4582,7 +4582,7 @@ public final class EventCityProto {
         return this;
       }
       public Builder addInProgressUserQuestDataInCity(
-          com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder builderForValue) {
+          com.lvl6.proto.QuestProto.FullUserQuestProto.Builder builderForValue) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           ensureInProgressUserQuestDataInCityIsMutable();
           inProgressUserQuestDataInCity_.add(builderForValue.build());
@@ -4593,7 +4593,7 @@ public final class EventCityProto {
         return this;
       }
       public Builder addInProgressUserQuestDataInCity(
-          int index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder builderForValue) {
+          int index, com.lvl6.proto.QuestProto.FullUserQuestProto.Builder builderForValue) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           ensureInProgressUserQuestDataInCityIsMutable();
           inProgressUserQuestDataInCity_.add(index, builderForValue.build());
@@ -4604,7 +4604,7 @@ public final class EventCityProto {
         return this;
       }
       public Builder addAllInProgressUserQuestDataInCity(
-          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> values) {
+          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullUserQuestProto> values) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           ensureInProgressUserQuestDataInCityIsMutable();
           super.addAll(values, inProgressUserQuestDataInCity_);
@@ -4634,18 +4634,18 @@ public final class EventCityProto {
         }
         return this;
       }
-      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder getInProgressUserQuestDataInCityBuilder(
+      public com.lvl6.proto.QuestProto.FullUserQuestProto.Builder getInProgressUserQuestDataInCityBuilder(
           int index) {
         return getInProgressUserQuestDataInCityFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder getInProgressUserQuestDataInCityOrBuilder(
+      public com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder getInProgressUserQuestDataInCityOrBuilder(
           int index) {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           return inProgressUserQuestDataInCity_.get(index);  } else {
           return inProgressUserQuestDataInCityBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> 
+      public java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder> 
            getInProgressUserQuestDataInCityOrBuilderList() {
         if (inProgressUserQuestDataInCityBuilder_ != null) {
           return inProgressUserQuestDataInCityBuilder_.getMessageOrBuilderList();
@@ -4653,25 +4653,25 @@ public final class EventCityProto {
           return java.util.Collections.unmodifiableList(inProgressUserQuestDataInCity_);
         }
       }
-      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder addInProgressUserQuestDataInCityBuilder() {
+      public com.lvl6.proto.QuestProto.FullUserQuestProto.Builder addInProgressUserQuestDataInCityBuilder() {
         return getInProgressUserQuestDataInCityFieldBuilder().addBuilder(
-            com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.getDefaultInstance());
+            com.lvl6.proto.QuestProto.FullUserQuestProto.getDefaultInstance());
       }
-      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder addInProgressUserQuestDataInCityBuilder(
+      public com.lvl6.proto.QuestProto.FullUserQuestProto.Builder addInProgressUserQuestDataInCityBuilder(
           int index) {
         return getInProgressUserQuestDataInCityFieldBuilder().addBuilder(
-            index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.getDefaultInstance());
+            index, com.lvl6.proto.QuestProto.FullUserQuestProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder> 
+      public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestProto.Builder> 
            getInProgressUserQuestDataInCityBuilderList() {
         return getInProgressUserQuestDataInCityFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> 
+          com.lvl6.proto.QuestProto.FullUserQuestProto, com.lvl6.proto.QuestProto.FullUserQuestProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder> 
           getInProgressUserQuestDataInCityFieldBuilder() {
         if (inProgressUserQuestDataInCityBuilder_ == null) {
           inProgressUserQuestDataInCityBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder>(
+              com.lvl6.proto.QuestProto.FullUserQuestProto, com.lvl6.proto.QuestProto.FullUserQuestProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestProtoOrBuilder>(
                   inProgressUserQuestDataInCity_,
                   ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
@@ -4762,17 +4762,17 @@ public final class EventCityProto {
       "R_FAIL\020\004\022%\n!CLIENT_TOO_APART_FROM_SERVER" +
       "_TIME\020\005\"X\n\024LoadCityRequestProto\0220\n\006sende",
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\016\n\006cityId\030\002 \001(\005\"\366\002\n\025LoadCityResponsePr" +
+      "o\022\016\n\006cityId\030\002 \001(\005\"\355\002\n\025LoadCityResponsePr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
       "imumUserProto\022D\n\006status\030\002 \001(\01624.com.lvl6" +
       ".proto.LoadCityResponseProto.LoadCitySta" +
       "tus\0226\n\014cityElements\030\003 \003(\0132 .com.lvl6.pro" +
-      "to.CityElementProto\022\016\n\006cityId\030\004 \001(\005\022R\n\035i" +
-      "nProgressUserQuestDataInCity\030\005 \003(\0132+.com" +
-      ".lvl6.proto.FullUserQuestDataLargeProto\"" +
-      "I\n\016LoadCityStatus\022\013\n\007SUCCESS\020\001\022\032\n\026NOT_AC",
-      "CESSIBLE_TO_USER\020\002\022\016\n\nOTHER_FAIL\020\003B\020B\016Ev" +
-      "entCityProto"
+      "to.CityElementProto\022\016\n\006cityId\030\004 \001(\005\022I\n\035i" +
+      "nProgressUserQuestDataInCity\030\005 \003(\0132\".com" +
+      ".lvl6.proto.FullUserQuestProto\"I\n\016LoadCi" +
+      "tyStatus\022\013\n\007SUCCESS\020\001\022\032\n\026NOT_ACCESSIBLE_",
+      "TO_USER\020\002\022\016\n\nOTHER_FAIL\020\003B\020B\016EventCityPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
