@@ -153,12 +153,10 @@ import com.lvl6.utils.DBConnection;
     int questId = rs.getInt(i++);
     boolean isRedeemed = rs.getBoolean(i++);
     boolean isComplete = rs.getBoolean(i++);
-    boolean tasksComplete = rs.getBoolean(i++);
-    boolean defeatTypeJobsComplete = rs.getBoolean(i++);
-    int coinsRetrievedForReq = rs.getInt(i++);
+    int progress = rs.getInt(i++);
     
-    QuestForUser userQuest = new QuestForUser(userId, questId, isRedeemed, isComplete, tasksComplete, 
-        defeatTypeJobsComplete, coinsRetrievedForReq);
+    QuestForUser userQuest = new QuestForUser(userId, questId, isRedeemed,
+    		isComplete, progress);
     return userQuest;
   }
   

@@ -61,10 +61,10 @@ public class UserQuestTask implements Runnable{
 
 	@Override
 	public void run() {
-		MinimumUserProto.Builder user = lteg.minimumUserProto(userId);
-		for(Integer i = 0; i< iterations; i++) {
-			outboundEvents.send(lteg.userQuestDetails(user));
-		}
+//		MinimumUserProto.Builder user = lteg.minimumUserProto(userId);
+//		for(Integer i = 0; i< iterations; i++) {
+//			outboundEvents.send(lteg.userQuestDetails(user));
+//		}
 
 	}
 

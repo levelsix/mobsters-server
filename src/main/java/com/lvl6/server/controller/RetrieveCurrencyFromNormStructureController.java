@@ -17,11 +17,9 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveCurrencyFromNormStructureRequestEvent;
 import com.lvl6.events.response.RetrieveCurrencyFromNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.Quest;
 import com.lvl6.info.Structure;
-import com.lvl6.info.User;
-import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
@@ -29,13 +27,10 @@ import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureReque
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
-import com.lvl6.server.GameServer;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class RetrieveCurrencyFromNormStructureController extends EventController{
@@ -108,8 +103,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
-        
-        updateAndCheckUserQuests(server, coinGain, senderProto);      
         
         writeToUserCurrencyHistory(user, coinGain, previousSilver);
       }
@@ -200,30 +193,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return totalCoinsGained;
   }
   
-  private void updateAndCheckUserQuests(GameServer server, int coinGain, MinimumUserProto senderProto) {
-    List<QuestForUser> inProgressUserQuests = RetrieveUtils.questForUserRetrieveUtils().getIncompleteUserQuestsForUser(senderProto.getUserId());
-    if (inProgressUserQuests != null) {
-      List<Integer> relevantQuests = new ArrayList<Integer>();
-      for (QuestForUser userQuest : inProgressUserQuests) {
-        if (!userQuest.isComplete()) {
-          Quest quest = QuestRetrieveUtils.getQuestForQuestId(userQuest.getQuestId());
-          if (quest != null) {
-            if (quest.getCoinRetrievalAmountRequired() > 0) {
-              userQuest.setCoinsRetrievedForReq(userQuest.getCoinsRetrievedForReq() + coinGain);
-              QuestUtils.checkQuestCompleteAndMaybeSendIfJustCompleted(server, quest, userQuest, senderProto, true, null);
-              relevantQuests.add(quest.getId());
-            }
-          } else {
-            log.error("quest for userQuest does not exist. user quest's quest is " + userQuest.getQuestId());
-          }
-        }
-      }
-      if (relevantQuests.size() > 0 && !UpdateUtils.get().updateUserQuestsCoinsretrievedforreq(senderProto.getUserId(), relevantQuests, coinGain)) {
-        log.error("problem with incrementing coins retrieved by " + coinGain + " in user quest info for these quests:" + relevantQuests);
-      }
-    }
-  }
-
   private boolean checkLegitRetrieval(Builder resBuilder, User user, List<Integer> userStructIds, 
       Map<Integer, StructureForUser> userStructIdsToUserStructs, Map<Integer, Structure> userStructIdsToStructures,
       Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval, List<Integer> duplicates, int coinGain) {

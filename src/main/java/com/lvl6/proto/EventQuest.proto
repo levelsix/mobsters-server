@@ -28,8 +28,13 @@ message QuestAcceptResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+message QuestProgressRequestProto {
+	optional MinimumUserProto sender = 1;
+}
+
 																						//DONE
-message QuestCompleteResponseProto {
+message QuestProgressResponseProto {
      optional MinimumUserProto sender = 1;
      optional int32 questId = 2;
      optional CityElementProto CityElement = 3;
@@ -61,24 +66,5 @@ message QuestRedeemResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
-//if no questId supplied, returns userquestdetails for all in progress quests
-message UserQuestDetailsRequestProto {
-     optional MinimumUserProto sender = 1;
-     optional int32 questId = 2;
-}
-
-message UserQuestDetailsResponseProto {
-     optional MinimumUserProto sender = 1;
-     repeated FullUserQuestDataLargeProto inProgressUserQuestData = 2;
-
-    optional UserQuestDetailsStatus status = 3;    
-
-     enum UserQuestDetailsStatus {
-          SUCCESS = 1;
-          SUPPLIED_QUESTID_CURRENTLY_NOT_IN_PROGRESS = 2;
-          SOME_FAIL = 3;
-     }
-}
 
 //------------------------------------------------------------------------------------------

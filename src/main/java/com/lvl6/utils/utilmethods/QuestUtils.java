@@ -1,36 +1,18 @@
 package com.lvl6.utils.utilmethods;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.lvl6.events.response.QuestCompleteResponseEvent;
-import com.lvl6.info.CityElement;
-import com.lvl6.info.Quest;
-import com.lvl6.info.QuestForUser;
-import com.lvl6.info.StructureForUser;
-import com.lvl6.info.jobs.QuestJobBuildStruct;
-import com.lvl6.info.jobs.QuestJobUpgradeStruct;
-import com.lvl6.proto.EventQuestProto.QuestCompleteResponseProto;
-import com.lvl6.proto.QuestProto.SpecialQuestAction;
-import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.rarechange.QuestJobBuildStructRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.QuestJobUpgradeStructRetrieveUtils;
-import com.lvl6.server.GameServer;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.QuestGraph;
-import com.lvl6.utils.RetrieveUtils;
 
 public class QuestUtils {
 
 
 	private static final Logger log = LoggerFactory.getLogger(QuestUtils.class);
-	
+	/*
   public static void checkAndSendQuestsCompleteBasic(GameServer server, int userId, MinimumUserProto senderProto, 
       SpecialQuestAction justCompletedSpecialQuestAction, boolean checkOnlySpecialQuests) {
   	
@@ -56,8 +38,8 @@ public class QuestUtils {
     			userQuest, senderProto, true, justCompletedSpecialQuestAction);
 
     }
-  }
-
+  }*/
+/*
   public static boolean checkQuestCompleteAndMaybeSendIfJustCompleted(
   		GameServer server, Quest quest, QuestForUser userQuest,
       MinimumUserProto senderProto, boolean sendCompleteMessageIfJustCompleted,
@@ -108,43 +90,31 @@ public class QuestUtils {
     sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(server, quest, userQuest, senderProto,
         sendCompleteMessageIfJustCompleted);
     return true;
-//    if (possessEquipJobsRequired != null && possessEquipJobsRequired.size() > 0) {
-//    	Map<Integer, List<UserEquip>> equipIdsToUserEquips = RetrieveUtils.userEquipRetrieveUtils().getEquipIdsToUserEquipsForUser(userQuest.getUserId());
-//    	if (equipIdsToUserEquips == null || equipIdsToUserEquips.size() <= 0) {
-//    		return false;
-//    	}
-//    	Map<Integer, PossessEquipJob> pejs = PossessEquipJobRetrieveUtils.getPossessEquipJobsForPossessEquipJobIds(possessEquipJobsRequired);
-//    	for (PossessEquipJob pej : pejs.values()) {
-//    		if (equipIdsToUserEquips.get(pej.getEquipId()) == null || equipIdsToUserEquips.get(pej.getEquipId()).size() < pej.getQuantity()) {
-//    			return false;
-//    		} 
-//    	}
-//    }
-  }
+  }*/
   
   //records to db if special quest is completed;
   // compare random quest with quest user completed
   // return true if random quest matches quest user completed
-  private static boolean recordSpecialQuestAsCompleted(GameServer server,
-  		Quest quest, QuestForUser userQuest, MinimumUserProto senderProto,
-  		SpecialQuestAction justCompletedSpecialQuestAction,
-  		boolean sendCompleteMessageIfJustCompleted) {
-
-  	if (justCompletedSpecialQuestAction != null &&
-  			justCompletedSpecialQuestAction == quest.getSpecialQuestActionRequired()) {
-  		sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(server, quest,
-  				userQuest, senderProto, sendCompleteMessageIfJustCompleted);
-  		return true;
-  	} else if (quest.getSpecialQuestActionRequired() == SpecialQuestAction.REQUEST_JOIN_CLAN &&
-  			senderProto.hasClan() && senderProto.getClan().getClanId() > 0) {
-  		//user's action just now didn't complete clan quest,
-  		//but clan quest needs to be recorded as completed
-  		sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(server, quest, userQuest, senderProto,
-  				sendCompleteMessageIfJustCompleted);
-  	}
-  	return false;
-  }
-
+//  private static boolean recordSpecialQuestAsCompleted(GameServer server,
+//  		Quest quest, QuestForUser userQuest, MinimumUserProto senderProto,
+//  		SpecialQuestAction justCompletedSpecialQuestAction,
+//  		boolean sendCompleteMessageIfJustCompleted) {
+//
+//  	if (justCompletedSpecialQuestAction != null &&
+//  			justCompletedSpecialQuestAction == quest.getSpecialQuestActionRequired()) {
+//  		sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(server, quest,
+//  				userQuest, senderProto, sendCompleteMessageIfJustCompleted);
+//  		return true;
+//  	} else if (quest.getSpecialQuestActionRequired() == SpecialQuestAction.REQUEST_JOIN_CLAN &&
+//  			senderProto.hasClan() && senderProto.getClan().getClanId() > 0) {
+//  		//user's action just now didn't complete clan quest,
+//  		//but clan quest needs to be recorded as completed
+//  		sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(server, quest, userQuest, senderProto,
+//  				sendCompleteMessageIfJustCompleted);
+//  	}
+//  	return false;
+//  }
+	/*
   //return true if no build job structs exist or if user completed them all
   //return false otherwise
   private static boolean completedBuildStructJobs(int userId,
@@ -194,7 +164,7 @@ public class QuestUtils {
       return true;
     }
   }
-
+  
   private static boolean completedUpgradeStructJobs(int userId,
       boolean upgradeStructJobsExist, List<Integer> upgradeStructJobsRequired,
       Map<Integer, List<StructureForUser>> structIdsToUserStructs) {
@@ -244,31 +214,31 @@ public class QuestUtils {
 
     return usjComplete;
   }
-
+	*/
   
 
-  private static void sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(GameServer server, Quest quest,
-      QuestForUser userQuest, MinimumUserProto senderProto,
-      boolean sendCompleteMessageIfJustCompleted) {
-    if (server != null && senderProto != null && sendCompleteMessageIfJustCompleted) {
-      sendQuestCompleteResponse(server, senderProto, quest);
-    }
-    if (!userQuest.isComplete() && !UpdateUtils.get().updateUserQuestIscomplete(userQuest.getUserId(), userQuest.getQuestId())) {
-      log.error("problem with marking user quest as complete. userquest=" + userQuest);
-    }
-  }
+//  private static void sendQuestCompleteResponseIfRequestedAndUpdateUserQuest(GameServer server, Quest quest,
+//      QuestForUser userQuest, MinimumUserProto senderProto,
+//      boolean sendCompleteMessageIfJustCompleted) {
+//    if (server != null && senderProto != null && sendCompleteMessageIfJustCompleted) {
+//      sendQuestCompleteResponse(server, senderProto, quest);
+//    }
+//    if (!userQuest.isComplete() && !UpdateUtils.get().updateUserQuestIscomplete(userQuest.getUserId(), userQuest.getQuestId())) {
+//      log.error("problem with marking user quest as complete. userquest=" + userQuest);
+//    }
+//  }
 
-  private static void sendQuestCompleteResponse (GameServer server, MinimumUserProto senderProto, Quest quest){
-    QuestCompleteResponseProto.Builder builder = QuestCompleteResponseProto.newBuilder().setSender(senderProto)
-        .setQuestId(quest.getId());
-    CityElement cityElement = CityElementsRetrieveUtils.getCityElement(quest.getCityId(), quest.getAssetNumWithinCity());
-    if (cityElement != null) {
-      builder.setCityElement(CreateInfoProtoUtils.createCityElementProtoFromCityElement(cityElement));
-    }
-    QuestCompleteResponseEvent event = new QuestCompleteResponseEvent(senderProto.getUserId());
-    event.setQuestCompleteResponseProto(builder.build());
-    server.writeEvent(event);
-  }
+//  private static void sendQuestCompleteResponse (GameServer server, MinimumUserProto senderProto, Quest quest){
+//    QuestCompleteResponseProto.Builder builder = QuestCompleteResponseProto.newBuilder().setSender(senderProto)
+//        .setQuestId(quest.getId());
+//    CityElement cityElement = CityElementsRetrieveUtils.getCityElement(quest.getCityId(), quest.getAssetNumWithinCity());
+//    if (cityElement != null) {
+//      builder.setCityElement(CreateInfoProtoUtils.createCityElementProtoFromCityElement(cityElement));
+//    }
+//    QuestCompleteResponseEvent event = new QuestCompleteResponseEvent(senderProto.getUserId());
+//    event.setQuestCompleteResponseProto(builder.build());
+//    server.writeEvent(event);
+//  }
 
   public static List<Integer> getAvailableQuestsForUser(List<Integer> redeemed, List<Integer> inProgress) {
     QuestGraph graph = QuestRetrieveUtils.getQuestGraph();

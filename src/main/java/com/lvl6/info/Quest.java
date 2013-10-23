@@ -3,43 +3,34 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.List;
 
-import com.lvl6.proto.QuestProto.SpecialQuestAction;
-
 public class Quest implements Serializable {
 	
-	private static final long serialVersionUID = 8566942575371304994L;
+	private static final long serialVersionUID = -1107519920555385732L;
 	private int id;
   private int cityId;
   private String goodName;
   private String goodDescription;
   private String goodDoneResponse;
   private Dialogue goodAcceptDialogue;
-  private int assetNumWithinCity;
-  private int coinsGained;
-  private int diamondsGained;
-  private int expGained;
-  private int monsterIdGained;
+  private int questType;
+  private String jobDescription;
+  private int staticDataId;
+  private int quantity;
+  private int coinReward;
+  private int diamondReward;
+  private int expReward;
+  private int monsterIdReward;
+  private boolean isCompleteMonster;
   private List<Integer> questsRequiredForThis;
-  private List<Integer> tasksRequired;
-  private List<Integer> upgradeStructJobsRequired;
-  private List<Integer> buildStructJobsRequired;
-  private List<Integer> monsterJobsRequired;
-  private int coinRetrievalAmountRequired;
-  private SpecialQuestAction specialQuestActionRequired;
   private String goodQuestGiverImageSuffix;
   private int priority;
   private String carrotId;
-
-
-
+  
 	public Quest(int id, int cityId, String goodName, String goodDescription,
-			String goodDoneResponse, Dialogue goodAcceptDialogue,
-			int assetNumWithinCity, int coinsGained, int diamondsGained,
-			int expGained, int monsterIdGained, List<Integer> questsRequiredForThis,
-			List<Integer> tasksRequired, List<Integer> upgradeStructJobsRequired,
-			List<Integer> buildStructJobsRequired, List<Integer> monsterJobsRequired,
-			int coinRetrievalAmountRequired,
-			SpecialQuestAction specialQuestActionRequired,
+			String goodDoneResponse, Dialogue goodAcceptDialogue, int questType,
+			String jobDescription, int staticDataId, int quantity, int coinReward,
+			int diamondReward, int expReward, int monsterIdReward,
+			boolean isCompleteMonster, List<Integer> questsRequiredForThis,
 			String goodQuestGiverImageSuffix, int priority, String carrotId) {
 		super();
 		this.id = id;
@@ -48,65 +39,20 @@ public class Quest implements Serializable {
 		this.goodDescription = goodDescription;
 		this.goodDoneResponse = goodDoneResponse;
 		this.goodAcceptDialogue = goodAcceptDialogue;
-		this.assetNumWithinCity = assetNumWithinCity;
-		this.coinsGained = coinsGained;
-		this.diamondsGained = diamondsGained;
-		this.expGained = expGained;
-		this.monsterIdGained = monsterIdGained;
+		this.questType = questType;
+		this.jobDescription = jobDescription;
+		this.staticDataId = staticDataId;
+		this.quantity = quantity;
+		this.coinReward = coinReward;
+		this.diamondReward = diamondReward;
+		this.expReward = expReward;
+		this.monsterIdReward = monsterIdReward;
+		this.isCompleteMonster = isCompleteMonster;
 		this.questsRequiredForThis = questsRequiredForThis;
-		this.tasksRequired = tasksRequired;
-		this.upgradeStructJobsRequired = upgradeStructJobsRequired;
-		this.buildStructJobsRequired = buildStructJobsRequired;
-		this.monsterJobsRequired = monsterJobsRequired;
-		this.coinRetrievalAmountRequired = coinRetrievalAmountRequired;
-		this.specialQuestActionRequired = specialQuestActionRequired;
 		this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
 		this.priority = priority;
 		this.carrotId = carrotId;
 	}
-
-	//public int getNumComponents(boolean isGoodSide) {}
-  public int getNumComponents() {
-    int numComponents = 0;
-    if (specialQuestActionRequired != null)
-      return 1;
-    if (tasksRequired != null)
-      numComponents += tasksRequired.size();
-    if (upgradeStructJobsRequired != null)
-      numComponents += upgradeStructJobsRequired.size();
-    if (buildStructJobsRequired != null)
-      numComponents += buildStructJobsRequired.size();
-    if (coinRetrievalAmountRequired > 0)
-      numComponents++;
-    return numComponents;
-  }
-  
-  public boolean isSpecialQuest() {
-  	if (null == specialQuestActionRequired) {
-  		return false;
-  	} else {
-  		return true;
-  	}
-  }
-  
-  public boolean hasBuildStructJobs() {
-  	if (null == buildStructJobsRequired ||
-  			buildStructJobsRequired.isEmpty()) {
-  		return false;
-  	} else {
-  		return true;
-  	}
-  }
-  
-  public boolean hasUpgradeStructJobs() {
-  	if (null == upgradeStructJobsRequired ||
-  		upgradeStructJobsRequired.isEmpty()) {
-  		return false;
-  	} else {
-  		return true;
-  	}
-  }
-
 
 	public int getId() {
 		return id;
@@ -156,44 +102,76 @@ public class Quest implements Serializable {
 		this.goodAcceptDialogue = goodAcceptDialogue;
 	}
 
-	public int getAssetNumWithinCity() {
-		return assetNumWithinCity;
+	public int getQuestType() {
+		return questType;
 	}
 
-	public void setAssetNumWithinCity(int assetNumWithinCity) {
-		this.assetNumWithinCity = assetNumWithinCity;
+	public void setQuestType(int questType) {
+		this.questType = questType;
 	}
 
-	public int getCoinsGained() {
-		return coinsGained;
+	public String getJobDescription() {
+		return jobDescription;
 	}
 
-	public void setCoinsGained(int coinsGained) {
-		this.coinsGained = coinsGained;
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
 	}
 
-	public int getDiamondsGained() {
-		return diamondsGained;
+	public int getStaticDataId() {
+		return staticDataId;
 	}
 
-	public void setDiamondsGained(int diamondsGained) {
-		this.diamondsGained = diamondsGained;
+	public void setStaticDataId(int staticDataId) {
+		this.staticDataId = staticDataId;
 	}
 
-	public int getExpGained() {
-		return expGained;
+	public int getQuantity() {
+		return quantity;
 	}
 
-	public void setExpGained(int expGained) {
-		this.expGained = expGained;
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
-	public int getMonsterIdGained() {
-		return monsterIdGained;
+	public int getCoinReward() {
+		return coinReward;
 	}
 
-	public void setMonsterIdGained(int monsterIdGained) {
-		this.monsterIdGained = monsterIdGained;
+	public void setCoinReward(int coinReward) {
+		this.coinReward = coinReward;
+	}
+
+	public int getDiamondReward() {
+		return diamondReward;
+	}
+
+	public void setDiamondReward(int diamondReward) {
+		this.diamondReward = diamondReward;
+	}
+
+	public int getExpReward() {
+		return expReward;
+	}
+
+	public void setExpReward(int expReward) {
+		this.expReward = expReward;
+	}
+
+	public int getMonsterIdReward() {
+		return monsterIdReward;
+	}
+
+	public void setMonsterIdReward(int monsterIdReward) {
+		this.monsterIdReward = monsterIdReward;
+	}
+
+	public boolean isCompleteMonster() {
+		return isCompleteMonster;
+	}
+
+	public void setCompleteMonster(boolean isCompleteMonster) {
+		this.isCompleteMonster = isCompleteMonster;
 	}
 
 	public List<Integer> getQuestsRequiredForThis() {
@@ -202,55 +180,6 @@ public class Quest implements Serializable {
 
 	public void setQuestsRequiredForThis(List<Integer> questsRequiredForThis) {
 		this.questsRequiredForThis = questsRequiredForThis;
-	}
-
-	public List<Integer> getTasksRequired() {
-		return tasksRequired;
-	}
-
-	public void setTasksRequired(List<Integer> tasksRequired) {
-		this.tasksRequired = tasksRequired;
-	}
-
-	public List<Integer> getUpgradeStructJobsRequired() {
-		return upgradeStructJobsRequired;
-	}
-
-	public void setUpgradeStructJobsRequired(List<Integer> upgradeStructJobsRequired) {
-		this.upgradeStructJobsRequired = upgradeStructJobsRequired;
-	}
-
-	public List<Integer> getBuildStructJobsRequired() {
-		return buildStructJobsRequired;
-	}
-
-	public void setBuildStructJobsRequired(List<Integer> buildStructJobsRequired) {
-		this.buildStructJobsRequired = buildStructJobsRequired;
-	}
-
-	public List<Integer> getMonsterJobsRequired() {
-		return monsterJobsRequired;
-	}
-
-	public void setMonsterJobsRequired(List<Integer> monsterJobsRequired) {
-		this.monsterJobsRequired = monsterJobsRequired;
-	}
-
-	public int getCoinRetrievalAmountRequired() {
-		return coinRetrievalAmountRequired;
-	}
-
-	public void setCoinRetrievalAmountRequired(int coinRetrievalAmountRequired) {
-		this.coinRetrievalAmountRequired = coinRetrievalAmountRequired;
-	}
-
-	public SpecialQuestAction getSpecialQuestActionRequired() {
-		return specialQuestActionRequired;
-	}
-
-	public void setSpecialQuestActionRequired(
-			SpecialQuestAction specialQuestActionRequired) {
-		this.specialQuestActionRequired = specialQuestActionRequired;
 	}
 
 	public String getGoodQuestGiverImageSuffix() {
@@ -282,18 +211,14 @@ public class Quest implements Serializable {
 		return "Quest [id=" + id + ", cityId=" + cityId + ", goodName=" + goodName
 				+ ", goodDescription=" + goodDescription + ", goodDoneResponse="
 				+ goodDoneResponse + ", goodAcceptDialogue=" + goodAcceptDialogue
-				+ ", assetNumWithinCity=" + assetNumWithinCity + ", coinsGained="
-				+ coinsGained + ", diamondsGained=" + diamondsGained + ", expGained="
-				+ expGained + ", monsterIdGained=" + monsterIdGained
+				+ ", questType=" + questType + ", jobDescription=" + jobDescription
+				+ ", staticDataId=" + staticDataId + ", quantity=" + quantity
+				+ ", coinReward=" + coinReward + ", diamondReward=" + diamondReward
+				+ ", expReward=" + expReward + ", monsterIdReward=" + monsterIdReward
+				+ ", isCompleteMonster=" + isCompleteMonster
 				+ ", questsRequiredForThis=" + questsRequiredForThis
-				+ ", tasksRequired=" + tasksRequired + ", upgradeStructJobsRequired="
-				+ upgradeStructJobsRequired + ", buildStructJobsRequired="
-				+ buildStructJobsRequired + ", monsterJobsRequired="
-				+ monsterJobsRequired + ", coinRetrievalAmountRequired="
-				+ coinRetrievalAmountRequired + ", specialQuestActionRequired="
-				+ specialQuestActionRequired + ", goodQuestGiverImageSuffix="
-				+ goodQuestGiverImageSuffix + ", priority=" + priority + ", carrotId="
-				+ carrotId + "]";
+				+ ", goodQuestGiverImageSuffix=" + goodQuestGiverImageSuffix
+				+ ", priority=" + priority + ", carrotId=" + carrotId + "]";
 	}
-
+  
 }

@@ -8,75 +8,6 @@ public final class QuestProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public enum SpecialQuestAction
-      implements com.google.protobuf.ProtocolMessageEnum {
-    REQUEST_JOIN_CLAN(0, 1),
-    EVOLVE_A_MONSTER(1, 2),
-    ;
-    
-    public static final int REQUEST_JOIN_CLAN_VALUE = 1;
-    public static final int EVOLVE_A_MONSTER_VALUE = 2;
-    
-    
-    public final int getNumber() { return value; }
-    
-    public static SpecialQuestAction valueOf(int value) {
-      switch (value) {
-        case 1: return REQUEST_JOIN_CLAN;
-        case 2: return EVOLVE_A_MONSTER;
-        default: return null;
-      }
-    }
-    
-    public static com.google.protobuf.Internal.EnumLiteMap<SpecialQuestAction>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static com.google.protobuf.Internal.EnumLiteMap<SpecialQuestAction>
-        internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<SpecialQuestAction>() {
-            public SpecialQuestAction findValueByNumber(int number) {
-              return SpecialQuestAction.valueOf(number);
-            }
-          };
-    
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.lvl6.proto.QuestProto.getDescriptor().getEnumTypes().get(0);
-    }
-    
-    private static final SpecialQuestAction[] VALUES = {
-      REQUEST_JOIN_CLAN, EVOLVE_A_MONSTER, 
-    };
-    
-    public static SpecialQuestAction valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
-    }
-    
-    private final int index;
-    private final int value;
-    
-    private SpecialQuestAction(int index, int value) {
-      this.index = index;
-      this.value = value;
-    }
-    
-    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SpecialQuestAction)
-  }
-  
   public interface FullQuestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -105,74 +36,54 @@ public final class QuestProto {
     com.lvl6.proto.QuestProto.DialogueProto getAcceptDialogue();
     com.lvl6.proto.QuestProto.DialogueProtoOrBuilder getAcceptDialogueOrBuilder();
     
-    // optional int32 assetNumWithinCity = 7;
-    boolean hasAssetNumWithinCity();
-    int getAssetNumWithinCity();
+    // optional .com.lvl6.proto.FullQuestProto.QuestType questType = 7;
+    boolean hasQuestType();
+    com.lvl6.proto.QuestProto.FullQuestProto.QuestType getQuestType();
     
-    // optional int32 coinsGained = 8;
-    boolean hasCoinsGained();
-    int getCoinsGained();
+    // optional int32 staticDataId = 8;
+    boolean hasStaticDataId();
+    int getStaticDataId();
     
-    // optional int32 diamondsGained = 9;
-    boolean hasDiamondsGained();
-    int getDiamondsGained();
+    // optional int32 quantity = 9;
+    boolean hasQuantity();
+    int getQuantity();
     
-    // optional int32 expGained = 10;
-    boolean hasExpGained();
-    int getExpGained();
+    // optional int32 coinReward = 10;
+    boolean hasCoinReward();
+    int getCoinReward();
     
-    // optional int32 monsterId = 11;
-    boolean hasMonsterId();
-    int getMonsterId();
+    // optional int32 diamondReward = 11;
+    boolean hasDiamondReward();
+    int getDiamondReward();
     
-    // repeated int32 questsRequiredForThis = 12;
+    // optional int32 expReward = 12;
+    boolean hasExpReward();
+    int getExpReward();
+    
+    // optional int32 monsterIdReward = 13;
+    boolean hasMonsterIdReward();
+    int getMonsterIdReward();
+    
+    // optional bool isCompleteMonster = 14;
+    boolean hasIsCompleteMonster();
+    boolean getIsCompleteMonster();
+    
+    // repeated int32 questsRequiredForThis = 15;
     java.util.List<java.lang.Integer> getQuestsRequiredForThisList();
     int getQuestsRequiredForThisCount();
     int getQuestsRequiredForThis(int index);
     
-    // repeated int32 taskReqs = 13;
-    java.util.List<java.lang.Integer> getTaskReqsList();
-    int getTaskReqsCount();
-    int getTaskReqs(int index);
-    
-    // repeated int32 upgradeStructJobsReqs = 14;
-    java.util.List<java.lang.Integer> getUpgradeStructJobsReqsList();
-    int getUpgradeStructJobsReqsCount();
-    int getUpgradeStructJobsReqs(int index);
-    
-    // repeated int32 buildStructJobsReqs = 15;
-    java.util.List<java.lang.Integer> getBuildStructJobsReqsList();
-    int getBuildStructJobsReqsCount();
-    int getBuildStructJobsReqs(int index);
-    
-    // repeated int32 monsterJobsReqs = 16;
-    java.util.List<java.lang.Integer> getMonsterJobsReqsList();
-    int getMonsterJobsReqsCount();
-    int getMonsterJobsReqs(int index);
-    
-    // optional int32 coinRetrievalReq = 17;
-    boolean hasCoinRetrievalReq();
-    int getCoinRetrievalReq();
-    
-    // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 18;
-    boolean hasSpecialQuestActionReq();
-    com.lvl6.proto.QuestProto.SpecialQuestAction getSpecialQuestActionReq();
-    
-    // optional int32 numComponentsForGood = 19;
-    boolean hasNumComponentsForGood();
-    int getNumComponentsForGood();
-    
-    // optional string questGiverName = 20;
-    boolean hasQuestGiverName();
-    String getQuestGiverName();
-    
-    // optional string questGiverImageSuffix = 21;
+    // optional string questGiverImageSuffix = 16;
     boolean hasQuestGiverImageSuffix();
     String getQuestGiverImageSuffix();
     
-    // optional int32 priority = 22;
+    // optional int32 priority = 17;
     boolean hasPriority();
     int getPriority();
+    
+    // optional string carrotId = 18;
+    boolean hasCarrotId();
+    String getCarrotId();
   }
   public static final class FullQuestProto extends
       com.google.protobuf.GeneratedMessage
@@ -200,6 +111,78 @@ public final class QuestProto {
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_FullQuestProto_fieldAccessorTable;
+    }
+    
+    public enum QuestType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      COLLECT_MONSTER(0, 1),
+      COLLECT_AND_DONATE_MONSTER(1, 2),
+      KILL_MONSTER(2, 3),
+      ;
+      
+      public static final int COLLECT_MONSTER_VALUE = 1;
+      public static final int COLLECT_AND_DONATE_MONSTER_VALUE = 2;
+      public static final int KILL_MONSTER_VALUE = 3;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static QuestType valueOf(int value) {
+        switch (value) {
+          case 1: return COLLECT_MONSTER;
+          case 2: return COLLECT_AND_DONATE_MONSTER;
+          case 3: return KILL_MONSTER;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<QuestType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<QuestType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<QuestType>() {
+              public QuestType findValueByNumber(int number) {
+                return QuestType.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.QuestProto.FullQuestProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final QuestType[] VALUES = {
+        COLLECT_MONSTER, COLLECT_AND_DONATE_MONSTER, KILL_MONSTER, 
+      };
+      
+      public static QuestType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private QuestType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.FullQuestProto.QuestType)
     }
     
     private int bitField0_;
@@ -332,58 +315,88 @@ public final class QuestProto {
       return acceptDialogue_;
     }
     
-    // optional int32 assetNumWithinCity = 7;
-    public static final int ASSETNUMWITHINCITY_FIELD_NUMBER = 7;
-    private int assetNumWithinCity_;
-    public boolean hasAssetNumWithinCity() {
+    // optional .com.lvl6.proto.FullQuestProto.QuestType questType = 7;
+    public static final int QUESTTYPE_FIELD_NUMBER = 7;
+    private com.lvl6.proto.QuestProto.FullQuestProto.QuestType questType_;
+    public boolean hasQuestType() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
-    public int getAssetNumWithinCity() {
-      return assetNumWithinCity_;
+    public com.lvl6.proto.QuestProto.FullQuestProto.QuestType getQuestType() {
+      return questType_;
     }
     
-    // optional int32 coinsGained = 8;
-    public static final int COINSGAINED_FIELD_NUMBER = 8;
-    private int coinsGained_;
-    public boolean hasCoinsGained() {
+    // optional int32 staticDataId = 8;
+    public static final int STATICDATAID_FIELD_NUMBER = 8;
+    private int staticDataId_;
+    public boolean hasStaticDataId() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
-    public int getCoinsGained() {
-      return coinsGained_;
+    public int getStaticDataId() {
+      return staticDataId_;
     }
     
-    // optional int32 diamondsGained = 9;
-    public static final int DIAMONDSGAINED_FIELD_NUMBER = 9;
-    private int diamondsGained_;
-    public boolean hasDiamondsGained() {
+    // optional int32 quantity = 9;
+    public static final int QUANTITY_FIELD_NUMBER = 9;
+    private int quantity_;
+    public boolean hasQuantity() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
     }
-    public int getDiamondsGained() {
-      return diamondsGained_;
+    public int getQuantity() {
+      return quantity_;
     }
     
-    // optional int32 expGained = 10;
-    public static final int EXPGAINED_FIELD_NUMBER = 10;
-    private int expGained_;
-    public boolean hasExpGained() {
+    // optional int32 coinReward = 10;
+    public static final int COINREWARD_FIELD_NUMBER = 10;
+    private int coinReward_;
+    public boolean hasCoinReward() {
       return ((bitField0_ & 0x00000200) == 0x00000200);
     }
-    public int getExpGained() {
-      return expGained_;
+    public int getCoinReward() {
+      return coinReward_;
     }
     
-    // optional int32 monsterId = 11;
-    public static final int MONSTERID_FIELD_NUMBER = 11;
-    private int monsterId_;
-    public boolean hasMonsterId() {
+    // optional int32 diamondReward = 11;
+    public static final int DIAMONDREWARD_FIELD_NUMBER = 11;
+    private int diamondReward_;
+    public boolean hasDiamondReward() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
     }
-    public int getMonsterId() {
-      return monsterId_;
+    public int getDiamondReward() {
+      return diamondReward_;
     }
     
-    // repeated int32 questsRequiredForThis = 12;
-    public static final int QUESTSREQUIREDFORTHIS_FIELD_NUMBER = 12;
+    // optional int32 expReward = 12;
+    public static final int EXPREWARD_FIELD_NUMBER = 12;
+    private int expReward_;
+    public boolean hasExpReward() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    public int getExpReward() {
+      return expReward_;
+    }
+    
+    // optional int32 monsterIdReward = 13;
+    public static final int MONSTERIDREWARD_FIELD_NUMBER = 13;
+    private int monsterIdReward_;
+    public boolean hasMonsterIdReward() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    public int getMonsterIdReward() {
+      return monsterIdReward_;
+    }
+    
+    // optional bool isCompleteMonster = 14;
+    public static final int ISCOMPLETEMONSTER_FIELD_NUMBER = 14;
+    private boolean isCompleteMonster_;
+    public boolean hasIsCompleteMonster() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    public boolean getIsCompleteMonster() {
+      return isCompleteMonster_;
+    }
+    
+    // repeated int32 questsRequiredForThis = 15;
+    public static final int QUESTSREQUIREDFORTHIS_FIELD_NUMBER = 15;
     private java.util.List<java.lang.Integer> questsRequiredForThis_;
     public java.util.List<java.lang.Integer>
         getQuestsRequiredForThisList() {
@@ -396,129 +409,11 @@ public final class QuestProto {
       return questsRequiredForThis_.get(index);
     }
     
-    // repeated int32 taskReqs = 13;
-    public static final int TASKREQS_FIELD_NUMBER = 13;
-    private java.util.List<java.lang.Integer> taskReqs_;
-    public java.util.List<java.lang.Integer>
-        getTaskReqsList() {
-      return taskReqs_;
-    }
-    public int getTaskReqsCount() {
-      return taskReqs_.size();
-    }
-    public int getTaskReqs(int index) {
-      return taskReqs_.get(index);
-    }
-    
-    // repeated int32 upgradeStructJobsReqs = 14;
-    public static final int UPGRADESTRUCTJOBSREQS_FIELD_NUMBER = 14;
-    private java.util.List<java.lang.Integer> upgradeStructJobsReqs_;
-    public java.util.List<java.lang.Integer>
-        getUpgradeStructJobsReqsList() {
-      return upgradeStructJobsReqs_;
-    }
-    public int getUpgradeStructJobsReqsCount() {
-      return upgradeStructJobsReqs_.size();
-    }
-    public int getUpgradeStructJobsReqs(int index) {
-      return upgradeStructJobsReqs_.get(index);
-    }
-    
-    // repeated int32 buildStructJobsReqs = 15;
-    public static final int BUILDSTRUCTJOBSREQS_FIELD_NUMBER = 15;
-    private java.util.List<java.lang.Integer> buildStructJobsReqs_;
-    public java.util.List<java.lang.Integer>
-        getBuildStructJobsReqsList() {
-      return buildStructJobsReqs_;
-    }
-    public int getBuildStructJobsReqsCount() {
-      return buildStructJobsReqs_.size();
-    }
-    public int getBuildStructJobsReqs(int index) {
-      return buildStructJobsReqs_.get(index);
-    }
-    
-    // repeated int32 monsterJobsReqs = 16;
-    public static final int MONSTERJOBSREQS_FIELD_NUMBER = 16;
-    private java.util.List<java.lang.Integer> monsterJobsReqs_;
-    public java.util.List<java.lang.Integer>
-        getMonsterJobsReqsList() {
-      return monsterJobsReqs_;
-    }
-    public int getMonsterJobsReqsCount() {
-      return monsterJobsReqs_.size();
-    }
-    public int getMonsterJobsReqs(int index) {
-      return monsterJobsReqs_.get(index);
-    }
-    
-    // optional int32 coinRetrievalReq = 17;
-    public static final int COINRETRIEVALREQ_FIELD_NUMBER = 17;
-    private int coinRetrievalReq_;
-    public boolean hasCoinRetrievalReq() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
-    }
-    public int getCoinRetrievalReq() {
-      return coinRetrievalReq_;
-    }
-    
-    // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 18;
-    public static final int SPECIALQUESTACTIONREQ_FIELD_NUMBER = 18;
-    private com.lvl6.proto.QuestProto.SpecialQuestAction specialQuestActionReq_;
-    public boolean hasSpecialQuestActionReq() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
-    }
-    public com.lvl6.proto.QuestProto.SpecialQuestAction getSpecialQuestActionReq() {
-      return specialQuestActionReq_;
-    }
-    
-    // optional int32 numComponentsForGood = 19;
-    public static final int NUMCOMPONENTSFORGOOD_FIELD_NUMBER = 19;
-    private int numComponentsForGood_;
-    public boolean hasNumComponentsForGood() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
-    }
-    public int getNumComponentsForGood() {
-      return numComponentsForGood_;
-    }
-    
-    // optional string questGiverName = 20;
-    public static final int QUESTGIVERNAME_FIELD_NUMBER = 20;
-    private java.lang.Object questGiverName_;
-    public boolean hasQuestGiverName() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
-    }
-    public String getQuestGiverName() {
-      java.lang.Object ref = questGiverName_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          questGiverName_ = s;
-        }
-        return s;
-      }
-    }
-    private com.google.protobuf.ByteString getQuestGiverNameBytes() {
-      java.lang.Object ref = questGiverName_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        questGiverName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    
-    // optional string questGiverImageSuffix = 21;
-    public static final int QUESTGIVERIMAGESUFFIX_FIELD_NUMBER = 21;
+    // optional string questGiverImageSuffix = 16;
+    public static final int QUESTGIVERIMAGESUFFIX_FIELD_NUMBER = 16;
     private java.lang.Object questGiverImageSuffix_;
     public boolean hasQuestGiverImageSuffix() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     public String getQuestGiverImageSuffix() {
       java.lang.Object ref = questGiverImageSuffix_;
@@ -546,14 +441,46 @@ public final class QuestProto {
       }
     }
     
-    // optional int32 priority = 22;
-    public static final int PRIORITY_FIELD_NUMBER = 22;
+    // optional int32 priority = 17;
+    public static final int PRIORITY_FIELD_NUMBER = 17;
     private int priority_;
     public boolean hasPriority() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     public int getPriority() {
       return priority_;
+    }
+    
+    // optional string carrotId = 18;
+    public static final int CARROTID_FIELD_NUMBER = 18;
+    private java.lang.Object carrotId_;
+    public boolean hasCarrotId() {
+      return ((bitField0_ & 0x00010000) == 0x00010000);
+    }
+    public String getCarrotId() {
+      java.lang.Object ref = carrotId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          carrotId_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getCarrotIdBytes() {
+      java.lang.Object ref = carrotId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        carrotId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
     
     private void initFields() {
@@ -563,22 +490,18 @@ public final class QuestProto {
       description_ = "";
       doneResponse_ = "";
       acceptDialogue_ = com.lvl6.proto.QuestProto.DialogueProto.getDefaultInstance();
-      assetNumWithinCity_ = 0;
-      coinsGained_ = 0;
-      diamondsGained_ = 0;
-      expGained_ = 0;
-      monsterId_ = 0;
+      questType_ = com.lvl6.proto.QuestProto.FullQuestProto.QuestType.COLLECT_MONSTER;
+      staticDataId_ = 0;
+      quantity_ = 0;
+      coinReward_ = 0;
+      diamondReward_ = 0;
+      expReward_ = 0;
+      monsterIdReward_ = 0;
+      isCompleteMonster_ = false;
       questsRequiredForThis_ = java.util.Collections.emptyList();;
-      taskReqs_ = java.util.Collections.emptyList();;
-      upgradeStructJobsReqs_ = java.util.Collections.emptyList();;
-      buildStructJobsReqs_ = java.util.Collections.emptyList();;
-      monsterJobsReqs_ = java.util.Collections.emptyList();;
-      coinRetrievalReq_ = 0;
-      specialQuestActionReq_ = com.lvl6.proto.QuestProto.SpecialQuestAction.REQUEST_JOIN_CLAN;
-      numComponentsForGood_ = 0;
-      questGiverName_ = "";
       questGiverImageSuffix_ = "";
       priority_ = 0;
+      carrotId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -611,52 +534,40 @@ public final class QuestProto {
         output.writeMessage(6, acceptDialogue_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, assetNumWithinCity_);
+        output.writeEnum(7, questType_.getNumber());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, coinsGained_);
+        output.writeInt32(8, staticDataId_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(9, diamondsGained_);
+        output.writeInt32(9, quantity_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, expGained_);
+        output.writeInt32(10, coinReward_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, monsterId_);
-      }
-      for (int i = 0; i < questsRequiredForThis_.size(); i++) {
-        output.writeInt32(12, questsRequiredForThis_.get(i));
-      }
-      for (int i = 0; i < taskReqs_.size(); i++) {
-        output.writeInt32(13, taskReqs_.get(i));
-      }
-      for (int i = 0; i < upgradeStructJobsReqs_.size(); i++) {
-        output.writeInt32(14, upgradeStructJobsReqs_.get(i));
-      }
-      for (int i = 0; i < buildStructJobsReqs_.size(); i++) {
-        output.writeInt32(15, buildStructJobsReqs_.get(i));
-      }
-      for (int i = 0; i < monsterJobsReqs_.size(); i++) {
-        output.writeInt32(16, monsterJobsReqs_.get(i));
+        output.writeInt32(11, diamondReward_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(17, coinRetrievalReq_);
+        output.writeInt32(12, expReward_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeEnum(18, specialQuestActionReq_.getNumber());
+        output.writeInt32(13, monsterIdReward_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeInt32(19, numComponentsForGood_);
+        output.writeBool(14, isCompleteMonster_);
+      }
+      for (int i = 0; i < questsRequiredForThis_.size(); i++) {
+        output.writeInt32(15, questsRequiredForThis_.get(i));
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        output.writeBytes(20, getQuestGiverNameBytes());
+        output.writeBytes(16, getQuestGiverImageSuffixBytes());
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        output.writeBytes(21, getQuestGiverImageSuffixBytes());
+        output.writeInt32(17, priority_);
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeInt32(22, priority_);
+        output.writeBytes(18, getCarrotIdBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -693,23 +604,35 @@ public final class QuestProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, assetNumWithinCity_);
+          .computeEnumSize(7, questType_.getNumber());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, coinsGained_);
+          .computeInt32Size(8, staticDataId_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, diamondsGained_);
+          .computeInt32Size(9, quantity_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, expGained_);
+          .computeInt32Size(10, coinReward_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, monsterId_);
+          .computeInt32Size(11, diamondReward_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, expReward_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, monsterIdReward_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(14, isCompleteMonster_);
       }
       {
         int dataSize = 0;
@@ -720,65 +643,17 @@ public final class QuestProto {
         size += dataSize;
         size += 1 * getQuestsRequiredForThisList().size();
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < taskReqs_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(taskReqs_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getTaskReqsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < upgradeStructJobsReqs_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(upgradeStructJobsReqs_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getUpgradeStructJobsReqsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < buildStructJobsReqs_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(buildStructJobsReqs_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getBuildStructJobsReqsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < monsterJobsReqs_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(monsterJobsReqs_.get(i));
-        }
-        size += dataSize;
-        size += 2 * getMonsterJobsReqsList().size();
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(17, coinRetrievalReq_);
-      }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(18, specialQuestActionReq_.getNumber());
-      }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(19, numComponentsForGood_);
-      }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(20, getQuestGiverNameBytes());
+          .computeBytesSize(16, getQuestGiverImageSuffixBytes());
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(21, getQuestGiverImageSuffixBytes());
+          .computeInt32Size(17, priority_);
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(22, priority_);
+          .computeBytesSize(18, getCarrotIdBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -921,38 +796,30 @@ public final class QuestProto {
           acceptDialogueBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
-        assetNumWithinCity_ = 0;
+        questType_ = com.lvl6.proto.QuestProto.FullQuestProto.QuestType.COLLECT_MONSTER;
         bitField0_ = (bitField0_ & ~0x00000040);
-        coinsGained_ = 0;
+        staticDataId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
-        diamondsGained_ = 0;
+        quantity_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        expGained_ = 0;
+        coinReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        monsterId_ = 0;
+        diamondReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
-        questsRequiredForThis_ = java.util.Collections.emptyList();;
+        expReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
-        taskReqs_ = java.util.Collections.emptyList();;
+        monsterIdReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
-        upgradeStructJobsReqs_ = java.util.Collections.emptyList();;
+        isCompleteMonster_ = false;
         bitField0_ = (bitField0_ & ~0x00002000);
-        buildStructJobsReqs_ = java.util.Collections.emptyList();;
+        questsRequiredForThis_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00004000);
-        monsterJobsReqs_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00008000);
-        coinRetrievalReq_ = 0;
-        bitField0_ = (bitField0_ & ~0x00010000);
-        specialQuestActionReq_ = com.lvl6.proto.QuestProto.SpecialQuestAction.REQUEST_JOIN_CLAN;
-        bitField0_ = (bitField0_ & ~0x00020000);
-        numComponentsForGood_ = 0;
-        bitField0_ = (bitField0_ & ~0x00040000);
-        questGiverName_ = "";
-        bitField0_ = (bitField0_ & ~0x00080000);
         questGiverImageSuffix_ = "";
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         priority_ = 0;
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00010000);
+        carrotId_ = "";
+        bitField0_ = (bitField0_ & ~0x00020000);
         return this;
       }
       
@@ -1022,72 +889,52 @@ public final class QuestProto {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.assetNumWithinCity_ = assetNumWithinCity_;
+        result.questType_ = questType_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.coinsGained_ = coinsGained_;
+        result.staticDataId_ = staticDataId_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.diamondsGained_ = diamondsGained_;
+        result.quantity_ = quantity_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.expGained_ = expGained_;
+        result.coinReward_ = coinReward_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.monsterId_ = monsterId_;
-        if (((bitField0_ & 0x00000800) == 0x00000800)) {
-          questsRequiredForThis_ = java.util.Collections.unmodifiableList(questsRequiredForThis_);
-          bitField0_ = (bitField0_ & ~0x00000800);
-        }
-        result.questsRequiredForThis_ = questsRequiredForThis_;
-        if (((bitField0_ & 0x00001000) == 0x00001000)) {
-          taskReqs_ = java.util.Collections.unmodifiableList(taskReqs_);
-          bitField0_ = (bitField0_ & ~0x00001000);
-        }
-        result.taskReqs_ = taskReqs_;
-        if (((bitField0_ & 0x00002000) == 0x00002000)) {
-          upgradeStructJobsReqs_ = java.util.Collections.unmodifiableList(upgradeStructJobsReqs_);
-          bitField0_ = (bitField0_ & ~0x00002000);
-        }
-        result.upgradeStructJobsReqs_ = upgradeStructJobsReqs_;
-        if (((bitField0_ & 0x00004000) == 0x00004000)) {
-          buildStructJobsReqs_ = java.util.Collections.unmodifiableList(buildStructJobsReqs_);
-          bitField0_ = (bitField0_ & ~0x00004000);
-        }
-        result.buildStructJobsReqs_ = buildStructJobsReqs_;
-        if (((bitField0_ & 0x00008000) == 0x00008000)) {
-          monsterJobsReqs_ = java.util.Collections.unmodifiableList(monsterJobsReqs_);
-          bitField0_ = (bitField0_ & ~0x00008000);
-        }
-        result.monsterJobsReqs_ = monsterJobsReqs_;
-        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+        result.diamondReward_ = diamondReward_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.coinRetrievalReq_ = coinRetrievalReq_;
-        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+        result.expReward_ = expReward_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.specialQuestActionReq_ = specialQuestActionReq_;
-        if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+        result.monsterIdReward_ = monsterIdReward_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.numComponentsForGood_ = numComponentsForGood_;
-        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+        result.isCompleteMonster_ = isCompleteMonster_;
+        if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          questsRequiredForThis_ = java.util.Collections.unmodifiableList(questsRequiredForThis_);
+          bitField0_ = (bitField0_ & ~0x00004000);
+        }
+        result.questsRequiredForThis_ = questsRequiredForThis_;
+        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.questGiverName_ = questGiverName_;
-        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+        result.questGiverImageSuffix_ = questGiverImageSuffix_;
+        if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.questGiverImageSuffix_ = questGiverImageSuffix_;
-        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+        result.priority_ = priority_;
+        if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00010000;
         }
-        result.priority_ = priority_;
+        result.carrotId_ = carrotId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1122,88 +969,48 @@ public final class QuestProto {
         if (other.hasAcceptDialogue()) {
           mergeAcceptDialogue(other.getAcceptDialogue());
         }
-        if (other.hasAssetNumWithinCity()) {
-          setAssetNumWithinCity(other.getAssetNumWithinCity());
+        if (other.hasQuestType()) {
+          setQuestType(other.getQuestType());
         }
-        if (other.hasCoinsGained()) {
-          setCoinsGained(other.getCoinsGained());
+        if (other.hasStaticDataId()) {
+          setStaticDataId(other.getStaticDataId());
         }
-        if (other.hasDiamondsGained()) {
-          setDiamondsGained(other.getDiamondsGained());
+        if (other.hasQuantity()) {
+          setQuantity(other.getQuantity());
         }
-        if (other.hasExpGained()) {
-          setExpGained(other.getExpGained());
+        if (other.hasCoinReward()) {
+          setCoinReward(other.getCoinReward());
         }
-        if (other.hasMonsterId()) {
-          setMonsterId(other.getMonsterId());
+        if (other.hasDiamondReward()) {
+          setDiamondReward(other.getDiamondReward());
+        }
+        if (other.hasExpReward()) {
+          setExpReward(other.getExpReward());
+        }
+        if (other.hasMonsterIdReward()) {
+          setMonsterIdReward(other.getMonsterIdReward());
+        }
+        if (other.hasIsCompleteMonster()) {
+          setIsCompleteMonster(other.getIsCompleteMonster());
         }
         if (!other.questsRequiredForThis_.isEmpty()) {
           if (questsRequiredForThis_.isEmpty()) {
             questsRequiredForThis_ = other.questsRequiredForThis_;
-            bitField0_ = (bitField0_ & ~0x00000800);
+            bitField0_ = (bitField0_ & ~0x00004000);
           } else {
             ensureQuestsRequiredForThisIsMutable();
             questsRequiredForThis_.addAll(other.questsRequiredForThis_);
           }
           onChanged();
         }
-        if (!other.taskReqs_.isEmpty()) {
-          if (taskReqs_.isEmpty()) {
-            taskReqs_ = other.taskReqs_;
-            bitField0_ = (bitField0_ & ~0x00001000);
-          } else {
-            ensureTaskReqsIsMutable();
-            taskReqs_.addAll(other.taskReqs_);
-          }
-          onChanged();
-        }
-        if (!other.upgradeStructJobsReqs_.isEmpty()) {
-          if (upgradeStructJobsReqs_.isEmpty()) {
-            upgradeStructJobsReqs_ = other.upgradeStructJobsReqs_;
-            bitField0_ = (bitField0_ & ~0x00002000);
-          } else {
-            ensureUpgradeStructJobsReqsIsMutable();
-            upgradeStructJobsReqs_.addAll(other.upgradeStructJobsReqs_);
-          }
-          onChanged();
-        }
-        if (!other.buildStructJobsReqs_.isEmpty()) {
-          if (buildStructJobsReqs_.isEmpty()) {
-            buildStructJobsReqs_ = other.buildStructJobsReqs_;
-            bitField0_ = (bitField0_ & ~0x00004000);
-          } else {
-            ensureBuildStructJobsReqsIsMutable();
-            buildStructJobsReqs_.addAll(other.buildStructJobsReqs_);
-          }
-          onChanged();
-        }
-        if (!other.monsterJobsReqs_.isEmpty()) {
-          if (monsterJobsReqs_.isEmpty()) {
-            monsterJobsReqs_ = other.monsterJobsReqs_;
-            bitField0_ = (bitField0_ & ~0x00008000);
-          } else {
-            ensureMonsterJobsReqsIsMutable();
-            monsterJobsReqs_.addAll(other.monsterJobsReqs_);
-          }
-          onChanged();
-        }
-        if (other.hasCoinRetrievalReq()) {
-          setCoinRetrievalReq(other.getCoinRetrievalReq());
-        }
-        if (other.hasSpecialQuestActionReq()) {
-          setSpecialQuestActionReq(other.getSpecialQuestActionReq());
-        }
-        if (other.hasNumComponentsForGood()) {
-          setNumComponentsForGood(other.getNumComponentsForGood());
-        }
-        if (other.hasQuestGiverName()) {
-          setQuestGiverName(other.getQuestGiverName());
-        }
         if (other.hasQuestGiverImageSuffix()) {
           setQuestGiverImageSuffix(other.getQuestGiverImageSuffix());
         }
         if (other.hasPriority()) {
           setPriority(other.getPriority());
+        }
+        if (other.hasCarrotId()) {
+          setCarrotId(other.getCarrotId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1271,36 +1078,57 @@ public final class QuestProto {
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000040;
-              assetNumWithinCity_ = input.readInt32();
+              int rawValue = input.readEnum();
+              com.lvl6.proto.QuestProto.FullQuestProto.QuestType value = com.lvl6.proto.QuestProto.FullQuestProto.QuestType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(7, rawValue);
+              } else {
+                bitField0_ |= 0x00000040;
+                questType_ = value;
+              }
               break;
             }
             case 64: {
               bitField0_ |= 0x00000080;
-              coinsGained_ = input.readInt32();
+              staticDataId_ = input.readInt32();
               break;
             }
             case 72: {
               bitField0_ |= 0x00000100;
-              diamondsGained_ = input.readInt32();
+              quantity_ = input.readInt32();
               break;
             }
             case 80: {
               bitField0_ |= 0x00000200;
-              expGained_ = input.readInt32();
+              coinReward_ = input.readInt32();
               break;
             }
             case 88: {
               bitField0_ |= 0x00000400;
-              monsterId_ = input.readInt32();
+              diamondReward_ = input.readInt32();
               break;
             }
             case 96: {
+              bitField0_ |= 0x00000800;
+              expReward_ = input.readInt32();
+              break;
+            }
+            case 104: {
+              bitField0_ |= 0x00001000;
+              monsterIdReward_ = input.readInt32();
+              break;
+            }
+            case 112: {
+              bitField0_ |= 0x00002000;
+              isCompleteMonster_ = input.readBool();
+              break;
+            }
+            case 120: {
               ensureQuestsRequiredForThisIsMutable();
               questsRequiredForThis_.add(input.readInt32());
               break;
             }
-            case 98: {
+            case 122: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -1309,96 +1137,19 @@ public final class QuestProto {
               input.popLimit(limit);
               break;
             }
-            case 104: {
-              ensureTaskReqsIsMutable();
-              taskReqs_.add(input.readInt32());
-              break;
-            }
-            case 106: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addTaskReqs(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 112: {
-              ensureUpgradeStructJobsReqsIsMutable();
-              upgradeStructJobsReqs_.add(input.readInt32());
-              break;
-            }
-            case 114: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addUpgradeStructJobsReqs(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 120: {
-              ensureBuildStructJobsReqsIsMutable();
-              buildStructJobsReqs_.add(input.readInt32());
-              break;
-            }
-            case 122: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addBuildStructJobsReqs(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 128: {
-              ensureMonsterJobsReqsIsMutable();
-              monsterJobsReqs_.add(input.readInt32());
-              break;
-            }
             case 130: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addMonsterJobsReqs(input.readInt32());
-              }
-              input.popLimit(limit);
+              bitField0_ |= 0x00008000;
+              questGiverImageSuffix_ = input.readBytes();
               break;
             }
             case 136: {
               bitField0_ |= 0x00010000;
-              coinRetrievalReq_ = input.readInt32();
-              break;
-            }
-            case 144: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.QuestProto.SpecialQuestAction value = com.lvl6.proto.QuestProto.SpecialQuestAction.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(18, rawValue);
-              } else {
-                bitField0_ |= 0x00020000;
-                specialQuestActionReq_ = value;
-              }
-              break;
-            }
-            case 152: {
-              bitField0_ |= 0x00040000;
-              numComponentsForGood_ = input.readInt32();
-              break;
-            }
-            case 162: {
-              bitField0_ |= 0x00080000;
-              questGiverName_ = input.readBytes();
-              break;
-            }
-            case 170: {
-              bitField0_ |= 0x00100000;
-              questGiverImageSuffix_ = input.readBytes();
-              break;
-            }
-            case 176: {
-              bitField0_ |= 0x00200000;
               priority_ = input.readInt32();
+              break;
+            }
+            case 146: {
+              bitField0_ |= 0x00020000;
+              carrotId_ = input.readBytes();
               break;
             }
           }
@@ -1647,117 +1398,183 @@ public final class QuestProto {
         return acceptDialogueBuilder_;
       }
       
-      // optional int32 assetNumWithinCity = 7;
-      private int assetNumWithinCity_ ;
-      public boolean hasAssetNumWithinCity() {
+      // optional .com.lvl6.proto.FullQuestProto.QuestType questType = 7;
+      private com.lvl6.proto.QuestProto.FullQuestProto.QuestType questType_ = com.lvl6.proto.QuestProto.FullQuestProto.QuestType.COLLECT_MONSTER;
+      public boolean hasQuestType() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
-      public int getAssetNumWithinCity() {
-        return assetNumWithinCity_;
+      public com.lvl6.proto.QuestProto.FullQuestProto.QuestType getQuestType() {
+        return questType_;
       }
-      public Builder setAssetNumWithinCity(int value) {
+      public Builder setQuestType(com.lvl6.proto.QuestProto.FullQuestProto.QuestType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         bitField0_ |= 0x00000040;
-        assetNumWithinCity_ = value;
+        questType_ = value;
         onChanged();
         return this;
       }
-      public Builder clearAssetNumWithinCity() {
+      public Builder clearQuestType() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        assetNumWithinCity_ = 0;
+        questType_ = com.lvl6.proto.QuestProto.FullQuestProto.QuestType.COLLECT_MONSTER;
         onChanged();
         return this;
       }
       
-      // optional int32 coinsGained = 8;
-      private int coinsGained_ ;
-      public boolean hasCoinsGained() {
+      // optional int32 staticDataId = 8;
+      private int staticDataId_ ;
+      public boolean hasStaticDataId() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
-      public int getCoinsGained() {
-        return coinsGained_;
+      public int getStaticDataId() {
+        return staticDataId_;
       }
-      public Builder setCoinsGained(int value) {
+      public Builder setStaticDataId(int value) {
         bitField0_ |= 0x00000080;
-        coinsGained_ = value;
+        staticDataId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearCoinsGained() {
+      public Builder clearStaticDataId() {
         bitField0_ = (bitField0_ & ~0x00000080);
-        coinsGained_ = 0;
+        staticDataId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 diamondsGained = 9;
-      private int diamondsGained_ ;
-      public boolean hasDiamondsGained() {
+      // optional int32 quantity = 9;
+      private int quantity_ ;
+      public boolean hasQuantity() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
-      public int getDiamondsGained() {
-        return diamondsGained_;
+      public int getQuantity() {
+        return quantity_;
       }
-      public Builder setDiamondsGained(int value) {
+      public Builder setQuantity(int value) {
         bitField0_ |= 0x00000100;
-        diamondsGained_ = value;
+        quantity_ = value;
         onChanged();
         return this;
       }
-      public Builder clearDiamondsGained() {
+      public Builder clearQuantity() {
         bitField0_ = (bitField0_ & ~0x00000100);
-        diamondsGained_ = 0;
+        quantity_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 expGained = 10;
-      private int expGained_ ;
-      public boolean hasExpGained() {
+      // optional int32 coinReward = 10;
+      private int coinReward_ ;
+      public boolean hasCoinReward() {
         return ((bitField0_ & 0x00000200) == 0x00000200);
       }
-      public int getExpGained() {
-        return expGained_;
+      public int getCoinReward() {
+        return coinReward_;
       }
-      public Builder setExpGained(int value) {
+      public Builder setCoinReward(int value) {
         bitField0_ |= 0x00000200;
-        expGained_ = value;
+        coinReward_ = value;
         onChanged();
         return this;
       }
-      public Builder clearExpGained() {
+      public Builder clearCoinReward() {
         bitField0_ = (bitField0_ & ~0x00000200);
-        expGained_ = 0;
+        coinReward_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 monsterId = 11;
-      private int monsterId_ ;
-      public boolean hasMonsterId() {
+      // optional int32 diamondReward = 11;
+      private int diamondReward_ ;
+      public boolean hasDiamondReward() {
         return ((bitField0_ & 0x00000400) == 0x00000400);
       }
-      public int getMonsterId() {
-        return monsterId_;
+      public int getDiamondReward() {
+        return diamondReward_;
       }
-      public Builder setMonsterId(int value) {
+      public Builder setDiamondReward(int value) {
         bitField0_ |= 0x00000400;
-        monsterId_ = value;
+        diamondReward_ = value;
         onChanged();
         return this;
       }
-      public Builder clearMonsterId() {
+      public Builder clearDiamondReward() {
         bitField0_ = (bitField0_ & ~0x00000400);
-        monsterId_ = 0;
+        diamondReward_ = 0;
         onChanged();
         return this;
       }
       
-      // repeated int32 questsRequiredForThis = 12;
+      // optional int32 expReward = 12;
+      private int expReward_ ;
+      public boolean hasExpReward() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      public int getExpReward() {
+        return expReward_;
+      }
+      public Builder setExpReward(int value) {
+        bitField0_ |= 0x00000800;
+        expReward_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearExpReward() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        expReward_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 monsterIdReward = 13;
+      private int monsterIdReward_ ;
+      public boolean hasMonsterIdReward() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      public int getMonsterIdReward() {
+        return monsterIdReward_;
+      }
+      public Builder setMonsterIdReward(int value) {
+        bitField0_ |= 0x00001000;
+        monsterIdReward_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterIdReward() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        monsterIdReward_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool isCompleteMonster = 14;
+      private boolean isCompleteMonster_ ;
+      public boolean hasIsCompleteMonster() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      public boolean getIsCompleteMonster() {
+        return isCompleteMonster_;
+      }
+      public Builder setIsCompleteMonster(boolean value) {
+        bitField0_ |= 0x00002000;
+        isCompleteMonster_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsCompleteMonster() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        isCompleteMonster_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // repeated int32 questsRequiredForThis = 15;
       private java.util.List<java.lang.Integer> questsRequiredForThis_ = java.util.Collections.emptyList();;
       private void ensureQuestsRequiredForThisIsMutable() {
-        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
           questsRequiredForThis_ = new java.util.ArrayList<java.lang.Integer>(questsRequiredForThis_);
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00004000;
          }
       }
       public java.util.List<java.lang.Integer>
@@ -1792,297 +1609,15 @@ public final class QuestProto {
       }
       public Builder clearQuestsRequiredForThis() {
         questsRequiredForThis_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000800);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 taskReqs = 13;
-      private java.util.List<java.lang.Integer> taskReqs_ = java.util.Collections.emptyList();;
-      private void ensureTaskReqsIsMutable() {
-        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
-          taskReqs_ = new java.util.ArrayList<java.lang.Integer>(taskReqs_);
-          bitField0_ |= 0x00001000;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getTaskReqsList() {
-        return java.util.Collections.unmodifiableList(taskReqs_);
-      }
-      public int getTaskReqsCount() {
-        return taskReqs_.size();
-      }
-      public int getTaskReqs(int index) {
-        return taskReqs_.get(index);
-      }
-      public Builder setTaskReqs(
-          int index, int value) {
-        ensureTaskReqsIsMutable();
-        taskReqs_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addTaskReqs(int value) {
-        ensureTaskReqsIsMutable();
-        taskReqs_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllTaskReqs(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureTaskReqsIsMutable();
-        super.addAll(values, taskReqs_);
-        onChanged();
-        return this;
-      }
-      public Builder clearTaskReqs() {
-        taskReqs_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00001000);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 upgradeStructJobsReqs = 14;
-      private java.util.List<java.lang.Integer> upgradeStructJobsReqs_ = java.util.Collections.emptyList();;
-      private void ensureUpgradeStructJobsReqsIsMutable() {
-        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
-          upgradeStructJobsReqs_ = new java.util.ArrayList<java.lang.Integer>(upgradeStructJobsReqs_);
-          bitField0_ |= 0x00002000;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getUpgradeStructJobsReqsList() {
-        return java.util.Collections.unmodifiableList(upgradeStructJobsReqs_);
-      }
-      public int getUpgradeStructJobsReqsCount() {
-        return upgradeStructJobsReqs_.size();
-      }
-      public int getUpgradeStructJobsReqs(int index) {
-        return upgradeStructJobsReqs_.get(index);
-      }
-      public Builder setUpgradeStructJobsReqs(
-          int index, int value) {
-        ensureUpgradeStructJobsReqsIsMutable();
-        upgradeStructJobsReqs_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addUpgradeStructJobsReqs(int value) {
-        ensureUpgradeStructJobsReqsIsMutable();
-        upgradeStructJobsReqs_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllUpgradeStructJobsReqs(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureUpgradeStructJobsReqsIsMutable();
-        super.addAll(values, upgradeStructJobsReqs_);
-        onChanged();
-        return this;
-      }
-      public Builder clearUpgradeStructJobsReqs() {
-        upgradeStructJobsReqs_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00002000);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 buildStructJobsReqs = 15;
-      private java.util.List<java.lang.Integer> buildStructJobsReqs_ = java.util.Collections.emptyList();;
-      private void ensureBuildStructJobsReqsIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
-          buildStructJobsReqs_ = new java.util.ArrayList<java.lang.Integer>(buildStructJobsReqs_);
-          bitField0_ |= 0x00004000;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getBuildStructJobsReqsList() {
-        return java.util.Collections.unmodifiableList(buildStructJobsReqs_);
-      }
-      public int getBuildStructJobsReqsCount() {
-        return buildStructJobsReqs_.size();
-      }
-      public int getBuildStructJobsReqs(int index) {
-        return buildStructJobsReqs_.get(index);
-      }
-      public Builder setBuildStructJobsReqs(
-          int index, int value) {
-        ensureBuildStructJobsReqsIsMutable();
-        buildStructJobsReqs_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addBuildStructJobsReqs(int value) {
-        ensureBuildStructJobsReqsIsMutable();
-        buildStructJobsReqs_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllBuildStructJobsReqs(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureBuildStructJobsReqsIsMutable();
-        super.addAll(values, buildStructJobsReqs_);
-        onChanged();
-        return this;
-      }
-      public Builder clearBuildStructJobsReqs() {
-        buildStructJobsReqs_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00004000);
         onChanged();
         return this;
       }
       
-      // repeated int32 monsterJobsReqs = 16;
-      private java.util.List<java.lang.Integer> monsterJobsReqs_ = java.util.Collections.emptyList();;
-      private void ensureMonsterJobsReqsIsMutable() {
-        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
-          monsterJobsReqs_ = new java.util.ArrayList<java.lang.Integer>(monsterJobsReqs_);
-          bitField0_ |= 0x00008000;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getMonsterJobsReqsList() {
-        return java.util.Collections.unmodifiableList(monsterJobsReqs_);
-      }
-      public int getMonsterJobsReqsCount() {
-        return monsterJobsReqs_.size();
-      }
-      public int getMonsterJobsReqs(int index) {
-        return monsterJobsReqs_.get(index);
-      }
-      public Builder setMonsterJobsReqs(
-          int index, int value) {
-        ensureMonsterJobsReqsIsMutable();
-        monsterJobsReqs_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addMonsterJobsReqs(int value) {
-        ensureMonsterJobsReqsIsMutable();
-        monsterJobsReqs_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllMonsterJobsReqs(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureMonsterJobsReqsIsMutable();
-        super.addAll(values, monsterJobsReqs_);
-        onChanged();
-        return this;
-      }
-      public Builder clearMonsterJobsReqs() {
-        monsterJobsReqs_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00008000);
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 coinRetrievalReq = 17;
-      private int coinRetrievalReq_ ;
-      public boolean hasCoinRetrievalReq() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
-      }
-      public int getCoinRetrievalReq() {
-        return coinRetrievalReq_;
-      }
-      public Builder setCoinRetrievalReq(int value) {
-        bitField0_ |= 0x00010000;
-        coinRetrievalReq_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCoinRetrievalReq() {
-        bitField0_ = (bitField0_ & ~0x00010000);
-        coinRetrievalReq_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional .com.lvl6.proto.SpecialQuestAction specialQuestActionReq = 18;
-      private com.lvl6.proto.QuestProto.SpecialQuestAction specialQuestActionReq_ = com.lvl6.proto.QuestProto.SpecialQuestAction.REQUEST_JOIN_CLAN;
-      public boolean hasSpecialQuestActionReq() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
-      }
-      public com.lvl6.proto.QuestProto.SpecialQuestAction getSpecialQuestActionReq() {
-        return specialQuestActionReq_;
-      }
-      public Builder setSpecialQuestActionReq(com.lvl6.proto.QuestProto.SpecialQuestAction value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00020000;
-        specialQuestActionReq_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearSpecialQuestActionReq() {
-        bitField0_ = (bitField0_ & ~0x00020000);
-        specialQuestActionReq_ = com.lvl6.proto.QuestProto.SpecialQuestAction.REQUEST_JOIN_CLAN;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 numComponentsForGood = 19;
-      private int numComponentsForGood_ ;
-      public boolean hasNumComponentsForGood() {
-        return ((bitField0_ & 0x00040000) == 0x00040000);
-      }
-      public int getNumComponentsForGood() {
-        return numComponentsForGood_;
-      }
-      public Builder setNumComponentsForGood(int value) {
-        bitField0_ |= 0x00040000;
-        numComponentsForGood_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearNumComponentsForGood() {
-        bitField0_ = (bitField0_ & ~0x00040000);
-        numComponentsForGood_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional string questGiverName = 20;
-      private java.lang.Object questGiverName_ = "";
-      public boolean hasQuestGiverName() {
-        return ((bitField0_ & 0x00080000) == 0x00080000);
-      }
-      public String getQuestGiverName() {
-        java.lang.Object ref = questGiverName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          questGiverName_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
-      }
-      public Builder setQuestGiverName(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00080000;
-        questGiverName_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearQuestGiverName() {
-        bitField0_ = (bitField0_ & ~0x00080000);
-        questGiverName_ = getDefaultInstance().getQuestGiverName();
-        onChanged();
-        return this;
-      }
-      void setQuestGiverName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00080000;
-        questGiverName_ = value;
-        onChanged();
-      }
-      
-      // optional string questGiverImageSuffix = 21;
+      // optional string questGiverImageSuffix = 16;
       private java.lang.Object questGiverImageSuffix_ = "";
       public boolean hasQuestGiverImageSuffix() {
-        return ((bitField0_ & 0x00100000) == 0x00100000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       public String getQuestGiverImageSuffix() {
         java.lang.Object ref = questGiverImageSuffix_;
@@ -2098,42 +1633,78 @@ public final class QuestProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00100000;
+  bitField0_ |= 0x00008000;
         questGiverImageSuffix_ = value;
         onChanged();
         return this;
       }
       public Builder clearQuestGiverImageSuffix() {
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         questGiverImageSuffix_ = getDefaultInstance().getQuestGiverImageSuffix();
         onChanged();
         return this;
       }
       void setQuestGiverImageSuffix(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00008000;
         questGiverImageSuffix_ = value;
         onChanged();
       }
       
-      // optional int32 priority = 22;
+      // optional int32 priority = 17;
       private int priority_ ;
       public boolean hasPriority() {
-        return ((bitField0_ & 0x00200000) == 0x00200000);
+        return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       public int getPriority() {
         return priority_;
       }
       public Builder setPriority(int value) {
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00010000;
         priority_ = value;
         onChanged();
         return this;
       }
       public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         priority_ = 0;
         onChanged();
         return this;
+      }
+      
+      // optional string carrotId = 18;
+      private java.lang.Object carrotId_ = "";
+      public boolean hasCarrotId() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      public String getCarrotId() {
+        java.lang.Object ref = carrotId_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          carrotId_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setCarrotId(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00020000;
+        carrotId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCarrotId() {
+        bitField0_ = (bitField0_ & ~0x00020000);
+        carrotId_ = getDefaultInstance().getCarrotId();
+        onChanged();
+        return this;
+      }
+      void setCarrotId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00020000;
+        carrotId_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullQuestProto)
@@ -3242,43 +2813,9 @@ public final class QuestProto {
     boolean hasIsComplete();
     boolean getIsComplete();
     
-    // repeated .com.lvl6.proto.MinimumUserBuildStructJobProto requiredBuildStructJobProgress = 5;
-    java.util.List<com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto> 
-        getRequiredBuildStructJobProgressList();
-    com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto getRequiredBuildStructJobProgress(int index);
-    int getRequiredBuildStructJobProgressCount();
-    java.util.List<? extends com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder> 
-        getRequiredBuildStructJobProgressOrBuilderList();
-    com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder getRequiredBuildStructJobProgressOrBuilder(
-        int index);
-    
-    // repeated .com.lvl6.proto.MinimumUserUpgradeStructJobProto requiredUpgradeStructJobProgress = 6;
-    java.util.List<com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto> 
-        getRequiredUpgradeStructJobProgressList();
-    com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto getRequiredUpgradeStructJobProgress(int index);
-    int getRequiredUpgradeStructJobProgressCount();
-    java.util.List<? extends com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder> 
-        getRequiredUpgradeStructJobProgressOrBuilderList();
-    com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder getRequiredUpgradeStructJobProgressOrBuilder(
-        int index);
-    
-    // repeated .com.lvl6.proto.MinimumUserQuestTaskProto requiredTasksProgress = 7;
-    java.util.List<com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto> 
-        getRequiredTasksProgressList();
-    com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto getRequiredTasksProgress(int index);
-    int getRequiredTasksProgressCount();
-    java.util.List<? extends com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder> 
-        getRequiredTasksProgressOrBuilderList();
-    com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder getRequiredTasksProgressOrBuilder(
-        int index);
-    
-    // optional int32 coinsRetrievedForReq = 8;
-    boolean hasCoinsRetrievedForReq();
-    int getCoinsRetrievedForReq();
-    
-    // optional int32 numComponentsComplete = 9;
-    boolean hasNumComponentsComplete();
-    int getNumComponentsComplete();
+    // optional int32 progress = 5;
+    boolean hasProgress();
+    int getProgress();
   }
   public static final class FullUserQuestDataLargeProto extends
       com.google.protobuf.GeneratedMessage
@@ -3349,87 +2886,14 @@ public final class QuestProto {
       return isComplete_;
     }
     
-    // repeated .com.lvl6.proto.MinimumUserBuildStructJobProto requiredBuildStructJobProgress = 5;
-    public static final int REQUIREDBUILDSTRUCTJOBPROGRESS_FIELD_NUMBER = 5;
-    private java.util.List<com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto> requiredBuildStructJobProgress_;
-    public java.util.List<com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto> getRequiredBuildStructJobProgressList() {
-      return requiredBuildStructJobProgress_;
-    }
-    public java.util.List<? extends com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder> 
-        getRequiredBuildStructJobProgressOrBuilderList() {
-      return requiredBuildStructJobProgress_;
-    }
-    public int getRequiredBuildStructJobProgressCount() {
-      return requiredBuildStructJobProgress_.size();
-    }
-    public com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto getRequiredBuildStructJobProgress(int index) {
-      return requiredBuildStructJobProgress_.get(index);
-    }
-    public com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder getRequiredBuildStructJobProgressOrBuilder(
-        int index) {
-      return requiredBuildStructJobProgress_.get(index);
-    }
-    
-    // repeated .com.lvl6.proto.MinimumUserUpgradeStructJobProto requiredUpgradeStructJobProgress = 6;
-    public static final int REQUIREDUPGRADESTRUCTJOBPROGRESS_FIELD_NUMBER = 6;
-    private java.util.List<com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto> requiredUpgradeStructJobProgress_;
-    public java.util.List<com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto> getRequiredUpgradeStructJobProgressList() {
-      return requiredUpgradeStructJobProgress_;
-    }
-    public java.util.List<? extends com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder> 
-        getRequiredUpgradeStructJobProgressOrBuilderList() {
-      return requiredUpgradeStructJobProgress_;
-    }
-    public int getRequiredUpgradeStructJobProgressCount() {
-      return requiredUpgradeStructJobProgress_.size();
-    }
-    public com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto getRequiredUpgradeStructJobProgress(int index) {
-      return requiredUpgradeStructJobProgress_.get(index);
-    }
-    public com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder getRequiredUpgradeStructJobProgressOrBuilder(
-        int index) {
-      return requiredUpgradeStructJobProgress_.get(index);
-    }
-    
-    // repeated .com.lvl6.proto.MinimumUserQuestTaskProto requiredTasksProgress = 7;
-    public static final int REQUIREDTASKSPROGRESS_FIELD_NUMBER = 7;
-    private java.util.List<com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto> requiredTasksProgress_;
-    public java.util.List<com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto> getRequiredTasksProgressList() {
-      return requiredTasksProgress_;
-    }
-    public java.util.List<? extends com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder> 
-        getRequiredTasksProgressOrBuilderList() {
-      return requiredTasksProgress_;
-    }
-    public int getRequiredTasksProgressCount() {
-      return requiredTasksProgress_.size();
-    }
-    public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto getRequiredTasksProgress(int index) {
-      return requiredTasksProgress_.get(index);
-    }
-    public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder getRequiredTasksProgressOrBuilder(
-        int index) {
-      return requiredTasksProgress_.get(index);
-    }
-    
-    // optional int32 coinsRetrievedForReq = 8;
-    public static final int COINSRETRIEVEDFORREQ_FIELD_NUMBER = 8;
-    private int coinsRetrievedForReq_;
-    public boolean hasCoinsRetrievedForReq() {
+    // optional int32 progress = 5;
+    public static final int PROGRESS_FIELD_NUMBER = 5;
+    private int progress_;
+    public boolean hasProgress() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
-    public int getCoinsRetrievedForReq() {
-      return coinsRetrievedForReq_;
-    }
-    
-    // optional int32 numComponentsComplete = 9;
-    public static final int NUMCOMPONENTSCOMPLETE_FIELD_NUMBER = 9;
-    private int numComponentsComplete_;
-    public boolean hasNumComponentsComplete() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    public int getNumComponentsComplete() {
-      return numComponentsComplete_;
+    public int getProgress() {
+      return progress_;
     }
     
     private void initFields() {
@@ -3437,11 +2901,7 @@ public final class QuestProto {
       questId_ = 0;
       isRedeemed_ = false;
       isComplete_ = false;
-      requiredBuildStructJobProgress_ = java.util.Collections.emptyList();
-      requiredUpgradeStructJobProgress_ = java.util.Collections.emptyList();
-      requiredTasksProgress_ = java.util.Collections.emptyList();
-      coinsRetrievedForReq_ = 0;
-      numComponentsComplete_ = 0;
+      progress_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3467,20 +2927,8 @@ public final class QuestProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBool(4, isComplete_);
       }
-      for (int i = 0; i < requiredBuildStructJobProgress_.size(); i++) {
-        output.writeMessage(5, requiredBuildStructJobProgress_.get(i));
-      }
-      for (int i = 0; i < requiredUpgradeStructJobProgress_.size(); i++) {
-        output.writeMessage(6, requiredUpgradeStructJobProgress_.get(i));
-      }
-      for (int i = 0; i < requiredTasksProgress_.size(); i++) {
-        output.writeMessage(7, requiredTasksProgress_.get(i));
-      }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(8, coinsRetrievedForReq_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(9, numComponentsComplete_);
+        output.writeInt32(5, progress_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3507,25 +2955,9 @@ public final class QuestProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, isComplete_);
       }
-      for (int i = 0; i < requiredBuildStructJobProgress_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, requiredBuildStructJobProgress_.get(i));
-      }
-      for (int i = 0; i < requiredUpgradeStructJobProgress_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, requiredUpgradeStructJobProgress_.get(i));
-      }
-      for (int i = 0; i < requiredTasksProgress_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, requiredTasksProgress_.get(i));
-      }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, coinsRetrievedForReq_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, numComponentsComplete_);
+          .computeInt32Size(5, progress_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3643,9 +3075,6 @@ public final class QuestProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getRequiredBuildStructJobProgressFieldBuilder();
-          getRequiredUpgradeStructJobProgressFieldBuilder();
-          getRequiredTasksProgressFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3662,28 +3091,8 @@ public final class QuestProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         isComplete_ = false;
         bitField0_ = (bitField0_ & ~0x00000008);
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          requiredBuildStructJobProgress_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-        } else {
-          requiredBuildStructJobProgressBuilder_.clear();
-        }
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          requiredUpgradeStructJobProgress_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.clear();
-        }
-        if (requiredTasksProgressBuilder_ == null) {
-          requiredTasksProgress_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
-        } else {
-          requiredTasksProgressBuilder_.clear();
-        }
-        coinsRetrievedForReq_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        numComponentsComplete_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        progress_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -3738,41 +3147,10 @@ public final class QuestProto {
           to_bitField0_ |= 0x00000008;
         }
         result.isComplete_ = isComplete_;
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            requiredBuildStructJobProgress_ = java.util.Collections.unmodifiableList(requiredBuildStructJobProgress_);
-            bitField0_ = (bitField0_ & ~0x00000010);
-          }
-          result.requiredBuildStructJobProgress_ = requiredBuildStructJobProgress_;
-        } else {
-          result.requiredBuildStructJobProgress_ = requiredBuildStructJobProgressBuilder_.build();
-        }
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
-            requiredUpgradeStructJobProgress_ = java.util.Collections.unmodifiableList(requiredUpgradeStructJobProgress_);
-            bitField0_ = (bitField0_ & ~0x00000020);
-          }
-          result.requiredUpgradeStructJobProgress_ = requiredUpgradeStructJobProgress_;
-        } else {
-          result.requiredUpgradeStructJobProgress_ = requiredUpgradeStructJobProgressBuilder_.build();
-        }
-        if (requiredTasksProgressBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040)) {
-            requiredTasksProgress_ = java.util.Collections.unmodifiableList(requiredTasksProgress_);
-            bitField0_ = (bitField0_ & ~0x00000040);
-          }
-          result.requiredTasksProgress_ = requiredTasksProgress_;
-        } else {
-          result.requiredTasksProgress_ = requiredTasksProgressBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.coinsRetrievedForReq_ = coinsRetrievedForReq_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.numComponentsComplete_ = numComponentsComplete_;
+        result.progress_ = progress_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3801,89 +3179,8 @@ public final class QuestProto {
         if (other.hasIsComplete()) {
           setIsComplete(other.getIsComplete());
         }
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          if (!other.requiredBuildStructJobProgress_.isEmpty()) {
-            if (requiredBuildStructJobProgress_.isEmpty()) {
-              requiredBuildStructJobProgress_ = other.requiredBuildStructJobProgress_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-            } else {
-              ensureRequiredBuildStructJobProgressIsMutable();
-              requiredBuildStructJobProgress_.addAll(other.requiredBuildStructJobProgress_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.requiredBuildStructJobProgress_.isEmpty()) {
-            if (requiredBuildStructJobProgressBuilder_.isEmpty()) {
-              requiredBuildStructJobProgressBuilder_.dispose();
-              requiredBuildStructJobProgressBuilder_ = null;
-              requiredBuildStructJobProgress_ = other.requiredBuildStructJobProgress_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-              requiredBuildStructJobProgressBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getRequiredBuildStructJobProgressFieldBuilder() : null;
-            } else {
-              requiredBuildStructJobProgressBuilder_.addAllMessages(other.requiredBuildStructJobProgress_);
-            }
-          }
-        }
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          if (!other.requiredUpgradeStructJobProgress_.isEmpty()) {
-            if (requiredUpgradeStructJobProgress_.isEmpty()) {
-              requiredUpgradeStructJobProgress_ = other.requiredUpgradeStructJobProgress_;
-              bitField0_ = (bitField0_ & ~0x00000020);
-            } else {
-              ensureRequiredUpgradeStructJobProgressIsMutable();
-              requiredUpgradeStructJobProgress_.addAll(other.requiredUpgradeStructJobProgress_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.requiredUpgradeStructJobProgress_.isEmpty()) {
-            if (requiredUpgradeStructJobProgressBuilder_.isEmpty()) {
-              requiredUpgradeStructJobProgressBuilder_.dispose();
-              requiredUpgradeStructJobProgressBuilder_ = null;
-              requiredUpgradeStructJobProgress_ = other.requiredUpgradeStructJobProgress_;
-              bitField0_ = (bitField0_ & ~0x00000020);
-              requiredUpgradeStructJobProgressBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getRequiredUpgradeStructJobProgressFieldBuilder() : null;
-            } else {
-              requiredUpgradeStructJobProgressBuilder_.addAllMessages(other.requiredUpgradeStructJobProgress_);
-            }
-          }
-        }
-        if (requiredTasksProgressBuilder_ == null) {
-          if (!other.requiredTasksProgress_.isEmpty()) {
-            if (requiredTasksProgress_.isEmpty()) {
-              requiredTasksProgress_ = other.requiredTasksProgress_;
-              bitField0_ = (bitField0_ & ~0x00000040);
-            } else {
-              ensureRequiredTasksProgressIsMutable();
-              requiredTasksProgress_.addAll(other.requiredTasksProgress_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.requiredTasksProgress_.isEmpty()) {
-            if (requiredTasksProgressBuilder_.isEmpty()) {
-              requiredTasksProgressBuilder_.dispose();
-              requiredTasksProgressBuilder_ = null;
-              requiredTasksProgress_ = other.requiredTasksProgress_;
-              bitField0_ = (bitField0_ & ~0x00000040);
-              requiredTasksProgressBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getRequiredTasksProgressFieldBuilder() : null;
-            } else {
-              requiredTasksProgressBuilder_.addAllMessages(other.requiredTasksProgress_);
-            }
-          }
-        }
-        if (other.hasCoinsRetrievedForReq()) {
-          setCoinsRetrievedForReq(other.getCoinsRetrievedForReq());
-        }
-        if (other.hasNumComponentsComplete()) {
-          setNumComponentsComplete(other.getNumComponentsComplete());
+        if (other.hasProgress()) {
+          setProgress(other.getProgress());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3936,32 +3233,9 @@ public final class QuestProto {
               isComplete_ = input.readBool();
               break;
             }
-            case 42: {
-              com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder subBuilder = com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addRequiredBuildStructJobProgress(subBuilder.buildPartial());
-              break;
-            }
-            case 50: {
-              com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder subBuilder = com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addRequiredUpgradeStructJobProgress(subBuilder.buildPartial());
-              break;
-            }
-            case 58: {
-              com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder subBuilder = com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addRequiredTasksProgress(subBuilder.buildPartial());
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              coinsRetrievedForReq_ = input.readInt32();
-              break;
-            }
-            case 72: {
-              bitField0_ |= 0x00000100;
-              numComponentsComplete_ = input.readInt32();
+            case 40: {
+              bitField0_ |= 0x00000010;
+              progress_ = input.readInt32();
               break;
             }
           }
@@ -4054,602 +3328,23 @@ public final class QuestProto {
         return this;
       }
       
-      // repeated .com.lvl6.proto.MinimumUserBuildStructJobProto requiredBuildStructJobProgress = 5;
-      private java.util.List<com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto> requiredBuildStructJobProgress_ =
-        java.util.Collections.emptyList();
-      private void ensureRequiredBuildStructJobProgressIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          requiredBuildStructJobProgress_ = new java.util.ArrayList<com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto>(requiredBuildStructJobProgress_);
-          bitField0_ |= 0x00000010;
-         }
+      // optional int32 progress = 5;
+      private int progress_ ;
+      public boolean hasProgress() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder> requiredBuildStructJobProgressBuilder_;
-      
-      public java.util.List<com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto> getRequiredBuildStructJobProgressList() {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(requiredBuildStructJobProgress_);
-        } else {
-          return requiredBuildStructJobProgressBuilder_.getMessageList();
-        }
+      public int getProgress() {
+        return progress_;
       }
-      public int getRequiredBuildStructJobProgressCount() {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          return requiredBuildStructJobProgress_.size();
-        } else {
-          return requiredBuildStructJobProgressBuilder_.getCount();
-        }
-      }
-      public com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto getRequiredBuildStructJobProgress(int index) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          return requiredBuildStructJobProgress_.get(index);
-        } else {
-          return requiredBuildStructJobProgressBuilder_.getMessage(index);
-        }
-      }
-      public Builder setRequiredBuildStructJobProgress(
-          int index, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto value) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredBuildStructJobProgressIsMutable();
-          requiredBuildStructJobProgress_.set(index, value);
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      public Builder setRequiredBuildStructJobProgress(
-          int index, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder builderForValue) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          ensureRequiredBuildStructJobProgressIsMutable();
-          requiredBuildStructJobProgress_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addRequiredBuildStructJobProgress(com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto value) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredBuildStructJobProgressIsMutable();
-          requiredBuildStructJobProgress_.add(value);
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addRequiredBuildStructJobProgress(
-          int index, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto value) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredBuildStructJobProgressIsMutable();
-          requiredBuildStructJobProgress_.add(index, value);
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addRequiredBuildStructJobProgress(
-          com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder builderForValue) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          ensureRequiredBuildStructJobProgressIsMutable();
-          requiredBuildStructJobProgress_.add(builderForValue.build());
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addRequiredBuildStructJobProgress(
-          int index, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder builderForValue) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          ensureRequiredBuildStructJobProgressIsMutable();
-          requiredBuildStructJobProgress_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllRequiredBuildStructJobProgress(
-          java.lang.Iterable<? extends com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto> values) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          ensureRequiredBuildStructJobProgressIsMutable();
-          super.addAll(values, requiredBuildStructJobProgress_);
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      public Builder clearRequiredBuildStructJobProgress() {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          requiredBuildStructJobProgress_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removeRequiredBuildStructJobProgress(int index) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          ensureRequiredBuildStructJobProgressIsMutable();
-          requiredBuildStructJobProgress_.remove(index);
-          onChanged();
-        } else {
-          requiredBuildStructJobProgressBuilder_.remove(index);
-        }
-        return this;
-      }
-      public com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder getRequiredBuildStructJobProgressBuilder(
-          int index) {
-        return getRequiredBuildStructJobProgressFieldBuilder().getBuilder(index);
-      }
-      public com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder getRequiredBuildStructJobProgressOrBuilder(
-          int index) {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          return requiredBuildStructJobProgress_.get(index);  } else {
-          return requiredBuildStructJobProgressBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder> 
-           getRequiredBuildStructJobProgressOrBuilderList() {
-        if (requiredBuildStructJobProgressBuilder_ != null) {
-          return requiredBuildStructJobProgressBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(requiredBuildStructJobProgress_);
-        }
-      }
-      public com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder addRequiredBuildStructJobProgressBuilder() {
-        return getRequiredBuildStructJobProgressFieldBuilder().addBuilder(
-            com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.getDefaultInstance());
-      }
-      public com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder addRequiredBuildStructJobProgressBuilder(
-          int index) {
-        return getRequiredBuildStructJobProgressFieldBuilder().addBuilder(
-            index, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.getDefaultInstance());
-      }
-      public java.util.List<com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder> 
-           getRequiredBuildStructJobProgressBuilderList() {
-        return getRequiredBuildStructJobProgressFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder> 
-          getRequiredBuildStructJobProgressFieldBuilder() {
-        if (requiredBuildStructJobProgressBuilder_ == null) {
-          requiredBuildStructJobProgressBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto.Builder, com.lvl6.proto.JobProto.MinimumUserBuildStructJobProtoOrBuilder>(
-                  requiredBuildStructJobProgress_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
-                  getParentForChildren(),
-                  isClean());
-          requiredBuildStructJobProgress_ = null;
-        }
-        return requiredBuildStructJobProgressBuilder_;
-      }
-      
-      // repeated .com.lvl6.proto.MinimumUserUpgradeStructJobProto requiredUpgradeStructJobProgress = 6;
-      private java.util.List<com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto> requiredUpgradeStructJobProgress_ =
-        java.util.Collections.emptyList();
-      private void ensureRequiredUpgradeStructJobProgressIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          requiredUpgradeStructJobProgress_ = new java.util.ArrayList<com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto>(requiredUpgradeStructJobProgress_);
-          bitField0_ |= 0x00000020;
-         }
-      }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder> requiredUpgradeStructJobProgressBuilder_;
-      
-      public java.util.List<com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto> getRequiredUpgradeStructJobProgressList() {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(requiredUpgradeStructJobProgress_);
-        } else {
-          return requiredUpgradeStructJobProgressBuilder_.getMessageList();
-        }
-      }
-      public int getRequiredUpgradeStructJobProgressCount() {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          return requiredUpgradeStructJobProgress_.size();
-        } else {
-          return requiredUpgradeStructJobProgressBuilder_.getCount();
-        }
-      }
-      public com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto getRequiredUpgradeStructJobProgress(int index) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          return requiredUpgradeStructJobProgress_.get(index);
-        } else {
-          return requiredUpgradeStructJobProgressBuilder_.getMessage(index);
-        }
-      }
-      public Builder setRequiredUpgradeStructJobProgress(
-          int index, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto value) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredUpgradeStructJobProgressIsMutable();
-          requiredUpgradeStructJobProgress_.set(index, value);
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      public Builder setRequiredUpgradeStructJobProgress(
-          int index, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder builderForValue) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          ensureRequiredUpgradeStructJobProgressIsMutable();
-          requiredUpgradeStructJobProgress_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addRequiredUpgradeStructJobProgress(com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto value) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredUpgradeStructJobProgressIsMutable();
-          requiredUpgradeStructJobProgress_.add(value);
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addRequiredUpgradeStructJobProgress(
-          int index, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto value) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredUpgradeStructJobProgressIsMutable();
-          requiredUpgradeStructJobProgress_.add(index, value);
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addRequiredUpgradeStructJobProgress(
-          com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder builderForValue) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          ensureRequiredUpgradeStructJobProgressIsMutable();
-          requiredUpgradeStructJobProgress_.add(builderForValue.build());
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addRequiredUpgradeStructJobProgress(
-          int index, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder builderForValue) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          ensureRequiredUpgradeStructJobProgressIsMutable();
-          requiredUpgradeStructJobProgress_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllRequiredUpgradeStructJobProgress(
-          java.lang.Iterable<? extends com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto> values) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          ensureRequiredUpgradeStructJobProgressIsMutable();
-          super.addAll(values, requiredUpgradeStructJobProgress_);
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      public Builder clearRequiredUpgradeStructJobProgress() {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          requiredUpgradeStructJobProgress_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removeRequiredUpgradeStructJobProgress(int index) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          ensureRequiredUpgradeStructJobProgressIsMutable();
-          requiredUpgradeStructJobProgress_.remove(index);
-          onChanged();
-        } else {
-          requiredUpgradeStructJobProgressBuilder_.remove(index);
-        }
-        return this;
-      }
-      public com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder getRequiredUpgradeStructJobProgressBuilder(
-          int index) {
-        return getRequiredUpgradeStructJobProgressFieldBuilder().getBuilder(index);
-      }
-      public com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder getRequiredUpgradeStructJobProgressOrBuilder(
-          int index) {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          return requiredUpgradeStructJobProgress_.get(index);  } else {
-          return requiredUpgradeStructJobProgressBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder> 
-           getRequiredUpgradeStructJobProgressOrBuilderList() {
-        if (requiredUpgradeStructJobProgressBuilder_ != null) {
-          return requiredUpgradeStructJobProgressBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(requiredUpgradeStructJobProgress_);
-        }
-      }
-      public com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder addRequiredUpgradeStructJobProgressBuilder() {
-        return getRequiredUpgradeStructJobProgressFieldBuilder().addBuilder(
-            com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.getDefaultInstance());
-      }
-      public com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder addRequiredUpgradeStructJobProgressBuilder(
-          int index) {
-        return getRequiredUpgradeStructJobProgressFieldBuilder().addBuilder(
-            index, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.getDefaultInstance());
-      }
-      public java.util.List<com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder> 
-           getRequiredUpgradeStructJobProgressBuilderList() {
-        return getRequiredUpgradeStructJobProgressFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder> 
-          getRequiredUpgradeStructJobProgressFieldBuilder() {
-        if (requiredUpgradeStructJobProgressBuilder_ == null) {
-          requiredUpgradeStructJobProgressBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto.Builder, com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProtoOrBuilder>(
-                  requiredUpgradeStructJobProgress_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
-                  getParentForChildren(),
-                  isClean());
-          requiredUpgradeStructJobProgress_ = null;
-        }
-        return requiredUpgradeStructJobProgressBuilder_;
-      }
-      
-      // repeated .com.lvl6.proto.MinimumUserQuestTaskProto requiredTasksProgress = 7;
-      private java.util.List<com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto> requiredTasksProgress_ =
-        java.util.Collections.emptyList();
-      private void ensureRequiredTasksProgressIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          requiredTasksProgress_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto>(requiredTasksProgress_);
-          bitField0_ |= 0x00000040;
-         }
-      }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder> requiredTasksProgressBuilder_;
-      
-      public java.util.List<com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto> getRequiredTasksProgressList() {
-        if (requiredTasksProgressBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(requiredTasksProgress_);
-        } else {
-          return requiredTasksProgressBuilder_.getMessageList();
-        }
-      }
-      public int getRequiredTasksProgressCount() {
-        if (requiredTasksProgressBuilder_ == null) {
-          return requiredTasksProgress_.size();
-        } else {
-          return requiredTasksProgressBuilder_.getCount();
-        }
-      }
-      public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto getRequiredTasksProgress(int index) {
-        if (requiredTasksProgressBuilder_ == null) {
-          return requiredTasksProgress_.get(index);
-        } else {
-          return requiredTasksProgressBuilder_.getMessage(index);
-        }
-      }
-      public Builder setRequiredTasksProgress(
-          int index, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto value) {
-        if (requiredTasksProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredTasksProgressIsMutable();
-          requiredTasksProgress_.set(index, value);
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      public Builder setRequiredTasksProgress(
-          int index, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder builderForValue) {
-        if (requiredTasksProgressBuilder_ == null) {
-          ensureRequiredTasksProgressIsMutable();
-          requiredTasksProgress_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addRequiredTasksProgress(com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto value) {
-        if (requiredTasksProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredTasksProgressIsMutable();
-          requiredTasksProgress_.add(value);
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addRequiredTasksProgress(
-          int index, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto value) {
-        if (requiredTasksProgressBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRequiredTasksProgressIsMutable();
-          requiredTasksProgress_.add(index, value);
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addRequiredTasksProgress(
-          com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder builderForValue) {
-        if (requiredTasksProgressBuilder_ == null) {
-          ensureRequiredTasksProgressIsMutable();
-          requiredTasksProgress_.add(builderForValue.build());
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addRequiredTasksProgress(
-          int index, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder builderForValue) {
-        if (requiredTasksProgressBuilder_ == null) {
-          ensureRequiredTasksProgressIsMutable();
-          requiredTasksProgress_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllRequiredTasksProgress(
-          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto> values) {
-        if (requiredTasksProgressBuilder_ == null) {
-          ensureRequiredTasksProgressIsMutable();
-          super.addAll(values, requiredTasksProgress_);
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      public Builder clearRequiredTasksProgress() {
-        if (requiredTasksProgressBuilder_ == null) {
-          requiredTasksProgress_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removeRequiredTasksProgress(int index) {
-        if (requiredTasksProgressBuilder_ == null) {
-          ensureRequiredTasksProgressIsMutable();
-          requiredTasksProgress_.remove(index);
-          onChanged();
-        } else {
-          requiredTasksProgressBuilder_.remove(index);
-        }
-        return this;
-      }
-      public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder getRequiredTasksProgressBuilder(
-          int index) {
-        return getRequiredTasksProgressFieldBuilder().getBuilder(index);
-      }
-      public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder getRequiredTasksProgressOrBuilder(
-          int index) {
-        if (requiredTasksProgressBuilder_ == null) {
-          return requiredTasksProgress_.get(index);  } else {
-          return requiredTasksProgressBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder> 
-           getRequiredTasksProgressOrBuilderList() {
-        if (requiredTasksProgressBuilder_ != null) {
-          return requiredTasksProgressBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(requiredTasksProgress_);
-        }
-      }
-      public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder addRequiredTasksProgressBuilder() {
-        return getRequiredTasksProgressFieldBuilder().addBuilder(
-            com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.getDefaultInstance());
-      }
-      public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder addRequiredTasksProgressBuilder(
-          int index) {
-        return getRequiredTasksProgressFieldBuilder().addBuilder(
-            index, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.getDefaultInstance());
-      }
-      public java.util.List<com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder> 
-           getRequiredTasksProgressBuilderList() {
-        return getRequiredTasksProgressFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder> 
-          getRequiredTasksProgressFieldBuilder() {
-        if (requiredTasksProgressBuilder_ == null) {
-          requiredTasksProgressBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder, com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder>(
-                  requiredTasksProgress_,
-                  ((bitField0_ & 0x00000040) == 0x00000040),
-                  getParentForChildren(),
-                  isClean());
-          requiredTasksProgress_ = null;
-        }
-        return requiredTasksProgressBuilder_;
-      }
-      
-      // optional int32 coinsRetrievedForReq = 8;
-      private int coinsRetrievedForReq_ ;
-      public boolean hasCoinsRetrievedForReq() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      public int getCoinsRetrievedForReq() {
-        return coinsRetrievedForReq_;
-      }
-      public Builder setCoinsRetrievedForReq(int value) {
-        bitField0_ |= 0x00000080;
-        coinsRetrievedForReq_ = value;
+      public Builder setProgress(int value) {
+        bitField0_ |= 0x00000010;
+        progress_ = value;
         onChanged();
         return this;
       }
-      public Builder clearCoinsRetrievedForReq() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        coinsRetrievedForReq_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 numComponentsComplete = 9;
-      private int numComponentsComplete_ ;
-      public boolean hasNumComponentsComplete() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
-      }
-      public int getNumComponentsComplete() {
-        return numComponentsComplete_;
-      }
-      public Builder setNumComponentsComplete(int value) {
-        bitField0_ |= 0x00000100;
-        numComponentsComplete_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearNumComponentsComplete() {
-        bitField0_ = (bitField0_ & ~0x00000100);
-        numComponentsComplete_ = 0;
+      public Builder clearProgress() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        progress_ = 0;
         onChanged();
         return this;
       }
@@ -4663,515 +3358,6 @@ public final class QuestProto {
     }
     
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserQuestDataLargeProto)
-  }
-  
-  public interface MinimumUserQuestTaskProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional int32 userId = 1;
-    boolean hasUserId();
-    int getUserId();
-    
-    // optional int32 questId = 2;
-    boolean hasQuestId();
-    int getQuestId();
-    
-    // optional int32 taskId = 3;
-    boolean hasTaskId();
-    int getTaskId();
-    
-    // optional int32 numTimesActed = 4;
-    boolean hasNumTimesActed();
-    int getNumTimesActed();
-  }
-  public static final class MinimumUserQuestTaskProto extends
-      com.google.protobuf.GeneratedMessage
-      implements MinimumUserQuestTaskProtoOrBuilder {
-    // Use MinimumUserQuestTaskProto.newBuilder() to construct.
-    private MinimumUserQuestTaskProto(Builder builder) {
-      super(builder);
-    }
-    private MinimumUserQuestTaskProto(boolean noInit) {}
-    
-    private static final MinimumUserQuestTaskProto defaultInstance;
-    public static MinimumUserQuestTaskProto getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public MinimumUserQuestTaskProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // optional int32 userId = 1;
-    public static final int USERID_FIELD_NUMBER = 1;
-    private int userId_;
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public int getUserId() {
-      return userId_;
-    }
-    
-    // optional int32 questId = 2;
-    public static final int QUESTID_FIELD_NUMBER = 2;
-    private int questId_;
-    public boolean hasQuestId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public int getQuestId() {
-      return questId_;
-    }
-    
-    // optional int32 taskId = 3;
-    public static final int TASKID_FIELD_NUMBER = 3;
-    private int taskId_;
-    public boolean hasTaskId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public int getTaskId() {
-      return taskId_;
-    }
-    
-    // optional int32 numTimesActed = 4;
-    public static final int NUMTIMESACTED_FIELD_NUMBER = 4;
-    private int numTimesActed_;
-    public boolean hasNumTimesActed() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public int getNumTimesActed() {
-      return numTimesActed_;
-    }
-    
-    private void initFields() {
-      userId_ = 0;
-      questId_ = 0;
-      taskId_ = 0;
-      numTimesActed_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, questId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, taskId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, numTimesActed_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, userId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, questId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, taskId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, numTimesActed_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-    
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.QuestProto.MinimumUserQuestTaskProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_fieldAccessorTable;
-      }
-      
-      // Construct using com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        userId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        questId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        taskId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        numTimesActed_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.getDescriptor();
-      }
-      
-      public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto getDefaultInstanceForType() {
-        return com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.getDefaultInstance();
-      }
-      
-      public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto build() {
-        com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto buildPartial() {
-        com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto result = new com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.userId_ = userId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.questId_ = questId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.taskId_ = taskId_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.numTimesActed_ = numTimesActed_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto) {
-          return mergeFrom((com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto other) {
-        if (other == com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.getDefaultInstance()) return this;
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        if (other.hasQuestId()) {
-          setQuestId(other.getQuestId());
-        }
-        if (other.hasTaskId()) {
-          setTaskId(other.getTaskId());
-        }
-        if (other.hasNumTimesActed()) {
-          setNumTimesActed(other.getNumTimesActed());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              userId_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              questId_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              taskId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              numTimesActed_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      }
-      
-      private int bitField0_;
-      
-      // optional int32 userId = 1;
-      private int userId_ ;
-      public boolean hasUserId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public int getUserId() {
-        return userId_;
-      }
-      public Builder setUserId(int value) {
-        bitField0_ |= 0x00000001;
-        userId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearUserId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 questId = 2;
-      private int questId_ ;
-      public boolean hasQuestId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public int getQuestId() {
-        return questId_;
-      }
-      public Builder setQuestId(int value) {
-        bitField0_ |= 0x00000002;
-        questId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearQuestId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        questId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 taskId = 3;
-      private int taskId_ ;
-      public boolean hasTaskId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public int getTaskId() {
-        return taskId_;
-      }
-      public Builder setTaskId(int value) {
-        bitField0_ |= 0x00000004;
-        taskId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearTaskId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        taskId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 numTimesActed = 4;
-      private int numTimesActed_ ;
-      public boolean hasNumTimesActed() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public int getNumTimesActed() {
-        return numTimesActed_;
-      }
-      public Builder setNumTimesActed(int value) {
-        bitField0_ |= 0x00000008;
-        numTimesActed_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearNumTimesActed() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        numTimesActed_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MinimumUserQuestTaskProto)
-    }
-    
-    static {
-      defaultInstance = new MinimumUserQuestTaskProto(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserQuestTaskProto)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -5194,11 +3380,6 @@ public final class QuestProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -5209,46 +3390,33 @@ public final class QuestProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Quest.proto\022\016com.lvl6.proto\032\tJob.proto" +
-      "\"\332\004\n\016FullQuestProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006" +
+      "\"\256\004\n\016FullQuestProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006" +
       "cityId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023\n\013descriptio" +
       "n\030\004 \001(\t\022\024\n\014doneResponse\030\005 \001(\t\0225\n\016acceptD" +
       "ialogue\030\006 \001(\0132\035.com.lvl6.proto.DialogueP" +
-      "roto\022\032\n\022assetNumWithinCity\030\007 \001(\005\022\023\n\013coin" +
-      "sGained\030\010 \001(\005\022\026\n\016diamondsGained\030\t \001(\005\022\021\n" +
-      "\texpGained\030\n \001(\005\022\021\n\tmonsterId\030\013 \001(\005\022\035\n\025q" +
-      "uestsRequiredForThis\030\014 \003(\005\022\020\n\010taskReqs\030\r" +
-      " \003(\005\022\035\n\025upgradeStructJobsReqs\030\016 \003(\005\022\033\n\023b",
-      "uildStructJobsReqs\030\017 \003(\005\022\027\n\017monsterJobsR" +
-      "eqs\030\020 \003(\005\022\030\n\020coinRetrievalReq\030\021 \001(\005\022A\n\025s" +
-      "pecialQuestActionReq\030\022 \001(\0162\".com.lvl6.pr" +
-      "oto.SpecialQuestAction\022\034\n\024numComponentsF" +
-      "orGood\030\023 \001(\005\022\026\n\016questGiverName\030\024 \001(\t\022\035\n\025" +
-      "questGiverImageSuffix\030\025 \001(\t\022\020\n\010priority\030" +
-      "\026 \001(\005\"\351\002\n\rDialogueProto\022G\n\rspeechSegment" +
-      "\030\001 \003(\01320.com.lvl6.proto.DialogueProto.Sp" +
-      "eechSegmentProto\032\216\002\n\022SpeechSegmentProto\022" +
-      "Q\n\007speaker\030\001 \001(\0162@.com.lvl6.proto.Dialog",
-      "ueProto.SpeechSegmentProto.DialogueSpeak" +
-      "er\022\023\n\013speakerText\030\002 \001(\t\"\217\001\n\017DialogueSpea" +
-      "ker\022\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTORIAL_GIRL\020\002\022" +
-      "\020\n\014QUESTGIVER_1\020\003\022\020\n\014QUESTGIVER_2\020\004\022\020\n\014Q" +
-      "UESTGIVER_3\020\005\022\020\n\014QUESTGIVER_4\020\006\022\020\n\014QUEST" +
-      "GIVER_5\020\007\"\241\003\n\033FullUserQuestDataLargeProt" +
-      "o\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nis" +
-      "Redeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022V\n\036re" +
-      "quiredBuildStructJobProgress\030\005 \003(\0132..com" +
-      ".lvl6.proto.MinimumUserBuildStructJobPro",
-      "to\022Z\n requiredUpgradeStructJobProgress\030\006" +
-      " \003(\01320.com.lvl6.proto.MinimumUserUpgrade" +
-      "StructJobProto\022H\n\025requiredTasksProgress\030" +
-      "\007 \003(\0132).com.lvl6.proto.MinimumUserQuestT" +
-      "askProto\022\034\n\024coinsRetrievedForReq\030\010 \001(\005\022\035" +
-      "\n\025numComponentsComplete\030\t \001(\005\"c\n\031Minimum" +
-      "UserQuestTaskProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007qu" +
-      "estId\030\002 \001(\005\022\016\n\006taskId\030\003 \001(\005\022\025\n\rnumTimesA" +
-      "cted\030\004 \001(\005*A\n\022SpecialQuestAction\022\025\n\021REQU" +
-      "EST_JOIN_CLAN\020\001\022\024\n\020EVOLVE_A_MONSTER\020\002B\014B",
-      "\nQuestProto"
+      "roto\022;\n\tquestType\030\007 \001(\0162(.com.lvl6.proto" +
+      ".FullQuestProto.QuestType\022\024\n\014staticDataI" +
+      "d\030\010 \001(\005\022\020\n\010quantity\030\t \001(\005\022\022\n\ncoinReward\030" +
+      "\n \001(\005\022\025\n\rdiamondReward\030\013 \001(\005\022\021\n\texpRewar" +
+      "d\030\014 \001(\005\022\027\n\017monsterIdReward\030\r \001(\005\022\031\n\021isCo",
+      "mpleteMonster\030\016 \001(\010\022\035\n\025questsRequiredFor" +
+      "This\030\017 \003(\005\022\035\n\025questGiverImageSuffix\030\020 \001(" +
+      "\t\022\020\n\010priority\030\021 \001(\005\022\020\n\010carrotId\030\022 \001(\t\"R\n" +
+      "\tQuestType\022\023\n\017COLLECT_MONSTER\020\001\022\036\n\032COLLE" +
+      "CT_AND_DONATE_MONSTER\020\002\022\020\n\014KILL_MONSTER\020" +
+      "\003\"\351\002\n\rDialogueProto\022G\n\rspeechSegment\030\001 \003" +
+      "(\01320.com.lvl6.proto.DialogueProto.Speech" +
+      "SegmentProto\032\216\002\n\022SpeechSegmentProto\022Q\n\007s" +
+      "peaker\030\001 \001(\0162@.com.lvl6.proto.DialoguePr" +
+      "oto.SpeechSegmentProto.DialogueSpeaker\022\023",
+      "\n\013speakerText\030\002 \001(\t\"\217\001\n\017DialogueSpeaker\022" +
+      "\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTORIAL_GIRL\020\002\022\020\n\014Q" +
+      "UESTGIVER_1\020\003\022\020\n\014QUESTGIVER_2\020\004\022\020\n\014QUEST" +
+      "GIVER_3\020\005\022\020\n\014QUESTGIVER_4\020\006\022\020\n\014QUESTGIVE" +
+      "R_5\020\007\"x\n\033FullUserQuestDataLargeProto\022\016\n\006" +
+      "userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedee" +
+      "med\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010progres" +
+      "s\030\005 \001(\005B\014B\nQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5260,7 +3428,7 @@ public final class QuestProto {
           internal_static_com_lvl6_proto_FullQuestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullQuestProto_descriptor,
-              new java.lang.String[] { "QuestId", "CityId", "Name", "Description", "DoneResponse", "AcceptDialogue", "AssetNumWithinCity", "CoinsGained", "DiamondsGained", "ExpGained", "MonsterId", "QuestsRequiredForThis", "TaskReqs", "UpgradeStructJobsReqs", "BuildStructJobsReqs", "MonsterJobsReqs", "CoinRetrievalReq", "SpecialQuestActionReq", "NumComponentsForGood", "QuestGiverName", "QuestGiverImageSuffix", "Priority", },
+              new java.lang.String[] { "QuestId", "CityId", "Name", "Description", "DoneResponse", "AcceptDialogue", "QuestType", "StaticDataId", "Quantity", "CoinReward", "DiamondReward", "ExpReward", "MonsterIdReward", "IsCompleteMonster", "QuestsRequiredForThis", "QuestGiverImageSuffix", "Priority", "CarrotId", },
               com.lvl6.proto.QuestProto.FullQuestProto.class,
               com.lvl6.proto.QuestProto.FullQuestProto.Builder.class);
           internal_static_com_lvl6_proto_DialogueProto_descriptor =
@@ -5284,17 +3452,9 @@ public final class QuestProto {
           internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserQuestDataLargeProto_descriptor,
-              new java.lang.String[] { "UserId", "QuestId", "IsRedeemed", "IsComplete", "RequiredBuildStructJobProgress", "RequiredUpgradeStructJobProgress", "RequiredTasksProgress", "CoinsRetrievedForReq", "NumComponentsComplete", },
+              new java.lang.String[] { "UserId", "QuestId", "IsRedeemed", "IsComplete", "Progress", },
               com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.class,
               com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder.class);
-          internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_MinimumUserQuestTaskProto_descriptor,
-              new java.lang.String[] { "UserId", "QuestId", "TaskId", "NumTimesActed", },
-              com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.class,
-              com.lvl6.proto.QuestProto.MinimumUserQuestTaskProto.Builder.class);
           return null;
         }
       };

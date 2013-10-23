@@ -13,22 +13,24 @@ message FullQuestProto {
      optional string description = 4;
      optional string doneResponse = 5;
      optional DialogueProto acceptDialogue = 6;
-     optional int32 assetNumWithinCity = 7;
-     optional int32 coinsGained = 8;
-     optional int32 diamondsGained = 9;
-     optional int32 expGained = 10;
-     optional int32 monsterId = 11;
-     repeated int32 questsRequiredForThis = 12;
-     repeated int32 taskReqs = 13;
-     repeated int32 upgradeStructJobsReqs = 14;
-     repeated int32 buildStructJobsReqs = 15;
-     repeated int32 monsterJobsReqs = 16;
-     optional int32 coinRetrievalReq = 17;
-     optional SpecialQuestAction specialQuestActionReq = 18; 
-     optional int32 numComponentsForGood = 19;
-     optional string questGiverName = 20;
-     optional string questGiverImageSuffix = 21;
-     optional int32 priority = 22;
+     optional QuestType questType = 7;
+     optional int32 staticDataId = 8;
+     optional int32 quantity = 9;
+     optional int32 coinReward = 10;
+     optional int32 diamondReward = 11;
+     optional int32 expReward = 12;
+     optional int32 monsterIdReward = 13;
+     optional bool isCompleteMonster = 14;
+     repeated int32 questsRequiredForThis = 15;
+     optional string questGiverImageSuffix = 16;
+     optional int32 priority = 17;
+     optional string carrotId = 18;
+     
+     enum QuestType {
+     	COLLECT_MONSTER = 1;
+     	COLLECT_AND_DONATE_MONSTER = 2;
+     	KILL_MONSTER = 3; 
+     }
 }
 
 //------------------------------------------------------------------------------------------
@@ -54,10 +56,11 @@ message DialogueProto {
 
 //------------------------------------------------------------------------------------------
 
-enum SpecialQuestAction {
-	REQUEST_JOIN_CLAN = 1;
-	EVOLVE_A_MONSTER = 2;
-}
+//this is incorporated into QuestType
+//enum SpecialQuestAction {
+//	REQUEST_JOIN_CLAN = 1;
+//  EVOLVE_A_MONSTER = 2;
+//}
 
 //------------------------------------------------------------------------------------------
 
@@ -66,18 +69,8 @@ message FullUserQuestDataLargeProto {
      optional int32 questId = 2;
      optional bool isRedeemed = 3;
      optional bool isComplete = 4;
-     repeated MinimumUserBuildStructJobProto requiredBuildStructJobProgress = 5;
-     repeated MinimumUserUpgradeStructJobProto requiredUpgradeStructJobProgress = 6;
-     repeated MinimumUserQuestTaskProto requiredTasksProgress = 7;
-     optional int32 coinsRetrievedForReq = 8;
-     optional int32 numComponentsComplete = 9;
-}
-
-message MinimumUserQuestTaskProto {
-     optional int32 userId = 1;
-     optional int32 questId = 2;
-     optional int32 taskId = 3;
-     optional int32 numTimesActed = 4;
+     optional int32 progress = 5;
+     
 }
 
 //------------------------------------------------------------------------------------------

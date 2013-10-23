@@ -31,36 +31,39 @@ message StartupResponseProto {
     optional StartupConstants startupConstants = 5;
     repeated FullCityProto allCities = 6;
     
-    repeated FullQuestProto inProgressIncompleteQuests = 7;
-    repeated FullQuestProto inProgressCompleteQuests = 8;
+    repeated FullQuestProto inProgressQuests = 7;
+    repeated FullQuestProto unredeemedQuests = 8;
 	repeated FullQuestProto availableQuests = 9;   
-	repeated FullUserClanProto userClanInfo = 10;
 	
-	optional string appStoreURL = 11;
-	optional string reviewPageURL = 12;
-	optional string reviewPageConfirmationMessage = 13;
-	optional bool playerHasBoughtInAppPurchase = 14;
-	repeated GoldSaleProto goldSales = 15;
+	//only send the ones that are not redeemed, (incomplete and complete)
+	repeated FullUserQuestDataLargeProto userQuests = 10;
+	repeated FullUserClanProto userClanInfo = 11;
 	
-	repeated AttackedNotificationProto attackNotifications = 16;
-	repeated ReferralNotificationProto referralNotifications = 17;
-	repeated string noticesToPlayers = 18;
-	repeated GroupChatMessageProto globalChats = 19;
-	repeated GroupChatMessageProto clanChats = 20;
+	optional string appStoreURL = 12;
+	optional string reviewPageURL = 13;
+	optional string reviewPageConfirmationMessage = 14;
+	optional bool playerHasBoughtInAppPurchase = 15;
+	repeated GoldSaleProto goldSales = 16;
+	
+	repeated AttackedNotificationProto attackNotifications = 17;
+	repeated ReferralNotificationProto referralNotifications = 18;
+	repeated string noticesToPlayers = 19;
+	repeated GroupChatMessageProto globalChats = 20;
+	repeated GroupChatMessageProto clanChats = 21;
 	//repeated most recent private chat posts regarding this user
-	repeated PrivateChatPostProto pcpp = 21;
+	repeated PrivateChatPostProto pcpp = 22;
 	
-	repeated LevelAndRequiredExpProto larep = 22;
-	repeated FullStructureProto staticStructs = 23;
-	repeated CityExpansionCostProto expansionCosts = 24;
-	repeated MonsterProto staticMonsters = 25;
-	repeated FullUserMonsterProto usersMonsters = 26;
-	repeated UserMonsterHealingProto monstersHealing = 27;
-	optional UserEnhancementProto enhancements = 28;
+	repeated LevelAndRequiredExpProto larep = 23;
+	repeated FullStructureProto staticStructs = 24;
+	repeated CityExpansionCostProto expansionCosts = 25;
+	repeated MonsterProto staticMonsters = 26;
+	repeated FullUserMonsterProto usersMonsters = 27;
+	repeated UserMonsterHealingProto monstersHealing = 28;
+	optional UserEnhancementProto enhancements = 29;
 	
-	repeated RareBoosterPurchaseProto rareBoosterPurchases = 29;
+	repeated RareBoosterPurchaseProto rareBoosterPurchases = 30;
 	
-	optional string kabamNaid = 30;
+	optional string kabamNaid = 31;
 	
 	
 	

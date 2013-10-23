@@ -4,26 +4,22 @@ import java.io.Serializable;
 
 public class QuestForUser implements Serializable {
 
-	private static final long serialVersionUID = 6402831762354203777L;
+	private static final long serialVersionUID = 7901389370805472521L;
+	
 	private int userId;
 	private int questId;
 	private boolean isRedeemed;
 	private boolean isComplete;
-	private boolean tasksComplete;
-	private boolean defeatTypeJobsComplete;
-	private int coinsRetrievedForReq;
-
+	private int progress;
+	
 	public QuestForUser(int userId, int questId, boolean isRedeemed,
-			boolean isComplete, boolean tasksComplete,
-			boolean defeatTypeJobsComplete, int coinsRetrievedForReq) {
+			boolean isComplete, int progress) {
 		super();
 		this.userId = userId;
 		this.questId = questId;
 		this.isRedeemed = isRedeemed;
 		this.isComplete = isComplete;
-		this.tasksComplete = tasksComplete;
-		this.defeatTypeJobsComplete = defeatTypeJobsComplete;
-		this.coinsRetrievedForReq = coinsRetrievedForReq;
+		this.progress = progress;
 	}
 
 	public int getUserId() {
@@ -58,36 +54,19 @@ public class QuestForUser implements Serializable {
 		this.isComplete = isComplete;
 	}
 
-	public boolean isTasksComplete() {
-		return tasksComplete;
+	public int getProgress() {
+		return progress;
 	}
 
-	public void setTasksComplete(boolean tasksComplete) {
-		this.tasksComplete = tasksComplete;
-	}
-
-	public boolean isDefeatTypeJobsComplete() {
-		return defeatTypeJobsComplete;
-	}
-
-	public void setDefeatTypeJobsComplete(boolean defeatTypeJobsComplete) {
-		this.defeatTypeJobsComplete = defeatTypeJobsComplete;
-	}
-
-	public int getCoinsRetrievedForReq() {
-		return coinsRetrievedForReq;
-	}
-
-	public void setCoinsRetrievedForReq(int coinsRetrievedForReq) {
-		this.coinsRetrievedForReq = coinsRetrievedForReq;
+	public void setProgress(int progress) {
+		this.progress = progress;
 	}
 
 	@Override
 	public String toString() {
-		return "UserQuest [userId=" + userId + ", questId=" + questId
+		return "QuestForUser [userId=" + userId + ", questId=" + questId
 				+ ", isRedeemed=" + isRedeemed + ", isComplete=" + isComplete
-				+ ", tasksComplete=" + tasksComplete
-				+ ", defeatTypeJobsComplete=" + defeatTypeJobsComplete
-				+ ", coinsRetrievedForReq=" + coinsRetrievedForReq + "]";
+				+ ", progress=" + progress + "]";
 	}
+
 }

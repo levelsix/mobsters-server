@@ -8,9 +8,8 @@ import org.springframework.integration.message.GenericMessage;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto.Builder;
 import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
-import com.lvl6.proto.EventQuestProto.UserQuestDetailsRequestProto;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 
 public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {
 
@@ -39,12 +38,12 @@ public class LoadTestEventGeneratorImpl implements LoadTestEventGenerator {
 		return new GenericMessage<byte[]>(bb.array());
 	}
 
-	@Override
-	public Message<byte[]> userQuestDetails(MinimumUserProto.Builder user) {
-		UserQuestDetailsRequestProto.Builder build = UserQuestDetailsRequestProto.newBuilder();
-		build.setSender(user);
-		return convertToMessage(build.build().toByteArray(), EventProtocolRequest.C_USER_QUEST_DETAILS_EVENT_VALUE);
-	}
+//	@Override
+//	public Message<byte[]> userQuestDetails(MinimumUserProto.Builder user) {
+//		UserQuestDetailsRequestProto.Builder build = UserQuestDetailsRequestProto.newBuilder();
+//		build.setSender(user);
+//		return convertToMessage(build.build().toByteArray(), EventProtocolRequest.C_USER_QUEST_DETAILS_EVENT_VALUE);
+//	}
 
 	@Override
 	public MinimumUserProto.Builder minimumUserProto(Integer userId) {

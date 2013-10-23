@@ -17,7 +17,6 @@ import com.lvl6.info.Dialogue;
 import com.lvl6.info.Quest;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.DBConstants;
-import com.lvl6.proto.QuestProto.SpecialQuestAction;
 import com.lvl6.utils.DBConnection;
 import com.lvl6.utils.QuestGraph;
 
@@ -81,15 +80,11 @@ import com.lvl6.utils.QuestGraph;
         try {
           rs.last();
           rs.beforeFirst();
-          HashMap<Integer, Quest> tmp = new HashMap<Integer, Quest>();
+          Map<Integer, Quest> tmp = new HashMap<Integer, Quest>();
           while(rs.next()) {
             Quest quest = convertRSRowToQuest(rs);
             if (quest != null) {
-              if (quest.getNumComponents() > 1 && quest.getSpecialQuestActionRequired() != null) {
-                log.error("problem with quest in the db- has a special quest, as well as other components. quest=" + quest);
-              } else {
                 tmp.put(quest.getId(), quest);
-              }
             }
           }
           questIdsToQuests = tmp;
@@ -118,11 +113,7 @@ import com.lvl6.utils.QuestGraph;
           while(rs.next()) {  //should only be one
             Quest quest = convertRSRowToQuest(rs);
             if (quest != null) {
-              if (quest.getNumComponents() > 1 && quest.getSpecialQuestActionRequired() != null) {
-                log.error("problem with quest in the db- has a special quest, as well as other components. quest=" + quest);
-              } else {
                 quests.add(quest);
-              }
             }
           }
           QuestGraph tmp = new QuestGraph(quests);
@@ -158,11 +149,15 @@ import com.lvl6.utils.QuestGraph;
     String goodAcceptDialogueBlob = rs.getString(i++);
     Dialogue goodAcceptDialogue = MiscMethods.createDialogue(goodAcceptDialogueBlob);
 
-    int assetNumWithinCity = rs.getInt(i++);
-    int coinsGained = rs.getInt(i++);
-    int diamondsGained = rs.getInt(i++);
-    int expGained = rs.getInt(i++);
-    int equipIdGained = rs.getInt(i++);
+    int questType = rs.getInt(i++);
+    String jobDescription = rs.getString(i++);
+    int staticDataId = rs.getInt(i++);
+    int quantity = rs.getInt(i++);
+    int coinReward = rs.getInt(i++);
+    int diamondReward = rs.getInt(i++);
+    int expReward = rs.getInt(i++);
+    int monsterIdReward = rs.getInt(i++);
+    boolean isCompleteMonster = rs.getBoolean(i++);
     
     String questsRequiredForThisString = rs.getString(i++);
     List<Integer> questsRequiredForThis = new ArrayList<Integer>();
@@ -171,52 +166,16 @@ import com.lvl6.utils.QuestGraph;
       		delimiter, questsRequiredForThis);
     }
 
-    String tasksRequiredString = rs.getString(i++);
-    List<Integer> tasksRequired = new ArrayList<Integer>();
-    if (tasksRequiredString != null) {
-      MiscMethods.explodeIntoInts(tasksRequiredString, delimiter, tasksRequired);
-    }
-
-    String upgradeStructJobsRequiredString = rs.getString(i++);
-    List<Integer> upgradeStructJobsRequired = new ArrayList<Integer>();
-    if (upgradeStructJobsRequiredString != null) {
-      MiscMethods.explodeIntoInts(upgradeStructJobsRequiredString,
-      		delimiter, upgradeStructJobsRequired);
-    }
-
-    String buildStructJobsRequiredString = rs.getString(i++);
-    List<Integer> buildStructJobsRequired = new ArrayList<Integer>();
-    if (buildStructJobsRequiredString != null) {
-      MiscMethods.explodeIntoInts(buildStructJobsRequiredString,
-      		delimiter, buildStructJobsRequired);
-    }
-
-    String monsterJobsString = rs.getString(i++);
-    List<Integer> monsterJobsRequired = new ArrayList<Integer>();
-    if (null != monsterJobsString) {
-    	MiscMethods.explodeIntoInts(monsterJobsString,
-    			delimiter, monsterJobsRequired);
-    }
-    
-    int coinRetrievalAmountRequired = rs.getInt(i++);
-
-    SpecialQuestAction specialQuestActionRequired = null;
-    int specialQuestActionInt = rs.getInt(i++);
-    if (!rs.wasNull()) {
-    	specialQuestActionRequired = SpecialQuestAction.valueOf(specialQuestActionInt);
-    }
-    
     String goodQuestGiverImageSuffix = rs.getString(i++);
     int priority = rs.getInt(i++);
     String carrotId = rs.getString(i++);
     
     Quest quest = new Quest(id, cityId, goodName, goodDescription,
-    		goodDoneResponse, goodAcceptDialogue, assetNumWithinCity,
-    		coinsGained, diamondsGained, expGained, equipIdGained,
-    		questsRequiredForThis, tasksRequired, upgradeStructJobsRequired,
-    		buildStructJobsRequired, monsterJobsRequired,
-    		coinRetrievalAmountRequired, specialQuestActionRequired,
+    		goodDoneResponse, goodAcceptDialogue, questType, jobDescription,
+    		staticDataId, quantity, coinReward, diamondReward, expReward,
+    		monsterIdReward, isCompleteMonster, questsRequiredForThis,
     		goodQuestGiverImageSuffix, priority, carrotId);
+    
     return quest;
   }
 

@@ -26,7 +26,6 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.QuestUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class NormStructWaitCompleteController extends EventController{
@@ -91,9 +90,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       server.writeEvent(resEvent);
 
-      if (legitWaitComplete) {
-        QuestUtils.checkAndSendQuestsCompleteBasic(server, senderProto.getUserId(), senderProto, null, false);          
-      }
     } catch (Exception e) {
       log.error("exception in NormStructWaitCompleteController processEvent", e);
     } finally {

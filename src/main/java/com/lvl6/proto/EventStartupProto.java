@@ -814,24 +814,24 @@ public final class EventStartupProto {
     com.lvl6.proto.CityProto.FullCityProtoOrBuilder getAllCitiesOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.FullQuestProto inProgressIncompleteQuests = 7;
+    // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;
     java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
-        getInProgressIncompleteQuestsList();
-    com.lvl6.proto.QuestProto.FullQuestProto getInProgressIncompleteQuests(int index);
-    int getInProgressIncompleteQuestsCount();
+        getInProgressQuestsList();
+    com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index);
+    int getInProgressQuestsCount();
     java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-        getInProgressIncompleteQuestsOrBuilderList();
-    com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressIncompleteQuestsOrBuilder(
+        getInProgressQuestsOrBuilderList();
+    com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.FullQuestProto inProgressCompleteQuests = 8;
+    // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;
     java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
-        getInProgressCompleteQuestsList();
-    com.lvl6.proto.QuestProto.FullQuestProto getInProgressCompleteQuests(int index);
-    int getInProgressCompleteQuestsCount();
+        getUnredeemedQuestsList();
+    com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index);
+    int getUnredeemedQuestsCount();
     java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-        getInProgressCompleteQuestsOrBuilderList();
-    com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressCompleteQuestsOrBuilder(
+        getUnredeemedQuestsOrBuilderList();
+    com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
         int index);
     
     // repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;
@@ -844,7 +844,17 @@ public final class EventStartupProto {
     com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getAvailableQuestsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 10;
+    // repeated .com.lvl6.proto.FullUserQuestDataLargeProto userQuests = 10;
+    java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> 
+        getUserQuestsList();
+    com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto getUserQuests(int index);
+    int getUserQuestsCount();
+    java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> 
+        getUserQuestsOrBuilderList();
+    com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder getUserQuestsOrBuilder(
+        int index);
+    
+    // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 11;
     java.util.List<com.lvl6.proto.ClanProto.FullUserClanProto> 
         getUserClanInfoList();
     com.lvl6.proto.ClanProto.FullUserClanProto getUserClanInfo(int index);
@@ -854,23 +864,23 @@ public final class EventStartupProto {
     com.lvl6.proto.ClanProto.FullUserClanProtoOrBuilder getUserClanInfoOrBuilder(
         int index);
     
-    // optional string appStoreURL = 11;
+    // optional string appStoreURL = 12;
     boolean hasAppStoreURL();
     String getAppStoreURL();
     
-    // optional string reviewPageURL = 12;
+    // optional string reviewPageURL = 13;
     boolean hasReviewPageURL();
     String getReviewPageURL();
     
-    // optional string reviewPageConfirmationMessage = 13;
+    // optional string reviewPageConfirmationMessage = 14;
     boolean hasReviewPageConfirmationMessage();
     String getReviewPageConfirmationMessage();
     
-    // optional bool playerHasBoughtInAppPurchase = 14;
+    // optional bool playerHasBoughtInAppPurchase = 15;
     boolean hasPlayerHasBoughtInAppPurchase();
     boolean getPlayerHasBoughtInAppPurchase();
     
-    // repeated .com.lvl6.proto.GoldSaleProto goldSales = 15;
+    // repeated .com.lvl6.proto.GoldSaleProto goldSales = 16;
     java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> 
         getGoldSalesList();
     com.lvl6.proto.InAppPurchaseProto.GoldSaleProto getGoldSales(int index);
@@ -880,7 +890,7 @@ public final class EventStartupProto {
     com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder getGoldSalesOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 16;
+    // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 17;
     java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto> 
         getAttackNotificationsList();
     com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto getAttackNotifications(int index);
@@ -890,7 +900,7 @@ public final class EventStartupProto {
     com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProtoOrBuilder getAttackNotificationsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 17;
+    // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 18;
     java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto> 
         getReferralNotificationsList();
     com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto getReferralNotifications(int index);
@@ -900,12 +910,12 @@ public final class EventStartupProto {
     com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProtoOrBuilder getReferralNotificationsOrBuilder(
         int index);
     
-    // repeated string noticesToPlayers = 18;
+    // repeated string noticesToPlayers = 19;
     java.util.List<String> getNoticesToPlayersList();
     int getNoticesToPlayersCount();
     String getNoticesToPlayers(int index);
     
-    // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 19;
+    // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 20;
     java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> 
         getGlobalChatsList();
     com.lvl6.proto.ChatProto.GroupChatMessageProto getGlobalChats(int index);
@@ -915,7 +925,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getGlobalChatsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 20;
+    // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 21;
     java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> 
         getClanChatsList();
     com.lvl6.proto.ChatProto.GroupChatMessageProto getClanChats(int index);
@@ -925,7 +935,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder getClanChatsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 21;
+    // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 22;
     java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> 
         getPcppList();
     com.lvl6.proto.ChatProto.PrivateChatPostProto getPcpp(int index);
@@ -935,7 +945,7 @@ public final class EventStartupProto {
     com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getPcppOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 22;
+    // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 23;
     java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> 
         getLarepList();
     com.lvl6.proto.UserProto.LevelAndRequiredExpProto getLarep(int index);
@@ -945,7 +955,7 @@ public final class EventStartupProto {
     com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder getLarepOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.FullStructureProto staticStructs = 23;
+    // repeated .com.lvl6.proto.FullStructureProto staticStructs = 24;
     java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> 
         getStaticStructsList();
     com.lvl6.proto.StructureProto.FullStructureProto getStaticStructs(int index);
@@ -955,7 +965,7 @@ public final class EventStartupProto {
     com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getStaticStructsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 24;
+    // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 25;
     java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> 
         getExpansionCostsList();
     com.lvl6.proto.CityProto.CityExpansionCostProto getExpansionCosts(int index);
@@ -965,7 +975,7 @@ public final class EventStartupProto {
     com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder getExpansionCostsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.MonsterProto staticMonsters = 25;
+    // repeated .com.lvl6.proto.MonsterProto staticMonsters = 26;
     java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> 
         getStaticMonstersList();
     com.lvl6.proto.MonsterStuffProto.MonsterProto getStaticMonsters(int index);
@@ -975,7 +985,7 @@ public final class EventStartupProto {
     com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder getStaticMonstersOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 26;
+    // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 27;
     java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
         getUsersMonstersList();
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUsersMonsters(int index);
@@ -985,7 +995,7 @@ public final class EventStartupProto {
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUsersMonstersOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 27;
+    // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 28;
     java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> 
         getMonstersHealingList();
     com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto getMonstersHealing(int index);
@@ -995,12 +1005,12 @@ public final class EventStartupProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getMonstersHealingOrBuilder(
         int index);
     
-    // optional .com.lvl6.proto.UserEnhancementProto enhancements = 28;
+    // optional .com.lvl6.proto.UserEnhancementProto enhancements = 29;
     boolean hasEnhancements();
     com.lvl6.proto.MonsterStuffProto.UserEnhancementProto getEnhancements();
     com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder getEnhancementsOrBuilder();
     
-    // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 29;
+    // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 30;
     java.util.List<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto> 
         getRareBoosterPurchasesList();
     com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto getRareBoosterPurchases(int index);
@@ -1010,7 +1020,7 @@ public final class EventStartupProto {
     com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProtoOrBuilder getRareBoosterPurchasesOrBuilder(
         int index);
     
-    // optional string kabamNaid = 30;
+    // optional string kabamNaid = 31;
     boolean hasKabamNaid();
     String getKabamNaid();
   }
@@ -7689,46 +7699,46 @@ public final class EventStartupProto {
       return allCities_.get(index);
     }
     
-    // repeated .com.lvl6.proto.FullQuestProto inProgressIncompleteQuests = 7;
-    public static final int INPROGRESSINCOMPLETEQUESTS_FIELD_NUMBER = 7;
-    private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressIncompleteQuests_;
-    public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressIncompleteQuestsList() {
-      return inProgressIncompleteQuests_;
+    // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;
+    public static final int INPROGRESSQUESTS_FIELD_NUMBER = 7;
+    private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressQuests_;
+    public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressQuestsList() {
+      return inProgressQuests_;
     }
     public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-        getInProgressIncompleteQuestsOrBuilderList() {
-      return inProgressIncompleteQuests_;
+        getInProgressQuestsOrBuilderList() {
+      return inProgressQuests_;
     }
-    public int getInProgressIncompleteQuestsCount() {
-      return inProgressIncompleteQuests_.size();
+    public int getInProgressQuestsCount() {
+      return inProgressQuests_.size();
     }
-    public com.lvl6.proto.QuestProto.FullQuestProto getInProgressIncompleteQuests(int index) {
-      return inProgressIncompleteQuests_.get(index);
+    public com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index) {
+      return inProgressQuests_.get(index);
     }
-    public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressIncompleteQuestsOrBuilder(
+    public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
         int index) {
-      return inProgressIncompleteQuests_.get(index);
+      return inProgressQuests_.get(index);
     }
     
-    // repeated .com.lvl6.proto.FullQuestProto inProgressCompleteQuests = 8;
-    public static final int INPROGRESSCOMPLETEQUESTS_FIELD_NUMBER = 8;
-    private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressCompleteQuests_;
-    public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressCompleteQuestsList() {
-      return inProgressCompleteQuests_;
+    // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;
+    public static final int UNREDEEMEDQUESTS_FIELD_NUMBER = 8;
+    private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> unredeemedQuests_;
+    public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getUnredeemedQuestsList() {
+      return unredeemedQuests_;
     }
     public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-        getInProgressCompleteQuestsOrBuilderList() {
-      return inProgressCompleteQuests_;
+        getUnredeemedQuestsOrBuilderList() {
+      return unredeemedQuests_;
     }
-    public int getInProgressCompleteQuestsCount() {
-      return inProgressCompleteQuests_.size();
+    public int getUnredeemedQuestsCount() {
+      return unredeemedQuests_.size();
     }
-    public com.lvl6.proto.QuestProto.FullQuestProto getInProgressCompleteQuests(int index) {
-      return inProgressCompleteQuests_.get(index);
+    public com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index) {
+      return unredeemedQuests_.get(index);
     }
-    public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressCompleteQuestsOrBuilder(
+    public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
         int index) {
-      return inProgressCompleteQuests_.get(index);
+      return unredeemedQuests_.get(index);
     }
     
     // repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;
@@ -7752,8 +7762,29 @@ public final class EventStartupProto {
       return availableQuests_.get(index);
     }
     
-    // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 10;
-    public static final int USERCLANINFO_FIELD_NUMBER = 10;
+    // repeated .com.lvl6.proto.FullUserQuestDataLargeProto userQuests = 10;
+    public static final int USERQUESTS_FIELD_NUMBER = 10;
+    private java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> userQuests_;
+    public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> getUserQuestsList() {
+      return userQuests_;
+    }
+    public java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> 
+        getUserQuestsOrBuilderList() {
+      return userQuests_;
+    }
+    public int getUserQuestsCount() {
+      return userQuests_.size();
+    }
+    public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto getUserQuests(int index) {
+      return userQuests_.get(index);
+    }
+    public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder getUserQuestsOrBuilder(
+        int index) {
+      return userQuests_.get(index);
+    }
+    
+    // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 11;
+    public static final int USERCLANINFO_FIELD_NUMBER = 11;
     private java.util.List<com.lvl6.proto.ClanProto.FullUserClanProto> userClanInfo_;
     public java.util.List<com.lvl6.proto.ClanProto.FullUserClanProto> getUserClanInfoList() {
       return userClanInfo_;
@@ -7773,8 +7804,8 @@ public final class EventStartupProto {
       return userClanInfo_.get(index);
     }
     
-    // optional string appStoreURL = 11;
-    public static final int APPSTOREURL_FIELD_NUMBER = 11;
+    // optional string appStoreURL = 12;
+    public static final int APPSTOREURL_FIELD_NUMBER = 12;
     private java.lang.Object appStoreURL_;
     public boolean hasAppStoreURL() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
@@ -7805,8 +7836,8 @@ public final class EventStartupProto {
       }
     }
     
-    // optional string reviewPageURL = 12;
-    public static final int REVIEWPAGEURL_FIELD_NUMBER = 12;
+    // optional string reviewPageURL = 13;
+    public static final int REVIEWPAGEURL_FIELD_NUMBER = 13;
     private java.lang.Object reviewPageURL_;
     public boolean hasReviewPageURL() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
@@ -7837,8 +7868,8 @@ public final class EventStartupProto {
       }
     }
     
-    // optional string reviewPageConfirmationMessage = 13;
-    public static final int REVIEWPAGECONFIRMATIONMESSAGE_FIELD_NUMBER = 13;
+    // optional string reviewPageConfirmationMessage = 14;
+    public static final int REVIEWPAGECONFIRMATIONMESSAGE_FIELD_NUMBER = 14;
     private java.lang.Object reviewPageConfirmationMessage_;
     public boolean hasReviewPageConfirmationMessage() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
@@ -7869,8 +7900,8 @@ public final class EventStartupProto {
       }
     }
     
-    // optional bool playerHasBoughtInAppPurchase = 14;
-    public static final int PLAYERHASBOUGHTINAPPPURCHASE_FIELD_NUMBER = 14;
+    // optional bool playerHasBoughtInAppPurchase = 15;
+    public static final int PLAYERHASBOUGHTINAPPPURCHASE_FIELD_NUMBER = 15;
     private boolean playerHasBoughtInAppPurchase_;
     public boolean hasPlayerHasBoughtInAppPurchase() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
@@ -7879,8 +7910,8 @@ public final class EventStartupProto {
       return playerHasBoughtInAppPurchase_;
     }
     
-    // repeated .com.lvl6.proto.GoldSaleProto goldSales = 15;
-    public static final int GOLDSALES_FIELD_NUMBER = 15;
+    // repeated .com.lvl6.proto.GoldSaleProto goldSales = 16;
+    public static final int GOLDSALES_FIELD_NUMBER = 16;
     private java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> goldSales_;
     public java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> getGoldSalesList() {
       return goldSales_;
@@ -7900,8 +7931,8 @@ public final class EventStartupProto {
       return goldSales_.get(index);
     }
     
-    // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 16;
-    public static final int ATTACKNOTIFICATIONS_FIELD_NUMBER = 16;
+    // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 17;
+    public static final int ATTACKNOTIFICATIONS_FIELD_NUMBER = 17;
     private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto> attackNotifications_;
     public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto> getAttackNotificationsList() {
       return attackNotifications_;
@@ -7921,8 +7952,8 @@ public final class EventStartupProto {
       return attackNotifications_.get(index);
     }
     
-    // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 17;
-    public static final int REFERRALNOTIFICATIONS_FIELD_NUMBER = 17;
+    // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 18;
+    public static final int REFERRALNOTIFICATIONS_FIELD_NUMBER = 18;
     private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto> referralNotifications_;
     public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto> getReferralNotificationsList() {
       return referralNotifications_;
@@ -7942,8 +7973,8 @@ public final class EventStartupProto {
       return referralNotifications_.get(index);
     }
     
-    // repeated string noticesToPlayers = 18;
-    public static final int NOTICESTOPLAYERS_FIELD_NUMBER = 18;
+    // repeated string noticesToPlayers = 19;
+    public static final int NOTICESTOPLAYERS_FIELD_NUMBER = 19;
     private com.google.protobuf.LazyStringList noticesToPlayers_;
     public java.util.List<String>
         getNoticesToPlayersList() {
@@ -7956,8 +7987,8 @@ public final class EventStartupProto {
       return noticesToPlayers_.get(index);
     }
     
-    // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 19;
-    public static final int GLOBALCHATS_FIELD_NUMBER = 19;
+    // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 20;
+    public static final int GLOBALCHATS_FIELD_NUMBER = 20;
     private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> globalChats_;
     public java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> getGlobalChatsList() {
       return globalChats_;
@@ -7977,8 +8008,8 @@ public final class EventStartupProto {
       return globalChats_.get(index);
     }
     
-    // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 20;
-    public static final int CLANCHATS_FIELD_NUMBER = 20;
+    // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 21;
+    public static final int CLANCHATS_FIELD_NUMBER = 21;
     private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> clanChats_;
     public java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> getClanChatsList() {
       return clanChats_;
@@ -7998,8 +8029,8 @@ public final class EventStartupProto {
       return clanChats_.get(index);
     }
     
-    // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 21;
-    public static final int PCPP_FIELD_NUMBER = 21;
+    // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 22;
+    public static final int PCPP_FIELD_NUMBER = 22;
     private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> pcpp_;
     public java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> getPcppList() {
       return pcpp_;
@@ -8019,8 +8050,8 @@ public final class EventStartupProto {
       return pcpp_.get(index);
     }
     
-    // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 22;
-    public static final int LAREP_FIELD_NUMBER = 22;
+    // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 23;
+    public static final int LAREP_FIELD_NUMBER = 23;
     private java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> larep_;
     public java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> getLarepList() {
       return larep_;
@@ -8040,8 +8071,8 @@ public final class EventStartupProto {
       return larep_.get(index);
     }
     
-    // repeated .com.lvl6.proto.FullStructureProto staticStructs = 23;
-    public static final int STATICSTRUCTS_FIELD_NUMBER = 23;
+    // repeated .com.lvl6.proto.FullStructureProto staticStructs = 24;
+    public static final int STATICSTRUCTS_FIELD_NUMBER = 24;
     private java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> staticStructs_;
     public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> getStaticStructsList() {
       return staticStructs_;
@@ -8061,8 +8092,8 @@ public final class EventStartupProto {
       return staticStructs_.get(index);
     }
     
-    // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 24;
-    public static final int EXPANSIONCOSTS_FIELD_NUMBER = 24;
+    // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 25;
+    public static final int EXPANSIONCOSTS_FIELD_NUMBER = 25;
     private java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> expansionCosts_;
     public java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> getExpansionCostsList() {
       return expansionCosts_;
@@ -8082,8 +8113,8 @@ public final class EventStartupProto {
       return expansionCosts_.get(index);
     }
     
-    // repeated .com.lvl6.proto.MonsterProto staticMonsters = 25;
-    public static final int STATICMONSTERS_FIELD_NUMBER = 25;
+    // repeated .com.lvl6.proto.MonsterProto staticMonsters = 26;
+    public static final int STATICMONSTERS_FIELD_NUMBER = 26;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> staticMonsters_;
     public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> getStaticMonstersList() {
       return staticMonsters_;
@@ -8103,8 +8134,8 @@ public final class EventStartupProto {
       return staticMonsters_.get(index);
     }
     
-    // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 26;
-    public static final int USERSMONSTERS_FIELD_NUMBER = 26;
+    // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 27;
+    public static final int USERSMONSTERS_FIELD_NUMBER = 27;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> usersMonsters_;
     public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUsersMonstersList() {
       return usersMonsters_;
@@ -8124,8 +8155,8 @@ public final class EventStartupProto {
       return usersMonsters_.get(index);
     }
     
-    // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 27;
-    public static final int MONSTERSHEALING_FIELD_NUMBER = 27;
+    // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 28;
+    public static final int MONSTERSHEALING_FIELD_NUMBER = 28;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> monstersHealing_;
     public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> getMonstersHealingList() {
       return monstersHealing_;
@@ -8145,8 +8176,8 @@ public final class EventStartupProto {
       return monstersHealing_.get(index);
     }
     
-    // optional .com.lvl6.proto.UserEnhancementProto enhancements = 28;
-    public static final int ENHANCEMENTS_FIELD_NUMBER = 28;
+    // optional .com.lvl6.proto.UserEnhancementProto enhancements = 29;
+    public static final int ENHANCEMENTS_FIELD_NUMBER = 29;
     private com.lvl6.proto.MonsterStuffProto.UserEnhancementProto enhancements_;
     public boolean hasEnhancements() {
       return ((bitField0_ & 0x00000200) == 0x00000200);
@@ -8158,8 +8189,8 @@ public final class EventStartupProto {
       return enhancements_;
     }
     
-    // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 29;
-    public static final int RAREBOOSTERPURCHASES_FIELD_NUMBER = 29;
+    // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 30;
+    public static final int RAREBOOSTERPURCHASES_FIELD_NUMBER = 30;
     private java.util.List<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto> rareBoosterPurchases_;
     public java.util.List<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto> getRareBoosterPurchasesList() {
       return rareBoosterPurchases_;
@@ -8179,8 +8210,8 @@ public final class EventStartupProto {
       return rareBoosterPurchases_.get(index);
     }
     
-    // optional string kabamNaid = 30;
-    public static final int KABAMNAID_FIELD_NUMBER = 30;
+    // optional string kabamNaid = 31;
+    public static final int KABAMNAID_FIELD_NUMBER = 31;
     private java.lang.Object kabamNaid_;
     public boolean hasKabamNaid() {
       return ((bitField0_ & 0x00000400) == 0x00000400);
@@ -8218,9 +8249,10 @@ public final class EventStartupProto {
       updateStatus_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus.NO_UPDATE;
       startupConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.getDefaultInstance();
       allCities_ = java.util.Collections.emptyList();
-      inProgressIncompleteQuests_ = java.util.Collections.emptyList();
-      inProgressCompleteQuests_ = java.util.Collections.emptyList();
+      inProgressQuests_ = java.util.Collections.emptyList();
+      unredeemedQuests_ = java.util.Collections.emptyList();
       availableQuests_ = java.util.Collections.emptyList();
+      userQuests_ = java.util.Collections.emptyList();
       userClanInfo_ = java.util.Collections.emptyList();
       appStoreURL_ = "";
       reviewPageURL_ = "";
@@ -8273,77 +8305,80 @@ public final class EventStartupProto {
       for (int i = 0; i < allCities_.size(); i++) {
         output.writeMessage(6, allCities_.get(i));
       }
-      for (int i = 0; i < inProgressIncompleteQuests_.size(); i++) {
-        output.writeMessage(7, inProgressIncompleteQuests_.get(i));
+      for (int i = 0; i < inProgressQuests_.size(); i++) {
+        output.writeMessage(7, inProgressQuests_.get(i));
       }
-      for (int i = 0; i < inProgressCompleteQuests_.size(); i++) {
-        output.writeMessage(8, inProgressCompleteQuests_.get(i));
+      for (int i = 0; i < unredeemedQuests_.size(); i++) {
+        output.writeMessage(8, unredeemedQuests_.get(i));
       }
       for (int i = 0; i < availableQuests_.size(); i++) {
         output.writeMessage(9, availableQuests_.get(i));
       }
+      for (int i = 0; i < userQuests_.size(); i++) {
+        output.writeMessage(10, userQuests_.get(i));
+      }
       for (int i = 0; i < userClanInfo_.size(); i++) {
-        output.writeMessage(10, userClanInfo_.get(i));
+        output.writeMessage(11, userClanInfo_.get(i));
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeBytes(11, getAppStoreURLBytes());
+        output.writeBytes(12, getAppStoreURLBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeBytes(12, getReviewPageURLBytes());
+        output.writeBytes(13, getReviewPageURLBytes());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(13, getReviewPageConfirmationMessageBytes());
+        output.writeBytes(14, getReviewPageConfirmationMessageBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBool(14, playerHasBoughtInAppPurchase_);
+        output.writeBool(15, playerHasBoughtInAppPurchase_);
       }
       for (int i = 0; i < goldSales_.size(); i++) {
-        output.writeMessage(15, goldSales_.get(i));
+        output.writeMessage(16, goldSales_.get(i));
       }
       for (int i = 0; i < attackNotifications_.size(); i++) {
-        output.writeMessage(16, attackNotifications_.get(i));
+        output.writeMessage(17, attackNotifications_.get(i));
       }
       for (int i = 0; i < referralNotifications_.size(); i++) {
-        output.writeMessage(17, referralNotifications_.get(i));
+        output.writeMessage(18, referralNotifications_.get(i));
       }
       for (int i = 0; i < noticesToPlayers_.size(); i++) {
-        output.writeBytes(18, noticesToPlayers_.getByteString(i));
+        output.writeBytes(19, noticesToPlayers_.getByteString(i));
       }
       for (int i = 0; i < globalChats_.size(); i++) {
-        output.writeMessage(19, globalChats_.get(i));
+        output.writeMessage(20, globalChats_.get(i));
       }
       for (int i = 0; i < clanChats_.size(); i++) {
-        output.writeMessage(20, clanChats_.get(i));
+        output.writeMessage(21, clanChats_.get(i));
       }
       for (int i = 0; i < pcpp_.size(); i++) {
-        output.writeMessage(21, pcpp_.get(i));
+        output.writeMessage(22, pcpp_.get(i));
       }
       for (int i = 0; i < larep_.size(); i++) {
-        output.writeMessage(22, larep_.get(i));
+        output.writeMessage(23, larep_.get(i));
       }
       for (int i = 0; i < staticStructs_.size(); i++) {
-        output.writeMessage(23, staticStructs_.get(i));
+        output.writeMessage(24, staticStructs_.get(i));
       }
       for (int i = 0; i < expansionCosts_.size(); i++) {
-        output.writeMessage(24, expansionCosts_.get(i));
+        output.writeMessage(25, expansionCosts_.get(i));
       }
       for (int i = 0; i < staticMonsters_.size(); i++) {
-        output.writeMessage(25, staticMonsters_.get(i));
+        output.writeMessage(26, staticMonsters_.get(i));
       }
       for (int i = 0; i < usersMonsters_.size(); i++) {
-        output.writeMessage(26, usersMonsters_.get(i));
+        output.writeMessage(27, usersMonsters_.get(i));
       }
       for (int i = 0; i < monstersHealing_.size(); i++) {
-        output.writeMessage(27, monstersHealing_.get(i));
+        output.writeMessage(28, monstersHealing_.get(i));
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeMessage(28, enhancements_);
+        output.writeMessage(29, enhancements_);
       }
       for (int i = 0; i < rareBoosterPurchases_.size(); i++) {
-        output.writeMessage(29, rareBoosterPurchases_.get(i));
+        output.writeMessage(30, rareBoosterPurchases_.get(i));
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeBytes(30, getKabamNaidBytes());
+        output.writeBytes(31, getKabamNaidBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -8378,49 +8413,53 @@ public final class EventStartupProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, allCities_.get(i));
       }
-      for (int i = 0; i < inProgressIncompleteQuests_.size(); i++) {
+      for (int i = 0; i < inProgressQuests_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, inProgressIncompleteQuests_.get(i));
+          .computeMessageSize(7, inProgressQuests_.get(i));
       }
-      for (int i = 0; i < inProgressCompleteQuests_.size(); i++) {
+      for (int i = 0; i < unredeemedQuests_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, inProgressCompleteQuests_.get(i));
+          .computeMessageSize(8, unredeemedQuests_.get(i));
       }
       for (int i = 0; i < availableQuests_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, availableQuests_.get(i));
       }
+      for (int i = 0; i < userQuests_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, userQuests_.get(i));
+      }
       for (int i = 0; i < userClanInfo_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(10, userClanInfo_.get(i));
+          .computeMessageSize(11, userClanInfo_.get(i));
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(11, getAppStoreURLBytes());
+          .computeBytesSize(12, getAppStoreURLBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(12, getReviewPageURLBytes());
+          .computeBytesSize(13, getReviewPageURLBytes());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(13, getReviewPageConfirmationMessageBytes());
+          .computeBytesSize(14, getReviewPageConfirmationMessageBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(14, playerHasBoughtInAppPurchase_);
+          .computeBoolSize(15, playerHasBoughtInAppPurchase_);
       }
       for (int i = 0; i < goldSales_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(15, goldSales_.get(i));
+          .computeMessageSize(16, goldSales_.get(i));
       }
       for (int i = 0; i < attackNotifications_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(16, attackNotifications_.get(i));
+          .computeMessageSize(17, attackNotifications_.get(i));
       }
       for (int i = 0; i < referralNotifications_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(17, referralNotifications_.get(i));
+          .computeMessageSize(18, referralNotifications_.get(i));
       }
       {
         int dataSize = 0;
@@ -8433,51 +8472,51 @@ public final class EventStartupProto {
       }
       for (int i = 0; i < globalChats_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(19, globalChats_.get(i));
+          .computeMessageSize(20, globalChats_.get(i));
       }
       for (int i = 0; i < clanChats_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(20, clanChats_.get(i));
+          .computeMessageSize(21, clanChats_.get(i));
       }
       for (int i = 0; i < pcpp_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(21, pcpp_.get(i));
+          .computeMessageSize(22, pcpp_.get(i));
       }
       for (int i = 0; i < larep_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(22, larep_.get(i));
+          .computeMessageSize(23, larep_.get(i));
       }
       for (int i = 0; i < staticStructs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(23, staticStructs_.get(i));
+          .computeMessageSize(24, staticStructs_.get(i));
       }
       for (int i = 0; i < expansionCosts_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(24, expansionCosts_.get(i));
+          .computeMessageSize(25, expansionCosts_.get(i));
       }
       for (int i = 0; i < staticMonsters_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(25, staticMonsters_.get(i));
+          .computeMessageSize(26, staticMonsters_.get(i));
       }
       for (int i = 0; i < usersMonsters_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(26, usersMonsters_.get(i));
+          .computeMessageSize(27, usersMonsters_.get(i));
       }
       for (int i = 0; i < monstersHealing_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(27, monstersHealing_.get(i));
+          .computeMessageSize(28, monstersHealing_.get(i));
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(28, enhancements_);
+          .computeMessageSize(29, enhancements_);
       }
       for (int i = 0; i < rareBoosterPurchases_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(29, rareBoosterPurchases_.get(i));
+          .computeMessageSize(30, rareBoosterPurchases_.get(i));
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(30, getKabamNaidBytes());
+          .computeBytesSize(31, getKabamNaidBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8598,9 +8637,10 @@ public final class EventStartupProto {
           getSenderFieldBuilder();
           getStartupConstantsFieldBuilder();
           getAllCitiesFieldBuilder();
-          getInProgressIncompleteQuestsFieldBuilder();
-          getInProgressCompleteQuestsFieldBuilder();
+          getInProgressQuestsFieldBuilder();
+          getUnredeemedQuestsFieldBuilder();
           getAvailableQuestsFieldBuilder();
+          getUserQuestsFieldBuilder();
           getUserClanInfoFieldBuilder();
           getGoldSalesFieldBuilder();
           getAttackNotificationsFieldBuilder();
@@ -8648,17 +8688,17 @@ public final class EventStartupProto {
         } else {
           allCitiesBuilder_.clear();
         }
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          inProgressIncompleteQuests_ = java.util.Collections.emptyList();
+        if (inProgressQuestsBuilder_ == null) {
+          inProgressQuests_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000040);
         } else {
-          inProgressIncompleteQuestsBuilder_.clear();
+          inProgressQuestsBuilder_.clear();
         }
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          inProgressCompleteQuests_ = java.util.Collections.emptyList();
+        if (unredeemedQuestsBuilder_ == null) {
+          unredeemedQuests_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000080);
         } else {
-          inProgressCompleteQuestsBuilder_.clear();
+          unredeemedQuestsBuilder_.clear();
         }
         if (availableQuestsBuilder_ == null) {
           availableQuests_ = java.util.Collections.emptyList();
@@ -8666,91 +8706,97 @@ public final class EventStartupProto {
         } else {
           availableQuestsBuilder_.clear();
         }
+        if (userQuestsBuilder_ == null) {
+          userQuests_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          userQuestsBuilder_.clear();
+        }
         if (userClanInfoBuilder_ == null) {
           userClanInfo_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000400);
         } else {
           userClanInfoBuilder_.clear();
         }
         appStoreURL_ = "";
-        bitField0_ = (bitField0_ & ~0x00000400);
-        reviewPageURL_ = "";
         bitField0_ = (bitField0_ & ~0x00000800);
-        reviewPageConfirmationMessage_ = "";
+        reviewPageURL_ = "";
         bitField0_ = (bitField0_ & ~0x00001000);
-        playerHasBoughtInAppPurchase_ = false;
+        reviewPageConfirmationMessage_ = "";
         bitField0_ = (bitField0_ & ~0x00002000);
+        playerHasBoughtInAppPurchase_ = false;
+        bitField0_ = (bitField0_ & ~0x00004000);
         if (goldSalesBuilder_ == null) {
           goldSales_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           goldSalesBuilder_.clear();
         }
         if (attackNotificationsBuilder_ == null) {
           attackNotifications_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
         } else {
           attackNotificationsBuilder_.clear();
         }
         if (referralNotificationsBuilder_ == null) {
           referralNotifications_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00010000);
+          bitField0_ = (bitField0_ & ~0x00020000);
         } else {
           referralNotificationsBuilder_.clear();
         }
         noticesToPlayers_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         if (globalChatsBuilder_ == null) {
           globalChats_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00080000);
         } else {
           globalChatsBuilder_.clear();
         }
         if (clanChatsBuilder_ == null) {
           clanChats_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00080000);
+          bitField0_ = (bitField0_ & ~0x00100000);
         } else {
           clanChatsBuilder_.clear();
         }
         if (pcppBuilder_ == null) {
           pcpp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00100000);
+          bitField0_ = (bitField0_ & ~0x00200000);
         } else {
           pcppBuilder_.clear();
         }
         if (larepBuilder_ == null) {
           larep_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00200000);
+          bitField0_ = (bitField0_ & ~0x00400000);
         } else {
           larepBuilder_.clear();
         }
         if (staticStructsBuilder_ == null) {
           staticStructs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00400000);
+          bitField0_ = (bitField0_ & ~0x00800000);
         } else {
           staticStructsBuilder_.clear();
         }
         if (expansionCostsBuilder_ == null) {
           expansionCosts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00800000);
+          bitField0_ = (bitField0_ & ~0x01000000);
         } else {
           expansionCostsBuilder_.clear();
         }
         if (staticMonstersBuilder_ == null) {
           staticMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x01000000);
+          bitField0_ = (bitField0_ & ~0x02000000);
         } else {
           staticMonstersBuilder_.clear();
         }
         if (usersMonstersBuilder_ == null) {
           usersMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x02000000);
+          bitField0_ = (bitField0_ & ~0x04000000);
         } else {
           usersMonstersBuilder_.clear();
         }
         if (monstersHealingBuilder_ == null) {
           monstersHealing_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x04000000);
+          bitField0_ = (bitField0_ & ~0x08000000);
         } else {
           monstersHealingBuilder_.clear();
         }
@@ -8759,15 +8805,15 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x08000000);
+        bitField0_ = (bitField0_ & ~0x10000000);
         if (rareBoosterPurchasesBuilder_ == null) {
           rareBoosterPurchases_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x10000000);
+          bitField0_ = (bitField0_ & ~0x20000000);
         } else {
           rareBoosterPurchasesBuilder_.clear();
         }
         kabamNaid_ = "";
-        bitField0_ = (bitField0_ & ~0x20000000);
+        bitField0_ = (bitField0_ & ~0x40000000);
         return this;
       }
       
@@ -8843,23 +8889,23 @@ public final class EventStartupProto {
         } else {
           result.allCities_ = allCitiesBuilder_.build();
         }
-        if (inProgressIncompleteQuestsBuilder_ == null) {
+        if (inProgressQuestsBuilder_ == null) {
           if (((bitField0_ & 0x00000040) == 0x00000040)) {
-            inProgressIncompleteQuests_ = java.util.Collections.unmodifiableList(inProgressIncompleteQuests_);
+            inProgressQuests_ = java.util.Collections.unmodifiableList(inProgressQuests_);
             bitField0_ = (bitField0_ & ~0x00000040);
           }
-          result.inProgressIncompleteQuests_ = inProgressIncompleteQuests_;
+          result.inProgressQuests_ = inProgressQuests_;
         } else {
-          result.inProgressIncompleteQuests_ = inProgressIncompleteQuestsBuilder_.build();
+          result.inProgressQuests_ = inProgressQuestsBuilder_.build();
         }
-        if (inProgressCompleteQuestsBuilder_ == null) {
+        if (unredeemedQuestsBuilder_ == null) {
           if (((bitField0_ & 0x00000080) == 0x00000080)) {
-            inProgressCompleteQuests_ = java.util.Collections.unmodifiableList(inProgressCompleteQuests_);
+            unredeemedQuests_ = java.util.Collections.unmodifiableList(unredeemedQuests_);
             bitField0_ = (bitField0_ & ~0x00000080);
           }
-          result.inProgressCompleteQuests_ = inProgressCompleteQuests_;
+          result.unredeemedQuests_ = unredeemedQuests_;
         } else {
-          result.inProgressCompleteQuests_ = inProgressCompleteQuestsBuilder_.build();
+          result.unredeemedQuests_ = unredeemedQuestsBuilder_.build();
         }
         if (availableQuestsBuilder_ == null) {
           if (((bitField0_ & 0x00000100) == 0x00000100)) {
@@ -8870,146 +8916,155 @@ public final class EventStartupProto {
         } else {
           result.availableQuests_ = availableQuestsBuilder_.build();
         }
-        if (userClanInfoBuilder_ == null) {
+        if (userQuestsBuilder_ == null) {
           if (((bitField0_ & 0x00000200) == 0x00000200)) {
-            userClanInfo_ = java.util.Collections.unmodifiableList(userClanInfo_);
+            userQuests_ = java.util.Collections.unmodifiableList(userQuests_);
             bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.userQuests_ = userQuests_;
+        } else {
+          result.userQuests_ = userQuestsBuilder_.build();
+        }
+        if (userClanInfoBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400)) {
+            userClanInfo_ = java.util.Collections.unmodifiableList(userClanInfo_);
+            bitField0_ = (bitField0_ & ~0x00000400);
           }
           result.userClanInfo_ = userClanInfo_;
         } else {
           result.userClanInfo_ = userClanInfoBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000020;
         }
         result.appStoreURL_ = appStoreURL_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00000040;
         }
         result.reviewPageURL_ = reviewPageURL_;
-        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00000080;
         }
         result.reviewPageConfirmationMessage_ = reviewPageConfirmationMessage_;
-        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+        if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00000100;
         }
         result.playerHasBoughtInAppPurchase_ = playerHasBoughtInAppPurchase_;
         if (goldSalesBuilder_ == null) {
-          if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
             goldSales_ = java.util.Collections.unmodifiableList(goldSales_);
-            bitField0_ = (bitField0_ & ~0x00004000);
+            bitField0_ = (bitField0_ & ~0x00008000);
           }
           result.goldSales_ = goldSales_;
         } else {
           result.goldSales_ = goldSalesBuilder_.build();
         }
         if (attackNotificationsBuilder_ == null) {
-          if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          if (((bitField0_ & 0x00010000) == 0x00010000)) {
             attackNotifications_ = java.util.Collections.unmodifiableList(attackNotifications_);
-            bitField0_ = (bitField0_ & ~0x00008000);
+            bitField0_ = (bitField0_ & ~0x00010000);
           }
           result.attackNotifications_ = attackNotifications_;
         } else {
           result.attackNotifications_ = attackNotificationsBuilder_.build();
         }
         if (referralNotificationsBuilder_ == null) {
-          if (((bitField0_ & 0x00010000) == 0x00010000)) {
+          if (((bitField0_ & 0x00020000) == 0x00020000)) {
             referralNotifications_ = java.util.Collections.unmodifiableList(referralNotifications_);
-            bitField0_ = (bitField0_ & ~0x00010000);
+            bitField0_ = (bitField0_ & ~0x00020000);
           }
           result.referralNotifications_ = referralNotifications_;
         } else {
           result.referralNotifications_ = referralNotificationsBuilder_.build();
         }
-        if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        if (((bitField0_ & 0x00040000) == 0x00040000)) {
           noticesToPlayers_ = new com.google.protobuf.UnmodifiableLazyStringList(
               noticesToPlayers_);
-          bitField0_ = (bitField0_ & ~0x00020000);
+          bitField0_ = (bitField0_ & ~0x00040000);
         }
         result.noticesToPlayers_ = noticesToPlayers_;
         if (globalChatsBuilder_ == null) {
-          if (((bitField0_ & 0x00040000) == 0x00040000)) {
+          if (((bitField0_ & 0x00080000) == 0x00080000)) {
             globalChats_ = java.util.Collections.unmodifiableList(globalChats_);
-            bitField0_ = (bitField0_ & ~0x00040000);
+            bitField0_ = (bitField0_ & ~0x00080000);
           }
           result.globalChats_ = globalChats_;
         } else {
           result.globalChats_ = globalChatsBuilder_.build();
         }
         if (clanChatsBuilder_ == null) {
-          if (((bitField0_ & 0x00080000) == 0x00080000)) {
+          if (((bitField0_ & 0x00100000) == 0x00100000)) {
             clanChats_ = java.util.Collections.unmodifiableList(clanChats_);
-            bitField0_ = (bitField0_ & ~0x00080000);
+            bitField0_ = (bitField0_ & ~0x00100000);
           }
           result.clanChats_ = clanChats_;
         } else {
           result.clanChats_ = clanChatsBuilder_.build();
         }
         if (pcppBuilder_ == null) {
-          if (((bitField0_ & 0x00100000) == 0x00100000)) {
+          if (((bitField0_ & 0x00200000) == 0x00200000)) {
             pcpp_ = java.util.Collections.unmodifiableList(pcpp_);
-            bitField0_ = (bitField0_ & ~0x00100000);
+            bitField0_ = (bitField0_ & ~0x00200000);
           }
           result.pcpp_ = pcpp_;
         } else {
           result.pcpp_ = pcppBuilder_.build();
         }
         if (larepBuilder_ == null) {
-          if (((bitField0_ & 0x00200000) == 0x00200000)) {
+          if (((bitField0_ & 0x00400000) == 0x00400000)) {
             larep_ = java.util.Collections.unmodifiableList(larep_);
-            bitField0_ = (bitField0_ & ~0x00200000);
+            bitField0_ = (bitField0_ & ~0x00400000);
           }
           result.larep_ = larep_;
         } else {
           result.larep_ = larepBuilder_.build();
         }
         if (staticStructsBuilder_ == null) {
-          if (((bitField0_ & 0x00400000) == 0x00400000)) {
+          if (((bitField0_ & 0x00800000) == 0x00800000)) {
             staticStructs_ = java.util.Collections.unmodifiableList(staticStructs_);
-            bitField0_ = (bitField0_ & ~0x00400000);
+            bitField0_ = (bitField0_ & ~0x00800000);
           }
           result.staticStructs_ = staticStructs_;
         } else {
           result.staticStructs_ = staticStructsBuilder_.build();
         }
         if (expansionCostsBuilder_ == null) {
-          if (((bitField0_ & 0x00800000) == 0x00800000)) {
+          if (((bitField0_ & 0x01000000) == 0x01000000)) {
             expansionCosts_ = java.util.Collections.unmodifiableList(expansionCosts_);
-            bitField0_ = (bitField0_ & ~0x00800000);
+            bitField0_ = (bitField0_ & ~0x01000000);
           }
           result.expansionCosts_ = expansionCosts_;
         } else {
           result.expansionCosts_ = expansionCostsBuilder_.build();
         }
         if (staticMonstersBuilder_ == null) {
-          if (((bitField0_ & 0x01000000) == 0x01000000)) {
+          if (((bitField0_ & 0x02000000) == 0x02000000)) {
             staticMonsters_ = java.util.Collections.unmodifiableList(staticMonsters_);
-            bitField0_ = (bitField0_ & ~0x01000000);
+            bitField0_ = (bitField0_ & ~0x02000000);
           }
           result.staticMonsters_ = staticMonsters_;
         } else {
           result.staticMonsters_ = staticMonstersBuilder_.build();
         }
         if (usersMonstersBuilder_ == null) {
-          if (((bitField0_ & 0x02000000) == 0x02000000)) {
+          if (((bitField0_ & 0x04000000) == 0x04000000)) {
             usersMonsters_ = java.util.Collections.unmodifiableList(usersMonsters_);
-            bitField0_ = (bitField0_ & ~0x02000000);
+            bitField0_ = (bitField0_ & ~0x04000000);
           }
           result.usersMonsters_ = usersMonsters_;
         } else {
           result.usersMonsters_ = usersMonstersBuilder_.build();
         }
         if (monstersHealingBuilder_ == null) {
-          if (((bitField0_ & 0x04000000) == 0x04000000)) {
+          if (((bitField0_ & 0x08000000) == 0x08000000)) {
             monstersHealing_ = java.util.Collections.unmodifiableList(monstersHealing_);
-            bitField0_ = (bitField0_ & ~0x04000000);
+            bitField0_ = (bitField0_ & ~0x08000000);
           }
           result.monstersHealing_ = monstersHealing_;
         } else {
           result.monstersHealing_ = monstersHealingBuilder_.build();
         }
-        if (((from_bitField0_ & 0x08000000) == 0x08000000)) {
+        if (((from_bitField0_ & 0x10000000) == 0x10000000)) {
           to_bitField0_ |= 0x00000200;
         }
         if (enhancementsBuilder_ == null) {
@@ -9018,15 +9073,15 @@ public final class EventStartupProto {
           result.enhancements_ = enhancementsBuilder_.build();
         }
         if (rareBoosterPurchasesBuilder_ == null) {
-          if (((bitField0_ & 0x10000000) == 0x10000000)) {
+          if (((bitField0_ & 0x20000000) == 0x20000000)) {
             rareBoosterPurchases_ = java.util.Collections.unmodifiableList(rareBoosterPurchases_);
-            bitField0_ = (bitField0_ & ~0x10000000);
+            bitField0_ = (bitField0_ & ~0x20000000);
           }
           result.rareBoosterPurchases_ = rareBoosterPurchases_;
         } else {
           result.rareBoosterPurchases_ = rareBoosterPurchasesBuilder_.build();
         }
-        if (((from_bitField0_ & 0x20000000) == 0x20000000)) {
+        if (((from_bitField0_ & 0x40000000) == 0x40000000)) {
           to_bitField0_ |= 0x00000400;
         }
         result.kabamNaid_ = kabamNaid_;
@@ -9087,55 +9142,55 @@ public final class EventStartupProto {
             }
           }
         }
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          if (!other.inProgressIncompleteQuests_.isEmpty()) {
-            if (inProgressIncompleteQuests_.isEmpty()) {
-              inProgressIncompleteQuests_ = other.inProgressIncompleteQuests_;
+        if (inProgressQuestsBuilder_ == null) {
+          if (!other.inProgressQuests_.isEmpty()) {
+            if (inProgressQuests_.isEmpty()) {
+              inProgressQuests_ = other.inProgressQuests_;
               bitField0_ = (bitField0_ & ~0x00000040);
             } else {
-              ensureInProgressIncompleteQuestsIsMutable();
-              inProgressIncompleteQuests_.addAll(other.inProgressIncompleteQuests_);
+              ensureInProgressQuestsIsMutable();
+              inProgressQuests_.addAll(other.inProgressQuests_);
             }
             onChanged();
           }
         } else {
-          if (!other.inProgressIncompleteQuests_.isEmpty()) {
-            if (inProgressIncompleteQuestsBuilder_.isEmpty()) {
-              inProgressIncompleteQuestsBuilder_.dispose();
-              inProgressIncompleteQuestsBuilder_ = null;
-              inProgressIncompleteQuests_ = other.inProgressIncompleteQuests_;
+          if (!other.inProgressQuests_.isEmpty()) {
+            if (inProgressQuestsBuilder_.isEmpty()) {
+              inProgressQuestsBuilder_.dispose();
+              inProgressQuestsBuilder_ = null;
+              inProgressQuests_ = other.inProgressQuests_;
               bitField0_ = (bitField0_ & ~0x00000040);
-              inProgressIncompleteQuestsBuilder_ = 
+              inProgressQuestsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getInProgressIncompleteQuestsFieldBuilder() : null;
+                   getInProgressQuestsFieldBuilder() : null;
             } else {
-              inProgressIncompleteQuestsBuilder_.addAllMessages(other.inProgressIncompleteQuests_);
+              inProgressQuestsBuilder_.addAllMessages(other.inProgressQuests_);
             }
           }
         }
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          if (!other.inProgressCompleteQuests_.isEmpty()) {
-            if (inProgressCompleteQuests_.isEmpty()) {
-              inProgressCompleteQuests_ = other.inProgressCompleteQuests_;
+        if (unredeemedQuestsBuilder_ == null) {
+          if (!other.unredeemedQuests_.isEmpty()) {
+            if (unredeemedQuests_.isEmpty()) {
+              unredeemedQuests_ = other.unredeemedQuests_;
               bitField0_ = (bitField0_ & ~0x00000080);
             } else {
-              ensureInProgressCompleteQuestsIsMutable();
-              inProgressCompleteQuests_.addAll(other.inProgressCompleteQuests_);
+              ensureUnredeemedQuestsIsMutable();
+              unredeemedQuests_.addAll(other.unredeemedQuests_);
             }
             onChanged();
           }
         } else {
-          if (!other.inProgressCompleteQuests_.isEmpty()) {
-            if (inProgressCompleteQuestsBuilder_.isEmpty()) {
-              inProgressCompleteQuestsBuilder_.dispose();
-              inProgressCompleteQuestsBuilder_ = null;
-              inProgressCompleteQuests_ = other.inProgressCompleteQuests_;
+          if (!other.unredeemedQuests_.isEmpty()) {
+            if (unredeemedQuestsBuilder_.isEmpty()) {
+              unredeemedQuestsBuilder_.dispose();
+              unredeemedQuestsBuilder_ = null;
+              unredeemedQuests_ = other.unredeemedQuests_;
               bitField0_ = (bitField0_ & ~0x00000080);
-              inProgressCompleteQuestsBuilder_ = 
+              unredeemedQuestsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getInProgressCompleteQuestsFieldBuilder() : null;
+                   getUnredeemedQuestsFieldBuilder() : null;
             } else {
-              inProgressCompleteQuestsBuilder_.addAllMessages(other.inProgressCompleteQuests_);
+              unredeemedQuestsBuilder_.addAllMessages(other.unredeemedQuests_);
             }
           }
         }
@@ -9165,11 +9220,37 @@ public final class EventStartupProto {
             }
           }
         }
+        if (userQuestsBuilder_ == null) {
+          if (!other.userQuests_.isEmpty()) {
+            if (userQuests_.isEmpty()) {
+              userQuests_ = other.userQuests_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureUserQuestsIsMutable();
+              userQuests_.addAll(other.userQuests_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.userQuests_.isEmpty()) {
+            if (userQuestsBuilder_.isEmpty()) {
+              userQuestsBuilder_.dispose();
+              userQuestsBuilder_ = null;
+              userQuests_ = other.userQuests_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              userQuestsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUserQuestsFieldBuilder() : null;
+            } else {
+              userQuestsBuilder_.addAllMessages(other.userQuests_);
+            }
+          }
+        }
         if (userClanInfoBuilder_ == null) {
           if (!other.userClanInfo_.isEmpty()) {
             if (userClanInfo_.isEmpty()) {
               userClanInfo_ = other.userClanInfo_;
-              bitField0_ = (bitField0_ & ~0x00000200);
+              bitField0_ = (bitField0_ & ~0x00000400);
             } else {
               ensureUserClanInfoIsMutable();
               userClanInfo_.addAll(other.userClanInfo_);
@@ -9182,7 +9263,7 @@ public final class EventStartupProto {
               userClanInfoBuilder_.dispose();
               userClanInfoBuilder_ = null;
               userClanInfo_ = other.userClanInfo_;
-              bitField0_ = (bitField0_ & ~0x00000200);
+              bitField0_ = (bitField0_ & ~0x00000400);
               userClanInfoBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUserClanInfoFieldBuilder() : null;
@@ -9207,7 +9288,7 @@ public final class EventStartupProto {
           if (!other.goldSales_.isEmpty()) {
             if (goldSales_.isEmpty()) {
               goldSales_ = other.goldSales_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             } else {
               ensureGoldSalesIsMutable();
               goldSales_.addAll(other.goldSales_);
@@ -9220,7 +9301,7 @@ public final class EventStartupProto {
               goldSalesBuilder_.dispose();
               goldSalesBuilder_ = null;
               goldSales_ = other.goldSales_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
               goldSalesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getGoldSalesFieldBuilder() : null;
@@ -9233,7 +9314,7 @@ public final class EventStartupProto {
           if (!other.attackNotifications_.isEmpty()) {
             if (attackNotifications_.isEmpty()) {
               attackNotifications_ = other.attackNotifications_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
             } else {
               ensureAttackNotificationsIsMutable();
               attackNotifications_.addAll(other.attackNotifications_);
@@ -9246,7 +9327,7 @@ public final class EventStartupProto {
               attackNotificationsBuilder_.dispose();
               attackNotificationsBuilder_ = null;
               attackNotifications_ = other.attackNotifications_;
-              bitField0_ = (bitField0_ & ~0x00008000);
+              bitField0_ = (bitField0_ & ~0x00010000);
               attackNotificationsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getAttackNotificationsFieldBuilder() : null;
@@ -9259,7 +9340,7 @@ public final class EventStartupProto {
           if (!other.referralNotifications_.isEmpty()) {
             if (referralNotifications_.isEmpty()) {
               referralNotifications_ = other.referralNotifications_;
-              bitField0_ = (bitField0_ & ~0x00010000);
+              bitField0_ = (bitField0_ & ~0x00020000);
             } else {
               ensureReferralNotificationsIsMutable();
               referralNotifications_.addAll(other.referralNotifications_);
@@ -9272,7 +9353,7 @@ public final class EventStartupProto {
               referralNotificationsBuilder_.dispose();
               referralNotificationsBuilder_ = null;
               referralNotifications_ = other.referralNotifications_;
-              bitField0_ = (bitField0_ & ~0x00010000);
+              bitField0_ = (bitField0_ & ~0x00020000);
               referralNotificationsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getReferralNotificationsFieldBuilder() : null;
@@ -9284,7 +9365,7 @@ public final class EventStartupProto {
         if (!other.noticesToPlayers_.isEmpty()) {
           if (noticesToPlayers_.isEmpty()) {
             noticesToPlayers_ = other.noticesToPlayers_;
-            bitField0_ = (bitField0_ & ~0x00020000);
+            bitField0_ = (bitField0_ & ~0x00040000);
           } else {
             ensureNoticesToPlayersIsMutable();
             noticesToPlayers_.addAll(other.noticesToPlayers_);
@@ -9295,7 +9376,7 @@ public final class EventStartupProto {
           if (!other.globalChats_.isEmpty()) {
             if (globalChats_.isEmpty()) {
               globalChats_ = other.globalChats_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x00080000);
             } else {
               ensureGlobalChatsIsMutable();
               globalChats_.addAll(other.globalChats_);
@@ -9308,7 +9389,7 @@ public final class EventStartupProto {
               globalChatsBuilder_.dispose();
               globalChatsBuilder_ = null;
               globalChats_ = other.globalChats_;
-              bitField0_ = (bitField0_ & ~0x00040000);
+              bitField0_ = (bitField0_ & ~0x00080000);
               globalChatsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getGlobalChatsFieldBuilder() : null;
@@ -9321,7 +9402,7 @@ public final class EventStartupProto {
           if (!other.clanChats_.isEmpty()) {
             if (clanChats_.isEmpty()) {
               clanChats_ = other.clanChats_;
-              bitField0_ = (bitField0_ & ~0x00080000);
+              bitField0_ = (bitField0_ & ~0x00100000);
             } else {
               ensureClanChatsIsMutable();
               clanChats_.addAll(other.clanChats_);
@@ -9334,7 +9415,7 @@ public final class EventStartupProto {
               clanChatsBuilder_.dispose();
               clanChatsBuilder_ = null;
               clanChats_ = other.clanChats_;
-              bitField0_ = (bitField0_ & ~0x00080000);
+              bitField0_ = (bitField0_ & ~0x00100000);
               clanChatsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getClanChatsFieldBuilder() : null;
@@ -9347,7 +9428,7 @@ public final class EventStartupProto {
           if (!other.pcpp_.isEmpty()) {
             if (pcpp_.isEmpty()) {
               pcpp_ = other.pcpp_;
-              bitField0_ = (bitField0_ & ~0x00100000);
+              bitField0_ = (bitField0_ & ~0x00200000);
             } else {
               ensurePcppIsMutable();
               pcpp_.addAll(other.pcpp_);
@@ -9360,7 +9441,7 @@ public final class EventStartupProto {
               pcppBuilder_.dispose();
               pcppBuilder_ = null;
               pcpp_ = other.pcpp_;
-              bitField0_ = (bitField0_ & ~0x00100000);
+              bitField0_ = (bitField0_ & ~0x00200000);
               pcppBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPcppFieldBuilder() : null;
@@ -9373,7 +9454,7 @@ public final class EventStartupProto {
           if (!other.larep_.isEmpty()) {
             if (larep_.isEmpty()) {
               larep_ = other.larep_;
-              bitField0_ = (bitField0_ & ~0x00200000);
+              bitField0_ = (bitField0_ & ~0x00400000);
             } else {
               ensureLarepIsMutable();
               larep_.addAll(other.larep_);
@@ -9386,7 +9467,7 @@ public final class EventStartupProto {
               larepBuilder_.dispose();
               larepBuilder_ = null;
               larep_ = other.larep_;
-              bitField0_ = (bitField0_ & ~0x00200000);
+              bitField0_ = (bitField0_ & ~0x00400000);
               larepBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getLarepFieldBuilder() : null;
@@ -9399,7 +9480,7 @@ public final class EventStartupProto {
           if (!other.staticStructs_.isEmpty()) {
             if (staticStructs_.isEmpty()) {
               staticStructs_ = other.staticStructs_;
-              bitField0_ = (bitField0_ & ~0x00400000);
+              bitField0_ = (bitField0_ & ~0x00800000);
             } else {
               ensureStaticStructsIsMutable();
               staticStructs_.addAll(other.staticStructs_);
@@ -9412,7 +9493,7 @@ public final class EventStartupProto {
               staticStructsBuilder_.dispose();
               staticStructsBuilder_ = null;
               staticStructs_ = other.staticStructs_;
-              bitField0_ = (bitField0_ & ~0x00400000);
+              bitField0_ = (bitField0_ & ~0x00800000);
               staticStructsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getStaticStructsFieldBuilder() : null;
@@ -9425,7 +9506,7 @@ public final class EventStartupProto {
           if (!other.expansionCosts_.isEmpty()) {
             if (expansionCosts_.isEmpty()) {
               expansionCosts_ = other.expansionCosts_;
-              bitField0_ = (bitField0_ & ~0x00800000);
+              bitField0_ = (bitField0_ & ~0x01000000);
             } else {
               ensureExpansionCostsIsMutable();
               expansionCosts_.addAll(other.expansionCosts_);
@@ -9438,7 +9519,7 @@ public final class EventStartupProto {
               expansionCostsBuilder_.dispose();
               expansionCostsBuilder_ = null;
               expansionCosts_ = other.expansionCosts_;
-              bitField0_ = (bitField0_ & ~0x00800000);
+              bitField0_ = (bitField0_ & ~0x01000000);
               expansionCostsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getExpansionCostsFieldBuilder() : null;
@@ -9451,7 +9532,7 @@ public final class EventStartupProto {
           if (!other.staticMonsters_.isEmpty()) {
             if (staticMonsters_.isEmpty()) {
               staticMonsters_ = other.staticMonsters_;
-              bitField0_ = (bitField0_ & ~0x01000000);
+              bitField0_ = (bitField0_ & ~0x02000000);
             } else {
               ensureStaticMonstersIsMutable();
               staticMonsters_.addAll(other.staticMonsters_);
@@ -9464,7 +9545,7 @@ public final class EventStartupProto {
               staticMonstersBuilder_.dispose();
               staticMonstersBuilder_ = null;
               staticMonsters_ = other.staticMonsters_;
-              bitField0_ = (bitField0_ & ~0x01000000);
+              bitField0_ = (bitField0_ & ~0x02000000);
               staticMonstersBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getStaticMonstersFieldBuilder() : null;
@@ -9477,7 +9558,7 @@ public final class EventStartupProto {
           if (!other.usersMonsters_.isEmpty()) {
             if (usersMonsters_.isEmpty()) {
               usersMonsters_ = other.usersMonsters_;
-              bitField0_ = (bitField0_ & ~0x02000000);
+              bitField0_ = (bitField0_ & ~0x04000000);
             } else {
               ensureUsersMonstersIsMutable();
               usersMonsters_.addAll(other.usersMonsters_);
@@ -9490,7 +9571,7 @@ public final class EventStartupProto {
               usersMonstersBuilder_.dispose();
               usersMonstersBuilder_ = null;
               usersMonsters_ = other.usersMonsters_;
-              bitField0_ = (bitField0_ & ~0x02000000);
+              bitField0_ = (bitField0_ & ~0x04000000);
               usersMonstersBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getUsersMonstersFieldBuilder() : null;
@@ -9503,7 +9584,7 @@ public final class EventStartupProto {
           if (!other.monstersHealing_.isEmpty()) {
             if (monstersHealing_.isEmpty()) {
               monstersHealing_ = other.monstersHealing_;
-              bitField0_ = (bitField0_ & ~0x04000000);
+              bitField0_ = (bitField0_ & ~0x08000000);
             } else {
               ensureMonstersHealingIsMutable();
               monstersHealing_.addAll(other.monstersHealing_);
@@ -9516,7 +9597,7 @@ public final class EventStartupProto {
               monstersHealingBuilder_.dispose();
               monstersHealingBuilder_ = null;
               monstersHealing_ = other.monstersHealing_;
-              bitField0_ = (bitField0_ & ~0x04000000);
+              bitField0_ = (bitField0_ & ~0x08000000);
               monstersHealingBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getMonstersHealingFieldBuilder() : null;
@@ -9532,7 +9613,7 @@ public final class EventStartupProto {
           if (!other.rareBoosterPurchases_.isEmpty()) {
             if (rareBoosterPurchases_.isEmpty()) {
               rareBoosterPurchases_ = other.rareBoosterPurchases_;
-              bitField0_ = (bitField0_ & ~0x10000000);
+              bitField0_ = (bitField0_ & ~0x20000000);
             } else {
               ensureRareBoosterPurchasesIsMutable();
               rareBoosterPurchases_.addAll(other.rareBoosterPurchases_);
@@ -9545,7 +9626,7 @@ public final class EventStartupProto {
               rareBoosterPurchasesBuilder_.dispose();
               rareBoosterPurchasesBuilder_ = null;
               rareBoosterPurchases_ = other.rareBoosterPurchases_;
-              bitField0_ = (bitField0_ & ~0x10000000);
+              bitField0_ = (bitField0_ & ~0x20000000);
               rareBoosterPurchasesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getRareBoosterPurchasesFieldBuilder() : null;
@@ -9642,13 +9723,13 @@ public final class EventStartupProto {
             case 58: {
               com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addInProgressIncompleteQuests(subBuilder.buildPartial());
+              addInProgressQuests(subBuilder.buildPartial());
               break;
             }
             case 66: {
               com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addInProgressCompleteQuests(subBuilder.buildPartial());
+              addUnredeemedQuests(subBuilder.buildPartial());
               break;
             }
             case 74: {
@@ -9658,109 +9739,115 @@ public final class EventStartupProto {
               break;
             }
             case 82: {
+              com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addUserQuests(subBuilder.buildPartial());
+              break;
+            }
+            case 90: {
               com.lvl6.proto.ClanProto.FullUserClanProto.Builder subBuilder = com.lvl6.proto.ClanProto.FullUserClanProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUserClanInfo(subBuilder.buildPartial());
               break;
             }
-            case 90: {
-              bitField0_ |= 0x00000400;
-              appStoreURL_ = input.readBytes();
-              break;
-            }
             case 98: {
               bitField0_ |= 0x00000800;
-              reviewPageURL_ = input.readBytes();
+              appStoreURL_ = input.readBytes();
               break;
             }
             case 106: {
               bitField0_ |= 0x00001000;
+              reviewPageURL_ = input.readBytes();
+              break;
+            }
+            case 114: {
+              bitField0_ |= 0x00002000;
               reviewPageConfirmationMessage_ = input.readBytes();
               break;
             }
-            case 112: {
-              bitField0_ |= 0x00002000;
+            case 120: {
+              bitField0_ |= 0x00004000;
               playerHasBoughtInAppPurchase_ = input.readBool();
               break;
             }
-            case 122: {
+            case 130: {
               com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder subBuilder = com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addGoldSales(subBuilder.buildPartial());
               break;
             }
-            case 130: {
+            case 138: {
               com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addAttackNotifications(subBuilder.buildPartial());
               break;
             }
-            case 138: {
+            case 146: {
               com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addReferralNotifications(subBuilder.buildPartial());
               break;
             }
-            case 146: {
+            case 154: {
               ensureNoticesToPlayersIsMutable();
               noticesToPlayers_.add(input.readBytes());
-              break;
-            }
-            case 154: {
-              com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder subBuilder = com.lvl6.proto.ChatProto.GroupChatMessageProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addGlobalChats(subBuilder.buildPartial());
               break;
             }
             case 162: {
               com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder subBuilder = com.lvl6.proto.ChatProto.GroupChatMessageProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addClanChats(subBuilder.buildPartial());
+              addGlobalChats(subBuilder.buildPartial());
               break;
             }
             case 170: {
+              com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder subBuilder = com.lvl6.proto.ChatProto.GroupChatMessageProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addClanChats(subBuilder.buildPartial());
+              break;
+            }
+            case 178: {
               com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder subBuilder = com.lvl6.proto.ChatProto.PrivateChatPostProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addPcpp(subBuilder.buildPartial());
               break;
             }
-            case 178: {
+            case 186: {
               com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder subBuilder = com.lvl6.proto.UserProto.LevelAndRequiredExpProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addLarep(subBuilder.buildPartial());
               break;
             }
-            case 186: {
+            case 194: {
               com.lvl6.proto.StructureProto.FullStructureProto.Builder subBuilder = com.lvl6.proto.StructureProto.FullStructureProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addStaticStructs(subBuilder.buildPartial());
               break;
             }
-            case 194: {
+            case 202: {
               com.lvl6.proto.CityProto.CityExpansionCostProto.Builder subBuilder = com.lvl6.proto.CityProto.CityExpansionCostProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addExpansionCosts(subBuilder.buildPartial());
               break;
             }
-            case 202: {
+            case 210: {
               com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MonsterProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addStaticMonsters(subBuilder.buildPartial());
               break;
             }
-            case 210: {
+            case 218: {
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUsersMonsters(subBuilder.buildPartial());
               break;
             }
-            case 218: {
+            case 226: {
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addMonstersHealing(subBuilder.buildPartial());
               break;
             }
-            case 226: {
+            case 234: {
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.newBuilder();
               if (hasEnhancements()) {
                 subBuilder.mergeFrom(getEnhancements());
@@ -9769,14 +9856,14 @@ public final class EventStartupProto {
               setEnhancements(subBuilder.buildPartial());
               break;
             }
-            case 234: {
+            case 242: {
               com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto.Builder subBuilder = com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addRareBoosterPurchases(subBuilder.buildPartial());
               break;
             }
-            case 242: {
-              bitField0_ |= 0x20000000;
+            case 250: {
+              bitField0_ |= 0x40000000;
               kabamNaid_ = input.readBytes();
               break;
             }
@@ -10221,376 +10308,376 @@ public final class EventStartupProto {
         return allCitiesBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullQuestProto inProgressIncompleteQuests = 7;
-      private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressIncompleteQuests_ =
+      // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 7;
+      private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressQuests_ =
         java.util.Collections.emptyList();
-      private void ensureInProgressIncompleteQuestsIsMutable() {
+      private void ensureInProgressQuestsIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          inProgressIncompleteQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>(inProgressIncompleteQuests_);
+          inProgressQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>(inProgressQuests_);
           bitField0_ |= 0x00000040;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> inProgressIncompleteQuestsBuilder_;
+          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> inProgressQuestsBuilder_;
       
-      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressIncompleteQuestsList() {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(inProgressIncompleteQuests_);
+      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressQuestsList() {
+        if (inProgressQuestsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(inProgressQuests_);
         } else {
-          return inProgressIncompleteQuestsBuilder_.getMessageList();
+          return inProgressQuestsBuilder_.getMessageList();
         }
       }
-      public int getInProgressIncompleteQuestsCount() {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          return inProgressIncompleteQuests_.size();
+      public int getInProgressQuestsCount() {
+        if (inProgressQuestsBuilder_ == null) {
+          return inProgressQuests_.size();
         } else {
-          return inProgressIncompleteQuestsBuilder_.getCount();
+          return inProgressQuestsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto getInProgressIncompleteQuests(int index) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          return inProgressIncompleteQuests_.get(index);
+      public com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index) {
+        if (inProgressQuestsBuilder_ == null) {
+          return inProgressQuests_.get(index);
         } else {
-          return inProgressIncompleteQuestsBuilder_.getMessage(index);
+          return inProgressQuestsBuilder_.getMessage(index);
         }
       }
-      public Builder setInProgressIncompleteQuests(
+      public Builder setInProgressQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
+        if (inProgressQuestsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureInProgressIncompleteQuestsIsMutable();
-          inProgressIncompleteQuests_.set(index, value);
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.set(index, value);
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.setMessage(index, value);
+          inProgressQuestsBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setInProgressIncompleteQuests(
+      public Builder setInProgressQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          ensureInProgressIncompleteQuestsIsMutable();
-          inProgressIncompleteQuests_.set(index, builderForValue.build());
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.set(index, builderForValue.build());
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.setMessage(index, builderForValue.build());
+          inProgressQuestsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addInProgressIncompleteQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
+      public Builder addInProgressQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (inProgressQuestsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureInProgressIncompleteQuestsIsMutable();
-          inProgressIncompleteQuests_.add(value);
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.add(value);
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.addMessage(value);
+          inProgressQuestsBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addInProgressIncompleteQuests(
+      public Builder addInProgressQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
+        if (inProgressQuestsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureInProgressIncompleteQuestsIsMutable();
-          inProgressIncompleteQuests_.add(index, value);
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.add(index, value);
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.addMessage(index, value);
+          inProgressQuestsBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addInProgressIncompleteQuests(
+      public Builder addInProgressQuests(
           com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          ensureInProgressIncompleteQuestsIsMutable();
-          inProgressIncompleteQuests_.add(builderForValue.build());
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.add(builderForValue.build());
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.addMessage(builderForValue.build());
+          inProgressQuestsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addInProgressIncompleteQuests(
+      public Builder addInProgressQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          ensureInProgressIncompleteQuestsIsMutable();
-          inProgressIncompleteQuests_.add(index, builderForValue.build());
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.add(index, builderForValue.build());
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.addMessage(index, builderForValue.build());
+          inProgressQuestsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllInProgressIncompleteQuests(
+      public Builder addAllInProgressQuests(
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          ensureInProgressIncompleteQuestsIsMutable();
-          super.addAll(values, inProgressIncompleteQuests_);
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          super.addAll(values, inProgressQuests_);
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.addAllMessages(values);
+          inProgressQuestsBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearInProgressIncompleteQuests() {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          inProgressIncompleteQuests_ = java.util.Collections.emptyList();
+      public Builder clearInProgressQuests() {
+        if (inProgressQuestsBuilder_ == null) {
+          inProgressQuests_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.clear();
+          inProgressQuestsBuilder_.clear();
         }
         return this;
       }
-      public Builder removeInProgressIncompleteQuests(int index) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          ensureInProgressIncompleteQuestsIsMutable();
-          inProgressIncompleteQuests_.remove(index);
+      public Builder removeInProgressQuests(int index) {
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.remove(index);
           onChanged();
         } else {
-          inProgressIncompleteQuestsBuilder_.remove(index);
+          inProgressQuestsBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder getInProgressIncompleteQuestsBuilder(
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder getInProgressQuestsBuilder(
           int index) {
-        return getInProgressIncompleteQuestsFieldBuilder().getBuilder(index);
+        return getInProgressQuestsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressIncompleteQuestsOrBuilder(
+      public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
           int index) {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          return inProgressIncompleteQuests_.get(index);  } else {
-          return inProgressIncompleteQuestsBuilder_.getMessageOrBuilder(index);
+        if (inProgressQuestsBuilder_ == null) {
+          return inProgressQuests_.get(index);  } else {
+          return inProgressQuestsBuilder_.getMessageOrBuilder(index);
         }
       }
       public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-           getInProgressIncompleteQuestsOrBuilderList() {
-        if (inProgressIncompleteQuestsBuilder_ != null) {
-          return inProgressIncompleteQuestsBuilder_.getMessageOrBuilderList();
+           getInProgressQuestsOrBuilderList() {
+        if (inProgressQuestsBuilder_ != null) {
+          return inProgressQuestsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(inProgressIncompleteQuests_);
+          return java.util.Collections.unmodifiableList(inProgressQuests_);
         }
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressIncompleteQuestsBuilder() {
-        return getInProgressIncompleteQuestsFieldBuilder().addBuilder(
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressQuestsBuilder() {
+        return getInProgressQuestsFieldBuilder().addBuilder(
             com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressIncompleteQuestsBuilder(
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressQuestsBuilder(
           int index) {
-        return getInProgressIncompleteQuestsFieldBuilder().addBuilder(
+        return getInProgressQuestsFieldBuilder().addBuilder(
             index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
-           getInProgressIncompleteQuestsBuilderList() {
-        return getInProgressIncompleteQuestsFieldBuilder().getBuilderList();
+           getInProgressQuestsBuilderList() {
+        return getInProgressQuestsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-          getInProgressIncompleteQuestsFieldBuilder() {
-        if (inProgressIncompleteQuestsBuilder_ == null) {
-          inProgressIncompleteQuestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getInProgressQuestsFieldBuilder() {
+        if (inProgressQuestsBuilder_ == null) {
+          inProgressQuestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder>(
-                  inProgressIncompleteQuests_,
+                  inProgressQuests_,
                   ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
-          inProgressIncompleteQuests_ = null;
+          inProgressQuests_ = null;
         }
-        return inProgressIncompleteQuestsBuilder_;
+        return inProgressQuestsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullQuestProto inProgressCompleteQuests = 8;
-      private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressCompleteQuests_ =
+      // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 8;
+      private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> unredeemedQuests_ =
         java.util.Collections.emptyList();
-      private void ensureInProgressCompleteQuestsIsMutable() {
+      private void ensureUnredeemedQuestsIsMutable() {
         if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          inProgressCompleteQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>(inProgressCompleteQuests_);
+          unredeemedQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>(unredeemedQuests_);
           bitField0_ |= 0x00000080;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> inProgressCompleteQuestsBuilder_;
+          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> unredeemedQuestsBuilder_;
       
-      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressCompleteQuestsList() {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(inProgressCompleteQuests_);
+      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getUnredeemedQuestsList() {
+        if (unredeemedQuestsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(unredeemedQuests_);
         } else {
-          return inProgressCompleteQuestsBuilder_.getMessageList();
+          return unredeemedQuestsBuilder_.getMessageList();
         }
       }
-      public int getInProgressCompleteQuestsCount() {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          return inProgressCompleteQuests_.size();
+      public int getUnredeemedQuestsCount() {
+        if (unredeemedQuestsBuilder_ == null) {
+          return unredeemedQuests_.size();
         } else {
-          return inProgressCompleteQuestsBuilder_.getCount();
+          return unredeemedQuestsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto getInProgressCompleteQuests(int index) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          return inProgressCompleteQuests_.get(index);
+      public com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index) {
+        if (unredeemedQuestsBuilder_ == null) {
+          return unredeemedQuests_.get(index);
         } else {
-          return inProgressCompleteQuestsBuilder_.getMessage(index);
+          return unredeemedQuestsBuilder_.getMessage(index);
         }
       }
-      public Builder setInProgressCompleteQuests(
+      public Builder setUnredeemedQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
+        if (unredeemedQuestsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureInProgressCompleteQuestsIsMutable();
-          inProgressCompleteQuests_.set(index, value);
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.set(index, value);
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.setMessage(index, value);
+          unredeemedQuestsBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setInProgressCompleteQuests(
+      public Builder setUnredeemedQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          ensureInProgressCompleteQuestsIsMutable();
-          inProgressCompleteQuests_.set(index, builderForValue.build());
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.set(index, builderForValue.build());
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.setMessage(index, builderForValue.build());
+          unredeemedQuestsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addInProgressCompleteQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
+      public Builder addUnredeemedQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (unredeemedQuestsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureInProgressCompleteQuestsIsMutable();
-          inProgressCompleteQuests_.add(value);
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.add(value);
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.addMessage(value);
+          unredeemedQuestsBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addInProgressCompleteQuests(
+      public Builder addUnredeemedQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
+        if (unredeemedQuestsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureInProgressCompleteQuestsIsMutable();
-          inProgressCompleteQuests_.add(index, value);
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.add(index, value);
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.addMessage(index, value);
+          unredeemedQuestsBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addInProgressCompleteQuests(
+      public Builder addUnredeemedQuests(
           com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          ensureInProgressCompleteQuestsIsMutable();
-          inProgressCompleteQuests_.add(builderForValue.build());
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.add(builderForValue.build());
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.addMessage(builderForValue.build());
+          unredeemedQuestsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addInProgressCompleteQuests(
+      public Builder addUnredeemedQuests(
           int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          ensureInProgressCompleteQuestsIsMutable();
-          inProgressCompleteQuests_.add(index, builderForValue.build());
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.add(index, builderForValue.build());
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.addMessage(index, builderForValue.build());
+          unredeemedQuestsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllInProgressCompleteQuests(
+      public Builder addAllUnredeemedQuests(
           java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          ensureInProgressCompleteQuestsIsMutable();
-          super.addAll(values, inProgressCompleteQuests_);
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          super.addAll(values, unredeemedQuests_);
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.addAllMessages(values);
+          unredeemedQuestsBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearInProgressCompleteQuests() {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          inProgressCompleteQuests_ = java.util.Collections.emptyList();
+      public Builder clearUnredeemedQuests() {
+        if (unredeemedQuestsBuilder_ == null) {
+          unredeemedQuests_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000080);
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.clear();
+          unredeemedQuestsBuilder_.clear();
         }
         return this;
       }
-      public Builder removeInProgressCompleteQuests(int index) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          ensureInProgressCompleteQuestsIsMutable();
-          inProgressCompleteQuests_.remove(index);
+      public Builder removeUnredeemedQuests(int index) {
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.remove(index);
           onChanged();
         } else {
-          inProgressCompleteQuestsBuilder_.remove(index);
+          unredeemedQuestsBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder getInProgressCompleteQuestsBuilder(
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder getUnredeemedQuestsBuilder(
           int index) {
-        return getInProgressCompleteQuestsFieldBuilder().getBuilder(index);
+        return getUnredeemedQuestsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressCompleteQuestsOrBuilder(
+      public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
           int index) {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          return inProgressCompleteQuests_.get(index);  } else {
-          return inProgressCompleteQuestsBuilder_.getMessageOrBuilder(index);
+        if (unredeemedQuestsBuilder_ == null) {
+          return unredeemedQuests_.get(index);  } else {
+          return unredeemedQuestsBuilder_.getMessageOrBuilder(index);
         }
       }
       public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-           getInProgressCompleteQuestsOrBuilderList() {
-        if (inProgressCompleteQuestsBuilder_ != null) {
-          return inProgressCompleteQuestsBuilder_.getMessageOrBuilderList();
+           getUnredeemedQuestsOrBuilderList() {
+        if (unredeemedQuestsBuilder_ != null) {
+          return unredeemedQuestsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(inProgressCompleteQuests_);
+          return java.util.Collections.unmodifiableList(unredeemedQuests_);
         }
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressCompleteQuestsBuilder() {
-        return getInProgressCompleteQuestsFieldBuilder().addBuilder(
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addUnredeemedQuestsBuilder() {
+        return getUnredeemedQuestsFieldBuilder().addBuilder(
             com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressCompleteQuestsBuilder(
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addUnredeemedQuestsBuilder(
           int index) {
-        return getInProgressCompleteQuestsFieldBuilder().addBuilder(
+        return getUnredeemedQuestsFieldBuilder().addBuilder(
             index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
       }
       public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
-           getInProgressCompleteQuestsBuilderList() {
-        return getInProgressCompleteQuestsFieldBuilder().getBuilderList();
+           getUnredeemedQuestsBuilderList() {
+        return getUnredeemedQuestsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-          getInProgressCompleteQuestsFieldBuilder() {
-        if (inProgressCompleteQuestsBuilder_ == null) {
-          inProgressCompleteQuestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getUnredeemedQuestsFieldBuilder() {
+        if (unredeemedQuestsBuilder_ == null) {
+          unredeemedQuestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder>(
-                  inProgressCompleteQuests_,
+                  unredeemedQuests_,
                   ((bitField0_ & 0x00000080) == 0x00000080),
                   getParentForChildren(),
                   isClean());
-          inProgressCompleteQuests_ = null;
+          unredeemedQuests_ = null;
         }
-        return inProgressCompleteQuestsBuilder_;
+        return unredeemedQuestsBuilder_;
       }
       
       // repeated .com.lvl6.proto.FullQuestProto availableQuests = 9;
@@ -10779,13 +10866,199 @@ public final class EventStartupProto {
         return availableQuestsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 10;
+      // repeated .com.lvl6.proto.FullUserQuestDataLargeProto userQuests = 10;
+      private java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> userQuests_ =
+        java.util.Collections.emptyList();
+      private void ensureUserQuestsIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          userQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto>(userQuests_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> userQuestsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> getUserQuestsList() {
+        if (userQuestsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(userQuests_);
+        } else {
+          return userQuestsBuilder_.getMessageList();
+        }
+      }
+      public int getUserQuestsCount() {
+        if (userQuestsBuilder_ == null) {
+          return userQuests_.size();
+        } else {
+          return userQuestsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto getUserQuests(int index) {
+        if (userQuestsBuilder_ == null) {
+          return userQuests_.get(index);
+        } else {
+          return userQuestsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setUserQuests(
+          int index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto value) {
+        if (userQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserQuestsIsMutable();
+          userQuests_.set(index, value);
+          onChanged();
+        } else {
+          userQuestsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setUserQuests(
+          int index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder builderForValue) {
+        if (userQuestsBuilder_ == null) {
+          ensureUserQuestsIsMutable();
+          userQuests_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          userQuestsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addUserQuests(com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto value) {
+        if (userQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserQuestsIsMutable();
+          userQuests_.add(value);
+          onChanged();
+        } else {
+          userQuestsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addUserQuests(
+          int index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto value) {
+        if (userQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUserQuestsIsMutable();
+          userQuests_.add(index, value);
+          onChanged();
+        } else {
+          userQuestsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addUserQuests(
+          com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder builderForValue) {
+        if (userQuestsBuilder_ == null) {
+          ensureUserQuestsIsMutable();
+          userQuests_.add(builderForValue.build());
+          onChanged();
+        } else {
+          userQuestsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addUserQuests(
+          int index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder builderForValue) {
+        if (userQuestsBuilder_ == null) {
+          ensureUserQuestsIsMutable();
+          userQuests_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          userQuestsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllUserQuests(
+          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto> values) {
+        if (userQuestsBuilder_ == null) {
+          ensureUserQuestsIsMutable();
+          super.addAll(values, userQuests_);
+          onChanged();
+        } else {
+          userQuestsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearUserQuests() {
+        if (userQuestsBuilder_ == null) {
+          userQuests_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+        } else {
+          userQuestsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeUserQuests(int index) {
+        if (userQuestsBuilder_ == null) {
+          ensureUserQuestsIsMutable();
+          userQuests_.remove(index);
+          onChanged();
+        } else {
+          userQuestsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder getUserQuestsBuilder(
+          int index) {
+        return getUserQuestsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder getUserQuestsOrBuilder(
+          int index) {
+        if (userQuestsBuilder_ == null) {
+          return userQuests_.get(index);  } else {
+          return userQuestsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> 
+           getUserQuestsOrBuilderList() {
+        if (userQuestsBuilder_ != null) {
+          return userQuestsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(userQuests_);
+        }
+      }
+      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder addUserQuestsBuilder() {
+        return getUserQuestsFieldBuilder().addBuilder(
+            com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder addUserQuestsBuilder(
+          int index) {
+        return getUserQuestsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder> 
+           getUserQuestsBuilderList() {
+        return getUserQuestsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder> 
+          getUserQuestsFieldBuilder() {
+        if (userQuestsBuilder_ == null) {
+          userQuestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProto.Builder, com.lvl6.proto.QuestProto.FullUserQuestDataLargeProtoOrBuilder>(
+                  userQuests_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          userQuests_ = null;
+        }
+        return userQuestsBuilder_;
+      }
+      
+      // repeated .com.lvl6.proto.FullUserClanProto userClanInfo = 11;
       private java.util.List<com.lvl6.proto.ClanProto.FullUserClanProto> userClanInfo_ =
         java.util.Collections.emptyList();
       private void ensureUserClanInfoIsMutable() {
-        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
           userClanInfo_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.FullUserClanProto>(userClanInfo_);
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000400;
          }
       }
       
@@ -10901,7 +11174,7 @@ public final class EventStartupProto {
       public Builder clearUserClanInfo() {
         if (userClanInfoBuilder_ == null) {
           userClanInfo_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000400);
           onChanged();
         } else {
           userClanInfoBuilder_.clear();
@@ -10957,7 +11230,7 @@ public final class EventStartupProto {
           userClanInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.FullUserClanProto, com.lvl6.proto.ClanProto.FullUserClanProto.Builder, com.lvl6.proto.ClanProto.FullUserClanProtoOrBuilder>(
                   userClanInfo_,
-                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  ((bitField0_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
           userClanInfo_ = null;
@@ -10965,10 +11238,10 @@ public final class EventStartupProto {
         return userClanInfoBuilder_;
       }
       
-      // optional string appStoreURL = 11;
+      // optional string appStoreURL = 12;
       private java.lang.Object appStoreURL_ = "";
       public boolean hasAppStoreURL() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       public String getAppStoreURL() {
         java.lang.Object ref = appStoreURL_;
@@ -10984,27 +11257,27 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000400;
+  bitField0_ |= 0x00000800;
         appStoreURL_ = value;
         onChanged();
         return this;
       }
       public Builder clearAppStoreURL() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         appStoreURL_ = getDefaultInstance().getAppStoreURL();
         onChanged();
         return this;
       }
       void setAppStoreURL(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         appStoreURL_ = value;
         onChanged();
       }
       
-      // optional string reviewPageURL = 12;
+      // optional string reviewPageURL = 13;
       private java.lang.Object reviewPageURL_ = "";
       public boolean hasReviewPageURL() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       public String getReviewPageURL() {
         java.lang.Object ref = reviewPageURL_;
@@ -11020,27 +11293,27 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000800;
+  bitField0_ |= 0x00001000;
         reviewPageURL_ = value;
         onChanged();
         return this;
       }
       public Builder clearReviewPageURL() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         reviewPageURL_ = getDefaultInstance().getReviewPageURL();
         onChanged();
         return this;
       }
       void setReviewPageURL(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00001000;
         reviewPageURL_ = value;
         onChanged();
       }
       
-      // optional string reviewPageConfirmationMessage = 13;
+      // optional string reviewPageConfirmationMessage = 14;
       private java.lang.Object reviewPageConfirmationMessage_ = "";
       public boolean hasReviewPageConfirmationMessage() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       public String getReviewPageConfirmationMessage() {
         java.lang.Object ref = reviewPageConfirmationMessage_;
@@ -11056,51 +11329,51 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00001000;
+  bitField0_ |= 0x00002000;
         reviewPageConfirmationMessage_ = value;
         onChanged();
         return this;
       }
       public Builder clearReviewPageConfirmationMessage() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         reviewPageConfirmationMessage_ = getDefaultInstance().getReviewPageConfirmationMessage();
         onChanged();
         return this;
       }
       void setReviewPageConfirmationMessage(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00002000;
         reviewPageConfirmationMessage_ = value;
         onChanged();
       }
       
-      // optional bool playerHasBoughtInAppPurchase = 14;
+      // optional bool playerHasBoughtInAppPurchase = 15;
       private boolean playerHasBoughtInAppPurchase_ ;
       public boolean hasPlayerHasBoughtInAppPurchase() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       public boolean getPlayerHasBoughtInAppPurchase() {
         return playerHasBoughtInAppPurchase_;
       }
       public Builder setPlayerHasBoughtInAppPurchase(boolean value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00004000;
         playerHasBoughtInAppPurchase_ = value;
         onChanged();
         return this;
       }
       public Builder clearPlayerHasBoughtInAppPurchase() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         playerHasBoughtInAppPurchase_ = false;
         onChanged();
         return this;
       }
       
-      // repeated .com.lvl6.proto.GoldSaleProto goldSales = 15;
+      // repeated .com.lvl6.proto.GoldSaleProto goldSales = 16;
       private java.util.List<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto> goldSales_ =
         java.util.Collections.emptyList();
       private void ensureGoldSalesIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
           goldSales_ = new java.util.ArrayList<com.lvl6.proto.InAppPurchaseProto.GoldSaleProto>(goldSales_);
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
          }
       }
       
@@ -11216,7 +11489,7 @@ public final class EventStartupProto {
       public Builder clearGoldSales() {
         if (goldSalesBuilder_ == null) {
           goldSales_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           onChanged();
         } else {
           goldSalesBuilder_.clear();
@@ -11272,7 +11545,7 @@ public final class EventStartupProto {
           goldSalesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.InAppPurchaseProto.GoldSaleProto, com.lvl6.proto.InAppPurchaseProto.GoldSaleProto.Builder, com.lvl6.proto.InAppPurchaseProto.GoldSaleProtoOrBuilder>(
                   goldSales_,
-                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  ((bitField0_ & 0x00008000) == 0x00008000),
                   getParentForChildren(),
                   isClean());
           goldSales_ = null;
@@ -11280,13 +11553,13 @@ public final class EventStartupProto {
         return goldSalesBuilder_;
       }
       
-      // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 16;
+      // repeated .com.lvl6.proto.StartupResponseProto.AttackedNotificationProto attackNotifications = 17;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto> attackNotifications_ =
         java.util.Collections.emptyList();
       private void ensureAttackNotificationsIsMutable() {
-        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
           attackNotifications_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto>(attackNotifications_);
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00010000;
          }
       }
       
@@ -11402,7 +11675,7 @@ public final class EventStartupProto {
       public Builder clearAttackNotifications() {
         if (attackNotificationsBuilder_ == null) {
           attackNotifications_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00010000);
           onChanged();
         } else {
           attackNotificationsBuilder_.clear();
@@ -11458,7 +11731,7 @@ public final class EventStartupProto {
           attackNotificationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.AttackedNotificationProtoOrBuilder>(
                   attackNotifications_,
-                  ((bitField0_ & 0x00008000) == 0x00008000),
+                  ((bitField0_ & 0x00010000) == 0x00010000),
                   getParentForChildren(),
                   isClean());
           attackNotifications_ = null;
@@ -11466,13 +11739,13 @@ public final class EventStartupProto {
         return attackNotificationsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 17;
+      // repeated .com.lvl6.proto.StartupResponseProto.ReferralNotificationProto referralNotifications = 18;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto> referralNotifications_ =
         java.util.Collections.emptyList();
       private void ensureReferralNotificationsIsMutable() {
-        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
+        if (!((bitField0_ & 0x00020000) == 0x00020000)) {
           referralNotifications_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto>(referralNotifications_);
-          bitField0_ |= 0x00010000;
+          bitField0_ |= 0x00020000;
          }
       }
       
@@ -11588,7 +11861,7 @@ public final class EventStartupProto {
       public Builder clearReferralNotifications() {
         if (referralNotificationsBuilder_ == null) {
           referralNotifications_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00010000);
+          bitField0_ = (bitField0_ & ~0x00020000);
           onChanged();
         } else {
           referralNotificationsBuilder_.clear();
@@ -11644,7 +11917,7 @@ public final class EventStartupProto {
           referralNotificationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProtoOrBuilder>(
                   referralNotifications_,
-                  ((bitField0_ & 0x00010000) == 0x00010000),
+                  ((bitField0_ & 0x00020000) == 0x00020000),
                   getParentForChildren(),
                   isClean());
           referralNotifications_ = null;
@@ -11652,12 +11925,12 @@ public final class EventStartupProto {
         return referralNotificationsBuilder_;
       }
       
-      // repeated string noticesToPlayers = 18;
+      // repeated string noticesToPlayers = 19;
       private com.google.protobuf.LazyStringList noticesToPlayers_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureNoticesToPlayersIsMutable() {
-        if (!((bitField0_ & 0x00020000) == 0x00020000)) {
+        if (!((bitField0_ & 0x00040000) == 0x00040000)) {
           noticesToPlayers_ = new com.google.protobuf.LazyStringArrayList(noticesToPlayers_);
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00040000;
          }
       }
       public java.util.List<String>
@@ -11698,7 +11971,7 @@ public final class EventStartupProto {
       }
       public Builder clearNoticesToPlayers() {
         noticesToPlayers_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         onChanged();
         return this;
       }
@@ -11708,13 +11981,13 @@ public final class EventStartupProto {
         onChanged();
       }
       
-      // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 19;
+      // repeated .com.lvl6.proto.GroupChatMessageProto globalChats = 20;
       private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> globalChats_ =
         java.util.Collections.emptyList();
       private void ensureGlobalChatsIsMutable() {
-        if (!((bitField0_ & 0x00040000) == 0x00040000)) {
+        if (!((bitField0_ & 0x00080000) == 0x00080000)) {
           globalChats_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.GroupChatMessageProto>(globalChats_);
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00080000;
          }
       }
       
@@ -11830,7 +12103,7 @@ public final class EventStartupProto {
       public Builder clearGlobalChats() {
         if (globalChatsBuilder_ == null) {
           globalChats_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00080000);
           onChanged();
         } else {
           globalChatsBuilder_.clear();
@@ -11886,7 +12159,7 @@ public final class EventStartupProto {
           globalChatsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.GroupChatMessageProto, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder, com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder>(
                   globalChats_,
-                  ((bitField0_ & 0x00040000) == 0x00040000),
+                  ((bitField0_ & 0x00080000) == 0x00080000),
                   getParentForChildren(),
                   isClean());
           globalChats_ = null;
@@ -11894,13 +12167,13 @@ public final class EventStartupProto {
         return globalChatsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 20;
+      // repeated .com.lvl6.proto.GroupChatMessageProto clanChats = 21;
       private java.util.List<com.lvl6.proto.ChatProto.GroupChatMessageProto> clanChats_ =
         java.util.Collections.emptyList();
       private void ensureClanChatsIsMutable() {
-        if (!((bitField0_ & 0x00080000) == 0x00080000)) {
+        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
           clanChats_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.GroupChatMessageProto>(clanChats_);
-          bitField0_ |= 0x00080000;
+          bitField0_ |= 0x00100000;
          }
       }
       
@@ -12016,7 +12289,7 @@ public final class EventStartupProto {
       public Builder clearClanChats() {
         if (clanChatsBuilder_ == null) {
           clanChats_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00080000);
+          bitField0_ = (bitField0_ & ~0x00100000);
           onChanged();
         } else {
           clanChatsBuilder_.clear();
@@ -12072,7 +12345,7 @@ public final class EventStartupProto {
           clanChatsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.GroupChatMessageProto, com.lvl6.proto.ChatProto.GroupChatMessageProto.Builder, com.lvl6.proto.ChatProto.GroupChatMessageProtoOrBuilder>(
                   clanChats_,
-                  ((bitField0_ & 0x00080000) == 0x00080000),
+                  ((bitField0_ & 0x00100000) == 0x00100000),
                   getParentForChildren(),
                   isClean());
           clanChats_ = null;
@@ -12080,13 +12353,13 @@ public final class EventStartupProto {
         return clanChatsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 21;
+      // repeated .com.lvl6.proto.PrivateChatPostProto pcpp = 22;
       private java.util.List<com.lvl6.proto.ChatProto.PrivateChatPostProto> pcpp_ =
         java.util.Collections.emptyList();
       private void ensurePcppIsMutable() {
-        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
+        if (!((bitField0_ & 0x00200000) == 0x00200000)) {
           pcpp_ = new java.util.ArrayList<com.lvl6.proto.ChatProto.PrivateChatPostProto>(pcpp_);
-          bitField0_ |= 0x00100000;
+          bitField0_ |= 0x00200000;
          }
       }
       
@@ -12202,7 +12475,7 @@ public final class EventStartupProto {
       public Builder clearPcpp() {
         if (pcppBuilder_ == null) {
           pcpp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00100000);
+          bitField0_ = (bitField0_ & ~0x00200000);
           onChanged();
         } else {
           pcppBuilder_.clear();
@@ -12258,7 +12531,7 @@ public final class EventStartupProto {
           pcppBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ChatProto.PrivateChatPostProto, com.lvl6.proto.ChatProto.PrivateChatPostProto.Builder, com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder>(
                   pcpp_,
-                  ((bitField0_ & 0x00100000) == 0x00100000),
+                  ((bitField0_ & 0x00200000) == 0x00200000),
                   getParentForChildren(),
                   isClean());
           pcpp_ = null;
@@ -12266,13 +12539,13 @@ public final class EventStartupProto {
         return pcppBuilder_;
       }
       
-      // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 22;
+      // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 23;
       private java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> larep_ =
         java.util.Collections.emptyList();
       private void ensureLarepIsMutable() {
-        if (!((bitField0_ & 0x00200000) == 0x00200000)) {
+        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
           larep_ = new java.util.ArrayList<com.lvl6.proto.UserProto.LevelAndRequiredExpProto>(larep_);
-          bitField0_ |= 0x00200000;
+          bitField0_ |= 0x00400000;
          }
       }
       
@@ -12388,7 +12661,7 @@ public final class EventStartupProto {
       public Builder clearLarep() {
         if (larepBuilder_ == null) {
           larep_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00200000);
+          bitField0_ = (bitField0_ & ~0x00400000);
           onChanged();
         } else {
           larepBuilder_.clear();
@@ -12444,7 +12717,7 @@ public final class EventStartupProto {
           larepBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.UserProto.LevelAndRequiredExpProto, com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder, com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder>(
                   larep_,
-                  ((bitField0_ & 0x00200000) == 0x00200000),
+                  ((bitField0_ & 0x00400000) == 0x00400000),
                   getParentForChildren(),
                   isClean());
           larep_ = null;
@@ -12452,13 +12725,13 @@ public final class EventStartupProto {
         return larepBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullStructureProto staticStructs = 23;
+      // repeated .com.lvl6.proto.FullStructureProto staticStructs = 24;
       private java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> staticStructs_ =
         java.util.Collections.emptyList();
       private void ensureStaticStructsIsMutable() {
-        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
+        if (!((bitField0_ & 0x00800000) == 0x00800000)) {
           staticStructs_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.FullStructureProto>(staticStructs_);
-          bitField0_ |= 0x00400000;
+          bitField0_ |= 0x00800000;
          }
       }
       
@@ -12574,7 +12847,7 @@ public final class EventStartupProto {
       public Builder clearStaticStructs() {
         if (staticStructsBuilder_ == null) {
           staticStructs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00400000);
+          bitField0_ = (bitField0_ & ~0x00800000);
           onChanged();
         } else {
           staticStructsBuilder_.clear();
@@ -12630,7 +12903,7 @@ public final class EventStartupProto {
           staticStructsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder>(
                   staticStructs_,
-                  ((bitField0_ & 0x00400000) == 0x00400000),
+                  ((bitField0_ & 0x00800000) == 0x00800000),
                   getParentForChildren(),
                   isClean());
           staticStructs_ = null;
@@ -12638,13 +12911,13 @@ public final class EventStartupProto {
         return staticStructsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 24;
+      // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 25;
       private java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> expansionCosts_ =
         java.util.Collections.emptyList();
       private void ensureExpansionCostsIsMutable() {
-        if (!((bitField0_ & 0x00800000) == 0x00800000)) {
+        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
           expansionCosts_ = new java.util.ArrayList<com.lvl6.proto.CityProto.CityExpansionCostProto>(expansionCosts_);
-          bitField0_ |= 0x00800000;
+          bitField0_ |= 0x01000000;
          }
       }
       
@@ -12760,7 +13033,7 @@ public final class EventStartupProto {
       public Builder clearExpansionCosts() {
         if (expansionCostsBuilder_ == null) {
           expansionCosts_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00800000);
+          bitField0_ = (bitField0_ & ~0x01000000);
           onChanged();
         } else {
           expansionCostsBuilder_.clear();
@@ -12816,7 +13089,7 @@ public final class EventStartupProto {
           expansionCostsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.CityProto.CityExpansionCostProto, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder, com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder>(
                   expansionCosts_,
-                  ((bitField0_ & 0x00800000) == 0x00800000),
+                  ((bitField0_ & 0x01000000) == 0x01000000),
                   getParentForChildren(),
                   isClean());
           expansionCosts_ = null;
@@ -12824,13 +13097,13 @@ public final class EventStartupProto {
         return expansionCostsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.MonsterProto staticMonsters = 25;
+      // repeated .com.lvl6.proto.MonsterProto staticMonsters = 26;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> staticMonsters_ =
         java.util.Collections.emptyList();
       private void ensureStaticMonstersIsMutable() {
-        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
+        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
           staticMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterProto>(staticMonsters_);
-          bitField0_ |= 0x01000000;
+          bitField0_ |= 0x02000000;
          }
       }
       
@@ -12946,7 +13219,7 @@ public final class EventStartupProto {
       public Builder clearStaticMonsters() {
         if (staticMonstersBuilder_ == null) {
           staticMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x01000000);
+          bitField0_ = (bitField0_ & ~0x02000000);
           onChanged();
         } else {
           staticMonstersBuilder_.clear();
@@ -13002,7 +13275,7 @@ public final class EventStartupProto {
           staticMonstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.MonsterProto, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder>(
                   staticMonsters_,
-                  ((bitField0_ & 0x01000000) == 0x01000000),
+                  ((bitField0_ & 0x02000000) == 0x02000000),
                   getParentForChildren(),
                   isClean());
           staticMonsters_ = null;
@@ -13010,13 +13283,13 @@ public final class EventStartupProto {
         return staticMonstersBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 26;
+      // repeated .com.lvl6.proto.FullUserMonsterProto usersMonsters = 27;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> usersMonsters_ =
         java.util.Collections.emptyList();
       private void ensureUsersMonstersIsMutable() {
-        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
+        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
           usersMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(usersMonsters_);
-          bitField0_ |= 0x02000000;
+          bitField0_ |= 0x04000000;
          }
       }
       
@@ -13132,7 +13405,7 @@ public final class EventStartupProto {
       public Builder clearUsersMonsters() {
         if (usersMonstersBuilder_ == null) {
           usersMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x02000000);
+          bitField0_ = (bitField0_ & ~0x04000000);
           onChanged();
         } else {
           usersMonstersBuilder_.clear();
@@ -13188,7 +13461,7 @@ public final class EventStartupProto {
           usersMonstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
                   usersMonsters_,
-                  ((bitField0_ & 0x02000000) == 0x02000000),
+                  ((bitField0_ & 0x04000000) == 0x04000000),
                   getParentForChildren(),
                   isClean());
           usersMonsters_ = null;
@@ -13196,13 +13469,13 @@ public final class EventStartupProto {
         return usersMonstersBuilder_;
       }
       
-      // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 27;
+      // repeated .com.lvl6.proto.UserMonsterHealingProto monstersHealing = 28;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> monstersHealing_ =
         java.util.Collections.emptyList();
       private void ensureMonstersHealingIsMutable() {
-        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
+        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
           monstersHealing_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto>(monstersHealing_);
-          bitField0_ |= 0x04000000;
+          bitField0_ |= 0x08000000;
          }
       }
       
@@ -13318,7 +13591,7 @@ public final class EventStartupProto {
       public Builder clearMonstersHealing() {
         if (monstersHealingBuilder_ == null) {
           monstersHealing_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x04000000);
+          bitField0_ = (bitField0_ & ~0x08000000);
           onChanged();
         } else {
           monstersHealingBuilder_.clear();
@@ -13374,7 +13647,7 @@ public final class EventStartupProto {
           monstersHealingBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder>(
                   monstersHealing_,
-                  ((bitField0_ & 0x04000000) == 0x04000000),
+                  ((bitField0_ & 0x08000000) == 0x08000000),
                   getParentForChildren(),
                   isClean());
           monstersHealing_ = null;
@@ -13382,12 +13655,12 @@ public final class EventStartupProto {
         return monstersHealingBuilder_;
       }
       
-      // optional .com.lvl6.proto.UserEnhancementProto enhancements = 28;
+      // optional .com.lvl6.proto.UserEnhancementProto enhancements = 29;
       private com.lvl6.proto.MonsterStuffProto.UserEnhancementProto enhancements_ = com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.lvl6.proto.MonsterStuffProto.UserEnhancementProto, com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder, com.lvl6.proto.MonsterStuffProto.UserEnhancementProtoOrBuilder> enhancementsBuilder_;
       public boolean hasEnhancements() {
-        return ((bitField0_ & 0x08000000) == 0x08000000);
+        return ((bitField0_ & 0x10000000) == 0x10000000);
       }
       public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto getEnhancements() {
         if (enhancementsBuilder_ == null) {
@@ -13406,7 +13679,7 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x08000000;
+        bitField0_ |= 0x10000000;
         return this;
       }
       public Builder setEnhancements(
@@ -13417,12 +13690,12 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x08000000;
+        bitField0_ |= 0x10000000;
         return this;
       }
       public Builder mergeEnhancements(com.lvl6.proto.MonsterStuffProto.UserEnhancementProto value) {
         if (enhancementsBuilder_ == null) {
-          if (((bitField0_ & 0x08000000) == 0x08000000) &&
+          if (((bitField0_ & 0x10000000) == 0x10000000) &&
               enhancements_ != com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance()) {
             enhancements_ =
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.newBuilder(enhancements_).mergeFrom(value).buildPartial();
@@ -13433,7 +13706,7 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x08000000;
+        bitField0_ |= 0x10000000;
         return this;
       }
       public Builder clearEnhancements() {
@@ -13443,11 +13716,11 @@ public final class EventStartupProto {
         } else {
           enhancementsBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x08000000);
+        bitField0_ = (bitField0_ & ~0x10000000);
         return this;
       }
       public com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder getEnhancementsBuilder() {
-        bitField0_ |= 0x08000000;
+        bitField0_ |= 0x10000000;
         onChanged();
         return getEnhancementsFieldBuilder().getBuilder();
       }
@@ -13472,13 +13745,13 @@ public final class EventStartupProto {
         return enhancementsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 29;
+      // repeated .com.lvl6.proto.RareBoosterPurchaseProto rareBoosterPurchases = 30;
       private java.util.List<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto> rareBoosterPurchases_ =
         java.util.Collections.emptyList();
       private void ensureRareBoosterPurchasesIsMutable() {
-        if (!((bitField0_ & 0x10000000) == 0x10000000)) {
+        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
           rareBoosterPurchases_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto>(rareBoosterPurchases_);
-          bitField0_ |= 0x10000000;
+          bitField0_ |= 0x20000000;
          }
       }
       
@@ -13594,7 +13867,7 @@ public final class EventStartupProto {
       public Builder clearRareBoosterPurchases() {
         if (rareBoosterPurchasesBuilder_ == null) {
           rareBoosterPurchases_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x10000000);
+          bitField0_ = (bitField0_ & ~0x20000000);
           onChanged();
         } else {
           rareBoosterPurchasesBuilder_.clear();
@@ -13650,7 +13923,7 @@ public final class EventStartupProto {
           rareBoosterPurchasesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto, com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto.Builder, com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProtoOrBuilder>(
                   rareBoosterPurchases_,
-                  ((bitField0_ & 0x10000000) == 0x10000000),
+                  ((bitField0_ & 0x20000000) == 0x20000000),
                   getParentForChildren(),
                   isClean());
           rareBoosterPurchases_ = null;
@@ -13658,10 +13931,10 @@ public final class EventStartupProto {
         return rareBoosterPurchasesBuilder_;
       }
       
-      // optional string kabamNaid = 30;
+      // optional string kabamNaid = 31;
       private java.lang.Object kabamNaid_ = "";
       public boolean hasKabamNaid() {
-        return ((bitField0_ & 0x20000000) == 0x20000000);
+        return ((bitField0_ & 0x40000000) == 0x40000000);
       }
       public String getKabamNaid() {
         java.lang.Object ref = kabamNaid_;
@@ -13677,19 +13950,19 @@ public final class EventStartupProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x20000000;
+  bitField0_ |= 0x40000000;
         kabamNaid_ = value;
         onChanged();
         return this;
       }
       public Builder clearKabamNaid() {
-        bitField0_ = (bitField0_ & ~0x20000000);
+        bitField0_ = (bitField0_ & ~0x40000000);
         kabamNaid_ = getDefaultInstance().getKabamNaid();
         onChanged();
         return this;
       }
       void setKabamNaid(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x20000000;
+        bitField0_ |= 0x40000000;
         kabamNaid_ = value;
         onChanged();
       }
@@ -13777,7 +14050,7 @@ public final class EventStartupProto {
       "oto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n" +
       "\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014" +
       "advertiserId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 " +
-      "\001(\010\"\375\036\n\024StartupResponseProto\022\030\n\020serverTi" +
+      "\001(\010\"\254\037\n\024StartupResponseProto\022\030\n\020serverTi" +
       "meMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl",
       "6.proto.FullUserProto\022I\n\rstartupStatus\030\003" +
       " \001(\01622.com.lvl6.proto.StartupResponsePro" +
@@ -13786,97 +14059,98 @@ public final class EventStartupProto {
       "ateStatus\022O\n\020startupConstants\030\005 \001(\01325.co" +
       "m.lvl6.proto.StartupResponseProto.Startu" +
       "pConstants\0220\n\tallCities\030\006 \003(\0132\035.com.lvl6" +
-      ".proto.FullCityProto\022B\n\032inProgressIncomp" +
-      "leteQuests\030\007 \003(\0132\036.com.lvl6.proto.FullQu" +
-      "estProto\022@\n\030inProgressCompleteQuests\030\010 \003",
-      "(\0132\036.com.lvl6.proto.FullQuestProto\0227\n\017av" +
-      "ailableQuests\030\t \003(\0132\036.com.lvl6.proto.Ful" +
-      "lQuestProto\0227\n\014userClanInfo\030\n \003(\0132!.com." +
-      "lvl6.proto.FullUserClanProto\022\023\n\013appStore" +
-      "URL\030\013 \001(\t\022\025\n\rreviewPageURL\030\014 \001(\t\022%\n\035revi" +
-      "ewPageConfirmationMessage\030\r \001(\t\022$\n\034playe" +
-      "rHasBoughtInAppPurchase\030\016 \001(\010\0220\n\tgoldSal" +
-      "es\030\017 \003(\0132\035.com.lvl6.proto.GoldSaleProto\022" +
-      "[\n\023attackNotifications\030\020 \003(\0132>.com.lvl6." +
-      "proto.StartupResponseProto.AttackedNotif",
-      "icationProto\022]\n\025referralNotifications\030\021 " +
-      "\003(\0132>.com.lvl6.proto.StartupResponseProt" +
-      "o.ReferralNotificationProto\022\030\n\020noticesTo" +
-      "Players\030\022 \003(\t\022:\n\013globalChats\030\023 \003(\0132%.com" +
-      ".lvl6.proto.GroupChatMessageProto\0228\n\tcla" +
-      "nChats\030\024 \003(\0132%.com.lvl6.proto.GroupChatM" +
-      "essageProto\0222\n\004pcpp\030\025 \003(\0132$.com.lvl6.pro" +
-      "to.PrivateChatPostProto\0227\n\005larep\030\026 \003(\0132(" +
-      ".com.lvl6.proto.LevelAndRequiredExpProto" +
-      "\0229\n\rstaticStructs\030\027 \003(\0132\".com.lvl6.proto",
-      ".FullStructureProto\022>\n\016expansionCosts\030\030 " +
-      "\003(\0132&.com.lvl6.proto.CityExpansionCostPr" +
-      "oto\0224\n\016staticMonsters\030\031 \003(\0132\034.com.lvl6.p" +
-      "roto.MonsterProto\022;\n\rusersMonsters\030\032 \003(\013" +
-      "2$.com.lvl6.proto.FullUserMonsterProto\022@" +
-      "\n\017monstersHealing\030\033 \003(\0132\'.com.lvl6.proto" +
-      ".UserMonsterHealingProto\022:\n\014enhancements" +
-      "\030\034 \001(\0132$.com.lvl6.proto.UserEnhancementP" +
-      "roto\022F\n\024rareBoosterPurchases\030\035 \003(\0132(.com" +
-      ".lvl6.proto.RareBoosterPurchaseProto\022\021\n\t",
-      "kabamNaid\030\036 \001(\t\032\200\001\n\031AttackedNotification" +
-      "Proto\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\032\n\022battleCompleteTime\030" +
-      "\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031ReferralN" +
-      "otificationProto\0222\n\010referred\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\023\n\013recruitT" +
-      "ime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032" +
-      "\341\016\n\020StartupConstants\022H\n\025inAppPurchasePac" +
-      "kages\030\001 \003(\0132).com.lvl6.proto.InAppPurcha" +
-      "sePackageProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022",
-      "\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022f\n\023normStr" +
-      "uctConstants\030\004 \001(\0132I.com.lvl6.proto.Star" +
-      "tupResponseProto.StartupConstants.NormSt" +
-      "ructConstants\022n\n\025animatedSpriteOffsets\030\005" +
-      " \003(\0132O.com.lvl6.proto.StartupResponsePro" +
-      "to.StartupConstants.AnimatedSpriteOffset" +
-      "Proto\022\025\n\rminNameLength\030\006 \001(\005\022\025\n\rmaxNameL" +
-      "ength\030\007 \001(\005\022\035\n\025maxLengthOfChatString\030\010 \001" +
-      "(\005\022Z\n\rclanConstants\030\t \001(\0132C.com.lvl6.pro" +
-      "to.StartupResponseProto.StartupConstants",
-      ".ClanConstants\022p\n\030downloadableNibConstan" +
-      "ts\030\n \001(\0132N.com.lvl6.proto.StartupRespons" +
-      "eProto.StartupConstants.DownloadableNibC" +
-      "onstants\022\'\n\037numHoursBeforeReshowingGoldS" +
-      "ale\030\013 \001(\005\022\036\n\026levelToShowRateUsPopup\030\014 \001(" +
-      "\005\022e\n\022touramentConstants\030\r \001(\0132I.com.lvl6" +
-      ".proto.StartupResponseProto.StartupConst" +
-      "ants.TournamentConstants\022\037\n\027fbConnectRew" +
-      "ardDiamonds\030\016 \001(\005\022\023\n\013faqFileName\030\017 \001(\t\022<" +
-      "\n\022adminChatUserProto\030\020 \001(\0132 .com.lvl6.pr",
-      "oto.MinimumUserProto\022\037\n\027numBeginnerSales" +
-      "Allowed\030\021 \001(\005\022h\n\024userMonsterConstants\030\022 " +
-      "\001(\0132J.com.lvl6.proto.StartupResponseProt" +
-      "o.StartupConstants.UserMonsterConstants\032" +
-      "\367\001\n\023NormStructConstants\022/\n\'minutesToUpgr" +
-      "adeForNormStructMultiplier\030\001 \001(\001\022&\n\036inco" +
-      "meFromNormStructMultiplier\030\002 \001(\001\022)\n!upgr" +
-      "adeStructCoinCostExponentBase\030\003 \001(\001\022,\n$u" +
-      "pgradeStructDiamondCostExponentBase\030\004 \001(" +
-      "\001\022.\n&diamondCostForInstantUpgradeMultipl",
-      "ier\030\005 \001(\001\032_\n\031AnimatedSpriteOffsetProto\022\021" +
-      "\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com." +
-      "lvl6.proto.CoordinateProto\032\232\001\n\rClanConst" +
-      "ants\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030m" +
-      "axCharLengthForClanName\030\002 \001(\005\022\'\n\037maxChar" +
-      "LengthForClanDescription\030\003 \001(\005\022\037\n\027maxCha" +
-      "rLengthForClanTag\030\004 \001(\005\032c\n\030DownloadableN" +
-      "ibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expan" +
-      "sionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003" +
-      " \001(\t\032y\n\023TournamentConstants\022\022\n\nwinsWeigh",
-      "t\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWe" +
-      "ight\030\003 \001(\005\022#\n\033numHoursToShowAfterEventEn" +
-      "d\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017maxNu" +
-      "mTeamSlots\030\001 \001(\005\022!\n\031initialMaxNumMonster" +
-      "Limit\030\002 \001(\005\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE" +
-      "\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3" +
-      "\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_" +
-      "NOT_IN_DB\020\002B\023B\021EventStartupProto"
+      ".proto.FullCityProto\0228\n\020inProgressQuests" +
+      "\030\007 \003(\0132\036.com.lvl6.proto.FullQuestProto\0228" +
+      "\n\020unredeemedQuests\030\010 \003(\0132\036.com.lvl6.prot",
+      "o.FullQuestProto\0227\n\017availableQuests\030\t \003(" +
+      "\0132\036.com.lvl6.proto.FullQuestProto\022?\n\nuse" +
+      "rQuests\030\n \003(\0132+.com.lvl6.proto.FullUserQ" +
+      "uestDataLargeProto\0227\n\014userClanInfo\030\013 \003(\013" +
+      "2!.com.lvl6.proto.FullUserClanProto\022\023\n\013a" +
+      "ppStoreURL\030\014 \001(\t\022\025\n\rreviewPageURL\030\r \001(\t\022" +
+      "%\n\035reviewPageConfirmationMessage\030\016 \001(\t\022$" +
+      "\n\034playerHasBoughtInAppPurchase\030\017 \001(\010\0220\n\t" +
+      "goldSales\030\020 \003(\0132\035.com.lvl6.proto.GoldSal" +
+      "eProto\022[\n\023attackNotifications\030\021 \003(\0132>.co",
+      "m.lvl6.proto.StartupResponseProto.Attack" +
+      "edNotificationProto\022]\n\025referralNotificat" +
+      "ions\030\022 \003(\0132>.com.lvl6.proto.StartupRespo" +
+      "nseProto.ReferralNotificationProto\022\030\n\020no" +
+      "ticesToPlayers\030\023 \003(\t\022:\n\013globalChats\030\024 \003(" +
+      "\0132%.com.lvl6.proto.GroupChatMessageProto" +
+      "\0228\n\tclanChats\030\025 \003(\0132%.com.lvl6.proto.Gro" +
+      "upChatMessageProto\0222\n\004pcpp\030\026 \003(\0132$.com.l" +
+      "vl6.proto.PrivateChatPostProto\0227\n\005larep\030" +
+      "\027 \003(\0132(.com.lvl6.proto.LevelAndRequiredE",
+      "xpProto\0229\n\rstaticStructs\030\030 \003(\0132\".com.lvl" +
+      "6.proto.FullStructureProto\022>\n\016expansionC" +
+      "osts\030\031 \003(\0132&.com.lvl6.proto.CityExpansio" +
+      "nCostProto\0224\n\016staticMonsters\030\032 \003(\0132\034.com" +
+      ".lvl6.proto.MonsterProto\022;\n\rusersMonster" +
+      "s\030\033 \003(\0132$.com.lvl6.proto.FullUserMonster" +
+      "Proto\022@\n\017monstersHealing\030\034 \003(\0132\'.com.lvl" +
+      "6.proto.UserMonsterHealingProto\022:\n\014enhan" +
+      "cements\030\035 \001(\0132$.com.lvl6.proto.UserEnhan" +
+      "cementProto\022F\n\024rareBoosterPurchases\030\036 \003(",
+      "\0132(.com.lvl6.proto.RareBoosterPurchasePr" +
+      "oto\022\021\n\tkabamNaid\030\037 \001(\t\032\200\001\n\031AttackedNotif" +
+      "icationProto\0222\n\010attacker\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\032\n\022battleComple" +
+      "teTime\030\002 \001(\003\022\023\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031Re" +
+      "ferralNotificationProto\0222\n\010referred\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\023\n\013r" +
+      "ecruitTime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer" +
+      "\030\003 \001(\005\032\341\016\n\020StartupConstants\022H\n\025inAppPurc" +
+      "hasePackages\030\001 \003(\0132).com.lvl6.proto.InAp",
+      "pPurchasePackageProto\022\027\n\017maxLevelForUser" +
+      "\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022f\n\023" +
+      "normStructConstants\030\004 \001(\0132I.com.lvl6.pro" +
+      "to.StartupResponseProto.StartupConstants" +
+      ".NormStructConstants\022n\n\025animatedSpriteOf" +
+      "fsets\030\005 \003(\0132O.com.lvl6.proto.StartupResp" +
+      "onseProto.StartupConstants.AnimatedSprit" +
+      "eOffsetProto\022\025\n\rminNameLength\030\006 \001(\005\022\025\n\rm" +
+      "axNameLength\030\007 \001(\005\022\035\n\025maxLengthOfChatStr" +
+      "ing\030\010 \001(\005\022Z\n\rclanConstants\030\t \001(\0132C.com.l",
+      "vl6.proto.StartupResponseProto.StartupCo" +
+      "nstants.ClanConstants\022p\n\030downloadableNib" +
+      "Constants\030\n \001(\0132N.com.lvl6.proto.Startup" +
+      "ResponseProto.StartupConstants.Downloada" +
+      "bleNibConstants\022\'\n\037numHoursBeforeReshowi" +
+      "ngGoldSale\030\013 \001(\005\022\036\n\026levelToShowRateUsPop" +
+      "up\030\014 \001(\005\022e\n\022touramentConstants\030\r \001(\0132I.c" +
+      "om.lvl6.proto.StartupResponseProto.Start" +
+      "upConstants.TournamentConstants\022\037\n\027fbCon" +
+      "nectRewardDiamonds\030\016 \001(\005\022\023\n\013faqFileName\030",
+      "\017 \001(\t\022<\n\022adminChatUserProto\030\020 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022\037\n\027numBeginn" +
+      "erSalesAllowed\030\021 \001(\005\022h\n\024userMonsterConst" +
+      "ants\030\022 \001(\0132J.com.lvl6.proto.StartupRespo" +
+      "nseProto.StartupConstants.UserMonsterCon" +
+      "stants\032\367\001\n\023NormStructConstants\022/\n\'minute" +
+      "sToUpgradeForNormStructMultiplier\030\001 \001(\001\022" +
+      "&\n\036incomeFromNormStructMultiplier\030\002 \001(\001\022" +
+      ")\n!upgradeStructCoinCostExponentBase\030\003 \001" +
+      "(\001\022,\n$upgradeStructDiamondCostExponentBa",
+      "se\030\004 \001(\001\022.\n&diamondCostForInstantUpgrade" +
+      "Multiplier\030\005 \001(\001\032_\n\031AnimatedSpriteOffset" +
+      "Proto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\013" +
+      "2\037.com.lvl6.proto.CoordinateProto\032\232\001\n\rCl" +
+      "anConstants\022\035\n\025coinPriceToCreateClan\030\001 \001" +
+      "(\005\022 \n\030maxCharLengthForClanName\030\002 \001(\005\022\'\n\037" +
+      "maxCharLengthForClanDescription\030\003 \001(\005\022\037\n" +
+      "\027maxCharLengthForClanTag\030\004 \001(\005\032c\n\030Downlo" +
+      "adableNibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030" +
+      "\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShoppeNi",
+      "bName\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nwi" +
+      "nsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013" +
+      "fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowAfter" +
+      "EventEnd\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027" +
+      "\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMaxNum" +
+      "MonsterLimit\030\002 \001(\005\"A\n\014UpdateStatus\022\r\n\tNO" +
+      "_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPD" +
+      "ATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022" +
+      "\n\016USER_NOT_IN_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13896,7 +14170,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
-              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "AllCities", "InProgressIncompleteQuests", "InProgressCompleteQuests", "AvailableQuests", "UserClanInfo", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "GoldSales", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "Larep", "StaticStructs", "ExpansionCosts", "StaticMonsters", "UsersMonsters", "MonstersHealing", "Enhancements", "RareBoosterPurchases", "KabamNaid", },
+              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "AllCities", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "UserQuests", "UserClanInfo", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "GoldSales", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "Larep", "StaticStructs", "ExpansionCosts", "StaticMonsters", "UsersMonsters", "MonstersHealing", "Enhancements", "RareBoosterPurchases", "KabamNaid", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =

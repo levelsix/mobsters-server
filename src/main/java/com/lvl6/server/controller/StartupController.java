@@ -96,7 +96,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -335,7 +334,7 @@ public class StartupController extends EventController {
   	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
   	
   	  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-  	  for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
+  	  /*for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
   	    if (uq.isRedeemed()) {
   	      redeemedQuestIds.add(uq.getQuestId());
   	    } else {
@@ -359,7 +358,7 @@ public class StartupController extends EventController {
   	                questIdToQuests.get(uq.getQuestId())));
   	      }
   	    }
-  	  }
+  	  }*/
   	
   	  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
   	      inProgressQuestIds);
