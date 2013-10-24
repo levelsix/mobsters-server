@@ -823,6 +823,7 @@ public class UpdateUtils implements UpdateUtil {
 				aRow.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, mfu.isComplete());
 				aRow.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, mfu.getTeamSlotNum());
 				
+				newRows.add(aRow);
 			}
 			log.info("newRows=" + newRows);
 			int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
