@@ -63,6 +63,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     QuestRedeemResponseProto.Builder resBuilder = QuestRedeemResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);
+    resBuilder.setQuestId(questId);
 
     boolean legitRedeem = false;
     QuestForUser userQuest = null;

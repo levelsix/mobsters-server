@@ -64,6 +64,7 @@ message QuestRedeemResponseProto {
      repeated FullQuestProto newlyAvailableQuests = 2;
      optional QuestRedeemStatus status = 3;    
      optional FullUserMonsterProto fump = 4;
+     optional int32 questId = 5;
      
      enum QuestRedeemStatus {
           SUCCESS = 1;
