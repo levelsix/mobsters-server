@@ -74,10 +74,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (successful) {
-      	//send back the equip protos that updated
-      	//no reason to believe some equip will not be updated so
-      	//send back what client gave
-      	resBuilder.addAllUmchp(umchpList);
     	  resBuilder.setStatus(UpdateMonsterHealthStatus.SUCCESS);
       }
       

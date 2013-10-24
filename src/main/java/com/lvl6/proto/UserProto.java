@@ -4672,7 +4672,7 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserProto)
   }
   
-  public interface LevelAndRequiredExpProtoOrBuilder
+  public interface StaticLevelInfoProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional int32 level = 1;
@@ -4682,33 +4682,37 @@ public final class UserProto {
     // optional int32 requiredExperience = 2;
     boolean hasRequiredExperience();
     int getRequiredExperience();
+    
+    // optional int32 maxCash = 3;
+    boolean hasMaxCash();
+    int getMaxCash();
   }
-  public static final class LevelAndRequiredExpProto extends
+  public static final class StaticLevelInfoProto extends
       com.google.protobuf.GeneratedMessage
-      implements LevelAndRequiredExpProtoOrBuilder {
-    // Use LevelAndRequiredExpProto.newBuilder() to construct.
-    private LevelAndRequiredExpProto(Builder builder) {
+      implements StaticLevelInfoProtoOrBuilder {
+    // Use StaticLevelInfoProto.newBuilder() to construct.
+    private StaticLevelInfoProto(Builder builder) {
       super(builder);
     }
-    private LevelAndRequiredExpProto(boolean noInit) {}
+    private StaticLevelInfoProto(boolean noInit) {}
     
-    private static final LevelAndRequiredExpProto defaultInstance;
-    public static LevelAndRequiredExpProto getDefaultInstance() {
+    private static final StaticLevelInfoProto defaultInstance;
+    public static StaticLevelInfoProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public LevelAndRequiredExpProto getDefaultInstanceForType() {
+    public StaticLevelInfoProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor;
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_LevelAndRequiredExpProto_fieldAccessorTable;
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -4732,9 +4736,20 @@ public final class UserProto {
       return requiredExperience_;
     }
     
+    // optional int32 maxCash = 3;
+    public static final int MAXCASH_FIELD_NUMBER = 3;
+    private int maxCash_;
+    public boolean hasMaxCash() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getMaxCash() {
+      return maxCash_;
+    }
+    
     private void initFields() {
       level_ = 0;
       requiredExperience_ = 0;
+      maxCash_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4754,6 +4769,9 @@ public final class UserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, requiredExperience_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, maxCash_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -4771,6 +4789,10 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, requiredExperience_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, maxCash_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -4783,41 +4805,41 @@ public final class UserProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(byte[] data)
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -4826,7 +4848,7 @@ public final class UserProto {
         return null;
       }
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseDelimitedFrom(
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4837,12 +4859,12 @@ public final class UserProto {
         return null;
       }
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.UserProto.LevelAndRequiredExpProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -4852,7 +4874,7 @@ public final class UserProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.UserProto.LevelAndRequiredExpProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.UserProto.StaticLevelInfoProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -4865,18 +4887,18 @@ public final class UserProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder {
+       implements com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor;
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_LevelAndRequiredExpProto_fieldAccessorTable;
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.UserProto.LevelAndRequiredExpProto.newBuilder()
+      // Construct using com.lvl6.proto.UserProto.StaticLevelInfoProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -4899,6 +4921,8 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         requiredExperience_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        maxCash_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -4908,24 +4932,24 @@ public final class UserProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.UserProto.LevelAndRequiredExpProto.getDescriptor();
+        return com.lvl6.proto.UserProto.StaticLevelInfoProto.getDescriptor();
       }
       
-      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto getDefaultInstanceForType() {
-        return com.lvl6.proto.UserProto.LevelAndRequiredExpProto.getDefaultInstance();
+      public com.lvl6.proto.UserProto.StaticLevelInfoProto getDefaultInstanceForType() {
+        return com.lvl6.proto.UserProto.StaticLevelInfoProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto build() {
-        com.lvl6.proto.UserProto.LevelAndRequiredExpProto result = buildPartial();
+      public com.lvl6.proto.UserProto.StaticLevelInfoProto build() {
+        com.lvl6.proto.UserProto.StaticLevelInfoProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.UserProto.LevelAndRequiredExpProto buildParsed()
+      private com.lvl6.proto.UserProto.StaticLevelInfoProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.UserProto.LevelAndRequiredExpProto result = buildPartial();
+        com.lvl6.proto.UserProto.StaticLevelInfoProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -4933,8 +4957,8 @@ public final class UserProto {
         return result;
       }
       
-      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto buildPartial() {
-        com.lvl6.proto.UserProto.LevelAndRequiredExpProto result = new com.lvl6.proto.UserProto.LevelAndRequiredExpProto(this);
+      public com.lvl6.proto.UserProto.StaticLevelInfoProto buildPartial() {
+        com.lvl6.proto.UserProto.StaticLevelInfoProto result = new com.lvl6.proto.UserProto.StaticLevelInfoProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -4945,27 +4969,34 @@ public final class UserProto {
           to_bitField0_ |= 0x00000002;
         }
         result.requiredExperience_ = requiredExperience_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.maxCash_ = maxCash_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.UserProto.LevelAndRequiredExpProto) {
-          return mergeFrom((com.lvl6.proto.UserProto.LevelAndRequiredExpProto)other);
+        if (other instanceof com.lvl6.proto.UserProto.StaticLevelInfoProto) {
+          return mergeFrom((com.lvl6.proto.UserProto.StaticLevelInfoProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.UserProto.LevelAndRequiredExpProto other) {
-        if (other == com.lvl6.proto.UserProto.LevelAndRequiredExpProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.UserProto.StaticLevelInfoProto other) {
+        if (other == com.lvl6.proto.UserProto.StaticLevelInfoProto.getDefaultInstance()) return this;
         if (other.hasLevel()) {
           setLevel(other.getLevel());
         }
         if (other.hasRequiredExperience()) {
           setRequiredExperience(other.getRequiredExperience());
+        }
+        if (other.hasMaxCash()) {
+          setMaxCash(other.getMaxCash());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5006,6 +5037,11 @@ public final class UserProto {
             case 16: {
               bitField0_ |= 0x00000002;
               requiredExperience_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              maxCash_ = input.readInt32();
               break;
             }
           }
@@ -5056,15 +5092,36 @@ public final class UserProto {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.LevelAndRequiredExpProto)
+      // optional int32 maxCash = 3;
+      private int maxCash_ ;
+      public boolean hasMaxCash() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getMaxCash() {
+        return maxCash_;
+      }
+      public Builder setMaxCash(int value) {
+        bitField0_ |= 0x00000004;
+        maxCash_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMaxCash() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        maxCash_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticLevelInfoProto)
     }
     
     static {
-      defaultInstance = new LevelAndRequiredExpProto(true);
+      defaultInstance = new StaticLevelInfoProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.LevelAndRequiredExpProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.StaticLevelInfoProto)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -5088,10 +5145,10 @@ public final class UserProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor;
+    internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_LevelAndRequiredExpProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -5133,9 +5190,9 @@ public final class UserProto {
       "\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030",
       "numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWa" +
       "llPostNotificationTime\030\032 \001(\003\022\021\n\tkabamNai" +
-      "d\030\033 \001(\t\"E\n\030LevelAndRequiredExpProto\022\r\n\005l" +
-      "evel\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005B\013" +
-      "B\tUserProto"
+      "d\030\033 \001(\t\"R\n\024StaticLevelInfoProto\022\r\n\005level" +
+      "\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\022\017\n\007ma" +
+      "xCash\030\003 \001(\005B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5174,14 +5231,14 @@ public final class UserProto {
               new java.lang.String[] { "UserId", "Name", "Level", "Diamonds", "Coins", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalMonsterSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", },
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
-          internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor =
+          internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor =
             getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_LevelAndRequiredExpProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_LevelAndRequiredExpProto_descriptor,
-              new java.lang.String[] { "Level", "RequiredExperience", },
-              com.lvl6.proto.UserProto.LevelAndRequiredExpProto.class,
-              com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder.class);
+              internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor,
+              new java.lang.String[] { "Level", "RequiredExperience", "MaxCash", },
+              com.lvl6.proto.UserProto.StaticLevelInfoProto.class,
+              com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder.class);
           return null;
         }
       };

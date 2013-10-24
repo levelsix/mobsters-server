@@ -1,6 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +12,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LevelUpRequestEvent;
 import com.lvl6.events.response.LevelUpResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.City;
+import com.lvl6.info.StaticLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -22,13 +21,12 @@ import com.lvl6.proto.EventUserProto.LevelUpRequestProto;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.rarechange.LevelRequiredExperienceRetrieveUtils;
+import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.rarechange.StaticLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class LevelUpController extends EventController {
 
@@ -79,7 +77,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //      int levelAfterLeveling = ControllerConstants.NOT_SET;
       if (legitLevelUp) {
         int newNextLevel = user.getLevel() + 2;
-        int expRequiredForNewNextLevel = LevelRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(newNextLevel);
+        StaticLevelInfo sli = StaticLevelInfoRetrieveUtils.getStaticLevelInfoForLevel(newNextLevel);
+        int expRequiredForNewNextLevel = sli.getRequiredExp();
 
         int newLevel = user.getLevel() + 1;
 //        levelBeforeLeveling = user.getLevel();
@@ -163,7 +162,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("user is already at server's allowed max level: " + ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
       return false;
     }
-    Integer expRequiredForNextLevel = LevelRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(user.getLevel() + 1);
+    StaticLevelInfo sli = StaticLevelInfoRetrieveUtils.getStaticLevelInfoForLevel(user.getLevel() + 1);
+    Integer expRequiredForNextLevel = sli.getRequiredExp();
     if (expRequiredForNextLevel == null) {
       resBuilder.setStatus(LevelUpStatus.OTHER_FAIL);
       log.error("no experience required inputted for level: " + user.getLevel() + 1);

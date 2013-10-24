@@ -71,8 +71,7 @@ message UpdateMonsterHealthRequestProto {
 
 message UpdateMonsterHealthResponseProto {
 	optional MinimumUserProto sender = 1;
-	repeated UserMonsterCurrentHealthProto umchp = 2;
-	optional UpdateMonsterHealthStatus status = 3;
+	optional UpdateMonsterHealthStatus status = 2;
 	
 	enum UpdateMonsterHealthStatus {
 		SUCCESS = 1;
@@ -103,9 +102,6 @@ message HealMonsterRequestProto {
 message HealMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional HealMonsterStatus status = 2;
-	
-	//these are the monsters in the table 
-	repeated UserMonsterHealingProto umhp = 3;
 	
 	enum HealMonsterStatus {
 		SUCCESS = 1;

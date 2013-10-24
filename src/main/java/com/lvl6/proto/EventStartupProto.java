@@ -945,14 +945,14 @@ public final class EventStartupProto {
     com.lvl6.proto.ChatProto.PrivateChatPostProtoOrBuilder getPcppOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 23;
-    java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> 
-        getLarepList();
-    com.lvl6.proto.UserProto.LevelAndRequiredExpProto getLarep(int index);
-    int getLarepCount();
-    java.util.List<? extends com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder> 
-        getLarepOrBuilderList();
-    com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder getLarepOrBuilder(
+    // repeated .com.lvl6.proto.StaticLevelInfoProto slip = 23;
+    java.util.List<com.lvl6.proto.UserProto.StaticLevelInfoProto> 
+        getSlipList();
+    com.lvl6.proto.UserProto.StaticLevelInfoProto getSlip(int index);
+    int getSlipCount();
+    java.util.List<? extends com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder> 
+        getSlipOrBuilderList();
+    com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder getSlipOrBuilder(
         int index);
     
     // repeated .com.lvl6.proto.FullStructureProto staticStructs = 24;
@@ -8050,25 +8050,25 @@ public final class EventStartupProto {
       return pcpp_.get(index);
     }
     
-    // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 23;
-    public static final int LAREP_FIELD_NUMBER = 23;
-    private java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> larep_;
-    public java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> getLarepList() {
-      return larep_;
+    // repeated .com.lvl6.proto.StaticLevelInfoProto slip = 23;
+    public static final int SLIP_FIELD_NUMBER = 23;
+    private java.util.List<com.lvl6.proto.UserProto.StaticLevelInfoProto> slip_;
+    public java.util.List<com.lvl6.proto.UserProto.StaticLevelInfoProto> getSlipList() {
+      return slip_;
     }
-    public java.util.List<? extends com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder> 
-        getLarepOrBuilderList() {
-      return larep_;
+    public java.util.List<? extends com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder> 
+        getSlipOrBuilderList() {
+      return slip_;
     }
-    public int getLarepCount() {
-      return larep_.size();
+    public int getSlipCount() {
+      return slip_.size();
     }
-    public com.lvl6.proto.UserProto.LevelAndRequiredExpProto getLarep(int index) {
-      return larep_.get(index);
+    public com.lvl6.proto.UserProto.StaticLevelInfoProto getSlip(int index) {
+      return slip_.get(index);
     }
-    public com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder getLarepOrBuilder(
+    public com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder getSlipOrBuilder(
         int index) {
-      return larep_.get(index);
+      return slip_.get(index);
     }
     
     // repeated .com.lvl6.proto.FullStructureProto staticStructs = 24;
@@ -8265,7 +8265,7 @@ public final class EventStartupProto {
       globalChats_ = java.util.Collections.emptyList();
       clanChats_ = java.util.Collections.emptyList();
       pcpp_ = java.util.Collections.emptyList();
-      larep_ = java.util.Collections.emptyList();
+      slip_ = java.util.Collections.emptyList();
       staticStructs_ = java.util.Collections.emptyList();
       expansionCosts_ = java.util.Collections.emptyList();
       staticMonsters_ = java.util.Collections.emptyList();
@@ -8353,8 +8353,8 @@ public final class EventStartupProto {
       for (int i = 0; i < pcpp_.size(); i++) {
         output.writeMessage(22, pcpp_.get(i));
       }
-      for (int i = 0; i < larep_.size(); i++) {
-        output.writeMessage(23, larep_.get(i));
+      for (int i = 0; i < slip_.size(); i++) {
+        output.writeMessage(23, slip_.get(i));
       }
       for (int i = 0; i < staticStructs_.size(); i++) {
         output.writeMessage(24, staticStructs_.get(i));
@@ -8482,9 +8482,9 @@ public final class EventStartupProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(22, pcpp_.get(i));
       }
-      for (int i = 0; i < larep_.size(); i++) {
+      for (int i = 0; i < slip_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(23, larep_.get(i));
+          .computeMessageSize(23, slip_.get(i));
       }
       for (int i = 0; i < staticStructs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -8648,7 +8648,7 @@ public final class EventStartupProto {
           getGlobalChatsFieldBuilder();
           getClanChatsFieldBuilder();
           getPcppFieldBuilder();
-          getLarepFieldBuilder();
+          getSlipFieldBuilder();
           getStaticStructsFieldBuilder();
           getExpansionCostsFieldBuilder();
           getStaticMonstersFieldBuilder();
@@ -8764,11 +8764,11 @@ public final class EventStartupProto {
         } else {
           pcppBuilder_.clear();
         }
-        if (larepBuilder_ == null) {
-          larep_ = java.util.Collections.emptyList();
+        if (slipBuilder_ == null) {
+          slip_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00400000);
         } else {
-          larepBuilder_.clear();
+          slipBuilder_.clear();
         }
         if (staticStructsBuilder_ == null) {
           staticStructs_ = java.util.Collections.emptyList();
@@ -9010,14 +9010,14 @@ public final class EventStartupProto {
         } else {
           result.pcpp_ = pcppBuilder_.build();
         }
-        if (larepBuilder_ == null) {
+        if (slipBuilder_ == null) {
           if (((bitField0_ & 0x00400000) == 0x00400000)) {
-            larep_ = java.util.Collections.unmodifiableList(larep_);
+            slip_ = java.util.Collections.unmodifiableList(slip_);
             bitField0_ = (bitField0_ & ~0x00400000);
           }
-          result.larep_ = larep_;
+          result.slip_ = slip_;
         } else {
-          result.larep_ = larepBuilder_.build();
+          result.slip_ = slipBuilder_.build();
         }
         if (staticStructsBuilder_ == null) {
           if (((bitField0_ & 0x00800000) == 0x00800000)) {
@@ -9450,29 +9450,29 @@ public final class EventStartupProto {
             }
           }
         }
-        if (larepBuilder_ == null) {
-          if (!other.larep_.isEmpty()) {
-            if (larep_.isEmpty()) {
-              larep_ = other.larep_;
+        if (slipBuilder_ == null) {
+          if (!other.slip_.isEmpty()) {
+            if (slip_.isEmpty()) {
+              slip_ = other.slip_;
               bitField0_ = (bitField0_ & ~0x00400000);
             } else {
-              ensureLarepIsMutable();
-              larep_.addAll(other.larep_);
+              ensureSlipIsMutable();
+              slip_.addAll(other.slip_);
             }
             onChanged();
           }
         } else {
-          if (!other.larep_.isEmpty()) {
-            if (larepBuilder_.isEmpty()) {
-              larepBuilder_.dispose();
-              larepBuilder_ = null;
-              larep_ = other.larep_;
+          if (!other.slip_.isEmpty()) {
+            if (slipBuilder_.isEmpty()) {
+              slipBuilder_.dispose();
+              slipBuilder_ = null;
+              slip_ = other.slip_;
               bitField0_ = (bitField0_ & ~0x00400000);
-              larepBuilder_ = 
+              slipBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getLarepFieldBuilder() : null;
+                   getSlipFieldBuilder() : null;
             } else {
-              larepBuilder_.addAllMessages(other.larep_);
+              slipBuilder_.addAllMessages(other.slip_);
             }
           }
         }
@@ -9812,9 +9812,9 @@ public final class EventStartupProto {
               break;
             }
             case 186: {
-              com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder subBuilder = com.lvl6.proto.UserProto.LevelAndRequiredExpProto.newBuilder();
+              com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder subBuilder = com.lvl6.proto.UserProto.StaticLevelInfoProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addLarep(subBuilder.buildPartial());
+              addSlip(subBuilder.buildPartial());
               break;
             }
             case 194: {
@@ -12539,190 +12539,190 @@ public final class EventStartupProto {
         return pcppBuilder_;
       }
       
-      // repeated .com.lvl6.proto.LevelAndRequiredExpProto larep = 23;
-      private java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> larep_ =
+      // repeated .com.lvl6.proto.StaticLevelInfoProto slip = 23;
+      private java.util.List<com.lvl6.proto.UserProto.StaticLevelInfoProto> slip_ =
         java.util.Collections.emptyList();
-      private void ensureLarepIsMutable() {
+      private void ensureSlipIsMutable() {
         if (!((bitField0_ & 0x00400000) == 0x00400000)) {
-          larep_ = new java.util.ArrayList<com.lvl6.proto.UserProto.LevelAndRequiredExpProto>(larep_);
+          slip_ = new java.util.ArrayList<com.lvl6.proto.UserProto.StaticLevelInfoProto>(slip_);
           bitField0_ |= 0x00400000;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.UserProto.LevelAndRequiredExpProto, com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder, com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder> larepBuilder_;
+          com.lvl6.proto.UserProto.StaticLevelInfoProto, com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder, com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder> slipBuilder_;
       
-      public java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto> getLarepList() {
-        if (larepBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(larep_);
+      public java.util.List<com.lvl6.proto.UserProto.StaticLevelInfoProto> getSlipList() {
+        if (slipBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(slip_);
         } else {
-          return larepBuilder_.getMessageList();
+          return slipBuilder_.getMessageList();
         }
       }
-      public int getLarepCount() {
-        if (larepBuilder_ == null) {
-          return larep_.size();
+      public int getSlipCount() {
+        if (slipBuilder_ == null) {
+          return slip_.size();
         } else {
-          return larepBuilder_.getCount();
+          return slipBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto getLarep(int index) {
-        if (larepBuilder_ == null) {
-          return larep_.get(index);
+      public com.lvl6.proto.UserProto.StaticLevelInfoProto getSlip(int index) {
+        if (slipBuilder_ == null) {
+          return slip_.get(index);
         } else {
-          return larepBuilder_.getMessage(index);
+          return slipBuilder_.getMessage(index);
         }
       }
-      public Builder setLarep(
-          int index, com.lvl6.proto.UserProto.LevelAndRequiredExpProto value) {
-        if (larepBuilder_ == null) {
+      public Builder setSlip(
+          int index, com.lvl6.proto.UserProto.StaticLevelInfoProto value) {
+        if (slipBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureLarepIsMutable();
-          larep_.set(index, value);
+          ensureSlipIsMutable();
+          slip_.set(index, value);
           onChanged();
         } else {
-          larepBuilder_.setMessage(index, value);
+          slipBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setLarep(
-          int index, com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder builderForValue) {
-        if (larepBuilder_ == null) {
-          ensureLarepIsMutable();
-          larep_.set(index, builderForValue.build());
+      public Builder setSlip(
+          int index, com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder builderForValue) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          slip_.set(index, builderForValue.build());
           onChanged();
         } else {
-          larepBuilder_.setMessage(index, builderForValue.build());
+          slipBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addLarep(com.lvl6.proto.UserProto.LevelAndRequiredExpProto value) {
-        if (larepBuilder_ == null) {
+      public Builder addSlip(com.lvl6.proto.UserProto.StaticLevelInfoProto value) {
+        if (slipBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureLarepIsMutable();
-          larep_.add(value);
+          ensureSlipIsMutable();
+          slip_.add(value);
           onChanged();
         } else {
-          larepBuilder_.addMessage(value);
+          slipBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addLarep(
-          int index, com.lvl6.proto.UserProto.LevelAndRequiredExpProto value) {
-        if (larepBuilder_ == null) {
+      public Builder addSlip(
+          int index, com.lvl6.proto.UserProto.StaticLevelInfoProto value) {
+        if (slipBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureLarepIsMutable();
-          larep_.add(index, value);
+          ensureSlipIsMutable();
+          slip_.add(index, value);
           onChanged();
         } else {
-          larepBuilder_.addMessage(index, value);
+          slipBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addLarep(
-          com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder builderForValue) {
-        if (larepBuilder_ == null) {
-          ensureLarepIsMutable();
-          larep_.add(builderForValue.build());
+      public Builder addSlip(
+          com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder builderForValue) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          slip_.add(builderForValue.build());
           onChanged();
         } else {
-          larepBuilder_.addMessage(builderForValue.build());
+          slipBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addLarep(
-          int index, com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder builderForValue) {
-        if (larepBuilder_ == null) {
-          ensureLarepIsMutable();
-          larep_.add(index, builderForValue.build());
+      public Builder addSlip(
+          int index, com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder builderForValue) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          slip_.add(index, builderForValue.build());
           onChanged();
         } else {
-          larepBuilder_.addMessage(index, builderForValue.build());
+          slipBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllLarep(
-          java.lang.Iterable<? extends com.lvl6.proto.UserProto.LevelAndRequiredExpProto> values) {
-        if (larepBuilder_ == null) {
-          ensureLarepIsMutable();
-          super.addAll(values, larep_);
+      public Builder addAllSlip(
+          java.lang.Iterable<? extends com.lvl6.proto.UserProto.StaticLevelInfoProto> values) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          super.addAll(values, slip_);
           onChanged();
         } else {
-          larepBuilder_.addAllMessages(values);
+          slipBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearLarep() {
-        if (larepBuilder_ == null) {
-          larep_ = java.util.Collections.emptyList();
+      public Builder clearSlip() {
+        if (slipBuilder_ == null) {
+          slip_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00400000);
           onChanged();
         } else {
-          larepBuilder_.clear();
+          slipBuilder_.clear();
         }
         return this;
       }
-      public Builder removeLarep(int index) {
-        if (larepBuilder_ == null) {
-          ensureLarepIsMutable();
-          larep_.remove(index);
+      public Builder removeSlip(int index) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          slip_.remove(index);
           onChanged();
         } else {
-          larepBuilder_.remove(index);
+          slipBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder getLarepBuilder(
+      public com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder getSlipBuilder(
           int index) {
-        return getLarepFieldBuilder().getBuilder(index);
+        return getSlipFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder getLarepOrBuilder(
+      public com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder getSlipOrBuilder(
           int index) {
-        if (larepBuilder_ == null) {
-          return larep_.get(index);  } else {
-          return larepBuilder_.getMessageOrBuilder(index);
+        if (slipBuilder_ == null) {
+          return slip_.get(index);  } else {
+          return slipBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder> 
-           getLarepOrBuilderList() {
-        if (larepBuilder_ != null) {
-          return larepBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder> 
+           getSlipOrBuilderList() {
+        if (slipBuilder_ != null) {
+          return slipBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(larep_);
+          return java.util.Collections.unmodifiableList(slip_);
         }
       }
-      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder addLarepBuilder() {
-        return getLarepFieldBuilder().addBuilder(
-            com.lvl6.proto.UserProto.LevelAndRequiredExpProto.getDefaultInstance());
+      public com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder addSlipBuilder() {
+        return getSlipFieldBuilder().addBuilder(
+            com.lvl6.proto.UserProto.StaticLevelInfoProto.getDefaultInstance());
       }
-      public com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder addLarepBuilder(
+      public com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder addSlipBuilder(
           int index) {
-        return getLarepFieldBuilder().addBuilder(
-            index, com.lvl6.proto.UserProto.LevelAndRequiredExpProto.getDefaultInstance());
+        return getSlipFieldBuilder().addBuilder(
+            index, com.lvl6.proto.UserProto.StaticLevelInfoProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder> 
-           getLarepBuilderList() {
-        return getLarepFieldBuilder().getBuilderList();
+      public java.util.List<com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder> 
+           getSlipBuilderList() {
+        return getSlipFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.UserProto.LevelAndRequiredExpProto, com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder, com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder> 
-          getLarepFieldBuilder() {
-        if (larepBuilder_ == null) {
-          larepBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.UserProto.LevelAndRequiredExpProto, com.lvl6.proto.UserProto.LevelAndRequiredExpProto.Builder, com.lvl6.proto.UserProto.LevelAndRequiredExpProtoOrBuilder>(
-                  larep_,
+          com.lvl6.proto.UserProto.StaticLevelInfoProto, com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder, com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder> 
+          getSlipFieldBuilder() {
+        if (slipBuilder_ == null) {
+          slipBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.UserProto.StaticLevelInfoProto, com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder, com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder>(
+                  slip_,
                   ((bitField0_ & 0x00400000) == 0x00400000),
                   getParentForChildren(),
                   isClean());
-          larep_ = null;
+          slip_ = null;
         }
-        return larepBuilder_;
+        return slipBuilder_;
       }
       
       // repeated .com.lvl6.proto.FullStructureProto staticStructs = 24;
@@ -14050,7 +14050,7 @@ public final class EventStartupProto {
       "oto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n" +
       "\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014" +
       "advertiserId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 " +
-      "\001(\010\"\243\037\n\024StartupResponseProto\022\030\n\020serverTi" +
+      "\001(\010\"\236\037\n\024StartupResponseProto\022\030\n\020serverTi" +
       "meMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl",
       "6.proto.FullUserProto\022I\n\rstartupStatus\030\003" +
       " \001(\01622.com.lvl6.proto.StartupResponsePro" +
@@ -14080,77 +14080,77 @@ public final class EventStartupProto {
       "vl6.proto.GroupChatMessageProto\0228\n\tclanC" +
       "hats\030\025 \003(\0132%.com.lvl6.proto.GroupChatMes" +
       "sageProto\0222\n\004pcpp\030\026 \003(\0132$.com.lvl6.proto" +
-      ".PrivateChatPostProto\0227\n\005larep\030\027 \003(\0132(.c" +
-      "om.lvl6.proto.LevelAndRequiredExpProto\0229",
-      "\n\rstaticStructs\030\030 \003(\0132\".com.lvl6.proto.F" +
-      "ullStructureProto\022>\n\016expansionCosts\030\031 \003(" +
-      "\0132&.com.lvl6.proto.CityExpansionCostProt" +
-      "o\0224\n\016staticMonsters\030\032 \003(\0132\034.com.lvl6.pro" +
-      "to.MonsterProto\022;\n\rusersMonsters\030\033 \003(\0132$" +
-      ".com.lvl6.proto.FullUserMonsterProto\022@\n\017" +
-      "monstersHealing\030\034 \003(\0132\'.com.lvl6.proto.U" +
-      "serMonsterHealingProto\022:\n\014enhancements\030\035" +
-      " \001(\0132$.com.lvl6.proto.UserEnhancementPro" +
-      "to\022F\n\024rareBoosterPurchases\030\036 \003(\0132(.com.l",
-      "vl6.proto.RareBoosterPurchaseProto\022\021\n\tka" +
-      "bamNaid\030\037 \001(\t\032\200\001\n\031AttackedNotificationPr" +
-      "oto\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\032\n\022battleCompleteTime\030\002 " +
-      "\001(\003\022\023\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNot" +
-      "ificationProto\0222\n\010referred\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\023\n\013recruitTim" +
-      "e\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\341\016" +
-      "\n\020StartupConstants\022H\n\025inAppPurchasePacka" +
-      "ges\030\001 \003(\0132).com.lvl6.proto.InAppPurchase",
-      "PackageProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n" +
-      "\024maxNumOfSingleStruct\030\003 \001(\005\022f\n\023normStruc" +
-      "tConstants\030\004 \001(\0132I.com.lvl6.proto.Startu" +
-      "pResponseProto.StartupConstants.NormStru" +
-      "ctConstants\022n\n\025animatedSpriteOffsets\030\005 \003" +
-      "(\0132O.com.lvl6.proto.StartupResponseProto" +
-      ".StartupConstants.AnimatedSpriteOffsetPr" +
-      "oto\022\025\n\rminNameLength\030\006 \001(\005\022\025\n\rmaxNameLen" +
-      "gth\030\007 \001(\005\022\035\n\025maxLengthOfChatString\030\010 \001(\005" +
-      "\022Z\n\rclanConstants\030\t \001(\0132C.com.lvl6.proto",
-      ".StartupResponseProto.StartupConstants.C" +
-      "lanConstants\022p\n\030downloadableNibConstants" +
-      "\030\n \001(\0132N.com.lvl6.proto.StartupResponseP" +
-      "roto.StartupConstants.DownloadableNibCon" +
-      "stants\022\'\n\037numHoursBeforeReshowingGoldSal" +
-      "e\030\013 \001(\005\022\036\n\026levelToShowRateUsPopup\030\014 \001(\005\022" +
-      "e\n\022touramentConstants\030\r \001(\0132I.com.lvl6.p" +
-      "roto.StartupResponseProto.StartupConstan" +
-      "ts.TournamentConstants\022\037\n\027fbConnectRewar" +
-      "dDiamonds\030\016 \001(\005\022\023\n\013faqFileName\030\017 \001(\t\022<\n\022",
-      "adminChatUserProto\030\020 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\037\n\027numBeginnerSalesAl" +
-      "lowed\030\021 \001(\005\022h\n\024userMonsterConstants\030\022 \001(" +
-      "\0132J.com.lvl6.proto.StartupResponseProto." +
-      "StartupConstants.UserMonsterConstants\032\367\001" +
-      "\n\023NormStructConstants\022/\n\'minutesToUpgrad" +
-      "eForNormStructMultiplier\030\001 \001(\001\022&\n\036income" +
-      "FromNormStructMultiplier\030\002 \001(\001\022)\n!upgrad" +
-      "eStructCoinCostExponentBase\030\003 \001(\001\022,\n$upg" +
-      "radeStructDiamondCostExponentBase\030\004 \001(\001\022",
-      ".\n&diamondCostForInstantUpgradeMultiplie" +
-      "r\030\005 \001(\001\032_\n\031AnimatedSpriteOffsetProto\022\021\n\t" +
-      "imageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lv" +
-      "l6.proto.CoordinateProto\032\232\001\n\rClanConstan" +
-      "ts\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030max" +
-      "CharLengthForClanName\030\002 \001(\005\022\'\n\037maxCharLe" +
-      "ngthForClanDescription\030\003 \001(\005\022\037\n\027maxCharL" +
-      "engthForClanTag\030\004 \001(\005\032c\n\030DownloadableNib" +
-      "Constants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansi" +
-      "onNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001",
-      "(\t\032y\n\023TournamentConstants\022\022\n\nwinsWeight\030" +
-      "\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeig" +
-      "ht\030\003 \001(\005\022#\n\033numHoursToShowAfterEventEnd\030" +
-      "\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017maxNumT" +
-      "eamSlots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLi" +
-      "mit\030\002 \001(\005\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001" +
-      "\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\r" +
-      "StartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NO" +
-      "T_IN_DB\020\002B\023B\021EventStartupProto"
+      ".PrivateChatPostProto\0222\n\004slip\030\027 \003(\0132$.co" +
+      "m.lvl6.proto.StaticLevelInfoProto\0229\n\rsta",
+      "ticStructs\030\030 \003(\0132\".com.lvl6.proto.FullSt" +
+      "ructureProto\022>\n\016expansionCosts\030\031 \003(\0132&.c" +
+      "om.lvl6.proto.CityExpansionCostProto\0224\n\016" +
+      "staticMonsters\030\032 \003(\0132\034.com.lvl6.proto.Mo" +
+      "nsterProto\022;\n\rusersMonsters\030\033 \003(\0132$.com." +
+      "lvl6.proto.FullUserMonsterProto\022@\n\017monst" +
+      "ersHealing\030\034 \003(\0132\'.com.lvl6.proto.UserMo" +
+      "nsterHealingProto\022:\n\014enhancements\030\035 \001(\0132" +
+      "$.com.lvl6.proto.UserEnhancementProto\022F\n" +
+      "\024rareBoosterPurchases\030\036 \003(\0132(.com.lvl6.p",
+      "roto.RareBoosterPurchaseProto\022\021\n\tkabamNa" +
+      "id\030\037 \001(\t\032\200\001\n\031AttackedNotificationProto\0222" +
+      "\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\032\n\022battleCompleteTime\030\002 \001(\003\022\023" +
+      "\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNotifica" +
+      "tionProto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022\023\n\013recruitTime\030\002 \001" +
+      "(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\341\016\n\020Sta" +
+      "rtupConstants\022H\n\025inAppPurchasePackages\030\001" +
+      " \003(\0132).com.lvl6.proto.InAppPurchasePacka",
+      "geProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxN" +
+      "umOfSingleStruct\030\003 \001(\005\022f\n\023normStructCons" +
+      "tants\030\004 \001(\0132I.com.lvl6.proto.StartupResp" +
+      "onseProto.StartupConstants.NormStructCon" +
+      "stants\022n\n\025animatedSpriteOffsets\030\005 \003(\0132O." +
+      "com.lvl6.proto.StartupResponseProto.Star" +
+      "tupConstants.AnimatedSpriteOffsetProto\022\025" +
+      "\n\rminNameLength\030\006 \001(\005\022\025\n\rmaxNameLength\030\007" +
+      " \001(\005\022\035\n\025maxLengthOfChatString\030\010 \001(\005\022Z\n\rc" +
+      "lanConstants\030\t \001(\0132C.com.lvl6.proto.Star",
+      "tupResponseProto.StartupConstants.ClanCo" +
+      "nstants\022p\n\030downloadableNibConstants\030\n \001(" +
+      "\0132N.com.lvl6.proto.StartupResponseProto." +
+      "StartupConstants.DownloadableNibConstant" +
+      "s\022\'\n\037numHoursBeforeReshowingGoldSale\030\013 \001" +
+      "(\005\022\036\n\026levelToShowRateUsPopup\030\014 \001(\005\022e\n\022to" +
+      "uramentConstants\030\r \001(\0132I.com.lvl6.proto." +
+      "StartupResponseProto.StartupConstants.To" +
+      "urnamentConstants\022\037\n\027fbConnectRewardDiam" +
+      "onds\030\016 \001(\005\022\023\n\013faqFileName\030\017 \001(\t\022<\n\022admin",
+      "ChatUserProto\030\020 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022\037\n\027numBeginnerSalesAllowed" +
+      "\030\021 \001(\005\022h\n\024userMonsterConstants\030\022 \001(\0132J.c" +
+      "om.lvl6.proto.StartupResponseProto.Start" +
+      "upConstants.UserMonsterConstants\032\367\001\n\023Nor" +
+      "mStructConstants\022/\n\'minutesToUpgradeForN" +
+      "ormStructMultiplier\030\001 \001(\001\022&\n\036incomeFromN" +
+      "ormStructMultiplier\030\002 \001(\001\022)\n!upgradeStru" +
+      "ctCoinCostExponentBase\030\003 \001(\001\022,\n$upgradeS" +
+      "tructDiamondCostExponentBase\030\004 \001(\001\022.\n&di",
+      "amondCostForInstantUpgradeMultiplier\030\005 \001" +
+      "(\001\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timage" +
+      "Name\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.pr" +
+      "oto.CoordinateProto\032\232\001\n\rClanConstants\022\035\n" +
+      "\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharL" +
+      "engthForClanName\030\002 \001(\005\022\'\n\037maxCharLengthF" +
+      "orClanDescription\030\003 \001(\005\022\037\n\027maxCharLength" +
+      "ForClanTag\030\004 \001(\005\032c\n\030DownloadableNibConst" +
+      "ants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNib" +
+      "Name\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n",
+      "\023TournamentConstants\022\022\n\nwinsWeight\030\001 \001(\005" +
+      "\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 " +
+      "\001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(\005" +
+      "\032R\n\024UserMonsterConstants\022\027\n\017maxNumTeamSl" +
+      "ots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030\002" +
+      " \001(\005\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014M" +
+      "INOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStart" +
+      "upStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_" +
+      "DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14170,7 +14170,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
-              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "AllCities", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "UserQuests", "UserClanInfo", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "GoldSales", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "Larep", "StaticStructs", "ExpansionCosts", "StaticMonsters", "UsersMonsters", "MonstersHealing", "Enhancements", "RareBoosterPurchases", "KabamNaid", },
+              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "AllCities", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "UserQuests", "UserClanInfo", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "GoldSales", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "Slip", "StaticStructs", "ExpansionCosts", "StaticMonsters", "UsersMonsters", "MonstersHealing", "Enhancements", "RareBoosterPurchases", "KabamNaid", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =

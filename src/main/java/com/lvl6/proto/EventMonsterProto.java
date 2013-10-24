@@ -3938,17 +3938,7 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 2;
-    java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> 
-        getUmchpList();
-    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getUmchp(int index);
-    int getUmchpCount();
-    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
-        getUmchpOrBuilderList();
-    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getUmchpOrBuilder(
-        int index);
-    
-    // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 3;
+    // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;
     boolean hasStatus();
     com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus getStatus();
   }
@@ -4066,29 +4056,8 @@ public final class EventMonsterProto {
       return sender_;
     }
     
-    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 2;
-    public static final int UMCHP_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> umchp_;
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> getUmchpList() {
-      return umchp_;
-    }
-    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
-        getUmchpOrBuilderList() {
-      return umchp_;
-    }
-    public int getUmchpCount() {
-      return umchp_.size();
-    }
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getUmchp(int index) {
-      return umchp_.get(index);
-    }
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getUmchpOrBuilder(
-        int index) {
-      return umchp_.get(index);
-    }
-    
-    // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 3;
-    public static final int STATUS_FIELD_NUMBER = 3;
+    // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;
+    public static final int STATUS_FIELD_NUMBER = 2;
     private com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status_;
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -4099,7 +4068,6 @@ public final class EventMonsterProto {
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      umchp_ = java.util.Collections.emptyList();
       status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -4117,11 +4085,8 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < umchp_.size(); i++) {
-        output.writeMessage(2, umchp_.get(i));
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(3, status_.getNumber());
+        output.writeEnum(2, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -4136,13 +4101,9 @@ public final class EventMonsterProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      for (int i = 0; i < umchp_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, umchp_.get(i));
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, status_.getNumber());
+          .computeEnumSize(2, status_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4261,7 +4222,6 @@ public final class EventMonsterProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getUmchpFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4276,14 +4236,8 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (umchpBuilder_ == null) {
-          umchp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          umchpBuilder_.clear();
-        }
         status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       
@@ -4330,16 +4284,7 @@ public final class EventMonsterProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (umchpBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            umchp_ = java.util.Collections.unmodifiableList(umchp_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.umchp_ = umchp_;
-        } else {
-          result.umchp_ = umchpBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
@@ -4361,32 +4306,6 @@ public final class EventMonsterProto {
         if (other == com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
-        }
-        if (umchpBuilder_ == null) {
-          if (!other.umchp_.isEmpty()) {
-            if (umchp_.isEmpty()) {
-              umchp_ = other.umchp_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureUmchpIsMutable();
-              umchp_.addAll(other.umchp_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.umchp_.isEmpty()) {
-            if (umchpBuilder_.isEmpty()) {
-              umchpBuilder_.dispose();
-              umchpBuilder_ = null;
-              umchp_ = other.umchp_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              umchpBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getUmchpFieldBuilder() : null;
-            } else {
-              umchpBuilder_.addAllMessages(other.umchp_);
-            }
-          }
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
@@ -4431,19 +4350,13 @@ public final class EventMonsterProto {
               setSender(subBuilder.buildPartial());
               break;
             }
-            case 18: {
-              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addUmchp(subBuilder.buildPartial());
-              break;
-            }
-            case 24: {
+            case 16: {
               int rawValue = input.readEnum();
               com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus value = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
+                unknownFields.mergeVarintField(2, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000002;
                 status_ = value;
               }
               break;
@@ -4544,196 +4457,10 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
       
-      // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto umchp = 2;
-      private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> umchp_ =
-        java.util.Collections.emptyList();
-      private void ensureUmchpIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          umchp_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto>(umchp_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> umchpBuilder_;
-      
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> getUmchpList() {
-        if (umchpBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(umchp_);
-        } else {
-          return umchpBuilder_.getMessageList();
-        }
-      }
-      public int getUmchpCount() {
-        if (umchpBuilder_ == null) {
-          return umchp_.size();
-        } else {
-          return umchpBuilder_.getCount();
-        }
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getUmchp(int index) {
-        if (umchpBuilder_ == null) {
-          return umchp_.get(index);
-        } else {
-          return umchpBuilder_.getMessage(index);
-        }
-      }
-      public Builder setUmchp(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
-        if (umchpBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUmchpIsMutable();
-          umchp_.set(index, value);
-          onChanged();
-        } else {
-          umchpBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      public Builder setUmchp(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
-        if (umchpBuilder_ == null) {
-          ensureUmchpIsMutable();
-          umchp_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          umchpBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addUmchp(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
-        if (umchpBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUmchpIsMutable();
-          umchp_.add(value);
-          onChanged();
-        } else {
-          umchpBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addUmchp(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
-        if (umchpBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUmchpIsMutable();
-          umchp_.add(index, value);
-          onChanged();
-        } else {
-          umchpBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addUmchp(
-          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
-        if (umchpBuilder_ == null) {
-          ensureUmchpIsMutable();
-          umchp_.add(builderForValue.build());
-          onChanged();
-        } else {
-          umchpBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addUmchp(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
-        if (umchpBuilder_ == null) {
-          ensureUmchpIsMutable();
-          umchp_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          umchpBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllUmchp(
-          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> values) {
-        if (umchpBuilder_ == null) {
-          ensureUmchpIsMutable();
-          super.addAll(values, umchp_);
-          onChanged();
-        } else {
-          umchpBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      public Builder clearUmchp() {
-        if (umchpBuilder_ == null) {
-          umchp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          umchpBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removeUmchp(int index) {
-        if (umchpBuilder_ == null) {
-          ensureUmchpIsMutable();
-          umchp_.remove(index);
-          onChanged();
-        } else {
-          umchpBuilder_.remove(index);
-        }
-        return this;
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder getUmchpBuilder(
-          int index) {
-        return getUmchpFieldBuilder().getBuilder(index);
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getUmchpOrBuilder(
-          int index) {
-        if (umchpBuilder_ == null) {
-          return umchp_.get(index);  } else {
-          return umchpBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
-           getUmchpOrBuilderList() {
-        if (umchpBuilder_ != null) {
-          return umchpBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(umchp_);
-        }
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder addUmchpBuilder() {
-        return getUmchpFieldBuilder().addBuilder(
-            com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance());
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder addUmchpBuilder(
-          int index) {
-        return getUmchpFieldBuilder().addBuilder(
-            index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance());
-      }
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder> 
-           getUmchpBuilderList() {
-        return getUmchpFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
-          getUmchpFieldBuilder() {
-        if (umchpBuilder_ == null) {
-          umchpBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder>(
-                  umchp_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
-                  getParentForChildren(),
-                  isClean());
-          umchp_ = null;
-        }
-        return umchpBuilder_;
-      }
-      
-      // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 3;
+      // optional .com.lvl6.proto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status = 2;
       private com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
       public boolean hasStatus() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       public com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus getStatus() {
         return status_;
@@ -4742,13 +4469,13 @@ public final class EventMonsterProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         status_ = value;
         onChanged();
         return this;
       }
       public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.UpdateMonsterHealthStatus.SUCCESS;
         onChanged();
         return this;
@@ -6076,16 +5803,6 @@ public final class EventMonsterProto {
     // optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;
     boolean hasStatus();
     com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus getStatus();
-    
-    // repeated .com.lvl6.proto.UserMonsterHealingProto umhp = 3;
-    java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> 
-        getUmhpList();
-    com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto getUmhp(int index);
-    int getUmhpCount();
-    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder> 
-        getUmhpOrBuilderList();
-    com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getUmhpOrBuilder(
-        int index);
   }
   public static final class HealMonsterResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -6217,31 +5934,9 @@ public final class EventMonsterProto {
       return status_;
     }
     
-    // repeated .com.lvl6.proto.UserMonsterHealingProto umhp = 3;
-    public static final int UMHP_FIELD_NUMBER = 3;
-    private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> umhp_;
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> getUmhpList() {
-      return umhp_;
-    }
-    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder> 
-        getUmhpOrBuilderList() {
-      return umhp_;
-    }
-    public int getUmhpCount() {
-      return umhp_.size();
-    }
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto getUmhp(int index) {
-      return umhp_.get(index);
-    }
-    public com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getUmhpOrBuilder(
-        int index) {
-      return umhp_.get(index);
-    }
-    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
-      umhp_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6261,9 +5956,6 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, status_.getNumber());
       }
-      for (int i = 0; i < umhp_.size(); i++) {
-        output.writeMessage(3, umhp_.get(i));
-      }
       getUnknownFields().writeTo(output);
     }
     
@@ -6280,10 +5972,6 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, status_.getNumber());
-      }
-      for (int i = 0; i < umhp_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, umhp_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6402,7 +6090,6 @@ public final class EventMonsterProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getUmhpFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6419,12 +6106,6 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
-        if (umhpBuilder_ == null) {
-          umhp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-        } else {
-          umhpBuilder_.clear();
-        }
         return this;
       }
       
@@ -6475,15 +6156,6 @@ public final class EventMonsterProto {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
-        if (umhpBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            umhp_ = java.util.Collections.unmodifiableList(umhp_);
-            bitField0_ = (bitField0_ & ~0x00000004);
-          }
-          result.umhp_ = umhp_;
-        } else {
-          result.umhp_ = umhpBuilder_.build();
-        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6505,32 +6177,6 @@ public final class EventMonsterProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
-        }
-        if (umhpBuilder_ == null) {
-          if (!other.umhp_.isEmpty()) {
-            if (umhp_.isEmpty()) {
-              umhp_ = other.umhp_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-            } else {
-              ensureUmhpIsMutable();
-              umhp_.addAll(other.umhp_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.umhp_.isEmpty()) {
-            if (umhpBuilder_.isEmpty()) {
-              umhpBuilder_.dispose();
-              umhpBuilder_ = null;
-              umhp_ = other.umhp_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-              umhpBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getUmhpFieldBuilder() : null;
-            } else {
-              umhpBuilder_.addAllMessages(other.umhp_);
-            }
-          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6581,12 +6227,6 @@ public final class EventMonsterProto {
                 bitField0_ |= 0x00000002;
                 status_ = value;
               }
-              break;
-            }
-            case 26: {
-              com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addUmhp(subBuilder.buildPartial());
               break;
             }
           }
@@ -6707,192 +6347,6 @@ public final class EventMonsterProto {
         status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
         onChanged();
         return this;
-      }
-      
-      // repeated .com.lvl6.proto.UserMonsterHealingProto umhp = 3;
-      private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> umhp_ =
-        java.util.Collections.emptyList();
-      private void ensureUmhpIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          umhp_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto>(umhp_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder> umhpBuilder_;
-      
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> getUmhpList() {
-        if (umhpBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(umhp_);
-        } else {
-          return umhpBuilder_.getMessageList();
-        }
-      }
-      public int getUmhpCount() {
-        if (umhpBuilder_ == null) {
-          return umhp_.size();
-        } else {
-          return umhpBuilder_.getCount();
-        }
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto getUmhp(int index) {
-        if (umhpBuilder_ == null) {
-          return umhp_.get(index);
-        } else {
-          return umhpBuilder_.getMessage(index);
-        }
-      }
-      public Builder setUmhp(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto value) {
-        if (umhpBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUmhpIsMutable();
-          umhp_.set(index, value);
-          onChanged();
-        } else {
-          umhpBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      public Builder setUmhp(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder builderForValue) {
-        if (umhpBuilder_ == null) {
-          ensureUmhpIsMutable();
-          umhp_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          umhpBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addUmhp(com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto value) {
-        if (umhpBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUmhpIsMutable();
-          umhp_.add(value);
-          onChanged();
-        } else {
-          umhpBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addUmhp(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto value) {
-        if (umhpBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUmhpIsMutable();
-          umhp_.add(index, value);
-          onChanged();
-        } else {
-          umhpBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addUmhp(
-          com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder builderForValue) {
-        if (umhpBuilder_ == null) {
-          ensureUmhpIsMutable();
-          umhp_.add(builderForValue.build());
-          onChanged();
-        } else {
-          umhpBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addUmhp(
-          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder builderForValue) {
-        if (umhpBuilder_ == null) {
-          ensureUmhpIsMutable();
-          umhp_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          umhpBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllUmhp(
-          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> values) {
-        if (umhpBuilder_ == null) {
-          ensureUmhpIsMutable();
-          super.addAll(values, umhp_);
-          onChanged();
-        } else {
-          umhpBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      public Builder clearUmhp() {
-        if (umhpBuilder_ == null) {
-          umhp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-          onChanged();
-        } else {
-          umhpBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removeUmhp(int index) {
-        if (umhpBuilder_ == null) {
-          ensureUmhpIsMutable();
-          umhp_.remove(index);
-          onChanged();
-        } else {
-          umhpBuilder_.remove(index);
-        }
-        return this;
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder getUmhpBuilder(
-          int index) {
-        return getUmhpFieldBuilder().getBuilder(index);
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getUmhpOrBuilder(
-          int index) {
-        if (umhpBuilder_ == null) {
-          return umhp_.get(index);  } else {
-          return umhpBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder> 
-           getUmhpOrBuilderList() {
-        if (umhpBuilder_ != null) {
-          return umhpBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(umhp_);
-        }
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder addUmhpBuilder() {
-        return getUmhpFieldBuilder().addBuilder(
-            com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.getDefaultInstance());
-      }
-      public com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder addUmhpBuilder(
-          int index) {
-        return getUmhpFieldBuilder().addBuilder(
-            index, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.getDefaultInstance());
-      }
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder> 
-           getUmhpBuilderList() {
-        return getUmhpFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder> 
-          getUmhpFieldBuilder() {
-        if (umhpBuilder_ == null) {
-          umhpBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder>(
-                  umhp_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
-                  getParentForChildren(),
-                  isClean());
-          umhp_ = null;
-        }
-        return umhpBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.HealMonsterResponseProto)
@@ -11587,74 +11041,71 @@ public final class EventMonsterProto {
       "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
       "mumUserProto\022<\n\005umchp\030\002 \003(\0132-.com.lvl6.p" +
       "roto.UserMonsterCurrentHealthProto\022\022\n\ncl" +
-      "ientTime\030\003 \001(\003\"\305\002\n UpdateMonsterHealthRe" +
+      "ientTime\030\003 \001(\003\"\207\002\n UpdateMonsterHealthRe" +
       "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022<\n\005umchp\030\002 \003(\0132-.c" +
-      "om.lvl6.proto.UserMonsterCurrentHealthPr",
-      "oto\022Z\n\006status\030\003 \001(\0162J.com.lvl6.proto.Upd" +
-      "ateMonsterHealthResponseProto.UpdateMons" +
-      "terHealthStatus\"U\n\031UpdateMonsterHealthSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_F" +
-      "UNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"\215\002\n\027HealMonsterRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022:\n\tumhDelete\030\002 \003(\0132" +
-      "\'.com.lvl6.proto.UserMonsterHealingProto" +
-      "\022:\n\tumhUpdate\030\003 \003(\0132\'.com.lvl6.proto.Use" +
-      "rMonsterHealingProto\0227\n\006umhNew\030\004 \003(\0132\'.c",
-      "om.lvl6.proto.UserMonsterHealingProto\022\017\n" +
-      "\007gemCost\030\005 \001(\005\"\351\002\n\030HealMonsterResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022J\n\006status\030\002 \001(\0162:.com.lvl6" +
-      ".proto.HealMonsterResponseProto.HealMons" +
-      "terStatus\0225\n\004umhp\030\003 \003(\0132\'.com.lvl6.proto" +
-      ".UserMonsterHealingProto\"\227\001\n\021HealMonster" +
-      "Status\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT" +
-      "_FUNDS\020\002\022%\n!FAIL_ALL_MONSTERS_ALREADY_HE" +
-      "ALING\020\003\022!\n\035FAIL_ALL_MONSTERS_NONEXISTENT",
-      "\020\004\022\016\n\nFAIL_OTHER\020\005\"\304\001\n\'HealMonsterWaitTi" +
-      "meCompleteRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\021\n\tisSp" +
-      "eedup\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005\022<\n\005u" +
-      "mchp\030\004 \003(\0132-.com.lvl6.proto.UserMonsterC" +
-      "urrentHealthProto\"\306\002\n(HealMonsterWaitTim" +
-      "eCompleteResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022j\n\006stat" +
-      "us\030\002 \001(\0162Z.com.lvl6.proto.HealMonsterWai" +
-      "tTimeCompleteResponseProto.HealMonsterWa",
-      "itTimeCompleteStatus\"|\n!HealMonsterWaitT" +
-      "imeCompleteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_H" +
-      "EALING_NOT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFICIE" +
-      "NT_FUNDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\202\001\n\"AddMonste" +
-      "rToBattleTeamRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022\023\n\013t" +
-      "eamSlotNum\030\002 \001(\005\022\025\n\ruserMonsterId\030\003 \001(\003\"" +
-      "\366\001\n#AddMonsterToBattleTeamResponseProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022`\n\006status\030\002 \001(\0162P.com.lvl6.pro",
-      "to.AddMonsterToBattleTeamResponseProto.A" +
-      "ddMonsterToBattleTeamStatus\";\n\034AddMonste" +
-      "rToBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL" +
-      "_OTHER\020\002\"r\n\'RemoveMonsterFromBattleTeamR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022\025\n\ruserMonsterId\030\003" +
-      " \001(\003\"\212\002\n(RemoveMonsterFromBattleTeamResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022j\n\006status\030\002 \001(\0162Z.co" +
-      "m.lvl6.proto.RemoveMonsterFromBattleTeam",
-      "ResponseProto.RemoveMonsterFromBattleTea" +
-      "mStatus\"@\n!RemoveMonsterFromBattleTeamSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"m\n#Buy" +
-      "MonsterInventorySlotRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022\024\n\014numPurchases\030\002 \001(\005\"\227\002\n$BuyMonsterI" +
-      "nventorySlotResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022b\n\006s" +
-      "tatus\030\002 \001(\0162R.com.lvl6.proto.BuyMonsterI" +
-      "nventorySlotResponseProto.BuyMonsterInve",
-      "ntorySlotStatus\"Y\n\035BuyMonsterInventorySl" +
-      "otStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIE" +
-      "NT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021EventMonst" +
-      "erProto"
+      "roto.MinimumUserProto\022Z\n\006status\030\002 \001(\0162J." +
+      "com.lvl6.proto.UpdateMonsterHealthRespon",
+      "seProto.UpdateMonsterHealthStatus\"U\n\031Upd" +
+      "ateMonsterHealthStatus\022\013\n\007SUCCESS\020\001\022\033\n\027F" +
+      "AIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003" +
+      "\"\215\002\n\027HealMonsterRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022:" +
+      "\n\tumhDelete\030\002 \003(\0132\'.com.lvl6.proto.UserM" +
+      "onsterHealingProto\022:\n\tumhUpdate\030\003 \003(\0132\'." +
+      "com.lvl6.proto.UserMonsterHealingProto\0227" +
+      "\n\006umhNew\030\004 \003(\0132\'.com.lvl6.proto.UserMons" +
+      "terHealingProto\022\017\n\007gemCost\030\005 \001(\005\"\262\002\n\030Hea",
+      "lMonsterResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022J\n\006statu" +
+      "s\030\002 \001(\0162:.com.lvl6.proto.HealMonsterResp" +
+      "onseProto.HealMonsterStatus\"\227\001\n\021HealMons" +
+      "terStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICI" +
+      "ENT_FUNDS\020\002\022%\n!FAIL_ALL_MONSTERS_ALREADY" +
+      "_HEALING\020\003\022!\n\035FAIL_ALL_MONSTERS_NONEXIST" +
+      "ENT\020\004\022\016\n\nFAIL_OTHER\020\005\"\304\001\n\'HealMonsterWai" +
+      "tTimeCompleteRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\021\n\ti",
+      "sSpeedup\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005\022<" +
+      "\n\005umchp\030\004 \003(\0132-.com.lvl6.proto.UserMonst" +
+      "erCurrentHealthProto\"\306\002\n(HealMonsterWait" +
+      "TimeCompleteResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022j\n\006s" +
+      "tatus\030\002 \001(\0162Z.com.lvl6.proto.HealMonster" +
+      "WaitTimeCompleteResponseProto.HealMonste" +
+      "rWaitTimeCompleteStatus\"|\n!HealMonsterWa" +
+      "itTimeCompleteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAI" +
+      "L_HEALING_NOT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFI",
+      "CIENT_FUNDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\202\001\n\"AddMon" +
+      "sterToBattleTeamRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\023" +
+      "\n\013teamSlotNum\030\002 \001(\005\022\025\n\ruserMonsterId\030\003 \001" +
+      "(\003\"\366\001\n#AddMonsterToBattleTeamResponsePro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022`\n\006status\030\002 \001(\0162P.com.lvl6." +
+      "proto.AddMonsterToBattleTeamResponseProt" +
+      "o.AddMonsterToBattleTeamStatus\";\n\034AddMon" +
+      "sterToBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF",
+      "AIL_OTHER\020\002\"r\n\'RemoveMonsterFromBattleTe" +
+      "amRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\025\n\ruserMonsterI" +
+      "d\030\003 \001(\003\"\212\002\n(RemoveMonsterFromBattleTeamR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022j\n\006status\030\002 \001(\0162Z" +
+      ".com.lvl6.proto.RemoveMonsterFromBattleT" +
+      "eamResponseProto.RemoveMonsterFromBattle" +
+      "TeamStatus\"@\n!RemoveMonsterFromBattleTea" +
+      "mStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"m\n#",
+      "BuyMonsterInventorySlotRequestProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022\024\n\014numPurchases\030\002 \001(\005\"\227\002\n$BuyMonst" +
+      "erInventorySlotResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022b" +
+      "\n\006status\030\002 \001(\0162R.com.lvl6.proto.BuyMonst" +
+      "erInventorySlotResponseProto.BuyMonsterI" +
+      "nventorySlotStatus\"Y\n\035BuyMonsterInventor" +
+      "ySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFI" +
+      "CIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021EventMo",
+      "nsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11706,7 +11157,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UpdateMonsterHealthResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Umchp", "Status", },
+              new java.lang.String[] { "Sender", "Status", },
               com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.class,
               com.lvl6.proto.EventMonsterProto.UpdateMonsterHealthResponseProto.Builder.class);
           internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor =
@@ -11722,7 +11173,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_HealMonsterResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "Umhp", },
+              new java.lang.String[] { "Sender", "Status", },
               com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.class,
               com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.Builder.class);
           internal_static_com_lvl6_proto_HealMonsterWaitTimeCompleteRequestProto_descriptor =

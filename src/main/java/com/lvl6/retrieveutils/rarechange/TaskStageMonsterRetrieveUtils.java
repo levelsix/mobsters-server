@@ -92,7 +92,7 @@ import com.lvl6.utils.DBConnection;
             taskStageMonsterIdsToTaskStageMonstersTemp.put(taskStageMonsterId, taskStageMonster);
           }
           taskStageIdsToTaskStageMonsters = taskStageIdsToTaskStageMonstersTemp;
-          
+          taskStageMonsterIdsToTaskStageMonsters = taskStageMonsterIdsToTaskStageMonstersTemp;
         } catch (SQLException e) {
           log.error("problem with database call.", e);
           

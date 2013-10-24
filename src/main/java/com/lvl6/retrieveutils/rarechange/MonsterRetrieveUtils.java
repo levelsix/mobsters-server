@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,6 +98,7 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
+    String monsterGroup = rs.getString(i++);
     MonsterQuality quality = MonsterQuality.valueOf(rs.getInt(i++));
     int evolutionLevel = rs.getInt(i++);
     String displayName = rs.getString(i++);
@@ -119,8 +119,14 @@ import com.lvl6.utils.DBConnection;
     String carrotRecruited = rs.getString(i++);
     String carrotDefeated = rs.getString(i++);
     String carrotEvolved = rs.getString(i++);
+    String description = rs.getString(i++);
     
-    Monster monster = new Monster(id, name, quality, evolutionLevel, displayName, element, baseHp, imageName, numPuzzlePieces, elementOneDmg, elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg, hpLevelMultiplier, attackLevelMultiplier, maxLevel, evolutionMonsterId, carrotRecruited, carrotDefeated, carrotEvolved);
+    Monster monster = new Monster(id, name, monsterGroup, quality,
+    		evolutionLevel, displayName, element, baseHp, imageName,
+    		numPuzzlePieces, elementOneDmg, elementTwoDmg, elementThreeDmg,
+    		elementFourDmg, elementFiveDmg, hpLevelMultiplier,
+    		attackLevelMultiplier, maxLevel, evolutionMonsterId,
+    		carrotRecruited, carrotDefeated, carrotEvolved, description);
 
     return monster;
   }

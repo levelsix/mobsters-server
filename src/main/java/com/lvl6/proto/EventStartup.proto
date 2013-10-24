@@ -53,7 +53,7 @@ message StartupResponseProto {
 	//repeated most recent private chat posts regarding this user
 	repeated PrivateChatPostProto pcpp = 22;
 	
-	repeated LevelAndRequiredExpProto larep = 23;
+	repeated StaticLevelInfoProto slip = 23;
 	repeated FullStructureProto staticStructs = 24;
 	repeated CityExpansionCostProto expansionCosts = 25;
 	repeated MonsterProto staticMonsters = 26;

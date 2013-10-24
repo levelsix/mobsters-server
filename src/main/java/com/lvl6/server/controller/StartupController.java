@@ -47,6 +47,7 @@ import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
+import com.lvl6.info.StaticLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
@@ -74,7 +75,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.UserProto.FullUserProto;
-import com.lvl6.proto.UserProto.LevelAndRequiredExpProto;
+import com.lvl6.proto.UserProto.StaticLevelInfoProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
@@ -85,10 +86,10 @@ import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.LevelRequiredExperienceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StaticLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
@@ -210,7 +211,7 @@ public class StartupController extends EventController {
           setGoldSales(resBuilder, user);
           setNotifications(resBuilder, user);
           setNoticesToPlayers(resBuilder, user);
-          setLevelAndRequiredExperience(resBuilder);
+          setStaticLevelInfoStuff(resBuilder);
           setChatMessages(resBuilder, user);
           setPrivateChatPosts(resBuilder, user);
           setStaticMonstersAndStructs(resBuilder);
@@ -417,16 +418,21 @@ public class StartupController extends EventController {
 
   }
   
-  private void setLevelAndRequiredExperience(Builder resBuilder) {
-  	Map<Integer, Integer> levelToRequiredExp =
-  			LevelRequiredExperienceRetrieveUtils.getLevelToRequiredExperienceForLevel();
+  private void setStaticLevelInfoStuff(Builder resBuilder) {
+  	Map<Integer, StaticLevelInfo> levelToStaticLevelInfo = 
+  			StaticLevelInfoRetrieveUtils.getAllStaticLevelInfo();
   	
-  	for (int lvl : levelToRequiredExp.keySet())  {
-  		int exp = levelToRequiredExp.get(lvl);
-  		LevelAndRequiredExpProto.Builder larepb = LevelAndRequiredExpProto.newBuilder();
-  		larepb.setLevel(lvl);
-  		larepb.setRequiredExperience(exp);
-  		resBuilder.addLarep(larepb.build());
+  	for (int lvl : levelToStaticLevelInfo.keySet())  {
+  		StaticLevelInfo sli = levelToStaticLevelInfo.get(lvl);
+  		
+  		int exp = sli.getLvl();
+  		int maxCash = sli.getMaxCash();
+  		
+  		StaticLevelInfoProto.Builder slipb = StaticLevelInfoProto.newBuilder();
+  		slipb.setLevel(lvl);
+  		slipb.setRequiredExperience(exp);
+  		slipb.setMaxCash(maxCash);
+  		resBuilder.addSlip(slipb.build());
   	}
   }
   

@@ -40,9 +40,6 @@ import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
 import com.lvl6.info.UserCityExpansionData;
 import com.lvl6.info.UserClan;
-import com.lvl6.info.jobs.QuestJobBuildStruct;
-import com.lvl6.info.jobs.QuestJobMonster;
-import com.lvl6.info.jobs.QuestJobUpgradeStruct;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
@@ -492,31 +489,6 @@ public class CreateInfoProtoUtils {
     return builder.build();
   }
 
-  public static BuildStructJobProto createFullBuildStructJobProtoFromBuildStructJob(
-      QuestJobBuildStruct j) {
-    return BuildStructJobProto.newBuilder().setBuildStructJobId(j.getId()).setStructId(j.getStructId()).setQuantityRequired(j.getQuantity()).build();
-  }
-
-  public static UpgradeStructJobProto createFullUpgradeStructJobProtoFromUpgradeStructJob(
-      QuestJobUpgradeStruct j) {
-    return UpgradeStructJobProto.newBuilder().setUpgradeStructJobId(j.getId()).setStructId(j.getStructId()).setLevelReq(j.getLevelReq()).build();
-  }
-
-  public static MonsterJobProto createFullMonsterJobProtoFromQuestJobMonster(QuestJobMonster qjm) {
-    MonsterJobProto.Builder mjpb = MonsterJobProto.newBuilder();
-    mjpb.setMonsterJobId(qjm.getId());
-    mjpb.setMonsterId(qjm.getMonsterId());
-    mjpb.setQuanity(qjm.getQuantity());
-    int val = qjm.getMonsterJobType();
-    if (val > 0) {
-      MonsterJobType mjt = MonsterJobType.valueOf(val);
-      mjpb.setMonsterJobType(mjt);
-    }
-
-    return mjpb.build();
-  }
-
-
   public static List<FullUserQuestProto> createFullUserQuestDataLarges(List<QuestForUser> userQuests, Map<Integer, Quest> questIdsToQuests) {
     List<FullUserQuestProto> fullUserQuestDataLargeProtos = new ArrayList<FullUserQuestProto>();
 
@@ -559,14 +531,6 @@ public class CreateInfoProtoUtils {
       builder.setYLength(nce.getyLength());
     }
     return builder.build();
-  }
-
-  private static MinimumUserUpgradeStructJobProto createMinimumUserUpgradeStructJobProto(QuestForUser userQuest, QuestJobUpgradeStruct upgradeStructJob, int currentLevel) {
-    return MinimumUserUpgradeStructJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setUpgradeStructJobId(upgradeStructJob.getId()).setCurrentLevel(currentLevel).build();
-  }
-
-  private static MinimumUserBuildStructJobProto createMinimumUserBuildStructJobProto(QuestForUser userQuest, QuestJobBuildStruct buildStructJob, int quantityOwned) {
-    return MinimumUserBuildStructJobProto.newBuilder().setUserId(userQuest.getUserId()).setQuestId(userQuest.getQuestId()).setBuildStructJobId(buildStructJob.getId()).setNumOfStructUserHas(quantityOwned).build();
   }
 
   public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPost (

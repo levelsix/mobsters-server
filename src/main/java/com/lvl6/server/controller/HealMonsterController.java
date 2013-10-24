@@ -108,7 +108,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
-    	  setResponseBuilder(resBuilder, userId);
+//    	  setResponseBuilder(resBuilder, userId);
       }
       
       HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(userId);
@@ -248,15 +248,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private void setResponseBuilder(Builder resBuilder, int userId) {
-  	Map<Long, MonsterHealingForUser> alreadyHealing =
-  			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
-  	
-  	for(MonsterHealingForUser mhfu : alreadyHealing.values()) {
-  		UserMonsterHealingProto umhp =
-  				CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
-  		resBuilder.addUmhp(umhp);
-  	}
-  	
+//  	Map<Long, MonsterHealingForUser> alreadyHealing =
+//  			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
+//  	
+//  	for(MonsterHealingForUser mhfu : alreadyHealing.values()) {
+//  		UserMonsterHealingProto umhp =
+//  				CreateInfoProtoUtils.createUserMonsterHealingProtoFromObj(mhfu);
+//  		resBuilder.addUmhp(umhp);
+//  	}
+//  	
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
