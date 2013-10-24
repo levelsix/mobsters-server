@@ -331,6 +331,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			new ArrayList<MonsterForUser>(monsterIdsToIncompletes.values());
   	
   	if (!dirtyMonsterForUserList.isEmpty()) {
+  		log.info("the monsters that are updated: " + dirtyMonsterForUserList);
   		UpdateUtils.get().updateUserMonsterNumPieces(userId, dirtyMonsterForUserList);
   	}
   	
@@ -339,6 +340,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	List<MonsterForUser> newMonsters = MonsterStuffUtils
   			.createMonstersForUserFromQuantities(userId, monsterIdToRemainingPieces);
   	if (!newMonsters.isEmpty()) {
+  		log.info("the monsters that are new: " + newMonsters);
   		List<Long> monsterForUserIds = InsertUtils.get()
   				.insertIntoMonsterForUserReturnIds(userId, newMonsters);
   		
