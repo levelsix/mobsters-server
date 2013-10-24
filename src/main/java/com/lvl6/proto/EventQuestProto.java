@@ -2718,6 +2718,10 @@ public final class EventQuestProto {
     boolean hasFump();
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump();
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
+    
+    // optional int32 questId = 5;
+    boolean hasQuestId();
+    int getQuestId();
   }
   public static final class QuestRedeemResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -2877,11 +2881,22 @@ public final class EventQuestProto {
       return fump_;
     }
     
+    // optional int32 questId = 5;
+    public static final int QUESTID_FIELD_NUMBER = 5;
+    private int questId_;
+    public boolean hasQuestId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getQuestId() {
+      return questId_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       newlyAvailableQuests_ = java.util.Collections.emptyList();
       status_ = com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus.SUCCESS;
       fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
+      questId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2907,6 +2922,9 @@ public final class EventQuestProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeMessage(4, fump_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, questId_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -2931,6 +2949,10 @@ public final class EventQuestProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, fump_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, questId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3079,6 +3101,8 @@ public final class EventQuestProto {
           fumpBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
+        questId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -3146,6 +3170,10 @@ public final class EventQuestProto {
         } else {
           result.fump_ = fumpBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.questId_ = questId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3196,6 +3224,9 @@ public final class EventQuestProto {
         }
         if (other.hasFump()) {
           mergeFump(other.getFump());
+        }
+        if (other.hasQuestId()) {
+          setQuestId(other.getQuestId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3261,6 +3292,11 @@ public final class EventQuestProto {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setFump(subBuilder.buildPartial());
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              questId_ = input.readInt32();
               break;
             }
           }
@@ -3659,6 +3695,27 @@ public final class EventQuestProto {
         return fumpBuilder_;
       }
       
+      // optional int32 questId = 5;
+      private int questId_ ;
+      public boolean hasQuestId() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getQuestId() {
+        return questId_;
+      }
+      public Builder setQuestId(int value) {
+        bitField0_ |= 0x00000010;
+        questId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearQuestId() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        questId_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestRedeemResponseProto)
     }
     
@@ -3732,16 +3789,16 @@ public final class EventQuestProto {
       "IL_NO_QUEST_EXISTS\020\002\022\016\n\nFAIL_OTHER\020\003\"\\\n\027" +
       "QuestRedeemRequestProto\0220\n\006sender\030\001 \001(\0132" +
       " .com.lvl6.proto.MinimumUserProto\022\017\n\007que" +
-      "stId\030\002 \001(\005\"\323\002\n\030QuestRedeemResponseProto\022" +
+      "stId\030\002 \001(\005\"\344\002\n\030QuestRedeemResponseProto\022" +
       "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
       "UserProto\022<\n\024newlyAvailableQuests\030\002 \003(\0132" +
       "\036.com.lvl6.proto.FullQuestProto\022J\n\006statu" +
       "s\030\003 \001(\0162:.com.lvl6.proto.QuestRedeemResp" +
       "onseProto.QuestRedeemStatus\0222\n\004fump\030\004 \001(" +
-      "\0132$.com.lvl6.proto.FullUserMonsterProto\"",
-      "G\n\021QuestRedeemStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAI" +
-      "L_NOT_COMPLETE\020\002\022\016\n\nFAIL_OTHER\020\003B\021B\017Even" +
-      "tQuestProto"
+      "\0132$.com.lvl6.proto.FullUserMonsterProto\022",
+      "\017\n\007questId\030\005 \001(\005\"G\n\021QuestRedeemStatus\022\013\n" +
+      "\007SUCCESS\020\001\022\025\n\021FAIL_NOT_COMPLETE\020\002\022\016\n\nFAI" +
+      "L_OTHER\020\003B\021B\017EventQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3793,7 +3850,7 @@ public final class EventQuestProto {
           internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "Fump", },
+              new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "Fump", "QuestId", },
               com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.class,
               com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.Builder.class);
           return null;

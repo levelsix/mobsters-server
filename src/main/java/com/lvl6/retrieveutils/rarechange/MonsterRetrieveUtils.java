@@ -112,7 +112,7 @@ import com.lvl6.utils.DBConnection;
     int elementFourDmg = rs.getInt(i++);
     int elementFiveDmg = rs.getInt(i++);
     float hpLevelMultiplier = rs.getFloat(i++);
-    float attackLevelMultiplier = rs.getInt(i++);
+    float attackLevelMultiplier = rs.getFloat(i++);
     int maxLevel = rs.getInt(i++);
     int evolutionMonsterId = rs.getInt(i++);
 

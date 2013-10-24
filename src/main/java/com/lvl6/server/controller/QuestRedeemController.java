@@ -66,6 +66,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     QuestRedeemResponseProto.Builder resBuilder = QuestRedeemResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);
+    resBuilder.setQuestId(questId);
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
