@@ -313,6 +313,8 @@ public class StartupController extends EventController {
   	  List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
   	      .getUserQuestsForUser(user.getId());
   	  
+  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
+  	  
   	  List<Integer> inProgressQuestIds = new ArrayList<Integer>();
   	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
   	  
