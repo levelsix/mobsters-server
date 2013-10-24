@@ -1,5 +1,5 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS REQUIRED that represents which client sent it/triggered it 
-
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 import "MonsterStuff.proto";
 import "Task.proto";
 import "User.proto";
@@ -39,8 +39,8 @@ message EndDungeonRequestProto {
 message EndDungeonResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional EndDungeonStatus status = 2;
-	repeated FullUserMonsterProto newOrUpdated = 3;
-	
+	//repeated FullUserMonsterProto newOrUpdated = 3; //BAD!!! DON'T START NAMES WITH NEW OR COPY
+	repeated FullUserMonsterProto updatedOrNew = 3;
 	
 	enum EndDungeonStatus {
 		SUCCESS = 1;

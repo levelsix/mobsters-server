@@ -367,7 +367,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  resBuilder.setStatus(EndDungeonStatus.SUCCESS);
 	  
 	  if (!protos.isEmpty()) {
-	  	resBuilder.addAllNewOrUpdated(protos);
+	  	resBuilder.addAllUpdatedOrNew(protos);
 	  }
   }
   
