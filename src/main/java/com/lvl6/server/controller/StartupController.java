@@ -327,6 +327,7 @@ public class StartupController extends EventController {
   	      redeemedQuestIds.add(uq.getQuestId());
   	      
   	    } else {
+  	    	log.info("userQuest is unredeemed. uq=" + uq);
   	    	//unredeemed quest section
   	      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
   	      FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);
@@ -346,7 +347,9 @@ public class StartupController extends EventController {
   	  //generate the user quests
   	  List<FullUserQuestProto> currentUserQuests = CreateInfoProtoUtils
   	  		.createFullUserQuestDataLarges(inProgressQuests, questIdToQuests);
-  	  log.info("currentUserQuest protos=" + currentUserQuests);
+  	  log.info("currentUserQuest protos=" + currentUserQuests +
+  	  		"\t inProgressQuests=" + inProgressQuests + "\t questIdsToQuests=" +
+  	  		questIdToQuests);
   	  resBuilder.addAllUserQuests(currentUserQuests);
   	
   	  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
