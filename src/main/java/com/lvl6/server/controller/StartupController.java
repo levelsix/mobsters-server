@@ -327,7 +327,6 @@ public class StartupController extends EventController {
   	      redeemedQuestIds.add(uq.getQuestId());
   	      
   	    } else {
-  	    	log.info("userQuest is unredeemed. uq=" + uq);
   	    	//unredeemed quest section
   	      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
   	      FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);

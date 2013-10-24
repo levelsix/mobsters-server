@@ -502,7 +502,8 @@ public class CreateInfoProtoUtils {
         builder.setIsRedeemed(userQuest.isRedeemed());
         builder.setIsComplete(userQuest.isComplete());
         builder.setProgress(userQuest.getProgress());
-
+        fullUserQuestDataLargeProtos.add(builder.build());
+        
       } else {
         log.error("no quest with id " + userQuest.getQuestId() + ", userQuest=" + userQuest);
       }
