@@ -38,7 +38,7 @@ message QuestProgressRequestProto {
 	optional bool isComplete = 4;
 	
 	//if set, delete these user monster ids 
-	repeated int32 deleteUserMonsterIds = 5;
+	repeated int64 deleteUserMonsterIds = 5;
 }
 
 																						//DONE

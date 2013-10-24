@@ -1131,10 +1131,10 @@ public final class EventQuestProto {
     boolean hasIsComplete();
     boolean getIsComplete();
     
-    // repeated int32 deleteUserMonsterIds = 5;
-    java.util.List<java.lang.Integer> getDeleteUserMonsterIdsList();
+    // repeated int64 deleteUserMonsterIds = 5;
+    java.util.List<java.lang.Long> getDeleteUserMonsterIdsList();
     int getDeleteUserMonsterIdsCount();
-    int getDeleteUserMonsterIds(int index);
+    long getDeleteUserMonsterIds(int index);
   }
   public static final class QuestProgressRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -1208,17 +1208,17 @@ public final class EventQuestProto {
       return isComplete_;
     }
     
-    // repeated int32 deleteUserMonsterIds = 5;
+    // repeated int64 deleteUserMonsterIds = 5;
     public static final int DELETEUSERMONSTERIDS_FIELD_NUMBER = 5;
-    private java.util.List<java.lang.Integer> deleteUserMonsterIds_;
-    public java.util.List<java.lang.Integer>
+    private java.util.List<java.lang.Long> deleteUserMonsterIds_;
+    public java.util.List<java.lang.Long>
         getDeleteUserMonsterIdsList() {
       return deleteUserMonsterIds_;
     }
     public int getDeleteUserMonsterIdsCount() {
       return deleteUserMonsterIds_.size();
     }
-    public int getDeleteUserMonsterIds(int index) {
+    public long getDeleteUserMonsterIds(int index) {
       return deleteUserMonsterIds_.get(index);
     }
     
@@ -1254,7 +1254,7 @@ public final class EventQuestProto {
         output.writeBool(4, isComplete_);
       }
       for (int i = 0; i < deleteUserMonsterIds_.size(); i++) {
-        output.writeInt32(5, deleteUserMonsterIds_.get(i));
+        output.writeInt64(5, deleteUserMonsterIds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1285,7 +1285,7 @@ public final class EventQuestProto {
         int dataSize = 0;
         for (int i = 0; i < deleteUserMonsterIds_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(deleteUserMonsterIds_.get(i));
+            .computeInt64SizeNoTag(deleteUserMonsterIds_.get(i));
         }
         size += dataSize;
         size += 1 * getDeleteUserMonsterIdsList().size();
@@ -1587,14 +1587,14 @@ public final class EventQuestProto {
             }
             case 40: {
               ensureDeleteUserMonsterIdsIsMutable();
-              deleteUserMonsterIds_.add(input.readInt32());
+              deleteUserMonsterIds_.add(input.readInt64());
               break;
             }
             case 42: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
-                addDeleteUserMonsterIds(input.readInt32());
+                addDeleteUserMonsterIds(input.readInt64());
               }
               input.popLimit(limit);
               break;
@@ -1758,39 +1758,39 @@ public final class EventQuestProto {
         return this;
       }
       
-      // repeated int32 deleteUserMonsterIds = 5;
-      private java.util.List<java.lang.Integer> deleteUserMonsterIds_ = java.util.Collections.emptyList();;
+      // repeated int64 deleteUserMonsterIds = 5;
+      private java.util.List<java.lang.Long> deleteUserMonsterIds_ = java.util.Collections.emptyList();;
       private void ensureDeleteUserMonsterIdsIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Integer>(deleteUserMonsterIds_);
+          deleteUserMonsterIds_ = new java.util.ArrayList<java.lang.Long>(deleteUserMonsterIds_);
           bitField0_ |= 0x00000010;
          }
       }
-      public java.util.List<java.lang.Integer>
+      public java.util.List<java.lang.Long>
           getDeleteUserMonsterIdsList() {
         return java.util.Collections.unmodifiableList(deleteUserMonsterIds_);
       }
       public int getDeleteUserMonsterIdsCount() {
         return deleteUserMonsterIds_.size();
       }
-      public int getDeleteUserMonsterIds(int index) {
+      public long getDeleteUserMonsterIds(int index) {
         return deleteUserMonsterIds_.get(index);
       }
       public Builder setDeleteUserMonsterIds(
-          int index, int value) {
+          int index, long value) {
         ensureDeleteUserMonsterIdsIsMutable();
         deleteUserMonsterIds_.set(index, value);
         onChanged();
         return this;
       }
-      public Builder addDeleteUserMonsterIds(int value) {
+      public Builder addDeleteUserMonsterIds(long value) {
         ensureDeleteUserMonsterIdsIsMutable();
         deleteUserMonsterIds_.add(value);
         onChanged();
         return this;
       }
       public Builder addAllDeleteUserMonsterIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          java.lang.Iterable<? extends java.lang.Long> values) {
         ensureDeleteUserMonsterIdsIsMutable();
         super.addAll(values, deleteUserMonsterIds_);
         onChanged();
@@ -3947,7 +3947,7 @@ public final class EventQuestProto {
       "(\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007" +
       "questId\030\002 \001(\005\022\027\n\017currentProgress\030\003 \001(\005\022\022" +
       "\n\nisComplete\030\004 \001(\010\022\034\n\024deleteUserMonsterI" +
-      "ds\030\005 \003(\005\"\354\001\n\032QuestProgressResponseProto\022" +
+      "ds\030\005 \003(\003\"\354\001\n\032QuestProgressResponseProto\022" +
       "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
       "UserProto\022N\n\006status\030\002 \001(\0162>.com.lvl6.pro" +
       "to.QuestProgressResponseProto.QuestProgr",

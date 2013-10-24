@@ -226,10 +226,8 @@ public class DeleteUtils implements DeleteUtil {
   @Override
   public int deleteMonstersForUser(List<Long> userMonsterIds) {
     String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
-    List<String> questions = new ArrayList<String>();
-    for(long userEquipId : userMonsterIds) {
-      questions.add("?");
-    }
+    int size = userMonsterIds.size();
+    List<String> questions = Collections.nCopies(size, "?");
     
     String delimiter = ",";
     String query = " DELETE FROM " + tableName + " WHERE " + DBConstants.MONSTER_FOR_USER__ID

@@ -22,6 +22,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
   @Component @DependsOn("gameServer") public class QuestProgressController extends EventController {
@@ -63,7 +64,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     int currentProgress = reqProto.getCurrentProgress();
     //use this value when updating user quest, don't check this
     boolean isComplete = reqProto.getIsComplete();
-    List<Integer> deleteUserMonsterIds = reqProto.getDeleteUserMonsterIdsList();
+    List<Long> deleteUserMonsterIds = reqProto.getDeleteUserMonsterIdsList();
 
     //set stuff to send to the client
     QuestProgressResponseProto.Builder resBuilder = QuestProgressResponseProto.newBuilder();
@@ -129,7 +130,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
   }
 
   private void writeChangesToDB(int userId, Quest quest, int questId,
-  		int currentProgress, boolean isComplete, List<Integer> deleteUserMonsterIds) {
+  		int currentProgress, boolean isComplete, List<Long> deleteUserMonsterIds) {
   	//if userQuest's progress reached the progress specified in quest then
   	//also set userQuest.isComplete = true;
   	
@@ -145,6 +146,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
   		log.error("num inserted/updated for unredeemd user quest:" +
   				num + "\t userId=" + userId + "\t questId=" + questId +
   				"\t currentProgress=" + currentProgress);
+  	}
+  	
+  	//delete the user monster ids
+  	if (null != deleteUserMonsterIds && !deleteUserMonsterIds.isEmpty()) {
+  		num = DeleteUtils.get().deleteMonstersForUser(deleteUserMonsterIds); 
+  		log.info("num user monsters deleted: " + num + "\t ids deleted: "+
+  				deleteUserMonsterIds);
   	}
   }
 }
