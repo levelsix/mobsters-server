@@ -13,6 +13,7 @@ import org.mortbay.log.Log;
 
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
@@ -821,6 +822,44 @@ public class InsertUtils implements InsertUtil{
         insertParams, numRows);
     
     return numInserted;
+	}
+
+	/*
+	 * README!!!!!!!!!!!!!!!
+   * assumptions: all the entries at index i across all the lists, 
+   * they make up the values for one row to insert into the table
+   */
+	@Override
+	public List<Long> insertIntoMonsterForUserReturnIds(int userId, List<MonsterForUser> userMonsters) {
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		
+		for(int i = 0; i < userMonsters.size(); i++){
+			MonsterForUser mfu = userMonsters.get(i);
+			int monsterId = mfu.getMonsterId();
+			int currentExp = mfu.getCurrentExp();
+			int currentLvl = mfu.getCurrentLvl();
+			int currentHp = mfu.getCurrentHealth();
+			int numPieces = mfu.getNumPieces();
+			boolean isComplete = mfu.isComplete();
+			int teamSlotNum = mfu.getTeamSlotNum();
+			
+			Map<String, Object> row = new HashMap<String, Object>();
+			row.put(DBConstants.MONSTER_FOR_USER__USER_ID, userId);
+			row.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
+			row.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, currentExp);
+			row.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, currentLvl);
+			row.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currentHp);
+			row.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
+			row.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
+			row.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
+			newRows.add(row);
+		}
+		
+		List<Long> monsterForUserIds = DBConnection.get()
+				.insertIntoTableBasicReturnLongIds(tableName, newRows);
+		Log.info("monsterForUserIds= " + monsterForUserIds);
+		return monsterForUserIds;
 	}
 
 }

@@ -154,7 +154,7 @@ public class DeleteUtils implements DeleteUtil {
   }
   
   @Override
-  public int deleteTaskStagesForIds(List<Long> taskStageForUserIds) {
+  public int deleteTaskStagesForUserWithIds(List<Long> taskStageForUserIds) {
   	String tableName = DBConstants.TABLE_TASK_STAGE_FOR_USER;
   	int size = taskStageForUserIds.size();
     List<String> questions = Collections.nCopies(size, "?");

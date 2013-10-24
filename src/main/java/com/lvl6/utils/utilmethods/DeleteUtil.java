@@ -31,7 +31,7 @@ public interface DeleteUtil {
   
   public abstract int deleteTaskForUserWithTaskForUserId(long taskForUserId);
   
-  public abstract int deleteTaskStagesForIds(List<Long> taskStageForUserIds);
+  public abstract int deleteTaskStagesForUserWithIds(List<Long> taskStageForUserIds);
   
   public abstract int deleteMonsterHealingForUser(int userId, List<Long> userMonsterIds);
   

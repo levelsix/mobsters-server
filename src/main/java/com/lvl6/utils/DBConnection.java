@@ -403,7 +403,7 @@ public class DBConnection {
 	/*
 	 * assumes every list for each column is numRows length insertParams: key,
 	 * value pair follows this format columnName1->list(row1ValueForColumn1,
-	 * row2ValueForColumn2,...); columnName2->List(row1ValueForColumn2,
+	 * row2ValueForColumn1,...); columnName2->List(row1ValueForColumn2,
 	 * row2ValueForColumn2,...); . . .
 	 */
 	public int insertIntoTableMultipleRows(String tablename, Map<String, List<Object>> insertParams,
@@ -554,11 +554,12 @@ public class DBConnection {
 	/*
 	 * newRows should contain maps that are different only by the value in the
 	 * key, value pair, i.e. each map in newRows is the new row to be inserted
-	 * example usage: INSERT INTO user_bosses (boss_id, user_id, cur_health)
-	 * <---this is columns in the following code VALUES (1, 2, 500), ,---- Each
-	 * of these is a values list and together (2, 5, 100), <--|----- are
-	 * collectively referred to as (3, 9, 0) '---- valuesListCollection in the
-	 * code
+	 * example usage: 
+	 * INSERT INTO user_bosses 
+	 * 				(boss_id, user_id, cur_health) <---this is columns in the following code 
+	 * VALUES (1, 2, 500), <---- Each of these is a values list and together 					
+	 *        (2, 5, 100), <---- are collectively referred to as 
+	 *        (3, 9, 0)    <---- valuesListCollection in the code
 	 */
 	public List<Integer> insertIntoTableBasicReturnIds(String tableName, List<Map<String, Object>> newRows) {
 		List<String> questions = new LinkedList<String>();

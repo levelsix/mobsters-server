@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.TaskForUser;
 import com.lvl6.info.TaskStageForUser;
+import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -32,8 +34,13 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class EndDungeonController extends EventController {
 
@@ -93,6 +100,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       if (successful) {
       	long taskForUserId = ut.getId(); 
+      	//the things to delete and store into history
       	List<TaskStageForUser> tsfuList = TaskStageForUserRetrieveUtils
       			.getTaskStagesForUserWithTaskForUserId(taskForUserId);
       	
@@ -183,44 +191,21 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Date startDate = ut.getStartDate();
 	  long startMillis = startDate.getTime();
 	  Timestamp startTime = new Timestamp(startMillis);
-	  int numInserted = InsertUtils.get().insertIntoTaskHistory(utId,uId, tId,
+	  int num = InsertUtils.get().insertIntoTaskHistory(utId,uId, tId,
 			  expGained, silverGained, numRevives, startTime, clientTime, userWon);
-	  if (1 != numInserted) {
+	  if (1 != num) {
 		  log.error("unexpected error: error when inserting into user_task_history. " +
-		  		"numInserted=" + numInserted + " Attempting to undo shi");
+		  		"numInserted=" + num + " Attempting to undo shi");
 		  updateUser(u, -1* silverGained, -1 * expGained, clientTime);
 		  return false;
 	  }
+	  
+	  //DELETE FROM TASK_FOR_USER TABLE
+	  num = DeleteUtils.get().deleteTaskForUserWithTaskForUserId(utId); 
+	  log.info("num rows deleted from task_for_user table. num=" + num);
+	  
 	  return true;
   }
-  
-  //fill up 'protos' with the equips the user gets after writing to db
-  /*private void meteEquips(int uId, Timestamp now, UserTask ut,
-		  List<FullUserEquipProto> protos) {
-	  List<Integer> equipIds = ut.getMonsterRewardEquipIds();
-	  
-	  //arguments for db call
-	  int amount = equipIds.size();
-	  int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
-	  int enhancementLevel = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT;
-	  List<Integer> levels = new ArrayList<Integer>(Collections.nCopies(amount, forgeLevel));
-	  List<Integer> enhancement = new ArrayList<Integer>(Collections.nCopies(amount, enhancementLevel));
-	  String reason = ControllerConstants.UER__TASK_ACTION;
-
-	  //give user the equips
-	  List<Long> userEquipIds = InsertUtils.get().insertUserEquips(uId,
-			  equipIds, levels, enhancement, now, reason);
-	  
-	  //construct the protos, now that the userEquipIds are known
-	  for (int i = 0; i < equipIds.size(); i++) {
-		  long userEquipId = userEquipIds.get(i);
-		  int equipId = equipIds.get(i);
-		  
-		  FullUserEquipProto fuep = CreateInfoProtoUtils.createFullUserEquipProto(
-				  userEquipId, uId, equipId, forgeLevel, enhancementLevel);
-		  protos.add(fuep);
-	  }
-  }*/
   
   private boolean updateUser(User u, int silverGained, int expGained,
 		  Timestamp clientTime) {
@@ -240,6 +225,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   //
   private void recordStageHistory(List<TaskStageForUser> tsfuList,
   		Map<Integer, Integer> monsterIdToNumPieces) {
+  	//keep track of how many pieces dropped and by which task stage monster
+  	Map<Integer, Integer> taskStageMonsterIdToQuantity =
+  			new HashMap<Integer, Integer>();
+  	
+  	
+  	//collections to hold values to be saved to the db
   	List<Long> userTaskStageId = new ArrayList<Long>();
   	List<Long> userTaskId = new ArrayList<Long>();
   	List<Integer> stageNum = new ArrayList<Integer>();
@@ -260,6 +251,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		silverGained.add(tsfu.getSilverGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
+  		
+  		if (!dropped) {
+  			//not going to keep track of non dropped monster pieces
+  			continue;
+  		}
+  		
+  		//since monster piece dropped, update our current stats on monster pieces
+  		if (taskStageMonsterIdToQuantity.containsKey(taskStageMonsterId)) {
+  			//saw this task stage monster id before, increment quantity
+  			int quantity = 1 + taskStageMonsterIdToQuantity.get(taskStageMonsterId);
+  			taskStageMonsterIdToQuantity.put(taskStageMonsterId, quantity);
+  			
+  		} else {
+  			//haven't seen this task stage monster id yet, so start off at 1
+  			taskStageMonsterIdToQuantity.put(taskStageMonsterId, 1);
+  		}
   	}
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
@@ -267,28 +274,99 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			monsterPieceDropped);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);
+  	
+  	//DELETE FROM TASK_STAGE_FOR_USER
+  	num = DeleteUtils.get().deleteTaskStagesForUserWithIds(userTaskStageId);
+  	log.info("num task stage for user rows deleted: num=" + num);
+  	
+  	//retrieve those task stage monsters. aggregate the quantities by monster id
+  	//assume different task stage monsters can be the same monster
+  	Collection<Integer> taskStageMonsterIds = taskStageMonsterIdToQuantity.keySet();
+  	Map<Integer, TaskStageMonster> monstersThatDropped = TaskStageMonsterRetrieveUtils
+  			.getTaskStageMonstersForIds(taskStageMonsterIds);
+  	
+  	for (int taskStageMonsterId : taskStageMonsterIds) {
+  		TaskStageMonster monsterThatDropped = monstersThatDropped.get(taskStageMonsterId);
+  		int monsterId = monsterThatDropped.getMonsterId();
+  		int numPiecesDroppedForMonster = taskStageMonsterIdToQuantity.get(taskStageMonsterId); 
+  		
+  		//aggregate pieces based on monsterId, since assuming different task
+  		//stage monsters can be the same monster
+  		if (monsterIdToNumPieces.containsKey(monsterId)) {
+  			int newAmount = numPiecesDroppedForMonster + monsterIdToNumPieces.get(monsterId);
+  			monsterIdToNumPieces.put(monsterId, newAmount);
+  			
+  		} else {
+  			//first time seeing this monster, store existing quantity
+  			monsterIdToNumPieces.put(monsterId, numPiecesDroppedForMonster);
+  		}
+  	}
   }
   
   private List<FullUserMonsterProto> updateUserMonsters(int userId,
   		Map<Integer, Integer> monsterIdToNumPieces) {
-  	//for all the monster pieces the user got, see if he already has any
-  	Set<Integer> monsterIds = monsterIdToNumPieces.keySet();
-  	Map<Integer, MonsterForUser> monsterIdsToIncompletes = 
-  			RetrieveUtils.monsterForUserRetrieveUtils()
-  			.getIncompleteMonstersWithUserAndMonsterIds(userId, monsterIds);
+  	log.info("the monster pieces the user gets: " + monsterIdToNumPieces);
   	
+  	if (monsterIdToNumPieces.isEmpty()) {
+  		return new ArrayList<FullUserMonsterProto>();
+  	}
   	
-  	//for the monsterIds not in the map, just insert them into the table
+  	//for all the monster pieces the user will receive, see if he already has any
+  	//retrieve all of user's incomplete monsters that have these monster ids 
+  	Set<Integer> droppedMonsterIds = monsterIdToNumPieces.keySet();
   	
-  	//for the monsterIds in the map, retrieve monsters, 
+  	Map<Integer, MonsterForUser> monsterIdsToIncompletes =  RetrieveUtils
+  			.monsterForUserRetrieveUtils()
+  			.getIncompleteMonstersWithUserAndMonsterIds(userId, droppedMonsterIds);
   	
-  	return null;
+  	//take however many pieces necessary from monsterIdToNumPieces to
+  	//complete these incomplete monsterForUsers
+  	//monsterIdsToIncompletes will be modified
+  	Map<Integer, Integer> monsterIdToRemainingPieces = MonsterStuffUtils
+  			.completeMonsterForUserFromMonsterIdsAndQuantities(
+  					monsterIdsToIncompletes, monsterIdToNumPieces);
+  	
+  	//update these incomplete monsters, if any
+  	List<MonsterForUser> dirtyMonsterForUserList = 
+  			new ArrayList<MonsterForUser>(monsterIdsToIncompletes.values());
+  	
+  	if (!dirtyMonsterForUserList.isEmpty()) {
+  		UpdateUtils.get().updateUserMonsterNumPieces(userId, dirtyMonsterForUserList);
+  	}
+  	
+  	//monsterIdToRemainingPieces now contains all the new monsters
+  	//the user will get
+  	List<MonsterForUser> newMonsters = MonsterStuffUtils
+  			.createMonstersForUserFromQuantities(userId, monsterIdToRemainingPieces);
+  	if (!newMonsters.isEmpty()) {
+  		List<Long> monsterForUserIds = InsertUtils.get()
+  				.insertIntoMonsterForUserReturnIds(userId, newMonsters);
+  		
+  		//set these ids into the list "newMonsters"
+  		for (int i = 0; i < monsterForUserIds.size(); i++) {
+  			MonsterForUser newMonster = newMonsters.get(i);
+  			long monsterForUserId = monsterForUserIds.get(i);
+  			newMonster.setId(monsterForUserId);
+  		}
+  	}
+  	
+  	//create the return value
+  	List<MonsterForUser> newOrUpdated = new ArrayList<MonsterForUser>();
+  	newOrUpdated.addAll(dirtyMonsterForUserList);
+  	newOrUpdated.addAll(newMonsters);
+  	List<FullUserMonsterProto> protos = CreateInfoProtoUtils
+  			.createFullUserMonsterProtoList(newOrUpdated);
+  	
+  	return protos;
   }
   
   private void setResponseBuilder(Builder resBuilder,
 		  List<FullUserMonsterProto> protos) {
 	  resBuilder.setStatus(EndDungeonStatus.SUCCESS);
-	  resBuilder.addAllNewOrUpdated(protos);
+	  
+	  if (!protos.isEmpty()) {
+	  	resBuilder.addAllNewOrUpdated(protos);
+	  }
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,

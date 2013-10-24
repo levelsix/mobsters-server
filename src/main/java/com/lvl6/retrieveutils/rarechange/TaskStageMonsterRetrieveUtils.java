@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.lvl6.utils.DBConnection;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonsters;
+  private static Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonsters;
 
   private static final String TABLE_NAME = DBConstants.TABLE_TASK_STAGE_MONSTER;
 
@@ -43,6 +45,18 @@ import com.lvl6.utils.DBConnection;
     return taskStageIdsToTaskStageMonsters.get(taskStageId);
   }
 
+  public static Map<Integer, TaskStageMonster> getTaskStageMonstersForIds(Collection<Integer> ids) {
+  	if (null == taskStageMonsterIdsToTaskStageMonsters) {
+  		setStaticTaskStageIdsToTaskStageMonster();
+  	}
+  	Map<Integer, TaskStageMonster> returnMap = new HashMap<Integer, TaskStageMonster>();
+  	
+  	for (int id : ids) {
+  		TaskStageMonster tsm = taskStageMonsterIdsToTaskStageMonsters.get(id);
+  		returnMap.put(id, tsm);
+  	}
+  	return returnMap;
+  }
 
   private static void setStaticTaskStageIdsToTaskStageMonster() {
     log.debug("setting static map of taskStageIds to monsterIds");
@@ -59,6 +73,8 @@ import com.lvl6.utils.DBConnection;
           rs.beforeFirst();
           Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonstersTemp =
               new HashMap<Integer, List<TaskStageMonster>>();
+          Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonstersTemp =
+          		new HashMap<Integer, TaskStageMonster>();
           
           //loop through each row and convert it into a java object
           while(rs.next()) {  
@@ -71,6 +87,9 @@ import com.lvl6.utils.DBConnection;
 
             List<TaskStageMonster> monsters = taskStageIdsToTaskStageMonstersTemp.get(stageId);
             monsters.add(taskStageMonster);
+            
+            int taskStageMonsterId = taskStageMonster.getId();
+            taskStageMonsterIdsToTaskStageMonstersTemp.put(taskStageMonsterId, taskStageMonster);
           }
           taskStageIdsToTaskStageMonsters = taskStageIdsToTaskStageMonstersTemp;
           

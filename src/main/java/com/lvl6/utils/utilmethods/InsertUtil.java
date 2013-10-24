@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 
@@ -130,4 +131,7 @@ public interface InsertUtil {
 			List<Long> userTaskId, List<Integer> stageNum, List<Integer> monsterId,
 			List<Integer> expGained, List<Integer> silverGained,
 			List<Boolean> monsterPieceDropped);
+	
+	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId, List<MonsterForUser> userMonsters);
+		
 }

@@ -369,6 +369,18 @@ public class CreateInfoProtoUtils {
     return mcp.setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
   }
 
+  public static List<FullUserMonsterProto> createFullUserMonsterProtoList(
+  		List<MonsterForUser> userMonsters) {
+  	List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
+  	
+  	for (MonsterForUser mfu : userMonsters) {
+  		FullUserMonsterProto ump = createFullUserMonsterProtoFromUserMonster(mfu);
+  		protos.add(ump);
+  	}
+  	
+  	return protos;
+  }
+  
   public static FullUserMonsterProto createFullUserMonsterProtoFromUserMonster(MonsterForUser mfu) {
     FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
     fumpb.setUserMonsterId(mfu.getId());
@@ -851,7 +863,5 @@ public class CreateInfoProtoUtils {
     
     return mpb.build();
   }
-
-
 
 }

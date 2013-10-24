@@ -222,7 +222,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   	}
   	
-  	int num = DeleteUtils.get().deleteTaskStagesForIds(userTaskStageId);
+  	int num = DeleteUtils.get().deleteTaskStagesForUserWithIds(userTaskStageId);
   	log.warn("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + taskStages);
 

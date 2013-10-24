@@ -48,6 +48,7 @@ public class DBConstants {
   public static final String TABLE_TASK_HISTORY = "task_history";
   public static final String TABLE_TASK_STAGE = "task_stage";
   public static final String TABLE_TASK_STAGE_FOR_USER = "task_stage_for_user";
+  public static final String TABLE_TASK_STAGE_HISTORY = "task_stage_history";
   public static final String TABLE_TASK_STAGE_MONSTER = "task_stage_monster";
 	public static final String TABLE_TOURNAMENT_EVENT = "tournament_event";	
 	public static final String TABLE_TOURNAMENT_EVENT_FOR_USER = "tournament_event_for_user";
@@ -58,7 +59,6 @@ public class DBConstants {
 	public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
 	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
   public static final String TABLE_USER_SESSION = "user_session";
-  public static final String TABLE_TASK_STAGE_HISTORY = "task_stage_history";
   
   /*COLUMNNAMES*/
   public static final String GENERIC__USER_ID = "user_id";

@@ -1,13 +1,15 @@
 package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
@@ -160,5 +162,5 @@ public interface UpdateUtil {
   
   public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl);
 
-  
+  public abstract int updateUserMonsterNumPieces(int userId, Collection<MonsterForUser> monsterForUserList);
 }

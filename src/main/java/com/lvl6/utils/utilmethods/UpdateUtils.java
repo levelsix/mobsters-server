@@ -2,6 +2,7 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.properties.DBConstants;
@@ -780,8 +782,6 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		log.info("newRows=" + newRows);
-		
-		
 		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
 
 		log.info("num monster_enhancing updated: " + numUpdated 
@@ -803,6 +803,34 @@ public class UpdateUtils implements UpdateUtil {
 				conditionParams, "and");
 		return numUpdated;
 	}
+
+		@Override
+		public int updateUserMonsterNumPieces(int userId,
+				Collection<MonsterForUser> monsterForUserList) {
+			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			for (MonsterForUser mfu : monsterForUserList) {
+				Map <String, Object> aRow = new HashMap<String, Object>();
+				
+				aRow.put(DBConstants.MONSTER_FOR_USER__ID, mfu.getId());
+				aRow.put(DBConstants.MONSTER_FOR_USER__USER_ID, mfu.getUserId());
+				aRow.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, mfu.getMonsterId());
+				aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_EXPERIENCE, mfu.getCurrentExp());
+				aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_LEVEL, mfu.getCurrentLvl());
+				aRow.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, mfu.getCurrentHealth());
+				aRow.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, mfu.getNumPieces());
+				aRow.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, mfu.isComplete());
+				aRow.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, mfu.getTeamSlotNum());
+				
+			}
+			log.info("newRows=" + newRows);
+			int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
+
+			log.info("num monster_for_user updated: " + numUpdated 
+					+ ". Number of monster_for_user: " + monsterForUserList.size());
+			return numUpdated;
+		}
 
 
 }

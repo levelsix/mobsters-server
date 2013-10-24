@@ -11,11 +11,14 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 
 
 public class MonsterStuffUtils {
@@ -151,6 +154,137 @@ public class MonsterStuffUtils {
   	}
   	
   	return nonProtos;
+  }
+  
+  // ASSUMPTION: WHATEVER MONSTER ID EXISTS IN  monsterIdToIncompleteUserMonster
+  // THERE IS A CORRESPONDING ENTRY IN monsterIdToQuantity
+  // returns the remaining quantities for each monster id after "completing"
+  // a user_monster 
+  // ALSO MODIFIES monsterIdToIncompleteUserMonster
+  public static Map<Integer, Integer> completeMonsterForUserFromMonsterIdsAndQuantities(
+  		Map<Integer, MonsterForUser> monsterIdToIncompleteUserMonster,
+  		Map<Integer, Integer> monsterIdToQuantity) {
+  	
+  	Map<Integer, Integer> monsterIdToNewQuantity = new HashMap<Integer, Integer>();
+  	//IF NO INCOMLETE MONSTERFORUSER EXISTS, THEN METHOD JUST
+  	//RETURNS A COPY OF THE MAP monsterIdToQuantity
+  	if (monsterIdToIncompleteUserMonster.isEmpty()) {
+  		monsterIdToNewQuantity.putAll(monsterIdToQuantity);
+  		return monsterIdToNewQuantity;
+  	}
+  	
+  	//retrieve the monsters so we know how much is needed to complete it
+  	Set<Integer> incompleteMonsterIds = monsterIdToIncompleteUserMonster.keySet();
+  	Map<Integer, Monster> monsterIdsToMonsters =  MonsterRetrieveUtils
+  			.getMonstersForMonsterIds(incompleteMonsterIds);
+  	
+
+  	//for each incomplete user monster, try to complete it with the 
+  	//available quantity in the monsterIdToQuantity map,
+  	//(breaking the abstraction) monsterIdToIncompleteUserMonster will be modified
+  	for (int monsterId : incompleteMonsterIds) {
+  		MonsterForUser mfu = monsterIdToIncompleteUserMonster.get(monsterId);
+  		int numPiecesAvailable = monsterIdToQuantity.get(monsterId);
+  		Monster monzter = monsterIdsToMonsters.get(monsterId);
+  		
+  		int newPiecesAvailable = completeMonsterForUserFromQuantity(
+  				mfu, numPiecesAvailable, monzter);
+  		
+  		if (newPiecesAvailable > 0) {
+  			monsterIdToNewQuantity.put(monsterId, newPiecesAvailable);
+  		}
+  	}
+  	
+  	return monsterIdToNewQuantity;
+  }
+  
+  //(breaking the abstraction) monsterForUser will be modified
+  //returns the number of pieces remaining after using up the pieces
+  //available in order to try completing the monster_for_user
+  public static int completeMonsterForUserFromQuantity(MonsterForUser mfu,
+  		int numPiecesAvailable, Monster monzter) {
+  	int numPiecesRemaining = 0;
+  	
+  	int numPiecesForCompletion = monzter.getNumPuzzlePieces();
+  	int existingNumPieces = mfu.getNumPieces();
+  	
+  	int updatedExistingPieces = existingNumPieces + numPiecesAvailable;
+
+  	//two scenarios: 
+  	//1) there are pieces remaining after trying to complete monsterForUser
+  	//2) no pieces remaining after trying to complete monsterForUser
+  	if (updatedExistingPieces > numPiecesForCompletion) {
+  		//there are more than enough pieces to complete this monster
+  		//"complete" the monsterForUser
+  		mfu.setNumPieces(numPiecesForCompletion);
+
+  		//calculate the remaining pieces remaining
+  		numPiecesRemaining = updatedExistingPieces - numPiecesForCompletion;
+  		
+  	} else {
+  		//no extra pieces remaining after trying to complete monsterForUser
+  		mfu.setNumPieces(updatedExistingPieces); 
+  	}
+  	return numPiecesRemaining;
+  }
+  
+  
+  public static List<MonsterForUser> createMonstersForUserFromQuantities(
+  		int userId, Map<Integer, Integer> monsterIdsToQuantities) {
+  	List<MonsterForUser> returnList = new ArrayList<MonsterForUser>();
+  	
+  	if(monsterIdsToQuantities.isEmpty()) {
+  		return returnList;
+  	}
+  	
+  	Set<Integer> monsterIds = monsterIdsToQuantities.keySet();
+  	Map<Integer, Monster> monsterIdsToMonsters =  MonsterRetrieveUtils
+  			.getMonstersForMonsterIds(monsterIds);
+  	
+  	//for each monster and quantity, create as many complete and incomplete
+  	//user monsters
+  	for (int monsterId : monsterIds) {
+  		Monster monzter = monsterIdsToMonsters.get(monsterId);
+  		int quantity = monsterIdsToQuantities.get(monsterId);
+  		
+  		List<MonsterForUser> newUserMonsters = createMonsterForUserFromQuantity(
+  				userId, monzter, quantity);
+  		returnList.addAll(newUserMonsters);
+  	}
+  	
+  	return returnList;
+  }
+  
+  //THE ID PROPERTY FOR ALL THESE monsterForUser will be a useless value, say 0
+  public static List<MonsterForUser> createMonsterForUserFromQuantity(int userId,
+  		Monster monzter, int quantity) {
+  	List<MonsterForUser> returnList = new ArrayList<MonsterForUser>();
+  	
+  	int numPiecesForCompletion = monzter.getNumPuzzlePieces();
+  	
+  	//TODO: FIGURE OUT IF THESE ARE TEH CORRECT DEFAULT VALUES
+  	int id = 0;
+  	int monsterId = monzter.getId();
+  	int currentExp = 0; //not sure if this is right
+  	int currentLvl = 1; //not sure if this is right
+  	int currentHealth = monzter.getBaseHp();
+  	int numPieces = 0;
+  	boolean isComplete = false;
+  	int teamSlotNum = 0;
+  	
+  	for (; quantity > 0; quantity -= numPiecesForCompletion) {
+  		if (quantity >= numPiecesForCompletion) {
+  			numPieces = numPiecesForCompletion;
+  		} else {
+  			numPieces = quantity; 
+  		}
+  		
+  		MonsterForUser mfu = new MonsterForUser(id, userId, monsterId,
+  				currentExp, currentLvl, currentHealth, numPieces, isComplete,
+  				teamSlotNum);
+  		returnList.add(mfu);
+  	}
+  	return returnList;
   }
   
 }
