@@ -1,5 +1,6 @@
 
 import "City.proto";
+import "MonsterStuff.proto";
 import "Quest.proto";
 import "User.proto";
 
@@ -52,9 +53,6 @@ message QuestProgressResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-//delete all userquest data besides the one in user_quests
-//client should also take away all the quests' requiredequips
-																						//DONE
 message QuestRedeemRequestProto {                         
      optional MinimumUserProto sender = 1;
      optional int32 questId = 2;
@@ -65,12 +63,12 @@ message QuestRedeemResponseProto {
      optional MinimumUserProto sender = 1;
      repeated FullQuestProto newlyAvailableQuests = 2;
      optional QuestRedeemStatus status = 3;    
-     optional int32 monsterId = 4;
+     optional FullUserMonsterProto fump = 4;
      
      enum QuestRedeemStatus {
           SUCCESS = 1;
-          NOT_COMPLETE = 2;
-          OTHER_FAIL = 3;
+          FAIL_NOT_COMPLETE = 2;
+          FAIL_OTHER = 3;
      }
 }
 

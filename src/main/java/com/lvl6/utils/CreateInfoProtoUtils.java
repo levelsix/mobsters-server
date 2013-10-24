@@ -60,12 +60,6 @@ import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
-import com.lvl6.proto.JobProto.BuildStructJobProto;
-import com.lvl6.proto.JobProto.MinimumUserBuildStructJobProto;
-import com.lvl6.proto.JobProto.MinimumUserUpgradeStructJobProto;
-import com.lvl6.proto.JobProto.MonsterJobProto;
-import com.lvl6.proto.JobProto.MonsterJobType;
-import com.lvl6.proto.JobProto.UpgradeStructJobProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -220,6 +214,7 @@ public class CreateInfoProtoUtils {
       QuestType qt = QuestType.valueOf(qType);
       builder.setQuestType(qt);
     }
+    builder.setJobDescription(quest.getJobDescription());
     builder.setStaticDataId(quest.getStaticDataId());
     builder.setQuantity(quest.getQuantity());
     builder.setCoinReward(quest.getCoinReward());

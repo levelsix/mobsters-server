@@ -2714,9 +2714,10 @@ public final class EventQuestProto {
     boolean hasStatus();
     com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus getStatus();
     
-    // optional int32 monsterId = 4;
-    boolean hasMonsterId();
-    int getMonsterId();
+    // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
+    boolean hasFump();
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump();
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder();
   }
   public static final class QuestRedeemResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -2749,13 +2750,13 @@ public final class EventQuestProto {
     public enum QuestRedeemStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      NOT_COMPLETE(1, 2),
-      OTHER_FAIL(2, 3),
+      FAIL_NOT_COMPLETE(1, 2),
+      FAIL_OTHER(2, 3),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int NOT_COMPLETE_VALUE = 2;
-      public static final int OTHER_FAIL_VALUE = 3;
+      public static final int FAIL_NOT_COMPLETE_VALUE = 2;
+      public static final int FAIL_OTHER_VALUE = 3;
       
       
       public final int getNumber() { return value; }
@@ -2763,8 +2764,8 @@ public final class EventQuestProto {
       public static QuestRedeemStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return NOT_COMPLETE;
-          case 3: return OTHER_FAIL;
+          case 2: return FAIL_NOT_COMPLETE;
+          case 3: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -2795,7 +2796,7 @@ public final class EventQuestProto {
       }
       
       private static final QuestRedeemStatus[] VALUES = {
-        SUCCESS, NOT_COMPLETE, OTHER_FAIL, 
+        SUCCESS, FAIL_NOT_COMPLETE, FAIL_OTHER, 
       };
       
       public static QuestRedeemStatus valueOf(
@@ -2863,21 +2864,24 @@ public final class EventQuestProto {
       return status_;
     }
     
-    // optional int32 monsterId = 4;
-    public static final int MONSTERID_FIELD_NUMBER = 4;
-    private int monsterId_;
-    public boolean hasMonsterId() {
+    // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
+    public static final int FUMP_FIELD_NUMBER = 4;
+    private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_;
+    public boolean hasFump() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public int getMonsterId() {
-      return monsterId_;
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump() {
+      return fump_;
+    }
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder() {
+      return fump_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       newlyAvailableQuests_ = java.util.Collections.emptyList();
       status_ = com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus.SUCCESS;
-      monsterId_ = 0;
+      fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2901,7 +2905,7 @@ public final class EventQuestProto {
         output.writeEnum(3, status_.getNumber());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(4, monsterId_);
+        output.writeMessage(4, fump_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2926,7 +2930,7 @@ public final class EventQuestProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, monsterId_);
+          .computeMessageSize(4, fump_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3046,6 +3050,7 @@ public final class EventQuestProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
           getNewlyAvailableQuestsFieldBuilder();
+          getFumpFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3068,7 +3073,11 @@ public final class EventQuestProto {
         }
         status_ = com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
-        monsterId_ = 0;
+        if (fumpBuilder_ == null) {
+          fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
+        } else {
+          fumpBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
@@ -3132,7 +3141,11 @@ public final class EventQuestProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.monsterId_ = monsterId_;
+        if (fumpBuilder_ == null) {
+          result.fump_ = fump_;
+        } else {
+          result.fump_ = fumpBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3181,8 +3194,8 @@ public final class EventQuestProto {
         if (other.hasStatus()) {
           setStatus(other.getStatus());
         }
-        if (other.hasMonsterId()) {
-          setMonsterId(other.getMonsterId());
+        if (other.hasFump()) {
+          mergeFump(other.getFump());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3241,9 +3254,13 @@ public final class EventQuestProto {
               }
               break;
             }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              monsterId_ = input.readInt32();
+            case 34: {
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
+              if (hasFump()) {
+                subBuilder.mergeFrom(getFump());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setFump(subBuilder.buildPartial());
               break;
             }
           }
@@ -3552,25 +3569,94 @@ public final class EventQuestProto {
         return this;
       }
       
-      // optional int32 monsterId = 4;
-      private int monsterId_ ;
-      public boolean hasMonsterId() {
+      // optional .com.lvl6.proto.FullUserMonsterProto fump = 4;
+      private com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> fumpBuilder_;
+      public boolean hasFump() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public int getMonsterId() {
-        return monsterId_;
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getFump() {
+        if (fumpBuilder_ == null) {
+          return fump_;
+        } else {
+          return fumpBuilder_.getMessage();
+        }
       }
-      public Builder setMonsterId(int value) {
+      public Builder setFump(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (fumpBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          fump_ = value;
+          onChanged();
+        } else {
+          fumpBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000008;
-        monsterId_ = value;
-        onChanged();
         return this;
       }
-      public Builder clearMonsterId() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        monsterId_ = 0;
-        onChanged();
+      public Builder setFump(
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (fumpBuilder_ == null) {
+          fump_ = builderForValue.build();
+          onChanged();
+        } else {
+          fumpBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
         return this;
+      }
+      public Builder mergeFump(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (fumpBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              fump_ != com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance()) {
+            fump_ =
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder(fump_).mergeFrom(value).buildPartial();
+          } else {
+            fump_ = value;
+          }
+          onChanged();
+        } else {
+          fumpBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      public Builder clearFump() {
+        if (fumpBuilder_ == null) {
+          fump_ = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance();
+          onChanged();
+        } else {
+          fumpBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getFumpBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getFumpFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getFumpOrBuilder() {
+        if (fumpBuilder_ != null) {
+          return fumpBuilder_.getMessageOrBuilder();
+        } else {
+          return fump_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+          getFumpFieldBuilder() {
+        if (fumpBuilder_ == null) {
+          fumpBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
+                  fump_,
+                  getParentForChildren(),
+                  isClean());
+          fump_ = null;
+        }
+        return fumpBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.QuestRedeemResponseProto)
@@ -3624,36 +3710,38 @@ public final class EventQuestProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\020EventQuest.proto\022\016com.lvl6.proto\032\nCity" +
-      ".proto\032\013Quest.proto\032\nUser.proto\"\\\n\027Quest" +
-      "AcceptRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\017\n\007questId\030" +
-      "\002 \001(\005\"\240\002\n\030QuestAcceptResponseProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022J\n\006status\030\002 \001(\0162:.com.lvl6.proto.Qu" +
-      "estAcceptResponseProto.QuestAcceptStatus" +
-      "\022\035\n\025cityIdOfAcceptedQuest\030\003 \001(\005\"g\n\021Quest" +
-      "AcceptStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_NOT_AV",
-      "AIL_TO_USER\020\002\022\031\n\025FAIL_ALREADY_ACCEPTED\020\003" +
-      "\022\016\n\nFAIL_OTHER\020\004\"w\n\031QuestProgressRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022\017\n\007questId\030\002 \001(\005\022\027\n\017curr" +
-      "entProgress\030\003 \001(\005\"\354\001\n\032QuestProgressRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022N\n\006status\030\002 \001(\0162>.com" +
-      ".lvl6.proto.QuestProgressResponseProto.Q" +
-      "uestProgressStatus\"L\n\023QuestProgressStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NO_QUEST_EXISTS\020\002",
-      "\022\016\n\nFAIL_OTHER\020\003\"\\\n\027QuestRedeemRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\017\n\007questId\030\002 \001(\005\"\255\002\n\030Quest" +
-      "RedeemResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022<\n\024newlyAv" +
-      "ailableQuests\030\002 \003(\0132\036.com.lvl6.proto.Ful" +
-      "lQuestProto\022J\n\006status\030\003 \001(\0162:.com.lvl6.p" +
-      "roto.QuestRedeemResponseProto.QuestRedee" +
-      "mStatus\022\021\n\tmonsterId\030\004 \001(\005\"B\n\021QuestRedee" +
-      "mStatus\022\013\n\007SUCCESS\020\001\022\020\n\014NOT_COMPLETE\020\002\022\016",
-      "\n\nOTHER_FAIL\020\003B\021B\017EventQuestProto"
+      ".proto\032\022MonsterStuff.proto\032\013Quest.proto\032" +
+      "\nUser.proto\"\\\n\027QuestAcceptRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\017\n\007questId\030\002 \001(\005\"\240\002\n\030QuestAccep" +
+      "tResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022J\n\006status\030\002 \001(\016" +
+      "2:.com.lvl6.proto.QuestAcceptResponsePro" +
+      "to.QuestAcceptStatus\022\035\n\025cityIdOfAccepted" +
+      "Quest\030\003 \001(\005\"g\n\021QuestAcceptStatus\022\013\n\007SUCC",
+      "ESS\020\001\022\032\n\026FAIL_NOT_AVAIL_TO_USER\020\002\022\031\n\025FAI" +
+      "L_ALREADY_ACCEPTED\020\003\022\016\n\nFAIL_OTHER\020\004\"w\n\031" +
+      "QuestProgressRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007q" +
+      "uestId\030\002 \001(\005\022\027\n\017currentProgress\030\003 \001(\005\"\354\001" +
+      "\n\032QuestProgressResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022N" +
+      "\n\006status\030\002 \001(\0162>.com.lvl6.proto.QuestPro" +
+      "gressResponseProto.QuestProgressStatus\"L" +
+      "\n\023QuestProgressStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FA",
+      "IL_NO_QUEST_EXISTS\020\002\022\016\n\nFAIL_OTHER\020\003\"\\\n\027" +
+      "QuestRedeemRequestProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\017\n\007que" +
+      "stId\030\002 \001(\005\"\323\002\n\030QuestRedeemResponseProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022<\n\024newlyAvailableQuests\030\002 \003(\0132" +
+      "\036.com.lvl6.proto.FullQuestProto\022J\n\006statu" +
+      "s\030\003 \001(\0162:.com.lvl6.proto.QuestRedeemResp" +
+      "onseProto.QuestRedeemStatus\0222\n\004fump\030\004 \001(" +
+      "\0132$.com.lvl6.proto.FullUserMonsterProto\"",
+      "G\n\021QuestRedeemStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAI" +
+      "L_NOT_COMPLETE\020\002\022\016\n\nFAIL_OTHER\020\003B\021B\017Even" +
+      "tQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3705,7 +3793,7 @@ public final class EventQuestProto {
           internal_static_com_lvl6_proto_QuestRedeemResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QuestRedeemResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "MonsterId", },
+              new java.lang.String[] { "Sender", "NewlyAvailableQuests", "Status", "Fump", },
               com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.class,
               com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.Builder.class);
           return null;
@@ -3715,6 +3803,7 @@ public final class EventQuestProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.CityProto.getDescriptor(),
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);

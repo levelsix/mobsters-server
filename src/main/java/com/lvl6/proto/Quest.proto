@@ -14,17 +14,18 @@ message FullQuestProto {
      optional string doneResponse = 5;
      optional DialogueProto acceptDialogue = 6;
      optional QuestType questType = 7;
-     optional int32 staticDataId = 8;
-     optional int32 quantity = 9;
-     optional int32 coinReward = 10;
-     optional int32 diamondReward = 11;
-     optional int32 expReward = 12;
-     optional int32 monsterIdReward = 13;
-     optional bool isCompleteMonster = 14;
-     repeated int32 questsRequiredForThis = 15;
-     optional string questGiverImageSuffix = 16;
-     optional int32 priority = 17;
-     optional string carrotId = 18;
+     optional string jobDescription = 8;
+     optional int32 staticDataId = 9;
+     optional int32 quantity = 10;
+     optional int32 coinReward = 11;
+     optional int32 diamondReward = 12;
+     optional int32 expReward = 13;
+     optional int32 monsterIdReward = 14;
+     optional bool isCompleteMonster = 15;
+     repeated int32 questsRequiredForThis = 16;
+     optional string questGiverImageSuffix = 17;
+     optional int32 priority = 18;
+     optional string carrotId = 19;
      
      enum QuestType {
      	KILL_MONSTER = 1;
