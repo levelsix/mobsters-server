@@ -25,12 +25,15 @@ import com.lvl6.proto.EventQuestProto.QuestRedeemRequestProto;
 import com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto;
 import com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.Builder;
 import com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class QuestRedeemController extends EventController {
 
@@ -64,61 +67,19 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);
 
-    boolean legitRedeem = false;
-    QuestForUser userQuest = null;
-    Quest quest = null;
-
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      userQuest = RetrieveUtils.questForUserRetrieveUtils().getSpecificUnredeemedUserQuest(userId, questId);
-      quest = QuestRetrieveUtils.getQuestForQuestId(questId);
-      legitRedeem = checkLegitRedeem(resBuilder, userQuest, quest);
+      QuestForUser userQuest = RetrieveUtils.questForUserRetrieveUtils().getSpecificUnredeemedUserQuest(userId, questId);
+      Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
+      boolean legitRedeem = checkLegitRedeem(resBuilder, userQuest, quest);
 
-      List<QuestForUser> inProgressAndRedeemedQuestForUsers = null;
       if (legitRedeem) {
       	
       	//calculate the available quests for this user
-        inProgressAndRedeemedQuestForUsers = RetrieveUtils.questForUserRetrieveUtils().getUserQuestsForUser(userId);
-        List<Integer> inProgressQuestIds = new ArrayList<Integer>();
-        List<Integer> redeemedQuestIds = new ArrayList<Integer>();
+      	setAvailableQuests(userId, questId, resBuilder);
         
-        if (inProgressAndRedeemedQuestForUsers != null) {
-          for (QuestForUser uq : inProgressAndRedeemedQuestForUsers) {
-            if (uq.isRedeemed() || uq.getQuestId() == questId) {
-              redeemedQuestIds.add(uq.getQuestId());
-            } else {
-              inProgressQuestIds.add(uq.getQuestId());  
-            }
-          }
-          Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-          List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds, inProgressQuestIds);
-          for (Integer availableQuestId : availableQuestIds) {
-            Quest q = questIdsToQuests.get(availableQuestId);
-            if (q.getQuestsRequiredForThis().contains(questId)) {
-              resBuilder.addNewlyAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(q));
-            }
-          }
-        }
-        
-        
-        
-        int monsterIdReward = quest.getMonsterIdReward();
-//        if (monsterIdReward > 0) {
-//          int userEquipId = InsertUtils.get().insertUserEquip(userQuest.getUserId(), monsterIdReward,
-//              ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT,
-//              now, ControllerConstants.UER__QUEST_REDEEM);
-//          if (userEquipId < 0) {
-//            resBuilder.setStatus(QuestRedeemStatus.OTHER_FAIL);
-//            log.error("problem with giving user 1 reward equip after completing the quest, equipId=" 
-//                + quest.getEquipIdGained() + ", quest= " + quest);
-//            legitRedeem = false;
-//          } else {
-//            resBuilder.setEquipRewardFromQuest(CreateInfoProtoUtils.createFullUserEquipProtoFromUserEquip(
-//                new UserEquip(userEquipId, userQuest.getUserId(), quest.getEquipIdGained(), 
-//                    ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT,
-//                    ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY)));
-//          }
-//        }
+        //give user the monster reward, if any, and send this to the client
+      	legitRedeem = awardMonsterReward(userId, quest, resBuilder);
       }
       
       QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(senderProto.getUserId());
@@ -154,51 +115,8 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
-    if (legitRedeem && quest != null && userQuest != null) {
-      clearQuestForUserData(quest, userQuest);
-    }
-
   }
 
-  private void clearQuestForUserData(Quest quest, QuestForUser userQuest) {
-//    if (quest.getTasksRequired() != null && quest.getTasksRequired().size() > 0) {
-//      if (!DeleteUtils.get().deleteQuestForUserInfoInTaskProgressAndCompletedTasks(userQuest.getUserId(), userQuest.getQuestId(), quest.getTasksRequired().size())) {
-//        log.error("problem with deleting user quest info in user quest task tables. questid=" + userQuest.getQuestId() 
-//            + ", num tasks it has is " + quest.getTasksRequired().size());
-//      }
-//    }
-//    List<Integer> defeatTypeJobs = null;
-//    defeatTypeJobs = quest.getDefeatGoodGuysJobsRequired();
-//    if (defeatTypeJobs != null && defeatTypeJobs.size() > 0) {
-//      if (!DeleteUtils.get().deleteQuestForUserInfoInDefeatTypeJobProgressAndCompletedDefeatTypeJobs(userQuest.getUserId(), userQuest.getQuestId(), defeatTypeJobs.size())) {
-//        log.error("problem with deleting user quest info for defeat type job tables. questid=" + userQuest.getQuestId() 
-//            + ", num defeat type jobs it has is " + defeatTypeJobs.size());
-//      }
-//    }    
-  }
-
-  private void writeChangesToDB(QuestForUser userQuest, Quest quest, User user, MinimumUserProto senderProto,
-      Map<String, Integer> money) {
-//    if (!UpdateUtils.get().updateRedeemQuestForUser(userQuest.getUserId(), userQuest.getQuestId())) {
-//      log.error("problem with marking user quest as redeemed. questId=" + userQuest.getQuestId());
-//    }
-//
-//    int coinsGained = Math.max(0, quest.getCoinsGained());
-//    int diamondsGained = Math.max(0, quest.getDiamondsGained());
-//    int expGained = Math.max(0,  quest.getExpGained());
-//    if (!user.updateRelativeDiamondsCoinsExperienceNaive(diamondsGained, coinsGained, expGained)) {
-//      log.error("problem with giving user " + diamondsGained + " diamonds, " + coinsGained
-//          + " coins, " + expGained + " exp");
-//    } else {
-//      //things worked
-//      if (0 != diamondsGained) {
-//        money.put(MiscMethods.gold, diamondsGained);
-//      }
-//      if (0 != coinsGained) {
-//        money.put(MiscMethods.silver, coinsGained);
-//      }
-//    }
-  }
 
   private boolean checkLegitRedeem(Builder resBuilder, QuestForUser userQuest, Quest quest) {
     if (userQuest == null || userQuest.isRedeemed()) {
@@ -215,10 +133,79 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     return true;  
   }
 
-//  private boolean checkIfUserGetsKiipReward() {
-//    if (Math.random() < ControllerConstants.CHANCE_TO_GET_KIIP_ON_QUEST_REDEEM) return true;
-//    return false;
-//  }
+  private void setAvailableQuests(int userId, int questId, Builder resBuilder) {
+  	List<QuestForUser> inProgressAndRedeemedQuestForUsers = RetrieveUtils
+  			.questForUserRetrieveUtils().getUserQuestsForUser(userId);
+    List<Integer> inProgressQuestIds = new ArrayList<Integer>();
+    List<Integer> redeemedQuestIds = new ArrayList<Integer>();
+    
+    if (inProgressAndRedeemedQuestForUsers != null) {
+      for (QuestForUser uq : inProgressAndRedeemedQuestForUsers) {
+        if (uq.isRedeemed() || uq.getQuestId() == questId) {
+          redeemedQuestIds.add(uq.getQuestId());
+        } else {
+          inProgressQuestIds.add(uq.getQuestId());  
+        }
+      }
+      Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
+      List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds, inProgressQuestIds);
+      for (Integer availableQuestId : availableQuestIds) {
+        Quest q = questIdsToQuests.get(availableQuestId);
+        if (q.getQuestsRequiredForThis().contains(questId)) {
+          resBuilder.addNewlyAvailableQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(q));
+        }
+      }
+    }
+  }
+  
+  private boolean awardMonsterReward(int userId, Quest quest, Builder resBuilder) {
+  	boolean legitRedeem = true;
+  	
+  	int monsterIdReward = quest.getMonsterIdReward();
+    if (monsterIdReward > 0) {
+    	//WHEN GIVING USER A MONSTER, CALL MonsterStuffUtils.updateUserMonsters(...)
+    	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
+    	monsterIdToNumPieces.put(monsterIdReward, 1);
+    	
+    	List<FullUserMonsterProto> reward = MonsterStuffUtils
+    			.updateUserMonsters(userId, monsterIdToNumPieces);
+    	
+      if (reward.isEmpty()) {
+        resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);
+        log.error("problem with giving user 1 monster after completing the quest, monsterId=" 
+            + monsterIdReward + ", quest= " + quest);
+        legitRedeem = false;
+      } else {
+      	FullUserMonsterProto fump = reward.get(0);
+        resBuilder.setFump(fump);
+      }
+    }
+    
+    return legitRedeem;
+  }
+
+  private void writeChangesToDB(QuestForUser userQuest, Quest quest, User user, MinimumUserProto senderProto,
+      Map<String, Integer> money) {
+    if (!UpdateUtils.get().updateRedeemQuestForUser(userQuest.getUserId(), userQuest.getQuestId())) {
+      log.error("problem with marking user quest as redeemed. questId=" + userQuest.getQuestId());
+    }
+
+    int coinsGained = Math.max(0, quest.getCoinReward());
+    int diamondsGained = Math.max(0, quest.getDiamondReward());
+    int expGained = Math.max(0,  quest.getExpReward());
+    if (!user.updateRelativeDiamondsCoinsExperienceNaive(diamondsGained, coinsGained, expGained)) {
+      log.error("problem with giving user " + diamondsGained + " diamonds, " + coinsGained
+          + " coins, " + expGained + " exp");
+    } else {
+      //things worked
+      if (0 != diamondsGained) {
+        money.put(MiscMethods.gold, diamondsGained);
+      }
+      if (0 != coinsGained) {
+        money.put(MiscMethods.silver, coinsGained);
+      }
+    }
+  }
 
   public void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money,
       int previousSilver, int previousGold, Timestamp date) {
@@ -237,4 +224,5 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money,
         previousGoldSilver, reasonsForChanges);
   }
+
 }

@@ -117,36 +117,6 @@ public class InsertUtils implements InsertUtil{
     return false;
   }
 
-  /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.InsertUtil#insertUserEquip(int, int)
-   */
-  /*@Caching(evict = {
-      //@CacheEvict(value = "userEquipsForUser", key = "#userId"),
-      //@CacheEvict(value = "equipsToUserEquipsForUser", key = "#userId"),
-      //@CacheEvict(value = "userEquipsWithEquipId", key = "#userId+':'+#equipId") })*/
-//  public int insertUserEquip(int userId, int equipId, int level, Timestamp now) {
-//    Map<String, Object> insertParams = new HashMap<String, Object>();
-//    insertParams.put(DBConstants.USER_EQUIP__USER_ID, userId);
-//    insertParams.put(DBConstants.USER_EQUIP__EQUIP_ID, equipId);
-//    insertParams.put(DBConstants.USER_EQUIP__LEVEL, level);
-//    
-//
-//    int userEquipId = DBConnection.get().insertIntoTableBasicReturnId(
-//        DBConstants.TABLE_USER_EQUIP, insertParams);
-//    return userEquipId;
-//  }
-//  @Override
-//  public int insertUserEquip(int userId, int equipId, int enhancementPercentage) {
-//    Map<String, Object> insertParams = new HashMap<String, Object>();
-//    insertParams.put(DBConstants.MONSTER_FOR_USER__USER_ID, userId);
-//    insertParams.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, equipId);
-//    insertParams.put(DBConstants.MONSTER_FOR_USER__ENHANCEMENT_PERCENT, enhancementPercentage);
-//
-//    int userEquipId = DBConnection.get().insertIntoTableBasicReturnId(
-//        DBConstants.TABLE_MONSTER_FOR_USER, insertParams);
-//    return userEquipId;
-//  }
-  
 //  public int insertEquipEnhancement(int userId, int equipId, int equipLevel,
 //      int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement) {
 //    String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;

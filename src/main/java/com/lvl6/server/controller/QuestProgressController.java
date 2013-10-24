@@ -140,8 +140,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     }
   	int num = insertUtils.insertUpdateUnredeemedUserQuest(userId,
   			questId, currentProgress, isComplete);
-  	log.error("num inserted/updated for unredeemd user quest=" +
-  			num + "\t userId=" + userId + "\t questId=" + questId +
-  			"\t currentProgress=" + currentProgress);
+  	if (num != 1) {
+  		log.error("num inserted/updated for unredeemd user quest:" +
+  				num + "\t userId=" + userId + "\t questId=" + questId +
+  				"\t currentProgress=" + currentProgress);
+  	}
   }
 }

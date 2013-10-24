@@ -40,7 +40,7 @@ public interface UpdateUtil {
       //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),
       //@CacheEvict(value = "incompleteUserQuestsForUser", key = "#userId"),
       //@CacheEvict(value = "unredeemedUserQuestsForUser", key = "#userId") })*/
-  public abstract boolean updateRedeemUserQuest(int userId, int questId);
+  public abstract boolean updateRedeemQuestForUser(int userId, int questId);
 
   /*
    * changin orientation

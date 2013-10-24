@@ -19,20 +19,9 @@ public interface InsertUtil {
 	//	public abstract void setCache(CacheManager cache);
 
 
-	/*@Caching(evict = {
-      //@CacheEvict(value = "userEquipsForUser", key = "#userId"),
-      //@CacheEvict(value = "equipsToUserEquipsForUser", key = "#userId"),
-      //@CacheEvict(value = "userEquipsWithEquipId", key = "#userId+':'+#equipId") })*/
-	//  public abstract int insertUserEquip(int userId, int equipId, int level,
-	//	  Timestamp now);
-
 	public abstract boolean insertUserCityExpansionData(int userId, Timestamp expandStartTime, 
 			int xPosition, int yPosition, boolean isExpanding);
 
-
-//	public abstract int insertUserEquip(int userId, int equipId,
-//			int enhancementPercentage);
-//
 //	public abstract int insertEquipEnhancement(int userId, int equipId, int equipLevel,
 //			int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement);
 

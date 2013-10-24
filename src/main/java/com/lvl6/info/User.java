@@ -352,9 +352,6 @@ public class User implements Serializable {
 		return false;
 	}
 
-
-
-
 	/*
 	 * used for tasks
 	 *        * user- coins/exp/tasks_completed increase

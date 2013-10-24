@@ -149,14 +149,8 @@ public class UpdateUtils implements UpdateUtil {
 
 
 
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateRedeemUserQuest(int, int)
-	 */
 	@Override
-	/*@Caching(evict={//@CacheEvict(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
-	public boolean updateRedeemUserQuest(int userId, int questId) {
+	public boolean updateRedeemQuestForUser(int userId, int questId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
 		conditionParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);

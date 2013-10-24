@@ -15,10 +15,15 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 
 public class MonsterStuffUtils {
@@ -285,6 +290,68 @@ public class MonsterStuffUtils {
   		returnList.add(mfu);
   	}
   	return returnList;
+  }
+  
+  
+  
+  //METHOD TO REWARD A USER WITH SOME MONSTERS
+  public static List<FullUserMonsterProto> updateUserMonsters(int userId,
+  		Map<Integer, Integer> monsterIdToNumPieces) {
+  	log.info("the monster pieces the user gets: " + monsterIdToNumPieces);
+  	
+  	if (monsterIdToNumPieces.isEmpty()) {
+  		return new ArrayList<FullUserMonsterProto>();
+  	}
+  	
+  	//for all the monster pieces the user will receive, see if he already has any
+  	//retrieve all of user's incomplete monsters that have these monster ids 
+  	Set<Integer> droppedMonsterIds = monsterIdToNumPieces.keySet();
+  	
+  	Map<Integer, MonsterForUser> monsterIdsToIncompletes =  RetrieveUtils
+  			.monsterForUserRetrieveUtils()
+  			.getIncompleteMonstersWithUserAndMonsterIds(userId, droppedMonsterIds);
+  	
+  	//take however many pieces necessary from monsterIdToNumPieces to
+  	//complete these incomplete monsterForUsers
+  	//monsterIdsToIncompletes will be modified
+  	Map<Integer, Integer> monsterIdToRemainingPieces = MonsterStuffUtils
+  			.completeMonsterForUserFromMonsterIdsAndQuantities(
+  					monsterIdsToIncompletes, monsterIdToNumPieces);
+  	
+  	//update these incomplete monsters, if any
+  	List<MonsterForUser> dirtyMonsterForUserList = 
+  			new ArrayList<MonsterForUser>(monsterIdsToIncompletes.values());
+  	
+  	if (!dirtyMonsterForUserList.isEmpty()) {
+  		log.info("the monsters that are updated: " + dirtyMonsterForUserList);
+  		UpdateUtils.get().updateUserMonsterNumPieces(userId, dirtyMonsterForUserList);
+  	}
+  	
+  	//monsterIdToRemainingPieces now contains all the new monsters
+  	//the user will get
+  	List<MonsterForUser> newMonsters = MonsterStuffUtils
+  			.createMonstersForUserFromQuantities(userId, monsterIdToRemainingPieces);
+  	if (!newMonsters.isEmpty()) {
+  		log.info("the monsters that are new: " + newMonsters);
+  		List<Long> monsterForUserIds = InsertUtils.get()
+  				.insertIntoMonsterForUserReturnIds(userId, newMonsters);
+  		
+  		//set these ids into the list "newMonsters"
+  		for (int i = 0; i < monsterForUserIds.size(); i++) {
+  			MonsterForUser newMonster = newMonsters.get(i);
+  			long monsterForUserId = monsterForUserIds.get(i);
+  			newMonster.setId(monsterForUserId);
+  		}
+  	}
+  	
+  	//create the return value
+  	List<MonsterForUser> newOrUpdated = new ArrayList<MonsterForUser>();
+  	newOrUpdated.addAll(dirtyMonsterForUserList);
+  	newOrUpdated.addAll(newMonsters);
+  	List<FullUserMonsterProto> protos = CreateInfoProtoUtils
+  			.createFullUserMonsterProtoList(newOrUpdated);
+  	
+  	return protos;
   }
   
 }
