@@ -28,7 +28,7 @@ message FullQuestProto {
      
      enum QuestType {
      	COLLECT_MONSTER = 1;
-     	COLLECT_AND_DONATE_MONSTER = 2;
+     	DONATE_MONSTER = 2;
      	KILL_MONSTER = 3; 
      }
 }

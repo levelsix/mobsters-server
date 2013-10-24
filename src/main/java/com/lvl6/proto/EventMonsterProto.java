@@ -4530,7 +4530,11 @@ public final class EventMonsterProto {
     com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProtoOrBuilder getUmhNewOrBuilder(
         int index);
     
-    // optional int32 gemCost = 5;
+    // optional sint32 cashCost = 5;
+    boolean hasCashCost();
+    int getCashCost();
+    
+    // optional sint32 gemCost = 6;
     boolean hasGemCost();
     int getGemCost();
   }
@@ -4639,11 +4643,21 @@ public final class EventMonsterProto {
       return umhNew_.get(index);
     }
     
-    // optional int32 gemCost = 5;
-    public static final int GEMCOST_FIELD_NUMBER = 5;
+    // optional sint32 cashCost = 5;
+    public static final int CASHCOST_FIELD_NUMBER = 5;
+    private int cashCost_;
+    public boolean hasCashCost() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getCashCost() {
+      return cashCost_;
+    }
+    
+    // optional sint32 gemCost = 6;
+    public static final int GEMCOST_FIELD_NUMBER = 6;
     private int gemCost_;
     public boolean hasGemCost() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public int getGemCost() {
       return gemCost_;
@@ -4654,6 +4668,7 @@ public final class EventMonsterProto {
       umhDelete_ = java.util.Collections.emptyList();
       umhUpdate_ = java.util.Collections.emptyList();
       umhNew_ = java.util.Collections.emptyList();
+      cashCost_ = 0;
       gemCost_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -4681,7 +4696,10 @@ public final class EventMonsterProto {
         output.writeMessage(4, umhNew_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(5, gemCost_);
+        output.writeSInt32(5, cashCost_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeSInt32(6, gemCost_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4710,7 +4728,11 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, gemCost_);
+          .computeSInt32Size(5, cashCost_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(6, gemCost_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4864,8 +4886,10 @@ public final class EventMonsterProto {
         } else {
           umhNewBuilder_.clear();
         }
-        gemCost_ = 0;
+        cashCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        gemCost_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -4941,6 +4965,10 @@ public final class EventMonsterProto {
         }
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000002;
+        }
+        result.cashCost_ = cashCost_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000004;
         }
         result.gemCost_ = gemCost_;
         result.bitField0_ = to_bitField0_;
@@ -5040,6 +5068,9 @@ public final class EventMonsterProto {
             }
           }
         }
+        if (other.hasCashCost()) {
+          setCashCost(other.getCashCost());
+        }
         if (other.hasGemCost()) {
           setGemCost(other.getGemCost());
         }
@@ -5103,7 +5134,12 @@ public final class EventMonsterProto {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              gemCost_ = input.readInt32();
+              cashCost_ = input.readSInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              gemCost_ = input.readSInt32();
               break;
             }
           }
@@ -5760,22 +5796,43 @@ public final class EventMonsterProto {
         return umhNewBuilder_;
       }
       
-      // optional int32 gemCost = 5;
+      // optional sint32 cashCost = 5;
+      private int cashCost_ ;
+      public boolean hasCashCost() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getCashCost() {
+        return cashCost_;
+      }
+      public Builder setCashCost(int value) {
+        bitField0_ |= 0x00000010;
+        cashCost_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCashCost() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        cashCost_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional sint32 gemCost = 6;
       private int gemCost_ ;
       public boolean hasGemCost() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getGemCost() {
         return gemCost_;
       }
       public Builder setGemCost(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         gemCost_ = value;
         onChanged();
         return this;
       }
       public Builder clearGemCost() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         gemCost_ = 0;
         onChanged();
         return this;
@@ -11048,64 +11105,64 @@ public final class EventMonsterProto {
       "seProto.UpdateMonsterHealthStatus\"U\n\031Upd" +
       "ateMonsterHealthStatus\022\013\n\007SUCCESS\020\001\022\033\n\027F" +
       "AIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003" +
-      "\"\215\002\n\027HealMonsterRequestProto\0220\n\006sender\030\001" +
+      "\"\237\002\n\027HealMonsterRequestProto\0220\n\006sender\030\001" +
       " \001(\0132 .com.lvl6.proto.MinimumUserProto\022:" +
       "\n\tumhDelete\030\002 \003(\0132\'.com.lvl6.proto.UserM" +
       "onsterHealingProto\022:\n\tumhUpdate\030\003 \003(\0132\'." +
       "com.lvl6.proto.UserMonsterHealingProto\0227" +
       "\n\006umhNew\030\004 \003(\0132\'.com.lvl6.proto.UserMons" +
-      "terHealingProto\022\017\n\007gemCost\030\005 \001(\005\"\262\002\n\030Hea",
-      "lMonsterResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022J\n\006statu" +
-      "s\030\002 \001(\0162:.com.lvl6.proto.HealMonsterResp" +
-      "onseProto.HealMonsterStatus\"\227\001\n\021HealMons" +
-      "terStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICI" +
-      "ENT_FUNDS\020\002\022%\n!FAIL_ALL_MONSTERS_ALREADY" +
-      "_HEALING\020\003\022!\n\035FAIL_ALL_MONSTERS_NONEXIST" +
-      "ENT\020\004\022\016\n\nFAIL_OTHER\020\005\"\304\001\n\'HealMonsterWai" +
-      "tTimeCompleteRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022\021\n\ti",
-      "sSpeedup\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005\022<" +
-      "\n\005umchp\030\004 \003(\0132-.com.lvl6.proto.UserMonst" +
-      "erCurrentHealthProto\"\306\002\n(HealMonsterWait" +
-      "TimeCompleteResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022j\n\006s" +
-      "tatus\030\002 \001(\0162Z.com.lvl6.proto.HealMonster" +
-      "WaitTimeCompleteResponseProto.HealMonste" +
-      "rWaitTimeCompleteStatus\"|\n!HealMonsterWa" +
-      "itTimeCompleteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAI" +
-      "L_HEALING_NOT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFI",
-      "CIENT_FUNDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\202\001\n\"AddMon" +
-      "sterToBattleTeamRequestProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\023" +
-      "\n\013teamSlotNum\030\002 \001(\005\022\025\n\ruserMonsterId\030\003 \001" +
-      "(\003\"\366\001\n#AddMonsterToBattleTeamResponsePro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022`\n\006status\030\002 \001(\0162P.com.lvl6." +
-      "proto.AddMonsterToBattleTeamResponseProt" +
-      "o.AddMonsterToBattleTeamStatus\";\n\034AddMon" +
-      "sterToBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF",
-      "AIL_OTHER\020\002\"r\n\'RemoveMonsterFromBattleTe" +
-      "amRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\025\n\ruserMonsterI" +
-      "d\030\003 \001(\003\"\212\002\n(RemoveMonsterFromBattleTeamR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022j\n\006status\030\002 \001(\0162Z" +
-      ".com.lvl6.proto.RemoveMonsterFromBattleT" +
-      "eamResponseProto.RemoveMonsterFromBattle" +
-      "TeamStatus\"@\n!RemoveMonsterFromBattleTea" +
-      "mStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"m\n#",
-      "BuyMonsterInventorySlotRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\024\n\014numPurchases\030\002 \001(\005\"\227\002\n$BuyMonst" +
-      "erInventorySlotResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022b" +
-      "\n\006status\030\002 \001(\0162R.com.lvl6.proto.BuyMonst" +
-      "erInventorySlotResponseProto.BuyMonsterI" +
-      "nventorySlotStatus\"Y\n\035BuyMonsterInventor" +
-      "ySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFI" +
-      "CIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021EventMo",
-      "nsterProto"
+      "terHealingProto\022\020\n\010cashCost\030\005 \001(\021\022\017\n\007gem",
+      "Cost\030\006 \001(\021\"\262\002\n\030HealMonsterResponseProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022J\n\006status\030\002 \001(\0162:.com.lvl6.pro" +
+      "to.HealMonsterResponseProto.HealMonsterS" +
+      "tatus\"\227\001\n\021HealMonsterStatus\022\013\n\007SUCCESS\020\001" +
+      "\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022%\n!FAIL_AL" +
+      "L_MONSTERS_ALREADY_HEALING\020\003\022!\n\035FAIL_ALL" +
+      "_MONSTERS_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\"" +
+      "\304\001\n\'HealMonsterWaitTimeCompleteRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min",
+      "imumUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gems" +
+      "ForSpeedup\030\003 \001(\005\022<\n\005umchp\030\004 \003(\0132-.com.lv" +
+      "l6.proto.UserMonsterCurrentHealthProto\"\306" +
+      "\002\n(HealMonsterWaitTimeCompleteResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022j\n\006status\030\002 \001(\0162Z.com.lvl6" +
+      ".proto.HealMonsterWaitTimeCompleteRespon" +
+      "seProto.HealMonsterWaitTimeCompleteStatu" +
+      "s\"|\n!HealMonsterWaitTimeCompleteStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\035\n\031FAIL_HEALING_NOT_COMPLETE",
+      "\020\002\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\003\022\016\n\nFAIL_" +
+      "OTHER\020\004\"\202\001\n\"AddMonsterToBattleTeamReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n" +
+      "\ruserMonsterId\030\003 \001(\003\"\366\001\n#AddMonsterToBat" +
+      "tleTeamResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022`\n\006status" +
+      "\030\002 \001(\0162P.com.lvl6.proto.AddMonsterToBatt" +
+      "leTeamResponseProto.AddMonsterToBattleTe" +
+      "amStatus\";\n\034AddMonsterToBattleTeamStatus",
+      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"r\n\'RemoveM" +
+      "onsterFromBattleTeamRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022\025\n\ruserMonsterId\030\003 \001(\003\"\212\002\n(RemoveMons" +
+      "terFromBattleTeamResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022j\n\006status\030\002 \001(\0162Z.com.lvl6.proto.Remove" +
+      "MonsterFromBattleTeamResponseProto.Remov" +
+      "eMonsterFromBattleTeamStatus\"@\n!RemoveMo" +
+      "nsterFromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016",
+      "\n\nFAIL_OTHER\020\002\"m\n#BuyMonsterInventorySlo" +
+      "tRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022\024\n\014numPurchases\030" +
+      "\002 \001(\005\"\227\002\n$BuyMonsterInventorySlotRespons" +
+      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022b\n\006status\030\002 \001(\0162R.com.l" +
+      "vl6.proto.BuyMonsterInventorySlotRespons" +
+      "eProto.BuyMonsterInventorySlotStatus\"Y\n\035" +
+      "BuyMonsterInventorySlotStatus\022\013\n\007SUCCESS" +
+      "\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_",
+      "OTHER\020\003B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11165,7 +11222,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_HealMonsterRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_HealMonsterRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "GemCost", },
+              new java.lang.String[] { "Sender", "UmhDelete", "UmhUpdate", "UmhNew", "CashCost", "GemCost", },
               com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto.class,
               com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto.Builder.class);
           internal_static_com_lvl6_proto_HealMonsterResponseProto_descriptor =

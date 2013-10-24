@@ -3,7 +3,6 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -35,7 +34,6 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -69,6 +67,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<UserMonsterHealingProto> umhDelete = reqProto.getUmhDeleteList();
     List<UserMonsterHealingProto> umhUpdate = reqProto.getUmhUpdateList();
     List<UserMonsterHealingProto> umhNew = reqProto.getUmhNewList();
+    int cashCost = reqProto.getCashCost();
+    int gemCost = reqProto.getGemCost();
 
     Map<Long, UserMonsterHealingProto> deleteMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);
     Map<Long, UserMonsterHealingProto> updateMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
@@ -96,15 +96,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	Map<Long, MonsterForUser> existingUserMonsters = RetrieveUtils
     			.monsterForUserRetrieveUtils().getSpecificUserMonsters(newIds);
     	
-      boolean legit = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
-      		alreadyHealing, alreadyEnhancing, deleteMap, updateMap, newMap);
+      boolean legit = checkLegit(resBuilder, aUser, userId,
+      		cashCost, gemCost, existingUserMonsters, alreadyHealing,
+      		alreadyEnhancing, deleteMap, updateMap, newMap);
 
       boolean successful = false;
       if(legit) {
     	  
 //        previousSilver = aUser.getCoins();
 //        previousGold = aUser.getDiamonds();
-    	  successful = writeChangesToDb(aUser, userId, deleteMap, updateMap, newMap);
+    	  successful = writeChangesToDb(aUser, userId, cashCost,
+    	  		gemCost, deleteMap, updateMap, newMap);
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
@@ -157,6 +159,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * 
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
+  		int cashCost, int gemCost,
   		Map<Long, MonsterForUser> existingUserMonsters,
   		Map<Long, MonsterHealingForUser> alreadyHealing,
   		Map<Long, MonsterEnhancingForUser> alreadyEnhancing,
@@ -167,6 +170,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("unexpected error: user is null. user=" + u + "\t deleteMap="+ deleteMap +
       		"\t updateMap=" + updateMap + "\t newMap=" + newMap);
       return false;
+    }
+    
+    //CHECK MONEY
+    int userGems = u.getDiamonds();
+    if (gemCost > userGems) {
+    	log.error("user error: user does not have enough gems. userGems="
+    			+ userGems + "\t gemCost=" + gemCost + "\t user=" + u);
+    	resBuilder.setStatus(HealMonsterStatus.FAIL_INSUFFICIENT_FUNDS);
+    	return false;
+    }
+    
+    // scenario can be user has insufficient cash/coin but has enough
+    // gems/gold to cover the difference
+    int userCash = u.getCoins();
+    if (cashCost > userCash && gemCost == 0) {
+    	//user doesn't have enough cash and is not paying gems.
+    	
+    	log.error("user error: user does not have enough cash. userCash="
+    			+ userCash + "\t cashCost=" + cashCost + "\t user=" + u);
+    	resBuilder.setStatus(HealMonsterStatus.FAIL_INSUFFICIENT_FUNDS);
+    	return false;
     }
     
     //retain only the userMonsters, the client sent, that are in healing
@@ -186,27 +210,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
     MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap, keepThingsInDomain, keepThingsNotInDomain);
     
-    //TODO: CHECK MONEY
     	
     resBuilder.setStatus(HealMonsterStatus.SUCCESS);
     return true;
   }
   
   private boolean writeChangesToDb(User u, int uId, 
+  		int cashCost, int gemCost,
 		  Map<Long, UserMonsterHealingProto> protoDeleteMap,
 		  Map<Long, UserMonsterHealingProto> protoUpdateMap,
 		  Map<Long, UserMonsterHealingProto> protoNewMap) {
 
 
-  	//TODO: CHARGE THE USER
-//	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
-//		  log.error("problem with updating user stats post-task. silverGained="
-//				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
-//				  ", clientTime=" + clientTime + ", user=" + u);
-//		  return false;
-//	  }
+  	//CHARGE THE USER
+  	log.info("user before funds change. u=" + u);
+  	int num = u.updateRelativeCoinsAndDiamonds(cashCost, gemCost);
+  	log.info("user after funds change. u=" + u);
+	  if (num != 1) {
+		  log.error("problem with updating user's funds. cashCost="
+				  + cashCost + ", gemCost=" + gemCost + ", user=" + u);
+		  return false;
+	  }
   	
-  	int num = 0;
 	  //delete the selected monsters from  the healing table, if there are
   	//any to delete
   	if (!protoDeleteMap.isEmpty()) {

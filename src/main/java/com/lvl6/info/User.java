@@ -111,189 +111,6 @@ public class User implements Serializable {
 	}
 
 
-	/*public boolean updateAbsoluteUserLocation(Location location) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LATITUDE, location.getLatitude());
-		absoluteParams.put(DBConstants.USER__LONGITUDE, location.getLongitude());
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.userLocation = location;
-			return true;
-		}
-		return false;
-	}*/
-
-
-	/*public boolean updateEquipped(UserEquip ue, boolean isPrestigeEquip) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		long userEquipId = ue.getId();
-		Equipment equipment = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(ue.getEquipId());
-
-		EquipType et = equipment.getType();
-		boolean isWeapon = (EquipType.WEAPON == et);
-		boolean isArmor = (EquipType.ARMOR == et);
-		boolean isAmulet = (EquipType.AMULET == et);
-
-		boolean isWeaponTwo = isWeapon && isPrestigeEquip;
-		boolean isArmorTwo = isArmor && isPrestigeEquip;
-		boolean isAmuletTwo = isAmulet && isPrestigeEquip;
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (isWeaponTwo) {
-			absoluteParams.put(DBConstants.USER__WEAPON_TWO_EQUIPPED_USER_EQUIP_ID, userEquipId);
-		} else if (isWeapon) {
-			absoluteParams.put(DBConstants.USER__WEAPON_EQUIPPED_USER_EQUIP_ID, userEquipId);
-		}
-		if (isArmorTwo) {
-			absoluteParams.put(DBConstants.USER__ARMOR_TWO_EQUIPPED_USER_EQUIP_ID, userEquipId);      
-		} else if (isArmor) {
-			absoluteParams.put(DBConstants.USER__ARMOR_EQUIPPED_USER_EQUIP_ID, userEquipId);
-		}
-		if (isAmuletTwo) {
-			absoluteParams.put(DBConstants.USER__AMULET_TWO_EQUIPPED_USER_EQUIP_ID, userEquipId);
-		} else if (isAmulet) {
-			absoluteParams.put(DBConstants.USER__AMULET_EQUIPPED_USER_EQUIP_ID, userEquipId);
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			if (isWeaponTwo) {
-				this.weaponTwoEquippedUserEquipId = userEquipId;
-			} else if (isWeapon) {
-				this.weaponEquippedUserEquipId = userEquipId;
-			}
-			if (isArmorTwo) {
-				this.armorTwoEquippedUserEquipId = userEquipId;
-			} else if (equipment.getType() == EquipType.ARMOR) {
-				this.armorEquippedUserEquipId = userEquipId;
-			}
-			if (isAmuletTwo) {
-				this.amuletTwoEquippedUserEquipId = userEquipId;
-			} else if (isAmulet) {
-				this.amuletEquippedUserEquipId = userEquipId;
-			}
-
-			return true;
-		}
-		return false;
-	}*/
-
-	/*public boolean updateAbsoluteAllEquipped(int weaponEquippedUserEquipId, int armorEquippedUserEquipId, 
-			int amuletEquippedUserequipId) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__WEAPON_EQUIPPED_USER_EQUIP_ID, weaponEquippedUserEquipId);
-		absoluteParams.put(DBConstants.USER__ARMOR_EQUIPPED_USER_EQUIP_ID, armorEquippedUserEquipId);      
-		absoluteParams.put(DBConstants.USER__AMULET_EQUIPPED_USER_EQUIP_ID, amuletEquippedUserequipId);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.weaponEquippedUserEquipId = weaponEquippedUserEquipId;
-			this.armorEquippedUserEquipId = armorEquippedUserEquipId;
-			this.amuletEquippedUserEquipId = amuletEquippedUserequipId;
-			return true;
-		}
-		return false;
-	}*/
-
-	/*public boolean updateUnequip(boolean isWeapon, boolean isArmor, boolean isAmulet,
-			boolean isWeaponTwo, boolean isArmorTwo, boolean isAmuletTwo) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (isWeapon) {
-			absoluteParams.put(DBConstants.USER__WEAPON_EQUIPPED_USER_EQUIP_ID, null);
-		}
-		if (isArmor) {
-			absoluteParams.put(DBConstants.USER__ARMOR_EQUIPPED_USER_EQUIP_ID, null);      
-		}
-		if (isAmulet) {
-			absoluteParams.put(DBConstants.USER__AMULET_EQUIPPED_USER_EQUIP_ID, null);
-		}
-		//for players that have prestige
-		if (isWeaponTwo) {
-			absoluteParams.put(DBConstants.USER__WEAPON_TWO_EQUIPPED_USER_EQUIP_ID, null);
-		}
-		if (isArmorTwo) {
-			absoluteParams.put(DBConstants.USER__ARMOR_TWO_EQUIPPED_USER_EQUIP_ID, null);      
-		}
-		if (isAmuletTwo) {
-			absoluteParams.put(DBConstants.USER__AMULET_TWO_EQUIPPED_USER_EQUIP_ID, null);
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
-		Log.info("				The number of rows updated: " + numUpdated);
-		if (numUpdated == 1) {
-			if (isWeapon) {
-				this.weaponEquippedUserEquipId = ControllerConstants.NOT_SET;
-			}
-			if (isArmor) {
-				this.armorEquippedUserEquipId = ControllerConstants.NOT_SET;
-			}
-			if (isAmulet) {
-				this.amuletEquippedUserEquipId = ControllerConstants.NOT_SET;
-			}
-			if (isWeaponTwo) {
-				this.weaponTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-			}
-			if (isArmorTwo) {
-				this.armorTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-			}
-			if (isAmuletTwo) {
-				this.amuletTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-			}
-			return true;
-		}
-		else if(0 == numUpdated && 
-				!(isWeapon || isArmor || isAmulet || isWeaponTwo|| isArmorTwo || isAmuletTwo)) {
-			return true;
-		}
-		return false;
-	}*/
-
-	/*public boolean updateRelativeDiamondsAbsoluteLastshortlicensepurchasetimeLastlonglicensepurchasetime(int diamondChange, 
-			Timestamp lastShortLicensePurchaseTime, Timestamp lastLongLicensePurchaseTime) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (lastShortLicensePurchaseTime != null) {
-			absoluteParams.put(DBConstants.USER__LAST_SHORT_LICENSE_PURCHASE_TIME, lastShortLicensePurchaseTime);
-		}
-		if (lastLongLicensePurchaseTime != null) {
-			absoluteParams.put(DBConstants.USER__LAST_LONG_LICENSE_PURCHASE_TIME, lastLongLicensePurchaseTime);
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.diamonds += diamondChange;
-			if (lastShortLicensePurchaseTime != null) {
-				this.lastShortLicensePurchaseTime = lastShortLicensePurchaseTime;
-			}
-			if (lastLongLicensePurchaseTime != null) {
-				this.lastLongLicensePurchaseTime = lastLongLicensePurchaseTime;
-			}
-			return true;
-		}
-		return false;
-	}*/
 
 	public boolean updateSetdevicetoken(String deviceToken) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -365,24 +182,6 @@ public class User implements Serializable {
 		return false;
 	}
 
-	/*public boolean updateRelativeNumGroupChatsRemainingAndDiamonds(int numGroupChatsRemainingChange, int diamondChange) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
-		relativeParams.put(DBConstants.USER__NUM_GROUP_CHATS_REMAINING, numGroupChatsRemainingChange);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.diamonds += diamondChange;
-			this.numGroupChatsRemaining += numGroupChatsRemainingChange;
-			return true;
-		}
-		return false;
-	}*/
-
 	public boolean updateRelativeBadgeAbsoluteLastBattleNotificationTime(int badgeChange, Timestamp newLastBattleNotificationTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -403,25 +202,6 @@ public class User implements Serializable {
 		return false;
 	}
 
-	/*public boolean updateRelativeBadgeAbsoluteLastMarketplaceNotificationTime(int badgeChange, Timestamp newLastMktNotificationTime) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_MARKETPLACE_NOTIFICATION_TIME, newLastMktNotificationTime);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.numBadges += badgeChange;
-			this.lastBattleNotificationTime = newLastMktNotificationTime;
-			return true;
-		}
-		return false;
-	}*/
 
 	public boolean updateRelativeBadgeAbsoluteLastWallPostNotificationTime(int badgeChange, Timestamp newLastWallNotificationTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -546,175 +326,6 @@ public class User implements Serializable {
 	}*;
 
 
-	/*
-	 * used for refilling energy
-	 */
-	/*public boolean updateLastenergyrefilltimeEnergy(Timestamp lastEnergyRefillTime, int energyChange) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, lastEnergyRefillTime);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__ENERGY, energyChange);
-
-		if (absoluteParams.size() == 0) {
-			absoluteParams = null;
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.lastEnergyRefillTime = lastEnergyRefillTime;
-			this.energy += energyChange;
-			return true;
-		}
-		return false;
-	}*/
-
-	/*
-	 * used for using diamonds to refill stat
-	 */
-	/*public boolean updateRelativeDiamondsRestoreStat (int diamondChange, StatType statType) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (statType == StatType.ENERGY) {
-			absoluteParams.put(DBConstants.USER__ENERGY, energyMax);
-		} 
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, 
-				absoluteParams, conditionParams, "and");
-		if (numUpdated == 1) {
-			if (statType == StatType.ENERGY) {
-				this.energy = energyMax;
-			} 
-			this.diamonds += diamondChange;
-
-			//tracking history of refills
-			boolean staminaRefill = (statType == StatType.STAMINA);
-			//goldCost (last arg) corresponds to either 
-			//ControllerConstants.Refill_stat_with_diamonds__diamond_cost_for_energy/stamina_refill
-			InsertUtils.get().insertIntoRefillStatHistory(this.id, staminaRefill, energyMax, -diamondChange);
-
-			return true;
-		}
-		return false;
-	}*/
-
-	/*
-	 * used for leveling up
-	 */
-	/*public boolean updateAbsoluteRestoreEnergyStaminaRelativeUpdateSkillPoints(int skillPointsChange, Timestamp levelUpTime) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = null;
-		if (skillPointsChange > 0) {
-			relativeParams = new HashMap<String, Object>();
-			//relativeParams.put(DBConstants.USER__SKILL_POINTS, skillPointsChange);
-		}
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__ENERGY, energyMax);
-		absoluteParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, levelUpTime);
-		//absoluteParams.put(DBConstants.USER__LAST_STAMINA_REFILL_TIME, levelUpTime);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.energy = energyMax;
-			this.lastEnergyRefillTime = levelUpTime;
-			return true;
-		}
-		return false;
-	}*/
-
-	/*
-	 * used for using skill points
-	 */
-	/*public boolean updateRelativeEnergyEnergyMax(int energyChange) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-
-		if (energyChange > 0) {
-			relativeParams.put(DBConstants.USER__ENERGY, energyChange);
-			relativeParams.put(DBConstants.USER__ENERGY_MAX, energyChange);
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.energy += energyChange;
-			this.energyMax += energyChange;
-			return true;
-		}
-		return false;
-	}*/
-
-
-	//  /*
-	//   * used for using skill points
-	//   */
-	//  public boolean updateRelativeEnergyEnergymaxStaminaStaminamaxSkillPoints 
-	//  (int energyChange, int energyMaxChange, 
-	//      int staminaChange, int staminaMaxChange, int skillPointsChange) {
-	//    Map <String, Object> conditionParams = new HashMap<String, Object>();
-	//    conditionParams.put(DBConstants.USER__ID, id);
-	//
-	//    Map <String, Object> relativeParams = new HashMap<String, Object>();
-	//
-	//    if (energyChange > 0) relativeParams.put(DBConstants.USER__ENERGY, energyChange);
-	//    if (energyMaxChange > 0) relativeParams.put(DBConstants.USER__ENERGY_MAX, energyMaxChange);
-	//    if (staminaChange > 0) relativeParams.put(DBConstants.USER__STAMINA, staminaChange);
-	//    if (staminaMaxChange > 0) relativeParams.put(DBConstants.USER__STAMINA_MAX, staminaMaxChange);
-	//
-	//    relativeParams.put(DBConstants.USER__SKILL_POINTS, skillPointsChange);
-	//
-	//    int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
-	//        conditionParams, "and");
-	//    if (numUpdated == 1) {
-	//      this.energy += energyChange;
-	//      this.energyMax += energyMaxChange;
-	//      this.stamina += staminaChange;
-	//      this.staminaMax += staminaMaxChange;
-	//      this.skillPoints += skillPointsChange;
-	//      return true;
-	//    }
-	//    return false;
-	//  }
-	//
-	//  /*
-	//   * used for using skill points
-	//   */
-	//  public boolean updateRelativeAttackDefenseSkillPoints (int attackChange, int defenseChange, 
-	//      int skillPointsChange) {
-	//    Map <String, Object> conditionParams = new HashMap<String, Object>();
-	//    conditionParams.put(DBConstants.USER__ID, id);
-	//
-	//    Map <String, Object> relativeParams = new HashMap<String, Object>();
-	//
-	//    if (attackChange > 0) relativeParams.put(DBConstants.USER__ATTACK, attackChange);
-	//    if (defenseChange > 0) relativeParams.put(DBConstants.USER__DEFENSE, defenseChange);
-	//    relativeParams.put(DBConstants.USER__SKILL_POINTS, skillPointsChange);
-	//
-	//    int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
-	//        conditionParams, "and");
-	//    if (numUpdated == 1) {
-	//      this.attack += attackChange;
-	//      this.defense += defenseChange;
-	//      this.skillPoints += skillPointsChange;
-	//      return true;
-	//    }
-	//    return false;
-	//  }
 
 	/*
 	 * used for purchasing and selling structures, redeeming quests
@@ -742,99 +353,6 @@ public class User implements Serializable {
 	}
 
 
-	/*
-	 * used for marketplace purchase
-	 */
-	/*public boolean updateMoveMarketplaceEarningsToRealStatResetNummarketplacesalesunredeemed() {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-
-		relativeParams.put(DBConstants.USER__DIAMONDS, marketplaceDiamondsEarnings);
-		relativeParams.put(DBConstants.USER__COINS, marketplaceCoinsEarnings);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-
-		absoluteParams.put(DBConstants.USER__MARKETPLACE_DIAMONDS_EARNINGS, 0);
-		absoluteParams.put(DBConstants.USER__MARKETPLACE_COINS_EARNINGS, 0);
-		absoluteParams.put(DBConstants.USER__NUM_MARKETPLACE_SALES_UNREDEEMED, 0);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.diamonds += marketplaceDiamondsEarnings;
-			this.coins += marketplaceCoinsEarnings;
-			this.marketplaceDiamondsEarnings = 0;
-			this.marketplaceCoinsEarnings = 0;
-			return true;
-		}
-		return false;
-	}*/
-
-	/*
-	 * used for marketplace purchase
-	 */
-	/*public boolean updateRelativeDiamondsearningsCoinsearningsNumpostsinmarketplaceNummarketplacesalesunredeemedNaive 
-	(int diamondEarningsChange, int coinEarningsChange, 
-			int numPostsInMarketplaceChange, int numMarketplaceSalesUnredeemedChange, boolean changeNumPostsInMarketplace) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-
-		relativeParams.put(DBConstants.USER__MARKETPLACE_DIAMONDS_EARNINGS, diamondEarningsChange);
-		relativeParams.put(DBConstants.USER__MARKETPLACE_COINS_EARNINGS, coinEarningsChange);
-		//relativeParams.put(DBConstants.USER__NUM_POSTS_IN_MARKETPLACE, numPostsInMarketplaceChange);
-		relativeParams.put(DBConstants.USER__NUM_MARKETPLACE_SALES_UNREDEEMED, numMarketplaceSalesUnredeemedChange);
-
-		if(changeNumPostsInMarketplace) {
-			absoluteParams.put(DBConstants.USER__NUM_POSTS_IN_MARKETPLACE, numPostsInMarketplaceChange);
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.marketplaceDiamondsEarnings += diamondEarningsChange;
-			this.marketplaceCoinsEarnings += coinEarningsChange;
-			this.numPostsInMarketplace = numPostsInMarketplaceChange;
-			this.numMarketplaceSalesUnredeemed += numMarketplaceSalesUnredeemedChange;
-			return true;
-		}
-		return false;
-	}*/
-
-
-	/*
-	 * used for marketplace
-	 */
-	/*public boolean updateRelativeDiamondsCoinsNumpostsinmarketplaceNaive (int diamondChange, int coinChange, 
-			int numPostsInMarketplaceChange, boolean changeNumPostsInMarketplace) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-
-		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
-		relativeParams.put(DBConstants.USER__COINS, coinChange);
-		//relativeParams.put(DBConstants.USER__NUM_POSTS_IN_MARKETPLACE, numPostsInMarketplaceChange);
-
-		if(changeNumPostsInMarketplace) {
-			absoluteParams.put(DBConstants.USER__NUM_POSTS_IN_MARKETPLACE, numPostsInMarketplaceChange);
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.coins += coinChange;
-			this.diamonds += diamondChange;
-			this.numPostsInMarketplace = numPostsInMarketplaceChange;
-			return true;
-		}
-		return false;
-	}*/
 
 
 	/*
@@ -892,29 +410,6 @@ public class User implements Serializable {
 		return false;
 	}
 
-	/*public boolean updateRelativeCoinsAdcolonyvideoswatched (int coinChange, int numAdColonyVideosWatched) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-
-		if (coinChange != 0) {
-			relativeParams.put(DBConstants.USER__COINS, coinChange);
-		}
-		if (numAdColonyVideosWatched != 0) {
-			relativeParams.put(DBConstants.USER__NUM_ADCOLONY_VIDEOS_WATCHED, numAdColonyVideosWatched); 
-		}
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.coins += coinChange;
-			this.numAdColonyVideosWatched += numAdColonyVideosWatched;
-			return true;
-		}
-		return false;
-	}*/
-
 	/*
 	 * used for in app purchases, armory, finishingnormstructbuild
 	 */
@@ -936,7 +431,28 @@ public class User implements Serializable {
 		}
 		return false;
 	}
-
+	
+	public int updateRelativeCoinsAndDiamonds(int coinsDelta, int diamondsDelta) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		if (diamondsDelta != 0) {
+			relativeParams.put(DBConstants.USER__DIAMONDS, diamondsDelta);
+		}
+		if (coinsDelta != 0) {
+			relativeParams.put(DBConstants.USER__COINS, coinsDelta);
+		}
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null,
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.diamonds += diamondsDelta;
+			this.coins += coinsDelta;
+		}
+		return numUpdated;
+	}
+	
 	public boolean updateRelativeDiamondsBeginnerSale (int diamondChange, boolean isBeginnerSale) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -981,27 +497,6 @@ public class User implements Serializable {
 		}
 		return false;
 	}
-
-
-	/*public boolean updateLastGoldmineRetrieval (int diamondChange, Timestamp lastGoldRetrieval) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_GOLDMINE_RETRIEVAL, lastGoldRetrieval);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.diamonds += diamondChange;
-			this.lastGoldmineRetrieval = lastGoldRetrieval;
-			return true;
-		}
-		return false;
-	}*/
 
 
 	public boolean updateRelativeCoinsCoinsretrievedfromstructs (int coinChange) {
@@ -1068,27 +563,6 @@ public class User implements Serializable {
 		}
 		return false;
 	}
-
-	/*
-	 * used for vault transactions
-	 */
-	/*public boolean updateRelativeCoinsVault (int coinsChange, int vaultChange) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		if (coinsChange != 0) relativeParams.put(DBConstants.USER__COINS, coinsChange);
-		if (vaultChange != 0) relativeParams.put(DBConstants.USER__VAULT_BALANCE, vaultChange);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.coins += coinsChange;
-			this.vaultBalance += vaultChange;
-			return true;
-		}
-		return false;
-	}*/
 
 	/*
 	 * used for battles
@@ -1162,6 +636,7 @@ public class User implements Serializable {
 		if (0 != defensesLostDelta) {
 			relativeParams.put(DBConstants.USER__DEFENSES_WON, defensesLostDelta);
 		}
+		//TODO: FINISH THIS
 	}
 	
 	//returns new shield end time if shield status changes
@@ -1264,54 +739,6 @@ public class User implements Serializable {
 		return false;
 	}
 
-	//  public boolean resetSkillPoints(int oldEnergy, int oldStamina, int relativeDiamondCost) {
-	//    // TODO Auto-generated method stub
-	//    Map <String, Object> conditionParams = new HashMap<String, Object>();
-	//    conditionParams.put(DBConstants.USER__ID, id);
-	//
-	//    Map <String, Object> absoluteParams = new HashMap<String, Object>();
-	//    int initialAttack = ControllerConstants.TUTORIAL__ARCHER_INIT_ATTACK;
-	//    int initialDefense = ControllerConstants.TUTORIAL__ARCHER_INIT_DEFENSE;
-	//    int initialEnergy = Math.min(oldEnergy, ControllerConstants.TUTORIAL__INIT_ENERGY);
-	//    int initialStamina = Math.min(oldStamina, ControllerConstants.TUTORIAL__INIT_STAMINA);
-	//    int returnSkillPoints = (this.level-1)*ControllerConstants.LEVEL_UP__SKILL_POINTS_GAINED;
-	//
-	//    if (this.type == UserType.GOOD_WARRIOR || this.type == UserType.BAD_WARRIOR) {
-	//      initialAttack = ControllerConstants.TUTORIAL__WARRIOR_INIT_ATTACK;
-	//      initialDefense = ControllerConstants.TUTORIAL__WARRIOR_INIT_DEFENSE;
-	//    } else if (this.type == UserType.GOOD_MAGE || this.type == UserType.BAD_MAGE) {
-	//      initialAttack = ControllerConstants.TUTORIAL__MAGE_INIT_ATTACK;
-	//      initialDefense = ControllerConstants.TUTORIAL__MAGE_INIT_DEFENSE;
-	//    }
-	//
-	//    absoluteParams.put(DBConstants.USER__ATTACK, initialAttack);
-	//    absoluteParams.put(DBConstants.USER__DEFENSE, initialDefense);
-	//    absoluteParams.put(DBConstants.USER__ENERGY_MAX, ControllerConstants.TUTORIAL__INIT_ENERGY);
-	//    absoluteParams.put(DBConstants.USER__STAMINA_MAX, ControllerConstants.TUTORIAL__INIT_STAMINA);
-	//    absoluteParams.put(DBConstants.USER__ENERGY, initialEnergy);
-	//    absoluteParams.put(DBConstants.USER__STAMINA, initialStamina);
-	//    absoluteParams.put(DBConstants.USER__SKILL_POINTS, returnSkillPoints);
-	//
-	//    Map <String, Object> relativeParams = new HashMap<String, Object>();
-	//    relativeParams.put(DBConstants.USER__DIAMONDS, relativeDiamondCost);
-	//
-	//    int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
-	//        relativeParams, absoluteParams, conditionParams, "and");
-	//    if (numUpdated == 1) {
-	//      this.attack = initialAttack;
-	//      this.defense = initialDefense;
-	//      this.energyMax = ControllerConstants.TUTORIAL__INIT_ENERGY;
-	//      this.energy = initialEnergy;
-	//      this.staminaMax = ControllerConstants.TUTORIAL__INIT_STAMINA;
-	//      this.stamina = initialStamina;
-	//      this.skillPoints = returnSkillPoints;
-	//      this.diamonds += relativeDiamondCost;
-	//      return true;
-	//    }
-	//
-	//    return false;
-	//  }
-
 	public boolean updateNumAdditionalMonsterSlotsAndDiamonds(int newAdditionalMonsterSlots, int cost) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
@@ -1332,71 +759,6 @@ public class User implements Serializable {
 		return false;
 	}
 
-	//  public boolean prestige(int oldEnergy, int oldStamina) {
-	//    //copied most from reset stat method named resetSkillPoints(...)
-	//    Map <String, Object> conditionParams = new HashMap<String, Object>();
-	//    conditionParams.put(DBConstants.USER__ID, id);
-	//
-	//    Map <String, Object> relativeParams = new HashMap<String, Object>();
-	//    //increment prestige level
-	//    relativeParams.put(DBConstants.USER__PRESTIGE_LEVEL, 1);
-	//    
-	//    Map <String, Object> absoluteParams = new HashMap<String, Object>();
-	//    //skill points need to be reset
-	//    int initialAttack = ControllerConstants.TUTORIAL__ARCHER_INIT_ATTACK;
-	//    int initialDefense = ControllerConstants.TUTORIAL__ARCHER_INIT_DEFENSE;
-	//    int initialEnergy = Math.min(oldEnergy, ControllerConstants.TUTORIAL__INIT_ENERGY);
-	//    int initialStamina = Math.min(oldStamina, ControllerConstants.TUTORIAL__INIT_STAMINA);
-	//    int returnSkillPoints = 0;
-	//
-	//    if (this.type == UserType.GOOD_WARRIOR || this.type == UserType.BAD_WARRIOR) {
-	//      initialAttack = ControllerConstants.TUTORIAL__WARRIOR_INIT_ATTACK;
-	//      initialDefense = ControllerConstants.TUTORIAL__WARRIOR_INIT_DEFENSE;
-	//    } else if (this.type == UserType.GOOD_MAGE || this.type == UserType.BAD_MAGE) {
-	//      initialAttack = ControllerConstants.TUTORIAL__MAGE_INIT_ATTACK;
-	//      initialDefense = ControllerConstants.TUTORIAL__MAGE_INIT_DEFENSE;
-	//    }
-	//    
-	//    absoluteParams.put(DBConstants.USER__LEVEL, 1);
-	//    absoluteParams.put(DBConstants.USER__ATTACK, initialAttack);
-	//    absoluteParams.put(DBConstants.USER__DEFENSE, initialDefense);
-	//    absoluteParams.put(DBConstants.USER__ENERGY_MAX, ControllerConstants.TUTORIAL__INIT_ENERGY);
-	//    absoluteParams.put(DBConstants.USER__STAMINA_MAX, ControllerConstants.TUTORIAL__INIT_STAMINA);
-	//    absoluteParams.put(DBConstants.USER__ENERGY, initialEnergy);
-	//    absoluteParams.put(DBConstants.USER__STAMINA, initialStamina);
-	//    absoluteParams.put(DBConstants.USER__SKILL_POINTS, returnSkillPoints);
-	//    absoluteParams.put(DBConstants.USER__EXPERIENCE, 0);
-	//    
-	//    //equips equipped need to be reset
-	//    absoluteParams.put(DBConstants.USER__WEAPON_EQUIPPED_USER_EQUIP_ID, null);
-	//    absoluteParams.put(DBConstants.USER__WEAPON_TWO_EQUIPPED_USER_EQUIP_ID, null);
-	//    absoluteParams.put(DBConstants.USER__ARMOR_EQUIPPED_USER_EQUIP_ID, null);
-	//    absoluteParams.put(DBConstants.USER__ARMOR_TWO_EQUIPPED_USER_EQUIP_ID, null);
-	//    absoluteParams.put(DBConstants.USER__AMULET_EQUIPPED_USER_EQUIP_ID, null);
-	//    absoluteParams.put(DBConstants.USER__AMULET_TWO_EQUIPPED_USER_EQUIP_ID, null);
-	//
-	//    int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
-	//        relativeParams, absoluteParams, conditionParams, "and");
-	//    if (numUpdated == 1) {
-	//      this.attack = initialAttack;
-	//      this.defense = initialDefense;
-	//      this.energyMax = ControllerConstants.TUTORIAL__INIT_ENERGY;
-	//      this.energy = initialEnergy;
-	//      this.staminaMax = ControllerConstants.TUTORIAL__INIT_STAMINA;
-	//      this.stamina = initialStamina;
-	//      this.skillPoints = returnSkillPoints;
-	//      this.weaponEquippedUserEquipId = ControllerConstants.NOT_SET;
-	//      this.weaponTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-	//      this.armorEquippedUserEquipId = ControllerConstants.NOT_SET;
-	//      this.armorTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-	//      this.amuletEquippedUserEquipId = ControllerConstants.NOT_SET;
-	//      this.amuletTwoEquippedUserEquipId = ControllerConstants.NOT_SET;
-	//      this.prestigeLevel += 1;
-	//      return true;
-	//    }
-	//
-	//    return false;
-	//  }
 
 	public boolean updateElo(int newElo) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();

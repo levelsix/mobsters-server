@@ -96,7 +96,10 @@ message HealMonsterRequestProto {
 	repeated UserMonsterHealingProto umhNew = 4;
 	
 	//take away all cash/silver then take away gems
-	optional int32 gemCost = 5;
+	//if negative, then take coins away, if positive then refund
+	optional sint32 cashCost = 5; 
+	//if negative, then take diamonds away, if positive then refund
+	optional sint32 gemCost = 6;
 }
 
 message HealMonsterResponseProto {

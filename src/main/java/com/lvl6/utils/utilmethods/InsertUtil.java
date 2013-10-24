@@ -41,8 +41,6 @@ public interface InsertUtil {
 //			Timestamp startTimeOfEnhancement);
 
 
-//	public abstract boolean insertUnredeemedUserQuest(int userId, int questId);
-
 	public abstract int insertUpdateUnredeemedUserQuest(int userId, int questId,
       int progress, boolean isComplete);
 	

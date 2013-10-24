@@ -293,28 +293,6 @@ public class InsertUtils implements InsertUtil{
 //    return blacksmithAttemptId;
 //  }
 
-
-  /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.InsertUtil#insertUnredeemedUserQuest(int, int, boolean, boolean)
-   */
-//  @Override
-  /*@Caching(evict={//@CacheEvict(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
-//  public boolean insertUnredeemedUserQuest(int userId, int questId,
-//      boolean hasNoRequiredTasks, boolean hasNoRequiredDefeatTypeJobs) {
-//    Map<String, Object> insertParams = new HashMap<String, Object>();
-//    insertParams.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
-//    insertParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
-//    insertParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
-//
-//    int numInserted = DBConnection.get().insertIntoTableBasic(
-//        DBConstants.TABLE_QUEST_FOR_USER, insertParams);
-//    if (numInserted == 1) {
-//      return true;
-//    }
-//    return false;
-//  }
   
   @Override
   public int insertUpdateUnredeemedUserQuest(int userId, int questId,

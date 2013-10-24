@@ -22,8 +22,9 @@ message QuestAcceptResponseProto {
 
      enum QuestAcceptStatus {
           SUCCESS = 1;
-          NOT_AVAIL_TO_USER = 2;
-          OTHER_FAIL = 3;
+          FAIL_NOT_AVAIL_TO_USER = 2;
+          FAIL_ALREADY_ACCEPTED = 3;
+          FAIL_OTHER = 4;
      }
 }
 
@@ -33,6 +34,7 @@ message QuestProgressRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 questId = 2;
 	optional int32 currentProgress = 3;
+	
 }
 
 																						//DONE

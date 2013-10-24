@@ -24,6 +24,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
+import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 
   @Component @DependsOn("gameServer") public class QuestAcceptController extends EventController {
@@ -64,6 +65,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
 
     QuestAcceptResponseProto.Builder resBuilder = QuestAcceptResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
+    resBuilder.setStatus(QuestAcceptStatus.FAIL_OTHER);
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
@@ -71,7 +73,8 @@ import com.lvl6.utils.utilmethods.QuestUtils;
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
 
-      boolean legitAccept = checkLegitAccept(resBuilder, user, quest);
+      boolean legitAccept = checkLegitAccept(resBuilder,
+      		user, userId, quest, questId);
 
       if (legitAccept) resBuilder.setCityIdOfAcceptedQuest(quest.getCityId());
       
@@ -81,10 +84,7 @@ import com.lvl6.utils.utilmethods.QuestUtils;
       server.writeEvent(resEvent);
 
       if (legitAccept) {
-//      	
-//        QuestForUser uq = new QuestForUser(userId, questId, isRedeemed, isComplete, progress);
-//        writeChangesToDB(uq);
-//        QuestUtils.checkQuestCompleteAndMaybeSendIfJustCompleted(server, quest, uq, senderProto, true, null);
+        writeChangesToDB(userId, questId, quest);
       }
 
     } catch (Exception e) {
@@ -94,15 +94,9 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     }
   }
 
-  private void writeChangesToDB(QuestForUser uq) {
-//    if (!insertUtils.insertUnredeemedUserQuest(uq.getUserId(), uq.getQuestId(), uq.isTasksComplete(), uq.isDefeatTypeJobsComplete())) {
-//      log.error("problem with inserting unredeemd user quest: " + uq);
-//    }
-  }
-
-  private boolean checkLegitAccept(Builder resBuilder, User user, Quest quest) {
+  private boolean checkLegitAccept(Builder resBuilder, User user,
+  		int userId, Quest quest, int questId) {
     if (user == null || quest == null) {
-      resBuilder.setStatus(QuestAcceptStatus.OTHER_FAIL);
       log.error("parameter passed in is null. user=" + user + ", quest=" + quest);
       return false;
     }
@@ -110,25 +104,43 @@ import com.lvl6.utils.utilmethods.QuestUtils;
     List<Integer> inProgressQuestIds = new ArrayList<Integer>();
     List<Integer> redeemedQuestIds = new ArrayList<Integer>();
 
-//    if (inProgressAndRedeemedUserQuests != null) {
-//      for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
-//        if (uq.isRedeemed()) {
-//          redeemedQuestIds.add(uq.getQuestId());
-//        } else {
-//          inProgressQuestIds.add(uq.getQuestId());  
-//        }
-//      }
-//      List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds, inProgressQuestIds);
-//      if (availableQuestIds != null && availableQuestIds.contains(quest.getId())) {
-//        resBuilder.setStatus(QuestAcceptStatus.SUCCESS);
-//        return true;
-//      } else {
-//        resBuilder.setStatus(QuestAcceptStatus.NOT_AVAIL_TO_USER);
-//        log.error("quest with id " + quest.getId() + " is not available to user");
-//        return false;
-//      }
-//    }
-    resBuilder.setStatus(QuestAcceptStatus.OTHER_FAIL);
-    return false;
+    if (inProgressAndRedeemedUserQuests != null) {
+      for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
+        if (uq.isRedeemed()) {
+          redeemedQuestIds.add(uq.getQuestId());
+        } else {
+          inProgressQuestIds.add(uq.getQuestId());  
+        }
+      }
+      List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds, inProgressQuestIds);
+      if (availableQuestIds != null && availableQuestIds.contains(quest.getId())) {
+        resBuilder.setStatus(QuestAcceptStatus.SUCCESS);
+        return true;
+      } else {
+        resBuilder.setStatus(QuestAcceptStatus.FAIL_NOT_AVAIL_TO_USER);
+        log.error("quest with id " + quest.getId() + " is not available to user");
+        return false;
+      }
+    }
+    
+    if (inProgressQuestIds.contains(questId)) {
+    	log.error("db says user already accepted this quest. quest=" + quest);
+    	resBuilder.setStatus(QuestAcceptStatus.FAIL_ALREADY_ACCEPTED);
+    	return false;
+    }
+    
+    resBuilder.setStatus(QuestAcceptStatus.SUCCESS);
+    return true;
   }
+
+  private void writeChangesToDB(int userId, int questId, Quest quest) {
+  	int progress = 0;
+  	boolean isComplete = false;
+  	int num = InsertUtils.get().insertUpdateUnredeemedUserQuest(
+  			userId, questId, progress, isComplete);
+  	
+  	log.info("num quests inserted into user_quests: " + num + 
+  			"\t quest inserted: " + quest);
+  }
+  
 }

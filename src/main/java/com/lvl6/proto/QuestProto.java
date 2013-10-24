@@ -116,12 +116,12 @@ public final class QuestProto {
     public enum QuestType
         implements com.google.protobuf.ProtocolMessageEnum {
       COLLECT_MONSTER(0, 1),
-      COLLECT_AND_DONATE_MONSTER(1, 2),
+      DONATE_MONSTER(1, 2),
       KILL_MONSTER(2, 3),
       ;
       
       public static final int COLLECT_MONSTER_VALUE = 1;
-      public static final int COLLECT_AND_DONATE_MONSTER_VALUE = 2;
+      public static final int DONATE_MONSTER_VALUE = 2;
       public static final int KILL_MONSTER_VALUE = 3;
       
       
@@ -130,7 +130,7 @@ public final class QuestProto {
       public static QuestType valueOf(int value) {
         switch (value) {
           case 1: return COLLECT_MONSTER;
-          case 2: return COLLECT_AND_DONATE_MONSTER;
+          case 2: return DONATE_MONSTER;
           case 3: return KILL_MONSTER;
           default: return null;
         }
@@ -162,7 +162,7 @@ public final class QuestProto {
       }
       
       private static final QuestType[] VALUES = {
-        COLLECT_MONSTER, COLLECT_AND_DONATE_MONSTER, KILL_MONSTER, 
+        COLLECT_MONSTER, DONATE_MONSTER, KILL_MONSTER, 
       };
       
       public static QuestType valueOf(
@@ -3390,7 +3390,7 @@ public final class QuestProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Quest.proto\022\016com.lvl6.proto\032\tJob.proto" +
-      "\"\256\004\n\016FullQuestProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006" +
+      "\"\242\004\n\016FullQuestProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006" +
       "cityId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023\n\013descriptio" +
       "n\030\004 \001(\t\022\024\n\014doneResponse\030\005 \001(\t\0225\n\016acceptD" +
       "ialogue\030\006 \001(\0132\035.com.lvl6.proto.DialogueP" +
@@ -3401,22 +3401,21 @@ public final class QuestProto {
       "d\030\014 \001(\005\022\027\n\017monsterIdReward\030\r \001(\005\022\031\n\021isCo",
       "mpleteMonster\030\016 \001(\010\022\035\n\025questsRequiredFor" +
       "This\030\017 \003(\005\022\035\n\025questGiverImageSuffix\030\020 \001(" +
-      "\t\022\020\n\010priority\030\021 \001(\005\022\020\n\010carrotId\030\022 \001(\t\"R\n" +
-      "\tQuestType\022\023\n\017COLLECT_MONSTER\020\001\022\036\n\032COLLE" +
-      "CT_AND_DONATE_MONSTER\020\002\022\020\n\014KILL_MONSTER\020" +
-      "\003\"\351\002\n\rDialogueProto\022G\n\rspeechSegment\030\001 \003" +
-      "(\01320.com.lvl6.proto.DialogueProto.Speech" +
-      "SegmentProto\032\216\002\n\022SpeechSegmentProto\022Q\n\007s" +
-      "peaker\030\001 \001(\0162@.com.lvl6.proto.DialoguePr" +
-      "oto.SpeechSegmentProto.DialogueSpeaker\022\023",
-      "\n\013speakerText\030\002 \001(\t\"\217\001\n\017DialogueSpeaker\022" +
-      "\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTORIAL_GIRL\020\002\022\020\n\014Q" +
-      "UESTGIVER_1\020\003\022\020\n\014QUESTGIVER_2\020\004\022\020\n\014QUEST" +
-      "GIVER_3\020\005\022\020\n\014QUESTGIVER_4\020\006\022\020\n\014QUESTGIVE" +
-      "R_5\020\007\"o\n\022FullUserQuestProto\022\016\n\006userId\030\001 " +
-      "\001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRedeemed\030\003 \001(\010" +
-      "\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010progress\030\005 \001(\005B\014" +
-      "B\nQuestProto"
+      "\t\022\020\n\010priority\030\021 \001(\005\022\020\n\010carrotId\030\022 \001(\t\"F\n" +
+      "\tQuestType\022\023\n\017COLLECT_MONSTER\020\001\022\022\n\016DONAT" +
+      "E_MONSTER\020\002\022\020\n\014KILL_MONSTER\020\003\"\351\002\n\rDialog" +
+      "ueProto\022G\n\rspeechSegment\030\001 \003(\01320.com.lvl" +
+      "6.proto.DialogueProto.SpeechSegmentProto" +
+      "\032\216\002\n\022SpeechSegmentProto\022Q\n\007speaker\030\001 \001(\016" +
+      "2@.com.lvl6.proto.DialogueProto.SpeechSe" +
+      "gmentProto.DialogueSpeaker\022\023\n\013speakerTex",
+      "t\030\002 \001(\t\"\217\001\n\017DialogueSpeaker\022\017\n\013PLAYER_TY" +
+      "PE\020\001\022\021\n\rTUTORIAL_GIRL\020\002\022\020\n\014QUESTGIVER_1\020" +
+      "\003\022\020\n\014QUESTGIVER_2\020\004\022\020\n\014QUESTGIVER_3\020\005\022\020\n" +
+      "\014QUESTGIVER_4\020\006\022\020\n\014QUESTGIVER_5\020\007\"o\n\022Ful" +
+      "lUserQuestProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007quest" +
+      "Id\030\002 \001(\005\022\022\n\nisRedeemed\030\003 \001(\010\022\022\n\nisComple" +
+      "te\030\004 \001(\010\022\020\n\010progress\030\005 \001(\005B\014B\nQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
