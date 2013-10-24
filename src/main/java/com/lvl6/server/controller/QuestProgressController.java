@@ -1,5 +1,8 @@
 package com.lvl6.server.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.QuestProgressRequestEvent;
 import com.lvl6.events.response.QuestProgressResponseEvent;
 import com.lvl6.info.Quest;
+import com.lvl6.info.QuestForUser;
 import com.lvl6.proto.EventQuestProto.QuestProgressRequestProto;
 import com.lvl6.proto.EventQuestProto.QuestProgressResponseProto;
 import com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.Builder;
@@ -17,6 +21,7 @@ import com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.QuestProgressSt
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 
   @Component @DependsOn("gameServer") public class QuestProgressController extends EventController {
@@ -56,6 +61,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     int userId = senderProto.getUserId();
     int questId = reqProto.getQuestId();
     int currentProgress = reqProto.getCurrentProgress();
+    //use this value when updating user quest, don't check this
+    boolean isComplete = reqProto.getIsComplete();
+    List<Integer> deleteUserMonsterIds = reqProto.getDeleteUserMonsterIdsList();
 
     //set stuff to send to the client
     QuestProgressResponseProto.Builder resBuilder = QuestProgressResponseProto.newBuilder();
@@ -65,13 +73,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
     try {
+    	//retrieve whatever is necessary from the db
       Quest quest = QuestRetrieveUtils.getQuestForQuestId(questId);
+      Map<Integer, QuestForUser> questIdsToUnredeemedUserQuests = RetrieveUtils
+      		.questForUserRetrieveUtils().getQuestIdToUnredeemedUserQuests(userId);
 
       boolean legitProgress = checkLegitProgress(resBuilder, userId, 
-      		currentProgress, questId, quest);
+      		currentProgress, questId, quest, questIdsToUnredeemedUserQuests);
 
       if (legitProgress) {
-        writeChangesToDB(userId, questId, currentProgress, quest);
+        writeChangesToDB(userId, quest, questId, currentProgress, isComplete,
+        		deleteUserMonsterIds);
       }
       
       QuestProgressResponseEvent resEvent = new QuestProgressResponseEvent(senderProto.getUserId());
@@ -88,7 +100,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 
   private boolean checkLegitProgress(Builder resBuilder, int userId,
-  		int progress, int questId, Quest quest) {
+  		int newProgress, int questId, Quest quest,
+  		Map<Integer, QuestForUser> questIdsToUnredeemedUserQuests) {
   	//make sure the quest, relating to the user_quest updated, exists
     if (quest == null) {
       log.error("parameter passed in is null.  quest=" + quest);
@@ -97,46 +110,34 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     }
     
     int questMaxProgress = quest.getQuantity();
-    if (progress > questMaxProgress) {
-    	log.warn("user went beyond the max progress for a quest. progress=" +
-    			progress + "\t quest=" + quest);
-    }
-    
-    
-    resBuilder.setStatus(QuestProgressStatus.SUCCESS);
-    return true;
-  }
-  
-  /*
-    private boolean checkLegitProgress(Builder resBuilder, int userId,
-  		int progress, int questId, Quest quest, Map<Integer, QuestForUser> userQuests) {
-    if (quest == null) {
-      log.error("parameter passed in is null.  quest=" + quest);
-      resBuilder.setStatus(QuestProgressStatus.FAIL_NO_QUEST_EXISTS);
-      return false;
+    if (newProgress > questMaxProgress) {
+    	log.warn("client is trying to set user_quest past the max progress. quest=" +
+    			quest + "\t ");
     }
     
     //CHECK TO MAKE SURE THAT THE USER HAS THIS QUEST
-    if (!userQuests.containsKey(questId)) {
+    if (!questIdsToUnredeemedUserQuests.containsKey(questId)) {
     	log.error("user trying to update progress for nonexisting user_quest. " +
-    			"progress=" + progress + "\t quest=" + quest + "\t userQuests=" + userQuests);
+    			"progress=" + newProgress + "\t quest=" + quest + "\t userQuests=" +
+    			questIdsToUnredeemedUserQuests);
     	return false;
     }
+    
     
     resBuilder.setStatus(QuestProgressStatus.SUCCESS);
     return true;
   }
-   */
 
-  private void writeChangesToDB(int userId, int questId,
-  		int currentProgress, Quest quest) {
+  private void writeChangesToDB(int userId, Quest quest, int questId,
+  		int currentProgress, boolean isComplete, List<Integer> deleteUserMonsterIds) {
   	//if userQuest's progress reached the progress specified in quest then
   	//also set userQuest.isComplete = true;
-  	boolean isComplete = false;
   	
   	int questMaxProgress = quest.getQuantity();
     if (currentProgress >= questMaxProgress) {
-    	isComplete = true;
+//    	isComplete = true;
+    	log.warn("client is trying to set user_quest past the max progress. quest=" +
+    			quest + "\t ");
     }
   	int num = insertUtils.insertUpdateUnredeemedUserQuest(userId,
   			questId, currentProgress, isComplete);

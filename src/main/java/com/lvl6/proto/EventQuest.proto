@@ -35,7 +35,10 @@ message QuestProgressRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 questId = 2;
 	optional int32 currentProgress = 3;
+	optional bool isComplete = 4;
 	
+	//if set, delete these user monster ids 
+	repeated int32 deleteUserMonsterIds = 5;
 }
 
 																						//DONE

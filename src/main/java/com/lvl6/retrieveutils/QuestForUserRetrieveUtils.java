@@ -40,23 +40,6 @@ import com.lvl6.utils.DBConnection;
     return userQuests;
   }
   
-  
-  ////@Cacheable(value="incompleteUserQuestsForUser", key="#userId")
-  public List<QuestForUser> getIncompleteUserQuestsForUser(int userId) {
-    log.debug("retrieving incomplete user quests for userId " + userId);
-    
-    TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
-    paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
-    paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, false);
-    
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
-    DBConnection.get().close(rs, null, conn);
-    return userQuests;
-  }
-  
   ////@Cacheable(value="unredeemedUserQuestsForUser", key="#userId")
   public List<QuestForUser> getUnredeemedUserQuestsForUser(int userId) {
     log.debug("retrieving unredeemed user quests for userId " + userId);
