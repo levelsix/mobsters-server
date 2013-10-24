@@ -63,7 +63,7 @@ import com.lvl6.utils.DBConnection;
     if (utList.isEmpty()) {
       return null;
     } else {
-      if (utList.size() >= 1) {
+      if (utList.size() > 1) {
         log.error("unexpected error: user has more than one user_task. userTasks=" +
             utList);
       }
