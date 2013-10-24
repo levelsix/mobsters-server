@@ -27,9 +27,12 @@ message FullQuestProto {
      optional string carrotId = 18;
      
      enum QuestType {
-     	COLLECT_MONSTER = 1;
-     	COLLECT_AND_DONATE_MONSTER = 2;
-     	KILL_MONSTER = 3; 
+     	KILL_MONSTER = 1;
+     	DONATE_MONSTER = 2;
+     	COMPLETE_TASK = 3;
+     	COLLECT_COINS_FROM_HOME = 4;
+     	BUILD_STRUCT = 5;
+     	UPGRADE_STRUCT = 6;
      }
 }
 
