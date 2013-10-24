@@ -116,7 +116,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     values.add(userId);
     query += DBConstants.MONSTER_FOR_USER__MONSTER_ID + " in (" +
     StringUtils.getListInString(questions, delimiter) + ") and ";
-    values.add(monsterIds);
+    values.addAll(monsterIds);
     
     query += DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
     values.add(false);
