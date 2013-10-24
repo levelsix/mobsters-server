@@ -74,6 +74,7 @@ import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullQuestProto;
+import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.StaticLevelInfoProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
@@ -315,6 +316,7 @@ public class StartupController extends EventController {
   	  
   	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
   	  
+  	  List<QuestForUser> inProgressQuests = new ArrayList<QuestForUser>();
   	  List<Integer> inProgressQuestIds = new ArrayList<Integer>();
   	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
   	  
@@ -329,6 +331,7 @@ public class StartupController extends EventController {
   	      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
   	      FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);
   	      
+  	      inProgressQuests.add(uq);
   	      inProgressQuestIds.add(uq.getQuestId());
   	      if (uq.isComplete()) { 
   	      	//complete and unredeemed userQuest, so quest goes in unredeemedQuest
@@ -339,6 +342,12 @@ public class StartupController extends EventController {
   	      }
   	    }
   	  }
+  	  
+  	  //generate the user quests
+  	  List<FullUserQuestProto> currentUserQuests = CreateInfoProtoUtils
+  	  		.createFullUserQuestDataLarges(inProgressQuests, questIdToQuests);
+  	  log.info("currentUserQuest protos=" + currentUserQuests);
+  	  resBuilder.addAllUserQuests(currentUserQuests);
   	
   	  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
   	      inProgressQuestIds);
