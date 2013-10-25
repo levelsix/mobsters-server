@@ -2,6 +2,7 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -792,6 +793,7 @@ public class InsertUtils implements InsertUtil{
 			int numPieces = mfu.getNumPieces();
 			boolean isComplete = mfu.isComplete();
 			int teamSlotNum = mfu.getTeamSlotNum();
+			//Since this is a new monster just use argument for sourceOfPieces
 			
 			Map<String, Object> row = new HashMap<String, Object>();
 			row.put(DBConstants.MONSTER_FOR_USER__USER_ID, userId);
@@ -810,6 +812,71 @@ public class InsertUtils implements InsertUtil{
 				.insertIntoTableBasicReturnLongIds(tableName, newRows);
 		Log.info("monsterForUserIds= " + monsterForUserIds);
 		return monsterForUserIds;
+	}
+	
+	@Override
+	public int insertIntoMonsterForUserDeleted(int userId, String deleteReason,
+			List<MonsterForUser> userMonsters, Date deleteDate) {
+		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		List<Object> monsterForUserIds = new ArrayList<Object>();
+		List<Object> userIds = new ArrayList<Object>();
+		List<Object> monsterIds = new ArrayList<Object>(); 
+		List<Object> currentExps = new ArrayList<Object>();
+		List<Object> currentLvls = new ArrayList<Object>();
+		List<Object> currentHps = new ArrayList<Object>();
+		List<Object> numPiecesList = new ArrayList<Object>();
+		List<Object> areComplete = new ArrayList<Object>();
+		List<Object> teamSlotNums = new ArrayList<Object>();
+		List<Object> sourcesOfPieces = new ArrayList<Object>();
+		List<Object> deleteReasons = new ArrayList<Object>();
+		List<Object> deleteTimes = new ArrayList<Object>();
+		Timestamp deleteTime = new Timestamp(deleteDate.getTime());
+		
+		for(int i = 0; i < userMonsters.size(); i++){
+			MonsterForUser mfu = userMonsters.get(i);
+			long monsterForUserId = mfu.getId();
+			int monsterId = mfu.getMonsterId();
+			int currentExp = mfu.getCurrentExp();
+			int currentLvl = mfu.getCurrentLvl();
+			int currentHp = mfu.getCurrentHealth();
+			int numPieces = mfu.getNumPieces();
+			boolean isComplete = mfu.isComplete();
+			int teamSlotNum = mfu.getTeamSlotNum();
+			String sourceOfPieces = mfu.getSourceOfPieces();
+			
+			monsterForUserIds.add(monsterForUserId);
+			userIds.add(userId);
+			monsterIds.add(monsterId);
+			currentExps.add(currentExp);
+			currentLvls.add(currentLvl);
+			currentHps.add(currentHp);
+			numPiecesList.add(numPieces);
+			areComplete.add(isComplete);
+			teamSlotNums.add(teamSlotNum);
+			sourcesOfPieces.add(sourceOfPieces);
+			deleteReasons.add(deleteReason);
+			deleteTimes.add(deleteTime);
+		}
+		
+		Map<String, List<Object>> insertParams = new HashMap<String, List<Object>>();
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__ID, monsterForUserIds);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__USER_ID, userIds);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__MONSTER_ID, monsterIds);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_EXPERIENCE, currentExps);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_LEVEL, currentLvls);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__CURRENT_HEALTH, currentHps);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__NUM_PIECES, numPiecesList);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__IS_COMPLETE, areComplete);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__TEAM_SLOT_NUM, teamSlotNums);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__SOURCE_OF_PIECES, sourcesOfPieces);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DELETED_REASON, deleteReasons);
+		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__DELETED_TIME, deleteTimes);
+		int numRows = userMonsters.size();
+		
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(tableName, 
+        insertParams, numRows);
+    
+    return numInserted;
 	}
 
 }

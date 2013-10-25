@@ -28,6 +28,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";
   public static final String TABLE_MONSTER_EVOLVING_HISTORY = "monster_evolving_history";
   public static final String TABLE_MONSTER_FOR_USER = "monster_for_user";
+  public static final String TABLE_MONSTER_FOR_USER_DELETED = "monster_for_user_deleted";
   public static final String TABLE_MONSTER_HEALING_FOR_USER = "monster_healing_for_user";
   public static final String TABLE_MONSTER_REWARD = "monster_reward";
   public static final String TABLE_PROFANITY = "profanity";
@@ -244,6 +245,20 @@ public class DBConstants {
   public static final String MONSTER_FOR_USER__IS_COMPLETE = "is_complete";
   public static final String MONSTER_FOR_USER__TEAM_SLOT_NUM = "team_slot_num";
   public static final String MONSTER_FOR_USER__SOURCE_OF_PIECES = "source_of_pieces";
+  
+  /*MONSTER FOR USER DELETED*/
+  public static final String MONSTER_FOR_USER_DELETED__ID = "monster_for_user_id";
+  public static final String MONSTER_FOR_USER_DELETED__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_FOR_USER_DELETED__MONSTER_ID = "monster_id";
+  public static final String MONSTER_FOR_USER_DELETED__CURRENT_EXPERIENCE = "current_experience";
+  public static final String MONSTER_FOR_USER_DELETED__CURRENT_LEVEL = "current_level";
+  public static final String MONSTER_FOR_USER_DELETED__CURRENT_HEALTH = "current_health";
+  public static final String MONSTER_FOR_USER_DELETED__NUM_PIECES = "num_pieces";
+  public static final String MONSTER_FOR_USER_DELETED__IS_COMPLETE = "is_complete";
+  public static final String MONSTER_FOR_USER_DELETED__TEAM_SLOT_NUM = "team_slot_num";
+  public static final String MONSTER_FOR_USER_DELETED__SOURCE_OF_PIECES = "source_of_pieces";
+  public static final String MONSTER_FOR_USER_DELETED__DELETED_REASON = "deleted_reason";
+  public static final String MONSTER_FOR_USER_DELETED__DELETED_TIME = "deleted_time";
   
   /*MONSTER HEALING FOR USER*/
   public static final String MONSTER_HEALING_FOR_USER__USER_ID = GENERIC__USER_ID;

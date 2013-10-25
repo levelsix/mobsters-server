@@ -49,7 +49,10 @@ message QuestProgressResponseProto {
      enum QuestProgressStatus {
      	SUCCESS = 1;
      	FAIL_NO_QUEST_EXISTS = 2;
-     	FAIL_OTHER = 3;
+     	FAIL_DELETE_AMOUNT_DOES_NOT_MATCH_QUEST = 3;
+     	FAIL_NONEXISTENT_USER_MONSTERS = 4;
+     	FAIL_INCOMPLETE_USER_MONSTERS = 5;
+     	FAIL_OTHER = 6;
      }
 }
 

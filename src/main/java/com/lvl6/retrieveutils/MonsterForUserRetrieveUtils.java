@@ -241,9 +241,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int numPieces = rs.getInt(i++);
     boolean isComplete = rs.getBoolean(i++);
     int teamSlotNum = rs.getInt(i++);
+    String sourceOfPieces = rs.getString(i++);
     
-    MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId, currentExp,
-    		currentLvl, currentHealth, numPieces, isComplete, teamSlotNum);
+    MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
+    		currentExp, currentLvl, currentHealth, numPieces, isComplete,
+    		teamSlotNum, sourceOfPieces);
     return userMonster;
   }
 

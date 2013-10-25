@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class MonsterForUser implements Serializable {
 
-	private static final long serialVersionUID = -8922073042885570264L;
+	private static final long serialVersionUID = -7419598476885376853L;
 	private long id;
 	private int userId;
 	private int monsterId;
@@ -14,10 +14,11 @@ public class MonsterForUser implements Serializable {
   private int numPieces;
   private boolean isComplete;
   private int teamSlotNum;
+  private String sourceOfPieces;
   
 	public MonsterForUser(long id, int userId, int monsterId, int currentExp,
 			int currentLvl, int currentHealth, int numPieces, boolean isComplete,
-			int teamSlotNum) {
+			int teamSlotNum, String sourceOfPieces) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -28,6 +29,7 @@ public class MonsterForUser implements Serializable {
 		this.numPieces = numPieces;
 		this.isComplete = isComplete;
 		this.teamSlotNum = teamSlotNum;
+		this.sourceOfPieces = sourceOfPieces;
 	}
 
 	public long getId() {
@@ -102,13 +104,21 @@ public class MonsterForUser implements Serializable {
 		this.teamSlotNum = teamSlotNum;
 	}
 
+	public String getSourceOfPieces() {
+		return sourceOfPieces;
+	}
+
+	public void setSourceOfPieces(String sourceOfPieces) {
+		this.sourceOfPieces = sourceOfPieces;
+	}
+
 	@Override
 	public String toString() {
 		return "MonsterForUser [id=" + id + ", userId=" + userId + ", monsterId="
 				+ monsterId + ", currentExp=" + currentExp + ", currentLvl="
 				+ currentLvl + ", currentHealth=" + currentHealth + ", numPieces="
 				+ numPieces + ", isComplete=" + isComplete + ", teamSlotNum="
-				+ teamSlotNum + "]";
+				+ teamSlotNum + ", sourceOfPieces=" + sourceOfPieces + "]";
 	}
-  
+	
 }
