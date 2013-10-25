@@ -14,6 +14,7 @@ public class ControllerConstants {
 	public static final int MONSTER_FOR_USER__MAX_TEAM_SIZE = 3;
 	public static final int MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT = 10;
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
+	public static final String MFUSOP__QUEST = "QuestId "; 
 	
   public static final int NOT_SET = -1;
   

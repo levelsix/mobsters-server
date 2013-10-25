@@ -778,7 +778,8 @@ public class InsertUtils implements InsertUtil{
    * they make up the values for one row to insert into the table
    */
 	@Override
-	public List<Long> insertIntoMonsterForUserReturnIds(int userId, List<MonsterForUser> userMonsters) {
+	public List<Long> insertIntoMonsterForUserReturnIds(int userId,
+			List<MonsterForUser> userMonsters, String sourceOfPieces) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		
@@ -801,6 +802,7 @@ public class InsertUtils implements InsertUtil{
 			row.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
 			row.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
 			row.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
+			row.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
 			newRows.add(row);
 		}
 		

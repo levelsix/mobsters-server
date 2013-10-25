@@ -296,7 +296,7 @@ public class MonsterStuffUtils {
   
   //METHOD TO REWARD A USER WITH SOME MONSTERS
   public static List<FullUserMonsterProto> updateUserMonsters(int userId,
-  		Map<Integer, Integer> monsterIdToNumPieces) {
+  		Map<Integer, Integer> monsterIdToNumPieces, String sourceOfPieces) {
   	log.info("the monster pieces the user gets: " + monsterIdToNumPieces);
   	
   	if (monsterIdToNumPieces.isEmpty()) {
@@ -324,7 +324,8 @@ public class MonsterStuffUtils {
   	
   	if (!dirtyMonsterForUserList.isEmpty()) {
   		log.info("the monsters that are updated: " + dirtyMonsterForUserList);
-  		UpdateUtils.get().updateUserMonsterNumPieces(userId, dirtyMonsterForUserList);
+  		UpdateUtils.get().updateUserMonsterNumPieces(userId, dirtyMonsterForUserList,
+  				sourceOfPieces);
   	}
   	
   	//monsterIdToRemainingPieces now contains all the new monsters
@@ -334,7 +335,7 @@ public class MonsterStuffUtils {
   	if (!newMonsters.isEmpty()) {
   		log.info("the monsters that are new: " + newMonsters);
   		List<Long> monsterForUserIds = InsertUtils.get()
-  				.insertIntoMonsterForUserReturnIds(userId, newMonsters);
+  				.insertIntoMonsterForUserReturnIds(userId, newMonsters, sourceOfPieces);
   		
   		//set these ids into the list "newMonsters"
   		for (int i = 0; i < monsterForUserIds.size(); i++) {

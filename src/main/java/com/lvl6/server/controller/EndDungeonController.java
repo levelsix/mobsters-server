@@ -105,8 +105,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	recordStageHistory(tsfuList, monsterIdToNumPieces);
       	
       	//update user's monsters
+      	String mfusop = ControllerConstants.MFUSOP__END_DUNGEON + taskForUserId;
       	List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
-      			updateUserMonsters(userId, monsterIdToNumPieces);
+      			updateUserMonsters(userId, monsterIdToNumPieces, mfusop);
 
     	  setResponseBuilder(resBuilder, newOrUpdated);
       }

@@ -800,7 +800,7 @@ public class UpdateUtils implements UpdateUtil {
 
 		@Override
 		public int updateUserMonsterNumPieces(int userId,
-				Collection<MonsterForUser> monsterForUserList) {
+				Collection<MonsterForUser> monsterForUserList, String updateReason) {
 			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 			
@@ -816,7 +816,7 @@ public class UpdateUtils implements UpdateUtil {
 				aRow.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, mfu.getNumPieces());
 				aRow.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, mfu.isComplete());
 				aRow.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, mfu.getTeamSlotNum());
-				
+				aRow.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, updateReason);
 				newRows.add(aRow);
 			}
 			log.info("newRows=" + newRows);

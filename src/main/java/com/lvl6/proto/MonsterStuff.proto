@@ -25,6 +25,8 @@ message MonsterProto {
 	optional string carrotRecruited = 19;
 	optional string carrotDefeated = 20;
 	optional string carrotEvolved = 21;
+	optional string description = 22; 
+	
 	
 	enum MonsterQuality {
 		COMMON = 1;
@@ -55,6 +57,7 @@ message FullUserMonsterProto {
 	optional int32 numPieces = 7;
 	optional bool isComplete = 8; 
 	optional int32 teamSlotNum = 9;
+	//optional string sourceOfPieces = 10;	//not needed for client
 }
 //------------------------------------------------------------------------------------------
 

@@ -162,5 +162,6 @@ public interface UpdateUtil {
   
   public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl);
 
-  public abstract int updateUserMonsterNumPieces(int userId, Collection<MonsterForUser> monsterForUserList);
+  public abstract int updateUserMonsterNumPieces(int userId,
+  		Collection<MonsterForUser> monsterForUserList, String updateReason);
 }

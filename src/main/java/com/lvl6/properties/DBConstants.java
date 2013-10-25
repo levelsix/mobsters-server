@@ -243,7 +243,8 @@ public class DBConstants {
   public static final String MONSTER_FOR_USER__NUM_PIECES = "num_pieces";
   public static final String MONSTER_FOR_USER__IS_COMPLETE = "is_complete";
   public static final String MONSTER_FOR_USER__TEAM_SLOT_NUM = "team_slot_num";
-
+  public static final String MONSTER_FOR_USER__SOURCE_OF_PIECES = "source_of_pieces";
+  
   /*MONSTER HEALING FOR USER*/
   public static final String MONSTER_HEALING_FOR_USER__USER_ID = GENERIC__USER_ID;
   public static final String MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";

@@ -119,6 +119,7 @@ public interface InsertUtil {
 			List<Integer> expGained, List<Integer> silverGained,
 			List<Boolean> monsterPieceDropped);
 	
-	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId, List<MonsterForUser> userMonsters);
+	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId,
+			List<MonsterForUser> userMonsters, String sourceOfPieces);
 		
 }

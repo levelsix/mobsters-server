@@ -80,7 +80,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	setAvailableQuests(userId, questId, resBuilder);
         
         //give user the monster reward, if any, and send this to the client
-      	legitRedeem = awardMonsterReward(userId, quest, resBuilder);
+      	legitRedeem = awardMonsterReward(resBuilder, userId, quest, questId);
       }
       
       QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(senderProto.getUserId());
@@ -159,7 +159,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
   
-  private boolean awardMonsterReward(int userId, Quest quest, Builder resBuilder) {
+  private boolean awardMonsterReward(Builder resBuilder, int userId,
+  		Quest quest, int questId) {
   	boolean legitRedeem = true;
   	
   	int monsterIdReward = quest.getMonsterIdReward();
@@ -168,8 +169,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
     	monsterIdToNumPieces.put(monsterIdReward, 1);
     	
+    	String mfusop = ControllerConstants.MFUSOP__QUEST + questId;
     	List<FullUserMonsterProto> reward = MonsterStuffUtils
-    			.updateUserMonsters(userId, monsterIdToNumPieces);
+    			.updateUserMonsters(userId, monsterIdToNumPieces, mfusop);
     	
       if (reward.isEmpty()) {
         resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);
