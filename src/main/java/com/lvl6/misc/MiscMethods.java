@@ -362,6 +362,9 @@ public class MiscMethods {
     UserMonsterConstants.Builder umcb = UserMonsterConstants.newBuilder();
     umcb.setMaxNumTeamSlots(ControllerConstants.MONSTER_FOR_USER__MAX_TEAM_SIZE);
     umcb.setInitialMaxNumMonsterLimit(ControllerConstants.MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT);
+    umcb.setMonsterInventoryIncrementAmount(ControllerConstants.MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT);
+    umcb.setGemPricePerSlot(ControllerConstants.MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT);
+    umcb.setNumFriendsToRecruitToIncreaseInventory(ControllerConstants.MONSTER_INVENTORY_SLOTS__NUM_FRIENDS_TO_RECRUIT_TO_INCREASE_INVENTORY);
     cb.setUserMonsterConstants(umcb.build());
     
 //    BattleConstants battleConstants = BattleConstants.newBuilder()

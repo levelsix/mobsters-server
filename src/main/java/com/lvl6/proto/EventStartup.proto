@@ -142,6 +142,12 @@ message StartupResponseProto {
 		message UserMonsterConstants {
 			optional int32 maxNumTeamSlots = 1;
 			optional int32 initialMaxNumMonsterLimit = 2;
+			
+			//how much the monster inventory limit is increased by
+			//whenever the user acquires more slots 
+			optional int32 monsterInventoryIncrementAmount = 3;
+			optional int32 gemPricePerSlot = 4;
+			optional int32 numFriendsToRecruitToIncreaseInventory = 5;
 		}
 		
 	}

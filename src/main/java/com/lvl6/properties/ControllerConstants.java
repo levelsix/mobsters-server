@@ -6,9 +6,14 @@ import com.lvl6.info.CoordinatePair;
 public class ControllerConstants {
 
 	//MOBSTERS CONSTANTS
+	
+	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
+	public static final int MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT = 2;
+	public static final int MONSTER_INVENTORY_SLOTS__NUM_FRIENDS_TO_RECRUIT_TO_INCREASE_INVENTORY = 3;
+	
 	public static final int MONSTER_FOR_USER__MAX_TEAM_SIZE = 3;
 	public static final int MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT = 10;
-	
+	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
 	
   public static final int NOT_SET = -1;
   
