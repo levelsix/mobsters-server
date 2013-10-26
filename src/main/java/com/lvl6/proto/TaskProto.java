@@ -630,11 +630,15 @@ public final class TaskProto {
     boolean hasName();
     String getName();
     
-    // optional int32 cityId = 3;
+    // optional string description = 3;
+    boolean hasDescription();
+    String getDescription();
+    
+    // optional int32 cityId = 4;
     boolean hasCityId();
     int getCityId();
     
-    // optional int32 assetNumWithinCity = 4;
+    // optional int32 assetNumWithinCity = 5;
     boolean hasAssetNumWithinCity();
     int getAssetNumWithinCity();
   }
@@ -709,21 +713,53 @@ public final class TaskProto {
       }
     }
     
-    // optional int32 cityId = 3;
-    public static final int CITYID_FIELD_NUMBER = 3;
+    // optional string description = 3;
+    public static final int DESCRIPTION_FIELD_NUMBER = 3;
+    private java.lang.Object description_;
+    public boolean hasDescription() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          description_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional int32 cityId = 4;
+    public static final int CITYID_FIELD_NUMBER = 4;
     private int cityId_;
     public boolean hasCityId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public int getCityId() {
       return cityId_;
     }
     
-    // optional int32 assetNumWithinCity = 4;
-    public static final int ASSETNUMWITHINCITY_FIELD_NUMBER = 4;
+    // optional int32 assetNumWithinCity = 5;
+    public static final int ASSETNUMWITHINCITY_FIELD_NUMBER = 5;
     private int assetNumWithinCity_;
     public boolean hasAssetNumWithinCity() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public int getAssetNumWithinCity() {
       return assetNumWithinCity_;
@@ -732,6 +768,7 @@ public final class TaskProto {
     private void initFields() {
       taskId_ = 0;
       name_ = "";
+      description_ = "";
       cityId_ = 0;
       assetNumWithinCity_ = 0;
     }
@@ -754,10 +791,13 @@ public final class TaskProto {
         output.writeBytes(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, cityId_);
+        output.writeBytes(3, getDescriptionBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, assetNumWithinCity_);
+        output.writeInt32(4, cityId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, assetNumWithinCity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -778,11 +818,15 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, cityId_);
+          .computeBytesSize(3, getDescriptionBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, assetNumWithinCity_);
+          .computeInt32Size(4, cityId_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, assetNumWithinCity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -912,10 +956,12 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        cityId_ = 0;
+        description_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        assetNumWithinCity_ = 0;
+        cityId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        assetNumWithinCity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -965,9 +1011,13 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.cityId_ = cityId_;
+        result.description_ = description_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
+        }
+        result.cityId_ = cityId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
         }
         result.assetNumWithinCity_ = assetNumWithinCity_;
         result.bitField0_ = to_bitField0_;
@@ -991,6 +1041,9 @@ public final class TaskProto {
         }
         if (other.hasName()) {
           setName(other.getName());
+        }
+        if (other.hasDescription()) {
+          setDescription(other.getDescription());
         }
         if (other.hasCityId()) {
           setCityId(other.getCityId());
@@ -1039,13 +1092,18 @@ public final class TaskProto {
               name_ = input.readBytes();
               break;
             }
-            case 24: {
+            case 26: {
               bitField0_ |= 0x00000004;
-              cityId_ = input.readInt32();
+              description_ = input.readBytes();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
+              cityId_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
               assetNumWithinCity_ = input.readInt32();
               break;
             }
@@ -1112,43 +1170,79 @@ public final class TaskProto {
         onChanged();
       }
       
-      // optional int32 cityId = 3;
+      // optional string description = 3;
+      private java.lang.Object description_ = "";
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          description_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDescription(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDescription() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      void setDescription(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        description_ = value;
+        onChanged();
+      }
+      
+      // optional int32 cityId = 4;
       private int cityId_ ;
       public boolean hasCityId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getCityId() {
         return cityId_;
       }
       public Builder setCityId(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         cityId_ = value;
         onChanged();
         return this;
       }
       public Builder clearCityId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         cityId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 assetNumWithinCity = 4;
+      // optional int32 assetNumWithinCity = 5;
       private int assetNumWithinCity_ ;
       public boolean hasAssetNumWithinCity() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getAssetNumWithinCity() {
         return assetNumWithinCity_;
       }
       public Builder setAssetNumWithinCity(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         assetNumWithinCity_ = value;
         onChanged();
         return this;
       }
       public Builder clearAssetNumWithinCity() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         assetNumWithinCity_ = 0;
         onChanged();
         return this;
@@ -2353,18 +2447,19 @@ public final class TaskProto {
       "\n\nTask.proto\022\016com.lvl6.proto\032\022MonsterStu" +
       "ff.proto\"_\n\016TaskStageProto\022\017\n\007stageId\030\001 " +
       "\001(\005\022<\n\rstageMonsters\030\002 \003(\0132%.com.lvl6.pr" +
-      "oto.TaskStageMonsterProto\"Y\n\rFullTaskPro" +
-      "to\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\016\n\006city" +
-      "Id\030\003 \001(\005\022\032\n\022assetNumWithinCity\030\004 \001(\005\"M\n\024" +
-      "MinimumUserTaskProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006" +
-      "taskId\030\002 \001(\005\022\025\n\rnumTimesActed\030\003 \001(\005\"\373\001\n\025" +
-      "TaskStageMonsterProto\022\021\n\tmonsterId\030\001 \001(\005" +
-      "\022F\n\013monsterType\030\002 \001(\01621.com.lvl6.proto.T",
-      "askStageMonsterProto.MonsterType\022\021\n\texpR" +
-      "eward\030\003 \001(\005\022\024\n\014silverReward\030\004 \001(\005\022\032\n\022puz" +
-      "zlePieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\"3\n\013" +
-      "MonsterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022" +
-      "\010\n\004BOSS\020\003B\013B\tTaskProto"
+      "oto.TaskStageMonsterProto\"n\n\rFullTaskPro" +
+      "to\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013desc" +
+      "ription\030\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetNu" +
+      "mWithinCity\030\005 \001(\005\"M\n\024MinimumUserTaskProt" +
+      "o\022\016\n\006userId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\025\n\rnum" +
+      "TimesActed\030\003 \001(\005\"\373\001\n\025TaskStageMonsterPro" +
+      "to\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030\002 \001",
+      "(\01621.com.lvl6.proto.TaskStageMonsterProt" +
+      "o.MonsterType\022\021\n\texpReward\030\003 \001(\005\022\024\n\014silv" +
+      "erReward\030\004 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001" +
+      "(\010\022\r\n\005level\030\006 \001(\005\"3\n\013MonsterType\022\013\n\007REGU" +
+      "LAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003B\013B\tTaskPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2384,7 +2479,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullTaskProto_descriptor,
-              new java.lang.String[] { "TaskId", "Name", "CityId", "AssetNumWithinCity", },
+              new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", },
               com.lvl6.proto.TaskProto.FullTaskProto.class,
               com.lvl6.proto.TaskProto.FullTaskProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor =

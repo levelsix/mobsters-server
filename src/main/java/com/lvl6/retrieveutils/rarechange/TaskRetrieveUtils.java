@@ -147,35 +147,12 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int id = rs.getInt(i++);
     String goodName = rs.getString(i++);
+    String description = rs.getString(i++);
     int cityId = rs.getInt(i++);
     int energyCost = rs.getInt(i++);
-//    int minCoinsGained = rs.getInt(i++);
-//    int maxCoinsGained = rs.getInt(i++);
-//    float chanceOfEquipLoot = rs.getFloat(i++);
-//    String equipIdsString = rs.getString(i++);
-//    List<Integer> equipIds = new ArrayList<Integer>();
-//    if (equipIdsString != null) {
-//      StringTokenizer st = new StringTokenizer(equipIdsString, ", ");
-//      while (st.hasMoreTokens()) {
-//        equipIds.add(Integer.parseInt(st.nextToken()));
-//      }
-//    }
-//    int expGained = rs.getInt(i++);
     int assetNumberWithinCity = rs.getInt(i++);
-//    int numForCompletion = rs.getInt(i++);
-//    String goodProcessingText = rs.getString(i++);
-//    String badProcessingText = rs.getString(i++);
     
-//    float spriteLandingX = rs.getFloat(i++);
-//    boolean spriteLandingXWasSet = !rs.wasNull();
-//    float spriteLandingY = rs.getFloat(i++);
-//    boolean spriteLandingYWasSet = !rs.wasNull();
-    
-//    CoordinatePair spriteLandingCoords = (spriteLandingXWasSet && spriteLandingYWasSet) ? new CoordinatePair(spriteLandingX, spriteLandingY) : null;
-
-//    AnimationType at = AnimationType.valueOf(rs.getInt(i++));
-    
-    Task task = new Task(id, goodName, cityId, energyCost, assetNumberWithinCity);
+    Task task = new Task(id, goodName, description, cityId, energyCost, assetNumberWithinCity);
     return task;
   }
 }

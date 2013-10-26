@@ -434,15 +434,20 @@ public class CreateInfoProtoUtils {
 
   public static FullTaskProto createFullTaskProtoFromTask(Task task) {
 
-    String name = null;
-    //		String processingText = null;
-
-    name = task.getGoodName();
-    //			processingText = task.getGoodProcessingText();
-
+    String name = task.getGoodName();
+    String description = task.getDescription();
     FullTaskProto.Builder builder = FullTaskProto.newBuilder();
     builder.setTaskId(task.getId());
-    builder.setName(name).setCityId(task.getCityId());
+    
+    if (null != name) {
+    	builder.setName(name);
+    }
+    
+    if (null != description) {
+    	builder.setDescription(description);
+    }
+    
+    builder.setCityId(task.getCityId());
     builder.setAssetNumWithinCity(task.getAssetNumberWithinCity());
 
     return builder.build();
