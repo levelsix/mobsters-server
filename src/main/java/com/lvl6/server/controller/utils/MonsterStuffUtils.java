@@ -276,6 +276,7 @@ public class MonsterStuffUtils {
   	int numPieces = 0;
   	boolean isComplete = false;
   	int teamSlotNum = 0;
+  	String sourceOfPieces = "";
   	
   	for (; quantity > 0; quantity -= numPiecesForCompletion) {
   		if (quantity >= numPiecesForCompletion) {
@@ -286,7 +287,7 @@ public class MonsterStuffUtils {
   		
   		MonsterForUser mfu = new MonsterForUser(id, userId, monsterId,
   				currentExp, currentLvl, currentHealth, numPieces, isComplete,
-  				teamSlotNum);
+  				teamSlotNum, sourceOfPieces);
   		returnList.add(mfu);
   	}
   	return returnList;
