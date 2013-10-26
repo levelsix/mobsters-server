@@ -280,54 +280,6 @@ public class User implements Serializable {
 	}
 
 	/*
-	 * used for reducing stamina and increasing silver and gold after attacking a boss
-	 */
-	/*public boolean updateUserAfterAttackingBoss(int energyChange,
-			int silverChange, int goldChange, boolean simulateEnergyRefill,
-			Timestamp clientTime, int expChange) {
-		String tableName = DBConstants.TABLE_USER;
-
-		//the columns that are going to change, "relative params" because 
-		//column changing is relative to itself
-		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__ENERGY, energyChange);
-		if (silverChange != 0) relativeParams.put(DBConstants.USER__COINS, silverChange);
-		if (goldChange != 0) relativeParams.put(DBConstants.USER__DIAMONDS, goldChange);
-		if(expChange != 0) relativeParams.put(DBConstants.USER__EXPERIENCE, expChange);
-
-		//WHERE clause 
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = null;
-		if (simulateEnergyRefill) {
-			absoluteParams = new HashMap<String, Object>();
-			absoluteParams.put(DBConstants.USER__LAST_ENERGY_REFILL_TIME, clientTime);
-		}
-
-		//the delimiter to separate the condition tests in the WHERE clause
-		String condDelim = "";
-
-		int numUpdated = DBConnection.get().updateTableRows(tableName, 
-				relativeParams, absoluteParams, conditionParams, condDelim);
-		if (1 == numUpdated) {
-			//should be one since id is unique
-			//need to update object since updated database
-			if (simulateEnergyRefill) {
-				this.lastEnergyRefillTime = clientTime;
-			}
-			this.energy += energyChange;
-			this.coins += silverChange;
-			this.diamonds += goldChange;
-			this.experience += expChange;
-			return true;
-		}
-		return false;
-	}*;
-
-
-
-	/*
 	 * used for purchasing and selling structures, redeeming quests
 	 */
 	public boolean updateRelativeDiamondsCoinsExperienceNaive (int diamondChange, int coinChange, 
@@ -736,12 +688,12 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateNumAdditionalMonsterSlotsAndDiamonds(int newAdditionalMonsterSlots, int cost) {
+	public boolean updateNumAdditionalMonsterSlotsAndDiamonds(int numAdditionalMonsterSlots, int cost) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__NUM_ADDITIONAL_FORGE_SLOTS, newAdditionalMonsterSlots);
+		absoluteParams.put(DBConstants.USER__NUM_ADDITIONAL_FORGE_SLOTS, numAdditionalMonsterSlots);
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 		relativeParams.put(DBConstants.USER__DIAMONDS, cost);
 
@@ -749,7 +701,7 @@ public class User implements Serializable {
 				relativeParams, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
 			this.diamonds += cost;
-			this.numAdditionalMonsterSlots = newAdditionalMonsterSlots;
+			this.numAdditionalMonsterSlots += numAdditionalMonsterSlots;
 			return true;
 		}
 

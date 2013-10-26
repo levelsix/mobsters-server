@@ -9930,7 +9930,7 @@ public final class EventMonsterProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.RemoveMonsterFromBattleTeamResponseProto)
   }
   
-  public interface BuyMonsterInventorySlotRequestProtoOrBuilder
+  public interface IncreaseMonsterInventorySlotRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional .com.lvl6.proto.MinimumUserProto sender = 1;
@@ -9942,32 +9942,32 @@ public final class EventMonsterProto {
     boolean hasNumPurchases();
     int getNumPurchases();
   }
-  public static final class BuyMonsterInventorySlotRequestProto extends
+  public static final class IncreaseMonsterInventorySlotRequestProto extends
       com.google.protobuf.GeneratedMessage
-      implements BuyMonsterInventorySlotRequestProtoOrBuilder {
-    // Use BuyMonsterInventorySlotRequestProto.newBuilder() to construct.
-    private BuyMonsterInventorySlotRequestProto(Builder builder) {
+      implements IncreaseMonsterInventorySlotRequestProtoOrBuilder {
+    // Use IncreaseMonsterInventorySlotRequestProto.newBuilder() to construct.
+    private IncreaseMonsterInventorySlotRequestProto(Builder builder) {
       super(builder);
     }
-    private BuyMonsterInventorySlotRequestProto(boolean noInit) {}
+    private IncreaseMonsterInventorySlotRequestProto(boolean noInit) {}
     
-    private static final BuyMonsterInventorySlotRequestProto defaultInstance;
-    public static BuyMonsterInventorySlotRequestProto getDefaultInstance() {
+    private static final IncreaseMonsterInventorySlotRequestProto defaultInstance;
+    public static IncreaseMonsterInventorySlotRequestProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public BuyMonsterInventorySlotRequestProto getDefaultInstanceForType() {
+    public IncreaseMonsterInventorySlotRequestProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_descriptor;
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_fieldAccessorTable;
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -10045,41 +10045,41 @@ public final class EventMonsterProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -10088,7 +10088,7 @@ public final class EventMonsterProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10099,12 +10099,12 @@ public final class EventMonsterProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10114,7 +10114,7 @@ public final class EventMonsterProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -10127,18 +10127,18 @@ public final class EventMonsterProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProtoOrBuilder {
+       implements com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_descriptor;
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_fieldAccessorTable;
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto.newBuilder()
+      // Construct using com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -10175,24 +10175,24 @@ public final class EventMonsterProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto.getDescriptor();
+        return com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.getDescriptor();
       }
       
-      public com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto.getDefaultInstance();
+      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto build() {
-        com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto result = buildPartial();
+      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto build() {
+        com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto buildParsed()
+      private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto result = buildPartial();
+        com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -10200,8 +10200,8 @@ public final class EventMonsterProto {
         return result;
       }
       
-      public com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto buildPartial() {
-        com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto result = new com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto(this);
+      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto buildPartial() {
+        com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto result = new com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -10222,16 +10222,16 @@ public final class EventMonsterProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto) {
-          return mergeFrom((com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto)other);
+        if (other instanceof com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto other) {
-        if (other == com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto other) {
+        if (other == com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -10400,18 +10400,18 @@ public final class EventMonsterProto {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BuyMonsterInventorySlotRequestProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto)
     }
     
     static {
-      defaultInstance = new BuyMonsterInventorySlotRequestProto(true);
+      defaultInstance = new IncreaseMonsterInventorySlotRequestProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BuyMonsterInventorySlotRequestProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto)
   }
   
-  public interface BuyMonsterInventorySlotResponseProtoOrBuilder
+  public interface IncreaseMonsterInventorySlotResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional .com.lvl6.proto.MinimumUserProto sender = 1;
@@ -10419,39 +10419,39 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional .com.lvl6.proto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus status = 2;
+    // optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;
     boolean hasStatus();
-    com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus getStatus();
+    com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus getStatus();
   }
-  public static final class BuyMonsterInventorySlotResponseProto extends
+  public static final class IncreaseMonsterInventorySlotResponseProto extends
       com.google.protobuf.GeneratedMessage
-      implements BuyMonsterInventorySlotResponseProtoOrBuilder {
-    // Use BuyMonsterInventorySlotResponseProto.newBuilder() to construct.
-    private BuyMonsterInventorySlotResponseProto(Builder builder) {
+      implements IncreaseMonsterInventorySlotResponseProtoOrBuilder {
+    // Use IncreaseMonsterInventorySlotResponseProto.newBuilder() to construct.
+    private IncreaseMonsterInventorySlotResponseProto(Builder builder) {
       super(builder);
     }
-    private BuyMonsterInventorySlotResponseProto(boolean noInit) {}
+    private IncreaseMonsterInventorySlotResponseProto(boolean noInit) {}
     
-    private static final BuyMonsterInventorySlotResponseProto defaultInstance;
-    public static BuyMonsterInventorySlotResponseProto getDefaultInstance() {
+    private static final IncreaseMonsterInventorySlotResponseProto defaultInstance;
+    public static IncreaseMonsterInventorySlotResponseProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public BuyMonsterInventorySlotResponseProto getDefaultInstanceForType() {
+    public IncreaseMonsterInventorySlotResponseProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_descriptor;
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_fieldAccessorTable;
+      return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable;
     }
     
-    public enum BuyMonsterInventorySlotStatus
+    public enum IncreaseMonsterInventorySlotStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_INSUFFICIENT_FUNDS(1, 2),
@@ -10465,7 +10465,7 @@ public final class EventMonsterProto {
       
       public final int getNumber() { return value; }
       
-      public static BuyMonsterInventorySlotStatus valueOf(int value) {
+      public static IncreaseMonsterInventorySlotStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_INSUFFICIENT_FUNDS;
@@ -10474,15 +10474,15 @@ public final class EventMonsterProto {
         }
       }
       
-      public static com.google.protobuf.Internal.EnumLiteMap<BuyMonsterInventorySlotStatus>
+      public static com.google.protobuf.Internal.EnumLiteMap<IncreaseMonsterInventorySlotStatus>
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<BuyMonsterInventorySlotStatus>
+      private static com.google.protobuf.Internal.EnumLiteMap<IncreaseMonsterInventorySlotStatus>
           internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<BuyMonsterInventorySlotStatus>() {
-              public BuyMonsterInventorySlotStatus findValueByNumber(int number) {
-                return BuyMonsterInventorySlotStatus.valueOf(number);
+            new com.google.protobuf.Internal.EnumLiteMap<IncreaseMonsterInventorySlotStatus>() {
+              public IncreaseMonsterInventorySlotStatus findValueByNumber(int number) {
+                return IncreaseMonsterInventorySlotStatus.valueOf(number);
               }
             };
       
@@ -10496,14 +10496,14 @@ public final class EventMonsterProto {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.getDescriptor().getEnumTypes().get(0);
+        return com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.getDescriptor().getEnumTypes().get(0);
       }
       
-      private static final BuyMonsterInventorySlotStatus[] VALUES = {
+      private static final IncreaseMonsterInventorySlotStatus[] VALUES = {
         SUCCESS, FAIL_INSUFFICIENT_FUNDS, FAIL_OTHER, 
       };
       
-      public static BuyMonsterInventorySlotStatus valueOf(
+      public static IncreaseMonsterInventorySlotStatus valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
         if (desc.getType() != getDescriptor()) {
           throw new java.lang.IllegalArgumentException(
@@ -10515,12 +10515,12 @@ public final class EventMonsterProto {
       private final int index;
       private final int value;
       
-      private BuyMonsterInventorySlotStatus(int index, int value) {
+      private IncreaseMonsterInventorySlotStatus(int index, int value) {
         this.index = index;
         this.value = value;
       }
       
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus)
     }
     
     private int bitField0_;
@@ -10537,19 +10537,19 @@ public final class EventMonsterProto {
       return sender_;
     }
     
-    // optional .com.lvl6.proto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus status = 2;
+    // optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;
     public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus status_;
+    private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status_;
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus getStatus() {
+    public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus getStatus() {
       return status_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus.SUCCESS;
+      status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -10598,41 +10598,41 @@ public final class EventMonsterProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseFrom(byte[] data)
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -10641,7 +10641,7 @@ public final class EventMonsterProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseDelimitedFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10652,12 +10652,12 @@ public final class EventMonsterProto {
         return null;
       }
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto parseFrom(
+    public static com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -10667,7 +10667,7 @@ public final class EventMonsterProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -10680,18 +10680,18 @@ public final class EventMonsterProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProtoOrBuilder {
+       implements com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_descriptor;
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_fieldAccessorTable;
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.newBuilder()
+      // Construct using com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -10717,7 +10717,7 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -10728,24 +10728,24 @@ public final class EventMonsterProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.getDescriptor();
+        return com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.getDescriptor();
       }
       
-      public com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.getDefaultInstance();
+      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto build() {
-        com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto result = buildPartial();
+      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto build() {
+        com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto buildParsed()
+      private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto result = buildPartial();
+        com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -10753,8 +10753,8 @@ public final class EventMonsterProto {
         return result;
       }
       
-      public com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto buildPartial() {
-        com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto result = new com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto(this);
+      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto buildPartial() {
+        com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto result = new com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -10775,16 +10775,16 @@ public final class EventMonsterProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto)other);
+        if (other instanceof com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto other) {
-        if (other == com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto other) {
+        if (other == com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
@@ -10833,7 +10833,7 @@ public final class EventMonsterProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus value = com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus.valueOf(rawValue);
+              com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus value = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -10938,15 +10938,15 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
       
-      // optional .com.lvl6.proto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus status = 2;
-      private com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus status_ = com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus.SUCCESS;
+      // optional .com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status = 2;
+      private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus getStatus() {
+      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus getStatus() {
         return status_;
       }
-      public Builder setStatus(com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus value) {
+      public Builder setStatus(com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -10957,20 +10957,20 @@ public final class EventMonsterProto {
       }
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.BuyMonsterInventorySlotStatus.SUCCESS;
+        status_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus.SUCCESS;
         onChanged();
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BuyMonsterInventorySlotResponseProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto)
     }
     
     static {
-      defaultInstance = new BuyMonsterInventorySlotResponseProto(true);
+      defaultInstance = new IncreaseMonsterInventorySlotResponseProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BuyMonsterInventorySlotResponseProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.IncreaseMonsterInventorySlotResponseProto)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -11044,15 +11044,15 @@ public final class EventMonsterProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_RemoveMonsterFromBattleTeamResponseProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_descriptor;
+    internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_descriptor;
+    internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -11152,17 +11152,18 @@ public final class EventMonsterProto {
       "MonsterFromBattleTeamResponseProto.Remov" +
       "eMonsterFromBattleTeamStatus\"@\n!RemoveMo" +
       "nsterFromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016",
-      "\n\nFAIL_OTHER\020\002\"m\n#BuyMonsterInventorySlo" +
-      "tRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022\024\n\014numPurchases\030" +
-      "\002 \001(\005\"\227\002\n$BuyMonsterInventorySlotRespons" +
-      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022b\n\006status\030\002 \001(\0162R.com.l" +
-      "vl6.proto.BuyMonsterInventorySlotRespons" +
-      "eProto.BuyMonsterInventorySlotStatus\"Y\n\035" +
-      "BuyMonsterInventorySlotStatus\022\013\n\007SUCCESS" +
-      "\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_",
-      "OTHER\020\003B\023B\021EventMonsterProto"
+      "\n\nFAIL_OTHER\020\002\"r\n(IncreaseMonsterInvento" +
+      "rySlotRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\024\n\014numPurch" +
+      "ases\030\002 \001(\005\"\253\002\n)IncreaseMonsterInventoryS" +
+      "lotResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022l\n\006status\030\002 \001" +
+      "(\0162\\.com.lvl6.proto.IncreaseMonsterInven" +
+      "torySlotResponseProto.IncreaseMonsterInv" +
+      "entorySlotStatus\"^\n\"IncreaseMonsterInven" +
+      "torySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSU",
+      "FFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021Even" +
+      "tMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -11281,22 +11282,22 @@ public final class EventMonsterProto {
               new java.lang.String[] { "Sender", "Status", },
               com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.class,
               com.lvl6.proto.EventMonsterProto.RemoveMonsterFromBattleTeamResponseProto.Builder.class);
-          internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_descriptor =
+          internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor =
             getDescriptor().getMessageTypes().get(14);
-          internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BuyMonsterInventorySlotRequestProto_descriptor,
+              internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor,
               new java.lang.String[] { "Sender", "NumPurchases", },
-              com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto.class,
-              com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotRequestProto.Builder.class);
-          internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_descriptor =
+              com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.class,
+              com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor =
             getDescriptor().getMessageTypes().get(15);
-          internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_BuyMonsterInventorySlotResponseProto_descriptor,
+              internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor,
               new java.lang.String[] { "Sender", "Status", },
-              com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.class,
-              com.lvl6.proto.EventMonsterProto.BuyMonsterInventorySlotResponseProto.Builder.class);
+              com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.class,
+              com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.Builder.class);
           return null;
         }
       };

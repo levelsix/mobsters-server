@@ -177,16 +177,16 @@ message RemoveMonsterFromBattleTeamResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-message BuyMonsterInventorySlotRequestProto {
+message IncreaseMonsterInventorySlotRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 numPurchases = 2;
 }	
 
-message BuyMonsterInventorySlotResponseProto {
+message IncreaseMonsterInventorySlotResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional BuyMonsterInventorySlotStatus status = 2;
+	optional IncreaseMonsterInventorySlotStatus status = 2;
 	
-	 enum BuyMonsterInventorySlotStatus {
+	 enum IncreaseMonsterInventorySlotStatus {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_FUNDS = 2;
 		FAIL_OTHER = 3;
