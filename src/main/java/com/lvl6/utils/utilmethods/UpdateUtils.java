@@ -831,6 +831,8 @@ public class UpdateUtils implements UpdateUtil {
 		@Override
 		public int updateCompleteUserMonster(List<Long> userMonsterIds) {
 			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+			int size = userMonsterIds.size();
+			List<String> questions = Collections.nCopies(size, "?");
 			
 			String query = "UPDATE " + tableName + " SET " + DBConstants.MONSTER_FOR_USER__IS_COMPLETE 
 					+ "=? WHERE " + DBConstants.MONSTER_FOR_USER__ID + " IN (";
@@ -838,8 +840,6 @@ public class UpdateUtils implements UpdateUtil {
 			values.add(true);
 			values.addAll(userMonsterIds);
 			
-			int size = userMonsterIds.size();
-			List<String> questions = Collections.nCopies(size, "?");
 			query += StringUtils.getListInString(questions, ",") + ");";
 			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
 			

@@ -825,11 +825,27 @@ public class CreateInfoProtoUtils {
     mpb.setHpLevelMultiplier(aMonster.getHpLevelMultiplier());
     mpb.setAttackLevelMultiplier(aMonster.getAttackLevelMultiplier());
     mpb.setMaxLevel(aMonster.getMaxLevel());
-    mpb.setEvolutionMonsterId(aMonster.getEvolutionMonsterId());
-    mpb.setCarrotRecruited(aMonster.getCarrotRecruited());
-    mpb.setCarrotDefeated(aMonster.getCarrotDefeated());
-    mpb.setCarrotEvolved(aMonster.getCarrotEvolved());
-    mpb.setDescription(aMonster.getDescription());
+    
+    int evolId = aMonster.getEvolutionMonsterId();
+    if (evolId > 0) {
+    	mpb.setEvolutionMonsterId(evolId);
+    }
+    String carrot = aMonster.getCarrotRecruited();
+    if (null != carrot) {
+    	mpb.setCarrotRecruited(carrot);
+    }
+    carrot = aMonster.getCarrotDefeated();
+    if (null != carrot) {
+    	mpb.setCarrotDefeated(carrot);
+    }
+    carrot = aMonster.getCarrotEvolved();
+    if (null != carrot) {
+    	mpb.setCarrotEvolved(carrot);
+    }
+    String description = aMonster.getDescription();
+    if (null != description) {
+    	mpb.setDescription(description);
+    }
     
     return mpb.build();
   }
