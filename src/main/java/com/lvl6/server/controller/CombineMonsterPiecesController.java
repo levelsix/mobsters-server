@@ -156,9 +156,7 @@ import com.lvl6.utils.RetrieveUtils;
   }
   
   private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds) { 
-  	
-  	boolean success = aUser.updateNumAdditionalMonsterSlotsAndDiamonds(
-  			numSlots, cost);
+  	boolean success = false;
   	
   	if (!success) {
   		log.error("problem with updating user monster inventory slots and diamonds");

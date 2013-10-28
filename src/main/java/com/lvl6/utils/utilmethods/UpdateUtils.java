@@ -831,6 +831,7 @@ public class UpdateUtils implements UpdateUtil {
 		public int updateCompleteUserMonster(List<Long> userMonsterIds) {
 			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 			
+			return 0;
 		}
 
 }
