@@ -3,6 +3,7 @@ package com.lvl6.utils.utilmethods;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -831,7 +832,18 @@ public class UpdateUtils implements UpdateUtil {
 		public int updateCompleteUserMonster(List<Long> userMonsterIds) {
 			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 			
-			return 0;
+			String query = "UPDATE " + tableName + " SET " + DBConstants.MONSTER_FOR_USER__IS_COMPLETE 
+					+ "=? WHERE " + DBConstants.MONSTER_FOR_USER__ID + " IN (";
+			List<Object> values = new ArrayList<Object>();
+			values.add(true);
+			values.addAll(userMonsterIds);
+			
+			int size = userMonsterIds.size();
+			List<String> questions = Collections.nCopies(size, "?");
+			query += StringUtils.getListInString(questions, ",") + ");";
+			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+			
+			return numUpdated;
 		}
 
 }
