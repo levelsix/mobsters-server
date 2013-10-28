@@ -61,21 +61,26 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonster;
   }
 
-  public Map<Long, MonsterForUser> getSpecificUserMonsters(Collection<Long> userMonsterIds) {
+  public Map<Long, MonsterForUser> getSpecificUserMonstersForUser(int userId,
+  		Collection<Long> userMonsterIds) {
     log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
 
     if (userMonsterIds == null || userMonsterIds.size() <= 0 ) {
       return new HashMap<Long, MonsterForUser>();
     }
 
-    String query = "select * from " + TABLE_NAME + " where (";
+    String query = "SELECT * FROM " + TABLE_NAME + " WHERE " +
+    		DBConstants.MONSTER_FOR_USER__USER_ID + "=? AND (";
+    
     List<String> condClauses = new ArrayList<String>();
     List <Object> values = new ArrayList<Object>();
+    values.add(userId);
+    
     for (Long userMonsterId : userMonsterIds) {
       condClauses.add(DBConstants.MONSTER_FOR_USER__ID + "=?");
       values.add(userMonsterId);
     }
-    query += StringUtils.getListInString(condClauses, "or") + ");"; // +
+    query += StringUtils.getListInString(condClauses, "OR") + ");"; // +
 //    		DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
 //    values.add(isComplete);
 
@@ -87,7 +92,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
 
   ////@Cacheable(value="userMonstersWithMonsterId", key="#userId+':'+#monsterId")
-  public List<MonsterForUser> getMonstersWithMonsterId(int userId, int monsterId) {
+  public List<MonsterForUser> getMonstersWithMonsterIdAndUserId(int userId, int monsterId) {
     log.debug("retrieving user monster for user: " + userId + ", monsterId: " + monsterId);
 
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();

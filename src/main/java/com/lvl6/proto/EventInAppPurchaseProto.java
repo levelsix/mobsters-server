@@ -1831,7 +1831,7 @@ public final class EventInAppPurchaseProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2;
+    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];
     boolean hasFreeDiamondsType();
     com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType getFreeDiamondsType();
     
@@ -1881,7 +1881,7 @@ public final class EventInAppPurchaseProto {
       return sender_;
     }
     
-    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2;
+    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];
     public static final int FREEDIAMONDSTYPE_FIELD_NUMBER = 2;
     private com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType freeDiamondsType_;
     public boolean hasFreeDiamondsType() {
@@ -2314,7 +2314,7 @@ public final class EventInAppPurchaseProto {
         return senderBuilder_;
       }
       
-      // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2;
+      // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];
       private com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType freeDiamondsType_ = com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType.FB_CONNECT;
       public boolean hasFreeDiamondsType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -2382,7 +2382,7 @@ public final class EventInAppPurchaseProto {
     boolean hasStatus();
     com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.EarnFreeDiamondsStatus getStatus();
     
-    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3;
+    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];
     boolean hasFreeDiamondsType();
     com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType getFreeDiamondsType();
   }
@@ -2513,7 +2513,7 @@ public final class EventInAppPurchaseProto {
       return status_;
     }
     
-    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3;
+    // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];
     public static final int FREEDIAMONDSTYPE_FIELD_NUMBER = 3;
     private com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType freeDiamondsType_;
     public boolean hasFreeDiamondsType() {
@@ -2966,7 +2966,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3;
+      // optional .com.lvl6.proto.EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];
       private com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType freeDiamondsType_ = com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType.FB_CONNECT;
       public boolean hasFreeDiamondsType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
@@ -3044,21 +3044,21 @@ public final class EventInAppPurchaseProto {
       "sGained\030\004 \001(\005\022\023\n\013packageName\030\005 \001(\t\022\024\n\014pa" +
       "ckagePrice\030\006 \001(\001\022\017\n\007receipt\030\007 \001(\t\"C\n\023InA" +
       "ppPurchaseStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\022" +
-      "\025\n\021DUPLICATE_RECEIPT\020\003\"\244\001\n\034EarnFreeDiamo" +
+      "\025\n\021DUPLICATE_RECEIPT\020\003\"\260\001\n\034EarnFreeDiamo" +
       "ndsRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022>\n\020freeDiamond" +
+      "l6.proto.MinimumUserProto\022J\n\020freeDiamond" +
       "sType\030\002 \001(\0162$.com.lvl6.proto.EarnFreeDia" +
-      "mondsType\022\022\n\nclientTime\030\003 \001(\003\"\337\002\n\035EarnFr" +
-      "eeDiamondsResponseProto\0220\n\006sender\030\001 \001(\0132",
-      " .com.lvl6.proto.MinimumUserProto\022T\n\006sta" +
-      "tus\030\002 \001(\0162D.com.lvl6.proto.EarnFreeDiamo" +
-      "ndsResponseProto.EarnFreeDiamondsStatus\022" +
-      ">\n\020freeDiamondsType\030\003 \001(\0162$.com.lvl6.pro" +
-      "to.EarnFreeDiamondsType\"v\n\026EarnFreeDiamo" +
-      "ndsStatus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_APA" +
-      "RT_FROM_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUPP" +
-      "ORTED\020\003\022\016\n\nOTHER_FAIL\020\004B\031B\027EventInAppPur" +
-      "chaseProto"
+      "mondsType:\nFB_CONNECT\022\022\n\nclientTime\030\003 \001(" +
+      "\003\"\353\002\n\035EarnFreeDiamondsResponseProto\0220\n\006s",
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.E" +
+      "arnFreeDiamondsResponseProto.EarnFreeDia" +
+      "mondsStatus\022J\n\020freeDiamondsType\030\003 \001(\0162$." +
+      "com.lvl6.proto.EarnFreeDiamondsType:\nFB_" +
+      "CONNECT\"v\n\026EarnFreeDiamondsStatus\022\013\n\007SUC" +
+      "CESS\020\001\022%\n!CLIENT_TOO_APART_FROM_SERVER_T" +
+      "IME\020\002\022\030\n\024METHOD_NOT_SUPPORTED\020\003\022\016\n\nOTHER" +
+      "_FAIL\020\004B\031B\027EventInAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

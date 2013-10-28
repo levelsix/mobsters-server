@@ -1341,7 +1341,7 @@ public final class EventStructureProto {
     com.lvl6.proto.StructureProto.CoordinateProto getCurStructCoordinates();
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCurStructCoordinatesOrBuilder();
     
-    // optional .com.lvl6.proto.StructOrientation newOrientation = 5;
+    // optional .com.lvl6.proto.StructOrientation newOrientation = 5 [default = POSITION_1];
     boolean hasNewOrientation();
     com.lvl6.proto.StructureProto.StructOrientation getNewOrientation();
   }
@@ -1489,7 +1489,7 @@ public final class EventStructureProto {
       return curStructCoordinates_;
     }
     
-    // optional .com.lvl6.proto.StructOrientation newOrientation = 5;
+    // optional .com.lvl6.proto.StructOrientation newOrientation = 5 [default = POSITION_1];
     public static final int NEWORIENTATION_FIELD_NUMBER = 5;
     private com.lvl6.proto.StructureProto.StructOrientation newOrientation_;
     public boolean hasNewOrientation() {
@@ -2110,7 +2110,7 @@ public final class EventStructureProto {
         return curStructCoordinatesBuilder_;
       }
       
-      // optional .com.lvl6.proto.StructOrientation newOrientation = 5;
+      // optional .com.lvl6.proto.StructOrientation newOrientation = 5 [default = POSITION_1];
       private com.lvl6.proto.StructureProto.StructOrientation newOrientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
       public boolean hasNewOrientation() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
@@ -10520,99 +10520,99 @@ public final class EventStructureProto {
       "_LOW\020\003\022!\n\035ANOTHER_STRUCT_STILL_BUILDING\020" +
       "\004\022#\n\037ALREADY_HAVE_MAX_OF_THIS_STRUCT\020\005\022\016" +
       "\n\nOTHER_FAIL\020\006\022%\n!CLIENT_TOO_APART_FROM_" +
-      "SERVER_TIME\020\007\"\375\002\n%MoveOrRotateNormStruct" +
+      "SERVER_TIME\020\007\"\211\003\n%MoveOrRotateNormStruct" +
       "ureRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
       "l6.proto.MinimumUserProto\022\024\n\014userStructI",
       "d\030\002 \001(\005\022^\n\004type\030\003 \001(\0162P.com.lvl6.proto.M" +
       "oveOrRotateNormStructureRequestProto.Mov" +
       "eOrRotateNormStructType\022=\n\024curStructCoor" +
       "dinates\030\004 \001(\0132\037.com.lvl6.proto.Coordinat" +
-      "eProto\0229\n\016newOrientation\030\005 \001(\0162!.com.lvl" +
-      "6.proto.StructOrientation\"2\n\032MoveOrRotat" +
-      "eNormStructType\022\010\n\004MOVE\020\001\022\n\n\006ROTATE\020\002\"\202\002" +
-      "\n&MoveOrRotateNormStructureResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022f\n\006status\030\002 \001(\0162V.com.lvl6.pr",
-      "oto.MoveOrRotateNormStructureResponsePro" +
-      "to.MoveOrRotateNormStructureStatus\">\n\037Mo" +
-      "veOrRotateNormStructureStatus\022\013\n\007SUCCESS" +
-      "\020\001\022\016\n\nOTHER_FAIL\020\002\"g\n\035SellNormStructureR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022\024\n\014userStructId\030\002 " +
-      "\001(\005\"\334\001\n\036SellNormStructureResponseProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022V\n\006status\030\002 \001(\0162F.com.lvl6.prot" +
-      "o.SellNormStructureResponseProto.SellNor",
-      "mStructureStatus\"0\n\027SellNormStructureSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\201\001\n UpgradeNo" +
+      "eProto\022E\n\016newOrientation\030\005 \001(\0162!.com.lvl" +
+      "6.proto.StructOrientation:\nPOSITION_1\"2\n" +
+      "\032MoveOrRotateNormStructType\022\010\n\004MOVE\020\001\022\n\n" +
+      "\006ROTATE\020\002\"\202\002\n&MoveOrRotateNormStructureR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022f\n\006status\030\002 \001(\0162V",
+      ".com.lvl6.proto.MoveOrRotateNormStructur" +
+      "eResponseProto.MoveOrRotateNormStructure" +
+      "Status\">\n\037MoveOrRotateNormStructureStatu" +
+      "s\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002\"g\n\035SellNo" +
       "rmStructureRequestProto\0220\n\006sender\030\001 \001(\0132" +
       " .com.lvl6.proto.MinimumUserProto\022\024\n\014use" +
-      "rStructId\030\002 \001(\005\022\025\n\rtimeOfUpgrade\030\003 \001(\003\"\227" +
-      "\003\n!UpgradeNormStructureResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\\\n\006status\030\002 \001(\0162L.com.lvl6.proto." +
-      "UpgradeNormStructureResponseProto.Upgrad" +
-      "eNormStructureStatus\"\341\001\n\032UpgradeNormStru",
-      "ctureStatus\022\013\n\007SUCCESS\020\001\022\030\n\024NOT_ENOUGH_M" +
-      "ATERIALS\020\002\022\021\n\rNOT_BUILT_YET\020\003\022\024\n\020NOT_USE" +
-      "RS_STRUCT\020\004\022\"\n\036ANOTHER_STRUCT_STILL_UPGR" +
-      "ADING\020\005\022\016\n\nOTHER_FAIL\020\006\022%\n!CLIENT_TOO_AP" +
-      "ART_FROM_SERVER_TIME\020\007\022\030\n\024AT_MAX_LEVEL_A" +
-      "LREADY\020\010\"\214\002\n-RetrieveCurrencyFromNormStr" +
-      "uctureRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022g\n\020structRe" +
-      "trievals\030\002 \003(\0132M.com.lvl6.proto.Retrieve" +
-      "CurrencyFromNormStructureRequestProto.St",
-      "ructRetrieval\032@\n\017StructRetrieval\022\024\n\014user" +
-      "StructId\030\001 \001(\005\022\027\n\017timeOfRetrieval\030\002 \001(\003\"" +
-      "\337\002\n.RetrieveCurrencyFromNormStructureRes" +
+      "rStructId\030\002 \001(\005\"\334\001\n\036SellNormStructureRes" +
       "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022v\n\006status\030\002 \001(\0162f.c" +
-      "om.lvl6.proto.RetrieveCurrencyFromNormSt" +
-      "ructureResponseProto.RetrieveCurrencyFro" +
-      "mNormStructureStatus\"\202\001\n\'RetrieveCurrenc" +
-      "yFromNormStructureStatus\022\016\n\nOTHER_FAIL\020\001" +
-      "\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_TOO_APART_FROM_S",
-      "ERVER_TIME\020\003\022\023\n\017NOT_LONG_ENOUGH\020\004\"\221\001\n0Fi" +
-      "nishNormStructWaittimeWithDiamondsReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\024\n\014userStructId\030\002 \001(\005\022\025" +
-      "\n\rtimeOfSpeedup\030\003 \001(\003\"\326\002\n1FinishNormStru" +
-      "ctWaittimeWithDiamondsResponseProto\0220\n\006s" +
+      "oto.MinimumUserProto\022V\n\006status\030\002 \001(\0162F.c" +
+      "om.lvl6.proto.SellNormStructureResponseP",
+      "roto.SellNormStructureStatus\"0\n\027SellNorm" +
+      "StructureStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\201" +
+      "\001\n UpgradeNormStructureRequestProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022p\n\006status\030\002 \001(\0162`.com.lvl6.proto.F" +
-      "inishNormStructWaittimeWithDiamondsRespo" +
-      "nseProto.FinishNormStructWaittimeStatus\"",
-      "}\n\036FinishNormStructWaittimeStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\027\n\023NOT_ENOUGH_DIAMONDS\020\002\022\016\n\nOTHER" +
-      "_FAIL\020\003\022%\n!CLIENT_TOO_APART_FROM_SERVER_" +
-      "TIME\020\004\"}\n\"NormStructWaitCompleteRequestP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\024\n\014userStructId\030\002 \003(\005\022\017\n\007" +
-      "curTime\030\003 \001(\003\"\353\002\n#NormStructWaitComplete" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022`\n\006status\030\002 \001(\0162" +
-      "P.com.lvl6.proto.NormStructWaitCompleteR",
-      "esponseProto.NormStructWaitCompleteStatu" +
-      "s\022:\n\nuserStruct\030\003 \003(\0132&.com.lvl6.proto.F" +
-      "ullUserStructureProto\"t\n\034NormStructWaitC" +
-      "ompleteStatus\022\013\n\007SUCCESS\020\001\022\020\n\014NOT_DONE_Y" +
-      "ET\020\002\022\016\n\nOTHER_FAIL\020\003\022%\n!CLIENT_TOO_APART" +
-      "_FROM_SERVER_TIME\020\004\"\235\001\n!ExpansionWaitCom" +
-      "pleteRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022\017\n\007curTime\030\002" +
-      " \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\txPosition\030\004 \001(\021" +
-      "\022\021\n\tyPosition\030\005 \001(\021\"\376\002\n\"ExpansionWaitCom",
-      "pleteResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022^\n\006status\030\002" +
-      " \001(\0162N.com.lvl6.proto.ExpansionWaitCompl" +
-      "eteResponseProto.ExpansionWaitCompleteSt" +
-      "atus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.proto.Use" +
-      "rCityExpansionDataProto\"\212\001\n\033ExpansionWai" +
-      "tCompleteStatus\022\013\n\007SUCCESS\020\001\022\025\n\021WAS_NOT_" +
-      "EXPANDING\020\002\022\020\n\014NOT_DONE_YET\020\003\022\016\n\nOTHER_F" +
-      "AIL\020\004\022%\n!CLIENT_TOO_APART_FROM_SERVER_TI" +
-      "ME\020\005B\025B\023EventStructureProto"
+      "Proto\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rtimeOfUpg" +
+      "rade\030\003 \001(\003\"\227\003\n!UpgradeNormStructureRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\\\n\006status\030\002 \001(\0162L.com" +
+      ".lvl6.proto.UpgradeNormStructureResponse" +
+      "Proto.UpgradeNormStructureStatus\"\341\001\n\032Upg",
+      "radeNormStructureStatus\022\013\n\007SUCCESS\020\001\022\030\n\024" +
+      "NOT_ENOUGH_MATERIALS\020\002\022\021\n\rNOT_BUILT_YET\020" +
+      "\003\022\024\n\020NOT_USERS_STRUCT\020\004\022\"\n\036ANOTHER_STRUC" +
+      "T_STILL_UPGRADING\020\005\022\016\n\nOTHER_FAIL\020\006\022%\n!C" +
+      "LIENT_TOO_APART_FROM_SERVER_TIME\020\007\022\030\n\024AT" +
+      "_MAX_LEVEL_ALREADY\020\010\"\214\002\n-RetrieveCurrenc" +
+      "yFromNormStructureRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022g\n\020structRetrievals\030\002 \003(\0132M.com.lvl6.pr" +
+      "oto.RetrieveCurrencyFromNormStructureReq",
+      "uestProto.StructRetrieval\032@\n\017StructRetri" +
+      "eval\022\024\n\014userStructId\030\001 \001(\005\022\027\n\017timeOfRetr" +
+      "ieval\030\002 \001(\003\"\337\002\n.RetrieveCurrencyFromNorm" +
+      "StructureResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022v\n\006stat" +
+      "us\030\002 \001(\0162f.com.lvl6.proto.RetrieveCurren" +
+      "cyFromNormStructureResponseProto.Retriev" +
+      "eCurrencyFromNormStructureStatus\"\202\001\n\'Ret" +
+      "rieveCurrencyFromNormStructureStatus\022\016\n\n" +
+      "OTHER_FAIL\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_TOO_",
+      "APART_FROM_SERVER_TIME\020\003\022\023\n\017NOT_LONG_ENO" +
+      "UGH\020\004\"\221\001\n0FinishNormStructWaittimeWithDi" +
+      "amondsRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\024\n\014userStru" +
+      "ctId\030\002 \001(\005\022\025\n\rtimeOfSpeedup\030\003 \001(\003\"\326\002\n1Fi" +
+      "nishNormStructWaittimeWithDiamondsRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022p\n\006status\030\002 \001(\0162`.com." +
+      "lvl6.proto.FinishNormStructWaittimeWithD" +
+      "iamondsResponseProto.FinishNormStructWai",
+      "ttimeStatus\"}\n\036FinishNormStructWaittimeS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\027\n\023NOT_ENOUGH_DIAMOND" +
+      "S\020\002\022\016\n\nOTHER_FAIL\020\003\022%\n!CLIENT_TOO_APART_" +
+      "FROM_SERVER_TIME\020\004\"}\n\"NormStructWaitComp" +
+      "leteRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\024\n\014userStruct" +
+      "Id\030\002 \003(\005\022\017\n\007curTime\030\003 \001(\003\"\353\002\n#NormStruct" +
+      "WaitCompleteResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022`\n\006s" +
+      "tatus\030\002 \001(\0162P.com.lvl6.proto.NormStructW",
+      "aitCompleteResponseProto.NormStructWaitC" +
+      "ompleteStatus\022:\n\nuserStruct\030\003 \003(\0132&.com." +
+      "lvl6.proto.FullUserStructureProto\"t\n\034Nor" +
+      "mStructWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\020" +
+      "\n\014NOT_DONE_YET\020\002\022\016\n\nOTHER_FAIL\020\003\022%\n!CLIE" +
+      "NT_TOO_APART_FROM_SERVER_TIME\020\004\"\235\001\n!Expa" +
+      "nsionWaitCompleteRequestProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\txPo" +
+      "sition\030\004 \001(\021\022\021\n\tyPosition\030\005 \001(\021\"\376\002\n\"Expa",
+      "nsionWaitCompleteResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto.Expans" +
+      "ionWaitCompleteResponseProto.ExpansionWa" +
+      "itCompleteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lv" +
+      "l6.proto.UserCityExpansionDataProto\"\212\001\n\033" +
+      "ExpansionWaitCompleteStatus\022\013\n\007SUCCESS\020\001" +
+      "\022\025\n\021WAS_NOT_EXPANDING\020\002\022\020\n\014NOT_DONE_YET\020" +
+      "\003\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_APART_FR" +
+      "OM_SERVER_TIME\020\005B\025B\023EventStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

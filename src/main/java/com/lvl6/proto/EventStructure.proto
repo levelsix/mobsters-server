@@ -40,7 +40,7 @@ message MoveOrRotateNormStructureRequestProto {
 	optional int32 userStructId = 2;
 	optional MoveOrRotateNormStructType type = 3;
 	optional CoordinateProto curStructCoordinates = 4;
-	optional StructOrientation newOrientation = 5;
+	optional StructOrientation newOrientation = 5 [default = POSITION_1];
 	
 	enum MoveOrRotateNormStructType {
 		MOVE = 1;

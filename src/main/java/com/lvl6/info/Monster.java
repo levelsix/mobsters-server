@@ -7,7 +7,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 
 public class Monster implements Serializable {
 
-	private static final long serialVersionUID = 2923324178507001754L;
+	private static final long serialVersionUID = 6201216250543100065L;
 	private int id;
 	private String name;
 	private String monsterGroup;
@@ -18,6 +18,7 @@ public class Monster implements Serializable {
 	private int baseHp;
 	private String imageName;
 	private int numPuzzlePieces;
+	private int minutesToCombinePieces;
 	private int elementOneDmg;
 	private int elementTwoDmg;
 	private int elementThreeDmg;
@@ -35,11 +36,11 @@ public class Monster implements Serializable {
 	public Monster(int id, String name, String monsterGroup,
 			MonsterQuality quality, int evolutionLevel, String displayName,
 			MonsterElement element, int baseHp, String imageName,
-			int numPuzzlePieces, int elementOneDmg, int elementTwoDmg,
-			int elementThreeDmg, int elementFourDmg, int elementFiveDmg,
-			float hpLevelMultiplier, float attackLevelMultiplier, int maxLevel,
-			int evolutionMonsterId, String carrotRecruited, String carrotDefeated,
-			String carrotEvolved, String description) {
+			int numPuzzlePieces, int minutesToCombinePieces, int elementOneDmg,
+			int elementTwoDmg, int elementThreeDmg, int elementFourDmg,
+			int elementFiveDmg, float hpLevelMultiplier, float attackLevelMultiplier,
+			int maxLevel, int evolutionMonsterId, String carrotRecruited,
+			String carrotDefeated, String carrotEvolved, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -51,6 +52,7 @@ public class Monster implements Serializable {
 		this.baseHp = baseHp;
 		this.imageName = imageName;
 		this.numPuzzlePieces = numPuzzlePieces;
+		this.minutesToCombinePieces = minutesToCombinePieces;
 		this.elementOneDmg = elementOneDmg;
 		this.elementTwoDmg = elementTwoDmg;
 		this.elementThreeDmg = elementThreeDmg;
@@ -144,6 +146,14 @@ public class Monster implements Serializable {
 
 	public void setNumPuzzlePieces(int numPuzzlePieces) {
 		this.numPuzzlePieces = numPuzzlePieces;
+	}
+
+	public int getMinutesToCombinePieces() {
+		return minutesToCombinePieces;
+	}
+
+	public void setMinutesToCombinePieces(int minutesToCombinePieces) {
+		this.minutesToCombinePieces = minutesToCombinePieces;
 	}
 
 	public int getElementOneDmg() {
@@ -256,16 +266,17 @@ public class Monster implements Serializable {
 				+ monsterGroup + ", quality=" + quality + ", evolutionLevel="
 				+ evolutionLevel + ", displayName=" + displayName + ", element="
 				+ element + ", baseHp=" + baseHp + ", imageName=" + imageName
-				+ ", numPuzzlePieces=" + numPuzzlePieces + ", elementOneDmg="
-				+ elementOneDmg + ", elementTwoDmg=" + elementTwoDmg
-				+ ", elementThreeDmg=" + elementThreeDmg + ", elementFourDmg="
-				+ elementFourDmg + ", elementFiveDmg=" + elementFiveDmg
-				+ ", hpLevelMultiplier=" + hpLevelMultiplier
-				+ ", attackLevelMultiplier=" + attackLevelMultiplier + ", maxLevel="
-				+ maxLevel + ", evolutionMonsterId=" + evolutionMonsterId
-				+ ", carrotRecruited=" + carrotRecruited + ", carrotDefeated="
-				+ carrotDefeated + ", carrotEvolved=" + carrotEvolved
-				+ ", description=" + description + "]";
+				+ ", numPuzzlePieces=" + numPuzzlePieces + ", minutesToCombinePieces="
+				+ minutesToCombinePieces + ", elementOneDmg=" + elementOneDmg
+				+ ", elementTwoDmg=" + elementTwoDmg + ", elementThreeDmg="
+				+ elementThreeDmg + ", elementFourDmg=" + elementFourDmg
+				+ ", elementFiveDmg=" + elementFiveDmg + ", hpLevelMultiplier="
+				+ hpLevelMultiplier + ", attackLevelMultiplier="
+				+ attackLevelMultiplier + ", maxLevel=" + maxLevel
+				+ ", evolutionMonsterId=" + evolutionMonsterId + ", carrotRecruited="
+				+ carrotRecruited + ", carrotDefeated=" + carrotDefeated
+				+ ", carrotEvolved=" + carrotEvolved + ", description=" + description
+				+ "]";
 	}
-
+  
 }

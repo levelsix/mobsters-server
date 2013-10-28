@@ -19,83 +19,91 @@ public final class MonsterStuffProto {
     boolean hasName();
     String getName();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 3;
+    // optional string monsterGroup = 3;
+    boolean hasMonsterGroup();
+    String getMonsterGroup();
+    
+    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
     boolean hasQuality();
     com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality();
     
-    // optional int32 evolutionLevel = 4;
+    // optional int32 evolutionLevel = 5;
     boolean hasEvolutionLevel();
     int getEvolutionLevel();
     
-    // optional string displayName = 5;
+    // optional string displayName = 6;
     boolean hasDisplayName();
     String getDisplayName();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 6;
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 7;
     boolean hasElement();
     com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getElement();
     
-    // optional int32 baseHp = 7;
+    // optional int32 baseHp = 8;
     boolean hasBaseHp();
     int getBaseHp();
     
-    // optional string imageName = 8;
+    // optional string imageName = 9;
     boolean hasImageName();
     String getImageName();
     
-    // optional int32 numPuzzlePieces = 9;
+    // optional int32 numPuzzlePieces = 10;
     boolean hasNumPuzzlePieces();
     int getNumPuzzlePieces();
     
-    // optional int32 elementOneDmg = 10;
+    // optional int32 minutesToCombinePieces = 11;
+    boolean hasMinutesToCombinePieces();
+    int getMinutesToCombinePieces();
+    
+    // optional int32 elementOneDmg = 12;
     boolean hasElementOneDmg();
     int getElementOneDmg();
     
-    // optional int32 elementTwoDmg = 11;
+    // optional int32 elementTwoDmg = 13;
     boolean hasElementTwoDmg();
     int getElementTwoDmg();
     
-    // optional int32 elementThreeDmg = 12;
+    // optional int32 elementThreeDmg = 14;
     boolean hasElementThreeDmg();
     int getElementThreeDmg();
     
-    // optional int32 elementFourDmg = 13;
+    // optional int32 elementFourDmg = 15;
     boolean hasElementFourDmg();
     int getElementFourDmg();
     
-    // optional int32 elementFiveDmg = 14;
+    // optional int32 elementFiveDmg = 16;
     boolean hasElementFiveDmg();
     int getElementFiveDmg();
     
-    // optional float hpLevelMultiplier = 15;
+    // optional float hpLevelMultiplier = 17;
     boolean hasHpLevelMultiplier();
     float getHpLevelMultiplier();
     
-    // optional float attackLevelMultiplier = 16;
+    // optional float attackLevelMultiplier = 18;
     boolean hasAttackLevelMultiplier();
     float getAttackLevelMultiplier();
     
-    // optional int32 maxLevel = 17;
+    // optional int32 maxLevel = 19;
     boolean hasMaxLevel();
     int getMaxLevel();
     
-    // optional int32 evolutionMonsterId = 18;
+    // optional int32 evolutionMonsterId = 20;
     boolean hasEvolutionMonsterId();
     int getEvolutionMonsterId();
     
-    // optional string carrotRecruited = 19;
+    // optional string carrotRecruited = 21;
     boolean hasCarrotRecruited();
     String getCarrotRecruited();
     
-    // optional string carrotDefeated = 20;
+    // optional string carrotDefeated = 22;
     boolean hasCarrotDefeated();
     String getCarrotDefeated();
     
-    // optional string carrotEvolved = 21;
+    // optional string carrotEvolved = 23;
     boolean hasCarrotEvolved();
     String getCarrotEvolved();
     
-    // optional string description = 22;
+    // optional string description = 24;
     boolean hasDescription();
     String getDescription();
   }
@@ -326,31 +334,63 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 3;
-    public static final int QUALITY_FIELD_NUMBER = 3;
+    // optional string monsterGroup = 3;
+    public static final int MONSTERGROUP_FIELD_NUMBER = 3;
+    private java.lang.Object monsterGroup_;
+    public boolean hasMonsterGroup() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public String getMonsterGroup() {
+      java.lang.Object ref = monsterGroup_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          monsterGroup_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getMonsterGroupBytes() {
+      java.lang.Object ref = monsterGroup_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        monsterGroup_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
+    public static final int QUALITY_FIELD_NUMBER = 4;
     private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_;
     public boolean hasQuality() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality() {
       return quality_;
     }
     
-    // optional int32 evolutionLevel = 4;
-    public static final int EVOLUTIONLEVEL_FIELD_NUMBER = 4;
+    // optional int32 evolutionLevel = 5;
+    public static final int EVOLUTIONLEVEL_FIELD_NUMBER = 5;
     private int evolutionLevel_;
     public boolean hasEvolutionLevel() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public int getEvolutionLevel() {
       return evolutionLevel_;
     }
     
-    // optional string displayName = 5;
-    public static final int DISPLAYNAME_FIELD_NUMBER = 5;
+    // optional string displayName = 6;
+    public static final int DISPLAYNAME_FIELD_NUMBER = 6;
     private java.lang.Object displayName_;
     public boolean hasDisplayName() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public String getDisplayName() {
       java.lang.Object ref = displayName_;
@@ -378,31 +418,31 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 6;
-    public static final int ELEMENT_FIELD_NUMBER = 6;
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 7;
+    public static final int ELEMENT_FIELD_NUMBER = 7;
     private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement element_;
     public boolean hasElement() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getElement() {
       return element_;
     }
     
-    // optional int32 baseHp = 7;
-    public static final int BASEHP_FIELD_NUMBER = 7;
+    // optional int32 baseHp = 8;
+    public static final int BASEHP_FIELD_NUMBER = 8;
     private int baseHp_;
     public boolean hasBaseHp() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public int getBaseHp() {
       return baseHp_;
     }
     
-    // optional string imageName = 8;
-    public static final int IMAGENAME_FIELD_NUMBER = 8;
+    // optional string imageName = 9;
+    public static final int IMAGENAME_FIELD_NUMBER = 9;
     private java.lang.Object imageName_;
     public boolean hasImageName() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     public String getImageName() {
       java.lang.Object ref = imageName_;
@@ -430,111 +470,121 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional int32 numPuzzlePieces = 9;
-    public static final int NUMPUZZLEPIECES_FIELD_NUMBER = 9;
+    // optional int32 numPuzzlePieces = 10;
+    public static final int NUMPUZZLEPIECES_FIELD_NUMBER = 10;
     private int numPuzzlePieces_;
     public boolean hasNumPuzzlePieces() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     public int getNumPuzzlePieces() {
       return numPuzzlePieces_;
     }
     
-    // optional int32 elementOneDmg = 10;
-    public static final int ELEMENTONEDMG_FIELD_NUMBER = 10;
+    // optional int32 minutesToCombinePieces = 11;
+    public static final int MINUTESTOCOMBINEPIECES_FIELD_NUMBER = 11;
+    private int minutesToCombinePieces_;
+    public boolean hasMinutesToCombinePieces() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    public int getMinutesToCombinePieces() {
+      return minutesToCombinePieces_;
+    }
+    
+    // optional int32 elementOneDmg = 12;
+    public static final int ELEMENTONEDMG_FIELD_NUMBER = 12;
     private int elementOneDmg_;
     public boolean hasElementOneDmg() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     public int getElementOneDmg() {
       return elementOneDmg_;
     }
     
-    // optional int32 elementTwoDmg = 11;
-    public static final int ELEMENTTWODMG_FIELD_NUMBER = 11;
+    // optional int32 elementTwoDmg = 13;
+    public static final int ELEMENTTWODMG_FIELD_NUMBER = 13;
     private int elementTwoDmg_;
     public boolean hasElementTwoDmg() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     public int getElementTwoDmg() {
       return elementTwoDmg_;
     }
     
-    // optional int32 elementThreeDmg = 12;
-    public static final int ELEMENTTHREEDMG_FIELD_NUMBER = 12;
+    // optional int32 elementThreeDmg = 14;
+    public static final int ELEMENTTHREEDMG_FIELD_NUMBER = 14;
     private int elementThreeDmg_;
     public boolean hasElementThreeDmg() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     public int getElementThreeDmg() {
       return elementThreeDmg_;
     }
     
-    // optional int32 elementFourDmg = 13;
-    public static final int ELEMENTFOURDMG_FIELD_NUMBER = 13;
+    // optional int32 elementFourDmg = 15;
+    public static final int ELEMENTFOURDMG_FIELD_NUMBER = 15;
     private int elementFourDmg_;
     public boolean hasElementFourDmg() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     public int getElementFourDmg() {
       return elementFourDmg_;
     }
     
-    // optional int32 elementFiveDmg = 14;
-    public static final int ELEMENTFIVEDMG_FIELD_NUMBER = 14;
+    // optional int32 elementFiveDmg = 16;
+    public static final int ELEMENTFIVEDMG_FIELD_NUMBER = 16;
     private int elementFiveDmg_;
     public boolean hasElementFiveDmg() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     public int getElementFiveDmg() {
       return elementFiveDmg_;
     }
     
-    // optional float hpLevelMultiplier = 15;
-    public static final int HPLEVELMULTIPLIER_FIELD_NUMBER = 15;
+    // optional float hpLevelMultiplier = 17;
+    public static final int HPLEVELMULTIPLIER_FIELD_NUMBER = 17;
     private float hpLevelMultiplier_;
     public boolean hasHpLevelMultiplier() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     public float getHpLevelMultiplier() {
       return hpLevelMultiplier_;
     }
     
-    // optional float attackLevelMultiplier = 16;
-    public static final int ATTACKLEVELMULTIPLIER_FIELD_NUMBER = 16;
+    // optional float attackLevelMultiplier = 18;
+    public static final int ATTACKLEVELMULTIPLIER_FIELD_NUMBER = 18;
     private float attackLevelMultiplier_;
     public boolean hasAttackLevelMultiplier() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     public float getAttackLevelMultiplier() {
       return attackLevelMultiplier_;
     }
     
-    // optional int32 maxLevel = 17;
-    public static final int MAXLEVEL_FIELD_NUMBER = 17;
+    // optional int32 maxLevel = 19;
+    public static final int MAXLEVEL_FIELD_NUMBER = 19;
     private int maxLevel_;
     public boolean hasMaxLevel() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
+      return ((bitField0_ & 0x00040000) == 0x00040000);
     }
     public int getMaxLevel() {
       return maxLevel_;
     }
     
-    // optional int32 evolutionMonsterId = 18;
-    public static final int EVOLUTIONMONSTERID_FIELD_NUMBER = 18;
+    // optional int32 evolutionMonsterId = 20;
+    public static final int EVOLUTIONMONSTERID_FIELD_NUMBER = 20;
     private int evolutionMonsterId_;
     public boolean hasEvolutionMonsterId() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
+      return ((bitField0_ & 0x00080000) == 0x00080000);
     }
     public int getEvolutionMonsterId() {
       return evolutionMonsterId_;
     }
     
-    // optional string carrotRecruited = 19;
-    public static final int CARROTRECRUITED_FIELD_NUMBER = 19;
+    // optional string carrotRecruited = 21;
+    public static final int CARROTRECRUITED_FIELD_NUMBER = 21;
     private java.lang.Object carrotRecruited_;
     public boolean hasCarrotRecruited() {
-      return ((bitField0_ & 0x00040000) == 0x00040000);
+      return ((bitField0_ & 0x00100000) == 0x00100000);
     }
     public String getCarrotRecruited() {
       java.lang.Object ref = carrotRecruited_;
@@ -562,11 +612,11 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional string carrotDefeated = 20;
-    public static final int CARROTDEFEATED_FIELD_NUMBER = 20;
+    // optional string carrotDefeated = 22;
+    public static final int CARROTDEFEATED_FIELD_NUMBER = 22;
     private java.lang.Object carrotDefeated_;
     public boolean hasCarrotDefeated() {
-      return ((bitField0_ & 0x00080000) == 0x00080000);
+      return ((bitField0_ & 0x00200000) == 0x00200000);
     }
     public String getCarrotDefeated() {
       java.lang.Object ref = carrotDefeated_;
@@ -594,11 +644,11 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional string carrotEvolved = 21;
-    public static final int CARROTEVOLVED_FIELD_NUMBER = 21;
+    // optional string carrotEvolved = 23;
+    public static final int CARROTEVOLVED_FIELD_NUMBER = 23;
     private java.lang.Object carrotEvolved_;
     public boolean hasCarrotEvolved() {
-      return ((bitField0_ & 0x00100000) == 0x00100000);
+      return ((bitField0_ & 0x00400000) == 0x00400000);
     }
     public String getCarrotEvolved() {
       java.lang.Object ref = carrotEvolved_;
@@ -626,11 +676,11 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional string description = 22;
-    public static final int DESCRIPTION_FIELD_NUMBER = 22;
+    // optional string description = 24;
+    public static final int DESCRIPTION_FIELD_NUMBER = 24;
     private java.lang.Object description_;
     public boolean hasDescription() {
-      return ((bitField0_ & 0x00200000) == 0x00200000);
+      return ((bitField0_ & 0x00800000) == 0x00800000);
     }
     public String getDescription() {
       java.lang.Object ref = description_;
@@ -661,6 +711,7 @@ public final class MonsterStuffProto {
     private void initFields() {
       monsterId_ = 0;
       name_ = "";
+      monsterGroup_ = "";
       quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
       evolutionLevel_ = 0;
       displayName_ = "";
@@ -668,6 +719,7 @@ public final class MonsterStuffProto {
       baseHp_ = 0;
       imageName_ = "";
       numPuzzlePieces_ = 0;
+      minutesToCombinePieces_ = 0;
       elementOneDmg_ = 0;
       elementTwoDmg_ = 0;
       elementThreeDmg_ = 0;
@@ -701,64 +753,70 @@ public final class MonsterStuffProto {
         output.writeBytes(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, quality_.getNumber());
+        output.writeBytes(3, getMonsterGroupBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, evolutionLevel_);
+        output.writeEnum(4, quality_.getNumber());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeBytes(5, getDisplayNameBytes());
+        output.writeInt32(5, evolutionLevel_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeEnum(6, element_.getNumber());
+        output.writeBytes(6, getDisplayNameBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, baseHp_);
+        output.writeEnum(7, element_.getNumber());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBytes(8, getImageNameBytes());
+        output.writeInt32(8, baseHp_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(9, numPuzzlePieces_);
+        output.writeBytes(9, getImageNameBytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, elementOneDmg_);
+        output.writeInt32(10, numPuzzlePieces_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, elementTwoDmg_);
+        output.writeInt32(11, minutesToCombinePieces_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(12, elementThreeDmg_);
+        output.writeInt32(12, elementOneDmg_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeInt32(13, elementFourDmg_);
+        output.writeInt32(13, elementTwoDmg_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeInt32(14, elementFiveDmg_);
+        output.writeInt32(14, elementThreeDmg_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        output.writeFloat(15, hpLevelMultiplier_);
+        output.writeInt32(15, elementFourDmg_);
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        output.writeFloat(16, attackLevelMultiplier_);
+        output.writeInt32(16, elementFiveDmg_);
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeInt32(17, maxLevel_);
+        output.writeFloat(17, hpLevelMultiplier_);
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        output.writeInt32(18, evolutionMonsterId_);
+        output.writeFloat(18, attackLevelMultiplier_);
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
-        output.writeBytes(19, getCarrotRecruitedBytes());
+        output.writeInt32(19, maxLevel_);
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
-        output.writeBytes(20, getCarrotDefeatedBytes());
+        output.writeInt32(20, evolutionMonsterId_);
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
-        output.writeBytes(21, getCarrotEvolvedBytes());
+        output.writeBytes(21, getCarrotRecruitedBytes());
       }
       if (((bitField0_ & 0x00200000) == 0x00200000)) {
-        output.writeBytes(22, getDescriptionBytes());
+        output.writeBytes(22, getCarrotDefeatedBytes());
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        output.writeBytes(23, getCarrotEvolvedBytes());
+      }
+      if (((bitField0_ & 0x00800000) == 0x00800000)) {
+        output.writeBytes(24, getDescriptionBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -779,83 +837,91 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, quality_.getNumber());
+          .computeBytesSize(3, getMonsterGroupBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, evolutionLevel_);
+          .computeEnumSize(4, quality_.getNumber());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getDisplayNameBytes());
+          .computeInt32Size(5, evolutionLevel_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, element_.getNumber());
+          .computeBytesSize(6, getDisplayNameBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, baseHp_);
+          .computeEnumSize(7, element_.getNumber());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(8, getImageNameBytes());
+          .computeInt32Size(8, baseHp_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, numPuzzlePieces_);
+          .computeBytesSize(9, getImageNameBytes());
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, elementOneDmg_);
+          .computeInt32Size(10, numPuzzlePieces_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, elementTwoDmg_);
+          .computeInt32Size(11, minutesToCombinePieces_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, elementThreeDmg_);
+          .computeInt32Size(12, elementOneDmg_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, elementFourDmg_);
+          .computeInt32Size(13, elementTwoDmg_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(14, elementFiveDmg_);
+          .computeInt32Size(14, elementThreeDmg_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(15, hpLevelMultiplier_);
+          .computeInt32Size(15, elementFourDmg_);
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(16, attackLevelMultiplier_);
+          .computeInt32Size(16, elementFiveDmg_);
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(17, maxLevel_);
+          .computeFloatSize(17, hpLevelMultiplier_);
       }
       if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(18, evolutionMonsterId_);
+          .computeFloatSize(18, attackLevelMultiplier_);
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(19, getCarrotRecruitedBytes());
+          .computeInt32Size(19, maxLevel_);
       }
       if (((bitField0_ & 0x00080000) == 0x00080000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(20, getCarrotDefeatedBytes());
+          .computeInt32Size(20, evolutionMonsterId_);
       }
       if (((bitField0_ & 0x00100000) == 0x00100000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(21, getCarrotEvolvedBytes());
+          .computeBytesSize(21, getCarrotRecruitedBytes());
       }
       if (((bitField0_ & 0x00200000) == 0x00200000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(22, getDescriptionBytes());
+          .computeBytesSize(22, getCarrotDefeatedBytes());
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(23, getCarrotEvolvedBytes());
+      }
+      if (((bitField0_ & 0x00800000) == 0x00800000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(24, getDescriptionBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -985,46 +1051,50 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        monsterGroup_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
-        evolutionLevel_ = 0;
+        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
         bitField0_ = (bitField0_ & ~0x00000008);
-        displayName_ = "";
+        evolutionLevel_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        displayName_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        baseHp_ = 0;
+        element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
         bitField0_ = (bitField0_ & ~0x00000040);
-        imageName_ = "";
+        baseHp_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
-        numPuzzlePieces_ = 0;
+        imageName_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
-        elementOneDmg_ = 0;
+        numPuzzlePieces_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        elementTwoDmg_ = 0;
+        minutesToCombinePieces_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
-        elementThreeDmg_ = 0;
+        elementOneDmg_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
-        elementFourDmg_ = 0;
+        elementTwoDmg_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
-        elementFiveDmg_ = 0;
+        elementThreeDmg_ = 0;
         bitField0_ = (bitField0_ & ~0x00002000);
-        hpLevelMultiplier_ = 0F;
+        elementFourDmg_ = 0;
         bitField0_ = (bitField0_ & ~0x00004000);
-        attackLevelMultiplier_ = 0F;
+        elementFiveDmg_ = 0;
         bitField0_ = (bitField0_ & ~0x00008000);
-        maxLevel_ = 0;
+        hpLevelMultiplier_ = 0F;
         bitField0_ = (bitField0_ & ~0x00010000);
-        evolutionMonsterId_ = 0;
+        attackLevelMultiplier_ = 0F;
         bitField0_ = (bitField0_ & ~0x00020000);
-        carrotRecruited_ = "";
+        maxLevel_ = 0;
         bitField0_ = (bitField0_ & ~0x00040000);
-        carrotDefeated_ = "";
+        evolutionMonsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00080000);
-        carrotEvolved_ = "";
+        carrotRecruited_ = "";
         bitField0_ = (bitField0_ & ~0x00100000);
-        description_ = "";
+        carrotDefeated_ = "";
         bitField0_ = (bitField0_ & ~0x00200000);
+        carrotEvolved_ = "";
+        bitField0_ = (bitField0_ & ~0x00400000);
+        description_ = "";
+        bitField0_ = (bitField0_ & ~0x00800000);
         return this;
       }
       
@@ -1074,81 +1144,89 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.quality_ = quality_;
+        result.monsterGroup_ = monsterGroup_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.evolutionLevel_ = evolutionLevel_;
+        result.quality_ = quality_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.displayName_ = displayName_;
+        result.evolutionLevel_ = evolutionLevel_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.element_ = element_;
+        result.displayName_ = displayName_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.baseHp_ = baseHp_;
+        result.element_ = element_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.imageName_ = imageName_;
+        result.baseHp_ = baseHp_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.numPuzzlePieces_ = numPuzzlePieces_;
+        result.imageName_ = imageName_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.elementOneDmg_ = elementOneDmg_;
+        result.numPuzzlePieces_ = numPuzzlePieces_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.elementTwoDmg_ = elementTwoDmg_;
+        result.minutesToCombinePieces_ = minutesToCombinePieces_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.elementThreeDmg_ = elementThreeDmg_;
+        result.elementOneDmg_ = elementOneDmg_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.elementFourDmg_ = elementFourDmg_;
+        result.elementTwoDmg_ = elementTwoDmg_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.elementFiveDmg_ = elementFiveDmg_;
+        result.elementThreeDmg_ = elementThreeDmg_;
         if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.hpLevelMultiplier_ = hpLevelMultiplier_;
+        result.elementFourDmg_ = elementFourDmg_;
         if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.attackLevelMultiplier_ = attackLevelMultiplier_;
+        result.elementFiveDmg_ = elementFiveDmg_;
         if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
           to_bitField0_ |= 0x00010000;
         }
-        result.maxLevel_ = maxLevel_;
+        result.hpLevelMultiplier_ = hpLevelMultiplier_;
         if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00020000;
         }
-        result.evolutionMonsterId_ = evolutionMonsterId_;
+        result.attackLevelMultiplier_ = attackLevelMultiplier_;
         if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
           to_bitField0_ |= 0x00040000;
         }
-        result.carrotRecruited_ = carrotRecruited_;
+        result.maxLevel_ = maxLevel_;
         if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
           to_bitField0_ |= 0x00080000;
         }
-        result.carrotDefeated_ = carrotDefeated_;
+        result.evolutionMonsterId_ = evolutionMonsterId_;
         if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
           to_bitField0_ |= 0x00100000;
         }
-        result.carrotEvolved_ = carrotEvolved_;
+        result.carrotRecruited_ = carrotRecruited_;
         if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
           to_bitField0_ |= 0x00200000;
+        }
+        result.carrotDefeated_ = carrotDefeated_;
+        if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
+          to_bitField0_ |= 0x00400000;
+        }
+        result.carrotEvolved_ = carrotEvolved_;
+        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
+          to_bitField0_ |= 0x00800000;
         }
         result.description_ = description_;
         result.bitField0_ = to_bitField0_;
@@ -1173,6 +1251,9 @@ public final class MonsterStuffProto {
         if (other.hasName()) {
           setName(other.getName());
         }
+        if (other.hasMonsterGroup()) {
+          setMonsterGroup(other.getMonsterGroup());
+        }
         if (other.hasQuality()) {
           setQuality(other.getQuality());
         }
@@ -1193,6 +1274,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasNumPuzzlePieces()) {
           setNumPuzzlePieces(other.getNumPuzzlePieces());
+        }
+        if (other.hasMinutesToCombinePieces()) {
+          setMinutesToCombinePieces(other.getMinutesToCombinePieces());
         }
         if (other.hasElementOneDmg()) {
           setElementOneDmg(other.getElementOneDmg());
@@ -1274,115 +1358,125 @@ public final class MonsterStuffProto {
               name_ = input.readBytes();
               break;
             }
-            case 24: {
+            case 26: {
+              bitField0_ |= 0x00000004;
+              monsterGroup_ = input.readBytes();
+              break;
+            }
+            case 32: {
               int rawValue = input.readEnum();
               com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality value = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
+                unknownFields.mergeVarintField(4, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000008;
                 quality_ = value;
               }
               break;
             }
-            case 32: {
-              bitField0_ |= 0x00000008;
+            case 40: {
+              bitField0_ |= 0x00000010;
               evolutionLevel_ = input.readInt32();
               break;
             }
-            case 42: {
-              bitField0_ |= 0x00000010;
+            case 50: {
+              bitField0_ |= 0x00000020;
               displayName_ = input.readBytes();
               break;
             }
-            case 48: {
+            case 56: {
               int rawValue = input.readEnum();
               com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(6, rawValue);
+                unknownFields.mergeVarintField(7, rawValue);
               } else {
-                bitField0_ |= 0x00000020;
+                bitField0_ |= 0x00000040;
                 element_ = value;
               }
               break;
             }
-            case 56: {
-              bitField0_ |= 0x00000040;
+            case 64: {
+              bitField0_ |= 0x00000080;
               baseHp_ = input.readInt32();
               break;
             }
-            case 66: {
-              bitField0_ |= 0x00000080;
-              imageName_ = input.readBytes();
-              break;
-            }
-            case 72: {
+            case 74: {
               bitField0_ |= 0x00000100;
-              numPuzzlePieces_ = input.readInt32();
+              imageName_ = input.readBytes();
               break;
             }
             case 80: {
               bitField0_ |= 0x00000200;
-              elementOneDmg_ = input.readInt32();
+              numPuzzlePieces_ = input.readInt32();
               break;
             }
             case 88: {
               bitField0_ |= 0x00000400;
-              elementTwoDmg_ = input.readInt32();
+              minutesToCombinePieces_ = input.readInt32();
               break;
             }
             case 96: {
               bitField0_ |= 0x00000800;
-              elementThreeDmg_ = input.readInt32();
+              elementOneDmg_ = input.readInt32();
               break;
             }
             case 104: {
               bitField0_ |= 0x00001000;
-              elementFourDmg_ = input.readInt32();
+              elementTwoDmg_ = input.readInt32();
               break;
             }
             case 112: {
               bitField0_ |= 0x00002000;
+              elementThreeDmg_ = input.readInt32();
+              break;
+            }
+            case 120: {
+              bitField0_ |= 0x00004000;
+              elementFourDmg_ = input.readInt32();
+              break;
+            }
+            case 128: {
+              bitField0_ |= 0x00008000;
               elementFiveDmg_ = input.readInt32();
               break;
             }
-            case 125: {
-              bitField0_ |= 0x00004000;
+            case 141: {
+              bitField0_ |= 0x00010000;
               hpLevelMultiplier_ = input.readFloat();
               break;
             }
-            case 133: {
-              bitField0_ |= 0x00008000;
+            case 149: {
+              bitField0_ |= 0x00020000;
               attackLevelMultiplier_ = input.readFloat();
               break;
             }
-            case 136: {
-              bitField0_ |= 0x00010000;
+            case 152: {
+              bitField0_ |= 0x00040000;
               maxLevel_ = input.readInt32();
               break;
             }
-            case 144: {
-              bitField0_ |= 0x00020000;
-              evolutionMonsterId_ = input.readInt32();
-              break;
-            }
-            case 154: {
-              bitField0_ |= 0x00040000;
-              carrotRecruited_ = input.readBytes();
-              break;
-            }
-            case 162: {
+            case 160: {
               bitField0_ |= 0x00080000;
-              carrotDefeated_ = input.readBytes();
+              evolutionMonsterId_ = input.readInt32();
               break;
             }
             case 170: {
               bitField0_ |= 0x00100000;
-              carrotEvolved_ = input.readBytes();
+              carrotRecruited_ = input.readBytes();
               break;
             }
             case 178: {
               bitField0_ |= 0x00200000;
+              carrotDefeated_ = input.readBytes();
+              break;
+            }
+            case 186: {
+              bitField0_ |= 0x00400000;
+              carrotEvolved_ = input.readBytes();
+              break;
+            }
+            case 194: {
+              bitField0_ |= 0x00800000;
               description_ = input.readBytes();
               break;
             }
@@ -1449,10 +1543,46 @@ public final class MonsterStuffProto {
         onChanged();
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 3;
+      // optional string monsterGroup = 3;
+      private java.lang.Object monsterGroup_ = "";
+      public boolean hasMonsterGroup() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public String getMonsterGroup() {
+        java.lang.Object ref = monsterGroup_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          monsterGroup_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setMonsterGroup(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        monsterGroup_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterGroup() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        monsterGroup_ = getDefaultInstance().getMonsterGroup();
+        onChanged();
+        return this;
+      }
+      void setMonsterGroup(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        monsterGroup_ = value;
+        onChanged();
+      }
+      
+      // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
       private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
       public boolean hasQuality() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality() {
         return quality_;
@@ -1461,43 +1591,43 @@ public final class MonsterStuffProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         quality_ = value;
         onChanged();
         return this;
       }
       public Builder clearQuality() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
         onChanged();
         return this;
       }
       
-      // optional int32 evolutionLevel = 4;
+      // optional int32 evolutionLevel = 5;
       private int evolutionLevel_ ;
       public boolean hasEvolutionLevel() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getEvolutionLevel() {
         return evolutionLevel_;
       }
       public Builder setEvolutionLevel(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         evolutionLevel_ = value;
         onChanged();
         return this;
       }
       public Builder clearEvolutionLevel() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         evolutionLevel_ = 0;
         onChanged();
         return this;
       }
       
-      // optional string displayName = 5;
+      // optional string displayName = 6;
       private java.lang.Object displayName_ = "";
       public boolean hasDisplayName() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public String getDisplayName() {
         java.lang.Object ref = displayName_;
@@ -1513,27 +1643,27 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000020;
         displayName_ = value;
         onChanged();
         return this;
       }
       public Builder clearDisplayName() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         displayName_ = getDefaultInstance().getDisplayName();
         onChanged();
         return this;
       }
       void setDisplayName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         displayName_ = value;
         onChanged();
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 6;
+      // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 7;
       private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
       public boolean hasElement() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getElement() {
         return element_;
@@ -1542,43 +1672,43 @@ public final class MonsterStuffProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         element_ = value;
         onChanged();
         return this;
       }
       public Builder clearElement() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
         onChanged();
         return this;
       }
       
-      // optional int32 baseHp = 7;
+      // optional int32 baseHp = 8;
       private int baseHp_ ;
       public boolean hasBaseHp() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public int getBaseHp() {
         return baseHp_;
       }
       public Builder setBaseHp(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         baseHp_ = value;
         onChanged();
         return this;
       }
       public Builder clearBaseHp() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         baseHp_ = 0;
         onChanged();
         return this;
       }
       
-      // optional string imageName = 8;
+      // optional string imageName = 9;
       private java.lang.Object imageName_ = "";
       public boolean hasImageName() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public String getImageName() {
         java.lang.Object ref = imageName_;
@@ -1594,237 +1724,258 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000080;
+  bitField0_ |= 0x00000100;
         imageName_ = value;
         onChanged();
         return this;
       }
       public Builder clearImageName() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         imageName_ = getDefaultInstance().getImageName();
         onChanged();
         return this;
       }
       void setImageName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         imageName_ = value;
         onChanged();
       }
       
-      // optional int32 numPuzzlePieces = 9;
+      // optional int32 numPuzzlePieces = 10;
       private int numPuzzlePieces_ ;
       public boolean hasNumPuzzlePieces() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       public int getNumPuzzlePieces() {
         return numPuzzlePieces_;
       }
       public Builder setNumPuzzlePieces(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         numPuzzlePieces_ = value;
         onChanged();
         return this;
       }
       public Builder clearNumPuzzlePieces() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         numPuzzlePieces_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 elementOneDmg = 10;
+      // optional int32 minutesToCombinePieces = 11;
+      private int minutesToCombinePieces_ ;
+      public boolean hasMinutesToCombinePieces() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public int getMinutesToCombinePieces() {
+        return minutesToCombinePieces_;
+      }
+      public Builder setMinutesToCombinePieces(int value) {
+        bitField0_ |= 0x00000400;
+        minutesToCombinePieces_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMinutesToCombinePieces() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        minutesToCombinePieces_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 elementOneDmg = 12;
       private int elementOneDmg_ ;
       public boolean hasElementOneDmg() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       public int getElementOneDmg() {
         return elementOneDmg_;
       }
       public Builder setElementOneDmg(int value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000800;
         elementOneDmg_ = value;
         onChanged();
         return this;
       }
       public Builder clearElementOneDmg() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000800);
         elementOneDmg_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 elementTwoDmg = 11;
+      // optional int32 elementTwoDmg = 13;
       private int elementTwoDmg_ ;
       public boolean hasElementTwoDmg() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       public int getElementTwoDmg() {
         return elementTwoDmg_;
       }
       public Builder setElementTwoDmg(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00001000;
         elementTwoDmg_ = value;
         onChanged();
         return this;
       }
       public Builder clearElementTwoDmg() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00001000);
         elementTwoDmg_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 elementThreeDmg = 12;
+      // optional int32 elementThreeDmg = 14;
       private int elementThreeDmg_ ;
       public boolean hasElementThreeDmg() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       public int getElementThreeDmg() {
         return elementThreeDmg_;
       }
       public Builder setElementThreeDmg(int value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00002000;
         elementThreeDmg_ = value;
         onChanged();
         return this;
       }
       public Builder clearElementThreeDmg() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00002000);
         elementThreeDmg_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 elementFourDmg = 13;
+      // optional int32 elementFourDmg = 15;
       private int elementFourDmg_ ;
       public boolean hasElementFourDmg() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       public int getElementFourDmg() {
         return elementFourDmg_;
       }
       public Builder setElementFourDmg(int value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00004000;
         elementFourDmg_ = value;
         onChanged();
         return this;
       }
       public Builder clearElementFourDmg() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         elementFourDmg_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 elementFiveDmg = 14;
+      // optional int32 elementFiveDmg = 16;
       private int elementFiveDmg_ ;
       public boolean hasElementFiveDmg() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       public int getElementFiveDmg() {
         return elementFiveDmg_;
       }
       public Builder setElementFiveDmg(int value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00008000;
         elementFiveDmg_ = value;
         onChanged();
         return this;
       }
       public Builder clearElementFiveDmg() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         elementFiveDmg_ = 0;
         onChanged();
         return this;
       }
       
-      // optional float hpLevelMultiplier = 15;
+      // optional float hpLevelMultiplier = 17;
       private float hpLevelMultiplier_ ;
       public boolean hasHpLevelMultiplier() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       public float getHpLevelMultiplier() {
         return hpLevelMultiplier_;
       }
       public Builder setHpLevelMultiplier(float value) {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00010000;
         hpLevelMultiplier_ = value;
         onChanged();
         return this;
       }
       public Builder clearHpLevelMultiplier() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         hpLevelMultiplier_ = 0F;
         onChanged();
         return this;
       }
       
-      // optional float attackLevelMultiplier = 16;
+      // optional float attackLevelMultiplier = 18;
       private float attackLevelMultiplier_ ;
       public boolean hasAttackLevelMultiplier() {
-        return ((bitField0_ & 0x00008000) == 0x00008000);
+        return ((bitField0_ & 0x00020000) == 0x00020000);
       }
       public float getAttackLevelMultiplier() {
         return attackLevelMultiplier_;
       }
       public Builder setAttackLevelMultiplier(float value) {
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00020000;
         attackLevelMultiplier_ = value;
         onChanged();
         return this;
       }
       public Builder clearAttackLevelMultiplier() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         attackLevelMultiplier_ = 0F;
         onChanged();
         return this;
       }
       
-      // optional int32 maxLevel = 17;
+      // optional int32 maxLevel = 19;
       private int maxLevel_ ;
       public boolean hasMaxLevel() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
+        return ((bitField0_ & 0x00040000) == 0x00040000);
       }
       public int getMaxLevel() {
         return maxLevel_;
       }
       public Builder setMaxLevel(int value) {
-        bitField0_ |= 0x00010000;
+        bitField0_ |= 0x00040000;
         maxLevel_ = value;
         onChanged();
         return this;
       }
       public Builder clearMaxLevel() {
-        bitField0_ = (bitField0_ & ~0x00010000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         maxLevel_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 evolutionMonsterId = 18;
+      // optional int32 evolutionMonsterId = 20;
       private int evolutionMonsterId_ ;
       public boolean hasEvolutionMonsterId() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
+        return ((bitField0_ & 0x00080000) == 0x00080000);
       }
       public int getEvolutionMonsterId() {
         return evolutionMonsterId_;
       }
       public Builder setEvolutionMonsterId(int value) {
-        bitField0_ |= 0x00020000;
+        bitField0_ |= 0x00080000;
         evolutionMonsterId_ = value;
         onChanged();
         return this;
       }
       public Builder clearEvolutionMonsterId() {
-        bitField0_ = (bitField0_ & ~0x00020000);
+        bitField0_ = (bitField0_ & ~0x00080000);
         evolutionMonsterId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional string carrotRecruited = 19;
+      // optional string carrotRecruited = 21;
       private java.lang.Object carrotRecruited_ = "";
       public boolean hasCarrotRecruited() {
-        return ((bitField0_ & 0x00040000) == 0x00040000);
+        return ((bitField0_ & 0x00100000) == 0x00100000);
       }
       public String getCarrotRecruited() {
         java.lang.Object ref = carrotRecruited_;
@@ -1840,27 +1991,27 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00040000;
+  bitField0_ |= 0x00100000;
         carrotRecruited_ = value;
         onChanged();
         return this;
       }
       public Builder clearCarrotRecruited() {
-        bitField0_ = (bitField0_ & ~0x00040000);
+        bitField0_ = (bitField0_ & ~0x00100000);
         carrotRecruited_ = getDefaultInstance().getCarrotRecruited();
         onChanged();
         return this;
       }
       void setCarrotRecruited(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00040000;
+        bitField0_ |= 0x00100000;
         carrotRecruited_ = value;
         onChanged();
       }
       
-      // optional string carrotDefeated = 20;
+      // optional string carrotDefeated = 22;
       private java.lang.Object carrotDefeated_ = "";
       public boolean hasCarrotDefeated() {
-        return ((bitField0_ & 0x00080000) == 0x00080000);
+        return ((bitField0_ & 0x00200000) == 0x00200000);
       }
       public String getCarrotDefeated() {
         java.lang.Object ref = carrotDefeated_;
@@ -1876,27 +2027,27 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00080000;
+  bitField0_ |= 0x00200000;
         carrotDefeated_ = value;
         onChanged();
         return this;
       }
       public Builder clearCarrotDefeated() {
-        bitField0_ = (bitField0_ & ~0x00080000);
+        bitField0_ = (bitField0_ & ~0x00200000);
         carrotDefeated_ = getDefaultInstance().getCarrotDefeated();
         onChanged();
         return this;
       }
       void setCarrotDefeated(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00200000;
         carrotDefeated_ = value;
         onChanged();
       }
       
-      // optional string carrotEvolved = 21;
+      // optional string carrotEvolved = 23;
       private java.lang.Object carrotEvolved_ = "";
       public boolean hasCarrotEvolved() {
-        return ((bitField0_ & 0x00100000) == 0x00100000);
+        return ((bitField0_ & 0x00400000) == 0x00400000);
       }
       public String getCarrotEvolved() {
         java.lang.Object ref = carrotEvolved_;
@@ -1912,27 +2063,27 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00100000;
+  bitField0_ |= 0x00400000;
         carrotEvolved_ = value;
         onChanged();
         return this;
       }
       public Builder clearCarrotEvolved() {
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00400000);
         carrotEvolved_ = getDefaultInstance().getCarrotEvolved();
         onChanged();
         return this;
       }
       void setCarrotEvolved(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00400000;
         carrotEvolved_ = value;
         onChanged();
       }
       
-      // optional string description = 22;
+      // optional string description = 24;
       private java.lang.Object description_ = "";
       public boolean hasDescription() {
-        return ((bitField0_ & 0x00200000) == 0x00200000);
+        return ((bitField0_ & 0x00800000) == 0x00800000);
       }
       public String getDescription() {
         java.lang.Object ref = description_;
@@ -1948,19 +2099,19 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00200000;
+  bitField0_ |= 0x00800000;
         description_ = value;
         onChanged();
         return this;
       }
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00800000);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       void setDescription(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00800000;
         description_ = value;
         onChanged();
       }
@@ -5262,45 +5413,46 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\353\005\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\241\006\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
-      "\030\002 \001(\t\022<\n\007quality\030\003 \001(\0162+.com.lvl6.proto" +
-      ".MonsterProto.MonsterQuality\022\026\n\016evolutio" +
-      "nLevel\030\004 \001(\005\022\023\n\013displayName\030\005 \001(\t\022<\n\007ele" +
-      "ment\030\006 \001(\0162+.com.lvl6.proto.MonsterProto" +
-      ".MonsterElement\022\016\n\006baseHp\030\007 \001(\005\022\021\n\timage" +
-      "Name\030\010 \001(\t\022\027\n\017numPuzzlePieces\030\t \001(\005\022\025\n\re" +
-      "lementOneDmg\030\n \001(\005\022\025\n\relementTwoDmg\030\013 \001(" +
-      "\005\022\027\n\017elementThreeDmg\030\014 \001(\005\022\026\n\016elementFou",
-      "rDmg\030\r \001(\005\022\026\n\016elementFiveDmg\030\016 \001(\005\022\031\n\021hp" +
-      "LevelMultiplier\030\017 \001(\002\022\035\n\025attackLevelMult" +
-      "iplier\030\020 \001(\002\022\020\n\010maxLevel\030\021 \001(\005\022\032\n\022evolut" +
-      "ionMonsterId\030\022 \001(\005\022\027\n\017carrotRecruited\030\023 " +
-      "\001(\t\022\026\n\016carrotDefeated\030\024 \001(\t\022\025\n\rcarrotEvo" +
-      "lved\030\025 \001(\t\022\023\n\013description\030\026 \001(\t\"J\n\016Monst" +
-      "erQuality\022\n\n\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA" +
-      "\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEGENDARY\020\005\"M\n\016MonsterEl" +
-      "ement\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n" +
-      "\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\"\313\001\n\024FullUserM",
-      "onsterProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006us" +
-      "erId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrent" +
-      "Exp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrent" +
-      "Health\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisCom" +
-      "plete\030\010 \001(\010\022\023\n\013teamSlotNum\030\t \001(\005\"a\n\027User" +
-      "MonsterHealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n\ru" +
-      "serMonsterId\030\002 \001(\003\022\037\n\027expectedStartTimeM" +
-      "illis\030\003 \001(\003\"M\n\035UserMonsterCurrentHealthP" +
-      "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentHe" +
-      "alth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006u",
-      "serId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com.l" +
-      "vl6.proto.UserEnhancementItemProto\0229\n\007fe" +
-      "eders\030\003 \003(\0132(.com.lvl6.proto.UserEnhance" +
-      "mentItemProto\"R\n\030UserEnhancementItemProt" +
-      "o\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedStar" +
-      "tTimeMillis\030\002 \001(\003\"f\n\032UserMonsterCurrentE" +
-      "xpProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expect" +
-      "edExperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(" +
-      "\005B\023B\021MonsterStuffProto"
+      "\030\002 \001(\t\022\024\n\014monsterGroup\030\003 \001(\t\022<\n\007quality\030" +
+      "\004 \001(\0162+.com.lvl6.proto.MonsterProto.Mons" +
+      "terQuality\022\026\n\016evolutionLevel\030\005 \001(\005\022\023\n\013di" +
+      "splayName\030\006 \001(\t\022<\n\007element\030\007 \001(\0162+.com.l" +
+      "vl6.proto.MonsterProto.MonsterElement\022\016\n" +
+      "\006baseHp\030\010 \001(\005\022\021\n\timageName\030\t \001(\t\022\027\n\017numP" +
+      "uzzlePieces\030\n \001(\005\022\036\n\026minutesToCombinePie" +
+      "ces\030\013 \001(\005\022\025\n\relementOneDmg\030\014 \001(\005\022\025\n\relem",
+      "entTwoDmg\030\r \001(\005\022\027\n\017elementThreeDmg\030\016 \001(\005" +
+      "\022\026\n\016elementFourDmg\030\017 \001(\005\022\026\n\016elementFiveD" +
+      "mg\030\020 \001(\005\022\031\n\021hpLevelMultiplier\030\021 \001(\002\022\035\n\025a" +
+      "ttackLevelMultiplier\030\022 \001(\002\022\020\n\010maxLevel\030\023" +
+      " \001(\005\022\032\n\022evolutionMonsterId\030\024 \001(\005\022\027\n\017carr" +
+      "otRecruited\030\025 \001(\t\022\026\n\016carrotDefeated\030\026 \001(" +
+      "\t\022\025\n\rcarrotEvolved\030\027 \001(\t\022\023\n\013description\030" +
+      "\030 \001(\t\"J\n\016MonsterQuality\022\n\n\006COMMON\020\001\022\010\n\004R" +
+      "ARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEGENDARY\020" +
+      "\005\"M\n\016MonsterElement\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002",
+      "\022\t\n\005WATER\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005" +
+      "\"\313\001\n\024FullUserMonsterProto\022\025\n\ruserMonster" +
+      "Id\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 " +
+      "\001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 " +
+      "\001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tnumPieces\030" +
+      "\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\023\n\013teamSlotNum" +
+      "\030\t \001(\005\"a\n\027UserMonsterHealingProto\022\016\n\006use" +
+      "rId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\037\n\027expe" +
+      "ctedStartTimeMillis\030\003 \001(\003\"M\n\035UserMonster" +
+      "CurrentHealthProto\022\025\n\ruserMonsterId\030\001 \001(",
+      "\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhance" +
+      "mentProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster" +
+      "\030\002 \001(\0132(.com.lvl6.proto.UserEnhancementI" +
+      "temProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.pro" +
+      "to.UserEnhancementItemProto\"R\n\030UserEnhan" +
+      "cementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037" +
+      "\n\027expectedStartTimeMillis\030\002 \001(\003\"f\n\032UserM" +
+      "onsterCurrentExpProto\022\025\n\ruserMonsterId\030\001" +
+      " \001(\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n\rexpe" +
+      "ctedLevel\030\003 \001(\005B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5312,7 +5464,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_MonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "Name", "Quality", "EvolutionLevel", "DisplayName", "Element", "BaseHp", "ImageName", "NumPuzzlePieces", "ElementOneDmg", "ElementTwoDmg", "ElementThreeDmg", "ElementFourDmg", "ElementFiveDmg", "HpLevelMultiplier", "AttackLevelMultiplier", "MaxLevel", "EvolutionMonsterId", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", },
+              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "Element", "BaseHp", "ImageName", "NumPuzzlePieces", "MinutesToCombinePieces", "ElementOneDmg", "ElementTwoDmg", "ElementThreeDmg", "ElementFourDmg", "ElementFiveDmg", "HpLevelMultiplier", "AttackLevelMultiplier", "MaxLevel", "EvolutionMonsterId", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", },
               com.lvl6.proto.MonsterStuffProto.MonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor =

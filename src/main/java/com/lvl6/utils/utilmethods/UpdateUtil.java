@@ -164,4 +164,7 @@ public interface UpdateUtil {
 
   public abstract int updateUserMonsterNumPieces(int userId,
   		Collection<MonsterForUser> monsterForUserList, String updateReason);
+  
+  public abstract int updateCompleteUserMonster(List<Long> userMonsterIds);
+  
 }

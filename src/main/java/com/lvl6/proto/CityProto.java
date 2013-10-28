@@ -1062,7 +1062,7 @@ public final class CityProto {
     boolean hasImgId();
     String getImgId();
     
-    // optional .com.lvl6.proto.StructOrientation orientation = 9;
+    // optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];
     boolean hasOrientation();
     com.lvl6.proto.StructureProto.StructOrientation getOrientation();
   }
@@ -1297,7 +1297,7 @@ public final class CityProto {
       }
     }
     
-    // optional .com.lvl6.proto.StructOrientation orientation = 9;
+    // optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];
     public static final int ORIENTATION_FIELD_NUMBER = 9;
     private com.lvl6.proto.StructureProto.StructOrientation orientation_;
     public boolean hasOrientation() {
@@ -2038,7 +2038,7 @@ public final class CityProto {
         onChanged();
       }
       
-      // optional .com.lvl6.proto.StructOrientation orientation = 9;
+      // optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];
       private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
       public boolean hasOrientation() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
@@ -2886,19 +2886,20 @@ public final class CityProto {
       "\001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"a\n\026CityExpa" +
       "nsionCostProto\022\024\n\014expansionNum\030\001 \001(\005\022\025\n\r" +
       "expansionCost\030\002 \001(\005\022\032\n\022numMinutesToExpan" +
-      "d\030\003 \001(\005\"\352\002\n\020CityElementProto\022\016\n\006cityId\030\001" +
+      "d\030\003 \001(\005\"\366\002\n\020CityElementProto\022\016\n\006cityId\030\001" +
       " \001(\005\022\017\n\007assetId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022;\n\004t" +
       "ype\030\004 \001(\0162-.com.lvl6.proto.CityElementPr",
       "oto.CityElemType\022/\n\006coords\030\005 \001(\0132\037.com.l" +
       "vl6.proto.CoordinateProto\022\017\n\007xLength\030\006 \001" +
-      "(\005\022\017\n\007yLength\030\007 \001(\005\022\r\n\005imgId\030\010 \001(\t\0226\n\013or" +
+      "(\005\022\017\n\007yLength\030\007 \001(\005\022\r\n\005imgId\030\010 \001(\t\022B\n\013or" +
       "ientation\030\t \001(\0162!.com.lvl6.proto.StructO" +
-      "rientation\"P\n\014CityElemType\022\014\n\010BUILDING\020\001" +
-      "\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_NEUTRAL_ENEMY" +
-      "\020\003\022\010\n\004BOSS\020\004\"\203\001\n\rFullCityProto\022\016\n\006cityId" +
-      "\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapImgName\030\003 \001(\t" +
-      "\022/\n\006center\030\004 \001(\0132\037.com.lvl6.proto.Coordi" +
-      "nateProto\022\017\n\007taskIds\030\005 \003(\005B\013B\tCityProto"
+      "rientation:\nPOSITION_1\"P\n\014CityElemType\022\014" +
+      "\n\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_N" +
+      "EUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\001\n\rFullCityPro" +
+      "to\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapI" +
+      "mgName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl6." +
+      "proto.CoordinateProto\022\017\n\007taskIds\030\005 \003(\005B\013",
+      "B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

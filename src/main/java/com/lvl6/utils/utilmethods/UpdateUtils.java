@@ -827,5 +827,10 @@ public class UpdateUtils implements UpdateUtil {
 			return numUpdated;
 		}
 
+		@Override
+		public int updateCompleteUserMonster(List<Long> userMonsterIds) {
+			String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+			
+		}
 
 }

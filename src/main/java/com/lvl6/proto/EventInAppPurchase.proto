@@ -37,7 +37,7 @@ message InAppPurchaseResponseProto {
 
 message EarnFreeDiamondsRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional EarnFreeDiamondsType freeDiamondsType = 2;
+	optional EarnFreeDiamondsType freeDiamondsType = 2 [default = FB_CONNECT];
 	optional int64 clientTime = 3;
 		
 }
@@ -45,7 +45,7 @@ message EarnFreeDiamondsRequestProto {
 message EarnFreeDiamondsResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional EarnFreeDiamondsStatus status = 2;
-	optional EarnFreeDiamondsType freeDiamondsType = 3;
+	optional EarnFreeDiamondsType freeDiamondsType = 3 [default = FB_CONNECT];
 	
 	enum EarnFreeDiamondsStatus {
 		SUCCESS = 1;

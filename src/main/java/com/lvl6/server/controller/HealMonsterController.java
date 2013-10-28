@@ -94,7 +94,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	Set<Long> newIds = new HashSet<Long>();
     	newIds.addAll(newMap.keySet());
     	Map<Long, MonsterForUser> existingUserMonsters = RetrieveUtils
-    			.monsterForUserRetrieveUtils().getSpecificUserMonsters(newIds);
+    			.monsterForUserRetrieveUtils().getSpecificUserMonstersForUser(userId, newIds);
     	
       boolean legit = checkLegit(resBuilder, aUser, userId,
       		cashCost, gemCost, existingUserMonsters, alreadyHealing,

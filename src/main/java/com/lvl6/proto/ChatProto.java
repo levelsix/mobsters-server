@@ -10,20 +10,20 @@ public final class ChatProto {
   }
   public enum GroupChatScope
       implements com.google.protobuf.ProtocolMessageEnum {
-    GLOBAL(0, 1),
-    CLAN(1, 2),
+    CLAN(0, 1),
+    GLOBAL(1, 2),
     ;
     
-    public static final int GLOBAL_VALUE = 1;
-    public static final int CLAN_VALUE = 2;
+    public static final int CLAN_VALUE = 1;
+    public static final int GLOBAL_VALUE = 2;
     
     
     public final int getNumber() { return value; }
     
     public static GroupChatScope valueOf(int value) {
       switch (value) {
-        case 1: return GLOBAL;
-        case 2: return CLAN;
+        case 1: return CLAN;
+        case 2: return GLOBAL;
         default: return null;
       }
     }
@@ -54,7 +54,7 @@ public final class ChatProto {
     }
     
     private static final GroupChatScope[] VALUES = {
-      GLOBAL, CLAN, 
+      CLAN, GLOBAL, 
     };
     
     public static GroupChatScope valueOf(
@@ -2028,7 +2028,7 @@ public final class ChatProto {
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
       "roto\022\022\n\ntimeOfChat\030\002 \001(\003\022\017\n\007content\030\003 \001(",
       "\t\022\017\n\007isAdmin\030\004 \001(\010\022\016\n\006chatId\030\005 \001(\005*&\n\016Gr" +
-      "oupChatScope\022\n\n\006GLOBAL\020\001\022\010\n\004CLAN\020\002B\013B\tCh" +
+      "oupChatScope\022\010\n\004CLAN\020\001\022\n\n\006GLOBAL\020\002B\013B\tCh" +
       "atProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

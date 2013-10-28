@@ -260,6 +260,7 @@ public class MonsterStuffUtils {
   	return returnList;
   }
   
+  //for given monster and num pieces, create as many of this monster as possible
   //THE ID PROPERTY FOR ALL THESE monsterForUser will be a useless value, say 0
   public static List<MonsterForUser> createMonsterForUserFromQuantity(int userId,
   		Monster monzter, int quantity) {
@@ -268,6 +269,7 @@ public class MonsterStuffUtils {
   	int numPiecesForCompletion = monzter.getNumPuzzlePieces();
   	
   	//TODO: FIGURE OUT IF THESE ARE TEH CORRECT DEFAULT VALUES
+  	//default values for creating a monster for user
   	int id = 0;
   	int monsterId = monzter.getId();
   	int currentExp = 0; //not sure if this is right
@@ -278,6 +280,8 @@ public class MonsterStuffUtils {
   	int teamSlotNum = 0;
   	String sourceOfPieces = "";
   	
+  	//decrement quantity by number of pieces to create a monster and
+  	//this represents one monster_for_user
   	for (; quantity > 0; quantity -= numPiecesForCompletion) {
   		if (quantity >= numPiecesForCompletion) {
   			numPieces = numPiecesForCompletion;
@@ -356,4 +360,42 @@ public class MonsterStuffUtils {
   	return protos;
   }
   
+  //returns user monster ids
+  public static List<Long> getWholeButNotCombinedUserMonsters(
+  		Map<Long, MonsterForUser> idsToUserMonsters) {
+  	List<Long> wholeUserMonsterIds = new ArrayList<Long>();
+  	
+  	Set<Integer> uniqMonsterIds = new HashSet<Integer>();
+  	for (MonsterForUser mfu : idsToUserMonsters.values()) {
+  		uniqMonsterIds.add(mfu.getMonsterId());
+  	}
+  	//get the monsters in order to determine num pieces to be considered whole
+  	List<Integer> monsterIds = new ArrayList<Integer>(uniqMonsterIds);
+  	Map<Integer, Monster> idsToMonsters = 
+  			MonsterRetrieveUtils.getMonstersForMonsterIds(monsterIds);
+  	
+  	//loop through user monsters and monsters and see if user monster is whole
+  	for (long userMonsterId : idsToUserMonsters.keySet()) {
+  		MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
+  		int monsterId = mfu.getMonsterId();
+  		Monster monzter = idsToMonsters.get(monsterId);
+
+  		if (mfu.isComplete()) {
+  			//want only incomplete monsters that are whole
+  			//(all pieces haven't been combined yet)
+  			continue;
+  		}
+  		
+  		int numPiecesToBeWhole = monzter.getNumPuzzlePieces();
+  		int userMonsterPieces = mfu.getNumPieces();
+  		if (userMonsterPieces > numPiecesToBeWhole) {
+  			log.warn("userMonster has more than the max num pieces. userMonster=" +
+  					mfu + "\t monster=" + monzter);
+  		} else if (userMonsterPieces == numPiecesToBeWhole) {
+  			wholeUserMonsterIds.add(userMonsterId);
+  		}
+  	}
+  	
+  	return wholeUserMonsterIds;
+  }
 }

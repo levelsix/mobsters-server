@@ -106,6 +106,7 @@ import com.lvl6.utils.DBConnection;
     int baseHp = rs.getInt(i++);
     String imageName = rs.getString(i++);
     int numPuzzlePieces = rs.getInt(i++);
+    int minutesToCombinePieces = rs.getInt(i++);
     int elementOneDmg = rs.getInt(i++);
     int elementTwoDmg = rs.getInt(i++);
     int elementThreeDmg = rs.getInt(i++);
@@ -123,9 +124,9 @@ import com.lvl6.utils.DBConnection;
     
     Monster monster = new Monster(id, name, monsterGroup, quality,
     		evolutionLevel, displayName, element, baseHp, imageName,
-    		numPuzzlePieces, elementOneDmg, elementTwoDmg, elementThreeDmg,
-    		elementFourDmg, elementFiveDmg, hpLevelMultiplier,
-    		attackLevelMultiplier, maxLevel, evolutionMonsterId,
+    		numPuzzlePieces, minutesToCombinePieces, elementOneDmg,
+    		elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg,
+    		hpLevelMultiplier, attackLevelMultiplier, maxLevel, evolutionMonsterId,
     		carrotRecruited, carrotDefeated, carrotEvolved, description);
 
     return monster;

@@ -195,3 +195,19 @@ message IncreaseMonsterInventorySlotResponseProto {
 
 //------------------------------------------------------------------------------------------
 
+message CombineMonsterPiecesRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated int64 userMonsterIds = 2;
+}
+
+message CombineMonsterPiecesResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional CombineMonsterPiecesStatus status = 2;
+	
+	enum CombineMonsterPiecesStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+//------------------------------------------------------------------------------------------

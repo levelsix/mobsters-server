@@ -803,12 +803,12 @@ public class CreateInfoProtoUtils {
     return bldr.build();
   }
 
-  // if caller wanted the silverDrop, then silverDrop should be set
   public static MonsterProto createMonsterProto(Monster aMonster) {
     MonsterProto.Builder mpb = MonsterProto.newBuilder();
 
     mpb.setMonsterId(aMonster.getId());
     mpb.setName(aMonster.getName());
+    mpb.setMonsterGroup(aMonster.getMonsterGroup());
     mpb.setQuality(aMonster.getQuality());
     mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
     mpb.setDisplayName(aMonster.getDisplayName());
@@ -816,6 +816,7 @@ public class CreateInfoProtoUtils {
     mpb.setBaseHp(aMonster.getBaseHp());
     mpb.setImageName(aMonster.getImageName());
     mpb.setNumPuzzlePieces(aMonster.getNumPuzzlePieces());
+    mpb.setMinutesToCombinePieces(aMonster.getMinutesToCombinePieces());
     mpb.setElementOneDmg(aMonster.getElementOneDmg());
     mpb.setElementTwoDmg(aMonster.getElementTwoDmg());
     mpb.setElementThreeDmg(aMonster.getElementThreeDmg());
@@ -825,6 +826,10 @@ public class CreateInfoProtoUtils {
     mpb.setAttackLevelMultiplier(aMonster.getAttackLevelMultiplier());
     mpb.setMaxLevel(aMonster.getMaxLevel());
     mpb.setEvolutionMonsterId(aMonster.getEvolutionMonsterId());
+    mpb.setCarrotRecruited(aMonster.getCarrotRecruited());
+    mpb.setCarrotDefeated(aMonster.getCarrotDefeated());
+    mpb.setCarrotEvolved(aMonster.getCarrotEvolved());
+    mpb.setDescription(aMonster.getDescription());
     
     return mpb.build();
   }

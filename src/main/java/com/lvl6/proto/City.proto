@@ -34,7 +34,7 @@ message CityElementProto {
 	optional int32 xLength = 6;
 	optional int32 yLength = 7;
 	optional string imgId = 8;
-	optional StructOrientation orientation = 9;
+	optional StructOrientation orientation = 9 [default = POSITION_1];
 	
 	enum CityElemType {
 		BUILDING = 1;
