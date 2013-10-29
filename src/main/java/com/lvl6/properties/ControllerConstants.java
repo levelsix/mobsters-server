@@ -15,6 +15,8 @@ public class ControllerConstants {
 	public static final int MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT = 10;
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
 	public static final String MFUSOP__QUEST = "QuestId "; 
+	//delete reasons
+	public static final String MFUDR__SELL = "sold for cash=";
 	public static final String MFUDR__QUEST = "QuestId ";
 	
   public static final int NOT_SET = -1;
@@ -257,7 +259,9 @@ public class ControllerConstants {
   public static final int TOURNAMENT_EVENT__FLEES_WEIGHT = -3;
   public static final int TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END = 24;
   
-  //USER CURRENCY HISTORY REASON FOR CHANGE VALUES
+  //USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
+  public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user_monster_ids: ";
+  
   public static final String UCHRFC__USER_CREATED = "user created";
   public static final String UCHRFC__LEADERBOARD = "leaderboard event";
   public static final String UCHRFC__CLAN_TOWER_WAR_ENDED = "clan tower war ended";

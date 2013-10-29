@@ -641,7 +641,7 @@ public class InsertUtils implements InsertUtil{
 //      insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__EQUIP_IDS, ids);
 //    }
     if (null != userEquipIds && !userEquipIds.isEmpty()) {
-      String ids = StringUtils.csvLongList(userEquipIds);
+      String ids = StringUtils.csvList(userEquipIds);
       insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__MONSTER_FOR_USER_IDS, ids);
     }
     
@@ -814,7 +814,7 @@ public class InsertUtils implements InsertUtil{
 	}
 	
 	@Override
-	public int insertIntoMonsterForUserDeleted(int userId, String deleteReason,
+	public int insertIntoMonsterForUserDeleted(int userId, List<String> delReasons,
 			List<MonsterForUser> userMonsters, Date deleteDate) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 		List<Object> monsterForUserIds = new ArrayList<Object>();
@@ -842,6 +842,7 @@ public class InsertUtils implements InsertUtil{
 			boolean isComplete = mfu.isComplete();
 			int teamSlotNum = mfu.getTeamSlotNum();
 			String sourceOfPieces = mfu.getSourceOfPieces();
+			String deleteReason = delReasons.get(i);
 			
 			monsterForUserIds.add(monsterForUserId);
 			userIds.add(userId);

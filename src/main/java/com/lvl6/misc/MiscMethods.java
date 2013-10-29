@@ -1335,6 +1335,14 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
 //    }
 //  }
   
+  public static int sumMapValues(Map<?, Integer> idToNum) {
+  	int sumSoFar = 0;
+  	
+  	for (int value : idToNum.values()) {
+  		sumSoFar += value;
+  	}
+  	return sumSoFar;
+  }
   
   public static int sumListsInMap(Map<Integer, List<Integer>> aMap) {
 	  int sum = 0;

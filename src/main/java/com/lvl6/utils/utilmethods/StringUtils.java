@@ -10,6 +10,7 @@ public class StringUtils {
 
 	private static final Logger log = LoggerFactory.getLogger(StringUtils.class);
 
+	public static String comma = ",";
   public static String getListInString(List<String> clauses, String delimiter) {
     String toreturn = "";
     if (clauses == null || clauses.size() < 1) {
@@ -21,30 +22,44 @@ public class StringUtils {
     }
     return toreturn.substring(0, toreturn.length() - delimiter.length() - 1);
   }
-  
-  public  static String csvIntList(List<Integer> clauses) {
-    String toreturn = "";
+//  
+//  public  static String csvIntList(List<Integer> clauses) {
+//    String toreturn = "";
+//    if (clauses == null || clauses.size() < 1) {
+//      log.error("invalid parameters passed into StringUtils csvIntList. clauses=" + clauses);
+//      return "";
+//    }
+//    
+//    for (Object clause : clauses) {
+//      toreturn += clause + ",";
+//    }
+//    return toreturn.substring(0, toreturn.length() - 1);
+//  }
+//
+//	public static String csvLongList(List<Long> clauses) {
+//		String toreturn = "";
+//    if (clauses == null || clauses.size() < 1) {
+//      log.error("invalid parameters passed into StringUtils csvIntList. clauses=" + clauses);
+//      return "";
+//    }
+//    
+//    for (Object clause : clauses) {
+//      toreturn += clause + ",";
+//    }
+//    return toreturn.substring(0, toreturn.length() - 1);
+//	}
+
+  public  static String csvList(List<?> clauses) {
+    StringBuffer toreturn = new StringBuffer();
     if (clauses == null || clauses.size() < 1) {
-      log.error("invalid parameters passed into StringUtils csvIntList. clauses=" + clauses);
+      log.error("invalid parameters passed into StringUtils csvList. clauses=" + clauses);
       return "";
     }
     
     for (Object clause : clauses) {
-      toreturn += clause + ",";
+      toreturn.append(clause); 
+      toreturn.append(comma);
     }
     return toreturn.substring(0, toreturn.length() - 1);
   }
-
-	public static String csvLongList(List<Long> clauses) {
-		String toreturn = "";
-    if (clauses == null || clauses.size() < 1) {
-      log.error("invalid parameters passed into StringUtils csvIntList. clauses=" + clauses);
-      return "";
-    }
-    
-    for (Object clause : clauses) {
-      toreturn += clause + ",";
-    }
-    return toreturn.substring(0, toreturn.length() - 1);
-	}
 }

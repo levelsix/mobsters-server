@@ -623,7 +623,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     relativeLessThanConditionParams.put(DBConstants.USER__LAST_TIME_QUEUED, timestamp2);
     
     String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
-    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
+    seenUserIdsString += StringUtils.csvList(seenUserIds) + ") and 1";
     absoluteConditionParams.put(seenUserIdsString, 1);
 
     ResultSet rs = DBConnection.get().selectRows(conn, columns,

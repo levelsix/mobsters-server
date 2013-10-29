@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -222,10 +223,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   	String deleteReason = ControllerConstants.MFUDR__QUEST + questId;
   	
+  	int size = deleteUserMonsters.size();
+  	List<String> deleteReasons = Collections.nCopies(size, deleteReason);
   	Collection<MonsterForUser> userMonsters = deleteUserMonsters.values();
   	List<MonsterForUser> userMonstersList = new ArrayList<MonsterForUser>(userMonsters);
   	int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
-  			deleteReason, userMonstersList, deleteDate);
+  			deleteReasons, userMonstersList, deleteDate);
   	
   	log.info("user monsters deleted for questId=" + questId + ". num=" + num);
   }
