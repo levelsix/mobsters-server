@@ -82,8 +82,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       server.writeEvent(resEvent);
 
       if (legitUpgrade) {
-        previousSilver = user.getCoins();
-        previousGold = user.getDiamonds();
+        previousSilver = user.getCash();
+        previousGold = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
         writeChangesToDB(user, userStruct, struct, timeOfUpgrade, money);
@@ -112,10 +112,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } else {
       //everything went well
       if (0 != goldChange) {
-        money.put(MiscMethods.gold, goldChange);
+        money.put(MiscMethods.gems, goldChange);
       }
       if (0 != silverChange) {
-        money.put(MiscMethods.silver, silverChange);
+        money.put(MiscMethods.cash, silverChange);
       }
     }
     if (!UpdateUtils.get().updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), null, timeOfUpgrade, false)) {
@@ -161,14 +161,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("user struct belongs to someone else with id " + userStruct.getUserId());
       return false;
     }
-    if (user.getCoins() < upgradeCoinCost) {
+    if (user.getCash() < upgradeCoinCost) {
       resBuilder.setStatus(UpgradeNormStructureStatus.NOT_ENOUGH_MATERIALS);
-      log.error("user doesn't have enough coins, has " + user.getCoins() + ", needs " + upgradeCoinCost);
+      log.error("user doesn't have enough coins, has " + user.getCash() + ", needs " + upgradeCoinCost);
       return false;
     }
-    if (user.getDiamonds() < upgradeDiamondCost) {
+    if (user.getGems() < upgradeDiamondCost) {
       resBuilder.setStatus(UpgradeNormStructureStatus.NOT_ENOUGH_MATERIALS);
-      log.error("user doesn't have enough diamonds, has " + user.getDiamonds() + ", needs " + upgradeDiamondCost);
+      log.error("user doesn't have enough diamonds, has " + user.getGems() + ", needs " + upgradeDiamondCost);
       return false;
     }
     List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
@@ -208,14 +208,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     String reasonForChange = ControllerConstants.UCHRFC__UPGRADE_NORM_STRUCT + " "
         + structDetails;
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
     
-    previousGoldSilver.put(silver, previousSilver);
-    previousGoldSilver.put(gold, previousGold);
+    previousGoldSilver.put(cash, previousSilver);
+    previousGoldSilver.put(gems, previousGold);
     
-    reasonsForChanges.put(gold, reasonForChange);
-    reasonsForChanges.put(silver,  reasonForChange);
+    reasonsForChanges.put(gems, reasonForChange);
+    reasonsForChanges.put(cash,  reasonForChange);
     
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, timeOfUpgrade, 
         money, previousGoldSilver, reasonsForChanges);

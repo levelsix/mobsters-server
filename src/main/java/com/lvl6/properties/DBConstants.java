@@ -22,7 +22,7 @@ public class DBConstants {
   public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
   public static final String TABLE_LOGIN_HISTORY = "login_history";	
   public static final String TABLE_MONSTER = "monster";
-  public static final String TABLE_MONSTER_ENHANCING_FOR_USER= "monster_enhancing_for_user";
+  public static final String TABLE_MONSTER_ENHANCING_FOR_USER = "monster_enhancing_for_user";
   public static final String TABLE_MONSTER_ENHANCING_HISTORY = "monster_enhancing_history";
   public static final String TABLE_MONSTER_EVOLVING_FAIL_FOR_USER = "monster_evolving_fail_for_user";
   public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";
@@ -265,12 +265,6 @@ public class DBConstants {
   public static final String MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
   public static final String MONSTER_HEALING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 //  public static final String MONSTER_HEALING_FOR_USER__QUEUED_TIME = "queued_time";
-  
-  /*MONSTER REWARD*/
-  public static final String MONSTER_REWARD__ID = GENERIC__ID;
-  public static final String MONSTER_REWARD__BOSS_ID = "monster_id";
-  public static final String MONSTER_REWARD__EQUIP_ID = "equip_id";
-  public static final String MONSTER_REWARD__DROP_RATE = "drop_rate";
 
   /*PRIVATE CHAT POSTS*/
   public static final String PRIVATE_CHAT_POSTS__ID = GENERIC__ID;

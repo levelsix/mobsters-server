@@ -17,8 +17,8 @@ public class User implements Serializable {
 	private int id;
 	private String name;
 	private int level;
-	private int diamonds;
-	private int coins;
+	private int gems;
+	private int cash;
 	private int experience;
 	private int tasksCompleted;
 	private int battlesWon;
@@ -56,7 +56,7 @@ public class User implements Serializable {
 
 
 
-	public User(int id, String name, int level, int diamonds, int coins,
+	public User(int id, String name, int level, int gems, int cash,
 			int experience, int tasksCompleted, int battlesWon, int battlesLost,
 			int flees, String referralCode, int numReferrals, String udid,
 			Date lastLogin, Date lastLogout, String deviceToken,
@@ -72,8 +72,8 @@ public class User implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.level = level;
-		this.diamonds = diamonds;
-		this.coins = coins;
+		this.gems = gems;
+		this.cash = cash;
 		this.experience = experience;
 		this.tasksCompleted = tasksCompleted;
 		this.battlesWon = battlesWon;
@@ -296,8 +296,8 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.diamonds += diamondChange;
-			this.coins += coinChange;
+			this.gems += diamondChange;
+			this.cash += coinChange;
 			this.experience += experienceChange;
 			return true;
 		}
@@ -328,7 +328,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.coins += coinChange;
+			this.cash += coinChange;
 			this.experience += expChange;
 			this.tasksCompleted += tasksCompletedChange;
 			return true;
@@ -352,7 +352,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.coins += coinChange;
+			this.cash += coinChange;
 			this.numReferrals += numReferralsChange;
 			return true;
 		}
@@ -375,7 +375,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.diamonds += diamondChange;
+			this.gems += diamondChange;
 			return true;
 		}
 		return false;
@@ -396,8 +396,8 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null,
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.diamonds += diamondsDelta;
-			this.coins += coinsDelta;
+			this.gems += diamondsDelta;
+			this.cash += coinsDelta;
 		}
 		return numUpdated;
 	}
@@ -419,7 +419,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.diamonds += diamondChange;
+			this.gems += diamondChange;
 			this.numBeginnerSalesPurchased += isBeginnerSale ? 1 : 0;
 			return true;
 		}
@@ -439,7 +439,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.coins += coinChange;
+			this.cash += coinChange;
 			if (clanId == null) this.clanId = ControllerConstants.NOT_SET;
 			else this.clanId = clanId;
 			return true;
@@ -462,7 +462,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.coins += coinChange;
+			this.cash += coinChange;
 			this.numCoinsRetrievedFromStructs += coinChange;
 			return true;
 		}
@@ -483,7 +483,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.coins += coinChange;
+			this.cash += coinChange;
 			return true;
 		}
 		return false;
@@ -506,7 +506,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.coins += coinChange;
+			this.cash += coinChange;
 			this.numBeginnerSalesPurchased += isBeginnerSale ? 1 : 0;
 			return true;
 		}
@@ -549,7 +549,7 @@ public class User implements Serializable {
 		if (numUpdated == 1) {
 //			this.energy +=energy;
 			this.experience += experience;
-			this.coins += coins;
+			this.cash += coins;
 			if (recordWinLossFlee) {
 				updateWinsLossFlees(battlesWon, battlesLost, fleesChange, attacksWonDelta,
 						defensesWonDelta, attacksLostDelta, defensesLostDelta);
@@ -654,7 +654,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.diamonds += diamondChange;
+			this.gems += diamondChange;
 			if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
 				this.hasReceivedfbReward = true;
 			}
@@ -682,7 +682,7 @@ public class User implements Serializable {
 			//if (newUserType != null) this.type = newUserType;
 			if (newName != null) this.name = newName;
 			if (newUdid != null) this.udid = newUdid;
-			this.diamonds += relativeDiamondCost;
+			this.gems += relativeDiamondCost;
 			return true;
 		}
 		return false;
@@ -700,7 +700,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
 				relativeParams, absoluteParams, conditionParams, "and");
 		if (numUpdated == 1) {
-			this.diamonds += cost;
+			this.gems += cost;
 			this.numAdditionalMonsterSlots += numAdditionalMonsterSlots;
 			return true;
 		}
@@ -766,23 +766,23 @@ public class User implements Serializable {
 	}
 
 
-	public int getDiamonds() {
-		return diamonds;
+	public int getGems() {
+		return gems;
 	}
 
 
-	public void setDiamonds(int diamonds) {
-		this.diamonds = diamonds;
+	public void setGems(int gems) {
+		this.gems = gems;
 	}
 
 
-	public int getCoins() {
-		return coins;
+	public int getCash() {
+		return cash;
 	}
 
 
-	public void setCoins(int coins) {
-		this.coins = coins;
+	public void setCash(int cash) {
+		this.cash = cash;
 	}
 
 
@@ -1122,7 +1122,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level
-				+ ", diamonds=" + diamonds + ", coins=" + coins + ", experience="
+				+ ", gems=" + gems + ", cash=" + cash + ", experience="
 				+ experience + ", tasksCompleted=" + tasksCompleted + ", battlesWon="
 				+ battlesWon + ", battlesLost=" + battlesLost + ", flees=" + flees
 				+ ", referralCode=" + referralCode + ", numReferrals=" + numReferrals

@@ -113,7 +113,7 @@ import com.lvl6.utils.RetrieveUtils;
   	}
   	
   	//check if user has enough money
-  	int userGems = u.getDiamonds();
+  	int userGems = u.getGems();
   	if (userGems < totalGemPrice) {
   		log.error("user does not have enough gems to buy more monster inventory slots. userGems=" +
   				userGems + "\t numSlots=" + numSlots + "\t numPurchases=" + numPurchases);

@@ -81,7 +81,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           userStructIdsToStructures, userStructIdsToTimesOfRetrieval, duplicates, coinGain);
       
       if (legitRetrieval) {
-        previousSilver = user.getCoins();
+        previousSilver = user.getCash();
         
         if (!user.updateRelativeCoinsCoinsretrievedfromstructs(coinGain)) {
           log.error("problem with updating user stats after retrieving " + coinGain + " silver");
@@ -252,7 +252,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String silver = MiscMethods.silver;
+    String silver = MiscMethods.cash;
     String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
     
     goldSilverChange.put(silver, coinChange);

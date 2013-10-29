@@ -96,8 +96,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       server.writeEvent(resEvent);
 
       if (legitPurchaseNorm) {
-        previousSilver = user.getCoins();
-        previousGold = user.getDiamonds();
+        previousSilver = user.getCash();
+        previousGold = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
         writeChangesToDB(user, struct, money);
@@ -122,10 +122,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       log.error("problem with taking away " + diamondChange + " diamonds, " + coinChange + " coins.");
     } else {//things went ok
       if (0 != diamondChange) {
-        money.put(MiscMethods.gold, diamondChange * -1);
+        money.put(MiscMethods.gems, diamondChange * -1);
       }
       if (0 != coinChange) {
-        money.put(MiscMethods.silver, coinChange * -1);
+        money.put(MiscMethods.cash, coinChange * -1);
       }
     }
   }
@@ -150,14 +150,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
           ", struct's min level is " + struct.getMinLevel());
       return false;
     }
-    if (user.getCoins() < struct.getCoinPrice()) {
+    if (user.getCash() < struct.getCoinPrice()) {
       resBuilder.setStatus(PurchaseNormStructureStatus.NOT_ENOUGH_MATERIALS);
-      log.error("user only has " + user.getCoins() + " coins and needs " + struct.getCoinPrice());
+      log.error("user only has " + user.getCash() + " coins and needs " + struct.getCoinPrice());
       return false;
     }
-    if (user.getDiamonds() < struct.getDiamondPrice()) {
+    if (user.getGems() < struct.getDiamondPrice()) {
       resBuilder.setStatus(PurchaseNormStructureStatus.NOT_ENOUGH_MATERIALS);
-      log.error("user only has " + user.getDiamonds() + " diamonds and needs " + struct.getDiamondPrice());
+      log.error("user only has " + user.getGems() + " diamonds and needs " + struct.getDiamondPrice());
       return false;
     }
 
@@ -192,15 +192,15 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       Map<String, Integer> money, int previousSilver, int previousGold) {
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
     String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_NORM_STRUCT +
         " structId:" + structId;
 
-    previousGoldSilver.put(gold, previousGold);
-    previousGoldSilver.put(silver, previousSilver);
-    reasonsForChanges.put(gold, reasonForChange);
-    reasonsForChanges.put(silver, reasonForChange);
+    previousGoldSilver.put(gems, previousGold);
+    previousGoldSilver.put(cash, previousSilver);
+    reasonsForChanges.put(gems, reasonForChange);
+    reasonsForChanges.put(cash, reasonForChange);
     
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money,
         previousGoldSilver, reasonsForChanges);

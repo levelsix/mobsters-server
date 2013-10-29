@@ -152,7 +152,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				      xPosition, yPosition, isExpanding)) {
 				log.error("problem with updating user expansion info after purchase");
 			}
-			currencyChange.put(MiscMethods.silver, coinChange);
+			currencyChange.put(MiscMethods.cash, coinChange);
 		}
 	}
 
@@ -185,7 +185,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 		//see if user has enough to buy next expansion
 		int cost = calculateExpansionCost(numOfExpansions + 1);
-		if (user.getCoins() < cost) {
+		if (user.getCash() < cost) {
 			resBuilder.setStatus(PurchaseCityExpansionStatus.NOT_ENOUGH_COINS);
 			return false;            
 		}
@@ -206,7 +206,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			Map<String, Integer> goldSilverChange, int previousSilver) {
 		Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		String silver = MiscMethods.silver;
+		String silver = MiscMethods.cash;
 		String reasonForChange = "Expanding xPosition: " + xPosition + ", yPosition: " + yPosition;
 
 		previousGoldSilver.put(silver, previousSilver);

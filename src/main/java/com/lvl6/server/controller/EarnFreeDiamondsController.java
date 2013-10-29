@@ -123,7 +123,7 @@ public class EarnFreeDiamondsController extends EventController {
       server.writeEvent(resEvent);
 
       if (legitFreeDiamondsEarn) {
-        previousGold = user.getDiamonds();
+        previousGold = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
         List<String> keys = new ArrayList<String>();
@@ -258,7 +258,7 @@ public class EarnFreeDiamondsController extends EventController {
       if (!user.updateRelativeDiamondsForFree(diamondChange, freeDiamondsType)) {
         log.error("unexpected error: user was not awarded for connecting to facebook");
       } else {
-        String key = MiscMethods.gold;
+        String key = MiscMethods.gems;
         money.put(key, diamondChange);
         keys.add(key);
       }
@@ -437,12 +437,12 @@ public class EarnFreeDiamondsController extends EventController {
       int currencyAfter;
       String reasonForChange = "earn free diamonds controller";
       
-      if(key.equals(MiscMethods.silver)) {
+      if(key.equals(MiscMethods.cash)) {
         isSilver = 1;
-        currencyAfter = aUser.getCoins();
+        currencyAfter = aUser.getCash();
       } else {
         isSilver = 0;
-        currencyAfter = aUser.getDiamonds();
+        currencyAfter = aUser.getGems();
       }
       
       /*if (freeDiamondsType == EarnFreeDiamondsType.KIIP) {

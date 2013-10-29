@@ -90,7 +90,7 @@ public class SellUserMonsterController extends EventController {
 
 			boolean successful = false;
 			if (legit) {
-				previousSilver = aUser.getCoins();
+				previousSilver = aUser.getCash();
 				successful = writeChangesToDb(aUser, userMonsterIds,
 						userMonsterIdsToCashAmounts);
 			}
@@ -236,7 +236,7 @@ public class SellUserMonsterController extends EventController {
 		Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
 		Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		String silver = MiscMethods.silver;
+		String silver = MiscMethods.cash;
 
 		// record the user monster ids that contributed to changing user's currency
 		String reasonForChange = ControllerConstants.UCHRFC__SOLD_USER_MONSTERS

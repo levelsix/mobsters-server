@@ -177,7 +177,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		//see if user has enough money to find a person to fight
 		int elo = attacker.getElo();
 		int cost = calculateQueueCost(attacker, elo);
-		if (attacker.getCoins() < cost) {
+		if (attacker.getCash() < cost) {
 			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_SILVER);
 			log.error("problem with QueueUp- attacker doesn't have enough silver to search queue");
 			return false;

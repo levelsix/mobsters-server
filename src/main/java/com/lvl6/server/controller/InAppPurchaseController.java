@@ -102,8 +102,8 @@ public class InAppPurchaseController extends EventController {
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int previousSilver = user.getCoins();
-      int previousGold = user.getDiamonds();
+      int previousSilver = user.getCash();
+      int previousGold = user.getGems();
 
       JSONObject response;
 
@@ -319,19 +319,19 @@ public class InAppPurchaseController extends EventController {
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
     String reasonForChange = ControllerConstants.UCHRFC__IN_APP_PURCHASE;
 
     if (0 < diamondChange) {
-      goldSilverChange.put(gold, diamondChange);
-      previousGoldSilver.put(gold, previousGold);
-      reasonsForChanges.put(gold, reasonForChange + gold);
+      goldSilverChange.put(gems, diamondChange);
+      previousGoldSilver.put(gems, previousGold);
+      reasonsForChanges.put(gems, reasonForChange + gems);
     } 
     if (0 < coinChange) {
-      goldSilverChange.put(silver, coinChange);
-      previousGoldSilver.put(silver, previousSilver);
-      reasonsForChanges.put(silver, reasonForChange + silver);
+      goldSilverChange.put(cash, coinChange);
+      previousGoldSilver.put(cash, previousSilver);
+      reasonsForChanges.put(cash, reasonForChange + cash);
     }
 
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date,

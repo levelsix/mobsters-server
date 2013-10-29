@@ -212,7 +212,7 @@ public class TournamentEventScheduledTasks {
 			List<Integer> previousGoldSilver, List<Integer> currentGoldSilver, int reward) {
 		for (Integer uId : userIds) {
 			User aUser = uMap.get(uId);
-			int gold = aUser.getDiamonds();
+			int gold = aUser.getGems();
 			previousGoldSilver.add(gold - reward);
 			currentGoldSilver.add(gold);
 		}

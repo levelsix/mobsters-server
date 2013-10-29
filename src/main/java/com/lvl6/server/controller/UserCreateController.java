@@ -31,8 +31,8 @@ import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus;
-import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.retrieveutils.AvailableReferralCodeRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.EventWriter;
@@ -42,7 +42,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class UserCreateController extends EventController {
 
@@ -312,7 +311,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (!referrer.isFake()) {
       server.lockPlayer(referrer.getId(), this.getClass().getSimpleName());
       try {
-        int previousSilver = referrer.getCoins();
+        int previousSilver = referrer.getCash();
         
         int coinsGivenToReferrer = MiscMethods.calculateCoinsGivenToReferrer(referrer);
         if (!referrer.updateRelativeCoinsNumreferrals(coinsGivenToReferrer, 1)) {
@@ -381,8 +380,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private void writeToUserCurrencyHistory(User aUser, int playerCoins, int playerDiamonds) {
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
     
     Timestamp date = new Timestamp(new Date().getTime());
     Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
@@ -390,14 +389,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     String reasonForChange = ControllerConstants.UCHRFC__USER_CREATED;
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     
-    goldSilverChange.put(gold, playerDiamonds);
-    goldSilverChange.put(silver, playerCoins);
+    goldSilverChange.put(gems, playerDiamonds);
+    goldSilverChange.put(cash, playerCoins);
     
-    previousGoldSilver.put(gold, 0);
-    previousGoldSilver.put(silver, 0);
+    previousGoldSilver.put(gems, 0);
+    previousGoldSilver.put(cash, 0);
     
-    reasonsForChanges.put(gold, reasonForChange);
-    reasonsForChanges.put(silver, reasonForChange);
+    reasonsForChanges.put(gems, reasonForChange);
+    reasonsForChanges.put(cash, reasonForChange);
     
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, goldSilverChange,
         previousGoldSilver, reasonsForChanges);
@@ -409,7 +408,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String silver = MiscMethods.silver;
+    String silver = MiscMethods.cash;
     String reasonForChange = ControllerConstants.UCHRFC__USER_CREATE_REFERRED_A_USER;
     
     goldSilverChange.put(silver, coinChange);

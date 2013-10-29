@@ -45,6 +45,14 @@ public final class EventMonsterProto {
         getUeipNewOrBuilderList();
     com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProtoOrBuilder getUeipNewOrBuilder(
         int index);
+    
+    // optional int32 gemsSpent = 5;
+    boolean hasGemsSpent();
+    int getGemsSpent();
+    
+    // optional sint32 cashChange = 6;
+    boolean hasCashChange();
+    int getCashChange();
   }
   public static final class SubmitMonsterEnhancementRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -151,11 +159,33 @@ public final class EventMonsterProto {
       return ueipNew_.get(index);
     }
     
+    // optional int32 gemsSpent = 5;
+    public static final int GEMSSPENT_FIELD_NUMBER = 5;
+    private int gemsSpent_;
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+    
+    // optional sint32 cashChange = 6;
+    public static final int CASHCHANGE_FIELD_NUMBER = 6;
+    private int cashChange_;
+    public boolean hasCashChange() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getCashChange() {
+      return cashChange_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       ueipDelete_ = java.util.Collections.emptyList();
       ueipUpdate_ = java.util.Collections.emptyList();
       ueipNew_ = java.util.Collections.emptyList();
+      gemsSpent_ = 0;
+      cashChange_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -181,6 +211,12 @@ public final class EventMonsterProto {
       for (int i = 0; i < ueipNew_.size(); i++) {
         output.writeMessage(4, ueipNew_.get(i));
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(5, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeSInt32(6, cashChange_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -205,6 +241,14 @@ public final class EventMonsterProto {
       for (int i = 0; i < ueipNew_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, ueipNew_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(6, cashChange_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -358,6 +402,10 @@ public final class EventMonsterProto {
         } else {
           ueipNewBuilder_.clear();
         }
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        cashChange_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -431,6 +479,14 @@ public final class EventMonsterProto {
         } else {
           result.ueipNew_ = ueipNewBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.gemsSpent_ = gemsSpent_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.cashChange_ = cashChange_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -528,6 +584,12 @@ public final class EventMonsterProto {
             }
           }
         }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
+        }
+        if (other.hasCashChange()) {
+          setCashChange(other.getCashChange());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -584,6 +646,16 @@ public final class EventMonsterProto {
               com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUeipNew(subBuilder.buildPartial());
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              gemsSpent_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              cashChange_ = input.readSInt32();
               break;
             }
           }
@@ -1240,6 +1312,48 @@ public final class EventMonsterProto {
         return ueipNewBuilder_;
       }
       
+      // optional int32 gemsSpent = 5;
+      private int gemsSpent_ ;
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000010;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemsSpent_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional sint32 cashChange = 6;
+      private int cashChange_ ;
+      public boolean hasCashChange() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getCashChange() {
+        return cashChange_;
+      }
+      public Builder setCashChange(int value) {
+        bitField0_ |= 0x00000020;
+        cashChange_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCashChange() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        cashChange_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SubmitMonsterEnhancementRequestProto)
     }
     
@@ -1294,19 +1408,15 @@ public final class EventMonsterProto {
     public enum SubmitMonsterEnhancementStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      OTHER_FAIL(1, 2),
-      CLIENT_TOO_APART_FROM_SERVER_TIME(2, 3),
-      MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT(3, 4),
-      TRYING_TO_SURPASS_MAX_LEVEL(4, 5),
-      NOT_ENOUGH_SILVER(5, 6),
+      FAIL_INSUFFICIENT_GEMS(1, 2),
+      FAIL_INSUFFICIENT_CASH(2, 3),
+      FAIL_OTHER(3, 4),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int OTHER_FAIL_VALUE = 2;
-      public static final int CLIENT_TOO_APART_FROM_SERVER_TIME_VALUE = 3;
-      public static final int MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT_VALUE = 4;
-      public static final int TRYING_TO_SURPASS_MAX_LEVEL_VALUE = 5;
-      public static final int NOT_ENOUGH_SILVER_VALUE = 6;
+      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
+      public static final int FAIL_INSUFFICIENT_CASH_VALUE = 3;
+      public static final int FAIL_OTHER_VALUE = 4;
       
       
       public final int getNumber() { return value; }
@@ -1314,11 +1424,9 @@ public final class EventMonsterProto {
       public static SubmitMonsterEnhancementStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return OTHER_FAIL;
-          case 3: return CLIENT_TOO_APART_FROM_SERVER_TIME;
-          case 4: return MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT;
-          case 5: return TRYING_TO_SURPASS_MAX_LEVEL;
-          case 6: return NOT_ENOUGH_SILVER;
+          case 2: return FAIL_INSUFFICIENT_GEMS;
+          case 3: return FAIL_INSUFFICIENT_CASH;
+          case 4: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -1349,7 +1457,7 @@ public final class EventMonsterProto {
       }
       
       private static final SubmitMonsterEnhancementStatus[] VALUES = {
-        SUCCESS, OTHER_FAIL, CLIENT_TOO_APART_FROM_SERVER_TIME, MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT, TRYING_TO_SURPASS_MAX_LEVEL, NOT_ENOUGH_SILVER, 
+        SUCCESS, FAIL_INSUFFICIENT_GEMS, FAIL_INSUFFICIENT_CASH, FAIL_OTHER, 
       };
       
       public static SubmitMonsterEnhancementStatus valueOf(
@@ -13430,125 +13538,124 @@ public final class EventMonsterProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\022EventMonster.proto\022\016com.lvl6.proto\032\022Mo" +
-      "nsterStuff.proto\032\nUser.proto\"\217\002\n$SubmitM" +
+      "nsterStuff.proto\032\nUser.proto\"\266\002\n$SubmitM" +
       "onsterEnhancementRequestProto\0220\n\006sender\030" +
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
       "<\n\nueipDelete\030\002 \003(\0132(.com.lvl6.proto.Use" +
       "rEnhancementItemProto\022<\n\nueipUpdate\030\003 \003(" +
       "\0132(.com.lvl6.proto.UserEnhancementItemPr" +
       "oto\0229\n\007ueipNew\030\004 \003(\0132(.com.lvl6.proto.Us" +
-      "erEnhancementItemProto\"\210\003\n%SubmitMonster" +
-      "EnhancementResponseProto\0220\n\006sender\030\001 \001(\013",
-      "2 .com.lvl6.proto.MinimumUserProto\022d\n\006st" +
-      "atus\030\002 \001(\0162T.com.lvl6.proto.SubmitMonste" +
-      "rEnhancementResponseProto.SubmitMonsterE" +
-      "nhancementStatus\"\306\001\n\036SubmitMonsterEnhanc" +
-      "ementStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002" +
-      "\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020\003\022" +
-      "(\n$MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT\020" +
-      "\004\022\037\n\033TRYING_TO_SURPASS_MAX_LEVEL\020\005\022\025\n\021NO" +
-      "T_ENOUGH_SILVER\020\006\"\331\001\n\'EnhancementWaitTim" +
-      "eCompleteRequestProto\0220\n\006sender\030\001 \001(\0132 .",
-      "com.lvl6.proto.MinimumUserProto\022\021\n\tisSpe" +
-      "edup\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005\0229\n\005um" +
-      "cep\030\004 \001(\0132*.com.lvl6.proto.UserMonsterCu" +
-      "rrentExpProto\022\026\n\016userMonsterIds\030\005 \003(\003\"\306\002" +
-      "\n(EnhancementWaitTimeCompleteResponsePro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022j\n\006status\030\002 \001(\0162Z.com.lvl6." +
-      "proto.EnhancementWaitTimeCompleteRespons" +
-      "eProto.EnhancementWaitTimeCompleteStatus" +
-      "\"|\n!EnhancementWaitTimeCompleteStatus\022\013\n",
-      "\007SUCCESS\020\001\022\035\n\031FAIL_HEALING_NOT_COMPLETE\020" +
-      "\002\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\003\022\016\n\nFAIL_O" +
-      "THER\020\004\"\245\001\n\037UpdateMonsterHealthRequestPro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022<\n\005umchp\030\002 \003(\0132-.com.lvl6.p" +
-      "roto.UserMonsterCurrentHealthProto\022\022\n\ncl" +
-      "ientTime\030\003 \001(\003\"\207\002\n UpdateMonsterHealthRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022Z\n\006status\030\002 \001(\0162J." +
-      "com.lvl6.proto.UpdateMonsterHealthRespon",
-      "seProto.UpdateMonsterHealthStatus\"U\n\031Upd" +
-      "ateMonsterHealthStatus\022\013\n\007SUCCESS\020\001\022\033\n\027F" +
-      "AIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003" +
-      "\"\237\002\n\027HealMonsterRequestProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022:" +
-      "\n\tumhDelete\030\002 \003(\0132\'.com.lvl6.proto.UserM" +
-      "onsterHealingProto\022:\n\tumhUpdate\030\003 \003(\0132\'." +
-      "com.lvl6.proto.UserMonsterHealingProto\0227" +
-      "\n\006umhNew\030\004 \003(\0132\'.com.lvl6.proto.UserMons" +
-      "terHealingProto\022\020\n\010cashCost\030\005 \001(\021\022\017\n\007gem",
-      "Cost\030\006 \001(\021\"\262\002\n\030HealMonsterResponseProto\022" +
+      "erEnhancementItemProto\022\021\n\tgemsSpent\030\005 \001(" +
+      "\005\022\022\n\ncashChange\030\006 \001(\021\"\266\002\n%SubmitMonsterE",
+      "nhancementResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022d\n\006sta" +
+      "tus\030\002 \001(\0162T.com.lvl6.proto.SubmitMonster" +
+      "EnhancementResponseProto.SubmitMonsterEn" +
+      "hancementStatus\"u\n\036SubmitMonsterEnhancem" +
+      "entStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICI" +
+      "ENT_GEMS\020\002\022\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022\016" +
+      "\n\nFAIL_OTHER\020\004\"\331\001\n\'EnhancementWaitTimeCo" +
+      "mpleteRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\021\n\tisSpeedu",
+      "p\030\002 \001(\010\022\026\n\016gemsForSpeedup\030\003 \001(\005\0229\n\005umcep" +
+      "\030\004 \001(\0132*.com.lvl6.proto.UserMonsterCurre" +
+      "ntExpProto\022\026\n\016userMonsterIds\030\005 \003(\003\"\306\002\n(E" +
+      "nhancementWaitTimeCompleteResponseProto\022" +
       "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022J\n\006status\030\002 \001(\0162:.com.lvl6.pro" +
-      "to.HealMonsterResponseProto.HealMonsterS" +
-      "tatus\"\227\001\n\021HealMonsterStatus\022\013\n\007SUCCESS\020\001" +
-      "\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022%\n!FAIL_AL" +
-      "L_MONSTERS_ALREADY_HEALING\020\003\022!\n\035FAIL_ALL" +
-      "_MONSTERS_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\"" +
-      "\304\001\n\'HealMonsterWaitTimeCompleteRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min",
-      "imumUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gems" +
-      "ForSpeedup\030\003 \001(\005\022<\n\005umchp\030\004 \003(\0132-.com.lv" +
-      "l6.proto.UserMonsterCurrentHealthProto\"\306" +
-      "\002\n(HealMonsterWaitTimeCompleteResponsePr" +
+      "UserProto\022j\n\006status\030\002 \001(\0162Z.com.lvl6.pro" +
+      "to.EnhancementWaitTimeCompleteResponsePr" +
+      "oto.EnhancementWaitTimeCompleteStatus\"|\n" +
+      "!EnhancementWaitTimeCompleteStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\035\n\031FAIL_HEALING_NOT_COMPLETE\020\002\022\033",
+      "\n\027FAIL_INSUFFICIENT_FUNDS\020\003\022\016\n\nFAIL_OTHE" +
+      "R\020\004\"\245\001\n\037UpdateMonsterHealthRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022<\n\005umchp\030\002 \003(\0132-.com.lvl6.prot" +
+      "o.UserMonsterCurrentHealthProto\022\022\n\nclien" +
+      "tTime\030\003 \001(\003\"\207\002\n UpdateMonsterHealthRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022Z\n\006status\030\002 \001(\0162J.com" +
+      ".lvl6.proto.UpdateMonsterHealthResponseP" +
+      "roto.UpdateMonsterHealthStatus\"U\n\031Update",
+      "MonsterHealthStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL" +
+      "_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"\237\002" +
+      "\n\027HealMonsterRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022:\n\tu" +
+      "mhDelete\030\002 \003(\0132\'.com.lvl6.proto.UserMons" +
+      "terHealingProto\022:\n\tumhUpdate\030\003 \003(\0132\'.com" +
+      ".lvl6.proto.UserMonsterHealingProto\0227\n\006u" +
+      "mhNew\030\004 \003(\0132\'.com.lvl6.proto.UserMonster" +
+      "HealingProto\022\020\n\010cashCost\030\005 \001(\021\022\017\n\007gemCos" +
+      "t\030\006 \001(\021\"\262\002\n\030HealMonsterResponseProto\0220\n\006",
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022J\n\006status\030\002 \001(\0162:.com.lvl6.proto." +
+      "HealMonsterResponseProto.HealMonsterStat" +
+      "us\"\227\001\n\021HealMonsterStatus\022\013\n\007SUCCESS\020\001\022\033\n" +
+      "\027FAIL_INSUFFICIENT_FUNDS\020\002\022%\n!FAIL_ALL_M" +
+      "ONSTERS_ALREADY_HEALING\020\003\022!\n\035FAIL_ALL_MO" +
+      "NSTERS_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005\"\304\001\n" +
+      "\'HealMonsterWaitTimeCompleteRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsFor",
+      "Speedup\030\003 \001(\005\022<\n\005umchp\030\004 \003(\0132-.com.lvl6." +
+      "proto.UserMonsterCurrentHealthProto\"\306\002\n(" +
+      "HealMonsterWaitTimeCompleteResponseProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022j\n\006status\030\002 \001(\0162Z.com.lvl6.pr" +
+      "oto.HealMonsterWaitTimeCompleteResponseP" +
+      "roto.HealMonsterWaitTimeCompleteStatus\"|" +
+      "\n!HealMonsterWaitTimeCompleteStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\035\n\031FAIL_HEALING_NOT_COMPLETE\020\002\022" +
+      "\033\n\027FAIL_INSUFFICIENT_FUNDS\020\003\022\016\n\nFAIL_OTH",
+      "ER\020\004\"\202\001\n\"AddMonsterToBattleTeamRequestPr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022j\n\006status\030\002 \001(\0162Z.com.lvl6" +
-      ".proto.HealMonsterWaitTimeCompleteRespon" +
-      "seProto.HealMonsterWaitTimeCompleteStatu" +
-      "s\"|\n!HealMonsterWaitTimeCompleteStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\035\n\031FAIL_HEALING_NOT_COMPLETE",
-      "\020\002\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\003\022\016\n\nFAIL_" +
-      "OTHER\020\004\"\202\001\n\"AddMonsterToBattleTeamReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n" +
-      "\ruserMonsterId\030\003 \001(\003\"\366\001\n#AddMonsterToBat" +
-      "tleTeamResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022`\n\006status" +
-      "\030\002 \001(\0162P.com.lvl6.proto.AddMonsterToBatt" +
-      "leTeamResponseProto.AddMonsterToBattleTe" +
-      "amStatus\";\n\034AddMonsterToBattleTeamStatus",
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"r\n\'RemoveM" +
-      "onsterFromBattleTeamRequestProto\0220\n\006send" +
+      "imumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n\rus" +
+      "erMonsterId\030\003 \001(\003\"\366\001\n#AddMonsterToBattle" +
+      "TeamResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022`\n\006status\030\002 " +
+      "\001(\0162P.com.lvl6.proto.AddMonsterToBattleT" +
+      "eamResponseProto.AddMonsterToBattleTeamS" +
+      "tatus\";\n\034AddMonsterToBattleTeamStatus\022\013\n" +
+      "\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"r\n\'RemoveMons",
+      "terFromBattleTeamRequestProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\025\n\ruserMonsterId\030\003 \001(\003\"\212\002\n(RemoveMonster" +
+      "FromBattleTeamResponseProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022j\n" +
+      "\006status\030\002 \001(\0162Z.com.lvl6.proto.RemoveMon" +
+      "sterFromBattleTeamResponseProto.RemoveMo" +
+      "nsterFromBattleTeamStatus\"@\n!RemoveMonst" +
+      "erFromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
+      "AIL_OTHER\020\002\"r\n(IncreaseMonsterInventoryS",
+      "lotRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022\024\n\014numPurchase" +
+      "s\030\002 \001(\005\"\253\002\n)IncreaseMonsterInventorySlot" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022l\n\006status\030\002 \001(\0162" +
+      "\\.com.lvl6.proto.IncreaseMonsterInventor" +
+      "ySlotResponseProto.IncreaseMonsterInvent" +
+      "orySlotStatus\"^\n\"IncreaseMonsterInventor" +
+      "ySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFI" +
+      "CIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"p\n$Combine",
+      "UserMonsterPiecesRequestProto\0220\n\006sender\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\026\n\016userMonsterIds\030\002 \003(\003\"\376\001\n%CombineUserM" +
+      "onsterPiecesResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022d\n\006s" +
+      "tatus\030\002 \001(\0162T.com.lvl6.proto.CombineUser" +
+      "MonsterPiecesResponseProto.CombineUserMo" +
+      "nsterPiecesStatus\"=\n\036CombineUserMonsterP" +
+      "iecesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
+      "\"\213\001\n\033SellUserMonsterRequestProto\0220\n\006send",
       "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022\025\n\ruserMonsterId\030\003 \001(\003\"\212\002\n(RemoveMons" +
-      "terFromBattleTeamResponseProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022j\n\006status\030\002 \001(\0162Z.com.lvl6.proto.Remove" +
-      "MonsterFromBattleTeamResponseProto.Remov" +
-      "eMonsterFromBattleTeamStatus\"@\n!RemoveMo" +
-      "nsterFromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016",
-      "\n\nFAIL_OTHER\020\002\"r\n(IncreaseMonsterInvento" +
-      "rySlotRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\024\n\014numPurch" +
-      "ases\030\002 \001(\005\"\253\002\n)IncreaseMonsterInventoryS" +
-      "lotResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022l\n\006status\030\002 \001" +
-      "(\0162\\.com.lvl6.proto.IncreaseMonsterInven" +
-      "torySlotResponseProto.IncreaseMonsterInv" +
-      "entorySlotStatus\"^\n\"IncreaseMonsterInven" +
-      "torySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSU",
-      "FFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"p\n$Comb" +
-      "ineUserMonsterPiecesRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022\026\n\016userMonsterIds\030\002 \003(\003\"\376\001\n%CombineUs" +
-      "erMonsterPiecesResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022d" +
-      "\n\006status\030\002 \001(\0162T.com.lvl6.proto.CombineU" +
-      "serMonsterPiecesResponseProto.CombineUse" +
-      "rMonsterPiecesStatus\"=\n\036CombineUserMonst" +
-      "erPiecesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE",
-      "R\020\002\"\213\001\n\033SellUserMonsterRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.proto.Mi" +
-      "nimumUserMonsterSellProto\"\332\001\n\034SellUserMo" +
-      "nsterResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022R\n\006status\030\002" +
-      " \001(\0162B.com.lvl6.proto.SellUserMonsterRes" +
-      "ponseProto.SellUserMonsterStatus\"4\n\025Sell" +
-      "UserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002B\023B\021EventMonsterProto"
+      "to\022:\n\005sales\030\002 \003(\0132+.com.lvl6.proto.Minim" +
+      "umUserMonsterSellProto\"\332\001\n\034SellUserMonst" +
+      "erResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022R\n\006status\030\002 \001(" +
+      "\0162B.com.lvl6.proto.SellUserMonsterRespon" +
+      "seProto.SellUserMonsterStatus\"4\n\025SellUse" +
+      "rMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHE" +
+      "R\020\002B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13560,7 +13667,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UeipDelete", "UeipUpdate", "UeipNew", },
+              new java.lang.String[] { "Sender", "UeipDelete", "UeipUpdate", "UeipNew", "GemsSpent", "CashChange", },
               com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto.class,
               com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto.Builder.class);
           internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor =

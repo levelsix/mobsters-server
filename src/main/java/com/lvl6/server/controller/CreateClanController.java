@@ -119,7 +119,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       resEvent.setCreateClanResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
       if (legitCreate) {
-        previousGold = user.getDiamonds();
+        previousGold = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
         writeChangesToDB(user, clanId, money);
@@ -144,7 +144,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       log.error("problem with decreasing user diamonds for creating clan");
     } else {
       //everything went well
-      money.put(MiscMethods.silver, coinChange);
+      money.put(MiscMethods.cash, coinChange);
     }
     if (!InsertUtils.get().insertUserClan(user.getId(), clanId, UserClanStatus.MEMBER, new Timestamp(new Date().getTime()))) {
       log.error("problem with inserting user clan data for user " + user + ", and clan id " + clanId);
@@ -158,9 +158,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       log.error("user is null");
       return false;      
     }
-    if (user.getCoins() < ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN) {
+    if (user.getCash() < ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN) {
       resBuilder.setStatus(CreateClanStatus.NOT_ENOUGH_COINS);
-      log.error("user only has " + user.getCoins() + ", needs " + ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
+      log.error("user only has " + user.getCash() + ", needs " + ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
       return false;
     }
     if (clanName.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME) {
@@ -208,11 +208,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       int previousGold) {
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gold = MiscMethods.gold;
+    String gems = MiscMethods.gems;
     String reasonForChange = ControllerConstants.UCHRFC__CREATE_CLAN;
     
-    previousGoldSilver.put(gold, previousGold);
-    reasonsForChanges.put(gold, reasonForChange);
+    previousGoldSilver.put(gems, previousGold);
+    reasonsForChanges.put(gems, reasonForChange);
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money, previousGoldSilver, reasonsForChanges);
   }
 }

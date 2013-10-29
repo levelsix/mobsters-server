@@ -90,8 +90,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
       if (legitRedeem) {
         User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-        int previousSilver = user.getCoins();
-        int previousGold = user.getDiamonds();
+        int previousSilver = user.getCash();
+        int previousGold = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
         writeChangesToDB(userQuest, quest, user, senderProto, money);
@@ -202,10 +202,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } else {
       //things worked
       if (0 != diamondsGained) {
-        money.put(MiscMethods.gold, diamondsGained);
+        money.put(MiscMethods.gems, diamondsGained);
       }
       if (0 != coinsGained) {
-        money.put(MiscMethods.silver, coinsGained);
+        money.put(MiscMethods.cash, coinsGained);
       }
     }
   }
@@ -215,14 +215,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
     String reasonForChange = ControllerConstants.UCHRFC__QUEST_REDEEM;
 
-    previousGoldSilver.put(gold, previousGold);
-    previousGoldSilver.put(silver, previousSilver);
-    reasonsForChanges.put(gold, reasonForChange);
-    reasonsForChanges.put(silver, reasonForChange);
+    previousGoldSilver.put(gems, previousGold);
+    previousGoldSilver.put(cash, previousSilver);
+    reasonsForChanges.put(gems, reasonForChange);
+    reasonsForChanges.put(cash, reasonForChange);
     
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money,
         previousGoldSilver, reasonsForChanges);

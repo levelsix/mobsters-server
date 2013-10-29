@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -21,7 +19,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginDungeonRequestEvent;
 import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.Monster;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUser;
 import com.lvl6.info.TaskStage;
@@ -39,7 +36,6 @@ import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -445,20 +441,20 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousSilver, int previousGold) {
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+      int previousCash, int previousGems) {
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
 
-    previousGoldSilver.put(gold, previousGold);
-    previousGoldSilver.put(silver, previousSilver);
-    reasonsForChanges.put(gold, reasonForChange);
-    reasonsForChanges.put(silver, reasonForChange);
+    previousGemsCash.put(gems, previousGems);
+    previousGemsCash.put(cash, previousCash);
+    reasonsForChanges.put(gems, reasonForChange);
+    reasonsForChanges.put(cash, reasonForChange);
 
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, curTime, money, 
-        previousGoldSilver, reasonsForChanges);
+        previousGemsCash, reasonsForChanges);
 
   }
 }

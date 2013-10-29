@@ -658,12 +658,6 @@ public class UpdateUtils implements UpdateUtil {
 			numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER,
 					relativeParams, absoluteParams, conditionParams, "AND");
 		}
-//		log.info("num userEquips updated: " + numUpdated 
-//				+ ". userMonsterIds: " + userMonsterIds);
-//		if (numUpdated == userMonsterIds.size()*2) {
-//			return true;
-//		}
-//		return false;
 		return numUpdated;
 	}
 

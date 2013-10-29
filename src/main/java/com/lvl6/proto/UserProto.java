@@ -1870,13 +1870,13 @@ public final class UserProto {
     boolean hasLevel();
     int getLevel();
     
-    // optional int32 diamonds = 4;
-    boolean hasDiamonds();
-    int getDiamonds();
+    // optional int32 gems = 4;
+    boolean hasGems();
+    int getGems();
     
-    // optional int32 coins = 5;
-    boolean hasCoins();
-    int getCoins();
+    // optional int32 cash = 5;
+    boolean hasCash();
+    int getCash();
     
     // optional int32 experience = 6;
     boolean hasExperience();
@@ -2097,24 +2097,24 @@ public final class UserProto {
       return level_;
     }
     
-    // optional int32 diamonds = 4;
-    public static final int DIAMONDS_FIELD_NUMBER = 4;
-    private int diamonds_;
-    public boolean hasDiamonds() {
+    // optional int32 gems = 4;
+    public static final int GEMS_FIELD_NUMBER = 4;
+    private int gems_;
+    public boolean hasGems() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public int getDiamonds() {
-      return diamonds_;
+    public int getGems() {
+      return gems_;
     }
     
-    // optional int32 coins = 5;
-    public static final int COINS_FIELD_NUMBER = 5;
-    private int coins_;
-    public boolean hasCoins() {
+    // optional int32 cash = 5;
+    public static final int CASH_FIELD_NUMBER = 5;
+    private int cash_;
+    public boolean hasCash() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
-    public int getCoins() {
-      return coins_;
+    public int getCash() {
+      return cash_;
     }
     
     // optional int32 experience = 6;
@@ -2574,8 +2574,8 @@ public final class UserProto {
       userId_ = 0;
       name_ = "";
       level_ = 0;
-      diamonds_ = 0;
-      coins_ = 0;
+      gems_ = 0;
+      cash_ = 0;
       experience_ = 0;
       tasksCompleted_ = 0;
       battlesWon_ = 0;
@@ -2633,10 +2633,10 @@ public final class UserProto {
         output.writeInt32(3, level_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, diamonds_);
+        output.writeInt32(4, gems_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, coins_);
+        output.writeInt32(5, cash_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, experience_);
@@ -2763,11 +2763,11 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, diamonds_);
+          .computeInt32Size(4, gems_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, coins_);
+          .computeInt32Size(5, cash_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3036,9 +3036,9 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         level_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        diamonds_ = 0;
+        gems_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        coins_ = 0;
+        cash_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
         experience_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -3167,11 +3167,11 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.diamonds_ = diamonds_;
+        result.gems_ = gems_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.coins_ = coins_;
+        result.cash_ = cash_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
@@ -3338,11 +3338,11 @@ public final class UserProto {
         if (other.hasLevel()) {
           setLevel(other.getLevel());
         }
-        if (other.hasDiamonds()) {
-          setDiamonds(other.getDiamonds());
+        if (other.hasGems()) {
+          setGems(other.getGems());
         }
-        if (other.hasCoins()) {
-          setCoins(other.getCoins());
+        if (other.hasCash()) {
+          setCash(other.getCash());
         }
         if (other.hasExperience()) {
           setExperience(other.getExperience());
@@ -3494,12 +3494,12 @@ public final class UserProto {
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              diamonds_ = input.readInt32();
+              gems_ = input.readInt32();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              coins_ = input.readInt32();
+              cash_ = input.readInt32();
               break;
             }
             case 48: {
@@ -3761,44 +3761,44 @@ public final class UserProto {
         return this;
       }
       
-      // optional int32 diamonds = 4;
-      private int diamonds_ ;
-      public boolean hasDiamonds() {
+      // optional int32 gems = 4;
+      private int gems_ ;
+      public boolean hasGems() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public int getDiamonds() {
-        return diamonds_;
+      public int getGems() {
+        return gems_;
       }
-      public Builder setDiamonds(int value) {
+      public Builder setGems(int value) {
         bitField0_ |= 0x00000008;
-        diamonds_ = value;
+        gems_ = value;
         onChanged();
         return this;
       }
-      public Builder clearDiamonds() {
+      public Builder clearGems() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        diamonds_ = 0;
+        gems_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 coins = 5;
-      private int coins_ ;
-      public boolean hasCoins() {
+      // optional int32 cash = 5;
+      private int cash_ ;
+      public boolean hasCash() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
-      public int getCoins() {
-        return coins_;
+      public int getCash() {
+        return cash_;
       }
-      public Builder setCoins(int value) {
+      public Builder setCash(int value) {
         bitField0_ |= 0x00000010;
-        coins_ = value;
+        cash_ = value;
         onChanged();
         return this;
       }
-      public Builder clearCoins() {
+      public Builder clearCash() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        coins_ = 0;
+        cash_ = 0;
         onChanged();
         return this;
       }
@@ -5167,32 +5167,32 @@ public final class UserProto {
       "\003 \001(\0132 .com.lvl6.proto.MinimumClanProto\"" +
       "b\n\031MinimumUserProtoWithLevel\0226\n\014minUserP" +
       "roto\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\r\n\005level\030\002 \001(\005\"\211\007\n\rFullUserProto\022\016\n",
+      "roto\022\r\n\005level\030\002 \001(\005\"\204\007\n\rFullUserProto\022\016\n",
       "\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001" +
-      "(\005\022\020\n\010diamonds\030\004 \001(\005\022\r\n\005coins\030\005 \001(\005\022\022\n\ne" +
-      "xperience\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001(\005\022" +
-      "\022\n\nbattlesWon\030\010 \001(\005\022\023\n\013battlesLost\030\t \001(\005" +
-      "\022\r\n\005flees\030\n \001(\005\022\024\n\014referralCode\030\013 \001(\t\022\024\n" +
-      "\014numReferrals\030\014 \001(\005\022\025\n\rlastLoginTime\030\016 \001" +
-      "(\003\022\026\n\016lastLogoutTime\030\017 \001(\003\022\016\n\006isFake\030\023 \001" +
-      "(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetrieved" +
-      "FromStructs\030\027 \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lv" +
-      "l6.proto.MinimumClanProto\022\033\n\023hasReceived",
-      "fbReward\030\034 \001(\010\022!\n\031numAdditionalMonsterSl" +
-      "ots\030\035 \001(\005\022!\n\031numBeginnerSalesPurchased\030\036" +
-      " \001(\005\022\027\n\017hasActiveShield\030\037 \001(\010\022\025\n\rshieldE" +
-      "ndTime\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004rank\030\" \001(\t\022" +
-      "\026\n\016lastTimeQueued\030# \001(\003\022\022\n\nattacksWon\030$ " +
-      "\001(\005\022\023\n\013defensesWon\030% \001(\005\022\023\n\013attacksLost\030" +
-      "& \001(\005\022\024\n\014defensesLost\030\' \001(\005\022\014\n\004udid\030\r \001(" +
-      "\t\022\023\n\013deviceToken\030\020 \001(\t\022\"\n\032lastBattleNoti" +
-      "ficationTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n" +
-      "\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030",
-      "numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWa" +
-      "llPostNotificationTime\030\032 \001(\003\022\021\n\tkabamNai" +
-      "d\030\033 \001(\t\"R\n\024StaticLevelInfoProto\022\r\n\005level" +
-      "\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\022\017\n\007ma" +
-      "xCash\030\003 \001(\005B\013B\tUserProto"
+      "(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022\022\n\nexperi" +
+      "ence\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001(\005\022\022\n\nba" +
+      "ttlesWon\030\010 \001(\005\022\023\n\013battlesLost\030\t \001(\005\022\r\n\005f" +
+      "lees\030\n \001(\005\022\024\n\014referralCode\030\013 \001(\t\022\024\n\014numR" +
+      "eferrals\030\014 \001(\005\022\025\n\rlastLoginTime\030\016 \001(\003\022\026\n" +
+      "\016lastLogoutTime\030\017 \001(\003\022\016\n\006isFake\030\023 \001(\010\022\017\n" +
+      "\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetrievedFromS" +
+      "tructs\030\027 \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumClanProto\022\033\n\023hasReceivedfbRew",
+      "ard\030\034 \001(\010\022!\n\031numAdditionalMonsterSlots\030\035" +
+      " \001(\005\022!\n\031numBeginnerSalesPurchased\030\036 \001(\005\022" +
+      "\027\n\017hasActiveShield\030\037 \001(\010\022\025\n\rshieldEndTim" +
+      "e\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004rank\030\" \001(\t\022\026\n\016la" +
+      "stTimeQueued\030# \001(\003\022\022\n\nattacksWon\030$ \001(\005\022\023" +
+      "\n\013defensesWon\030% \001(\005\022\023\n\013attacksLost\030& \001(\005" +
+      "\022\024\n\014defensesLost\030\' \001(\005\022\014\n\004udid\030\r \001(\t\022\023\n\013" +
+      "deviceToken\030\020 \001(\t\022\"\n\032lastBattleNotificat" +
+      "ionTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncrea" +
+      "teTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numCo",
+      "nsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPos" +
+      "tNotificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001" +
+      "(\t\"R\n\024StaticLevelInfoProto\022\r\n\005level\030\001 \001(" +
+      "\005\022\032\n\022requiredExperience\030\002 \001(\005\022\017\n\007maxCash" +
+      "\030\003 \001(\005B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5228,7 +5228,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserProto_descriptor,
-              new java.lang.String[] { "UserId", "Name", "Level", "Diamonds", "Coins", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalMonsterSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", },
+              new java.lang.String[] { "UserId", "Name", "Level", "Gems", "Cash", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalMonsterSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", },
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
           internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor =

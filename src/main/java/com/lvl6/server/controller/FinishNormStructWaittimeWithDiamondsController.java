@@ -77,8 +77,8 @@ import com.lvl6.utils.RetrieveUtils;
       server.writeEvent(resEvent);
 
       if (legitSpeedup) {
-        previousSilver = user.getCoins();
-        previousGold = user.getDiamonds();
+        previousSilver = user.getCash();
+        previousGold = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
         writeChangesToDB(user, userStruct, timeOfSpeedup, struct, money);
@@ -174,9 +174,9 @@ import com.lvl6.utils.RetrieveUtils;
 //      log.error("norm struct wait time type is unknown: " + waitTimeType);
 //      return false;
 //    }
-    if (user.getDiamonds() < diamondCost) {
+    if (user.getGems() < diamondCost) {
       resBuilder.setStatus(FinishNormStructWaittimeStatus.NOT_ENOUGH_DIAMONDS);
-      log.error("user doesn't have enough diamonds. has " + user.getDiamonds() +", needs " + diamondCost);
+      log.error("user doesn't have enough diamonds. has " + user.getGems() +", needs " + diamondCost);
       return false;
     }
     resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);

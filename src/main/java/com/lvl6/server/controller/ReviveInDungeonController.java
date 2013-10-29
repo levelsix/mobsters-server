@@ -130,7 +130,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     
     //make sure user has enough diamonds/gold?
-    int userDiamonds = u.getDiamonds();
+    int userDiamonds = u.getGems();
     int cost = ControllerConstants.TASK_ACTION__REVIVE_COST;
     if (cost > userDiamonds) {
     	log.error("user error: user does not have enough diamonds to revive. " +
@@ -187,13 +187,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
 
-    previousGoldSilver.put(gold, previousGold);
-    previousGoldSilver.put(silver, previousSilver);
-    reasonsForChanges.put(gold, reasonForChange);
-    reasonsForChanges.put(silver, reasonForChange);
+    previousGoldSilver.put(gems, previousGold);
+    previousGoldSilver.put(cash, previousSilver);
+    reasonsForChanges.put(gems, reasonForChange);
+    reasonsForChanges.put(cash, reasonForChange);
 
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, curTime, money, 
         previousGoldSilver, reasonsForChanges);

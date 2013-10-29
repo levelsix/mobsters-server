@@ -72,8 +72,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
         int previousSilver = 0;
         int previousGold = 0;
         if (user != null && struct != null && user.getId() == userStruct.getUserId()) {
-          previousSilver = user.getCoins();
-          previousGold = user.getDiamonds();
+          previousSilver = user.getCash();
+          previousGold = user.getGems();
           
           int diamondChange = Math.max(0,  (int)Math.ceil(struct.getDiamondPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
           int coinChange = Math.max(0,  (int)Math.ceil(struct.getCoinPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
@@ -129,21 +129,21 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     Timestamp date = new Timestamp((new Date()).getTime());
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
     String reasonForChange = ControllerConstants.UCHRFC__SELL_NORM_STRUCT + " "
         + structDetails;
 
     Map<String, Integer> money = new HashMap<String, Integer>();
     if (0 != diamondChange) {
-      money.put(gold, diamondChange);
-      previousGoldSilver.put(gold, previousGold);
-      reasonsForChanges.put(gold, reasonForChange);
+      money.put(gems, diamondChange);
+      previousGoldSilver.put(gems, previousGold);
+      reasonsForChanges.put(gems, reasonForChange);
     }
     if (0 != coinChange) {
-      money.put(silver, coinChange);
-      previousGoldSilver.put(silver, previousSilver);
-      reasonsForChanges.put(silver, reasonForChange);
+      money.put(cash, coinChange);
+      previousGoldSilver.put(cash, previousSilver);
+      reasonsForChanges.put(cash, reasonForChange);
     }
     
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money,

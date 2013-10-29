@@ -14,6 +14,17 @@ message SubmitMonsterEnhancementRequestProto {
 	repeated UserEnhancementItemProto ueipDelete = 2;
 	repeated UserEnhancementItemProto ueipUpdate = 3;
 	repeated UserEnhancementItemProto ueipNew = 4;
+	
+	//if user needs, say, five more cash then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 5;
+	
+	//positive means refund, negative means charge user
+	//Refund in this case: user has two feeders but deletes one of them,
+	//so now it's just base monster and one feeder. The user should get refunded
+	//for the feeder that was dequeued 
+	optional sint32 cashChange = 6; 
+	
 }
 
 message SubmitMonsterEnhancementResponseProto {
@@ -23,11 +34,10 @@ message SubmitMonsterEnhancementResponseProto {
 
 	enum SubmitMonsterEnhancementStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
-		MAIN_OR_FEEDER_OR_EQUIPS_NONEXISTENT = 4;
-		TRYING_TO_SURPASS_MAX_LEVEL = 5;
-		NOT_ENOUGH_SILVER = 6;
+		FAIL_INSUFFICIENT_GEMS = 2;
+		FAIL_INSUFFICIENT_CASH = 3;
+		FAIL_OTHER = 4;
+		//TRYING_TO_SURPASS_MAX_LEVEL = 5;
 	}
 }
 

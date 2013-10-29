@@ -103,9 +103,9 @@ import com.lvl6.utils.utilmethods.QuestUtils;
 @Component
 @DependsOn("gameServer")
 public class StartupController extends EventController {
-  private static String nameRulesFile = "namerulesElven.txt";
-  private static int syllablesInName1 = 2;
-  private static int syllablesInName2 = 3;
+//  private static String nameRulesFile = "namerulesElven.txt";
+//  private static int syllablesInName1 = 2;
+//  private static int syllablesInName2 = 3;
 
   private static Logger log = LoggerFactory.getLogger(new Object() {
   }.getClass().getEnclosingClass());
@@ -346,9 +346,9 @@ public class StartupController extends EventController {
   	  //generate the user quests
   	  List<FullUserQuestProto> currentUserQuests = CreateInfoProtoUtils
   	  		.createFullUserQuestDataLarges(inProgressQuests, questIdToQuests);
-  	  log.info("currentUserQuest protos=" + currentUserQuests +
-  	  		"\t inProgressQuests=" + inProgressQuests + "\t questIdsToQuests=" +
-  	  		questIdToQuests);
+//  	  log.info("currentUserQuest protos=" + currentUserQuests +
+//  	  		"\t inProgressQuests=" + inProgressQuests + "\t questIdsToQuests=" +
+//  	  		questIdToQuests);
   	  resBuilder.addAllUserQuests(currentUserQuests);
   	
   	  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
@@ -388,7 +388,7 @@ public class StartupController extends EventController {
   }
   
   private void setNotifications(Builder resBuilder, User user) {
-    List<Integer> userIds = new ArrayList<Integer>();
+//    List<Integer> userIds = new ArrayList<Integer>();
 
 //    List<MarketplaceTransaction> marketplaceTransactions = MarketplaceTransactionRetrieveUtils
 //        .getMostRecentMarketplaceTransactionsForPoster(user.getId(),
@@ -1244,8 +1244,8 @@ public class StartupController extends EventController {
       return false;
     }
 
-    int previousSilver = aUser.getCoins();
-    int previousGold = aUser.getDiamonds();
+    int previousSilver = aUser.getCash();
+    int previousGold = aUser.getGems();
     if (key.equals(MiscMethods.boosterPackId)) {
       // since user got a booster pack id as reward, need to "buy it" for
       // him
@@ -1258,7 +1258,7 @@ public class StartupController extends EventController {
         return false;
       }
     }
-    if (key.equals(MiscMethods.silver)) {
+    if (key.equals(MiscMethods.cash)) {
       if (!aUser.updateRelativeCoinsNaive(value)) {
         log.error("unexpected error: could not give silver bonus of " + value + " to user " + aUser);
         return false;
@@ -1266,7 +1266,7 @@ public class StartupController extends EventController {
         writeToUserCurrencyHistory(aUser, key, previousSilver, currentDayReward);
       }
     }
-    if (key.equals(MiscMethods.gold)) {
+    if (key.equals(MiscMethods.gems)) {
       if (!aUser.updateRelativeDiamondsNaive(value)) {
         log.error("unexpected error: could not give silver bonus of " + value + " to user " + aUser);
         return false;
@@ -1590,20 +1590,20 @@ public class StartupController extends EventController {
 
   public void writeToUserCurrencyHistory(User aUser, String goldSilver, int previousMoney,
       Map<String, Integer> goldSilverChange) {
-    String silver = MiscMethods.silver;
-    String gold = MiscMethods.gold;
+    String cash = MiscMethods.cash;
+    String gems = MiscMethods.gems;
 
     Timestamp date = new Timestamp((new Date()).getTime());
     Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     String reasonForChange = ControllerConstants.UCHRFC__STARTUP_DAILY_BONUS;
 
-    if (goldSilver.equals(silver)) {
-      previousGoldSilver.put(silver, previousMoney);
-      reasonsForChanges.put(silver, reasonForChange);
+    if (goldSilver.equals(cash)) {
+      previousGoldSilver.put(cash, previousMoney);
+      reasonsForChanges.put(cash, reasonForChange);
     } else {
-      previousGoldSilver.put(gold, previousMoney);
-      reasonsForChanges.put(gold, reasonForChange);
+      previousGoldSilver.put(gems, previousMoney);
+      reasonsForChanges.put(gems, reasonForChange);
     }
 
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, goldSilverChange,

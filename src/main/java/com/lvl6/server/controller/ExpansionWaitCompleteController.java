@@ -77,7 +77,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());  
 
 			if (legitExpansionComplete) {
-				previousGold = user.getDiamonds();
+				previousGold = user.getGems();
 
 				Map<String, Integer> money = new HashMap<String, Integer>();
 				writeChangesToDB(user, uced, speedUp, money, clientTime, xPosition, yPosition);
@@ -105,7 +105,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				log.error("problem updating user diamonds");
 			} else {
 				//everything went ok
-				money.put(MiscMethods.gold, diamondChange);
+				money.put(MiscMethods.gems, diamondChange);
 			}
 		}
 	}
@@ -140,7 +140,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return false;      
 		}
 		int cost = expansionDiamondCost(user.getId(), userCityExpansionData, clientTime);
-		if (speedUp && user.getDiamonds() < cost) {
+		if (speedUp && user.getGems() < cost) {
 			resBuilder.setStatus(ExpansionWaitCompleteStatus.OTHER_FAIL);
 			log.error("user error: user does not have enough gold to speed up expansion." +
 					" userCityExpansionData=" + userCityExpansionData + "cost=" + cost);
@@ -183,12 +183,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			int previousGold, int xPosition, int yPosition) {
 		Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		String gold = MiscMethods.gold;
+		String gems = MiscMethods.gems;
 
-		previousGoldSilver.put(gold, previousGold);
+		previousGoldSilver.put(gems, previousGold);
 
 		String reasonForChange = ControllerConstants.UCHRFC__EXPANSION_WAIT_COMPLETE;
-		reasonsForChanges.put(gold, reasonForChange + "xPosition: " + xPosition + " yPosition: " + yPosition);
+		reasonsForChanges.put(gems, reasonForChange + "xPosition: " + xPosition + " yPosition: " + yPosition);
 		
 
 		MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money, previousGoldSilver, reasonsForChanges);

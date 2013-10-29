@@ -16,7 +16,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.HealMonsterWaitTimeCompleteRequestEvent;
 import com.lvl6.events.response.HealMonsterWaitTimeCompleteResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -65,6 +64,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
     List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
     int gemsForSpeedUp = reqProto.getGemsForSpeedup();
+    
+    log.info("umchpList=" + umchpList + "\t userMonsterIdToExpectedHealth" +
+    		userMonsterIdToExpectedHealth + "\t userMonsterIds=" + userMonsterIds);
 
     //set some values to send to the client (the response proto)
     HealMonsterWaitTimeCompleteResponseProto.Builder resBuilder = HealMonsterWaitTimeCompleteResponseProto.newBuilder();
@@ -178,18 +180,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //		  return false;
 //	  }
   	
-  	//HEAL THE MONSTER
+  	//TODO: HEAL THE MONSTER
   	List<Integer> currentHealths = new ArrayList<Integer>();
   	int num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIds,
   			currentHealths, userMonsterIdsToHealths);
   	log.info("num updated=" + num);
 
-	  //delete the selected monsters from  the healing table
-	  num = DeleteUtils.get().deleteMonsterHealingForUser(
-	  		uId, userMonsterIds);
-	  log.info("deleted monster healing rows. numDeleted=" + num +
-	  		"\t userMonsterIds=" + userMonsterIds);
-	  
+  	//should always execute, but who knows...
+  	if (null != userMonsterIds && !userMonsterIds.isEmpty()) {
+  		//delete the selected monsters from  the healing table
+  		num = DeleteUtils.get().deleteMonsterHealingForUser(
+  				uId, userMonsterIds);
+  		log.info("deleted monster healing rows. numDeleted=" + num +
+  				"\t userMonsterIds=" + userMonsterIds);
+  	}
 	  return true;
   }
   
@@ -197,20 +201,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousSilver, int previousGold) {
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+      int previousCash, int previousGems) {
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-    String gold = MiscMethods.gold;
-    String silver = MiscMethods.silver;
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
 
-    previousGoldSilver.put(gold, previousGold);
-    previousGoldSilver.put(silver, previousSilver);
-    reasonsForChanges.put(gold, reasonForChange);
-    reasonsForChanges.put(silver, reasonForChange);
+    previousGemsCash.put(gems, previousGems);
+    previousGemsCash.put(cash, previousCash);
+    reasonsForChanges.put(gems, reasonForChange);
+    reasonsForChanges.put(cash, reasonForChange);
 
     MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, curTime, money, 
-        previousGoldSilver, reasonsForChanges);
+        previousGemsCash, reasonsForChanges);
 
   }
 }

@@ -54,7 +54,6 @@ import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -75,11 +74,9 @@ public class MiscMethods {
 
 
   private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
-  public static final String gold = "gold";
-  public static final String silver = "silver";
+  public static final String cash = "cash";
+  public static final String gems = "gems";
   public static final String boosterPackId = "boosterPackId";
-  public static final String coins = "coins";
-  public static final String diamonds = "diamonds";
 
 //  public static int calculateMinutesToFinishForgeAttempt(Equipment equipment, int goalLevel) {
 //    return (int)
@@ -202,7 +199,7 @@ public class MiscMethods {
 
   public static int calculateCoinsGivenToReferrer(User referrer) {
     return Math.min(ControllerConstants.USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER, (int)(Math.ceil(
-        (referrer.getCoins()) * 
+        (referrer.getCash()) * 
         ControllerConstants.USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER)));
   }
 
@@ -698,13 +695,13 @@ public class MiscMethods {
       List<String> reasonsForChanges = new ArrayList<String>();
 
       int userId = aUser.getId();
-      int goldChange = goldSilverChange.get(gold);
-      int silverChange = goldSilverChange.get(silver);
+      int goldChange = goldSilverChange.get(gems);
+      int silverChange = goldSilverChange.get(cash);
       int previousGold = 0;
       int previousSilver = 0;
-      int currentGold = aUser.getDiamonds();
+      int currentGold = aUser.getGems();
       //recording total silver user has
-      int currentSilver = aUser.getCoins();
+      int currentSilver = aUser.getCash();
 
       //record gold change first
       if (0 != goldChange) {
@@ -721,12 +718,12 @@ public class MiscMethods {
           //previous_gold = 5 - -5 = 10
           previousGold = currentGold - goldChange;
         } else {
-          previousGold = previousGoldSilver.get(gold);
+          previousGold = previousGoldSilver.get(gems);
         }
 
         previousCurrencies.add(previousGold);
         currentCurrencies.add(currentGold);
-        reasonsForChanges.add(reasons.get(gold));
+        reasonsForChanges.add(reasons.get(gems));
       }
 
       //record silver change next
@@ -738,12 +735,12 @@ public class MiscMethods {
         if(null == previousGoldSilver || previousGoldSilver.isEmpty()) {
           previousSilver = currentSilver - silverChange;
         } else {
-          previousSilver = previousGoldSilver.get(silver);
+          previousSilver = previousGoldSilver.get(cash);
         }
 
         previousCurrencies.add(previousSilver);
         currentCurrencies.add(currentSilver);
-        reasonsForChanges.add(reasons.get(silver));
+        reasonsForChanges.add(reasons.get(cash));
       }
 
       //using multiple rows because could be 2 entries: one for silver, other for gold
@@ -775,11 +772,11 @@ public class MiscMethods {
         return;//don't write a non change to history table to avoid bloat
       }
 
-      if (key.equals(gold)) {
-        currentCurrency = aUser.getDiamonds();
-      } else if(key.equals(silver)) {
+      if (key.equals(gems)) {
+        currentCurrency = aUser.getGems();
+      } else if(key.equals(cash)) {
         //record total silver
-        currentCurrency = aUser.getCoins();
+        currentCurrency = aUser.getCash();
         isSilver = 1;
       } else {
         log.error("invalid key for map representing currency change. key=" + key);
