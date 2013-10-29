@@ -16,7 +16,7 @@ public class Monster implements Serializable {
 	private String displayName;
 	private MonsterElement element;
 	private int baseHp;
-	private String imageName;
+	private String imagePrefix;
 	private int numPuzzlePieces;
 	private int minutesToCombinePieces;
 	private int elementOneDmg;
@@ -35,7 +35,7 @@ public class Monster implements Serializable {
   
 	public Monster(int id, String name, String monsterGroup,
 			MonsterQuality quality, int evolutionLevel, String displayName,
-			MonsterElement element, int baseHp, String imageName,
+			MonsterElement element, int baseHp, String imagePrefix,
 			int numPuzzlePieces, int minutesToCombinePieces, int elementOneDmg,
 			int elementTwoDmg, int elementThreeDmg, int elementFourDmg,
 			int elementFiveDmg, float hpLevelMultiplier, float attackLevelMultiplier,
@@ -50,7 +50,7 @@ public class Monster implements Serializable {
 		this.displayName = displayName;
 		this.element = element;
 		this.baseHp = baseHp;
-		this.imageName = imageName;
+		this.imagePrefix = imagePrefix;
 		this.numPuzzlePieces = numPuzzlePieces;
 		this.minutesToCombinePieces = minutesToCombinePieces;
 		this.elementOneDmg = elementOneDmg;
@@ -132,12 +132,12 @@ public class Monster implements Serializable {
 		this.baseHp = baseHp;
 	}
 
-	public String getImageName() {
-		return imageName;
+	public String getImagePrefix() {
+		return imagePrefix;
 	}
 
-	public void setImageName(String imageName) {
-		this.imageName = imageName;
+	public void setImagePrefix(String imagePrefix) {
+		this.imagePrefix = imagePrefix;
 	}
 
 	public int getNumPuzzlePieces() {
@@ -265,7 +265,7 @@ public class Monster implements Serializable {
 		return "Monster [id=" + id + ", name=" + name + ", monsterGroup="
 				+ monsterGroup + ", quality=" + quality + ", evolutionLevel="
 				+ evolutionLevel + ", displayName=" + displayName + ", element="
-				+ element + ", baseHp=" + baseHp + ", imageName=" + imageName
+				+ element + ", baseHp=" + baseHp + ", imagePrefix=" + imagePrefix
 				+ ", numPuzzlePieces=" + numPuzzlePieces + ", minutesToCombinePieces="
 				+ minutesToCombinePieces + ", elementOneDmg=" + elementOneDmg
 				+ ", elementTwoDmg=" + elementTwoDmg + ", elementThreeDmg="

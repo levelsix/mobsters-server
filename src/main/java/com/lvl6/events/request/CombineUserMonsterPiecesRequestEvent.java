@@ -5,25 +5,25 @@ import java.nio.ByteBuffer;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
-import com.lvl6.proto.EventMonsterProto.CombineMonsterPiecesRequestProto;
+import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto;
 
-public class CombineMonsterPiecesRequestEvent extends RequestEvent {
+public class CombineUserMonsterPiecesRequestEvent extends RequestEvent {
 
-  private CombineMonsterPiecesRequestProto combineMonsterPiecesRequestProto;
+  private CombineUserMonsterPiecesRequestProto combineMonsterPiecesRequestProto;
   
   /**
    * read the event from the given ByteBuffer to populate this event
    */
   public void read(ByteBuffer buff) {
     try {
-      combineMonsterPiecesRequestProto = CombineMonsterPiecesRequestProto.parseFrom(ByteString.copyFrom(buff));
+      combineMonsterPiecesRequestProto = CombineUserMonsterPiecesRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = combineMonsterPiecesRequestProto.getSender().getUserId();
     } catch (InvalidProtocolBufferException e) {
       e.printStackTrace();
     }
   }
 
-  public CombineMonsterPiecesRequestProto getCombineMonsterPiecesRequestProto() {
+  public CombineUserMonsterPiecesRequestProto getCombineUserMonsterPiecesRequestProto() {
     return combineMonsterPiecesRequestProto;
   }
 }

@@ -1065,6 +1065,11 @@ public final class CityProto {
     // optional .com.lvl6.proto.StructOrientation orientation = 9 [default = POSITION_1];
     boolean hasOrientation();
     com.lvl6.proto.StructureProto.StructOrientation getOrientation();
+    
+    // optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;
+    boolean hasSpriteCoords();
+    com.lvl6.proto.StructureProto.CoordinateProto getSpriteCoords();
+    com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getSpriteCoordsOrBuilder();
   }
   public static final class CityElementProto extends
       com.google.protobuf.GeneratedMessage
@@ -1307,6 +1312,19 @@ public final class CityProto {
       return orientation_;
     }
     
+    // optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;
+    public static final int SPRITECOORDS_FIELD_NUMBER = 10;
+    private com.lvl6.proto.StructureProto.CoordinateProto spriteCoords_;
+    public boolean hasSpriteCoords() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    public com.lvl6.proto.StructureProto.CoordinateProto getSpriteCoords() {
+      return spriteCoords_;
+    }
+    public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getSpriteCoordsOrBuilder() {
+      return spriteCoords_;
+    }
+    
     private void initFields() {
       cityId_ = 0;
       assetId_ = 0;
@@ -1317,6 +1335,7 @@ public final class CityProto {
       yLength_ = 0;
       imgId_ = "";
       orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      spriteCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1356,6 +1375,9 @@ public final class CityProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeEnum(9, orientation_.getNumber());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeMessage(10, spriteCoords_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1401,6 +1423,10 @@ public final class CityProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(9, orientation_.getNumber());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, spriteCoords_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1519,6 +1545,7 @@ public final class CityProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getCoordsFieldBuilder();
+          getSpriteCoordsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1549,6 +1576,12 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
         bitField0_ = (bitField0_ & ~0x00000100);
+        if (spriteCoordsBuilder_ == null) {
+          spriteCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+        } else {
+          spriteCoordsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
       
@@ -1627,6 +1660,14 @@ public final class CityProto {
           to_bitField0_ |= 0x00000100;
         }
         result.orientation_ = orientation_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        if (spriteCoordsBuilder_ == null) {
+          result.spriteCoords_ = spriteCoords_;
+        } else {
+          result.spriteCoords_ = spriteCoordsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1669,6 +1710,9 @@ public final class CityProto {
         }
         if (other.hasOrientation()) {
           setOrientation(other.getOrientation());
+        }
+        if (other.hasSpriteCoords()) {
+          mergeSpriteCoords(other.getSpriteCoords());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1760,6 +1804,15 @@ public final class CityProto {
                 bitField0_ |= 0x00000100;
                 orientation_ = value;
               }
+              break;
+            }
+            case 82: {
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
+              if (hasSpriteCoords()) {
+                subBuilder.mergeFrom(getSpriteCoords());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSpriteCoords(subBuilder.buildPartial());
               break;
             }
           }
@@ -2060,6 +2113,96 @@ public final class CityProto {
         orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
         onChanged();
         return this;
+      }
+      
+      // optional .com.lvl6.proto.CoordinateProto spriteCoords = 10;
+      private com.lvl6.proto.StructureProto.CoordinateProto spriteCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> spriteCoordsBuilder_;
+      public boolean hasSpriteCoords() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProto getSpriteCoords() {
+        if (spriteCoordsBuilder_ == null) {
+          return spriteCoords_;
+        } else {
+          return spriteCoordsBuilder_.getMessage();
+        }
+      }
+      public Builder setSpriteCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
+        if (spriteCoordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          spriteCoords_ = value;
+          onChanged();
+        } else {
+          spriteCoordsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      public Builder setSpriteCoords(
+          com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
+        if (spriteCoordsBuilder_ == null) {
+          spriteCoords_ = builderForValue.build();
+          onChanged();
+        } else {
+          spriteCoordsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      public Builder mergeSpriteCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
+        if (spriteCoordsBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200) &&
+              spriteCoords_ != com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance()) {
+            spriteCoords_ =
+              com.lvl6.proto.StructureProto.CoordinateProto.newBuilder(spriteCoords_).mergeFrom(value).buildPartial();
+          } else {
+            spriteCoords_ = value;
+          }
+          onChanged();
+        } else {
+          spriteCoordsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      public Builder clearSpriteCoords() {
+        if (spriteCoordsBuilder_ == null) {
+          spriteCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+          onChanged();
+        } else {
+          spriteCoordsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProto.Builder getSpriteCoordsBuilder() {
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return getSpriteCoordsFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getSpriteCoordsOrBuilder() {
+        if (spriteCoordsBuilder_ != null) {
+          return spriteCoordsBuilder_.getMessageOrBuilder();
+        } else {
+          return spriteCoords_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
+          getSpriteCoordsFieldBuilder() {
+        if (spriteCoordsBuilder_ == null) {
+          spriteCoordsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
+                  spriteCoords_,
+                  getParentForChildren(),
+                  isClean());
+          spriteCoords_ = null;
+        }
+        return spriteCoordsBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CityElementProto)
@@ -2886,20 +3029,21 @@ public final class CityProto {
       "\001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"a\n\026CityExpa" +
       "nsionCostProto\022\024\n\014expansionNum\030\001 \001(\005\022\025\n\r" +
       "expansionCost\030\002 \001(\005\022\032\n\022numMinutesToExpan" +
-      "d\030\003 \001(\005\"\366\002\n\020CityElementProto\022\016\n\006cityId\030\001" +
+      "d\030\003 \001(\005\"\255\003\n\020CityElementProto\022\016\n\006cityId\030\001" +
       " \001(\005\022\017\n\007assetId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022;\n\004t" +
       "ype\030\004 \001(\0162-.com.lvl6.proto.CityElementPr",
       "oto.CityElemType\022/\n\006coords\030\005 \001(\0132\037.com.l" +
       "vl6.proto.CoordinateProto\022\017\n\007xLength\030\006 \001" +
       "(\005\022\017\n\007yLength\030\007 \001(\005\022\r\n\005imgId\030\010 \001(\t\022B\n\013or" +
       "ientation\030\t \001(\0162!.com.lvl6.proto.StructO" +
-      "rientation:\nPOSITION_1\"P\n\014CityElemType\022\014" +
-      "\n\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_N" +
-      "EUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\001\n\rFullCityPro" +
-      "to\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapI" +
-      "mgName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl6." +
-      "proto.CoordinateProto\022\017\n\007taskIds\030\005 \003(\005B\013",
-      "B\tCityProto"
+      "rientation:\nPOSITION_1\0225\n\014spriteCoords\030\n" +
+      " \001(\0132\037.com.lvl6.proto.CoordinateProto\"P\n" +
+      "\014CityElemType\022\014\n\010BUILDING\020\001\022\016\n\nDECORATIO" +
+      "N\020\002\022\030\n\024PERSON_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"" +
+      "\203\001\n\rFullCityProto\022\016\n\006cityId\030\001 \001(\005\022\014\n\004nam" +
+      "e\030\002 \001(\t\022\022\n\nmapImgName\030\003 \001(\t\022/\n\006center\030\004 ",
+      "\001(\0132\037.com.lvl6.proto.CoordinateProto\022\017\n\007" +
+      "taskIds\030\005 \003(\005B\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2927,7 +3071,7 @@ public final class CityProto {
           internal_static_com_lvl6_proto_CityElementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_CityElementProto_descriptor,
-              new java.lang.String[] { "CityId", "AssetId", "Name", "Type", "Coords", "XLength", "YLength", "ImgId", "Orientation", },
+              new java.lang.String[] { "CityId", "AssetId", "Name", "Type", "Coords", "XLength", "YLength", "ImgId", "Orientation", "SpriteCoords", },
               com.lvl6.proto.CityProto.CityElementProto.class,
               com.lvl6.proto.CityProto.CityElementProto.Builder.class);
           internal_static_com_lvl6_proto_FullCityProto_descriptor =

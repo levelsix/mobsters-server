@@ -12,7 +12,7 @@ message MonsterProto {
 	optional string displayName = 6;
 	optional MonsterElement element = 7;
 	optional int32 baseHp = 8;
-	optional string imageName = 9;
+	optional string imagePrefix = 9;
 	optional int32 numPuzzlePieces = 10;
 	optional int32 minutesToCombinePieces = 11;
 	optional int32 elementOneDmg = 12;
@@ -101,3 +101,8 @@ message UserMonsterCurrentExpProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+message MinimumUserMonsterSellProto {
+	optional int64 userMonsterId = 1;
+	optional int32 cashAmount = 2;
+}

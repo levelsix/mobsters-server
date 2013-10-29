@@ -114,8 +114,10 @@ import com.lvl6.utils.DBConnection;
 
     int orientationNum = rs.getInt(i++);
     StructOrientation orientation = (rs.wasNull()) ? null : StructOrientation.valueOf(orientationNum);
-
-    return new CityElement(cityId, assetId, goodName, type, coords, xLength, yLength, imgGood, orientation);
+    CoordinatePair spriteCoords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
+    
+    return new CityElement(cityId, assetId, goodName, type, coords,
+    		xLength, yLength, imgGood, orientation, spriteCoords);
   }
 
 

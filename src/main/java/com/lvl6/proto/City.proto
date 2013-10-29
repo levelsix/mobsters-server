@@ -35,6 +35,7 @@ message CityElementProto {
 	optional int32 yLength = 7;
 	optional string imgId = 8;
 	optional StructOrientation orientation = 9 [default = POSITION_1];
+	optional CoordinateProto spriteCoords = 10;
 	
 	enum CityElemType {
 		BUILDING = 1;

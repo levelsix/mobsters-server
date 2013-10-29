@@ -1,6 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,76 +9,80 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
-import com.lvl6.events.request.CombineMonsterPiecesRequestEvent;
-import com.lvl6.events.response.CombineMonsterPiecesResponseEvent;
+import com.lvl6.events.request.SellUserMonsterRequestEvent;
+import com.lvl6.events.response.SellUserMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.proto.EventMonsterProto.CombineMonsterPiecesRequestProto;
-import com.lvl6.proto.EventMonsterProto.CombineMonsterPiecesResponseProto;
-import com.lvl6.proto.EventMonsterProto.CombineMonsterPiecesResponseProto.Builder;
-import com.lvl6.proto.EventMonsterProto.CombineMonsterPiecesResponseProto.CombineMonsterPiecesStatus;
+import com.lvl6.proto.EventMonsterProto.SellUserMonsterRequestProto;
+import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto;
+import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.Builder;
+import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus;
+import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
-@Component @DependsOn("gameServer") public class CombineMonsterPiecesController extends EventController {
+@Component @DependsOn("gameServer") public class SellUserMonsterController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 
-  public CombineMonsterPiecesController() {
+  public SellUserMonsterController() {
     numAllocatedThreads = 4;
   }
 
   @Override
   public RequestEvent createRequestEvent() {
-    return new CombineMonsterPiecesRequestEvent();
+    return new SellUserMonsterRequestEvent();
   }
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_COMBINE_MONSTER_PIECES_EVENT;
+    return EventProtocolRequest.C_SELL_USER_MONSTER_EVENT;
   }
 
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
-    CombineMonsterPiecesRequestProto reqProto = ((CombineMonsterPiecesRequestEvent)event).getCombineMonsterPiecesRequestProto();
+    SellUserMonsterRequestProto reqProto = ((SellUserMonsterRequestEvent)event).getSellUserMonsterRequestProto();
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
-    List<Long> userMonsterIds = reqProto.getUserMonsterIdsList();
-    userMonsterIds = new ArrayList<Long>(userMonsterIds);
-
+    List<MinimumUserMonsterSellProto> userMonsters = reqProto.getSalesList();
+    Map<Long, Integer> userMonsterIdToCost = MonsterStuffUtils
+    		.convertToMonsterForUserIdToCashAmount(userMonsters);
+    
+    
     //set some values to send to the client (the response proto)
-    CombineMonsterPiecesResponseProto.Builder resBuilder = CombineMonsterPiecesResponseProto.newBuilder();
+    SellUserMonsterResponseProto.Builder resBuilder = SellUserMonsterResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
-    resBuilder.setStatus(CombineMonsterPiecesStatus.FAIL_OTHER); //default
+    resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER); //default
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-      Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
-      		.monsterForUserRetrieveUtils().getSpecificUserMonstersForUser(userId, userMonsterIds);
-      
-      boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
-      		idsToUserMonsters);
+//      Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
+//      		.monsterForUserRetrieveUtils().getSpecificUserMonstersForUser(userId, userMonsterIds);
+//      
+//      boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
+//      		idsToUserMonsters);
 
-      boolean successful = false;
-      if(legit) {
-    	  successful = writeChangesToDb(aUser, userMonsterIds);
-      }
+//      boolean successful = false;
+//      if(legit) {
+//    	  successful = writeChangesToDb(aUser, userMonsterIds);
+//      }
+//      
+//      if (successful) {
+//    	  resBuilder.setStatus(SellUserMonsterStatus.SUCCESS);
+//      }
       
-      if (successful) {
-    	  resBuilder.setStatus(CombineMonsterPiecesStatus.SUCCESS);
-      }
-      
-      CombineMonsterPiecesResponseEvent resEvent = new CombineMonsterPiecesResponseEvent(userId);
+      SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(userId);
       resEvent.setTag(event.getTag());
-      resEvent.setCombineMonsterPiecesResponseProto(resBuilder.build());
+      resEvent.setSellUserMonsterResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
       
       UpdateClientUserResponseEvent resEventUpdate = MiscMethods
@@ -87,16 +90,16 @@ import com.lvl6.utils.RetrieveUtils;
       resEventUpdate.setTag(event.getTag());
       server.writeEvent(resEventUpdate);
     } catch (Exception e) {
-      log.error("exception in CombineMonsterPiecesController processEvent", e);
+      log.error("exception in SellUserMonsterController processEvent", e);
       //don't let the client hang
       try {
-    	  resBuilder.setStatus(CombineMonsterPiecesStatus.FAIL_OTHER);
-    	  CombineMonsterPiecesResponseEvent resEvent = new CombineMonsterPiecesResponseEvent(userId);
+    	  resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER);
+    	  SellUserMonsterResponseEvent resEvent = new SellUserMonsterResponseEvent(userId);
     	  resEvent.setTag(event.getTag());
-    	  resEvent.setCombineMonsterPiecesResponseProto(resBuilder.build());
+    	  resEvent.setSellUserMonsterResponseProto(resBuilder.build());
     	  server.writeEvent(resEvent);
       } catch (Exception e2) {
-    	  log.error("exception2 in CombineMonsterPiecesController processEvent", e);
+    	  log.error("exception2 in SellUserMonsterController processEvent", e);
       }
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -151,15 +154,18 @@ import com.lvl6.utils.RetrieveUtils;
   	}
   	
   	
-  	resBuilder.setStatus(CombineMonsterPiecesStatus.SUCCESS);
+  	resBuilder.setStatus(SellUserMonsterStatus.SUCCESS);
   	return true;
   }
   
   private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds) { 
-  	boolean success = false;
+  	boolean success = true;
   	
-  	if (!success) {
-  		log.error("problem with updating user monster inventory slots and diamonds");
+  	int num = UpdateUtils.get().updateCompleteUserMonster(userMonsterIds);
+  	
+  	if (num != userMonsterIds.size()) {
+  		log.error("problem with updating user monster is_complete. numUpdated=" +
+  				num + "\t userMonsterIds=" + userMonsterIds);
   	}
   	return success;
   }

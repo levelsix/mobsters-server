@@ -104,7 +104,7 @@ import com.lvl6.utils.DBConnection;
     String displayName = rs.getString(i++);
     MonsterElement element = MonsterElement.valueOf(rs.getInt(i++));
     int baseHp = rs.getInt(i++);
-    String imageName = rs.getString(i++);
+    String imagePrefix = rs.getString(i++);
     int numPuzzlePieces = rs.getInt(i++);
     int minutesToCombinePieces = rs.getInt(i++);
     int elementOneDmg = rs.getInt(i++);
@@ -123,7 +123,7 @@ import com.lvl6.utils.DBConnection;
     String description = rs.getString(i++);
     
     Monster monster = new Monster(id, name, monsterGroup, quality,
-    		evolutionLevel, displayName, element, baseHp, imageName,
+    		evolutionLevel, displayName, element, baseHp, imagePrefix,
     		numPuzzlePieces, minutesToCombinePieces, elementOneDmg,
     		elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg,
     		hpLevelMultiplier, attackLevelMultiplier, maxLevel, evolutionMonsterId,

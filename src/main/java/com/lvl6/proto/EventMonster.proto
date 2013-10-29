@@ -195,19 +195,36 @@ message IncreaseMonsterInventorySlotResponseProto {
 
 //------------------------------------------------------------------------------------------
 
-message CombineMonsterPiecesRequestProto {
+message CombineUserMonsterPiecesRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated int64 userMonsterIds = 2;
 }
 
-message CombineMonsterPiecesResponseProto {
+message CombineUserMonsterPiecesResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional CombineMonsterPiecesStatus status = 2;
+	optional CombineUserMonsterPiecesStatus status = 2;
 	
-	enum CombineMonsterPiecesStatus {
+	enum CombineUserMonsterPiecesStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
 	}
 }
 
 //------------------------------------------------------------------------------------------
+
+message SellUserMonsterRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated MinimumUserMonsterSellProto sales = 2;
+}
+
+message SellUserMonsterResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional SellUserMonsterStatus status = 2;
+	
+	enum SellUserMonsterStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+

@@ -516,9 +516,11 @@ public class CreateInfoProtoUtils {
   }
 
   public static CityElementProto createCityElementProtoFromCityElement(CityElement nce) {
-    CityElementProto.Builder builder = CityElementProto.newBuilder().setCityId(nce.getCityId()).setAssetId(nce.getAssetId())
-        .setType(nce.getType())
-        .setCoords(createCoordinateProtoFromCoordinatePair(nce.getCoords()));
+    CityElementProto.Builder builder = CityElementProto.newBuilder();
+    builder.setCityId(nce.getCityId());
+    builder.setAssetId(nce.getAssetId());
+    builder.setType(nce.getType());
+    builder.setCoords(createCoordinateProtoFromCoordinatePair(nce.getCoords()));
     builder.setName(nce.getGoodName());
     builder.setImgId(nce.getImgGood());
 
@@ -531,6 +533,9 @@ public class CreateInfoProtoUtils {
     if (nce.getyLength() > 0) {
       builder.setYLength(nce.getyLength());
     }
+    
+    builder.setSpriteCoords(createCoordinateProtoFromCoordinatePair(nce.getSpriteCoords()));
+    
     return builder.build();
   }
 
@@ -808,13 +813,16 @@ public class CreateInfoProtoUtils {
 
     mpb.setMonsterId(aMonster.getId());
     mpb.setName(aMonster.getName());
-    mpb.setMonsterGroup(aMonster.getMonsterGroup());
+    String mGroup = aMonster.getMonsterGroup();
+    if (null != mGroup) {
+    	mpb.setMonsterGroup(mGroup);
+    }
     mpb.setQuality(aMonster.getQuality());
     mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
     mpb.setDisplayName(aMonster.getDisplayName());
     mpb.setElement(aMonster.getElement());
     mpb.setBaseHp(aMonster.getBaseHp());
-    mpb.setImageName(aMonster.getImageName());
+    mpb.setImagePrefix(aMonster.getImagePrefix());
     mpb.setNumPuzzlePieces(aMonster.getNumPuzzlePieces());
     mpb.setMinutesToCombinePieces(aMonster.getMinutesToCombinePieces());
     mpb.setElementOneDmg(aMonster.getElementOneDmg());
