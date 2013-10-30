@@ -110,7 +110,7 @@ message HealMonsterRequestProto {
 	//positive means refund, negative means charge user
 	//Refund in this case: user has two monsters healing but deletes one of them,
 	//The user should get refunded for the monster that was dequeued 
-	optional sint32 cashCost = 5; 
+	optional sint32 cashChange = 5; 
 	
 	//positive amount
 	optional int32 gemCost = 6;

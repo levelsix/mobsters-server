@@ -260,9 +260,10 @@ public class ControllerConstants {
   public static final int TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END = 24;
   
   //USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
-  public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user_monster_ids: ";
   public static final String UCHRFC__ENHANCING = "enhancing: ";
+  public static final String UCHRFC__HEAL_MONSTER = "healed userMonsters: ";
   public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing ";
+  public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user_monster_ids: ";
   
   
   public static final String UCHRFC__USER_CREATED = "user created";
