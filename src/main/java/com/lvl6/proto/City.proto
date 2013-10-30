@@ -28,7 +28,7 @@ message CityExpansionCostProto {
 message CityElementProto {
 	optional int32 cityId = 1;
 	optional int32 assetId = 2;
-	optional string name = 3;
+	//optional string name = 3;
 	optional CityElemType type = 4;
 	optional CoordinateProto coords = 5;
 	optional int32 xLength = 6;

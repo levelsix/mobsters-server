@@ -7,10 +7,10 @@ import com.lvl6.proto.StructureProto.StructOrientation;
 
 public class CityElement implements Serializable {
 	
-	private static final long serialVersionUID = -765137466633523601L;
+	private static final long serialVersionUID = 1281950874996210998L;
 	private int cityId;
 	private int assetId;
-	private String goodName;
+//	private String goodName;
 	private CityElemType type;
 	private CoordinatePair coords;
 	private int xLength;
@@ -19,13 +19,13 @@ public class CityElement implements Serializable {
 	private StructOrientation orientation;
 	private CoordinatePair spriteCoords;
 	
-	public CityElement(int cityId, int assetId, String goodName,
-			CityElemType type, CoordinatePair coords, int xLength, int yLength,
-			String imgGood, StructOrientation orientation, CoordinatePair spriteCoords) {
+
+	public CityElement(int cityId, int assetId, CityElemType type,
+			CoordinatePair coords, int xLength, int yLength, String imgGood,
+			StructOrientation orientation, CoordinatePair spriteCoords) {
 		super();
 		this.cityId = cityId;
 		this.assetId = assetId;
-		this.goodName = goodName;
 		this.type = type;
 		this.coords = coords;
 		this.xLength = xLength;
@@ -49,14 +49,6 @@ public class CityElement implements Serializable {
 
 	public void setAssetId(int assetId) {
 		this.assetId = assetId;
-	}
-
-	public String getGoodName() {
-		return goodName;
-	}
-
-	public void setGoodName(String goodName) {
-		this.goodName = goodName;
 	}
 
 	public CityElemType getType() {
@@ -117,11 +109,10 @@ public class CityElement implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CityElement [cityId=" + cityId + ", assetId=" + assetId
-				+ ", goodName=" + goodName + ", type=" + type + ", coords=" + coords
-				+ ", xLength=" + xLength + ", yLength=" + yLength + ", imgGood="
-				+ imgGood + ", orientation=" + orientation + ", spriteCoords="
-				+ spriteCoords + "]";
+		return "CityElement [cityId=" + cityId + ", assetId=" + assetId + ", type="
+				+ type + ", coords=" + coords + ", xLength=" + xLength + ", yLength="
+				+ yLength + ", imgGood=" + imgGood + ", orientation=" + orientation
+				+ ", spriteCoords=" + spriteCoords + "]";
 	}
 
 }

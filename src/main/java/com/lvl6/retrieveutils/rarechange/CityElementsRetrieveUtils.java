@@ -100,7 +100,7 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int cityId = rs.getInt(i++);
     int assetId = rs.getInt(i++);
-    String goodName = rs.getString(i++);
+//    String goodName = rs.getString(i++);
     CityElemType type = CityElemType.valueOf(rs.getInt(i++));
     CoordinatePair coords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
 
@@ -116,7 +116,7 @@ import com.lvl6.utils.DBConnection;
     StructOrientation orientation = (rs.wasNull()) ? null : StructOrientation.valueOf(orientationNum);
     CoordinatePair spriteCoords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
     
-    return new CityElement(cityId, assetId, goodName, type, coords,
+    return new CityElement(cityId, assetId, type, coords,
     		xLength, yLength, imgGood, orientation, spriteCoords);
   }
 
