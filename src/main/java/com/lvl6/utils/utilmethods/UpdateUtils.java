@@ -664,7 +664,7 @@ public class UpdateUtils implements UpdateUtil {
 		String valuesList = StringUtils.getListInString(clauses, ",");
 		query += valuesList + 
 				" ON DUPLICATE KEY UPDATE " +
-				currentHealth + "values(" + currentHealth +");";
+				currentHealth + "=values(" + currentHealth +");";
 
 		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
 		return numUpdated;
