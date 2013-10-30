@@ -246,7 +246,7 @@ public class SellUserMonsterController extends EventController {
 		previousGoldSilver.put(silver, previousSilver);
 		reasonsForChanges.put(silver, reasonForChange);
 
-		MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date,
+		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
 				goldSilverChange, previousGoldSilver, reasonsForChanges);
 	}
 

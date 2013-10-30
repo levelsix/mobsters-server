@@ -80,8 +80,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      //int previousSilver = 0;
-      //int previousGold = 0;
+      //int previousCash = 0;
+      //int previousGems = 0;
     	//get whatever we need from the database
     	User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	Map<Long, MonsterHealingForUser> alreadyHealing =
@@ -103,11 +103,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean successful = false;
       if(legit) {
     	  
-//        previousSilver = aUser.getCoins();
-//        previousGold = aUser.getDiamonds();
+//        previousCash = aUser.getCoins();
+//        previousGems = aUser.getDiamonds();
     	  successful = writeChangesToDb(aUser, userId, cashCost,
     	  		gemCost, deleteMap, updateMap, newMap);
-//        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
+//        writeToUserCurrencyHistory(aUser, money, curTime, previousCash, previousGems);
       }
       if (successful) {
 //    	  setResponseBuilder(resBuilder, userId);
@@ -181,8 +181,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	return false;
     }
     
-    // scenario can be user has insufficient cash/coin but has enough
-    // gems/gold to cover the difference
+    // scenario can be user has insufficient cash but has enough
+    // gems to cover the difference
     int userCash = u.getCash();
     if (cashCost > userCash && gemCost == 0) {
     	//user doesn't have enough cash and is not paying gems.
@@ -297,7 +297,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     reasonsForChanges.put(gems, reasonForChange);
     reasonsForChanges.put(cash, reasonForChange);
 
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, curTime, money, 
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
         previousGemsCash, reasonsForChanges);
 
   }

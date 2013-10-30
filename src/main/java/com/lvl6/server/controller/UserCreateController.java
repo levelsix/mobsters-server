@@ -398,7 +398,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     reasonsForChanges.put(gems, reasonForChange);
     reasonsForChanges.put(cash, reasonForChange);
     
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, goldSilverChange,
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
         previousGoldSilver, reasonsForChanges);
   }
 
@@ -415,7 +415,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     previousGoldSilver.put(silver, previousSilver);
     reasonsForChanges.put(silver, reasonForChange);
     
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, goldSilverChange,
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
         previousGoldSilver, reasonsForChanges);
   }
   

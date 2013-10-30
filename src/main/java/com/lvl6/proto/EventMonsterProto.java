@@ -4642,7 +4642,7 @@ public final class EventMonsterProto {
     boolean hasCashCost();
     int getCashCost();
     
-    // optional sint32 gemCost = 6;
+    // optional int32 gemCost = 6;
     boolean hasGemCost();
     int getGemCost();
   }
@@ -4761,7 +4761,7 @@ public final class EventMonsterProto {
       return cashCost_;
     }
     
-    // optional sint32 gemCost = 6;
+    // optional int32 gemCost = 6;
     public static final int GEMCOST_FIELD_NUMBER = 6;
     private int gemCost_;
     public boolean hasGemCost() {
@@ -4807,7 +4807,7 @@ public final class EventMonsterProto {
         output.writeSInt32(5, cashCost_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeSInt32(6, gemCost_);
+        output.writeInt32(6, gemCost_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4840,7 +4840,7 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(6, gemCost_);
+          .computeInt32Size(6, gemCost_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5247,7 +5247,7 @@ public final class EventMonsterProto {
             }
             case 48: {
               bitField0_ |= 0x00000020;
-              gemCost_ = input.readSInt32();
+              gemCost_ = input.readInt32();
               break;
             }
           }
@@ -5925,7 +5925,7 @@ public final class EventMonsterProto {
         return this;
       }
       
-      // optional sint32 gemCost = 6;
+      // optional int32 gemCost = 6;
       private int gemCost_ ;
       public boolean hasGemCost() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
@@ -13586,7 +13586,7 @@ public final class EventMonsterProto {
       ".lvl6.proto.UserMonsterHealingProto\0227\n\006u" +
       "mhNew\030\004 \003(\0132\'.com.lvl6.proto.UserMonster" +
       "HealingProto\022\020\n\010cashCost\030\005 \001(\021\022\017\n\007gemCos" +
-      "t\030\006 \001(\021\"\262\002\n\030HealMonsterResponseProto\0220\n\006",
+      "t\030\006 \001(\005\"\262\002\n\030HealMonsterResponseProto\0220\n\006",
       "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
       "rProto\022J\n\006status\030\002 \001(\0162:.com.lvl6.proto." +
       "HealMonsterResponseProto.HealMonsterStat" +

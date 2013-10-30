@@ -61,8 +61,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-    	
     	Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
     	
       boolean legit = checkLegit(resBuilder, userId, umchpList, 
@@ -81,11 +79,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       resEvent.setTag(event.getTag());
       resEvent.setUpdateMonsterHealthResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
-//
-//      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-//          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-//      resEventUpdate.setTag(event.getTag());
-//      server.writeEvent(resEventUpdate);
+
     } catch (Exception e) {
       log.error("exception in UpdateMonsterHealthController processEvent", e);
       //don't let the client hang

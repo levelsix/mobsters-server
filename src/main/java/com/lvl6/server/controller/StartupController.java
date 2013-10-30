@@ -1606,7 +1606,7 @@ public class StartupController extends EventController {
       reasonsForChanges.put(gems, reasonForChange);
     }
 
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, goldSilverChange,
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
         previousGoldSilver, reasonsForChanges);
   }
 

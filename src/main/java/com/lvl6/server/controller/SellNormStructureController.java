@@ -146,7 +146,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       reasonsForChanges.put(cash, reasonForChange);
     }
     
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money,
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
         previousGoldSilver, reasonsForChanges);
     
   }

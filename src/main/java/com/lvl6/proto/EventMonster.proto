@@ -107,10 +107,13 @@ message HealMonsterRequestProto {
 	repeated UserMonsterHealingProto umhNew = 4;
 	
 	//take away all cash/silver then take away gems
-	//if negative, then take coins away, if positive then refund
+	//positive means refund, negative means charge user
+	//Refund in this case: user has two monsters healing but deletes one of them,
+	//The user should get refunded for the monster that was dequeued 
 	optional sint32 cashCost = 5; 
-	//if negative, then take diamonds away, if positive then refund
-	optional sint32 gemCost = 6;
+	
+	//positive amount
+	optional int32 gemCost = 6;
 }
 
 message HealMonsterResponseProto {

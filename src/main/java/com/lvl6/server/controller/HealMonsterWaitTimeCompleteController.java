@@ -213,7 +213,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     reasonsForChanges.put(gems, reasonForChange);
     reasonsForChanges.put(cash, reasonForChange);
 
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, curTime, money, 
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
         previousGemsCash, reasonsForChanges);
 
   }

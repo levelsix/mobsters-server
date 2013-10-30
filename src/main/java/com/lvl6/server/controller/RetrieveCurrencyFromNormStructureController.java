@@ -259,7 +259,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     previousGoldSilver.put(silver, previousSilver);
     reasonsForChanges.put(silver, reasonForChange);
     
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, goldSilverChange,
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
         previousGoldSilver, reasonsForChanges);
   }
   

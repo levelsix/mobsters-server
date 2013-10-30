@@ -334,7 +334,7 @@ public class InAppPurchaseController extends EventController {
       reasonsForChanges.put(cash, reasonForChange + cash);
     }
 
-    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date,
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
         goldSilverChange, previousGoldSilver, reasonsForChanges);
   }
 }

@@ -402,8 +402,8 @@ public class MiscMethods {
 //        .setNumMinutesToRepickLockBox(ControllerConstants.LOCK_BOXES__NUM_MINUTES_TO_REPICK)
 //        .setGoldCostToPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_PICK)
 //        .setGoldCostToResetPickLockBox(ControllerConstants.LOCK_BOXES__GOLD_COST_TO_RESET_PICK)
-//        .setSilverChanceToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_CHANCE_TO_PICK)
-//        .setSilverCostToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_COST_TO_PICK)
+//        .setCashChanceToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_CHANCE_TO_PICK)
+//        .setCashCostToPickLockBox(ControllerConstants.LOCK_BOXES__SILVER_COST_TO_PICK)
 //        .setNumDaysToShowAfterEventEnded(ControllerConstants.LOCK_BOXES__NUM_DAYS_AFTER_END_DATE_TO_KEEP_SENDING_PROTOS)
 //        .build();
 //
@@ -681,44 +681,44 @@ public class MiscMethods {
     return s;
   }
 
-  public static void writeToUserCurrencyOneUserGoldAndSilver(
-      User aUser, Timestamp date, Map<String,Integer> goldSilverChange, 
-      Map<String, Integer> previousGoldSilver, Map<String, String> reasons) {
+  public static void writeToUserCurrencyOneUserGemsAndCash(
+      User aUser, Timestamp date, Map<String,Integer> gemsCashChange, 
+      Map<String, Integer> previousGemsCash, Map<String, String> reasons) {
     //try, catch is here just in case this blows up, not really necessary;
     try {
       List<Integer> userIds = new ArrayList<Integer>();
       List<Timestamp> dates = new ArrayList<Timestamp>();
-      List<Integer> areSilver = new ArrayList<Integer>();
+      List<Integer> areCash = new ArrayList<Integer>();
       List<Integer> changesToCurrencies = new ArrayList<Integer>();
       List<Integer> previousCurrencies = new ArrayList<Integer>();
       List<Integer> currentCurrencies = new ArrayList<Integer>();
       List<String> reasonsForChanges = new ArrayList<String>();
 
       int userId = aUser.getId();
-      int goldChange = goldSilverChange.get(gems);
-      int silverChange = goldSilverChange.get(cash);
+      int gemsChange = gemsCashChange.get(gems);
+      int cashChange = gemsCashChange.get(cash);
       int previousGold = 0;
-      int previousSilver = 0;
+      int previousCash = 0;
       int currentGold = aUser.getGems();
-      //recording total silver user has
-      int currentSilver = aUser.getCash();
+      //recording total cash user has
+      int currentCash = aUser.getCash();
 
-      //record gold change first
-      if (0 != goldChange) {
+      //record gems change first
+      if (0 != gemsChange) {
         userIds.add(userId);
         dates.add(date);
-        areSilver.add(0); //gold
-        changesToCurrencies.add(goldChange);
-        if(null == previousGoldSilver || previousGoldSilver.isEmpty()) {
+        areCash.add(0); //gems
+        changesToCurrencies.add(gemsChange);
+        if(null == previousGemsCash || previousGemsCash.isEmpty()) {
           //difference instead of sum because of example:
-          //(previous gold) u.gold = 10; 
+          //(previous gems) u.gems = 10; 
           //change = -5 
-          //current gold = 10 - 5 = 5
-          //previous gold = currenty gold - change
-          //previous_gold = 5 - -5 = 10
-          previousGold = currentGold - goldChange;
+          //current gems = 10 - 5 = 5
+          //previous gems = currenty gems - change
+          //previous_gems = 5 - -5 = 10
+          previousGold = currentGold - gemsChange;
         } else {
-          previousGold = previousGoldSilver.get(gems);
+          previousGold = previousGemsCash.get(gems);
         }
 
         previousCurrencies.add(previousGold);
@@ -726,44 +726,44 @@ public class MiscMethods {
         reasonsForChanges.add(reasons.get(gems));
       }
 
-      //record silver change next
-      if (0 != silverChange) {
+      //record cash change next
+      if (0 != cashChange) {
         userIds.add(userId);
         dates.add(date);
-        areSilver.add(1); //silver
-        changesToCurrencies.add(silverChange);
-        if(null == previousGoldSilver || previousGoldSilver.isEmpty()) {
-          previousSilver = currentSilver - silverChange;
+        areCash.add(1); //cash
+        changesToCurrencies.add(cashChange);
+        if(null == previousGemsCash || previousGemsCash.isEmpty()) {
+          previousCash = currentCash - cashChange;
         } else {
-          previousSilver = previousGoldSilver.get(cash);
+          previousCash = previousGemsCash.get(cash);
         }
 
-        previousCurrencies.add(previousSilver);
-        currentCurrencies.add(currentSilver);
+        previousCurrencies.add(previousCash);
+        currentCurrencies.add(currentCash);
         reasonsForChanges.add(reasons.get(cash));
       }
 
-      //using multiple rows because could be 2 entries: one for silver, other for gold
-      InsertUtils.get().insertIntoUserCurrencyHistoryMultipleRows(userIds, dates, areSilver,
+      //using multiple rows because could be 2 entries: one for cash, other for gems
+      InsertUtils.get().insertIntoUserCurrencyHistoryMultipleRows(userIds, dates, areCash,
           changesToCurrencies, previousCurrencies, currentCurrencies, reasonsForChanges);
     } catch(Exception e) {
       log.error("Maybe table's not there or duplicate keys? ", e);
     }
   }
 
-  public static void writeToUserCurrencyOneUserGoldOrSilver(
-      User aUser, Timestamp date, Map<String,Integer> goldSilverChange, 
-      Map<String, Integer> previousGoldSilver, Map<String, String> reasons) {
+  public static void writeToUserCurrencyOneUserGemsOrCash(
+      User aUser, Timestamp date, Map<String,Integer> gemsCashChange, 
+      Map<String, Integer> previousGemsCash, Map<String, String> reasons) {
     try {
-      //determine what changed, gold or silver
-      Set<String> keySet = goldSilverChange.keySet();
+      //determine what changed, gems or cash
+      Set<String> keySet = gemsCashChange.keySet();
       Object[] keyArray = keySet.toArray();
       String key = (String) keyArray[0];
 
       //arguments to insertIntoUserCurrency
       int userId = aUser.getId();
-      int isSilver = 0;
-      int currencyChange = goldSilverChange.get(key);
+      int isCash = 0;
+      int currencyChange = gemsCashChange.get(key);
       int previousCurrency = 0;
       int currentCurrency = 0;
       String reasonForChange = reasons.get(key);
@@ -775,41 +775,41 @@ public class MiscMethods {
       if (key.equals(gems)) {
         currentCurrency = aUser.getGems();
       } else if(key.equals(cash)) {
-        //record total silver
+        //record total cash
         currentCurrency = aUser.getCash();
-        isSilver = 1;
+        isCash = 1;
       } else {
         log.error("invalid key for map representing currency change. key=" + key);
         return;
       }
 
-      if(null == previousGoldSilver || previousGoldSilver.isEmpty()) {
+      if(null == previousGemsCash || previousGemsCash.isEmpty()) {
         previousCurrency = currentCurrency - currencyChange;
       } else {
-        previousCurrency = previousGoldSilver.get(key);
+        previousCurrency = previousGemsCash.get(key);
       }
 
       InsertUtils.get().insertIntoUserCurrencyHistory(
-          userId, date, isSilver, currencyChange, previousCurrency, currentCurrency, reasonForChange);
+          userId, date, isCash, currencyChange, previousCurrency, currentCurrency, reasonForChange);
     } catch(Exception e) {
       log.error("null pointer exception?", e);
     }
   }
 
-  //goldSilverChange should represent how much user's silver and, or gold increased or decreased and
+  //gemsCashChange should represent how much user's cash and, or gems increased or decreased and
   //this should be called after the user is updated
-  //only previousGoldSilver can be null.
-  public static void writeToUserCurrencyOneUserGoldAndOrSilver(
-      User aUser, Timestamp date, Map<String,Integer> goldSilverChange, 
-      Map<String, Integer> previousGoldSilver, Map<String, String> reasonsForChanges) {
+  //only previousGemsCash can be null.
+  public static void writeToUserCurrencyOneUserGemsAndOrCash(
+      User aUser, Timestamp date, Map<String,Integer> gemsCashChange, 
+      Map<String, Integer> previousGemsCash, Map<String, String> reasonsForChanges) {
     try {
-      int amount = goldSilverChange.size();
+      int amount = gemsCashChange.size();
       if(2 == amount) {
-        writeToUserCurrencyOneUserGoldAndSilver(aUser, date, goldSilverChange, 
-            previousGoldSilver, reasonsForChanges);
+        writeToUserCurrencyOneUserGemsAndCash(aUser, date, gemsCashChange, 
+            previousGemsCash, reasonsForChanges);
       } else if(1 == amount) {
-        writeToUserCurrencyOneUserGoldOrSilver(aUser, date, goldSilverChange,
-            previousGoldSilver, reasonsForChanges);
+        writeToUserCurrencyOneUserGemsOrCash(aUser, date, gemsCashChange,
+            previousGemsCash, reasonsForChanges);
       }
     } catch(Exception e) {
       log.error("error updating user_curency_history; reasonsForChanges=" + shallowMapToString(reasonsForChanges), e);
@@ -882,10 +882,10 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     String packageS4SaleIdentifier = null;
     String packageS5SaleIdentifier = null;
 
-    String goldShoppeImageName = ControllerConstants.GOLD_SHOPPE_IMAGE_NAME_NEW_USER_GOLD_SALE;
-    String goldBarImageName = ControllerConstants.GOLD_BAR_IMAGE_NAME_NEW_USER_GOLD_SALE;
+    String gemsShoppeImageName = ControllerConstants.GOLD_SHOPPE_IMAGE_NAME_NEW_USER_GOLD_SALE;
+    String gemsBarImageName = ControllerConstants.GOLD_BAR_IMAGE_NAME_NEW_USER_GOLD_SALE;
 
-    GoldSale sale = new GoldSale(id, startDate, endDate, goldShoppeImageName, goldBarImageName, package1SaleIdentifier, package2SaleIdentifier, package3SaleIdentifier, package4SaleIdentifier, package5SaleIdentifier,
+    GoldSale sale = new GoldSale(id, startDate, endDate, gemsShoppeImageName, gemsBarImageName, package1SaleIdentifier, package2SaleIdentifier, package3SaleIdentifier, package4SaleIdentifier, package5SaleIdentifier,
         packageS1SaleIdentifier, packageS2SaleIdentifier, packageS3SaleIdentifier, packageS4SaleIdentifier, packageS5SaleIdentifier, true);
 
     return CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(sale);
