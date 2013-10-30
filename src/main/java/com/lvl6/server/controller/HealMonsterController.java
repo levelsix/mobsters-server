@@ -228,18 +228,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Map<Long, UserMonsterHealingProto> protoNewMap, Map<String, Integer> money) {
 
   	//CHARGE THE USER
-  	int cashCost = -1 * cashChange;
   	log.info("user before funds change. u=" + u);
-  	int num = u.updateRelativeCoinsAndDiamonds(cashCost, gemCost);
+  	int num = u.updateRelativeCoinsAndDiamonds(cashChange, gemCost);
   	log.info("user after funds change. u=" + u);
 	  if (num != 1) {
-		  log.error("problem with updating user's funds. cashCost=" + cashCost +
+		  log.error("problem with updating user's funds. cashChange=" + cashChange +
 		  		", gemCost=" + gemCost + ", user=" + u + "\t numUpdated=" + num);
 		  return false;
 	  } else {
 	  	//things went ok
-	  	if (0 != cashCost) {
-	  		money.put(MiscMethods.cash, cashCost);
+	  	if (0 != cashChange) {
+	  		money.put(MiscMethods.cash, cashChange);
 	  	}
 	  	if (0 != gemCost) {
 	  		money.put(MiscMethods.gems, gemCost);
