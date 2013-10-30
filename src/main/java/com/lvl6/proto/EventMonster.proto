@@ -48,12 +48,13 @@ message EnhancementWaitTimeCompleteRequestProto {
 	
 	//speeds up all or some monsters finished healing by waiting 
 	optional bool isSpeedup = 2; 
-	//will be set if isSpeedup is true
+	//will be set if isSpeedup is true (positive amount)
 	optional int32 gemsForSpeedup = 3;
 	
+	//client specifies the monster that results after finishing enhancement
 	optional UserMonsterCurrentExpProto umcep = 4;
 	
-	//ids of monster_enhancing_for_user to delete
+	//ids of monster_enhancing_for_user to delete, does not include main monster
 	repeated int64 userMonsterIds = 5; 
 }
 

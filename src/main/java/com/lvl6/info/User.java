@@ -360,7 +360,7 @@ public class User implements Serializable {
 	}
 
 	/*
-	 * used for in app purchases, armory, finishingnormstructbuild
+	 * used for in app purchases, finishingnormstructbuild, enhancing speedup
 	 */
 	public boolean updateRelativeDiamondsNaive (int diamondChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
