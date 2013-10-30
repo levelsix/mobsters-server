@@ -464,13 +464,22 @@ public class CreateInfoProtoUtils {
     builder.setIncome(s.getIncome());
     builder.setMinutesToGain(s.getMinutesToGain());
     builder.setMinutesToBuild(1234567890);
-    builder.setCoinPrice(s.getCoinPrice());
-    builder.setDiamondPrice(s.getDiamondPrice());
+    if (s.getCashPrice() > 0) {
+    	builder.setCashPrice(s.getCashPrice());
+    }
+    if (s.getGemPrice() > 0) {
+    	builder.setGemPrice(s.getGemPrice());
+    }
     builder.setMinLevel(s.getMinLevel());
     builder.setXLength(s.getxLength());
     builder.setYLength(s.getyLength());
+    builder.setInstaBuildGemCost(s.getInstaBuildGemCost());
     builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
-
+    
+    if (s.getSuccessorStructId() > 0) {
+    	builder.setSuccessorStructId(s.getSuccessorStructId());
+    }
+    
     return builder.build();
   }
 

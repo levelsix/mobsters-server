@@ -75,8 +75,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
           previousSilver = user.getCash();
           previousGold = user.getGems();
           
-          int diamondChange = Math.max(0,  (int)Math.ceil(struct.getDiamondPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
-          int coinChange = Math.max(0,  (int)Math.ceil(struct.getCoinPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
+          int diamondChange = Math.max(0,  (int)Math.ceil(struct.getGemPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
+          int coinChange = Math.max(0,  (int)Math.ceil(struct.getCashPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
           
           if (!user.updateRelativeDiamondsCoinsExperienceNaive(diamondChange, coinChange, 0)) {
             resBuilder.setStatus(SellNormStructureStatus.FAIL);

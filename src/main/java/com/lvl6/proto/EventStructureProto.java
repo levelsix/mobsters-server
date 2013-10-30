@@ -736,21 +736,21 @@ public final class EventStructureProto {
     public enum PurchaseNormStructureStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      NOT_ENOUGH_MATERIALS(1, 2),
-      LEVEL_TOO_LOW(2, 3),
-      ANOTHER_STRUCT_STILL_BUILDING(3, 4),
-      ALREADY_HAVE_MAX_OF_THIS_STRUCT(4, 5),
-      OTHER_FAIL(5, 6),
-      CLIENT_TOO_APART_FROM_SERVER_TIME(6, 7),
+      FAIL_INSUFFICIENT_CASH(1, 2),
+      FAIL_INSUFFICIENT_GEMS(2, 3),
+      FAIL_LEVEL_TOO_LOW(3, 4),
+      FAIL_ANOTHER_STRUCT_STILL_BUILDING(4, 5),
+      FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT(5, 6),
+      FAIL_OTHER(6, 7),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int NOT_ENOUGH_MATERIALS_VALUE = 2;
-      public static final int LEVEL_TOO_LOW_VALUE = 3;
-      public static final int ANOTHER_STRUCT_STILL_BUILDING_VALUE = 4;
-      public static final int ALREADY_HAVE_MAX_OF_THIS_STRUCT_VALUE = 5;
-      public static final int OTHER_FAIL_VALUE = 6;
-      public static final int CLIENT_TOO_APART_FROM_SERVER_TIME_VALUE = 7;
+      public static final int FAIL_INSUFFICIENT_CASH_VALUE = 2;
+      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 3;
+      public static final int FAIL_LEVEL_TOO_LOW_VALUE = 4;
+      public static final int FAIL_ANOTHER_STRUCT_STILL_BUILDING_VALUE = 5;
+      public static final int FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT_VALUE = 6;
+      public static final int FAIL_OTHER_VALUE = 7;
       
       
       public final int getNumber() { return value; }
@@ -758,12 +758,12 @@ public final class EventStructureProto {
       public static PurchaseNormStructureStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return NOT_ENOUGH_MATERIALS;
-          case 3: return LEVEL_TOO_LOW;
-          case 4: return ANOTHER_STRUCT_STILL_BUILDING;
-          case 5: return ALREADY_HAVE_MAX_OF_THIS_STRUCT;
-          case 6: return OTHER_FAIL;
-          case 7: return CLIENT_TOO_APART_FROM_SERVER_TIME;
+          case 2: return FAIL_INSUFFICIENT_CASH;
+          case 3: return FAIL_INSUFFICIENT_GEMS;
+          case 4: return FAIL_LEVEL_TOO_LOW;
+          case 5: return FAIL_ANOTHER_STRUCT_STILL_BUILDING;
+          case 6: return FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT;
+          case 7: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -794,7 +794,7 @@ public final class EventStructureProto {
       }
       
       private static final PurchaseNormStructureStatus[] VALUES = {
-        SUCCESS, NOT_ENOUGH_MATERIALS, LEVEL_TOO_LOW, ANOTHER_STRUCT_STILL_BUILDING, ALREADY_HAVE_MAX_OF_THIS_STRUCT, OTHER_FAIL, CLIENT_TOO_APART_FROM_SERVER_TIME, 
+        SUCCESS, FAIL_INSUFFICIENT_CASH, FAIL_INSUFFICIENT_GEMS, FAIL_LEVEL_TOO_LOW, FAIL_ANOTHER_STRUCT_STILL_BUILDING, FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT, FAIL_OTHER, 
       };
       
       public static PurchaseNormStructureStatus valueOf(
@@ -10509,110 +10509,111 @@ public final class EventStructureProto {
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
       "erProto\022:\n\021structCoordinates\030\002 \001(\0132\037.com" +
       ".lvl6.proto.CoordinateProto\022\020\n\010structId\030" +
-      "\003 \001(\005\022\026\n\016timeOfPurchase\030\004 \001(\003\"\245\003\n\"Purcha" +
+      "\003 \001(\005\022\026\n\016timeOfPurchase\030\004 \001(\003\"\253\003\n\"Purcha" +
       "seNormStructureResponseProto\0220\n\006sender\030\001" +
       " \001(\0132 .com.lvl6.proto.MinimumUserProto\022^" +
       "\n\006status\030\002 \001(\0162N.com.lvl6.proto.Purchase",
       "NormStructureResponseProto.PurchaseNormS" +
-      "tructureStatus\022\024\n\014userStructId\030\003 \001(\005\"\326\001\n" +
+      "tructureStatus\022\024\n\014userStructId\030\003 \001(\005\"\334\001\n" +
       "\033PurchaseNormStructureStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\030\n\024NOT_ENOUGH_MATERIALS\020\002\022\021\n\rLEVEL_TOO" +
-      "_LOW\020\003\022!\n\035ANOTHER_STRUCT_STILL_BUILDING\020" +
-      "\004\022#\n\037ALREADY_HAVE_MAX_OF_THIS_STRUCT\020\005\022\016" +
-      "\n\nOTHER_FAIL\020\006\022%\n!CLIENT_TOO_APART_FROM_" +
-      "SERVER_TIME\020\007\"\211\003\n%MoveOrRotateNormStruct" +
-      "ureRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022\024\n\014userStructI",
-      "d\030\002 \001(\005\022^\n\004type\030\003 \001(\0162P.com.lvl6.proto.M" +
-      "oveOrRotateNormStructureRequestProto.Mov" +
-      "eOrRotateNormStructType\022=\n\024curStructCoor" +
-      "dinates\030\004 \001(\0132\037.com.lvl6.proto.Coordinat" +
-      "eProto\022E\n\016newOrientation\030\005 \001(\0162!.com.lvl" +
-      "6.proto.StructOrientation:\nPOSITION_1\"2\n" +
-      "\032MoveOrRotateNormStructType\022\010\n\004MOVE\020\001\022\n\n" +
-      "\006ROTATE\020\002\"\202\002\n&MoveOrRotateNormStructureR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022f\n\006status\030\002 \001(\0162V",
-      ".com.lvl6.proto.MoveOrRotateNormStructur" +
-      "eResponseProto.MoveOrRotateNormStructure" +
-      "Status\">\n\037MoveOrRotateNormStructureStatu" +
-      "s\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002\"g\n\035SellNo" +
-      "rmStructureRequestProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022\024\n\014use" +
-      "rStructId\030\002 \001(\005\"\334\001\n\036SellNormStructureRes" +
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022V\n\006status\030\002 \001(\0162F.c" +
-      "om.lvl6.proto.SellNormStructureResponseP",
-      "roto.SellNormStructureStatus\"0\n\027SellNorm" +
-      "StructureStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\"\201" +
-      "\001\n UpgradeNormStructureRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rtimeOfUpg" +
-      "rade\030\003 \001(\003\"\227\003\n!UpgradeNormStructureRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022\\\n\006status\030\002 \001(\0162L.com" +
-      ".lvl6.proto.UpgradeNormStructureResponse" +
-      "Proto.UpgradeNormStructureStatus\"\341\001\n\032Upg",
-      "radeNormStructureStatus\022\013\n\007SUCCESS\020\001\022\030\n\024" +
-      "NOT_ENOUGH_MATERIALS\020\002\022\021\n\rNOT_BUILT_YET\020" +
-      "\003\022\024\n\020NOT_USERS_STRUCT\020\004\022\"\n\036ANOTHER_STRUC" +
-      "T_STILL_UPGRADING\020\005\022\016\n\nOTHER_FAIL\020\006\022%\n!C" +
-      "LIENT_TOO_APART_FROM_SERVER_TIME\020\007\022\030\n\024AT" +
-      "_MAX_LEVEL_ALREADY\020\010\"\214\002\n-RetrieveCurrenc" +
-      "yFromNormStructureRequestProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022g\n\020structRetrievals\030\002 \003(\0132M.com.lvl6.pr" +
-      "oto.RetrieveCurrencyFromNormStructureReq",
-      "uestProto.StructRetrieval\032@\n\017StructRetri" +
-      "eval\022\024\n\014userStructId\030\001 \001(\005\022\027\n\017timeOfRetr" +
-      "ieval\030\002 \001(\003\"\337\002\n.RetrieveCurrencyFromNorm" +
-      "StructureResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022v\n\006stat" +
-      "us\030\002 \001(\0162f.com.lvl6.proto.RetrieveCurren" +
-      "cyFromNormStructureResponseProto.Retriev" +
-      "eCurrencyFromNormStructureStatus\"\202\001\n\'Ret" +
-      "rieveCurrencyFromNormStructureStatus\022\016\n\n" +
-      "OTHER_FAIL\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_TOO_",
-      "APART_FROM_SERVER_TIME\020\003\022\023\n\017NOT_LONG_ENO" +
-      "UGH\020\004\"\221\001\n0FinishNormStructWaittimeWithDi" +
-      "amondsRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\024\n\014userStru" +
-      "ctId\030\002 \001(\005\022\025\n\rtimeOfSpeedup\030\003 \001(\003\"\326\002\n1Fi" +
-      "nishNormStructWaittimeWithDiamondsRespon" +
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022p\n\006status\030\002 \001(\0162`.com." +
-      "lvl6.proto.FinishNormStructWaittimeWithD" +
-      "iamondsResponseProto.FinishNormStructWai",
-      "ttimeStatus\"}\n\036FinishNormStructWaittimeS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\027\n\023NOT_ENOUGH_DIAMOND" +
-      "S\020\002\022\016\n\nOTHER_FAIL\020\003\022%\n!CLIENT_TOO_APART_" +
-      "FROM_SERVER_TIME\020\004\"}\n\"NormStructWaitComp" +
-      "leteRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022\024\n\014userStruct" +
-      "Id\030\002 \003(\005\022\017\n\007curTime\030\003 \001(\003\"\353\002\n#NormStruct" +
-      "WaitCompleteResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022`\n\006s" +
-      "tatus\030\002 \001(\0162P.com.lvl6.proto.NormStructW",
-      "aitCompleteResponseProto.NormStructWaitC" +
-      "ompleteStatus\022:\n\nuserStruct\030\003 \003(\0132&.com." +
-      "lvl6.proto.FullUserStructureProto\"t\n\034Nor" +
-      "mStructWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\020" +
-      "\n\014NOT_DONE_YET\020\002\022\016\n\nOTHER_FAIL\020\003\022%\n!CLIE" +
-      "NT_TOO_APART_FROM_SERVER_TIME\020\004\"\235\001\n!Expa" +
-      "nsionWaitCompleteRequestProto\0220\n\006sender\030" +
+      "\001\022\032\n\026FAIL_INSUFFICIENT_CASH\020\002\022\032\n\026FAIL_IN" +
+      "SUFFICIENT_GEMS\020\003\022\026\n\022FAIL_LEVEL_TOO_LOW\020" +
+      "\004\022&\n\"FAIL_ANOTHER_STRUCT_STILL_BUILDING\020" +
+      "\005\022(\n$FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUC" +
+      "T\020\006\022\016\n\nFAIL_OTHER\020\007\"\211\003\n%MoveOrRotateNorm" +
+      "StructureRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\024\n\014userS",
+      "tructId\030\002 \001(\005\022^\n\004type\030\003 \001(\0162P.com.lvl6.p" +
+      "roto.MoveOrRotateNormStructureRequestPro" +
+      "to.MoveOrRotateNormStructType\022=\n\024curStru" +
+      "ctCoordinates\030\004 \001(\0132\037.com.lvl6.proto.Coo" +
+      "rdinateProto\022E\n\016newOrientation\030\005 \001(\0162!.c" +
+      "om.lvl6.proto.StructOrientation:\nPOSITIO" +
+      "N_1\"2\n\032MoveOrRotateNormStructType\022\010\n\004MOV" +
+      "E\020\001\022\n\n\006ROTATE\020\002\"\202\002\n&MoveOrRotateNormStru" +
+      "ctureResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022f\n\006status\030\002",
+      " \001(\0162V.com.lvl6.proto.MoveOrRotateNormSt" +
+      "ructureResponseProto.MoveOrRotateNormStr" +
+      "uctureStatus\">\n\037MoveOrRotateNormStructur" +
+      "eStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002\"g\n\035" +
+      "SellNormStructureRequestProto\0220\n\006sender\030" +
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\txPo" +
-      "sition\030\004 \001(\021\022\021\n\tyPosition\030\005 \001(\021\"\376\002\n\"Expa",
-      "nsionWaitCompleteResponseProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto.Expans" +
-      "ionWaitCompleteResponseProto.ExpansionWa" +
-      "itCompleteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lv" +
-      "l6.proto.UserCityExpansionDataProto\"\212\001\n\033" +
-      "ExpansionWaitCompleteStatus\022\013\n\007SUCCESS\020\001" +
-      "\022\025\n\021WAS_NOT_EXPANDING\020\002\022\020\n\014NOT_DONE_YET\020" +
-      "\003\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_APART_FR" +
-      "OM_SERVER_TIME\020\005B\025B\023EventStructureProto"
+      "\024\n\014userStructId\030\002 \001(\005\"\334\001\n\036SellNormStruct" +
+      "ureResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022V\n\006status\030\002 \001" +
+      "(\0162F.com.lvl6.proto.SellNormStructureRes",
+      "ponseProto.SellNormStructureStatus\"0\n\027Se" +
+      "llNormStructureStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FA" +
+      "IL\020\002\"\201\001\n UpgradeNormStructureRequestProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rtim" +
+      "eOfUpgrade\030\003 \001(\003\"\227\003\n!UpgradeNormStructur" +
+      "eResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\\\n\006status\030\002 \001(\016" +
+      "2L.com.lvl6.proto.UpgradeNormStructureRe" +
+      "sponseProto.UpgradeNormStructureStatus\"\341",
+      "\001\n\032UpgradeNormStructureStatus\022\013\n\007SUCCESS" +
+      "\020\001\022\030\n\024NOT_ENOUGH_MATERIALS\020\002\022\021\n\rNOT_BUIL" +
+      "T_YET\020\003\022\024\n\020NOT_USERS_STRUCT\020\004\022\"\n\036ANOTHER" +
+      "_STRUCT_STILL_UPGRADING\020\005\022\016\n\nOTHER_FAIL\020" +
+      "\006\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020\007" +
+      "\022\030\n\024AT_MAX_LEVEL_ALREADY\020\010\"\214\002\n-RetrieveC" +
+      "urrencyFromNormStructureRequestProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022g\n\020structRetrievals\030\002 \003(\0132M.com.l" +
+      "vl6.proto.RetrieveCurrencyFromNormStruct",
+      "ureRequestProto.StructRetrieval\032@\n\017Struc" +
+      "tRetrieval\022\024\n\014userStructId\030\001 \001(\005\022\027\n\017time" +
+      "OfRetrieval\030\002 \001(\003\"\337\002\n.RetrieveCurrencyFr" +
+      "omNormStructureResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022v" +
+      "\n\006status\030\002 \001(\0162f.com.lvl6.proto.Retrieve" +
+      "CurrencyFromNormStructureResponseProto.R" +
+      "etrieveCurrencyFromNormStructureStatus\"\202" +
+      "\001\n\'RetrieveCurrencyFromNormStructureStat" +
+      "us\022\016\n\nOTHER_FAIL\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIEN",
+      "T_TOO_APART_FROM_SERVER_TIME\020\003\022\023\n\017NOT_LO" +
+      "NG_ENOUGH\020\004\"\221\001\n0FinishNormStructWaittime" +
+      "WithDiamondsRequestProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\024\n\014us" +
+      "erStructId\030\002 \001(\005\022\025\n\rtimeOfSpeedup\030\003 \001(\003\"" +
+      "\326\002\n1FinishNormStructWaittimeWithDiamonds" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022p\n\006status\030\002 \001(\0162" +
+      "`.com.lvl6.proto.FinishNormStructWaittim" +
+      "eWithDiamondsResponseProto.FinishNormStr",
+      "uctWaittimeStatus\"}\n\036FinishNormStructWai" +
+      "ttimeStatus\022\013\n\007SUCCESS\020\001\022\027\n\023NOT_ENOUGH_D" +
+      "IAMONDS\020\002\022\016\n\nOTHER_FAIL\020\003\022%\n!CLIENT_TOO_" +
+      "APART_FROM_SERVER_TIME\020\004\"}\n\"NormStructWa" +
+      "itCompleteRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\024\n\014user" +
+      "StructId\030\002 \003(\005\022\017\n\007curTime\030\003 \001(\003\"\353\002\n#Norm" +
+      "StructWaitCompleteResponseProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022`\n\006status\030\002 \001(\0162P.com.lvl6.proto.NormS",
+      "tructWaitCompleteResponseProto.NormStruc" +
+      "tWaitCompleteStatus\022:\n\nuserStruct\030\003 \003(\0132" +
+      "&.com.lvl6.proto.FullUserStructureProto\"" +
+      "t\n\034NormStructWaitCompleteStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\020\n\014NOT_DONE_YET\020\002\022\016\n\nOTHER_FAIL\020\003\022%" +
+      "\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020\004\"\235\001" +
+      "\n!ExpansionWaitCompleteRequestProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022" +
+      "\021\n\txPosition\030\004 \001(\021\022\021\n\tyPosition\030\005 \001(\021\"\376\002",
+      "\n\"ExpansionWaitCompleteResponseProto\0220\n\006" +
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto." +
+      "ExpansionWaitCompleteResponseProto.Expan" +
+      "sionWaitCompleteStatus\0229\n\005ucedp\030\003 \001(\0132*." +
+      "com.lvl6.proto.UserCityExpansionDataProt" +
+      "o\"\212\001\n\033ExpansionWaitCompleteStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\025\n\021WAS_NOT_EXPANDING\020\002\022\020\n\014NOT_DON" +
+      "E_YET\020\003\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_AP" +
+      "ART_FROM_SERVER_TIME\020\005B\025B\023EventStructure",
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

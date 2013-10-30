@@ -81,17 +81,17 @@ import com.lvl6.utils.DBConnection;
     int income = rs.getInt(i++);
     int minutesToGain = rs.getInt(i++);
     int minutesToBuild = rs.getInt(i++);
-    int coinPrice = rs.getInt(i++);
-    int diamondPrice = rs.getInt(i++);
+    int cashPrice = rs.getInt(i++);
+    int gemPrice = rs.getInt(i++);
     int minLevel = rs.getInt(i++);
     int xLength = rs.getInt(i++);
     int yLength = rs.getInt(i++);
-    int instaBuildDiamondCost = rs.getInt(i++);
+    int instaBuildGemCost = rs.getInt(i++);
     int imgVerticalPixelOffset = rs.getInt(i++);
     int successorStructId = rs.getInt(i++);
     
     return new Structure(id, name, income, minutesToGain, minutesToBuild,
-    		coinPrice, diamondPrice, minLevel, xLength, yLength,
-    		instaBuildDiamondCost, imgVerticalPixelOffset, successorStructId);
+    		cashPrice, gemPrice, minLevel, xLength, yLength,
+    		instaBuildGemCost, imgVerticalPixelOffset, successorStructId);
   }
 }
