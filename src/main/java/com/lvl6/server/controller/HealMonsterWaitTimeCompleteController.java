@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.Builder;
@@ -64,6 +66,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
     List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
     int gemsForSpeedUp = reqProto.getGemsForSpeedup();
+    Timestamp curTime = new Timestamp((new Date()).getTime());
     
     log.info("umchpList=" + umchpList + "\t userMonsterIdToExpectedHealth" +
     		userMonsterIdToExpectedHealth + "\t userMonsterIds=" + userMonsterIds);
@@ -75,8 +78,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      //int previousSilver = 0;
-      //int previousGold = 0;
+      int previousGems = 0;
     	//get whatever we need from the database
     	User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	Map<Long, MonsterHealingForUser> alreadyHealing =
@@ -86,15 +88,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       		userMonsterIds, isSpeedUp, gemsForSpeedUp);
 
       boolean successful = false;
+      Map<String, Integer> money = new HashMap<String, Integer>();
       if(legit) {
-//        previousSilver = aUser.getCoins();
-//        previousGold = aUser.getDiamonds();
-    	  successful = writeChangesToDb(aUser, userId, userMonsterIds, userMonsterIdToExpectedHealth,
-    	  		isSpeedUp, gemsForSpeedUp);
-//        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
-      }
-      if (successful) {
-    	  setResponseBuilder(resBuilder);
+        previousGems = aUser.getGems();
+        userMonsterIdToExpectedHealth = getValidEntries(userMonsterIds, userMonsterIdToExpectedHealth);
+    	  successful = writeChangesToDb(aUser, userId, userMonsterIds,
+    	  		userMonsterIdToExpectedHealth, isSpeedUp, gemsForSpeedUp);
       }
       
       HealMonsterWaitTimeCompleteResponseEvent resEvent = new HealMonsterWaitTimeCompleteResponseEvent(userId);
@@ -102,10 +101,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       resEvent.setHealMonsterWaitTimeCompleteResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
+      if (successful) {
+      	//since user's money most likely changed, tell client to update user
+      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+      	resEventUpdate.setTag(event.getTag());
+      	server.writeEvent(resEventUpdate);
+      	writeToUserCurrencyHistory(aUser, money, curTime, previousGems);
+      }
     } catch (Exception e) {
       log.error("exception in HealMonsterWaitTimeCompleteController processEvent", e);
       //don't let the client hang
@@ -147,20 +150,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
   		Map<Long, MonsterHealingForUser> alreadyHealing, List<Long> healedUp,
-  		boolean speedUp, int gemsForSpeedUp) {
+  		boolean speedup, int gemsForSpeedup) {
     if (null == u || null == healedUp || healedUp.isEmpty()) {
       log.error("unexpected error: user or idList is null. user=" + u +
-      		"\t healedUp="+ healedUp + "\t speedUp=" + speedUp);
+      		"\t healedUp="+ healedUp + "\t speedUp=" + speedup);
       return false;
     }
     log.info("alreadyHealing=" + alreadyHealing);
     
+    //modify healedUp to contain only those that exist
     Set<Long> alreadyHealingIds = alreadyHealing.keySet();
     MonsterStuffUtils.retainValidMonsterIds(alreadyHealingIds, healedUp);
     
-    //TODO: CHECK MONEY and CHECK SPEEDUP
-    if (speedUp) {
-    	
+    //CHECK MONEY and CHECK SPEEDUP
+    if (speedup) {
+    	int userGems = u.getGems();
+    	if (userGems < gemsForSpeedup) {
+    		log.error("user error: user sped up healing but has too little gems userGems=" +
+    				userGems + "\t gemsForSpeedup=" + gemsForSpeedup);
+    		resBuilder.setStatus(HealMonsterWaitTimeCompleteStatus.FAIL_INSUFFICIENT_FUNDS);
+    		return false;
+    	}
     }
     //TODO:update monster's healths
     	
@@ -168,22 +178,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return true;
   }
   
-  private boolean writeChangesToDb(User u, int uId, List<Long> userMonsterIds,
-  		Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedUp, int gemsForSpeedUp) {
-
-
-  	//TODO: CHARGE THE USER
-//	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
-//		  log.error("problem with updating user stats post-task. silverGained="
-//				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
-//				  ", clientTime=" + clientTime + ", user=" + u);
-//		  return false;
-//	  }
+  //only the entries in the map that have their key in validIds will be kept  
+  private Map<Long, Integer> getValidEntries(List<Long> validIds, 
+  		Map<Long, Integer> idsToValues) {
   	
-  	//TODO: HEAL THE MONSTER
-  	List<Integer> currentHealths = new ArrayList<Integer>();
-  	int num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIds,
-  			currentHealths, userMonsterIdsToHealths);
+  	Map<Long, Integer> returnMap = new HashMap<Long, Integer>();
+  	 
+  	for(long id : validIds) {
+  		int value = idsToValues.get(id);
+  		returnMap.put(id, value);
+  	}
+  	return returnMap;
+  }
+  
+  private boolean writeChangesToDb(User u, int uId, List<Long> userMonsterIds,
+  		Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup, int gemsForSpeedup) {
+
+  	if (isSpeedup) {
+  		
+  	//CHARGE THE USER
+  		if (!u.updateRelativeDiamondsNaive(gemsForSpeedup)) {
+  			log.error("could not update user gems. gemsForSpeedup=" + gemsForSpeedup +
+  					"user=" + u + "\t userMonsterIdsToHealths=" + userMonsterIdsToHealths);
+  			return false;
+  		}
+  	}
+  	
+  	//HEAL THE MONSTER
+  	int num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIdsToHealths);
   	log.info("num updated=" + num);
 
   	//should always execute, but who knows...
@@ -197,21 +219,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
-  private void setResponseBuilder(Builder resBuilder) {
-  }
-  
-  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousCash, int previousGems) {
+  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money,
+  		Timestamp curTime, int previousGems) {
+  	if (null == money || money.isEmpty()) {
+  		return;
+  	}
     Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
     String gems = MiscMethods.gems;
-    String cash = MiscMethods.cash;
 
     previousGemsCash.put(gems, previousGems);
-    previousGemsCash.put(cash, previousCash);
     reasonsForChanges.put(gems, reasonForChange);
-    reasonsForChanges.put(cash, reasonForChange);
 
     MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
         previousGemsCash, reasonsForChanges);

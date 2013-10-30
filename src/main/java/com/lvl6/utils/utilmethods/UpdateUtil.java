@@ -144,9 +144,7 @@ public interface UpdateUtil {
   
   public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevives);
   
-  public abstract int updateUserMonstersHealth(List<Long> userMonsterIds,
-  		List<Integer> currentHealths,
-  		Map<Long, Integer> userMonsterIdsToHealths); 
+  public abstract int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths); 
   
   public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);
   

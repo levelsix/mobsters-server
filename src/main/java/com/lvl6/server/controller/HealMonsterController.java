@@ -233,8 +233,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int num = u.updateRelativeCoinsAndDiamonds(cashCost, gemCost);
   	log.info("user after funds change. u=" + u);
 	  if (num != 1) {
-		  log.error("problem with updating user's funds. cashCost="
-				  + cashCost + ", gemCost=" + gemCost + ", user=" + u);
+		  log.error("problem with updating user's funds. cashCost=" + cashCost +
+		  		", gemCost=" + gemCost + ", user=" + u + "\t numUpdated=" + num);
 		  return false;
 	  } else {
 	  	//things went ok

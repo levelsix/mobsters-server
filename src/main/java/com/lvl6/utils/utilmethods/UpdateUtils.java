@@ -626,38 +626,47 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 	
-	public int updateUserMonstersHealth(List<Long> userMonsterIds,
-			List<Integer> currentHealths,
-			Map<Long, Integer> userMonsterIdsToHealths) {
-		Map<String, Object> relativeParams = null;
-		Map<String, Object> absoluteParams = new HashMap<String, Object>();
-		Map<String, Object> conditionParams = new HashMap<String, Object>();
-		
+	//if expectedHealths contains the exact same info as userMonsterIdsToHealths
+	//if map isn't set then list is used
+	public int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths) {
+		if (null == userMonsterIdsToHealths || userMonsterIdsToHealths.isEmpty()) {
+			return 0;
+		}
+
+		List<Object> values = new ArrayList<Object>();
+
+		//these specify the columns this transaction looks at to properly update rows
+		List<String> clauses = new ArrayList<String>();
+		clauses.add(DBConstants.MONSTER_FOR_USER__ID);
+		//		clauses.add(DBConstants.MONSTER_FOR_USER__USER_ID); //not necessary since id is used
+		String currentHealth = DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH;
+		clauses.add(currentHealth);
+		String columns = StringUtils.getListInString(clauses, ",");
+
+		//this holds the (...) clauses that go after "VALUES"
+		clauses.clear();
 		//if map(userMonsterId -> expectedHealth) is set then use it
-		if (null != userMonsterIdsToHealths && !userMonsterIdsToHealths.isEmpty()) {
-			for (long userMonsterId : userMonsterIdsToHealths.keySet()) {
-				int health = userMonsterIdsToHealths.get(userMonsterId);
-				
-				conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userMonsterId);
-				absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, health);
-			}
-		} else {
-			//since map is not set, go through the list
-			for(int i = 0; i < userMonsterIds.size(); i++) {
-				long userEquipId = userMonsterIds.get(i);
-				int health = currentHealths.get(i);
-
-				conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
-				absoluteParams.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, health);
-			}
+		//this generates the (...) clauses that go after "VALUES" 
+		for (long userMonsterId : userMonsterIdsToHealths.keySet()) {
+			int health = userMonsterIdsToHealths.get(userMonsterId);
+			String subclause = "(?,?)";
+			clauses.add(subclause);
+			//so mysql can use these values in the prepared query
+			values.add(userMonsterId);
+			values.add(health);
 		}
+		
+		//QUERY GENERATION
+		String query =
+				"INSERT INTO " 
+						+ DBConstants.TABLE_MONSTER_FOR_USER + " (" + columns +
+				") VALUES ";
+		String valuesList = StringUtils.getListInString(clauses, ",");
+		query += valuesList + 
+				" ON DUPLICATE KEY UPDATE " +
+				currentHealth + "values(" + currentHealth +");";
 
-		//to prevent db update query that updates nothing
-		int numUpdated = 0;
-		if (!absoluteParams.isEmpty()) {
-			numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER,
-					relativeParams, absoluteParams, conditionParams, "AND");
-		}
+		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
 		return numUpdated;
 	}
 

@@ -135,11 +135,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private boolean writeChangesToDb(int uId, Timestamp clientTime, 
   		Map<Long, Integer> userMonsterIdToExpectedHealth) {
-  	//replace existing durability for these user equips w/ new values 
-  	List<Long> userMonsterIds = null;
-  	List<Integer> currentHealth = null;
-  	int numUpdated = UpdateUtils.get().updateUserMonstersHealth(
-  			userMonsterIds, currentHealth, userMonsterIdToExpectedHealth);
+  	//replace existing health for these user monsters with new values 
+  	int numUpdated = UpdateUtils.get()
+  			.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
   	
   	if (numUpdated >= userMonsterIdToExpectedHealth.size()) {
   		return true;
