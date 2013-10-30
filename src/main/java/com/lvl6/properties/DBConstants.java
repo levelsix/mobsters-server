@@ -356,8 +356,8 @@ public class DBConstants {
   public static final String USER__ID = GENERIC__ID;
   public static final String USER__NAME = "name";
   public static final String USER__LEVEL = "level";
-  public static final String USER__DIAMONDS = "diamonds";
-  public static final String USER__COINS = "coins";
+  public static final String USER__GEMS = "gems";
+  public static final String USER__CASH = "cash";
   public static final String USER__EXPERIENCE = "experience";
   public static final String USER__TASKS_COMPLETED = "tasks_completed";
   public static final String USER__BATTLES_WON = "battles_won";

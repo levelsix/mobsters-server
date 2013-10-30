@@ -78,14 +78,14 @@ public class StatisticsRetrieveUtil {
 	
 	//
 	public Long sumOfSilverInWorld() {
-		return jdbcTemplate.queryForLong("select sum(" + DBConstants.USER__COINS +") from " + DBConstants.TABLE_USER 
+		return jdbcTemplate.queryForLong("select sum(" + DBConstants.USER__CASH +") from " + DBConstants.TABLE_USER 
 		    + " where " + DBConstants.USER__IS_FAKE + "=0");
 	}
 	
 	
 	//
 	public Long sumOfDiamondsInWorld() {
-		return jdbcTemplate.queryForLong("select sum(" + DBConstants.USER__DIAMONDS + ") from " + DBConstants.TABLE_USER + " where " + DBConstants.USER__IS_FAKE + "=0");
+		return jdbcTemplate.queryForLong("select sum(" + DBConstants.USER__GEMS + ") from " + DBConstants.TABLE_USER + " where " + DBConstants.USER__IS_FAKE + "=0");
 	}
 	
 	//

@@ -441,8 +441,8 @@ public class InsertUtils implements InsertUtil{
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
     insertParams.put(DBConstants.USER__LEVEL, level);
-    insertParams.put(DBConstants.USER__DIAMONDS, diamonds);
-    insertParams.put(DBConstants.USER__COINS, coins);
+    insertParams.put(DBConstants.USER__GEMS, diamonds);
+    insertParams.put(DBConstants.USER__CASH, coins);
     insertParams.put(DBConstants.USER__EXPERIENCE, experience);
     insertParams.put(DBConstants.USER__REFERRAL_CODE, newReferCode);
     insertParams.put(DBConstants.USER__UDID, udid);

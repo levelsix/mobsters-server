@@ -537,7 +537,7 @@ public class UpdateUtils implements UpdateUtil {
 
 		List<Object> values = new ArrayList<Object>();
 		String query = "update " + DBConstants.TABLE_USER + " set "
-				+ DBConstants.USER__DIAMONDS + "="+ DBConstants.USER__DIAMONDS + "+?"
+				+ DBConstants.USER__GEMS + "="+ DBConstants.USER__GEMS + "+?"
 				+ " where id in (?";
 		values.add(diamonds);
 		values.add(userIds.get(0));

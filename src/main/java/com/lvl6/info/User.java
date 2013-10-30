@@ -289,8 +289,8 @@ public class User implements Serializable {
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
-		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
-		relativeParams.put(DBConstants.USER__COINS, coinChange);
+		relativeParams.put(DBConstants.USER__GEMS, diamondChange);
+		relativeParams.put(DBConstants.USER__CASH, coinChange);
 		relativeParams.put(DBConstants.USER__EXPERIENCE, experienceChange);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
@@ -316,7 +316,7 @@ public class User implements Serializable {
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
-		relativeParams.put(DBConstants.USER__COINS, coinChange);
+		relativeParams.put(DBConstants.USER__CASH, coinChange);
 		relativeParams.put(DBConstants.USER__EXPERIENCE, expChange);
 		relativeParams.put(DBConstants.USER__TASKS_COMPLETED, tasksCompletedChange);
 
@@ -343,7 +343,7 @@ public class User implements Serializable {
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
 		if (coinChange != 0) {
-			relativeParams.put(DBConstants.USER__COINS, coinChange);
+			relativeParams.put(DBConstants.USER__CASH, coinChange);
 		}
 		if (numReferralsChange != 0) {
 			relativeParams.put(DBConstants.USER__NUM_REFERRALS, numReferralsChange); 
@@ -369,7 +369,7 @@ public class User implements Serializable {
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
 		if (diamondChange != 0) {
-			relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
+			relativeParams.put(DBConstants.USER__GEMS, diamondChange);
 		}
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
@@ -387,10 +387,10 @@ public class User implements Serializable {
 		
 		Map<String, Object> relativeParams = new HashMap<String, Object>();
 		if (diamondsDelta != 0) {
-			relativeParams.put(DBConstants.USER__DIAMONDS, diamondsDelta);
+			relativeParams.put(DBConstants.USER__GEMS, diamondsDelta);
 		}
 		if (coinsDelta != 0) {
-			relativeParams.put(DBConstants.USER__COINS, coinsDelta);
+			relativeParams.put(DBConstants.USER__CASH, coinsDelta);
 		}
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null,
@@ -409,7 +409,7 @@ public class User implements Serializable {
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
 		if (diamondChange != 0) {
-			relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
+			relativeParams.put(DBConstants.USER__GEMS, diamondChange);
 		}
 
 		if (isBeginnerSale) {
@@ -431,7 +431,7 @@ public class User implements Serializable {
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__COINS, coinChange);
+		relativeParams.put(DBConstants.USER__CASH, coinChange);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__CLAN_ID, clanId);
@@ -455,7 +455,7 @@ public class User implements Serializable {
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
 		if (coinChange != 0) {
-			relativeParams.put(DBConstants.USER__COINS, coinChange);
+			relativeParams.put(DBConstants.USER__CASH, coinChange);
 			relativeParams.put(DBConstants.USER__NUM_COINS_RETRIEVED_FROM_STRUCTS, coinChange);
 		}
 
@@ -477,7 +477,7 @@ public class User implements Serializable {
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
 		if (coinChange != 0) {
-			relativeParams.put(DBConstants.USER__COINS, coinChange);
+			relativeParams.put(DBConstants.USER__CASH, coinChange);
 		}
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
@@ -496,7 +496,7 @@ public class User implements Serializable {
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
 		if (coinChange != 0) {
-			relativeParams.put(DBConstants.USER__COINS, coinChange);
+			relativeParams.put(DBConstants.USER__CASH, coinChange);
 		}
 
 		if (isBeginnerSale) {
@@ -528,7 +528,7 @@ public class User implements Serializable {
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 		if (experience != 0) relativeParams.put(DBConstants.USER__EXPERIENCE, experience);
-		if (coins != 0) relativeParams.put(DBConstants.USER__COINS, coins);
+		if (coins != 0) relativeParams.put(DBConstants.USER__CASH, coins);
 		if (recordWinLossFlee) {
 			recordWinLossFlees(relativeParams, battlesWon, battlesLost, fleesChange,
 					attacksWonDelta, defensesWonDelta, attacksLostDelta, defensesLostDelta);
@@ -645,7 +645,7 @@ public class User implements Serializable {
 		Map<String, Object> absoluteParams = null;
 		if (diamondChange <= 0) return false;
 
-		relativeParams.put(DBConstants.USER__DIAMONDS, diamondChange);
+		relativeParams.put(DBConstants.USER__GEMS, diamondChange);
 		if (EarnFreeDiamondsType.FB_CONNECT == freeDiamondsType) {
 			absoluteParams = new HashMap<String, Object>();
 			absoluteParams.put(DBConstants.USER__HAS_RECEIVED_FB_REWARD, 1);
@@ -674,7 +674,7 @@ public class User implements Serializable {
 		if (newUdid != null) absoluteParams.put(DBConstants.USER__UDID, newUdid);
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__DIAMONDS, relativeDiamondCost);
+		relativeParams.put(DBConstants.USER__GEMS, relativeDiamondCost);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
 				relativeParams, absoluteParams, conditionParams, "and");
@@ -695,7 +695,7 @@ public class User implements Serializable {
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__NUM_ADDITIONAL_FORGE_SLOTS, numAdditionalMonsterSlots);
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__DIAMONDS, cost);
+		relativeParams.put(DBConstants.USER__GEMS, cost);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
 				relativeParams, absoluteParams, conditionParams, "and");
