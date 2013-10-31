@@ -285,31 +285,6 @@ public class InsertUtils implements InsertUtil{
     return numInserted;
   }
 
-  /* used for quest tasks */
-  /* (non-Javadoc)
-   * @see com.lvl6.utils.utilmethods.InsertUtil#insertCompletedTaskIdForUserQuest(int, int, int)
-   */
-  @Override
-  ////@CacheEvict(value = "questIdToUserTasksCompletedForQuestForUserCache", key="#userId")
-  public boolean insertCompletedTaskIdForUserQuest(int userId, int taskId,
-      int questId) {
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__USER_ID,
-        userId);
-    insertParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__QUEST_ID,
-        questId);
-    insertParams.put(
-        DBConstants.USER_QUESTS_COMPLETED_TASKS__COMPLETED_TASK_ID,
-        taskId);
-
-    int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_QUEST_TASK_HISTORY, insertParams);
-    if (numInserted == 1) {
-      return true;
-    }
-    return false;
-  }
-
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUserStructJustBuilt(int, int, java.sql.Timestamp, java.sql.Timestamp, com.lvl6.info.CoordinatePair)
    */

@@ -157,6 +157,8 @@ public interface UpdateUtil {
   public abstract int updateUserMonsterTeamSlotNum(long userMonsterId,
   		int teamSlotNum);
   
+  public int nullifyMonstersTeamSlotNum(List<Long> userMonsterIds, int newTeamSlotNum);
+  
   public abstract int updateUserMonsterEnhancing(int userId, List<MonsterEnhancingForUser> monsters);
   
   public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl);

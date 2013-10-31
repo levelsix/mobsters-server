@@ -64,7 +64,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
-      		.monsterForUserRetrieveUtils().getSpecificUserMonstersForUser(userId, userMonsterIds);
+      		.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
       
       boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
       		idsToUserMonsters);

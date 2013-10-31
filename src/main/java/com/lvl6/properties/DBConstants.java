@@ -36,8 +36,6 @@ public class DBConstants {
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
   //links up rows in task_history (thus task_stage_history where monster info resides)
   //to monster kill jobs
-  public static final String TABLE_QUEST_JOB_MONSTER_KILL_HISTORY_PROOF = "quest_job_monster_kill_history_proof";
-  public static final String TABLE_QUEST_TASK_HISTORY = "quest_task_history";
   public static final String TABLE_REFERRAL = "referral";
   public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
 	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";

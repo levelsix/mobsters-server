@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -60,20 +62,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      //User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 
     	//make sure it exists
-    	MonsterForUser mfu = RetrieveUtils.monsterForUserRetrieveUtils().getSpecificUserMonster(userMonsterId);
+    	Map<Long, MonsterForUser> idsToMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+    			.getSpecificOrAllUserMonstersForUser(userId, null);
     	//get the ones that aren't in enhancing or healing
     	Map<Long, MonsterEnhancingForUser> inEnhancing =
     			MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
     	Map<Long, MonsterHealingForUser> inHealing =
     			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
     	
-      boolean legit = checkLegit(resBuilder, userId, userMonsterId, mfu, inEnhancing, inHealing);
+      boolean legit = checkLegit(resBuilder, userId, teamSlotNum, userMonsterId,
+      		idsToMonsters, inEnhancing, inHealing);
 
       boolean successful = false;
       if(legit) {
+      	MonsterForUser mfu = idsToMonsters.get(userMonsterId);
     	  successful = writeChangesToDb(userId, teamSlotNum, userMonsterId, mfu);
       }
       
@@ -112,22 +116,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, int userId, long userMonsterId,
-		  MonsterForUser mfu, Map<Long, MonsterEnhancingForUser> inEnhancing, 
+  private boolean checkLegit(Builder resBuilder, int userId, int teamSlotNum,
+  		long userMonsterId, Map<Long, MonsterForUser> idsToMonsters,
+  		Map<Long, MonsterEnhancingForUser> inEnhancing, 
 		  Map<Long, MonsterHealingForUser> inHealing) {
   	
-  	if (null == mfu) {
-  		log.error("no monster_for_user exists with id=" + userMonsterId);
+  	if (!idsToMonsters.containsKey(userMonsterId)) {
+  		log.error("no monster_for_user exists with id=" + userMonsterId +
+  				" and userId=" + userId);
   		return false;
   	}
+  	MonsterForUser mfu = idsToMonsters.get(userMonsterId);
 
-  	//check to make sure this is indeed the user's monster
-  	int mfuUserId = mfu.getUserId();
-  	if (mfuUserId != userId) {
-  		log.error("what is this I don't even...client trying to \"equip\" " +
-  				"another user's monster. userId=" + userId + "\t monsterForUser=" + mfu);
-  		return false;
-  	}
+  	//if a monster is already occupying the slot, replace it
+  	clearBattleTeamSlot(teamSlotNum, idsToMonsters);
   	
   	//CHECK TO MAKE SURE THE USER MONSTER IS COMPLETE
   	if (!mfu.isComplete()) {
@@ -156,6 +158,31 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	resBuilder.setStatus(AddMonsterToBattleTeamStatus.SUCCESS);
   	return true;
+  }
+  
+  //if there is a, or are monsters in the map with a teamSlotNum value that equals
+  //the argument passed in: teamSlotNum, then remove the existing guys in said slot
+  private void clearBattleTeamSlot(int teamSlotNum,
+  		Map<Long, MonsterForUser>idsToMonsters) {
+  	List<Long> userMonsterIds = new ArrayList<Long>();
+  	
+  	//gather up the userMonsterIds with a team slot value = teamSlotNum (batch it)
+  	for(MonsterForUser mfu : idsToMonsters.values()) {
+  		if (mfu.getTeamSlotNum() == teamSlotNum) {
+  			log.error("more than one monster sharing team slot. userMonster=" + mfu); 
+  			userMonsterIds.add(mfu.getId());
+  		}
+  	}
+  	
+  	if (!userMonsterIds.isEmpty()) {
+  		int newTeamSlotNum = 0;
+  		//remove these monsters from the team slot with value = teamSlotNum
+  		int num = UpdateUtils.get().nullifyMonstersTeamSlotNum(
+  				userMonsterIds, newTeamSlotNum);
+  		log.info("removed userMonsterIds from teamSlot=" + teamSlotNum +
+  				"\t userMonsterIds=" + userMonsterIds + "\t numRemoved=" + num);
+  	}
+  	
   }
   
   private boolean writeChangesToDb(int uId, int teamSlotNum, long userMonsterId,

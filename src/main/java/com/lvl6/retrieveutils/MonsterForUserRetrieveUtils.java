@@ -63,28 +63,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return userMonster;
   }
 
-  public Map<Long, MonsterForUser> getSpecificUserMonstersForUser(int userId,
+  
+  public Map<Long, MonsterForUser> getSpecificOrAllUserMonstersForUser(int userId,
   		Collection<Long> userMonsterIds) {
     log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
-
-    if (userMonsterIds == null || userMonsterIds.size() <= 0 ) {
-      return new HashMap<Long, MonsterForUser>();
-    }
-
-    String query = "SELECT * FROM " + TABLE_NAME + " WHERE " +
-    		DBConstants.MONSTER_FOR_USER__USER_ID + "=? AND (";
     
-    List<String> condClauses = new ArrayList<String>();
-    List <Object> values = new ArrayList<Object>();
+    String query = "SELECT * FROM " + TABLE_NAME + " WHERE " +
+    		DBConstants.MONSTER_FOR_USER__USER_ID + "=?";
+    List<Object> values = new ArrayList<Object>();
     values.add(userId);
     
-    for (Long userMonsterId : userMonsterIds) {
-      condClauses.add(DBConstants.MONSTER_FOR_USER__ID + "=?");
-      values.add(userMonsterId);
+    //if user didn't give userMonsterIds then get all the user's monsters 
+    if (userMonsterIds != null && !userMonsterIds.isEmpty() ) {
+    	List<Long> userMonsterIdList = new ArrayList<Long>(userMonsterIds);
+    	
+    	query += " AND " + DBConstants.MONSTER_FOR_USER__ID + " IN (" +
+    			StringUtils.csvList(userMonsterIdList) + ");";
     }
-    query += StringUtils.getListInString(condClauses, "OR") + ");"; // +
-//    		DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
-//    values.add(isComplete);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);

@@ -101,7 +101,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Set<Long> newIds = new HashSet<Long>();
 			newIds.addAll(newMap.keySet());
     	Map<Long, MonsterForUser> existingUserMonsters = RetrieveUtils
-    			.monsterForUserRetrieveUtils().getSpecificUserMonstersForUser(userId, newIds);
+    			.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newIds);
 
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
 					alreadyEnhancing, alreadyHealing, deleteMap, updateMap, newMap,

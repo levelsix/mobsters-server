@@ -756,6 +756,24 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
+	public int nullifyMonstersTeamSlotNum(List<Long> userMonsterIds, int newTeamSlotNum) {
+		List<Object> values = new ArrayList<Object>();
+		String query = "UPDATE " + DBConstants.TABLE_MONSTER_FOR_USER + " SET "
+				+ DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM + "=? "+ "where " +
+				DBConstants.MONSTER_FOR_USER__ID + " in (";
+		
+		List<String> questions = Collections.nCopies(userMonsterIds.size(), "?");
+		query += StringUtils.getListInString(questions, ",") + ");";
+
+		values.add(newTeamSlotNum);
+		values.addAll(userMonsterIds);
+
+		log.info(query + " with values " +values);
+		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+		return numUpdated;
+	}
+	
+	@Override
 	public int updateUserMonsterEnhancing(int userId, List<MonsterEnhancingForUser> monsters) {
 		String tableName = DBConstants.TABLE_MONSTER_ENHANCING_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();

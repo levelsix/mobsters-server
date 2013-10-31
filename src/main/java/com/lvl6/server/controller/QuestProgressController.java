@@ -89,7 +89,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       Map<Integer, QuestForUser> questIdsToUnredeemedUserQuests = RetrieveUtils
       		.questForUserRetrieveUtils().getQuestIdToUnredeemedUserQuests(userId);
       Map<Long, MonsterForUser> deleteUserMonsters = RetrieveUtils
-      		.monsterForUserRetrieveUtils().getSpecificUserMonstersForUser(userId, deleteUserMonsterIds);
+      		.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, deleteUserMonsterIds);
       		
 
       boolean legitProgress = checkLegitProgress(resBuilder, userId, 

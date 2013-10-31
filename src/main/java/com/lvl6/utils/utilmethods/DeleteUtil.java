@@ -7,8 +7,6 @@ public interface DeleteUtil {
 
 	public abstract boolean deleteAvailableReferralCode(String referralCode);
 
-	public abstract boolean deleteQuestTaskCompletedForUser(int userId, int questId, int numTasks);
-
 	/*@Caching(evict = {
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
 			////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
@@ -26,8 +24,6 @@ public interface DeleteUtil {
   public void deleteUserClansForUserExceptSpecificClan(int userId, int clanId);
   
   public abstract int deleteAllUserQuestsForUser(int userId);
-  
-  public abstract int deleteAllUserQuestsCompletedTasksForUser(int userId);
   
   public abstract int deleteTaskForUserWithTaskForUserId(long taskForUserId);
   

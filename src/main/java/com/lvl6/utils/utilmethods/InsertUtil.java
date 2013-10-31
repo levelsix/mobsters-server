@@ -33,10 +33,6 @@ public interface InsertUtil {
 	public abstract int insertUpdateUnredeemedUserQuest(int userId, int questId,
       int progress, boolean isComplete);
 	
-	/* used for quest tasks */
-	public abstract boolean insertCompletedTaskIdForUserQuest(int userId,
-			int taskId, int questId);
-
 	public abstract boolean insertUserStructJustBuilt(int userId, int structId,
 			Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
 			CoordinatePair structCoords);

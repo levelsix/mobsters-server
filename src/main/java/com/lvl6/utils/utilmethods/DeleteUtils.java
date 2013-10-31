@@ -45,20 +45,6 @@ public class DeleteUtils implements DeleteUtil {
     return false;
   }
 
-  @Override
-  public boolean deleteQuestTaskCompletedForUser(int userId, int questId, int numTasks) {
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__USER_ID, userId);
-    conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__QUEST_ID, questId);
-
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_QUEST_TASK_HISTORY, conditionParams, "and");
-    if (numDeleted != numTasks) {
-      return false;
-    }
-    
-    return true;  
-  }
-
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteUserStruct(int)
    */
@@ -127,15 +113,6 @@ public class DeleteUtils implements DeleteUtil {
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
     conditionParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
-    int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
-    
-    return numDeleted;
-  }
-  public int deleteAllUserQuestsCompletedTasksForUser(int userId) {
-    String tableName = DBConstants.TABLE_QUEST_TASK_HISTORY;
-    String condDelim = "and";
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_QUESTS_COMPLETED_TASKS__USER_ID, userId);
     int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
     
     return numDeleted;
@@ -236,5 +213,5 @@ public class DeleteUtils implements DeleteUtil {
     int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, userMonsterIds);
     return numDeleted;
   }
-  
+
 }

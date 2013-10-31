@@ -4,7 +4,6 @@ import com.lvl6.retrieveutils.StatisticsRetrieveUtil;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterForUserRetrieveUtils;
 import com.lvl6.retrieveutils.QuestForUserRetrieveUtils;
-import com.lvl6.retrieveutils.QuestTaskHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.StructureForUserRetrieveUtils;
 import com.lvl6.spring.AppContext;
@@ -35,12 +34,12 @@ public class RetrieveUtils {
 		return AppContext.getApplicationContext().getBean(
 				StructureForUserRetrieveUtils.class);
 	}
-	
-	public static QuestTaskHistoryRetrieveUtils userQuestsCompletedTasksRetrieveUtils() {
-		return AppContext.getApplicationContext().getBean(
-				QuestTaskHistoryRetrieveUtils.class);
-	}
-	
+//	
+//	public static QuestTaskHistoryRetrieveUtils userQuestsCompletedTasksRetrieveUtils() {
+//		return AppContext.getApplicationContext().getBean(
+//				QuestTaskHistoryRetrieveUtils.class);
+//	}
+//	
 	public static StatisticsRetrieveUtil statisticsRetrieveUtils() {
 		return AppContext.getApplicationContext().getBean(
 				StatisticsRetrieveUtil.class);
