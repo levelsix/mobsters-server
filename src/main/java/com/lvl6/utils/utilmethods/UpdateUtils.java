@@ -181,10 +181,10 @@ public class UpdateUtils implements UpdateUtil {
 	public boolean updateUserStructOrientation(int userStructId,
 			StructOrientation orientation) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_STRUCTS__ID, userStructId);
+		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_STRUCTS__ORIENTATION, orientation.getNumber());
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, orientation.getNumber());
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, null, absoluteParams, 
 				conditionParams, "or");
@@ -285,16 +285,16 @@ public class UpdateUtils implements UpdateUtil {
       //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
 	public boolean updateUserStructLastretrievedIscompleteLevelchange(int userStructId, Timestamp lastRetrievedTime, boolean isComplete, int levelChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_STRUCTS__ID, userStructId);
+		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		if (lastRetrievedTime != null)
-			absoluteParams.put(DBConstants.USER_STRUCTS__LAST_RETRIEVED, lastRetrievedTime);
+			absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
 
-		absoluteParams.put(DBConstants.USER_STRUCTS__IS_COMPLETE, isComplete);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, isComplete);
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER_STRUCTS__LEVEL, levelChange);
+		relativeParams.put(DBConstants.STRUCTURE_FOR_USER__LEVEL, levelChange);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
 				conditionParams, "or");
@@ -338,18 +338,20 @@ public class UpdateUtils implements UpdateUtil {
 	/*@Caching(evict= {
       //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
       //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
-	public boolean updateUserStructLastretrievedLastupgradeIscomplete(int userStructId, Timestamp lastRetrievedTime, Timestamp lastUpgradeTime, boolean isComplete) {
+	public boolean updateUserStructLastretrievedLastupgradeIscomplete(
+			int userStructId, Timestamp lastRetrievedTime, Timestamp lastUpgradeTime,
+			boolean isComplete) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_STRUCTS__ID, userStructId);
+		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		if (lastRetrievedTime != null)
-			absoluteParams.put(DBConstants.USER_STRUCTS__LAST_RETRIEVED, lastRetrievedTime);
+			absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
 
 		if (lastUpgradeTime != null)
-			absoluteParams.put(DBConstants.USER_STRUCTS__LAST_UPGRADE_TIME, lastUpgradeTime);
+			absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_UPGRADE_TIME, lastUpgradeTime);
 
-		absoluteParams.put(DBConstants.USER_STRUCTS__IS_COMPLETE, isComplete);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, isComplete);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, null, absoluteParams, 
 				conditionParams, "or");
@@ -378,18 +380,18 @@ public class UpdateUtils implements UpdateUtil {
 			Timestamp lastRetrievedTime = userStructIdsToLastRetrievedTime.get(userStructId);
 			StructureForUser us = structIdsToUserStructs.get(userStructId);
 
-			aRow.put(DBConstants.USER_STRUCTS__ID, userStructId);
-			aRow.put(DBConstants.USER_STRUCTS__USER_ID, us.getUserId());
-			aRow.put(DBConstants.USER_STRUCTS__STRUCT_ID, us.getStructId());
-			aRow.put(DBConstants.USER_STRUCTS__LAST_RETRIEVED, lastRetrievedTime);
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, us.getUserId());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, us.getStructId());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
 			CoordinatePair cp = us.getCoordinates();
-			aRow.put(DBConstants.USER_STRUCTS__X_COORD, cp.getX());
-			aRow.put(DBConstants.USER_STRUCTS__Y_COORD, cp.getY());
-			aRow.put(DBConstants.USER_STRUCTS__LEVEL, us.getLevel());
-			aRow.put(DBConstants.USER_STRUCTS__PURCHASE_TIME, us.getPurchaseTime());
-			aRow.put(DBConstants.USER_STRUCTS__LAST_UPGRADE_TIME, us.getLastUpgradeTime());
-			aRow.put(DBConstants.USER_STRUCTS__IS_COMPLETE, us.isComplete());
-			aRow.put(DBConstants.USER_STRUCTS__ORIENTATION, us.getOrientation().getNumber());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, cp.getX());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, cp.getY());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__LEVEL, us.getLevel());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, us.getPurchaseTime());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__LAST_UPGRADE_TIME, us.getLastUpgradeTime());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, us.isComplete());
+			aRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, us.getOrientation().getNumber());
 
 			newRows.add(aRow);
 		}
@@ -416,10 +418,10 @@ public class UpdateUtils implements UpdateUtil {
       //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
 	public boolean updateUserStructLevel(int userStructId, int levelChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_STRUCTS__ID, userStructId);
+		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER_STRUCTS__LEVEL, levelChange);
+		relativeParams.put(DBConstants.STRUCTURE_FOR_USER__LEVEL, levelChange);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, null, 
 				conditionParams, "or");
@@ -441,11 +443,11 @@ public class UpdateUtils implements UpdateUtil {
       //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
 	public boolean updateUserStructCoord(int userStructId, CoordinatePair coordinates) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER_STRUCTS__ID, userStructId);
+		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER_STRUCTS__X_COORD, coordinates.getX());
-		absoluteParams.put(DBConstants.USER_STRUCTS__Y_COORD, coordinates.getY());
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, coordinates.getX());
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, coordinates.getY());
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, null, absoluteParams, 
 				conditionParams, "or");

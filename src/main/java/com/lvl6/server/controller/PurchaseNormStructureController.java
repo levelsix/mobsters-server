@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseNormStructureRequestEvent;
+import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.PurchaseNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.CoordinatePair;
@@ -22,6 +23,7 @@ import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.Builder;
@@ -63,6 +65,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int structId = reqProto.getStructId();
     CoordinatePair cp = new CoordinatePair(reqProto.getStructCoordinates().getX(), reqProto.getStructCoordinates().getY());
     Timestamp timeOfPurchase = new Timestamp(reqProto.getTimeOfPurchase());
@@ -111,7 +114,17 @@ import com.lvl6.utils.utilmethods.InsertUtil;
         		money, previousCash, previousGems);
       }
     } catch (Exception e) {
-      log.error("exception in PurchaseNormStructure processEvent", e);
+    	log.error("exception in PurchaseNormStructure processEvent", e);
+    	//don't let the client hang
+    	try {
+    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
+    		PurchaseNormStructureResponseEvent resEvent = new PurchaseNormStructureResponseEvent(userId);
+    		resEvent.setTag(event.getTag());
+    		resEvent.setPurchaseNormStructureResponseProto(resBuilder.build());
+    		server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in PurchaseNormStructure processEvent", e);
+    	}
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }

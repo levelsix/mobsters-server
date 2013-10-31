@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,9 +14,10 @@ import com.lvl6.events.request.FinishNormStructWaittimeWithDiamondsRequestEvent;
 import com.lvl6.events.response.FinishNormStructWaittimeWithDiamondsResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Structure;
-import com.lvl6.info.User;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRequestProto;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.Builder;
@@ -26,6 +26,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Component @DependsOn("gameServer") public class FinishNormStructWaittimeWithDiamondsController extends EventController{
 
@@ -51,18 +52,19 @@ import com.lvl6.utils.RetrieveUtils;
     FinishNormStructWaittimeWithDiamondsRequestProto reqProto = ((FinishNormStructWaittimeWithDiamondsRequestEvent)event).getFinishNormStructWaittimeWithDiamondsRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int userStructId = reqProto.getUserStructId();
     Timestamp timeOfSpeedup = new Timestamp(reqProto.getTimeOfSpeedup());
 
     FinishNormStructWaittimeWithDiamondsResponseProto.Builder resBuilder = FinishNormStructWaittimeWithDiamondsResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
+    resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int previousSilver = 0;
-      int previousGold = 0;
+      int previousGems = 0;
       StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
       Structure struct = null;
       if (userStruct != null) {
@@ -71,30 +73,37 @@ import com.lvl6.utils.RetrieveUtils;
 
       boolean legitSpeedup = checkLegitSpeedup(resBuilder, user, userStruct, timeOfSpeedup, struct);
 
+      
+      boolean success = false;
+      Map<String, Integer> money = new HashMap<String, Integer>();
+      if (legitSpeedup) {
+        previousGems = user.getGems();
+        writeChangesToDB(user, userStruct, timeOfSpeedup, struct, money);
+      }
+      
       FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
       resEvent.setFinishNormStructWaittimeWithDiamondsResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
-
-      if (legitSpeedup) {
-        previousSilver = user.getCash();
-        previousGold = user.getGems();
-        
-        Map<String, Integer> money = new HashMap<String, Integer>();
-        writeChangesToDB(user, userStruct, timeOfSpeedup, struct, money);
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
-//        writeToUserCurrencyHistory(user, userStruct, timeOfSpeedup, money, previousSilver, previousGold);
-//        if (waitTimeType == NormStructWaitTimeType.FINISH_CONSTRUCTION) {
-//          QuestUtils.checkAndSendQuestsCompleteBasic(server, user.getId(), senderProto, null, false);
-//        }
-//        if (waitTimeType == NormStructWaitTimeType.FINISH_UPGRADE) {
-//          QuestUtils.checkAndSendQuestsCompleteBasic(server, user.getId(), senderProto, null, false);
-//        }
+      
+      if (success) {
+      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+      	resEventUpdate.setTag(event.getTag());
+      	server.writeEvent(resEventUpdate);
+        writeToUserCurrencyHistory(user, userStruct, timeOfSpeedup, money, previousGems);
       }
     } catch (Exception e) {
       log.error("exception in FinishNormStructWaittimeWithDiamondsController processEvent", e);
+      //don't let the client hang
+      try {
+      	resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
+      	FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(userId);
+      	resEvent.setTag(event.getTag());
+      	resEvent.setFinishNormStructWaittimeWithDiamondsResponseProto(resBuilder.build());
+      	server.writeEvent(resEvent);
+      } catch (Exception e2) {
+      	log.error("exception2 in BeginDungeonController processEvent", e);
+      }
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
     }
@@ -102,149 +111,76 @@ import com.lvl6.utils.RetrieveUtils;
 
   private void writeChangesToDB(User user, StructureForUser userStruct,
   		Timestamp timeOfPurchase, Structure struct, Map<String, Integer> money) {
-//    if (waitTimeType == NormStructWaitTimeType.FINISH_CONSTRUCTION) {
-//      int goldCost = buildDiamondCost(userStruct, struct, timeOfPurchase) * -1;
-//      if (!user.updateRelativeDiamondsNaive(goldCost)) {
-//        log.error("problem with using diamonds to finish norm struct build");
-//      } else {
-//        if (!UpdateUtils.get().updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), timeOfPurchase, null, true)) {
-//          log.error("problem with using diamonds to finish norm struct build");
-//        }
-//        money.put(MiscMethods.gold, goldCost);
-//      }
-//    }
-//    if (waitTimeType == NormStructWaitTimeType.FINISH_INCOME_WAITTIME) {
-//      int goldCost = calculateDiamondCostForInstaRetrieve(userStruct, struct)*-1;
-//      int silverCost = MiscMethods.calculateIncomeGainedFromUserStruct(struct.getIncome(), userStruct.getLevel());
-//      if (!user.updateRelativeDiamondsCoinsExperienceNaive(goldCost, silverCost, 0)) {
-//        log.error("problem with using diamonds to finish norm struct income waittime");
-//      } else {
-//        if (!UpdateUtils.get().updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), timeOfPurchase, null, true)) {
-//          log.error("problem with using diamonds to finish norm struct income waittime");
-//        }
-//        money.put(MiscMethods.gold, goldCost);
-//        money.put(MiscMethods.silver, silverCost);
-//      }
-//    }
-//    if (waitTimeType == NormStructWaitTimeType.FINISH_UPGRADE) {
-//      int goldCost = upgradeDiamondCost(userStruct, struct, timeOfPurchase) * -1;
-//      if (!user.updateRelativeDiamondsNaive(goldCost)) {
-//        log.error("problem with using diamonds to finish norm struct upgrade waittime");
-//      } else {
-//        if (!UpdateUtils.get().updateUserStructLastretrievedIscompleteLevelchange(userStruct.getId(), timeOfPurchase, true, 1)) {
-//          log.error("problem with using diamodns to finish upgrade waittime");
-//        }
-//        money.put(MiscMethods.gold, goldCost);
-//      }
-//    }
+  	int gemCost = -1 * struct.getInstaBuildGemCost();
+  	
+  	//update user gems
+  	if (!user.updateRelativeDiamondsNaive(gemCost)) {
+  		log.error("problem with using diamonds to finish norm struct build. userStruct=" +
+  				userStruct + "\t struct=" + struct + "\t gemCost=" + gemCost);
+  	} else {
+  		//update structure for user to reflect it is complete
+  		if (!UpdateUtils.get().updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), timeOfPurchase, null, true)) {
+  			log.error("problem with completing norm struct build time. userStruct=" +
+  					userStruct + "\t struct=" + struct + "\t gemCost=" + gemCost);
+  		}
+  		money.put(MiscMethods.gems, gemCost);
+  	}
   }
 
   private boolean checkLegitSpeedup(Builder resBuilder, User user,
   		StructureForUser userStruct, Timestamp timeOfSpeedup, Structure struct) {
     if (user == null || userStruct == null || struct == null || userStruct.getUserId() != user.getId() || userStruct.isComplete()) {
-      resBuilder.setStatus(FinishNormStructWaittimeStatus.OTHER_FAIL);
+      resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
       log.error("something passed in is null. user=" + user + ", userStruct=" + userStruct +
            ", struct=" + struct + ", struct owner's id=" + userStruct.getUserId());
       return false;
     }
-    if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfSpeedup)) {
-      resBuilder.setStatus(FinishNormStructWaittimeStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-      log.error("client time too apart of server time. client time=" + timeOfSpeedup + ", servertime~="
-          + new Date());
-      return false;
-    }
-
-    if (timeOfSpeedup.getTime() < userStruct.getPurchaseTime().getTime()) {
-      resBuilder.setStatus(FinishNormStructWaittimeStatus.OTHER_FAIL);
-      log.error("time passed in is before time user struct was purchased. timeOfSpeedup=" + timeOfSpeedup
-          + ", struct was purchased=" + userStruct.getPurchaseTime());
-      return false;
-    }
-    
-    
-    int diamondCost = 123456789;
-//    if (waitTimeType == NormStructWaitTimeType.FINISH_CONSTRUCTION) {
-//      diamondCost = buildDiamondCost(userStruct, struct, timeOfSpeedup);
-//    } else if (waitTimeType == NormStructWaitTimeType.FINISH_INCOME_WAITTIME) {
-//      diamondCost = calculateDiamondCostForInstaRetrieve(userStruct, struct);
-//    } else if (waitTimeType == NormStructWaitTimeType.FINISH_UPGRADE) {
-//      diamondCost = upgradeDiamondCost(userStruct, struct, timeOfSpeedup);
-//    } else {
-//      resBuilder.setStatus(FinishNormStructWaittimeStatus.OTHER_FAIL);
-//      log.error("norm struct wait time type is unknown: " + waitTimeType);
+//    if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfSpeedup)) {
+//      resBuilder.setStatus(FinishNormStructWaittimeStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
+//      log.error("client time too apart of server time. client time=" + timeOfSpeedup + ", servertime~="
+//          + new Date());
 //      return false;
 //    }
-    if (user.getGems() < diamondCost) {
-      resBuilder.setStatus(FinishNormStructWaittimeStatus.NOT_ENOUGH_DIAMONDS);
-      log.error("user doesn't have enough diamonds. has " + user.getGems() +", needs " + diamondCost);
+//
+//    if (timeOfSpeedup.getTime() < userStruct.getPurchaseTime().getTime()) {
+//      resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
+//      log.error("time passed in is before time user struct was purchased. timeOfSpeedup=" + timeOfSpeedup
+//          + ", struct was purchased=" + userStruct.getPurchaseTime());
+//      return false;
+//    }
+//    
+    
+    int gemCost = struct.getInstaBuildGemCost();
+    if (user.getGems() < gemCost) {
+      resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_NOT_ENOUGH_GEMS);
+      log.error("user doesn't have enough diamonds. has " + user.getGems() +", needs " + gemCost);
       return false;
     }
     resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);
     return true;  
   }
   
-  
-//  private int calculateDiamondCostForInstaUpgrade(UserStruct userStruct, Structure struct) {
-//    int result = (int)(struct.getInstaUpgradeDiamondCostBase() * userStruct.getLevel() * 
-//        ControllerConstants.FINISH_NORM_STRUCT_WAITTIME_WITH_DIAMONDS__DIAMOND_COST_FOR_INSTANT_UPGRADE_MULTIPLIER);
-//    return Math.max(1, result);
-//  }
 
-//  public void writeToUserCurrencyHistory(User aUser, UserStruct userStruct, Timestamp timeOfPurchase, 
-//      NormStructWaitTimeType waitTimeType, Map<String, Integer> money, 
-//      int previousSilver, int previousGold) {
-//    
-//    int userStructId = userStruct.getId();
-//    int structId = userStruct.getStructId();
-//    int prevLevel = userStruct.getLevel();
-//    String structDetails = "uStructId:" + userStructId + " structId:" + structId
-//        + " prevLevel:" + prevLevel;
-//    
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String reasonForChange = ControllerConstants.UCHRFC__FINISH_NORM_STRUCT;
-//    String gold = MiscMethods.gold;
-//    String silver = MiscMethods.silver;
-//    
-//    previousGoldSilver.put(gold, previousGold);
-//    previousGoldSilver.put(silver, previousSilver);
-//    
-//    if (waitTimeType == NormStructWaitTimeType.FINISH_CONSTRUCTION) {
-//      reasonsForChanges.put(gold, reasonForChange + "finish construction " + structDetails);
-//      
-//    } else if (waitTimeType == NormStructWaitTimeType.FINISH_INCOME_WAITTIME) {
-//      reasonsForChanges.put(gold, reasonForChange + "finish income wait time " + structDetails);
-//      reasonsForChanges.put(silver, reasonForChange + "finish income wait time " + structDetails);
-//      
-//    } else if (waitTimeType == NormStructWaitTimeType.FINISH_UPGRADE) {
-//      reasonsForChanges.put(gold, reasonForChange + "finish upgrade " + structDetails);
-//      
-//    } else {
-//      return;
-//    }
-//    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, timeOfPurchase, money,
-//        previousGoldSilver, reasonsForChanges);
-//  }
-//  
-//  public int buildDiamondCost(UserStruct userStruct, Structure structure, Timestamp timeOfSpeedup) {
-//    long timePassed = (timeOfSpeedup.getTime() - userStruct.getPurchaseTime().getTime())/1000;
-//    long timeRemaining = (MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), 0))*60 - timePassed;
-//    double percentRemaining = timeRemaining/(double)(timeRemaining+timePassed);
-//    double speedUpConstant = 1+ControllerConstants.BUILD_LATE_SPEEDUP_CONSTANT*(1-percentRemaining);
-//    
-//    int diamondCost = (int)Math.ceil(speedUpConstant*percentRemaining*calculateDiamondCostForInstaUpgrade(userStruct, structure));
-//    return diamondCost;
-//  }
-//  
-//  public int upgradeDiamondCost(UserStruct userStruct, Structure structure, Timestamp timeOfSpeedup) {
-//  	long upgradeStartTime = userStruct.getLastUpgradeTime().getTime();
-//    long timePassed = (timeOfSpeedup.getTime() - upgradeStartTime)/1000;
-//    long timeRemaining = (MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), userStruct.getLevel()))*60 - timePassed;
-//    double percentRemaining = timeRemaining/(double)(timeRemaining+timePassed);
-//    double speedUpConstant = 1+ControllerConstants.UPGRADE_LATE_SPEEDUP_CONSTANT*(1-percentRemaining);
-//    
-//    int diamondCost = (int)Math.ceil(speedUpConstant*percentRemaining*calculateDiamondCostForInstaUpgrade(userStruct, structure));
-//    return diamondCost;
-//  }
+  public void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct,
+  		Timestamp timeOfPurchase, Map<String, Integer> money, int previousGems) {
+    
+    int userStructId = userStruct.getId();
+    int structId = userStruct.getStructId();
+    int prevLevel = userStruct.getLevel();
+    String structDetails = "uStructId:" + userStructId + " structId:" + structId
+        + " prevLevel:" + prevLevel;
+    
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    String reasonForChange = ControllerConstants.UCHRFC__FINISH_NORM_STRUCT;
+    String gems = MiscMethods.gems;
+    
+    previousGemsCash.put(gems, previousGems);
+    reasonsForChanges.put(gems, reasonForChange + "finish upgrade " + structDetails);
+      
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfPurchase, money,
+        previousGemsCash, reasonsForChanges);
+  }
+  
   
 }

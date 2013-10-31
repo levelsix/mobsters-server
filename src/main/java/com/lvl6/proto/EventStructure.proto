@@ -146,9 +146,8 @@ message FinishNormStructWaittimeWithDiamondsResponseProto {
      
      enum FinishNormStructWaittimeStatus {
      	SUCCESS = 1;
-     	NOT_ENOUGH_DIAMONDS = 2;
-     	OTHER_FAIL = 3;
-     	CLIENT_TOO_APART_FROM_SERVER_TIME = 4;
+     	FAIL_NOT_ENOUGH_GEMS = 2;
+     	FAIL_OTHER = 3;
      }
 }
 

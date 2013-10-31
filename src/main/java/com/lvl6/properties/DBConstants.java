@@ -292,17 +292,17 @@ public class DBConstants {
   public static final String USER_SESSIONS__LOGOUT_TIME = "logout_time";
 
   /*USER STRUCTS TABLE*/
-  public static final String USER_STRUCTS__ID = GENERIC__ID;
-  public static final String USER_STRUCTS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_STRUCTS__STRUCT_ID = "struct_id";
-  public static final String USER_STRUCTS__LAST_RETRIEVED = "last_retrieved";
-  public static final String USER_STRUCTS__X_COORD = "xcoord";
-  public static final String USER_STRUCTS__Y_COORD = "ycoord";
-  public static final String USER_STRUCTS__LEVEL = "level";
-  public static final String USER_STRUCTS__PURCHASE_TIME = "purchase_time";
-  public static final String USER_STRUCTS__LAST_UPGRADE_TIME = "last_upgrade_time";
-  public static final String USER_STRUCTS__IS_COMPLETE = "is_complete";
-  public static final String USER_STRUCTS__ORIENTATION = "orientation";
+  public static final String STRUCTURE_FOR_USER__ID = GENERIC__ID;
+  public static final String STRUCTURE_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String STRUCTURE_FOR_USER__STRUCT_ID = "struct_id";
+  public static final String STRUCTURE_FOR_USER__LAST_RETRIEVED = "last_retrieved";
+  public static final String STRUCTURE_FOR_USER__X_COORD = "xcoord";
+  public static final String STRUCTURE_FOR_USER__Y_COORD = "ycoord";
+  public static final String STRUCTURE_FOR_USER__LEVEL = "level";
+  public static final String STRUCTURE_FOR_USER__PURCHASE_TIME = "purchase_time";
+  public static final String STRUCTURE_FOR_USER__LAST_UPGRADE_TIME = "last_upgrade_time";
+  public static final String STRUCTURE_FOR_USER__IS_COMPLETE = "is_complete";
+  public static final String STRUCTURE_FOR_USER__ORIENTATION = "orientation";
 
   /*TASK FOR USER TABLE*/
   public static final String TASK_FOR_USER__ID = GENERIC__ID;

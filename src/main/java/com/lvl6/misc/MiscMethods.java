@@ -242,17 +242,6 @@ public class MiscMethods {
     return availCities;
   }
 
-//  public static int calculateMinutesToBuildOrUpgradeForUserStruct(int minutesToUpgradeBase, int userStructLevel) {
-//    if(userStructLevel==0) {
-//    	return minutesToUpgradeBase;
-//    }
-//  	return Math.max(1, (int)(minutesToUpgradeBase * (userStructLevel+1) * ControllerConstants.MINUTES_TO_UPGRADE_FOR_NORM_STRUCT_MULTIPLIER));
-//  }
-//
-//  public static int calculateIncomeGainedFromUserStruct(int structIncomeBase, int userStructLevel) {
-//    return Math.max(1, (int)(userStructLevel * structIncomeBase * ControllerConstants.INCOME_FROM_NORM_STRUCT_MULTIPLIER));
-//  }
-
   public static UpdateClientUserResponseEvent createUpdateClientUserResponseEventAndUpdateLeaderboard(User user) {
     try {
       if (!user.isFake()) {

@@ -73,7 +73,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     List<String> condClauses = new ArrayList<String>();
     List <Object> values = new ArrayList<Object>();
     for (Integer userStructId : userStructIds) {
-      condClauses.add(DBConstants.USER_STRUCTS__ID + "=?");
+      condClauses.add(DBConstants.STRUCTURE_FOR_USER__ID + "=?");
       values.add(userStructId);
     }
     query += StringUtils.getListInString(condClauses, "or") + ")";

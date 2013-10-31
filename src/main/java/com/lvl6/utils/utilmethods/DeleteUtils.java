@@ -68,7 +68,7 @@ public class DeleteUtils implements DeleteUtil {
       //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
   public boolean deleteUserStruct(int userStructId) {
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.USER_STRUCTS__ID, userStructId);
+    conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
     int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_STRUCTURE_FOR_USER, conditionParams, "and");
     if (numDeleted == 1) {
       return true;

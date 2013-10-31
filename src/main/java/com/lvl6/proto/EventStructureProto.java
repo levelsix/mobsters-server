@@ -7097,15 +7097,13 @@ public final class EventStructureProto {
     public enum FinishNormStructWaittimeStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      NOT_ENOUGH_DIAMONDS(1, 2),
-      OTHER_FAIL(2, 3),
-      CLIENT_TOO_APART_FROM_SERVER_TIME(3, 4),
+      FAIL_NOT_ENOUGH_GEMS(1, 2),
+      FAIL_OTHER(2, 3),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int NOT_ENOUGH_DIAMONDS_VALUE = 2;
-      public static final int OTHER_FAIL_VALUE = 3;
-      public static final int CLIENT_TOO_APART_FROM_SERVER_TIME_VALUE = 4;
+      public static final int FAIL_NOT_ENOUGH_GEMS_VALUE = 2;
+      public static final int FAIL_OTHER_VALUE = 3;
       
       
       public final int getNumber() { return value; }
@@ -7113,9 +7111,8 @@ public final class EventStructureProto {
       public static FinishNormStructWaittimeStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return NOT_ENOUGH_DIAMONDS;
-          case 3: return OTHER_FAIL;
-          case 4: return CLIENT_TOO_APART_FROM_SERVER_TIME;
+          case 2: return FAIL_NOT_ENOUGH_GEMS;
+          case 3: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -7146,7 +7143,7 @@ public final class EventStructureProto {
       }
       
       private static final FinishNormStructWaittimeStatus[] VALUES = {
-        SUCCESS, NOT_ENOUGH_DIAMONDS, OTHER_FAIL, CLIENT_TOO_APART_FROM_SERVER_TIME, 
+        SUCCESS, FAIL_NOT_ENOUGH_GEMS, FAIL_OTHER, 
       };
       
       public static FinishNormStructWaittimeStatus valueOf(
@@ -10578,42 +10575,41 @@ public final class EventStructureProto {
       "WithDiamondsRequestProto\0220\n\006sender\030\001 \001(\013" +
       "2 .com.lvl6.proto.MinimumUserProto\022\024\n\014us" +
       "erStructId\030\002 \001(\005\022\025\n\rtimeOfSpeedup\030\003 \001(\003\"" +
-      "\326\002\n1FinishNormStructWaittimeWithDiamonds" +
+      "\260\002\n1FinishNormStructWaittimeWithDiamonds" +
       "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
       ".proto.MinimumUserProto\022p\n\006status\030\002 \001(\0162" +
       "`.com.lvl6.proto.FinishNormStructWaittim" +
       "eWithDiamondsResponseProto.FinishNormStr",
-      "uctWaittimeStatus\"}\n\036FinishNormStructWai" +
-      "ttimeStatus\022\013\n\007SUCCESS\020\001\022\027\n\023NOT_ENOUGH_D" +
-      "IAMONDS\020\002\022\016\n\nOTHER_FAIL\020\003\022%\n!CLIENT_TOO_" +
-      "APART_FROM_SERVER_TIME\020\004\"}\n\"NormStructWa" +
-      "itCompleteRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\024\n\014user" +
-      "StructId\030\002 \003(\005\022\017\n\007curTime\030\003 \001(\003\"\353\002\n#Norm" +
-      "StructWaitCompleteResponseProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022`\n\006status\030\002 \001(\0162P.com.lvl6.proto.NormS",
-      "tructWaitCompleteResponseProto.NormStruc" +
-      "tWaitCompleteStatus\022:\n\nuserStruct\030\003 \003(\0132" +
-      "&.com.lvl6.proto.FullUserStructureProto\"" +
-      "t\n\034NormStructWaitCompleteStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\020\n\014NOT_DONE_YET\020\002\022\016\n\nOTHER_FAIL\020\003\022%" +
-      "\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020\004\"\235\001" +
-      "\n!ExpansionWaitCompleteRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022" +
-      "\021\n\txPosition\030\004 \001(\021\022\021\n\tyPosition\030\005 \001(\021\"\376\002",
-      "\n\"ExpansionWaitCompleteResponseProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto." +
-      "ExpansionWaitCompleteResponseProto.Expan" +
-      "sionWaitCompleteStatus\0229\n\005ucedp\030\003 \001(\0132*." +
-      "com.lvl6.proto.UserCityExpansionDataProt" +
-      "o\"\212\001\n\033ExpansionWaitCompleteStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\025\n\021WAS_NOT_EXPANDING\020\002\022\020\n\014NOT_DON" +
-      "E_YET\020\003\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_AP" +
-      "ART_FROM_SERVER_TIME\020\005B\025B\023EventStructure",
-      "Proto"
+      "uctWaittimeStatus\"W\n\036FinishNormStructWai" +
+      "ttimeStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_ENO" +
+      "UGH_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"}\n\"NormStruct" +
+      "WaitCompleteRequestProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022\024\n\014us" +
+      "erStructId\030\002 \003(\005\022\017\n\007curTime\030\003 \001(\003\"\353\002\n#No" +
+      "rmStructWaitCompleteResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022`\n\006status\030\002 \001(\0162P.com.lvl6.proto.Nor" +
+      "mStructWaitCompleteResponseProto.NormStr",
+      "uctWaitCompleteStatus\022:\n\nuserStruct\030\003 \003(" +
+      "\0132&.com.lvl6.proto.FullUserStructureProt" +
+      "o\"t\n\034NormStructWaitCompleteStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\020\n\014NOT_DONE_YET\020\002\022\016\n\nOTHER_FAIL\020\003" +
+      "\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIME\020\004\"" +
+      "\235\001\n!ExpansionWaitCompleteRequestProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(" +
+      "\010\022\021\n\txPosition\030\004 \001(\021\022\021\n\tyPosition\030\005 \001(\021\"" +
+      "\376\002\n\"ExpansionWaitCompleteResponseProto\0220",
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.prot" +
+      "o.ExpansionWaitCompleteResponseProto.Exp" +
+      "ansionWaitCompleteStatus\0229\n\005ucedp\030\003 \001(\0132" +
+      "*.com.lvl6.proto.UserCityExpansionDataPr" +
+      "oto\"\212\001\n\033ExpansionWaitCompleteStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\025\n\021WAS_NOT_EXPANDING\020\002\022\020\n\014NOT_D" +
+      "ONE_YET\020\003\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_" +
+      "APART_FROM_SERVER_TIME\020\005B\025B\023EventStructu" +
+      "reProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

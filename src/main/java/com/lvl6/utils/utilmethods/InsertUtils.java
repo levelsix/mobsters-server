@@ -318,17 +318,17 @@ public class InsertUtils implements InsertUtil{
       Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
       CoordinatePair structCoords) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.USER_STRUCTS__USER_ID, userId);
-    insertParams.put(DBConstants.USER_STRUCTS__STRUCT_ID, structId);
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, userId);
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, structId);
     insertParams
-    .put(DBConstants.USER_STRUCTS__X_COORD, structCoords.getX());
+    .put(DBConstants.STRUCTURE_FOR_USER__X_COORD, structCoords.getX());
     insertParams
-    .put(DBConstants.USER_STRUCTS__Y_COORD, structCoords.getY());
-    insertParams.put(DBConstants.USER_STRUCTS__PURCHASE_TIME,
+    .put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, structCoords.getY());
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME,
         timeOfStructPurchase);
-    insertParams.put(DBConstants.USER_STRUCTS__LAST_RETRIEVED,
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED,
         timeOfStructBuild);
-    insertParams.put(DBConstants.USER_STRUCTS__IS_COMPLETE, true);
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
 
     int numInserted = DBConnection.get().insertIntoTableBasic(
         DBConstants.TABLE_STRUCTURE_FOR_USER, insertParams);
@@ -348,11 +348,11 @@ public class InsertUtils implements InsertUtil{
   public int insertUserStruct(int userId, int structId,
       CoordinatePair coordinates, Timestamp timeOfPurchase) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.USER_STRUCTS__USER_ID, userId);
-    insertParams.put(DBConstants.USER_STRUCTS__STRUCT_ID, structId);
-    insertParams.put(DBConstants.USER_STRUCTS__X_COORD, coordinates.getX());
-    insertParams.put(DBConstants.USER_STRUCTS__Y_COORD, coordinates.getY());
-    insertParams.put(DBConstants.USER_STRUCTS__PURCHASE_TIME,
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, userId);
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, structId);
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, coordinates.getX());
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, coordinates.getY());
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME,
         timeOfPurchase);
 
     int userStructId = DBConnection.get().insertIntoTableBasicReturnId(
