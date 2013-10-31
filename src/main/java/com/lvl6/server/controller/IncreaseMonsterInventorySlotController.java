@@ -1,5 +1,10 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -47,6 +52,7 @@ import com.lvl6.utils.RetrieveUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     int numPurchases = reqProto.getNumPurchases();
+    Timestamp date = new Timestamp((new Date()).getTime());
 
     //set some values to send to the client (the response proto)
     IncreaseMonsterInventorySlotResponseProto.Builder resBuilder = IncreaseMonsterInventorySlotResponseProto.newBuilder();
@@ -55,6 +61,7 @@ import com.lvl6.utils.RetrieveUtils;
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
+    	int previousGems = 0;
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int numSlots = numPurchases *
       		ControllerConstants.MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT;
@@ -65,8 +72,10 @@ import com.lvl6.utils.RetrieveUtils;
       		numSlots, totalGemPrice);
 
       boolean successful = false;
+      Map<String, Integer> money = new HashMap<String, Integer>();
       if(legit) {
-    	  successful = writeChangesToDb(aUser, numSlots, totalGemPrice);
+      	previousGems = aUser.getGems();
+    	  successful = writeChangesToDb(aUser, numSlots, totalGemPrice, money);
       }
       
       if (successful) {
@@ -78,10 +87,14 @@ import com.lvl6.utils.RetrieveUtils;
       resEvent.setIncreaseMonsterInventorySlotResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
       
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
+      if (successful) {
+      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+      	resEventUpdate.setTag(event.getTag());
+      	server.writeEvent(resEventUpdate);
+      	
+      	writeToUserCurrencyHistory(aUser, date, money, previousGems, numSlots, gemPricePerSlot);
+      }
     } catch (Exception e) {
       log.error("exception in IncreaseMonsterInventorySlotController processEvent", e);
       //don't let the client hang
@@ -125,14 +138,35 @@ import com.lvl6.utils.RetrieveUtils;
   	return true;
   }
   
-  private boolean writeChangesToDb(User aUser, int numSlots, int cost) { 
+  private boolean writeChangesToDb(User aUser, int numSlots, int totalGemPrice,
+  		Map<String, Integer> money) {
+  	int cost = -1 * totalGemPrice;
   	boolean success = aUser.updateNumAdditionalMonsterSlotsAndDiamonds(
   			numSlots, cost);
-  	
   	if (!success) {
   		log.error("problem with updating user monster inventory slots and diamonds");
+  	} else {
+  		if (0 != cost) {
+  			money.put(MiscMethods.gems, cost);
+  		}
   	}
   	return success;
+  }
+  
+  private void writeToUserCurrencyHistory(User aUser, Timestamp date,
+  		Map<String, Integer> money, int previousGems, int numSlots, int pricePerSlot) {
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    String gems = MiscMethods.gems;
+    String reasonForChange = ControllerConstants.UCHRFC__INCREASE_MONSTER_INVENTORY +
+    		"numSlots=" + numSlots + " pricePerSlot=" + pricePerSlot;
+
+    previousGemsCash.put(gems, previousGems);
+    reasonsForChanges.put(gems, reasonForChange);
+    
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
+        previousGemsCash, reasonsForChanges);
+    
   }
   
 }

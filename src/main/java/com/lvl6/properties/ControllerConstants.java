@@ -262,6 +262,7 @@ public class ControllerConstants {
   //USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
   public static final String UCHRFC__ENHANCING = "enhancing: ";
   public static final String UCHRFC__HEAL_MONSTER = "healed userMonsters: ";
+  public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased monster inventory: ";
   public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing ";
   public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user_monster_ids: ";
   
