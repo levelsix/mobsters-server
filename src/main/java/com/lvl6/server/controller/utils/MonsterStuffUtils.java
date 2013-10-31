@@ -262,8 +262,8 @@ public class MonsterStuffUtils {
   	return returnList;
   }
   
-  //for given monster and num pieces, create as many of this monster as possible
-  //THE ID PROPERTY FOR ALL THESE monsterForUser will be a useless value, say 0
+  //for A GIVEN MONSTER and num pieces, create as many of this monster as possible
+  //THE ID PROPERTY FOR ALL these monsterForUser will be a useless value, say 0
   public static List<MonsterForUser> createMonsterForUserFromQuantity(int userId,
   		Monster monzter, int quantity, Date combineStartTime) {
   	List<MonsterForUser> returnList = new ArrayList<MonsterForUser>();
@@ -279,6 +279,12 @@ public class MonsterStuffUtils {
   	int currentHealth = monzter.getBaseHp();
   	int numPieces = 0;
   	boolean isComplete = false;
+  	
+  	//if the time it takes to combine a monster is 0 then the monster is complete
+  	if (monzter.getMinutesToCombinePieces() == 0) {
+  		isComplete = true;
+  	}
+  	
   	int teamSlotNum = 0;
   	String sourceOfPieces = "";
   	
@@ -326,7 +332,7 @@ public class MonsterStuffUtils {
   			.completeMonsterForUserFromMonsterIdsAndQuantities(
   					monsterIdsToIncompletes, monsterIdToNumPieces);
   	
-  	//update these incomplete monsters, if any SINCE UPDATING, UPDATE THE
+  	//UPDATE THESE INCOMPLETE MONSTERS, IF ANY. SINCE UPDATING, UPDATE THE
   	//combineStartTime
   	List<MonsterForUser> dirtyMonsterForUserList = 
   			new ArrayList<MonsterForUser>(monsterIdsToIncompletes.values());
@@ -338,7 +344,7 @@ public class MonsterStuffUtils {
   	
   	//monsterIdToRemainingPieces now contains all the new monsters
   	//the user will get. SET THE combineStartTime
-  	List<MonsterForUser> newMonsters = MonsterStuffUtils.createMonstersForUserFromQuantities(
+  	List<MonsterForUser> newMonsters = createMonstersForUserFromQuantities(
   			userId, monsterIdToRemainingPieces, combineStartDate);
   	if (!newMonsters.isEmpty()) {
   		log.info("the monsters that are new: " + newMonsters);
