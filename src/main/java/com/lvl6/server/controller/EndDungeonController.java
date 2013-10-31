@@ -76,8 +76,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-//      int previousSilver = 0;
-//      int previousGold = 0;
+      int previousCash = 0;
 
       List<TaskForUser> userTaskList = new ArrayList<TaskForUser>();
       TaskForUser ut = null;
@@ -85,14 +84,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 
       boolean successful = false;
+      Map<String, Integer> money = new HashMap<String, Integer>();
       List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
       if(legit) {
     	  ut = userTaskList.get(0);
-//        previousSilver = aUser.getCoins() + aUser.getVaultBalance();
-//        previousGold = aUser.getDiamonds();
+        previousCash = aUser.getCash();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
-    			  protos);
-//        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
+    			  money, protos);
       }
       if (successful) {
       	long taskForUserId = ut.getId(); 
@@ -117,13 +115,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       resEvent.setEndDungeonResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
-      
       if (successful) {
-      	//update quests
+      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+      	resEventUpdate.setTag(event.getTag());
+      	server.writeEvent(resEventUpdate);
+      	int taskId = ut.getTaskId();
+      	writeToUserCurrencyHistory(aUser, money, curTime, previousCash, userTaskId, taskId);
       }
       
     } catch (Exception e) {
@@ -166,17 +164,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
 
   private boolean writeChangesToDb(User u, int uId, TaskForUser ut, boolean userWon,
-		  Timestamp clientTime, List<FullUserMonsterProto> protos) {
-	  int silverGained = ut.getSilverGained();
+		  Timestamp clientTime, Map<String, Integer> money, List<FullUserMonsterProto> protos) {
+	  int cashGained = ut.getCashGained();
 	  int expGained = ut.getExpGained();
 	  
 	  if (userWon) {
-		  //insert the equips into user_equip
-//		  meteEquips(uId, clientTime, ut, protos);
-		  
-		  //update user silver and experience
-		  if (!updateUser(u, silverGained, expGained, clientTime)) {
+		  //update user cash and experience
+		  if (!updateUser(u, cashGained, expGained, clientTime)) {
 			  return false;
+		  } else {
+		  	if (0 != cashGained) {
+		  		money.put(MiscMethods.cash, cashGained);
+		  	}
 		  }
 	  }
 	  
@@ -189,11 +188,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  long startMillis = startDate.getTime();
 	  Timestamp startTime = new Timestamp(startMillis);
 	  int num = InsertUtils.get().insertIntoTaskHistory(utId,uId, tId,
-			  expGained, silverGained, numRevives, startTime, clientTime, userWon);
+			  expGained, cashGained, numRevives, startTime, clientTime, userWon);
 	  if (1 != num) {
 		  log.error("unexpected error: error when inserting into user_task_history. " +
 		  		"numInserted=" + num + " Attempting to undo shi");
-		  updateUser(u, -1* silverGained, -1 * expGained, clientTime);
+		  updateUser(u, -1* cashGained, -1 * expGained, clientTime);
 		  return false;
 	  }
 	  
@@ -204,14 +203,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  return true;
   }
   
-  private boolean updateUser(User u, int silverGained, int expGained,
+  private boolean updateUser(User u, int cashGained, int expGained,
 		  Timestamp clientTime) {
 	  int energyChange = 0;
 	  boolean simulateEnergyRefill = false;
-	  if (!u.updateRelativeCoinsExpTaskscompleted(silverGained,
+	  if (!u.updateRelativeCoinsExpTaskscompleted(cashGained,
 	  		expGained, 1, clientTime)) {
-		  log.error("problem with updating user stats post-task. silverGained="
-				  + silverGained + ", expGained=" + expGained + ", increased" +
+		  log.error("problem with updating user stats post-task. cashGained="
+				  + cashGained + ", expGained=" + expGained + ", increased" +
 				  " tasks completed by 1, energyChange=" + energyChange +
 				  ", clientTime=" + clientTime + ", simulateEnergyRefill=" +
 				  simulateEnergyRefill + ", user=" + u);
@@ -233,7 +232,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Integer> stageNum = new ArrayList<Integer>();
   	List<Integer> taskStageMonsterIdList = new ArrayList<Integer>();
   	List<Integer> expGained = new ArrayList<Integer>();
-  	List<Integer> silverGained = new ArrayList<Integer>();
+  	List<Integer> cashGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
   	
   	for (int i = 0; i < tsfuList.size(); i++) {
@@ -245,7 +244,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		int taskStageMonsterId = tsfu.getTaskStageMonsterId();
   		taskStageMonsterIdList.add(taskStageMonsterId);
   		expGained.add(tsfu.getExpGained());
-  		silverGained.add(tsfu.getSilverGained());
+  		cashGained.add(tsfu.getCashGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
   		
@@ -267,7 +266,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
-  			userTaskId, stageNum, taskStageMonsterIdList, expGained, silverGained,
+  			userTaskId, stageNum, taskStageMonsterIdList, expGained, cashGained,
   			monsterPieceDropped);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);
@@ -311,16 +310,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousCash, int previousGems) {
+      int previousCash, long userTaskId, int taskId) {
     Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-    String gems = MiscMethods.gems;
+    String reasonForChange = ControllerConstants.UCHRFC__END_TASK +
+    		"userTask=" + userTaskId + " taskId=" + taskId;
     String cash = MiscMethods.cash;
 
-    previousGemsCash.put(gems, previousGems);
     previousGemsCash.put(cash, previousCash);
-    reasonsForChanges.put(gems, reasonForChange);
     reasonsForChanges.put(cash, reasonForChange);
 
     MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 

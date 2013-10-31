@@ -4,24 +4,24 @@ import java.io.Serializable;
 
 public class TaskStageForUser implements Serializable {
 
-	private static final long serialVersionUID = 5794056622341011286L;
+	private static final long serialVersionUID = -8056132207020136517L;
 	private long id;
 	private long userTaskId;
 	private int stageNum;
 	public int taskStageMonsterId;
 	public int expGained;
-	public int silverGained;
+	public int cashGained;
 	public boolean monsterPieceDropped;
 	
 	public TaskStageForUser(long id, long userTaskId, int stageNum, int taskStageMonsterId,
-			int expGained, int silverGained, boolean monsterPieceDropped) {
+			int expGained, int cashGained, boolean monsterPieceDropped) {
 		super();
 		this.id = id;
 		this.userTaskId = userTaskId;
 		this.stageNum = stageNum;
 		this.taskStageMonsterId = taskStageMonsterId;
 		this.expGained = expGained;
-		this.silverGained = silverGained;
+		this.cashGained = cashGained;
 		this.monsterPieceDropped = monsterPieceDropped;
 	}
 
@@ -65,12 +65,12 @@ public class TaskStageForUser implements Serializable {
 		this.expGained = expGained;
 	}
 
-	public int getSilverGained() {
-		return silverGained;
+	public int getCashGained() {
+		return cashGained;
 	}
 
-	public void setSilverGained(int silverGained) {
-		this.silverGained = silverGained;
+	public void setCashGained(int cashGained) {
+		this.cashGained = cashGained;
 	}
 
 	public boolean isMonsterPieceDropped() {
@@ -85,7 +85,7 @@ public class TaskStageForUser implements Serializable {
 	public String toString() {
 		return "TaskStageForUser [id=" + id + ", userTaskId=" + userTaskId
 				+ ", stageNum=" + stageNum + ", taskStageMonsterId=" + taskStageMonsterId
-				+ ", expGained=" + expGained + ", silverGained=" + silverGained
+				+ ", expGained=" + expGained + ", cashGained=" + cashGained
 				+ ", monsterPieceDropped=" + monsterPieceDropped + "]";
 	}
 

@@ -328,7 +328,6 @@ public class MonsterStuffUtils {
   	//update these incomplete monsters, if any
   	List<MonsterForUser> dirtyMonsterForUserList = 
   			new ArrayList<MonsterForUser>(monsterIdsToIncompletes.values());
-  	
   	if (!dirtyMonsterForUserList.isEmpty()) {
   		log.info("the monsters that are updated: " + dirtyMonsterForUserList);
   		UpdateUtils.get().updateUserMonsterNumPieces(userId, dirtyMonsterForUserList,

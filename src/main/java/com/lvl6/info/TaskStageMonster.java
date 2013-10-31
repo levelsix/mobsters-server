@@ -7,14 +7,15 @@ import com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType;
 
 public class TaskStageMonster implements Serializable {
 
-	private static final long serialVersionUID = 6187452147997498630L;
-  private int id;
+	
+	private static final long serialVersionUID = -5605457666674487478L;
+	private int id;
 	private int stageId;
   private int monsterId;
   private MonsterType monsterType;
   private int expReward;
-  private int minSilverDrop;
-  private int maxSilverDrop;
+  private int minCashDrop;
+  private int maxCashDrop;
   private float puzzlePieceDropRate;
   private int level;
   private float chanceToAppear;
@@ -22,8 +23,8 @@ public class TaskStageMonster implements Serializable {
   private Random rand;
 
   public TaskStageMonster(int id, int stageId, int monsterId,
-      MonsterType monsterType, int expReward, int minSilverDrop,
-      int maxSilverDrop, float puzzlePieceDropRate, int level,
+      MonsterType monsterType, int expReward, int minCashDrop,
+      int maxCashDrop, float puzzlePieceDropRate, int level,
       float chanceToAppear) {
     super();
     this.id = id;
@@ -31,8 +32,8 @@ public class TaskStageMonster implements Serializable {
     this.monsterId = monsterId;
     this.monsterType = monsterType;
     this.expReward = expReward;
-    this.minSilverDrop = minSilverDrop;
-    this.maxSilverDrop = maxSilverDrop;
+    this.minCashDrop = minCashDrop;
+    this.maxCashDrop = maxCashDrop;
     this.puzzlePieceDropRate = puzzlePieceDropRate;
     this.level = level;
     this.chanceToAppear = chanceToAppear;
@@ -62,17 +63,17 @@ public class TaskStageMonster implements Serializable {
     this.rand = rand;
   }
   
-  public int getSilverDrop() {
+  public int getCashDrop() {
     //example goal: [min,max]=[5, 10], transform range to start at 0.
     //[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
     //this means there are (10-5)+1 possible numbers
     
-    int minMaxDiff = getMaxSilverDrop() - getMinSilverDrop();
-    int randSilver = rand.nextInt(minMaxDiff + 1); 
+    int minMaxDiff = getMaxCashDrop() - getMinCashDrop();
+    int randCash = rand.nextInt(minMaxDiff + 1); 
 
     //number generated in [0, max-min] range, but need to transform
     //back to original range [min, max]. so add min. [0+min, max-min+min]
-    return randSilver + getMinSilverDrop();
+    return randCash + getMinCashDrop();
   }
 
   public boolean didPuzzlePieceDrop() {
@@ -125,20 +126,20 @@ public class TaskStageMonster implements Serializable {
     this.expReward = expReward;
   }
 
-  public int getMinSilverDrop() {
-    return minSilverDrop;
+  public int getMinCashDrop() {
+    return minCashDrop;
   }
 
-  public void setMinSilverDrop(int minSilverDrop) {
-    this.minSilverDrop = minSilverDrop;
+  public void setMinCashDrop(int minCashDrop) {
+    this.minCashDrop = minCashDrop;
   }
 
-  public int getMaxSilverDrop() {
-    return maxSilverDrop;
+  public int getMaxCashDrop() {
+    return maxCashDrop;
   }
 
-  public void setMaxSilverDrop(int maxSilverDrop) {
-    this.maxSilverDrop = maxSilverDrop;
+  public void setMaxCashDrop(int maxCashDrop) {
+    this.maxCashDrop = maxCashDrop;
   }
 
   public float getPuzzlePieceDropRate() {
@@ -153,8 +154,8 @@ public class TaskStageMonster implements Serializable {
   public String toString() {
     return "TaskStageMonster [stageId=" + stageId + ", monsterId=" + monsterId
         + ", monsterType=" + monsterType + ", expReward=" + expReward
-        + ", minSilverDrop=" + minSilverDrop + ", maxSilverDrop="
-        + maxSilverDrop + ", puzzlePieceDropRate=" + puzzlePieceDropRate + "]";
+        + ", minCashDrop=" + minCashDrop + ", maxCashDrop="
+        + maxCashDrop + ", puzzlePieceDropRate=" + puzzlePieceDropRate + "]";
   }
 
 }

@@ -1726,9 +1726,9 @@ public final class TaskProto {
     boolean hasExpReward();
     int getExpReward();
     
-    // optional int32 silverReward = 4;
-    boolean hasSilverReward();
-    int getSilverReward();
+    // optional int32 cashReward = 4;
+    boolean hasCashReward();
+    int getCashReward();
     
     // optional bool puzzlePieceDropped = 5;
     boolean hasPuzzlePieceDropped();
@@ -1869,14 +1869,14 @@ public final class TaskProto {
       return expReward_;
     }
     
-    // optional int32 silverReward = 4;
-    public static final int SILVERREWARD_FIELD_NUMBER = 4;
-    private int silverReward_;
-    public boolean hasSilverReward() {
+    // optional int32 cashReward = 4;
+    public static final int CASHREWARD_FIELD_NUMBER = 4;
+    private int cashReward_;
+    public boolean hasCashReward() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public int getSilverReward() {
-      return silverReward_;
+    public int getCashReward() {
+      return cashReward_;
     }
     
     // optional bool puzzlePieceDropped = 5;
@@ -1903,7 +1903,7 @@ public final class TaskProto {
       monsterId_ = 0;
       monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
       expReward_ = 0;
-      silverReward_ = 0;
+      cashReward_ = 0;
       puzzlePieceDropped_ = false;
       level_ = 0;
     }
@@ -1929,7 +1929,7 @@ public final class TaskProto {
         output.writeInt32(3, expReward_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, silverReward_);
+        output.writeInt32(4, cashReward_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBool(5, puzzlePieceDropped_);
@@ -1960,7 +1960,7 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, silverReward_);
+          .computeInt32Size(4, cashReward_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2100,7 +2100,7 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         expReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        silverReward_ = 0;
+        cashReward_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
         puzzlePieceDropped_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -2159,7 +2159,7 @@ public final class TaskProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.silverReward_ = silverReward_;
+        result.cashReward_ = cashReward_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
@@ -2193,8 +2193,8 @@ public final class TaskProto {
         if (other.hasExpReward()) {
           setExpReward(other.getExpReward());
         }
-        if (other.hasSilverReward()) {
-          setSilverReward(other.getSilverReward());
+        if (other.hasCashReward()) {
+          setCashReward(other.getCashReward());
         }
         if (other.hasPuzzlePieceDropped()) {
           setPuzzlePieceDropped(other.getPuzzlePieceDropped());
@@ -2256,7 +2256,7 @@ public final class TaskProto {
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              silverReward_ = input.readInt32();
+              cashReward_ = input.readInt32();
               break;
             }
             case 40: {
@@ -2341,23 +2341,23 @@ public final class TaskProto {
         return this;
       }
       
-      // optional int32 silverReward = 4;
-      private int silverReward_ ;
-      public boolean hasSilverReward() {
+      // optional int32 cashReward = 4;
+      private int cashReward_ ;
+      public boolean hasCashReward() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public int getSilverReward() {
-        return silverReward_;
+      public int getCashReward() {
+        return cashReward_;
       }
-      public Builder setSilverReward(int value) {
+      public Builder setCashReward(int value) {
         bitField0_ |= 0x00000008;
-        silverReward_ = value;
+        cashReward_ = value;
         onChanged();
         return this;
       }
-      public Builder clearSilverReward() {
+      public Builder clearCashReward() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        silverReward_ = 0;
+        cashReward_ = 0;
         onChanged();
         return this;
       }
@@ -2452,14 +2452,14 @@ public final class TaskProto {
       "ription\030\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetNu" +
       "mWithinCity\030\005 \001(\005\"M\n\024MinimumUserTaskProt" +
       "o\022\016\n\006userId\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\025\n\rnum" +
-      "TimesActed\030\003 \001(\005\"\373\001\n\025TaskStageMonsterPro" +
+      "TimesActed\030\003 \001(\005\"\371\001\n\025TaskStageMonsterPro" +
       "to\022\021\n\tmonsterId\030\001 \001(\005\022F\n\013monsterType\030\002 \001",
       "(\01621.com.lvl6.proto.TaskStageMonsterProt" +
-      "o.MonsterType\022\021\n\texpReward\030\003 \001(\005\022\024\n\014silv" +
-      "erReward\030\004 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001" +
-      "(\010\022\r\n\005level\030\006 \001(\005\"3\n\013MonsterType\022\013\n\007REGU" +
-      "LAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003B\013B\tTaskPr" +
-      "oto"
+      "o.MonsterType\022\021\n\texpReward\030\003 \001(\005\022\022\n\ncash" +
+      "Reward\030\004 \001(\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010" +
+      "\022\r\n\005level\030\006 \001(\005\"3\n\013MonsterType\022\013\n\007REGULA" +
+      "R\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003B\013B\tTaskProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2495,7 +2495,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "MonsterType", "ExpReward", "SilverReward", "PuzzlePieceDropped", "Level", },
+              new java.lang.String[] { "MonsterId", "MonsterType", "ExpReward", "CashReward", "PuzzlePieceDropped", "Level", },
               com.lvl6.proto.TaskProto.TaskStageMonsterProto.class,
               com.lvl6.proto.TaskProto.TaskStageMonsterProto.Builder.class);
           return null;

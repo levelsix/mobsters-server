@@ -26,7 +26,6 @@ import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus;
@@ -83,8 +82,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Task aTask = TaskRetrieveUtils.getTaskForTaskId(taskId);
-//      int previousSilver = 0;
-//      int previousGold = 0;
 
       //userBossList should be populated if successful
       Map<Integer, TaskStage> tsMap = new HashMap<Integer, TaskStage>();
@@ -96,13 +93,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       boolean successful = false;
       if(legit) {
     	  
-//        previousSilver = aUser.getCoins() + aUser.getVaultBalance();
-//        previousGold = aUser.getDiamonds();
       	//determine the specifics for each stage (stored in stageNumsToProtos)
       	//then record specifics in db
     	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap, curTime,
     			  userTaskIdList, stageNumsToProtos);
-//        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
     	  setResponseBuilder(resBuilder, userTaskIdList, stageNumsToProtos);
@@ -174,7 +168,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	int userId = aTaskForUser.getUserId();
   	int taskId = aTaskForUser.getTaskId();
   	int expGained = aTaskForUser.getExpGained();
-  	int silverGained = aTaskForUser.getSilverGained();
+  	int cashGained = aTaskForUser.getCashGained();
   	int numRevives = aTaskForUser.getNumRevives();
   	Date aDate = aTaskForUser.getStartDate(); //shouldn't null
   	Timestamp startTime = null;
@@ -189,7 +183,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			"\t (should be 1) numDeleted=" + num);
   	//meh, fogedaboudit 
     InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId, taskId,
-    		expGained, silverGained, numRevives, startTime, endTime, userWon);
+    		expGained, cashGained, numRevives, startTime, endTime, userWon);
   }
   
   private void deleteExistingTaskStagesForUser(long taskForUserId) {
@@ -201,7 +195,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Integer> stageNum = new ArrayList<Integer>();
   	List<Integer> taskStageMonsterIdList = new ArrayList<Integer>();
   	List<Integer> expGained = new ArrayList<Integer>();
-  	List<Integer> silverGained = new ArrayList<Integer>();
+  	List<Integer> cashGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
 
   	for (int i = 0; i < taskStages.size(); i++) {
@@ -213,7 +207,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		int monsterId = tsfu.getTaskStageMonsterId();
   		taskStageMonsterIdList.add(monsterId);
   		expGained.add(tsfu.getExpGained());
-  		silverGained.add(tsfu.getSilverGained());
+  		cashGained.add(tsfu.getCashGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
 
@@ -224,7 +218,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			"taskStageForUser=" + taskStages);
 
   	InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
-  			userTaskId, stageNum, taskStageMonsterIdList, expGained, silverGained,
+  			userTaskId, stageNum, taskStageMonsterIdList, expGained, cashGained,
   			monsterPieceDropped);
   }
   
@@ -245,12 +239,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
 	  //calculate the exp that the user could gain for this task
 	  int expGained = MiscMethods.sumListsInMap(stageNumsToExps);
-	  //calculate the silver that the user could gain for this task
-	  int silverGained = MiscMethods.sumListsInMap(stageNumsToSilvers);
+	  //calculate the cash that the user could gain for this task
+	  int cashGained = MiscMethods.sumListsInMap(stageNumsToSilvers);
 	  
 	  
 	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
-		  log.error("problem with updating user stats post-task. silverGained="
+		  log.error("problem with updating user stats post-task. cashGained="
 				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
 				  ", clientTime=" + clientTime + ", user=" + u);
 		  return false;
@@ -258,7 +252,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	  //record into user_task table	  
 	  long userTaskId = InsertUtils.get().insertIntoUserTaskReturnId(uId, tId,
-			  expGained, silverGained, clientTime);
+			  expGained, cashGained, clientTime);
 	  
 	  //record into user_task stage table
 	  recordStages(userTaskId, stageNumsToSilvers, stageNumsToExps,
@@ -298,7 +292,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  
 		  
 		  /*Code below is done such that if more than one monster is generated
-		    above, then user has potential to get the silver and exp from all
+		    above, then user has potential to get the cash and exp from all
 		    the monsters including the one above.*/
 		  
 		  //randomly select a reward, IF ANY, that this monster can drop;
@@ -396,8 +390,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Integer> individualSilvers = new ArrayList<Integer>();
   	
 	  for (TaskStageMonster tsm : taskStageMonsters) {
-		  int silverDrop = tsm.getSilverDrop(); 
-		  individualSilvers.add(silverDrop);
+		  int cashDrop = tsm.getCashDrop(); 
+		  individualSilvers.add(cashDrop);
 	  }
 	  return individualSilvers;
   }
@@ -423,7 +417,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	int stageNum = stageNumList.get(i);
 	  	List<TaskStageMonster> taskStageMonsters = stageNumsToTaskStageMonsters.get(stageNum);
 	  	List<Integer> expsGained = stageNumsToExps.get(stageNum);
-	  	List<Integer> silverGained = stageNumsToSilvers.get(stageNum);
+	  	List<Integer> cashGained = stageNumsToSilvers.get(stageNum);
 	  	List<Boolean> monsterPiecesDropped = stageNumsToPuzzlePiecesDropped.get(stageNum);
 	  	
 	  	int numStageRows = taskStageMonsters.size();
@@ -436,9 +430,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
 	  	
 	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds,
-	  			repeatedStageNum, taskStageMonsterIds, expsGained, silverGained,
+	  			repeatedStageNum, taskStageMonsterIds, expsGained, cashGained,
 	  			monsterPiecesDropped);
-	  	//log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
+	  	log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
 	  }
   }
   
@@ -461,21 +455,4 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  }
   }
   
-  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousCash, int previousGems) {
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-    String gems = MiscMethods.gems;
-    String cash = MiscMethods.cash;
-
-    previousGemsCash.put(gems, previousGems);
-    previousGemsCash.put(cash, previousCash);
-    reasonsForChanges.put(gems, reasonForChange);
-    reasonsForChanges.put(cash, reasonForChange);
-
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGemsCash, reasonsForChanges);
-
-  }
 }

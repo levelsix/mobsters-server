@@ -5,23 +5,23 @@ import java.util.Date;
 
 public class TaskForUser implements Serializable {
 
-	private static final long serialVersionUID = -3612315843594872687L;
+	private static final long serialVersionUID = 6600851145460221996L;
 	private long id;
 	private int userId;
 	private int taskId;
 	public int expGained;
-	public int silverGained;
+	public int cashGained;
 	public int numRevives;
 	private Date startDate;
 	
 	public TaskForUser(long id, int userId, int taskId, int expGained,
-			int silverGained, int numRevives, Date startDate) {
+			int cashGained, int numRevives, Date startDate) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.taskId = taskId;
 		this.expGained = expGained;
-		this.silverGained = silverGained;
+		this.cashGained = cashGained;
 		this.numRevives = numRevives;
 		this.startDate = startDate;
 	}
@@ -58,12 +58,12 @@ public class TaskForUser implements Serializable {
 		this.expGained = expGained;
 	}
 
-	public int getSilverGained() {
-		return silverGained;
+	public int getCashGained() {
+		return cashGained;
 	}
 
-	public void setSilverGained(int silverGained) {
-		this.silverGained = silverGained;
+	public void setCashGained(int cashGained) {
+		this.cashGained = cashGained;
 	}
 
 	public int getNumRevives() {
@@ -85,8 +85,8 @@ public class TaskForUser implements Serializable {
 	@Override
 	public String toString() {
 		return "TaskForUser [id=" + id + ", userId=" + userId + ", taskId="
-				+ taskId + ", expGained=" + expGained + ", silverGained="
-				+ silverGained + ", numRevives=" + numRevives + ", startDate="
+				+ taskId + ", expGained=" + expGained + ", cashGained="
+				+ cashGained + ", numRevives=" + numRevives + ", startDate="
 				+ startDate + "]";
 	}
 	

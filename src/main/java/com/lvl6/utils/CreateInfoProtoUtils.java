@@ -805,11 +805,11 @@ public class CreateInfoProtoUtils {
   }
   
   public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
-      int silverReward, boolean pieceDropped) {
+      int cashReward, boolean pieceDropped) {
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
     bldr.setMonsterId(tsm.getMonsterId());
     bldr.setMonsterType(tsm.getMonsterType());
-    bldr.setSilverReward(silverReward);
+    bldr.setCashReward(cashReward);
     bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());

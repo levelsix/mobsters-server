@@ -78,7 +78,7 @@ import com.lvl6.utils.DBConnection;
     int taskId = rs.getInt(i++);
     
     int expGained = rs.getInt(i++);
-    int silverGained = rs.getInt(i++);
+    int cashGained = rs.getInt(i++);
     int numRevives = rs.getInt(i++);
     
     Date startDate = null;
@@ -91,7 +91,7 @@ import com.lvl6.utils.DBConnection;
     	log.error("db error: start_date is null. userId=" + userId, e);
     }
     
-    return new TaskForUser(id, userId, taskId, expGained, silverGained,
+    return new TaskForUser(id, userId, taskId, expGained, cashGained,
     		numRevives, startDate);
   }
 }
