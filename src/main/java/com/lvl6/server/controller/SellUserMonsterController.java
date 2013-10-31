@@ -78,7 +78,7 @@ public class SellUserMonsterController extends EventController {
 
 		server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
 		try {
-			int previousSilver = 0;
+			int previousCash = 0;
 
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 			Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
@@ -90,7 +90,7 @@ public class SellUserMonsterController extends EventController {
 
 			boolean successful = false;
 			if (legit) {
-				previousSilver = aUser.getCash();
+				previousCash = aUser.getCash();
 				successful = writeChangesToDb(aUser, userMonsterIds,
 						userMonsterIdsToCashAmounts);
 			}
@@ -114,7 +114,7 @@ public class SellUserMonsterController extends EventController {
 				writeChangesToHistory(userId, userMonsterIds,
 						userMonsterIdsToCashAmounts, idsToUserMonsters, deleteDate);
 				// WRITE TO USER CURRENCY HISTORY
-				writeToUserCurrencyHistory(aUser, previousSilver, deleteDate,
+				writeToUserCurrencyHistory(aUser, previousCash, deleteDate,
 						userMonsterIdsToCashAmounts, userMonsterIds);
 			}
 		} catch (Exception e) {
@@ -224,7 +224,7 @@ public class SellUserMonsterController extends EventController {
 	}
 
 	// FOR CURRENCY HISTORY PURPOSES
-	public void writeToUserCurrencyHistory(User aUser, int previousSilver,
+	public void writeToUserCurrencyHistory(User aUser, int previousCash,
 			Date aDate, Map<Long, Integer> userMonsterIdsToCashAmounts,
 			List<Long> userMonsterIds) {
 
@@ -233,21 +233,21 @@ public class SellUserMonsterController extends EventController {
 		int sum = MiscMethods.sumMapValues(userMonsterIdsToCashAmounts);
 		Timestamp date = new Timestamp(aDate.getTime());
 
-		Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
-		Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+		Map<String, Integer> gemCashChange = new HashMap<String, Integer>();
+		Map<String, Integer> previousGemCash = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		String silver = MiscMethods.cash;
+		String cash = MiscMethods.cash;
 
 		// record the user monster ids that contributed to changing user's currency
 		String reasonForChange = ControllerConstants.UCHRFC__SOLD_USER_MONSTERS
 				+ StringUtils.csvList(userMonsterIds);
 
-		goldSilverChange.put(silver, sum);
-		previousGoldSilver.put(silver, previousSilver);
-		reasonsForChanges.put(silver, reasonForChange);
+		gemCashChange.put(cash, sum);
+		previousGemCash.put(cash, previousCash);
+		reasonsForChanges.put(cash, reasonForChange);
 
 		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
-				goldSilverChange, previousGoldSilver, reasonsForChanges);
+				gemCashChange, previousGemCash, reasonsForChanges);
 	}
 
 }
