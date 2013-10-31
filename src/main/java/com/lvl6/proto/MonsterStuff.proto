@@ -58,8 +58,9 @@ message FullUserMonsterProto {
 	optional int32 currentHealth = 6;
 	optional int32 numPieces = 7;
 	optional bool isComplete = 8; 
-	optional int32 teamSlotNum = 9;
-	//optional string sourceOfPieces = 10;	//not needed for client
+	optional int64 combineStartTime = 9;
+	optional int32 teamSlotNum = 10;
+	//optional string sourceOfPieces = 11;	//not needed for client
 }
 //------------------------------------------------------------------------------------------
 

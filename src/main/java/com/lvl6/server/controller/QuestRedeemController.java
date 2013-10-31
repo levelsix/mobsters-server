@@ -60,8 +60,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     int questId = reqProto.getQuestId();
-
-    Timestamp now = new Timestamp((new Date()).getTime());
+    Date currentDate = new Date();
+    Timestamp now = new Timestamp(currentDate.getTime());
     
     QuestRedeemResponseProto.Builder resBuilder = QuestRedeemResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -80,7 +80,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	setAvailableQuests(userId, questId, resBuilder);
         
         //give user the monster reward, if any, and send this to the client
-      	legitRedeem = awardMonsterReward(resBuilder, userId, quest, questId);
+      	legitRedeem = awardMonsterReward(resBuilder, userId, quest, questId, currentDate);
       }
       
       QuestRedeemResponseEvent resEvent = new QuestRedeemResponseEvent(senderProto.getUserId());
@@ -160,7 +160,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private boolean awardMonsterReward(Builder resBuilder, int userId,
-  		Quest quest, int questId) {
+  		Quest quest, int questId, Date combineStartDate) {
   	boolean legitRedeem = true;
   	
   	int monsterIdReward = quest.getMonsterIdReward();
@@ -171,7 +171,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     	String mfusop = ControllerConstants.MFUSOP__QUEST + questId;
     	List<FullUserMonsterProto> reward = MonsterStuffUtils
-    			.updateUserMonsters(userId, monsterIdToNumPieces, mfusop);
+    			.updateUserMonsters(userId, monsterIdToNumPieces, mfusop, combineStartDate);
     	
       if (reward.isEmpty()) {
         resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);

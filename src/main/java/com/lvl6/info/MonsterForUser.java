@@ -1,10 +1,11 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class MonsterForUser implements Serializable {
 
-	private static final long serialVersionUID = -7419598476885376853L;
+	private static final long serialVersionUID = -6261386860780660263L;
 	private long id;
 	private int userId;
 	private int monsterId;
@@ -13,12 +14,13 @@ public class MonsterForUser implements Serializable {
   private int currentHealth;
   private int numPieces;
   private boolean isComplete;
+  private Date combineStartTime;
   private int teamSlotNum;
   private String sourceOfPieces;
   
 	public MonsterForUser(long id, int userId, int monsterId, int currentExp,
 			int currentLvl, int currentHealth, int numPieces, boolean isComplete,
-			int teamSlotNum, String sourceOfPieces) {
+			Date combineStartTime, int teamSlotNum, String sourceOfPieces) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -28,6 +30,7 @@ public class MonsterForUser implements Serializable {
 		this.currentHealth = currentHealth;
 		this.numPieces = numPieces;
 		this.isComplete = isComplete;
+		this.combineStartTime = combineStartTime;
 		this.teamSlotNum = teamSlotNum;
 		this.sourceOfPieces = sourceOfPieces;
 	}
@@ -96,6 +99,14 @@ public class MonsterForUser implements Serializable {
 		this.isComplete = isComplete;
 	}
 
+	public Date getCombineStartTime() {
+		return combineStartTime;
+	}
+
+	public void setCombineStartTime(Date combineStartTime) {
+		this.combineStartTime = combineStartTime;
+	}
+
 	public int getTeamSlotNum() {
 		return teamSlotNum;
 	}
@@ -117,8 +128,9 @@ public class MonsterForUser implements Serializable {
 		return "MonsterForUser [id=" + id + ", userId=" + userId + ", monsterId="
 				+ monsterId + ", currentExp=" + currentExp + ", currentLvl="
 				+ currentLvl + ", currentHealth=" + currentHealth + ", numPieces="
-				+ numPieces + ", isComplete=" + isComplete + ", teamSlotNum="
-				+ teamSlotNum + ", sourceOfPieces=" + sourceOfPieces + "]";
+				+ numPieces + ", isComplete=" + isComplete + ", combineStartTime="
+				+ combineStartTime + ", teamSlotNum=" + teamSlotNum
+				+ ", sourceOfPieces=" + sourceOfPieces + "]";
 	}
-	
+  
 }

@@ -2,6 +2,7 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -161,7 +162,8 @@ public interface UpdateUtil {
   public abstract int updateUserMonsterExpAndLvl(long l, int newExp, int newLvl);
 
   public abstract int updateUserMonsterNumPieces(int userId,
-  		Collection<MonsterForUser> monsterForUserList, String updateReason);
+  		Collection<MonsterForUser> monsterForUserList, String updateReason,
+  		Date combineStartTime);
   
   public abstract int updateCompleteUserMonster(List<Long> userMonsterIds);
   

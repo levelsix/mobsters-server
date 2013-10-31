@@ -243,6 +243,7 @@ public class DBConstants {
   public static final String MONSTER_FOR_USER__CURRENT_HEALTH = "current_health";
   public static final String MONSTER_FOR_USER__NUM_PIECES = "num_pieces";
   public static final String MONSTER_FOR_USER__IS_COMPLETE = "is_complete";
+  public static final String MONSTER_FOR_USER__COMBINE_START_TIME = "combine_start_time";
   public static final String MONSTER_FOR_USER__TEAM_SLOT_NUM = "team_slot_num";
   public static final String MONSTER_FOR_USER__SOURCE_OF_PIECES = "source_of_pieces";
   

@@ -66,6 +66,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     int userId = senderProto.getUserId();
     long userTaskId = reqProto.getUserTaskId();
     boolean userWon = reqProto.getUserWon();
+    Date currentDate = new Date(reqProto.getClientTime());
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
 
     //set some values to send to the client (the response proto)
@@ -105,7 +106,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	//update user's monsters
       	String mfusop = ControllerConstants.MFUSOP__END_DUNGEON + taskForUserId;
       	List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
-      			updateUserMonsters(userId, monsterIdToNumPieces, mfusop);
+      			updateUserMonsters(userId, monsterIdToNumPieces, mfusop, currentDate);
 
     	  setResponseBuilder(resBuilder, newOrUpdated);
       }

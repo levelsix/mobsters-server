@@ -3,9 +3,11 @@ package com.lvl6.retrieveutils;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -245,12 +247,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int currentHealth = rs.getInt(i++);
     int numPieces = rs.getInt(i++);
     boolean isComplete = rs.getBoolean(i++);
+    
+    Date combineStartTime = null;
+    try {
+    	Timestamp ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		combineStartTime = new Date(ts.getTime());
+    	}
+    } catch(Exception e) {
+    	log.error("maybe combineStartTime is null for monsterForUserId=" + id +
+    			" userId=" + userId, e);
+    }
     int teamSlotNum = rs.getInt(i++);
     String sourceOfPieces = rs.getString(i++);
     
     MonsterForUser userMonster = new MonsterForUser(id, userId, monsterId,
     		currentExp, currentLvl, currentHealth, numPieces, isComplete,
-    		teamSlotNum, sourceOfPieces);
+    		combineStartTime, teamSlotNum, sourceOfPieces);
     return userMonster;
   }
 

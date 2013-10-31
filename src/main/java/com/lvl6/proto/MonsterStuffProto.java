@@ -2162,7 +2162,11 @@ public final class MonsterStuffProto {
     boolean hasIsComplete();
     boolean getIsComplete();
     
-    // optional int32 teamSlotNum = 9;
+    // optional int64 combineStartTime = 9;
+    boolean hasCombineStartTime();
+    long getCombineStartTime();
+    
+    // optional int32 teamSlotNum = 10;
     boolean hasTeamSlotNum();
     int getTeamSlotNum();
   }
@@ -2275,11 +2279,21 @@ public final class MonsterStuffProto {
       return isComplete_;
     }
     
-    // optional int32 teamSlotNum = 9;
-    public static final int TEAMSLOTNUM_FIELD_NUMBER = 9;
+    // optional int64 combineStartTime = 9;
+    public static final int COMBINESTARTTIME_FIELD_NUMBER = 9;
+    private long combineStartTime_;
+    public boolean hasCombineStartTime() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public long getCombineStartTime() {
+      return combineStartTime_;
+    }
+    
+    // optional int32 teamSlotNum = 10;
+    public static final int TEAMSLOTNUM_FIELD_NUMBER = 10;
     private int teamSlotNum_;
     public boolean hasTeamSlotNum() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     public int getTeamSlotNum() {
       return teamSlotNum_;
@@ -2294,6 +2308,7 @@ public final class MonsterStuffProto {
       currentHealth_ = 0;
       numPieces_ = 0;
       isComplete_ = false;
+      combineStartTime_ = 0L;
       teamSlotNum_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -2333,7 +2348,10 @@ public final class MonsterStuffProto {
         output.writeBool(8, isComplete_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(9, teamSlotNum_);
+        output.writeInt64(9, combineStartTime_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, teamSlotNum_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2378,7 +2396,11 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, teamSlotNum_);
+          .computeInt64Size(9, combineStartTime_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, teamSlotNum_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2520,8 +2542,10 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         isComplete_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
-        teamSlotNum_ = 0;
+        combineStartTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000100);
+        teamSlotNum_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
       
@@ -2595,6 +2619,10 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
+        result.combineStartTime_ = combineStartTime_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
         result.teamSlotNum_ = teamSlotNum_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -2635,6 +2663,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasIsComplete()) {
           setIsComplete(other.getIsComplete());
+        }
+        if (other.hasCombineStartTime()) {
+          setCombineStartTime(other.getCombineStartTime());
         }
         if (other.hasTeamSlotNum()) {
           setTeamSlotNum(other.getTeamSlotNum());
@@ -2712,6 +2743,11 @@ public final class MonsterStuffProto {
             }
             case 72: {
               bitField0_ |= 0x00000100;
+              combineStartTime_ = input.readInt64();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
               teamSlotNum_ = input.readInt32();
               break;
             }
@@ -2889,22 +2925,43 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional int32 teamSlotNum = 9;
+      // optional int64 combineStartTime = 9;
+      private long combineStartTime_ ;
+      public boolean hasCombineStartTime() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public long getCombineStartTime() {
+        return combineStartTime_;
+      }
+      public Builder setCombineStartTime(long value) {
+        bitField0_ |= 0x00000100;
+        combineStartTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCombineStartTime() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        combineStartTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 teamSlotNum = 10;
       private int teamSlotNum_ ;
       public boolean hasTeamSlotNum() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       public int getTeamSlotNum() {
         return teamSlotNum_;
       }
       public Builder setTeamSlotNum(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         teamSlotNum_ = value;
         onChanged();
         return this;
       }
       public Builder clearTeamSlotNum() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         teamSlotNum_ = 0;
         onChanged();
         return this;
@@ -5834,27 +5891,28 @@ public final class MonsterStuffProto {
       "\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEGENDAR" +
       "Y\020\005\"M\n\016MonsterElement\022\010\n\004FIRE\020\001\022\t\n\005GRASS",
       "\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS" +
-      "\020\005\"\313\001\n\024FullUserMonsterProto\022\025\n\ruserMonst" +
+      "\020\005\"\345\001\n\024FullUserMonsterProto\022\025\n\ruserMonst" +
       "erId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030" +
       "\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030" +
       "\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tnumPiece" +
-      "s\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\023\n\013teamSlotN" +
-      "um\030\t \001(\005\"a\n\027UserMonsterHealingProto\022\016\n\006u" +
-      "serId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\037\n\027ex" +
-      "pectedStartTimeMillis\030\003 \001(\003\"M\n\035UserMonst" +
-      "erCurrentHealthProto\022\025\n\ruserMonsterId\030\001 ",
-      "\001(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhan" +
-      "cementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonst" +
-      "er\030\002 \001(\0132(.com.lvl6.proto.UserEnhancemen" +
-      "tItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.p" +
-      "roto.UserEnhancementItemProto\"R\n\030UserEnh" +
-      "ancementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003" +
-      "\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\"f\n\032Use" +
-      "rMonsterCurrentExpProto\022\025\n\ruserMonsterId" +
-      "\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n\rex" +
-      "pectedLevel\030\003 \001(\005\"H\n\033MinimumUserMonsterS",
-      "ellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncashA" +
-      "mount\030\002 \001(\005B\023B\021MonsterStuffProto"
+      "s\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030\n\020combineSt" +
+      "artTime\030\t \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\"a\n\027Us" +
+      "erMonsterHealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n" +
+      "\ruserMonsterId\030\002 \001(\003\022\037\n\027expectedStartTim" +
+      "eMillis\030\003 \001(\003\"M\n\035UserMonsterCurrentHealt",
+      "hProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrent" +
+      "Health\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n" +
+      "\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com" +
+      ".lvl6.proto.UserEnhancementItemProto\0229\n\007" +
+      "feeders\030\003 \003(\0132(.com.lvl6.proto.UserEnhan" +
+      "cementItemProto\"R\n\030UserEnhancementItemPr" +
+      "oto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedSt" +
+      "artTimeMillis\030\002 \001(\003\"f\n\032UserMonsterCurren" +
+      "tExpProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expe" +
+      "ctedExperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 ",
+      "\001(\005\"H\n\033MinimumUserMonsterSellProto\022\025\n\rus" +
+      "erMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005B\023B" +
+      "\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5874,7 +5932,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor,
-              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "CurrentExp", "CurrentLvl", "CurrentHealth", "NumPieces", "IsComplete", "TeamSlotNum", },
+              new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "CurrentExp", "CurrentLvl", "CurrentHealth", "NumPieces", "IsComplete", "CombineStartTime", "TeamSlotNum", },
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor =
