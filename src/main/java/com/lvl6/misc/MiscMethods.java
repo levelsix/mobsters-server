@@ -38,6 +38,7 @@ import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants;
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
@@ -352,6 +353,11 @@ public class MiscMethods {
     umcb.setGemPricePerSlot(ControllerConstants.MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT);
     umcb.setNumFriendsToRecruitToIncreaseInventory(ControllerConstants.MONSTER_INVENTORY_SLOTS__NUM_FRIENDS_TO_RECRUIT_TO_INCREASE_INVENTORY);
     cb.setUserMonsterConstants(umcb.build());
+    
+    MonsterConstants.Builder mcb = MonsterConstants.newBuilder();
+    mcb.setSilverPerHealthPoint(ControllerConstants.MONSTER__SILVER_PER_HEALTH_POINT);
+    mcb.setSecondsToHealPerHealthPoint(ControllerConstants.MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT);
+    cb.setMonsterConstants(mcb.build());
     
 //    BattleConstants battleConstants = BattleConstants.newBuilder()
 //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)

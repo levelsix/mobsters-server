@@ -2361,6 +2361,11 @@ public final class EventStartupProto {
       boolean hasUserMonsterConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants getUserMonsterConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder getUserMonsterConstantsOrBuilder();
+      
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 19;
+      boolean hasMonsterConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants getMonsterConstants();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder getMonsterConstantsOrBuilder();
     }
     public static final class StartupConstants extends
         com.google.protobuf.GeneratedMessage
@@ -5621,6 +5626,401 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants)
       }
       
+      public interface MonsterConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+        
+        // optional int32 silverPerHealthPoint = 1;
+        boolean hasSilverPerHealthPoint();
+        int getSilverPerHealthPoint();
+        
+        // optional int32 secondsToHealPerHealthPoint = 2;
+        boolean hasSecondsToHealPerHealthPoint();
+        int getSecondsToHealPerHealthPoint();
+      }
+      public static final class MonsterConstants extends
+          com.google.protobuf.GeneratedMessage
+          implements MonsterConstantsOrBuilder {
+        // Use MonsterConstants.newBuilder() to construct.
+        private MonsterConstants(Builder builder) {
+          super(builder);
+        }
+        private MonsterConstants(boolean noInit) {}
+        
+        private static final MonsterConstants defaultInstance;
+        public static MonsterConstants getDefaultInstance() {
+          return defaultInstance;
+        }
+        
+        public MonsterConstants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+        
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable;
+        }
+        
+        private int bitField0_;
+        // optional int32 silverPerHealthPoint = 1;
+        public static final int SILVERPERHEALTHPOINT_FIELD_NUMBER = 1;
+        private int silverPerHealthPoint_;
+        public boolean hasSilverPerHealthPoint() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public int getSilverPerHealthPoint() {
+          return silverPerHealthPoint_;
+        }
+        
+        // optional int32 secondsToHealPerHealthPoint = 2;
+        public static final int SECONDSTOHEALPERHEALTHPOINT_FIELD_NUMBER = 2;
+        private int secondsToHealPerHealthPoint_;
+        public boolean hasSecondsToHealPerHealthPoint() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public int getSecondsToHealPerHealthPoint() {
+          return secondsToHealPerHealthPoint_;
+        }
+        
+        private void initFields() {
+          silverPerHealthPoint_ = 0;
+          secondsToHealPerHealthPoint_ = 0;
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+          
+          memoizedIsInitialized = 1;
+          return true;
+        }
+        
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt32(1, silverPerHealthPoint_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeInt32(2, secondsToHealPerHealthPoint_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+        
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+        
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(1, silverPerHealthPoint_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, secondsToHealPerHealthPoint_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+        
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+        
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+        
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor;
+          }
+          
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable;
+          }
+          
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+          
+          private Builder(BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+          
+          public Builder clear() {
+            super.clear();
+            silverPerHealthPoint_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            secondsToHealPerHealthPoint_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            return this;
+          }
+          
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+          
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDescriptor();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+          
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants buildParsed()
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(
+                result).asInvalidProtocolBufferException();
+            }
+            return result;
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.silverPerHealthPoint_ = silverPerHealthPoint_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.secondsToHealPerHealthPoint_ = secondsToHealPerHealthPoint_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+          
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+          
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance()) return this;
+            if (other.hasSilverPerHealthPoint()) {
+              setSilverPerHealthPoint(other.getSilverPerHealthPoint());
+            }
+            if (other.hasSecondsToHealPerHealthPoint()) {
+              setSecondsToHealPerHealthPoint(other.getSecondsToHealPerHealthPoint());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+          
+          public final boolean isInitialized() {
+            return true;
+          }
+          
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder(
+                this.getUnknownFields());
+            while (true) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    this.setUnknownFields(unknownFields.build());
+                    onChanged();
+                    return this;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  silverPerHealthPoint_ = input.readInt32();
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  secondsToHealPerHealthPoint_ = input.readInt32();
+                  break;
+                }
+              }
+            }
+          }
+          
+          private int bitField0_;
+          
+          // optional int32 silverPerHealthPoint = 1;
+          private int silverPerHealthPoint_ ;
+          public boolean hasSilverPerHealthPoint() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          public int getSilverPerHealthPoint() {
+            return silverPerHealthPoint_;
+          }
+          public Builder setSilverPerHealthPoint(int value) {
+            bitField0_ |= 0x00000001;
+            silverPerHealthPoint_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearSilverPerHealthPoint() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            silverPerHealthPoint_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 secondsToHealPerHealthPoint = 2;
+          private int secondsToHealPerHealthPoint_ ;
+          public boolean hasSecondsToHealPerHealthPoint() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          public int getSecondsToHealPerHealthPoint() {
+            return secondsToHealPerHealthPoint_;
+          }
+          public Builder setSecondsToHealPerHealthPoint(int value) {
+            bitField0_ |= 0x00000002;
+            secondsToHealPerHealthPoint_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearSecondsToHealPerHealthPoint() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            secondsToHealPerHealthPoint_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
+        }
+        
+        static {
+          defaultInstance = new MonsterConstants(true);
+          defaultInstance.initFields();
+        }
+        
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
+      }
+      
       private int bitField0_;
       // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
       public static final int INAPPPURCHASEPACKAGES_FIELD_NUMBER = 1;
@@ -5864,6 +6264,19 @@ public final class EventStartupProto {
         return userMonsterConstants_;
       }
       
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 19;
+      public static final int MONSTERCONSTANTS_FIELD_NUMBER = 19;
+      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants_;
+      public boolean hasMonsterConstants() {
+        return ((bitField0_ & 0x00010000) == 0x00010000);
+      }
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants getMonsterConstants() {
+        return monsterConstants_;
+      }
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder getMonsterConstantsOrBuilder() {
+        return monsterConstants_;
+      }
+      
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -5883,6 +6296,7 @@ public final class EventStartupProto {
         adminChatUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         numBeginnerSalesAllowed_ = 0;
         userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
+        monsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -5949,6 +6363,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00008000) == 0x00008000)) {
           output.writeMessage(18, userMonsterConstants_);
+        }
+        if (((bitField0_ & 0x00010000) == 0x00010000)) {
+          output.writeMessage(19, monsterConstants_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -6030,6 +6447,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00008000) == 0x00008000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(18, userMonsterConstants_);
+        }
+        if (((bitField0_ & 0x00010000) == 0x00010000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(19, monsterConstants_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -6155,6 +6576,7 @@ public final class EventStartupProto {
             getTouramentConstantsFieldBuilder();
             getAdminChatUserProtoFieldBuilder();
             getUserMonsterConstantsFieldBuilder();
+            getMonsterConstantsFieldBuilder();
           }
         }
         private static Builder create() {
@@ -6231,6 +6653,12 @@ public final class EventStartupProto {
             userMonsterConstantsBuilder_.clear();
           }
           bitField0_ = (bitField0_ & ~0x00020000);
+          if (monsterConstantsBuilder_ == null) {
+            monsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
+          } else {
+            monsterConstantsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00040000);
           return this;
         }
         
@@ -6375,6 +6803,14 @@ public final class EventStartupProto {
           } else {
             result.userMonsterConstants_ = userMonsterConstantsBuilder_.build();
           }
+          if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+            to_bitField0_ |= 0x00010000;
+          }
+          if (monsterConstantsBuilder_ == null) {
+            result.monsterConstants_ = monsterConstants_;
+          } else {
+            result.monsterConstants_ = monsterConstantsBuilder_.build();
+          }
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -6490,6 +6926,9 @@ public final class EventStartupProto {
           }
           if (other.hasUserMonsterConstants()) {
             mergeUserMonsterConstants(other.getUserMonsterConstants());
+          }
+          if (other.hasMonsterConstants()) {
+            mergeMonsterConstants(other.getMonsterConstants());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -6636,6 +7075,15 @@ public final class EventStartupProto {
                 }
                 input.readMessage(subBuilder, extensionRegistry);
                 setUserMonsterConstants(subBuilder.buildPartial());
+                break;
+              }
+              case 154: {
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.newBuilder();
+                if (hasMonsterConstants()) {
+                  subBuilder.mergeFrom(getMonsterConstants());
+                }
+                input.readMessage(subBuilder, extensionRegistry);
+                setMonsterConstants(subBuilder.buildPartial());
                 break;
               }
             }
@@ -7779,6 +8227,96 @@ public final class EventStartupProto {
             userMonsterConstants_ = null;
           }
           return userMonsterConstantsBuilder_;
+        }
+        
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 19;
+        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder> monsterConstantsBuilder_;
+        public boolean hasMonsterConstants() {
+          return ((bitField0_ & 0x00040000) == 0x00040000);
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants getMonsterConstants() {
+          if (monsterConstantsBuilder_ == null) {
+            return monsterConstants_;
+          } else {
+            return monsterConstantsBuilder_.getMessage();
+          }
+        }
+        public Builder setMonsterConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants value) {
+          if (monsterConstantsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            monsterConstants_ = value;
+            onChanged();
+          } else {
+            monsterConstantsBuilder_.setMessage(value);
+          }
+          bitField0_ |= 0x00040000;
+          return this;
+        }
+        public Builder setMonsterConstants(
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder builderForValue) {
+          if (monsterConstantsBuilder_ == null) {
+            monsterConstants_ = builderForValue.build();
+            onChanged();
+          } else {
+            monsterConstantsBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x00040000;
+          return this;
+        }
+        public Builder mergeMonsterConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants value) {
+          if (monsterConstantsBuilder_ == null) {
+            if (((bitField0_ & 0x00040000) == 0x00040000) &&
+                monsterConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance()) {
+              monsterConstants_ =
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.newBuilder(monsterConstants_).mergeFrom(value).buildPartial();
+            } else {
+              monsterConstants_ = value;
+            }
+            onChanged();
+          } else {
+            monsterConstantsBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x00040000;
+          return this;
+        }
+        public Builder clearMonsterConstants() {
+          if (monsterConstantsBuilder_ == null) {
+            monsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
+            onChanged();
+          } else {
+            monsterConstantsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00040000);
+          return this;
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder getMonsterConstantsBuilder() {
+          bitField0_ |= 0x00040000;
+          onChanged();
+          return getMonsterConstantsFieldBuilder().getBuilder();
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder getMonsterConstantsOrBuilder() {
+          if (monsterConstantsBuilder_ != null) {
+            return monsterConstantsBuilder_.getMessageOrBuilder();
+          } else {
+            return monsterConstants_;
+          }
+        }
+        private com.google.protobuf.SingleFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder> 
+            getMonsterConstantsFieldBuilder() {
+          if (monsterConstantsBuilder_ == null) {
+            monsterConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder>(
+                    monsterConstants_,
+                    getParentForChildren(),
+                    isClean());
+            monsterConstants_ = null;
+          }
+          return monsterConstantsBuilder_;
         }
         
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
@@ -14204,6 +14742,11 @@ public final class EventStartupProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -14221,7 +14764,7 @@ public final class EventStartupProto {
       "oto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n" +
       "\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014" +
       "advertiserId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 " +
-      "\001(\010\"\221 \n\024StartupResponseProto\022\030\n\020serverTi" +
+      "\001(\010\"\312!\n\024StartupResponseProto\022\030\n\020serverTi" +
       "meMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl",
       "6.proto.FullUserProto\022I\n\rstartupStatus\030\003" +
       " \001(\01622.com.lvl6.proto.StartupResponsePro" +
@@ -14270,7 +14813,7 @@ public final class EventStartupProto {
       "\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNotifica" +
       "tionProto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.p" +
       "roto.MinimumUserProto\022\023\n\013recruitTime\030\002 \001" +
-      "(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\324\017\n\020Sta" +
+      "(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\215\021\n\020Sta" +
       "rtupConstants\022H\n\025inAppPurchasePackages\030\001" +
       " \003(\0132).com.lvl6.proto.InAppPurchasePacka",
       "geProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxN" +
@@ -14297,34 +14840,39 @@ public final class EventStartupProto {
       "imumUserProto\022\037\n\027numBeginnerSalesAllowed" +
       "\030\021 \001(\005\022h\n\024userMonsterConstants\030\022 \001(\0132J.c" +
       "om.lvl6.proto.StartupResponseProto.Start" +
-      "upConstants.UserMonsterConstants\032\367\001\n\023Nor" +
-      "mStructConstants\022/\n\'minutesToUpgradeForN" +
-      "ormStructMultiplier\030\001 \001(\001\022&\n\036incomeFromN" +
-      "ormStructMultiplier\030\002 \001(\001\022)\n!upgradeStru" +
-      "ctCoinCostExponentBase\030\003 \001(\001\022,\n$upgradeS" +
-      "tructDiamondCostExponentBase\030\004 \001(\001\022.\n&di",
-      "amondCostForInstantUpgradeMultiplier\030\005 \001" +
-      "(\001\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timage" +
-      "Name\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.pr" +
-      "oto.CoordinateProto\032\232\001\n\rClanConstants\022\035\n" +
-      "\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharL" +
-      "engthForClanName\030\002 \001(\005\022\'\n\037maxCharLengthF" +
-      "orClanDescription\030\003 \001(\005\022\037\n\027maxCharLength" +
-      "ForClanTag\030\004 \001(\005\032c\n\030DownloadableNibConst" +
-      "ants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNib" +
-      "Name\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n",
-      "\023TournamentConstants\022\022\n\nwinsWeight\030\001 \001(\005" +
-      "\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 " +
-      "\001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(\005" +
-      "\032\304\001\n\024UserMonsterConstants\022\027\n\017maxNumTeamS" +
-      "lots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030" +
-      "\002 \001(\005\022\'\n\037monsterInventoryIncrementAmount" +
-      "\030\003 \001(\005\022\027\n\017gemPricePerSlot\030\004 \001(\005\022.\n&numFr" +
-      "iendsToRecruitToIncreaseInventory\030\005 \001(\005\"" +
-      "A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_" +
-      "UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupSta",
-      "tus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B" +
-      "\023B\021EventStartupProto"
+      "upConstants.UserMonsterConstants\022`\n\020mons" +
+      "terConstants\030\023 \001(\0132F.com.lvl6.proto.Star" +
+      "tupResponseProto.StartupConstants.Monste" +
+      "rConstants\032\367\001\n\023NormStructConstants\022/\n\'mi" +
+      "nutesToUpgradeForNormStructMultiplier\030\001 " +
+      "\001(\001\022&\n\036incomeFromNormStructMultiplier\030\002 ",
+      "\001(\001\022)\n!upgradeStructCoinCostExponentBase" +
+      "\030\003 \001(\001\022,\n$upgradeStructDiamondCostExpone" +
+      "ntBase\030\004 \001(\001\022.\n&diamondCostForInstantUpg" +
+      "radeMultiplier\030\005 \001(\001\032_\n\031AnimatedSpriteOf" +
+      "fsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002" +
+      " \001(\0132\037.com.lvl6.proto.CoordinateProto\032\232\001" +
+      "\n\rClanConstants\022\035\n\025coinPriceToCreateClan" +
+      "\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002 \001(\005" +
+      "\022\'\n\037maxCharLengthForClanDescription\030\003 \001(" +
+      "\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\032c\n\030Do",
+      "wnloadableNibConstants\022\022\n\nmapNibName\030\001 \001" +
+      "(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShop" +
+      "peNibName\030\003 \001(\t\032y\n\023TournamentConstants\022\022" +
+      "\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005" +
+      "\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowA" +
+      "fterEventEnd\030\004 \001(\005\032\304\001\n\024UserMonsterConsta" +
+      "nts\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initialM" +
+      "axNumMonsterLimit\030\002 \001(\005\022\'\n\037monsterInvent" +
+      "oryIncrementAmount\030\003 \001(\005\022\027\n\017gemPricePerS" +
+      "lot\030\004 \001(\005\022.\n&numFriendsToRecruitToIncrea",
+      "seInventory\030\005 \001(\005\032U\n\020MonsterConstants\022\034\n" +
+      "\024silverPerHealthPoint\030\001 \001(\005\022#\n\033secondsTo" +
+      "HealPerHealthPoint\030\002 \001(\005\"A\n\014UpdateStatus" +
+      "\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJ" +
+      "OR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_" +
+      "DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStartup" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14368,7 +14916,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor =
@@ -14419,6 +14967,14 @@ public final class EventStartupProto {
               new java.lang.String[] { "MaxNumTeamSlots", "InitialMaxNumMonsterLimit", "MonsterInventoryIncrementAmount", "GemPricePerSlot", "NumFriendsToRecruitToIncreaseInventory", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder.class);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(6);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor,
+              new java.lang.String[] { "SilverPerHealthPoint", "SecondsToHealPerHealthPoint", },
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder.class);
           return null;
         }
       };

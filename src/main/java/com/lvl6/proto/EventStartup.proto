@@ -105,6 +105,7 @@ message StartupResponseProto {
 		optional int32 numBeginnerSalesAllowed = 17;
 		
 		optional UserMonsterConstants userMonsterConstants = 18;
+		optional MonsterConstants monsterConstants = 19;
 		
 		message NormStructConstants {
 			optional double minutesToUpgradeForNormStructMultiplier = 1;
@@ -113,32 +114,27 @@ message StartupResponseProto {
 			optional double upgradeStructDiamondCostExponentBase = 4;
 			optional double diamondCostForInstantUpgradeMultiplier = 5;
 		}
-		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
 			optional CoordinateProto offSet = 2;
 		}
-		
 		message ClanConstants {
 			optional int32 coinPriceToCreateClan = 1;
 			optional int32 maxCharLengthForClanName = 2;
 			optional int32 maxCharLengthForClanDescription = 3;
 			optional int32 maxCharLengthForClanTag = 4;
 		}
-		
 		message DownloadableNibConstants {
 			optional string mapNibName = 1;
 			optional string expansionNibName = 2;
 			optional string goldShoppeNibName = 3;
 		}
-		
 		message TournamentConstants {
 			optional int32 winsWeight = 1;
 			optional int32 lossesWeight = 2;
 			optional int32 fleesWeight = 3;
 			optional int32 numHoursToShowAfterEventEnd = 4;
 		}
-		
 		message UserMonsterConstants {
 			optional int32 maxNumTeamSlots = 1;
 			optional int32 initialMaxNumMonsterLimit = 2;
@@ -149,7 +145,10 @@ message StartupResponseProto {
 			optional int32 gemPricePerSlot = 4;
 			optional int32 numFriendsToRecruitToIncreaseInventory = 5;
 		}
-		
+		message MonsterConstants {
+			optional int32 silverPerHealthPoint = 1;
+			optional int32 secondsToHealPerHealthPoint = 2;
+		}
 	}
 	
     enum UpdateStatus {
