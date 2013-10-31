@@ -39,6 +39,7 @@ import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -324,26 +325,46 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private List<TaskStageMonster> fairlyPickMonsters(List<TaskStageMonster> taskStageMonsters,
   		Random rand, int quantity) {
-  	//efficiency check. If only n monsters and want n, return input.
-  	if (taskStageMonsters.size() == quantity) {
-  		return taskStageMonsters;
-  	}
-  	
   	//return value
-  	List<TaskStageMonster> selectedTsms = new ArrayList<TaskStageMonster>();
+  	List<TaskStageMonster> selectedTsm = new ArrayList<TaskStageMonster>();
+  	
+  	int size = taskStageMonsters.size();
+  	int quantityWanted = quantity;
+  	//sum up chance to appear, and need to normalize all the probabilities
+  	float sumOfProbabilities = MonsterStuffUtils.sumProbabilities(taskStageMonsters);
   	
   	List<TaskStageMonster> copyTaskStageMonsters = new ArrayList<TaskStageMonster>(taskStageMonsters);
-  	for (int i = 0; i < quantity; i++) {
-  		//select random index
-  		int randInt = rand.nextInt(copyTaskStageMonsters.size());
-  		TaskStageMonster chosenTsm = copyTaskStageMonsters.get(randInt);
+  	for (int i = 0; i < size; i++) {
+  		if (quantityWanted == 0) {
+  			//since we selected all the monsters we wanted, exit
+  			break;
+  		}
+  		if (quantityWanted < 0) {
+  			log.error("selecting some amount of monsters out of n possible monsters failed.");
+  			break;
+  		}
+  		//since we want k more monsters and we have k left, take them all
+  		int numLeft = size - i;
+  		if (quantityWanted == numLeft) {
+  			List<TaskStageMonster> leftOvers = taskStageMonsters.subList(i, size);
+  			selectedTsm.addAll(leftOvers);
+  			break;
+  		}
   		
-  		//remove the selected id
-  		copyTaskStageMonsters.remove(randInt);
-  		selectedTsms.add(chosenTsm);
+  		TaskStageMonster tsmSoFar = copyTaskStageMonsters.get(i);
+  		float chanceToAppear = tsmSoFar.getChanceToAppear();
+  		float randFloat = rand.nextFloat();
   		
+  		float normalizedProb = chanceToAppear/sumOfProbabilities;
+  		if (normalizedProb > randFloat) {
+  			//random number generated falls within this monster's probability window
+  			selectedTsm.add(tsmSoFar);
+  			quantityWanted -= 1;
+  		}
+  		//selecting without replacement so this guy's probability needs to go
+  		sumOfProbabilities -= chanceToAppear;
   	}
-	  return selectedTsms;
+	  return selectedTsm;
   }
   
   //for a monster, choose the reward to give (monster puzzle piece)

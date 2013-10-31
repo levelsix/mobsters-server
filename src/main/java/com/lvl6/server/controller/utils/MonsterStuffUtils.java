@@ -15,6 +15,7 @@ import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.TaskStageMonster;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -412,5 +413,15 @@ public class MonsterStuffUtils {
   	}
   	
   	return idToCashAmount;
+  }
+  
+  public static float sumProbabilities(List<TaskStageMonster> taskStageMonsters) {
+  	float sumProbabilities = 0.0f;
+  	
+  	for (TaskStageMonster tsm : taskStageMonsters) {
+  		sumProbabilities += tsm.getChanceToAppear();
+  	}
+  	
+  	return sumProbabilities;
   }
 }
