@@ -627,10 +627,10 @@ public class InsertUtils implements InsertUtil{
   
   public int insertIntoPrivateChatPosts(int posterId, int recipientId, String content, Timestamp timeOfPost) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.PRIVATE_CHAT_POSTS__POSTER_ID, posterId);
-    insertParams.put(DBConstants.PRIVATE_CHAT_POSTS__RECIPIENT_ID, recipientId);
-    insertParams.put(DBConstants.PRIVATE_CHAT_POSTS__CONTENT, content);
-    insertParams.put(DBConstants.PRIVATE_CHAT_POSTS__TIME_OF_POST, timeOfPost);
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID, posterId);
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID, recipientId);
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, content);
+    insertParams.put(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST, timeOfPost);
 
     int wallPostId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER_PRIVATE_CHAT_POST, insertParams);
@@ -649,10 +649,10 @@ public class InsertUtils implements InsertUtil{
       Timestamp ts = new Timestamp(dateOfPost.getTime());
       
       Map<String, Object> row = new HashMap<String, Object>();
-      row.put(DBConstants.PRIVATE_CHAT_POSTS__POSTER_ID, posterId);
-      row.put(DBConstants.PRIVATE_CHAT_POSTS__RECIPIENT_ID, recipientId);
-      row.put(DBConstants.PRIVATE_CHAT_POSTS__CONTENT, content);
-      row.put(DBConstants.PRIVATE_CHAT_POSTS__TIME_OF_POST, ts);
+      row.put(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID, posterId);
+      row.put(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID, recipientId);
+      row.put(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT, content);
+      row.put(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST, ts);
       newRows.add(row);
     }
     List<Integer> postIds = DBConnection.get().insertIntoTableBasicReturnIds(tableName, newRows);

@@ -159,31 +159,6 @@ public class DBConstants {
   public static final String IAP_HISTORY__BVRS = "bvrs";
   public static final String IAP_HISTORY__APP_ITEM_ID = "app_item_id";
 
-  /*TOURNAMENT EVENT*/
-  public static final String TOURNAMENT_EVENT__ID = GENERIC__ID;
-  public static final String TOURNAMENT_EVENT__START_TIME = "start_time";
-  public static final String TOURNAMENT_EVENT__END_TIME = "end_time";
-  public static final String TOURNAMENT_EVENT__EVENT_NAME = "event_time";
-  public static final String TOURNAMENT_EVENT__REWARDS_GIVEN_OUT = "rewards_given_out";
-  
-  /*TOURNAMENT EVENT FOR USER*/
-  public static final String TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID = "tournament_event_id";
-  public static final String TOURNAMENT_EVENT_FOR_USER__USER_ID = GENERIC__USER_ID;
-  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_WON = "battles_won";
-  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_LOST = "battles_lost";
-  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_FLED = "battles_fled";
-  
-  /*TOURNAMENT REWARD*/
-  public static final String TOURNAMENT_REWARD__ID = "tournament_event_id";
-  public static final String TOURNAMENT_REWARD__MIN_RANK = "min_rank";
-  public static final String TOURNAMENT_REWARD__MAX_RANK = "max_rank";
-  public static final String TOURNAMENT_REWARD__GOLD_REWARDED = "gold_rewarded";
-  public static final String TOURNAMENT_REWARD__BACKGROUND_IMAGE_NAME = "background_image_name";
-  public static final String TOURNAMENT_REWARD__PRIZE_IMAGE_NAME = "prize_image_name";
-  public static final String TOURNAMENT_REWARD__BLUE = "blue";
-  public static final String TOURNAMENT_REWARD__GREEN = "green";
-  public static final String TOURNAMENT_REWARD__RED = "red";
-
   /*LOCK BOX EVENT FOR USER*/
   public static final String LOCK_BOX_EVENT_FOR_USER__EVENT_ID = "lock_box_event_id";
   public static final String LOCK_BOX_EVENT_FOR_USER__USER_ID = "user_id";
@@ -205,13 +180,25 @@ public class DBConstants {
   public static final String MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 
   /*MONSTER ENHANCING HISTORY*/
-  public static final String MONSTER_ENHANCING_HISTORY__USER_ID = GENERIC__USER_ID;
   public static final String MONSTER_ENHANCING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
-  public static final String MONSTER_ENHANCING_HISTORY__EXPECTED_START_TIME = "expected_start_time";
+  public static final String MONSTER_ENHANCING_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_ENHANCING_HISTORY__MONSTER_ID = "monster_id";
+  public static final String MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL = "evolution_level";
+  public static final String MONSTER_ENHANCING_HISTORY__CURRENT_ENHANCEMENT_PERCENTAGE = "current_enhancement_percentage";
+  public static final String MONSTER_ENHANCING_HISTORY__PREVIOUS_ENHANCEMENT_PERCENTAGE = "previous_enhancement_percentage";
+  public static final String MONSTER_ENHANCING_HISTORY__EXPECTED_START_TIME = "enhancing_start_time";
 
 
   /*MONSTER EVOLVING FOR USER TABLE*/
   public static final String MONSTER_EVOLVING__ID = "id";
+  
+  /*MONSTER EVOLVING FAIL FOR USER*///keeping track of user's failed monster evolution attempts
+  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID = "monster_id";
+  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS = "num_fails";
+  
+  /*MONSTER EVOLVING FOR USER*/
+  
   
   /*MONSTER EVOLVING HISTORY TABLE*/
   public static final String MONSTER_EVOLVING_HISTORY__ID = "monster_evolving_id";
@@ -226,11 +213,6 @@ public class DBConstants {
   public static final String MONSTER_EVOLVING_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT = "equip_one_enhancement_percent";
   public static final String MONSTER_EVOLVING_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT = "equip_two_enhancement_percent";
   public static final String MONSTER_EVOLVING_HISTORY__FORGE_SLOT_NUMBER = "forge_slot_number";
-
-  /*MONSTER EVOLVING FAIL FOR USER*///keeping track of user's failed monster evolution attempts
-  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID = GENERIC__USER_ID;
-  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID = "monster_id";
-  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS = "num_fails";
 
   /*MONSTER FOR USER*/
   public static final String MONSTER_FOR_USER__ID = GENERIC__ID;
@@ -265,13 +247,6 @@ public class DBConstants {
   public static final String MONSTER_HEALING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 //  public static final String MONSTER_HEALING_FOR_USER__QUEUED_TIME = "queued_time";
 
-  /*PRIVATE CHAT POSTS*/
-  public static final String PRIVATE_CHAT_POSTS__ID = GENERIC__ID;
-  public static final String PRIVATE_CHAT_POSTS__POSTER_ID = "poster_id";
-  public static final String PRIVATE_CHAT_POSTS__RECIPIENT_ID = "recipient_id";
-  public static final String PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
-  public static final String PRIVATE_CHAT_POSTS__CONTENT = "content";
-  
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
   public static final String QUEST_FOR_USER__QUEST_ID = "quest_id";
@@ -284,11 +259,6 @@ public class DBConstants {
   public static final String REFERRALS__NEWLY_REFERRED_ID = "newly_referred_id";
   public static final String REFERRALS__TIME_OF_REFERRAL = "time_of_referral";
   public static final String REFERRALS__COINS_GIVEN_TO_REFERRER = "coins_given_to_referrer";
-
-  /*USER SESSIONS*/
-  public static final String USER_SESSIONS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_SESSIONS__LOGIN_TIME = "login_time";
-  public static final String USER_SESSIONS__LOGOUT_TIME = "logout_time";
 
   /*USER STRUCTS TABLE*/
   public static final String STRUCTURE_FOR_USER__ID = GENERIC__ID;
@@ -323,12 +293,6 @@ public class DBConstants {
   public static final String TASK_HISTORY__END_TIME = "end_time";
   public static final String TASK_HISTORY__USER_WON = "user_won";
 
-  /*TASK STAGE*/
-  public static final String TASK_STAGE__ID = GENERIC__ID;
-  public static final String TASK_STAGE__TASK_ID = "task_id";
-  public static final String TASK_STAGE__STAGE_NUM = "stage_num";
-  public static final String TASK_STAGE__EQUIP_DROP_RATE = "equip_drop_rate";
-  
   /*TASK STAGE FOR USER TABLE*/
   public static final String TASK_STAGE_FOR_USER__ID = GENERIC__ID;
   public static final String TASK_STAGE_FOR_USER__TASK_FOR_USER_ID = "task_for_user_id";
@@ -347,9 +311,30 @@ public class DBConstants {
   public static final String TASK_STAGE_HISTORY__SILVER_GAINED = "silver_gained";
   public static final String TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   
-  /*TASK STAGE*/
-  public static final String TASK_STAGE_MONSTER__TASK_STAGE_ID = "task_stage_id";
-  public static final String TASK_STAGE_MONSTER__MONSTER_ID = "monster_id";
+  /*TOURNAMENT EVENT*/
+  public static final String TOURNAMENT_EVENT__ID = GENERIC__ID;
+  public static final String TOURNAMENT_EVENT__START_TIME = "start_time";
+  public static final String TOURNAMENT_EVENT__END_TIME = "end_time";
+  public static final String TOURNAMENT_EVENT__EVENT_NAME = "event_time";
+  public static final String TOURNAMENT_EVENT__REWARDS_GIVEN_OUT = "rewards_given_out";
+  
+  /*TOURNAMENT EVENT FOR USER*/
+  public static final String TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID = "tournament_event_id";
+  public static final String TOURNAMENT_EVENT_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_WON = "battles_won";
+  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_LOST = "battles_lost";
+  public static final String TOURNAMENT_EVENT_FOR_USER__BATTLES_FLED = "battles_fled";
+  
+  /*TOURNAMENT REWARD*/
+  public static final String TOURNAMENT_REWARD__ID = "tournament_event_id";
+  public static final String TOURNAMENT_REWARD__MIN_RANK = "min_rank";
+  public static final String TOURNAMENT_REWARD__MAX_RANK = "max_rank";
+  public static final String TOURNAMENT_REWARD__GOLD_REWARDED = "gold_rewarded";
+  public static final String TOURNAMENT_REWARD__BACKGROUND_IMAGE_NAME = "background_image_name";
+  public static final String TOURNAMENT_REWARD__PRIZE_IMAGE_NAME = "prize_image_name";
+  public static final String TOURNAMENT_REWARD__BLUE = "blue";
+  public static final String TOURNAMENT_REWARD__GREEN = "green";
+  public static final String TOURNAMENT_REWARD__RED = "red";
 
   /*USER TABLE*/
   public static final String USER__ID = GENERIC__ID;
@@ -408,11 +393,17 @@ public class DBConstants {
   public static final String USER_CURRENCY_HISTORY__CURRENCY_BEFORE_CHANGE = "currency_before_change";
   public static final String USER_CURRENCY_HISTORY__CURRENCY_AFTER_CHANGE = "currency_after_change";
   public static final String USER_CURRENCY_HISTORY__REASON_FOR_CHANGE = "reason_for_change";
- 
   
-  /*USER QUESTS COMPLETED TASKS TABLE*/
-  public static final String USER_QUESTS_COMPLETED_TASKS__USER_ID = GENERIC__USER_ID;
-  public static final String USER_QUESTS_COMPLETED_TASKS__QUEST_ID = "quest_id";
-  public static final String USER_QUESTS_COMPLETED_TASKS__COMPLETED_TASK_ID = "completed_task_id";
-
+  /*USER PRIVATE CHAT POSTS*/
+  public static final String USER_PRIVATE_CHAT_POSTS__ID = GENERIC__ID;
+  public static final String USER_PRIVATE_CHAT_POSTS__POSTER_ID = "poster_id";
+  public static final String USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID = "recipient_id";
+  public static final String USER_PRIVATE_CHAT_POSTS__TIME_OF_POST = "time_of_post";
+  public static final String USER_PRIVATE_CHAT_POSTS__CONTENT = "content";
+  
+  /*USER SESSIONS*/
+  public static final String USER_SESSIONS__USER_ID = GENERIC__USER_ID;
+  public static final String USER_SESSIONS__LOGIN_TIME = "login_time";
+  public static final String USER_SESSIONS__LOGOUT_TIME = "logout_time";
+ 
 }

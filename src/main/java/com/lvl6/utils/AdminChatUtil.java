@@ -80,20 +80,20 @@ public class AdminChatUtil {
 	public List<AdminChatPost> getMessagesToAndFromAdmin(int offset, int limit) {
 		String query = "SELECT * FROM "
 				+ DBConstants.TABLE_USER_PRIVATE_CHAT_POST + " as chat where (chat."
-				+ DBConstants.PRIVATE_CHAT_POSTS__RECIPIENT_ID + "="
+				+ DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID + "="
 				+ ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID + " or chat."
-				+ DBConstants.PRIVATE_CHAT_POSTS__POSTER_ID + "="
+				+ DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID + "="
 				+ ControllerConstants.STARTUP__ADMIN_CHAT_USER_ID + ") order by chat."
-				+ DBConstants.PRIVATE_CHAT_POSTS__TIME_OF_POST + " DESC LIMIT " + limit + " OFFSET "
+				+ DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST + " DESC LIMIT " + limit + " OFFSET "
 				+ offset;
 		List<AdminChatPost> msgs = jdbcTemplate.query(query, new RowMapper<AdminChatPost>() {
 			@Override
 			public AdminChatPost mapRow(ResultSet rs, int index) throws SQLException {
-				return new AdminChatPost(rs.getInt(DBConstants.PRIVATE_CHAT_POSTS__ID), rs
-						.getInt(DBConstants.PRIVATE_CHAT_POSTS__POSTER_ID), rs
-						.getInt(DBConstants.PRIVATE_CHAT_POSTS__RECIPIENT_ID), rs
-						.getDate(DBConstants.PRIVATE_CHAT_POSTS__TIME_OF_POST), rs
-						.getString(DBConstants.PRIVATE_CHAT_POSTS__CONTENT));
+				return new AdminChatPost(rs.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__ID), rs
+						.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID), rs
+						.getInt(DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID), rs
+						.getDate(DBConstants.USER_PRIVATE_CHAT_POSTS__TIME_OF_POST), rs
+						.getString(DBConstants.USER_PRIVATE_CHAT_POSTS__CONTENT));
 			}
 		});
 		return addUsernames(msgs);

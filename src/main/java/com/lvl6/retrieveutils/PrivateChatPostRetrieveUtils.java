@@ -37,21 +37,21 @@ import com.lvl6.utils.DBConnection;
     query += 
         "SELECT * " +
     		"FROM " + TABLE_NAME + " " +
-    		"WHERE " + DBConstants.PRIVATE_CHAT_POSTS__POSTER_ID + " IN (?,?) ";
+    		"WHERE " + DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID + " IN (?,?) ";
     values.add(userOne);
     values.add(userTwo);
     query +=
-        "AND " + DBConstants.PRIVATE_CHAT_POSTS__RECIPIENT_ID + " IN (?,?) ";
+        "AND " + DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID + " IN (?,?) ";
     values.add(userOne);
     values.add(userTwo);
     
     //in case no before post id is specified
     if (ControllerConstants.NOT_SET != postId) {
-      query += "AND " + DBConstants.PRIVATE_CHAT_POSTS__ID + " < ? ";
+      query += "AND " + DBConstants.USER_PRIVATE_CHAT_POSTS__ID + " < ? ";
       values.add(postId);
     }
     
-    query += "ORDER BY " + DBConstants.PRIVATE_CHAT_POSTS__ID + " DESC  LIMIT ?";
+    query += "ORDER BY " + DBConstants.USER_PRIVATE_CHAT_POSTS__ID + " DESC  LIMIT ?";
     values.add(limit);
     
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
@@ -70,11 +70,11 @@ import com.lvl6.utils.DBConnection;
     String column = null;
     
     if (isRecipient) {
-      otherPersonColumn = DBConstants.PRIVATE_CHAT_POSTS__POSTER_ID;
-      column = DBConstants.PRIVATE_CHAT_POSTS__RECIPIENT_ID;
+      otherPersonColumn = DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID;
+      column = DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID;
     } else {
-      otherPersonColumn = DBConstants.PRIVATE_CHAT_POSTS__RECIPIENT_ID;
-      column = DBConstants.PRIVATE_CHAT_POSTS__POSTER_ID;
+      otherPersonColumn = DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID;
+      column = DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID;
     }
     Connection conn = DBConnection.get().getConnection();
     List<Object> values = new ArrayList<Object>();
@@ -83,7 +83,7 @@ import com.lvl6.utils.DBConnection;
 
     //get last post id between specified user and person said user chatted with
     subquery +=
-        "(SELECT max(" + DBConstants.PRIVATE_CHAT_POSTS__ID + ") as id " + 
+        "(SELECT max(" + DBConstants.USER_PRIVATE_CHAT_POSTS__ID + ") as id " + 
         "FROM " + TABLE_NAME + " " +
         "WHERE " + column + "=? " +
         "GROUP BY " + otherPersonColumn + ")";
