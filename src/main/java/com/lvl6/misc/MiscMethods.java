@@ -355,7 +355,7 @@ public class MiscMethods {
     cb.setUserMonsterConstants(umcb.build());
     
     MonsterConstants.Builder mcb = MonsterConstants.newBuilder();
-    mcb.setSilverPerHealthPoint(ControllerConstants.MONSTER__SILVER_PER_HEALTH_POINT);
+    mcb.setCashPerHealthPoint(ControllerConstants.MONSTER__CASH_PER_HEALTH_POINT);
     mcb.setSecondsToHealPerHealthPoint(ControllerConstants.MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT);
     cb.setMonsterConstants(mcb.build());
     

@@ -5629,9 +5629,9 @@ public final class EventStartupProto {
       public interface MonsterConstantsOrBuilder
           extends com.google.protobuf.MessageOrBuilder {
         
-        // optional int32 silverPerHealthPoint = 1;
-        boolean hasSilverPerHealthPoint();
-        int getSilverPerHealthPoint();
+        // optional int32 cashPerHealthPoint = 1;
+        boolean hasCashPerHealthPoint();
+        int getCashPerHealthPoint();
         
         // optional int32 secondsToHealPerHealthPoint = 2;
         boolean hasSecondsToHealPerHealthPoint();
@@ -5666,14 +5666,14 @@ public final class EventStartupProto {
         }
         
         private int bitField0_;
-        // optional int32 silverPerHealthPoint = 1;
-        public static final int SILVERPERHEALTHPOINT_FIELD_NUMBER = 1;
-        private int silverPerHealthPoint_;
-        public boolean hasSilverPerHealthPoint() {
+        // optional int32 cashPerHealthPoint = 1;
+        public static final int CASHPERHEALTHPOINT_FIELD_NUMBER = 1;
+        private int cashPerHealthPoint_;
+        public boolean hasCashPerHealthPoint() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
-        public int getSilverPerHealthPoint() {
-          return silverPerHealthPoint_;
+        public int getCashPerHealthPoint() {
+          return cashPerHealthPoint_;
         }
         
         // optional int32 secondsToHealPerHealthPoint = 2;
@@ -5687,7 +5687,7 @@ public final class EventStartupProto {
         }
         
         private void initFields() {
-          silverPerHealthPoint_ = 0;
+          cashPerHealthPoint_ = 0;
           secondsToHealPerHealthPoint_ = 0;
         }
         private byte memoizedIsInitialized = -1;
@@ -5703,7 +5703,7 @@ public final class EventStartupProto {
                             throws java.io.IOException {
           getSerializedSize();
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            output.writeInt32(1, silverPerHealthPoint_);
+            output.writeInt32(1, cashPerHealthPoint_);
           }
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             output.writeInt32(2, secondsToHealPerHealthPoint_);
@@ -5719,7 +5719,7 @@ public final class EventStartupProto {
           size = 0;
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(1, silverPerHealthPoint_);
+              .computeInt32Size(1, cashPerHealthPoint_);
           }
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             size += com.google.protobuf.CodedOutputStream
@@ -5849,7 +5849,7 @@ public final class EventStartupProto {
           
           public Builder clear() {
             super.clear();
-            silverPerHealthPoint_ = 0;
+            cashPerHealthPoint_ = 0;
             bitField0_ = (bitField0_ & ~0x00000001);
             secondsToHealPerHealthPoint_ = 0;
             bitField0_ = (bitField0_ & ~0x00000002);
@@ -5894,7 +5894,7 @@ public final class EventStartupProto {
             if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
               to_bitField0_ |= 0x00000001;
             }
-            result.silverPerHealthPoint_ = silverPerHealthPoint_;
+            result.cashPerHealthPoint_ = cashPerHealthPoint_;
             if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
               to_bitField0_ |= 0x00000002;
             }
@@ -5915,8 +5915,8 @@ public final class EventStartupProto {
           
           public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants other) {
             if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance()) return this;
-            if (other.hasSilverPerHealthPoint()) {
-              setSilverPerHealthPoint(other.getSilverPerHealthPoint());
+            if (other.hasCashPerHealthPoint()) {
+              setCashPerHealthPoint(other.getCashPerHealthPoint());
             }
             if (other.hasSecondsToHealPerHealthPoint()) {
               setSecondsToHealPerHealthPoint(other.getSecondsToHealPerHealthPoint());
@@ -5954,7 +5954,7 @@ public final class EventStartupProto {
                 }
                 case 8: {
                   bitField0_ |= 0x00000001;
-                  silverPerHealthPoint_ = input.readInt32();
+                  cashPerHealthPoint_ = input.readInt32();
                   break;
                 }
                 case 16: {
@@ -5968,23 +5968,23 @@ public final class EventStartupProto {
           
           private int bitField0_;
           
-          // optional int32 silverPerHealthPoint = 1;
-          private int silverPerHealthPoint_ ;
-          public boolean hasSilverPerHealthPoint() {
+          // optional int32 cashPerHealthPoint = 1;
+          private int cashPerHealthPoint_ ;
+          public boolean hasCashPerHealthPoint() {
             return ((bitField0_ & 0x00000001) == 0x00000001);
           }
-          public int getSilverPerHealthPoint() {
-            return silverPerHealthPoint_;
+          public int getCashPerHealthPoint() {
+            return cashPerHealthPoint_;
           }
-          public Builder setSilverPerHealthPoint(int value) {
+          public Builder setCashPerHealthPoint(int value) {
             bitField0_ |= 0x00000001;
-            silverPerHealthPoint_ = value;
+            cashPerHealthPoint_ = value;
             onChanged();
             return this;
           }
-          public Builder clearSilverPerHealthPoint() {
+          public Builder clearCashPerHealthPoint() {
             bitField0_ = (bitField0_ & ~0x00000001);
-            silverPerHealthPoint_ = 0;
+            cashPerHealthPoint_ = 0;
             onChanged();
             return this;
           }
@@ -14764,7 +14764,7 @@ public final class EventStartupProto {
       "oto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n" +
       "\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014" +
       "advertiserId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 " +
-      "\001(\010\"\312!\n\024StartupResponseProto\022\030\n\020serverTi" +
+      "\001(\010\"\310!\n\024StartupResponseProto\022\030\n\020serverTi" +
       "meMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl",
       "6.proto.FullUserProto\022I\n\rstartupStatus\030\003" +
       " \001(\01622.com.lvl6.proto.StartupResponsePro" +
@@ -14813,7 +14813,7 @@ public final class EventStartupProto {
       "\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNotifica" +
       "tionProto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.p" +
       "roto.MinimumUserProto\022\023\n\013recruitTime\030\002 \001" +
-      "(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\215\021\n\020Sta" +
+      "(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\213\021\n\020Sta" +
       "rtupConstants\022H\n\025inAppPurchasePackages\030\001" +
       " \003(\0132).com.lvl6.proto.InAppPurchasePacka",
       "geProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxN" +
@@ -14866,13 +14866,13 @@ public final class EventStartupProto {
       "axNumMonsterLimit\030\002 \001(\005\022\'\n\037monsterInvent" +
       "oryIncrementAmount\030\003 \001(\005\022\027\n\017gemPricePerS" +
       "lot\030\004 \001(\005\022.\n&numFriendsToRecruitToIncrea",
-      "seInventory\030\005 \001(\005\032U\n\020MonsterConstants\022\034\n" +
-      "\024silverPerHealthPoint\030\001 \001(\005\022#\n\033secondsTo" +
-      "HealPerHealthPoint\030\002 \001(\005\"A\n\014UpdateStatus" +
-      "\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJ" +
-      "OR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_" +
-      "DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStartup" +
-      "Proto"
+      "seInventory\030\005 \001(\005\032S\n\020MonsterConstants\022\032\n" +
+      "\022cashPerHealthPoint\030\001 \001(\005\022#\n\033secondsToHe" +
+      "alPerHealthPoint\030\002 \001(\005\"A\n\014UpdateStatus\022\r" +
+      "\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR" +
+      "_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_DB" +
+      "\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStartupPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14972,7 +14972,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor,
-              new java.lang.String[] { "SilverPerHealthPoint", "SecondsToHealPerHealthPoint", },
+              new java.lang.String[] { "CashPerHealthPoint", "SecondsToHealPerHealthPoint", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder.class);
           return null;
