@@ -693,7 +693,7 @@ public class User implements Serializable {
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__NUM_ADDITIONAL_FORGE_SLOTS, numAdditionalMonsterSlots);
+		absoluteParams.put(DBConstants.USER__NUM_ADDITIONAL_MONSTER_SLOTS, numAdditionalMonsterSlots);
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 		relativeParams.put(DBConstants.USER__GEMS, cost);
 

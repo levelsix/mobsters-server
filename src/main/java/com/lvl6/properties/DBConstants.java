@@ -373,7 +373,7 @@ public class DBConstants {
   public static final String USER__LAST_WALL_POST_NOTIFICATION_TIME = "last_wall_post_notification_time";
   public static final String USER__KABAM_NAID = "kabam_naid";
   public static final String USER__HAS_RECEIVED_FB_REWARD = "has_received_fb_reward";
-  public static final String USER__NUM_ADDITIONAL_FORGE_SLOTS = "num_additional_forge_slots";
+  public static final String USER__NUM_ADDITIONAL_MONSTER_SLOTS = "num_additional_monster_slots";
   public static final String USER__NUM_BEGINNER_SALES_PURCHASED = "num_beginner_sales_purchased";
   public static final String USER__HAS_ACTIVE_SHIELD = "has_active_shield";
   public static final String USER__SHIELD_END_TIME = "shield_end_time";

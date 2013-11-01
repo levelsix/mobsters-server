@@ -214,6 +214,7 @@ message CombineUserMonsterPiecesRequestProto {
 	repeated int64 userMonsterIds = 2;
 	
 	//(positive amount) if user wants to speed up the process
+	//if this is set, there should only be one userMonsterId
 	optional int32 gemCost = 3;
 }
 
