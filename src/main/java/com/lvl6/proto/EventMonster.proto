@@ -212,6 +212,9 @@ message IncreaseMonsterInventorySlotResponseProto {
 message CombineUserMonsterPiecesRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated int64 userMonsterIds = 2;
+	
+	//(positive amount) if user wants to speed up the process
+	optional int32 gemCost = 3;
 }
 
 message CombineUserMonsterPiecesResponseProto {
@@ -220,7 +223,8 @@ message CombineUserMonsterPiecesResponseProto {
 	
 	enum CombineUserMonsterPiecesStatus {
 		SUCCESS = 1;
-		FAIL_OTHER = 2;
+		FAIL_INSUFFUCIENT_GEMS = 2;
+		FAIL_OTHER = 3;
 	}
 }
 

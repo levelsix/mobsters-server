@@ -11093,6 +11093,10 @@ public final class EventMonsterProto {
     java.util.List<java.lang.Long> getUserMonsterIdsList();
     int getUserMonsterIdsCount();
     long getUserMonsterIds(int index);
+    
+    // optional int32 gemCost = 3;
+    boolean hasGemCost();
+    int getGemCost();
   }
   public static final class CombineUserMonsterPiecesRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -11150,9 +11154,20 @@ public final class EventMonsterProto {
       return userMonsterIds_.get(index);
     }
     
+    // optional int32 gemCost = 3;
+    public static final int GEMCOST_FIELD_NUMBER = 3;
+    private int gemCost_;
+    public boolean hasGemCost() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getGemCost() {
+      return gemCost_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userMonsterIds_ = java.util.Collections.emptyList();;
+      gemCost_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -11171,6 +11186,9 @@ public final class EventMonsterProto {
       }
       for (int i = 0; i < userMonsterIds_.size(); i++) {
         output.writeInt64(2, userMonsterIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(3, gemCost_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -11193,6 +11211,10 @@ public final class EventMonsterProto {
         }
         size += dataSize;
         size += 1 * getUserMonsterIdsList().size();
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, gemCost_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -11327,6 +11349,8 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         userMonsterIds_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000002);
+        gemCost_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -11378,6 +11402,10 @@ public final class EventMonsterProto {
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.userMonsterIds_ = userMonsterIds_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.gemCost_ = gemCost_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -11406,6 +11434,9 @@ public final class EventMonsterProto {
             userMonsterIds_.addAll(other.userMonsterIds_);
           }
           onChanged();
+        }
+        if (other.hasGemCost()) {
+          setGemCost(other.getGemCost());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -11459,6 +11490,11 @@ public final class EventMonsterProto {
                 addUserMonsterIds(input.readInt64());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              gemCost_ = input.readInt32();
               break;
             }
           }
@@ -11602,6 +11638,27 @@ public final class EventMonsterProto {
         return this;
       }
       
+      // optional int32 gemCost = 3;
+      private int gemCost_ ;
+      public boolean hasGemCost() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getGemCost() {
+        return gemCost_;
+      }
+      public Builder setGemCost(int value) {
+        bitField0_ |= 0x00000004;
+        gemCost_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemCost() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        gemCost_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.CombineUserMonsterPiecesRequestProto)
     }
     
@@ -11656,11 +11713,13 @@ public final class EventMonsterProto {
     public enum CombineUserMonsterPiecesStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      FAIL_OTHER(1, 2),
+      FAIL_INSUFFUCIENT_GEMS(1, 2),
+      FAIL_OTHER(2, 3),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int FAIL_OTHER_VALUE = 2;
+      public static final int FAIL_INSUFFUCIENT_GEMS_VALUE = 2;
+      public static final int FAIL_OTHER_VALUE = 3;
       
       
       public final int getNumber() { return value; }
@@ -11668,7 +11727,8 @@ public final class EventMonsterProto {
       public static CombineUserMonsterPiecesStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return FAIL_OTHER;
+          case 2: return FAIL_INSUFFUCIENT_GEMS;
+          case 3: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -11699,7 +11759,7 @@ public final class EventMonsterProto {
       }
       
       private static final CombineUserMonsterPiecesStatus[] VALUES = {
-        SUCCESS, FAIL_OTHER, 
+        SUCCESS, FAIL_INSUFFUCIENT_GEMS, FAIL_OTHER, 
       };
       
       public static CombineUserMonsterPiecesStatus valueOf(
@@ -13636,26 +13696,27 @@ public final class EventMonsterProto {
       "orySlotResponseProto.IncreaseMonsterInve" +
       "ntorySlotStatus\"^\n\"IncreaseMonsterInvent" +
       "orySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUF" +
-      "FICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"p\n$Combi",
-      "neUserMonsterPiecesRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\026\n\016userMonsterIds\030\002 \003(\003\"\376\001\n%CombineUse" +
-      "rMonsterPiecesResponseProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022d\n" +
-      "\006status\030\002 \001(\0162T.com.lvl6.proto.CombineUs" +
-      "erMonsterPiecesResponseProto.CombineUser" +
-      "MonsterPiecesStatus\"=\n\036CombineUserMonste" +
-      "rPiecesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER" +
-      "\020\002\"\213\001\n\033SellUserMonsterRequestProto\0220\n\006se",
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.proto.Min" +
-      "imumUserMonsterSellProto\"\332\001\n\034SellUserMon" +
-      "sterResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022R\n\006status\030\002 " +
-      "\001(\0162B.com.lvl6.proto.SellUserMonsterResp" +
-      "onseProto.SellUserMonsterStatus\"4\n\025SellU" +
-      "serMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
-      "HER\020\002B\023B\021EventMonsterProto"
+      "FICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"\201\001\n$Comb",
+      "ineUserMonsterPiecesRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 " +
+      "\001(\005\"\232\002\n%CombineUserMonsterPiecesResponse" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022d\n\006status\030\002 \001(\0162T.com.lv" +
+      "l6.proto.CombineUserMonsterPiecesRespons" +
+      "eProto.CombineUserMonsterPiecesStatus\"Y\n" +
+      "\036CombineUserMonsterPiecesStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022\016\n\nFAIL",
+      "_OTHER\020\003\"\213\001\n\033SellUserMonsterRequestProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.pro" +
+      "to.MinimumUserMonsterSellProto\"\332\001\n\034SellU" +
+      "serMonsterResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022R\n\006sta" +
+      "tus\030\002 \001(\0162B.com.lvl6.proto.SellUserMonst" +
+      "erResponseProto.SellUserMonsterStatus\"4\n" +
+      "\025SellUserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
+      "AIL_OTHER\020\002B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13795,7 +13856,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_CombineUserMonsterPiecesRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserMonsterIds", },
+              new java.lang.String[] { "Sender", "UserMonsterIds", "GemCost", },
               com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto.class,
               com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto.Builder.class);
           internal_static_com_lvl6_proto_CombineUserMonsterPiecesResponseProto_descriptor =

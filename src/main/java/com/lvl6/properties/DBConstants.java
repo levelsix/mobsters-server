@@ -30,6 +30,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_FOR_USER = "monster_for_user";
   public static final String TABLE_MONSTER_FOR_USER_DELETED = "monster_for_user_deleted";
   public static final String TABLE_MONSTER_HEALING_FOR_USER = "monster_healing_for_user";
+  public static final String TABLE_MONSTER_HEALING_HISTORY = "monster_healing_history";
   public static final String TABLE_MONSTER_REWARD = "monster_reward";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_QUEST = "quest";
@@ -246,6 +247,13 @@ public class DBConstants {
   public static final String MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
   public static final String MONSTER_HEALING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 //  public static final String MONSTER_HEALING_FOR_USER__QUEUED_TIME = "queued_time";
+  
+  /*MONSTER HEALING HISTORY*/
+  public static final String MONSTER_HEALING_HISTORY__USER_ID = "user_id";
+  public static final String MONSTER_HEALING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
+  public static final String MONSTER_HEALING_HISTORY__EXPECTED_START_TIME = "expected_start_time";
+  public static final String MONSTER_HEALING_HISTORY__DEQUEUED_TIME = "dequeued_time";
+  public static final String MONSTER_HEALING_HISTORY__FINISHED_HEALING = "finished_healing";
 
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
