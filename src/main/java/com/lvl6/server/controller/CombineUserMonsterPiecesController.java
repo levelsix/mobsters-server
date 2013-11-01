@@ -54,6 +54,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int userId = senderProto.getUserId();
     List<Long> userMonsterIds = reqProto.getUserMonsterIdsList();
     userMonsterIds = new ArrayList<Long>(userMonsterIds);
+    
+    log.info("reqProto=" + reqProto);
 
     //set some values to send to the client (the response proto)
     CombineUserMonsterPiecesResponseProto.Builder resBuilder = CombineUserMonsterPiecesResponseProto.newBuilder();

@@ -80,6 +80,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	query += " AND " + DBConstants.MONSTER_FOR_USER__ID + " IN (" +
     			StringUtils.csvList(userMonsterIdList) + ");";
     }
+    
+    log.info("query=" + query + "\t values=" + values);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
