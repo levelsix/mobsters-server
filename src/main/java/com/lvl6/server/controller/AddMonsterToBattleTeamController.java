@@ -169,7 +169,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//gather up the userMonsterIds with a team slot value = teamSlotNum (batch it)
   	for(MonsterForUser mfu : idsToMonsters.values()) {
   		if (mfu.getTeamSlotNum() == teamSlotNum) {
-  			log.error("more than one monster sharing team slot. userMonster=" + mfu); 
+  			log.warn("more than one monster sharing team slot. userMonster=" + mfu); 
   			userMonsterIds.add(mfu.getId());
   		}
   	}
@@ -179,7 +179,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		//remove these monsters from the team slot with value = teamSlotNum
   		int num = UpdateUtils.get().nullifyMonstersTeamSlotNum(
   				userMonsterIds, newTeamSlotNum);
-  		log.info("removed userMonsterIds from teamSlot=" + teamSlotNum +
+  		log.warn("removed userMonsterIds from teamSlot=" + teamSlotNum +
   				"\t userMonsterIds=" + userMonsterIds + "\t numRemoved=" + num);
   	}
   	
