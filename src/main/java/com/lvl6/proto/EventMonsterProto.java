@@ -11714,12 +11714,14 @@ public final class EventMonsterProto {
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_INSUFFUCIENT_GEMS(1, 2),
-      FAIL_OTHER(2, 3),
+      FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP(2, 3),
+      FAIL_OTHER(3, 4),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_INSUFFUCIENT_GEMS_VALUE = 2;
-      public static final int FAIL_OTHER_VALUE = 3;
+      public static final int FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP_VALUE = 3;
+      public static final int FAIL_OTHER_VALUE = 4;
       
       
       public final int getNumber() { return value; }
@@ -11728,7 +11730,8 @@ public final class EventMonsterProto {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_INSUFFUCIENT_GEMS;
-          case 3: return FAIL_OTHER;
+          case 3: return FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP;
+          case 4: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -11759,7 +11762,7 @@ public final class EventMonsterProto {
       }
       
       private static final CombineUserMonsterPiecesStatus[] VALUES = {
-        SUCCESS, FAIL_INSUFFUCIENT_GEMS, FAIL_OTHER, 
+        SUCCESS, FAIL_INSUFFUCIENT_GEMS, FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP, FAIL_OTHER, 
       };
       
       public static CombineUserMonsterPiecesStatus valueOf(
@@ -13700,23 +13703,24 @@ public final class EventMonsterProto {
       "ineUserMonsterPiecesRequestProto\0220\n\006send" +
       "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
       "to\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 " +
-      "\001(\005\"\232\002\n%CombineUserMonsterPiecesResponse" +
+      "\001(\005\"\307\002\n%CombineUserMonsterPiecesResponse" +
       "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
       "inimumUserProto\022d\n\006status\030\002 \001(\0162T.com.lv" +
       "l6.proto.CombineUserMonsterPiecesRespons" +
-      "eProto.CombineUserMonsterPiecesStatus\"Y\n" +
-      "\036CombineUserMonsterPiecesStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022\016\n\nFAIL",
-      "_OTHER\020\003\"\213\001\n\033SellUserMonsterRequestProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.pro" +
-      "to.MinimumUserMonsterSellProto\"\332\001\n\034SellU" +
-      "serMonsterResponseProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022R\n\006sta" +
-      "tus\030\002 \001(\0162B.com.lvl6.proto.SellUserMonst" +
-      "erResponseProto.SellUserMonsterStatus\"4\n" +
-      "\025SellUserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
-      "AIL_OTHER\020\002B\023B\021EventMonsterProto"
+      "eProto.CombineUserMonsterPiecesStatus\"\205\001" +
+      "\n\036CombineUserMonsterPiecesStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAI",
+      "L_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n" +
+      "\nFAIL_OTHER\020\004\"\213\001\n\033SellUserMonsterRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022:\n\005sales\030\002 \003(\0132+.com.lvl" +
+      "6.proto.MinimumUserMonsterSellProto\"\332\001\n\034" +
+      "SellUserMonsterResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022R" +
+      "\n\006status\030\002 \001(\0162B.com.lvl6.proto.SellUser" +
+      "MonsterResponseProto.SellUserMonsterStat" +
+      "us\"4\n\025SellUserMonsterStatus\022\013\n\007SUCCESS\020\001",
+      "\022\016\n\nFAIL_OTHER\020\002B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
