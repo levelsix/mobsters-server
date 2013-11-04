@@ -205,7 +205,7 @@ message ExpansionWaitCompleteResponseProto {
      	FAIL_WAS_NOT_EXPANDING = 2;
      	FAIL_NOT_DONE_YET = 3;
      	FAIL_INSUFFICIENT_GEMS = 4;
-     	FAIL_OTHER = 4;
+     	FAIL_OTHER = 5;
      }
 }
 

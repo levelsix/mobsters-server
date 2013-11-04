@@ -88,15 +88,19 @@ public final class StructureProto {
     boolean hasName();
     String getName();
     
-    // optional int32 income = 3;
+    // optional int32 level = 3;
+    boolean hasLevel();
+    int getLevel();
+    
+    // optional int32 income = 4;
     boolean hasIncome();
     int getIncome();
     
-    // optional int32 minutesToGain = 4;
+    // optional int32 minutesToGain = 5;
     boolean hasMinutesToGain();
     int getMinutesToGain();
     
-    // optional int32 minutesToBuild = 5;
+    // optional int32 minutesToBuild = 6;
     boolean hasMinutesToBuild();
     int getMinutesToBuild();
     
@@ -203,31 +207,41 @@ public final class StructureProto {
       }
     }
     
-    // optional int32 income = 3;
-    public static final int INCOME_FIELD_NUMBER = 3;
+    // optional int32 level = 3;
+    public static final int LEVEL_FIELD_NUMBER = 3;
+    private int level_;
+    public boolean hasLevel() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getLevel() {
+      return level_;
+    }
+    
+    // optional int32 income = 4;
+    public static final int INCOME_FIELD_NUMBER = 4;
     private int income_;
     public boolean hasIncome() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public int getIncome() {
       return income_;
     }
     
-    // optional int32 minutesToGain = 4;
-    public static final int MINUTESTOGAIN_FIELD_NUMBER = 4;
+    // optional int32 minutesToGain = 5;
+    public static final int MINUTESTOGAIN_FIELD_NUMBER = 5;
     private int minutesToGain_;
     public boolean hasMinutesToGain() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public int getMinutesToGain() {
       return minutesToGain_;
     }
     
-    // optional int32 minutesToBuild = 5;
-    public static final int MINUTESTOBUILD_FIELD_NUMBER = 5;
+    // optional int32 minutesToBuild = 6;
+    public static final int MINUTESTOBUILD_FIELD_NUMBER = 6;
     private int minutesToBuild_;
     public boolean hasMinutesToBuild() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public int getMinutesToBuild() {
       return minutesToBuild_;
@@ -237,7 +251,7 @@ public final class StructureProto {
     public static final int CASHPRICE_FIELD_NUMBER = 7;
     private int cashPrice_;
     public boolean hasCashPrice() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public int getCashPrice() {
       return cashPrice_;
@@ -247,7 +261,7 @@ public final class StructureProto {
     public static final int GEMPRICE_FIELD_NUMBER = 8;
     private int gemPrice_;
     public boolean hasGemPrice() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public int getGemPrice() {
       return gemPrice_;
@@ -257,7 +271,7 @@ public final class StructureProto {
     public static final int MINLEVEL_FIELD_NUMBER = 9;
     private int minLevel_;
     public boolean hasMinLevel() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     public int getMinLevel() {
       return minLevel_;
@@ -267,7 +281,7 @@ public final class StructureProto {
     public static final int XLENGTH_FIELD_NUMBER = 10;
     private int xLength_;
     public boolean hasXLength() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     public int getXLength() {
       return xLength_;
@@ -277,7 +291,7 @@ public final class StructureProto {
     public static final int YLENGTH_FIELD_NUMBER = 11;
     private int yLength_;
     public boolean hasYLength() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     public int getYLength() {
       return yLength_;
@@ -287,7 +301,7 @@ public final class StructureProto {
     public static final int INSTABUILDGEMCOST_FIELD_NUMBER = 12;
     private int instaBuildGemCost_;
     public boolean hasInstaBuildGemCost() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     public int getInstaBuildGemCost() {
       return instaBuildGemCost_;
@@ -297,7 +311,7 @@ public final class StructureProto {
     public static final int IMGVERTICALPIXELOFFSET_FIELD_NUMBER = 13;
     private int imgVerticalPixelOffset_;
     public boolean hasImgVerticalPixelOffset() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     public int getImgVerticalPixelOffset() {
       return imgVerticalPixelOffset_;
@@ -307,7 +321,7 @@ public final class StructureProto {
     public static final int SUCCESSORSTRUCTID_FIELD_NUMBER = 14;
     private int successorStructId_;
     public boolean hasSuccessorStructId() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     public int getSuccessorStructId() {
       return successorStructId_;
@@ -316,6 +330,7 @@ public final class StructureProto {
     private void initFields() {
       structId_ = 0;
       name_ = "";
+      level_ = 0;
       income_ = 0;
       minutesToGain_ = 0;
       minutesToBuild_ = 0;
@@ -347,36 +362,39 @@ public final class StructureProto {
         output.writeBytes(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, income_);
+        output.writeInt32(3, level_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, minutesToGain_);
+        output.writeInt32(4, income_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, minutesToBuild_);
+        output.writeInt32(5, minutesToGain_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(7, cashPrice_);
+        output.writeInt32(6, minutesToBuild_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(8, gemPrice_);
+        output.writeInt32(7, cashPrice_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(9, minLevel_);
+        output.writeInt32(8, gemPrice_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeInt32(10, xLength_);
+        output.writeInt32(9, minLevel_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(11, yLength_);
+        output.writeInt32(10, xLength_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(12, instaBuildGemCost_);
+        output.writeInt32(11, yLength_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(13, imgVerticalPixelOffset_);
+        output.writeInt32(12, instaBuildGemCost_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeInt32(13, imgVerticalPixelOffset_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeInt32(14, successorStructId_);
       }
       getUnknownFields().writeTo(output);
@@ -398,45 +416,49 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, income_);
+          .computeInt32Size(3, level_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, minutesToGain_);
+          .computeInt32Size(4, income_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, minutesToBuild_);
+          .computeInt32Size(5, minutesToGain_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, cashPrice_);
+          .computeInt32Size(6, minutesToBuild_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, gemPrice_);
+          .computeInt32Size(7, cashPrice_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, minLevel_);
+          .computeInt32Size(8, gemPrice_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, xLength_);
+          .computeInt32Size(9, minLevel_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, yLength_);
+          .computeInt32Size(10, xLength_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, instaBuildGemCost_);
+          .computeInt32Size(11, yLength_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, imgVerticalPixelOffset_);
+          .computeInt32Size(12, instaBuildGemCost_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(13, imgVerticalPixelOffset_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(14, successorStructId_);
       }
@@ -568,28 +590,30 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        income_ = 0;
+        level_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        minutesToGain_ = 0;
+        income_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        minutesToBuild_ = 0;
+        minutesToGain_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        cashPrice_ = 0;
+        minutesToBuild_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
-        gemPrice_ = 0;
+        cashPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        minLevel_ = 0;
+        gemPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
-        xLength_ = 0;
+        minLevel_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
-        yLength_ = 0;
+        xLength_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        instaBuildGemCost_ = 0;
+        yLength_ = 0;
         bitField0_ = (bitField0_ & ~0x00000400);
-        imgVerticalPixelOffset_ = 0;
+        instaBuildGemCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
-        successorStructId_ = 0;
+        imgVerticalPixelOffset_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
+        successorStructId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
       
@@ -639,45 +663,49 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.income_ = income_;
+        result.level_ = level_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.minutesToGain_ = minutesToGain_;
+        result.income_ = income_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.minutesToBuild_ = minutesToBuild_;
+        result.minutesToGain_ = minutesToGain_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.cashPrice_ = cashPrice_;
+        result.minutesToBuild_ = minutesToBuild_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.gemPrice_ = gemPrice_;
+        result.cashPrice_ = cashPrice_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.minLevel_ = minLevel_;
+        result.gemPrice_ = gemPrice_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.xLength_ = xLength_;
+        result.minLevel_ = minLevel_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.yLength_ = yLength_;
+        result.xLength_ = xLength_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.instaBuildGemCost_ = instaBuildGemCost_;
+        result.yLength_ = yLength_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.imgVerticalPixelOffset_ = imgVerticalPixelOffset_;
+        result.instaBuildGemCost_ = instaBuildGemCost_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
+        }
+        result.imgVerticalPixelOffset_ = imgVerticalPixelOffset_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
         }
         result.successorStructId_ = successorStructId_;
         result.bitField0_ = to_bitField0_;
@@ -701,6 +729,9 @@ public final class StructureProto {
         }
         if (other.hasName()) {
           setName(other.getName());
+        }
+        if (other.hasLevel()) {
+          setLevel(other.getLevel());
         }
         if (other.hasIncome()) {
           setIncome(other.getIncome());
@@ -778,56 +809,61 @@ public final class StructureProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              income_ = input.readInt32();
+              level_ = input.readInt32();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              minutesToGain_ = input.readInt32();
+              income_ = input.readInt32();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000010;
+              minutesToGain_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
               minutesToBuild_ = input.readInt32();
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               cashPrice_ = input.readInt32();
               break;
             }
             case 64: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               gemPrice_ = input.readInt32();
               break;
             }
             case 72: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               minLevel_ = input.readInt32();
               break;
             }
             case 80: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000200;
               xLength_ = input.readInt32();
               break;
             }
             case 88: {
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000400;
               yLength_ = input.readInt32();
               break;
             }
             case 96: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000800;
               instaBuildGemCost_ = input.readInt32();
               break;
             }
             case 104: {
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00001000;
               imgVerticalPixelOffset_ = input.readInt32();
               break;
             }
             case 112: {
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00002000;
               successorStructId_ = input.readInt32();
               break;
             }
@@ -894,64 +930,85 @@ public final class StructureProto {
         onChanged();
       }
       
-      // optional int32 income = 3;
+      // optional int32 level = 3;
+      private int level_ ;
+      public boolean hasLevel() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getLevel() {
+        return level_;
+      }
+      public Builder setLevel(int value) {
+        bitField0_ |= 0x00000004;
+        level_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLevel() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        level_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 income = 4;
       private int income_ ;
       public boolean hasIncome() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getIncome() {
         return income_;
       }
       public Builder setIncome(int value) {
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000008;
         income_ = value;
         onChanged();
         return this;
       }
       public Builder clearIncome() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         income_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 minutesToGain = 4;
+      // optional int32 minutesToGain = 5;
       private int minutesToGain_ ;
       public boolean hasMinutesToGain() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getMinutesToGain() {
         return minutesToGain_;
       }
       public Builder setMinutesToGain(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         minutesToGain_ = value;
         onChanged();
         return this;
       }
       public Builder clearMinutesToGain() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         minutesToGain_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 minutesToBuild = 5;
+      // optional int32 minutesToBuild = 6;
       private int minutesToBuild_ ;
       public boolean hasMinutesToBuild() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getMinutesToBuild() {
         return minutesToBuild_;
       }
       public Builder setMinutesToBuild(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000020;
         minutesToBuild_ = value;
         onChanged();
         return this;
       }
       public Builder clearMinutesToBuild() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000020);
         minutesToBuild_ = 0;
         onChanged();
         return this;
@@ -960,19 +1017,19 @@ public final class StructureProto {
       // optional int32 cashPrice = 7;
       private int cashPrice_ ;
       public boolean hasCashPrice() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public int getCashPrice() {
         return cashPrice_;
       }
       public Builder setCashPrice(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         cashPrice_ = value;
         onChanged();
         return this;
       }
       public Builder clearCashPrice() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         cashPrice_ = 0;
         onChanged();
         return this;
@@ -981,19 +1038,19 @@ public final class StructureProto {
       // optional int32 gemPrice = 8;
       private int gemPrice_ ;
       public boolean hasGemPrice() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public int getGemPrice() {
         return gemPrice_;
       }
       public Builder setGemPrice(int value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000080;
         gemPrice_ = value;
         onChanged();
         return this;
       }
       public Builder clearGemPrice() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000080);
         gemPrice_ = 0;
         onChanged();
         return this;
@@ -1002,19 +1059,19 @@ public final class StructureProto {
       // optional int32 minLevel = 9;
       private int minLevel_ ;
       public boolean hasMinLevel() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public int getMinLevel() {
         return minLevel_;
       }
       public Builder setMinLevel(int value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         minLevel_ = value;
         onChanged();
         return this;
       }
       public Builder clearMinLevel() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         minLevel_ = 0;
         onChanged();
         return this;
@@ -1023,19 +1080,19 @@ public final class StructureProto {
       // optional int32 xLength = 10;
       private int xLength_ ;
       public boolean hasXLength() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       public int getXLength() {
         return xLength_;
       }
       public Builder setXLength(int value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000200;
         xLength_ = value;
         onChanged();
         return this;
       }
       public Builder clearXLength() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         xLength_ = 0;
         onChanged();
         return this;
@@ -1044,19 +1101,19 @@ public final class StructureProto {
       // optional int32 yLength = 11;
       private int yLength_ ;
       public boolean hasYLength() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       public int getYLength() {
         return yLength_;
       }
       public Builder setYLength(int value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000400;
         yLength_ = value;
         onChanged();
         return this;
       }
       public Builder clearYLength() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000400);
         yLength_ = 0;
         onChanged();
         return this;
@@ -1065,19 +1122,19 @@ public final class StructureProto {
       // optional int32 instaBuildGemCost = 12;
       private int instaBuildGemCost_ ;
       public boolean hasInstaBuildGemCost() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       public int getInstaBuildGemCost() {
         return instaBuildGemCost_;
       }
       public Builder setInstaBuildGemCost(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000800;
         instaBuildGemCost_ = value;
         onChanged();
         return this;
       }
       public Builder clearInstaBuildGemCost() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000800);
         instaBuildGemCost_ = 0;
         onChanged();
         return this;
@@ -1086,19 +1143,19 @@ public final class StructureProto {
       // optional int32 imgVerticalPixelOffset = 13;
       private int imgVerticalPixelOffset_ ;
       public boolean hasImgVerticalPixelOffset() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       public int getImgVerticalPixelOffset() {
         return imgVerticalPixelOffset_;
       }
       public Builder setImgVerticalPixelOffset(int value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00001000;
         imgVerticalPixelOffset_ = value;
         onChanged();
         return this;
       }
       public Builder clearImgVerticalPixelOffset() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00001000);
         imgVerticalPixelOffset_ = 0;
         onChanged();
         return this;
@@ -1107,19 +1164,19 @@ public final class StructureProto {
       // optional int32 successorStructId = 14;
       private int successorStructId_ ;
       public boolean hasSuccessorStructId() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       public int getSuccessorStructId() {
         return successorStructId_;
       }
       public Builder setSuccessorStructId(int value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00002000;
         successorStructId_ = value;
         onChanged();
         return this;
       }
       public Builder clearSuccessorStructId() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         successorStructId_ = 0;
         onChanged();
         return this;
@@ -2387,24 +2444,24 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\"\242\002\n\022Fu" +
+      "\n\017Structure.proto\022\016com.lvl6.proto\"\261\002\n\022Fu" +
       "llStructureProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
-      "me\030\002 \001(\t\022\016\n\006income\030\003 \001(\005\022\025\n\rminutesToGai" +
-      "n\030\004 \001(\005\022\026\n\016minutesToBuild\030\005 \001(\005\022\021\n\tcashP" +
-      "rice\030\007 \001(\005\022\020\n\010gemPrice\030\010 \001(\005\022\020\n\010minLevel" +
-      "\030\t \001(\005\022\017\n\007xLength\030\n \001(\005\022\017\n\007yLength\030\013 \001(\005" +
-      "\022\031\n\021instaBuildGemCost\030\014 \001(\005\022\036\n\026imgVertic" +
-      "alPixelOffset\030\r \001(\005\022\031\n\021successorStructId" +
-      "\030\016 \001(\005\"\377\001\n\026FullUserStructureProto\022\024\n\014use" +
-      "rStructId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010struc",
-      "tId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\0224\n\013coor" +
-      "dinates\030\005 \001(\0132\037.com.lvl6.proto.Coordinat" +
-      "eProto\022\024\n\014purchaseTime\030\007 \001(\003\022\022\n\nisComple" +
-      "te\030\t \001(\010\0226\n\013orientation\030\n \001(\0162!.com.lvl6" +
-      ".proto.StructOrientation\"\'\n\017CoordinatePr" +
-      "oto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002*3\n\021StructOrien" +
-      "tation\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020" +
-      "B\016StructureProto"
+      "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\016\n\006income\030\004 \001(\005\022" +
+      "\025\n\rminutesToGain\030\005 \001(\005\022\026\n\016minutesToBuild" +
+      "\030\006 \001(\005\022\021\n\tcashPrice\030\007 \001(\005\022\020\n\010gemPrice\030\010 " +
+      "\001(\005\022\020\n\010minLevel\030\t \001(\005\022\017\n\007xLength\030\n \001(\005\022\017" +
+      "\n\007yLength\030\013 \001(\005\022\031\n\021instaBuildGemCost\030\014 \001" +
+      "(\005\022\036\n\026imgVerticalPixelOffset\030\r \001(\005\022\031\n\021su" +
+      "ccessorStructId\030\016 \001(\005\"\377\001\n\026FullUserStruct" +
+      "ureProto\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006userId",
+      "\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieve" +
+      "d\030\004 \001(\003\0224\n\013coordinates\030\005 \001(\0132\037.com.lvl6." +
+      "proto.CoordinateProto\022\024\n\014purchaseTime\030\007 " +
+      "\001(\003\022\022\n\nisComplete\030\t \001(\010\0226\n\013orientation\030\n" +
+      " \001(\0162!.com.lvl6.proto.StructOrientation\"" +
+      "\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002" +
+      "*3\n\021StructOrientation\022\016\n\nPOSITION_1\020\001\022\016\n" +
+      "\nPOSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2416,7 +2473,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_FullStructureProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullStructureProto_descriptor,
-              new java.lang.String[] { "StructId", "Name", "Income", "MinutesToGain", "MinutesToBuild", "CashPrice", "GemPrice", "MinLevel", "XLength", "YLength", "InstaBuildGemCost", "ImgVerticalPixelOffset", "SuccessorStructId", },
+              new java.lang.String[] { "StructId", "Name", "Level", "Income", "MinutesToGain", "MinutesToBuild", "CashPrice", "GemPrice", "MinLevel", "XLength", "YLength", "InstaBuildGemCost", "ImgVerticalPixelOffset", "SuccessorStructId", },
               com.lvl6.proto.StructureProto.FullStructureProto.class,
               com.lvl6.proto.StructureProto.FullStructureProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =

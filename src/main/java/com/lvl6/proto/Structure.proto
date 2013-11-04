@@ -6,9 +6,10 @@ option java_outer_classname = "StructureProto";
 message FullStructureProto { 
 	optional int32 structId = 1;
 	optional string name = 2;
-	optional int32 income = 3;
-	optional int32 minutesToGain = 4;
-	optional int32 minutesToBuild = 5;
+	optional int32 level = 3;
+	optional int32 income = 4;
+	optional int32 minutesToGain = 5;
+	optional int32 minutesToBuild = 6;
 	optional int32 cashPrice = 7;
 	optional int32 gemPrice = 8;
 	optional int32 minLevel = 9; //minUserLevel required
@@ -17,7 +18,6 @@ message FullStructureProto {
 	optional int32 instaBuildGemCost = 12;
 	optional int32 imgVerticalPixelOffset = 13;
 	optional int32 successorStructId = 14;	
-	
 }
 
 //------------------------------------------------------------------------------------------

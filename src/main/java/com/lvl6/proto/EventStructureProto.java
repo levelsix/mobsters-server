@@ -9743,14 +9743,14 @@ public final class EventStructureProto {
       FAIL_WAS_NOT_EXPANDING(1, 2),
       FAIL_NOT_DONE_YET(2, 3),
       FAIL_INSUFFICIENT_GEMS(3, 4),
+      FAIL_OTHER(4, 5),
       ;
       
-      public static final ExpansionWaitCompleteStatus FAIL_OTHER = FAIL_INSUFFICIENT_GEMS;
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_WAS_NOT_EXPANDING_VALUE = 2;
       public static final int FAIL_NOT_DONE_YET_VALUE = 3;
       public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 4;
-      public static final int FAIL_OTHER_VALUE = 4;
+      public static final int FAIL_OTHER_VALUE = 5;
       
       
       public final int getNumber() { return value; }
@@ -9761,6 +9761,7 @@ public final class EventStructureProto {
           case 2: return FAIL_WAS_NOT_EXPANDING;
           case 3: return FAIL_NOT_DONE_YET;
           case 4: return FAIL_INSUFFICIENT_GEMS;
+          case 5: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -10603,7 +10604,7 @@ public final class EventStructureProto {
       "DataProto\"\211\001\n\033ExpansionWaitCompleteStatu" +
       "s\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_WAS_NOT_EXPANDING" +
       "\020\002\022\025\n\021FAIL_NOT_DONE_YET\020\003\022\032\n\026FAIL_INSUFF" +
-      "ICIENT_GEMS\020\004\022\016\n\nFAIL_OTHER\020\004B\025B\023EventSt" +
+      "ICIENT_GEMS\020\004\022\016\n\nFAIL_OTHER\020\005B\025B\023EventSt" +
       "ructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

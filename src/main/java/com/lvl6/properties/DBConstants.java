@@ -57,6 +57,8 @@ public class DBConstants {
 	public static final String TABLE_BANNED_USER = "user_banned";
 	public static final String TABLE_USER_BEFORE_TUTORIAL_COMPLETION = "user_before_tutorial_completion";
 	public static final String TABLE_USER_CURRENCY_HISTORY = "user_currency_history";
+	public static final String TABLE_USER_FACEBOOK_INVITE = "user_facebook_invite";
+	public static final String TABLE_USER_FACEBOOK_INVITE_CONFIRMATION = "user_facebook_invite_confirmation";
 	public static final String TABLE_USER_PRIVATE_CHAT_POST = "user_private_chat_post";
   public static final String TABLE_USER_SESSION = "user_session";
   
@@ -407,6 +409,9 @@ public class DBConstants {
   public static final String USER_CURRENCY_HISTORY__CURRENCY_AFTER_CHANGE = "currency_after_change";
   public static final String USER_CURRENCY_HISTORY__REASON_FOR_CHANGE = "reason_for_change";
   public static final String USER_CURRENCY_HISTORY__DETAILS = "details";
+  
+  /*USER FACEBOOK INVITE*/
+  
   
   /*USER PRIVATE CHAT POSTS*/
   public static final String USER_PRIVATE_CHAT_POSTS__ID = GENERIC__ID;
