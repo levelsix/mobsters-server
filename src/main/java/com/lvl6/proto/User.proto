@@ -73,7 +73,7 @@ message FullUserProto {
 	optional int32 defensesWon = 37;
 	optional int32 attacksLost = 38;
 	optional int32 defensesLost = 39;
-
+	optional string facebookId = 40;
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this

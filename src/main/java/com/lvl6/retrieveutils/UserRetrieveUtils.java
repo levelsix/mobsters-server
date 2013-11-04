@@ -756,6 +756,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int defensesWon = rs.getInt(i++);
     int attacksLost = rs.getInt(i++);
     int defensesLost = rs.getInt(i++);
+    String facebookId = rs.getString(i++);
     
     User user = new User(id, name, level, diamonds, coins, experience,
     		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
@@ -766,7 +767,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		kabamNaid, hasReceivedfbReward, numAdditionalMonsterSlots,
     		numBeginnerSalesPurchased, hasActiveShield, shieldEndTime, elo,
     		rank, lastTimeQueued, attacksWon, defensesWon, attacksLost,
-    		defensesLost);
+    		defensesLost, facebookId);
     return user;
   }
 }

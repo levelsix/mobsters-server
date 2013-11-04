@@ -316,7 +316,7 @@ public class CreateInfoProtoUtils {
     builder.setDefensesWon(u.getAttacksWon());
     builder.setAttacksLost(u.getAttacksLost());
     builder.setDefensesLost(u.getDefensesLost());
-
+    builder.setFacebookId(u.getFacebookId());
     //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE
 
 

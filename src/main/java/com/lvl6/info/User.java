@@ -53,7 +53,7 @@ public class User implements Serializable {
 	private int defensesWon;
 	private int attacksLost;
 	private int defensesLost;
-
+	private String facebookId;
 
 
 	public User(int id, String name, int level, int gems, int cash,
@@ -67,7 +67,8 @@ public class User implements Serializable {
 			boolean hasReceivedfbReward, int numAdditionalMonsterSlots,
 			int numBeginnerSalesPurchased, boolean hasActiveShield,
 			Date shieldEndTime, int elo, String rank, Date lastTimeQueued,
-			int attacksWon, int defensesWon, int attacksLost, int defensesLost) {
+			int attacksWon, int defensesWon, int attacksLost, int defensesLost,
+			String facebookId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -108,6 +109,7 @@ public class User implements Serializable {
 		this.defensesWon = defensesWon;
 		this.attacksLost = attacksLost;
 		this.defensesLost = defensesLost;
+		this.facebookId = facebookId;
 	}
 
 
@@ -1118,13 +1120,20 @@ public class User implements Serializable {
 		this.defensesLost = defensesLost;
 	}
 
+	public String getFacebookId() {
+		return facebookId;
+	}
+
+	public void setFacebookId(String facebookId) {
+		this.facebookId = facebookId;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", level=" + level
-				+ ", gems=" + gems + ", cash=" + cash + ", experience="
-				+ experience + ", tasksCompleted=" + tasksCompleted + ", battlesWon="
-				+ battlesWon + ", battlesLost=" + battlesLost + ", flees=" + flees
+		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
+				+ gems + ", cash=" + cash + ", experience=" + experience
+				+ ", tasksCompleted=" + tasksCompleted + ", battlesWon=" + battlesWon
+				+ ", battlesLost=" + battlesLost + ", flees=" + flees
 				+ ", referralCode=" + referralCode + ", numReferrals=" + numReferrals
 				+ ", udid=" + udid + ", lastLogin=" + lastLogin + ", lastLogout="
 				+ lastLogout + ", deviceToken=" + deviceToken
@@ -1142,7 +1151,7 @@ public class User implements Serializable {
 				+ shieldEndTime + ", elo=" + elo + ", rank=" + rank
 				+ ", lastTimeQueued=" + lastTimeQueued + ", attacksWon=" + attacksWon
 				+ ", defensesWon=" + defensesWon + ", attacksLost=" + attacksLost
-				+ ", defensesLost=" + defensesLost + "]";
+				+ ", defensesLost=" + defensesLost + ", facebookId=" + facebookId + "]";
 	}
 
 }

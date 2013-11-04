@@ -107,11 +107,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   private Map<Integer, List<StructureForUser>> convertRSToStructIdsToUserStructs(
       ResultSet rs) {
+  	Map<Integer, List<StructureForUser>> structIdsToUserStructs = new HashMap<Integer, List<StructureForUser>>();
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
-        Map<Integer, List<StructureForUser>> structIdsToUserStructs = new HashMap<Integer, List<StructureForUser>>();
         while(rs.next()) {
           StructureForUser userStruct = convertRSRowToUserStruct(rs);
           List<StructureForUser> userStructsForStructId = structIdsToUserStructs.get(userStruct.getStructId());
@@ -123,13 +123,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
             structIdsToUserStructs.put(userStruct.getStructId(), userStructs);
           }
         }
-        return structIdsToUserStructs;
       } catch (SQLException e) {
         log.error("problem with database call.", e);
         
       }
     }
-    return null;
+    return structIdsToUserStructs;
   }
 
   private StructureForUser convertRSSingleToUserStructs(ResultSet rs) {

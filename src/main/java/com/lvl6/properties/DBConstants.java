@@ -388,6 +388,7 @@ public class DBConstants {
   public static final String USER__DEFENSES_WON = "defenses_won";
   public static final String USER__ATTACKS_LOST = "attacks_lost";
   public static final String USER__DEFENSES_LOST = "defenses_lost";
+  public static final String USER__FACEBOOK_ID = "facebook_id";
 
   /* USER BEFORE TUTORIAL COMPLETION*/
   public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

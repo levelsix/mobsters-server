@@ -160,57 +160,63 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     return true;
   }
 
-  private boolean checkLegitPurchaseNorm(Builder resBuilder, Structure struct,
+  private boolean checkLegitPurchaseNorm(Builder resBuilder, Structure prospective,
       User user, Timestamp timeOfPurchase) {
-    if (user == null || struct == null || timeOfPurchase == null) {
+    if (user == null || prospective == null || timeOfPurchase == null) {
       resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
-      log.error("parameter passed in is null. user=" + user + ", struct=" + struct 
+      log.error("parameter passed in is null. user=" + user + ", struct=" + prospective 
           + ", timeOfPurchase=" + timeOfPurchase);
       return false;
     }
     //see if the user is at or above the required level to build the structure
-    if (user.getLevel() < struct.getMinLevel()) {
+    if (user.getLevel() < prospective.getMinLevel()) {
       resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_LEVEL_TOO_LOW);
       log.error("user is too low level to purchase struct. user level=" + user.getLevel() + 
-          ", struct's min level is " + struct.getMinLevel());
+          ", struct's min level is " + prospective.getMinLevel());
       return false;
     }
     //check if user has enough cash to buy building
-    if (user.getCash() < struct.getCashPrice()) {
+    if (user.getCash() < prospective.getCashPrice()) {
       resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
-      log.error("user only has " + user.getCash() + " coins and needs " + struct.getCashPrice());
+      log.error("user only has " + user.getCash() + " coins and needs " + prospective.getCashPrice());
       return false;
     }
     //check if user has enough gems to buy building
-    if (user.getGems() < struct.getGemPrice()) {
+    if (user.getGems() < prospective.getGemPrice()) {
       resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
-      log.error("user only has " + user.getGems() + " diamonds and needs " + struct.getGemPrice());
+      log.error("user only has " + user.getGems() + " diamonds and needs " + prospective.getGemPrice());
       return false;
     }
 
-    //see if user can buy more of these structures and if another struct is in construction
+    int maxNumSameStruct = ControllerConstants
+    		.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE;
     Map<Integer, List<StructureForUser>> structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(user.getId());
-    if (structIdsToUserStructs != null) {
-      for (Integer structId : structIdsToUserStructs.keySet()) {
-        List<StructureForUser> userStructsOfSameStructId = structIdsToUserStructs.get(structId);
-        if (userStructsOfSameStructId != null) {
-          if (structId == struct.getId() && userStructsOfSameStructId.size() >= ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE) {
-            resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT);
-            log.error("user already has max of this struct, which is " 
-                + ControllerConstants.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE);
-            return false;
-          }
-          for (StructureForUser us : userStructsOfSameStructId) {
-            if (!us.isComplete() && us.getLastRetrieved() == null) {
-              resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_ANOTHER_STRUCT_STILL_BUILDING);
-              log.error("another struct still building: " + us); 
-              return false;
-            }
-          }
-        } else {
-          log.error("user has no structs? for structid " + structId);
-        }
-      }
+    
+    //see if user can buy more of these structures and if another struct is in construction
+    for (Integer structId : structIdsToUserStructs.keySet()) {
+    	List<StructureForUser> duplicateUserStructs = structIdsToUserStructs.get(structId);
+    	
+    	if (duplicateUserStructs != null) {
+    		int numCopies = duplicateUserStructs.size();
+    		//check if user can buy anymore of prospectiveStruct
+    		if (structId == prospective.getId() && numCopies >= maxNumSameStruct) {
+    			resBuilder.setStatus(PurchaseNormStructureStatus
+    					.FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT);
+    			log.error("user already has max of this struct, which is "  + maxNumSameStruct);
+    			return false;
+    		}
+    		//check if user already building something at time of purchase
+    		for (StructureForUser us : duplicateUserStructs) {
+    			//when a building is complete, it's completedTime will = retrievedTime
+    			if (!us.isComplete() && us.getLastRetrieved() == null) {
+    				resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_ANOTHER_STRUCT_STILL_BUILDING);
+    				log.error("another struct still building: " + us); 
+    				return false;
+    			}
+    		}
+    	} else {
+    		log.error("user has no structs? for structid " + structId);
+    	}
     }
     return true;
   }
