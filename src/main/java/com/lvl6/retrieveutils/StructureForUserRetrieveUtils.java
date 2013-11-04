@@ -164,14 +164,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     CoordinatePair coordinates = new CoordinatePair(rs.getInt(i++), rs.getInt(i++));
-    int level = rs.getInt(i++);
+//    int level = rs.getInt(i++);
     Date purchaseTime = new Date(rs.getTimestamp(i++).getTime());
     
     boolean isComplete = rs.getBoolean(i++);
     StructOrientation orientation = StructOrientation.valueOf(rs.getInt(i++));
 
     return new StructureForUser(id, userId, structId, lastRetrieved, coordinates,
-    		level, purchaseTime, isComplete, orientation);
+    		purchaseTime, isComplete, orientation);
   }
 
 }
