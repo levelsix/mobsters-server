@@ -467,6 +467,7 @@ public class CreateInfoProtoUtils {
     FullStructureProto.Builder builder = FullStructureProto.newBuilder();
     builder.setStructId(s.getId());
     builder.setName(s.getName());
+    builder.setLevel(s.getLevel());
     builder.setIncome(s.getIncome());
     builder.setMinutesToGain(s.getMinutesToGain());
     builder.setMinutesToBuild(s.getMinutesToBuild());

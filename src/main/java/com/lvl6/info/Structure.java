@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = 3254897803372739364L;
+	private static final long serialVersionUID = 5890003961169632164L;
 	private int id;
 	private String name;
+	private int level;
 	private int income;
 	private int minutesToGain;
 	private int minutesToBuild;
@@ -18,14 +19,15 @@ public class Structure implements Serializable {
 	private int instaBuildGemCost;
 	private int imgVerticalPixelOffset;
 	private int successorStructId;
-
-	public Structure(int id, String name, int income, int minutesToGain,
-			int minutesToBuild, int cashPrice, int gemPrice, int minLevel,
-			int xLength, int yLength, int instaBuildGemCost,
+	
+	public Structure(int id, String name, int level, int income,
+			int minutesToGain, int minutesToBuild, int cashPrice, int gemPrice,
+			int minLevel, int xLength, int yLength, int instaBuildGemCost,
 			int imgVerticalPixelOffset, int successorStructId) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.level = level;
 		this.income = income;
 		this.minutesToGain = minutesToGain;
 		this.minutesToBuild = minutesToBuild;
@@ -53,6 +55,14 @@ public class Structure implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
 	}
 
 	public int getIncome() {
@@ -145,11 +155,11 @@ public class Structure implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Structure [id=" + id + ", name=" + name + ", income=" + income
-				+ ", minutesToGain=" + minutesToGain + ", minutesToBuild="
-				+ minutesToBuild + ", cashPrice=" + cashPrice + ", gemPrice="
-				+ gemPrice + ", minLevel=" + minLevel + ", xLength=" + xLength
-				+ ", yLength=" + yLength + ", instaBuildGemCost="
+		return "Structure [id=" + id + ", name=" + name + ", level=" + level
+				+ ", income=" + income + ", minutesToGain=" + minutesToGain
+				+ ", minutesToBuild=" + minutesToBuild + ", cashPrice=" + cashPrice
+				+ ", gemPrice=" + gemPrice + ", minLevel=" + minLevel + ", xLength="
+				+ xLength + ", yLength=" + yLength + ", instaBuildGemCost="
 				+ instaBuildGemCost + ", imgVerticalPixelOffset="
 				+ imgVerticalPixelOffset + ", successorStructId=" + successorStructId
 				+ "]";

@@ -78,6 +78,7 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
+    int level = rs.getInt(i++);
     int income = rs.getInt(i++);
     int minutesToGain = rs.getInt(i++);
     int minutesToBuild = rs.getInt(i++);
@@ -90,8 +91,8 @@ import com.lvl6.utils.DBConnection;
     int imgVerticalPixelOffset = rs.getInt(i++);
     int successorStructId = rs.getInt(i++);
     
-    return new Structure(id, name, income, minutesToGain, minutesToBuild,
-    		cashPrice, gemPrice, minLevel, xLength, yLength,
-    		instaBuildGemCost, imgVerticalPixelOffset, successorStructId);
+    return new Structure(id, name, level, income, minutesToGain, minutesToBuild,
+    		cashPrice, gemPrice, minLevel, xLength, yLength, instaBuildGemCost,
+    		imgVerticalPixelOffset, successorStructId);
   }
 }
