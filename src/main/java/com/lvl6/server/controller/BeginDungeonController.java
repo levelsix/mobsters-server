@@ -66,7 +66,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     BeginDungeonRequestProto reqProto = ((BeginDungeonRequestEvent)event).getBeginDungeonRequestProto();
-    log.info("reqProto=" + reqProto);
+//    log.info("reqProto=" + reqProto);
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
@@ -184,8 +184,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	log.warn("deleted existing task_for_user. taskForUser=" + aTaskForUser +
   			"\t (should be 1) numDeleted=" + num);
   	//meh, fogedaboudit 
-    InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId, taskId,
+    num = InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId, taskId,
     		expGained, cashGained, numRevives, startTime, endTime, userWon, cancelled);
+    log.warn("inserted into task_history. taskForUser=" + aTaskForUser +
+  			"\t (should be 1) numInserted=" + num);
   }
   
   private void deleteExistingTaskStagesForUser(long taskForUserId) {
