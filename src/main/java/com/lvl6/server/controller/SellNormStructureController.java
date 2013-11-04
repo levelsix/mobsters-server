@@ -1,10 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -15,15 +10,15 @@ import com.lvl6.events.request.SellNormStructureRequestEvent;
 import com.lvl6.events.response.SellNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Structure;
-import com.lvl6.info.User;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -120,34 +115,34 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   
   public void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct, int diamondChange, 
       int coinChange, int previousSilver, int previousGold) {
-    int userStructId = userStruct.getId();
-    int structId = userStruct.getStructId();
-    int prevLevel = userStruct.getLevel();
-    String structDetails = "uStructId:" + userStructId + " structId:" + structId
-        + " prevLevel:" + prevLevel;
-    
-    Timestamp date = new Timestamp((new Date()).getTime());
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gems = MiscMethods.gems;
-    String cash = MiscMethods.cash;
-    String reasonForChange = ControllerConstants.UCHRFC__SELL_NORM_STRUCT + " "
-        + structDetails;
-
-    Map<String, Integer> money = new HashMap<String, Integer>();
-    if (0 != diamondChange) {
-      money.put(gems, diamondChange);
-      previousGoldSilver.put(gems, previousGold);
-      reasonsForChanges.put(gems, reasonForChange);
-    }
-    if (0 != coinChange) {
-      money.put(cash, coinChange);
-      previousGoldSilver.put(cash, previousSilver);
-      reasonsForChanges.put(cash, reasonForChange);
-    }
-    
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-        previousGoldSilver, reasonsForChanges);
-    
+//    int userStructId = userStruct.getId();
+//    int structId = userStruct.getStructId();
+//    int prevLevel = userStruct.getLevel();
+//    String structDetails = "uStructId:" + userStructId + " structId:" + structId
+//        + " prevLevel:" + prevLevel;
+//    
+//    Timestamp date = new Timestamp((new Date()).getTime());
+//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String gems = MiscMethods.gems;
+//    String cash = MiscMethods.cash;
+//    String reasonForChange = ControllerConstants.UCHRFC__SELL_NORM_STRUCT + " "
+//        + structDetails;
+//
+//    Map<String, Integer> money = new HashMap<String, Integer>();
+//    if (0 != diamondChange) {
+//      money.put(gems, diamondChange);
+//      previousGoldSilver.put(gems, previousGold);
+//      reasonsForChanges.put(gems, reasonForChange);
+//    }
+//    if (0 != coinChange) {
+//      money.put(cash, coinChange);
+//      previousGoldSilver.put(cash, previousSilver);
+//      reasonsForChanges.put(cash, reasonForChange);
+//    }
+//    
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
+//        previousGoldSilver, reasonsForChanges);
+//    
   }
 }

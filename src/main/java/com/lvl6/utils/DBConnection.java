@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -158,12 +160,12 @@ public class DBConnection {
     return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "and", null,
         false, limit, false);
   }
-
-	public ResultSet selectRowsAbsoluteAndOrderbydesc(Connection conn,
-			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn) {
-		return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "and",
-				orderByColumn, false, SELECT_LIMIT_NOT_SET, false);
-	}
+//
+//	public ResultSet selectRowsAbsoluteAndOrderbydesc(Connection conn,
+//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn) {
+//		return selectRows(conn, null, absoluteConditionParams, null, null, null, tablename, "and",
+//				orderByColumn, false, SELECT_LIMIT_NOT_SET, false);
+//	}
 
 	public ResultSet selectRowsAbsoluteAndOrderbydescLimit(Connection conn,
 			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit) {
@@ -177,20 +179,20 @@ public class DBConnection {
 		return selectRows(conn, null, absoluteConditionParams, null, lessThanConditionParams, null,
 				tablename, "and", orderByColumn, false, limit, false);
 	}
-
-	public ResultSet selectRowsAbsoluteAndOrderbydescLimitGreaterthan(Connection conn,
-			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
-			Map<String, Object> greaterThanConditionParams) {
-		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams, null, null,
-				tablename, "and", orderByColumn, false, limit, false);
-	}
-
-	public ResultSet selectRowsAbsoluteAndLimitLessthanGreaterthanRand(Connection conn,
-			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
-			Map<String, Object> lessThanConditionParams, Map<String, Object> greaterThanConditionParams) {
-		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams,
-				lessThanConditionParams, null, tablename, "and", null, false, limit, true);
-	}
+//
+//	public ResultSet selectRowsAbsoluteAndOrderbydescLimitGreaterthan(Connection conn,
+//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
+//			Map<String, Object> greaterThanConditionParams) {
+//		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams, null, null,
+//				tablename, "and", orderByColumn, false, limit, false);
+//	}
+//
+//	public ResultSet selectRowsAbsoluteAndLimitLessthanGreaterthanRand(Connection conn,
+//			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn, int limit,
+//			Map<String, Object> lessThanConditionParams, Map<String, Object> greaterThanConditionParams) {
+//		return selectRows(conn, null, absoluteConditionParams, greaterThanConditionParams,
+//				lessThanConditionParams, null, tablename, "and", null, false, limit, true);
+//	}
 
 	public ResultSet selectRowsAbsoluteAndOrderbydescGreaterthan(Connection conn,
 			Map<String, Object> absoluteConditionParams, String tablename, String orderByColumn,
@@ -360,45 +362,45 @@ public class DBConnection {
 		}
 		return numUpdated;
 	}
-
-	public int insertIntoTableIgnore(String tablename, Map<String, Object> insertParams) {
-		List<String> questions = new LinkedList<String>();
-		List<String> columns = new LinkedList<String>();
-		List<Object> values = new LinkedList<Object>();
-		int numUpdated = 0;
-
-		if (insertParams != null && insertParams.size() > 0) {
-			for (String column : insertParams.keySet()) {
-				questions.add("?");
-				columns.add(column);
-				values.add(insertParams.get(column));
-			}
-			String query = "insert ignore into " + tablename + "("
-					+ StringUtils.getListInString(columns, ",") + ") VALUES ("
-					+ StringUtils.getListInString(questions, ",") + ")";
-
-			Connection conn = null;
-			PreparedStatement stmt = null;
-			try {
-				conn = dataSource.getConnection();
-				stmt = conn.prepareStatement(query);
-				if (values.size() > 0) {
-					int i = 1;
-					for (Object value : values) {
-						stmt.setObject(i, value);
-						i++;
-					}
-				}
-				numUpdated = stmt.executeUpdate();
-			} catch (SQLException e) {
-				log.error("problem with " + query + ", values are " + values, e);
-				e.printStackTrace();
-			} finally {
-				close(null, stmt, conn);
-			}
-		}
-		return numUpdated;
-	}
+//
+//	public int insertIntoTableIgnore(String tablename, Map<String, Object> insertParams) {
+//		List<String> questions = new LinkedList<String>();
+//		List<String> columns = new LinkedList<String>();
+//		List<Object> values = new LinkedList<Object>();
+//		int numUpdated = 0;
+//
+//		if (insertParams != null && insertParams.size() > 0) {
+//			for (String column : insertParams.keySet()) {
+//				questions.add("?");
+//				columns.add(column);
+//				values.add(insertParams.get(column));
+//			}
+//			String query = "insert ignore into " + tablename + "("
+//					+ StringUtils.getListInString(columns, ",") + ") VALUES ("
+//					+ StringUtils.getListInString(questions, ",") + ")";
+//
+//			Connection conn = null;
+//			PreparedStatement stmt = null;
+//			try {
+//				conn = dataSource.getConnection();
+//				stmt = conn.prepareStatement(query);
+//				if (values.size() > 0) {
+//					int i = 1;
+//					for (Object value : values) {
+//						stmt.setObject(i, value);
+//						i++;
+//					}
+//				}
+//				numUpdated = stmt.executeUpdate();
+//			} catch (SQLException e) {
+//				log.error("problem with " + query + ", values are " + values, e);
+//				e.printStackTrace();
+//			} finally {
+//				close(null, stmt, conn);
+//			}
+//		}
+//		return numUpdated;
+//	}
 
 	/*
 	 * assumes every list for each column is numRows length insertParams: key,
@@ -506,50 +508,50 @@ public class DBConnection {
 		}
 		return generatedKey;
 	}
-	
-	/* returns 0 if error */
-	public long insertIntoTableBasicReturnLongId(String tablename, Map<String, Object> insertParams) {
-		List<String> questions = new LinkedList<String>();
-		List<String> columns = new LinkedList<String>();
-		List<Object> values = new LinkedList<Object>();
-
-		long generatedKey = 0;
-		if (insertParams != null && insertParams.size() > 0) {
-			for (String column : insertParams.keySet()) {
-				questions.add("?");
-				columns.add(column);
-				values.add(insertParams.get(column));
-			}
-			String query = "insert into " + tablename + "(" + StringUtils.getListInString(columns, ",")
-					+ ") VALUES (" + StringUtils.getListInString(questions, ",") + ")";
-			Connection conn = null;
-			PreparedStatement stmt = null;
-			try {
-				conn = dataSource.getConnection();
-				stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-				if (values.size() > 0) {
-					int i = 1;
-					for (Object value : values) {
-						stmt.setObject(i, value);
-						i++;
-					}
-				}
-				int numUpdated = stmt.executeUpdate();
-				if (numUpdated == 1) {
-					ResultSet rs = stmt.getGeneratedKeys();
-					if (rs.next()) {
-						generatedKey = rs.getLong(1);
-					}
-				}
-			} catch (SQLException e) {
-				log.error("problem with " + query + ", values are " + values, e);
-				e.printStackTrace();
-			} finally {
-				close(null, stmt, conn);
-			}
-		}
-		return generatedKey;
-	}
+//	
+//	/* returns 0 if error */
+//	public long insertIntoTableBasicReturnLongId(String tablename, Map<String, Object> insertParams) {
+//		List<String> questions = new LinkedList<String>();
+//		List<String> columns = new LinkedList<String>();
+//		List<Object> values = new LinkedList<Object>();
+//
+//		long generatedKey = 0;
+//		if (insertParams != null && insertParams.size() > 0) {
+//			for (String column : insertParams.keySet()) {
+//				questions.add("?");
+//				columns.add(column);
+//				values.add(insertParams.get(column));
+//			}
+//			String query = "insert into " + tablename + "(" + StringUtils.getListInString(columns, ",")
+//					+ ") VALUES (" + StringUtils.getListInString(questions, ",") + ")";
+//			Connection conn = null;
+//			PreparedStatement stmt = null;
+//			try {
+//				conn = dataSource.getConnection();
+//				stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+//				if (values.size() > 0) {
+//					int i = 1;
+//					for (Object value : values) {
+//						stmt.setObject(i, value);
+//						i++;
+//					}
+//				}
+//				int numUpdated = stmt.executeUpdate();
+//				if (numUpdated == 1) {
+//					ResultSet rs = stmt.getGeneratedKeys();
+//					if (rs.next()) {
+//						generatedKey = rs.getLong(1);
+//					}
+//				}
+//			} catch (SQLException e) {
+//				log.error("problem with " + query + ", values are " + values, e);
+//				e.printStackTrace();
+//			} finally {
+//				close(null, stmt, conn);
+//			}
+//		}
+//		return generatedKey;
+//	}
 
 	/*
 	 * newRows should contain maps that are different only by the value in the
@@ -566,7 +568,7 @@ public class DBConnection {
 		List<String> columns = new LinkedList<String>();
 		List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
 
-		populateQuestionsColumnsValuesListCollection(questions, columns, valuesListCollection, newRows);
+		populateQuestionsColumnsValues(questions, columns, valuesListCollection, newRows);
 
 		if (0 <= columns.size()) {
 			boolean isInsert = true;
@@ -583,7 +585,7 @@ public class DBConnection {
 		List<String> columns = new LinkedList<String>();
 		List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
 
-		populateQuestionsColumnsValuesListCollection(questions, columns, valuesListCollection, newRows);
+		populateQuestionsColumnsValues(questions, columns, valuesListCollection, newRows);
 
 		if (0 <= columns.size()) {
 			boolean isInsert = true;
@@ -592,68 +594,7 @@ public class DBConnection {
 					numberOfQuestionLists, isInsert);
 			return queryDBAndReturnAutoIncLongIds(query, valuesListCollection);
 		}
-		return null;
-	}
-
-	private void populateColumnsAndQuestions(List<String> columns, List<String> questions,
-			Map<String, Object> newRow) {
-		if (0 == columns.size()) {
-			for (String col : newRow.keySet()) {
-				columns.add(col);
-				questions.add("?");
-			}
-		}
-	}
-
-	private void generateValuesList(List<String> columns, List<Object> valuesList, Map<String, Object> newRow) {
-		for (String column : columns) {
-			valuesList.add(newRow.get(column));
-		}
-	}
-
-	// helper function for insertIntoTableBasicReturnIds() and
-	// replaceIntoTableValues()
-	private void populateQuestionsColumnsValuesListCollection(List<String> questions, List<String> columns,
-			List<List<Object>> valuesListCollection, List<Map<String, Object>> newRows) {
-		for (Map<String, Object> newRow : newRows) {
-
-			if (null != newRow && 0 < newRow.size()) {
-				// columns and questions should be populated only once
-				populateColumnsAndQuestions(columns, questions, newRow);
-
-				List<Object> valuesList = new ArrayList<Object>();
-				// generate a values list for all rows,
-				// i.e. the (?,...,?) in VALUES (?,...,?),...(?,...,?)
-				generateValuesList(columns, valuesList, newRow);
-
-				valuesListCollection.add(valuesList);
-			}
-		}
-	}
-
-	private String constructInsertOrReplaceIntoTableValuesSQLQuery(String tableName, List<String> columns,
-			List<String> questions, int numberOfQuestionLists, boolean isInsert) {
-		String delimiter = ",";
-		String query = "";
-		if (isInsert) {
-			query = "INSERT ";
-		} else {
-			query = "REPLACE ";
-		}
-
-		query += " into " + tableName + " (" + StringUtils.getListInString(columns, delimiter) + ") VALUES ";
-
-		// construct the (?,...,?),...(?,...,?) in VALUES (?,...,?),...(?,...,?)
-		for (int i = 0; i < numberOfQuestionLists; i++) {
-			query += "( ";
-			query += StringUtils.getListInString(questions, ",");
-			query += "), ";
-		}
-		// take out the trailing comma
-		int lastCommaLength = 2;
-		query = query.substring(0, query.length() - lastCommaLength);
-		log.info("sql query: " + query);
-		return query;
+		return new ArrayList<Long>();
 	}
 
 	// assumption: ordering of keys returned matches ordering of the list
@@ -701,21 +642,6 @@ public class DBConnection {
 		return generatedKeys;
 	}
 	
-	private void setValuesInPreparedStatement(PreparedStatement stmt, List<List<Object>> valuesListCollection)
-			throws Exception {
-		int i = 1;
-		for (List<Object> valueList : valuesListCollection) {
-			if (valueList.size() > 0) {
-				for (Object value : valueList) {
-					stmt.setObject(i, value);
-					i++;
-				}
-			} else {
-				throw new Exception("empty row tried to be inserted into db");
-			}
-		}
-	}
-
 	private void executeStmtReturnAutoIncIds(PreparedStatement stmt, List<Integer> generatedKeys)
 			throws SQLException {
 		int numUpdated = stmt.executeUpdate();
@@ -809,6 +735,36 @@ public class DBConnection {
 		return numUpdated;
 	}
 
+	/*
+	 * Acts like a limited mysql 'replace' transaction. The whole row won't be replaced,
+	 * rather specified columns of rows will be replaced
+	 */
+	public int insertOnDuplicateKeyUpdateColumnsAbsolute(String tableName,
+			List<Map<String, Object>> newRows, Set<String> replaceTheseColumns) {
+		
+		List<String> columns = new ArrayList<String>();
+		List<String> questions =  new ArrayList<String>();
+		//could just be a List<Object> but eh
+		List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
+		int numUpdated = 0;
+		
+		populateQuestionsColumnsValues(questions, columns, valuesListCollection, newRows);
+		
+		if (columns.isEmpty()) {
+			return numUpdated;
+		}
+		boolean isInsert = true;
+		int numberOfQuestionLists = valuesListCollection.size();
+		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName,
+				columns, questions, numberOfQuestionLists, isInsert);
+		//append the "ON DUPLICATE KEY UPDATE" part
+		transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns);
+		
+		numUpdated = queryDbAndReturnNumUpdated(query, valuesListCollection);
+		return numUpdated;
+	}
+	
+	
 	// query setup is similar to how insertIntoTableBasicReturnIds() works, but
 	// actual querying
 	// of db is slightly different in that this does not return the ids of rows
@@ -816,92 +772,235 @@ public class DBConnection {
 	// Hopefully the comments for insertIntoTableBasicReturnIds() will be
 	// helpful.
 	public int replaceIntoTableValues(String tableName, List<Map<String, Object>> newRows) {
-		List<String> questions = new LinkedList<String>();
-		List<String> columns = new LinkedList<String>();
+		List<String> questions = new ArrayList<String>();
+		List<String> columns = new ArrayList<String>();
+		//could just be a List<Object> but eh
 		List<List<Object>> valuesListCollection = new ArrayList<List<Object>>();
 		int numUpdated = 0;
 
-		populateQuestionsColumnsValuesListCollection(questions, columns, valuesListCollection, newRows);
+		populateQuestionsColumnsValues(questions, columns, valuesListCollection, newRows);
 
-		if (0 <= columns.size()) {
-
-			boolean isInsert = false;
-			int numberOfQuestionLists = valuesListCollection.size();
-			String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName, columns, questions,
-					numberOfQuestionLists, isInsert);
-			Connection conn = null;
-			PreparedStatement stmt = null;
-			try {
-				conn = dataSource.getConnection();
-				stmt = conn.prepareStatement(query);
-				setValuesInPreparedStatement(stmt, valuesListCollection);
-				numUpdated = stmt.executeUpdate(); // if this throws an error,
-													// then switch to
-													// stmt.execute()
-
-			} catch (SQLException e) {
-				log.error("problem with " + query + ", values are " + valuesListCollection, e);
-				e.printStackTrace();
-			} catch (Exception e) {
-				log.error("DID NOT MODIFY DB", e);
-			} finally {
-				close(null, stmt, conn);
-			}
+		if (columns.isEmpty()) {
+			return numUpdated;
 		}
+		boolean isInsert = false;
+		int numberOfQuestionLists = valuesListCollection.size();
+		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName,
+				columns, questions, numberOfQuestionLists, isInsert);
+		
+		numUpdated = queryDbAndReturnNumUpdated(query, valuesListCollection);
 		return numUpdated;
 	}
 
-	/*
-	 * mysql replace statement either: 1) inserts new row into table if there
-	 * does not exist a row in the table that has the same PRIMARY KEY or UNIQUE
-	 * index 2) drops preexisting row in the table with the same PRIMARY KEY and
-	 * inserts new row
-	 * 
-	 * in case (1) this function returns 1 in case (2) this function returns at
-	 * least 2
-	 */
-	public int replace(String tableName, Map<String, Object> columnsAndValues) {
-		// return value
-		int numUpdated = 0;
-
-		if (null != columnsAndValues && 0 < columnsAndValues.size()) {
-			// for prepared statement
-			List<String> columns = new LinkedList<String>();
-			List<Object> values = new LinkedList<Object>();
-			List<String> questions = new LinkedList<String>();
-
-			for (String column : columnsAndValues.keySet()) {
-				columns.add(column);
-				values.add(columnsAndValues.get(column));
-				questions.add("?");
+	//newRows MUST CONTAIN AT LEAST 1 ELEMENT
+	// questions, columns and valuesListCollection will be populated
+	private void populateQuestionsColumnsValues(List<String> questions,
+			List<String> columns, List<List<Object>> valuesListCollection,
+			List<Map<String, Object>> newRows) {
+		if (null == newRows || newRows.isEmpty()) {
+			return;
+		}
+		//specify column ordering so the values will be in the correct order.
+		//so across all List<Object> (in valuesListCollection) the value at, say,
+		//index 0 is for column0, and the value at index 1 is for column1, and so on
+		//e.g.  
+		//columns = (columnA, columnB, ...)
+		//valuesListCollection = ( FirstList(valueForColumnA, valueForColumnB...),
+		//												 SecondList(ValueForColumnA, valueForColumnB...),
+		//                         ...)
+		populateColumnsAndQuestions(columns, questions, newRows);
+		
+		for (Map<String, Object> newRow : newRows) {
+			if (null == newRow || newRow.isEmpty()) {
+				continue;
 			}
+			
+			// generate a values list for all rows,
+			// i.e. the (?,...,?) in VALUES (?,...,?),...(?,...,?)
+			List<Object> valuesList =  generateValuesList(columns, newRow);
+			valuesListCollection.add(valuesList);
+		}
+	}
 
-			String query = "REPLACE INTO " + tableName + "(" + StringUtils.getListInString(columns, ",")
-					+ ")" + " VALUE " + "( " + StringUtils.getListInString(questions, ",") + ")";
+	private void populateColumnsAndQuestions(List<String> columns, List<String> questions,
+			List<Map<String, Object>> newRows) {
+		//set the ordering of the columns
+		Map<String, Object> aRow = newRows.get(0);
+		Set<String> uniqColumns = aRow.keySet();
+		columns.addAll(uniqColumns);
+		
+		int amount = columns.size();
+		List<String> questionsTemp = Collections.nCopies(amount, "?");
+		questions.addAll(questionsTemp);
+	}
 
-			Connection conn = null;
-			PreparedStatement stmt = null;
-			try {
-				conn = dataSource.getConnection();
-				stmt = conn.prepareStatement(query);
+	private List<Object> generateValuesList(List<String> columns,
+			Map<String, Object> newRow) {
+		List<Object> valuesList = new ArrayList<Object>();
+		//list is an ordered collection and its iterator spits things out
+		//in the proper sequence (from first to last element)
+		for (String column : columns) {
+			Object value = newRow.get(column);
+			valuesList.add(value);
+		}
+		return valuesList;
+	}
+	
+	private String constructInsertOrReplaceIntoTableValuesSQLQuery(String tableName, List<String> columns,
+			List<String> questions, int numberOfQuestionLists, boolean isInsert) {
+		String delimiter = ",";
+		StringBuffer query = new StringBuffer();
+		if (isInsert) {
+			query.append("INSERT ");
+		} else {
+			query.append("REPLACE ");
+		}
 
-				int i = 1;
-				for (Object value : values) {
+		query.append(" into ");
+		query.append(tableName);
+		query.append(" (");
+		query.append(StringUtils.getListInString(columns, delimiter));
+		query.append(") VALUES ");
+
+		// construct the (?,...,?),...(?,...,?) in VALUES (?,...,?),...(?,...,?)
+		String questionList = "(" + StringUtils.getListInString(questions, ",") + ")";
+		List<String> questionLists = Collections.nCopies(numberOfQuestionLists, questionList);
+		String questionListsStr = StringUtils.getListInString(questionLists, delimiter + " ");
+		query.append(questionListsStr);
+		
+		String queryStr = query.toString();
+		log.info("sql query: " + queryStr);
+		return queryStr;
+	}
+	
+	private void setValuesInPreparedStatement(PreparedStatement stmt, List<List<Object>> valuesListCollection)
+			throws Exception {
+		int i = 1;
+		for (List<Object> valueList : valuesListCollection) {
+			if (valueList.size() > 0) {
+				for (Object value : valueList) {
 					stmt.setObject(i, value);
 					i++;
 				}
-				numUpdated = stmt.executeUpdate();
-			} catch (SQLException e) {
-				log.error("problem with " + query + ", values are " + values, e);
-				e.printStackTrace();
-			} finally {
-				close(null, stmt, conn);
+			} else {
+				throw new Exception("empty row tried to be inserted into db");
 			}
 		}
-
+	}
+	
+	private void transformToOnDuplicateKeyUpdateQuery(String query, 
+			Set<String> replaceTheseColumns) {
+		
+		StringBuffer newQuery = new StringBuffer();
+		newQuery.append(query);
+		newQuery.append(" ON DUPLICATE KEY UPDATE ");
+		
+		//this will hold the the individual update clauses in
+		//"some_column1=VALUES(some_column1), some_column2=VALUES(some_column2),...";
+		List<String> updateClauseList = new ArrayList<String>();
+		
+		//generate the individual update clauses. The "some_column1=VALUES(some_column1)"
+		//from example above
+		for(String replacedColumn : replaceTheseColumns) {
+			StringBuffer updateClause = new StringBuffer();
+			updateClause.append(replacedColumn);
+			updateClause.append("=VALUES(");
+			updateClause.append(replacedColumn);
+			updateClause.append(")");
+			
+			updateClauseList.add(updateClause.toString());
+		}
+		
+		String allUpdateClauses = StringUtils.getListInString(updateClauseList, ", ");
+		newQuery.append(allUpdateClauses);
+		
+	}
+	
+	private int queryDbAndReturnNumUpdated(String query, List<List<Object>> valuesListCollection) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int numUpdated = 0;
+		
+		try {
+			conn = dataSource.getConnection();
+			stmt = conn.prepareStatement(query);
+			setValuesInPreparedStatement(stmt, valuesListCollection);
+			
+			// if this throws an error, then switch to stmt.execute()
+			numUpdated = stmt.executeUpdate(); 
+			
+		} catch (SQLException e) {
+			log.error("problem with " + query + ", values are " + valuesListCollection, e);
+			e.printStackTrace();
+		} catch (Exception e) {
+			log.error("DID NOT MODIFY DB", e);
+		} finally {
+			close(null, stmt, conn);
+		}
 		return numUpdated;
 	}
+	
+//	/*
+//	 * mysql replace statement either: 1) inserts new row into table if there
+//	 * does not exist a row in the table that has the same PRIMARY KEY or UNIQUE
+//	 * index 2) drops preexisting row in the table with the same PRIMARY KEY and
+//	 * inserts new row
+//	 * 
+//	 * in case (1) this function returns 1 in case (2) this function returns at
+//	 * least 2
+//	 */
+//	public int replace(String tableName, Map<String, Object> columnsAndValues) {
+//		// return value
+//		int numUpdated = 0;
+//
+//		if (null != columnsAndValues && 0 < columnsAndValues.size()) {
+//			// for prepared statement
+//			List<String> columns = new LinkedList<String>();
+//			List<Object> values = new LinkedList<Object>();
+//			List<String> questions = new LinkedList<String>();
+//
+//			for (String column : columnsAndValues.keySet()) {
+//				columns.add(column);
+//				values.add(columnsAndValues.get(column));
+//				questions.add("?");
+//			}
+//
+//			String query = "REPLACE INTO " + tableName + "(" + StringUtils.getListInString(columns, ",")
+//					+ ")" + " VALUE " + "( " + StringUtils.getListInString(questions, ",") + ")";
+//
+//			Connection conn = null;
+//			PreparedStatement stmt = null;
+//			try {
+//				conn = dataSource.getConnection();
+//				stmt = conn.prepareStatement(query);
+//
+//				int i = 1;
+//				for (Object value : values) {
+//					stmt.setObject(i, value);
+//					i++;
+//				}
+//				numUpdated = stmt.executeUpdate();
+//			} catch (SQLException e) {
+//				log.error("problem with " + query + ", values are " + values, e);
+//				e.printStackTrace();
+//			} finally {
+//				close(null, stmt, conn);
+//			}
+//		}
+//
+//		return numUpdated;
+//	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	 * returns num of rows affected
 	 */

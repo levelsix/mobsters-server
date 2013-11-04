@@ -7,7 +7,7 @@ public class ControllerConstants {
 
 	//MOBSTERS CONSTANTS
 	
-	public static final int MONSTER__CASH_PER_HEALTH_POINT = 1;
+	public static final int MONSTER__CASH_PER_HEALTH_POINT = 10;
 	public static final int MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2;
 	
 	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
@@ -16,11 +16,15 @@ public class ControllerConstants {
 	
 	public static final int MONSTER_FOR_USER__MAX_TEAM_SIZE = 3;
 	public static final int MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT = 10;
+	
+	//MFUSOP = monster_for_user_source_of_pieces
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
-	public static final String MFUSOP__QUEST = "QuestId "; 
-	//delete reasons
-	public static final String MFUDR__SELL = "sold for cash=";
-	public static final String MFUDR__QUEST = "QuestId ";
+	public static final String MFUSOP__QUEST = "questId "; 
+	
+	//MFUDR = monster_for_user_delete_reasons
+	public static final String MFUDR__ENHANCING = "enhancing";
+	public static final String MFUDR__QUEST = "quest";
+	public static final String MFUDR__SELL = "sold for cash";
 	
   public static final int NOT_SET = -1;
   
@@ -263,12 +267,15 @@ public class ControllerConstants {
   public static final int TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END = 24;
   
   //USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
-  public static final String UCHRFC__END_TASK = "end task: ";
-  public static final String UCHRFC__ENHANCING = "enhancing: ";
-  public static final String UCHRFC__HEAL_MONSTER = "healed userMonsters: ";
-  public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased monster inventory: ";
-  public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing ";
-  public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user_monster_ids: ";
+  public static final String UCHRFC__CREATE_CLAN = "created clan";
+  public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
+  public static final String UCHRFC__END_TASK = "end task";
+  public static final String UCHRFC__ENHANCING = "enhancing user monsters";
+  public static final String UCHRFC__HEAL_MONSTER = "healed user monsters";
+  public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
+  public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
+  public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
+  public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
   
   
   public static final String UCHRFC__USER_CREATED = "user created";
@@ -296,10 +303,8 @@ public class ControllerConstants {
   public static final String UCHRFC__IN_APP_PURCHASE = "inapp purchase: ";
   public static final String UCHRFC__ARMORY_TRANSACTION = "armory transaction";
   public static final String UCHRFC__UPGRADE_CLAN_TIER_LEVEL = "upgraded clan tier level";
-  public static final String UCHRFC__CREATE_CLAN = "created clan";
   public static final String UCHRFC__EARN_FREE_DIAMONDS_KIIP = "kiip";
   public static final String UCHRFC__EARN_FREE_DIAMONDS_ADCOLONY = "adcolony";
-  public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
   public static final String UCHRFC__CHARACTER_MOD_TYPE = "character type, class";
   public static final String UCHRFC__CHARACTER_MOD_NAME = "character name";
   public static final String UCHRFC__CHARACTER_MOD_RESET = "character reset";

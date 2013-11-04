@@ -1,6 +1,9 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +19,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesRequestProto;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto;
 import com.lvl6.proto.EventMonsterProto.CombineUserMonsterPiecesResponseProto.Builder;
@@ -54,8 +58,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int userId = senderProto.getUserId();
     List<Long> userMonsterIds = reqProto.getUserMonsterIdsList();
     userMonsterIds = new ArrayList<Long>(userMonsterIds);
-    
-    log.info("reqProto=" + reqProto);
+    int gemCost = reqProto.getGemCost();
+    Date curDate = new Date();
+    Timestamp curTime = new Timestamp(curDate.getTime());
+//    log.info("reqProto=" + reqProto);
 
     //set some values to send to the client (the response proto)
     CombineUserMonsterPiecesResponseProto.Builder resBuilder = CombineUserMonsterPiecesResponseProto.newBuilder();
@@ -64,16 +70,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
+    	int previousGems = 0;
+    	
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
       		.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
       
       boolean legit = checkLegit(resBuilder, userId, aUser, userMonsterIds,
-      		idsToUserMonsters);
+      		idsToUserMonsters, gemCost);
 
       boolean successful = false;
+      Map<String, Integer> money = new HashMap<String, Integer>();
       if(legit) {
-    	  successful = writeChangesToDb(aUser, userMonsterIds);
+      	previousGems = aUser.getGems();
+    	  successful = writeChangesToDb(aUser, userMonsterIds, gemCost, money);
       }
       
       if (successful) {
@@ -85,10 +95,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       resEvent.setCombineUserMonsterPiecesResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
       
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
+      if (successful && gemCost > 0) {
+      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+      	resEventUpdate.setTag(event.getTag());
+      	server.writeEvent(resEventUpdate);
+      	
+      	writeToUserCurrencyHistory(aUser, money, curTime, previousGems, userMonsterIds);
+      }
     } catch (Exception e) {
       log.error("exception in CombineUserMonsterPiecesController processEvent", e);
       //don't let the client hang
@@ -117,7 +131,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    *  completed/combined, 'b' is missing a piece, 'c' doesn't exist
    */
   private boolean checkLegit(Builder resBuilder, int userId, User u,
-  		List<Long> userMonsterIds, Map<Long, MonsterForUser> idsToUserMonsters) {
+  		List<Long> userMonsterIds, Map<Long, MonsterForUser> idsToUserMonsters,
+  		int gemCost) {
   	
   	if (null == u) {
   		log.error("user is null. no user exists with id=" + userId + "");
@@ -153,13 +168,41 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		userMonsterIds.addAll(wholeUserMonsterIds);
   	}
   	
+  	if (gemCost > 0 && userMonsterIds.size() > 1) {
+  		//user speeding up combining multiple monsters, can only speed up one
+  		log.error("user speeding up combining pieces for multiple monsters can only " +
+  				"speed up one monster. gemCost=" + gemCost + "\t userMonsterIds=" + userMonsterIds);
+  		resBuilder.setStatus(CombineUserMonsterPiecesStatus
+  				.FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP);
+  		return false;
+  	}
   	
-  	resBuilder.setStatus(CombineUserMonsterPiecesStatus.SUCCESS);
+  	//check user gems
+  	int userGems = u.getGems();
+  	if (userGems < gemCost) {
+  		log.error("user doesn't have enough gems to speed up combining. userGems=" +
+  				userGems + "\t gemCost=" + gemCost + "\t userMonsterIds=" + userMonsterIds);
+  		resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_INSUFFUCIENT_GEMS);
+  		return false;
+  	}
+  	
   	return true;
   }
   
-  private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds) { 
-  	boolean success = true;
+  private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds,
+  		int gemCost, Map<String, Integer> money) { 
+  	
+  	//if user sped up stuff then charge him
+  	if (gemCost > 0) {
+  		int gemChange = -1 * gemCost;
+  		if (!aUser.updateRelativeDiamondsNaive(gemChange)) {
+  			log.error("problem with updating user gems for speedup. gemChange=" + gemChange + 
+  					"\t userMonsterIds=" + userMonsterIds);
+  			return false;
+  		} else {
+  			money.put(MiscMethods.gems, gemChange);
+  		}
+  	}
   	
   	int num = UpdateUtils.get().updateCompleteUserMonster(userMonsterIds);
   	
@@ -167,7 +210,26 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		log.error("problem with updating user monster is_complete. numUpdated=" +
   				num + "\t userMonsterIds=" + userMonsterIds);
   	}
-  	return success;
+  	return true;
   }
   
+  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money,
+  		Timestamp curTime, int previousGems, List<Long> userMonsterIds) {
+  	if (null == money || money.isEmpty()) {
+  		return;
+  	}
+  	String gems = MiscMethods.gems;
+  	String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_COMBINING_MONSTER;
+  	
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> detailsList = new HashMap<String, String>();
+
+    previousGemsCash.put(gems, previousGems);
+    reasonsForChanges.put(gems, reasonForChange);
+    detailsList.put(gems, "userMonsterIds=" + userMonsterIds);
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
+        previousGemsCash, reasonsForChanges, detailsList);
+
+  }
 }

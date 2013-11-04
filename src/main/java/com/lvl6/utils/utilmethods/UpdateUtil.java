@@ -61,11 +61,6 @@ public interface UpdateUtil {
 //      int questId, boolean setTasksCompleteTrue,
 //      boolean setDefeatTypeJobsCompleteTrue);
 
-  /*
-   * used for updating is_complete=true and last_retrieved to upgrade_time+minutestogain for a userstruct
-   */
-  public abstract boolean updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(
-      List<StructureForUser> userStructs, int levelChange);
 
   /*
    * used for updating last retrieved and/or last upgrade user struct time and is_complete
@@ -74,26 +69,14 @@ public interface UpdateUtil {
       ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
       ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
       //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
-  public abstract boolean updateUserStructLastretrievedIscompleteLevelchange(
-      int userStructId, Timestamp lastRetrievedTime, boolean isComplete,
-      int levelChange);
+  public abstract boolean updateUserStructLastretrievedIscomplete(
+      int userStructId, Timestamp lastRetrievedTime, boolean isComplete);
 
   /*
    * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
    */
   public abstract boolean updateUserStructsLastretrievedpostbuildIscomplete(
       List<StructureForUser> userStructs);
-
-  /*
-   * used for updating last retrieved and/or last upgrade user struct time and is_complete
-   */
-  /*@Caching(evict = {
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
-  public abstract boolean updateUserStructLastretrievedLastupgradeIscomplete(
-      int userStructId, Timestamp lastRetrievedTime,
-      Timestamp lastUpgradeTime, boolean isComplete);
 
   /*
    * used for updating last retrieved user struct times
@@ -106,15 +89,15 @@ public interface UpdateUtil {
       Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
       Map<Integer, StructureForUser> structIdsToUserStructs);
 
-  /*
-   * used for upgrading user structs level
-   */
-  /*@Caching(evict = {
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
-  public abstract boolean updateUserStructLevel(int userStructId,
-      int levelChange);
+//  /*
+//   * used for upgrading user structs level
+//   */
+//  /*@Caching(evict = {
+//      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
+//      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
+//      //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
+//  public abstract boolean updateUserStructLevel(int userStructId,
+//      int levelChange);
 
   /*
    * used for moving user structs

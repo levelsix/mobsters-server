@@ -1588,26 +1588,27 @@ public class StartupController extends EventController {
 //    resBuilder.setTutorialConstants(builder.build());
   }
 
+  //TODO: FIX THIS
   public void writeToUserCurrencyHistory(User aUser, String goldSilver, int previousMoney,
       Map<String, Integer> goldSilverChange) {
     String cash = MiscMethods.cash;
     String gems = MiscMethods.gems;
 
-    Timestamp date = new Timestamp((new Date()).getTime());
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String reasonForChange = ControllerConstants.UCHRFC__STARTUP_DAILY_BONUS;
-
-    if (goldSilver.equals(cash)) {
-      previousGoldSilver.put(cash, previousMoney);
-      reasonsForChanges.put(cash, reasonForChange);
-    } else {
-      previousGoldSilver.put(gems, previousMoney);
-      reasonsForChanges.put(gems, reasonForChange);
-    }
-
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
-        previousGoldSilver, reasonsForChanges);
+//    Timestamp date = new Timestamp((new Date()).getTime());
+//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String reasonForChange = ControllerConstants.UCHRFC__STARTUP_DAILY_BONUS;
+//
+//    if (goldSilver.equals(cash)) {
+//      previousGoldSilver.put(cash, previousMoney);
+//      reasonsForChanges.put(cash, reasonForChange);
+//    } else {
+//      previousGoldSilver.put(gems, previousMoney);
+//      reasonsForChanges.put(gems, reasonForChange);
+//    }
+//
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
+//        previousGoldSilver, reasonsForChanges);
   }
 
 }

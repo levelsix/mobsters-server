@@ -1,8 +1,5 @@
 package com.lvl6.server.controller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +16,6 @@ import com.lvl6.events.response.QuestProgressResponseEvent;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventQuestProto.QuestProgressRequestProto;
 import com.lvl6.proto.EventQuestProto.QuestProgressResponseProto;
 import com.lvl6.proto.EventQuestProto.QuestProgressResponseProto.Builder;
@@ -31,7 +27,6 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
-import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Component @DependsOn("gameServer") public class QuestProgressController extends EventController {
 
@@ -215,21 +210,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	return true;
   }
   
+  //TODO: FIX THIS
   private void writeChangesToHistory(int userId, int questId,
   		Map<Long, MonsterForUser> deleteUserMonsters, Date deleteDate) {
-  	
-  	if (null == deleteUserMonsters || deleteUserMonsters.isEmpty()) {
-  		return;
-  	}
-  	String deleteReason = ControllerConstants.MFUDR__QUEST + questId;
-  	
-  	int size = deleteUserMonsters.size();
-  	List<String> deleteReasons = Collections.nCopies(size, deleteReason);
-  	Collection<MonsterForUser> userMonsters = deleteUserMonsters.values();
-  	List<MonsterForUser> userMonstersList = new ArrayList<MonsterForUser>(userMonsters);
-  	int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
-  			deleteReasons, userMonstersList, deleteDate);
-  	
-  	log.info("user monsters deleted for questId=" + questId + ". num=" + num);
+//  	
+//  	if (null == deleteUserMonsters || deleteUserMonsters.isEmpty()) {
+//  		return;
+//  	}
+//  	String deleteReason = ControllerConstants.MFUDR__QUEST + questId;
+//  	
+//  	int size = deleteUserMonsters.size();
+//  	List<String> deleteReasons = Collections.nCopies(size, deleteReason);
+//  	Collection<MonsterForUser> userMonsters = deleteUserMonsters.values();
+//  	List<MonsterForUser> userMonstersList = new ArrayList<MonsterForUser>(userMonsters);
+//  	int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
+//  			deleteReasons, userMonstersList, deleteDate);
+//  	
+//  	log.info("user monsters deleted for questId=" + questId + ". num=" + num);
   }
 }

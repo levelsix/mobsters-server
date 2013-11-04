@@ -76,8 +76,9 @@ import com.lvl6.utils.DBConnection;
   private static ExpansionCost convertRSRowToCityExpansionCost(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
-    int expansionCost = rs.getInt(i++);
-
-    return new ExpansionCost(id, expansionCost);
+    int expansionCostCash = rs.getInt(i++);
+    int numMinutesToExpand = rs.getInt(i++);
+    int expansionCostGems = rs.getInt(i++);
+    return new ExpansionCost(id, expansionCostCash, numMinutesToExpand, expansionCostGems);
   }
 }

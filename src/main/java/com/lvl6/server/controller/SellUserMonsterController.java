@@ -214,40 +214,42 @@ public class SellUserMonsterController extends EventController {
 			userMonstersList.add(mfu);
 			deleteReasons.add(delReason + amount);
 		}
-
-		int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
-				deleteReasons, userMonstersList, deleteDate);
-
-		log.info("user monsters that were deleted. userMonsterIds="
-				+ userMonsterIds + "\t idsToCashAmounts=" + userMonsterIdsToCashAmounts
-				+ "\t idsToUserMonsters=" + idsToUserMonsters + "\t numDeleted=" + num);
+		//TODO: FIX THIS
+//
+//		int num = InsertUtils.get().insertIntoMonsterForUserDeleted(userId,
+//				deleteReasons, userMonstersList, deleteDate);
+//
+//		log.info("user monsters that were deleted. userMonsterIds="
+//				+ userMonsterIds + "\t idsToCashAmounts=" + userMonsterIdsToCashAmounts
+//				+ "\t idsToUserMonsters=" + idsToUserMonsters + "\t numDeleted=" + num);
 	}
 
+	//TODO: FIX THIS
 	// FOR CURRENCY HISTORY PURPOSES
 	public void writeToUserCurrencyHistory(User aUser, int previousCash,
 			Date aDate, Map<Long, Integer> userMonsterIdsToCashAmounts,
 			List<Long> userMonsterIds) {
 
-		// figure how much user gets. At the moment, if 0 then nothing is recorded
-		// in db
-		int sum = MiscMethods.sumMapValues(userMonsterIdsToCashAmounts);
-		Timestamp date = new Timestamp(aDate.getTime());
-
-		Map<String, Integer> gemCashChange = new HashMap<String, Integer>();
-		Map<String, Integer> previousGemCash = new HashMap<String, Integer>();
-		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		String cash = MiscMethods.cash;
-
-		// record the user monster ids that contributed to changing user's currency
-		String reasonForChange = ControllerConstants.UCHRFC__SOLD_USER_MONSTERS
-				+ StringUtils.csvList(userMonsterIds);
-
-		gemCashChange.put(cash, sum);
-		previousGemCash.put(cash, previousCash);
-		reasonsForChanges.put(cash, reasonForChange);
-
-		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
-				gemCashChange, previousGemCash, reasonsForChanges);
+//		// figure how much user gets. At the moment, if 0 then nothing is recorded
+//		// in db
+//		int sum = MiscMethods.sumMapValues(userMonsterIdsToCashAmounts);
+//		Timestamp date = new Timestamp(aDate.getTime());
+//
+//		Map<String, Integer> gemCashChange = new HashMap<String, Integer>();
+//		Map<String, Integer> previousGemCash = new HashMap<String, Integer>();
+//		Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//		String cash = MiscMethods.cash;
+//
+//		// record the user monster ids that contributed to changing user's currency
+//		String reasonForChange = ControllerConstants.UCHRFC__SOLD_USER_MONSTERS
+//				+ StringUtils.csvList(userMonsterIds);
+//
+//		gemCashChange.put(cash, sum);
+//		previousGemCash.put(cash, previousCash);
+//		reasonsForChanges.put(cash, reasonForChange);
+//
+//		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
+//				gemCashChange, previousGemCash, reasonsForChanges);
 	}
 
 }

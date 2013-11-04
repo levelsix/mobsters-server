@@ -249,29 +249,6 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	/*
-	 * used for updating is_complete=true and last_retrieved to upgrade_time+minutestogain for a userstruct
-	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(java.util.List, int)
-	 */
-	@Override
-	public boolean updateUserStructsLastretrievedpostupgradeIscompleteLevelchange(List<StructureForUser> userStructs, int levelChange) {
-//		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
-
-//		for (UserStruct userStruct : userStructs) {
-//			Structure structure = structures.get(userStruct.getStructId());
-//			if (structure == null) {
-//				return false;
-//			}
-//			Timestamp lastRetrievedTime = new Timestamp(userStruct.getLastUpgradeTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), userStruct.getLevel()));
-//			if (!updateUserStructLastretrievedIscompleteLevelchange(userStruct.getId(), lastRetrievedTime, true, levelChange)) {
-//				return false;
-//			}
-//		}
-//		return true;
-		return false;
-	}
 
 	/*
 	 * used for updating last retrieved and/or last upgrade user struct time and is_complete
@@ -283,19 +260,18 @@ public class UpdateUtils implements UpdateUtil {
 	/*@Caching(evict= {
       //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
       //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
-	public boolean updateUserStructLastretrievedIscompleteLevelchange(int userStructId, Timestamp lastRetrievedTime, boolean isComplete, int levelChange) {
+	public boolean updateUserStructLastretrievedIscomplete(int userStructId, Timestamp lastRetrievedTime, boolean isComplete) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (lastRetrievedTime != null)
+		Map <String, Object> relativeParams = null; //new HashMap<String, Object>();
+		
+		if (lastRetrievedTime != null) {
 			absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
-
+		}
 		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, isComplete);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.STRUCTURE_FOR_USER__LEVEL, levelChange);
-
+		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
 				conditionParams, "or");
 		if (numUpdated == 1) {
@@ -313,52 +289,18 @@ public class UpdateUtils implements UpdateUtil {
 	@Override
 	public boolean updateUserStructsLastretrievedpostbuildIscomplete(List<StructureForUser> userStructs) {
 //		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
-
-//		for (UserStruct userStruct : userStructs) {
+//
+//		for (StructureForUser userStruct : userStructs) {
 //			Structure structure = structures.get(userStruct.getStructId());
-//			if (structure == null) {
-//				return false;
-//			}
-//			Timestamp lastRetrievedTime = new Timestamp(userStruct.getPurchaseTime().getTime() + 60000*MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), 0));
+//			Timestamp lastRetrievedTime = new Timestamp(
+//					userStruct.getPurchaseTime().getTime() + 
+//					60000*
+//					MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), 0));
 //			if (!updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), lastRetrievedTime, null, true)) {
 //				return false;
 //			}
 //		}
-//		return true;
-		return false;
-	}
-
-	/*
-	 * used for updating last retrieved and/or last upgrade user struct time and is_complete
-	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructLastretrievedLastupgradeIscomplete(int, java.sql.Timestamp, java.sql.Timestamp, boolean)
-	 */
-	@Override
-	/*@Caching(evict= {
-      //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
-      //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
-	public boolean updateUserStructLastretrievedLastupgradeIscomplete(
-			int userStructId, Timestamp lastRetrievedTime, Timestamp lastUpgradeTime,
-			boolean isComplete) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		if (lastRetrievedTime != null)
-			absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
-
-		if (lastUpgradeTime != null)
-			absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_UPGRADE_TIME, lastUpgradeTime);
-
-		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, isComplete);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, null, absoluteParams, 
-				conditionParams, "or");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 	/*
@@ -387,9 +329,7 @@ public class UpdateUtils implements UpdateUtil {
 			CoordinatePair cp = us.getCoordinates();
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, cp.getX());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, cp.getY());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__LEVEL, us.getLevel());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, us.getPurchaseTime());
-			aRow.put(DBConstants.STRUCTURE_FOR_USER__LAST_UPGRADE_TIME, us.getLastUpgradeTime());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, us.isComplete());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, us.getOrientation().getNumber());
 
@@ -406,30 +346,30 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	/*
-	 * used for upgrading user structs level
-	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructLevel(int, int)
-	 */
-	@Override
-	/*@Caching(evict= {
-      //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
-      //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
-	public boolean updateUserStructLevel(int userStructId, int levelChange) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.STRUCTURE_FOR_USER__LEVEL, levelChange);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, null, 
-				conditionParams, "or");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
-	}
+//	/*
+//	 * used for upgrading user structs level
+//	 */
+//	/* (non-Javadoc)
+//	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructLevel(int, int)
+//	 */
+//	@Override
+//	/*@Caching(evict= {
+//      //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
+//      //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
+//	public boolean updateUserStructLevel(int userStructId, int levelChange) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
+//
+//		Map <String, Object> relativeParams = new HashMap<String, Object>();
+//		relativeParams.put(DBConstants.STRUCTURE_FOR_USER__LEVEL, levelChange);
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, null, 
+//				conditionParams, "or");
+//		if (numUpdated == 1) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	/*
 	 * used for moving user structs

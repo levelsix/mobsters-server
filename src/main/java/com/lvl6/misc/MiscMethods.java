@@ -79,10 +79,6 @@ public class MiscMethods {
   public static final String gems = "gems";
   public static final String boosterPackId = "boosterPackId";
 
-//  public static int calculateMinutesToFinishForgeAttempt(Equipment equipment, int goalLevel) {
-//    return (int)
-//        (equipment.getMinutesToAttemptForgeBase()*Math.pow(ControllerConstants.FORGE_TIME_BASE_FOR_EXPONENTIAL_MULTIPLIER, goalLevel));
-//  }
 
 //  public static float calculateChanceOfSuccessForForge(Equipment equipment, int goalLevel) {
 //    return  (1-equipment.getChanceOfForgeFailureBase()) - 
@@ -678,7 +674,8 @@ public class MiscMethods {
 
   public static void writeToUserCurrencyOneUserGemsAndCash(
       User aUser, Timestamp date, Map<String,Integer> gemsCashChange, 
-      Map<String, Integer> previousGemsCash, Map<String, String> reasons) {
+      Map<String, Integer> previousGemsCash, Map<String, String> reasons,
+      Map<String, String> detailsMap) {
     //try, catch is here just in case this blows up, not really necessary;
     try {
       List<Integer> userIds = new ArrayList<Integer>();
@@ -688,6 +685,7 @@ public class MiscMethods {
       List<Integer> previousCurrencies = new ArrayList<Integer>();
       List<Integer> currentCurrencies = new ArrayList<Integer>();
       List<String> reasonsForChanges = new ArrayList<String>();
+      List<String> details = new ArrayList<String>();
 
       int userId = aUser.getId();
       int gemsChange = gemsCashChange.get(gems);
@@ -719,6 +717,7 @@ public class MiscMethods {
         previousCurrencies.add(previousGold);
         currentCurrencies.add(currentGold);
         reasonsForChanges.add(reasons.get(gems));
+        details.add(detailsMap.get(gems));
       }
 
       //record cash change next
@@ -736,11 +735,13 @@ public class MiscMethods {
         previousCurrencies.add(previousCash);
         currentCurrencies.add(currentCash);
         reasonsForChanges.add(reasons.get(cash));
+        details.add(detailsMap.get(cash));
       }
 
       //using multiple rows because could be 2 entries: one for cash, other for gems
-      InsertUtils.get().insertIntoUserCurrencyHistoryMultipleRows(userIds, dates, areCash,
-          changesToCurrencies, previousCurrencies, currentCurrencies, reasonsForChanges);
+      InsertUtils.get().insertIntoUserCurrencyHistoryMultipleRows(userIds, dates,
+      		areCash, changesToCurrencies, previousCurrencies, currentCurrencies,
+      		reasonsForChanges, details);
     } catch(Exception e) {
       log.error("Maybe table's not there or duplicate keys? ", e);
     }
@@ -748,7 +749,8 @@ public class MiscMethods {
 
   public static void writeToUserCurrencyOneUserGemsOrCash(
       User aUser, Timestamp date, Map<String,Integer> gemsCashChange, 
-      Map<String, Integer> previousGemsCash, Map<String, String> reasons) {
+      Map<String, Integer> previousGemsCash, Map<String, String> reasons,
+      Map<String, String> detailsMap) {
     try {
       //determine what changed, gems or cash
       Set<String> keySet = gemsCashChange.keySet();
@@ -762,6 +764,7 @@ public class MiscMethods {
       int previousCurrency = 0;
       int currentCurrency = 0;
       String reasonForChange = reasons.get(key);
+      String details = null;//detailsList.get(0);
 
       if (0 == currencyChange) {
         return;//don't write a non change to history table to avoid bloat
@@ -769,10 +772,12 @@ public class MiscMethods {
 
       if (key.equals(gems)) {
         currentCurrency = aUser.getGems();
+        details = detailsMap.get(gems);
       } else if(key.equals(cash)) {
         //record total cash
         currentCurrency = aUser.getCash();
         isCash = 1;
+        details = detailsMap.get(cash);
       } else {
         log.error("invalid key for map representing currency change. key=" + key);
         return;
@@ -784,8 +789,9 @@ public class MiscMethods {
         previousCurrency = previousGemsCash.get(key);
       }
 
-      InsertUtils.get().insertIntoUserCurrencyHistory(
-          userId, date, isCash, currencyChange, previousCurrency, currentCurrency, reasonForChange);
+      InsertUtils.get().insertIntoUserCurrencyHistory(userId, date, isCash,
+      		currencyChange, previousCurrency, currentCurrency, reasonForChange,
+      		details);
     } catch(Exception e) {
       log.error("null pointer exception?", e);
     }
@@ -794,17 +800,18 @@ public class MiscMethods {
   //gemsCashChange should represent how much user's cash and, or gems increased or decreased and
   //this should be called after the user is updated
   //only previousGemsCash can be null.
-  public static void writeToUserCurrencyOneUserGemsAndOrCash(
-      User aUser, Timestamp date, Map<String,Integer> gemsCashChange, 
-      Map<String, Integer> previousGemsCash, Map<String, String> reasonsForChanges) {
+  public static void writeToUserCurrencyOneUserGemsAndOrCash(User aUser,
+  		Timestamp date, Map<String,Integer> gemsCashChange, 
+      Map<String, Integer> previousGemsCash,
+      Map<String, String> reasonsForChanges, Map<String, String> details) {
     try {
       int amount = gemsCashChange.size();
       if(2 == amount) {
         writeToUserCurrencyOneUserGemsAndCash(aUser, date, gemsCashChange, 
-            previousGemsCash, reasonsForChanges);
+            previousGemsCash, reasonsForChanges, details);
       } else if(1 == amount) {
         writeToUserCurrencyOneUserGemsOrCash(aUser, date, gemsCashChange,
-            previousGemsCash, reasonsForChanges);
+            previousGemsCash, reasonsForChanges, details);
       }
     } catch(Exception e) {
       log.error("error updating user_curency_history; reasonsForChanges=" + shallowMapToString(reasonsForChanges), e);
@@ -1373,6 +1380,18 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
 	  attacker.setElo(newAttackerElo);
 	  defender.setElo(newDefenderElo);
   
+  }
+  
+  public static int speedupCostOverTime(int cost, long startTimeMillis, 
+  		long durationInSeconds, long curTimeMillis) {
+  	
+  	long timePassedSeconds = (curTimeMillis = startTimeMillis)/1000;
+  	long timeRemainingSeconds = durationInSeconds - timePassedSeconds;
+  	
+  	double percentRemaining = timeRemainingSeconds/(double)(durationInSeconds);
+  	
+  	int newCost = (int)Math.ceil(cost * percentRemaining);
+  	return newCost;
   }
   
 }

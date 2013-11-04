@@ -3,9 +3,10 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserCityExpansionData implements Serializable {
-  private static final long serialVersionUID = -3018246069873803048L;
-  private int userId;
+public class ExpansionPurchaseForUser implements Serializable {
+	
+	private static final long serialVersionUID = -5045515317226423462L;
+	private int userId;
   private int xPosition;
   private int yPosition;
   private boolean isExpanding;
@@ -13,7 +14,7 @@ public class UserCityExpansionData implements Serializable {
   // upgrade button, not when the last upgrade
   // was complete
   
-	public UserCityExpansionData(int userId, int xPosition, int yPosition,
+	public ExpansionPurchaseForUser(int userId, int xPosition, int yPosition,
 			boolean isExpanding, Date expandStartTime) {
 		super();
 		this.userId = userId;
@@ -65,7 +66,7 @@ public class UserCityExpansionData implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserCityExpansionData [userId=" + userId + ", xPosition="
+		return "ExpansionPurchaseForUser [userId=" + userId + ", xPosition="
 				+ xPosition + ", yPosition=" + yPosition + ", isExpanding="
 				+ isExpanding + ", expandStartTime=" + expandStartTime + "]";
 	}

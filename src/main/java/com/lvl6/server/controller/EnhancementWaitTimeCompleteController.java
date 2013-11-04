@@ -18,6 +18,7 @@ import com.lvl6.events.request.EnhancementWaitTimeCompleteRequestEvent;
 import com.lvl6.events.response.EnhancementWaitTimeCompleteResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -76,21 +77,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       int previousGems = 0;
+      List<Long> userMonsterIds = new ArrayList<Long>();
+      userMonsterIds.add(umcep.getUserMonsterId()); //monster being enhanced
+      userMonsterIds.addAll(userMonsterIdsThatFinished);
       
     	//get whatever we need from the database
     	User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-    	Map<Long, MonsterEnhancingForUser> alreadyEnhancing =
+    	Map<Long, MonsterEnhancingForUser> inEnhancing =
     			MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
+    	Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils
+    			.monsterForUserRetrieveUtils()
+    			.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
     	
     	//do check to make sure one monster has a null start time
-      boolean legit = checkLegit(resBuilder, aUser, userId, alreadyEnhancing,
-      		umcep, userMonsterIdsThatFinished, isSpeedUp, gemsForSpeedUp);
+      boolean legit = checkLegit(resBuilder, aUser, userId, idsToUserMonsters,
+      		inEnhancing, umcep, userMonsterIdsThatFinished, isSpeedUp, gemsForSpeedUp);
 
       Map<String, Integer> money = new HashMap<String, Integer>();
       boolean successful = false;
       if(legit) {
         previousGems = aUser.getGems();
-    	  successful = writeChangesToDb(aUser, userId, curTime, alreadyEnhancing,
+    	  successful = writeChangesToDb(aUser, userId, curTime, inEnhancing,
     	  		umcep, userMonsterIdsThatFinished, isSpeedUp, gemsForSpeedUp, money);
       }
       if (successful) {
@@ -109,7 +116,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	
-      	writeToUserCurrencyHistory(aUser, money, curTime, previousGems);
+      	writeChangesToHistory(userId, inEnhancing, userMonsterIdsThatFinished);
+      	writeToUserCurrencyHistory(aUser, money, curTime, previousGems, umcep.getUserMonsterId());
       }
     } catch (Exception e) {
       log.error("exception in EnhancementWaitTimeCompleteController processEvent", e);
@@ -144,7 +152,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * @param resBuilder
    * @param u
    * @param userId
-   * @param alreadyEnhancing - the monsters that are in the enhancing queue
+   * @param idsToUserMonsters - the monsters the user has
+   * @param inEnhancing - the monsters that are in the enhancing queue
    * @param umcep - the base monster that is updated from using up some of the feeders
    * @param usedUpUserMonsterIds - userMonsterIds the user thinks has finished being enhanced
    * @param speedUUp
@@ -152,6 +161,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * @return
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
+  		Map<Long, MonsterForUser> idsToUserMonsters,
   		Map<Long, MonsterEnhancingForUser> inEnhancing, UserMonsterCurrentExpProto umcep,
   		List<Long> usedUpMonsterIds, boolean speedup, int gemsForSpeedup) {
   	
@@ -161,18 +171,35 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       		"\t speedup=" + speedup + "\t gemsForSpeedup=" + gemsForSpeedup);
       return false;
     }
-    log.info("alreadyEnhancing=" + inEnhancing);
+    log.info("inEnhancing=" + inEnhancing);
+    long userMonsterIdBeingEnhanced = umcep.getUserMonsterId();
     
     //make sure that the user monster ids that will be deleted will only be
     //the ids that exist in enhancing table
-    Set<Long> alreadyEnhancingIds = inEnhancing.keySet();
-    MonsterStuffUtils.retainValidMonsterIds(alreadyEnhancingIds, usedUpMonsterIds);
+    Set<Long> inEnhancingIds = inEnhancing.keySet();
+    MonsterStuffUtils.retainValidMonsterIds(inEnhancingIds, usedUpMonsterIds);
     
     //check to make sure the base monsterId is in enhancing
-    if (!alreadyEnhancingIds.contains(umcep.getUserMonsterId())) {
+    if (!inEnhancingIds.contains(userMonsterIdBeingEnhanced)) {
     	log.error("client did not send updated base monster specifying what new exp and lvl are");
     	return false;
     }
+    
+    /* NOT SURE IF THESE ARE  NECESSARY, SO DOING IT ANYWAY*/
+    //check to make sure the monster being enhanced is part of the
+    //user's monsters
+    if (!idsToUserMonsters.containsKey(userMonsterIdBeingEnhanced)) {
+    	log.error("monster being enhanced doesn't exist!. userMonsterIdBeingEnhanced=" + 
+    			userMonsterIdBeingEnhanced + "\t deleteIds=" + usedUpMonsterIds +
+    			"\t inEnhancing=" + inEnhancing + "\t gemsForSpeedup=" + gemsForSpeedup +
+    			"\t speedup=" + speedup);
+    	return false;
+    }
+    
+    //retain only the valid monster for user ids that will be deleted
+    Set<Long> existingIds = idsToUserMonsters.keySet();
+    MonsterStuffUtils.retainValidMonsterIds(existingIds, usedUpMonsterIds);
+    
     
     //CHECK MONEY and CHECK SPEEDUP
     if (speedup) {
@@ -219,11 +246,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			newExp, newLvl);
   	log.info("num updated=" + num);
 
-	  //delete the selected monsters from  the healing table
-	  num = DeleteUtils.get().deleteMonsterEnhancingForUser(
+	  return true;
+  }
+  
+  private void setResponseBuilder(Builder resBuilder) {
+  }
+  
+  private void writeChangesToHistory(int uId,
+  		Map<Long, MonsterEnhancingForUser> inEnhancing,
+  		List<Long> userMonsterIds) {
+  	
+  	//TODO: keep track of the userMonsters that are deleted
+  	
+  	
+  	//TODO: keep track of the monsters that were enhancing
+  	
+  	//delete the selected monsters from  the enhancing table
+	  int num = DeleteUtils.get().deleteMonsterEnhancingForUser(
 	  		uId, userMonsterIds);
 	  log.info("deleted monster healing rows. numDeleted=" + num +
 	  		"\t userMonsterIds=" + userMonsterIds + "\t inEnhancing=" + inEnhancing);
+
 	  
 	  //delete the userMonsterIds from the monster_for_user table, but don't delete
 	  //the monster user is enhancing
@@ -231,24 +274,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  log.info("defeated monster_for_user rows. numDeleted=" + num + "\t inEnhancing=" +
 	  		inEnhancing);
 	  
-	  return true;
-  }
-  
-  private void setResponseBuilder(Builder resBuilder) {
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-  		int previousGems) {
+  		int previousGems, long userMonsterId) {
+  	String gems = MiscMethods.gems;
+  	String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_ENHANCING;
     Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_ENHANCING;
-    String gems = MiscMethods.gems;
-
+    Map<String, String> detailsMap = new HashMap<String, String>();
+    
     previousGemsCash.put(gems, previousGems);
     reasonsForChanges.put(gems, reasonForChange);
-
+    detailsMap.put(gems, " userMonsterId=" + userMonsterId); 
     MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGemsCash, reasonsForChanges);
+        previousGemsCash, reasonsForChanges, detailsMap);
 
   }
 }

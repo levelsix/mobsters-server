@@ -18,7 +18,7 @@ import com.lvl6.events.response.PurchaseCityExpansionResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.User;
-import com.lvl6.info.UserCityExpansionData;
+import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventCityProto.PurchaseCityExpansionRequestProto;
@@ -27,7 +27,7 @@ import com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto.Builder;
 import com.lvl6.proto.EventCityProto.PurchaseCityExpansionResponseProto.PurchaseCityExpansionStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.UserCityExpansionDataRetrieveUtils;
+import com.lvl6.retrieveutils.ExpansionPurchaseForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -86,8 +86,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		try {
 			
 			User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-			List<UserCityExpansionData> userCityExpansionDataList =
-					UserCityExpansionDataRetrieveUtils.getUserCityExpansionDatasForUserId(userId);
+			List<ExpansionPurchaseForUser> userCityExpansionDataList =
+					ExpansionPurchaseForUserRetrieveUtils.getUserCityExpansionDatasForUserId(userId);
 			//used to calculate cost for buying expansion
 			int numExpansions = 0;
 			if (null != userCityExpansionDataList) {
@@ -115,7 +115,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				
 				//modified user object, need to update the client to reflect this
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-				UserCityExpansionData uced = UserCityExpansionDataRetrieveUtils.getSpecificUserCityExpansionDataForUserIdAndPosition(user.getId(), xPosition, yPosition);
+				ExpansionPurchaseForUser uced = ExpansionPurchaseForUserRetrieveUtils.getSpecificUserCityExpansionDataForUserIdAndPosition(user.getId(), xPosition, yPosition);
 				resBuilder.setUcedp(CreateInfoProtoUtils.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
@@ -157,7 +157,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	}
 
 	private boolean checkLegitExpansion(Builder resBuilder, Timestamp timeOfPurchase, User user, 
-			List<UserCityExpansionData> userCityExpansionDataList, int numOfExpansions,
+			List<ExpansionPurchaseForUser> userCityExpansionDataList, int numOfExpansions,
 			List<Integer> costList) {
 
 		if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfPurchase)) {
@@ -168,7 +168,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		boolean isExpanding = false;
 		//loop through each expansion and see if any expansions are still expanding
 		if (userCityExpansionDataList != null) {
-			for(UserCityExpansionData uced : userCityExpansionDataList) {
+			for(ExpansionPurchaseForUser uced : userCityExpansionDataList) {
 				if(uced.isExpanding()) {
 					isExpanding = true;
 					break;
@@ -199,20 +199,21 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		ExpansionCost cec = ExpansionCostRetrieveUtils.getCityExpansionCostById(numOfExpansions);
 		//log.info("cec=" + cec);
 		//log.info("all expansion stuff" + CityExpansionCostRetrieveUtils.getAllExpansionNumsToCosts());
-		return cec.getExpansionCost();
+		return cec.getExpansionCostCash();
 	}
 
+	//TODO: FIX THIS
 	public void writeToUserCurrencyHistory(User aUser, Timestamp date, int xPosition, int yPosition,
 			Map<String, Integer> goldSilverChange, int previousSilver) {
-		Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		String silver = MiscMethods.cash;
-		String reasonForChange = "Expanding xPosition: " + xPosition + ", yPosition: " + yPosition;
-
-		previousGoldSilver.put(silver, previousSilver);
-		reasonsForChanges.put(silver, reasonForChange);
-
-		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
-				previousGoldSilver, reasonsForChanges);
+//		Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//		Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//		String silver = MiscMethods.cash;
+//		String reasonForChange = "Expanding xPosition: " + xPosition + ", yPosition: " + yPosition;
+//
+//		previousGoldSilver.put(silver, previousSilver);
+//		reasonsForChanges.put(silver, reasonForChange);
+//
+//		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
+//				previousGoldSilver, reasonsForChanges);
 	}
 }

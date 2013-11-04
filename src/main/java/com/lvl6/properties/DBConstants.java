@@ -181,13 +181,16 @@ public class DBConstants {
   public static final String MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 
   /*MONSTER ENHANCING HISTORY*/
-  public static final String MONSTER_ENHANCING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
+  public static final String MONSTER_ENHANCING_HISTORY__ID = "id";
   public static final String MONSTER_ENHANCING_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_ENHANCING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
   public static final String MONSTER_ENHANCING_HISTORY__MONSTER_ID = "monster_id";
-  public static final String MONSTER_ENHANCING_HISTORY__EVOLUTION_LEVEL = "evolution_level";
-  public static final String MONSTER_ENHANCING_HISTORY__CURRENT_ENHANCEMENT_PERCENTAGE = "current_enhancement_percentage";
-  public static final String MONSTER_ENHANCING_HISTORY__PREVIOUS_ENHANCEMENT_PERCENTAGE = "previous_enhancement_percentage";
-  public static final String MONSTER_ENHANCING_HISTORY__EXPECTED_START_TIME = "enhancing_start_time";
+  public static final String MONSTER_ENHANCING_HISTORY__CURRENT_EXPERIENCE = "current_experience";
+  public static final String MONSTER_ENHANCING_HISTORY__PREVIOUS_EXPERIENCE = "previous_experience";
+  public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_START_TIME = "enhancing_start_time";
+  public static final String MONSTER_ENHANCING_HISTORY__TIME_OF_ENTRY = "time_of_entry";
+  public static final String MONSTER_ENHANCING_HISTORY__IS_FEEDER = "is_feeder";
+  public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_CANCELLED = "enhancing_cancelled";
 
 
   /*MONSTER EVOLVING FOR USER TABLE*/
@@ -237,9 +240,11 @@ public class DBConstants {
   public static final String MONSTER_FOR_USER_DELETED__CURRENT_HEALTH = "current_health";
   public static final String MONSTER_FOR_USER_DELETED__NUM_PIECES = "num_pieces";
   public static final String MONSTER_FOR_USER_DELETED__IS_COMPLETE = "is_complete";
+  public static final String MONSTER_FOR_USER_DELETED__COMBINE_START_TIME = "combine_start_time";
   public static final String MONSTER_FOR_USER_DELETED__TEAM_SLOT_NUM = "team_slot_num";
   public static final String MONSTER_FOR_USER_DELETED__SOURCE_OF_PIECES = "source_of_pieces";
   public static final String MONSTER_FOR_USER_DELETED__DELETED_REASON = "deleted_reason";
+  public static final String MONSTER_FOR_USER_DELETED__DETAILS = "details";
   public static final String MONSTER_FOR_USER_DELETED__DELETED_TIME = "deleted_time";
   
   /*MONSTER HEALING FOR USER*/
@@ -275,9 +280,7 @@ public class DBConstants {
   public static final String STRUCTURE_FOR_USER__LAST_RETRIEVED = "last_retrieved";
   public static final String STRUCTURE_FOR_USER__X_COORD = "xcoord";
   public static final String STRUCTURE_FOR_USER__Y_COORD = "ycoord";
-  public static final String STRUCTURE_FOR_USER__LEVEL = "level";
   public static final String STRUCTURE_FOR_USER__PURCHASE_TIME = "purchase_time";
-  public static final String STRUCTURE_FOR_USER__LAST_UPGRADE_TIME = "last_upgrade_time";
   public static final String STRUCTURE_FOR_USER__IS_COMPLETE = "is_complete";
   public static final String STRUCTURE_FOR_USER__ORIENTATION = "orientation";
 
@@ -300,6 +303,7 @@ public class DBConstants {
   public static final String TASK_HISTORY__START_TIME = "start_time";
   public static final String TASK_HISTORY__END_TIME = "end_time";
   public static final String TASK_HISTORY__USER_WON = "user_won";
+  public static final String TASK_HISTORY__CANCELLED = "cancelled";
 
   /*TASK STAGE FOR USER TABLE*/
   public static final String TASK_STAGE_FOR_USER__ID = GENERIC__ID;
@@ -401,6 +405,7 @@ public class DBConstants {
   public static final String USER_CURRENCY_HISTORY__CURRENCY_BEFORE_CHANGE = "currency_before_change";
   public static final String USER_CURRENCY_HISTORY__CURRENCY_AFTER_CHANGE = "currency_after_change";
   public static final String USER_CURRENCY_HISTORY__REASON_FOR_CHANGE = "reason_for_change";
+  public static final String USER_CURRENCY_HISTORY__DETAILS = "details";
   
   /*USER PRIVATE CHAT POSTS*/
   public static final String USER_PRIVATE_CHAT_POSTS__ID = GENERIC__ID;

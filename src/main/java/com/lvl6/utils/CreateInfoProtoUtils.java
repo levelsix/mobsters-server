@@ -38,7 +38,7 @@ import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
-import com.lvl6.info.UserCityExpansionData;
+import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
@@ -168,7 +168,7 @@ public class CreateInfoProtoUtils {
   //		return builder.build();
   //	}
 
-  public static UserCityExpansionDataProto createUserCityExpansionDataProtoFromUserCityExpansionData(UserCityExpansionData uced) {
+  public static UserCityExpansionDataProto createUserCityExpansionDataProtoFromUserCityExpansionData(ExpansionPurchaseForUser uced) {
     UserCityExpansionDataProto.Builder builder = UserCityExpansionDataProto.newBuilder().setUserId(uced.getUserId())
         .setXPosition(uced.getxPosition()).setYPosition(uced.getyPosition()).setIsExpanding(uced.isExpanding());
     if (uced.getExpandStartTime() != null) {
@@ -179,8 +179,10 @@ public class CreateInfoProtoUtils {
 
   public static CityExpansionCostProto createCityExpansionCostProtoFromCityExpansionCost(ExpansionCost cec) {
     CityExpansionCostProto.Builder builder = CityExpansionCostProto.newBuilder();
-    builder.setExpansionNum(cec.getId())
-    .setExpansionCost(cec.getExpansionCost());
+    builder.setExpansionNum(cec.getId());
+    builder.setExpansionCostCash(cec.getExpansionCostCash());
+    builder.setNumMinutesToExpand(cec.getNumMinutesToExpand());
+    builder.setSpeedupExpansionGemCost(cec.getSpeedupExpansionGemCost());
     return builder.build();
   }
 
@@ -252,7 +254,7 @@ public class CreateInfoProtoUtils {
     builder.setUserStructId(userStruct.getId());
     builder.setUserId(userStruct.getUserId());
     builder.setStructId(userStruct.getStructId());
-    builder.setLevel(userStruct.getLevel());
+//    builder.setLevel(userStruct.getLevel());
     builder.setIsComplete(userStruct.isComplete());
     builder.setCoordinates(createCoordinateProtoFromCoordinatePair(userStruct.getCoordinates()));
     builder.setOrientation(userStruct.getOrientation());
@@ -262,9 +264,9 @@ public class CreateInfoProtoUtils {
     if (userStruct.getLastRetrieved() != null) {
       builder.setLastRetrieved(userStruct.getLastRetrieved().getTime());
     }
-    if (userStruct.getLastUpgradeTime() != null) {
-      builder.setLastUpgradeTime(userStruct.getLastUpgradeTime().getTime());
-    }
+//    if (userStruct.getLastUpgradeTime() != null) {
+//      builder.setLastUpgradeTime(userStruct.getLastUpgradeTime().getTime());
+//    }
     return builder.build();
   }
 

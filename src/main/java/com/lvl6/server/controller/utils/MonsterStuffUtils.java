@@ -98,7 +98,7 @@ public class MonsterStuffUtils {
   		//since selectedId isn't in the domain and want to keep things in domain
   		//or is in the domain and want to keep things not in domain, remove it
   		Object umhp = selectedMonsters.remove(selectedId);
-  		log.warn("Not valid. object=" + umhp + "; keepThingsInDomain=" + keepThingsInDomain +
+  		log.warn("Not retaining. object=" + umhp + "; keepThingsInDomain=" + keepThingsInDomain +
   				"; keepThingsNotInDomain=" + keepThingsNotInDomain);
   	}
   }

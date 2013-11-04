@@ -181,22 +181,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
-  
+  //TODO: FIX THIS
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
       int previousSilver, int previousGold) {
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-    String gems = MiscMethods.gems;
-    String cash = MiscMethods.cash;
-
-    previousGoldSilver.put(gems, previousGold);
-    previousGoldSilver.put(cash, previousSilver);
-    reasonsForChanges.put(gems, reasonForChange);
-    reasonsForChanges.put(cash, reasonForChange);
-
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGoldSilver, reasonsForChanges);
+//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
+//    String gems = MiscMethods.gems;
+//    String cash = MiscMethods.cash;
+//
+//    previousGoldSilver.put(gems, previousGold);
+//    previousGoldSilver.put(cash, previousSilver);
+//    reasonsForChanges.put(gems, reasonForChange);
+//    reasonsForChanges.put(cash, reasonForChange);
+//
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
+//        previousGoldSilver, reasonsForChanges);
 
   }
 }

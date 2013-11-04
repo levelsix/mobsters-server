@@ -24,7 +24,6 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.Builder;
@@ -122,6 +121,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
+      	//TODO: WRITE TO HISTORY
       	writeToUserCurrencyHistory(aUser, money, curTime, previousCash, previousGems,
       			deleteMap, updateMap, newMap);
       }
@@ -285,40 +285,41 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
+  //TODO: FIX THIS
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
       int previousCash, int previousGems,
       Map<Long, UserMonsterHealingProto> deleteMap,
   		Map<Long, UserMonsterHealingProto> updateMap,
   		Map<Long, UserMonsterHealingProto> newMap) {
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    StringBuffer reasonForChange = new StringBuffer();
-    reasonForChange.append(ControllerConstants.UCHRFC__HEAL_MONSTER);
-    String gems = MiscMethods.gems;
-    String cash = MiscMethods.cash;
-    
-    //could just individually add in the ids or something else, but eh, lazy
-    //not really necessary to record ids, but maybe more info is better
-    if (null != deleteMap && !deleteMap.isEmpty()) {
-    	reasonForChange.append("deleted=");
-    	reasonForChange.append(deleteMap.keySet());
-    }
-    if (null != updateMap && !updateMap.isEmpty()) {
-    	reasonForChange.append("updated=");
-    	reasonForChange.append(updateMap.keySet());
-    }
-    if (null != newMap && !newMap.isEmpty()) {
-    	reasonForChange.append("new=");
-    	reasonForChange.append(newMap.keySet());
-    }
-
-    previousGemsCash.put(gems, previousGems);
-    previousGemsCash.put(cash, previousCash);
-    reasonsForChanges.put(gems, reasonForChange.toString());
-    reasonsForChanges.put(cash, reasonForChange.toString());
-
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGemsCash, reasonsForChanges);
+//    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    StringBuffer reasonForChange = new StringBuffer();
+//    reasonForChange.append(ControllerConstants.UCHRFC__HEAL_MONSTER);
+//    String gems = MiscMethods.gems;
+//    String cash = MiscMethods.cash;
+//    
+//    //could just individually add in the ids or something else, but eh, lazy
+//    //not really necessary to record ids, but maybe more info is better
+//    if (null != deleteMap && !deleteMap.isEmpty()) {
+//    	reasonForChange.append("deleted=");
+//    	reasonForChange.append(deleteMap.keySet());
+//    }
+//    if (null != updateMap && !updateMap.isEmpty()) {
+//    	reasonForChange.append("updated=");
+//    	reasonForChange.append(updateMap.keySet());
+//    }
+//    if (null != newMap && !newMap.isEmpty()) {
+//    	reasonForChange.append("new=");
+//    	reasonForChange.append(newMap.keySet());
+//    }
+//
+//    previousGemsCash.put(gems, previousGems);
+//    previousGemsCash.put(cash, previousCash);
+//    reasonsForChanges.put(gems, reasonForChange.toString());
+//    reasonsForChanges.put(cash, reasonForChange.toString());
+//
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
+//        previousGemsCash, reasonsForChanges);
 
   }
 }

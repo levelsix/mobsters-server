@@ -78,7 +78,7 @@ message SellNormStructureResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+//NOT REALLY NEEDED SINCE PURCHASING A STRUCTURE CAN BE CONSTRUED AS UPGRADING
 																						//DONE
 message UpgradeNormStructureRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -103,31 +103,6 @@ message UpgradeNormStructureResponseProto {
 	}
 }
 
-//------------------------------------------------------------------------------------------
-
-																						//DONE
-message RetrieveCurrencyFromNormStructureRequestProto {
-	optional MinimumUserProto sender = 1;
-	repeated StructRetrieval structRetrievals = 2;
-	
-	message StructRetrieval {
-		optional int32 userStructId = 1;
-		optional int64 timeOfRetrieval = 2;
-	}
-}
-
-																						//DONE
-message RetrieveCurrencyFromNormStructureResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional RetrieveCurrencyFromNormStructureStatus status = 2;
-	
-	enum RetrieveCurrencyFromNormStructureStatus {
-		OTHER_FAIL = 1;
-		SUCCESS = 2;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
-		NOT_LONG_ENOUGH = 4;
-	}
-}
 
 //------------------------------------------------------------------------------------------
 
@@ -137,6 +112,7 @@ message FinishNormStructWaittimeWithDiamondsRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 userStructId = 2;
 	optional int64 timeOfSpeedup = 3;			//lastRetrieved will start with this date
+	//TODO: ACCOUNT FOR HOW MUCH TIME HAS PASSED WHEN DETERMINING SPEEDUP GEM COST
 }
 
 																						//DONE
@@ -175,10 +151,34 @@ message NormStructWaitCompleteResponseProto {
      
      enum NormStructWaitCompleteStatus {
      	SUCCESS = 1;
-     	NOT_DONE_YET = 2;
-     	OTHER_FAIL = 3;
-     	CLIENT_TOO_APART_FROM_SERVER_TIME = 4;
+     	FAIL_NOT_DONE_YET = 2;
+     	FAIL_OTHER = 3;
      }
+}
+
+//------------------------------------------------------------------------------------------
+																						//DONE
+message RetrieveCurrencyFromNormStructureRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated StructRetrieval structRetrievals = 2;
+	
+	message StructRetrieval {
+		optional int32 userStructId = 1;
+		optional int64 timeOfRetrieval = 2;
+	}
+}
+
+																						//DONE
+message RetrieveCurrencyFromNormStructureResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RetrieveCurrencyFromNormStructureStatus status = 2;
+	
+	enum RetrieveCurrencyFromNormStructureStatus {
+		OTHER_FAIL = 1;
+		SUCCESS = 2;
+		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
+		NOT_LONG_ENOUGH = 4;
+	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -202,10 +202,10 @@ message ExpansionWaitCompleteResponseProto {
      
      enum ExpansionWaitCompleteStatus {
      	SUCCESS = 1;
-     	WAS_NOT_EXPANDING = 2;
-     	NOT_DONE_YET = 3;
-     	OTHER_FAIL = 4;
-     	CLIENT_TOO_APART_FROM_SERVER_TIME = 5;
+     	FAIL_WAS_NOT_EXPANDING = 2;
+     	FAIL_NOT_DONE_YET = 3;
+     	FAIL_INSUFFICIENT_GEMS = 4;
+     	FAIL_OTHER = 4;
      }
 }
 

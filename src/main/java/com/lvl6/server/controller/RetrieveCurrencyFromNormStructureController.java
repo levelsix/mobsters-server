@@ -3,7 +3,6 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,6 @@ import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto;
@@ -56,6 +54,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent)event).getRetrieveCurrencyFromNormStructureRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
     
     Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<Integer, Timestamp>();
@@ -73,7 +72,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       int previousSilver = 0;
       List<Integer> userStructIds = new ArrayList<Integer>(userStructIdsToTimesOfRetrieval.keySet());
       
-      Map<Integer, StructureForUser> userStructIdsToUserStructs = getUserStructIdsToUserStructs(userStructIds);
+      Map<Integer, StructureForUser> userStructIdsToUserStructs = getUserStructIdsToUserStructs(userId, userStructIds);
       Map<Integer, Structure> userStructIdsToStructures = getUserStructIdsToStructs(userStructIdsToUserStructs.values());
       
       int coinGain = calculateMoneyGainedFromStructs(userStructIds, userStructIdsToUserStructs, userStructIdsToStructures);
@@ -132,14 +131,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
   
-  private Map<Integer, StructureForUser> getUserStructIdsToUserStructs(List<Integer> userStructIds) {
+  private Map<Integer, StructureForUser> getUserStructIdsToUserStructs(int userId,
+  		List<Integer> userStructIds) {
     Map<Integer, StructureForUser> returnValue = new HashMap<Integer, StructureForUser>();
     if(null == userStructIds || userStructIds.isEmpty()) {
       log.error("no user struct ids!");
     }
     
     List<StructureForUser> userStructList = RetrieveUtils.userStructRetrieveUtils()
-        .getUserStructs(userStructIds);
+        .getSpecificOrAllUserStructsForUser(userId, userStructIds);
     for(StructureForUser us : userStructList) {
       if(null != us) {
         returnValue.put(us.getId(), us);
@@ -181,10 +181,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int totalCoinsGained = 0;
     
     for(Integer i : userStructIds) {
-      StructureForUser userStructure = userStructIdsToUserStructs.get(i);
+//      StructureForUser userStructure = userStructIdsToUserStructs.get(i);
       Structure struct = userStructIdsToStructures.get(i);
       int structIncome = struct.getIncome();
-      int userStructureLevel = userStructure.getLevel();
+//      int userStructureLevel = userStructure.getLevel();
       
 //      totalCoinsGained += MiscMethods.calculateIncomeGainedFromUserStruct(
 //          structIncome, userStructureLevel);
@@ -246,21 +246,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
   }
   
+  //TODO: FIX THIS
   public void writeToUserCurrencyHistory(User aUser, int coinChange, int previousSilver) {
-    Timestamp date = new Timestamp((new Date()).getTime());
-
-    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String silver = MiscMethods.cash;
-    String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
-    
-    goldSilverChange.put(silver, coinChange);
-    previousGoldSilver.put(silver, previousSilver);
-    reasonsForChanges.put(silver, reasonForChange);
-    
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
-        previousGoldSilver, reasonsForChanges);
+//    Timestamp date = new Timestamp((new Date()).getTime());
+//
+//    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
+//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String silver = MiscMethods.cash;
+//    String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
+//    
+//    goldSilverChange.put(silver, coinChange);
+//    previousGoldSilver.put(silver, previousSilver);
+//    reasonsForChanges.put(silver, reasonForChange);
+//    
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
+//        previousGoldSilver, reasonsForChanges);
   }
   
 }

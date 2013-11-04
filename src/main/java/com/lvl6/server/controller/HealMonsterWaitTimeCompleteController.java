@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +19,6 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteRequestProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterWaitTimeCompleteResponseProto.Builder;
@@ -107,6 +104,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
+      	
+      	//TODO: WRITE TO HISTORY
       	writeToUserCurrencyHistory(aUser, money, curTime, previousGems);
       }
     } catch (Exception e) {
@@ -219,21 +218,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
+  //TODO: FIX THIS
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money,
   		Timestamp curTime, int previousGems) {
-  	if (null == money || money.isEmpty()) {
-  		return;
-  	}
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-    String gems = MiscMethods.gems;
-
-    previousGemsCash.put(gems, previousGems);
-    reasonsForChanges.put(gems, reasonForChange);
-
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGemsCash, reasonsForChanges);
+//  	if (null == money || money.isEmpty()) {
+//  		return;
+//  	}
+//    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
+//    String gems = MiscMethods.gems;
+//
+//    previousGemsCash.put(gems, previousGems);
+//    reasonsForChanges.put(gems, reasonForChange);
+//
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
+//        previousGemsCash, reasonsForChanges);
 
   }
 }

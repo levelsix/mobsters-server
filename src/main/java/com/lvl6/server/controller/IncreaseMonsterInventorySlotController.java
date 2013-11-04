@@ -153,20 +153,21 @@ import com.lvl6.utils.RetrieveUtils;
   	return success;
   }
   
+  //TODO:FIX THIS
   private void writeToUserCurrencyHistory(User aUser, Timestamp date,
   		Map<String, Integer> money, int previousGems, int numSlots, int pricePerSlot) {
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gems = MiscMethods.gems;
-    String reasonForChange = ControllerConstants.UCHRFC__INCREASE_MONSTER_INVENTORY +
-    		"numSlots=" + numSlots + " pricePerSlot=" + pricePerSlot;
-
-    previousGemsCash.put(gems, previousGems);
-    reasonsForChanges.put(gems, reasonForChange);
-    
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-        previousGemsCash, reasonsForChanges);
-    
+//    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String gems = MiscMethods.gems;
+//    String reasonForChange = ControllerConstants.UCHRFC__INCREASE_MONSTER_INVENTORY +
+//    		"numSlots=" + numSlots + " pricePerSlot=" + pricePerSlot;
+//
+//    previousGemsCash.put(gems, previousGems);
+//    reasonsForChanges.put(gems, reasonForChange);
+//    
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
+//        previousGemsCash, reasonsForChanges);
+//    
   }
   
 }

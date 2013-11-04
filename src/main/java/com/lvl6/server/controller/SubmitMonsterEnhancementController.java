@@ -279,7 +279,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 					"\t protoDeleteMap=" + protoDeleteMap);
 		}
 		
-		//convert protos to java cou
+		//convert protos to java counterparts
 		List<MonsterEnhancingForUser> updateMap = MonsterStuffUtils.convertToMonsterEnhancingForUser(
 	  		uId, protoUpdateMap);
 		log.info("updateMap=" + updateMap);
@@ -355,8 +355,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		reasonsForChanges.put(cash, reasonForChange.toString());
 		reasonsForChanges.put(gems, reasonForChange.toString());
-
-		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money, previousGemsCash, reasonsForChanges);
+		//TODO: FIX THIS
+//		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money, previousGemsCash, reasonsForChanges);
 	}
 
 }

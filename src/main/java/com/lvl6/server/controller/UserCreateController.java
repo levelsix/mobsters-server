@@ -379,44 +379,45 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     return true;
   }
 
+  //TODO: FIX THIS
   private void writeToUserCurrencyHistory(User aUser, int playerCoins, int playerDiamonds) {
-    String gems = MiscMethods.gems;
-    String cash = MiscMethods.cash;
-    
-    Timestamp date = new Timestamp(new Date().getTime());
-    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    String reasonForChange = ControllerConstants.UCHRFC__USER_CREATED;
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    
-    goldSilverChange.put(gems, playerDiamonds);
-    goldSilverChange.put(cash, playerCoins);
-    
-    previousGoldSilver.put(gems, 0);
-    previousGoldSilver.put(cash, 0);
-    
-    reasonsForChanges.put(gems, reasonForChange);
-    reasonsForChanges.put(cash, reasonForChange);
-    
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
-        previousGoldSilver, reasonsForChanges);
+//    String gems = MiscMethods.gems;
+//    String cash = MiscMethods.cash;
+//    
+//    Timestamp date = new Timestamp(new Date().getTime());
+//    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
+//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//    String reasonForChange = ControllerConstants.UCHRFC__USER_CREATED;
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    
+//    goldSilverChange.put(gems, playerDiamonds);
+//    goldSilverChange.put(cash, playerCoins);
+//    
+//    previousGoldSilver.put(gems, 0);
+//    previousGoldSilver.put(cash, 0);
+//    
+//    reasonsForChanges.put(gems, reasonForChange);
+//    reasonsForChanges.put(cash, reasonForChange);
+//    
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
+//        previousGoldSilver, reasonsForChanges);
   }
-
+  //TODO: FIX THIS
   public void writeToUserCurrencyHistoryTwo(User aUser, int coinChange, int previousSilver) {
-    Timestamp date = new Timestamp((new Date()).getTime());
-
-    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String silver = MiscMethods.cash;
-    String reasonForChange = ControllerConstants.UCHRFC__USER_CREATE_REFERRED_A_USER;
-    
-    goldSilverChange.put(silver, coinChange);
-    previousGoldSilver.put(silver, previousSilver);
-    reasonsForChanges.put(silver, reasonForChange);
-    
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
-        previousGoldSilver, reasonsForChanges);
+//    Timestamp date = new Timestamp((new Date()).getTime());
+//
+//    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
+//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String silver = MiscMethods.cash;
+//    String reasonForChange = ControllerConstants.UCHRFC__USER_CREATE_REFERRED_A_USER;
+//    
+//    goldSilverChange.put(silver, coinChange);
+//    previousGoldSilver.put(silver, previousSilver);
+//    reasonsForChanges.put(silver, reasonForChange);
+//    
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
+//        previousGoldSilver, reasonsForChanges);
   }
   
 }

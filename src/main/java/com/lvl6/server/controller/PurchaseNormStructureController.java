@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseNormStructureRequestEvent;
-import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.PurchaseNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.CoordinatePair;
@@ -23,7 +22,6 @@ import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.Builder;
@@ -170,29 +168,27 @@ import com.lvl6.utils.utilmethods.InsertUtil;
           + ", timeOfPurchase=" + timeOfPurchase);
       return false;
     }
-//    if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfPurchase)) {
-//      resBuilder.setStatus(PurchaseNormStructureStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-//      log.error("client time too apart of server time. client time=" + timeOfPurchase + ", servertime~="
-//          + new Date());
-//      return false;
-//    }
+    //see if the user is at or above the required level to build the structure
     if (user.getLevel() < struct.getMinLevel()) {
       resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_LEVEL_TOO_LOW);
       log.error("user is too low level to purchase struct. user level=" + user.getLevel() + 
           ", struct's min level is " + struct.getMinLevel());
       return false;
     }
+    //check if user has enough cash to buy building
     if (user.getCash() < struct.getCashPrice()) {
       resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
       log.error("user only has " + user.getCash() + " coins and needs " + struct.getCashPrice());
       return false;
     }
+    //check if user has enough gems to buy building
     if (user.getGems() < struct.getGemPrice()) {
       resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
       log.error("user only has " + user.getGems() + " diamonds and needs " + struct.getGemPrice());
       return false;
     }
 
+    //see if user can buy more of these structures and if another struct is in construction
     Map<Integer, List<StructureForUser>> structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(user.getId());
     if (structIdsToUserStructs != null) {
       for (Integer structId : structIdsToUserStructs.keySet()) {
@@ -219,22 +215,23 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     return true;
   }
   
+  //TODO: TRACK CURRENCY
   private void writeToUserCurrencyHistory(User aUser, int structId, int uStructId,
   		Timestamp date, Map<String, Integer> money, int previousSilver, int previousGold) {
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gems = MiscMethods.gems;
-    String cash = MiscMethods.cash;
-    String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_NORM_STRUCT +
-        " structId=" + structId + " uStructId=" + uStructId;
-
-    previousGoldSilver.put(gems, previousGold);
-    previousGoldSilver.put(cash, previousSilver);
-    reasonsForChanges.put(gems, reasonForChange);
-    reasonsForChanges.put(cash, reasonForChange);
-    
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-        previousGoldSilver, reasonsForChanges);
+//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String gems = MiscMethods.gems;
+//    String cash = MiscMethods.cash;
+//    String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_NORM_STRUCT +
+//        " structId=" + structId + " uStructId=" + uStructId;
+//
+//    previousGoldSilver.put(gems, previousGold);
+//    previousGoldSilver.put(cash, previousSilver);
+//    reasonsForChanges.put(gems, reasonForChange);
+//    reasonsForChanges.put(cash, reasonForChange);
+//    
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
+//        previousGoldSilver, reasonsForChanges);
     
   }
 }

@@ -1160,17 +1160,9 @@ public final class StructureProto {
     com.lvl6.proto.StructureProto.CoordinateProto getCoordinates();
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordinatesOrBuilder();
     
-    // optional int32 level = 6;
-    boolean hasLevel();
-    int getLevel();
-    
     // optional int64 purchaseTime = 7;
     boolean hasPurchaseTime();
     long getPurchaseTime();
-    
-    // optional int64 lastUpgradeTime = 8;
-    boolean hasLastUpgradeTime();
-    long getLastUpgradeTime();
     
     // optional bool isComplete = 9;
     boolean hasIsComplete();
@@ -1262,41 +1254,21 @@ public final class StructureProto {
       return coordinates_;
     }
     
-    // optional int32 level = 6;
-    public static final int LEVEL_FIELD_NUMBER = 6;
-    private int level_;
-    public boolean hasLevel() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    public int getLevel() {
-      return level_;
-    }
-    
     // optional int64 purchaseTime = 7;
     public static final int PURCHASETIME_FIELD_NUMBER = 7;
     private long purchaseTime_;
     public boolean hasPurchaseTime() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public long getPurchaseTime() {
       return purchaseTime_;
-    }
-    
-    // optional int64 lastUpgradeTime = 8;
-    public static final int LASTUPGRADETIME_FIELD_NUMBER = 8;
-    private long lastUpgradeTime_;
-    public boolean hasLastUpgradeTime() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    public long getLastUpgradeTime() {
-      return lastUpgradeTime_;
     }
     
     // optional bool isComplete = 9;
     public static final int ISCOMPLETE_FIELD_NUMBER = 9;
     private boolean isComplete_;
     public boolean hasIsComplete() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public boolean getIsComplete() {
       return isComplete_;
@@ -1306,7 +1278,7 @@ public final class StructureProto {
     public static final int ORIENTATION_FIELD_NUMBER = 10;
     private com.lvl6.proto.StructureProto.StructOrientation orientation_;
     public boolean hasOrientation() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public com.lvl6.proto.StructureProto.StructOrientation getOrientation() {
       return orientation_;
@@ -1318,9 +1290,7 @@ public final class StructureProto {
       structId_ = 0;
       lastRetrieved_ = 0L;
       coordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      level_ = 0;
       purchaseTime_ = 0L;
-      lastUpgradeTime_ = 0L;
       isComplete_ = false;
       orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
     }
@@ -1352,18 +1322,12 @@ public final class StructureProto {
         output.writeMessage(5, coordinates_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(6, level_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(7, purchaseTime_);
       }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt64(8, lastUpgradeTime_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBool(9, isComplete_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeEnum(10, orientation_.getNumber());
       }
       getUnknownFields().writeTo(output);
@@ -1397,21 +1361,13 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, level_);
+          .computeInt64Size(7, purchaseTime_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, purchaseTime_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(8, lastUpgradeTime_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(9, isComplete_);
       }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(10, orientation_.getNumber());
       }
@@ -1554,16 +1510,12 @@ public final class StructureProto {
           coordinatesBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000010);
-        level_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
         purchaseTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        lastUpgradeTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         isComplete_ = false;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       
@@ -1629,21 +1581,13 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.level_ = level_;
+        result.purchaseTime_ = purchaseTime_;
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.purchaseTime_ = purchaseTime_;
+        result.isComplete_ = isComplete_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
-        }
-        result.lastUpgradeTime_ = lastUpgradeTime_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.isComplete_ = isComplete_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
         }
         result.orientation_ = orientation_;
         result.bitField0_ = to_bitField0_;
@@ -1677,14 +1621,8 @@ public final class StructureProto {
         if (other.hasCoordinates()) {
           mergeCoordinates(other.getCoordinates());
         }
-        if (other.hasLevel()) {
-          setLevel(other.getLevel());
-        }
         if (other.hasPurchaseTime()) {
           setPurchaseTime(other.getPurchaseTime());
-        }
-        if (other.hasLastUpgradeTime()) {
-          setLastUpgradeTime(other.getLastUpgradeTime());
         }
         if (other.hasIsComplete()) {
           setIsComplete(other.getIsComplete());
@@ -1752,23 +1690,13 @@ public final class StructureProto {
               setCoordinates(subBuilder.buildPartial());
               break;
             }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              level_ = input.readInt32();
-              break;
-            }
             case 56: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000020;
               purchaseTime_ = input.readInt64();
               break;
             }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              lastUpgradeTime_ = input.readInt64();
-              break;
-            }
             case 72: {
-              bitField0_ |= 0x00000100;
+              bitField0_ |= 0x00000040;
               isComplete_ = input.readBool();
               break;
             }
@@ -1778,7 +1706,7 @@ public final class StructureProto {
               if (value == null) {
                 unknownFields.mergeVarintField(10, rawValue);
               } else {
-                bitField0_ |= 0x00000200;
+                bitField0_ |= 0x00000080;
                 orientation_ = value;
               }
               break;
@@ -1963,65 +1891,23 @@ public final class StructureProto {
         return coordinatesBuilder_;
       }
       
-      // optional int32 level = 6;
-      private int level_ ;
-      public boolean hasLevel() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      public int getLevel() {
-        return level_;
-      }
-      public Builder setLevel(int value) {
-        bitField0_ |= 0x00000020;
-        level_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearLevel() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        level_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // optional int64 purchaseTime = 7;
       private long purchaseTime_ ;
       public boolean hasPurchaseTime() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public long getPurchaseTime() {
         return purchaseTime_;
       }
       public Builder setPurchaseTime(long value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         purchaseTime_ = value;
         onChanged();
         return this;
       }
       public Builder clearPurchaseTime() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         purchaseTime_ = 0L;
-        onChanged();
-        return this;
-      }
-      
-      // optional int64 lastUpgradeTime = 8;
-      private long lastUpgradeTime_ ;
-      public boolean hasLastUpgradeTime() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      public long getLastUpgradeTime() {
-        return lastUpgradeTime_;
-      }
-      public Builder setLastUpgradeTime(long value) {
-        bitField0_ |= 0x00000080;
-        lastUpgradeTime_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearLastUpgradeTime() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        lastUpgradeTime_ = 0L;
         onChanged();
         return this;
       }
@@ -2029,19 +1915,19 @@ public final class StructureProto {
       // optional bool isComplete = 9;
       private boolean isComplete_ ;
       public boolean hasIsComplete() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public boolean getIsComplete() {
         return isComplete_;
       }
       public Builder setIsComplete(boolean value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000040;
         isComplete_ = value;
         onChanged();
         return this;
       }
       public Builder clearIsComplete() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         isComplete_ = false;
         onChanged();
         return this;
@@ -2050,7 +1936,7 @@ public final class StructureProto {
       // optional .com.lvl6.proto.StructOrientation orientation = 10;
       private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
       public boolean hasOrientation() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public com.lvl6.proto.StructureProto.StructOrientation getOrientation() {
         return orientation_;
@@ -2059,13 +1945,13 @@ public final class StructureProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000080;
         orientation_ = value;
         onChanged();
         return this;
       }
       public Builder clearOrientation() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000080);
         orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
         onChanged();
         return this;
@@ -2509,12 +2395,11 @@ public final class StructureProto {
       "\030\t \001(\005\022\017\n\007xLength\030\n \001(\005\022\017\n\007yLength\030\013 \001(\005" +
       "\022\031\n\021instaBuildGemCost\030\014 \001(\005\022\036\n\026imgVertic" +
       "alPixelOffset\030\r \001(\005\022\031\n\021successorStructId" +
-      "\030\016 \001(\005\"\247\002\n\026FullUserStructureProto\022\024\n\014use" +
+      "\030\016 \001(\005\"\377\001\n\026FullUserStructureProto\022\024\n\014use" +
       "rStructId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010struc",
       "tId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\0224\n\013coor" +
       "dinates\030\005 \001(\0132\037.com.lvl6.proto.Coordinat" +
-      "eProto\022\r\n\005level\030\006 \001(\005\022\024\n\014purchaseTime\030\007 " +
-      "\001(\003\022\027\n\017lastUpgradeTime\030\010 \001(\003\022\022\n\nisComple" +
+      "eProto\022\024\n\014purchaseTime\030\007 \001(\003\022\022\n\nisComple" +
       "te\030\t \001(\010\0226\n\013orientation\030\n \001(\0162!.com.lvl6" +
       ".proto.StructOrientation\"\'\n\017CoordinatePr" +
       "oto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002*3\n\021StructOrien" +
@@ -2539,7 +2424,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserStructureProto_descriptor,
-              new java.lang.String[] { "UserStructId", "UserId", "StructId", "LastRetrieved", "Coordinates", "Level", "PurchaseTime", "LastUpgradeTime", "IsComplete", "Orientation", },
+              new java.lang.String[] { "UserStructId", "UserId", "StructId", "LastRetrieved", "Coordinates", "PurchaseTime", "IsComplete", "Orientation", },
               com.lvl6.proto.StructureProto.FullUserStructureProto.class,
               com.lvl6.proto.StructureProto.FullUserStructureProto.Builder.class);
           internal_static_com_lvl6_proto_CoordinateProto_descriptor =

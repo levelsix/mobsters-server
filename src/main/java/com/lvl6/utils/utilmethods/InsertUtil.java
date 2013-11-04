@@ -80,11 +80,12 @@ public interface InsertUtil {
 	public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, int battlesWonChange, int battlesLostChange, int battlesFledChange);
 
 	public abstract int insertIntoUserCurrencyHistory (int userId, Timestamp date, int isSilver, 
-			int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange);
+			int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange, String details);
 
 	public abstract int insertIntoUserCurrencyHistoryMultipleRows (List<Integer> userIds,
 			List<Timestamp> dates, List<Integer> areSilver, List<Integer> currenciesChange,
-			List<Integer> currenciesBefore, List<Integer> currentCurrencies, List<String> reasonsForChanges);
+			List<Integer> currenciesBefore, List<Integer> currentCurrencies, List<String> reasonsForChanges,
+			List<String> details);
 
 	public abstract int insertIntoLoginHistory(String udid, int userId, Timestamp now, boolean isLogin, boolean goingThroughTutorial);
 
@@ -104,7 +105,7 @@ public interface InsertUtil {
 
 	public abstract int insertIntoTaskHistory(long userTaskId, int userId,
 			int taskId, int expGained, int silverGained, int numRevives,
-			Timestamp startTime, Timestamp endTime, boolean userWon);
+			Timestamp startTime, Timestamp endTime, boolean userWon, boolean cancelled);
 	
 	public abstract int insertIntoUserTaskStage(List<Long> userTaskId, List<Integer> stageNum,
 			List<Integer> monsterId, List<Integer> expGained, List<Integer> silverGained,
@@ -119,5 +120,5 @@ public interface InsertUtil {
 			List<MonsterForUser> userMonsters, String sourceOfPieces);
 	
 	public abstract int insertIntoMonsterForUserDeleted(int userId, List<String> deleteReasons,
-			List<MonsterForUser> userMonsters, Date deleteDate);
+			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate);
 }

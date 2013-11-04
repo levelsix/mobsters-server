@@ -118,7 +118,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         money.put(MiscMethods.cash, silverChange);
       }
     }
-    if (!UpdateUtils.get().updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), null, timeOfUpgrade, false)) {
+    if (!UpdateUtils.get().updateUserStructLastretrievedIscomplete(userStruct.getId(), null, false)) {
       log.error("problem with changing time of upgrade to " + timeOfUpgrade + " and marking as incomplete, the user struct " + userStruct);
     }
   }
@@ -171,16 +171,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("user doesn't have enough diamonds, has " + user.getGems() + ", needs " + upgradeDiamondCost);
       return false;
     }
-    List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
-    if (userStructs != null) {
-      for (StructureForUser us : userStructs) {
-        if (!us.isComplete() && us.getLastRetrieved() != null && us.getLastUpgradeTime() != null) {
-          resBuilder.setStatus(UpgradeNormStructureStatus.ANOTHER_STRUCT_STILL_UPGRADING);
-          log.error("another struct is still upgrading: user struct=" + us);
-          return false;
-        }
-      }
-    }
+    //TODO: FIGURE OUT WHY THIS SHIT IS HERE
+//    List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
+//    if (userStructs != null) {
+//      for (StructureForUser us : userStructs) {
+//        if (!us.isComplete() && us.getLastRetrieved() != null && us.getLastUpgradeTime() != null) {
+//          resBuilder.setStatus(UpgradeNormStructureStatus.ANOTHER_STRUCT_STILL_UPGRADING);
+//          log.error("another struct is still upgrading: user struct=" + us);
+//          return false;
+//        }
+//      }
+//    }
     resBuilder.setStatus(UpgradeNormStructureStatus.SUCCESS);
     return true;
   }
@@ -217,8 +218,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     reasonsForChanges.put(gems, reasonForChange);
     reasonsForChanges.put(cash,  reasonForChange);
     
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfUpgrade, 
-        money, previousGoldSilver, reasonsForChanges);
+    //TODO: FIX THIS
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfUpgrade, 
+//        money, previousGoldSilver, reasonsForChanges);
   }
 
 }

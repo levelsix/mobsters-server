@@ -15,11 +15,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.UserCityExpansionData;
+import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class UserCityExpansionDataRetrieveUtils {
+@Component @DependsOn("gameServer") public class ExpansionPurchaseForUserRetrieveUtils {
 
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
@@ -27,43 +27,15 @@ import com.lvl6.utils.DBConnection;
 
 
 
-	public static List<UserCityExpansionData> getUserCityExpansionDatasForUserId(int userId) {
-
-		/*Connection conn = DBConnection.get().getConnection();
-		List<String> columns = null; //all columns
-		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-		Map<String, Object> relativeGreaterThanConditionParams =
-				new HashMap<String, Object>();
-		Map<String, Object> relativeLessThanConditionParams = null;
-		Map<String, Object> likeCondParams = null;
-		String tablename = TABLE_NAME;
-		String conddelim = "AND";
-		String orderByColumn = null;
-		boolean orderByAsc = false;
-		int limit = ControllerConstants.NOT_SET;
-		boolean random = false;
-
-		absoluteConditionParams.put(DBConstants.USER_CITY_EXPANSION_DATA__USER_ID, userId);
-
-		ResultSet rs = DBConnection.get().selectRows(conn, columns,
-				absoluteConditionParams, relativeGreaterThanConditionParams,
-				relativeLessThanConditionParams, likeCondParams,
-				tablename, conddelim, orderByColumn, orderByAsc, limit, random); */
-		
+	public static List<ExpansionPurchaseForUser> getUserCityExpansionDatasForUserId(int userId) {
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-		List<UserCityExpansionData> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
+		List<ExpansionPurchaseForUser> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
 		DBConnection.get().close(rs, null, conn);
 		return userCityExpansionDatas;
 	}
 	
-	public static UserCityExpansionData getSpecificUserCityExpansionDataForUserIdAndPosition(int userId, int xPosition, int yPosition) {
-//		List<UserCityExpansionData> ucedList = getUserCityExpansionDatasForUserId(userId);
-//		for(UserCityExpansionData uced : ucedList) {
-//			if(uced.getxPosition() == xPosition && uced.getyPosition() == yPosition) 
-//				return uced;
-//		}
-//		return null;
+	public static ExpansionPurchaseForUser getSpecificUserCityExpansionDataForUserIdAndPosition(int userId, int xPosition, int yPosition) {
 		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
 		absoluteConditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__USER_ID, userId);
 		absoluteConditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__X_POSITION, xPosition);
@@ -72,7 +44,7 @@ import com.lvl6.utils.DBConnection;
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn,
 				absoluteConditionParams, TABLE_NAME);
-		List<UserCityExpansionData> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
+		List<ExpansionPurchaseForUser> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
 		DBConnection.get().close(rs, null, conn);
 		
 		log.info("userCityExpansionDatas=" + userCityExpansionDatas);
@@ -110,14 +82,14 @@ import com.lvl6.utils.DBConnection;
 		return 0;
 	}
 
-	private static List<UserCityExpansionData> grabUserCityExpansionDatasFromRS(ResultSet rs) {
+	private static List<ExpansionPurchaseForUser> grabUserCityExpansionDatasFromRS(ResultSet rs) {
 		if (rs != null) {
 			try {
 				rs.last();
 				rs.beforeFirst();
-				List<UserCityExpansionData> userCityExpansionDatas = new ArrayList<UserCityExpansionData>();
+				List<ExpansionPurchaseForUser> userCityExpansionDatas = new ArrayList<ExpansionPurchaseForUser>();
 				while(rs.next()) {
-					UserCityExpansionData uc = convertRSRowToUserCityExpansionData(rs);
+					ExpansionPurchaseForUser uc = convertRSRowToUserCityExpansionData(rs);
 					userCityExpansionDatas.add(uc);
 				}
 				return userCityExpansionDatas;
@@ -132,7 +104,7 @@ import com.lvl6.utils.DBConnection;
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.
 	 */
-	private static UserCityExpansionData convertRSRowToUserCityExpansionData(ResultSet rs) throws SQLException {
+	private static ExpansionPurchaseForUser convertRSRowToUserCityExpansionData(ResultSet rs) throws SQLException {
 		int i = 1;
 		int userId = rs.getInt(i++);
 		int xPosition = rs.getInt(i++);
@@ -145,7 +117,7 @@ import com.lvl6.utils.DBConnection;
 			expandStartTime = new Date(ts.getTime());
 		}
 
-		return new UserCityExpansionData(userId, xPosition, yPosition, isExpanding, expandStartTime);
+		return new ExpansionPurchaseForUser(userId, xPosition, yPosition, isExpanding, expandStartTime);
 	}
 
 }

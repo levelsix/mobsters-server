@@ -188,8 +188,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Date startDate = ut.getStartDate();
 	  long startMillis = startDate.getTime();
 	  Timestamp startTime = new Timestamp(startMillis);
+	  boolean cancelled = false;
 	  int num = InsertUtils.get().insertIntoTaskHistory(utId,uId, tId,
-			  expGained, cashGained, numRevives, startTime, clientTime, userWon);
+			  expGained, cashGained, numRevives, startTime, clientTime, userWon, cancelled);
 	  if (1 != num) {
 		  log.error("unexpected error: error when inserting into user_task_history. " +
 		  		"numInserted=" + num + " Attempting to undo shi");
@@ -312,17 +313,23 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
       int previousCash, long userTaskId, int taskId) {
+  	StringBuffer sb = new StringBuffer();
+  	sb.append("userTask=");
+  	sb.append(userTaskId);
+  	sb.append(" taskId=");
+  	sb.append(taskId);
+  	String cash = MiscMethods.cash;
+  	String reasonForChange = ControllerConstants.UCHRFC__END_TASK;
+  	
     Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String reasonForChange = ControllerConstants.UCHRFC__END_TASK +
-    		"userTask=" + userTaskId + " taskId=" + taskId;
-    String cash = MiscMethods.cash;
+    Map<String, String> detailsMap = new HashMap<String, String>();
 
     previousGemsCash.put(cash, previousCash);
     reasonsForChanges.put(cash, reasonForChange);
-
+    detailsMap.put(cash, sb.toString());
     MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGemsCash, reasonsForChanges);
+        previousGemsCash, reasonsForChanges, detailsMap);
 
   }
 }

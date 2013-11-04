@@ -136,9 +136,11 @@ public class TournamentEventScheduledTasks {
 		List<Integer> previousGoldSilver = new ArrayList<Integer>();
 		List<Integer> currentGoldSilver = new ArrayList<Integer>();
 		List<String> reasonsForChanges = new ArrayList<String>();
-
+		List<String> detailsList = new ArrayList<String>();
+		
+		int tournamentEventId = event.getId();
 		List<TournamentEventReward> rewards = TournamentEventRewardRetrieveUtils
-				.getLeaderboardEventRewardsForId(event.getId());
+				.getLeaderboardEventRewardsForId(tournamentEventId);
 		for (TournamentEventReward reward : rewards) {
 			Set<Tuple> set = new HashSet<Tuple>();
 			set = leader.getEventTopN(event.getId(), reward.getMinRank() - 1, reward.getMaxRank() - 1);
@@ -159,6 +161,7 @@ public class TournamentEventScheduledTasks {
 				areSilver.add(0);
 				goldSilverChange.add(reward.getGoldRewarded());
 				reasonsForChanges.add(ControllerConstants.UCHRFC__LEADERBOARD);
+				detailsList.add("tournamentId=" + tournamentEventId);
 			}
 
 			log.info("Awarding " + reward.getGoldRewarded() + " gold for ranks " + reward.getMinRank() + "-"
@@ -174,7 +177,8 @@ public class TournamentEventScheduledTasks {
 				getPreviousAndCurrentGold(userIds, uMap, previousGoldSilver, currentGoldSilver, goldRewarded);
 				int numInserted = InsertUtils.get()
 						.insertIntoUserCurrencyHistoryMultipleRows(userIds, dates, areSilver,
-								goldSilverChange, previousGoldSilver, currentGoldSilver, reasonsForChanges);
+								goldSilverChange, previousGoldSilver, currentGoldSilver, reasonsForChanges,
+								detailsList);
 				log.info("Should be " + userIds.size() + ". Rows inserted into user_currency_history: "
 						+ numInserted);
 			} catch (Exception e) {

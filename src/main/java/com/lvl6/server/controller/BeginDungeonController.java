@@ -177,13 +177,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   	Timestamp endTime = null;
   	boolean userWon = false;
+  	boolean cancelled = true;
   	
   	int num = DeleteUtils.get().deleteTaskForUserWithTaskForUserId(taskForUserId);
   	log.warn("deleted existing task_for_user. taskForUser=" + aTaskForUser +
   			"\t (should be 1) numDeleted=" + num);
   	//meh, fogedaboudit 
     InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId, taskId,
-    		expGained, cashGained, numRevives, startTime, endTime, userWon);
+    		expGained, cashGained, numRevives, startTime, endTime, userWon, cancelled);
   }
   
   private void deleteExistingTaskStagesForUser(long taskForUserId) {

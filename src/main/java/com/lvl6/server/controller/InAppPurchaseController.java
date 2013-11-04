@@ -10,7 +10,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -37,7 +36,6 @@ import com.lvl6.events.response.InAppPurchaseResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.KabamProperties;
@@ -314,27 +312,28 @@ public class InAppPurchaseController extends EventController {
     return sb.toString();
   }
 
+  //TODO: FIX THIS
   private void writeToUserCurrencyHistory(User aUser, Timestamp date,
       int diamondChange, int coinChange, int previousSilver, int previousGold) {
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
-    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-    String gems = MiscMethods.gems;
-    String cash = MiscMethods.cash;
-    String reasonForChange = ControllerConstants.UCHRFC__IN_APP_PURCHASE;
-
-    if (0 < diamondChange) {
-      goldSilverChange.put(gems, diamondChange);
-      previousGoldSilver.put(gems, previousGold);
-      reasonsForChanges.put(gems, reasonForChange + gems);
-    } 
-    if (0 < coinChange) {
-      goldSilverChange.put(cash, coinChange);
-      previousGoldSilver.put(cash, previousSilver);
-      reasonsForChanges.put(cash, reasonForChange + cash);
-    }
-
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
-        goldSilverChange, previousGoldSilver, reasonsForChanges);
+//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+//    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
+//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+//    String gems = MiscMethods.gems;
+//    String cash = MiscMethods.cash;
+//    String reasonForChange = ControllerConstants.UCHRFC__IN_APP_PURCHASE;
+//
+//    if (0 < diamondChange) {
+//      goldSilverChange.put(gems, diamondChange);
+//      previousGoldSilver.put(gems, previousGold);
+//      reasonsForChanges.put(gems, reasonForChange + gems);
+//    } 
+//    if (0 < coinChange) {
+//      goldSilverChange.put(cash, coinChange);
+//      previousGoldSilver.put(cash, previousSilver);
+//      reasonsForChanges.put(cash, reasonForChange + cash);
+//    }
+//
+//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date,
+//        goldSilverChange, previousGoldSilver, reasonsForChanges);
   }
 }

@@ -19,8 +19,9 @@ message UserCityExpansionDataProto {
 
 message CityExpansionCostProto {
 	optional int32 expansionNum = 1; //first, second,...or nth expansion
-	optional int32 expansionCost = 2;
+	optional int32 expansionCostCash = 2;
 	optional int32 numMinutesToExpand = 3;
+	optional int32 speedupExpansionGemCost = 4; //cost for speedup
 }
 
 //------------------------------------------------------------------------------------------

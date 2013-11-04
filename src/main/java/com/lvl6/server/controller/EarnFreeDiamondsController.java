@@ -436,6 +436,7 @@ public class EarnFreeDiamondsController extends EventController {
       int currencyChange = money.get(key);
       int currencyAfter;
       String reasonForChange = "earn free diamonds controller";
+      String details = "";
       
       if(key.equals(MiscMethods.cash)) {
         isSilver = 1;
@@ -455,7 +456,7 @@ public class EarnFreeDiamondsController extends EventController {
       }
       
       int inserted = InsertUtils.get().insertIntoUserCurrencyHistory(userId, date, isSilver,
-          currencyChange, previousGold, currencyAfter, reasonForChange);
+          currencyChange, previousGold, currencyAfter, reasonForChange, details);
 
       log.info("Should be 1. Rows inserted into user_currency_history: " + inserted);
     } catch (Exception e) {

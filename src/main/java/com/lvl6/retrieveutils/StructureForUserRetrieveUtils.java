@@ -62,22 +62,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
 
   
-  public List<StructureForUser> getUserStructs(List<Integer> userStructIds) {
+  public List<StructureForUser> getSpecificOrAllUserStructsForUser(int userId,
+  		List<Integer> userStructIds) {
     log.debug("retrieving userStructs with ids " + userStructIds);
     
-    if (userStructIds == null || userStructIds.size() <= 0 ) {
-      return new ArrayList<StructureForUser>();
-    }
-    
-    String query = "select * from " + TABLE_NAME + " where (";
-    List<String> condClauses = new ArrayList<String>();
+    String query = "SELECT * FROM " + TABLE_NAME + " WHERE " +
+    		DBConstants.STRUCTURE_FOR_USER__USER_ID + "=?";
     List <Object> values = new ArrayList<Object>();
-    for (Integer userStructId : userStructIds) {
-      condClauses.add(DBConstants.STRUCTURE_FOR_USER__ID + "=?");
-      values.add(userStructId);
-    }
-    query += StringUtils.getListInString(condClauses, "or") + ")";
+    values.add(userId);
     
+    //if user didn't give any userStructIds then get all the user's structs
+    if (userStructIds == null || userStructIds.size() <= 0 ) {
+    	query += " AND " + DBConstants.STRUCTURE_FOR_USER__ID + " IN (" +
+    			StringUtils.csvList(userStructIds) + ");";
+    }
+    
+    log.info("query=" + query + "\t values=" + values);
+
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
     List<StructureForUser> userStructs = convertRSToUserStructs(rs);
@@ -166,16 +167,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int level = rs.getInt(i++);
     Date purchaseTime = new Date(rs.getTimestamp(i++).getTime());
     
-    Date lastUpgradeTime = null;
-    ts= rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      lastUpgradeTime = new Date(ts.getTime());
-    }
-    
     boolean isComplete = rs.getBoolean(i++);
     StructOrientation orientation = StructOrientation.valueOf(rs.getInt(i++));
 
-    return new StructureForUser(id, userId, structId, lastRetrieved, coordinates, level, purchaseTime, lastUpgradeTime, isComplete, orientation);
+    return new StructureForUser(id, userId, structId, lastRetrieved, coordinates,
+    		level, purchaseTime, isComplete, orientation);
   }
 
 }

@@ -508,7 +508,8 @@ public class InsertUtils implements InsertUtil{
   
   //0 for isSilver means currency is gold; 1 for isSilver means currency is silver
   public int insertIntoUserCurrencyHistory (int userId, Timestamp date, int isSilver, 
-      int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange) {
+      int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange,
+      String details) {
     String tableName = DBConstants.TABLE_USER_CURRENCY_HISTORY;
     Map<String, Object> insertParams = new HashMap<String, Object>();
     
@@ -519,6 +520,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__CURRENCY_BEFORE_CHANGE, currencyBefore);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__CURRENCY_AFTER_CHANGE, currencyAfter);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__REASON_FOR_CHANGE, reasonForChange);
+    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__DETAILS, details);
     
     //number of rows inserted
     int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
@@ -533,7 +535,7 @@ public class InsertUtils implements InsertUtil{
   @SuppressWarnings("unchecked") //the generics issue noted below
   public int insertIntoUserCurrencyHistoryMultipleRows(List<Integer> userIds, List<Timestamp> dates, 
       List<Integer> areSilver, List<Integer> changesToCurrencies, List<Integer> previousCurrencies, 
-      List<Integer> currentCurrencies, List<String> reasonsForChanges) {
+      List<Integer> currentCurrencies, List<String> reasonsForChanges, List<String> details) {
     String tablename = DBConstants.TABLE_USER_CURRENCY_HISTORY;
     
     //did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
@@ -553,6 +555,7 @@ public class InsertUtils implements InsertUtil{
     }
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__CURRENCY_AFTER_CHANGE, currentCurrencies);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__REASON_FOR_CHANGE, reasonsForChanges);
+    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__DETAILS, details);
     
     int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
         insertParams, numRows);
@@ -662,24 +665,30 @@ public class InsertUtils implements InsertUtil{
   //returns the id
   public long insertIntoUserTaskReturnId(int userId, int taskId, int expGained,
   		int silverGained, Timestamp startTime) {
-	  Map<String, Object> insertParams = new HashMap<String, Object>();
+	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 	  
 	  //for recording what-dropped in which-stage
-	  insertParams.put(DBConstants.TASK_FOR_USER__USER_ID, userId);
-	  insertParams.put(DBConstants.TASK_FOR_USER__TASK_ID, taskId);
-	  insertParams.put(DBConstants.TASK_FOR_USER__EXP_GAINED, expGained);
-	  insertParams.put(DBConstants.TASK_FOR_USER__SILVER_GAINED, silverGained);
-	  insertParams.put(DBConstants.TASK_FOR_USER__NUM_REVIVES, 0);
-	  insertParams.put(DBConstants.TASK_FOR_USER__START_TIME, startTime);
+	  Map<String, Object> row = new HashMap<String, Object>();
+	  row.put(DBConstants.TASK_FOR_USER__USER_ID, userId);
+	  row.put(DBConstants.TASK_FOR_USER__TASK_ID, taskId);
+	  row.put(DBConstants.TASK_FOR_USER__EXP_GAINED, expGained);
+	  row.put(DBConstants.TASK_FOR_USER__SILVER_GAINED, silverGained);
+	  row.put(DBConstants.TASK_FOR_USER__NUM_REVIVES, 0);
+	  row.put(DBConstants.TASK_FOR_USER__START_TIME, startTime);
 	  
-	  long userTaskId = DBConnection.get().insertIntoTableBasicReturnLongId(
-			  DBConstants.TABLE_TASK_FOR_USER, insertParams);
+	  List<Long> userTaskIdList = DBConnection.get().insertIntoTableBasicReturnLongIds(
+			  DBConstants.TABLE_TASK_FOR_USER, newRows);
+	  
+	  long userTaskId = 0;
+	  if (!userTaskIdList.isEmpty()) {
+	  	userTaskId = userTaskIdList.get(0);
+	  }
 	  return userTaskId;
   }
   
   public int insertIntoTaskHistory(long userTaskId, int userId, int taskId,
 		  int expGained, int silverGained, int numRevives, Timestamp startTime,
-		  Timestamp endTime, boolean userWon) {
+		  Timestamp endTime, boolean userWon, boolean cancelled) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
 	  insertParams.put(DBConstants.TASK_HISTORY__TASK_FOR_USER_ID, userTaskId);
@@ -691,6 +700,7 @@ public class InsertUtils implements InsertUtil{
 	  insertParams.put(DBConstants.TASK_HISTORY__START_TIME, startTime);
 	  insertParams.put(DBConstants.TASK_HISTORY__END_TIME, endTime);
 	  insertParams.put(DBConstants.TASK_HISTORY__USER_WON, userWon);
+	  insertParams.put(DBConstants.TASK_HISTORY__CANCELLED, cancelled);
 	  
 	  int numInserted = DBConnection.get().insertIntoTableBasic(
 			  DBConstants.TABLE_TASK_HISTORY, insertParams);
@@ -790,7 +800,7 @@ public class InsertUtils implements InsertUtil{
 	
 	@Override
 	public int insertIntoMonsterForUserDeleted(int userId, List<String> delReasons,
-			List<MonsterForUser> userMonsters, Date deleteDate) {
+			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
 		List<Object> monsterForUserIds = new ArrayList<Object>();
 		List<Object> userIds = new ArrayList<Object>();

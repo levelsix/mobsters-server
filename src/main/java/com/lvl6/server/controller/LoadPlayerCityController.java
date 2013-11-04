@@ -12,7 +12,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LoadPlayerCityRequestEvent;
 import com.lvl6.events.response.LoadPlayerCityResponseEvent;
 import com.lvl6.info.User;
-import com.lvl6.info.UserCityExpansionData;
+import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityRequestProto;
@@ -21,7 +21,7 @@ import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.Builder;
 import com.lvl6.proto.EventCityProto.LoadPlayerCityResponseProto.LoadPlayerCityStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.UserCityExpansionDataRetrieveUtils;
+import com.lvl6.retrieveutils.ExpansionPurchaseForUserRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -62,10 +62,10 @@ import com.lvl6.utils.RetrieveUtils;
       List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(cityOwnerId);
       setResponseUserStructs(resBuilder, userStructs);
       
-      List<UserCityExpansionData> userCityExpansionDataList = UserCityExpansionDataRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserId());
+      List<ExpansionPurchaseForUser> userCityExpansionDataList = ExpansionPurchaseForUserRetrieveUtils.getUserCityExpansionDatasForUserId(senderProto.getUserId());
       List<UserCityExpansionDataProto> userCityExpansionDataProtoList = new ArrayList<UserCityExpansionDataProto>();
       if (userCityExpansionDataList != null) {
-    	for(UserCityExpansionData uced : userCityExpansionDataList) {
+    	for(ExpansionPurchaseForUser uced : userCityExpansionDataList) {
     		userCityExpansionDataProtoList.add(CreateInfoProtoUtils.createUserCityExpansionDataProtoFromUserCityExpansionData(uced));
     	}
         resBuilder.addAllUserCityExpansionDataProtoList(userCityExpansionDataProtoList);
