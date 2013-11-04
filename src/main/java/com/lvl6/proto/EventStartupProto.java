@@ -5629,9 +5629,9 @@ public final class EventStartupProto {
       public interface MonsterConstantsOrBuilder
           extends com.google.protobuf.MessageOrBuilder {
         
-        // optional int32 cashPerHealthPoint = 1;
+        // optional float cashPerHealthPoint = 1;
         boolean hasCashPerHealthPoint();
-        int getCashPerHealthPoint();
+        float getCashPerHealthPoint();
         
         // optional int32 secondsToHealPerHealthPoint = 2;
         boolean hasSecondsToHealPerHealthPoint();
@@ -5666,13 +5666,13 @@ public final class EventStartupProto {
         }
         
         private int bitField0_;
-        // optional int32 cashPerHealthPoint = 1;
+        // optional float cashPerHealthPoint = 1;
         public static final int CASHPERHEALTHPOINT_FIELD_NUMBER = 1;
-        private int cashPerHealthPoint_;
+        private float cashPerHealthPoint_;
         public boolean hasCashPerHealthPoint() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
-        public int getCashPerHealthPoint() {
+        public float getCashPerHealthPoint() {
           return cashPerHealthPoint_;
         }
         
@@ -5687,7 +5687,7 @@ public final class EventStartupProto {
         }
         
         private void initFields() {
-          cashPerHealthPoint_ = 0;
+          cashPerHealthPoint_ = 0F;
           secondsToHealPerHealthPoint_ = 0;
         }
         private byte memoizedIsInitialized = -1;
@@ -5703,7 +5703,7 @@ public final class EventStartupProto {
                             throws java.io.IOException {
           getSerializedSize();
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            output.writeInt32(1, cashPerHealthPoint_);
+            output.writeFloat(1, cashPerHealthPoint_);
           }
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             output.writeInt32(2, secondsToHealPerHealthPoint_);
@@ -5719,7 +5719,7 @@ public final class EventStartupProto {
           size = 0;
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(1, cashPerHealthPoint_);
+              .computeFloatSize(1, cashPerHealthPoint_);
           }
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             size += com.google.protobuf.CodedOutputStream
@@ -5849,7 +5849,7 @@ public final class EventStartupProto {
           
           public Builder clear() {
             super.clear();
-            cashPerHealthPoint_ = 0;
+            cashPerHealthPoint_ = 0F;
             bitField0_ = (bitField0_ & ~0x00000001);
             secondsToHealPerHealthPoint_ = 0;
             bitField0_ = (bitField0_ & ~0x00000002);
@@ -5952,9 +5952,9 @@ public final class EventStartupProto {
                   }
                   break;
                 }
-                case 8: {
+                case 13: {
                   bitField0_ |= 0x00000001;
-                  cashPerHealthPoint_ = input.readInt32();
+                  cashPerHealthPoint_ = input.readFloat();
                   break;
                 }
                 case 16: {
@@ -5968,15 +5968,15 @@ public final class EventStartupProto {
           
           private int bitField0_;
           
-          // optional int32 cashPerHealthPoint = 1;
-          private int cashPerHealthPoint_ ;
+          // optional float cashPerHealthPoint = 1;
+          private float cashPerHealthPoint_ ;
           public boolean hasCashPerHealthPoint() {
             return ((bitField0_ & 0x00000001) == 0x00000001);
           }
-          public int getCashPerHealthPoint() {
+          public float getCashPerHealthPoint() {
             return cashPerHealthPoint_;
           }
-          public Builder setCashPerHealthPoint(int value) {
+          public Builder setCashPerHealthPoint(float value) {
             bitField0_ |= 0x00000001;
             cashPerHealthPoint_ = value;
             onChanged();
@@ -5984,7 +5984,7 @@ public final class EventStartupProto {
           }
           public Builder clearCashPerHealthPoint() {
             bitField0_ = (bitField0_ & ~0x00000001);
-            cashPerHealthPoint_ = 0;
+            cashPerHealthPoint_ = 0F;
             onChanged();
             return this;
           }
@@ -14867,7 +14867,7 @@ public final class EventStartupProto {
       "oryIncrementAmount\030\003 \001(\005\022\027\n\017gemPricePerS" +
       "lot\030\004 \001(\005\022.\n&numFriendsToRecruitToIncrea",
       "seInventory\030\005 \001(\005\032S\n\020MonsterConstants\022\032\n" +
-      "\022cashPerHealthPoint\030\001 \001(\005\022#\n\033secondsToHe" +
+      "\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHe" +
       "alPerHealthPoint\030\002 \001(\005\"A\n\014UpdateStatus\022\r" +
       "\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR" +
       "_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_DB" +

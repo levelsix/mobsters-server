@@ -146,7 +146,7 @@ message StartupResponseProto {
 			optional int32 numFriendsToRecruitToIncreaseInventory = 5;
 		}
 		message MonsterConstants {
-			optional int32 cashPerHealthPoint = 1;
+			optional float cashPerHealthPoint = 1;
 			optional int32 secondsToHealPerHealthPoint = 2;
 		}
 	}
