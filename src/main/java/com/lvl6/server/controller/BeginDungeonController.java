@@ -66,6 +66,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     BeginDungeonRequestProto reqProto = ((BeginDungeonRequestEvent)event).getBeginDungeonRequestProto();
+    log.info("reqProto=" + reqProto);
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
@@ -215,12 +216,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   	
   	int num = DeleteUtils.get().deleteTaskStagesForUserWithIds(userTaskStageId);
-  	log.warn("num task stage history rows inserted: num=" + num +
+  	log.warn("num task stage history rows deleted: num=" + num +
   			"taskStageForUser=" + taskStages);
 
-  	InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
+  	num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, taskStageMonsterIdList, expGained, cashGained,
   			monsterPieceDropped);
+  	log.warn("num task stage history rows inserted: num=" + num +
+  			"taskStageForUser=" + taskStages);
   }
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,

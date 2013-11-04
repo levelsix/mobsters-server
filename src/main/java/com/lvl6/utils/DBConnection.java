@@ -798,6 +798,7 @@ public class DBConnection {
 			List<String> columns, List<List<Object>> valuesListCollection,
 			List<Map<String, Object>> newRows) {
 		if (null == newRows || newRows.isEmpty()) {
+			log.info("populateQuestionsColumnsValues(), newRows is empty");
 			return;
 		}
 		//specify column ordering so the values will be in the correct order.
@@ -820,6 +821,8 @@ public class DBConnection {
 			List<Object> valuesList =  generateValuesList(columns, newRow);
 			valuesListCollection.add(valuesList);
 		}
+		
+		log.info("atm line 825. valuesListCollection=" + valuesListCollection);
 	}
 
 	private void populateColumnsAndQuestions(List<String> columns, List<String> questions,
@@ -827,7 +830,9 @@ public class DBConnection {
 		//set the ordering of the columns
 		Map<String, Object> aRow = newRows.get(0);
 		Set<String> uniqColumns = aRow.keySet();
-		columns.addAll(uniqColumns);
+		List<String> uniqColumnsList = new ArrayList<String>(uniqColumns);
+		columns.addAll(uniqColumnsList);
+		log.info("uniqColumnsList=" + uniqColumnsList);
 		
 		int amount = columns.size();
 		List<String> questionsTemp = Collections.nCopies(amount, "?");
