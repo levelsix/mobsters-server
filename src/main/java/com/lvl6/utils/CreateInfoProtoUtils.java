@@ -465,7 +465,7 @@ public class CreateInfoProtoUtils {
     builder.setName(s.getName());
     builder.setIncome(s.getIncome());
     builder.setMinutesToGain(s.getMinutesToGain());
-    builder.setMinutesToBuild(1234567890);
+    builder.setMinutesToBuild(s.getMinutesToBuild());
     if (s.getCashPrice() > 0) {
     	builder.setCashPrice(s.getCashPrice());
     }
