@@ -141,7 +141,7 @@ import com.lvl6.utils.RetrieveUtils;
   private boolean writeChangesToDb(User aUser, int numSlots, int totalGemPrice,
   		Map<String, Integer> money) {
   	int cost = -1 * totalGemPrice;
-  	boolean success = aUser.updateNumAdditionalMonsterSlotsAndDiamonds(
+  	boolean success = aUser.updateRelativelyNumAdditionalMonsterSlotsAndDiamonds(
   			numSlots, cost);
   	if (!success) {
   		log.error("problem with updating user monster inventory slots and diamonds");
