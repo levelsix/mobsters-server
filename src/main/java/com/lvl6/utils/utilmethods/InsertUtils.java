@@ -675,6 +675,7 @@ public class InsertUtils implements InsertUtil{
 	  row.put(DBConstants.TASK_FOR_USER__SILVER_GAINED, silverGained);
 	  row.put(DBConstants.TASK_FOR_USER__NUM_REVIVES, 0);
 	  row.put(DBConstants.TASK_FOR_USER__START_TIME, startTime);
+	  newRows.add(row);
 	  
 	  List<Long> userTaskIdList = DBConnection.get().insertIntoTableBasicReturnLongIds(
 			  DBConstants.TABLE_TASK_FOR_USER, newRows);
