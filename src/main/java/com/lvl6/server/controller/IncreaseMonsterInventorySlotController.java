@@ -48,6 +48,8 @@ import com.lvl6.utils.RetrieveUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     IncreaseMonsterInventorySlotRequestProto reqProto = ((IncreaseMonsterInventorySlotRequestEvent)event).getIncreaseMonsterInventorySlotRequestProto();
 
+  	//EVERY TIME USER BUYS SLOTS RESET user_facebook_invite_for_slot table
+    
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();

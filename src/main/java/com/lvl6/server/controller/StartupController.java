@@ -219,11 +219,13 @@ public class StartupController extends EventController {
           setUserMonsterStuff(resBuilder, user);
           setExpansionCosts(resBuilder);
           setBoosterPurchases(resBuilder);
+          setFacebookAndExtraSlotsStuff(resBuilder, user);
+          
+          
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
           setLockBoxEvents(resBuilder, user);
-
 //          setLeaderboardEventStuff(resBuilder);
           setAllies(resBuilder, user);
 //          setAllBosses(resBuilder, user.getType());
@@ -755,7 +757,9 @@ public class StartupController extends EventController {
     }
   }  
   
-  
+  private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User user) {
+  	
+  }
   
   
   

@@ -194,7 +194,7 @@ message RemoveMonsterFromBattleTeamResponseProto {
 message IncreaseMonsterInventorySlotRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 numPurchases = 2;
-	//EVERY TIME USER BUYS SLOTS RESET user_facebook_invite_for_slot
+	//EVERY TIME USER BUYS SLOTS RESET user_facebook_invite_for_slot table
 	//no need to update clients that this happened
 }	
 
@@ -240,6 +240,7 @@ message AcceptAndRejectFbInviteForSlotsResponseProto {
 		SUCCESS = 1;
 		FAIL_EXPIRED = 2; //3 PEOPLE ALREADY ACCEPTED INVITE
 		FAIL_ALREADY_BEEN_USED = 3;
+		FAIL_OTHER = 4;
 	}
 }
 

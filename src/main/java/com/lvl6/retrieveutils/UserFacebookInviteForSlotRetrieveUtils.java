@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +37,11 @@ import com.lvl6.utils.DBConnection;
   }
   
   public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForUserId(int userId) {
+  	TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
+  	paramsToVals.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_ID, userId);
+  	
     Connection conn = DBConnection.get().getConnection();
-    
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
     Map<Integer, UserFacebookInviteForSlot> idsToInvites =
     		convertRSToInviteIdsToInvites(rs);
     return idsToInvites;

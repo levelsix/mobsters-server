@@ -1023,6 +1023,16 @@ public final class EventStartupProto {
     // optional string kabamNaid = 31;
     boolean hasKabamNaid();
     String getKabamNaid();
+    
+    // repeated int32 userIdsUsedForExtraSlots = 32;
+    java.util.List<java.lang.Integer> getUserIdsUsedForExtraSlotsList();
+    int getUserIdsUsedForExtraSlotsCount();
+    int getUserIdsUsedForExtraSlots(int index);
+    
+    // repeated int32 userIdsInvitedForExtraSlots = 33;
+    java.util.List<java.lang.Integer> getUserIdsInvitedForExtraSlotsList();
+    int getUserIdsInvitedForExtraSlotsCount();
+    int getUserIdsInvitedForExtraSlots(int index);
   }
   public static final class StartupResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -9008,6 +9018,34 @@ public final class EventStartupProto {
       }
     }
     
+    // repeated int32 userIdsUsedForExtraSlots = 32;
+    public static final int USERIDSUSEDFOREXTRASLOTS_FIELD_NUMBER = 32;
+    private java.util.List<java.lang.Integer> userIdsUsedForExtraSlots_;
+    public java.util.List<java.lang.Integer>
+        getUserIdsUsedForExtraSlotsList() {
+      return userIdsUsedForExtraSlots_;
+    }
+    public int getUserIdsUsedForExtraSlotsCount() {
+      return userIdsUsedForExtraSlots_.size();
+    }
+    public int getUserIdsUsedForExtraSlots(int index) {
+      return userIdsUsedForExtraSlots_.get(index);
+    }
+    
+    // repeated int32 userIdsInvitedForExtraSlots = 33;
+    public static final int USERIDSINVITEDFOREXTRASLOTS_FIELD_NUMBER = 33;
+    private java.util.List<java.lang.Integer> userIdsInvitedForExtraSlots_;
+    public java.util.List<java.lang.Integer>
+        getUserIdsInvitedForExtraSlotsList() {
+      return userIdsInvitedForExtraSlots_;
+    }
+    public int getUserIdsInvitedForExtraSlotsCount() {
+      return userIdsInvitedForExtraSlots_.size();
+    }
+    public int getUserIdsInvitedForExtraSlots(int index) {
+      return userIdsInvitedForExtraSlots_.get(index);
+    }
+    
     private void initFields() {
       serverTimeMillis_ = 0L;
       sender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
@@ -9040,6 +9078,8 @@ public final class EventStartupProto {
       enhancements_ = com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.getDefaultInstance();
       rareBoosterPurchases_ = java.util.Collections.emptyList();
       kabamNaid_ = "";
+      userIdsUsedForExtraSlots_ = java.util.Collections.emptyList();;
+      userIdsInvitedForExtraSlots_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9145,6 +9185,12 @@ public final class EventStartupProto {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeBytes(31, getKabamNaidBytes());
+      }
+      for (int i = 0; i < userIdsUsedForExtraSlots_.size(); i++) {
+        output.writeInt32(32, userIdsUsedForExtraSlots_.get(i));
+      }
+      for (int i = 0; i < userIdsInvitedForExtraSlots_.size(); i++) {
+        output.writeInt32(33, userIdsInvitedForExtraSlots_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -9283,6 +9329,24 @@ public final class EventStartupProto {
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(31, getKabamNaidBytes());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < userIdsUsedForExtraSlots_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(userIdsUsedForExtraSlots_.get(i));
+        }
+        size += dataSize;
+        size += 2 * getUserIdsUsedForExtraSlotsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < userIdsInvitedForExtraSlots_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(userIdsInvitedForExtraSlots_.get(i));
+        }
+        size += dataSize;
+        size += 2 * getUserIdsInvitedForExtraSlotsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9580,6 +9644,10 @@ public final class EventStartupProto {
         }
         kabamNaid_ = "";
         bitField0_ = (bitField0_ & ~0x40000000);
+        userIdsUsedForExtraSlots_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x80000000);
+        userIdsInvitedForExtraSlots_ = java.util.Collections.emptyList();;
+        bitField1_ = (bitField1_ & ~0x00000001);
         return this;
       }
       
@@ -9617,6 +9685,7 @@ public final class EventStartupProto {
       public com.lvl6.proto.EventStartupProto.StartupResponseProto buildPartial() {
         com.lvl6.proto.EventStartupProto.StartupResponseProto result = new com.lvl6.proto.EventStartupProto.StartupResponseProto(this);
         int from_bitField0_ = bitField0_;
+        int from_bitField1_ = bitField1_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
@@ -9851,6 +9920,16 @@ public final class EventStartupProto {
           to_bitField0_ |= 0x00000400;
         }
         result.kabamNaid_ = kabamNaid_;
+        if (((bitField0_ & 0x80000000) == 0x80000000)) {
+          userIdsUsedForExtraSlots_ = java.util.Collections.unmodifiableList(userIdsUsedForExtraSlots_);
+          bitField0_ = (bitField0_ & ~0x80000000);
+        }
+        result.userIdsUsedForExtraSlots_ = userIdsUsedForExtraSlots_;
+        if (((bitField1_ & 0x00000001) == 0x00000001)) {
+          userIdsInvitedForExtraSlots_ = java.util.Collections.unmodifiableList(userIdsInvitedForExtraSlots_);
+          bitField1_ = (bitField1_ & ~0x00000001);
+        }
+        result.userIdsInvitedForExtraSlots_ = userIdsInvitedForExtraSlots_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10404,6 +10483,26 @@ public final class EventStartupProto {
         if (other.hasKabamNaid()) {
           setKabamNaid(other.getKabamNaid());
         }
+        if (!other.userIdsUsedForExtraSlots_.isEmpty()) {
+          if (userIdsUsedForExtraSlots_.isEmpty()) {
+            userIdsUsedForExtraSlots_ = other.userIdsUsedForExtraSlots_;
+            bitField0_ = (bitField0_ & ~0x80000000);
+          } else {
+            ensureUserIdsUsedForExtraSlotsIsMutable();
+            userIdsUsedForExtraSlots_.addAll(other.userIdsUsedForExtraSlots_);
+          }
+          onChanged();
+        }
+        if (!other.userIdsInvitedForExtraSlots_.isEmpty()) {
+          if (userIdsInvitedForExtraSlots_.isEmpty()) {
+            userIdsInvitedForExtraSlots_ = other.userIdsInvitedForExtraSlots_;
+            bitField1_ = (bitField1_ & ~0x00000001);
+          } else {
+            ensureUserIdsInvitedForExtraSlotsIsMutable();
+            userIdsInvitedForExtraSlots_.addAll(other.userIdsInvitedForExtraSlots_);
+          }
+          onChanged();
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -10633,11 +10732,40 @@ public final class EventStartupProto {
               kabamNaid_ = input.readBytes();
               break;
             }
+            case 256: {
+              ensureUserIdsUsedForExtraSlotsIsMutable();
+              userIdsUsedForExtraSlots_.add(input.readInt32());
+              break;
+            }
+            case 258: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addUserIdsUsedForExtraSlots(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 264: {
+              ensureUserIdsInvitedForExtraSlotsIsMutable();
+              userIdsInvitedForExtraSlots_.add(input.readInt32());
+              break;
+            }
+            case 266: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addUserIdsInvitedForExtraSlots(input.readInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
           }
         }
       }
       
       private int bitField0_;
+      private int bitField1_;
       
       // optional int64 serverTimeMillis = 1;
       private long serverTimeMillis_ ;
@@ -14733,6 +14861,96 @@ public final class EventStartupProto {
         onChanged();
       }
       
+      // repeated int32 userIdsUsedForExtraSlots = 32;
+      private java.util.List<java.lang.Integer> userIdsUsedForExtraSlots_ = java.util.Collections.emptyList();;
+      private void ensureUserIdsUsedForExtraSlotsIsMutable() {
+        if (!((bitField0_ & 0x80000000) == 0x80000000)) {
+          userIdsUsedForExtraSlots_ = new java.util.ArrayList<java.lang.Integer>(userIdsUsedForExtraSlots_);
+          bitField0_ |= 0x80000000;
+         }
+      }
+      public java.util.List<java.lang.Integer>
+          getUserIdsUsedForExtraSlotsList() {
+        return java.util.Collections.unmodifiableList(userIdsUsedForExtraSlots_);
+      }
+      public int getUserIdsUsedForExtraSlotsCount() {
+        return userIdsUsedForExtraSlots_.size();
+      }
+      public int getUserIdsUsedForExtraSlots(int index) {
+        return userIdsUsedForExtraSlots_.get(index);
+      }
+      public Builder setUserIdsUsedForExtraSlots(
+          int index, int value) {
+        ensureUserIdsUsedForExtraSlotsIsMutable();
+        userIdsUsedForExtraSlots_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addUserIdsUsedForExtraSlots(int value) {
+        ensureUserIdsUsedForExtraSlotsIsMutable();
+        userIdsUsedForExtraSlots_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllUserIdsUsedForExtraSlots(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureUserIdsUsedForExtraSlotsIsMutable();
+        super.addAll(values, userIdsUsedForExtraSlots_);
+        onChanged();
+        return this;
+      }
+      public Builder clearUserIdsUsedForExtraSlots() {
+        userIdsUsedForExtraSlots_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x80000000);
+        onChanged();
+        return this;
+      }
+      
+      // repeated int32 userIdsInvitedForExtraSlots = 33;
+      private java.util.List<java.lang.Integer> userIdsInvitedForExtraSlots_ = java.util.Collections.emptyList();;
+      private void ensureUserIdsInvitedForExtraSlotsIsMutable() {
+        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
+          userIdsInvitedForExtraSlots_ = new java.util.ArrayList<java.lang.Integer>(userIdsInvitedForExtraSlots_);
+          bitField1_ |= 0x00000001;
+         }
+      }
+      public java.util.List<java.lang.Integer>
+          getUserIdsInvitedForExtraSlotsList() {
+        return java.util.Collections.unmodifiableList(userIdsInvitedForExtraSlots_);
+      }
+      public int getUserIdsInvitedForExtraSlotsCount() {
+        return userIdsInvitedForExtraSlots_.size();
+      }
+      public int getUserIdsInvitedForExtraSlots(int index) {
+        return userIdsInvitedForExtraSlots_.get(index);
+      }
+      public Builder setUserIdsInvitedForExtraSlots(
+          int index, int value) {
+        ensureUserIdsInvitedForExtraSlotsIsMutable();
+        userIdsInvitedForExtraSlots_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addUserIdsInvitedForExtraSlots(int value) {
+        ensureUserIdsInvitedForExtraSlotsIsMutable();
+        userIdsInvitedForExtraSlots_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllUserIdsInvitedForExtraSlots(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureUserIdsInvitedForExtraSlotsIsMutable();
+        super.addAll(values, userIdsInvitedForExtraSlots_);
+        onChanged();
+        return this;
+      }
+      public Builder clearUserIdsInvitedForExtraSlots() {
+        userIdsInvitedForExtraSlots_ = java.util.Collections.emptyList();;
+        bitField1_ = (bitField1_ & ~0x00000001);
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto)
     }
     
@@ -14821,7 +15039,7 @@ public final class EventStartupProto {
       "oto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n" +
       "\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014" +
       "advertiserId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 " +
-      "\001(\010\"\337!\n\024StartupResponseProto\022\030\n\020serverTi" +
+      "\001(\010\"\246\"\n\024StartupResponseProto\022\030\n\020serverTi" +
       "meMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl",
       "6.proto.FullUserProto\022I\n\rstartupStatus\030\003" +
       " \001(\01622.com.lvl6.proto.StartupResponsePro" +
@@ -14864,72 +15082,74 @@ public final class EventStartupProto {
       "$.com.lvl6.proto.UserEnhancementProto\022F\n" +
       "\024rareBoosterPurchases\030\036 \003(\0132(.com.lvl6.p",
       "roto.RareBoosterPurchaseProto\022\021\n\tkabamNa" +
-      "id\030\037 \001(\t\032\200\001\n\031AttackedNotificationProto\0222" +
-      "\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\032\n\022battleCompleteTime\030\002 \001(\003\022\023" +
-      "\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNotifica" +
-      "tionProto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022\023\n\013recruitTime\030\002 \001" +
-      "(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\242\021\n\020Sta" +
-      "rtupConstants\022H\n\025inAppPurchasePackages\030\001" +
-      " \003(\0132).com.lvl6.proto.InAppPurchasePacka",
-      "geProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxN" +
-      "umOfSingleStruct\030\003 \001(\005\022f\n\023normStructCons" +
-      "tants\030\004 \001(\0132I.com.lvl6.proto.StartupResp" +
-      "onseProto.StartupConstants.NormStructCon" +
-      "stants\022n\n\025animatedSpriteOffsets\030\005 \003(\0132O." +
-      "com.lvl6.proto.StartupResponseProto.Star" +
-      "tupConstants.AnimatedSpriteOffsetProto\022\025" +
-      "\n\rminNameLength\030\006 \001(\005\022\025\n\rmaxNameLength\030\007" +
-      " \001(\005\022\035\n\025maxLengthOfChatString\030\010 \001(\005\022Z\n\rc" +
-      "lanConstants\030\t \001(\0132C.com.lvl6.proto.Star",
-      "tupResponseProto.StartupConstants.ClanCo" +
-      "nstants\022p\n\030downloadableNibConstants\030\n \001(" +
-      "\0132N.com.lvl6.proto.StartupResponseProto." +
-      "StartupConstants.DownloadableNibConstant" +
-      "s\022\'\n\037numHoursBeforeReshowingGoldSale\030\013 \001" +
-      "(\005\022\036\n\026levelToShowRateUsPopup\030\014 \001(\005\022e\n\022to" +
-      "uramentConstants\030\r \001(\0132I.com.lvl6.proto." +
-      "StartupResponseProto.StartupConstants.To" +
-      "urnamentConstants\022\037\n\027fbConnectRewardDiam" +
-      "onds\030\016 \001(\005\022\023\n\013faqFileName\030\017 \001(\t\022<\n\022admin",
-      "ChatUserProto\030\020 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\037\n\027numBeginnerSalesAllowed" +
-      "\030\021 \001(\005\022h\n\024userMonsterConstants\030\022 \001(\0132J.c" +
-      "om.lvl6.proto.StartupResponseProto.Start" +
-      "upConstants.UserMonsterConstants\022`\n\020mons" +
-      "terConstants\030\023 \001(\0132F.com.lvl6.proto.Star" +
-      "tupResponseProto.StartupConstants.Monste" +
-      "rConstants\022\025\n\rminutesPerGem\030\024 \001(\002\032\367\001\n\023No" +
-      "rmStructConstants\022/\n\'minutesToUpgradeFor" +
-      "NormStructMultiplier\030\001 \001(\001\022&\n\036incomeFrom",
-      "NormStructMultiplier\030\002 \001(\001\022)\n!upgradeStr" +
-      "uctCoinCostExponentBase\030\003 \001(\001\022,\n$upgrade" +
-      "StructDiamondCostExponentBase\030\004 \001(\001\022.\n&d" +
-      "iamondCostForInstantUpgradeMultiplier\030\005 " +
-      "\001(\001\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timag" +
-      "eName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.p" +
-      "roto.CoordinateProto\032\232\001\n\rClanConstants\022\035" +
-      "\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxChar" +
-      "LengthForClanName\030\002 \001(\005\022\'\n\037maxCharLength" +
-      "ForClanDescription\030\003 \001(\005\022\037\n\027maxCharLengt",
-      "hForClanTag\030\004 \001(\005\032c\n\030DownloadableNibCons" +
-      "tants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNi" +
-      "bName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y" +
-      "\n\023TournamentConstants\022\022\n\nwinsWeight\030\001 \001(" +
-      "\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003" +
-      " \001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(" +
-      "\005\032\304\001\n\024UserMonsterConstants\022\027\n\017maxNumTeam" +
-      "Slots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit" +
-      "\030\002 \001(\005\022\'\n\037monsterInventoryIncrementAmoun" +
-      "t\030\003 \001(\005\022\027\n\017gemPricePerSlot\030\004 \001(\005\022.\n&numF",
-      "riendsToRecruitToIncreaseInventory\030\005 \001(\005" +
-      "\032S\n\020MonsterConstants\022\032\n\022cashPerHealthPoi" +
-      "nt\030\001 \001(\002\022#\n\033secondsToHealPerHealthPoint\030" +
-      "\002 \001(\002\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014" +
-      "MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStar" +
-      "tupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN" +
-      "_DB\020\002B\023B\021EventStartupProto"
+      "id\030\037 \001(\t\022 \n\030userIdsUsedForExtraSlots\030  \003" +
+      "(\005\022#\n\033userIdsInvitedForExtraSlots\030! \003(\005\032" +
+      "\200\001\n\031AttackedNotificationProto\0222\n\010attacke" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\022\032\n\022battleCompleteTime\030\002 \001(\003\022\023\n\013coinsSt" +
+      "olen\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto" +
+      "\0222\n\010referred\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coi" +
+      "nsGivenToReferrer\030\003 \001(\005\032\242\021\n\020StartupConst",
+      "ants\022H\n\025inAppPurchasePackages\030\001 \003(\0132).co" +
+      "m.lvl6.proto.InAppPurchasePackageProto\022\027" +
+      "\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingl" +
+      "eStruct\030\003 \001(\005\022f\n\023normStructConstants\030\004 \001" +
+      "(\0132I.com.lvl6.proto.StartupResponseProto" +
+      ".StartupConstants.NormStructConstants\022n\n" +
+      "\025animatedSpriteOffsets\030\005 \003(\0132O.com.lvl6." +
+      "proto.StartupResponseProto.StartupConsta" +
+      "nts.AnimatedSpriteOffsetProto\022\025\n\rminName" +
+      "Length\030\006 \001(\005\022\025\n\rmaxNameLength\030\007 \001(\005\022\035\n\025m",
+      "axLengthOfChatString\030\010 \001(\005\022Z\n\rclanConsta" +
+      "nts\030\t \001(\0132C.com.lvl6.proto.StartupRespon" +
+      "seProto.StartupConstants.ClanConstants\022p" +
+      "\n\030downloadableNibConstants\030\n \001(\0132N.com.l" +
+      "vl6.proto.StartupResponseProto.StartupCo" +
+      "nstants.DownloadableNibConstants\022\'\n\037numH" +
+      "oursBeforeReshowingGoldSale\030\013 \001(\005\022\036\n\026lev" +
+      "elToShowRateUsPopup\030\014 \001(\005\022e\n\022touramentCo" +
+      "nstants\030\r \001(\0132I.com.lvl6.proto.StartupRe" +
+      "sponseProto.StartupConstants.TournamentC",
+      "onstants\022\037\n\027fbConnectRewardDiamonds\030\016 \001(" +
+      "\005\022\023\n\013faqFileName\030\017 \001(\t\022<\n\022adminChatUserP" +
+      "roto\030\020 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\037\n\027numBeginnerSalesAllowed\030\021 \001(\005\022h\n" +
+      "\024userMonsterConstants\030\022 \001(\0132J.com.lvl6.p" +
+      "roto.StartupResponseProto.StartupConstan" +
+      "ts.UserMonsterConstants\022`\n\020monsterConsta" +
+      "nts\030\023 \001(\0132F.com.lvl6.proto.StartupRespon" +
+      "seProto.StartupConstants.MonsterConstant" +
+      "s\022\025\n\rminutesPerGem\030\024 \001(\002\032\367\001\n\023NormStructC",
+      "onstants\022/\n\'minutesToUpgradeForNormStruc" +
+      "tMultiplier\030\001 \001(\001\022&\n\036incomeFromNormStruc" +
+      "tMultiplier\030\002 \001(\001\022)\n!upgradeStructCoinCo" +
+      "stExponentBase\030\003 \001(\001\022,\n$upgradeStructDia" +
+      "mondCostExponentBase\030\004 \001(\001\022.\n&diamondCos" +
+      "tForInstantUpgradeMultiplier\030\005 \001(\001\032_\n\031An" +
+      "imatedSpriteOffsetProto\022\021\n\timageName\030\001 \001" +
+      "(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coor" +
+      "dinateProto\032\232\001\n\rClanConstants\022\035\n\025coinPri" +
+      "ceToCreateClan\030\001 \001(\005\022 \n\030maxCharLengthFor",
+      "ClanName\030\002 \001(\005\022\'\n\037maxCharLengthForClanDe" +
+      "scription\030\003 \001(\005\022\037\n\027maxCharLengthForClanT" +
+      "ag\030\004 \001(\005\032c\n\030DownloadableNibConstants\022\022\n\n" +
+      "mapNibName\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001" +
+      "(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023Tournam" +
+      "entConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014loss" +
+      "esWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033n" +
+      "umHoursToShowAfterEventEnd\030\004 \001(\005\032\304\001\n\024Use" +
+      "rMonsterConstants\022\027\n\017maxNumTeamSlots\030\001 \001" +
+      "(\005\022!\n\031initialMaxNumMonsterLimit\030\002 \001(\005\022\'\n",
+      "\037monsterInventoryIncrementAmount\030\003 \001(\005\022\027" +
+      "\n\017gemPricePerSlot\030\004 \001(\005\022.\n&numFriendsToR" +
+      "ecruitToIncreaseInventory\030\005 \001(\005\032S\n\020Monst" +
+      "erConstants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022" +
+      "#\n\033secondsToHealPerHealthPoint\030\002 \001(\002\"A\n\014" +
+      "UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPD" +
+      "ATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus" +
+      "\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021" +
+      "EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14949,7 +15169,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
-              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "AllCities", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "UserQuests", "UserClanInfo", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "GoldSales", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "Slip", "StaticStructs", "ExpansionCosts", "StaticMonsters", "UsersMonsters", "MonstersHealing", "Enhancements", "RareBoosterPurchases", "KabamNaid", },
+              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "AllCities", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "UserQuests", "UserClanInfo", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "GoldSales", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "Slip", "StaticStructs", "ExpansionCosts", "StaticMonsters", "UsersMonsters", "MonstersHealing", "Enhancements", "RareBoosterPurchases", "KabamNaid", "UserIdsUsedForExtraSlots", "UserIdsInvitedForExtraSlots", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =

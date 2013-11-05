@@ -12860,11 +12860,13 @@ public final class EventMonsterProto {
       SUCCESS(0, 1),
       FAIL_EXPIRED(1, 2),
       FAIL_ALREADY_BEEN_USED(2, 3),
+      FAIL_OTHER(3, 4),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_EXPIRED_VALUE = 2;
       public static final int FAIL_ALREADY_BEEN_USED_VALUE = 3;
+      public static final int FAIL_OTHER_VALUE = 4;
       
       
       public final int getNumber() { return value; }
@@ -12874,6 +12876,7 @@ public final class EventMonsterProto {
           case 1: return SUCCESS;
           case 2: return FAIL_EXPIRED;
           case 3: return FAIL_ALREADY_BEEN_USED;
+          case 4: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -12904,7 +12907,7 @@ public final class EventMonsterProto {
       }
       
       private static final AcceptAndRejectFbInviteForSlotsStatus[] VALUES = {
-        SUCCESS, FAIL_EXPIRED, FAIL_ALREADY_BEEN_USED, 
+        SUCCESS, FAIL_EXPIRED, FAIL_ALREADY_BEEN_USED, FAIL_OTHER, 
       };
       
       public static AcceptAndRejectFbInviteForSlotsStatus valueOf(
@@ -16028,36 +16031,37 @@ public final class EventMonsterProto {
       "cceptAndRejectFbInviteForSlotsRequestPro",
       "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
       "mumUserProto\022\031\n\021acceptedInviteIds\030\002 \003(\005\022" +
-      "\031\n\021rejectedInviteIds\030\003 \003(\005\"\270\002\n,AcceptAnd" +
+      "\031\n\021rejectedInviteIds\030\003 \003(\005\"\310\002\n,AcceptAnd" +
       "RejectFbInviteForSlotsResponseProto\0220\n\006s" +
       "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
       "Proto\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto.A" +
       "cceptAndRejectFbInviteForSlotsResponsePr" +
       "oto.AcceptAndRejectFbInviteForSlotsStatu" +
-      "s\"b\n%AcceptAndRejectFbInviteForSlotsStat" +
+      "s\"r\n%AcceptAndRejectFbInviteForSlotsStat" +
       "us\022\013\n\007SUCCESS\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAI",
-      "L_ALREADY_BEEN_USED\020\003\"\201\001\n$CombineUserMon" +
-      "sterPiecesRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\026\n\016user" +
-      "MonsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%Co" +
-      "mbineUserMonsterPiecesResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.C" +
-      "ombineUserMonsterPiecesResponseProto.Com" +
-      "bineUserMonsterPiecesStatus\"\205\001\n\036CombineU" +
-      "serMonsterPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026F",
-      "AIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_THA" +
-      "N_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTHE" +
-      "R\020\004\"\213\001\n\033SellUserMonsterRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.proto.Mi" +
-      "nimumUserMonsterSellProto\"\332\001\n\034SellUserMo" +
-      "nsterResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022R\n\006status\030\002" +
-      " \001(\0162B.com.lvl6.proto.SellUserMonsterRes" +
-      "ponseProto.SellUserMonsterStatus\"4\n\025Sell",
-      "UserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_O" +
-      "THER\020\002B\023B\021EventMonsterProto"
+      "L_ALREADY_BEEN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001" +
+      "\n$CombineUserMonsterPiecesRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemC" +
+      "ost\030\003 \001(\005\"\307\002\n%CombineUserMonsterPiecesRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022d\n\006status\030\002 \001(\0162T." +
+      "com.lvl6.proto.CombineUserMonsterPiecesR" +
+      "esponseProto.CombineUserMonsterPiecesSta" +
+      "tus\"\205\001\n\036CombineUserMonsterPiecesStatus\022\013",
+      "\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022" +
+      "*\n&FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDU" +
+      "P\020\003\022\016\n\nFAIL_OTHER\020\004\"\213\001\n\033SellUserMonsterR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022:\n\005sales\030\002 \003(\0132+.c" +
+      "om.lvl6.proto.MinimumUserMonsterSellProt" +
+      "o\"\332\001\n\034SellUserMonsterResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Se" +
+      "llUserMonsterResponseProto.SellUserMonst",
+      "erStatus\"4\n\025SellUserMonsterStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B\021EventMonsterPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
