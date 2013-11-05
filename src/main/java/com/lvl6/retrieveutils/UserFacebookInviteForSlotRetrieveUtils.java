@@ -38,7 +38,7 @@ import com.lvl6.utils.DBConnection;
   
   public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForUserId(int userId) {
   	TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
-  	paramsToVals.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_ID, userId);
+  	paramsToVals.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, userId);
   	
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -46,14 +46,14 @@ import com.lvl6.utils.DBConnection;
     return idsToInvites;
   }
   
-  public static List<Integer> getUniqueRecipientIdsForInviterId(int userId) {
+  public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId) {
   	StringBuffer querySb = new StringBuffer();
   	querySb.append("SELECT DISTINCT(");
-  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_ID);
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
   	querySb.append(") FROM ");
   	querySb.append(TABLE_NAME);
   	querySb.append(" WHERE ");
-  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_ID);
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
   	querySb.append("=?");
   	String query = querySb.toString();
   	
@@ -62,7 +62,7 @@ import com.lvl6.utils.DBConnection;
   	values.add(userId);
   	Connection conn = DBConnection.get().getConnection();
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-  	List<Integer> recipientIds = convertRSToInts(rs);
+  	List<String> recipientIds = convertRSToStrings(rs);
   	return recipientIds;
   }
   
@@ -114,29 +114,29 @@ import com.lvl6.utils.DBConnection;
   	return idsToInvites;
   }
   
-  private static List<Integer> convertRSToInts(ResultSet rs) {
-  	List<Integer> intList = new ArrayList<Integer>();
+  private static List<String> convertRSToStrings(ResultSet rs) {
+  	List<String> stringList = new ArrayList<String>();
   	if (null != rs) {
   		try {
   			rs.last();
   			rs.beforeFirst();
   			while(rs.next()) {
   				int indexOfFirstAndOnlyColumn = 1;
-  				int anInt = rs.getInt(indexOfFirstAndOnlyColumn); 
-  				intList.add(anInt);
+  				String aString = rs.getString(indexOfFirstAndOnlyColumn); 
+  				stringList.add(aString);
   			}
   		} catch(SQLException e) {
   			log.error("problem with database call.", e);
   		}
   	}
-  	return intList;
+  	return stringList;
   }
   
   private static UserFacebookInviteForSlot convertRSRowToInvite(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
-    int inviterId = rs.getInt(i++);
-    int recipientId = rs.getInt(i++);
+    int inviterUserId = rs.getInt(i++);
+    String recipientFacebookId = rs.getString(i++);
     
     Date timeOfInvite = null;
     try {
@@ -146,12 +146,12 @@ import com.lvl6.utils.DBConnection;
     	}
     } catch (Exception e) {
     	log.error("db error: start_date is null. id=" + id + " inviterId=" +
-    			inviterId + " recipientId=" + recipientId, e);
+    			inviterUserId + " recipientFacebookId=" + recipientFacebookId, e);
     }
     boolean accepted = rs.getBoolean(i++);
     
     UserFacebookInviteForSlot invite = new UserFacebookInviteForSlot(id,
-    		inviterId, recipientId, timeOfInvite, accepted); 
+    		inviterUserId, recipientFacebookId, timeOfInvite, accepted); 
     return invite;
   }
 }

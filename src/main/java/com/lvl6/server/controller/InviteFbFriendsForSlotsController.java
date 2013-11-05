@@ -66,19 +66,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-      List<Integer> idsOfFbFriends = RetrieveUtils.userRetrieveUtils()
-      		.getUserIdsForFacebookIds(fbIdsOfFriends);
       Map<Integer, UserFacebookInviteForSlot> idsToInvites = 
       		UserFacebookInviteForSlotRetrieveUtils.getInviteIdsToInvitesForUserId(userId);
       
-      //contains the ids of new users the user can invite
-      List<Integer> newUserIdsToInvite = new ArrayList<Integer>();
+      //contains the facebook ids of new users the user can invite
+      List<String> newFacebookIdsToInvite = new ArrayList<String>();
       boolean legit = checkLegit(resBuilder, userId, aUser, fbIdsOfFriends,
-      		idsOfFbFriends, idsToInvites, newUserIdsToInvite);
+      		idsToInvites, newFacebookIdsToInvite);
 
       boolean successful = false;
       if(legit) {
-    	  successful = writeChangesToDb(aUser, newUserIdsToInvite, curTime);
+    	  successful = writeChangesToDb(aUser, newFacebookIdsToInvite, curTime);
       }
       
       if (successful) {
@@ -114,51 +112,45 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    * modified
    */
   private boolean checkLegit(Builder resBuilder, int userId, User u,
-  		List<String> fbIdsOfFriends, List<Integer> idsOfFbFriends,
-  		Map<Integer, UserFacebookInviteForSlot> idsToInvites,
-  		List<Integer> newUserIdsToInvite) {
+  		List<String> fbIdsOfFriends, Map<Integer, UserFacebookInviteForSlot> idsToInvites,
+  		List<String> newFacebookIdsToInvite) {
   	
-  	if (null == u || idsOfFbFriends.isEmpty()) {
-  		log.error("user is null. no user exists with id=" + userId + " or no friends." +
-  				" friendIds=" + idsOfFbFriends);
+  	if (null == u) {
+  		log.error("user is null. no user exists with id=" + userId);
   		return false;
-  	}
-
-  	int numFriendFbIds = fbIdsOfFriends.size();
-  	int numFbFriendIds = idsOfFbFriends.size();
-  	if (numFriendFbIds != numFbFriendIds) {
-  		log.warn("num friend fb ids != num fb friend ids. numFriendFbIds=" +
-  				numFriendFbIds + "\t numFbFriendIds=" + numFbFriendIds);
   	}
   	
   	//if the user already invited some friends, don't invite again, keep
   	//only new ones
-  	List<Integer> newUserIdsToInviteTemp = getNewInvites(idsOfFbFriends, idsToInvites);
-  	newUserIdsToInvite.addAll(newUserIdsToInviteTemp);
+  	List<String> newFacebookIdsToInviteTemp = getNewInvites(
+  			fbIdsOfFriends, idsToInvites);
+  	newFacebookIdsToInvite.addAll(newFacebookIdsToInviteTemp);
   	
   	resBuilder.setStatus(InviteFbFriendsForSlotsStatus.SUCCESS);
   	return true;
   }
   
-  private List<Integer> getNewInvites(List<Integer> idsOfFbFriends,
+  //keeps and returns the facebook ids that have not been invited yet
+  private List<String> getNewInvites(List<String> fbIdsOfFriends,
   		 Map<Integer, UserFacebookInviteForSlot> idsToInvites) {
   	//contains the duplicate invites, that need to be deleted
   	//e.g. two invites exist with same inviterId and recipientId
   	List<Integer> inviteIdsOfDuplicateInvites = new ArrayList<Integer>();
   	
-  	Set<Integer> existingRecipientIds = new HashSet<Integer>();
+  	//running collection of recipient ids already seen
+  	Set<String> processedRecipientIds = new HashSet<String>();
   	
   	for (Integer inviteId : idsToInvites.keySet()) {
   		UserFacebookInviteForSlot invite = idsToInvites.get(inviteId);
-  		int recipientId = invite.getRecipientId(); 
+  		String recipientId = invite.getRecipientFacebookId(); 
   		
-  		if (existingRecipientIds.contains(recipientId)) {
+  		if (processedRecipientIds.contains(recipientId)) {
   			//done to ensure a user does not invite another user more than once
   			//i.e. tuple (inviterId, recipientId) is unique
   			inviteIdsOfDuplicateInvites.add(inviteId);
   		} else {
   			//keep track of the recipientIds seen so far
-  			existingRecipientIds.add(recipientId);
+  			processedRecipientIds.add(recipientId);
   		}
   	}
   	
@@ -169,30 +161,31 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   	
   	
-  	List<Integer> newUserIdsToInvite = new ArrayList<Integer>();
+  	List<String> newUserIdsToInvite = new ArrayList<String>();
   	//don't want to generate an invite to a recipient the user has already invited
-  	for (Integer prospectiveRecipientId : idsOfFbFriends) {
+  	//going through the facebook ids client sends and select only the new ones
+  	for (String prospectiveRecipientId : fbIdsOfFriends) {
   		
   		//keep only the recipient ids that have not been seen/invited
-  		if(!existingRecipientIds.contains(prospectiveRecipientId)) {
+  		if(!processedRecipientIds.contains(prospectiveRecipientId)) {
   			newUserIdsToInvite.add(prospectiveRecipientId);
   		}
   	}
   	return newUserIdsToInvite;
   }
   
-  private boolean writeChangesToDb(User aUser, List<Integer> newUserIdsToInvite, 
+  private boolean writeChangesToDb(User aUser, List<String> newFacebookIdsToInvite, 
   		Timestamp curTime) {
-  	if (newUserIdsToInvite.isEmpty()) {
+  	if (newFacebookIdsToInvite.isEmpty()) {
   		return true;
   	}
   	
   	int userId = aUser.getId();
   	int num = InsertUtils.get().insertIntoUserFbInviteForSlot(userId,
-  			newUserIdsToInvite, curTime);
+  			newFacebookIdsToInvite, curTime);
   	
-  	int expectedNum = newUserIdsToInvite.size();
-  	if (num != newUserIdsToInvite.size()) {
+  	int expectedNum = newFacebookIdsToInvite.size();
+  	if (num != expectedNum) {
   		log.error("problem with updating user monster inventory slots and diamonds." +
   				" num inserted: " + num + "\t should have been: " + expectedNum);
   	} 

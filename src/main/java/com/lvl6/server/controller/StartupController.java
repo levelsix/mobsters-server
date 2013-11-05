@@ -85,6 +85,7 @@ import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -759,11 +760,24 @@ public class StartupController extends EventController {
   }  
   
   private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User user) {
+  	//FIRST SEND ALL THE USER IDS THAT THE USER INVITED 
   	int userId = user.getId();
-  	List<Integer> recipientIds = UserFacebookInviteForSlotRetrieveUtils
-  			.getUniqueRecipientIdsForInviterId(userId);
+  	//NEED TO GET THE FACEBOOK IDS HE INVITED
+  	List<String> recipientFacebookIds = UserFacebookInviteForSlotRetrieveUtils
+  			.getUniqueRecipientFacebookIdsForInviterId(userId);
   	
+  	if (null == recipientFacebookIds || recipientFacebookIds.isEmpty()) {
+  		return;
+  	}
+  	//THEN FROM THOSE FACEBOOK IDS GET THE USER IDS
+  	List<Integer> recipientIds = RetrieveUtils.userRetrieveUtils()
+  			.getUserIdsForFacebookIds(recipientFacebookIds);
+  	if (null == recipientIds || recipientIds.isEmpty()) {
+  		return;
+  	}
   	resBuilder.addAllUserIdsUsedForExtraSlots(recipientIds);
+  	
+  	//SECOND GET ALL THE USER IDS THAT HELPED THE USER GET SLOTS
   }
   
   

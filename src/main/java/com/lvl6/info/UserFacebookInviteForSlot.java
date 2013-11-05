@@ -5,19 +5,19 @@ import java.util.Date;
 
 public class UserFacebookInviteForSlot implements Serializable {
 
-	private static final long serialVersionUID = -490530127649788790L;
+	private static final long serialVersionUID = 1780229714903784581L;
 	private int id;
-	private int inviterId;
-	private int recipientId;
+	private int inviterUserId;
+	private String recipientFacebookId;
 	private Date timeOfInvite;
 	private boolean accepted;
 	
-	public UserFacebookInviteForSlot(int id, int inviterId, int recipientId,
-			Date timeOfInvite, boolean accepted) {
+	public UserFacebookInviteForSlot(int id, int inviterUserId,
+			String recipientFacebookId, Date timeOfInvite, boolean accepted) {
 		super();
 		this.id = id;
-		this.inviterId = inviterId;
-		this.recipientId = recipientId;
+		this.inviterUserId = inviterUserId;
+		this.recipientFacebookId = recipientFacebookId;
 		this.timeOfInvite = timeOfInvite;
 		this.accepted = accepted;
 	}
@@ -30,20 +30,20 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.id = id;
 	}
 
-	public int getInviterId() {
-		return inviterId;
+	public int getInviterUserId() {
+		return inviterUserId;
 	}
 
-	public void setInviterId(int inviterId) {
-		this.inviterId = inviterId;
+	public void setInviterUserId(int inviterUserId) {
+		this.inviterUserId = inviterUserId;
 	}
 
-	public int getRecipientId() {
-		return recipientId;
+	public String getRecipientFacebookId() {
+		return recipientFacebookId;
 	}
 
-	public void setRecipientId(int recipientId) {
-		this.recipientId = recipientId;
+	public void setRecipientFacebookId(String recipientFacebookId) {
+		this.recipientFacebookId = recipientFacebookId;
 	}
 
 	public Date getTimeOfInvite() {
@@ -64,9 +64,8 @@ public class UserFacebookInviteForSlot implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserFacebookInviteForSlot [id=" + id + ", inviterId=" + inviterId
-				+ ", recipientId=" + recipientId + ", timeOfInvite=" + timeOfInvite
-				+ ", accepted=" + accepted + "]";
+		return "UserFacebookInviteForSlot [id=" + id + ", inviterUserId="
+				+ inviterUserId + ", recipientFacebookId=" + recipientFacebookId
+				+ ", timeOfInvite=" + timeOfInvite + ", accepted=" + accepted + "]";
 	}
-	
 }
