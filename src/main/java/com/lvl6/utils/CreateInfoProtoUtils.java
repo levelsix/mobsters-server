@@ -389,6 +389,12 @@ public class CreateInfoProtoUtils {
     fumpb.setCurrentHealth(mfu.getCurrentHealth());
     fumpb.setNumPieces(mfu.getNumPieces());
     fumpb.setIsComplete(mfu.isComplete());
+    
+    Date combineStartTime = mfu.getCombineStartTime();
+    if (null != combineStartTime) {
+    	fumpb.setCombineStartTime(combineStartTime.getTime());
+    }
+    
     fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
     return fumpb.build();
   }
