@@ -835,10 +835,16 @@ public class CreateInfoProtoUtils {
     }
     mpb.setQuality(aMonster.getQuality());
     mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
-    mpb.setDisplayName(aMonster.getDisplayName());
+    String displayName = aMonster.getDisplayName(); 
+    if (null != displayName) {
+    	mpb.setDisplayName(displayName);
+    }
     mpb.setElement(aMonster.getElement());
     mpb.setBaseHp(aMonster.getBaseHp());
-    mpb.setImagePrefix(aMonster.getImagePrefix());
+    String imagePrefix = aMonster.getImagePrefix(); 
+    if (null != imagePrefix) {
+    	mpb.setImagePrefix(imagePrefix);
+    }
     mpb.setNumPuzzlePieces(aMonster.getNumPuzzlePieces());
     mpb.setMinutesToCombinePieces(aMonster.getMinutesToCombinePieces());
     mpb.setElementOneDmg(aMonster.getElementOneDmg());
