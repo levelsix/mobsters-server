@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -64,19 +65,31 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   public List<StructureForUser> getSpecificOrAllUserStructsForUser(int userId,
   		List<Integer> userStructIds) {
-    log.debug("retrieving userStructs with ids " + userStructIds);
     
-    String query = "SELECT * FROM " + TABLE_NAME + " WHERE " +
-    		DBConstants.STRUCTURE_FOR_USER__USER_ID + "=?";
+  	StringBuffer querySb = new StringBuffer();
+    querySb.append("SELECT * FROM ");
+    querySb.append(TABLE_NAME); 
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.STRUCTURE_FOR_USER__USER_ID);
+    querySb.append("=?");
     List <Object> values = new ArrayList<Object>();
     values.add(userId);
     
     //if user didn't give any userStructIds then get all the user's structs
-    if (userStructIds == null || userStructIds.size() <= 0 ) {
-    	query += " AND " + DBConstants.STRUCTURE_FOR_USER__ID + " IN (" +
-    			StringUtils.csvList(userStructIds) + ");";
+    //else get the specific ids
+    if (userStructIds != null && !userStructIds.isEmpty() ) {
+    	log.debug("retrieving userStructs with ids " + userStructIds);
+    	querySb.append(" AND ");
+    	querySb.append(DBConstants.STRUCTURE_FOR_USER__ID);
+    	querySb.append(" IN (");
+    	int amount = userStructIds.size();
+    	List<String> questions = Collections.nCopies(amount, "?");
+    	querySb.append(StringUtils.csvList(questions));
+    	querySb.append(");");
+    	values.addAll(userStructIds);
     }
-    
+
+    String query = querySb.toString();
     log.info("query=" + query + "\t values=" + values);
 
     Connection conn = DBConnection.get().getConnection();

@@ -33,6 +33,13 @@ message MinimumUserProtoWithLevel {
 
 //------------------------------------------------------------------------------------------
 
+message MinimumUserProtoWithFacebookId {
+	optional MinimumUserProto minUserProto = 1;
+	optional string facebookId = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
 message FullUserProto {
 	optional int32 userId = 1;
     optional string name = 2;

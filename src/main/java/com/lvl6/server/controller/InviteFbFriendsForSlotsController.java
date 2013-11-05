@@ -23,7 +23,7 @@ import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -53,8 +53,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     InviteFbFriendsForSlotsRequestProto reqProto = ((InviteFbFriendsForSlotsRequestEvent)event).getInviteFbFriendsForSlotsRequestProto();
 
     //get values sent from the client (the request proto)
-    MinimumUserProto senderProto = reqProto.getSender();
-    int userId = senderProto.getUserId();
+    MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
+    int userId = senderProto.getMinUserProto().getUserId();
     List<String> fbIdsOfFriends = reqProto.getFbFriendIdsList();
     Timestamp curTime = new Timestamp((new Date()).getTime());
 
@@ -63,11 +63,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(InviteFbFriendsForSlotsStatus.FAIL_OTHER); //default
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    server.lockPlayer(userId, this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Map<Integer, UserFacebookInviteForSlot> idsToInvites = 
-      		UserFacebookInviteForSlotRetrieveUtils.getInviteIdsToInvitesForUserId(userId);
+      		UserFacebookInviteForSlotRetrieveUtils.getInviteIdsToInvitesForInviterUserId(userId);
       
       //contains the facebook ids of new users the user can invite
       List<String> newFacebookIdsToInvite = new ArrayList<String>();
@@ -101,7 +101,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  log.error("exception2 in InviteFbFriendsForSlotsController processEvent", e);
       }
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+      server.unlockPlayer(userId, this.getClass().getSimpleName());
     }
   }
 

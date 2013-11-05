@@ -1855,6 +1855,524 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithLevel)
   }
   
+  public interface MinimumUserProtoWithFacebookIdOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
+    boolean hasMinUserProto();
+    com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder();
+    
+    // optional string facebookId = 2;
+    boolean hasFacebookId();
+    String getFacebookId();
+  }
+  public static final class MinimumUserProtoWithFacebookId extends
+      com.google.protobuf.GeneratedMessage
+      implements MinimumUserProtoWithFacebookIdOrBuilder {
+    // Use MinimumUserProtoWithFacebookId.newBuilder() to construct.
+    private MinimumUserProtoWithFacebookId(Builder builder) {
+      super(builder);
+    }
+    private MinimumUserProtoWithFacebookId(boolean noInit) {}
+    
+    private static final MinimumUserProtoWithFacebookId defaultInstance;
+    public static MinimumUserProtoWithFacebookId getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MinimumUserProtoWithFacebookId getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
+    public static final int MINUSERPROTO_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_;
+    public boolean hasMinUserProto() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto() {
+      return minUserProto_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder() {
+      return minUserProto_;
+    }
+    
+    // optional string facebookId = 2;
+    public static final int FACEBOOKID_FIELD_NUMBER = 2;
+    private java.lang.Object facebookId_;
+    public boolean hasFacebookId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public String getFacebookId() {
+      java.lang.Object ref = facebookId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          facebookId_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getFacebookIdBytes() {
+      java.lang.Object ref = facebookId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        facebookId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    private void initFields() {
+      minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      facebookId_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, minUserProto_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getFacebookIdBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, minUserProto_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getFacebookIdBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getMinUserProtoFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (minUserProtoBuilder_ == null) {
+          minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          minUserProtoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        facebookId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDescriptor();
+      }
+      
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId getDefaultInstanceForType() {
+        return com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId build() {
+        com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId buildPartial() {
+        com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId result = new com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (minUserProtoBuilder_ == null) {
+          result.minUserProto_ = minUserProto_;
+        } else {
+          result.minUserProto_ = minUserProtoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.facebookId_ = facebookId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId) {
+          return mergeFrom((com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId other) {
+        if (other == com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance()) return this;
+        if (other.hasMinUserProto()) {
+          mergeMinUserProto(other.getMinUserProto());
+        }
+        if (other.hasFacebookId()) {
+          setFacebookId(other.getFacebookId());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasMinUserProto()) {
+                subBuilder.mergeFrom(getMinUserProto());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setMinUserProto(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              facebookId_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto minUserProto = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> minUserProtoBuilder_;
+      public boolean hasMinUserProto() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getMinUserProto() {
+        if (minUserProtoBuilder_ == null) {
+          return minUserProto_;
+        } else {
+          return minUserProtoBuilder_.getMessage();
+        }
+      }
+      public Builder setMinUserProto(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (minUserProtoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          minUserProto_ = value;
+          onChanged();
+        } else {
+          minUserProtoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setMinUserProto(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (minUserProtoBuilder_ == null) {
+          minUserProto_ = builderForValue.build();
+          onChanged();
+        } else {
+          minUserProtoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeMinUserProto(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (minUserProtoBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              minUserProto_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            minUserProto_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(minUserProto_).mergeFrom(value).buildPartial();
+          } else {
+            minUserProto_ = value;
+          }
+          onChanged();
+        } else {
+          minUserProtoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearMinUserProto() {
+        if (minUserProtoBuilder_ == null) {
+          minUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          minUserProtoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getMinUserProtoBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getMinUserProtoFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getMinUserProtoOrBuilder() {
+        if (minUserProtoBuilder_ != null) {
+          return minUserProtoBuilder_.getMessageOrBuilder();
+        } else {
+          return minUserProto_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getMinUserProtoFieldBuilder() {
+        if (minUserProtoBuilder_ == null) {
+          minUserProtoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  minUserProto_,
+                  getParentForChildren(),
+                  isClean());
+          minUserProto_ = null;
+        }
+        return minUserProtoBuilder_;
+      }
+      
+      // optional string facebookId = 2;
+      private java.lang.Object facebookId_ = "";
+      public boolean hasFacebookId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public String getFacebookId() {
+        java.lang.Object ref = facebookId_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          facebookId_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setFacebookId(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        facebookId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFacebookId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        facebookId_ = getDefaultInstance().getFacebookId();
+        onChanged();
+        return this;
+      }
+      void setFacebookId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        facebookId_ = value;
+        onChanged();
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MinimumUserProtoWithFacebookId)
+    }
+    
+    static {
+      defaultInstance = new MinimumUserProtoWithFacebookId(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithFacebookId)
+  }
+  
   public interface FullUserProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -5291,6 +5809,11 @@ public final class UserProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserProtoWithLevel_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullUserProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -5318,33 +5841,36 @@ public final class UserProto {
       "\003 \001(\0132 .com.lvl6.proto.MinimumClanProto\"" +
       "b\n\031MinimumUserProtoWithLevel\0226\n\014minUserP" +
       "roto\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\r\n\005level\030\002 \001(\005\"\264\007\n\rFullUserProto\022\016\n",
-      "\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001" +
-      "(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022\022\n\nexperi" +
-      "ence\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001(\005\022\022\n\nba" +
-      "ttlesWon\030\010 \001(\005\022\023\n\013battlesLost\030\t \001(\005\022\r\n\005f" +
-      "lees\030\n \001(\005\022\024\n\014referralCode\030\013 \001(\t\022\024\n\014numR" +
-      "eferrals\030\014 \001(\005\022\025\n\rlastLoginTime\030\016 \001(\003\022\026\n" +
-      "\016lastLogoutTime\030\017 \001(\003\022\016\n\006isFake\030\023 \001(\010\022\017\n" +
-      "\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetrievedFromS" +
-      "tructs\030\027 \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumClanProto\022\033\n\023hasReceivedfbRew",
-      "ard\030\034 \001(\010\022!\n\031numAdditionalMonsterSlots\030\035" +
-      " \001(\005\022!\n\031numBeginnerSalesPurchased\030\036 \001(\005\022" +
-      "\027\n\017hasActiveShield\030\037 \001(\010\022\025\n\rshieldEndTim" +
-      "e\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004rank\030\" \001(\t\022\026\n\016la" +
-      "stTimeQueued\030# \001(\003\022\022\n\nattacksWon\030$ \001(\005\022\023" +
-      "\n\013defensesWon\030% \001(\005\022\023\n\013attacksLost\030& \001(\005" +
-      "\022\024\n\014defensesLost\030\' \001(\005\022\022\n\nfacebookId\030( \001" +
-      "(\t\022\014\n\004udid\030\r \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\"\n" +
-      "\032lastBattleNotificationTime\030\021 \001(\003\022\021\n\tnum" +
-      "Badges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\tapsa",
-      "larId\030\026 \001(\005\022 \n\030numConsecutiveDaysPlayed\030" +
-      "\030 \001(\005\022$\n\034lastWallPostNotificationTime\030\032 " +
-      "\001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\032\n\022nthExtraSlotsV" +
-      "iaFb\030) \001(\005\"R\n\024StaticLevelInfoProto\022\r\n\005le" +
-      "vel\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\022\017\n" +
-      "\007maxCash\030\003 \001(\005B\013B\tUserProto"
+      "roto\022\r\n\005level\030\002 \001(\005\"l\n\036MinimumUserProtoW",
+      "ithFacebookId\0226\n\014minUserProto\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022\022\n\nfaceboo" +
+      "kId\030\002 \001(\t\"\264\007\n\rFullUserProto\022\016\n\006userId\030\001 " +
+      "\001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\014\n\004gems" +
+      "\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022\022\n\nexperience\030\006 \001(\005" +
+      "\022\026\n\016tasksCompleted\030\007 \001(\005\022\022\n\nbattlesWon\030\010" +
+      " \001(\005\022\023\n\013battlesLost\030\t \001(\005\022\r\n\005flees\030\n \001(\005" +
+      "\022\024\n\014referralCode\030\013 \001(\t\022\024\n\014numReferrals\030\014" +
+      " \001(\005\022\025\n\rlastLoginTime\030\016 \001(\003\022\026\n\016lastLogou" +
+      "tTime\030\017 \001(\003\022\016\n\006isFake\030\023 \001(\010\022\017\n\007isAdmin\030\025",
+      " \001(\010\022$\n\034numCoinsRetrievedFromStructs\030\027 \001" +
+      "(\005\022.\n\004clan\030\031 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mClanProto\022\033\n\023hasReceivedfbReward\030\034 \001(\010\022" +
+      "!\n\031numAdditionalMonsterSlots\030\035 \001(\005\022!\n\031nu" +
+      "mBeginnerSalesPurchased\030\036 \001(\005\022\027\n\017hasActi" +
+      "veShield\030\037 \001(\010\022\025\n\rshieldEndTime\030  \001(\003\022\013\n" +
+      "\003elo\030! \001(\005\022\014\n\004rank\030\" \001(\t\022\026\n\016lastTimeQueu" +
+      "ed\030# \001(\003\022\022\n\nattacksWon\030$ \001(\005\022\023\n\013defenses" +
+      "Won\030% \001(\005\022\023\n\013attacksLost\030& \001(\005\022\024\n\014defens" +
+      "esLost\030\' \001(\005\022\022\n\nfacebookId\030( \001(\t\022\014\n\004udid",
+      "\030\r \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\"\n\032lastBattl" +
+      "eNotificationTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001" +
+      "(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(" +
+      "\005\022 \n\030numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034l" +
+      "astWallPostNotificationTime\030\032 \001(\003\022\021\n\tkab" +
+      "amNaid\030\033 \001(\t\022\032\n\022nthExtraSlotsViaFb\030) \001(\005" +
+      "\"R\n\024StaticLevelInfoProto\022\r\n\005level\030\001 \001(\005\022" +
+      "\032\n\022requiredExperience\030\002 \001(\005\022\017\n\007maxCash\030\003" +
+      " \001(\005B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5375,8 +5901,16 @@ public final class UserProto {
               new java.lang.String[] { "MinUserProto", "Level", },
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.class,
               com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder.class);
-          internal_static_com_lvl6_proto_FullUserProto_descriptor =
+          internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor =
             getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_descriptor,
+              new java.lang.String[] { "MinUserProto", "FacebookId", },
+              com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.class,
+              com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder.class);
+          internal_static_com_lvl6_proto_FullUserProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
           internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserProto_descriptor,
@@ -5384,7 +5918,7 @@ public final class UserProto {
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
           internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor,

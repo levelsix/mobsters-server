@@ -868,13 +868,11 @@ public class InsertUtils implements InsertUtil{
 		
 		List<Integer> inviterIdList = Collections.nCopies(amount, userId);
 		List<Timestamp> timeOfInviteList = Collections.nCopies(amount, curTime);
-		List<Boolean> acceptedList = Collections.nCopies(amount, false);
 		
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, inviterIdList);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID, facebookIds);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE, timeOfInviteList);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ACCEPTED, acceptedList);
 		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 				tableName, insertParams, amount);
 		

@@ -416,7 +416,7 @@ public class DBConstants {
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID = "inviter_user_id";
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID = "recipient_facebook_id";
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE = "time_of_invite";
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT__ACCEPTED = "accepted";
+  public static final String USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED = "time_accepted";
   
   /*USER FACEBOOK INVITE ACCEPTED*/
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__ID = GENERIC__ID;
@@ -424,7 +424,8 @@ public class DBConstants {
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__RECIPIENT_FACEBOOK_ID = "recipient_facebook_id";
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_OF_INVITE = "time_of_invite";
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_ACCEPTED = "time_accepted";
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITE_ROUND_NUM = "invite_round_num";
+  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__NTH_EXTRA_SLOTS_VIA_FB = "nth_extra_slots_via_fb";
+  public static final String USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_OF_ENTRY = "time_of_entry";
 
   /*USER PRIVATE CHAT POSTS*/
   public static final String USER_PRIVATE_CHAT_POSTS__ID = GENERIC__ID;

@@ -11084,10 +11084,10 @@ public final class EventMonsterProto {
   public interface InviteFbFriendsForSlotsRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
     
     // repeated string fbFriendIds = 2;
     java.util.List<String> getFbFriendIdsList();
@@ -11123,16 +11123,16 @@ public final class EventMonsterProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -11151,7 +11151,7 @@ public final class EventMonsterProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       fbFriendIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
@@ -11320,7 +11320,7 @@ public final class EventMonsterProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -11440,7 +11440,7 @@ public final class EventMonsterProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -11459,21 +11459,21 @@ public final class EventMonsterProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -11487,7 +11487,7 @@ public final class EventMonsterProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -11497,12 +11497,12 @@ public final class EventMonsterProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -11515,7 +11515,7 @@ public final class EventMonsterProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -11523,12 +11523,12 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -11536,11 +11536,11 @@ public final class EventMonsterProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -11619,10 +11619,10 @@ public final class EventMonsterProto {
   public interface InviteFbFriendsForSlotsResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
     
     // optional .com.lvl6.proto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus status = 2;
     boolean hasStatus();
@@ -11726,16 +11726,16 @@ public final class EventMonsterProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -11750,7 +11750,7 @@ public final class EventMonsterProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       status_ = com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -11914,7 +11914,7 @@ public final class EventMonsterProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -12025,7 +12025,7 @@ public final class EventMonsterProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -12050,21 +12050,21 @@ public final class EventMonsterProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -12078,7 +12078,7 @@ public final class EventMonsterProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -12088,12 +12088,12 @@ public final class EventMonsterProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -12106,7 +12106,7 @@ public final class EventMonsterProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -12114,12 +12114,12 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -12127,11 +12127,11 @@ public final class EventMonsterProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -16018,50 +16018,50 @@ public final class EventMonsterProto {
       "orySlotResponseProto.IncreaseMonsterInve" +
       "ntorySlotStatus\"^\n\"IncreaseMonsterInvent" +
       "orySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUF" +
-      "FICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"l\n#Invit",
-      "eFbFriendsForSlotsRequestProto\0220\n\006sender" +
+      "FICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"z\n#Invit",
+      "eFbFriendsForSlotsRequestProto\022>\n\006sender" +
+      "\030\001 \001(\0132..com.lvl6.proto.MinimumUserProto" +
+      "WithFacebookId\022\023\n\013fbFriendIds\030\002 \003(\t\"\210\002\n$" +
+      "InviteFbFriendsForSlotsResponseProto\022>\n\006" +
+      "sender\030\001 \001(\0132..com.lvl6.proto.MinimumUse" +
+      "rProtoWithFacebookId\022b\n\006status\030\002 \001(\0162R.c" +
+      "om.lvl6.proto.InviteFbFriendsForSlotsRes" +
+      "ponseProto.InviteFbFriendsForSlotsStatus" +
+      "\"<\n\035InviteFbFriendsForSlotsStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\225\001\n+AcceptAndReje",
+      "ctFbInviteForSlotsRequestProto\0220\n\006sender" +
       "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
-      "\022\023\n\013fbFriendIds\030\002 \003(\t\"\372\001\n$InviteFbFriend" +
-      "sForSlotsResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022b\n\006stat" +
-      "us\030\002 \001(\0162R.com.lvl6.proto.InviteFbFriend" +
-      "sForSlotsResponseProto.InviteFbFriendsFo" +
-      "rSlotsStatus\"<\n\035InviteFbFriendsForSlotsS" +
-      "tatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\225\001\n+A" +
-      "cceptAndRejectFbInviteForSlotsRequestPro",
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\022\031\n\021acceptedInviteIds\030\002 \003(\005\022" +
-      "\031\n\021rejectedInviteIds\030\003 \003(\005\"\310\002\n,AcceptAnd" +
-      "RejectFbInviteForSlotsResponseProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto.A" +
-      "cceptAndRejectFbInviteForSlotsResponsePr" +
-      "oto.AcceptAndRejectFbInviteForSlotsStatu" +
-      "s\"r\n%AcceptAndRejectFbInviteForSlotsStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAI",
-      "L_ALREADY_BEEN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001" +
-      "\n$CombineUserMonsterPiecesRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemC" +
-      "ost\030\003 \001(\005\"\307\002\n%CombineUserMonsterPiecesRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022d\n\006status\030\002 \001(\0162T." +
-      "com.lvl6.proto.CombineUserMonsterPiecesR" +
-      "esponseProto.CombineUserMonsterPiecesSta" +
-      "tus\"\205\001\n\036CombineUserMonsterPiecesStatus\022\013",
-      "\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022" +
-      "*\n&FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDU" +
-      "P\020\003\022\016\n\nFAIL_OTHER\020\004\"\213\001\n\033SellUserMonsterR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022:\n\005sales\030\002 \003(\0132+.c" +
-      "om.lvl6.proto.MinimumUserMonsterSellProt" +
-      "o\"\332\001\n\034SellUserMonsterResponseProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Se" +
-      "llUserMonsterResponseProto.SellUserMonst",
-      "erStatus\"4\n\025SellUserMonsterStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B\021EventMonsterPr" +
-      "oto"
+      "\022\031\n\021acceptedInviteIds\030\002 \003(\005\022\031\n\021rejectedI" +
+      "nviteIds\030\003 \003(\005\"\310\002\n,AcceptAndRejectFbInvi" +
+      "teForSlotsResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022r\n\006sta" +
+      "tus\030\002 \001(\0162b.com.lvl6.proto.AcceptAndReje" +
+      "ctFbInviteForSlotsResponseProto.AcceptAn" +
+      "dRejectFbInviteForSlotsStatus\"r\n%AcceptA" +
+      "ndRejectFbInviteForSlotsStatus\022\013\n\007SUCCES",
+      "S\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BE" +
+      "EN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$CombineUse" +
+      "rMonsterPiecesRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\026\n\016" +
+      "userMonsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002" +
+      "\n%CombineUserMonsterPiecesResponseProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022d\n\006status\030\002 \001(\0162T.com.lvl6.pro" +
+      "to.CombineUserMonsterPiecesResponseProto" +
+      ".CombineUserMonsterPiecesStatus\"\205\001\n\036Comb",
+      "ineUserMonsterPiecesStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE" +
+      "_THAN_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_" +
+      "OTHER\020\004\"\213\001\n\033SellUserMonsterRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.prot" +
+      "o.MinimumUserMonsterSellProto\"\332\001\n\034SellUs" +
+      "erMonsterResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022R\n\006stat" +
+      "us\030\002 \001(\0162B.com.lvl6.proto.SellUserMonste",
+      "rResponseProto.SellUserMonsterStatus\"4\n\025" +
+      "SellUserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFA" +
+      "IL_OTHER\020\002B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

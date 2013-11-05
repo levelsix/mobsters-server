@@ -780,7 +780,7 @@ public class StartupController extends EventController {
   	String fbId = user.getFacebookId();
   	List<Integer> inviterUserIds = UserFacebookInviteForSlotRetrieveUtils
   			.getUniqueInviterUserIdsForRequesterId(fbId);
-  	resBuilder.addAllUserIdsInvitingMeForExtraSlots(inviterUserIds);
+//  	resBuilder.addAllUserIdsInvitingMeForExtraSlots(inviterUserIds);
   	
   	//SECOND GET ALL THE USER IDS THAT HELPED THE USER GET SLOTS
   }

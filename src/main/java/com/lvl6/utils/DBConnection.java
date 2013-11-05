@@ -740,7 +740,8 @@ public class DBConnection {
 	 * rather specified columns of rows will be replaced
 	 */
 	public int insertOnDuplicateKeyUpdateColumnsAbsolute(String tableName,
-			List<Map<String, Object>> newRows, Set<String> replaceTheseColumns) {
+			List<Map<String, Object>> newRows, Set<String> replaceTheseColumns,
+			Set<String> unchangedColumns) {
 		
 		List<String> columns = new ArrayList<String>();
 		List<String> questions =  new ArrayList<String>();
@@ -758,7 +759,7 @@ public class DBConnection {
 		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName,
 				columns, questions, numberOfQuestionLists, isInsert);
 		//append the "ON DUPLICATE KEY UPDATE" part
-		transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns);
+		transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns, unchangedColumns);
 		
 		numUpdated = queryDbAndReturnNumUpdated(query, valuesListCollection);
 		return numUpdated;
@@ -892,7 +893,7 @@ public class DBConnection {
 	}
 	
 	private void transformToOnDuplicateKeyUpdateQuery(String query, 
-			Set<String> replaceTheseColumns) {
+			Set<String> replaceTheseColumns, Set<String> unchangedColumns) {
 		
 		StringBuffer newQuery = new StringBuffer();
 		newQuery.append(query);
@@ -912,6 +913,13 @@ public class DBConnection {
 			updateClause.append(")");
 			
 			updateClauseList.add(updateClause.toString());
+		}
+		
+		for (String unchangedColumn : unchangedColumns) {
+			StringBuffer noOpUpdateClause = new StringBuffer();
+			noOpUpdateClause.append(unchangedColumn);
+			noOpUpdateClause.append("=");
+			noOpUpdateClause.append(unchangedColumn);
 		}
 		
 		String allUpdateClauses = StringUtils.getListInString(updateClauseList, ", ");

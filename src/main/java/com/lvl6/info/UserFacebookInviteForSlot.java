@@ -5,21 +5,21 @@ import java.util.Date;
 
 public class UserFacebookInviteForSlot implements Serializable {
 
-	private static final long serialVersionUID = 1780229714903784581L;
+	private static final long serialVersionUID = 2859595490274508645L;
 	private int id;
 	private int inviterUserId;
 	private String recipientFacebookId;
 	private Date timeOfInvite;
-	private boolean accepted;
+	private Date timeAccepted;
 	
 	public UserFacebookInviteForSlot(int id, int inviterUserId,
-			String recipientFacebookId, Date timeOfInvite, boolean accepted) {
+			String recipientFacebookId, Date timeOfInvite, Date timeAccepted) {
 		super();
 		this.id = id;
 		this.inviterUserId = inviterUserId;
 		this.recipientFacebookId = recipientFacebookId;
 		this.timeOfInvite = timeOfInvite;
-		this.accepted = accepted;
+		this.timeAccepted = timeAccepted;
 	}
 
 	public int getId() {
@@ -54,18 +54,20 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.timeOfInvite = timeOfInvite;
 	}
 
-	public boolean isAccepted() {
-		return accepted;
+	public Date getTimeAccepted() {
+		return timeAccepted;
 	}
 
-	public void setAccepted(boolean accepted) {
-		this.accepted = accepted;
+	public void setTimeAccepted(Date timeAccepted) {
+		this.timeAccepted = timeAccepted;
 	}
 
 	@Override
 	public String toString() {
 		return "UserFacebookInviteForSlot [id=" + id + ", inviterUserId="
 				+ inviterUserId + ", recipientFacebookId=" + recipientFacebookId
-				+ ", timeOfInvite=" + timeOfInvite + ", accepted=" + accepted + "]";
+				+ ", timeOfInvite=" + timeOfInvite + ", timeAccepted=" + timeAccepted
+				+ "]";
 	}
+	
 }

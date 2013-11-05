@@ -66,21 +66,29 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   public Map<Long, MonsterForUser> getSpecificOrAllUserMonstersForUser(int userId,
   		Collection<Long> userMonsterIds) {
-    log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
     
-    String query = "SELECT * FROM " + TABLE_NAME + " WHERE " +
-    		DBConstants.MONSTER_FOR_USER__USER_ID + "=?";
-    List<Object> values = new ArrayList<Object>();
+    StringBuffer querySb = new StringBuffer();
+    querySb.append("SELECT * FROM ");
+    querySb.append(TABLE_NAME); 
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+    querySb.append("=?");
+    List <Object> values = new ArrayList<Object>();
     values.add(userId);
     
     //if user didn't give userMonsterIds then get all the user's monsters 
     if (userMonsterIds != null && !userMonsterIds.isEmpty() ) {
-    	List<Long> userMonsterIdList = new ArrayList<Long>(userMonsterIds);
-    	
-    	query += " AND " + DBConstants.MONSTER_FOR_USER__ID + " IN (" +
-    			StringUtils.csvList(userMonsterIdList) + ");";
+    	log.debug("retrieving user monster for userMonsterIds: " + userMonsterIds);
+    	querySb.append(" AND ");
+    	querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+    	querySb.append(" IN (");
+    	int amount = userMonsterIds.size();
+    	List<String> questions = Collections.nCopies(amount, "?");
+    	querySb.append(StringUtils.csvList(questions));
+    	querySb.append(");");
+    	values.add(userMonsterIds);
     }
-    
+    String query = querySb.toString();
     log.info("query=" + query + "\t values=" + values);
 
     Connection conn = DBConnection.get().getConnection();

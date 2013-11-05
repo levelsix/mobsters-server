@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class UserFacebookInviteForSlotRetrieveUtils {
 
@@ -36,12 +37,45 @@ import com.lvl6.utils.DBConnection;
     return invite;
   }
   
-  public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForUserId(int userId) {
+  public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForInviterUserId(int userId) {
   	TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
   	paramsToVals.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, userId);
   	
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+    Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
+    return idsToInvites;
+  }
+  
+  //recipientFacebookId assumed to be not null
+  public static Map<Integer, UserFacebookInviteForSlot> getSpecificOrAllInvitesForRecipient(
+  		String recipientFacebookId, List<Integer> specificInviteIds) {
+    
+    StringBuffer querySb = new StringBuffer();
+    querySb.append("SELECT * FROM ");
+    querySb.append(TABLE_NAME); 
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
+    querySb.append("=?");
+    List <Object> values = new ArrayList<Object>();
+    values.add(recipientFacebookId);
+    
+    //if user didn't give any userStructIds then get all the user's structs
+    if (null != specificInviteIds && !specificInviteIds.isEmpty()) {
+    	log.debug("retrieving UserFacebookInviteForSlot with ids " + specificInviteIds);
+    	querySb.append(" AND ");
+    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+    	querySb.append(" IN (");
+    	querySb.append(StringUtils.csvList(specificInviteIds));
+    	querySb.append(");");
+    	values.addAll(specificInviteIds);
+    }
+    
+    String query = querySb.toString();
+    log.info("query=" + query + "\t values=" + values);
+
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
     Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
     return idsToInvites;
   }
@@ -182,13 +216,20 @@ import com.lvl6.utils.DBConnection;
     		timeOfInvite = new Date(ts.getTime());
     	}
     } catch (Exception e) {
-    	log.error("db error: start_date is null. id=" + id + " inviterId=" +
+    	log.error("db error: maybe timeOfInvite is null. id=" + id + " inviterId=" +
     			inviterUserId + " recipientFacebookId=" + recipientFacebookId, e);
     }
-    boolean accepted = rs.getBoolean(i++);
+    
+    Date timeAccepted = null; 
+    try {
+    		rs.getTimestamp(i++);
+    } catch (Exception e) {
+    	log.error("db error: maybe timeAccepted is null. id=" + id + " inviterId=" +
+    			inviterUserId + " recipientFacebookId=" + recipientFacebookId, e);
+    }
     
     UserFacebookInviteForSlot invite = new UserFacebookInviteForSlot(id,
-    		inviterUserId, recipientFacebookId, timeOfInvite, accepted); 
+    		inviterUserId, recipientFacebookId, timeOfInvite, timeAccepted); 
     return invite;
   }
 }

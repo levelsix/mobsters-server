@@ -212,12 +212,13 @@ message IncreaseMonsterInventorySlotResponseProto {
 //NOTE: NO LOCK IS ACQUIRED FOR FB FRIENDS WHEN INSERTING INTO
 // user_facebook_invite_for_slot TABLE
 message InviteFbFriendsForSlotsRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithFacebookId sender = 1;
 	repeated string fbFriendIds = 2;		
 }
 
+//server sends this to all the recipients in fbFriendIds that have a user id
 message InviteFbFriendsForSlotsResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithFacebookId sender = 1;
 	optional InviteFbFriendsForSlotsStatus status = 2;
 	
 	enum InviteFbFriendsForSlotsStatus {
@@ -228,10 +229,12 @@ message InviteFbFriendsForSlotsResponseProto {
 
 message AcceptAndRejectFbInviteForSlotsRequestProto {
 	optional MinimumUserProto sender = 1;
+	//server records all valid accepts, does not enforce max 3 accepts per inviter
 	repeated int32 acceptedInviteIds = 2;
 	repeated int32 rejectedInviteIds = 3;
 }
 
+//server sends this to all the inviters in acceptedInviteIds
 message AcceptAndRejectFbInviteForSlotsResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional AcceptAndRejectFbInviteForSlotsStatus status = 2;
