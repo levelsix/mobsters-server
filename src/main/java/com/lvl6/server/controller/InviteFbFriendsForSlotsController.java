@@ -125,16 +125,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<String> newFacebookIdsToInviteTemp = getNewInvites(
   			fbIdsOfFriends, idsToInvites);
   	newFacebookIdsToInvite.addAll(newFacebookIdsToInviteTemp);
-  	
-  	resBuilder.setStatus(InviteFbFriendsForSlotsStatus.SUCCESS);
   	return true;
   }
   
   //keeps and returns the facebook ids that have not been invited yet
   private List<String> getNewInvites(List<String> fbIdsOfFriends,
   		 Map<Integer, UserFacebookInviteForSlot> idsToInvites) {
-  	//contains the duplicate invites, that need to be deleted
-  	//e.g. two invites exist with same inviterId and recipientId
+  	//CONTAINS THE DUPLICATE INVITES, THAT NEED TO BE DELETED
+  	//E.G. TWO INVITES EXIST WITH SAME INVITERID AND RECIPIENTID
   	List<Integer> inviteIdsOfDuplicateInvites = new ArrayList<Integer>();
   	
   	//running collection of recipient ids already seen
@@ -154,7 +152,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		}
   	}
   	
-  	//DELETE THE DUPLICATE INVITES
+  	//DELETE THE DUPLICATE INVITES THAT ARE ALREADY IN DB
   	if (!inviteIdsOfDuplicateInvites.isEmpty()) {
   		int num = DeleteUtils.get().deleteUserFacebookInviteForSlots(inviteIdsOfDuplicateInvites);
   		log.warn("num duplicate invites deleted: " + num);

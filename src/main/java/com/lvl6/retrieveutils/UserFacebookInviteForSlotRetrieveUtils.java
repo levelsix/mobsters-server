@@ -66,6 +66,26 @@ import com.lvl6.utils.DBConnection;
   	return recipientIds;
   }
   
+  public static List<Integer> getUniqueInviterUserIdsForRequesterId(String facebookId) {
+  	StringBuffer querySb = new StringBuffer();
+  	querySb.append("SELECT DISTINCT(");
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
+  	querySb.append(") FROM ");
+  	querySb.append(TABLE_NAME);
+  	querySb.append(" WHERE ");
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
+  	querySb.append("=?");
+  	String query = querySb.toString();
+  	
+  	log.info("query=" + query);
+  	List<Object> values = new ArrayList<Object>();
+  	values.add(facebookId);
+  	Connection conn = DBConnection.get().getConnection();
+  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+  	List<Integer> userIds = convertRSToInts(rs);
+  	return userIds;
+  }
+  
   private static UserFacebookInviteForSlot convertRSToInvite(ResultSet rs) {
     List<UserFacebookInviteForSlot> utList = new ArrayList<UserFacebookInviteForSlot>();
     if (rs != null) {
@@ -130,6 +150,23 @@ import com.lvl6.utils.DBConnection;
   		}
   	}
   	return stringList;
+  }
+  private static List<Integer> convertRSToInts(ResultSet rs) {
+  	List<Integer> intList = new ArrayList<Integer>();
+  	if (null != rs) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			while(rs.next()) {
+  				int indexOfFirstAndOnlyColumn = 1;
+  				int anInt = rs.getInt(indexOfFirstAndOnlyColumn); 
+  				intList.add(anInt);
+  			}
+  		} catch(SQLException e) {
+  			log.error("problem with database call.", e);
+  		}
+  	}
+  	return intList;
   }
   
   private static UserFacebookInviteForSlot convertRSRowToInvite(ResultSet rs) throws SQLException {

@@ -760,22 +760,27 @@ public class StartupController extends EventController {
   }  
   
   private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User user) {
-  	//FIRST SEND ALL THE USER IDS THAT THE USER INVITED 
-  	int userId = user.getId();
-  	//NEED TO GET THE FACEBOOK IDS HE INVITED
-  	List<String> recipientFacebookIds = UserFacebookInviteForSlotRetrieveUtils
-  			.getUniqueRecipientFacebookIdsForInviterId(userId);
-  	
-  	if (null == recipientFacebookIds || recipientFacebookIds.isEmpty()) {
-  		return;
-  	}
-  	//THEN FROM THOSE FACEBOOK IDS GET THE USER IDS
-  	List<Integer> recipientIds = RetrieveUtils.userRetrieveUtils()
-  			.getUserIdsForFacebookIds(recipientFacebookIds);
-  	if (null == recipientIds || recipientIds.isEmpty()) {
-  		return;
-  	}
-  	resBuilder.addAllUserIdsUsedForExtraSlots(recipientIds);
+//  	//FIRST SEND ALL THE USER IDS THAT THE USER INVITED 
+//  	int userId = user.getId();
+//  	//NEED TO GET THE FACEBOOK IDS HE INVITED
+//  	List<String> recipientFacebookIds = UserFacebookInviteForSlotRetrieveUtils
+//  			.getUniqueRecipientFacebookIdsForInviterId(userId);
+//  	
+//  	if (null == recipientFacebookIds || recipientFacebookIds.isEmpty()) {
+//  		return;
+//  	}
+//  	//THEN FROM THOSE FACEBOOK IDS GET THE USER IDS
+//  	List<Integer> recipientIds = RetrieveUtils.userRetrieveUtils()
+//  			.getUserIdsForFacebookIds(recipientFacebookIds);
+//  	if (null == recipientIds || recipientIds.isEmpty()) {
+//  		return;
+//  	}
+//  	
+  	//send all the user ids where this user is the one being invited (the recipient)
+  	String fbId = user.getFacebookId();
+  	List<Integer> inviterUserIds = UserFacebookInviteForSlotRetrieveUtils
+  			.getUniqueInviterUserIdsForRequesterId(fbId);
+  	resBuilder.addAllUserIdsInvitingMeForExtraSlots(inviterUserIds);
   	
   	//SECOND GET ALL THE USER IDS THAT HELPED THE USER GET SLOTS
   }
