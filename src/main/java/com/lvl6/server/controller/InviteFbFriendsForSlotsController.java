@@ -87,7 +87,22 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       resEvent.setTag(event.getTag());
       resEvent.setInviteFbFriendsForSlotsResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
-
+      
+      if (successful) {
+      	//send this to all the recipients in fbIdsOfFriends that have a user id
+      	//if want to send to the new ones use newFacebookIdsToInvite
+      	List<Integer> recipientUserIds = RetrieveUtils.userRetrieveUtils()
+      			.getUserIdsForFacebookIds(fbIdsOfFriends);
+      	
+      	InviteFbFriendsForSlotsResponseProto responseProto = resBuilder.build();
+      	for (Integer recipientUserId : recipientUserIds) {
+      		InviteFbFriendsForSlotsResponseEvent newResEvent =
+      				new InviteFbFriendsForSlotsResponseEvent(recipientUserId);
+          resEvent.setTag(0);
+          resEvent.setInviteFbFriendsForSlotsResponseProto(responseProto);
+          server.writeEvent(newResEvent);
+      	}
+      }
     } catch (Exception e) {
       log.error("exception in InviteFbFriendsForSlotsController processEvent", e);
       //don't let the client hang
@@ -159,17 +174,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   	
   	
-  	List<String> newUserIdsToInvite = new ArrayList<String>();
+  	List<String> newFacebookIdsToInvite = new ArrayList<String>();
   	//don't want to generate an invite to a recipient the user has already invited
   	//going through the facebook ids client sends and select only the new ones
   	for (String prospectiveRecipientId : fbIdsOfFriends) {
   		
   		//keep only the recipient ids that have not been seen/invited
   		if(!processedRecipientIds.contains(prospectiveRecipientId)) {
-  			newUserIdsToInvite.add(prospectiveRecipientId);
+  			newFacebookIdsToInvite.add(prospectiveRecipientId);
   		}
   	}
-  	return newUserIdsToInvite;
+  	return newFacebookIdsToInvite;
   }
   
   private boolean writeChangesToDb(User aUser, List<String> newFacebookIdsToInvite, 
