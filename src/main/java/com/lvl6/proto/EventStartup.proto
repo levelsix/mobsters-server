@@ -65,6 +65,12 @@ message StartupResponseProto {
 	
 	optional string kabamNaid = 31;
 	
+	//send over all unique user ids in fb_invite_for_slots_history
+	
+	//send over all user ids in fb_invite_for_slot table where this user
+	//is the person being invited
+	
+	
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
@@ -147,7 +153,7 @@ message StartupResponseProto {
 		}
 		message MonsterConstants {
 			optional float cashPerHealthPoint = 1;
-			optional int32 secondsToHealPerHealthPoint = 2;
+			optional float secondsToHealPerHealthPoint = 2;
 		}
 	}
 	

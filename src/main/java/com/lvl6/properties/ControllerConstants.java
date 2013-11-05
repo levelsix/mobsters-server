@@ -8,7 +8,7 @@ public class ControllerConstants {
 	//MOBSTERS CONSTANTS
 	
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
-	public static final int MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2;
+	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;
 	
 	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
 	public static final int MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT = 2;

@@ -5633,9 +5633,9 @@ public final class EventStartupProto {
         boolean hasCashPerHealthPoint();
         float getCashPerHealthPoint();
         
-        // optional int32 secondsToHealPerHealthPoint = 2;
+        // optional float secondsToHealPerHealthPoint = 2;
         boolean hasSecondsToHealPerHealthPoint();
-        int getSecondsToHealPerHealthPoint();
+        float getSecondsToHealPerHealthPoint();
       }
       public static final class MonsterConstants extends
           com.google.protobuf.GeneratedMessage
@@ -5676,19 +5676,19 @@ public final class EventStartupProto {
           return cashPerHealthPoint_;
         }
         
-        // optional int32 secondsToHealPerHealthPoint = 2;
+        // optional float secondsToHealPerHealthPoint = 2;
         public static final int SECONDSTOHEALPERHEALTHPOINT_FIELD_NUMBER = 2;
-        private int secondsToHealPerHealthPoint_;
+        private float secondsToHealPerHealthPoint_;
         public boolean hasSecondsToHealPerHealthPoint() {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
-        public int getSecondsToHealPerHealthPoint() {
+        public float getSecondsToHealPerHealthPoint() {
           return secondsToHealPerHealthPoint_;
         }
         
         private void initFields() {
           cashPerHealthPoint_ = 0F;
-          secondsToHealPerHealthPoint_ = 0;
+          secondsToHealPerHealthPoint_ = 0F;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -5706,7 +5706,7 @@ public final class EventStartupProto {
             output.writeFloat(1, cashPerHealthPoint_);
           }
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            output.writeInt32(2, secondsToHealPerHealthPoint_);
+            output.writeFloat(2, secondsToHealPerHealthPoint_);
           }
           getUnknownFields().writeTo(output);
         }
@@ -5723,7 +5723,7 @@ public final class EventStartupProto {
           }
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(2, secondsToHealPerHealthPoint_);
+              .computeFloatSize(2, secondsToHealPerHealthPoint_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -5851,7 +5851,7 @@ public final class EventStartupProto {
             super.clear();
             cashPerHealthPoint_ = 0F;
             bitField0_ = (bitField0_ & ~0x00000001);
-            secondsToHealPerHealthPoint_ = 0;
+            secondsToHealPerHealthPoint_ = 0F;
             bitField0_ = (bitField0_ & ~0x00000002);
             return this;
           }
@@ -5957,9 +5957,9 @@ public final class EventStartupProto {
                   cashPerHealthPoint_ = input.readFloat();
                   break;
                 }
-                case 16: {
+                case 21: {
                   bitField0_ |= 0x00000002;
-                  secondsToHealPerHealthPoint_ = input.readInt32();
+                  secondsToHealPerHealthPoint_ = input.readFloat();
                   break;
                 }
               }
@@ -5989,15 +5989,15 @@ public final class EventStartupProto {
             return this;
           }
           
-          // optional int32 secondsToHealPerHealthPoint = 2;
-          private int secondsToHealPerHealthPoint_ ;
+          // optional float secondsToHealPerHealthPoint = 2;
+          private float secondsToHealPerHealthPoint_ ;
           public boolean hasSecondsToHealPerHealthPoint() {
             return ((bitField0_ & 0x00000002) == 0x00000002);
           }
-          public int getSecondsToHealPerHealthPoint() {
+          public float getSecondsToHealPerHealthPoint() {
             return secondsToHealPerHealthPoint_;
           }
-          public Builder setSecondsToHealPerHealthPoint(int value) {
+          public Builder setSecondsToHealPerHealthPoint(float value) {
             bitField0_ |= 0x00000002;
             secondsToHealPerHealthPoint_ = value;
             onChanged();
@@ -6005,7 +6005,7 @@ public final class EventStartupProto {
           }
           public Builder clearSecondsToHealPerHealthPoint() {
             bitField0_ = (bitField0_ & ~0x00000002);
-            secondsToHealPerHealthPoint_ = 0;
+            secondsToHealPerHealthPoint_ = 0F;
             onChanged();
             return this;
           }
@@ -14868,7 +14868,7 @@ public final class EventStartupProto {
       "lot\030\004 \001(\005\022.\n&numFriendsToRecruitToIncrea",
       "seInventory\030\005 \001(\005\032S\n\020MonsterConstants\022\032\n" +
       "\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHe" +
-      "alPerHealthPoint\030\002 \001(\005\"A\n\014UpdateStatus\022\r" +
+      "alPerHealthPoint\030\002 \001(\002\"A\n\014UpdateStatus\022\r" +
       "\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR" +
       "_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_DB" +
       "\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStartupPr" +
