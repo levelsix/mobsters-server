@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +34,58 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private final int MAX_BATTLE_DB_HITS = 5;
   private final int EXTREME_MAX_BATTLE_DB_HITS = 30;
   
+  public List<Integer> getUserIdsForFacebookIds(List<String> facebookIds) {
+  	int amount = facebookIds.size();
+  	List<String> questionMarkList = Collections.nCopies(amount, "?"); 
+  	String questionMarks = StringUtils.csvList(questionMarkList);
+  	
+  	List<Object> params = new ArrayList<Object>();
+  	params.addAll(facebookIds);
+  	
+  	StringBuffer querySb = new StringBuffer();
+  	querySb.append("SELECT ");
+  	querySb.append(DBConstants.USER__ID);
+  	querySb.append(" FROM ");
+  	querySb.append(TABLE_NAME);
+  	querySb.append(" WHERE ");
+  	querySb.append(DBConstants.USER__FACEBOOK_ID);
+  	querySb.append(" IN (");
+  	querySb.append(questionMarks);
+  	querySb.append(");");
+  	
+  	String query = querySb.toString();
+  	Connection conn = DBConnection.get().getConnection();
+  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
+
+  	List<Integer> userIdList = new ArrayList<Integer>();
+  	try {
+  		if (null == rs) {
+  			return userIdList;
+  		}
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			while(rs.next()) {
+  				int userId = rs.getInt(1);
+  				userIdList.add(userId);
+  			}
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+  		}
+  	} catch (Exception e) {
+  		log.error("sql query wrong 2", e);
+  	} finally {
+  		DBConnection.get().close(null, null, conn);
+  	}
+    return userIdList;
+  }
   
   public int numAccountsForUDID(String udid) {
     List<Object> params = new ArrayList<Object>();
     params.add(udid);
     Connection conn = DBConnection.get().getConnection();
     String query = "select count(*) from " +
-    		TABLE_NAME + " where udid like concat(\"%\", ?, \"%\");";
+    		TABLE_NAME + " where udid like concat(?, \"%\");";
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
     int count = 0;
     try {
@@ -757,6 +803,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int attacksLost = rs.getInt(i++);
     int defensesLost = rs.getInt(i++);
     String facebookId = rs.getString(i++);
+    int nthExtraSlotsViaFb = rs.getInt(i++);
     
     User user = new User(id, name, level, diamonds, coins, experience,
     		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
@@ -767,7 +814,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		kabamNaid, hasReceivedfbReward, numAdditionalMonsterSlots,
     		numBeginnerSalesPurchased, hasActiveShield, shieldEndTime, elo,
     		rank, lastTimeQueued, attacksWon, defensesWon, attacksLost,
-    		defensesLost, facebookId);
+    		defensesLost, facebookId, nthExtraSlotsViaFb);
     return user;
   }
 }

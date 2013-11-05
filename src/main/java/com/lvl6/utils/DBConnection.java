@@ -408,7 +408,7 @@ public class DBConnection {
 	 * row2ValueForColumn1,...); columnName2->List(row1ValueForColumn2,
 	 * row2ValueForColumn2,...); . . .
 	 */
-	public int insertIntoTableMultipleRows(String tablename, Map<String, List<Object>> insertParams,
+	public int insertIntoTableMultipleRows(String tablename, Map<String, List<?>> insertParams,
 			int numRows) {
 		List<String> questionsPerRow = new LinkedList<String>();
 		List<String> columns = new LinkedList<String>();
@@ -419,7 +419,7 @@ public class DBConnection {
 			boolean firstTime = true;
 			for (int i = 0; i < numRows; i++) {
 				for (String column : insertParams.keySet()) {
-					List<Object> valuesForColumn = insertParams.get(column);
+					List<?> valuesForColumn = insertParams.get(column);
 					values.add(valuesForColumn.get(i));
 
 					if (firstTime) {

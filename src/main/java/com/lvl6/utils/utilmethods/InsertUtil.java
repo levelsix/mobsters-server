@@ -121,4 +121,7 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoMonsterForUserDeleted(int userId, List<String> deleteReasons,
 			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate);
+	
+	public abstract int insertIntoUserFbInviteForSlot(int userId, List<Integer> userIds,
+			Timestamp curTime);
 }

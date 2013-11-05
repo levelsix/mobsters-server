@@ -36,5 +36,6 @@ public interface DeleteUtil {
   public abstract int deleteMonsterForUser(long l);
   
   public abstract int deleteMonstersForUser(List<Long> userMonsterIds);
-  
+ 
+  public abstract int deleteUserFacebookInviteForSlots(List<Integer> idsOfInvites);
 }

@@ -214,4 +214,19 @@ public class DeleteUtils implements DeleteUtil {
     return numDeleted;
   }
 
+	@Override
+	public int deleteUserFacebookInviteForSlots(List<Integer> idsOfInvites) {
+		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
+    int size = idsOfInvites.size();
+    List<String> questions = Collections.nCopies(size, "?");
+    
+    String delimiter = ",";
+    String query = " DELETE FROM " + tableName + " WHERE " +
+    DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID
+    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
+    
+    int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, idsOfInvites);
+    return numDeleted;
+	}
+
 }

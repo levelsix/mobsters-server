@@ -54,7 +54,7 @@ public class User implements Serializable {
 	private int attacksLost;
 	private int defensesLost;
 	private String facebookId;
-
+	private int nthExtraSlotsViaFb;
 
 	public User(int id, String name, int level, int gems, int cash,
 			int experience, int tasksCompleted, int battlesWon, int battlesLost,
@@ -68,7 +68,7 @@ public class User implements Serializable {
 			int numBeginnerSalesPurchased, boolean hasActiveShield,
 			Date shieldEndTime, int elo, String rank, Date lastTimeQueued,
 			int attacksWon, int defensesWon, int attacksLost, int defensesLost,
-			String facebookId) {
+			String facebookId, int nthExtraSlotsViaFb) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -110,6 +110,7 @@ public class User implements Serializable {
 		this.attacksLost = attacksLost;
 		this.defensesLost = defensesLost;
 		this.facebookId = facebookId;
+		this.nthExtraSlotsViaFb = nthExtraSlotsViaFb;
 	}
 
 
@@ -1128,6 +1129,14 @@ public class User implements Serializable {
 		this.facebookId = facebookId;
 	}
 
+	public int getNthExtraSlotsViaFb() {
+		return nthExtraSlotsViaFb;
+	}
+
+	public void setNthExtraSlotsViaFb(int nthExtraSlotsViaFb) {
+		this.nthExtraSlotsViaFb = nthExtraSlotsViaFb;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
@@ -1151,7 +1160,8 @@ public class User implements Serializable {
 				+ shieldEndTime + ", elo=" + elo + ", rank=" + rank
 				+ ", lastTimeQueued=" + lastTimeQueued + ", attacksWon=" + attacksWon
 				+ ", defensesWon=" + defensesWon + ", attacksLost=" + attacksLost
-				+ ", defensesLost=" + defensesLost + ", facebookId=" + facebookId + "]";
+				+ ", defensesLost=" + defensesLost + ", facebookId=" + facebookId
+				+ ", nthExtraSlotsViaFb=" + nthExtraSlotsViaFb + "]";
 	}
 
 }

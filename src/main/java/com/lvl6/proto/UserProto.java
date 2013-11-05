@@ -2018,6 +2018,10 @@ public final class UserProto {
     // optional string kabamNaid = 27;
     boolean hasKabamNaid();
     String getKabamNaid();
+    
+    // optional int32 nthExtraSlotsViaFb = 41;
+    boolean hasNthExtraSlotsViaFb();
+    int getNthExtraSlotsViaFb();
   }
   public static final class FullUserProto extends
       com.google.protobuf.GeneratedMessage
@@ -2606,6 +2610,16 @@ public final class UserProto {
       }
     }
     
+    // optional int32 nthExtraSlotsViaFb = 41;
+    public static final int NTHEXTRASLOTSVIAFB_FIELD_NUMBER = 41;
+    private int nthExtraSlotsViaFb_;
+    public boolean hasNthExtraSlotsViaFb() {
+      return ((bitField1_ & 0x00000100) == 0x00000100);
+    }
+    public int getNthExtraSlotsViaFb() {
+      return nthExtraSlotsViaFb_;
+    }
+    
     private void initFields() {
       userId_ = 0;
       name_ = "";
@@ -2647,6 +2661,7 @@ public final class UserProto {
       numConsecutiveDaysPlayed_ = 0;
       lastWallPostNotificationTime_ = 0L;
       kabamNaid_ = "";
+      nthExtraSlotsViaFb_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2779,6 +2794,9 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x40000000) == 0x40000000)) {
         output.writeBytes(40, getFacebookIdBytes());
+      }
+      if (((bitField1_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(41, nthExtraSlotsViaFb_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2948,6 +2966,10 @@ public final class UserProto {
       if (((bitField0_ & 0x40000000) == 0x40000000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(40, getFacebookIdBytes());
+      }
+      if (((bitField1_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(41, nthExtraSlotsViaFb_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3158,6 +3180,8 @@ public final class UserProto {
         bitField1_ = (bitField1_ & ~0x00000040);
         kabamNaid_ = "";
         bitField1_ = (bitField1_ & ~0x00000080);
+        nthExtraSlotsViaFb_ = 0;
+        bitField1_ = (bitField1_ & ~0x00000100);
         return this;
       }
       
@@ -3362,6 +3386,10 @@ public final class UserProto {
           to_bitField1_ |= 0x00000080;
         }
         result.kabamNaid_ = kabamNaid_;
+        if (((from_bitField1_ & 0x00000100) == 0x00000100)) {
+          to_bitField1_ |= 0x00000100;
+        }
+        result.nthExtraSlotsViaFb_ = nthExtraSlotsViaFb_;
         result.bitField0_ = to_bitField0_;
         result.bitField1_ = to_bitField1_;
         onBuilt();
@@ -3498,6 +3526,9 @@ public final class UserProto {
         }
         if (other.hasKabamNaid()) {
           setKabamNaid(other.getKabamNaid());
+        }
+        if (other.hasNthExtraSlotsViaFb()) {
+          setNthExtraSlotsViaFb(other.getNthExtraSlotsViaFb());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3732,6 +3763,11 @@ public final class UserProto {
             case 322: {
               bitField0_ |= 0x40000000;
               facebookId_ = input.readBytes();
+              break;
+            }
+            case 328: {
+              bitField1_ |= 0x00000100;
+              nthExtraSlotsViaFb_ = input.readInt32();
               break;
             }
           }
@@ -4755,6 +4791,27 @@ public final class UserProto {
         onChanged();
       }
       
+      // optional int32 nthExtraSlotsViaFb = 41;
+      private int nthExtraSlotsViaFb_ ;
+      public boolean hasNthExtraSlotsViaFb() {
+        return ((bitField1_ & 0x00000100) == 0x00000100);
+      }
+      public int getNthExtraSlotsViaFb() {
+        return nthExtraSlotsViaFb_;
+      }
+      public Builder setNthExtraSlotsViaFb(int value) {
+        bitField1_ |= 0x00000100;
+        nthExtraSlotsViaFb_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNthExtraSlotsViaFb() {
+        bitField1_ = (bitField1_ & ~0x00000100);
+        nthExtraSlotsViaFb_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullUserProto)
     }
     
@@ -5261,7 +5318,7 @@ public final class UserProto {
       "\003 \001(\0132 .com.lvl6.proto.MinimumClanProto\"" +
       "b\n\031MinimumUserProtoWithLevel\0226\n\014minUserP" +
       "roto\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\r\n\005level\030\002 \001(\005\"\230\007\n\rFullUserProto\022\016\n",
+      "roto\022\r\n\005level\030\002 \001(\005\"\264\007\n\rFullUserProto\022\016\n",
       "\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001" +
       "(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022\022\n\nexperi" +
       "ence\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001(\005\022\022\n\nba" +
@@ -5284,9 +5341,10 @@ public final class UserProto {
       "Badges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\tapsa",
       "larId\030\026 \001(\005\022 \n\030numConsecutiveDaysPlayed\030" +
       "\030 \001(\005\022$\n\034lastWallPostNotificationTime\030\032 " +
-      "\001(\003\022\021\n\tkabamNaid\030\033 \001(\t\"R\n\024StaticLevelInf" +
-      "oProto\022\r\n\005level\030\001 \001(\005\022\032\n\022requiredExperie" +
-      "nce\030\002 \001(\005\022\017\n\007maxCash\030\003 \001(\005B\013B\tUserProto"
+      "\001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\032\n\022nthExtraSlotsV" +
+      "iaFb\030) \001(\005\"R\n\024StaticLevelInfoProto\022\r\n\005le" +
+      "vel\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005\022\017\n" +
+      "\007maxCash\030\003 \001(\005B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5322,7 +5380,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserProto_descriptor,
-              new java.lang.String[] { "UserId", "Name", "Level", "Gems", "Cash", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalMonsterSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "FacebookId", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", },
+              new java.lang.String[] { "UserId", "Name", "Level", "Gems", "Cash", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalMonsterSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "FacebookId", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "NthExtraSlotsViaFb", },
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
           internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor =

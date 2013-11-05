@@ -2,6 +2,7 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -532,15 +533,13 @@ public class InsertUtils implements InsertUtil{
    * assumptions: all the entries at index i across all the lists, 
    * they make up the values for one row to insert into user_currency_history
    */
-  @SuppressWarnings("unchecked") //the generics issue noted below
   public int insertIntoUserCurrencyHistoryMultipleRows(List<Integer> userIds, List<Timestamp> dates, 
       List<Integer> areSilver, List<Integer> changesToCurrencies, List<Integer> previousCurrencies, 
       List<Integer> currentCurrencies, List<String> reasonsForChanges, List<String> details) {
     String tablename = DBConstants.TABLE_USER_CURRENCY_HISTORY;
     
     //did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
-    @SuppressWarnings("rawtypes")
-    Map insertParams = new HashMap<String, List<Object>>();
+    Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
     int numRows = userIds.size();
 
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__USER_ID,
@@ -709,14 +708,12 @@ public class InsertUtils implements InsertUtil{
   }
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public int insertIntoUserTaskStage(List<Long> userTaskIds,
 			List<Integer> stageNums, List<Integer> taskStageMonsterIds, List<Integer> expsGained,
 			List<Integer> silversGained, List<Boolean> monsterPiecesDropped) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
 
-		@SuppressWarnings("rawtypes")
-    Map insertParams = new HashMap<String, List<Object>>();
+    Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 		int numRows = stageNums.size();
 
 		insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, userTaskIds);
@@ -734,7 +731,6 @@ public class InsertUtils implements InsertUtil{
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public int insertIntoTaskStageHistory(
 			List<Long> userTaskStageId, List<Long> userTaskId,
 			List<Integer> stageNum, List<Integer> taskStageMonsterId, List<Integer> expGained,
@@ -742,8 +738,7 @@ public class InsertUtils implements InsertUtil{
 		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
 		int numRows = stageNum.size();
 		
-		@SuppressWarnings("rawtypes")
-    Map insertParams = new HashMap<String, List<Object>>();
+    Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageId);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskId);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNum);
@@ -844,7 +839,7 @@ public class InsertUtils implements InsertUtil{
 			deleteTimes.add(deleteTime);
 		}
 		
-		Map<String, List<Object>> insertParams = new HashMap<String, List<Object>>();
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__ID, monsterForUserIds);
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__USER_ID, userIds);
 		insertParams.put(DBConstants.MONSTER_FOR_USER_DELETED__MONSTER_ID, monsterIds);
@@ -863,6 +858,27 @@ public class InsertUtils implements InsertUtil{
         insertParams, numRows);
     
     return numInserted;
+	}
+
+	@Override
+	public int insertIntoUserFbInviteForSlot(int userId, List<Integer> userIds,
+			Timestamp curTime) {
+		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
+		int amount = userIds.size();
+		
+		List<Integer> inviterIdList = Collections.nCopies(amount, userId);
+		List<Timestamp> timeOfInviteList = Collections.nCopies(amount, curTime);
+		List<Boolean> acceptedList = Collections.nCopies(amount, false);
+		
+		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_ID, inviterIdList);
+		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_ID, userIds);
+		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE, timeOfInviteList);
+		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ACCEPTED, acceptedList);
+		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
+				tableName, insertParams, amount);
+		
+		return numInserted;
 	}
 
 }

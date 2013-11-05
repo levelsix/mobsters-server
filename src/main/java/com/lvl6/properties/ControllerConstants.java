@@ -6,6 +6,8 @@ import com.lvl6.info.CoordinatePair;
 public class ControllerConstants {
 
 	//MOBSTERS CONSTANTS
+	public static final float GEMS_PER_DOLLAR = 10f;//client doesn't need this
+	public static final float MINUTES_PER_GEM = 10f;
 	
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
 	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;

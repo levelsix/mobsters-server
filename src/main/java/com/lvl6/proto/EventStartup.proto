@@ -113,6 +113,8 @@ message StartupResponseProto {
 		optional UserMonsterConstants userMonsterConstants = 18;
 		optional MonsterConstants monsterConstants = 19;
 		
+		optional float minutesPerGem = 20; 
+		
 		message NormStructConstants {
 			optional double minutesToUpgradeForNormStructMultiplier = 1;
 			optional double incomeFromNormStructMultiplier = 2;

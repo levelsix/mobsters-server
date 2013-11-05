@@ -194,6 +194,8 @@ message RemoveMonsterFromBattleTeamResponseProto {
 message IncreaseMonsterInventorySlotRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 numPurchases = 2;
+	//EVERY TIME USER BUYS SLOTS RESET user_facebook_invite_for_slot
+	//no need to update clients that this happened
 }	
 
 message IncreaseMonsterInventorySlotResponseProto {
@@ -204,6 +206,40 @@ message IncreaseMonsterInventorySlotResponseProto {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_FUNDS = 2;
 		FAIL_OTHER = 3;
+	}
+}
+
+//NOTE: NO LOCK IS ACQUIRED FOR FB FRIENDS WHEN INSERTING INTO
+// user_facebook_invite_for_slot TABLE
+message InviteFbFriendsForSlotsRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated string fbFriendIds = 2;		
+}
+
+message InviteFbFriendsForSlotsResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional InviteFbFriendsForSlotsStatus status = 2;
+	
+	enum InviteFbFriendsForSlotsStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+
+message AcceptAndRejectFbInviteForSlotsRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated int32 acceptedInviteIds = 2;
+	repeated int32 rejectedInviteIds = 3;
+}
+
+message AcceptAndRejectFbInviteForSlotsResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional AcceptAndRejectFbInviteForSlotsStatus status = 2;
+	
+	enum AcceptAndRejectFbInviteForSlotsStatus {
+		SUCCESS = 1;
+		FAIL_EXPIRED = 2; //3 PEOPLE ALREADY ACCEPTED INVITE
+		FAIL_ALREADY_BEEN_USED = 3;
 	}
 }
 

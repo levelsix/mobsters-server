@@ -355,6 +355,7 @@ public class MiscMethods {
     mcb.setSecondsToHealPerHealthPoint(ControllerConstants.MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT);
     cb.setMonsterConstants(mcb.build());
     
+    cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
 //    BattleConstants battleConstants = BattleConstants.newBuilder()
 //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
 //        .setBattleWeightGivenToAttackStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_STAT)

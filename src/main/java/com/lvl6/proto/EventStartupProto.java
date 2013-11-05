@@ -2366,6 +2366,10 @@ public final class EventStartupProto {
       boolean hasMonsterConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants getMonsterConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder getMonsterConstantsOrBuilder();
+      
+      // optional float minutesPerGem = 20;
+      boolean hasMinutesPerGem();
+      float getMinutesPerGem();
     }
     public static final class StartupConstants extends
         com.google.protobuf.GeneratedMessage
@@ -6277,6 +6281,16 @@ public final class EventStartupProto {
         return monsterConstants_;
       }
       
+      // optional float minutesPerGem = 20;
+      public static final int MINUTESPERGEM_FIELD_NUMBER = 20;
+      private float minutesPerGem_;
+      public boolean hasMinutesPerGem() {
+        return ((bitField0_ & 0x00020000) == 0x00020000);
+      }
+      public float getMinutesPerGem() {
+        return minutesPerGem_;
+      }
+      
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -6297,6 +6311,7 @@ public final class EventStartupProto {
         numBeginnerSalesAllowed_ = 0;
         userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
         monsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
+        minutesPerGem_ = 0F;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -6366,6 +6381,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00010000) == 0x00010000)) {
           output.writeMessage(19, monsterConstants_);
+        }
+        if (((bitField0_ & 0x00020000) == 0x00020000)) {
+          output.writeFloat(20, minutesPerGem_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -6451,6 +6469,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00010000) == 0x00010000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(19, monsterConstants_);
+        }
+        if (((bitField0_ & 0x00020000) == 0x00020000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeFloatSize(20, minutesPerGem_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -6659,6 +6681,8 @@ public final class EventStartupProto {
             monsterConstantsBuilder_.clear();
           }
           bitField0_ = (bitField0_ & ~0x00040000);
+          minutesPerGem_ = 0F;
+          bitField0_ = (bitField0_ & ~0x00080000);
           return this;
         }
         
@@ -6811,6 +6835,10 @@ public final class EventStartupProto {
           } else {
             result.monsterConstants_ = monsterConstantsBuilder_.build();
           }
+          if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
+            to_bitField0_ |= 0x00020000;
+          }
+          result.minutesPerGem_ = minutesPerGem_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -6929,6 +6957,9 @@ public final class EventStartupProto {
           }
           if (other.hasMonsterConstants()) {
             mergeMonsterConstants(other.getMonsterConstants());
+          }
+          if (other.hasMinutesPerGem()) {
+            setMinutesPerGem(other.getMinutesPerGem());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -7084,6 +7115,11 @@ public final class EventStartupProto {
                 }
                 input.readMessage(subBuilder, extensionRegistry);
                 setMonsterConstants(subBuilder.buildPartial());
+                break;
+              }
+              case 165: {
+                bitField0_ |= 0x00080000;
+                minutesPerGem_ = input.readFloat();
                 break;
               }
             }
@@ -8317,6 +8353,27 @@ public final class EventStartupProto {
             monsterConstants_ = null;
           }
           return monsterConstantsBuilder_;
+        }
+        
+        // optional float minutesPerGem = 20;
+        private float minutesPerGem_ ;
+        public boolean hasMinutesPerGem() {
+          return ((bitField0_ & 0x00080000) == 0x00080000);
+        }
+        public float getMinutesPerGem() {
+          return minutesPerGem_;
+        }
+        public Builder setMinutesPerGem(float value) {
+          bitField0_ |= 0x00080000;
+          minutesPerGem_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearMinutesPerGem() {
+          bitField0_ = (bitField0_ & ~0x00080000);
+          minutesPerGem_ = 0F;
+          onChanged();
+          return this;
         }
         
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
@@ -14764,7 +14821,7 @@ public final class EventStartupProto {
       "oto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n" +
       "\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014" +
       "advertiserId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 " +
-      "\001(\010\"\310!\n\024StartupResponseProto\022\030\n\020serverTi" +
+      "\001(\010\"\337!\n\024StartupResponseProto\022\030\n\020serverTi" +
       "meMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl",
       "6.proto.FullUserProto\022I\n\rstartupStatus\030\003" +
       " \001(\01622.com.lvl6.proto.StartupResponsePro" +
@@ -14813,7 +14870,7 @@ public final class EventStartupProto {
       "\n\013coinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNotifica" +
       "tionProto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.p" +
       "roto.MinimumUserProto\022\023\n\013recruitTime\030\002 \001" +
-      "(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\213\021\n\020Sta" +
+      "(\003\022\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\242\021\n\020Sta" +
       "rtupConstants\022H\n\025inAppPurchasePackages\030\001" +
       " \003(\0132).com.lvl6.proto.InAppPurchasePacka",
       "geProto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxN" +
@@ -14843,36 +14900,36 @@ public final class EventStartupProto {
       "upConstants.UserMonsterConstants\022`\n\020mons" +
       "terConstants\030\023 \001(\0132F.com.lvl6.proto.Star" +
       "tupResponseProto.StartupConstants.Monste" +
-      "rConstants\032\367\001\n\023NormStructConstants\022/\n\'mi" +
-      "nutesToUpgradeForNormStructMultiplier\030\001 " +
-      "\001(\001\022&\n\036incomeFromNormStructMultiplier\030\002 ",
-      "\001(\001\022)\n!upgradeStructCoinCostExponentBase" +
-      "\030\003 \001(\001\022,\n$upgradeStructDiamondCostExpone" +
-      "ntBase\030\004 \001(\001\022.\n&diamondCostForInstantUpg" +
-      "radeMultiplier\030\005 \001(\001\032_\n\031AnimatedSpriteOf" +
-      "fsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002" +
-      " \001(\0132\037.com.lvl6.proto.CoordinateProto\032\232\001" +
-      "\n\rClanConstants\022\035\n\025coinPriceToCreateClan" +
-      "\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002 \001(\005" +
-      "\022\'\n\037maxCharLengthForClanDescription\030\003 \001(" +
-      "\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\032c\n\030Do",
-      "wnloadableNibConstants\022\022\n\nmapNibName\030\001 \001" +
-      "(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShop" +
-      "peNibName\030\003 \001(\t\032y\n\023TournamentConstants\022\022" +
-      "\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005" +
-      "\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowA" +
-      "fterEventEnd\030\004 \001(\005\032\304\001\n\024UserMonsterConsta" +
-      "nts\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initialM" +
-      "axNumMonsterLimit\030\002 \001(\005\022\'\n\037monsterInvent" +
-      "oryIncrementAmount\030\003 \001(\005\022\027\n\017gemPricePerS" +
-      "lot\030\004 \001(\005\022.\n&numFriendsToRecruitToIncrea",
-      "seInventory\030\005 \001(\005\032S\n\020MonsterConstants\022\032\n" +
-      "\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHe" +
-      "alPerHealthPoint\030\002 \001(\002\"A\n\014UpdateStatus\022\r" +
-      "\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR" +
-      "_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_DB" +
-      "\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStartupPr" +
-      "oto"
+      "rConstants\022\025\n\rminutesPerGem\030\024 \001(\002\032\367\001\n\023No" +
+      "rmStructConstants\022/\n\'minutesToUpgradeFor" +
+      "NormStructMultiplier\030\001 \001(\001\022&\n\036incomeFrom",
+      "NormStructMultiplier\030\002 \001(\001\022)\n!upgradeStr" +
+      "uctCoinCostExponentBase\030\003 \001(\001\022,\n$upgrade" +
+      "StructDiamondCostExponentBase\030\004 \001(\001\022.\n&d" +
+      "iamondCostForInstantUpgradeMultiplier\030\005 " +
+      "\001(\001\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timag" +
+      "eName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.p" +
+      "roto.CoordinateProto\032\232\001\n\rClanConstants\022\035" +
+      "\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxChar" +
+      "LengthForClanName\030\002 \001(\005\022\'\n\037maxCharLength" +
+      "ForClanDescription\030\003 \001(\005\022\037\n\027maxCharLengt",
+      "hForClanTag\030\004 \001(\005\032c\n\030DownloadableNibCons" +
+      "tants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNi" +
+      "bName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y" +
+      "\n\023TournamentConstants\022\022\n\nwinsWeight\030\001 \001(" +
+      "\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003" +
+      " \001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(" +
+      "\005\032\304\001\n\024UserMonsterConstants\022\027\n\017maxNumTeam" +
+      "Slots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit" +
+      "\030\002 \001(\005\022\'\n\037monsterInventoryIncrementAmoun" +
+      "t\030\003 \001(\005\022\027\n\017gemPricePerSlot\030\004 \001(\005\022.\n&numF",
+      "riendsToRecruitToIncreaseInventory\030\005 \001(\005" +
+      "\032S\n\020MonsterConstants\022\032\n\022cashPerHealthPoi" +
+      "nt\030\001 \001(\002\022#\n\033secondsToHealPerHealthPoint\030" +
+      "\002 \001(\002\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014" +
+      "MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStar" +
+      "tupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN" +
+      "_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14916,7 +14973,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor =
