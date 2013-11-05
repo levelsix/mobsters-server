@@ -54,6 +54,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	querySb.append(");");
   	
   	String query = querySb.toString();
+  	log.info("query=" + query + "\t values=" + params);
   	Connection conn = DBConnection.get().getConnection();
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
 
