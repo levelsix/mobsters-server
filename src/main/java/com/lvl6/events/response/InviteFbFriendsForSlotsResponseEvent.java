@@ -13,7 +13,7 @@ public class InviteFbFriendsForSlotsResponseEvent extends NormalResponseEvent {
   
   public InviteFbFriendsForSlotsResponseEvent(int playerId){
     super(playerId);
-    eventType = EventProtocolResponse.S_INCREASE_MONSTER_INVENTORY_SLOT_EVENT;
+    eventType = EventProtocolResponse.S_INVITE_FB_FRIENDS_FOR_SLOTS_EVENT;
   }
   
   @Override
