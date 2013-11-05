@@ -42,9 +42,28 @@ import com.lvl6.utils.DBConnection;
   	
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    Map<Integer, UserFacebookInviteForSlot> idsToInvites =
-    		convertRSToInviteIdsToInvites(rs);
+    Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
     return idsToInvites;
+  }
+  
+  public static List<Integer> getUniqueRecipientIdsForInviterId(int userId) {
+  	StringBuffer querySb = new StringBuffer();
+  	querySb.append("SELECT DISTINCT(");
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_ID);
+  	querySb.append(") FROM ");
+  	querySb.append(TABLE_NAME);
+  	querySb.append(" WHERE ");
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_ID);
+  	querySb.append("=?");
+  	String query = querySb.toString();
+  	
+  	log.info("query=" + query);
+  	List<Object> values = new ArrayList<Object>();
+  	values.add(userId);
+  	Connection conn = DBConnection.get().getConnection();
+  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+  	List<Integer> recipientIds = convertRSToInts(rs);
+  	return recipientIds;
   }
   
   private static UserFacebookInviteForSlot convertRSToInvite(ResultSet rs) {
@@ -93,6 +112,24 @@ import com.lvl6.utils.DBConnection;
   		}
   	}
   	return idsToInvites;
+  }
+  
+  private static List<Integer> convertRSToInts(ResultSet rs) {
+  	List<Integer> intList = new ArrayList<Integer>();
+  	if (null != rs) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			while(rs.next()) {
+  				int indexOfFirstAndOnlyColumn = 1;
+  				int anInt = rs.getInt(indexOfFirstAndOnlyColumn); 
+  				intList.add(anInt);
+  			}
+  		} catch(SQLException e) {
+  			log.error("problem with database call.", e);
+  		}
+  	}
+  	return intList;
   }
   
   private static UserFacebookInviteForSlot convertRSRowToInvite(ResultSet rs) throws SQLException {

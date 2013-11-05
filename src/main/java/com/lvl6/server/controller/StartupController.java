@@ -84,6 +84,7 @@ import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
+import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -758,7 +759,11 @@ public class StartupController extends EventController {
   }  
   
   private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User user) {
+  	int userId = user.getId();
+  	List<Integer> recipientIds = UserFacebookInviteForSlotRetrieveUtils
+  			.getUniqueRecipientIdsForInviterId(userId);
   	
+  	resBuilder.addAllUserIdsUsedForExtraSlots(recipientIds);
   }
   
   
