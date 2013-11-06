@@ -87,6 +87,7 @@ import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
+import com.lvl6.retrieveutils.UserFacebookInviteForSlotAcceptedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
@@ -762,68 +763,91 @@ public class StartupController extends EventController {
   }  
   
   private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User user) {
-//  	//FIRST SEND ALL THE USER IDS THAT THE USER INVITED 
-//  	int userId = user.getId();
-//  	//NEED TO GET THE FACEBOOK IDS HE INVITED
-//  	List<String> recipientFacebookIds = UserFacebookInviteForSlotRetrieveUtils
-//  			.getUniqueRecipientFacebookIdsForInviterId(userId);
-//  	
-//  	if (null == recipientFacebookIds || recipientFacebookIds.isEmpty()) {
-//  		return;
-//  	}
-//  	//THEN FROM THOSE FACEBOOK IDS GET THE USER IDS
-//  	List<Integer> recipientIds = RetrieveUtils.userRetrieveUtils()
-//  			.getUserIdsForFacebookIds(recipientFacebookIds);
-//  	if (null == recipientIds || recipientIds.isEmpty()) {
-//  		return;
-//  	}
-//  	
-  	//send all the user ids where this user is the one being invited (the recipient)
+  	//gather up data so as to make only one user retrieval query
+  	int userId = user.getId();
+  	//NEED TO GET THE FACEBOOK IDS HE INVITED AND HAVE ACCEPTED HIS INVITES
+  	List<String> recipientFacebookIds = UserFacebookInviteForSlotAcceptedRetrieveUtils
+  			.getUniqueRecipientFacebookIdsForInviterId(userId);
+  	
+  	//GET THE USERIDS THAT ACCEPTED HIS INVITES
   	String fbId = user.getFacebookId();
   	List<Integer> specificInviteIds = null;
   	Map<Integer, UserFacebookInviteForSlot> idsToInvites = UserFacebookInviteForSlotRetrieveUtils
   			.getSpecificOrAllInvitesForRecipient(fbId, specificInviteIds);
-
-  	if (null != idsToInvites && !idsToInvites.isEmpty()) {
-  	List<Integer> inviterUserIds = new ArrayList<Integer>();
-  	List<UserFacebookInviteForSlotProto> invitesToMe =
-  			createInviteProtos(idsToInvites, inviterUserIds);
-  	resBuilder.addAllInvitesToMeForSlots(invitesToMe);
+  	Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites =
+  			new HashMap<Integer, UserFacebookInviteForSlot>();
+  	//to make it easier later on, get the inviter ids for these invites and
+  	//tie a an inviter id to an invite
+  	List<Integer> inviterUserIds = getInviterIds(idsToInvites, inviterIdsToInvites);
   	
-  		Map<Integer, User> idsToInviters = RetrieveUtils.userRetrieveUtils()
-  				.getUsersByIds(inviterUserIds);
-  		//  	resBuilder.addAllUsersInvitingMeForExtraSlots(inviterUserIds);
-  		for (User u : idsToInviters.values()) {
-  			MinimumUserProtoWithFacebookId inviterProto = 
-  					CreateInfoProtoUtils.createMinimumUserProtoWithFacebookIdFromUser(u);
-  			resBuilder.addUsersInvitingMeForExtraSlots(inviterProto);
+
+  	//GET THE USERS
+  	Map<Integer, User> idsToUsers = RetrieveUtils.userRetrieveUtils()
+  			.getUsersForFacebookIdsOrUserIds(recipientFacebookIds, inviterUserIds);
+  	List<User> recipients = new ArrayList<User>();
+  	List<User> inviters = new ArrayList<User>();
+  	separateUsersIntoRecipientsAndInviters(idsToUsers, recipientFacebookIds,
+  			recipients, inviterUserIds, inviters);
+  	
+  	
+  	//send all the recipients that accepted this user's invite
+  	//THEN FROM THOSE FACEBOOK IDS GET THE USERS
+  	for (User u : recipients) {
+  		MinimumUserProtoWithFacebookId recipientProto = 
+  				CreateInfoProtoUtils.createMinimumUserProtoWithFacebookIdFromUser(u);
+  		resBuilder.addUsersUsedForExtraSlots(recipientProto);
+  	}
+  	
+  	//send all the invites where this user is the one being invited
+  	for (Integer inviterId : inviterUserIds) {
+  		User inviter = idsToUsers.get(inviterId);
+  		UserFacebookInviteForSlot invite = inviterIdsToInvites.get(inviterId);
+  		UserFacebookInviteForSlotProto inviteProto =
+  				CreateInfoProtoUtils.createUserFacebookInviteForSlotProtoFromInvite(invite, inviter);
+  		
+  		resBuilder.addInvitesToMeForSlots(inviteProto);
+  	}
+  }
+  
+  private List<Integer> getInviterIds(Map<Integer, UserFacebookInviteForSlot> idsToInvites,
+  		Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites) {
+  	
+  	List<Integer> inviterIds = new ArrayList<Integer>(); 
+  	for (UserFacebookInviteForSlot invite : idsToInvites.values()) {
+  		int userId = invite.getInviterUserId();
+  		inviterIds.add(userId);
+  		
+  		inviterIdsToInvites.put(userId, invite);
+  	}
+  	return inviterIds;
+  }
+  
+  private void separateUsersIntoRecipientsAndInviters(Map<Integer, User> idsToUsers,
+  		List<String> recipientFacebookIds, List<User> recipients,
+  		List<Integer> inviterUserIds, List<User> inviters) {
+  	
+  	Set<String> recipientFacebookIdsSet = new HashSet<String>(recipientFacebookIds);
+  	
+  	//set the recipients
+  	for (Integer userId : idsToUsers.keySet()) {
+  		User u = idsToUsers.get(userId);
+  		String facebookId = u.getFacebookId();
+  		
+  		if (recipientFacebookIdsSet.contains(facebookId)) {
+  			//this is a recipient
+  			recipients.add(u);
   		}
   	}
   	
-  	
-  	
-  	
-  	//SECOND GET ALL THE USER IDS THAT HELPED THE USER GET SLOTS
-  }
-  
-  private List<UserFacebookInviteForSlotProto> createInviteProtos(
-  		Map<Integer, UserFacebookInviteForSlot> idsToInvites, List<Integer> inviterUserIds) {
-  	List<UserFacebookInviteForSlotProto> inviteProtos =
-  			new ArrayList<UserFacebookInviteForSlotProto>();
-  	
-  	for (UserFacebookInviteForSlot invite : idsToInvites.values()) {
-  		//populate the inviterUserIds
-  		int inviterId = invite.getInviterUserId();
-  		inviterUserIds.add(inviterId);
-  		
-  		UserFacebookInviteForSlotProto inviteProto =  CreateInfoProtoUtils
-  				.createUserFacebookInviteForSlotProtoFromInvite(invite);
-  		inviteProtos.add(inviteProto);
+  	//set the inviters
+  	for (Integer inviterId : inviterUserIds) {
+  		if (idsToUsers.containsKey(inviterId)) {
+  			User u = idsToUsers.get(inviterId);
+  			inviters.add(u);
+  		}
   	}
-  	return inviteProtos;
+  	
   }
-  
-  
   
   
   

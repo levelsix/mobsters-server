@@ -34,14 +34,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private final int MAX_BATTLE_DB_HITS = 5;
   private final int EXTREME_MAX_BATTLE_DB_HITS = 30;
   
+  
   public List<Integer> getUserIdsForFacebookIds(List<String> facebookIds) {
   	int amount = facebookIds.size();
   	List<String> questionMarkList = Collections.nCopies(amount, "?"); 
   	String questionMarks = StringUtils.csvList(questionMarkList);
-  	
+
   	List<Object> params = new ArrayList<Object>();
   	params.addAll(facebookIds);
-  	
+
   	StringBuffer querySb = new StringBuffer();
   	querySb.append("SELECT ");
   	querySb.append(DBConstants.USER__ID);
@@ -52,12 +53,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	querySb.append(" IN (");
   	querySb.append(questionMarks);
   	querySb.append(");");
-  	
+
   	String query = querySb.toString();
   	log.info("query=" + query + "\t values=" + params);
   	Connection conn = DBConnection.get().getConnection();
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
-
   	List<Integer> userIdList = new ArrayList<Integer>();
   	try {
   		if (null == rs) {
@@ -78,7 +78,55 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	} finally {
   		DBConnection.get().close(null, null, conn);
   	}
-    return userIdList;
+  	return userIdList;
+  }
+
+
+  public Map<Integer, User> getUsersForFacebookIdsOrUserIds(List<String> facebookIds,
+  		List<Integer> userIds) {
+  	
+  	List<Object> params = new ArrayList<Object>();
+  	
+  	StringBuffer querySb = new StringBuffer();
+  	querySb.append("SELECT * FROM ");
+  	querySb.append(TABLE_NAME);
+  	querySb.append(" WHERE ");
+  	if (null != facebookIds && !facebookIds.isEmpty()) {
+  		int amount = facebookIds.size();
+  		List<String> questionMarkList = Collections.nCopies(amount, "?"); 
+  		String questionMarks = StringUtils.csvList(questionMarkList);
+
+  		querySb.append(DBConstants.USER__FACEBOOK_ID);
+  		querySb.append(" IN (");
+  		querySb.append(questionMarks);
+  		querySb.append(")");
+  		
+  		if (null != userIds && !userIds.isEmpty()) {
+  			querySb.append(" OR ");
+  		}
+  		
+  		params.addAll(facebookIds);
+  	}
+  	
+  	if (null != userIds && !userIds.isEmpty()) {
+  		int amount = userIds.size();
+  		List<String> questionMarkList = Collections.nCopies(amount, "?");
+  		String questionMarks = StringUtils.csvList(questionMarkList);
+  		
+  		querySb.append(DBConstants.USER__ID);
+			querySb.append(" IN (");
+  		querySb.append(questionMarks);
+  		querySb.append(")");
+  		
+  		params.addAll(userIds);
+		}
+  	
+  	String query = querySb.toString();
+  	log.info("query=" + query + "\t values=" + params);
+  	Connection conn = DBConnection.get().getConnection();
+  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
+  	Map<Integer, User> userMap = convertRSToUserIdToUsersMap(rs);
+    return userMap;
   }
   
   public int numAccountsForUDID(String udid) {

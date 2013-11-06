@@ -902,11 +902,13 @@ public class CreateInfoProtoUtils {
   }
   
   public static UserFacebookInviteForSlotProto createUserFacebookInviteForSlotProtoFromInvite(
-  		UserFacebookInviteForSlot invite) {
+  		UserFacebookInviteForSlot invite, User inviter) {
   	UserFacebookInviteForSlotProto.Builder inviteProtoBuilder =
   			UserFacebookInviteForSlotProto.newBuilder();
   	inviteProtoBuilder.setId(invite.getId());
-  	inviteProtoBuilder.setInviterUserId(invite.getInviterUserId());
+  	MinimumUserProtoWithFacebookId inviterProto =
+  			createMinimumUserProtoWithFacebookIdFromUser(inviter);
+  	inviteProtoBuilder.setInviter(inviterProto);
   	inviteProtoBuilder.setRecipientFacebookId(invite.getRecipientFacebookId());
   	
   	Date d = invite.getTimeOfInvite();
