@@ -223,7 +223,7 @@ public class DBConnection {
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + values, e);
 		} catch (NullPointerException e) {
-			log.error("problem with " + query + ", values are " + values, e);
+			log.error("null pointer problem with " + query + ", values are " + values, e);
 		}
 		return rs;
 	}
@@ -248,7 +248,7 @@ public class DBConnection {
 		} catch (SQLException e) {
 			log.error("problem with " + query + ", values are " + values, e);
 		} catch (NullPointerException e) {
-			log.error("problem with " + query + ", values are " + values, e);
+			log.error("null pointer problem with " + query + ", values are " + values, e);
 		} finally {
 			close(null, stmt, conn);
 		}
@@ -737,11 +737,11 @@ public class DBConnection {
 
 	/*
 	 * Acts like a limited mysql 'replace' transaction. The whole row won't be replaced,
-	 * rather specified columns of rows will be replaced
+	 * rather specified columns of rows will be replaced. THE WHOLE PRIMARY KEY MUST
+	 * BE SPECIFIED!! 
 	 */
 	public int insertOnDuplicateKeyUpdateColumnsAbsolute(String tableName,
-			List<Map<String, Object>> newRows, Set<String> replaceTheseColumns,
-			Set<String> unchangedColumns) {
+			List<Map<String, Object>> newRows, Set<String> replaceTheseColumns) {
 		
 		List<String> columns = new ArrayList<String>();
 		List<String> questions =  new ArrayList<String>();
@@ -759,7 +759,7 @@ public class DBConnection {
 		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName,
 				columns, questions, numberOfQuestionLists, isInsert);
 		//append the "ON DUPLICATE KEY UPDATE" part
-		transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns, unchangedColumns);
+		transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns);
 		
 		numUpdated = queryDbAndReturnNumUpdated(query, valuesListCollection);
 		return numUpdated;
@@ -873,7 +873,7 @@ public class DBConnection {
 		query.append(questionListsStr);
 		
 		String queryStr = query.toString();
-		log.info("(constructInsertOrReplaceIntoTableValuesSQLQuery()) sqlQuery: " + queryStr);
+//		log.info("(constructInsertOrReplaceIntoTableValuesSQLQuery()) sqlQuery: " + queryStr);
 		return queryStr;
 	}
 	
@@ -893,7 +893,7 @@ public class DBConnection {
 	}
 	
 	private void transformToOnDuplicateKeyUpdateQuery(String query, 
-			Set<String> replaceTheseColumns, Set<String> unchangedColumns) {
+			Set<String> replaceTheseColumns) {
 		
 		StringBuffer newQuery = new StringBuffer();
 		newQuery.append(query);
@@ -913,13 +913,6 @@ public class DBConnection {
 			updateClause.append(")");
 			
 			updateClauseList.add(updateClause.toString());
-		}
-		
-		for (String unchangedColumn : unchangedColumns) {
-			StringBuffer noOpUpdateClause = new StringBuffer();
-			noOpUpdateClause.append(unchangedColumn);
-			noOpUpdateClause.append("=");
-			noOpUpdateClause.append(unchangedColumn);
 		}
 		
 		String allUpdateClauses = StringUtils.getListInString(updateClauseList, ", ");
