@@ -27,12 +27,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
-  private static final String TABLE_NAME = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
+  private static final String TABLE_NAME = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED;
   
   public static UserFacebookInviteForSlotAccepted getInviteForId(int inviteId) {
     Connection conn = DBConnection.get().getConnection();
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID, inviteId);
+    absoluteConditionParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__ID, inviteId);
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
     UserFacebookInviteForSlotAccepted invite = convertRSToInvite(rs);
@@ -41,7 +41,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   public static Map<Integer, UserFacebookInviteForSlotAccepted> getInviteIdsToInvitesForInviterUserId(int userId) {
   	TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
-  	paramsToVals.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, userId);
+  	paramsToVals.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITER_USER_ID, userId);
   	
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
@@ -57,7 +57,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     querySb.append("SELECT * FROM ");
     querySb.append(TABLE_NAME); 
     querySb.append(" WHERE ");
-    querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
+    querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__RECIPIENT_FACEBOOK_ID);
     querySb.append("=?");
     List <Object> values = new ArrayList<Object>();
     values.add(recipientFacebookId);
@@ -66,7 +66,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     if (null != specificInviteIds && !specificInviteIds.isEmpty()) {
     	log.debug("retrieving UserFacebookInviteForSlotAccepted with ids " + specificInviteIds);
     	querySb.append(" AND ");
-    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__ID);
     	querySb.append(" IN (");
     	querySb.append(StringUtils.csvList(specificInviteIds));
     	querySb.append(");");
@@ -85,11 +85,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId) {
   	StringBuffer querySb = new StringBuffer();
   	querySb.append("SELECT DISTINCT(");
-  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__RECIPIENT_FACEBOOK_ID);
   	querySb.append(") FROM ");
   	querySb.append(TABLE_NAME);
   	querySb.append(" WHERE ");
-  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITER_USER_ID);
   	querySb.append("=?");
   	String query = querySb.toString();
   	
@@ -105,11 +105,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public static Set<Integer> getUniqueInviterUserIdsForRequesterId(String facebookId) {
   	StringBuffer querySb = new StringBuffer();
   	querySb.append("SELECT DISTINCT(");
-  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITER_USER_ID);
   	querySb.append(") FROM ");
   	querySb.append(TABLE_NAME);
   	querySb.append(" WHERE ");
-  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__RECIPIENT_FACEBOOK_ID);
   	querySb.append("=?");
   	String query = querySb.toString();
   	
@@ -123,31 +123,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   private static UserFacebookInviteForSlotAccepted convertRSToInvite(ResultSet rs) {
-    List<UserFacebookInviteForSlotAccepted> utList = new ArrayList<UserFacebookInviteForSlotAccepted>();
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
-        while(rs.next()) {  //should only be one
+        if (rs.next()) {  //should only be one
         	UserFacebookInviteForSlotAccepted invite = convertRSRowToInvite(rs);
-          utList.add(invite);
+        	return invite;
         }
       } catch (SQLException e) {
         log.error("problem with database call.", e);
         
       }
     }
-    
-    //error checking. There should only be one row in user_task table for any user
-    if (utList.isEmpty()) {
-      return null;
-    } else {
-      if (utList.size() > 1) {
-        log.error("unexpected error: user has more than one user_task. userTasks=" +
-            utList);
-      }
-      return utList.get(0);
-    }
+    return null;
   }
   
   private static Map<Integer, UserFacebookInviteForSlotAccepted> convertRSToInviteIdsToInvites(ResultSet rs) {
