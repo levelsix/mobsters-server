@@ -228,7 +228,7 @@ message InviteFbFriendsForSlotsResponseProto {
 }
 
 message AcceptAndRejectFbInviteForSlotsRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithFacebookId sender = 1;
 	//server records all valid accepts, does not enforce max 3 accepts per inviter
 	repeated int32 acceptedInviteIds = 2;
 	repeated int32 rejectedInviteIds = 3;
@@ -236,7 +236,7 @@ message AcceptAndRejectFbInviteForSlotsRequestProto {
 
 //server sends this to all the inviters in acceptedInviteIds
 message AcceptAndRejectFbInviteForSlotsResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithFacebookId sender = 1;
 	optional AcceptAndRejectFbInviteForSlotsStatus status = 2;
 	
 	enum AcceptAndRejectFbInviteForSlotsStatus {

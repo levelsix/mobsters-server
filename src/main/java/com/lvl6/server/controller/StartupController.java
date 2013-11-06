@@ -76,6 +76,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.UserProto.FullUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.StaticLevelInfoProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
@@ -85,7 +86,6 @@ import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
-import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -780,7 +780,16 @@ public class StartupController extends EventController {
   	String fbId = user.getFacebookId();
   	List<Integer> inviterUserIds = UserFacebookInviteForSlotRetrieveUtils
   			.getUniqueInviterUserIdsForRequesterId(fbId);
-//  	resBuilder.addAllUserIdsInvitingMeForExtraSlots(inviterUserIds);
+  	if (null != inviterUserIds && !inviterUserIds.isEmpty()) {
+  		Map<Integer, User> idsToInviters = RetrieveUtils.userRetrieveUtils()
+  				.getUsersByIds(inviterUserIds);
+  		//  	resBuilder.addAllUsersInvitingMeForExtraSlots(inviterUserIds);
+  		for (User u : idsToInviters.values()) {
+  			MinimumUserProtoWithFacebookId inviterProto = 
+  					CreateInfoProtoUtils.createMinimumUserProtoWithFacebookIdFromUser(u);
+  			resBuilder.addUsersInvitingMeForExtraSlots(inviterProto);
+  		}
+  	}
   	
   	//SECOND GET ALL THE USER IDS THAT HELPED THE USER GET SLOTS
   }

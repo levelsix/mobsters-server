@@ -84,6 +84,7 @@ import com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
@@ -130,6 +131,18 @@ public class CreateInfoProtoUtils {
   public static MinimumUserProtoWithLevel createMinimumUserProtoWithLevelFromUser(User u) {
     MinimumUserProto mup = createMinimumUserProtoFromUser(u);
     return MinimumUserProtoWithLevel.newBuilder().setMinUserProto(mup).setLevel(u.getLevel()).build();
+  }
+  
+  public static MinimumUserProtoWithFacebookId createMinimumUserProtoWithFacebookIdFromUser(User u) {
+  	MinimumUserProto mup = createMinimumUserProtoFromUser(u);
+  	MinimumUserProtoWithFacebookId.Builder b = MinimumUserProtoWithFacebookId.newBuilder();
+  	b.setMinUserProto(mup);
+  	String facebookId = u.getFacebookId();
+  	if (null != facebookId) {
+  		b.setFacebookId(facebookId);
+  	}
+  	
+  	return b.build();
   }
 
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u, UserClanStatus s) {
