@@ -21,6 +21,7 @@ import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.ExpansionCost;
+import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -38,8 +39,8 @@ import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
-import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.UserClan;
+import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
@@ -86,6 +87,7 @@ import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
+import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -897,6 +899,27 @@ public class CreateInfoProtoUtils {
     }
     
     return mpb.build();
+  }
+  
+  public static UserFacebookInviteForSlotProto createUserFacebookInviteForSlotProtoFromInvite(
+  		UserFacebookInviteForSlot invite) {
+  	UserFacebookInviteForSlotProto.Builder inviteProtoBuilder =
+  			UserFacebookInviteForSlotProto.newBuilder();
+  	inviteProtoBuilder.setId(invite.getId());
+  	inviteProtoBuilder.setInviterUserId(invite.getInviterUserId());
+  	inviteProtoBuilder.setRecipientFacebookId(invite.getRecipientFacebookId());
+  	
+  	Date d = invite.getTimeOfInvite();
+  	if (null != d) {
+  		inviteProtoBuilder.setTimeOfInvite(d.getTime());
+  	}
+  	
+  	d = invite.getTimeAccepted();
+  	if (null != d) {
+  		inviteProtoBuilder.setTimeAccepted(d.getTime());
+  	}
+  	
+  	return inviteProtoBuilder.build();
   }
 
 }

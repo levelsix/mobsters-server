@@ -51,6 +51,7 @@ import com.lvl6.info.StaticLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
+import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -78,6 +79,7 @@ import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.StaticLevelInfoProto;
+import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
@@ -778,9 +780,16 @@ public class StartupController extends EventController {
 //  	
   	//send all the user ids where this user is the one being invited (the recipient)
   	String fbId = user.getFacebookId();
-  	List<Integer> inviterUserIds = UserFacebookInviteForSlotRetrieveUtils
-  			.getUniqueInviterUserIdsForRequesterId(fbId);
-  	if (null != inviterUserIds && !inviterUserIds.isEmpty()) {
+  	List<Integer> specificInviteIds = null;
+  	Map<Integer, UserFacebookInviteForSlot> idsToInvites = UserFacebookInviteForSlotRetrieveUtils
+  			.getSpecificOrAllInvitesForRecipient(fbId, specificInviteIds);
+
+  	if (null != idsToInvites && !idsToInvites.isEmpty()) {
+  	List<Integer> inviterUserIds = new ArrayList<Integer>();
+  	List<UserFacebookInviteForSlotProto> invitesToMe =
+  			createInviteProtos(idsToInvites, inviterUserIds);
+  	resBuilder.addAllInvitesToMeForSlots(invitesToMe);
+  	
   		Map<Integer, User> idsToInviters = RetrieveUtils.userRetrieveUtils()
   				.getUsersByIds(inviterUserIds);
   		//  	resBuilder.addAllUsersInvitingMeForExtraSlots(inviterUserIds);
@@ -791,10 +800,28 @@ public class StartupController extends EventController {
   		}
   	}
   	
+  	
+  	
+  	
   	//SECOND GET ALL THE USER IDS THAT HELPED THE USER GET SLOTS
   }
   
-  
+  private List<UserFacebookInviteForSlotProto> createInviteProtos(
+  		Map<Integer, UserFacebookInviteForSlot> idsToInvites, List<Integer> inviterUserIds) {
+  	List<UserFacebookInviteForSlotProto> inviteProtos =
+  			new ArrayList<UserFacebookInviteForSlotProto>();
+  	
+  	for (UserFacebookInviteForSlot invite : idsToInvites.values()) {
+  		//populate the inviterUserIds
+  		int inviterId = invite.getInviterUserId();
+  		inviterUserIds.add(inviterId);
+  		
+  		UserFacebookInviteForSlotProto inviteProto =  CreateInfoProtoUtils
+  				.createUserFacebookInviteForSlotProtoFromInvite(invite);
+  		inviteProtos.add(inviteProto);
+  	}
+  	return inviteProtos;
+  }
   
   
   

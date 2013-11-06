@@ -2373,6 +2373,609 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithFacebookId)
   }
   
+  public interface UserFacebookInviteForSlotProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 id = 1;
+    boolean hasId();
+    int getId();
+    
+    // optional int32 inviterUserId = 2;
+    boolean hasInviterUserId();
+    int getInviterUserId();
+    
+    // optional string recipientFacebookId = 3;
+    boolean hasRecipientFacebookId();
+    String getRecipientFacebookId();
+    
+    // optional int64 timeOfInvite = 4;
+    boolean hasTimeOfInvite();
+    long getTimeOfInvite();
+    
+    // optional int64 timeAccepted = 5;
+    boolean hasTimeAccepted();
+    long getTimeAccepted();
+  }
+  public static final class UserFacebookInviteForSlotProto extends
+      com.google.protobuf.GeneratedMessage
+      implements UserFacebookInviteForSlotProtoOrBuilder {
+    // Use UserFacebookInviteForSlotProto.newBuilder() to construct.
+    private UserFacebookInviteForSlotProto(Builder builder) {
+      super(builder);
+    }
+    private UserFacebookInviteForSlotProto(boolean noInit) {}
+    
+    private static final UserFacebookInviteForSlotProto defaultInstance;
+    public static UserFacebookInviteForSlotProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public UserFacebookInviteForSlotProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 id = 1;
+    public static final int ID_FIELD_NUMBER = 1;
+    private int id_;
+    public boolean hasId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getId() {
+      return id_;
+    }
+    
+    // optional int32 inviterUserId = 2;
+    public static final int INVITERUSERID_FIELD_NUMBER = 2;
+    private int inviterUserId_;
+    public boolean hasInviterUserId() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getInviterUserId() {
+      return inviterUserId_;
+    }
+    
+    // optional string recipientFacebookId = 3;
+    public static final int RECIPIENTFACEBOOKID_FIELD_NUMBER = 3;
+    private java.lang.Object recipientFacebookId_;
+    public boolean hasRecipientFacebookId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public String getRecipientFacebookId() {
+      java.lang.Object ref = recipientFacebookId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          recipientFacebookId_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getRecipientFacebookIdBytes() {
+      java.lang.Object ref = recipientFacebookId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        recipientFacebookId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional int64 timeOfInvite = 4;
+    public static final int TIMEOFINVITE_FIELD_NUMBER = 4;
+    private long timeOfInvite_;
+    public boolean hasTimeOfInvite() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public long getTimeOfInvite() {
+      return timeOfInvite_;
+    }
+    
+    // optional int64 timeAccepted = 5;
+    public static final int TIMEACCEPTED_FIELD_NUMBER = 5;
+    private long timeAccepted_;
+    public boolean hasTimeAccepted() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public long getTimeAccepted() {
+      return timeAccepted_;
+    }
+    
+    private void initFields() {
+      id_ = 0;
+      inviterUserId_ = 0;
+      recipientFacebookId_ = "";
+      timeOfInvite_ = 0L;
+      timeAccepted_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, id_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, inviterUserId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getRecipientFacebookIdBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt64(4, timeOfInvite_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, timeAccepted_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, id_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, inviterUserId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getRecipientFacebookIdBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(4, timeOfInvite_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, timeAccepted_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.UserProto.UserFacebookInviteForSlotProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        id_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        inviterUserId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        recipientFacebookId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        timeOfInvite_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        timeAccepted_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto getDefaultInstanceForType() {
+        return com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto build() {
+        com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto buildPartial() {
+        com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto result = new com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.id_ = id_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.inviterUserId_ = inviterUserId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.recipientFacebookId_ = recipientFacebookId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.timeOfInvite_ = timeOfInvite_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.timeAccepted_ = timeAccepted_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto) {
+          return mergeFrom((com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto other) {
+        if (other == com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.getDefaultInstance()) return this;
+        if (other.hasId()) {
+          setId(other.getId());
+        }
+        if (other.hasInviterUserId()) {
+          setInviterUserId(other.getInviterUserId());
+        }
+        if (other.hasRecipientFacebookId()) {
+          setRecipientFacebookId(other.getRecipientFacebookId());
+        }
+        if (other.hasTimeOfInvite()) {
+          setTimeOfInvite(other.getTimeOfInvite());
+        }
+        if (other.hasTimeAccepted()) {
+          setTimeAccepted(other.getTimeAccepted());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              inviterUserId_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              recipientFacebookId_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              timeOfInvite_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              timeAccepted_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 id = 1;
+      private int id_ ;
+      public boolean hasId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getId() {
+        return id_;
+      }
+      public Builder setId(int value) {
+        bitField0_ |= 0x00000001;
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        id_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 inviterUserId = 2;
+      private int inviterUserId_ ;
+      public boolean hasInviterUserId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getInviterUserId() {
+        return inviterUserId_;
+      }
+      public Builder setInviterUserId(int value) {
+        bitField0_ |= 0x00000002;
+        inviterUserId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearInviterUserId() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        inviterUserId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional string recipientFacebookId = 3;
+      private java.lang.Object recipientFacebookId_ = "";
+      public boolean hasRecipientFacebookId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public String getRecipientFacebookId() {
+        java.lang.Object ref = recipientFacebookId_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          recipientFacebookId_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setRecipientFacebookId(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        recipientFacebookId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRecipientFacebookId() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        recipientFacebookId_ = getDefaultInstance().getRecipientFacebookId();
+        onChanged();
+        return this;
+      }
+      void setRecipientFacebookId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        recipientFacebookId_ = value;
+        onChanged();
+      }
+      
+      // optional int64 timeOfInvite = 4;
+      private long timeOfInvite_ ;
+      public boolean hasTimeOfInvite() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public long getTimeOfInvite() {
+        return timeOfInvite_;
+      }
+      public Builder setTimeOfInvite(long value) {
+        bitField0_ |= 0x00000008;
+        timeOfInvite_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTimeOfInvite() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        timeOfInvite_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 timeAccepted = 5;
+      private long timeAccepted_ ;
+      public boolean hasTimeAccepted() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public long getTimeAccepted() {
+        return timeAccepted_;
+      }
+      public Builder setTimeAccepted(long value) {
+        bitField0_ |= 0x00000010;
+        timeAccepted_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTimeAccepted() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        timeAccepted_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserFacebookInviteForSlotProto)
+    }
+    
+    static {
+      defaultInstance = new UserFacebookInviteForSlotProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserFacebookInviteForSlotProto)
+  }
+  
   public interface FullUserProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -5814,6 +6417,11 @@ public final class UserProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserProtoWithFacebookId_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullUserProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -5844,33 +6452,36 @@ public final class UserProto {
       "roto\022\r\n\005level\030\002 \001(\005\"l\n\036MinimumUserProtoW",
       "ithFacebookId\0226\n\014minUserProto\030\001 \001(\0132 .co" +
       "m.lvl6.proto.MinimumUserProto\022\022\n\nfaceboo" +
-      "kId\030\002 \001(\t\"\264\007\n\rFullUserProto\022\016\n\006userId\030\001 " +
-      "\001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\014\n\004gems" +
-      "\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022\022\n\nexperience\030\006 \001(\005" +
-      "\022\026\n\016tasksCompleted\030\007 \001(\005\022\022\n\nbattlesWon\030\010" +
-      " \001(\005\022\023\n\013battlesLost\030\t \001(\005\022\r\n\005flees\030\n \001(\005" +
-      "\022\024\n\014referralCode\030\013 \001(\t\022\024\n\014numReferrals\030\014" +
-      " \001(\005\022\025\n\rlastLoginTime\030\016 \001(\003\022\026\n\016lastLogou" +
-      "tTime\030\017 \001(\003\022\016\n\006isFake\030\023 \001(\010\022\017\n\007isAdmin\030\025",
-      " \001(\010\022$\n\034numCoinsRetrievedFromStructs\030\027 \001" +
-      "(\005\022.\n\004clan\030\031 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mClanProto\022\033\n\023hasReceivedfbReward\030\034 \001(\010\022" +
-      "!\n\031numAdditionalMonsterSlots\030\035 \001(\005\022!\n\031nu" +
-      "mBeginnerSalesPurchased\030\036 \001(\005\022\027\n\017hasActi" +
-      "veShield\030\037 \001(\010\022\025\n\rshieldEndTime\030  \001(\003\022\013\n" +
-      "\003elo\030! \001(\005\022\014\n\004rank\030\" \001(\t\022\026\n\016lastTimeQueu" +
-      "ed\030# \001(\003\022\022\n\nattacksWon\030$ \001(\005\022\023\n\013defenses" +
-      "Won\030% \001(\005\022\023\n\013attacksLost\030& \001(\005\022\024\n\014defens" +
-      "esLost\030\' \001(\005\022\022\n\nfacebookId\030( \001(\t\022\014\n\004udid",
-      "\030\r \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\"\n\032lastBattl" +
-      "eNotificationTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001" +
-      "(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(" +
-      "\005\022 \n\030numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034l" +
-      "astWallPostNotificationTime\030\032 \001(\003\022\021\n\tkab" +
-      "amNaid\030\033 \001(\t\022\032\n\022nthExtraSlotsViaFb\030) \001(\005" +
-      "\"R\n\024StaticLevelInfoProto\022\r\n\005level\030\001 \001(\005\022" +
-      "\032\n\022requiredExperience\030\002 \001(\005\022\017\n\007maxCash\030\003" +
-      " \001(\005B\013B\tUserProto"
+      "kId\030\002 \001(\t\"\214\001\n\036UserFacebookInviteForSlotP" +
+      "roto\022\n\n\002id\030\001 \001(\005\022\025\n\rinviterUserId\030\002 \001(\005\022" +
+      "\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014timeOfIn" +
+      "vite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\"\264\007\n\rFul" +
+      "lUserProto\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t" +
+      "\022\r\n\005level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 " +
+      "\001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016tasksComplete" +
+      "d\030\007 \001(\005\022\022\n\nbattlesWon\030\010 \001(\005\022\023\n\013battlesLo",
+      "st\030\t \001(\005\022\r\n\005flees\030\n \001(\005\022\024\n\014referralCode\030" +
+      "\013 \001(\t\022\024\n\014numReferrals\030\014 \001(\005\022\025\n\rlastLogin" +
+      "Time\030\016 \001(\003\022\026\n\016lastLogoutTime\030\017 \001(\003\022\016\n\006is" +
+      "Fake\030\023 \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoinsR" +
+      "etrievedFromStructs\030\027 \001(\005\022.\n\004clan\030\031 \001(\0132" +
+      " .com.lvl6.proto.MinimumClanProto\022\033\n\023has" +
+      "ReceivedfbReward\030\034 \001(\010\022!\n\031numAdditionalM" +
+      "onsterSlots\030\035 \001(\005\022!\n\031numBeginnerSalesPur" +
+      "chased\030\036 \001(\005\022\027\n\017hasActiveShield\030\037 \001(\010\022\025\n" +
+      "\rshieldEndTime\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004ran",
+      "k\030\" \001(\t\022\026\n\016lastTimeQueued\030# \001(\003\022\022\n\nattac" +
+      "ksWon\030$ \001(\005\022\023\n\013defensesWon\030% \001(\005\022\023\n\013atta" +
+      "cksLost\030& \001(\005\022\024\n\014defensesLost\030\' \001(\005\022\022\n\nf" +
+      "acebookId\030( \001(\t\022\014\n\004udid\030\r \001(\t\022\023\n\013deviceT" +
+      "oken\030\020 \001(\t\022\"\n\032lastBattleNotificationTime" +
+      "\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTime\030" +
+      "\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numConsecuti" +
+      "veDaysPlayed\030\030 \001(\005\022$\n\034lastWallPostNotifi" +
+      "cationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\032\n\022n" +
+      "thExtraSlotsViaFb\030) \001(\005\"R\n\024StaticLevelIn",
+      "foProto\022\r\n\005level\030\001 \001(\005\022\032\n\022requiredExperi" +
+      "ence\030\002 \001(\005\022\017\n\007maxCash\030\003 \001(\005B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5909,8 +6520,16 @@ public final class UserProto {
               new java.lang.String[] { "MinUserProto", "FacebookId", },
               com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.class,
               com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.Builder.class);
-          internal_static_com_lvl6_proto_FullUserProto_descriptor =
+          internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor =
             getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor,
+              new java.lang.String[] { "Id", "InviterUserId", "RecipientFacebookId", "TimeOfInvite", "TimeAccepted", },
+              com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.class,
+              com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.Builder.class);
+          internal_static_com_lvl6_proto_FullUserProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
           internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserProto_descriptor,
@@ -5918,7 +6537,7 @@ public final class UserProto {
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
           internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor,
