@@ -50,6 +50,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
   //recipientFacebookId assumed to be not null
   public static Map<Integer, UserFacebookInviteForSlot> getSpecificOrAllInvitesForRecipient(
   		String recipientFacebookId, List<Integer> specificInviteIds) {
+  	if (null == recipientFacebookId || recipientFacebookId.isEmpty()) {
+  		return new HashMap<Integer, UserFacebookInviteForSlot>();
+  	}
     
     StringBuffer querySb = new StringBuffer();
     querySb.append("SELECT * FROM ");
