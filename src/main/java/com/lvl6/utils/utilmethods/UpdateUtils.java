@@ -840,7 +840,8 @@ public class UpdateUtils implements UpdateUtil {
 			values.add(recipientFacebookId);
 			
 			String query = querySb.toString();
-			log.info("updateUserFacebookInviteForSlotAcceptTime query=" + query);
+			log.info("\t\t\t\t updateUserFacebookInviteForSlotAcceptTime query=" + query +
+					"\t values=" + values);
 			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
 			
 			return numUpdated;
