@@ -268,10 +268,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		List<Integer> acceptedInviteIds, List<Integer> rejectedInviteIds,
   		Map<Integer, UserFacebookInviteForSlot> idsToInvitesInDb,
   		Timestamp acceptTime) {
-  	log.info("idsToInvitesInDb=" + idsToInvitesInDb);
+  	log.info("idsToInvitesInDb=" + idsToInvitesInDb + "\t acceptedInviteIds=" +
+  			acceptedInviteIds + "\t rejectedInviteIds=" + rejectedInviteIds);
   	
   	//update the acceptTimes for the acceptedInviteIds
-  	if (!rejectedInviteIds.isEmpty()) {
+  	if (!acceptedInviteIds.isEmpty()) {
   		int num = UpdateUtils.get().updateUserFacebookInviteForSlotAcceptTime(
   				userFacebookId, acceptedInviteIds, acceptTime);
   		log.info("\t\t\t\t\t\t\t num acceptedInviteIds updated: " + num + "\t invites=" +
