@@ -785,10 +785,6 @@ public class StartupController extends EventController {
   	Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites =
   			new HashMap<Integer, UserFacebookInviteForSlot>();
   	List<Integer> inviterUserIds = getInviterIds(idsToInvites, inviterIdsToInvites);
-  	log.info("where current user is recipient. idsToInvites=" + idsToInvites);
-  	log.info("inviterIdsToInvites=" + inviterIdsToInvites);
-  	log.info("inviterUserIds=" + inviterUserIds);
-  	
   	
   	
   	//base case where user never did any invites
@@ -797,6 +793,7 @@ public class StartupController extends EventController {
   		//no facebook stuff
   		return;
   	}
+  	
 
   	//GET THE USERS
   	Map<Integer, User> idsToUsers = RetrieveUtils.userRetrieveUtils()
@@ -821,7 +818,6 @@ public class StartupController extends EventController {
   		UserFacebookInviteForSlotProto inviteProto =
   				CreateInfoProtoUtils.createUserFacebookInviteForSlotProtoFromInvite(invite, inviter);
   		
-  		log.info("\t\t klajdflajf  \t\t inviteProto=" + inviteProto);
   		resBuilder.addInvitesToMeForSlots(inviteProto);
   	}
   }
