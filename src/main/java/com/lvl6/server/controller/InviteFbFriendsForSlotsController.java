@@ -98,8 +98,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	for (Integer recipientUserId : recipientUserIds) {
       		InviteFbFriendsForSlotsResponseEvent newResEvent =
       				new InviteFbFriendsForSlotsResponseEvent(recipientUserId);
-          resEvent.setTag(0);
-          resEvent.setInviteFbFriendsForSlotsResponseProto(responseProto);
+      		newResEvent.setTag(0);
+      		newResEvent.setInviteFbFriendsForSlotsResponseProto(responseProto);
           server.writeEvent(newResEvent);
       	}
       }
