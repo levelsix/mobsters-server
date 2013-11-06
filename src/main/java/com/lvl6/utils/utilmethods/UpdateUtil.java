@@ -152,4 +152,6 @@ public interface UpdateUtil {
   
   public abstract int updateCompleteUserMonster(List<Long> userMonsterIds);
   
+  public abstract int updateUserFacebookInviteForSlotAcceptTime(String recipientFacebookId,
+  		List<Integer> acceptedInviteIds, Timestamp acceptTime);
 }

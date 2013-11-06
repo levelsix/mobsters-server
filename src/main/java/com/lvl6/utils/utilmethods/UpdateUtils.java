@@ -812,4 +812,38 @@ public class UpdateUtils implements UpdateUtil {
 			return numUpdated;
 		}
 
+		@Override
+		public int updateUserFacebookInviteForSlotAcceptTime(String recipientFacebookId,
+				List<Integer> acceptedInviteIds, Timestamp acceptTime) {
+			String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
+			int size = acceptedInviteIds.size();
+			List<String> questions = Collections.nCopies(size, "?");
+			List<Object> values = new ArrayList<Object>();
+			
+			StringBuffer querySb = new StringBuffer();
+			querySb.append("UPDATE ");
+			querySb.append(tableName);
+			querySb.append(" SET ");
+			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
+			querySb.append("=? WHERE ");
+			values.add(acceptTime);
+			
+			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+			querySb.append(" IN (");
+			String questionsStr = StringUtils.csvList(questions);
+			querySb.append(questionsStr);
+			querySb.append(") AND ");
+			values.add(acceptedInviteIds);
+			
+			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
+			querySb.append("=?");
+			values.add(recipientFacebookId);
+			
+			String query = querySb.toString();
+			log.info("updateUserFacebookInviteForSlotAcceptTime query=" + query);
+			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+			
+			return numUpdated;
+		}
+
 }
