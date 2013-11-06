@@ -772,14 +772,20 @@ public class StartupController extends EventController {
   	//GET THE USERIDS THAT ACCEPTED HIS INVITES
   	String fbId = user.getFacebookId();
   	List<Integer> specificInviteIds = null;
-  	Map<Integer, UserFacebookInviteForSlot> idsToInvites = UserFacebookInviteForSlotRetrieveUtils
+  	Map<Integer, UserFacebookInviteForSlot> idsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
+  	
+  	//base case where user does not have facebook id
+  	if (null != fbId && !fbId.isEmpty()) {
+  		idsToInvites = UserFacebookInviteForSlotRetrieveUtils
   			.getSpecificOrAllInvitesForRecipient(fbId, specificInviteIds);
+  	}
   	Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites =
   			new HashMap<Integer, UserFacebookInviteForSlot>();
   	//to make it easier later on, get the inviter ids for these invites and
   	//tie a an inviter id to an invite
   	List<Integer> inviterUserIds = getInviterIds(idsToInvites, inviterIdsToInvites);
   	
+  	//base case where user never did any invites
   	if ((null == recipientFacebookIds || recipientFacebookIds.isEmpty()) &&
   			(null == inviterUserIds || inviterUserIds.isEmpty())) {
   		//no facebook stuff
