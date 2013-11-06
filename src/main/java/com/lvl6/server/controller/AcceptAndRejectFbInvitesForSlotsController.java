@@ -281,7 +281,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	//DELETE THE rejectedInviteIds THAT ARE ALREADY IN DB
   	if (!rejectedInviteIds.isEmpty()) {
-  		int num = DeleteUtils.get().deleteUserFacebookInviteForSlots(rejectedInviteIds);
+  		int num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(rejectedInviteIds);
   		log.info("num rejectedInviteIds deleted: " + num + "\t invites=" +
   				rejectedInviteIds);
   	}

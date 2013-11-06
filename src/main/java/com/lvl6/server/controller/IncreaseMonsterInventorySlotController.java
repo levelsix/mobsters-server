@@ -24,6 +24,7 @@ import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProt
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component @DependsOn("gameServer") public class IncreaseMonsterInventorySlotController extends EventController {
 
@@ -96,6 +97,9 @@ import com.lvl6.utils.RetrieveUtils;
       	server.writeEvent(resEventUpdate);
       	
       	writeToUserCurrencyHistory(aUser, date, money, previousGems, numSlots, gemPricePerSlot);
+      	
+      	//delete the user's facebook invites for slots
+      	deleteInvitesForSlotsAfterPurchase(userId, money);
       }
     } catch (Exception e) {
       log.error("exception in IncreaseMonsterInventorySlotController processEvent", e);
@@ -147,6 +151,7 @@ import com.lvl6.utils.RetrieveUtils;
   			numSlots, cost);
   	if (!success) {
   		log.error("problem with updating user monster inventory slots and diamonds");
+  		success = false;
   	} else {
   		if (0 != cost) {
   			money.put(MiscMethods.gems, cost);
@@ -170,6 +175,17 @@ import com.lvl6.utils.RetrieveUtils;
 //    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
 //        previousGemsCash, reasonsForChanges);
 //    
+  }
+  
+  //after user buys slots, delete all accepted and unaccepted invites for slots
+  private void deleteInvitesForSlotsAfterPurchase(int userId, Map<String, Integer> money) {
+  	if (money.isEmpty()) {
+  		return;
+  	}
+  	
+  	int num = DeleteUtils.get().deleteUserFacebookInvitesForUser(userId);
+  	log.info("num invites deleted after buying slot. userId=" + userId + 
+  			" numDeleted=" + num);
   }
   
 }

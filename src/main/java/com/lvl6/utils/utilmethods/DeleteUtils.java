@@ -215,18 +215,44 @@ public class DeleteUtils implements DeleteUtil {
   }
 
 	@Override
-	public int deleteUserFacebookInviteForSlots(List<Integer> idsOfInvites) {
+	public int deleteUserFacebookInvitesForSlots(List<Integer> idsOfInvites) {
 		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
     int size = idsOfInvites.size();
     List<String> questions = Collections.nCopies(size, "?");
+    String questionMarks = StringUtils.csvList(questions);
     
-    String delimiter = ",";
-    String query = " DELETE FROM " + tableName + " WHERE " +
-    DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID
-    + " IN (" + StringUtils.getListInString(questions, delimiter) + ")";
+    StringBuffer querySb = new StringBuffer();
+    querySb.append("DELETE FROM ");
+    querySb.append(tableName);
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+    querySb.append(" IN (");
+    querySb.append(questionMarks);
+    querySb.append(")");
+    String query = querySb.toString();
     
     int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, idsOfInvites);
     return numDeleted;
 	}
 
+	@Override
+	public int deleteUserFacebookInvitesForUser(int userId) {
+		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
+		
+		StringBuffer querySb = new StringBuffer();
+		querySb.append("DELETE FROM ");
+		querySb.append(tableName);
+		querySb.append(" WHERE ");
+		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+		querySb.append(" > 0 AND ");
+		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
+		querySb.append("=?;");
+		
+		String query = querySb.toString();
+		List<Integer> values = new ArrayList<Integer>();
+		values.add(userId);
+		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
+		return numDeleted;
+	}
+	
 }

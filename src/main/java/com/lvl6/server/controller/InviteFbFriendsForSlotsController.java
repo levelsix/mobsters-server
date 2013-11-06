@@ -169,7 +169,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   	//DELETE THE DUPLICATE INVITES THAT ARE ALREADY IN DB
   	if (!inviteIdsOfDuplicateInvites.isEmpty()) {
-  		int num = DeleteUtils.get().deleteUserFacebookInviteForSlots(inviteIdsOfDuplicateInvites);
+  		int num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsOfDuplicateInvites);
   		log.warn("num duplicate invites deleted: " + num);
   	}
   	
