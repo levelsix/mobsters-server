@@ -41,7 +41,7 @@ message MinimumUserProtoWithFacebookId {
 //------------------------------------------------------------------------------------------
 
 message UserFacebookInviteForSlotProto {
-	optional int32 id = 1;
+	optional int32 inviteId = 1;
 	optional MinimumUserProtoWithFacebookId inviter = 2;
 	optional string recipientFacebookId = 3;
 	optional int64 timeOfInvite = 4;

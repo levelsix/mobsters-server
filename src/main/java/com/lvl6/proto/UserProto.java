@@ -2376,9 +2376,9 @@ public final class UserProto {
   public interface UserFacebookInviteForSlotProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 id = 1;
-    boolean hasId();
-    int getId();
+    // optional int32 inviteId = 1;
+    boolean hasInviteId();
+    int getInviteId();
     
     // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId inviter = 2;
     boolean hasInviter();
@@ -2426,14 +2426,14 @@ public final class UserProto {
     }
     
     private int bitField0_;
-    // optional int32 id = 1;
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    public boolean hasId() {
+    // optional int32 inviteId = 1;
+    public static final int INVITEID_FIELD_NUMBER = 1;
+    private int inviteId_;
+    public boolean hasInviteId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getId() {
-      return id_;
+    public int getInviteId() {
+      return inviteId_;
     }
     
     // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId inviter = 2;
@@ -2502,7 +2502,7 @@ public final class UserProto {
     }
     
     private void initFields() {
-      id_ = 0;
+      inviteId_ = 0;
       inviter_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
       recipientFacebookId_ = "";
       timeOfInvite_ = 0L;
@@ -2521,7 +2521,7 @@ public final class UserProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, id_);
+        output.writeInt32(1, inviteId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, inviter_);
@@ -2546,7 +2546,7 @@ public final class UserProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
+          .computeInt32Size(1, inviteId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2689,7 +2689,7 @@ public final class UserProto {
       
       public Builder clear() {
         super.clear();
-        id_ = 0;
+        inviteId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         if (inviterBuilder_ == null) {
           inviter_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
@@ -2744,7 +2744,7 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.id_ = id_;
+        result.inviteId_ = inviteId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -2781,8 +2781,8 @@ public final class UserProto {
       
       public Builder mergeFrom(com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto other) {
         if (other == com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.getDefaultInstance()) return this;
-        if (other.hasId()) {
-          setId(other.getId());
+        if (other.hasInviteId()) {
+          setInviteId(other.getInviteId());
         }
         if (other.hasInviter()) {
           mergeInviter(other.getInviter());
@@ -2829,7 +2829,7 @@ public final class UserProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              id_ = input.readInt32();
+              inviteId_ = input.readInt32();
               break;
             }
             case 18: {
@@ -2862,23 +2862,23 @@ public final class UserProto {
       
       private int bitField0_;
       
-      // optional int32 id = 1;
-      private int id_ ;
-      public boolean hasId() {
+      // optional int32 inviteId = 1;
+      private int inviteId_ ;
+      public boolean hasInviteId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getId() {
-        return id_;
+      public int getInviteId() {
+        return inviteId_;
       }
-      public Builder setId(int value) {
+      public Builder setInviteId(int value) {
         bitField0_ |= 0x00000001;
-        id_ = value;
+        inviteId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearId() {
+      public Builder clearInviteId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        id_ = 0;
+        inviteId_ = 0;
         onChanged();
         return this;
       }
@@ -6538,38 +6538,38 @@ public final class UserProto {
       "roto\022\r\n\005level\030\002 \001(\005\"l\n\036MinimumUserProtoW",
       "ithFacebookId\0226\n\014minUserProto\030\001 \001(\0132 .co" +
       "m.lvl6.proto.MinimumUserProto\022\022\n\nfaceboo" +
-      "kId\030\002 \001(\t\"\266\001\n\036UserFacebookInviteForSlotP" +
-      "roto\022\n\n\002id\030\001 \001(\005\022?\n\007inviter\030\002 \001(\0132..com." +
-      "lvl6.proto.MinimumUserProtoWithFacebookI" +
-      "d\022\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014timeOf" +
-      "Invite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\"\264\007\n\rF" +
-      "ullUserProto\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001" +
-      "(\t\022\r\n\005level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030" +
-      "\005 \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016tasksComple",
-      "ted\030\007 \001(\005\022\022\n\nbattlesWon\030\010 \001(\005\022\023\n\013battles" +
-      "Lost\030\t \001(\005\022\r\n\005flees\030\n \001(\005\022\024\n\014referralCod" +
-      "e\030\013 \001(\t\022\024\n\014numReferrals\030\014 \001(\005\022\025\n\rlastLog" +
-      "inTime\030\016 \001(\003\022\026\n\016lastLogoutTime\030\017 \001(\003\022\016\n\006" +
-      "isFake\030\023 \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoin" +
-      "sRetrievedFromStructs\030\027 \001(\005\022.\n\004clan\030\031 \001(" +
-      "\0132 .com.lvl6.proto.MinimumClanProto\022\033\n\023h" +
-      "asReceivedfbReward\030\034 \001(\010\022!\n\031numAdditiona" +
-      "lMonsterSlots\030\035 \001(\005\022!\n\031numBeginnerSalesP" +
-      "urchased\030\036 \001(\005\022\027\n\017hasActiveShield\030\037 \001(\010\022",
-      "\025\n\rshieldEndTime\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004r" +
-      "ank\030\" \001(\t\022\026\n\016lastTimeQueued\030# \001(\003\022\022\n\natt" +
-      "acksWon\030$ \001(\005\022\023\n\013defensesWon\030% \001(\005\022\023\n\013at" +
-      "tacksLost\030& \001(\005\022\024\n\014defensesLost\030\' \001(\005\022\022\n" +
-      "\nfacebookId\030( \001(\t\022\014\n\004udid\030\r \001(\t\022\023\n\013devic" +
-      "eToken\030\020 \001(\t\022\"\n\032lastBattleNotificationTi" +
-      "me\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTim" +
-      "e\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numConsecu" +
-      "tiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPostNoti" +
-      "ficationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\032\n",
-      "\022nthExtraSlotsViaFb\030) \001(\005\"R\n\024StaticLevel" +
-      "InfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022requiredExpe" +
-      "rience\030\002 \001(\005\022\017\n\007maxCash\030\003 \001(\005B\013B\tUserPro" +
-      "to"
+      "kId\030\002 \001(\t\"\274\001\n\036UserFacebookInviteForSlotP" +
+      "roto\022\020\n\010inviteId\030\001 \001(\005\022?\n\007inviter\030\002 \001(\0132" +
+      "..com.lvl6.proto.MinimumUserProtoWithFac" +
+      "ebookId\022\033\n\023recipientFacebookId\030\003 \001(\t\022\024\n\014" +
+      "timeOfInvite\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003" +
+      "\"\264\007\n\rFullUserProto\022\016\n\006userId\030\001 \001(\005\022\014\n\004na" +
+      "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n" +
+      "\004cash\030\005 \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016tasks",
+      "Completed\030\007 \001(\005\022\022\n\nbattlesWon\030\010 \001(\005\022\023\n\013b" +
+      "attlesLost\030\t \001(\005\022\r\n\005flees\030\n \001(\005\022\024\n\014refer" +
+      "ralCode\030\013 \001(\t\022\024\n\014numReferrals\030\014 \001(\005\022\025\n\rl" +
+      "astLoginTime\030\016 \001(\003\022\026\n\016lastLogoutTime\030\017 \001" +
+      "(\003\022\016\n\006isFake\030\023 \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034n" +
+      "umCoinsRetrievedFromStructs\030\027 \001(\005\022.\n\004cla" +
+      "n\030\031 \001(\0132 .com.lvl6.proto.MinimumClanProt" +
+      "o\022\033\n\023hasReceivedfbReward\030\034 \001(\010\022!\n\031numAdd" +
+      "itionalMonsterSlots\030\035 \001(\005\022!\n\031numBeginner" +
+      "SalesPurchased\030\036 \001(\005\022\027\n\017hasActiveShield\030",
+      "\037 \001(\010\022\025\n\rshieldEndTime\030  \001(\003\022\013\n\003elo\030! \001(" +
+      "\005\022\014\n\004rank\030\" \001(\t\022\026\n\016lastTimeQueued\030# \001(\003\022" +
+      "\022\n\nattacksWon\030$ \001(\005\022\023\n\013defensesWon\030% \001(\005" +
+      "\022\023\n\013attacksLost\030& \001(\005\022\024\n\014defensesLost\030\' " +
+      "\001(\005\022\022\n\nfacebookId\030( \001(\t\022\014\n\004udid\030\r \001(\t\022\023\n" +
+      "\013deviceToken\030\020 \001(\t\022\"\n\032lastBattleNotifica" +
+      "tionTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncre" +
+      "ateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numC" +
+      "onsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPo" +
+      "stNotificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 ",
+      "\001(\t\022\032\n\022nthExtraSlotsViaFb\030) \001(\005\"R\n\024Stati" +
+      "cLevelInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022requir" +
+      "edExperience\030\002 \001(\005\022\017\n\007maxCash\030\003 \001(\005B\013B\tU" +
+      "serProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6613,7 +6613,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserFacebookInviteForSlotProto_descriptor,
-              new java.lang.String[] { "Id", "Inviter", "RecipientFacebookId", "TimeOfInvite", "TimeAccepted", },
+              new java.lang.String[] { "InviteId", "Inviter", "RecipientFacebookId", "TimeOfInvite", "TimeAccepted", },
               com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.class,
               com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserProto_descriptor =
