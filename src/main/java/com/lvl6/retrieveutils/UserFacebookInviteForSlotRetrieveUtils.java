@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +67,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	querySb.append(" AND ");
     	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
     	querySb.append(" IN (");
-    	querySb.append(StringUtils.csvList(specificInviteIds));
+    	
+    	int amount = specificInviteIds.size();
+    	List<String> questionMarkList = Collections.nCopies(amount, "?");
+    	String questionMarkStr = StringUtils.csvList(questionMarkList);
+    	
+    	querySb.append(questionMarkStr);
     	querySb.append(");");
     	values.addAll(specificInviteIds);
     }

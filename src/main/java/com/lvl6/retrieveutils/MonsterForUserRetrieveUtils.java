@@ -82,9 +82,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	querySb.append(" AND ");
     	querySb.append(DBConstants.MONSTER_FOR_USER__ID);
     	querySb.append(" IN (");
+    	
     	int amount = userMonsterIds.size();
     	List<String> questions = Collections.nCopies(amount, "?");
-    	querySb.append(StringUtils.csvList(questions));
+    	String questionMarkStr = StringUtils.csvList(questions);
+    	
+    	querySb.append(questionMarkStr);
     	querySb.append(");");
     	values.addAll(userMonsterIds);
     }
