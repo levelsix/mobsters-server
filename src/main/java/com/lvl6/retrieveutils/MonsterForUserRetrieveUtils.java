@@ -86,7 +86,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	List<String> questions = Collections.nCopies(amount, "?");
     	querySb.append(StringUtils.csvList(questions));
     	querySb.append(");");
-    	values.add(userMonsterIds);
+    	values.addAll(userMonsterIds);
     }
     String query = querySb.toString();
     log.info("query=" + query + "\t values=" + values);
