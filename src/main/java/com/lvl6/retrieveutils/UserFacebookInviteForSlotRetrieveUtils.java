@@ -121,31 +121,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   private static UserFacebookInviteForSlot convertRSToInvite(ResultSet rs) {
-    List<UserFacebookInviteForSlot> utList = new ArrayList<UserFacebookInviteForSlot>();
-    if (rs != null) {
-      try {
-        rs.last();
-        rs.beforeFirst();
-        while(rs.next()) {  //should only be one
-        	UserFacebookInviteForSlot invite = convertRSRowToInvite(rs);
-          utList.add(invite);
-        }
-      } catch (SQLException e) {
-        log.error("problem with database call.", e);
-        
-      }
-    }
-    
-    //error checking. There should only be one row in user_task table for any user
-    if (utList.isEmpty()) {
-      return null;
-    } else {
-      if (utList.size() > 1) {
-        log.error("unexpected error: user has more than one user_task. userTasks=" +
-            utList);
-      }
-      return utList.get(0);
-    }
+  	if (rs != null) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			if (rs.next()) {  //should only be one
+  				UserFacebookInviteForSlot invite = convertRSRowToInvite(rs);
+  				return invite;
+  			}
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+
+  		}
+  	}
+  	return null;
   }
   
   private static Map<Integer, UserFacebookInviteForSlot> convertRSToInviteIdsToInvites(ResultSet rs) {
