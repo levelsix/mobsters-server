@@ -274,7 +274,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	if (!rejectedInviteIds.isEmpty()) {
   		int num = UpdateUtils.get().updateUserFacebookInviteForSlotAcceptTime(
   				userFacebookId, acceptedInviteIds, acceptTime);
-  		log.info("num acceptedInviteIds updated: " + num + "\t invites=" +
+  		log.info("\t\t\t\t\t\t\t num acceptedInviteIds updated: " + num + "\t invites=" +
   				acceptedInviteIds);
   	}
   	
