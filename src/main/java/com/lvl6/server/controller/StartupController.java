@@ -780,6 +780,11 @@ public class StartupController extends EventController {
   	//tie a an inviter id to an invite
   	List<Integer> inviterUserIds = getInviterIds(idsToInvites, inviterIdsToInvites);
   	
+  	if ((null == recipientFacebookIds || recipientFacebookIds.isEmpty()) &&
+  			(null == inviterUserIds || inviterUserIds.isEmpty())) {
+  		//no facebook stuff
+  		return;
+  	}
 
   	//GET THE USERS
   	Map<Integer, User> idsToUsers = RetrieveUtils.userRetrieveUtils()
