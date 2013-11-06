@@ -816,6 +816,7 @@ public class StartupController extends EventController {
   		UserFacebookInviteForSlotProto inviteProto =
   				CreateInfoProtoUtils.createUserFacebookInviteForSlotProtoFromInvite(invite, inviter);
   		
+  		log.info("\t\t klajdflajf  \t\t inviteProto=" + inviteProto);
   		resBuilder.addInvitesToMeForSlots(inviteProto);
   	}
   }
