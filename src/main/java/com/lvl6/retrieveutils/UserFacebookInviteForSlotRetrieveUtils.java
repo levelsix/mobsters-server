@@ -210,6 +210,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	if (!rs.wasNull()) {
     		timeOfInvite = new Date(ts.getTime());
     	}
+    	
     } catch (Exception e) {
     	log.error("db error: maybe timeOfInvite is null. id=" + id + " inviterId=" +
     			inviterUserId + " recipientFacebookId=" + recipientFacebookId, e);
@@ -217,7 +218,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     Date timeAccepted = null; 
     try {
-    		rs.getTimestamp(i++);
+    		Timestamp ts = rs.getTimestamp(i++);
+    		if (!rs.wasNull()) {
+    			timeAccepted = new Date(ts.getTime());
+    		}
+    		
     } catch (Exception e) {
     	log.error("db error: maybe timeAccepted is null. id=" + id + " inviterId=" +
     			inviterUserId + " recipientFacebookId=" + recipientFacebookId, e);
