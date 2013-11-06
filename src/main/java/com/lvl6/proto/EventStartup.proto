@@ -65,13 +65,13 @@ message StartupResponseProto {
 	
 	optional string kabamNaid = 31;
 	
-	//send over all recipients in user_facebook_invite_for_slot_accepted table
+	//send over all recipients (in user_facebook_invite_for_slot_accepted table)
+	//that have been "redeemed"
 	repeated MinimumUserProtoWithFacebookId usersUsedForExtraSlots = 32;
 	
-	//send over all inviters in fb_invite_for_slot table where this user
+	//send over all invites (in fb_invite_for_slot table) where this user
 	//is the person being invited
-	repeated MinimumUserProtoWithFacebookId usersInvitingMeForExtraSlots = 33;
-	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 34;
+	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 33;
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
