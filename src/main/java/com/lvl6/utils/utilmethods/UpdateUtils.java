@@ -833,7 +833,7 @@ public class UpdateUtils implements UpdateUtil {
 			String questionsStr = StringUtils.csvList(questions);
 			querySb.append(questionsStr);
 			querySb.append(") AND ");
-			values.add(acceptedInviteIds);
+			values.addAll(acceptedInviteIds);
 			
 			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
 			querySb.append("=?");
