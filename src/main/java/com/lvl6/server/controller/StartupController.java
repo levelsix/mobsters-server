@@ -765,25 +765,31 @@ public class StartupController extends EventController {
   private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User user) {
   	//gather up data so as to make only one user retrieval query
   	int userId = user.getId();
+  	
   	//NEED TO GET THE FACEBOOK IDS HE INVITED AND HAVE ACCEPTED HIS INVITES
   	List<String> recipientFacebookIds = UserFacebookInviteForSlotAcceptedRetrieveUtils
   			.getUniqueRecipientFacebookIdsForInviterId(userId);
-  	
-  	//GET THE USERIDS THAT ACCEPTED HIS INVITES
   	String fbId = user.getFacebookId();
   	List<Integer> specificInviteIds = null;
   	Map<Integer, UserFacebookInviteForSlot> idsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
   	
+  	
+  	//GET THE INVITES WHERE THIS USER IS THE RECIPIENT
   	//base case where user does not have facebook id
   	if (null != fbId && !fbId.isEmpty()) {
   		idsToInvites = UserFacebookInviteForSlotRetrieveUtils
   			.getSpecificOrAllInvitesForRecipient(fbId, specificInviteIds);
   	}
-  	Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites =
-  			new HashMap<Integer, UserFacebookInviteForSlot>();
   	//to make it easier later on, get the inviter ids for these invites and
   	//tie a an inviter id to an invite
+  	Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites =
+  			new HashMap<Integer, UserFacebookInviteForSlot>();
   	List<Integer> inviterUserIds = getInviterIds(idsToInvites, inviterIdsToInvites);
+  	log.info("where current user is recipient. idsToInvites=" + idsToInvites);
+  	log.info("inviterIdsToInvites=" + inviterIdsToInvites);
+  	log.info("inviterUserIds=" + inviterUserIds);
+  	
+  	
   	
   	//base case where user never did any invites
   	if ((null == recipientFacebookIds || recipientFacebookIds.isEmpty()) &&
@@ -802,7 +808,6 @@ public class StartupController extends EventController {
   	
   	
   	//send all the recipients that accepted this user's invite
-  	//THEN FROM THOSE FACEBOOK IDS GET THE USERS
   	for (User u : recipients) {
   		MinimumUserProtoWithFacebookId recipientProto = 
   				CreateInfoProtoUtils.createMinimumUserProtoWithFacebookIdFromUser(u);
