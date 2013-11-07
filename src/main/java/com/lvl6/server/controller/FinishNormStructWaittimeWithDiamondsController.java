@@ -19,6 +19,7 @@ import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRequestProto;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto;
 import com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.Builder;
@@ -68,8 +69,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       int previousGems = 0;
       StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
       Structure struct = null;
+      Structure formerStruct = null;
+      
       if (userStruct != null) {
-        struct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
+      	int structId = userStruct.getStructId();
+        struct = StructureRetrieveUtils.getStructForStructId(structId);
+        formerStruct = StructureRetrieveUtils.getPredecessorStructForStructId(structId);
       }
       
       //don't want to recalculate gem cost, so this will contain cost when it's first computed
@@ -83,7 +88,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (legitSpeedup) {
         previousGems = user.getGems();
         int gemCost = gemCostList.get(0);
-        writeChangesToDB(user, userStruct, timeOfSpeedup, struct, gemCost, money);
+        success = writeChangesToDB(user, userStruct, timeOfSpeedup, struct, gemCost, money);
       }
       
       FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserId());
@@ -95,7 +100,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
-        writeToUserCurrencyHistory(user, userStruct, timeOfSpeedup, money, previousGems);
+        writeToUserCurrencyHistory(user, userStruct, formerStruct, timeOfSpeedup, money, previousGems);
       }
     } catch (Exception e) {
       log.error("exception in FinishNormStructWaittimeWithDiamondsController processEvent", e);
@@ -114,25 +119,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
 
-  private void writeChangesToDB(User user, StructureForUser userStruct,
-  		Timestamp timeOfPurchase, Structure struct, int gemCost, 
-  		Map<String, Integer> money) {
-  	
-  	int gemChange = -1 * gemCost;
-  	//update user gems
-  	if (!user.updateRelativeDiamondsNaive(gemChange)) {
-  		log.error("problem with using diamonds to finish norm struct build. userStruct=" +
-  				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
-  	} else {
-  		//update structure for user to reflect it is complete
-  		if (!UpdateUtils.get().updateUserStructLastretrievedIscomplete(userStruct.getId(), timeOfPurchase, true)) {
-  			log.error("problem with completing norm struct build time. userStruct=" +
-  					userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
-  		}
-  		money.put(MiscMethods.gems, gemChange);
-  	}
-  }
-
   private boolean checkLegitSpeedup(Builder resBuilder, User user,
   		StructureForUser userStruct, Timestamp timeOfSpeedup, Structure struct,
   		List<Integer> gemCostList) {
@@ -144,7 +130,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     
-    //TODO: ACCOUNT FOR HOW MUCH TIME HAS PASSED WHEN DETERMINING SPEEDUP GEM COST 
+    //ACCOUNT FOR HOW MUCH TIME HAS PASSED WHEN DETERMINING SPEEDUP GEM COST 
     int cost = struct.getInstaBuildGemCost();
     long startTimeMillis = userStruct.getPurchaseTime().getTime();
     long durationInSeconds = struct.getMinutesToBuild() * 60;
@@ -161,28 +147,71 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);
     return true;  
   }
-  
 
-  //TODO: FIX THIS
+  private boolean writeChangesToDB(User user, StructureForUser userStruct,
+  		Timestamp timeOfPurchase, Structure struct, int gemCost, 
+  		Map<String, Integer> money) {
+  	
+  	
+  	int gemChange = -1 * gemCost;
+  	//update structure for user to reflect it is complete
+  	if (!UpdateUtils.get().updateFinishUpgradingUserStruct(userStruct.getId(), timeOfPurchase)) {
+  		log.error("problem with completing norm struct build time. userStruct=" +
+  				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
+  		return false;
+  	}
+  	
+  	//update user gems
+  	if (!user.updateRelativeDiamondsNaive(gemChange)) {
+  		log.error("problem with using diamonds to finish norm struct build. userStruct=" +
+  				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
+  	} else {
+  		money.put(MiscMethods.gems, gemChange);
+  	}
+  	return true;
+  }
+
   public void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct,
-  		Timestamp timeOfPurchase, Map<String, Integer> money, int previousGems) {
+  		Structure formerStruct, Timestamp timeOfPurchase, Map<String, Integer> money,
+  		int previousGems) {
     
-//    int userStructId = userStruct.getId();
-//    int structId = userStruct.getStructId();
-//    int prevLevel = userStruct.getLevel();
-//    String structDetails = "uStructId:" + userStructId + " structId:" + structId
-//        + " prevLevel:" + prevLevel;
-//    
-//    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String reasonForChange = ControllerConstants.UCHRFC__FINISH_NORM_STRUCT;
-//    String gems = MiscMethods.gems;
-//    
-//    previousGemsCash.put(gems, previousGems);
-//    reasonsForChanges.put(gems, reasonForChange + "finish upgrade " + structDetails);
-//      
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfPurchase, money,
-//        previousGemsCash, reasonsForChanges);
+    int userStructId = userStruct.getId();
+    int structId = userStruct.getStructId();
+    
+    StringBuffer structDetails = new StringBuffer(); //   + structId;
+    if (null == formerStruct) {
+    	//no previous guy so user speeding up building first building
+    	structDetails.append(" construction ");
+    } else {
+    	structDetails.append(" upgrade ");
+    }
+    structDetails.append("uStructId: ");
+    structDetails.append(userStructId);
+    structDetails.append(" structId: ");
+    structDetails.append(structId);
+
+    if (null != formerStruct) {
+    	int prevStructId = formerStruct.getId();
+    	int prevLevel = formerStruct.getLevel();
+    	structDetails.append(" prevStructId: ");
+    	structDetails.append(prevStructId);
+    	structDetails.append(" prevLevel: ");
+    	structDetails.append(prevLevel);
+    }
+    
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> details = new HashMap<String, String>();
+    String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_NORM_STRUCT;
+    String gems = MiscMethods.gems;
+    
+    previousGemsCash.put(gems, previousGems);
+    reasonsForChanges.put(gems, reasonForChange);
+    String detail = structDetails.toString();
+    details.put(gems, detail);
+      
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfPurchase, money,
+        previousGemsCash, reasonsForChanges, details);
   }
   
   

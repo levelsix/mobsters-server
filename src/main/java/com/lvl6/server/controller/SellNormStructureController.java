@@ -1,5 +1,10 @@
 package com.lvl6.server.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -46,7 +51,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     SellNormStructureRequestProto reqProto = ((SellNormStructureRequestEvent)event).getSellNormStructureRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int userStructId = reqProto.getUserStructId();
+    Timestamp curTime = new Timestamp((new Date()).getTime());
 
     SellNormStructureResponseProto.Builder resBuilder = SellNormStructureResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -58,24 +65,23 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       struct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
     }
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-
+    server.lockPlayer(userId, this.getClass().getSimpleName());
     try {
       User user = null;
       if (userStruct != null) {
-        user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-        int previousSilver = 0;
-        int previousGold = 0;
-        if (user != null && struct != null && user.getId() == userStruct.getUserId()) {
-          previousSilver = user.getCash();
-          previousGold = user.getGems();
+        user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+        int previousCash = 0;
+        int previousGems = 0;
+        if (user != null && struct != null && userId == userStruct.getUserId()) {
+          previousCash = user.getCash();
+          previousGems = user.getGems();
           
-          int diamondChange = Math.max(0,  (int)Math.ceil(struct.getGemPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
-          int coinChange = Math.max(0,  (int)Math.ceil(struct.getCashPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
+          int gemChange = Math.max(0,  (int)Math.ceil(struct.getGemPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
+          int cashChange = Math.max(0,  (int)Math.ceil(struct.getCashPrice()*ControllerConstants.SELL_NORM_STRUCTURE__PERCENT_RETURNED_TO_USER));
           
-          if (!user.updateRelativeDiamondsCoinsExperienceNaive(diamondChange, coinChange, 0)) {
+          if (!user.updateRelativeDiamondsCoinsExperienceNaive(gemChange, cashChange, 0)) {
             resBuilder.setStatus(SellNormStructureStatus.FAIL);
-            log.error("problem with giving user " + diamondChange + " diamonds and " + coinChange + " coins");
+            log.error("problem with giving user " + gemChange + " gems and " + cashChange + " cashs");
           } else {
             if (!DeleteUtils.get().deleteUserStruct(userStructId)) {
               resBuilder.setStatus(SellNormStructureStatus.FAIL);
@@ -83,7 +89,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
             } else {
               resBuilder.setStatus(SellNormStructureStatus.SUCCESS);                      
             }
-            writeToUserCurrencyHistory(user, userStruct, diamondChange, coinChange, previousSilver, previousGold);
+            writeToUserCurrencyHistory(user, userStruct, struct, curTime, gemChange,
+            		cashChange, previousCash, previousGems);
           }
         } else {
           resBuilder.setStatus(SellNormStructureStatus.FAIL);
@@ -113,36 +120,36 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
   }
   
-  public void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct, int diamondChange, 
-      int coinChange, int previousSilver, int previousGold) {
-//    int userStructId = userStruct.getId();
-//    int structId = userStruct.getStructId();
-//    int prevLevel = userStruct.getLevel();
-//    String structDetails = "uStructId:" + userStructId + " structId:" + structId
-//        + " prevLevel:" + prevLevel;
-//    
-//    Timestamp date = new Timestamp((new Date()).getTime());
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//    String reasonForChange = ControllerConstants.UCHRFC__SELL_NORM_STRUCT + " "
-//        + structDetails;
-//
-//    Map<String, Integer> money = new HashMap<String, Integer>();
-//    if (0 != diamondChange) {
-//      money.put(gems, diamondChange);
-//      previousGoldSilver.put(gems, previousGold);
-//      reasonsForChanges.put(gems, reasonForChange);
-//    }
-//    if (0 != coinChange) {
-//      money.put(cash, coinChange);
-//      previousGoldSilver.put(cash, previousSilver);
-//      reasonsForChanges.put(cash, reasonForChange);
-//    }
-//    
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-//        previousGoldSilver, reasonsForChanges);
-//    
+  public void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct,
+  		Structure struct, Timestamp curTime, int gemChange, int cashChange,
+  		int previousSilver, int previousGold) {
+    int userStructId = userStruct.getId();
+    int structId = userStruct.getStructId();
+    String structDetails = "uStructId:" + userStructId + " structId:" + structId;
+    
+    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> details = new HashMap<String, String>();
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
+    String reasonForChange = ControllerConstants.UCHRFC__SELL_NORM_STRUCT;
+
+    Map<String, Integer> money = new HashMap<String, Integer>();
+    if (0 != gemChange) {
+      money.put(gems, gemChange);
+      previousGoldSilver.put(gems, previousGold);
+      reasonsForChanges.put(gems, reasonForChange);
+      details.put(gems, structDetails);
+    }
+    if (0 != cashChange) {
+      money.put(cash, cashChange);
+      previousGoldSilver.put(cash, previousSilver);
+      reasonsForChanges.put(cash, reasonForChange);
+      details.put(gems, structDetails);
+    }
+    
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money,
+        previousGoldSilver, reasonsForChanges, details);
+    
   }
 }

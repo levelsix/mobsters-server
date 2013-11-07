@@ -34,7 +34,6 @@ message PurchaseNormStructureResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-																						//DONE
 message MoveOrRotateNormStructureRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 userStructId = 2;
@@ -59,8 +58,6 @@ message MoveOrRotateNormStructureResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
-																						//DONE
 message SellNormStructureRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 userStructId = 2;
@@ -78,8 +75,7 @@ message SellNormStructureResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//NOT REALLY NEEDED SINCE PURCHASING A STRUCTURE CAN BE CONSTRUED AS UPGRADING
-																						//DONE
+//user initiating a structure upgrade
 message UpgradeNormStructureRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 userStructId = 2;
@@ -93,20 +89,17 @@ message UpgradeNormStructureResponseProto {
 	
 	enum UpgradeNormStructureStatus {
 		SUCCESS = 1;
-		NOT_ENOUGH_MATERIALS = 2;
-		NOT_BUILT_YET = 3;
-		NOT_USERS_STRUCT = 4;
-		ANOTHER_STRUCT_STILL_UPGRADING = 5;
-		OTHER_FAIL = 6;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 7;
-		AT_MAX_LEVEL_ALREADY = 8;
+		FAIL_NOT_ENOUGH_CASH = 2;
+		FAIL_NOT_ENOUGH_GEMS = 3;
+		FAIL_NOT_BUILT_YET = 4;
+		FAIL_NOT_USERS_STRUCT = 5;
+		FAIL_ANOTHER_STRUCT_STILL_UPGRADING = 6;
+		FAIL_AT_MAX_LEVEL_ALREADY = 7;
+		FAIL_OTHER = 8;
 	}
 }
 
-
 //------------------------------------------------------------------------------------------
-
-					//DONE
 					//rename to speed up norm struct 
 message FinishNormStructWaittimeWithDiamondsRequestProto {
 	optional MinimumUserProto sender = 1;

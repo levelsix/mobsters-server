@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,16 +15,16 @@ import com.lvl6.events.request.UpgradeNormStructureRequestEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.events.response.UpgradeNormStructureResponseEvent;
 import com.lvl6.info.Structure;
-import com.lvl6.info.User;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.UpgradeNormStructureStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -56,42 +55,46 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     UpgradeNormStructureResponseProto.Builder resBuilder = UpgradeNormStructureResponseProto.newBuilder();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int userStructId = reqProto.getUserStructId();
     Timestamp timeOfUpgrade = new Timestamp(reqProto.getTimeOfUpgrade());
     
     resBuilder.setSender(senderProto);
 
-    Structure struct = null;
+    Structure currentStruct = null;
+    Structure upgradedStruct = null;
     StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
 
     if (userStruct != null) {
-      struct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
+    	currentStruct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
+      upgradedStruct = StructureRetrieveUtils.getUpgradedStructForStructId(userStruct.getStructId());
     }
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-
+    server.lockPlayer(userId, this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int previousSilver = 0;
-      int previousGold = 0;
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      int previousCash = 0;
+      int previousGems = 0;
       
-      boolean legitUpgrade = checkLegitUpgrade(resBuilder, user, userStruct, struct, timeOfUpgrade);
-      UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(senderProto.getUserId());
+      boolean legitUpgrade = checkLegitUpgrade(resBuilder, user, userStruct, currentStruct,
+      		upgradedStruct, timeOfUpgrade);
+      UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
       resEvent.setTag(event.getTag());
       resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
 
       if (legitUpgrade) {
-        previousSilver = user.getCash();
-        previousGold = user.getGems();
+        previousCash = user.getCash();
+        previousGems = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
-        writeChangesToDB(user, userStruct, struct, timeOfUpgrade, money);
+        writeChangesToDB(user, userStruct, upgradedStruct, timeOfUpgrade, money);
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
-        writeToUserCurrencyHistory(user, userStruct, timeOfUpgrade, money, previousSilver, previousGold);
+        writeToUserCurrencyHistory(user, userStruct, currentStruct, upgradedStruct,
+        		timeOfUpgrade, money, previousCash, previousGems);
       }
     } catch (Exception e) {
       log.error("exception in UpgradeNormStructure processEvent", e);
@@ -100,127 +103,120 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
 
-  private void writeChangesToDB(User user, StructureForUser userStruct, Structure struct, Timestamp timeOfUpgrade,
-      Map<String, Integer> money) {
-//    int goldChange = -1*calculateUpgradeDiamondCost(userStruct.getLevel(), struct);
-//    int silverChange = -1*calculateUpgradeCoinCost(userStruct.getLevel(), struct);
-//    
-//    // TODO Auto-generated method stub
-//    if (!user.updateRelativeDiamondsCoinsExperienceNaive(goldChange, silverChange, 0)) {
-//      log.error("problem with updating user stats: diamondChange=" + goldChange
-//          + ", coinChange=" + silverChange + ", user is " + user);
-//    } else {
-//      //everything went well
-//      if (0 != goldChange) {
-//        money.put(MiscMethods.gems, goldChange);
-//      }
-//      if (0 != silverChange) {
-//        money.put(MiscMethods.cash, silverChange);
-//      }
-//    }
-//    if (!UpdateUtils.get().updateUserStructLastretrievedIscomplete(userStruct.getId(), null, false)) {
-//      log.error("problem with changing time of upgrade to " + timeOfUpgrade + " and marking as incomplete, the user struct " + userStruct);
-//    }
+  private void writeChangesToDB(User user, StructureForUser userStruct, Structure upgradedStruct,
+  		Timestamp timeOfUpgrade, Map<String, Integer> money) {
+  	
+  	int newStructId = upgradedStruct.getId();
+  	//upgrade the user's struct
+  	if (!UpdateUtils.get().updateBeginUpgradingUserStruct(userStruct.getId(),
+  			newStructId, timeOfUpgrade)) {
+  		log.error("problem with changing time of upgrade to " + timeOfUpgrade + 
+  				" and marking as incomplete, the user struct " + userStruct);
+  	}
+  	
+  	//charge the user  	
+  	int gemCost = upgradedStruct.getGemPrice();
+  	int cashCost = upgradedStruct.getCashPrice();
+    int gemChange = -1*gemCost;
+    int cashChange = -1*cashCost;
+    if (!user.updateRelativeDiamondsCoinsExperienceNaive(gemChange, cashChange, 0)) {
+      log.error("problem with updating user stats: diamondChange=" + gemChange
+          + ", coinChange=" + cashChange + ", user is " + user);
+    } else {
+      //everything went well
+      if (0 != gemChange) {
+        money.put(MiscMethods.gems, gemChange);
+      }
+      if (0 != cashChange) {
+        money.put(MiscMethods.cash, cashChange);
+      }
+    }
   }
 
   private boolean checkLegitUpgrade(Builder resBuilder, User user, StructureForUser userStruct,
-      Structure struct, Timestamp timeOfUpgrade) {
-    if (user == null || userStruct == null || struct == null || userStruct.getLastRetrieved() == null) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.OTHER_FAIL);
-      log.error("parameter passed in is null. user=" + user + ", user struct=" + userStruct + ", struct="
-          + struct + ", userStruct's last retrieve time=" + userStruct.getLastRetrieved());
-      return false;
-    }
-    if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfUpgrade)) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-      log.error("client time too apart of server time. client time=" + timeOfUpgrade + ", servertime~="
-          + new Date());
+      Structure currentStruct, Structure upgradedStruct, Timestamp timeOfUpgrade) {
+    if (user == null || userStruct == null || userStruct.getLastRetrieved() == null) {
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_OTHER);
+      log.error("parameter passed in is null. user=" + user + ", user struct=" + userStruct + 
+         ", userStruct's last retrieve time=" + userStruct.getLastRetrieved());
       return false;
     }
     if (!userStruct.isComplete()) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.NOT_BUILT_YET);
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
       log.error("user struct is not complete yet");
       return false;
     }
+    if (null == upgradedStruct) {
+    	resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_AT_MAX_LEVEL_ALREADY);
+    	log.error("user struct at max level already. struct is " + currentStruct);
+    	return false;
+    }
     if (timeOfUpgrade.getTime() < userStruct.getLastRetrieved().getTime()) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.NOT_BUILT_YET);
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_BUILT_YET);
       log.error("the upgrade time " + timeOfUpgrade + " is before the last time the building was retrieved:"
           + userStruct.getLastRetrieved());
       return false;
     }
-//    if (userStruct.getLevel() == ControllerConstants.UPGRADE_NORM_STRUCTURE__MAX_STRUCT_LEVEL) {
-//      resBuilder.setStatus(UpgradeNormStructureStatus.AT_MAX_LEVEL_ALREADY);
-//      log.error("user struct at max level already, which is " + ControllerConstants.UPGRADE_NORM_STRUCTURE__MAX_STRUCT_LEVEL);
-//      return false;
-//    }
-//    int upgradeCoinCost = calculateUpgradeCoinCost(userStruct.getLevel(), struct);
-//    int upgradeDiamondCost = calculateUpgradeDiamondCost(userStruct.getLevel(), struct);
-//
-//    if (user.getId() != userStruct.getUserId()) {
-//      resBuilder.setStatus(UpgradeNormStructureStatus.NOT_USERS_STRUCT);
-//      log.error("user struct belongs to someone else with id " + userStruct.getUserId());
-//      return false;
-//    }
-//    if (user.getCash() < upgradeCoinCost) {
-//      resBuilder.setStatus(UpgradeNormStructureStatus.NOT_ENOUGH_MATERIALS);
-//      log.error("user doesn't have enough coins, has " + user.getCash() + ", needs " + upgradeCoinCost);
-//      return false;
-//    }
-//    if (user.getGems() < upgradeDiamondCost) {
-//      resBuilder.setStatus(UpgradeNormStructureStatus.NOT_ENOUGH_MATERIALS);
-//      log.error("user doesn't have enough diamonds, has " + user.getGems() + ", needs " + upgradeDiamondCost);
-//      return false;
-//    }
-    //TODO: FIGURE OUT WHY THIS SHIT IS HERE
-//    List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
-//    if (userStructs != null) {
-//      for (StructureForUser us : userStructs) {
-//        if (!us.isComplete() && us.getLastRetrieved() != null && us.getLastUpgradeTime() != null) {
-//          resBuilder.setStatus(UpgradeNormStructureStatus.ANOTHER_STRUCT_STILL_UPGRADING);
-//          log.error("another struct is still upgrading: user struct=" + us);
-//          return false;
-//        }
-//      }
-//    }
+    //see if the user can upgrade it
+    int upgradeCashCost = upgradedStruct.getCashPrice();
+    int upgradeGemCost = upgradedStruct.getGemPrice();
+
+    if (user.getId() != userStruct.getUserId()) {
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
+      log.error("user struct belongs to someone else with id " + userStruct.getUserId());
+      return false;
+    }
+    if (user.getCash() < upgradeCashCost) {
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
+      log.error("user doesn't have enough coins, has " + user.getCash() + ", needs " + upgradeCashCost);
+      return false;
+    }
+    if (user.getGems() < upgradeGemCost) {
+      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
+      log.error("user doesn't have enough diamonds, has " + user.getGems() + ", needs " + upgradeGemCost);
+      return false;
+    }
+    //TODO: only make one user struct retrieve call 
+    List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
+    if (userStructs != null) {
+      for (StructureForUser us : userStructs) {
+        if (!us.isComplete() && us.getUpgradeStartTime() != null) {
+          resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_ANOTHER_STRUCT_STILL_UPGRADING);
+          log.error("another struct is still upgrading: user struct=" + us);
+          return false;
+        }
+      }
+    }
     resBuilder.setStatus(UpgradeNormStructureStatus.SUCCESS);
     return true;
   }
-
-  private int calculateUpgradeCoinCost(int oldLevel, Structure struct) {
-//    return Math.max(0, (int)(struct.getCoinPrice() * Math.pow(ControllerConstants.UPGRADE_NORM_STRUCTURE__UPGRADE_STRUCT_COIN_COST_EXPONENT_BASE, oldLevel)));
-  	return 1234567890;
-  }
   
-  private int calculateUpgradeDiamondCost(int oldLevel, Structure struct) {
-  	return 123457890;
-//    return Math.max(0, (int)(struct.getDiamondPrice() * Math.pow(ControllerConstants.UPGRADE_NORM_STRUCTURE__UPGRADE_STRUCT_DIAMOND_COST_EXPONENT_BASE, oldLevel)));
-  }
-  
-  private void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct, Timestamp timeOfUpgrade, 
-      Map<String, Integer> money, int previousSilver, int previousGold) {
-//    
-//    int userStructId = userStruct.getId();
-//    int structId = userStruct.getStructId();
-//    int prevLevel = userStruct.getLevel();
-//    String structDetails = "uStructId:" + userStructId + " structId:" + structId
-//        + " prevLevel:" + prevLevel;
-//    
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    String reasonForChange = ControllerConstants.UCHRFC__UPGRADE_NORM_STRUCT + " "
-//        + structDetails;
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//    
-//    previousGoldSilver.put(cash, previousSilver);
-//    previousGoldSilver.put(gems, previousGold);
-//    
-//    reasonsForChanges.put(gems, reasonForChange);
-//    reasonsForChanges.put(cash,  reasonForChange);
+  private void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct,
+  		Structure curStruct, Structure upgradedStruct, Timestamp timeOfUpgrade,
+  		Map<String, Integer> money, int previousSilver, int previousGold) {
     
-    //TODO: FIX THIS
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfUpgrade, 
-//        money, previousGoldSilver, reasonsForChanges);
+    int userStructId = userStruct.getId();
+    int prevStructId = curStruct.getId();
+    int prevLevel = curStruct.getLevel();
+    String structDetails = "uStructId:" + userStructId + " preStructId:" + prevStructId
+        + " prevLevel:" + prevLevel;
+    
+    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+    String reasonForChange = ControllerConstants.UCHRFC__UPGRADE_NORM_STRUCT;
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> details = new HashMap<String, String>();
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
+    
+    previousGoldSilver.put(cash, previousSilver);
+    previousGoldSilver.put(gems, previousGold);
+    reasonsForChanges.put(cash,  reasonForChange);
+    reasonsForChanges.put(gems, reasonForChange);
+    details.put(cash, structDetails);
+    details.put(gems, structDetails);
+    
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfUpgrade, 
+        money, previousGoldSilver, reasonsForChanges, details);
   }
 
 }

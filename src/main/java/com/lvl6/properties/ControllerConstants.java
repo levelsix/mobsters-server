@@ -275,9 +275,12 @@ public class ControllerConstants {
   public static final String UCHRFC__ENHANCING = "enhancing user monsters";
   public static final String UCHRFC__HEAL_MONSTER = "healed user monsters";
   public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
+  public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
+  public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
   public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
   public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
-  public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
+  public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
+  public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
   
   
   public static final String UCHRFC__USER_CREATED = "user created";
@@ -288,10 +291,7 @@ public class ControllerConstants {
   public static final String UCHRFC__GROUP_CHAT = "purchased group chat"; //is controller for this even used?
   public static final String UCHRFC__BOSS_ACTION = "boss action";
   public static final String UCHRFC__REFILL_STAT = "refilled stat: ";
-  public static final String UCHRFC__FINISH_NORM_STRUCT = "finish norm stuct: ";
-  public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgraded norm struct";
   public static final String UCHRFC__SELL_NORM_STRUCT = "sell norm struct";
-  public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
   public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
   public static final String UCHRFC__REDEEM_MARKETPLACE_EARNINGS = "redeemed marketplace earnings";
   public static final String UCHRFC__PICK_LOCKBOX = "picked lockbox";

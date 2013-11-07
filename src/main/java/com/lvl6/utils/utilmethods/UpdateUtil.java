@@ -61,23 +61,18 @@ public interface UpdateUtil {
 //      int questId, boolean setTasksCompleteTrue,
 //      boolean setDefeatTypeJobsCompleteTrue);
 
-
-  /*
-   * used for updating last retrieved and/or last upgrade user struct time and is_complete
-   */
-  /*@Caching(evict = {
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
-  public abstract boolean updateUserStructLastretrievedIscomplete(
-      int userStructId, Timestamp lastRetrievedTime, boolean isComplete);
-
   /*
    * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
    */
   public abstract boolean updateUserStructsLastretrievedpostbuildIscomplete(
       List<StructureForUser> userStructs);
 
+  public abstract boolean updateBeginUpgradingUserStruct(int userStructId,
+  		int newStructId, Timestamp upgradeTime);
+  
+  public abstract boolean updateFinishUpgradingUserStruct(
+  		int userStructId, Timestamp lastRetrievedTime);
+  
   /*
    * used for updating last retrieved user struct times
    */

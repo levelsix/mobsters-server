@@ -249,28 +249,38 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-
-	/*
-	 * used for updating last retrieved and/or last upgrade user struct time and is_complete
-	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructLastretrievedIscompleteLevelchange(int, java.sql.Timestamp, boolean, int)
-	 */
-	@Override
-	/*@Caching(evict= {
-      //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
-      //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
-	public boolean updateUserStructLastretrievedIscomplete(int userStructId, Timestamp lastRetrievedTime, boolean isComplete) {
+	public boolean updateBeginUpgradingUserStruct(int userStructId,
+  		int newStructId, Timestamp upgradeTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		Map <String, Object> relativeParams = null; //new HashMap<String, Object>();
 		
-		if (lastRetrievedTime != null) {
-			absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, newStructId);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__UPGRADE_START_TIME, upgradeTime);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, false);
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
+				conditionParams, "or");
+		if (numUpdated == 1) {
+			return true;
 		}
-		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, isComplete);
+		return false;
+		
+	}
+	
+	@Override
+	public boolean updateFinishUpgradingUserStruct(int userStructId, Timestamp lastRetrievedTime) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
+		
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		Map <String, Object> relativeParams = null; //new HashMap<String, Object>();
+		
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, lastRetrievedTime);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
 				conditionParams, "or");
@@ -279,7 +289,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
-
+	
 	/*
 	 * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
 	 */

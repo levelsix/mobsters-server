@@ -38,6 +38,36 @@ import com.lvl6.utils.DBConnection;
     }
     return structIdsToStructs.get(structId);
   }
+  
+  public static Structure getUpgradedStructForStructId(int structId) {
+  	log.debug("retrieve upgraded struct data for structId " + structId);
+  	if (structIdsToStructs == null) {
+      setStaticStructIdsToStructs();      
+    }
+  	Structure curStruct = structIdsToStructs.get(structId);
+  	if (null != curStruct) {
+  		int successorStructId = curStruct.getSuccessorStructId(); 
+  		
+  		Structure upgradedStruct = structIdsToStructs.get(successorStructId);
+  		return upgradedStruct;
+  	}
+  	return null;
+  }
+  
+  public static Structure getPredecessorStructForStructId(int structId) {
+  	log.debug("retrieve predecessor struct data for structId " + structId);
+  	if (structIdsToStructs == null) {
+      setStaticStructIdsToStructs();      
+    }
+  	Structure curStruct = structIdsToStructs.get(structId);
+  	if (null != curStruct) {
+  		int predecessorStructId = curStruct.getPredecessorStructId();
+  		
+  		Structure predecessorStruct = structIdsToStructs.get(predecessorStructId);
+  		return predecessorStruct;
+  	}
+  	return null;
+  }
 
   private static void setStaticStructIdsToStructs() {
     log.debug("setting static map of structIds to structs");
@@ -90,9 +120,10 @@ import com.lvl6.utils.DBConnection;
     int instaBuildGemCost = rs.getInt(i++);
     int imgVerticalPixelOffset = rs.getInt(i++);
     int successorStructId = rs.getInt(i++);
+    int predecessorStructId = rs.getInt(i++);
     
     return new Structure(id, name, level, income, minutesToGain, minutesToBuild,
     		cashPrice, gemPrice, minLevel, xLength, yLength, instaBuildGemCost,
-    		imgVerticalPixelOffset, successorStructId);
+    		imgVerticalPixelOffset, successorStructId, predecessorStructId);
   }
 }

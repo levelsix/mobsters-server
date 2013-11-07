@@ -285,6 +285,7 @@ public class DBConstants {
   public static final String STRUCTURE_FOR_USER__PURCHASE_TIME = "purchase_time";
   public static final String STRUCTURE_FOR_USER__IS_COMPLETE = "is_complete";
   public static final String STRUCTURE_FOR_USER__ORIENTATION = "orientation";
+  public static final String STRUCTURE_FOR_USER__UPGRADE_START_TIME = "upgrade_start_time";
 
   /*TASK FOR USER TABLE*/
   public static final String TASK_FOR_USER__ID = GENERIC__ID;

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = 5890003961169632164L;
+	private static final long serialVersionUID = -2186263225940622814L;
 	private int id;
 	private String name;
 	private int level;
@@ -19,11 +19,12 @@ public class Structure implements Serializable {
 	private int instaBuildGemCost;
 	private int imgVerticalPixelOffset;
 	private int successorStructId;
+	private int predecessorStructId;
 	
 	public Structure(int id, String name, int level, int income,
 			int minutesToGain, int minutesToBuild, int cashPrice, int gemPrice,
 			int minLevel, int xLength, int yLength, int instaBuildGemCost,
-			int imgVerticalPixelOffset, int successorStructId) {
+			int imgVerticalPixelOffset, int successorStructId, int predecessorStructId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -39,6 +40,7 @@ public class Structure implements Serializable {
 		this.instaBuildGemCost = instaBuildGemCost;
 		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
 		this.successorStructId = successorStructId;
+		this.predecessorStructId = predecessorStructId;
 	}
 
 	public int getId() {
@@ -153,6 +155,14 @@ public class Structure implements Serializable {
 		this.successorStructId = successorStructId;
 	}
 
+	public int getPredecessorStructId() {
+		return predecessorStructId;
+	}
+
+	public void setPredecessorStructId(int predecessorStructId) {
+		this.predecessorStructId = predecessorStructId;
+	}
+
 	@Override
 	public String toString() {
 		return "Structure [id=" + id + ", name=" + name + ", level=" + level
@@ -162,7 +172,7 @@ public class Structure implements Serializable {
 				+ xLength + ", yLength=" + yLength + ", instaBuildGemCost="
 				+ instaBuildGemCost + ", imgVerticalPixelOffset="
 				+ imgVerticalPixelOffset + ", successorStructId=" + successorStructId
-				+ "]";
+				+ ", predecessorStructId=" + predecessorStructId + "]";
 	}
 
 }

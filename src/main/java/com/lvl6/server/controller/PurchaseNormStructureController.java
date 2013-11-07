@@ -221,23 +221,25 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     return true;
   }
   
-  //TODO: TRACK CURRENCY
   private void writeToUserCurrencyHistory(User aUser, int structId, int uStructId,
   		Timestamp date, Map<String, Integer> money, int previousSilver, int previousGold) {
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//    String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_NORM_STRUCT +
-//        " structId=" + structId + " uStructId=" + uStructId;
-//
-//    previousGoldSilver.put(gems, previousGold);
-//    previousGoldSilver.put(cash, previousSilver);
-//    reasonsForChanges.put(gems, reasonForChange);
-//    reasonsForChanges.put(cash, reasonForChange);
-//    
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-//        previousGoldSilver, reasonsForChanges);
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> details = new HashMap<String, String>();
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
+    String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_NORM_STRUCT;
+    String detail = "structId=" + structId + " uStructId=" + uStructId;
+
+    previousGemsCash.put(gems, previousGold);
+    previousGemsCash.put(cash, previousSilver);
+    reasonsForChanges.put(gems, reasonForChange);
+    reasonsForChanges.put(cash, reasonForChange);
+    details.put(gems, detail);
+    details.put(cash, detail);
+    
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
+        previousGemsCash, reasonsForChanges, details);
     
   }
 }
