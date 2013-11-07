@@ -720,6 +720,7 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
+			this.elo = newElo;
 			return true;
 		}
 		return false;
@@ -733,11 +734,30 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
+			this.lastTimeQueued = lastTimeQueued;
 			return true;
 		}
 		return false;
 	}
 
+	public boolean updateNthExtraSlotsViaFb(int slotChange) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		relativeParams.put(DBConstants.USER__NTH_EXTRA_SLOTS_VIA_FB, slotChange);
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, null, conditionParams, "and");
+		
+		if (1 == numUpdated) {
+			this.nthExtraSlotsViaFb += slotChange;
+			return true;
+		} else {
+			return false;
+		}
+			
+	}
+	
 
 	public int getId() {
 		return id;
