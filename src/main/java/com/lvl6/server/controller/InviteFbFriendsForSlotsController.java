@@ -66,8 +66,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     server.lockPlayer(userId, this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      boolean acceptedInvitesOnly = false;
       Map<Integer, UserFacebookInviteForSlot> idsToInvites = 
-      		UserFacebookInviteForSlotRetrieveUtils.getInviteIdsToInvitesForInviterUserId(userId);
+      		UserFacebookInviteForSlotRetrieveUtils.getInviteIdsToInvitesForInviterUserId(
+      				userId, acceptedInvitesOnly);
       
       //contains the facebook ids of new users the user can invite
       List<String> newFacebookIdsToInvite = new ArrayList<String>();

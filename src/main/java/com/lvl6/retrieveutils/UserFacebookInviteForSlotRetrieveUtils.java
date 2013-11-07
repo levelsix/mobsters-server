@@ -38,12 +38,28 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return invite;
   }
   
-  public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForInviterUserId(int userId) {
-  	TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
-  	paramsToVals.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, userId);
+  public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForInviterUserId(
+  		int userId, boolean acceptedInvitesOnly) {
+  	StringBuffer querySb = new StringBuffer();
+  	querySb.append("SELECT * FROM ");
+  	querySb.append(TABLE_NAME);
+  	querySb.append(" WHERE ");
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
+  	querySb.append("=?");
+  	List<Object> values = new ArrayList<Object>();
+  	values.add(userId);
   	
+  	if (acceptedInvitesOnly) {
+  		querySb.append(" AND ");
+  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
+  		querySb.append(" IS NOT NULL");
+  	}
+  	
+  	String query = querySb.toString();
+    log.info("query=" + query + "\t values=" + values);
+
     Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
     Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
     return idsToInvites;
   }
