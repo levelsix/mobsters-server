@@ -149,10 +149,10 @@ import com.lvl6.utils.DBConnection;
     String goodName = rs.getString(i++);
     String description = rs.getString(i++);
     int cityId = rs.getInt(i++);
-    int energyCost = rs.getInt(i++);
+//    int energyCost = rs.getInt(i++);
     int assetNumberWithinCity = rs.getInt(i++);
     
-    Task task = new Task(id, goodName, description, cityId, energyCost, assetNumberWithinCity);
+    Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity);
     return task;
   }
 }
