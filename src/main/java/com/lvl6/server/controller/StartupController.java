@@ -704,7 +704,9 @@ public class StartupController extends EventController {
     	for (MonsterEnhancingForUser mefu : enhancingMonsters) {
     		UserEnhancementItemProto ueip = CreateInfoProtoUtils.createUserEnhancementItemProtoFromObj(mefu);
     		
-    		//TODO: if user has no monsters with null start time, or if user has more than one
+    		//TODO: if user has no monsters with null start time
+    		//(if user has all monsters with a start time), or if user has more than one
+    		//monster with a null start time
     		//STORE THEM AND DELETE THEM OR SOMETHING
     		
     		//search for the monster that is being enhanced, the one with null start time

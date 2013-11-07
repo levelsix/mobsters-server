@@ -10,6 +10,7 @@ import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
+import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 
 public interface InsertUtil {
@@ -124,4 +125,9 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
 			Timestamp curTime);
+	
+	public abstract int insertIntoUserFbInviteForSlotAccepted(List<Integer> userIds,
+			List<Integer> nthExtraSlotsList,
+			List<UserFacebookInviteForSlot> acceptedInvites, Timestamp curTime);
+	
 }

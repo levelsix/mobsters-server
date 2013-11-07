@@ -10,7 +10,7 @@ option java_outer_classname = "EventMonsterProto";
 message SubmitMonsterEnhancementRequestProto {
 	optional MinimumUserProto sender = 1;
 	
-	//monster being enhanced will have null for expectedStartTime
+	//MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
 	repeated UserEnhancementItemProto ueipDelete = 2;
 	repeated UserEnhancementItemProto ueipUpdate = 3;
 	repeated UserEnhancementItemProto ueipNew = 4;
@@ -193,9 +193,17 @@ message RemoveMonsterFromBattleTeamResponseProto {
 
 message IncreaseMonsterInventorySlotRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 numPurchases = 2;
-	//EVERY TIME USER BUYS SLOTS RESET user_facebook_invite_for_slot table
+	optional IncreaseSlotType increaseSlotType = 2;
+	
+	optional int32 numPurchases = 3;
+	//EVERY TIME USER BUYS SLOTS, RESET user_facebook_invite_for_slot table
 	//no need to update clients that this happened
+	
+	
+	enum IncreaseSlotType {
+		PURCHASE = 1;
+		REDEEM_FACEBOOK_INVITES = 2;
+	}
 }	
 
 message IncreaseMonsterInventorySlotResponseProto {
@@ -205,9 +213,12 @@ message IncreaseMonsterInventorySlotResponseProto {
 	 enum IncreaseMonsterInventorySlotStatus {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_FUNDS = 2;
-		FAIL_OTHER = 3;
+		FAIL_INSUFFICIENT_FACEBOOK_INVITES = 3;
+		FAIL_OTHER = 4;
 	}
 }
+
+//------------------------------------------------------------------------------------------
 
 //NOTE: NO LOCK IS ACQUIRED FOR FB FRIENDS WHEN INSERTING INTO
 // user_facebook_invite_for_slot TABLE
@@ -226,6 +237,8 @@ message InviteFbFriendsForSlotsResponseProto {
 		FAIL_OTHER = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
 
 message AcceptAndRejectFbInviteForSlotsRequestProto {
 	optional MinimumUserProtoWithFacebookId sender = 1;

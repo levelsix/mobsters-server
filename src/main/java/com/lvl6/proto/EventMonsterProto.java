@@ -10046,7 +10046,11 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional int32 numPurchases = 2;
+    // optional .com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType = 2;
+    boolean hasIncreaseSlotType();
+    com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType getIncreaseSlotType();
+    
+    // optional int32 numPurchases = 3;
     boolean hasNumPurchases();
     int getNumPurchases();
   }
@@ -10078,6 +10082,75 @@ public final class EventMonsterProto {
       return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable;
     }
     
+    public enum IncreaseSlotType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      PURCHASE(0, 1),
+      REDEEM_FACEBOOK_INVITES(1, 2),
+      ;
+      
+      public static final int PURCHASE_VALUE = 1;
+      public static final int REDEEM_FACEBOOK_INVITES_VALUE = 2;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static IncreaseSlotType valueOf(int value) {
+        switch (value) {
+          case 1: return PURCHASE;
+          case 2: return REDEEM_FACEBOOK_INVITES;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<IncreaseSlotType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<IncreaseSlotType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<IncreaseSlotType>() {
+              public IncreaseSlotType findValueByNumber(int number) {
+                return IncreaseSlotType.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final IncreaseSlotType[] VALUES = {
+        PURCHASE, REDEEM_FACEBOOK_INVITES, 
+      };
+      
+      public static IncreaseSlotType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private IncreaseSlotType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType)
+    }
+    
     private int bitField0_;
     // optional .com.lvl6.proto.MinimumUserProto sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
@@ -10092,11 +10165,21 @@ public final class EventMonsterProto {
       return sender_;
     }
     
-    // optional int32 numPurchases = 2;
-    public static final int NUMPURCHASES_FIELD_NUMBER = 2;
+    // optional .com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType = 2;
+    public static final int INCREASESLOTTYPE_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType_;
+    public boolean hasIncreaseSlotType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType getIncreaseSlotType() {
+      return increaseSlotType_;
+    }
+    
+    // optional int32 numPurchases = 3;
+    public static final int NUMPURCHASES_FIELD_NUMBER = 3;
     private int numPurchases_;
     public boolean hasNumPurchases() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public int getNumPurchases() {
       return numPurchases_;
@@ -10104,6 +10187,7 @@ public final class EventMonsterProto {
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      increaseSlotType_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType.PURCHASE;
       numPurchases_ = 0;
     }
     private byte memoizedIsInitialized = -1;
@@ -10122,7 +10206,10 @@ public final class EventMonsterProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, numPurchases_);
+        output.writeEnum(2, increaseSlotType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, numPurchases_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -10139,7 +10226,11 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, numPurchases_);
+          .computeEnumSize(2, increaseSlotType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, numPurchases_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -10272,8 +10363,10 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        numPurchases_ = 0;
+        increaseSlotType_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType.PURCHASE;
         bitField0_ = (bitField0_ & ~0x00000002);
+        numPurchases_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -10323,6 +10416,10 @@ public final class EventMonsterProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
+        result.increaseSlotType_ = increaseSlotType_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
         result.numPurchases_ = numPurchases_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -10342,6 +10439,9 @@ public final class EventMonsterProto {
         if (other == com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
+        }
+        if (other.hasIncreaseSlotType()) {
+          setIncreaseSlotType(other.getIncreaseSlotType());
         }
         if (other.hasNumPurchases()) {
           setNumPurchases(other.getNumPurchases());
@@ -10387,7 +10487,18 @@ public final class EventMonsterProto {
               break;
             }
             case 16: {
-              bitField0_ |= 0x00000002;
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType value = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                increaseSlotType_ = value;
+              }
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
               numPurchases_ = input.readInt32();
               break;
             }
@@ -10487,22 +10598,46 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
       
-      // optional int32 numPurchases = 2;
+      // optional .com.lvl6.proto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType = 2;
+      private com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType increaseSlotType_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType.PURCHASE;
+      public boolean hasIncreaseSlotType() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType getIncreaseSlotType() {
+        return increaseSlotType_;
+      }
+      public Builder setIncreaseSlotType(com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        increaseSlotType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIncreaseSlotType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        increaseSlotType_ = com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.IncreaseSlotType.PURCHASE;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 numPurchases = 3;
       private int numPurchases_ ;
       public boolean hasNumPurchases() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public int getNumPurchases() {
         return numPurchases_;
       }
       public Builder setNumPurchases(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000004;
         numPurchases_ = value;
         onChanged();
         return this;
       }
       public Builder clearNumPurchases() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         numPurchases_ = 0;
         onChanged();
         return this;
@@ -10563,12 +10698,14 @@ public final class EventMonsterProto {
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_INSUFFICIENT_FUNDS(1, 2),
-      FAIL_OTHER(2, 3),
+      FAIL_INSUFFICIENT_FACEBOOK_INVITES(2, 3),
+      FAIL_OTHER(3, 4),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_INSUFFICIENT_FUNDS_VALUE = 2;
-      public static final int FAIL_OTHER_VALUE = 3;
+      public static final int FAIL_INSUFFICIENT_FACEBOOK_INVITES_VALUE = 3;
+      public static final int FAIL_OTHER_VALUE = 4;
       
       
       public final int getNumber() { return value; }
@@ -10577,7 +10714,8 @@ public final class EventMonsterProto {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_INSUFFICIENT_FUNDS;
-          case 3: return FAIL_OTHER;
+          case 3: return FAIL_INSUFFICIENT_FACEBOOK_INVITES;
+          case 4: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -10608,7 +10746,7 @@ public final class EventMonsterProto {
       }
       
       private static final IncreaseMonsterInventorySlotStatus[] VALUES = {
-        SUCCESS, FAIL_INSUFFICIENT_FUNDS, FAIL_OTHER, 
+        SUCCESS, FAIL_INSUFFICIENT_FUNDS, FAIL_INSUFFICIENT_FACEBOOK_INVITES, FAIL_OTHER, 
       };
       
       public static IncreaseMonsterInventorySlotStatus valueOf(
@@ -16008,61 +16146,66 @@ public final class EventMonsterProto {
       "onsterFromBattleTeamResponseProto.Remove" +
       "MonsterFromBattleTeamStatus\"@\n!RemoveMon" +
       "sterFromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
-      "\nFAIL_OTHER\020\002\"r\n(IncreaseMonsterInventor",
-      "ySlotRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022\024\n\014numPurcha" +
-      "ses\030\002 \001(\005\"\253\002\n)IncreaseMonsterInventorySl" +
-      "otResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022l\n\006status\030\002 \001(" +
-      "\0162\\.com.lvl6.proto.IncreaseMonsterInvent" +
-      "orySlotResponseProto.IncreaseMonsterInve" +
-      "ntorySlotStatus\"^\n\"IncreaseMonsterInvent" +
-      "orySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUF" +
-      "FICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003\"z\n#Invit",
-      "eFbFriendsForSlotsRequestProto\022>\n\006sender" +
-      "\030\001 \001(\0132..com.lvl6.proto.MinimumUserProto" +
-      "WithFacebookId\022\023\n\013fbFriendIds\030\002 \003(\t\"\210\002\n$" +
-      "InviteFbFriendsForSlotsResponseProto\022>\n\006" +
+      "\nFAIL_OTHER\020\002\"\226\002\n(IncreaseMonsterInvento",
+      "rySlotRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022c\n\020increase" +
+      "SlotType\030\002 \001(\0162I.com.lvl6.proto.Increase" +
+      "MonsterInventorySlotRequestProto.Increas" +
+      "eSlotType\022\024\n\014numPurchases\030\003 \001(\005\"=\n\020Incre" +
+      "aseSlotType\022\014\n\010PURCHASE\020\001\022\033\n\027REDEEM_FACE" +
+      "BOOK_INVITES\020\002\"\324\002\n)IncreaseMonsterInvent" +
+      "orySlotResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022l\n\006status" +
+      "\030\002 \001(\0162\\.com.lvl6.proto.IncreaseMonsterI",
+      "nventorySlotResponseProto.IncreaseMonste" +
+      "rInventorySlotStatus\"\206\001\n\"IncreaseMonster" +
+      "InventorySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL" +
+      "_INSUFFICIENT_FUNDS\020\002\022&\n\"FAIL_INSUFFICIE" +
+      "NT_FACEBOOK_INVITES\020\003\022\016\n\nFAIL_OTHER\020\004\"z\n" +
+      "#InviteFbFriendsForSlotsRequestProto\022>\n\006" +
       "sender\030\001 \001(\0132..com.lvl6.proto.MinimumUse" +
-      "rProtoWithFacebookId\022b\n\006status\030\002 \001(\0162R.c" +
-      "om.lvl6.proto.InviteFbFriendsForSlotsRes" +
-      "ponseProto.InviteFbFriendsForSlotsStatus" +
-      "\"<\n\035InviteFbFriendsForSlotsStatus\022\013\n\007SUC" +
-      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\243\001\n+AcceptAndReje",
-      "ctFbInviteForSlotsRequestProto\022>\n\006sender" +
-      "\030\001 \001(\0132..com.lvl6.proto.MinimumUserProto" +
-      "WithFacebookId\022\031\n\021acceptedInviteIds\030\002 \003(" +
-      "\005\022\031\n\021rejectedInviteIds\030\003 \003(\005\"\326\002\n,AcceptA" +
-      "ndRejectFbInviteForSlotsResponseProto\022>\n" +
-      "\006sender\030\001 \001(\0132..com.lvl6.proto.MinimumUs" +
-      "erProtoWithFacebookId\022r\n\006status\030\002 \001(\0162b." +
-      "com.lvl6.proto.AcceptAndRejectFbInviteFo" +
-      "rSlotsResponseProto.AcceptAndRejectFbInv" +
-      "iteForSlotsStatus\"r\n%AcceptAndRejectFbIn",
-      "viteForSlotsStatus\022\013\n\007SUCCESS\020\001\022\020\n\014FAIL_" +
-      "EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BEEN_USED\020\003\022\016\n" +
-      "\nFAIL_OTHER\020\004\"\201\001\n$CombineUserMonsterPiec" +
-      "esRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\026\n\016userMonsterI" +
-      "ds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%CombineUse" +
-      "rMonsterPiecesResponseProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022d\n" +
-      "\006status\030\002 \001(\0162T.com.lvl6.proto.CombineUs" +
-      "erMonsterPiecesResponseProto.CombineUser",
-      "MonsterPiecesStatus\"\205\001\n\036CombineUserMonst" +
-      "erPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSU" +
-      "FFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_THAN_ONE_MO" +
-      "NSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTHER\020\004\"\213\001\n\033" +
-      "SellUserMonsterRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022:\n" +
-      "\005sales\030\002 \003(\0132+.com.lvl6.proto.MinimumUse" +
-      "rMonsterSellProto\"\332\001\n\034SellUserMonsterRes" +
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022R\n\006status\030\002 \001(\0162B.c",
-      "om.lvl6.proto.SellUserMonsterResponsePro" +
-      "to.SellUserMonsterStatus\"4\n\025SellUserMons" +
-      "terStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023" +
-      "B\021EventMonsterProto"
+      "rProtoWithFacebookId\022\023\n\013fbFriendIds\030\002 \003(" +
+      "\t\"\210\002\n$InviteFbFriendsForSlotsResponsePro" +
+      "to\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Mini",
+      "mumUserProtoWithFacebookId\022b\n\006status\030\002 \001" +
+      "(\0162R.com.lvl6.proto.InviteFbFriendsForSl" +
+      "otsResponseProto.InviteFbFriendsForSlots" +
+      "Status\"<\n\035InviteFbFriendsForSlotsStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\243\001\n+AcceptA" +
+      "ndRejectFbInviteForSlotsRequestProto\022>\n\006" +
+      "sender\030\001 \001(\0132..com.lvl6.proto.MinimumUse" +
+      "rProtoWithFacebookId\022\031\n\021acceptedInviteId" +
+      "s\030\002 \003(\005\022\031\n\021rejectedInviteIds\030\003 \003(\005\"\326\002\n,A" +
+      "cceptAndRejectFbInviteForSlotsResponsePr",
+      "oto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Min" +
+      "imumUserProtoWithFacebookId\022r\n\006status\030\002 " +
+      "\001(\0162b.com.lvl6.proto.AcceptAndRejectFbIn" +
+      "viteForSlotsResponseProto.AcceptAndRejec" +
+      "tFbInviteForSlotsStatus\"r\n%AcceptAndReje" +
+      "ctFbInviteForSlotsStatus\022\013\n\007SUCCESS\020\001\022\020\n" +
+      "\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BEEN_USE" +
+      "D\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$CombineUserMonst" +
+      "erPiecesRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\026\n\016userMo",
+      "nsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%Comb" +
+      "ineUserMonsterPiecesResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Com" +
+      "bineUserMonsterPiecesResponseProto.Combi" +
+      "neUserMonsterPiecesStatus\"\205\001\n\036CombineUse" +
+      "rMonsterPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAI" +
+      "L_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_THAN_" +
+      "ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTHER\020" +
+      "\004\"\213\001\n\033SellUserMonsterRequestProto\0220\n\006sen",
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.proto.Mini" +
+      "mumUserMonsterSellProto\"\332\001\n\034SellUserMons" +
+      "terResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022R\n\006status\030\002 \001" +
+      "(\0162B.com.lvl6.proto.SellUserMonsterRespo" +
+      "nseProto.SellUserMonsterStatus\"4\n\025SellUs" +
+      "erMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
+      "ER\020\002B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -16186,7 +16329,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "NumPurchases", },
+              new java.lang.String[] { "Sender", "IncreaseSlotType", "NumPurchases", },
               com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.class,
               com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotRequestProto.Builder.class);
           internal_static_com_lvl6_proto_IncreaseMonsterInventorySlotResponseProto_descriptor =
