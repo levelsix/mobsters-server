@@ -80,9 +80,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
           int cashChange = 0;
           
           if (struct.isPremiumCurrency()) {
-          	gemChange = -1 * struct.getSellPrice();
+          	gemChange = struct.getSellPrice();
           } else {
-          	cashChange = -1 * struct.getSellPrice();
+          	cashChange = struct.getSellPrice();
           }
           
           if (!user.updateRelativeDiamondsCoinsExperienceNaive(gemChange, cashChange, 0)) {
