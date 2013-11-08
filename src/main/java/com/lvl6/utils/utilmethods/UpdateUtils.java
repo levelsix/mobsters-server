@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,10 +18,12 @@ import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
+import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.DBConnection;
 
@@ -271,7 +274,8 @@ public class UpdateUtils implements UpdateUtil {
 	}
 	
 	@Override
-	public boolean updateFinishUpgradingUserStruct(int userStructId, Timestamp lastRetrievedTime) {
+	public boolean updateSpeedupUpgradingUserStruct(int userStructId,
+			Timestamp lastRetrievedTime, Timestamp purchaseTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 		
@@ -279,7 +283,7 @@ public class UpdateUtils implements UpdateUtil {
 		Map <String, Object> relativeParams = null; //new HashMap<String, Object>();
 		
 		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
-		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, lastRetrievedTime);
+		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, purchaseTime);
 		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
@@ -290,27 +294,54 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 	
-	/*
-	 * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
-	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructsLastretrievedpostbuildIscomplete(java.util.List)
-	 */
 	@Override
-	public boolean updateUserStructsLastretrievedpostbuildIscomplete(List<StructureForUser> userStructs) {
-//		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
-//
-//		for (StructureForUser userStruct : userStructs) {
-//			Structure structure = structures.get(userStruct.getStructId());
-//			Timestamp lastRetrievedTime = new Timestamp(
-//					userStruct.getPurchaseTime().getTime() + 
-//					60000*
-//					MiscMethods.calculateMinutesToBuildOrUpgradeForUserStruct(structure.getMinutesToUpgradeBase(), 0));
-//			if (!updateUserStructLastretrievedLastupgradeIscomplete(userStruct.getId(), lastRetrievedTime, null, true)) {
-//				return false;
-//			}
-//		}
-		return true;
+	public boolean updateUserStructsBuildingIscomplete(int userId, 
+			List<StructureForUser> userStructs, List<Timestamp> newPurchaseTimes) {
+		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
+		Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
+		
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (int index = 0; index < newPurchaseTimes.size(); index++) {
+			StructureForUser userStruct = userStructs.get(index); 
+			Timestamp newPurchaseTime = newPurchaseTimes.get(index);
+			Structure structure = structures.get(userStruct.getStructId());
+			long userStructPurchaseTime = userStruct.getPurchaseTime().getTime();
+			Timestamp lastRetrievedTime = new Timestamp(userStructPurchaseTime +
+					60000 * structure.getMinutesToBuild());
+			
+			//not really necessary to set them all the unchanging ones, but let's be safe
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__ID, userStruct.getId());
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, userId);
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, structure.getId());
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
+			CoordinatePair coord = userStruct.getCoordinates();
+			float xCoordinate = coord.getX();
+			float yCoordinate = coord.getY();
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, xCoordinate);
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, yCoordinate);
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, newPurchaseTime);
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, userStruct.getOrientation().getNumber());
+			newRow.put(DBConstants.STRUCTURE_FOR_USER__UPGRADE_START_TIME, userStruct.getUpgradeStartTime());
+			
+			newRows.add(newRow);
+		}
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED);
+		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME);
+		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE);
+		
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
+		
+		log.info("num userStructs updated: " + numUpdated  + ". Number of userStructs: " +
+				userStructs.size() + "\t userStructs=" + userStructs);
+		if (numUpdated == userStructs.size()*2) {
+			return true;
+		}
+		return false;
 	}
 
 	/*

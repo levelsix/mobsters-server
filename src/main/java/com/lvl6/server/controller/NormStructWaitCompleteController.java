@@ -61,7 +61,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    server.lockPlayer(userId, this.getClass().getSimpleName());
     try {
       List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils()
       		.getSpecificOrAllUserStructsForUser(userId, userStructIds);
@@ -73,7 +73,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       boolean success = false;
       if (legitWaitComplete) {
       	//upgrading and building a building is the same thing
-        success = writeChangesToDB(userStructs);
+        success = writeChangesToDB(userId, userStructs);
       }
 
       if (success) {
@@ -94,16 +94,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     } catch (Exception e) {
       log.error("exception in NormStructWaitCompleteController processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());      
+      server.unlockPlayer(userId, this.getClass().getSimpleName());      
     }
-  }
-
-  private boolean writeChangesToDB(List<StructureForUser> buildsDone) {
-    if (!UpdateUtils.get().updateUserStructsLastretrievedpostbuildIscomplete(buildsDone)) {
-      log.error("problem with marking norm struct builds as complete for one of these structs: " + buildsDone);
-      return false;
-    }
-    return true;
   }
 
   private boolean checkLegitWaitComplete(Builder resBuilder,
@@ -145,7 +137,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   }
 
-  //"validStructIds" and "validUserStructs" will be POPULATED
+  //"validUserStructIds" and "validUserStructs" will be POPULATED
   private void calculateValidUserStructs(int userId, Timestamp clientTime, 
   		List<StructureForUser> userStructs, List<Integer> validUserStructIds,
   		List<StructureForUser> validUserStructs) {
@@ -178,9 +170,42 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       } else {
         log.warn("user struct has never been bought or purchased according to db. " + us);
       }
-      
     }
     
+  }
+  
+
+  private boolean writeChangesToDB(int userId, List<StructureForUser> buildsDone) {
+  	List<Timestamp> newPurchaseTimes = calculateNewPurchaseTimes(buildsDone);
+    if (!UpdateUtils.get().updateUserStructsBuildingIscomplete(userId, buildsDone,
+    		newPurchaseTimes)) {
+      log.error("problem with marking norm struct builds as complete for one of these structs: " + buildsDone);
+      return false;
+    }
+    return true;
+  }
+
+  //if build that is done is done upgrading, then it's purchase time should change
+  private List<Timestamp> calculateNewPurchaseTimes(List<StructureForUser> buildsDone) {
+  	List<Timestamp> newPurchaseTimes = new ArrayList<Timestamp>();
+  	
+  	for (StructureForUser sfu : buildsDone) {
+  		int structureId = sfu.getStructId();
+  		Structure struct = StructureRetrieveUtils.getPredecessorStructForStructId(structureId);
+  		Date newDate;
+  		
+  		if (null != struct) {
+  			newDate = sfu.getUpgradeStartTime();
+  		} else {
+  			//no predecessor struct, meaning this structure just finished being built
+  			//not upgrading
+  			newDate = sfu.getPurchaseTime();
+  		}
+  		
+  		Timestamp newTime = new Timestamp(newDate.getTime());
+  		newPurchaseTimes.add(newTime);
+  	}
+  	return newPurchaseTimes;
   }
   
 }

@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +89,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (legitSpeedup) {
         previousGems = user.getGems();
         int gemCost = gemCostList.get(0);
-        success = writeChangesToDB(user, userStruct, timeOfSpeedup, struct, gemCost, money);
+        success = writeChangesToDB(user, userStruct, timeOfSpeedup, struct,
+        		formerStruct, gemCost, money);
       }
       
       FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserId());
@@ -149,13 +151,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean writeChangesToDB(User user, StructureForUser userStruct,
-  		Timestamp timeOfPurchase, Structure struct, int gemCost, 
-  		Map<String, Integer> money) {
-  	
-  	
+  		Timestamp timeOfSpeedup, Structure struct, Structure formerStruct,
+  		int gemCost, Map<String, Integer> money) {
+
   	int gemChange = -1 * gemCost;
+  	//when user upgrades a building its purchase time also gets updated
+  	//it shouldn't be updated if the structure is just waiting to be built
+  	Date newPurchaseDate = userStruct.getPurchaseTime();
+  	if (null != formerStruct) {
+  		newPurchaseDate = userStruct.getUpgradeStartTime();
+  	}
+  	Timestamp newPurchaseTime = new Timestamp(newPurchaseDate.getTime());
+  	
   	//update structure for user to reflect it is complete
-  	if (!UpdateUtils.get().updateFinishUpgradingUserStruct(userStruct.getId(), timeOfPurchase)) {
+  	//if this speed up request is for upgrading, then it's purchase time should
+  	//be when upgrading first began
+  	if (!UpdateUtils.get().updateSpeedupUpgradingUserStruct(userStruct.getId(),
+  			timeOfSpeedup, newPurchaseTime)) {
   		log.error("problem with completing norm struct build time. userStruct=" +
   				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
   		return false;

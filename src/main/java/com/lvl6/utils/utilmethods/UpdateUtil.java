@@ -64,14 +64,14 @@ public interface UpdateUtil {
   /*
    * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
    */
-  public abstract boolean updateUserStructsLastretrievedpostbuildIscomplete(
-      List<StructureForUser> userStructs);
+  public abstract boolean updateUserStructsBuildingIscomplete(int userId,
+      List<StructureForUser> userStructs, List<Timestamp> newPurchaseTimes);
 
   public abstract boolean updateBeginUpgradingUserStruct(int userStructId,
   		int newStructId, Timestamp upgradeTime);
   
-  public abstract boolean updateFinishUpgradingUserStruct(
-  		int userStructId, Timestamp lastRetrievedTime);
+  public abstract boolean updateSpeedupUpgradingUserStruct(int userStructId,
+  		Timestamp lastRetrievedTime, Timestamp purchaseTime);
   
   /*
    * used for updating last retrieved user struct times
