@@ -1,10 +1,8 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -58,6 +56,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int userId = senderProto.getUserId();
     int userStructId = reqProto.getUserStructId();
     Timestamp timeOfSpeedup = new Timestamp(reqProto.getTimeOfSpeedup());
+    int gemCostToSpeedup = reqProto.getGemCostToSpeedup();
 
     FinishNormStructWaittimeWithDiamondsResponseProto.Builder resBuilder = FinishNormStructWaittimeWithDiamondsResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -78,19 +77,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         formerStruct = StructureRetrieveUtils.getPredecessorStructForStructId(structId);
       }
       
-      //don't want to recalculate gem cost, so this will contain cost when it's first computed
-      List<Integer> gemCostList = new ArrayList<Integer>();
       boolean legitSpeedup = checkLegitSpeedup(resBuilder, user, userStruct,
-      		timeOfSpeedup, struct, gemCostList);
+      		timeOfSpeedup, struct, gemCostToSpeedup);
 
       
       boolean success = false;
       Map<String, Integer> money = new HashMap<String, Integer>();
       if (legitSpeedup) {
         previousGems = user.getGems();
-        int gemCost = gemCostList.get(0);
         success = writeChangesToDB(user, userStruct, timeOfSpeedup, struct,
-        		formerStruct, gemCost, money);
+        		formerStruct, gemCostToSpeedup, money);
       }
       
       FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserId());
@@ -123,7 +119,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean checkLegitSpeedup(Builder resBuilder, User user,
   		StructureForUser userStruct, Timestamp timeOfSpeedup, Structure struct,
-  		List<Integer> gemCostList) {
+  		int gemCostToSpeedup) {
     if (user == null || userStruct == null || struct == null ||
     		userStruct.getUserId() != user.getId() || userStruct.isComplete()) {
       resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
@@ -132,20 +128,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     
-    //ACCOUNT FOR HOW MUCH TIME HAS PASSED WHEN DETERMINING SPEEDUP GEM COST 
-    int cost = struct.getInstaBuildGemCost();
-    long startTimeMillis = userStruct.getPurchaseTime().getTime();
-    long durationInSeconds = struct.getMinutesToBuild() * 60;
-    long curTimeMillis = timeOfSpeedup.getTime();
-    int gemCost = MiscMethods.speedupCostOverTime(cost, startTimeMillis, durationInSeconds, curTimeMillis);
-    
-    if (user.getGems() < gemCost) {
+    if (user.getGems() < gemCostToSpeedup) {
       resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_NOT_ENOUGH_GEMS);
-      log.error("user doesn't have enough diamonds. has " + user.getGems() +", needs " + gemCost);
+      log.error("user doesn't have enough diamonds. has " + user.getGems() +", needs " +
+      		gemCostToSpeedup);
       return false;
     }
     
-    gemCostList.add(gemCost);
     resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);
     return true;  
   }

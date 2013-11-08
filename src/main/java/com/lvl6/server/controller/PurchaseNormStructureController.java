@@ -128,37 +128,6 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     }
   }
 
-  private boolean writeChangesToDB(User user, Structure struct, CoordinatePair cp,
-  		Timestamp purchaseTime, List<Integer> uStructId, Map<String, Integer> money) {
-    int gemChange = -1 * Math.max(0, struct.getGemPrice());
-    int cashChange = -1 * Math.max(0, struct.getCashPrice());
-    
-    int userId = user.getId();
-    int structId = struct.getId();
-    int userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime);
-    if (userStructId <= 0) {
-      log.error("problem with giving struct " + structId + " at " + purchaseTime +
-      		" on " + cp);
-      return false;
-    }
-
-    int num = user.updateRelativeCoinsAndDiamonds(cashChange, gemChange);
-    if (1 != num) {
-      log.error("problem with updating user currency. gemChange=" + gemChange +
-      		" cashChange=" + cashChange + "\t numRowsUpdated=" + num);
-      return false;
-    } else {//things went ok
-      if (0 != gemChange) {
-        money.put(MiscMethods.gems, gemChange * -1);
-      }
-      if (0 != cashChange) {
-        money.put(MiscMethods.cash, cashChange * -1);
-      }
-    }
-    
-    uStructId.add(userStructId);
-    return true;
-  }
 
   private boolean checkLegitPurchaseNorm(Builder resBuilder, Structure prospective,
       User user, Timestamp timeOfPurchase) {
@@ -175,17 +144,21 @@ import com.lvl6.utils.utilmethods.InsertUtil;
           ", struct's min level is " + prospective.getMinLevel());
       return false;
     }
-    //check if user has enough cash to buy building
-    if (user.getCash() < prospective.getCashPrice()) {
-      resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
-      log.error("user only has " + user.getCash() + " coins and needs " + prospective.getCashPrice());
-      return false;
-    }
-    //check if user has enough gems to buy building
-    if (user.getGems() < prospective.getGemPrice()) {
-      resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
-      log.error("user only has " + user.getGems() + " diamonds and needs " + prospective.getGemPrice());
-      return false;
+    int buildPrice = prospective.getBuildPrice();
+    if (prospective.isPremiumCurrency()) {
+    	//check if user has enough gems to buy building
+    	if (user.getGems() < buildPrice) {
+    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
+    		log.error("user only has " + user.getGems() + " gems; needs " + buildPrice);
+    		return false;
+    	}
+    } else {
+    	//check if user has enough cash to building
+    	if (user.getCash() < buildPrice) {
+    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
+    		log.error("user only has " + user.getCash() + " cash; needs " + buildPrice);
+    		return false;
+    	}
     }
 
     int maxNumSameStruct = ControllerConstants
@@ -218,6 +191,44 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     		log.error("user has no structs? for structid " + structId);
     	}
     }
+    return true;
+  }
+
+  private boolean writeChangesToDB(User user, Structure struct, CoordinatePair cp,
+  		Timestamp purchaseTime, List<Integer> uStructId, Map<String, Integer> money) {
+  	int buildPrice = struct.getBuildPrice();
+    int gemChange = 0;
+    int cashChange = 0;
+    if (struct.isPremiumCurrency()) {
+    	gemChange = -1 * buildPrice;
+    } else {
+    	cashChange = -1* buildPrice;
+    }
+    
+    int userId = user.getId();
+    int structId = struct.getId();
+    int userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime);
+    if (userStructId <= 0) {
+      log.error("problem with giving struct " + structId + " at " + purchaseTime +
+      		" on " + cp);
+      return false;
+    }
+
+    int num = user.updateRelativeCoinsAndDiamonds(cashChange, gemChange);
+    if (1 != num) {
+      log.error("problem with updating user currency. gemChange=" + gemChange +
+      		" cashChange=" + cashChange + "\t numRowsUpdated=" + num);
+      return false;
+    } else {//things went ok
+      if (0 != gemChange) {
+        money.put(MiscMethods.gems, gemChange * -1);
+      }
+      if (0 != cashChange) {
+        money.put(MiscMethods.cash, cashChange * -1);
+      }
+    }
+    
+    uStructId.add(userStructId);
     return true;
   }
   

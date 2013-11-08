@@ -4,27 +4,28 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = -2186263225940622814L;
+	private static final long serialVersionUID = 3987603240365836181L;
 	private int id;
 	private String name;
 	private int level;
 	private int income;
 	private int minutesToGain;
 	private int minutesToBuild;
-	private int cashPrice;
-	private int gemPrice;
+	private int buildPrice;
+	private boolean isPremiumCurrency;
+	private int sellPrice;
 	private int minLevel;
 	private int xLength;
 	private int yLength;
-	private int instaBuildGemCost;
 	private int imgVerticalPixelOffset;
 	private int successorStructId;
 	private int predecessorStructId;
 	
 	public Structure(int id, String name, int level, int income,
-			int minutesToGain, int minutesToBuild, int cashPrice, int gemPrice,
-			int minLevel, int xLength, int yLength, int instaBuildGemCost,
-			int imgVerticalPixelOffset, int successorStructId, int predecessorStructId) {
+			int minutesToGain, int minutesToBuild, int buildPrice,
+			boolean isPremiumCurrency, int sellPrice, int minLevel, int xLength,
+			int yLength, int imgVerticalPixelOffset, int successorStructId,
+			int predecessorStructId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -32,12 +33,12 @@ public class Structure implements Serializable {
 		this.income = income;
 		this.minutesToGain = minutesToGain;
 		this.minutesToBuild = minutesToBuild;
-		this.cashPrice = cashPrice;
-		this.gemPrice = gemPrice;
+		this.buildPrice = buildPrice;
+		this.isPremiumCurrency = isPremiumCurrency;
+		this.sellPrice = sellPrice;
 		this.minLevel = minLevel;
 		this.xLength = xLength;
 		this.yLength = yLength;
-		this.instaBuildGemCost = instaBuildGemCost;
 		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
 		this.successorStructId = successorStructId;
 		this.predecessorStructId = predecessorStructId;
@@ -91,20 +92,28 @@ public class Structure implements Serializable {
 		this.minutesToBuild = minutesToBuild;
 	}
 
-	public int getCashPrice() {
-		return cashPrice;
+	public int getBuildPrice() {
+		return buildPrice;
 	}
 
-	public void setCashPrice(int cashPrice) {
-		this.cashPrice = cashPrice;
+	public void setBuildPrice(int buildPrice) {
+		this.buildPrice = buildPrice;
 	}
 
-	public int getGemPrice() {
-		return gemPrice;
+	public boolean isPremiumCurrency() {
+		return isPremiumCurrency;
 	}
 
-	public void setGemPrice(int gemPrice) {
-		this.gemPrice = gemPrice;
+	public void setPremiumCurrency(boolean isPremiumCurrency) {
+		this.isPremiumCurrency = isPremiumCurrency;
+	}
+
+	public int getSellPrice() {
+		return sellPrice;
+	}
+
+	public void setSellPrice(int sellPrice) {
+		this.sellPrice = sellPrice;
 	}
 
 	public int getMinLevel() {
@@ -129,14 +138,6 @@ public class Structure implements Serializable {
 
 	public void setyLength(int yLength) {
 		this.yLength = yLength;
-	}
-
-	public int getInstaBuildGemCost() {
-		return instaBuildGemCost;
-	}
-
-	public void setInstaBuildGemCost(int instaBuildGemCost) {
-		this.instaBuildGemCost = instaBuildGemCost;
 	}
 
 	public int getImgVerticalPixelOffset() {
@@ -167,10 +168,10 @@ public class Structure implements Serializable {
 	public String toString() {
 		return "Structure [id=" + id + ", name=" + name + ", level=" + level
 				+ ", income=" + income + ", minutesToGain=" + minutesToGain
-				+ ", minutesToBuild=" + minutesToBuild + ", cashPrice=" + cashPrice
-				+ ", gemPrice=" + gemPrice + ", minLevel=" + minLevel + ", xLength="
-				+ xLength + ", yLength=" + yLength + ", instaBuildGemCost="
-				+ instaBuildGemCost + ", imgVerticalPixelOffset="
+				+ ", minutesToBuild=" + minutesToBuild + ", buildPrice=" + buildPrice
+				+ ", isPremiumCurrency=" + isPremiumCurrency + ", sellPrice="
+				+ sellPrice + ", minLevel=" + minLevel + ", xLength=" + xLength
+				+ ", yLength=" + yLength + ", imgVerticalPixelOffset="
 				+ imgVerticalPixelOffset + ", successorStructId=" + successorStructId
 				+ ", predecessorStructId=" + predecessorStructId + "]";
 	}

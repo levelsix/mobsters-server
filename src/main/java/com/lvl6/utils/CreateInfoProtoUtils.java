@@ -492,20 +492,20 @@ public class CreateInfoProtoUtils {
     builder.setIncome(s.getIncome());
     builder.setMinutesToGain(s.getMinutesToGain());
     builder.setMinutesToBuild(s.getMinutesToBuild());
-    if (s.getCashPrice() > 0) {
-    	builder.setCashPrice(s.getCashPrice());
-    }
-    if (s.getGemPrice() > 0) {
-    	builder.setGemPrice(s.getGemPrice());
-    }
+    builder.setBuildPrice(s.getBuildPrice());
+    builder.setIsPremiumCurrency(s.isPremiumCurrency());
+    builder.setSellPrice(s.getSellPrice());
     builder.setMinLevel(s.getMinLevel());
     builder.setXLength(s.getxLength());
     builder.setYLength(s.getyLength());
-    builder.setInstaBuildGemCost(s.getInstaBuildGemCost());
     builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
     
     if (s.getSuccessorStructId() > 0) {
     	builder.setSuccessorStructId(s.getSuccessorStructId());
+    }
+    //not really needed, but what the hey
+    if (s.getPredecessorStructId() > 0) {
+    	builder.setPredecessorStructId(s.getPredecessorStructId());
     }
     
     return builder.build();

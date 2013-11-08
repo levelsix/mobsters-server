@@ -115,8 +115,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//charge the user  	
-  	int gemCost = upgradedStruct.getGemPrice();
-  	int cashCost = upgradedStruct.getCashPrice();
+  	int buildPrice = upgradedStruct.getBuildPrice();
+  	
+  	int gemCost = 0;
+  	int cashCost = 0;
+  	if (upgradedStruct.isPremiumCurrency()) {
+  		gemCost = buildPrice;
+  	} else {
+  		cashCost = buildPrice;
+  	}
+  	
     int gemChange = -1*gemCost;
     int cashChange = -1*cashCost;
     if (!user.updateRelativeDiamondsCoinsExperienceNaive(gemChange, cashChange, 0)) {
@@ -158,23 +166,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     //see if the user can upgrade it
-    int upgradeCashCost = upgradedStruct.getCashPrice();
-    int upgradeGemCost = upgradedStruct.getGemPrice();
-
     if (user.getId() != userStruct.getUserId()) {
       resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_USERS_STRUCT);
       log.error("user struct belongs to someone else with id " + userStruct.getUserId());
       return false;
     }
-    if (user.getCash() < upgradeCashCost) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
-      log.error("user doesn't have enough coins, has " + user.getCash() + ", needs " + upgradeCashCost);
-      return false;
-    }
-    if (user.getGems() < upgradeGemCost) {
-      resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
-      log.error("user doesn't have enough diamonds, has " + user.getGems() + ", needs " + upgradeGemCost);
-      return false;
+    
+    int buildPrice = upgradedStruct.getBuildPrice();
+    if (upgradedStruct.isPremiumCurrency()) {
+    	if (user.getGems() < buildPrice) {
+    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
+    		log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + buildPrice);
+    		return false;
+    	}
+    } else {
+    	if (user.getCash() < buildPrice) {
+    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
+    		log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + buildPrice);
+    		return false;
+    	}
     }
     //TODO: only make one user struct retrieve call 
     List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
