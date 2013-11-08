@@ -88,6 +88,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         success = writeChangesToDB(user, userStruct, timeOfSpeedup, struct,
         		formerStruct, gemCostToSpeedup, money);
       }
+      if (success) {
+      	resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);
+      }
       
       FinishNormStructWaittimeWithDiamondsResponseEvent resEvent = new FinishNormStructWaittimeWithDiamondsResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
@@ -135,7 +138,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     
-    resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);
     return true;  
   }
 
@@ -144,6 +146,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		int gemCost, Map<String, Integer> money) {
 
   	int gemChange = -1 * gemCost;
+  	//update user gems
+  	if (!user.updateRelativeDiamondsNaive(gemChange)) {
+  		log.error("problem with using diamonds to finish norm struct build. userStruct=" +
+  				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
+  		return false;
+  	} else {
+  		money.put(MiscMethods.gems, gemChange);
+  	}
+  	
   	//when user upgrades a building its purchase time also gets updated
   	//it shouldn't be updated if the structure is just waiting to be built
   	Date newPurchaseDate = userStruct.getPurchaseTime();
@@ -162,13 +173,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		return false;
   	}
   	
-  	//update user gems
-  	if (!user.updateRelativeDiamondsNaive(gemChange)) {
-  		log.error("problem with using diamonds to finish norm struct build. userStruct=" +
-  				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
-  	} else {
-  		money.put(MiscMethods.gems, gemChange);
-  	}
+  	
   	return true;
   }
 
