@@ -759,7 +759,7 @@ public class DBConnection {
 		String query = constructInsertOrReplaceIntoTableValuesSQLQuery(tableName,
 				columns, questions, numberOfQuestionLists, isInsert);
 		//append the "ON DUPLICATE KEY UPDATE" part
-		transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns);
+		query = transformToOnDuplicateKeyUpdateQuery(query, replaceTheseColumns);
 		
 		numUpdated = queryDbAndReturnNumUpdated(query, valuesListCollection);
 		return numUpdated;
@@ -892,7 +892,7 @@ public class DBConnection {
 		}
 	}
 	
-	private void transformToOnDuplicateKeyUpdateQuery(String query, 
+	private String transformToOnDuplicateKeyUpdateQuery(String query, 
 			Set<String> replaceTheseColumns) {
 		
 		StringBuffer newQuery = new StringBuffer();
@@ -918,6 +918,7 @@ public class DBConnection {
 		String allUpdateClauses = StringUtils.getListInString(updateClauseList, ", ");
 		newQuery.append(allUpdateClauses);
 		
+		return newQuery.toString();
 	}
 	
 	private int queryDbAndReturnNumUpdated(String query, List<List<Object>> valuesListCollection) {
