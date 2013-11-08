@@ -220,22 +220,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private boolean writeChangesToDb(User u, int uId, Timestamp clientTime,
   		Map<Long, MonsterEnhancingForUser> inEnhancing, UserMonsterCurrentExpProto umcep,
-  		List<Long> userMonsterIds, boolean isSpeedUp, int gemsForSpeedup,
+  		List<Long> userMonsterIds, boolean isSpeedup, int gemsForSpeedup,
   		Map<String, Integer> money) {
 
 
-  	//CHARGE THE USER
-  	int gemCost = -1 * gemsForSpeedup;
-	  if (!u.updateRelativeDiamondsNaive(gemCost)) {
-		  log.error("problem with updating user stats post-task. cashGained="
-				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
-				  ", clientTime=" + clientTime + ", user=" + u);
-		  return false;
-	  } else {
-	  	if (0 != gemCost) {
-	  		money.put(MiscMethods.gems, gemCost);
-	  	}
-	  }
+  	if (isSpeedup) {
+  		//CHARGE THE USER
+  		int gemCost = -1 * gemsForSpeedup;
+  		if (!u.updateRelativeDiamondsNaive(gemCost)) {
+  			log.error("problem with updating user stats post-task. cashGained="
+  					+ 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
+  					", clientTime=" + clientTime + ", user=" + u);
+  			return false;
+  		} else {
+  			if (0 != gemCost) {
+  				money.put(MiscMethods.gems, gemCost);
+  			}
+  		}
+  	}
   	
   	long userMonsterIdBeingEnhanced = umcep.getUserMonsterId();
   	int newExp = umcep.getExpectedExperience();
