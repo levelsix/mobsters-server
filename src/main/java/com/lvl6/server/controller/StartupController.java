@@ -49,6 +49,7 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticLevelInfo;
 import com.lvl6.info.Structure;
+import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
@@ -76,6 +77,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
+import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.StaticLevelInfoProto;
@@ -97,6 +99,7 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
 import com.lvl6.spring.AppContext;
@@ -225,7 +228,7 @@ public class StartupController extends EventController {
           setExpansionCosts(resBuilder);
           setBoosterPurchases(resBuilder);
           setFacebookAndExtraSlotsStuff(resBuilder, user);
-          
+          setAllTasks(resBuilder);
           
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
@@ -868,7 +871,14 @@ public class StartupController extends EventController {
   	
   }
   
-  
+  private void setAllTasks(Builder resBuilder) {
+  	Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
+  	
+  	for (Task aTask : taskIdsToTasks.values()) {
+  		FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
+  		resBuilder.addAllTasks(ftp);
+  	}
+  }
   
   
   
