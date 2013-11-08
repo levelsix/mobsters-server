@@ -53,6 +53,9 @@ message FullCityProto {
 	optional string name = 2;
 	optional string mapImgName = 3;
 	optional CoordinateProto center = 4;
+	optional string roadImgName = 5;
+	optional string mapTmxName = 6;
+	optional CoordinateProto roadImgCoords = 7;
 	
-	repeated int32 taskIds = 5;
+	repeated int32 taskIds = 8;
 }

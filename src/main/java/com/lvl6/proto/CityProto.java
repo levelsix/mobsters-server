@@ -2199,7 +2199,20 @@ public final class CityProto {
     com.lvl6.proto.StructureProto.CoordinateProto getCenter();
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCenterOrBuilder();
     
-    // repeated int32 taskIds = 5;
+    // optional string roadImgName = 5;
+    boolean hasRoadImgName();
+    String getRoadImgName();
+    
+    // optional string mapTmxName = 6;
+    boolean hasMapTmxName();
+    String getMapTmxName();
+    
+    // optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;
+    boolean hasRoadImgCoords();
+    com.lvl6.proto.StructureProto.CoordinateProto getRoadImgCoords();
+    com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getRoadImgCoordsOrBuilder();
+    
+    // repeated int32 taskIds = 8;
     java.util.List<java.lang.Integer> getTaskIdsList();
     int getTaskIdsCount();
     int getTaskIds(int index);
@@ -2320,8 +2333,85 @@ public final class CityProto {
       return center_;
     }
     
-    // repeated int32 taskIds = 5;
-    public static final int TASKIDS_FIELD_NUMBER = 5;
+    // optional string roadImgName = 5;
+    public static final int ROADIMGNAME_FIELD_NUMBER = 5;
+    private java.lang.Object roadImgName_;
+    public boolean hasRoadImgName() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getRoadImgName() {
+      java.lang.Object ref = roadImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          roadImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getRoadImgNameBytes() {
+      java.lang.Object ref = roadImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        roadImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string mapTmxName = 6;
+    public static final int MAPTMXNAME_FIELD_NUMBER = 6;
+    private java.lang.Object mapTmxName_;
+    public boolean hasMapTmxName() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public String getMapTmxName() {
+      java.lang.Object ref = mapTmxName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          mapTmxName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getMapTmxNameBytes() {
+      java.lang.Object ref = mapTmxName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        mapTmxName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;
+    public static final int ROADIMGCOORDS_FIELD_NUMBER = 7;
+    private com.lvl6.proto.StructureProto.CoordinateProto roadImgCoords_;
+    public boolean hasRoadImgCoords() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public com.lvl6.proto.StructureProto.CoordinateProto getRoadImgCoords() {
+      return roadImgCoords_;
+    }
+    public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getRoadImgCoordsOrBuilder() {
+      return roadImgCoords_;
+    }
+    
+    // repeated int32 taskIds = 8;
+    public static final int TASKIDS_FIELD_NUMBER = 8;
     private java.util.List<java.lang.Integer> taskIds_;
     public java.util.List<java.lang.Integer>
         getTaskIdsList() {
@@ -2339,6 +2429,9 @@ public final class CityProto {
       name_ = "";
       mapImgName_ = "";
       center_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+      roadImgName_ = "";
+      mapTmxName_ = "";
+      roadImgCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       taskIds_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
@@ -2365,8 +2458,17 @@ public final class CityProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(4, center_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getRoadImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getMapTmxNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(7, roadImgCoords_);
+      }
       for (int i = 0; i < taskIds_.size(); i++) {
-        output.writeInt32(5, taskIds_.get(i));
+        output.writeInt32(8, taskIds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -2392,6 +2494,18 @@ public final class CityProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, center_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getRoadImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getMapTmxNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, roadImgCoords_);
       }
       {
         int dataSize = 0;
@@ -2519,6 +2633,7 @@ public final class CityProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getCenterFieldBuilder();
+          getRoadImgCoordsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2539,8 +2654,18 @@ public final class CityProto {
           centerBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
-        taskIds_ = java.util.Collections.emptyList();;
+        roadImgName_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
+        mapTmxName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        if (roadImgCoordsBuilder_ == null) {
+          roadImgCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+        } else {
+          roadImgCoordsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        taskIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       
@@ -2599,9 +2724,25 @@ public final class CityProto {
         } else {
           result.center_ = centerBuilder_.build();
         }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.roadImgName_ = roadImgName_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.mapTmxName_ = mapTmxName_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        if (roadImgCoordsBuilder_ == null) {
+          result.roadImgCoords_ = roadImgCoords_;
+        } else {
+          result.roadImgCoords_ = roadImgCoordsBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
           taskIds_ = java.util.Collections.unmodifiableList(taskIds_);
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.taskIds_ = taskIds_;
         result.bitField0_ = to_bitField0_;
@@ -2632,10 +2773,19 @@ public final class CityProto {
         if (other.hasCenter()) {
           mergeCenter(other.getCenter());
         }
+        if (other.hasRoadImgName()) {
+          setRoadImgName(other.getRoadImgName());
+        }
+        if (other.hasMapTmxName()) {
+          setMapTmxName(other.getMapTmxName());
+        }
+        if (other.hasRoadImgCoords()) {
+          mergeRoadImgCoords(other.getRoadImgCoords());
+        }
         if (!other.taskIds_.isEmpty()) {
           if (taskIds_.isEmpty()) {
             taskIds_ = other.taskIds_;
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000080);
           } else {
             ensureTaskIdsIsMutable();
             taskIds_.addAll(other.taskIds_);
@@ -2697,12 +2847,31 @@ public final class CityProto {
               setCenter(subBuilder.buildPartial());
               break;
             }
-            case 40: {
+            case 42: {
+              bitField0_ |= 0x00000010;
+              roadImgName_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              mapTmxName_ = input.readBytes();
+              break;
+            }
+            case 58: {
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
+              if (hasRoadImgCoords()) {
+                subBuilder.mergeFrom(getRoadImgCoords());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setRoadImgCoords(subBuilder.buildPartial());
+              break;
+            }
+            case 64: {
               ensureTaskIdsIsMutable();
               taskIds_.add(input.readInt32());
               break;
             }
-            case 42: {
+            case 66: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               while (input.getBytesUntilLimit() > 0) {
@@ -2900,12 +3069,174 @@ public final class CityProto {
         return centerBuilder_;
       }
       
-      // repeated int32 taskIds = 5;
+      // optional string roadImgName = 5;
+      private java.lang.Object roadImgName_ = "";
+      public boolean hasRoadImgName() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getRoadImgName() {
+        java.lang.Object ref = roadImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          roadImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setRoadImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        roadImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRoadImgName() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        roadImgName_ = getDefaultInstance().getRoadImgName();
+        onChanged();
+        return this;
+      }
+      void setRoadImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        roadImgName_ = value;
+        onChanged();
+      }
+      
+      // optional string mapTmxName = 6;
+      private java.lang.Object mapTmxName_ = "";
+      public boolean hasMapTmxName() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public String getMapTmxName() {
+        java.lang.Object ref = mapTmxName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          mapTmxName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setMapTmxName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        mapTmxName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMapTmxName() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        mapTmxName_ = getDefaultInstance().getMapTmxName();
+        onChanged();
+        return this;
+      }
+      void setMapTmxName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000020;
+        mapTmxName_ = value;
+        onChanged();
+      }
+      
+      // optional .com.lvl6.proto.CoordinateProto roadImgCoords = 7;
+      private com.lvl6.proto.StructureProto.CoordinateProto roadImgCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> roadImgCoordsBuilder_;
+      public boolean hasRoadImgCoords() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProto getRoadImgCoords() {
+        if (roadImgCoordsBuilder_ == null) {
+          return roadImgCoords_;
+        } else {
+          return roadImgCoordsBuilder_.getMessage();
+        }
+      }
+      public Builder setRoadImgCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
+        if (roadImgCoordsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          roadImgCoords_ = value;
+          onChanged();
+        } else {
+          roadImgCoordsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      public Builder setRoadImgCoords(
+          com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
+        if (roadImgCoordsBuilder_ == null) {
+          roadImgCoords_ = builderForValue.build();
+          onChanged();
+        } else {
+          roadImgCoordsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      public Builder mergeRoadImgCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
+        if (roadImgCoordsBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              roadImgCoords_ != com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance()) {
+            roadImgCoords_ =
+              com.lvl6.proto.StructureProto.CoordinateProto.newBuilder(roadImgCoords_).mergeFrom(value).buildPartial();
+          } else {
+            roadImgCoords_ = value;
+          }
+          onChanged();
+        } else {
+          roadImgCoordsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      public Builder clearRoadImgCoords() {
+        if (roadImgCoordsBuilder_ == null) {
+          roadImgCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+          onChanged();
+        } else {
+          roadImgCoordsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProto.Builder getRoadImgCoordsBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getRoadImgCoordsFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getRoadImgCoordsOrBuilder() {
+        if (roadImgCoordsBuilder_ != null) {
+          return roadImgCoordsBuilder_.getMessageOrBuilder();
+        } else {
+          return roadImgCoords_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
+          getRoadImgCoordsFieldBuilder() {
+        if (roadImgCoordsBuilder_ == null) {
+          roadImgCoordsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
+                  roadImgCoords_,
+                  getParentForChildren(),
+                  isClean());
+          roadImgCoords_ = null;
+        }
+        return roadImgCoordsBuilder_;
+      }
+      
+      // repeated int32 taskIds = 8;
       private java.util.List<java.lang.Integer> taskIds_ = java.util.Collections.emptyList();;
       private void ensureTaskIdsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           taskIds_ = new java.util.ArrayList<java.lang.Integer>(taskIds_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000080;
          }
       }
       public java.util.List<java.lang.Integer>
@@ -2940,7 +3271,7 @@ public final class CityProto {
       }
       public Builder clearTaskIds() {
         taskIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -3003,11 +3334,13 @@ public final class CityProto {
       "TION_1\0225\n\014spriteCoords\030\n \001(\0132\037.com.lvl6." +
       "proto.CoordinateProto\"P\n\014CityElemType\022\014\n" +
       "\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_NE" +
-      "UTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\001\n\rFullCityProt" +
+      "UTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\344\001\n\rFullCityProt" +
       "o\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapIm",
       "gName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl6.p" +
-      "roto.CoordinateProto\022\017\n\007taskIds\030\005 \003(\005B\013B" +
-      "\tCityProto"
+      "roto.CoordinateProto\022\023\n\013roadImgName\030\005 \001(" +
+      "\t\022\022\n\nmapTmxName\030\006 \001(\t\0226\n\rroadImgCoords\030\007" +
+      " \001(\0132\037.com.lvl6.proto.CoordinateProto\022\017\n" +
+      "\007taskIds\030\010 \003(\005B\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3043,7 +3376,7 @@ public final class CityProto {
           internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullCityProto_descriptor,
-              new java.lang.String[] { "CityId", "Name", "MapImgName", "Center", "TaskIds", },
+              new java.lang.String[] { "CityId", "Name", "MapImgName", "Center", "RoadImgName", "MapTmxName", "RoadImgCoords", "TaskIds", },
               com.lvl6.proto.CityProto.FullCityProto.class,
               com.lvl6.proto.CityProto.FullCityProto.Builder.class);
           return null;
