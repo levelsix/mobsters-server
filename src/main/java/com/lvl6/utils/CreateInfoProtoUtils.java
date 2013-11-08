@@ -475,7 +475,7 @@ public class CreateInfoProtoUtils {
     
     builder.setCityId(task.getCityId());
     builder.setAssetNumWithinCity(task.getAssetNumberWithinCity());
-    builder.setPreprequisiteTaskId(task.getPrerequisiteTaskId());
+    builder.setPrerequisiteTaskId(task.getPrerequisiteTaskId());
     return builder.build();
   }
 
