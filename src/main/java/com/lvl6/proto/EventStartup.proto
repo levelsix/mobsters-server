@@ -6,6 +6,7 @@ import "Clan.proto";
 import "InAppPurchase.proto";
 import "Quest.proto";
 import "Structure.proto";
+import "Task.proto";
 import "User.proto";
 import "MonsterStuff.proto";
 
@@ -73,6 +74,7 @@ message StartupResponseProto {
 	//is the person being invited
 	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 33;
 	
+	repeated FullTaskProto allTasks = 34;
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
