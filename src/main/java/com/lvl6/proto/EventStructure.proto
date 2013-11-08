@@ -178,12 +178,14 @@ message RetrieveCurrencyFromNormStructureResponseProto {
 message ExpansionWaitCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 curTime = 2;						//used for checking
-	optional bool speedUp = 3;
 	
 	//the (x,y) coordinates in relation to the original plot of land
 	//sint32 because it's more efficient when google protocol buffers serializes/encodes the values
-	optional sint32 xPosition = 4; 
-	optional sint32 yPosition = 5;
+	optional sint32 xPosition = 3; 
+	optional sint32 yPosition = 4;
+	
+	optional bool speedUp = 5;
+	optional int32 gemCostToSpeedup = 6;
 }
 
 																						//DONE

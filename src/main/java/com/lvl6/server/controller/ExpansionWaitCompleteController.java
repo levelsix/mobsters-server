@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +30,6 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
-/*
- * NOT READY/BEING USED YET
- */
 
 @Component @DependsOn("gameServer") public class ExpansionWaitCompleteController extends EventController{
 
@@ -60,9 +56,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
-		boolean speedUp = reqProto.getSpeedUp();
 		int xPosition = reqProto.getXPosition();
 		int yPosition = reqProto.getYPosition();
+		boolean speedUp = reqProto.getSpeedUp();
+		int gemCostToSpeedup = reqProto.getGemCostToSpeedup();
 
 		ExpansionWaitCompleteResponseProto.Builder resBuilder = ExpansionWaitCompleteResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
@@ -77,18 +74,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			ExpansionPurchaseForUser epfu = selectSpecificExpansion(xPosition, yPosition,
 					epfuList);
 			
-			List<Integer> gemCostList = new ArrayList<Integer>();
 			boolean legitExpansionComplete = checkLegitExpansionComplete(user, resBuilder,
-					epfuList, epfu, clientTime, speedUp, gemCostList);
+					epfuList, epfu, clientTime, speedUp, gemCostToSpeedup);
 			int previousGems = 0;
 
 
 			if (legitExpansionComplete) {
 				previousGems = user.getGems();
 				int nthExpansion = epfuList.size();
-				int gemCost = gemCostList.get(0);
 				Map<String, Integer> money = new HashMap<String, Integer>();
-				writeChangesToDB(user, epfu, speedUp, money, clientTime, nthExpansion, gemCost);
+				writeChangesToDB(user, epfu, speedUp, money, clientTime, nthExpansion, gemCostToSpeedup);
 				writeToUserCurrencyHistory(user, clientTime, money, previousGems, xPosition, yPosition);
 				UserCityExpansionDataProto ucedp = CreateInfoProtoUtils
 						.createUserCityExpansionDataProtoFromUserCityExpansionData(epfu); 
@@ -162,7 +157,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	
 	private boolean checkLegitExpansionComplete(User user, Builder resBuilder,
 			List<ExpansionPurchaseForUser> epfuList, ExpansionPurchaseForUser userCityExpansionData,
-			Timestamp clientTime, boolean speedUp, List<Integer> gemCostList) {
+			Timestamp clientTime, boolean speedUp, int gemCostToSpeedup) {
 		int nthExpansion = epfuList.size();
 		
 		if (userCityExpansionData==null) {
@@ -174,7 +169,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		ExpansionCost ec = ExpansionCostRetrieveUtils.getCityExpansionCostById(nthExpansion);
 		int numMinutes = ec.getNumMinutesToExpand();
-		int gemCost = ec.getSpeedupExpansionGemCost();
 		
 		//check if user has waited long enough to complete expansion (sans using gems)
 		long expandStartMillis = userCityExpansionData.getExpandStartTime().getTime();
@@ -188,17 +182,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return false;      
 		}
 		
-		long secondsForExpansion = millisForExpansion/1000;
-		int newGemCost = MiscMethods.speedupCostOverTime(gemCost, expandStartMillis,
-				secondsForExpansion, curTimeMillis);
-		if (speedUp && user.getGems() < newGemCost) {
+		if (speedUp && user.getGems() < gemCostToSpeedup) {
 			resBuilder.setStatus(ExpansionWaitCompleteStatus.FAIL_INSUFFICIENT_GEMS);
 			log.error("user error: user does not have enough gems to speed up expansion." +
-					" userCityExpansionData=" + userCityExpansionData + "cost=" + newGemCost);
+					" userCityExpansionData=" + userCityExpansionData + "cost=" + gemCostToSpeedup);
 			return false;      
 		}
 		
-		gemCostList.add(newGemCost);
 		resBuilder.setStatus(ExpansionWaitCompleteStatus.SUCCESS);
 		return true;  
 	}

@@ -9109,17 +9109,21 @@ public final class EventStructureProto {
     boolean hasCurTime();
     long getCurTime();
     
-    // optional bool speedUp = 3;
-    boolean hasSpeedUp();
-    boolean getSpeedUp();
-    
-    // optional sint32 xPosition = 4;
+    // optional sint32 xPosition = 3;
     boolean hasXPosition();
     int getXPosition();
     
-    // optional sint32 yPosition = 5;
+    // optional sint32 yPosition = 4;
     boolean hasYPosition();
     int getYPosition();
+    
+    // optional bool speedUp = 5;
+    boolean hasSpeedUp();
+    boolean getSpeedUp();
+    
+    // optional int32 gemCostToSpeedup = 6;
+    boolean hasGemCostToSpeedup();
+    int getGemCostToSpeedup();
   }
   public static final class ExpansionWaitCompleteRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -9173,42 +9177,53 @@ public final class EventStructureProto {
       return curTime_;
     }
     
-    // optional bool speedUp = 3;
-    public static final int SPEEDUP_FIELD_NUMBER = 3;
-    private boolean speedUp_;
-    public boolean hasSpeedUp() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public boolean getSpeedUp() {
-      return speedUp_;
-    }
-    
-    // optional sint32 xPosition = 4;
-    public static final int XPOSITION_FIELD_NUMBER = 4;
+    // optional sint32 xPosition = 3;
+    public static final int XPOSITION_FIELD_NUMBER = 3;
     private int xPosition_;
     public boolean hasXPosition() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public int getXPosition() {
       return xPosition_;
     }
     
-    // optional sint32 yPosition = 5;
-    public static final int YPOSITION_FIELD_NUMBER = 5;
+    // optional sint32 yPosition = 4;
+    public static final int YPOSITION_FIELD_NUMBER = 4;
     private int yPosition_;
     public boolean hasYPosition() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public int getYPosition() {
       return yPosition_;
     }
     
+    // optional bool speedUp = 5;
+    public static final int SPEEDUP_FIELD_NUMBER = 5;
+    private boolean speedUp_;
+    public boolean hasSpeedUp() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public boolean getSpeedUp() {
+      return speedUp_;
+    }
+    
+    // optional int32 gemCostToSpeedup = 6;
+    public static final int GEMCOSTTOSPEEDUP_FIELD_NUMBER = 6;
+    private int gemCostToSpeedup_;
+    public boolean hasGemCostToSpeedup() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getGemCostToSpeedup() {
+      return gemCostToSpeedup_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       curTime_ = 0L;
-      speedUp_ = false;
       xPosition_ = 0;
       yPosition_ = 0;
+      speedUp_ = false;
+      gemCostToSpeedup_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -9229,13 +9244,16 @@ public final class EventStructureProto {
         output.writeInt64(2, curTime_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBool(3, speedUp_);
+        output.writeSInt32(3, xPosition_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeSInt32(4, xPosition_);
+        output.writeSInt32(4, yPosition_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeSInt32(5, yPosition_);
+        output.writeBool(5, speedUp_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, gemCostToSpeedup_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -9256,15 +9274,19 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, speedUp_);
+          .computeSInt32Size(3, xPosition_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(4, xPosition_);
+          .computeSInt32Size(4, yPosition_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(5, yPosition_);
+          .computeBoolSize(5, speedUp_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, gemCostToSpeedup_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -9399,12 +9421,14 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         curTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
-        speedUp_ = false;
-        bitField0_ = (bitField0_ & ~0x00000004);
         xPosition_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         yPosition_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        speedUp_ = false;
         bitField0_ = (bitField0_ & ~0x00000010);
+        gemCostToSpeedup_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -9458,15 +9482,19 @@ public final class EventStructureProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.speedUp_ = speedUp_;
+        result.xPosition_ = xPosition_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.xPosition_ = xPosition_;
+        result.yPosition_ = yPosition_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.yPosition_ = yPosition_;
+        result.speedUp_ = speedUp_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.gemCostToSpeedup_ = gemCostToSpeedup_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9489,14 +9517,17 @@ public final class EventStructureProto {
         if (other.hasCurTime()) {
           setCurTime(other.getCurTime());
         }
-        if (other.hasSpeedUp()) {
-          setSpeedUp(other.getSpeedUp());
-        }
         if (other.hasXPosition()) {
           setXPosition(other.getXPosition());
         }
         if (other.hasYPosition()) {
           setYPosition(other.getYPosition());
+        }
+        if (other.hasSpeedUp()) {
+          setSpeedUp(other.getSpeedUp());
+        }
+        if (other.hasGemCostToSpeedup()) {
+          setGemCostToSpeedup(other.getGemCostToSpeedup());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -9545,17 +9576,22 @@ public final class EventStructureProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              speedUp_ = input.readBool();
+              xPosition_ = input.readSInt32();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              xPosition_ = input.readSInt32();
+              yPosition_ = input.readSInt32();
               break;
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              yPosition_ = input.readSInt32();
+              speedUp_ = input.readBool();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              gemCostToSpeedup_ = input.readInt32();
               break;
             }
           }
@@ -9675,65 +9711,86 @@ public final class EventStructureProto {
         return this;
       }
       
-      // optional bool speedUp = 3;
-      private boolean speedUp_ ;
-      public boolean hasSpeedUp() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public boolean getSpeedUp() {
-        return speedUp_;
-      }
-      public Builder setSpeedUp(boolean value) {
-        bitField0_ |= 0x00000004;
-        speedUp_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearSpeedUp() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        speedUp_ = false;
-        onChanged();
-        return this;
-      }
-      
-      // optional sint32 xPosition = 4;
+      // optional sint32 xPosition = 3;
       private int xPosition_ ;
       public boolean hasXPosition() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public int getXPosition() {
         return xPosition_;
       }
       public Builder setXPosition(int value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         xPosition_ = value;
         onChanged();
         return this;
       }
       public Builder clearXPosition() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         xPosition_ = 0;
         onChanged();
         return this;
       }
       
-      // optional sint32 yPosition = 5;
+      // optional sint32 yPosition = 4;
       private int yPosition_ ;
       public boolean hasYPosition() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getYPosition() {
         return yPosition_;
       }
       public Builder setYPosition(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         yPosition_ = value;
         onChanged();
         return this;
       }
       public Builder clearYPosition() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         yPosition_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool speedUp = 5;
+      private boolean speedUp_ ;
+      public boolean hasSpeedUp() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public boolean getSpeedUp() {
+        return speedUp_;
+      }
+      public Builder setSpeedUp(boolean value) {
+        bitField0_ |= 0x00000010;
+        speedUp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSpeedUp() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        speedUp_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 gemCostToSpeedup = 6;
+      private int gemCostToSpeedup_ ;
+      public boolean hasGemCostToSpeedup() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getGemCostToSpeedup() {
+        return gemCostToSpeedup_;
+      }
+      public Builder setGemCostToSpeedup(int value) {
+        bitField0_ |= 0x00000020;
+        gemCostToSpeedup_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemCostToSpeedup() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        gemCostToSpeedup_ = 0;
         onChanged();
         return this;
       }
@@ -10648,22 +10705,22 @@ public final class EventStructureProto {
       "cyFromNormStructureStatus\"\202\001\n\'RetrieveCu" +
       "rrencyFromNormStructureStatus\022\016\n\nOTHER_F" +
       "AIL\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_TOO_APART_F" +
-      "ROM_SERVER_TIME\020\003\022\023\n\017NOT_LONG_ENOUGH\020\004\"\235" +
+      "ROM_SERVER_TIME\020\003\022\023\n\017NOT_LONG_ENOUGH\020\004\"\267" +
       "\001\n!ExpansionWaitCompleteRequestProto\0220\n\006" +
       "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010" +
-      "\022\021\n\txPosition\030\004 \001(\021\022\021\n\tyPosition\030\005 \001(\021\"\375" +
-      "\002\n\"ExpansionWaitCompleteResponseProto\0220\n",
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto" +
-      ".ExpansionWaitCompleteResponseProto.Expa" +
-      "nsionWaitCompleteStatus\0229\n\005ucedp\030\003 \001(\0132*" +
-      ".com.lvl6.proto.UserCityExpansionDataPro" +
-      "to\"\211\001\n\033ExpansionWaitCompleteStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\032\n\026FAIL_WAS_NOT_EXPANDING\020\002\022\025\n\021F" +
-      "AIL_NOT_DONE_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_" +
-      "GEMS\020\004\022\016\n\nFAIL_OTHER\020\005B\025B\023EventStructure" +
-      "Proto"
+      "rProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txPosition\030\003 \001" +
+      "(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010\022\030" +
+      "\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"ExpansionWa",
+      "itCompleteResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022^\n\006sta" +
+      "tus\030\002 \001(\0162N.com.lvl6.proto.ExpansionWait" +
+      "CompleteResponseProto.ExpansionWaitCompl" +
+      "eteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.prot" +
+      "o.UserCityExpansionDataProto\"\211\001\n\033Expansi" +
+      "onWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAI" +
+      "L_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DONE_Y" +
+      "ET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nFAIL" +
+      "_OTHER\020\005B\025B\023EventStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10795,7 +10852,7 @@ public final class EventStructureProto {
           internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CurTime", "SpeedUp", "XPosition", "YPosition", },
+              new java.lang.String[] { "Sender", "CurTime", "XPosition", "YPosition", "SpeedUp", "GemCostToSpeedup", },
               com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteRequestProto.class,
               com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteRequestProto.Builder.class);
           internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor =
