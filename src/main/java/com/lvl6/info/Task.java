@@ -4,22 +4,24 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
-	private static final long serialVersionUID = 8186881508295561112L;
+	private static final long serialVersionUID = -7855307089070848265L;
 	private int id;
 	private String goodName;
 	private String description;
 	private int cityId;
 //	private int energyCost;
 	private int assetNumberWithinCity;
+	private int prerequisiteTaskId;
 	
 	public Task(int id, String goodName, String description, int cityId,
-			int assetNumberWithinCity) {
+			int assetNumberWithinCity, int prerequisiteTaskId) {
 		super();
 		this.id = id;
 		this.goodName = goodName;
 		this.description = description;
 		this.cityId = cityId;
 		this.assetNumberWithinCity = assetNumberWithinCity;
+		this.prerequisiteTaskId = prerequisiteTaskId;
 	}
 
 	public int getId() {
@@ -62,11 +64,20 @@ public class Task implements Serializable {
 		this.assetNumberWithinCity = assetNumberWithinCity;
 	}
 
+	public int getPrerequisiteTaskId() {
+		return prerequisiteTaskId;
+	}
+
+	public void setPrerequisiteTaskId(int prerequisiteTaskId) {
+		this.prerequisiteTaskId = prerequisiteTaskId;
+	}
+
 	@Override
 	public String toString() {
 		return "Task [id=" + id + ", goodName=" + goodName + ", description="
 				+ description + ", cityId=" + cityId + ", assetNumberWithinCity="
-				+ assetNumberWithinCity + "]";
+				+ assetNumberWithinCity + ", prerequisiteTaskId=" + prerequisiteTaskId
+				+ "]";
 	}
 	
 }

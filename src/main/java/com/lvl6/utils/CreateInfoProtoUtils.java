@@ -460,12 +460,11 @@ public class CreateInfoProtoUtils {
   }
 
   public static FullTaskProto createFullTaskProtoFromTask(Task task) {
-
     String name = task.getGoodName();
     String description = task.getDescription();
+    
     FullTaskProto.Builder builder = FullTaskProto.newBuilder();
     builder.setTaskId(task.getId());
-    
     if (null != name) {
     	builder.setName(name);
     }
@@ -476,7 +475,7 @@ public class CreateInfoProtoUtils {
     
     builder.setCityId(task.getCityId());
     builder.setAssetNumWithinCity(task.getAssetNumberWithinCity());
-
+    builder.setPreprequisiteTaskId(task.getPrerequisiteTaskId());
     return builder.build();
   }
 

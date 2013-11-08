@@ -151,8 +151,10 @@ import com.lvl6.utils.DBConnection;
     int cityId = rs.getInt(i++);
 //    int energyCost = rs.getInt(i++);
     int assetNumberWithinCity = rs.getInt(i++);
+    int prerequisiteTaskId = rs.getInt(i++);
     
-    Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity);
+    Task task = new Task(id, goodName, description, cityId, assetNumberWithinCity,
+    		prerequisiteTaskId);
     return task;
   }
 }
