@@ -515,13 +515,27 @@ public class CreateInfoProtoUtils {
     FullCityProto.Builder builder = FullCityProto.newBuilder();
     builder.setCityId(c.getId());
     builder.setName(c.getName());
-    builder.setMapImgName(c.getMapImgName()).setCenter(createCoordinateProtoFromCoordinatePair(c.getCenter()));
+    builder.setMapImgName(c.getMapImgName());
+    builder.setCenter(createCoordinateProtoFromCoordinatePair(c.getCenter()));
     List<Task> tasks = TaskRetrieveUtils.getAllTasksForCityId(c.getId());
     if (tasks != null) {
       for (Task t : tasks) {
         builder.addTaskIds(t.getId());
       }
     }
+    
+    String roadImgName = c.getRoadImgName();
+    if (null != roadImgName) {
+    	builder.setRoadImgName(roadImgName);
+    }
+    
+    String mapTmxName = c.getMapTmxName();
+    if (null != mapTmxName) {
+    	builder.setMapTmxName(mapTmxName);
+    }
+    
+    builder.setRoadImgCoords(createCoordinateProtoFromCoordinatePair(c.getRoadImgCoords()));
+    
 
     return builder.build();
   }
