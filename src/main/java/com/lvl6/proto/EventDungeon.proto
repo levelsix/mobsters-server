@@ -34,6 +34,7 @@ message EndDungeonRequestProto {
 	optional int64 userTaskId = 2;
 	optional bool userWon = 3; 
 	optional int64 clientTime = 4;
+	
 }
 
 message EndDungeonResponseProto {
@@ -41,6 +42,8 @@ message EndDungeonResponseProto {
 	optional EndDungeonStatus status = 2;
 	//repeated FullUserMonsterProto newOrUpdated = 3; //BAD!!! DON'T START NAMES WITH NEW OR COPY
 	repeated FullUserMonsterProto updatedOrNew = 3;
+	optional int32 taskId = 4;
+	optional bool didUserWin = 5;
 	
 	enum EndDungeonStatus {
 		SUCCESS = 1;
