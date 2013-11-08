@@ -2310,12 +2310,7 @@ public final class EventStartupProto {
       boolean hasMaxNumOfSingleStruct();
       int getMaxNumOfSingleStruct();
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants = 4;
-      boolean hasNormStructConstants();
-      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getNormStructConstants();
-      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getNormStructConstantsOrBuilder();
-      
-      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 4;
       java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto> 
           getAnimatedSpriteOffsetsList();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto getAnimatedSpriteOffsets(int index);
@@ -2325,69 +2320,69 @@ public final class EventStartupProto {
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProtoOrBuilder getAnimatedSpriteOffsetsOrBuilder(
           int index);
       
-      // optional int32 minNameLength = 6;
+      // optional int32 minNameLength = 5;
       boolean hasMinNameLength();
       int getMinNameLength();
       
-      // optional int32 maxNameLength = 7;
+      // optional int32 maxNameLength = 6;
       boolean hasMaxNameLength();
       int getMaxNameLength();
       
-      // optional int32 maxLengthOfChatString = 8;
+      // optional int32 maxLengthOfChatString = 7;
       boolean hasMaxLengthOfChatString();
       int getMaxLengthOfChatString();
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 9;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 8;
       boolean hasClanConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants getClanConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder getClanConstantsOrBuilder();
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 10;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 9;
       boolean hasDownloadableNibConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants getDownloadableNibConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder getDownloadableNibConstantsOrBuilder();
       
-      // optional int32 numHoursBeforeReshowingGoldSale = 11;
+      // optional int32 numHoursBeforeReshowingGoldSale = 10;
       boolean hasNumHoursBeforeReshowingGoldSale();
       int getNumHoursBeforeReshowingGoldSale();
       
-      // optional int32 levelToShowRateUsPopup = 12;
+      // optional int32 levelToShowRateUsPopup = 11;
       boolean hasLevelToShowRateUsPopup();
       int getLevelToShowRateUsPopup();
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 13;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 12;
       boolean hasTouramentConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getTouramentConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder getTouramentConstantsOrBuilder();
       
-      // optional int32 fbConnectRewardDiamonds = 14;
+      // optional int32 fbConnectRewardDiamonds = 13;
       boolean hasFbConnectRewardDiamonds();
       int getFbConnectRewardDiamonds();
       
-      // optional string faqFileName = 15;
+      // optional string faqFileName = 14;
       boolean hasFaqFileName();
       String getFaqFileName();
       
-      // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 16;
+      // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 15;
       boolean hasAdminChatUserProto();
       com.lvl6.proto.UserProto.MinimumUserProto getAdminChatUserProto();
       com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAdminChatUserProtoOrBuilder();
       
-      // optional int32 numBeginnerSalesAllowed = 17;
+      // optional int32 numBeginnerSalesAllowed = 16;
       boolean hasNumBeginnerSalesAllowed();
       int getNumBeginnerSalesAllowed();
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 18;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 17;
       boolean hasUserMonsterConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants getUserMonsterConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder getUserMonsterConstantsOrBuilder();
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 19;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 18;
       boolean hasMonsterConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants getMonsterConstants();
       com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder getMonsterConstantsOrBuilder();
       
-      // optional float minutesPerGem = 20;
+      // optional float minutesPerGem = 19;
       boolean hasMinutesPerGem();
       float getMinutesPerGem();
     }
@@ -2417,572 +2412,6 @@ public final class EventStartupProto {
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable;
-      }
-      
-      public interface NormStructConstantsOrBuilder
-          extends com.google.protobuf.MessageOrBuilder {
-        
-        // optional double minutesToUpgradeForNormStructMultiplier = 1;
-        boolean hasMinutesToUpgradeForNormStructMultiplier();
-        double getMinutesToUpgradeForNormStructMultiplier();
-        
-        // optional double incomeFromNormStructMultiplier = 2;
-        boolean hasIncomeFromNormStructMultiplier();
-        double getIncomeFromNormStructMultiplier();
-        
-        // optional double upgradeStructCoinCostExponentBase = 3;
-        boolean hasUpgradeStructCoinCostExponentBase();
-        double getUpgradeStructCoinCostExponentBase();
-        
-        // optional double upgradeStructDiamondCostExponentBase = 4;
-        boolean hasUpgradeStructDiamondCostExponentBase();
-        double getUpgradeStructDiamondCostExponentBase();
-        
-        // optional double diamondCostForInstantUpgradeMultiplier = 5;
-        boolean hasDiamondCostForInstantUpgradeMultiplier();
-        double getDiamondCostForInstantUpgradeMultiplier();
-      }
-      public static final class NormStructConstants extends
-          com.google.protobuf.GeneratedMessage
-          implements NormStructConstantsOrBuilder {
-        // Use NormStructConstants.newBuilder() to construct.
-        private NormStructConstants(Builder builder) {
-          super(builder);
-        }
-        private NormStructConstants(boolean noInit) {}
-        
-        private static final NormStructConstants defaultInstance;
-        public static NormStructConstants getDefaultInstance() {
-          return defaultInstance;
-        }
-        
-        public NormStructConstants getDefaultInstanceForType() {
-          return defaultInstance;
-        }
-        
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor;
-        }
-        
-        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_fieldAccessorTable;
-        }
-        
-        private int bitField0_;
-        // optional double minutesToUpgradeForNormStructMultiplier = 1;
-        public static final int MINUTESTOUPGRADEFORNORMSTRUCTMULTIPLIER_FIELD_NUMBER = 1;
-        private double minutesToUpgradeForNormStructMultiplier_;
-        public boolean hasMinutesToUpgradeForNormStructMultiplier() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        public double getMinutesToUpgradeForNormStructMultiplier() {
-          return minutesToUpgradeForNormStructMultiplier_;
-        }
-        
-        // optional double incomeFromNormStructMultiplier = 2;
-        public static final int INCOMEFROMNORMSTRUCTMULTIPLIER_FIELD_NUMBER = 2;
-        private double incomeFromNormStructMultiplier_;
-        public boolean hasIncomeFromNormStructMultiplier() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        public double getIncomeFromNormStructMultiplier() {
-          return incomeFromNormStructMultiplier_;
-        }
-        
-        // optional double upgradeStructCoinCostExponentBase = 3;
-        public static final int UPGRADESTRUCTCOINCOSTEXPONENTBASE_FIELD_NUMBER = 3;
-        private double upgradeStructCoinCostExponentBase_;
-        public boolean hasUpgradeStructCoinCostExponentBase() {
-          return ((bitField0_ & 0x00000004) == 0x00000004);
-        }
-        public double getUpgradeStructCoinCostExponentBase() {
-          return upgradeStructCoinCostExponentBase_;
-        }
-        
-        // optional double upgradeStructDiamondCostExponentBase = 4;
-        public static final int UPGRADESTRUCTDIAMONDCOSTEXPONENTBASE_FIELD_NUMBER = 4;
-        private double upgradeStructDiamondCostExponentBase_;
-        public boolean hasUpgradeStructDiamondCostExponentBase() {
-          return ((bitField0_ & 0x00000008) == 0x00000008);
-        }
-        public double getUpgradeStructDiamondCostExponentBase() {
-          return upgradeStructDiamondCostExponentBase_;
-        }
-        
-        // optional double diamondCostForInstantUpgradeMultiplier = 5;
-        public static final int DIAMONDCOSTFORINSTANTUPGRADEMULTIPLIER_FIELD_NUMBER = 5;
-        private double diamondCostForInstantUpgradeMultiplier_;
-        public boolean hasDiamondCostForInstantUpgradeMultiplier() {
-          return ((bitField0_ & 0x00000010) == 0x00000010);
-        }
-        public double getDiamondCostForInstantUpgradeMultiplier() {
-          return diamondCostForInstantUpgradeMultiplier_;
-        }
-        
-        private void initFields() {
-          minutesToUpgradeForNormStructMultiplier_ = 0D;
-          incomeFromNormStructMultiplier_ = 0D;
-          upgradeStructCoinCostExponentBase_ = 0D;
-          upgradeStructDiamondCostExponentBase_ = 0D;
-          diamondCostForInstantUpgradeMultiplier_ = 0D;
-        }
-        private byte memoizedIsInitialized = -1;
-        public final boolean isInitialized() {
-          byte isInitialized = memoizedIsInitialized;
-          if (isInitialized != -1) return isInitialized == 1;
-          
-          memoizedIsInitialized = 1;
-          return true;
-        }
-        
-        public void writeTo(com.google.protobuf.CodedOutputStream output)
-                            throws java.io.IOException {
-          getSerializedSize();
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            output.writeDouble(1, minutesToUpgradeForNormStructMultiplier_);
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            output.writeDouble(2, incomeFromNormStructMultiplier_);
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            output.writeDouble(3, upgradeStructCoinCostExponentBase_);
-          }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            output.writeDouble(4, upgradeStructDiamondCostExponentBase_);
-          }
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            output.writeDouble(5, diamondCostForInstantUpgradeMultiplier_);
-          }
-          getUnknownFields().writeTo(output);
-        }
-        
-        private int memoizedSerializedSize = -1;
-        public int getSerializedSize() {
-          int size = memoizedSerializedSize;
-          if (size != -1) return size;
-        
-          size = 0;
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeDoubleSize(1, minutesToUpgradeForNormStructMultiplier_);
-          }
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeDoubleSize(2, incomeFromNormStructMultiplier_);
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeDoubleSize(3, upgradeStructCoinCostExponentBase_);
-          }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeDoubleSize(4, upgradeStructDiamondCostExponentBase_);
-          }
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeDoubleSize(5, diamondCostForInstantUpgradeMultiplier_);
-          }
-          size += getUnknownFields().getSerializedSize();
-          memoizedSerializedSize = size;
-          return size;
-        }
-        
-        private static final long serialVersionUID = 0L;
-        @java.lang.Override
-        protected java.lang.Object writeReplace()
-            throws java.io.ObjectStreamException {
-          return super.writeReplace();
-        }
-        
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseFrom(
-            com.google.protobuf.ByteString data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseFrom(
-            com.google.protobuf.ByteString data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseFrom(byte[] data)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseFrom(
-            byte[] data,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return newBuilder().mergeFrom(data, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseDelimitedFrom(java.io.InputStream input)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseDelimitedFrom(
-            java.io.InputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          Builder builder = newBuilder();
-          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-            return builder.buildParsed();
-          } else {
-            return null;
-          }
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseFrom(
-            com.google.protobuf.CodedInputStream input)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input).buildParsed();
-        }
-        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants parseFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          return newBuilder().mergeFrom(input, extensionRegistry)
-                   .buildParsed();
-        }
-        
-        public static Builder newBuilder() { return Builder.create(); }
-        public Builder newBuilderForType() { return newBuilder(); }
-        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants prototype) {
-          return newBuilder().mergeFrom(prototype);
-        }
-        public Builder toBuilder() { return newBuilder(this); }
-        
-        @java.lang.Override
-        protected Builder newBuilderForType(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          Builder builder = new Builder(parent);
-          return builder;
-        }
-        public static final class Builder extends
-            com.google.protobuf.GeneratedMessage.Builder<Builder>
-           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder {
-          public static final com.google.protobuf.Descriptors.Descriptor
-              getDescriptor() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor;
-          }
-          
-          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-              internalGetFieldAccessorTable() {
-            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_fieldAccessorTable;
-          }
-          
-          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.newBuilder()
-          private Builder() {
-            maybeForceBuilderInitialization();
-          }
-          
-          private Builder(BuilderParent parent) {
-            super(parent);
-            maybeForceBuilderInitialization();
-          }
-          private void maybeForceBuilderInitialization() {
-            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-            }
-          }
-          private static Builder create() {
-            return new Builder();
-          }
-          
-          public Builder clear() {
-            super.clear();
-            minutesToUpgradeForNormStructMultiplier_ = 0D;
-            bitField0_ = (bitField0_ & ~0x00000001);
-            incomeFromNormStructMultiplier_ = 0D;
-            bitField0_ = (bitField0_ & ~0x00000002);
-            upgradeStructCoinCostExponentBase_ = 0D;
-            bitField0_ = (bitField0_ & ~0x00000004);
-            upgradeStructDiamondCostExponentBase_ = 0D;
-            bitField0_ = (bitField0_ & ~0x00000008);
-            diamondCostForInstantUpgradeMultiplier_ = 0D;
-            bitField0_ = (bitField0_ & ~0x00000010);
-            return this;
-          }
-          
-          public Builder clone() {
-            return create().mergeFrom(buildPartial());
-          }
-          
-          public com.google.protobuf.Descriptors.Descriptor
-              getDescriptorForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDescriptor();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getDefaultInstanceForType() {
-            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants build() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(result);
-            }
-            return result;
-          }
-          
-          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants buildParsed()
-              throws com.google.protobuf.InvalidProtocolBufferException {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants result = buildPartial();
-            if (!result.isInitialized()) {
-              throw newUninitializedMessageException(
-                result).asInvalidProtocolBufferException();
-            }
-            return result;
-          }
-          
-          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants buildPartial() {
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants(this);
-            int from_bitField0_ = bitField0_;
-            int to_bitField0_ = 0;
-            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-              to_bitField0_ |= 0x00000001;
-            }
-            result.minutesToUpgradeForNormStructMultiplier_ = minutesToUpgradeForNormStructMultiplier_;
-            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-              to_bitField0_ |= 0x00000002;
-            }
-            result.incomeFromNormStructMultiplier_ = incomeFromNormStructMultiplier_;
-            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-              to_bitField0_ |= 0x00000004;
-            }
-            result.upgradeStructCoinCostExponentBase_ = upgradeStructCoinCostExponentBase_;
-            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-              to_bitField0_ |= 0x00000008;
-            }
-            result.upgradeStructDiamondCostExponentBase_ = upgradeStructDiamondCostExponentBase_;
-            if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-              to_bitField0_ |= 0x00000010;
-            }
-            result.diamondCostForInstantUpgradeMultiplier_ = diamondCostForInstantUpgradeMultiplier_;
-            result.bitField0_ = to_bitField0_;
-            onBuilt();
-            return result;
-          }
-          
-          public Builder mergeFrom(com.google.protobuf.Message other) {
-            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants) {
-              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants)other);
-            } else {
-              super.mergeFrom(other);
-              return this;
-            }
-          }
-          
-          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants other) {
-            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance()) return this;
-            if (other.hasMinutesToUpgradeForNormStructMultiplier()) {
-              setMinutesToUpgradeForNormStructMultiplier(other.getMinutesToUpgradeForNormStructMultiplier());
-            }
-            if (other.hasIncomeFromNormStructMultiplier()) {
-              setIncomeFromNormStructMultiplier(other.getIncomeFromNormStructMultiplier());
-            }
-            if (other.hasUpgradeStructCoinCostExponentBase()) {
-              setUpgradeStructCoinCostExponentBase(other.getUpgradeStructCoinCostExponentBase());
-            }
-            if (other.hasUpgradeStructDiamondCostExponentBase()) {
-              setUpgradeStructDiamondCostExponentBase(other.getUpgradeStructDiamondCostExponentBase());
-            }
-            if (other.hasDiamondCostForInstantUpgradeMultiplier()) {
-              setDiamondCostForInstantUpgradeMultiplier(other.getDiamondCostForInstantUpgradeMultiplier());
-            }
-            this.mergeUnknownFields(other.getUnknownFields());
-            return this;
-          }
-          
-          public final boolean isInitialized() {
-            return true;
-          }
-          
-          public Builder mergeFrom(
-              com.google.protobuf.CodedInputStream input,
-              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-              throws java.io.IOException {
-            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-              com.google.protobuf.UnknownFieldSet.newBuilder(
-                this.getUnknownFields());
-            while (true) {
-              int tag = input.readTag();
-              switch (tag) {
-                case 0:
-                  this.setUnknownFields(unknownFields.build());
-                  onChanged();
-                  return this;
-                default: {
-                  if (!parseUnknownField(input, unknownFields,
-                                         extensionRegistry, tag)) {
-                    this.setUnknownFields(unknownFields.build());
-                    onChanged();
-                    return this;
-                  }
-                  break;
-                }
-                case 9: {
-                  bitField0_ |= 0x00000001;
-                  minutesToUpgradeForNormStructMultiplier_ = input.readDouble();
-                  break;
-                }
-                case 17: {
-                  bitField0_ |= 0x00000002;
-                  incomeFromNormStructMultiplier_ = input.readDouble();
-                  break;
-                }
-                case 25: {
-                  bitField0_ |= 0x00000004;
-                  upgradeStructCoinCostExponentBase_ = input.readDouble();
-                  break;
-                }
-                case 33: {
-                  bitField0_ |= 0x00000008;
-                  upgradeStructDiamondCostExponentBase_ = input.readDouble();
-                  break;
-                }
-                case 41: {
-                  bitField0_ |= 0x00000010;
-                  diamondCostForInstantUpgradeMultiplier_ = input.readDouble();
-                  break;
-                }
-              }
-            }
-          }
-          
-          private int bitField0_;
-          
-          // optional double minutesToUpgradeForNormStructMultiplier = 1;
-          private double minutesToUpgradeForNormStructMultiplier_ ;
-          public boolean hasMinutesToUpgradeForNormStructMultiplier() {
-            return ((bitField0_ & 0x00000001) == 0x00000001);
-          }
-          public double getMinutesToUpgradeForNormStructMultiplier() {
-            return minutesToUpgradeForNormStructMultiplier_;
-          }
-          public Builder setMinutesToUpgradeForNormStructMultiplier(double value) {
-            bitField0_ |= 0x00000001;
-            minutesToUpgradeForNormStructMultiplier_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearMinutesToUpgradeForNormStructMultiplier() {
-            bitField0_ = (bitField0_ & ~0x00000001);
-            minutesToUpgradeForNormStructMultiplier_ = 0D;
-            onChanged();
-            return this;
-          }
-          
-          // optional double incomeFromNormStructMultiplier = 2;
-          private double incomeFromNormStructMultiplier_ ;
-          public boolean hasIncomeFromNormStructMultiplier() {
-            return ((bitField0_ & 0x00000002) == 0x00000002);
-          }
-          public double getIncomeFromNormStructMultiplier() {
-            return incomeFromNormStructMultiplier_;
-          }
-          public Builder setIncomeFromNormStructMultiplier(double value) {
-            bitField0_ |= 0x00000002;
-            incomeFromNormStructMultiplier_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearIncomeFromNormStructMultiplier() {
-            bitField0_ = (bitField0_ & ~0x00000002);
-            incomeFromNormStructMultiplier_ = 0D;
-            onChanged();
-            return this;
-          }
-          
-          // optional double upgradeStructCoinCostExponentBase = 3;
-          private double upgradeStructCoinCostExponentBase_ ;
-          public boolean hasUpgradeStructCoinCostExponentBase() {
-            return ((bitField0_ & 0x00000004) == 0x00000004);
-          }
-          public double getUpgradeStructCoinCostExponentBase() {
-            return upgradeStructCoinCostExponentBase_;
-          }
-          public Builder setUpgradeStructCoinCostExponentBase(double value) {
-            bitField0_ |= 0x00000004;
-            upgradeStructCoinCostExponentBase_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearUpgradeStructCoinCostExponentBase() {
-            bitField0_ = (bitField0_ & ~0x00000004);
-            upgradeStructCoinCostExponentBase_ = 0D;
-            onChanged();
-            return this;
-          }
-          
-          // optional double upgradeStructDiamondCostExponentBase = 4;
-          private double upgradeStructDiamondCostExponentBase_ ;
-          public boolean hasUpgradeStructDiamondCostExponentBase() {
-            return ((bitField0_ & 0x00000008) == 0x00000008);
-          }
-          public double getUpgradeStructDiamondCostExponentBase() {
-            return upgradeStructDiamondCostExponentBase_;
-          }
-          public Builder setUpgradeStructDiamondCostExponentBase(double value) {
-            bitField0_ |= 0x00000008;
-            upgradeStructDiamondCostExponentBase_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearUpgradeStructDiamondCostExponentBase() {
-            bitField0_ = (bitField0_ & ~0x00000008);
-            upgradeStructDiamondCostExponentBase_ = 0D;
-            onChanged();
-            return this;
-          }
-          
-          // optional double diamondCostForInstantUpgradeMultiplier = 5;
-          private double diamondCostForInstantUpgradeMultiplier_ ;
-          public boolean hasDiamondCostForInstantUpgradeMultiplier() {
-            return ((bitField0_ & 0x00000010) == 0x00000010);
-          }
-          public double getDiamondCostForInstantUpgradeMultiplier() {
-            return diamondCostForInstantUpgradeMultiplier_;
-          }
-          public Builder setDiamondCostForInstantUpgradeMultiplier(double value) {
-            bitField0_ |= 0x00000010;
-            diamondCostForInstantUpgradeMultiplier_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearDiamondCostForInstantUpgradeMultiplier() {
-            bitField0_ = (bitField0_ & ~0x00000010);
-            diamondCostForInstantUpgradeMultiplier_ = 0D;
-            onChanged();
-            return this;
-          }
-          
-          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants)
-        }
-        
-        static {
-          defaultInstance = new NormStructConstants(true);
-          defaultInstance.initFields();
-        }
-        
-        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants)
       }
       
       public interface AnimatedSpriteOffsetProtoOrBuilder
@@ -6087,21 +5516,8 @@ public final class EventStartupProto {
         return maxNumOfSingleStruct_;
       }
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants = 4;
-      public static final int NORMSTRUCTCONSTANTS_FIELD_NUMBER = 4;
-      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants_;
-      public boolean hasNormStructConstants() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getNormStructConstants() {
-        return normStructConstants_;
-      }
-      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getNormStructConstantsOrBuilder() {
-        return normStructConstants_;
-      }
-      
-      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
-      public static final int ANIMATEDSPRITEOFFSETS_FIELD_NUMBER = 5;
+      // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 4;
+      public static final int ANIMATEDSPRITEOFFSETS_FIELD_NUMBER = 4;
       private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto> animatedSpriteOffsets_;
       public java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto> getAnimatedSpriteOffsetsList() {
         return animatedSpriteOffsets_;
@@ -6121,41 +5537,41 @@ public final class EventStartupProto {
         return animatedSpriteOffsets_.get(index);
       }
       
-      // optional int32 minNameLength = 6;
-      public static final int MINNAMELENGTH_FIELD_NUMBER = 6;
+      // optional int32 minNameLength = 5;
+      public static final int MINNAMELENGTH_FIELD_NUMBER = 5;
       private int minNameLength_;
       public boolean hasMinNameLength() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public int getMinNameLength() {
         return minNameLength_;
       }
       
-      // optional int32 maxNameLength = 7;
-      public static final int MAXNAMELENGTH_FIELD_NUMBER = 7;
+      // optional int32 maxNameLength = 6;
+      public static final int MAXNAMELENGTH_FIELD_NUMBER = 6;
       private int maxNameLength_;
       public boolean hasMaxNameLength() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getMaxNameLength() {
         return maxNameLength_;
       }
       
-      // optional int32 maxLengthOfChatString = 8;
-      public static final int MAXLENGTHOFCHATSTRING_FIELD_NUMBER = 8;
+      // optional int32 maxLengthOfChatString = 7;
+      public static final int MAXLENGTHOFCHATSTRING_FIELD_NUMBER = 7;
       private int maxLengthOfChatString_;
       public boolean hasMaxLengthOfChatString() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getMaxLengthOfChatString() {
         return maxLengthOfChatString_;
       }
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 9;
-      public static final int CLANCONSTANTS_FIELD_NUMBER = 9;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 8;
+      public static final int CLANCONSTANTS_FIELD_NUMBER = 8;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants clanConstants_;
       public boolean hasClanConstants() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants getClanConstants() {
         return clanConstants_;
@@ -6164,11 +5580,11 @@ public final class EventStartupProto {
         return clanConstants_;
       }
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 10;
-      public static final int DOWNLOADABLENIBCONSTANTS_FIELD_NUMBER = 10;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 9;
+      public static final int DOWNLOADABLENIBCONSTANTS_FIELD_NUMBER = 9;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants_;
       public boolean hasDownloadableNibConstants() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants getDownloadableNibConstants() {
         return downloadableNibConstants_;
@@ -6177,31 +5593,31 @@ public final class EventStartupProto {
         return downloadableNibConstants_;
       }
       
-      // optional int32 numHoursBeforeReshowingGoldSale = 11;
-      public static final int NUMHOURSBEFORERESHOWINGGOLDSALE_FIELD_NUMBER = 11;
+      // optional int32 numHoursBeforeReshowingGoldSale = 10;
+      public static final int NUMHOURSBEFORERESHOWINGGOLDSALE_FIELD_NUMBER = 10;
       private int numHoursBeforeReshowingGoldSale_;
       public boolean hasNumHoursBeforeReshowingGoldSale() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public int getNumHoursBeforeReshowingGoldSale() {
         return numHoursBeforeReshowingGoldSale_;
       }
       
-      // optional int32 levelToShowRateUsPopup = 12;
-      public static final int LEVELTOSHOWRATEUSPOPUP_FIELD_NUMBER = 12;
+      // optional int32 levelToShowRateUsPopup = 11;
+      public static final int LEVELTOSHOWRATEUSPOPUP_FIELD_NUMBER = 11;
       private int levelToShowRateUsPopup_;
       public boolean hasLevelToShowRateUsPopup() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public int getLevelToShowRateUsPopup() {
         return levelToShowRateUsPopup_;
       }
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 13;
-      public static final int TOURAMENTCONSTANTS_FIELD_NUMBER = 13;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 12;
+      public static final int TOURAMENTCONSTANTS_FIELD_NUMBER = 12;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants_;
       public boolean hasTouramentConstants() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getTouramentConstants() {
         return touramentConstants_;
@@ -6210,21 +5626,21 @@ public final class EventStartupProto {
         return touramentConstants_;
       }
       
-      // optional int32 fbConnectRewardDiamonds = 14;
-      public static final int FBCONNECTREWARDDIAMONDS_FIELD_NUMBER = 14;
+      // optional int32 fbConnectRewardDiamonds = 13;
+      public static final int FBCONNECTREWARDDIAMONDS_FIELD_NUMBER = 13;
       private int fbConnectRewardDiamonds_;
       public boolean hasFbConnectRewardDiamonds() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       public int getFbConnectRewardDiamonds() {
         return fbConnectRewardDiamonds_;
       }
       
-      // optional string faqFileName = 15;
-      public static final int FAQFILENAME_FIELD_NUMBER = 15;
+      // optional string faqFileName = 14;
+      public static final int FAQFILENAME_FIELD_NUMBER = 14;
       private java.lang.Object faqFileName_;
       public boolean hasFaqFileName() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       public String getFaqFileName() {
         java.lang.Object ref = faqFileName_;
@@ -6252,11 +5668,11 @@ public final class EventStartupProto {
         }
       }
       
-      // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 16;
-      public static final int ADMINCHATUSERPROTO_FIELD_NUMBER = 16;
+      // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 15;
+      public static final int ADMINCHATUSERPROTO_FIELD_NUMBER = 15;
       private com.lvl6.proto.UserProto.MinimumUserProto adminChatUserProto_;
       public boolean hasAdminChatUserProto() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       public com.lvl6.proto.UserProto.MinimumUserProto getAdminChatUserProto() {
         return adminChatUserProto_;
@@ -6265,21 +5681,21 @@ public final class EventStartupProto {
         return adminChatUserProto_;
       }
       
-      // optional int32 numBeginnerSalesAllowed = 17;
-      public static final int NUMBEGINNERSALESALLOWED_FIELD_NUMBER = 17;
+      // optional int32 numBeginnerSalesAllowed = 16;
+      public static final int NUMBEGINNERSALESALLOWED_FIELD_NUMBER = 16;
       private int numBeginnerSalesAllowed_;
       public boolean hasNumBeginnerSalesAllowed() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       public int getNumBeginnerSalesAllowed() {
         return numBeginnerSalesAllowed_;
       }
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 18;
-      public static final int USERMONSTERCONSTANTS_FIELD_NUMBER = 18;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 17;
+      public static final int USERMONSTERCONSTANTS_FIELD_NUMBER = 17;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants_;
       public boolean hasUserMonsterConstants() {
-        return ((bitField0_ & 0x00008000) == 0x00008000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants getUserMonsterConstants() {
         return userMonsterConstants_;
@@ -6288,11 +5704,11 @@ public final class EventStartupProto {
         return userMonsterConstants_;
       }
       
-      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 19;
-      public static final int MONSTERCONSTANTS_FIELD_NUMBER = 19;
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 18;
+      public static final int MONSTERCONSTANTS_FIELD_NUMBER = 18;
       private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants_;
       public boolean hasMonsterConstants() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants getMonsterConstants() {
         return monsterConstants_;
@@ -6301,11 +5717,11 @@ public final class EventStartupProto {
         return monsterConstants_;
       }
       
-      // optional float minutesPerGem = 20;
-      public static final int MINUTESPERGEM_FIELD_NUMBER = 20;
+      // optional float minutesPerGem = 19;
+      public static final int MINUTESPERGEM_FIELD_NUMBER = 19;
       private float minutesPerGem_;
       public boolean hasMinutesPerGem() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
+        return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       public float getMinutesPerGem() {
         return minutesPerGem_;
@@ -6315,7 +5731,6 @@ public final class EventStartupProto {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
         maxNumOfSingleStruct_ = 0;
-        normStructConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
         animatedSpriteOffsets_ = java.util.Collections.emptyList();
         minNameLength_ = 0;
         maxNameLength_ = 0;
@@ -6354,56 +5769,53 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           output.writeInt32(3, maxNumOfSingleStruct_);
         }
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          output.writeMessage(4, normStructConstants_);
-        }
         for (int i = 0; i < animatedSpriteOffsets_.size(); i++) {
-          output.writeMessage(5, animatedSpriteOffsets_.get(i));
+          output.writeMessage(4, animatedSpriteOffsets_.get(i));
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(5, minNameLength_);
         }
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          output.writeInt32(6, minNameLength_);
+          output.writeInt32(6, maxNameLength_);
         }
         if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          output.writeInt32(7, maxNameLength_);
+          output.writeInt32(7, maxLengthOfChatString_);
         }
         if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          output.writeInt32(8, maxLengthOfChatString_);
+          output.writeMessage(8, clanConstants_);
         }
         if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          output.writeMessage(9, clanConstants_);
+          output.writeMessage(9, downloadableNibConstants_);
         }
         if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          output.writeMessage(10, downloadableNibConstants_);
+          output.writeInt32(10, numHoursBeforeReshowingGoldSale_);
         }
         if (((bitField0_ & 0x00000100) == 0x00000100)) {
-          output.writeInt32(11, numHoursBeforeReshowingGoldSale_);
+          output.writeInt32(11, levelToShowRateUsPopup_);
         }
         if (((bitField0_ & 0x00000200) == 0x00000200)) {
-          output.writeInt32(12, levelToShowRateUsPopup_);
+          output.writeMessage(12, touramentConstants_);
         }
         if (((bitField0_ & 0x00000400) == 0x00000400)) {
-          output.writeMessage(13, touramentConstants_);
+          output.writeInt32(13, fbConnectRewardDiamonds_);
         }
         if (((bitField0_ & 0x00000800) == 0x00000800)) {
-          output.writeInt32(14, fbConnectRewardDiamonds_);
+          output.writeBytes(14, getFaqFileNameBytes());
         }
         if (((bitField0_ & 0x00001000) == 0x00001000)) {
-          output.writeBytes(15, getFaqFileNameBytes());
+          output.writeMessage(15, adminChatUserProto_);
         }
         if (((bitField0_ & 0x00002000) == 0x00002000)) {
-          output.writeMessage(16, adminChatUserProto_);
+          output.writeInt32(16, numBeginnerSalesAllowed_);
         }
         if (((bitField0_ & 0x00004000) == 0x00004000)) {
-          output.writeInt32(17, numBeginnerSalesAllowed_);
+          output.writeMessage(17, userMonsterConstants_);
         }
         if (((bitField0_ & 0x00008000) == 0x00008000)) {
-          output.writeMessage(18, userMonsterConstants_);
+          output.writeMessage(18, monsterConstants_);
         }
         if (((bitField0_ & 0x00010000) == 0x00010000)) {
-          output.writeMessage(19, monsterConstants_);
-        }
-        if (((bitField0_ & 0x00020000) == 0x00020000)) {
-          output.writeFloat(20, minutesPerGem_);
+          output.writeFloat(19, minutesPerGem_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -6426,73 +5838,69 @@ public final class EventStartupProto {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(3, maxNumOfSingleStruct_);
         }
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(4, normStructConstants_);
-        }
         for (int i = 0; i < animatedSpriteOffsets_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(5, animatedSpriteOffsets_.get(i));
+            .computeMessageSize(4, animatedSpriteOffsets_.get(i));
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(5, minNameLength_);
         }
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(6, minNameLength_);
+            .computeInt32Size(6, maxNameLength_);
         }
         if (((bitField0_ & 0x00000010) == 0x00000010)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(7, maxNameLength_);
+            .computeInt32Size(7, maxLengthOfChatString_);
         }
         if (((bitField0_ & 0x00000020) == 0x00000020)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(8, maxLengthOfChatString_);
+            .computeMessageSize(8, clanConstants_);
         }
         if (((bitField0_ & 0x00000040) == 0x00000040)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(9, clanConstants_);
+            .computeMessageSize(9, downloadableNibConstants_);
         }
         if (((bitField0_ & 0x00000080) == 0x00000080)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(10, downloadableNibConstants_);
+            .computeInt32Size(10, numHoursBeforeReshowingGoldSale_);
         }
         if (((bitField0_ & 0x00000100) == 0x00000100)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(11, numHoursBeforeReshowingGoldSale_);
+            .computeInt32Size(11, levelToShowRateUsPopup_);
         }
         if (((bitField0_ & 0x00000200) == 0x00000200)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(12, levelToShowRateUsPopup_);
+            .computeMessageSize(12, touramentConstants_);
         }
         if (((bitField0_ & 0x00000400) == 0x00000400)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(13, touramentConstants_);
+            .computeInt32Size(13, fbConnectRewardDiamonds_);
         }
         if (((bitField0_ & 0x00000800) == 0x00000800)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(14, fbConnectRewardDiamonds_);
+            .computeBytesSize(14, getFaqFileNameBytes());
         }
         if (((bitField0_ & 0x00001000) == 0x00001000)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(15, getFaqFileNameBytes());
+            .computeMessageSize(15, adminChatUserProto_);
         }
         if (((bitField0_ & 0x00002000) == 0x00002000)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(16, adminChatUserProto_);
+            .computeInt32Size(16, numBeginnerSalesAllowed_);
         }
         if (((bitField0_ & 0x00004000) == 0x00004000)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeInt32Size(17, numBeginnerSalesAllowed_);
+            .computeMessageSize(17, userMonsterConstants_);
         }
         if (((bitField0_ & 0x00008000) == 0x00008000)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(18, userMonsterConstants_);
+            .computeMessageSize(18, monsterConstants_);
         }
         if (((bitField0_ & 0x00010000) == 0x00010000)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(19, monsterConstants_);
-        }
-        if (((bitField0_ & 0x00020000) == 0x00020000)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeFloatSize(20, minutesPerGem_);
+            .computeFloatSize(19, minutesPerGem_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -6611,7 +6019,6 @@ public final class EventStartupProto {
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
             getInAppPurchasePackagesFieldBuilder();
-            getNormStructConstantsFieldBuilder();
             getAnimatedSpriteOffsetsFieldBuilder();
             getClanConstantsFieldBuilder();
             getDownloadableNibConstantsFieldBuilder();
@@ -6637,72 +6044,66 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000002);
           maxNumOfSingleStruct_ = 0;
           bitField0_ = (bitField0_ & ~0x00000004);
-          if (normStructConstantsBuilder_ == null) {
-            normStructConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
-          } else {
-            normStructConstantsBuilder_.clear();
-          }
-          bitField0_ = (bitField0_ & ~0x00000008);
           if (animatedSpriteOffsetsBuilder_ == null) {
             animatedSpriteOffsets_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000008);
           } else {
             animatedSpriteOffsetsBuilder_.clear();
           }
           minNameLength_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000010);
           maxNameLength_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000020);
           maxLengthOfChatString_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000040);
           if (clanConstantsBuilder_ == null) {
             clanConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance();
           } else {
             clanConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000080);
           if (downloadableNibConstantsBuilder_ == null) {
             downloadableNibConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance();
           } else {
             downloadableNibConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000100);
           numHoursBeforeReshowingGoldSale_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000200);
           levelToShowRateUsPopup_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00000400);
           if (touramentConstantsBuilder_ == null) {
             touramentConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
           } else {
             touramentConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00000800);
           fbConnectRewardDiamonds_ = 0;
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00001000);
           faqFileName_ = "";
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00002000);
           if (adminChatUserProtoBuilder_ == null) {
             adminChatUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
           } else {
             adminChatUserProtoBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           numBeginnerSalesAllowed_ = 0;
-          bitField0_ = (bitField0_ & ~0x00010000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           if (userMonsterConstantsBuilder_ == null) {
             userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
           } else {
             userMonsterConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00020000);
+          bitField0_ = (bitField0_ & ~0x00010000);
           if (monsterConstantsBuilder_ == null) {
             monsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
           } else {
             monsterConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00020000);
           minutesPerGem_ = 0F;
-          bitField0_ = (bitField0_ & ~0x00080000);
+          bitField0_ = (bitField0_ & ~0x00040000);
           return this;
         }
         
@@ -6758,105 +6159,97 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00000002;
           }
           result.maxNumOfSingleStruct_ = maxNumOfSingleStruct_;
-          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-            to_bitField0_ |= 0x00000004;
-          }
-          if (normStructConstantsBuilder_ == null) {
-            result.normStructConstants_ = normStructConstants_;
-          } else {
-            result.normStructConstants_ = normStructConstantsBuilder_.build();
-          }
           if (animatedSpriteOffsetsBuilder_ == null) {
-            if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            if (((bitField0_ & 0x00000008) == 0x00000008)) {
               animatedSpriteOffsets_ = java.util.Collections.unmodifiableList(animatedSpriteOffsets_);
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000008);
             }
             result.animatedSpriteOffsets_ = animatedSpriteOffsets_;
           } else {
             result.animatedSpriteOffsets_ = animatedSpriteOffsetsBuilder_.build();
           }
+          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.minNameLength_ = minNameLength_;
           if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
             to_bitField0_ |= 0x00000008;
           }
-          result.minNameLength_ = minNameLength_;
+          result.maxNameLength_ = maxNameLength_;
           if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
             to_bitField0_ |= 0x00000010;
           }
-          result.maxNameLength_ = maxNameLength_;
+          result.maxLengthOfChatString_ = maxLengthOfChatString_;
           if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
             to_bitField0_ |= 0x00000020;
-          }
-          result.maxLengthOfChatString_ = maxLengthOfChatString_;
-          if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-            to_bitField0_ |= 0x00000040;
           }
           if (clanConstantsBuilder_ == null) {
             result.clanConstants_ = clanConstants_;
           } else {
             result.clanConstants_ = clanConstantsBuilder_.build();
           }
-          if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-            to_bitField0_ |= 0x00000080;
+          if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+            to_bitField0_ |= 0x00000040;
           }
           if (downloadableNibConstantsBuilder_ == null) {
             result.downloadableNibConstants_ = downloadableNibConstants_;
           } else {
             result.downloadableNibConstants_ = downloadableNibConstantsBuilder_.build();
           }
+          if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+            to_bitField0_ |= 0x00000080;
+          }
+          result.numHoursBeforeReshowingGoldSale_ = numHoursBeforeReshowingGoldSale_;
           if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
             to_bitField0_ |= 0x00000100;
           }
-          result.numHoursBeforeReshowingGoldSale_ = numHoursBeforeReshowingGoldSale_;
+          result.levelToShowRateUsPopup_ = levelToShowRateUsPopup_;
           if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
             to_bitField0_ |= 0x00000200;
-          }
-          result.levelToShowRateUsPopup_ = levelToShowRateUsPopup_;
-          if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
-            to_bitField0_ |= 0x00000400;
           }
           if (touramentConstantsBuilder_ == null) {
             result.touramentConstants_ = touramentConstants_;
           } else {
             result.touramentConstants_ = touramentConstantsBuilder_.build();
           }
+          if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+            to_bitField0_ |= 0x00000400;
+          }
+          result.fbConnectRewardDiamonds_ = fbConnectRewardDiamonds_;
           if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
             to_bitField0_ |= 0x00000800;
           }
-          result.fbConnectRewardDiamonds_ = fbConnectRewardDiamonds_;
+          result.faqFileName_ = faqFileName_;
           if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
             to_bitField0_ |= 0x00001000;
-          }
-          result.faqFileName_ = faqFileName_;
-          if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
-            to_bitField0_ |= 0x00002000;
           }
           if (adminChatUserProtoBuilder_ == null) {
             result.adminChatUserProto_ = adminChatUserProto_;
           } else {
             result.adminChatUserProto_ = adminChatUserProtoBuilder_.build();
           }
-          if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
-            to_bitField0_ |= 0x00004000;
+          if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
+            to_bitField0_ |= 0x00002000;
           }
           result.numBeginnerSalesAllowed_ = numBeginnerSalesAllowed_;
-          if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
-            to_bitField0_ |= 0x00008000;
+          if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
+            to_bitField0_ |= 0x00004000;
           }
           if (userMonsterConstantsBuilder_ == null) {
             result.userMonsterConstants_ = userMonsterConstants_;
           } else {
             result.userMonsterConstants_ = userMonsterConstantsBuilder_.build();
           }
-          if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
-            to_bitField0_ |= 0x00010000;
+          if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
+            to_bitField0_ |= 0x00008000;
           }
           if (monsterConstantsBuilder_ == null) {
             result.monsterConstants_ = monsterConstants_;
           } else {
             result.monsterConstants_ = monsterConstantsBuilder_.build();
           }
-          if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
-            to_bitField0_ |= 0x00020000;
+          if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
+            to_bitField0_ |= 0x00010000;
           }
           result.minutesPerGem_ = minutesPerGem_;
           result.bitField0_ = to_bitField0_;
@@ -6907,14 +6300,11 @@ public final class EventStartupProto {
           if (other.hasMaxNumOfSingleStruct()) {
             setMaxNumOfSingleStruct(other.getMaxNumOfSingleStruct());
           }
-          if (other.hasNormStructConstants()) {
-            mergeNormStructConstants(other.getNormStructConstants());
-          }
           if (animatedSpriteOffsetsBuilder_ == null) {
             if (!other.animatedSpriteOffsets_.isEmpty()) {
               if (animatedSpriteOffsets_.isEmpty()) {
                 animatedSpriteOffsets_ = other.animatedSpriteOffsets_;
-                bitField0_ = (bitField0_ & ~0x00000010);
+                bitField0_ = (bitField0_ & ~0x00000008);
               } else {
                 ensureAnimatedSpriteOffsetsIsMutable();
                 animatedSpriteOffsets_.addAll(other.animatedSpriteOffsets_);
@@ -6927,7 +6317,7 @@ public final class EventStartupProto {
                 animatedSpriteOffsetsBuilder_.dispose();
                 animatedSpriteOffsetsBuilder_ = null;
                 animatedSpriteOffsets_ = other.animatedSpriteOffsets_;
-                bitField0_ = (bitField0_ & ~0x00000010);
+                bitField0_ = (bitField0_ & ~0x00000008);
                 animatedSpriteOffsetsBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getAnimatedSpriteOffsetsFieldBuilder() : null;
@@ -7029,36 +6419,27 @@ public final class EventStartupProto {
                 break;
               }
               case 34: {
-                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.newBuilder();
-                if (hasNormStructConstants()) {
-                  subBuilder.mergeFrom(getNormStructConstants());
-                }
-                input.readMessage(subBuilder, extensionRegistry);
-                setNormStructConstants(subBuilder.buildPartial());
-                break;
-              }
-              case 42: {
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.newBuilder();
                 input.readMessage(subBuilder, extensionRegistry);
                 addAnimatedSpriteOffsets(subBuilder.buildPartial());
                 break;
               }
+              case 40: {
+                bitField0_ |= 0x00000010;
+                minNameLength_ = input.readInt32();
+                break;
+              }
               case 48: {
                 bitField0_ |= 0x00000020;
-                minNameLength_ = input.readInt32();
+                maxNameLength_ = input.readInt32();
                 break;
               }
               case 56: {
                 bitField0_ |= 0x00000040;
-                maxNameLength_ = input.readInt32();
-                break;
-              }
-              case 64: {
-                bitField0_ |= 0x00000080;
                 maxLengthOfChatString_ = input.readInt32();
                 break;
               }
-              case 74: {
+              case 66: {
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.newBuilder();
                 if (hasClanConstants()) {
                   subBuilder.mergeFrom(getClanConstants());
@@ -7067,7 +6448,7 @@ public final class EventStartupProto {
                 setClanConstants(subBuilder.buildPartial());
                 break;
               }
-              case 82: {
+              case 74: {
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.newBuilder();
                 if (hasDownloadableNibConstants()) {
                   subBuilder.mergeFrom(getDownloadableNibConstants());
@@ -7076,17 +6457,17 @@ public final class EventStartupProto {
                 setDownloadableNibConstants(subBuilder.buildPartial());
                 break;
               }
-              case 88: {
-                bitField0_ |= 0x00000400;
+              case 80: {
+                bitField0_ |= 0x00000200;
                 numHoursBeforeReshowingGoldSale_ = input.readInt32();
                 break;
               }
-              case 96: {
-                bitField0_ |= 0x00000800;
+              case 88: {
+                bitField0_ |= 0x00000400;
                 levelToShowRateUsPopup_ = input.readInt32();
                 break;
               }
-              case 106: {
+              case 98: {
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.newBuilder();
                 if (hasTouramentConstants()) {
                   subBuilder.mergeFrom(getTouramentConstants());
@@ -7095,17 +6476,17 @@ public final class EventStartupProto {
                 setTouramentConstants(subBuilder.buildPartial());
                 break;
               }
-              case 112: {
-                bitField0_ |= 0x00002000;
+              case 104: {
+                bitField0_ |= 0x00001000;
                 fbConnectRewardDiamonds_ = input.readInt32();
                 break;
               }
-              case 122: {
-                bitField0_ |= 0x00004000;
+              case 114: {
+                bitField0_ |= 0x00002000;
                 faqFileName_ = input.readBytes();
                 break;
               }
-              case 130: {
+              case 122: {
                 com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
                 if (hasAdminChatUserProto()) {
                   subBuilder.mergeFrom(getAdminChatUserProto());
@@ -7114,12 +6495,12 @@ public final class EventStartupProto {
                 setAdminChatUserProto(subBuilder.buildPartial());
                 break;
               }
-              case 136: {
-                bitField0_ |= 0x00010000;
+              case 128: {
+                bitField0_ |= 0x00008000;
                 numBeginnerSalesAllowed_ = input.readInt32();
                 break;
               }
-              case 146: {
+              case 138: {
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.newBuilder();
                 if (hasUserMonsterConstants()) {
                   subBuilder.mergeFrom(getUserMonsterConstants());
@@ -7128,7 +6509,7 @@ public final class EventStartupProto {
                 setUserMonsterConstants(subBuilder.buildPartial());
                 break;
               }
-              case 154: {
+              case 146: {
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.newBuilder();
                 if (hasMonsterConstants()) {
                   subBuilder.mergeFrom(getMonsterConstants());
@@ -7137,8 +6518,8 @@ public final class EventStartupProto {
                 setMonsterConstants(subBuilder.buildPartial());
                 break;
               }
-              case 165: {
-                bitField0_ |= 0x00080000;
+              case 157: {
+                bitField0_ |= 0x00040000;
                 minutesPerGem_ = input.readFloat();
                 break;
               }
@@ -7376,103 +6757,13 @@ public final class EventStartupProto {
           return this;
         }
         
-        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants = 4;
-        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants normStructConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
-        private com.google.protobuf.SingleFieldBuilder<
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder> normStructConstantsBuilder_;
-        public boolean hasNormStructConstants() {
-          return ((bitField0_ & 0x00000008) == 0x00000008);
-        }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants getNormStructConstants() {
-          if (normStructConstantsBuilder_ == null) {
-            return normStructConstants_;
-          } else {
-            return normStructConstantsBuilder_.getMessage();
-          }
-        }
-        public Builder setNormStructConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants value) {
-          if (normStructConstantsBuilder_ == null) {
-            if (value == null) {
-              throw new NullPointerException();
-            }
-            normStructConstants_ = value;
-            onChanged();
-          } else {
-            normStructConstantsBuilder_.setMessage(value);
-          }
-          bitField0_ |= 0x00000008;
-          return this;
-        }
-        public Builder setNormStructConstants(
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder builderForValue) {
-          if (normStructConstantsBuilder_ == null) {
-            normStructConstants_ = builderForValue.build();
-            onChanged();
-          } else {
-            normStructConstantsBuilder_.setMessage(builderForValue.build());
-          }
-          bitField0_ |= 0x00000008;
-          return this;
-        }
-        public Builder mergeNormStructConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants value) {
-          if (normStructConstantsBuilder_ == null) {
-            if (((bitField0_ & 0x00000008) == 0x00000008) &&
-                normStructConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance()) {
-              normStructConstants_ =
-                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.newBuilder(normStructConstants_).mergeFrom(value).buildPartial();
-            } else {
-              normStructConstants_ = value;
-            }
-            onChanged();
-          } else {
-            normStructConstantsBuilder_.mergeFrom(value);
-          }
-          bitField0_ |= 0x00000008;
-          return this;
-        }
-        public Builder clearNormStructConstants() {
-          if (normStructConstantsBuilder_ == null) {
-            normStructConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.getDefaultInstance();
-            onChanged();
-          } else {
-            normStructConstantsBuilder_.clear();
-          }
-          bitField0_ = (bitField0_ & ~0x00000008);
-          return this;
-        }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder getNormStructConstantsBuilder() {
-          bitField0_ |= 0x00000008;
-          onChanged();
-          return getNormStructConstantsFieldBuilder().getBuilder();
-        }
-        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder getNormStructConstantsOrBuilder() {
-          if (normStructConstantsBuilder_ != null) {
-            return normStructConstantsBuilder_.getMessageOrBuilder();
-          } else {
-            return normStructConstants_;
-          }
-        }
-        private com.google.protobuf.SingleFieldBuilder<
-            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder> 
-            getNormStructConstantsFieldBuilder() {
-          if (normStructConstantsBuilder_ == null) {
-            normStructConstantsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstantsOrBuilder>(
-                    normStructConstants_,
-                    getParentForChildren(),
-                    isClean());
-            normStructConstants_ = null;
-          }
-          return normStructConstantsBuilder_;
-        }
-        
-        // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
+        // repeated .com.lvl6.proto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto animatedSpriteOffsets = 4;
         private java.util.List<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto> animatedSpriteOffsets_ =
           java.util.Collections.emptyList();
         private void ensureAnimatedSpriteOffsetsIsMutable() {
-          if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (!((bitField0_ & 0x00000008) == 0x00000008)) {
             animatedSpriteOffsets_ = new java.util.ArrayList<com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto>(animatedSpriteOffsets_);
-            bitField0_ |= 0x00000010;
+            bitField0_ |= 0x00000008;
            }
         }
         
@@ -7588,7 +6879,7 @@ public final class EventStartupProto {
         public Builder clearAnimatedSpriteOffsets() {
           if (animatedSpriteOffsetsBuilder_ == null) {
             animatedSpriteOffsets_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000008);
             onChanged();
           } else {
             animatedSpriteOffsetsBuilder_.clear();
@@ -7644,7 +6935,7 @@ public final class EventStartupProto {
             animatedSpriteOffsetsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProtoOrBuilder>(
                     animatedSpriteOffsets_,
-                    ((bitField0_ & 0x00000010) == 0x00000010),
+                    ((bitField0_ & 0x00000008) == 0x00000008),
                     getParentForChildren(),
                     isClean());
             animatedSpriteOffsets_ = null;
@@ -7652,75 +6943,75 @@ public final class EventStartupProto {
           return animatedSpriteOffsetsBuilder_;
         }
         
-        // optional int32 minNameLength = 6;
+        // optional int32 minNameLength = 5;
         private int minNameLength_ ;
         public boolean hasMinNameLength() {
-          return ((bitField0_ & 0x00000020) == 0x00000020);
+          return ((bitField0_ & 0x00000010) == 0x00000010);
         }
         public int getMinNameLength() {
           return minNameLength_;
         }
         public Builder setMinNameLength(int value) {
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000010;
           minNameLength_ = value;
           onChanged();
           return this;
         }
         public Builder clearMinNameLength() {
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000010);
           minNameLength_ = 0;
           onChanged();
           return this;
         }
         
-        // optional int32 maxNameLength = 7;
+        // optional int32 maxNameLength = 6;
         private int maxNameLength_ ;
         public boolean hasMaxNameLength() {
-          return ((bitField0_ & 0x00000040) == 0x00000040);
+          return ((bitField0_ & 0x00000020) == 0x00000020);
         }
         public int getMaxNameLength() {
           return maxNameLength_;
         }
         public Builder setMaxNameLength(int value) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000020;
           maxNameLength_ = value;
           onChanged();
           return this;
         }
         public Builder clearMaxNameLength() {
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000020);
           maxNameLength_ = 0;
           onChanged();
           return this;
         }
         
-        // optional int32 maxLengthOfChatString = 8;
+        // optional int32 maxLengthOfChatString = 7;
         private int maxLengthOfChatString_ ;
         public boolean hasMaxLengthOfChatString() {
-          return ((bitField0_ & 0x00000080) == 0x00000080);
+          return ((bitField0_ & 0x00000040) == 0x00000040);
         }
         public int getMaxLengthOfChatString() {
           return maxLengthOfChatString_;
         }
         public Builder setMaxLengthOfChatString(int value) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000040;
           maxLengthOfChatString_ = value;
           onChanged();
           return this;
         }
         public Builder clearMaxLengthOfChatString() {
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000040);
           maxLengthOfChatString_ = 0;
           onChanged();
           return this;
         }
         
-        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 9;
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.ClanConstants clanConstants = 8;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants clanConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstantsOrBuilder> clanConstantsBuilder_;
         public boolean hasClanConstants() {
-          return ((bitField0_ & 0x00000100) == 0x00000100);
+          return ((bitField0_ & 0x00000080) == 0x00000080);
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants getClanConstants() {
           if (clanConstantsBuilder_ == null) {
@@ -7739,7 +7030,7 @@ public final class EventStartupProto {
           } else {
             clanConstantsBuilder_.setMessage(value);
           }
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000080;
           return this;
         }
         public Builder setClanConstants(
@@ -7750,12 +7041,12 @@ public final class EventStartupProto {
           } else {
             clanConstantsBuilder_.setMessage(builderForValue.build());
           }
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000080;
           return this;
         }
         public Builder mergeClanConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants value) {
           if (clanConstantsBuilder_ == null) {
-            if (((bitField0_ & 0x00000100) == 0x00000100) &&
+            if (((bitField0_ & 0x00000080) == 0x00000080) &&
                 clanConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.getDefaultInstance()) {
               clanConstants_ =
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.newBuilder(clanConstants_).mergeFrom(value).buildPartial();
@@ -7766,7 +7057,7 @@ public final class EventStartupProto {
           } else {
             clanConstantsBuilder_.mergeFrom(value);
           }
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000080;
           return this;
         }
         public Builder clearClanConstants() {
@@ -7776,11 +7067,11 @@ public final class EventStartupProto {
           } else {
             clanConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000080);
           return this;
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder getClanConstantsBuilder() {
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000080;
           onChanged();
           return getClanConstantsFieldBuilder().getBuilder();
         }
@@ -7805,12 +7096,12 @@ public final class EventStartupProto {
           return clanConstantsBuilder_;
         }
         
-        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 10;
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants = 9;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants downloadableNibConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstantsOrBuilder> downloadableNibConstantsBuilder_;
         public boolean hasDownloadableNibConstants() {
-          return ((bitField0_ & 0x00000200) == 0x00000200);
+          return ((bitField0_ & 0x00000100) == 0x00000100);
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants getDownloadableNibConstants() {
           if (downloadableNibConstantsBuilder_ == null) {
@@ -7829,7 +7120,7 @@ public final class EventStartupProto {
           } else {
             downloadableNibConstantsBuilder_.setMessage(value);
           }
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
           return this;
         }
         public Builder setDownloadableNibConstants(
@@ -7840,12 +7131,12 @@ public final class EventStartupProto {
           } else {
             downloadableNibConstantsBuilder_.setMessage(builderForValue.build());
           }
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
           return this;
         }
         public Builder mergeDownloadableNibConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants value) {
           if (downloadableNibConstantsBuilder_ == null) {
-            if (((bitField0_ & 0x00000200) == 0x00000200) &&
+            if (((bitField0_ & 0x00000100) == 0x00000100) &&
                 downloadableNibConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.getDefaultInstance()) {
               downloadableNibConstants_ =
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.newBuilder(downloadableNibConstants_).mergeFrom(value).buildPartial();
@@ -7856,7 +7147,7 @@ public final class EventStartupProto {
           } else {
             downloadableNibConstantsBuilder_.mergeFrom(value);
           }
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
           return this;
         }
         public Builder clearDownloadableNibConstants() {
@@ -7866,11 +7157,11 @@ public final class EventStartupProto {
           } else {
             downloadableNibConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00000200);
+          bitField0_ = (bitField0_ & ~0x00000100);
           return this;
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.Builder getDownloadableNibConstantsBuilder() {
-          bitField0_ |= 0x00000200;
+          bitField0_ |= 0x00000100;
           onChanged();
           return getDownloadableNibConstantsFieldBuilder().getBuilder();
         }
@@ -7895,54 +7186,54 @@ public final class EventStartupProto {
           return downloadableNibConstantsBuilder_;
         }
         
-        // optional int32 numHoursBeforeReshowingGoldSale = 11;
+        // optional int32 numHoursBeforeReshowingGoldSale = 10;
         private int numHoursBeforeReshowingGoldSale_ ;
         public boolean hasNumHoursBeforeReshowingGoldSale() {
-          return ((bitField0_ & 0x00000400) == 0x00000400);
+          return ((bitField0_ & 0x00000200) == 0x00000200);
         }
         public int getNumHoursBeforeReshowingGoldSale() {
           return numHoursBeforeReshowingGoldSale_;
         }
         public Builder setNumHoursBeforeReshowingGoldSale(int value) {
-          bitField0_ |= 0x00000400;
+          bitField0_ |= 0x00000200;
           numHoursBeforeReshowingGoldSale_ = value;
           onChanged();
           return this;
         }
         public Builder clearNumHoursBeforeReshowingGoldSale() {
-          bitField0_ = (bitField0_ & ~0x00000400);
+          bitField0_ = (bitField0_ & ~0x00000200);
           numHoursBeforeReshowingGoldSale_ = 0;
           onChanged();
           return this;
         }
         
-        // optional int32 levelToShowRateUsPopup = 12;
+        // optional int32 levelToShowRateUsPopup = 11;
         private int levelToShowRateUsPopup_ ;
         public boolean hasLevelToShowRateUsPopup() {
-          return ((bitField0_ & 0x00000800) == 0x00000800);
+          return ((bitField0_ & 0x00000400) == 0x00000400);
         }
         public int getLevelToShowRateUsPopup() {
           return levelToShowRateUsPopup_;
         }
         public Builder setLevelToShowRateUsPopup(int value) {
-          bitField0_ |= 0x00000800;
+          bitField0_ |= 0x00000400;
           levelToShowRateUsPopup_ = value;
           onChanged();
           return this;
         }
         public Builder clearLevelToShowRateUsPopup() {
-          bitField0_ = (bitField0_ & ~0x00000800);
+          bitField0_ = (bitField0_ & ~0x00000400);
           levelToShowRateUsPopup_ = 0;
           onChanged();
           return this;
         }
         
-        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 13;
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants = 12;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants touramentConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstantsOrBuilder> touramentConstantsBuilder_;
         public boolean hasTouramentConstants() {
-          return ((bitField0_ & 0x00001000) == 0x00001000);
+          return ((bitField0_ & 0x00000800) == 0x00000800);
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants getTouramentConstants() {
           if (touramentConstantsBuilder_ == null) {
@@ -7961,7 +7252,7 @@ public final class EventStartupProto {
           } else {
             touramentConstantsBuilder_.setMessage(value);
           }
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00000800;
           return this;
         }
         public Builder setTouramentConstants(
@@ -7972,12 +7263,12 @@ public final class EventStartupProto {
           } else {
             touramentConstantsBuilder_.setMessage(builderForValue.build());
           }
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00000800;
           return this;
         }
         public Builder mergeTouramentConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants value) {
           if (touramentConstantsBuilder_ == null) {
-            if (((bitField0_ & 0x00001000) == 0x00001000) &&
+            if (((bitField0_ & 0x00000800) == 0x00000800) &&
                 touramentConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.getDefaultInstance()) {
               touramentConstants_ =
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.newBuilder(touramentConstants_).mergeFrom(value).buildPartial();
@@ -7988,7 +7279,7 @@ public final class EventStartupProto {
           } else {
             touramentConstantsBuilder_.mergeFrom(value);
           }
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00000800;
           return this;
         }
         public Builder clearTouramentConstants() {
@@ -7998,11 +7289,11 @@ public final class EventStartupProto {
           } else {
             touramentConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00001000);
+          bitField0_ = (bitField0_ & ~0x00000800);
           return this;
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder getTouramentConstantsBuilder() {
-          bitField0_ |= 0x00001000;
+          bitField0_ |= 0x00000800;
           onChanged();
           return getTouramentConstantsFieldBuilder().getBuilder();
         }
@@ -8027,31 +7318,31 @@ public final class EventStartupProto {
           return touramentConstantsBuilder_;
         }
         
-        // optional int32 fbConnectRewardDiamonds = 14;
+        // optional int32 fbConnectRewardDiamonds = 13;
         private int fbConnectRewardDiamonds_ ;
         public boolean hasFbConnectRewardDiamonds() {
-          return ((bitField0_ & 0x00002000) == 0x00002000);
+          return ((bitField0_ & 0x00001000) == 0x00001000);
         }
         public int getFbConnectRewardDiamonds() {
           return fbConnectRewardDiamonds_;
         }
         public Builder setFbConnectRewardDiamonds(int value) {
-          bitField0_ |= 0x00002000;
+          bitField0_ |= 0x00001000;
           fbConnectRewardDiamonds_ = value;
           onChanged();
           return this;
         }
         public Builder clearFbConnectRewardDiamonds() {
-          bitField0_ = (bitField0_ & ~0x00002000);
+          bitField0_ = (bitField0_ & ~0x00001000);
           fbConnectRewardDiamonds_ = 0;
           onChanged();
           return this;
         }
         
-        // optional string faqFileName = 15;
+        // optional string faqFileName = 14;
         private java.lang.Object faqFileName_ = "";
         public boolean hasFaqFileName() {
-          return ((bitField0_ & 0x00004000) == 0x00004000);
+          return ((bitField0_ & 0x00002000) == 0x00002000);
         }
         public String getFaqFileName() {
           java.lang.Object ref = faqFileName_;
@@ -8067,29 +7358,29 @@ public final class EventStartupProto {
           if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00004000;
+  bitField0_ |= 0x00002000;
           faqFileName_ = value;
           onChanged();
           return this;
         }
         public Builder clearFaqFileName() {
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00002000);
           faqFileName_ = getDefaultInstance().getFaqFileName();
           onChanged();
           return this;
         }
         void setFaqFileName(com.google.protobuf.ByteString value) {
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00002000;
           faqFileName_ = value;
           onChanged();
         }
         
-        // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 16;
+        // optional .com.lvl6.proto.MinimumUserProto adminChatUserProto = 15;
         private com.lvl6.proto.UserProto.MinimumUserProto adminChatUserProto_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> adminChatUserProtoBuilder_;
         public boolean hasAdminChatUserProto() {
-          return ((bitField0_ & 0x00008000) == 0x00008000);
+          return ((bitField0_ & 0x00004000) == 0x00004000);
         }
         public com.lvl6.proto.UserProto.MinimumUserProto getAdminChatUserProto() {
           if (adminChatUserProtoBuilder_ == null) {
@@ -8108,7 +7399,7 @@ public final class EventStartupProto {
           } else {
             adminChatUserProtoBuilder_.setMessage(value);
           }
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00004000;
           return this;
         }
         public Builder setAdminChatUserProto(
@@ -8119,12 +7410,12 @@ public final class EventStartupProto {
           } else {
             adminChatUserProtoBuilder_.setMessage(builderForValue.build());
           }
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00004000;
           return this;
         }
         public Builder mergeAdminChatUserProto(com.lvl6.proto.UserProto.MinimumUserProto value) {
           if (adminChatUserProtoBuilder_ == null) {
-            if (((bitField0_ & 0x00008000) == 0x00008000) &&
+            if (((bitField0_ & 0x00004000) == 0x00004000) &&
                 adminChatUserProto_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
               adminChatUserProto_ =
                 com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(adminChatUserProto_).mergeFrom(value).buildPartial();
@@ -8135,7 +7426,7 @@ public final class EventStartupProto {
           } else {
             adminChatUserProtoBuilder_.mergeFrom(value);
           }
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00004000;
           return this;
         }
         public Builder clearAdminChatUserProto() {
@@ -8145,11 +7436,11 @@ public final class EventStartupProto {
           } else {
             adminChatUserProtoBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00008000);
+          bitField0_ = (bitField0_ & ~0x00004000);
           return this;
         }
         public com.lvl6.proto.UserProto.MinimumUserProto.Builder getAdminChatUserProtoBuilder() {
-          bitField0_ |= 0x00008000;
+          bitField0_ |= 0x00004000;
           onChanged();
           return getAdminChatUserProtoFieldBuilder().getBuilder();
         }
@@ -8174,33 +7465,33 @@ public final class EventStartupProto {
           return adminChatUserProtoBuilder_;
         }
         
-        // optional int32 numBeginnerSalesAllowed = 17;
+        // optional int32 numBeginnerSalesAllowed = 16;
         private int numBeginnerSalesAllowed_ ;
         public boolean hasNumBeginnerSalesAllowed() {
-          return ((bitField0_ & 0x00010000) == 0x00010000);
+          return ((bitField0_ & 0x00008000) == 0x00008000);
         }
         public int getNumBeginnerSalesAllowed() {
           return numBeginnerSalesAllowed_;
         }
         public Builder setNumBeginnerSalesAllowed(int value) {
-          bitField0_ |= 0x00010000;
+          bitField0_ |= 0x00008000;
           numBeginnerSalesAllowed_ = value;
           onChanged();
           return this;
         }
         public Builder clearNumBeginnerSalesAllowed() {
-          bitField0_ = (bitField0_ & ~0x00010000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           numBeginnerSalesAllowed_ = 0;
           onChanged();
           return this;
         }
         
-        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 18;
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants = 17;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants userMonsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstantsOrBuilder> userMonsterConstantsBuilder_;
         public boolean hasUserMonsterConstants() {
-          return ((bitField0_ & 0x00020000) == 0x00020000);
+          return ((bitField0_ & 0x00010000) == 0x00010000);
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants getUserMonsterConstants() {
           if (userMonsterConstantsBuilder_ == null) {
@@ -8219,7 +7510,7 @@ public final class EventStartupProto {
           } else {
             userMonsterConstantsBuilder_.setMessage(value);
           }
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00010000;
           return this;
         }
         public Builder setUserMonsterConstants(
@@ -8230,12 +7521,12 @@ public final class EventStartupProto {
           } else {
             userMonsterConstantsBuilder_.setMessage(builderForValue.build());
           }
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00010000;
           return this;
         }
         public Builder mergeUserMonsterConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants value) {
           if (userMonsterConstantsBuilder_ == null) {
-            if (((bitField0_ & 0x00020000) == 0x00020000) &&
+            if (((bitField0_ & 0x00010000) == 0x00010000) &&
                 userMonsterConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.getDefaultInstance()) {
               userMonsterConstants_ =
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.newBuilder(userMonsterConstants_).mergeFrom(value).buildPartial();
@@ -8246,7 +7537,7 @@ public final class EventStartupProto {
           } else {
             userMonsterConstantsBuilder_.mergeFrom(value);
           }
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00010000;
           return this;
         }
         public Builder clearUserMonsterConstants() {
@@ -8256,11 +7547,11 @@ public final class EventStartupProto {
           } else {
             userMonsterConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00020000);
+          bitField0_ = (bitField0_ & ~0x00010000);
           return this;
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder getUserMonsterConstantsBuilder() {
-          bitField0_ |= 0x00020000;
+          bitField0_ |= 0x00010000;
           onChanged();
           return getUserMonsterConstantsFieldBuilder().getBuilder();
         }
@@ -8285,12 +7576,12 @@ public final class EventStartupProto {
           return userMonsterConstantsBuilder_;
         }
         
-        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 19;
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants = 18;
         private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants monsterConstants_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance();
         private com.google.protobuf.SingleFieldBuilder<
             com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstantsOrBuilder> monsterConstantsBuilder_;
         public boolean hasMonsterConstants() {
-          return ((bitField0_ & 0x00040000) == 0x00040000);
+          return ((bitField0_ & 0x00020000) == 0x00020000);
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants getMonsterConstants() {
           if (monsterConstantsBuilder_ == null) {
@@ -8309,7 +7600,7 @@ public final class EventStartupProto {
           } else {
             monsterConstantsBuilder_.setMessage(value);
           }
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00020000;
           return this;
         }
         public Builder setMonsterConstants(
@@ -8320,12 +7611,12 @@ public final class EventStartupProto {
           } else {
             monsterConstantsBuilder_.setMessage(builderForValue.build());
           }
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00020000;
           return this;
         }
         public Builder mergeMonsterConstants(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants value) {
           if (monsterConstantsBuilder_ == null) {
-            if (((bitField0_ & 0x00040000) == 0x00040000) &&
+            if (((bitField0_ & 0x00020000) == 0x00020000) &&
                 monsterConstants_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.getDefaultInstance()) {
               monsterConstants_ =
                 com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.newBuilder(monsterConstants_).mergeFrom(value).buildPartial();
@@ -8336,7 +7627,7 @@ public final class EventStartupProto {
           } else {
             monsterConstantsBuilder_.mergeFrom(value);
           }
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00020000;
           return this;
         }
         public Builder clearMonsterConstants() {
@@ -8346,11 +7637,11 @@ public final class EventStartupProto {
           } else {
             monsterConstantsBuilder_.clear();
           }
-          bitField0_ = (bitField0_ & ~0x00040000);
+          bitField0_ = (bitField0_ & ~0x00020000);
           return this;
         }
         public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder getMonsterConstantsBuilder() {
-          bitField0_ |= 0x00040000;
+          bitField0_ |= 0x00020000;
           onChanged();
           return getMonsterConstantsFieldBuilder().getBuilder();
         }
@@ -8375,22 +7666,22 @@ public final class EventStartupProto {
           return monsterConstantsBuilder_;
         }
         
-        // optional float minutesPerGem = 20;
+        // optional float minutesPerGem = 19;
         private float minutesPerGem_ ;
         public boolean hasMinutesPerGem() {
-          return ((bitField0_ & 0x00080000) == 0x00080000);
+          return ((bitField0_ & 0x00040000) == 0x00040000);
         }
         public float getMinutesPerGem() {
           return minutesPerGem_;
         }
         public Builder setMinutesPerGem(float value) {
-          bitField0_ |= 0x00080000;
+          bitField0_ |= 0x00040000;
           minutesPerGem_ = value;
           onChanged();
           return this;
         }
         public Builder clearMinutesPerGem() {
-          bitField0_ = (bitField0_ & ~0x00080000);
+          bitField0_ = (bitField0_ & ~0x00040000);
           minutesPerGem_ = 0F;
           onChanged();
           return this;
@@ -15318,11 +14609,6 @@ public final class EventStartupProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -15369,7 +14655,7 @@ public final class EventStartupProto {
       "oto\022\014\n\004udid\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n" +
       "\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014" +
       "advertiserId\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 " +
-      "\001(\010\"\374\"\n\024StartupResponseProto\022\030\n\020serverTi" +
+      "\001(\010\"\232 \n\024StartupResponseProto\022\030\n\020serverTi" +
       "meMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl",
       "6.proto.FullUserProto\022I\n\rstartupStatus\030\003" +
       " \001(\01622.com.lvl6.proto.StartupResponsePro" +
@@ -15422,66 +14708,57 @@ public final class EventStartupProto {
       "oinsStolen\030\003 \001(\005\032\202\001\n\031ReferralNotificatio" +
       "nProto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.prot",
       "o.MinimumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022" +
-      "\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\242\021\n\020Startu" +
+      "\034\n\024coinsGivenToReferrer\030\003 \001(\005\032\300\016\n\020Startu" +
       "pConstants\022H\n\025inAppPurchasePackages\030\001 \003(" +
       "\0132).com.lvl6.proto.InAppPurchasePackageP" +
       "roto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumO" +
-      "fSingleStruct\030\003 \001(\005\022f\n\023normStructConstan" +
-      "ts\030\004 \001(\0132I.com.lvl6.proto.StartupRespons" +
-      "eProto.StartupConstants.NormStructConsta" +
-      "nts\022n\n\025animatedSpriteOffsets\030\005 \003(\0132O.com" +
-      ".lvl6.proto.StartupResponseProto.Startup",
-      "Constants.AnimatedSpriteOffsetProto\022\025\n\rm" +
-      "inNameLength\030\006 \001(\005\022\025\n\rmaxNameLength\030\007 \001(" +
-      "\005\022\035\n\025maxLengthOfChatString\030\010 \001(\005\022Z\n\rclan" +
-      "Constants\030\t \001(\0132C.com.lvl6.proto.Startup" +
-      "ResponseProto.StartupConstants.ClanConst" +
-      "ants\022p\n\030downloadableNibConstants\030\n \001(\0132N" +
-      ".com.lvl6.proto.StartupResponseProto.Sta" +
-      "rtupConstants.DownloadableNibConstants\022\'" +
-      "\n\037numHoursBeforeReshowingGoldSale\030\013 \001(\005\022" +
-      "\036\n\026levelToShowRateUsPopup\030\014 \001(\005\022e\n\022toura",
-      "mentConstants\030\r \001(\0132I.com.lvl6.proto.Sta" +
-      "rtupResponseProto.StartupConstants.Tourn" +
-      "amentConstants\022\037\n\027fbConnectRewardDiamond" +
-      "s\030\016 \001(\005\022\023\n\013faqFileName\030\017 \001(\t\022<\n\022adminCha" +
-      "tUserProto\030\020 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\037\n\027numBeginnerSalesAllowed\030\021 " +
-      "\001(\005\022h\n\024userMonsterConstants\030\022 \001(\0132J.com." +
-      "lvl6.proto.StartupResponseProto.StartupC" +
-      "onstants.UserMonsterConstants\022`\n\020monster" +
-      "Constants\030\023 \001(\0132F.com.lvl6.proto.Startup",
-      "ResponseProto.StartupConstants.MonsterCo" +
-      "nstants\022\025\n\rminutesPerGem\030\024 \001(\002\032\367\001\n\023NormS" +
-      "tructConstants\022/\n\'minutesToUpgradeForNor" +
-      "mStructMultiplier\030\001 \001(\001\022&\n\036incomeFromNor" +
-      "mStructMultiplier\030\002 \001(\001\022)\n!upgradeStruct" +
-      "CoinCostExponentBase\030\003 \001(\001\022,\n$upgradeStr" +
-      "uctDiamondCostExponentBase\030\004 \001(\001\022.\n&diam" +
-      "ondCostForInstantUpgradeMultiplier\030\005 \001(\001" +
-      "\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timageNa" +
-      "me\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.prot",
-      "o.CoordinateProto\032\232\001\n\rClanConstants\022\035\n\025c" +
-      "oinPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharLen" +
-      "gthForClanName\030\002 \001(\005\022\'\n\037maxCharLengthFor" +
-      "ClanDescription\030\003 \001(\005\022\037\n\027maxCharLengthFo" +
-      "rClanTag\030\004 \001(\005\032c\n\030DownloadableNibConstan" +
-      "ts\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNibNa" +
-      "me\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023T" +
-      "ournamentConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024" +
-      "\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(" +
-      "\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(\005\032\304",
-      "\001\n\024UserMonsterConstants\022\027\n\017maxNumTeamSlo" +
-      "ts\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030\002 " +
-      "\001(\005\022\'\n\037monsterInventoryIncrementAmount\030\003" +
-      " \001(\005\022\027\n\017gemPricePerSlot\030\004 \001(\005\022.\n&numFrie" +
-      "ndsToRecruitToIncreaseInventory\030\005 \001(\005\032S\n" +
-      "\020MonsterConstants\022\032\n\022cashPerHealthPoint\030" +
-      "\001 \001(\002\022#\n\033secondsToHealPerHealthPoint\030\002 \001" +
-      "(\002\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MIN" +
-      "OR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartup" +
-      "Status\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB",
-      "\020\002B\023B\021EventStartupProto"
+      "fSingleStruct\030\003 \001(\005\022n\n\025animatedSpriteOff" +
+      "sets\030\004 \003(\0132O.com.lvl6.proto.StartupRespo" +
+      "nseProto.StartupConstants.AnimatedSprite" +
+      "OffsetProto\022\025\n\rminNameLength\030\005 \001(\005\022\025\n\rma" +
+      "xNameLength\030\006 \001(\005\022\035\n\025maxLengthOfChatStri",
+      "ng\030\007 \001(\005\022Z\n\rclanConstants\030\010 \001(\0132C.com.lv" +
+      "l6.proto.StartupResponseProto.StartupCon" +
+      "stants.ClanConstants\022p\n\030downloadableNibC" +
+      "onstants\030\t \001(\0132N.com.lvl6.proto.StartupR" +
+      "esponseProto.StartupConstants.Downloadab" +
+      "leNibConstants\022\'\n\037numHoursBeforeReshowin" +
+      "gGoldSale\030\n \001(\005\022\036\n\026levelToShowRateUsPopu" +
+      "p\030\013 \001(\005\022e\n\022touramentConstants\030\014 \001(\0132I.co" +
+      "m.lvl6.proto.StartupResponseProto.Startu" +
+      "pConstants.TournamentConstants\022\037\n\027fbConn",
+      "ectRewardDiamonds\030\r \001(\005\022\023\n\013faqFileName\030\016" +
+      " \001(\t\022<\n\022adminChatUserProto\030\017 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\037\n\027numBeginne" +
+      "rSalesAllowed\030\020 \001(\005\022h\n\024userMonsterConsta" +
+      "nts\030\021 \001(\0132J.com.lvl6.proto.StartupRespon" +
+      "seProto.StartupConstants.UserMonsterCons" +
+      "tants\022`\n\020monsterConstants\030\022 \001(\0132F.com.lv" +
+      "l6.proto.StartupResponseProto.StartupCon" +
+      "stants.MonsterConstants\022\025\n\rminutesPerGem" +
+      "\030\023 \001(\002\032_\n\031AnimatedSpriteOffsetProto\022\021\n\ti",
+      "mageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl" +
+      "6.proto.CoordinateProto\032\232\001\n\rClanConstant" +
+      "s\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxC" +
+      "harLengthForClanName\030\002 \001(\005\022\'\n\037maxCharLen" +
+      "gthForClanDescription\030\003 \001(\005\022\037\n\027maxCharLe" +
+      "ngthForClanTag\030\004 \001(\005\032c\n\030DownloadableNibC" +
+      "onstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansio" +
+      "nNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(" +
+      "\t\032y\n\023TournamentConstants\022\022\n\nwinsWeight\030\001" +
+      " \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeigh",
+      "t\030\003 \001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004" +
+      " \001(\005\032\304\001\n\024UserMonsterConstants\022\027\n\017maxNumT" +
+      "eamSlots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLi" +
+      "mit\030\002 \001(\005\022\'\n\037monsterInventoryIncrementAm" +
+      "ount\030\003 \001(\005\022\027\n\017gemPricePerSlot\030\004 \001(\005\022.\n&n" +
+      "umFriendsToRecruitToIncreaseInventory\030\005 " +
+      "\001(\005\032S\n\020MonsterConstants\022\032\n\022cashPerHealth" +
+      "Point\030\001 \001(\002\022#\n\033secondsToHealPerHealthPoi" +
+      "nt\030\002 \001(\002\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022" +
+      "\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rS",
+      "tartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT" +
+      "_IN_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15525,19 +14802,11 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "NormStructConstants", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor =
-            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
-          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_NormStructConstants_descriptor,
-              new java.lang.String[] { "MinutesToUpgradeForNormStructMultiplier", "IncomeFromNormStructMultiplier", "UpgradeStructCoinCostExponentBase", "UpgradeStructDiamondCostExponentBase", "DiamondCostForInstantUpgradeMultiplier", },
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.class,
-              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.NormStructConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
-            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(1);
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(0);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor,
@@ -15545,7 +14814,7 @@ public final class EventStartupProto {
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor =
-            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(2);
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(1);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_ClanConstants_descriptor,
@@ -15553,7 +14822,7 @@ public final class EventStartupProto {
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor =
-            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(3);
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(2);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_DownloadableNibConstants_descriptor,
@@ -15561,7 +14830,7 @@ public final class EventStartupProto {
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor =
-            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(4);
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(3);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_TournamentConstants_descriptor,
@@ -15569,7 +14838,7 @@ public final class EventStartupProto {
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.TournamentConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor =
-            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(5);
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(4);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor,
@@ -15577,7 +14846,7 @@ public final class EventStartupProto {
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor =
-            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(6);
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(5);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor,

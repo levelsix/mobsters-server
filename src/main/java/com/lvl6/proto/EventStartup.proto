@@ -94,35 +94,29 @@ message StartupResponseProto {
     	optional int32 maxLevelForUser = 2;
     	
 		optional int32 maxNumOfSingleStruct = 3;
-		optional NormStructConstants normStructConstants = 4;
 
-		repeated AnimatedSpriteOffsetProto animatedSpriteOffsets = 5;
-		optional int32 minNameLength = 6;
-		optional int32 maxNameLength = 7;
-		optional int32 maxLengthOfChatString = 8;
-		optional ClanConstants clanConstants = 9;
-		optional DownloadableNibConstants downloadableNibConstants = 10;
+		repeated AnimatedSpriteOffsetProto animatedSpriteOffsets = 4;
+		optional int32 minNameLength = 5;
+		optional int32 maxNameLength = 6;
+		optional int32 maxLengthOfChatString = 7;
+		optional ClanConstants clanConstants = 8;
+		optional DownloadableNibConstants downloadableNibConstants = 9;
 		
-		optional int32 numHoursBeforeReshowingGoldSale = 11;
-		optional int32 levelToShowRateUsPopup = 12;
-		optional TournamentConstants touramentConstants = 13;
-		optional int32 fbConnectRewardDiamonds = 14;
-		optional string faqFileName = 15;
-		optional MinimumUserProto adminChatUserProto = 16;
-		optional int32 numBeginnerSalesAllowed = 17;
+		optional int32 numHoursBeforeReshowingGoldSale = 10;
+		optional int32 levelToShowRateUsPopup = 11;
+		optional TournamentConstants touramentConstants = 12;
+		optional int32 fbConnectRewardDiamonds = 13;
+		optional string faqFileName = 14;
+		optional MinimumUserProto adminChatUserProto = 15;
+		optional int32 numBeginnerSalesAllowed = 16;
 		
-		optional UserMonsterConstants userMonsterConstants = 18;
-		optional MonsterConstants monsterConstants = 19;
+		optional UserMonsterConstants userMonsterConstants = 17;
+		optional MonsterConstants monsterConstants = 18;
 		
-		optional float minutesPerGem = 20; 
+		optional float minutesPerGem = 19; 
 		
-		message NormStructConstants {
-			optional double minutesToUpgradeForNormStructMultiplier = 1;
-			optional double incomeFromNormStructMultiplier = 2;
-			optional double upgradeStructCoinCostExponentBase = 3;
-			optional double upgradeStructDiamondCostExponentBase = 4;
-			optional double diamondCostForInstantUpgradeMultiplier = 5;
-		}
+		
+		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
 			optional CoordinateProto offSet = 2;
