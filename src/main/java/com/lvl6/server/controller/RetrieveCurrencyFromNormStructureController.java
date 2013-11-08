@@ -88,19 +88,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       		userStructIdsToTimesOfRetrieval, duplicates, cashGained);
       
       int cashGain = 0;
+      boolean successful = false;
       if (legitRetrieval) {
       	cashGain = cashGained.get(0);
         previousCash = user.getCash();
         
-        if (!user.updateRelativeCoinsCoinsretrievedfromstructs(cashGain)) {
-          log.error("problem with updating user stats after retrieving " + cashGain + " cash");
-          legitRetrieval = false;
-        }
-        if (!UpdateUtils.get().updateUserStructsLastretrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
-          log.error("problem with updating user structs last retrieved for userStructIds " 
-              + userStructIdsToTimesOfRetrieval);
-          legitRetrieval = false;
-        }
+        successful = writeChangesToDb(user, cashGain, userStructIdsToUserStructs,
+        		userStructIdsToTimesOfRetrieval);
+      }
+      if (successful) {
+      	resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
       }
 
       RetrieveCurrencyFromNormStructureResponseEvent resEvent = new RetrieveCurrencyFromNormStructureResponseEvent(senderProto.getUserId());
@@ -244,6 +241,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //return to the caller the amount of money the user can collect 
     cashGained.add(cash);
     
+    return true;
+  }
+  
+  private boolean writeChangesToDb(User user, int cashGain,
+  		Map<Integer, StructureForUser> userStructIdsToUserStructs,
+  		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval) {
+  	if (!user.updateRelativeCoinsCoinsretrievedfromstructs(cashGain)) {
+      log.error("problem with updating user stats after retrieving " + cashGain + " cash");
+      return false;
+    }
+    if (!UpdateUtils.get().updateUserStructsLastretrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
+      log.error("problem with updating user structs last retrieved for userStructIds " 
+          + userStructIdsToTimesOfRetrieval);
+      return false;
+    }
     return true;
   }
   
