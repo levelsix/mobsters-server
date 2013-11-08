@@ -10,14 +10,18 @@ message FullStructureProto {
 	optional int32 income = 4;
 	optional int32 minutesToGain = 5;
 	optional int32 minutesToBuild = 6;
-	optional int32 cashPrice = 7;
-	optional int32 gemPrice = 8;
-	optional int32 minLevel = 9; //minUserLevel required
-	optional int32 xLength = 10;
-	optional int32 yLength = 11;
-	optional int32 instaBuildGemCost = 12;
+	optional int32 buildPrice = 7;
+	optional int32 sellPrice = 8;
+	optional bool isPremiumCurrency = 9;
+	optional int32 minLevel = 10; //minUserLevel required
+	optional int32 xLength = 11;
+	optional int32 yLength = 12;
 	optional int32 imgVerticalPixelOffset = 13;
 	optional int32 successorStructId = 14;	
+	
+	
+	//client doesn't need this
+	optional int32 predecessorStructId = 15;
 }
 
 //------------------------------------------------------------------------------------------
