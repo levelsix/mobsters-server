@@ -105,9 +105,8 @@ message FinishNormStructWaittimeWithDiamondsRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 userStructId = 2;
 	optional int64 timeOfSpeedup = 3;			//lastRetrieved will start with this date
-	//TODO: ACCOUNT FOR HOW MUCH TIME HAS PASSED WHEN DETERMINING SPEEDUP GEM COST
+	optional int32 gemCostToSpeedup = 4;
 }
-
 																						//DONE
 message FinishNormStructWaittimeWithDiamondsResponseProto {
      optional MinimumUserProto sender = 1;
