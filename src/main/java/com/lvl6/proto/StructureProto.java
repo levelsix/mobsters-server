@@ -108,13 +108,13 @@ public final class StructureProto {
     boolean hasBuildPrice();
     int getBuildPrice();
     
-    // optional int32 sellPrice = 8;
-    boolean hasSellPrice();
-    int getSellPrice();
-    
-    // optional bool isPremiumCurrency = 9;
+    // optional bool isPremiumCurrency = 8;
     boolean hasIsPremiumCurrency();
     boolean getIsPremiumCurrency();
+    
+    // optional int32 sellPrice = 9;
+    boolean hasSellPrice();
+    int getSellPrice();
     
     // optional int32 minLevel = 10;
     boolean hasMinLevel();
@@ -261,24 +261,24 @@ public final class StructureProto {
       return buildPrice_;
     }
     
-    // optional int32 sellPrice = 8;
-    public static final int SELLPRICE_FIELD_NUMBER = 8;
-    private int sellPrice_;
-    public boolean hasSellPrice() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    public int getSellPrice() {
-      return sellPrice_;
-    }
-    
-    // optional bool isPremiumCurrency = 9;
-    public static final int ISPREMIUMCURRENCY_FIELD_NUMBER = 9;
+    // optional bool isPremiumCurrency = 8;
+    public static final int ISPREMIUMCURRENCY_FIELD_NUMBER = 8;
     private boolean isPremiumCurrency_;
     public boolean hasIsPremiumCurrency() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public boolean getIsPremiumCurrency() {
       return isPremiumCurrency_;
+    }
+    
+    // optional int32 sellPrice = 9;
+    public static final int SELLPRICE_FIELD_NUMBER = 9;
+    private int sellPrice_;
+    public boolean hasSellPrice() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public int getSellPrice() {
+      return sellPrice_;
     }
     
     // optional int32 minLevel = 10;
@@ -349,8 +349,8 @@ public final class StructureProto {
       minutesToGain_ = 0;
       minutesToBuild_ = 0;
       buildPrice_ = 0;
-      sellPrice_ = 0;
       isPremiumCurrency_ = false;
+      sellPrice_ = 0;
       minLevel_ = 0;
       xLength_ = 0;
       yLength_ = 0;
@@ -392,10 +392,10 @@ public final class StructureProto {
         output.writeInt32(7, buildPrice_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, sellPrice_);
+        output.writeBool(8, isPremiumCurrency_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBool(9, isPremiumCurrency_);
+        output.writeInt32(9, sellPrice_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(10, minLevel_);
@@ -454,11 +454,11 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, sellPrice_);
+          .computeBoolSize(8, isPremiumCurrency_);
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(9, isPremiumCurrency_);
+          .computeInt32Size(9, sellPrice_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
@@ -622,9 +622,9 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         buildPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
-        sellPrice_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
         isPremiumCurrency_ = false;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        sellPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000100);
         minLevel_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
@@ -707,11 +707,11 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.sellPrice_ = sellPrice_;
+        result.isPremiumCurrency_ = isPremiumCurrency_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.isPremiumCurrency_ = isPremiumCurrency_;
+        result.sellPrice_ = sellPrice_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
@@ -773,11 +773,11 @@ public final class StructureProto {
         if (other.hasBuildPrice()) {
           setBuildPrice(other.getBuildPrice());
         }
-        if (other.hasSellPrice()) {
-          setSellPrice(other.getSellPrice());
-        }
         if (other.hasIsPremiumCurrency()) {
           setIsPremiumCurrency(other.getIsPremiumCurrency());
+        }
+        if (other.hasSellPrice()) {
+          setSellPrice(other.getSellPrice());
         }
         if (other.hasMinLevel()) {
           setMinLevel(other.getMinLevel());
@@ -865,12 +865,12 @@ public final class StructureProto {
             }
             case 64: {
               bitField0_ |= 0x00000080;
-              sellPrice_ = input.readInt32();
+              isPremiumCurrency_ = input.readBool();
               break;
             }
             case 72: {
               bitField0_ |= 0x00000100;
-              isPremiumCurrency_ = input.readBool();
+              sellPrice_ = input.readInt32();
               break;
             }
             case 80: {
@@ -1071,44 +1071,44 @@ public final class StructureProto {
         return this;
       }
       
-      // optional int32 sellPrice = 8;
-      private int sellPrice_ ;
-      public boolean hasSellPrice() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      public int getSellPrice() {
-        return sellPrice_;
-      }
-      public Builder setSellPrice(int value) {
-        bitField0_ |= 0x00000080;
-        sellPrice_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearSellPrice() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        sellPrice_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional bool isPremiumCurrency = 9;
+      // optional bool isPremiumCurrency = 8;
       private boolean isPremiumCurrency_ ;
       public boolean hasIsPremiumCurrency() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public boolean getIsPremiumCurrency() {
         return isPremiumCurrency_;
       }
       public Builder setIsPremiumCurrency(boolean value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         isPremiumCurrency_ = value;
         onChanged();
         return this;
       }
       public Builder clearIsPremiumCurrency() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         isPremiumCurrency_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 sellPrice = 9;
+      private int sellPrice_ ;
+      public boolean hasSellPrice() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public int getSellPrice() {
+        return sellPrice_;
+      }
+      public Builder setSellPrice(int value) {
+        bitField0_ |= 0x00000100;
+        sellPrice_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSellPrice() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        sellPrice_ = 0;
         onChanged();
         return this;
       }
@@ -2505,8 +2505,8 @@ public final class StructureProto {
       "llStructureProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\016\n\006income\030\004 \001(\005\022" +
       "\025\n\rminutesToGain\030\005 \001(\005\022\026\n\016minutesToBuild" +
-      "\030\006 \001(\005\022\022\n\nbuildPrice\030\007 \001(\005\022\021\n\tsellPrice\030" +
-      "\010 \001(\005\022\031\n\021isPremiumCurrency\030\t \001(\010\022\020\n\010minL" +
+      "\030\006 \001(\005\022\022\n\nbuildPrice\030\007 \001(\005\022\031\n\021isPremiumC" +
+      "urrency\030\010 \001(\010\022\021\n\tsellPrice\030\t \001(\005\022\020\n\010minL" +
       "evel\030\n \001(\005\022\017\n\007xLength\030\013 \001(\005\022\017\n\007yLength\030\014" +
       " \001(\005\022\036\n\026imgVerticalPixelOffset\030\r \001(\005\022\031\n\021" +
       "successorStructId\030\016 \001(\005\022\033\n\023predecessorSt" +
@@ -2531,7 +2531,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_FullStructureProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullStructureProto_descriptor,
-              new java.lang.String[] { "StructId", "Name", "Level", "Income", "MinutesToGain", "MinutesToBuild", "BuildPrice", "SellPrice", "IsPremiumCurrency", "MinLevel", "XLength", "YLength", "ImgVerticalPixelOffset", "SuccessorStructId", "PredecessorStructId", },
+              new java.lang.String[] { "StructId", "Name", "Level", "Income", "MinutesToGain", "MinutesToBuild", "BuildPrice", "IsPremiumCurrency", "SellPrice", "MinLevel", "XLength", "YLength", "ImgVerticalPixelOffset", "SuccessorStructId", "PredecessorStructId", },
               com.lvl6.proto.StructureProto.FullStructureProto.class,
               com.lvl6.proto.StructureProto.FullStructureProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =

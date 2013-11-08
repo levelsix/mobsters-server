@@ -11,8 +11,8 @@ message FullStructureProto {
 	optional int32 minutesToGain = 5;
 	optional int32 minutesToBuild = 6;
 	optional int32 buildPrice = 7;
-	optional int32 sellPrice = 8;
-	optional bool isPremiumCurrency = 9;
+	optional bool isPremiumCurrency = 8;
+	optional int32 sellPrice = 9;
 	optional int32 minLevel = 10; //minUserLevel required
 	optional int32 xLength = 11;
 	optional int32 yLength = 12;
