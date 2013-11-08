@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval;
 import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto;
@@ -56,39 +58,47 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
+    Timestamp curTime = new Timestamp((new Date()).getTime());
     
     Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<Integer, Timestamp>();
     List<Integer> duplicates = new ArrayList<Integer>();
     //create map from ids to times and check for duplicates
     getIdsAndTimes(structRetrievals, userStructIdsToTimesOfRetrieval, duplicates); 
     
-    RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder = RetrieveCurrencyFromNormStructureResponseProto.newBuilder();
+    RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder =
+    		RetrieveCurrencyFromNormStructureResponseProto.newBuilder();
+    resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
     resBuilder.setSender(senderProto);
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int previousSilver = 0;
+      int previousCash = 0;
       List<Integer> userStructIds = new ArrayList<Integer>(userStructIdsToTimesOfRetrieval.keySet());
       
       Map<Integer, StructureForUser> userStructIdsToUserStructs = getUserStructIdsToUserStructs(userId, userStructIds);
       Map<Integer, Structure> userStructIdsToStructures = getUserStructIdsToStructs(userStructIdsToUserStructs.values());
       
-      int coinGain = calculateMoneyGainedFromStructs(userStructIds, userStructIdsToUserStructs, userStructIdsToStructures);
-      boolean legitRetrieval = checkLegitRetrieval(resBuilder, user, userStructIds, userStructIdsToUserStructs,
-          userStructIdsToStructures, userStructIdsToTimesOfRetrieval, duplicates, coinGain);
+      //this will contain the amount user collects
+      List<Integer> cashGained = new ArrayList<Integer>();
+      //userStructIdsToTimesOfRetrieval and userStructIdsToUserStructs will be
+      //modified to contain only the valid user structs user can retrieve currency from
+      boolean legitRetrieval = checkLegitRetrieval(resBuilder, user, userStructIds,
+      		userStructIdsToUserStructs, userStructIdsToStructures,
+      		userStructIdsToTimesOfRetrieval, duplicates, cashGained);
       
+      int cashGain = 0;
       if (legitRetrieval) {
-        previousSilver = user.getCash();
+      	cashGain = cashGained.get(0);
+        previousCash = user.getCash();
         
-        if (!user.updateRelativeCoinsCoinsretrievedfromstructs(coinGain)) {
-          log.error("problem with updating user stats after retrieving " + coinGain + " silver");
+        if (!user.updateRelativeCoinsCoinsretrievedfromstructs(cashGain)) {
+          log.error("problem with updating user stats after retrieving " + cashGain + " cash");
           legitRetrieval = false;
         }
         if (!UpdateUtils.get().updateUserStructsLastretrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
           log.error("problem with updating user structs last retrieved for userStructIds " 
-              + MiscMethods.shallowMapToString(userStructIdsToTimesOfRetrieval));
+              + userStructIdsToTimesOfRetrieval);
           legitRetrieval = false;
         }
       }
@@ -103,7 +113,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
-        writeToUserCurrencyHistory(user, coinGain, previousSilver);
+        writeToUserCurrencyHistory(user, cashGain, previousCash, curTime,
+        		userStructIdsToTimesOfRetrieval);
       }
     } catch (Exception e) {
       log.error("exception in RetrieveCurrencyFromNormStructureController processEvent", e);
@@ -131,11 +142,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
   
+  //retrieve these user structs from the db and put them in a map
   private Map<Integer, StructureForUser> getUserStructIdsToUserStructs(int userId,
   		List<Integer> userStructIds) {
     Map<Integer, StructureForUser> returnValue = new HashMap<Integer, StructureForUser>();
     if(null == userStructIds || userStructIds.isEmpty()) {
       log.error("no user struct ids!");
+      return returnValue;
     }
     
     List<StructureForUser> userStructList = RetrieveUtils.userStructRetrieveUtils()
@@ -145,14 +158,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         returnValue.put(us.getId(), us);
       } else {
         log.error("could not retrieve one of the user structs. userStructIds to retrieve="
-            + MiscMethods.shallowListToString(userStructIds) + ". user structs retrieved=" 
-            + MiscMethods.shallowListToString(userStructList) + ". Continuing with processing.");
-        return new HashMap<Integer, StructureForUser>();
+            + userStructIds + ". user structs retrieved=" 
+            + userStructList + ". Continuing with processing.");
       }
     }
     return returnValue;
   }
   
+  //link up a user struct id with the structure object
   private Map<Integer, Structure> getUserStructIdsToStructs(Collection<StructureForUser> userStructs) {
     Map<Integer, Structure> returnValue = new HashMap<Integer, Structure>();
     Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
@@ -176,92 +189,86 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return returnValue;
   }
   
-  private int calculateMoneyGainedFromStructs(List<Integer> userStructIds,
-      Map<Integer, StructureForUser> userStructIdsToUserStructs, Map<Integer, Structure> userStructIdsToStructures) {
-    int totalCoinsGained = 0;
-    
-    for(Integer i : userStructIds) {
-//      StructureForUser userStructure = userStructIdsToUserStructs.get(i);
-      Structure struct = userStructIdsToStructures.get(i);
-      int structIncome = struct.getIncome();
-//      int userStructureLevel = userStructure.getLevel();
-      
-//      totalCoinsGained += MiscMethods.calculateIncomeGainedFromUserStruct(
-//          structIncome, userStructureLevel);
-    }
-    
-    return totalCoinsGained;
-  }
-  
-  private boolean checkLegitRetrieval(Builder resBuilder, User user, List<Integer> userStructIds, 
-      Map<Integer, StructureForUser> userStructIdsToUserStructs, Map<Integer, Structure> userStructIdsToStructures,
-      Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval, List<Integer> duplicates, int coinGain) {
+  private boolean checkLegitRetrieval(Builder resBuilder, User user,
+  		List<Integer> userStructIds, 
+      Map<Integer, StructureForUser> userStructIdsToUserStructs,
+      Map<Integer, Structure> userStructIdsToStructures,
+      Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval,
+      List<Integer> duplicates, List<Integer> cashGained) {
 
-//    int userId = user.getId();
-//    
-//    if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
-//        || userStructIdsToStructures.isEmpty() || userStructIdsToTimesOfRetrieval.isEmpty()) { //|| timeOfRetrieval == null || userStruct.getLastRetrieved() == null) {
-//      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-//      log.error("user is null, or no struct ids, or no user structs, or no structures, or no retrieval times . user=" + user
-//          + MiscMethods.shallowListToString(userStructIds) + " " + MiscMethods.shallowMapToString(userStructIdsToUserStructs) + " " 
-//          + MiscMethods.shallowMapToString(userStructIdsToStructures) + MiscMethods.shallowMapToString(userStructIdsToTimesOfRetrieval));
-//      return false;
-//    }
-//    if (!duplicates.isEmpty()) {
-//      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-//      log.error("duplicate struct ids in request. ids=" + MiscMethods.shallowListToString(duplicates));
-//      return false;
-//    }
-//    for (Integer id : userStructIds) {
-//      UserStruct userStruct = userStructIdsToUserStructs.get(id);
-//      Timestamp timeOfRetrieval = userStructIdsToTimesOfRetrieval.get(id);
-//      Structure struct = userStructIdsToStructures.get(id);
-//      
-//      if (userId != userStruct.getUserId() || !userStruct.isComplete()) {
-//        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-//        log.error("struct owner is not user, or struct is not complete yet. userStruct=" + userStruct);
-//        return false;
-//      }
-//      if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfRetrieval)) {
-//        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-//        log.error("client time too apart of server time. client time=" + timeOfRetrieval + ", servertime~="
-//            + new Date());
-//        return false;
-//      }
-//      if ((timeOfRetrieval.getTime() - userStruct.getLastRetrieved().getTime())  < 60000*struct.getMinutesToGain()) {
-//        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.NOT_LONG_ENOUGH);
-//        log.error("struct not ready for retrieval yet. time of retrieval=" + timeOfRetrieval
-//            + ", userStruct=" + userStruct + ", takes this many minutes to gain:" + struct.getMinutesToGain()); 
-//        return false;
-//      }
-//    }
-//    if (coinGain <= 0) {
-//      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-//      log.error("coinGain <= 0. coinGain is " + coinGain);
-//      return false;
-//    }
-//    resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
-    resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
-    return false;
+    int userId = user.getId();
     
+    if (user == null || userStructIds.isEmpty() || userStructIdsToUserStructs.isEmpty()
+        || userStructIdsToStructures.isEmpty() || userStructIdsToTimesOfRetrieval.isEmpty()) { //|| timeOfRetrieval == null || userStruct.getLastRetrieved() == null) {
+      log.error("user is null, or no struct ids, user structs, structures, or retrieval times . user=" +
+        user + "\t userStructIds=" + userStructIds + "\t structIdsToUserStructs=" +
+        userStructIdsToUserStructs + "\t userStructIdsToStructs=" + userStructIdsToStructures +
+        "\t userStructIdsToRetrievalTimes=" + userStructIdsToTimesOfRetrieval);
+      return false;
+    }
+    if (!duplicates.isEmpty()) {
+      resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
+      log.warn("duplicate struct ids in request. ids=" + duplicates);
+    }
+
+    //calculate how much user gets
+    int cash = 0;
+    //go through the userStructIds the user sent, checking which structs can be
+    //retrieved
+    for (Integer id : userStructIds) {
+      StructureForUser userStruct = userStructIdsToUserStructs.get(id);
+      Timestamp timeOfRetrieval = userStructIdsToTimesOfRetrieval.get(id);
+      Structure struct = userStructIdsToStructures.get(id);
+      
+      if (userId != userStruct.getUserId() || !userStruct.isComplete()) {
+        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL);
+        log.warn("(will continue processing) struct owner is not user, or struct" +
+        		" is not complete yet. userStruct=" + userStruct);
+        //remove invalid user structure
+        userStructIdsToUserStructs.remove(id);
+        userStructIdsToTimesOfRetrieval.remove(id);
+        continue;
+      }
+      if ((timeOfRetrieval.getTime() - userStruct.getLastRetrieved().getTime())  < 60000*struct.getMinutesToGain()) {
+        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.NOT_LONG_ENOUGH);
+        log.warn("(will continue processing) struct not ready for retrieval yet. " +
+        		"time of retrieval=" + timeOfRetrieval + ", userStruct=" + userStruct +
+        		", takes this many minutes to gain:" + struct.getMinutesToGain()); 
+        //remove invalid user structure
+        userStructIdsToUserStructs.remove(id);
+        userStructIdsToTimesOfRetrieval.remove(id);
+        continue;
+      }
+      cash += struct.getIncome();
+    }
+    //return to the caller the amount of money the user can collect 
+    cashGained.add(cash);
+    
+    return true;
   }
   
-  //TODO: FIX THIS
-  public void writeToUserCurrencyHistory(User aUser, int coinChange, int previousSilver) {
-//    Timestamp date = new Timestamp((new Date()).getTime());
-//
-//    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String silver = MiscMethods.cash;
-//    String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
-//    
-//    goldSilverChange.put(silver, coinChange);
-//    previousGoldSilver.put(silver, previousSilver);
-//    reasonsForChanges.put(silver, reasonForChange);
-//    
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
-//        previousGoldSilver, reasonsForChanges);
+  public void writeToUserCurrencyHistory(User aUser, int cashChange,
+  		int previousCash, Timestamp curTime,
+  		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval) {
+
+    Map<String, Integer> gemsCashChange = new HashMap<String, Integer>();
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> details = new HashMap<String, String>();
+    String cash = MiscMethods.cash;
+    String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
+    StringBuffer detailSb = new StringBuffer();
+    detailSb.append("userStructIds to times=");
+    detailSb.append(userStructIdsToTimesOfRetrieval);
+    
+    
+    gemsCashChange.put(cash, cashChange);
+    previousGemsCash.put(cash, previousCash);
+    reasonsForChanges.put(cash, reasonForChange);
+    details.put(cash, detailSb.toString());
+    
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, gemsCashChange,
+        previousGemsCash, reasonsForChanges, details);
   }
   
 }
