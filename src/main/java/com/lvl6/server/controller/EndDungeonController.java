@@ -72,6 +72,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     //set some values to send to the client (the response proto)
     EndDungeonResponseProto.Builder resBuilder = EndDungeonResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
+    resBuilder.setDidUserWin(userWon);
     resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER); //default
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -88,10 +89,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       Map<String, Integer> money = new HashMap<String, Integer>();
       List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
       if(legit) {
+      	
     	  ut = userTaskList.get(0);
         previousCash = aUser.getCash();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
     			  money, protos);
+    	  
+    	  resBuilder.setTaskId(ut.getTaskId());
       }
       if (successful) {
       	long taskForUserId = ut.getId(); 
