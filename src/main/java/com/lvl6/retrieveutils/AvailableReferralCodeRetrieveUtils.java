@@ -43,7 +43,7 @@ import com.lvl6.utils.DBConnection;
         }
       } 
     }
-    DBConnection.get().close(rs, null, null);
+    DBConnection.get().close(rs, null, conn);
     
     ResultSet rs2 = null;
     if (conn != null) {

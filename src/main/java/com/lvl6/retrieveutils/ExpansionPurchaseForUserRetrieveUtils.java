@@ -76,7 +76,7 @@ import com.lvl6.utils.DBConnection;
 		}catch(Exception e) {
 
 		}finally {
-			DBConnection.get().close(null, null, conn);
+			DBConnection.get().close(rs, null, conn);
 		}
 		log.warn("No user expanions found when counting for user id="+userId);
 		return 0;

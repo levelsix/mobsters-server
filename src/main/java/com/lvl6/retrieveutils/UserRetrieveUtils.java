@@ -76,7 +76,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	} catch (Exception e) {
   		log.error("sql query wrong 2", e);
   	} finally {
-  		DBConnection.get().close(null, null, conn);
+  		DBConnection.get().close(rs, null, conn);
   	}
   	return userIdList;
   }
@@ -150,7 +150,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     } catch (Exception e) {
       log.error("sql query wrong 2", e);
     } finally {
-      DBConnection.get().close(null, null, conn);
+      DBConnection.get().close(rs, null, conn);
     }
     return count;
   }
@@ -175,7 +175,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  }catch(Exception e) {
 		  
 	  }finally {
-		DBConnection.get().close(null, null, conn);
+		DBConnection.get().close(rs, null, conn);
 	  }
 	  log.warn("No users found when counting users for isFake="+isFake);
 	  return 0;
