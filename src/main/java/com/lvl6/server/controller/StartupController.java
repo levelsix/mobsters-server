@@ -64,6 +64,7 @@ import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
+import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
@@ -202,6 +203,8 @@ public class StartupController extends EventController {
           setBoosterPurchases(resBuilder);
           setFacebookAndExtraSlotsStuff(resBuilder, user);
           setCompletedTasks(resBuilder, user);
+          setAllStaticData(resBuilder, user);
+          
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
@@ -747,7 +750,12 @@ public class StartupController extends EventController {
   	resBuilder.addAllCompletedTaskIds(taskIds);
   }
   
-  
+  private void setAllStaticData(Builder resBuilder, User user) {
+  	int userId = user.getId();
+  	StaticDataProto sdp = MiscMethods.getAllStaticData(userId);
+  	
+  	resBuilder.setStaticDataStuffProto(sdp);
+  }
   
   
   
@@ -893,23 +901,6 @@ public class StartupController extends EventController {
     }
   }
 
-//  private void sendAllStructs(String udid, User user) {
-//    RetrieveStaticDataResponseEvent resEvent1 = new RetrieveStaticDataResponseEvent(0);
-//    RetrieveStaticDataResponseProto.Builder resProto1 = RetrieveStaticDataResponseProto.newBuilder();
-//    Map<Integer, Structure> structIdsToStructures = StructureRetrieveUtils.getStructIdsToStructs();
-//    for (Integer structId : structIdsToStructures.keySet()) {
-//      Structure struct = structIdsToStructures.get(structId);
-//      if (struct != null) {
-//        resProto1.addStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
-//      } else {
-//        resProto1.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-//        log.error("problem with retrieving struct with id " + structId);
-//      }
-//    }
-//    resEvent1.setRetrieveStaticDataResponseProto(resProto1.build());
-//    server.writePreDBEvent(resEvent1, udid);
-//    log.info("Structs sent");
-//  }
 
   private void setUnhandledForgeAttempts(Builder resBuilder, User user) {
 //    Map<Integer, BlacksmithAttempt> blacksmithIdToBlacksmithAttempt = 

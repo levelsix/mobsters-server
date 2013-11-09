@@ -25,7 +25,14 @@ import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.City;
 import com.lvl6.info.Dialogue;
+import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
+import com.lvl6.info.Monster;
+import com.lvl6.info.Quest;
+import com.lvl6.info.QuestForUser;
+import com.lvl6.info.StaticUserLevelInfo;
+import com.lvl6.info.Structure;
+import com.lvl6.info.Task;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
 import com.lvl6.info.User;
@@ -34,6 +41,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
+import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
@@ -43,9 +51,14 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Us
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
+import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
+import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
+import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder; 
+import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
@@ -69,7 +82,9 @@ import com.lvl6.server.GameServer;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.QuestUtils;
 
 public class MiscMethods {
 
@@ -1391,6 +1406,103 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   	
   	int newCost = (int)Math.ceil(cost * percentRemaining);
   	return newCost;
+  }
+  
+  public static StaticDataProto getAllStaticData(int userId) {
+  	StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
+  	
+  //Player city expansions
+  	Map<Integer, ExpansionCost> expansionCosts =
+  			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
+  	for (ExpansionCost cec : expansionCosts.values()) {
+  		CityExpansionCostProto cecp = CreateInfoProtoUtils
+  				.createCityExpansionCostProtoFromCityExpansionCost(cec);
+  		sdpb.addExpansionCosts(cecp);
+  	}
+  	//Cities
+  	Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+  	for (Integer cityId : cities.keySet()) {
+  		City city = cities.get(cityId);
+  		sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+  	}
+  	//Structures
+  	Map<Integer, Structure> structs = StructureRetrieveUtils.getStructIdsToStructs();
+  	for (Structure struct : structs.values()) {
+  		sdpb.addAllStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
+  	}
+  	//Tasks
+  	Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
+  	for (Task aTask : taskIdsToTasks.values()) {
+  		FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
+  		sdpb.addAllTasks(ftp);
+  	}
+  	//Monsters
+  	Map<Integer, Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+  	for (Monster monster : monsters.values()) {
+  		sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster));
+  	}
+  	//User level stuff
+  	Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
+  			StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
+  	for (int lvl : levelToStaticUserLevelInfo.keySet())  {
+  		StaticUserLevelInfo sli = levelToStaticUserLevelInfo.get(lvl);
+  		int exp = sli.getLvl();
+  		int maxCash = sli.getMaxCash();
+
+  		StaticUserLevelInfoProto.Builder slipb = StaticUserLevelInfoProto.newBuilder();
+  		slipb.setLevel(lvl);
+  		slipb.setRequiredExperience(exp);
+  		slipb.setMaxCash(maxCash);
+  		sdpb.addSlip(slipb.build());
+  	}
+
+  	setInProgressAndAvailableQuests(sdpb, userId);
+  	
+  	return sdpb.build();
+  }
+  
+  private static void setInProgressAndAvailableQuests(Builder sdpb, int userId) {
+  	List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
+  			.getUserQuestsForUser(userId);
+
+
+  	List<Integer> inProgressQuestIds = new ArrayList<Integer>();
+  	List<Integer> redeemedQuestIds = new ArrayList<Integer>();
+
+  	Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
+  	for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
+
+  		if (uq.isRedeemed()) {
+  			redeemedQuestIds.add(uq.getQuestId());
+
+  		} else {
+  			//unredeemed quest section
+  			Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
+  			FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);
+
+  			inProgressQuestIds.add(uq.getQuestId());
+  			if (uq.isComplete()) { 
+  				//complete and unredeemed userQuest, so quest goes in unredeemedQuest
+  				sdpb.addUnredeemedQuests(questProto);
+  			} else {
+  				//incomplete and unredeemed userQuest, so quest goes in inProgressQuest
+  				sdpb.addInProgressQuests(questProto);
+  			}
+  		}
+  	}
+
+  	List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
+  			inProgressQuestIds);
+  	if (availableQuestIds == null) {
+  		return;
+  	}
+
+  	//from the available quest ids generate the available quest protos
+  	for (Integer questId : availableQuestIds) {
+  		FullQuestProto fqp = CreateInfoProtoUtils.createFullQuestProtoFromQuest(
+  				questIdToQuests.get(questId));
+  		sdpb.addAvailableQuests(fqp);
+  	}
   }
   
 }
