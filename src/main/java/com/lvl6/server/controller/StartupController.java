@@ -317,15 +317,6 @@ public class StartupController extends EventController {
   private void setNotifications(Builder resBuilder, User user) {
 //    List<Integer> userIds = new ArrayList<Integer>();
 
-//    List<MarketplaceTransaction> marketplaceTransactions = MarketplaceTransactionRetrieveUtils
-//        .getMostRecentMarketplaceTransactionsForPoster(user.getId(),
-//            ControllerConstants.STARTUP__MAX_NUM_OF_STARTUP_NOTIFICATION_TYPE_TO_SEND);
-//    if (marketplaceTransactions != null && marketplaceTransactions.size() > 0) {
-//      for (MarketplaceTransaction mt : marketplaceTransactions) {
-//        userIds.add(mt.getBuyerId());
-//      }
-//    }
-//
 //    Timestamp earliestBattleNotificationTimeToRetrieve = new Timestamp(new Date().getTime()
 //        - ControllerConstants.STARTUP__HOURS_OF_BATTLE_NOTIFICATIONS_TO_SEND * 3600000);
 //
