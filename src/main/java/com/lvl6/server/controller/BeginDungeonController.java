@@ -77,6 +77,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     //set some values to send to the client (the response proto)
     BeginDungeonResponseProto.Builder resBuilder = BeginDungeonResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
+    resBuilder.setTaskId(taskId);
     resBuilder.setStatus(BeginDungeonStatus.FAIL_OTHER); //default
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());

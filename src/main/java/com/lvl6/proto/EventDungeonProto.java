@@ -568,7 +568,11 @@ public final class EventDungeonProto {
     boolean hasUserTaskId();
     long getUserTaskId();
     
-    // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 4;
+    // optional int32 taskId = 4;
+    boolean hasTaskId();
+    int getTaskId();
+    
+    // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;
     boolean hasStatus();
     com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus getStatus();
   }
@@ -717,11 +721,21 @@ public final class EventDungeonProto {
       return userTaskId_;
     }
     
-    // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 4;
-    public static final int STATUS_FIELD_NUMBER = 4;
+    // optional int32 taskId = 4;
+    public static final int TASKID_FIELD_NUMBER = 4;
+    private int taskId_;
+    public boolean hasTaskId() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getTaskId() {
+      return taskId_;
+    }
+    
+    // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;
+    public static final int STATUS_FIELD_NUMBER = 5;
     private com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus status_;
     public boolean hasStatus() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus getStatus() {
       return status_;
@@ -731,6 +745,7 @@ public final class EventDungeonProto {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       tsp_ = java.util.Collections.emptyList();
       userTaskId_ = 0L;
+      taskId_ = 0;
       status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -755,7 +770,10 @@ public final class EventDungeonProto {
         output.writeInt64(3, userTaskId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(4, status_.getNumber());
+        output.writeInt32(4, taskId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(5, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -780,7 +798,11 @@ public final class EventDungeonProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, status_.getNumber());
+          .computeInt32Size(4, taskId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, status_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -922,8 +944,10 @@ public final class EventDungeonProto {
         }
         userTaskId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
-        status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
+        taskId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -986,6 +1010,10 @@ public final class EventDungeonProto {
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000004;
         }
+        result.taskId_ = taskId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
         result.status_ = status_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1034,6 +1062,9 @@ public final class EventDungeonProto {
         }
         if (other.hasUserTaskId()) {
           setUserTaskId(other.getUserTaskId());
+        }
+        if (other.hasTaskId()) {
+          setTaskId(other.getTaskId());
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
@@ -1090,12 +1121,17 @@ public final class EventDungeonProto {
               break;
             }
             case 32: {
+              bitField0_ |= 0x00000008;
+              taskId_ = input.readInt32();
+              break;
+            }
+            case 40: {
               int rawValue = input.readEnum();
               com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus value = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(4, rawValue);
+                unknownFields.mergeVarintField(5, rawValue);
               } else {
-                bitField0_ |= 0x00000008;
+                bitField0_ |= 0x00000010;
                 status_ = value;
               }
               break;
@@ -1403,10 +1439,31 @@ public final class EventDungeonProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 4;
+      // optional int32 taskId = 4;
+      private int taskId_ ;
+      public boolean hasTaskId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getTaskId() {
+        return taskId_;
+      }
+      public Builder setTaskId(int value) {
+        bitField0_ |= 0x00000008;
+        taskId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTaskId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        taskId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.BeginDungeonResponseProto.BeginDungeonStatus status = 5;
       private com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
       public boolean hasStatus() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus getStatus() {
         return status_;
@@ -1415,13 +1472,13 @@ public final class EventDungeonProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000010;
         status_ = value;
         onChanged();
         return this;
       }
       public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000010);
         status_ = com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus.SUCCESS;
         onChanged();
         return this;
@@ -4179,36 +4236,37 @@ public final class EventDungeonProto {
       "nsterStuff.proto\032\nTask.proto\032\nUser.proto" +
       "\"p\n\030BeginDungeonRequestProto\0220\n\006sender\030\001" +
       " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\022" +
-      "\n\nclientTime\030\002 \001(\003\022\016\n\006taskId\030\003 \001(\005\"\257\002\n\031B" +
+      "\n\nclientTime\030\002 \001(\003\022\016\n\006taskId\030\003 \001(\005\"\277\002\n\031B" +
       "eginDungeonResponseProto\0220\n\006sender\030\001 \001(\013" +
       "2 .com.lvl6.proto.MinimumUserProto\022+\n\003ts" +
       "p\030\002 \003(\0132\036.com.lvl6.proto.TaskStageProto\022" +
-      "\022\n\nuserTaskId\030\003 \001(\003\022L\n\006status\030\004 \001(\0162<.co" +
-      "m.lvl6.proto.BeginDungeonResponseProto.B",
-      "eginDungeonStatus\"Q\n\022BeginDungeonStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\036\n\032FAIL_INSUFFICIENT_STAMER" +
-      "GY\020\002\022\016\n\nFAIL_OTHER\020\003\"\241\001\n\026EndDungeonReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\022\n\nuserTaskId\030\002 \001(\003\022\017\n" +
-      "\007userWon\030\003 \001(\010\022\022\n\nclientTime\030\004 \001(\003\022\034\n\024fi" +
-      "rstTimeUserWonTask\030\005 \001(\010\"\243\002\n\027EndDungeonR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022H\n\006status\030\002 \001(\01628" +
-      ".com.lvl6.proto.EndDungeonResponseProto.",
-      "EndDungeonStatus\022:\n\014updatedOrNew\030\003 \003(\0132$" +
-      ".com.lvl6.proto.FullUserMonsterProto\022\016\n\006" +
-      "taskId\030\004 \001(\005\022\017\n\007userWon\030\005 \001(\010\"/\n\020EndDung" +
-      "eonStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"w" +
-      "\n\033ReviveInDungeonRequestProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\022\n\nuserTaskId\030\002 \001(\003\022\022\n\nclientTime\030\003 \001(\003\"" +
-      "\367\001\n\034ReviveInDungeonResponseProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Revi",
-      "veInDungeonResponseProto.ReviveInDungeon" +
-      "Status\"Q\n\025ReviveInDungeonStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAI" +
-      "L_OTHER\020\003B\023B\021EventDungeonProto"
+      "\022\n\nuserTaskId\030\003 \001(\003\022\016\n\006taskId\030\004 \001(\005\022L\n\006s" +
+      "tatus\030\005 \001(\0162<.com.lvl6.proto.BeginDungeo",
+      "nResponseProto.BeginDungeonStatus\"Q\n\022Beg" +
+      "inDungeonStatus\022\013\n\007SUCCESS\020\001\022\036\n\032FAIL_INS" +
+      "UFFICIENT_STAMERGY\020\002\022\016\n\nFAIL_OTHER\020\003\"\241\001\n" +
+      "\026EndDungeonRequestProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022\022\n\nuse" +
+      "rTaskId\030\002 \001(\003\022\017\n\007userWon\030\003 \001(\010\022\022\n\nclient" +
+      "Time\030\004 \001(\003\022\034\n\024firstTimeUserWonTask\030\005 \001(\010" +
+      "\"\243\002\n\027EndDungeonResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022H" +
+      "\n\006status\030\002 \001(\01628.com.lvl6.proto.EndDunge",
+      "onResponseProto.EndDungeonStatus\022:\n\014upda" +
+      "tedOrNew\030\003 \003(\0132$.com.lvl6.proto.FullUser" +
+      "MonsterProto\022\016\n\006taskId\030\004 \001(\005\022\017\n\007userWon\030" +
+      "\005 \001(\010\"/\n\020EndDungeonStatus\022\013\n\007SUCCESS\020\001\022\016" +
+      "\n\nFAIL_OTHER\020\002\"w\n\033ReviveInDungeonRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\022\n\nuserTaskId\030\002 \001(\003\022\022\n\nc" +
+      "lientTime\030\003 \001(\003\"\367\001\n\034ReviveInDungeonRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022R\n\006status\030\002 \001(\0162B.com",
+      ".lvl6.proto.ReviveInDungeonResponseProto" +
+      ".ReviveInDungeonStatus\"Q\n\025ReviveInDungeo" +
+      "nStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIEN" +
+      "T_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021EventDungeo" +
+      "nProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4228,7 +4286,7 @@ public final class EventDungeonProto {
           internal_static_com_lvl6_proto_BeginDungeonResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Tsp", "UserTaskId", "Status", },
+              new java.lang.String[] { "Sender", "Tsp", "UserTaskId", "TaskId", "Status", },
               com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.class,
               com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.Builder.class);
           internal_static_com_lvl6_proto_EndDungeonRequestProto_descriptor =

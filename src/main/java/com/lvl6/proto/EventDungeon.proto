@@ -18,7 +18,8 @@ message BeginDungeonResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated TaskStageProto tsp = 2;
 	optional int64 userTaskId = 3;
-	optional BeginDungeonStatus status = 4;
+	optional int32 taskId = 4;
+	optional BeginDungeonStatus status = 5;
 	
 	enum BeginDungeonStatus {
 		SUCCESS = 1;
