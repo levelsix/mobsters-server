@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,20 +13,33 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveStaticDataRequestEvent;
 import com.lvl6.events.response.RetrieveStaticDataResponseEvent;
 import com.lvl6.info.City;
+import com.lvl6.info.ExpansionCost;
+import com.lvl6.info.Monster;
 import com.lvl6.info.Quest;
+import com.lvl6.info.QuestForUser;
+import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.Task;
+import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataRequestProto;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.Builder;
 import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.QuestProto.FullQuestProto;
+import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.QuestUtils;
 
   @Component @DependsOn("gameServer") public class RetrieveStaticDataController extends EventController{
 
@@ -55,7 +69,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setStatus(RetrieveStaticDataStatus.SUCCESS);
 
-    populateResBuilder(resBuilder, reqProto);
+    populateResBuilder(resBuilder, senderProto.getUserId());
     RetrieveStaticDataResponseProto resProto = resBuilder.build();
 
     RetrieveStaticDataResponseEvent resEvent = new RetrieveStaticDataResponseEvent(senderProto.getUserId());
@@ -65,90 +79,53 @@ import com.lvl6.utils.CreateInfoProtoUtils;
     server.writeEvent(resEvent);
   }
 
-  private void populateResBuilder(Builder resBuilder, RetrieveStaticDataRequestProto reqProto) {
-    List <Integer> structIds = reqProto.getStructIdsList();
-    if (structIds != null && structIds.size() > 0) {
-      Map<Integer, Structure> structIdsToStructures = StructureRetrieveUtils.getStructIdsToStructs();
-      for (Integer structId :  structIds) {
-        Structure struct = structIdsToStructures.get(structId);
-        if (struct != null) {
-          resBuilder.addStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving struct with id " + structId);
-        }
-      }
-    }
+  private void populateResBuilder(Builder resBuilder, int userId) {
+  	//Player city expansions
+  	Map<Integer, ExpansionCost> expansionCosts =
+  			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
+  	for (ExpansionCost cec : expansionCosts.values()) {
+  		CityExpansionCostProto cecp = CreateInfoProtoUtils
+  				.createCityExpansionCostProtoFromCityExpansionCost(cec);
+  		resBuilder.addExpansionCosts(cecp);
+  	}
+  	//Cities
+  	Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
+  	for (Integer cityId : cities.keySet()) {
+  		City city = cities.get(cityId);
+  		resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
+  	}
+  	//Structures
+  	Map<Integer, Structure> structs = StructureRetrieveUtils.getStructIdsToStructs();
+  	for (Structure struct : structs.values()) {
+  		resBuilder.addAllStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
+  	}
+  	//Tasks
+  	Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
+  	for (Task aTask : taskIdsToTasks.values()) {
+  		FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
+  		resBuilder.addAllTasks(ftp);
+  	}
+  	//Monsters
+  	Map<Integer, Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+  	for (Monster monster : monsters.values()) {
+  		resBuilder.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster));
+  	}
+  	//User level stuff
+  	Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
+  			StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
+  	for (int lvl : levelToStaticUserLevelInfo.keySet())  {
+  		StaticUserLevelInfo sli = levelToStaticUserLevelInfo.get(lvl);
+  		int exp = sli.getLvl();
+  		int maxCash = sli.getMaxCash();
 
-    List <Integer> taskIds = reqProto.getTaskIdsList();
-    if (taskIds != null && taskIds.size() > 0) {
-      Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
-      for (Integer taskId :  taskIds) {
-        Task task = taskIdsToTasks.get(taskId);
-        if (task != null) {
-          resBuilder.addTasks(CreateInfoProtoUtils.createFullTaskProtoFromTask(task));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving task with id " + taskId);
-        }
-      }
-    }
+  		StaticUserLevelInfoProto.Builder slipb = StaticUserLevelInfoProto.newBuilder();
+  		slipb.setLevel(lvl);
+  		slipb.setRequiredExperience(exp);
+  		slipb.setMaxCash(maxCash);
+  		resBuilder.addSlip(slipb.build());
+  	}
 
-    List <Integer> questIds = reqProto.getQuestIdsList();
-    if (questIds != null && questIds.size() > 0) {
-      Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
-      for (Integer questId :  questIds) {
-        Quest quest = questIdsToQuests.get(questId);
-        if (quest != null) {
-          resBuilder.addQuests(CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving quest with id " + quest);
-        }
-      }
-    }
-
-    List <Integer> cityIds = reqProto.getCityIdsList();
-    if (cityIds != null && cityIds.size() > 0) {
-      Map<Integer, City> cityIdsToCitys = CityRetrieveUtils.getCityIdsToCities();
-      for (Integer cityId :  cityIds) {
-        City city = cityIdsToCitys.get(cityId);
-        if (city != null) {
-          resBuilder.addCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-        } else {
-          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-          log.error("problem with retrieving city with id " + cityId);
-        }
-      }
-    }
-
-//    List <Integer> equipIds = reqProto.getEquipIdsList();
-//    if (equipIds != null && equipIds.size() > 0) {
-//      Map<Integer, Equipment> equipIdsToEquips = EquipmentRetrieveUtils.getEquipmentIdsToEquipment();
-//      for (Integer equipId :  equipIds) {
-//        Equipment equip = equipIdsToEquips.get(equipId);
-//        if (equip != null) {
-//          resBuilder.addEquips(CreateInfoProtoUtils.createFullEquipProtoFromEquip(equip));
-//        } else {
-//          resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-//          log.error("problem with retrieving equip with id " + equipId);
-//        }
-//      }
-//    }
-
-//    if (reqProto.hasLevelForExpRequiredRequest()) {
-//      int level = reqProto.getLevelForExpRequiredRequest();
-//      if (level > ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER || level < 2) {
-//        resBuilder.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-//        log.error("no exp data stored for levels < 2 and levels > " + ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
-//      } else {
-//        int expRequired = LevelsRequiredExperienceRetrieveUtils.getRequiredExperienceForLevel(level);
-//        if (expRequired > 0)
-//          resBuilder.setExpRequiredForRequestedLevel(expRequired);
-//        else
-//          log.error("problem with retrieving exp required for level " + level);
-//      }
-//    }
+  	setInProgressAndAvailableQuests(resBuilder, userId);
 
 //    if (reqProto.getCurrentLockBoxEvents()) {
 //      resBuilder.addAllLockBoxEvents(MiscMethods.currentLockBoxEvents());
@@ -160,5 +137,49 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 //      //TODO: SET THE REWARD STUFF
 //    }
   }
+  
+  private void setInProgressAndAvailableQuests(Builder resBuilder, int userId) {
+	  List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
+	      .getUserQuestsForUser(userId);
+	  
+	  
+	  List<Integer> inProgressQuestIds = new ArrayList<Integer>();
+	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
+	  
+	  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
+	  for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
+	  	
+	    if (uq.isRedeemed()) {
+	      redeemedQuestIds.add(uq.getQuestId());
+	      
+	    } else {
+	    	//unredeemed quest section
+	      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
+	      FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);
+	      
+	      inProgressQuestIds.add(uq.getQuestId());
+	      if (uq.isComplete()) { 
+	      	//complete and unredeemed userQuest, so quest goes in unredeemedQuest
+	        resBuilder.addUnredeemedQuests(questProto);
+	      } else {
+	      	//incomplete and unredeemed userQuest, so quest goes in inProgressQuest
+	        resBuilder.addInProgressQuests(questProto);
+	      }
+	    }
+	  }
+	  
+	  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
+	      inProgressQuestIds);
+	  if (availableQuestIds == null) {
+	  	return;
+	  }
+	  
+	  //from the available quest ids generate the available quest protos
+	  for (Integer questId : availableQuestIds) {
+	  	FullQuestProto fqp = CreateInfoProtoUtils.createFullQuestProtoFromQuest(
+	  			questIdToQuests.get(questId));
+	  	resBuilder.addAvailableQuests(fqp);
+	  }
+}
 
 }

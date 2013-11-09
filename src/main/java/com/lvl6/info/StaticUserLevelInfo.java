@@ -2,14 +2,14 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-public class StaticLevelInfo implements Serializable{
+public class StaticUserLevelInfo implements Serializable{
 	
 	private static final long serialVersionUID = -8242282071455381140L;
 	private int lvl;
   private int requiredExp;
   private int maxCash;
   
-	public StaticLevelInfo(int lvl, int requiredExp, int maxCash) {
+	public StaticUserLevelInfo(int lvl, int requiredExp, int maxCash) {
 		super();
 		this.lvl = lvl;
 		this.requiredExp = requiredExp;

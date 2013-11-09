@@ -58,7 +58,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StaticLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -534,7 +534,7 @@ public class MiscMethods {
     MonsterRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
-    StaticLevelInfoRetrieveUtils.reload();
+    StaticUserLevelInfoRetrieveUtils.reload();
     StructureRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
     TaskStageMonsterRetrieveUtils.reload();

@@ -1,6 +1,6 @@
 
-import "Job.proto";
 import "City.proto";
+import "MonsterStuff.proto";
 import "Quest.proto";
 import "Structure.proto";
 import "Task.proto";
@@ -15,24 +15,23 @@ option java_outer_classname = "EventStaticDataProto";
 //in the future, put in neutral city elems?																						//DONE
 message RetrieveStaticDataRequestProto {
     optional MinimumUserProto sender = 1;
-	repeated int32 structIds = 2;
-	repeated int32 taskIds = 3;
-	repeated int32 questIds = 4;
-	repeated int32 cityIds = 5;
-	repeated int32 monsterIds = 6;
-	repeated int32 buildStructJobIds = 7;
-	repeated int32 upgradeStructJobIds = 8;
 }
 
 message RetrieveStaticDataResponseProto {
     optional MinimumUserProto sender = 1;
-	repeated FullStructureProto structs = 2;
-	repeated FullTaskProto tasks = 3;
-	repeated FullQuestProto quests = 4;
-	repeated FullCityProto cities = 5;
-	repeated BuildStructJobProto buildStructJobs = 6;
-	repeated UpgradeStructJobProto upgradeStructJobs = 7;
-	optional RetrieveStaticDataStatus status = 8;
+	repeated CityExpansionCostProto expansionCosts = 2;
+	repeated FullCityProto allCities = 3;
+	repeated FullStructureProto allStructs = 4;
+	repeated FullTaskProto allTasks = 5;
+	repeated MonsterProto allMonsters = 6;
+	repeated StaticUserLevelInfoProto slip = 7;
+	
+	repeated FullQuestProto inProgressQuests = 8; //has not been completed
+    repeated FullQuestProto unredeemedQuests = 9; //is complete
+	repeated FullQuestProto availableQuests = 10; 
+	
+	
+	optional RetrieveStaticDataStatus status = 11;
 	
 	enum RetrieveStaticDataStatus {
 		SUCCESS = 1;

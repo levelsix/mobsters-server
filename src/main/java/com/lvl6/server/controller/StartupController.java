@@ -33,23 +33,15 @@ import com.kabam.apiclient.MobileNaidResponse;
 import com.kabam.apiclient.ResponseCode;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.StartupRequestEvent;
-import com.lvl6.events.response.RetrieveStaticDataResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
-import com.lvl6.info.City;
 import com.lvl6.info.Clan;
-import com.lvl6.info.ExpansionCost;
-import com.lvl6.info.GoldSale;
-import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
-import com.lvl6.info.StaticLevelInfo;
-import com.lvl6.info.Structure;
-import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
@@ -61,26 +53,19 @@ import com.lvl6.properties.KabamProperties;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
-import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
-import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto;
-import com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus;
-import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
-import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
-import com.lvl6.proto.UserProto.StaticLevelInfoProto;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
@@ -92,22 +77,14 @@ import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotAcceptedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StaticLevelInfoRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.QuestUtils;
 
 @Component
 @DependsOn("gameServer")
@@ -215,21 +192,15 @@ public class StartupController extends EventController {
           startupStatus = StartupStatus.USER_IN_DB;
           log.info("No major update... getting user info");
 //          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
-          setCitiesAndUserCityInfos(resBuilder, user);
           setInProgressAndAvailableQuests(resBuilder, user);
           setUserClanInfos(resBuilder, user);
-          setGoldSales(resBuilder, user);
           setNotifications(resBuilder, user);
           setNoticesToPlayers(resBuilder, user);
-          setStaticLevelInfoStuff(resBuilder);
           setChatMessages(resBuilder, user);
           setPrivateChatPosts(resBuilder, user);
-          setStaticMonstersAndStructs(resBuilder);
           setUserMonsterStuff(resBuilder, user);
-          setExpansionCosts(resBuilder);
           setBoosterPurchases(resBuilder);
           setFacebookAndExtraSlotsStuff(resBuilder, user);
-          setAllTasks(resBuilder);
           setCompletedTasks(resBuilder, user);
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
@@ -313,67 +284,26 @@ public class StartupController extends EventController {
     updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
   }
 
-  private void setCitiesAndUserCityInfos(Builder resBuilder, User user) {
-    Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
-    for (Integer cityId : cities.keySet()) {
-      City city = cities.get(cityId);
-      resBuilder.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
-    }
-  }
-
   private void setInProgressAndAvailableQuests(Builder resBuilder, User user) {
   	  List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
   	      .getUserQuestsForUser(user.getId());
-  	  
-  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
+//  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
   	  
   	  List<QuestForUser> inProgressQuests = new ArrayList<QuestForUser>();
-  	  List<Integer> inProgressQuestIds = new ArrayList<Integer>();
-  	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
   	  
   	  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
   	  for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
   	  	
-  	    if (uq.isRedeemed()) {
-  	      redeemedQuestIds.add(uq.getQuestId());
-  	      
-  	    } else {
+  	    if (!uq.isRedeemed()) {
   	    	//unredeemed quest section
-  	      Quest quest = QuestRetrieveUtils.getQuestForQuestId(uq.getQuestId());
-  	      FullQuestProto questProto = CreateInfoProtoUtils.createFullQuestProtoFromQuest(quest);
-  	      
-  	      inProgressQuests.add(uq);
-  	      inProgressQuestIds.add(uq.getQuestId());
-  	      if (uq.isComplete()) { 
-  	      	//complete and unredeemed userQuest, so quest goes in unredeemedQuest
-  	        resBuilder.addUnredeemedQuests(questProto);
-  	      } else {
-  	      	//incomplete and unredeemed userQuest, so quest goes in inProgressQuest
-  	        resBuilder.addInProgressQuests(questProto);
-  	      }
+  	    	inProgressQuests.add(uq);
   	    }
   	  }
   	  
   	  //generate the user quests
   	  List<FullUserQuestProto> currentUserQuests = CreateInfoProtoUtils
   	  		.createFullUserQuestDataLarges(inProgressQuests, questIdToQuests);
-//  	  log.info("currentUserQuest protos=" + currentUserQuests +
-//  	  		"\t inProgressQuests=" + inProgressQuests + "\t questIdsToQuests=" +
-//  	  		questIdToQuests);
   	  resBuilder.addAllUserQuests(currentUserQuests);
-  	
-  	  List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds,
-  	      inProgressQuestIds);
-  	  if (availableQuestIds == null) {
-  	  	return;
-  	  }
-  	  
-  	  //from the available quest ids generate the available quest protos
-  	  for (Integer questId : availableQuestIds) {
-  	  	FullQuestProto fqp = CreateInfoProtoUtils.createFullQuestProtoFromQuest(
-  	  			questIdToQuests.get(questId));
-  	  	resBuilder.addAvailableQuests(fqp);
-  	  }
   }
   
   private void setUserClanInfos(StartupResponseProto.Builder resBuilder, User user) {
@@ -384,20 +314,6 @@ public class StartupController extends EventController {
     }
   }
 
-  private void setGoldSales(StartupResponseProto.Builder resBuilder, User user) {
-    GoldSaleProto sale = MiscMethods.createFakeGoldSaleForNewPlayer(user);
-    if (sale != null) {
-      resBuilder.addGoldSales(sale);
-    }
-
-    List<GoldSale> sales = GoldSaleRetrieveUtils.getCurrentAndFutureGoldSales();
-    if (sales != null && sales.size() > 0) {
-      for (GoldSale s : sales) {
-        resBuilder.addGoldSales(CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(s));
-      }
-    }
-  }
-  
   private void setNotifications(Builder resBuilder, User user) {
 //    List<Integer> userIds = new ArrayList<Integer>();
 
@@ -442,23 +358,9 @@ public class StartupController extends EventController {
 
   }
   
-  private void setStaticLevelInfoStuff(Builder resBuilder) {
-  	Map<Integer, StaticLevelInfo> levelToStaticLevelInfo = 
-  			StaticLevelInfoRetrieveUtils.getAllStaticLevelInfo();
-  	
-  	for (int lvl : levelToStaticLevelInfo.keySet())  {
-  		StaticLevelInfo sli = levelToStaticLevelInfo.get(lvl);
-  		
-  		int exp = sli.getLvl();
-  		int maxCash = sli.getMaxCash();
-  		
-  		StaticLevelInfoProto.Builder slipb = StaticLevelInfoProto.newBuilder();
-  		slipb.setLevel(lvl);
-  		slipb.setRequiredExperience(exp);
-  		slipb.setMaxCash(maxCash);
-  		resBuilder.addSlip(slipb.build());
-  	}
-  }
+
+
+  
   
   private void setChatMessages(StartupResponseProto.Builder resBuilder, User user) {
   	//  if (user.getClanId() > 0) {
@@ -662,17 +564,6 @@ public class StartupController extends EventController {
     return clanIdsToUserIdSet;
   }
 
-  private void setStaticMonstersAndStructs(StartupResponseProto.Builder resBuilder) {
-    Collection<Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters().values();
-    for (Monster monster : monsters) {
-      resBuilder.addStaticMonsters(CreateInfoProtoUtils.createMonsterProto(monster));
-    }
-
-    Collection<Structure> structs = StructureRetrieveUtils.getStructIdsToStructs().values();
-    for (Structure struct : structs) {
-      resBuilder.addStaticStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
-    }
-  }
 
   private void setUserMonsterStuff(Builder resBuilder, User user) {
   	int userId = user.getId();
@@ -730,16 +621,6 @@ public class StartupController extends EventController {
     	resBuilder.setEnhancements(uep);
     }
     
-  }
-  
-  private void setExpansionCosts(Builder resBuilder) {
-  	Map<Integer, ExpansionCost> expansionCosts =
-  			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
-  	for (ExpansionCost cec : expansionCosts.values()) {
-  		CityExpansionCostProto cecp = CreateInfoProtoUtils
-  				.createCityExpansionCostProtoFromCityExpansionCost(cec);
-  		resBuilder.addExpansionCosts(cecp);
-  	}
   }
 
   private void setBoosterPurchases(StartupResponseProto.Builder resBuilder) {
@@ -868,14 +749,6 @@ public class StartupController extends EventController {
   	
   }
   
-  private void setAllTasks(Builder resBuilder) {
-  	Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
-  	
-  	for (Task aTask : taskIdsToTasks.values()) {
-  		FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
-  		resBuilder.addAllTasks(ftp);
-  	}
-  }
   
   private void setCompletedTasks(Builder resBuilder, User user) {
   	List<Integer> taskIds = TaskForUserCompletedRetrieveUtils
@@ -1029,23 +902,23 @@ public class StartupController extends EventController {
     }
   }
 
-  private void sendAllStructs(String udid, User user) {
-    RetrieveStaticDataResponseEvent resEvent1 = new RetrieveStaticDataResponseEvent(0);
-    RetrieveStaticDataResponseProto.Builder resProto1 = RetrieveStaticDataResponseProto.newBuilder();
-    Map<Integer, Structure> structIdsToStructures = StructureRetrieveUtils.getStructIdsToStructs();
-    for (Integer structId : structIdsToStructures.keySet()) {
-      Structure struct = structIdsToStructures.get(structId);
-      if (struct != null) {
-        resProto1.addStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
-      } else {
-        resProto1.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
-        log.error("problem with retrieving struct with id " + structId);
-      }
-    }
-    resEvent1.setRetrieveStaticDataResponseProto(resProto1.build());
-    server.writePreDBEvent(resEvent1, udid);
-    log.info("Structs sent");
-  }
+//  private void sendAllStructs(String udid, User user) {
+//    RetrieveStaticDataResponseEvent resEvent1 = new RetrieveStaticDataResponseEvent(0);
+//    RetrieveStaticDataResponseProto.Builder resProto1 = RetrieveStaticDataResponseProto.newBuilder();
+//    Map<Integer, Structure> structIdsToStructures = StructureRetrieveUtils.getStructIdsToStructs();
+//    for (Integer structId : structIdsToStructures.keySet()) {
+//      Structure struct = structIdsToStructures.get(structId);
+//      if (struct != null) {
+//        resProto1.addStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
+//      } else {
+//        resProto1.setStatus(RetrieveStaticDataStatus.SOME_FAIL);
+//        log.error("problem with retrieving struct with id " + structId);
+//      }
+//    }
+//    resEvent1.setRetrieveStaticDataResponseProto(resProto1.build());
+//    server.writePreDBEvent(resEvent1, udid);
+//    log.info("Structs sent");
+//  }
 
   private void setUnhandledForgeAttempts(Builder resBuilder, User user) {
 //    Map<Integer, BlacksmithAttempt> blacksmithIdToBlacksmithAttempt = 

@@ -109,7 +109,7 @@ message FullUserProto {
 
 //------------------------------------------------------------------------------------------
 
-message StaticLevelInfoProto {
+message StaticUserLevelInfoProto {
 	optional int32 level = 1;
 	optional int32 requiredExperience = 2; 
 	optional int32 maxCash = 3;

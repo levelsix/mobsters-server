@@ -1,6 +1,4 @@
 
-import "Job.proto";
-
 package com.lvl6.proto;
 
 option java_outer_classname = "QuestProto";

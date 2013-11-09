@@ -6030,7 +6030,7 @@ public final class UserProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserProto)
   }
   
-  public interface StaticLevelInfoProtoOrBuilder
+  public interface StaticUserLevelInfoProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional int32 level = 1;
@@ -6045,32 +6045,32 @@ public final class UserProto {
     boolean hasMaxCash();
     int getMaxCash();
   }
-  public static final class StaticLevelInfoProto extends
+  public static final class StaticUserLevelInfoProto extends
       com.google.protobuf.GeneratedMessage
-      implements StaticLevelInfoProtoOrBuilder {
-    // Use StaticLevelInfoProto.newBuilder() to construct.
-    private StaticLevelInfoProto(Builder builder) {
+      implements StaticUserLevelInfoProtoOrBuilder {
+    // Use StaticUserLevelInfoProto.newBuilder() to construct.
+    private StaticUserLevelInfoProto(Builder builder) {
       super(builder);
     }
-    private StaticLevelInfoProto(boolean noInit) {}
+    private StaticUserLevelInfoProto(boolean noInit) {}
     
-    private static final StaticLevelInfoProto defaultInstance;
-    public static StaticLevelInfoProto getDefaultInstance() {
+    private static final StaticUserLevelInfoProto defaultInstance;
+    public static StaticUserLevelInfoProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public StaticLevelInfoProto getDefaultInstanceForType() {
+    public StaticUserLevelInfoProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor;
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable;
+      return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable;
     }
     
     private int bitField0_;
@@ -6163,41 +6163,41 @@ public final class UserProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(byte[] data)
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -6206,7 +6206,7 @@ public final class UserProto {
         return null;
       }
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseDelimitedFrom(
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6217,12 +6217,12 @@ public final class UserProto {
         return null;
       }
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.UserProto.StaticLevelInfoProto parseFrom(
+    public static com.lvl6.proto.UserProto.StaticUserLevelInfoProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6232,7 +6232,7 @@ public final class UserProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.UserProto.StaticLevelInfoProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.UserProto.StaticUserLevelInfoProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -6245,18 +6245,18 @@ public final class UserProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.UserProto.StaticLevelInfoProtoOrBuilder {
+       implements com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor;
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable;
+        return com.lvl6.proto.UserProto.internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.UserProto.StaticLevelInfoProto.newBuilder()
+      // Construct using com.lvl6.proto.UserProto.StaticUserLevelInfoProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -6290,24 +6290,24 @@ public final class UserProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.UserProto.StaticLevelInfoProto.getDescriptor();
+        return com.lvl6.proto.UserProto.StaticUserLevelInfoProto.getDescriptor();
       }
       
-      public com.lvl6.proto.UserProto.StaticLevelInfoProto getDefaultInstanceForType() {
-        return com.lvl6.proto.UserProto.StaticLevelInfoProto.getDefaultInstance();
+      public com.lvl6.proto.UserProto.StaticUserLevelInfoProto getDefaultInstanceForType() {
+        return com.lvl6.proto.UserProto.StaticUserLevelInfoProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.UserProto.StaticLevelInfoProto build() {
-        com.lvl6.proto.UserProto.StaticLevelInfoProto result = buildPartial();
+      public com.lvl6.proto.UserProto.StaticUserLevelInfoProto build() {
+        com.lvl6.proto.UserProto.StaticUserLevelInfoProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.UserProto.StaticLevelInfoProto buildParsed()
+      private com.lvl6.proto.UserProto.StaticUserLevelInfoProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.UserProto.StaticLevelInfoProto result = buildPartial();
+        com.lvl6.proto.UserProto.StaticUserLevelInfoProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -6315,8 +6315,8 @@ public final class UserProto {
         return result;
       }
       
-      public com.lvl6.proto.UserProto.StaticLevelInfoProto buildPartial() {
-        com.lvl6.proto.UserProto.StaticLevelInfoProto result = new com.lvl6.proto.UserProto.StaticLevelInfoProto(this);
+      public com.lvl6.proto.UserProto.StaticUserLevelInfoProto buildPartial() {
+        com.lvl6.proto.UserProto.StaticUserLevelInfoProto result = new com.lvl6.proto.UserProto.StaticUserLevelInfoProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -6337,16 +6337,16 @@ public final class UserProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.UserProto.StaticLevelInfoProto) {
-          return mergeFrom((com.lvl6.proto.UserProto.StaticLevelInfoProto)other);
+        if (other instanceof com.lvl6.proto.UserProto.StaticUserLevelInfoProto) {
+          return mergeFrom((com.lvl6.proto.UserProto.StaticUserLevelInfoProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.UserProto.StaticLevelInfoProto other) {
-        if (other == com.lvl6.proto.UserProto.StaticLevelInfoProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.UserProto.StaticUserLevelInfoProto other) {
+        if (other == com.lvl6.proto.UserProto.StaticUserLevelInfoProto.getDefaultInstance()) return this;
         if (other.hasLevel()) {
           setLevel(other.getLevel());
         }
@@ -6471,15 +6471,15 @@ public final class UserProto {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticLevelInfoProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticUserLevelInfoProto)
     }
     
     static {
-      defaultInstance = new StaticLevelInfoProto(true);
+      defaultInstance = new StaticUserLevelInfoProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.StaticLevelInfoProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.StaticUserLevelInfoProto)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -6513,10 +6513,10 @@ public final class UserProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor;
+    internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6566,10 +6566,10 @@ public final class UserProto {
       "ateTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numC" +
       "onsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPo" +
       "stNotificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 ",
-      "\001(\t\022\032\n\022nthExtraSlotsViaFb\030) \001(\005\"R\n\024Stati" +
-      "cLevelInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022requir" +
-      "edExperience\030\002 \001(\005\022\017\n\007maxCash\030\003 \001(\005B\013B\tU" +
-      "serProto"
+      "\001(\t\022\032\n\022nthExtraSlotsViaFb\030) \001(\005\"V\n\030Stati" +
+      "cUserLevelInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022re" +
+      "quiredExperience\030\002 \001(\005\022\017\n\007maxCash\030\003 \001(\005B" +
+      "\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6624,14 +6624,14 @@ public final class UserProto {
               new java.lang.String[] { "UserId", "Name", "Level", "Gems", "Cash", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumAdditionalMonsterSlots", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "LastTimeQueued", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "FacebookId", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "NthExtraSlotsViaFb", },
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
-          internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor =
+          internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor =
             getDescriptor().getMessageTypes().get(6);
-          internal_static_com_lvl6_proto_StaticLevelInfoProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_StaticLevelInfoProto_descriptor,
+              internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor,
               new java.lang.String[] { "Level", "RequiredExperience", "MaxCash", },
-              com.lvl6.proto.UserProto.StaticLevelInfoProto.class,
-              com.lvl6.proto.UserProto.StaticLevelInfoProto.Builder.class);
+              com.lvl6.proto.UserProto.StaticUserLevelInfoProto.class,
+              com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder.class);
           return null;
         }
       };

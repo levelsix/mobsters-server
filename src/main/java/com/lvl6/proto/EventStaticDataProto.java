@@ -15,41 +15,6 @@ public final class EventStaticDataProto {
     boolean hasSender();
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // repeated int32 structIds = 2;
-    java.util.List<java.lang.Integer> getStructIdsList();
-    int getStructIdsCount();
-    int getStructIds(int index);
-    
-    // repeated int32 taskIds = 3;
-    java.util.List<java.lang.Integer> getTaskIdsList();
-    int getTaskIdsCount();
-    int getTaskIds(int index);
-    
-    // repeated int32 questIds = 4;
-    java.util.List<java.lang.Integer> getQuestIdsList();
-    int getQuestIdsCount();
-    int getQuestIds(int index);
-    
-    // repeated int32 cityIds = 5;
-    java.util.List<java.lang.Integer> getCityIdsList();
-    int getCityIdsCount();
-    int getCityIds(int index);
-    
-    // repeated int32 monsterIds = 6;
-    java.util.List<java.lang.Integer> getMonsterIdsList();
-    int getMonsterIdsCount();
-    int getMonsterIds(int index);
-    
-    // repeated int32 buildStructJobIds = 7;
-    java.util.List<java.lang.Integer> getBuildStructJobIdsList();
-    int getBuildStructJobIdsCount();
-    int getBuildStructJobIds(int index);
-    
-    // repeated int32 upgradeStructJobIds = 8;
-    java.util.List<java.lang.Integer> getUpgradeStructJobIdsList();
-    int getUpgradeStructJobIdsCount();
-    int getUpgradeStructJobIds(int index);
   }
   public static final class RetrieveStaticDataRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -93,113 +58,8 @@ public final class EventStaticDataProto {
       return sender_;
     }
     
-    // repeated int32 structIds = 2;
-    public static final int STRUCTIDS_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> structIds_;
-    public java.util.List<java.lang.Integer>
-        getStructIdsList() {
-      return structIds_;
-    }
-    public int getStructIdsCount() {
-      return structIds_.size();
-    }
-    public int getStructIds(int index) {
-      return structIds_.get(index);
-    }
-    
-    // repeated int32 taskIds = 3;
-    public static final int TASKIDS_FIELD_NUMBER = 3;
-    private java.util.List<java.lang.Integer> taskIds_;
-    public java.util.List<java.lang.Integer>
-        getTaskIdsList() {
-      return taskIds_;
-    }
-    public int getTaskIdsCount() {
-      return taskIds_.size();
-    }
-    public int getTaskIds(int index) {
-      return taskIds_.get(index);
-    }
-    
-    // repeated int32 questIds = 4;
-    public static final int QUESTIDS_FIELD_NUMBER = 4;
-    private java.util.List<java.lang.Integer> questIds_;
-    public java.util.List<java.lang.Integer>
-        getQuestIdsList() {
-      return questIds_;
-    }
-    public int getQuestIdsCount() {
-      return questIds_.size();
-    }
-    public int getQuestIds(int index) {
-      return questIds_.get(index);
-    }
-    
-    // repeated int32 cityIds = 5;
-    public static final int CITYIDS_FIELD_NUMBER = 5;
-    private java.util.List<java.lang.Integer> cityIds_;
-    public java.util.List<java.lang.Integer>
-        getCityIdsList() {
-      return cityIds_;
-    }
-    public int getCityIdsCount() {
-      return cityIds_.size();
-    }
-    public int getCityIds(int index) {
-      return cityIds_.get(index);
-    }
-    
-    // repeated int32 monsterIds = 6;
-    public static final int MONSTERIDS_FIELD_NUMBER = 6;
-    private java.util.List<java.lang.Integer> monsterIds_;
-    public java.util.List<java.lang.Integer>
-        getMonsterIdsList() {
-      return monsterIds_;
-    }
-    public int getMonsterIdsCount() {
-      return monsterIds_.size();
-    }
-    public int getMonsterIds(int index) {
-      return monsterIds_.get(index);
-    }
-    
-    // repeated int32 buildStructJobIds = 7;
-    public static final int BUILDSTRUCTJOBIDS_FIELD_NUMBER = 7;
-    private java.util.List<java.lang.Integer> buildStructJobIds_;
-    public java.util.List<java.lang.Integer>
-        getBuildStructJobIdsList() {
-      return buildStructJobIds_;
-    }
-    public int getBuildStructJobIdsCount() {
-      return buildStructJobIds_.size();
-    }
-    public int getBuildStructJobIds(int index) {
-      return buildStructJobIds_.get(index);
-    }
-    
-    // repeated int32 upgradeStructJobIds = 8;
-    public static final int UPGRADESTRUCTJOBIDS_FIELD_NUMBER = 8;
-    private java.util.List<java.lang.Integer> upgradeStructJobIds_;
-    public java.util.List<java.lang.Integer>
-        getUpgradeStructJobIdsList() {
-      return upgradeStructJobIds_;
-    }
-    public int getUpgradeStructJobIdsCount() {
-      return upgradeStructJobIds_.size();
-    }
-    public int getUpgradeStructJobIds(int index) {
-      return upgradeStructJobIds_.get(index);
-    }
-    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      structIds_ = java.util.Collections.emptyList();;
-      taskIds_ = java.util.Collections.emptyList();;
-      questIds_ = java.util.Collections.emptyList();;
-      cityIds_ = java.util.Collections.emptyList();;
-      monsterIds_ = java.util.Collections.emptyList();;
-      buildStructJobIds_ = java.util.Collections.emptyList();;
-      upgradeStructJobIds_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -216,27 +76,6 @@ public final class EventStaticDataProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < structIds_.size(); i++) {
-        output.writeInt32(2, structIds_.get(i));
-      }
-      for (int i = 0; i < taskIds_.size(); i++) {
-        output.writeInt32(3, taskIds_.get(i));
-      }
-      for (int i = 0; i < questIds_.size(); i++) {
-        output.writeInt32(4, questIds_.get(i));
-      }
-      for (int i = 0; i < cityIds_.size(); i++) {
-        output.writeInt32(5, cityIds_.get(i));
-      }
-      for (int i = 0; i < monsterIds_.size(); i++) {
-        output.writeInt32(6, monsterIds_.get(i));
-      }
-      for (int i = 0; i < buildStructJobIds_.size(); i++) {
-        output.writeInt32(7, buildStructJobIds_.get(i));
-      }
-      for (int i = 0; i < upgradeStructJobIds_.size(); i++) {
-        output.writeInt32(8, upgradeStructJobIds_.get(i));
-      }
       getUnknownFields().writeTo(output);
     }
     
@@ -249,69 +88,6 @@ public final class EventStaticDataProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < structIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(structIds_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getStructIdsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < taskIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(taskIds_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getTaskIdsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < questIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(questIds_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getQuestIdsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < cityIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(cityIds_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getCityIdsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < monsterIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(monsterIds_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getMonsterIdsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < buildStructJobIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(buildStructJobIds_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getBuildStructJobIdsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < upgradeStructJobIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(upgradeStructJobIds_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getUpgradeStructJobIdsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -444,20 +220,6 @@ public final class EventStaticDataProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        structIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        taskIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        questIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        cityIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        monsterIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        buildStructJobIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        upgradeStructJobIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       
@@ -504,41 +266,6 @@ public final class EventStaticDataProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          structIds_ = java.util.Collections.unmodifiableList(structIds_);
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.structIds_ = structIds_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          taskIds_ = java.util.Collections.unmodifiableList(taskIds_);
-          bitField0_ = (bitField0_ & ~0x00000004);
-        }
-        result.taskIds_ = taskIds_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          questIds_ = java.util.Collections.unmodifiableList(questIds_);
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.questIds_ = questIds_;
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
-          cityIds_ = java.util.Collections.unmodifiableList(cityIds_);
-          bitField0_ = (bitField0_ & ~0x00000010);
-        }
-        result.cityIds_ = cityIds_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          monsterIds_ = java.util.Collections.unmodifiableList(monsterIds_);
-          bitField0_ = (bitField0_ & ~0x00000020);
-        }
-        result.monsterIds_ = monsterIds_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          buildStructJobIds_ = java.util.Collections.unmodifiableList(buildStructJobIds_);
-          bitField0_ = (bitField0_ & ~0x00000040);
-        }
-        result.buildStructJobIds_ = buildStructJobIds_;
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          upgradeStructJobIds_ = java.util.Collections.unmodifiableList(upgradeStructJobIds_);
-          bitField0_ = (bitField0_ & ~0x00000080);
-        }
-        result.upgradeStructJobIds_ = upgradeStructJobIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -557,76 +284,6 @@ public final class EventStaticDataProto {
         if (other == com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataRequestProto.getDefaultInstance()) return this;
         if (other.hasSender()) {
           mergeSender(other.getSender());
-        }
-        if (!other.structIds_.isEmpty()) {
-          if (structIds_.isEmpty()) {
-            structIds_ = other.structIds_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureStructIdsIsMutable();
-            structIds_.addAll(other.structIds_);
-          }
-          onChanged();
-        }
-        if (!other.taskIds_.isEmpty()) {
-          if (taskIds_.isEmpty()) {
-            taskIds_ = other.taskIds_;
-            bitField0_ = (bitField0_ & ~0x00000004);
-          } else {
-            ensureTaskIdsIsMutable();
-            taskIds_.addAll(other.taskIds_);
-          }
-          onChanged();
-        }
-        if (!other.questIds_.isEmpty()) {
-          if (questIds_.isEmpty()) {
-            questIds_ = other.questIds_;
-            bitField0_ = (bitField0_ & ~0x00000008);
-          } else {
-            ensureQuestIdsIsMutable();
-            questIds_.addAll(other.questIds_);
-          }
-          onChanged();
-        }
-        if (!other.cityIds_.isEmpty()) {
-          if (cityIds_.isEmpty()) {
-            cityIds_ = other.cityIds_;
-            bitField0_ = (bitField0_ & ~0x00000010);
-          } else {
-            ensureCityIdsIsMutable();
-            cityIds_.addAll(other.cityIds_);
-          }
-          onChanged();
-        }
-        if (!other.monsterIds_.isEmpty()) {
-          if (monsterIds_.isEmpty()) {
-            monsterIds_ = other.monsterIds_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-          } else {
-            ensureMonsterIdsIsMutable();
-            monsterIds_.addAll(other.monsterIds_);
-          }
-          onChanged();
-        }
-        if (!other.buildStructJobIds_.isEmpty()) {
-          if (buildStructJobIds_.isEmpty()) {
-            buildStructJobIds_ = other.buildStructJobIds_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-          } else {
-            ensureBuildStructJobIdsIsMutable();
-            buildStructJobIds_.addAll(other.buildStructJobIds_);
-          }
-          onChanged();
-        }
-        if (!other.upgradeStructJobIds_.isEmpty()) {
-          if (upgradeStructJobIds_.isEmpty()) {
-            upgradeStructJobIds_ = other.upgradeStructJobIds_;
-            bitField0_ = (bitField0_ & ~0x00000080);
-          } else {
-            ensureUpgradeStructJobIdsIsMutable();
-            upgradeStructJobIds_.addAll(other.upgradeStructJobIds_);
-          }
-          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -666,104 +323,6 @@ public final class EventStaticDataProto {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              ensureStructIdsIsMutable();
-              structIds_.add(input.readInt32());
-              break;
-            }
-            case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addStructIds(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 24: {
-              ensureTaskIdsIsMutable();
-              taskIds_.add(input.readInt32());
-              break;
-            }
-            case 26: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addTaskIds(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 32: {
-              ensureQuestIdsIsMutable();
-              questIds_.add(input.readInt32());
-              break;
-            }
-            case 34: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addQuestIds(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 40: {
-              ensureCityIdsIsMutable();
-              cityIds_.add(input.readInt32());
-              break;
-            }
-            case 42: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addCityIds(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 48: {
-              ensureMonsterIdsIsMutable();
-              monsterIds_.add(input.readInt32());
-              break;
-            }
-            case 50: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addMonsterIds(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 56: {
-              ensureBuildStructJobIdsIsMutable();
-              buildStructJobIds_.add(input.readInt32());
-              break;
-            }
-            case 58: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addBuildStructJobIds(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 64: {
-              ensureUpgradeStructJobIdsIsMutable();
-              upgradeStructJobIds_.add(input.readInt32());
-              break;
-            }
-            case 66: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addUpgradeStructJobIds(input.readInt32());
-              }
-              input.popLimit(limit);
               break;
             }
           }
@@ -862,321 +421,6 @@ public final class EventStaticDataProto {
         return senderBuilder_;
       }
       
-      // repeated int32 structIds = 2;
-      private java.util.List<java.lang.Integer> structIds_ = java.util.Collections.emptyList();;
-      private void ensureStructIdsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          structIds_ = new java.util.ArrayList<java.lang.Integer>(structIds_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getStructIdsList() {
-        return java.util.Collections.unmodifiableList(structIds_);
-      }
-      public int getStructIdsCount() {
-        return structIds_.size();
-      }
-      public int getStructIds(int index) {
-        return structIds_.get(index);
-      }
-      public Builder setStructIds(
-          int index, int value) {
-        ensureStructIdsIsMutable();
-        structIds_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addStructIds(int value) {
-        ensureStructIdsIsMutable();
-        structIds_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllStructIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureStructIdsIsMutable();
-        super.addAll(values, structIds_);
-        onChanged();
-        return this;
-      }
-      public Builder clearStructIds() {
-        structIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 taskIds = 3;
-      private java.util.List<java.lang.Integer> taskIds_ = java.util.Collections.emptyList();;
-      private void ensureTaskIdsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          taskIds_ = new java.util.ArrayList<java.lang.Integer>(taskIds_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getTaskIdsList() {
-        return java.util.Collections.unmodifiableList(taskIds_);
-      }
-      public int getTaskIdsCount() {
-        return taskIds_.size();
-      }
-      public int getTaskIds(int index) {
-        return taskIds_.get(index);
-      }
-      public Builder setTaskIds(
-          int index, int value) {
-        ensureTaskIdsIsMutable();
-        taskIds_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addTaskIds(int value) {
-        ensureTaskIdsIsMutable();
-        taskIds_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllTaskIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureTaskIdsIsMutable();
-        super.addAll(values, taskIds_);
-        onChanged();
-        return this;
-      }
-      public Builder clearTaskIds() {
-        taskIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 questIds = 4;
-      private java.util.List<java.lang.Integer> questIds_ = java.util.Collections.emptyList();;
-      private void ensureQuestIdsIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          questIds_ = new java.util.ArrayList<java.lang.Integer>(questIds_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getQuestIdsList() {
-        return java.util.Collections.unmodifiableList(questIds_);
-      }
-      public int getQuestIdsCount() {
-        return questIds_.size();
-      }
-      public int getQuestIds(int index) {
-        return questIds_.get(index);
-      }
-      public Builder setQuestIds(
-          int index, int value) {
-        ensureQuestIdsIsMutable();
-        questIds_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addQuestIds(int value) {
-        ensureQuestIdsIsMutable();
-        questIds_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllQuestIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureQuestIdsIsMutable();
-        super.addAll(values, questIds_);
-        onChanged();
-        return this;
-      }
-      public Builder clearQuestIds() {
-        questIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 cityIds = 5;
-      private java.util.List<java.lang.Integer> cityIds_ = java.util.Collections.emptyList();;
-      private void ensureCityIdsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          cityIds_ = new java.util.ArrayList<java.lang.Integer>(cityIds_);
-          bitField0_ |= 0x00000010;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getCityIdsList() {
-        return java.util.Collections.unmodifiableList(cityIds_);
-      }
-      public int getCityIdsCount() {
-        return cityIds_.size();
-      }
-      public int getCityIds(int index) {
-        return cityIds_.get(index);
-      }
-      public Builder setCityIds(
-          int index, int value) {
-        ensureCityIdsIsMutable();
-        cityIds_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addCityIds(int value) {
-        ensureCityIdsIsMutable();
-        cityIds_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllCityIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureCityIdsIsMutable();
-        super.addAll(values, cityIds_);
-        onChanged();
-        return this;
-      }
-      public Builder clearCityIds() {
-        cityIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 monsterIds = 6;
-      private java.util.List<java.lang.Integer> monsterIds_ = java.util.Collections.emptyList();;
-      private void ensureMonsterIdsIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          monsterIds_ = new java.util.ArrayList<java.lang.Integer>(monsterIds_);
-          bitField0_ |= 0x00000020;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getMonsterIdsList() {
-        return java.util.Collections.unmodifiableList(monsterIds_);
-      }
-      public int getMonsterIdsCount() {
-        return monsterIds_.size();
-      }
-      public int getMonsterIds(int index) {
-        return monsterIds_.get(index);
-      }
-      public Builder setMonsterIds(
-          int index, int value) {
-        ensureMonsterIdsIsMutable();
-        monsterIds_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addMonsterIds(int value) {
-        ensureMonsterIdsIsMutable();
-        monsterIds_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllMonsterIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureMonsterIdsIsMutable();
-        super.addAll(values, monsterIds_);
-        onChanged();
-        return this;
-      }
-      public Builder clearMonsterIds() {
-        monsterIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 buildStructJobIds = 7;
-      private java.util.List<java.lang.Integer> buildStructJobIds_ = java.util.Collections.emptyList();;
-      private void ensureBuildStructJobIdsIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          buildStructJobIds_ = new java.util.ArrayList<java.lang.Integer>(buildStructJobIds_);
-          bitField0_ |= 0x00000040;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getBuildStructJobIdsList() {
-        return java.util.Collections.unmodifiableList(buildStructJobIds_);
-      }
-      public int getBuildStructJobIdsCount() {
-        return buildStructJobIds_.size();
-      }
-      public int getBuildStructJobIds(int index) {
-        return buildStructJobIds_.get(index);
-      }
-      public Builder setBuildStructJobIds(
-          int index, int value) {
-        ensureBuildStructJobIdsIsMutable();
-        buildStructJobIds_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addBuildStructJobIds(int value) {
-        ensureBuildStructJobIdsIsMutable();
-        buildStructJobIds_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllBuildStructJobIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureBuildStructJobIdsIsMutable();
-        super.addAll(values, buildStructJobIds_);
-        onChanged();
-        return this;
-      }
-      public Builder clearBuildStructJobIds() {
-        buildStructJobIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
-        return this;
-      }
-      
-      // repeated int32 upgradeStructJobIds = 8;
-      private java.util.List<java.lang.Integer> upgradeStructJobIds_ = java.util.Collections.emptyList();;
-      private void ensureUpgradeStructJobIdsIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          upgradeStructJobIds_ = new java.util.ArrayList<java.lang.Integer>(upgradeStructJobIds_);
-          bitField0_ |= 0x00000080;
-         }
-      }
-      public java.util.List<java.lang.Integer>
-          getUpgradeStructJobIdsList() {
-        return java.util.Collections.unmodifiableList(upgradeStructJobIds_);
-      }
-      public int getUpgradeStructJobIdsCount() {
-        return upgradeStructJobIds_.size();
-      }
-      public int getUpgradeStructJobIds(int index) {
-        return upgradeStructJobIds_.get(index);
-      }
-      public Builder setUpgradeStructJobIds(
-          int index, int value) {
-        ensureUpgradeStructJobIdsIsMutable();
-        upgradeStructJobIds_.set(index, value);
-        onChanged();
-        return this;
-      }
-      public Builder addUpgradeStructJobIds(int value) {
-        ensureUpgradeStructJobIdsIsMutable();
-        upgradeStructJobIds_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllUpgradeStructJobIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureUpgradeStructJobIdsIsMutable();
-        super.addAll(values, upgradeStructJobIds_);
-        onChanged();
-        return this;
-      }
-      public Builder clearUpgradeStructJobIds() {
-        upgradeStructJobIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        onChanged();
-        return this;
-      }
-      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RetrieveStaticDataRequestProto)
     }
     
@@ -1196,67 +440,97 @@ public final class EventStaticDataProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // repeated .com.lvl6.proto.FullStructureProto structs = 2;
-    java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> 
-        getStructsList();
-    com.lvl6.proto.StructureProto.FullStructureProto getStructs(int index);
-    int getStructsCount();
-    java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
-        getStructsOrBuilderList();
-    com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getStructsOrBuilder(
+    // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;
+    java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> 
+        getExpansionCostsList();
+    com.lvl6.proto.CityProto.CityExpansionCostProto getExpansionCosts(int index);
+    int getExpansionCostsCount();
+    java.util.List<? extends com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> 
+        getExpansionCostsOrBuilderList();
+    com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder getExpansionCostsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.FullTaskProto tasks = 3;
-    java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> 
-        getTasksList();
-    com.lvl6.proto.TaskProto.FullTaskProto getTasks(int index);
-    int getTasksCount();
-    java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
-        getTasksOrBuilderList();
-    com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getTasksOrBuilder(
-        int index);
-    
-    // repeated .com.lvl6.proto.FullQuestProto quests = 4;
-    java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
-        getQuestsList();
-    com.lvl6.proto.QuestProto.FullQuestProto getQuests(int index);
-    int getQuestsCount();
-    java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-        getQuestsOrBuilderList();
-    com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getQuestsOrBuilder(
-        int index);
-    
-    // repeated .com.lvl6.proto.FullCityProto cities = 5;
+    // repeated .com.lvl6.proto.FullCityProto allCities = 3;
     java.util.List<com.lvl6.proto.CityProto.FullCityProto> 
-        getCitiesList();
-    com.lvl6.proto.CityProto.FullCityProto getCities(int index);
-    int getCitiesCount();
+        getAllCitiesList();
+    com.lvl6.proto.CityProto.FullCityProto getAllCities(int index);
+    int getAllCitiesCount();
     java.util.List<? extends com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
-        getCitiesOrBuilderList();
-    com.lvl6.proto.CityProto.FullCityProtoOrBuilder getCitiesOrBuilder(
+        getAllCitiesOrBuilderList();
+    com.lvl6.proto.CityProto.FullCityProtoOrBuilder getAllCitiesOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.BuildStructJobProto buildStructJobs = 6;
-    java.util.List<com.lvl6.proto.JobProto.BuildStructJobProto> 
-        getBuildStructJobsList();
-    com.lvl6.proto.JobProto.BuildStructJobProto getBuildStructJobs(int index);
-    int getBuildStructJobsCount();
-    java.util.List<? extends com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder> 
-        getBuildStructJobsOrBuilderList();
-    com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder getBuildStructJobsOrBuilder(
+    // repeated .com.lvl6.proto.FullStructureProto allStructs = 4;
+    java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> 
+        getAllStructsList();
+    com.lvl6.proto.StructureProto.FullStructureProto getAllStructs(int index);
+    int getAllStructsCount();
+    java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
+        getAllStructsOrBuilderList();
+    com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getAllStructsOrBuilder(
         int index);
     
-    // repeated .com.lvl6.proto.UpgradeStructJobProto upgradeStructJobs = 7;
-    java.util.List<com.lvl6.proto.JobProto.UpgradeStructJobProto> 
-        getUpgradeStructJobsList();
-    com.lvl6.proto.JobProto.UpgradeStructJobProto getUpgradeStructJobs(int index);
-    int getUpgradeStructJobsCount();
-    java.util.List<? extends com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder> 
-        getUpgradeStructJobsOrBuilderList();
-    com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder getUpgradeStructJobsOrBuilder(
+    // repeated .com.lvl6.proto.FullTaskProto allTasks = 5;
+    java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> 
+        getAllTasksList();
+    com.lvl6.proto.TaskProto.FullTaskProto getAllTasks(int index);
+    int getAllTasksCount();
+    java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
+        getAllTasksOrBuilderList();
+    com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getAllTasksOrBuilder(
         int index);
     
-    // optional .com.lvl6.proto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus status = 8;
+    // repeated .com.lvl6.proto.MonsterProto allMonsters = 6;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> 
+        getAllMonstersList();
+    com.lvl6.proto.MonsterStuffProto.MonsterProto getAllMonsters(int index);
+    int getAllMonstersCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> 
+        getAllMonstersOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder getAllMonstersOrBuilder(
+        int index);
+    
+    // repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 7;
+    java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> 
+        getSlipList();
+    com.lvl6.proto.UserProto.StaticUserLevelInfoProto getSlip(int index);
+    int getSlipCount();
+    java.util.List<? extends com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> 
+        getSlipOrBuilderList();
+    com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder getSlipOrBuilder(
+        int index);
+    
+    // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 8;
+    java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
+        getInProgressQuestsList();
+    com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index);
+    int getInProgressQuestsCount();
+    java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+        getInProgressQuestsOrBuilderList();
+    com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
+        int index);
+    
+    // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 9;
+    java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
+        getUnredeemedQuestsList();
+    com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index);
+    int getUnredeemedQuestsCount();
+    java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+        getUnredeemedQuestsOrBuilderList();
+    com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
+        int index);
+    
+    // repeated .com.lvl6.proto.FullQuestProto availableQuests = 10;
+    java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> 
+        getAvailableQuestsList();
+    com.lvl6.proto.QuestProto.FullQuestProto getAvailableQuests(int index);
+    int getAvailableQuestsCount();
+    java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+        getAvailableQuestsOrBuilderList();
+    com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getAvailableQuestsOrBuilder(
+        int index);
+    
+    // optional .com.lvl6.proto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus status = 11;
     boolean hasStatus();
     com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus getStatus();
   }
@@ -1371,134 +645,197 @@ public final class EventStaticDataProto {
       return sender_;
     }
     
-    // repeated .com.lvl6.proto.FullStructureProto structs = 2;
-    public static final int STRUCTS_FIELD_NUMBER = 2;
-    private java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> structs_;
-    public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> getStructsList() {
-      return structs_;
+    // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;
+    public static final int EXPANSIONCOSTS_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> expansionCosts_;
+    public java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> getExpansionCostsList() {
+      return expansionCosts_;
     }
-    public java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
-        getStructsOrBuilderList() {
-      return structs_;
+    public java.util.List<? extends com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> 
+        getExpansionCostsOrBuilderList() {
+      return expansionCosts_;
     }
-    public int getStructsCount() {
-      return structs_.size();
+    public int getExpansionCostsCount() {
+      return expansionCosts_.size();
     }
-    public com.lvl6.proto.StructureProto.FullStructureProto getStructs(int index) {
-      return structs_.get(index);
+    public com.lvl6.proto.CityProto.CityExpansionCostProto getExpansionCosts(int index) {
+      return expansionCosts_.get(index);
     }
-    public com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getStructsOrBuilder(
+    public com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder getExpansionCostsOrBuilder(
         int index) {
-      return structs_.get(index);
+      return expansionCosts_.get(index);
     }
     
-    // repeated .com.lvl6.proto.FullTaskProto tasks = 3;
-    public static final int TASKS_FIELD_NUMBER = 3;
-    private java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> tasks_;
-    public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> getTasksList() {
-      return tasks_;
-    }
-    public java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
-        getTasksOrBuilderList() {
-      return tasks_;
-    }
-    public int getTasksCount() {
-      return tasks_.size();
-    }
-    public com.lvl6.proto.TaskProto.FullTaskProto getTasks(int index) {
-      return tasks_.get(index);
-    }
-    public com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getTasksOrBuilder(
-        int index) {
-      return tasks_.get(index);
-    }
-    
-    // repeated .com.lvl6.proto.FullQuestProto quests = 4;
-    public static final int QUESTS_FIELD_NUMBER = 4;
-    private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> quests_;
-    public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getQuestsList() {
-      return quests_;
-    }
-    public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-        getQuestsOrBuilderList() {
-      return quests_;
-    }
-    public int getQuestsCount() {
-      return quests_.size();
-    }
-    public com.lvl6.proto.QuestProto.FullQuestProto getQuests(int index) {
-      return quests_.get(index);
-    }
-    public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getQuestsOrBuilder(
-        int index) {
-      return quests_.get(index);
-    }
-    
-    // repeated .com.lvl6.proto.FullCityProto cities = 5;
-    public static final int CITIES_FIELD_NUMBER = 5;
-    private java.util.List<com.lvl6.proto.CityProto.FullCityProto> cities_;
-    public java.util.List<com.lvl6.proto.CityProto.FullCityProto> getCitiesList() {
-      return cities_;
+    // repeated .com.lvl6.proto.FullCityProto allCities = 3;
+    public static final int ALLCITIES_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.CityProto.FullCityProto> allCities_;
+    public java.util.List<com.lvl6.proto.CityProto.FullCityProto> getAllCitiesList() {
+      return allCities_;
     }
     public java.util.List<? extends com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
-        getCitiesOrBuilderList() {
-      return cities_;
+        getAllCitiesOrBuilderList() {
+      return allCities_;
     }
-    public int getCitiesCount() {
-      return cities_.size();
+    public int getAllCitiesCount() {
+      return allCities_.size();
     }
-    public com.lvl6.proto.CityProto.FullCityProto getCities(int index) {
-      return cities_.get(index);
+    public com.lvl6.proto.CityProto.FullCityProto getAllCities(int index) {
+      return allCities_.get(index);
     }
-    public com.lvl6.proto.CityProto.FullCityProtoOrBuilder getCitiesOrBuilder(
+    public com.lvl6.proto.CityProto.FullCityProtoOrBuilder getAllCitiesOrBuilder(
         int index) {
-      return cities_.get(index);
+      return allCities_.get(index);
     }
     
-    // repeated .com.lvl6.proto.BuildStructJobProto buildStructJobs = 6;
-    public static final int BUILDSTRUCTJOBS_FIELD_NUMBER = 6;
-    private java.util.List<com.lvl6.proto.JobProto.BuildStructJobProto> buildStructJobs_;
-    public java.util.List<com.lvl6.proto.JobProto.BuildStructJobProto> getBuildStructJobsList() {
-      return buildStructJobs_;
+    // repeated .com.lvl6.proto.FullStructureProto allStructs = 4;
+    public static final int ALLSTRUCTS_FIELD_NUMBER = 4;
+    private java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> allStructs_;
+    public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> getAllStructsList() {
+      return allStructs_;
     }
-    public java.util.List<? extends com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder> 
-        getBuildStructJobsOrBuilderList() {
-      return buildStructJobs_;
+    public java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
+        getAllStructsOrBuilderList() {
+      return allStructs_;
     }
-    public int getBuildStructJobsCount() {
-      return buildStructJobs_.size();
+    public int getAllStructsCount() {
+      return allStructs_.size();
     }
-    public com.lvl6.proto.JobProto.BuildStructJobProto getBuildStructJobs(int index) {
-      return buildStructJobs_.get(index);
+    public com.lvl6.proto.StructureProto.FullStructureProto getAllStructs(int index) {
+      return allStructs_.get(index);
     }
-    public com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder getBuildStructJobsOrBuilder(
+    public com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getAllStructsOrBuilder(
         int index) {
-      return buildStructJobs_.get(index);
+      return allStructs_.get(index);
     }
     
-    // repeated .com.lvl6.proto.UpgradeStructJobProto upgradeStructJobs = 7;
-    public static final int UPGRADESTRUCTJOBS_FIELD_NUMBER = 7;
-    private java.util.List<com.lvl6.proto.JobProto.UpgradeStructJobProto> upgradeStructJobs_;
-    public java.util.List<com.lvl6.proto.JobProto.UpgradeStructJobProto> getUpgradeStructJobsList() {
-      return upgradeStructJobs_;
+    // repeated .com.lvl6.proto.FullTaskProto allTasks = 5;
+    public static final int ALLTASKS_FIELD_NUMBER = 5;
+    private java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> allTasks_;
+    public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> getAllTasksList() {
+      return allTasks_;
     }
-    public java.util.List<? extends com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder> 
-        getUpgradeStructJobsOrBuilderList() {
-      return upgradeStructJobs_;
+    public java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
+        getAllTasksOrBuilderList() {
+      return allTasks_;
     }
-    public int getUpgradeStructJobsCount() {
-      return upgradeStructJobs_.size();
+    public int getAllTasksCount() {
+      return allTasks_.size();
     }
-    public com.lvl6.proto.JobProto.UpgradeStructJobProto getUpgradeStructJobs(int index) {
-      return upgradeStructJobs_.get(index);
+    public com.lvl6.proto.TaskProto.FullTaskProto getAllTasks(int index) {
+      return allTasks_.get(index);
     }
-    public com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder getUpgradeStructJobsOrBuilder(
+    public com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getAllTasksOrBuilder(
         int index) {
-      return upgradeStructJobs_.get(index);
+      return allTasks_.get(index);
     }
     
-    // optional .com.lvl6.proto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus status = 8;
-    public static final int STATUS_FIELD_NUMBER = 8;
+    // repeated .com.lvl6.proto.MonsterProto allMonsters = 6;
+    public static final int ALLMONSTERS_FIELD_NUMBER = 6;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> allMonsters_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> getAllMonstersList() {
+      return allMonsters_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> 
+        getAllMonstersOrBuilderList() {
+      return allMonsters_;
+    }
+    public int getAllMonstersCount() {
+      return allMonsters_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterProto getAllMonsters(int index) {
+      return allMonsters_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder getAllMonstersOrBuilder(
+        int index) {
+      return allMonsters_.get(index);
+    }
+    
+    // repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 7;
+    public static final int SLIP_FIELD_NUMBER = 7;
+    private java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> slip_;
+    public java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> getSlipList() {
+      return slip_;
+    }
+    public java.util.List<? extends com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> 
+        getSlipOrBuilderList() {
+      return slip_;
+    }
+    public int getSlipCount() {
+      return slip_.size();
+    }
+    public com.lvl6.proto.UserProto.StaticUserLevelInfoProto getSlip(int index) {
+      return slip_.get(index);
+    }
+    public com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder getSlipOrBuilder(
+        int index) {
+      return slip_.get(index);
+    }
+    
+    // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 8;
+    public static final int INPROGRESSQUESTS_FIELD_NUMBER = 8;
+    private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressQuests_;
+    public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressQuestsList() {
+      return inProgressQuests_;
+    }
+    public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+        getInProgressQuestsOrBuilderList() {
+      return inProgressQuests_;
+    }
+    public int getInProgressQuestsCount() {
+      return inProgressQuests_.size();
+    }
+    public com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index) {
+      return inProgressQuests_.get(index);
+    }
+    public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
+        int index) {
+      return inProgressQuests_.get(index);
+    }
+    
+    // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 9;
+    public static final int UNREDEEMEDQUESTS_FIELD_NUMBER = 9;
+    private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> unredeemedQuests_;
+    public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getUnredeemedQuestsList() {
+      return unredeemedQuests_;
+    }
+    public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+        getUnredeemedQuestsOrBuilderList() {
+      return unredeemedQuests_;
+    }
+    public int getUnredeemedQuestsCount() {
+      return unredeemedQuests_.size();
+    }
+    public com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index) {
+      return unredeemedQuests_.get(index);
+    }
+    public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
+        int index) {
+      return unredeemedQuests_.get(index);
+    }
+    
+    // repeated .com.lvl6.proto.FullQuestProto availableQuests = 10;
+    public static final int AVAILABLEQUESTS_FIELD_NUMBER = 10;
+    private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> availableQuests_;
+    public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getAvailableQuestsList() {
+      return availableQuests_;
+    }
+    public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+        getAvailableQuestsOrBuilderList() {
+      return availableQuests_;
+    }
+    public int getAvailableQuestsCount() {
+      return availableQuests_.size();
+    }
+    public com.lvl6.proto.QuestProto.FullQuestProto getAvailableQuests(int index) {
+      return availableQuests_.get(index);
+    }
+    public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getAvailableQuestsOrBuilder(
+        int index) {
+      return availableQuests_.get(index);
+    }
+    
+    // optional .com.lvl6.proto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus status = 11;
+    public static final int STATUS_FIELD_NUMBER = 11;
     private com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus status_;
     public boolean hasStatus() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -1509,12 +846,15 @@ public final class EventStaticDataProto {
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      structs_ = java.util.Collections.emptyList();
-      tasks_ = java.util.Collections.emptyList();
-      quests_ = java.util.Collections.emptyList();
-      cities_ = java.util.Collections.emptyList();
-      buildStructJobs_ = java.util.Collections.emptyList();
-      upgradeStructJobs_ = java.util.Collections.emptyList();
+      expansionCosts_ = java.util.Collections.emptyList();
+      allCities_ = java.util.Collections.emptyList();
+      allStructs_ = java.util.Collections.emptyList();
+      allTasks_ = java.util.Collections.emptyList();
+      allMonsters_ = java.util.Collections.emptyList();
+      slip_ = java.util.Collections.emptyList();
+      inProgressQuests_ = java.util.Collections.emptyList();
+      unredeemedQuests_ = java.util.Collections.emptyList();
+      availableQuests_ = java.util.Collections.emptyList();
       status_ = com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -1532,26 +872,35 @@ public final class EventStaticDataProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < structs_.size(); i++) {
-        output.writeMessage(2, structs_.get(i));
+      for (int i = 0; i < expansionCosts_.size(); i++) {
+        output.writeMessage(2, expansionCosts_.get(i));
       }
-      for (int i = 0; i < tasks_.size(); i++) {
-        output.writeMessage(3, tasks_.get(i));
+      for (int i = 0; i < allCities_.size(); i++) {
+        output.writeMessage(3, allCities_.get(i));
       }
-      for (int i = 0; i < quests_.size(); i++) {
-        output.writeMessage(4, quests_.get(i));
+      for (int i = 0; i < allStructs_.size(); i++) {
+        output.writeMessage(4, allStructs_.get(i));
       }
-      for (int i = 0; i < cities_.size(); i++) {
-        output.writeMessage(5, cities_.get(i));
+      for (int i = 0; i < allTasks_.size(); i++) {
+        output.writeMessage(5, allTasks_.get(i));
       }
-      for (int i = 0; i < buildStructJobs_.size(); i++) {
-        output.writeMessage(6, buildStructJobs_.get(i));
+      for (int i = 0; i < allMonsters_.size(); i++) {
+        output.writeMessage(6, allMonsters_.get(i));
       }
-      for (int i = 0; i < upgradeStructJobs_.size(); i++) {
-        output.writeMessage(7, upgradeStructJobs_.get(i));
+      for (int i = 0; i < slip_.size(); i++) {
+        output.writeMessage(7, slip_.get(i));
+      }
+      for (int i = 0; i < inProgressQuests_.size(); i++) {
+        output.writeMessage(8, inProgressQuests_.get(i));
+      }
+      for (int i = 0; i < unredeemedQuests_.size(); i++) {
+        output.writeMessage(9, unredeemedQuests_.get(i));
+      }
+      for (int i = 0; i < availableQuests_.size(); i++) {
+        output.writeMessage(10, availableQuests_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(8, status_.getNumber());
+        output.writeEnum(11, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1566,33 +915,45 @@ public final class EventStaticDataProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      for (int i = 0; i < structs_.size(); i++) {
+      for (int i = 0; i < expansionCosts_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, structs_.get(i));
+          .computeMessageSize(2, expansionCosts_.get(i));
       }
-      for (int i = 0; i < tasks_.size(); i++) {
+      for (int i = 0; i < allCities_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, tasks_.get(i));
+          .computeMessageSize(3, allCities_.get(i));
       }
-      for (int i = 0; i < quests_.size(); i++) {
+      for (int i = 0; i < allStructs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, quests_.get(i));
+          .computeMessageSize(4, allStructs_.get(i));
       }
-      for (int i = 0; i < cities_.size(); i++) {
+      for (int i = 0; i < allTasks_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, cities_.get(i));
+          .computeMessageSize(5, allTasks_.get(i));
       }
-      for (int i = 0; i < buildStructJobs_.size(); i++) {
+      for (int i = 0; i < allMonsters_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, buildStructJobs_.get(i));
+          .computeMessageSize(6, allMonsters_.get(i));
       }
-      for (int i = 0; i < upgradeStructJobs_.size(); i++) {
+      for (int i = 0; i < slip_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, upgradeStructJobs_.get(i));
+          .computeMessageSize(7, slip_.get(i));
+      }
+      for (int i = 0; i < inProgressQuests_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, inProgressQuests_.get(i));
+      }
+      for (int i = 0; i < unredeemedQuests_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, unredeemedQuests_.get(i));
+      }
+      for (int i = 0; i < availableQuests_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, availableQuests_.get(i));
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(8, status_.getNumber());
+          .computeEnumSize(11, status_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1711,12 +1072,15 @@ public final class EventStaticDataProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getStructsFieldBuilder();
-          getTasksFieldBuilder();
-          getQuestsFieldBuilder();
-          getCitiesFieldBuilder();
-          getBuildStructJobsFieldBuilder();
-          getUpgradeStructJobsFieldBuilder();
+          getExpansionCostsFieldBuilder();
+          getAllCitiesFieldBuilder();
+          getAllStructsFieldBuilder();
+          getAllTasksFieldBuilder();
+          getAllMonstersFieldBuilder();
+          getSlipFieldBuilder();
+          getInProgressQuestsFieldBuilder();
+          getUnredeemedQuestsFieldBuilder();
+          getAvailableQuestsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1731,44 +1095,62 @@ public final class EventStaticDataProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (structsBuilder_ == null) {
-          structs_ = java.util.Collections.emptyList();
+        if (expansionCostsBuilder_ == null) {
+          expansionCosts_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
-          structsBuilder_.clear();
+          expansionCostsBuilder_.clear();
         }
-        if (tasksBuilder_ == null) {
-          tasks_ = java.util.Collections.emptyList();
+        if (allCitiesBuilder_ == null) {
+          allCities_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000004);
         } else {
-          tasksBuilder_.clear();
+          allCitiesBuilder_.clear();
         }
-        if (questsBuilder_ == null) {
-          quests_ = java.util.Collections.emptyList();
+        if (allStructsBuilder_ == null) {
+          allStructs_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000008);
         } else {
-          questsBuilder_.clear();
+          allStructsBuilder_.clear();
         }
-        if (citiesBuilder_ == null) {
-          cities_ = java.util.Collections.emptyList();
+        if (allTasksBuilder_ == null) {
+          allTasks_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000010);
         } else {
-          citiesBuilder_.clear();
+          allTasksBuilder_.clear();
         }
-        if (buildStructJobsBuilder_ == null) {
-          buildStructJobs_ = java.util.Collections.emptyList();
+        if (allMonstersBuilder_ == null) {
+          allMonsters_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000020);
         } else {
-          buildStructJobsBuilder_.clear();
+          allMonstersBuilder_.clear();
         }
-        if (upgradeStructJobsBuilder_ == null) {
-          upgradeStructJobs_ = java.util.Collections.emptyList();
+        if (slipBuilder_ == null) {
+          slip_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000040);
         } else {
-          upgradeStructJobsBuilder_.clear();
+          slipBuilder_.clear();
+        }
+        if (inProgressQuestsBuilder_ == null) {
+          inProgressQuests_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+        } else {
+          inProgressQuestsBuilder_.clear();
+        }
+        if (unredeemedQuestsBuilder_ == null) {
+          unredeemedQuests_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+        } else {
+          unredeemedQuestsBuilder_.clear();
+        }
+        if (availableQuestsBuilder_ == null) {
+          availableQuests_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          availableQuestsBuilder_.clear();
         }
         status_ = com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus.SUCCESS;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
       
@@ -1815,61 +1197,88 @@ public final class EventStaticDataProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (structsBuilder_ == null) {
+        if (expansionCostsBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            structs_ = java.util.Collections.unmodifiableList(structs_);
+            expansionCosts_ = java.util.Collections.unmodifiableList(expansionCosts_);
             bitField0_ = (bitField0_ & ~0x00000002);
           }
-          result.structs_ = structs_;
+          result.expansionCosts_ = expansionCosts_;
         } else {
-          result.structs_ = structsBuilder_.build();
+          result.expansionCosts_ = expansionCostsBuilder_.build();
         }
-        if (tasksBuilder_ == null) {
+        if (allCitiesBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            tasks_ = java.util.Collections.unmodifiableList(tasks_);
+            allCities_ = java.util.Collections.unmodifiableList(allCities_);
             bitField0_ = (bitField0_ & ~0x00000004);
           }
-          result.tasks_ = tasks_;
+          result.allCities_ = allCities_;
         } else {
-          result.tasks_ = tasksBuilder_.build();
+          result.allCities_ = allCitiesBuilder_.build();
         }
-        if (questsBuilder_ == null) {
+        if (allStructsBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            quests_ = java.util.Collections.unmodifiableList(quests_);
+            allStructs_ = java.util.Collections.unmodifiableList(allStructs_);
             bitField0_ = (bitField0_ & ~0x00000008);
           }
-          result.quests_ = quests_;
+          result.allStructs_ = allStructs_;
         } else {
-          result.quests_ = questsBuilder_.build();
+          result.allStructs_ = allStructsBuilder_.build();
         }
-        if (citiesBuilder_ == null) {
+        if (allTasksBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            cities_ = java.util.Collections.unmodifiableList(cities_);
+            allTasks_ = java.util.Collections.unmodifiableList(allTasks_);
             bitField0_ = (bitField0_ & ~0x00000010);
           }
-          result.cities_ = cities_;
+          result.allTasks_ = allTasks_;
         } else {
-          result.cities_ = citiesBuilder_.build();
+          result.allTasks_ = allTasksBuilder_.build();
         }
-        if (buildStructJobsBuilder_ == null) {
+        if (allMonstersBuilder_ == null) {
           if (((bitField0_ & 0x00000020) == 0x00000020)) {
-            buildStructJobs_ = java.util.Collections.unmodifiableList(buildStructJobs_);
+            allMonsters_ = java.util.Collections.unmodifiableList(allMonsters_);
             bitField0_ = (bitField0_ & ~0x00000020);
           }
-          result.buildStructJobs_ = buildStructJobs_;
+          result.allMonsters_ = allMonsters_;
         } else {
-          result.buildStructJobs_ = buildStructJobsBuilder_.build();
+          result.allMonsters_ = allMonstersBuilder_.build();
         }
-        if (upgradeStructJobsBuilder_ == null) {
+        if (slipBuilder_ == null) {
           if (((bitField0_ & 0x00000040) == 0x00000040)) {
-            upgradeStructJobs_ = java.util.Collections.unmodifiableList(upgradeStructJobs_);
+            slip_ = java.util.Collections.unmodifiableList(slip_);
             bitField0_ = (bitField0_ & ~0x00000040);
           }
-          result.upgradeStructJobs_ = upgradeStructJobs_;
+          result.slip_ = slip_;
         } else {
-          result.upgradeStructJobs_ = upgradeStructJobsBuilder_.build();
+          result.slip_ = slipBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (inProgressQuestsBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080)) {
+            inProgressQuests_ = java.util.Collections.unmodifiableList(inProgressQuests_);
+            bitField0_ = (bitField0_ & ~0x00000080);
+          }
+          result.inProgressQuests_ = inProgressQuests_;
+        } else {
+          result.inProgressQuests_ = inProgressQuestsBuilder_.build();
+        }
+        if (unredeemedQuestsBuilder_ == null) {
+          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+            unredeemedQuests_ = java.util.Collections.unmodifiableList(unredeemedQuests_);
+            bitField0_ = (bitField0_ & ~0x00000100);
+          }
+          result.unredeemedQuests_ = unredeemedQuests_;
+        } else {
+          result.unredeemedQuests_ = unredeemedQuestsBuilder_.build();
+        }
+        if (availableQuestsBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            availableQuests_ = java.util.Collections.unmodifiableList(availableQuests_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.availableQuests_ = availableQuests_;
+        } else {
+          result.availableQuests_ = availableQuestsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
@@ -1892,159 +1301,237 @@ public final class EventStaticDataProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (structsBuilder_ == null) {
-          if (!other.structs_.isEmpty()) {
-            if (structs_.isEmpty()) {
-              structs_ = other.structs_;
+        if (expansionCostsBuilder_ == null) {
+          if (!other.expansionCosts_.isEmpty()) {
+            if (expansionCosts_.isEmpty()) {
+              expansionCosts_ = other.expansionCosts_;
               bitField0_ = (bitField0_ & ~0x00000002);
             } else {
-              ensureStructsIsMutable();
-              structs_.addAll(other.structs_);
+              ensureExpansionCostsIsMutable();
+              expansionCosts_.addAll(other.expansionCosts_);
             }
             onChanged();
           }
         } else {
-          if (!other.structs_.isEmpty()) {
-            if (structsBuilder_.isEmpty()) {
-              structsBuilder_.dispose();
-              structsBuilder_ = null;
-              structs_ = other.structs_;
+          if (!other.expansionCosts_.isEmpty()) {
+            if (expansionCostsBuilder_.isEmpty()) {
+              expansionCostsBuilder_.dispose();
+              expansionCostsBuilder_ = null;
+              expansionCosts_ = other.expansionCosts_;
               bitField0_ = (bitField0_ & ~0x00000002);
-              structsBuilder_ = 
+              expansionCostsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getStructsFieldBuilder() : null;
+                   getExpansionCostsFieldBuilder() : null;
             } else {
-              structsBuilder_.addAllMessages(other.structs_);
+              expansionCostsBuilder_.addAllMessages(other.expansionCosts_);
             }
           }
         }
-        if (tasksBuilder_ == null) {
-          if (!other.tasks_.isEmpty()) {
-            if (tasks_.isEmpty()) {
-              tasks_ = other.tasks_;
+        if (allCitiesBuilder_ == null) {
+          if (!other.allCities_.isEmpty()) {
+            if (allCities_.isEmpty()) {
+              allCities_ = other.allCities_;
               bitField0_ = (bitField0_ & ~0x00000004);
             } else {
-              ensureTasksIsMutable();
-              tasks_.addAll(other.tasks_);
+              ensureAllCitiesIsMutable();
+              allCities_.addAll(other.allCities_);
             }
             onChanged();
           }
         } else {
-          if (!other.tasks_.isEmpty()) {
-            if (tasksBuilder_.isEmpty()) {
-              tasksBuilder_.dispose();
-              tasksBuilder_ = null;
-              tasks_ = other.tasks_;
+          if (!other.allCities_.isEmpty()) {
+            if (allCitiesBuilder_.isEmpty()) {
+              allCitiesBuilder_.dispose();
+              allCitiesBuilder_ = null;
+              allCities_ = other.allCities_;
               bitField0_ = (bitField0_ & ~0x00000004);
-              tasksBuilder_ = 
+              allCitiesBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getTasksFieldBuilder() : null;
+                   getAllCitiesFieldBuilder() : null;
             } else {
-              tasksBuilder_.addAllMessages(other.tasks_);
+              allCitiesBuilder_.addAllMessages(other.allCities_);
             }
           }
         }
-        if (questsBuilder_ == null) {
-          if (!other.quests_.isEmpty()) {
-            if (quests_.isEmpty()) {
-              quests_ = other.quests_;
+        if (allStructsBuilder_ == null) {
+          if (!other.allStructs_.isEmpty()) {
+            if (allStructs_.isEmpty()) {
+              allStructs_ = other.allStructs_;
               bitField0_ = (bitField0_ & ~0x00000008);
             } else {
-              ensureQuestsIsMutable();
-              quests_.addAll(other.quests_);
+              ensureAllStructsIsMutable();
+              allStructs_.addAll(other.allStructs_);
             }
             onChanged();
           }
         } else {
-          if (!other.quests_.isEmpty()) {
-            if (questsBuilder_.isEmpty()) {
-              questsBuilder_.dispose();
-              questsBuilder_ = null;
-              quests_ = other.quests_;
+          if (!other.allStructs_.isEmpty()) {
+            if (allStructsBuilder_.isEmpty()) {
+              allStructsBuilder_.dispose();
+              allStructsBuilder_ = null;
+              allStructs_ = other.allStructs_;
               bitField0_ = (bitField0_ & ~0x00000008);
-              questsBuilder_ = 
+              allStructsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getQuestsFieldBuilder() : null;
+                   getAllStructsFieldBuilder() : null;
             } else {
-              questsBuilder_.addAllMessages(other.quests_);
+              allStructsBuilder_.addAllMessages(other.allStructs_);
             }
           }
         }
-        if (citiesBuilder_ == null) {
-          if (!other.cities_.isEmpty()) {
-            if (cities_.isEmpty()) {
-              cities_ = other.cities_;
+        if (allTasksBuilder_ == null) {
+          if (!other.allTasks_.isEmpty()) {
+            if (allTasks_.isEmpty()) {
+              allTasks_ = other.allTasks_;
               bitField0_ = (bitField0_ & ~0x00000010);
             } else {
-              ensureCitiesIsMutable();
-              cities_.addAll(other.cities_);
+              ensureAllTasksIsMutable();
+              allTasks_.addAll(other.allTasks_);
             }
             onChanged();
           }
         } else {
-          if (!other.cities_.isEmpty()) {
-            if (citiesBuilder_.isEmpty()) {
-              citiesBuilder_.dispose();
-              citiesBuilder_ = null;
-              cities_ = other.cities_;
+          if (!other.allTasks_.isEmpty()) {
+            if (allTasksBuilder_.isEmpty()) {
+              allTasksBuilder_.dispose();
+              allTasksBuilder_ = null;
+              allTasks_ = other.allTasks_;
               bitField0_ = (bitField0_ & ~0x00000010);
-              citiesBuilder_ = 
+              allTasksBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getCitiesFieldBuilder() : null;
+                   getAllTasksFieldBuilder() : null;
             } else {
-              citiesBuilder_.addAllMessages(other.cities_);
+              allTasksBuilder_.addAllMessages(other.allTasks_);
             }
           }
         }
-        if (buildStructJobsBuilder_ == null) {
-          if (!other.buildStructJobs_.isEmpty()) {
-            if (buildStructJobs_.isEmpty()) {
-              buildStructJobs_ = other.buildStructJobs_;
+        if (allMonstersBuilder_ == null) {
+          if (!other.allMonsters_.isEmpty()) {
+            if (allMonsters_.isEmpty()) {
+              allMonsters_ = other.allMonsters_;
               bitField0_ = (bitField0_ & ~0x00000020);
             } else {
-              ensureBuildStructJobsIsMutable();
-              buildStructJobs_.addAll(other.buildStructJobs_);
+              ensureAllMonstersIsMutable();
+              allMonsters_.addAll(other.allMonsters_);
             }
             onChanged();
           }
         } else {
-          if (!other.buildStructJobs_.isEmpty()) {
-            if (buildStructJobsBuilder_.isEmpty()) {
-              buildStructJobsBuilder_.dispose();
-              buildStructJobsBuilder_ = null;
-              buildStructJobs_ = other.buildStructJobs_;
+          if (!other.allMonsters_.isEmpty()) {
+            if (allMonstersBuilder_.isEmpty()) {
+              allMonstersBuilder_.dispose();
+              allMonstersBuilder_ = null;
+              allMonsters_ = other.allMonsters_;
               bitField0_ = (bitField0_ & ~0x00000020);
-              buildStructJobsBuilder_ = 
+              allMonstersBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getBuildStructJobsFieldBuilder() : null;
+                   getAllMonstersFieldBuilder() : null;
             } else {
-              buildStructJobsBuilder_.addAllMessages(other.buildStructJobs_);
+              allMonstersBuilder_.addAllMessages(other.allMonsters_);
             }
           }
         }
-        if (upgradeStructJobsBuilder_ == null) {
-          if (!other.upgradeStructJobs_.isEmpty()) {
-            if (upgradeStructJobs_.isEmpty()) {
-              upgradeStructJobs_ = other.upgradeStructJobs_;
+        if (slipBuilder_ == null) {
+          if (!other.slip_.isEmpty()) {
+            if (slip_.isEmpty()) {
+              slip_ = other.slip_;
               bitField0_ = (bitField0_ & ~0x00000040);
             } else {
-              ensureUpgradeStructJobsIsMutable();
-              upgradeStructJobs_.addAll(other.upgradeStructJobs_);
+              ensureSlipIsMutable();
+              slip_.addAll(other.slip_);
             }
             onChanged();
           }
         } else {
-          if (!other.upgradeStructJobs_.isEmpty()) {
-            if (upgradeStructJobsBuilder_.isEmpty()) {
-              upgradeStructJobsBuilder_.dispose();
-              upgradeStructJobsBuilder_ = null;
-              upgradeStructJobs_ = other.upgradeStructJobs_;
+          if (!other.slip_.isEmpty()) {
+            if (slipBuilder_.isEmpty()) {
+              slipBuilder_.dispose();
+              slipBuilder_ = null;
+              slip_ = other.slip_;
               bitField0_ = (bitField0_ & ~0x00000040);
-              upgradeStructJobsBuilder_ = 
+              slipBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getUpgradeStructJobsFieldBuilder() : null;
+                   getSlipFieldBuilder() : null;
             } else {
-              upgradeStructJobsBuilder_.addAllMessages(other.upgradeStructJobs_);
+              slipBuilder_.addAllMessages(other.slip_);
+            }
+          }
+        }
+        if (inProgressQuestsBuilder_ == null) {
+          if (!other.inProgressQuests_.isEmpty()) {
+            if (inProgressQuests_.isEmpty()) {
+              inProgressQuests_ = other.inProgressQuests_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+            } else {
+              ensureInProgressQuestsIsMutable();
+              inProgressQuests_.addAll(other.inProgressQuests_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.inProgressQuests_.isEmpty()) {
+            if (inProgressQuestsBuilder_.isEmpty()) {
+              inProgressQuestsBuilder_.dispose();
+              inProgressQuestsBuilder_ = null;
+              inProgressQuests_ = other.inProgressQuests_;
+              bitField0_ = (bitField0_ & ~0x00000080);
+              inProgressQuestsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getInProgressQuestsFieldBuilder() : null;
+            } else {
+              inProgressQuestsBuilder_.addAllMessages(other.inProgressQuests_);
+            }
+          }
+        }
+        if (unredeemedQuestsBuilder_ == null) {
+          if (!other.unredeemedQuests_.isEmpty()) {
+            if (unredeemedQuests_.isEmpty()) {
+              unredeemedQuests_ = other.unredeemedQuests_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+            } else {
+              ensureUnredeemedQuestsIsMutable();
+              unredeemedQuests_.addAll(other.unredeemedQuests_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.unredeemedQuests_.isEmpty()) {
+            if (unredeemedQuestsBuilder_.isEmpty()) {
+              unredeemedQuestsBuilder_.dispose();
+              unredeemedQuestsBuilder_ = null;
+              unredeemedQuests_ = other.unredeemedQuests_;
+              bitField0_ = (bitField0_ & ~0x00000100);
+              unredeemedQuestsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUnredeemedQuestsFieldBuilder() : null;
+            } else {
+              unredeemedQuestsBuilder_.addAllMessages(other.unredeemedQuests_);
+            }
+          }
+        }
+        if (availableQuestsBuilder_ == null) {
+          if (!other.availableQuests_.isEmpty()) {
+            if (availableQuests_.isEmpty()) {
+              availableQuests_ = other.availableQuests_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureAvailableQuestsIsMutable();
+              availableQuests_.addAll(other.availableQuests_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.availableQuests_.isEmpty()) {
+            if (availableQuestsBuilder_.isEmpty()) {
+              availableQuestsBuilder_.dispose();
+              availableQuestsBuilder_ = null;
+              availableQuests_ = other.availableQuests_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              availableQuestsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getAvailableQuestsFieldBuilder() : null;
+            } else {
+              availableQuestsBuilder_.addAllMessages(other.availableQuests_);
             }
           }
         }
@@ -2092,48 +1579,66 @@ public final class EventStaticDataProto {
               break;
             }
             case 18: {
-              com.lvl6.proto.StructureProto.FullStructureProto.Builder subBuilder = com.lvl6.proto.StructureProto.FullStructureProto.newBuilder();
+              com.lvl6.proto.CityProto.CityExpansionCostProto.Builder subBuilder = com.lvl6.proto.CityProto.CityExpansionCostProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addStructs(subBuilder.buildPartial());
+              addExpansionCosts(subBuilder.buildPartial());
               break;
             }
             case 26: {
-              com.lvl6.proto.TaskProto.FullTaskProto.Builder subBuilder = com.lvl6.proto.TaskProto.FullTaskProto.newBuilder();
+              com.lvl6.proto.CityProto.FullCityProto.Builder subBuilder = com.lvl6.proto.CityProto.FullCityProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addTasks(subBuilder.buildPartial());
+              addAllCities(subBuilder.buildPartial());
               break;
             }
             case 34: {
-              com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
+              com.lvl6.proto.StructureProto.FullStructureProto.Builder subBuilder = com.lvl6.proto.StructureProto.FullStructureProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addQuests(subBuilder.buildPartial());
+              addAllStructs(subBuilder.buildPartial());
               break;
             }
             case 42: {
-              com.lvl6.proto.CityProto.FullCityProto.Builder subBuilder = com.lvl6.proto.CityProto.FullCityProto.newBuilder();
+              com.lvl6.proto.TaskProto.FullTaskProto.Builder subBuilder = com.lvl6.proto.TaskProto.FullTaskProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addCities(subBuilder.buildPartial());
+              addAllTasks(subBuilder.buildPartial());
               break;
             }
             case 50: {
-              com.lvl6.proto.JobProto.BuildStructJobProto.Builder subBuilder = com.lvl6.proto.JobProto.BuildStructJobProto.newBuilder();
+              com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MonsterProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addBuildStructJobs(subBuilder.buildPartial());
+              addAllMonsters(subBuilder.buildPartial());
               break;
             }
             case 58: {
-              com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder subBuilder = com.lvl6.proto.JobProto.UpgradeStructJobProto.newBuilder();
+              com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder subBuilder = com.lvl6.proto.UserProto.StaticUserLevelInfoProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addUpgradeStructJobs(subBuilder.buildPartial());
+              addSlip(subBuilder.buildPartial());
               break;
             }
-            case 64: {
+            case 66: {
+              com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addInProgressQuests(subBuilder.buildPartial());
+              break;
+            }
+            case 74: {
+              com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addUnredeemedQuests(subBuilder.buildPartial());
+              break;
+            }
+            case 82: {
+              com.lvl6.proto.QuestProto.FullQuestProto.Builder subBuilder = com.lvl6.proto.QuestProto.FullQuestProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addAvailableQuests(subBuilder.buildPartial());
+              break;
+            }
+            case 88: {
               int rawValue = input.readEnum();
               com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus value = com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(8, rawValue);
+                unknownFields.mergeVarintField(11, rawValue);
               } else {
-                bitField0_ |= 0x00000080;
+                bitField0_ |= 0x00000400;
                 status_ = value;
               }
               break;
@@ -2234,1126 +1739,1684 @@ public final class EventStaticDataProto {
         return senderBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullStructureProto structs = 2;
-      private java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> structs_ =
+      // repeated .com.lvl6.proto.CityExpansionCostProto expansionCosts = 2;
+      private java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> expansionCosts_ =
         java.util.Collections.emptyList();
-      private void ensureStructsIsMutable() {
+      private void ensureExpansionCostsIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          structs_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.FullStructureProto>(structs_);
+          expansionCosts_ = new java.util.ArrayList<com.lvl6.proto.CityProto.CityExpansionCostProto>(expansionCosts_);
           bitField0_ |= 0x00000002;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> structsBuilder_;
+          com.lvl6.proto.CityProto.CityExpansionCostProto, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder, com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> expansionCostsBuilder_;
       
-      public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> getStructsList() {
-        if (structsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(structs_);
+      public java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto> getExpansionCostsList() {
+        if (expansionCostsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(expansionCosts_);
         } else {
-          return structsBuilder_.getMessageList();
+          return expansionCostsBuilder_.getMessageList();
         }
       }
-      public int getStructsCount() {
-        if (structsBuilder_ == null) {
-          return structs_.size();
+      public int getExpansionCostsCount() {
+        if (expansionCostsBuilder_ == null) {
+          return expansionCosts_.size();
         } else {
-          return structsBuilder_.getCount();
+          return expansionCostsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.StructureProto.FullStructureProto getStructs(int index) {
-        if (structsBuilder_ == null) {
-          return structs_.get(index);
+      public com.lvl6.proto.CityProto.CityExpansionCostProto getExpansionCosts(int index) {
+        if (expansionCostsBuilder_ == null) {
+          return expansionCosts_.get(index);
         } else {
-          return structsBuilder_.getMessage(index);
+          return expansionCostsBuilder_.getMessage(index);
         }
       }
-      public Builder setStructs(
-          int index, com.lvl6.proto.StructureProto.FullStructureProto value) {
-        if (structsBuilder_ == null) {
+      public Builder setExpansionCosts(
+          int index, com.lvl6.proto.CityProto.CityExpansionCostProto value) {
+        if (expansionCostsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureStructsIsMutable();
-          structs_.set(index, value);
+          ensureExpansionCostsIsMutable();
+          expansionCosts_.set(index, value);
           onChanged();
         } else {
-          structsBuilder_.setMessage(index, value);
+          expansionCostsBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setStructs(
-          int index, com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
-        if (structsBuilder_ == null) {
-          ensureStructsIsMutable();
-          structs_.set(index, builderForValue.build());
+      public Builder setExpansionCosts(
+          int index, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder builderForValue) {
+        if (expansionCostsBuilder_ == null) {
+          ensureExpansionCostsIsMutable();
+          expansionCosts_.set(index, builderForValue.build());
           onChanged();
         } else {
-          structsBuilder_.setMessage(index, builderForValue.build());
+          expansionCostsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addStructs(com.lvl6.proto.StructureProto.FullStructureProto value) {
-        if (structsBuilder_ == null) {
+      public Builder addExpansionCosts(com.lvl6.proto.CityProto.CityExpansionCostProto value) {
+        if (expansionCostsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureStructsIsMutable();
-          structs_.add(value);
+          ensureExpansionCostsIsMutable();
+          expansionCosts_.add(value);
           onChanged();
         } else {
-          structsBuilder_.addMessage(value);
+          expansionCostsBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addStructs(
-          int index, com.lvl6.proto.StructureProto.FullStructureProto value) {
-        if (structsBuilder_ == null) {
+      public Builder addExpansionCosts(
+          int index, com.lvl6.proto.CityProto.CityExpansionCostProto value) {
+        if (expansionCostsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureStructsIsMutable();
-          structs_.add(index, value);
+          ensureExpansionCostsIsMutable();
+          expansionCosts_.add(index, value);
           onChanged();
         } else {
-          structsBuilder_.addMessage(index, value);
+          expansionCostsBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addStructs(
-          com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
-        if (structsBuilder_ == null) {
-          ensureStructsIsMutable();
-          structs_.add(builderForValue.build());
+      public Builder addExpansionCosts(
+          com.lvl6.proto.CityProto.CityExpansionCostProto.Builder builderForValue) {
+        if (expansionCostsBuilder_ == null) {
+          ensureExpansionCostsIsMutable();
+          expansionCosts_.add(builderForValue.build());
           onChanged();
         } else {
-          structsBuilder_.addMessage(builderForValue.build());
+          expansionCostsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addStructs(
-          int index, com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
-        if (structsBuilder_ == null) {
-          ensureStructsIsMutable();
-          structs_.add(index, builderForValue.build());
+      public Builder addExpansionCosts(
+          int index, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder builderForValue) {
+        if (expansionCostsBuilder_ == null) {
+          ensureExpansionCostsIsMutable();
+          expansionCosts_.add(index, builderForValue.build());
           onChanged();
         } else {
-          structsBuilder_.addMessage(index, builderForValue.build());
+          expansionCostsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllStructs(
-          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.FullStructureProto> values) {
-        if (structsBuilder_ == null) {
-          ensureStructsIsMutable();
-          super.addAll(values, structs_);
+      public Builder addAllExpansionCosts(
+          java.lang.Iterable<? extends com.lvl6.proto.CityProto.CityExpansionCostProto> values) {
+        if (expansionCostsBuilder_ == null) {
+          ensureExpansionCostsIsMutable();
+          super.addAll(values, expansionCosts_);
           onChanged();
         } else {
-          structsBuilder_.addAllMessages(values);
+          expansionCostsBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearStructs() {
-        if (structsBuilder_ == null) {
-          structs_ = java.util.Collections.emptyList();
+      public Builder clearExpansionCosts() {
+        if (expansionCostsBuilder_ == null) {
+          expansionCosts_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
-          structsBuilder_.clear();
+          expansionCostsBuilder_.clear();
         }
         return this;
       }
-      public Builder removeStructs(int index) {
-        if (structsBuilder_ == null) {
-          ensureStructsIsMutable();
-          structs_.remove(index);
+      public Builder removeExpansionCosts(int index) {
+        if (expansionCostsBuilder_ == null) {
+          ensureExpansionCostsIsMutable();
+          expansionCosts_.remove(index);
           onChanged();
         } else {
-          structsBuilder_.remove(index);
+          expansionCostsBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.StructureProto.FullStructureProto.Builder getStructsBuilder(
+      public com.lvl6.proto.CityProto.CityExpansionCostProto.Builder getExpansionCostsBuilder(
           int index) {
-        return getStructsFieldBuilder().getBuilder(index);
+        return getExpansionCostsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getStructsOrBuilder(
+      public com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder getExpansionCostsOrBuilder(
           int index) {
-        if (structsBuilder_ == null) {
-          return structs_.get(index);  } else {
-          return structsBuilder_.getMessageOrBuilder(index);
+        if (expansionCostsBuilder_ == null) {
+          return expansionCosts_.get(index);  } else {
+          return expansionCostsBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
-           getStructsOrBuilderList() {
-        if (structsBuilder_ != null) {
-          return structsBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> 
+           getExpansionCostsOrBuilderList() {
+        if (expansionCostsBuilder_ != null) {
+          return expansionCostsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(structs_);
+          return java.util.Collections.unmodifiableList(expansionCosts_);
         }
       }
-      public com.lvl6.proto.StructureProto.FullStructureProto.Builder addStructsBuilder() {
-        return getStructsFieldBuilder().addBuilder(
-            com.lvl6.proto.StructureProto.FullStructureProto.getDefaultInstance());
+      public com.lvl6.proto.CityProto.CityExpansionCostProto.Builder addExpansionCostsBuilder() {
+        return getExpansionCostsFieldBuilder().addBuilder(
+            com.lvl6.proto.CityProto.CityExpansionCostProto.getDefaultInstance());
       }
-      public com.lvl6.proto.StructureProto.FullStructureProto.Builder addStructsBuilder(
+      public com.lvl6.proto.CityProto.CityExpansionCostProto.Builder addExpansionCostsBuilder(
           int index) {
-        return getStructsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.StructureProto.FullStructureProto.getDefaultInstance());
+        return getExpansionCostsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.CityProto.CityExpansionCostProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto.Builder> 
-           getStructsBuilderList() {
-        return getStructsFieldBuilder().getBuilderList();
+      public java.util.List<com.lvl6.proto.CityProto.CityExpansionCostProto.Builder> 
+           getExpansionCostsBuilderList() {
+        return getExpansionCostsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
-          getStructsFieldBuilder() {
-        if (structsBuilder_ == null) {
-          structsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder>(
-                  structs_,
+          com.lvl6.proto.CityProto.CityExpansionCostProto, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder, com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder> 
+          getExpansionCostsFieldBuilder() {
+        if (expansionCostsBuilder_ == null) {
+          expansionCostsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.CityProto.CityExpansionCostProto, com.lvl6.proto.CityProto.CityExpansionCostProto.Builder, com.lvl6.proto.CityProto.CityExpansionCostProtoOrBuilder>(
+                  expansionCosts_,
                   ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
-          structs_ = null;
+          expansionCosts_ = null;
         }
-        return structsBuilder_;
+        return expansionCostsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullTaskProto tasks = 3;
-      private java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> tasks_ =
+      // repeated .com.lvl6.proto.FullCityProto allCities = 3;
+      private java.util.List<com.lvl6.proto.CityProto.FullCityProto> allCities_ =
         java.util.Collections.emptyList();
-      private void ensureTasksIsMutable() {
+      private void ensureAllCitiesIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          tasks_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.FullTaskProto>(tasks_);
+          allCities_ = new java.util.ArrayList<com.lvl6.proto.CityProto.FullCityProto>(allCities_);
           bitField0_ |= 0x00000004;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.TaskProto.FullTaskProto, com.lvl6.proto.TaskProto.FullTaskProto.Builder, com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> tasksBuilder_;
+          com.lvl6.proto.CityProto.FullCityProto, com.lvl6.proto.CityProto.FullCityProto.Builder, com.lvl6.proto.CityProto.FullCityProtoOrBuilder> allCitiesBuilder_;
       
-      public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> getTasksList() {
-        if (tasksBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(tasks_);
+      public java.util.List<com.lvl6.proto.CityProto.FullCityProto> getAllCitiesList() {
+        if (allCitiesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(allCities_);
         } else {
-          return tasksBuilder_.getMessageList();
+          return allCitiesBuilder_.getMessageList();
         }
       }
-      public int getTasksCount() {
-        if (tasksBuilder_ == null) {
-          return tasks_.size();
+      public int getAllCitiesCount() {
+        if (allCitiesBuilder_ == null) {
+          return allCities_.size();
         } else {
-          return tasksBuilder_.getCount();
+          return allCitiesBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.TaskProto.FullTaskProto getTasks(int index) {
-        if (tasksBuilder_ == null) {
-          return tasks_.get(index);
+      public com.lvl6.proto.CityProto.FullCityProto getAllCities(int index) {
+        if (allCitiesBuilder_ == null) {
+          return allCities_.get(index);
         } else {
-          return tasksBuilder_.getMessage(index);
+          return allCitiesBuilder_.getMessage(index);
         }
       }
-      public Builder setTasks(
-          int index, com.lvl6.proto.TaskProto.FullTaskProto value) {
-        if (tasksBuilder_ == null) {
+      public Builder setAllCities(
+          int index, com.lvl6.proto.CityProto.FullCityProto value) {
+        if (allCitiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureTasksIsMutable();
-          tasks_.set(index, value);
+          ensureAllCitiesIsMutable();
+          allCities_.set(index, value);
           onChanged();
         } else {
-          tasksBuilder_.setMessage(index, value);
+          allCitiesBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setTasks(
-          int index, com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
-        if (tasksBuilder_ == null) {
-          ensureTasksIsMutable();
-          tasks_.set(index, builderForValue.build());
+      public Builder setAllCities(
+          int index, com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
+        if (allCitiesBuilder_ == null) {
+          ensureAllCitiesIsMutable();
+          allCities_.set(index, builderForValue.build());
           onChanged();
         } else {
-          tasksBuilder_.setMessage(index, builderForValue.build());
+          allCitiesBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addTasks(com.lvl6.proto.TaskProto.FullTaskProto value) {
-        if (tasksBuilder_ == null) {
+      public Builder addAllCities(com.lvl6.proto.CityProto.FullCityProto value) {
+        if (allCitiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureTasksIsMutable();
-          tasks_.add(value);
+          ensureAllCitiesIsMutable();
+          allCities_.add(value);
           onChanged();
         } else {
-          tasksBuilder_.addMessage(value);
+          allCitiesBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addTasks(
-          int index, com.lvl6.proto.TaskProto.FullTaskProto value) {
-        if (tasksBuilder_ == null) {
+      public Builder addAllCities(
+          int index, com.lvl6.proto.CityProto.FullCityProto value) {
+        if (allCitiesBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureTasksIsMutable();
-          tasks_.add(index, value);
+          ensureAllCitiesIsMutable();
+          allCities_.add(index, value);
           onChanged();
         } else {
-          tasksBuilder_.addMessage(index, value);
+          allCitiesBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addTasks(
-          com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
-        if (tasksBuilder_ == null) {
-          ensureTasksIsMutable();
-          tasks_.add(builderForValue.build());
+      public Builder addAllCities(
+          com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
+        if (allCitiesBuilder_ == null) {
+          ensureAllCitiesIsMutable();
+          allCities_.add(builderForValue.build());
           onChanged();
         } else {
-          tasksBuilder_.addMessage(builderForValue.build());
+          allCitiesBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addTasks(
-          int index, com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
-        if (tasksBuilder_ == null) {
-          ensureTasksIsMutable();
-          tasks_.add(index, builderForValue.build());
+      public Builder addAllCities(
+          int index, com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
+        if (allCitiesBuilder_ == null) {
+          ensureAllCitiesIsMutable();
+          allCities_.add(index, builderForValue.build());
           onChanged();
         } else {
-          tasksBuilder_.addMessage(index, builderForValue.build());
+          allCitiesBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllTasks(
-          java.lang.Iterable<? extends com.lvl6.proto.TaskProto.FullTaskProto> values) {
-        if (tasksBuilder_ == null) {
-          ensureTasksIsMutable();
-          super.addAll(values, tasks_);
+      public Builder addAllAllCities(
+          java.lang.Iterable<? extends com.lvl6.proto.CityProto.FullCityProto> values) {
+        if (allCitiesBuilder_ == null) {
+          ensureAllCitiesIsMutable();
+          super.addAll(values, allCities_);
           onChanged();
         } else {
-          tasksBuilder_.addAllMessages(values);
+          allCitiesBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearTasks() {
-        if (tasksBuilder_ == null) {
-          tasks_ = java.util.Collections.emptyList();
+      public Builder clearAllCities() {
+        if (allCitiesBuilder_ == null) {
+          allCities_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
-          tasksBuilder_.clear();
+          allCitiesBuilder_.clear();
         }
         return this;
       }
-      public Builder removeTasks(int index) {
-        if (tasksBuilder_ == null) {
-          ensureTasksIsMutable();
-          tasks_.remove(index);
+      public Builder removeAllCities(int index) {
+        if (allCitiesBuilder_ == null) {
+          ensureAllCitiesIsMutable();
+          allCities_.remove(index);
           onChanged();
         } else {
-          tasksBuilder_.remove(index);
+          allCitiesBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.TaskProto.FullTaskProto.Builder getTasksBuilder(
+      public com.lvl6.proto.CityProto.FullCityProto.Builder getAllCitiesBuilder(
           int index) {
-        return getTasksFieldBuilder().getBuilder(index);
+        return getAllCitiesFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getTasksOrBuilder(
+      public com.lvl6.proto.CityProto.FullCityProtoOrBuilder getAllCitiesOrBuilder(
           int index) {
-        if (tasksBuilder_ == null) {
-          return tasks_.get(index);  } else {
-          return tasksBuilder_.getMessageOrBuilder(index);
+        if (allCitiesBuilder_ == null) {
+          return allCities_.get(index);  } else {
+          return allCitiesBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
-           getTasksOrBuilderList() {
-        if (tasksBuilder_ != null) {
-          return tasksBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
+           getAllCitiesOrBuilderList() {
+        if (allCitiesBuilder_ != null) {
+          return allCitiesBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(tasks_);
+          return java.util.Collections.unmodifiableList(allCities_);
         }
       }
-      public com.lvl6.proto.TaskProto.FullTaskProto.Builder addTasksBuilder() {
-        return getTasksFieldBuilder().addBuilder(
-            com.lvl6.proto.TaskProto.FullTaskProto.getDefaultInstance());
+      public com.lvl6.proto.CityProto.FullCityProto.Builder addAllCitiesBuilder() {
+        return getAllCitiesFieldBuilder().addBuilder(
+            com.lvl6.proto.CityProto.FullCityProto.getDefaultInstance());
       }
-      public com.lvl6.proto.TaskProto.FullTaskProto.Builder addTasksBuilder(
+      public com.lvl6.proto.CityProto.FullCityProto.Builder addAllCitiesBuilder(
           int index) {
-        return getTasksFieldBuilder().addBuilder(
-            index, com.lvl6.proto.TaskProto.FullTaskProto.getDefaultInstance());
+        return getAllCitiesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.CityProto.FullCityProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto.Builder> 
-           getTasksBuilderList() {
-        return getTasksFieldBuilder().getBuilderList();
+      public java.util.List<com.lvl6.proto.CityProto.FullCityProto.Builder> 
+           getAllCitiesBuilderList() {
+        return getAllCitiesFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.TaskProto.FullTaskProto, com.lvl6.proto.TaskProto.FullTaskProto.Builder, com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
-          getTasksFieldBuilder() {
-        if (tasksBuilder_ == null) {
-          tasksBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.TaskProto.FullTaskProto, com.lvl6.proto.TaskProto.FullTaskProto.Builder, com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder>(
-                  tasks_,
+          com.lvl6.proto.CityProto.FullCityProto, com.lvl6.proto.CityProto.FullCityProto.Builder, com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
+          getAllCitiesFieldBuilder() {
+        if (allCitiesBuilder_ == null) {
+          allCitiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.CityProto.FullCityProto, com.lvl6.proto.CityProto.FullCityProto.Builder, com.lvl6.proto.CityProto.FullCityProtoOrBuilder>(
+                  allCities_,
                   ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
-          tasks_ = null;
+          allCities_ = null;
         }
-        return tasksBuilder_;
+        return allCitiesBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullQuestProto quests = 4;
-      private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> quests_ =
+      // repeated .com.lvl6.proto.FullStructureProto allStructs = 4;
+      private java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> allStructs_ =
         java.util.Collections.emptyList();
-      private void ensureQuestsIsMutable() {
+      private void ensureAllStructsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          quests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>(quests_);
+          allStructs_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.FullStructureProto>(allStructs_);
           bitField0_ |= 0x00000008;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> questsBuilder_;
+          com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> allStructsBuilder_;
       
-      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getQuestsList() {
-        if (questsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(quests_);
+      public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> getAllStructsList() {
+        if (allStructsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(allStructs_);
         } else {
-          return questsBuilder_.getMessageList();
+          return allStructsBuilder_.getMessageList();
         }
       }
-      public int getQuestsCount() {
-        if (questsBuilder_ == null) {
-          return quests_.size();
+      public int getAllStructsCount() {
+        if (allStructsBuilder_ == null) {
+          return allStructs_.size();
         } else {
-          return questsBuilder_.getCount();
+          return allStructsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto getQuests(int index) {
-        if (questsBuilder_ == null) {
-          return quests_.get(index);
+      public com.lvl6.proto.StructureProto.FullStructureProto getAllStructs(int index) {
+        if (allStructsBuilder_ == null) {
+          return allStructs_.get(index);
         } else {
-          return questsBuilder_.getMessage(index);
+          return allStructsBuilder_.getMessage(index);
         }
       }
-      public Builder setQuests(
-          int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (questsBuilder_ == null) {
+      public Builder setAllStructs(
+          int index, com.lvl6.proto.StructureProto.FullStructureProto value) {
+        if (allStructsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureQuestsIsMutable();
-          quests_.set(index, value);
+          ensureAllStructsIsMutable();
+          allStructs_.set(index, value);
           onChanged();
         } else {
-          questsBuilder_.setMessage(index, value);
+          allStructsBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setQuests(
-          int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (questsBuilder_ == null) {
-          ensureQuestsIsMutable();
-          quests_.set(index, builderForValue.build());
+      public Builder setAllStructs(
+          int index, com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
+        if (allStructsBuilder_ == null) {
+          ensureAllStructsIsMutable();
+          allStructs_.set(index, builderForValue.build());
           onChanged();
         } else {
-          questsBuilder_.setMessage(index, builderForValue.build());
+          allStructsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (questsBuilder_ == null) {
+      public Builder addAllStructs(com.lvl6.proto.StructureProto.FullStructureProto value) {
+        if (allStructsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureQuestsIsMutable();
-          quests_.add(value);
+          ensureAllStructsIsMutable();
+          allStructs_.add(value);
           onChanged();
         } else {
-          questsBuilder_.addMessage(value);
+          allStructsBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addQuests(
-          int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
-        if (questsBuilder_ == null) {
+      public Builder addAllStructs(
+          int index, com.lvl6.proto.StructureProto.FullStructureProto value) {
+        if (allStructsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureQuestsIsMutable();
-          quests_.add(index, value);
+          ensureAllStructsIsMutable();
+          allStructs_.add(index, value);
           onChanged();
         } else {
-          questsBuilder_.addMessage(index, value);
+          allStructsBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addQuests(
-          com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (questsBuilder_ == null) {
-          ensureQuestsIsMutable();
-          quests_.add(builderForValue.build());
+      public Builder addAllStructs(
+          com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
+        if (allStructsBuilder_ == null) {
+          ensureAllStructsIsMutable();
+          allStructs_.add(builderForValue.build());
           onChanged();
         } else {
-          questsBuilder_.addMessage(builderForValue.build());
+          allStructsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addQuests(
-          int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
-        if (questsBuilder_ == null) {
-          ensureQuestsIsMutable();
-          quests_.add(index, builderForValue.build());
+      public Builder addAllStructs(
+          int index, com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
+        if (allStructsBuilder_ == null) {
+          ensureAllStructsIsMutable();
+          allStructs_.add(index, builderForValue.build());
           onChanged();
         } else {
-          questsBuilder_.addMessage(index, builderForValue.build());
+          allStructsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllQuests(
-          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
-        if (questsBuilder_ == null) {
-          ensureQuestsIsMutable();
-          super.addAll(values, quests_);
+      public Builder addAllAllStructs(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.FullStructureProto> values) {
+        if (allStructsBuilder_ == null) {
+          ensureAllStructsIsMutable();
+          super.addAll(values, allStructs_);
           onChanged();
         } else {
-          questsBuilder_.addAllMessages(values);
+          allStructsBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearQuests() {
-        if (questsBuilder_ == null) {
-          quests_ = java.util.Collections.emptyList();
+      public Builder clearAllStructs() {
+        if (allStructsBuilder_ == null) {
+          allStructs_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
-          questsBuilder_.clear();
+          allStructsBuilder_.clear();
         }
         return this;
       }
-      public Builder removeQuests(int index) {
-        if (questsBuilder_ == null) {
-          ensureQuestsIsMutable();
-          quests_.remove(index);
+      public Builder removeAllStructs(int index) {
+        if (allStructsBuilder_ == null) {
+          ensureAllStructsIsMutable();
+          allStructs_.remove(index);
           onChanged();
         } else {
-          questsBuilder_.remove(index);
+          allStructsBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder getQuestsBuilder(
+      public com.lvl6.proto.StructureProto.FullStructureProto.Builder getAllStructsBuilder(
           int index) {
-        return getQuestsFieldBuilder().getBuilder(index);
+        return getAllStructsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getQuestsOrBuilder(
+      public com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getAllStructsOrBuilder(
           int index) {
-        if (questsBuilder_ == null) {
-          return quests_.get(index);  } else {
-          return questsBuilder_.getMessageOrBuilder(index);
+        if (allStructsBuilder_ == null) {
+          return allStructs_.get(index);  } else {
+          return allStructsBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-           getQuestsOrBuilderList() {
-        if (questsBuilder_ != null) {
-          return questsBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
+           getAllStructsOrBuilderList() {
+        if (allStructsBuilder_ != null) {
+          return allStructsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(quests_);
+          return java.util.Collections.unmodifiableList(allStructs_);
         }
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addQuestsBuilder() {
-        return getQuestsFieldBuilder().addBuilder(
-            com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
+      public com.lvl6.proto.StructureProto.FullStructureProto.Builder addAllStructsBuilder() {
+        return getAllStructsFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.FullStructureProto.getDefaultInstance());
       }
-      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addQuestsBuilder(
+      public com.lvl6.proto.StructureProto.FullStructureProto.Builder addAllStructsBuilder(
           int index) {
-        return getQuestsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
+        return getAllStructsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.FullStructureProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
-           getQuestsBuilderList() {
-        return getQuestsFieldBuilder().getBuilderList();
+      public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto.Builder> 
+           getAllStructsBuilderList() {
+        return getAllStructsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
-          getQuestsFieldBuilder() {
-        if (questsBuilder_ == null) {
-          questsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder>(
-                  quests_,
+          com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
+          getAllStructsFieldBuilder() {
+        if (allStructsBuilder_ == null) {
+          allStructsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder>(
+                  allStructs_,
                   ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
-          quests_ = null;
+          allStructs_ = null;
         }
-        return questsBuilder_;
+        return allStructsBuilder_;
       }
       
-      // repeated .com.lvl6.proto.FullCityProto cities = 5;
-      private java.util.List<com.lvl6.proto.CityProto.FullCityProto> cities_ =
+      // repeated .com.lvl6.proto.FullTaskProto allTasks = 5;
+      private java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> allTasks_ =
         java.util.Collections.emptyList();
-      private void ensureCitiesIsMutable() {
+      private void ensureAllTasksIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          cities_ = new java.util.ArrayList<com.lvl6.proto.CityProto.FullCityProto>(cities_);
+          allTasks_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.FullTaskProto>(allTasks_);
           bitField0_ |= 0x00000010;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.CityProto.FullCityProto, com.lvl6.proto.CityProto.FullCityProto.Builder, com.lvl6.proto.CityProto.FullCityProtoOrBuilder> citiesBuilder_;
+          com.lvl6.proto.TaskProto.FullTaskProto, com.lvl6.proto.TaskProto.FullTaskProto.Builder, com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> allTasksBuilder_;
       
-      public java.util.List<com.lvl6.proto.CityProto.FullCityProto> getCitiesList() {
-        if (citiesBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(cities_);
+      public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto> getAllTasksList() {
+        if (allTasksBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(allTasks_);
         } else {
-          return citiesBuilder_.getMessageList();
+          return allTasksBuilder_.getMessageList();
         }
       }
-      public int getCitiesCount() {
-        if (citiesBuilder_ == null) {
-          return cities_.size();
+      public int getAllTasksCount() {
+        if (allTasksBuilder_ == null) {
+          return allTasks_.size();
         } else {
-          return citiesBuilder_.getCount();
+          return allTasksBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.CityProto.FullCityProto getCities(int index) {
-        if (citiesBuilder_ == null) {
-          return cities_.get(index);
+      public com.lvl6.proto.TaskProto.FullTaskProto getAllTasks(int index) {
+        if (allTasksBuilder_ == null) {
+          return allTasks_.get(index);
         } else {
-          return citiesBuilder_.getMessage(index);
+          return allTasksBuilder_.getMessage(index);
         }
       }
-      public Builder setCities(
-          int index, com.lvl6.proto.CityProto.FullCityProto value) {
-        if (citiesBuilder_ == null) {
+      public Builder setAllTasks(
+          int index, com.lvl6.proto.TaskProto.FullTaskProto value) {
+        if (allTasksBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureCitiesIsMutable();
-          cities_.set(index, value);
+          ensureAllTasksIsMutable();
+          allTasks_.set(index, value);
           onChanged();
         } else {
-          citiesBuilder_.setMessage(index, value);
+          allTasksBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setCities(
-          int index, com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
-        if (citiesBuilder_ == null) {
-          ensureCitiesIsMutable();
-          cities_.set(index, builderForValue.build());
+      public Builder setAllTasks(
+          int index, com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
+        if (allTasksBuilder_ == null) {
+          ensureAllTasksIsMutable();
+          allTasks_.set(index, builderForValue.build());
           onChanged();
         } else {
-          citiesBuilder_.setMessage(index, builderForValue.build());
+          allTasksBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addCities(com.lvl6.proto.CityProto.FullCityProto value) {
-        if (citiesBuilder_ == null) {
+      public Builder addAllTasks(com.lvl6.proto.TaskProto.FullTaskProto value) {
+        if (allTasksBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureCitiesIsMutable();
-          cities_.add(value);
+          ensureAllTasksIsMutable();
+          allTasks_.add(value);
           onChanged();
         } else {
-          citiesBuilder_.addMessage(value);
+          allTasksBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addCities(
-          int index, com.lvl6.proto.CityProto.FullCityProto value) {
-        if (citiesBuilder_ == null) {
+      public Builder addAllTasks(
+          int index, com.lvl6.proto.TaskProto.FullTaskProto value) {
+        if (allTasksBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureCitiesIsMutable();
-          cities_.add(index, value);
+          ensureAllTasksIsMutable();
+          allTasks_.add(index, value);
           onChanged();
         } else {
-          citiesBuilder_.addMessage(index, value);
+          allTasksBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addCities(
-          com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
-        if (citiesBuilder_ == null) {
-          ensureCitiesIsMutable();
-          cities_.add(builderForValue.build());
+      public Builder addAllTasks(
+          com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
+        if (allTasksBuilder_ == null) {
+          ensureAllTasksIsMutable();
+          allTasks_.add(builderForValue.build());
           onChanged();
         } else {
-          citiesBuilder_.addMessage(builderForValue.build());
+          allTasksBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addCities(
-          int index, com.lvl6.proto.CityProto.FullCityProto.Builder builderForValue) {
-        if (citiesBuilder_ == null) {
-          ensureCitiesIsMutable();
-          cities_.add(index, builderForValue.build());
+      public Builder addAllTasks(
+          int index, com.lvl6.proto.TaskProto.FullTaskProto.Builder builderForValue) {
+        if (allTasksBuilder_ == null) {
+          ensureAllTasksIsMutable();
+          allTasks_.add(index, builderForValue.build());
           onChanged();
         } else {
-          citiesBuilder_.addMessage(index, builderForValue.build());
+          allTasksBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllCities(
-          java.lang.Iterable<? extends com.lvl6.proto.CityProto.FullCityProto> values) {
-        if (citiesBuilder_ == null) {
-          ensureCitiesIsMutable();
-          super.addAll(values, cities_);
+      public Builder addAllAllTasks(
+          java.lang.Iterable<? extends com.lvl6.proto.TaskProto.FullTaskProto> values) {
+        if (allTasksBuilder_ == null) {
+          ensureAllTasksIsMutable();
+          super.addAll(values, allTasks_);
           onChanged();
         } else {
-          citiesBuilder_.addAllMessages(values);
+          allTasksBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearCities() {
-        if (citiesBuilder_ == null) {
-          cities_ = java.util.Collections.emptyList();
+      public Builder clearAllTasks() {
+        if (allTasksBuilder_ == null) {
+          allTasks_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
-          citiesBuilder_.clear();
+          allTasksBuilder_.clear();
         }
         return this;
       }
-      public Builder removeCities(int index) {
-        if (citiesBuilder_ == null) {
-          ensureCitiesIsMutable();
-          cities_.remove(index);
+      public Builder removeAllTasks(int index) {
+        if (allTasksBuilder_ == null) {
+          ensureAllTasksIsMutable();
+          allTasks_.remove(index);
           onChanged();
         } else {
-          citiesBuilder_.remove(index);
+          allTasksBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.CityProto.FullCityProto.Builder getCitiesBuilder(
+      public com.lvl6.proto.TaskProto.FullTaskProto.Builder getAllTasksBuilder(
           int index) {
-        return getCitiesFieldBuilder().getBuilder(index);
+        return getAllTasksFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.CityProto.FullCityProtoOrBuilder getCitiesOrBuilder(
+      public com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder getAllTasksOrBuilder(
           int index) {
-        if (citiesBuilder_ == null) {
-          return cities_.get(index);  } else {
-          return citiesBuilder_.getMessageOrBuilder(index);
+        if (allTasksBuilder_ == null) {
+          return allTasks_.get(index);  } else {
+          return allTasksBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
-           getCitiesOrBuilderList() {
-        if (citiesBuilder_ != null) {
-          return citiesBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
+           getAllTasksOrBuilderList() {
+        if (allTasksBuilder_ != null) {
+          return allTasksBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(cities_);
+          return java.util.Collections.unmodifiableList(allTasks_);
         }
       }
-      public com.lvl6.proto.CityProto.FullCityProto.Builder addCitiesBuilder() {
-        return getCitiesFieldBuilder().addBuilder(
-            com.lvl6.proto.CityProto.FullCityProto.getDefaultInstance());
+      public com.lvl6.proto.TaskProto.FullTaskProto.Builder addAllTasksBuilder() {
+        return getAllTasksFieldBuilder().addBuilder(
+            com.lvl6.proto.TaskProto.FullTaskProto.getDefaultInstance());
       }
-      public com.lvl6.proto.CityProto.FullCityProto.Builder addCitiesBuilder(
+      public com.lvl6.proto.TaskProto.FullTaskProto.Builder addAllTasksBuilder(
           int index) {
-        return getCitiesFieldBuilder().addBuilder(
-            index, com.lvl6.proto.CityProto.FullCityProto.getDefaultInstance());
+        return getAllTasksFieldBuilder().addBuilder(
+            index, com.lvl6.proto.TaskProto.FullTaskProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.CityProto.FullCityProto.Builder> 
-           getCitiesBuilderList() {
-        return getCitiesFieldBuilder().getBuilderList();
+      public java.util.List<com.lvl6.proto.TaskProto.FullTaskProto.Builder> 
+           getAllTasksBuilderList() {
+        return getAllTasksFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.CityProto.FullCityProto, com.lvl6.proto.CityProto.FullCityProto.Builder, com.lvl6.proto.CityProto.FullCityProtoOrBuilder> 
-          getCitiesFieldBuilder() {
-        if (citiesBuilder_ == null) {
-          citiesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.CityProto.FullCityProto, com.lvl6.proto.CityProto.FullCityProto.Builder, com.lvl6.proto.CityProto.FullCityProtoOrBuilder>(
-                  cities_,
+          com.lvl6.proto.TaskProto.FullTaskProto, com.lvl6.proto.TaskProto.FullTaskProto.Builder, com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder> 
+          getAllTasksFieldBuilder() {
+        if (allTasksBuilder_ == null) {
+          allTasksBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.TaskProto.FullTaskProto, com.lvl6.proto.TaskProto.FullTaskProto.Builder, com.lvl6.proto.TaskProto.FullTaskProtoOrBuilder>(
+                  allTasks_,
                   ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
-          cities_ = null;
+          allTasks_ = null;
         }
-        return citiesBuilder_;
+        return allTasksBuilder_;
       }
       
-      // repeated .com.lvl6.proto.BuildStructJobProto buildStructJobs = 6;
-      private java.util.List<com.lvl6.proto.JobProto.BuildStructJobProto> buildStructJobs_ =
+      // repeated .com.lvl6.proto.MonsterProto allMonsters = 6;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> allMonsters_ =
         java.util.Collections.emptyList();
-      private void ensureBuildStructJobsIsMutable() {
+      private void ensureAllMonstersIsMutable() {
         if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          buildStructJobs_ = new java.util.ArrayList<com.lvl6.proto.JobProto.BuildStructJobProto>(buildStructJobs_);
+          allMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterProto>(allMonsters_);
           bitField0_ |= 0x00000020;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.JobProto.BuildStructJobProto, com.lvl6.proto.JobProto.BuildStructJobProto.Builder, com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder> buildStructJobsBuilder_;
+          com.lvl6.proto.MonsterStuffProto.MonsterProto, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> allMonstersBuilder_;
       
-      public java.util.List<com.lvl6.proto.JobProto.BuildStructJobProto> getBuildStructJobsList() {
-        if (buildStructJobsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(buildStructJobs_);
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto> getAllMonstersList() {
+        if (allMonstersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(allMonsters_);
         } else {
-          return buildStructJobsBuilder_.getMessageList();
+          return allMonstersBuilder_.getMessageList();
         }
       }
-      public int getBuildStructJobsCount() {
-        if (buildStructJobsBuilder_ == null) {
-          return buildStructJobs_.size();
+      public int getAllMonstersCount() {
+        if (allMonstersBuilder_ == null) {
+          return allMonsters_.size();
         } else {
-          return buildStructJobsBuilder_.getCount();
+          return allMonstersBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.JobProto.BuildStructJobProto getBuildStructJobs(int index) {
-        if (buildStructJobsBuilder_ == null) {
-          return buildStructJobs_.get(index);
+      public com.lvl6.proto.MonsterStuffProto.MonsterProto getAllMonsters(int index) {
+        if (allMonstersBuilder_ == null) {
+          return allMonsters_.get(index);
         } else {
-          return buildStructJobsBuilder_.getMessage(index);
+          return allMonstersBuilder_.getMessage(index);
         }
       }
-      public Builder setBuildStructJobs(
-          int index, com.lvl6.proto.JobProto.BuildStructJobProto value) {
-        if (buildStructJobsBuilder_ == null) {
+      public Builder setAllMonsters(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterProto value) {
+        if (allMonstersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBuildStructJobsIsMutable();
-          buildStructJobs_.set(index, value);
+          ensureAllMonstersIsMutable();
+          allMonsters_.set(index, value);
           onChanged();
         } else {
-          buildStructJobsBuilder_.setMessage(index, value);
+          allMonstersBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setBuildStructJobs(
-          int index, com.lvl6.proto.JobProto.BuildStructJobProto.Builder builderForValue) {
-        if (buildStructJobsBuilder_ == null) {
-          ensureBuildStructJobsIsMutable();
-          buildStructJobs_.set(index, builderForValue.build());
+      public Builder setAllMonsters(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder builderForValue) {
+        if (allMonstersBuilder_ == null) {
+          ensureAllMonstersIsMutable();
+          allMonsters_.set(index, builderForValue.build());
           onChanged();
         } else {
-          buildStructJobsBuilder_.setMessage(index, builderForValue.build());
+          allMonstersBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addBuildStructJobs(com.lvl6.proto.JobProto.BuildStructJobProto value) {
-        if (buildStructJobsBuilder_ == null) {
+      public Builder addAllMonsters(com.lvl6.proto.MonsterStuffProto.MonsterProto value) {
+        if (allMonstersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBuildStructJobsIsMutable();
-          buildStructJobs_.add(value);
+          ensureAllMonstersIsMutable();
+          allMonsters_.add(value);
           onChanged();
         } else {
-          buildStructJobsBuilder_.addMessage(value);
+          allMonstersBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addBuildStructJobs(
-          int index, com.lvl6.proto.JobProto.BuildStructJobProto value) {
-        if (buildStructJobsBuilder_ == null) {
+      public Builder addAllMonsters(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterProto value) {
+        if (allMonstersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBuildStructJobsIsMutable();
-          buildStructJobs_.add(index, value);
+          ensureAllMonstersIsMutable();
+          allMonsters_.add(index, value);
           onChanged();
         } else {
-          buildStructJobsBuilder_.addMessage(index, value);
+          allMonstersBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addBuildStructJobs(
-          com.lvl6.proto.JobProto.BuildStructJobProto.Builder builderForValue) {
-        if (buildStructJobsBuilder_ == null) {
-          ensureBuildStructJobsIsMutable();
-          buildStructJobs_.add(builderForValue.build());
+      public Builder addAllMonsters(
+          com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder builderForValue) {
+        if (allMonstersBuilder_ == null) {
+          ensureAllMonstersIsMutable();
+          allMonsters_.add(builderForValue.build());
           onChanged();
         } else {
-          buildStructJobsBuilder_.addMessage(builderForValue.build());
+          allMonstersBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addBuildStructJobs(
-          int index, com.lvl6.proto.JobProto.BuildStructJobProto.Builder builderForValue) {
-        if (buildStructJobsBuilder_ == null) {
-          ensureBuildStructJobsIsMutable();
-          buildStructJobs_.add(index, builderForValue.build());
+      public Builder addAllMonsters(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder builderForValue) {
+        if (allMonstersBuilder_ == null) {
+          ensureAllMonstersIsMutable();
+          allMonsters_.add(index, builderForValue.build());
           onChanged();
         } else {
-          buildStructJobsBuilder_.addMessage(index, builderForValue.build());
+          allMonstersBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllBuildStructJobs(
-          java.lang.Iterable<? extends com.lvl6.proto.JobProto.BuildStructJobProto> values) {
-        if (buildStructJobsBuilder_ == null) {
-          ensureBuildStructJobsIsMutable();
-          super.addAll(values, buildStructJobs_);
+      public Builder addAllAllMonsters(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.MonsterProto> values) {
+        if (allMonstersBuilder_ == null) {
+          ensureAllMonstersIsMutable();
+          super.addAll(values, allMonsters_);
           onChanged();
         } else {
-          buildStructJobsBuilder_.addAllMessages(values);
+          allMonstersBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearBuildStructJobs() {
-        if (buildStructJobsBuilder_ == null) {
-          buildStructJobs_ = java.util.Collections.emptyList();
+      public Builder clearAllMonsters() {
+        if (allMonstersBuilder_ == null) {
+          allMonsters_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
-          buildStructJobsBuilder_.clear();
+          allMonstersBuilder_.clear();
         }
         return this;
       }
-      public Builder removeBuildStructJobs(int index) {
-        if (buildStructJobsBuilder_ == null) {
-          ensureBuildStructJobsIsMutable();
-          buildStructJobs_.remove(index);
+      public Builder removeAllMonsters(int index) {
+        if (allMonstersBuilder_ == null) {
+          ensureAllMonstersIsMutable();
+          allMonsters_.remove(index);
           onChanged();
         } else {
-          buildStructJobsBuilder_.remove(index);
+          allMonstersBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.JobProto.BuildStructJobProto.Builder getBuildStructJobsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder getAllMonstersBuilder(
           int index) {
-        return getBuildStructJobsFieldBuilder().getBuilder(index);
+        return getAllMonstersFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder getBuildStructJobsOrBuilder(
+      public com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder getAllMonstersOrBuilder(
           int index) {
-        if (buildStructJobsBuilder_ == null) {
-          return buildStructJobs_.get(index);  } else {
-          return buildStructJobsBuilder_.getMessageOrBuilder(index);
+        if (allMonstersBuilder_ == null) {
+          return allMonsters_.get(index);  } else {
+          return allMonstersBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder> 
-           getBuildStructJobsOrBuilderList() {
-        if (buildStructJobsBuilder_ != null) {
-          return buildStructJobsBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> 
+           getAllMonstersOrBuilderList() {
+        if (allMonstersBuilder_ != null) {
+          return allMonstersBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(buildStructJobs_);
+          return java.util.Collections.unmodifiableList(allMonsters_);
         }
       }
-      public com.lvl6.proto.JobProto.BuildStructJobProto.Builder addBuildStructJobsBuilder() {
-        return getBuildStructJobsFieldBuilder().addBuilder(
-            com.lvl6.proto.JobProto.BuildStructJobProto.getDefaultInstance());
+      public com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder addAllMonstersBuilder() {
+        return getAllMonstersFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.MonsterProto.getDefaultInstance());
       }
-      public com.lvl6.proto.JobProto.BuildStructJobProto.Builder addBuildStructJobsBuilder(
+      public com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder addAllMonstersBuilder(
           int index) {
-        return getBuildStructJobsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.JobProto.BuildStructJobProto.getDefaultInstance());
+        return getAllMonstersFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.MonsterProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.JobProto.BuildStructJobProto.Builder> 
-           getBuildStructJobsBuilderList() {
-        return getBuildStructJobsFieldBuilder().getBuilderList();
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder> 
+           getAllMonstersBuilderList() {
+        return getAllMonstersFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.JobProto.BuildStructJobProto, com.lvl6.proto.JobProto.BuildStructJobProto.Builder, com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder> 
-          getBuildStructJobsFieldBuilder() {
-        if (buildStructJobsBuilder_ == null) {
-          buildStructJobsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.JobProto.BuildStructJobProto, com.lvl6.proto.JobProto.BuildStructJobProto.Builder, com.lvl6.proto.JobProto.BuildStructJobProtoOrBuilder>(
-                  buildStructJobs_,
+          com.lvl6.proto.MonsterStuffProto.MonsterProto, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder> 
+          getAllMonstersFieldBuilder() {
+        if (allMonstersBuilder_ == null) {
+          allMonstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.MonsterProto, com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterProtoOrBuilder>(
+                  allMonsters_,
                   ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
-          buildStructJobs_ = null;
+          allMonsters_ = null;
         }
-        return buildStructJobsBuilder_;
+        return allMonstersBuilder_;
       }
       
-      // repeated .com.lvl6.proto.UpgradeStructJobProto upgradeStructJobs = 7;
-      private java.util.List<com.lvl6.proto.JobProto.UpgradeStructJobProto> upgradeStructJobs_ =
+      // repeated .com.lvl6.proto.StaticUserLevelInfoProto slip = 7;
+      private java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> slip_ =
         java.util.Collections.emptyList();
-      private void ensureUpgradeStructJobsIsMutable() {
+      private void ensureSlipIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          upgradeStructJobs_ = new java.util.ArrayList<com.lvl6.proto.JobProto.UpgradeStructJobProto>(upgradeStructJobs_);
+          slip_ = new java.util.ArrayList<com.lvl6.proto.UserProto.StaticUserLevelInfoProto>(slip_);
           bitField0_ |= 0x00000040;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.JobProto.UpgradeStructJobProto, com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder, com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder> upgradeStructJobsBuilder_;
+          com.lvl6.proto.UserProto.StaticUserLevelInfoProto, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder, com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> slipBuilder_;
       
-      public java.util.List<com.lvl6.proto.JobProto.UpgradeStructJobProto> getUpgradeStructJobsList() {
-        if (upgradeStructJobsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(upgradeStructJobs_);
+      public java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto> getSlipList() {
+        if (slipBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(slip_);
         } else {
-          return upgradeStructJobsBuilder_.getMessageList();
+          return slipBuilder_.getMessageList();
         }
       }
-      public int getUpgradeStructJobsCount() {
-        if (upgradeStructJobsBuilder_ == null) {
-          return upgradeStructJobs_.size();
+      public int getSlipCount() {
+        if (slipBuilder_ == null) {
+          return slip_.size();
         } else {
-          return upgradeStructJobsBuilder_.getCount();
+          return slipBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.JobProto.UpgradeStructJobProto getUpgradeStructJobs(int index) {
-        if (upgradeStructJobsBuilder_ == null) {
-          return upgradeStructJobs_.get(index);
+      public com.lvl6.proto.UserProto.StaticUserLevelInfoProto getSlip(int index) {
+        if (slipBuilder_ == null) {
+          return slip_.get(index);
         } else {
-          return upgradeStructJobsBuilder_.getMessage(index);
+          return slipBuilder_.getMessage(index);
         }
       }
-      public Builder setUpgradeStructJobs(
-          int index, com.lvl6.proto.JobProto.UpgradeStructJobProto value) {
-        if (upgradeStructJobsBuilder_ == null) {
+      public Builder setSlip(
+          int index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto value) {
+        if (slipBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUpgradeStructJobsIsMutable();
-          upgradeStructJobs_.set(index, value);
+          ensureSlipIsMutable();
+          slip_.set(index, value);
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.setMessage(index, value);
+          slipBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setUpgradeStructJobs(
-          int index, com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder builderForValue) {
-        if (upgradeStructJobsBuilder_ == null) {
-          ensureUpgradeStructJobsIsMutable();
-          upgradeStructJobs_.set(index, builderForValue.build());
+      public Builder setSlip(
+          int index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder builderForValue) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          slip_.set(index, builderForValue.build());
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.setMessage(index, builderForValue.build());
+          slipBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addUpgradeStructJobs(com.lvl6.proto.JobProto.UpgradeStructJobProto value) {
-        if (upgradeStructJobsBuilder_ == null) {
+      public Builder addSlip(com.lvl6.proto.UserProto.StaticUserLevelInfoProto value) {
+        if (slipBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUpgradeStructJobsIsMutable();
-          upgradeStructJobs_.add(value);
+          ensureSlipIsMutable();
+          slip_.add(value);
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.addMessage(value);
+          slipBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addUpgradeStructJobs(
-          int index, com.lvl6.proto.JobProto.UpgradeStructJobProto value) {
-        if (upgradeStructJobsBuilder_ == null) {
+      public Builder addSlip(
+          int index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto value) {
+        if (slipBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUpgradeStructJobsIsMutable();
-          upgradeStructJobs_.add(index, value);
+          ensureSlipIsMutable();
+          slip_.add(index, value);
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.addMessage(index, value);
+          slipBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addUpgradeStructJobs(
-          com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder builderForValue) {
-        if (upgradeStructJobsBuilder_ == null) {
-          ensureUpgradeStructJobsIsMutable();
-          upgradeStructJobs_.add(builderForValue.build());
+      public Builder addSlip(
+          com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder builderForValue) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          slip_.add(builderForValue.build());
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.addMessage(builderForValue.build());
+          slipBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addUpgradeStructJobs(
-          int index, com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder builderForValue) {
-        if (upgradeStructJobsBuilder_ == null) {
-          ensureUpgradeStructJobsIsMutable();
-          upgradeStructJobs_.add(index, builderForValue.build());
+      public Builder addSlip(
+          int index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder builderForValue) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          slip_.add(index, builderForValue.build());
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.addMessage(index, builderForValue.build());
+          slipBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllUpgradeStructJobs(
-          java.lang.Iterable<? extends com.lvl6.proto.JobProto.UpgradeStructJobProto> values) {
-        if (upgradeStructJobsBuilder_ == null) {
-          ensureUpgradeStructJobsIsMutable();
-          super.addAll(values, upgradeStructJobs_);
+      public Builder addAllSlip(
+          java.lang.Iterable<? extends com.lvl6.proto.UserProto.StaticUserLevelInfoProto> values) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          super.addAll(values, slip_);
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.addAllMessages(values);
+          slipBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearUpgradeStructJobs() {
-        if (upgradeStructJobsBuilder_ == null) {
-          upgradeStructJobs_ = java.util.Collections.emptyList();
+      public Builder clearSlip() {
+        if (slipBuilder_ == null) {
+          slip_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.clear();
+          slipBuilder_.clear();
         }
         return this;
       }
-      public Builder removeUpgradeStructJobs(int index) {
-        if (upgradeStructJobsBuilder_ == null) {
-          ensureUpgradeStructJobsIsMutable();
-          upgradeStructJobs_.remove(index);
+      public Builder removeSlip(int index) {
+        if (slipBuilder_ == null) {
+          ensureSlipIsMutable();
+          slip_.remove(index);
           onChanged();
         } else {
-          upgradeStructJobsBuilder_.remove(index);
+          slipBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder getUpgradeStructJobsBuilder(
+      public com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder getSlipBuilder(
           int index) {
-        return getUpgradeStructJobsFieldBuilder().getBuilder(index);
+        return getSlipFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder getUpgradeStructJobsOrBuilder(
+      public com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder getSlipOrBuilder(
           int index) {
-        if (upgradeStructJobsBuilder_ == null) {
-          return upgradeStructJobs_.get(index);  } else {
-          return upgradeStructJobsBuilder_.getMessageOrBuilder(index);
+        if (slipBuilder_ == null) {
+          return slip_.get(index);  } else {
+          return slipBuilder_.getMessageOrBuilder(index);
         }
       }
-      public java.util.List<? extends com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder> 
-           getUpgradeStructJobsOrBuilderList() {
-        if (upgradeStructJobsBuilder_ != null) {
-          return upgradeStructJobsBuilder_.getMessageOrBuilderList();
+      public java.util.List<? extends com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> 
+           getSlipOrBuilderList() {
+        if (slipBuilder_ != null) {
+          return slipBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(upgradeStructJobs_);
+          return java.util.Collections.unmodifiableList(slip_);
         }
       }
-      public com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder addUpgradeStructJobsBuilder() {
-        return getUpgradeStructJobsFieldBuilder().addBuilder(
-            com.lvl6.proto.JobProto.UpgradeStructJobProto.getDefaultInstance());
+      public com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder addSlipBuilder() {
+        return getSlipFieldBuilder().addBuilder(
+            com.lvl6.proto.UserProto.StaticUserLevelInfoProto.getDefaultInstance());
       }
-      public com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder addUpgradeStructJobsBuilder(
+      public com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder addSlipBuilder(
           int index) {
-        return getUpgradeStructJobsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.JobProto.UpgradeStructJobProto.getDefaultInstance());
+        return getSlipFieldBuilder().addBuilder(
+            index, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.getDefaultInstance());
       }
-      public java.util.List<com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder> 
-           getUpgradeStructJobsBuilderList() {
-        return getUpgradeStructJobsFieldBuilder().getBuilderList();
+      public java.util.List<com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder> 
+           getSlipBuilderList() {
+        return getSlipFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.JobProto.UpgradeStructJobProto, com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder, com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder> 
-          getUpgradeStructJobsFieldBuilder() {
-        if (upgradeStructJobsBuilder_ == null) {
-          upgradeStructJobsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.JobProto.UpgradeStructJobProto, com.lvl6.proto.JobProto.UpgradeStructJobProto.Builder, com.lvl6.proto.JobProto.UpgradeStructJobProtoOrBuilder>(
-                  upgradeStructJobs_,
+          com.lvl6.proto.UserProto.StaticUserLevelInfoProto, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder, com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder> 
+          getSlipFieldBuilder() {
+        if (slipBuilder_ == null) {
+          slipBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.UserProto.StaticUserLevelInfoProto, com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder, com.lvl6.proto.UserProto.StaticUserLevelInfoProtoOrBuilder>(
+                  slip_,
                   ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
-          upgradeStructJobs_ = null;
+          slip_ = null;
         }
-        return upgradeStructJobsBuilder_;
+        return slipBuilder_;
       }
       
-      // optional .com.lvl6.proto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus status = 8;
+      // repeated .com.lvl6.proto.FullQuestProto inProgressQuests = 8;
+      private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> inProgressQuests_ =
+        java.util.Collections.emptyList();
+      private void ensureInProgressQuestsIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          inProgressQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>(inProgressQuests_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> inProgressQuestsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getInProgressQuestsList() {
+        if (inProgressQuestsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(inProgressQuests_);
+        } else {
+          return inProgressQuestsBuilder_.getMessageList();
+        }
+      }
+      public int getInProgressQuestsCount() {
+        if (inProgressQuestsBuilder_ == null) {
+          return inProgressQuests_.size();
+        } else {
+          return inProgressQuestsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto getInProgressQuests(int index) {
+        if (inProgressQuestsBuilder_ == null) {
+          return inProgressQuests_.get(index);
+        } else {
+          return inProgressQuestsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setInProgressQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (inProgressQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.set(index, value);
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setInProgressQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addInProgressQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (inProgressQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.add(value);
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addInProgressQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (inProgressQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.add(index, value);
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addInProgressQuests(
+          com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.add(builderForValue.build());
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addInProgressQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllInProgressQuests(
+          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          super.addAll(values, inProgressQuests_);
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearInProgressQuests() {
+        if (inProgressQuestsBuilder_ == null) {
+          inProgressQuests_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000080);
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeInProgressQuests(int index) {
+        if (inProgressQuestsBuilder_ == null) {
+          ensureInProgressQuestsIsMutable();
+          inProgressQuests_.remove(index);
+          onChanged();
+        } else {
+          inProgressQuestsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder getInProgressQuestsBuilder(
+          int index) {
+        return getInProgressQuestsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getInProgressQuestsOrBuilder(
+          int index) {
+        if (inProgressQuestsBuilder_ == null) {
+          return inProgressQuests_.get(index);  } else {
+          return inProgressQuestsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+           getInProgressQuestsOrBuilderList() {
+        if (inProgressQuestsBuilder_ != null) {
+          return inProgressQuestsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(inProgressQuests_);
+        }
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressQuestsBuilder() {
+        return getInProgressQuestsFieldBuilder().addBuilder(
+            com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addInProgressQuestsBuilder(
+          int index) {
+        return getInProgressQuestsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
+           getInProgressQuestsBuilderList() {
+        return getInProgressQuestsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+          getInProgressQuestsFieldBuilder() {
+        if (inProgressQuestsBuilder_ == null) {
+          inProgressQuestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder>(
+                  inProgressQuests_,
+                  ((bitField0_ & 0x00000080) == 0x00000080),
+                  getParentForChildren(),
+                  isClean());
+          inProgressQuests_ = null;
+        }
+        return inProgressQuestsBuilder_;
+      }
+      
+      // repeated .com.lvl6.proto.FullQuestProto unredeemedQuests = 9;
+      private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> unredeemedQuests_ =
+        java.util.Collections.emptyList();
+      private void ensureUnredeemedQuestsIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          unredeemedQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>(unredeemedQuests_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> unredeemedQuestsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getUnredeemedQuestsList() {
+        if (unredeemedQuestsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(unredeemedQuests_);
+        } else {
+          return unredeemedQuestsBuilder_.getMessageList();
+        }
+      }
+      public int getUnredeemedQuestsCount() {
+        if (unredeemedQuestsBuilder_ == null) {
+          return unredeemedQuests_.size();
+        } else {
+          return unredeemedQuestsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto getUnredeemedQuests(int index) {
+        if (unredeemedQuestsBuilder_ == null) {
+          return unredeemedQuests_.get(index);
+        } else {
+          return unredeemedQuestsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setUnredeemedQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (unredeemedQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.set(index, value);
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setUnredeemedQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addUnredeemedQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (unredeemedQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.add(value);
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addUnredeemedQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (unredeemedQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.add(index, value);
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addUnredeemedQuests(
+          com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.add(builderForValue.build());
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addUnredeemedQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllUnredeemedQuests(
+          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          super.addAll(values, unredeemedQuests_);
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearUnredeemedQuests() {
+        if (unredeemedQuestsBuilder_ == null) {
+          unredeemedQuests_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000100);
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeUnredeemedQuests(int index) {
+        if (unredeemedQuestsBuilder_ == null) {
+          ensureUnredeemedQuestsIsMutable();
+          unredeemedQuests_.remove(index);
+          onChanged();
+        } else {
+          unredeemedQuestsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder getUnredeemedQuestsBuilder(
+          int index) {
+        return getUnredeemedQuestsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getUnredeemedQuestsOrBuilder(
+          int index) {
+        if (unredeemedQuestsBuilder_ == null) {
+          return unredeemedQuests_.get(index);  } else {
+          return unredeemedQuestsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+           getUnredeemedQuestsOrBuilderList() {
+        if (unredeemedQuestsBuilder_ != null) {
+          return unredeemedQuestsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(unredeemedQuests_);
+        }
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addUnredeemedQuestsBuilder() {
+        return getUnredeemedQuestsFieldBuilder().addBuilder(
+            com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addUnredeemedQuestsBuilder(
+          int index) {
+        return getUnredeemedQuestsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
+           getUnredeemedQuestsBuilderList() {
+        return getUnredeemedQuestsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+          getUnredeemedQuestsFieldBuilder() {
+        if (unredeemedQuestsBuilder_ == null) {
+          unredeemedQuestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder>(
+                  unredeemedQuests_,
+                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  getParentForChildren(),
+                  isClean());
+          unredeemedQuests_ = null;
+        }
+        return unredeemedQuestsBuilder_;
+      }
+      
+      // repeated .com.lvl6.proto.FullQuestProto availableQuests = 10;
+      private java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> availableQuests_ =
+        java.util.Collections.emptyList();
+      private void ensureAvailableQuestsIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          availableQuests_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.FullQuestProto>(availableQuests_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> availableQuestsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto> getAvailableQuestsList() {
+        if (availableQuestsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(availableQuests_);
+        } else {
+          return availableQuestsBuilder_.getMessageList();
+        }
+      }
+      public int getAvailableQuestsCount() {
+        if (availableQuestsBuilder_ == null) {
+          return availableQuests_.size();
+        } else {
+          return availableQuestsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto getAvailableQuests(int index) {
+        if (availableQuestsBuilder_ == null) {
+          return availableQuests_.get(index);
+        } else {
+          return availableQuestsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setAvailableQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (availableQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAvailableQuestsIsMutable();
+          availableQuests_.set(index, value);
+          onChanged();
+        } else {
+          availableQuestsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setAvailableQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (availableQuestsBuilder_ == null) {
+          ensureAvailableQuestsIsMutable();
+          availableQuests_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          availableQuestsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAvailableQuests(com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (availableQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAvailableQuestsIsMutable();
+          availableQuests_.add(value);
+          onChanged();
+        } else {
+          availableQuestsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addAvailableQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto value) {
+        if (availableQuestsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAvailableQuestsIsMutable();
+          availableQuests_.add(index, value);
+          onChanged();
+        } else {
+          availableQuestsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addAvailableQuests(
+          com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (availableQuestsBuilder_ == null) {
+          ensureAvailableQuestsIsMutable();
+          availableQuests_.add(builderForValue.build());
+          onChanged();
+        } else {
+          availableQuestsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAvailableQuests(
+          int index, com.lvl6.proto.QuestProto.FullQuestProto.Builder builderForValue) {
+        if (availableQuestsBuilder_ == null) {
+          ensureAvailableQuestsIsMutable();
+          availableQuests_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          availableQuestsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllAvailableQuests(
+          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.FullQuestProto> values) {
+        if (availableQuestsBuilder_ == null) {
+          ensureAvailableQuestsIsMutable();
+          super.addAll(values, availableQuests_);
+          onChanged();
+        } else {
+          availableQuestsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearAvailableQuests() {
+        if (availableQuestsBuilder_ == null) {
+          availableQuests_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+        } else {
+          availableQuestsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeAvailableQuests(int index) {
+        if (availableQuestsBuilder_ == null) {
+          ensureAvailableQuestsIsMutable();
+          availableQuests_.remove(index);
+          onChanged();
+        } else {
+          availableQuestsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder getAvailableQuestsBuilder(
+          int index) {
+        return getAvailableQuestsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder getAvailableQuestsOrBuilder(
+          int index) {
+        if (availableQuestsBuilder_ == null) {
+          return availableQuests_.get(index);  } else {
+          return availableQuestsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+           getAvailableQuestsOrBuilderList() {
+        if (availableQuestsBuilder_ != null) {
+          return availableQuestsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(availableQuests_);
+        }
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addAvailableQuestsBuilder() {
+        return getAvailableQuestsFieldBuilder().addBuilder(
+            com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.QuestProto.FullQuestProto.Builder addAvailableQuestsBuilder(
+          int index) {
+        return getAvailableQuestsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.QuestProto.FullQuestProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.QuestProto.FullQuestProto.Builder> 
+           getAvailableQuestsBuilderList() {
+        return getAvailableQuestsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder> 
+          getAvailableQuestsFieldBuilder() {
+        if (availableQuestsBuilder_ == null) {
+          availableQuestsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.QuestProto.FullQuestProto, com.lvl6.proto.QuestProto.FullQuestProto.Builder, com.lvl6.proto.QuestProto.FullQuestProtoOrBuilder>(
+                  availableQuests_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          availableQuests_ = null;
+        }
+        return availableQuestsBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus status = 11;
       private com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus status_ = com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus.SUCCESS;
       public boolean hasStatus() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       public com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus getStatus() {
         return status_;
@@ -3362,13 +3425,13 @@ public final class EventStaticDataProto {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000400;
         status_ = value;
         onChanged();
         return this;
       }
       public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000400);
         status_ = com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.RetrieveStaticDataStatus.SUCCESS;
         onChanged();
         return this;
@@ -3748,30 +3811,31 @@ public final class EventStaticDataProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\025EventStaticData.proto\022\016com.lvl6.proto\032" +
-      "\tJob.proto\032\nCity.proto\032\013Quest.proto\032\017Str" +
-      "ucture.proto\032\nTask.proto\032\nUser.proto\"\345\001\n" +
-      "\036RetrieveStaticDataRequestProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\021\n\tstructIds\030\002 \003(\005\022\017\n\007taskIds\030\003 \003(\005\022\020\n" +
-      "\010questIds\030\004 \003(\005\022\017\n\007cityIds\030\005 \003(\005\022\022\n\nmons" +
-      "terIds\030\006 \003(\005\022\031\n\021buildStructJobIds\030\007 \003(\005\022" +
-      "\033\n\023upgradeStructJobIds\030\010 \003(\005\"\247\004\n\037Retriev" +
-      "eStaticDataResponseProto\0220\n\006sender\030\001 \001(\013",
-      "2 .com.lvl6.proto.MinimumUserProto\0223\n\007st" +
-      "ructs\030\002 \003(\0132\".com.lvl6.proto.FullStructu" +
-      "reProto\022,\n\005tasks\030\003 \003(\0132\035.com.lvl6.proto." +
-      "FullTaskProto\022.\n\006quests\030\004 \003(\0132\036.com.lvl6" +
-      ".proto.FullQuestProto\022-\n\006cities\030\005 \003(\0132\035." +
-      "com.lvl6.proto.FullCityProto\022<\n\017buildStr" +
-      "uctJobs\030\006 \003(\0132#.com.lvl6.proto.BuildStru" +
-      "ctJobProto\022@\n\021upgradeStructJobs\030\007 \003(\0132%." +
-      "com.lvl6.proto.UpgradeStructJobProto\022X\n\006" +
-      "status\030\010 \001(\0162H.com.lvl6.proto.RetrieveSt",
-      "aticDataResponseProto.RetrieveStaticData" +
-      "Status\"6\n\030RetrieveStaticDataStatus\022\013\n\007SU" +
-      "CCESS\020\001\022\r\n\tSOME_FAIL\020\002\"6\n\"PurgeClientSta" +
-      "ticDataResponseProto\022\020\n\010senderId\030\001 \001(\005B\026" +
-      "B\024EventStaticDataProto"
+      "\nCity.proto\032\022MonsterStuff.proto\032\013Quest.p" +
+      "roto\032\017Structure.proto\032\nTask.proto\032\nUser." +
+      "proto\"R\n\036RetrieveStaticDataRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\"\330\005\n\037RetrieveStaticDataResponse" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022>\n\016expansionCosts\030\002 \003(\0132" +
+      "&.com.lvl6.proto.CityExpansionCostProto\022" +
+      "0\n\tallCities\030\003 \003(\0132\035.com.lvl6.proto.Full",
+      "CityProto\0226\n\nallStructs\030\004 \003(\0132\".com.lvl6" +
+      ".proto.FullStructureProto\022/\n\010allTasks\030\005 " +
+      "\003(\0132\035.com.lvl6.proto.FullTaskProto\0221\n\013al" +
+      "lMonsters\030\006 \003(\0132\034.com.lvl6.proto.Monster" +
+      "Proto\0226\n\004slip\030\007 \003(\0132(.com.lvl6.proto.Sta" +
+      "ticUserLevelInfoProto\0228\n\020inProgressQuest" +
+      "s\030\010 \003(\0132\036.com.lvl6.proto.FullQuestProto\022" +
+      "8\n\020unredeemedQuests\030\t \003(\0132\036.com.lvl6.pro" +
+      "to.FullQuestProto\0227\n\017availableQuests\030\n \003" +
+      "(\0132\036.com.lvl6.proto.FullQuestProto\022X\n\006st",
+      "atus\030\013 \001(\0162H.com.lvl6.proto.RetrieveStat" +
+      "icDataResponseProto.RetrieveStaticDataSt" +
+      "atus\"6\n\030RetrieveStaticDataStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\r\n\tSOME_FAIL\020\002\"6\n\"PurgeClientStati" +
+      "cDataResponseProto\022\020\n\010senderId\030\001 \001(\005B\026B\024" +
+      "EventStaticDataProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3783,7 +3847,7 @@ public final class EventStaticDataProto {
           internal_static_com_lvl6_proto_RetrieveStaticDataRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RetrieveStaticDataRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "StructIds", "TaskIds", "QuestIds", "CityIds", "MonsterIds", "BuildStructJobIds", "UpgradeStructJobIds", },
+              new java.lang.String[] { "Sender", },
               com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataRequestProto.class,
               com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataRequestProto.Builder.class);
           internal_static_com_lvl6_proto_RetrieveStaticDataResponseProto_descriptor =
@@ -3791,7 +3855,7 @@ public final class EventStaticDataProto {
           internal_static_com_lvl6_proto_RetrieveStaticDataResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RetrieveStaticDataResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Structs", "Tasks", "Quests", "Cities", "BuildStructJobs", "UpgradeStructJobs", "Status", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllStructs", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "Status", },
               com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.class,
               com.lvl6.proto.EventStaticDataProto.RetrieveStaticDataResponseProto.Builder.class);
           internal_static_com_lvl6_proto_PurgeClientStaticDataResponseProto_descriptor =
@@ -3808,8 +3872,8 @@ public final class EventStaticDataProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.lvl6.proto.JobProto.getDescriptor(),
           com.lvl6.proto.CityProto.getDescriptor(),
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.QuestProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.TaskProto.getDescriptor(),

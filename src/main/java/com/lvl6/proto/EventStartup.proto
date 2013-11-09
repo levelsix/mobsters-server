@@ -30,51 +30,41 @@ message StartupResponseProto {
     optional StartupStatus startupStatus= 3;
     optional UpdateStatus updateStatus= 4;
     optional StartupConstants startupConstants = 5;
-    repeated FullCityProto allCities = 6;
     
-    repeated FullQuestProto inProgressQuests = 7; //has not been completed
-    repeated FullQuestProto unredeemedQuests = 8; //is complete
-	repeated FullQuestProto availableQuests = 9;   
-	
 	//only send the ones that are not redeemed, (incomplete and complete)
-	repeated FullUserQuestProto userQuests = 10;
-	repeated FullUserClanProto userClanInfo = 11;
+	repeated FullUserQuestProto userQuests = 6;
+	repeated FullUserClanProto userClanInfo = 7;
 	
-	optional string appStoreURL = 12;
-	optional string reviewPageURL = 13;
-	optional string reviewPageConfirmationMessage = 14;
-	optional bool playerHasBoughtInAppPurchase = 15;
-	repeated GoldSaleProto goldSales = 16;
+	optional string appStoreURL = 8;
+	optional string reviewPageURL = 9;
+	optional string reviewPageConfirmationMessage = 10;
+	optional bool playerHasBoughtInAppPurchase = 11;
 	
-	repeated AttackedNotificationProto attackNotifications = 17;
-	repeated ReferralNotificationProto referralNotifications = 18;
-	repeated string noticesToPlayers = 19;
-	repeated GroupChatMessageProto globalChats = 20;
-	repeated GroupChatMessageProto clanChats = 21;
+	repeated AttackedNotificationProto attackNotifications = 12;
+	repeated ReferralNotificationProto referralNotifications = 13;
+	repeated string noticesToPlayers = 14;
+	repeated GroupChatMessageProto globalChats = 15;
+	repeated GroupChatMessageProto clanChats = 16;
 	//repeated most recent private chat posts regarding this user
-	repeated PrivateChatPostProto pcpp = 22;
+	repeated PrivateChatPostProto pcpp = 17;
 	
-	repeated StaticLevelInfoProto slip = 23;
-	repeated FullStructureProto staticStructs = 24;
-	repeated CityExpansionCostProto expansionCosts = 25;
-	repeated MonsterProto staticMonsters = 26;
-	repeated FullUserMonsterProto usersMonsters = 27;
-	repeated UserMonsterHealingProto monstersHealing = 28;
-	optional UserEnhancementProto enhancements = 29;
+	repeated FullUserMonsterProto usersMonsters = 18;
+	repeated UserMonsterHealingProto monstersHealing = 19;
+	optional UserEnhancementProto enhancements = 20;
+	repeated RareBoosterPurchaseProto rareBoosterPurchases = 21;
 	
-	repeated RareBoosterPurchaseProto rareBoosterPurchases = 30;
-	
-	optional string kabamNaid = 31;
+	optional string kabamNaid = 22;
 	
 	//send over all recipients (in user_facebook_invite_for_slot_accepted table)
 	//that have been "redeemed"
-	repeated MinimumUserProtoWithFacebookId usersUsedForExtraSlots = 32;
+	repeated MinimumUserProtoWithFacebookId usersUsedForExtraSlots = 23;
 	
 	//send over all invites (in fb_invite_for_slot table) where this user
 	//is the person being invited
-	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 33;
+	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 24;
 	
-	repeated FullTaskProto allTasks = 34;
+	
+	
 	
 	repeated int32 completedTaskIds = 35; 
 	

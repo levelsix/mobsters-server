@@ -22,7 +22,6 @@ import "EventStructure.proto";
 import "EventTournament.proto";
 import "EventUser.proto";
 import "InAppPurchase.proto";
-import "Job.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
 import "Structure.proto";

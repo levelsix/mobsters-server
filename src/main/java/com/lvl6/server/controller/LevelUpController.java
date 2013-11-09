@@ -12,7 +12,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.LevelUpRequestEvent;
 import com.lvl6.events.response.LevelUpResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.StaticLevelInfo;
+import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -23,7 +23,7 @@ import com.lvl6.proto.EventUserProto.LevelUpResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.rarechange.StaticLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -77,7 +77,7 @@ import com.lvl6.utils.RetrieveUtils;
 //      int levelAfterLeveling = ControllerConstants.NOT_SET;
       if (legitLevelUp) {
         int newNextLevel = user.getLevel() + 2;
-        StaticLevelInfo sli = StaticLevelInfoRetrieveUtils.getStaticLevelInfoForLevel(newNextLevel);
+        StaticUserLevelInfo sli = StaticUserLevelInfoRetrieveUtils.getStaticLevelInfoForLevel(newNextLevel);
         int expRequiredForNewNextLevel = sli.getRequiredExp();
 
         int newLevel = user.getLevel() + 1;
@@ -162,7 +162,7 @@ import com.lvl6.utils.RetrieveUtils;
       log.error("user is already at server's allowed max level: " + ControllerConstants.LEVEL_UP__MAX_LEVEL_FOR_USER);
       return false;
     }
-    StaticLevelInfo sli = StaticLevelInfoRetrieveUtils.getStaticLevelInfoForLevel(user.getLevel() + 1);
+    StaticUserLevelInfo sli = StaticUserLevelInfoRetrieveUtils.getStaticLevelInfoForLevel(user.getLevel() + 1);
     Integer expRequiredForNextLevel = sli.getRequiredExp();
     if (expRequiredForNextLevel == null) {
       resBuilder.setStatus(LevelUpStatus.OTHER_FAIL);
