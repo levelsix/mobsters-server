@@ -192,12 +192,11 @@ public class CreateInfoProtoUtils {
     return builder.build();
   }
 
-  public static CityExpansionCostProto createCityExpansionCostProtoFromCityExpansionCost(ExpansionCost cec) {
+  public static CityExpansionCostProto createCityExpansionCostProtoFromCityExpansionCost(ExpansionCost ec) {
     CityExpansionCostProto.Builder builder = CityExpansionCostProto.newBuilder();
-    builder.setExpansionNum(cec.getId());
-    builder.setExpansionCostCash(cec.getExpansionCostCash());
-    builder.setNumMinutesToExpand(cec.getNumMinutesToExpand());
-    builder.setSpeedupExpansionGemCost(cec.getSpeedupExpansionGemCost());
+    builder.setExpansionNum(ec.getId());
+    builder.setExpansionCostCash(ec.getExpansionCostCash());
+    builder.setNumMinutesToExpand(ec.getNumMinutesToExpand());
     return builder.build();
   }
 

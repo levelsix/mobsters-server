@@ -78,7 +78,7 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(i++);
     int expansionCostCash = rs.getInt(i++);
     int numMinutesToExpand = rs.getInt(i++);
-    int expansionCostGems = rs.getInt(i++);
-    return new ExpansionCost(id, expansionCostCash, numMinutesToExpand, expansionCostGems);
+    
+    return new ExpansionCost(id, expansionCostCash, numMinutesToExpand);
   }
 }

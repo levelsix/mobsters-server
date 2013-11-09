@@ -4,19 +4,16 @@ import java.io.Serializable;
 
 public class ExpansionCost implements Serializable {
 	
-	private static final long serialVersionUID = -6063293628759189565L;
+	private static final long serialVersionUID = 1486947262199932773L;
 	private int id;
 	private int expansionCostCash;
 	private int numMinutesToExpand;
-	private int speedupExpansionGemCost;
 	
-	public ExpansionCost(int id, int expansionCostCash, int numMinutesToExpand,
-			int speedupExpansionGemCost) {
+	public ExpansionCost(int id, int expansionCostCash, int numMinutesToExpand) {
 		super();
 		this.id = id;
 		this.expansionCostCash = expansionCostCash;
 		this.numMinutesToExpand = numMinutesToExpand;
-		this.speedupExpansionGemCost = speedupExpansionGemCost;
 	}
 
 	public int getId() {
@@ -43,19 +40,11 @@ public class ExpansionCost implements Serializable {
 		this.numMinutesToExpand = numMinutesToExpand;
 	}
 
-	public int getSpeedupExpansionGemCost() {
-		return speedupExpansionGemCost;
-	}
-
-	public void setSpeedupExpansionGemCost(int speedupExpansionGemCost) {
-		this.speedupExpansionGemCost = speedupExpansionGemCost;
-	}
-
 	@Override
 	public String toString() {
 		return "ExpansionCost [id=" + id + ", expansionCostCash="
 				+ expansionCostCash + ", numMinutesToExpand=" + numMinutesToExpand
-				+ ", speedupExpansionGemCost=" + speedupExpansionGemCost + "]";
-	}	
+				+ "]";
+	}
 	
 }

@@ -588,10 +588,6 @@ public final class CityProto {
     // optional int32 numMinutesToExpand = 3;
     boolean hasNumMinutesToExpand();
     int getNumMinutesToExpand();
-    
-    // optional int32 speedupExpansionGemCost = 4;
-    boolean hasSpeedupExpansionGemCost();
-    int getSpeedupExpansionGemCost();
   }
   public static final class CityExpansionCostProto extends
       com.google.protobuf.GeneratedMessage
@@ -652,21 +648,10 @@ public final class CityProto {
       return numMinutesToExpand_;
     }
     
-    // optional int32 speedupExpansionGemCost = 4;
-    public static final int SPEEDUPEXPANSIONGEMCOST_FIELD_NUMBER = 4;
-    private int speedupExpansionGemCost_;
-    public boolean hasSpeedupExpansionGemCost() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public int getSpeedupExpansionGemCost() {
-      return speedupExpansionGemCost_;
-    }
-    
     private void initFields() {
       expansionNum_ = 0;
       expansionCostCash_ = 0;
       numMinutesToExpand_ = 0;
-      speedupExpansionGemCost_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -689,9 +674,6 @@ public final class CityProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, numMinutesToExpand_);
       }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, speedupExpansionGemCost_);
-      }
       getUnknownFields().writeTo(output);
     }
     
@@ -712,10 +694,6 @@ public final class CityProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, numMinutesToExpand_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, speedupExpansionGemCost_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -847,8 +825,6 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         numMinutesToExpand_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        speedupExpansionGemCost_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -899,10 +875,6 @@ public final class CityProto {
           to_bitField0_ |= 0x00000004;
         }
         result.numMinutesToExpand_ = numMinutesToExpand_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.speedupExpansionGemCost_ = speedupExpansionGemCost_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -927,9 +899,6 @@ public final class CityProto {
         }
         if (other.hasNumMinutesToExpand()) {
           setNumMinutesToExpand(other.getNumMinutesToExpand());
-        }
-        if (other.hasSpeedupExpansionGemCost()) {
-          setSpeedupExpansionGemCost(other.getSpeedupExpansionGemCost());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -975,11 +944,6 @@ public final class CityProto {
             case 24: {
               bitField0_ |= 0x00000004;
               numMinutesToExpand_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              speedupExpansionGemCost_ = input.readInt32();
               break;
             }
           }
@@ -1047,27 +1011,6 @@ public final class CityProto {
       public Builder clearNumMinutesToExpand() {
         bitField0_ = (bitField0_ & ~0x00000004);
         numMinutesToExpand_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 speedupExpansionGemCost = 4;
-      private int speedupExpansionGemCost_ ;
-      public boolean hasSpeedupExpansionGemCost() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public int getSpeedupExpansionGemCost() {
-        return speedupExpansionGemCost_;
-      }
-      public Builder setSpeedupExpansionGemCost(int value) {
-        bitField0_ |= 0x00000008;
-        speedupExpansionGemCost_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearSpeedupExpansionGemCost() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        speedupExpansionGemCost_ = 0;
         onChanged();
         return this;
       }
@@ -3320,27 +3263,26 @@ public final class CityProto {
       "proto\032\nUser.proto\"\200\001\n\032UserCityExpansionD" +
       "ataProto\022\016\n\006userId\030\001 \001(\005\022\021\n\txPosition\030\002 " +
       "\001(\021\022\021\n\tyPosition\030\003 \001(\021\022\023\n\013isExpanding\030\004 " +
-      "\001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"\206\001\n\026CityExp" +
-      "ansionCostProto\022\024\n\014expansionNum\030\001 \001(\005\022\031\n" +
-      "\021expansionCostCash\030\002 \001(\005\022\032\n\022numMinutesTo" +
-      "Expand\030\003 \001(\005\022\037\n\027speedupExpansionGemCost\030" +
-      "\004 \001(\005\"\237\003\n\020CityElementProto\022\016\n\006cityId\030\001 \001" +
-      "(\005\022\017\n\007assetId\030\002 \001(\005\022;\n\004type\030\004 \001(\0162-.com.",
-      "lvl6.proto.CityElementProto.CityElemType" +
-      "\022/\n\006coords\030\005 \001(\0132\037.com.lvl6.proto.Coordi" +
-      "nateProto\022\017\n\007xLength\030\006 \001(\005\022\017\n\007yLength\030\007 " +
-      "\001(\005\022\r\n\005imgId\030\010 \001(\t\022B\n\013orientation\030\t \001(\0162" +
-      "!.com.lvl6.proto.StructOrientation:\nPOSI" +
-      "TION_1\0225\n\014spriteCoords\030\n \001(\0132\037.com.lvl6." +
-      "proto.CoordinateProto\"P\n\014CityElemType\022\014\n" +
-      "\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PERSON_NE" +
-      "UTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\344\001\n\rFullCityProt" +
-      "o\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nmapIm",
-      "gName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.lvl6.p" +
-      "roto.CoordinateProto\022\023\n\013roadImgName\030\005 \001(" +
-      "\t\022\022\n\nmapTmxName\030\006 \001(\t\0226\n\rroadImgCoords\030\007" +
-      " \001(\0132\037.com.lvl6.proto.CoordinateProto\022\017\n" +
-      "\007taskIds\030\010 \003(\005B\013B\tCityProto"
+      "\001(\010\022\027\n\017expandStartTime\030\005 \001(\003\"e\n\026CityExpa" +
+      "nsionCostProto\022\024\n\014expansionNum\030\001 \001(\005\022\031\n\021" +
+      "expansionCostCash\030\002 \001(\005\022\032\n\022numMinutesToE" +
+      "xpand\030\003 \001(\005\"\237\003\n\020CityElementProto\022\016\n\006city" +
+      "Id\030\001 \001(\005\022\017\n\007assetId\030\002 \001(\005\022;\n\004type\030\004 \001(\0162" +
+      "-.com.lvl6.proto.CityElementProto.CityEl",
+      "emType\022/\n\006coords\030\005 \001(\0132\037.com.lvl6.proto." +
+      "CoordinateProto\022\017\n\007xLength\030\006 \001(\005\022\017\n\007yLen" +
+      "gth\030\007 \001(\005\022\r\n\005imgId\030\010 \001(\t\022B\n\013orientation\030" +
+      "\t \001(\0162!.com.lvl6.proto.StructOrientation" +
+      ":\nPOSITION_1\0225\n\014spriteCoords\030\n \001(\0132\037.com" +
+      ".lvl6.proto.CoordinateProto\"P\n\014CityElemT" +
+      "ype\022\014\n\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PER" +
+      "SON_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\344\001\n\rFullCi" +
+      "tyProto\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n" +
+      "\nmapImgName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.",
+      "lvl6.proto.CoordinateProto\022\023\n\013roadImgNam" +
+      "e\030\005 \001(\t\022\022\n\nmapTmxName\030\006 \001(\t\0226\n\rroadImgCo" +
+      "ords\030\007 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
+      "oto\022\017\n\007taskIds\030\010 \003(\005B\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3360,7 +3302,7 @@ public final class CityProto {
           internal_static_com_lvl6_proto_CityExpansionCostProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_CityExpansionCostProto_descriptor,
-              new java.lang.String[] { "ExpansionNum", "ExpansionCostCash", "NumMinutesToExpand", "SpeedupExpansionGemCost", },
+              new java.lang.String[] { "ExpansionNum", "ExpansionCostCash", "NumMinutesToExpand", },
               com.lvl6.proto.CityProto.CityExpansionCostProto.class,
               com.lvl6.proto.CityProto.CityExpansionCostProto.Builder.class);
           internal_static_com_lvl6_proto_CityElementProto_descriptor =
