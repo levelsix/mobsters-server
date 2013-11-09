@@ -24,6 +24,7 @@ import "EventUser.proto";
 import "InAppPurchase.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
+import "StaticData.proto";
 import "Structure.proto";
 import "Task.proto";
 import "TournamentStuff.proto";
