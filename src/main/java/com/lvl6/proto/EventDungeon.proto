@@ -43,7 +43,7 @@ message EndDungeonResponseProto {
 	//repeated FullUserMonsterProto newOrUpdated = 3; //BAD!!! DON'T START NAMES WITH NEW OR COPY
 	repeated FullUserMonsterProto updatedOrNew = 3;
 	optional int32 taskId = 4;
-	optional bool didUserWin = 5;
+	optional bool userWon = 5;
 	
 	enum EndDungeonStatus {
 		SUCCESS = 1;
