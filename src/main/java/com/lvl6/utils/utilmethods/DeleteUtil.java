@@ -25,7 +25,7 @@ public interface DeleteUtil {
   
   public abstract int deleteAllUserQuestsForUser(int userId);
   
-  public abstract int deleteTaskForUserWithTaskForUserId(long taskForUserId);
+  public abstract int deleteTaskForUserOngoingWithTaskForUserId(long taskForUserId);
   
   public abstract int deleteTaskStagesForUserWithIds(List<Long> taskStageForUserIds);
   

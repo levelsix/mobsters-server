@@ -15,42 +15,42 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.TaskForUser;
+import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class TaskForUserRetrieveUtils {
+@Component @DependsOn("gameServer") public class TaskForUserOngoingRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
-  private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER;
+  private static final String TABLE_NAME = DBConstants.TABLE_TASK_FOR_USER_ONGOING;
   
-  public static TaskForUser getUserTaskForId(long userTaskId) {
+  public static TaskForUserOngoing getUserTaskForId(long userTaskId) {
     Connection conn = DBConnection.get().getConnection();
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.TASK_FOR_USER__ID, userTaskId);
+    absoluteConditionParams.put(DBConstants.TASK_FOR_USER_ONGOING__ID, userTaskId);
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
-    TaskForUser ut = convertRSToUserTask(rs);
+    TaskForUserOngoing ut = convertRSToUserTask(rs);
     return ut;
   }
   
-  public static TaskForUser getUserTaskForUserId(int userId) {
+  public static TaskForUserOngoing getUserTaskForUserId(int userId) {
     Connection conn = DBConnection.get().getConnection();
     
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    TaskForUser ut = convertRSToUserTask(rs);
+    TaskForUserOngoing ut = convertRSToUserTask(rs);
     return ut;
   }
   
-  private static TaskForUser convertRSToUserTask(ResultSet rs) {
-    List<TaskForUser> utList = new ArrayList<TaskForUser>();
+  private static TaskForUserOngoing convertRSToUserTask(ResultSet rs) {
+    List<TaskForUserOngoing> utList = new ArrayList<TaskForUserOngoing>();
     if (rs != null) {
       try {
         rs.last();
         rs.beforeFirst();
         while(rs.next()) {  //should only be one
-          TaskForUser ut = convertRSRowToUserTask(rs);
+          TaskForUserOngoing ut = convertRSRowToUserTask(rs);
           utList.add(ut);
         }
       } catch (SQLException e) {
@@ -71,7 +71,7 @@ import com.lvl6.utils.DBConnection;
     }
   }
   
-  private static TaskForUser convertRSRowToUserTask(ResultSet rs) throws SQLException {
+  private static TaskForUserOngoing convertRSRowToUserTask(ResultSet rs) throws SQLException {
     int i = 1;
     long id = rs.getLong(i++);
     int userId = rs.getInt(i++);
@@ -91,7 +91,7 @@ import com.lvl6.utils.DBConnection;
     	log.error("db error: start_date is null. userId=" + userId, e);
     }
     
-    return new TaskForUser(id, userId, taskId, expGained, cashGained,
+    return new TaskForUserOngoing(id, userId, taskId, expGained, cashGained,
     		numRevives, startDate);
   }
 }

@@ -17,7 +17,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.TaskForUser;
+import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.info.User;
@@ -30,7 +30,7 @@ import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.TaskForUserRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -68,6 +68,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean userWon = reqProto.getUserWon();
     Date currentDate = new Date(reqProto.getClientTime());
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
+    boolean firstTimeUserWonTask = reqProto.getFirstTimeUserWonTask();
 
     //set some values to send to the client (the response proto)
     EndDungeonResponseProto.Builder resBuilder = EndDungeonResponseProto.newBuilder();
@@ -80,8 +81,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousCash = 0;
 
-      List<TaskForUser> userTaskList = new ArrayList<TaskForUser>();
-      TaskForUser ut = null;
+      List<TaskForUserOngoing> userTaskList = new ArrayList<TaskForUserOngoing>();
+      TaskForUserOngoing ut = null;
       boolean legit = checkLegit(resBuilder, aUser, userId, userTaskId, userTaskList);
 
 
@@ -127,6 +128,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	server.writeEvent(resEventUpdate);
       	int taskId = ut.getTaskId();
       	writeToUserCurrencyHistory(aUser, money, curTime, previousCash, userTaskId, taskId);
+      	writeToTaskForUserCompleted(userId, taskId, userWon, firstTimeUserWonTask, curTime);
       }
       
     } catch (Exception e) {
@@ -151,13 +153,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    * builder status to the appropriate value.
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
-		  long userTaskId, List<TaskForUser> userTaskList) {
+		  long userTaskId, List<TaskForUserOngoing> userTaskList) {
     if (null == u) {
       log.error("unexpected error: user is null. user=" + u);
       return false;
     }
     
-    TaskForUser ut = TaskForUserRetrieveUtils.getUserTaskForId(userTaskId);
+    TaskForUserOngoing ut = TaskForUserOngoingRetrieveUtils.getUserTaskForId(userTaskId);
     if (null == ut) {
     	log.error("unexpected error: no user task for id userTaskId=" + userTaskId);
     	return false;
@@ -168,7 +170,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     return true;
   }
 
-  private boolean writeChangesToDb(User u, int uId, TaskForUser ut, boolean userWon,
+  private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut, boolean userWon,
 		  Timestamp clientTime, Map<String, Integer> money, List<FullUserMonsterProto> protos) {
 	  int cashGained = ut.getCashGained();
 	  int expGained = ut.getExpGained();
@@ -203,7 +205,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  }
 	  
 	  //DELETE FROM TASK_FOR_USER TABLE
-	  num = DeleteUtils.get().deleteTaskForUserWithTaskForUserId(utId); 
+	  num = DeleteUtils.get().deleteTaskForUserOngoingWithTaskForUserId(utId); 
 	  log.info("num rows deleted from task_for_user table. num=" + num);
 	  
 	  return true;
@@ -335,5 +337,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
         previousGemsCash, reasonsForChanges, detailsMap);
 
+  }
+  
+  private void writeToTaskForUserCompleted(int userId, int taskId, 
+  		boolean userWon, boolean firstTimeUserWonTask, Timestamp now) {
+  	if (userWon && firstTimeUserWonTask) {
+  		int numInserted = InsertUtils.get()
+  				.insertIntoTaskForUserCompleted(userId, taskId, now);
+  		
+  		log.info("numInserted into task_for_user_completed: " + numInserted);
+  	}
   }
 }

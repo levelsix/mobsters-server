@@ -119,11 +119,11 @@ public class DeleteUtils implements DeleteUtil {
   }
   
   @Override
-  public int deleteTaskForUserWithTaskForUserId(long taskForUserId) {
-    String tableName = DBConstants.TABLE_TASK_FOR_USER;
+  public int deleteTaskForUserOngoingWithTaskForUserId(long taskForUserId) {
+    String tableName = DBConstants.TABLE_TASK_FOR_USER_ONGOING;
     String condDelim = "and";
     Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.TASK_FOR_USER__ID, taskForUserId);
+    conditionParams.put(DBConstants.TASK_FOR_USER_ONGOING__ID, taskForUserId);
     int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, condDelim);
     
     

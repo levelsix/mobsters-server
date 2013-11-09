@@ -20,7 +20,7 @@ import com.lvl6.events.request.BeginDungeonRequestEvent;
 import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Task;
-import com.lvl6.info.TaskForUser;
+import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStage;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
@@ -33,7 +33,7 @@ import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.TaskForUserRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -147,7 +147,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	return false;
     }
     
-    TaskForUser aTaskForUser = TaskForUserRetrieveUtils.getUserTaskForUserId(userId);
+    TaskForUserOngoing aTaskForUser = TaskForUserOngoingRetrieveUtils.getUserTaskForUserId(userId);
     if(null != aTaskForUser) {
       log.warn("(will continue processing, but) user has existing task when" +
       		" beginning another. No task should exist. user=" + u + "\t task=" +
@@ -165,8 +165,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   //TODO: MOVE THESE METHODS INTO A UTILS FOR TASK
-  private void deleteExistingTaskForUser(long taskForUserId, TaskForUser aTaskForUser) {
-  	DeleteUtils.get().deleteTaskForUserWithTaskForUserId(taskForUserId);
+  private void deleteExistingTaskForUser(long taskForUserId, TaskForUserOngoing aTaskForUser) {
+  	DeleteUtils.get().deleteTaskForUserOngoingWithTaskForUserId(taskForUserId);
   	int userId = aTaskForUser.getUserId();
   	int taskId = aTaskForUser.getTaskId();
   	int expGained = aTaskForUser.getExpGained();
@@ -181,7 +181,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	boolean userWon = false;
   	boolean cancelled = true;
   	
-  	int num = DeleteUtils.get().deleteTaskForUserWithTaskForUserId(taskForUserId);
+  	int num = DeleteUtils.get().deleteTaskForUserOngoingWithTaskForUserId(taskForUserId);
   	log.warn("deleted existing task_for_user. taskForUser=" + aTaskForUser +
   			"\t (should be 1) numDeleted=" + num);
   	//meh, fogedaboudit 

@@ -44,7 +44,8 @@ public class DBConstants {
   public static final String TABLE_STRUCTURE = "structure";
   public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
   public static final String TABLE_TASK = "task";
-  public static final String TABLE_TASK_FOR_USER = "task_for_user";
+  public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
+  public static final String TABLE_TASK_FOR_USER_ONGOING = "task_for_user_ongoing";
   public static final String TABLE_TASK_HISTORY = "task_history";
   public static final String TABLE_TASK_STAGE = "task_stage";
   public static final String TABLE_TASK_STAGE_FOR_USER = "task_stage_for_user";
@@ -287,15 +288,20 @@ public class DBConstants {
   public static final String STRUCTURE_FOR_USER__ORIENTATION = "orientation";
   public static final String STRUCTURE_FOR_USER__UPGRADE_START_TIME = "upgrade_start_time";
 
-  /*TASK FOR USER TABLE*/
-  public static final String TASK_FOR_USER__ID = GENERIC__ID;
-  public static final String TASK_FOR_USER__USER_ID = GENERIC__USER_ID;
-  public static final String TASK_FOR_USER__TASK_ID = "task_id";
-  public static final String TASK_FOR_USER__EXP_GAINED = "exp_gained";
-  public static final String TASK_FOR_USER__SILVER_GAINED = "silver_gained";
-  public static final String TASK_FOR_USER__NUM_REVIVES = "num_revives";
-  public static final String TASK_FOR_USER__START_TIME = "start_time";
+  /*TASK FOR USER ONGOING TABLE*/
+  public static final String TASK_FOR_USER_ONGOING__ID = GENERIC__ID;
+  public static final String TASK_FOR_USER_ONGOING__USER_ID = GENERIC__USER_ID;
+  public static final String TASK_FOR_USER_ONGOING__TASK_ID = "task_id";
+  public static final String TASK_FOR_USER_ONGOING__EXP_GAINED = "exp_gained";
+  public static final String TASK_FOR_USER_ONGOING__SILVER_GAINED = "silver_gained";
+  public static final String TASK_FOR_USER_ONGOING__NUM_REVIVES = "num_revives";
+  public static final String TASK_FOR_USER_ONGOING__START_TIME = "start_time";
 
+  /*TASK FOR USER COMPLETED TABLE*/
+  public static final String TASK_FOR_USER_COMPLETED__USER_ID = GENERIC__USER_ID;
+  public static final String TASK_FOR_USER_COMPLETED__TASK_ID = "task_id";
+  public static final String TASK_FOR_USER_COMPLETED__TIME_OF_ENTRY = "time_of_entry";
+  
   /*TASK HISTORY TABLE*/
   public static final String TASK_HISTORY__TASK_FOR_USER_ID = "task_for_user_id";
   public static final String TASK_HISTORY__USER_ID = GENERIC__USER_ID;

@@ -669,16 +669,16 @@ public class InsertUtils implements InsertUtil{
 	  
 	  //for recording what-dropped in which-stage
 	  Map<String, Object> row = new HashMap<String, Object>();
-	  row.put(DBConstants.TASK_FOR_USER__USER_ID, userId);
-	  row.put(DBConstants.TASK_FOR_USER__TASK_ID, taskId);
-	  row.put(DBConstants.TASK_FOR_USER__EXP_GAINED, expGained);
-	  row.put(DBConstants.TASK_FOR_USER__SILVER_GAINED, silverGained);
-	  row.put(DBConstants.TASK_FOR_USER__NUM_REVIVES, 0);
-	  row.put(DBConstants.TASK_FOR_USER__START_TIME, startTime);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__USER_ID, userId);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_ID, taskId);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__EXP_GAINED, expGained);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__SILVER_GAINED, silverGained);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__NUM_REVIVES, 0);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__START_TIME, startTime);
 	  newRows.add(row);
 	  
 	  List<Long> userTaskIdList = DBConnection.get().insertIntoTableBasicReturnLongIds(
-			  DBConstants.TABLE_TASK_FOR_USER, newRows);
+			  DBConstants.TABLE_TASK_FOR_USER_ONGOING, newRows);
 	  
 	  long userTaskId = 0;
 	  if (!userTaskIdList.isEmpty()) {
@@ -706,6 +706,20 @@ public class InsertUtils implements InsertUtil{
 	  int numInserted = DBConnection.get().insertIntoTableBasic(
 			  DBConstants.TABLE_TASK_HISTORY, insertParams);
 	  return numInserted; 
+  }
+  
+  @Override
+  public int insertIntoTaskForUserCompleted(int userId, int taskId, 
+  		Timestamp timeOfEntry) {
+  	Map<String, Object> insertParams = new HashMap<String, Object>();
+  	
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__USER_ID, userId);
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TASK_ID, taskId);
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TIME_OF_ENTRY, timeOfEntry);
+  	
+  	int numInserted = DBConnection.get().insertIntoTableBasic(
+			  DBConstants.TABLE_TASK_HISTORY, insertParams);
+	  return numInserted;
   }
 
 	@Override

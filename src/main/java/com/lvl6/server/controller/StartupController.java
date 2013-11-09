@@ -89,6 +89,7 @@ import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
+import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotAcceptedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
@@ -229,7 +230,7 @@ public class StartupController extends EventController {
           setBoosterPurchases(resBuilder);
           setFacebookAndExtraSlotsStuff(resBuilder, user);
           setAllTasks(resBuilder);
-          
+          setCompletedTasks(resBuilder, user);
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
@@ -876,7 +877,11 @@ public class StartupController extends EventController {
   	}
   }
   
-  
+  private void setCompletedTasks(Builder resBuilder, User user) {
+  	List<Integer> taskIds = TaskForUserCompletedRetrieveUtils
+  			.getAllTaskIdsForUser(user.getId());
+  	resBuilder.addAllCompletedTaskIds(taskIds);
+  }
   
   
   

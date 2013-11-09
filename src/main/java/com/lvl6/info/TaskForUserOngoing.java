@@ -3,9 +3,9 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TaskForUser implements Serializable {
+public class TaskForUserOngoing implements Serializable {
 
-	private static final long serialVersionUID = 6600851145460221996L;
+	private static final long serialVersionUID = 6004235125628441640L;
 	private long id;
 	private int userId;
 	private int taskId;
@@ -14,7 +14,7 @@ public class TaskForUser implements Serializable {
 	public int numRevives;
 	private Date startDate;
 	
-	public TaskForUser(long id, int userId, int taskId, int expGained,
+	public TaskForUserOngoing(long id, int userId, int taskId, int expGained,
 			int cashGained, int numRevives, Date startDate) {
 		super();
 		this.id = id;
@@ -84,10 +84,9 @@ public class TaskForUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TaskForUser [id=" + id + ", userId=" + userId + ", taskId="
-				+ taskId + ", expGained=" + expGained + ", cashGained="
-				+ cashGained + ", numRevives=" + numRevives + ", startDate="
-				+ startDate + "]";
+		return "TaskForUserOngoing [id=" + id + ", userId=" + userId + ", taskId="
+				+ taskId + ", expGained=" + expGained + ", cashGained=" + cashGained
+				+ ", numRevives=" + numRevives + ", startDate=" + startDate + "]";
 	}
-	
+
 }

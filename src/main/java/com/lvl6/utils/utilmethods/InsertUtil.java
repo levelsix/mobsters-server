@@ -108,6 +108,9 @@ public interface InsertUtil {
 			int taskId, int expGained, int silverGained, int numRevives,
 			Timestamp startTime, Timestamp endTime, boolean userWon, boolean cancelled);
 	
+	public abstract int insertIntoTaskForUserCompleted(int userId, int task,
+			Timestamp timeOfEntry);
+	
 	public abstract int insertIntoUserTaskStage(List<Long> userTaskId, List<Integer> stageNum,
 			List<Integer> monsterId, List<Integer> expGained, List<Integer> silverGained,
 			List<Boolean> monsterPieceDropped);
