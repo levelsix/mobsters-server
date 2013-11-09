@@ -1171,15 +1171,15 @@ public class StartupController extends EventController {
     return equipId;
   }
 
-  private int getEquipId(int numBoosterItemsUserWants, List<BoosterItem> itemsUserReceives) {
-    if (1 != numBoosterItemsUserWants) {
-      log.error("unexpected error: trying to buy more than one equip from booster pack. boosterItems="
-          + MiscMethods.shallowListToString(itemsUserReceives));
-      return ControllerConstants.NOT_SET;
-    }
-    BoosterItem bi = itemsUserReceives.get(0);
-    return bi.getEquipId();
-  }
+//  private int getEquipId(int numBoosterItemsUserWants, List<BoosterItem> itemsUserReceives) {
+//    if (1 != numBoosterItemsUserWants) {
+//      log.error("unexpected error: trying to buy more than one equip from booster pack. boosterItems="
+//          + MiscMethods.shallowListToString(itemsUserReceives));
+//      return ControllerConstants.NOT_SET;
+//    }
+//    BoosterItem bi = itemsUserReceives.get(0);
+//    return bi.getEquipId();
+//  }
 
   private boolean writeBoosterStuffToDB(User aUser, Map<Integer, Integer> boosterItemIdsToNumCollected,
       Map<Integer, Integer> newBoosterItemIdsToNumCollected, List<BoosterItem> itemsUserReceives,
