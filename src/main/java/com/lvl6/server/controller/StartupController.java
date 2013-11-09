@@ -682,10 +682,6 @@ public class StartupController extends EventController {
     	for (MonsterForUser mfu : userMonsters) {
     		FullUserMonsterProto fump = CreateInfoProtoUtils.createFullUserMonsterProtoFromUserMonster(mfu);
     		resBuilder.addUsersMonsters(fump);
-    		
-    		if (2 == user.getId()) {
-    			log.info("monsterForUser=" + fump);
-    		}
     	}
     }
     
