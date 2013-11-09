@@ -79,20 +79,31 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			int previousGems = 0;
 
 
+			boolean success = false;
+			Map<String, Integer> money = new HashMap<String, Integer>();
 			if (legitExpansionComplete) {
 				previousGems = user.getGems();
 				int nthExpansion = epfuList.size();
-				Map<String, Integer> money = new HashMap<String, Integer>();
-				writeChangesToDB(user, epfu, speedUp, money, clientTime, nthExpansion, gemCostToSpeedup);
+				success = writeChangesToDB(user, epfu, speedUp, money, clientTime, nthExpansion, gemCostToSpeedup);
+			}
+			
+			if (success) {
+				UserCityExpansionDataProto ucedp = CreateInfoProtoUtils
+						.createUserCityExpansionDataProtoFromUserCityExpansionData(epfu); 
+				resBuilder.setUcedp(ucedp);
+			}
+			
+			ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(senderProto.getUserId());
+			resEvent.setTag(event.getTag());
+			resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());  
+			server.writeEvent(resEvent);
+			
+			if (success) {
 				writeToUserCurrencyHistory(user, clientTime, money, previousGems, xPosition, yPosition);
 				UserCityExpansionDataProto ucedp = CreateInfoProtoUtils
 						.createUserCityExpansionDataProtoFromUserCityExpansionData(epfu); 
 				resBuilder.setUcedp(ucedp);
 			}
-			ExpansionWaitCompleteResponseEvent resEvent = new ExpansionWaitCompleteResponseEvent(senderProto.getUserId());
-			resEvent.setTag(event.getTag());
-			resEvent.setExpansionWaitCompleteResponseProto(resBuilder.build());  
-			server.writeEvent(resEvent);
 			
 		} catch (Exception e) {
 			log.error("exception in ExpansionWaitCompleteController processEvent", e);
@@ -111,26 +122,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		}
 	}
 
-	private void writeChangesToDB(User user, ExpansionPurchaseForUser epfu, boolean speedup, 
+	private boolean writeChangesToDB(User user, ExpansionPurchaseForUser epfu, boolean speedup, 
 			Map<String, Integer> money, Timestamp clientTime, int nthExpansion, int gemCost) {
+		if (speedup) {
+			int gemChange = -1 * gemCost;
+			if (!user.updateRelativeDiamondsNaive(gemChange)) {
+				log.error("problem updating user gems. gemChange=" + gemChange);
+				return false;
+			} else {
+				//everything went ok
+				money.put(MiscMethods.gems, gemChange);
+			}
+		}
+		
 		int xPosition = epfu.getxPosition();
 		int yPosition = epfu.getyPosition();
 		if (!UpdateUtils.get().updateUserCityExpansionData(user.getId(),
 				xPosition, yPosition, false, clientTime)) {
 			log.error("problem with resolving expansion. expansion=" + epfu +
 					"\t speedup=" + speedup + "\t user=" + user);
+			return false;
 		}
-
-		if (!speedup) {
-			return;
-		}
-		int gemChange = -1 * gemCost;
-		if (!user.updateRelativeDiamondsNaive(gemChange)) {
-			log.error("problem updating user gems");
-		} else {
-			//everything went ok
-			money.put(MiscMethods.gems, gemChange);
-		}
+		return true;
 	}
 
 	private ExpansionPurchaseForUser selectSpecificExpansion(int xPosition, int yPosition,
