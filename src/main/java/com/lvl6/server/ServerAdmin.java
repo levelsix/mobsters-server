@@ -27,8 +27,10 @@ import com.hazelcast.core.MessageListener;
 import com.lvl6.events.response.PurgeClientStaticDataResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.EventStaticDataProto.PurgeClientStaticDataResponseProto;
+import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
@@ -206,9 +208,14 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 			log.info("Sending purge static data notification to clients: " + keySet.size());
 			while (playas.hasNext()) {
 				Integer playa = playas.next();
+				
+				StaticDataProto sdp = MiscMethods.getAllStaticData(playa);
 				PurgeClientStaticDataResponseEvent pcsd = new PurgeClientStaticDataResponseEvent(playa);
-				pcsd.setPurgeClientStaticDataResponseProto(PurgeClientStaticDataResponseProto.newBuilder()
-						.setSenderId(playa).build());
+				PurgeClientStaticDataResponseProto.Builder purgeProto = PurgeClientStaticDataResponseProto.newBuilder();
+				purgeProto.setSenderId(playa);
+				purgeProto.setStaticDataStuff(sdp);
+				
+				pcsd.setPurgeClientStaticDataResponseProto(purgeProto.build());
 				writer.handleEvent(pcsd);
 			}
 		}
