@@ -718,7 +718,7 @@ public class InsertUtils implements InsertUtil{
   	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TIME_OF_ENTRY, timeOfEntry);
   	
   	int numInserted = DBConnection.get().insertIntoTableBasic(
-			  DBConstants.TABLE_TASK_HISTORY, insertParams);
+			  DBConstants.TABLE_TASK_FOR_USER_COMPLETED, insertParams);
 	  return numInserted;
   }
 
