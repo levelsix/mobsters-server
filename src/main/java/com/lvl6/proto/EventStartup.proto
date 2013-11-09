@@ -76,6 +76,8 @@ message StartupResponseProto {
 	
 	repeated FullTaskProto allTasks = 34;
 	
+	repeated int32 completedTaskIds = 35; 
+	
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
 
