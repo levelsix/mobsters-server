@@ -34,7 +34,7 @@ message EndDungeonRequestProto {
 	optional int64 userTaskId = 2;
 	optional bool userWon = 3; 
 	optional int64 clientTime = 4;
-	
+	optional bool firstTimeUserWonTask = 5;
 }
 
 message EndDungeonResponseProto {
