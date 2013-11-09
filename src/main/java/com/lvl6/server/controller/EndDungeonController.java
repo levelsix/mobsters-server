@@ -72,7 +72,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     //set some values to send to the client (the response proto)
     EndDungeonResponseProto.Builder resBuilder = EndDungeonResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
-    resBuilder.setDidUserWin(userWon);
+    resBuilder.setUserWon(userWon);
     resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER); //default
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
