@@ -5,6 +5,7 @@ import "City.proto";
 import "Clan.proto";
 import "InAppPurchase.proto";
 import "Quest.proto";
+import "StaticData.proto";
 import "Structure.proto";
 import "Task.proto";
 import "User.proto";
@@ -65,7 +66,7 @@ message StartupResponseProto {
 	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 25;
 	
 	
-	
+	optional StaticDataProto staticDataStuffProto = 26;
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;

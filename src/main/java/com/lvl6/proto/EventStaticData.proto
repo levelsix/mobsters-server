@@ -1,10 +1,5 @@
 
-import "City.proto";
-import "MonsterStuff.proto";
-import "Quest.proto";
-import "Structure.proto";
-import "Task.proto";
-import "User.proto";
+import "StaticData.proto";
 
 package com.lvl6.proto;
 
@@ -12,38 +7,9 @@ option java_outer_classname = "EventStaticDataProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
 
-//in the future, put in neutral city elems?																						//DONE
-message RetrieveStaticDataRequestProto {
-    optional MinimumUserProto sender = 1;
-}
-
-message RetrieveStaticDataResponseProto {
-    optional MinimumUserProto sender = 1;
-	repeated CityExpansionCostProto expansionCosts = 2;
-	repeated FullCityProto allCities = 3;
-	repeated FullStructureProto allStructs = 4;
-	repeated FullTaskProto allTasks = 5;
-	repeated MonsterProto allMonsters = 6;
-	repeated StaticUserLevelInfoProto slip = 7;
-	
-	repeated FullQuestProto inProgressQuests = 8; //has not been completed
-    repeated FullQuestProto unredeemedQuests = 9; //is complete
-	repeated FullQuestProto availableQuests = 10; 
-	
-	
-	optional RetrieveStaticDataStatus status = 11;
-	
-	enum RetrieveStaticDataStatus {
-		SUCCESS = 1;
-		SOME_FAIL = 2;
-	}
-	
-}
-
-//------------------------------------------------------------------------------------------
-
 message PurgeClientStaticDataResponseProto {
      optional int32 senderId = 1;
+     optional StaticDataProto staticDataStuff = 2;
 }
 
 //------------------------------------------------------------------------------------------
