@@ -147,7 +147,8 @@ public class SendGroupChatController extends EventController {
           chatProto.setIsAdmin(user.isAdmin());
         }
         sendChatMessage(senderProto.getUserId(), chatProto, event.getTag(),
-            scope == GroupChatScope.CLAN, user.getClanId(), user.isAdmin(), timeOfPost.getTime());
+            scope == GroupChatScope.CLAN, user.getClanId(), user.isAdmin(),
+            timeOfPost.getTime(), user.getLevel());
         // send messages in background so sending player can unlock
         /*
          * executor.execute(new Runnable() {
@@ -166,7 +167,7 @@ public class SendGroupChatController extends EventController {
   }
 
   protected void sendChatMessage(int senderId, ReceivedGroupChatResponseProto.Builder chatProto, int tag,
-      boolean isForClan, int clanId, boolean isAdmin, long time) {
+      boolean isForClan, int clanId, boolean isAdmin, long time, int level) {
     ReceivedGroupChatResponseEvent ce = new ReceivedGroupChatResponseEvent(senderId);
     ce.setReceivedGroupChatResponseProto(chatProto.build());
     if (isForClan) {

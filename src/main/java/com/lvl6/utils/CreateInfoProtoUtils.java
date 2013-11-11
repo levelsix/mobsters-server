@@ -719,12 +719,22 @@ public class CreateInfoProtoUtils {
 
   public static GroupChatMessageProto createGroupChatMessageProtoFromClanChatPost(
       ClanChatPost p, User user) {
-    return GroupChatMessageProto.newBuilder().setSender(createMinimumUserProtoFromUser(user))
-        .setTimeOfChat(p.getTimeOfPost().getTime()).setContent(p.getContent()).build();
+  	GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
+  	gcmpb.setSender(createMinimumUserProtoWithLevelFromUser(user));
+  	gcmpb.setTimeOfChat(p.getTimeOfPost().getTime());
+  	gcmpb.setContent(p.getContent());
+    return gcmpb.build();
   }
 
   public static GroupChatMessageProto createGroupChatMessageProto(long time, MinimumUserProto user, String content, boolean isAdmin, int chatId) {
-    return GroupChatMessageProto.newBuilder().setSender(user).setTimeOfChat(time).setContent(content).setIsAdmin(isAdmin).setChatId(chatId).build();
+  	GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
+  	
+//  	gcmpb.setSender(user);
+  	gcmpb.setTimeOfChat(time);
+  	gcmpb.setContent(content);
+  	gcmpb.setIsAdmin(isAdmin);
+  	gcmpb.setChatId(chatId).build();
+    return gcmpb.build();
   }
 
   public static FullUserClanProto createFullUserClanProtoFromUserClan(UserClan uc) {
