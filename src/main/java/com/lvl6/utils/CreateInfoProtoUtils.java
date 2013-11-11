@@ -726,7 +726,7 @@ public class CreateInfoProtoUtils {
     return gcmpb.build();
   }
 
-  public static GroupChatMessageProto createGroupChatMessageProto(long time, MinimumUserProto user, String content, boolean isAdmin, int chatId) {
+  public static GroupChatMessageProto createGroupChatMessageProto(long time, MinimumUserProtoWithLevel user, String content, boolean isAdmin, int chatId) {
   	GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
   	
 //  	gcmpb.setSender(user);

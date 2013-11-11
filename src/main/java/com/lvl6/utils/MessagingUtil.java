@@ -21,6 +21,7 @@ import com.lvl6.proto.ChatProto.GroupChatScope;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendAdminMessageResponseProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.server.EventWriter;
 
 @Component
@@ -52,6 +53,11 @@ public class MessagingUtil {
 	public MinimumUserProto getAlexUserProto() {
 		User alex = RetrieveUtils.userRetrieveUtils().getUserById(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
 		return CreateInfoProtoUtils.createMinimumUserProtoFromUser(alex);
+	}
+	
+	public MinimumUserProtoWithLevel getAlexUserProtoWithLvl() {
+		User alex = RetrieveUtils.userRetrieveUtils().getUserById(ControllerConstants.USER_CREATE__ID_OF_POSTER_OF_FIRST_WALL);
+		return CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(alex);
 	}
 	
 	
@@ -92,14 +98,14 @@ public class MessagingUtil {
 		//send regular global chat
 		log.info("Sending admin message global chat");
 		final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto.newBuilder();
-		MinimumUserProto senderProto = getAlexUserProto();
+		MinimumUserProtoWithLevel senderProto = getAlexUserProtoWithLvl();
 		final GroupChatScope scope = GroupChatScope.GLOBAL;
 		final Timestamp timeOfPost = new Timestamp(new Date().getTime());
 		chatProto.setChatMessage(message);
 		chatProto.setSender(senderProto);
 		chatProto.setScope(scope);
 		chatProto.setIsAdmin(true);
-		sendChatMessage(senderProto.getUserId(), chatProto, 1, timeOfPost.getTime());
+		sendChatMessage(senderProto.getMinUserProto().getUserId(), chatProto, 1, timeOfPost.getTime());
 	}
 	
 	protected void sendChatMessage(int senderId, ReceivedGroupChatResponseProto.Builder chatProto, int tag, long time) {

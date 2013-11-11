@@ -22,15 +22,16 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ChatProto.GroupChatMessageProto;
+import com.lvl6.proto.ChatProto.GroupChatScope;
 import com.lvl6.proto.EventChatProto.ReceivedGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatRequestProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.Builder;
 import com.lvl6.proto.EventChatProto.SendGroupChatResponseProto.SendGroupChatStatus;
-import com.lvl6.proto.ChatProto.GroupChatMessageProto;
-import com.lvl6.proto.ChatProto.GroupChatScope;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
 import com.lvl6.server.EventWriter;
 import com.lvl6.utils.ConnectedPlayer;
@@ -141,7 +142,9 @@ public class SendGroupChatController extends EventController {
         final ReceivedGroupChatResponseProto.Builder chatProto = ReceivedGroupChatResponseProto
             .newBuilder();
         chatProto.setChatMessage(censoredChatMessage);
-        chatProto.setSender(senderProto);
+        MinimumUserProtoWithLevel mupWithLvl = CreateInfoProtoUtils
+        		.createMinimumUserProtoWithLevelFromUser(user);
+        chatProto.setSender(mupWithLvl);
         chatProto.setScope(scope);
         if (scope == GroupChatScope.GLOBAL) {
           chatProto.setIsAdmin(user.isAdmin());

@@ -22,6 +22,7 @@ import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto;
 import com.lvl6.proto.EventChatProto.RetrievePrivateChatPostsResponseProto.RetrievePrivateChatPostsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -84,15 +85,15 @@ import com.lvl6.utils.RetrieveUtils;
             usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
             
             //for not hitting the db for every private chat post
-            Map<Integer, MinimumUserProto> userIdsToMups =
-                generateUserIdsToMups(usersByIds, userId, otherUserId);
+            Map<Integer, MinimumUserProtoWithLevel> userIdsToMups =
+                generateUserIdsToMupsWithLevel(usersByIds, userId, otherUserId);
             
             //convert private chat post to group chat message proto
             for (PrivateChatPost pwp : recentPrivateChatPosts) {
               int posterId = pwp.getPosterId();
               
               long time = pwp.getTimeOfPost().getTime();
-              MinimumUserProto user = userIdsToMups.get(posterId);
+              MinimumUserProtoWithLevel user = userIdsToMups.get(posterId);
               String content = pwp.getContent();
               boolean isAdmin = false;
               
@@ -119,17 +120,17 @@ import com.lvl6.utils.RetrieveUtils;
 
   }
   
-  private Map<Integer, MinimumUserProto> generateUserIdsToMups(Map<Integer, User> usersByIds,
+  private Map<Integer, MinimumUserProtoWithLevel> generateUserIdsToMupsWithLevel(Map<Integer, User> usersByIds,
       int userId, int otherUserId) {
-    Map<Integer, MinimumUserProto> userIdsToMups = new HashMap<Integer, MinimumUserProto>();
+    Map<Integer, MinimumUserProtoWithLevel> userIdsToMups = new HashMap<Integer, MinimumUserProtoWithLevel>();
     
     User aUser = usersByIds.get(userId);
     User otherUser = usersByIds.get(otherUserId);
     
-    MinimumUserProto mup1 = CreateInfoProtoUtils.createMinimumUserProtoFromUser(aUser);
+    MinimumUserProtoWithLevel mup1 = CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(aUser);
     userIdsToMups.put(userId, mup1);
     
-    MinimumUserProto mup2 = CreateInfoProtoUtils.createMinimumUserProtoFromUser(otherUser);
+    MinimumUserProtoWithLevel mup2 = CreateInfoProtoUtils.createMinimumUserProtoWithLevelFromUser(otherUser);
     userIdsToMups.put(otherUserId, mup2);
     
     return userIdsToMups;

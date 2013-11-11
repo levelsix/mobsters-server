@@ -36,6 +36,7 @@ import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
+import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
@@ -68,6 +69,7 @@ import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
+import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
@@ -357,54 +359,54 @@ public class StartupController extends EventController {
   
   
   private void setChatMessages(StartupResponseProto.Builder resBuilder, User user) {
-  	//  if (user.getClanId() > 0) {
-  	//    List<ClanChatPost> activeClanChatPosts;
-  	//    activeClanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
-  	//        ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
-  	//
-  	//    if (activeClanChatPosts != null) {
-  	//      if (activeClanChatPosts != null && activeClanChatPosts.size() > 0) {
-  	//        List<Integer> userIds = new ArrayList<Integer>();
-  	//        for (ClanChatPost p : activeClanChatPosts) {
-  	//          userIds.add(p.getPosterId());
-  	//        }
-  	//        Map<Integer, User> usersByIds = null;
-  	//        if (userIds.size() > 0) {
-  	//          usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-  	//          for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
-  	//            ClanChatPost pwp = activeClanChatPosts.get(i);
-  	//            resBuilder.addClanChats(CreateInfoProtoUtils
-  	//                .createGroupChatMessageProtoFromClanChatPost(pwp,
-  	//                    usersByIds.get(pwp.getPosterId())));
-  	//          }
-  	//        }
-  	//      }
-  	//    }
-  	//  }
-  	//
-  	//  Iterator<GroupChatMessageProto> it = chatMessages.iterator();
-  	//  List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
-  	//  while (it.hasNext()) {
-  	//    globalChats.add(it.next());
-  	//  }
-  	//
-  	//  Comparator<GroupChatMessageProto> c = new Comparator<GroupChatMessageProto>() {
-  	//    @Override
-  	//    public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
-  	//      if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
-  	//        return -1;
-  	//      } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
-  	//        return 1;
-  	//      } else {
-  	//        return 0;
-  	//      }
-  	//    }
-  	//  };
-  	//  Collections.sort(globalChats, c);
-  	//  // Need to add them in reverse order
-  	//  for (int i = 0; i < globalChats.size(); i++) {
-  	//    resBuilder.addGlobalChats(globalChats.get(i));
-  	//  }
+  	  if (user.getClanId() > 0) {
+  	    List<ClanChatPost> activeClanChatPosts;
+  	    activeClanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
+  	        ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
+  	
+  	    if (activeClanChatPosts != null) {
+  	      if (activeClanChatPosts != null && activeClanChatPosts.size() > 0) {
+  	        List<Integer> userIds = new ArrayList<Integer>();
+  	        for (ClanChatPost p : activeClanChatPosts) {
+  	          userIds.add(p.getPosterId());
+  	        }
+  	        Map<Integer, User> usersByIds = null;
+  	        if (userIds.size() > 0) {
+  	          usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+  	          for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
+  	            ClanChatPost pwp = activeClanChatPosts.get(i);
+  	            resBuilder.addClanChats(CreateInfoProtoUtils
+  	                .createGroupChatMessageProtoFromClanChatPost(pwp,
+  	                    usersByIds.get(pwp.getPosterId())));
+  	          }
+  	        }
+  	      }
+  	    }
+  	  }
+  	
+  	  Iterator<GroupChatMessageProto> it = chatMessages.iterator();
+  	  List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
+  	  while (it.hasNext()) {
+  	    globalChats.add(it.next());
+  	  }
+  	
+  	  Comparator<GroupChatMessageProto> c = new Comparator<GroupChatMessageProto>() {
+  	    @Override
+  	    public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
+  	      if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
+  	        return -1;
+  	      } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
+  	        return 1;
+  	      } else {
+  	        return 0;
+  	      }
+  	    }
+  	  };
+  	  Collections.sort(globalChats, c);
+  	  // Need to add them in reverse order
+  	  for (int i = 0; i < globalChats.size(); i++) {
+  	    resBuilder.addGlobalChats(globalChats.get(i));
+  	  }
   }
 
   private void setPrivateChatPosts(Builder resBuilder, User aUser) {
