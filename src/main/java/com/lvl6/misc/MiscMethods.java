@@ -1446,7 +1446,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   			StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
   	for (int lvl : levelToStaticUserLevelInfo.keySet())  {
   		StaticUserLevelInfo sli = levelToStaticUserLevelInfo.get(lvl);
-  		int exp = sli.getLvl();
+  		int exp = sli.getRequiredExp();
   		int maxCash = sli.getMaxCash();
 
   		StaticUserLevelInfoProto.Builder slipb = StaticUserLevelInfoProto.newBuilder();
