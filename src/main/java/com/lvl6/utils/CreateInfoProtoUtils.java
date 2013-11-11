@@ -132,7 +132,10 @@ public class CreateInfoProtoUtils {
 
   public static MinimumUserProtoWithLevel createMinimumUserProtoWithLevelFromUser(User u) {
     MinimumUserProto mup = createMinimumUserProtoFromUser(u);
-    return MinimumUserProtoWithLevel.newBuilder().setMinUserProto(mup).setLevel(u.getLevel()).build();
+    MinimumUserProtoWithLevel.Builder mupWithLevel = MinimumUserProtoWithLevel.newBuilder();
+    mupWithLevel.setMinUserProto(mup);
+    mupWithLevel.setLevel(u.getLevel());
+    return mupWithLevel.build();
   }
   
   public static MinimumUserProtoWithFacebookId createMinimumUserProtoWithFacebookIdFromUser(User u) {
@@ -729,7 +732,7 @@ public class CreateInfoProtoUtils {
   public static GroupChatMessageProto createGroupChatMessageProto(long time, MinimumUserProtoWithLevel user, String content, boolean isAdmin, int chatId) {
   	GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
   	
-//  	gcmpb.setSender(user);
+  	gcmpb.setSender(user);
   	gcmpb.setTimeOfChat(time);
   	gcmpb.setContent(content);
   	gcmpb.setIsAdmin(isAdmin);
