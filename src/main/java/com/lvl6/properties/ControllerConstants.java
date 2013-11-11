@@ -28,6 +28,11 @@ public class ControllerConstants {
 	public static final String MFUDR__QUEST = "quest";
 	public static final String MFUDR__SELL = "sold for cash";
 	
+	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
+	
+	
+	
+	//old aoc constants
   public static final int NOT_SET = -1;
   
   //GENERATING LISTS OF ENEMIES
@@ -379,5 +384,6 @@ public class ControllerConstants {
   public static final String NIB_NAME__TRAVELING_MAP = "TravelingMap.4";
   public static final String NIB_NAME__EXPANSION = "Expansion.2";
   public static final String NIB_NAME__GOLD_SHOPPE = "GoldShoppe.4";
+	
   
 }
