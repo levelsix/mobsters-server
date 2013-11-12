@@ -1,4 +1,5 @@
 
+import "MonsterStuff.proto";
 import "Structure.proto";
 import "User.proto";
 
@@ -64,12 +65,14 @@ message LevelUpResponseProto {
 message RetrieveUsersForUserIdsRequestProto {
     optional MinimumUserProto sender = 1;
 	repeated int32 requestedUserIds = 2;
+	optional bool includeCurMonsterTeam = 3;
 }
 
 																						//DONE
 message RetrieveUsersForUserIdsResponseProto {
     optional MinimumUserProto sender = 1;
 	repeated FullUserProto requestedUsers = 2;
+	optional UserCurrentMonsterTeamProto curTeam = 3;
 }
 
 //------------------------------------------------------------------------------------------

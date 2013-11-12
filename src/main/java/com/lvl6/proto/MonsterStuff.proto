@@ -107,3 +107,10 @@ message MinimumUserMonsterSellProto {
 	optional int64 userMonsterId = 1;
 	optional int32 cashAmount = 2;
 }
+
+//------------------------------------------------------------------------------------------
+
+message UserCurrentMonsterTeamProto {
+	optional int32 userId = 1;
+	repeated FullUserMonsterProto currentTeam = 2;
+}
