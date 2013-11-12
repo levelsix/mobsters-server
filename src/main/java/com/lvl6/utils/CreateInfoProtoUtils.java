@@ -488,7 +488,17 @@ public class CreateInfoProtoUtils {
     
     builder.setCityId(task.getCityId());
     builder.setAssetNumWithinCity(task.getAssetNumberWithinCity());
-    builder.setPrerequisiteTaskId(task.getPrerequisiteTaskId());
+    
+    int prerequisiteTaskId = task.getPrerequisiteTaskId();
+    if (prerequisiteTaskId > 0) {
+    	builder.setPrerequisiteTaskId(prerequisiteTaskId);
+    }
+    
+    int prerequisiteQuestId = task.getPrerequisiteQuestId();
+    if (prerequisiteQuestId > 0) {
+    	builder.setPrerequisiteQuestId(prerequisiteQuestId);
+    }
+    
     return builder.build();
   }
 

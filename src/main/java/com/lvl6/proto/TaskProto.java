@@ -645,6 +645,10 @@ public final class TaskProto {
     // optional int32 prerequisiteTaskId = 6;
     boolean hasPrerequisiteTaskId();
     int getPrerequisiteTaskId();
+    
+    // optional int32 prerequisiteQuestId = 7;
+    boolean hasPrerequisiteQuestId();
+    int getPrerequisiteQuestId();
   }
   public static final class FullTaskProto extends
       com.google.protobuf.GeneratedMessage
@@ -779,6 +783,16 @@ public final class TaskProto {
       return prerequisiteTaskId_;
     }
     
+    // optional int32 prerequisiteQuestId = 7;
+    public static final int PREREQUISITEQUESTID_FIELD_NUMBER = 7;
+    private int prerequisiteQuestId_;
+    public boolean hasPrerequisiteQuestId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getPrerequisiteQuestId() {
+      return prerequisiteQuestId_;
+    }
+    
     private void initFields() {
       taskId_ = 0;
       name_ = "";
@@ -786,6 +800,7 @@ public final class TaskProto {
       cityId_ = 0;
       assetNumWithinCity_ = 0;
       prerequisiteTaskId_ = 0;
+      prerequisiteQuestId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -816,6 +831,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, prerequisiteTaskId_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, prerequisiteQuestId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -849,6 +867,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, prerequisiteTaskId_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, prerequisiteQuestId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -986,6 +1008,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         prerequisiteTaskId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        prerequisiteQuestId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -1048,6 +1072,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000020;
         }
         result.prerequisiteTaskId_ = prerequisiteTaskId_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.prerequisiteQuestId_ = prerequisiteQuestId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1081,6 +1109,9 @@ public final class TaskProto {
         }
         if (other.hasPrerequisiteTaskId()) {
           setPrerequisiteTaskId(other.getPrerequisiteTaskId());
+        }
+        if (other.hasPrerequisiteQuestId()) {
+          setPrerequisiteQuestId(other.getPrerequisiteQuestId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1141,6 +1172,11 @@ public final class TaskProto {
             case 48: {
               bitField0_ |= 0x00000020;
               prerequisiteTaskId_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              prerequisiteQuestId_ = input.readInt32();
               break;
             }
           }
@@ -1301,6 +1337,27 @@ public final class TaskProto {
       public Builder clearPrerequisiteTaskId() {
         bitField0_ = (bitField0_ & ~0x00000020);
         prerequisiteTaskId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 prerequisiteQuestId = 7;
+      private int prerequisiteQuestId_ ;
+      public boolean hasPrerequisiteQuestId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getPrerequisiteQuestId() {
+        return prerequisiteQuestId_;
+      }
+      public Builder setPrerequisiteQuestId(int value) {
+        bitField0_ |= 0x00000040;
+        prerequisiteQuestId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearPrerequisiteQuestId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        prerequisiteQuestId_ = 0;
         onChanged();
         return this;
       }
@@ -2504,19 +2561,20 @@ public final class TaskProto {
       "\n\nTask.proto\022\016com.lvl6.proto\032\022MonsterStu" +
       "ff.proto\"_\n\016TaskStageProto\022\017\n\007stageId\030\001 " +
       "\001(\005\022<\n\rstageMonsters\030\002 \003(\0132%.com.lvl6.pr" +
-      "oto.TaskStageMonsterProto\"\212\001\n\rFullTaskPr" +
+      "oto.TaskStageMonsterProto\"\247\001\n\rFullTaskPr" +
       "oto\022\016\n\006taskId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\023\n\013des" +
       "cription\030\003 \001(\t\022\016\n\006cityId\030\004 \001(\005\022\032\n\022assetN" +
       "umWithinCity\030\005 \001(\005\022\032\n\022prerequisiteTaskId" +
-      "\030\006 \001(\005\"M\n\024MinimumUserTaskProto\022\016\n\006userId" +
-      "\030\001 \001(\005\022\016\n\006taskId\030\002 \001(\005\022\025\n\rnumTimesActed\030" +
-      "\003 \001(\005\"\371\001\n\025TaskStageMonsterProto\022\021\n\tmonst",
-      "erId\030\001 \001(\005\022F\n\013monsterType\030\002 \001(\01621.com.lv" +
-      "l6.proto.TaskStageMonsterProto.MonsterTy" +
-      "pe\022\021\n\texpReward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(" +
-      "\005\022\032\n\022puzzlePieceDropped\030\005 \001(\010\022\r\n\005level\030\006" +
-      " \001(\005\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI" +
-      "_BOSS\020\002\022\010\n\004BOSS\020\003B\013B\tTaskProto"
+      "\030\006 \001(\005\022\033\n\023prerequisiteQuestId\030\007 \001(\005\"M\n\024M" +
+      "inimumUserTaskProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006t" +
+      "askId\030\002 \001(\005\022\025\n\rnumTimesActed\030\003 \001(\005\"\371\001\n\025T",
+      "askStageMonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022" +
+      "F\n\013monsterType\030\002 \001(\01621.com.lvl6.proto.Ta" +
+      "skStageMonsterProto.MonsterType\022\021\n\texpRe" +
+      "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\032\n\022puzzle" +
+      "PieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\"3\n\013Mon" +
+      "sterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004" +
+      "BOSS\020\003B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2536,7 +2594,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_FullTaskProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullTaskProto_descriptor,
-              new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", },
+              new java.lang.String[] { "TaskId", "Name", "Description", "CityId", "AssetNumWithinCity", "PrerequisiteTaskId", "PrerequisiteQuestId", },
               com.lvl6.proto.TaskProto.FullTaskProto.class,
               com.lvl6.proto.TaskProto.FullTaskProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserTaskProto_descriptor =

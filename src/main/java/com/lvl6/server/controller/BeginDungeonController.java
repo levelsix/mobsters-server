@@ -85,7 +85,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       Task aTask = TaskRetrieveUtils.getTaskForTaskId(taskId);
 
-      //userBossList should be populated if successful
       Map<Integer, TaskStage> tsMap = new HashMap<Integer, TaskStage>();
       boolean legit = checkLegit(resBuilder, aUser, userId, aTask,
     		  taskId, tsMap);
