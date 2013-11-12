@@ -72,7 +72,7 @@ message RetrieveUsersForUserIdsRequestProto {
 message RetrieveUsersForUserIdsResponseProto {
     optional MinimumUserProto sender = 1;
 	repeated FullUserProto requestedUsers = 2;
-	optional UserCurrentMonsterTeamProto curTeam = 3;
+	repeated UserCurrentMonsterTeamProto curTeam = 3;
 }
 
 //------------------------------------------------------------------------------------------
