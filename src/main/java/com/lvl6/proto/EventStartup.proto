@@ -34,6 +34,7 @@ message StartupResponseProto {
     
 	//only send the ones that are not redeemed, (incomplete and complete)
 	repeated FullUserQuestProto userQuests = 6;
+	optional FullUserQuestProto userQuests = 27;
 	repeated FullUserClanProto userClanInfo = 7;
 	repeated int32 completedTaskIds = 8; 
 	
@@ -67,7 +68,7 @@ message StartupResponseProto {
 	
 	
 	optional StaticDataProto staticDataStuffProto = 26;
-	
+	//optional FullUserQuestProto userQuests = 27; //above, after "userQuests = 6"
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
