@@ -62,7 +62,7 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setOtherUserId(otherUserId);
 
     try {
-      resBuilder.setStatus(RetrievePrivateChatPostsStatus.FAIL);
+      resBuilder.setStatus(RetrievePrivateChatPostsStatus.SUCCESS);
 
       List <PrivateChatPost> recentPrivateChatPosts;
       if (beforePrivateChatId > 0) {
@@ -116,6 +116,16 @@ import com.lvl6.utils.RetrieveUtils;
       server.writeEvent(resEvent);
     } catch (Exception e) {
       log.error("exception in RetrievePrivateChatPostsController processEvent", e);
+    //don't let the client hang
+      try {
+    	  resBuilder.setStatus(RetrievePrivateChatPostsStatus.FAIL);
+    	  RetrievePrivateChatPostsResponseEvent resEvent = new RetrievePrivateChatPostsResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setRetrievePrivateChatPostsResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+      } catch (Exception e2) {
+    	  log.error("exception2 in RetrievePrivateChatPostsController processEvent", e);
+      }
     }
 
   }
