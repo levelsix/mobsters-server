@@ -295,6 +295,7 @@ public class StartupController extends EventController {
 //  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
   	  
   	  List<QuestForUser> inProgressQuests = new ArrayList<QuestForUser>();
+  	  List<Integer> redeemedQuestIds = new ArrayList<Integer>();
   	  
   	  Map<Integer, Quest> questIdToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
   	  for (QuestForUser uq : inProgressAndRedeemedUserQuests) {
@@ -302,6 +303,9 @@ public class StartupController extends EventController {
   	    if (!uq.isRedeemed()) {
   	    	//unredeemed quest section
   	    	inProgressQuests.add(uq);
+  	    } else {
+  	    	int questId = uq.getQuestId();
+  	    	redeemedQuestIds.add(questId);
   	    }
   	  }
   	  
@@ -309,6 +313,9 @@ public class StartupController extends EventController {
   	  List<FullUserQuestProto> currentUserQuests = CreateInfoProtoUtils
   	  		.createFullUserQuestDataLarges(inProgressQuests, questIdToQuests);
   	  resBuilder.addAllUserQuests(currentUserQuests);
+  	  
+  	  //generate the redeemed quest ids
+  	  resBuilder.addAllRedeemedQuestIds(redeemedQuestIds);
   }
   
   private void setUserClanInfos(StartupResponseProto.Builder resBuilder, User user) {
