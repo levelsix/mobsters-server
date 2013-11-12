@@ -547,8 +547,11 @@ public class CreateInfoProtoUtils {
     }
     
     builder.setRoadImgCoords(createCoordinateProtoFromCoordinatePair(c.getRoadImgCoords()));
-    
-
+    String atkMapLabelImgName = c.getAttackMapLabelImgName();
+    if (null != atkMapLabelImgName) {
+    	builder.setAttackMapLabelImgName(c.getAttackMapLabelImgName());
+    }
+    	
     return builder.build();
   }
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class City implements Serializable {
 
-	private static final long serialVersionUID = -4600432068729933532L;
+	private static final long serialVersionUID = 8092805006560290613L;
 	private int id;
 	private String name;
 	private String mapImgName;
@@ -12,9 +12,11 @@ public class City implements Serializable {
 	private String roadImgName;
 	private String mapTmxName;
 	private CoordinatePair roadImgCoords;
+	private String attackMapLabelImgName;
 	
 	public City(int id, String name, String mapImgName, CoordinatePair center,
-			String roadImgName, String mapTmxName, CoordinatePair roadImgCoords) {
+			String roadImgName, String mapTmxName, CoordinatePair roadImgCoords,
+			String attackMapLabelImgName) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -23,6 +25,7 @@ public class City implements Serializable {
 		this.roadImgName = roadImgName;
 		this.mapTmxName = mapTmxName;
 		this.roadImgCoords = roadImgCoords;
+		this.attackMapLabelImgName = attackMapLabelImgName;
 	}
 
 	public int getId() {
@@ -81,11 +84,20 @@ public class City implements Serializable {
 		this.roadImgCoords = roadImgCoords;
 	}
 
+	public String getAttackMapLabelImgName() {
+		return attackMapLabelImgName;
+	}
+
+	public void setAttackMapLabelImgName(String attackMapLabelImgName) {
+		this.attackMapLabelImgName = attackMapLabelImgName;
+	}
+
 	@Override
 	public String toString() {
 		return "City [id=" + id + ", name=" + name + ", mapImgName=" + mapImgName
 				+ ", center=" + center + ", roadImgName=" + roadImgName
 				+ ", mapTmxName=" + mapTmxName + ", roadImgCoords=" + roadImgCoords
-				+ "]";
+				+ ", attackMapLabelImgName=" + attackMapLabelImgName + "]";
 	}
+	
 }

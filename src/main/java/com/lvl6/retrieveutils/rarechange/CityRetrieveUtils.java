@@ -81,9 +81,10 @@ import com.lvl6.utils.DBConnection;
 		String roadImgName = rs.getString(i++);
 		String mapTmxName = rs.getString(i++);
 		CoordinatePair roadImgCoords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
+		String attackMapLabelImgName = rs.getString(i++);
 		
 		City city = new City(id, name, mapImgName, center, roadImgName, mapTmxName,
-				roadImgCoords); 
+				roadImgCoords, attackMapLabelImgName); 
 		return city;
 	}
 

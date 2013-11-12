@@ -2159,6 +2159,10 @@ public final class CityProto {
     java.util.List<java.lang.Integer> getTaskIdsList();
     int getTaskIdsCount();
     int getTaskIds(int index);
+    
+    // optional string attackMapLabelImgName = 9;
+    boolean hasAttackMapLabelImgName();
+    String getAttackMapLabelImgName();
   }
   public static final class FullCityProto extends
       com.google.protobuf.GeneratedMessage
@@ -2367,6 +2371,38 @@ public final class CityProto {
       return taskIds_.get(index);
     }
     
+    // optional string attackMapLabelImgName = 9;
+    public static final int ATTACKMAPLABELIMGNAME_FIELD_NUMBER = 9;
+    private java.lang.Object attackMapLabelImgName_;
+    public boolean hasAttackMapLabelImgName() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public String getAttackMapLabelImgName() {
+      java.lang.Object ref = attackMapLabelImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          attackMapLabelImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAttackMapLabelImgNameBytes() {
+      java.lang.Object ref = attackMapLabelImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        attackMapLabelImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       cityId_ = 0;
       name_ = "";
@@ -2376,6 +2412,7 @@ public final class CityProto {
       mapTmxName_ = "";
       roadImgCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       taskIds_ = java.util.Collections.emptyList();;
+      attackMapLabelImgName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2412,6 +2449,9 @@ public final class CityProto {
       }
       for (int i = 0; i < taskIds_.size(); i++) {
         output.writeInt32(8, taskIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(9, getAttackMapLabelImgNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2458,6 +2498,10 @@ public final class CityProto {
         }
         size += dataSize;
         size += 1 * getTaskIdsList().size();
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getAttackMapLabelImgNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2609,6 +2653,8 @@ public final class CityProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         taskIds_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000080);
+        attackMapLabelImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       
@@ -2688,6 +2734,10 @@ public final class CityProto {
           bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.taskIds_ = taskIds_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.attackMapLabelImgName_ = attackMapLabelImgName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2734,6 +2784,9 @@ public final class CityProto {
             taskIds_.addAll(other.taskIds_);
           }
           onChanged();
+        }
+        if (other.hasAttackMapLabelImgName()) {
+          setAttackMapLabelImgName(other.getAttackMapLabelImgName());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2821,6 +2874,11 @@ public final class CityProto {
                 addTaskIds(input.readInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
+              attackMapLabelImgName_ = input.readBytes();
               break;
             }
           }
@@ -3219,6 +3277,42 @@ public final class CityProto {
         return this;
       }
       
+      // optional string attackMapLabelImgName = 9;
+      private java.lang.Object attackMapLabelImgName_ = "";
+      public boolean hasAttackMapLabelImgName() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public String getAttackMapLabelImgName() {
+        java.lang.Object ref = attackMapLabelImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          attackMapLabelImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setAttackMapLabelImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        attackMapLabelImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAttackMapLabelImgName() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        attackMapLabelImgName_ = getDefaultInstance().getAttackMapLabelImgName();
+        onChanged();
+        return this;
+      }
+      void setAttackMapLabelImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000100;
+        attackMapLabelImgName_ = value;
+        onChanged();
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullCityProto)
     }
     
@@ -3276,13 +3370,14 @@ public final class CityProto {
       ":\nPOSITION_1\0225\n\014spriteCoords\030\n \001(\0132\037.com" +
       ".lvl6.proto.CoordinateProto\"P\n\014CityElemT" +
       "ype\022\014\n\010BUILDING\020\001\022\016\n\nDECORATION\020\002\022\030\n\024PER" +
-      "SON_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\344\001\n\rFullCi" +
+      "SON_NEUTRAL_ENEMY\020\003\022\010\n\004BOSS\020\004\"\203\002\n\rFullCi" +
       "tyProto\022\016\n\006cityId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n" +
       "\nmapImgName\030\003 \001(\t\022/\n\006center\030\004 \001(\0132\037.com.",
       "lvl6.proto.CoordinateProto\022\023\n\013roadImgNam" +
       "e\030\005 \001(\t\022\022\n\nmapTmxName\030\006 \001(\t\0226\n\rroadImgCo" +
       "ords\030\007 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
-      "oto\022\017\n\007taskIds\030\010 \003(\005B\013B\tCityProto"
+      "oto\022\017\n\007taskIds\030\010 \003(\005\022\035\n\025attackMapLabelIm" +
+      "gName\030\t \001(\tB\013B\tCityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3318,7 +3413,7 @@ public final class CityProto {
           internal_static_com_lvl6_proto_FullCityProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullCityProto_descriptor,
-              new java.lang.String[] { "CityId", "Name", "MapImgName", "Center", "RoadImgName", "MapTmxName", "RoadImgCoords", "TaskIds", },
+              new java.lang.String[] { "CityId", "Name", "MapImgName", "Center", "RoadImgName", "MapTmxName", "RoadImgCoords", "TaskIds", "AttackMapLabelImgName", },
               com.lvl6.proto.CityProto.FullCityProto.class,
               com.lvl6.proto.CityProto.FullCityProto.Builder.class);
           return null;
