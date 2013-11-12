@@ -121,23 +121,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
       boolean successful = false;
       if (legit) {
-        //check if user has bought up all the booster items in the booster pack
-        int numBoosterItemsUserWants = 1;
+      	previousGems = user.getGems();
+
+      	int numBoosterItemsUserWants = 1;
         itemsUserReceives = determineBoosterItemsUserReceives(
         		numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
         
-        previousGems = user.getGems();
+        //set the FullUserMonsterProtos to send to the client
         successful = writeChangesToDB(resBuilder, user, boosterPackId,
         		itemsUserReceives, gemPrice, now);
       }
-      
-//      if (successful) {
-//        UserBoosterPackProto aUserBoosterPackProto = 
-//            CreateInfoProtoUtils.createUserBoosterPackProto(boosterPackId, userId, newBoosterItemIdsToNumCollected);
-//        
-//        resBuilder.addAllMonsterForUsers(fullMonsterForUserProtos);
-//        resBuilder.setUserBoosterPack(aUserBoosterPackProto);
-//      }
       
       PurchaseBoosterPackResponseProto resProto = resBuilder.build();
       PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserId());
