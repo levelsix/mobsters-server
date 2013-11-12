@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +12,14 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveUsersForUserIdsRequestEvent;
 import com.lvl6.events.response.RetrieveUsersForUserIdsResponseEvent;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsRequestProto;
 import com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto;
-import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -44,7 +47,8 @@ import com.lvl6.utils.RetrieveUtils;
 
     MinimumUserProto senderProto = reqProto.getSender();
     List<Integer> requestedUserIds = reqProto.getRequestedUserIdsList();
-
+    boolean includeCurMonsterTeam = reqProto.getIncludeCurMonsterTeam();
+    
     RetrieveUsersForUserIdsResponseProto.Builder resBuilder = RetrieveUsersForUserIdsResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
@@ -62,6 +66,16 @@ import com.lvl6.utils.RetrieveUtils;
 //          resBuilder.addPotentialPointsLost(pointsLost);
 //        }
       }
+      
+      List<UserCurrentMonsterTeamProto> teams = null;
+      if (includeCurMonsterTeam) {
+      	teams = constructTeamsForUsers(requestedUserIds);
+      }
+      
+      if (null != teams && !teams.isEmpty()) {
+      	resBuilder.addAllCurTeam(teams);
+      }
+      
     } else {
       log.error("no users with the ids " + requestedUserIds);
     }
@@ -70,6 +84,29 @@ import com.lvl6.utils.RetrieveUtils;
     resEvent.setTag(event.getTag());
     resEvent.setRetrieveUsersForUserIdsResponseProto(resProto);
     server.writeEvent(resEvent);
+  }
+  
+  private List<UserCurrentMonsterTeamProto> constructTeamsForUsers(List<Integer> userIds) {
+  	Map<Integer, List<MonsterForUser>> userIdsToCurrentTeam = RetrieveUtils
+  			.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIds);
+
+  	//for each user construct his current team
+  	List<UserCurrentMonsterTeamProto> retVal = new ArrayList<UserCurrentMonsterTeamProto>();
+  	for (Integer userId : userIdsToCurrentTeam.keySet()) {
+  		List<MonsterForUser> currentTeam = userIdsToCurrentTeam.get(userId);
+
+  		List<FullUserMonsterProto> currentTeamProto = CreateInfoProtoUtils
+  				.createFullUserMonsterProtoList(currentTeam);
+  		
+  		//create the proto via the builder
+  		UserCurrentMonsterTeamProto.Builder teamForUser = UserCurrentMonsterTeamProto.newBuilder();
+  		teamForUser.setUserId(userId);
+  		teamForUser.addAllCurrentTeam(currentTeamProto);
+  		
+  		retVal.add(teamForUser.build());
+  	}
+  	
+  	return retVal;
   }
 
 }

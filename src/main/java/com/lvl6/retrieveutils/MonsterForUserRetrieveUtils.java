@@ -51,6 +51,37 @@ import com.lvl6.utils.utilmethods.StringUtils;
     DBConnection.get().close(rs, null, conn);
     return monsterIdsToMonsters;
   }
+  
+  public Map<Integer, List<MonsterForUser>> getUserIdsToMonsterTeamForUserIds(
+  		List<Integer> userIds) {
+  	
+  	StringBuffer sb = new StringBuffer();
+  	sb.append("SELECT * FROM ");
+  	sb.append(TABLE_NAME);
+  	sb.append(" WHERE ");
+  	sb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+  	sb.append(" IN (");
+  	String userIdStr = StringUtils.csvList(userIds);
+  	sb.append(userIdStr);
+  	sb.append(") AND ");
+  	sb.append(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM);
+  	sb.append(" > ?;");
+  	
+  	List<Object> values = new ArrayList<Object>();
+  	values.addAll(userIds);
+  	values.add(0);
+  	
+  	String query = sb.toString();
+  	
+  	log.info("RETRIEVING USERS' TEAMS. query=" + query + "\t\t values=" + values);
+  	
+  	Connection conn = DBConnection.get().getConnection();
+  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+  	Map<Integer, List<MonsterForUser>> userIdsToCurrentTeam = convertRSToUserIdsToCurrentTeam(rs);
+  	DBConnection.get().close(rs, null, conn);
+  	
+  	return userIdsToCurrentTeam;
+  }
 
   ////@Cacheable(value="specificMonster", key="#userMonsterId")
   public MonsterForUser getSpecificUserMonster(long userMonsterId) {
@@ -168,6 +199,39 @@ import com.lvl6.utils.utilmethods.StringUtils;
       }
     }
     return null;
+  }
+  
+  private Map<Integer, List<MonsterForUser>> convertRSToUserIdsToCurrentTeam(
+      ResultSet rs) {
+  	Map<Integer, List<MonsterForUser>> userIdsToCurrentTeam = new HashMap<Integer, List<MonsterForUser>>();
+  	
+    if (rs != null) {
+      try {
+        rs.last();
+        rs.beforeFirst();
+        while(rs.next()) {
+          MonsterForUser userMonster = convertRSRowToMonster(rs);
+          if (null == userMonster) {
+          	continue;
+          }
+          
+          int userId = userMonster.getUserId();
+
+          //if just saw this user for first time, create the list for his team
+          if (!userIdsToCurrentTeam.containsKey(userId)) {
+          	List<MonsterForUser> currentTeam = new ArrayList<MonsterForUser>();
+          	userIdsToCurrentTeam.put(userId, currentTeam);
+          }
+
+          //get the user's team and add in the monster
+          List<MonsterForUser> currentTeam = userIdsToCurrentTeam.get(userId);
+          currentTeam.add(userMonster);
+        }
+      } catch (SQLException e) {
+        log.error("problem with database call.", e);
+      }
+    }
+    return userIdsToCurrentTeam;
   }
   
   private Map<Integer, MonsterForUser> convertRSToMonsterIdsToMonsters(ResultSet rs) {

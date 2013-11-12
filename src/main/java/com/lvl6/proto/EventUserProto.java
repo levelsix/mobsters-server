@@ -2821,6 +2821,10 @@ public final class EventUserProto {
     java.util.List<java.lang.Integer> getRequestedUserIdsList();
     int getRequestedUserIdsCount();
     int getRequestedUserIds(int index);
+    
+    // optional bool includeCurMonsterTeam = 3;
+    boolean hasIncludeCurMonsterTeam();
+    boolean getIncludeCurMonsterTeam();
   }
   public static final class RetrieveUsersForUserIdsRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -2878,9 +2882,20 @@ public final class EventUserProto {
       return requestedUserIds_.get(index);
     }
     
+    // optional bool includeCurMonsterTeam = 3;
+    public static final int INCLUDECURMONSTERTEAM_FIELD_NUMBER = 3;
+    private boolean includeCurMonsterTeam_;
+    public boolean hasIncludeCurMonsterTeam() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public boolean getIncludeCurMonsterTeam() {
+      return includeCurMonsterTeam_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       requestedUserIds_ = java.util.Collections.emptyList();;
+      includeCurMonsterTeam_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2899,6 +2914,9 @@ public final class EventUserProto {
       }
       for (int i = 0; i < requestedUserIds_.size(); i++) {
         output.writeInt32(2, requestedUserIds_.get(i));
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(3, includeCurMonsterTeam_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2921,6 +2939,10 @@ public final class EventUserProto {
         }
         size += dataSize;
         size += 1 * getRequestedUserIdsList().size();
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, includeCurMonsterTeam_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3055,6 +3077,8 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         requestedUserIds_ = java.util.Collections.emptyList();;
         bitField0_ = (bitField0_ & ~0x00000002);
+        includeCurMonsterTeam_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -3106,6 +3130,10 @@ public final class EventUserProto {
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.requestedUserIds_ = requestedUserIds_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.includeCurMonsterTeam_ = includeCurMonsterTeam_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3134,6 +3162,9 @@ public final class EventUserProto {
             requestedUserIds_.addAll(other.requestedUserIds_);
           }
           onChanged();
+        }
+        if (other.hasIncludeCurMonsterTeam()) {
+          setIncludeCurMonsterTeam(other.getIncludeCurMonsterTeam());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3187,6 +3218,11 @@ public final class EventUserProto {
                 addRequestedUserIds(input.readInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              includeCurMonsterTeam_ = input.readBool();
               break;
             }
           }
@@ -3330,6 +3366,27 @@ public final class EventUserProto {
         return this;
       }
       
+      // optional bool includeCurMonsterTeam = 3;
+      private boolean includeCurMonsterTeam_ ;
+      public boolean hasIncludeCurMonsterTeam() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public boolean getIncludeCurMonsterTeam() {
+        return includeCurMonsterTeam_;
+      }
+      public Builder setIncludeCurMonsterTeam(boolean value) {
+        bitField0_ |= 0x00000004;
+        includeCurMonsterTeam_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIncludeCurMonsterTeam() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        includeCurMonsterTeam_ = false;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RetrieveUsersForUserIdsRequestProto)
     }
     
@@ -3357,6 +3414,16 @@ public final class EventUserProto {
     java.util.List<? extends com.lvl6.proto.UserProto.FullUserProtoOrBuilder> 
         getRequestedUsersOrBuilderList();
     com.lvl6.proto.UserProto.FullUserProtoOrBuilder getRequestedUsersOrBuilder(
+        int index);
+    
+    // repeated .com.lvl6.proto.UserCurrentMonsterTeamProto curTeam = 3;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> 
+        getCurTeamList();
+    com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto getCurTeam(int index);
+    int getCurTeamCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> 
+        getCurTeamOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder getCurTeamOrBuilder(
         int index);
   }
   public static final class RetrieveUsersForUserIdsResponseProto extends
@@ -3422,9 +3489,31 @@ public final class EventUserProto {
       return requestedUsers_.get(index);
     }
     
+    // repeated .com.lvl6.proto.UserCurrentMonsterTeamProto curTeam = 3;
+    public static final int CURTEAM_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> curTeam_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> getCurTeamList() {
+      return curTeam_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> 
+        getCurTeamOrBuilderList() {
+      return curTeam_;
+    }
+    public int getCurTeamCount() {
+      return curTeam_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto getCurTeam(int index) {
+      return curTeam_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder getCurTeamOrBuilder(
+        int index) {
+      return curTeam_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       requestedUsers_ = java.util.Collections.emptyList();
+      curTeam_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3444,6 +3533,9 @@ public final class EventUserProto {
       for (int i = 0; i < requestedUsers_.size(); i++) {
         output.writeMessage(2, requestedUsers_.get(i));
       }
+      for (int i = 0; i < curTeam_.size(); i++) {
+        output.writeMessage(3, curTeam_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -3460,6 +3552,10 @@ public final class EventUserProto {
       for (int i = 0; i < requestedUsers_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, requestedUsers_.get(i));
+      }
+      for (int i = 0; i < curTeam_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, curTeam_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3579,6 +3675,7 @@ public final class EventUserProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
           getRequestedUsersFieldBuilder();
+          getCurTeamFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3598,6 +3695,12 @@ public final class EventUserProto {
           bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           requestedUsersBuilder_.clear();
+        }
+        if (curTeamBuilder_ == null) {
+          curTeam_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          curTeamBuilder_.clear();
         }
         return this;
       }
@@ -3654,6 +3757,15 @@ public final class EventUserProto {
         } else {
           result.requestedUsers_ = requestedUsersBuilder_.build();
         }
+        if (curTeamBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            curTeam_ = java.util.Collections.unmodifiableList(curTeam_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.curTeam_ = curTeam_;
+        } else {
+          result.curTeam_ = curTeamBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3696,6 +3808,32 @@ public final class EventUserProto {
                    getRequestedUsersFieldBuilder() : null;
             } else {
               requestedUsersBuilder_.addAllMessages(other.requestedUsers_);
+            }
+          }
+        }
+        if (curTeamBuilder_ == null) {
+          if (!other.curTeam_.isEmpty()) {
+            if (curTeam_.isEmpty()) {
+              curTeam_ = other.curTeam_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureCurTeamIsMutable();
+              curTeam_.addAll(other.curTeam_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.curTeam_.isEmpty()) {
+            if (curTeamBuilder_.isEmpty()) {
+              curTeamBuilder_.dispose();
+              curTeamBuilder_ = null;
+              curTeam_ = other.curTeam_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              curTeamBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getCurTeamFieldBuilder() : null;
+            } else {
+              curTeamBuilder_.addAllMessages(other.curTeam_);
             }
           }
         }
@@ -3743,6 +3881,12 @@ public final class EventUserProto {
               com.lvl6.proto.UserProto.FullUserProto.Builder subBuilder = com.lvl6.proto.UserProto.FullUserProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addRequestedUsers(subBuilder.buildPartial());
+              break;
+            }
+            case 26: {
+              com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addCurTeam(subBuilder.buildPartial());
               break;
             }
           }
@@ -4025,6 +4169,192 @@ public final class EventUserProto {
           requestedUsers_ = null;
         }
         return requestedUsersBuilder_;
+      }
+      
+      // repeated .com.lvl6.proto.UserCurrentMonsterTeamProto curTeam = 3;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> curTeam_ =
+        java.util.Collections.emptyList();
+      private void ensureCurTeamIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          curTeam_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto>(curTeam_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> curTeamBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> getCurTeamList() {
+        if (curTeamBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(curTeam_);
+        } else {
+          return curTeamBuilder_.getMessageList();
+        }
+      }
+      public int getCurTeamCount() {
+        if (curTeamBuilder_ == null) {
+          return curTeam_.size();
+        } else {
+          return curTeamBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto getCurTeam(int index) {
+        if (curTeamBuilder_ == null) {
+          return curTeam_.get(index);
+        } else {
+          return curTeamBuilder_.getMessage(index);
+        }
+      }
+      public Builder setCurTeam(
+          int index, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto value) {
+        if (curTeamBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCurTeamIsMutable();
+          curTeam_.set(index, value);
+          onChanged();
+        } else {
+          curTeamBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setCurTeam(
+          int index, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder builderForValue) {
+        if (curTeamBuilder_ == null) {
+          ensureCurTeamIsMutable();
+          curTeam_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          curTeamBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addCurTeam(com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto value) {
+        if (curTeamBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCurTeamIsMutable();
+          curTeam_.add(value);
+          onChanged();
+        } else {
+          curTeamBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addCurTeam(
+          int index, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto value) {
+        if (curTeamBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCurTeamIsMutable();
+          curTeam_.add(index, value);
+          onChanged();
+        } else {
+          curTeamBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addCurTeam(
+          com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder builderForValue) {
+        if (curTeamBuilder_ == null) {
+          ensureCurTeamIsMutable();
+          curTeam_.add(builderForValue.build());
+          onChanged();
+        } else {
+          curTeamBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addCurTeam(
+          int index, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder builderForValue) {
+        if (curTeamBuilder_ == null) {
+          ensureCurTeamIsMutable();
+          curTeam_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          curTeamBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllCurTeam(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto> values) {
+        if (curTeamBuilder_ == null) {
+          ensureCurTeamIsMutable();
+          super.addAll(values, curTeam_);
+          onChanged();
+        } else {
+          curTeamBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearCurTeam() {
+        if (curTeamBuilder_ == null) {
+          curTeam_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          curTeamBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeCurTeam(int index) {
+        if (curTeamBuilder_ == null) {
+          ensureCurTeamIsMutable();
+          curTeam_.remove(index);
+          onChanged();
+        } else {
+          curTeamBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder getCurTeamBuilder(
+          int index) {
+        return getCurTeamFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder getCurTeamOrBuilder(
+          int index) {
+        if (curTeamBuilder_ == null) {
+          return curTeam_.get(index);  } else {
+          return curTeamBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> 
+           getCurTeamOrBuilderList() {
+        if (curTeamBuilder_ != null) {
+          return curTeamBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(curTeam_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder addCurTeamBuilder() {
+        return getCurTeamFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder addCurTeamBuilder(
+          int index) {
+        return getCurTeamFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder> 
+           getCurTeamBuilderList() {
+        return getCurTeamFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> 
+          getCurTeamFieldBuilder() {
+        if (curTeamBuilder_ == null) {
+          curTeamBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder>(
+                  curTeam_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          curTeam_ = null;
+        }
+        return curTeamBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.RetrieveUsersForUserIdsResponseProto)
@@ -4992,42 +5322,45 @@ public final class EventUserProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017EventUser.proto\022\016com.lvl6.proto\032\017Struc" +
-      "ture.proto\032\nUser.proto\"\354\001\n\026UserCreateReq" +
-      "uestProto\022\014\n\004udid\030\001 \001(\t\022\014\n\004name\030\002 \001(\t\022\024\n" +
-      "\014referrerCode\030\003 \001(\t\022\023\n\013deviceToken\030\004 \001(\t" +
-      "\022\034\n\024timeOfStructPurchase\030\005 \001(\003\022\031\n\021timeOf" +
-      "StructBuild\030\006 \001(\003\0225\n\014structCoords\030\007 \001(\0132" +
-      "\037.com.lvl6.proto.CoordinateProto\022\033\n\023used" +
-      "DiamondsToBuilt\030\010 \001(\010\"\220\002\n\027UserCreateResp" +
-      "onseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.pro" +
-      "to.FullUserProto\022H\n\006status\030\002 \001(\01628.com.l",
-      "vl6.proto.UserCreateResponseProto.UserCr" +
-      "eateStatus\"|\n\020UserCreateStatus\022\013\n\007SUCCES" +
-      "S\020\001\022\020\n\014INVALID_NAME\020\002\022!\n\035USER_WITH_UDID_" +
-      "ALREADY_EXISTS\020\003\022\026\n\022INVALID_REFER_CODE\020\004" +
-      "\022\016\n\nOTHER_FAIL\020\005\"G\n\023LevelUpRequestProto\022" +
-      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\"\271\002\n\024LevelUpResponseProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022B\n\006status\030\002 \001(\01622.com.lvl6.proto.Le" +
-      "velUpResponseProto.LevelUpStatus\022A\n\025newl",
-      "yAvailableStructs\030\003 \003(\0132\".com.lvl6.proto" +
-      ".FullStructureProto\"h\n\rLevelUpStatus\022\013\n\007" +
-      "SUCCESS\020\001\022 \n\034NOT_ENOUGH_EXP_TO_NEXT_LEVE" +
-      "L\020\002\022\030\n\024ALREADY_AT_MAX_LEVEL\020\003\022\016\n\nOTHER_F" +
-      "AIL\020\004\"q\n#RetrieveUsersForUserIdsRequestP" +
-      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
-      "nimumUserProto\022\030\n\020requestedUserIds\030\002 \003(\005" +
-      "\"\217\001\n$RetrieveUsersForUserIdsResponseProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\0225\n\016requestedUsers\030\002 \003(\0132\035.co",
-      "m.lvl6.proto.FullUserProto\"F\n\022LogoutRequ" +
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\"h\n\035UpdateClientUserRe" +
-      "sponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.p" +
-      "roto.FullUserProto\022\030\n\020timeOfUserUpdate\030\002" +
-      " \001(\003B\020B\016EventUserProto"
+      "\n\017EventUser.proto\022\016com.lvl6.proto\032\022Monst" +
+      "erStuff.proto\032\017Structure.proto\032\nUser.pro" +
+      "to\"\354\001\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
+      "\001(\t\022\014\n\004name\030\002 \001(\t\022\024\n\014referrerCode\030\003 \001(\t\022" +
+      "\023\n\013deviceToken\030\004 \001(\t\022\034\n\024timeOfStructPurc" +
+      "hase\030\005 \001(\003\022\031\n\021timeOfStructBuild\030\006 \001(\003\0225\n" +
+      "\014structCoords\030\007 \001(\0132\037.com.lvl6.proto.Coo" +
+      "rdinateProto\022\033\n\023usedDiamondsToBuilt\030\010 \001(" +
+      "\010\"\220\002\n\027UserCreateResponseProto\022-\n\006sender\030" +
+      "\001 \001(\0132\035.com.lvl6.proto.FullUserProto\022H\n\006",
+      "status\030\002 \001(\01628.com.lvl6.proto.UserCreate" +
+      "ResponseProto.UserCreateStatus\"|\n\020UserCr" +
+      "eateStatus\022\013\n\007SUCCESS\020\001\022\020\n\014INVALID_NAME\020" +
+      "\002\022!\n\035USER_WITH_UDID_ALREADY_EXISTS\020\003\022\026\n\022" +
+      "INVALID_REFER_CODE\020\004\022\016\n\nOTHER_FAIL\020\005\"G\n\023" +
+      "LevelUpRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\"\271\002\n\024LevelU" +
+      "pResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022B\n\006status\030\002 \001(\016" +
+      "22.com.lvl6.proto.LevelUpResponseProto.L",
+      "evelUpStatus\022A\n\025newlyAvailableStructs\030\003 " +
+      "\003(\0132\".com.lvl6.proto.FullStructureProto\"" +
+      "h\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022 \n\034NOT_ENO" +
+      "UGH_EXP_TO_NEXT_LEVEL\020\002\022\030\n\024ALREADY_AT_MA" +
+      "X_LEVEL\020\003\022\016\n\nOTHER_FAIL\020\004\"\220\001\n#RetrieveUs" +
+      "ersForUserIdsRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020r" +
+      "equestedUserIds\030\002 \003(\005\022\035\n\025includeCurMonst" +
+      "erTeam\030\003 \001(\010\"\315\001\n$RetrieveUsersForUserIds" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6",
+      ".proto.MinimumUserProto\0225\n\016requestedUser" +
+      "s\030\002 \003(\0132\035.com.lvl6.proto.FullUserProto\022<" +
+      "\n\007curTeam\030\003 \003(\0132+.com.lvl6.proto.UserCur" +
+      "rentMonsterTeamProto\"F\n\022LogoutRequestPro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\"h\n\035UpdateClientUserResponse" +
+      "Proto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.proto.F" +
+      "ullUserProto\022\030\n\020timeOfUserUpdate\030\002 \001(\003B\020" +
+      "B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5071,7 +5404,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_RetrieveUsersForUserIdsRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RetrieveUsersForUserIdsRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "RequestedUserIds", },
+              new java.lang.String[] { "Sender", "RequestedUserIds", "IncludeCurMonsterTeam", },
               com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsRequestProto.class,
               com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsRequestProto.Builder.class);
           internal_static_com_lvl6_proto_RetrieveUsersForUserIdsResponseProto_descriptor =
@@ -5079,7 +5412,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_RetrieveUsersForUserIdsResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RetrieveUsersForUserIdsResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "RequestedUsers", },
+              new java.lang.String[] { "Sender", "RequestedUsers", "CurTeam", },
               com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto.class,
               com.lvl6.proto.EventUserProto.RetrieveUsersForUserIdsResponseProto.Builder.class);
           internal_static_com_lvl6_proto_LogoutRequestProto_descriptor =
@@ -5104,6 +5437,7 @@ public final class EventUserProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
