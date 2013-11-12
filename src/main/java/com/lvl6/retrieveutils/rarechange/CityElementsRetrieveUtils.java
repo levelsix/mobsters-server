@@ -104,10 +104,10 @@ import com.lvl6.utils.DBConnection;
     CityElemType type = CityElemType.valueOf(rs.getInt(i++));
     CoordinatePair coords = new CoordinatePair(rs.getFloat(i++), rs.getFloat(i++));
 
-    int xLength = rs.getInt(i++);
+    float xLength = rs.getFloat(i++);
     if (rs.wasNull()) xLength = ControllerConstants.NOT_SET;
 
-    int yLength = rs.getInt(i++);
+    float yLength = rs.getFloat(i++);
     if (rs.wasNull()) yLength = ControllerConstants.NOT_SET;
 
     String imgGood = rs.getString(i++);

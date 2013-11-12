@@ -31,8 +31,8 @@ message CityElementProto {
 	//optional string name = 3;
 	optional CityElemType type = 4;
 	optional CoordinateProto coords = 5;
-	optional int32 xLength = 6;
-	optional int32 yLength = 7;
+	optional float xLength = 6;
+	optional float yLength = 7;
 	optional string imgId = 8;
 	optional StructOrientation orientation = 9 [default = POSITION_1];
 	optional CoordinateProto spriteCoords = 10;

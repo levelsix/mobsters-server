@@ -7,21 +7,20 @@ import com.lvl6.proto.StructureProto.StructOrientation;
 
 public class CityElement implements Serializable {
 	
-	private static final long serialVersionUID = 1281950874996210998L;
+	private static final long serialVersionUID = -449823837985027081L;
 	private int cityId;
 	private int assetId;
 //	private String goodName;
 	private CityElemType type;
 	private CoordinatePair coords;
-	private int xLength;
-	private int yLength;
+	private float xLength;
+	private float yLength;
 	private String imgGood;
 	private StructOrientation orientation;
 	private CoordinatePair spriteCoords;
 	
-
 	public CityElement(int cityId, int assetId, CityElemType type,
-			CoordinatePair coords, int xLength, int yLength, String imgGood,
+			CoordinatePair coords, float xLength, float yLength, String imgGood,
 			StructOrientation orientation, CoordinatePair spriteCoords) {
 		super();
 		this.cityId = cityId;
@@ -67,19 +66,19 @@ public class CityElement implements Serializable {
 		this.coords = coords;
 	}
 
-	public int getxLength() {
+	public float getxLength() {
 		return xLength;
 	}
 
-	public void setxLength(int xLength) {
+	public void setxLength(float xLength) {
 		this.xLength = xLength;
 	}
 
-	public int getyLength() {
+	public float getyLength() {
 		return yLength;
 	}
 
-	public void setyLength(int yLength) {
+	public void setyLength(float yLength) {
 		this.yLength = yLength;
 	}
 
@@ -114,5 +113,5 @@ public class CityElement implements Serializable {
 				+ yLength + ", imgGood=" + imgGood + ", orientation=" + orientation
 				+ ", spriteCoords=" + spriteCoords + "]";
 	}
-
+	
 }

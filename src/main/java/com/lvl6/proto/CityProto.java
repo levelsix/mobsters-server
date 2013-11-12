@@ -1046,13 +1046,13 @@ public final class CityProto {
     com.lvl6.proto.StructureProto.CoordinateProto getCoords();
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordsOrBuilder();
     
-    // optional int32 xLength = 6;
+    // optional float xLength = 6;
     boolean hasXLength();
-    int getXLength();
+    float getXLength();
     
-    // optional int32 yLength = 7;
+    // optional float yLength = 7;
     boolean hasYLength();
-    int getYLength();
+    float getYLength();
     
     // optional string imgId = 8;
     boolean hasImgId();
@@ -1214,23 +1214,23 @@ public final class CityProto {
       return coords_;
     }
     
-    // optional int32 xLength = 6;
+    // optional float xLength = 6;
     public static final int XLENGTH_FIELD_NUMBER = 6;
-    private int xLength_;
+    private float xLength_;
     public boolean hasXLength() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
-    public int getXLength() {
+    public float getXLength() {
       return xLength_;
     }
     
-    // optional int32 yLength = 7;
+    // optional float yLength = 7;
     public static final int YLENGTH_FIELD_NUMBER = 7;
-    private int yLength_;
+    private float yLength_;
     public boolean hasYLength() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
-    public int getYLength() {
+    public float getYLength() {
       return yLength_;
     }
     
@@ -1294,8 +1294,8 @@ public final class CityProto {
       assetId_ = 0;
       type_ = com.lvl6.proto.CityProto.CityElementProto.CityElemType.BUILDING;
       coords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      xLength_ = 0;
-      yLength_ = 0;
+      xLength_ = 0F;
+      yLength_ = 0F;
       imgId_ = "";
       orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
       spriteCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
@@ -1325,10 +1325,10 @@ public final class CityProto {
         output.writeMessage(5, coords_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(6, xLength_);
+        output.writeFloat(6, xLength_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt32(7, yLength_);
+        output.writeFloat(7, yLength_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeBytes(8, getImgIdBytes());
@@ -1366,11 +1366,11 @@ public final class CityProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(6, xLength_);
+          .computeFloatSize(6, xLength_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, yLength_);
+          .computeFloatSize(7, yLength_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1522,9 +1522,9 @@ public final class CityProto {
           coordsBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
-        xLength_ = 0;
+        xLength_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000010);
-        yLength_ = 0;
+        yLength_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000020);
         imgId_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
@@ -1722,14 +1722,14 @@ public final class CityProto {
               setCoords(subBuilder.buildPartial());
               break;
             }
-            case 48: {
+            case 53: {
               bitField0_ |= 0x00000010;
-              xLength_ = input.readInt32();
+              xLength_ = input.readFloat();
               break;
             }
-            case 56: {
+            case 61: {
               bitField0_ |= 0x00000020;
-              yLength_ = input.readInt32();
+              yLength_ = input.readFloat();
               break;
             }
             case 66: {
@@ -1919,15 +1919,15 @@ public final class CityProto {
         return coordsBuilder_;
       }
       
-      // optional int32 xLength = 6;
-      private int xLength_ ;
+      // optional float xLength = 6;
+      private float xLength_ ;
       public boolean hasXLength() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
-      public int getXLength() {
+      public float getXLength() {
         return xLength_;
       }
-      public Builder setXLength(int value) {
+      public Builder setXLength(float value) {
         bitField0_ |= 0x00000010;
         xLength_ = value;
         onChanged();
@@ -1935,20 +1935,20 @@ public final class CityProto {
       }
       public Builder clearXLength() {
         bitField0_ = (bitField0_ & ~0x00000010);
-        xLength_ = 0;
+        xLength_ = 0F;
         onChanged();
         return this;
       }
       
-      // optional int32 yLength = 7;
-      private int yLength_ ;
+      // optional float yLength = 7;
+      private float yLength_ ;
       public boolean hasYLength() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
-      public int getYLength() {
+      public float getYLength() {
         return yLength_;
       }
-      public Builder setYLength(int value) {
+      public Builder setYLength(float value) {
         bitField0_ |= 0x00000020;
         yLength_ = value;
         onChanged();
@@ -1956,7 +1956,7 @@ public final class CityProto {
       }
       public Builder clearYLength() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        yLength_ = 0;
+        yLength_ = 0F;
         onChanged();
         return this;
       }
@@ -3364,8 +3364,8 @@ public final class CityProto {
       "Id\030\001 \001(\005\022\017\n\007assetId\030\002 \001(\005\022;\n\004type\030\004 \001(\0162" +
       "-.com.lvl6.proto.CityElementProto.CityEl",
       "emType\022/\n\006coords\030\005 \001(\0132\037.com.lvl6.proto." +
-      "CoordinateProto\022\017\n\007xLength\030\006 \001(\005\022\017\n\007yLen" +
-      "gth\030\007 \001(\005\022\r\n\005imgId\030\010 \001(\t\022B\n\013orientation\030" +
+      "CoordinateProto\022\017\n\007xLength\030\006 \001(\002\022\017\n\007yLen" +
+      "gth\030\007 \001(\002\022\r\n\005imgId\030\010 \001(\t\022B\n\013orientation\030" +
       "\t \001(\0162!.com.lvl6.proto.StructOrientation" +
       ":\nPOSITION_1\0225\n\014spriteCoords\030\n \001(\0132\037.com" +
       ".lvl6.proto.CoordinateProto\"P\n\014CityElemT" +
