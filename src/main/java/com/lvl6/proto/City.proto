@@ -57,6 +57,6 @@ message FullCityProto {
 	optional CoordinateProto roadImgCoords = 7;
 	
 	repeated int32 taskIds = 8;
-	optional string attackMapLabelImgName = 8;
+	optional string attackMapLabelImgName = 9;
 	
 }
