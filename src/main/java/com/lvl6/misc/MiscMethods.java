@@ -1031,111 +1031,47 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     return domainValuesToQuantities;
   }
   
-//  /*cut out from purchase booster pack controller*/
-//  //Returns all the booster items the user purchased and whether or not the use reset the chesst.
-//  //If the user buys out deck start over from a fresh deck 
-//  //(boosterItemIdsToNumCollected is changed to reflect none have been collected).
-//  //Also, keep track of which items were purchased before and/or after the reset (via collectedBeforeReset)
-//  public static boolean getAllBoosterItemsForUser(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
-//      Map<Integer, Integer> boosterItemIdsToNumCollected, int numBoosterItemsUserWants, User aUser, 
-//      BoosterPack aPack, List<BoosterItem> returnValue, List<Boolean> collectedBeforeReset) {
-//    boolean resetOccurred = false;
-//    int boosterPackId = aPack.getId();
-//    
-//    //the possible items user can get
-//    List<Integer> boosterItemIdsUserCanGet = new ArrayList<Integer>();
-//    List<Integer> quantitiesInStock = new ArrayList<Integer>();
-//    
-//    //populate boosterItemIdsUserCanGet, and quantitiesInStock
-//    int sumQuantitiesInStock = determineBoosterItemsLeft(allBoosterItemIdsToBoosterItems, 
-//        boosterItemIdsToNumCollected, boosterItemIdsUserCanGet, quantitiesInStock, aUser, boosterPackId);
-//    
-//    //just in case user is allowed to purchase a lot more than what is available in a chest
-//    //should take care of the case where user buys out the exact amount remaining in the chest
-//    while (numBoosterItemsUserWants >= sumQuantitiesInStock) {
-//      resetOccurred = true;
-//      //give all the remaining booster items to the user, 
-//      for (int i = 0; i < boosterItemIdsUserCanGet.size(); i++) {
-//        int bItemId = boosterItemIdsUserCanGet.get(i);
-//        BoosterItem bi = allBoosterItemIdsToBoosterItems.get(bItemId);
-//        int quantityInStock = quantitiesInStock.get(i);
-//        for (int quant = 0; quant < quantityInStock; quant++) {
-//          returnValue.add(bi);
-//          collectedBeforeReset.add(true);
-//        }
-//      }
-//      //decrement number user still needs to receive, and then reset deck
-//      numBoosterItemsUserWants -= sumQuantitiesInStock;
-//      
-//      //start from a clean slate as if it is the first time user is purchasing
-//      boosterItemIdsUserCanGet.clear();
-//      boosterItemIdsToNumCollected.clear();
-//      quantitiesInStock.clear();
-//      sumQuantitiesInStock = 0;
-//      for (int boosterItemId : allBoosterItemIdsToBoosterItems.keySet()) {
-//        BoosterItem boosterItemUserCanGet = allBoosterItemIdsToBoosterItems.get(boosterItemId);
-//        boosterItemIdsUserCanGet.add(boosterItemId);
-//        boosterItemIdsToNumCollected.put(boosterItemId, 0);
-//        int quantityInStock = boosterItemUserCanGet.getQuantity();
-//        quantitiesInStock.add(quantityInStock);
-//        sumQuantitiesInStock += quantityInStock;
-//      }
-//    }
-//
-//    //set the booster item(s) the user will receieve  
-//    List<BoosterItem> itemUserReceives = new ArrayList<BoosterItem>();
-//    if (aPack.isStarterPack()) {
-//      itemUserReceives = determineStarterBoosterItemsUserReceives(boosterItemIdsUserCanGet,
-//          quantitiesInStock, numBoosterItemsUserWants, sumQuantitiesInStock, allBoosterItemIdsToBoosterItems);
-//    } else {
-//      itemUserReceives = determineBoosterItemsUserReceives(boosterItemIdsUserCanGet, 
-//          quantitiesInStock, numBoosterItemsUserWants, sumQuantitiesInStock, allBoosterItemIdsToBoosterItems);
-//    }
-//    returnValue.addAll(itemUserReceives);
-//    collectedBeforeReset.addAll(Collections.nCopies(itemUserReceives.size(), false));
-//    return resetOccurred;
-//  }
 
   /*cut out from purchase booster pack controller*/
   //populates ids, quantitiesInStock; determines the remaining booster items the user can get
-  private static int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
-      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet, 
-      List<Integer> quantitiesInStock, User aUser, int boosterPackId) {
-    //max number randon number can go
-    int sumQuantitiesInStock = 0;
-
-    //determine how many BoosterItems are left that user can get
-    for (int boosterItemId : allBoosterItemIdsToBoosterItems.keySet()) {
-      BoosterItem potentialEquip = allBoosterItemIdsToBoosterItems.get(boosterItemId);
-      int quantityLimit = potentialEquip.getQuantity();
-      int quantityPurchasedPreviously = ControllerConstants.NOT_SET;
-
-      if (boosterItemIdsToNumCollected.containsKey(boosterItemId)) {
-        quantityPurchasedPreviously = boosterItemIdsToNumCollected.get(boosterItemId);
-      }
-
-      if(ControllerConstants.NOT_SET == quantityPurchasedPreviously) {
-        //user has never bought this BoosterItem before
-        boosterItemIdsUserCanGet.add(boosterItemId);
-        quantitiesInStock.add(quantityLimit);
-        sumQuantitiesInStock += quantityLimit;
-      } else if (quantityPurchasedPreviously < quantityLimit) {
-        //user bought before, but has not reached the limit
-        int numLeftInStock = quantityLimit - quantityPurchasedPreviously;
-        boosterItemIdsUserCanGet.add(boosterItemId);
-        quantitiesInStock.add(numLeftInStock);
-        sumQuantitiesInStock += numLeftInStock;
-      } else if (quantityPurchasedPreviously == quantityLimit) {
-        continue;
-      } else {//will this ever be reached?
-        log.error("somehow user has bought more than the allowed limit for a booster item for a booster pack. "
-            + "quantityLimit: " + quantityLimit + ", quantityPurchasedPreviously: " + quantityPurchasedPreviously
-            + ", userId: " + aUser.getId() + ", boosterItem: " + potentialEquip + ", boosterPackId: " + boosterPackId);
-      }
-    }
-
-    return sumQuantitiesInStock;
-  }
+//  private static int determineBoosterItemsLeft(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
+//      Map<Integer, Integer> boosterItemIdsToNumCollected, List<Integer> boosterItemIdsUserCanGet, 
+//      List<Integer> quantitiesInStock, User aUser, int boosterPackId) {
+//    //max number randon number can go
+//    int sumQuantitiesInStock = 0;
+//
+//    //determine how many BoosterItems are left that user can get
+//    for (int boosterItemId : allBoosterItemIdsToBoosterItems.keySet()) {
+//      BoosterItem potentialEquip = allBoosterItemIdsToBoosterItems.get(boosterItemId);
+//      int quantityLimit = potentialEquip.getQuantity();
+//      int quantityPurchasedPreviously = ControllerConstants.NOT_SET;
+//
+//      if (boosterItemIdsToNumCollected.containsKey(boosterItemId)) {
+//        quantityPurchasedPreviously = boosterItemIdsToNumCollected.get(boosterItemId);
+//      }
+//
+//      if(ControllerConstants.NOT_SET == quantityPurchasedPreviously) {
+//        //user has never bought this BoosterItem before
+//        boosterItemIdsUserCanGet.add(boosterItemId);
+//        quantitiesInStock.add(quantityLimit);
+//        sumQuantitiesInStock += quantityLimit;
+//      } else if (quantityPurchasedPreviously < quantityLimit) {
+//        //user bought before, but has not reached the limit
+//        int numLeftInStock = quantityLimit - quantityPurchasedPreviously;
+//        boosterItemIdsUserCanGet.add(boosterItemId);
+//        quantitiesInStock.add(numLeftInStock);
+//        sumQuantitiesInStock += numLeftInStock;
+//      } else if (quantityPurchasedPreviously == quantityLimit) {
+//        continue;
+//      } else {//will this ever be reached?
+//        log.error("somehow user has bought more than the allowed limit for a booster item for a booster pack. "
+//            + "quantityLimit: " + quantityLimit + ", quantityPurchasedPreviously: " + quantityPurchasedPreviously
+//            + ", userId: " + aUser.getId() + ", boosterItem: " + potentialEquip + ", boosterPackId: " + boosterPackId);
+//      }
+//    }
+//
+//    return sumQuantitiesInStock;
+//  }
   
 //  /*cut out from purchase booster pack controller*/
 //  //no arguments are modified

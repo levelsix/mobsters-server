@@ -205,7 +205,7 @@ public class MonsterStuffUtils {
   	return monsterIdToNewQuantity;
   }
   
-  //(breaking the abstraction) monsterForUser will be modified
+  //(breaking the abstraction) MonsterForUser mfu will be modified.
   //returns the number of pieces remaining after using up the pieces
   //available in order to try completing the monster_for_user
   public static int completeMonsterForUserFromQuantity(MonsterForUser mfu,
@@ -328,8 +328,8 @@ public class MonsterStuffUtils {
   	//take however many pieces necessary from monsterIdToNumPieces to
   	//complete these incomplete monsterForUsers
   	//monsterIdsToIncompletes will be modified
-  	Map<Integer, Integer> monsterIdToRemainingPieces = MonsterStuffUtils
-  			.completeMonsterForUserFromMonsterIdsAndQuantities(
+  	Map<Integer, Integer> monsterIdToRemainingPieces = 
+  			completeMonsterForUserFromMonsterIdsAndQuantities(
   					monsterIdsToIncompletes, monsterIdToNumPieces);
   	
   	//UPDATE THESE INCOMPLETE MONSTERS, IF ANY. SINCE UPDATING, UPDATE THE

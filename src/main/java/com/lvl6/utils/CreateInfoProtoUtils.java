@@ -821,18 +821,23 @@ public class CreateInfoProtoUtils {
 
 
   public static BoosterItemProto createBoosterItemProto(BoosterItem bi) {
-    BoosterItemProto.Builder b = BoosterItemProto.newBuilder()
-        .setBoosterItemId(bi.getId()).setEquipId(bi.getEquipId()).setQuantity(bi.getQuantity())
-        .setIsSpecial(bi.isSpecial());
+    BoosterItemProto.Builder b = BoosterItemProto.newBuilder();
+    b.setBoosterItemId(bi.getId());
+    b.setBoosterPackId(bi.getBoosterPackId());
+    b.setMonsterId(bi.getMonsterId());
+    b.setNumPieces(bi.getNumPieces());
+    b.setIsSpecial(bi.isSpecial());
+    b.setGemReward(bi.getGemReward());
+    b.setCashReward(bi.getCashReward());
+    b.setChanceToAppear(bi.getChanceToAppear());
     return b.build();
   }
 
   public static BoosterPackProto createBoosterPackProto(BoosterPack bp, Collection<BoosterItem> biList) {
     BoosterPackProto.Builder b = BoosterPackProto.newBuilder();
     b.setBoosterPackId(bp.getId());
-    b.setCostsCoins(bp.isCostsCoins());
-    b.setName(bp.getName());
-    b.setPrice(1234567890);
+    b.setBoosterPackName(bp.getName());
+    b.setGemPrice(bp.getGemPrice());
     if (biList != null) {
       List<BoosterItemProto> biProtos = new ArrayList<BoosterItemProto>();
       for(BoosterItem bi : biList) {

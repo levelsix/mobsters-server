@@ -1,3 +1,5 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
+
 package com.lvl6.proto;
 
 option java_outer_classname = "UserProto";

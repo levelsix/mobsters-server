@@ -17,19 +17,23 @@ message RareBoosterPurchaseProto {
 
 message BoosterPackProto {
 	optional int32 boosterPackId = 1;
-	optional bool costsCoins = 2;
-	optional string name = 3;
+	optional string boosterPackName = 2;
+	optional int32 gemPrice = 3;
 	repeated BoosterItemProto boosterItems = 4;
-	optional int32 price = 5;
 }
 
 //------------------------------------------------------------------------------------------
 
 message BoosterItemProto {
 	optional int32 boosterItemId = 1;
-	optional int32 equipId = 2;
-	optional int32 quantity = 3;
-	optional bool isSpecial = 4;
+	optional int32 boosterPackId = 2;
+	optional int32 monsterId = 3;
+	optional int32 numPieces = 4;
+	optional bool isComplete = 5; 
+	optional bool isSpecial = 6;
+	optional int32 gemReward = 7;
+	optional int32 cashReward = 8;
+	optional float chanceToAppear = 9;
 }
 
 //------------------------------------------------------------------------------------------

@@ -22,6 +22,7 @@ public class ControllerConstants {
 	//MFUSOP = monster_for_user_source_of_pieces
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
 	public static final String MFUSOP__QUEST = "questId "; 
+	public static final String MFUSOP__BOOSTER_PACK = "boosterPackId";
 	
 	//MFUDR = monster_for_user_delete_reasons
 	public static final String MFUDR__ENHANCING = "enhancing";
@@ -48,7 +49,7 @@ public class ControllerConstants {
   public static final String UER__UNSUCCESSFUL_FORGE = "unsuccessful forge";
   public static final String UER__PICK_LOCK_BOX = "pick lock box";
   public static final String UER__THREE_CARD_MONTE = "three card monte";
-  public static final String UER__PURCHASE_BOOSTER_PACK = "purhcase booster pack";
+  
   public static final String UER__PURCHASE_FROM_MARKETPLACE = "purchase from marketplace";
   public static final String UER__QUEST_REDEEM = "quest redeem";
   public static final String UER__REDEEM_USER_CITY_GEMS = "redeem user city gems";

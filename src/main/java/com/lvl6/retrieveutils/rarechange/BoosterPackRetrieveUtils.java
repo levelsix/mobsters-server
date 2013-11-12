@@ -13,7 +13,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.BoosterPack;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -93,28 +92,10 @@ import com.lvl6.utils.DBConnection;
   private static BoosterPack convertRSRowToBoosterPack(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
-    boolean costsCoins = rs.getBoolean(i++);
     String name = rs.getString(i++);
-    String chestImage = rs.getString(i++);
-    String middleImage = rs.getString(i++);
-    String backgroundImage = rs.getString(i++);
-    int minLevel = rs.getInt(i++);
-    int maxLevel = rs.getInt(i++);
+    int gemPrice = rs.getInt(i++);
     
-    int dailyLimit = rs.getInt(i++);
-    if (rs.wasNull()) {
-      dailyLimit = ControllerConstants.NOT_SET;
-    }
-    
-    int salePriceOne = rs.getInt(i++);
-    int retailPriceOne = rs.getInt(i++);
-    int salePriceTwo = rs.getInt(i++);
-    int retailPriceTwo = rs.getInt(i++);
-    boolean isStarterPack = rs.getBoolean(i++);
-    
-    BoosterPack boosterPack = new BoosterPack(id, costsCoins, name, chestImage,
-        middleImage, backgroundImage, minLevel, maxLevel, dailyLimit, salePriceOne, 
-        retailPriceOne, salePriceTwo, retailPriceTwo, isStarterPack);
+    BoosterPack boosterPack = new BoosterPack(id, name, gemPrice);
     return boosterPack; 
   }
 }

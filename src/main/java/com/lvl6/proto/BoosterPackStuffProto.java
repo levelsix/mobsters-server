@@ -696,13 +696,13 @@ public final class BoosterPackStuffProto {
     boolean hasBoosterPackId();
     int getBoosterPackId();
     
-    // optional bool costsCoins = 2;
-    boolean hasCostsCoins();
-    boolean getCostsCoins();
+    // optional string boosterPackName = 2;
+    boolean hasBoosterPackName();
+    String getBoosterPackName();
     
-    // optional string name = 3;
-    boolean hasName();
-    String getName();
+    // optional int32 gemPrice = 3;
+    boolean hasGemPrice();
+    int getGemPrice();
     
     // repeated .com.lvl6.proto.BoosterItemProto boosterItems = 4;
     java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> 
@@ -713,10 +713,6 @@ public final class BoosterPackStuffProto {
         getBoosterItemsOrBuilderList();
     com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getBoosterItemsOrBuilder(
         int index);
-    
-    // optional int32 price = 5;
-    boolean hasPrice();
-    int getPrice();
   }
   public static final class BoosterPackProto extends
       com.google.protobuf.GeneratedMessage
@@ -757,24 +753,14 @@ public final class BoosterPackStuffProto {
       return boosterPackId_;
     }
     
-    // optional bool costsCoins = 2;
-    public static final int COSTSCOINS_FIELD_NUMBER = 2;
-    private boolean costsCoins_;
-    public boolean hasCostsCoins() {
+    // optional string boosterPackName = 2;
+    public static final int BOOSTERPACKNAME_FIELD_NUMBER = 2;
+    private java.lang.Object boosterPackName_;
+    public boolean hasBoosterPackName() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public boolean getCostsCoins() {
-      return costsCoins_;
-    }
-    
-    // optional string name = 3;
-    public static final int NAME_FIELD_NUMBER = 3;
-    private java.lang.Object name_;
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public String getName() {
-      java.lang.Object ref = name_;
+    public String getBoosterPackName() {
+      java.lang.Object ref = boosterPackName_;
       if (ref instanceof String) {
         return (String) ref;
       } else {
@@ -782,21 +768,31 @@ public final class BoosterPackStuffProto {
             (com.google.protobuf.ByteString) ref;
         String s = bs.toStringUtf8();
         if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          name_ = s;
+          boosterPackName_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getNameBytes() {
-      java.lang.Object ref = name_;
+    private com.google.protobuf.ByteString getBoosterPackNameBytes() {
+      java.lang.Object ref = boosterPackName_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        name_ = b;
+        boosterPackName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
+    }
+    
+    // optional int32 gemPrice = 3;
+    public static final int GEMPRICE_FIELD_NUMBER = 3;
+    private int gemPrice_;
+    public boolean hasGemPrice() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getGemPrice() {
+      return gemPrice_;
     }
     
     // repeated .com.lvl6.proto.BoosterItemProto boosterItems = 4;
@@ -820,22 +816,11 @@ public final class BoosterPackStuffProto {
       return boosterItems_.get(index);
     }
     
-    // optional int32 price = 5;
-    public static final int PRICE_FIELD_NUMBER = 5;
-    private int price_;
-    public boolean hasPrice() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public int getPrice() {
-      return price_;
-    }
-    
     private void initFields() {
       boosterPackId_ = 0;
-      costsCoins_ = false;
-      name_ = "";
+      boosterPackName_ = "";
+      gemPrice_ = 0;
       boosterItems_ = java.util.Collections.emptyList();
-      price_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -853,16 +838,13 @@ public final class BoosterPackStuffProto {
         output.writeInt32(1, boosterPackId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBool(2, costsCoins_);
+        output.writeBytes(2, getBoosterPackNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getNameBytes());
+        output.writeInt32(3, gemPrice_);
       }
       for (int i = 0; i < boosterItems_.size(); i++) {
         output.writeMessage(4, boosterItems_.get(i));
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(5, price_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -879,19 +861,15 @@ public final class BoosterPackStuffProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(2, costsCoins_);
+          .computeBytesSize(2, getBoosterPackNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getNameBytes());
+          .computeInt32Size(3, gemPrice_);
       }
       for (int i = 0; i < boosterItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, boosterItems_.get(i));
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, price_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1020,9 +998,9 @@ public final class BoosterPackStuffProto {
         super.clear();
         boosterPackId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        costsCoins_ = false;
+        boosterPackName_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        name_ = "";
+        gemPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         if (boosterItemsBuilder_ == null) {
           boosterItems_ = java.util.Collections.emptyList();
@@ -1030,8 +1008,6 @@ public final class BoosterPackStuffProto {
         } else {
           boosterItemsBuilder_.clear();
         }
-        price_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -1077,11 +1053,11 @@ public final class BoosterPackStuffProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.costsCoins_ = costsCoins_;
+        result.boosterPackName_ = boosterPackName_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.name_ = name_;
+        result.gemPrice_ = gemPrice_;
         if (boosterItemsBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
             boosterItems_ = java.util.Collections.unmodifiableList(boosterItems_);
@@ -1091,10 +1067,6 @@ public final class BoosterPackStuffProto {
         } else {
           result.boosterItems_ = boosterItemsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.price_ = price_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1114,11 +1086,11 @@ public final class BoosterPackStuffProto {
         if (other.hasBoosterPackId()) {
           setBoosterPackId(other.getBoosterPackId());
         }
-        if (other.hasCostsCoins()) {
-          setCostsCoins(other.getCostsCoins());
+        if (other.hasBoosterPackName()) {
+          setBoosterPackName(other.getBoosterPackName());
         }
-        if (other.hasName()) {
-          setName(other.getName());
+        if (other.hasGemPrice()) {
+          setGemPrice(other.getGemPrice());
         }
         if (boosterItemsBuilder_ == null) {
           if (!other.boosterItems_.isEmpty()) {
@@ -1145,9 +1117,6 @@ public final class BoosterPackStuffProto {
               boosterItemsBuilder_.addAllMessages(other.boosterItems_);
             }
           }
-        }
-        if (other.hasPrice()) {
-          setPrice(other.getPrice());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1185,25 +1154,20 @@ public final class BoosterPackStuffProto {
               boosterPackId_ = input.readInt32();
               break;
             }
-            case 16: {
+            case 18: {
               bitField0_ |= 0x00000002;
-              costsCoins_ = input.readBool();
+              boosterPackName_ = input.readBytes();
               break;
             }
-            case 26: {
+            case 24: {
               bitField0_ |= 0x00000004;
-              name_ = input.readBytes();
+              gemPrice_ = input.readInt32();
               break;
             }
             case 34: {
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder subBuilder = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addBoosterItems(subBuilder.buildPartial());
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              price_ = input.readInt32();
               break;
             }
           }
@@ -1233,61 +1197,61 @@ public final class BoosterPackStuffProto {
         return this;
       }
       
-      // optional bool costsCoins = 2;
-      private boolean costsCoins_ ;
-      public boolean hasCostsCoins() {
+      // optional string boosterPackName = 2;
+      private java.lang.Object boosterPackName_ = "";
+      public boolean hasBoosterPackName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public boolean getCostsCoins() {
-        return costsCoins_;
-      }
-      public Builder setCostsCoins(boolean value) {
-        bitField0_ |= 0x00000002;
-        costsCoins_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCostsCoins() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        costsCoins_ = false;
-        onChanged();
-        return this;
-      }
-      
-      // optional string name = 3;
-      private java.lang.Object name_ = "";
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public String getName() {
-        java.lang.Object ref = name_;
+      public String getBoosterPackName() {
+        java.lang.Object ref = boosterPackName_;
         if (!(ref instanceof String)) {
           String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          name_ = s;
+          boosterPackName_ = s;
           return s;
         } else {
           return (String) ref;
         }
       }
-      public Builder setName(String value) {
+      public Builder setBoosterPackName(String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
-        name_ = value;
+  bitField0_ |= 0x00000002;
+        boosterPackName_ = value;
         onChanged();
         return this;
       }
-      public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        name_ = getDefaultInstance().getName();
+      public Builder clearBoosterPackName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        boosterPackName_ = getDefaultInstance().getBoosterPackName();
         onChanged();
         return this;
       }
-      void setName(com.google.protobuf.ByteString value) {
+      void setBoosterPackName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        boosterPackName_ = value;
+        onChanged();
+      }
+      
+      // optional int32 gemPrice = 3;
+      private int gemPrice_ ;
+      public boolean hasGemPrice() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getGemPrice() {
+        return gemPrice_;
+      }
+      public Builder setGemPrice(int value) {
         bitField0_ |= 0x00000004;
-        name_ = value;
+        gemPrice_ = value;
         onChanged();
+        return this;
+      }
+      public Builder clearGemPrice() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        gemPrice_ = 0;
+        onChanged();
+        return this;
       }
       
       // repeated .com.lvl6.proto.BoosterItemProto boosterItems = 4;
@@ -1476,27 +1440,6 @@ public final class BoosterPackStuffProto {
         return boosterItemsBuilder_;
       }
       
-      // optional int32 price = 5;
-      private int price_ ;
-      public boolean hasPrice() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      public int getPrice() {
-        return price_;
-      }
-      public Builder setPrice(int value) {
-        bitField0_ |= 0x00000010;
-        price_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearPrice() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        price_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoosterPackProto)
     }
     
@@ -1515,17 +1458,37 @@ public final class BoosterPackStuffProto {
     boolean hasBoosterItemId();
     int getBoosterItemId();
     
-    // optional int32 equipId = 2;
-    boolean hasEquipId();
-    int getEquipId();
+    // optional int32 boosterPackId = 2;
+    boolean hasBoosterPackId();
+    int getBoosterPackId();
     
-    // optional int32 quantity = 3;
-    boolean hasQuantity();
-    int getQuantity();
+    // optional int32 monsterId = 3;
+    boolean hasMonsterId();
+    int getMonsterId();
     
-    // optional bool isSpecial = 4;
+    // optional int32 numPieces = 4;
+    boolean hasNumPieces();
+    int getNumPieces();
+    
+    // optional bool isComplete = 5;
+    boolean hasIsComplete();
+    boolean getIsComplete();
+    
+    // optional bool isSpecial = 6;
     boolean hasIsSpecial();
     boolean getIsSpecial();
+    
+    // optional int32 gemReward = 7;
+    boolean hasGemReward();
+    int getGemReward();
+    
+    // optional int32 cashReward = 8;
+    boolean hasCashReward();
+    int getCashReward();
+    
+    // optional float chanceToAppear = 9;
+    boolean hasChanceToAppear();
+    float getChanceToAppear();
   }
   public static final class BoosterItemProto extends
       com.google.protobuf.GeneratedMessage
@@ -1566,41 +1529,96 @@ public final class BoosterPackStuffProto {
       return boosterItemId_;
     }
     
-    // optional int32 equipId = 2;
-    public static final int EQUIPID_FIELD_NUMBER = 2;
-    private int equipId_;
-    public boolean hasEquipId() {
+    // optional int32 boosterPackId = 2;
+    public static final int BOOSTERPACKID_FIELD_NUMBER = 2;
+    private int boosterPackId_;
+    public boolean hasBoosterPackId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public int getEquipId() {
-      return equipId_;
+    public int getBoosterPackId() {
+      return boosterPackId_;
     }
     
-    // optional int32 quantity = 3;
-    public static final int QUANTITY_FIELD_NUMBER = 3;
-    private int quantity_;
-    public boolean hasQuantity() {
+    // optional int32 monsterId = 3;
+    public static final int MONSTERID_FIELD_NUMBER = 3;
+    private int monsterId_;
+    public boolean hasMonsterId() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public int getQuantity() {
-      return quantity_;
+    public int getMonsterId() {
+      return monsterId_;
     }
     
-    // optional bool isSpecial = 4;
-    public static final int ISSPECIAL_FIELD_NUMBER = 4;
+    // optional int32 numPieces = 4;
+    public static final int NUMPIECES_FIELD_NUMBER = 4;
+    private int numPieces_;
+    public boolean hasNumPieces() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getNumPieces() {
+      return numPieces_;
+    }
+    
+    // optional bool isComplete = 5;
+    public static final int ISCOMPLETE_FIELD_NUMBER = 5;
+    private boolean isComplete_;
+    public boolean hasIsComplete() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public boolean getIsComplete() {
+      return isComplete_;
+    }
+    
+    // optional bool isSpecial = 6;
+    public static final int ISSPECIAL_FIELD_NUMBER = 6;
     private boolean isSpecial_;
     public boolean hasIsSpecial() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public boolean getIsSpecial() {
       return isSpecial_;
     }
     
+    // optional int32 gemReward = 7;
+    public static final int GEMREWARD_FIELD_NUMBER = 7;
+    private int gemReward_;
+    public boolean hasGemReward() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getGemReward() {
+      return gemReward_;
+    }
+    
+    // optional int32 cashReward = 8;
+    public static final int CASHREWARD_FIELD_NUMBER = 8;
+    private int cashReward_;
+    public boolean hasCashReward() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public int getCashReward() {
+      return cashReward_;
+    }
+    
+    // optional float chanceToAppear = 9;
+    public static final int CHANCETOAPPEAR_FIELD_NUMBER = 9;
+    private float chanceToAppear_;
+    public boolean hasChanceToAppear() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public float getChanceToAppear() {
+      return chanceToAppear_;
+    }
+    
     private void initFields() {
       boosterItemId_ = 0;
-      equipId_ = 0;
-      quantity_ = 0;
+      boosterPackId_ = 0;
+      monsterId_ = 0;
+      numPieces_ = 0;
+      isComplete_ = false;
       isSpecial_ = false;
+      gemReward_ = 0;
+      cashReward_ = 0;
+      chanceToAppear_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1618,13 +1636,28 @@ public final class BoosterPackStuffProto {
         output.writeInt32(1, boosterItemId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, equipId_);
+        output.writeInt32(2, boosterPackId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, quantity_);
+        output.writeInt32(3, monsterId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBool(4, isSpecial_);
+        output.writeInt32(4, numPieces_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, isComplete_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, isSpecial_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, gemReward_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, cashReward_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeFloat(9, chanceToAppear_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -1641,15 +1674,35 @@ public final class BoosterPackStuffProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, equipId_);
+          .computeInt32Size(2, boosterPackId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, quantity_);
+          .computeInt32Size(3, monsterId_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, isSpecial_);
+          .computeInt32Size(4, numPieces_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, isComplete_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, isSpecial_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, gemReward_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, cashReward_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(9, chanceToAppear_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1777,12 +1830,22 @@ public final class BoosterPackStuffProto {
         super.clear();
         boosterItemId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        equipId_ = 0;
+        boosterPackId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        quantity_ = 0;
+        monsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        isSpecial_ = false;
+        numPieces_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        isComplete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        isSpecial_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        gemReward_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        cashReward_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        chanceToAppear_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       
@@ -1828,15 +1891,35 @@ public final class BoosterPackStuffProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.equipId_ = equipId_;
+        result.boosterPackId_ = boosterPackId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.quantity_ = quantity_;
+        result.monsterId_ = monsterId_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
+        result.numPieces_ = numPieces_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.isComplete_ = isComplete_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
         result.isSpecial_ = isSpecial_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.gemReward_ = gemReward_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.cashReward_ = cashReward_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.chanceToAppear_ = chanceToAppear_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1856,14 +1939,29 @@ public final class BoosterPackStuffProto {
         if (other.hasBoosterItemId()) {
           setBoosterItemId(other.getBoosterItemId());
         }
-        if (other.hasEquipId()) {
-          setEquipId(other.getEquipId());
+        if (other.hasBoosterPackId()) {
+          setBoosterPackId(other.getBoosterPackId());
         }
-        if (other.hasQuantity()) {
-          setQuantity(other.getQuantity());
+        if (other.hasMonsterId()) {
+          setMonsterId(other.getMonsterId());
+        }
+        if (other.hasNumPieces()) {
+          setNumPieces(other.getNumPieces());
+        }
+        if (other.hasIsComplete()) {
+          setIsComplete(other.getIsComplete());
         }
         if (other.hasIsSpecial()) {
           setIsSpecial(other.getIsSpecial());
+        }
+        if (other.hasGemReward()) {
+          setGemReward(other.getGemReward());
+        }
+        if (other.hasCashReward()) {
+          setCashReward(other.getCashReward());
+        }
+        if (other.hasChanceToAppear()) {
+          setChanceToAppear(other.getChanceToAppear());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1903,17 +2001,42 @@ public final class BoosterPackStuffProto {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              equipId_ = input.readInt32();
+              boosterPackId_ = input.readInt32();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              quantity_ = input.readInt32();
+              monsterId_ = input.readInt32();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
+              numPieces_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              isComplete_ = input.readBool();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
               isSpecial_ = input.readBool();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              gemReward_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              cashReward_ = input.readInt32();
+              break;
+            }
+            case 77: {
+              bitField0_ |= 0x00000100;
+              chanceToAppear_ = input.readFloat();
               break;
             }
           }
@@ -1943,65 +2066,170 @@ public final class BoosterPackStuffProto {
         return this;
       }
       
-      // optional int32 equipId = 2;
-      private int equipId_ ;
-      public boolean hasEquipId() {
+      // optional int32 boosterPackId = 2;
+      private int boosterPackId_ ;
+      public boolean hasBoosterPackId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public int getEquipId() {
-        return equipId_;
+      public int getBoosterPackId() {
+        return boosterPackId_;
       }
-      public Builder setEquipId(int value) {
+      public Builder setBoosterPackId(int value) {
         bitField0_ |= 0x00000002;
-        equipId_ = value;
+        boosterPackId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearEquipId() {
+      public Builder clearBoosterPackId() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        equipId_ = 0;
+        boosterPackId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 quantity = 3;
-      private int quantity_ ;
-      public boolean hasQuantity() {
+      // optional int32 monsterId = 3;
+      private int monsterId_ ;
+      public boolean hasMonsterId() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public int getQuantity() {
-        return quantity_;
+      public int getMonsterId() {
+        return monsterId_;
       }
-      public Builder setQuantity(int value) {
+      public Builder setMonsterId(int value) {
         bitField0_ |= 0x00000004;
-        quantity_ = value;
+        monsterId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearQuantity() {
+      public Builder clearMonsterId() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        quantity_ = 0;
+        monsterId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional bool isSpecial = 4;
+      // optional int32 numPieces = 4;
+      private int numPieces_ ;
+      public boolean hasNumPieces() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getNumPieces() {
+        return numPieces_;
+      }
+      public Builder setNumPieces(int value) {
+        bitField0_ |= 0x00000008;
+        numPieces_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumPieces() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        numPieces_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool isComplete = 5;
+      private boolean isComplete_ ;
+      public boolean hasIsComplete() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public boolean getIsComplete() {
+        return isComplete_;
+      }
+      public Builder setIsComplete(boolean value) {
+        bitField0_ |= 0x00000010;
+        isComplete_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsComplete() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        isComplete_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool isSpecial = 6;
       private boolean isSpecial_ ;
       public boolean hasIsSpecial() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public boolean getIsSpecial() {
         return isSpecial_;
       }
       public Builder setIsSpecial(boolean value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000020;
         isSpecial_ = value;
         onChanged();
         return this;
       }
       public Builder clearIsSpecial() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000020);
         isSpecial_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 gemReward = 7;
+      private int gemReward_ ;
+      public boolean hasGemReward() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getGemReward() {
+        return gemReward_;
+      }
+      public Builder setGemReward(int value) {
+        bitField0_ |= 0x00000040;
+        gemReward_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemReward() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        gemReward_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 cashReward = 8;
+      private int cashReward_ ;
+      public boolean hasCashReward() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public int getCashReward() {
+        return cashReward_;
+      }
+      public Builder setCashReward(int value) {
+        bitField0_ |= 0x00000080;
+        cashReward_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCashReward() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        cashReward_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional float chanceToAppear = 9;
+      private float chanceToAppear_ ;
+      public boolean hasChanceToAppear() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public float getChanceToAppear() {
+        return chanceToAppear_;
+      }
+      public Builder setChanceToAppear(float value) {
+        bitField0_ |= 0x00000100;
+        chanceToAppear_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearChanceToAppear() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        chanceToAppear_ = 0F;
         onChanged();
         return this;
       }
@@ -2046,14 +2274,16 @@ public final class BoosterPackStuffProto {
       "o\022.\n\004user\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
       "UserProto\0221\n\007booster\030\002 \001(\0132 .com.lvl6.pr" +
       "oto.BoosterPackProto\022\026\n\016timeOfPurchase\030\003" +
-      " \001(\004\022\021\n\tmonsterId\030\004 \001(\005\"\222\001\n\020BoosterPackP" +
-      "roto\022\025\n\rboosterPackId\030\001 \001(\005\022\022\n\ncostsCoin" +
-      "s\030\002 \001(\010\022\014\n\004name\030\003 \001(\t\0226\n\014boosterItems\030\004 " +
-      "\003(\0132 .com.lvl6.proto.BoosterItemProto\022\r\n" +
-      "\005price\030\005 \001(\005\"_\n\020BoosterItemProto\022\025\n\rboos",
-      "terItemId\030\001 \001(\005\022\017\n\007equipId\030\002 \001(\005\022\020\n\010quan" +
-      "tity\030\003 \001(\005\022\021\n\tisSpecial\030\004 \001(\010B\027B\025Booster" +
-      "PackStuffProto"
+      " \001(\004\022\021\n\tmonsterId\030\004 \001(\005\"\214\001\n\020BoosterPackP" +
+      "roto\022\025\n\rboosterPackId\030\001 \001(\005\022\027\n\017boosterPa" +
+      "ckName\030\002 \001(\t\022\020\n\010gemPrice\030\003 \001(\005\0226\n\014booste" +
+      "rItems\030\004 \003(\0132 .com.lvl6.proto.BoosterIte" +
+      "mProto\"\314\001\n\020BoosterItemProto\022\025\n\rboosterIt",
+      "emId\030\001 \001(\005\022\025\n\rboosterPackId\030\002 \001(\005\022\021\n\tmon" +
+      "sterId\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001(\005\022\022\n\nisCom" +
+      "plete\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(\010\022\021\n\tgemRew" +
+      "ard\030\007 \001(\005\022\022\n\ncashReward\030\010 \001(\005\022\026\n\016chanceT" +
+      "oAppear\030\t \001(\002B\027B\025BoosterPackStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2073,7 +2303,7 @@ public final class BoosterPackStuffProto {
           internal_static_com_lvl6_proto_BoosterPackProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BoosterPackProto_descriptor,
-              new java.lang.String[] { "BoosterPackId", "CostsCoins", "Name", "BoosterItems", "Price", },
+              new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "BoosterItems", },
               com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.class,
               com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder.class);
           internal_static_com_lvl6_proto_BoosterItemProto_descriptor =
@@ -2081,7 +2311,7 @@ public final class BoosterPackStuffProto {
           internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BoosterItemProto_descriptor,
-              new java.lang.String[] { "BoosterItemId", "EquipId", "Quantity", "IsSpecial", },
+              new java.lang.String[] { "BoosterItemId", "BoosterPackId", "MonsterId", "NumPieces", "IsComplete", "IsSpecial", "GemReward", "CashReward", "ChanceToAppear", },
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.class,
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder.class);
           return null;

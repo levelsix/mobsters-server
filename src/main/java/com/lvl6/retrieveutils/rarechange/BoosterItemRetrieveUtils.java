@@ -144,11 +144,16 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int id = rs.getInt(i++);
     int boosterPackId = rs.getInt(i++);
-    int equipId = rs.getInt(i++);
-    int quantity = rs.getInt(i++);
+    int monsterId = rs.getInt(i++);
+    int numPieces = rs.getInt(i++);
+    boolean isComplete = rs.getBoolean(i++);
     boolean isSpecial = rs.getBoolean(i++);
-
-    BoosterItem boosterItem = new BoosterItem(id, boosterPackId, equipId, quantity, isSpecial);
+    int gemReward = rs.getInt(i++);
+    int cashReward = rs.getInt(i++);
+    float chanceToAppear = rs.getFloat(i++);
+    
+    BoosterItem boosterItem = new BoosterItem(id, boosterPackId, monsterId,
+    		numPieces, isComplete, isSpecial, gemReward, cashReward, chanceToAppear);
     return boosterItem;
   }
 }

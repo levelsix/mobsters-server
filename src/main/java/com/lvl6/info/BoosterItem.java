@@ -3,68 +3,112 @@ package com.lvl6.info;
 import java.io.Serializable;
 
 public class BoosterItem implements Serializable {
-  private static final long serialVersionUID = -8696581640525315061L;
-  private int id;
+	
+	private static final long serialVersionUID = 6843248362650495626L;
+	private int id;
   private int boosterPackId;
-  private int equipId;
-  private int quantity;
+  private int monsterId;
+  private int numPieces;
+  private boolean isComplete;
   private boolean isSpecial;
+  private int gemReward;
+  private int cashReward;
+  private float chanceToAppear;
   
-  public BoosterItem(int id, int boosterPackId, int equipId, 
-      int quantity, boolean isSpecial) {
-    super();
-    this.id = id;
-    this.boosterPackId = boosterPackId;
-    this.equipId = equipId;
-    this.quantity = quantity;
-    this.isSpecial = isSpecial;
-  }
+	public BoosterItem(int id, int boosterPackId, int monsterId, int numPieces,
+			boolean isComplete, boolean isSpecial, int gemReward, int cashReward,
+			float chanceToAppear) {
+		super();
+		this.id = id;
+		this.boosterPackId = boosterPackId;
+		this.monsterId = monsterId;
+		this.numPieces = numPieces;
+		this.isComplete = isComplete;
+		this.isSpecial = isSpecial;
+		this.gemReward = gemReward;
+		this.cashReward = cashReward;
+		this.chanceToAppear = chanceToAppear;
+	}
 
-  public int getId() {
-    return id;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public void setId(int id) {
-    this.id = id;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public int getBoosterPackId() {
-    return boosterPackId;
-  }
+	public int getBoosterPackId() {
+		return boosterPackId;
+	}
 
-  public void setBoosterPackId(int boosterPackId) {
-    this.boosterPackId = boosterPackId;
-  }
+	public void setBoosterPackId(int boosterPackId) {
+		this.boosterPackId = boosterPackId;
+	}
 
-  public int getEquipId() {
-    return equipId;
-  }
+	public int getMonsterId() {
+		return monsterId;
+	}
 
-  public void setEquipId(int equipId) {
-    this.equipId = equipId;
-  }
+	public void setMonsterId(int monsterId) {
+		this.monsterId = monsterId;
+	}
 
-  public int getQuantity() {
-    return quantity;
-  }
+	public int getNumPieces() {
+		return numPieces;
+	}
 
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
+	public void setNumPieces(int numPieces) {
+		this.numPieces = numPieces;
+	}
 
-  public boolean isSpecial() {
-    return isSpecial;
-  }
+	public boolean isComplete() {
+		return isComplete;
+	}
 
-  public void setSpecial(boolean isSpecial) {
-    this.isSpecial = isSpecial;
-  }
+	public void setComplete(boolean isComplete) {
+		this.isComplete = isComplete;
+	}
 
-  @Override
-  public String toString() {
-    return "BoosterItem [id=" + id + ", boosterPackId=" + boosterPackId
-        + ", equipId=" + equipId + ", quantity=" + quantity + ", isSpecial="
-        + isSpecial + "]";
-  }
+	public boolean isSpecial() {
+		return isSpecial;
+	}
+
+	public void setSpecial(boolean isSpecial) {
+		this.isSpecial = isSpecial;
+	}
+
+	public int getGemReward() {
+		return gemReward;
+	}
+
+	public void setGemReward(int gemReward) {
+		this.gemReward = gemReward;
+	}
+
+	public int getCashReward() {
+		return cashReward;
+	}
+
+	public void setCashReward(int cashReward) {
+		this.cashReward = cashReward;
+	}
+
+	public float getChanceToAppear() {
+		return chanceToAppear;
+	}
+
+	public void setChanceToAppear(float chanceToAppear) {
+		this.chanceToAppear = chanceToAppear;
+	}
+
+	@Override
+	public String toString() {
+		return "BoosterItem [id=" + id + ", boosterPackId=" + boosterPackId
+				+ ", monsterId=" + monsterId + ", numPieces=" + numPieces
+				+ ", isComplete=" + isComplete + ", isSpecial=" + isSpecial
+				+ ", gemReward=" + gemReward + ", cashReward=" + cashReward
+				+ ", chanceToAppear=" + chanceToAppear + "]";
+	}
   
 }

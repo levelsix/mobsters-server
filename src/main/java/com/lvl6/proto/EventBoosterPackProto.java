@@ -1813,6 +1813,16 @@ public final class EventBoosterPackProto {
     // optional .com.lvl6.proto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus status = 2;
     boolean hasStatus();
     com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus getStatus();
+    
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
+        getUpdatedOrNewList();
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index);
+    int getUpdatedOrNewCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getUpdatedOrNewOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+        int index);
   }
   public static final class PurchaseBoosterPackResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -1845,17 +1855,13 @@ public final class EventBoosterPackProto {
     public enum PurchaseBoosterPackStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      NOT_ENOUGH_GOLD(1, 2),
-      NOT_ENOUGH_SILVER(2, 3),
-      OTHER_FAIL(3, 4),
-      CLIENT_TOO_APART_FROM_SERVER_TIME(4, 5),
+      FAIL_INSUFFICIENT_GEMS(1, 2),
+      FAIL_OTHER(2, 3),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int NOT_ENOUGH_GOLD_VALUE = 2;
-      public static final int NOT_ENOUGH_SILVER_VALUE = 3;
-      public static final int OTHER_FAIL_VALUE = 4;
-      public static final int CLIENT_TOO_APART_FROM_SERVER_TIME_VALUE = 5;
+      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
+      public static final int FAIL_OTHER_VALUE = 3;
       
       
       public final int getNumber() { return value; }
@@ -1863,10 +1869,8 @@ public final class EventBoosterPackProto {
       public static PurchaseBoosterPackStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return NOT_ENOUGH_GOLD;
-          case 3: return NOT_ENOUGH_SILVER;
-          case 4: return OTHER_FAIL;
-          case 5: return CLIENT_TOO_APART_FROM_SERVER_TIME;
+          case 2: return FAIL_INSUFFICIENT_GEMS;
+          case 3: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -1897,7 +1901,7 @@ public final class EventBoosterPackProto {
       }
       
       private static final PurchaseBoosterPackStatus[] VALUES = {
-        SUCCESS, NOT_ENOUGH_GOLD, NOT_ENOUGH_SILVER, OTHER_FAIL, CLIENT_TOO_APART_FROM_SERVER_TIME, 
+        SUCCESS, FAIL_INSUFFICIENT_GEMS, FAIL_OTHER, 
       };
       
       public static PurchaseBoosterPackStatus valueOf(
@@ -1944,9 +1948,31 @@ public final class EventBoosterPackProto {
       return status_;
     }
     
+    // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
+    public static final int UPDATEDORNEW_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
+      return updatedOrNew_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+        getUpdatedOrNewOrBuilderList() {
+      return updatedOrNew_;
+    }
+    public int getUpdatedOrNewCount() {
+      return updatedOrNew_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
+      return updatedOrNew_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+        int index) {
+      return updatedOrNew_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
+      updatedOrNew_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1966,6 +1992,9 @@ public final class EventBoosterPackProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, status_.getNumber());
       }
+      for (int i = 0; i < updatedOrNew_.size(); i++) {
+        output.writeMessage(3, updatedOrNew_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -1982,6 +2011,10 @@ public final class EventBoosterPackProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, status_.getNumber());
+      }
+      for (int i = 0; i < updatedOrNew_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, updatedOrNew_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2100,6 +2133,7 @@ public final class EventBoosterPackProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getUpdatedOrNewFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2116,6 +2150,12 @@ public final class EventBoosterPackProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNew_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          updatedOrNewBuilder_.clear();
+        }
         return this;
       }
       
@@ -2166,6 +2206,15 @@ public final class EventBoosterPackProto {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
+        if (updatedOrNewBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            updatedOrNew_ = java.util.Collections.unmodifiableList(updatedOrNew_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.updatedOrNew_ = updatedOrNew_;
+        } else {
+          result.updatedOrNew_ = updatedOrNewBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2187,6 +2236,32 @@ public final class EventBoosterPackProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
+        }
+        if (updatedOrNewBuilder_ == null) {
+          if (!other.updatedOrNew_.isEmpty()) {
+            if (updatedOrNew_.isEmpty()) {
+              updatedOrNew_ = other.updatedOrNew_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureUpdatedOrNewIsMutable();
+              updatedOrNew_.addAll(other.updatedOrNew_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.updatedOrNew_.isEmpty()) {
+            if (updatedOrNewBuilder_.isEmpty()) {
+              updatedOrNewBuilder_.dispose();
+              updatedOrNewBuilder_ = null;
+              updatedOrNew_ = other.updatedOrNew_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              updatedOrNewBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getUpdatedOrNewFieldBuilder() : null;
+            } else {
+              updatedOrNewBuilder_.addAllMessages(other.updatedOrNew_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2237,6 +2312,12 @@ public final class EventBoosterPackProto {
                 bitField0_ |= 0x00000002;
                 status_ = value;
               }
+              break;
+            }
+            case 26: {
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addUpdatedOrNew(subBuilder.buildPartial());
               break;
             }
           }
@@ -2357,6 +2438,192 @@ public final class EventBoosterPackProto {
         status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
         onChanged();
         return this;
+      }
+      
+      // repeated .com.lvl6.proto.FullUserMonsterProto updatedOrNew = 3;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> updatedOrNew_ =
+        java.util.Collections.emptyList();
+      private void ensureUpdatedOrNewIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          updatedOrNew_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(updatedOrNew_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> updatedOrNewBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUpdatedOrNewList() {
+        if (updatedOrNewBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(updatedOrNew_);
+        } else {
+          return updatedOrNewBuilder_.getMessageList();
+        }
+      }
+      public int getUpdatedOrNewCount() {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.size();
+        } else {
+          return updatedOrNewBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUpdatedOrNew(int index) {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.get(index);
+        } else {
+          return updatedOrNewBuilder_.getMessage(index);
+        }
+      }
+      public Builder setUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.set(index, value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addUpdatedOrNew(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+        if (updatedOrNewBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(index, value);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addUpdatedOrNew(
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addUpdatedOrNew(
+          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllUpdatedOrNew(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          super.addAll(values, updatedOrNew_);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearUpdatedOrNew() {
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNew_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeUpdatedOrNew(int index) {
+        if (updatedOrNewBuilder_ == null) {
+          ensureUpdatedOrNewIsMutable();
+          updatedOrNew_.remove(index);
+          onChanged();
+        } else {
+          updatedOrNewBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getUpdatedOrNewBuilder(
+          int index) {
+        return getUpdatedOrNewFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
+          int index) {
+        if (updatedOrNewBuilder_ == null) {
+          return updatedOrNew_.get(index);  } else {
+          return updatedOrNewBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+           getUpdatedOrNewOrBuilderList() {
+        if (updatedOrNewBuilder_ != null) {
+          return updatedOrNewBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(updatedOrNew_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder() {
+        return getUpdatedOrNewFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUpdatedOrNewBuilder(
+          int index) {
+        return getUpdatedOrNewFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
+           getUpdatedOrNewBuilderList() {
+        return getUpdatedOrNewFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+          getUpdatedOrNewFieldBuilder() {
+        if (updatedOrNewBuilder_ == null) {
+          updatedOrNewBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
+                  updatedOrNew_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          updatedOrNew_ = null;
+        }
+        return updatedOrNewBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PurchaseBoosterPackResponseProto)
@@ -2829,31 +3096,32 @@ public final class EventBoosterPackProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026EventBoosterPack.proto\022\016com.lvl6.proto" +
-      "\032\026BoosterPackStuff.proto\032\nUser.proto\"S\n\037" +
-      "RetrieveBoosterPackRequestProto\0220\n\006sende" +
+      "\032\026BoosterPackStuff.proto\032\022MonsterStuff.p" +
+      "roto\032\nUser.proto\"S\n\037RetrieveBoosterPackR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\"\232\002\n RetrieveBooste" +
+      "rPackResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022/\n\005packs\030\002 " +
+      "\003(\0132 .com.lvl6.proto.BoosterPackProto\022Z\n" +
+      "\006status\030\003 \001(\0162J.com.lvl6.proto.RetrieveB" +
+      "oosterPackResponseProto.RetrieveBoosterP",
+      "ackStatus\"7\n\031RetrieveBoosterPackStatus\022\013" +
+      "\n\007SUCCESS\020\001\022\r\n\tSOME_FAIL\020\002\"~\n\037PurchaseBo" +
+      "osterPackRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\025\n\rboost" +
+      "erPackId\030\002 \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\302\002\n P" +
+      "urchaseBoosterPackResponseProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\"\232\002\n RetrieveBoosterPackResponseProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022/\n\005packs\030\002 \003(\0132 .com.lvl6.proto" +
-      ".BoosterPackProto\022Z\n\006status\030\003 \001(\0162J.com." +
-      "lvl6.proto.RetrieveBoosterPackResponsePr" +
-      "oto.RetrieveBoosterPackStatus\"7\n\031Retriev",
-      "eBoosterPackStatus\022\013\n\007SUCCESS\020\001\022\r\n\tSOME_" +
-      "FAIL\020\002\"~\n\037PurchaseBoosterPackRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\025\n\rboosterPackId\030\002 \001(\005\022\022\n\ncl" +
-      "ientTime\030\003 \001(\003\"\276\002\n PurchaseBoosterPackRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022Z\n\006status\030\002 \001(\0162J." +
-      "com.lvl6.proto.PurchaseBoosterPackRespon" +
-      "seProto.PurchaseBoosterPackStatus\"\213\001\n\031Pu" +
-      "rchaseBoosterPackStatus\022\013\n\007SUCCESS\020\001\022\023\n\017",
-      "NOT_ENOUGH_GOLD\020\002\022\025\n\021NOT_ENOUGH_SILVER\020\003" +
-      "\022\016\n\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_APART_FRO" +
-      "M_SERVER_TIME\020\005\"q\n(ReceivedRareBoosterPu" +
-      "rchaseResponseProto\022E\n\023rareBoosterPurcha" +
-      "se\030\001 \001(\0132(.com.lvl6.proto.RareBoosterPur" +
-      "chaseProtoB\027B\025EventBoosterPackProto"
+      "o\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Purch" +
+      "aseBoosterPackResponseProto.PurchaseBoos" +
+      "terPackStatus\022:\n\014updatedOrNew\030\003 \003(\0132$.co",
+      "m.lvl6.proto.FullUserMonsterProto\"T\n\031Pur" +
+      "chaseBoosterPackStatus\022\013\n\007SUCCESS\020\001\022\032\n\026F" +
+      "AIL_INSUFFICIENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"" +
+      "q\n(ReceivedRareBoosterPurchaseResponsePr" +
+      "oto\022E\n\023rareBoosterPurchase\030\001 \001(\0132(.com.l" +
+      "vl6.proto.RareBoosterPurchaseProtoB\027B\025Ev" +
+      "entBoosterPackProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2889,7 +3157,7 @@ public final class EventBoosterPackProto {
           internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", },
+              new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", },
               com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.class,
               com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder.class);
           internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_descriptor =
@@ -2907,6 +3175,7 @@ public final class EventBoosterPackProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.BoosterPackStuffProto.getDescriptor(),
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
   }

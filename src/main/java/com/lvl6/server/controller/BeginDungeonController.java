@@ -295,7 +295,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  List<TaskStageMonster> taskStageMonsters = 
 				  TaskStageMonsterRetrieveUtils.getTaskStagesForTaskStageId(tsId);
 		  int quantity = 1; //change value to increase monsters spawned
-		  List<TaskStageMonster> spawnedTaskStageMonsters = fairlyPickMonsters(taskStageMonsters, rand, quantity);
+		  List<TaskStageMonster> spawnedTaskStageMonsters = selectMonsters(taskStageMonsters, rand, quantity);
 		  
 		  
 		  /*Code below is done such that if more than one monster is generated
@@ -324,7 +324,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  return stageNumsToProtos;
   }
   
-  private List<TaskStageMonster> fairlyPickMonsters(List<TaskStageMonster> taskStageMonsters,
+  /*picking without replacement*/
+  private List<TaskStageMonster> selectMonsters(List<TaskStageMonster> taskStageMonsters,
   		Random rand, int quantity) {
   	//return value
   	List<TaskStageMonster> selectedTsm = new ArrayList<TaskStageMonster>();
