@@ -24,6 +24,7 @@ import com.lvl6.properties.Globals;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventChatProto.PrivateChatPostResponseProto;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserClanRetrieveUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
@@ -310,8 +311,9 @@ public class APNSWriter extends Wrap {
 	          content += "...";
 	        }
 	      }
-	      String clan = post.getPoster().getClan().getClanId() > 0 ? "[" + post.getPoster().getClan().getTag() + "] " : "";
-	      pb.alertBody(clan + post.getPoster().getName()
+	      MinimumUserProto mup = post.getPoster().getMinUserProto();
+	      String clan = mup.getClan().getClanId() > 0 ? "[" + mup.getClan().getTag() + "] " : "";
+	      pb.alertBody(clan + mup.getName()
 	          + " sent a private message: " + content);
 
 	      if (!pb.isTooLong()) {

@@ -129,6 +129,17 @@ public class CreateInfoProtoUtils {
         .setUserId(u.getId()).setClan(createMinimumClanProtoFromClan(c));
     return builder.build();
   }
+  public static MinimumUserProtoWithLevel createMinimumUserProtoWithLevelFromUserAndClan(User u, Clan c) {
+    MinimumUserProto.Builder builder = MinimumUserProto.newBuilder();
+    builder.setName(u.getName());
+    builder.setUserId(u.getId());
+    builder.setClan(createMinimumClanProtoFromClan(c));
+    
+    MinimumUserProtoWithLevel.Builder builderWithLevel = MinimumUserProtoWithLevel.newBuilder();
+    builderWithLevel.setMinUserProto(builder.build());
+    builderWithLevel.setLevel(u.getLevel());
+    return builderWithLevel.build();
+  }
 
   public static MinimumUserProtoWithLevel createMinimumUserProtoWithLevelFromUser(User u) {
     MinimumUserProto mup = createMinimumUserProtoFromUser(u);
@@ -593,35 +604,46 @@ public class CreateInfoProtoUtils {
 
   public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPost (
       PrivateChatPost p, User poster, User recipient) {
-    MinimumUserProto mupPoster = createMinimumUserProtoFromUser(poster); 
-    MinimumUserProto mupRecipient = createMinimumUserProtoFromUser(recipient);
+    MinimumUserProtoWithLevel mupwlPoster = createMinimumUserProtoWithLevelFromUser(poster); 
+    MinimumUserProtoWithLevel mupwlRecipient = createMinimumUserProtoWithLevelFromUser(recipient);
 
     // Truncate time because db truncates it
     long time = p.getTimeOfPost().getTime();
     time = time - time % 1000;
+    
+    PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
+    pcppb.setPrivateChatPostId(p.getId());
+    pcppb.setPoster(mupwlPoster);
+    pcppb.setRecipient(mupwlRecipient);
+    pcppb.setTimeOfPost(time);
+    pcppb.setContent(p.getContent());
 
-    return PrivateChatPostProto.newBuilder().setPrivateChatPostId(p.getId())
-        .setPoster(mupPoster).setRecipient(mupRecipient)
-        .setTimeOfPost(time).setContent(p.getContent()).build();
+    return pcppb.build();
   }
 
   public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos (
-      PrivateChatPost p, MinimumUserProto mupPoster, MinimumUserProto mupRecipient) {
-    return PrivateChatPostProto.newBuilder().setPrivateChatPostId(p.getId())
-        .setPoster(mupPoster).setRecipient(mupRecipient)
-        .setTimeOfPost(p.getTimeOfPost().getTime()).setContent(p.getContent()).build();
+      PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
+      MinimumUserProtoWithLevel mupwlRecipient) {
+  	PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
+  	
+    pcppb.setPrivateChatPostId(p.getId());
+    pcppb.setPoster(mupwlPoster);
+    pcppb.setRecipient(mupwlRecipient);
+    pcppb.setTimeOfPost(p.getTimeOfPost().getTime());
+    pcppb.setContent(p.getContent());
+    return pcppb.build();
   }
 
   public static List<PrivateChatPostProto> createPrivateChatPostProtoFromPrivateChatPostsAndProtos (
-      List<PrivateChatPost> pList, Map<Integer, MinimumUserProto> idsToMups) {
+      List<PrivateChatPost> pList, Map<Integer, MinimumUserProtoWithLevel> idsToMupwls) {
     List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
 
     for (PrivateChatPost pcp : pList) {
-      MinimumUserProto mupPoster = idsToMups.get(pcp.getPosterId());
-      MinimumUserProto mupRecipient = idsToMups.get(pcp.getRecipientId());
+      MinimumUserProtoWithLevel mupwlPoster = idsToMupwls.get(pcp.getPosterId());
+      MinimumUserProtoWithLevel mupwlRecipient = idsToMupwls.get(pcp.getRecipientId());
 
       PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(pcp,
-          mupPoster, mupRecipient);
+          mupwlPoster, mupwlRecipient);
 
       pcppList.add(pcpp);
     }
@@ -640,11 +662,12 @@ public class CreateInfoProtoUtils {
       Map<Integer, PrivateChatPost> postIdsToPrivateChatPosts) {
 
     List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
-    Map<Integer, MinimumUserProto> userIdToMinimumUserProto = new HashMap<Integer, MinimumUserProto>();
+    Map<Integer, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel =
+    		new HashMap<Integer, MinimumUserProtoWithLevel>();
     //construct the minimum user protos for the users that have clans
     //and the clanless users
     createMinimumUserProtosFromClannedAndClanlessUsers(clanIdsToClans, clanIdsToUserIdSet,
-        clanlessUserIds, userIdsToUsers, userIdToMinimumUserProto);
+        clanlessUserIds, userIdsToUsers, userIdToMinimumUserProtoWithLevel);
 
     //now actually construct the PrivateChatPostProtos
     if (null != privateChatPostIds && !privateChatPostIds.isEmpty()) {
@@ -654,22 +677,22 @@ public class CreateInfoProtoUtils {
         int posterId = pcp.getPosterId();
         int recipientId = pcp.getRecipientId();
 
-        MinimumUserProto mupPoster = userIdToMinimumUserProto.get(posterId);
-        MinimumUserProto mupRecipient = userIdToMinimumUserProto.get(recipientId);
+        MinimumUserProtoWithLevel mupwlPoster = userIdToMinimumUserProtoWithLevel.get(posterId);
+        MinimumUserProtoWithLevel mupwlRecipient = userIdToMinimumUserProtoWithLevel.get(recipientId);
 
         PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-            pcp, mupPoster, mupRecipient);
+            pcp, mupwlPoster, mupwlRecipient);
         pcppList.add(pcpp);
       }
     } else {
       for (PrivateChatPost pcp : postIdsToPrivateChatPosts.values()) {
         int posterId = pcp.getPosterId();
         int recipientId = pcp.getRecipientId();
-        MinimumUserProto mupPoster = userIdToMinimumUserProto.get(posterId);
-        MinimumUserProto mupRecipient = userIdToMinimumUserProto.get(recipientId);
+        MinimumUserProtoWithLevel mupwlPoster = userIdToMinimumUserProtoWithLevel.get(posterId);
+        MinimumUserProtoWithLevel mupwlRecipient = userIdToMinimumUserProtoWithLevel.get(recipientId);
 
         PrivateChatPostProto pcpp = createPrivateChatPostProtoFromPrivateChatPostAndProtos(
-            pcp, mupPoster, mupRecipient);
+            pcp, mupwlPoster, mupwlRecipient);
         pcppList.add(pcpp);
       }
     }
@@ -680,12 +703,12 @@ public class CreateInfoProtoUtils {
   public static void createMinimumUserProtosFromClannedAndClanlessUsers(
       Map<Integer, Clan> clanIdsToClans, Map<Integer, Set<Integer>> clanIdsToUserIdSet,
       List<Integer> clanlessUserIds, Map<Integer, User> userIdsToUsers, 
-      Map<Integer, MinimumUserProto> userIdToMinimumUserProto) {
+      Map<Integer, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel) {
     //construct the minimum user protos for the clanless users
     for (int userId : clanlessUserIds) {
       User u = userIdsToUsers.get(userId);
-      MinimumUserProto mup = createMinimumUserProtoFromUser(u);
-      userIdToMinimumUserProto.put(userId, mup);
+      MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUser(u);
+      userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
     }
 
     //construct the minimum user protos for the users that have clans 
@@ -696,8 +719,8 @@ public class CreateInfoProtoUtils {
         //create minimum user protos for users associated with clan
         for (int userId: clanIdsToUserIdSet.get(clanId)) {
           User u = userIdsToUsers.get(userId);
-          MinimumUserProto mup = createMinimumUserProtoFromUserAndClan(u, c);
-          userIdToMinimumUserProto.put(userId, mup);
+          MinimumUserProtoWithLevel mupwl = createMinimumUserProtoWithLevelFromUserAndClan(u, c);
+          userIdToMinimumUserProtoWithLevel.put(userId, mupwl);
         }
       }
     }
