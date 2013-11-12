@@ -34,7 +34,7 @@ message StartupResponseProto {
     
 	//only send the ones that are not redeemed, (incomplete and complete)
 	repeated FullUserQuestProto userQuests = 6;
-	optional FullUserQuestProto redeemedUserQuests = 27;
+	optional int32 redeemedQuestIds = 27;
 	repeated FullUserClanProto userClanInfo = 7;
 	repeated int32 completedTaskIds = 8; 
 	
