@@ -285,6 +285,7 @@ public class ControllerConstants {
   public static final String UCHRFC__HEAL_MONSTER = "healed user monsters";
   public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
   public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
+  public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
   public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
   public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
   public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
@@ -322,7 +323,6 @@ public class ControllerConstants {
   public static final String UCHRFC__CHARACTER_MOD_SKILL_POINTS = "character skill points";
   public static final String UCHRFC__GOLDMINE = "goldmine reset";
   public static final String UCHRFC__COLLECT_GOLDMINE = "collect from goldmine";
-  public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack with id ";
   public static final String UCHRFC__PURCHASED_ADDITIONAL_FORGE_SLOTS = "purchased additional forge slots";
   //silver only reasons
   public static final String UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT = "retrieve currency from normal structures";

@@ -431,4 +431,20 @@ public class MonsterStuffUtils {
   	
   	return sumProbabilities;
   }
+  
+  public static MonsterForUser createNewUserMonster(int userId, int numPieces,
+  		Monster monster, Date now, boolean isComplete) {
+  	int id = 0;
+  	int monsterId = monster.getId();
+  	int currentExp = 0;
+  	int currentLvl = 1;
+  	int currentHealth = monster.getBaseHp();
+  	int teamSlotNum = 0;
+  	String sourceOfPieces = "";
+  	MonsterForUser mfu = new MonsterForUser(id, userId, monsterId, currentExp,
+  			currentLvl, currentHealth, numPieces, isComplete, now,
+  			teamSlotNum, sourceOfPieces);
+  	
+  	return mfu;
+  }
 }

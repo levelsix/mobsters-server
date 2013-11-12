@@ -11,8 +11,6 @@ import java.util.Random;
 
 import javax.annotation.Resource;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -22,7 +20,6 @@ import com.hazelcast.core.IList;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.PurchaseBoosterPackRequestEvent;
 import com.lvl6.events.response.PurchaseBoosterPackResponseEvent;
-import com.lvl6.events.response.ReceivedRareBoosterPurchaseResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
@@ -36,11 +33,9 @@ import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus;
-import com.lvl6.proto.EventBoosterPackProto.ReceivedRareBoosterPurchaseResponseProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.UserBoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
@@ -48,7 +43,7 @@ import com.lvl6.server.EventWriter;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class PurchaseBoosterPackController extends EventController {
@@ -105,6 +100,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Date now = new Date(reqProto.getClientTime());
     Timestamp nowTimestamp = new Timestamp(now.getTime());
 
+    //values to send to client
     PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
 
@@ -118,7 +114,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
       int gemPrice = aPack.getGemPrice();
       Map<Integer, BoosterItem> boosterItemIdsToBoosterItems = BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 
-      //values to send to client
       List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
       
       boolean legit = checkLegitPurchase(resBuilder, user, userId, now,
@@ -128,7 +123,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       if (legit) {
         //check if user has bought up all the booster items in the booster pack
         int numBoosterItemsUserWants = 1;
-        List<BoosterItem> items = determineBoosterItemsUserReceives(
+        itemsUserReceives = determineBoosterItemsUserReceives(
         		numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
         
         previousGems = user.getGems();
@@ -156,17 +151,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
         server.writeEvent(resEventUpdate);
         
         
-        int numBought = itemsUserReceives.size();
-        
-        //multiple scenarios where user can "buy" booster pack, but,
-        //so far, the other ones aren't counted towards the daily limit
-        boolean excludeFromLimitCheck = false;
-//        
 //        MiscMethods.writeToUserBoosterPackHistoryOneUser(userId, boosterPackId, numBought, 
 //            nowTimestamp, itemsUserReceives, excludeFromLimitCheck, userEquipIds);
-//        writeToUserCurrencyHistory(user, boosterPackId, nowTimestamp,
-//            gemChange, previousSilver, previousGems);
-//        
+        writeToUserCurrencyHistory(user, boosterPackId, nowTimestamp,
+            gemPrice, previousGems, itemsUserReceives);
+        
         sendBoosterPurchaseMessage(user, aPack, itemsUserReceives);
       }
     } catch (Exception e) {
@@ -226,33 +215,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return true;
   }
   
-  private int getNumEquipsPurchasedToday(int userId, int boosterPackId, 
-      DateTime startOfDayInLA) {
-    //get the time at the start of the day in UTC
-    DateTimeZone utcTZ = DateTimeZone.UTC;
-    DateTime startOfDayInLAInUtc = startOfDayInLA.withZone(utcTZ);
-    Timestamp startTime = new Timestamp(startOfDayInLAInUtc.toDate().getTime());
-
-    int numPurchased = UserBoosterPackRetrieveUtils
-        .getNumPacksPurchasedAfterDateForUserAndPackId(userId, boosterPackId, startTime);
-    
-    return numPurchased;
-  }
-  
-  //Returns all the booster items the user purchased and whether or not the use reset the chesst.
-  //If the user buys out deck start over from a fresh deck 
-  //(boosterItemIdsToNumCollected is changed to reflect none have been collected).
-  //Also, keep track of which items were purchased before and/or after the reset (via collectedBeforeReset)
-  private void getAllBoosterItemsForUser(Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems, 
-      int numBoosterItemsUserWants, User aUser, BoosterPack aPack, List<BoosterItem> returnValue) {
-    int boosterPackId = aPack.getId();
-    
-    //set the booster item(s) the user will receieve  
-    List<BoosterItem> itemUserReceives = determineBoosterItemsUserReceives(
-    		numBoosterItemsUserWants, allBoosterItemIdsToBoosterItems);
-    returnValue.addAll(itemUserReceives);
-  }
-  
+//  private int getNumEquipsPurchasedToday(int userId, int boosterPackId, 
+//      DateTime startOfDayInLA) {
+//    //get the time at the start of the day in UTC
+//    DateTimeZone utcTZ = DateTimeZone.UTC;
+//    DateTime startOfDayInLAInUtc = startOfDayInLA.withZone(utcTZ);
+//    Timestamp startTime = new Timestamp(startOfDayInLAInUtc.toDate().getTime());
+//
+//    int numPurchased = UserBoosterPackRetrieveUtils
+//        .getNumPacksPurchasedAfterDateForUserAndPackId(userId, boosterPackId, startTime);
+//    
+//    return numPurchased;
+//  }
   
   //no arguments are modified
   private List<BoosterItem> determineBoosterItemsUserReceives(int amountUserWantsToPurchase,
@@ -260,30 +234,17 @@ import com.lvl6.utils.utilmethods.StringUtils;
     //return value
     List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
     
-    Random rand = new Random();
     Collection<BoosterItem> items = allBoosterItemIdsToBoosterItems.values();
     List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
-    int size = itemsList.size();
     float sumOfProbabilities = sumProbabilities(allBoosterItemIdsToBoosterItems.values());    
     
     //selecting items at random with replacement
     for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {
-    	float normalizedProbabilitySoFar = 0f;
-      float randFloat = rand.nextFloat();
-      
-      //for each item, nrmalize 
-      for(int i = 0; i < size; i++) {
-        BoosterItem item = itemsList.get(i);
-        //normalize probability
-        normalizedProbabilitySoFar += item.getChanceToAppear() / sumOfProbabilities;
-        
-        if(randFloat < normalizedProbabilitySoFar) {
-          //we have a winner! current boosterItem is what the user gets
-          itemsUserReceives.add(item);
-          
-          break;
-        }
-      }
+    	BoosterItem bi = selectBoosterItem(itemsList, sumOfProbabilities);
+    	if (null == bi) {
+    		continue;
+    	}
+    	itemsUserReceives.add(bi);
     }
     
     return itemsUserReceives;
@@ -295,6 +256,29 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		sumOfProbabilities += bi.getChanceToAppear();
   	}
   	return sumOfProbabilities;
+  }
+  
+  private BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
+  		float sumOfProbabilities) {
+  	Random rand = new Random();
+  	float normalizedProbabilitySoFar = 0f;
+    float randFloat = rand.nextFloat();
+    
+    int size = itemsList.size();
+    //for each item, normalize before seeing if it is selected
+    for(int i = 0; i < size; i++) {
+      BoosterItem item = itemsList.get(i);
+      //normalize probability
+      normalizedProbabilitySoFar += item.getChanceToAppear() / sumOfProbabilities;
+      
+      if(randFloat < normalizedProbabilitySoFar) {
+        //we have a winner! current boosterItem is what the user gets
+        return item;
+      }
+    }
+
+    log.error("maybe no boosterItems exist. boosterItems=" + itemsList);
+    return null;
   }
   
   private boolean writeChangesToDB(Builder resBuilder, User user, int bPackId,
@@ -312,26 +296,45 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		return false;
   	}
   	
-  	//assuming things work while updating user monsters
-    //sop = source of pieces
     Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
-    String mfusop = createUpdateUserMonsterArguments(bPackId, itemsUserReceives,
-    		monsterIdToNumPieces);
-    List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
-  			updateUserMonsters(userId, monsterIdToNumPieces, mfusop, now);
+    List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
+    //sop = source of pieces
+    String mfusop = createUpdateUserMonsterArguments(userId, bPackId,
+    		itemsUserReceives, monsterIdToNumPieces, completeUserMonsters, now);
+    
+    //this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
+    if (!completeUserMonsters.isEmpty()) {
+    	List<Long> monsterForUserIds = InsertUtils.get()
+    			.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop);
+    	List<FullUserMonsterProto> newOrUpdated = createFullUserMonsterProtos(
+    			monsterForUserIds, completeUserMonsters);
+    	
+    	//set the builder that will be sent to the client
+    	resBuilder.addAllUpdatedOrNew(newOrUpdated);
+    }
+    
+    //this is if the user did not buy a complete monster, UPDATE DB
+    if (!monsterIdToNumPieces.isEmpty()) {
+    	//assume things just work while updating user monsters
+    	List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
+    			updateUserMonsters(userId, monsterIdToNumPieces, mfusop, now);
+    	
+    	//sset the builder that will be sent to the client
+    	resBuilder.addAllUpdatedOrNew(newOrUpdated);
+    }
 
-    if (null == newOrUpdated || newOrUpdated.isEmpty()) {
+    if (monsterIdToNumPieces.isEmpty() && completeUserMonsters.isEmpty()) {
       resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
       return false;
     }
     
-    
     return true;
   }
   
-  //monsterIdsToNumPieces will be populated
-  private String createUpdateUserMonsterArguments(int boosterPackId,
-  		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces) {
+  //monsterIdsToNumPieces or completeUserMonsters will be populated
+  private String createUpdateUserMonsterArguments(int userId, int boosterPackId,
+  		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces,
+  		List<MonsterForUser> completeUserMonsters, Date now) {
   	StringBuffer sb = new StringBuffer();
   	sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
   	sb.append(" ");
@@ -341,10 +344,24 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	List<Integer> boosterItemIds = new ArrayList<Integer>();
   	for (BoosterItem item : boosterItems) {
   		Integer id = item.getId();
+  		Integer monsterId = item.getMonsterId();
   		Integer numPieces = item.getNumPieces();
   		
-  		monsterIdsToNumPieces.put(id, numPieces);
-  		boosterItemIds.add(id);
+  		if (item.isComplete()) {
+  			//create a "complete" user monster
+  			boolean isComplete = true;
+  			Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+  			MonsterForUser newUserMonster = MonsterStuffUtils.createNewUserMonster(
+  					userId, numPieces, monzter, now, isComplete);
+  			
+  			//return this monster in the argument list completeUserMonsters, so caller
+  			//can use it
+  			completeUserMonsters.add(newUserMonster);
+  			
+  		} else {
+  			monsterIdsToNumPieces.put(monsterId, numPieces);
+  			boosterItemIds.add(id);
+  		}
   	}
   	
   	String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
@@ -353,40 +370,50 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
 
   
-  private List<FullUserMonsterProto> createFullUserMonsterProtos(List<Long> userEquipIds, 
-      int userId, List<BoosterItem> boosterItems) {
+  
+  private List<FullUserMonsterProto> createFullUserMonsterProtos(
+  		List<Long> userMonsterIds, List<MonsterForUser> mfuList) {
     List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
     
-//    for(int i = 0; i < boosterItems.size(); i++) {
-//      long ueId = userEquipIds.get(i);
-//      BoosterItem bi = boosterItems.get(i);
-//      int equipId = bi.getEquipId();
-//      int level = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
-//      int enhancement = ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT; 
-//      int durability = ControllerConstants.DEFAULT_USER_EQUIP_DURABILITY;
-//      MonsterForUser ue = new MonsterForUser(ueId, userId, equipId, level, enhancement,
-//      		durability);
-//      
-//      FullUserMonsterProto fuep = CreateInfoProtoUtils.createFullUserMonsterProtoFromMonsterForUser(ue);
-//      protos.add(fuep);
-//    }
+    for(int i = 0; i < userMonsterIds.size(); i++) {
+      long mfuId = userMonsterIds.get(i);
+      MonsterForUser mfu = mfuList.get(i);
+      mfu.setId(mfuId);
+      FullUserMonsterProto fump = CreateInfoProtoUtils
+      		.createFullUserMonsterProtoFromUserMonster(mfu);
+      protos.add(fump);
+    }
     
     return protos;
   }
   
-  private void writeToUserCurrencyHistory(User aUser, int packId, Timestamp date, Map<String, Integer> money,
-      int previousSilver, int previousGold) {
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String gold = MiscMethods.gold;
-//    String silver = MiscMethods.silver;
-//    String reasonForChange = ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK + packId;
-//    
-//    previousGoldSilver.put(gold, previousGold);
-//    previousGoldSilver.put(silver, previousSilver);
-//    reasonsForChanges.put(gold, reasonForChange);
-//    reasonsForChanges.put(silver, reasonForChange);
-//    MiscMethods.writeToUserCurrencyOneUserGoldAndOrSilver(aUser, date, money, previousGoldSilver, reasonsForChanges);
+  private void writeToUserCurrencyHistory(User aUser, int packId, Timestamp date,
+  		int gemPrice, int previousGems, List<BoosterItem> items) {
+  	List<Integer> itemIds = new ArrayList<Integer>();
+  	for (BoosterItem item : items) {
+  		int id = item.getId();
+  		itemIds.add(id);
+  	}
+  	
+  	StringBuffer detailSb = new StringBuffer();
+  	detailSb.append(" bItemIds=");
+  	String itemIdsCsv = StringUtils.csvList(itemIds);
+  	detailSb.append(itemIdsCsv);
+  	
+  	String gems = MiscMethods.gems;
+  	String reasonForChange = ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK;
+  	
+  	Map<String, Integer> money = new HashMap<String, Integer>();
+    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> details = new HashMap<String, String>();
+    
+    money.put(gems, gemPrice);
+    previousGemsCash.put(gems, previousGems);
+    reasonsForChanges.put(gems, reasonForChange);
+    details.put(gems, detailSb.toString());
+    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
+    		previousGemsCash, reasonsForChanges, details);
   }
   
 }
