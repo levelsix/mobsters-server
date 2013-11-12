@@ -29,8 +29,11 @@ public class ControllerConstants {
 	public static final String MFUDR__QUEST = "quest";
 	public static final String MFUDR__SELL = "sold for cash";
 	
+	//chats
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 	
+	//pvp
+	public static final int PVP__REQUIRED_MIN_LEVEL = 30;
 	
 	
 	//old aoc constants

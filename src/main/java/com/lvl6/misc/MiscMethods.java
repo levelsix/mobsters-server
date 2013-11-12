@@ -369,6 +369,10 @@ public class MiscMethods {
     cb.setMonsterConstants(mcb.build());
     
     cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
+    
+    cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
+    
+    //set more properties above
 //    BattleConstants battleConstants = BattleConstants.newBuilder()
 //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
 //        .setBattleWeightGivenToAttackStat(ControllerConstants.BATTLE_WEIGHT_GIVEN_TO_ATTACK_STAT)

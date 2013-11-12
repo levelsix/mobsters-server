@@ -38,6 +38,11 @@ message PurchaseBoosterPackRequestProto {
 message PurchaseBoosterPackResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional PurchaseBoosterPackStatus status = 2;
+	
+	//if user received, say, two pieces of a monster
+	//and he needs one to complete an existing monster
+	//there would be one monster that would be completed
+	//and another that would be the remaining pieces of the monster
 	repeated FullUserMonsterProto updatedOrNew = 3;
 	
 	enum PurchaseBoosterPackStatus {
