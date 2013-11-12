@@ -109,7 +109,7 @@ message StartupResponseProto {
 		optional MonsterConstants monsterConstants = 18;
 		
 		optional float minutesPerGem = 19; 
-		
+		optional int32 pvpRequiredMinLvl = 20;
 		
 		
 		message AnimatedSpriteOffsetProto {
