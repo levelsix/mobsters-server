@@ -859,6 +859,7 @@ public class CreateInfoProtoUtils {
     b.setBoosterPackId(bi.getBoosterPackId());
     b.setMonsterId(bi.getMonsterId());
     b.setNumPieces(bi.getNumPieces());
+    b.setIsComplete(bi.isComplete());
     b.setIsSpecial(bi.isSpecial());
     b.setGemReward(bi.getGemReward());
     b.setCashReward(bi.getCashReward());
