@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import org.mortbay.log.Log;
 
 import com.lvl6.info.BlacksmithAttempt;
+import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -597,31 +598,38 @@ public class InsertUtils implements InsertUtil{
     return numInserted;
   }
   
-  public int insertIntoUserBoosterPackHistory(int userId, int boosterPackId, 
-      int numBought, Timestamp timeOfPurchase, int rarityOneQuantity, 
-      int rarityTwoQuantity, int rarityThreeQuantity, boolean excludeFromLimitCheck,
-      List<Integer> equipIds, List<Long> userEquipIds) {
-    String tableName = DBConstants.TABLE_USER_BOOSTER_PACK_HISTORY;
+  public int insertIntoBoosterPackPurchaseHistory(int userId, int boosterPackId, 
+      Timestamp timeOfPurchase, BoosterItem bi, List<Long> userMonsterIds) {
+    String tableName = DBConstants.TABLE_BOOSTER_PACK_PURCHASE_HISTORY;
     
     Map<String, Object> insertParams = new HashMap<String, Object>();
+    int boosterItemId = bi.getId();
+    int monsterId = bi.getMonsterId();
+    int numPieces = bi.getNumPieces();
+    boolean isComplete = bi.isComplete();
+    boolean isSpecial = bi.isSpecial();
+    int gemReward = bi.getGemReward();
+    float chanceToAppear = bi.getChanceToAppear();
     
-    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__USER_ID, userId);
-    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__BOOSTER_PACK_ID, boosterPackId);
-    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__NUM_BOUGHT, numBought);
-    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__TIME_OF_PURCHASE, timeOfPurchase);
-    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__RARITY_ONE_QUANTITY, rarityOneQuantity);
-    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__RARITY_TWO_QUANTITY, rarityTwoQuantity);
-    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__RARITY_THREE_QUANTITY, rarityThreeQuantity);
-    insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK, excludeFromLimitCheck);
-    
-//    if (null != equipIds && !equipIds.isEmpty()) {
-//      String ids = StringUtils.csvIntList(equipIds);
-//      insertParams.put(DBConstants.USER_BOOSTER_PACK_HISTORY__EQUIP_IDS, ids);
-//    }
-    if (null != userEquipIds && !userEquipIds.isEmpty()) {
-      String ids = StringUtils.csvList(userEquipIds);
-      insertParams.put(DBConstants.BOOSTER_PACK_HISTORY__MONSTER_FOR_USER_IDS, ids);
+    insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__USER_ID, userId);
+    insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID, boosterPackId);
+    insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE, timeOfPurchase);
+    insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID, boosterItemId);
+    //monster prize and gem prize are mutually exclusive
+    if (monsterId > 0) {
+    	insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID, monsterId);
+    	insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__NUM_PIECES, numPieces);
+    	insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_COMPLETE, isComplete);
+    	insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__IS_SPECIAL, isSpecial);
+    	
+    	String userMonsterIdsStr = StringUtils.csvList(userMonsterIds);
+    	insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS,
+    			userMonsterIdsStr);
+    } else if (gemReward > 0) {
+    insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD, gemReward);
     }
+    
+    insertParams.put(DBConstants.BOOSTER_PACK_PURCHASE_HISTORY__CHANCE_TO_APPEAR, chanceToAppear);
     
     int numInserted = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
     return numInserted;

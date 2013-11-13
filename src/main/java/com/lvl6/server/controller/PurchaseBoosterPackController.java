@@ -28,6 +28,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackRequestProto;
 import com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto;
@@ -134,6 +135,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
         		itemsUserReceives, gemPrice, now, gemReward);
       }
       
+      if (successful) {
+      	//assume user only purchases 1 item. NEED TO LET CLIENT KNOW THE PRIZE
+      	if (null != itemsUserReceives && !itemsUserReceives.isEmpty()) {
+      		BoosterItem bi = itemsUserReceives.get(0);
+      		BoosterItemProto bip = CreateInfoProtoUtils.createBoosterItemProto(bi);
+      		resBuilder.setPrize(bip);
+      	}
+      }
+      
       PurchaseBoosterPackResponseProto resProto = resBuilder.build();
       PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
@@ -145,11 +155,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
-        
-        
         writeToUserCurrencyHistory(user, boosterPackId, nowTimestamp,
             gemPrice, previousGems, itemsUserReceives, gemReward);
         
+        //just assume user can only buy one booster pack at a time
+        writeToBoosterPackPurchaseHistory(userId, boosterPackId, itemsUserReceives,
+        		resBuilder.getUpdatedOrNewList(), nowTimestamp);
         sendBoosterPurchaseMessage(user, aPack, itemsUserReceives);
       }
     } catch (Exception e) {
@@ -299,6 +310,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		return false;
   	}
   	
+  	log.info("SPENT MONEY ON BOOSTER PACK: " + bPackId + "\t gemPrice=" + gemPrice +
+  			"\t gemReward=" + gemReward + "\t itemsUserReceives=" + itemsUserReceives);
+  	
     Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
     List<MonsterForUser> completeUserMonsters = new ArrayList<MonsterForUser>();
     //sop = source of pieces
@@ -312,6 +326,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	List<FullUserMonsterProto> newOrUpdated = createFullUserMonsterProtos(
     			monsterForUserIds, completeUserMonsters);
     	
+    	log.info("YIIIIPEEEEE!. BOUGHT COMPLETE MONSTER(S)! monster(s)= newOrUpdated" +
+    			newOrUpdated + "\t bpackId=" + bPackId);
     	//set the builder that will be sent to the client
     	resBuilder.addAllUpdatedOrNew(newOrUpdated);
     }
@@ -322,7 +338,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
     			updateUserMonsters(userId, monsterIdToNumPieces, mfusop, now);
     	
-    	//sset the builder that will be sent to the client
+    	log.info("YIIIIPEEEEE!. BOUGHT INCOMPLETE MONSTER(S)! monster(s)= newOrUpdated" +
+    			newOrUpdated + "\t bpackId=" + bPackId);
+    	//set the builder that will be sent to the client
     	resBuilder.addAllUpdatedOrNew(newOrUpdated);
     }
 
@@ -425,6 +443,24 @@ import com.lvl6.utils.utilmethods.StringUtils;
     details.put(gems, detailSb.toString());
     MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
     		previousGemsCash, reasonsForChanges, details);
+  }
+  
+  private void writeToBoosterPackPurchaseHistory(int userId, int boosterPackId,
+  		List<BoosterItem> itemsUserReceives, List<FullUserMonsterProto> fumpList,
+  		Timestamp timeOfPurchase) {
+  	//just assuming there is one Booster Item
+  	if (itemsUserReceives.isEmpty()) {
+  		return;
+  	}
+  	BoosterItem bi = itemsUserReceives.get(0);
+
+  	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(fumpList); 
+  	
+  	int num = InsertUtils.get().insertIntoBoosterPackPurchaseHistory(userId,
+  			boosterPackId, timeOfPurchase, bi, userMonsterIds);
+  	
+  	log.info("wrote to booster pack history!!!! \t numInserted=" + num +
+  			"\t boosterItem=" + itemsUserReceives);
   }
   
 }

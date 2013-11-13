@@ -567,6 +567,11 @@ public final class EventBoosterPackProto {
         getUpdatedOrNewOrBuilderList();
     com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUpdatedOrNewOrBuilder(
         int index);
+    
+    // optional .com.lvl6.proto.BoosterItemProto prize = 4;
+    boolean hasPrize();
+    com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getPrize();
+    com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getPrizeOrBuilder();
   }
   public static final class PurchaseBoosterPackResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -713,10 +718,24 @@ public final class EventBoosterPackProto {
       return updatedOrNew_.get(index);
     }
     
+    // optional .com.lvl6.proto.BoosterItemProto prize = 4;
+    public static final int PRIZE_FIELD_NUMBER = 4;
+    private com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto prize_;
+    public boolean hasPrize() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getPrize() {
+      return prize_;
+    }
+    public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getPrizeOrBuilder() {
+      return prize_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.PurchaseBoosterPackStatus.SUCCESS;
       updatedOrNew_ = java.util.Collections.emptyList();
+      prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -739,6 +758,9 @@ public final class EventBoosterPackProto {
       for (int i = 0; i < updatedOrNew_.size(); i++) {
         output.writeMessage(3, updatedOrNew_.get(i));
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(4, prize_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -759,6 +781,10 @@ public final class EventBoosterPackProto {
       for (int i = 0; i < updatedOrNew_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(3, updatedOrNew_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, prize_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -878,6 +904,7 @@ public final class EventBoosterPackProto {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
           getUpdatedOrNewFieldBuilder();
+          getPrizeFieldBuilder();
         }
       }
       private static Builder create() {
@@ -900,6 +927,12 @@ public final class EventBoosterPackProto {
         } else {
           updatedOrNewBuilder_.clear();
         }
+        if (prizeBuilder_ == null) {
+          prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
+        } else {
+          prizeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -959,6 +992,14 @@ public final class EventBoosterPackProto {
         } else {
           result.updatedOrNew_ = updatedOrNewBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (prizeBuilder_ == null) {
+          result.prize_ = prize_;
+        } else {
+          result.prize_ = prizeBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1006,6 +1047,9 @@ public final class EventBoosterPackProto {
               updatedOrNewBuilder_.addAllMessages(other.updatedOrNew_);
             }
           }
+        }
+        if (other.hasPrize()) {
+          mergePrize(other.getPrize());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1062,6 +1106,15 @@ public final class EventBoosterPackProto {
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUpdatedOrNew(subBuilder.buildPartial());
+              break;
+            }
+            case 34: {
+              com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder subBuilder = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.newBuilder();
+              if (hasPrize()) {
+                subBuilder.mergeFrom(getPrize());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setPrize(subBuilder.buildPartial());
               break;
             }
           }
@@ -1368,6 +1421,96 @@ public final class EventBoosterPackProto {
           updatedOrNew_ = null;
         }
         return updatedOrNewBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.BoosterItemProto prize = 4;
+      private com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> prizeBuilder_;
+      public boolean hasPrize() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getPrize() {
+        if (prizeBuilder_ == null) {
+          return prize_;
+        } else {
+          return prizeBuilder_.getMessage();
+        }
+      }
+      public Builder setPrize(com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto value) {
+        if (prizeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          prize_ = value;
+          onChanged();
+        } else {
+          prizeBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      public Builder setPrize(
+          com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder builderForValue) {
+        if (prizeBuilder_ == null) {
+          prize_ = builderForValue.build();
+          onChanged();
+        } else {
+          prizeBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      public Builder mergePrize(com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto value) {
+        if (prizeBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              prize_ != com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance()) {
+            prize_ =
+              com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.newBuilder(prize_).mergeFrom(value).buildPartial();
+          } else {
+            prize_ = value;
+          }
+          onChanged();
+        } else {
+          prizeBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      public Builder clearPrize() {
+        if (prizeBuilder_ == null) {
+          prize_ = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance();
+          onChanged();
+        } else {
+          prizeBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder getPrizeBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getPrizeFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getPrizeOrBuilder() {
+        if (prizeBuilder_ != null) {
+          return prizeBuilder_.getMessageOrBuilder();
+        } else {
+          return prize_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> 
+          getPrizeFieldBuilder() {
+        if (prizeBuilder_ == null) {
+          prizeBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder>(
+                  prize_,
+                  getParentForChildren(),
+                  isClean());
+          prize_ = null;
+        }
+        return prizeBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PurchaseBoosterPackResponseProto)
@@ -1834,19 +1977,20 @@ public final class EventBoosterPackProto {
       "roto\032\nUser.proto\"~\n\037PurchaseBoosterPackR" +
       "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
       "roto.MinimumUserProto\022\025\n\rboosterPackId\030\002" +
-      " \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\302\002\n PurchaseBoo" +
+      " \001(\005\022\022\n\nclientTime\030\003 \001(\003\"\363\002\n PurchaseBoo" +
       "sterPackResponseProto\0220\n\006sender\030\001 \001(\0132 ." +
       "com.lvl6.proto.MinimumUserProto\022Z\n\006statu" +
       "s\030\002 \001(\0162J.com.lvl6.proto.PurchaseBooster" +
       "PackResponseProto.PurchaseBoosterPackSta",
       "tus\022:\n\014updatedOrNew\030\003 \003(\0132$.com.lvl6.pro" +
-      "to.FullUserMonsterProto\"T\n\031PurchaseBoost" +
-      "erPackStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFF" +
-      "ICIENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"q\n(Receive" +
-      "dRareBoosterPurchaseResponseProto\022E\n\023rar" +
-      "eBoosterPurchase\030\001 \001(\0132(.com.lvl6.proto." +
-      "RareBoosterPurchaseProtoB\027B\025EventBooster" +
-      "PackProto"
+      "to.FullUserMonsterProto\022/\n\005prize\030\004 \001(\0132 " +
+      ".com.lvl6.proto.BoosterItemProto\"T\n\031Purc" +
+      "haseBoosterPackStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FA" +
+      "IL_INSUFFICIENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"q" +
+      "\n(ReceivedRareBoosterPurchaseResponsePro" +
+      "to\022E\n\023rareBoosterPurchase\030\001 \001(\0132(.com.lv" +
+      "l6.proto.RareBoosterPurchaseProtoB\027B\025Eve" +
+      "ntBoosterPackProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1866,7 +2010,7 @@ public final class EventBoosterPackProto {
           internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PurchaseBoosterPackResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", },
+              new java.lang.String[] { "Sender", "Status", "UpdatedOrNew", "Prize", },
               com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.class,
               com.lvl6.proto.EventBoosterPackProto.PurchaseBoosterPackResponseProto.Builder.class);
           internal_static_com_lvl6_proto_ReceivedRareBoosterPurchaseResponseProto_descriptor =

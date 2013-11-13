@@ -38,7 +38,7 @@ public class MonsterStuffUtils {
   		Map<Long, Integer> userMonsterIdToExpectedHealth) {
   	List<Long> idList = new ArrayList<Long>();
   	
-  	if(null == umchpList) {
+  	if (null == umchpList) {
   		return idList;
   	}
   	
@@ -47,6 +47,20 @@ public class MonsterStuffUtils {
   		idList.add(id);
   		int health = umchp.getCurrentHealth();
   		userMonsterIdToExpectedHealth.put(id, health);
+  	}
+  	return idList;
+  }
+  
+  public static List<Long> getUserMonsterIds(List<FullUserMonsterProto> mfuList) {
+  	List<Long> idList = new ArrayList<Long>();
+  	
+  	if (null == mfuList) {
+  		return idList;
+  	}
+  	
+  	for (FullUserMonsterProto fump : mfuList) {
+  		long id = fump.getUserMonsterId();
+  		idList.add(id);
   	}
   	return idList;
   }

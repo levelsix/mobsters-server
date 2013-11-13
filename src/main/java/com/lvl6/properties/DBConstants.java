@@ -8,7 +8,7 @@ public class DBConstants {
 	public static final String TABLE_BOOSTER_DISPLAY_ITEM = "booster_display_item";
 	public static final String TABLE_BOOSTER_ITEM = "booster_item";
 	public static final String TABLE_BOOSTER_PACK = "booster_pack";
-	public static final String TABLE_USER_BOOSTER_PACK_HISTORY = "booster_pack_history";
+	public static final String TABLE_BOOSTER_PACK_PURCHASE_HISTORY = "booster_pack_purchase_history";
 	public static final String TABLE_CITY = "city";
 	public static final String TABLE_CITY_ELEMENT = "city_element";
 	public static final String TABLE_CLANS = "clan";
@@ -88,18 +88,19 @@ public class DBConstants {
   public static final String BATTLE_HISTORY__EXP_GAINED = "exp_gained";
   public static final String BATTLE_HISTORY__STOLEN_EQUIP_LEVEL = "stolen_equip_level";
 
-  /*USER BOOSTER PACK HISTORY*/
-  public static final String BOOSTER_PACK_HISTORY__ID = GENERIC__ID;
-  public static final String BOOSTER_PACK_HISTORY__USER_ID = GENERIC__USER_ID;
-  public static final String BOOSTER_PACK_HISTORY__BOOSTER_PACK_ID = "booster_pack_id"; 
-  public static final String BOOSTER_PACK_HISTORY__NUM_BOUGHT = "num_bought";
-  public static final String BOOSTER_PACK_HISTORY__TIME_OF_PURCHASE = "time_of_purchase";
-  public static final String BOOSTER_PACK_HISTORY__RARITY_ONE_QUANTITY = "rarity_one_quantity";
-  public static final String BOOSTER_PACK_HISTORY__RARITY_TWO_QUANTITY = "rarity_two_quantity";
-  public static final String BOOSTER_PACK_HISTORY__RARITY_THREE_QUANTITY = "rarity_three_quantity";
-  public static final String BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK = "exclude_from_limit_check";
-  public static final String BOOSTER_PACK_HISTORY__MONSTER_IDS = "monster_ids";
-  public static final String BOOSTER_PACK_HISTORY__MONSTER_FOR_USER_IDS = "monster_for_user_ids";
+  /*BOOSTER PACK PURCHASE HISTORY*/
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__USER_ID = GENERIC__USER_ID;
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID = "booster_pack_id"; 
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE = "time_of_purchase";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_ITEM_ID = "booster_item_id";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__MONSTER_ID = "monster_id";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__NUM_PIECES = "num_pieces";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__IS_COMPLETE = "is_complete";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__IS_SPECIAL = "is_special";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__GEM_REWARD = "gem_reward";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__CASH_REWARD = "cash_reward";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__CHANCE_TO_APPEAR = "chance_to_appear";
+  public static final String BOOSTER_PACK_PURCHASE_HISTORY__CHANGED_MONSTER_FOR_USER_IDS = "changed_monster_for_user_ids";
   
   /*CLANS*/
   public static final String CLANS__ID = "id";

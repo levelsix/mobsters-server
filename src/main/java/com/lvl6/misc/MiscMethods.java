@@ -925,19 +925,6 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
     return days;
   }
   
-//  public static void writeToUserBoosterPackHistoryOneUser(int userId, int packId,
-//      int numBought, Timestamp nowTimestamp, List<BoosterItem> itemsUserReceives,
-//      boolean excludeFromLimitCheck, List<Long> userEquipIds) {
-//    List<Integer> equipIds = new ArrayList<Integer>();
-//    List<Integer> raritiesCollected = getRaritiesCollected(itemsUserReceives, equipIds);
-//    int rarityOne = raritiesCollected.get(0);
-//    int rarityTwo = raritiesCollected.get(1);
-//    int rarityThree = raritiesCollected.get(2);
-//    
-//    InsertUtils.get().insertIntoUserBoosterPackHistory(userId,
-//        packId, numBought, nowTimestamp, rarityOne, rarityTwo,
-//        rarityThree, excludeFromLimitCheck, equipIds, userEquipIds);
-//  }
   
 //  private static List<Integer> getRaritiesCollected(
 //      List<BoosterItem> itemsUserReceives, List<Integer> equipIds) {

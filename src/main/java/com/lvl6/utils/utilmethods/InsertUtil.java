@@ -7,6 +7,7 @@ import java.util.List;
 import org.json.JSONObject;
 
 import com.lvl6.info.BlacksmithAttempt;
+import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -92,9 +93,8 @@ public interface InsertUtil {
 
 	public abstract int insertIntoFirstTimeUsers(String openUdid, String udid, String mac, String advertiserId, Timestamp now);
 
-	public abstract int insertIntoUserBoosterPackHistory(int userId, int boosterPackId, int numBought, Timestamp timeOfPurchase,
-			int rarityOneQuantity, int rarityTwoQuantity, int rarityThreeQuantity, boolean excludeFromLimitCheck, List<Integer> equipIds,
-			List<Long> userEquipIds);
+	public abstract int insertIntoBoosterPackPurchaseHistory(int userId, int boosterPackId, 
+      Timestamp timeOfPurchase, BoosterItem bi, List<Long> userMonsterIds);
 
 	public abstract int insertIntoPrivateChatPosts(int posterId, int recipientId, String content, Timestamp timeOfPost);
 
