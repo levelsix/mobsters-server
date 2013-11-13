@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.AnimatedSpriteOffset;
+import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
@@ -43,9 +44,9 @@ import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
+import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
-import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.ColorProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
@@ -63,6 +64,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.An
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
@@ -832,6 +834,24 @@ public class CreateInfoProtoUtils {
     return b.build();
   }
 
+  public static BoosterDisplayItemProto createBoosterDisplayItemProto(
+  		BoosterDisplayItem bdi) {
+  	BoosterDisplayItemProto.Builder b = BoosterDisplayItemProto.newBuilder();
+  	
+  	b.setBoosterPackId(bdi.getBoosterPackId());
+  	b.setIsMonster(bdi.isMonster());
+  	b.setIsComplete(bdi.isComplete());
+  	
+  	MonsterQuality mq = bdi.getMonsterQuality();
+  	if (null != mq) {
+  		b.setQuality(mq);
+  	}
+  	
+  	b.setGemReward(bdi.getGemReward());
+  	b.setQuantity(bdi.getQuantity());
+  	
+  	return b.build();
+  }
 
   public static BoosterItemProto createBoosterItemProto(BoosterItem bi) {
     BoosterItemProto.Builder b = BoosterItemProto.newBuilder();
@@ -846,27 +866,70 @@ public class CreateInfoProtoUtils {
     return b.build();
   }
 
-  public static BoosterPackProto createBoosterPackProto(BoosterPack bp, Collection<BoosterItem> biList) {
+  public static BoosterPackProto createBoosterPackProto(BoosterPack bp,
+  		Collection<BoosterItem> biList, Collection<BoosterDisplayItem> bdiList) {
     BoosterPackProto.Builder b = BoosterPackProto.newBuilder();
     b.setBoosterPackId(bp.getId());
-    b.setBoosterPackName(bp.getName());
-    b.setGemPrice(bp.getGemPrice());
-    if (biList != null) {
-      List<BoosterItemProto> biProtos = new ArrayList<BoosterItemProto>();
-      for(BoosterItem bi : biList) {
-        biProtos.add(createBoosterItemProto(bi));
-      }
-      b.addAllBoosterItems(biProtos);
+    
+    String str = bp.getName();
+    if (null != str && !str.isEmpty()) {
+    	b.setBoosterPackName(str);
     }
+    
+    b.setGemPrice(bp.getGemPrice());
+    
+    str = bp.getListBackgroundImgName();
+    if (null != str && !str.isEmpty()) {
+    	b.setListBackgroundImgName(str);
+    }
+    
+    str = bp.getListDescription();
+    if (null != str && !str.isEmpty()) {
+    	b.setListDescription(str);
+    }
+    
+    str = bp.getNavBarImgName();
+    if (null != str && !str.isEmpty()) {
+    	b.setNavBarImgName(str);
+    }
+    
+    str = bp.getNavTitleImgName();
+    if (null != str && !str.isEmpty()) {
+    	b.setNavTitleImgName(str);
+    }
+    
+    str = bp.getMachineImgName();
+    if (null != str && !str.isEmpty()) {
+    	b.setMachineImgName(str);
+    }
+    
+    
+    if (biList != null) {
+      for(BoosterItem bi : biList) {
+      	//only want special booster items
+      	if (bi.isSpecial()) {
+      		BoosterItemProto bip = createBoosterItemProto(bi); 
+      		b.addSpecialItems(bip);
+      	}
+      }
+    }
+    
+    if (null != bdiList) {
+    	for (BoosterDisplayItem bdi : bdiList) {
+    		BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi);
+    		b.addDisplayItems(bdip);
+    	}
+    }
+    
     return b.build();
   }
 
 
-  public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {
-    return RareBoosterPurchaseProto.newBuilder().setBooster(createBoosterPackProto(bp, null))
-        .setUser(createMinimumUserProtoFromUser(u))
-        .setTimeOfPurchase(d.getTime()).build();
-  }
+//  public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {
+//    return RareBoosterPurchaseProto.newBuilder().setBooster(createBoosterPackProto(bp, null))
+//        .setUser(createMinimumUserProtoFromUser(u))
+//        .setTimeOfPurchase(d.getTime()).build();
+//  }
 
   //individualSilvers should always be set, since silver dropped is within a range
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,

@@ -5,6 +5,7 @@ public class DBConstants {
   /* TABLENAMES*/
 	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
 	public static final String TABLE_BATTLE_HISTORY = "battle_history";
+	public static final String TABLE_BOOSTER_DISPLAY_ITEM = "booster_display_item";
 	public static final String TABLE_BOOSTER_ITEM = "booster_item";
 	public static final String TABLE_BOOSTER_PACK = "booster_pack";
 	public static final String TABLE_USER_BOOSTER_PACK_HISTORY = "booster_pack_history";
@@ -87,18 +88,6 @@ public class DBConstants {
   public static final String BATTLE_HISTORY__EXP_GAINED = "exp_gained";
   public static final String BATTLE_HISTORY__STOLEN_EQUIP_LEVEL = "stolen_equip_level";
 
-  /*BOOSTER PACK*/
-  public static final String BOOSTER_PACK__ID = GENERIC__ID;
-  public static final String BOOSTER_PACK__COSTS_COINS = "costs_coins";
-  public static final String BOOSTER_PACK__SALE_PRICE = "sale_price";
-  public static final String BOOSTER_PACK__RETAIL_PRICE = "retail_price";
-  public static final String BOOSTER_PACK__NAME = "name";
-  public static final String BOOSTER_PACK__CHEST_IMAGE = "chest_image";
-  public static final String BOOSTER_PACK__MIDDLE_IMAGE = "middle_image";
-  public static final String BOOSTER_PACK__BACKGROUND_IMAGE = "background_image";
-  public static final String BOOSTER_PACK__MIN_LEVEL = "min_level";
-  public static final String BOOSTER_PACK__MAX_LEVEL = "max_level";
-
   /*USER BOOSTER PACK HISTORY*/
   public static final String BOOSTER_PACK_HISTORY__ID = GENERIC__ID;
   public static final String BOOSTER_PACK_HISTORY__USER_ID = GENERIC__USER_ID;
@@ -111,13 +100,6 @@ public class DBConstants {
   public static final String BOOSTER_PACK_HISTORY__EXCLUDE_FROM_LIMIT_CHECK = "exclude_from_limit_check";
   public static final String BOOSTER_PACK_HISTORY__MONSTER_IDS = "monster_ids";
   public static final String BOOSTER_PACK_HISTORY__MONSTER_FOR_USER_IDS = "monster_for_user_ids";
-  
-  /*BOOSTER ITEM*/
-  public static final String BOOSTER_ITEM__ID = GENERIC__ID;
-  public static final String BOOSTER_ITEM__BOOSTER_PACK_ID = "booster_pack_id";
-  public static final String BOOSTER_ITEM__EQUIP_ID = "equip_id";
-  public static final String BOOSTER_ITEM__QUANTITY = "quantity";
-  public static final String BOOSTER_ITEM__IS_SPECIAL = "is_special";
   
   /*CLANS*/
   public static final String CLANS__ID = "id";

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,9 @@ import org.slf4j.MDC;
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.AnimatedSpriteOffset;
+import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.ExpansionCost;
@@ -41,6 +44,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
+import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
@@ -51,15 +55,16 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Us
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
-import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
+import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
-import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder; 
+import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
 import com.lvl6.retrieveutils.rarechange.BannedUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.BoosterDisplayItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
@@ -68,6 +73,7 @@ import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -539,8 +545,8 @@ public class MiscMethods {
 
   public static void reloadAllRareChangeStaticData() {
     log.info("Reloading rare change static data");
-    StartupStuffRetrieveUtils.reload();
     BannedUserRetrieveUtils.reload();
+    BoosterDisplayItemRetrieveUtils.reload();
     BoosterItemRetrieveUtils.reload();
     BoosterPackRetrieveUtils.reload();
     CityElementsRetrieveUtils.reload(); 
@@ -551,8 +557,10 @@ public class MiscMethods {
     GoldSaleRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
+    MonsterRewardRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
+    StartupStuffRetrieveUtils.reload();
     StaticUserLevelInfoRetrieveUtils.reload();
     StructureRetrieveUtils.reload();
     TaskRetrieveUtils.reload();
@@ -560,7 +568,6 @@ public class MiscMethods {
     TaskStageRetrieveUtils.reload();
     TournamentEventRetrieveUtils.reload();
     TournamentEventRewardRetrieveUtils.reload();
-    
   }
 
 
@@ -1397,6 +1404,37 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   	}
 
   	setInProgressAndAvailableQuests(sdpb, userId);
+  	
+  	//Booster pack stuff
+  	Map<Integer, BoosterPack> idsToBoosterPacks = BoosterPackRetrieveUtils
+  			.getBoosterPackIdsToBoosterPacks();
+  	Map<Integer, Map<Integer, BoosterItem>> packIdToItemIdsToItems =
+  			BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
+  	Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
+  			BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
+  	
+  	for (Integer bpackId : idsToBoosterPacks.keySet()) {
+  		BoosterPack bp = idsToBoosterPacks.get(bpackId);
+  		
+  		//get the booster items associated with this booster pack
+  		Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
+  		Collection<BoosterItem> items = null;
+  		if (null != itemIdsToItems) {
+  			items = itemIdsToItems.values();
+  		}
+  		
+  		//get the booster display items for this booster pack
+  		Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
+  				packIdToDisplayIdsToDisplayItems.get(bpackId);
+  		Collection<BoosterDisplayItem> displayItems = null;
+  		if (null != displayIdsToDisplayItems) {
+  			displayItems = displayIdsToDisplayItems.values();
+  		}
+  		
+  		BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
+  				bp, items, displayItems);
+  		sdpb.addBoosterPacks(bpProto);
+  	}
   	
   	return sdpb.build();
   }

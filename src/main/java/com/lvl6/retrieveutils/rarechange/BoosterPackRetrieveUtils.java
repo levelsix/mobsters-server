@@ -94,8 +94,15 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
     int gemPrice = rs.getInt(i++);
+    String listBackgroundImgName = rs.getString(i++);
+    String listDescription = rs.getString(i++);
+    String navBarImgName = rs.getString(i++);
+    String navTitleImgName = rs.getString(i++);
+    String machineImgName = rs.getString(i++);
     
-    BoosterPack boosterPack = new BoosterPack(id, name, gemPrice);
+    BoosterPack boosterPack = new BoosterPack(id, name, gemPrice,
+    		listBackgroundImgName, listDescription, navBarImgName,
+    		navTitleImgName, machineImgName);
     return boosterPack; 
   }
 }
