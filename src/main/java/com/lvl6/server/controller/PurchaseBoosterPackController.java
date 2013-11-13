@@ -319,6 +319,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String mfusop = createUpdateUserMonsterArguments(userId, bPackId,
     		itemsUserReceives, monsterIdToNumPieces, completeUserMonsters, now);
     
+    log.info("!!!!!!!!!mfusop=" + mfusop);
+    
     //this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
     if (!completeUserMonsters.isEmpty()) {
     	List<Long> monsterForUserIds = InsertUtils.get()
@@ -384,8 +386,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
   		} else {
   			monsterIdsToNumPieces.put(monsterId, numPieces);
-  			boosterItemIds.add(id);
   		}
+  		boosterItemIds.add(id);
   	}
   	
   	String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
