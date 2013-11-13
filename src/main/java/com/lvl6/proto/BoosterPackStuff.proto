@@ -27,6 +27,7 @@ message BoosterPackProto {
 	optional string navBarImgName = 7;
 	optional string navTitleImgName = 8;
 	optional string machineImgName = 9;
+	repeated BoosterDisplayItemProto displayItems = 10;
 }
 
 //------------------------------------------------------------------------------------------
