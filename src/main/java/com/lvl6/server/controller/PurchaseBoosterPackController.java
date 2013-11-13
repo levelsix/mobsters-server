@@ -115,6 +115,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       Map<Integer, BoosterItem> boosterItemIdsToBoosterItems = BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackId(boosterPackId);
 
       List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
+      int gemReward = 0;
       
       boolean legit = checkLegitPurchase(resBuilder, user, userId, now,
           aPack, boosterPackId, gemPrice, boosterItemIdsToBoosterItems);
@@ -127,9 +128,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
         itemsUserReceives = determineBoosterItemsUserReceives(
         		numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
         
-        //set the FullUserMonsterProtos to send to the client
+        gemReward = determineGemReward(itemsUserReceives);
+        //set the FullUserMonsterProtos (in resBuilder) to send to the client
         successful = writeChangesToDB(resBuilder, user, boosterPackId,
-        		itemsUserReceives, gemPrice, now);
+        		itemsUserReceives, gemPrice, now, gemReward);
       }
       
       PurchaseBoosterPackResponseProto resProto = resBuilder.build();
@@ -144,10 +146,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
         server.writeEvent(resEventUpdate);
         
         
-//        MiscMethods.writeToUserBoosterPackHistoryOneUser(userId, boosterPackId, numBought, 
-//            nowTimestamp, itemsUserReceives, excludeFromLimitCheck, userEquipIds);
+        
         writeToUserCurrencyHistory(user, boosterPackId, nowTimestamp,
-            gemPrice, previousGems, itemsUserReceives);
+            gemPrice, previousGems, itemsUserReceives, gemReward);
         
         sendBoosterPurchaseMessage(user, aPack, itemsUserReceives);
       }
@@ -273,19 +274,28 @@ import com.lvl6.utils.utilmethods.StringUtils;
     log.error("maybe no boosterItems exist. boosterItems=" + itemsList);
     return null;
   }
+
+  private int determineGemReward(List<BoosterItem> boosterItems) {
+  	int gemReward = 0;
+  	for (BoosterItem bi : boosterItems) {
+  		gemReward += bi.getGemReward();
+  	}
+  	
+  	return gemReward;
+  }
   
   private boolean writeChangesToDB(Builder resBuilder, User user, int bPackId,
-      List<BoosterItem> itemsUserReceives, int gemPrice, Date now) {
+      List<BoosterItem> itemsUserReceives, int gemPrice, Date now, int gemReward) {
   	
     //update user, user_monsters
   	int userId = user.getId();
-  	//user received the correct number of equips
   	int currencyChange = -1 * gemPrice; //should be negative
-  	
+  	currencyChange += gemReward;
   	
   	//update user's money
   	if (!user.updateRelativeDiamondsNaive(currencyChange)) {
-  		log.error("could not change user's money. gemPrice=" + gemPrice);
+  		log.error("could not change user's money. gemPrice=" + gemPrice + "\t gemReward=" +
+  				gemReward + "\t change=" + currencyChange);
   		return false;
   	}
   	
@@ -381,7 +391,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   private void writeToUserCurrencyHistory(User aUser, int packId, Timestamp date,
-  		int gemPrice, int previousGems, List<BoosterItem> items) {
+  		int gemPrice, int previousGems, List<BoosterItem> items, int gemReward) {
   	List<Integer> itemIds = new ArrayList<Integer>();
   	for (BoosterItem item : items) {
   		int id = item.getId();
@@ -389,10 +399,17 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	}
   	
   	StringBuffer detailSb = new StringBuffer();
-  	detailSb.append(" bItemIds=");
-  	String itemIdsCsv = StringUtils.csvList(itemIds);
-  	detailSb.append(itemIdsCsv);
-  	
+  	if (null != items && !items.isEmpty()) {
+  		detailSb.append(" bItemIds=");
+  		String itemIdsCsv = StringUtils.csvList(itemIds);
+  		detailSb.append(itemIdsCsv);
+  	}
+  	if (gemReward > 0) {
+  		detailSb.append(" gemPrice=");
+  		detailSb.append(gemPrice);
+  		detailSb.append(" gemReward=");
+  		detailSb.append(gemReward);
+  	}
   	String gems = MiscMethods.gems;
   	String reasonForChange = ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK;
   	
@@ -401,7 +418,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> details = new HashMap<String, String>();
     
-    money.put(gems, gemPrice);
+    int change = (-1 * gemPrice) + gemReward;
+    money.put(gems, change);
     previousGemsCash.put(gems, previousGems);
     reasonsForChanges.put(gems, reasonForChange);
     details.put(gems, detailSb.toString());
