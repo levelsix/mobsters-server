@@ -104,6 +104,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     //values to send to client
     PurchaseBoosterPackResponseProto.Builder resBuilder = PurchaseBoosterPackResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
+    resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
 
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -126,6 +127,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
       	previousGems = user.getGems();
 
       	int numBoosterItemsUserWants = 1;
+      	log.info("determining the booster items the user receives.");
         itemsUserReceives = determineBoosterItemsUserReceives(
         		numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
         
@@ -269,12 +271,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	float normalizedProbabilitySoFar = 0f;
     float randFloat = rand.nextFloat();
     
+    log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities);
+    
     int size = itemsList.size();
     //for each item, normalize before seeing if it is selected
     for(int i = 0; i < size; i++) {
       BoosterItem item = itemsList.get(i);
+      
       //normalize probability
       normalizedProbabilitySoFar += item.getChanceToAppear() / sumOfProbabilities;
+      
+      log.info("boosterItem=" + item + "\t normalizedProbabilitySoFar=" +
+      		normalizedProbabilitySoFar);
       
       if(randFloat < normalizedProbabilitySoFar) {
         //we have a winner! current boosterItem is what the user gets
@@ -346,10 +354,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	resBuilder.addAllUpdatedOrNew(newOrUpdated);
     }
 
-    if (monsterIdToNumPieces.isEmpty() && completeUserMonsters.isEmpty()) {
-      resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
-      return false;
-    }
+//    if (monsterIdToNumPieces.isEmpty() && completeUserMonsters.isEmpty() &&
+//    		gemReward <= 0) {
+//    	log.warn("user didn't get any monsters or gems...boosterItemsUserReceives="
+//    		+ itemsUserReceives);
+//      resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+//      return false;
+//    }
     
     return true;
   }
