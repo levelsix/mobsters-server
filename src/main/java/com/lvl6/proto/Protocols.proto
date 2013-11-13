@@ -35,6 +35,7 @@ package com.lvl6.proto;
 
 option java_outer_classname = "ProtocolsProto";
 
+	//gaps mean something used to be there
 enum EventProtocolRequest {
 	C_STARTUP_EVENT = 1;
 	C_IN_APP_PURCHASE_EVENT = 2;

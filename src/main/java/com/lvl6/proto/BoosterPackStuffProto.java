@@ -704,14 +704,44 @@ public final class BoosterPackStuffProto {
     boolean hasGemPrice();
     int getGemPrice();
     
-    // repeated .com.lvl6.proto.BoosterItemProto boosterItems = 4;
+    // repeated .com.lvl6.proto.BoosterItemProto specialItems = 4;
     java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> 
-        getBoosterItemsList();
-    com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getBoosterItems(int index);
-    int getBoosterItemsCount();
+        getSpecialItemsList();
+    com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getSpecialItems(int index);
+    int getSpecialItemsCount();
     java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> 
-        getBoosterItemsOrBuilderList();
-    com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getBoosterItemsOrBuilder(
+        getSpecialItemsOrBuilderList();
+    com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getSpecialItemsOrBuilder(
+        int index);
+    
+    // optional string listBackgroundImgName = 5;
+    boolean hasListBackgroundImgName();
+    String getListBackgroundImgName();
+    
+    // optional string listDescription = 6;
+    boolean hasListDescription();
+    String getListDescription();
+    
+    // optional string navBarImgName = 7;
+    boolean hasNavBarImgName();
+    String getNavBarImgName();
+    
+    // optional string navTitleImgName = 8;
+    boolean hasNavTitleImgName();
+    String getNavTitleImgName();
+    
+    // optional string machineImgName = 9;
+    boolean hasMachineImgName();
+    String getMachineImgName();
+    
+    // repeated .com.lvl6.proto.BoosterDisplayItemProto displayItems = 10;
+    java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> 
+        getDisplayItemsList();
+    com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto getDisplayItems(int index);
+    int getDisplayItemsCount();
+    java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder> 
+        getDisplayItemsOrBuilderList();
+    com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder getDisplayItemsOrBuilder(
         int index);
   }
   public static final class BoosterPackProto extends
@@ -795,32 +825,219 @@ public final class BoosterPackStuffProto {
       return gemPrice_;
     }
     
-    // repeated .com.lvl6.proto.BoosterItemProto boosterItems = 4;
-    public static final int BOOSTERITEMS_FIELD_NUMBER = 4;
-    private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> boosterItems_;
-    public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> getBoosterItemsList() {
-      return boosterItems_;
+    // repeated .com.lvl6.proto.BoosterItemProto specialItems = 4;
+    public static final int SPECIALITEMS_FIELD_NUMBER = 4;
+    private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> specialItems_;
+    public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> getSpecialItemsList() {
+      return specialItems_;
     }
     public java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> 
-        getBoosterItemsOrBuilderList() {
-      return boosterItems_;
+        getSpecialItemsOrBuilderList() {
+      return specialItems_;
     }
-    public int getBoosterItemsCount() {
-      return boosterItems_.size();
+    public int getSpecialItemsCount() {
+      return specialItems_.size();
     }
-    public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getBoosterItems(int index) {
-      return boosterItems_.get(index);
+    public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getSpecialItems(int index) {
+      return specialItems_.get(index);
     }
-    public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getBoosterItemsOrBuilder(
+    public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getSpecialItemsOrBuilder(
         int index) {
-      return boosterItems_.get(index);
+      return specialItems_.get(index);
+    }
+    
+    // optional string listBackgroundImgName = 5;
+    public static final int LISTBACKGROUNDIMGNAME_FIELD_NUMBER = 5;
+    private java.lang.Object listBackgroundImgName_;
+    public boolean hasListBackgroundImgName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getListBackgroundImgName() {
+      java.lang.Object ref = listBackgroundImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          listBackgroundImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getListBackgroundImgNameBytes() {
+      java.lang.Object ref = listBackgroundImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        listBackgroundImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string listDescription = 6;
+    public static final int LISTDESCRIPTION_FIELD_NUMBER = 6;
+    private java.lang.Object listDescription_;
+    public boolean hasListDescription() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getListDescription() {
+      java.lang.Object ref = listDescription_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          listDescription_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getListDescriptionBytes() {
+      java.lang.Object ref = listDescription_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        listDescription_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string navBarImgName = 7;
+    public static final int NAVBARIMGNAME_FIELD_NUMBER = 7;
+    private java.lang.Object navBarImgName_;
+    public boolean hasNavBarImgName() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public String getNavBarImgName() {
+      java.lang.Object ref = navBarImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          navBarImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getNavBarImgNameBytes() {
+      java.lang.Object ref = navBarImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        navBarImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string navTitleImgName = 8;
+    public static final int NAVTITLEIMGNAME_FIELD_NUMBER = 8;
+    private java.lang.Object navTitleImgName_;
+    public boolean hasNavTitleImgName() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public String getNavTitleImgName() {
+      java.lang.Object ref = navTitleImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          navTitleImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getNavTitleImgNameBytes() {
+      java.lang.Object ref = navTitleImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        navTitleImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string machineImgName = 9;
+    public static final int MACHINEIMGNAME_FIELD_NUMBER = 9;
+    private java.lang.Object machineImgName_;
+    public boolean hasMachineImgName() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public String getMachineImgName() {
+      java.lang.Object ref = machineImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          machineImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getMachineImgNameBytes() {
+      java.lang.Object ref = machineImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        machineImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // repeated .com.lvl6.proto.BoosterDisplayItemProto displayItems = 10;
+    public static final int DISPLAYITEMS_FIELD_NUMBER = 10;
+    private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> displayItems_;
+    public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> getDisplayItemsList() {
+      return displayItems_;
+    }
+    public java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder> 
+        getDisplayItemsOrBuilderList() {
+      return displayItems_;
+    }
+    public int getDisplayItemsCount() {
+      return displayItems_.size();
+    }
+    public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto getDisplayItems(int index) {
+      return displayItems_.get(index);
+    }
+    public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder getDisplayItemsOrBuilder(
+        int index) {
+      return displayItems_.get(index);
     }
     
     private void initFields() {
       boosterPackId_ = 0;
       boosterPackName_ = "";
       gemPrice_ = 0;
-      boosterItems_ = java.util.Collections.emptyList();
+      specialItems_ = java.util.Collections.emptyList();
+      listBackgroundImgName_ = "";
+      listDescription_ = "";
+      navBarImgName_ = "";
+      navTitleImgName_ = "";
+      machineImgName_ = "";
+      displayItems_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -843,8 +1060,26 @@ public final class BoosterPackStuffProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, gemPrice_);
       }
-      for (int i = 0; i < boosterItems_.size(); i++) {
-        output.writeMessage(4, boosterItems_.get(i));
+      for (int i = 0; i < specialItems_.size(); i++) {
+        output.writeMessage(4, specialItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(5, getListBackgroundImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(6, getListDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(7, getNavBarImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(8, getNavTitleImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(9, getMachineImgNameBytes());
+      }
+      for (int i = 0; i < displayItems_.size(); i++) {
+        output.writeMessage(10, displayItems_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -867,9 +1102,33 @@ public final class BoosterPackStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, gemPrice_);
       }
-      for (int i = 0; i < boosterItems_.size(); i++) {
+      for (int i = 0; i < specialItems_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, boosterItems_.get(i));
+          .computeMessageSize(4, specialItems_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getListBackgroundImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getListDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getNavBarImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getNavTitleImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getMachineImgNameBytes());
+      }
+      for (int i = 0; i < displayItems_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, displayItems_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -987,7 +1246,8 @@ public final class BoosterPackStuffProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getBoosterItemsFieldBuilder();
+          getSpecialItemsFieldBuilder();
+          getDisplayItemsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1002,11 +1262,27 @@ public final class BoosterPackStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         gemPrice_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        if (boosterItemsBuilder_ == null) {
-          boosterItems_ = java.util.Collections.emptyList();
+        if (specialItemsBuilder_ == null) {
+          specialItems_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000008);
         } else {
-          boosterItemsBuilder_.clear();
+          specialItemsBuilder_.clear();
+        }
+        listBackgroundImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        listDescription_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        navBarImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        navTitleImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        machineImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
+        if (displayItemsBuilder_ == null) {
+          displayItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+        } else {
+          displayItemsBuilder_.clear();
         }
         return this;
       }
@@ -1058,14 +1334,43 @@ public final class BoosterPackStuffProto {
           to_bitField0_ |= 0x00000004;
         }
         result.gemPrice_ = gemPrice_;
-        if (boosterItemsBuilder_ == null) {
+        if (specialItemsBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            boosterItems_ = java.util.Collections.unmodifiableList(boosterItems_);
+            specialItems_ = java.util.Collections.unmodifiableList(specialItems_);
             bitField0_ = (bitField0_ & ~0x00000008);
           }
-          result.boosterItems_ = boosterItems_;
+          result.specialItems_ = specialItems_;
         } else {
-          result.boosterItems_ = boosterItemsBuilder_.build();
+          result.specialItems_ = specialItemsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.listBackgroundImgName_ = listBackgroundImgName_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.listDescription_ = listDescription_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.navBarImgName_ = navBarImgName_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.navTitleImgName_ = navTitleImgName_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.machineImgName_ = machineImgName_;
+        if (displayItemsBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200)) {
+            displayItems_ = java.util.Collections.unmodifiableList(displayItems_);
+            bitField0_ = (bitField0_ & ~0x00000200);
+          }
+          result.displayItems_ = displayItems_;
+        } else {
+          result.displayItems_ = displayItemsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1092,29 +1397,70 @@ public final class BoosterPackStuffProto {
         if (other.hasGemPrice()) {
           setGemPrice(other.getGemPrice());
         }
-        if (boosterItemsBuilder_ == null) {
-          if (!other.boosterItems_.isEmpty()) {
-            if (boosterItems_.isEmpty()) {
-              boosterItems_ = other.boosterItems_;
+        if (specialItemsBuilder_ == null) {
+          if (!other.specialItems_.isEmpty()) {
+            if (specialItems_.isEmpty()) {
+              specialItems_ = other.specialItems_;
               bitField0_ = (bitField0_ & ~0x00000008);
             } else {
-              ensureBoosterItemsIsMutable();
-              boosterItems_.addAll(other.boosterItems_);
+              ensureSpecialItemsIsMutable();
+              specialItems_.addAll(other.specialItems_);
             }
             onChanged();
           }
         } else {
-          if (!other.boosterItems_.isEmpty()) {
-            if (boosterItemsBuilder_.isEmpty()) {
-              boosterItemsBuilder_.dispose();
-              boosterItemsBuilder_ = null;
-              boosterItems_ = other.boosterItems_;
+          if (!other.specialItems_.isEmpty()) {
+            if (specialItemsBuilder_.isEmpty()) {
+              specialItemsBuilder_.dispose();
+              specialItemsBuilder_ = null;
+              specialItems_ = other.specialItems_;
               bitField0_ = (bitField0_ & ~0x00000008);
-              boosterItemsBuilder_ = 
+              specialItemsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getBoosterItemsFieldBuilder() : null;
+                   getSpecialItemsFieldBuilder() : null;
             } else {
-              boosterItemsBuilder_.addAllMessages(other.boosterItems_);
+              specialItemsBuilder_.addAllMessages(other.specialItems_);
+            }
+          }
+        }
+        if (other.hasListBackgroundImgName()) {
+          setListBackgroundImgName(other.getListBackgroundImgName());
+        }
+        if (other.hasListDescription()) {
+          setListDescription(other.getListDescription());
+        }
+        if (other.hasNavBarImgName()) {
+          setNavBarImgName(other.getNavBarImgName());
+        }
+        if (other.hasNavTitleImgName()) {
+          setNavTitleImgName(other.getNavTitleImgName());
+        }
+        if (other.hasMachineImgName()) {
+          setMachineImgName(other.getMachineImgName());
+        }
+        if (displayItemsBuilder_ == null) {
+          if (!other.displayItems_.isEmpty()) {
+            if (displayItems_.isEmpty()) {
+              displayItems_ = other.displayItems_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+            } else {
+              ensureDisplayItemsIsMutable();
+              displayItems_.addAll(other.displayItems_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.displayItems_.isEmpty()) {
+            if (displayItemsBuilder_.isEmpty()) {
+              displayItemsBuilder_.dispose();
+              displayItemsBuilder_ = null;
+              displayItems_ = other.displayItems_;
+              bitField0_ = (bitField0_ & ~0x00000200);
+              displayItemsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getDisplayItemsFieldBuilder() : null;
+            } else {
+              displayItemsBuilder_.addAllMessages(other.displayItems_);
             }
           }
         }
@@ -1167,7 +1513,38 @@ public final class BoosterPackStuffProto {
             case 34: {
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder subBuilder = com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
-              addBoosterItems(subBuilder.buildPartial());
+              addSpecialItems(subBuilder.buildPartial());
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              listBackgroundImgName_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              listDescription_ = input.readBytes();
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
+              navBarImgName_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000080;
+              navTitleImgName_ = input.readBytes();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
+              machineImgName_ = input.readBytes();
+              break;
+            }
+            case 82: {
+              com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder subBuilder = com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addDisplayItems(subBuilder.buildPartial());
               break;
             }
           }
@@ -1254,190 +1631,556 @@ public final class BoosterPackStuffProto {
         return this;
       }
       
-      // repeated .com.lvl6.proto.BoosterItemProto boosterItems = 4;
-      private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> boosterItems_ =
+      // repeated .com.lvl6.proto.BoosterItemProto specialItems = 4;
+      private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> specialItems_ =
         java.util.Collections.emptyList();
-      private void ensureBoosterItemsIsMutable() {
+      private void ensureSpecialItemsIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          boosterItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto>(boosterItems_);
+          specialItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto>(specialItems_);
           bitField0_ |= 0x00000008;
          }
       }
       
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> boosterItemsBuilder_;
+          com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> specialItemsBuilder_;
       
-      public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> getBoosterItemsList() {
-        if (boosterItemsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(boosterItems_);
+      public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> getSpecialItemsList() {
+        if (specialItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(specialItems_);
         } else {
-          return boosterItemsBuilder_.getMessageList();
+          return specialItemsBuilder_.getMessageList();
         }
       }
-      public int getBoosterItemsCount() {
-        if (boosterItemsBuilder_ == null) {
-          return boosterItems_.size();
+      public int getSpecialItemsCount() {
+        if (specialItemsBuilder_ == null) {
+          return specialItems_.size();
         } else {
-          return boosterItemsBuilder_.getCount();
+          return specialItemsBuilder_.getCount();
         }
       }
-      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getBoosterItems(int index) {
-        if (boosterItemsBuilder_ == null) {
-          return boosterItems_.get(index);
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto getSpecialItems(int index) {
+        if (specialItemsBuilder_ == null) {
+          return specialItems_.get(index);
         } else {
-          return boosterItemsBuilder_.getMessage(index);
+          return specialItemsBuilder_.getMessage(index);
         }
       }
-      public Builder setBoosterItems(
+      public Builder setSpecialItems(
           int index, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto value) {
-        if (boosterItemsBuilder_ == null) {
+        if (specialItemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBoosterItemsIsMutable();
-          boosterItems_.set(index, value);
+          ensureSpecialItemsIsMutable();
+          specialItems_.set(index, value);
           onChanged();
         } else {
-          boosterItemsBuilder_.setMessage(index, value);
+          specialItemsBuilder_.setMessage(index, value);
         }
         return this;
       }
-      public Builder setBoosterItems(
+      public Builder setSpecialItems(
           int index, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder builderForValue) {
-        if (boosterItemsBuilder_ == null) {
-          ensureBoosterItemsIsMutable();
-          boosterItems_.set(index, builderForValue.build());
+        if (specialItemsBuilder_ == null) {
+          ensureSpecialItemsIsMutable();
+          specialItems_.set(index, builderForValue.build());
           onChanged();
         } else {
-          boosterItemsBuilder_.setMessage(index, builderForValue.build());
+          specialItemsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addBoosterItems(com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto value) {
-        if (boosterItemsBuilder_ == null) {
+      public Builder addSpecialItems(com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto value) {
+        if (specialItemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBoosterItemsIsMutable();
-          boosterItems_.add(value);
+          ensureSpecialItemsIsMutable();
+          specialItems_.add(value);
           onChanged();
         } else {
-          boosterItemsBuilder_.addMessage(value);
+          specialItemsBuilder_.addMessage(value);
         }
         return this;
       }
-      public Builder addBoosterItems(
+      public Builder addSpecialItems(
           int index, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto value) {
-        if (boosterItemsBuilder_ == null) {
+        if (specialItemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureBoosterItemsIsMutable();
-          boosterItems_.add(index, value);
+          ensureSpecialItemsIsMutable();
+          specialItems_.add(index, value);
           onChanged();
         } else {
-          boosterItemsBuilder_.addMessage(index, value);
+          specialItemsBuilder_.addMessage(index, value);
         }
         return this;
       }
-      public Builder addBoosterItems(
+      public Builder addSpecialItems(
           com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder builderForValue) {
-        if (boosterItemsBuilder_ == null) {
-          ensureBoosterItemsIsMutable();
-          boosterItems_.add(builderForValue.build());
+        if (specialItemsBuilder_ == null) {
+          ensureSpecialItemsIsMutable();
+          specialItems_.add(builderForValue.build());
           onChanged();
         } else {
-          boosterItemsBuilder_.addMessage(builderForValue.build());
+          specialItemsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
-      public Builder addBoosterItems(
+      public Builder addSpecialItems(
           int index, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder builderForValue) {
-        if (boosterItemsBuilder_ == null) {
-          ensureBoosterItemsIsMutable();
-          boosterItems_.add(index, builderForValue.build());
+        if (specialItemsBuilder_ == null) {
+          ensureSpecialItemsIsMutable();
+          specialItems_.add(index, builderForValue.build());
           onChanged();
         } else {
-          boosterItemsBuilder_.addMessage(index, builderForValue.build());
+          specialItemsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
-      public Builder addAllBoosterItems(
+      public Builder addAllSpecialItems(
           java.lang.Iterable<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto> values) {
-        if (boosterItemsBuilder_ == null) {
-          ensureBoosterItemsIsMutable();
-          super.addAll(values, boosterItems_);
+        if (specialItemsBuilder_ == null) {
+          ensureSpecialItemsIsMutable();
+          super.addAll(values, specialItems_);
           onChanged();
         } else {
-          boosterItemsBuilder_.addAllMessages(values);
+          specialItemsBuilder_.addAllMessages(values);
         }
         return this;
       }
-      public Builder clearBoosterItems() {
-        if (boosterItemsBuilder_ == null) {
-          boosterItems_ = java.util.Collections.emptyList();
+      public Builder clearSpecialItems() {
+        if (specialItemsBuilder_ == null) {
+          specialItems_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
-          boosterItemsBuilder_.clear();
+          specialItemsBuilder_.clear();
         }
         return this;
       }
-      public Builder removeBoosterItems(int index) {
-        if (boosterItemsBuilder_ == null) {
-          ensureBoosterItemsIsMutable();
-          boosterItems_.remove(index);
+      public Builder removeSpecialItems(int index) {
+        if (specialItemsBuilder_ == null) {
+          ensureSpecialItemsIsMutable();
+          specialItems_.remove(index);
           onChanged();
         } else {
-          boosterItemsBuilder_.remove(index);
+          specialItemsBuilder_.remove(index);
         }
         return this;
       }
-      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder getBoosterItemsBuilder(
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder getSpecialItemsBuilder(
           int index) {
-        return getBoosterItemsFieldBuilder().getBuilder(index);
+        return getSpecialItemsFieldBuilder().getBuilder(index);
       }
-      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getBoosterItemsOrBuilder(
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder getSpecialItemsOrBuilder(
           int index) {
-        if (boosterItemsBuilder_ == null) {
-          return boosterItems_.get(index);  } else {
-          return boosterItemsBuilder_.getMessageOrBuilder(index);
+        if (specialItemsBuilder_ == null) {
+          return specialItems_.get(index);  } else {
+          return specialItemsBuilder_.getMessageOrBuilder(index);
         }
       }
       public java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> 
-           getBoosterItemsOrBuilderList() {
-        if (boosterItemsBuilder_ != null) {
-          return boosterItemsBuilder_.getMessageOrBuilderList();
+           getSpecialItemsOrBuilderList() {
+        if (specialItemsBuilder_ != null) {
+          return specialItemsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(boosterItems_);
+          return java.util.Collections.unmodifiableList(specialItems_);
         }
       }
-      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder addBoosterItemsBuilder() {
-        return getBoosterItemsFieldBuilder().addBuilder(
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder addSpecialItemsBuilder() {
+        return getSpecialItemsFieldBuilder().addBuilder(
             com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance());
       }
-      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder addBoosterItemsBuilder(
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder addSpecialItemsBuilder(
           int index) {
-        return getBoosterItemsFieldBuilder().addBuilder(
+        return getSpecialItemsFieldBuilder().addBuilder(
             index, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.getDefaultInstance());
       }
       public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder> 
-           getBoosterItemsBuilderList() {
-        return getBoosterItemsFieldBuilder().getBuilderList();
+           getSpecialItemsBuilderList() {
+        return getSpecialItemsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
           com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder> 
-          getBoosterItemsFieldBuilder() {
-        if (boosterItemsBuilder_ == null) {
-          boosterItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+          getSpecialItemsFieldBuilder() {
+        if (specialItemsBuilder_ == null) {
+          specialItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterItemProtoOrBuilder>(
-                  boosterItems_,
+                  specialItems_,
                   ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
-          boosterItems_ = null;
+          specialItems_ = null;
         }
-        return boosterItemsBuilder_;
+        return specialItemsBuilder_;
+      }
+      
+      // optional string listBackgroundImgName = 5;
+      private java.lang.Object listBackgroundImgName_ = "";
+      public boolean hasListBackgroundImgName() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getListBackgroundImgName() {
+        java.lang.Object ref = listBackgroundImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          listBackgroundImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setListBackgroundImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        listBackgroundImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearListBackgroundImgName() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        listBackgroundImgName_ = getDefaultInstance().getListBackgroundImgName();
+        onChanged();
+        return this;
+      }
+      void setListBackgroundImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        listBackgroundImgName_ = value;
+        onChanged();
+      }
+      
+      // optional string listDescription = 6;
+      private java.lang.Object listDescription_ = "";
+      public boolean hasListDescription() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public String getListDescription() {
+        java.lang.Object ref = listDescription_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          listDescription_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setListDescription(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        listDescription_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearListDescription() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        listDescription_ = getDefaultInstance().getListDescription();
+        onChanged();
+        return this;
+      }
+      void setListDescription(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000020;
+        listDescription_ = value;
+        onChanged();
+      }
+      
+      // optional string navBarImgName = 7;
+      private java.lang.Object navBarImgName_ = "";
+      public boolean hasNavBarImgName() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public String getNavBarImgName() {
+        java.lang.Object ref = navBarImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          navBarImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setNavBarImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        navBarImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNavBarImgName() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        navBarImgName_ = getDefaultInstance().getNavBarImgName();
+        onChanged();
+        return this;
+      }
+      void setNavBarImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000040;
+        navBarImgName_ = value;
+        onChanged();
+      }
+      
+      // optional string navTitleImgName = 8;
+      private java.lang.Object navTitleImgName_ = "";
+      public boolean hasNavTitleImgName() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public String getNavTitleImgName() {
+        java.lang.Object ref = navTitleImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          navTitleImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setNavTitleImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        navTitleImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNavTitleImgName() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        navTitleImgName_ = getDefaultInstance().getNavTitleImgName();
+        onChanged();
+        return this;
+      }
+      void setNavTitleImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000080;
+        navTitleImgName_ = value;
+        onChanged();
+      }
+      
+      // optional string machineImgName = 9;
+      private java.lang.Object machineImgName_ = "";
+      public boolean hasMachineImgName() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public String getMachineImgName() {
+        java.lang.Object ref = machineImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          machineImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setMachineImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        machineImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMachineImgName() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        machineImgName_ = getDefaultInstance().getMachineImgName();
+        onChanged();
+        return this;
+      }
+      void setMachineImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000100;
+        machineImgName_ = value;
+        onChanged();
+      }
+      
+      // repeated .com.lvl6.proto.BoosterDisplayItemProto displayItems = 10;
+      private java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> displayItems_ =
+        java.util.Collections.emptyList();
+      private void ensureDisplayItemsIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          displayItems_ = new java.util.ArrayList<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto>(displayItems_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder> displayItemsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> getDisplayItemsList() {
+        if (displayItemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(displayItems_);
+        } else {
+          return displayItemsBuilder_.getMessageList();
+        }
+      }
+      public int getDisplayItemsCount() {
+        if (displayItemsBuilder_ == null) {
+          return displayItems_.size();
+        } else {
+          return displayItemsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto getDisplayItems(int index) {
+        if (displayItemsBuilder_ == null) {
+          return displayItems_.get(index);
+        } else {
+          return displayItemsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setDisplayItems(
+          int index, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto value) {
+        if (displayItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDisplayItemsIsMutable();
+          displayItems_.set(index, value);
+          onChanged();
+        } else {
+          displayItemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setDisplayItems(
+          int index, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder builderForValue) {
+        if (displayItemsBuilder_ == null) {
+          ensureDisplayItemsIsMutable();
+          displayItems_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          displayItemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addDisplayItems(com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto value) {
+        if (displayItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDisplayItemsIsMutable();
+          displayItems_.add(value);
+          onChanged();
+        } else {
+          displayItemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addDisplayItems(
+          int index, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto value) {
+        if (displayItemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDisplayItemsIsMutable();
+          displayItems_.add(index, value);
+          onChanged();
+        } else {
+          displayItemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addDisplayItems(
+          com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder builderForValue) {
+        if (displayItemsBuilder_ == null) {
+          ensureDisplayItemsIsMutable();
+          displayItems_.add(builderForValue.build());
+          onChanged();
+        } else {
+          displayItemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addDisplayItems(
+          int index, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder builderForValue) {
+        if (displayItemsBuilder_ == null) {
+          ensureDisplayItemsIsMutable();
+          displayItems_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          displayItemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllDisplayItems(
+          java.lang.Iterable<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto> values) {
+        if (displayItemsBuilder_ == null) {
+          ensureDisplayItemsIsMutable();
+          super.addAll(values, displayItems_);
+          onChanged();
+        } else {
+          displayItemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearDisplayItems() {
+        if (displayItemsBuilder_ == null) {
+          displayItems_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000200);
+          onChanged();
+        } else {
+          displayItemsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeDisplayItems(int index) {
+        if (displayItemsBuilder_ == null) {
+          ensureDisplayItemsIsMutable();
+          displayItems_.remove(index);
+          onChanged();
+        } else {
+          displayItemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder getDisplayItemsBuilder(
+          int index) {
+        return getDisplayItemsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder getDisplayItemsOrBuilder(
+          int index) {
+        if (displayItemsBuilder_ == null) {
+          return displayItems_.get(index);  } else {
+          return displayItemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder> 
+           getDisplayItemsOrBuilderList() {
+        if (displayItemsBuilder_ != null) {
+          return displayItemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(displayItems_);
+        }
+      }
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder addDisplayItemsBuilder() {
+        return getDisplayItemsFieldBuilder().addBuilder(
+            com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder addDisplayItemsBuilder(
+          int index) {
+        return getDisplayItemsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder> 
+           getDisplayItemsBuilderList() {
+        return getDisplayItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder> 
+          getDisplayItemsFieldBuilder() {
+        if (displayItemsBuilder_ == null) {
+          displayItemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder, com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder>(
+                  displayItems_,
+                  ((bitField0_ & 0x00000200) == 0x00000200),
+                  getParentForChildren(),
+                  isClean());
+          displayItems_ = null;
+        }
+        return displayItemsBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoosterPackProto)
@@ -2245,6 +2988,638 @@ public final class BoosterPackStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoosterItemProto)
   }
   
+  public interface BoosterDisplayItemProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 boosterPackId = 1;
+    boolean hasBoosterPackId();
+    int getBoosterPackId();
+    
+    // optional bool isMonster = 2;
+    boolean hasIsMonster();
+    boolean getIsMonster();
+    
+    // optional bool isComplete = 3;
+    boolean hasIsComplete();
+    boolean getIsComplete();
+    
+    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
+    boolean hasQuality();
+    com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality();
+    
+    // optional int32 gemReward = 5;
+    boolean hasGemReward();
+    int getGemReward();
+    
+    // optional int32 quantity = 6;
+    boolean hasQuantity();
+    int getQuantity();
+  }
+  public static final class BoosterDisplayItemProto extends
+      com.google.protobuf.GeneratedMessage
+      implements BoosterDisplayItemProtoOrBuilder {
+    // Use BoosterDisplayItemProto.newBuilder() to construct.
+    private BoosterDisplayItemProto(Builder builder) {
+      super(builder);
+    }
+    private BoosterDisplayItemProto(boolean noInit) {}
+    
+    private static final BoosterDisplayItemProto defaultInstance;
+    public static BoosterDisplayItemProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public BoosterDisplayItemProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.BoosterPackStuffProto.internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.BoosterPackStuffProto.internal_static_com_lvl6_proto_BoosterDisplayItemProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 boosterPackId = 1;
+    public static final int BOOSTERPACKID_FIELD_NUMBER = 1;
+    private int boosterPackId_;
+    public boolean hasBoosterPackId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getBoosterPackId() {
+      return boosterPackId_;
+    }
+    
+    // optional bool isMonster = 2;
+    public static final int ISMONSTER_FIELD_NUMBER = 2;
+    private boolean isMonster_;
+    public boolean hasIsMonster() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public boolean getIsMonster() {
+      return isMonster_;
+    }
+    
+    // optional bool isComplete = 3;
+    public static final int ISCOMPLETE_FIELD_NUMBER = 3;
+    private boolean isComplete_;
+    public boolean hasIsComplete() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public boolean getIsComplete() {
+      return isComplete_;
+    }
+    
+    // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
+    public static final int QUALITY_FIELD_NUMBER = 4;
+    private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_;
+    public boolean hasQuality() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality() {
+      return quality_;
+    }
+    
+    // optional int32 gemReward = 5;
+    public static final int GEMREWARD_FIELD_NUMBER = 5;
+    private int gemReward_;
+    public boolean hasGemReward() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getGemReward() {
+      return gemReward_;
+    }
+    
+    // optional int32 quantity = 6;
+    public static final int QUANTITY_FIELD_NUMBER = 6;
+    private int quantity_;
+    public boolean hasQuantity() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getQuantity() {
+      return quantity_;
+    }
+    
+    private void initFields() {
+      boosterPackId_ = 0;
+      isMonster_ = false;
+      isComplete_ = false;
+      quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+      gemReward_ = 0;
+      quantity_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, boosterPackId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, isMonster_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, isComplete_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, quality_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, gemReward_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, quantity_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, boosterPackId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, isMonster_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, isComplete_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, quality_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemReward_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, quantity_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.BoosterPackStuffProto.internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.BoosterPackStuffProto.internal_static_com_lvl6_proto_BoosterDisplayItemProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        boosterPackId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        isMonster_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        isComplete_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        gemReward_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        quantity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto getDefaultInstanceForType() {
+        return com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto build() {
+        com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto buildPartial() {
+        com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto result = new com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.boosterPackId_ = boosterPackId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.isMonster_ = isMonster_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.isComplete_ = isComplete_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.quality_ = quality_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.gemReward_ = gemReward_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.quantity_ = quantity_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto) {
+          return mergeFrom((com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto other) {
+        if (other == com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.getDefaultInstance()) return this;
+        if (other.hasBoosterPackId()) {
+          setBoosterPackId(other.getBoosterPackId());
+        }
+        if (other.hasIsMonster()) {
+          setIsMonster(other.getIsMonster());
+        }
+        if (other.hasIsComplete()) {
+          setIsComplete(other.getIsComplete());
+        }
+        if (other.hasQuality()) {
+          setQuality(other.getQuality());
+        }
+        if (other.hasGemReward()) {
+          setGemReward(other.getGemReward());
+        }
+        if (other.hasQuantity()) {
+          setQuantity(other.getQuantity());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              boosterPackId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              isMonster_ = input.readBool();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              isComplete_ = input.readBool();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality value = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                quality_ = value;
+              }
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              gemReward_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              quantity_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 boosterPackId = 1;
+      private int boosterPackId_ ;
+      public boolean hasBoosterPackId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getBoosterPackId() {
+        return boosterPackId_;
+      }
+      public Builder setBoosterPackId(int value) {
+        bitField0_ |= 0x00000001;
+        boosterPackId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearBoosterPackId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        boosterPackId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool isMonster = 2;
+      private boolean isMonster_ ;
+      public boolean hasIsMonster() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public boolean getIsMonster() {
+        return isMonster_;
+      }
+      public Builder setIsMonster(boolean value) {
+        bitField0_ |= 0x00000002;
+        isMonster_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsMonster() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        isMonster_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool isComplete = 3;
+      private boolean isComplete_ ;
+      public boolean hasIsComplete() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public boolean getIsComplete() {
+        return isComplete_;
+      }
+      public Builder setIsComplete(boolean value) {
+        bitField0_ |= 0x00000004;
+        isComplete_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsComplete() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        isComplete_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.MonsterProto.MonsterQuality quality = 4;
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+      public boolean hasQuality() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality getQuality() {
+        return quality_;
+      }
+      public Builder setQuality(com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        quality_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearQuality() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 gemReward = 5;
+      private int gemReward_ ;
+      public boolean hasGemReward() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getGemReward() {
+        return gemReward_;
+      }
+      public Builder setGemReward(int value) {
+        bitField0_ |= 0x00000010;
+        gemReward_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemReward() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemReward_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 quantity = 6;
+      private int quantity_ ;
+      public boolean hasQuantity() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getQuantity() {
+        return quantity_;
+      }
+      public Builder setQuantity(int value) {
+        bitField0_ |= 0x00000020;
+        quantity_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearQuantity() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        quantity_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BoosterDisplayItemProto)
+    }
+    
+    static {
+      defaultInstance = new BoosterDisplayItemProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.BoosterDisplayItemProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RareBoosterPurchaseProto_descriptor;
   private static
@@ -2260,6 +3635,11 @@ public final class BoosterPackStuffProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BoosterItemProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_BoosterDisplayItemProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2270,20 +3650,30 @@ public final class BoosterPackStuffProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\026BoosterPackStuff.proto\022\016com.lvl6.proto" +
-      "\032\nUser.proto\"\250\001\n\030RareBoosterPurchaseProt" +
-      "o\022.\n\004user\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\0221\n\007booster\030\002 \001(\0132 .com.lvl6.pr" +
-      "oto.BoosterPackProto\022\026\n\016timeOfPurchase\030\003" +
-      " \001(\004\022\021\n\tmonsterId\030\004 \001(\005\"\214\001\n\020BoosterPackP" +
-      "roto\022\025\n\rboosterPackId\030\001 \001(\005\022\027\n\017boosterPa" +
-      "ckName\030\002 \001(\t\022\020\n\010gemPrice\030\003 \001(\005\0226\n\014booste" +
-      "rItems\030\004 \003(\0132 .com.lvl6.proto.BoosterIte" +
-      "mProto\"\314\001\n\020BoosterItemProto\022\025\n\rboosterIt",
-      "emId\030\001 \001(\005\022\025\n\rboosterPackId\030\002 \001(\005\022\021\n\tmon" +
-      "sterId\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001(\005\022\022\n\nisCom" +
-      "plete\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(\010\022\021\n\tgemRew" +
-      "ard\030\007 \001(\005\022\022\n\ncashReward\030\010 \001(\005\022\026\n\016chanceT" +
-      "oAppear\030\t \001(\002B\027B\025BoosterPackStuffProto"
+      "\032\022MonsterStuff.proto\032\nUser.proto\"\250\001\n\030Rar" +
+      "eBoosterPurchaseProto\022.\n\004user\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\0221\n\007booster" +
+      "\030\002 \001(\0132 .com.lvl6.proto.BoosterPackProto" +
+      "\022\026\n\016timeOfPurchase\030\003 \001(\004\022\021\n\tmonsterId\030\004 " +
+      "\001(\005\"\313\002\n\020BoosterPackProto\022\025\n\rboosterPackI" +
+      "d\030\001 \001(\005\022\027\n\017boosterPackName\030\002 \001(\t\022\020\n\010gemP" +
+      "rice\030\003 \001(\005\0226\n\014specialItems\030\004 \003(\0132 .com.l" +
+      "vl6.proto.BoosterItemProto\022\035\n\025listBackgr",
+      "oundImgName\030\005 \001(\t\022\027\n\017listDescription\030\006 \001" +
+      "(\t\022\025\n\rnavBarImgName\030\007 \001(\t\022\027\n\017navTitleImg" +
+      "Name\030\010 \001(\t\022\026\n\016machineImgName\030\t \001(\t\022=\n\014di" +
+      "splayItems\030\n \003(\0132\'.com.lvl6.proto.Booste" +
+      "rDisplayItemProto\"\314\001\n\020BoosterItemProto\022\025" +
+      "\n\rboosterItemId\030\001 \001(\005\022\025\n\rboosterPackId\030\002" +
+      " \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\021\n\tnumPieces\030\004 \001" +
+      "(\005\022\022\n\nisComplete\030\005 \001(\010\022\021\n\tisSpecial\030\006 \001(" +
+      "\010\022\021\n\tgemReward\030\007 \001(\005\022\022\n\ncashReward\030\010 \001(\005" +
+      "\022\026\n\016chanceToAppear\030\t \001(\002\"\272\001\n\027BoosterDisp",
+      "layItemProto\022\025\n\rboosterPackId\030\001 \001(\005\022\021\n\ti" +
+      "sMonster\030\002 \001(\010\022\022\n\nisComplete\030\003 \001(\010\022<\n\007qu" +
+      "ality\030\004 \001(\0162+.com.lvl6.proto.MonsterProt" +
+      "o.MonsterQuality\022\021\n\tgemReward\030\005 \001(\005\022\020\n\010q" +
+      "uantity\030\006 \001(\005B\027B\025BoosterPackStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2303,7 +3693,7 @@ public final class BoosterPackStuffProto {
           internal_static_com_lvl6_proto_BoosterPackProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BoosterPackProto_descriptor,
-              new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "BoosterItems", },
+              new java.lang.String[] { "BoosterPackId", "BoosterPackName", "GemPrice", "SpecialItems", "ListBackgroundImgName", "ListDescription", "NavBarImgName", "NavTitleImgName", "MachineImgName", "DisplayItems", },
               com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.class,
               com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto.Builder.class);
           internal_static_com_lvl6_proto_BoosterItemProto_descriptor =
@@ -2314,12 +3704,21 @@ public final class BoosterPackStuffProto {
               new java.lang.String[] { "BoosterItemId", "BoosterPackId", "MonsterId", "NumPieces", "IsComplete", "IsSpecial", "GemReward", "CashReward", "ChanceToAppear", },
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.class,
               com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto.Builder.class);
+          internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_BoosterDisplayItemProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_BoosterDisplayItemProto_descriptor,
+              new java.lang.String[] { "BoosterPackId", "IsMonster", "IsComplete", "Quality", "GemReward", "Quantity", },
+              com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.class,
+              com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto.Builder.class);
           return null;
         }
       };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
   }
