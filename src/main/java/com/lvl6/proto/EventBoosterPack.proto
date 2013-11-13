@@ -30,6 +30,8 @@ message PurchaseBoosterPackResponseProto {
 	//and another that would be the remaining pieces of the monster
 	repeated FullUserMonsterProto updatedOrNew = 3;
 	
+	optional BoosterItemProto prize = 4;
+	
 	enum PurchaseBoosterPackStatus {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_GEMS = 2;
