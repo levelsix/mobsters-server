@@ -271,7 +271,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	float normalizedProbabilitySoFar = 0f;
     float randFloat = rand.nextFloat();
     
-    log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities);
+    log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities +
+    		"\t randFloat=" + randFloat);
     
     int size = itemsList.size();
     //for each item, normalize before seeing if it is selected
