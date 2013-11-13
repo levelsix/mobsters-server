@@ -368,17 +368,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		Integer monsterId = item.getMonsterId();
   		Integer numPieces = item.getNumPieces();
   		
+  		if (monsterId <= 0) {
+  			continue;
+  		}
   		if (item.isComplete()) {
   			//create a "complete" user monster
   			boolean isComplete = true;
   			Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
   			MonsterForUser newUserMonster = MonsterStuffUtils.createNewUserMonster(
   					userId, numPieces, monzter, now, isComplete);
-  			
+
   			//return this monster in the argument list completeUserMonsters, so caller
   			//can use it
   			completeUserMonsters.add(newUserMonster);
-  			
+
   		} else {
   			monsterIdsToNumPieces.put(monsterId, numPieces);
   			boosterItemIds.add(id);
