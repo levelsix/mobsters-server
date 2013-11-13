@@ -460,6 +460,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     previousGemsCash.put(gems, previousGems);
     reasonsForChanges.put(gems, reasonForChange);
     details.put(gems, detailSb.toString());
+    
+    log.info("DETAILS=" + detailSb.toString());
     MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
     		previousGemsCash, reasonsForChanges, details);
   }
