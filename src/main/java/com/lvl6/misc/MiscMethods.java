@@ -557,7 +557,7 @@ public class MiscMethods {
     GoldSaleRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
-    MonsterRewardRetrieveUtils.reload();
+//    MonsterRewardRetrieveUtils.reload(); //not used
     ProfanityRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
