@@ -1,4 +1,5 @@
 
+import "MonsterStuff.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -19,7 +20,13 @@ message BoosterPackProto {
 	optional int32 boosterPackId = 1;
 	optional string boosterPackName = 2;
 	optional int32 gemPrice = 3;
-	repeated BoosterItemProto boosterItems = 4;
+	repeated BoosterItemProto specialItems = 4;
+	
+	optional string listBackgroundImgName = 5;
+	optional string listDescription = 6;
+	optional string navBarImgName = 7;
+	optional string navTitleImgName = 8;
+	optional string machineImgName = 9;
 }
 
 //------------------------------------------------------------------------------------------
@@ -32,10 +39,22 @@ message BoosterItemProto {
 	optional bool isComplete = 5; 
 	optional bool isSpecial = 6;
 	optional int32 gemReward = 7;
+	
+	//not going to be used
 	optional int32 cashReward = 8;
+	
 	optional float chanceToAppear = 9;
 }
 
 //------------------------------------------------------------------------------------------
 
-
+message BoosterDisplayItemProto {
+	 //not really needed, but eh
+	optional int32 boosterPackId = 1;
+	
+	//true means monster, false means gems
+	optional bool isMonster = 2;
+	optional bool isComplete = 3;
+	optional MonsterProto.MonsterQuality quality = 4;
+	optional int32 gemReward = 5;
+}
