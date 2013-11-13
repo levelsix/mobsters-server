@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -272,15 +271,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  	log.info("updated monster healing rows. numUpdated/inserted=" + num);
 	  }
 	  
-	  //for the new monsters, ensure that the monsters are "unequipped"
-	  if (!protoNewMap.isEmpty()) {
-	  	//for the new monsters, set the teamSlotNum to 0
-	  	int size = protoNewMap.size();
-	  	List<Long> userMonsterIdList = new ArrayList<Long>(protoNewMap.keySet());
-	  	List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
-	  	num = UpdateUtils.get().updateNullifyUserMonstersTeamSlotNum(userMonsterIdList, teamSlotNumList);
-	  	log.info("updated user monster rows. numUpdated=" + num);
-	  }
+	  //don't unequip the monsters
+//	  //for the new monsters, ensure that the monsters are "unequipped"
+//	  if (!protoNewMap.isEmpty()) {
+//	  	//for the new monsters, set the teamSlotNum to 0
+//	  	int size = protoNewMap.size();
+//	  	List<Long> userMonsterIdList = new ArrayList<Long>(protoNewMap.keySet());
+//	  	List<Integer> teamSlotNumList = Collections.nCopies(size, 0);
+//	  	num = UpdateUtils.get().updateNullifyUserMonstersTeamSlotNum(userMonsterIdList, teamSlotNumList);
+//	  	log.info("updated user monster rows. numUpdated=" + num);
+//	  }
 	  
 	  return true;
   }
