@@ -370,6 +370,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		Integer monsterId = item.getMonsterId();
   		Integer numPieces = item.getNumPieces();
   		
+  		//only keep track of the booster item ids that are a monster reward
   		if (monsterId <= 0) {
   			continue;
   		}
@@ -389,9 +390,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		}
   		boosterItemIds.add(id);
   	}
+  	if (!boosterItemIds.isEmpty()) {
+  		String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
+  		sb.append(boosterItemIdsStr);
+  	}
   	
-  	String boosterItemIdsStr = StringUtils.csvList(boosterItemIds);
-  	sb.append(boosterItemIdsStr);
   	return sb.toString();
   }
 
