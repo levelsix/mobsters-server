@@ -12,6 +12,9 @@ message BeginDungeonRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 clientTime = 2;
 	optional int32 taskId = 3; 
+	
+	//used for determining if boss spawned
+	optional bool userBeatAllCityTasks = 4;
 }
 
 message BeginDungeonResponseProto {
@@ -23,8 +26,7 @@ message BeginDungeonResponseProto {
 	
 	enum BeginDungeonStatus {
 		SUCCESS = 1;
-		FAIL_INSUFFICIENT_STAMERGY = 2;
-		FAIL_OTHER = 3;
+		FAIL_OTHER = 2;
 	}
 }
 
@@ -35,7 +37,14 @@ message EndDungeonRequestProto {
 	optional int64 userTaskId = 2;
 	optional bool userWon = 3; 
 	optional int64 clientTime = 4;
+	
+	//(for efficiency reasons: limiting db interaction) 
+	//this is to record into the task_for_user_completed table ONLY when
+	//user FIRST BEATS a task. 
 	optional bool firstTimeUserWonTask = 5;
+	
+	//used for determining if boss spawns
+	optional bool userBeatAllCityTasks = 6;
 }
 
 message EndDungeonResponseProto {
