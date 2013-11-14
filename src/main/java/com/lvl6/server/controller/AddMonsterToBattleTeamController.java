@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,6 @@ import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.AddM
 import com.lvl6.proto.EventMonsterProto.AddMonsterToBattleTeamResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
-import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -66,11 +65,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	//make sure it exists
     	Map<Long, MonsterForUser> idsToMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
     			.getSpecificOrAllUserMonstersForUser(userId, null);
-    	//get the ones that aren't in enhancing or healing
+//    	//get the ones that aren't in enhancing or healing
+//    	Map<Long, MonsterEnhancingForUser> inEnhancing =
+//    			MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
+//    	Map<Long, MonsterHealingForUser> inHealing =
+//    			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
     	Map<Long, MonsterEnhancingForUser> inEnhancing =
-    			MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
+    			new HashMap<Long, MonsterEnhancingForUser>();
     	Map<Long, MonsterHealingForUser> inHealing =
-    			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
+    			new HashMap<Long, MonsterHealingForUser>(); 
     	
       boolean legit = checkLegit(resBuilder, userId, teamSlotNum, userMonsterId,
       		idsToMonsters, inEnhancing, inHealing);
