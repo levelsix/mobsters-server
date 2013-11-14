@@ -4,22 +4,25 @@ import java.io.Serializable;
 
 public class TaskStageForUser implements Serializable {
 
-	private static final long serialVersionUID = -8056132207020136517L;
+	private static final long serialVersionUID = 1374700398614911304L;
 	private long id;
 	private long userTaskId;
 	private int stageNum;
-	public int taskStageMonsterId;
-	public int expGained;
-	public int cashGained;
-	public boolean monsterPieceDropped;
+	private int taskStageMonsterId;
+	private String monsterType;
+	private int expGained;
+	private int cashGained;
+	private boolean monsterPieceDropped;
 	
-	public TaskStageForUser(long id, long userTaskId, int stageNum, int taskStageMonsterId,
-			int expGained, int cashGained, boolean monsterPieceDropped) {
+	public TaskStageForUser(long id, long userTaskId, int stageNum,
+			int taskStageMonsterId, String monsterType, int expGained,
+			int cashGained, boolean monsterPieceDropped) {
 		super();
 		this.id = id;
 		this.userTaskId = userTaskId;
 		this.stageNum = stageNum;
 		this.taskStageMonsterId = taskStageMonsterId;
+		this.monsterType = monsterType;
 		this.expGained = expGained;
 		this.cashGained = cashGained;
 		this.monsterPieceDropped = monsterPieceDropped;
@@ -57,6 +60,14 @@ public class TaskStageForUser implements Serializable {
 		this.taskStageMonsterId = taskStageMonsterId;
 	}
 
+	public String getMonsterType() {
+		return monsterType;
+	}
+
+	public void setMonsterType(String monsterType) {
+		this.monsterType = monsterType;
+	}
+
 	public int getExpGained() {
 		return expGained;
 	}
@@ -84,9 +95,10 @@ public class TaskStageForUser implements Serializable {
 	@Override
 	public String toString() {
 		return "TaskStageForUser [id=" + id + ", userTaskId=" + userTaskId
-				+ ", stageNum=" + stageNum + ", taskStageMonsterId=" + taskStageMonsterId
-				+ ", expGained=" + expGained + ", cashGained=" + cashGained
-				+ ", monsterPieceDropped=" + monsterPieceDropped + "]";
+				+ ", stageNum=" + stageNum + ", taskStageMonsterId="
+				+ taskStageMonsterId + ", monsterType=" + monsterType + ", expGained="
+				+ expGained + ", cashGained=" + cashGained + ", monsterPieceDropped="
+				+ monsterPieceDropped + "]";
 	}
 
 }

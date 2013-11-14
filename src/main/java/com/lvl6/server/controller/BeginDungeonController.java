@@ -198,6 +198,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Long> userTaskId = new ArrayList<Long>();
   	List<Integer> stageNum = new ArrayList<Integer>();
   	List<Integer> taskStageMonsterIdList = new ArrayList<Integer>();
+  	List<String> monsterTypes = new ArrayList<String>();
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> cashGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
@@ -210,6 +211,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   		int monsterId = tsfu.getTaskStageMonsterId();
   		taskStageMonsterIdList.add(monsterId);
+  		monsterTypes.add(tsfu.getMonsterType());
   		expGained.add(tsfu.getExpGained());
   		cashGained.add(tsfu.getCashGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
@@ -222,8 +224,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			"taskStageForUser=" + taskStages);
 
   	num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
-  			userTaskId, stageNum, taskStageMonsterIdList, expGained, cashGained,
-  			monsterPieceDropped);
+  			userTaskId, stageNum, taskStageMonsterIdList, monsterTypes, expGained,
+  			cashGained, monsterPieceDropped);
   	log.warn("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + taskStages);
   }
@@ -432,13 +434,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	List<Integer> repeatedStageNum = Collections.nCopies(numStageRows, stageNum);
 	  	
 	  	List<Integer> taskStageMonsterIds = new ArrayList<Integer>();
+	  	List<String> monsterTypes = new ArrayList<String>();
 	  	for (TaskStageMonster tsm : taskStageMonsters) {
         taskStageMonsterIds.add(tsm.getId());
+        monsterTypes.add(tsm.getMonsterType().name());
       }
 	  	
 	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds,
-	  			repeatedStageNum, taskStageMonsterIds, expsGained, cashGained,
-	  			monsterPiecesDropped);
+	  			repeatedStageNum, taskStageMonsterIds, monsterTypes, expsGained,
+	  			cashGained, monsterPiecesDropped);
 	  	log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
 	  }
   }

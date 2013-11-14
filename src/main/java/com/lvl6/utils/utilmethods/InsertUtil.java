@@ -111,14 +111,14 @@ public interface InsertUtil {
 	public abstract int insertIntoTaskForUserCompleted(int userId, int task,
 			Timestamp timeOfEntry);
 	
-	public abstract int insertIntoUserTaskStage(List<Long> userTaskId, List<Integer> stageNum,
-			List<Integer> monsterId, List<Integer> expGained, List<Integer> silverGained,
-			List<Boolean> monsterPieceDropped);
+	public abstract int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
+			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
+			List<Integer> silversGained, List<Boolean> monsterPiecesDropped);
 	
-	public abstract int insertIntoTaskStageHistory(List<Long> userTaskStageId,
-			List<Long> userTaskId, List<Integer> stageNum, List<Integer> monsterId,
-			List<Integer> expGained, List<Integer> silverGained,
-			List<Boolean> monsterPieceDropped);
+	public abstract int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
+			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> monsterIds,
+			List<String> monsterTypes, List<Integer> expsGained, List<Integer> silversGained,
+			List<Boolean> monsterPiecesDropped);
 	
 	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces);

@@ -239,6 +239,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Long> userTaskId = new ArrayList<Long>();
   	List<Integer> stageNum = new ArrayList<Integer>();
   	List<Integer> taskStageMonsterIdList = new ArrayList<Integer>();
+  	List<String> monsterTypes = new ArrayList<String>();
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> cashGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
@@ -251,6 +252,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		
   		int taskStageMonsterId = tsfu.getTaskStageMonsterId();
   		taskStageMonsterIdList.add(taskStageMonsterId);
+  		monsterTypes.add(tsfu.getMonsterType());
   		expGained.add(tsfu.getExpGained());
   		cashGained.add(tsfu.getCashGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
@@ -274,8 +276,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
-  			userTaskId, stageNum, taskStageMonsterIdList, expGained, cashGained,
-  			monsterPieceDropped);
+  			userTaskId, stageNum, taskStageMonsterIdList, monsterTypes, expGained,
+  			cashGained, monsterPieceDropped);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);
   	

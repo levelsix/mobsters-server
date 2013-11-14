@@ -731,8 +731,8 @@ public class InsertUtils implements InsertUtil{
   }
 
 	@Override
-	public int insertIntoUserTaskStage(List<Long> userTaskIds,
-			List<Integer> stageNums, List<Integer> taskStageMonsterIds, List<Integer> expsGained,
+	public int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
+			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
 			List<Integer> silversGained, List<Boolean> monsterPiecesDropped) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
 
@@ -742,6 +742,7 @@ public class InsertUtils implements InsertUtil{
 		insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, userTaskIds);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, stageNums);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, taskStageMonsterIds);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_TYPE, monsterTypes);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__EXP_GAINED, expsGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__SILVER_GAINED, silversGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
@@ -754,21 +755,22 @@ public class InsertUtils implements InsertUtil{
 	}
 
 	@Override
-	public int insertIntoTaskStageHistory(
-			List<Long> userTaskStageId, List<Long> userTaskId,
-			List<Integer> stageNum, List<Integer> taskStageMonsterId, List<Integer> expGained,
-			List<Integer> silverGained, List<Boolean> monsterPieceDropped) {
+	public int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
+			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> taskStageMonsterIds,
+			List<String> monsterTypes, List<Integer> expsGained, 
+			List<Integer> silversGained, List<Boolean> monsterPiecesDropped) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
-		int numRows = stageNum.size();
+		int numRows = stageNums.size();
 		
     Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageId);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskId);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNum);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, taskStageMonsterId);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expGained);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__SILVER_GAINED, silverGained);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPieceDropped);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageIds);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskIds);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNums);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, taskStageMonsterIds);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_TYPE, monsterTypes);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expsGained);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__SILVER_GAINED, silversGained);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
     
     int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
         insertParams, numRows);
