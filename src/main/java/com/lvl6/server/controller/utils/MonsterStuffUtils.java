@@ -181,7 +181,8 @@ public class MonsterStuffUtils {
   // THERE IS A CORRESPONDING ENTRY IN monsterIdToQuantity
   // returns the remaining quantities for each monster id after "completing"
   // a user_monster 
-  // ALSO MODIFIES monsterIdToIncompleteUserMonster
+  // ALSO MODIFIES the monsters in monsterIdToIncompleteUserMonster
+  //monsterIdToQuantity will not be modified
   public static Map<Integer, Integer> completeMonsterForUserFromMonsterIdsAndQuantities(
   		Map<Integer, MonsterForUser> monsterIdToIncompleteUserMonster,
   		Map<Integer, Integer> monsterIdToQuantity) {
@@ -202,7 +203,7 @@ public class MonsterStuffUtils {
 
   	//for each incomplete user monster, try to complete it with the 
   	//available quantity in the monsterIdToQuantity map,
-  	//(breaking the abstraction) monsterIdToIncompleteUserMonster will be modified
+  	//monsterIdToIncompleteUserMonster will be modified
   	for (int monsterId : incompleteMonsterIds) {
   		MonsterForUser mfu = monsterIdToIncompleteUserMonster.get(monsterId);
   		int numPiecesAvailable = monsterIdToQuantity.get(monsterId);
@@ -246,6 +247,15 @@ public class MonsterStuffUtils {
   		//no extra pieces remaining after trying to complete monsterForUser
   		mfu.setNumPieces(updatedExistingPieces); 
   	}
+  	
+  	//if monster for user has max number of pieces, and minutes to combine is 0
+  	//it should be marked as complete
+  	int mfuNewNumPieces = mfu.getNumPieces();
+  	int numMinutesForCompletion = monzter.getMinutesToCombinePieces();
+  	if (mfuNewNumPieces == numPiecesForCompletion && 0 == numMinutesForCompletion) {
+  		mfu.setComplete(true);
+  	}
+  	
   	return numPiecesRemaining;
   }
   
@@ -268,15 +278,22 @@ public class MonsterStuffUtils {
   		Monster monzter = monsterIdsToMonsters.get(monsterId);
   		int quantity = monsterIdsToQuantities.get(monsterId);
   		
+  		log.info("for monsterId=" + monsterId + "\t and for quantity=" + quantity +
+  				"\t creating some number of a specific monster for a user. monster=" +
+  				monzter);
+  		
   		List<MonsterForUser> newUserMonsters = createMonsterForUserFromQuantity(
   				userId, monzter, quantity, combineStartTime);
+  		log.info("some amount of a certain monster created. monster(s)=" +
+  				newUserMonsters);
+  		
   		returnList.addAll(newUserMonsters);
   	}
   	
   	return returnList;
   }
   
-  //for A GIVEN MONSTER and num pieces, create as many of this monster as possible
+  //for A GIVEN MONSTER and QUANTITY of pieces, create as many of this monster as possible
   //THE ID PROPERTY FOR ALL these monsterForUser will be a useless value, say 0
   public static List<MonsterForUser> createMonsterForUserFromQuantity(int userId,
   		Monster monzter, int quantity, Date combineStartTime) {
@@ -291,25 +308,31 @@ public class MonsterStuffUtils {
   	int currentExp = 0; //not sure if this is right
   	int currentLvl = 1; //not sure if this is right
   	int currentHealth = monzter.getBaseHp();
-  	int numPieces = 0;
-  	boolean isComplete = false;
-  	
-  	//if the time it takes to combine a monster is 0 then the monster is complete
-  	if (monzter.getMinutesToCombinePieces() == 0) {
-  		isComplete = true;
-  	}
   	
   	int teamSlotNum = 0;
   	String sourceOfPieces = "";
   	
-  	//decrement quantity by number of pieces to create a monster and
+  	//decrement quantity by number_of_pieces_to_create_a_monster and
   	//this represents one monster_for_user
   	for (; quantity > 0; quantity -= numPiecesForCompletion) {
+  		boolean isComplete = false;
+  		int numPieces = 0;
+  		
   		if (quantity >= numPiecesForCompletion) {
   			numPieces = numPiecesForCompletion;
+  			
+  			//since there's enough pieces to create a whole monster, if the time
+  			//it takes to combine a monster is 0 then the monster is complete
+  			if (monzter.getMinutesToCombinePieces() == 0) {
+  				isComplete = true;
+  			}
+  			
   		} else {
+  			//this happens only when there isn't enough pieces left to make a whole
+  			//monster 
   			numPieces = quantity; 
   		}
+  		
   		
   		MonsterForUser mfu = new MonsterForUser(id, userId, monsterId,
   				currentExp, currentLvl, currentHealth, numPieces, isComplete,
