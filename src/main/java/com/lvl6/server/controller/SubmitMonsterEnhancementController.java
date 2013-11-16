@@ -258,7 +258,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int gemChange = -1 * gemsSpent;
 		int numChange = user.updateRelativeCoinsAndDiamonds(cashChange, gemChange); 
 		if (1 != numChange) {
-			log.error("problem with updating user stats: gemChange=" + gemChange
+			log.warn("problem with updating user stats: gemChange=" + gemChange
 					+ ", cashChange=" + cashChange + ", user is " + user);
 		} else {
 			//everything went well
