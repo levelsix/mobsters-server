@@ -259,7 +259,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int numChange = user.updateRelativeCoinsAndDiamonds(cashChange, gemChange); 
 		if (1 != numChange) {
 			log.warn("problem with updating user stats: gemChange=" + gemChange
-					+ ", cashChange=" + cashChange + ", user is " + user);
+					+ ", cashChange=" + cashChange + ", user is " + user +
+					"\t perhaps base monster deleted \t protoDeleteMap=" + protoDeleteMap);
 		} else {
 			//everything went well
 			if (0 != cashChange) {
