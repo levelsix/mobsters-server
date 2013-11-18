@@ -5023,6 +5023,14 @@ public final class EventStartupProto {
         // optional float secondsToHealPerHealthPoint = 2;
         boolean hasSecondsToHealPerHealthPoint();
         float getSecondsToHealPerHealthPoint();
+        
+        // optional float elementalStrength = 3;
+        boolean hasElementalStrength();
+        float getElementalStrength();
+        
+        // optional float elementalWeakness = 4;
+        boolean hasElementalWeakness();
+        float getElementalWeakness();
       }
       public static final class MonsterConstants extends
           com.google.protobuf.GeneratedMessage
@@ -5073,9 +5081,31 @@ public final class EventStartupProto {
           return secondsToHealPerHealthPoint_;
         }
         
+        // optional float elementalStrength = 3;
+        public static final int ELEMENTALSTRENGTH_FIELD_NUMBER = 3;
+        private float elementalStrength_;
+        public boolean hasElementalStrength() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public float getElementalStrength() {
+          return elementalStrength_;
+        }
+        
+        // optional float elementalWeakness = 4;
+        public static final int ELEMENTALWEAKNESS_FIELD_NUMBER = 4;
+        private float elementalWeakness_;
+        public boolean hasElementalWeakness() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        public float getElementalWeakness() {
+          return elementalWeakness_;
+        }
+        
         private void initFields() {
           cashPerHealthPoint_ = 0F;
           secondsToHealPerHealthPoint_ = 0F;
+          elementalStrength_ = 0F;
+          elementalWeakness_ = 0F;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -5095,6 +5125,12 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             output.writeFloat(2, secondsToHealPerHealthPoint_);
           }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            output.writeFloat(3, elementalStrength_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            output.writeFloat(4, elementalWeakness_);
+          }
           getUnknownFields().writeTo(output);
         }
         
@@ -5111,6 +5147,14 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             size += com.google.protobuf.CodedOutputStream
               .computeFloatSize(2, secondsToHealPerHealthPoint_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeFloatSize(3, elementalStrength_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeFloatSize(4, elementalWeakness_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -5240,6 +5284,10 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000001);
             secondsToHealPerHealthPoint_ = 0F;
             bitField0_ = (bitField0_ & ~0x00000002);
+            elementalStrength_ = 0F;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            elementalWeakness_ = 0F;
+            bitField0_ = (bitField0_ & ~0x00000008);
             return this;
           }
           
@@ -5286,6 +5334,14 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000002;
             }
             result.secondsToHealPerHealthPoint_ = secondsToHealPerHealthPoint_;
+            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+              to_bitField0_ |= 0x00000004;
+            }
+            result.elementalStrength_ = elementalStrength_;
+            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+              to_bitField0_ |= 0x00000008;
+            }
+            result.elementalWeakness_ = elementalWeakness_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -5307,6 +5363,12 @@ public final class EventStartupProto {
             }
             if (other.hasSecondsToHealPerHealthPoint()) {
               setSecondsToHealPerHealthPoint(other.getSecondsToHealPerHealthPoint());
+            }
+            if (other.hasElementalStrength()) {
+              setElementalStrength(other.getElementalStrength());
+            }
+            if (other.hasElementalWeakness()) {
+              setElementalWeakness(other.getElementalWeakness());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -5347,6 +5409,16 @@ public final class EventStartupProto {
                 case 21: {
                   bitField0_ |= 0x00000002;
                   secondsToHealPerHealthPoint_ = input.readFloat();
+                  break;
+                }
+                case 29: {
+                  bitField0_ |= 0x00000004;
+                  elementalStrength_ = input.readFloat();
+                  break;
+                }
+                case 37: {
+                  bitField0_ |= 0x00000008;
+                  elementalWeakness_ = input.readFloat();
                   break;
                 }
               }
@@ -5393,6 +5465,48 @@ public final class EventStartupProto {
           public Builder clearSecondsToHealPerHealthPoint() {
             bitField0_ = (bitField0_ & ~0x00000002);
             secondsToHealPerHealthPoint_ = 0F;
+            onChanged();
+            return this;
+          }
+          
+          // optional float elementalStrength = 3;
+          private float elementalStrength_ ;
+          public boolean hasElementalStrength() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+          }
+          public float getElementalStrength() {
+            return elementalStrength_;
+          }
+          public Builder setElementalStrength(float value) {
+            bitField0_ |= 0x00000004;
+            elementalStrength_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearElementalStrength() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            elementalStrength_ = 0F;
+            onChanged();
+            return this;
+          }
+          
+          // optional float elementalWeakness = 4;
+          private float elementalWeakness_ ;
+          public boolean hasElementalWeakness() {
+            return ((bitField0_ & 0x00000008) == 0x00000008);
+          }
+          public float getElementalWeakness() {
+            return elementalWeakness_;
+          }
+          public Builder setElementalWeakness(float value) {
+            bitField0_ |= 0x00000008;
+            elementalWeakness_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearElementalWeakness() {
+            bitField0_ = (bitField0_ & ~0x00000008);
+            elementalWeakness_ = 0F;
             onChanged();
             return this;
           }
@@ -12720,7 +12834,7 @@ public final class EventStartupProto {
       "uff.proto\"\215\001\n\023StartupRequestProto\022\014\n\004udi" +
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
-      "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\"\324\035\n\024St" +
+      "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\"\213\036\n\024St" +
       "artupResponseProto\022\030\n\020serverTimeMillis\030\001",
       " \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.Fu" +
       "llUserProto\022I\n\rstartupStatus\030\003 \001(\01622.com" +
@@ -12765,7 +12879,7 @@ public final class EventStartupProto {
       "sStolen\030\003 \001(\005\032\202\001\n\031ReferralNotificationPr" +
       "oto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.proto.M" +
       "inimumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024" +
-      "coinsGivenToReferrer\030\003 \001(\005\032\333\016\n\020StartupCo" +
+      "coinsGivenToReferrer\030\003 \001(\005\032\222\017\n\020StartupCo" +
       "nstants\022H\n\025inAppPurchasePackages\030\001 \003(\0132)" +
       ".com.lvl6.proto.InAppPurchasePackageProt" +
       "o\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSi" +
@@ -12810,13 +12924,14 @@ public final class EventStartupProto {
       "\n\031initialMaxNumMonsterLimit\030\002 \001(\005\022\'\n\037mon" +
       "sterInventoryIncrementAmount\030\003 \001(\005\022\027\n\017ge" +
       "mPricePerSlot\030\004 \001(\005\022.\n&numFriendsToRecru" +
-      "itToIncreaseInventory\030\005 \001(\005\032S\n\020MonsterCo" +
-      "nstants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033s",
-      "econdsToHealPerHealthPoint\030\002 \001(\002\"A\n\014Upda" +
-      "teStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020" +
-      "\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\n" +
-      "USER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021Even" +
-      "tStartupProto"
+      "itToIncreaseInventory\030\005 \001(\005\032\211\001\n\020MonsterC" +
+      "onstants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033",
+      "secondsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021ele" +
+      "mentalStrength\030\003 \001(\002\022\031\n\021elementalWeaknes" +
+      "s\030\004 \001(\002\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020" +
+      "\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rSt" +
+      "artupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_" +
+      "IN_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -12908,7 +13023,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor,
-              new java.lang.String[] { "CashPerHealthPoint", "SecondsToHealPerHealthPoint", },
+              new java.lang.String[] { "CashPerHealthPoint", "SecondsToHealPerHealthPoint", "ElementalStrength", "ElementalWeakness", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder.class);
           return null;

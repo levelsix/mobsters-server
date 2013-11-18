@@ -1,3 +1,5 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
 import "BoosterPackStuff.proto";
 import "Chat.proto";
@@ -152,6 +154,9 @@ message StartupResponseProto {
 		message MonsterConstants {
 			optional float cashPerHealthPoint = 1;
 			optional float secondsToHealPerHealthPoint = 2;
+			
+			optional float elementalStrength = 3;
+			optional float elementalWeakness = 4;
 		}
 	}
 	
