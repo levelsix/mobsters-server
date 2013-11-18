@@ -11,6 +11,8 @@ public class ControllerConstants {
 	
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
 	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;
+	public static final float MONSTER__ELEMENTAL_STRENGTH = 1.2F;
+	public static final float MONSTER__ELEMENTAL_WEAKNESS = 0.8F;
 	
 	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
 	public static final int MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT = 2;
