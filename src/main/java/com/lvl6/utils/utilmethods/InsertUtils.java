@@ -785,8 +785,10 @@ public class InsertUtils implements InsertUtil{
    */
 	@Override
 	public List<Long> insertIntoMonsterForUserReturnIds(int userId,
-			List<MonsterForUser> userMonsters, String sourceOfPieces) {
+			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate) {
 		String tableName = DBConstants.TABLE_MONSTER_FOR_USER;
+		Timestamp combineStartTime = new Timestamp(combineStartDate.getTime());
+		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 		
 		for(int i = 0; i < userMonsters.size(); i++){
@@ -808,6 +810,7 @@ public class InsertUtils implements InsertUtil{
 			row.put(DBConstants.MONSTER_FOR_USER__CURRENT_HEALTH, currentHp);
 			row.put(DBConstants.MONSTER_FOR_USER__NUM_PIECES, numPieces);
 			row.put(DBConstants.MONSTER_FOR_USER__IS_COMPLETE, isComplete);
+			row.put(DBConstants.MONSTER_FOR_USER__COMBINE_START_TIME, combineStartTime);
 			row.put(DBConstants.MONSTER_FOR_USER__TEAM_SLOT_NUM, teamSlotNum);
 			row.put(DBConstants.MONSTER_FOR_USER__SOURCE_OF_PIECES, sourceOfPieces);
 			newRows.add(row);
