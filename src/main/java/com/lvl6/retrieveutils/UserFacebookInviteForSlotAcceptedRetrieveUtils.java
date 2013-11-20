@@ -37,6 +37,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
     UserFacebookInviteForSlotAccepted invite = convertRSToInvite(rs);
+    DBConnection.get().close(rs, null, conn);
     return invite;
   }
   
@@ -47,6 +48,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
     Map<Integer, UserFacebookInviteForSlotAccepted> idsToInvites = convertRSToInviteIdsToInvites(rs);
+    DBConnection.get().close(rs, null, conn);
     return idsToInvites;
   }
   
@@ -85,6 +87,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
     Map<Integer, UserFacebookInviteForSlotAccepted> idsToInvites = convertRSToInviteIdsToInvites(rs);
+    DBConnection.get().close(rs, null, conn);
     return idsToInvites;
   }
   
@@ -105,6 +108,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	Connection conn = DBConnection.get().getConnection();
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
   	List<String> recipientIds = convertRSToStrings(rs);
+    DBConnection.get().close(rs, null, conn);
   	return recipientIds;
   }
   
@@ -125,6 +129,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	Connection conn = DBConnection.get().getConnection();
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
   	Set<Integer> userIds = convertRSToInts(rs);
+    DBConnection.get().close(rs, null, conn);
   	return userIds;
   }
   

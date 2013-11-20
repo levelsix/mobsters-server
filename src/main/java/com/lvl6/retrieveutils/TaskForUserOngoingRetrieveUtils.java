@@ -32,6 +32,7 @@ import com.lvl6.utils.DBConnection;
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
     TaskForUserOngoing ut = convertRSToUserTask(rs);
+    DBConnection.get().close(rs, null, conn);
     return ut;
   }
   
@@ -40,6 +41,7 @@ import com.lvl6.utils.DBConnection;
     
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
     TaskForUserOngoing ut = convertRSToUserTask(rs);
+    DBConnection.get().close(rs, null, conn);
     return ut;
   }
   
