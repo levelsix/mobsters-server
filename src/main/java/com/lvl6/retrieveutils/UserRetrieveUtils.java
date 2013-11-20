@@ -390,7 +390,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		try {
 			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
 			user = convertRSToUser(rs);
-			DBConnection.get().close(rs, null, conn);
+//			DBConnection.get().close(rs, null, conn);
 		} catch (Exception e) {
     	log.error("user retrieve db error.", e);
     } finally {
