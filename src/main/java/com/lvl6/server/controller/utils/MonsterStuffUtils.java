@@ -385,8 +385,8 @@ public class MonsterStuffUtils {
   			userId, monsterIdToRemainingPieces, combineStartDate);
   	if (!newMonsters.isEmpty()) {
   		log.info("the monsters that are new: " + newMonsters);
-  		List<Long> monsterForUserIds = InsertUtils.get()
-  				.insertIntoMonsterForUserReturnIds(userId, newMonsters, sourceOfPieces);
+  		List<Long> monsterForUserIds = InsertUtils.get().insertIntoMonsterForUserReturnIds(
+  				userId, newMonsters, sourceOfPieces, combineStartDate);
   		
   		//set these ids into the list "newMonsters"
   		for (int i = 0; i < monsterForUserIds.size(); i++) {

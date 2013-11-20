@@ -121,7 +121,7 @@ public interface InsertUtil {
 			List<Boolean> monsterPiecesDropped);
 	
 	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId,
-			List<MonsterForUser> userMonsters, String sourceOfPieces);
+			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate);
 	
 	public abstract int insertIntoMonsterForUserDeleted(int userId, List<String> deleteReasons,
 			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate);

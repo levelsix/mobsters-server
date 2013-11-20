@@ -333,7 +333,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     //this is if the user bought a complete monster, STORE TO DB THE NEW MONSTERS
     if (!completeUserMonsters.isEmpty()) {
     	List<Long> monsterForUserIds = InsertUtils.get()
-    			.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop);
+    			.insertIntoMonsterForUserReturnIds(userId, completeUserMonsters, mfusop, now);
     	List<FullUserMonsterProto> newOrUpdated = createFullUserMonsterProtos(
     			monsterForUserIds, completeUserMonsters);
     	
