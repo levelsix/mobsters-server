@@ -39,7 +39,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForInviterUserId(
   		int userId, boolean acceptedInvitesOnly) {
-  	StringBuffer querySb = new StringBuffer();
+  	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT * FROM ");
   	querySb.append(TABLE_NAME);
   	querySb.append(" WHERE ");
@@ -67,7 +67,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public static Map<Integer, UserFacebookInviteForSlot> getSpecificOrAllInvitesForRecipient(
   		String recipientFacebookId, List<Integer> specificInviteIds) {
     
-    StringBuffer querySb = new StringBuffer();
+    StringBuilder querySb = new StringBuilder();
     querySb.append("SELECT * FROM ");
     querySb.append(TABLE_NAME); 
     querySb.append(" WHERE ");
@@ -102,7 +102,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId) {
-  	StringBuffer querySb = new StringBuffer();
+  	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
   	querySb.append(") FROM ");
@@ -122,7 +122,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   public static List<Integer> getUniqueInviterUserIdsForRequesterId(String facebookId) {
-  	StringBuffer querySb = new StringBuffer();
+  	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
   	querySb.append(") FROM ");

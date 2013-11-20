@@ -32,10 +32,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public List<StructureForUser> getUserStructsForUser(int userId) {
     log.debug("retrieving user structs for userId " + userId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    List<StructureForUser> userStructs = convertRSToUserStructs(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<StructureForUser> userStructs = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			userStructs = convertRSToUserStructs(rs);
+		} catch (Exception e) {
+    	log.error("structure for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userStructs;
   }
 
@@ -44,10 +52,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public Map<Integer, List<StructureForUser>> getStructIdsToUserStructsForUser(int userId) {
     log.debug("retrieving map of struct id to userstructs for userId " + userId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    Map<Integer, List<StructureForUser>> structIdToUserStructs = convertRSToStructIdsToUserStructs(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, List<StructureForUser>> structIdToUserStructs = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			structIdToUserStructs = convertRSToStructIdsToUserStructs(rs);
+		} catch (Exception e) {
+    	log.error("structure for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return structIdToUserStructs;
   }
 
@@ -55,10 +71,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public StructureForUser getSpecificUserStruct(int userStructId) {
     log.debug("retrieving user struct with id " + userStructId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsById(conn, userStructId, TABLE_NAME);
-    StructureForUser userStruct = convertRSSingleToUserStructs(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		StructureForUser userStruct = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsById(conn, userStructId, TABLE_NAME);
+			userStruct = convertRSSingleToUserStructs(rs);
+		} catch (Exception e) {
+    	log.error("structure for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userStruct;
   }
 
@@ -66,7 +90,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public List<StructureForUser> getSpecificOrAllUserStructsForUser(int userId,
   		List<Integer> userStructIds) {
     
-  	StringBuffer querySb = new StringBuffer();
+  	StringBuilder querySb = new StringBuilder();
     querySb.append("SELECT * FROM ");
     querySb.append(TABLE_NAME); 
     querySb.append(" WHERE ");
@@ -95,10 +119,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String query = querySb.toString();
     log.info("query=" + query + "\t values=" + values);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    List<StructureForUser> userStructs = convertRSToUserStructs(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<StructureForUser> userStructs = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userStructs = convertRSToUserStructs(rs);
+		} catch (Exception e) {
+    	log.error("structure for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userStructs;
   }
 

@@ -269,7 +269,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<String, String> details = new HashMap<String, String>();
     String cash = MiscMethods.cash;
     String reasonForChange = ControllerConstants.UCHRFC__RETRIEVE_CURRENCY_FROM_NORM_STRUCT;
-    StringBuffer detailSb = new StringBuffer();
+    StringBuilder detailSb = new StringBuilder();
     detailSb.append("userStructIds to times=");
     detailSb.append(userStructIdsToTimesOfRetrieval);
     

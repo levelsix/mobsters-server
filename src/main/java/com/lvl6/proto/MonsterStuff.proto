@@ -1,3 +1,6 @@
+//ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
+//DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
+
 package com.lvl6.proto;
 
 option java_outer_classname = "MonsterStuffProto";
@@ -87,6 +90,7 @@ message UserEnhancementProto {
 }
 
 message UserEnhancementItemProto {
+	//MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
 	optional int64 userMonsterId = 1;
 	optional int64 expectedStartTimeMillis = 2;
 }

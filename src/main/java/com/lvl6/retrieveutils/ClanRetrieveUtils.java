@@ -35,10 +35,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
     absoluteParams.put(DBConstants.CLANS__ID, clanId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteParams, TABLE_NAME);
-    Clan clan = convertRSToSingleClan(rs);
-    DBConnection.get().close(rs, null, conn);
+    Clan clan = null;
+    Connection conn = null;
+    ResultSet rs = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteParams, TABLE_NAME);
+			clan = convertRSToSingleClan(rs);
+		} catch (Exception e) {
+    	log.error("clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clan;
   }
 
@@ -60,10 +68,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     query += StringUtils.getListInString(condClauses, "or") + ")";
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    Map<Integer, Clan> clanIdToClanMap = convertRSToClanIdToClanMap(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, Clan> clanIdToClanMap = new HashMap<Integer, Clan>();
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			clanIdToClanMap = convertRSToClanIdToClanMap(rs);
+		} catch (Exception e) {
+    	log.error("clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clanIdToClanMap;
     
   }
@@ -75,10 +91,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     likeParams.put(DBConstants.CLANS__NAME, "%"+name+"%");
     likeParams.put(DBConstants.CLANS__TAG, "%"+tag+"%");
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsLikeOr(conn, likeParams, TABLE_NAME);
-    List<Clan> clans = convertRSToClansList(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<Clan> clans = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsLikeOr(conn, likeParams, TABLE_NAME);
+			clans = convertRSToClansList(rs);
+		} catch (Exception e) {
+    	log.error("clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clans;
   }
   
@@ -89,10 +113,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     absoluteParams.put(DBConstants.CLANS__NAME, name);
     absoluteParams.put(DBConstants.CLANS__TAG, tag);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, absoluteParams, TABLE_NAME);
-    Clan clan = convertRSToSingleClan(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Clan clan = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteOr(conn, absoluteParams, TABLE_NAME);
+			clan = convertRSToSingleClan(rs);
+		} catch (Exception e) {
+    	log.error("clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clan;
   }
  
@@ -100,18 +132,34 @@ import com.lvl6.utils.utilmethods.StringUtils;
     TreeMap <String, Object> lessThanParamsToVals = new TreeMap<String, Object>();
     lessThanParamsToVals.put(DBConstants.CLANS__ID, clanId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimitLessthan(conn, null, TABLE_NAME, DBConstants.CLANS__ID, limit, lessThanParamsToVals);
-    List<Clan> clans = convertRSToClansList(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<Clan> clans = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimitLessthan(conn, null, TABLE_NAME, DBConstants.CLANS__ID, limit, lessThanParamsToVals);
+			clans = convertRSToClansList(rs);
+		} catch (Exception e) {
+    	log.error("clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clans;
   }
 
   public static List<Clan> getMostRecentClans(int limit) {
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimit(conn, null, TABLE_NAME, DBConstants.CLANS__ID, limit);
-    List<Clan> clans = convertRSToClansList(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<Clan> clans = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimit(conn, null, TABLE_NAME, DBConstants.CLANS__ID, limit);
+			clans = convertRSToClansList(rs);
+		} catch (Exception e) {
+    	log.error("clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clans;
   }
   

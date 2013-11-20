@@ -28,41 +28,52 @@ import com.lvl6.utils.DBConnection;
     
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectDirectQueryNaive(conn, query, null);
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          while(rs.next()) {
-            offset = rs.getInt(1);
-            break;
-          }
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-        }
-      } 
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectDirectQueryNaive(conn, query, null);
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      while(rs.next()) {
+			        offset = rs.getInt(1);
+			        break;
+			      }
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			    }
+			  } 
+			}
+		} catch (Exception e) {
+    	log.error("available referral code retrieve db error.", e);
+    } finally {
+    	//not closing connection because, query below uses it
+    	DBConnection.get().close(rs, null, null);
     }
-    DBConnection.get().close(rs, null, conn);
     
     ResultSet rs2 = null;
-    if (conn != null) {
-      query = "SELECT " + DBConstants.AVAILABLE_REFERRAL_CODES__CODE+ " FROM " + TABLE_NAME + " LIMIT " + offset + ", 1"; 
-      rs2 = DBConnection.get().selectDirectQueryNaive(conn, query, null);
-      if (rs2 != null) {
-        try {
-          rs2.last();
-          rs2.beforeFirst();
-          while(rs2.next()) {
-            availableReferralCode = rs2.getString(DBConstants.AVAILABLE_REFERRAL_CODES__CODE);
-            break;
-          }
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-        }
-      } 
+    try {
+			if (conn != null) {
+			  query = "SELECT " + DBConstants.AVAILABLE_REFERRAL_CODES__CODE+ " FROM " + TABLE_NAME + " LIMIT " + offset + ", 1"; 
+			  rs2 = DBConnection.get().selectDirectQueryNaive(conn, query, null);
+			  if (rs2 != null) {
+			    try {
+			      rs2.last();
+			      rs2.beforeFirst();
+			      while(rs2.next()) {
+			        availableReferralCode = rs2.getString(DBConstants.AVAILABLE_REFERRAL_CODES__CODE);
+			        break;
+			      }
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			    }
+			  } 
+			}
+		} catch (Exception e) {
+    	log.error("available referral code retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs2, null, conn);
     }
-    DBConnection.get().close(rs2, null, conn);
 
     return availableReferralCode;
   }

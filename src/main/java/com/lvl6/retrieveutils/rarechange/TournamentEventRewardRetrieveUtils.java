@@ -58,42 +58,47 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Map <Integer, List<TournamentEventReward>> idsToLeaderboardEventRewardTemp = 
-              new HashMap<Integer, List<TournamentEventReward>>();
-          while(rs.next()) {  
-            TournamentEventReward le = convertRSRowToLeaderboardEventReward(rs);
-            
-            if (le != null) {
-              int tournamentEventId = le.getTournamentEventId();
-              List<TournamentEventReward> existingRewards = 
-                  idsToLeaderboardEventRewardTemp.get(tournamentEventId);
-              
-              if (null != existingRewards) {
-                //map already has rewards pertaining to this event, so add to it
-                existingRewards.add(le);
-              } else {
-                //le is a reward for a new event, create a new list for it
-                List<TournamentEventReward> newEventRewards = new ArrayList<TournamentEventReward>();
-                newEventRewards.add(le);
-                
-                idsToLeaderboardEventRewardTemp.put(tournamentEventId, newEventRewards);  
-              }
-            }
-          }
-          tournamentEventIdsToLeaderboardEventRewards = idsToLeaderboardEventRewardTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      Map <Integer, List<TournamentEventReward>> idsToLeaderboardEventRewardTemp = 
+			          new HashMap<Integer, List<TournamentEventReward>>();
+			      while(rs.next()) {  
+			        TournamentEventReward le = convertRSRowToLeaderboardEventReward(rs);
+			        
+			        if (le != null) {
+			          int tournamentEventId = le.getTournamentEventId();
+			          List<TournamentEventReward> existingRewards = 
+			              idsToLeaderboardEventRewardTemp.get(tournamentEventId);
+			          
+			          if (null != existingRewards) {
+			            //map already has rewards pertaining to this event, so add to it
+			            existingRewards.add(le);
+			          } else {
+			            //le is a reward for a new event, create a new list for it
+			            List<TournamentEventReward> newEventRewards = new ArrayList<TournamentEventReward>();
+			            newEventRewards.add(le);
+			            
+			            idsToLeaderboardEventRewardTemp.put(tournamentEventId, newEventRewards);  
+			          }
+			        }
+			      }
+			      tournamentEventIdsToLeaderboardEventRewards = idsToLeaderboardEventRewardTemp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("tournament event reward retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs,  null, conn);
   }
 
   public static void reload() {

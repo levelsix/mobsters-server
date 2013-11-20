@@ -74,27 +74,32 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          HashMap<Integer, Structure> structIdsToStructsTemp = new HashMap<Integer, Structure>();
-          while(rs.next()) {
-            Structure struct = convertRSRowToStruct(rs);
-            if (struct != null)
-              structIdsToStructsTemp.put(struct.getId(), struct);
-          }
-          structIdsToStructs = structIdsToStructsTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      HashMap<Integer, Structure> structIdsToStructsTemp = new HashMap<Integer, Structure>();
+			      while(rs.next()) {
+			        Structure struct = convertRSRowToStruct(rs);
+			        if (struct != null)
+			          structIdsToStructsTemp.put(struct.getId(), struct);
+			      }
+			      structIdsToStructs = structIdsToStructsTemp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("structure retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   public static void reload() {

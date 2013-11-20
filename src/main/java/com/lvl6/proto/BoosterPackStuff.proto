@@ -1,3 +1,4 @@
+//BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "MonsterStuff.proto";
 import "User.proto";

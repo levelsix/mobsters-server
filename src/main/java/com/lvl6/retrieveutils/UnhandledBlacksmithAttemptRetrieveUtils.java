@@ -27,10 +27,18 @@ import com.lvl6.utils.DBConnection;
   public static Map<Integer, BlacksmithAttempt> getUnhandledBlacksmithAttemptsForUser(int userId) {
     log.debug("retrieving unhandled blacksmith attempts for user " + userId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    Map<Integer, BlacksmithAttempt> blacksmithIdToBlacksmithAttempt = convertRSToBlacksmithAttempts(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, BlacksmithAttempt> blacksmithIdToBlacksmithAttempt = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			blacksmithIdToBlacksmithAttempt = convertRSToBlacksmithAttempts(rs);
+		} catch (Exception e) {
+    	log.error("tournament event for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return blacksmithIdToBlacksmithAttempt;
   }
   

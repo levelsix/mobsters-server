@@ -59,47 +59,52 @@ import com.lvl6.utils.DBConnection;
   }
 
   private static void setStaticTaskStageIdsToTaskStageMonster() {
-    log.debug("setting static map of taskStageIds to monsterIds");
+    log.debug("setting static map of taskStage and taskStageMonster Ids to monsterIds");
 
     Random rand = new Random();
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonstersTemp =
-              new HashMap<Integer, List<TaskStageMonster>>();
-          Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonstersTemp =
-          		new HashMap<Integer, TaskStageMonster>();
-          
-          //loop through each row and convert it into a java object
-          while(rs.next()) {  
-            TaskStageMonster taskStageMonster = convertRSRowToTaskStageMonster(rs, rand);
-            
-            int stageId = taskStageMonster.getStageId();
-            if (!taskStageIdsToTaskStageMonstersTemp.containsKey(stageId)) {
-              taskStageIdsToTaskStageMonstersTemp.put(stageId, new ArrayList<TaskStageMonster>());
-            }
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      Map<Integer, List<TaskStageMonster>> taskStageIdsToTaskStageMonstersTemp =
+			          new HashMap<Integer, List<TaskStageMonster>>();
+			      Map<Integer, TaskStageMonster> taskStageMonsterIdsToTaskStageMonstersTemp =
+			      		new HashMap<Integer, TaskStageMonster>();
+			      
+			      //loop through each row and convert it into a java object
+			      while(rs.next()) {  
+			        TaskStageMonster taskStageMonster = convertRSRowToTaskStageMonster(rs, rand);
+			        
+			        int stageId = taskStageMonster.getStageId();
+			        if (!taskStageIdsToTaskStageMonstersTemp.containsKey(stageId)) {
+			          taskStageIdsToTaskStageMonstersTemp.put(stageId, new ArrayList<TaskStageMonster>());
+			        }
 
-            List<TaskStageMonster> monsters = taskStageIdsToTaskStageMonstersTemp.get(stageId);
-            monsters.add(taskStageMonster);
-            
-            int taskStageMonsterId = taskStageMonster.getId();
-            taskStageMonsterIdsToTaskStageMonstersTemp.put(taskStageMonsterId, taskStageMonster);
-          }
-          taskStageIdsToTaskStageMonsters = taskStageIdsToTaskStageMonstersTemp;
-          taskStageMonsterIdsToTaskStageMonsters = taskStageMonsterIdsToTaskStageMonstersTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+			        List<TaskStageMonster> monsters = taskStageIdsToTaskStageMonstersTemp.get(stageId);
+			        monsters.add(taskStageMonster);
+			        
+			        int taskStageMonsterId = taskStageMonster.getId();
+			        taskStageMonsterIdsToTaskStageMonstersTemp.put(taskStageMonsterId, taskStageMonster);
+			      }
+			      taskStageIdsToTaskStageMonsters = taskStageIdsToTaskStageMonstersTemp;
+			      taskStageMonsterIdsToTaskStageMonsters = taskStageMonsterIdsToTaskStageMonstersTemp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("task stage monster retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   public static void reload() {

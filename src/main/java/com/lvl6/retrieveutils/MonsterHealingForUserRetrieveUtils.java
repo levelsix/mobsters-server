@@ -33,10 +33,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public static Map<Long, MonsterHealingForUser> getMonstersForUser(int userId) {
     log.debug("retrieving user monsters being healined for userId " + userId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    Map<Long, MonsterHealingForUser> userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Long, MonsterHealingForUser> userMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster healing for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userMonsters;
   }
 
@@ -57,10 +65,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     StringUtils.getListInString(questions, delimiter) + ") and ";
     values.add(userMonsterIds);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    Map<Long, MonsterHealingForUser> incompleteMonsters = convertRSToUserMonsterIdsToMonsters(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Long, MonsterHealingForUser> incompleteMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			incompleteMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster healing for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return incompleteMonsters;
   }
   

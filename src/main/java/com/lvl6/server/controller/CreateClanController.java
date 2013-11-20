@@ -206,7 +206,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private void writeToUserCurrencyHistory(User aUser, Timestamp date, Map<String, Integer> money,
       int previousGold, int clanId, String clanName) {
-  	StringBuffer sb = new StringBuffer();
+  	StringBuilder sb = new StringBuilder();
   	sb.append("clanId=");
   	sb.append(clanId);
   	sb.append(" clanName=");

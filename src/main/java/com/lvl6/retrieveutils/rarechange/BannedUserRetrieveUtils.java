@@ -35,26 +35,32 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+    	if (conn != null) {
+    		rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Set<Integer> userIdsTemp = new HashSet<Integer>();
-          while(rs.next()) { 
-            Integer profanityTerm = convertRSRowToBannedUser(rs);
-            if (null != profanityTerm)
-              userIdsTemp.add(profanityTerm);
-          }
-          userIds = userIdsTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-        }
-      }    
+    		if (rs != null) {
+    			try {
+    				rs.last();
+    				rs.beforeFirst();
+    				Set<Integer> userIdsTemp = new HashSet<Integer>();
+    				while(rs.next()) { 
+    					Integer profanityTerm = convertRSRowToBannedUser(rs);
+    					if (null != profanityTerm)
+    						userIdsTemp.add(profanityTerm);
+    				}
+    				userIds = userIdsTemp;
+    			} catch (SQLException e) {
+    				log.error("problem with database call.", e);
+    			}
+    		}
+    	}
+    } catch (Exception e) {
+    	log.error("banned user retrieve db error.", e);
     }
-    DBConnection.get().close(rs, null, conn);
+    finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
   }
 
   public static void reload() {

@@ -853,7 +853,7 @@ public class DBConnection {
 	private String constructInsertOrReplaceIntoTableValuesSQLQuery(String tableName, List<String> columns,
 			List<String> questions, int numberOfQuestionLists, boolean isInsert) {
 		String delimiter = ",";
-		StringBuffer query = new StringBuffer();
+		StringBuilder query = new StringBuilder();
 		if (isInsert) {
 			query.append("INSERT ");
 		} else {
@@ -895,7 +895,7 @@ public class DBConnection {
 	private String transformToOnDuplicateKeyUpdateQuery(String query, 
 			Set<String> replaceTheseColumns) {
 		
-		StringBuffer newQuery = new StringBuffer();
+		StringBuilder newQuery = new StringBuilder();
 		newQuery.append(query);
 		newQuery.append(" ON DUPLICATE KEY UPDATE ");
 		
@@ -906,7 +906,7 @@ public class DBConnection {
 		//generate the individual update clauses. The "some_column1=VALUES(some_column1)"
 		//from example above
 		for(String replacedColumn : replaceTheseColumns) {
-			StringBuffer updateClause = new StringBuffer();
+			StringBuilder updateClause = new StringBuilder();
 			updateClause.append(replacedColumn);
 			updateClause.append("=VALUES(");
 			updateClause.append(replacedColumn);

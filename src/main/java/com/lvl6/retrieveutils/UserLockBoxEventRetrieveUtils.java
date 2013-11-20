@@ -27,10 +27,18 @@ import com.lvl6.utils.DBConnection;
   public static Map<Integer, UserLockBoxEvent> getLockBoxEventIdsToLockBoxEventsForUser(int userId) {
     log.debug("retrieving lock box event ids to num lock boxes map for userId " + userId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    Map<Integer, UserLockBoxEvent> lockBoxEventIdsToUserLockBoxEvents = grabUserLockBoxEventsFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, UserLockBoxEvent> lockBoxEventIdsToUserLockBoxEvents = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			lockBoxEventIdsToUserLockBoxEvents = grabUserLockBoxEventsFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user lock box event retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return lockBoxEventIdsToUserLockBoxEvents;
   }
   
@@ -40,10 +48,18 @@ import com.lvl6.utils.DBConnection;
     paramsToVals.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__USER_ID, userId);
     paramsToVals.put(DBConstants.LOCK_BOX_EVENT_FOR_USER__EVENT_ID, lockBoxEventId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    UserLockBoxEvent event = grabUserLockBoxEventFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		UserLockBoxEvent event = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			event = grabUserLockBoxEventFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user lock box event retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return event;
   }
 

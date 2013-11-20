@@ -44,24 +44,29 @@ import com.lvl6.utils.DBConnection;
 		log.debug("setting static map of cityIds to city");
 		Connection conn = DBConnection.get().getConnection();
 		ResultSet rs = null;
-		if (conn != null) {
-			rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-			try {
-				rs.last();
-				rs.beforeFirst();
-				Map <Integer, City> cityIdToCityTemp = new HashMap<Integer, City>();
-				while(rs.next()) {  //should only be one
-					City city = convertRSRowToCity(rs);
-					if (city != null)
-						cityIdToCityTemp.put(city.getId(), city);
-				}
-				cityIdToCity = cityIdToCityTemp;
-			} catch (SQLException e) {
-				log.error("problem with database call.", e);
+		try {
+			if (conn != null) {
+				rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+				try {
+					rs.last();
+					rs.beforeFirst();
+					Map <Integer, City> cityIdToCityTemp = new HashMap<Integer, City>();
+					while(rs.next()) {  //should only be one
+						City city = convertRSRowToCity(rs);
+						if (city != null)
+							cityIdToCityTemp.put(city.getId(), city);
+					}
+					cityIdToCity = cityIdToCityTemp;
+				} catch (SQLException e) {
+					log.error("problem with database call.", e);
 
+				}
 			}
-		}
-		DBConnection.get().close(rs, null, conn);
+		} catch (Exception e) {
+    	log.error("city retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
 	}   
 
 	public static void reload() {

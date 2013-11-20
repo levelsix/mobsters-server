@@ -141,6 +141,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<Integer> redeemedQuestIds = new ArrayList<Integer>();
     
     if (inProgressAndRedeemedQuestForUsers != null) {
+    	//group things into redeemed and unredeemed
       for (QuestForUser uq : inProgressAndRedeemedQuestForUsers) {
         if (uq.isRedeemed() || uq.getQuestId() == questId) {
           redeemedQuestIds.add(uq.getQuestId());
@@ -148,8 +149,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           inProgressQuestIds.add(uq.getQuestId());  
         }
       }
-      Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
       List<Integer> availableQuestIds = QuestUtils.getAvailableQuestsForUser(redeemedQuestIds, inProgressQuestIds);
+      
+      //from the available quests, create protos out of the quests that had
+      //the quest user just redeemed as a prerequisite
+      Map<Integer, Quest> questIdsToQuests = QuestRetrieveUtils.getQuestIdsToQuests();
       for (Integer availableQuestId : availableQuestIds) {
         Quest q = questIdsToQuests.get(availableQuestId);
         if (q.getQuestsRequiredForThis().contains(questId)) {

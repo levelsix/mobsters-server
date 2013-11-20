@@ -26,10 +26,18 @@ import com.lvl6.utils.DBConnection;
     Map <String, Object> paramsToVals = new HashMap<String, Object>();
     paramsToVals.put(DBConstants.USER__UDID, UDID);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
-    boolean loggedIn = convertRSToBoolean(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		boolean loggedIn = false;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
+			loggedIn = convertRSToBoolean(rs);
+		} catch (Exception e) {
+    	log.error("login history retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return loggedIn;
   }
   

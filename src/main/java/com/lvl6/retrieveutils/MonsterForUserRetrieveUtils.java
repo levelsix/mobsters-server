@@ -34,10 +34,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public List<MonsterForUser> getMonstersForUser(int userId) {
     log.debug("retrieving user monsters for userId " + userId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    List<MonsterForUser> userMonsters = convertRSToMonsters(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<MonsterForUser> userMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			userMonsters = convertRSToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userMonsters;
   }
 
@@ -45,17 +53,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public Map<Integer, List<MonsterForUser>> getMonsterIdsToMonstersForUser(int userId) {
     log.debug("retrieving map of monster id to usermonsters for userId " + userId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    Map<Integer, List<MonsterForUser>> monsterIdsToMonsters = convertRSToMonsterIdsToMonsterList(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, List<MonsterForUser>> monsterIdsToMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			monsterIdsToMonsters = convertRSToMonsterIdsToMonsterList(rs);
+		} catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return monsterIdsToMonsters;
   }
   
   public Map<Integer, List<MonsterForUser>> getUserIdsToMonsterTeamForUserIds(
   		List<Integer> userIds) {
   	
-  	StringBuffer sb = new StringBuffer();
+  	StringBuilder sb = new StringBuilder();
   	sb.append("SELECT * FROM ");
   	sb.append(TABLE_NAME);
   	sb.append(" WHERE ");
@@ -77,10 +93,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	
   	log.info("RETRIEVING USERS' TEAMS. query=" + query + "\t\t values=" + values);
   	
-  	Connection conn = DBConnection.get().getConnection();
-  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-  	Map<Integer, List<MonsterForUser>> userIdsToCurrentTeam = convertRSToUserIdsToCurrentTeam(rs);
-  	DBConnection.get().close(rs, null, conn);
+  	Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, List<MonsterForUser>> userIdsToCurrentTeam = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userIdsToCurrentTeam = convertRSToUserIdsToCurrentTeam(rs);
+		} catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
   	
   	return userIdsToCurrentTeam;
   }
@@ -89,10 +113,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public MonsterForUser getSpecificUserMonster(long userMonsterId) {
     log.debug("retrieving user monster for userMonsterId: " + userMonsterId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByLongId(conn, userMonsterId, TABLE_NAME);
-    MonsterForUser userMonster = convertRSSingleToMonsters(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		MonsterForUser userMonster = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByLongId(conn, userMonsterId, TABLE_NAME);
+			userMonster = convertRSSingleToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userMonster;
   }
 
@@ -100,7 +132,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   public Map<Long, MonsterForUser> getSpecificOrAllUserMonstersForUser(int userId,
   		Collection<Long> userMonsterIds) {
     
-    StringBuffer querySb = new StringBuffer();
+    StringBuilder querySb = new StringBuilder();
     querySb.append("SELECT * FROM ");
     querySb.append(TABLE_NAME); 
     querySb.append(" WHERE ");
@@ -127,10 +159,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String query = querySb.toString();
     log.info("query=" + query + "\t values=" + values);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    Map<Long, MonsterForUser> userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Long, MonsterForUser> userMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userMonsters;
   }
 
@@ -142,10 +182,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     paramsToVals.put(DBConstants.MONSTER_FOR_USER__USER_ID, userId);
     paramsToVals.put(DBConstants.MONSTER_FOR_USER__MONSTER_ID, monsterId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<MonsterForUser> userMonsters = convertRSToMonsters(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<MonsterForUser> userMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userMonsters = convertRSToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userMonsters;
   }
   
@@ -169,10 +217,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     query += DBConstants.MONSTER_FOR_USER__IS_COMPLETE + "=?;";
     values.add(false);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    Map<Integer, MonsterForUser> incompleteMonsters = convertRSToMonsterIdsToMonsters(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, MonsterForUser> incompleteMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			incompleteMonsters = convertRSToMonsterIdsToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return incompleteMonsters;
   }
 

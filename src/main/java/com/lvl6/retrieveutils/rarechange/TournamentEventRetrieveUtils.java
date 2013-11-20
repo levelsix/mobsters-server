@@ -105,8 +105,11 @@ import com.lvl6.utils.DBConnection;
 //            log.error("problem with tournament event db call.", e);
 //          }
 //        }
-//      }
-//      DBConnection.get().close(rs, null, conn);
+//      } catch (Exception e) {
+//  				log.error("tournament event retrieve db error.", e);
+//				} finally {
+//					DBConnection.get().close(rs, null, conn);
+//				}
 //    }
 //    
 //    return toReturn;
@@ -117,26 +120,31 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Map <Integer, TournamentEvent> idsToTournamentEventTemp = new HashMap<Integer, TournamentEvent>();
-          while(rs.next()) {  //should only be one
-            TournamentEvent le = convertRSRowToTournamentEvent(rs);
-            if (le != null)
-              idsToTournamentEventTemp.put(le.getId(), le);
-          }
-          idsToLeaderBoardEvents = idsToTournamentEventTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      Map <Integer, TournamentEvent> idsToTournamentEventTemp = new HashMap<Integer, TournamentEvent>();
+			      while(rs.next()) {  //should only be one
+			        TournamentEvent le = convertRSRowToTournamentEvent(rs);
+			        if (le != null)
+			          idsToTournamentEventTemp.put(le.getId(), le);
+			      }
+			      idsToLeaderBoardEvents = idsToTournamentEventTemp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("tournament event retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs,  null, conn);
   }
 
   public static void reload() {

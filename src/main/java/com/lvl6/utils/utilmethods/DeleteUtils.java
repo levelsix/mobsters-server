@@ -221,7 +221,7 @@ public class DeleteUtils implements DeleteUtil {
     List<String> questions = Collections.nCopies(size, "?");
     String questionMarks = StringUtils.csvList(questions);
     
-    StringBuffer querySb = new StringBuffer();
+    StringBuilder querySb = new StringBuilder();
     querySb.append("DELETE FROM ");
     querySb.append(tableName);
     querySb.append(" WHERE ");
@@ -239,7 +239,7 @@ public class DeleteUtils implements DeleteUtil {
 	public int deleteUserFacebookInvitesForUser(int userId) {
 		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
 		
-		StringBuffer querySb = new StringBuffer();
+		StringBuilder querySb = new StringBuilder();
 		querySb.append("DELETE FROM ");
 		querySb.append(tableName);
 		querySb.append(" WHERE ");

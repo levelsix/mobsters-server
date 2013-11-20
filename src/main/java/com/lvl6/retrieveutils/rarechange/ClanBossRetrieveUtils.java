@@ -54,8 +54,11 @@ import com.lvl6.utils.DBConnection;
           
         }
       }    
+    } catch (Exception e) {
+    	log.error("clan boss retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
   */
   public static void reload() {

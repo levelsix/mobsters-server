@@ -23,7 +23,7 @@ import com.lvl6.utils.DBConnection;
   
   public static List<Integer> getAllTaskIdsForUser(int userId) {
   	
-  	StringBuffer querySb = new StringBuffer();
+  	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
   	querySb.append(DBConstants.TASK_FOR_USER_COMPLETED__TASK_ID);
   	querySb.append(")");

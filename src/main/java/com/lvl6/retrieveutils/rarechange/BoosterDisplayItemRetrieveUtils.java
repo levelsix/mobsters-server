@@ -112,27 +112,33 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+    	if (conn != null) {
+    		rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          HashMap<Integer, BoosterDisplayItem> boosterDisplayItemIdsToBoosterDisplayItemsTemp = new HashMap<Integer, BoosterDisplayItem>();
-          while(rs.next()) {  //should only be one
-            BoosterDisplayItem boosterDisplayItem = convertRSRowToBoosterDisplayItem(rs);
-            if (boosterDisplayItem != null)
-              boosterDisplayItemIdsToBoosterDisplayItemsTemp.put(boosterDisplayItem.getId(), boosterDisplayItem);
-          }
-          boosterDisplayItemIdsToBoosterDisplayItems = boosterDisplayItemIdsToBoosterDisplayItemsTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+    		if (rs != null) {
+    			try {
+    				rs.last();
+    				rs.beforeFirst();
+    				HashMap<Integer, BoosterDisplayItem> boosterDisplayItemIdsToBoosterDisplayItemsTemp = new HashMap<Integer, BoosterDisplayItem>();
+    				while(rs.next()) {  //should only be one
+    					BoosterDisplayItem boosterDisplayItem = convertRSRowToBoosterDisplayItem(rs);
+    					if (boosterDisplayItem != null)
+    						boosterDisplayItemIdsToBoosterDisplayItemsTemp.put(boosterDisplayItem.getId(), boosterDisplayItem);
+    				}
+    				boosterDisplayItemIdsToBoosterDisplayItems = boosterDisplayItemIdsToBoosterDisplayItemsTemp;
+    			} catch (SQLException e) {
+    				log.error("problem with database call.", e);
+
+    			}
+    		}    
+    	}
+    }  catch (Exception e) {
+    	log.error("booster display item retrieve db error.", e);
     }
-    DBConnection.get().close(rs, null, conn);
+    finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
   }
 
   public static void reload() {

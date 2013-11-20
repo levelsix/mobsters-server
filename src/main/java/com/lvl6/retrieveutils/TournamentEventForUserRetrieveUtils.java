@@ -29,10 +29,18 @@ public class TournamentEventForUserRetrieveUtils {
     paramsToVals.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID, leaderboardEventId);
     paramsToVals.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    TournamentEventForUser ulbe = grabUserLeaderboardEventFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		TournamentEventForUser ulbe = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			ulbe = grabUserLeaderboardEventFromRS(rs);
+		} catch (Exception e) {
+    	log.error("tournament event for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return ulbe;
   }
   
@@ -40,10 +48,18 @@ public class TournamentEventForUserRetrieveUtils {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
-    List<TournamentEventForUser> userLeaderboardEvents = grabUserLeaderboardEventsFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<TournamentEventForUser> userLeaderboardEvents = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
+			userLeaderboardEvents = grabUserLeaderboardEventsFromRS(rs);
+		} catch (Exception e) {
+    	log.error("tournament event for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userLeaderboardEvents;
   }
 

@@ -33,10 +33,18 @@ import com.lvl6.utils.DBConnection;
     TreeMap <String, Object> greaterThanParams = new TreeMap<String, Object>();
     greaterThanParams.put(DBConstants.REFERRALS__TIME_OF_REFERRAL, lastLogout);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescGreaterthan(conn, absoluteParams, TABLE_NAME, DBConstants.REFERRALS__TIME_OF_REFERRAL, greaterThanParams);
-    List<Referral> referrals = convertRSToReferralsList(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<Referral> referrals = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescGreaterthan(conn, absoluteParams, TABLE_NAME, DBConstants.REFERRALS__TIME_OF_REFERRAL, greaterThanParams);
+			referrals = convertRSToReferralsList(rs);
+		} catch (Exception e) {
+    	log.error("referrals retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return referrals;
   }
   

@@ -370,7 +370,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private String createUpdateUserMonsterArguments(int userId, int boosterPackId,
   		List<BoosterItem> boosterItems, Map<Integer, Integer> monsterIdsToNumPieces,
   		List<MonsterForUser> completeUserMonsters, Date now) {
-  	StringBuffer sb = new StringBuffer();
+  	StringBuilder sb = new StringBuilder();
   	sb.append(ControllerConstants.MFUSOP__BOOSTER_PACK);
   	sb.append(" ");
   	sb.append(boosterPackId);
@@ -436,7 +436,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		itemIds.add(id);
   	}
   	
-  	StringBuffer detailSb = new StringBuffer();
+  	StringBuilder detailSb = new StringBuilder();
   	if (null != items && !items.isEmpty()) {
   		detailSb.append(" bItemIds=");
   		String itemIdsCsv = StringUtils.csvList(itemIds);

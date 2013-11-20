@@ -69,31 +69,36 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Map<Integer, List<MonsterReward>> monsterIdsToMonsterRewardTemp = new HashMap<Integer, List<MonsterReward>>();
-          while(rs.next()) {  
-            MonsterReward br = convertRSRowToMonsterReward(rs);
-            if (br != null) {
-              int bid = br.getMonsterId();
-              if (monsterIdsToMonsterRewardTemp.get(bid) == null) {
-                monsterIdsToMonsterRewardTemp.put(bid, new ArrayList<MonsterReward>());
-              }
-              monsterIdsToMonsterRewardTemp.get(bid).add(br);
-            }
-          }
-          monsterIdsToMonsterReward = monsterIdsToMonsterRewardTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+    try {
+    	if (conn != null) {
+    		rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    		if (rs != null) {
+    			try {
+    				rs.last();
+    				rs.beforeFirst();
+    				Map<Integer, List<MonsterReward>> monsterIdsToMonsterRewardTemp = new HashMap<Integer, List<MonsterReward>>();
+    				while(rs.next()) {  
+    					MonsterReward br = convertRSRowToMonsterReward(rs);
+    					if (br != null) {
+    						int bid = br.getMonsterId();
+    						if (monsterIdsToMonsterRewardTemp.get(bid) == null) {
+    							monsterIdsToMonsterRewardTemp.put(bid, new ArrayList<MonsterReward>());
+    						}
+    						monsterIdsToMonsterRewardTemp.get(bid).add(br);
+    					}
+    				}
+    				monsterIdsToMonsterReward = monsterIdsToMonsterRewardTemp;
+    			} catch (SQLException e) {
+    				log.error("problem with database call.", e);
+
+    			}
+    		}    
+    	}
+    } catch (Exception e) {
+    	log.error("monster reward retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   private static void setStaticIdsToMonsterReward() {
@@ -101,27 +106,32 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+    	if (conn != null) {
+    		rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          HashMap<Integer, MonsterReward> idsToMonsterRewardTemp = new HashMap<Integer, MonsterReward>();
-          while(rs.next()) {  //should only be one
-            MonsterReward mr = convertRSRowToMonsterReward(rs);
-            if (mr != null)
-              idsToMonsterRewardTemp.put(mr.getId(), mr);
-          }
-          idsToMonsterReward = idsToMonsterRewardTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+    		if (rs != null) {
+    			try {
+    				rs.last();
+    				rs.beforeFirst();
+    				HashMap<Integer, MonsterReward> idsToMonsterRewardTemp = new HashMap<Integer, MonsterReward>();
+    				while(rs.next()) {  //should only be one
+    					MonsterReward mr = convertRSRowToMonsterReward(rs);
+    					if (mr != null)
+    						idsToMonsterRewardTemp.put(mr.getId(), mr);
+    				}
+    				idsToMonsterReward = idsToMonsterRewardTemp;
+    			} catch (SQLException e) {
+    				log.error("problem with database call.", e);
+
+    			}
+    		}    
+    	}
+    } catch (Exception e) {
+    	log.error("monster reward retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   public static void reload() {

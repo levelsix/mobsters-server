@@ -26,10 +26,19 @@ import com.lvl6.utils.DBConnection;
   public static ClanChatPost getSpecificActiveClanChatPost(int wallPostId) {
     log.debug("retrieving clan chat post with id " + wallPostId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsById(conn, wallPostId, TABLE_NAME);
-    ClanChatPost clanChatPost = convertRSToSingleClanChatPost(rs);
-    DBConnection.get().close(rs, null, conn);
+    ClanChatPost clanChatPost = null;
+    Connection conn = null;
+    ResultSet rs = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsById(conn, wallPostId, TABLE_NAME);
+			clanChatPost = convertRSToSingleClanChatPost(rs);
+			DBConnection.get().close(rs, null, conn);
+		} catch (Exception e) {
+    	log.error("clan chat post retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clanChatPost;
   }
 
@@ -41,10 +50,18 @@ import com.lvl6.utils.DBConnection;
     TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
     absoluteParams.put(DBConstants.CLAN_CHAT_POST__CLAN_ID, clanId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimitLessthan(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_CHAT_POST__ID, limit, lessThanParamsToVals);
-    List<ClanChatPost> clanChatPosts = convertRSToClanChatPosts(rs);
-    DBConnection.get().close(rs, null, conn);
+    List<ClanChatPost> clanChatPosts = new ArrayList<ClanChatPost>();
+    Connection conn = null;
+    ResultSet rs = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimitLessthan(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_CHAT_POST__ID, limit, lessThanParamsToVals);
+			clanChatPosts = convertRSToClanChatPosts(rs);
+		} catch (Exception e) {
+    	log.error("clan chat post retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clanChatPosts;
   }
   
@@ -54,10 +71,18 @@ import com.lvl6.utils.DBConnection;
     TreeMap <String, Object> absoluteParams = new TreeMap<String, Object>();
     absoluteParams.put(DBConstants.CLAN_CHAT_POST__CLAN_ID, clanId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimit(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_CHAT_POST__ID, limit);
-    List<ClanChatPost> clanChatPosts = convertRSToClanChatPosts(rs);
-    DBConnection.get().close(rs, null, conn);
+    List<ClanChatPost> clanChatPosts = new ArrayList<ClanChatPost>();
+    Connection conn = null;
+    ResultSet rs = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAndOrderbydescLimit(conn, absoluteParams, TABLE_NAME, DBConstants.CLAN_CHAT_POST__ID, limit);
+			clanChatPosts = convertRSToClanChatPosts(rs);
+		} catch (Exception e) {
+    	log.error("clan chat post retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return clanChatPosts;
   }
   

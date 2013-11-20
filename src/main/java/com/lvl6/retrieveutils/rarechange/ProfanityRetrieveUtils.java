@@ -35,27 +35,32 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Set<String> oneWordProfanityTemp = new HashSet<String>();
-          while(rs.next()) { 
-            String profanityTerm = convertRSRowToProfanity(rs);
-            if (null != profanityTerm)
-              oneWordProfanityTemp.add(profanityTerm);
-          }
-          oneWordProfanity = oneWordProfanityTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      Set<String> oneWordProfanityTemp = new HashSet<String>();
+			      while(rs.next()) { 
+			        String profanityTerm = convertRSRowToProfanity(rs);
+			        if (null != profanityTerm)
+			          oneWordProfanityTemp.add(profanityTerm);
+			      }
+			      oneWordProfanity = oneWordProfanityTemp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("profanity retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   public static void reload() {

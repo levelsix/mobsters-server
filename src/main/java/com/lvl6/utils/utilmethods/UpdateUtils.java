@@ -861,7 +861,7 @@ public class UpdateUtils implements UpdateUtil {
 			List<String> questions = Collections.nCopies(size, "?");
 			List<Object> values = new ArrayList<Object>();
 			
-			StringBuffer querySb = new StringBuffer();
+			StringBuilder querySb = new StringBuilder();
 			querySb.append("UPDATE ");
 			querySb.append(tableName);
 			querySb.append(" SET ");

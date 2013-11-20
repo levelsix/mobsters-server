@@ -31,10 +31,18 @@ import com.lvl6.utils.DBConnection;
     paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
     paramsToVals.put(DBConstants.CLAN_FOR_USER__STATUS, UserClanStatus.MEMBER.getNumber());
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<UserClan> userClans = grabUserClansFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<UserClan> userClans = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userClans = grabUserClansFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userClans;
   }
 
@@ -48,10 +56,18 @@ import com.lvl6.utils.DBConnection;
     values.add(clanId2);
     values.add(UserClanStatus.MEMBER.getNumber());
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    List<UserClan> userClans = grabUserClansFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<UserClan> userClans = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userClans = grabUserClansFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userClans;
   }
 
@@ -59,10 +75,18 @@ import com.lvl6.utils.DBConnection;
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<UserClan> userClans = grabUserClansFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<UserClan> userClans = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userClans = grabUserClansFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userClans;
   }
 
@@ -70,19 +94,27 @@ import com.lvl6.utils.DBConnection;
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = null;
-    if (ControllerConstants.CLAN__ALLIANCE_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId ||
-        ControllerConstants.CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId) {
-      //some clans will have a shit ton of people.
-      //Getting 1k+ users generates buffer overflow exception
-      rs = DBConnection.get().selectRowsAbsoluteAndLimit(conn, paramsToVals, TABLE_NAME,
-          ControllerConstants.CLAN__ALLIANCE_LEGION_LIMIT_TO_RETRIEVE_FROM_DB);
-    } else {
-      rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<UserClan> userClans = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = null;
+			if (ControllerConstants.CLAN__ALLIANCE_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId ||
+			    ControllerConstants.CLAN__LEGION_CLAN_ID_THAT_IS_EXCEPTION_TO_LIMIT == clanId) {
+			  //some clans will have a shit ton of people.
+			  //Getting 1k+ users generates buffer overflow exception
+			  rs = DBConnection.get().selectRowsAbsoluteAndLimit(conn, paramsToVals, TABLE_NAME,
+			      ControllerConstants.CLAN__ALLIANCE_LEGION_LIMIT_TO_RETRIEVE_FROM_DB);
+			} else {
+			  rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			}
+			userClans = grabUserClansFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    List<UserClan> userClans = grabUserClansFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
     return userClans;
   }
 
@@ -92,10 +124,18 @@ import com.lvl6.utils.DBConnection;
     paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
     paramsToVals.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    UserClan userClan = grabUserClanFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		UserClan userClan = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userClan = grabUserClanFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userClan;
   }
 

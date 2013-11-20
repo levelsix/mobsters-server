@@ -5,8 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,49 +64,75 @@ import com.lvl6.utils.DBConnection;
     return cityIdsToTasks.get(cityId);
   }
   
-//  public static int getNumTapsToRankupCity(int cityId) {
-//    if (cityIdsToTasks == null) {
-//      setStaticCityIdsToTasks();
-//    }
-//    List<Task> tasksForCity = cityIdsToTasks.get(cityId);
-//    
-//    int numTaps = 0;
-//    for (Task t : tasksForCity) {
-//      numTaps += t.getNumForCompletion();
-//    }
-//    
-//    return numTaps;
-//  }
+  public static Set<Integer> getAllTaskIdsForCityId(int cityId) {
+  	log.debug("retrieving all taskIds for cityId=" + cityId);
+  	if (cityIdsToTasks == null) {
+      setStaticCityIdsToTasks();
+    }
+  	List<Task> tasksForCity = null;
+  	tasksForCity = cityIdsToTasks.get(cityId);
+  	
+  	if (null == tasksForCity) {
+  		return new HashSet<Integer>();
+  	}
+  	
+  	Set<Integer> retVal = new HashSet<Integer>();
+  	for (Task t : tasksForCity) {
+  		int taskId = t.getId();
+  		retVal.add(taskId);
+  	}
+  	return retVal;
+  }
+  
+  public static int getCityIdForTask(int taskId) {
+    if (cityIdsToTasks == null) {
+      setStaticCityIdsToTasks();
+    }
+    
+    
+    if (!taskIdsToTasks.containsKey(taskId)) {
+    	return 0;
+    }
+    
+    Task aTask = taskIdsToTasks.get(taskId);
+    int cityId = aTask.getCityId();
+    return cityId;
+  }
 
   private static void setStaticCityIdsToTasks() {
     log.debug("setting static map of cityId to tasks");
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Map<Integer, List<Task>> cityIdToTasksTemp = new HashMap<Integer, List<Task>>();
-          while(rs.next()) {  //should only be one
-            Task task = convertRSRowToTask(rs);
-            if (task != null) {
-              if (cityIdToTasksTemp.get(task.getCityId()) == null) {
-                cityIdToTasksTemp.put(task.getCityId(), new ArrayList<Task>());
-              }
-              cityIdToTasksTemp.get(task.getCityId()).add(task);
-            }
-          }
-          cityIdsToTasks = cityIdToTasksTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      Map<Integer, List<Task>> cityIdToTasksTemp = new HashMap<Integer, List<Task>>();
+			      while(rs.next()) {  //should only be one
+			        Task task = convertRSRowToTask(rs);
+			        if (task != null) {
+			          if (cityIdToTasksTemp.get(task.getCityId()) == null) {
+			            cityIdToTasksTemp.put(task.getCityId(), new ArrayList<Task>());
+			          }
+			          cityIdToTasksTemp.get(task.getCityId()).add(task);
+			        }
+			      }
+			      cityIdsToTasks = cityIdToTasksTemp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("task retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   private static void setStaticTaskIdsToTasks() {
@@ -112,27 +140,32 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          HashMap<Integer, Task> taskIdsToTasksTemp = new HashMap<Integer, Task>();
-          while(rs.next()) {  //should only be one
-            Task task = convertRSRowToTask(rs);
-            if (task != null)
-              taskIdsToTasksTemp.put(task.getId(), task);
-          }
-          taskIdsToTasks = taskIdsToTasksTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      HashMap<Integer, Task> taskIdsToTasksTemp = new HashMap<Integer, Task>();
+			      while(rs.next()) {  //should only be one
+			        Task task = convertRSRowToTask(rs);
+			        if (task != null)
+			          taskIdsToTasksTemp.put(task.getId(), task);
+			      }
+			      taskIdsToTasks = taskIdsToTasksTemp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("task retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   public static void reload() {

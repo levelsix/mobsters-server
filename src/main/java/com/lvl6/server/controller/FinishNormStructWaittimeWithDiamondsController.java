@@ -184,7 +184,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int userStructId = userStruct.getId();
     int structId = userStruct.getStructId();
     
-    StringBuffer structDetails = new StringBuffer(); //   + structId;
+    StringBuilder structDetails = new StringBuilder(); //   + structId;
     if (null == formerStruct) {
     	//no previous guy so user speeding up building first building
     	structDetails.append(" construction ");

@@ -28,10 +28,18 @@ import com.lvl6.utils.DBConnection;
 
 
 	public static List<ExpansionPurchaseForUser> getUserCityExpansionDatasForUserId(int userId) {
-		Connection conn = DBConnection.get().getConnection();
-		ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-		List<ExpansionPurchaseForUser> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
-		DBConnection.get().close(rs, null, conn);
+		Connection conn = null;
+		ResultSet rs = null;
+		List<ExpansionPurchaseForUser> userCityExpansionDatas = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
+		} catch (Exception e) {
+    	log.error("expansion purchase for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
 		return userCityExpansionDatas;
 	}
 	
@@ -41,11 +49,19 @@ import com.lvl6.utils.DBConnection;
 		absoluteConditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__X_POSITION, xPosition);
 		absoluteConditionParams.put(DBConstants.EXPANSION_PURCHASE_FOR_USER__Y_POSITION, yPosition);
 		
-		Connection conn = DBConnection.get().getConnection();
-		ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn,
-				absoluteConditionParams, TABLE_NAME);
-		List<ExpansionPurchaseForUser> userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
-		DBConnection.get().close(rs, null, conn);
+		Connection conn = null;
+		ResultSet rs = null;
+		List<ExpansionPurchaseForUser> userCityExpansionDatas = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn,
+					absoluteConditionParams, TABLE_NAME);
+			userCityExpansionDatas = grabUserCityExpansionDatasFromRS(rs);
+		} catch (Exception e) {
+    	log.error("expansion purchase for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
 		
 		log.info("userCityExpansionDatas=" + userCityExpansionDatas);
 		
@@ -73,11 +89,11 @@ import com.lvl6.utils.DBConnection;
 
 				}
 			}
-		}catch(Exception e) {
-
-		}finally {
-			DBConnection.get().close(rs, null, conn);
-		}
+		} catch (Exception e) {
+    	log.error("expansion purchase for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
 		log.warn("No user expanions found when counting for user id="+userId);
 		return 0;
 	}

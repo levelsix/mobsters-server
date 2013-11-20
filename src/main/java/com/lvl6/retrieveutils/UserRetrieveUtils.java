@@ -43,7 +43,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	List<Object> params = new ArrayList<Object>();
   	params.addAll(facebookIds);
 
-  	StringBuffer querySb = new StringBuffer();
+  	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT ");
   	querySb.append(DBConstants.USER__ID);
   	querySb.append(" FROM ");
@@ -87,7 +87,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	
   	List<Object> params = new ArrayList<Object>();
   	
-  	StringBuffer querySb = new StringBuffer();
+  	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT * FROM ");
   	querySb.append(TABLE_NAME);
   	querySb.append(" WHERE ");
@@ -123,9 +123,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	
   	String query = querySb.toString();
   	log.info("query=" + query + "\t values=" + params);
-  	Connection conn = DBConnection.get().getConnection();
-  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
-  	Map<Integer, User> userMap = convertRSToUserIdToUsersMap(rs);
+  	Connection conn = null;
+  	ResultSet rs = null;
+  	Map<Integer, User> userMap = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
+			userMap = convertRSToUserIdToUsersMap(rs);
+		} catch (Exception e) {
+    	log.error("user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userMap;
   }
   
@@ -175,7 +184,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
 	  }catch(Exception e) {
 		  
 	  }finally {
-		DBConnection.get().close(rs, null, conn);
+	  	DBConnection.get().close(rs, null, conn);
 	  }
 	  log.warn("No users found when counting users for isFake="+isFake);
 	  return 0;
@@ -209,10 +218,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     query += StringUtils.getListInString(condClauses, "or") + ")";
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    Map<Integer, User> userIdToUserMap = convertRSToUserIdToUsersMap(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, User> userIdToUserMap = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userIdToUserMap = convertRSToUserIdToUsersMap(rs);
+		} catch (Exception e) {
+    	log.error("user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userIdToUserMap;
   }
 
@@ -222,10 +239,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
     absoluteConditionParams.put(DBConstants.USER__CLAN_ID, clanId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, DBConstants.TABLE_USER);
-    List<User> usersList = convertRSToUsers(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<User> usersList = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, DBConstants.TABLE_USER);
+			usersList = convertRSToUsers(rs);
+		} catch (Exception e) {
+    	log.error("user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return usersList;
   }
 
@@ -337,12 +362,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
     paramsToVals.put(DBConstants.USER__REFERRAL_CODE, queryString);
     paramsToVals.put(DBConstants.USER__NAME, queryString);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
-    
-    List<User> users = convertRSToUsers(rs);
-    if (users == null) users = new ArrayList<User>();
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<User> users = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
+			
+			users = convertRSToUsers(rs);
+			if (users == null) users = new ArrayList<User>();
+		} catch (Exception e) {
+    	log.error("user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return users;
   }
   
@@ -351,10 +384,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Map <String, Object> paramsToVals = new HashMap<String, Object>();
     paramsToVals.put(DBConstants.USER__UDID, UDID);
 
+    User user = null;
     Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
-    User user = convertRSToUser(rs);
-    DBConnection.get().close(rs, null, conn);
+    ResultSet rs = null;
+		try {
+			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
+			user = convertRSToUser(rs);
+			DBConnection.get().close(rs, null, conn);
+		} catch (Exception e) {
+    	log.error("user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return user;
   }
 
@@ -363,10 +404,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Map <String, Object> paramsToVals = new HashMap<String, Object>();
     paramsToVals.put(DBConstants.USER__REFERRAL_CODE, referralCode);
 
+    User user = null;
     Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
-    User user = convertRSToUser(rs);
-    DBConnection.get().close(rs, null, conn);
+    ResultSet rs = null;
+		try {
+			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
+			user = convertRSToUser(rs);
+			DBConnection.get().close(rs, null, conn);
+		} catch (Exception e) {
+    	log.error("user  retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return user;
   }
 
@@ -424,217 +473,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     return null;
   }
-  
-  /*
-  public List<User> retrieveUsersBasedOnElo1(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
-  		
-  		Connection conn = DBConnection.get().getConnection();
-	    List<String> columns = null; //all columns
-	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> relativeGreaterThanConditionParams =
-	        new HashMap<String, Object>();
-	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> likeCondParams = null;
-	    String tablename = TABLE_NAME;
-	    String conddelim = "AND";
-	    String orderByColumn = null;
-	    boolean orderByAsc = false;
-	    int limit = 68;
-	    boolean random = true;
-  
-	    //trying to improve elo range calculation readability
-	    int distance = ControllerConstants.BATTLE__ELO_DISTANCE_ONE;
-	    int eloMin = elo - distance;
-	    int eloMax = elo + distance;
-	    int lastViewedTimeMillisBuffer = ControllerConstants.BATTLE__LAST_VIEWED_TIME_MILLIS_ADDEND;
-	    		
-	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
-	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, eloMin);
-	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, eloMax);
-	    Timestamp timestamp = new Timestamp(clientTime.getTime());
-	    
-	    //user's shield should have ended before now
-	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
-	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - lastViewedTimeMillisBuffer);
-	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
-	    
-	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
-	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
-	    absoluteConditionParams.put(seenUserIdsString, 1);
-
-	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
-		        absoluteConditionParams, relativeGreaterThanConditionParams,
-		        relativeLessThanConditionParams, likeCondParams,
-		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
-	    
-	    List<User> queueList = convertRSToUsers(rs);
-	    DBConnection.get().close(rs, null, conn);
-	    
-	    //make sure attacker himself not chosen
-	    for(User u : queueList) {
-	    	if(u.getId() == attacker.getId())
-	    		queueList.remove(u);
-	    }
-	    
-	    return queueList;
-  }
-  
-  
-  public List<User> retrieveUsersBasedOnElo2(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
-		
-		Connection conn = DBConnection.get().getConnection();
-		List<String> columns = null; //all columns
-		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-		Map<String, Object> relativeGreaterThanConditionParams =
-				new HashMap<String, Object>();
-		Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
-		Map<String, Object> likeCondParams = null;
-		String tablename = TABLE_NAME;
-		String conddelim = "AND";
-		String orderByColumn = null;
-		boolean orderByAsc = false;
-		int limit = 13;
-		boolean random = true;
-
-		absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
-		relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo-200);
-		relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo-100);
-		Timestamp timestamp = new Timestamp(clientTime.getTime());
-		relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
-		Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
-		relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
-
-		String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
-		seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
-		absoluteConditionParams.put(seenUserIdsString, 1);
-
-		ResultSet rs = DBConnection.get().selectRows(conn, columns,
-				absoluteConditionParams, relativeGreaterThanConditionParams,
-				relativeLessThanConditionParams, likeCondParams,
-				tablename, conddelim, orderByColumn, orderByAsc, limit, random);
-
-		List<User> queueList = convertRSToUsers(rs);
-		DBConnection.get().close(rs, null, conn);
-
-		return queueList;
-  }
-  
-  public List<User> retrieveUsersBasedOnElo3(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
-		
-		Connection conn = DBConnection.get().getConnection();
-	    List<String> columns = null; //all columns
-	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> relativeGreaterThanConditionParams =
-	        new HashMap<String, Object>();
-	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> likeCondParams = null;
-	    String tablename = TABLE_NAME;
-	    String conddelim = "AND";
-	    String orderByColumn = null;
-	    boolean orderByAsc = false;
-	    int limit = 13;
-	    boolean random = true;
-
-	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
-	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo+100);
-	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo+200);
-	    Timestamp timestamp = new Timestamp(clientTime.getTime());
-	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
-	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
-	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
-	    
-	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
-	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
-	    absoluteConditionParams.put(seenUserIdsString, 1);
-
-	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
-		        absoluteConditionParams, relativeGreaterThanConditionParams,
-		        relativeLessThanConditionParams, likeCondParams,
-		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
-	    
-	    List<User> queueList = convertRSToUsers(rs);
-	    DBConnection.get().close(rs, null, conn);
-	    
-	    return queueList;
-}
-  
-  public List<User> retrieveUsersBasedOnElo4(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
-		
-		Connection conn = DBConnection.get().getConnection();
-	    List<String> columns = null; //all columns
-	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> relativeGreaterThanConditionParams =
-	        new HashMap<String, Object>();
-	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> likeCondParams = null;
-	    String tablename = TABLE_NAME;
-	    String conddelim = "AND";
-	    String orderByColumn = null;
-	    boolean orderByAsc = false;
-	    int limit = 3;
-	    boolean random = true;
-
-	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
-	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo-300);
-	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo-200);
-	    Timestamp timestamp = new Timestamp(clientTime.getTime());
-	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
-	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
-	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
-	    
-	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
-	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
-	    absoluteConditionParams.put(seenUserIdsString, 1);
-
-	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
-		        absoluteConditionParams, relativeGreaterThanConditionParams,
-		        relativeLessThanConditionParams, likeCondParams,
-		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
-	    
-	    List<User> queueList = convertRSToUsers(rs);
-	    DBConnection.get().close(rs, null, conn);
-	    
-	    return queueList;
-}
-  
-  public List<User> retrieveUsersBasedOnElo5(User attacker, int elo, List<Integer> seenUserIds, Date clientTime) {
-		
-		Connection conn = DBConnection.get().getConnection();
-	    List<String> columns = null; //all columns
-	    Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> relativeGreaterThanConditionParams =
-	        new HashMap<String, Object>();
-	    Map<String, Object> relativeLessThanConditionParams = new HashMap<String, Object>();
-	    Map<String, Object> likeCondParams = null;
-	    String tablename = TABLE_NAME;
-	    String conddelim = "AND";
-	    String orderByColumn = null;
-	    boolean orderByAsc = false;
-	    int limit = 13;
-	    boolean random = true;
-
-	    absoluteConditionParams.put(DBConstants.USER__HAS_BEGINNER_SHIELD, false);
-	    relativeGreaterThanConditionParams.put(DBConstants.USER__ELO, elo+200);
-	    relativeLessThanConditionParams.put(DBConstants.USER__ELO, elo+300);
-	    Timestamp timestamp = new Timestamp(clientTime.getTime());
-	    relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
-	    Timestamp timestamp2 = new Timestamp(clientTime.getTime() - 600000);
-	    relativeLessThanConditionParams.put(DBConstants.USER__LAST_QUEUE_TIME, timestamp2);
-	    
-	    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
-	    seenUserIdsString += StringUtils.csvIntList(seenUserIds) + ") and 1";
-	    absoluteConditionParams.put(seenUserIdsString, 1);
-
-	    ResultSet rs = DBConnection.get().selectRows(conn, columns,
-		        absoluteConditionParams, relativeGreaterThanConditionParams,
-		        relativeLessThanConditionParams, likeCondParams,
-		        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
-	    
-	    List<User> queueList = convertRSToUsers(rs);
-	    DBConnection.get().close(rs, null, conn);
-	    
-	    return queueList;
-  }*/
   
   public List<User> retrieveCompleteQueueList(User attacker, int elo,
   		List<Integer> seenUserIds, Date clientTime) {
@@ -721,13 +559,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
     seenUserIdsString += StringUtils.csvList(seenUserIds) + ") and 1";
     absoluteConditionParams.put(seenUserIdsString, 1);
 
-    ResultSet rs = DBConnection.get().selectRows(conn, columns,
-	        absoluteConditionParams, relativeGreaterThanConditionParams,
-	        relativeLessThanConditionParams, likeCondParams,
-	        tablename, conddelim, orderByColumn, orderByAsc, limit, random);
-    
-    List<User> queueList = convertRSToUsers(rs);
-    DBConnection.get().close(rs, null, conn);
+    ResultSet rs = null;
+		List<User> queueList = new ArrayList<User>();
+		try {
+			rs = DBConnection.get().selectRows(conn, columns,
+			      absoluteConditionParams, relativeGreaterThanConditionParams,
+			      relativeLessThanConditionParams, likeCondParams,
+			      tablename, conddelim, orderByColumn, orderByAsc, limit, random);
+			
+			queueList = convertRSToUsers(rs);
+		} catch (Exception e) {
+    	log.error(" retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     
     return queueList;
   }

@@ -320,7 +320,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
 		Map<String, String> reasonsForChanges = new HashMap<String, String>();
-		StringBuffer reasonForChange = new StringBuffer();
+		StringBuilder reasonForChange = new StringBuilder();
 		reasonForChange.append(ControllerConstants.UCHRFC__ENHANCING);
 		
 		String cash = MiscMethods.cash;

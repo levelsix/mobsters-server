@@ -50,7 +50,7 @@ public class StringUtils {
 //	}
 
   public  static String csvList(List<?> clauses) {
-    StringBuffer toreturn = new StringBuffer();
+    StringBuilder toreturn = new StringBuilder();
     if (clauses == null || clauses.size() < 1) {
       log.error("invalid parameters passed into StringUtils csvList. clauses=" + clauses);
       return "";

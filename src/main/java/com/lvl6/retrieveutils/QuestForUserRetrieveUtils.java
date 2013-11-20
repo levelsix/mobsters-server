@@ -33,10 +33,18 @@ import com.lvl6.utils.DBConnection;
     paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_COMPLETE, false);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<QuestForUser> userQuests = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userQuests = convertRSToUserQuests(rs);
+		} catch (Exception e) {
+    	log.error("quest for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userQuests;
   }
   
@@ -47,10 +55,18 @@ import com.lvl6.utils.DBConnection;
     paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
     paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<QuestForUser> userQuests = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userQuests = convertRSToUserQuests(rs);
+		} catch (Exception e) {
+    	log.error("quest for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userQuests;
   }
   
@@ -60,10 +76,18 @@ import com.lvl6.utils.DBConnection;
   	paramsToVals.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
   	paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     
-  	Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    Map<Integer, QuestForUser> questIdsToUnredeemedUserQuests = convertRSToUserQuestsMap(rs);
-    DBConnection.get().close(rs, null, conn);
+  	Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, QuestForUser> questIdsToUnredeemedUserQuests = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			questIdsToUnredeemedUserQuests = convertRSToUserQuestsMap(rs);
+		} catch (Exception e) {
+    	log.error("quest for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return questIdsToUnredeemedUserQuests;
   }
   
@@ -71,10 +95,18 @@ import com.lvl6.utils.DBConnection;
   public List<QuestForUser> getUserQuestsForUser(int userId) {
     log.debug("retrieving user quests for userId " + userId);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    List<QuestForUser> userQuests = convertRSToUserQuests(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<QuestForUser> userQuests = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			userQuests = convertRSToUserQuests(rs);
+		} catch (Exception e) {
+    	log.error("quest for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userQuests;
   }
   
@@ -85,10 +117,18 @@ import com.lvl6.utils.DBConnection;
     paramsToVals.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
     paramsToVals.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    QuestForUser userQuest = convertRSToSingleUserQuest(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		QuestForUser userQuest = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userQuest = convertRSToSingleUserQuest(rs);
+		} catch (Exception e) {
+    	log.error("quest for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userQuest;
   }
   

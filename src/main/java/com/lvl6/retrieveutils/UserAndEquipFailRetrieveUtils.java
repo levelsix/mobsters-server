@@ -29,10 +29,18 @@ import com.lvl6.utils.DBConnection;
     paramsToVals.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID, equipId);
     paramsToVals.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID, userId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    UserAndEquipFail userClan = grabUserAndEquipFailFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		UserAndEquipFail userClan = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userClan = grabUserAndEquipFailFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user and equip fail retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userClan;
   }
 
@@ -57,10 +65,18 @@ import com.lvl6.utils.DBConnection;
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID, userId);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-    List<UserAndEquipFail> userClans = grabUserAndEquipFailsFromRS(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<UserAndEquipFail> userClans = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			userClans = grabUserAndEquipFailsFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user and equip fail retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return userClans;
   }
 

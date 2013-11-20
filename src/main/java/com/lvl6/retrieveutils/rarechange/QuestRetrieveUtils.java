@@ -74,27 +74,32 @@ import com.lvl6.utils.QuestGraph;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Map<Integer, Quest> tmp = new HashMap<Integer, Quest>();
-          while(rs.next()) {
-            Quest quest = convertRSRowToQuest(rs);
-            if (quest != null) {
-                tmp.put(quest.getId(), quest);
-            }
-          }
-          questIdsToQuests = tmp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      Map<Integer, Quest> tmp = new HashMap<Integer, Quest>();
+			      while(rs.next()) {
+			        Quest quest = convertRSRowToQuest(rs);
+			        if (quest != null) {
+			            tmp.put(quest.getId(), quest);
+			        }
+			      }
+			      questIdsToQuests = tmp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }
+			}
+		} catch (Exception e) {
+    	log.error("quest retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs,  null, conn);
   }
 
   private static void setStaticQuestGraph() {
@@ -102,29 +107,34 @@ import com.lvl6.utils.QuestGraph;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+			if (conn != null) {
+			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          List<Quest> quests = new ArrayList<Quest>();
-          while(rs.next()) {  //should only be one
-            Quest quest = convertRSRowToQuest(rs);
-            if (quest != null) {
-                quests.add(quest);
-            }
-          }
-          QuestGraph tmp = new QuestGraph(quests);
-          questGraph = tmp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      List<Quest> quests = new ArrayList<Quest>();
+			      while(rs.next()) {  //should only be one
+			        Quest quest = convertRSRowToQuest(rs);
+			        if (quest != null) {
+			            quests.add(quest);
+			        }
+			      }
+			      QuestGraph tmp = new QuestGraph(quests);
+			      questGraph = tmp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("quest retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   public static void reload() {

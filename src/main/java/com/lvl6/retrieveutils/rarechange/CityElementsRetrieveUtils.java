@@ -70,30 +70,35 @@ import com.lvl6.utils.DBConnection;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          Map <Integer, List<CityElement>> cityIdToCityElementsTemp = new HashMap<Integer, List<CityElement>>();
-          while(rs.next()) {
-            CityElement nce = convertRSRowToCityElement(rs);
-            if (nce != null) {
-              if (cityIdToCityElementsTemp.get(nce.getCityId()) == null) {
-                cityIdToCityElementsTemp.put(nce.getCityId(), new ArrayList<CityElement>());
-              }
-              cityIdToCityElementsTemp.get(nce.getCityId()).add(nce);
-            }
-          }
-          cityIdToCityElements = cityIdToCityElementsTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }   
+    try {
+    	if (conn != null) {
+    		rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    		if (rs != null) {
+    			try {
+    				rs.last();
+    				rs.beforeFirst();
+    				Map <Integer, List<CityElement>> cityIdToCityElementsTemp = new HashMap<Integer, List<CityElement>>();
+    				while(rs.next()) {
+    					CityElement nce = convertRSRowToCityElement(rs);
+    					if (nce != null) {
+    						if (cityIdToCityElementsTemp.get(nce.getCityId()) == null) {
+    							cityIdToCityElementsTemp.put(nce.getCityId(), new ArrayList<CityElement>());
+    						}
+    						cityIdToCityElementsTemp.get(nce.getCityId()).add(nce);
+    					}
+    				}
+    				cityIdToCityElements = cityIdToCityElementsTemp;
+    			} catch (SQLException e) {
+    				log.error("problem with database call.", e);
+
+    			}
+    		}   
+    	}
+    } catch (Exception e) {
+    	log.error("city elements retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   private static CityElement convertRSRowToCityElement(ResultSet rs) throws SQLException {

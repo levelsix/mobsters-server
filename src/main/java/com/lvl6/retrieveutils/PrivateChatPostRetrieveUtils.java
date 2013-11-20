@@ -31,7 +31,6 @@ import com.lvl6.utils.DBConnection;
     log.info("retrieving " + limit + " private chat posts before certain postId "
       + postId + " for userOne " + userOne + " and userTwo" + userTwo);
     
-    Connection conn = DBConnection.get().getConnection();
     String query = "";
     List<Object> values = new ArrayList<Object>();
     query += 
@@ -54,10 +53,18 @@ import com.lvl6.utils.DBConnection;
     query += "ORDER BY " + DBConstants.USER_PRIVATE_CHAT_POSTS__ID + " DESC  LIMIT ?";
     values.add(limit);
     
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    
-    List<PrivateChatPost> privateChatPosts = convertRSToPrivateChatPosts(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		List<PrivateChatPost> privateChatPosts = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			privateChatPosts = convertRSToPrivateChatPosts(rs);
+		} catch (Exception e) {
+    	log.error("private chat post retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return privateChatPosts;
   }
   
@@ -76,7 +83,6 @@ import com.lvl6.utils.DBConnection;
       otherPersonColumn = DBConstants.USER_PRIVATE_CHAT_POSTS__RECIPIENT_ID;
       column = DBConstants.USER_PRIVATE_CHAT_POSTS__POSTER_ID;
     }
-    Connection conn = DBConnection.get().getConnection();
     List<Object> values = new ArrayList<Object>();
     String query = "";
     String subquery = "";
@@ -101,10 +107,18 @@ import com.lvl6.utils.DBConnection;
     values.add(limit);
     
     
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    
-    Map<Integer, PrivateChatPost> privateChatPosts = convertRSToMapIdToPrivateChatPost(rs);
-    DBConnection.get().close(rs, null, conn);
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, PrivateChatPost> privateChatPosts = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			privateChatPosts = convertRSToMapIdToPrivateChatPost(rs);
+		} catch (Exception e) {
+    	log.error("private chat post retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
     return privateChatPosts;
   }
   

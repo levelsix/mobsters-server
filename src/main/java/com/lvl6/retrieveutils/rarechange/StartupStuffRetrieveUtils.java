@@ -59,30 +59,35 @@ import com.lvl6.utils.RetrieveUtils;
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
-    if (conn != null) {
-      Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-      absoluteConditionParams.put(DBConstants.ALERT_ON_STARTUP__IS_ACTIVE, true);
-      rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
-      //rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+    try {
+			if (conn != null) {
+			  Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+			  absoluteConditionParams.put(DBConstants.ALERT_ON_STARTUP__IS_ACTIVE, true);
+			  rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
+			  //rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
 
-      if (rs != null) {
-        try {
-          rs.last();
-          rs.beforeFirst();
-          List<String> noticesTemp = new ArrayList<String>();
-          while(rs.next()) { 
-            String noticesTerm = convertRSRowToAlerts(rs);
-            if (null != noticesTerm)
-              noticesTemp.add(noticesTerm);
-          }
-          notices = noticesTemp;
-        } catch (SQLException e) {
-          log.error("problem with database call.", e);
-          
-        }
-      }    
+			  if (rs != null) {
+			    try {
+			      rs.last();
+			      rs.beforeFirst();
+			      List<String> noticesTemp = new ArrayList<String>();
+			      while(rs.next()) { 
+			        String noticesTerm = convertRSRowToAlerts(rs);
+			        if (null != noticesTerm)
+			          noticesTemp.add(noticesTerm);
+			      }
+			      notices = noticesTemp;
+			    } catch (SQLException e) {
+			      log.error("problem with database call.", e);
+			      
+			    }
+			  }    
+			}
+		} catch (Exception e) {
+    	log.error("startup stuff retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
     }
-    DBConnection.get().close(rs, null, conn);
   }
 
   public static void reload() {
