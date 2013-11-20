@@ -30,6 +30,7 @@ import com.lvl6.utils.DBConnection;
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
     TaskStageForUser tsfu = convertRSToUserTask(rs);
+    DBConnection.get().close(rs, null, conn);
     return tsfu;
   }
   
@@ -40,6 +41,7 @@ import com.lvl6.utils.DBConnection;
   	
   	ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
   	List<TaskStageForUser> tsfuList = convertRSToUserTaskStageList(rs);
+    DBConnection.get().close(rs, null, conn);
   	return tsfuList;
   }
   
@@ -48,6 +50,7 @@ import com.lvl6.utils.DBConnection;
     
     ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
     TaskStageForUser ut = convertRSToUserTask(rs);
+    DBConnection.get().close(rs, null, conn);
     return ut;
   }
   
