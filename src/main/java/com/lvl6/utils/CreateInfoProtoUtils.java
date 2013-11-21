@@ -76,7 +76,9 @@ import com.lvl6.proto.QuestProto.FullQuestProto.QuestType;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullStructureProto;
+import com.lvl6.proto.StructureProto.FullStructureProto.StructType;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
+import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
@@ -511,25 +513,37 @@ public class CreateInfoProtoUtils {
   public static FullStructureProto createFullStructureProtoFromStructure(Structure s) {
     FullStructureProto.Builder builder = FullStructureProto.newBuilder();
     builder.setStructId(s.getId());
-    builder.setName(s.getName());
-    builder.setLevel(s.getLevel());
-    builder.setIncome(s.getIncome());
-    builder.setMinutesToGain(s.getMinutesToGain());
-    builder.setMinutesToBuild(s.getMinutesToBuild());
-    builder.setBuildPrice(s.getBuildPrice());
-    builder.setIsPremiumCurrency(s.isPremiumCurrency());
-    builder.setSellPrice(s.getSellPrice());
-    builder.setMinLevel(s.getMinLevel());
-    builder.setXLength(s.getxLength());
-    builder.setYLength(s.getyLength());
-    builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
     
-    if (s.getSuccessorStructId() > 0) {
-    	builder.setSuccessorStructId(s.getSuccessorStructId());
+    String aStr = s.getName();
+    if (null != aStr) {
+    	builder.setName(s.getName());
     }
-    //not really needed, but what the hey
+    
+    builder.setLevel(s.getLevel());
+    aStr = s.getStructType();
+    if (null != aStr) {
+    	StructType t = StructType.valueOf(aStr);
+    	builder.setStructType(t);
+    }
+    
+    aStr = s.getBuildResourceType();
+    if (null != aStr) {
+    	ResourceType rt = ResourceType.valueOf(aStr);
+    	builder.setBuildResourceType(rt);
+    }
+    
+    builder.setBuildCost(s.getBuildCost());
+    builder.setMinutesToBuild(s.getMinutesToBuild());
+    builder.setPrerequisiteTownHallId(s.getRequiredTownHallId());
+    builder.setWidth(s.getWidth());
+    builder.setHeight(s.getHeight());
+    builder.setSpriteImgName(s.getSpriteImgName());
+    
     if (s.getPredecessorStructId() > 0) {
     	builder.setPredecessorStructId(s.getPredecessorStructId());
+    }
+    if (s.getSuccessorStructId() > 0) {
+    	builder.setSuccessorStructId(s.getSuccessorStructId());
     }
     
     return builder.build();

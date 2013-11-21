@@ -115,15 +115,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//charge the user  	
-  	int buildPrice = upgradedStruct.getBuildPrice();
+  	int buildCost = upgradedStruct.getBuildCost();
   	
   	int gemCost = 0;
   	int cashCost = 0;
-  	if (upgradedStruct.isPremiumCurrency()) {
-  		gemCost = buildPrice;
-  	} else {
-  		cashCost = buildPrice;
-  	}
+  		cashCost = buildCost;
   	
     int gemChange = -1*gemCost;
     int cashChange = -1*cashCost;
@@ -172,20 +168,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     
-    int buildPrice = upgradedStruct.getBuildPrice();
-    if (upgradedStruct.isPremiumCurrency()) {
-    	if (user.getGems() < buildPrice) {
-    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
-    		log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + buildPrice);
-    		return false;
-    	}
-    } else {
-    	if (user.getCash() < buildPrice) {
-    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
-    		log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + buildPrice);
-    		return false;
-    	}
-    }
+//    int buildPrice = upgradedStruct.getBuildPrice();
+//    if (upgradedStruct.isPremiumCurrency()) {
+//    	if (user.getGems() < buildPrice) {
+//    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
+//    		log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + buildPrice);
+//    		return false;
+//    	}
+//    } else {
+//    	if (user.getCash() < buildPrice) {
+//    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
+//    		log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + buildPrice);
+//    		return false;
+//    	}
+//    }
     //TODO: only make one user struct retrieve call 
     List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
     if (userStructs != null) {

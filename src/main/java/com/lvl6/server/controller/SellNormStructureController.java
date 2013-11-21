@@ -65,59 +65,60 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       struct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
     }
 
+    //selling structures is not allowed anymore
     server.lockPlayer(userId, this.getClass().getSimpleName());
     try {
-      User user = null;
-      if (userStruct != null) {
-        user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-        int previousCash = 0;
-        int previousGems = 0;
-        if (user != null && struct != null && userId == userStruct.getUserId()) {
-          previousCash = user.getCash();
-          previousGems = user.getGems();
-          
-          int gemChange = 0;
-          int cashChange = 0;
-          
-          if (struct.isPremiumCurrency()) {
-          	gemChange = struct.getSellPrice();
-          } else {
-          	cashChange = struct.getSellPrice();
-          }
-          
-          if (!user.updateRelativeDiamondsCoinsExperienceNaive(gemChange, cashChange, 0)) {
-            resBuilder.setStatus(SellNormStructureStatus.FAIL);
-            log.error("problem with giving user " + gemChange + " gems and " + cashChange + " cashs");
-          } else {
-            if (!DeleteUtils.get().deleteUserStruct(userStructId)) {
-              resBuilder.setStatus(SellNormStructureStatus.FAIL);
-              log.error("problem with deleting user struct with user struct id " + userStructId);
-            } else {
-              resBuilder.setStatus(SellNormStructureStatus.SUCCESS);                      
-            }
-            writeToUserCurrencyHistory(user, userStruct, struct, curTime, gemChange,
-            		cashChange, previousCash, previousGems);
-          }
-        } else {
-          resBuilder.setStatus(SellNormStructureStatus.FAIL);
-          log.error("parameter null, struct doesn't belong to user, or struct is not complete. user="
-              + user + ", struct=" + struct + ", userStruct=" + userStruct);
-        }
-      } else {
-        resBuilder.setStatus(SellNormStructureStatus.FAIL);       
-        log.error("no user struct with id " + userStructId);
-      }
+//      User user = null;
+//      if (userStruct != null) {
+//        user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+//        int previousCash = 0;
+//        int previousGems = 0;
+//        if (user != null && struct != null && userId == userStruct.getUserId()) {
+//          previousCash = user.getCash();
+//          previousGems = user.getGems();
+//          
+//          int gemChange = 0;
+//          int cashChange = 0;
+//          
+//          if (struct.isPremiumCurrency()) {
+//          	gemChange = struct.getSellPrice();
+//          } else {
+//          	cashChange = struct.getSellPrice();
+//          }
+//          
+//          if (!user.updateRelativeDiamondsCoinsExperienceNaive(gemChange, cashChange, 0)) {
+//            resBuilder.setStatus(SellNormStructureStatus.FAIL);
+//            log.error("problem with giving user " + gemChange + " gems and " + cashChange + " cashs");
+//          } else {
+//            if (!DeleteUtils.get().deleteUserStruct(userStructId)) {
+//              resBuilder.setStatus(SellNormStructureStatus.FAIL);
+//              log.error("problem with deleting user struct with user struct id " + userStructId);
+//            } else {
+//              resBuilder.setStatus(SellNormStructureStatus.SUCCESS);                      
+//            }
+//            writeToUserCurrencyHistory(user, userStruct, struct, curTime, gemChange,
+//            		cashChange, previousCash, previousGems);
+//          }
+//        } else {
+//          resBuilder.setStatus(SellNormStructureStatus.FAIL);
+//          log.error("parameter null, struct doesn't belong to user, or struct is not complete. user="
+//              + user + ", struct=" + struct + ", userStruct=" + userStruct);
+//        }
+//      } else {
+//        resBuilder.setStatus(SellNormStructureStatus.FAIL);       
+//        log.error("no user struct with id " + userStructId);
+//      }
 
       SellNormStructureResponseEvent resEvent = new SellNormStructureResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
       resEvent.setSellNormStructureResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
 
-      if (user != null) {
-        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
-        resEventUpdate.setTag(event.getTag());
-        server.writeEvent(resEventUpdate);
-      }
+//      if (user != null) {
+//        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+//        resEventUpdate.setTag(event.getTag());
+//        server.writeEvent(resEventUpdate);
+//      }
 
     } catch (Exception e) {
       log.error("exception in SellNormStructure processEvent", e);

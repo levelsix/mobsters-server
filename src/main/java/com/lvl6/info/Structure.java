@@ -4,44 +4,39 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = 3987603240365836181L;
+	private static final long serialVersionUID = -149493349319465229L;
 	private int id;
 	private String name;
 	private int level;
-	private int income;
-	private int minutesToGain;
+	private String structType;
+	private String buildResourceType;
+	private int buildCost;
 	private int minutesToBuild;
-	private int buildPrice;
-	private boolean isPremiumCurrency;
-	private int sellPrice;
-	private int minLevel;
-	private int xLength;
-	private int yLength;
-	private int imgVerticalPixelOffset;
-	private int successorStructId;
+	private int requiredTownHallId;
+	private int width;
+	private int height;
+	private String spriteImgName;
 	private int predecessorStructId;
+	private int successorStructId;
 	
-	public Structure(int id, String name, int level, int income,
-			int minutesToGain, int minutesToBuild, int buildPrice,
-			boolean isPremiumCurrency, int sellPrice, int minLevel, int xLength,
-			int yLength, int imgVerticalPixelOffset, int successorStructId,
-			int predecessorStructId) {
+	public Structure(int id, String name, int level, String structType,
+			String buildResourceType, int buildCost, int minutesToBuild,
+			int requiredTownHallId, int width, int height, String spriteImgName,
+			int predecessorStructId, int successorStructId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.level = level;
-		this.income = income;
-		this.minutesToGain = minutesToGain;
+		this.structType = structType;
+		this.buildResourceType = buildResourceType;
+		this.buildCost = buildCost;
 		this.minutesToBuild = minutesToBuild;
-		this.buildPrice = buildPrice;
-		this.isPremiumCurrency = isPremiumCurrency;
-		this.sellPrice = sellPrice;
-		this.minLevel = minLevel;
-		this.xLength = xLength;
-		this.yLength = yLength;
-		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
-		this.successorStructId = successorStructId;
+		this.requiredTownHallId = requiredTownHallId;
+		this.width = width;
+		this.height = height;
+		this.spriteImgName = spriteImgName;
 		this.predecessorStructId = predecessorStructId;
+		this.successorStructId = successorStructId;
 	}
 
 	public int getId() {
@@ -68,20 +63,28 @@ public class Structure implements Serializable {
 		this.level = level;
 	}
 
-	public int getIncome() {
-		return income;
+	public String getStructType() {
+		return structType;
 	}
 
-	public void setIncome(int income) {
-		this.income = income;
+	public void setStructType(String structType) {
+		this.structType = structType;
 	}
 
-	public int getMinutesToGain() {
-		return minutesToGain;
+	public String getBuildResourceType() {
+		return buildResourceType;
 	}
 
-	public void setMinutesToGain(int minutesToGain) {
-		this.minutesToGain = minutesToGain;
+	public void setBuildResourceType(String buildResourceType) {
+		this.buildResourceType = buildResourceType;
+	}
+
+	public int getBuildCost() {
+		return buildCost;
+	}
+
+	public void setBuildCost(int buildCost) {
+		this.buildCost = buildCost;
 	}
 
 	public int getMinutesToBuild() {
@@ -92,68 +95,36 @@ public class Structure implements Serializable {
 		this.minutesToBuild = minutesToBuild;
 	}
 
-	public int getBuildPrice() {
-		return buildPrice;
+	public int getRequiredTownHallId() {
+		return requiredTownHallId;
 	}
 
-	public void setBuildPrice(int buildPrice) {
-		this.buildPrice = buildPrice;
+	public void setRequiredTownHallId(int requiredTownHallId) {
+		this.requiredTownHallId = requiredTownHallId;
 	}
 
-	public boolean isPremiumCurrency() {
-		return isPremiumCurrency;
+	public int getWidth() {
+		return width;
 	}
 
-	public void setPremiumCurrency(boolean isPremiumCurrency) {
-		this.isPremiumCurrency = isPremiumCurrency;
+	public void setWidth(int width) {
+		this.width = width;
 	}
 
-	public int getSellPrice() {
-		return sellPrice;
+	public int getHeight() {
+		return height;
 	}
 
-	public void setSellPrice(int sellPrice) {
-		this.sellPrice = sellPrice;
+	public void setHeight(int height) {
+		this.height = height;
 	}
 
-	public int getMinLevel() {
-		return minLevel;
+	public String getSpriteImgName() {
+		return spriteImgName;
 	}
 
-	public void setMinLevel(int minLevel) {
-		this.minLevel = minLevel;
-	}
-
-	public int getxLength() {
-		return xLength;
-	}
-
-	public void setxLength(int xLength) {
-		this.xLength = xLength;
-	}
-
-	public int getyLength() {
-		return yLength;
-	}
-
-	public void setyLength(int yLength) {
-		this.yLength = yLength;
-	}
-
-	public int getImgVerticalPixelOffset() {
-		return imgVerticalPixelOffset;
-	}
-
-	public void setImgVerticalPixelOffset(int imgVerticalPixelOffset) {
-		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
-	}
-
-	public int getSuccessorStructId() {
-		return successorStructId;
-	}
-
-	public void setSuccessorStructId(int successorStructId) {
-		this.successorStructId = successorStructId;
+	public void setSpriteImgName(String spriteImgName) {
+		this.spriteImgName = spriteImgName;
 	}
 
 	public int getPredecessorStructId() {
@@ -164,16 +135,23 @@ public class Structure implements Serializable {
 		this.predecessorStructId = predecessorStructId;
 	}
 
+	public int getSuccessorStructId() {
+		return successorStructId;
+	}
+
+	public void setSuccessorStructId(int successorStructId) {
+		this.successorStructId = successorStructId;
+	}
+
 	@Override
 	public String toString() {
 		return "Structure [id=" + id + ", name=" + name + ", level=" + level
-				+ ", income=" + income + ", minutesToGain=" + minutesToGain
-				+ ", minutesToBuild=" + minutesToBuild + ", buildPrice=" + buildPrice
-				+ ", isPremiumCurrency=" + isPremiumCurrency + ", sellPrice="
-				+ sellPrice + ", minLevel=" + minLevel + ", xLength=" + xLength
-				+ ", yLength=" + yLength + ", imgVerticalPixelOffset="
-				+ imgVerticalPixelOffset + ", successorStructId=" + successorStructId
-				+ ", predecessorStructId=" + predecessorStructId + "]";
+				+ ", structType=" + structType + ", buildResourceType="
+				+ buildResourceType + ", buildCost=" + buildCost + ", minutesToBuild="
+				+ minutesToBuild + ", requiredTownHallId=" + requiredTownHallId
+				+ ", width=" + width + ", height=" + height + ", spriteImgName="
+				+ spriteImgName + ", predecessorStructId=" + predecessorStructId
+				+ ", successorStructId=" + successorStructId + "]";
 	}
 
 }

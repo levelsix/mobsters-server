@@ -106,9 +106,9 @@ import com.lvl6.utils.RetrieveUtils;
         Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
         if (structIdsToStructs != null) {
           for (Structure struct : structIdsToStructs.values()) {
-            if (struct != null && struct.getMinLevel() == newLevel) {
+//            if (struct != null && struct.getMinLevel() == newLevel) {
               resBuilder.addNewlyAvailableStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
-            } 
+//            } 
           }
         }
       }

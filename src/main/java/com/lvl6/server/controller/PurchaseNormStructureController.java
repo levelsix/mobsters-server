@@ -137,29 +137,29 @@ import com.lvl6.utils.utilmethods.InsertUtil;
           + ", timeOfPurchase=" + timeOfPurchase);
       return false;
     }
-    //see if the user is at or above the required level to build the structure
-    if (user.getLevel() < prospective.getMinLevel()) {
-      resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_LEVEL_TOO_LOW);
-      log.error("user is too low level to purchase struct. user level=" + user.getLevel() + 
-          ", struct's min level is " + prospective.getMinLevel());
-      return false;
-    }
-    int buildPrice = prospective.getBuildPrice();
-    if (prospective.isPremiumCurrency()) {
-    	//check if user has enough gems to buy building
-    	if (user.getGems() < buildPrice) {
-    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
-    		log.error("user only has " + user.getGems() + " gems; needs " + buildPrice);
-    		return false;
-    	}
-    } else {
-    	//check if user has enough cash to building
-    	if (user.getCash() < buildPrice) {
-    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
-    		log.error("user only has " + user.getCash() + " cash; needs " + buildPrice);
-    		return false;
-    	}
-    }
+//    //see if the user is at or above the required level to build the structure
+//    if (user.getLevel() < prospective.getMinLevel()) {
+//      resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_LEVEL_TOO_LOW);
+//      log.error("user is too low level to purchase struct. user level=" + user.getLevel() + 
+//          ", struct's min level is " + prospective.getMinLevel());
+//      return false;
+//    }
+//    int buildPrice = prospective.getBuildPrice();
+//    if (prospective.isPremiumCurrency()) {
+//    	//check if user has enough gems to buy building
+//    	if (user.getGems() < buildPrice) {
+//    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
+//    		log.error("user only has " + user.getGems() + " gems; needs " + buildPrice);
+//    		return false;
+//    	}
+//    } else {
+//    	//check if user has enough cash to building
+//    	if (user.getCash() < buildPrice) {
+//    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
+//    		log.error("user only has " + user.getCash() + " cash; needs " + buildPrice);
+//    		return false;
+//    	}
+//    }
 
     int maxNumSameStruct = ControllerConstants
     		.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE;
@@ -196,14 +196,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
   private boolean writeChangesToDB(User user, Structure struct, CoordinatePair cp,
   		Timestamp purchaseTime, List<Integer> uStructId, Map<String, Integer> money) {
-  	int buildPrice = struct.getBuildPrice();
+  	//TODO: TAKE AWAY THE CORRECT RESOURCE
+  	int buildPrice = struct.getBuildCost();
     int gemChange = 0;
     int cashChange = 0;
-    if (struct.isPremiumCurrency()) {
-    	gemChange = -1 * buildPrice;
-    } else {
-    	cashChange = -1* buildPrice;
-    }
+    cashChange = -1* buildPrice;
     
     int userId = user.getId();
     int structId = struct.getId();

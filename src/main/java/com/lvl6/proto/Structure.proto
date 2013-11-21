@@ -73,7 +73,7 @@ message HospitalProto {
 
 message ResidenceProto {
 	optional int32 structId = 1;
-	//how many monster slots the user can have now (absolute number)
+	//how many monster slots this residence gives the user (absolute number)
 	optional int32 numMonsterSlots = 2;
 }
 
@@ -88,6 +88,9 @@ message TownHallProto {
 	
 	optional int32 numHospitals = 6;
 	optional int32 numResidences = 7;
+	
+	//how many monster slots this town hall gives the user (absolute number)
+	optional int32 numMonsterSlots = 8;
 }
 
 //------------------------------------------------------------------------------------------

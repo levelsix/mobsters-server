@@ -226,17 +226,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         userStructIdsToTimesOfRetrieval.remove(id);
         continue;
       }
-      if ((timeOfRetrieval.getTime() - userStruct.getLastRetrieved().getTime())  < 60000*struct.getMinutesToGain()) {
-        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.NOT_LONG_ENOUGH);
-        log.warn("(will continue processing) struct not ready for retrieval yet. " +
-        		"time of retrieval=" + timeOfRetrieval + ", userStruct=" + userStruct +
-        		", takes this many minutes to gain:" + struct.getMinutesToGain()); 
-        //remove invalid user structure
-        userStructIdsToUserStructs.remove(id);
-        userStructIdsToTimesOfRetrieval.remove(id);
-        continue;
-      }
-      cash += struct.getIncome();
+//      if ((timeOfRetrieval.getTime() - userStruct.getLastRetrieved().getTime())  < 60000*struct.getMinutesToGain()) {
+//        resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.NOT_LONG_ENOUGH);
+//        log.warn("(will continue processing) struct not ready for retrieval yet. " +
+//        		"time of retrieval=" + timeOfRetrieval + ", userStruct=" + userStruct +
+//        		", takes this many minutes to gain:" + struct.getMinutesToGain()); 
+//        //remove invalid user structure
+//        userStructIdsToUserStructs.remove(id);
+//        userStructIdsToTimesOfRetrieval.remove(id);
+//        continue;
+//      }
+//      cash += struct.getIncome();
     }
     //return to the caller the amount of money the user can collect 
     cashGained.add(cash);

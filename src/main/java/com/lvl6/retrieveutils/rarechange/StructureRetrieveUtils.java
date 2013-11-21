@@ -114,21 +114,19 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
     int level = rs.getInt(i++);
-    int income = rs.getInt(i++);
-    int minutesToGain = rs.getInt(i++);
+    String structType = rs.getString(i++);
+    String buildResourceType = rs.getString(i++);
+    int buildCost = rs.getInt(i++);
     int minutesToBuild = rs.getInt(i++);
-    int buildPrice = rs.getInt(i++);
-    boolean isPremiumCurrency = rs.getBoolean(i++);
-    int sellPrice = rs.getInt(i++);
-    int minLevel = rs.getInt(i++);
-    int xLength = rs.getInt(i++);
-    int yLength = rs.getInt(i++);
-    int imgVerticalPixelOffset = rs.getInt(i++);
-    int successorStructId = rs.getInt(i++);
+    int requiredTownHallId = rs.getInt(i++);
+    int width = rs.getInt(i++);
+    int height = rs.getInt(i++);
+    String spriteImgName = rs.getString(i++);
     int predecessorStructId = rs.getInt(i++);
+    int successorStructId = rs.getInt(i++);
     
-    return new Structure(id, name, level, income, minutesToGain, minutesToBuild,
-    		buildPrice, isPremiumCurrency, sellPrice, minLevel, xLength, yLength,
-    		imgVerticalPixelOffset, successorStructId, predecessorStructId);
+    return new Structure(id, name, level, structType, buildResourceType, buildCost,
+    		minutesToBuild, requiredTownHallId, width, height, spriteImgName,
+    		predecessorStructId, successorStructId);
   }
 }
