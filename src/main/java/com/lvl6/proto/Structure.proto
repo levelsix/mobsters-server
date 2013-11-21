@@ -10,21 +10,84 @@ message FullStructureProto {
 	optional int32 structId = 1;
 	optional string name = 2;
 	optional int32 level = 3;
-	optional int32 income = 4;
-	optional int32 minutesToGain = 5;
-	optional int32 minutesToBuild = 6;
-	optional int32 buildPrice = 7;
-	optional bool isPremiumCurrency = 8;
-	optional int32 sellPrice = 9;
-	optional int32 minLevel = 10; //minUserLevel required
-	optional int32 xLength = 11;
-	optional int32 yLength = 12;
-	optional int32 imgVerticalPixelOffset = 13;
-	optional int32 successorStructId = 14;	
+	optional StructType structType = 4;
 	
+	//cash, other soft currency (like CoC's gold, elixir, dark elixir)
+	optional ResourceType buildResourceType = 5; 
+	optional int32 buildCost = 6;
+	optional int32 minutesToBuild = 7;
+	optional int32 prerequisiteTownHallId = 8;
+	optional int32 width = 9;
+	optional int32 height = 10;
+	optional string spriteImgName = 11;
+	optional int32 predecessorStructId = 12;
+	optional int32 successorStructId = 13;	
 	
-	//client doesn't need this
-	optional int32 predecessorStructId = 15;
+	enum StructType {
+		RESOURCE_GENERATOR = 1;
+		RESOURCE_STORAGE = 2;
+		HOSPITAL = 3;
+		RESIDENCE = 4
+		TOWN_HALL = 5;
+	}
+}
+
+enum ResourceType {
+	CASH = 1;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ResourceGeneratorProto {
+	optional int32 structId = 1;
+	
+	//the type of resource that is generated
+	optional ResourceType resourceType = 2;
+	
+	//at the moment, some amount per hour
+	optional float productionRate = 3;
+	optional int32 capacity = 4;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ResourceStorageProto {
+	optional int32 structId = 1;
+	
+	//the type of resource that is stored
+	optional ResourceType resourceType = 2;
+	optional int32 capacity = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message HospitalProto {
+	optional int32 structId = 1;
+	optional int32 queueSize = 2;
+	
+	//ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
+	optional float healthPerSecond = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
+message ResidenceProto {
+	optional int32 structId = 1;
+	//how many monster slots the user can have now (absolute number)
+	optional int32 numMonsterSlots = 2;
+}
+
+//------------------------------------------------------------------------------------------
+
+message TownHallProto {
+	optional int32 structId = 1;
+	optional int32 numResourceOneGenerators = 2
+	optional int32 numResourceOneStorages = 3; 	
+	optional int32 numResourceTwoGenerators = 4;
+	optional int32 numResourceTwoStorages = 5;
+	
+	optional int32 numHospitals = 6;
+	optional int32 numResidences = 7;
 }
 
 //------------------------------------------------------------------------------------------
@@ -34,12 +97,10 @@ message FullUserStructureProto {
 	optional int32 userId = 2;
 	optional int32 structId = 3;
 	optional int64 lastRetrieved = 4;
-	optional CoordinateProto coordinates = 5;
-	//optional int32 level = 6;
-	optional int64 purchaseTime = 7;
-	//optional int64 lastUpgradeTime = 8;
-	optional bool isComplete = 9;
-	optional StructOrientation orientation = 10;
+	optional int64 purchaseTime = 5;
+	optional bool isComplete = 6;
+	optional CoordinateProto coordinates = 7;
+	optional StructOrientation orientation = 8;
 }
 
 //------------------------------------------------------------------------------------------
