@@ -527,14 +527,18 @@ public class CreateInfoProtoUtils {
     		StructType t = StructType.valueOf(aStr);
     		builder.setStructType(t);
     	} catch (Exception e) {
-    		log.error("could not create enum type. structure=" + s, e);
+    		log.error("could not create enum type. structType=" + aStr + "...", e);
     	}
     }
     
     aStr = s.getBuildResourceType();
     if (null != aStr) {
-    	ResourceType rt = ResourceType.valueOf(aStr);
-    	builder.setBuildResourceType(rt);
+    	try {
+    		ResourceType rt = ResourceType.valueOf(aStr);
+    		builder.setBuildResourceType(rt);
+    	} catch (Exception e) {
+    		log.error("could not create enum type. resourceType=" + aStr + "...", e);
+    	}
     }
     
     builder.setBuildCost(s.getBuildCost());
@@ -542,8 +546,11 @@ public class CreateInfoProtoUtils {
     builder.setPrerequisiteTownHallId(s.getRequiredTownHallId());
     builder.setWidth(s.getWidth());
     builder.setHeight(s.getHeight());
-    builder.setSpriteImgName(s.getSpriteImgName());
     
+    aStr = s.getSpriteImgName();
+    if (null != aStr) {
+    	builder.setSpriteImgName(s.getSpriteImgName());
+    }
     if (s.getPredecessorStructId() > 0) {
     	builder.setPredecessorStructId(s.getPredecessorStructId());
     }
