@@ -27,7 +27,7 @@ message FullStructureProto {
 		RESOURCE_GENERATOR = 1;
 		RESOURCE_STORAGE = 2;
 		HOSPITAL = 3;
-		RESIDENCE = 4
+		RESIDENCE = 4;
 		TOWN_HALL = 5;
 	}
 }
@@ -81,7 +81,7 @@ message ResidenceProto {
 
 message TownHallProto {
 	optional int32 structId = 1;
-	optional int32 numResourceOneGenerators = 2
+	optional int32 numResourceOneGenerators = 2;
 	optional int32 numResourceOneStorages = 3; 	
 	optional int32 numResourceTwoGenerators = 4;
 	optional int32 numResourceTwoStorages = 5;
