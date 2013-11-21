@@ -521,6 +521,7 @@ public class CreateInfoProtoUtils {
     
     builder.setLevel(s.getLevel());
     aStr = s.getStructType();
+    log.info("this is the structure " + s);
     if (null != aStr) {
     	StructType t = StructType.valueOf(aStr);
     	builder.setStructType(t);
