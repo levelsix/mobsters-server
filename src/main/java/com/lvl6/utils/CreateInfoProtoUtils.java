@@ -64,6 +64,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.An
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
@@ -1016,7 +1017,13 @@ public class CreateInfoProtoUtils {
     if (null != displayName) {
     	mpb.setDisplayName(displayName);
     }
-    mpb.setElement(aMonster.getElement());
+    
+    MonsterElement me = aMonster.getElement();
+    if (null != me) {
+    	mpb.setElement(aMonster.getElement());
+    } else{
+    	log.error("monster element is null!!!!!! monster=" + me);
+    }
     mpb.setBaseHp(aMonster.getBaseHp());
     String imagePrefix = aMonster.getImagePrefix(); 
     if (null != imagePrefix) {
