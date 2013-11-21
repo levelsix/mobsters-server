@@ -36,14 +36,17 @@ public class DBConstants {
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
-  //links up rows in task_history (thus task_stage_history where monster info resides)
-  //to monster kill jobs
   public static final String TABLE_REFERRAL = "referral";
   public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
 	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";
   public static final String TABLE_STATIC_LEVEL_INFO = "static_level_info";
   public static final String TABLE_STRUCTURE = "structure";
   public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
+  public static final String TABLE_STRUCTURE_HOSPITAL = "structure_hospital";
+  public static final String TABLE_STRUCTURE_RESIDENCE = "structure_residence";
+  public static final String TABLE_STRUCTURE_RESOURCE_GENERATOR = "structure_resource_generator";
+  public static final String TABLE_STRUCTURE_RESOURCE_STORAGE = "structure_resource_storage";
+  public static final String TABLE_STRUCTURE_TOWN_HALL = "structure_town_hall";
   public static final String TABLE_TASK = "task";
   public static final String TABLE_TASK_FOR_USER_COMPLETED = "task_for_user_completed";
   public static final String TABLE_TASK_FOR_USER_ONGOING = "task_for_user_ongoing";
