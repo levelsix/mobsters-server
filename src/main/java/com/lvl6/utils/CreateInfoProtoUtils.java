@@ -523,8 +523,12 @@ public class CreateInfoProtoUtils {
     aStr = s.getStructType();
     log.info("this is the structure " + s);
     if (null != aStr) {
-    	StructType t = StructType.valueOf(aStr);
-    	builder.setStructType(t);
+    	try {
+    		StructType t = StructType.valueOf(aStr);
+    		builder.setStructType(t);
+    	} catch (Exception e) {
+    		log.error("could not create enum type. structure=" + s, e);
+    	}
     }
     
     aStr = s.getBuildResourceType();
