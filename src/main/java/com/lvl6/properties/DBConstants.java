@@ -272,7 +272,7 @@ public class DBConstants {
   public static final String STRUCTURE_FOR_USER__PURCHASE_TIME = "purchase_time";
   public static final String STRUCTURE_FOR_USER__IS_COMPLETE = "is_complete";
   public static final String STRUCTURE_FOR_USER__ORIENTATION = "orientation";
-  public static final String STRUCTURE_FOR_USER__UPGRADE_START_TIME = "upgrade_start_time";
+//  public static final String STRUCTURE_FOR_USER__UPGRADE_START_TIME = "upgrade_start_time";
 
   /*TASK FOR USER ONGOING TABLE*/
   public static final String TASK_FOR_USER_ONGOING__ID = GENERIC__ID;
@@ -351,6 +351,7 @@ public class DBConstants {
   public static final String USER__LEVEL = "level";
   public static final String USER__GEMS = "gems";
   public static final String USER__CASH = "cash";
+  public static final String USER__OIL = "oil";
   public static final String USER__EXPERIENCE = "experience";
   public static final String USER__TASKS_COMPLETED = "tasks_completed";
   public static final String USER__BATTLES_WON = "battles_won";

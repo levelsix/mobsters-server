@@ -320,6 +320,7 @@ public class CreateInfoProtoUtils {
     builder.setLevel(u.getLevel());
     builder.setGems(u.getGems());
     builder.setCash(u.getCash());
+    builder.setOil(u.getOil());
     builder.setExperience(u.getExperience());
     builder.setTasksCompleted(u.getTasksCompleted());
     builder.setBattlesWon(u.getBattlesWon());

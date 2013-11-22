@@ -585,8 +585,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int id = rs.getInt(i++);
     String name = rs.getString(i++);
     int level = rs.getInt(i++);
-    int diamonds = rs.getInt(i++);
-    int coins = rs.getInt(i++);
+    int gems = rs.getInt(i++);
+    int cash = rs.getInt(i++);
+    int oil = rs.getInt(i++);
     int experience = rs.getInt(i++);
     int tasksCompleted = rs.getInt(i++);
     int battlesWon = rs.getInt(i++);
@@ -699,13 +700,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String facebookId = rs.getString(i++);
     int nthExtraSlotsViaFb = rs.getInt(i++);
     
-    User user = new User(id, name, level, diamonds, coins, experience,
-    		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
-    		numReferrals, udid, lastLogin, lastLogout, deviceToken,
-    		lastBattleNotificationTime, numBadges, isFake, createTime,
-    		isAdmin, apsalarId, numCoinsRetrievedFromStructs,
-    		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
-    		kabamNaid, hasReceivedfbReward, numAdditionalMonsterSlots,
+    User user = new User(id, name, level, gems, cash, oil,
+    		experience, tasksCompleted, battlesWon, battlesLost, flees,
+    		referralCode, numReferrals, udid, lastLogin, lastLogout
+    		, deviceToken, lastBattleNotificationTime, numBadges,
+    		isFake, createTime, isAdmin, apsalarId,
+    		numCoinsRetrievedFromStructs, numConsecutiveDaysPlayed,
+    		clanId, lastWallPostNotificationTime, kabamNaid,
+    		hasReceivedfbReward, numAdditionalMonsterSlots,
     		numBeginnerSalesPurchased, hasActiveShield, shieldEndTime, elo,
     		rank, lastTimeQueued, attacksWon, defensesWon, attacksLost,
     		defensesLost, facebookId, nthExtraSlotsViaFb);

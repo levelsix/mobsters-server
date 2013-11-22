@@ -13,12 +13,13 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 
-	private static final long serialVersionUID = -2819418420486930959L;
+	private static final long serialVersionUID = -718480033961695206L;
 	private int id;
 	private String name;
 	private int level;
 	private int gems;
 	private int cash;
+	private int oil;
 	private int experience;
 	private int tasksCompleted;
 	private int battlesWon;
@@ -55,8 +56,8 @@ public class User implements Serializable {
 	private int defensesLost;
 	private String facebookId;
 	private int nthExtraSlotsViaFb;
-
-	public User(int id, String name, int level, int gems, int cash,
+	
+	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, int battlesWon, int battlesLost,
 			int flees, String referralCode, int numReferrals, String udid,
 			Date lastLogin, Date lastLogout, String deviceToken,
@@ -75,6 +76,7 @@ public class User implements Serializable {
 		this.level = level;
 		this.gems = gems;
 		this.cash = cash;
+		this.oil = oil;
 		this.experience = experience;
 		this.tasksCompleted = tasksCompleted;
 		this.battlesWon = battlesWon;
@@ -112,8 +114,6 @@ public class User implements Serializable {
 		this.facebookId = facebookId;
 		this.nthExtraSlotsViaFb = nthExtraSlotsViaFb;
 	}
-
-
 
 	public boolean updateSetdevicetoken(String deviceToken) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -757,357 +757,294 @@ public class User implements Serializable {
 		}
 			
 	}
-	
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public int getLevel() {
 		return level;
 	}
 
-
 	public void setLevel(int level) {
 		this.level = level;
 	}
-
 
 	public int getGems() {
 		return gems;
 	}
 
-
 	public void setGems(int gems) {
 		this.gems = gems;
 	}
-
 
 	public int getCash() {
 		return cash;
 	}
 
-
 	public void setCash(int cash) {
 		this.cash = cash;
 	}
 
+	public int getOil() {
+		return oil;
+	}
+
+	public void setOil(int oil) {
+		this.oil = oil;
+	}
 
 	public int getExperience() {
 		return experience;
 	}
 
-
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}
-
 
 	public int getTasksCompleted() {
 		return tasksCompleted;
 	}
 
-
 	public void setTasksCompleted(int tasksCompleted) {
 		this.tasksCompleted = tasksCompleted;
 	}
-
 
 	public int getBattlesWon() {
 		return battlesWon;
 	}
 
-
 	public void setBattlesWon(int battlesWon) {
 		this.battlesWon = battlesWon;
 	}
-
 
 	public int getBattlesLost() {
 		return battlesLost;
 	}
 
-
 	public void setBattlesLost(int battlesLost) {
 		this.battlesLost = battlesLost;
 	}
-
 
 	public int getFlees() {
 		return flees;
 	}
 
-
 	public void setFlees(int flees) {
 		this.flees = flees;
 	}
-
 
 	public String getReferralCode() {
 		return referralCode;
 	}
 
-
 	public void setReferralCode(String referralCode) {
 		this.referralCode = referralCode;
 	}
-
 
 	public int getNumReferrals() {
 		return numReferrals;
 	}
 
-
 	public void setNumReferrals(int numReferrals) {
 		this.numReferrals = numReferrals;
 	}
-
 
 	public String getUdid() {
 		return udid;
 	}
 
-
 	public void setUdid(String udid) {
 		this.udid = udid;
 	}
-
 
 	public Date getLastLogin() {
 		return lastLogin;
 	}
 
-
 	public void setLastLogin(Date lastLogin) {
 		this.lastLogin = lastLogin;
 	}
-
 
 	public Date getLastLogout() {
 		return lastLogout;
 	}
 
-
 	public void setLastLogout(Date lastLogout) {
 		this.lastLogout = lastLogout;
 	}
-
 
 	public String getDeviceToken() {
 		return deviceToken;
 	}
 
-
 	public void setDeviceToken(String deviceToken) {
 		this.deviceToken = deviceToken;
 	}
-
 
 	public Date getLastBattleNotificationTime() {
 		return lastBattleNotificationTime;
 	}
 
-
 	public void setLastBattleNotificationTime(Date lastBattleNotificationTime) {
 		this.lastBattleNotificationTime = lastBattleNotificationTime;
 	}
-
 
 	public int getNumBadges() {
 		return numBadges;
 	}
 
-
 	public void setNumBadges(int numBadges) {
 		this.numBadges = numBadges;
 	}
-
 
 	public boolean isFake() {
 		return isFake;
 	}
 
-
 	public void setFake(boolean isFake) {
 		this.isFake = isFake;
 	}
-
 
 	public Date getCreateTime() {
 		return createTime;
 	}
 
-
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-
 
 	public boolean isAdmin() {
 		return isAdmin;
 	}
 
-
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-
 
 	public String getApsalarId() {
 		return apsalarId;
 	}
 
-
 	public void setApsalarId(String apsalarId) {
 		this.apsalarId = apsalarId;
 	}
-
 
 	public int getNumCoinsRetrievedFromStructs() {
 		return numCoinsRetrievedFromStructs;
 	}
 
-
 	public void setNumCoinsRetrievedFromStructs(int numCoinsRetrievedFromStructs) {
 		this.numCoinsRetrievedFromStructs = numCoinsRetrievedFromStructs;
 	}
-
 
 	public int getNumConsecutiveDaysPlayed() {
 		return numConsecutiveDaysPlayed;
 	}
 
-
 	public void setNumConsecutiveDaysPlayed(int numConsecutiveDaysPlayed) {
 		this.numConsecutiveDaysPlayed = numConsecutiveDaysPlayed;
 	}
-
 
 	public int getClanId() {
 		return clanId;
 	}
 
-
 	public void setClanId(int clanId) {
 		this.clanId = clanId;
 	}
-
 
 	public Date getLastWallPostNotificationTime() {
 		return lastWallPostNotificationTime;
 	}
 
-
 	public void setLastWallPostNotificationTime(Date lastWallPostNotificationTime) {
 		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
 	}
-
 
 	public int getKabamNaid() {
 		return kabamNaid;
 	}
 
-
 	public void setKabamNaid(int kabamNaid) {
 		this.kabamNaid = kabamNaid;
 	}
-
 
 	public boolean isHasReceivedfbReward() {
 		return hasReceivedfbReward;
 	}
 
-
 	public void setHasReceivedfbReward(boolean hasReceivedfbReward) {
 		this.hasReceivedfbReward = hasReceivedfbReward;
 	}
-
 
 	public int getNumAdditionalMonsterSlots() {
 		return numAdditionalMonsterSlots;
 	}
 
-
 	public void setNumAdditionalMonsterSlots(int numAdditionalMonsterSlots) {
 		this.numAdditionalMonsterSlots = numAdditionalMonsterSlots;
 	}
-
 
 	public int getNumBeginnerSalesPurchased() {
 		return numBeginnerSalesPurchased;
 	}
 
-
 	public void setNumBeginnerSalesPurchased(int numBeginnerSalesPurchased) {
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 	}
-
 
 	public boolean isHasActiveShield() {
 		return hasActiveShield;
 	}
 
-
 	public void setHasActiveShield(boolean hasActiveShield) {
 		this.hasActiveShield = hasActiveShield;
 	}
-
 
 	public Date getShieldEndTime() {
 		return shieldEndTime;
 	}
 
-
 	public void setShieldEndTime(Date shieldEndTime) {
 		this.shieldEndTime = shieldEndTime;
 	}
-
 
 	public int getElo() {
 		return elo;
 	}
 
-
 	public void setElo(int elo) {
 		this.elo = elo;
 	}
-
 
 	public String getRank() {
 		return rank;
 	}
 
-
 	public void setRank(String rank) {
 		this.rank = rank;
 	}
-
 
 	public Date getLastTimeQueued() {
 		return lastTimeQueued;
 	}
 
-
 	public void setLastTimeQueued(Date lastTimeQueued) {
 		this.lastTimeQueued = lastTimeQueued;
 	}
-
 
 	public int getAttacksWon() {
 		return attacksWon;
@@ -1160,9 +1097,9 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
-				+ gems + ", cash=" + cash + ", experience=" + experience
-				+ ", tasksCompleted=" + tasksCompleted + ", battlesWon=" + battlesWon
-				+ ", battlesLost=" + battlesLost + ", flees=" + flees
+				+ gems + ", cash=" + cash + ", oil=" + oil + ", experience="
+				+ experience + ", tasksCompleted=" + tasksCompleted + ", battlesWon="
+				+ battlesWon + ", battlesLost=" + battlesLost + ", flees=" + flees
 				+ ", referralCode=" + referralCode + ", numReferrals=" + numReferrals
 				+ ", udid=" + udid + ", lastLogin=" + lastLogin + ", lastLogout="
 				+ lastLogout + ", deviceToken=" + deviceToken
@@ -1183,5 +1120,5 @@ public class User implements Serializable {
 				+ ", defensesLost=" + defensesLost + ", facebookId=" + facebookId
 				+ ", nthExtraSlotsViaFb=" + nthExtraSlotsViaFb + "]";
 	}
-
+	
 }

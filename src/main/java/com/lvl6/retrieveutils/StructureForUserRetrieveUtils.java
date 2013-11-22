@@ -216,19 +216,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     boolean isComplete = rs.getBoolean(i++);
     StructOrientation orientation = StructOrientation.valueOf(rs.getInt(i++));
-    
-    Date upgradeTime = null;
-    try {
-    	ts = rs.getTimestamp(i++);
-    	if (!rs.wasNull()) {
-    		upgradeTime = new Date(ts.getTime());
-    	}
-    } catch (Exception e) {
-    	log.error("db error: maybe upgradeTime is null. id=" + id + " userId=" + userId);
-		}
 
     return new StructureForUser(id, userId, structId, lastRetrieved, coordinates,
-    		purchaseTime, isComplete, orientation, upgradeTime);
+    		purchaseTime, isComplete, orientation);
   }
 
 }

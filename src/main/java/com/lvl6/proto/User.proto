@@ -62,6 +62,7 @@ message FullUserProto {
     optional int32 level = 3;
 	optional int32 gems = 4;
 	optional int32 cash = 5;
+	optional int32 oil = 42; 
 	optional int32 experience = 6;
 	optional int32 tasksCompleted = 7;
 	optional int32 battlesWon = 8;
@@ -98,6 +99,7 @@ message FullUserProto {
 	optional int32 defensesLost = 39;
 	optional string facebookId = 40;
 	//optional int32 nthExtraSlotsViaFb = 41; //defined below
+	//optional int32 oil = 42; //defined above
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
