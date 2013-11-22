@@ -17,7 +17,7 @@ message SubmitMonsterEnhancementRequestProto {
 	repeated UserEnhancementItemProto ueipUpdate = 3;
 	repeated UserEnhancementItemProto ueipNew = 4;
 	
-	//if user needs, say, five more cash then user can spend gems to replace
+	//if user needs, say, five more cash, then user can spend gems to replace
 	//said five cash. (positive number, server will convert it to negative)
 	optional int32 gemsSpent = 5;
 	

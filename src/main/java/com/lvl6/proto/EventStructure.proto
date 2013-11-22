@@ -10,15 +10,24 @@ package com.lvl6.proto;
 option java_outer_classname = "EventStructureProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
-																						//DONE
+//server will check money stuff, similar to enhancing
+//client will need to check that the user can build the structure:
+//meets town hall requirement, structure limit, can only build one thing
 message PurchaseNormStructureRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional CoordinateProto structCoordinates = 2;
 	optional int32 structId = 3;
 	optional int64 timeOfPurchase = 4;
+	
+	//if user needs, say, five more cash, then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 5;
+	
+	//positive means refund, negative means charge user
+	optional sint32 resourceChange = 6; 
+	optional ResourceType resourceType = 7 [default = CASH];
 }
 
-																						//DONE
 message PurchaseNormStructureResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional PurchaseNormStructureStatus status = 2;
@@ -29,10 +38,7 @@ message PurchaseNormStructureResponseProto {
 		FAIL_INSUFFICIENT_CASH = 2;
 		FAIL_INSUFFICIENT_GEMS = 3;
 		FAIL_INSUFFICIENT_OIL = 4;
-		FAIL_ANOTHER_STRUCT_STILL_BUILDING = 5;
-		FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT = 6;
-		FAIL_TOWN_HALL_LEVEL_TOO_LOW = 7;
-		FAIL_OTHER = 8;
+		FAIL_OTHER = 5;
 	}
 }
 
