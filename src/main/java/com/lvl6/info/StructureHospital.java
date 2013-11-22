@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class StructureHospital implements Serializable {
 
+/**
+	 * 
+	 */
 	private static final long serialVersionUID = -3569030137246330339L;
+	//	private static final long serialVersionUID = -3569030137246330339L;
 	private int structId;
 	private int queueSize;
 	float healthPerSecond;

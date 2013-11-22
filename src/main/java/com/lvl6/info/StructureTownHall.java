@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class StructureTownHall implements Serializable {
 
+/**
+	 * 
+	 */
 	private static final long serialVersionUID = 3264422497524249315L;
+	//	private static final long serialVersionUID = 3264422497524249315L;
 	private int structId;
 	private int numResourceOneGenerators;
 	private int numResourceOneStorages;

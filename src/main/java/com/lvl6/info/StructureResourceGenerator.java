@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class StructureResourceGenerator implements Serializable {
 
+/**
+	 * 
+	 */
 	private static final long serialVersionUID = -2371172975086740032L;
+	//	private static final long serialVersionUID = -2371172975086740032L;
 	private int structId;
 	private String resourceTypeGenerated;
 	//at the moment, some amount per hour

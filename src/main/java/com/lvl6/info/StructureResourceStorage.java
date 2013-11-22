@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class StructureResourceStorage implements Serializable {
 
+/**
+	 * 
+	 */
 	private static final long serialVersionUID = 5021640371198924904L;
+//	private static final long serialVersionUID = 5021640371198924904L;
 	private int structId;
 	private String resourceTypeStored;
 	private int capacity;
