@@ -42,7 +42,7 @@ enum ResourceType {
 //------------------------------------------------------------------------------------------
 
 message ResourceGeneratorProto {
-	optional StructureInfoProto structStuff = 1;
+	optional StructureInfoProto structInfo = 1;
 	
 	//the type of resource that is generated
 	optional ResourceType resourceType = 2;
@@ -55,7 +55,7 @@ message ResourceGeneratorProto {
 //------------------------------------------------------------------------------------------
 
 message ResourceStorageProto {
-	optional StructureInfoProto structStuff = 1;
+	optional StructureInfoProto structInfo = 1;
 	
 	//the type of resource that is stored
 	optional ResourceType resourceType = 2;
@@ -65,7 +65,7 @@ message ResourceStorageProto {
 //------------------------------------------------------------------------------------------
 
 message HospitalProto {
-	optional StructureInfoProto structStuff = 1;
+	optional StructureInfoProto structInfo = 1;
 	optional int32 queueSize = 2;
 	
 	//ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
@@ -75,7 +75,7 @@ message HospitalProto {
 //------------------------------------------------------------------------------------------
 
 message ResidenceProto {
-	optional StructureInfoProto structStuff = 1;
+	optional StructureInfoProto structInfo = 1;
 	
 	//how many monster slots this residence gives the user (absolute number)
 	//does not depend on previous lower level structures
@@ -94,7 +94,7 @@ message ResidenceProto {
 //------------------------------------------------------------------------------------------
 
 message TownHallProto {
-	optional StructureInfoProto structStuff = 1;
+	optional StructureInfoProto structInfo = 1;
 	optional int32 numResourceOneGenerators = 2;
 	optional int32 numResourceOneStorages = 3; 	
 	optional int32 numResourceTwoGenerators = 4;
