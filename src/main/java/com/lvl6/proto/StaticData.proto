@@ -33,7 +33,7 @@ message StaticDataProto {
 	repeated ResourceGeneratorProto allGenerators = 13;
 	repeated ResourceStorageProto allStorages = 14;
 	repeated HospitalProto allHospitals = 15;
-	repeated ResidenceProto allResidences  = 16;
+	repeated ResidenceProto allResidences = 16;
 	repeated TownHallProto allTownHalls = 17;
 	
 	optional RetrieveStaticDataStatus status = 2;
