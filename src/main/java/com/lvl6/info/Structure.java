@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = -149493349319465229L;
+	private static final long serialVersionUID = -8592996117760444971L;
 	private int id;
 	private String name;
 	private int level;
@@ -18,11 +18,15 @@ public class Structure implements Serializable {
 	private String spriteImgName;
 	private int predecessorStructId;
 	private int successorStructId;
+	private String imgName;
+	private float imgVerticalPixelOffset;
+	private String description;
 	
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
 			int requiredTownHallId, int width, int height, String spriteImgName,
-			int predecessorStructId, int successorStructId) {
+			int predecessorStructId, int successorStructId, String imgName,
+			float imgVerticalPixelOffset, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -37,6 +41,9 @@ public class Structure implements Serializable {
 		this.spriteImgName = spriteImgName;
 		this.predecessorStructId = predecessorStructId;
 		this.successorStructId = successorStructId;
+		this.imgName = imgName;
+		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
+		this.description = description;
 	}
 
 	public int getId() {
@@ -143,6 +150,30 @@ public class Structure implements Serializable {
 		this.successorStructId = successorStructId;
 	}
 
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+
+	public float getImgVerticalPixelOffset() {
+		return imgVerticalPixelOffset;
+	}
+
+	public void setImgVerticalPixelOffset(float imgVerticalPixelOffset) {
+		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@Override
 	public String toString() {
 		return "Structure [id=" + id + ", name=" + name + ", level=" + level
@@ -151,7 +182,9 @@ public class Structure implements Serializable {
 				+ minutesToBuild + ", requiredTownHallId=" + requiredTownHallId
 				+ ", width=" + width + ", height=" + height + ", spriteImgName="
 				+ spriteImgName + ", predecessorStructId=" + predecessorStructId
-				+ ", successorStructId=" + successorStructId + "]";
+				+ ", successorStructId=" + successorStructId + ", imgName=" + imgName
+				+ ", imgVerticalPixelOffset=" + imgVerticalPixelOffset
+				+ ", description=" + description + "]";
 	}
 
 }

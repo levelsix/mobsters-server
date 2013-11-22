@@ -124,10 +124,14 @@ import com.lvl6.utils.DBConnection;
     String spriteImgName = rs.getString(i++);
     int predecessorStructId = rs.getInt(i++);
     int successorStructId = rs.getInt(i++);
+    String imgName = rs.getString(i++);
+    float imgVerticalPixelOffset = rs.getFloat(i++);
+    String description = rs.getString(i++);
     
-    Structure s = new Structure(id, name, level, structType, buildResourceType, buildCost,
-    		minutesToBuild, requiredTownHallId, width, height, spriteImgName,
-    		predecessorStructId, successorStructId);
+    Structure s = new Structure(id, name, level, structType, buildResourceType,
+    		buildCost, minutesToBuild, requiredTownHallId, width, height, spriteImgName,
+    		predecessorStructId, successorStructId, imgName, imgVerticalPixelOffset,
+    		description);
     
     if (null != structType) {
     	String newStructType = structType.trim();

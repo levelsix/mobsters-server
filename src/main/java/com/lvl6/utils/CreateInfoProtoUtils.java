@@ -565,6 +565,18 @@ public class CreateInfoProtoUtils {
     	builder.setSuccessorStructId(s.getSuccessorStructId());
     }
     
+    aStr = s.getImgName();
+    if (null != aStr) {
+    	builder.setImgName(aStr);
+    }
+    
+    builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
+    
+    aStr = s.getDescription();
+    if (null != aStr) {
+    	builder.setDescription(aStr);
+    }
+    
     return builder.build();
   }
   
