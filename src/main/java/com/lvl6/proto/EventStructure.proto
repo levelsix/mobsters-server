@@ -21,6 +21,7 @@ message PurchaseNormStructureRequestProto {
 	
 	//if user needs, say, five more cash, then user can spend gems to replace
 	//said five cash. (positive number, server will convert it to negative)
+	//if nonzero, this means the building user bought is complete
 	optional int32 gemsSpent = 5;
 	
 	//positive means refund, negative means charge user
@@ -52,7 +53,7 @@ message MoveOrRotateNormStructureRequestProto {
 	
 	enum MoveOrRotateNormStructType {
 		MOVE = 1;
-		ROTATE = 2;
+		//ROTATE = 2;
 	}
 }
 																						//DONE
@@ -63,23 +64,6 @@ message MoveOrRotateNormStructureResponseProto {
 	enum MoveOrRotateNormStructureStatus {
 		SUCCESS = 1;
 		OTHER_FAIL = 2;
-	}
-}
-
-//------------------------------------------------------------------------------------------
-message SellNormStructureRequestProto {
-	optional MinimumUserProto sender = 1;
-	optional int32 userStructId = 2;
-}
-
-																						//DONE
-message SellNormStructureResponseProto {
-	optional MinimumUserProto sender = 1;
-	optional SellNormStructureStatus status = 2;
-	
-	enum SellNormStructureStatus {
-		SUCCESS = 1;
-		FAIL = 2;
 	}
 }
 
