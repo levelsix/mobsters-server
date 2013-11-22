@@ -1982,16 +1982,6 @@ public final class EventUserProto {
     // optional .com.lvl6.proto.LevelUpResponseProto.LevelUpStatus status = 2;
     boolean hasStatus();
     com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus getStatus();
-    
-    // repeated .com.lvl6.proto.FullStructureProto newlyAvailableStructs = 3;
-    java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> 
-        getNewlyAvailableStructsList();
-    com.lvl6.proto.StructureProto.FullStructureProto getNewlyAvailableStructs(int index);
-    int getNewlyAvailableStructsCount();
-    java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
-        getNewlyAvailableStructsOrBuilderList();
-    com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getNewlyAvailableStructsOrBuilder(
-        int index);
   }
   public static final class LevelUpResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -2120,31 +2110,9 @@ public final class EventUserProto {
       return status_;
     }
     
-    // repeated .com.lvl6.proto.FullStructureProto newlyAvailableStructs = 3;
-    public static final int NEWLYAVAILABLESTRUCTS_FIELD_NUMBER = 3;
-    private java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> newlyAvailableStructs_;
-    public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> getNewlyAvailableStructsList() {
-      return newlyAvailableStructs_;
-    }
-    public java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
-        getNewlyAvailableStructsOrBuilderList() {
-      return newlyAvailableStructs_;
-    }
-    public int getNewlyAvailableStructsCount() {
-      return newlyAvailableStructs_.size();
-    }
-    public com.lvl6.proto.StructureProto.FullStructureProto getNewlyAvailableStructs(int index) {
-      return newlyAvailableStructs_.get(index);
-    }
-    public com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getNewlyAvailableStructsOrBuilder(
-        int index) {
-      return newlyAvailableStructs_.get(index);
-    }
-    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus.SUCCESS;
-      newlyAvailableStructs_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2164,9 +2132,6 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, status_.getNumber());
       }
-      for (int i = 0; i < newlyAvailableStructs_.size(); i++) {
-        output.writeMessage(3, newlyAvailableStructs_.get(i));
-      }
       getUnknownFields().writeTo(output);
     }
     
@@ -2183,10 +2148,6 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, status_.getNumber());
-      }
-      for (int i = 0; i < newlyAvailableStructs_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, newlyAvailableStructs_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2305,7 +2266,6 @@ public final class EventUserProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
-          getNewlyAvailableStructsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2322,12 +2282,6 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
-        if (newlyAvailableStructsBuilder_ == null) {
-          newlyAvailableStructs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-        } else {
-          newlyAvailableStructsBuilder_.clear();
-        }
         return this;
       }
       
@@ -2378,15 +2332,6 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
-        if (newlyAvailableStructsBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            newlyAvailableStructs_ = java.util.Collections.unmodifiableList(newlyAvailableStructs_);
-            bitField0_ = (bitField0_ & ~0x00000004);
-          }
-          result.newlyAvailableStructs_ = newlyAvailableStructs_;
-        } else {
-          result.newlyAvailableStructs_ = newlyAvailableStructsBuilder_.build();
-        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2408,32 +2353,6 @@ public final class EventUserProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
-        }
-        if (newlyAvailableStructsBuilder_ == null) {
-          if (!other.newlyAvailableStructs_.isEmpty()) {
-            if (newlyAvailableStructs_.isEmpty()) {
-              newlyAvailableStructs_ = other.newlyAvailableStructs_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-            } else {
-              ensureNewlyAvailableStructsIsMutable();
-              newlyAvailableStructs_.addAll(other.newlyAvailableStructs_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.newlyAvailableStructs_.isEmpty()) {
-            if (newlyAvailableStructsBuilder_.isEmpty()) {
-              newlyAvailableStructsBuilder_.dispose();
-              newlyAvailableStructsBuilder_ = null;
-              newlyAvailableStructs_ = other.newlyAvailableStructs_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-              newlyAvailableStructsBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getNewlyAvailableStructsFieldBuilder() : null;
-            } else {
-              newlyAvailableStructsBuilder_.addAllMessages(other.newlyAvailableStructs_);
-            }
-          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2484,12 +2403,6 @@ public final class EventUserProto {
                 bitField0_ |= 0x00000002;
                 status_ = value;
               }
-              break;
-            }
-            case 26: {
-              com.lvl6.proto.StructureProto.FullStructureProto.Builder subBuilder = com.lvl6.proto.StructureProto.FullStructureProto.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addNewlyAvailableStructs(subBuilder.buildPartial());
               break;
             }
           }
@@ -2610,192 +2523,6 @@ public final class EventUserProto {
         status_ = com.lvl6.proto.EventUserProto.LevelUpResponseProto.LevelUpStatus.SUCCESS;
         onChanged();
         return this;
-      }
-      
-      // repeated .com.lvl6.proto.FullStructureProto newlyAvailableStructs = 3;
-      private java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> newlyAvailableStructs_ =
-        java.util.Collections.emptyList();
-      private void ensureNewlyAvailableStructsIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          newlyAvailableStructs_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.FullStructureProto>(newlyAvailableStructs_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> newlyAvailableStructsBuilder_;
-      
-      public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto> getNewlyAvailableStructsList() {
-        if (newlyAvailableStructsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(newlyAvailableStructs_);
-        } else {
-          return newlyAvailableStructsBuilder_.getMessageList();
-        }
-      }
-      public int getNewlyAvailableStructsCount() {
-        if (newlyAvailableStructsBuilder_ == null) {
-          return newlyAvailableStructs_.size();
-        } else {
-          return newlyAvailableStructsBuilder_.getCount();
-        }
-      }
-      public com.lvl6.proto.StructureProto.FullStructureProto getNewlyAvailableStructs(int index) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          return newlyAvailableStructs_.get(index);
-        } else {
-          return newlyAvailableStructsBuilder_.getMessage(index);
-        }
-      }
-      public Builder setNewlyAvailableStructs(
-          int index, com.lvl6.proto.StructureProto.FullStructureProto value) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureNewlyAvailableStructsIsMutable();
-          newlyAvailableStructs_.set(index, value);
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      public Builder setNewlyAvailableStructs(
-          int index, com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          ensureNewlyAvailableStructsIsMutable();
-          newlyAvailableStructs_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addNewlyAvailableStructs(com.lvl6.proto.StructureProto.FullStructureProto value) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureNewlyAvailableStructsIsMutable();
-          newlyAvailableStructs_.add(value);
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      public Builder addNewlyAvailableStructs(
-          int index, com.lvl6.proto.StructureProto.FullStructureProto value) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureNewlyAvailableStructsIsMutable();
-          newlyAvailableStructs_.add(index, value);
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addNewlyAvailableStructs(
-          com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          ensureNewlyAvailableStructsIsMutable();
-          newlyAvailableStructs_.add(builderForValue.build());
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addNewlyAvailableStructs(
-          int index, com.lvl6.proto.StructureProto.FullStructureProto.Builder builderForValue) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          ensureNewlyAvailableStructsIsMutable();
-          newlyAvailableStructs_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllNewlyAvailableStructs(
-          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.FullStructureProto> values) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          ensureNewlyAvailableStructsIsMutable();
-          super.addAll(values, newlyAvailableStructs_);
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      public Builder clearNewlyAvailableStructs() {
-        if (newlyAvailableStructsBuilder_ == null) {
-          newlyAvailableStructs_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.clear();
-        }
-        return this;
-      }
-      public Builder removeNewlyAvailableStructs(int index) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          ensureNewlyAvailableStructsIsMutable();
-          newlyAvailableStructs_.remove(index);
-          onChanged();
-        } else {
-          newlyAvailableStructsBuilder_.remove(index);
-        }
-        return this;
-      }
-      public com.lvl6.proto.StructureProto.FullStructureProto.Builder getNewlyAvailableStructsBuilder(
-          int index) {
-        return getNewlyAvailableStructsFieldBuilder().getBuilder(index);
-      }
-      public com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder getNewlyAvailableStructsOrBuilder(
-          int index) {
-        if (newlyAvailableStructsBuilder_ == null) {
-          return newlyAvailableStructs_.get(index);  } else {
-          return newlyAvailableStructsBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
-           getNewlyAvailableStructsOrBuilderList() {
-        if (newlyAvailableStructsBuilder_ != null) {
-          return newlyAvailableStructsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(newlyAvailableStructs_);
-        }
-      }
-      public com.lvl6.proto.StructureProto.FullStructureProto.Builder addNewlyAvailableStructsBuilder() {
-        return getNewlyAvailableStructsFieldBuilder().addBuilder(
-            com.lvl6.proto.StructureProto.FullStructureProto.getDefaultInstance());
-      }
-      public com.lvl6.proto.StructureProto.FullStructureProto.Builder addNewlyAvailableStructsBuilder(
-          int index) {
-        return getNewlyAvailableStructsFieldBuilder().addBuilder(
-            index, com.lvl6.proto.StructureProto.FullStructureProto.getDefaultInstance());
-      }
-      public java.util.List<com.lvl6.proto.StructureProto.FullStructureProto.Builder> 
-           getNewlyAvailableStructsBuilderList() {
-        return getNewlyAvailableStructsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder> 
-          getNewlyAvailableStructsFieldBuilder() {
-        if (newlyAvailableStructsBuilder_ == null) {
-          newlyAvailableStructsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.StructureProto.FullStructureProto, com.lvl6.proto.StructureProto.FullStructureProto.Builder, com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder>(
-                  newlyAvailableStructs_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
-                  getParentForChildren(),
-                  isClean());
-          newlyAvailableStructs_ = null;
-        }
-        return newlyAvailableStructsBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.LevelUpResponseProto)
@@ -5338,29 +5065,27 @@ public final class EventUserProto {
       "\002\022!\n\035USER_WITH_UDID_ALREADY_EXISTS\020\003\022\026\n\022" +
       "INVALID_REFER_CODE\020\004\022\016\n\nOTHER_FAIL\020\005\"G\n\023" +
       "LevelUpRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\"\271\002\n\024LevelU" +
+      "m.lvl6.proto.MinimumUserProto\"\366\001\n\024LevelU" +
       "pResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
       "6.proto.MinimumUserProto\022B\n\006status\030\002 \001(\016" +
       "22.com.lvl6.proto.LevelUpResponseProto.L",
-      "evelUpStatus\022A\n\025newlyAvailableStructs\030\003 " +
-      "\003(\0132\".com.lvl6.proto.FullStructureProto\"" +
-      "h\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022 \n\034NOT_ENO" +
-      "UGH_EXP_TO_NEXT_LEVEL\020\002\022\030\n\024ALREADY_AT_MA" +
-      "X_LEVEL\020\003\022\016\n\nOTHER_FAIL\020\004\"\220\001\n#RetrieveUs" +
-      "ersForUserIdsRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022\030\n\020r" +
-      "equestedUserIds\030\002 \003(\005\022\035\n\025includeCurMonst" +
-      "erTeam\030\003 \001(\010\"\315\001\n$RetrieveUsersForUserIds" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6",
-      ".proto.MinimumUserProto\0225\n\016requestedUser" +
-      "s\030\002 \003(\0132\035.com.lvl6.proto.FullUserProto\022<" +
-      "\n\007curTeam\030\003 \003(\0132+.com.lvl6.proto.UserCur" +
-      "rentMonsterTeamProto\"F\n\022LogoutRequestPro" +
-      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
-      "mumUserProto\"h\n\035UpdateClientUserResponse" +
-      "Proto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.proto.F" +
-      "ullUserProto\022\030\n\020timeOfUserUpdate\030\002 \001(\003B\020" +
-      "B\016EventUserProto"
+      "evelUpStatus\"h\n\rLevelUpStatus\022\013\n\007SUCCESS" +
+      "\020\001\022 \n\034NOT_ENOUGH_EXP_TO_NEXT_LEVEL\020\002\022\030\n\024" +
+      "ALREADY_AT_MAX_LEVEL\020\003\022\016\n\nOTHER_FAIL\020\004\"\220" +
+      "\001\n#RetrieveUsersForUserIdsRequestProto\0220" +
+      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
+      "serProto\022\030\n\020requestedUserIds\030\002 \003(\005\022\035\n\025in" +
+      "cludeCurMonsterTeam\030\003 \001(\010\"\315\001\n$RetrieveUs" +
+      "ersForUserIdsResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\0225\n\016" +
+      "requestedUsers\030\002 \003(\0132\035.com.lvl6.proto.Fu",
+      "llUserProto\022<\n\007curTeam\030\003 \003(\0132+.com.lvl6." +
+      "proto.UserCurrentMonsterTeamProto\"F\n\022Log" +
+      "outRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\"h\n\035UpdateClien" +
+      "tUserResponseProto\022-\n\006sender\030\001 \001(\0132\035.com" +
+      ".lvl6.proto.FullUserProto\022\030\n\020timeOfUserU" +
+      "pdate\030\002 \001(\003B\020B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5396,7 +5121,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_LevelUpResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_LevelUpResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", "NewlyAvailableStructs", },
+              new java.lang.String[] { "Sender", "Status", },
               com.lvl6.proto.EventUserProto.LevelUpResponseProto.class,
               com.lvl6.proto.EventUserProto.LevelUpResponseProto.Builder.class);
           internal_static_com_lvl6_proto_RetrieveUsersForUserIdsRequestProto_descriptor =

@@ -35,6 +35,11 @@ import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureHospital;
+import com.lvl6.info.StructureResidence;
+import com.lvl6.info.StructureResourceGenerator;
+import com.lvl6.info.StructureResourceStorage;
+import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TournamentEvent;
 import com.lvl6.info.TournamentEventReward;
@@ -59,6 +64,12 @@ import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeake
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
+import com.lvl6.proto.StructureProto.HospitalProto;
+import com.lvl6.proto.StructureProto.ResidenceProto;
+import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
+import com.lvl6.proto.StructureProto.ResourceStorageProto;
+import com.lvl6.proto.StructureProto.StructureInfoProto;
+import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -1357,7 +1368,19 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   public static StaticDataProto getAllStaticData(int userId) {
   	StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
   	
-  //Player city expansions
+  	setPlayerCityExpansions(sdpb);
+  	setCities(sdpb);
+  	setTasks(sdpb);
+  	setMonsters(sdpb);
+  	setUserLevelStuff(sdpb, userId);
+  	setInProgressAndAvailableQuests(sdpb, userId);
+  	setBoosterPackStuff(sdpb);
+  	setStructures(sdpb);
+  	
+  	return sdpb.build();
+  }
+  private static void setPlayerCityExpansions(Builder sdpb) {
+  	//Player city expansions
   	Map<Integer, ExpansionCost> expansionCosts =
   			ExpansionCostRetrieveUtils.getAllExpansionNumsToCosts();
   	for (ExpansionCost cec : expansionCosts.values()) {
@@ -1365,28 +1388,31 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   				.createCityExpansionCostProtoFromCityExpansionCost(cec);
   		sdpb.addExpansionCosts(cecp);
   	}
+  }
+  private static void setCities(Builder sdpb) {
   	//Cities
   	Map<Integer, City> cities = CityRetrieveUtils.getCityIdsToCities();
   	for (Integer cityId : cities.keySet()) {
   		City city = cities.get(cityId);
   		sdpb.addAllCities(CreateInfoProtoUtils.createFullCityProtoFromCity(city));
   	}
-  	//Structures
-  	Map<Integer, Structure> structs = StructureRetrieveUtils.getStructIdsToStructs();
-  	for (Structure struct : structs.values()) {
-  		sdpb.addAllStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
-  	}
+  }
+  private static void setTasks(Builder sdpb) {
   	//Tasks
   	Map<Integer, Task> taskIdsToTasks = TaskRetrieveUtils.getTaskIdsToTasks();
   	for (Task aTask : taskIdsToTasks.values()) {
   		FullTaskProto ftp = CreateInfoProtoUtils.createFullTaskProtoFromTask(aTask);
   		sdpb.addAllTasks(ftp);
   	}
+  }
+  private static void setMonsters(Builder sdpb) {
   	//Monsters
   	Map<Integer, Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
   	for (Monster monster : monsters.values()) {
   		sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster));
   	}
+  }
+  private static void setUserLevelStuff(Builder sdpb, int userId) {
   	//User level stuff
   	Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
   			StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
@@ -1401,43 +1427,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   		slipb.setMaxCash(maxCash);
   		sdpb.addSlip(slipb.build());
   	}
-
-  	setInProgressAndAvailableQuests(sdpb, userId);
-  	
-  	//Booster pack stuff
-  	Map<Integer, BoosterPack> idsToBoosterPacks = BoosterPackRetrieveUtils
-  			.getBoosterPackIdsToBoosterPacks();
-  	Map<Integer, Map<Integer, BoosterItem>> packIdToItemIdsToItems =
-  			BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
-  	Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
-  			BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
-  	
-  	for (Integer bpackId : idsToBoosterPacks.keySet()) {
-  		BoosterPack bp = idsToBoosterPacks.get(bpackId);
-  		
-  		//get the booster items associated with this booster pack
-  		Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
-  		Collection<BoosterItem> items = null;
-  		if (null != itemIdsToItems) {
-  			items = itemIdsToItems.values();
-  		}
-  		
-  		//get the booster display items for this booster pack
-  		Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
-  				packIdToDisplayIdsToDisplayItems.get(bpackId);
-  		Collection<BoosterDisplayItem> displayItems = null;
-  		if (null != displayIdsToDisplayItems) {
-  			displayItems = displayIdsToDisplayItems.values();
-  		}
-  		
-  		BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
-  				bp, items, displayItems);
-  		sdpb.addBoosterPacks(bpProto);
-  	}
-  	
-  	return sdpb.build();
   }
-  
   private static void setInProgressAndAvailableQuests(Builder sdpb, int userId) {
   	List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
   			.getUserQuestsForUser(userId);
@@ -1481,5 +1471,123 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   		sdpb.addAvailableQuests(fqp);
   	}
   }
-  
+  private static void setBoosterPackStuff(Builder sdpb) {
+  	//Booster pack stuff
+  	Map<Integer, BoosterPack> idsToBoosterPacks = BoosterPackRetrieveUtils
+  			.getBoosterPackIdsToBoosterPacks();
+  	Map<Integer, Map<Integer, BoosterItem>> packIdToItemIdsToItems =
+  			BoosterItemRetrieveUtils.getBoosterItemIdsToBoosterItemsForBoosterPackIds();
+  	Map<Integer, Map<Integer, BoosterDisplayItem>> packIdToDisplayIdsToDisplayItems =
+  			BoosterDisplayItemRetrieveUtils.getBoosterDisplayItemIdsToBoosterDisplayItemsForBoosterPackIds();
+
+  	for (Integer bpackId : idsToBoosterPacks.keySet()) {
+  		BoosterPack bp = idsToBoosterPacks.get(bpackId);
+
+  		//get the booster items associated with this booster pack
+  		Map<Integer, BoosterItem> itemIdsToItems = packIdToItemIdsToItems.get(bpackId);
+  		Collection<BoosterItem> items = null;
+  		if (null != itemIdsToItems) {
+  			items = itemIdsToItems.values();
+  		}
+
+  		//get the booster display items for this booster pack
+  		Map<Integer, BoosterDisplayItem> displayIdsToDisplayItems = 
+  				packIdToDisplayIdsToDisplayItems.get(bpackId);
+  		Collection<BoosterDisplayItem> displayItems = null;
+  		if (null != displayIdsToDisplayItems) {
+  			displayItems = displayIdsToDisplayItems.values();
+  		}
+
+  		BoosterPackProto bpProto = CreateInfoProtoUtils.createBoosterPackProto(
+  				bp, items, displayItems);
+  		sdpb.addBoosterPacks(bpProto);
+  	}
+  }
+  private static void setStructures(Builder sdpb) {
+  	//Structures
+  	Map<Integer, Structure> structs = StructureRetrieveUtils.getStructIdsToStructs();
+  	Map<Integer, StructureInfoProto> structProtos = new HashMap<Integer, StructureInfoProto>();
+  	for (Integer structId : structs.keySet()) {
+  		Structure struct = structs.get(structId);
+  		StructureInfoProto sip = CreateInfoProtoUtils.createStructureInfoProtoFromStructure(struct);
+  		structProtos.put(structId, sip);
+  	}
+  	
+  	setGenerators(sdpb, structs, structProtos);
+  	setStorages(sdpb, structs, structProtos);
+  	setHospitals(sdpb, structs, structProtos);
+  	setResidences(sdpb, structs, structProtos);
+  	setTownHalls(sdpb, structs, structProtos);
+  }
+  //resource generator
+  private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
+  		Map<Integer, StructureInfoProto> structProtos) {
+  	Map<Integer, StructureResourceGenerator> idsToGenerators = 
+  			StructureResourceGeneratorRetrieveUtils.getStructIdsToResourceGenerators();
+  	for (Integer structId : idsToGenerators.keySet()) {
+  		Structure s = structs.get(structId);
+  		StructureInfoProto sip = structProtos.get(structId);
+  		StructureResourceGenerator srg = idsToGenerators.get(structId);
+
+  		ResourceGeneratorProto rgp = CreateInfoProtoUtils.createResourceGeneratorProto(s, sip, srg);
+  		sdpb.addAllGenerators(rgp);
+  	}
+  }
+  //resource storage
+  private static void setStorages(Builder sdpb, Map<Integer, Structure> structs,
+  		Map<Integer, StructureInfoProto> structProtos) {
+  	Map<Integer, StructureResourceStorage> idsToStorages = 
+  			StructureResourceStorageRetrieveUtils.getStructIdsToResourceStorages();
+  	for (Integer structId : idsToStorages.keySet()) {
+  		Structure s = structs.get(structId);
+  		StructureInfoProto sip = structProtos.get(structId);
+  		StructureResourceStorage srg = idsToStorages.get(structId);
+
+  		ResourceStorageProto rgp = CreateInfoProtoUtils.createResourceStorageProto(s, sip, srg);
+  		sdpb.addAllStorages(rgp);
+  	}
+  }
+  //hospitals
+  private static void setHospitals(Builder sdpb, Map<Integer, Structure> structs,
+  		Map<Integer, StructureInfoProto> structProtos) {
+  	Map<Integer, StructureHospital> idsToStorages = 
+  			StructureHospitalRetrieveUtils.getStructIdsToHospitals();
+  	for (Integer structId : idsToStorages.keySet()) {
+  		Structure s = structs.get(structId);
+  		StructureInfoProto sip = structProtos.get(structId);
+  		StructureHospital srg = idsToStorages.get(structId);
+
+  		HospitalProto rgp = CreateInfoProtoUtils.createHospitalProto(s, sip, srg);
+  		sdpb.addAllHospitals(rgp);
+  	}
+  }
+  //residences
+  private static void setResidences(Builder sdpb, Map<Integer, Structure> structs,
+  		Map<Integer, StructureInfoProto> structProtos) {
+  	Map<Integer, StructureResidence> idsToStorages = 
+  			StructureResidenceRetrieveUtils.getStructIdsToResidences();
+  	for (Integer structId : idsToStorages.keySet()) {
+  		Structure s = structs.get(structId);
+  		StructureInfoProto sip = structProtos.get(structId);
+  		StructureResidence srg = idsToStorages.get(structId);
+
+  		ResidenceProto rgp = CreateInfoProtoUtils.createResidenceProto(s, sip, srg);
+  		sdpb.addAllResidences(rgp);
+  	}
+  }
+  //town hall
+  private static void setTownHalls(Builder sdpb, Map<Integer, Structure> structs,
+  		Map<Integer, StructureInfoProto> structProtos) {
+  	Map<Integer, StructureTownHall> idsToStorages = 
+  			StructureTownHallRetrieveUtils.getStructIdsToTownHalls();
+  	for (Integer structId : idsToStorages.keySet()) {
+  		Structure s = structs.get(structId);
+  		StructureInfoProto sip = structProtos.get(structId);
+  		StructureTownHall srg = idsToStorages.get(structId);
+
+  		TownHallProto rgp = CreateInfoProtoUtils.createTownHallProto(s, sip, srg);
+  		sdpb.addAllTownHalls(rgp);
+  	}
+  }
+
 }
