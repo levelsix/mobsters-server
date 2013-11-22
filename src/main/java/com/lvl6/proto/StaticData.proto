@@ -17,31 +17,24 @@ option java_outer_classname = "StaticDataStuffProto";
 
 message StaticDataProto {
     optional MinimumUserProto sender = 1;
-	repeated CityExpansionCostProto expansionCosts = 3;
-	repeated FullCityProto allCities = 4;
-	repeated FullTaskProto allTasks = 5;
-	repeated MonsterProto allMonsters = 6;
-	repeated StaticUserLevelInfoProto slip = 7;
+	repeated CityExpansionCostProto expansionCosts = 2;
+	repeated FullCityProto allCities = 3;
+	repeated FullTaskProto allTasks = 4;
+	repeated MonsterProto allMonsters = 5;
+	repeated StaticUserLevelInfoProto slip = 6;
 	
-	repeated FullQuestProto inProgressQuests = 8; //has not been completed
-    repeated FullQuestProto unredeemedQuests = 9; //is complete
-	repeated FullQuestProto availableQuests = 10; 
+	repeated FullQuestProto inProgressQuests = 7; //has not been completed
+    repeated FullQuestProto unredeemedQuests = 8; //is complete
+	repeated FullQuestProto availableQuests = 9; 
 	
-	//optional RetrieveStaticDataStatus status = 11; //defined near the end
-	repeated BoosterPackProto boosterPacks = 12;
+	//optional RetrieveStaticDataStatus status = 10; //defined near the end
+	repeated BoosterPackProto boosterPacks = 11;
 	
-	repeated ResourceGeneratorProto allGenerators = 13;
-	repeated ResourceStorageProto allStorages = 14;
-	repeated HospitalProto allHospitals = 15;
-	repeated ResidenceProto allResidences = 16;
-	repeated TownHallProto allTownHalls = 17;
-	
-	optional RetrieveStaticDataStatus status = 2;
-	
-	enum RetrieveStaticDataStatus {
-		SUCCESS = 1;
-		SOME_FAIL = 2;
-	}
+	repeated ResourceGeneratorProto allGenerators = 12;
+	repeated ResourceStorageProto allStorages = 13;
+	repeated HospitalProto allHospitals = 14;
+	repeated ResidenceProto allResidences = 15;
+	repeated TownHallProto allTownHalls = 16;
 	
 }
 	
