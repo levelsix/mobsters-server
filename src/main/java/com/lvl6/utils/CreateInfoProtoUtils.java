@@ -574,7 +574,7 @@ public class CreateInfoProtoUtils {
   	}
   	
   	ResourceGeneratorProto.Builder rgpb = ResourceGeneratorProto.newBuilder();
-  	rgpb.setStructStuff(sip);
+  	rgpb.setStructInfo(sip);
   	
   	String aStr = srg.getResourceTypeGenerated();
   	ResourceType rt = ResourceType.valueOf(aStr);
@@ -598,7 +598,7 @@ public class CreateInfoProtoUtils {
   	}
   	
   	ResourceStorageProto.Builder rspb = ResourceStorageProto.newBuilder();
-  	rspb.setStructStuff(sip);
+  	rspb.setStructInfo(sip);
   	
   	String aStr = srs.getResourceTypeStored();
   	ResourceType rt = ResourceType.valueOf(aStr);
@@ -620,7 +620,7 @@ public class CreateInfoProtoUtils {
   	}
   	
   	HospitalProto.Builder hpb = HospitalProto.newBuilder();
-  	hpb.setStructStuff(sip);
+  	hpb.setStructInfo(sip);
   	hpb.setQueueSize(sh.getQueueSize());
   	hpb.setHealthPerSecond(sh.getHealthPerSecond());
   	
@@ -634,7 +634,7 @@ public class CreateInfoProtoUtils {
   	}
   	
   	ResidenceProto.Builder rpb = ResidenceProto.newBuilder();
-  	rpb.setStructStuff(sip);
+  	rpb.setStructInfo(sip);
   	rpb.setNumMonsterSlots(sr.getNumMonsterSlots());
   	rpb.setNumBonusMonsterSlots(sr.getNumBonusMonsterSlots());
   	rpb.setNumGemsRequired(sr.getNumGemsRequired());
@@ -650,7 +650,7 @@ public class CreateInfoProtoUtils {
   	}
   	
   	TownHallProto.Builder thpb = TownHallProto.newBuilder();
-  	thpb.setStructStuff(sip);
+  	thpb.setStructInfo(sip);
   	thpb.setNumResourceOneGenerators(sth.getNumResourceOneGenerators());
   	thpb.setNumResourceOneStorages(sth.getNumResourceOneStorages());
   	thpb.setNumResourceTwoGenerators(sth.getNumResourceTwoGenerators());

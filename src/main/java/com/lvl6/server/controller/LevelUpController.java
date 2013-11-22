@@ -103,14 +103,14 @@ import com.lvl6.utils.RetrieveUtils;
 //          }
 //        }
 
-        Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
-        if (structIdsToStructs != null) {
-          for (Structure struct : structIdsToStructs.values()) {
+//        Map<Integer, Structure> structIdsToStructs = StructureRetrieveUtils.getStructIdsToStructs();
+//        if (structIdsToStructs != null) {
+//          for (Structure struct : structIdsToStructs.values()) {
 //            if (struct != null && struct.getMinLevel() == newLevel) {
-              resBuilder.addNewlyAvailableStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
+//              resBuilder.addNewlyAvailableStructs(CreateInfoProtoUtils.createFullStructureProtoFromStructure(struct));
 //            } 
-          }
-        }
+//          }
+//        }
       }
 
       LevelUpResponseProto resProto = resBuilder.build();
