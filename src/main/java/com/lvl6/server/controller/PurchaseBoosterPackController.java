@@ -430,6 +430,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   private void writeToUserCurrencyHistory(User aUser, int packId, Timestamp date,
   		int gemPrice, int previousGems, List<BoosterItem> items, int gemReward) {
+  	int userId = aUser.getId();
   	List<Integer> itemIds = new ArrayList<Integer>();
   	for (BoosterItem item : items) {
   		int id = item.getId();
@@ -452,19 +453,21 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	String reasonForChange = ControllerConstants.UCHRFC__PURHCASED_BOOSTER_PACK;
   	
   	Map<String, Integer> money = new HashMap<String, Integer>();
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+  	Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+  	Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> details = new HashMap<String, String>();
     
     int change = (-1 * gemPrice) + gemReward;
     money.put(gems, change);
-    previousGemsCash.put(gems, previousGems);
+    previousCurrencies.put(gems, previousGems);
+    currentCurrencies.put(gems, aUser.getGems());
     reasonsForChanges.put(gems, reasonForChange);
     details.put(gems, detailSb.toString());
     
     log.info("DETAILS=" + detailSb.toString());
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-    		previousGemsCash, reasonsForChanges, details);
+    MiscMethods.writeToUserCurrencyOneUser(userId, date, money, previousCurrencies,
+    		currentCurrencies, reasonsForChanges, details);
   }
   
   private void writeToBoosterPackPurchaseHistory(int userId, int boosterPackId,

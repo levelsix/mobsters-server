@@ -463,8 +463,7 @@ public class StartupController extends EventController {
     if (null == userIdsToUsers || userIdsToUsers.isEmpty() ||
         userIdsToUsers.size() == 1) {
       log.error("unexpected error: perhaps user talked to himself. postsUserReceved="
-          + MiscMethods.shallowMapToString(postsUserReceived) + ", postsUserSent="
-          + MiscMethods.shallowMapToString(postsUserSent) + ", aUser=" + aUser);
+          + postsUserReceived + ", postsUserSent=" + postsUserSent + ", aUser=" + aUser);
       return;
     }
 
@@ -1222,7 +1221,7 @@ public class StartupController extends EventController {
       value = currentDayReward.get(key);
     } else {
       log.error("unexpected error: current day's reward for a user is more than one. rewards="
-          + MiscMethods.shallowMapToString(currentDayReward));
+          + currentDayReward);
       return false;
     }
 

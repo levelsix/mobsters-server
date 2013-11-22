@@ -205,7 +205,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void writeToUserCurrencyHistory(User aUser, Timestamp date, Map<String, Integer> money,
-      int previousGold, int clanId, String clanName) {
+      int previousGems, int clanId, String clanName) {
+  	int userId = aUser.getId();
   	StringBuilder sb = new StringBuilder();
   	sb.append("clanId=");
   	sb.append(clanId);
@@ -214,14 +215,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	String gems = MiscMethods.gems;
   	String reasonForChange = ControllerConstants.UCHRFC__CREATE_CLAN;
   	
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+    Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> detailsMap = new HashMap<String, String>();
     detailsMap.put(gems, sb.toString());
     
-    previousGoldSilver.put(gems, previousGold);
+    previousCurrencyMap.put(gems, previousGems);
+    currentCurrencyMap.put(gems, aUser.getGems());
     reasonsForChanges.put(gems, reasonForChange);
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-    		previousGoldSilver, reasonsForChanges, detailsMap);
+    MiscMethods.writeToUserCurrencyOneUser(userId, date, money, previousCurrencyMap,
+    		currentCurrencyMap, reasonsForChanges, detailsMap);
   }
 }

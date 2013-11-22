@@ -18,7 +18,6 @@ import com.lvl6.events.response.PurchaseNormStructureResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Structure;
-import com.lvl6.info.StructureForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -27,6 +26,7 @@ import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.Builder;
 import com.lvl6.proto.EventStructureProto.PurchaseNormStructureResponseProto.PurchaseNormStructureStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -67,6 +67,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     int structId = reqProto.getStructId();
     CoordinatePair cp = new CoordinatePair(reqProto.getStructCoordinates().getX(), reqProto.getStructCoordinates().getY());
     Timestamp timeOfPurchase = new Timestamp(reqProto.getTimeOfPurchase());
+    //positive value, need to convert to negative when updating user
+    int gemsSpent = reqProto.getGemsSpent();
+    //positive means refund, negative means charge user
+    int resourceChange = reqProto.getResourceChange();
+    ResourceType resourceType = reqProto.getResourceType();
 
     //things to send to client
     PurchaseNormStructureResponseProto.Builder resBuilder = PurchaseNormStructureResponseProto.newBuilder();
@@ -75,21 +80,28 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
+    	//get things from the db
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
-      int previousCash = 0;
+      
+      //currency history purposes
       int previousGems = 0;
+      int previousOil = 0;
+      int previousCash = 0;
       int uStructId = 0;
 
-      boolean legitPurchaseNorm = checkLegitPurchaseNorm(resBuilder, struct, user, timeOfPurchase);
+      boolean legitPurchaseNorm = checkLegitPurchaseNorm(resBuilder, struct, user,
+      		timeOfPurchase, gemsSpent, resourceChange, resourceType);
 
       boolean success = false;
       List<Integer> uStructIdList = new ArrayList<Integer>();
       Map<String, Integer> money = new HashMap<String, Integer>();
       if (legitPurchaseNorm) {
-      	previousCash = user.getCash();
       	previousGems = user.getGems();
-      	success = writeChangesToDB(user, struct, cp, timeOfPurchase, uStructIdList, money);
+      	previousOil = user.getOil();
+      	previousCash = user.getCash();
+      	success = writeChangesToDB(user, structId, cp, timeOfPurchase, gemsSpent,
+      			resourceChange, resourceType, uStructIdList, money);
       }
       
       if (success) {
@@ -109,7 +121,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
         server.writeEvent(resEventUpdate);
         
         writeToUserCurrencyHistory(user, structId, uStructId, timeOfPurchase,
-        		money, previousCash, previousGems);
+        		money, previousGems, previousOil, previousCash);
       }
     } catch (Exception e) {
     	log.error("exception in PurchaseNormStructure processEvent", e);
@@ -130,88 +142,78 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 
   private boolean checkLegitPurchaseNorm(Builder resBuilder, Structure prospective,
-      User user, Timestamp timeOfPurchase) {
+      User user, Timestamp timeOfPurchase, int gemsSpent, int resourceChange,
+      ResourceType resourceType) {
     if (user == null || prospective == null || timeOfPurchase == null) {
-      resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_OTHER);
       log.error("parameter passed in is null. user=" + user + ", struct=" + prospective 
           + ", timeOfPurchase=" + timeOfPurchase);
       return false;
     }
-//    //see if the user is at or above the required level to build the structure
-//    if (user.getLevel() < prospective.getMinLevel()) {
-//      resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_LEVEL_TOO_LOW);
-//      log.error("user is too low level to purchase struct. user level=" + user.getLevel() + 
-//          ", struct's min level is " + prospective.getMinLevel());
-//      return false;
-//    }
-//    int buildPrice = prospective.getBuildPrice();
-//    if (prospective.isPremiumCurrency()) {
-//    	//check if user has enough gems to buy building
-//    	if (user.getGems() < buildPrice) {
-//    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
-//    		log.error("user only has " + user.getGems() + " gems; needs " + buildPrice);
-//    		return false;
-//    	}
-//    } else {
-//    	//check if user has enough cash to building
-//    	if (user.getCash() < buildPrice) {
-//    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
-//    		log.error("user only has " + user.getCash() + " cash; needs " + buildPrice);
-//    		return false;
-//    	}
-//    }
-
-    int maxNumSameStruct = ControllerConstants
-    		.PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE;
-    Map<Integer, List<StructureForUser>> structIdsToUserStructs = RetrieveUtils.userStructRetrieveUtils().getStructIdsToUserStructsForUser(user.getId());
-    
-    //see if user can buy more of these structures and if another struct is in construction
-    for (Integer structId : structIdsToUserStructs.keySet()) {
-    	List<StructureForUser> duplicateUserStructs = structIdsToUserStructs.get(structId);
-    	
-    	if (duplicateUserStructs != null) {
-    		int numCopies = duplicateUserStructs.size();
-    		//check if user can buy anymore of prospectiveStruct
-    		if (structId == prospective.getId() && numCopies >= maxNumSameStruct) {
-    			resBuilder.setStatus(PurchaseNormStructureStatus
-    					.FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT);
-    			log.error("user already has max of this struct, which is "  + maxNumSameStruct);
-    			return false;
-    		}
-    		//check if user already building something at time of purchase
-    		for (StructureForUser us : duplicateUserStructs) {
-    			//when a building is complete, it's completedTime will = retrievedTime
-    			if (!us.isComplete() && us.getLastRetrieved() == null) {
-    				resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_ANOTHER_STRUCT_STILL_BUILDING);
-    				log.error("another struct still building: " + us); 
-    				return false;
-    			}
-    		}
-    	} else {
-    		log.error("user has no structs? for structid " + structId);
-    	}
+    ResourceType structResourceType = ResourceType.valueOf(prospective.getBuildResourceType());
+    if (resourceType != structResourceType) {
+    	log.error("client is specifying unexpected resource type. actual=" + resourceType +
+    			"\t expected=" + structResourceType + "\t structure=" + prospective);
+    	return false;
     }
+    
+    //check if user has enough resources to build it
+    int userGems = user.getGems();
+    if (gemsSpent > 0 && userGems < gemsSpent) {
+    	log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
+    			resourceChange  + " " + resourceType + " to buy structure=" + prospective);
+    	resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
+    	return false;
+    }
+    
+    int requiredResourceAmount = -1 * resourceChange;
+    if (resourceType == ResourceType.CASH) {
+    	int userResource = user.getCash();
+    	if (userResource < requiredResourceAmount) {
+    		log.error("not enough cash to buy structure. cash=" + userResource +
+    				"\t cost=" + requiredResourceAmount + "\t structure=" + prospective);
+    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_CASH);
+    		return false;
+    	}
+    } else if (resourceType == ResourceType.OIL) {
+    	int userResource = user.getOil();
+    	if (userResource < requiredResourceAmount) {
+    		log.error("not enough oil to buy structure. oil=" + userResource +
+    				"\t cost=" + requiredResourceAmount + "\t structure=" + prospective);
+    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_OIL);
+    		return false;
+    	}
+    } else {
+    	log.error("unknown resource type: " + resourceType + "\t structure=" + prospective);
+    	return false;
+    }
+
     return true;
   }
 
-  private boolean writeChangesToDB(User user, Structure struct, CoordinatePair cp,
-  		Timestamp purchaseTime, List<Integer> uStructId, Map<String, Integer> money) {
-  	//TODO: TAKE AWAY THE CORRECT RESOURCE
-  	int buildPrice = struct.getBuildCost();
-    int gemChange = 0;
-    int cashChange = 0;
-    cashChange = -1* buildPrice;
-    
+  //uStructId will store the newly created user structure
+  private boolean writeChangesToDB(User user, int structId, CoordinatePair cp,
+  		Timestamp purchaseTime, int gemsSpent, int resourceChange, ResourceType resourceType,
+  		List<Integer> uStructId, Map<String, Integer> money) {
     int userId = user.getId();
-    int structId = struct.getId();
     int userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime);
     if (userStructId <= 0) {
       log.error("problem with giving struct " + structId + " at " + purchaseTime +
       		" on " + cp);
       return false;
     }
+    
+    //TAKE AWAY THE CORRECT RESOURCE
+    int gemChange = -1 * gemsSpent;
+    int cashChange = 0;
+    int oilChange = 0;
+    
+    if (resourceType == ResourceType.CASH) {
+    	cashChange = resourceChange;
+    } else if (resourceType == ResourceType.OIL) {
+    	oilChange = resourceChange;
+    }
 
-    int num = user.updateRelativeCoinsAndDiamonds(cashChange, gemChange);
+    int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
     if (1 != num) {
       log.error("problem with updating user currency. gemChange=" + gemChange +
       		" cashChange=" + cashChange + "\t numRowsUpdated=" + num);
@@ -221,7 +223,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
         money.put(MiscMethods.gems, gemChange * -1);
       }
       if (0 != cashChange) {
-        money.put(MiscMethods.cash, cashChange * -1);
+        money.put(MiscMethods.cash, cashChange);
+      }
+      if (0 != oilChange) {
+      	money.put(MiscMethods.oil, oilChange);
       }
     }
     
@@ -229,25 +234,35 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     return true;
   }
   
-  private void writeToUserCurrencyHistory(User aUser, int structId, int uStructId,
-  		Timestamp date, Map<String, Integer> money, int previousSilver, int previousGold) {
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+  private void writeToUserCurrencyHistory(User u, int structId, int uStructId,
+  		Timestamp date, Map<String, Integer> money, int previousGems, int previousOil,
+  		int previousCash) {
+  	int userId = u.getId();
+    Map<String, Integer> previousCurencyMap = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> details = new HashMap<String, String>();
     String gems = MiscMethods.gems;
     String cash = MiscMethods.cash;
+    String oil = MiscMethods.oil;
     String reasonForChange = ControllerConstants.UCHRFC__PURCHASE_NORM_STRUCT;
     String detail = "structId=" + structId + " uStructId=" + uStructId;
 
-    previousGemsCash.put(gems, previousGold);
-    previousGemsCash.put(cash, previousSilver);
+    previousCurencyMap.put(gems, previousGems);
+    previousCurencyMap.put(cash, previousCash);
+    previousCurencyMap.put(oil, previousOil);
+    currentCurrencyMap.put(gems, u.getGems());
+    currentCurrencyMap.put(cash, u.getCash());
+    currentCurrencyMap.put(oil, u.getOil());
     reasonsForChanges.put(gems, reasonForChange);
     reasonsForChanges.put(cash, reasonForChange);
+    reasonsForChanges.put(oil, reasonForChange);
     details.put(gems, detail);
     details.put(cash, detail);
+    details.put(oil, detail);
     
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money,
-        previousGemsCash, reasonsForChanges, details);
+    MiscMethods.writeToUserCurrencyOneUser(userId, date, money, previousCurencyMap,
+    		currentCurrencyMap, reasonsForChanges, details);
     
   }
 }

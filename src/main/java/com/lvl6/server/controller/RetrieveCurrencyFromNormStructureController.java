@@ -263,8 +263,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		int previousCash, Timestamp curTime,
   		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval) {
 
+  	int userId = aUser.getId();
     Map<String, Integer> gemsCashChange = new HashMap<String, Integer>();
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> details = new HashMap<String, String>();
     String cash = MiscMethods.cash;
@@ -275,12 +277,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     
     gemsCashChange.put(cash, cashChange);
-    previousGemsCash.put(cash, previousCash);
+    previousCurrencies.put(cash, previousCash);
+    currentCurrencies.put(cash, aUser.getCash());
     reasonsForChanges.put(cash, reasonForChange);
     details.put(cash, detailSb.toString());
     
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, gemsCashChange,
-        previousGemsCash, reasonsForChanges, details);
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, gemsCashChange,
+        previousCurrencies, currentCurrencies, reasonsForChanges, details);
   }
   
 }

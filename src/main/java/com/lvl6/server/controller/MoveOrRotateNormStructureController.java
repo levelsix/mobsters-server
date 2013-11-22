@@ -51,8 +51,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     StructOrientation orientation = null;
     if (type == MoveOrRotateNormStructType.MOVE) {
       newCoords = new CoordinatePair(reqProto.getCurStructCoordinates().getX(), reqProto.getCurStructCoordinates().getY());
-    } else if (type == MoveOrRotateNormStructType.ROTATE) {
-      orientation = reqProto.getNewOrientation();
     }
 
     MoveOrRotateNormStructureResponseProto.Builder resBuilder = MoveOrRotateNormStructureResponseProto.newBuilder();
@@ -75,10 +73,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         legit = false;
         resBuilder.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
         log.error("asked to move, but the coordinates supplied in are null. reqProto's newStructCoordinates=" + reqProto.getCurStructCoordinates());
-      } else if (type == MoveOrRotateNormStructType.ROTATE && orientation == null) {
-        legit = false;
-        resBuilder.setStatus(MoveOrRotateNormStructureStatus.OTHER_FAIL);
-        log.error("asked to move, but the orientation supplied in is null. reqProto's orientation=" + reqProto.getNewOrientation());
       }
 
       if (legit) {

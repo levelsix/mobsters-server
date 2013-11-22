@@ -218,18 +218,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	if (null == money || money.isEmpty()) {
   		return;
   	}
+  	int userId = aUser.getId();
   	String gems = MiscMethods.gems;
   	String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_COMBINING_MONSTER;
   	
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> detailsList = new HashMap<String, String>();
 
-    previousGemsCash.put(gems, previousGems);
+    previousCurrencies.put(gems, previousGems);
+    currentCurrencies.put(gems, aUser.getGems());
     reasonsForChanges.put(gems, reasonForChange);
     detailsList.put(gems, "userMonsterIds=" + userMonsterIds);
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGemsCash, reasonsForChanges, detailsList);
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money, 
+        previousCurrencies, currentCurrencies, reasonsForChanges, detailsList);
 
   }
 }

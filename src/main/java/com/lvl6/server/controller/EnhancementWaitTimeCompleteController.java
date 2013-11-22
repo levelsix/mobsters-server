@@ -280,17 +280,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
   		int previousGems, long userMonsterId) {
+  	int userId = aUser.getId();
   	String gems = MiscMethods.gems;
   	String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_ENHANCING;
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> detailsMap = new HashMap<String, String>();
     
-    previousGemsCash.put(gems, previousGems);
+    previousCurrencies.put(gems, previousGems);
+    currentCurrencies.put(gems, aUser.getGems());
     reasonsForChanges.put(gems, reasonForChange);
     detailsMap.put(gems, " userMonsterId=" + userMonsterId); 
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGemsCash, reasonsForChanges, detailsMap);
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money, previousCurrencies,
+    		currentCurrencies, reasonsForChanges, detailsMap);
 
   }
 }

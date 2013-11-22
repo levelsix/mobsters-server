@@ -85,7 +85,7 @@ public interface InsertUtil {
 			int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange, String details);
 
 	public abstract int insertIntoUserCurrencyHistoryMultipleRows (List<Integer> userIds,
-			List<Timestamp> dates, List<Integer> areSilver, List<Integer> currenciesChange,
+			List<Timestamp> dates, List<String> resourceTypes, List<Integer> currenciesChange,
 			List<Integer> currenciesBefore, List<Integer> currentCurrencies, List<String> reasonsForChanges,
 			List<String> details);
 

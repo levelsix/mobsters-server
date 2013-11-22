@@ -321,6 +321,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
       int previousCash, long userTaskId, int taskId) {
+  	int userId = aUser.getId();
   	StringBuffer sb = new StringBuffer();
   	sb.append("userTask=");
   	sb.append(userTaskId);
@@ -329,15 +330,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	String cash = MiscMethods.cash;
   	String reasonForChange = ControllerConstants.UCHRFC__END_TASK;
   	
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> detailsMap = new HashMap<String, String>();
 
-    previousGemsCash.put(cash, previousCash);
+    previousCurrencies.put(cash, previousCash);
+    
     reasonsForChanges.put(cash, reasonForChange);
     detailsMap.put(cash, sb.toString());
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-        previousGemsCash, reasonsForChanges, detailsMap);
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, money, previousCurrencies,
+    		currentCurrencies, reasonsForChanges, detailsMap);
 
   }
   

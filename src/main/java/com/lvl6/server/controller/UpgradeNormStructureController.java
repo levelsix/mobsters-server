@@ -201,28 +201,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		Structure curStruct, Structure upgradedStruct, Timestamp timeOfUpgrade,
   		Map<String, Integer> money, int previousSilver, int previousGold) {
     
+  	int userId = aUser.getId();
     int userStructId = userStruct.getId();
     int prevStructId = curStruct.getId();
     int prevLevel = curStruct.getLevel();
     String structDetails = "uStructId:" + userStructId + " preStructId:" + prevStructId
         + " prevLevel:" + prevLevel;
     
-    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
+    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     String reasonForChange = ControllerConstants.UCHRFC__UPGRADE_NORM_STRUCT;
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> details = new HashMap<String, String>();
     String gems = MiscMethods.gems;
     String cash = MiscMethods.cash;
     
-    previousGoldSilver.put(cash, previousSilver);
-    previousGoldSilver.put(gems, previousGold);
+    previousCurrencies.put(cash, previousSilver);
+    previousCurrencies.put(gems, previousGold);
+    currentCurrencies.put(cash, aUser.getCash());
+    currentCurrencies.put(gems, aUser.getGems());
     reasonsForChanges.put(cash,  reasonForChange);
     reasonsForChanges.put(gems, reasonForChange);
     details.put(cash, structDetails);
     details.put(gems, structDetails);
     
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfUpgrade, 
-        money, previousGoldSilver, reasonsForChanges, details);
+    MiscMethods.writeToUserCurrencyOneUser(userId, timeOfUpgrade, money,
+    		previousCurrencies, currentCurrencies, reasonsForChanges, details);
   }
 
 }

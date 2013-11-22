@@ -536,7 +536,7 @@ public class InsertUtils implements InsertUtil{
    * they make up the values for one row to insert into user_currency_history
    */
   public int insertIntoUserCurrencyHistoryMultipleRows(List<Integer> userIds, List<Timestamp> dates, 
-      List<Integer> areSilver, List<Integer> changesToCurrencies, List<Integer> previousCurrencies, 
+      List<String> resourceTypes, List<Integer> changesToCurrencies, List<Integer> previousCurrencies, 
       List<Integer> currentCurrencies, List<String> reasonsForChanges, List<String> details) {
     String tablename = DBConstants.TABLE_USER_CURRENCY_HISTORY;
     
@@ -547,7 +547,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__USER_ID,
         userIds);														
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__DATE, dates);
-    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__IS_SILVER, areSilver);
+    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__IS_SILVER, resourceTypes);
     if(null != changesToCurrencies && 0 < changesToCurrencies.size()) {
       insertParams.put(DBConstants.USER_CURRENCY_HISTORY__CURRENCY_CHANGE, changesToCurrencies);
     }

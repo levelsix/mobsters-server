@@ -68,6 +68,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		List<UserEnhancementItemProto> ueipUpdated = reqProto.getUeipUpdateList();
 		List<UserEnhancementItemProto> ueipNew = reqProto.getUeipNewList();
 		int userId = senderProto.getUserId();
+		//positive value, need to convert to negative when updating user
 		int gemsSpent = reqProto.getGemsSpent();
 		//positive means refund, negative means charge user
 		int cashChange = reqProto.getCashChange();
@@ -255,8 +256,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Map<String, Integer> money) {
 
 		//CHARGE THE USER
+		int oilChange = 0;
 		int gemChange = -1 * gemsSpent;
-		int numChange = user.updateRelativeCoinsAndDiamonds(cashChange, gemChange); 
+		int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 		if (1 != numChange) {
 			log.warn("problem with updating user stats: gemChange=" + gemChange
 					+ ", cashChange=" + cashChange + ", user is " + user +

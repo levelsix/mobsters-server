@@ -180,7 +180,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   public void writeToUserCurrencyHistory(User aUser, StructureForUser userStruct,
   		Structure formerStruct, Timestamp timeOfPurchase, Map<String, Integer> money,
   		int previousGems) {
-    
+    int userId = aUser.getId();
     int userStructId = userStruct.getId();
     int structId = userStruct.getStructId();
     
@@ -205,19 +205,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	structDetails.append(prevLevel);
     }
     
-    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
+    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> details = new HashMap<String, String>();
     String reasonForChange = ControllerConstants.UCHRFC__SPED_UP_NORM_STRUCT;
     String gems = MiscMethods.gems;
     
-    previousGemsCash.put(gems, previousGems);
+    previousCurrencies.put(gems, previousGems);
     reasonsForChanges.put(gems, reasonForChange);
     String detail = structDetails.toString();
     details.put(gems, detail);
       
-    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, timeOfPurchase, money,
-        previousGemsCash, reasonsForChanges, details);
+    MiscMethods.writeToUserCurrencyOneUser(userId, timeOfPurchase, money,
+        currentCurrencies, previousCurrencies, reasonsForChanges, details);
   }
   
   

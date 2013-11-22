@@ -131,7 +131,7 @@ public class TournamentEventScheduledTasks {
 		List<Integer> allUserIds = new ArrayList<Integer>();
 		// user_currency_history
 		List<Timestamp> dates = new ArrayList<Timestamp>();
-		List<Integer> areSilver = new ArrayList<Integer>();
+		List<String> resourceType = new ArrayList<String>();
 		List<Integer> goldSilverChange = new ArrayList<Integer>();
 		List<Integer> previousGoldSilver = new ArrayList<Integer>();
 		List<Integer> currentGoldSilver = new ArrayList<Integer>();
@@ -158,7 +158,7 @@ public class TournamentEventScheduledTasks {
 
 				// user_currency_history
 				dates.add(nowCopy);
-				areSilver.add(0);
+				resourceType.add(MiscMethods.cash);
 				goldSilverChange.add(reward.getGoldRewarded());
 				reasonsForChanges.add(ControllerConstants.UCHRFC__LEADERBOARD);
 				detailsList.add("tournamentId=" + tournamentEventId);
@@ -176,7 +176,7 @@ public class TournamentEventScheduledTasks {
 				// right when this executes
 				getPreviousAndCurrentGold(userIds, uMap, previousGoldSilver, currentGoldSilver, goldRewarded);
 				int numInserted = InsertUtils.get()
-						.insertIntoUserCurrencyHistoryMultipleRows(userIds, dates, areSilver,
+						.insertIntoUserCurrencyHistoryMultipleRows(userIds, dates, resourceType,
 								goldSilverChange, previousGoldSilver, currentGoldSilver, reasonsForChanges,
 								detailsList);
 				log.info("Should be " + userIds.size() + ". Rows inserted into user_currency_history: "
@@ -186,7 +186,7 @@ public class TournamentEventScheduledTasks {
 			}
 			// this is done so as to not create new lists each loop
 			dates.clear();
-			areSilver.clear();
+			resourceType.clear();
 			goldSilverChange.clear();
 			previousGoldSilver.clear();
 			currentGoldSilver.clear();
