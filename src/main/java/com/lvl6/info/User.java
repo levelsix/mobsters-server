@@ -384,23 +384,27 @@ public class User implements Serializable {
 		return false;
 	}
 	
-	public int updateRelativeCoinsAndDiamonds(int coinsDelta, int diamondsDelta) {
+	public int updateRelativeCashAndOilAndGems(int cashDelta, int oilDelta, int gemsDelta) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		
 		Map<String, Object> relativeParams = new HashMap<String, Object>();
-		if (diamondsDelta != 0) {
-			relativeParams.put(DBConstants.USER__GEMS, diamondsDelta);
+		if (gemsDelta != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, gemsDelta);
 		}
-		if (coinsDelta != 0) {
-			relativeParams.put(DBConstants.USER__CASH, coinsDelta);
+		if (oilDelta != 0) {
+			relativeParams.put(DBConstants.USER__OIL, oilDelta);
+		}
+		if (cashDelta != 0) {
+			relativeParams.put(DBConstants.USER__CASH, cashDelta);
 		}
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null,
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.gems += diamondsDelta;
-			this.cash += coinsDelta;
+			this.gems += gemsDelta;
+			this.oil += oilDelta;
+			this.cash += cashDelta;
 		}
 		return numUpdated;
 	}
