@@ -25,6 +25,9 @@ message StructureInfoProto {
 	optional int32 predecessorStructId = 12;
 	optional int32 successorStructId = 13;	
 	
+	optional string imgName = 14;
+	optional float imgVerticalPixelOffset = 15; 
+	
 	enum StructType {
 		RESOURCE_GENERATOR = 1;
 		RESOURCE_STORAGE = 2;
