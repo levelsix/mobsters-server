@@ -6,7 +6,9 @@ package com.lvl6.proto;
 option java_outer_classname = "StructureProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
-message FullStructureProto { 
+//server will never send this, will only send these in the protos that rely on this proto
+//there will never be a full structure proto on its own
+message StructureInfoProto { 
 	optional int32 structId = 1;
 	optional string name = 2;
 	optional int32 level = 3;
@@ -40,7 +42,7 @@ enum ResourceType {
 //------------------------------------------------------------------------------------------
 
 message ResourceGeneratorProto {
-	optional int32 structId = 1;
+	optional StructureInfoProto structStuff = 1;
 	
 	//the type of resource that is generated
 	optional ResourceType resourceType = 2;
@@ -53,7 +55,7 @@ message ResourceGeneratorProto {
 //------------------------------------------------------------------------------------------
 
 message ResourceStorageProto {
-	optional int32 structId = 1;
+	optional StructureInfoProto structStuff = 1;
 	
 	//the type of resource that is stored
 	optional ResourceType resourceType = 2;
@@ -63,7 +65,7 @@ message ResourceStorageProto {
 //------------------------------------------------------------------------------------------
 
 message HospitalProto {
-	optional int32 structId = 1;
+	optional StructureInfoProto structStuff = 1;
 	optional int32 queueSize = 2;
 	
 	//ratio how much is health is healed in a second, (e.g. 0.5 in 1sec or 1 in 2sec)
@@ -73,7 +75,7 @@ message HospitalProto {
 //------------------------------------------------------------------------------------------
 
 message ResidenceProto {
-	optional int32 structId = 1;
+	optional StructureInfoProto structStuff = 1;
 	
 	//how many monster slots this residence gives the user (absolute number)
 	//does not depend on previous lower level structures
@@ -92,7 +94,7 @@ message ResidenceProto {
 //------------------------------------------------------------------------------------------
 
 message TownHallProto {
-	optional int32 structId = 1;
+	optional StructureInfoProto structStuff = 1;
 	optional int32 numResourceOneGenerators = 2;
 	optional int32 numResourceOneStorages = 3; 	
 	optional int32 numResourceTwoGenerators = 4;

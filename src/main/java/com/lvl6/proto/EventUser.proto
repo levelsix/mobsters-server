@@ -52,7 +52,7 @@ message LevelUpRequestProto {
 message LevelUpResponseProto {
      optional MinimumUserProto sender = 1;
      optional LevelUpStatus status = 2;
-     repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
+     //repeated FullStructureProto newlyAvailableStructs = 3;					//only new ones
 
 	enum LevelUpStatus {
      	SUCCESS = 1;
