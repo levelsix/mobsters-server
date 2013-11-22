@@ -84,11 +84,15 @@ message UpgradeNormStructureResponseProto {
 		SUCCESS = 1;
 		FAIL_NOT_ENOUGH_CASH = 2;
 		FAIL_NOT_ENOUGH_GEMS = 3;
-		FAIL_NOT_BUILT_YET = 4;
-		FAIL_NOT_USERS_STRUCT = 5;
-		FAIL_ANOTHER_STRUCT_STILL_UPGRADING = 6;
-		FAIL_AT_MAX_LEVEL_ALREADY = 7;
-		FAIL_OTHER = 8;
+		FAIL_NOT_ENOUGH_OIL = 4;
+		FAIL_NOT_BUILT_YET = 5;
+		FAIL_NOT_USERS_STRUCT = 6;
+		
+		//client will do this, since it already knows if a user is upgrading something
+		//FAIL_ANOTHER_STRUCT_STILL_UPGRADING = 7; 
+		
+		FAIL_AT_MAX_LEVEL_ALREADY = 8;
+		FAIL_OTHER = 9;
 	}
 }
 

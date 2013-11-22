@@ -3458,21 +3458,21 @@ public final class EventStructureProto {
       SUCCESS(0, 1),
       FAIL_NOT_ENOUGH_CASH(1, 2),
       FAIL_NOT_ENOUGH_GEMS(2, 3),
-      FAIL_NOT_BUILT_YET(3, 4),
-      FAIL_NOT_USERS_STRUCT(4, 5),
-      FAIL_ANOTHER_STRUCT_STILL_UPGRADING(5, 6),
-      FAIL_AT_MAX_LEVEL_ALREADY(6, 7),
-      FAIL_OTHER(7, 8),
+      FAIL_NOT_ENOUGH_OIL(3, 4),
+      FAIL_NOT_BUILT_YET(4, 5),
+      FAIL_NOT_USERS_STRUCT(5, 6),
+      FAIL_AT_MAX_LEVEL_ALREADY(6, 8),
+      FAIL_OTHER(7, 9),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_NOT_ENOUGH_CASH_VALUE = 2;
       public static final int FAIL_NOT_ENOUGH_GEMS_VALUE = 3;
-      public static final int FAIL_NOT_BUILT_YET_VALUE = 4;
-      public static final int FAIL_NOT_USERS_STRUCT_VALUE = 5;
-      public static final int FAIL_ANOTHER_STRUCT_STILL_UPGRADING_VALUE = 6;
-      public static final int FAIL_AT_MAX_LEVEL_ALREADY_VALUE = 7;
-      public static final int FAIL_OTHER_VALUE = 8;
+      public static final int FAIL_NOT_ENOUGH_OIL_VALUE = 4;
+      public static final int FAIL_NOT_BUILT_YET_VALUE = 5;
+      public static final int FAIL_NOT_USERS_STRUCT_VALUE = 6;
+      public static final int FAIL_AT_MAX_LEVEL_ALREADY_VALUE = 8;
+      public static final int FAIL_OTHER_VALUE = 9;
       
       
       public final int getNumber() { return value; }
@@ -3482,11 +3482,11 @@ public final class EventStructureProto {
           case 1: return SUCCESS;
           case 2: return FAIL_NOT_ENOUGH_CASH;
           case 3: return FAIL_NOT_ENOUGH_GEMS;
-          case 4: return FAIL_NOT_BUILT_YET;
-          case 5: return FAIL_NOT_USERS_STRUCT;
-          case 6: return FAIL_ANOTHER_STRUCT_STILL_UPGRADING;
-          case 7: return FAIL_AT_MAX_LEVEL_ALREADY;
-          case 8: return FAIL_OTHER;
+          case 4: return FAIL_NOT_ENOUGH_OIL;
+          case 5: return FAIL_NOT_BUILT_YET;
+          case 6: return FAIL_NOT_USERS_STRUCT;
+          case 8: return FAIL_AT_MAX_LEVEL_ALREADY;
+          case 9: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -3517,7 +3517,7 @@ public final class EventStructureProto {
       }
       
       private static final UpgradeNormStructureStatus[] VALUES = {
-        SUCCESS, FAIL_NOT_ENOUGH_CASH, FAIL_NOT_ENOUGH_GEMS, FAIL_NOT_BUILT_YET, FAIL_NOT_USERS_STRUCT, FAIL_ANOTHER_STRUCT_STILL_UPGRADING, FAIL_AT_MAX_LEVEL_ALREADY, FAIL_OTHER, 
+        SUCCESS, FAIL_NOT_ENOUGH_CASH, FAIL_NOT_ENOUGH_GEMS, FAIL_NOT_ENOUGH_OIL, FAIL_NOT_BUILT_YET, FAIL_NOT_USERS_STRUCT, FAIL_AT_MAX_LEVEL_ALREADY, FAIL_OTHER, 
       };
       
       public static UpgradeNormStructureStatus valueOf(
@@ -9769,71 +9769,71 @@ public final class EventStructureProto {
       "FAIL\020\002\"\201\001\n UpgradeNormStructureRequestPr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
       "imumUserProto\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rt" +
-      "imeOfUpgrade\030\003 \001(\003\"\236\003\n!UpgradeNormStruct" +
+      "imeOfUpgrade\030\003 \001(\003\"\216\003\n!UpgradeNormStruct" +
       "ureResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
       "vl6.proto.MinimumUserProto\022\\\n\006status\030\002 \001",
       "(\0162L.com.lvl6.proto.UpgradeNormStructure" +
       "ResponseProto.UpgradeNormStructureStatus" +
-      "\"\350\001\n\032UpgradeNormStructureStatus\022\013\n\007SUCCE" +
+      "\"\330\001\n\032UpgradeNormStructureStatus\022\013\n\007SUCCE" +
       "SS\020\001\022\030\n\024FAIL_NOT_ENOUGH_CASH\020\002\022\030\n\024FAIL_N" +
-      "OT_ENOUGH_GEMS\020\003\022\026\n\022FAIL_NOT_BUILT_YET\020\004" +
-      "\022\031\n\025FAIL_NOT_USERS_STRUCT\020\005\022\'\n#FAIL_ANOT" +
-      "HER_STRUCT_STILL_UPGRADING\020\006\022\035\n\031FAIL_AT_" +
-      "MAX_LEVEL_ALREADY\020\007\022\016\n\nFAIL_OTHER\020\010\"\253\001\n0" +
-      "FinishNormStructWaittimeWithDiamondsRequ" +
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot",
-      "o.MinimumUserProto\022\024\n\014userStructId\030\002 \001(\005" +
-      "\022\025\n\rtimeOfSpeedup\030\003 \001(\003\022\030\n\020gemCostToSpee" +
-      "dup\030\004 \001(\005\"\260\002\n1FinishNormStructWaittimeWi" +
-      "thDiamondsResponseProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022p\n\006sta" +
-      "tus\030\002 \001(\0162`.com.lvl6.proto.FinishNormStr" +
-      "uctWaittimeWithDiamondsResponseProto.Fin" +
-      "ishNormStructWaittimeStatus\"W\n\036FinishNor" +
-      "mStructWaittimeStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FA" +
-      "IL_NOT_ENOUGH_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"}\n\"",
-      "NormStructWaitCompleteRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\024\n\014userStructId\030\002 \003(\005\022\017\n\007curTime\030\003 " +
-      "\001(\003\"\311\002\n#NormStructWaitCompleteResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022`\n\006status\030\002 \001(\0162P.com.lvl6" +
-      ".proto.NormStructWaitCompleteResponsePro" +
-      "to.NormStructWaitCompleteStatus\022:\n\nuserS" +
-      "truct\030\003 \003(\0132&.com.lvl6.proto.FullUserStr" +
-      "uctureProto\"R\n\034NormStructWaitCompleteSta",
-      "tus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_DONE_YET\020\002\022" +
-      "\016\n\nFAIL_OTHER\020\003\"\214\002\n-RetrieveCurrencyFrom" +
-      "NormStructureRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022g\n\020s" +
-      "tructRetrievals\030\002 \003(\0132M.com.lvl6.proto.R" +
-      "etrieveCurrencyFromNormStructureRequestP" +
-      "roto.StructRetrieval\032@\n\017StructRetrieval\022" +
-      "\024\n\014userStructId\030\001 \001(\005\022\027\n\017timeOfRetrieval" +
-      "\030\002 \001(\003\"\337\002\n.RetrieveCurrencyFromNormStruc" +
-      "tureResponseProto\0220\n\006sender\030\001 \001(\0132 .com.",
-      "lvl6.proto.MinimumUserProto\022v\n\006status\030\002 " +
-      "\001(\0162f.com.lvl6.proto.RetrieveCurrencyFro" +
-      "mNormStructureResponseProto.RetrieveCurr" +
-      "encyFromNormStructureStatus\"\202\001\n\'Retrieve" +
-      "CurrencyFromNormStructureStatus\022\016\n\nOTHER" +
-      "_FAIL\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_TOO_APART" +
-      "_FROM_SERVER_TIME\020\003\022\023\n\017NOT_LONG_ENOUGH\020\004" +
-      "\"\267\001\n!ExpansionWaitCompleteRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txPosition\030\003",
-      " \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010" +
-      "\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"Expansion" +
-      "WaitCompleteResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022^\n\006s" +
-      "tatus\030\002 \001(\0162N.com.lvl6.proto.ExpansionWa" +
-      "itCompleteResponseProto.ExpansionWaitCom" +
-      "pleteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.pr" +
-      "oto.UserCityExpansionDataProto\"\211\001\n\033Expan" +
-      "sionWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026F" +
-      "AIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DONE",
-      "_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nFA" +
-      "IL_OTHER\020\005B\025B\023EventStructureProto"
+      "OT_ENOUGH_GEMS\020\003\022\027\n\023FAIL_NOT_ENOUGH_OIL\020" +
+      "\004\022\026\n\022FAIL_NOT_BUILT_YET\020\005\022\031\n\025FAIL_NOT_US" +
+      "ERS_STRUCT\020\006\022\035\n\031FAIL_AT_MAX_LEVEL_ALREAD" +
+      "Y\020\010\022\016\n\nFAIL_OTHER\020\t\"\253\001\n0FinishNormStruct" +
+      "WaittimeWithDiamondsRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro",
+      "to\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rtimeOfSpeedu" +
+      "p\030\003 \001(\003\022\030\n\020gemCostToSpeedup\030\004 \001(\005\"\260\002\n1Fi" +
+      "nishNormStructWaittimeWithDiamondsRespon" +
+      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022p\n\006status\030\002 \001(\0162`.com." +
+      "lvl6.proto.FinishNormStructWaittimeWithD" +
+      "iamondsResponseProto.FinishNormStructWai" +
+      "ttimeStatus\"W\n\036FinishNormStructWaittimeS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_ENOUGH_GE" +
+      "MS\020\002\022\016\n\nFAIL_OTHER\020\003\"}\n\"NormStructWaitCo",
+      "mpleteRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\024\n\014userStru" +
+      "ctId\030\002 \003(\005\022\017\n\007curTime\030\003 \001(\003\"\311\002\n#NormStru" +
+      "ctWaitCompleteResponseProto\0220\n\006sender\030\001 " +
+      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022`\n" +
+      "\006status\030\002 \001(\0162P.com.lvl6.proto.NormStruc" +
+      "tWaitCompleteResponseProto.NormStructWai" +
+      "tCompleteStatus\022:\n\nuserStruct\030\003 \003(\0132&.co" +
+      "m.lvl6.proto.FullUserStructureProto\"R\n\034N" +
+      "ormStructWaitCompleteStatus\022\013\n\007SUCCESS\020\001",
+      "\022\025\n\021FAIL_NOT_DONE_YET\020\002\022\016\n\nFAIL_OTHER\020\003\"" +
+      "\214\002\n-RetrieveCurrencyFromNormStructureReq" +
+      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022g\n\020structRetrievals\030" +
+      "\002 \003(\0132M.com.lvl6.proto.RetrieveCurrencyF" +
+      "romNormStructureRequestProto.StructRetri" +
+      "eval\032@\n\017StructRetrieval\022\024\n\014userStructId\030" +
+      "\001 \001(\005\022\027\n\017timeOfRetrieval\030\002 \001(\003\"\337\002\n.Retri" +
+      "eveCurrencyFromNormStructureResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim",
+      "umUserProto\022v\n\006status\030\002 \001(\0162f.com.lvl6.p" +
+      "roto.RetrieveCurrencyFromNormStructureRe" +
+      "sponseProto.RetrieveCurrencyFromNormStru" +
+      "ctureStatus\"\202\001\n\'RetrieveCurrencyFromNorm" +
+      "StructureStatus\022\016\n\nOTHER_FAIL\020\001\022\013\n\007SUCCE" +
+      "SS\020\002\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIM" +
+      "E\020\003\022\023\n\017NOT_LONG_ENOUGH\020\004\"\267\001\n!ExpansionWa" +
+      "itCompleteRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\017\n\007curT" +
+      "ime\030\002 \001(\003\022\021\n\txPosition\030\003 \001(\021\022\021\n\tyPositio",
+      "n\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010\022\030\n\020gemCostToSpe" +
+      "edup\030\006 \001(\005\"\375\002\n\"ExpansionWaitCompleteResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022^\n\006status\030\002 \001(\0162N.co" +
+      "m.lvl6.proto.ExpansionWaitCompleteRespon" +
+      "seProto.ExpansionWaitCompleteStatus\0229\n\005u" +
+      "cedp\030\003 \001(\0132*.com.lvl6.proto.UserCityExpa" +
+      "nsionDataProto\"\211\001\n\033ExpansionWaitComplete" +
+      "Status\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_WAS_NOT_EXPA" +
+      "NDING\020\002\022\025\n\021FAIL_NOT_DONE_YET\020\003\022\032\n\026FAIL_I",
+      "NSUFFICIENT_GEMS\020\004\022\016\n\nFAIL_OTHER\020\005B\025B\023Ev" +
+      "entStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
