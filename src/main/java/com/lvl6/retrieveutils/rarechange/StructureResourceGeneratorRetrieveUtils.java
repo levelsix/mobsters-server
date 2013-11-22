@@ -115,7 +115,22 @@ import com.lvl6.utils.DBConnection;
     float productionRate = rs.getFloat(i++);
     int capacity = rs.getInt(i++);
     
-    return new StructureResourceGenerator(structId, resourceTypeGenerated, productionRate,
-    		capacity);
+    StructureResourceGenerator srg = new StructureResourceGenerator(structId,
+    		resourceTypeGenerated, productionRate, capacity);
+    
+    if (null != resourceTypeGenerated) {
+    	String newResourceTypeGenerated = resourceTypeGenerated.trim();
+    	newResourceTypeGenerated = newResourceTypeGenerated.toUpperCase();
+    	if (!resourceTypeGenerated.equals(newResourceTypeGenerated)) {
+    		log.error("string for resource type is incorrect. is=" + resourceTypeGenerated +
+    				"\t (if spelled correctly) expected=" + newResourceTypeGenerated +
+    				"\t resourceGenerator obj=" + srg);
+    		srg.setResourceTypeGenerated(newResourceTypeGenerated);
+    	}
+    } else {
+    	log.error("resourceStorage obj's resource type is null!!!. obj=" + srg);
+    }
+    
+    return srg;
   }
 }

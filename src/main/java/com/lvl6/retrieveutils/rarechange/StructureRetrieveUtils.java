@@ -125,8 +125,36 @@ import com.lvl6.utils.DBConnection;
     int predecessorStructId = rs.getInt(i++);
     int successorStructId = rs.getInt(i++);
     
-    return new Structure(id, name, level, structType, buildResourceType, buildCost,
+    Structure s = new Structure(id, name, level, structType, buildResourceType, buildCost,
     		minutesToBuild, requiredTownHallId, width, height, spriteImgName,
     		predecessorStructId, successorStructId);
+    
+    if (null != structType) {
+    	String newStructType = structType.trim();
+    	newStructType = newStructType.toUpperCase();
+    	if (!structType.equals(newStructType)) {
+    		log.error("string for struct type is incorrect. is=" + structType +
+    				"\t (if spelled correctly) expected=" + newStructType + "\t struct obj=" + s);
+    		s.setStructType(newStructType);
+    	}
+    	
+    } else {
+    	log.error("structure obj's struct type is null!!!. obj=" + s);
+    }
+    
+    if (null != buildResourceType) {
+    	String newBuildResourceType = buildResourceType.trim();
+    	newBuildResourceType = newBuildResourceType.toUpperCase();
+    	if (!buildResourceType.equals(newBuildResourceType)) {
+    		log.error("string for resource type is incorrect. is=" + buildResourceType +
+    				"\t (if spelled correctly) expected=" + newBuildResourceType +
+    				"\t struct obj=" + s);
+    		s.setBuildResourceType(newBuildResourceType);
+    	}
+    	
+    } else {
+    	log.error("structure obj's resource type is null!!!. obj=" + s);
+    }
+    return s;
   }
 }

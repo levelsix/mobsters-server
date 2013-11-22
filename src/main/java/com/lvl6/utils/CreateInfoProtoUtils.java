@@ -34,6 +34,11 @@ import com.lvl6.info.QuestForUser;
 import com.lvl6.info.Referral;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureHospital;
+import com.lvl6.info.StructureResidence;
+import com.lvl6.info.StructureResourceGenerator;
+import com.lvl6.info.StructureResourceStorage;
+import com.lvl6.info.StructureTownHall;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskStage;
 import com.lvl6.info.TaskStageMonster;
@@ -76,10 +81,15 @@ import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullQuestProto.QuestType;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
-import com.lvl6.proto.StructureProto.FullStructureProto;
-import com.lvl6.proto.StructureProto.FullStructureProto.StructType;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
+import com.lvl6.proto.StructureProto.HospitalProto;
+import com.lvl6.proto.StructureProto.ResidenceProto;
+import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
+import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.StructureProto.StructureInfoProto;
+import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
+import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
@@ -511,8 +521,8 @@ public class CreateInfoProtoUtils {
     return CoordinateProto.newBuilder().setX(cp.getX()).setY(cp.getY()).build();
   }
 
-  public static FullStructureProto createFullStructureProtoFromStructure(Structure s) {
-    FullStructureProto.Builder builder = FullStructureProto.newBuilder();
+  public static StructureInfoProto createStructureInfoProtoFromStructure(Structure s) {
+    StructureInfoProto.Builder builder = StructureInfoProto.newBuilder();
     builder.setStructId(s.getId());
     
     String aStr = s.getName();
@@ -522,24 +532,19 @@ public class CreateInfoProtoUtils {
     
     builder.setLevel(s.getLevel());
     aStr = s.getStructType();
-    log.info("this is the structure " + s);
-    if (null != aStr) {
-    	try {
-    		StructType t = StructType.valueOf(aStr);
-    		builder.setStructType(t);
-    	} catch (Exception e) {
-    		log.error("could not create enum type. structType=" + aStr + "...", e);
-    	}
+    StructType st = StructType.valueOf(aStr);
+    if (null != st) {
+    		builder.setStructType(st);
+    } else {
+    		log.error("can't create enum type. structType=" + aStr + ".\t structure=" + s);
     }
     
     aStr = s.getBuildResourceType();
-    if (null != aStr) {
-    	try {
-    		ResourceType rt = ResourceType.valueOf(aStr);
+    ResourceType rt = ResourceType.valueOf(aStr);
+    if (null != rt) {
     		builder.setBuildResourceType(rt);
-    	} catch (Exception e) {
-    		log.error("could not create enum type. resourceType=" + aStr + "...", e);
-    	}
+    } else {
+  		log.error("can't create enum type. resourceType=" + aStr + ". structure=" + s);
     }
     
     builder.setBuildCost(s.getBuildCost());
@@ -561,6 +566,102 @@ public class CreateInfoProtoUtils {
     
     return builder.build();
   }
+  
+  public static ResourceGeneratorProto createResourceGeneratorProto(Structure s,
+  		StructureInfoProto sip, StructureResourceGenerator srg) {
+  	if (null == sip) {
+  		sip = createStructureInfoProtoFromStructure(s);
+  	}
+  	
+  	ResourceGeneratorProto.Builder rgpb = ResourceGeneratorProto.newBuilder();
+  	rgpb.setStructStuff(sip);
+  	
+  	String aStr = srg.getResourceTypeGenerated();
+  	ResourceType rt = ResourceType.valueOf(aStr);
+  	if (null != rt) {
+  		rgpb.setResourceType(rt);
+  	} else {
+  		log.error("can't create enum type. resourceType=" + aStr +
+  				". resourceGenerator=" + srg);
+  	}
+  	
+  	rgpb.setProductionRate(srg.getProductionRate());
+  	rgpb.setCapacity(srg.getCapacity());
+  	
+  	return rgpb.build();
+  }
+  
+  public static ResourceStorageProto createResourceStorageProto(Structure s,
+  		StructureInfoProto sip,  StructureResourceStorage srs) {
+  	if (null == sip) {
+  		sip = createStructureInfoProtoFromStructure(s);
+  	}
+  	
+  	ResourceStorageProto.Builder rspb = ResourceStorageProto.newBuilder();
+  	rspb.setStructStuff(sip);
+  	
+  	String aStr = srs.getResourceTypeStored();
+  	ResourceType rt = ResourceType.valueOf(aStr);
+  	if (null != rt) {
+  		rspb.setResourceType(rt);
+  	} else {
+  		log.error("can't create enum type. resourceType=" + aStr +
+  				". resourceStorage=" + srs);
+  	}
+  	rspb.setCapacity(srs.getCapacity());
+  	
+  	return rspb.build();
+  }
+  
+  public static HospitalProto createHospitalProto(Structure s, StructureInfoProto sip,
+  		StructureHospital sh) {
+  	if (null == sip) {
+  		sip = createStructureInfoProtoFromStructure(s);
+  	}
+  	
+  	HospitalProto.Builder hpb = HospitalProto.newBuilder();
+  	hpb.setStructStuff(sip);
+  	hpb.setQueueSize(sh.getQueueSize());
+  	hpb.setHealthPerSecond(sh.getHealthPerSecond());
+  	
+  	return hpb.build();
+  }
+  
+  public static ResidenceProto createResidenceProto(Structure s, StructureInfoProto sip,
+  		StructureResidence sr) {
+  	if (null == sip) {
+  		sip = createStructureInfoProtoFromStructure(s);
+  	}
+  	
+  	ResidenceProto.Builder rpb = ResidenceProto.newBuilder();
+  	rpb.setStructStuff(sip);
+  	rpb.setNumMonsterSlots(sr.getNumMonsterSlots());
+  	rpb.setNumBonusMonsterSlots(sr.getNumBonusMonsterSlots());
+  	rpb.setNumGemsRequired(sr.getNumGemsRequired());
+  	rpb.setNumAcceptedFbInvites(sr.getNumAcceptedFbInvites());
+  	
+  	return rpb.build();
+  }
+  
+  public static TownHallProto createTownHallProto(Structure s, StructureInfoProto sip,
+  		StructureTownHall sth) {
+  	if (null == sip) {
+  		sip = createStructureInfoProtoFromStructure(s);
+  	}
+  	
+  	TownHallProto.Builder thpb = TownHallProto.newBuilder();
+  	thpb.setStructStuff(sip);
+  	thpb.setNumResourceOneGenerators(sth.getNumResourceOneGenerators());
+  	thpb.setNumResourceOneStorages(sth.getNumResourceOneStorages());
+  	thpb.setNumResourceTwoGenerators(sth.getNumResourceTwoGenerators());
+  	thpb.setNumResourceTwoStorages(sth.getNumResourceTwoStorages());
+  	thpb.setNumHospitals(sth.getNumHospitals());
+  	thpb.setNumResidences(sth.getNumResidences());
+  	thpb.setNumMonsterSlots(sth.getNumMonsterSlots());
+  	
+  	return thpb.build();
+  }
+  
 
   public static FullCityProto createFullCityProtoFromCity(City c) {
     FullCityProto.Builder builder = FullCityProto.newBuilder();
@@ -1022,7 +1123,7 @@ public class CreateInfoProtoUtils {
     if (null != me) {
     	mpb.setElement(aMonster.getElement());
     } else{
-    	log.error("monster element is null!!!!!! monster=" + me);
+    	log.error("monster element is null!!!!!! monster=" + aMonster);
     }
     mpb.setBaseHp(aMonster.getBaseHp());
     String imagePrefix = aMonster.getImagePrefix(); 

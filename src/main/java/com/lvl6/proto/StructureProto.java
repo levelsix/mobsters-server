@@ -11,9 +11,11 @@ public final class StructureProto {
   public enum ResourceType
       implements com.google.protobuf.ProtocolMessageEnum {
     CASH(0, 1),
+    OIL(1, 2),
     ;
     
     public static final int CASH_VALUE = 1;
+    public static final int OIL_VALUE = 2;
     
     
     public final int getNumber() { return value; }
@@ -21,6 +23,7 @@ public final class StructureProto {
     public static ResourceType valueOf(int value) {
       switch (value) {
         case 1: return CASH;
+        case 2: return OIL;
         default: return null;
       }
     }
@@ -51,7 +54,7 @@ public final class StructureProto {
     }
     
     private static final ResourceType[] VALUES = {
-      CASH, 
+      CASH, OIL, 
     };
     
     public static ResourceType valueOf(
@@ -143,7 +146,7 @@ public final class StructureProto {
     // @@protoc_insertion_point(enum_scope:com.lvl6.proto.StructOrientation)
   }
   
-  public interface FullStructureProtoOrBuilder
+  public interface StructureInfoProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
     // optional int32 structId = 1;
@@ -158,9 +161,9 @@ public final class StructureProto {
     boolean hasLevel();
     int getLevel();
     
-    // optional .com.lvl6.proto.FullStructureProto.StructType structType = 4;
+    // optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;
     boolean hasStructType();
-    com.lvl6.proto.StructureProto.FullStructureProto.StructType getStructType();
+    com.lvl6.proto.StructureProto.StructureInfoProto.StructType getStructType();
     
     // optional .com.lvl6.proto.ResourceType buildResourceType = 5;
     boolean hasBuildResourceType();
@@ -198,32 +201,32 @@ public final class StructureProto {
     boolean hasSuccessorStructId();
     int getSuccessorStructId();
   }
-  public static final class FullStructureProto extends
+  public static final class StructureInfoProto extends
       com.google.protobuf.GeneratedMessage
-      implements FullStructureProtoOrBuilder {
-    // Use FullStructureProto.newBuilder() to construct.
-    private FullStructureProto(Builder builder) {
+      implements StructureInfoProtoOrBuilder {
+    // Use StructureInfoProto.newBuilder() to construct.
+    private StructureInfoProto(Builder builder) {
       super(builder);
     }
-    private FullStructureProto(boolean noInit) {}
+    private StructureInfoProto(boolean noInit) {}
     
-    private static final FullStructureProto defaultInstance;
-    public static FullStructureProto getDefaultInstance() {
+    private static final StructureInfoProto defaultInstance;
+    public static StructureInfoProto getDefaultInstance() {
       return defaultInstance;
     }
     
-    public FullStructureProto getDefaultInstanceForType() {
+    public StructureInfoProto getDefaultInstanceForType() {
       return defaultInstance;
     }
     
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_FullStructureProto_descriptor;
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_StructureInfoProto_descriptor;
     }
     
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_FullStructureProto_fieldAccessorTable;
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable;
     }
     
     public enum StructType
@@ -277,7 +280,7 @@ public final class StructureProto {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return com.lvl6.proto.StructureProto.FullStructureProto.getDescriptor().getEnumTypes().get(0);
+        return com.lvl6.proto.StructureProto.StructureInfoProto.getDescriptor().getEnumTypes().get(0);
       }
       
       private static final StructType[] VALUES = {
@@ -301,7 +304,7 @@ public final class StructureProto {
         this.value = value;
       }
       
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.FullStructureProto.StructType)
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.StructureInfoProto.StructType)
     }
     
     private int bitField0_;
@@ -357,13 +360,13 @@ public final class StructureProto {
       return level_;
     }
     
-    // optional .com.lvl6.proto.FullStructureProto.StructType structType = 4;
+    // optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;
     public static final int STRUCTTYPE_FIELD_NUMBER = 4;
-    private com.lvl6.proto.StructureProto.FullStructureProto.StructType structType_;
+    private com.lvl6.proto.StructureProto.StructureInfoProto.StructType structType_;
     public boolean hasStructType() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public com.lvl6.proto.StructureProto.FullStructureProto.StructType getStructType() {
+    public com.lvl6.proto.StructureProto.StructureInfoProto.StructType getStructType() {
       return structType_;
     }
     
@@ -483,7 +486,7 @@ public final class StructureProto {
       structId_ = 0;
       name_ = "";
       level_ = 0;
-      structType_ = com.lvl6.proto.StructureProto.FullStructureProto.StructType.RESOURCE_GENERATOR;
+      structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.RESOURCE_GENERATOR;
       buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
       buildCost_ = 0;
       minutesToBuild_ = 0;
@@ -618,41 +621,41 @@ public final class StructureProto {
       return super.writeReplace();
     }
     
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseFrom(
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseFrom(
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseFrom(byte[] data)
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data).buildParsed();
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseFrom(
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return newBuilder().mergeFrom(data, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseFrom(java.io.InputStream input)
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseFrom(
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input, extensionRegistry)
                .buildParsed();
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseDelimitedFrom(java.io.InputStream input)
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       Builder builder = newBuilder();
       if (builder.mergeDelimitedFrom(input)) {
@@ -661,7 +664,7 @@ public final class StructureProto {
         return null;
       }
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseDelimitedFrom(
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -672,12 +675,12 @@ public final class StructureProto {
         return null;
       }
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseFrom(
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return newBuilder().mergeFrom(input).buildParsed();
     }
-    public static com.lvl6.proto.StructureProto.FullStructureProto parseFrom(
+    public static com.lvl6.proto.StructureProto.StructureInfoProto parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -687,7 +690,7 @@ public final class StructureProto {
     
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.StructureProto.FullStructureProto prototype) {
+    public static Builder newBuilder(com.lvl6.proto.StructureProto.StructureInfoProto prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -700,18 +703,18 @@ public final class StructureProto {
     }
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.StructureProto.FullStructureProtoOrBuilder {
+       implements com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_FullStructureProto_descriptor;
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_StructureInfoProto_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_FullStructureProto_fieldAccessorTable;
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable;
       }
       
-      // Construct using com.lvl6.proto.StructureProto.FullStructureProto.newBuilder()
+      // Construct using com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -736,7 +739,7 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         level_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        structType_ = com.lvl6.proto.StructureProto.FullStructureProto.StructType.RESOURCE_GENERATOR;
+        structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.RESOURCE_GENERATOR;
         bitField0_ = (bitField0_ & ~0x00000008);
         buildResourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -765,24 +768,24 @@ public final class StructureProto {
       
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.lvl6.proto.StructureProto.FullStructureProto.getDescriptor();
+        return com.lvl6.proto.StructureProto.StructureInfoProto.getDescriptor();
       }
       
-      public com.lvl6.proto.StructureProto.FullStructureProto getDefaultInstanceForType() {
-        return com.lvl6.proto.StructureProto.FullStructureProto.getDefaultInstance();
+      public com.lvl6.proto.StructureProto.StructureInfoProto getDefaultInstanceForType() {
+        return com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       }
       
-      public com.lvl6.proto.StructureProto.FullStructureProto build() {
-        com.lvl6.proto.StructureProto.FullStructureProto result = buildPartial();
+      public com.lvl6.proto.StructureProto.StructureInfoProto build() {
+        com.lvl6.proto.StructureProto.StructureInfoProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
       
-      private com.lvl6.proto.StructureProto.FullStructureProto buildParsed()
+      private com.lvl6.proto.StructureProto.StructureInfoProto buildParsed()
           throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.StructureProto.FullStructureProto result = buildPartial();
+        com.lvl6.proto.StructureProto.StructureInfoProto result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(
             result).asInvalidProtocolBufferException();
@@ -790,8 +793,8 @@ public final class StructureProto {
         return result;
       }
       
-      public com.lvl6.proto.StructureProto.FullStructureProto buildPartial() {
-        com.lvl6.proto.StructureProto.FullStructureProto result = new com.lvl6.proto.StructureProto.FullStructureProto(this);
+      public com.lvl6.proto.StructureProto.StructureInfoProto buildPartial() {
+        com.lvl6.proto.StructureProto.StructureInfoProto result = new com.lvl6.proto.StructureProto.StructureInfoProto(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -852,16 +855,16 @@ public final class StructureProto {
       }
       
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.StructureProto.FullStructureProto) {
-          return mergeFrom((com.lvl6.proto.StructureProto.FullStructureProto)other);
+        if (other instanceof com.lvl6.proto.StructureProto.StructureInfoProto) {
+          return mergeFrom((com.lvl6.proto.StructureProto.StructureInfoProto)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
       
-      public Builder mergeFrom(com.lvl6.proto.StructureProto.FullStructureProto other) {
-        if (other == com.lvl6.proto.StructureProto.FullStructureProto.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.lvl6.proto.StructureProto.StructureInfoProto other) {
+        if (other == com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) return this;
         if (other.hasStructId()) {
           setStructId(other.getStructId());
         }
@@ -949,7 +952,7 @@ public final class StructureProto {
             }
             case 32: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.StructureProto.FullStructureProto.StructType value = com.lvl6.proto.StructureProto.FullStructureProto.StructType.valueOf(rawValue);
+              com.lvl6.proto.StructureProto.StructureInfoProto.StructType value = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(4, rawValue);
               } else {
@@ -1093,15 +1096,15 @@ public final class StructureProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.FullStructureProto.StructType structType = 4;
-      private com.lvl6.proto.StructureProto.FullStructureProto.StructType structType_ = com.lvl6.proto.StructureProto.FullStructureProto.StructType.RESOURCE_GENERATOR;
+      // optional .com.lvl6.proto.StructureInfoProto.StructType structType = 4;
+      private com.lvl6.proto.StructureProto.StructureInfoProto.StructType structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.RESOURCE_GENERATOR;
       public boolean hasStructType() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public com.lvl6.proto.StructureProto.FullStructureProto.StructType getStructType() {
+      public com.lvl6.proto.StructureProto.StructureInfoProto.StructType getStructType() {
         return structType_;
       }
-      public Builder setStructType(com.lvl6.proto.StructureProto.FullStructureProto.StructType value) {
+      public Builder setStructType(com.lvl6.proto.StructureProto.StructureInfoProto.StructType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1112,7 +1115,7 @@ public final class StructureProto {
       }
       public Builder clearStructType() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        structType_ = com.lvl6.proto.StructureProto.FullStructureProto.StructType.RESOURCE_GENERATOR;
+        structType_ = com.lvl6.proto.StructureProto.StructureInfoProto.StructType.RESOURCE_GENERATOR;
         onChanged();
         return this;
       }
@@ -1324,23 +1327,24 @@ public final class StructureProto {
         return this;
       }
       
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullStructureProto)
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StructureInfoProto)
     }
     
     static {
-      defaultInstance = new FullStructureProto(true);
+      defaultInstance = new StructureInfoProto(true);
       defaultInstance.initFields();
     }
     
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullStructureProto)
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.StructureInfoProto)
   }
   
   public interface ResourceGeneratorProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 structId = 1;
-    boolean hasStructId();
-    int getStructId();
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    boolean hasStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder();
     
     // optional .com.lvl6.proto.ResourceType resourceType = 2;
     boolean hasResourceType();
@@ -1383,14 +1387,17 @@ public final class StructureProto {
     }
     
     private int bitField0_;
-    // optional int32 structId = 1;
-    public static final int STRUCTID_FIELD_NUMBER = 1;
-    private int structId_;
-    public boolean hasStructId() {
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    public static final int STRUCTSTUFF_FIELD_NUMBER = 1;
+    private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_;
+    public boolean hasStructStuff() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getStructId() {
-      return structId_;
+    public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+      return structStuff_;
+    }
+    public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+      return structStuff_;
     }
     
     // optional .com.lvl6.proto.ResourceType resourceType = 2;
@@ -1424,7 +1431,7 @@ public final class StructureProto {
     }
     
     private void initFields() {
-      structId_ = 0;
+      structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
       productionRate_ = 0F;
       capacity_ = 0;
@@ -1442,7 +1449,7 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, structId_);
+        output.writeMessage(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, resourceType_.getNumber());
@@ -1464,7 +1471,7 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, structId_);
+          .computeMessageSize(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1594,6 +1601,7 @@ public final class StructureProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getStructStuffFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1602,7 +1610,11 @@ public final class StructureProto {
       
       public Builder clear() {
         super.clear();
-        structId_ = 0;
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+        } else {
+          structStuffBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
         resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1651,7 +1663,11 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.structId_ = structId_;
+        if (structStuffBuilder_ == null) {
+          result.structStuff_ = structStuff_;
+        } else {
+          result.structStuff_ = structStuffBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -1680,8 +1696,8 @@ public final class StructureProto {
       
       public Builder mergeFrom(com.lvl6.proto.StructureProto.ResourceGeneratorProto other) {
         if (other == com.lvl6.proto.StructureProto.ResourceGeneratorProto.getDefaultInstance()) return this;
-        if (other.hasStructId()) {
-          setStructId(other.getStructId());
+        if (other.hasStructStuff()) {
+          mergeStructStuff(other.getStructStuff());
         }
         if (other.hasResourceType()) {
           setResourceType(other.getResourceType());
@@ -1723,9 +1739,13 @@ public final class StructureProto {
               }
               break;
             }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              structId_ = input.readInt32();
+            case 10: {
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder subBuilder = com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder();
+              if (hasStructStuff()) {
+                subBuilder.mergeFrom(getStructStuff());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setStructStuff(subBuilder.buildPartial());
               break;
             }
             case 16: {
@@ -1755,25 +1775,94 @@ public final class StructureProto {
       
       private int bitField0_;
       
-      // optional int32 structId = 1;
-      private int structId_ ;
-      public boolean hasStructId() {
+      // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+      private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structStuffBuilder_;
+      public boolean hasStructStuff() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getStructId() {
-        return structId_;
+      public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+        if (structStuffBuilder_ == null) {
+          return structStuff_;
+        } else {
+          return structStuffBuilder_.getMessage();
+        }
       }
-      public Builder setStructId(int value) {
+      public Builder setStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          structStuff_ = value;
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000001;
-        structId_ = value;
-        onChanged();
         return this;
       }
-      public Builder clearStructId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        structId_ = 0;
-        onChanged();
+      public Builder setStructStuff(
+          com.lvl6.proto.StructureProto.StructureInfoProto.Builder builderForValue) {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = builderForValue.build();
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
         return this;
+      }
+      public Builder mergeStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              structStuff_ != com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) {
+            structStuff_ =
+              com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder(structStuff_).mergeFrom(value).buildPartial();
+          } else {
+            structStuff_ = value;
+          }
+          onChanged();
+        } else {
+          structStuffBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearStructStuff() {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          structStuffBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProto.Builder getStructStuffBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getStructStuffFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+        if (structStuffBuilder_ != null) {
+          return structStuffBuilder_.getMessageOrBuilder();
+        } else {
+          return structStuff_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> 
+          getStructStuffFieldBuilder() {
+        if (structStuffBuilder_ == null) {
+          structStuffBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
+                  structStuff_,
+                  getParentForChildren(),
+                  isClean());
+          structStuff_ = null;
+        }
+        return structStuffBuilder_;
       }
       
       // optional .com.lvl6.proto.ResourceType resourceType = 2;
@@ -1856,9 +1945,10 @@ public final class StructureProto {
   public interface ResourceStorageProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 structId = 1;
-    boolean hasStructId();
-    int getStructId();
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    boolean hasStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder();
     
     // optional .com.lvl6.proto.ResourceType resourceType = 2;
     boolean hasResourceType();
@@ -1897,14 +1987,17 @@ public final class StructureProto {
     }
     
     private int bitField0_;
-    // optional int32 structId = 1;
-    public static final int STRUCTID_FIELD_NUMBER = 1;
-    private int structId_;
-    public boolean hasStructId() {
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    public static final int STRUCTSTUFF_FIELD_NUMBER = 1;
+    private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_;
+    public boolean hasStructStuff() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getStructId() {
-      return structId_;
+    public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+      return structStuff_;
+    }
+    public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+      return structStuff_;
     }
     
     // optional .com.lvl6.proto.ResourceType resourceType = 2;
@@ -1928,7 +2021,7 @@ public final class StructureProto {
     }
     
     private void initFields() {
-      structId_ = 0;
+      structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
       capacity_ = 0;
     }
@@ -1945,7 +2038,7 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, structId_);
+        output.writeMessage(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, resourceType_.getNumber());
@@ -1964,7 +2057,7 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, structId_);
+          .computeMessageSize(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2090,6 +2183,7 @@ public final class StructureProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getStructStuffFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2098,7 +2192,11 @@ public final class StructureProto {
       
       public Builder clear() {
         super.clear();
-        structId_ = 0;
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+        } else {
+          structStuffBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
         resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2145,7 +2243,11 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.structId_ = structId_;
+        if (structStuffBuilder_ == null) {
+          result.structStuff_ = structStuff_;
+        } else {
+          result.structStuff_ = structStuffBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -2170,8 +2272,8 @@ public final class StructureProto {
       
       public Builder mergeFrom(com.lvl6.proto.StructureProto.ResourceStorageProto other) {
         if (other == com.lvl6.proto.StructureProto.ResourceStorageProto.getDefaultInstance()) return this;
-        if (other.hasStructId()) {
-          setStructId(other.getStructId());
+        if (other.hasStructStuff()) {
+          mergeStructStuff(other.getStructStuff());
         }
         if (other.hasResourceType()) {
           setResourceType(other.getResourceType());
@@ -2210,9 +2312,13 @@ public final class StructureProto {
               }
               break;
             }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              structId_ = input.readInt32();
+            case 10: {
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder subBuilder = com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder();
+              if (hasStructStuff()) {
+                subBuilder.mergeFrom(getStructStuff());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setStructStuff(subBuilder.buildPartial());
               break;
             }
             case 16: {
@@ -2237,25 +2343,94 @@ public final class StructureProto {
       
       private int bitField0_;
       
-      // optional int32 structId = 1;
-      private int structId_ ;
-      public boolean hasStructId() {
+      // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+      private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structStuffBuilder_;
+      public boolean hasStructStuff() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getStructId() {
-        return structId_;
+      public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+        if (structStuffBuilder_ == null) {
+          return structStuff_;
+        } else {
+          return structStuffBuilder_.getMessage();
+        }
       }
-      public Builder setStructId(int value) {
+      public Builder setStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          structStuff_ = value;
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000001;
-        structId_ = value;
-        onChanged();
         return this;
       }
-      public Builder clearStructId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        structId_ = 0;
-        onChanged();
+      public Builder setStructStuff(
+          com.lvl6.proto.StructureProto.StructureInfoProto.Builder builderForValue) {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = builderForValue.build();
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
         return this;
+      }
+      public Builder mergeStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              structStuff_ != com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) {
+            structStuff_ =
+              com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder(structStuff_).mergeFrom(value).buildPartial();
+          } else {
+            structStuff_ = value;
+          }
+          onChanged();
+        } else {
+          structStuffBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearStructStuff() {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          structStuffBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProto.Builder getStructStuffBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getStructStuffFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+        if (structStuffBuilder_ != null) {
+          return structStuffBuilder_.getMessageOrBuilder();
+        } else {
+          return structStuff_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> 
+          getStructStuffFieldBuilder() {
+        if (structStuffBuilder_ == null) {
+          structStuffBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
+                  structStuff_,
+                  getParentForChildren(),
+                  isClean());
+          structStuff_ = null;
+        }
+        return structStuffBuilder_;
       }
       
       // optional .com.lvl6.proto.ResourceType resourceType = 2;
@@ -2317,9 +2492,10 @@ public final class StructureProto {
   public interface HospitalProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 structId = 1;
-    boolean hasStructId();
-    int getStructId();
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    boolean hasStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder();
     
     // optional int32 queueSize = 2;
     boolean hasQueueSize();
@@ -2358,14 +2534,17 @@ public final class StructureProto {
     }
     
     private int bitField0_;
-    // optional int32 structId = 1;
-    public static final int STRUCTID_FIELD_NUMBER = 1;
-    private int structId_;
-    public boolean hasStructId() {
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    public static final int STRUCTSTUFF_FIELD_NUMBER = 1;
+    private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_;
+    public boolean hasStructStuff() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getStructId() {
-      return structId_;
+    public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+      return structStuff_;
+    }
+    public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+      return structStuff_;
     }
     
     // optional int32 queueSize = 2;
@@ -2389,7 +2568,7 @@ public final class StructureProto {
     }
     
     private void initFields() {
-      structId_ = 0;
+      structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       queueSize_ = 0;
       healthPerSecond_ = 0F;
     }
@@ -2406,7 +2585,7 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, structId_);
+        output.writeMessage(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, queueSize_);
@@ -2425,7 +2604,7 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, structId_);
+          .computeMessageSize(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2551,6 +2730,7 @@ public final class StructureProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getStructStuffFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2559,7 +2739,11 @@ public final class StructureProto {
       
       public Builder clear() {
         super.clear();
-        structId_ = 0;
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+        } else {
+          structStuffBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
         queueSize_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -2606,7 +2790,11 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.structId_ = structId_;
+        if (structStuffBuilder_ == null) {
+          result.structStuff_ = structStuff_;
+        } else {
+          result.structStuff_ = structStuffBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -2631,8 +2819,8 @@ public final class StructureProto {
       
       public Builder mergeFrom(com.lvl6.proto.StructureProto.HospitalProto other) {
         if (other == com.lvl6.proto.StructureProto.HospitalProto.getDefaultInstance()) return this;
-        if (other.hasStructId()) {
-          setStructId(other.getStructId());
+        if (other.hasStructStuff()) {
+          mergeStructStuff(other.getStructStuff());
         }
         if (other.hasQueueSize()) {
           setQueueSize(other.getQueueSize());
@@ -2671,9 +2859,13 @@ public final class StructureProto {
               }
               break;
             }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              structId_ = input.readInt32();
+            case 10: {
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder subBuilder = com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder();
+              if (hasStructStuff()) {
+                subBuilder.mergeFrom(getStructStuff());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setStructStuff(subBuilder.buildPartial());
               break;
             }
             case 16: {
@@ -2692,25 +2884,94 @@ public final class StructureProto {
       
       private int bitField0_;
       
-      // optional int32 structId = 1;
-      private int structId_ ;
-      public boolean hasStructId() {
+      // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+      private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structStuffBuilder_;
+      public boolean hasStructStuff() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getStructId() {
-        return structId_;
+      public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+        if (structStuffBuilder_ == null) {
+          return structStuff_;
+        } else {
+          return structStuffBuilder_.getMessage();
+        }
       }
-      public Builder setStructId(int value) {
+      public Builder setStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          structStuff_ = value;
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000001;
-        structId_ = value;
-        onChanged();
         return this;
       }
-      public Builder clearStructId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        structId_ = 0;
-        onChanged();
+      public Builder setStructStuff(
+          com.lvl6.proto.StructureProto.StructureInfoProto.Builder builderForValue) {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = builderForValue.build();
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
         return this;
+      }
+      public Builder mergeStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              structStuff_ != com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) {
+            structStuff_ =
+              com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder(structStuff_).mergeFrom(value).buildPartial();
+          } else {
+            structStuff_ = value;
+          }
+          onChanged();
+        } else {
+          structStuffBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearStructStuff() {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          structStuffBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProto.Builder getStructStuffBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getStructStuffFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+        if (structStuffBuilder_ != null) {
+          return structStuffBuilder_.getMessageOrBuilder();
+        } else {
+          return structStuff_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> 
+          getStructStuffFieldBuilder() {
+        if (structStuffBuilder_ == null) {
+          structStuffBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
+                  structStuff_,
+                  getParentForChildren(),
+                  isClean());
+          structStuff_ = null;
+        }
+        return structStuffBuilder_;
       }
       
       // optional int32 queueSize = 2;
@@ -2769,13 +3030,26 @@ public final class StructureProto {
   public interface ResidenceProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 structId = 1;
-    boolean hasStructId();
-    int getStructId();
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    boolean hasStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder();
     
     // optional int32 numMonsterSlots = 2;
     boolean hasNumMonsterSlots();
     int getNumMonsterSlots();
+    
+    // optional int32 numBonusMonsterSlots = 3;
+    boolean hasNumBonusMonsterSlots();
+    int getNumBonusMonsterSlots();
+    
+    // optional int32 numGemsRequired = 4;
+    boolean hasNumGemsRequired();
+    int getNumGemsRequired();
+    
+    // optional int32 numAcceptedFbInvites = 5;
+    boolean hasNumAcceptedFbInvites();
+    int getNumAcceptedFbInvites();
   }
   public static final class ResidenceProto extends
       com.google.protobuf.GeneratedMessage
@@ -2806,14 +3080,17 @@ public final class StructureProto {
     }
     
     private int bitField0_;
-    // optional int32 structId = 1;
-    public static final int STRUCTID_FIELD_NUMBER = 1;
-    private int structId_;
-    public boolean hasStructId() {
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    public static final int STRUCTSTUFF_FIELD_NUMBER = 1;
+    private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_;
+    public boolean hasStructStuff() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getStructId() {
-      return structId_;
+    public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+      return structStuff_;
+    }
+    public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+      return structStuff_;
     }
     
     // optional int32 numMonsterSlots = 2;
@@ -2826,9 +3103,42 @@ public final class StructureProto {
       return numMonsterSlots_;
     }
     
+    // optional int32 numBonusMonsterSlots = 3;
+    public static final int NUMBONUSMONSTERSLOTS_FIELD_NUMBER = 3;
+    private int numBonusMonsterSlots_;
+    public boolean hasNumBonusMonsterSlots() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getNumBonusMonsterSlots() {
+      return numBonusMonsterSlots_;
+    }
+    
+    // optional int32 numGemsRequired = 4;
+    public static final int NUMGEMSREQUIRED_FIELD_NUMBER = 4;
+    private int numGemsRequired_;
+    public boolean hasNumGemsRequired() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getNumGemsRequired() {
+      return numGemsRequired_;
+    }
+    
+    // optional int32 numAcceptedFbInvites = 5;
+    public static final int NUMACCEPTEDFBINVITES_FIELD_NUMBER = 5;
+    private int numAcceptedFbInvites_;
+    public boolean hasNumAcceptedFbInvites() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getNumAcceptedFbInvites() {
+      return numAcceptedFbInvites_;
+    }
+    
     private void initFields() {
-      structId_ = 0;
+      structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       numMonsterSlots_ = 0;
+      numBonusMonsterSlots_ = 0;
+      numGemsRequired_ = 0;
+      numAcceptedFbInvites_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2843,10 +3153,19 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, structId_);
+        output.writeMessage(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, numMonsterSlots_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, numBonusMonsterSlots_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, numGemsRequired_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, numAcceptedFbInvites_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2859,11 +3178,23 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, structId_);
+          .computeMessageSize(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, numMonsterSlots_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, numBonusMonsterSlots_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, numGemsRequired_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, numAcceptedFbInvites_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2981,6 +3312,7 @@ public final class StructureProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getStructStuffFieldBuilder();
         }
       }
       private static Builder create() {
@@ -2989,10 +3321,20 @@ public final class StructureProto {
       
       public Builder clear() {
         super.clear();
-        structId_ = 0;
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+        } else {
+          structStuffBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
         numMonsterSlots_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        numBonusMonsterSlots_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        numGemsRequired_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        numAcceptedFbInvites_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -3034,11 +3376,27 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.structId_ = structId_;
+        if (structStuffBuilder_ == null) {
+          result.structStuff_ = structStuff_;
+        } else {
+          result.structStuff_ = structStuffBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
         result.numMonsterSlots_ = numMonsterSlots_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.numBonusMonsterSlots_ = numBonusMonsterSlots_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.numGemsRequired_ = numGemsRequired_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.numAcceptedFbInvites_ = numAcceptedFbInvites_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3055,11 +3413,20 @@ public final class StructureProto {
       
       public Builder mergeFrom(com.lvl6.proto.StructureProto.ResidenceProto other) {
         if (other == com.lvl6.proto.StructureProto.ResidenceProto.getDefaultInstance()) return this;
-        if (other.hasStructId()) {
-          setStructId(other.getStructId());
+        if (other.hasStructStuff()) {
+          mergeStructStuff(other.getStructStuff());
         }
         if (other.hasNumMonsterSlots()) {
           setNumMonsterSlots(other.getNumMonsterSlots());
+        }
+        if (other.hasNumBonusMonsterSlots()) {
+          setNumBonusMonsterSlots(other.getNumBonusMonsterSlots());
+        }
+        if (other.hasNumGemsRequired()) {
+          setNumGemsRequired(other.getNumGemsRequired());
+        }
+        if (other.hasNumAcceptedFbInvites()) {
+          setNumAcceptedFbInvites(other.getNumAcceptedFbInvites());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3092,14 +3459,33 @@ public final class StructureProto {
               }
               break;
             }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              structId_ = input.readInt32();
+            case 10: {
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder subBuilder = com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder();
+              if (hasStructStuff()) {
+                subBuilder.mergeFrom(getStructStuff());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setStructStuff(subBuilder.buildPartial());
               break;
             }
             case 16: {
               bitField0_ |= 0x00000002;
               numMonsterSlots_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              numBonusMonsterSlots_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              numGemsRequired_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              numAcceptedFbInvites_ = input.readInt32();
               break;
             }
           }
@@ -3108,25 +3494,94 @@ public final class StructureProto {
       
       private int bitField0_;
       
-      // optional int32 structId = 1;
-      private int structId_ ;
-      public boolean hasStructId() {
+      // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+      private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structStuffBuilder_;
+      public boolean hasStructStuff() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getStructId() {
-        return structId_;
+      public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+        if (structStuffBuilder_ == null) {
+          return structStuff_;
+        } else {
+          return structStuffBuilder_.getMessage();
+        }
       }
-      public Builder setStructId(int value) {
+      public Builder setStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          structStuff_ = value;
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000001;
-        structId_ = value;
-        onChanged();
         return this;
       }
-      public Builder clearStructId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        structId_ = 0;
-        onChanged();
+      public Builder setStructStuff(
+          com.lvl6.proto.StructureProto.StructureInfoProto.Builder builderForValue) {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = builderForValue.build();
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
         return this;
+      }
+      public Builder mergeStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              structStuff_ != com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) {
+            structStuff_ =
+              com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder(structStuff_).mergeFrom(value).buildPartial();
+          } else {
+            structStuff_ = value;
+          }
+          onChanged();
+        } else {
+          structStuffBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearStructStuff() {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          structStuffBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProto.Builder getStructStuffBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getStructStuffFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+        if (structStuffBuilder_ != null) {
+          return structStuffBuilder_.getMessageOrBuilder();
+        } else {
+          return structStuff_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> 
+          getStructStuffFieldBuilder() {
+        if (structStuffBuilder_ == null) {
+          structStuffBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
+                  structStuff_,
+                  getParentForChildren(),
+                  isClean());
+          structStuff_ = null;
+        }
+        return structStuffBuilder_;
       }
       
       // optional int32 numMonsterSlots = 2;
@@ -3150,6 +3605,69 @@ public final class StructureProto {
         return this;
       }
       
+      // optional int32 numBonusMonsterSlots = 3;
+      private int numBonusMonsterSlots_ ;
+      public boolean hasNumBonusMonsterSlots() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getNumBonusMonsterSlots() {
+        return numBonusMonsterSlots_;
+      }
+      public Builder setNumBonusMonsterSlots(int value) {
+        bitField0_ |= 0x00000004;
+        numBonusMonsterSlots_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumBonusMonsterSlots() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        numBonusMonsterSlots_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 numGemsRequired = 4;
+      private int numGemsRequired_ ;
+      public boolean hasNumGemsRequired() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getNumGemsRequired() {
+        return numGemsRequired_;
+      }
+      public Builder setNumGemsRequired(int value) {
+        bitField0_ |= 0x00000008;
+        numGemsRequired_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumGemsRequired() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        numGemsRequired_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 numAcceptedFbInvites = 5;
+      private int numAcceptedFbInvites_ ;
+      public boolean hasNumAcceptedFbInvites() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getNumAcceptedFbInvites() {
+        return numAcceptedFbInvites_;
+      }
+      public Builder setNumAcceptedFbInvites(int value) {
+        bitField0_ |= 0x00000010;
+        numAcceptedFbInvites_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumAcceptedFbInvites() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        numAcceptedFbInvites_ = 0;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ResidenceProto)
     }
     
@@ -3164,9 +3682,10 @@ public final class StructureProto {
   public interface TownHallProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int32 structId = 1;
-    boolean hasStructId();
-    int getStructId();
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    boolean hasStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff();
+    com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder();
     
     // optional int32 numResourceOneGenerators = 2;
     boolean hasNumResourceOneGenerators();
@@ -3191,6 +3710,10 @@ public final class StructureProto {
     // optional int32 numResidences = 7;
     boolean hasNumResidences();
     int getNumResidences();
+    
+    // optional int32 numMonsterSlots = 8;
+    boolean hasNumMonsterSlots();
+    int getNumMonsterSlots();
   }
   public static final class TownHallProto extends
       com.google.protobuf.GeneratedMessage
@@ -3221,14 +3744,17 @@ public final class StructureProto {
     }
     
     private int bitField0_;
-    // optional int32 structId = 1;
-    public static final int STRUCTID_FIELD_NUMBER = 1;
-    private int structId_;
-    public boolean hasStructId() {
+    // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+    public static final int STRUCTSTUFF_FIELD_NUMBER = 1;
+    private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_;
+    public boolean hasStructStuff() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public int getStructId() {
-      return structId_;
+    public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+      return structStuff_;
+    }
+    public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+      return structStuff_;
     }
     
     // optional int32 numResourceOneGenerators = 2;
@@ -3291,14 +3817,25 @@ public final class StructureProto {
       return numResidences_;
     }
     
+    // optional int32 numMonsterSlots = 8;
+    public static final int NUMMONSTERSLOTS_FIELD_NUMBER = 8;
+    private int numMonsterSlots_;
+    public boolean hasNumMonsterSlots() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public int getNumMonsterSlots() {
+      return numMonsterSlots_;
+    }
+    
     private void initFields() {
-      structId_ = 0;
+      structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       numResourceOneGenerators_ = 0;
       numResourceOneStorages_ = 0;
       numResourceTwoGenerators_ = 0;
       numResourceTwoStorages_ = 0;
       numHospitals_ = 0;
       numResidences_ = 0;
+      numMonsterSlots_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3313,7 +3850,7 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, structId_);
+        output.writeMessage(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, numResourceOneGenerators_);
@@ -3333,6 +3870,9 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(7, numResidences_);
       }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, numMonsterSlots_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -3344,7 +3884,7 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, structId_);
+          .computeMessageSize(1, structStuff_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3369,6 +3909,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, numResidences_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, numMonsterSlots_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3486,6 +4030,7 @@ public final class StructureProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getStructStuffFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3494,7 +4039,11 @@ public final class StructureProto {
       
       public Builder clear() {
         super.clear();
-        structId_ = 0;
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+        } else {
+          structStuffBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000001);
         numResourceOneGenerators_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -3508,6 +4057,8 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         numResidences_ = 0;
         bitField0_ = (bitField0_ & ~0x00000040);
+        numMonsterSlots_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       
@@ -3549,7 +4100,11 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.structId_ = structId_;
+        if (structStuffBuilder_ == null) {
+          result.structStuff_ = structStuff_;
+        } else {
+          result.structStuff_ = structStuffBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
@@ -3574,6 +4129,10 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000040;
         }
         result.numResidences_ = numResidences_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.numMonsterSlots_ = numMonsterSlots_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3590,8 +4149,8 @@ public final class StructureProto {
       
       public Builder mergeFrom(com.lvl6.proto.StructureProto.TownHallProto other) {
         if (other == com.lvl6.proto.StructureProto.TownHallProto.getDefaultInstance()) return this;
-        if (other.hasStructId()) {
-          setStructId(other.getStructId());
+        if (other.hasStructStuff()) {
+          mergeStructStuff(other.getStructStuff());
         }
         if (other.hasNumResourceOneGenerators()) {
           setNumResourceOneGenerators(other.getNumResourceOneGenerators());
@@ -3610,6 +4169,9 @@ public final class StructureProto {
         }
         if (other.hasNumResidences()) {
           setNumResidences(other.getNumResidences());
+        }
+        if (other.hasNumMonsterSlots()) {
+          setNumMonsterSlots(other.getNumMonsterSlots());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3642,9 +4204,13 @@ public final class StructureProto {
               }
               break;
             }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              structId_ = input.readInt32();
+            case 10: {
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder subBuilder = com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder();
+              if (hasStructStuff()) {
+                subBuilder.mergeFrom(getStructStuff());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setStructStuff(subBuilder.buildPartial());
               break;
             }
             case 16: {
@@ -3677,31 +4243,105 @@ public final class StructureProto {
               numResidences_ = input.readInt32();
               break;
             }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              numMonsterSlots_ = input.readInt32();
+              break;
+            }
           }
         }
       }
       
       private int bitField0_;
       
-      // optional int32 structId = 1;
-      private int structId_ ;
-      public boolean hasStructId() {
+      // optional .com.lvl6.proto.StructureInfoProto structStuff = 1;
+      private com.lvl6.proto.StructureProto.StructureInfoProto structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> structStuffBuilder_;
+      public boolean hasStructStuff() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public int getStructId() {
-        return structId_;
+      public com.lvl6.proto.StructureProto.StructureInfoProto getStructStuff() {
+        if (structStuffBuilder_ == null) {
+          return structStuff_;
+        } else {
+          return structStuffBuilder_.getMessage();
+        }
       }
-      public Builder setStructId(int value) {
+      public Builder setStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          structStuff_ = value;
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000001;
-        structId_ = value;
-        onChanged();
         return this;
       }
-      public Builder clearStructId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        structId_ = 0;
-        onChanged();
+      public Builder setStructStuff(
+          com.lvl6.proto.StructureProto.StructureInfoProto.Builder builderForValue) {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = builderForValue.build();
+          onChanged();
+        } else {
+          structStuffBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
         return this;
+      }
+      public Builder mergeStructStuff(com.lvl6.proto.StructureProto.StructureInfoProto value) {
+        if (structStuffBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              structStuff_ != com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance()) {
+            structStuff_ =
+              com.lvl6.proto.StructureProto.StructureInfoProto.newBuilder(structStuff_).mergeFrom(value).buildPartial();
+          } else {
+            structStuff_ = value;
+          }
+          onChanged();
+        } else {
+          structStuffBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearStructStuff() {
+        if (structStuffBuilder_ == null) {
+          structStuff_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          structStuffBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProto.Builder getStructStuffBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getStructStuffFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder getStructStuffOrBuilder() {
+        if (structStuffBuilder_ != null) {
+          return structStuffBuilder_.getMessageOrBuilder();
+        } else {
+          return structStuff_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder> 
+          getStructStuffFieldBuilder() {
+        if (structStuffBuilder_ == null) {
+          structStuffBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.StructureInfoProto, com.lvl6.proto.StructureProto.StructureInfoProto.Builder, com.lvl6.proto.StructureProto.StructureInfoProtoOrBuilder>(
+                  structStuff_,
+                  getParentForChildren(),
+                  isClean());
+          structStuff_ = null;
+        }
+        return structStuffBuilder_;
       }
       
       // optional int32 numResourceOneGenerators = 2;
@@ -3826,6 +4466,27 @@ public final class StructureProto {
       public Builder clearNumResidences() {
         bitField0_ = (bitField0_ & ~0x00000040);
         numResidences_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 numMonsterSlots = 8;
+      private int numMonsterSlots_ ;
+      public boolean hasNumMonsterSlots() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public int getNumMonsterSlots() {
+        return numMonsterSlots_;
+      }
+      public Builder setNumMonsterSlots(int value) {
+        bitField0_ |= 0x00000080;
+        numMonsterSlots_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumMonsterSlots() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        numMonsterSlots_ = 0;
         onChanged();
         return this;
       }
@@ -5069,10 +5730,10 @@ public final class StructureProto {
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_FullStructureProto_descriptor;
+    internal_static_com_lvl6_proto_StructureInfoProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_FullStructureProto_fieldAccessorTable;
+      internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor;
   private static
@@ -5117,10 +5778,10 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\"\340\003\n\022Fu" +
-      "llStructureProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
+      "\n\017Structure.proto\022\016com.lvl6.proto\"\340\003\n\022St" +
+      "ructureInfoProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022A\n\nstructType\030\004 " +
-      "\001(\0162-.com.lvl6.proto.FullStructureProto." +
+      "\001(\0162-.com.lvl6.proto.StructureInfoProto." +
       "StructType\0227\n\021buildResourceType\030\005 \001(\0162\034." +
       "com.lvl6.proto.ResourceType\022\021\n\tbuildCost" +
       "\030\006 \001(\005\022\026\n\016minutesToBuild\030\007 \001(\005\022\036\n\026prereq" +
@@ -5129,52 +5790,60 @@ public final class StructureProto {
       "predecessorStructId\030\014 \001(\005\022\031\n\021successorSt",
       "ructId\030\r \001(\005\"f\n\nStructType\022\026\n\022RESOURCE_G" +
       "ENERATOR\020\001\022\024\n\020RESOURCE_STORAGE\020\002\022\014\n\010HOSP" +
-      "ITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\"\210\001\n" +
-      "\026ResourceGeneratorProto\022\020\n\010structId\030\001 \001(" +
-      "\005\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl6.proto" +
-      ".ResourceType\022\026\n\016productionRate\030\003 \001(\002\022\020\n" +
-      "\010capacity\030\004 \001(\005\"n\n\024ResourceStorageProto\022" +
-      "\020\n\010structId\030\001 \001(\005\0222\n\014resourceType\030\002 \001(\0162" +
-      "\034.com.lvl6.proto.ResourceType\022\020\n\010capacit" +
-      "y\030\003 \001(\005\"M\n\rHospitalProto\022\020\n\010structId\030\001 \001",
-      "(\005\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017healthPerSecond" +
-      "\030\003 \001(\002\";\n\016ResidenceProto\022\020\n\010structId\030\001 \001" +
-      "(\005\022\027\n\017numMonsterSlots\030\002 \001(\005\"\322\001\n\rTownHall" +
-      "Proto\022\020\n\010structId\030\001 \001(\005\022 \n\030numResourceOn" +
-      "eGenerators\030\002 \001(\005\022\036\n\026numResourceOneStora" +
-      "ges\030\003 \001(\005\022 \n\030numResourceTwoGenerators\030\004 " +
-      "\001(\005\022\036\n\026numResourceTwoStorages\030\005 \001(\005\022\024\n\014n" +
-      "umHospitals\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(\005" +
-      "\"\377\001\n\026FullUserStructureProto\022\024\n\014userStruc" +
-      "tId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 ",
-      "\001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTi" +
-      "me\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordina" +
-      "tes\030\007 \001(\0132\037.com.lvl6.proto.CoordinatePro" +
-      "to\0226\n\013orientation\030\010 \001(\0162!.com.lvl6.proto" +
-      ".StructOrientation\"\'\n\017CoordinateProto\022\t\n" +
-      "\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002*\030\n\014ResourceType\022\010\n\004C" +
-      "ASH\020\001*3\n\021StructOrientation\022\016\n\nPOSITION_1" +
-      "\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
+      "ITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\"\257\001\n" +
+      "\026ResourceGeneratorProto\0227\n\013structStuff\030\001" +
+      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
+      "\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl6.proto." +
+      "ResourceType\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010" +
+      "capacity\030\004 \001(\005\"\225\001\n\024ResourceStorageProto\022" +
+      "7\n\013structStuff\030\001 \001(\0132\".com.lvl6.proto.St" +
+      "ructureInfoProto\0222\n\014resourceType\030\002 \001(\0162\034",
+      ".com.lvl6.proto.ResourceType\022\020\n\010capacity" +
+      "\030\003 \001(\005\"t\n\rHospitalProto\0227\n\013structStuff\030\001" +
+      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
+      "\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017healthPerSecond\030\003" +
+      " \001(\002\"\267\001\n\016ResidenceProto\0227\n\013structStuff\030\001" +
+      " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
+      "\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024numBonusMon" +
+      "sterSlots\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005" +
+      "\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\"\222\002\n\rTownH" +
+      "allProto\0227\n\013structStuff\030\001 \001(\0132\".com.lvl6",
+      ".proto.StructureInfoProto\022 \n\030numResource" +
+      "OneGenerators\030\002 \001(\005\022\036\n\026numResourceOneSto" +
+      "rages\030\003 \001(\005\022 \n\030numResourceTwoGenerators\030" +
+      "\004 \001(\005\022\036\n\026numResourceTwoStorages\030\005 \001(\005\022\024\n" +
+      "\014numHospitals\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001" +
+      "(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\"\377\001\n\026FullUser" +
+      "StructureProto\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006" +
+      "userId\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRe" +
+      "trieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\ni" +
+      "sComplete\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.c",
+      "om.lvl6.proto.CoordinateProto\0226\n\013orienta" +
+      "tion\030\010 \001(\0162!.com.lvl6.proto.StructOrient" +
+      "ation\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y" +
+      "\030\002 \001(\002*!\n\014ResourceType\022\010\n\004CASH\020\001\022\007\n\003OIL\020" +
+      "\002*3\n\021StructOrientation\022\016\n\nPOSITION_1\020\001\022\016" +
+      "\n\nPOSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_com_lvl6_proto_FullStructureProto_descriptor =
+          internal_static_com_lvl6_proto_StructureInfoProto_descriptor =
             getDescriptor().getMessageTypes().get(0);
-          internal_static_com_lvl6_proto_FullStructureProto_fieldAccessorTable = new
+          internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_FullStructureProto_descriptor,
+              internal_static_com_lvl6_proto_StructureInfoProto_descriptor,
               new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "PrerequisiteTownHallId", "Width", "Height", "SpriteImgName", "PredecessorStructId", "SuccessorStructId", },
-              com.lvl6.proto.StructureProto.FullStructureProto.class,
-              com.lvl6.proto.StructureProto.FullStructureProto.Builder.class);
+              com.lvl6.proto.StructureProto.StructureInfoProto.class,
+              com.lvl6.proto.StructureProto.StructureInfoProto.Builder.class);
           internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_com_lvl6_proto_ResourceGeneratorProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor,
-              new java.lang.String[] { "StructId", "ResourceType", "ProductionRate", "Capacity", },
+              new java.lang.String[] { "StructStuff", "ResourceType", "ProductionRate", "Capacity", },
               com.lvl6.proto.StructureProto.ResourceGeneratorProto.class,
               com.lvl6.proto.StructureProto.ResourceGeneratorProto.Builder.class);
           internal_static_com_lvl6_proto_ResourceStorageProto_descriptor =
@@ -5182,7 +5851,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_ResourceStorageProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ResourceStorageProto_descriptor,
-              new java.lang.String[] { "StructId", "ResourceType", "Capacity", },
+              new java.lang.String[] { "StructStuff", "ResourceType", "Capacity", },
               com.lvl6.proto.StructureProto.ResourceStorageProto.class,
               com.lvl6.proto.StructureProto.ResourceStorageProto.Builder.class);
           internal_static_com_lvl6_proto_HospitalProto_descriptor =
@@ -5190,7 +5859,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_HospitalProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_HospitalProto_descriptor,
-              new java.lang.String[] { "StructId", "QueueSize", "HealthPerSecond", },
+              new java.lang.String[] { "StructStuff", "QueueSize", "HealthPerSecond", },
               com.lvl6.proto.StructureProto.HospitalProto.class,
               com.lvl6.proto.StructureProto.HospitalProto.Builder.class);
           internal_static_com_lvl6_proto_ResidenceProto_descriptor =
@@ -5198,7 +5867,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_ResidenceProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ResidenceProto_descriptor,
-              new java.lang.String[] { "StructId", "NumMonsterSlots", },
+              new java.lang.String[] { "StructStuff", "NumMonsterSlots", "NumBonusMonsterSlots", "NumGemsRequired", "NumAcceptedFbInvites", },
               com.lvl6.proto.StructureProto.ResidenceProto.class,
               com.lvl6.proto.StructureProto.ResidenceProto.Builder.class);
           internal_static_com_lvl6_proto_TownHallProto_descriptor =
@@ -5206,7 +5875,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_TownHallProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TownHallProto_descriptor,
-              new java.lang.String[] { "StructId", "NumResourceOneGenerators", "NumResourceOneStorages", "NumResourceTwoGenerators", "NumResourceTwoStorages", "NumHospitals", "NumResidences", },
+              new java.lang.String[] { "StructStuff", "NumResourceOneGenerators", "NumResourceOneStorages", "NumResourceTwoGenerators", "NumResourceTwoStorages", "NumHospitals", "NumResidences", "NumMonsterSlots", },
               com.lvl6.proto.StructureProto.TownHallProto.class,
               com.lvl6.proto.StructureProto.TownHallProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =

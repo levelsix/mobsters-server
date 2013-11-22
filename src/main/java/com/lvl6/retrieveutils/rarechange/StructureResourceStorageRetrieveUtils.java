@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.StructureResourceStorage;
 import com.lvl6.info.Structure;
+import com.lvl6.info.StructureResourceStorage;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -114,6 +114,21 @@ import com.lvl6.utils.DBConnection;
     String resourceTypeStored = rs.getString(i++);
     int capacity = rs.getInt(i++);
     
-    return new StructureResourceStorage(structId, resourceTypeStored, capacity);
+    StructureResourceStorage srs = new StructureResourceStorage(structId,
+    		resourceTypeStored, capacity);
+    
+    if (null != resourceTypeStored) {
+    	String newResourceTypeStored = resourceTypeStored.trim();
+    	newResourceTypeStored = newResourceTypeStored.toUpperCase();
+    	if (!resourceTypeStored.equals(newResourceTypeStored)) {
+    		log.error("string for resource type is incorrect. is=" + resourceTypeStored +
+    				"\t (if spelled correctly) expected=" + newResourceTypeStored +
+    				"\t resourceStorage obj=" + srs);
+    		srs.setResourceTypeStored(newResourceTypeStored);
+    	}
+    } else {
+    	log.error("resourceStorage obj's resource type is null!!!. obj=" + srs);
+    }
+    return srs;
   }
 }
