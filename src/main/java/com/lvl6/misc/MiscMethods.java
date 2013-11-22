@@ -5,8 +5,10 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -113,6 +115,7 @@ public class MiscMethods {
   private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
   public static final String cash = "cash";
   public static final String gems = "gems";
+  public static final String oil = "oil";
   public static final String boosterPackId = "boosterPackId";
 
 
@@ -720,177 +723,54 @@ public class MiscMethods {
     return s;
   }
 
-  public static void writeToUserCurrencyOneUserGemsAndCash(
-      User aUser, Timestamp date, Map<String,Integer> gemsCashChange, 
-      Map<String, Integer> previousGemsCash, Map<String, String> reasons,
-      Map<String, String> detailsMap) {
-    //try, catch is here just in case this blows up, not really necessary;
-    try {
-      List<Integer> userIds = new ArrayList<Integer>();
-      List<Timestamp> dates = new ArrayList<Timestamp>();
-      List<Integer> areCash = new ArrayList<Integer>();
-      List<Integer> changesToCurrencies = new ArrayList<Integer>();
-      List<Integer> previousCurrencies = new ArrayList<Integer>();
-      List<Integer> currentCurrencies = new ArrayList<Integer>();
-      List<String> reasonsForChanges = new ArrayList<String>();
-      List<String> details = new ArrayList<String>();
-
-      int userId = aUser.getId();
-      int gemsChange = gemsCashChange.get(gems);
-      int cashChange = gemsCashChange.get(cash);
-      int previousGold = 0;
-      int previousCash = 0;
-      int currentGold = aUser.getGems();
-      //recording total cash user has
-      int currentCash = aUser.getCash();
-
-      //record gems change first
-      if (0 != gemsChange) {
-        userIds.add(userId);
-        dates.add(date);
-        areCash.add(0); //gems
-        changesToCurrencies.add(gemsChange);
-        if(null == previousGemsCash || previousGemsCash.isEmpty()) {
-          //difference instead of sum because of example:
-          //(previous gems) u.gems = 10; 
-          //change = -5 
-          //current gems = 10 - 5 = 5
-          //previous gems = currenty gems - change
-          //previous_gems = 5 - -5 = 10
-          previousGold = currentGold - gemsChange;
-        } else {
-          previousGold = previousGemsCash.get(gems);
-        }
-
-        previousCurrencies.add(previousGold);
-        currentCurrencies.add(currentGold);
-        reasonsForChanges.add(reasons.get(gems));
-        details.add(detailsMap.get(gems));
-      }
-
-      //record cash change next
-      if (0 != cashChange) {
-        userIds.add(userId);
-        dates.add(date);
-        areCash.add(1); //cash
-        changesToCurrencies.add(cashChange);
-        if(null == previousGemsCash || previousGemsCash.isEmpty()) {
-          previousCash = currentCash - cashChange;
-        } else {
-          previousCash = previousGemsCash.get(cash);
-        }
-
-        previousCurrencies.add(previousCash);
-        currentCurrencies.add(currentCash);
-        reasonsForChanges.add(reasons.get(cash));
-        details.add(detailsMap.get(cash));
-      }
-
-      //using multiple rows because could be 2 entries: one for cash, other for gems
-      InsertUtils.get().insertIntoUserCurrencyHistoryMultipleRows(userIds, dates,
-      		areCash, changesToCurrencies, previousCurrencies, currentCurrencies,
-      		reasonsForChanges, details);
-    } catch(Exception e) {
-      log.error("Maybe table's not there or duplicate keys? ", e);
-    }
-  }
-
-  public static void writeToUserCurrencyOneUserGemsOrCash(
-      User aUser, Timestamp date, Map<String,Integer> gemsCashChange, 
-      Map<String, Integer> previousGemsCash, Map<String, String> reasons,
-      Map<String, String> detailsMap) {
-    try {
-      //determine what changed, gems or cash
-      Set<String> keySet = gemsCashChange.keySet();
-      Object[] keyArray = keySet.toArray();
-      String key = (String) keyArray[0];
-
-      //arguments to insertIntoUserCurrency
-      int userId = aUser.getId();
-      int isCash = 0;
-      int currencyChange = gemsCashChange.get(key);
-      int previousCurrency = 0;
-      int currentCurrency = 0;
-      String reasonForChange = reasons.get(key);
-      String details = null;//detailsList.get(0);
-
-      if (0 == currencyChange) {
-        return;//don't write a non change to history table to avoid bloat
-      }
-
-      if (key.equals(gems)) {
-        currentCurrency = aUser.getGems();
-        details = detailsMap.get(gems);
-      } else if(key.equals(cash)) {
-        //record total cash
-        currentCurrency = aUser.getCash();
-        isCash = 1;
-        details = detailsMap.get(cash);
-      } else {
-        log.error("invalid key for map representing currency change. key=" + key);
-        return;
-      }
-
-      if(null == previousGemsCash || previousGemsCash.isEmpty()) {
-        previousCurrency = currentCurrency - currencyChange;
-      } else {
-        previousCurrency = previousGemsCash.get(key);
-      }
-
-      InsertUtils.get().insertIntoUserCurrencyHistory(userId, date, isCash,
-      		currencyChange, previousCurrency, currentCurrency, reasonForChange,
-      		details);
-    } catch(Exception e) {
-      log.error("null pointer exception?", e);
-    }
-  }
-
-  //gemsCashChange should represent how much user's cash and, or gems increased or decreased and
+  //currencyChange should represent how much user's currency increased or decreased and
   //this should be called after the user is updated
-  //only previousGemsCash can be null.
-  public static void writeToUserCurrencyOneUserGemsAndOrCash(User aUser,
-  		Timestamp date, Map<String,Integer> gemsCashChange, 
-      Map<String, Integer> previousGemsCash,
-      Map<String, String> reasonsForChanges, Map<String, String> details) {
+  public static void writeToUserCurrencyOneUser(int userId, Timestamp thyme,
+  		Map<String,Integer> changeMap, Map<String, Integer> previousCurrencyMap,
+  		Map<String, Integer> currentCurrencyMap, Map<String, String> changeReasonsMap,
+  		Map<String, String> detailsMap) {
     try {
-      int amount = gemsCashChange.size();
-      if(2 == amount) {
-        writeToUserCurrencyOneUserGemsAndCash(aUser, date, gemsCashChange, 
-            previousGemsCash, reasonsForChanges, details);
-      } else if(1 == amount) {
-        writeToUserCurrencyOneUserGemsOrCash(aUser, date, gemsCashChange,
-            previousGemsCash, reasonsForChanges, details);
+      int amount = changeMap.size();
+      
+      Set<String> keys = new HashSet<String>(changeMap.keySet());
+      for (String key : keys) {
+      	Integer change = changeMap.get(key);
+      	if (0 == change) {
+      		changeMap.remove(key);
+      		previousCurrencyMap.remove(key);
+      		currentCurrencyMap.remove(key);
+      		changeReasonsMap.remove(key);
+      		detailsMap.remove(key);
+      	}
       }
+      
+      List<Integer> userIds = Collections.nCopies(amount, userId);
+      List<Timestamp> timestamps = Collections.nCopies(amount, thyme); 
+      List<String> resourceTypes = new ArrayList<String>(changeMap.keySet());
+      List<Integer> currencyChanges = getValsInOrder(resourceTypes, changeMap);
+      List<Integer> previousCurrencies = getValsInOrder(resourceTypes, previousCurrencyMap);
+      List<Integer> currentCurrencies = getValsInOrder(resourceTypes, currentCurrencyMap);
+      List<String> reasonsForChanges = getValsInOrder(resourceTypes, changeReasonsMap);
+      List<String> details = getValsInOrder(resourceTypes, detailsMap);
+      		
+      InsertUtils.get().insertIntoUserCurrencyHistoryMultipleRows(userIds, timestamps,
+      		resourceTypes, currencyChanges, previousCurrencies, currentCurrencies,
+      		reasonsForChanges, details);
+      
     } catch(Exception e) {
-      log.error("error updating user_curency_history; reasonsForChanges=" + shallowMapToString(reasonsForChanges), e);
+      log.error("error updating user_curency_history; reasonsForChanges=" + changeReasonsMap, e);
     }
   }
-
-  public static String shallowListToString(List<?> aList) {
-    StringBuilder returnValue = new StringBuilder();
-    for(Object o : aList) {
-      returnValue.append(" ");
-      returnValue.append(o.toString()); 
-    }
-    return returnValue.toString();
+  
+  private static <T> List<T> getValsInOrder(List<String> keys, Map<String, T> keysToVals) {
+  	List<T> valsInOrder = new ArrayList<T>();
+  	for (String key : keys) {
+  		T delta = keysToVals.get(key);
+  		valsInOrder.add(delta);
+  	}
+  	return valsInOrder;
   }
-
-  public static String shallowMapToString(Map<?, ?> aMap) {
-    StringBuilder returnValue = new StringBuilder();
-    if (null != aMap && !aMap.isEmpty()) {
-      returnValue.append("[");
-      for(Object key : aMap.keySet()) {
-        returnValue.append(" ");
-        returnValue.append(key);
-        returnValue.append("=");
-        returnValue.append(aMap.get(key).toString());
-      }
-      returnValue.append("]");
-    }
-    return returnValue.toString();
-  }
-
-
+  
 //  public static boolean isEquipAtMaxEnhancementLevel(MonsterForUser enhancingUserEquip) {
 //    int currentEnhancementLevel = enhancingUserEquip.getEnhancementPercentage();
 //    int maxEnhancementLevel = ControllerConstants.MAX_ENHANCEMENT_LEVEL 

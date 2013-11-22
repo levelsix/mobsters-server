@@ -26,7 +26,8 @@ message StructureInfoProto {
 	optional int32 successorStructId = 13;	
 	
 	optional string imgName = 14;
-	optional float imgVerticalPixelOffset = 15; 
+	optional float imgVerticalPixelOffset = 15;
+	optional string description = 16; //text field in db 
 	
 	enum StructType {
 		RESOURCE_GENERATOR = 1;

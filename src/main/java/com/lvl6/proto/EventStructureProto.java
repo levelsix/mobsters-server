@@ -28,6 +28,18 @@ public final class EventStructureProto {
     // optional int64 timeOfPurchase = 4;
     boolean hasTimeOfPurchase();
     long getTimeOfPurchase();
+    
+    // optional int32 gemsSpent = 5;
+    boolean hasGemsSpent();
+    int getGemsSpent();
+    
+    // optional sint32 resourceChange = 6;
+    boolean hasResourceChange();
+    int getResourceChange();
+    
+    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
+    boolean hasResourceType();
+    com.lvl6.proto.StructureProto.ResourceType getResourceType();
   }
   public static final class PurchaseNormStructureRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -104,11 +116,44 @@ public final class EventStructureProto {
       return timeOfPurchase_;
     }
     
+    // optional int32 gemsSpent = 5;
+    public static final int GEMSSPENT_FIELD_NUMBER = 5;
+    private int gemsSpent_;
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+    
+    // optional sint32 resourceChange = 6;
+    public static final int RESOURCECHANGE_FIELD_NUMBER = 6;
+    private int resourceChange_;
+    public boolean hasResourceChange() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getResourceChange() {
+      return resourceChange_;
+    }
+    
+    // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
+    public static final int RESOURCETYPE_FIELD_NUMBER = 7;
+    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    public boolean hasResourceType() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      return resourceType_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       structCoordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       structId_ = 0;
       timeOfPurchase_ = 0L;
+      gemsSpent_ = 0;
+      resourceChange_ = 0;
+      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -134,6 +179,15 @@ public final class EventStructureProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(4, timeOfPurchase_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeSInt32(6, resourceChange_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeEnum(7, resourceType_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -158,6 +212,18 @@ public final class EventStructureProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, timeOfPurchase_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemsSpent_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(6, resourceChange_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(7, resourceType_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -301,6 +367,12 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         timeOfPurchase_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        resourceChange_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -363,6 +435,18 @@ public final class EventStructureProto {
           to_bitField0_ |= 0x00000008;
         }
         result.timeOfPurchase_ = timeOfPurchase_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.gemsSpent_ = gemsSpent_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.resourceChange_ = resourceChange_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.resourceType_ = resourceType_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -390,6 +474,15 @@ public final class EventStructureProto {
         }
         if (other.hasTimeOfPurchase()) {
           setTimeOfPurchase(other.getTimeOfPurchase());
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
+        }
+        if (other.hasResourceChange()) {
+          setResourceChange(other.getResourceChange());
+        }
+        if (other.hasResourceType()) {
+          setResourceType(other.getResourceType());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -448,6 +541,27 @@ public final class EventStructureProto {
             case 32: {
               bitField0_ |= 0x00000008;
               timeOfPurchase_ = input.readInt64();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              gemsSpent_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              resourceChange_ = input.readSInt32();
+              break;
+            }
+            case 56: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(7, rawValue);
+              } else {
+                bitField0_ |= 0x00000040;
+                resourceType_ = value;
+              }
               break;
             }
           }
@@ -678,6 +792,72 @@ public final class EventStructureProto {
         return this;
       }
       
+      // optional int32 gemsSpent = 5;
+      private int gemsSpent_ ;
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000010;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemsSpent_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional sint32 resourceChange = 6;
+      private int resourceChange_ ;
+      public boolean hasResourceChange() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getResourceChange() {
+        return resourceChange_;
+      }
+      public Builder setResourceChange(int value) {
+        bitField0_ |= 0x00000020;
+        resourceChange_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearResourceChange() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        resourceChange_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.ResourceType resourceType = 7 [default = CASH];
+      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      public boolean hasResourceType() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+        return resourceType_;
+      }
+      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        resourceType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearResourceType() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PurchaseNormStructureRequestProto)
     }
     
@@ -739,20 +919,14 @@ public final class EventStructureProto {
       FAIL_INSUFFICIENT_CASH(1, 2),
       FAIL_INSUFFICIENT_GEMS(2, 3),
       FAIL_INSUFFICIENT_OIL(3, 4),
-      FAIL_ANOTHER_STRUCT_STILL_BUILDING(4, 5),
-      FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT(5, 6),
-      FAIL_TOWN_HALL_LEVEL_TOO_LOW(6, 7),
-      FAIL_OTHER(7, 8),
+      FAIL_OTHER(4, 5),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_INSUFFICIENT_CASH_VALUE = 2;
       public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 3;
       public static final int FAIL_INSUFFICIENT_OIL_VALUE = 4;
-      public static final int FAIL_ANOTHER_STRUCT_STILL_BUILDING_VALUE = 5;
-      public static final int FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT_VALUE = 6;
-      public static final int FAIL_TOWN_HALL_LEVEL_TOO_LOW_VALUE = 7;
-      public static final int FAIL_OTHER_VALUE = 8;
+      public static final int FAIL_OTHER_VALUE = 5;
       
       
       public final int getNumber() { return value; }
@@ -763,10 +937,7 @@ public final class EventStructureProto {
           case 2: return FAIL_INSUFFICIENT_CASH;
           case 3: return FAIL_INSUFFICIENT_GEMS;
           case 4: return FAIL_INSUFFICIENT_OIL;
-          case 5: return FAIL_ANOTHER_STRUCT_STILL_BUILDING;
-          case 6: return FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT;
-          case 7: return FAIL_TOWN_HALL_LEVEL_TOO_LOW;
-          case 8: return FAIL_OTHER;
+          case 5: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -797,7 +968,7 @@ public final class EventStructureProto {
       }
       
       private static final PurchaseNormStructureStatus[] VALUES = {
-        SUCCESS, FAIL_INSUFFICIENT_CASH, FAIL_INSUFFICIENT_GEMS, FAIL_INSUFFICIENT_OIL, FAIL_ANOTHER_STRUCT_STILL_BUILDING, FAIL_ALREADY_HAVE_MAX_OF_THIS_STRUCT, FAIL_TOWN_HALL_LEVEL_TOO_LOW, FAIL_OTHER, 
+        SUCCESS, FAIL_INSUFFICIENT_CASH, FAIL_INSUFFICIENT_GEMS, FAIL_INSUFFICIENT_OIL, FAIL_OTHER, 
       };
       
       public static PurchaseNormStructureStatus valueOf(
@@ -1379,11 +1550,9 @@ public final class EventStructureProto {
     public enum MoveOrRotateNormStructType
         implements com.google.protobuf.ProtocolMessageEnum {
       MOVE(0, 1),
-      ROTATE(1, 2),
       ;
       
       public static final int MOVE_VALUE = 1;
-      public static final int ROTATE_VALUE = 2;
       
       
       public final int getNumber() { return value; }
@@ -1391,7 +1560,6 @@ public final class EventStructureProto {
       public static MoveOrRotateNormStructType valueOf(int value) {
         switch (value) {
           case 1: return MOVE;
-          case 2: return ROTATE;
           default: return null;
         }
       }
@@ -1422,7 +1590,7 @@ public final class EventStructureProto {
       }
       
       private static final MoveOrRotateNormStructType[] VALUES = {
-        MOVE, ROTATE, 
+        MOVE, 
       };
       
       public static MoveOrRotateNormStructType valueOf(
@@ -2705,1046 +2873,6 @@ public final class EventStructureProto {
     }
     
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MoveOrRotateNormStructureResponseProto)
-  }
-  
-  public interface SellNormStructureRequestProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-    boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // optional int32 userStructId = 2;
-    boolean hasUserStructId();
-    int getUserStructId();
-  }
-  public static final class SellNormStructureRequestProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SellNormStructureRequestProtoOrBuilder {
-    // Use SellNormStructureRequestProto.newBuilder() to construct.
-    private SellNormStructureRequestProto(Builder builder) {
-      super(builder);
-    }
-    private SellNormStructureRequestProto(boolean noInit) {}
-    
-    private static final SellNormStructureRequestProto defaultInstance;
-    public static SellNormStructureRequestProto getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public SellNormStructureRequestProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SellNormStructureRequestProto_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SellNormStructureRequestProto_fieldAccessorTable;
-    }
-    
-    private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-    public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-    public boolean hasSender() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-      return sender_;
-    }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-      return sender_;
-    }
-    
-    // optional int32 userStructId = 2;
-    public static final int USERSTRUCTID_FIELD_NUMBER = 2;
-    private int userStructId_;
-    public boolean hasUserStructId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public int getUserStructId() {
-      return userStructId_;
-    }
-    
-    private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      userStructId_ = 0;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, sender_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, userStructId_);
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, sender_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, userStructId_);
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-    
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.SellNormStructureRequestProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SellNormStructureRequestProto_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SellNormStructureRequestProto_fieldAccessorTable;
-      }
-      
-      // Construct using com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getSenderFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        userStructId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto.getDescriptor();
-      }
-      
-      public com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto.getDefaultInstance();
-      }
-      
-      public com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto build() {
-        com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto buildPartial() {
-        com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto result = new com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (senderBuilder_ == null) {
-          result.sender_ = sender_;
-        } else {
-          result.sender_ = senderBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.userStructId_ = userStructId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto) {
-          return mergeFrom((com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto other) {
-        if (other == com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto.getDefaultInstance()) return this;
-        if (other.hasSender()) {
-          mergeSender(other.getSender());
-        }
-        if (other.hasUserStructId()) {
-          setUserStructId(other.getUserStructId());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              userStructId_ = input.readInt32();
-              break;
-            }
-          }
-        }
-      }
-      
-      private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-      public boolean hasSender() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-        if (senderBuilder_ == null) {
-          return sender_;
-        } else {
-          return senderBuilder_.getMessage();
-        }
-      }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          sender_ = value;
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (senderBuilder_ == null) {
-          sender_ = builderForValue.build();
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
-          } else {
-            sender_ = value;
-          }
-          onChanged();
-        } else {
-          senderBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder clearSender() {
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getSenderFieldBuilder().getBuilder();
-      }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-        if (senderBuilder_ != null) {
-          return senderBuilder_.getMessageOrBuilder();
-        } else {
-          return sender_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getSenderFieldBuilder() {
-        if (senderBuilder_ == null) {
-          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
-                  getParentForChildren(),
-                  isClean());
-          sender_ = null;
-        }
-        return senderBuilder_;
-      }
-      
-      // optional int32 userStructId = 2;
-      private int userStructId_ ;
-      public boolean hasUserStructId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public int getUserStructId() {
-        return userStructId_;
-      }
-      public Builder setUserStructId(int value) {
-        bitField0_ |= 0x00000002;
-        userStructId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearUserStructId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        userStructId_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SellNormStructureRequestProto)
-    }
-    
-    static {
-      defaultInstance = new SellNormStructureRequestProto(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.SellNormStructureRequestProto)
-  }
-  
-  public interface SellNormStructureResponseProtoOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-    
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-    boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
-    
-    // optional .com.lvl6.proto.SellNormStructureResponseProto.SellNormStructureStatus status = 2;
-    boolean hasStatus();
-    com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus getStatus();
-  }
-  public static final class SellNormStructureResponseProto extends
-      com.google.protobuf.GeneratedMessage
-      implements SellNormStructureResponseProtoOrBuilder {
-    // Use SellNormStructureResponseProto.newBuilder() to construct.
-    private SellNormStructureResponseProto(Builder builder) {
-      super(builder);
-    }
-    private SellNormStructureResponseProto(boolean noInit) {}
-    
-    private static final SellNormStructureResponseProto defaultInstance;
-    public static SellNormStructureResponseProto getDefaultInstance() {
-      return defaultInstance;
-    }
-    
-    public SellNormStructureResponseProto getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SellNormStructureResponseProto_descriptor;
-    }
-    
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SellNormStructureResponseProto_fieldAccessorTable;
-    }
-    
-    public enum SellNormStructureStatus
-        implements com.google.protobuf.ProtocolMessageEnum {
-      SUCCESS(0, 1),
-      FAIL(1, 2),
-      ;
-      
-      public static final int SUCCESS_VALUE = 1;
-      public static final int FAIL_VALUE = 2;
-      
-      
-      public final int getNumber() { return value; }
-      
-      public static SellNormStructureStatus valueOf(int value) {
-        switch (value) {
-          case 1: return SUCCESS;
-          case 2: return FAIL;
-          default: return null;
-        }
-      }
-      
-      public static com.google.protobuf.Internal.EnumLiteMap<SellNormStructureStatus>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<SellNormStructureStatus>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<SellNormStructureStatus>() {
-              public SellNormStructureStatus findValueByNumber(int number) {
-                return SellNormStructureStatus.valueOf(number);
-              }
-            };
-      
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.getDescriptor().getEnumTypes().get(0);
-      }
-      
-      private static final SellNormStructureStatus[] VALUES = {
-        SUCCESS, FAIL, 
-      };
-      
-      public static SellNormStructureStatus valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-      
-      private final int index;
-      private final int value;
-      
-      private SellNormStructureStatus(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-      
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.SellNormStructureResponseProto.SellNormStructureStatus)
-    }
-    
-    private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-    public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
-    public boolean hasSender() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-      return sender_;
-    }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-      return sender_;
-    }
-    
-    // optional .com.lvl6.proto.SellNormStructureResponseProto.SellNormStructureStatus status = 2;
-    public static final int STATUS_FIELD_NUMBER = 2;
-    private com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus status_;
-    public boolean hasStatus() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    public com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus getStatus() {
-      return status_;
-    }
-    
-    private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus.SUCCESS;
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-      
-      memoizedIsInitialized = 1;
-      return true;
-    }
-    
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeMessage(1, sender_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, status_.getNumber());
-      }
-      getUnknownFields().writeTo(output);
-    }
-    
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-    
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, sender_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, status_.getNumber());
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-    
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-    
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
-    }
-    public static com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
-    }
-    
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-    
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements com.lvl6.proto.EventStructureProto.SellNormStructureResponseProtoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SellNormStructureResponseProto_descriptor;
-      }
-      
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.lvl6.proto.EventStructureProto.internal_static_com_lvl6_proto_SellNormStructureResponseProto_fieldAccessorTable;
-      }
-      
-      // Construct using com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-      
-      private Builder(BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getSenderFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-      
-      public Builder clear() {
-        super.clear();
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus.SUCCESS;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-      
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-      
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.getDescriptor();
-      }
-      
-      public com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto getDefaultInstanceForType() {
-        return com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.getDefaultInstance();
-      }
-      
-      public com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto build() {
-        com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-      
-      private com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
-      public com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto buildPartial() {
-        com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto result = new com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        if (senderBuilder_ == null) {
-          result.sender_ = sender_;
-        } else {
-          result.sender_ = senderBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.status_ = status_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-      
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto) {
-          return mergeFrom((com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto other) {
-        if (other == com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.getDefaultInstance()) return this;
-        if (other.hasSender()) {
-          mergeSender(other.getSender());
-        }
-        if (other.hasStatus()) {
-          setStatus(other.getStatus());
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-      
-      public final boolean isInitialized() {
-        return true;
-      }
-      
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasSender()) {
-                subBuilder.mergeFrom(getSender());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setSender(subBuilder.buildPartial());
-              break;
-            }
-            case 16: {
-              int rawValue = input.readEnum();
-              com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus value = com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(2, rawValue);
-              } else {
-                bitField0_ |= 0x00000002;
-                status_ = value;
-              }
-              break;
-            }
-          }
-        }
-      }
-      
-      private int bitField0_;
-      
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
-      public boolean hasSender() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
-        if (senderBuilder_ == null) {
-          return sender_;
-        } else {
-          return senderBuilder_.getMessage();
-        }
-      }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          sender_ = value;
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (senderBuilder_ == null) {
-          sender_ = builderForValue.build();
-          onChanged();
-        } else {
-          senderBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (senderBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
-          } else {
-            sender_ = value;
-          }
-          onChanged();
-        } else {
-          senderBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000001;
-        return this;
-      }
-      public Builder clearSender() {
-        if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-          onChanged();
-        } else {
-          senderBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
-        bitField0_ |= 0x00000001;
-        onChanged();
-        return getSenderFieldBuilder().getBuilder();
-      }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
-        if (senderBuilder_ != null) {
-          return senderBuilder_.getMessageOrBuilder();
-        } else {
-          return sender_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getSenderFieldBuilder() {
-        if (senderBuilder_ == null) {
-          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  sender_,
-                  getParentForChildren(),
-                  isClean());
-          sender_ = null;
-        }
-        return senderBuilder_;
-      }
-      
-      // optional .com.lvl6.proto.SellNormStructureResponseProto.SellNormStructureStatus status = 2;
-      private com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus.SUCCESS;
-      public boolean hasStatus() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      public com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus getStatus() {
-        return status_;
-      }
-      public Builder setStatus(com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000002;
-        status_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearStatus() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.SellNormStructureStatus.SUCCESS;
-        onChanged();
-        return this;
-      }
-      
-      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SellNormStructureResponseProto)
-    }
-    
-    static {
-      defaultInstance = new SellNormStructureResponseProto(true);
-      defaultInstance.initFields();
-    }
-    
-    // @@protoc_insertion_point(class_scope:com.lvl6.proto.SellNormStructureResponseProto)
   }
   
   public interface UpgradeNormStructureRequestProtoOrBuilder
@@ -10541,16 +9669,6 @@ public final class EventStructureProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MoveOrRotateNormStructureResponseProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_SellNormStructureRequestProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_SellNormStructureRequestProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_com_lvl6_proto_SellNormStructureResponseProto_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_com_lvl6_proto_SellNormStructureResponseProto_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -10616,115 +9734,106 @@ public final class EventStructureProto {
     java.lang.String[] descriptorData = {
       "\n\024EventStructure.proto\022\016com.lvl6.proto\032\n" +
       "City.proto\032\017Structure.proto\032\nUser.proto\"" +
-      "\273\001\n!PurchaseNormStructureRequestProto\0220\n" +
+      "\240\002\n!PurchaseNormStructureRequestProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
       "erProto\022:\n\021structCoordinates\030\002 \001(\0132\037.com" +
       ".lvl6.proto.CoordinateProto\022\020\n\010structId\030" +
-      "\003 \001(\005\022\026\n\016timeOfPurchase\030\004 \001(\003\"\320\003\n\"Purcha" +
-      "seNormStructureResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022^" +
-      "\n\006status\030\002 \001(\0162N.com.lvl6.proto.Purchase",
-      "NormStructureResponseProto.PurchaseNormS" +
-      "tructureStatus\022\024\n\014userStructId\030\003 \001(\005\"\201\002\n" +
-      "\033PurchaseNormStructureStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\032\n\026FAIL_INSUFFICIENT_CASH\020\002\022\032\n\026FAIL_IN" +
-      "SUFFICIENT_GEMS\020\003\022\031\n\025FAIL_INSUFFICIENT_O" +
-      "IL\020\004\022&\n\"FAIL_ANOTHER_STRUCT_STILL_BUILDI" +
-      "NG\020\005\022(\n$FAIL_ALREADY_HAVE_MAX_OF_THIS_ST" +
-      "RUCT\020\006\022 \n\034FAIL_TOWN_HALL_LEVEL_TOO_LOW\020\007" +
-      "\022\016\n\nFAIL_OTHER\020\010\"\211\003\n%MoveOrRotateNormStr" +
-      "uctureRequestProto\0220\n\006sender\030\001 \001(\0132 .com",
-      ".lvl6.proto.MinimumUserProto\022\024\n\014userStru" +
-      "ctId\030\002 \001(\005\022^\n\004type\030\003 \001(\0162P.com.lvl6.prot" +
-      "o.MoveOrRotateNormStructureRequestProto." +
-      "MoveOrRotateNormStructType\022=\n\024curStructC" +
-      "oordinates\030\004 \001(\0132\037.com.lvl6.proto.Coordi" +
-      "nateProto\022E\n\016newOrientation\030\005 \001(\0162!.com." +
-      "lvl6.proto.StructOrientation:\nPOSITION_1" +
-      "\"2\n\032MoveOrRotateNormStructType\022\010\n\004MOVE\020\001" +
-      "\022\n\n\006ROTATE\020\002\"\202\002\n&MoveOrRotateNormStructu" +
-      "reResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv",
-      "l6.proto.MinimumUserProto\022f\n\006status\030\002 \001(" +
-      "\0162V.com.lvl6.proto.MoveOrRotateNormStruc" +
-      "tureResponseProto.MoveOrRotateNormStruct" +
-      "ureStatus\">\n\037MoveOrRotateNormStructureSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002\"g\n\035Sel" +
-      "lNormStructureRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\024\n\014" +
-      "userStructId\030\002 \001(\005\"\334\001\n\036SellNormStructure" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022V\n\006status\030\002 \001(\0162",
-      "F.com.lvl6.proto.SellNormStructureRespon" +
-      "seProto.SellNormStructureStatus\"0\n\027SellN" +
-      "ormStructureStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020" +
-      "\002\"\201\001\n UpgradeNormStructureRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rtimeOf" +
-      "Upgrade\030\003 \001(\003\"\236\003\n!UpgradeNormStructureRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022\\\n\006status\030\002 \001(\0162L." +
-      "com.lvl6.proto.UpgradeNormStructureRespo",
-      "nseProto.UpgradeNormStructureStatus\"\350\001\n\032" +
-      "UpgradeNormStructureStatus\022\013\n\007SUCCESS\020\001\022" +
-      "\030\n\024FAIL_NOT_ENOUGH_CASH\020\002\022\030\n\024FAIL_NOT_EN" +
-      "OUGH_GEMS\020\003\022\026\n\022FAIL_NOT_BUILT_YET\020\004\022\031\n\025F" +
-      "AIL_NOT_USERS_STRUCT\020\005\022\'\n#FAIL_ANOTHER_S" +
-      "TRUCT_STILL_UPGRADING\020\006\022\035\n\031FAIL_AT_MAX_L" +
-      "EVEL_ALREADY\020\007\022\016\n\nFAIL_OTHER\020\010\"\253\001\n0Finis" +
-      "hNormStructWaittimeWithDiamondsRequestPr" +
+      "\003 \001(\005\022\026\n\016timeOfPurchase\030\004 \001(\003\022\021\n\tgemsSpe" +
+      "nt\030\005 \001(\005\022\026\n\016resourceChange\030\006 \001(\021\0228\n\014reso" +
+      "urceType\030\007 \001(\0162\034.com.lvl6.proto.Resource" +
+      "Type:\004CASH\"\334\002\n\"PurchaseNormStructureResp",
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022^\n\006status\030\002 \001(\0162N.co" +
+      "m.lvl6.proto.PurchaseNormStructureRespon" +
+      "seProto.PurchaseNormStructureStatus\022\024\n\014u" +
+      "serStructId\030\003 \001(\005\"\215\001\n\033PurchaseNormStruct" +
+      "ureStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFICI" +
+      "ENT_CASH\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003\022\031" +
+      "\n\025FAIL_INSUFFICIENT_OIL\020\004\022\016\n\nFAIL_OTHER\020" +
+      "\005\"\375\002\n%MoveOrRotateNormStructureRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min",
+      "imumUserProto\022\024\n\014userStructId\030\002 \001(\005\022^\n\004t" +
+      "ype\030\003 \001(\0162P.com.lvl6.proto.MoveOrRotateN" +
+      "ormStructureRequestProto.MoveOrRotateNor" +
+      "mStructType\022=\n\024curStructCoordinates\030\004 \001(" +
+      "\0132\037.com.lvl6.proto.CoordinateProto\022E\n\016ne" +
+      "wOrientation\030\005 \001(\0162!.com.lvl6.proto.Stru" +
+      "ctOrientation:\nPOSITION_1\"&\n\032MoveOrRotat" +
+      "eNormStructType\022\010\n\004MOVE\020\001\"\202\002\n&MoveOrRota" +
+      "teNormStructureResponseProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022f",
+      "\n\006status\030\002 \001(\0162V.com.lvl6.proto.MoveOrRo" +
+      "tateNormStructureResponseProto.MoveOrRot" +
+      "ateNormStructureStatus\">\n\037MoveOrRotateNo" +
+      "rmStructureStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_" +
+      "FAIL\020\002\"\201\001\n UpgradeNormStructureRequestPr" +
       "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rt",
-      "imeOfSpeedup\030\003 \001(\003\022\030\n\020gemCostToSpeedup\030\004" +
-      " \001(\005\"\260\002\n1FinishNormStructWaittimeWithDia" +
-      "mondsResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022p\n\006status\030\002" +
-      " \001(\0162`.com.lvl6.proto.FinishNormStructWa" +
-      "ittimeWithDiamondsResponseProto.FinishNo" +
-      "rmStructWaittimeStatus\"W\n\036FinishNormStru" +
-      "ctWaittimeStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NO" +
-      "T_ENOUGH_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"}\n\"NormS" +
-      "tructWaitCompleteRequestProto\0220\n\006sender\030",
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\024\n\014userStructId\030\002 \003(\005\022\017\n\007curTime\030\003 \001(\003\"\311" +
-      "\002\n#NormStructWaitCompleteResponseProto\0220" +
+      "imumUserProto\022\024\n\014userStructId\030\002 \001(\005\022\025\n\rt" +
+      "imeOfUpgrade\030\003 \001(\003\"\236\003\n!UpgradeNormStruct" +
+      "ureResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\\\n\006status\030\002 \001",
+      "(\0162L.com.lvl6.proto.UpgradeNormStructure" +
+      "ResponseProto.UpgradeNormStructureStatus" +
+      "\"\350\001\n\032UpgradeNormStructureStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\030\n\024FAIL_NOT_ENOUGH_CASH\020\002\022\030\n\024FAIL_N" +
+      "OT_ENOUGH_GEMS\020\003\022\026\n\022FAIL_NOT_BUILT_YET\020\004" +
+      "\022\031\n\025FAIL_NOT_USERS_STRUCT\020\005\022\'\n#FAIL_ANOT" +
+      "HER_STRUCT_STILL_UPGRADING\020\006\022\035\n\031FAIL_AT_" +
+      "MAX_LEVEL_ALREADY\020\007\022\016\n\nFAIL_OTHER\020\010\"\253\001\n0" +
+      "FinishNormStructWaittimeWithDiamondsRequ" +
+      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot",
+      "o.MinimumUserProto\022\024\n\014userStructId\030\002 \001(\005" +
+      "\022\025\n\rtimeOfSpeedup\030\003 \001(\003\022\030\n\020gemCostToSpee" +
+      "dup\030\004 \001(\005\"\260\002\n1FinishNormStructWaittimeWi" +
+      "thDiamondsResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022p\n\006sta" +
+      "tus\030\002 \001(\0162`.com.lvl6.proto.FinishNormStr" +
+      "uctWaittimeWithDiamondsResponseProto.Fin" +
+      "ishNormStructWaittimeStatus\"W\n\036FinishNor" +
+      "mStructWaittimeStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FA" +
+      "IL_NOT_ENOUGH_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003\"}\n\"",
+      "NormStructWaitCompleteRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\024\n\014userStructId\030\002 \003(\005\022\017\n\007curTime\030\003 " +
+      "\001(\003\"\311\002\n#NormStructWaitCompleteResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022`\n\006status\030\002 \001(\0162P.com.lvl6" +
+      ".proto.NormStructWaitCompleteResponsePro" +
+      "to.NormStructWaitCompleteStatus\022:\n\nuserS" +
+      "truct\030\003 \003(\0132&.com.lvl6.proto.FullUserStr" +
+      "uctureProto\"R\n\034NormStructWaitCompleteSta",
+      "tus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_DONE_YET\020\002\022" +
+      "\016\n\nFAIL_OTHER\020\003\"\214\002\n-RetrieveCurrencyFrom" +
+      "NormStructureRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022g\n\020s" +
+      "tructRetrievals\030\002 \003(\0132M.com.lvl6.proto.R" +
+      "etrieveCurrencyFromNormStructureRequestP" +
+      "roto.StructRetrieval\032@\n\017StructRetrieval\022" +
+      "\024\n\014userStructId\030\001 \001(\005\022\027\n\017timeOfRetrieval" +
+      "\030\002 \001(\003\"\337\002\n.RetrieveCurrencyFromNormStruc" +
+      "tureResponseProto\0220\n\006sender\030\001 \001(\0132 .com.",
+      "lvl6.proto.MinimumUserProto\022v\n\006status\030\002 " +
+      "\001(\0162f.com.lvl6.proto.RetrieveCurrencyFro" +
+      "mNormStructureResponseProto.RetrieveCurr" +
+      "encyFromNormStructureStatus\"\202\001\n\'Retrieve" +
+      "CurrencyFromNormStructureStatus\022\016\n\nOTHER" +
+      "_FAIL\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_TOO_APART" +
+      "_FROM_SERVER_TIME\020\003\022\023\n\017NOT_LONG_ENOUGH\020\004" +
+      "\"\267\001\n!ExpansionWaitCompleteRequestProto\0220" +
       "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022`\n\006status\030\002 \001(\0162P.com.lvl6.prot" +
-      "o.NormStructWaitCompleteResponseProto.No" +
-      "rmStructWaitCompleteStatus\022:\n\nuserStruct" +
-      "\030\003 \003(\0132&.com.lvl6.proto.FullUserStructur" +
-      "eProto\"R\n\034NormStructWaitCompleteStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\025\n\021FAIL_NOT_DONE_YET\020\002\022\016\n\nFA",
-      "IL_OTHER\020\003\"\214\002\n-RetrieveCurrencyFromNormS" +
-      "tructureRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022g\n\020struct" +
-      "Retrievals\030\002 \003(\0132M.com.lvl6.proto.Retrie" +
-      "veCurrencyFromNormStructureRequestProto." +
-      "StructRetrieval\032@\n\017StructRetrieval\022\024\n\014us" +
-      "erStructId\030\001 \001(\005\022\027\n\017timeOfRetrieval\030\002 \001(" +
-      "\003\"\337\002\n.RetrieveCurrencyFromNormStructureR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022v\n\006status\030\002 \001(\0162f",
-      ".com.lvl6.proto.RetrieveCurrencyFromNorm" +
-      "StructureResponseProto.RetrieveCurrencyF" +
-      "romNormStructureStatus\"\202\001\n\'RetrieveCurre" +
-      "ncyFromNormStructureStatus\022\016\n\nOTHER_FAIL" +
-      "\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_TOO_APART_FROM" +
-      "_SERVER_TIME\020\003\022\023\n\017NOT_LONG_ENOUGH\020\004\"\267\001\n!" +
-      "ExpansionWaitCompleteRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txPosition\030\003 \001(\021\022" +
-      "\021\n\tyPosition\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010\022\030\n\020g",
-      "emCostToSpeedup\030\006 \001(\005\"\375\002\n\"ExpansionWaitC" +
-      "ompleteResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022^\n\006status" +
-      "\030\002 \001(\0162N.com.lvl6.proto.ExpansionWaitCom" +
-      "pleteResponseProto.ExpansionWaitComplete" +
-      "Status\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.proto.U" +
-      "serCityExpansionDataProto\"\211\001\n\033ExpansionW" +
-      "aitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_W" +
-      "AS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DONE_YET\020" +
-      "\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nFAIL_OT",
-      "HER\020\005B\025B\023EventStructureProto"
+      "serProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txPosition\030\003",
+      " \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010" +
+      "\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"Expansion" +
+      "WaitCompleteResponseProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022^\n\006s" +
+      "tatus\030\002 \001(\0162N.com.lvl6.proto.ExpansionWa" +
+      "itCompleteResponseProto.ExpansionWaitCom" +
+      "pleteStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.pr" +
+      "oto.UserCityExpansionDataProto\"\211\001\n\033Expan" +
+      "sionWaitCompleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026F" +
+      "AIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL_NOT_DONE",
+      "_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\004\022\016\n\nFA" +
+      "IL_OTHER\020\005B\025B\023EventStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10736,7 +9845,7 @@ public final class EventStructureProto {
           internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PurchaseNormStructureRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "StructCoordinates", "StructId", "TimeOfPurchase", },
+              new java.lang.String[] { "Sender", "StructCoordinates", "StructId", "TimeOfPurchase", "GemsSpent", "ResourceChange", "ResourceType", },
               com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto.class,
               com.lvl6.proto.EventStructureProto.PurchaseNormStructureRequestProto.Builder.class);
           internal_static_com_lvl6_proto_PurchaseNormStructureResponseProto_descriptor =
@@ -10763,24 +9872,8 @@ public final class EventStructureProto {
               new java.lang.String[] { "Sender", "Status", },
               com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.class,
               com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureResponseProto.Builder.class);
-          internal_static_com_lvl6_proto_SellNormStructureRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_com_lvl6_proto_SellNormStructureRequestProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SellNormStructureRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserStructId", },
-              com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto.class,
-              com.lvl6.proto.EventStructureProto.SellNormStructureRequestProto.Builder.class);
-          internal_static_com_lvl6_proto_SellNormStructureResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_com_lvl6_proto_SellNormStructureResponseProto_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_com_lvl6_proto_SellNormStructureResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", },
-              com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.class,
-              com.lvl6.proto.EventStructureProto.SellNormStructureResponseProto.Builder.class);
           internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(4);
           internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UpgradeNormStructureRequestProto_descriptor,
@@ -10788,7 +9881,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto.class,
               com.lvl6.proto.EventStructureProto.UpgradeNormStructureRequestProto.Builder.class);
           internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UpgradeNormStructureResponseProto_descriptor,
@@ -10796,7 +9889,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.class,
               com.lvl6.proto.EventStructureProto.UpgradeNormStructureResponseProto.Builder.class);
           internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsRequestProto_descriptor,
@@ -10804,7 +9897,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRequestProto.class,
               com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsRequestProto.Builder.class);
           internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FinishNormStructWaittimeWithDiamondsResponseProto_descriptor,
@@ -10812,7 +9905,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.class,
               com.lvl6.proto.EventStructureProto.FinishNormStructWaittimeWithDiamondsResponseProto.Builder.class);
           internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_NormStructWaitCompleteRequestProto_descriptor,
@@ -10820,7 +9913,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto.class,
               com.lvl6.proto.EventStructureProto.NormStructWaitCompleteRequestProto.Builder.class);
           internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(11);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_NormStructWaitCompleteResponseProto_descriptor,
@@ -10828,7 +9921,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.class,
               com.lvl6.proto.EventStructureProto.NormStructWaitCompleteResponseProto.Builder.class);
           internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(12);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_descriptor,
@@ -10844,7 +9937,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval.class,
               com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval.Builder.class);
           internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(13);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor,
@@ -10852,7 +9945,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.class,
               com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.Builder.class);
           internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor =
-            getDescriptor().getMessageTypes().get(14);
+            getDescriptor().getMessageTypes().get(12);
           internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ExpansionWaitCompleteRequestProto_descriptor,
@@ -10860,7 +9953,7 @@ public final class EventStructureProto {
               com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteRequestProto.class,
               com.lvl6.proto.EventStructureProto.ExpansionWaitCompleteRequestProto.Builder.class);
           internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(15);
+            getDescriptor().getMessageTypes().get(13);
           internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ExpansionWaitCompleteResponseProto_descriptor,
