@@ -10,24 +10,8 @@ option java_outer_classname = "EventStaticDataProto";
 
 
 message PurgeClientStaticDataResponseProto {
-	//will most likely be the id of an admin
 	optional int32 senderId = 1;
-     
-	//this just triggers client to send a retrieve static data event
+	optional StaticDataProto staticDataStuff = 2;
 }
 
 //------------------------------------------------------------------------------------------
-
-	
-message RetrieveStaticDataRequestProto {
-	optional int32 senderId = 1;
-}
-message RetrieveStaticDataResponseProto {
-	optional int32 senderId = 1;
-	optional StaticDataProto sdp = 2;
-	
-	enum RetrieveStaticDataStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
-	}
-}
