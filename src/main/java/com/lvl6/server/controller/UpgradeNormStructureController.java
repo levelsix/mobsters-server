@@ -186,11 +186,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils().getUserStructsForUser(user.getId());
     if (userStructs != null) {
       for (StructureForUser us : userStructs) {
-        if (!us.isComplete() && us.getUpgradeStartTime() != null) {
-          resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_ANOTHER_STRUCT_STILL_UPGRADING);
-          log.error("another struct is still upgrading: user struct=" + us);
-          return false;
-        }
+//        if (!us.isComplete() && us.getUpgradeStartTime() != null) {
+//          resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_ANOTHER_STRUCT_STILL_UPGRADING);
+//          log.error("another struct is still upgrading: user struct=" + us);
+//          return false;
+//        }
       }
     }
     resBuilder.setStatus(UpgradeNormStructureStatus.SUCCESS);

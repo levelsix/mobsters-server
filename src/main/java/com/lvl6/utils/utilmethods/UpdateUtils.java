@@ -261,7 +261,7 @@ public class UpdateUtils implements UpdateUtil {
 		Map <String, Object> relativeParams = null; //new HashMap<String, Object>();
 		
 		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, newStructId);
-		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__UPGRADE_START_TIME, upgradeTime);
+//		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__UPGRADE_START_TIME, upgradeTime);
 		absoluteParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, false);
 		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, absoluteParams, 
@@ -323,7 +323,7 @@ public class UpdateUtils implements UpdateUtil {
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, newPurchaseTime);
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, true);
 			newRow.put(DBConstants.STRUCTURE_FOR_USER__ORIENTATION, userStruct.getOrientation().getNumber());
-			newRow.put(DBConstants.STRUCTURE_FOR_USER__UPGRADE_START_TIME, userStruct.getUpgradeStartTime());
+//			newRow.put(DBConstants.STRUCTURE_FOR_USER__UPGRADE_START_TIME, userStruct.getUpgradeStartTime());
 			
 			newRows.add(newRow);
 		}

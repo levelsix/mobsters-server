@@ -194,13 +194,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		Structure struct = StructureRetrieveUtils.getPredecessorStructForStructId(structureId);
   		Date newDate;
   		
-  		if (null != struct) {
-  			newDate = sfu.getUpgradeStartTime();
-  		} else {
+//  		if (null != struct) {
+//  			newDate = sfu.getUpgradeStartTime();
+//  		} else {
   			//no predecessor struct, meaning this structure just finished being built
   			//not upgrading
   			newDate = sfu.getPurchaseTime();
-  		}
+//  		}
   		
   		Timestamp newTime = new Timestamp(newDate.getTime());
   		newPurchaseTimes.add(newTime);

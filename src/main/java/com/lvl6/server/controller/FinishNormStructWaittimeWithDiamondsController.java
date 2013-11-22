@@ -159,7 +159,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//it shouldn't be updated if the structure is just waiting to be built
   	Date newPurchaseDate = userStruct.getPurchaseTime();
   	if (null != formerStruct) {
-  		newPurchaseDate = userStruct.getUpgradeStartTime();
+//  		newPurchaseDate = userStruct.getUpgradeStartTime();
   	}
   	Timestamp newPurchaseTime = new Timestamp(newPurchaseDate.getTime());
   	
