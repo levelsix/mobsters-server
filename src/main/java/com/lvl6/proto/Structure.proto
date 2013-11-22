@@ -73,8 +73,19 @@ message HospitalProto {
 
 message ResidenceProto {
 	optional int32 structId = 1;
+	
 	//how many monster slots this residence gives the user (absolute number)
+	//does not depend on previous lower level structures
 	optional int32 numMonsterSlots = 2;
+	
+	//additional slots if user buys some gems or invites friends
+	optional int32 numBonusMonsterSlots
+	
+	//number of gems it costs to buy one additional monster slot
+	optional int32 numGemsRequired = 3;
+	
+	//number of accepted fb invites to get one additional monster slot
+	optional int32 numAcceptedFbInvites = 4;
 }
 
 //------------------------------------------------------------------------------------------
