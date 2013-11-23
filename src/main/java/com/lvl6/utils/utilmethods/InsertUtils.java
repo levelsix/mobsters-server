@@ -323,15 +323,19 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUserStruct(int, int, com.lvl6.info.CoordinatePair, java.sql.Timestamp)
    */
   @Override
-  public int insertUserStruct(int userId, int structId,
-      CoordinatePair coordinates, Timestamp timeOfPurchase) {
+  public int insertUserStruct(int userId, int structId, CoordinatePair coordinates,
+  		Timestamp timeOfPurchase, Timestamp lastRetrievedTime, boolean isComplete) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, userId);
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, structId);
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, coordinates.getX());
     insertParams.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, coordinates.getY());
-    insertParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME,
-        timeOfPurchase);
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, timeOfPurchase);
+    insertParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, isComplete);
+    if (null != lastRetrievedTime && isComplete) {
+    	insertParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, lastRetrievedTime);
+    	
+    }
 
     int userStructId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_STRUCTURE_FOR_USER, insertParams);

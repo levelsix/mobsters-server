@@ -195,7 +195,15 @@ import com.lvl6.utils.utilmethods.InsertUtil;
   		Timestamp purchaseTime, int gemsSpent, int resourceChange, ResourceType resourceType,
   		List<Integer> uStructId, Map<String, Integer> money) {
     int userId = user.getId();
-    int userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime);
+    Timestamp lastRetrievedTime = null;
+    boolean isComplete = false;
+    if (gemsSpent > 0) {
+    	lastRetrievedTime = purchaseTime;
+    	isComplete = true;
+    }
+    
+    int userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime,
+    		lastRetrievedTime, isComplete);
     if (userStructId <= 0) {
       log.error("problem with giving struct " + structId + " at " + purchaseTime +
       		" on " + cp);

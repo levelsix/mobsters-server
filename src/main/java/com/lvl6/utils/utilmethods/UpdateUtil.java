@@ -71,7 +71,7 @@ public interface UpdateUtil {
   		int newStructId, Timestamp upgradeTime);
   
   public abstract boolean updateSpeedupUpgradingUserStruct(int userStructId,
-  		Timestamp lastRetrievedTime, Timestamp purchaseTime);
+  		Timestamp lastRetrievedTime);
   
   /*
    * used for updating last retrieved user struct times

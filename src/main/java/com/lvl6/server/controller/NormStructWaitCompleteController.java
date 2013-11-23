@@ -66,14 +66,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       List<StructureForUser> userStructs = RetrieveUtils.userStructRetrieveUtils()
       		.getSpecificOrAllUserStructsForUser(userId, userStructIds);
 
+      List<Timestamp> newRetrievedTimes = new ArrayList<Timestamp>();
       boolean legitWaitComplete = checkLegitWaitComplete(resBuilder, userStructs,
-      		userStructIds, senderProto.getUserId(), clientTime);
+      		userStructIds, senderProto.getUserId(), clientTime, newRetrievedTimes);
 
 
       boolean success = false;
       if (legitWaitComplete) {
       	//upgrading and building a building is the same thing
-        success = writeChangesToDB(userId, userStructs);
+        success = writeChangesToDB(userId, userStructs, newRetrievedTimes);
       }
 
       if (success) {
@@ -100,7 +101,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean checkLegitWaitComplete(Builder resBuilder,
       List<StructureForUser> userStructs, List<Integer> userStructIds,
-      int userId, Timestamp clientTime) {
+      int userId, Timestamp clientTime, List<Timestamp> newRetrievedTimes) {
   	
     if (userStructs == null || userStructIds == null || clientTime == null || userStructIds.size() != userStructs.size()) {
       resBuilder.setStatus(NormStructWaitCompleteStatus.FAIL_OTHER);
@@ -108,20 +109,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
           + userStructs + ", userStructIds=" + userStructIds + ", clientTime=" + clientTime);
       return false;
     }
-//    if (!MiscMethods.checkClientTimeAroundApproximateNow(clientTime)) {
-//      resBuilder.setStatus(NormStructWaitCompleteStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-//      log.error("client time too apart of server time. client time=" + clientTime + ", servertime~="
-//          + new Date());
-//      return false;
-//    }
 
     //for each user structure complete the ones the client said are done.
     //replace what client sent with the ones that are actually done
     List<StructureForUser> validUserStructs = new ArrayList<StructureForUser>();
     List<Integer> validUserStructIds = new ArrayList<Integer>();
     
-    calculateValidUserStructs(userId, clientTime, userStructs, validUserStructIds,
-    		validUserStructs);
+    List<Timestamp> timesBuildsFinished = calculateValidUserStructs(userId, clientTime,
+    		userStructs, validUserStructIds, validUserStructs);
     
     if (userStructs.size() != validUserStructs.size()) {
     	log.warn("some of what the client sent is invalid. idsClientSent=" +
@@ -133,14 +128,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	userStructIds.addAll(validUserStructIds);
     }
     
+    newRetrievedTimes.addAll(timesBuildsFinished);
     return true;  
 
   }
 
-  //"validUserStructIds" and "validUserStructs" will be POPULATED
-  private void calculateValidUserStructs(int userId, Timestamp clientTime, 
+  //"validUserStructIds" and "validUserStructs" WILL BE POPULATED
+  private List<Timestamp> calculateValidUserStructs(int userId, Timestamp clientTime, 
   		List<StructureForUser> userStructs, List<Integer> validUserStructIds,
   		List<StructureForUser> validUserStructs) {
+  	List<Timestamp> timesBuildsFinished = new ArrayList<Timestamp>();
     Map<Integer, Structure> structures = StructureRetrieveUtils.getStructIdsToStructs();
     
     for (StructureForUser us : userStructs) {
@@ -158,7 +155,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       long buildTimeMillis = 60000*struct.getMinutesToBuild();
       
       if (null != purchaseDate) {
-        if (purchaseDate.getTime() + buildTimeMillis > clientTime.getTime()) {
+      	long timeBuildFinished = purchaseDate.getTime() + buildTimeMillis;
+        if (timeBuildFinished > clientTime.getTime()) {
           log.warn("the building is not done yet. userstruct=" + ", client time is " +
           		clientTime + ", purchase time was " + purchaseDate);
           continue;
@@ -166,46 +164,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         
         validUserStructIds.add(us.getId());
         validUserStructs.add(us);
+        timesBuildsFinished.add(new Timestamp(timeBuildFinished));
         
       } else {
         log.warn("user struct has never been bought or purchased according to db. " + us);
       }
     }
-    
+    return timesBuildsFinished;
   }
   
 
-  private boolean writeChangesToDB(int userId, List<StructureForUser> buildsDone) {
-  	List<Timestamp> newPurchaseTimes = calculateNewPurchaseTimes(buildsDone);
+  private boolean writeChangesToDB(int userId, List<StructureForUser> buildsDone,
+  		List<Timestamp> newRetrievedTimes) {
     if (!UpdateUtils.get().updateUserStructsBuildingIscomplete(userId, buildsDone,
-    		newPurchaseTimes)) {
+    		newRetrievedTimes)) {
       log.error("problem with marking norm struct builds as complete for one of these structs: " + buildsDone);
       return false;
     }
     return true;
   }
 
-  //if build that is done is done upgrading, then it's purchase time should change
-  private List<Timestamp> calculateNewPurchaseTimes(List<StructureForUser> buildsDone) {
-  	List<Timestamp> newPurchaseTimes = new ArrayList<Timestamp>();
-  	
-  	for (StructureForUser sfu : buildsDone) {
-  		int structureId = sfu.getStructId();
-  		Structure struct = StructureRetrieveUtils.getPredecessorStructForStructId(structureId);
-  		Date newDate;
-  		
-//  		if (null != struct) {
-//  			newDate = sfu.getUpgradeStartTime();
-//  		} else {
-  			//no predecessor struct, meaning this structure just finished being built
-  			//not upgrading
-  			newDate = sfu.getPurchaseTime();
-//  		}
-  		
-  		Timestamp newTime = new Timestamp(newDate.getTime());
-  		newPurchaseTimes.add(newTime);
-  	}
-  	return newPurchaseTimes;
-  }
-  
 }

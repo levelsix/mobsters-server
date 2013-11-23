@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,6 +54,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     int userStructId = reqProto.getUserStructId();
+    //userstruct's lastRetrieved will start with this date
     Timestamp timeOfSpeedup = new Timestamp(reqProto.getTimeOfSpeedup());
     int gemCostToSpeedup = reqProto.getGemCostToSpeedup();
 
@@ -63,7 +63,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       int previousGems = 0;
@@ -155,19 +154,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		money.put(MiscMethods.gems, gemChange);
   	}
   	
-  	//when user upgrades a building its purchase time also gets updated
-  	//it shouldn't be updated if the structure is just waiting to be built
-  	Date newPurchaseDate = userStruct.getPurchaseTime();
-  	if (null != formerStruct) {
-//  		newPurchaseDate = userStruct.getUpgradeStartTime();
-  	}
-  	Timestamp newPurchaseTime = new Timestamp(newPurchaseDate.getTime());
+  	//the last retrieved time has a value of timeOfSpeedup
   	
   	//update structure for user to reflect it is complete
-  	//if this speed up request is for upgrading, then it's purchase time should
-  	//be when upgrading first began
   	if (!UpdateUtils.get().updateSpeedupUpgradingUserStruct(userStruct.getId(),
-  			timeOfSpeedup, newPurchaseTime)) {
+  			timeOfSpeedup)) {
   		log.error("problem with completing norm struct build time. userStruct=" +
   				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
   		return false;

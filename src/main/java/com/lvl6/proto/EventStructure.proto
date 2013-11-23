@@ -68,7 +68,7 @@ message MoveOrRotateNormStructureResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//user initiating a structure upgrade
+//user initiating a structure upgrade, similar to a purchase norm structure
 message UpgradeNormStructureRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 userStructId = 2;
@@ -101,7 +101,11 @@ message UpgradeNormStructureResponseProto {
 message FinishNormStructWaittimeWithDiamondsRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 userStructId = 2;
-	optional int64 timeOfSpeedup = 3;			//lastRetrieved will start with this date
+	
+	//user's userstruct's lastRetrieved will start with this date
+	//if the structure is a generator, the uncollected resources will be lost when upgraded
+	optional int64 timeOfSpeedup = 3;			
+	
 	optional int32 gemCostToSpeedup = 4;
 }
 																						//DONE
@@ -129,7 +133,13 @@ message FinishNormStructWaittimeWithDiamondsResponseProto {
 message NormStructWaitCompleteRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated int32 userStructId = 2;
-	optional int64 curTime = 3;						//used for checking
+	
+	//if the structure is a generator, the uncollected resources will be lost when upgraded
+	//server will compute last retrieved times
+	//this is just for history purposes
+	optional int64 curTime = 3;
+	
+	
 }
 
 																						//DONE
