@@ -78,6 +78,18 @@ message HospitalProto {
 
 //------------------------------------------------------------------------------------------
 
+//for enhancing monsters
+message LabProto {
+	optional StructureInfoProto structInfo = 1;
+	optional int32 queueSize = 2;
+	
+	//maybe convert monsters to points and it will take (points)(second/points)='x' seconds
+	//for a main monster to be enhanced with all those points
+	optional float pointsPerSecond = 3;
+}
+
+//------------------------------------------------------------------------------------------
+
 message ResidenceProto {
 	optional StructureInfoProto structInfo = 1;
 	
