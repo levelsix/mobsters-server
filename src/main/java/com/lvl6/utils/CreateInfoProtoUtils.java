@@ -677,7 +677,21 @@ public class CreateInfoProtoUtils {
   	return thpb.build();
   }
 
-  public static FullCityProto createFullCityProtoFromCity(City c) {
+  public static LabProto createLabProto(Structure s, StructureInfoProto sip,
+  		StructureLab sl) {
+  	if (null == sip) {
+  		sip = createStructureInfoProtoFromStructure(s);
+  	}
+  	
+  	LabProto.Builder lpb = LabProto.newBuilder();
+  	lpb.setStructInfo(sip);
+  	lpb.setQueueSize(sl.getQueueSize());
+  	lpb.setPointsPerSecond(sl.getPointsPerSecond());
+  	
+  	return lpb.build();
+  }
+  
+   public static FullCityProto createFullCityProtoFromCity(City c) {
     FullCityProto.Builder builder = FullCityProto.newBuilder();
     builder.setCityId(c.getId());
     builder.setName(c.getName());

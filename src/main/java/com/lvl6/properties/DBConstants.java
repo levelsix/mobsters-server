@@ -43,6 +43,7 @@ public class DBConstants {
   public static final String TABLE_STRUCTURE = "structure";
   public static final String TABLE_STRUCTURE_FOR_USER = "structure_for_user";
   public static final String TABLE_STRUCTURE_HOSPITAL = "structure_hospital";
+  public static final String TABLE_STRUCTURE_LAB = "structure_lab";
   public static final String TABLE_STRUCTURE_RESIDENCE = "structure_residence";
   public static final String TABLE_STRUCTURE_RESOURCE_GENERATOR = "structure_resource_generator";
   public static final String TABLE_STRUCTURE_RESOURCE_STORAGE = "structure_resource_storage";

@@ -38,6 +38,7 @@ import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureHospital;
+import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -67,6 +68,7 @@ import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.StructureProto.HospitalProto;
+import com.lvl6.proto.StructureProto.LabProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
@@ -91,6 +93,7 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureHospitalRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureLabRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StructureResourceStorageRetrieveUtils;
@@ -584,6 +587,7 @@ public class MiscMethods {
     StartupStuffRetrieveUtils.reload();
     StaticUserLevelInfoRetrieveUtils.reload();
     StructureHospitalRetrieveUtils.reload();
+    StructureLabRetrieveUtils.reload();
     StructureResidenceRetrieveUtils.reload();
     StructureResourceGeneratorRetrieveUtils.reload();
     StructureResourceStorageRetrieveUtils.reload();
@@ -1398,6 +1402,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   	setHospitals(sdpb, structs, structProtos);
   	setResidences(sdpb, structs, structProtos);
   	setTownHalls(sdpb, structs, structProtos);
+  	setLabs(sdpb, structs, structProtos);
   }
   //resource generator
   private static void setGenerators(Builder sdpb, Map<Integer, Structure> structs,
@@ -1430,12 +1435,12 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   //hospitals
   private static void setHospitals(Builder sdpb, Map<Integer, Structure> structs,
   		Map<Integer, StructureInfoProto> structProtos) {
-  	Map<Integer, StructureHospital> idsToStorages = 
+  	Map<Integer, StructureHospital> idsToHospitals = 
   			StructureHospitalRetrieveUtils.getStructIdsToHospitals();
-  	for (Integer structId : idsToStorages.keySet()) {
+  	for (Integer structId : idsToHospitals.keySet()) {
   		Structure s = structs.get(structId);
   		StructureInfoProto sip = structProtos.get(structId);
-  		StructureHospital srg = idsToStorages.get(structId);
+  		StructureHospital srg = idsToHospitals.get(structId);
 
   		HospitalProto rgp = CreateInfoProtoUtils.createHospitalProto(s, sip, srg);
   		sdpb.addAllHospitals(rgp);
@@ -1444,12 +1449,12 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   //residences
   private static void setResidences(Builder sdpb, Map<Integer, Structure> structs,
   		Map<Integer, StructureInfoProto> structProtos) {
-  	Map<Integer, StructureResidence> idsToStorages = 
+  	Map<Integer, StructureResidence> idsToResidences = 
   			StructureResidenceRetrieveUtils.getStructIdsToResidences();
-  	for (Integer structId : idsToStorages.keySet()) {
+  	for (Integer structId : idsToResidences.keySet()) {
   		Structure s = structs.get(structId);
   		StructureInfoProto sip = structProtos.get(structId);
-  		StructureResidence srg = idsToStorages.get(structId);
+  		StructureResidence srg = idsToResidences.get(structId);
 
   		ResidenceProto rgp = CreateInfoProtoUtils.createResidenceProto(s, sip, srg);
   		sdpb.addAllResidences(rgp);
@@ -1458,16 +1463,30 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   //town hall
   private static void setTownHalls(Builder sdpb, Map<Integer, Structure> structs,
   		Map<Integer, StructureInfoProto> structProtos) {
-  	Map<Integer, StructureTownHall> idsToStorages = 
+  	Map<Integer, StructureTownHall> idsToTownHalls = 
   			StructureTownHallRetrieveUtils.getStructIdsToTownHalls();
-  	for (Integer structId : idsToStorages.keySet()) {
+  	for (Integer structId : idsToTownHalls.keySet()) {
   		Structure s = structs.get(structId);
   		StructureInfoProto sip = structProtos.get(structId);
-  		StructureTownHall srg = idsToStorages.get(structId);
+  		StructureTownHall srg = idsToTownHalls.get(structId);
 
   		TownHallProto rgp = CreateInfoProtoUtils.createTownHallProto(s, sip, srg);
   		sdpb.addAllTownHalls(rgp);
   	}
+  }
+  //lab
+  private static void setLabs(Builder sdpb, Map<Integer, Structure> structs,
+  		Map<Integer, StructureInfoProto> structProtos) {
+  	Map<Integer, StructureLab> idsToLabs = StructureLabRetrieveUtils
+  			.getStructIdsToLabs();
+  	for (Integer structId : idsToLabs.keySet()) {
+  		Structure s = structs.get(structId);
+  		StructureInfoProto sip = structProtos.get(structId);
+  		StructureLab srg = idsToLabs.get(structId);
+
+  		LabProto rgp = CreateInfoProtoUtils.createLabProto(s, sip, srg);
+  		sdpb.addAllLabs(rgp);
+  	}		
   }
 
 }
