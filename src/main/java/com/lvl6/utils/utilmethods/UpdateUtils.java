@@ -338,22 +338,18 @@ public class UpdateUtils implements UpdateUtil {
 	/*
 	 * used for updating last retrieved user struct time
 	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructLastretrieved(int, java.sql.Timestamp)
-	 */
-	/*@Override
-  @Caching(evict= {
-      //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
-      //@CacheEvict(value="specificUserStruct", key="#userStructId")}) */
+
+	@Override
 	public boolean updateUserStructsLastretrieved(Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
 			Map<Integer, StructureForUser> structIdsToUserStructs) {
+		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
+		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-
 		for(Integer userStructId : userStructIdsToLastRetrievedTime.keySet()) {
-			Map <String, Object> aRow = new HashMap<String, Object>();
 			Timestamp lastRetrievedTime = userStructIdsToLastRetrievedTime.get(userStructId);
 			StructureForUser us = structIdsToUserStructs.get(userStructId);
 
+			Map<String, Object> aRow = new HashMap<String, Object>();
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__USER_ID, us.getUserId());
 			aRow.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, us.getStructId());
@@ -368,7 +364,12 @@ public class UpdateUtils implements UpdateUtil {
 			newRows.add(aRow);
 		}
 
-		int numUpdated = DBConnection.get().replaceIntoTableValues(DBConstants.TABLE_STRUCTURE_FOR_USER, newRows);
+//		int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
+		//determine which columns should be replaced
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED);
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
 
 		log.info("num userStructs updated: " + numUpdated 
 				+ ". Number of userStructs: " + userStructIdsToLastRetrievedTime.size());

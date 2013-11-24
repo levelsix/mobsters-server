@@ -7762,26 +7762,20 @@ public final class EventStructureProto {
     
     public enum RetrieveCurrencyFromNormStructureStatus
         implements com.google.protobuf.ProtocolMessageEnum {
-      OTHER_FAIL(0, 1),
-      SUCCESS(1, 2),
-      CLIENT_TOO_APART_FROM_SERVER_TIME(2, 3),
-      NOT_LONG_ENOUGH(3, 4),
+      SUCCESS(0, 1),
+      FAIL_OTHER(1, 2),
       ;
       
-      public static final int OTHER_FAIL_VALUE = 1;
-      public static final int SUCCESS_VALUE = 2;
-      public static final int CLIENT_TOO_APART_FROM_SERVER_TIME_VALUE = 3;
-      public static final int NOT_LONG_ENOUGH_VALUE = 4;
+      public static final int SUCCESS_VALUE = 1;
+      public static final int FAIL_OTHER_VALUE = 2;
       
       
       public final int getNumber() { return value; }
       
       public static RetrieveCurrencyFromNormStructureStatus valueOf(int value) {
         switch (value) {
-          case 1: return OTHER_FAIL;
-          case 2: return SUCCESS;
-          case 3: return CLIENT_TOO_APART_FROM_SERVER_TIME;
-          case 4: return NOT_LONG_ENOUGH;
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -7812,7 +7806,7 @@ public final class EventStructureProto {
       }
       
       private static final RetrieveCurrencyFromNormStructureStatus[] VALUES = {
-        OTHER_FAIL, SUCCESS, CLIENT_TOO_APART_FROM_SERVER_TIME, NOT_LONG_ENOUGH, 
+        SUCCESS, FAIL_OTHER, 
       };
       
       public static RetrieveCurrencyFromNormStructureStatus valueOf(
@@ -7861,7 +7855,7 @@ public final class EventStructureProto {
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL;
+      status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8029,7 +8023,7 @@ public final class EventStructureProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL;
+        status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -8251,7 +8245,7 @@ public final class EventStructureProto {
       }
       
       // optional .com.lvl6.proto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status = 2;
-      private com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL;
+      private com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
       public boolean hasStatus() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
@@ -8269,7 +8263,7 @@ public final class EventStructureProto {
       }
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.OTHER_FAIL;
+        status_ = com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureResponseProto.RetrieveCurrencyFromNormStructureStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -9867,31 +9861,29 @@ public final class EventStructureProto {
       "romNormStructureRequestProto.StructRetri" +
       "eval\032Y\n\017StructRetrieval\022\024\n\014userStructId\030" +
       "\001 \001(\005\022\027\n\017timeOfRetrieval\030\002 \001(\003\022\027\n\017amount" +
-      "Collected\030\003 \001(\005\"\337\002\n.RetrieveCurrencyFrom" +
+      "Collected\030\003 \001(\005\"\242\002\n.RetrieveCurrencyFrom" +
       "NormStructureResponseProto\0220\n\006sender\030\001 \001",
       "(\0132 .com.lvl6.proto.MinimumUserProto\022v\n\006" +
       "status\030\002 \001(\0162f.com.lvl6.proto.RetrieveCu" +
       "rrencyFromNormStructureResponseProto.Ret" +
-      "rieveCurrencyFromNormStructureStatus\"\202\001\n" +
-      "\'RetrieveCurrencyFromNormStructureStatus" +
-      "\022\016\n\nOTHER_FAIL\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_" +
-      "TOO_APART_FROM_SERVER_TIME\020\003\022\023\n\017NOT_LONG" +
-      "_ENOUGH\020\004\"\267\001\n!ExpansionWaitCompleteReque" +
-      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txP",
-      "osition\030\003 \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007spee" +
-      "dUp\030\005 \001(\010\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"" +
-      "ExpansionWaitCompleteResponseProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto.Ex" +
-      "pansionWaitCompleteResponseProto.Expansi" +
-      "onWaitCompleteStatus\0229\n\005ucedp\030\003 \001(\0132*.co" +
-      "m.lvl6.proto.UserCityExpansionDataProto\"" +
-      "\211\001\n\033ExpansionWaitCompleteStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\032\n\026FAIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL",
-      "_NOT_DONE_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEM" +
-      "S\020\004\022\016\n\nFAIL_OTHER\020\005B\025B\023EventStructurePro" +
-      "to"
+      "rieveCurrencyFromNormStructureStatus\"F\n\'" +
+      "RetrieveCurrencyFromNormStructureStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\267\001\n!Expansi" +
+      "onWaitCompleteRequestProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007" +
+      "curTime\030\002 \001(\003\022\021\n\txPosition\030\003 \001(\021\022\021\n\tyPos" +
+      "ition\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010\022\030\n\020gemCostT",
+      "oSpeedup\030\006 \001(\005\"\375\002\n\"ExpansionWaitComplete" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022^\n\006status\030\002 \001(\0162" +
+      "N.com.lvl6.proto.ExpansionWaitCompleteRe" +
+      "sponseProto.ExpansionWaitCompleteStatus\022" +
+      "9\n\005ucedp\030\003 \001(\0132*.com.lvl6.proto.UserCity" +
+      "ExpansionDataProto\"\211\001\n\033ExpansionWaitComp" +
+      "leteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_WAS_NOT_" +
+      "EXPANDING\020\002\022\025\n\021FAIL_NOT_DONE_YET\020\003\022\032\n\026FA" +
+      "IL_INSUFFICIENT_GEMS\020\004\022\016\n\nFAIL_OTHER\020\005B\025",
+      "B\023EventStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

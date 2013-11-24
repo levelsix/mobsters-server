@@ -174,10 +174,8 @@ message RetrieveCurrencyFromNormStructureResponseProto {
 	optional RetrieveCurrencyFromNormStructureStatus status = 2;
 	
 	enum RetrieveCurrencyFromNormStructureStatus {
-		OTHER_FAIL = 1;
-		SUCCESS = 2;
-		CLIENT_TOO_APART_FROM_SERVER_TIME = 3;
-		NOT_LONG_ENOUGH = 4;
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
 	}
 }
 
