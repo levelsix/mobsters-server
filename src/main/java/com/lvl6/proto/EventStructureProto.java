@@ -6627,6 +6627,10 @@ public final class EventStructureProto {
       // optional int64 timeOfRetrieval = 2;
       boolean hasTimeOfRetrieval();
       long getTimeOfRetrieval();
+      
+      // optional int32 amountCollected = 3;
+      boolean hasAmountCollected();
+      int getAmountCollected();
     }
     public static final class StructRetrieval extends
         com.google.protobuf.GeneratedMessage
@@ -6677,9 +6681,20 @@ public final class EventStructureProto {
         return timeOfRetrieval_;
       }
       
+      // optional int32 amountCollected = 3;
+      public static final int AMOUNTCOLLECTED_FIELD_NUMBER = 3;
+      private int amountCollected_;
+      public boolean hasAmountCollected() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getAmountCollected() {
+        return amountCollected_;
+      }
+      
       private void initFields() {
         userStructId_ = 0;
         timeOfRetrieval_ = 0L;
+        amountCollected_ = 0;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -6699,6 +6714,9 @@ public final class EventStructureProto {
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           output.writeInt64(2, timeOfRetrieval_);
         }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(3, amountCollected_);
+        }
         getUnknownFields().writeTo(output);
       }
       
@@ -6715,6 +6733,10 @@ public final class EventStructureProto {
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt64Size(2, timeOfRetrieval_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, amountCollected_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -6844,6 +6866,8 @@ public final class EventStructureProto {
           bitField0_ = (bitField0_ & ~0x00000001);
           timeOfRetrieval_ = 0L;
           bitField0_ = (bitField0_ & ~0x00000002);
+          amountCollected_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
           return this;
         }
         
@@ -6890,6 +6914,10 @@ public final class EventStructureProto {
             to_bitField0_ |= 0x00000002;
           }
           result.timeOfRetrieval_ = timeOfRetrieval_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.amountCollected_ = amountCollected_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -6911,6 +6939,9 @@ public final class EventStructureProto {
           }
           if (other.hasTimeOfRetrieval()) {
             setTimeOfRetrieval(other.getTimeOfRetrieval());
+          }
+          if (other.hasAmountCollected()) {
+            setAmountCollected(other.getAmountCollected());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -6951,6 +6982,11 @@ public final class EventStructureProto {
               case 16: {
                 bitField0_ |= 0x00000002;
                 timeOfRetrieval_ = input.readInt64();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                amountCollected_ = input.readInt32();
                 break;
               }
             }
@@ -6997,6 +7033,27 @@ public final class EventStructureProto {
         public Builder clearTimeOfRetrieval() {
           bitField0_ = (bitField0_ & ~0x00000002);
           timeOfRetrieval_ = 0L;
+          onChanged();
+          return this;
+        }
+        
+        // optional int32 amountCollected = 3;
+        private int amountCollected_ ;
+        public boolean hasAmountCollected() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public int getAmountCollected() {
+          return amountCollected_;
+        }
+        public Builder setAmountCollected(int value) {
+          bitField0_ |= 0x00000004;
+          amountCollected_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearAmountCollected() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          amountCollected_ = 0;
           onChanged();
           return this;
         }
@@ -9803,37 +9860,38 @@ public final class EventStructureProto {
       "m.lvl6.proto.FullUserStructureProto\"R\n\034N" +
       "ormStructWaitCompleteStatus\022\013\n\007SUCCESS\020\001",
       "\022\025\n\021FAIL_NOT_DONE_YET\020\002\022\016\n\nFAIL_OTHER\020\003\"" +
-      "\214\002\n-RetrieveCurrencyFromNormStructureReq" +
+      "\245\002\n-RetrieveCurrencyFromNormStructureReq" +
       "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
       "to.MinimumUserProto\022g\n\020structRetrievals\030" +
       "\002 \003(\0132M.com.lvl6.proto.RetrieveCurrencyF" +
       "romNormStructureRequestProto.StructRetri" +
-      "eval\032@\n\017StructRetrieval\022\024\n\014userStructId\030" +
-      "\001 \001(\005\022\027\n\017timeOfRetrieval\030\002 \001(\003\"\337\002\n.Retri" +
-      "eveCurrencyFromNormStructureResponseProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim",
-      "umUserProto\022v\n\006status\030\002 \001(\0162f.com.lvl6.p" +
-      "roto.RetrieveCurrencyFromNormStructureRe" +
-      "sponseProto.RetrieveCurrencyFromNormStru" +
-      "ctureStatus\"\202\001\n\'RetrieveCurrencyFromNorm" +
-      "StructureStatus\022\016\n\nOTHER_FAIL\020\001\022\013\n\007SUCCE" +
-      "SS\020\002\022%\n!CLIENT_TOO_APART_FROM_SERVER_TIM" +
-      "E\020\003\022\023\n\017NOT_LONG_ENOUGH\020\004\"\267\001\n!ExpansionWa" +
-      "itCompleteRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022\017\n\007curT" +
-      "ime\030\002 \001(\003\022\021\n\txPosition\030\003 \001(\021\022\021\n\tyPositio",
-      "n\030\004 \001(\021\022\017\n\007speedUp\030\005 \001(\010\022\030\n\020gemCostToSpe" +
-      "edup\030\006 \001(\005\"\375\002\n\"ExpansionWaitCompleteResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022^\n\006status\030\002 \001(\0162N.co" +
-      "m.lvl6.proto.ExpansionWaitCompleteRespon" +
-      "seProto.ExpansionWaitCompleteStatus\0229\n\005u" +
-      "cedp\030\003 \001(\0132*.com.lvl6.proto.UserCityExpa" +
-      "nsionDataProto\"\211\001\n\033ExpansionWaitComplete" +
-      "Status\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_WAS_NOT_EXPA" +
-      "NDING\020\002\022\025\n\021FAIL_NOT_DONE_YET\020\003\022\032\n\026FAIL_I",
-      "NSUFFICIENT_GEMS\020\004\022\016\n\nFAIL_OTHER\020\005B\025B\023Ev" +
-      "entStructureProto"
+      "eval\032Y\n\017StructRetrieval\022\024\n\014userStructId\030" +
+      "\001 \001(\005\022\027\n\017timeOfRetrieval\030\002 \001(\003\022\027\n\017amount" +
+      "Collected\030\003 \001(\005\"\337\002\n.RetrieveCurrencyFrom" +
+      "NormStructureResponseProto\0220\n\006sender\030\001 \001",
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022v\n\006" +
+      "status\030\002 \001(\0162f.com.lvl6.proto.RetrieveCu" +
+      "rrencyFromNormStructureResponseProto.Ret" +
+      "rieveCurrencyFromNormStructureStatus\"\202\001\n" +
+      "\'RetrieveCurrencyFromNormStructureStatus" +
+      "\022\016\n\nOTHER_FAIL\020\001\022\013\n\007SUCCESS\020\002\022%\n!CLIENT_" +
+      "TOO_APART_FROM_SERVER_TIME\020\003\022\023\n\017NOT_LONG" +
+      "_ENOUGH\020\004\"\267\001\n!ExpansionWaitCompleteReque" +
+      "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
+      ".MinimumUserProto\022\017\n\007curTime\030\002 \001(\003\022\021\n\txP",
+      "osition\030\003 \001(\021\022\021\n\tyPosition\030\004 \001(\021\022\017\n\007spee" +
+      "dUp\030\005 \001(\010\022\030\n\020gemCostToSpeedup\030\006 \001(\005\"\375\002\n\"" +
+      "ExpansionWaitCompleteResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022^\n\006status\030\002 \001(\0162N.com.lvl6.proto.Ex" +
+      "pansionWaitCompleteResponseProto.Expansi" +
+      "onWaitCompleteStatus\0229\n\005ucedp\030\003 \001(\0132*.co" +
+      "m.lvl6.proto.UserCityExpansionDataProto\"" +
+      "\211\001\n\033ExpansionWaitCompleteStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\032\n\026FAIL_WAS_NOT_EXPANDING\020\002\022\025\n\021FAIL",
+      "_NOT_DONE_YET\020\003\022\032\n\026FAIL_INSUFFICIENT_GEM" +
+      "S\020\004\022\016\n\nFAIL_OTHER\020\005B\025B\023EventStructurePro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9933,7 +9991,7 @@ public final class EventStructureProto {
           internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureRequestProto_StructRetrieval_descriptor,
-              new java.lang.String[] { "UserStructId", "TimeOfRetrieval", },
+              new java.lang.String[] { "UserStructId", "TimeOfRetrieval", "AmountCollected", },
               com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval.class,
               com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRequestProto.StructRetrieval.Builder.class);
           internal_static_com_lvl6_proto_RetrieveCurrencyFromNormStructureResponseProto_descriptor =

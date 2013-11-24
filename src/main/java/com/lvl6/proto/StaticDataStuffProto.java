@@ -146,6 +146,16 @@ public final class StaticDataStuffProto {
     com.lvl6.proto.StructureProto.ResidenceProtoOrBuilder getAllResidencesOrBuilder(
         int index);
     
+    // repeated .com.lvl6.proto.LabProto allLabs = 17;
+    java.util.List<com.lvl6.proto.StructureProto.LabProto> 
+        getAllLabsList();
+    com.lvl6.proto.StructureProto.LabProto getAllLabs(int index);
+    int getAllLabsCount();
+    java.util.List<? extends com.lvl6.proto.StructureProto.LabProtoOrBuilder> 
+        getAllLabsOrBuilderList();
+    com.lvl6.proto.StructureProto.LabProtoOrBuilder getAllLabsOrBuilder(
+        int index);
+    
     // repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;
     java.util.List<com.lvl6.proto.StructureProto.TownHallProto> 
         getAllTownHallsList();
@@ -471,6 +481,27 @@ public final class StaticDataStuffProto {
       return allResidences_.get(index);
     }
     
+    // repeated .com.lvl6.proto.LabProto allLabs = 17;
+    public static final int ALLLABS_FIELD_NUMBER = 17;
+    private java.util.List<com.lvl6.proto.StructureProto.LabProto> allLabs_;
+    public java.util.List<com.lvl6.proto.StructureProto.LabProto> getAllLabsList() {
+      return allLabs_;
+    }
+    public java.util.List<? extends com.lvl6.proto.StructureProto.LabProtoOrBuilder> 
+        getAllLabsOrBuilderList() {
+      return allLabs_;
+    }
+    public int getAllLabsCount() {
+      return allLabs_.size();
+    }
+    public com.lvl6.proto.StructureProto.LabProto getAllLabs(int index) {
+      return allLabs_.get(index);
+    }
+    public com.lvl6.proto.StructureProto.LabProtoOrBuilder getAllLabsOrBuilder(
+        int index) {
+      return allLabs_.get(index);
+    }
+    
     // repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;
     public static final int ALLTOWNHALLS_FIELD_NUMBER = 16;
     private java.util.List<com.lvl6.proto.StructureProto.TownHallProto> allTownHalls_;
@@ -507,6 +538,7 @@ public final class StaticDataStuffProto {
       allStorages_ = java.util.Collections.emptyList();
       allHospitals_ = java.util.Collections.emptyList();
       allResidences_ = java.util.Collections.emptyList();
+      allLabs_ = java.util.Collections.emptyList();
       allTownHalls_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -565,6 +597,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < allTownHalls_.size(); i++) {
         output.writeMessage(16, allTownHalls_.get(i));
+      }
+      for (int i = 0; i < allLabs_.size(); i++) {
+        output.writeMessage(17, allLabs_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -634,6 +669,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < allTownHalls_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(16, allTownHalls_.get(i));
+      }
+      for (int i = 0; i < allLabs_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(17, allLabs_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -765,6 +804,7 @@ public final class StaticDataStuffProto {
           getAllStoragesFieldBuilder();
           getAllHospitalsFieldBuilder();
           getAllResidencesFieldBuilder();
+          getAllLabsFieldBuilder();
           getAllTownHallsFieldBuilder();
         }
       }
@@ -858,9 +898,15 @@ public final class StaticDataStuffProto {
         } else {
           allResidencesBuilder_.clear();
         }
+        if (allLabsBuilder_ == null) {
+          allLabs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00004000);
+        } else {
+          allLabsBuilder_.clear();
+        }
         if (allTownHallsBuilder_ == null) {
           allTownHalls_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           allTownHallsBuilder_.clear();
         }
@@ -1027,10 +1073,19 @@ public final class StaticDataStuffProto {
         } else {
           result.allResidences_ = allResidencesBuilder_.build();
         }
-        if (allTownHallsBuilder_ == null) {
+        if (allLabsBuilder_ == null) {
           if (((bitField0_ & 0x00004000) == 0x00004000)) {
-            allTownHalls_ = java.util.Collections.unmodifiableList(allTownHalls_);
+            allLabs_ = java.util.Collections.unmodifiableList(allLabs_);
             bitField0_ = (bitField0_ & ~0x00004000);
+          }
+          result.allLabs_ = allLabs_;
+        } else {
+          result.allLabs_ = allLabsBuilder_.build();
+        }
+        if (allTownHallsBuilder_ == null) {
+          if (((bitField0_ & 0x00008000) == 0x00008000)) {
+            allTownHalls_ = java.util.Collections.unmodifiableList(allTownHalls_);
+            bitField0_ = (bitField0_ & ~0x00008000);
           }
           result.allTownHalls_ = allTownHalls_;
         } else {
@@ -1393,11 +1448,37 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (allLabsBuilder_ == null) {
+          if (!other.allLabs_.isEmpty()) {
+            if (allLabs_.isEmpty()) {
+              allLabs_ = other.allLabs_;
+              bitField0_ = (bitField0_ & ~0x00004000);
+            } else {
+              ensureAllLabsIsMutable();
+              allLabs_.addAll(other.allLabs_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.allLabs_.isEmpty()) {
+            if (allLabsBuilder_.isEmpty()) {
+              allLabsBuilder_.dispose();
+              allLabsBuilder_ = null;
+              allLabs_ = other.allLabs_;
+              bitField0_ = (bitField0_ & ~0x00004000);
+              allLabsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getAllLabsFieldBuilder() : null;
+            } else {
+              allLabsBuilder_.addAllMessages(other.allLabs_);
+            }
+          }
+        }
         if (allTownHallsBuilder_ == null) {
           if (!other.allTownHalls_.isEmpty()) {
             if (allTownHalls_.isEmpty()) {
               allTownHalls_ = other.allTownHalls_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
             } else {
               ensureAllTownHallsIsMutable();
               allTownHalls_.addAll(other.allTownHalls_);
@@ -1410,7 +1491,7 @@ public final class StaticDataStuffProto {
               allTownHallsBuilder_.dispose();
               allTownHallsBuilder_ = null;
               allTownHalls_ = other.allTownHalls_;
-              bitField0_ = (bitField0_ & ~0x00004000);
+              bitField0_ = (bitField0_ & ~0x00008000);
               allTownHallsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getAllTownHallsFieldBuilder() : null;
@@ -1541,6 +1622,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.StructureProto.TownHallProto.Builder subBuilder = com.lvl6.proto.StructureProto.TownHallProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addAllTownHalls(subBuilder.buildPartial());
+              break;
+            }
+            case 138: {
+              com.lvl6.proto.StructureProto.LabProto.Builder subBuilder = com.lvl6.proto.StructureProto.LabProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addAllLabs(subBuilder.buildPartial());
               break;
             }
           }
@@ -4057,13 +4144,199 @@ public final class StaticDataStuffProto {
         return allResidencesBuilder_;
       }
       
+      // repeated .com.lvl6.proto.LabProto allLabs = 17;
+      private java.util.List<com.lvl6.proto.StructureProto.LabProto> allLabs_ =
+        java.util.Collections.emptyList();
+      private void ensureAllLabsIsMutable() {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+          allLabs_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.LabProto>(allLabs_);
+          bitField0_ |= 0x00004000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.LabProto, com.lvl6.proto.StructureProto.LabProto.Builder, com.lvl6.proto.StructureProto.LabProtoOrBuilder> allLabsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.StructureProto.LabProto> getAllLabsList() {
+        if (allLabsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(allLabs_);
+        } else {
+          return allLabsBuilder_.getMessageList();
+        }
+      }
+      public int getAllLabsCount() {
+        if (allLabsBuilder_ == null) {
+          return allLabs_.size();
+        } else {
+          return allLabsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.StructureProto.LabProto getAllLabs(int index) {
+        if (allLabsBuilder_ == null) {
+          return allLabs_.get(index);
+        } else {
+          return allLabsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setAllLabs(
+          int index, com.lvl6.proto.StructureProto.LabProto value) {
+        if (allLabsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllLabsIsMutable();
+          allLabs_.set(index, value);
+          onChanged();
+        } else {
+          allLabsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setAllLabs(
+          int index, com.lvl6.proto.StructureProto.LabProto.Builder builderForValue) {
+        if (allLabsBuilder_ == null) {
+          ensureAllLabsIsMutable();
+          allLabs_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          allLabsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllLabs(com.lvl6.proto.StructureProto.LabProto value) {
+        if (allLabsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllLabsIsMutable();
+          allLabs_.add(value);
+          onChanged();
+        } else {
+          allLabsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addAllLabs(
+          int index, com.lvl6.proto.StructureProto.LabProto value) {
+        if (allLabsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllLabsIsMutable();
+          allLabs_.add(index, value);
+          onChanged();
+        } else {
+          allLabsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addAllLabs(
+          com.lvl6.proto.StructureProto.LabProto.Builder builderForValue) {
+        if (allLabsBuilder_ == null) {
+          ensureAllLabsIsMutable();
+          allLabs_.add(builderForValue.build());
+          onChanged();
+        } else {
+          allLabsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllLabs(
+          int index, com.lvl6.proto.StructureProto.LabProto.Builder builderForValue) {
+        if (allLabsBuilder_ == null) {
+          ensureAllLabsIsMutable();
+          allLabs_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          allLabsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllAllLabs(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.LabProto> values) {
+        if (allLabsBuilder_ == null) {
+          ensureAllLabsIsMutable();
+          super.addAll(values, allLabs_);
+          onChanged();
+        } else {
+          allLabsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearAllLabs() {
+        if (allLabsBuilder_ == null) {
+          allLabs_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00004000);
+          onChanged();
+        } else {
+          allLabsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeAllLabs(int index) {
+        if (allLabsBuilder_ == null) {
+          ensureAllLabsIsMutable();
+          allLabs_.remove(index);
+          onChanged();
+        } else {
+          allLabsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.LabProto.Builder getAllLabsBuilder(
+          int index) {
+        return getAllLabsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.StructureProto.LabProtoOrBuilder getAllLabsOrBuilder(
+          int index) {
+        if (allLabsBuilder_ == null) {
+          return allLabs_.get(index);  } else {
+          return allLabsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.StructureProto.LabProtoOrBuilder> 
+           getAllLabsOrBuilderList() {
+        if (allLabsBuilder_ != null) {
+          return allLabsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(allLabs_);
+        }
+      }
+      public com.lvl6.proto.StructureProto.LabProto.Builder addAllLabsBuilder() {
+        return getAllLabsFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.LabProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.StructureProto.LabProto.Builder addAllLabsBuilder(
+          int index) {
+        return getAllLabsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.LabProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.StructureProto.LabProto.Builder> 
+           getAllLabsBuilderList() {
+        return getAllLabsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.LabProto, com.lvl6.proto.StructureProto.LabProto.Builder, com.lvl6.proto.StructureProto.LabProtoOrBuilder> 
+          getAllLabsFieldBuilder() {
+        if (allLabsBuilder_ == null) {
+          allLabsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.LabProto, com.lvl6.proto.StructureProto.LabProto.Builder, com.lvl6.proto.StructureProto.LabProtoOrBuilder>(
+                  allLabs_,
+                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  getParentForChildren(),
+                  isClean());
+          allLabs_ = null;
+        }
+        return allLabsBuilder_;
+      }
+      
       // repeated .com.lvl6.proto.TownHallProto allTownHalls = 16;
       private java.util.List<com.lvl6.proto.StructureProto.TownHallProto> allTownHalls_ =
         java.util.Collections.emptyList();
       private void ensureAllTownHallsIsMutable() {
-        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
           allTownHalls_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.TownHallProto>(allTownHalls_);
-          bitField0_ |= 0x00004000;
+          bitField0_ |= 0x00008000;
          }
       }
       
@@ -4179,7 +4452,7 @@ public final class StaticDataStuffProto {
       public Builder clearAllTownHalls() {
         if (allTownHallsBuilder_ == null) {
           allTownHalls_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00004000);
+          bitField0_ = (bitField0_ & ~0x00008000);
           onChanged();
         } else {
           allTownHallsBuilder_.clear();
@@ -4235,7 +4508,7 @@ public final class StaticDataStuffProto {
           allTownHallsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.StructureProto.TownHallProto, com.lvl6.proto.StructureProto.TownHallProto.Builder, com.lvl6.proto.StructureProto.TownHallProtoOrBuilder>(
                   allTownHalls_,
-                  ((bitField0_ & 0x00004000) == 0x00004000),
+                  ((bitField0_ & 0x00008000) == 0x00008000),
                   getParentForChildren(),
                   isClean());
           allTownHalls_ = null;
@@ -4271,7 +4544,7 @@ public final class StaticDataStuffProto {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Boos" +
       "terPackStuff.proto\032\nCity.proto\032\022MonsterS" +
       "tuff.proto\032\013Quest.proto\032\017Structure.proto" +
-      "\032\nTask.proto\032\nUser.proto\"\321\006\n\017StaticDataP" +
+      "\032\nTask.proto\032\nUser.proto\"\374\006\n\017StaticDataP" +
       "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
       "nimumUserProto\022>\n\016expansionCosts\030\002 \003(\0132&" +
       ".com.lvl6.proto.CityExpansionCostProto\0220" +
@@ -4291,9 +4564,10 @@ public final class StaticDataStuffProto {
       "com.lvl6.proto.ResourceStorageProto\0223\n\014a" +
       "llHospitals\030\016 \003(\0132\035.com.lvl6.proto.Hospi" +
       "talProto\0225\n\rallResidences\030\017 \003(\0132\036.com.lv" +
-      "l6.proto.ResidenceProto\0223\n\014allTownHalls\030" +
-      "\020 \003(\0132\035.com.lvl6.proto.TownHallProtoB\026B\024" +
-      "StaticDataStuffProto"
+      "l6.proto.ResidenceProto\022)\n\007allLabs\030\021 \003(\013" +
+      "2\030.com.lvl6.proto.LabProto\0223\n\014allTownHal" +
+      "ls\030\020 \003(\0132\035.com.lvl6.proto.TownHallProtoB" +
+      "\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4305,7 +4579,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllTownHalls", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;
