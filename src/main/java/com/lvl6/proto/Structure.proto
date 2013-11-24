@@ -35,6 +35,7 @@ message StructureInfoProto {
 		HOSPITAL = 3;
 		RESIDENCE = 4;
 		TOWN_HALL = 5;
+		LAB = 6;
 	}
 }
 
