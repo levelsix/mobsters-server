@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = -8592996117760444971L;
+	private static final long serialVersionUID = 6443641991258284286L;
 	private int id;
 	private String name;
 	private int level;
@@ -12,7 +12,7 @@ public class Structure implements Serializable {
 	private String buildResourceType;
 	private int buildCost;
 	private int minutesToBuild;
-	private int requiredTownHallId;
+	private int requiredTownHallLvl;
 	private int width;
 	private int height;
 	private String spriteImgName;
@@ -24,7 +24,7 @@ public class Structure implements Serializable {
 	
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
-			int requiredTownHallId, int width, int height, String spriteImgName,
+			int requiredTownHallLvl, int width, int height, String spriteImgName,
 			int predecessorStructId, int successorStructId, String imgName,
 			float imgVerticalPixelOffset, String description) {
 		super();
@@ -35,7 +35,7 @@ public class Structure implements Serializable {
 		this.buildResourceType = buildResourceType;
 		this.buildCost = buildCost;
 		this.minutesToBuild = minutesToBuild;
-		this.requiredTownHallId = requiredTownHallId;
+		this.requiredTownHallLvl = requiredTownHallLvl;
 		this.width = width;
 		this.height = height;
 		this.spriteImgName = spriteImgName;
@@ -102,12 +102,12 @@ public class Structure implements Serializable {
 		this.minutesToBuild = minutesToBuild;
 	}
 
-	public int getRequiredTownHallId() {
-		return requiredTownHallId;
+	public int getRequiredTownHallLvl() {
+		return requiredTownHallLvl;
 	}
 
-	public void setRequiredTownHallId(int requiredTownHallId) {
-		this.requiredTownHallId = requiredTownHallId;
+	public void setRequiredTownHallLvl(int requiredTownHallLvl) {
+		this.requiredTownHallLvl = requiredTownHallLvl;
 	}
 
 	public int getWidth() {
@@ -179,12 +179,12 @@ public class Structure implements Serializable {
 		return "Structure [id=" + id + ", name=" + name + ", level=" + level
 				+ ", structType=" + structType + ", buildResourceType="
 				+ buildResourceType + ", buildCost=" + buildCost + ", minutesToBuild="
-				+ minutesToBuild + ", requiredTownHallId=" + requiredTownHallId
+				+ minutesToBuild + ", requiredTownHallLvl=" + requiredTownHallLvl
 				+ ", width=" + width + ", height=" + height + ", spriteImgName="
 				+ spriteImgName + ", predecessorStructId=" + predecessorStructId
 				+ ", successorStructId=" + successorStructId + ", imgName=" + imgName
 				+ ", imgVerticalPixelOffset=" + imgVerticalPixelOffset
 				+ ", description=" + description + "]";
 	}
-
+	
 }

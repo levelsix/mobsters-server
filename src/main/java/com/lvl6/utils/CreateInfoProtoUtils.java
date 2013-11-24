@@ -35,6 +35,7 @@ import com.lvl6.info.Referral;
 import com.lvl6.info.Structure;
 import com.lvl6.info.StructureForUser;
 import com.lvl6.info.StructureHospital;
+import com.lvl6.info.StructureLab;
 import com.lvl6.info.StructureResidence;
 import com.lvl6.info.StructureResourceGenerator;
 import com.lvl6.info.StructureResourceStorage;
@@ -83,6 +84,7 @@ import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
+import com.lvl6.proto.StructureProto.LabProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
@@ -550,7 +552,7 @@ public class CreateInfoProtoUtils {
     
     builder.setBuildCost(s.getBuildCost());
     builder.setMinutesToBuild(s.getMinutesToBuild());
-    builder.setPrerequisiteTownHallId(s.getRequiredTownHallId());
+    builder.setPrerequisiteTownHallLvl(s.getRequiredTownHallLvl());
     builder.setWidth(s.getWidth());
     builder.setHeight(s.getHeight());
     
@@ -674,7 +676,6 @@ public class CreateInfoProtoUtils {
   	
   	return thpb.build();
   }
-  
 
   public static FullCityProto createFullCityProtoFromCity(City c) {
     FullCityProto.Builder builder = FullCityProto.newBuilder();
