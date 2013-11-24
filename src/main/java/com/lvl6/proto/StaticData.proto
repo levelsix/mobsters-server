@@ -34,7 +34,9 @@ message StaticDataProto {
 	repeated ResourceStorageProto allStorages = 13;
 	repeated HospitalProto allHospitals = 14;
 	repeated ResidenceProto allResidences = 15;
+	repeated LabProto allLabs = 17;
 	repeated TownHallProto allTownHalls = 16;
 	
+	//repeated LabProto allLabs = 17; //defined above
 }
 	

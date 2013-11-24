@@ -18,7 +18,7 @@ message StructureInfoProto {
 	optional ResourceType buildResourceType = 5; 
 	optional int32 buildCost = 6;
 	optional int32 minutesToBuild = 7;
-	optional int32 prerequisiteTownHallId = 8;
+	optional int32 prerequisiteTownHallLvl = 8;
 	optional int32 width = 9;
 	optional int32 height = 10;
 	optional string spriteImgName = 11;
