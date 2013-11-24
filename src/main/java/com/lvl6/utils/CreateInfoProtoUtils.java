@@ -342,6 +342,7 @@ public class CreateInfoProtoUtils {
     builder.setCreateTime(u.getCreateTime().getTime());
     builder.setIsAdmin(u.isAdmin());
     builder.setNumCoinsRetrievedFromStructs(u.getNumCoinsRetrievedFromStructs());
+    builder.setNumOilRetrievedFromStructs(u.getNumOilRetrievedFromStructs());
     if (u.getClanId() > 0) {
       Clan clan = ClanRetrieveUtils.getClanWithId(u.getClanId());
       builder.setClan(createMinimumClanProtoFromClan(clan));

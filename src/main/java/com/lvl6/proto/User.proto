@@ -81,6 +81,7 @@ message FullUserProto {
 	optional bool isAdmin = 21;
 	//optional int32 apsalarId = 22; //defined below
 	optional int32 numCoinsRetrievedFromStructs = 23;
+	optional int32 numOilRetrievedFromStructs = 43;
 	//optional int32 numConsecutiveDaysPlayed = 24; defined below
 	optional MinimumClanProto clan = 25;
 	//optional int64 lastWallPostNotificationTime lwpnt = 26;
@@ -100,6 +101,7 @@ message FullUserProto {
 	optional string facebookId = 40;
 	//optional int32 nthExtraSlotsViaFb = 41; //defined below
 	//optional int32 oil = 42; //defined above
+	//optional int32 numOilRetrievedFromStructs = 43; //defined above
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this

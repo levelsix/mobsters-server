@@ -38,6 +38,7 @@ public class User implements Serializable {
 	private boolean isAdmin;
 	private String apsalarId;
 	private int numCoinsRetrievedFromStructs;
+	private int numOilRetrievedFromStructs;
 	private int numConsecutiveDaysPlayed;
 	private int clanId;
 	private Date lastWallPostNotificationTime;
@@ -63,8 +64,9 @@ public class User implements Serializable {
 			Date lastLogin, Date lastLogout, String deviceToken,
 			Date lastBattleNotificationTime, int numBadges, boolean isFake,
 			Date createTime, boolean isAdmin, String apsalarId,
-			int numCoinsRetrievedFromStructs, int numConsecutiveDaysPlayed,
-			int clanId, Date lastWallPostNotificationTime, int kabamNaid,
+			int numCoinsRetrievedFromStructs, int numOilRetrievedFromStructs,
+			int numConsecutiveDaysPlayed, int clanId,
+			Date lastWallPostNotificationTime, int kabamNaid,
 			boolean hasReceivedfbReward, int numAdditionalMonsterSlots,
 			int numBeginnerSalesPurchased, boolean hasActiveShield,
 			Date shieldEndTime, int elo, String rank, Date lastTimeQueued,
@@ -95,6 +97,7 @@ public class User implements Serializable {
 		this.isAdmin = isAdmin;
 		this.apsalarId = apsalarId;
 		this.numCoinsRetrievedFromStructs = numCoinsRetrievedFromStructs;
+		this.numOilRetrievedFromStructs = numOilRetrievedFromStructs;
 		this.numConsecutiveDaysPlayed = numConsecutiveDaysPlayed;
 		this.clanId = clanId;
 		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
@@ -455,7 +458,8 @@ public class User implements Serializable {
 	}
 
 
-	public boolean updateRelativeCoinsCoinsretrievedfromstructs (int coinChange) {
+	public boolean updateRelativeCoinsOilRetrievedFromStructs (int coinChange,
+			int oilChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -465,12 +469,19 @@ public class User implements Serializable {
 			relativeParams.put(DBConstants.USER__CASH, coinChange);
 			relativeParams.put(DBConstants.USER__NUM_COINS_RETRIEVED_FROM_STRUCTS, coinChange);
 		}
+		if (oilChange != 0) {
+			relativeParams.put(DBConstants.USER__OIL, oilChange);
+			relativeParams.put(DBConstants.USER__NUM_OIL_RETRIEVED_FROM_STRUCTS, coinChange);
+		}
 
+		
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.cash += coinChange;
 			this.numCoinsRetrievedFromStructs += coinChange;
+			this.oil += oilChange;
+			this.numOilRetrievedFromStructs += oilChange;
 			return true;
 		}
 		return false;
@@ -954,6 +965,14 @@ public class User implements Serializable {
 		this.numCoinsRetrievedFromStructs = numCoinsRetrievedFromStructs;
 	}
 
+	public int getNumOilRetrievedFromStructs() {
+		return numOilRetrievedFromStructs;
+	}
+
+	public void setNumOilRetrievedFromStructs(int numOilRetrievedFromStructs) {
+		this.numOilRetrievedFromStructs = numOilRetrievedFromStructs;
+	}
+
 	public int getNumConsecutiveDaysPlayed() {
 		return numConsecutiveDaysPlayed;
 	}
@@ -1111,6 +1130,7 @@ public class User implements Serializable {
 				+ ", numBadges=" + numBadges + ", isFake=" + isFake + ", createTime="
 				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId=" + apsalarId
 				+ ", numCoinsRetrievedFromStructs=" + numCoinsRetrievedFromStructs
+				+ ", numOilRetrievedFromStructs=" + numOilRetrievedFromStructs
 				+ ", numConsecutiveDaysPlayed=" + numConsecutiveDaysPlayed
 				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
 				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
@@ -1124,5 +1144,5 @@ public class User implements Serializable {
 				+ ", defensesLost=" + defensesLost + ", facebookId=" + facebookId
 				+ ", nthExtraSlotsViaFb=" + nthExtraSlotsViaFb + "]";
 	}
-	
+
 }
