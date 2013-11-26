@@ -70,14 +70,15 @@ import com.lvl6.utils.DBConnection;
   }
 
   private static void setStaticStructIdsToStructs() {
-    log.debug("setting static map of structIds to structs");
+    log.info("setting static map of structIds to structs");
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
     try {
 			if (conn != null) {
+				log.info("before querying db for structure table");
 			  rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-
+			  log.info("after querying db for structure table");
 			  if (rs != null) {
 			    try {
 			      rs.last();
