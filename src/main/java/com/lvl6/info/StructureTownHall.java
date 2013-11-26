@@ -4,11 +4,7 @@ import java.io.Serializable;
 
 public class StructureTownHall implements Serializable {
 
-/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3264422497524249315L;
-	//	private static final long serialVersionUID = 3264422497524249315L;
+	private static final long serialVersionUID = 1546077239974628623L;
 	private int structId;
 	private int numResourceOneGenerators;
 	private int numResourceOneStorages;
@@ -17,11 +13,13 @@ public class StructureTownHall implements Serializable {
 	private int numHospitals;
 	private int numResidences;
 	private int numMonsterSlots;
+	private int numLabs;
+	
 	
 	public StructureTownHall(int structId, int numResourceOneGenerators,
 			int numResourceOneStorages, int numResourceTwoGenerators,
 			int numResourceTwoStorages, int numHospitals, int numResidences,
-			int numMonsterSlots) {
+			int numMonsterSlots, int numLabs) {
 		super();
 		this.structId = structId;
 		this.numResourceOneGenerators = numResourceOneGenerators;
@@ -31,71 +29,99 @@ public class StructureTownHall implements Serializable {
 		this.numHospitals = numHospitals;
 		this.numResidences = numResidences;
 		this.numMonsterSlots = numMonsterSlots;
+		this.numLabs = numLabs;
 	}
+
 
 	public int getStructId() {
 		return structId;
 	}
 
+
 	public void setStructId(int structId) {
 		this.structId = structId;
 	}
+
 
 	public int getNumResourceOneGenerators() {
 		return numResourceOneGenerators;
 	}
 
+
 	public void setNumResourceOneGenerators(int numResourceOneGenerators) {
 		this.numResourceOneGenerators = numResourceOneGenerators;
 	}
+
 
 	public int getNumResourceOneStorages() {
 		return numResourceOneStorages;
 	}
 
+
 	public void setNumResourceOneStorages(int numResourceOneStorages) {
 		this.numResourceOneStorages = numResourceOneStorages;
 	}
+
 
 	public int getNumResourceTwoGenerators() {
 		return numResourceTwoGenerators;
 	}
 
+
 	public void setNumResourceTwoGenerators(int numResourceTwoGenerators) {
 		this.numResourceTwoGenerators = numResourceTwoGenerators;
 	}
+
 
 	public int getNumResourceTwoStorages() {
 		return numResourceTwoStorages;
 	}
 
+
 	public void setNumResourceTwoStorages(int numResourceTwoStorages) {
 		this.numResourceTwoStorages = numResourceTwoStorages;
 	}
+
 
 	public int getNumHospitals() {
 		return numHospitals;
 	}
 
+
 	public void setNumHospitals(int numHospitals) {
 		this.numHospitals = numHospitals;
 	}
+
 
 	public int getNumResidences() {
 		return numResidences;
 	}
 
+
 	public void setNumResidences(int numResidences) {
 		this.numResidences = numResidences;
 	}
+
 
 	public int getNumMonsterSlots() {
 		return numMonsterSlots;
 	}
 
+
 	public void setNumMonsterSlots(int numMonsterSlots) {
 		this.numMonsterSlots = numMonsterSlots;
 	}
+
+
+	public int getNumLabs() {
+		return numLabs;
+	}
+
+
+	public void setNumLabs(int numLabs) {
+		this.numLabs = numLabs;
+	}
+
 
 	@Override
 	public String toString() {
@@ -105,7 +131,6 @@ public class StructureTownHall implements Serializable {
 				+ ", numResourceTwoGenerators=" + numResourceTwoGenerators
 				+ ", numResourceTwoStorages=" + numResourceTwoStorages
 				+ ", numHospitals=" + numHospitals + ", numResidences=" + numResidences
-				+ ", numMonsterSlots=" + numMonsterSlots + "]";
-	}	
-
+				+ ", numMonsterSlots=" + numMonsterSlots + ", numLabs=" + numLabs + "]";
+	}
 }

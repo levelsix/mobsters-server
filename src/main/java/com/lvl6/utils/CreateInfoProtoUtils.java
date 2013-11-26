@@ -670,6 +670,7 @@ public class CreateInfoProtoUtils {
   	thpb.setNumHospitals(sth.getNumHospitals());
   	thpb.setNumResidences(sth.getNumResidences());
   	thpb.setNumMonsterSlots(sth.getNumMonsterSlots());
+  	thpb.setNumLabs(sth.getNumLabs());
   	
   	return thpb.build();
   }

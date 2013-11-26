@@ -118,9 +118,10 @@ import com.lvl6.utils.DBConnection;
     int numHospitals = rs.getInt(i++);
     int numResidences = rs.getInt(i++);
     int numMonsterSlots = rs.getInt(i++);
+    int numLabs = rs.getInt(i++);
     
     return new StructureTownHall(structId, numResourceOneGenerators,
     		numResourceOneStorages, numResourceTwoGenerators, numResourceTwoStorages,
-    		numHospitals, numResidences, numMonsterSlots);
+    		numHospitals, numResidences, numMonsterSlots, numLabs);
   }
 }
