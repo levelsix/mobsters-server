@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = 6443641991258284286L;
+	private static final long serialVersionUID = 4444043649409504316L;
 	private int id;
 	private String name;
 	private int level;
@@ -15,7 +15,6 @@ public class Structure implements Serializable {
 	private int requiredTownHallLvl;
 	private int width;
 	private int height;
-	private String spriteImgName;
 	private int predecessorStructId;
 	private int successorStructId;
 	private String imgName;
@@ -24,9 +23,9 @@ public class Structure implements Serializable {
 	
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
-			int requiredTownHallLvl, int width, int height, String spriteImgName,
-			int predecessorStructId, int successorStructId, String imgName,
-			float imgVerticalPixelOffset, String description) {
+			int requiredTownHallLvl, int width, int height, int predecessorStructId,
+			int successorStructId, String imgName, float imgVerticalPixelOffset,
+			String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,7 +37,6 @@ public class Structure implements Serializable {
 		this.requiredTownHallLvl = requiredTownHallLvl;
 		this.width = width;
 		this.height = height;
-		this.spriteImgName = spriteImgName;
 		this.predecessorStructId = predecessorStructId;
 		this.successorStructId = successorStructId;
 		this.imgName = imgName;
@@ -126,14 +124,6 @@ public class Structure implements Serializable {
 		this.height = height;
 	}
 
-	public String getSpriteImgName() {
-		return spriteImgName;
-	}
-
-	public void setSpriteImgName(String spriteImgName) {
-		this.spriteImgName = spriteImgName;
-	}
-
 	public int getPredecessorStructId() {
 		return predecessorStructId;
 	}
@@ -180,11 +170,10 @@ public class Structure implements Serializable {
 				+ ", structType=" + structType + ", buildResourceType="
 				+ buildResourceType + ", buildCost=" + buildCost + ", minutesToBuild="
 				+ minutesToBuild + ", requiredTownHallLvl=" + requiredTownHallLvl
-				+ ", width=" + width + ", height=" + height + ", spriteImgName="
-				+ spriteImgName + ", predecessorStructId=" + predecessorStructId
-				+ ", successorStructId=" + successorStructId + ", imgName=" + imgName
-				+ ", imgVerticalPixelOffset=" + imgVerticalPixelOffset
-				+ ", description=" + description + "]";
+				+ ", width=" + width + ", height=" + height + ", predecessorStructId="
+				+ predecessorStructId + ", successorStructId=" + successorStructId
+				+ ", imgName=" + imgName + ", imgVerticalPixelOffset="
+				+ imgVerticalPixelOffset + ", description=" + description + "]";
 	}
 	
 }

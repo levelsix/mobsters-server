@@ -189,10 +189,6 @@ public final class StructureProto {
     boolean hasHeight();
     int getHeight();
     
-    // optional string spriteImgName = 11;
-    boolean hasSpriteImgName();
-    String getSpriteImgName();
-    
     // optional int32 predecessorStructId = 12;
     boolean hasPredecessorStructId();
     int getPredecessorStructId();
@@ -445,43 +441,11 @@ public final class StructureProto {
       return height_;
     }
     
-    // optional string spriteImgName = 11;
-    public static final int SPRITEIMGNAME_FIELD_NUMBER = 11;
-    private java.lang.Object spriteImgName_;
-    public boolean hasSpriteImgName() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
-    }
-    public String getSpriteImgName() {
-      java.lang.Object ref = spriteImgName_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          spriteImgName_ = s;
-        }
-        return s;
-      }
-    }
-    private com.google.protobuf.ByteString getSpriteImgNameBytes() {
-      java.lang.Object ref = spriteImgName_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        spriteImgName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    
     // optional int32 predecessorStructId = 12;
     public static final int PREDECESSORSTRUCTID_FIELD_NUMBER = 12;
     private int predecessorStructId_;
     public boolean hasPredecessorStructId() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     public int getPredecessorStructId() {
       return predecessorStructId_;
@@ -491,7 +455,7 @@ public final class StructureProto {
     public static final int SUCCESSORSTRUCTID_FIELD_NUMBER = 13;
     private int successorStructId_;
     public boolean hasSuccessorStructId() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     public int getSuccessorStructId() {
       return successorStructId_;
@@ -501,7 +465,7 @@ public final class StructureProto {
     public static final int IMGNAME_FIELD_NUMBER = 14;
     private java.lang.Object imgName_;
     public boolean hasImgName() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     public String getImgName() {
       java.lang.Object ref = imgName_;
@@ -533,7 +497,7 @@ public final class StructureProto {
     public static final int IMGVERTICALPIXELOFFSET_FIELD_NUMBER = 15;
     private float imgVerticalPixelOffset_;
     public boolean hasImgVerticalPixelOffset() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     public float getImgVerticalPixelOffset() {
       return imgVerticalPixelOffset_;
@@ -543,7 +507,7 @@ public final class StructureProto {
     public static final int DESCRIPTION_FIELD_NUMBER = 16;
     private java.lang.Object description_;
     public boolean hasDescription() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     public String getDescription() {
       java.lang.Object ref = description_;
@@ -582,7 +546,6 @@ public final class StructureProto {
       prerequisiteTownHallLvl_ = 0;
       width_ = 0;
       height_ = 0;
-      spriteImgName_ = "";
       predecessorStructId_ = 0;
       successorStructId_ = 0;
       imgName_ = "";
@@ -632,21 +595,18 @@ public final class StructureProto {
         output.writeInt32(10, height_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeBytes(11, getSpriteImgNameBytes());
-      }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeInt32(12, predecessorStructId_);
       }
-      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
         output.writeInt32(13, successorStructId_);
       }
-      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeBytes(14, getImgNameBytes());
       }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
         output.writeFloat(15, imgVerticalPixelOffset_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         output.writeBytes(16, getDescriptionBytes());
       }
       getUnknownFields().writeTo(output);
@@ -700,25 +660,21 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(11, getSpriteImgNameBytes());
+          .computeInt32Size(12, predecessorStructId_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, predecessorStructId_);
+          .computeInt32Size(13, successorStructId_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, successorStructId_);
+          .computeBytesSize(14, getImgNameBytes());
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(14, getImgNameBytes());
-      }
-      if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(15, imgVerticalPixelOffset_);
       }
-      if (((bitField0_ & 0x00008000) == 0x00008000)) {
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(16, getDescriptionBytes());
       }
@@ -866,18 +822,16 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         height_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
-        spriteImgName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000400);
         predecessorStructId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         successorStructId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         imgName_ = "";
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         imgVerticalPixelOffset_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         description_ = "";
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         return this;
       }
       
@@ -959,25 +913,21 @@ public final class StructureProto {
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.spriteImgName_ = spriteImgName_;
+        result.predecessorStructId_ = predecessorStructId_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.predecessorStructId_ = predecessorStructId_;
+        result.successorStructId_ = successorStructId_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.successorStructId_ = successorStructId_;
+        result.imgName_ = imgName_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.imgName_ = imgName_;
+        result.imgVerticalPixelOffset_ = imgVerticalPixelOffset_;
         if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00004000;
-        }
-        result.imgVerticalPixelOffset_ = imgVerticalPixelOffset_;
-        if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
-          to_bitField0_ |= 0x00008000;
         }
         result.description_ = description_;
         result.bitField0_ = to_bitField0_;
@@ -1025,9 +975,6 @@ public final class StructureProto {
         }
         if (other.hasHeight()) {
           setHeight(other.getHeight());
-        }
-        if (other.hasSpriteImgName()) {
-          setSpriteImgName(other.getSpriteImgName());
         }
         if (other.hasPredecessorStructId()) {
           setPredecessorStructId(other.getPredecessorStructId());
@@ -1137,33 +1084,28 @@ public final class StructureProto {
               height_ = input.readInt32();
               break;
             }
-            case 90: {
-              bitField0_ |= 0x00000400;
-              spriteImgName_ = input.readBytes();
-              break;
-            }
             case 96: {
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00000400;
               predecessorStructId_ = input.readInt32();
               break;
             }
             case 104: {
-              bitField0_ |= 0x00001000;
+              bitField0_ |= 0x00000800;
               successorStructId_ = input.readInt32();
               break;
             }
             case 114: {
-              bitField0_ |= 0x00002000;
+              bitField0_ |= 0x00001000;
               imgName_ = input.readBytes();
               break;
             }
             case 125: {
-              bitField0_ |= 0x00004000;
+              bitField0_ |= 0x00002000;
               imgVerticalPixelOffset_ = input.readFloat();
               break;
             }
             case 130: {
-              bitField0_ |= 0x00008000;
+              bitField0_ |= 0x00004000;
               description_ = input.readBytes();
               break;
             }
@@ -1404,58 +1346,22 @@ public final class StructureProto {
         return this;
       }
       
-      // optional string spriteImgName = 11;
-      private java.lang.Object spriteImgName_ = "";
-      public boolean hasSpriteImgName() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
-      }
-      public String getSpriteImgName() {
-        java.lang.Object ref = spriteImgName_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          spriteImgName_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
-      }
-      public Builder setSpriteImgName(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000400;
-        spriteImgName_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearSpriteImgName() {
-        bitField0_ = (bitField0_ & ~0x00000400);
-        spriteImgName_ = getDefaultInstance().getSpriteImgName();
-        onChanged();
-        return this;
-      }
-      void setSpriteImgName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000400;
-        spriteImgName_ = value;
-        onChanged();
-      }
-      
       // optional int32 predecessorStructId = 12;
       private int predecessorStructId_ ;
       public boolean hasPredecessorStructId() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       public int getPredecessorStructId() {
         return predecessorStructId_;
       }
       public Builder setPredecessorStructId(int value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000400;
         predecessorStructId_ = value;
         onChanged();
         return this;
       }
       public Builder clearPredecessorStructId() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000400);
         predecessorStructId_ = 0;
         onChanged();
         return this;
@@ -1464,19 +1370,19 @@ public final class StructureProto {
       // optional int32 successorStructId = 13;
       private int successorStructId_ ;
       public boolean hasSuccessorStructId() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       public int getSuccessorStructId() {
         return successorStructId_;
       }
       public Builder setSuccessorStructId(int value) {
-        bitField0_ |= 0x00001000;
+        bitField0_ |= 0x00000800;
         successorStructId_ = value;
         onChanged();
         return this;
       }
       public Builder clearSuccessorStructId() {
-        bitField0_ = (bitField0_ & ~0x00001000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         successorStructId_ = 0;
         onChanged();
         return this;
@@ -1485,7 +1391,7 @@ public final class StructureProto {
       // optional string imgName = 14;
       private java.lang.Object imgName_ = "";
       public boolean hasImgName() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       public String getImgName() {
         java.lang.Object ref = imgName_;
@@ -1501,19 +1407,19 @@ public final class StructureProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00002000;
+  bitField0_ |= 0x00001000;
         imgName_ = value;
         onChanged();
         return this;
       }
       public Builder clearImgName() {
-        bitField0_ = (bitField0_ & ~0x00002000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         imgName_ = getDefaultInstance().getImgName();
         onChanged();
         return this;
       }
       void setImgName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00002000;
+        bitField0_ |= 0x00001000;
         imgName_ = value;
         onChanged();
       }
@@ -1521,19 +1427,19 @@ public final class StructureProto {
       // optional float imgVerticalPixelOffset = 15;
       private float imgVerticalPixelOffset_ ;
       public boolean hasImgVerticalPixelOffset() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       public float getImgVerticalPixelOffset() {
         return imgVerticalPixelOffset_;
       }
       public Builder setImgVerticalPixelOffset(float value) {
-        bitField0_ |= 0x00004000;
+        bitField0_ |= 0x00002000;
         imgVerticalPixelOffset_ = value;
         onChanged();
         return this;
       }
       public Builder clearImgVerticalPixelOffset() {
-        bitField0_ = (bitField0_ & ~0x00004000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         imgVerticalPixelOffset_ = 0F;
         onChanged();
         return this;
@@ -1542,7 +1448,7 @@ public final class StructureProto {
       // optional string description = 16;
       private java.lang.Object description_ = "";
       public boolean hasDescription() {
-        return ((bitField0_ & 0x00008000) == 0x00008000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       public String getDescription() {
         java.lang.Object ref = description_;
@@ -1558,19 +1464,19 @@ public final class StructureProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00008000;
+  bitField0_ |= 0x00004000;
         description_ = value;
         onChanged();
         return this;
       }
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00008000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       void setDescription(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00008000;
+        bitField0_ |= 0x00004000;
         description_ = value;
         onChanged();
       }
@@ -6569,7 +6475,7 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\"\260\004\n\022St" +
+      "\n\017Structure.proto\022\016com.lvl6.proto\"\231\004\n\022St" +
       "ructureInfoProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022A\n\nstructType\030\004 " +
       "\001(\0162-.com.lvl6.proto.StructureInfoProto." +
@@ -6577,49 +6483,48 @@ public final class StructureProto {
       "com.lvl6.proto.ResourceType\022\021\n\tbuildCost" +
       "\030\006 \001(\005\022\026\n\016minutesToBuild\030\007 \001(\005\022\037\n\027prereq" +
       "uisiteTownHallLvl\030\010 \001(\005\022\r\n\005width\030\t \001(\005\022\016" +
-      "\n\006height\030\n \001(\005\022\025\n\rspriteImgName\030\013 \001(\t\022\033\n" +
-      "\023predecessorStructId\030\014 \001(\005\022\031\n\021successorS",
-      "tructId\030\r \001(\005\022\017\n\007imgName\030\016 \001(\t\022\036\n\026imgVer" +
-      "ticalPixelOffset\030\017 \001(\002\022\023\n\013description\030\020 " +
-      "\001(\t\"o\n\nStructType\022\026\n\022RESOURCE_GENERATOR\020" +
-      "\001\022\024\n\020RESOURCE_STORAGE\020\002\022\014\n\010HOSPITAL\020\003\022\r\n" +
-      "\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\"\256\001\n" +
-      "\026ResourceGeneratorProto\0226\n\nstructInfo\030\001 " +
-      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022" +
-      "2\n\014resourceType\030\002 \001(\0162\034.com.lvl6.proto.R" +
-      "esourceType\022\026\n\016productionRate\030\003 \001(\002\022\020\n\010c" +
-      "apacity\030\004 \001(\005\"\224\001\n\024ResourceStorageProto\0226",
+      "\n\006height\030\n \001(\005\022\033\n\023predecessorStructId\030\014 " +
+      "\001(\005\022\031\n\021successorStructId\030\r \001(\005\022\017\n\007imgNam",
+      "e\030\016 \001(\t\022\036\n\026imgVerticalPixelOffset\030\017 \001(\002\022" +
+      "\023\n\013description\030\020 \001(\t\"o\n\nStructType\022\026\n\022RE" +
+      "SOURCE_GENERATOR\020\001\022\024\n\020RESOURCE_STORAGE\020\002" +
+      "\022\014\n\010HOSPITAL\020\003\022\r\n\tRESIDENCE\020\004\022\r\n\tTOWN_HA" +
+      "LL\020\005\022\007\n\003LAB\020\006\"\256\001\n\026ResourceGeneratorProto" +
+      "\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.St" +
+      "ructureInfoProto\0222\n\014resourceType\030\002 \001(\0162\034" +
+      ".com.lvl6.proto.ResourceType\022\026\n\016producti" +
+      "onRate\030\003 \001(\002\022\020\n\010capacity\030\004 \001(\005\"\224\001\n\024Resou" +
+      "rceStorageProto\0226\n\nstructInfo\030\001 \001(\0132\".co",
+      "m.lvl6.proto.StructureInfoProto\0222\n\014resou" +
+      "rceType\030\002 \001(\0162\034.com.lvl6.proto.ResourceT" +
+      "ype\022\020\n\010capacity\030\003 \001(\005\"s\n\rHospitalProto\0226" +
       "\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Stru" +
-      "ctureInfoProto\0222\n\014resourceType\030\002 \001(\0162\034.c" +
-      "om.lvl6.proto.ResourceType\022\020\n\010capacity\030\003" +
-      " \001(\005\"s\n\rHospitalProto\0226\n\nstructInfo\030\001 \001(" +
-      "\0132\".com.lvl6.proto.StructureInfoProto\022\021\n" +
-      "\tqueueSize\030\002 \001(\005\022\027\n\017healthPerSecond\030\003 \001(" +
-      "\002\"n\n\010LabProto\0226\n\nstructInfo\030\001 \001(\0132\".com." +
-      "lvl6.proto.StructureInfoProto\022\021\n\tqueueSi" +
-      "ze\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\"\266\001\n\016Re" +
-      "sidenceProto\0226\n\nstructInfo\030\001 \001(\0132\".com.l",
-      "vl6.proto.StructureInfoProto\022\027\n\017numMonst" +
-      "erSlots\030\002 \001(\005\022\034\n\024numBonusMonsterSlots\030\003 " +
-      "\001(\005\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n\024numAccep" +
-      "tedFbInvites\030\005 \001(\005\"\221\002\n\rTownHallProto\0226\n\n" +
-      "structInfo\030\001 \001(\0132\".com.lvl6.proto.Struct" +
-      "ureInfoProto\022 \n\030numResourceOneGenerators" +
-      "\030\002 \001(\005\022\036\n\026numResourceOneStorages\030\003 \001(\005\022 " +
-      "\n\030numResourceTwoGenerators\030\004 \001(\005\022\036\n\026numR" +
-      "esourceTwoStorages\030\005 \001(\005\022\024\n\014numHospitals" +
-      "\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMons",
-      "terSlots\030\010 \001(\005\"\377\001\n\026FullUserStructureProt" +
-      "o\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022" +
-      "\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003" +
-      "\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001" +
-      "(\010\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl6.proto" +
-      ".CoordinateProto\0226\n\013orientation\030\010 \001(\0162!." +
-      "com.lvl6.proto.StructOrientation\"\'\n\017Coor" +
-      "dinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002*!\n\014Res" +
-      "ourceType\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002*3\n\021StructOr" +
-      "ientation\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020",
-      "\002B\020B\016StructureProto"
+      "ctureInfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017hea" +
+      "lthPerSecond\030\003 \001(\002\"n\n\010LabProto\0226\n\nstruct" +
+      "Info\030\001 \001(\0132\".com.lvl6.proto.StructureInf" +
+      "oProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017pointsPerSe" +
+      "cond\030\003 \001(\002\"\266\001\n\016ResidenceProto\0226\n\nstructI" +
+      "nfo\030\001 \001(\0132\".com.lvl6.proto.StructureInfo",
+      "Proto\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024numBon" +
+      "usMonsterSlots\030\003 \001(\005\022\027\n\017numGemsRequired\030" +
+      "\004 \001(\005\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\"\221\002\n\r" +
+      "TownHallProto\0226\n\nstructInfo\030\001 \001(\0132\".com." +
+      "lvl6.proto.StructureInfoProto\022 \n\030numReso" +
+      "urceOneGenerators\030\002 \001(\005\022\036\n\026numResourceOn" +
+      "eStorages\030\003 \001(\005\022 \n\030numResourceTwoGenerat" +
+      "ors\030\004 \001(\005\022\036\n\026numResourceTwoStorages\030\005 \001(" +
+      "\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnumResidences" +
+      "\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(\005\"\377\001\n\026Full",
+      "UserStructureProto\022\024\n\014userStructId\030\001 \001(\005" +
+      "\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rla" +
+      "stRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022" +
+      "\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\013" +
+      "2\037.com.lvl6.proto.CoordinateProto\0226\n\013ori" +
+      "entation\030\010 \001(\0162!.com.lvl6.proto.StructOr" +
+      "ientation\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022" +
+      "\t\n\001y\030\002 \001(\002*!\n\014ResourceType\022\010\n\004CASH\020\001\022\007\n\003" +
+      "OIL\020\002*3\n\021StructOrientation\022\016\n\nPOSITION_1" +
+      "\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6631,7 +6536,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_StructureInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StructureInfoProto_descriptor,
-              new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "PrerequisiteTownHallLvl", "Width", "Height", "SpriteImgName", "PredecessorStructId", "SuccessorStructId", "ImgName", "ImgVerticalPixelOffset", "Description", },
+              new java.lang.String[] { "StructId", "Name", "Level", "StructType", "BuildResourceType", "BuildCost", "MinutesToBuild", "PrerequisiteTownHallLvl", "Width", "Height", "PredecessorStructId", "SuccessorStructId", "ImgName", "ImgVerticalPixelOffset", "Description", },
               com.lvl6.proto.StructureProto.StructureInfoProto.class,
               com.lvl6.proto.StructureProto.StructureInfoProto.Builder.class);
           internal_static_com_lvl6_proto_ResourceGeneratorProto_descriptor =

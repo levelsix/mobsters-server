@@ -121,7 +121,6 @@ import com.lvl6.utils.DBConnection;
     int requiredTownHallLvl = rs.getInt(i++);
     int width = rs.getInt(i++);
     int height = rs.getInt(i++);
-    String spriteImgName = rs.getString(i++);
     int predecessorStructId = rs.getInt(i++);
     int successorStructId = rs.getInt(i++);
     String imgName = rs.getString(i++);
@@ -129,7 +128,7 @@ import com.lvl6.utils.DBConnection;
     String description = rs.getString(i++);
     
     Structure s = new Structure(id, name, level, structType, buildResourceType,
-    		buildCost, minutesToBuild, requiredTownHallLvl, width, height, spriteImgName,
+    		buildCost, minutesToBuild, requiredTownHallLvl, width, height,
     		predecessorStructId, successorStructId, imgName, imgVerticalPixelOffset,
     		description);
     

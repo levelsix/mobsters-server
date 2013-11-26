@@ -557,10 +557,6 @@ public class CreateInfoProtoUtils {
     builder.setWidth(s.getWidth());
     builder.setHeight(s.getHeight());
     
-    aStr = s.getSpriteImgName();
-    if (null != aStr) {
-    	builder.setSpriteImgName(s.getSpriteImgName());
-    }
     if (s.getPredecessorStructId() > 0) {
     	builder.setPredecessorStructId(s.getPredecessorStructId());
     }
