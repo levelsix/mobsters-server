@@ -6,8 +6,8 @@ package com.lvl6.proto;
 option java_outer_classname = "StructureProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
-//server will never send this, will only send these in the protos that rely on this proto
-//there will never be a full structure proto on its own
+//server will never send this by itself, will only send these in the protos that
+//rely on this proto there will never be a full structure proto on its own
 message StructureInfoProto { 
 	optional int32 structId = 1;
 	optional string name = 2;
@@ -21,7 +21,7 @@ message StructureInfoProto {
 	optional int32 prerequisiteTownHallLvl = 8;
 	optional int32 width = 9;
 	optional int32 height = 10;
-	optional string spriteImgName = 11;
+	
 	optional int32 predecessorStructId = 12;
 	optional int32 successorStructId = 13;	
 	
