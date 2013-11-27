@@ -242,26 +242,6 @@ public class MiscMethods {
         ControllerConstants.USER_CREATE__PERCENTAGE_OF_COIN_WEALTH_GIVEN_TO_REFERRER)));
   }
 
-//  public static int calculateCoinsGainedFromTutorialTask(Task firstTaskToComplete) {
-//    return ((firstTaskToComplete.getMinCoinsGained() + firstTaskToComplete.getMaxCoinsGained())/2)
-//        * firstTaskToComplete.getNumForCompletion();
-//  }
-
-  /*public static boolean unequipUserEquipIfEquipped(User user, UserEquip userEquip) {
-    long userEquipId = userEquip.getId();
-    boolean isWeaponOne = user.getWeaponEquippedUserEquipId() == userEquipId;
-    boolean isArmorOne = user.getArmorEquippedUserEquipId() == userEquipId; 
-    boolean isAmuletOne = user.getAmuletEquippedUserEquipId() == userEquipId;
-    //for players who have prestige
-    boolean isWeaponTwo = user.getWeaponTwoEquippedUserEquipId() == userEquipId; 
-    boolean isArmorTwo = user.getArmorTwoEquippedUserEquipId() == userEquipId;
-    boolean isAmuletTwo = user.getAmuletTwoEquippedUserEquipId() == userEquipId;
-    if ( isWeaponOne || isWeaponTwo || isArmorOne || isArmorTwo || isAmuletOne || isAmuletTwo) {
-      return user.updateUnequip(isWeaponOne, isArmorOne, isAmuletOne, isWeaponTwo, isArmorTwo,
-          isAmuletTwo);
-    } 
-    return true;
-  }*/
 
   public static boolean checkClientTimeAroundApproximateNow(Timestamp clientTime) {
     if (clientTime.getTime() < new Date().getTime() + Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME*60000 && 
@@ -736,6 +716,7 @@ public class MiscMethods {
     try {
       int amount = changeMap.size();
       
+      //getting rid of changes that are 0
       Set<String> keys = new HashSet<String>(changeMap.keySet());
       for (String key : keys) {
       	Integer change = changeMap.get(key);

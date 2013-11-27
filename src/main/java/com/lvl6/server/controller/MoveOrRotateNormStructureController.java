@@ -43,6 +43,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     MoveOrRotateNormStructureRequestProto reqProto = ((MoveOrRotateNormStructureRequestEvent)event).getMoveOrRotateNormStructureRequestProto();
 
+    //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
     int userStructId = reqProto.getUserStructId();
     MoveOrRotateNormStructType type = reqProto.getType();

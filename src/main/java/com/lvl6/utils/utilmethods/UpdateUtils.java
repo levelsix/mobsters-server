@@ -379,31 +379,6 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-//	/*
-//	 * used for upgrading user structs level
-//	 */
-//	/* (non-Javadoc)
-//	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructLevel(int, int)
-//	 */
-//	@Override
-//	/*@Caching(evict= {
-//      //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
-//      //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
-//	public boolean updateUserStructLevel(int userStructId, int levelChange) {
-//		Map <String, Object> conditionParams = new HashMap<String, Object>();
-//		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
-//
-//		Map <String, Object> relativeParams = new HashMap<String, Object>();
-//		relativeParams.put(DBConstants.STRUCTURE_FOR_USER__LEVEL, levelChange);
-//
-//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_STRUCTURE_FOR_USER, relativeParams, null, 
-//				conditionParams, "or");
-//		if (numUpdated == 1) {
-//			return true;
-//		}
-//		return false;
-//	}
-
 	/*
 	 * used for moving user structs
 	 */
