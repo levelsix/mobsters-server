@@ -197,10 +197,6 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     int userId = user.getId();
     Timestamp lastRetrievedTime = null;
     boolean isComplete = false;
-    if (gemsSpent > 0) {
-    	lastRetrievedTime = purchaseTime;
-    	isComplete = true;
-    }
     
     int userStructId = insertUtils.insertUserStruct(userId, structId, cp, purchaseTime,
     		lastRetrievedTime, isComplete);

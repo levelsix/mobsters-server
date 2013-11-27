@@ -321,7 +321,7 @@ public class UpdateUtils implements UpdateUtil {
 		//determine which columns should be replaced
 		Set<String> replaceTheseColumns = new HashSet<String>();
 		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED);
-		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME);
+//		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME);
 		replaceTheseColumns.add(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE);
 		
 		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
