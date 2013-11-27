@@ -57,6 +57,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int userId = senderProto.getUserId();
     int userStructId = reqProto.getUserStructId();
     Timestamp timeOfUpgrade = new Timestamp(reqProto.getTimeOfUpgrade());
+    int gemsSpent = reqProto.getGemsSpent();
+    //positive means refund, negative means charge user
+    int resourceChange = reqProto.getResourceChange();
+    ResourceType rt = reqProto.getResourceType();
     
     UpgradeNormStructureResponseProto.Builder resBuilder = UpgradeNormStructureResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -69,20 +73,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	Structure currentStruct = null;
     	Structure nextLevelStruct = null;
     	StructureForUser userStruct = RetrieveUtils.userStructRetrieveUtils().getSpecificUserStruct(userStructId);
-    	ResourceType rt = null;
     	
     	if (userStruct != null) {
     		currentStruct = StructureRetrieveUtils.getStructForStructId(userStruct.getStructId());
     		nextLevelStruct = StructureRetrieveUtils.getUpgradedStructForStructId(userStruct.getStructId());
-    		String strResourceType = nextLevelStruct.getBuildResourceType();
-    		rt = ResourceType.valueOf(strResourceType);
     	}
       int previousCash = 0;
       int previousOil = 0;
       int previousGems = 0;
       
       boolean legitUpgrade = checkLegitUpgrade(resBuilder, user, userStruct, currentStruct,
-      		nextLevelStruct, rt, timeOfUpgrade);
+      		nextLevelStruct, gemsSpent, resourceChange, rt, timeOfUpgrade);
       UpgradeNormStructureResponseEvent resEvent = new UpgradeNormStructureResponseEvent(userId);
       resEvent.setTag(event.getTag());
       resEvent.setUpgradeNormStructureResponseProto(resBuilder.build());  
@@ -94,7 +95,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         previousGems = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
-        writeChangesToDB(user, userStruct, nextLevelStruct, rt, timeOfUpgrade, money);
+        writeChangesToDB(user, userStruct, nextLevelStruct, gemsSpent, resourceChange, rt,
+        		timeOfUpgrade, money);
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
@@ -119,7 +121,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean checkLegitUpgrade(Builder resBuilder, User user, StructureForUser userStruct,
-      Structure currentStruct, Structure nextLevelStruct, ResourceType rt, Timestamp timeOfUpgrade) {
+      Structure currentStruct, Structure nextLevelStruct, int gemsSpent, int resourceChange, 
+      ResourceType rt,Timestamp timeOfUpgrade) {
     if (user == null || userStruct == null || userStruct.getLastRetrieved() == null) {
       log.error("parameter passed in is null. user=" + user + ", user struct=" + userStruct + 
          ", userStruct's last retrieve time=" + userStruct.getLastRetrieved());
@@ -148,17 +151,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;
     }
     
-    int buildPrice = nextLevelStruct.getBuildCost();
+    int userGems = user.getGems();
+    if (gemsSpent > 0 && userGems < gemsSpent) {
+    	log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
+    			resourceChange  + " " + rt + " to upgrade to structure=" + nextLevelStruct);
+    	resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
+    	return false;
+    }
     if (ResourceType.CASH.equals(rt)) {
-    	if (user.getCash() < buildPrice) {
+    	if (user.getCash() < resourceChange) {
     		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_CASH);
-    		log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + buildPrice);
+    		log.error("user doesn't have enough cash, has " + user.getCash() + ", needs " + resourceChange);
     		return false;
     	}
     } else if (ResourceType.OIL.equals(rt)){
-    	if (user.getOil() < buildPrice) {
-    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_GEMS);
-    		log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + buildPrice);
+    	if (user.getOil() < resourceChange) {
+    		resBuilder.setStatus(UpgradeNormStructureStatus.FAIL_NOT_ENOUGH_OIL);
+    		log.error("user doesn't have enough gems, has " + user.getGems() + ", needs " + resourceChange);
     		return false;
     	}
     }
@@ -180,7 +189,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private void writeChangesToDB(User user, StructureForUser userStruct, Structure upgradedStruct,
-  		ResourceType rt, Timestamp timeOfUpgrade, Map<String, Integer> money) {
+  		int gemsSpent, int resourceChange, ResourceType rt, Timestamp timeOfUpgrade,
+  		Map<String, Integer> money) {
 
   	int newStructId = upgradedStruct.getId();
   	//upgrade the user's struct
@@ -191,16 +201,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
 
   	//charge the user  	
-  	int buildCost = upgradedStruct.getBuildCost();
-
   	int cashChange = 0;
     int oilChange = 0;
-    int gemChange = 0;
+    int gemChange = -1 * gemsSpent;
     
     if (ResourceType.CASH.equals(rt)) {
-    	cashChange = -1 * buildCost;
+    	cashChange = resourceChange;
     } else if (ResourceType.OIL.equals(rt)) {
-    	oilChange = -1 * buildCost;
+    	oilChange = resourceChange;
     }
 
     int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
@@ -208,9 +216,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("problem with updating user currency. gemChange=" + gemChange +
       		" cashChange=" + cashChange + "\t oilChange=" + oilChange + "\t numRowsUpdated=" + num);
     } else {//things went ok
-//      if (0 != gemChange) {
-//        money.put(MiscMethods.gems, gemChange * -1);
-//      }
+      if (0 != gemChange) {
+        money.put(MiscMethods.gems, gemChange);
+      }
       if (0 != cashChange) {
         money.put(MiscMethods.cash, cashChange);
       }
