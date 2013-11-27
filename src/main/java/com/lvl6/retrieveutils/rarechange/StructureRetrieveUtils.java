@@ -126,11 +126,12 @@ import com.lvl6.utils.DBConnection;
     String imgName = rs.getString(i++);
     float imgVerticalPixelOffset = rs.getFloat(i++);
     String description = rs.getString(i++);
+    String shortDescription = rs.getString(i++);
     
     Structure s = new Structure(id, name, level, structType, buildResourceType,
     		buildCost, minutesToBuild, requiredTownHallLvl, width, height,
     		predecessorStructId, successorStructId, imgName, imgVerticalPixelOffset,
-    		description);
+    		description, shortDescription);
     
     if (null != structType) {
     	String newStructType = structType.trim();

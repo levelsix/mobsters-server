@@ -576,6 +576,11 @@ public class CreateInfoProtoUtils {
     	builder.setDescription(aStr);
     }
     
+    aStr = s.getShortDescription();
+    if (null != aStr) {
+    	builder.setShortDescription(aStr);
+    }
+    
     return builder.build();
   }
   

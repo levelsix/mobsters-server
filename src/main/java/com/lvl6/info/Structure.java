@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = 4444043649409504316L;
+	private static final long serialVersionUID = 5378386129555703159L;
 	private int id;
 	private String name;
 	private int level;
@@ -20,12 +20,13 @@ public class Structure implements Serializable {
 	private String imgName;
 	private float imgVerticalPixelOffset;
 	private String description;
+	private String shortDescription;
 	
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
 			int requiredTownHallLvl, int width, int height, int predecessorStructId,
 			int successorStructId, String imgName, float imgVerticalPixelOffset,
-			String description) {
+			String description, String shortDescription) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -42,6 +43,7 @@ public class Structure implements Serializable {
 		this.imgName = imgName;
 		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
 		this.description = description;
+		this.shortDescription = shortDescription;
 	}
 
 	public int getId() {
@@ -164,6 +166,14 @@ public class Structure implements Serializable {
 		this.description = description;
 	}
 
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
 	@Override
 	public String toString() {
 		return "Structure [id=" + id + ", name=" + name + ", level=" + level
@@ -173,7 +183,8 @@ public class Structure implements Serializable {
 				+ ", width=" + width + ", height=" + height + ", predecessorStructId="
 				+ predecessorStructId + ", successorStructId=" + successorStructId
 				+ ", imgName=" + imgName + ", imgVerticalPixelOffset="
-				+ imgVerticalPixelOffset + ", description=" + description + "]";
+				+ imgVerticalPixelOffset + ", description=" + description
+				+ ", shortDescription=" + shortDescription + "]";
 	}
 	
 }
