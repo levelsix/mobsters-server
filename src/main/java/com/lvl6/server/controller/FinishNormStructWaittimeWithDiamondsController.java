@@ -204,12 +204,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     String gems = MiscMethods.gems;
     
     previousCurrencies.put(gems, previousGems);
+    currentCurrencies.put(gems, aUser.getGems());
     reasonsForChanges.put(gems, reasonForChange);
     String detail = structDetails.toString();
     details.put(gems, detail);
       
     MiscMethods.writeToUserCurrencyOneUser(userId, timeOfPurchase, money,
-        currentCurrencies, previousCurrencies, reasonsForChanges, details);
+    		previousCurrencies, currentCurrencies, reasonsForChanges, details);
   }
   
   
