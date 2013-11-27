@@ -21,7 +21,6 @@ message PurchaseNormStructureRequestProto {
 	
 	//if user needs, say, five more cash, then user can spend gems to replace
 	//said five cash. (positive number, server will convert it to negative)
-	//if nonzero, this means the building user bought is complete
 	optional int32 gemsSpent = 5;
 	
 	//positive means refund, negative means charge user
@@ -73,6 +72,14 @@ message UpgradeNormStructureRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 userStructId = 2;
 	optional int64 timeOfUpgrade = 3;	
+	
+	//if user needs, say, five more cash, then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 4;
+	
+	//positive means refund, negative means charge user
+	optional sint32 resourceChange = 5; 
+	optional ResourceType resourceType = 6 [default = CASH];
 }
 
 																						//DONE
