@@ -403,7 +403,7 @@ public class DBConstants {
   /*USER CURRENCY HISTORY (FOR GOLD/DIAMONDS AND SILVER/COINS*/
   public static final String USER_CURRENCY_HISTORY__USER_ID = GENERIC__USER_ID;
   public static final String USER_CURRENCY_HISTORY__DATE = "date";
-  public static final String USER_CURRENCY_HISTORY__IS_SILVER = "is_silver";
+  public static final String USER_CURRENCY_HISTORY__RESOURCE_TYPE = "resource_type";
   public static final String USER_CURRENCY_HISTORY__CURRENCY_CHANGE = "currency_change";
   public static final String USER_CURRENCY_HISTORY__CURRENCY_BEFORE_CHANGE = "currency_before_change";
   public static final String USER_CURRENCY_HISTORY__CURRENCY_AFTER_CHANGE = "currency_after_change";

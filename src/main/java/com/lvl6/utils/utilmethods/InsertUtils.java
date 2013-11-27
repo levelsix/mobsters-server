@@ -514,7 +514,7 @@ public class InsertUtils implements InsertUtil{
   
   
   //0 for isSilver means currency is gold; 1 for isSilver means currency is silver
-  public int insertIntoUserCurrencyHistory (int userId, Timestamp date, int isSilver, 
+  public int insertIntoUserCurrencyHistory (int userId, Timestamp date, String resourceType, 
       int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange,
       String details) {
     String tableName = DBConstants.TABLE_USER_CURRENCY_HISTORY;
@@ -522,7 +522,7 @@ public class InsertUtils implements InsertUtil{
     
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__USER_ID, userId);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__DATE, date);
-    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__IS_SILVER, isSilver);
+    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__RESOURCE_TYPE, resourceType);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__CURRENCY_CHANGE, currencyChange);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__CURRENCY_BEFORE_CHANGE, currencyBefore);
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__CURRENCY_AFTER_CHANGE, currencyAfter);
@@ -551,7 +551,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__USER_ID,
         userIds);														
     insertParams.put(DBConstants.USER_CURRENCY_HISTORY__DATE, dates);
-    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__IS_SILVER, resourceTypes);
+    insertParams.put(DBConstants.USER_CURRENCY_HISTORY__RESOURCE_TYPE, resourceTypes);
     if(null != changesToCurrencies && 0 < changesToCurrencies.size()) {
       insertParams.put(DBConstants.USER_CURRENCY_HISTORY__CURRENCY_CHANGE, changesToCurrencies);
     }

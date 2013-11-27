@@ -81,7 +81,7 @@ public interface InsertUtil {
 
 	public int insertIntoUserLeaderboardEvent(int leaderboardEventId, int userId, int battlesWonChange, int battlesLostChange, int battlesFledChange);
 
-	public abstract int insertIntoUserCurrencyHistory (int userId, Timestamp date, int isSilver, 
+	public abstract int insertIntoUserCurrencyHistory (int userId, Timestamp date, String resourceType, 
 			int currencyChange, int currencyBefore, int currencyAfter, String reasonForChange, String details);
 
 	public abstract int insertIntoUserCurrencyHistoryMultipleRows (List<Integer> userIds,

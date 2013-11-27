@@ -431,18 +431,15 @@ public class EarnFreeDiamondsController extends EventController {
         return;
       }
       int userId = aUser.getId();
-      int isSilver;
-      String key = keys.get(0);
-      int currencyChange = money.get(key);
+      String resourceType = keys.get(0);
+      int currencyChange = money.get(resourceType);
       int currencyAfter;
       String reasonForChange = "earn free diamonds controller";
       String details = "";
       
-      if(key.equals(MiscMethods.cash)) {
-        isSilver = 1;
+      if(resourceType.equals(MiscMethods.cash)) {
         currencyAfter = aUser.getCash();
       } else {
-        isSilver = 0;
         currencyAfter = aUser.getGems();
       }
       
@@ -455,7 +452,7 @@ public class EarnFreeDiamondsController extends EventController {
         reasonForChange = ControllerConstants.UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT;
       }
       
-      int inserted = InsertUtils.get().insertIntoUserCurrencyHistory(userId, date, isSilver,
+      int inserted = InsertUtils.get().insertIntoUserCurrencyHistory(userId, date, resourceType,
           currencyChange, previousGold, currencyAfter, reasonForChange, details);
 
       log.info("Should be 1. Rows inserted into user_currency_history: " + inserted);
