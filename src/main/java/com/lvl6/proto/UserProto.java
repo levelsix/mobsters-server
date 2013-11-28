@@ -6154,10 +6154,6 @@ public final class UserProto {
     // optional int32 requiredExperience = 2;
     boolean hasRequiredExperience();
     int getRequiredExperience();
-    
-    // optional int32 maxCash = 3;
-    boolean hasMaxCash();
-    int getMaxCash();
   }
   public static final class StaticUserLevelInfoProto extends
       com.google.protobuf.GeneratedMessage
@@ -6208,20 +6204,9 @@ public final class UserProto {
       return requiredExperience_;
     }
     
-    // optional int32 maxCash = 3;
-    public static final int MAXCASH_FIELD_NUMBER = 3;
-    private int maxCash_;
-    public boolean hasMaxCash() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public int getMaxCash() {
-      return maxCash_;
-    }
-    
     private void initFields() {
       level_ = 0;
       requiredExperience_ = 0;
-      maxCash_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6241,9 +6226,6 @@ public final class UserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, requiredExperience_);
       }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, maxCash_);
-      }
       getUnknownFields().writeTo(output);
     }
     
@@ -6260,10 +6242,6 @@ public final class UserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, requiredExperience_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, maxCash_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6393,8 +6371,6 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         requiredExperience_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        maxCash_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -6441,10 +6417,6 @@ public final class UserProto {
           to_bitField0_ |= 0x00000002;
         }
         result.requiredExperience_ = requiredExperience_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.maxCash_ = maxCash_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6466,9 +6438,6 @@ public final class UserProto {
         }
         if (other.hasRequiredExperience()) {
           setRequiredExperience(other.getRequiredExperience());
-        }
-        if (other.hasMaxCash()) {
-          setMaxCash(other.getMaxCash());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6509,11 +6478,6 @@ public final class UserProto {
             case 16: {
               bitField0_ |= 0x00000002;
               requiredExperience_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              maxCash_ = input.readInt32();
               break;
             }
           }
@@ -6560,27 +6524,6 @@ public final class UserProto {
       public Builder clearRequiredExperience() {
         bitField0_ = (bitField0_ & ~0x00000002);
         requiredExperience_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 maxCash = 3;
-      private int maxCash_ ;
-      public boolean hasMaxCash() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public int getMaxCash() {
-        return maxCash_;
-      }
-      public Builder setMaxCash(int value) {
-        bitField0_ |= 0x00000004;
-        maxCash_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearMaxCash() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        maxCash_ = 0;
         onChanged();
         return this;
       }
@@ -6682,9 +6625,9 @@ public final class UserProto {
       "\005\022 \n\030numConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034l",
       "astWallPostNotificationTime\030\032 \001(\003\022\021\n\tkab" +
       "amNaid\030\033 \001(\t\022\032\n\022nthExtraSlotsViaFb\030) \001(\005" +
-      "\"V\n\030StaticUserLevelInfoProto\022\r\n\005level\030\001 " +
-      "\001(\005\022\032\n\022requiredExperience\030\002 \001(\005\022\017\n\007maxCa" +
-      "sh\030\003 \001(\005B\013B\tUserProto"
+      "\"E\n\030StaticUserLevelInfoProto\022\r\n\005level\030\001 " +
+      "\001(\005\022\032\n\022requiredExperience\030\002 \001(\005B\013B\tUserP" +
+      "roto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6744,7 +6687,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_StaticUserLevelInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor,
-              new java.lang.String[] { "Level", "RequiredExperience", "MaxCash", },
+              new java.lang.String[] { "Level", "RequiredExperience", },
               com.lvl6.proto.UserProto.StaticUserLevelInfoProto.class,
               com.lvl6.proto.UserProto.StaticUserLevelInfoProto.Builder.class);
           return null;

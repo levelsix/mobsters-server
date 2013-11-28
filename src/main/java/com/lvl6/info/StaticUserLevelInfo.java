@@ -4,18 +4,16 @@ import java.io.Serializable;
 
 public class StaticUserLevelInfo implements Serializable{
 	
-	private static final long serialVersionUID = -8242282071455381140L;
+	private static final long serialVersionUID = -258608581176466155L;
 	private int lvl;
   private int requiredExp;
-  private int maxCash;
   
-	public StaticUserLevelInfo(int lvl, int requiredExp, int maxCash) {
+	public StaticUserLevelInfo(int lvl, int requiredExp) {
 		super();
 		this.lvl = lvl;
 		this.requiredExp = requiredExp;
-		this.maxCash = maxCash;
 	}
-
+	
 	public int getLvl() {
 		return lvl;
 	}
@@ -32,18 +30,10 @@ public class StaticUserLevelInfo implements Serializable{
 		this.requiredExp = requiredExp;
 	}
 
-	public int getMaxCash() {
-		return maxCash;
-	}
-
-	public void setMaxCash(int maxCash) {
-		this.maxCash = maxCash;
-	}
-
 	@Override
 	public String toString() {
-		return "StaticLevelInfo [lvl=" + lvl + ", requiredExp=" + requiredExp
-				+ ", maxCash=" + maxCash + "]";
+		return "StaticUserLevelInfo [lvl=" + lvl + ", requiredExp=" + requiredExp
+				+ "]";
 	}
   
 }

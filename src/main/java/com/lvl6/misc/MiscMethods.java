@@ -1284,12 +1284,10 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   	for (int lvl : levelToStaticUserLevelInfo.keySet())  {
   		StaticUserLevelInfo sli = levelToStaticUserLevelInfo.get(lvl);
   		int exp = sli.getRequiredExp();
-  		int maxCash = sli.getMaxCash();
 
   		StaticUserLevelInfoProto.Builder slipb = StaticUserLevelInfoProto.newBuilder();
   		slipb.setLevel(lvl);
   		slipb.setRequiredExperience(exp);
-  		slipb.setMaxCash(maxCash);
   		sdpb.addSlip(slipb.build());
   	}
   }

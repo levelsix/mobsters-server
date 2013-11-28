@@ -85,9 +85,8 @@ import com.lvl6.utils.DBConnection;
     int i = 1;
     int lvl = rs.getInt(i++);
     int requiredExp = rs.getInt(i++);
-    int maxCash = rs.getInt(i++);
     
-    StaticUserLevelInfo sli = new StaticUserLevelInfo(lvl, requiredExp, maxCash);
+    StaticUserLevelInfo sli = new StaticUserLevelInfo(lvl, requiredExp);
     return sli;
   }
 }
