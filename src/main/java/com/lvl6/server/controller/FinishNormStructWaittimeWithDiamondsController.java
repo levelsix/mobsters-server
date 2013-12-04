@@ -85,7 +85,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (legitSpeedup) {
         previousGems = user.getGems();
         success = writeChangesToDB(user, userStruct, timeOfSpeedup, struct,
-        		formerStruct, gemCostToSpeedup, money);
+        		gemCostToSpeedup, money);
       }
       if (success) {
       	resBuilder.setStatus(FinishNormStructWaittimeStatus.SUCCESS);
@@ -141,8 +141,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
 
   private boolean writeChangesToDB(User user, StructureForUser userStruct,
-  		Timestamp timeOfSpeedup, Structure struct, Structure formerStruct,
-  		int gemCost, Map<String, Integer> money) {
+  		Timestamp timeOfSpeedup, Structure struct, int gemCost, Map<String, Integer> money) {
 
   	int gemChange = -1 * gemCost;
   	//update user gems

@@ -12,10 +12,12 @@ public final class StructureProto {
       implements com.google.protobuf.ProtocolMessageEnum {
     CASH(0, 1),
     OIL(1, 2),
+    GEMS(2, 3),
     ;
     
     public static final int CASH_VALUE = 1;
     public static final int OIL_VALUE = 2;
+    public static final int GEMS_VALUE = 3;
     
     
     public final int getNumber() { return value; }
@@ -24,6 +26,7 @@ public final class StructureProto {
       switch (value) {
         case 1: return CASH;
         case 2: return OIL;
+        case 3: return GEMS;
         default: return null;
       }
     }
@@ -54,7 +57,7 @@ public final class StructureProto {
     }
     
     private static final ResourceType[] VALUES = {
-      CASH, OIL, 
+      CASH, OIL, GEMS, 
     };
     
     public static ResourceType valueOf(
@@ -6674,9 +6677,10 @@ public final class StructureProto {
       "\001(\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013" +
       "orientation\030\010 \001(\0162!.com.lvl6.proto.Struc" +
       "tOrientation\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001" +
-      "(\002\022\t\n\001y\030\002 \001(\002*!\n\014ResourceType\022\010\n\004CASH\020\001\022" +
-      "\007\n\003OIL\020\002*3\n\021StructOrientation\022\016\n\nPOSITIO",
-      "N_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
+      "(\002\022\t\n\001y\030\002 \001(\002*+\n\014ResourceType\022\010\n\004CASH\020\001\022" +
+      "\007\n\003OIL\020\002\022\010\n\004GEMS\020\003*3\n\021StructOrientation\022",
+      "\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016Struc" +
+      "tureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
