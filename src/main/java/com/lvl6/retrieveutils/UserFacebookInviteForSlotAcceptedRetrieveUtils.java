@@ -51,7 +51,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Map<Integer, UserFacebookInviteForSlotAccepted> idsToInvites = convertRSToInviteIdsToInvites(rs);
     DBConnection.get().close(rs, null, conn);
     return idsToInvites;*/
-  	return null;
+  	return new HashMap<Integer, UserFacebookInviteForSlotAccepted>();
   }
   
   //recipientFacebookId assumed to be not null
@@ -92,7 +92,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     DBConnection.get().close(rs, null, conn);
     return idsToInvites;
     */
-  	return null;
+  	return new HashMap<Integer, UserFacebookInviteForSlotAccepted>();
   }
   
   public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId) {
@@ -136,7 +136,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	Set<Integer> userIds = convertRSToInts(rs);
     DBConnection.get().close(rs, null, conn);
   	return userIds;*/
-  	return null;
+  	return new HashSet<Integer>();
   }
   
   private static UserFacebookInviteForSlotAccepted convertRSToInvite(ResultSet rs) {
