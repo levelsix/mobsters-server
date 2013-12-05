@@ -348,7 +348,7 @@ public class CreateInfoProtoUtils {
       builder.setClan(createMinimumClanProtoFromClan(clan));
     }
     builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
-    builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
+//    builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
     builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
     builder.setHasActiveShield(u.isHasActiveShield());
     if(u.getShieldEndTime() != null) {
