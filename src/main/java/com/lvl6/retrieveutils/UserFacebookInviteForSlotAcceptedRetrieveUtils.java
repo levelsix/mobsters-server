@@ -114,7 +114,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	List<String> recipientIds = convertRSToStrings(rs);
     DBConnection.get().close(rs, null, conn);
   	return recipientIds;*/
-  	return null;
+  	return new ArrayList<String>();
   }
   
   public static Set<Integer> getUniqueInviterUserIdsForRequesterId(String facebookId) {
