@@ -12,8 +12,8 @@ import com.lvl6.proto.InAppPurchaseProto.EarnFreeDiamondsType;
 import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
-
-	private static final long serialVersionUID = -718480033961695206L;
+	
+	private static final long serialVersionUID = -1955754690988621207L;
 	private int id;
 	private String name;
 	private int level;
@@ -44,7 +44,7 @@ public class User implements Serializable {
 	private Date lastWallPostNotificationTime;
 	private int kabamNaid;
 	private boolean hasReceivedfbReward;
-	private int numAdditionalMonsterSlots;
+//	private int numAdditionalMonsterSlots;
 	private int numBeginnerSalesPurchased;
 	private boolean hasActiveShield;
 	private Date shieldEndTime;
@@ -56,8 +56,8 @@ public class User implements Serializable {
 	private int attacksLost;
 	private int defensesLost;
 	private String facebookId;
-	private int nthExtraSlotsViaFb;
-	
+//	private int nthExtraSlotsViaFb;
+
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, int battlesWon, int battlesLost,
 			int flees, String referralCode, int numReferrals, String udid,
@@ -67,11 +67,10 @@ public class User implements Serializable {
 			int numCoinsRetrievedFromStructs, int numOilRetrievedFromStructs,
 			int numConsecutiveDaysPlayed, int clanId,
 			Date lastWallPostNotificationTime, int kabamNaid,
-			boolean hasReceivedfbReward, int numAdditionalMonsterSlots,
-			int numBeginnerSalesPurchased, boolean hasActiveShield,
-			Date shieldEndTime, int elo, String rank, Date lastTimeQueued,
-			int attacksWon, int defensesWon, int attacksLost, int defensesLost,
-			String facebookId, int nthExtraSlotsViaFb) {
+			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
+			boolean hasActiveShield, Date shieldEndTime, int elo, String rank,
+			Date lastTimeQueued, int attacksWon, int defensesWon, int attacksLost,
+			int defensesLost, String facebookId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -103,7 +102,6 @@ public class User implements Serializable {
 		this.lastWallPostNotificationTime = lastWallPostNotificationTime;
 		this.kabamNaid = kabamNaid;
 		this.hasReceivedfbReward = hasReceivedfbReward;
-		this.numAdditionalMonsterSlots = numAdditionalMonsterSlots;
 		this.numBeginnerSalesPurchased = numBeginnerSalesPurchased;
 		this.hasActiveShield = hasActiveShield;
 		this.shieldEndTime = shieldEndTime;
@@ -115,7 +113,6 @@ public class User implements Serializable {
 		this.attacksLost = attacksLost;
 		this.defensesLost = defensesLost;
 		this.facebookId = facebookId;
-		this.nthExtraSlotsViaFb = nthExtraSlotsViaFb;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -706,7 +703,7 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateRelativelyNumAdditionalMonsterSlotsAndDiamonds(int numAdditionalMonsterSlots, int cost) {
+	/*public boolean updateRelativelyNumAdditionalMonsterSlotsAndDiamonds(int numAdditionalMonsterSlots, int cost) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
@@ -724,7 +721,7 @@ public class User implements Serializable {
 		}
 
 		return false;
-	}
+	}*/
 
 
 	public boolean updateElo(int newElo) {
@@ -755,7 +752,7 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateNthExtraSlotsViaFb(int slotChange) {
+	/*public boolean updateNthExtraSlotsViaFb(int slotChange) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
@@ -770,8 +767,7 @@ public class User implements Serializable {
 		} else {
 			return false;
 		}
-			
-	}
+	}*/
 
 	public int getId() {
 		return id;
@@ -1013,14 +1009,6 @@ public class User implements Serializable {
 		this.hasReceivedfbReward = hasReceivedfbReward;
 	}
 
-	public int getNumAdditionalMonsterSlots() {
-		return numAdditionalMonsterSlots;
-	}
-
-	public void setNumAdditionalMonsterSlots(int numAdditionalMonsterSlots) {
-		this.numAdditionalMonsterSlots = numAdditionalMonsterSlots;
-	}
-
 	public int getNumBeginnerSalesPurchased() {
 		return numBeginnerSalesPurchased;
 	}
@@ -1109,14 +1097,6 @@ public class User implements Serializable {
 		this.facebookId = facebookId;
 	}
 
-	public int getNthExtraSlotsViaFb() {
-		return nthExtraSlotsViaFb;
-	}
-
-	public void setNthExtraSlotsViaFb(int nthExtraSlotsViaFb) {
-		this.nthExtraSlotsViaFb = nthExtraSlotsViaFb;
-	}
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
@@ -1135,14 +1115,12 @@ public class User implements Serializable {
 				+ ", clanId=" + clanId + ", lastWallPostNotificationTime="
 				+ lastWallPostNotificationTime + ", kabamNaid=" + kabamNaid
 				+ ", hasReceivedfbReward=" + hasReceivedfbReward
-				+ ", numAdditionalMonsterSlots=" + numAdditionalMonsterSlots
 				+ ", numBeginnerSalesPurchased=" + numBeginnerSalesPurchased
 				+ ", hasActiveShield=" + hasActiveShield + ", shieldEndTime="
 				+ shieldEndTime + ", elo=" + elo + ", rank=" + rank
 				+ ", lastTimeQueued=" + lastTimeQueued + ", attacksWon=" + attacksWon
 				+ ", defensesWon=" + defensesWon + ", attacksLost=" + attacksLost
-				+ ", defensesLost=" + defensesLost + ", facebookId=" + facebookId
-				+ ", nthExtraSlotsViaFb=" + nthExtraSlotsViaFb + "]";
+				+ ", defensesLost=" + defensesLost + ", facebookId=" + facebookId + "]";
 	}
 
 }

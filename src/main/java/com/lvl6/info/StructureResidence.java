@@ -4,11 +4,7 @@ import java.io.Serializable;
 
 public class StructureResidence implements Serializable {
 
-/**
-	 * 
-	 */
-	private static final long serialVersionUID = 742347051351586126L;
-	//	private static final long serialVersionUID = 742347051351586126L;
+	private static final long serialVersionUID = 5657322728558293593L;
 	private int structId;
 	//how many monster slots this residence gives the user (absolute number)
 	//does not depend on previous lower level structures
@@ -23,20 +19,25 @@ public class StructureResidence implements Serializable {
 	//number of accepted fb invites to get one additional monster slot
 	private int numAcceptedFbInvites;
 	
+	private String occupationName;
+	
+	
 	public StructureResidence(int structId, int numMonsterSlots,
-			int numBonusMonsterSlots, int numGemsRequired, int numAcceptedFbInvites) {
+			int numBonusMonsterSlots, int numGemsRequired, int numAcceptedFbInvites,
+			String occupationName) {
 		super();
 		this.structId = structId;
 		this.numMonsterSlots = numMonsterSlots;
 		this.numBonusMonsterSlots = numBonusMonsterSlots;
 		this.numGemsRequired = numGemsRequired;
 		this.numAcceptedFbInvites = numAcceptedFbInvites;
+		this.occupationName = occupationName;
 	}
 
 	public int getStructId() {
 		return structId;
 	}
-
+	
 	public void setStructId(int structId) {
 		this.structId = structId;
 	}
@@ -73,12 +74,20 @@ public class StructureResidence implements Serializable {
 		this.numAcceptedFbInvites = numAcceptedFbInvites;
 	}
 
+	public String getOccupationName() {
+		return occupationName;
+	}
+
+	public void setOccupationName(String occupationName) {
+		this.occupationName = occupationName;
+	}
+
 	@Override
 	public String toString() {
 		return "StructureResidence [structId=" + structId + ", numMonsterSlots="
 				+ numMonsterSlots + ", numBonusMonsterSlots=" + numBonusMonsterSlots
 				+ ", numGemsRequired=" + numGemsRequired + ", numAcceptedFbInvites="
-				+ numAcceptedFbInvites + "]";
+				+ numAcceptedFbInvites + ", occupationName=" + occupationName + "]";
 	}
-	
+
 }

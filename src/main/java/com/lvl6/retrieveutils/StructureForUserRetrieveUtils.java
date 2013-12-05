@@ -216,9 +216,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     boolean isComplete = rs.getBoolean(i++);
     StructOrientation orientation = StructOrientation.valueOf(rs.getInt(i++));
+    int fbInviteStructLvl = rs.getInt(i++);
 
     return new StructureForUser(id, userId, structId, lastRetrieved, coordinates,
-    		purchaseTime, isComplete, orientation);
+    		purchaseTime, isComplete, orientation, fbInviteStructLvl);
   }
 
 }

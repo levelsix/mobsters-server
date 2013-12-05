@@ -248,8 +248,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
     			inviterUserId + " recipientFacebookId=" + recipientFacebookId, e);
     }
     
-    UserFacebookInviteForSlot invite = new UserFacebookInviteForSlot(id,
-    		inviterUserId, recipientFacebookId, timeOfInvite, timeAccepted); 
+    int userStructId = rs.getInt(i++);
+    int structLvl = rs.getInt(i++);
+    boolean isRedeemed = rs.getBoolean(i++);
+    
+    Date timeRedeemed = null;
+    try {
+    	Timestamp ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		timeRedeemed = new Date(ts.getTime());
+    	}
+    	
+    } catch (Exception e) {
+    	log.error("db error: maybe timeRedeemed is null. id=" + id + " inviterId=" +
+    			inviterUserId + " recipientFacebookId=" + recipientFacebookId, e);
+    }
+    
+    UserFacebookInviteForSlot invite = new UserFacebookInviteForSlot(id, inviterUserId,
+    		recipientFacebookId, timeOfInvite, timeAccepted, userStructId, structLvl,
+    		isRedeemed, timeRedeemed); 
     return invite;
   }
 }

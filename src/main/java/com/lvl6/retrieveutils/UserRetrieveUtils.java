@@ -667,7 +667,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int kabamNaid = rs.getInt(i++);
 
     boolean hasReceivedfbReward = rs.getBoolean(i++);
-    int numAdditionalMonsterSlots = rs.getInt(i++);
+//    int numAdditionalMonsterSlots = rs.getInt(i++);
     int numBeginnerSalesPurchased = rs.getInt(i++);
     boolean hasActiveShield = rs.getBoolean(i++);
     
@@ -699,7 +699,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int attacksLost = rs.getInt(i++);
     int defensesLost = rs.getInt(i++);
     String facebookId = rs.getString(i++);
-    int nthExtraSlotsViaFb = rs.getInt(i++);
+//    int nthExtraSlotsViaFb = rs.getInt(i++);
     
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
@@ -707,10 +707,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		lastBattleNotificationTime, numBadges, isFake, createTime, isAdmin,
     		apsalarId, numCoinsRetrievedFromStructs, numOilRetrievedFromStructs,
     		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
-    		kabamNaid, hasReceivedfbReward, numAdditionalMonsterSlots,
-    		numBeginnerSalesPurchased, hasActiveShield, shieldEndTime, elo,
-    		rank, lastTimeQueued, attacksWon, defensesWon, attacksLost,
-    		defensesLost, facebookId, nthExtraSlotsViaFb);
+    		kabamNaid, hasReceivedfbReward, numBeginnerSalesPurchased,
+    		hasActiveShield, shieldEndTime, elo, rank, lastTimeQueued,
+    		attacksWon, defensesWon, attacksLost, defensesLost, facebookId);
     return user;
   }
 }
