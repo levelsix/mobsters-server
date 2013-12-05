@@ -936,7 +936,7 @@ public class InsertUtils implements InsertUtil{
 			Timestamp t2 = new Timestamp(d2.getTime()); 
 			acceptTimes.add(t2);
 		}
-		
+		/*
 		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__ID, ids);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITER_USER_ID, userIds);
@@ -945,10 +945,12 @@ public class InsertUtils implements InsertUtil{
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_ACCEPTED, acceptTimes);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__NTH_EXTRA_SLOTS_VIA_FB, nthExtraSlotsList);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_OF_ENTRY, timesOfEntries);
-				
+			
 		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 				tableName, insertParams, amount);
 		return numInserted;
+		*/
+		return 0;
 	}
 
 }

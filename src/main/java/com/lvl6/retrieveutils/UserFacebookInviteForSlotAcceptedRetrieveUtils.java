@@ -31,31 +31,33 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private static final String TABLE_NAME = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED;
   
   public static UserFacebookInviteForSlotAccepted getInviteForId(int inviteId) {
-    Connection conn = DBConnection.get().getConnection();
+    /*Connection conn = DBConnection.get().getConnection();
     Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
     absoluteConditionParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__ID, inviteId);
     
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, absoluteConditionParams, TABLE_NAME);
     UserFacebookInviteForSlotAccepted invite = convertRSToInvite(rs);
     DBConnection.get().close(rs, null, conn);
-    return invite;
+    return invite;*/
+  	return null;
   }
   
   public static Map<Integer, UserFacebookInviteForSlotAccepted> getInviteIdsToInvitesForInviterUserId(int userId) {
-  	TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
+  	/*TreeMap<String, Object> paramsToVals = new TreeMap<String, Object>();
   	paramsToVals.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITER_USER_ID, userId);
   	
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
     Map<Integer, UserFacebookInviteForSlotAccepted> idsToInvites = convertRSToInviteIdsToInvites(rs);
     DBConnection.get().close(rs, null, conn);
-    return idsToInvites;
+    return idsToInvites;*/
+  	return null;
   }
   
   //recipientFacebookId assumed to be not null
   public static Map<Integer, UserFacebookInviteForSlotAccepted> getSpecificOrAllInvitesForRecipient(
   		String recipientFacebookId, List<Integer> specificInviteIds) {
-    
+    /*
     StringBuilder querySb = new StringBuilder();
     querySb.append("SELECT * FROM ");
     querySb.append(TABLE_NAME); 
@@ -89,10 +91,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Map<Integer, UserFacebookInviteForSlotAccepted> idsToInvites = convertRSToInviteIdsToInvites(rs);
     DBConnection.get().close(rs, null, conn);
     return idsToInvites;
+    */
+  	return null;
   }
   
   public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId) {
-  	StringBuilder querySb = new StringBuilder();
+  	/*StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__RECIPIENT_FACEBOOK_ID);
   	querySb.append(") FROM ");
@@ -109,11 +113,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
   	List<String> recipientIds = convertRSToStrings(rs);
     DBConnection.get().close(rs, null, conn);
-  	return recipientIds;
+  	return recipientIds;*/
+  	return null;
   }
   
   public static Set<Integer> getUniqueInviterUserIdsForRequesterId(String facebookId) {
-  	StringBuilder querySb = new StringBuilder();
+  	/*StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITER_USER_ID);
   	querySb.append(") FROM ");
@@ -130,7 +135,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
   	Set<Integer> userIds = convertRSToInts(rs);
     DBConnection.get().close(rs, null, conn);
-  	return userIds;
+  	return userIds;*/
+  	return null;
   }
   
   private static UserFacebookInviteForSlotAccepted convertRSToInvite(ResultSet rs) {
