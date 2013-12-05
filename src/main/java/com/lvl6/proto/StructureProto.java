@@ -3839,6 +3839,10 @@ public final class StructureProto {
     // optional int32 numAcceptedFbInvites = 5;
     boolean hasNumAcceptedFbInvites();
     int getNumAcceptedFbInvites();
+    
+    // optional string occupationName = 6;
+    boolean hasOccupationName();
+    String getOccupationName();
   }
   public static final class ResidenceProto extends
       com.google.protobuf.GeneratedMessage
@@ -3922,12 +3926,45 @@ public final class StructureProto {
       return numAcceptedFbInvites_;
     }
     
+    // optional string occupationName = 6;
+    public static final int OCCUPATIONNAME_FIELD_NUMBER = 6;
+    private java.lang.Object occupationName_;
+    public boolean hasOccupationName() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public String getOccupationName() {
+      java.lang.Object ref = occupationName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          occupationName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getOccupationNameBytes() {
+      java.lang.Object ref = occupationName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        occupationName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       numMonsterSlots_ = 0;
       numBonusMonsterSlots_ = 0;
       numGemsRequired_ = 0;
       numAcceptedFbInvites_ = 0;
+      occupationName_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3955,6 +3992,9 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(5, numAcceptedFbInvites_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getOccupationNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -3984,6 +4024,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, numAcceptedFbInvites_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getOccupationNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4124,6 +4168,8 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         numAcceptedFbInvites_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        occupationName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -4186,6 +4232,10 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000010;
         }
         result.numAcceptedFbInvites_ = numAcceptedFbInvites_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.occupationName_ = occupationName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4216,6 +4266,9 @@ public final class StructureProto {
         }
         if (other.hasNumAcceptedFbInvites()) {
           setNumAcceptedFbInvites(other.getNumAcceptedFbInvites());
+        }
+        if (other.hasOccupationName()) {
+          setOccupationName(other.getOccupationName());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4275,6 +4328,11 @@ public final class StructureProto {
             case 40: {
               bitField0_ |= 0x00000010;
               numAcceptedFbInvites_ = input.readInt32();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              occupationName_ = input.readBytes();
               break;
             }
           }
@@ -4455,6 +4513,42 @@ public final class StructureProto {
         numAcceptedFbInvites_ = 0;
         onChanged();
         return this;
+      }
+      
+      // optional string occupationName = 6;
+      private java.lang.Object occupationName_ = "";
+      public boolean hasOccupationName() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public String getOccupationName() {
+        java.lang.Object ref = occupationName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          occupationName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setOccupationName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        occupationName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearOccupationName() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        occupationName_ = getDefaultInstance().getOccupationName();
+        onChanged();
+        return this;
+      }
+      void setOccupationName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000020;
+        occupationName_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ResidenceProto)
@@ -5383,6 +5477,10 @@ public final class StructureProto {
     // optional .com.lvl6.proto.StructOrientation orientation = 8;
     boolean hasOrientation();
     com.lvl6.proto.StructureProto.StructOrientation getOrientation();
+    
+    // optional int32 fbInviteStructLvl = 9;
+    boolean hasFbInviteStructLvl();
+    int getFbInviteStructLvl();
   }
   public static final class FullUserStructureProto extends
       com.google.protobuf.GeneratedMessage
@@ -5496,6 +5594,16 @@ public final class StructureProto {
       return orientation_;
     }
     
+    // optional int32 fbInviteStructLvl = 9;
+    public static final int FBINVITESTRUCTLVL_FIELD_NUMBER = 9;
+    private int fbInviteStructLvl_;
+    public boolean hasFbInviteStructLvl() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public int getFbInviteStructLvl() {
+      return fbInviteStructLvl_;
+    }
+    
     private void initFields() {
       userStructId_ = 0;
       userId_ = 0;
@@ -5505,6 +5613,7 @@ public final class StructureProto {
       isComplete_ = false;
       coordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      fbInviteStructLvl_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5541,6 +5650,9 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeEnum(8, orientation_.getNumber());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(9, fbInviteStructLvl_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -5582,6 +5694,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(8, orientation_.getNumber());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, fbInviteStructLvl_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5728,6 +5844,8 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
         bitField0_ = (bitField0_ & ~0x00000080);
+        fbInviteStructLvl_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       
@@ -5802,6 +5920,10 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000080;
         }
         result.orientation_ = orientation_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.fbInviteStructLvl_ = fbInviteStructLvl_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5841,6 +5963,9 @@ public final class StructureProto {
         }
         if (other.hasOrientation()) {
           setOrientation(other.getOrientation());
+        }
+        if (other.hasFbInviteStructLvl()) {
+          setFbInviteStructLvl(other.getFbInviteStructLvl());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5921,6 +6046,11 @@ public final class StructureProto {
                 bitField0_ |= 0x00000080;
                 orientation_ = value;
               }
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              fbInviteStructLvl_ = input.readInt32();
               break;
             }
           }
@@ -6165,6 +6295,27 @@ public final class StructureProto {
       public Builder clearOrientation() {
         bitField0_ = (bitField0_ & ~0x00000080);
         orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 fbInviteStructLvl = 9;
+      private int fbInviteStructLvl_ ;
+      public boolean hasFbInviteStructLvl() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public int getFbInviteStructLvl() {
+        return fbInviteStructLvl_;
+      }
+      public Builder setFbInviteStructLvl(int value) {
+        bitField0_ |= 0x00000100;
+        fbInviteStructLvl_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFbInviteStructLvl() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        fbInviteStructLvl_ = 0;
         onChanged();
         return this;
       }
@@ -6657,30 +6808,31 @@ public final class StructureProto {
       "\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017healthPerSecond\030\003" +
       " \001(\002\"n\n\010LabProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
       "om.lvl6.proto.StructureInfoProto\022\021\n\tqueu" +
-      "eSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\"\266\001\n" +
+      "eSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\"\316\001\n" +
       "\016ResidenceProto\0226\n\nstructInfo\030\001 \001(\0132\".co",
       "m.lvl6.proto.StructureInfoProto\022\027\n\017numMo" +
       "nsterSlots\030\002 \001(\005\022\034\n\024numBonusMonsterSlots" +
       "\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n\024numAc" +
-      "ceptedFbInvites\030\005 \001(\005\"\242\002\n\rTownHallProto\022" +
-      "6\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.Str" +
-      "uctureInfoProto\022 \n\030numResourceOneGenerat" +
-      "ors\030\002 \001(\005\022\036\n\026numResourceOneStorages\030\003 \001(" +
-      "\005\022 \n\030numResourceTwoGenerators\030\004 \001(\005\022\036\n\026n" +
-      "umResourceTwoStorages\030\005 \001(\005\022\024\n\014numHospit" +
-      "als\030\006 \001(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numM",
-      "onsterSlots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\"\377\001\n\026F" +
-      "ullUserStructureProto\022\024\n\014userStructId\030\001 " +
-      "\001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n" +
-      "\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001" +
-      "(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinates\030\007 " +
-      "\001(\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013" +
-      "orientation\030\010 \001(\0162!.com.lvl6.proto.Struc" +
-      "tOrientation\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001" +
-      "(\002\022\t\n\001y\030\002 \001(\002*+\n\014ResourceType\022\010\n\004CASH\020\001\022" +
-      "\007\n\003OIL\020\002\022\010\n\004GEMS\020\003*3\n\021StructOrientation\022",
-      "\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016Struc" +
-      "tureProto"
+      "ceptedFbInvites\030\005 \001(\005\022\026\n\016occupationName\030" +
+      "\006 \001(\t\"\242\002\n\rTownHallProto\0226\n\nstructInfo\030\001 " +
+      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022" +
+      " \n\030numResourceOneGenerators\030\002 \001(\005\022\036\n\026num" +
+      "ResourceOneStorages\030\003 \001(\005\022 \n\030numResource" +
+      "TwoGenerators\030\004 \001(\005\022\036\n\026numResourceTwoSto" +
+      "rages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnum",
+      "Residences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(" +
+      "\005\022\017\n\007numLabs\030\t \001(\005\"\232\002\n\026FullUserStructure" +
+      "Proto\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006userId\030\002 " +
+      "\001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004" +
+      " \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisComplete" +
+      "\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl6.p" +
+      "roto.CoordinateProto\0226\n\013orientation\030\010 \001(" +
+      "\0162!.com.lvl6.proto.StructOrientation\022\031\n\021" +
+      "fbInviteStructLvl\030\t \001(\005\"\'\n\017CoordinatePro" +
+      "to\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002*+\n\014ResourceType",
+      "\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003*3\n\021StructO" +
+      "rientation\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2" +
+      "\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6732,7 +6884,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_ResidenceProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ResidenceProto_descriptor,
-              new java.lang.String[] { "StructInfo", "NumMonsterSlots", "NumBonusMonsterSlots", "NumGemsRequired", "NumAcceptedFbInvites", },
+              new java.lang.String[] { "StructInfo", "NumMonsterSlots", "NumBonusMonsterSlots", "NumGemsRequired", "NumAcceptedFbInvites", "OccupationName", },
               com.lvl6.proto.StructureProto.ResidenceProto.class,
               com.lvl6.proto.StructureProto.ResidenceProto.Builder.class);
           internal_static_com_lvl6_proto_TownHallProto_descriptor =
@@ -6748,7 +6900,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_FullUserStructureProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserStructureProto_descriptor,
-              new java.lang.String[] { "UserStructId", "UserId", "StructId", "LastRetrieved", "PurchaseTime", "IsComplete", "Coordinates", "Orientation", },
+              new java.lang.String[] { "UserStructId", "UserId", "StructId", "LastRetrieved", "PurchaseTime", "IsComplete", "Coordinates", "Orientation", "FbInviteStructLvl", },
               com.lvl6.proto.StructureProto.FullUserStructureProto.class,
               com.lvl6.proto.StructureProto.FullUserStructureProto.Builder.class);
           internal_static_com_lvl6_proto_CoordinateProto_descriptor =
