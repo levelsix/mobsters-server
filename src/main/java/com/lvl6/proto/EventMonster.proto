@@ -224,9 +224,16 @@ message IncreaseMonsterInventorySlotResponseProto {
 
 //NOTE: NO LOCK IS ACQUIRED FOR FB FRIENDS WHEN INSERTING INTO
 // user_facebook_invite_for_slot TABLE
+//invites will now be tied to a user struct
 message InviteFbFriendsForSlotsRequestProto {
 	optional MinimumUserProtoWithFacebookId sender = 1;
-	repeated string fbFriendIds = 2;		
+	repeated FacebookInviteStructure invites = 2;
+
+	message FacebookInviteStructure {
+		optional string fbFriendId = 1;
+		optional int32 userStructId = 2;
+		optional int32 userStructLvl = 3;
+	}		
 }
 
 //server sends this to all the recipients in fbFriendIds that have a user id
