@@ -656,7 +656,10 @@ public class CreateInfoProtoUtils {
   	rpb.setNumBonusMonsterSlots(sr.getNumBonusMonsterSlots());
   	rpb.setNumGemsRequired(sr.getNumGemsRequired());
   	rpb.setNumAcceptedFbInvites(sr.getNumAcceptedFbInvites());
-  	
+  	String str = sr.getOccupationName();
+  	if (null != str) {
+  		rpb.setOccupationName(str);
+  	}
   	return rpb.build();
   }
   
