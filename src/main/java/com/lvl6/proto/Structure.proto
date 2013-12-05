@@ -109,6 +109,8 @@ message ResidenceProto {
 	
 	//number of accepted fb invites to get one additional monster slot
 	optional int32 numAcceptedFbInvites = 5;
+	
+	optional string occupationName = 6;
 }
 
 //------------------------------------------------------------------------------------------
@@ -140,6 +142,7 @@ message FullUserStructureProto {
 	optional bool isComplete = 6;
 	optional CoordinateProto coordinates = 7;
 	optional StructOrientation orientation = 8;
+	optional int32 fbInviteStructLvl = 9;
 }
 
 //------------------------------------------------------------------------------------------

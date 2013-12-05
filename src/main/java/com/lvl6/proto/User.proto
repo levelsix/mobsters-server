@@ -52,6 +52,8 @@ message UserFacebookInviteForSlotProto {
 	optional string recipientFacebookId = 3;
 	optional int64 timeOfInvite = 4;
 	optional int64 timeAccepted = 5;
+	optional int32 userStructId = 6;
+	optional int32 structLvl = 7;
 }
 
 //------------------------------------------------------------------------------------------
@@ -87,7 +89,7 @@ message FullUserProto {
 	//optional int64 lastWallPostNotificationTime lwpnt = 26;
 	//optional string kabamNaid = 27;
 	optional bool hasReceivedfbReward = 28;
-	optional int32 numAdditionalMonsterSlots = 29;
+	//optional int32 numAdditionalMonsterSlots = 29; //get rid of this
 	optional int32 numBeginnerSalesPurchased = 30;
 	optional bool hasActiveShield = 31; 
 	optional int64 shieldEndTime = 32;
@@ -114,7 +116,7 @@ message FullUserProto {
 	optional int32 numConsecutiveDaysPlayed = 24;
 	optional int64 lastWallPostNotificationTime = 26;
 	optional string kabamNaid = 27;
-	optional int32 nthExtraSlotsViaFb = 41;
+	//optional int32 nthExtraSlotsViaFb = 41; //get rid of this
 }
 
 //------------------------------------------------------------------------------------------
