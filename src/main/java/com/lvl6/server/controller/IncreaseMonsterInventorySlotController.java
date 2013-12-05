@@ -186,7 +186,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites,
   		Map<String, Integer> money) {
   	boolean success = false;
-  	
+  	/*
   	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
   		int n = ControllerConstants.MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS;
   		//get the three earliest accepted invites
@@ -227,7 +227,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		if (success && 0 != cost) {
   				money.put(MiscMethods.gems, cost);
   		}
-  	}
+  	} */
   	return success;
   }
   
