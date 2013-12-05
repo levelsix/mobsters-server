@@ -53,7 +53,10 @@ message UserFacebookInviteForSlotProto {
 	optional int64 timeOfInvite = 4;
 	optional int64 timeAccepted = 5;
 	optional int32 userStructId = 6;
-	optional int32 structLvl = 7;
+	
+	//also represents the user struct lvl,
+	//most likely not the current struct lvl
+	optional int32 structFbLvl = 7;
 }
 
 //------------------------------------------------------------------------------------------
