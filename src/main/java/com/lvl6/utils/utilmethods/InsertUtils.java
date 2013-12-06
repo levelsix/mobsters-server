@@ -894,7 +894,7 @@ public class InsertUtils implements InsertUtil{
 
 	@Override
 	public int insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
-			Timestamp curTime) {
+			Timestamp curTime, List<Integer> userStructIds, List<Integer> userStructsFbLvl) {
 		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
 		int amount = facebookIds.size();
 		
@@ -905,6 +905,10 @@ public class InsertUtils implements InsertUtil{
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, inviterIdList);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID, facebookIds);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE, timeOfInviteList);
+		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_ID, userStructIds);
+		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__STRUCT_FB_LVL, userStructsFbLvl);
+		
+		
 		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 				tableName, insertParams, amount);
 		return numInserted;

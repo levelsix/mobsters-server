@@ -3,6 +3,7 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,9 @@ import com.lvl6.events.request.InviteFbFriendsForSlotsRequestEvent;
 import com.lvl6.events.response.InviteFbFriendsForSlotsResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
+import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto;
+import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus;
@@ -55,7 +58,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     //get values sent from the client (the request proto)
     MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
     int userId = senderProto.getMinUserProto().getUserId();
-    List<String> fbIdsOfFriends = reqProto.getFbFriendIdsList();
+    List<FacebookInviteStructure> invites = reqProto.getInvitesList();
+    
+    Map<String, Integer> fbIdsToUserStructIds = new HashMap<String, Integer>();
+    Map<String, Integer> fbIdsToUserStructFbLvl = new HashMap<String, Integer>();
+    List<String> fbIdsOfFriends = demultiplexFacebookInviteStructure(invites,
+    		fbIdsToUserStructIds, fbIdsToUserStructFbLvl);
+    
+    
     Timestamp curTime = new Timestamp((new Date()).getTime());
 
     //set some values to send to the client (the response proto)
@@ -68,18 +78,24 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       //get all the invites the user sent
       boolean acceptedInvitesOnly = false;
+      boolean filterByRedeemed = false;
+      boolean isRedeemed = false;
       Map<Integer, UserFacebookInviteForSlot> idsToInvites = 
       		UserFacebookInviteForSlotRetrieveUtils.getInviteIdsToInvitesForInviterUserId(
-      				userId, acceptedInvitesOnly);
+      				userId, acceptedInvitesOnly, filterByRedeemed, isRedeemed);
       
-      //contains the facebook ids of new users the user can invite
+      //will contain the facebook ids of new users the user can invite
+      //new is defined as: for each facebookId the tuple
+      //(inviterId, recipientId)=(userId, facebookId) 
+      //doesn't already exist in the table 
       List<String> newFacebookIdsToInvite = new ArrayList<String>();
       boolean legit = checkLegit(resBuilder, userId, aUser, fbIdsOfFriends,
       		idsToInvites, newFacebookIdsToInvite);
 
       boolean successful = false;
       if(legit) {
-    	  successful = writeChangesToDb(aUser, newFacebookIdsToInvite, curTime);
+    	  successful = writeChangesToDb(aUser, newFacebookIdsToInvite, curTime,
+    	  		fbIdsToUserStructIds, fbIdsToUserStructFbLvl);
       }
       
       if (successful) {
@@ -122,6 +138,23 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       server.unlockPlayer(userId, this.getClass().getSimpleName());
     }
   }
+  
+  private List<String> demultiplexFacebookInviteStructure(List<FacebookInviteStructure> invites,
+  		Map<String, Integer> fbIdsToUserStructIds, Map<String, Integer> fbIdsToUserStructFbLvl) {
+  	
+  	List<String> retVal = new ArrayList<String>();
+  	for (FacebookInviteStructure fis : invites) {
+  		String fbId = fis.getFbFriendId();
+  		
+  		int userStructId = fis.getUserStructId();
+  		int userStructFbLvl = fis.getUserStructFbLvl();
+  		
+  		retVal.add(fbId);
+  		fbIdsToUserStructIds.put(fbId, userStructId);
+  		fbIdsToUserStructFbLvl.put(fbId, userStructFbLvl);
+  	}
+  	return retVal;
+  }
 
 
   /*
@@ -156,21 +189,25 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	//running collection of recipient ids already seen
   	Set<String> processedRecipientIds = new HashSet<String>();
   	
+  	//for each recipientId separate the unique ones from the duplicates
   	for (Integer inviteId : idsToInvites.keySet()) {
   		UserFacebookInviteForSlot invite = idsToInvites.get(inviteId);
   		String recipientId = invite.getRecipientFacebookId(); 
   		
+  		//if seen this recipientId place it in the duplicates list
   		if (processedRecipientIds.contains(recipientId)) {
   			//done to ensure a user does not invite another user more than once
   			//i.e. tuple (inviterId, recipientId) is unique
   			inviteIdsOfDuplicateInvites.add(inviteId);
   		} else {
-  			//keep track of the recipientIds seen so far
+  			//keep track of the recipientIds seen so far (the unique ones)
   			processedRecipientIds.add(recipientId);
   		}
   	}
   	
   	//DELETE THE DUPLICATE INVITES THAT ARE ALREADY IN DB
+  	//maybe need to determine which invites should be deleted, as in most recent or somethings
+  	//because right now, any of the nonunique invites could be deleted
   	if (!inviteIdsOfDuplicateInvites.isEmpty()) {
   		int num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsOfDuplicateInvites);
   		log.warn("num duplicate invites deleted: " + num);
@@ -191,14 +228,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private boolean writeChangesToDb(User aUser, List<String> newFacebookIdsToInvite, 
-  		Timestamp curTime) {
+  		Timestamp curTime, Map<String, Integer> fbIdsToUserStructIds,
+  		Map<String, Integer> fbIdsToUserStructsFbLvl) {
   	if (newFacebookIdsToInvite.isEmpty()) {
   		return true;
   	}
+  	List<Integer> userStructIds = MiscMethods.getValsInOrder(newFacebookIdsToInvite,
+  			fbIdsToUserStructIds);
+  	List<Integer> userStructsFbLvl = MiscMethods.getValsInOrder(newFacebookIdsToInvite,
+  			fbIdsToUserStructsFbLvl);
   	
   	int userId = aUser.getId();
   	int num = InsertUtils.get().insertIntoUserFbInviteForSlot(userId,
-  			newFacebookIdsToInvite, curTime);
+  			newFacebookIdsToInvite, curTime, userStructIds, userStructsFbLvl);
   	
   	int expectedNum = newFacebookIdsToInvite.size();
   	if (num != expectedNum) {

@@ -11227,10 +11227,15 @@ public final class EventMonsterProto {
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookIdOrBuilder getSenderOrBuilder();
     
-    // repeated string fbFriendIds = 2;
-    java.util.List<String> getFbFriendIdsList();
-    int getFbFriendIdsCount();
-    String getFbFriendIds(int index);
+    // repeated .com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure invites = 2;
+    java.util.List<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> 
+        getInvitesList();
+    com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure getInvites(int index);
+    int getInvitesCount();
+    java.util.List<? extends com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder> 
+        getInvitesOrBuilderList();
+    com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder getInvitesOrBuilder(
+        int index);
   }
   public static final class InviteFbFriendsForSlotsRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -11260,6 +11265,495 @@ public final class EventMonsterProto {
       return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_fieldAccessorTable;
     }
     
+    public interface FacebookInviteStructureOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+      
+      // optional string fbFriendId = 1;
+      boolean hasFbFriendId();
+      String getFbFriendId();
+      
+      // optional int32 userStructId = 2;
+      boolean hasUserStructId();
+      int getUserStructId();
+      
+      // optional int32 userStructFbLvl = 3;
+      boolean hasUserStructFbLvl();
+      int getUserStructFbLvl();
+    }
+    public static final class FacebookInviteStructure extends
+        com.google.protobuf.GeneratedMessage
+        implements FacebookInviteStructureOrBuilder {
+      // Use FacebookInviteStructure.newBuilder() to construct.
+      private FacebookInviteStructure(Builder builder) {
+        super(builder);
+      }
+      private FacebookInviteStructure(boolean noInit) {}
+      
+      private static final FacebookInviteStructure defaultInstance;
+      public static FacebookInviteStructure getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      public FacebookInviteStructure getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_fieldAccessorTable;
+      }
+      
+      private int bitField0_;
+      // optional string fbFriendId = 1;
+      public static final int FBFRIENDID_FIELD_NUMBER = 1;
+      private java.lang.Object fbFriendId_;
+      public boolean hasFbFriendId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getFbFriendId() {
+        java.lang.Object ref = fbFriendId_;
+        if (ref instanceof String) {
+          return (String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+            fbFriendId_ = s;
+          }
+          return s;
+        }
+      }
+      private com.google.protobuf.ByteString getFbFriendIdBytes() {
+        java.lang.Object ref = fbFriendId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          fbFriendId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      
+      // optional int32 userStructId = 2;
+      public static final int USERSTRUCTID_FIELD_NUMBER = 2;
+      private int userStructId_;
+      public boolean hasUserStructId() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getUserStructId() {
+        return userStructId_;
+      }
+      
+      // optional int32 userStructFbLvl = 3;
+      public static final int USERSTRUCTFBLVL_FIELD_NUMBER = 3;
+      private int userStructFbLvl_;
+      public boolean hasUserStructFbLvl() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getUserStructFbLvl() {
+        return userStructFbLvl_;
+      }
+      
+      private void initFields() {
+        fbFriendId_ = "";
+        userStructId_ = 0;
+        userStructFbLvl_ = 0;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+        
+        memoizedIsInitialized = 1;
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getFbFriendIdBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeInt32(2, userStructId_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(3, userStructFbLvl_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getFbFriendIdBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(2, userStructId_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, userStructFbLvl_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+      
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+      
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventMonsterProto.internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_fieldAccessorTable;
+        }
+        
+        // Construct using com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+        
+        private Builder(BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+        
+        public Builder clear() {
+          super.clear();
+          fbFriendId_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          userStructId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          userStructFbLvl_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+        
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+        
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.getDescriptor();
+        }
+        
+        public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure getDefaultInstanceForType() {
+          return com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.getDefaultInstance();
+        }
+        
+        public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure build() {
+          com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+        
+        private com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return result;
+        }
+        
+        public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure buildPartial() {
+          com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure result = new com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.fbFriendId_ = fbFriendId_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.userStructId_ = userStructId_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.userStructFbLvl_ = userStructFbLvl_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure) {
+            return mergeFrom((com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure other) {
+          if (other == com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.getDefaultInstance()) return this;
+          if (other.hasFbFriendId()) {
+            setFbFriendId(other.getFbFriendId());
+          }
+          if (other.hasUserStructId()) {
+            setUserStructId(other.getUserStructId());
+          }
+          if (other.hasUserStructFbLvl()) {
+            setUserStructFbLvl(other.getUserStructFbLvl());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public final boolean isInitialized() {
+          return true;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                fbFriendId_ = input.readBytes();
+                break;
+              }
+              case 16: {
+                bitField0_ |= 0x00000002;
+                userStructId_ = input.readInt32();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                userStructFbLvl_ = input.readInt32();
+                break;
+              }
+            }
+          }
+        }
+        
+        private int bitField0_;
+        
+        // optional string fbFriendId = 1;
+        private java.lang.Object fbFriendId_ = "";
+        public boolean hasFbFriendId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public String getFbFriendId() {
+          java.lang.Object ref = fbFriendId_;
+          if (!(ref instanceof String)) {
+            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            fbFriendId_ = s;
+            return s;
+          } else {
+            return (String) ref;
+          }
+        }
+        public Builder setFbFriendId(String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          fbFriendId_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearFbFriendId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          fbFriendId_ = getDefaultInstance().getFbFriendId();
+          onChanged();
+          return this;
+        }
+        void setFbFriendId(com.google.protobuf.ByteString value) {
+          bitField0_ |= 0x00000001;
+          fbFriendId_ = value;
+          onChanged();
+        }
+        
+        // optional int32 userStructId = 2;
+        private int userStructId_ ;
+        public boolean hasUserStructId() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public int getUserStructId() {
+          return userStructId_;
+        }
+        public Builder setUserStructId(int value) {
+          bitField0_ |= 0x00000002;
+          userStructId_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearUserStructId() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          userStructId_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // optional int32 userStructFbLvl = 3;
+        private int userStructFbLvl_ ;
+        public boolean hasUserStructFbLvl() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public int getUserStructFbLvl() {
+          return userStructFbLvl_;
+        }
+        public Builder setUserStructFbLvl(int value) {
+          bitField0_ |= 0x00000004;
+          userStructFbLvl_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearUserStructFbLvl() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          userStructFbLvl_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // @@protoc_insertion_point(builder_scope:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure)
+      }
+      
+      static {
+        defaultInstance = new FacebookInviteStructure(true);
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure)
+    }
+    
     private int bitField0_;
     // optional .com.lvl6.proto.MinimumUserProtoWithFacebookId sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
@@ -11274,23 +11768,30 @@ public final class EventMonsterProto {
       return sender_;
     }
     
-    // repeated string fbFriendIds = 2;
-    public static final int FBFRIENDIDS_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList fbFriendIds_;
-    public java.util.List<String>
-        getFbFriendIdsList() {
-      return fbFriendIds_;
+    // repeated .com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure invites = 2;
+    public static final int INVITES_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> invites_;
+    public java.util.List<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> getInvitesList() {
+      return invites_;
     }
-    public int getFbFriendIdsCount() {
-      return fbFriendIds_.size();
+    public java.util.List<? extends com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder> 
+        getInvitesOrBuilderList() {
+      return invites_;
     }
-    public String getFbFriendIds(int index) {
-      return fbFriendIds_.get(index);
+    public int getInvitesCount() {
+      return invites_.size();
+    }
+    public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure getInvites(int index) {
+      return invites_.get(index);
+    }
+    public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder getInvitesOrBuilder(
+        int index) {
+      return invites_.get(index);
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId.getDefaultInstance();
-      fbFriendIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      invites_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -11307,8 +11808,8 @@ public final class EventMonsterProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, sender_);
       }
-      for (int i = 0; i < fbFriendIds_.size(); i++) {
-        output.writeBytes(2, fbFriendIds_.getByteString(i));
+      for (int i = 0; i < invites_.size(); i++) {
+        output.writeMessage(2, invites_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -11323,14 +11824,9 @@ public final class EventMonsterProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, sender_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < fbFriendIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(fbFriendIds_.getByteString(i));
-        }
-        size += dataSize;
-        size += 1 * getFbFriendIdsList().size();
+      for (int i = 0; i < invites_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, invites_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -11449,6 +11945,7 @@ public final class EventMonsterProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getInvitesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -11463,8 +11960,12 @@ public final class EventMonsterProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        fbFriendIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        if (invitesBuilder_ == null) {
+          invites_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          invitesBuilder_.clear();
+        }
         return this;
       }
       
@@ -11511,12 +12012,15 @@ public final class EventMonsterProto {
         } else {
           result.sender_ = senderBuilder_.build();
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          fbFriendIds_ = new com.google.protobuf.UnmodifiableLazyStringList(
-              fbFriendIds_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (invitesBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            invites_ = java.util.Collections.unmodifiableList(invites_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.invites_ = invites_;
+        } else {
+          result.invites_ = invitesBuilder_.build();
         }
-        result.fbFriendIds_ = fbFriendIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -11536,15 +12040,31 @@ public final class EventMonsterProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (!other.fbFriendIds_.isEmpty()) {
-          if (fbFriendIds_.isEmpty()) {
-            fbFriendIds_ = other.fbFriendIds_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureFbFriendIdsIsMutable();
-            fbFriendIds_.addAll(other.fbFriendIds_);
+        if (invitesBuilder_ == null) {
+          if (!other.invites_.isEmpty()) {
+            if (invites_.isEmpty()) {
+              invites_ = other.invites_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureInvitesIsMutable();
+              invites_.addAll(other.invites_);
+            }
+            onChanged();
           }
-          onChanged();
+        } else {
+          if (!other.invites_.isEmpty()) {
+            if (invitesBuilder_.isEmpty()) {
+              invitesBuilder_.dispose();
+              invitesBuilder_ = null;
+              invites_ = other.invites_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              invitesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getInvitesFieldBuilder() : null;
+            } else {
+              invitesBuilder_.addAllMessages(other.invites_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -11587,8 +12107,9 @@ public final class EventMonsterProto {
               break;
             }
             case 18: {
-              ensureFbFriendIdsIsMutable();
-              fbFriendIds_.add(input.readBytes());
+              com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder subBuilder = com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addInvites(subBuilder.buildPartial());
               break;
             }
           }
@@ -11687,60 +12208,190 @@ public final class EventMonsterProto {
         return senderBuilder_;
       }
       
-      // repeated string fbFriendIds = 2;
-      private com.google.protobuf.LazyStringList fbFriendIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureFbFriendIdsIsMutable() {
+      // repeated .com.lvl6.proto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure invites = 2;
+      private java.util.List<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> invites_ =
+        java.util.Collections.emptyList();
+      private void ensureInvitesIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          fbFriendIds_ = new com.google.protobuf.LazyStringArrayList(fbFriendIds_);
+          invites_ = new java.util.ArrayList<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure>(invites_);
           bitField0_ |= 0x00000002;
          }
       }
-      public java.util.List<String>
-          getFbFriendIdsList() {
-        return java.util.Collections.unmodifiableList(fbFriendIds_);
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder> invitesBuilder_;
+      
+      public java.util.List<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> getInvitesList() {
+        if (invitesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(invites_);
+        } else {
+          return invitesBuilder_.getMessageList();
+        }
       }
-      public int getFbFriendIdsCount() {
-        return fbFriendIds_.size();
+      public int getInvitesCount() {
+        if (invitesBuilder_ == null) {
+          return invites_.size();
+        } else {
+          return invitesBuilder_.getCount();
+        }
       }
-      public String getFbFriendIds(int index) {
-        return fbFriendIds_.get(index);
+      public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure getInvites(int index) {
+        if (invitesBuilder_ == null) {
+          return invites_.get(index);
+        } else {
+          return invitesBuilder_.getMessage(index);
+        }
       }
-      public Builder setFbFriendIds(
-          int index, String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureFbFriendIdsIsMutable();
-        fbFriendIds_.set(index, value);
-        onChanged();
+      public Builder setInvites(
+          int index, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure value) {
+        if (invitesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInvitesIsMutable();
+          invites_.set(index, value);
+          onChanged();
+        } else {
+          invitesBuilder_.setMessage(index, value);
+        }
         return this;
       }
-      public Builder addFbFriendIds(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureFbFriendIdsIsMutable();
-        fbFriendIds_.add(value);
-        onChanged();
+      public Builder setInvites(
+          int index, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder builderForValue) {
+        if (invitesBuilder_ == null) {
+          ensureInvitesIsMutable();
+          invites_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          invitesBuilder_.setMessage(index, builderForValue.build());
+        }
         return this;
       }
-      public Builder addAllFbFriendIds(
-          java.lang.Iterable<String> values) {
-        ensureFbFriendIdsIsMutable();
-        super.addAll(values, fbFriendIds_);
-        onChanged();
+      public Builder addInvites(com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure value) {
+        if (invitesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInvitesIsMutable();
+          invites_.add(value);
+          onChanged();
+        } else {
+          invitesBuilder_.addMessage(value);
+        }
         return this;
       }
-      public Builder clearFbFriendIds() {
-        fbFriendIds_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        onChanged();
+      public Builder addInvites(
+          int index, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure value) {
+        if (invitesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInvitesIsMutable();
+          invites_.add(index, value);
+          onChanged();
+        } else {
+          invitesBuilder_.addMessage(index, value);
+        }
         return this;
       }
-      void addFbFriendIds(com.google.protobuf.ByteString value) {
-        ensureFbFriendIdsIsMutable();
-        fbFriendIds_.add(value);
-        onChanged();
+      public Builder addInvites(
+          com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder builderForValue) {
+        if (invitesBuilder_ == null) {
+          ensureInvitesIsMutable();
+          invites_.add(builderForValue.build());
+          onChanged();
+        } else {
+          invitesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addInvites(
+          int index, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder builderForValue) {
+        if (invitesBuilder_ == null) {
+          ensureInvitesIsMutable();
+          invites_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          invitesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllInvites(
+          java.lang.Iterable<? extends com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure> values) {
+        if (invitesBuilder_ == null) {
+          ensureInvitesIsMutable();
+          super.addAll(values, invites_);
+          onChanged();
+        } else {
+          invitesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearInvites() {
+        if (invitesBuilder_ == null) {
+          invites_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          invitesBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeInvites(int index) {
+        if (invitesBuilder_ == null) {
+          ensureInvitesIsMutable();
+          invites_.remove(index);
+          onChanged();
+        } else {
+          invitesBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder getInvitesBuilder(
+          int index) {
+        return getInvitesFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder getInvitesOrBuilder(
+          int index) {
+        if (invitesBuilder_ == null) {
+          return invites_.get(index);  } else {
+          return invitesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder> 
+           getInvitesOrBuilderList() {
+        if (invitesBuilder_ != null) {
+          return invitesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(invites_);
+        }
+      }
+      public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder addInvitesBuilder() {
+        return getInvitesFieldBuilder().addBuilder(
+            com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.getDefaultInstance());
+      }
+      public com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder addInvitesBuilder(
+          int index) {
+        return getInvitesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder> 
+           getInvitesBuilderList() {
+        return getInvitesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder> 
+          getInvitesFieldBuilder() {
+        if (invitesBuilder_ == null) {
+          invitesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder, com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructureOrBuilder>(
+                  invites_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          invites_ = null;
+        }
+        return invitesBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.InviteFbFriendsForSlotsRequestProto)
@@ -16014,6 +16665,11 @@ public final class EventMonsterProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -16161,51 +16817,55 @@ public final class EventMonsterProto {
       "rInventorySlotStatus\"\206\001\n\"IncreaseMonster" +
       "InventorySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL" +
       "_INSUFFICIENT_FUNDS\020\002\022&\n\"FAIL_INSUFFICIE" +
-      "NT_FACEBOOK_INVITES\020\003\022\016\n\nFAIL_OTHER\020\004\"z\n" +
-      "#InviteFbFriendsForSlotsRequestProto\022>\n\006" +
-      "sender\030\001 \001(\0132..com.lvl6.proto.MinimumUse" +
-      "rProtoWithFacebookId\022\023\n\013fbFriendIds\030\002 \003(" +
-      "\t\"\210\002\n$InviteFbFriendsForSlotsResponsePro" +
-      "to\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Mini",
-      "mumUserProtoWithFacebookId\022b\n\006status\030\002 \001" +
-      "(\0162R.com.lvl6.proto.InviteFbFriendsForSl" +
-      "otsResponseProto.InviteFbFriendsForSlots" +
-      "Status\"<\n\035InviteFbFriendsForSlotsStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\243\001\n+AcceptA" +
-      "ndRejectFbInviteForSlotsRequestProto\022>\n\006" +
-      "sender\030\001 \001(\0132..com.lvl6.proto.MinimumUse" +
-      "rProtoWithFacebookId\022\031\n\021acceptedInviteId" +
-      "s\030\002 \003(\005\022\031\n\021rejectedInviteIds\030\003 \003(\005\"\326\002\n,A" +
-      "cceptAndRejectFbInviteForSlotsResponsePr",
-      "oto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Min" +
-      "imumUserProtoWithFacebookId\022r\n\006status\030\002 " +
-      "\001(\0162b.com.lvl6.proto.AcceptAndRejectFbIn" +
-      "viteForSlotsResponseProto.AcceptAndRejec" +
-      "tFbInviteForSlotsStatus\"r\n%AcceptAndReje" +
-      "ctFbInviteForSlotsStatus\022\013\n\007SUCCESS\020\001\022\020\n" +
-      "\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BEEN_USE" +
-      "D\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$CombineUserMonst" +
-      "erPiecesRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
-      "om.lvl6.proto.MinimumUserProto\022\026\n\016userMo",
-      "nsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%Comb" +
-      "ineUserMonsterPiecesResponseProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Com" +
-      "bineUserMonsterPiecesResponseProto.Combi" +
-      "neUserMonsterPiecesStatus\"\205\001\n\036CombineUse" +
-      "rMonsterPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAI" +
-      "L_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_THAN_" +
-      "ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTHER\020" +
-      "\004\"\213\001\n\033SellUserMonsterRequestProto\0220\n\006sen",
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.proto.Mini" +
-      "mumUserMonsterSellProto\"\332\001\n\034SellUserMons" +
-      "terResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022R\n\006status\030\002 \001" +
-      "(\0162B.com.lvl6.proto.SellUserMonsterRespo" +
-      "nseProto.SellUserMonsterStatus\"4\n\025SellUs" +
-      "erMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTH" +
-      "ER\020\002B\023B\021EventMonsterProto"
+      "NT_FACEBOOK_INVITES\020\003\022\016\n\nFAIL_OTHER\020\004\"\241\002" +
+      "\n#InviteFbFriendsForSlotsRequestProto\022>\n" +
+      "\006sender\030\001 \001(\0132..com.lvl6.proto.MinimumUs" +
+      "erProtoWithFacebookId\022\\\n\007invites\030\002 \003(\0132K" +
+      ".com.lvl6.proto.InviteFbFriendsForSlotsR" +
+      "equestProto.FacebookInviteStructure\032\\\n\027F",
+      "acebookInviteStructure\022\022\n\nfbFriendId\030\001 \001" +
+      "(\t\022\024\n\014userStructId\030\002 \001(\005\022\027\n\017userStructFb" +
+      "Lvl\030\003 \001(\005\"\210\002\n$InviteFbFriendsForSlotsRes" +
+      "ponseProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.pr" +
+      "oto.MinimumUserProtoWithFacebookId\022b\n\006st" +
+      "atus\030\002 \001(\0162R.com.lvl6.proto.InviteFbFrie" +
+      "ndsForSlotsResponseProto.InviteFbFriends" +
+      "ForSlotsStatus\"<\n\035InviteFbFriendsForSlot" +
+      "sStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\243\001\n" +
+      "+AcceptAndRejectFbInviteForSlotsRequestP",
+      "roto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Mi" +
+      "nimumUserProtoWithFacebookId\022\031\n\021accepted" +
+      "InviteIds\030\002 \003(\005\022\031\n\021rejectedInviteIds\030\003 \003" +
+      "(\005\"\326\002\n,AcceptAndRejectFbInviteForSlotsRe" +
+      "sponseProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.p" +
+      "roto.MinimumUserProtoWithFacebookId\022r\n\006s" +
+      "tatus\030\002 \001(\0162b.com.lvl6.proto.AcceptAndRe" +
+      "jectFbInviteForSlotsResponseProto.Accept" +
+      "AndRejectFbInviteForSlotsStatus\"r\n%Accep" +
+      "tAndRejectFbInviteForSlotsStatus\022\013\n\007SUCC",
+      "ESS\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_" +
+      "BEEN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$CombineU" +
+      "serMonsterPiecesRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\026" +
+      "\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"" +
+      "\307\002\n%CombineUserMonsterPiecesResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022d\n\006status\030\002 \001(\0162T.com.lvl6.p" +
+      "roto.CombineUserMonsterPiecesResponsePro" +
+      "to.CombineUserMonsterPiecesStatus\"\205\001\n\036Co",
+      "mbineUserMonsterPiecesStatus\022\013\n\007SUCCESS\020" +
+      "\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MO" +
+      "RE_THAN_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAI" +
+      "L_OTHER\020\004\"\213\001\n\033SellUserMonsterRequestProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022:\n\005sales\030\002 \003(\0132+.com.lvl6.pr" +
+      "oto.MinimumUserMonsterSellProto\"\332\001\n\034Sell" +
+      "UserMonsterResponseProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022R\n\006st" +
+      "atus\030\002 \001(\0162B.com.lvl6.proto.SellUserMons",
+      "terResponseProto.SellUserMonsterStatus\"4" +
+      "\n\025SellUserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
+      "FAIL_OTHER\020\002B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -16345,9 +17005,17 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "FbFriendIds", },
+              new java.lang.String[] { "Sender", "Invites", },
               com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.class,
               com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor =
+            internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_descriptor.getNestedTypes().get(0);
+          internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_InviteFbFriendsForSlotsRequestProto_FacebookInviteStructure_descriptor,
+              new java.lang.String[] { "FbFriendId", "UserStructId", "UserStructFbLvl", },
+              com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.class,
+              com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure.Builder.class);
           internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_descriptor =
             getDescriptor().getMessageTypes().get(17);
           internal_static_com_lvl6_proto_InviteFbFriendsForSlotsResponseProto_fieldAccessorTable = new

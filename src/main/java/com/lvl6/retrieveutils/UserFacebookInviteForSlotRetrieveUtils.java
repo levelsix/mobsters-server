@@ -39,7 +39,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForInviterUserId(
-  		int userId, boolean acceptedInvitesOnly) {
+  		int userId, boolean acceptedInvitesOnly, boolean filterByRedeemed, boolean isRedeemed) {
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT * FROM ");
   	querySb.append(TABLE_NAME);
@@ -54,9 +54,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
   		querySb.append(" IS NOT NULL");
   	}
-  	
+  	if (filterByRedeemed) {
+  		querySb.append(" AND ");
+  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
+  		querySb.append("=?");
+  		values.add(isRedeemed);
+  	}
   	String query = querySb.toString();
-    log.info("query=" + query + "\t values=" + values);
+  	log.info("query=" + query + "\t values=" + values);
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
@@ -249,7 +254,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     int userStructId = rs.getInt(i++);
-    int structLvl = rs.getInt(i++);
+    int structFbLvl = rs.getInt(i++);
     boolean isRedeemed = rs.getBoolean(i++);
     
     Date timeRedeemed = null;
@@ -265,7 +270,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     UserFacebookInviteForSlot invite = new UserFacebookInviteForSlot(id, inviterUserId,
-    		recipientFacebookId, timeOfInvite, timeAccepted, userStructId, structLvl,
+    		recipientFacebookId, timeOfInvite, timeAccepted, userStructId, structFbLvl,
     		isRedeemed, timeRedeemed); 
     return invite;
   }

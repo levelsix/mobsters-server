@@ -747,11 +747,11 @@ public class MiscMethods {
     }
   }
   
-  private static <T> List<T> getValsInOrder(List<String> keys, Map<String, T> keysToVals) {
+  public static <T> List<T> getValsInOrder(List<String> keys, Map<String, T> keysToVals) {
   	List<T> valsInOrder = new ArrayList<T>();
   	for (String key : keys) {
-  		T delta = keysToVals.get(key);
-  		valsInOrder.add(delta);
+  		T val = keysToVals.get(key);
+  		valsInOrder.add(val);
   	}
   	return valsInOrder;
   }

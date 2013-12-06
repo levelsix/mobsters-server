@@ -5,20 +5,20 @@ import java.util.Date;
 
 public class UserFacebookInviteForSlot implements Serializable {
 
-	private static final long serialVersionUID = -6873138874924409925L;
+	private static final long serialVersionUID = 573667334958397296L;
 	private int id;
 	private int inviterUserId;
 	private String recipientFacebookId;
 	private Date timeOfInvite;
 	private Date timeAccepted;
 	private int userStructId;
-	private int structLvl;
+	private int structFbLvl;
 	private boolean isRedeemed;
 	private Date timeRedeemed;
 	
 	public UserFacebookInviteForSlot(int id, int inviterUserId,
 			String recipientFacebookId, Date timeOfInvite, Date timeAccepted,
-			int userStructId, int structLvl, boolean isRedeemed, Date timeRedeemed) {
+			int userStructId, int structFbLvl, boolean isRedeemed, Date timeRedeemed) {
 		super();
 		this.id = id;
 		this.inviterUserId = inviterUserId;
@@ -26,7 +26,7 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.timeOfInvite = timeOfInvite;
 		this.timeAccepted = timeAccepted;
 		this.userStructId = userStructId;
-		this.structLvl = structLvl;
+		this.structFbLvl = structFbLvl;
 		this.isRedeemed = isRedeemed;
 		this.timeRedeemed = timeRedeemed;
 	}
@@ -79,12 +79,12 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.userStructId = userStructId;
 	}
 
-	public int getStructLvl() {
-		return structLvl;
+	public int getStructFbLvl() {
+		return structFbLvl;
 	}
 
-	public void setStructLvl(int structLvl) {
-		this.structLvl = structLvl;
+	public void setStructFbLvl(int structFbLvl) {
+		this.structFbLvl = structFbLvl;
 	}
 
 	public boolean isRedeemed() {
@@ -108,7 +108,7 @@ public class UserFacebookInviteForSlot implements Serializable {
 		return "UserFacebookInviteForSlot [id=" + id + ", inviterUserId="
 				+ inviterUserId + ", recipientFacebookId=" + recipientFacebookId
 				+ ", timeOfInvite=" + timeOfInvite + ", timeAccepted=" + timeAccepted
-				+ ", userStructId=" + userStructId + ", structLvl=" + structLvl
+				+ ", userStructId=" + userStructId + ", structFbLvl=" + structFbLvl
 				+ ", isRedeemed=" + isRedeemed + ", timeRedeemed=" + timeRedeemed + "]";
 	}
 	
