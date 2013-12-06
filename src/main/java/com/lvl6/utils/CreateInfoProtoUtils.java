@@ -1223,6 +1223,17 @@ public class CreateInfoProtoUtils {
   		inviteProtoBuilder.setTimeAccepted(d.getTime());
   	}
   	
+  	int userStructId = invite.getUserStructId();
+  	inviteProtoBuilder.setUserStructId(userStructId);
+  	
+  	int userStructFbLvl = invite.getStructFbLvl();
+  	inviteProtoBuilder.setStructFbLvl(userStructFbLvl);
+  	
+  	d = invite.getTimeRedeemed();
+  	if (null != d) {
+  		inviteProtoBuilder.setRedeemedTime(d.getTime());
+  	}
+  	
   	return inviteProtoBuilder.build();
   }
 
