@@ -57,6 +57,8 @@ message UserFacebookInviteForSlotProto {
 	//also represents the user struct lvl,
 	//most likely not the current struct lvl
 	optional int32 structFbLvl = 7;
+	
+	optional int64 redeemedTime = 8;
 }
 
 //------------------------------------------------------------------------------------------
