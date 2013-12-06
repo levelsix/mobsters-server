@@ -201,6 +201,7 @@ message IncreaseMonsterInventorySlotRequestProto {
 	//EVERY TIME USER BUYS SLOTS, RESET user_facebook_invite_for_slot table
 	//no need to update clients that this happened
 	
+	repeated int32 userFbInviteForSlotIds = 4;
 	
 	enum IncreaseSlotType {
 		PURCHASE = 1;
