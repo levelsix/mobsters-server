@@ -77,12 +77,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       //get all the invites the user sent
-      boolean acceptedInvitesOnly = false;
+      boolean filterByAccepted = false;
+      boolean isAccepted = false;
       boolean filterByRedeemed = false;
       boolean isRedeemed = false;
       Map<Integer, UserFacebookInviteForSlot> idsToInvites = 
       		UserFacebookInviteForSlotRetrieveUtils.getInviteIdsToInvitesForInviterUserId(
-      				userId, acceptedInvitesOnly, filterByRedeemed, isRedeemed);
+      				userId, filterByAccepted, isAccepted, filterByRedeemed, isRedeemed);
       
       //will contain the facebook ids of new users the user can invite
       //new is defined as: for each facebookId the tuple
