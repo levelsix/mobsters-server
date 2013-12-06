@@ -41,7 +41,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForInviterUserId(
-  		int userId, boolean acceptedInvitesOnly, boolean filterByRedeemed, boolean isRedeemed) {
+  		int userId, boolean filterByAccepted, boolean isAccepted, boolean filterByRedeemed,
+  		boolean isRedeemed) {
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT * FROM ");
   	querySb.append(TABLE_NAME);
@@ -51,11 +52,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	List<Object> values = new ArrayList<Object>();
   	values.add(userId);
   	
-  	if (acceptedInvitesOnly) {
-  		querySb.append(" AND ");
-  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
-  		querySb.append(" IS NOT NULL");
-  	}
+  	 if (filterByAccepted) {
+     	querySb.append(" AND ");
+     	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
+     	querySb.append(" IS ");
+     	if (isAccepted) {
+     		querySb.append("NOT ");
+     	}
+     	querySb.append("NULL");
+     }
   	if (filterByRedeemed) {
   		querySb.append(" AND ");
   		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
@@ -130,7 +135,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   }
   
   public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId,
-  		boolean filterByRedeemed, boolean isRedeemed) {
+  		boolean filterByAccepted, boolean isAccepted) {
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
@@ -142,12 +147,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	List<Object> values = new ArrayList<Object>();
   	values.add(userId);
   	
-  	if (filterByRedeemed) {
-  		querySb.append(" AND ");
-  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
-  		querySb.append("=?");
-  		values.add(isRedeemed);
-  	}
+  	if (filterByAccepted) {
+    	querySb.append(" AND ");
+    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
+    	querySb.append(" IS ");
+    	if (isAccepted) {
+    		querySb.append("NOT ");
+    	}
+    	querySb.append("NULL");
+    }
+  	
   	String query = querySb.toString();
   	
   	log.info("query=" + query);

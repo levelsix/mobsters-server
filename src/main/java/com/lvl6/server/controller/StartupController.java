@@ -651,37 +651,39 @@ public class StartupController extends EventController {
     }
   }  
   
-  private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User user) {
+  private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User thisUser) {
   	//gather up data so as to make only one user retrieval query
-  	int userId = user.getId();
+  	int userId = thisUser.getId();
   	
-  	//GET THE INVITES WHERE THIS USER IS THE RECIPIENT
-  	//base case where user does not have facebook id
-  	String fbId = user.getFacebookId();
+  	//get the invites where this user is the recipient, get unaccepted, hence, unredeemed invites
+  	Map<Integer, UserFacebookInviteForSlot> idsToInvitesToMe = new HashMap<Integer, UserFacebookInviteForSlot>();
+  	String fbId = thisUser.getFacebookId();
   	List<Integer> specificInviteIds = null;
-  	Map<Integer, UserFacebookInviteForSlot> idsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
   	boolean filterByAccepted = true;
-  	boolean isAccepted = true;
+  	boolean isAccepted = false;
   	boolean filterByRedeemed = false;
   	boolean isRedeemed = false; //doesn't matter
+  	//base case where user does not have facebook id
   	if (null != fbId && !fbId.isEmpty()) {
-  		idsToInvites = UserFacebookInviteForSlotRetrieveUtils
+  		idsToInvitesToMe = UserFacebookInviteForSlotRetrieveUtils
   				.getSpecificOrAllInvitesForRecipient(fbId, specificInviteIds, filterByAccepted,
   						isAccepted, filterByRedeemed, isRedeemed);
   	}
   	
-  	//NEED TO GET THE FACEBOOK IDS (recipient ids) THIS USER INVITED AND WHO HAVE
-  	//ACCEPTED HIS INVITE 
-  	filterByRedeemed = true;
-  	isRedeemed = true;
-  	List<String> recipientFacebookIds = UserFacebookInviteForSlotRetrieveUtils
-  			.getUniqueRecipientFacebookIdsForInviterId(userId, filterByRedeemed, isRedeemed);
+  	//get the invites where this user is the inviter, get accepted, unredeemed does not matter 
+  	isAccepted = true;
+  	Map<Integer, UserFacebookInviteForSlot> idsToInvitesFromMe = 
+  			UserFacebookInviteForSlotRetrieveUtils.getInviteIdsToInvitesForInviterUserId(
+  					userId, filterByAccepted, isAccepted, filterByRedeemed, isRedeemed);
+  	
+  	List<String> recipientFacebookIds = getRecipientFbIds(idsToInvitesFromMe);
   	
   	//to make it easier later on, get the inviter ids for these invites and
-  	//tie a an inviter id to an invite
+  	//map inviter id to an invite
   	Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites =
   			new HashMap<Integer, UserFacebookInviteForSlot>();
-  	List<Integer> inviterUserIds = getInviterIds(idsToInvites, inviterIdsToInvites);
+  	//inviterIdsToInvites will be populated by getInviterIds(...)
+  	List<Integer> inviterUserIds = getInviterIds(idsToInvitesToMe, inviterIdsToInvites);
   	
   	
   	//base case where user never did any invites
@@ -698,27 +700,40 @@ public class StartupController extends EventController {
   	List<User> recipients = new ArrayList<User>();
   	List<User> inviters = new ArrayList<User>();
   	separateUsersIntoRecipientsAndInviters(idsToUsers, recipientFacebookIds,
-  			recipients, inviterUserIds, inviters);
+  			inviterUserIds, recipients, inviters);
   	
-//  	
-//  	//send all the recipients that accepted this user's invite
-//  	for (User u : recipients) {
-//  		MinimumUserProtoWithFacebookId recipientProto = 
-//  				CreateInfoProtoUtils.createMinimumUserProtoWithFacebookIdFromUser(u);
-//  		resBuilder.addUsersUsedForExtraSlots(recipientProto);
-//  	}
-//  	
+  	
   	//send all the invites where this user is the one being invited
   	for (Integer inviterId : inviterUserIds) {
   		User inviter = idsToUsers.get(inviterId);
+  		MinimumUserProtoWithFacebookId inviterProto = null;
   		UserFacebookInviteForSlot invite = inviterIdsToInvites.get(inviterId);
-  		UserFacebookInviteForSlotProto inviteProto =
-  				CreateInfoProtoUtils.createUserFacebookInviteForSlotProtoFromInvite(invite, inviter);
+  		UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
+  				.createUserFacebookInviteForSlotProtoFromInvite(invite, inviter, inviterProto);
   		
   		resBuilder.addInvitesToMeForSlots(inviteProto);
   	}
+  	
+  	//send all the invites where this user is the one inviting
+  	MinimumUserProtoWithFacebookId thisUserProto = CreateInfoProtoUtils
+  			.createMinimumUserProtoWithFacebookIdFromUser(thisUser);
+  	for (UserFacebookInviteForSlot invite : idsToInvitesFromMe.values()) {
+  		UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
+  				.createUserFacebookInviteForSlotProtoFromInvite(invite, thisUser, thisUserProto);
+  		resBuilder.addInvitesFromMeForSlots(inviteProto);
+  	}
   }
   
+  private List<String> getRecipientFbIds(Map<Integer, UserFacebookInviteForSlot> idsToInvitesFromMe) {
+  	List<String> fbIds = new ArrayList<String>();
+  	for (UserFacebookInviteForSlot invite : idsToInvitesFromMe.values()) {
+  		String fbId = invite.getRecipientFacebookId();
+  		fbIds.add(fbId);
+  	}
+  	return fbIds;
+  }
+  
+  //inviterIdsToInvites will be populated
   private List<Integer> getInviterIds(Map<Integer, UserFacebookInviteForSlot> idsToInvites,
   		Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites) {
   	
@@ -733,8 +748,8 @@ public class StartupController extends EventController {
   }
   
   private void separateUsersIntoRecipientsAndInviters(Map<Integer, User> idsToUsers,
-  		List<String> recipientFacebookIds, List<User> recipients,
-  		List<Integer> inviterUserIds, List<User> inviters) {
+  		List<String> recipientFacebookIds, List<Integer> inviterUserIds,
+  		List<User> recipients, List<User> inviters) {
   	
   	Set<String> recipientFacebookIdsSet = new HashSet<String>(recipientFacebookIds);
   	
@@ -743,7 +758,7 @@ public class StartupController extends EventController {
   		User u = idsToUsers.get(userId);
   		String facebookId = u.getFacebookId();
   		
-  		if (recipientFacebookIdsSet.contains(facebookId)) {
+  		if (null != facebookId && recipientFacebookIdsSet.contains(facebookId)) {
   			//this is a recipient
   			recipients.add(u);
   		}

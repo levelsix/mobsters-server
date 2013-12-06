@@ -61,7 +61,7 @@ message StartupResponseProto {
 	optional string kabamNaid = 23;
 	
 	//send over all invites (in fb_invite_for_slot table) where this user
-	//is the person being invited, unaccepted and unredeemed
+	//is the recipient, get unaccepted, hence, unredeemed invites
 	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 24;
 	
 	//send over all invites where this user is the inviter and the invite is accepted
@@ -74,8 +74,6 @@ message StartupResponseProto {
 	
 	//for each city, the city's boss is hiding in the specified taskId
 	repeated int32 taskIdForCurrentCityBoss = 28;
-	
-	//repeated UserFacebookInviteForSlotProto invitesFromMeForSlots = 29; //defined above
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;
