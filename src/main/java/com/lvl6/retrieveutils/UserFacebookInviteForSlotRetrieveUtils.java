@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,7 +74,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   //recipientFacebookId assumed to be not null
   public static Map<Integer, UserFacebookInviteForSlot> getSpecificOrAllInvitesForRecipient(
-  		String recipientFacebookId, List<Integer> specificInviteIds) {
+  		String recipientFacebookId, List<Integer> specificInviteIds, boolean filterByAccepted,
+  		boolean isAccepted, boolean filterByRedeemed, boolean isRedeemed) {
     
     StringBuilder querySb = new StringBuilder();
     querySb.append("SELECT * FROM ");
@@ -95,8 +98,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	String questionMarkStr = StringUtils.csvList(questionMarkList);
     	
     	querySb.append(questionMarkStr);
-    	querySb.append(");");
+    	querySb.append(")");
     	values.addAll(specificInviteIds);
+    }
+    
+    if (filterByAccepted) {
+    	querySb.append(" AND ");
+    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
+    	querySb.append(" IS ");
+    	if (isAccepted) {
+    		querySb.append("NOT ");
+    	}
+    	querySb.append("NULL");
+    }
+    
+    if (filterByRedeemed) {
+    	querySb.append(" AND ");
+    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
+    	querySb.append("=?");
+    	values.add(isRedeemed);
     }
     
     String query = querySb.toString();
@@ -109,7 +129,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return idsToInvites;
   }
   
-  public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId) {
+  public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId,
+  		boolean filterByRedeemed, boolean isRedeemed) {
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
@@ -118,11 +139,18 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	querySb.append(" WHERE ");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
   	querySb.append("=?");
+  	List<Object> values = new ArrayList<Object>();
+  	values.add(userId);
+  	
+  	if (filterByRedeemed) {
+  		querySb.append(" AND ");
+  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
+  		querySb.append("=?");
+  		values.add(isRedeemed);
+  	}
   	String query = querySb.toString();
   	
   	log.info("query=" + query);
-  	List<Object> values = new ArrayList<Object>();
-  	values.add(userId);
   	Connection conn = DBConnection.get().getConnection();
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
   	List<String> recipientIds = convertRSToStrings(rs);
@@ -130,7 +158,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	return recipientIds;
   }
   
-  public static List<Integer> getUniqueInviterUserIdsForRequesterId(String facebookId) {
+  public static Set<Integer> getUniqueInviterUserIdsForRequesterId(String facebookId,
+  		boolean filterByAccepted, boolean isAccepted) {
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT DISTINCT(");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
@@ -139,16 +168,25 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	querySb.append(" WHERE ");
   	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
   	querySb.append("=?");
+  	List<Object> values = new ArrayList<Object>();
+  	values.add(facebookId);
+  	
+  	if (filterByAccepted) {
+  		querySb.append(" AND ");
+  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
+  		querySb.append("=?");
+  		values.add(isAccepted);
+  	}
+  	
   	String query = querySb.toString();
   	
   	log.info("query=" + query);
-  	List<Object> values = new ArrayList<Object>();
-  	values.add(facebookId);
   	Connection conn = DBConnection.get().getConnection();
   	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
   	List<Integer> userIds = convertRSToInts(rs);
     DBConnection.get().close(rs, null, conn);
-  	return userIds;
+    Set<Integer> uniqUserIds = new HashSet<Integer>(userIds);
+  	return uniqUserIds;
   }
   
   private static UserFacebookInviteForSlot convertRSToInvite(ResultSet rs) {

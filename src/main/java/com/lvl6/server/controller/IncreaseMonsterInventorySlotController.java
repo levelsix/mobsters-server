@@ -142,43 +142,44 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		IncreaseSlotType aType, int numPurchases, int numSlots, int totalGemPrice,
   		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites) {
   	
-  	if (null == u) {
-  		log.error("user is null. no user exists with id=" + userId);
-  		return false;
-  	}
-  	
-  	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == aType) {
-  		int minNumInvites = ControllerConstants
-  				.MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS;
-  		
-  		boolean acceptedInvitesOnly = true;
-  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp =
-  				UserFacebookInviteForSlotRetrieveUtils
-  				.getInviteIdsToInvitesForInviterUserId(userId, acceptedInvitesOnly);
-  		
-  		int acceptedAmount = idsToAcceptedTemp.size(); 
-  		if(acceptedAmount <= minNumInvites) {
-  			log.error("user deficient on accepted facebook invites to increase slots. " +
-  					"minRequired=" + minNumInvites + "\t has:" + acceptedAmount);
-  			return false;
-  		}
-  		//give the caller the values
-  		idsToAcceptedInvites.putAll(idsToAcceptedTemp);
-  		
-  	} else if (IncreaseSlotType.PURCHASE == aType) {
-  		//check if user has enough money
-  		int userGems = u.getGems();
-  		if (userGems < totalGemPrice) {
-  			log.error("user does not have enough gems to buy more monster inventory slots. userGems=" +
-  					userGems + "\t numSlots=" + numSlots + "\t numPurchases=" + numPurchases);
-  			return false;
-  		}
-  		
-  	} else {
-  		return false;
-  	}
-  	
-  	return true;
+//  	if (null == u) {
+//  		log.error("user is null. no user exists with id=" + userId);
+//  		return false;
+//  	}
+//  	
+//  	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == aType) {
+//  		int minNumInvites = ControllerConstants
+//  				.MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS;
+//  		
+//  		boolean acceptedInvitesOnly = true;
+//  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp =
+//  				UserFacebookInviteForSlotRetrieveUtils
+//  				.getInviteIdsToInvitesForInviterUserId(userId, acceptedInvitesOnly);
+//  		
+//  		int acceptedAmount = idsToAcceptedTemp.size(); 
+//  		if(acceptedAmount <= minNumInvites) {
+//  			log.error("user deficient on accepted facebook invites to increase slots. " +
+//  					"minRequired=" + minNumInvites + "\t has:" + acceptedAmount);
+//  			return false;
+//  		}
+//  		//give the caller the values
+//  		idsToAcceptedInvites.putAll(idsToAcceptedTemp);
+//  		
+//  	} else if (IncreaseSlotType.PURCHASE == aType) {
+//  		//check if user has enough money
+//  		int userGems = u.getGems();
+//  		if (userGems < totalGemPrice) {
+//  			log.error("user does not have enough gems to buy more monster inventory slots. userGems=" +
+//  					userGems + "\t numSlots=" + numSlots + "\t numPurchases=" + numPurchases);
+//  			return false;
+//  		}
+//  		
+//  	} else {
+//  		return false;
+//  	}
+//  	
+//  	return true;
+  	return false;
   }
   
   private boolean writeChangesToDb(User aUser, IncreaseSlotType increaseType,

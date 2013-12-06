@@ -655,20 +655,28 @@ public class StartupController extends EventController {
   	//gather up data so as to make only one user retrieval query
   	int userId = user.getId();
   	
-  	//NEED TO GET THE FACEBOOK IDS HE INVITED AND HAVE ACCEPTED HIS INVITES
-  	List<String> recipientFacebookIds = UserFacebookInviteForSlotAcceptedRetrieveUtils
-  			.getUniqueRecipientFacebookIdsForInviterId(userId);
+  	//GET THE INVITES WHERE THIS USER IS THE RECIPIENT
+  	//base case where user does not have facebook id
   	String fbId = user.getFacebookId();
   	List<Integer> specificInviteIds = null;
   	Map<Integer, UserFacebookInviteForSlot> idsToInvites = new HashMap<Integer, UserFacebookInviteForSlot>();
-  	
-  	
-  	//GET THE INVITES WHERE THIS USER IS THE RECIPIENT
-  	//base case where user does not have facebook id
+  	boolean filterByAccepted = true;
+  	boolean isAccepted = true;
+  	boolean filterByRedeemed = false;
+  	boolean isRedeemed = false; //doesn't matter
   	if (null != fbId && !fbId.isEmpty()) {
   		idsToInvites = UserFacebookInviteForSlotRetrieveUtils
-  			.getSpecificOrAllInvitesForRecipient(fbId, specificInviteIds);
+  				.getSpecificOrAllInvitesForRecipient(fbId, specificInviteIds, filterByAccepted,
+  						isAccepted, filterByRedeemed, isRedeemed);
   	}
+  	
+  	//NEED TO GET THE FACEBOOK IDS (recipient ids) THIS USER INVITED AND WHO HAVE
+  	//ACCEPTED HIS INVITE 
+  	filterByRedeemed = true;
+  	isRedeemed = true;
+  	List<String> recipientFacebookIds = UserFacebookInviteForSlotRetrieveUtils
+  			.getUniqueRecipientFacebookIdsForInviterId(userId, filterByRedeemed, isRedeemed);
+  	
   	//to make it easier later on, get the inviter ids for these invites and
   	//tie a an inviter id to an invite
   	Map<Integer, UserFacebookInviteForSlot> inviterIdsToInvites =
@@ -692,14 +700,14 @@ public class StartupController extends EventController {
   	separateUsersIntoRecipientsAndInviters(idsToUsers, recipientFacebookIds,
   			recipients, inviterUserIds, inviters);
   	
-  	
-  	//send all the recipients that accepted this user's invite
-  	for (User u : recipients) {
-  		MinimumUserProtoWithFacebookId recipientProto = 
-  				CreateInfoProtoUtils.createMinimumUserProtoWithFacebookIdFromUser(u);
-  		resBuilder.addUsersUsedForExtraSlots(recipientProto);
-  	}
-  	
+//  	
+//  	//send all the recipients that accepted this user's invite
+//  	for (User u : recipients) {
+//  		MinimumUserProtoWithFacebookId recipientProto = 
+//  				CreateInfoProtoUtils.createMinimumUserProtoWithFacebookIdFromUser(u);
+//  		resBuilder.addUsersUsedForExtraSlots(recipientProto);
+//  	}
+//  	
   	//send all the invites where this user is the one being invited
   	for (Integer inviterId : inviterUserIds) {
   		User inviter = idsToUsers.get(inviterId);

@@ -60,16 +60,13 @@ message StartupResponseProto {
 	
 	optional string kabamNaid = 23;
 	
-	//send over all recipients (in user_facebook_invite_for_slot_accepted table)
-	//that have been "redeemed"
-	repeated MinimumUserProtoWithFacebookId usersUsedForExtraSlots = 24;
-	
 	//send over all invites (in fb_invite_for_slot table) where this user
-	//is the person being invited
-	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 25;
+	//is the person being invited, unaccepted and unredeemed
+	repeated UserFacebookInviteForSlotProto invitesToMeForSlots = 24;
 	
 	//send over all invites where this user is the inviter and the invite is accepted
-	repeated UserFacebookInviteForSlotProto invitesFromMeForSlots = 29;
+	//isRedeemed does not matter
+	repeated UserFacebookInviteForSlotProto invitesFromMeForSlots = 25;
 	
 	
 	optional StaticDataProto staticDataStuffProto = 26;

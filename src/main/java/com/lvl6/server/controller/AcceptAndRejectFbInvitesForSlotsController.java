@@ -24,7 +24,6 @@ import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseP
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotAcceptedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -155,21 +154,29 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   				acceptedInviteIds + "\t rejectedInviteIds=" + rejectedInviteIds);
   		return false;
   	}
+  	//search for these invites accepted and rejected
   	List<Integer> inviteIds = new ArrayList<Integer>(acceptedInviteIds);
   	inviteIds.addAll(rejectedInviteIds);
   	
-  	//retrieve the invites for this recipient
+  	//retrieve the invites for this recipient that haven't been accepted nor redeemed
+  	boolean filterByAccepted = true;
+  	boolean isAccepted = false;
+  	boolean filterByRedeemed = true;
+  	boolean isRedeemed = false;
   	Map<Integer, UserFacebookInviteForSlot> idsToInvitesInDb = UserFacebookInviteForSlotRetrieveUtils
-  			.getSpecificOrAllInvitesForRecipient(userFacebookId, inviteIds);
+  			.getSpecificOrAllInvitesForRecipient(userFacebookId, inviteIds, filterByAccepted,
+  					isAccepted, filterByRedeemed, isRedeemed);
   	Set<Integer> validIds = idsToInvitesInDb.keySet();
   	
-  	//only want the acceptedInvite ids that exist in idsToInvites
+  	//only want the acceptedInvite ids that aren't yet accepted nor redeemed
   	retainIfInExistingInts(validIds, acceptedInviteIds);
   	
-  	//only want the rejectedInvite ids that exist in idsToInvites
+  	//only want the rejectedInvite ids that aren't yet accepted nor redeemed
   	retainIfInExistingInts(validIds, rejectedInviteIds);
 
   	
+  	//check to make sure this user is not accepting any invites from an inviter
+  	//this user has already accepted, or in other words
   	//check to make sure this user has not previously accepted any invites from 
   	//any of the inviters of the acceptedInviteIds
   	
@@ -177,15 +184,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	Map<Integer, Integer> acceptedInviterIdsToInviteIds = getInviterUserIds(
   			acceptedInviteIds, idsToInvitesInDb); 
   	
-  	//look in the invite_accepted table for the inviter user ids
-  	//that have recipientFacebookId = userFacebookId
-  	Set<Integer> recordedInviterIds = UserFacebookInviteForSlotAcceptedRetrieveUtils
-  			.getUniqueInviterUserIdsForRequesterId(userFacebookId);
+  	//look in the invite table for accepted invites (includes redeemed),
+  	//select the inviter user ids that have recipientFacebookId = userFacebookId
+  	isAccepted = true;
+  	Set<Integer> redeemedInviterIds = UserFacebookInviteForSlotRetrieveUtils
+  			.getUniqueInviterUserIdsForRequesterId(userFacebookId, filterByAccepted, isAccepted);
   	
-  	//if any of the inviter ids for acceptedInviteIds are already in the invite_accepted
-  	//table with this user, delete inviteId from the acceptedInviteIds list and put the
-  	//inviteId into the rejectedInviteIds list
-  	retainInvitesFromUnusedInviters(recordedInviterIds, acceptedInviterIdsToInviteIds,
+  	//if any of the acceptedInviteIds contains an inviterId this user has already accepted
+  	//an invite from,
+  	//delete inviteId from the acceptedInviteIds list and put the
+  	//inviteId into the rejectedInviteIds list,
+  	//done so because the db probably has recorded that the inviter used up this user
+  	//and is trying to use this user again
+  	retainInvitesFromUnusedInviters(redeemedInviterIds, acceptedInviterIdsToInviteIds,
   			acceptedInviteIds, rejectedInviteIds);
   	
   	idsToInvites.putAll(idsToInvitesInDb);
@@ -219,15 +230,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return inviterUserIdsToInviteIds;
   }
   
-  //recordedInviterIds are the inviterIds in the invite_accepted table
+  //recordedInviterIds are the inviterIds in the invite table that are for redeemed invites
   private void retainInvitesFromUnusedInviters(Set<Integer> recordedInviterIds,
   		Map<Integer, Integer> acceptedInviterIdsToInviteIds, 
   		List<Integer> acceptedInviteIds, List<Integer> rejectedInviteIds) {
-  	//if any of the inviter ids for acceptedInviterIdsToInviteIds are already in
-  	//the invite_accepted table with this user, delete inviteId from the
+  	//if any of the inviter ids in acceptedInviterIdsToInviteIds are already in
+  	//the invite table with this user, delete inviteId from the
   	//acceptedInviteIds list and put the inviteId into the rejectedInviteIds list
   	
-  	//keep track of the inviterIds that the user has previously already accepted  
+  	//keep track of the inviterIds that this user has previously already accepted  
   	Map<Integer, Integer> invalidInviteIdsToUserIds = new HashMap<Integer, Integer>();
   	for (Integer potentialNewInviterId : acceptedInviterIdsToInviteIds.keySet()) {
   		if (recordedInviterIds.contains(potentialNewInviterId)) {
@@ -272,6 +283,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			acceptedInviteIds + "\t rejectedInviteIds=" + rejectedInviteIds);
   	
   	//update the acceptTimes for the acceptedInviteIds
+  	//these acceptedInviteIds are for unaccepted, unredeemed invites
   	if (!acceptedInviteIds.isEmpty()) {
   		int num = UpdateUtils.get().updateUserFacebookInviteForSlotAcceptTime(
   				userFacebookId, acceptedInviteIds, acceptTime);
@@ -280,6 +292,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//DELETE THE rejectedInviteIds THAT ARE ALREADY IN DB
+  	//these deleted invites are for unaccepted, unredeemed invites
   	if (!rejectedInviteIds.isEmpty()) {
   		int num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(rejectedInviteIds);
   		log.info("num rejectedInviteIds deleted: " + num + "\t invites=" +
