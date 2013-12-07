@@ -192,15 +192,16 @@ message RemoveMonsterFromBattleTeamResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+//request will not be batched
 message IncreaseMonsterInventorySlotRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional IncreaseSlotType increaseSlotType = 2;
+	optional int32 userStructId = 3;
 	
-	optional int32 numPurchases = 3;
 	//EVERY TIME USER BUYS SLOTS, RESET user_facebook_invite_for_slot table
 	//no need to update clients that this happened
 	
+	//all these invites are for one userstruct
 	repeated int32 userFbInviteForSlotIds = 4;
 	
 	enum IncreaseSlotType {
@@ -218,6 +219,8 @@ message IncreaseMonsterInventorySlotResponseProto {
 		FAIL_INSUFFICIENT_FUNDS = 2;
 		FAIL_INSUFFICIENT_FACEBOOK_INVITES = 3;
 		FAIL_OTHER = 4;
+		//user struct id/fb lvl not consistent across invites
+		FAIL_INCONSISTENT_INVITE_DATA = 5;
 	}
 }
 
