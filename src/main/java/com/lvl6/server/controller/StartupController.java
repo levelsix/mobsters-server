@@ -78,7 +78,6 @@ import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
-import com.lvl6.retrieveutils.UserFacebookInviteForSlotAcceptedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
@@ -154,6 +153,7 @@ public class StartupController extends EventController {
     UpdateStatus updateStatus;
     String udid = reqProto.getUdid();
     String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId() : null;
+    String fbId = reqProto.getFbId();
 
     StartupResponseProto.Builder resBuilder = StartupResponseProto.newBuilder();
 
@@ -188,7 +188,8 @@ public class StartupController extends EventController {
     int newNumConsecutiveDaysLoggedIn = 0;
 
     if (updateStatus != UpdateStatus.MAJOR_UPDATE) {
-      user = RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
+    	List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
+      user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
       if (user != null) {
         server.lockPlayer(user.getId(), this.getClass().getSimpleName());
         try {
@@ -287,6 +288,39 @@ public class StartupController extends EventController {
     // regardless of whether the user is new or restarting from an account
     // reset
     updateLeaderboard(apsalarId, user, now, newNumConsecutiveDaysLoggedIn);
+  }
+
+  //priority of user returned is 
+  //user with specified fbId
+  //user with specified udid
+  //null
+  private User selectUser(List<User> users, String udid, String fbId) {
+  	int numUsers = users.size();
+//  	if (numUsers > 2) {
+//  		log.error("there are more than 2 users with the same udid and fbId. udid=" + udid +
+//  				" fbId=" + fbId + " users=" + users);
+//  	}
+  	if (1 == numUsers) {
+  		return users.get(0);
+  	}
+  	
+  	User udidUser = null;
+  	
+  	for (User u : users) {
+  		String userFbId = u.getFacebookId();
+  		String userUdid = u.getUdid();
+  		
+  		if (fbId != null && fbId.equals(userFbId)) {
+  			return u;
+  		} else if (null == udidUser && udid != null && udid.equals(userUdid)) {
+  			//so this is the first user with specified udid, don't change reference
+  			//to this user once set
+  			udidUser = u;
+  		}
+  	}
+  	
+  	//didn't find user with specified fbId
+  	return udidUser;
   }
 
   private void setInProgressAndAvailableQuests(Builder resBuilder, User user) {

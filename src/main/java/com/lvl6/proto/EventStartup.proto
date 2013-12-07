@@ -25,6 +25,11 @@ message StartupRequestProto {				//client will also send ChangeUserLocationReque
      optional string macAddress = 4;
      optional string advertiserId = 5;
      optional bool isForceTutorial = 6;
+     
+     //check fb then udid
+     //if this exists, then send facebook user first,
+     //then send udid, 
+     optional string fbId = 7;
 }
 
 message StartupResponseProto {

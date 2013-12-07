@@ -398,6 +398,27 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     return user;
   }
+  
+  public List<User> getUserByUDIDorFbId(String UDID, String fbId) {
+    log.debug("retrieving user with udid=" + UDID + " fbId=" + fbId);
+    Map <String, Object> paramsToVals = new HashMap<String, Object>();
+    paramsToVals.put(DBConstants.USER__UDID, UDID);
+    paramsToVals.put(DBConstants.USER__FACEBOOK_ID, fbId);
+
+    List<User> user = null;
+    Connection conn = DBConnection.get().getConnection();
+    ResultSet rs = null;
+		try {
+			rs = DBConnection.get().selectRowsAbsoluteOr(conn, paramsToVals, TABLE_NAME);
+			user = convertRSToUsers(rs);
+//			DBConnection.get().close(rs, null, conn);
+		} catch (Exception e) {
+    	log.error("user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+    return user;
+  }
 
   public User getUserByReferralCode(String referralCode) {
     log.debug("retrieving user with referral code " + referralCode);
