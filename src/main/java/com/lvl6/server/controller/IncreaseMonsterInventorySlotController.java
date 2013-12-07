@@ -308,7 +308,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   				curTime, nEarliestInvites);
   		log.info("num saved: " + num);
 
-  		if (num == minNumInvites) {
+  		if (num != minNumInvites) {
   			log.error("expected updated: " + minNumInvites + "\t actual updated: " + num);
   			return false;
   		}
