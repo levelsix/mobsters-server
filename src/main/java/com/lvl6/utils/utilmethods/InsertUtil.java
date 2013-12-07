@@ -11,7 +11,6 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
-import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 
 public interface InsertUtil {
@@ -60,10 +59,10 @@ public interface InsertUtil {
 			int coinsGivenToReferrer);
 
 	// returns -1 if error
-	public abstract int insertUser(String udid, String name,
-			String deviceToken, String newReferCode, int level,
-			int experience, int coins, int diamonds, boolean isFake,
-			boolean activateShield, Timestamp createTime, String rank);
+	public abstract int insertUser(String udid, String name, String deviceToken,
+			String newReferCode, int level, int experience, int coins, int diamonds,
+			boolean isFake, boolean activateShield, Timestamp createTime, String rank,
+			String facebookId);
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
 

@@ -20,10 +20,11 @@ message UserCreateRequestProto {
      optional string name = 2;
      optional string referrerCode = 3;
      optional string deviceToken = 4;
-     optional int64 timeOfStructPurchase = 5;
-     optional int64 timeOfStructBuild = 6;
+     optional int64 timeOfStructPurchase = 5; //isn't used
+     optional int64 timeOfStructBuild = 6;    //isn't used
      optional CoordinateProto structCoords = 7;
      optional bool usedDiamondsToBuilt = 8;
+     optional string facebookId = 9;
 }
 
 message UserCreateResponseProto {
@@ -32,10 +33,12 @@ message UserCreateResponseProto {
 	
     enum UserCreateStatus {
 		SUCCESS = 1;
-		INVALID_NAME = 2;
-		USER_WITH_UDID_ALREADY_EXISTS = 3;
-     	INVALID_REFER_CODE = 4;
-		OTHER_FAIL = 5;
+		FAIL_INVALID_NAME = 2;
+		FAIL_USER_WITH_UDID_ALREADY_EXISTS = 3;
+     	FAIL_INVALID_REFER_CODE = 4;
+     	FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 5;
+		FAIL_OTHER = 6;
+		
 	}  
 }
 

@@ -43,6 +43,10 @@ public final class EventUserProto {
     // optional bool usedDiamondsToBuilt = 8;
     boolean hasUsedDiamondsToBuilt();
     boolean getUsedDiamondsToBuilt();
+    
+    // optional string facebookId = 9;
+    boolean hasFacebookId();
+    String getFacebookId();
   }
   public static final class UserCreateRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -244,6 +248,38 @@ public final class EventUserProto {
       return usedDiamondsToBuilt_;
     }
     
+    // optional string facebookId = 9;
+    public static final int FACEBOOKID_FIELD_NUMBER = 9;
+    private java.lang.Object facebookId_;
+    public boolean hasFacebookId() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public String getFacebookId() {
+      java.lang.Object ref = facebookId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          facebookId_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getFacebookIdBytes() {
+      java.lang.Object ref = facebookId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        facebookId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       udid_ = "";
       name_ = "";
@@ -253,6 +289,7 @@ public final class EventUserProto {
       timeOfStructBuild_ = 0L;
       structCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       usedDiamondsToBuilt_ = false;
+      facebookId_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -289,6 +326,9 @@ public final class EventUserProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBool(8, usedDiamondsToBuilt_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, getFacebookIdBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -330,6 +370,10 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(8, usedDiamondsToBuilt_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getFacebookIdBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -476,6 +520,8 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000040);
         usedDiamondsToBuilt_ = false;
         bitField0_ = (bitField0_ & ~0x00000080);
+        facebookId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       
@@ -550,6 +596,10 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000080;
         }
         result.usedDiamondsToBuilt_ = usedDiamondsToBuilt_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.facebookId_ = facebookId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -589,6 +639,9 @@ public final class EventUserProto {
         }
         if (other.hasUsedDiamondsToBuilt()) {
           setUsedDiamondsToBuilt(other.getUsedDiamondsToBuilt());
+        }
+        if (other.hasFacebookId()) {
+          setFacebookId(other.getFacebookId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -663,6 +716,11 @@ public final class EventUserProto {
             case 64: {
               bitField0_ |= 0x00000080;
               usedDiamondsToBuilt_ = input.readBool();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
+              facebookId_ = input.readBytes();
               break;
             }
           }
@@ -968,6 +1026,42 @@ public final class EventUserProto {
         return this;
       }
       
+      // optional string facebookId = 9;
+      private java.lang.Object facebookId_ = "";
+      public boolean hasFacebookId() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public String getFacebookId() {
+        java.lang.Object ref = facebookId_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          facebookId_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setFacebookId(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        facebookId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFacebookId() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        facebookId_ = getDefaultInstance().getFacebookId();
+        onChanged();
+        return this;
+      }
+      void setFacebookId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000100;
+        facebookId_ = value;
+        onChanged();
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserCreateRequestProto)
     }
     
@@ -1022,17 +1116,19 @@ public final class EventUserProto {
     public enum UserCreateStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      INVALID_NAME(1, 2),
-      USER_WITH_UDID_ALREADY_EXISTS(2, 3),
-      INVALID_REFER_CODE(3, 4),
-      OTHER_FAIL(4, 5),
+      FAIL_INVALID_NAME(1, 2),
+      FAIL_USER_WITH_UDID_ALREADY_EXISTS(2, 3),
+      FAIL_INVALID_REFER_CODE(3, 4),
+      FAIL_USER_WITH_FACEBOOK_ID_EXISTS(4, 5),
+      FAIL_OTHER(5, 6),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int INVALID_NAME_VALUE = 2;
-      public static final int USER_WITH_UDID_ALREADY_EXISTS_VALUE = 3;
-      public static final int INVALID_REFER_CODE_VALUE = 4;
-      public static final int OTHER_FAIL_VALUE = 5;
+      public static final int FAIL_INVALID_NAME_VALUE = 2;
+      public static final int FAIL_USER_WITH_UDID_ALREADY_EXISTS_VALUE = 3;
+      public static final int FAIL_INVALID_REFER_CODE_VALUE = 4;
+      public static final int FAIL_USER_WITH_FACEBOOK_ID_EXISTS_VALUE = 5;
+      public static final int FAIL_OTHER_VALUE = 6;
       
       
       public final int getNumber() { return value; }
@@ -1040,10 +1136,11 @@ public final class EventUserProto {
       public static UserCreateStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return INVALID_NAME;
-          case 3: return USER_WITH_UDID_ALREADY_EXISTS;
-          case 4: return INVALID_REFER_CODE;
-          case 5: return OTHER_FAIL;
+          case 2: return FAIL_INVALID_NAME;
+          case 3: return FAIL_USER_WITH_UDID_ALREADY_EXISTS;
+          case 4: return FAIL_INVALID_REFER_CODE;
+          case 5: return FAIL_USER_WITH_FACEBOOK_ID_EXISTS;
+          case 6: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -1074,7 +1171,7 @@ public final class EventUserProto {
       }
       
       private static final UserCreateStatus[] VALUES = {
-        SUCCESS, INVALID_NAME, USER_WITH_UDID_ALREADY_EXISTS, INVALID_REFER_CODE, OTHER_FAIL, 
+        SUCCESS, FAIL_INVALID_NAME, FAIL_USER_WITH_UDID_ALREADY_EXISTS, FAIL_INVALID_REFER_CODE, FAIL_USER_WITH_FACEBOOK_ID_EXISTS, FAIL_OTHER, 
       };
       
       public static UserCreateStatus valueOf(
@@ -5051,41 +5148,43 @@ public final class EventUserProto {
     java.lang.String[] descriptorData = {
       "\n\017EventUser.proto\022\016com.lvl6.proto\032\022Monst" +
       "erStuff.proto\032\017Structure.proto\032\nUser.pro" +
-      "to\"\354\001\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
+      "to\"\200\002\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
       "\001(\t\022\014\n\004name\030\002 \001(\t\022\024\n\014referrerCode\030\003 \001(\t\022" +
       "\023\n\013deviceToken\030\004 \001(\t\022\034\n\024timeOfStructPurc" +
       "hase\030\005 \001(\003\022\031\n\021timeOfStructBuild\030\006 \001(\003\0225\n" +
       "\014structCoords\030\007 \001(\0132\037.com.lvl6.proto.Coo" +
       "rdinateProto\022\033\n\023usedDiamondsToBuilt\030\010 \001(" +
-      "\010\"\220\002\n\027UserCreateResponseProto\022-\n\006sender\030" +
-      "\001 \001(\0132\035.com.lvl6.proto.FullUserProto\022H\n\006",
-      "status\030\002 \001(\01628.com.lvl6.proto.UserCreate" +
-      "ResponseProto.UserCreateStatus\"|\n\020UserCr" +
-      "eateStatus\022\013\n\007SUCCESS\020\001\022\020\n\014INVALID_NAME\020" +
-      "\002\022!\n\035USER_WITH_UDID_ALREADY_EXISTS\020\003\022\026\n\022" +
-      "INVALID_REFER_CODE\020\004\022\016\n\nOTHER_FAIL\020\005\"G\n\023" +
-      "LevelUpRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\"\366\001\n\024LevelU" +
-      "pResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022B\n\006status\030\002 \001(\016" +
-      "22.com.lvl6.proto.LevelUpResponseProto.L",
-      "evelUpStatus\"h\n\rLevelUpStatus\022\013\n\007SUCCESS" +
-      "\020\001\022 \n\034NOT_ENOUGH_EXP_TO_NEXT_LEVEL\020\002\022\030\n\024" +
-      "ALREADY_AT_MAX_LEVEL\020\003\022\016\n\nOTHER_FAIL\020\004\"\220" +
-      "\001\n#RetrieveUsersForUserIdsRequestProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022\030\n\020requestedUserIds\030\002 \003(\005\022\035\n\025in" +
-      "cludeCurMonsterTeam\030\003 \001(\010\"\315\001\n$RetrieveUs" +
-      "ersForUserIdsResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\0225\n\016" +
-      "requestedUsers\030\002 \003(\0132\035.com.lvl6.proto.Fu",
-      "llUserProto\022<\n\007curTeam\030\003 \003(\0132+.com.lvl6." +
-      "proto.UserCurrentMonsterTeamProto\"F\n\022Log" +
-      "outRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\"h\n\035UpdateClien" +
-      "tUserResponseProto\022-\n\006sender\030\001 \001(\0132\035.com" +
-      ".lvl6.proto.FullUserProto\022\030\n\020timeOfUserU" +
-      "pdate\030\002 \001(\003B\020B\016EventUserProto"
+      "\010\022\022\n\nfacebookId\030\t \001(\t\"\307\002\n\027UserCreateResp" +
+      "onseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.pro",
+      "to.FullUserProto\022H\n\006status\030\002 \001(\01628.com.l" +
+      "vl6.proto.UserCreateResponseProto.UserCr" +
+      "eateStatus\"\262\001\n\020UserCreateStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\025\n\021FAIL_INVALID_NAME\020\002\022&\n\"FAIL_USER" +
+      "_WITH_UDID_ALREADY_EXISTS\020\003\022\033\n\027FAIL_INVA" +
+      "LID_REFER_CODE\020\004\022%\n!FAIL_USER_WITH_FACEB" +
+      "OOK_ID_EXISTS\020\005\022\016\n\nFAIL_OTHER\020\006\"G\n\023Level" +
+      "UpRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\"\366\001\n\024LevelUpResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro",
+      "to.MinimumUserProto\022B\n\006status\030\002 \001(\01622.co" +
+      "m.lvl6.proto.LevelUpResponseProto.LevelU" +
+      "pStatus\"h\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022 \n" +
+      "\034NOT_ENOUGH_EXP_TO_NEXT_LEVEL\020\002\022\030\n\024ALREA" +
+      "DY_AT_MAX_LEVEL\020\003\022\016\n\nOTHER_FAIL\020\004\"\220\001\n#Re" +
+      "trieveUsersForUserIdsRequestProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\030\n\020requestedUserIds\030\002 \003(\005\022\035\n\025include" +
+      "CurMonsterTeam\030\003 \001(\010\"\315\001\n$RetrieveUsersFo" +
+      "rUserIdsResponseProto\0220\n\006sender\030\001 \001(\0132 .",
+      "com.lvl6.proto.MinimumUserProto\0225\n\016reque" +
+      "stedUsers\030\002 \003(\0132\035.com.lvl6.proto.FullUse" +
+      "rProto\022<\n\007curTeam\030\003 \003(\0132+.com.lvl6.proto" +
+      ".UserCurrentMonsterTeamProto\"F\n\022LogoutRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\"h\n\035UpdateClientUser" +
+      "ResponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6" +
+      ".proto.FullUserProto\022\030\n\020timeOfUserUpdate" +
+      "\030\002 \001(\003B\020B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5097,7 +5196,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_UserCreateRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserCreateRequestProto_descriptor,
-              new java.lang.String[] { "Udid", "Name", "ReferrerCode", "DeviceToken", "TimeOfStructPurchase", "TimeOfStructBuild", "StructCoords", "UsedDiamondsToBuilt", },
+              new java.lang.String[] { "Udid", "Name", "ReferrerCode", "DeviceToken", "TimeOfStructPurchase", "TimeOfStructBuild", "StructCoords", "UsedDiamondsToBuilt", "FacebookId", },
               com.lvl6.proto.EventUserProto.UserCreateRequestProto.class,
               com.lvl6.proto.EventUserProto.UserCreateRequestProto.Builder.class);
           internal_static_com_lvl6_proto_UserCreateResponseProto_descriptor =

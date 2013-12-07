@@ -1,11 +1,8 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -96,29 +93,26 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     UserCreateRequestProto reqProto = ((UserCreateRequestEvent)event).getUserCreateRequestProto();
     String udid = reqProto.getUdid();
     String name = reqProto.getName();
-
     String referrerCode = (reqProto.hasReferrerCode()) ? reqProto.getReferrerCode() : null;
     String deviceToken = (reqProto.hasDeviceToken() && reqProto.getDeviceToken().length() > 0) ? reqProto.getDeviceToken() : null;
-
     Timestamp createTime = new Timestamp((new Date()).getTime());
     Timestamp timeOfStructPurchase = createTime; //new Timestamp(reqProto.getTimeOfStructPurchase());
     Timestamp timeOfStructBuild = createTime; //new Timestamp(reqProto.getTimeOfStructBuild());
     CoordinatePair structCoords = new CoordinatePair(reqProto.getStructCoords().getX(), reqProto.getStructCoords().getY());
-
     boolean usedDiamondsToBuild = reqProto.getUsedDiamondsToBuilt();
+    String facebookId = reqProto.getFacebookId();
 
 
     UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto.newBuilder();
 
     User referrer = (referrerCode != null && referrerCode.length() > 0) ? RetrieveUtils.userRetrieveUtils().getUserByReferralCode(referrerCode) : null;;
 
-    boolean legitUserCreate = checkLegitUserCreate(resBuilder, udid, name, 
+    boolean legitUserCreate = checkLegitUserCreate(resBuilder, udid, facebookId, name, 
        timeOfStructPurchase, timeOfStructBuild, structCoords, 
         referrer, reqProto.hasReferrerCode());
 
     User user = null;
     int userId = ControllerConstants.NOT_SET;
-    List<Integer> equipIds = new ArrayList<Integer>();
     Task taskCompleted = null;
     Task questTaskCompleted = null;
     int playerCoins = 0;
@@ -150,7 +144,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       userId = insertUtils.insertUser(udid, name, deviceToken,
           newReferCode, ControllerConstants.USER_CREATE__START_LEVEL, 
           playerExp, playerCoins, playerDiamonds, false,
-          activateShield, createTime, rank);
+          activateShield, createTime, rank, facebookId);
             
       if (userId > 0) {
         server.lockPlayer(userId, this.getClass().getSimpleName());
@@ -173,7 +167,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
           server.unlockPlayer(userId, this.getClass().getSimpleName()); 
         }
       } else {
-        resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
+        resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
         log.error("problem with trying to create user. udid="
         		+ udid + ", name=" + name + ", deviceToken=" + deviceToken
         		+ ", newReferCode=" + newReferCode + ", playerExp="
@@ -339,37 +333,49 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     }
   }
 
-  private boolean checkLegitUserCreate(Builder resBuilder, String udid,
+  private boolean checkLegitUserCreate(Builder resBuilder, String udid, String facebookId,
       String name, Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
       CoordinatePair coordinatePair, User referrer, boolean hasReferrerCode) {
 
     if (udid == null || name == null || timeOfStructPurchase == null || coordinatePair == null || timeOfStructBuild == null) {
-      resBuilder.setStatus(UserCreateStatus.OTHER_FAIL);
+      resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
       log.error("parameter passed in is null. udid=" + udid + ", name=" + name + ", timeOfStructPurchase=" + timeOfStructPurchase
           + ", coordinatePair=" + coordinatePair + ", timeOfStructBuild=" + timeOfStructBuild);
       return false;
     }
     if (hasReferrerCode && referrer == null) {
-      resBuilder.setStatus(UserCreateStatus.INVALID_REFER_CODE);
+      resBuilder.setStatus(UserCreateStatus.FAIL_INVALID_REFER_CODE);
       log.info("refer code passed in is invalid.");
       return false;
     }
-    if (RetrieveUtils.userRetrieveUtils().getUserByUDID(udid) != null) {
-      resBuilder.setStatus(UserCreateStatus.USER_WITH_UDID_ALREADY_EXISTS);
+    List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, facebookId);
+    User udidUser = null;
+    User fbUser = null;
+    
+    for(User u : users) {
+    	String userUdid = u.getUdid();
+    	String userFacebookId = u.getFacebookId();
+    	
+    	if (null != userUdid && userUdid.equals(udid)) {
+    		udidUser = u;
+    	} else if (null != userFacebookId && userFacebookId.equals(facebookId)) {
+    		fbUser = u;
+    	}
+    }
+    
+    if (null != udidUser) {
+      resBuilder.setStatus(UserCreateStatus.FAIL_USER_WITH_UDID_ALREADY_EXISTS);
       log.error("user with udid " + udid + " already exists");
       return false;
     }
-    /*if (timeOfStructBuild.getTime() <= timeOfStructPurchase.getTime() || 
-        timeOfStructBuild.getTime() > new Date().getTime() + Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME*60000 ||
-        timeOfStructPurchase.getTime() > new Date().getTime() + Globals.NUM_MINUTES_DIFFERENCE_LEEWAY_FOR_CLIENT_TIME*60000) {
-      resBuilder.setStatus(UserCreateStatus.TIME_ISSUE);
-      log.error("time issue. time now is " + new Date() + ". timeOfStructBuild=" + timeOfStructBuild 
-          + ", timeOfStructPurchase=" + timeOfStructPurchase);
+    if (null != fbUser) {
+      resBuilder.setStatus(UserCreateStatus.FAIL_USER_WITH_FACEBOOK_ID_EXISTS);
+      log.error("user with facebookId " + facebookId + " already exists");
       return false;
-    }*/
+    }
     if (name.length() < ControllerConstants.USER_CREATE__MIN_NAME_LENGTH || 
         name.length() > ControllerConstants.USER_CREATE__MAX_NAME_LENGTH) {
-      resBuilder.setStatus(UserCreateStatus.INVALID_NAME);
+      resBuilder.setStatus(UserCreateStatus.FAIL_INVALID_NAME);
       log.error("name length is off. length is " + name.length() + ", should be in between " + ControllerConstants.USER_CREATE__MIN_NAME_LENGTH
           + " and " + ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
       return false;

@@ -17,7 +17,6 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
-import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.proto.ClanProto.UserClanStatus;
@@ -415,10 +414,10 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUser(java.lang.String, java.lang.String, com.lvl6.proto.InfoProto.UserType, com.lvl6.info.Location, java.lang.String, java.lang.String, int, int, int, int, int, int, int, int, int, java.lang.Integer, java.lang.Integer, java.lang.Integer, boolean)
    */
   @Override
-  public int insertUser(String udid, String name,
-			String deviceToken, String newReferCode, int level,
-			int experience, int coins, int diamonds, boolean isFake,
-			boolean activateShield, Timestamp createTime, String rank) {
+  public int insertUser(String udid, String name, String deviceToken,
+  		String newReferCode, int level, int experience, int coins, int diamonds,
+  		boolean isFake, boolean activateShield, Timestamp createTime, String rank,
+  		String facebookId) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
@@ -434,6 +433,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
     insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
     insertParams.put(DBConstants.USER__RANK, rank);
+    insertParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
     
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
