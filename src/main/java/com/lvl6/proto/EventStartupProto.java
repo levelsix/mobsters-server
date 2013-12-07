@@ -4457,18 +4457,6 @@ public final class EventStartupProto {
         // optional int32 initialMaxNumMonsterLimit = 2;
         boolean hasInitialMaxNumMonsterLimit();
         int getInitialMaxNumMonsterLimit();
-        
-        // optional int32 monsterInventoryIncrementAmount = 3;
-        boolean hasMonsterInventoryIncrementAmount();
-        int getMonsterInventoryIncrementAmount();
-        
-        // optional int32 gemPricePerSlot = 4;
-        boolean hasGemPricePerSlot();
-        int getGemPricePerSlot();
-        
-        // optional int32 numFriendsToRecruitToIncreaseInventory = 5;
-        boolean hasNumFriendsToRecruitToIncreaseInventory();
-        int getNumFriendsToRecruitToIncreaseInventory();
       }
       public static final class UserMonsterConstants extends
           com.google.protobuf.GeneratedMessage
@@ -4519,42 +4507,9 @@ public final class EventStartupProto {
           return initialMaxNumMonsterLimit_;
         }
         
-        // optional int32 monsterInventoryIncrementAmount = 3;
-        public static final int MONSTERINVENTORYINCREMENTAMOUNT_FIELD_NUMBER = 3;
-        private int monsterInventoryIncrementAmount_;
-        public boolean hasMonsterInventoryIncrementAmount() {
-          return ((bitField0_ & 0x00000004) == 0x00000004);
-        }
-        public int getMonsterInventoryIncrementAmount() {
-          return monsterInventoryIncrementAmount_;
-        }
-        
-        // optional int32 gemPricePerSlot = 4;
-        public static final int GEMPRICEPERSLOT_FIELD_NUMBER = 4;
-        private int gemPricePerSlot_;
-        public boolean hasGemPricePerSlot() {
-          return ((bitField0_ & 0x00000008) == 0x00000008);
-        }
-        public int getGemPricePerSlot() {
-          return gemPricePerSlot_;
-        }
-        
-        // optional int32 numFriendsToRecruitToIncreaseInventory = 5;
-        public static final int NUMFRIENDSTORECRUITTOINCREASEINVENTORY_FIELD_NUMBER = 5;
-        private int numFriendsToRecruitToIncreaseInventory_;
-        public boolean hasNumFriendsToRecruitToIncreaseInventory() {
-          return ((bitField0_ & 0x00000010) == 0x00000010);
-        }
-        public int getNumFriendsToRecruitToIncreaseInventory() {
-          return numFriendsToRecruitToIncreaseInventory_;
-        }
-        
         private void initFields() {
           maxNumTeamSlots_ = 0;
           initialMaxNumMonsterLimit_ = 0;
-          monsterInventoryIncrementAmount_ = 0;
-          gemPricePerSlot_ = 0;
-          numFriendsToRecruitToIncreaseInventory_ = 0;
         }
         private byte memoizedIsInitialized = -1;
         public final boolean isInitialized() {
@@ -4574,15 +4529,6 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             output.writeInt32(2, initialMaxNumMonsterLimit_);
           }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            output.writeInt32(3, monsterInventoryIncrementAmount_);
-          }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            output.writeInt32(4, gemPricePerSlot_);
-          }
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            output.writeInt32(5, numFriendsToRecruitToIncreaseInventory_);
-          }
           getUnknownFields().writeTo(output);
         }
         
@@ -4599,18 +4545,6 @@ public final class EventStartupProto {
           if (((bitField0_ & 0x00000002) == 0x00000002)) {
             size += com.google.protobuf.CodedOutputStream
               .computeInt32Size(2, initialMaxNumMonsterLimit_);
-          }
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(3, monsterInventoryIncrementAmount_);
-          }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(4, gemPricePerSlot_);
-          }
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            size += com.google.protobuf.CodedOutputStream
-              .computeInt32Size(5, numFriendsToRecruitToIncreaseInventory_);
           }
           size += getUnknownFields().getSerializedSize();
           memoizedSerializedSize = size;
@@ -4740,12 +4674,6 @@ public final class EventStartupProto {
             bitField0_ = (bitField0_ & ~0x00000001);
             initialMaxNumMonsterLimit_ = 0;
             bitField0_ = (bitField0_ & ~0x00000002);
-            monsterInventoryIncrementAmount_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000004);
-            gemPricePerSlot_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000008);
-            numFriendsToRecruitToIncreaseInventory_ = 0;
-            bitField0_ = (bitField0_ & ~0x00000010);
             return this;
           }
           
@@ -4792,18 +4720,6 @@ public final class EventStartupProto {
               to_bitField0_ |= 0x00000002;
             }
             result.initialMaxNumMonsterLimit_ = initialMaxNumMonsterLimit_;
-            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-              to_bitField0_ |= 0x00000004;
-            }
-            result.monsterInventoryIncrementAmount_ = monsterInventoryIncrementAmount_;
-            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-              to_bitField0_ |= 0x00000008;
-            }
-            result.gemPricePerSlot_ = gemPricePerSlot_;
-            if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-              to_bitField0_ |= 0x00000010;
-            }
-            result.numFriendsToRecruitToIncreaseInventory_ = numFriendsToRecruitToIncreaseInventory_;
             result.bitField0_ = to_bitField0_;
             onBuilt();
             return result;
@@ -4825,15 +4741,6 @@ public final class EventStartupProto {
             }
             if (other.hasInitialMaxNumMonsterLimit()) {
               setInitialMaxNumMonsterLimit(other.getInitialMaxNumMonsterLimit());
-            }
-            if (other.hasMonsterInventoryIncrementAmount()) {
-              setMonsterInventoryIncrementAmount(other.getMonsterInventoryIncrementAmount());
-            }
-            if (other.hasGemPricePerSlot()) {
-              setGemPricePerSlot(other.getGemPricePerSlot());
-            }
-            if (other.hasNumFriendsToRecruitToIncreaseInventory()) {
-              setNumFriendsToRecruitToIncreaseInventory(other.getNumFriendsToRecruitToIncreaseInventory());
             }
             this.mergeUnknownFields(other.getUnknownFields());
             return this;
@@ -4874,21 +4781,6 @@ public final class EventStartupProto {
                 case 16: {
                   bitField0_ |= 0x00000002;
                   initialMaxNumMonsterLimit_ = input.readInt32();
-                  break;
-                }
-                case 24: {
-                  bitField0_ |= 0x00000004;
-                  monsterInventoryIncrementAmount_ = input.readInt32();
-                  break;
-                }
-                case 32: {
-                  bitField0_ |= 0x00000008;
-                  gemPricePerSlot_ = input.readInt32();
-                  break;
-                }
-                case 40: {
-                  bitField0_ |= 0x00000010;
-                  numFriendsToRecruitToIncreaseInventory_ = input.readInt32();
                   break;
                 }
               }
@@ -4935,69 +4827,6 @@ public final class EventStartupProto {
           public Builder clearInitialMaxNumMonsterLimit() {
             bitField0_ = (bitField0_ & ~0x00000002);
             initialMaxNumMonsterLimit_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 monsterInventoryIncrementAmount = 3;
-          private int monsterInventoryIncrementAmount_ ;
-          public boolean hasMonsterInventoryIncrementAmount() {
-            return ((bitField0_ & 0x00000004) == 0x00000004);
-          }
-          public int getMonsterInventoryIncrementAmount() {
-            return monsterInventoryIncrementAmount_;
-          }
-          public Builder setMonsterInventoryIncrementAmount(int value) {
-            bitField0_ |= 0x00000004;
-            monsterInventoryIncrementAmount_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearMonsterInventoryIncrementAmount() {
-            bitField0_ = (bitField0_ & ~0x00000004);
-            monsterInventoryIncrementAmount_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 gemPricePerSlot = 4;
-          private int gemPricePerSlot_ ;
-          public boolean hasGemPricePerSlot() {
-            return ((bitField0_ & 0x00000008) == 0x00000008);
-          }
-          public int getGemPricePerSlot() {
-            return gemPricePerSlot_;
-          }
-          public Builder setGemPricePerSlot(int value) {
-            bitField0_ |= 0x00000008;
-            gemPricePerSlot_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearGemPricePerSlot() {
-            bitField0_ = (bitField0_ & ~0x00000008);
-            gemPricePerSlot_ = 0;
-            onChanged();
-            return this;
-          }
-          
-          // optional int32 numFriendsToRecruitToIncreaseInventory = 5;
-          private int numFriendsToRecruitToIncreaseInventory_ ;
-          public boolean hasNumFriendsToRecruitToIncreaseInventory() {
-            return ((bitField0_ & 0x00000010) == 0x00000010);
-          }
-          public int getNumFriendsToRecruitToIncreaseInventory() {
-            return numFriendsToRecruitToIncreaseInventory_;
-          }
-          public Builder setNumFriendsToRecruitToIncreaseInventory(int value) {
-            bitField0_ |= 0x00000010;
-            numFriendsToRecruitToIncreaseInventory_ = value;
-            onChanged();
-            return this;
-          }
-          public Builder clearNumFriendsToRecruitToIncreaseInventory() {
-            bitField0_ = (bitField0_ & ~0x00000010);
-            numFriendsToRecruitToIncreaseInventory_ = 0;
             onChanged();
             return this;
           }
@@ -12834,7 +12663,7 @@ public final class EventStartupProto {
       "uff.proto\"\215\001\n\023StartupRequestProto\022\014\n\004udi" +
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
-      "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\"\212\036\n\024St" +
+      "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\"\227\035\n\024St" +
       "artupResponseProto\022\030\n\020serverTimeMillis\030\001",
       " \001(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.Fu" +
       "llUserProto\022I\n\rstartupStatus\030\003 \001(\01622.com" +
@@ -12879,7 +12708,7 @@ public final class EventStartupProto {
       "Stolen\030\003 \001(\005\032\202\001\n\031ReferralNotificationPro" +
       "to\0222\n\010referred\030\001 \001(\0132 .com.lvl6.proto.Mi" +
       "nimumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024c" +
-      "oinsGivenToReferrer\030\003 \001(\005\032\222\017\n\020StartupCon" +
+      "oinsGivenToReferrer\030\003 \001(\005\032\237\016\n\020StartupCon" +
       "stants\022H\n\025inAppPurchasePackages\030\001 \003(\0132)." +
       "com.lvl6.proto.InAppPurchasePackageProto" +
       "\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSin" +
@@ -12919,19 +12748,16 @@ public final class EventStartupProto {
       "\021goldShoppeNibName\030\003 \001(\t\032y\n\023TournamentCo" +
       "nstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWei" +
       "ght\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHou" +
-      "rsToShowAfterEventEnd\030\004 \001(\005\032\304\001\n\024UserMons" +
-      "terConstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n" +
-      "\031initialMaxNumMonsterLimit\030\002 \001(\005\022\'\n\037mons" +
-      "terInventoryIncrementAmount\030\003 \001(\005\022\027\n\017gem" +
-      "PricePerSlot\030\004 \001(\005\022.\n&numFriendsToRecrui" +
-      "tToIncreaseInventory\030\005 \001(\005\032\211\001\n\020MonsterCo" +
-      "nstants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033s",
-      "econdsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021elem" +
-      "entalStrength\030\003 \001(\002\022\031\n\021elementalWeakness" +
-      "\030\004 \001(\002\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n" +
-      "\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rSta" +
-      "rtupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_I" +
-      "N_DB\020\002B\023B\021EventStartupProto"
+      "rsToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMonst" +
+      "erConstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031" +
+      "initialMaxNumMonsterLimit\030\002 \001(\005\032\211\001\n\020Mons" +
+      "terConstants\022\032\n\022cashPerHealthPoint\030\001 \001(\002" +
+      "\022#\n\033secondsToHealPerHealthPoint\030\002 \001(\002\022\031\n" +
+      "\021elementalStrength\030\003 \001(\002\022\031\n\021elementalWea" +
+      "kness\030\004 \001(\002\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE",
+      "\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3" +
+      "\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_" +
+      "NOT_IN_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13015,7 +12841,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_UserMonsterConstants_descriptor,
-              new java.lang.String[] { "MaxNumTeamSlots", "InitialMaxNumMonsterLimit", "MonsterInventoryIncrementAmount", "GemPricePerSlot", "NumFriendsToRecruitToIncreaseInventory", },
+              new java.lang.String[] { "MaxNumTeamSlots", "InitialMaxNumMonsterLimit", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_descriptor =

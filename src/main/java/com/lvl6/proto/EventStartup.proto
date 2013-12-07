@@ -146,9 +146,9 @@ message StartupResponseProto {
 			
 			//how much the monster inventory limit is increased by
 			//whenever the user acquires more slots 
-			optional int32 monsterInventoryIncrementAmount = 3;
-			optional int32 gemPricePerSlot = 4;
-			optional int32 numFriendsToRecruitToIncreaseInventory = 5;
+			//optional int32 monsterInventoryIncrementAmount = 3;
+			//optional int32 gemPricePerSlot = 4;
+			//optional int32 numFriendsToRecruitToIncreaseInventory = 5;
 		}
 		message MonsterConstants {
 			optional float cashPerHealthPoint = 1;

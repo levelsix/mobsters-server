@@ -703,27 +703,6 @@ public class User implements Serializable {
 		return false;
 	}
 
-	/*public boolean updateRelativelyNumAdditionalMonsterSlotsAndDiamonds(int numAdditionalMonsterSlots, int cost) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__NUM_ADDITIONAL_MONSTER_SLOTS, numAdditionalMonsterSlots);
-		relativeParams.put(DBConstants.USER__GEMS, cost);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
-				relativeParams, absoluteParams, conditionParams, "and");
-		if (numUpdated == 1) {
-			this.gems += cost;
-			this.numAdditionalMonsterSlots += numAdditionalMonsterSlots;
-			return true;
-		}
-
-		return false;
-	}*/
-
-
 	public boolean updateElo(int newElo) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);

@@ -1226,7 +1226,7 @@ public class CreateInfoProtoUtils {
   	int userStructId = invite.getUserStructId();
   	inviteProtoBuilder.setUserStructId(userStructId);
   	
-  	int userStructFbLvl = invite.getStructFbLvl();
+  	int userStructFbLvl = invite.getUserStructFbLvl();
   	inviteProtoBuilder.setStructFbLvl(userStructFbLvl);
   	
   	d = invite.getTimeRedeemed();

@@ -13,10 +13,10 @@ public class StructureResidence implements Serializable {
 	//additional slots if user buys some gems or invites friends
 	private int numBonusMonsterSlots;
 	
-	//number of gems it costs to buy one additional monster slot
+	//number of gems it costs to buy all numBonusMonsterSlots
 	private int numGemsRequired;
 	
-	//number of accepted fb invites to get one additional monster slot
+	//number of accepted fb invites to get all numBonusMonsterSlots
 	private int numAcceptedFbInvites;
 	
 	private String occupationName;

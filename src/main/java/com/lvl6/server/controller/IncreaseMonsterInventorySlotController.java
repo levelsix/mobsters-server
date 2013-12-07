@@ -18,6 +18,9 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.IncreaseMonsterInventorySlotRequestEvent;
 import com.lvl6.events.response.IncreaseMonsterInventorySlotResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.Structure;
+import com.lvl6.info.StructureForUser;
+import com.lvl6.info.StructureResidence;
 import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.misc.MiscMethods;
@@ -28,11 +31,14 @@ import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProt
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.IncreaseMonsterInventorySlotResponseProto.IncreaseMonsterInventorySlotStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureResidenceRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.StructureRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
-import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class IncreaseMonsterInventorySlotController extends EventController {
 
@@ -63,7 +69,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     IncreaseSlotType increaseType = reqProto.getIncreaseSlotType();
-    int numPurchases = reqProto.getNumPurchases();
+    int userStructId = reqProto.getUserStructId();
+    //the invites to redeem     
+    List<Integer> userFbInviteIds = reqProto.getUserFbInviteForSlotIdsList();
     Timestamp curTime = new Timestamp((new Date()).getTime());
 
     //set some values to send to the client (the response proto)
@@ -74,26 +82,26 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
     	int previousGems = 0;
+    	//get stuff from the db
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-      //this is in the case the user is buying slots
-      int numSlots = numPurchases *
-      		ControllerConstants.MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT;
-      int gemPricePerSlot = ControllerConstants.MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT;
-    	int totalGemPrice = gemPricePerSlot * numSlots;
+    	StructureForUser sfu = RetrieveUtils.userStructRetrieveUtils()
+    			.getSpecificUserStruct(userStructId);
     	
     	//will be populated if user is successfully redeeming fb invites
     	Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites = 
     			new HashMap<Integer, UserFacebookInviteForSlot>();
       
-      boolean legit = checkLegit(resBuilder, userId, aUser, increaseType,
-      		numPurchases, numSlots, totalGemPrice, idsToAcceptedInvites);
+      boolean legit = checkLegit(resBuilder, userId, aUser, userStructId, sfu,
+      		increaseType, userFbInviteIds, idsToAcceptedInvites);
 
+      int gemCost = 0;
       boolean successful = false;
-      Map<String, Integer> money = new HashMap<String, Integer>();
+      Map<String, Integer> changeMap = new HashMap<String, Integer>();
       if(legit) {
       	previousGems = aUser.getGems();
-    	  successful = writeChangesToDb(aUser, increaseType, numSlots,
-    	  		totalGemPrice, curTime, idsToAcceptedInvites, money);
+      	gemCost = getGemPriceFromStruct(sfu); 
+    	  successful = writeChangesToDb(aUser, sfu, increaseType, gemCost, curTime,
+    	  		idsToAcceptedInvites, changeMap);
       }
       
       if (successful) {
@@ -111,10 +119,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	
-      	writeToUserCurrencyHistory(aUser, curTime, money, previousGems, numSlots, gemPricePerSlot);
-      	
+      	if (increaseType == IncreaseSlotType.PURCHASE) {
+      		writeToUserCurrencyHistory(aUser, sfu, increaseType, curTime, changeMap, previousGems);
+      	}
       	//delete the user's facebook invites for slots
-      	deleteInvitesForSlotsAfterPurchase(userId, money);
+      	deleteInvitesForSlotsAfterPurchase(userId, changeMap);
       }
     } catch (Exception e) {
       log.error("exception in IncreaseMonsterInventorySlotController processEvent", e);
@@ -138,109 +147,210 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, int userId, User u,
-  		IncreaseSlotType aType, int numPurchases, int numSlots, int totalGemPrice,
+  private boolean checkLegit(Builder resBuilder, int userId, User u, int userStructId,
+  		StructureForUser sfu, IncreaseSlotType aType, List<Integer> userFbInviteIds,
   		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites) {
+  	if (null == u) {
+  		log.error("user is null. no user exists with id=" + userId);
+  		return false;
+  	}
+  	if (null == sfu) {
+  		log.error("doesn't exist, user struct with id=" + userStructId);
+  		return false;
+  	}
   	
-//  	if (null == u) {
-//  		log.error("user is null. no user exists with id=" + userId);
-//  		return false;
-//  	}
-//  	
-//  	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == aType) {
-//  		int minNumInvites = ControllerConstants
-//  				.MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS;
-//  		
-//  		boolean acceptedInvitesOnly = true;
-//  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp =
-//  				UserFacebookInviteForSlotRetrieveUtils
-//  				.getInviteIdsToInvitesForInviterUserId(userId, acceptedInvitesOnly);
-//  		
-//  		int acceptedAmount = idsToAcceptedTemp.size(); 
-//  		if(acceptedAmount <= minNumInvites) {
-//  			log.error("user deficient on accepted facebook invites to increase slots. " +
-//  					"minRequired=" + minNumInvites + "\t has:" + acceptedAmount);
-//  			return false;
-//  		}
-//  		//give the caller the values
-//  		idsToAcceptedInvites.putAll(idsToAcceptedTemp);
-//  		
-//  	} else if (IncreaseSlotType.PURCHASE == aType) {
-//  		//check if user has enough money
-//  		int userGems = u.getGems();
-//  		if (userGems < totalGemPrice) {
-//  			log.error("user does not have enough gems to buy more monster inventory slots. userGems=" +
-//  					userGems + "\t numSlots=" + numSlots + "\t numPurchases=" + numPurchases);
-//  			return false;
-//  		}
-//  		
-//  	} else {
-//  		return false;
-//  	}
-//  	
-//  	return true;
-  	return false;
+  	//THE CHECK IF USER IS REDEEMING FACEBOOK INVITES
+  	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == aType) {
+  		//get accepted and unredeemed invites
+  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp = getInvites(userId,
+  				userFbInviteIds);
+  		//check if requested invites even exist
+  		if (null == idsToAcceptedTemp || idsToAcceptedTemp.isEmpty()) {
+  			log.error("no invites exist with ids: " + userFbInviteIds);
+  			return false;
+  		}
+
+    	int userStructIdFromInvites = getUserStructId(idsToAcceptedTemp);
+    	if (userStructId != userStructIdFromInvites) {
+    		resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INCONSISTENT_INVITE_DATA);
+    		log.error("data across invites aren't consistent: user struct id/fb lvl. invites=" +
+    				idsToAcceptedTemp + "\t expectedUserStructId=" + userStructId);
+    		return false;
+    	}
+  		
+  		//required min num invites depends on the structure
+  		int minNumInvites = getMinNumInvitesFromStruct(sfu);
+  		//check if user has enough invites to gain a slot
+  		int acceptedAmount = idsToAcceptedTemp.size(); 
+  		if(acceptedAmount < minNumInvites) {
+  			resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INSUFFICIENT_FACEBOOK_INVITES);
+  			log.error("user doesn't meet num accepted facebook invites to increase slots. " +
+  					"minRequired=" + minNumInvites + "\t has:" + acceptedAmount);
+  			return false;
+  		}
+  		//give the caller the invites, at this point, the number of invites is at least
+  		//equal to minNumInvites and could be more
+  		idsToAcceptedInvites.putAll(idsToAcceptedTemp);
+  		
+  		//THE CHECK IF USER IS BUYING SLOTS
+  	} else if (IncreaseSlotType.PURCHASE == aType) {
+  		//gemprice depends on the structure;
+  		int gemPrice = getGemPriceFromStruct(sfu);
+  		
+  		//check if user has enough money
+  		int userGems = u.getGems();
+  		if (userGems < gemPrice) {
+  			resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_INSUFFICIENT_FUNDS);
+  			log.error("user does not have enough gems to buy more monster inventory slots. userGems=" +
+  					userGems + "\t gemPrice=" + gemPrice);
+  			return false;
+  		}
+  		
+  	} else {
+  		return false;
+  	}
+  	
+  	return true;
   }
   
-  private boolean writeChangesToDb(User aUser, IncreaseSlotType increaseType,
-  		int numSlots, int totalGemPrice, Timestamp curTime,
-  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites,
-  		Map<String, Integer> money) {
-  	boolean success = false;
-  	/*
-  	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
-  		int n = ControllerConstants.MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS;
-  		//get the three earliest accepted invites
-  		List<UserFacebookInviteForSlot> earliestAcceptedInvites =
-  				nEarliestInvites(idsToAcceptedInvites, n);
+  private Map<Integer, UserFacebookInviteForSlot> getInvites(int userId,
+  		List<Integer> userFbInviteIds) {
+  //get accepted and unredeemed invites
+		boolean filterByAccepted = true;
+		boolean isAccepted = true;
+		boolean filterByRedeemed = true;
+		boolean isRedeemed = false;
+		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp =
+				UserFacebookInviteForSlotRetrieveUtils.getSpecificOrAllInvitesForInviter(
+						userId, userFbInviteIds, filterByAccepted, isAccepted, filterByRedeemed,
+						isRedeemed);
+		return idsToAcceptedTemp;
+  }
+  
+  //if user struct ids and user struct fb lvls are inconsistent, return non-positive value;
+  private int getUserStructId(Map<Integer, UserFacebookInviteForSlot> idsToAcceptedTemp) {
+  	int prevUserStructId = -1;
+  	int prevUserStructFbLvl = -1;
+  	
+  	for (UserFacebookInviteForSlot invite : idsToAcceptedTemp.values()) {
+  		int tempUserStructId = invite.getUserStructId();
+  		int tempUserStructFbLvl = invite.getUserStructFbLvl();
+  		if (-1 == prevUserStructId) {
+  			prevUserStructId = tempUserStructId;
+  			prevUserStructFbLvl = tempUserStructFbLvl;
+  			
+  		} else if (prevUserStructId != tempUserStructId || prevUserStructFbLvl != tempUserStructFbLvl) {
+  			//since the userStructIds or userStructFbLvl's are inconsistent, return failure
+  			return -1;
+  		}
   		
-  		//save these to the user_facebook_invite_for_slots_accepted table
-  		log.info("saving to accepted invites table. invites=" + earliestAcceptedInvites);
-  		int userId = aUser.getId();
-  		List<Integer> userIds = Collections.nCopies(n, userId);
-  		int nthExtraSlot = aUser.getNthExtraSlotsViaFb();
-  		List<Integer> nthExtraSlotsList = Collections.nCopies(n, nthExtraSlot);
-  		int num = InsertUtils.get().insertIntoUserFbInviteForSlotAccepted(userIds,
-  				nthExtraSlotsList, earliestAcceptedInvites, curTime);
+  	}
+  	return prevUserStructId;
+  }
+  
+  private int getMinNumInvitesFromStruct(StructureForUser sfu) {
+  	//get the structure
+  	int structId = sfu.getStructId();
+  	Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
+  	String structType = struct.getStructType();
+  	
+  	int minNumInvites = -1;
+  	//at the moment, invites are only for residences
+  	if (StructType.valueOf(structType) == StructType.RESIDENCE) {
+  		StructureResidence residence = StructureResidenceRetrieveUtils
+  				.getResidenceForStructId(structId);
+  		minNumInvites = residence.getNumAcceptedFbInvites();
+  	}
+  	
+  	return minNumInvites;
+  }
+  
+  private int getGemPriceFromStruct(StructureForUser sfu) {
+  	//get the structure
+  	int structId = sfu.getStructId();
+  	Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
+  	String structType = struct.getStructType();
+  	
+  	int gemPrice = Integer.MAX_VALUE;
+  	//at the moment, invites are only for residences
+  	if (StructType.valueOf(structType) == StructType.RESIDENCE) {
+  		StructureResidence residence = StructureResidenceRetrieveUtils
+  				.getResidenceForStructId(structId);
+  		gemPrice = residence.getNumGemsRequired();
+  	}
+  	
+  	return gemPrice;
+  }
+  
+  private boolean writeChangesToDb(User aUser, StructureForUser sfu, 
+  		IncreaseSlotType increaseType, int gemCost, Timestamp curTime,
+  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites,
+  		Map<String, Integer> changeMap) {
+  	boolean success = false;
+  	
+  	//increase the user structs fb invite lvl
+  	int userStructId = sfu.getId();
+  	int fbInviteLevelChange = 1;
+  	if (!UpdateUtils.get().updateUserStructLevel(userStructId, fbInviteLevelChange)) {
+  		log.error("(won't continue processing) couldn't update fbInviteLevel for user struct=" + sfu);
+  		return false;
+  	}
+  	
+  	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
+  		int minNumInvites = getMinNumInvitesFromStruct(sfu);
+  		//if num accepted invites more than min required, just take the earliest ones
+  		List<Integer> inviteIdsTheRest = new ArrayList<Integer>();
+  		List<UserFacebookInviteForSlot> nEarliestInvites = nEarliestInvites(
+  				idsToAcceptedInvites, minNumInvites, inviteIdsTheRest); 
+  		
+  		//redeem the nEarliestInvites
+  		int num = UpdateUtils.get().updateRedeemUserFacebookInviteForSlot(
+  				curTime, nEarliestInvites);
   		log.info("num saved: " + num);
   		
-  		//increase the user's extra slots
-  		int slotChange = 1;
-  		boolean updated = aUser.updateNthExtraSlotsViaFb(slotChange);
-  		log.info("increasing user's nth extra slots via fb by 1. updated=" + updated);
-  		
-  		//delete all the accepted invites
-  		int numCurInvites = idsToAcceptedInvites.size();
+  		//delete all the remaining invites
+  		int numCurInvites = inviteIdsTheRest.size();
   		log.info("num current invites: " + numCurInvites + "invitesToDelete= " +
-  				idsToAcceptedInvites);
-  		num = DeleteUtils.get().deleteUserFacebookInvitesForUser(userId);
+  				inviteIdsTheRest);
+  		num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsTheRest);
   		log.info("num deleted: " + num);
   	}
   	
   	if (IncreaseSlotType.PURCHASE == increaseType) {
-  		int cost = -1 * totalGemPrice;
-  		success = aUser.updateRelativelyNumAdditionalMonsterSlotsAndDiamonds(
-  				numSlots, cost);
+  		int cost = -1 * gemCost;
+  		success = aUser.updateRelativeDiamondsNaive(cost);
   		
   		if (!success) {
   			log.error("problem with updating user monster inventory slots and diamonds");
   		}
   		if (success && 0 != cost) {
-  				money.put(MiscMethods.gems, cost);
+  				changeMap.put(MiscMethods.gems, cost);
   		}
-  	} */
+  	}
   	return success;
   }
   
   private List<UserFacebookInviteForSlot> nEarliestInvites(
-  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites, int n) {
+  		Map<Integer, UserFacebookInviteForSlot> idsToAcceptedInvites, int n,
+  		List<Integer> inviteIdsTheRest) {
+  	
   	List<UserFacebookInviteForSlot> earliestAcceptedInvites =
   			new ArrayList<UserFacebookInviteForSlot>(idsToAcceptedInvites.values());
   	orderUserFacebookAcceptedInvitesForSlots(earliestAcceptedInvites);
   	
   	if (n < earliestAcceptedInvites.size()) {
+  		int amount = earliestAcceptedInvites.size();
+  		
+  		//want to get the remaining invites after the first n
+  		for (UserFacebookInviteForSlot invite : earliestAcceptedInvites.subList(n, amount)) {
+  			Integer id = invite.getId();
+  			inviteIdsTheRest.add(id);
+  		}
+  		
+  		//get first n invites
   		return earliestAcceptedInvites.subList(0, n);
   	} else {
+  		//num invites guaranteed to not be less than n
   		return earliestAcceptedInvites;
   	}
   }
@@ -273,20 +383,34 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   
   //TODO:FIX THIS
-  private void writeToUserCurrencyHistory(User aUser, Timestamp curTime,
-  		Map<String, Integer> money, int previousGems, int numSlots, int pricePerSlot) {
-//    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String gems = MiscMethods.gems;
-//    String reasonForChange = ControllerConstants.UCHRFC__INCREASE_MONSTER_INVENTORY +
-//    		"numSlots=" + numSlots + " pricePerSlot=" + pricePerSlot;
-//
-//    previousGemsCash.put(gems, previousGems);
-//    reasonsForChanges.put(gems, reasonForChange);
-//    
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money,
-//        previousGemsCash, reasonsForChanges);
-//    
+  private void writeToUserCurrencyHistory(User aUser, StructureForUser sfu, 
+  		IncreaseSlotType increaseType, Timestamp curTime, Map<String, Integer> changeMap,
+  		int previousGems) {
+  	int userId = aUser.getId();
+  	
+  	Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
+  	Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
+    Map<String, String> changeReasonsMap = new HashMap<String, String>();
+    Map<String, String> detailsMap = new HashMap<String, String>();
+    String gems = MiscMethods.gems;
+    String reasonForChange = ControllerConstants.UCHRFC__INCREASE_MONSTER_INVENTORY;
+    
+    StringBuilder sb = new StringBuilder();
+    sb.append("increaseType=");
+    sb.append(increaseType.name());
+    sb.append(" prevFbInviteStructLvl=");
+    sb.append(sfu.getFbInviteStructLvl());
+    String details = sb.toString();
+    
+    previousCurrencyMap.put(gems, previousGems);
+    currentCurrencyMap.put(gems, aUser.getGems());
+    changeReasonsMap.put(gems, reasonForChange);
+    detailsMap.put(gems, details);
+    
+    
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap, previousCurrencyMap,
+    		currentCurrencyMap, changeReasonsMap, detailsMap);
+    
   }
   
   //after user buys slots, delete all accepted and unaccepted invites for slots
@@ -295,7 +419,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		return;
   	}
   	
-  	int num = DeleteUtils.get().deleteUserFacebookInvitesForUser(userId);
+  	int num = DeleteUtils.get().deleteUnredeemedUserFacebookInvitesForUser(userId);
   	log.info("num invites deleted after buying slot. userId=" + userId + 
   			" numDeleted=" + num);
   }

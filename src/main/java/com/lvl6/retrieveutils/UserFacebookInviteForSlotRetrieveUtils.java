@@ -40,9 +40,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return invite;
   }
   
-  public static Map<Integer, UserFacebookInviteForSlot> getInviteIdsToInvitesForInviterUserId(
-  		int userId, boolean filterByAccepted, boolean isAccepted, boolean filterByRedeemed,
-  		boolean isRedeemed) {
+  public static Map<Integer, UserFacebookInviteForSlot> getSpecificOrAllInvitesForInviter(
+  		int userId, List<Integer> specificInviteIds, boolean filterByAccepted,
+  		boolean isAccepted, boolean filterByRedeemed, boolean isRedeemed) {
   	StringBuilder querySb = new StringBuilder();
   	querySb.append("SELECT * FROM ");
   	querySb.append(TABLE_NAME);
@@ -51,16 +51,32 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	querySb.append("=?");
   	List<Object> values = new ArrayList<Object>();
   	values.add(userId);
-  	
-  	 if (filterByAccepted) {
-     	querySb.append(" AND ");
-     	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
-     	querySb.append(" IS ");
-     	if (isAccepted) {
-     		querySb.append("NOT ");
-     	}
-     	querySb.append("NULL");
-     }
+
+  	//if user didn't give any userStructIds then get all the user's structs
+  	if (null != specificInviteIds && !specificInviteIds.isEmpty()) {
+  		log.debug("retrieving UserFacebookInviteForSlot with ids " + specificInviteIds);
+  		querySb.append(" AND ");
+  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+  		querySb.append(" IN (");
+
+  		int amount = specificInviteIds.size();
+  		List<String> questionMarkList = Collections.nCopies(amount, "?");
+  		String questionMarkStr = StringUtils.csvList(questionMarkList);
+
+  		querySb.append(questionMarkStr);
+  		querySb.append(")");
+  		values.addAll(specificInviteIds);
+  	}
+
+  	if (filterByAccepted) {
+  		querySb.append(" AND ");
+  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
+  		querySb.append(" IS ");
+  		if (isAccepted) {
+  			querySb.append("NOT ");
+  		}
+  		querySb.append("NULL");
+  	}
   	if (filterByRedeemed) {
   		querySb.append(" AND ");
   		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
@@ -70,11 +86,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	String query = querySb.toString();
   	log.info("query=" + query + "\t values=" + values);
 
-    Connection conn = DBConnection.get().getConnection();
-    ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
-    DBConnection.get().close(rs, null, conn);
-    return idsToInvites;
+  	Connection conn = DBConnection.get().getConnection();
+  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+  	Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
+  	DBConnection.get().close(rs, null, conn);
+  	return idsToInvites;
   }
   
   //recipientFacebookId assumed to be not null
@@ -90,23 +106,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
     querySb.append("=?");
     List <Object> values = new ArrayList<Object>();
     values.add(recipientFacebookId);
-    
+
     //if user didn't give any userStructIds then get all the user's structs
     if (null != specificInviteIds && !specificInviteIds.isEmpty()) {
     	log.debug("retrieving UserFacebookInviteForSlot with ids " + specificInviteIds);
     	querySb.append(" AND ");
     	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
     	querySb.append(" IN (");
-    	
+
     	int amount = specificInviteIds.size();
     	List<String> questionMarkList = Collections.nCopies(amount, "?");
     	String questionMarkStr = StringUtils.csvList(questionMarkList);
-    	
+
     	querySb.append(questionMarkStr);
     	querySb.append(")");
     	values.addAll(specificInviteIds);
     }
-    
+
     if (filterByAccepted) {
     	querySb.append(" AND ");
     	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
@@ -116,14 +132,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	}
     	querySb.append("NULL");
     }
-    
+
     if (filterByRedeemed) {
     	querySb.append(" AND ");
     	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
     	querySb.append("=?");
     	values.add(isRedeemed);
     }
-    
+
     String query = querySb.toString();
     log.info("query=" + query + "\t values=" + values);
 
@@ -134,38 +150,38 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return idsToInvites;
   }
   
-  public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId,
-  		boolean filterByAccepted, boolean isAccepted) {
-  	StringBuilder querySb = new StringBuilder();
-  	querySb.append("SELECT DISTINCT(");
-  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
-  	querySb.append(") FROM ");
-  	querySb.append(TABLE_NAME);
-  	querySb.append(" WHERE ");
-  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
-  	querySb.append("=?");
-  	List<Object> values = new ArrayList<Object>();
-  	values.add(userId);
-  	
-  	if (filterByAccepted) {
-    	querySb.append(" AND ");
-    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
-    	querySb.append(" IS ");
-    	if (isAccepted) {
-    		querySb.append("NOT ");
-    	}
-    	querySb.append("NULL");
-    }
-  	
-  	String query = querySb.toString();
-  	
-  	log.info("query=" + query);
-  	Connection conn = DBConnection.get().getConnection();
-  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-  	List<String> recipientIds = convertRSToStrings(rs);
-    DBConnection.get().close(rs, null, conn);
-  	return recipientIds;
-  }
+//  public static List<String> getUniqueRecipientFacebookIdsForInviterId(int userId,
+//  		boolean filterByAccepted, boolean isAccepted) {
+//  	StringBuilder querySb = new StringBuilder();
+//  	querySb.append("SELECT DISTINCT(");
+//  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
+//  	querySb.append(") FROM ");
+//  	querySb.append(TABLE_NAME);
+//  	querySb.append(" WHERE ");
+//  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
+//  	querySb.append("=?");
+//  	List<Object> values = new ArrayList<Object>();
+//  	values.add(userId);
+//  	
+//  	if (filterByAccepted) {
+//    	querySb.append(" AND ");
+//    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
+//    	querySb.append(" IS ");
+//    	if (isAccepted) {
+//    		querySb.append("NOT ");
+//    	}
+//    	querySb.append("NULL");
+//    }
+//  	
+//  	String query = querySb.toString();
+//  	
+//  	log.info("query=" + query);
+//  	Connection conn = DBConnection.get().getConnection();
+//  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+//  	List<String> recipientIds = convertRSToStrings(rs);
+//    DBConnection.get().close(rs, null, conn);
+//  	return recipientIds;
+//  }
   
   public static Set<Integer> getUniqueInviterUserIdsForRequesterId(String facebookId,
   		boolean filterByAccepted, boolean isAccepted) {
@@ -235,23 +251,23 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	return idsToInvites;
   }
   
-  private static List<String> convertRSToStrings(ResultSet rs) {
-  	List<String> stringList = new ArrayList<String>();
-  	if (null != rs) {
-  		try {
-  			rs.last();
-  			rs.beforeFirst();
-  			while(rs.next()) {
-  				int indexOfFirstAndOnlyColumn = 1;
-  				String aString = rs.getString(indexOfFirstAndOnlyColumn); 
-  				stringList.add(aString);
-  			}
-  		} catch(SQLException e) {
-  			log.error("problem with database call.", e);
-  		}
-  	}
-  	return stringList;
-  }
+//  private static List<String> convertRSToStrings(ResultSet rs) {
+//  	List<String> stringList = new ArrayList<String>();
+//  	if (null != rs) {
+//  		try {
+//  			rs.last();
+//  			rs.beforeFirst();
+//  			while(rs.next()) {
+//  				int indexOfFirstAndOnlyColumn = 1;
+//  				String aString = rs.getString(indexOfFirstAndOnlyColumn); 
+//  				stringList.add(aString);
+//  			}
+//  		} catch(SQLException e) {
+//  			log.error("problem with database call.", e);
+//  		}
+//  	}
+//  	return stringList;
+//  }
   private static List<Integer> convertRSToInts(ResultSet rs) {
   	List<Integer> intList = new ArrayList<Integer>();
   	if (null != rs) {
@@ -301,7 +317,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     int userStructId = rs.getInt(i++);
-    int structFbLvl = rs.getInt(i++);
+    int userStructFbLvl = rs.getInt(i++);
     boolean isRedeemed = rs.getBoolean(i++);
     
     Date timeRedeemed = null;
@@ -317,7 +333,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     
     UserFacebookInviteForSlot invite = new UserFacebookInviteForSlot(id, inviterUserId,
-    		recipientFacebookId, timeOfInvite, timeAccepted, userStructId, structFbLvl,
+    		recipientFacebookId, timeOfInvite, timeAccepted, userStructId, userStructFbLvl,
     		isRedeemed, timeRedeemed); 
     return invite;
   }

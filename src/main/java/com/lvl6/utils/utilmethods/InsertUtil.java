@@ -129,8 +129,4 @@ public interface InsertUtil {
 	public abstract int insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
 			Timestamp curTime, List<Integer> userStructIds, List<Integer> userStructsFbLvl);
 	
-	public abstract int insertIntoUserFbInviteForSlotAccepted(List<Integer> userIds,
-			List<Integer> nthExtraSlotsList,
-			List<UserFacebookInviteForSlot> acceptedInvites, Timestamp curTime);
-	
 }

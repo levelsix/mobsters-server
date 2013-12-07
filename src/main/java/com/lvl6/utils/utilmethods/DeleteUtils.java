@@ -236,7 +236,7 @@ public class DeleteUtils implements DeleteUtil {
 	}
 
 	@Override
-	public int deleteUserFacebookInvitesForUser(int userId) {
+	public int deleteUnredeemedUserFacebookInvitesForUser(int userId) {
 		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
 		
 		StringBuilder querySb = new StringBuilder();
@@ -246,7 +246,10 @@ public class DeleteUtils implements DeleteUtil {
 		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
 		querySb.append(" > 0 AND ");
 		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID);
-		querySb.append("=?;");
+		querySb.append("=?");
+		querySb.append(" AND ");
+		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_REDEEMED);
+		querySb.append(" IS NULL");
 		
 		String query = querySb.toString();
 		List<Integer> values = new ArrayList<Integer>();

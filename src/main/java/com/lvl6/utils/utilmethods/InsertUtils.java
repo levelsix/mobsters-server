@@ -906,55 +906,12 @@ public class InsertUtils implements InsertUtil{
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID, facebookIds);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE, timeOfInviteList);
 		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_ID, userStructIds);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__STRUCT_FB_LVL, userStructsFbLvl);
+		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_FB_LVL, userStructsFbLvl);
 		
 		
 		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
 				tableName, insertParams, amount);
 		return numInserted;
-	}
-
-	@Override
-	public int insertIntoUserFbInviteForSlotAccepted(List<Integer> userIds,
-			List<Integer> nthExtraSlotsList,
-			List<UserFacebookInviteForSlot> acceptedInvites, Timestamp curTime) {
-		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED;
-		int amount = acceptedInvites.size();
-		
-		List<Integer> ids = new ArrayList<Integer>();
-		List<String> recipientFacebookIds = new ArrayList<String>();
-		List<Timestamp> timesOfInvites = new ArrayList<Timestamp>();
-		List<Timestamp> acceptTimes = new ArrayList<Timestamp>();
-		List<Timestamp> timesOfEntries = Collections.nCopies(amount, curTime);
-		
-		for (int i = 0; i < amount; i++) {
-			UserFacebookInviteForSlot invite = acceptedInvites.get(i);
-			ids.add(invite.getId());
-			recipientFacebookIds.add(invite.getRecipientFacebookId());
-			
-			Date d1 = invite.getTimeOfInvite();
-			Timestamp t1 = new Timestamp(d1.getTime()); 
-			timesOfInvites.add(t1);
-			
-			Date d2 = invite.getTimeAccepted();
-			Timestamp t2 = new Timestamp(d2.getTime()); 
-			acceptTimes.add(t2);
-		}
-		/*
-		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__ID, ids);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__INVITER_USER_ID, userIds);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__RECIPIENT_FACEBOOK_ID, recipientFacebookIds);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_OF_INVITE, timesOfInvites);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_ACCEPTED, acceptTimes);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__NTH_EXTRA_SLOTS_VIA_FB, nthExtraSlotsList);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT_ACCEPTED__TIME_OF_ENTRY, timesOfEntries);
-			
-		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
-				tableName, insertParams, amount);
-		return numInserted;
-		*/
-		return 0;
 	}
 
 }

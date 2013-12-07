@@ -39,5 +39,5 @@ public interface DeleteUtil {
  
   public abstract int deleteUserFacebookInvitesForSlots(List<Integer> idsOfInvites);
   
-  public abstract int deleteUserFacebookInvitesForUser(int userId);
+  public abstract int deleteUnredeemedUserFacebookInvitesForUser(int userId);
 }

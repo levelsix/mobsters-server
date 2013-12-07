@@ -12,6 +12,7 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
 
@@ -84,15 +85,10 @@ public interface UpdateUtil {
       Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
       Map<Integer, StructureForUser> structIdsToUserStructs);
 
-//  /*
-//   * used for upgrading user structs level
-//   */
-//  /*@Caching(evict = {
-//      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-//      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-//      //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
-//  public abstract boolean updateUserStructLevel(int userStructId,
-//      int levelChange);
+  /*
+   * used for upgrading user struct's fb invite level
+   */
+  public abstract boolean updateUserStructLevel(int userStructId, int fbInviteLevelChange);
 
   /*
    * used for moving user structs
@@ -149,4 +145,7 @@ public interface UpdateUtil {
   
   public abstract int updateUserFacebookInviteForSlotAcceptTime(String recipientFacebookId,
   		List<Integer> acceptedInviteIds, Timestamp acceptTime);
+  
+  public abstract int updateRedeemUserFacebookInviteForSlot(Timestamp redeemTime,
+  		List<UserFacebookInviteForSlot> redeemedInvites);
 }

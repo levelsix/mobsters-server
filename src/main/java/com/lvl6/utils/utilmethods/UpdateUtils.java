@@ -19,6 +19,7 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.StructureForUser;
+import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.StructureProto.StructOrientation;
@@ -378,6 +379,28 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		return false;
 	}
+	
+	/*
+   * used for upgrading user struct's fb invite level
+   */
+	@Override
+  public boolean updateUserStructLevel(int userStructId, int fbInviteLevelChange) {
+		String tableName = DBConstants.TABLE_STRUCTURE_FOR_USER;
+		
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		relativeParams.put(DBConstants.STRUCTURE_FOR_USER__FB_INVITE_STRUCT_LVL,
+				fbInviteLevelChange);
+
+		int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+				null, conditionParams, "and");
+		if (numUpdated == 1) {
+			return true;
+		}
+		return false;
+  }
 
 	/*
 	 * used for moving user structs
@@ -846,6 +869,46 @@ public class UpdateUtils implements UpdateUtil {
 			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID);
 			querySb.append("=?");
 			values.add(recipientFacebookId);
+			
+			String query = querySb.toString();
+			log.info("\t\t\t\t updateUserFacebookInviteForSlotAcceptTime query=" + query +
+					"\t values=" + values);
+			int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
+			
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateRedeemUserFacebookInviteForSlot(Timestamp redeemTime,
+				List<UserFacebookInviteForSlot> redeemedInvites) {
+			String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
+			int amount = redeemedInvites.size();
+			List<Integer> ids = new ArrayList<Integer>();
+			
+			for(UserFacebookInviteForSlot invite : redeemedInvites) {
+				int id = invite.getId();
+				ids.add(id);
+			}
+			List<String> questions = Collections.nCopies(amount, "?");
+			List<Object> values = new ArrayList<Object>();
+			
+			StringBuilder querySb = new StringBuilder();
+			querySb.append("UPDATE ");
+			querySb.append(tableName);
+			querySb.append(" SET ");
+			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_REDEEMED);
+			querySb.append("=?, ");
+			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
+			querySb.append("=? WHERE ");
+			values.add(redeemTime);
+			values.add(true);
+			
+			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+			querySb.append(" IN (");
+			String questionsStr = StringUtils.csvList(questions);
+			querySb.append(questionsStr);
+			querySb.append(")");
+			values.addAll(ids);
 			
 			String query = querySb.toString();
 			log.info("\t\t\t\t updateUserFacebookInviteForSlotAcceptTime query=" + query +

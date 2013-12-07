@@ -5,20 +5,21 @@ import java.util.Date;
 
 public class UserFacebookInviteForSlot implements Serializable {
 
-	private static final long serialVersionUID = 573667334958397296L;
+	private static final long serialVersionUID = 4752275955003573930L;
 	private int id;
 	private int inviterUserId;
 	private String recipientFacebookId;
 	private Date timeOfInvite;
 	private Date timeAccepted;
 	private int userStructId;
-	private int structFbLvl;
+	private int userStructFbLvl;
 	private boolean isRedeemed;
 	private Date timeRedeemed;
 	
 	public UserFacebookInviteForSlot(int id, int inviterUserId,
 			String recipientFacebookId, Date timeOfInvite, Date timeAccepted,
-			int userStructId, int structFbLvl, boolean isRedeemed, Date timeRedeemed) {
+			int userStructId, int userStructFbLvl, boolean isRedeemed,
+			Date timeRedeemed) {
 		super();
 		this.id = id;
 		this.inviterUserId = inviterUserId;
@@ -26,7 +27,7 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.timeOfInvite = timeOfInvite;
 		this.timeAccepted = timeAccepted;
 		this.userStructId = userStructId;
-		this.structFbLvl = structFbLvl;
+		this.userStructFbLvl = userStructFbLvl;
 		this.isRedeemed = isRedeemed;
 		this.timeRedeemed = timeRedeemed;
 	}
@@ -79,12 +80,12 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.userStructId = userStructId;
 	}
 
-	public int getStructFbLvl() {
-		return structFbLvl;
+	public int getUserStructFbLvl() {
+		return userStructFbLvl;
 	}
 
-	public void setStructFbLvl(int structFbLvl) {
-		this.structFbLvl = structFbLvl;
+	public void setUserStructFbLvl(int userStructFbLvl) {
+		this.userStructFbLvl = userStructFbLvl;
 	}
 
 	public boolean isRedeemed() {
@@ -108,8 +109,8 @@ public class UserFacebookInviteForSlot implements Serializable {
 		return "UserFacebookInviteForSlot [id=" + id + ", inviterUserId="
 				+ inviterUserId + ", recipientFacebookId=" + recipientFacebookId
 				+ ", timeOfInvite=" + timeOfInvite + ", timeAccepted=" + timeAccepted
-				+ ", userStructId=" + userStructId + ", structFbLvl=" + structFbLvl
-				+ ", isRedeemed=" + isRedeemed + ", timeRedeemed=" + timeRedeemed + "]";
+				+ ", userStructId=" + userStructId + ", userStructFbLvl="
+				+ userStructFbLvl + ", isRedeemed=" + isRedeemed + ", timeRedeemed="
+				+ timeRedeemed + "]";
 	}
-	
 }
