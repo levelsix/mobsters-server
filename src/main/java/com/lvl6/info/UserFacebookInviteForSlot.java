@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class UserFacebookInviteForSlot implements Serializable {
 
-	private static final long serialVersionUID = 4752275955003573930L;
+	private static final long serialVersionUID = -1731978369694889921L;
 	private int id;
 	private int inviterUserId;
 	private String recipientFacebookId;
@@ -13,13 +13,11 @@ public class UserFacebookInviteForSlot implements Serializable {
 	private Date timeAccepted;
 	private int userStructId;
 	private int userStructFbLvl;
-	private boolean isRedeemed;
 	private Date timeRedeemed;
 	
 	public UserFacebookInviteForSlot(int id, int inviterUserId,
 			String recipientFacebookId, Date timeOfInvite, Date timeAccepted,
-			int userStructId, int userStructFbLvl, boolean isRedeemed,
-			Date timeRedeemed) {
+			int userStructId, int userStructFbLvl, Date timeRedeemed) {
 		super();
 		this.id = id;
 		this.inviterUserId = inviterUserId;
@@ -28,7 +26,6 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.timeAccepted = timeAccepted;
 		this.userStructId = userStructId;
 		this.userStructFbLvl = userStructFbLvl;
-		this.isRedeemed = isRedeemed;
 		this.timeRedeemed = timeRedeemed;
 	}
 
@@ -88,14 +85,6 @@ public class UserFacebookInviteForSlot implements Serializable {
 		this.userStructFbLvl = userStructFbLvl;
 	}
 
-	public boolean isRedeemed() {
-		return isRedeemed;
-	}
-
-	public void setRedeemed(boolean isRedeemed) {
-		this.isRedeemed = isRedeemed;
-	}
-
 	public Date getTimeRedeemed() {
 		return timeRedeemed;
 	}
@@ -110,7 +99,7 @@ public class UserFacebookInviteForSlot implements Serializable {
 				+ inviterUserId + ", recipientFacebookId=" + recipientFacebookId
 				+ ", timeOfInvite=" + timeOfInvite + ", timeAccepted=" + timeAccepted
 				+ ", userStructId=" + userStructId + ", userStructFbLvl="
-				+ userStructFbLvl + ", isRedeemed=" + isRedeemed + ", timeRedeemed="
-				+ timeRedeemed + "]";
+				+ userStructFbLvl + ", timeRedeemed=" + timeRedeemed + "]";
 	}
+	
 }

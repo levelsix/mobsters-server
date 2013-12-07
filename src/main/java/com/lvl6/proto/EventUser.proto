@@ -95,3 +95,18 @@ message UpdateClientUserResponseProto {
 
 //------------------------------------------------------------------------------------------
 	
+message SetFacebookIdRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string fbId = 2;
+}
+
+message SetFacebookIdResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional SetFacebookIdStatus status = 2;
+	
+	enum SetFacebookIdStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
+	

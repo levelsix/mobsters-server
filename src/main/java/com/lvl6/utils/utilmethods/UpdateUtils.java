@@ -897,11 +897,11 @@ public class UpdateUtils implements UpdateUtil {
 			querySb.append(tableName);
 			querySb.append(" SET ");
 			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_REDEEMED);
-			querySb.append("=?, ");
-			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
+//			querySb.append("=?, ");
+//			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
 			querySb.append("=? WHERE ");
 			values.add(redeemTime);
-			values.add(true);
+//			values.add(true);
 			
 			querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
 			querySb.append(" IN (");

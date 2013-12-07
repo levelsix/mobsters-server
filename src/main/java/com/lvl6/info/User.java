@@ -131,6 +131,22 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public boolean updateSetFacebookId(String facebookId) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.facebookId = facebookId;
+			return true;
+		}
+		return false;
+	}
+
 	public boolean updateSetKabamNaid(int kabamNaid) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);

@@ -419,7 +419,6 @@ public class DBConstants {
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED = "time_accepted";
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_ID = "user_struct_id";
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_FB_LVL = "user_struct_fb_lvl";
-  public static final String USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED = "is_redeemed";
   public static final String USER_FACEBOOK_INVITE_FOR_SLOT__TIME_REDEEMED = "time_redeemed";
   
   /*USER FACEBOOK INVITE ACCEPTED

@@ -104,11 +104,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
   		querySb.append("NULL");
   	}
   	if (filterByRedeemed) {
-  		querySb.append(" AND ");
-  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
-  		querySb.append("=?");
-  		values.add(isRedeemed);
-  	}
+    	querySb.append(" AND ");
+    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_REDEEMED);
+    	querySb.append(" IS ");
+    	if (isRedeemed) {
+    		querySb.append("NOT ");
+    	}
+    	querySb.append("NULL");
+    }
   	String query = querySb.toString();
   	log.info("query=" + query + "\t values=" + values);
 
@@ -161,9 +164,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     if (filterByRedeemed) {
     	querySb.append(" AND ");
-    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
-    	querySb.append("=?");
-    	values.add(isRedeemed);
+    	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_REDEEMED);
+    	querySb.append(" IS ");
+    	if (isRedeemed) {
+    		querySb.append("NOT ");
+    	}
+    	querySb.append("NULL");
     }
 
     String query = querySb.toString();
@@ -222,12 +228,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	List<Object> values = new ArrayList<Object>();
   	values.add(facebookId);
   	
-  	if (filterByAccepted) {
-  		querySb.append(" AND ");
-  		querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__IS_REDEEMED);
-  		querySb.append("=?");
-  		values.add(isAccepted);
-  	}
+  	 if (filterByAccepted) {
+     	querySb.append(" AND ");
+     	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_ACCEPTED);
+     	querySb.append(" IS ");
+     	if (isAccepted) {
+     		querySb.append("NOT ");
+     	}
+     	querySb.append("NULL");
+     }
   	
   	String query = querySb.toString();
   	
@@ -344,7 +353,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     int userStructId = rs.getInt(i++);
     int userStructFbLvl = rs.getInt(i++);
-    boolean isRedeemed = rs.getBoolean(i++);
     
     Date timeRedeemed = null;
     try {
@@ -360,7 +368,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     UserFacebookInviteForSlot invite = new UserFacebookInviteForSlot(id, inviterUserId,
     		recipientFacebookId, timeOfInvite, timeAccepted, userStructId, userStructFbLvl,
-    		isRedeemed, timeRedeemed); 
+    		timeRedeemed); 
     return invite;
   }
 }
