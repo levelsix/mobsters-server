@@ -56,6 +56,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     AcceptAndRejectFbInviteForSlotsRequestProto reqProto = ((AcceptAndRejectFbInviteForSlotsRequestEvent)event).getAcceptAndRejectFbInviteForSlotsRequestProto();
 
+    log.info("reqProto=" + reqProto);
     //get values sent from the client (the request proto)
     MinimumUserProtoWithFacebookId senderProto = reqProto.getSender();
     MinimumUserProto sender = senderProto.getMinUserProto();
@@ -193,7 +194,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	Set<Integer> validIds = idsToInvitesInDb.keySet();
   	
   	//only want the acceptedInvite ids that aren't yet accepted nor redeemed
+  	log.info("acceptedInviteIds before filter: " + acceptedInviteIds);
   	retainIfInExistingInts(validIds, acceptedInviteIds);
+  	log.info("acceptedInviteIds after filter: " + acceptedInviteIds);
   	
   	//only want the rejectedInvite ids that aren't yet accepted nor redeemed
   	retainIfInExistingInts(validIds, rejectedInviteIds);
@@ -220,8 +223,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//inviteId into the rejectedInviteIds list,
   	//done so because the db probably has recorded that the inviter used up this user
   	//and is trying to use this user again
+  	log.info("acceptedInviteIds before inviter used check: " + acceptedInviteIds);
   	retainInvitesFromUnusedInviters(redeemedInviterIds, acceptedInviterIdsToInviteIds,
   			acceptedInviteIds, rejectedInviteIds);
+  	log.info("acceptedInviteIds after inviter used check: " + acceptedInviteIds);
   	
   	idsToInvites.putAll(idsToInvitesInDb);
   	
