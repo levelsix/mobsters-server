@@ -214,6 +214,8 @@ message IncreaseMonsterInventorySlotResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional IncreaseMonsterInventorySlotStatus status = 2;
 	
+	
+	
 	 enum IncreaseMonsterInventorySlotStatus {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_FUNDS = 2;
@@ -249,6 +251,8 @@ message InviteFbFriendsForSlotsResponseProto {
 	optional MinimumUserProtoWithFacebookId sender = 1;
 	optional InviteFbFriendsForSlotsStatus status = 2;
 	
+	repeated UserFacebookInviteForSlotProto invitesNew = 3;
+	
 	enum InviteFbFriendsForSlotsStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
@@ -268,6 +272,8 @@ message AcceptAndRejectFbInviteForSlotsRequestProto {
 message AcceptAndRejectFbInviteForSlotsResponseProto {
 	optional MinimumUserProtoWithFacebookId sender = 1;
 	optional AcceptAndRejectFbInviteForSlotsStatus status = 2;
+	
+	repeated UserFacebookInviteForSlotProto acceptedInvites = 3;
 	
 	enum AcceptAndRejectFbInviteForSlotsStatus {
 		SUCCESS = 1;

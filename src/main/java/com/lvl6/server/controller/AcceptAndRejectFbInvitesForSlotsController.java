@@ -2,6 +2,7 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AcceptAndRejectFbInviteForSlotsRequestEvent;
 import com.lvl6.events.response.AcceptAndRejectFbInviteForSlotsResponseEvent;
+import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsRequestProto;
 import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseProto;
@@ -24,7 +26,10 @@ import com.lvl6.proto.EventMonsterProto.AcceptAndRejectFbInviteForSlotsResponseP
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
+import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
+import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -97,6 +102,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (successful) {
+      	//need to retrieve all the inviters from the db, set the accepted time for
+      	//accepted invites
+      	Collection<UserFacebookInviteForSlot> invites = idsToInvitesInDb.values(); 
+      	List<Integer> userIds = getInviterIds(invites);
+      	Map<Integer, User> idsToInviters = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+      	
+      	for (UserFacebookInviteForSlot invite : invites) {
+      		invite.setTimeAccepted(acceptTime);
+      		
+      		int inviterId = invite.getInviterUserId();
+      		User inviter = idsToInviters.get(inviterId);
+      		MinimumUserProtoWithFacebookId inviterProto = null;
+      		
+      		//create the proto for the invites
+      		UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
+      				.createUserFacebookInviteForSlotProtoFromInvite(invite, inviter, inviterProto);
+      		
+      		resBuilder.addAcceptedInvites(inviteProto);
+      	}
     	  resBuilder.setStatus(AcceptAndRejectFbInviteForSlotsStatus.SUCCESS);
       }
       
@@ -300,6 +324,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	return true;
+  }
+  
+  private List<Integer> getInviterIds(Collection<UserFacebookInviteForSlot> invites) {
+  	List<Integer> inviterIds = new ArrayList<Integer>();
+  	
+  	for (UserFacebookInviteForSlot invite : invites) {
+  		int inviterId = invite.getInviterUserId();
+  		inviterIds.add(inviterId);
+  	}
+  	return inviterIds;
   }
   
 }

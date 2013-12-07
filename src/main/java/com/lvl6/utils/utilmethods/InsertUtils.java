@@ -2,7 +2,6 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -893,25 +892,28 @@ public class InsertUtils implements InsertUtil{
 	}
 
 	@Override
-	public int insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
-			Timestamp curTime, List<Integer> userStructIds, List<Integer> userStructsFbLvl) {
+	public List<Integer> insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
+			Timestamp curTime, Map<String, Integer> fbIdsToUserStructIds,
+  		Map<String, Integer> fbIdsToUserStructsFbLvl) {
 		String tableName = DBConstants.TABLE_USER_FACEBOOK_INVITE_FOR_SLOT;
-		int amount = facebookIds.size();
 		
-		List<Integer> inviterIdList = Collections.nCopies(amount, userId);
-		List<Timestamp> timeOfInviteList = Collections.nCopies(amount, curTime);
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for (String fbId : facebookIds) {
+			Integer userStructId = fbIdsToUserStructIds.get(fbId);
+			Integer userStructFbLvl = fbIdsToUserStructsFbLvl.get(fbId);
+			
+			Map<String, Object> newRow = new HashMap<String, Object>();
+			newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, userId);
+			newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID, fbId);
+			newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE, curTime);
+			newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_ID, userStructId);
+			newRow.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_FB_LVL, userStructFbLvl);
+			newRows.add(newRow);
+		}
 		
-		Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__INVITER_USER_ID, inviterIdList);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__RECIPIENT_FACEBOOK_ID, facebookIds);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__TIME_OF_INVITE, timeOfInviteList);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_ID, userStructIds);
-		insertParams.put(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__USER_STRUCT_FB_LVL, userStructsFbLvl);
 		
-		
-		int numInserted = DBConnection.get().insertIntoTableMultipleRows(
-				tableName, insertParams, amount);
-		return numInserted;
+		List<Integer> ids = DBConnection.get().insertIntoTableBasicReturnIds(tableName, newRows);
+		return ids;
 	}
 
 }

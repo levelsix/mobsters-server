@@ -3,6 +3,7 @@ package com.lvl6.utils.utilmethods;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONObject;
 
@@ -125,7 +126,8 @@ public interface InsertUtil {
 	public abstract int insertIntoMonsterForUserDeleted(int userId, List<String> deleteReasons,
 			List<String> deleteDetails, List<MonsterForUser> userMonsters, Date deleteDate);
 	
-	public abstract int insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
-			Timestamp curTime, List<Integer> userStructIds, List<Integer> userStructsFbLvl);
+	public abstract List<Integer> insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
+			Timestamp curTime, Map<String, Integer> fbIdsToUserStructIds,
+  		Map<String, Integer> fbIdsToUserStructsFbLvl);
 	
 }

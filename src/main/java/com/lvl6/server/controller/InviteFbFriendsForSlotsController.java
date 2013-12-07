@@ -19,7 +19,6 @@ import com.lvl6.events.request.InviteFbFriendsForSlotsRequestEvent;
 import com.lvl6.events.response.InviteFbFriendsForSlotsResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.info.UserFacebookInviteForSlot;
-import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsRequestProto.FacebookInviteStructure;
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto;
@@ -27,7 +26,9 @@ import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.Bui
 import com.lvl6.proto.EventMonsterProto.InviteFbFriendsForSlotsResponseProto.InviteFbFriendsForSlotsStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
+import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -95,12 +96,23 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       		idsToInvites, newFacebookIdsToInvite);
 
       boolean successful = false;
+      List<Integer> inviteIds = new ArrayList<Integer>();
       if(legit) {
+      	//will populate inviteIds
     	  successful = writeChangesToDb(aUser, newFacebookIdsToInvite, curTime,
-    	  		fbIdsToUserStructIds, fbIdsToUserStructFbLvl);
+    	  		fbIdsToUserStructIds, fbIdsToUserStructFbLvl, inviteIds);
       }
       
       if (successful) {
+      	Map<Integer, UserFacebookInviteForSlot> newIdsToInvites =
+      			UserFacebookInviteForSlotRetrieveUtils.getInviteForId(inviteIds);
+      	//client needs to know what the new invites are;
+      	for (Integer id : newIdsToInvites.keySet()) {
+      		UserFacebookInviteForSlot invite = newIdsToInvites.get(id);
+      		UserFacebookInviteForSlotProto inviteProto = CreateInfoProtoUtils
+      				.createUserFacebookInviteForSlotProtoFromInvite(invite, aUser, senderProto);
+      		resBuilder.addInvitesNew(inviteProto);
+      	}
     	  resBuilder.setStatus(InviteFbFriendsForSlotsStatus.SUCCESS);
       }
       
@@ -113,7 +125,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	//send this to all the recipients in fbIdsOfFriends that have a user id
       	//if want to send to the new ones use newFacebookIdsToInvite
       	List<Integer> recipientUserIds = RetrieveUtils.userRetrieveUtils()
-      			.getUserIdsForFacebookIds(fbIdsOfFriends);
+      			.getUserIdsForFacebookIds(newFacebookIdsToInvite);
       	
       	InviteFbFriendsForSlotsResponseProto responseProto = resBuilder.build();
       	for (Integer recipientUserId : recipientUserIds) {
@@ -231,25 +243,23 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private boolean writeChangesToDb(User aUser, List<String> newFacebookIdsToInvite, 
   		Timestamp curTime, Map<String, Integer> fbIdsToUserStructIds,
-  		Map<String, Integer> fbIdsToUserStructsFbLvl) {
+  		Map<String, Integer> fbIdsToUserStructsFbLvl, List<Integer> inviteIds) {
   	if (newFacebookIdsToInvite.isEmpty()) {
   		return true;
   	}
-  	List<Integer> userStructIds = MiscMethods.getValsInOrder(newFacebookIdsToInvite,
-  			fbIdsToUserStructIds);
-  	List<Integer> userStructsFbLvl = MiscMethods.getValsInOrder(newFacebookIdsToInvite,
-  			fbIdsToUserStructsFbLvl);
-  	
   	int userId = aUser.getId();
-  	int num = InsertUtils.get().insertIntoUserFbInviteForSlot(userId,
-  			newFacebookIdsToInvite, curTime, userStructIds, userStructsFbLvl);
+  	List<Integer> inviteIdsTemp = InsertUtils.get().insertIntoUserFbInviteForSlot(userId,
+  			newFacebookIdsToInvite, curTime, fbIdsToUserStructIds, fbIdsToUserStructsFbLvl);
+  	int numInserted = inviteIdsTemp.size();
   	
   	int expectedNum = newFacebookIdsToInvite.size();
-  	if (num != expectedNum) {
+  	if (numInserted != expectedNum) {
   		log.error("problem with updating user monster inventory slots and diamonds." +
-  				" num inserted: " + num + "\t should have been: " + expectedNum);
+  				" num inserted: " + numInserted + "\t should have been: " + expectedNum);
   	} 
-  	log.info("num inserted: " + num);
+  	log.info("num inserted: " + numInserted + "\t ids=" + inviteIdsTemp);
+  	
+  	inviteIds.addAll(inviteIdsTemp);
   	return true;
   }
   

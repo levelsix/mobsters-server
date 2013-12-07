@@ -40,6 +40,32 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return invite;
   }
   
+  public static Map<Integer, UserFacebookInviteForSlot> getInviteForId(List<Integer> inviteIds) {
+  	int amount = inviteIds.size();
+  	List<String> questionMarkList = Collections.nCopies(amount, "?"); 
+  	String questionMarks = StringUtils.csvList(questionMarkList);
+
+  	List<Object> params = new ArrayList<Object>();
+  	params.addAll(inviteIds);
+
+  	StringBuilder querySb = new StringBuilder();
+  	querySb.append("SELECT * FROM ");
+  	querySb.append(TABLE_NAME);
+  	querySb.append(" WHERE ");
+  	querySb.append(DBConstants.USER_FACEBOOK_INVITE_FOR_SLOT__ID);
+  	querySb.append(" IN (");
+  	querySb.append(questionMarks);
+  	querySb.append(");");
+
+  	String query = querySb.toString();
+  	log.info("query=" + query + "\t values=" + params);
+  	Connection conn = DBConnection.get().getConnection();
+  	ResultSet rs = DBConnection.get().selectDirectQueryNaive(conn, query, params);
+  	Map<Integer, UserFacebookInviteForSlot> idsToInvites = convertRSToInviteIdsToInvites(rs);
+  	DBConnection.get().close(rs, null, conn);
+  	return idsToInvites;
+  }
+  
   public static Map<Integer, UserFacebookInviteForSlot> getSpecificOrAllInvitesForInviter(
   		int userId, List<Integer> specificInviteIds, boolean filterByAccepted,
   		boolean isAccepted, boolean filterByRedeemed, boolean isRedeemed) {
