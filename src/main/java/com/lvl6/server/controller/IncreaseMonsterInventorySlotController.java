@@ -308,6 +308,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   				curTime, nEarliestInvites);
   		log.info("num saved: " + num);
 
+  		if (num == minNumInvites) {
+  			log.error("expected updated: " + minNumInvites + "\t actual updated: " + num);
+  			return false;
+  		}
   		//delete all the remaining invites
   		int numCurInvites = inviteIdsTheRest.size();
   		if (numCurInvites > 0) {
@@ -316,6 +320,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsTheRest);
   			log.info("num deleted: " + num);
   		}
+  		success = true;
   	}
   	
   	if (IncreaseSlotType.PURCHASE == increaseType) {
