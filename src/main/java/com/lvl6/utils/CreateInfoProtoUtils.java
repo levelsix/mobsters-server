@@ -300,6 +300,7 @@ public class CreateInfoProtoUtils {
     builder.setUserId(userStruct.getUserId());
     builder.setStructId(userStruct.getStructId());
 //    builder.setLevel(userStruct.getLevel());
+    builder.setFbInviteStructLvl(userStruct.getFbInviteStructLvl());
     builder.setIsComplete(userStruct.isComplete());
     builder.setCoordinates(createCoordinateProtoFromCoordinatePair(userStruct.getCoordinates()));
     builder.setOrientation(userStruct.getOrientation());
