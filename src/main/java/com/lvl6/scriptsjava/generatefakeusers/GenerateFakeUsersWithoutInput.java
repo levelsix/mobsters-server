@@ -71,11 +71,11 @@ public class GenerateFakeUsersWithoutInput {
     
     InsertUtil insertUtils = (InsertUtil) AppContext.getApplicationContext().getBean("insertUtils");
     boolean activateShield = false;
-    
+    String facebookId = null;
     if (insertUtils.insertUser(newReferCode + newReferCode, name, null,
     		newReferCode, level, 0, 0, 0, true, activateShield,
     		new Timestamp((new Date()).getTime()),
-        ControllerConstants.TUTORIAL__INIT_RANK) < 0) {
+        ControllerConstants.TUTORIAL__INIT_RANK, facebookId) < 0) {
       System.out.println("error in creating user");
     }
 
