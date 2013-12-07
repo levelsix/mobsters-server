@@ -307,13 +307,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		int num = UpdateUtils.get().updateRedeemUserFacebookInviteForSlot(
   				curTime, nEarliestInvites);
   		log.info("num saved: " + num);
-  		
+
   		//delete all the remaining invites
   		int numCurInvites = inviteIdsTheRest.size();
-  		log.info("num current invites: " + numCurInvites + "invitesToDelete= " +
-  				inviteIdsTheRest);
-  		num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsTheRest);
-  		log.info("num deleted: " + num);
+  		if (numCurInvites > 0) {
+  			log.info("num current invites: " + numCurInvites + " invitesToDelete= " +
+  					inviteIdsTheRest);
+  			num = DeleteUtils.get().deleteUserFacebookInvitesForSlots(inviteIdsTheRest);
+  			log.info("num deleted: " + num);
+  		}
   	}
   	
   	if (IncreaseSlotType.PURCHASE == increaseType) {
