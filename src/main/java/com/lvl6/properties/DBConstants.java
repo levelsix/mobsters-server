@@ -317,6 +317,7 @@ public class DBConstants {
   public static final String TASK_STAGE_HISTORY__TASK_FOR_USER_ID = "task_for_user_id";
   public static final String TASK_STAGE_HISTORY__STAGE_NUM = "stage_num";
   public static final String TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID = "task_stage_monster_id";
+  //not needed since task stage monster now has monster_type
   public static final String TASK_STAGE_HISTORY__MONSTER_TYPE = "monster_type";
   public static final String TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";
   public static final String TASK_STAGE_HISTORY__SILVER_GAINED = "silver_gained";

@@ -165,7 +165,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   //TODO: MOVE THESE METHODS INTO A UTILS FOR TASK
   private void deleteExistingTaskForUser(long taskForUserId, TaskForUserOngoing aTaskForUser) {
-  	DeleteUtils.get().deleteTaskForUserOngoingWithTaskForUserId(taskForUserId);
+//  	DeleteUtils.get().deleteTaskForUserOngoingWithTaskForUserId(taskForUserId);
   	int userId = aTaskForUser.getUserId();
   	int taskId = aTaskForUser.getTaskId();
   	int expGained = aTaskForUser.getExpGained();
@@ -250,13 +250,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  //calculate the cash that the user could gain for this task
 	  int cashGained = MiscMethods.sumListsInMap(stageNumsToSilvers);
 	  
-	  
-	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
-		  log.error("problem with updating user stats post-task. cashGained="
-				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
-				  ", clientTime=" + clientTime + ", user=" + u);
-		  return false;
-	  }
+	  //don't know why this is used
+//	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
+//		  log.error("problem with updating user stats post-task. cashGained="
+//				  + 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
+//				  ", clientTime=" + clientTime + ", user=" + u);
+//		  return false;
+//	  }
 
 	  //record into user_task table	  
 	  long userTaskId = InsertUtils.get().insertIntoUserTaskReturnId(uId, tId,

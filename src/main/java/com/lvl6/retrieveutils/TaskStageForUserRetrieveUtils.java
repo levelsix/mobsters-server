@@ -45,14 +45,14 @@ import com.lvl6.utils.DBConnection;
   	return tsfuList;
   }
   
-  public static TaskStageForUser getTaskStageForUserForUserId(int userId) {
-    Connection conn = DBConnection.get().getConnection();
-    
-    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-    TaskStageForUser ut = convertRSToUserTask(rs);
-    DBConnection.get().close(rs, null, conn);
-    return ut;
-  }
+//  public static TaskStageForUser getTaskStageForUserForUserId(int userId) {
+//    Connection conn = DBConnection.get().getConnection();
+//    
+//    ResultSet rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+//    TaskStageForUser ut = convertRSToUserTask(rs);
+//    DBConnection.get().close(rs, null, conn);
+//    return ut;
+//  }
   
   private static TaskStageForUser convertRSToUserTask(ResultSet rs) {
     List<TaskStageForUser> utList = new ArrayList<TaskStageForUser>();
