@@ -32,19 +32,19 @@ import com.lvl6.utils.DBConnection;
     return boosterPackIdsToBoosterPacks;
   }
   
-  public static Map<Integer, BoosterPack> getBoosterPacksForBoosterPackIds(
-      List<Integer> boosterPackIds) {
-    if (boosterPackIdsToBoosterPacks == null) {
-      setStaticBoosterPackIdsToBoosterPacks();
-    }
-    Map<Integer, BoosterPack> returnValue = new HashMap<Integer, BoosterPack>();
-    for (int id : boosterPackIds) {
-      BoosterPack aPack = boosterPackIdsToBoosterPacks.get(id);
-      returnValue.put(id, aPack);
-    }
-    
-    return returnValue;
-  }
+//  public static Map<Integer, BoosterPack> getBoosterPacksForBoosterPackIds(
+//      List<Integer> boosterPackIds) {
+//    if (boosterPackIdsToBoosterPacks == null) {
+//      setStaticBoosterPackIdsToBoosterPacks();
+//    }
+//    Map<Integer, BoosterPack> returnValue = new HashMap<Integer, BoosterPack>();
+//    for (int id : boosterPackIds) {
+//      BoosterPack aPack = boosterPackIdsToBoosterPacks.get(id);
+//      returnValue.put(id, aPack);
+//    }
+//    
+//    return returnValue;
+//  }
 
   public static BoosterPack getBoosterPackForBoosterPackId(int boosterPackId) {
     log.debug("retrieve booster pack data for booster pack " + boosterPackId);

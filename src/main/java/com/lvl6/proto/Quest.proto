@@ -26,6 +26,7 @@ message FullQuestProto {
      optional string questGiverImageSuffix = 17;
      optional int32 priority = 18;
      optional string carrotId = 19;
+     optional bool isAchievement = 20;
      
      enum QuestType {
      	KILL_MONSTER = 1;
