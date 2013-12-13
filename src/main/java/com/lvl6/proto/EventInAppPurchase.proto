@@ -62,6 +62,8 @@ message EarnFreeDiamondsResponseProto {
 
 message ExchangeGemsForResourcesRequestProto {
 	optional MinimumUserProto sender = 1;
+	
+	//positive number representing how many gems to be taken away
 	optional int32 numGems = 2;
 	optional int32 numResources = 3;
 	optional ResourceType resourceType = 4 [default = CASH];
@@ -77,6 +79,7 @@ message ExchangeGemsForResourcesResponseProto {
 	enum ExchangeGemsForResourcesStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
+		FAIL_INSUFFICIENT_GEMS = 3;
 	}
 }
 

@@ -3706,10 +3706,12 @@ public final class EventInAppPurchaseProto {
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_OTHER(1, 2),
+      FAIL_INSUFFICIENT_GEMS(2, 3),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_OTHER_VALUE = 2;
+      public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 3;
       
       
       public final int getNumber() { return value; }
@@ -3718,6 +3720,7 @@ public final class EventInAppPurchaseProto {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
+          case 3: return FAIL_INSUFFICIENT_GEMS;
           default: return null;
         }
       }
@@ -3748,7 +3751,7 @@ public final class EventInAppPurchaseProto {
       }
       
       private static final ExchangeGemsForResourcesStatus[] VALUES = {
-        SUCCESS, FAIL_OTHER, 
+        SUCCESS, FAIL_OTHER, FAIL_INSUFFICIENT_GEMS, 
       };
       
       public static ExchangeGemsForResourcesStatus valueOf(
@@ -4293,14 +4296,15 @@ public final class EventInAppPurchaseProto {
       "\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007n" +
       "umGems\030\002 \001(\005\022\024\n\014numResources\030\003 \001(\005\0228\n\014re" +
       "sourceType\030\004 \001(\0162\034.com.lvl6.proto.Resour" +
-      "ceType:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\376\001\n%Exc" +
+      "ceType:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\232\002\n%Exc" +
       "hangeGemsForResourcesResponseProto\0220\n\006se" +
       "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
       "roto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Ex" +
       "changeGemsForResourcesResponseProto.Exch" +
-      "angeGemsForResourcesStatus\"=\n\036ExchangeGe" +
+      "angeGemsForResourcesStatus\"Y\n\036ExchangeGe" +
       "msForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI",
-      "L_OTHER\020\002B\031B\027EventInAppPurchaseProto"
+      "L_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003B\031B" +
+      "\027EventInAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
