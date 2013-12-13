@@ -3001,6 +3001,1226 @@ public final class EventInAppPurchaseProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.EarnFreeDiamondsResponseProto)
   }
   
+  public interface ExchangeGemsForResourcesRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional int32 numGems = 2;
+    boolean hasNumGems();
+    int getNumGems();
+    
+    // optional int32 numResources = 3;
+    boolean hasNumResources();
+    int getNumResources();
+    
+    // optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];
+    boolean hasResourceType();
+    com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    
+    // optional int64 clientTime = 5;
+    boolean hasClientTime();
+    long getClientTime();
+  }
+  public static final class ExchangeGemsForResourcesRequestProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ExchangeGemsForResourcesRequestProtoOrBuilder {
+    // Use ExchangeGemsForResourcesRequestProto.newBuilder() to construct.
+    private ExchangeGemsForResourcesRequestProto(Builder builder) {
+      super(builder);
+    }
+    private ExchangeGemsForResourcesRequestProto(boolean noInit) {}
+    
+    private static final ExchangeGemsForResourcesRequestProto defaultInstance;
+    public static ExchangeGemsForResourcesRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ExchangeGemsForResourcesRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional int32 numGems = 2;
+    public static final int NUMGEMS_FIELD_NUMBER = 2;
+    private int numGems_;
+    public boolean hasNumGems() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getNumGems() {
+      return numGems_;
+    }
+    
+    // optional int32 numResources = 3;
+    public static final int NUMRESOURCES_FIELD_NUMBER = 3;
+    private int numResources_;
+    public boolean hasNumResources() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getNumResources() {
+      return numResources_;
+    }
+    
+    // optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];
+    public static final int RESOURCETYPE_FIELD_NUMBER = 4;
+    private com.lvl6.proto.StructureProto.ResourceType resourceType_;
+    public boolean hasResourceType() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+      return resourceType_;
+    }
+    
+    // optional int64 clientTime = 5;
+    public static final int CLIENTTIME_FIELD_NUMBER = 5;
+    private long clientTime_;
+    public boolean hasClientTime() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public long getClientTime() {
+      return clientTime_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      numGems_ = 0;
+      numResources_ = 0;
+      resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      clientTime_ = 0L;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, numGems_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, numResources_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, resourceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, clientTime_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, numGems_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, numResources_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, resourceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, clientTime_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        numGems_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        numResources_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        clientTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto build() {
+        com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto buildPartial() {
+        com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto result = new com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.numGems_ = numGems_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.numResources_ = numResources_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.resourceType_ = resourceType_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.clientTime_ = clientTime_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto other) {
+        if (other == com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasNumGems()) {
+          setNumGems(other.getNumGems());
+        }
+        if (other.hasNumResources()) {
+          setNumResources(other.getNumResources());
+        }
+        if (other.hasResourceType()) {
+          setResourceType(other.getResourceType());
+        }
+        if (other.hasClientTime()) {
+          setClientTime(other.getClientTime());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              numGems_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              numResources_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                resourceType_ = value;
+              }
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              clientTime_ = input.readInt64();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional int32 numGems = 2;
+      private int numGems_ ;
+      public boolean hasNumGems() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getNumGems() {
+        return numGems_;
+      }
+      public Builder setNumGems(int value) {
+        bitField0_ |= 0x00000002;
+        numGems_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumGems() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        numGems_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 numResources = 3;
+      private int numResources_ ;
+      public boolean hasNumResources() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getNumResources() {
+        return numResources_;
+      }
+      public Builder setNumResources(int value) {
+        bitField0_ |= 0x00000004;
+        numResources_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearNumResources() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        numResources_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.ResourceType resourceType = 4 [default = CASH];
+      private com.lvl6.proto.StructureProto.ResourceType resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      public boolean hasResourceType() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public com.lvl6.proto.StructureProto.ResourceType getResourceType() {
+        return resourceType_;
+      }
+      public Builder setResourceType(com.lvl6.proto.StructureProto.ResourceType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        resourceType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearResourceType() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 clientTime = 5;
+      private long clientTime_ ;
+      public boolean hasClientTime() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public long getClientTime() {
+        return clientTime_;
+      }
+      public Builder setClientTime(long value) {
+        bitField0_ |= 0x00000010;
+        clientTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClientTime() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ExchangeGemsForResourcesRequestProto)
+    }
+    
+    static {
+      defaultInstance = new ExchangeGemsForResourcesRequestProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ExchangeGemsForResourcesRequestProto)
+  }
+  
+  public interface ExchangeGemsForResourcesResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.UserProto.MinimumUserProto getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    
+    // optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;
+    boolean hasStatus();
+    com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus getStatus();
+  }
+  public static final class ExchangeGemsForResourcesResponseProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ExchangeGemsForResourcesResponseProtoOrBuilder {
+    // Use ExchangeGemsForResourcesResponseProto.newBuilder() to construct.
+    private ExchangeGemsForResourcesResponseProto(Builder builder) {
+      super(builder);
+    }
+    private ExchangeGemsForResourcesResponseProto(boolean noInit) {}
+    
+    private static final ExchangeGemsForResourcesResponseProto defaultInstance;
+    public static ExchangeGemsForResourcesResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ExchangeGemsForResourcesResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_fieldAccessorTable;
+    }
+    
+    public enum ExchangeGemsForResourcesStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      SUCCESS(0, 1),
+      FAIL_OTHER(1, 2),
+      ;
+      
+      public static final int SUCCESS_VALUE = 1;
+      public static final int FAIL_OTHER_VALUE = 2;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static ExchangeGemsForResourcesStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<ExchangeGemsForResourcesStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<ExchangeGemsForResourcesStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ExchangeGemsForResourcesStatus>() {
+              public ExchangeGemsForResourcesStatus findValueByNumber(int number) {
+                return ExchangeGemsForResourcesStatus.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final ExchangeGemsForResourcesStatus[] VALUES = {
+        SUCCESS, FAIL_OTHER, 
+      };
+      
+      public static ExchangeGemsForResourcesStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private ExchangeGemsForResourcesStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus)
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;
+    public static final int STATUS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status_;
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus getStatus() {
+      return status_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventInAppPurchaseProto.internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto build() {
+        com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto buildPartial() {
+        com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto result = new com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto other) {
+        if (other == com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus value = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;
+      private com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus getStatus() {
+        return status_;
+      }
+      public Builder setStatus(com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ExchangeGemsForResourcesResponseProto)
+    }
+    
+    static {
+      defaultInstance = new ExchangeGemsForResourcesResponseProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ExchangeGemsForResourcesResponseProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_InAppPurchaseRequestProto_descriptor;
   private static
@@ -3021,6 +4241,16 @@ public final class EventInAppPurchaseProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_EarnFreeDiamondsResponseProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3031,34 +4261,46 @@ public final class EventInAppPurchaseProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\030EventInAppPurchase.proto\022\016com.lvl6.pro" +
-      "to\032\023InAppPurchase.proto\032\nUser.proto\"\251\001\n\031" +
-      "InAppPurchaseRequestProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007r" +
-      "eceipt\030\002 \001(\t\022\022\n\nlocalcents\030\003 \001(\t\022\025\n\rloca" +
-      "lcurrency\030\004 \001(\t\022\016\n\006locale\030\005 \001(\t\022\016\n\006ipadd" +
-      "r\030\006 \001(\t\"\314\002\n\032InAppPurchaseResponseProto\0220" +
-      "\n\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumU" +
-      "serProto\022N\n\006status\030\002 \001(\0162>.com.lvl6.prot" +
-      "o.InAppPurchaseResponseProto.InAppPurcha",
-      "seStatus\022\026\n\016diamondsGained\030\003 \001(\005\022\023\n\013coin" +
-      "sGained\030\004 \001(\005\022\023\n\013packageName\030\005 \001(\t\022\024\n\014pa" +
-      "ckagePrice\030\006 \001(\001\022\017\n\007receipt\030\007 \001(\t\"C\n\023InA" +
-      "ppPurchaseStatus\022\013\n\007SUCCESS\020\001\022\010\n\004FAIL\020\002\022" +
-      "\025\n\021DUPLICATE_RECEIPT\020\003\"\260\001\n\034EarnFreeDiamo" +
-      "ndsRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022J\n\020freeDiamond" +
-      "sType\030\002 \001(\0162$.com.lvl6.proto.EarnFreeDia" +
-      "mondsType:\nFB_CONNECT\022\022\n\nclientTime\030\003 \001(" +
-      "\003\"\353\002\n\035EarnFreeDiamondsResponseProto\0220\n\006s",
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022T\n\006status\030\002 \001(\0162D.com.lvl6.proto.E" +
-      "arnFreeDiamondsResponseProto.EarnFreeDia" +
-      "mondsStatus\022J\n\020freeDiamondsType\030\003 \001(\0162$." +
-      "com.lvl6.proto.EarnFreeDiamondsType:\nFB_" +
-      "CONNECT\"v\n\026EarnFreeDiamondsStatus\022\013\n\007SUC" +
-      "CESS\020\001\022%\n!CLIENT_TOO_APART_FROM_SERVER_T" +
-      "IME\020\002\022\030\n\024METHOD_NOT_SUPPORTED\020\003\022\016\n\nOTHER" +
-      "_FAIL\020\004B\031B\027EventInAppPurchaseProto"
+      "to\032\023InAppPurchase.proto\032\017Structure.proto" +
+      "\032\nUser.proto\"\251\001\n\031InAppPurchaseRequestPro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022\017\n\007receipt\030\002 \001(\t\022\022\n\nlocalce" +
+      "nts\030\003 \001(\t\022\025\n\rlocalcurrency\030\004 \001(\t\022\016\n\006loca" +
+      "le\030\005 \001(\t\022\016\n\006ipaddr\030\006 \001(\t\"\314\002\n\032InAppPurcha" +
+      "seResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022N\n\006status\030\002 \001(" +
+      "\0162>.com.lvl6.proto.InAppPurchaseResponse",
+      "Proto.InAppPurchaseStatus\022\026\n\016diamondsGai" +
+      "ned\030\003 \001(\005\022\023\n\013coinsGained\030\004 \001(\005\022\023\n\013packag" +
+      "eName\030\005 \001(\t\022\024\n\014packagePrice\030\006 \001(\001\022\017\n\007rec" +
+      "eipt\030\007 \001(\t\"C\n\023InAppPurchaseStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\010\n\004FAIL\020\002\022\025\n\021DUPLICATE_RECEIPT\020\003\"" +
+      "\260\001\n\034EarnFreeDiamondsRequestProto\0220\n\006send" +
+      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
+      "to\022J\n\020freeDiamondsType\030\002 \001(\0162$.com.lvl6." +
+      "proto.EarnFreeDiamondsType:\nFB_CONNECT\022\022" +
+      "\n\nclientTime\030\003 \001(\003\"\353\002\n\035EarnFreeDiamondsR",
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022T\n\006status\030\002 \001(\0162D" +
+      ".com.lvl6.proto.EarnFreeDiamondsResponse" +
+      "Proto.EarnFreeDiamondsStatus\022J\n\020freeDiam" +
+      "ondsType\030\003 \001(\0162$.com.lvl6.proto.EarnFree" +
+      "DiamondsType:\nFB_CONNECT\"v\n\026EarnFreeDiam" +
+      "ondsStatus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_AP" +
+      "ART_FROM_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUP" +
+      "PORTED\020\003\022\016\n\nOTHER_FAIL\020\004\"\315\001\n$ExchangeGem" +
+      "sForResourcesRequestProto\0220\n\006sender\030\001 \001(",
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007n" +
+      "umGems\030\002 \001(\005\022\024\n\014numResources\030\003 \001(\005\0228\n\014re" +
+      "sourceType\030\004 \001(\0162\034.com.lvl6.proto.Resour" +
+      "ceType:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\376\001\n%Exc" +
+      "hangeGemsForResourcesResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Ex" +
+      "changeGemsForResourcesResponseProto.Exch" +
+      "angeGemsForResourcesStatus\"=\n\036ExchangeGe" +
+      "msForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI",
+      "L_OTHER\020\002B\031B\027EventInAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3097,6 +4339,22 @@ public final class EventInAppPurchaseProto {
               new java.lang.String[] { "Sender", "Status", "FreeDiamondsType", },
               com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.class,
               com.lvl6.proto.EventInAppPurchaseProto.EarnFreeDiamondsResponseProto.Builder.class);
+          internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ExchangeGemsForResourcesRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "NumGems", "NumResources", "ResourceType", "ClientTime", },
+              com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto.class,
+              com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ExchangeGemsForResourcesResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "Status", },
+              com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.class,
+              com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.Builder.class);
           return null;
         }
       };
@@ -3104,6 +4362,7 @@ public final class EventInAppPurchaseProto {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.lvl6.proto.InAppPurchaseProto.getDescriptor(),
+          com.lvl6.proto.StructureProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
   }
