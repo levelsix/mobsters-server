@@ -275,6 +275,7 @@ public class CreateInfoProtoUtils {
       builder.setPriority(quest.getPriority());
     }
     builder.setCarrotId(quest.getCarrotId());
+    builder.setIsAchievement(quest.isAchievement());
     
     return builder.build();
   }

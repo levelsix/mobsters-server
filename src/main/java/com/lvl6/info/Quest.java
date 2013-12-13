@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Quest implements Serializable {
 	
-	private static final long serialVersionUID = -1107519920555385732L;
+	private static final long serialVersionUID = 1227799912592612183L;
 	private int id;
   private int cityId;
   private String goodName;
@@ -25,13 +25,15 @@ public class Quest implements Serializable {
   private String goodQuestGiverImageSuffix;
   private int priority;
   private String carrotId;
-  
-	public Quest(int id, int cityId, String goodName, String goodDescription,
+  private boolean isAchievement;
+
+  public Quest(int id, int cityId, String goodName, String goodDescription,
 			String goodDoneResponse, Dialogue goodAcceptDialogue, int questType,
 			String jobDescription, int staticDataId, int quantity, int coinReward,
 			int diamondReward, int expReward, int monsterIdReward,
 			boolean isCompleteMonster, List<Integer> questsRequiredForThis,
-			String goodQuestGiverImageSuffix, int priority, String carrotId) {
+			String goodQuestGiverImageSuffix, int priority, String carrotId,
+			boolean isAchievement) {
 		super();
 		this.id = id;
 		this.cityId = cityId;
@@ -52,6 +54,7 @@ public class Quest implements Serializable {
 		this.goodQuestGiverImageSuffix = goodQuestGiverImageSuffix;
 		this.priority = priority;
 		this.carrotId = carrotId;
+		this.isAchievement = isAchievement;
 	}
 
 	public int getId() {
@@ -206,6 +209,14 @@ public class Quest implements Serializable {
 		this.carrotId = carrotId;
 	}
 
+	public boolean isAchievement() {
+		return isAchievement;
+	}
+
+	public void setAchievement(boolean isAchievement) {
+		this.isAchievement = isAchievement;
+	}
+
 	@Override
 	public String toString() {
 		return "Quest [id=" + id + ", cityId=" + cityId + ", goodName=" + goodName
@@ -218,7 +229,8 @@ public class Quest implements Serializable {
 				+ ", isCompleteMonster=" + isCompleteMonster
 				+ ", questsRequiredForThis=" + questsRequiredForThis
 				+ ", goodQuestGiverImageSuffix=" + goodQuestGiverImageSuffix
-				+ ", priority=" + priority + ", carrotId=" + carrotId + "]";
+				+ ", priority=" + priority + ", carrotId=" + carrotId
+				+ ", isAchievement=" + isAchievement + "]";
 	}
   
 }

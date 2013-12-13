@@ -179,12 +179,13 @@ import com.lvl6.utils.QuestGraph;
     String goodQuestGiverImageSuffix = rs.getString(i++);
     int priority = rs.getInt(i++);
     String carrotId = rs.getString(i++);
+    boolean isAchievement = rs.getBoolean(i++);
     
     Quest quest = new Quest(id, cityId, goodName, goodDescription,
     		goodDoneResponse, goodAcceptDialogue, questType, jobDescription,
     		staticDataId, quantity, coinReward, diamondReward, expReward,
     		monsterIdReward, isCompleteMonster, questsRequiredForThis,
-    		goodQuestGiverImageSuffix, priority, carrotId);
+    		goodQuestGiverImageSuffix, priority, carrotId, isAchievement);
     
     return quest;
   }
