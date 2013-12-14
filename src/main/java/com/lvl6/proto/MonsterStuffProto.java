@@ -2993,9 +2993,9 @@ public final class MonsterStuffProto {
     boolean hasExpectedStartTimeMillis();
     long getExpectedStartTimeMillis();
     
-    // optional string userHospitalStructId = 4;
+    // optional int32 userHospitalStructId = 4;
     boolean hasUserHospitalStructId();
-    String getUserHospitalStructId();
+    int getUserHospitalStructId();
     
     // optional int32 healthProgress = 5;
     boolean hasHealthProgress();
@@ -3064,36 +3064,14 @@ public final class MonsterStuffProto {
       return expectedStartTimeMillis_;
     }
     
-    // optional string userHospitalStructId = 4;
+    // optional int32 userHospitalStructId = 4;
     public static final int USERHOSPITALSTRUCTID_FIELD_NUMBER = 4;
-    private java.lang.Object userHospitalStructId_;
+    private int userHospitalStructId_;
     public boolean hasUserHospitalStructId() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
-    public String getUserHospitalStructId() {
-      java.lang.Object ref = userHospitalStructId_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          userHospitalStructId_ = s;
-        }
-        return s;
-      }
-    }
-    private com.google.protobuf.ByteString getUserHospitalStructIdBytes() {
-      java.lang.Object ref = userHospitalStructId_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        userHospitalStructId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getUserHospitalStructId() {
+      return userHospitalStructId_;
     }
     
     // optional int32 healthProgress = 5;
@@ -3120,7 +3098,7 @@ public final class MonsterStuffProto {
       userId_ = 0;
       userMonsterId_ = 0L;
       expectedStartTimeMillis_ = 0L;
-      userHospitalStructId_ = "";
+      userHospitalStructId_ = 0;
       healthProgress_ = 0;
       priority_ = 0;
     }
@@ -3146,7 +3124,7 @@ public final class MonsterStuffProto {
         output.writeInt64(3, expectedStartTimeMillis_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getUserHospitalStructIdBytes());
+        output.writeInt32(4, userHospitalStructId_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(5, healthProgress_);
@@ -3177,7 +3155,7 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getUserHospitalStructIdBytes());
+          .computeInt32Size(4, userHospitalStructId_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
@@ -3317,7 +3295,7 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         expectedStartTimeMillis_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
-        userHospitalStructId_ = "";
+        userHospitalStructId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
         healthProgress_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -3465,9 +3443,9 @@ public final class MonsterStuffProto {
               expectedStartTimeMillis_ = input.readInt64();
               break;
             }
-            case 34: {
+            case 32: {
               bitField0_ |= 0x00000008;
-              userHospitalStructId_ = input.readBytes();
+              userHospitalStructId_ = input.readInt32();
               break;
             }
             case 40: {
@@ -3549,40 +3527,25 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional string userHospitalStructId = 4;
-      private java.lang.Object userHospitalStructId_ = "";
+      // optional int32 userHospitalStructId = 4;
+      private int userHospitalStructId_ ;
       public boolean hasUserHospitalStructId() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      public String getUserHospitalStructId() {
-        java.lang.Object ref = userHospitalStructId_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          userHospitalStructId_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
+      public int getUserHospitalStructId() {
+        return userHospitalStructId_;
       }
-      public Builder setUserHospitalStructId(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+      public Builder setUserHospitalStructId(int value) {
+        bitField0_ |= 0x00000008;
         userHospitalStructId_ = value;
         onChanged();
         return this;
       }
       public Builder clearUserHospitalStructId() {
         bitField0_ = (bitField0_ & ~0x00000008);
-        userHospitalStructId_ = getDefaultInstance().getUserHospitalStructId();
+        userHospitalStructId_ = 0;
         onChanged();
         return this;
-      }
-      void setUserHospitalStructId(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000008;
-        userHospitalStructId_ = value;
-        onChanged();
       }
       
       // optional int32 healthProgress = 5;
@@ -6724,7 +6687,7 @@ public final class MonsterStuffProto {
       "serMonsterHealingProto\022\016\n\006userId\030\001 \001(\005\022\025" +
       "\n\ruserMonsterId\030\002 \001(\003\022\037\n\027expectedStartTi" +
       "meMillis\030\003 \001(\003\022\034\n\024userHospitalStructId\030\004",
-      " \001(\t\022\026\n\016healthProgress\030\005 \001(\005\022\020\n\010priority" +
+      " \001(\005\022\026\n\016healthProgress\030\005 \001(\005\022\020\n\010priority" +
       "\030\006 \001(\005\"M\n\035UserMonsterCurrentHealthProto\022" +
       "\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentHealth\030" +
       "\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006userId" +

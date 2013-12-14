@@ -111,10 +111,16 @@ import com.lvl6.utils.utilmethods.StringUtils;
     Date expectedStartTime = null;
     try {
     	ts = rs.getTimestamp(i++);
-    	expectedStartTime = new Date(ts.getTime());
+    	if (!rs.wasNull()) {
+    		expectedStartTime = new Date(ts.getTime());
+    	}
     } catch (SQLException e) {
     	log.error("expected start time might be null userId=" + userId, e);
     }
+    
+    int userStructHospitalId = rs.getInt(i++);
+    int healthProgress = rs.getInt(i++);
+    int priority = rs.getInt(i++);
     
 //    Date queuedTime = null;
 //    try {
@@ -125,7 +131,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
 //    }
     
     MonsterHealingForUser userMonster = new MonsterHealingForUser(userId,
-    		monsterForUserId, expectedStartTime);//, queuedTime);
+    		monsterForUserId, expectedStartTime, userStructHospitalId, healthProgress,
+    		priority);
     return userMonster;
   }
 

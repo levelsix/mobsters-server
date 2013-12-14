@@ -459,6 +459,10 @@ public class CreateInfoProtoUtils {
   		umhpb.setExpectedStartTimeMillis(aDate.getTime());
   	}
   	
+  	umhpb.setUserHospitalStructId(mhfu.getUserStructHospitalId());
+  	umhpb.setHealthProgress(mhfu.getHealthProgress());
+  	umhpb.setPriority(mhfu.getPriority());
+  	
 //  	aDate = mhfu.getQueuedTime();
 //  	if (null != aDate) {
 //  		umhpb.setQueuedTimeMillis(aDate.getTime());
