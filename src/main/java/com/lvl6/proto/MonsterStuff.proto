@@ -66,16 +66,22 @@ message FullUserMonsterProto {
 	//optional string sourceOfPieces = 11;	//not needed for client
 }
 //------------------------------------------------------------------------------------------
-
+// used in HealMonsterRequestProto
 message UserMonsterHealingProto {
 	optional int32 userId = 1;
 	optional int64 userMonsterId = 2;
 	optional int64 expectedStartTimeMillis = 3;
-	//optional int64 queuedTimeMillis = 4;
+	
+	//id of the user's hospital structure
+	optional string userHospitalStructId = 4;
+	//how much health is already healed	
+	optional int32 healthProgress = 5;
+	//incrementing number (starts back at one(?) when healing a monster and it's the first one)
+	optional int32 priority = 6;
 }
 
 //------------------------------------------------------------------------------------------
-
+// used in UpdateMonsterHealthRequestProto
 message UserMonsterCurrentHealthProto {
 	optional int64 userMonsterId = 1;
 	optional int32 currentHealth = 2; //what the health should be
