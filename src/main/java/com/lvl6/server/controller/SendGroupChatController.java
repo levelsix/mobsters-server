@@ -118,6 +118,9 @@ public class SendGroupChatController extends EventController {
 
     SendGroupChatResponseProto.Builder resBuilder = SendGroupChatResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
+    resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
+    SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(senderProto.getUserId());
+    resEvent.setTag(event.getTag());
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
@@ -125,8 +128,6 @@ public class SendGroupChatController extends EventController {
 
       boolean legitSend = checkLegitSend(resBuilder, user, scope, chatMessage);
 
-      SendGroupChatResponseEvent resEvent = new SendGroupChatResponseEvent(senderProto.getUserId());
-      resEvent.setTag(event.getTag());
       resEvent.setSendGroupChatResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 
@@ -163,7 +164,15 @@ public class SendGroupChatController extends EventController {
          */
       }
     } catch (Exception e) {
-      log.error("exception in SendGroupChat processEvent", e);
+    	log.error("exception in SendGroupChat processEvent", e);
+    	//don't let the client hang
+    	try {
+    		resBuilder.setStatus(SendGroupChatStatus.OTHER_FAIL);
+    		resEvent.setSendGroupChatResponseProto(resBuilder.build());
+    		server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in SendGroupChat processEvent", e);
+    	}
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
