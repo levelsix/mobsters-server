@@ -268,7 +268,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   private BoosterItem selectBoosterItem(List<BoosterItem> itemsList,
   		float sumOfProbabilities) {
   	Random rand = new Random();
-  	float normalizedProbabilitySoFar = 0f;
+  	float unnormalizedProbabilitySoFar = 0f;
     float randFloat = rand.nextFloat();
     
     log.info("selecting booster item. sumOfProbabilities=" + sumOfProbabilities +
@@ -280,7 +280,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
       BoosterItem item = itemsList.get(i);
       
       //normalize probability
-      normalizedProbabilitySoFar += item.getChanceToAppear() / sumOfProbabilities;
+      unnormalizedProbabilitySoFar += item.getChanceToAppear();
+      float normalizedProbabilitySoFar = unnormalizedProbabilitySoFar / sumOfProbabilities;
       
       log.info("boosterItem=" + item + "\t normalizedProbabilitySoFar=" +
       		normalizedProbabilitySoFar);
