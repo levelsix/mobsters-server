@@ -676,6 +676,13 @@ public class UpdateUtils implements UpdateUtil {
 //			d = mhfu.getQueuedTime();
 //			Timestamp queuedTime = new Timestamp(d.getTime());
 //			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME, queuedTime);
+			int userStructHospitalId = mhfu.getUserStructHospitalId();
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID, userStructHospitalId);
+			int healthProgress = mhfu.getHealthProgress();
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS, healthProgress);
+			int priority = mhfu.getPriority();
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__PRIORITY, priority);
+			
 			newRows.add(aRow);
 		}
 		

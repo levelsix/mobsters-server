@@ -92,10 +92,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
     	
     	//retrieve only the new monsters that will be healed
-    	Set<Long> newIds = new HashSet<Long>();
-    	newIds.addAll(newMap.keySet());
-    	Map<Long, MonsterForUser> existingUserMonsters = RetrieveUtils
-    			.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newIds);
+    	Map<Long, MonsterForUser> existingUserMonsters = new HashMap<Long, MonsterForUser>();
+    	if (null != newMap && !newMap.isEmpty()) {
+    		Set<Long> newIds = new HashSet<Long>();
+    		newIds.addAll(newMap.keySet());
+    		existingUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+    				.getSpecificOrAllUserMonstersForUser(userId, newIds);
+    	}
     	
       boolean legit = checkLegit(resBuilder, aUser, userId,
       		cashChange, gemCost, existingUserMonsters, alreadyHealing,
@@ -256,14 +259,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
 	  
 	  //convert protos to java counterparts
-	  List<MonsterHealingForUser> updateMap = MonsterStuffUtils.convertToMonsterHealingForUser(
+	  List<MonsterHealingForUser> updateList = MonsterStuffUtils.convertToMonsterHealingForUser(
 	  		uId, protoUpdateMap);
-	  List<MonsterHealingForUser> newMap = MonsterStuffUtils.convertToMonsterHealingForUser(
+	  List<MonsterHealingForUser> newList = MonsterStuffUtils.convertToMonsterHealingForUser(
 	  		uId, protoNewMap);
 	  
 	  List<MonsterHealingForUser> updateAndNew = new ArrayList<MonsterHealingForUser>();
-	  updateAndNew.addAll(updateMap);
-	  updateAndNew.addAll(newMap);
+	  updateAndNew.addAll(updateList);
+	  updateAndNew.addAll(newList);
 	  
 	  //client could have deleted one item from two item queue, or added at least one item
 	  if (!updateAndNew.isEmpty()) {

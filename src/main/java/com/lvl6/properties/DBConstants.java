@@ -242,6 +242,10 @@ public class DBConstants {
   public static final String MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
   public static final String MONSTER_HEALING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
 //  public static final String MONSTER_HEALING_FOR_USER__QUEUED_TIME = "queued_time";
+  public static final String MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID = "user_struct_hospital_id";
+  public static final String MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS = "health_progress";
+  public static final String MONSTER_HEALING_FOR_USER__PRIORITY = "priority";
+  
   
   /*MONSTER HEALING HISTORY*/
   public static final String MONSTER_HEALING_HISTORY__USER_ID = "user_id";
