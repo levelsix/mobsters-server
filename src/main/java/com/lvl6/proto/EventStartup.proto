@@ -122,6 +122,7 @@ message StartupResponseProto {
 		
 		optional float minutesPerGem = 19; 
 		optional int32 pvpRequiredMinLvl = 20;
+		optional float gemsPerResource = 21;
 		
 		
 		message AnimatedSpriteOffsetProto {

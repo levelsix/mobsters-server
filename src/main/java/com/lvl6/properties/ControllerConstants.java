@@ -6,6 +6,9 @@ import com.lvl6.info.CoordinatePair;
 public class ControllerConstants {
 
 	//MOBSTERS CONSTANTS
+	
+	//includes oil and cash, 1 gem per 1000 resource? 
+	public static final float GEMS_PER_RESOURCE = 0.001F;
 	public static final float GEMS_PER_DOLLAR = 10f;//client doesn't need this
 	public static final float MINUTES_PER_GEM = 10f;
 	
