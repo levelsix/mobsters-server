@@ -92,7 +92,7 @@
 		<globals.kabamEnabled>true</globals.kabamEnabled>
 		<globals.offerChartEnabled>false</globals.offerChartEnabled>
 		<globals.appStoreUrl><![CDATA[itms-apps://itunes.com/apps/ageofchaos]]></globals.appStoreUrl>
-		<globals.appleBundleId>com.lvl6.kingdom</globals.appleBundleId>
+		<globals.appleBundleId>com.lvl6.mobsters</globals.appleBundleId>
 		<globals.reviewPageUrl><![CDATA[itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=548520325&pageNumber=0&sortOrdering=1&type=Purple+Software]]></globals.reviewPageUrl>
 		<globals.initial.diamonds>20</globals.initial.diamonds>
 		
