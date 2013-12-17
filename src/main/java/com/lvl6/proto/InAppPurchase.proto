@@ -9,8 +9,7 @@ option java_outer_classname = "InAppPurchaseProto";
 message InAppPurchasePackageProto {
 	optional string iapPackageId = 1;
 	optional int32 currencyAmount = 2;
-	optional bool isGold = 3;
-	optional string imageName = 4;
+	optional string imageName = 3;
 }
 
 //------------------------------------------------------------------------------------------
