@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ExchangeGemsForResourcesRequestEvent;
 import com.lvl6.events.response.ExchangeGemsForResourcesResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
@@ -79,11 +80,17 @@ import com.lvl6.utils.RetrieveUtils;
       ExchangeGemsForResourcesResponseEvent resEvent =
       		new ExchangeGemsForResourcesResponseEvent(senderProto.getUserId());
       resEvent.setExchangeGemsForResourcesResponseProto(resProto);
+      resEvent.setTag(event.getTag());
       server.writeEvent(resEvent);
       
-      writeToUserCurrencyHistory(user, previousCurrency, currencyChange, curTime, 
-      		resourceType, numResources, numGems);
+      if (successful) {
+        UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
+        resEventUpdate.setTag(event.getTag());
+        server.writeEvent(resEventUpdate);
 
+        writeToUserCurrencyHistory(user, previousCurrency, currencyChange, curTime, 
+            resourceType, numResources, numGems);
+      }
     } catch (Exception e) {
       log.error("exception in ExchangeGemsForResourcesController processEvent", e);
     } finally {
