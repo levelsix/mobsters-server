@@ -94,11 +94,7 @@ public final class InAppPurchaseProto {
     boolean hasCurrencyAmount();
     int getCurrencyAmount();
     
-    // optional bool isGold = 3;
-    boolean hasIsGold();
-    boolean getIsGold();
-    
-    // optional string imageName = 4;
+    // optional string imageName = 3;
     boolean hasImageName();
     String getImageName();
   }
@@ -173,21 +169,11 @@ public final class InAppPurchaseProto {
       return currencyAmount_;
     }
     
-    // optional bool isGold = 3;
-    public static final int ISGOLD_FIELD_NUMBER = 3;
-    private boolean isGold_;
-    public boolean hasIsGold() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public boolean getIsGold() {
-      return isGold_;
-    }
-    
-    // optional string imageName = 4;
-    public static final int IMAGENAME_FIELD_NUMBER = 4;
+    // optional string imageName = 3;
+    public static final int IMAGENAME_FIELD_NUMBER = 3;
     private java.lang.Object imageName_;
     public boolean hasImageName() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public String getImageName() {
       java.lang.Object ref = imageName_;
@@ -218,7 +204,6 @@ public final class InAppPurchaseProto {
     private void initFields() {
       iapPackageId_ = "";
       currencyAmount_ = 0;
-      isGold_ = false;
       imageName_ = "";
     }
     private byte memoizedIsInitialized = -1;
@@ -240,10 +225,7 @@ public final class InAppPurchaseProto {
         output.writeInt32(2, currencyAmount_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBool(3, isGold_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getImageNameBytes());
+        output.writeBytes(3, getImageNameBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -264,11 +246,7 @@ public final class InAppPurchaseProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, isGold_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getImageNameBytes());
+          .computeBytesSize(3, getImageNameBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -398,10 +376,8 @@ public final class InAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         currencyAmount_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        isGold_ = false;
-        bitField0_ = (bitField0_ & ~0x00000004);
         imageName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -451,10 +427,6 @@ public final class InAppPurchaseProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.isGold_ = isGold_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
         result.imageName_ = imageName_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -477,9 +449,6 @@ public final class InAppPurchaseProto {
         }
         if (other.hasCurrencyAmount()) {
           setCurrencyAmount(other.getCurrencyAmount());
-        }
-        if (other.hasIsGold()) {
-          setIsGold(other.getIsGold());
         }
         if (other.hasImageName()) {
           setImageName(other.getImageName());
@@ -525,13 +494,8 @@ public final class InAppPurchaseProto {
               currencyAmount_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 26: {
               bitField0_ |= 0x00000004;
-              isGold_ = input.readBool();
-              break;
-            }
-            case 34: {
-              bitField0_ |= 0x00000008;
               imageName_ = input.readBytes();
               break;
             }
@@ -598,31 +562,10 @@ public final class InAppPurchaseProto {
         return this;
       }
       
-      // optional bool isGold = 3;
-      private boolean isGold_ ;
-      public boolean hasIsGold() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public boolean getIsGold() {
-        return isGold_;
-      }
-      public Builder setIsGold(boolean value) {
-        bitField0_ |= 0x00000004;
-        isGold_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearIsGold() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        isGold_ = false;
-        onChanged();
-        return this;
-      }
-      
-      // optional string imageName = 4;
+      // optional string imageName = 3;
       private java.lang.Object imageName_ = "";
       public boolean hasImageName() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public String getImageName() {
         java.lang.Object ref = imageName_;
@@ -638,19 +581,19 @@ public final class InAppPurchaseProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         imageName_ = value;
         onChanged();
         return this;
       }
       public Builder clearImageName() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         imageName_ = getDefaultInstance().getImageName();
         onChanged();
         return this;
       }
       void setImageName(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         imageName_ = value;
         onChanged();
       }
@@ -2322,25 +2265,24 @@ public final class InAppPurchaseProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023InAppPurchase.proto\022\016com.lvl6.proto\"l\n" +
+      "\n\023InAppPurchase.proto\022\016com.lvl6.proto\"\\\n" +
       "\031InAppPurchasePackageProto\022\024\n\014iapPackage" +
-      "Id\030\001 \001(\t\022\026\n\016currencyAmount\030\002 \001(\005\022\016\n\006isGo" +
-      "ld\030\003 \001(\010\022\021\n\timageName\030\004 \001(\t\"\327\003\n\rGoldSale" +
-      "Proto\022\016\n\006saleId\030\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003" +
-      "\022\017\n\007endDate\030\003 \001(\003\022\036\n\026package1SaleIdentif" +
-      "ier\030\004 \001(\t\022\036\n\026package2SaleIdentifier\030\005 \001(" +
-      "\t\022\036\n\026package3SaleIdentifier\030\006 \001(\t\022\036\n\026pac" +
-      "kage4SaleIdentifier\030\007 \001(\t\022\036\n\026package5Sal" +
-      "eIdentifier\030\010 \001(\t\022\033\n\023goldShoppeImageName",
-      "\030\t \001(\t\022\030\n\020goldBarImageName\030\n \001(\t\022\037\n\027pack" +
-      "ageS1SaleIdentifier\030\013 \001(\t\022\037\n\027packageS2Sa" +
-      "leIdentifier\030\014 \001(\t\022\037\n\027packageS3SaleIdent" +
-      "ifier\030\r \001(\t\022\037\n\027packageS4SaleIdentifier\030\016" +
-      " \001(\t\022\037\n\027packageS5SaleIdentifier\030\017 \001(\t\022\026\n" +
-      "\016isBeginnerSale\030\020 \001(\010*Q\n\024EarnFreeDiamond" +
-      "sType\022\016\n\nFB_CONNECT\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FLU" +
-      "RRY_VIDEO\020\003\022\013\n\007TWITTER\020\004B\024B\022InAppPurchas" +
-      "eProto"
+      "Id\030\001 \001(\t\022\026\n\016currencyAmount\030\002 \001(\005\022\021\n\timag" +
+      "eName\030\003 \001(\t\"\327\003\n\rGoldSaleProto\022\016\n\006saleId\030" +
+      "\001 \001(\005\022\021\n\tstartDate\030\002 \001(\003\022\017\n\007endDate\030\003 \001(" +
+      "\003\022\036\n\026package1SaleIdentifier\030\004 \001(\t\022\036\n\026pac" +
+      "kage2SaleIdentifier\030\005 \001(\t\022\036\n\026package3Sal" +
+      "eIdentifier\030\006 \001(\t\022\036\n\026package4SaleIdentif" +
+      "ier\030\007 \001(\t\022\036\n\026package5SaleIdentifier\030\010 \001(" +
+      "\t\022\033\n\023goldShoppeImageName\030\t \001(\t\022\030\n\020goldBa",
+      "rImageName\030\n \001(\t\022\037\n\027packageS1SaleIdentif" +
+      "ier\030\013 \001(\t\022\037\n\027packageS2SaleIdentifier\030\014 \001" +
+      "(\t\022\037\n\027packageS3SaleIdentifier\030\r \001(\t\022\037\n\027p" +
+      "ackageS4SaleIdentifier\030\016 \001(\t\022\037\n\027packageS" +
+      "5SaleIdentifier\030\017 \001(\t\022\026\n\016isBeginnerSale\030" +
+      "\020 \001(\010*Q\n\024EarnFreeDiamondsType\022\016\n\nFB_CONN" +
+      "ECT\020\001\022\n\n\006TAPJOY\020\002\022\020\n\014FLURRY_VIDEO\020\003\022\013\n\007T" +
+      "WITTER\020\004B\024B\022InAppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2352,7 +2294,7 @@ public final class InAppPurchaseProto {
           internal_static_com_lvl6_proto_InAppPurchasePackageProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_InAppPurchasePackageProto_descriptor,
-              new java.lang.String[] { "IapPackageId", "CurrencyAmount", "IsGold", "ImageName", },
+              new java.lang.String[] { "IapPackageId", "CurrencyAmount", "ImageName", },
               com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.class,
               com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto.Builder.class);
           internal_static_com_lvl6_proto_GoldSaleProto_descriptor =
