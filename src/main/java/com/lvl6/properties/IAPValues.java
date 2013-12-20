@@ -122,7 +122,7 @@ public class IAPValues {
   public static final double PACKAGE_S5_BSALE_PRICE = 49.99;
 
   public static final List<String> iapPackageNames = 
-      Arrays.asList(PACKAGE1, PACKAGES1, PACKAGE2, PACKAGES2, PACKAGE3, PACKAGES3, PACKAGE4, PACKAGES4, PACKAGE5, PACKAGES5);
+      Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
 
   public static final List<String> packageNames = 
       Arrays.asList(PACKAGE1, PACKAGE2, PACKAGE3, PACKAGE4, PACKAGE5);
