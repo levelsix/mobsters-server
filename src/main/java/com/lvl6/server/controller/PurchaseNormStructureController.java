@@ -158,11 +158,19 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     
     //check if user has enough resources to build it
     int userGems = user.getGems();
-    if (gemsSpent > 0 && userGems < gemsSpent) {
-    	log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
-    			resourceChange  + " " + resourceType + " to buy structure=" + prospective);
-    	resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
-    	return false;
+    //check if gems are spent
+    if (gemsSpent > 0) {
+    	if (userGems < gemsSpent) {
+    		//doesn't have enough gems
+    		log.error("user has " + userGems + " gems; trying to spend " + gemsSpent + " and " +
+    				resourceChange  + " " + resourceType + " to buy structure=" + prospective);
+    		resBuilder.setStatus(PurchaseNormStructureStatus.FAIL_INSUFFICIENT_GEMS);
+    		return false;
+    	} else {
+    		//has enough gems
+    		return true;
+    	}
+    	
     }
     
     int requiredResourceAmount = -1 * resourceChange;
