@@ -38,7 +38,6 @@ message UserCreateResponseProto {
      	FAIL_INVALID_REFER_CODE = 4;
      	FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 5;
 		FAIL_OTHER = 6;
-		
 	}  
 }
 

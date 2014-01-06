@@ -160,10 +160,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			List<ExpansionPurchaseForUser> userCityExpansionDataList, int numOfExpansions,
 			List<Integer> costList) {
 
-		if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfPurchase)) {
-			resBuilder.setStatus(PurchaseCityExpansionStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
-			return false;
-		}
+//		if (!MiscMethods.checkClientTimeAroundApproximateNow(timeOfPurchase)) {
+//			resBuilder.setStatus(PurchaseCityExpansionStatus.CLIENT_TOO_APART_FROM_SERVER_TIME);
+//			return false;
+//		}
 
 		boolean isExpanding = false;
 		//loop through each expansion and see if any expansions are still expanding

@@ -215,7 +215,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private Map<Integer, UserFacebookInviteForSlot> getInvites(int userId,
   		List<Integer> userFbInviteIds) {
-  //get accepted and unredeemed invites
+  	//get accepted and unredeemed invites
 		boolean filterByAccepted = true;
 		boolean isAccepted = true;
 		boolean filterByRedeemed = true;

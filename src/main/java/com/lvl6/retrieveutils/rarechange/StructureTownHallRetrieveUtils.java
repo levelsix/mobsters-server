@@ -32,13 +32,13 @@ import com.lvl6.utils.DBConnection;
     return structIdsToTownHalls;
   }
 
-  public static StructureTownHall getTownHallRequiredForStructId(int structId) {
-    log.debug("retrieve struct data for structId " + structId);
-    if (structIdsToTownHalls == null) {
-      setStaticStructIdsToTownHalls();      
-    }
-    return structIdsToTownHalls.get(structId);
-  }
+//  public static StructureTownHall getTownHallRequiredForStructId(int structId) {
+//    log.debug("retrieve struct data for structId " + structId);
+//    if (structIdsToTownHalls == null) {
+//      setStaticStructIdsToTownHalls();      
+//    }
+//    return structIdsToTownHalls.get(structId);
+//  }
   
   public static StructureTownHall getUpgradedTownHallForStructId(int structId) {
   	log.debug("retrieve upgraded struct data for structId " + structId);

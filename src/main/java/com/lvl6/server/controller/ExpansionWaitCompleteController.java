@@ -83,8 +83,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<String, Integer> money = new HashMap<String, Integer>();
 			if (legitExpansionComplete) {
 				previousGems = user.getGems();
-				int nthExpansion = epfuList.size();
-				success = writeChangesToDB(user, epfu, speedUp, money, clientTime, nthExpansion, gemCostToSpeedup);
+				success = writeChangesToDB(user, epfu, speedUp, money, clientTime, gemCostToSpeedup);
 			}
 			
 			if (success) {
@@ -123,7 +122,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private boolean writeChangesToDB(User user, ExpansionPurchaseForUser epfu, boolean speedup, 
-			Map<String, Integer> money, Timestamp clientTime, int nthExpansion, int gemCost) {
+			Map<String, Integer> money, Timestamp clientTime, int gemCost) {
 		if (speedup) {
 			int gemChange = -1 * gemCost;
 			if (!user.updateRelativeDiamondsNaive(gemChange)) {

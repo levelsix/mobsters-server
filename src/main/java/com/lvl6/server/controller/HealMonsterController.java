@@ -68,7 +68,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<UserMonsterHealingProto> umhNew = reqProto.getUmhNewList();
     //positive means refund, negative means charge user
     int cashChange = reqProto.getCashChange();
-    int gemCost = reqProto.getGemCost();
+    int gemCost = reqProto.getTotalGemCost();
     Timestamp curTime = new Timestamp((new Date()).getTime());
 
     Map<Long, UserMonsterHealingProto> deleteMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);

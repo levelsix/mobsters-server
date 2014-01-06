@@ -228,9 +228,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		//CHARGE THE USER
   		int gemCost = -1 * gemsForSpeedup;
   		if (!u.updateRelativeDiamondsNaive(gemCost)) {
-  			log.error("problem with updating user stats post-task. cashGained="
-  					+ 0 + ", expGained=" + 0 + ", increased tasks completed by 0," +
-  					", clientTime=" + clientTime + ", user=" + u);
+  			log.error("problem with updating user gems. gemsForSpeedup=" + gemsForSpeedup +
+  					", clientTime=" + clientTime + ", baseMonster" + umcep +  ", clientTime=" +
+  					clientTime + ", userMonsterIdsToDelete=" + userMonsterIds + ", user=" + u);
   			return false;
   		} else {
   			if (0 != gemCost) {

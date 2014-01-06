@@ -27,8 +27,8 @@ message LoadPlayerCityResponseProto {
      
     enum LoadPlayerCityStatus {
      	SUCCESS = 1;
-     	NO_SUCH_PLAYER = 2;
-     	OTHER_FAIL = 3;
+     	FAIL_NO_SUCH_PLAYER = 2;
+     	FAIL_OTHER = 3;
      }
 }
 

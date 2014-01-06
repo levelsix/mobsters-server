@@ -138,7 +138,7 @@ import com.lvl6.utils.RetrieveUtils;
         resBuilder.addOwnerNormStructs(CreateInfoProtoUtils.createFullUserStructureProtoFromUserstruct(userStruct));
       }
     } else {
-      resBuilder.setStatus(LoadPlayerCityStatus.OTHER_FAIL);
+      resBuilder.setStatus(LoadPlayerCityStatus.FAIL_OTHER);
       log.error("user structs found for user is null");
     }
   }

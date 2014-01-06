@@ -557,13 +557,13 @@ public final class EventCityProto {
     public enum LoadPlayerCityStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      NO_SUCH_PLAYER(1, 2),
-      OTHER_FAIL(2, 3),
+      FAIL_NO_SUCH_PLAYER(1, 2),
+      FAIL_OTHER(2, 3),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int NO_SUCH_PLAYER_VALUE = 2;
-      public static final int OTHER_FAIL_VALUE = 3;
+      public static final int FAIL_NO_SUCH_PLAYER_VALUE = 2;
+      public static final int FAIL_OTHER_VALUE = 3;
       
       
       public final int getNumber() { return value; }
@@ -571,8 +571,8 @@ public final class EventCityProto {
       public static LoadPlayerCityStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return NO_SUCH_PLAYER;
-          case 3: return OTHER_FAIL;
+          case 2: return FAIL_NO_SUCH_PLAYER;
+          case 3: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -603,7 +603,7 @@ public final class EventCityProto {
       }
       
       private static final LoadPlayerCityStatus[] VALUES = {
-        SUCCESS, NO_SUCH_PLAYER, OTHER_FAIL, 
+        SUCCESS, FAIL_NO_SUCH_PLAYER, FAIL_OTHER, 
       };
       
       public static LoadPlayerCityStatus valueOf(
@@ -4735,7 +4735,7 @@ public final class EventCityProto {
       "proto\032\013Quest.proto\032\017Structure.proto\032\nUse" +
       "r.proto\"c\n\032LoadPlayerCityRequestProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\023\n\013cityOwnerId\030\002 \001(\005\"\265\003\n\033LoadPla" +
+      "erProto\022\023\n\013cityOwnerId\030\002 \001(\005\"\272\003\n\033LoadPla" +
       "yerCityResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\0223\n\tcityOw" +
       "ner\030\002 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
@@ -4744,35 +4744,35 @@ public final class EventCityProto {
       "tatus\022@\n\020ownerNormStructs\030\004 \003(\0132&.com.lv" +
       "l6.proto.FullUserStructureProto\022R\n\036userC" +
       "ityExpansionDataProtoList\030\005 \003(\0132*.com.lv" +
-      "l6.proto.UserCityExpansionDataProto\"G\n\024L" +
-      "oadPlayerCityStatus\022\013\n\007SUCCESS\020\001\022\022\n\016NO_S" +
-      "UCH_PLAYER\020\002\022\016\n\nOTHER_FAIL\020\003\"\223\001\n!Purchas" +
-      "eCityExpansionRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\021\n\t" +
-      "xPosition\030\002 \001(\021\022\021\n\tyPosition\030\003 \001(\021\022\026\n\016ti" +
-      "meOfPurchase\030\004 \001(\003\"\202\003\n\"PurchaseCityExpan",
-      "sionResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022^\n\006status\030\002 " +
-      "\001(\0162N.com.lvl6.proto.PurchaseCityExpansi" +
-      "onResponseProto.PurchaseCityExpansionSta" +
-      "tus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.proto.User" +
-      "CityExpansionDataProto\"\216\001\n\033PurchaseCityE" +
-      "xpansionStatus\022\013\n\007SUCCESS\020\001\022\024\n\020NOT_ENOUG" +
-      "H_COINS\020\002\022\025\n\021ALREADY_EXPANDING\020\003\022\016\n\nOTHE" +
-      "R_FAIL\020\004\022%\n!CLIENT_TOO_APART_FROM_SERVER" +
-      "_TIME\020\005\"X\n\024LoadCityRequestProto\0220\n\006sende",
+      "l6.proto.UserCityExpansionDataProto\"L\n\024L" +
+      "oadPlayerCityStatus\022\013\n\007SUCCESS\020\001\022\027\n\023FAIL" +
+      "_NO_SUCH_PLAYER\020\002\022\016\n\nFAIL_OTHER\020\003\"\223\001\n!Pu" +
+      "rchaseCityExpansionRequestProto\0220\n\006sende" +
       "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022\016\n\006cityId\030\002 \001(\005\"\355\002\n\025LoadCityResponsePr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022D\n\006status\030\002 \001(\01624.com.lvl6" +
-      ".proto.LoadCityResponseProto.LoadCitySta" +
-      "tus\0226\n\014cityElements\030\003 \003(\0132 .com.lvl6.pro" +
-      "to.CityElementProto\022\016\n\006cityId\030\004 \001(\005\022I\n\035i" +
-      "nProgressUserQuestDataInCity\030\005 \003(\0132\".com" +
-      ".lvl6.proto.FullUserQuestProto\"I\n\016LoadCi" +
-      "tyStatus\022\013\n\007SUCCESS\020\001\022\032\n\026NOT_ACCESSIBLE_",
-      "TO_USER\020\002\022\016\n\nOTHER_FAIL\020\003B\020B\016EventCityPr" +
-      "oto"
+      "o\022\021\n\txPosition\030\002 \001(\021\022\021\n\tyPosition\030\003 \001(\021\022" +
+      "\026\n\016timeOfPurchase\030\004 \001(\003\"\202\003\n\"PurchaseCity",
+      "ExpansionResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022^\n\006stat" +
+      "us\030\002 \001(\0162N.com.lvl6.proto.PurchaseCityEx" +
+      "pansionResponseProto.PurchaseCityExpansi" +
+      "onStatus\0229\n\005ucedp\030\003 \001(\0132*.com.lvl6.proto" +
+      ".UserCityExpansionDataProto\"\216\001\n\033Purchase" +
+      "CityExpansionStatus\022\013\n\007SUCCESS\020\001\022\024\n\020NOT_" +
+      "ENOUGH_COINS\020\002\022\025\n\021ALREADY_EXPANDING\020\003\022\016\n" +
+      "\nOTHER_FAIL\020\004\022%\n!CLIENT_TOO_APART_FROM_S" +
+      "ERVER_TIME\020\005\"X\n\024LoadCityRequestProto\0220\n\006",
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\016\n\006cityId\030\002 \001(\005\"\355\002\n\025LoadCityRespo" +
+      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022D\n\006status\030\002 \001(\01624.com" +
+      ".lvl6.proto.LoadCityResponseProto.LoadCi" +
+      "tyStatus\0226\n\014cityElements\030\003 \003(\0132 .com.lvl" +
+      "6.proto.CityElementProto\022\016\n\006cityId\030\004 \001(\005" +
+      "\022I\n\035inProgressUserQuestDataInCity\030\005 \003(\0132" +
+      "\".com.lvl6.proto.FullUserQuestProto\"I\n\016L" +
+      "oadCityStatus\022\013\n\007SUCCESS\020\001\022\032\n\026NOT_ACCESS",
+      "IBLE_TO_USER\020\002\022\016\n\nOTHER_FAIL\020\003B\020B\016EventC" +
+      "ityProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
