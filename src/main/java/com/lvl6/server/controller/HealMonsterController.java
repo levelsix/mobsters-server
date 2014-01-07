@@ -23,10 +23,12 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventMonsterProto.HealMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -68,12 +70,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<UserMonsterHealingProto> umhNew = reqProto.getUmhNewList();
     //positive means refund, negative means charge user
     int cashChange = reqProto.getCashChange();
+    int gemCostForHealing = reqProto.getGemCostForHealing();
+    
+    boolean isSpeedup = reqProto.getIsSpeedup();
+    int gemsForSpeedup = reqProto.getGemsForSpeedup();
+    List<UserMonsterCurrentHealthProto> umchpList = reqProto.getUmchpList();
+    Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
+    List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(umchpList, userMonsterIdToExpectedHealth);
+    
     int gemCost = reqProto.getTotalGemCost();
     Timestamp curTime = new Timestamp((new Date()).getTime());
 
     Map<Long, UserMonsterHealingProto> deleteMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);
     Map<Long, UserMonsterHealingProto> updateMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
     Map<Long, UserMonsterHealingProto> newMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhNew); 
+    
+    log.info("umchpList=" + umchpList + "\t userMonsterIdToExpectedHealth" +
+    		userMonsterIdToExpectedHealth + "\t userMonsterIds=" + userMonsterIds);
+    
     //set some values to send to the client (the response proto)
     HealMonsterResponseProto.Builder resBuilder = HealMonsterResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -102,15 +116,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	
       boolean legit = checkLegit(resBuilder, aUser, userId,
       		cashChange, gemCost, existingUserMonsters, alreadyHealing,
-      		alreadyEnhancing, deleteMap, updateMap, newMap);
+      		alreadyEnhancing, deleteMap, updateMap, newMap, userMonsterIds);
 
       boolean successful = false;
+      //first two maps are for different heal monster and speed up heal monster
       Map<String, Integer> money = new HashMap<String, Integer>();
+      Map<String, Integer> moneyForHealSpeedup = new HashMap<String, Integer>();
+      //this map is both combined
+      Map<String, Integer> changeMap = new HashMap<String, Integer>();
       if(legit) {
         previousCash = aUser.getCash();
         previousGems = aUser.getGems();
-    	  successful = writeChangesToDb(aUser, userId, cashChange,
-    	  		gemCost, deleteMap, updateMap, newMap, money);
+        
+        //from HealMonsterWaitTimeCompleteController
+        userMonsterIdToExpectedHealth = getValidEntries(userMonsterIds, userMonsterIdToExpectedHealth);
+    	  successful = writeChangesToDb(aUser, userId, cashChange, gemCost, deleteMap,
+    	  		updateMap, newMap, gemCostForHealing, money, userMonsterIds, 
+    	  		userMonsterIdToExpectedHealth, isSpeedup, gemsForSpeedup, moneyForHealSpeedup,
+    	  		changeMap);
       }
       
       HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(userId);
@@ -124,8 +147,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
       	//TODO: WRITE TO HISTORY
-      	writeToUserCurrencyHistory(aUser, money, curTime, previousCash, previousGems,
-      			deleteMap, updateMap, newMap);
+      	writeToUserCurrencyHistory(aUser, changeMap,  money, curTime, previousCash,
+      			previousGems, deleteMap, updateMap, newMap, moneyForHealSpeedup);
       }
     } catch (Exception e) {
       log.error("exception in HealMonsterController processEvent", e);
@@ -149,6 +172,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * builder status to the appropriate value. delete, update, new maps
    * MIGHT BE MODIFIED.
    * 
+   * from HealMonsterWaitTimeComplete controller logic
+   * @healedUp MIGHT ALSO BE MODIFIED.
+   * 
    * For the most part, will always return success. Why?
    * (Will return fail if user does not have enough funds.) 
    * Answer: For the map
@@ -170,7 +196,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		Map<Long, MonsterEnhancingForUser> alreadyEnhancing,
   		Map<Long, UserMonsterHealingProto> deleteMap,
   		Map<Long, UserMonsterHealingProto> updateMap,
-  		Map<Long, UserMonsterHealingProto> newMap) {
+  		Map<Long, UserMonsterHealingProto> newMap, List<Long> healedUp) {
     if (null == u ) {
       log.error("unexpected error: user is null. user=" + u + "\t deleteMap="+ deleteMap +
       		"\t updateMap=" + updateMap + "\t newMap=" + newMap);
@@ -190,7 +216,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     // gems to cover the difference
     int userCash = u.getCash();
     int cashCost = -1 * cashChange;
-    if (cashCost > userCash && gemCost == 0) {
+    if (gemCost == 0 && cashCost > userCash) {
     	//user doesn't have enough cash and is not paying gems.
     	
     	log.error("user error: user has too little cash and not using gems. userCash="
@@ -218,21 +244,43 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
     MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap, keepThingsInDomain, keepThingsNotInDomain);
     
+    
+    //FROM HealMonsterWaitTimeComplete CONTROLLER
+    //modify healedUp to contain only those that exist
+    MonsterStuffUtils.retainValidMonsterIds(alreadyHealingIds, healedUp);
+    
     	
     resBuilder.setStatus(HealMonsterStatus.SUCCESS);
     return true;
   }
   
+  //only the entries in the map that have their key in validIds will be kept  
+  //idsToValues contains keys that are in validIds and some that aren't
+  private Map<Long, Integer> getValidEntries(List<Long> validIds, 
+  		Map<Long, Integer> idsToValues) {
+
+  	Map<Long, Integer> returnMap = new HashMap<Long, Integer>();
+
+  	for(long id : validIds) {
+  		int value = idsToValues.get(id);
+  		returnMap.put(id, value);
+  	}
+  	return returnMap;
+  }
+  
   private boolean writeChangesToDb(User u, int uId, 
-  		int cashChange, int gemCost,
-		  Map<Long, UserMonsterHealingProto> protoDeleteMap,
+  		int cashChange, int gemCost, Map<Long, UserMonsterHealingProto> protoDeleteMap,
 		  Map<Long, UserMonsterHealingProto> protoUpdateMap,
-		  Map<Long, UserMonsterHealingProto> protoNewMap, Map<String, Integer> money) {
+		  Map<Long, UserMonsterHealingProto> protoNewMap, int gemCostForHealing,
+		  Map<String, Integer> money, List<Long> userMonsterIds, 
+		  Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup, int gemsForSpeedup,
+		  Map<String, Integer> moneyForSpeedup, Map<String, Integer> changeMap) {
 
   	int oilChange = 0;
+  	int gemChange = -1 * gemCost;
   	//CHARGE THE USER
   	log.info("user before funds change. u=" + u);
-  	int num = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemCost);
+  	int num = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
   	log.info("user after funds change. u=" + u);
 	  if (num != 1) {
 		  log.error("problem with updating user's funds. cashChange=" + cashChange +
@@ -242,10 +290,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  	//things went ok
 	  	if (0 != cashChange) {
 	  		money.put(MiscMethods.cash, cashChange);
+	  		changeMap.put(MiscMethods.cash, cashChange);
+	  	}
+	  	if (0 != gemCostForHealing) {
+	  		money.put(MiscMethods.gems, gemCostForHealing);
+	  	}
+	  	if (0 != gemsForSpeedup) {
+	  		moneyForSpeedup.put(MiscMethods.gems, gemsForSpeedup);
 	  	}
 	  	if (0 != gemCost) {
-	  		money.put(MiscMethods.gems, gemCost);
+	  		changeMap.put(MiscMethods.gems, gemChange);
 	  	}
+	  	
 	  }
   	
 	  //delete the selected monsters from  the healing table, if there are
@@ -286,44 +342,93 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //	  	log.info("updated user monster rows. numUpdated=" + num);
 //	  }
 	  
+	  
+	  //LOGIC FROM HealMonsterWaitTimeCompleteController
+	  if (null != userMonsterIdsToHealths && !userMonsterIdsToHealths.isEmpty()) {
+	  	//HEAL THE MONSTER
+	  	num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIdsToHealths);
+	  	log.info("num updated=" + num);
+	  }
+	  //should always execute, but who knows...
+	  if (null != userMonsterIds && !userMonsterIds.isEmpty()) {
+	  	//delete the selected monsters from  the healing table
+	  	num = DeleteUtils.get().deleteMonsterHealingForUser(
+	  			uId, userMonsterIds);
+	  	log.info("deleted monster healing rows. numDeleted=" + num +
+	  			"\t userMonsterIds=" + userMonsterIds);
+	  }
 	  return true;
   }
   
   //TODO: FIX THIS
-  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousCash, int previousGems,
-      Map<Long, UserMonsterHealingProto> deleteMap,
+  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> changeMap,
+  		Map<String, Integer> money, Timestamp curTime, int previousCash, int previousGems,
+  		Map<Long, UserMonsterHealingProto> deleteMap, 
   		Map<Long, UserMonsterHealingProto> updateMap,
-  		Map<Long, UserMonsterHealingProto> newMap) {
-//    Map<String, Integer> previousGemsCash = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    StringBuilder reasonForChange = new StringBuilder();
-//    reasonForChange.append(ControllerConstants.UCHRFC__HEAL_MONSTER);
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//    
-//    //could just individually add in the ids or something else, but eh, lazy
-//    //not really necessary to record ids, but maybe more info is better
-//    if (null != deleteMap && !deleteMap.isEmpty()) {
-//    	reasonForChange.append("deleted=");
-//    	reasonForChange.append(deleteMap.keySet());
-//    }
-//    if (null != updateMap && !updateMap.isEmpty()) {
-//    	reasonForChange.append("updated=");
-//    	reasonForChange.append(updateMap.keySet());
-//    }
-//    if (null != newMap && !newMap.isEmpty()) {
-//    	reasonForChange.append("new=");
-//    	reasonForChange.append(newMap.keySet());
-//    }
-//
-//    previousGemsCash.put(gems, previousGems);
-//    previousGemsCash.put(cash, previousCash);
-//    reasonsForChanges.put(gems, reasonForChange.toString());
-//    reasonsForChanges.put(cash, reasonForChange.toString());
-//
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-//        previousGemsCash, reasonsForChanges);
+  		Map<Long, UserMonsterHealingProto> newMap, Map<String, Integer> moneyForHealSpeedup) {
+  	
+  	int userId = aUser.getId();
+    Map<String, Integer> previousCurrencies = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrencies = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> details = new HashMap<String, String>();
+    
+    StringBuilder reasonForChange = new StringBuilder();
+    reasonForChange.append(ControllerConstants.UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING);
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
+    
+    StringBuilder detailSb = new StringBuilder();
+    if (!money.isEmpty()) {
+    	detailSb.append("heal monster info: ");
+    }
+    if (money.containsKey(gems)) {
+    	detailSb.append("gemChange=");
+    	detailSb.append(money.get(gems));
+    	detailSb.append(" ");
+    }
+    if (money.containsKey(cash)) {
+    	detailSb.append("cashChange=");
+    	detailSb.append(money.get(cash));
+    	detailSb.append(" ");
+    }
+    //could just individually add in the ids or something else, but eh, lazy
+    //not really necessary to record ids, but maybe more info is better
+    if (null != deleteMap && !deleteMap.isEmpty()) {
+    	detailSb.append("deleted=");
+    	detailSb.append(deleteMap.keySet());
+    	detailSb.append(" ");
+    }
+    if (null != updateMap && !updateMap.isEmpty()) {
+    	detailSb.append("updated=");
+    	detailSb.append(updateMap.keySet());
+    	detailSb.append(" ");
+    }
+    if (null != newMap && !newMap.isEmpty()) {
+    	detailSb.append("new=");
+    	detailSb.append(newMap.keySet());
+    	detailSb.append(" ");
+    }
+    
+    if (!moneyForHealSpeedup.isEmpty()) {
+    	detailSb.append("sped up healing info: ");
+    }
+    if (moneyForHealSpeedup.containsKey(gems)) {
+    	detailSb.append("gemChange= ");
+    	detailSb.append(moneyForHealSpeedup.get(gems));
+    }
+
+    previousCurrencies.put(gems, previousGems);
+    previousCurrencies.put(cash, previousCash);
+    currentCurrencies.put(gems, aUser.getGems());
+    currentCurrencies.put(cash, aUser.getCash());
+    reasonsForChanges.put(gems, reasonForChange.toString());
+    reasonsForChanges.put(cash, reasonForChange.toString());
+    details.put(gems, detailSb.toString());
+    details.put(cash, detailSb.toString());
+
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, changeMap, previousCurrencies,
+    		currentCurrencies, reasonsForChanges, details);
 
   }
 }

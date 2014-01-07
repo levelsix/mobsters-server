@@ -95,7 +95,8 @@ public class MonsterStuffUtils {
   }
   
   /*
-   * selected monsters (the second argument) might be modified
+   * selected monsters (the second argument) might be modified, nothing is done if
+   * selected monsters is empty.
    */
   public static void retainValidMonsters(Set<Long> domain,  Map<Long, ?> selectedMonsters,
   		boolean keepThingsInDomain, boolean keepThingsNotInDomain) {

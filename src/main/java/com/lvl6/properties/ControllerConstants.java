@@ -288,7 +288,7 @@ public class ControllerConstants {
   public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
   public static final String UCHRFC__END_TASK = "end task";
   public static final String UCHRFC__ENHANCING = "enhancing user monsters";
-  public static final String UCHRFC__HEAL_MONSTER = "healed user monsters";
+  public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
   public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
   public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
   public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
