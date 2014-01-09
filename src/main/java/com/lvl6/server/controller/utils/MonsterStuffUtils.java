@@ -144,7 +144,13 @@ public class MonsterStuffUtils {
   	
   	for(UserMonsterHealingProto umhp: protos.values()) {
   		Long monsterForUserId = umhp.getUserMonsterId();
-  		Date expectedStartTime = new Date(umhp.getExpectedStartTimeMillis());
+  		
+  		//maybe client didn't not supposed to always set this?
+  		Date expectedStartTime = null;
+  		if (umhp.hasExpectedStartTimeMillis()) {
+  			expectedStartTime = new Date(umhp.getExpectedStartTimeMillis());
+  		}
+  		
   		int userStructHospitalId = umhp.getUserHospitalStructId();
   		int healthProgress = umhp.getHealthProgress();
   		int priority = umhp.getPriority();

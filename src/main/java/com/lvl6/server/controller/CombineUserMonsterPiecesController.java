@@ -128,7 +128,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * can be combined
    * 
    * Example. client gives ids (a, b, c, d). Let's say 'a' is already
-   *  completed/combined, 'b' is missing a piece, 'c' doesn't exist
+   *  completed/combined, 'b' is missing a piece, 'c' doesn't exist and 'd'
+   *  can be completed  so "userMonsterIds" will be modified to only contain
+	 * 'd'
    */
   private boolean checkLegit(Builder resBuilder, int userId, User u,
   		List<Long> userMonsterIds, Map<Long, MonsterForUser> idsToUserMonsters,

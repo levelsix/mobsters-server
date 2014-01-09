@@ -364,28 +364,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private void orderUserFacebookAcceptedInvitesForSlots(
   		List<UserFacebookInviteForSlot> invites) {
-  	
+
   	Collections.sort(invites, new Comparator<UserFacebookInviteForSlot>() {
-      @Override
-      public int compare(UserFacebookInviteForSlot lhs, UserFacebookInviteForSlot rhs) {
-      	//sorting by accept time, which should not be null
-      	Date lhsDate = lhs.getTimeAccepted();
-      	Date rhsDate = rhs.getTimeAccepted();
-      	
-      	if (null == lhsDate && null == rhsDate) 
-      		return 0;
-      	else if (null == lhsDate) 
-      		return -1;
-      	else if (null == rhsDate) 
-      		return 1;
-      	else if (lhsDate.getTime() < rhsDate.getTime())
-      		return -1;
-      	else if (lhsDate.getTime() == rhsDate.getTime())
-      		return 0;
-      	else
-      		return 1;
-      }
-  });
+  		@Override
+  		public int compare(UserFacebookInviteForSlot lhs, UserFacebookInviteForSlot rhs) {
+  			//sorting by accept time, which should not be null
+  			Date lhsDate = lhs.getTimeAccepted();
+  			Date rhsDate = rhs.getTimeAccepted();
+
+  			if (null == lhsDate && null == rhsDate) 
+  				return 0;
+  			else if (null == lhsDate) 
+  				return -1;
+  			else if (null == rhsDate) 
+  				return 1;
+  			else if (lhsDate.getTime() < rhsDate.getTime())
+  				return -1;
+  			else if (lhsDate.getTime() == rhsDate.getTime())
+  				return 0;
+  			else
+  				return 1;
+  		}
+  	});
   }
   
   

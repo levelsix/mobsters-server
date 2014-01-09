@@ -259,12 +259,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return inviterUserIdsToInviteIds;
   }
   
-  //recordedInviterIds are the inviterIds in the invite table that are for redeemed invites
+  //recordedInviterIds are the inviterIds in the invite table that belong to invites
+  //accepted by a user
   private void retainInvitesFromUnusedInviters(Set<Integer> recordedInviterIds,
   		Map<Integer, Integer> acceptedInviterIdsToInviteIds, 
   		List<Integer> acceptedInviteIds, List<Integer> rejectedInviteIds) {
-  	//if any of the inviter ids in acceptedInviterIdsToInviteIds are already in
-  	//the invite table with this user, delete inviteId from the
+  	//if any of the inviter ids in acceptedInviterIdsToInviteIds are in
+  	//recordedInviterIds, delete inviteId from the
   	//acceptedInviteIds list and put the inviteId into the rejectedInviteIds list
   	
   	//keep track of the inviterIds that this user has previously already accepted  
