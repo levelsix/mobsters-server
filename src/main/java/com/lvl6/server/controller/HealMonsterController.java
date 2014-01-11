@@ -324,6 +324,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  updateAndNew.addAll(updateList);
 	  updateAndNew.addAll(newList);
 	  
+	  log.info("updated and new monsters for healing: " + updateAndNew);
+	  
 	  //client could have deleted one item from two item queue, or added at least one item
 	  if (!updateAndNew.isEmpty()) {
 	  	//update and insert the new monsters

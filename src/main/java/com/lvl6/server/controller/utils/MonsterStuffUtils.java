@@ -147,7 +147,7 @@ public class MonsterStuffUtils {
   		
   		//maybe client didn't not supposed to always set this?
   		Date expectedStartTime = null;
-  		if (umhp.hasExpectedStartTimeMillis()) {
+  		if (umhp.hasExpectedStartTimeMillis() && umhp.getExpectedStartTimeMillis() > 0) {
   			expectedStartTime = new Date(umhp.getExpectedStartTimeMillis());
   		}
   		
