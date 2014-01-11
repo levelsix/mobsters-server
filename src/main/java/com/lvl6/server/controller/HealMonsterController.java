@@ -136,6 +136,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  		changeMap);
       }
       
+      if (successful) {
+      	resBuilder.setStatus(HealMonsterStatus.SUCCESS);
+      }
+      
       HealMonsterResponseEvent resEvent = new HealMonsterResponseEvent(userId);
       resEvent.setTag(event.getTag());
       resEvent.setHealMonsterResponseProto(resBuilder.build());
@@ -249,8 +253,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //modify healedUp to contain only those that exist
     MonsterStuffUtils.retainValidMonsterIds(alreadyHealingIds, healedUp);
     
-    	
-    resBuilder.setStatus(HealMonsterStatus.SUCCESS);
     return true;
   }
   
@@ -276,39 +278,42 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup, int gemsForSpeedup,
 		  Map<String, Integer> moneyForSpeedup, Map<String, Integer> changeMap) {
 
-  	int oilChange = 0;
-  	int gemChange = -1 * gemCost;
-  	//CHARGE THE USER
-  	log.info("user before funds change. u=" + u);
-  	int num = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
-  	log.info("user after funds change. u=" + u);
-	  if (num != 1) {
-		  log.error("problem with updating user's funds. cashChange=" + cashChange +
-		  		", gemCost=" + gemCost + ", user=" + u + "\t numUpdated=" + num);
-		  return false;
-	  } else {
-	  	//things went ok
-	  	if (0 != cashChange) {
-	  		money.put(MiscMethods.cash, cashChange);
-	  		changeMap.put(MiscMethods.cash, cashChange);
-	  	}
-	  	if (0 != gemCostForHealing) {
-	  		money.put(MiscMethods.gems, gemCostForHealing);
-	  	}
-	  	if (0 != gemsForSpeedup) {
-	  		moneyForSpeedup.put(MiscMethods.gems, gemsForSpeedup);
-	  	}
-	  	if (0 != gemCost) {
-	  		changeMap.put(MiscMethods.gems, gemChange);
-	  	}
-	  	
-	  }
+  	
+  	if (0 != cashChange || 0 != gemCost) {
+  		int oilChange = 0;
+  		int gemChange = -1 * gemCost;
+  		//CHARGE THE USER
+  		log.info("user before funds change. u=" + u);
+  		int num = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
+  		log.info("user after funds change. u=" + u);
+  		if (num != 1) {
+  			log.error("problem with updating user's funds. cashChange=" + cashChange +
+  					", gemCost=" + gemCost + ", user=" + u + "\t numUpdated=" + num);
+  			return false;
+  		} else {
+  			//things went ok
+  			if (0 != cashChange) {
+  				money.put(MiscMethods.cash, cashChange);
+  				changeMap.put(MiscMethods.cash, cashChange);
+  			}
+  			if (0 != gemCostForHealing) {
+  				money.put(MiscMethods.gems, gemCostForHealing);
+  			}
+  			if (0 != gemsForSpeedup) {
+  				moneyForSpeedup.put(MiscMethods.gems, gemsForSpeedup);
+  			}
+  			if (0 != gemCost) {
+  				changeMap.put(MiscMethods.gems, gemChange);
+  			}
+
+  		}
+  	}
   	
 	  //delete the selected monsters from  the healing table, if there are
   	//any to delete
   	if (!protoDeleteMap.isEmpty()) {
   		List<Long> deleteIds = new ArrayList<Long>(protoDeleteMap.keySet());
-  		num = DeleteUtils.get().deleteMonsterHealingForUser(
+  		int num = DeleteUtils.get().deleteMonsterHealingForUser(
   				uId, deleteIds);
   		log.info("deleted monster healing rows. numDeleted=" + num +
   				"\t protoDeleteMap=" + protoDeleteMap);
@@ -329,7 +334,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  //client could have deleted one item from two item queue, or added at least one item
 	  if (!updateAndNew.isEmpty()) {
 	  	//update and insert the new monsters
-	  	num = UpdateUtils.get().updateUserMonsterHealing(uId, updateAndNew);
+	  	int num = UpdateUtils.get().updateUserMonsterHealing(uId, updateAndNew);
 	  	log.info("updated monster healing rows. numUpdated/inserted=" + num);
 	  }
 	  
@@ -348,13 +353,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  //LOGIC FROM HealMonsterWaitTimeCompleteController
 	  if (null != userMonsterIdsToHealths && !userMonsterIdsToHealths.isEmpty()) {
 	  	//HEAL THE MONSTER
-	  	num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIdsToHealths);
+	  	int num = UpdateUtils.get().updateUserMonstersHealth(userMonsterIdsToHealths);
 	  	log.info("num updated=" + num);
 	  }
 	  //should always execute, but who knows...
 	  if (null != userMonsterIds && !userMonsterIds.isEmpty()) {
 	  	//delete the selected monsters from  the healing table
-	  	num = DeleteUtils.get().deleteMonsterHealingForUser(
+	  	int num = DeleteUtils.get().deleteMonsterHealingForUser(
 	  			uId, userMonsterIds);
 	  	log.info("deleted monster healing rows. numDeleted=" + num +
 	  			"\t userMonsterIds=" + userMonsterIds);
