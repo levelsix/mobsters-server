@@ -34,16 +34,16 @@ public class DeleteUtils implements DeleteUtil {
     return true;  
   }
 
-  public boolean deleteBlacksmithAttempt(int blacksmithId) {
-    Map <String, Object> conditionParams = new HashMap<String, Object>();
-    conditionParams.put(DBConstants.MONSTER_EVOLVING__ID, blacksmithId);
-
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER, conditionParams, "and");
-    if (numDeleted == 1) {
-      return true;
-    }
-    return false;
-  }
+//  public boolean deleteBlacksmithAttempt(int blacksmithId) {
+//    Map <String, Object> conditionParams = new HashMap<String, Object>();
+//    conditionParams.put(DBConstants.MONSTER_EVOLVING__ID, blacksmithId);
+//
+//    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER, conditionParams, "and");
+//    if (numDeleted == 1) {
+//      return true;
+//    }
+//    return false;
+//  }
 
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.DeleteUtil#deleteUserStruct(int)

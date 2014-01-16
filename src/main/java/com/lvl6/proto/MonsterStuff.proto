@@ -26,12 +26,22 @@ message MonsterProto {
 	optional float hpLevelMultiplier = 17;
 	optional float attackLevelMultiplier = 18;
 	optional int32 maxLevel = 19;
+	
+	//what monster this monster evolves into
 	optional int32 evolutionMonsterId = 20;
+	//the monster that is needed in order to evolve this monster
+	optional int32 evolutionCatalystMonsterId = 25;
+	optional int32 minutesToEvolve = 26;
+	optional int32 numCatalystMonstersRequired = 27;
+	
 	optional string carrotRecruited = 21;
 	optional string carrotDefeated = 22;
 	optional string carrotEvolved = 23;
 	optional string description = 24; 
 	
+	//optional int32 requiredEvolvingMonsterId = 25; //defined above
+	//optional int32 minutesToEvolve = 26; //defined above
+	//optional int32 numCatalystMonstersRequired = 27; //defined above
 	
 	enum MonsterQuality {
 		COMMON = 1;
@@ -124,3 +134,15 @@ message UserCurrentMonsterTeamProto {
 	optional int32 userId = 1;
 	repeated FullUserMonsterProto currentTeam = 2;
 }
+
+//------------------------------------------------------------------------------------------
+message UserEvolutionProto {
+	//the monster that is required to combine 2 monsters
+	optional int64 catalystUserMonsterId = 1;
+	
+	//the 2 monsters that are combined
+	repeated int64 userMonsterIds = 2;
+	
+	optional int64 startTime = 3;
+}
+

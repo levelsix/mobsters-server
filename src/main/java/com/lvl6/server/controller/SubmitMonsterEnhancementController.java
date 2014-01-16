@@ -208,7 +208,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			return false;
 		}
 
-		if (!hasEnoughCash(resBuilder, u, cashChange, deleteMap, updateMap, newMap)) {
+		if (!hasEnoughCash(resBuilder, u, gemsSpent, cashChange, deleteMap, updateMap, newMap)) {
 			return false;
 		}
 
@@ -233,13 +233,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
 
 	private boolean hasEnoughCash(Builder resBuilder, User u, int cashChange,
-			Map<Long, UserEnhancementItemProto> deleteMap,
+			int gemsSpent, Map<Long, UserEnhancementItemProto> deleteMap,
 			Map<Long, UserEnhancementItemProto> updateMap,
 			Map<Long, UserEnhancementItemProto> newMap) {
 		int userCash = u.getCash(); 
 		//positive 'cashChange' means refund, negative means charge user
 		int cost = -1 * cashChange;
-		if (userCash < cost) {
+		
+		//if user not spending gems and is just spending cash, check if he has enough
+		if (0 == gemsSpent && userCash < cost) {
 			log.error("user error: user does not have enough cash. userCash=" + userCash +
 					"\t cost=" + cost + "\t deleteMap=" + deleteMap + "\t newMap=" +
 					newMap + "\t updateMap=" + updateMap + "\t user=" + u);

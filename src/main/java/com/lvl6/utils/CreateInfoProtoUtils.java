@@ -1202,6 +1202,13 @@ public class CreateInfoProtoUtils {
     	mpb.setDescription(description);
     }
     
+    int evolutionCatalystMonsterId = aMonster.getEvolutionCatalystMonsterId();
+    mpb.setEvolutionCatalystMonsterId(evolutionCatalystMonsterId);
+    int minutesToEvolve = aMonster.getMinutesToEvolve();
+    mpb.setMinutesToEvolve(minutesToEvolve);
+    
+    int num = aMonster.getNumCatalystsRequired();
+    mpb.setNumCatalystMonstersRequired(num);
     return mpb.build();
   }
   

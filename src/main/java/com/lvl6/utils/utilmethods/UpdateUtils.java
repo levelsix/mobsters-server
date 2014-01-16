@@ -643,21 +643,21 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 
-	public int updateUserAndEquipFail(int userId, int equipId, int failIncrement) {
-		Map <String, Object> insertParams = new HashMap<String, Object>();
-
-		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID, userId);
-		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID, equipId);
-		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS, failIncrement);
-
-		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS, failIncrement);
-
-		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_MONSTER_EVOLVING_FAIL_FOR_USER, insertParams, 
-				columnsToUpdate, null);//DBConstants.USER_CITIES__CURRENT_RANK, increment);
-
-		return numUpdated;
-	}
+//	public int updateUserAndEquipFail(int userId, int equipId, int failIncrement) {
+//		Map <String, Object> insertParams = new HashMap<String, Object>();
+//
+//		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID, userId);
+//		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID, equipId);
+//		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS, failIncrement);
+//
+//		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
+//		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS, failIncrement);
+//
+//		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_MONSTER_EVOLVING_FAIL_FOR_USER, insertParams, 
+//				columnsToUpdate, null);//DBConstants.USER_CITIES__CURRENT_RANK, increment);
+//
+//		return numUpdated;
+//	}
 	
 	public int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters) {
 		String tableName = DBConstants.TABLE_MONSTER_HEALING_FOR_USER;

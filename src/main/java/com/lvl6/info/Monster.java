@@ -7,7 +7,10 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 
 public class Monster implements Serializable {
 
-	private static final long serialVersionUID = 6201216250543100065L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7850071510552523272L;
 	private int id;
 	private String name;
 	private String monsterGroup;
@@ -23,16 +26,19 @@ public class Monster implements Serializable {
 	private int elementTwoDmg;
 	private int elementThreeDmg;
 	private int elementFourDmg;
-  private int elementFiveDmg;
-  private float hpLevelMultiplier;
-  private float attackLevelMultiplier;
-  private int maxLevel;
-  private int evolutionMonsterId;
-  private String carrotRecruited;
-  private String carrotDefeated;
-  private String carrotEvolved;
-  private String description;
-  
+	private int elementFiveDmg;
+	private float hpLevelMultiplier;
+	private float attackLevelMultiplier;
+	private int maxLevel;
+	private int evolutionMonsterId;
+	private String carrotRecruited;
+	private String carrotDefeated;
+	private String carrotEvolved;
+	private String description;
+	private int evolutionCatalystMonsterId;
+	private int minutesToEvolve;
+	private int numCatalystsRequired;
+	
 	public Monster(int id, String name, String monsterGroup,
 			MonsterQuality quality, int evolutionLevel, String displayName,
 			MonsterElement element, int baseHp, String imagePrefix,
@@ -40,7 +46,9 @@ public class Monster implements Serializable {
 			int elementTwoDmg, int elementThreeDmg, int elementFourDmg,
 			int elementFiveDmg, float hpLevelMultiplier, float attackLevelMultiplier,
 			int maxLevel, int evolutionMonsterId, String carrotRecruited,
-			String carrotDefeated, String carrotEvolved, String description) {
+			String carrotDefeated, String carrotEvolved, String description,
+			int evolutionCatalystMonsterId, int minutesToEvolve,
+			int numCatalystsRequired) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -66,6 +74,9 @@ public class Monster implements Serializable {
 		this.carrotDefeated = carrotDefeated;
 		this.carrotEvolved = carrotEvolved;
 		this.description = description;
+		this.evolutionCatalystMonsterId = evolutionCatalystMonsterId;
+		this.minutesToEvolve = minutesToEvolve;
+		this.numCatalystsRequired = numCatalystsRequired;
 	}
 
 	public int getId() {
@@ -260,6 +271,30 @@ public class Monster implements Serializable {
 		this.description = description;
 	}
 
+	public int getEvolutionCatalystMonsterId() {
+		return evolutionCatalystMonsterId;
+	}
+
+	public void setEvolutionCatalystMonsterId(int evolutionCatalystMonsterId) {
+		this.evolutionCatalystMonsterId = evolutionCatalystMonsterId;
+	}
+
+	public int getMinutesToEvolve() {
+		return minutesToEvolve;
+	}
+
+	public void setMinutesToEvolve(int minutesToEvolve) {
+		this.minutesToEvolve = minutesToEvolve;
+	}
+
+	public int getNumCatalystsRequired() {
+		return numCatalystsRequired;
+	}
+
+	public void setNumCatalystsRequired(int numCatalystsRequired) {
+		this.numCatalystsRequired = numCatalystsRequired;
+	}
+
 	@Override
 	public String toString() {
 		return "Monster [id=" + id + ", name=" + name + ", monsterGroup="
@@ -276,7 +311,8 @@ public class Monster implements Serializable {
 				+ ", evolutionMonsterId=" + evolutionMonsterId + ", carrotRecruited="
 				+ carrotRecruited + ", carrotDefeated=" + carrotDefeated
 				+ ", carrotEvolved=" + carrotEvolved + ", description=" + description
-				+ "]";
+				+ ", evolutionCatalystMonsterId=" + evolutionCatalystMonsterId
+				+ ", minutesToEvolve=" + minutesToEvolve + ", numCatalystsRequired="
+				+ numCatalystsRequired + "]";
 	}
-  
 }

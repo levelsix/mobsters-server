@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
@@ -67,7 +66,7 @@ public interface InsertUtil {
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
 
-	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
+//	public abstract boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge);
 
 	public abstract int insertClan(String name, int ownerId, Timestamp createTime, String description, String tag, boolean requestToJoinRequired);
 
@@ -129,5 +128,10 @@ public interface InsertUtil {
 	public abstract List<Integer> insertIntoUserFbInviteForSlot(int userId, List<String> facebookIds,
 			Timestamp curTime, Map<String, Integer> fbIdsToUserStructIds,
   		Map<String, Integer> fbIdsToUserStructsFbLvl);
+	
+	//the user monster ids will be ordered in ascending order, and this will determine
+	//which one is one and which one is two
+	public abstract int insertIntoMonsterEvolvingForUser(int userId, long catalystUserMonsterId,
+			List<Long> userMonsterIds, Timestamp startTime);
 	
 }

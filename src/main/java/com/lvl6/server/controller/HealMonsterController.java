@@ -279,6 +279,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Map<String, Integer> moneyForSpeedup, Map<String, Integer> changeMap) {
 
   	
+  	//if checks are here because the changes are 0 if the HealMonsterWaitTimeComplete
+  	//feature part of this controller is being processed
   	if (0 != cashChange || 0 != gemCost) {
   		int oilChange = 0;
   		int gemChange = -1 * gemCost;

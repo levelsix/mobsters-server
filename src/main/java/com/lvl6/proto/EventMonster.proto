@@ -9,6 +9,43 @@ package com.lvl6.proto;
 option java_outer_classname = "EventMonsterProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
+message EvolveMonsterRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//at this moment only one catalyst monster is needed to fuse two monsters
+	//into an evolved form. If in the future more catalysts are required then
+	//the userMonsterIds property in UserEvolutionProto would be duplicates
+	//while the catalystUserMonsterId would change
+	optional UserEvolutionProto evolution = 2;
+	
+	//if user needs, say, five more cash, then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 3;
+	
+	//positive means refund, negative means charge user
+	optional sint32 oilChange = 4;
+	
+}
+
+message EvolveMonsterResponseProto {
+	optional MinimumUserProto sender = 1;
+	
+	optional EvolveMonsterStatus status = 2;
+	
+	enum EvolveMonsterStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_GEMS = 2;
+		FAIL_INSUFFICIENT_RESOURCES = 3;
+		FAIL_MONSTER_REACHED_EVOLVING_LIMIT = 4;
+		//user is already evolving some number of monsters and reached the limit.
+		FAIL_MAX_NUM_EVOLUTIONS_REACHED = 5;
+		FAIL_NONEXISTENT_MONSTERS = 6;
+		FAIL_OTHER = 7;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
 message SubmitMonsterEnhancementRequestProto {
 	optional MinimumUserProto sender = 1;
 	

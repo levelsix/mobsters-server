@@ -127,12 +127,16 @@ import com.lvl6.utils.DBConnection;
     String carrotEvolved = rs.getString(i++);
     String description = rs.getString(i++);
     
-    Monster monster = new Monster(id, name, monsterGroup, quality,
-    		evolutionLevel, displayName, element, baseHp, imagePrefix,
-    		numPuzzlePieces, minutesToCombinePieces, elementOneDmg,
-    		elementTwoDmg, elementThreeDmg, elementFourDmg, elementFiveDmg,
-    		hpLevelMultiplier, attackLevelMultiplier, maxLevel, evolutionMonsterId,
-    		carrotRecruited, carrotDefeated, carrotEvolved, description);
+    int requiredEvolvingMonsterId = rs.getInt(i++);
+    int minutesToEvolve = rs.getInt(i++);
+    int numCatalystsRequired = rs.getInt(i++);
+    
+    Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
+    		displayName, element, baseHp, imagePrefix, numPuzzlePieces,
+    		minutesToCombinePieces, elementOneDmg, elementTwoDmg, elementThreeDmg,
+    		elementFourDmg, elementFiveDmg, hpLevelMultiplier, attackLevelMultiplier,
+    		maxLevel, evolutionMonsterId, carrotRecruited, carrotDefeated, carrotEvolved,
+    		description, requiredEvolvingMonsterId, minutesToEvolve, numCatalystsRequired);
 
     return monster;
   }

@@ -781,6 +781,8 @@ public class StartupController extends EventController {
   	return inviterIds;
   }
   
+  //given map of userIds to users, list of recipient facebook ids and list of inviter
+  //user ids, separate the map of users into recipient and inviter
   private void separateUsersIntoRecipientsAndInviters(Map<Integer, User> idsToUsers,
   		List<String> recipientFacebookIds, List<Integer> inviterUserIds,
   		List<User> recipients, List<User> inviters) {

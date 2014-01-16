@@ -121,7 +121,7 @@ public interface UpdateUtil {
   
   public abstract int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths); 
   
-  public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);
+//  public abstract int updateUserAndEquipFail(int userId, int equipId, int failIncrement);
   
   public abstract int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters);
   

@@ -2,6 +2,7 @@ package com.lvl6.utils.utilmethods;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.mortbay.log.Log;
 
-import com.lvl6.info.BlacksmithAttempt;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
@@ -85,38 +85,38 @@ public class InsertUtils implements InsertUtil{
     return false;
   }
 
-  public boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge) {
-    Map<String, Object> insertParams = new HashMap<String, Object>();
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__ID, ba.getId());
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_ID, ba.getUserId());
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__MONSTER_ID, ba.getEquipId());
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__GOAL_LEVEL, ba.getGoalLevel());
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__GUARANTEED, ba.isGuaranteed());
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__START_TIME, ba.getStartTime());
-
-    if (ba.getDiamondGuaranteeCost() > 0) {
-      insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__DIAMOND_GUARANTEE_COST, ba.getDiamondGuaranteeCost());
-    }
-
-    if (ba.getTimeOfSpeedup() != null) {
-      insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__TIME_OF_SPEEDUP, ba.getTimeOfSpeedup());
-    }
-
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__SUCCESS, successfulForge);
-
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT,
-        ba.getEquipOneEnhancementPercent());
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT,
-        ba.getEquipTwoEnhancementPercent());
-    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__FORGE_SLOT_NUMBER, ba.getForgeSlotNumber());
-    
-    int numInserted = DBConnection.get().insertIntoTableBasic(
-        DBConstants.TABLE_MONSTER_EVOLVING_HISTORY, insertParams);
-    if (numInserted == 1) {
-      return true;
-    }
-    return false;
-  }
+//  public boolean insertForgeAttemptIntoBlacksmithHistory(BlacksmithAttempt ba, boolean successfulForge) {
+//    Map<String, Object> insertParams = new HashMap<String, Object>();
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__ID, ba.getId());
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__USER_ID, ba.getUserId());
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__MONSTER_ID, ba.getEquipId());
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__GOAL_LEVEL, ba.getGoalLevel());
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__GUARANTEED, ba.isGuaranteed());
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__START_TIME, ba.getStartTime());
+//
+//    if (ba.getDiamondGuaranteeCost() > 0) {
+//      insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__DIAMOND_GUARANTEE_COST, ba.getDiamondGuaranteeCost());
+//    }
+//
+//    if (ba.getTimeOfSpeedup() != null) {
+//      insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__TIME_OF_SPEEDUP, ba.getTimeOfSpeedup());
+//    }
+//
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__SUCCESS, successfulForge);
+//
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT,
+//        ba.getEquipOneEnhancementPercent());
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT,
+//        ba.getEquipTwoEnhancementPercent());
+//    insertParams.put(DBConstants.MONSTER_EVOLVING_HISTORY__FORGE_SLOT_NUMBER, ba.getForgeSlotNumber());
+//    
+//    int numInserted = DBConnection.get().insertIntoTableBasic(
+//        DBConstants.TABLE_MONSTER_EVOLVING_HISTORY, insertParams);
+//    if (numInserted == 1) {
+//      return true;
+//    }
+//    return false;
+//  }
 
 //  public int insertEquipEnhancement(int userId, int equipId, int equipLevel,
 //      int enhancementPercentageBeforeEnhancement, Timestamp startTimeOfEnhancement) {
@@ -916,4 +916,29 @@ public class InsertUtils implements InsertUtil{
 		return ids;
 	}
 
+	//the user monster ids will be ordered in ascending order, and this will determine
+	//which one is one and which one is two
+	@Override
+	public int insertIntoMonsterEvolvingForUser(int userId, long catalystUserMonsterId,
+			List<Long> userMonsterIds, Timestamp startTime) {
+		Collections.sort(userMonsterIds);
+		long userMonsterIdOne = userMonsterIds.get(0);
+		long userMOnsterIdTwo = userMonsterIds.get(1);
+		
+		String tableName = DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER;
+		
+		Map <String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID,
+				catalystUserMonsterId);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_ONE,
+				userMonsterIdOne);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_TWO,
+				userMOnsterIdTwo);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_ID, userId);
+		insertParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__START_TIME, startTime);
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+		
+		return numUpdated;
+	}
 }

@@ -25,7 +25,6 @@ public class DBConstants {
   public static final String TABLE_MONSTER = "monster";
   public static final String TABLE_MONSTER_ENHANCING_FOR_USER = "monster_enhancing_for_user";
   public static final String TABLE_MONSTER_ENHANCING_HISTORY = "monster_enhancing_history";
-  public static final String TABLE_MONSTER_EVOLVING_FAIL_FOR_USER = "monster_evolving_fail_for_user";
   public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";
   public static final String TABLE_MONSTER_EVOLVING_HISTORY = "monster_evolving_history";
   public static final String TABLE_MONSTER_FOR_USER = "monster_for_user";
@@ -182,31 +181,21 @@ public class DBConstants {
   public static final String MONSTER_ENHANCING_HISTORY__IS_FEEDER = "is_feeder";
   public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_CANCELLED = "enhancing_cancelled";
 
-
-  /*MONSTER EVOLVING FOR USER TABLE*/
-  public static final String MONSTER_EVOLVING__ID = "id";
-  
-  /*MONSTER EVOLVING FAIL FOR USER*///keeping track of user's failed monster evolution attempts
-  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID = GENERIC__USER_ID;
-  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID = "monster_id";
-  public static final String MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS = "num_fails";
-  
   /*MONSTER EVOLVING FOR USER*/
-  
+  public static final String MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID = "catalyst_user_monster_id";
+  public static final String MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_ONE = "user_monster_id_one";
+  public static final String MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_TWO = "user_monster_id_two";
+  public static final String MONSTER_EVOLVING_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String MONSTER_EVOLVING_FOR_USER__START_TIME = "start_time";
   
   /*MONSTER EVOLVING HISTORY TABLE*/
-  public static final String MONSTER_EVOLVING_HISTORY__ID = "monster_evolving_id";
+  public static final String MONSTER_EVOLVING_HISTORY__ID = "id";
   public static final String MONSTER_EVOLVING_HISTORY__USER_ID = GENERIC__USER_ID;
-  public static final String MONSTER_EVOLVING_HISTORY__MONSTER_ID = "monster_id";
-  public static final String MONSTER_EVOLVING_HISTORY__GOAL_LEVEL = "goal_level";
-  public static final String MONSTER_EVOLVING_HISTORY__GUARANTEED = "guaranteed";
+  public static final String MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_ONE = "user_monster_id_one";
+  public static final String MONSTER_EVOLVING_HISTORY__USER_MONSTER_ID_TWO = "user_monster_id_two";
+  public static final String MONSTER_EVOLVING_HISTORY__CATALYST_USER_MONSTER_ID = "catalyst_user_monster_id";
   public static final String MONSTER_EVOLVING_HISTORY__START_TIME = "start_time";
-  public static final String MONSTER_EVOLVING_HISTORY__DIAMOND_GUARANTEE_COST = "diamond_guarantee_cost";
-  public static final String MONSTER_EVOLVING_HISTORY__TIME_OF_SPEEDUP = "time_of_speedup";
-  public static final String MONSTER_EVOLVING_HISTORY__SUCCESS = "success";
-  public static final String MONSTER_EVOLVING_HISTORY__EQUIP_ONE_ENHANCEMENT_PERCENT = "equip_one_enhancement_percent";
-  public static final String MONSTER_EVOLVING_HISTORY__EQUIP_TWO_ENHANCEMENT_PERCENT = "equip_two_enhancement_percent";
-  public static final String MONSTER_EVOLVING_HISTORY__FORGE_SLOT_NUMBER = "forge_slot_number";
+  public static final String MONSTER_EVOLVING_HISTORY__TIME_OF_ENTRY = "time_of_entry";
 
   /*MONSTER FOR USER*/
   public static final String MONSTER_FOR_USER__ID = GENERIC__ID;
