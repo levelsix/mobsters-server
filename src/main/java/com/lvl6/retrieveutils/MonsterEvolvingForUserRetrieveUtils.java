@@ -25,7 +25,7 @@ import com.lvl6.utils.DBConnection;
 
 
 	////@Cacheable(value="userMonstersForUser", key="#userId")
-	public static Map<Long, MonsterEvolvingForUser> getMonstersForUser(int userId) {
+	public static Map<Long, MonsterEvolvingForUser> getCatalystIdsToEvolutionsForUser(int userId) {
 		log.debug("retrieving user monsters being healined for userId " + userId);
 
 		Connection conn = null;

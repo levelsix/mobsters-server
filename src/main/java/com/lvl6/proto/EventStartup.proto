@@ -61,6 +61,7 @@ message StartupResponseProto {
 	repeated FullUserMonsterProto usersMonsters = 19;
 	repeated UserMonsterHealingProto monstersHealing = 20;
 	optional UserEnhancementProto enhancements = 21;
+	optional UserEvolutionProto evolution = 29;
 	repeated RareBoosterPurchaseProto rareBoosterPurchases = 22;
 	
 	optional string kabamNaid = 23;
@@ -73,12 +74,14 @@ message StartupResponseProto {
 	//isRedeemed does not matter
 	repeated UserFacebookInviteForSlotProto invitesFromMeForSlots = 25;
 	
-	
 	optional StaticDataProto staticDataStuffProto = 26;
+	
 	//repeated int32 redeemedQuestIds = 27; //above, after "userQuests = 6"
 	
 	//for each city, the city's boss is hiding in the specified taskId
 	repeated int32 taskIdForCurrentCityBoss = 28;
+	
+	//optional UserEvolutionProto evolution = 29; //defined above, below #21
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;

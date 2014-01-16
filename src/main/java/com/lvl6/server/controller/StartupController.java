@@ -38,6 +38,7 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
@@ -62,6 +63,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
+import com.lvl6.proto.MonsterStuffProto.UserEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
@@ -75,6 +77,7 @@ import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
@@ -613,6 +616,7 @@ public class StartupController extends EventController {
     	}
     }
     
+    //monsters in healing
     Map<Long, MonsterHealingForUser> userMonstersHealing = MonsterHealingForUserRetrieveUtils
     		.getMonstersForUser(userId);
     if (null != userMonstersHealing && !userMonstersHealing.isEmpty()) {
@@ -624,6 +628,7 @@ public class StartupController extends EventController {
     	}
     }
     
+    //enhancing monsters
     Map<Long, MonsterEnhancingForUser> userMonstersEnhancing = MonsterEnhancingForUserRetrieveUtils
     		.getMonstersForUser(userId);
     if (null != userMonstersEnhancing && !userMonstersEnhancing.isEmpty()) {
@@ -656,6 +661,21 @@ public class StartupController extends EventController {
     	
     	resBuilder.setEnhancements(uep);
     }
+    
+    //evolving monsters
+    Map<Long, MonsterEvolvingForUser> userMonsterEvolving = MonsterEvolvingForUserRetrieveUtils
+    		.getCatalystIdsToEvolutionsForUser(userId);
+    if (null != userMonsterEvolving && !userMonsterEvolving.isEmpty()) {
+    	
+    	for (MonsterEvolvingForUser mefu : userMonsterEvolving.values()) {
+    		UserEvolutionProto uep = CreateInfoProtoUtils.createUserEvolutionProtoFromEvolution(mefu);
+    		
+    		//TODO: NOTE THAT IF MORE THAN ONE EVOLUTION IS ALLLOWED AT A TIME, THIS METHOD
+    		//CALL NEEDS TO CHANGE
+    		resBuilder.setEvolution(uep);
+    	}
+    }
+    
     
   }
 

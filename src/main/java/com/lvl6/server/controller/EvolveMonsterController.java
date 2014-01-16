@@ -97,7 +97,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
 			
 			Map<Long, MonsterEvolvingForUser> alreadyEvolving =
-					MonsterEvolvingForUserRetrieveUtils.getMonstersForUser(userId);
+					MonsterEvolvingForUserRetrieveUtils.getCatalystIdsToEvolutionsForUser(userId);
 			
 			//retrieve all the new monsters
     	Map<Long, MonsterForUser> existingUserMonsters = new HashMap<Long, MonsterForUser>();
