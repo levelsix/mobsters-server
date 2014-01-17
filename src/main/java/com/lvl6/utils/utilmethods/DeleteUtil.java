@@ -40,4 +40,7 @@ public interface DeleteUtil {
   public abstract int deleteUserFacebookInvitesForSlots(List<Integer> idsOfInvites);
   
   public abstract int deleteUnredeemedUserFacebookInvitesForUser(int userId);
+  
+  public abstract int deleteMonsterEvolvingForUser(long catalystUserMonsterId,
+  		long userMonsterIdOne, long userMonsterIdTwo, int userId);
 }

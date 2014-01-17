@@ -257,5 +257,21 @@ public class DeleteUtils implements DeleteUtil {
 		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, values);
 		return numDeleted;
 	}
+
+	@Override
+	public int deleteMonsterEvolvingForUser(long catalystUserMonsterId,
+			long userMonsterIdOne, long userMonsterIdTwo, int userId) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID,
+    		catalystUserMonsterId);
+		conditionParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_ONE,
+    		userMonsterIdOne);
+		conditionParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_TWO,
+    		userMonsterIdTwo);
+		conditionParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_ID, userId);
+		
+    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_REFERRAL_CODE_AVAILABLE, conditionParams, "and");
+		return numDeleted;
+	}
 	
 }

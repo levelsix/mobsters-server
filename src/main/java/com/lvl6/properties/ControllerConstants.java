@@ -40,6 +40,25 @@ public class ControllerConstants {
 	//pvp
 	public static final int PVP__REQUIRED_MIN_LEVEL = 30;
 	
+	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
+	public static final String UCHRFC__CREATE_CLAN = "created clan";
+	public static final String UCHRFC__CURRENCY_EXCHANGE = "currency exchange";
+	public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
+	public static final String UCHRFC__END_TASK = "end task";
+	public static final String UCHRFC__ENHANCING = "enhancing user monsters";
+	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
+	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
+	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
+	public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
+	public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
+	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
+	public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
+	public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
+	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
+	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
+	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
+
+	
 	
 	//old aoc constants
   public static final int NOT_SET = -1;
@@ -282,21 +301,6 @@ public class ControllerConstants {
   public static final int TOURNAMENT_EVENT__FLEES_WEIGHT = -3;
   public static final int TOURNAMENT_EVENT__NUM_HOURS_TO_SHOW_AFTER_EVENT_END = 24;
   
-  //USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
-  public static final String UCHRFC__CREATE_CLAN = "created clan";
-  public static final String UCHRFC__CURRENCY_EXCHANGE = "currency exchange";
-  public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
-  public static final String UCHRFC__END_TASK = "end task";
-  public static final String UCHRFC__ENHANCING = "enhancing user monsters";
-  public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
-  public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
-  public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
-  public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
-  public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
-  public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
-  public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
-  public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
-  public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
   
   
   public static final String UCHRFC__USER_CREATED = "user created";
@@ -308,7 +312,6 @@ public class ControllerConstants {
   public static final String UCHRFC__BOSS_ACTION = "boss action";
   public static final String UCHRFC__REFILL_STAT = "refilled stat: ";
   public static final String UCHRFC__SELL_NORM_STRUCT = "sell norm struct";
-  public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
   public static final String UCHRFC__REDEEM_MARKETPLACE_EARNINGS = "redeemed marketplace earnings";
   public static final String UCHRFC__PICK_LOCKBOX = "picked lockbox";
   public static final String UCHRFC__RETRACT_MARKETPLACE_POST = "retract marketplace post";

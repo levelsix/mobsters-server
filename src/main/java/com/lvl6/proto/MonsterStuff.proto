@@ -52,11 +52,14 @@ message MonsterProto {
 	}
 	
 	enum MonsterElement {
-		FIRE = 1;
-		GRASS = 2;
-		WATER = 3;
-		LIGHTNING = 4;
-		DARKNESS = 5;
+		FIRE = 1; //beats grass
+		GRASS = 2; //beats water
+		WATER = 3; //beats fire
+		
+		LIGHTNING = 4; //beats darkness
+		DARKNESS = 5; //beats lightning
+		
+		ROCK = 6; //damages everything
 	}
 }
 

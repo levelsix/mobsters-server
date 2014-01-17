@@ -46,6 +46,28 @@ message EvolveMonsterResponseProto {
 
 //------------------------------------------------------------------------------------------
 
+message EvolutionFinishedRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//if the user is going to speed up the evolution process
+	//(positive number, server will convert it to negative)
+	optional int32 gemsSpent = 2; 
+}
+
+message EvolutionFinishedResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional FullUserMonsterProto evolvedMonster = 2;
+	optional EvolutionFinishedStatus status = 3;
+	
+	enum EvolutionFinishedStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_GEMS = 2;
+		FAIL_OTHER = 3;
+	}
+} 
+
+//------------------------------------------------------------------------------------------
+
 message SubmitMonsterEnhancementRequestProto {
 	optional MinimumUserProto sender = 1;
 	

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,6 @@ import com.lvl6.utils.DBConnection;
 	private static final String TABLE_NAME = DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER;
 
 
-	////@Cacheable(value="userMonstersForUser", key="#userId")
 	public static Map<Long, MonsterEvolvingForUser> getCatalystIdsToEvolutionsForUser(int userId) {
 		log.debug("retrieving user monsters being healined for userId " + userId);
 
@@ -41,6 +41,30 @@ import com.lvl6.utils.DBConnection;
     	DBConnection.get().close(rs, null, conn);
     }
 		return userMonsters;
+	}
+	
+	public static MonsterEvolvingForUser getEvolutionForUser(int userId) {
+		log.debug("retrieving user monsters being healined for userId " + userId);
+
+		Connection conn = null;
+		ResultSet rs = null;
+		Map<Long, MonsterEvolvingForUser> userMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
+			userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster enhancing for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+		
+		MonsterEvolvingForUser mefu = null;
+		if (null != userMonsters && !userMonsters.isEmpty()) {
+			Collection<MonsterEvolvingForUser> evolutions = userMonsters.values();
+			mefu = (MonsterEvolvingForUser) evolutions.toArray()[0];
+		}
+		return mefu;
 	}
 
 //	public static Map<Long, MonsterEvolvingForUser> getMonstersWithUserAndMonsterIds(

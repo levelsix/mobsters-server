@@ -793,6 +793,7 @@ public class InsertUtils implements InsertUtil{
 		Timestamp combineStartTime = new Timestamp(combineStartDate.getTime());
 		
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		sourceOfPieces = " " + sourceOfPieces + " ";
 		
 		for(int i = 0; i < userMonsters.size(); i++){
 			MonsterForUser mfu = userMonsters.get(i);

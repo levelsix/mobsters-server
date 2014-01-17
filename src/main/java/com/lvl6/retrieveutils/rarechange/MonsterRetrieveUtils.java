@@ -58,6 +58,16 @@ import com.lvl6.utils.DBConnection;
     return toreturn;
   }
 
+  public static Monster getEvolvedFormForMonster(int monsterId) {
+  	if (null == monsterIdsToMonsters) {
+  		setStaticMonsterIdsToMonsters();
+  	}
+  	Monster m = monsterIdsToMonsters.get(monsterId);
+  	
+  	int evolvedId = m.getEvolutionMonsterId();
+  	
+  	return monsterIdsToMonsters.get(evolvedId);
+  }
 
   private static void setStaticMonsterIdsToMonsters() {
     log.debug("setting static map of monsterIds to monsters");
