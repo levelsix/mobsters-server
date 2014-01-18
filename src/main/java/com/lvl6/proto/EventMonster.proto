@@ -174,16 +174,14 @@ message HealMonsterRequestProto {
 	optional sint32 cashChange = 5; 
 	
 	//positive amount if charging user, negative if refunding user
-	optional int32 gemCostForHealing = 6; //(for history purposes)
+	optional int32 gemCostForHealing = 6; 
 	
 	
 	//smushing HealMonsterWaitTimeCompleteRequestProto logic into this event
 	optional bool isSpeedup = 7;
-	optional int32 gemsForSpeedup = 8; //pos amount if charging user, (for history purposes) 
+	optional int32 gemsForSpeedup = 8; //pos amount if charging user 
 	repeated UserMonsterCurrentHealthProto umchp = 9;
 	
-	//pos amount if charging user, negative if user gains gems
-	optional int32 totalGemCost = 10;
 }
 
 message HealMonsterResponseProto {
