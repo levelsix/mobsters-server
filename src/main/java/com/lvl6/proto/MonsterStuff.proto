@@ -23,6 +23,7 @@ message MonsterProto {
 	optional int32 elementThreeDmg = 14;
 	optional int32 elementFourDmg = 15;
 	optional int32 elementFiveDmg = 16;
+	optional int32 elementSixDmg = 28;
 	optional float hpLevelMultiplier = 17;
 	optional float attackLevelMultiplier = 18;
 	optional int32 maxLevel = 19;
@@ -42,6 +43,8 @@ message MonsterProto {
 	//optional int32 requiredEvolvingMonsterId = 25; //defined above
 	//optional int32 minutesToEvolve = 26; //defined above
 	//optional int32 numCatalystMonstersRequired = 27; //defined above
+	//optional int32 elementSixDmg = 28; //defined above
+	
 	
 	enum MonsterQuality {
 		COMMON = 1;

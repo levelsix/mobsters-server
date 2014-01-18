@@ -1179,6 +1179,7 @@ public class CreateInfoProtoUtils {
     mpb.setElementThreeDmg(aMonster.getElementThreeDmg());
     mpb.setElementFourDmg(aMonster.getElementFourDmg());
     mpb.setElementFiveDmg(aMonster.getElementFiveDmg());
+    mpb.setElementSixDmg(aMonster.getElementSixDmg());
     mpb.setHpLevelMultiplier(aMonster.getHpLevelMultiplier());
     mpb.setAttackLevelMultiplier(aMonster.getAttackLevelMultiplier());
     mpb.setMaxLevel(aMonster.getMaxLevel());

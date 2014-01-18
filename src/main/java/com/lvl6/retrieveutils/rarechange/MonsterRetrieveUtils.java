@@ -133,6 +133,7 @@ import com.lvl6.utils.DBConnection;
     int elementThreeDmg = rs.getInt(i++);
     int elementFourDmg = rs.getInt(i++);
     int elementFiveDmg = rs.getInt(i++);
+    int elementSixDmg = rs.getInt(i++);
     float hpLevelMultiplier = rs.getFloat(i++);
     float attackLevelMultiplier = rs.getFloat(i++);
     int maxLevel = rs.getInt(i++);
@@ -150,9 +151,10 @@ import com.lvl6.utils.DBConnection;
     Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
     		displayName, element, baseHp, imagePrefix, numPuzzlePieces,
     		minutesToCombinePieces, elementOneDmg, elementTwoDmg, elementThreeDmg,
-    		elementFourDmg, elementFiveDmg, hpLevelMultiplier, attackLevelMultiplier,
-    		maxLevel, evolutionMonsterId, carrotRecruited, carrotDefeated, carrotEvolved,
-    		description, requiredEvolvingMonsterId, minutesToEvolve, numCatalystsRequired);
+    		elementFourDmg, elementFiveDmg, elementSixDmg, hpLevelMultiplier,
+    		attackLevelMultiplier, maxLevel, evolutionMonsterId, carrotRecruited,
+    		carrotDefeated, carrotEvolved, description, requiredEvolvingMonsterId,
+    		minutesToEvolve, numCatalystsRequired);
 
     return monster;
   }
