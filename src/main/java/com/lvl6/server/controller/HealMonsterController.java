@@ -63,6 +63,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     HealMonsterRequestProto reqProto = ((HealMonsterRequestEvent)event).getHealMonsterRequestProto();
+    log.info("reqProto=" + reqProto);
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
@@ -286,6 +287,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup, int gemsForSpeedup,
 		  Map<String, Integer> moneyForSpeedup, Map<String, Integer> changeMap) {
 
+  	log.info("cashChange=" + cashChange);
+  	log.info("gemCost=" + gemCost);
+  	log.info("deleteMap=" + protoDeleteMap);
+  	log.info("updateMap=" + protoUpdateMap);
+  	log.info("newMap=" + protoNewMap);
+  	log.info("gemCostForHealing=" + gemCostForHealing);
+  	log.info("isSpeedup=" + isSpeedup);
+  	log.info("gemsForSpedup" + gemsForSpeedup);
+  	
+  	
   	
   	//if checks are here because the changes are 0 if the HealMonsterWaitTimeComplete
   	//feature part of this controller is being processed
