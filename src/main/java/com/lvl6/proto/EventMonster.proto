@@ -84,7 +84,7 @@ message SubmitMonsterEnhancementRequestProto {
 	//Refund in this case: user has two feeders but deletes one of them,
 	//so now it's just base monster and one feeder. The user should get refunded
 	//for the feeder that was dequeued 
-	optional sint32 cashChange = 6; 
+	optional sint32 oilChange = 6; 
 	
 }
 
@@ -96,7 +96,7 @@ message SubmitMonsterEnhancementResponseProto {
 	enum SubmitMonsterEnhancementStatus {
 		SUCCESS = 1;
 		FAIL_INSUFFICIENT_GEMS = 2;
-		FAIL_INSUFFICIENT_CASH = 3;
+		FAIL_INSUFFICIENT_OIL = 3;
 		FAIL_OTHER = 4;
 		//TRYING_TO_SURPASS_MAX_LEVEL = 5;
 	}

@@ -73,7 +73,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//positive value, need to convert to negative when updating user
 		int gemsSpent = reqProto.getGemsSpent();
 		//positive means refund, negative means charge user
-		int cashChange = reqProto.getCashChange();
+		int oilChange = reqProto.getOilChange();
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
 
 		Map<Long, UserEnhancementItemProto> deleteMap = MonsterStuffUtils.
@@ -91,7 +91,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 		server.lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
 		try {
-			int previousCash = 0;
+			int previousOil = 0;
 			int previousGems = 0;
 			//get whatever we need from the database
 			User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -110,15 +110,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
 					alreadyEnhancing, alreadyHealing, deleteMap, updateMap, newMap, evolution,
-					gemsSpent, cashChange);
+					gemsSpent, oilChange);
 
 			boolean successful = false;
 			Map<String, Integer> money = new HashMap<String, Integer>();
 			
 			if (legitMonster) {
-				previousCash = aUser.getCash();
+				previousOil = aUser.getOil();
 				previousGems = aUser.getGems();
-				successful = writeChangesToDB(aUser, userId, gemsSpent, cashChange,
+				successful = writeChangesToDB(aUser, userId, gemsSpent, oilChange,
 						deleteMap, updateMap, newMap, money);
 			}
 		
@@ -136,7 +136,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				resEventUpdate.setTag(event.getTag());
 				server.writeEvent(resEventUpdate);
 
-				writeToUserCurrencyHistory(aUser, clientTime, money, previousCash, previousGems,
+				writeToUserCurrencyHistory(aUser, clientTime, money, previousOil, previousGems,
 						deleteMap, updateMap, newMap);
 			}
 
@@ -173,7 +173,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<Long, UserEnhancementItemProto> deleteMap,
 			Map<Long, UserEnhancementItemProto> updateMap,
 			Map<Long, UserEnhancementItemProto> newMap, MonsterEvolvingForUser evolution,
-			int gemsSpent, int cashChange) {
+			int gemsSpent, int oilChange) {
 		if (null == u ) {
 			log.error("unexpected error: user is null. user=" + u + "\t deleteMap="+ deleteMap +
 					"\t updateMap=" + updateMap + "\t newMap=" + newMap);
@@ -217,11 +217,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 
 		//CHECK MONEY
-		if (!hasEnoughGems(resBuilder, u, gemsSpent, cashChange, deleteMap, updateMap, newMap)) {
+		if (!hasEnoughGems(resBuilder, u, gemsSpent, oilChange, deleteMap, updateMap, newMap)) {
 			return false;
 		}
 
-		if (!hasEnoughCash(resBuilder, u, gemsSpent, cashChange, deleteMap, updateMap, newMap)) {
+		if (!hasEnoughOil(resBuilder, u, gemsSpent, oilChange, deleteMap, updateMap, newMap)) {
 			return false;
 		}
 
@@ -229,7 +229,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	}
  
 	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent,
-			int cashChange, Map<Long, UserEnhancementItemProto> deleteMap,
+			int oilChange, Map<Long, UserEnhancementItemProto> deleteMap,
 			Map<Long, UserEnhancementItemProto> updateMap,
 			Map<Long, UserEnhancementItemProto> newMap) {
 		int userGems = u.getGems();
@@ -237,7 +237,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		if (userGems < gemsSpent) {
 			log.error("user error: user does not have enough gems. userGems=" + userGems +
 					"\t gemsSpent=" + gemsSpent + "\t deleteMap=" + deleteMap + "\t newMap=" +
-					newMap + "\t updateMap=" + updateMap + "\t cashChange=" + cashChange +
+					newMap + "\t updateMap=" + updateMap + "\t cashChange=" + oilChange +
 					"\t user=" + u);
 			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_GEMS);
 			return false;
@@ -245,43 +245,43 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		return true;
 	}
 
-	private boolean hasEnoughCash(Builder resBuilder, User u, int cashChange,
+	private boolean hasEnoughOil(Builder resBuilder, User u, int oilChange,
 			int gemsSpent, Map<Long, UserEnhancementItemProto> deleteMap,
 			Map<Long, UserEnhancementItemProto> updateMap,
 			Map<Long, UserEnhancementItemProto> newMap) {
-		int userCash = u.getCash(); 
+		int userOil = u.getOil(); 
 		//positive 'cashChange' means refund, negative means charge user
-		int cost = -1 * cashChange;
+		int cost = -1 * oilChange;
 		
 		//if user not spending gems and is just spending cash, check if he has enough
-		if (0 == gemsSpent && userCash < cost) {
-			log.error("user error: user does not have enough cash. userCash=" + userCash +
+		if (0 == gemsSpent && userOil < cost) {
+			log.error("user error: user does not have enough oil. userOil=" + userOil +
 					"\t cost=" + cost + "\t deleteMap=" + deleteMap + "\t newMap=" +
 					newMap + "\t updateMap=" + updateMap + "\t user=" + u);
-			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_CASH);
+			resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_INSUFFICIENT_OIL);
 			return false;
 		}
 		return true;
 	}
 
 	private boolean writeChangesToDB(User user, int uId, int gemsSpent,
-			int cashChange, Map<Long, UserEnhancementItemProto> protoDeleteMap,
+			int oilChange, Map<Long, UserEnhancementItemProto> protoDeleteMap,
 		  Map<Long, UserEnhancementItemProto> protoUpdateMap,
 		  Map<Long, UserEnhancementItemProto> protoNewMap,
 		  Map<String, Integer> money) {
 
 		//CHARGE THE USER
-		int oilChange = 0;
+		int cashChange = 0;
 		int gemChange = -1 * gemsSpent;
 		int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 		if (1 != numChange) {
 			log.warn("problem with updating user stats: gemChange=" + gemChange
-					+ ", cashChange=" + cashChange + ", user is " + user +
+					+ ", oilChange=" + oilChange + ", user is " + user +
 					"\t perhaps base monster deleted \t protoDeleteMap=" + protoDeleteMap);
 		} else {
 			//everything went well
-			if (0 != cashChange) {
-				money.put(MiscMethods.cash, cashChange);
+			if (0 != oilChange) {
+				money.put(MiscMethods.oil, oilChange);
 			}
 			if (0 != gemsSpent) {
 				money.put(MiscMethods.gems, gemChange);
@@ -330,7 +330,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   
 	public void writeToUserCurrencyHistory(User aUser, Timestamp date,
-			Map<String, Integer> money, int previousCash, int previousGems,
+			Map<String, Integer> money, int previousOil, int previousGems,
 			Map<Long, UserEnhancementItemProto> protoDeleteMap,
 		  Map<Long, UserEnhancementItemProto> protoUpdateMap,
 		  Map<Long, UserEnhancementItemProto> protoNewMap) {
@@ -340,9 +340,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		StringBuilder reasonForChange = new StringBuilder();
 		reasonForChange.append(ControllerConstants.UCHRFC__ENHANCING);
 		
-		String cash = MiscMethods.cash;
+		String oil = MiscMethods.oil;
 		String gems = MiscMethods.gems;
-		previousGemsCash.put(cash, previousCash);
+		previousGemsCash.put(oil, previousOil);
 		previousGemsCash.put(gems, previousGems);
 		
 		//maybe shouldn't keep track...oh well, more info hopefully is better than none
@@ -371,7 +371,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			}
 		}
 		
-		reasonsForChanges.put(cash, reasonForChange.toString());
+		reasonsForChanges.put(oil, reasonForChange.toString());
 		reasonsForChanges.put(gems, reasonForChange.toString());
 		//TODO: FIX THIS
 //		MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, money, previousGemsCash, reasonsForChanges);

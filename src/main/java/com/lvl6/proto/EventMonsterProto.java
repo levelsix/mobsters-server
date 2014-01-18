@@ -2491,9 +2491,9 @@ public final class EventMonsterProto {
     boolean hasGemsSpent();
     int getGemsSpent();
     
-    // optional sint32 cashChange = 6;
-    boolean hasCashChange();
-    int getCashChange();
+    // optional sint32 oilChange = 6;
+    boolean hasOilChange();
+    int getOilChange();
   }
   public static final class SubmitMonsterEnhancementRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -2610,14 +2610,14 @@ public final class EventMonsterProto {
       return gemsSpent_;
     }
     
-    // optional sint32 cashChange = 6;
-    public static final int CASHCHANGE_FIELD_NUMBER = 6;
-    private int cashChange_;
-    public boolean hasCashChange() {
+    // optional sint32 oilChange = 6;
+    public static final int OILCHANGE_FIELD_NUMBER = 6;
+    private int oilChange_;
+    public boolean hasOilChange() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public int getCashChange() {
-      return cashChange_;
+    public int getOilChange() {
+      return oilChange_;
     }
     
     private void initFields() {
@@ -2626,7 +2626,7 @@ public final class EventMonsterProto {
       ueipUpdate_ = java.util.Collections.emptyList();
       ueipNew_ = java.util.Collections.emptyList();
       gemsSpent_ = 0;
-      cashChange_ = 0;
+      oilChange_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2656,7 +2656,7 @@ public final class EventMonsterProto {
         output.writeInt32(5, gemsSpent_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeSInt32(6, cashChange_);
+        output.writeSInt32(6, oilChange_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2689,7 +2689,7 @@ public final class EventMonsterProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeSInt32Size(6, cashChange_);
+          .computeSInt32Size(6, oilChange_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2845,7 +2845,7 @@ public final class EventMonsterProto {
         }
         gemsSpent_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
-        cashChange_ = 0;
+        oilChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
@@ -2927,7 +2927,7 @@ public final class EventMonsterProto {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.cashChange_ = cashChange_;
+        result.oilChange_ = oilChange_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3028,8 +3028,8 @@ public final class EventMonsterProto {
         if (other.hasGemsSpent()) {
           setGemsSpent(other.getGemsSpent());
         }
-        if (other.hasCashChange()) {
-          setCashChange(other.getCashChange());
+        if (other.hasOilChange()) {
+          setOilChange(other.getOilChange());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3096,7 +3096,7 @@ public final class EventMonsterProto {
             }
             case 48: {
               bitField0_ |= 0x00000020;
-              cashChange_ = input.readSInt32();
+              oilChange_ = input.readSInt32();
               break;
             }
           }
@@ -3774,23 +3774,23 @@ public final class EventMonsterProto {
         return this;
       }
       
-      // optional sint32 cashChange = 6;
-      private int cashChange_ ;
-      public boolean hasCashChange() {
+      // optional sint32 oilChange = 6;
+      private int oilChange_ ;
+      public boolean hasOilChange() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
-      public int getCashChange() {
-        return cashChange_;
+      public int getOilChange() {
+        return oilChange_;
       }
-      public Builder setCashChange(int value) {
+      public Builder setOilChange(int value) {
         bitField0_ |= 0x00000020;
-        cashChange_ = value;
+        oilChange_ = value;
         onChanged();
         return this;
       }
-      public Builder clearCashChange() {
+      public Builder clearOilChange() {
         bitField0_ = (bitField0_ & ~0x00000020);
-        cashChange_ = 0;
+        oilChange_ = 0;
         onChanged();
         return this;
       }
@@ -3850,13 +3850,13 @@ public final class EventMonsterProto {
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_INSUFFICIENT_GEMS(1, 2),
-      FAIL_INSUFFICIENT_CASH(2, 3),
+      FAIL_INSUFFICIENT_OIL(2, 3),
       FAIL_OTHER(3, 4),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_INSUFFICIENT_GEMS_VALUE = 2;
-      public static final int FAIL_INSUFFICIENT_CASH_VALUE = 3;
+      public static final int FAIL_INSUFFICIENT_OIL_VALUE = 3;
       public static final int FAIL_OTHER_VALUE = 4;
       
       
@@ -3866,7 +3866,7 @@ public final class EventMonsterProto {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_INSUFFICIENT_GEMS;
-          case 3: return FAIL_INSUFFICIENT_CASH;
+          case 3: return FAIL_INSUFFICIENT_OIL;
           case 4: return FAIL_OTHER;
           default: return null;
         }
@@ -3898,7 +3898,7 @@ public final class EventMonsterProto {
       }
       
       private static final SubmitMonsterEnhancementStatus[] VALUES = {
-        SUCCESS, FAIL_INSUFFICIENT_GEMS, FAIL_INSUFFICIENT_CASH, FAIL_OTHER, 
+        SUCCESS, FAIL_INSUFFICIENT_GEMS, FAIL_INSUFFICIENT_OIL, FAIL_OTHER, 
       };
       
       public static SubmitMonsterEnhancementStatus valueOf(
@@ -18861,153 +18861,153 @@ public final class EventMonsterProto {
       "ishedResponseProto.EvolutionFinishedStat" +
       "us\"R\n\027EvolutionFinishedStatus\022\013\n\007SUCCESS" +
       "\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\016\n\nFAIL_O" +
-      "THER\020\003\"\266\002\n$SubmitMonsterEnhancementReque" +
+      "THER\020\003\"\265\002\n$SubmitMonsterEnhancementReque" +
       "stProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
       ".MinimumUserProto\022<\n\nueipDelete\030\002 \003(\0132(." +
       "com.lvl6.proto.UserEnhancementItemProto\022",
       "<\n\nueipUpdate\030\003 \003(\0132(.com.lvl6.proto.Use" +
       "rEnhancementItemProto\0229\n\007ueipNew\030\004 \003(\0132(" +
       ".com.lvl6.proto.UserEnhancementItemProto" +
-      "\022\021\n\tgemsSpent\030\005 \001(\005\022\022\n\ncashChange\030\006 \001(\021\"" +
-      "\266\002\n%SubmitMonsterEnhancementResponseProt" +
+      "\022\021\n\tgemsSpent\030\005 \001(\005\022\021\n\toilChange\030\006 \001(\021\"\265" +
+      "\002\n%SubmitMonsterEnhancementResponseProto" +
+      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
+      "mUserProto\022d\n\006status\030\002 \001(\0162T.com.lvl6.pr" +
+      "oto.SubmitMonsterEnhancementResponseProt" +
+      "o.SubmitMonsterEnhancementStatus\"t\n\036Subm" +
+      "itMonsterEnhancementStatus\022\013\n\007SUCCESS\020\001\022",
+      "\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FAIL_INSU" +
+      "FFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\331\001\n\'Enhan" +
+      "cementWaitTimeCompleteRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsForSpeedu" +
+      "p\030\003 \001(\005\0229\n\005umcep\030\004 \001(\0132*.com.lvl6.proto." +
+      "UserMonsterCurrentExpProto\022\026\n\016userMonste" +
+      "rIds\030\005 \003(\003\"\306\002\n(EnhancementWaitTimeComple" +
+      "teResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022j\n\006status\030\002 \001(",
+      "\0162Z.com.lvl6.proto.EnhancementWaitTimeCo" +
+      "mpleteResponseProto.EnhancementWaitTimeC" +
+      "ompleteStatus\"|\n!EnhancementWaitTimeComp" +
+      "leteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_HEALING_" +
+      "NOT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFICIENT_FUND" +
+      "S\020\003\022\016\n\nFAIL_OTHER\020\004\"\245\001\n\037UpdateMonsterHea" +
+      "lthRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\022<\n\005umchp\030\002 \003(\013" +
+      "2-.com.lvl6.proto.UserMonsterCurrentHeal" +
+      "thProto\022\022\n\nclientTime\030\003 \001(\003\"\207\002\n UpdateMo",
+      "nsterHealthResponseProto\0220\n\006sender\030\001 \001(\013" +
+      "2 .com.lvl6.proto.MinimumUserProto\022Z\n\006st" +
+      "atus\030\002 \001(\0162J.com.lvl6.proto.UpdateMonste" +
+      "rHealthResponseProto.UpdateMonsterHealth" +
+      "Status\"U\n\031UpdateMonsterHealthStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n" +
+      "\nFAIL_OTHER\020\003\"\224\003\n\027HealMonsterRequestProt" +
       "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022d\n\006status\030\002 \001(\0162T.com.lvl6.p" +
-      "roto.SubmitMonsterEnhancementResponsePro" +
-      "to.SubmitMonsterEnhancementStatus\"u\n\036Sub" +
-      "mitMonsterEnhancementStatus\022\013\n\007SUCCESS\020\001",
-      "\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\032\n\026FAIL_INS" +
-      "UFFICIENT_CASH\020\003\022\016\n\nFAIL_OTHER\020\004\"\331\001\n\'Enh" +
-      "ancementWaitTimeCompleteRequestProto\0220\n\006" +
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsForSpee" +
-      "dup\030\003 \001(\005\0229\n\005umcep\030\004 \001(\0132*.com.lvl6.prot" +
-      "o.UserMonsterCurrentExpProto\022\026\n\016userMons" +
-      "terIds\030\005 \003(\003\"\306\002\n(EnhancementWaitTimeComp" +
-      "leteResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022j\n\006status\030\002 ",
-      "\001(\0162Z.com.lvl6.proto.EnhancementWaitTime" +
-      "CompleteResponseProto.EnhancementWaitTim" +
-      "eCompleteStatus\"|\n!EnhancementWaitTimeCo" +
-      "mpleteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_HEALIN" +
-      "G_NOT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFICIENT_FU" +
-      "NDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\245\001\n\037UpdateMonsterH" +
-      "ealthRequestProto\0220\n\006sender\030\001 \001(\0132 .com." +
-      "lvl6.proto.MinimumUserProto\022<\n\005umchp\030\002 \003" +
-      "(\0132-.com.lvl6.proto.UserMonsterCurrentHe" +
-      "althProto\022\022\n\nclientTime\030\003 \001(\003\"\207\002\n Update",
-      "MonsterHealthResponseProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022Z\n\006" +
-      "status\030\002 \001(\0162J.com.lvl6.proto.UpdateMons" +
-      "terHealthResponseProto.UpdateMonsterHeal" +
-      "thStatus\"U\n\031UpdateMonsterHealthStatus\022\013\n" +
+      "umUserProto\022:\n\tumhDelete\030\002 \003(\0132\'.com.lvl" +
+      "6.proto.UserMonsterHealingProto\022:\n\tumhUp",
+      "date\030\003 \003(\0132\'.com.lvl6.proto.UserMonsterH" +
+      "ealingProto\0227\n\006umhNew\030\004 \003(\0132\'.com.lvl6.p" +
+      "roto.UserMonsterHealingProto\022\022\n\ncashChan" +
+      "ge\030\005 \001(\021\022\031\n\021gemCostForHealing\030\006 \001(\005\022\021\n\ti" +
+      "sSpeedup\030\007 \001(\010\022\026\n\016gemsForSpeedup\030\010 \001(\005\022<" +
+      "\n\005umchp\030\t \003(\0132-.com.lvl6.proto.UserMonst" +
+      "erCurrentHealthProto\"\321\002\n\030HealMonsterResp" +
+      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
+      "to.MinimumUserProto\022J\n\006status\030\002 \001(\0162:.co" +
+      "m.lvl6.proto.HealMonsterResponseProto.He",
+      "alMonsterStatus\"\266\001\n\021HealMonsterStatus\022\013\n" +
       "\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022" +
-      "\016\n\nFAIL_OTHER\020\003\"\224\003\n\027HealMonsterRequestPr" +
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022:\n\tumhDelete\030\002 \003(\0132\'.com.l" +
-      "vl6.proto.UserMonsterHealingProto\022:\n\tumh",
-      "Update\030\003 \003(\0132\'.com.lvl6.proto.UserMonste" +
-      "rHealingProto\0227\n\006umhNew\030\004 \003(\0132\'.com.lvl6" +
-      ".proto.UserMonsterHealingProto\022\022\n\ncashCh" +
-      "ange\030\005 \001(\021\022\031\n\021gemCostForHealing\030\006 \001(\005\022\021\n" +
-      "\tisSpeedup\030\007 \001(\010\022\026\n\016gemsForSpeedup\030\010 \001(\005" +
-      "\022<\n\005umchp\030\t \003(\0132-.com.lvl6.proto.UserMon" +
-      "sterCurrentHealthProto\"\321\002\n\030HealMonsterRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022J\n\006status\030\002 \001(\0162:." +
-      "com.lvl6.proto.HealMonsterResponseProto.",
-      "HealMonsterStatus\"\266\001\n\021HealMonsterStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020" +
-      "\002\022%\n!FAIL_ALL_MONSTERS_ALREADY_HEALING\020\003" +
-      "\022!\n\035FAIL_ALL_MONSTERS_NONEXISTENT\020\004\022\016\n\nF" +
-      "AIL_OTHER\020\005\022\035\n\031FAIL_HEALING_NOT_COMPLETE" +
-      "\020\006\"\202\001\n\"AddMonsterToBattleTeamRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n\ruser" +
-      "MonsterId\030\003 \001(\003\"\366\001\n#AddMonsterToBattleTe" +
-      "amResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv",
-      "l6.proto.MinimumUserProto\022`\n\006status\030\002 \001(" +
-      "\0162P.com.lvl6.proto.AddMonsterToBattleTea" +
-      "mResponseProto.AddMonsterToBattleTeamSta" +
-      "tus\";\n\034AddMonsterToBattleTeamStatus\022\013\n\007S" +
-      "UCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"r\n\'RemoveMonste" +
-      "rFromBattleTeamRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\025\n" +
-      "\ruserMonsterId\030\003 \001(\003\"\212\002\n(RemoveMonsterFr" +
-      "omBattleTeamResponseProto\0220\n\006sender\030\001 \001(" +
-      "\0132 .com.lvl6.proto.MinimumUserProto\022j\n\006s",
-      "tatus\030\002 \001(\0162Z.com.lvl6.proto.RemoveMonst" +
-      "erFromBattleTeamResponseProto.RemoveMons" +
-      "terFromBattleTeamStatus\"@\n!RemoveMonster" +
-      "FromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI" +
-      "L_OTHER\020\002\"\266\002\n(IncreaseMonsterInventorySl" +
-      "otRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022c\n\020increaseSlot" +
-      "Type\030\002 \001(\0162I.com.lvl6.proto.IncreaseMons" +
-      "terInventorySlotRequestProto.IncreaseSlo" +
-      "tType\022\024\n\014userStructId\030\003 \001(\005\022\036\n\026userFbInv",
-      "iteForSlotIds\030\004 \003(\005\"=\n\020IncreaseSlotType\022" +
-      "\014\n\010PURCHASE\020\001\022\033\n\027REDEEM_FACEBOOK_INVITES" +
-      "\020\002\"\367\002\n)IncreaseMonsterInventorySlotRespo" +
-      "nseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022l\n\006status\030\002 \001(\0162\\.com" +
-      ".lvl6.proto.IncreaseMonsterInventorySlot" +
-      "ResponseProto.IncreaseMonsterInventorySl" +
-      "otStatus\"\251\001\n\"IncreaseMonsterInventorySlo" +
-      "tStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIEN" +
-      "T_FUNDS\020\002\022&\n\"FAIL_INSUFFICIENT_FACEBOOK_",
-      "INVITES\020\003\022\016\n\nFAIL_OTHER\020\004\022!\n\035FAIL_INCONS" +
-      "ISTENT_INVITE_DATA\020\005\"\241\002\n#InviteFbFriends" +
-      "ForSlotsRequestProto\022>\n\006sender\030\001 \001(\0132..c" +
+      "%\n!FAIL_ALL_MONSTERS_ALREADY_HEALING\020\003\022!" +
+      "\n\035FAIL_ALL_MONSTERS_NONEXISTENT\020\004\022\016\n\nFAI" +
+      "L_OTHER\020\005\022\035\n\031FAIL_HEALING_NOT_COMPLETE\020\006" +
+      "\"\202\001\n\"AddMonsterToBattleTeamRequestProto\022" +
+      "0\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimum" +
+      "UserProto\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n\ruserMo" +
+      "nsterId\030\003 \001(\003\"\366\001\n#AddMonsterToBattleTeam" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6",
+      ".proto.MinimumUserProto\022`\n\006status\030\002 \001(\0162" +
+      "P.com.lvl6.proto.AddMonsterToBattleTeamR" +
+      "esponseProto.AddMonsterToBattleTeamStatu" +
+      "s\";\n\034AddMonsterToBattleTeamStatus\022\013\n\007SUC" +
+      "CESS\020\001\022\016\n\nFAIL_OTHER\020\002\"r\n\'RemoveMonsterF" +
+      "romBattleTeamRequestProto\0220\n\006sender\030\001 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\022\025\n\ru" +
+      "serMonsterId\030\003 \001(\003\"\212\002\n(RemoveMonsterFrom" +
+      "BattleTeamResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022j\n\006sta",
+      "tus\030\002 \001(\0162Z.com.lvl6.proto.RemoveMonster" +
+      "FromBattleTeamResponseProto.RemoveMonste" +
+      "rFromBattleTeamStatus\"@\n!RemoveMonsterFr" +
+      "omBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
+      "OTHER\020\002\"\266\002\n(IncreaseMonsterInventorySlot" +
+      "RequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022c\n\020increaseSlotTy" +
+      "pe\030\002 \001(\0162I.com.lvl6.proto.IncreaseMonste" +
+      "rInventorySlotRequestProto.IncreaseSlotT" +
+      "ype\022\024\n\014userStructId\030\003 \001(\005\022\036\n\026userFbInvit",
+      "eForSlotIds\030\004 \003(\005\"=\n\020IncreaseSlotType\022\014\n" +
+      "\010PURCHASE\020\001\022\033\n\027REDEEM_FACEBOOK_INVITES\020\002" +
+      "\"\367\002\n)IncreaseMonsterInventorySlotRespons" +
+      "eProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022l\n\006status\030\002 \001(\0162\\.com.l" +
+      "vl6.proto.IncreaseMonsterInventorySlotRe" +
+      "sponseProto.IncreaseMonsterInventorySlot" +
+      "Status\"\251\001\n\"IncreaseMonsterInventorySlotS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_" +
+      "FUNDS\020\002\022&\n\"FAIL_INSUFFICIENT_FACEBOOK_IN",
+      "VITES\020\003\022\016\n\nFAIL_OTHER\020\004\022!\n\035FAIL_INCONSIS" +
+      "TENT_INVITE_DATA\020\005\"\241\002\n#InviteFbFriendsFo" +
+      "rSlotsRequestProto\022>\n\006sender\030\001 \001(\0132..com" +
+      ".lvl6.proto.MinimumUserProtoWithFacebook" +
+      "Id\022\\\n\007invites\030\002 \003(\0132K.com.lvl6.proto.Inv" +
+      "iteFbFriendsForSlotsRequestProto.Faceboo" +
+      "kInviteStructure\032\\\n\027FacebookInviteStruct" +
+      "ure\022\022\n\nfbFriendId\030\001 \001(\t\022\024\n\014userStructId\030" +
+      "\002 \001(\005\022\027\n\017userStructFbLvl\030\003 \001(\005\"\314\002\n$Invit" +
+      "eFbFriendsForSlotsResponseProto\022>\n\006sende",
+      "r\030\001 \001(\0132..com.lvl6.proto.MinimumUserProt" +
+      "oWithFacebookId\022b\n\006status\030\002 \001(\0162R.com.lv" +
+      "l6.proto.InviteFbFriendsForSlotsResponse" +
+      "Proto.InviteFbFriendsForSlotsStatus\022B\n\ni" +
+      "nvitesNew\030\003 \003(\0132..com.lvl6.proto.UserFac" +
+      "ebookInviteForSlotProto\"<\n\035InviteFbFrien" +
+      "dsForSlotsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OT" +
+      "HER\020\002\"\243\001\n+AcceptAndRejectFbInviteForSlot" +
+      "sRequestProto\022>\n\006sender\030\001 \001(\0132..com.lvl6" +
+      ".proto.MinimumUserProtoWithFacebookId\022\031\n",
+      "\021acceptedInviteIds\030\002 \003(\005\022\031\n\021rejectedInvi" +
+      "teIds\030\003 \003(\005\"\237\003\n,AcceptAndRejectFbInviteF" +
+      "orSlotsResponseProto\022>\n\006sender\030\001 \001(\0132..c" +
       "om.lvl6.proto.MinimumUserProtoWithFacebo" +
-      "okId\022\\\n\007invites\030\002 \003(\0132K.com.lvl6.proto.I" +
-      "nviteFbFriendsForSlotsRequestProto.Faceb" +
-      "ookInviteStructure\032\\\n\027FacebookInviteStru" +
-      "cture\022\022\n\nfbFriendId\030\001 \001(\t\022\024\n\014userStructI" +
-      "d\030\002 \001(\005\022\027\n\017userStructFbLvl\030\003 \001(\005\"\314\002\n$Inv" +
-      "iteFbFriendsForSlotsResponseProto\022>\n\006sen",
-      "der\030\001 \001(\0132..com.lvl6.proto.MinimumUserPr" +
-      "otoWithFacebookId\022b\n\006status\030\002 \001(\0162R.com." +
-      "lvl6.proto.InviteFbFriendsForSlotsRespon" +
-      "seProto.InviteFbFriendsForSlotsStatus\022B\n" +
-      "\ninvitesNew\030\003 \003(\0132..com.lvl6.proto.UserF" +
-      "acebookInviteForSlotProto\"<\n\035InviteFbFri" +
-      "endsForSlotsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
-      "OTHER\020\002\"\243\001\n+AcceptAndRejectFbInviteForSl" +
-      "otsRequestProto\022>\n\006sender\030\001 \001(\0132..com.lv" +
-      "l6.proto.MinimumUserProtoWithFacebookId\022",
-      "\031\n\021acceptedInviteIds\030\002 \003(\005\022\031\n\021rejectedIn" +
-      "viteIds\030\003 \003(\005\"\237\003\n,AcceptAndRejectFbInvit" +
-      "eForSlotsResponseProto\022>\n\006sender\030\001 \001(\0132." +
-      ".com.lvl6.proto.MinimumUserProtoWithFace" +
-      "bookId\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto." +
-      "AcceptAndRejectFbInviteForSlotsResponseP" +
-      "roto.AcceptAndRejectFbInviteForSlotsStat" +
-      "us\022G\n\017acceptedInvites\030\003 \003(\0132..com.lvl6.p" +
-      "roto.UserFacebookInviteForSlotProto\"r\n%A" +
-      "cceptAndRejectFbInviteForSlotsStatus\022\013\n\007",
-      "SUCCESS\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALRE" +
-      "ADY_BEEN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$Comb" +
-      "ineUserMonsterPiecesRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 " +
-      "\001(\005\"\307\002\n%CombineUserMonsterPiecesResponse" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022d\n\006status\030\002 \001(\0162T.com.lv" +
-      "l6.proto.CombineUserMonsterPiecesRespons" +
-      "eProto.CombineUserMonsterPiecesStatus\"\205\001",
-      "\n\036CombineUserMonsterPiecesStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAI" +
-      "L_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n" +
-      "\nFAIL_OTHER\020\004\"\213\001\n\033SellUserMonsterRequest" +
-      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
-      "inimumUserProto\022:\n\005sales\030\002 \003(\0132+.com.lvl" +
-      "6.proto.MinimumUserMonsterSellProto\"\332\001\n\034" +
-      "SellUserMonsterResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022R" +
-      "\n\006status\030\002 \001(\0162B.com.lvl6.proto.SellUser",
-      "MonsterResponseProto.SellUserMonsterStat" +
-      "us\"4\n\025SellUserMonsterStatus\022\013\n\007SUCCESS\020\001" +
-      "\022\016\n\nFAIL_OTHER\020\002B\023B\021EventMonsterProto"
+      "okId\022r\n\006status\030\002 \001(\0162b.com.lvl6.proto.Ac" +
+      "ceptAndRejectFbInviteForSlotsResponsePro" +
+      "to.AcceptAndRejectFbInviteForSlotsStatus" +
+      "\022G\n\017acceptedInvites\030\003 \003(\0132..com.lvl6.pro" +
+      "to.UserFacebookInviteForSlotProto\"r\n%Acc" +
+      "eptAndRejectFbInviteForSlotsStatus\022\013\n\007SU",
+      "CCESS\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREAD" +
+      "Y_BEEN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$Combin" +
+      "eUserMonsterPiecesRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(" +
+      "\005\"\307\002\n%CombineUserMonsterPiecesResponsePr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022d\n\006status\030\002 \001(\0162T.com.lvl6" +
+      ".proto.CombineUserMonsterPiecesResponseP" +
+      "roto.CombineUserMonsterPiecesStatus\"\205\001\n\036",
+      "CombineUserMonsterPiecesStatus\022\013\n\007SUCCES" +
+      "S\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_" +
+      "MORE_THAN_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nF" +
+      "AIL_OTHER\020\004\"\213\001\n\033SellUserMonsterRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022:\n\005sales\030\002 \003(\0132+.com.lvl6." +
+      "proto.MinimumUserMonsterSellProto\"\332\001\n\034Se" +
+      "llUserMonsterResponseProto\0220\n\006sender\030\001 \001" +
+      "(\0132 .com.lvl6.proto.MinimumUserProto\022R\n\006" +
+      "status\030\002 \001(\0162B.com.lvl6.proto.SellUserMo",
+      "nsterResponseProto.SellUserMonsterStatus" +
+      "\"4\n\025SellUserMonsterStatus\022\013\n\007SUCCESS\020\001\022\016" +
+      "\n\nFAIL_OTHER\020\002B\023B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -19051,7 +19051,7 @@ public final class EventMonsterProto {
           internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_SubmitMonsterEnhancementRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UeipDelete", "UeipUpdate", "UeipNew", "GemsSpent", "CashChange", },
+              new java.lang.String[] { "Sender", "UeipDelete", "UeipUpdate", "UeipNew", "GemsSpent", "OilChange", },
               com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto.class,
               com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementRequestProto.Builder.class);
           internal_static_com_lvl6_proto_SubmitMonsterEnhancementResponseProto_descriptor =
