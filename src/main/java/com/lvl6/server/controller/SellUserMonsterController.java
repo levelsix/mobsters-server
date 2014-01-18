@@ -1,9 +1,7 @@
 package com.lvl6.server.controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,8 +29,6 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
-import com.lvl6.utils.utilmethods.InsertUtils;
-import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component
 @DependsOn("gameServer")

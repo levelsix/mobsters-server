@@ -131,6 +131,10 @@ import com.lvl6.utils.utilmethods.StringUtils;
         itemsUserReceives = determineBoosterItemsUserReceives(
         		numBoosterItemsUserWants, boosterItemIdsToBoosterItems);
         
+        legit = checkIfMonstersExist(itemsUserReceives);
+      }
+        
+      if (legit) {
         gemReward = determineGemReward(itemsUserReceives);
         //set the FullUserMonsterProtos (in resBuilder) to send to the client
         successful = writeChangesToDB(resBuilder, user, boosterPackId,
@@ -166,7 +170,17 @@ import com.lvl6.utils.utilmethods.StringUtils;
         sendBoosterPurchaseMessage(user, aPack, itemsUserReceives);
       }
     } catch (Exception e) {
-      log.error("exception in PurchaseBoosterPackController processEvent", e);
+    	log.error("exception in PurchaseBoosterPackController processEvent", e);
+    	// don't let the client hang
+    	try {
+    		resBuilder.setStatus(PurchaseBoosterPackStatus.FAIL_OTHER);
+    		PurchaseBoosterPackResponseEvent resEvent = new PurchaseBoosterPackResponseEvent(senderProto.getUserId());
+        resEvent.setTag(event.getTag());
+        resEvent.setPurchaseBoosterPackResponseProto(resBuilder.build());
+        server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in SellUserMonsterController processEvent", e);
+    	}
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName()); 
     }
@@ -294,6 +308,26 @@ import com.lvl6.utils.utilmethods.StringUtils;
 
     log.error("maybe no boosterItems exist. boosterItems=" + itemsList);
     return null;
+  }
+  
+  //purpose of this method is to discover if the booster items that contain
+  //monsters as rewards, if the monster ids are valid 
+  private boolean checkIfMonstersExist(List<BoosterItem> itemsUserReceives) {
+  	boolean monstersExist = true;
+  	
+  	Map<Integer, Monster> monsterIdsToMonsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
+  	for (BoosterItem bi : itemsUserReceives) {
+  		int monsterId = bi.getMonsterId();
+  		
+  		if (0 == monsterId) {
+  			//this booster item does not contain a monster reward
+  			continue;
+  		} else if (!monsterIdsToMonsters.containsKey(monsterId)) {
+  			log.error("This booster item contains nonexistent monsterId. item=" + bi);
+  			monstersExist = false;
+  		}
+  	}
+  	return monstersExist;
   }
 
   private int determineGemReward(List<BoosterItem> boosterItems) {

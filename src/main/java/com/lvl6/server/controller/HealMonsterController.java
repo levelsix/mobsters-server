@@ -19,6 +19,7 @@ import com.lvl6.events.request.HealMonsterRequestEvent;
 import com.lvl6.events.response.HealMonsterResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
@@ -33,6 +34,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -103,7 +105,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
     	Map<Long, MonsterEnhancingForUser> alreadyEnhancing =
 					MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
-    	
+    	MonsterEvolvingForUser evolution = MonsterEvolvingForUserRetrieveUtils
+					.getEvolutionForUser(userId);
     	
     	//retrieve only the new monsters that will be healed
     	Map<Long, MonsterForUser> existingUserMonsters = new HashMap<Long, MonsterForUser>();
@@ -114,9 +117,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     				.getSpecificOrAllUserMonstersForUser(userId, newIds);
     	}
     	
-      boolean legit = checkLegit(resBuilder, aUser, userId,
-      		cashChange, gemCost, existingUserMonsters, alreadyHealing,
-      		alreadyEnhancing, deleteMap, updateMap, newMap, userMonsterIds);
+      boolean legit = checkLegit(resBuilder, aUser, userId, cashChange, gemCost,
+      		existingUserMonsters, alreadyHealing, alreadyEnhancing, deleteMap, updateMap,
+      		newMap, userMonsterIds, evolution);
 
       boolean successful = false;
       //first two maps are for different heal monster and speed up heal monster
@@ -200,7 +203,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		Map<Long, MonsterEnhancingForUser> alreadyEnhancing,
   		Map<Long, UserMonsterHealingProto> deleteMap,
   		Map<Long, UserMonsterHealingProto> updateMap,
-  		Map<Long, UserMonsterHealingProto> newMap, List<Long> healedUp) {
+  		Map<Long, UserMonsterHealingProto> newMap, List<Long> healedUp,
+  		MonsterEvolvingForUser evolution) {
     if (null == u ) {
       log.error("unexpected error: user is null. user=" + u + "\t deleteMap="+ deleteMap +
       		"\t updateMap=" + updateMap + "\t newMap=" + newMap);
@@ -247,6 +251,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     keepThingsNotInDomain = true;
     Set<Long> alreadyEnhancingIds = alreadyEnhancing.keySet();
     MonsterStuffUtils.retainValidMonsters(alreadyEnhancingIds, newMap, keepThingsInDomain, keepThingsNotInDomain);
+    
+    //retain only the userMonsters, the client sent, that are not in evolutions
+    Set<Long> idsInEvolutions = MonsterStuffUtils.getUserMonsterIdsUsedInEvolution(evolution, null);
+    MonsterStuffUtils.retainValidMonsters(idsInEvolutions, newMap, keepThingsInDomain, keepThingsNotInDomain);
     
     
     //FROM HealMonsterWaitTimeComplete CONTROLLER

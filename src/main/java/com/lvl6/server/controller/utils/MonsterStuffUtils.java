@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.TaskStageMonster;
@@ -494,4 +495,34 @@ public class MonsterStuffUtils {
   	
   	return mfu;
   }
+  
+  //gather up the user monster ids in the evolution(s)
+  public static Set<Long> getUserMonsterIdsUsedInEvolution(MonsterEvolvingForUser mefu,
+  		Map<Long, MonsterEvolvingForUser> catalystIdToMonsterEvolutionForUser) {
+  	Set<Long> userMonsterIds = new HashSet<Long>();
+
+  	if (null != mefu) {
+  		long id = mefu.getCatalystMonsterForUserId();
+  		userMonsterIds.add(id);
+  		id = mefu.getMonsterForUserIdOne();
+  		userMonsterIds.add(id);
+  		id = mefu.getMonsterForUserIdTwo();
+  		userMonsterIds.add(id);
+
+  	} else if (null != catalystIdToMonsterEvolutionForUser &&
+  			!catalystIdToMonsterEvolutionForUser.isEmpty()){
+  		//loop through each MonsterEvolvingForUser gathering up the MonsterForUserIds
+  		for (MonsterEvolvingForUser mefyou : catalystIdToMonsterEvolutionForUser.values()) {
+  			long id = mefyou.getCatalystMonsterForUserId();
+  			userMonsterIds.add(id);
+  			id = mefyou.getMonsterForUserIdOne();
+  			userMonsterIds.add(id);
+  			id = mefyou.getMonsterForUserIdTwo();
+  			userMonsterIds.add(id);
+  		}
+  	}
+
+  	return userMonsterIds;
+  }
+  
 }

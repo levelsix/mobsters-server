@@ -39,7 +39,13 @@ import com.lvl6.utils.DBConnection;
     if (monsterIdsToMonsters == null) {
       setStaticMonsterIdsToMonsters();      
     }
-    return monsterIdsToMonsters.get(monsterId);
+    
+    if (monsterIdsToMonsters.containsKey(monsterId)) {
+    	return monsterIdsToMonsters.get(monsterId); 
+    } else {
+    	log.error("db error: no monster exists with id=" + monsterId);
+    	return null; 
+    }
   }
 
   public static Map<Integer, Monster> getMonstersForMonsterIds(Collection<Integer> ids) {

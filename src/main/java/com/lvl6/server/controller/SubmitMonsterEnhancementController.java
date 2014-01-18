@@ -20,6 +20,7 @@ import com.lvl6.events.request.SubmitMonsterEnhancementRequestEvent;
 import com.lvl6.events.response.SubmitMonsterEnhancementResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.MonsterEnhancingForUser;
+import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.User;
@@ -33,6 +34,7 @@ import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
+import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -97,6 +99,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 						MonsterEnhancingForUserRetrieveUtils.getMonstersForUser(userId);
 			Map<Long, MonsterHealingForUser> alreadyHealing =
     			MonsterHealingForUserRetrieveUtils.getMonstersForUser(userId);
+			MonsterEvolvingForUser evolution = MonsterEvolvingForUserRetrieveUtils
+					.getEvolutionForUser(userId);
     	
 			//retrieve only the new monsters that will be used in enhancing
 			Set<Long> newIds = new HashSet<Long>();
@@ -105,7 +109,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     			.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newIds);
 
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
-					alreadyEnhancing, alreadyHealing, deleteMap, updateMap, newMap,
+					alreadyEnhancing, alreadyHealing, deleteMap, updateMap, newMap, evolution,
 					gemsSpent, cashChange);
 
 			boolean successful = false;
@@ -168,7 +172,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<Long, MonsterHealingForUser> alreadyHealing,
 			Map<Long, UserEnhancementItemProto> deleteMap,
 			Map<Long, UserEnhancementItemProto> updateMap,
-			Map<Long, UserEnhancementItemProto> newMap, int gemsSpent, int cashChange) {
+			Map<Long, UserEnhancementItemProto> newMap, MonsterEvolvingForUser evolution,
+			int gemsSpent, int cashChange) {
 		if (null == u ) {
 			log.error("unexpected error: user is null. user=" + u + "\t deleteMap="+ deleteMap +
 					"\t updateMap=" + updateMap + "\t newMap=" + newMap);
@@ -201,7 +206,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Set<Long> alreadyHealingIds = alreadyHealing.keySet();
 			MonsterStuffUtils.retainValidMonsters(alreadyHealingIds, newMap,
 					keepThingsInDomain, keepThingsNotInDomain);
+			
+			//retain only the userMonsters in newMap that are not in evolutions
+			Set<Long> idsInEvolutions = MonsterStuffUtils.getUserMonsterIdsUsedInEvolution(
+					evolution, null);
+			MonsterStuffUtils.retainValidMonsters(idsInEvolutions, newMap,
+					keepThingsInDomain, keepThingsNotInDomain);
+			
 		}
+		
 
 		//CHECK MONEY
 		if (!hasEnoughGems(resBuilder, u, gemsSpent, cashChange, deleteMap, updateMap, newMap)) {
