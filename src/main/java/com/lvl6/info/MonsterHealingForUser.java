@@ -5,24 +5,20 @@ import java.util.Date;
 
 public class MonsterHealingForUser implements Serializable {
 
-	private static final long serialVersionUID = -4500932968776459991L;
-	
+	private static final long serialVersionUID = -8439682340648783600L;
 	private int userId;
 	private long monsterForUserId;
-  private Date expectedStartTime;
-  private int userStructHospitalId;
+  private Date queuedTime;
+//  private int userStructHospitalId;
   private int healthProgress;
   private int priority;
-//  private Date queuedTime;
   
 	public MonsterHealingForUser(int userId, long monsterForUserId,
-			Date expectedStartTime, int userStructHospitalId, int healthProgress,
-			int priority) {
+			Date queuedTime, int healthProgress, int priority) {
 		super();
 		this.userId = userId;
 		this.monsterForUserId = monsterForUserId;
-		this.expectedStartTime = expectedStartTime;
-		this.userStructHospitalId = userStructHospitalId;
+		this.queuedTime = queuedTime;
 		this.healthProgress = healthProgress;
 		this.priority = priority;
 	}
@@ -43,20 +39,12 @@ public class MonsterHealingForUser implements Serializable {
 		this.monsterForUserId = monsterForUserId;
 	}
 
-	public Date getExpectedStartTime() {
-		return expectedStartTime;
+	public Date getQueuedTime() {
+		return queuedTime;
 	}
 
-	public void setExpectedStartTime(Date expectedStartTime) {
-		this.expectedStartTime = expectedStartTime;
-	}
-
-	public int getUserStructHospitalId() {
-		return userStructHospitalId;
-	}
-
-	public void setUserStructHospitalId(int userStructHospitalId) {
-		this.userStructHospitalId = userStructHospitalId;
+	public void setQueuedTime(Date queuedTime) {
+		this.queuedTime = queuedTime;
 	}
 
 	public int getHealthProgress() {
@@ -75,13 +63,11 @@ public class MonsterHealingForUser implements Serializable {
 		this.priority = priority;
 	}
 
-
 	@Override
 	public String toString() {
 		return "MonsterHealingForUser [userId=" + userId + ", monsterForUserId="
-				+ monsterForUserId + ", expectedStartTime=" + expectedStartTime
-				+ ", userStructHospitalId=" + userStructHospitalId
-				+ ", healthProgress=" + healthProgress + ", priority=" + priority + "]";
+				+ monsterForUserId + ", queuedTime=" + queuedTime + ", healthProgress="
+				+ healthProgress + ", priority=" + priority + "]";
 	}
   
 }

@@ -63,6 +63,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		SubmitMonsterEnhancementRequestProto reqProto = ((SubmitMonsterEnhancementRequestEvent)event)
 				.getSubmitMonsterEnhancementRequestProto();
+		
+//		log.info("reqProto=" + reqProto);
 
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -273,20 +275,28 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//CHARGE THE USER
 		int cashChange = 0;
 		int gemChange = -1 * gemsSpent;
-		int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
-		if (1 != numChange) {
-			log.warn("problem with updating user stats: gemChange=" + gemChange
-					+ ", oilChange=" + oilChange + ", user is " + user +
-					"\t perhaps base monster deleted \t protoDeleteMap=" + protoDeleteMap);
-		} else {
-			//everything went well
-			if (0 != oilChange) {
-				money.put(MiscMethods.oil, oilChange);
-			}
-			if (0 != gemsSpent) {
-				money.put(MiscMethods.gems, gemChange);
+
+		if (0 != oilChange || 0 != gemsSpent) {
+//			log.info("oilChange=" + oilChange + "\t gemChange=" + gemChange);
+			int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
+			if (1 != numChange) {
+				log.warn("problem with updating user stats: gemChange=" + gemChange
+						+ ", oilChange=" + oilChange + ", user is " + user +
+						"\t perhaps base monster deleted \t protoDeleteMap=" + protoDeleteMap);
+			} else {
+				//everything went well
+				if (0 != oilChange) {
+					money.put(MiscMethods.oil, oilChange);
+				}
+				if (0 != gemsSpent) {
+					money.put(MiscMethods.gems, gemChange);
+				}
 			}
 		}
+//		log.info("deleteMap=" + protoDeleteMap);
+//		log.info("updateMap=" + protoUpdateMap);
+//		log.info("newMap=" + protoNewMap);
+		
 		
 		int num = 0;
 		//delete everything left in the map, if there are any

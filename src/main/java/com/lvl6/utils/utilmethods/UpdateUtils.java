@@ -670,18 +670,15 @@ public class UpdateUtils implements UpdateUtil {
 			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__MONSTER_FOR_USER_ID, mhfu.getMonsterForUserId());
 			
 			//monster may just be queued in the hospital but not started
-			Date d = mhfu.getExpectedStartTime();
-			Timestamp startTime = null;
+			Date d = mhfu.getQueuedTime();
+			Timestamp queuedTime = null;
 			if (null != d) {
-				startTime = new Timestamp(d.getTime());
+				queuedTime = new Timestamp(d.getTime());
 			}
-			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__EXPECTED_START_TIME, startTime);
+			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME, queuedTime);
 			
-//			d = mhfu.getQueuedTime();
-//			Timestamp queuedTime = new Timestamp(d.getTime());
-//			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME, queuedTime);
-			int userStructHospitalId = mhfu.getUserStructHospitalId();
-			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID, userStructHospitalId);
+//			int userStructHospitalId = mhfu.getUserStructHospitalId();
+//			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__USER_STRUCT_HOSPITAL_ID, userStructHospitalId);
 			int healthProgress = mhfu.getHealthProgress();
 			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__HEALTH_PROGRESS, healthProgress);
 			int priority = mhfu.getPriority();

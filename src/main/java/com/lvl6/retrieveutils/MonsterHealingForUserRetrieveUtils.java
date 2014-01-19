@@ -108,31 +108,21 @@ import com.lvl6.utils.utilmethods.StringUtils;
     long monsterForUserId = rs.getLong(i++);
     
     Timestamp ts = null;
-    Date expectedStartTime = null;
+    Date queuedTime = null;
     try {
     	ts = rs.getTimestamp(i++);
     	if (!rs.wasNull()) {
-    		expectedStartTime = new Date(ts.getTime());
+    		queuedTime = new Date(ts.getTime());
     	}
     } catch (SQLException e) {
     	log.error("expected start time might be null userId=" + userId, e);
     }
     
-    int userStructHospitalId = rs.getInt(i++);
     int healthProgress = rs.getInt(i++);
     int priority = rs.getInt(i++);
     
-//    Date queuedTime = null;
-//    try {
-//    	ts = rs.getTimestamp(i++);
-//    	queuedTime = new Date(ts.getTime());
-//    } catch (SQLException e) {
-//    	log.error("expected start time might be null userId=" + userId, e);
-//    }
-    
     MonsterHealingForUser userMonster = new MonsterHealingForUser(userId,
-    		monsterForUserId, expectedStartTime, userStructHospitalId, healthProgress,
-    		priority);
+    		monsterForUserId, queuedTime, healthProgress, priority);
     return userMonster;
   }
 

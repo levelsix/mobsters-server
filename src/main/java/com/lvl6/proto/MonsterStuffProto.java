@@ -3220,13 +3220,9 @@ public final class MonsterStuffProto {
     boolean hasUserMonsterId();
     long getUserMonsterId();
     
-    // optional int64 expectedStartTimeMillis = 3;
-    boolean hasExpectedStartTimeMillis();
-    long getExpectedStartTimeMillis();
-    
-    // optional int32 userHospitalStructId = 4;
-    boolean hasUserHospitalStructId();
-    int getUserHospitalStructId();
+    // optional int64 queuedTimeMillis = 3;
+    boolean hasQueuedTimeMillis();
+    long getQueuedTimeMillis();
     
     // optional int32 healthProgress = 5;
     boolean hasHealthProgress();
@@ -3285,31 +3281,21 @@ public final class MonsterStuffProto {
       return userMonsterId_;
     }
     
-    // optional int64 expectedStartTimeMillis = 3;
-    public static final int EXPECTEDSTARTTIMEMILLIS_FIELD_NUMBER = 3;
-    private long expectedStartTimeMillis_;
-    public boolean hasExpectedStartTimeMillis() {
+    // optional int64 queuedTimeMillis = 3;
+    public static final int QUEUEDTIMEMILLIS_FIELD_NUMBER = 3;
+    private long queuedTimeMillis_;
+    public boolean hasQueuedTimeMillis() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public long getExpectedStartTimeMillis() {
-      return expectedStartTimeMillis_;
-    }
-    
-    // optional int32 userHospitalStructId = 4;
-    public static final int USERHOSPITALSTRUCTID_FIELD_NUMBER = 4;
-    private int userHospitalStructId_;
-    public boolean hasUserHospitalStructId() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public int getUserHospitalStructId() {
-      return userHospitalStructId_;
+    public long getQueuedTimeMillis() {
+      return queuedTimeMillis_;
     }
     
     // optional int32 healthProgress = 5;
     public static final int HEALTHPROGRESS_FIELD_NUMBER = 5;
     private int healthProgress_;
     public boolean hasHealthProgress() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public int getHealthProgress() {
       return healthProgress_;
@@ -3319,7 +3305,7 @@ public final class MonsterStuffProto {
     public static final int PRIORITY_FIELD_NUMBER = 6;
     private int priority_;
     public boolean hasPriority() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public int getPriority() {
       return priority_;
@@ -3328,8 +3314,7 @@ public final class MonsterStuffProto {
     private void initFields() {
       userId_ = 0;
       userMonsterId_ = 0L;
-      expectedStartTimeMillis_ = 0L;
-      userHospitalStructId_ = 0;
+      queuedTimeMillis_ = 0L;
       healthProgress_ = 0;
       priority_ = 0;
     }
@@ -3352,15 +3337,12 @@ public final class MonsterStuffProto {
         output.writeInt64(2, userMonsterId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt64(3, expectedStartTimeMillis_);
+        output.writeInt64(3, queuedTimeMillis_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, userHospitalStructId_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(5, healthProgress_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(6, priority_);
       }
       getUnknownFields().writeTo(output);
@@ -3382,17 +3364,13 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, expectedStartTimeMillis_);
+          .computeInt64Size(3, queuedTimeMillis_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, userHospitalStructId_);
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, healthProgress_);
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, priority_);
       }
@@ -3524,14 +3502,12 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         userMonsterId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
-        expectedStartTimeMillis_ = 0L;
+        queuedTimeMillis_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
-        userHospitalStructId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
         healthProgress_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         priority_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -3581,17 +3557,13 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.expectedStartTimeMillis_ = expectedStartTimeMillis_;
+        result.queuedTimeMillis_ = queuedTimeMillis_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.userHospitalStructId_ = userHospitalStructId_;
+        result.healthProgress_ = healthProgress_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
-        }
-        result.healthProgress_ = healthProgress_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
         }
         result.priority_ = priority_;
         result.bitField0_ = to_bitField0_;
@@ -3616,11 +3588,8 @@ public final class MonsterStuffProto {
         if (other.hasUserMonsterId()) {
           setUserMonsterId(other.getUserMonsterId());
         }
-        if (other.hasExpectedStartTimeMillis()) {
-          setExpectedStartTimeMillis(other.getExpectedStartTimeMillis());
-        }
-        if (other.hasUserHospitalStructId()) {
-          setUserHospitalStructId(other.getUserHospitalStructId());
+        if (other.hasQueuedTimeMillis()) {
+          setQueuedTimeMillis(other.getQueuedTimeMillis());
         }
         if (other.hasHealthProgress()) {
           setHealthProgress(other.getHealthProgress());
@@ -3671,21 +3640,16 @@ public final class MonsterStuffProto {
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              expectedStartTimeMillis_ = input.readInt64();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              userHospitalStructId_ = input.readInt32();
+              queuedTimeMillis_ = input.readInt64();
               break;
             }
             case 40: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               healthProgress_ = input.readInt32();
               break;
             }
             case 48: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000010;
               priority_ = input.readInt32();
               break;
             }
@@ -3737,44 +3701,23 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional int64 expectedStartTimeMillis = 3;
-      private long expectedStartTimeMillis_ ;
-      public boolean hasExpectedStartTimeMillis() {
+      // optional int64 queuedTimeMillis = 3;
+      private long queuedTimeMillis_ ;
+      public boolean hasQueuedTimeMillis() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public long getExpectedStartTimeMillis() {
-        return expectedStartTimeMillis_;
+      public long getQueuedTimeMillis() {
+        return queuedTimeMillis_;
       }
-      public Builder setExpectedStartTimeMillis(long value) {
+      public Builder setQueuedTimeMillis(long value) {
         bitField0_ |= 0x00000004;
-        expectedStartTimeMillis_ = value;
+        queuedTimeMillis_ = value;
         onChanged();
         return this;
       }
-      public Builder clearExpectedStartTimeMillis() {
+      public Builder clearQueuedTimeMillis() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        expectedStartTimeMillis_ = 0L;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 userHospitalStructId = 4;
-      private int userHospitalStructId_ ;
-      public boolean hasUserHospitalStructId() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public int getUserHospitalStructId() {
-        return userHospitalStructId_;
-      }
-      public Builder setUserHospitalStructId(int value) {
-        bitField0_ |= 0x00000008;
-        userHospitalStructId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearUserHospitalStructId() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        userHospitalStructId_ = 0;
+        queuedTimeMillis_ = 0L;
         onChanged();
         return this;
       }
@@ -3782,19 +3725,19 @@ public final class MonsterStuffProto {
       // optional int32 healthProgress = 5;
       private int healthProgress_ ;
       public boolean hasHealthProgress() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public int getHealthProgress() {
         return healthProgress_;
       }
       public Builder setHealthProgress(int value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         healthProgress_ = value;
         onChanged();
         return this;
       }
       public Builder clearHealthProgress() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         healthProgress_ = 0;
         onChanged();
         return this;
@@ -3803,19 +3746,19 @@ public final class MonsterStuffProto {
       // optional int32 priority = 6;
       private int priority_ ;
       public boolean hasPriority() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getPriority() {
         return priority_;
       }
       public Builder setPriority(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         priority_ = value;
         onChanged();
         return this;
       }
       public Builder clearPriority() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         priority_ = 0;
         onChanged();
         return this;
@@ -7426,29 +7369,28 @@ public final class MonsterStuffProto {
       "currentLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022" +
       "\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030" +
       "\n\020combineStartTime\030\t \001(\003\022\023\n\013teamSlotNum\030",
-      "\n \001(\005\"\251\001\n\027UserMonsterHealingProto\022\016\n\006use" +
-      "rId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\037\n\027expe" +
-      "ctedStartTimeMillis\030\003 \001(\003\022\034\n\024userHospita" +
-      "lStructId\030\004 \001(\005\022\026\n\016healthProgress\030\005 \001(\005\022" +
-      "\020\n\010priority\030\006 \001(\005\"M\n\035UserMonsterCurrentH" +
-      "ealthProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcur" +
-      "rentHealth\030\002 \001(\005\"\240\001\n\024UserEnhancementProt" +
-      "o\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(" +
-      ".com.lvl6.proto.UserEnhancementItemProto" +
-      "\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.proto.UserE",
-      "nhancementItemProto\"R\n\030UserEnhancementIt" +
-      "emProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expect" +
-      "edStartTimeMillis\030\002 \001(\003\"f\n\032UserMonsterCu" +
-      "rrentExpProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022" +
-      "expectedExperience\030\002 \001(\005\022\025\n\rexpectedLeve" +
-      "l\030\003 \001(\005\"H\n\033MinimumUserMonsterSellProto\022\025" +
-      "\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(" +
-      "\005\"h\n\033UserCurrentMonsterTeamProto\022\016\n\006user" +
-      "Id\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl6" +
-      ".proto.FullUserMonsterProto\"^\n\022UserEvolu",
-      "tionProto\022\035\n\025catalystUserMonsterId\030\001 \001(\003" +
-      "\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 " +
-      "\001(\003B\023B\021MonsterStuffProto"
+      "\n \001(\005\"\204\001\n\027UserMonsterHealingProto\022\016\n\006use" +
+      "rId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queu" +
+      "edTimeMillis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001" +
+      "(\005\022\020\n\010priority\030\006 \001(\005\"M\n\035UserMonsterCurre" +
+      "ntHealthProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\r" +
+      "currentHealth\030\002 \001(\005\"\240\001\n\024UserEnhancementP" +
+      "roto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(" +
+      "\0132(.com.lvl6.proto.UserEnhancementItemPr" +
+      "oto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.proto.Us" +
+      "erEnhancementItemProto\"R\n\030UserEnhancemen",
+      "tItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027exp" +
+      "ectedStartTimeMillis\030\002 \001(\003\"f\n\032UserMonste" +
+      "rCurrentExpProto\022\025\n\ruserMonsterId\030\001 \001(\003\022" +
+      "\032\n\022expectedExperience\030\002 \001(\005\022\025\n\rexpectedL" +
+      "evel\030\003 \001(\005\"H\n\033MinimumUserMonsterSellProt" +
+      "o\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002" +
+      " \001(\005\"h\n\033UserCurrentMonsterTeamProto\022\016\n\006u" +
+      "serId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com.l" +
+      "vl6.proto.FullUserMonsterProto\"^\n\022UserEv" +
+      "olutionProto\022\035\n\025catalystUserMonsterId\030\001 ",
+      "\001(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime" +
+      "\030\003 \001(\003B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7476,7 +7418,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor,
-              new java.lang.String[] { "UserId", "UserMonsterId", "ExpectedStartTimeMillis", "UserHospitalStructId", "HealthProgress", "Priority", },
+              new java.lang.String[] { "UserId", "UserMonsterId", "QueuedTimeMillis", "HealthProgress", "Priority", },
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor =

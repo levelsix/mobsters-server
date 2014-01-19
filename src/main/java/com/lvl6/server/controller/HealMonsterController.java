@@ -154,7 +154,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
-      	//TODO: WRITE TO HISTORY
+      	//TODO: WRITE TO monster healing HISTORY
       	writeToUserCurrencyHistory(aUser, changeMap,  money, curTime, previousCash,
       			previousGems, deleteMap, updateMap, newMap, moneyForHealSpeedup);
       }
@@ -386,7 +386,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	  return true;
   }
   
-  //TODO: FIX THIS
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> changeMap,
   		Map<String, Integer> money, Timestamp curTime, int previousCash, int previousGems,
   		Map<Long, UserMonsterHealingProto> deleteMap, 

@@ -146,18 +146,18 @@ public class MonsterStuffUtils {
   	for(UserMonsterHealingProto umhp: protos.values()) {
   		Long monsterForUserId = umhp.getUserMonsterId();
   		
-  		//maybe client didn't not supposed to always set this?
-  		Date expectedStartTime = null;
-  		if (umhp.hasExpectedStartTimeMillis() && umhp.getExpectedStartTimeMillis() > 0) {
-  			expectedStartTime = new Date(umhp.getExpectedStartTimeMillis());
+  		//maybe client not supposed to always set this?
+  		Date queuedTime = null;
+  		if (umhp.hasQueuedTimeMillis() && umhp.getQueuedTimeMillis() > 0) {
+  			queuedTime = new Date(umhp.getQueuedTimeMillis());
   		}
   		
-  		int userStructHospitalId = umhp.getUserHospitalStructId();
+//  		int userStructHospitalId = umhp.getUserHospitalStructId();
   		int healthProgress = umhp.getHealthProgress();
   		int priority = umhp.getPriority();
 //  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
   		MonsterHealingForUser mhfu = new MonsterHealingForUser(userId, monsterForUserId,
-  				expectedStartTime, userStructHospitalId, healthProgress, priority);
+  				queuedTime, healthProgress, priority);
   		nonProtos.add(mhfu);
   	}
   	

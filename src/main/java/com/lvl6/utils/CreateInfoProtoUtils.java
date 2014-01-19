@@ -456,19 +456,14 @@ public class CreateInfoProtoUtils {
   	umhpb.setUserId(mhfu.getUserId());
   	umhpb.setUserMonsterId(mhfu.getMonsterForUserId());
   	
-  	Date aDate = mhfu.getExpectedStartTime();
+  	Date aDate = mhfu.getQueuedTime();
   	if (null != aDate) {
-  		umhpb.setExpectedStartTimeMillis(aDate.getTime());
+  		umhpb.setQueuedTimeMillis(aDate.getTime());
   	}
   	
-  	umhpb.setUserHospitalStructId(mhfu.getUserStructHospitalId());
+//  	umhpb.setUserHospitalStructId(mhfu.getUserStructHospitalId());
   	umhpb.setHealthProgress(mhfu.getHealthProgress());
   	umhpb.setPriority(mhfu.getPriority());
-  	
-//  	aDate = mhfu.getQueuedTime();
-//  	if (null != aDate) {
-//  		umhpb.setQueuedTimeMillis(aDate.getTime());
-//  	}
   	
   	return umhpb.build();
   }
