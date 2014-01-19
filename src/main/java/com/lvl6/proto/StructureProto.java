@@ -252,6 +252,7 @@ public final class StructureProto {
       RESIDENCE(3, 4),
       TOWN_HALL(4, 5),
       LAB(5, 6),
+      EVO(6, 7),
       ;
       
       public static final int RESOURCE_GENERATOR_VALUE = 1;
@@ -260,6 +261,7 @@ public final class StructureProto {
       public static final int RESIDENCE_VALUE = 4;
       public static final int TOWN_HALL_VALUE = 5;
       public static final int LAB_VALUE = 6;
+      public static final int EVO_VALUE = 7;
       
       
       public final int getNumber() { return value; }
@@ -272,6 +274,7 @@ public final class StructureProto {
           case 4: return RESIDENCE;
           case 5: return TOWN_HALL;
           case 6: return LAB;
+          case 7: return EVO;
           default: return null;
         }
       }
@@ -302,7 +305,7 @@ public final class StructureProto {
       }
       
       private static final StructType[] VALUES = {
-        RESOURCE_GENERATOR, RESOURCE_STORAGE, HOSPITAL, RESIDENCE, TOWN_HALL, LAB, 
+        RESOURCE_GENERATOR, RESOURCE_STORAGE, HOSPITAL, RESIDENCE, TOWN_HALL, LAB, EVO, 
       };
       
       public static StructType valueOf(
@@ -6780,7 +6783,7 @@ public final class StructureProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017Structure.proto\022\016com.lvl6.proto\"\263\004\n\022St" +
+      "\n\017Structure.proto\022\016com.lvl6.proto\"\274\004\n\022St" +
       "ructureInfoProto\022\020\n\010structId\030\001 \001(\005\022\014\n\004na" +
       "me\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022A\n\nstructType\030\004 " +
       "\001(\0162-.com.lvl6.proto.StructureInfoProto." +
@@ -6792,47 +6795,47 @@ public final class StructureProto {
       "\001(\005\022\031\n\021successorStructId\030\r \001(\005\022\017\n\007imgNam",
       "e\030\016 \001(\t\022\036\n\026imgVerticalPixelOffset\030\017 \001(\002\022" +
       "\023\n\013description\030\020 \001(\t\022\030\n\020shortDescription" +
-      "\030\021 \001(\t\"o\n\nStructType\022\026\n\022RESOURCE_GENERAT" +
+      "\030\021 \001(\t\"x\n\nStructType\022\026\n\022RESOURCE_GENERAT" +
       "OR\020\001\022\024\n\020RESOURCE_STORAGE\020\002\022\014\n\010HOSPITAL\020\003" +
-      "\022\r\n\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\"" +
-      "\256\001\n\026ResourceGeneratorProto\0226\n\nstructInfo" +
-      "\030\001 \001(\0132\".com.lvl6.proto.StructureInfoPro" +
-      "to\0222\n\014resourceType\030\002 \001(\0162\034.com.lvl6.prot" +
-      "o.ResourceType\022\026\n\016productionRate\030\003 \001(\002\022\020" +
-      "\n\010capacity\030\004 \001(\005\"\224\001\n\024ResourceStorageProt",
-      "o\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl6.proto.S" +
-      "tructureInfoProto\0222\n\014resourceType\030\002 \001(\0162" +
-      "\034.com.lvl6.proto.ResourceType\022\020\n\010capacit" +
-      "y\030\003 \001(\005\"s\n\rHospitalProto\0226\n\nstructInfo\030\001" +
+      "\022\r\n\tRESIDENCE\020\004\022\r\n\tTOWN_HALL\020\005\022\007\n\003LAB\020\006\022" +
+      "\007\n\003EVO\020\007\"\256\001\n\026ResourceGeneratorProto\0226\n\ns" +
+      "tructInfo\030\001 \001(\0132\".com.lvl6.proto.Structu" +
+      "reInfoProto\0222\n\014resourceType\030\002 \001(\0162\034.com." +
+      "lvl6.proto.ResourceType\022\026\n\016productionRat" +
+      "e\030\003 \001(\002\022\020\n\010capacity\030\004 \001(\005\"\224\001\n\024ResourceSt",
+      "orageProto\0226\n\nstructInfo\030\001 \001(\0132\".com.lvl" +
+      "6.proto.StructureInfoProto\0222\n\014resourceTy" +
+      "pe\030\002 \001(\0162\034.com.lvl6.proto.ResourceType\022\020" +
+      "\n\010capacity\030\003 \001(\005\"s\n\rHospitalProto\0226\n\nstr" +
+      "uctInfo\030\001 \001(\0132\".com.lvl6.proto.Structure" +
+      "InfoProto\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017healthPe" +
+      "rSecond\030\003 \001(\002\"n\n\010LabProto\0226\n\nstructInfo\030" +
+      "\001 \001(\0132\".com.lvl6.proto.StructureInfoProt" +
+      "o\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030" +
+      "\003 \001(\002\"\316\001\n\016ResidenceProto\0226\n\nstructInfo\030\001",
       " \001(\0132\".com.lvl6.proto.StructureInfoProto" +
-      "\022\021\n\tqueueSize\030\002 \001(\005\022\027\n\017healthPerSecond\030\003" +
-      " \001(\002\"n\n\010LabProto\0226\n\nstructInfo\030\001 \001(\0132\".c" +
-      "om.lvl6.proto.StructureInfoProto\022\021\n\tqueu" +
-      "eSize\030\002 \001(\005\022\027\n\017pointsPerSecond\030\003 \001(\002\"\316\001\n" +
-      "\016ResidenceProto\0226\n\nstructInfo\030\001 \001(\0132\".co",
-      "m.lvl6.proto.StructureInfoProto\022\027\n\017numMo" +
-      "nsterSlots\030\002 \001(\005\022\034\n\024numBonusMonsterSlots" +
-      "\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005\022\034\n\024numAc" +
-      "ceptedFbInvites\030\005 \001(\005\022\026\n\016occupationName\030" +
-      "\006 \001(\t\"\242\002\n\rTownHallProto\0226\n\nstructInfo\030\001 " +
-      "\001(\0132\".com.lvl6.proto.StructureInfoProto\022" +
-      " \n\030numResourceOneGenerators\030\002 \001(\005\022\036\n\026num" +
-      "ResourceOneStorages\030\003 \001(\005\022 \n\030numResource" +
-      "TwoGenerators\030\004 \001(\005\022\036\n\026numResourceTwoSto" +
-      "rages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001(\005\022\025\n\rnum",
-      "Residences\030\007 \001(\005\022\027\n\017numMonsterSlots\030\010 \001(" +
-      "\005\022\017\n\007numLabs\030\t \001(\005\"\232\002\n\026FullUserStructure" +
-      "Proto\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006userId\030\002 " +
-      "\001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004" +
-      " \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisComplete" +
-      "\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl6.p" +
-      "roto.CoordinateProto\0226\n\013orientation\030\010 \001(" +
-      "\0162!.com.lvl6.proto.StructOrientation\022\031\n\021" +
-      "fbInviteStructLvl\030\t \001(\005\"\'\n\017CoordinatePro" +
-      "to\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002*+\n\014ResourceType",
-      "\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003*3\n\021StructO" +
-      "rientation\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2" +
-      "\020\002B\020B\016StructureProto"
+      "\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024numBonusMon" +
+      "sterSlots\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005" +
+      "\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022\026\n\016occupa" +
+      "tionName\030\006 \001(\t\"\242\002\n\rTownHallProto\0226\n\nstru" +
+      "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
+      "nfoProto\022 \n\030numResourceOneGenerators\030\002 \001" +
+      "(\005\022\036\n\026numResourceOneStorages\030\003 \001(\005\022 \n\030nu" +
+      "mResourceTwoGenerators\030\004 \001(\005\022\036\n\026numResou" +
+      "rceTwoStorages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001",
+      "(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterS" +
+      "lots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\"\232\002\n\026FullUser" +
+      "StructureProto\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006" +
+      "userId\030\002 \001(\005\022\020\n\010structId\030\003 \001(\005\022\025\n\rlastRe" +
+      "trieved\030\004 \001(\003\022\024\n\014purchaseTime\030\005 \001(\003\022\022\n\ni" +
+      "sComplete\030\006 \001(\010\0224\n\013coordinates\030\007 \001(\0132\037.c" +
+      "om.lvl6.proto.CoordinateProto\0226\n\013orienta" +
+      "tion\030\010 \001(\0162!.com.lvl6.proto.StructOrient" +
+      "ation\022\031\n\021fbInviteStructLvl\030\t \001(\005\"\'\n\017Coor" +
+      "dinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002*+\n\014Res",
+      "ourceType\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003*3" +
+      "\n\021StructOrientation\022\016\n\nPOSITION_1\020\001\022\016\n\nP" +
+      "OSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

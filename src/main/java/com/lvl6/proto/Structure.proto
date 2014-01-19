@@ -38,6 +38,7 @@ message StructureInfoProto {
 		RESIDENCE = 4;
 		TOWN_HALL = 5;
 		LAB = 6;
+		EVO = 7; //FOR EVOLUTION
 	}
 }
 

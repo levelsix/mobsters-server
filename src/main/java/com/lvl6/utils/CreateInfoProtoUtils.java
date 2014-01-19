@@ -259,10 +259,12 @@ public class CreateInfoProtoUtils {
     }
     
     int qType = quest.getQuestType();
-    if (qType > 0) {
-      QuestType qt = QuestType.valueOf(qType);
-      builder.setQuestType(qt);
-    }
+    try {
+			  QuestType qt = QuestType.valueOf(qType);
+			  builder.setQuestType(qt);
+		} catch (Exception e) {
+			log.error("can't create enum type. questType=" + qType + ".\t quest=" + quest);
+		}
     builder.setJobDescription(quest.getJobDescription());
     builder.setStaticDataId(quest.getStaticDataId());
     builder.setQuantity(quest.getQuantity());
@@ -539,19 +541,19 @@ public class CreateInfoProtoUtils {
     
     builder.setLevel(s.getLevel());
     aStr = s.getStructType();
-    StructType st = StructType.valueOf(aStr);
-    if (null != st) {
-    		builder.setStructType(st);
-    } else {
-    		log.error("can't create enum type. structType=" + aStr + ".\t structure=" + s);
+    try {
+    	StructType st = StructType.valueOf(aStr);
+    	builder.setStructType(st);
+    } catch (Exception e) {
+    	log.error("can't create enum type. structType=" + aStr + ".\t structure=" + s);
     }
     
     aStr = s.getBuildResourceType();
-    ResourceType rt = ResourceType.valueOf(aStr);
-    if (null != rt) {
-    		builder.setBuildResourceType(rt);
-    } else {
-  		log.error("can't create enum type. resourceType=" + aStr + ". structure=" + s);
+    try {
+    	ResourceType rt = ResourceType.valueOf(aStr);
+    	builder.setBuildResourceType(rt);
+    } catch (Exception e) {
+    	log.error("can't create enum type. resourceType=" + aStr + ". structure=" + s);
     }
     
     builder.setBuildCost(s.getBuildCost());
@@ -597,14 +599,14 @@ public class CreateInfoProtoUtils {
   	rgpb.setStructInfo(sip);
   	
   	String aStr = srg.getResourceTypeGenerated();
-  	ResourceType rt = ResourceType.valueOf(aStr);
-  	if (null != rt) {
+  	try {
+  		ResourceType rt = ResourceType.valueOf(aStr);
   		rgpb.setResourceType(rt);
-  	} else {
+  	} catch (Exception e) {
   		log.error("can't create enum type. resourceType=" + aStr +
   				". resourceGenerator=" + srg);
   	}
-  	
+
   	rgpb.setProductionRate(srg.getProductionRate());
   	rgpb.setCapacity(srg.getCapacity());
   	
@@ -621,13 +623,14 @@ public class CreateInfoProtoUtils {
   	rspb.setStructInfo(sip);
   	
   	String aStr = srs.getResourceTypeStored();
-  	ResourceType rt = ResourceType.valueOf(aStr);
-  	if (null != rt) {
+  	try {
+  		ResourceType rt = ResourceType.valueOf(aStr);
   		rspb.setResourceType(rt);
-  	} else {
+  	} catch (Exception e) {
   		log.error("can't create enum type. resourceType=" + aStr +
   				". resourceStorage=" + srs);
   	}
+  	
   	rspb.setCapacity(srs.getCapacity());
   	
   	return rspb.build();
