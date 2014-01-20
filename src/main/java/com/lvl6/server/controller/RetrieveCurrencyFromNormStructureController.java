@@ -55,7 +55,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent)event).getRetrieveCurrencyFromNormStructureRequestProto();
-
+    log.info("reqProto=" + reqProto);
     //get stuff client sent
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
@@ -274,7 +274,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval,
   		Map<Integer, Integer> userStructIdsToAmountCollected) {
   	if (!user.updateRelativeCoinsOilRetrievedFromStructs(cashGain, oilGain)) {
-      log.error("problem with updating user stats after retrieving " + cashGain + " cash");
+      log.error("problem with updating user stats after retrieving " + cashGain + " cash" +
+      		"\t" + oilGain + " oil.");
       return false;
     }
     if (!UpdateUtils.get().updateUserStructsLastretrieved(userStructIdsToTimesOfRetrieval, userStructIdsToUserStructs)) {
