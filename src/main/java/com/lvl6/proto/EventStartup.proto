@@ -61,7 +61,7 @@ message StartupResponseProto {
 	repeated FullUserMonsterProto usersMonsters = 19;
 	repeated UserMonsterHealingProto monstersHealing = 20;
 	optional UserEnhancementProto enhancements = 21;
-	optional UserEvolutionProto evolution = 29;
+	optional UserMonsterEvolutionProto evolution = 29;
 	repeated RareBoosterPurchaseProto rareBoosterPurchases = 22;
 	
 	optional string kabamNaid = 23;

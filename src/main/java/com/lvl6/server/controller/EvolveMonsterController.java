@@ -28,7 +28,7 @@ import com.lvl6.proto.EventMonsterProto.EvolveMonsterRequestProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.EvolveMonsterResponseProto.EvolveMonsterStatus;
-import com.lvl6.proto.MonsterStuffProto.UserEvolutionProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
@@ -64,7 +64,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
 		
-		UserEvolutionProto uep = reqProto.getEvolution();
+		UserMonsterEvolutionProto uep = reqProto.getEvolution();
 		int gemsSpent = reqProto.getGemsSpent();
 		//positive means refund, negative means charge user
 		int oilChange = reqProto.getOilChange();

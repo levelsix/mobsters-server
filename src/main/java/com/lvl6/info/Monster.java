@@ -7,7 +7,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 
 public class Monster implements Serializable {
 
-	private static final long serialVersionUID = -3068933333874383134L;
+	private static final long serialVersionUID = -6287966573363325642L;
 	private int id;
 	private String name;
 	private String monsterGroup;
@@ -36,6 +36,7 @@ public class Monster implements Serializable {
 	private int evolutionCatalystMonsterId;
 	private int minutesToEvolve;
 	private int numCatalystsRequired;
+	private int enhancingFeederExp;
 	
 	public Monster(int id, String name, String monsterGroup,
 			MonsterQuality quality, int evolutionLevel, String displayName,
@@ -46,7 +47,7 @@ public class Monster implements Serializable {
 			float attackLevelMultiplier, int maxLevel, int evolutionMonsterId,
 			String carrotRecruited, String carrotDefeated, String carrotEvolved,
 			String description, int evolutionCatalystMonsterId, int minutesToEvolve,
-			int numCatalystsRequired) {
+			int numCatalystsRequired, int enhancingFeederExp) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -76,6 +77,7 @@ public class Monster implements Serializable {
 		this.evolutionCatalystMonsterId = evolutionCatalystMonsterId;
 		this.minutesToEvolve = minutesToEvolve;
 		this.numCatalystsRequired = numCatalystsRequired;
+		this.enhancingFeederExp = enhancingFeederExp;
 	}
 
 	public int getId() {
@@ -302,6 +304,14 @@ public class Monster implements Serializable {
 		this.numCatalystsRequired = numCatalystsRequired;
 	}
 
+	public int getEnhancingFeederExp() {
+		return enhancingFeederExp;
+	}
+
+	public void setEnhancingFeederExp(int enhancingFeederExp) {
+		this.enhancingFeederExp = enhancingFeederExp;
+	}
+
 	@Override
 	public String toString() {
 		return "Monster [id=" + id + ", name=" + name + ", monsterGroup="
@@ -320,7 +330,8 @@ public class Monster implements Serializable {
 				+ carrotDefeated + ", carrotEvolved=" + carrotEvolved
 				+ ", description=" + description + ", evolutionCatalystMonsterId="
 				+ evolutionCatalystMonsterId + ", minutesToEvolve=" + minutesToEvolve
-				+ ", numCatalystsRequired=" + numCatalystsRequired + "]";
+				+ ", numCatalystsRequired=" + numCatalystsRequired
+				+ ", enhancingFeederExp=" + enhancingFeederExp + "]";
 	}
 
 }

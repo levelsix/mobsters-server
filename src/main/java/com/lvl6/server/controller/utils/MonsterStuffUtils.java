@@ -153,7 +153,7 @@ public class MonsterStuffUtils {
   		}
   		
 //  		int userStructHospitalId = umhp.getUserHospitalStructId();
-  		int healthProgress = umhp.getHealthProgress();
+  		float healthProgress = umhp.getHealthProgress();
   		int priority = umhp.getPriority();
 //  		Date queuedTime = new Date(umhp.getQueuedTimeMillis());
   		MonsterHealingForUser mhfu = new MonsterHealingForUser(userId, monsterForUserId,

@@ -44,6 +44,7 @@ message MonsterProto {
 	//optional int32 minutesToEvolve = 26; //defined above
 	//optional int32 numCatalystMonstersRequired = 27; //defined above
 	//optional int32 elementSixDmg = 28; //defined above
+	optional int32 enhancingFeederExp = 29;
 	
 	
 	enum MonsterQuality {
@@ -94,7 +95,7 @@ message UserMonsterHealingProto {
 											   //the hospitals the user has
 											   
 	//how much health is already healed	
-	optional int32 healthProgress = 5;
+	optional float healthProgress = 5;
 	//incrementing number (starts back at one(?) when healing a monster and it's the first one)
 	optional int32 priority = 6;
 }
@@ -145,7 +146,7 @@ message UserCurrentMonsterTeamProto {
 }
 
 //------------------------------------------------------------------------------------------
-message UserEvolutionProto {
+message UserMonsterEvolutionProto {
 	//the monster that is required to combine 2 monsters
 	optional int64 catalystUserMonsterId = 1;
 	

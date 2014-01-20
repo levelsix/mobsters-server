@@ -16,7 +16,7 @@ message EvolveMonsterRequestProto {
 	//into an evolved form. If in the future more catalysts are required then
 	//the userMonsterIds property in UserEvolutionProto would be duplicates
 	//while the catalystUserMonsterId would change
-	optional UserEvolutionProto evolution = 2;
+	optional UserMonsterEvolutionProto evolution = 2;
 	
 	//if user needs, say, five more cash, then user can spend gems to replace
 	//said five cash. (positive number, server will convert it to negative)

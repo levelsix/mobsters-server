@@ -147,6 +147,7 @@ import com.lvl6.utils.DBConnection;
     int requiredEvolvingMonsterId = rs.getInt(i++);
     int minutesToEvolve = rs.getInt(i++);
     int numCatalystsRequired = rs.getInt(i++);
+    int enhancingFeederExp = rs.getInt(i++);
     
     Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
     		displayName, element, baseHp, imagePrefix, numPuzzlePieces,
@@ -154,7 +155,7 @@ import com.lvl6.utils.DBConnection;
     		elementFourDmg, elementFiveDmg, elementSixDmg, hpLevelMultiplier,
     		attackLevelMultiplier, maxLevel, evolutionMonsterId, carrotRecruited,
     		carrotDefeated, carrotEvolved, description, requiredEvolvingMonsterId,
-    		minutesToEvolve, numCatalystsRequired);
+    		minutesToEvolve, numCatalystsRequired, enhancingFeederExp);
 
     return monster;
   }

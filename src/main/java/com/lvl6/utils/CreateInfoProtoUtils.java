@@ -75,7 +75,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
-import com.lvl6.proto.MonsterStuffProto.UserEvolutionProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
@@ -1210,6 +1210,9 @@ public class CreateInfoProtoUtils {
     
     int num = aMonster.getNumCatalystsRequired();
     mpb.setNumCatalystMonstersRequired(num);
+    int enhanceFeederExp = aMonster.getEnhancingFeederExp();
+    mpb.setEnhancingFeederExp(enhanceFeederExp);
+    
     return mpb.build();
   }
   
@@ -1251,14 +1254,13 @@ public class CreateInfoProtoUtils {
   	return inviteProtoBuilder.build();
   }
   
-  public static UserEvolutionProto createUserEvolutionProtoFromEvolution(
+  public static UserMonsterEvolutionProto createUserEvolutionProtoFromEvolution(
   		MonsterEvolvingForUser mefu) {
-  	UserEvolutionProto.Builder uepb = UserEvolutionProto.newBuilder();
+  	UserMonsterEvolutionProto.Builder uepb = UserMonsterEvolutionProto.newBuilder();
   	
   	long catalystUserMonsterId = mefu.getCatalystMonsterForUserId();
   	long one = mefu.getMonsterForUserIdOne();
   	long two = mefu.getMonsterForUserIdTwo();
-  	int userId = mefu.getUserId();
   	Date startTime = mefu.getStartTime();
   	
   	uepb.setCatalystUserMonsterId(catalystUserMonsterId);

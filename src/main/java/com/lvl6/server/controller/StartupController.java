@@ -63,7 +63,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
-import com.lvl6.proto.MonsterStuffProto.UserEvolutionProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
@@ -668,7 +668,8 @@ public class StartupController extends EventController {
     if (null != userMonsterEvolving && !userMonsterEvolving.isEmpty()) {
     	
     	for (MonsterEvolvingForUser mefu : userMonsterEvolving.values()) {
-    		UserEvolutionProto uep = CreateInfoProtoUtils.createUserEvolutionProtoFromEvolution(mefu);
+    		UserMonsterEvolutionProto uep = CreateInfoProtoUtils
+    				.createUserEvolutionProtoFromEvolution(mefu);
     		
     		//TODO: NOTE THAT IF MORE THAN ONE EVOLUTION IS ALLLOWED AT A TIME, THIS METHOD
     		//CALL NEEDS TO CHANGE
