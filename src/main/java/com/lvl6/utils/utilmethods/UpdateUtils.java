@@ -374,7 +374,10 @@ public class UpdateUtils implements UpdateUtil {
 
 		log.info("num userStructs updated: " + numUpdated 
 				+ ". Number of userStructs: " + userStructIdsToLastRetrievedTime.size());
-		if (numUpdated == userStructIdsToLastRetrievedTime.size()*2) {
+		
+		int maxNum = userStructIdsToLastRetrievedTime.size()*2;
+		int minNum = userStructIdsToLastRetrievedTime.size();
+		if (numUpdated >= minNum && numUpdated <= maxNum) {
 			return true;
 		}
 		return false;
