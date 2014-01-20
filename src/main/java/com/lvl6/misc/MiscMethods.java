@@ -736,6 +736,11 @@ public class MiscMethods {
       List<String> reasonsForChanges = getValsInOrder(resourceTypes, changeReasonsMap);
       List<String> details = getValsInOrder(resourceTypes, detailsMap);
       		
+      if (currencyChanges.isEmpty() || previousCurrencies.isEmpty() ||
+      		currentCurrencies.isEmpty() || reasonsForChanges.isEmpty()) {
+      	return;
+      }
+      
       InsertUtils.get().insertIntoUserCurrencyHistoryMultipleRows(userIds, timestamps,
       		resourceTypes, currencyChanges, previousCurrencies, currentCurrencies,
       		reasonsForChanges, details);
