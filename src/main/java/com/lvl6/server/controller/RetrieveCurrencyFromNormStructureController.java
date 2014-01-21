@@ -30,6 +30,7 @@ import com.lvl6.proto.EventStructureProto.RetrieveCurrencyFromNormStructureRespo
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.rarechange.StructureResourceGeneratorRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
@@ -57,11 +58,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     RetrieveCurrencyFromNormStructureRequestProto reqProto = ((RetrieveCurrencyFromNormStructureRequestEvent)event).getRetrieveCurrencyFromNormStructureRequestProto();
     log.info("reqProto=" + reqProto);
     //get stuff client sent
-    MinimumUserProto senderProto = reqProto.getSender();
+    MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+    MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
     int userId = senderProto.getUserId();
     List<StructRetrieval> structRetrievals = reqProto.getStructRetrievalsList();
     Timestamp curTime = new Timestamp((new Date()).getTime());
-    
+    int maxCash = senderResourcesProto.getMaxCash();
+    int maxOil = senderResourcesProto.getMaxOil();
     
     Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval =  new HashMap<Integer, Timestamp>();
     Map<Integer, Integer> userStructIdsToAmountCollected = new HashMap<Integer, Integer>();
@@ -73,7 +76,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     RetrieveCurrencyFromNormStructureResponseProto.Builder resBuilder =
     		RetrieveCurrencyFromNormStructureResponseProto.newBuilder();
     resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.FAIL_OTHER);
-    resBuilder.setSender(senderProto);
+    resBuilder.setSender(senderResourcesProto);
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
@@ -105,7 +108,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         previousOil = user.getOil();
         
         successful = writeChangesToDb(user, cashGain, oilGain, userStructIdsToUserStructs,
-        		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected);
+        		userStructIdsToTimesOfRetrieval, userStructIdsToAmountCollected, maxCash, maxOil);
       }
       if (successful) {
       	resBuilder.setStatus(RetrieveCurrencyFromNormStructureStatus.SUCCESS);
@@ -272,7 +275,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private boolean writeChangesToDb(User user, int cashGain, int oilGain,
   		Map<Integer, StructureForUser> userStructIdsToUserStructs,
   		Map<Integer, Timestamp> userStructIdsToTimesOfRetrieval,
-  		Map<Integer, Integer> userStructIdsToAmountCollected) {
+  		Map<Integer, Integer> userStructIdsToAmountCollected, int maxCash, int maxOil) {
+  	//capping how much the user can gain of a certain resource
+  	int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash
+  	int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
+  	cashGain = Math.min(maxCashUserCanGain, cashGain);
+  			
+  	int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil
+  	int maxOilUserCanGain = maxOil - curOil;
+  	oilGain = Math.min(maxOilUserCanGain, oilGain);
+  	
   	if (!user.updateRelativeCoinsOilRetrievedFromStructs(cashGain, oilGain)) {
       log.error("problem with updating user stats after retrieving " + cashGain + " cash" +
       		"\t" + oilGain + " oil.");

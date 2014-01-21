@@ -62,13 +62,13 @@ message QuestProgressResponseProto {
 //------------------------------------------------------------------------------------------
 
 message QuestRedeemRequestProto {                         
-     optional MinimumUserProto sender = 1;
+     optional MinimumUserProtoWithMaxResources sender = 1;
      optional int32 questId = 2;
 }
 
 																						//DONE
 message QuestRedeemResponseProto {
-     optional MinimumUserProto sender = 1;
+     optional MinimumUserProtoWithMaxResources sender = 1;
      repeated FullQuestProto newlyAvailableQuests = 2;
      optional QuestRedeemStatus status = 3;    
      optional FullUserMonsterProto fump = 4;

@@ -17,7 +17,7 @@ public class SellUserMonsterRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       sellUserMonsterRequestProto = SellUserMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = sellUserMonsterRequestProto.getSender().getUserId();
+      playerId = sellUserMonsterRequestProto.getSender().getMinUserProto().getUserId();
     } catch (InvalidProtocolBufferException e) {
       e.printStackTrace();
     }

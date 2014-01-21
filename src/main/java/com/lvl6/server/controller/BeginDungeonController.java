@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginDungeonRequestEvent;
 import com.lvl6.events.response.BeginDungeonResponseEvent;
-import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStage;
@@ -108,10 +107,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       resEvent.setBeginDungeonResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
+//      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+//          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+//      resEventUpdate.setTag(event.getTag());
+//      server.writeEvent(resEventUpdate);
     } catch (Exception e) {
       log.error("exception in BeginDungeonController processEvent", e);
       //don't let the client hang

@@ -2452,10 +2452,10 @@ public final class EventMonsterProto {
   public interface SubmitMonsterEnhancementRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
     
     // repeated .com.lvl6.proto.UserEnhancementItemProto ueipDelete = 2;
     java.util.List<com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto> 
@@ -2524,16 +2524,16 @@ public final class EventMonsterProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -2621,7 +2621,7 @@ public final class EventMonsterProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       ueipDelete_ = java.util.Collections.emptyList();
       ueipUpdate_ = java.util.Collections.emptyList();
       ueipNew_ = java.util.Collections.emptyList();
@@ -2820,7 +2820,7 @@ public final class EventMonsterProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -3063,7 +3063,7 @@ public final class EventMonsterProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -3105,21 +3105,21 @@ public final class EventMonsterProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3133,7 +3133,7 @@ public final class EventMonsterProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -3143,12 +3143,12 @@ public final class EventMonsterProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -3161,7 +3161,7 @@ public final class EventMonsterProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -3169,12 +3169,12 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -3182,11 +3182,11 @@ public final class EventMonsterProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -3809,10 +3809,10 @@ public final class EventMonsterProto {
   public interface SubmitMonsterEnhancementResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
     
     // optional .com.lvl6.proto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus status = 2;
     boolean hasStatus();
@@ -3922,16 +3922,16 @@ public final class EventMonsterProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -3946,7 +3946,7 @@ public final class EventMonsterProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       status_ = com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -4110,7 +4110,7 @@ public final class EventMonsterProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -4221,7 +4221,7 @@ public final class EventMonsterProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -4246,21 +4246,21 @@ public final class EventMonsterProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4274,7 +4274,7 @@ public final class EventMonsterProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -4284,12 +4284,12 @@ public final class EventMonsterProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -4302,7 +4302,7 @@ public final class EventMonsterProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -4310,12 +4310,12 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -4323,11 +4323,11 @@ public final class EventMonsterProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -7044,10 +7044,10 @@ public final class EventMonsterProto {
   public interface HealMonsterRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
     
     // repeated .com.lvl6.proto.UserMonsterHealingProto umhDelete = 2;
     java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto> 
@@ -7134,16 +7134,16 @@ public final class EventMonsterProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -7272,7 +7272,7 @@ public final class EventMonsterProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       umhDelete_ = java.util.Collections.emptyList();
       umhUpdate_ = java.util.Collections.emptyList();
       umhNew_ = java.util.Collections.emptyList();
@@ -7496,7 +7496,7 @@ public final class EventMonsterProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -7798,7 +7798,7 @@ public final class EventMonsterProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -7856,21 +7856,21 @@ public final class EventMonsterProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7884,7 +7884,7 @@ public final class EventMonsterProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -7894,12 +7894,12 @@ public final class EventMonsterProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -7912,7 +7912,7 @@ public final class EventMonsterProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -7920,12 +7920,12 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -7933,11 +7933,11 @@ public final class EventMonsterProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -8788,10 +8788,10 @@ public final class EventMonsterProto {
   public interface HealMonsterResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
     
     // optional .com.lvl6.proto.HealMonsterResponseProto.HealMonsterStatus status = 2;
     boolean hasStatus();
@@ -8907,16 +8907,16 @@ public final class EventMonsterProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -8931,7 +8931,7 @@ public final class EventMonsterProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       status_ = com.lvl6.proto.EventMonsterProto.HealMonsterResponseProto.HealMonsterStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -9095,7 +9095,7 @@ public final class EventMonsterProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -9206,7 +9206,7 @@ public final class EventMonsterProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -9231,21 +9231,21 @@ public final class EventMonsterProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -9259,7 +9259,7 @@ public final class EventMonsterProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -9269,12 +9269,12 @@ public final class EventMonsterProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -9287,7 +9287,7 @@ public final class EventMonsterProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -9295,12 +9295,12 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -9308,11 +9308,11 @@ public final class EventMonsterProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -17438,10 +17438,10 @@ public final class EventMonsterProto {
   public interface SellUserMonsterRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
     
     // repeated .com.lvl6.proto.MinimumUserMonsterSellProto sales = 2;
     java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto> 
@@ -17482,16 +17482,16 @@ public final class EventMonsterProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -17517,7 +17517,7 @@ public final class EventMonsterProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       sales_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -17682,7 +17682,7 @@ public final class EventMonsterProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -17825,7 +17825,7 @@ public final class EventMonsterProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -17845,21 +17845,21 @@ public final class EventMonsterProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -17873,7 +17873,7 @@ public final class EventMonsterProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -17883,12 +17883,12 @@ public final class EventMonsterProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -17901,7 +17901,7 @@ public final class EventMonsterProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -17909,12 +17909,12 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -17922,11 +17922,11 @@ public final class EventMonsterProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -18135,10 +18135,10 @@ public final class EventMonsterProto {
   public interface SellUserMonsterResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
     
     // optional .com.lvl6.proto.SellUserMonsterResponseProto.SellUserMonsterStatus status = 2;
     boolean hasStatus();
@@ -18242,16 +18242,16 @@ public final class EventMonsterProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -18266,7 +18266,7 @@ public final class EventMonsterProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       status_ = com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMonsterStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -18430,7 +18430,7 @@ public final class EventMonsterProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -18541,7 +18541,7 @@ public final class EventMonsterProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -18566,21 +18566,21 @@ public final class EventMonsterProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -18594,7 +18594,7 @@ public final class EventMonsterProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -18604,12 +18604,12 @@ public final class EventMonsterProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -18622,7 +18622,7 @@ public final class EventMonsterProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -18630,12 +18630,12 @@ public final class EventMonsterProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -18643,11 +18643,11 @@ public final class EventMonsterProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -18861,154 +18861,156 @@ public final class EventMonsterProto {
       "tionFinishedResponseProto.EvolutionFinis" +
       "hedStatus\"R\n\027EvolutionFinishedStatus\022\013\n\007" +
       "SUCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\016\n" +
-      "\nFAIL_OTHER\020\003\"\265\002\n$SubmitMonsterEnhanceme" +
-      "ntRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022<\n\nueipDelete\030\002" +
-      " \003(\0132(.com.lvl6.proto.UserEnhancementIte",
-      "mProto\022<\n\nueipUpdate\030\003 \003(\0132(.com.lvl6.pr" +
-      "oto.UserEnhancementItemProto\0229\n\007ueipNew\030" +
-      "\004 \003(\0132(.com.lvl6.proto.UserEnhancementIt" +
-      "emProto\022\021\n\tgemsSpent\030\005 \001(\005\022\021\n\toilChange\030" +
-      "\006 \001(\021\"\265\002\n%SubmitMonsterEnhancementRespon" +
-      "seProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto" +
-      ".MinimumUserProto\022d\n\006status\030\002 \001(\0162T.com." +
-      "lvl6.proto.SubmitMonsterEnhancementRespo" +
-      "nseProto.SubmitMonsterEnhancementStatus\"" +
-      "t\n\036SubmitMonsterEnhancementStatus\022\013\n\007SUC",
-      "CESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FA" +
-      "IL_INSUFFICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\331\001" +
-      "\n\'EnhancementWaitTimeCompleteRequestProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsFo" +
-      "rSpeedup\030\003 \001(\005\0229\n\005umcep\030\004 \001(\0132*.com.lvl6" +
-      ".proto.UserMonsterCurrentExpProto\022\026\n\016use" +
-      "rMonsterIds\030\005 \003(\003\"\306\002\n(EnhancementWaitTim" +
-      "eCompleteResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022j\n\006stat",
-      "us\030\002 \001(\0162Z.com.lvl6.proto.EnhancementWai" +
-      "tTimeCompleteResponseProto.EnhancementWa" +
-      "itTimeCompleteStatus\"|\n!EnhancementWaitT" +
-      "imeCompleteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_H" +
-      "EALING_NOT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFICIE" +
-      "NT_FUNDS\020\003\022\016\n\nFAIL_OTHER\020\004\"\245\001\n\037UpdateMon" +
-      "sterHealthRequestProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022<\n\005umch" +
-      "p\030\002 \003(\0132-.com.lvl6.proto.UserMonsterCurr" +
-      "entHealthProto\022\022\n\nclientTime\030\003 \001(\003\"\207\002\n U",
-      "pdateMonsterHealthResponseProto\0220\n\006sende" +
-      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
-      "o\022Z\n\006status\030\002 \001(\0162J.com.lvl6.proto.Updat" +
-      "eMonsterHealthResponseProto.UpdateMonste" +
-      "rHealthStatus\"U\n\031UpdateMonsterHealthStat" +
-      "us\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUN" +
-      "DS\020\002\022\016\n\nFAIL_OTHER\020\003\"\224\003\n\027HealMonsterRequ" +
-      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
-      "o.MinimumUserProto\022:\n\tumhDelete\030\002 \003(\0132\'." +
-      "com.lvl6.proto.UserMonsterHealingProto\022:",
-      "\n\tumhUpdate\030\003 \003(\0132\'.com.lvl6.proto.UserM" +
-      "onsterHealingProto\0227\n\006umhNew\030\004 \003(\0132\'.com" +
-      ".lvl6.proto.UserMonsterHealingProto\022\022\n\nc" +
-      "ashChange\030\005 \001(\021\022\031\n\021gemCostForHealing\030\006 \001" +
-      "(\005\022\021\n\tisSpeedup\030\007 \001(\010\022\026\n\016gemsForSpeedup\030" +
-      "\010 \001(\005\022<\n\005umchp\030\t \003(\0132-.com.lvl6.proto.Us" +
-      "erMonsterCurrentHealthProto\"\321\002\n\030HealMons" +
-      "terResponseProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
-      "vl6.proto.MinimumUserProto\022J\n\006status\030\002 \001" +
-      "(\0162:.com.lvl6.proto.HealMonsterResponseP",
-      "roto.HealMonsterStatus\"\266\001\n\021HealMonsterSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_F" +
-      "UNDS\020\002\022%\n!FAIL_ALL_MONSTERS_ALREADY_HEAL" +
-      "ING\020\003\022!\n\035FAIL_ALL_MONSTERS_NONEXISTENT\020\004" +
-      "\022\016\n\nFAIL_OTHER\020\005\022\035\n\031FAIL_HEALING_NOT_COM" +
-      "PLETE\020\006\"\202\001\n\"AddMonsterToBattleTeamReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n" +
-      "\ruserMonsterId\030\003 \001(\003\"\366\001\n#AddMonsterToBat" +
-      "tleTeamResponseProto\0220\n\006sender\030\001 \001(\0132 .c",
-      "om.lvl6.proto.MinimumUserProto\022`\n\006status" +
-      "\030\002 \001(\0162P.com.lvl6.proto.AddMonsterToBatt" +
-      "leTeamResponseProto.AddMonsterToBattleTe" +
-      "amStatus\";\n\034AddMonsterToBattleTeamStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"r\n\'RemoveM" +
-      "onsterFromBattleTeamRequestProto\0220\n\006send" +
-      "er\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPro" +
-      "to\022\025\n\ruserMonsterId\030\003 \001(\003\"\212\002\n(RemoveMons" +
-      "terFromBattleTeamResponseProto\0220\n\006sender" +
-      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto",
-      "\022j\n\006status\030\002 \001(\0162Z.com.lvl6.proto.Remove" +
-      "MonsterFromBattleTeamResponseProto.Remov" +
-      "eMonsterFromBattleTeamStatus\"@\n!RemoveMo" +
-      "nsterFromBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016" +
-      "\n\nFAIL_OTHER\020\002\"\266\002\n(IncreaseMonsterInvent" +
-      "orySlotRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022c\n\020increas" +
-      "eSlotType\030\002 \001(\0162I.com.lvl6.proto.Increas" +
-      "eMonsterInventorySlotRequestProto.Increa" +
-      "seSlotType\022\024\n\014userStructId\030\003 \001(\005\022\036\n\026user",
-      "FbInviteForSlotIds\030\004 \003(\005\"=\n\020IncreaseSlot" +
-      "Type\022\014\n\010PURCHASE\020\001\022\033\n\027REDEEM_FACEBOOK_IN" +
-      "VITES\020\002\"\367\002\n)IncreaseMonsterInventorySlot" +
-      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
-      ".proto.MinimumUserProto\022l\n\006status\030\002 \001(\0162" +
-      "\\.com.lvl6.proto.IncreaseMonsterInventor" +
-      "ySlotResponseProto.IncreaseMonsterInvent" +
-      "orySlotStatus\"\251\001\n\"IncreaseMonsterInvento" +
-      "rySlotStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFF" +
-      "ICIENT_FUNDS\020\002\022&\n\"FAIL_INSUFFICIENT_FACE",
-      "BOOK_INVITES\020\003\022\016\n\nFAIL_OTHER\020\004\022!\n\035FAIL_I" +
-      "NCONSISTENT_INVITE_DATA\020\005\"\241\002\n#InviteFbFr" +
-      "iendsForSlotsRequestProto\022>\n\006sender\030\001 \001(" +
-      "\0132..com.lvl6.proto.MinimumUserProtoWithF" +
-      "acebookId\022\\\n\007invites\030\002 \003(\0132K.com.lvl6.pr" +
-      "oto.InviteFbFriendsForSlotsRequestProto." +
-      "FacebookInviteStructure\032\\\n\027FacebookInvit" +
-      "eStructure\022\022\n\nfbFriendId\030\001 \001(\t\022\024\n\014userSt" +
-      "ructId\030\002 \001(\005\022\027\n\017userStructFbLvl\030\003 \001(\005\"\314\002" +
-      "\n$InviteFbFriendsForSlotsResponseProto\022>",
-      "\n\006sender\030\001 \001(\0132..com.lvl6.proto.MinimumU" +
-      "serProtoWithFacebookId\022b\n\006status\030\002 \001(\0162R" +
-      ".com.lvl6.proto.InviteFbFriendsForSlotsR" +
-      "esponseProto.InviteFbFriendsForSlotsStat" +
-      "us\022B\n\ninvitesNew\030\003 \003(\0132..com.lvl6.proto." +
-      "UserFacebookInviteForSlotProto\"<\n\035Invite" +
-      "FbFriendsForSlotsStatus\022\013\n\007SUCCESS\020\001\022\016\n\n" +
-      "FAIL_OTHER\020\002\"\243\001\n+AcceptAndRejectFbInvite" +
-      "ForSlotsRequestProto\022>\n\006sender\030\001 \001(\0132..c" +
-      "om.lvl6.proto.MinimumUserProtoWithFacebo",
-      "okId\022\031\n\021acceptedInviteIds\030\002 \003(\005\022\031\n\021rejec" +
-      "tedInviteIds\030\003 \003(\005\"\237\003\n,AcceptAndRejectFb" +
-      "InviteForSlotsResponseProto\022>\n\006sender\030\001 " +
-      "\001(\0132..com.lvl6.proto.MinimumUserProtoWit" +
-      "hFacebookId\022r\n\006status\030\002 \001(\0162b.com.lvl6.p" +
-      "roto.AcceptAndRejectFbInviteForSlotsResp" +
-      "onseProto.AcceptAndRejectFbInviteForSlot" +
-      "sStatus\022G\n\017acceptedInvites\030\003 \003(\0132..com.l" +
-      "vl6.proto.UserFacebookInviteForSlotProto" +
-      "\"r\n%AcceptAndRejectFbInviteForSlotsStatu",
-      "s\022\013\n\007SUCCESS\020\001\022\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL" +
-      "_ALREADY_BEEN_USED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n" +
-      "$CombineUserMonsterPiecesRequestProto\0220\n" +
-      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
-      "erProto\022\026\n\016userMonsterIds\030\002 \003(\003\022\017\n\007gemCo" +
-      "st\030\003 \001(\005\"\307\002\n%CombineUserMonsterPiecesRes" +
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022d\n\006status\030\002 \001(\0162T.c" +
-      "om.lvl6.proto.CombineUserMonsterPiecesRe" +
-      "sponseProto.CombineUserMonsterPiecesStat",
-      "us\"\205\001\n\036CombineUserMonsterPiecesStatus\022\013\n" +
-      "\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFUCIENT_GEMS\020\002\022*" +
-      "\n&FAIL_MORE_THAN_ONE_MONSTER_FOR_SPEEDUP" +
-      "\020\003\022\016\n\nFAIL_OTHER\020\004\"\213\001\n\033SellUserMonsterRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022:\n\005sales\030\002 \003(\0132+.co" +
-      "m.lvl6.proto.MinimumUserMonsterSellProto" +
-      "\"\332\001\n\034SellUserMonsterResponseProto\0220\n\006sen" +
+      "\nFAIL_OTHER\020\003\"\305\002\n$SubmitMonsterEnhanceme" +
+      "ntRequestProto\022@\n\006sender\030\001 \001(\01320.com.lvl" +
+      "6.proto.MinimumUserProtoWithMaxResources" +
+      "\022<\n\nueipDelete\030\002 \003(\0132(.com.lvl6.proto.Us",
+      "erEnhancementItemProto\022<\n\nueipUpdate\030\003 \003" +
+      "(\0132(.com.lvl6.proto.UserEnhancementItemP" +
+      "roto\0229\n\007ueipNew\030\004 \003(\0132(.com.lvl6.proto.U" +
+      "serEnhancementItemProto\022\021\n\tgemsSpent\030\005 \001" +
+      "(\005\022\021\n\toilChange\030\006 \001(\021\"\305\002\n%SubmitMonsterE" +
+      "nhancementResponseProto\022@\n\006sender\030\001 \001(\0132" +
+      "0.com.lvl6.proto.MinimumUserProtoWithMax" +
+      "Resources\022d\n\006status\030\002 \001(\0162T.com.lvl6.pro" +
+      "to.SubmitMonsterEnhancementResponseProto" +
+      ".SubmitMonsterEnhancementStatus\"t\n\036Submi",
+      "tMonsterEnhancementStatus\022\013\n\007SUCCESS\020\001\022\032" +
+      "\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\031\n\025FAIL_INSUF" +
+      "FICIENT_OIL\020\003\022\016\n\nFAIL_OTHER\020\004\"\331\001\n\'Enhanc" +
+      "ementWaitTimeCompleteRequestProto\0220\n\006sen" +
       "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Sel",
-      "lUserMonsterResponseProto.SellUserMonste" +
-      "rStatus\"4\n\025SellUserMonsterStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B\021EventMonsterPro" +
-      "to"
+      "oto\022\021\n\tisSpeedup\030\002 \001(\010\022\026\n\016gemsForSpeedup" +
+      "\030\003 \001(\005\0229\n\005umcep\030\004 \001(\0132*.com.lvl6.proto.U" +
+      "serMonsterCurrentExpProto\022\026\n\016userMonster" +
+      "Ids\030\005 \003(\003\"\306\002\n(EnhancementWaitTimeComplet" +
+      "eResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl",
+      "6.proto.MinimumUserProto\022j\n\006status\030\002 \001(\016" +
+      "2Z.com.lvl6.proto.EnhancementWaitTimeCom" +
+      "pleteResponseProto.EnhancementWaitTimeCo" +
+      "mpleteStatus\"|\n!EnhancementWaitTimeCompl" +
+      "eteStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_HEALING_N" +
+      "OT_COMPLETE\020\002\022\033\n\027FAIL_INSUFFICIENT_FUNDS" +
+      "\020\003\022\016\n\nFAIL_OTHER\020\004\"\245\001\n\037UpdateMonsterHeal" +
+      "thRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022<\n\005umchp\030\002 \003(\0132" +
+      "-.com.lvl6.proto.UserMonsterCurrentHealt",
+      "hProto\022\022\n\nclientTime\030\003 \001(\003\"\207\002\n UpdateMon" +
+      "sterHealthResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022Z\n\006sta" +
+      "tus\030\002 \001(\0162J.com.lvl6.proto.UpdateMonster" +
+      "HealthResponseProto.UpdateMonsterHealthS" +
+      "tatus\"U\n\031UpdateMonsterHealthStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\n" +
+      "FAIL_OTHER\020\003\"\244\003\n\027HealMonsterRequestProto" +
+      "\022@\n\006sender\030\001 \001(\01320.com.lvl6.proto.Minimu" +
+      "mUserProtoWithMaxResources\022:\n\tumhDelete\030",
+      "\002 \003(\0132\'.com.lvl6.proto.UserMonsterHealin" +
+      "gProto\022:\n\tumhUpdate\030\003 \003(\0132\'.com.lvl6.pro" +
+      "to.UserMonsterHealingProto\0227\n\006umhNew\030\004 \003" +
+      "(\0132\'.com.lvl6.proto.UserMonsterHealingPr" +
+      "oto\022\022\n\ncashChange\030\005 \001(\021\022\031\n\021gemCostForHea" +
+      "ling\030\006 \001(\005\022\021\n\tisSpeedup\030\007 \001(\010\022\026\n\016gemsFor" +
+      "Speedup\030\010 \001(\005\022<\n\005umchp\030\t \003(\0132-.com.lvl6." +
+      "proto.UserMonsterCurrentHealthProto\"\341\002\n\030" +
+      "HealMonsterResponseProto\022@\n\006sender\030\001 \001(\013" +
+      "20.com.lvl6.proto.MinimumUserProtoWithMa",
+      "xResources\022J\n\006status\030\002 \001(\0162:.com.lvl6.pr" +
+      "oto.HealMonsterResponseProto.HealMonster" +
+      "Status\"\266\001\n\021HealMonsterStatus\022\013\n\007SUCCESS\020" +
+      "\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022%\n!FAIL_A" +
+      "LL_MONSTERS_ALREADY_HEALING\020\003\022!\n\035FAIL_AL" +
+      "L_MONSTERS_NONEXISTENT\020\004\022\016\n\nFAIL_OTHER\020\005" +
+      "\022\035\n\031FAIL_HEALING_NOT_COMPLETE\020\006\"\202\001\n\"AddM" +
+      "onsterToBattleTeamRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\023\n\013teamSlotNum\030\002 \001(\005\022\025\n\ruserMonsterId\030\003",
+      " \001(\003\"\366\001\n#AddMonsterToBattleTeamResponseP" +
+      "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022`\n\006status\030\002 \001(\0162P.com.lvl" +
+      "6.proto.AddMonsterToBattleTeamResponsePr" +
+      "oto.AddMonsterToBattleTeamStatus\";\n\034AddM" +
+      "onsterToBattleTeamStatus\022\013\n\007SUCCESS\020\001\022\016\n" +
+      "\nFAIL_OTHER\020\002\"r\n\'RemoveMonsterFromBattle" +
+      "TeamRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\025\n\ruserMonste" +
+      "rId\030\003 \001(\003\"\212\002\n(RemoveMonsterFromBattleTea",
+      "mResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022j\n\006status\030\002 \001(\016" +
+      "2Z.com.lvl6.proto.RemoveMonsterFromBattl" +
+      "eTeamResponseProto.RemoveMonsterFromBatt" +
+      "leTeamStatus\"@\n!RemoveMonsterFromBattleT" +
+      "eamStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\266" +
+      "\002\n(IncreaseMonsterInventorySlotRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022c\n\020increaseSlotType\030\002 \001(\0162" +
+      "I.com.lvl6.proto.IncreaseMonsterInventor",
+      "ySlotRequestProto.IncreaseSlotType\022\024\n\014us" +
+      "erStructId\030\003 \001(\005\022\036\n\026userFbInviteForSlotI" +
+      "ds\030\004 \003(\005\"=\n\020IncreaseSlotType\022\014\n\010PURCHASE" +
+      "\020\001\022\033\n\027REDEEM_FACEBOOK_INVITES\020\002\"\367\002\n)Incr" +
+      "easeMonsterInventorySlotResponseProto\0220\n" +
+      "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
+      "erProto\022l\n\006status\030\002 \001(\0162\\.com.lvl6.proto" +
+      ".IncreaseMonsterInventorySlotResponsePro" +
+      "to.IncreaseMonsterInventorySlotStatus\"\251\001" +
+      "\n\"IncreaseMonsterInventorySlotStatus\022\013\n\007",
+      "SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022&" +
+      "\n\"FAIL_INSUFFICIENT_FACEBOOK_INVITES\020\003\022\016" +
+      "\n\nFAIL_OTHER\020\004\022!\n\035FAIL_INCONSISTENT_INVI" +
+      "TE_DATA\020\005\"\241\002\n#InviteFbFriendsForSlotsReq" +
+      "uestProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.pro" +
+      "to.MinimumUserProtoWithFacebookId\022\\\n\007inv" +
+      "ites\030\002 \003(\0132K.com.lvl6.proto.InviteFbFrie" +
+      "ndsForSlotsRequestProto.FacebookInviteSt" +
+      "ructure\032\\\n\027FacebookInviteStructure\022\022\n\nfb" +
+      "FriendId\030\001 \001(\t\022\024\n\014userStructId\030\002 \001(\005\022\027\n\017",
+      "userStructFbLvl\030\003 \001(\005\"\314\002\n$InviteFbFriend" +
+      "sForSlotsResponseProto\022>\n\006sender\030\001 \001(\0132." +
+      ".com.lvl6.proto.MinimumUserProtoWithFace" +
+      "bookId\022b\n\006status\030\002 \001(\0162R.com.lvl6.proto." +
+      "InviteFbFriendsForSlotsResponseProto.Inv" +
+      "iteFbFriendsForSlotsStatus\022B\n\ninvitesNew" +
+      "\030\003 \003(\0132..com.lvl6.proto.UserFacebookInvi" +
+      "teForSlotProto\"<\n\035InviteFbFriendsForSlot" +
+      "sStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\243\001\n" +
+      "+AcceptAndRejectFbInviteForSlotsRequestP",
+      "roto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Mi" +
+      "nimumUserProtoWithFacebookId\022\031\n\021accepted" +
+      "InviteIds\030\002 \003(\005\022\031\n\021rejectedInviteIds\030\003 \003" +
+      "(\005\"\237\003\n,AcceptAndRejectFbInviteForSlotsRe" +
+      "sponseProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.p" +
+      "roto.MinimumUserProtoWithFacebookId\022r\n\006s" +
+      "tatus\030\002 \001(\0162b.com.lvl6.proto.AcceptAndRe" +
+      "jectFbInviteForSlotsResponseProto.Accept" +
+      "AndRejectFbInviteForSlotsStatus\022G\n\017accep" +
+      "tedInvites\030\003 \003(\0132..com.lvl6.proto.UserFa",
+      "cebookInviteForSlotProto\"r\n%AcceptAndRej" +
+      "ectFbInviteForSlotsStatus\022\013\n\007SUCCESS\020\001\022\020" +
+      "\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BEEN_US" +
+      "ED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$CombineUserMons" +
+      "terPiecesRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
+      "com.lvl6.proto.MinimumUserProto\022\026\n\016userM" +
+      "onsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%Com" +
+      "bineUserMonsterPiecesResponseProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Co",
+      "mbineUserMonsterPiecesResponseProto.Comb" +
+      "ineUserMonsterPiecesStatus\"\205\001\n\036CombineUs" +
+      "erMonsterPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FA" +
+      "IL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_THAN" +
+      "_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTHER" +
+      "\020\004\"\233\001\n\033SellUserMonsterRequestProto\022@\n\006se" +
+      "nder\030\001 \001(\01320.com.lvl6.proto.MinimumUserP" +
+      "rotoWithMaxResources\022:\n\005sales\030\002 \003(\0132+.co" +
+      "m.lvl6.proto.MinimumUserMonsterSellProto" +
+      "\"\352\001\n\034SellUserMonsterResponseProto\022@\n\006sen",
+      "der\030\001 \001(\01320.com.lvl6.proto.MinimumUserPr" +
+      "otoWithMaxResources\022R\n\006status\030\002 \001(\0162B.co" +
+      "m.lvl6.proto.SellUserMonsterResponseProt" +
+      "o.SellUserMonsterStatus\"4\n\025SellUserMonst" +
+      "erStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B" +
+      "\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

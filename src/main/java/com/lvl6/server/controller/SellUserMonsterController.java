@@ -26,6 +26,7 @@ import com.lvl6.proto.EventMonsterProto.SellUserMonsterResponseProto.SellUserMon
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -57,7 +58,8 @@ public class SellUserMonsterController extends EventController {
 				.getSellUserMonsterRequestProto();
 
 		// get values sent from the client (the request proto)
-		MinimumUserProto senderProto = reqProto.getSender();
+		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
 		int userId = senderProto.getUserId();
 		List<MinimumUserMonsterSellProto> userMonsters = reqProto.getSalesList();
 		Map<Long, Integer> userMonsterIdsToCashAmounts = MonsterStuffUtils
@@ -65,11 +67,13 @@ public class SellUserMonsterController extends EventController {
 		Set<Long> userMonsterIdsSet = userMonsterIdsToCashAmounts.keySet();
 		List<Long> userMonsterIds = new ArrayList<Long>(userMonsterIdsSet);
 		Date deleteDate = new Date();
+		
+		int maxCash = senderResourcesProto.getMaxCash();
 
 		// set some values to send to the client (the response proto)
 		SellUserMonsterResponseProto.Builder resBuilder = SellUserMonsterResponseProto
 				.newBuilder();
-		resBuilder.setSender(senderProto);
+		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(SellUserMonsterStatus.FAIL_OTHER); // default
 
 		server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -87,8 +91,8 @@ public class SellUserMonsterController extends EventController {
 			boolean successful = false;
 			if (legit) {
 				previousCash = aUser.getCash();
-				successful = writeChangesToDb(aUser, userMonsterIds,
-						userMonsterIdsToCashAmounts);
+				successful = writeChangesToDb(aUser, userMonsterIds, userMonsterIdsToCashAmounts,
+						maxCash);
 			}
 
 			if (successful) {
@@ -171,12 +175,16 @@ public class SellUserMonsterController extends EventController {
 	}
 
 	private boolean writeChangesToDb(User aUser, List<Long> userMonsterIds,
-			Map<Long, Integer> userMonsterIdsToCashAmounts) {
+			Map<Long, Integer> userMonsterIdsToCashAmounts, int maxCash) {
 		boolean success = true;
 
 		// sum up the monies and give it to the user
 		int sum = MiscMethods.sumMapValues(userMonsterIdsToCashAmounts);
-		if (!aUser.updateRelativeCoinsNaive(sum)) {
+		int curCash = Math.min(aUser.getCash(), maxCash); //in case user's cash is more than maxCash
+		int maxCashUserCanGain = maxCash - curCash;
+		sum = Math.min(sum, maxCashUserCanGain);
+		
+		if (!aUser.updateRelativeCashNaive(sum)) {
 			log.error("error updating user coins by " + sum + " not deleting "
 					+ "userMonstersIdsToCashAmounts=" + userMonsterIdsToCashAmounts);
 			return false;

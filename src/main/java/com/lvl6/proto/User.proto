@@ -46,6 +46,15 @@ message MinimumUserProtoWithFacebookId {
 
 //------------------------------------------------------------------------------------------
 
+message MinimumUserProtoWithMaxResources {
+	optional MinimumUserProto minUserProto = 1;
+	optional int32 maxCash = 2;
+	optional int32 maxOil = 3;
+}
+
+
+//------------------------------------------------------------------------------------------
+
 message UserFacebookInviteForSlotProto {
 	optional int32 inviteId = 1;
 	optional MinimumUserProtoWithFacebookId inviter = 2;

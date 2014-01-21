@@ -1320,7 +1320,7 @@ public class StartupController extends EventController {
       }
     }
     if (key.equals(MiscMethods.cash)) {
-      if (!aUser.updateRelativeCoinsNaive(value)) {
+      if (!aUser.updateRelativeCashNaive(value)) {
         log.error("unexpected error: could not give silver bonus of " + value + " to user " + aUser);
         return false;
       } else {// gave user silver

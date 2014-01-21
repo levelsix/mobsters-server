@@ -28,6 +28,7 @@ import com.lvl6.proto.EventQuestProto.QuestRedeemResponseProto.QuestRedeemStatus
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -57,14 +58,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     QuestRedeemRequestProto reqProto = ((QuestRedeemRequestEvent)event).getQuestRedeemRequestProto();
 
-    MinimumUserProto senderProto = reqProto.getSender();
+    MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+    MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
     int userId = senderProto.getUserId();
     int questId = reqProto.getQuestId();
     Date currentDate = new Date();
     Timestamp now = new Timestamp(currentDate.getTime());
+    int maxCash = senderResourcesProto.getMaxCash();
     
     QuestRedeemResponseProto.Builder resBuilder = QuestRedeemResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
+    resBuilder.setSender(senderResourcesProto);
     resBuilder.setStatus(QuestRedeemStatus.FAIL_OTHER);
     resBuilder.setQuestId(questId);
 
@@ -94,7 +97,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         int previousGold = user.getGems();
         
         Map<String, Integer> money = new HashMap<String, Integer>();
-        writeChangesToDB(userQuest, quest, user, senderProto, money);
+        writeChangesToDB(userQuest, quest, user, senderProto, money, maxCash);
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
@@ -191,25 +194,30 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     return legitRedeem;
   }
 
-  private void writeChangesToDB(QuestForUser userQuest, Quest quest, User user, MinimumUserProto senderProto,
-      Map<String, Integer> money) {
+  private void writeChangesToDB(QuestForUser userQuest, Quest quest, User user,
+  		MinimumUserProto senderProto, Map<String, Integer> money, int maxCash) {
     if (!UpdateUtils.get().updateRedeemQuestForUser(userQuest.getUserId(), userQuest.getQuestId())) {
       log.error("problem with marking user quest as redeemed. questId=" + userQuest.getQuestId());
     }
 
-    int coinsGained = Math.max(0, quest.getCoinReward());
-    int diamondsGained = Math.max(0, quest.getDiamondReward());
+    int cashGain = Math.max(0, quest.getCoinReward());
+    int gemsGained = Math.max(0, quest.getDiamondReward());
     int expGained = Math.max(0,  quest.getExpReward());
-    if (!user.updateRelativeDiamondsCoinsExperienceNaive(diamondsGained, coinsGained, expGained)) {
-      log.error("problem with giving user " + diamondsGained + " diamonds, " + coinsGained
-          + " coins, " + expGained + " exp");
+    
+    int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash
+  	int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
+  	cashGain = Math.min(maxCashUserCanGain, cashGain);
+    
+    if (!user.updateRelativeGemsCashExperienceNaive(gemsGained, cashGain, expGained)) {
+      log.error("problem with giving user " + gemsGained + " diamonds, " + cashGain
+          + " cash, " + expGained + " exp");
     } else {
       //things worked
-      if (0 != diamondsGained) {
-        money.put(MiscMethods.gems, diamondsGained);
+      if (0 != gemsGained) {
+        money.put(MiscMethods.gems, gemsGained);
       }
-      if (0 != coinsGained) {
-        money.put(MiscMethods.cash, coinsGained);
+      if (0 != cashGain) {
+        money.put(MiscMethods.cash, cashGain);
       }
     }
   }

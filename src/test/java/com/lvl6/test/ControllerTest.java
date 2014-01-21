@@ -148,7 +148,7 @@ public class ControllerTest extends TestCase {
 		int diamondChange = 0;
 		int coinChange = 50000;
 		int experienceChange = 0;
-		boolean successful = aUser.updateRelativeDiamondsCoinsExperienceNaive(
+		boolean successful = aUser.updateRelativeGemsCashExperienceNaive(
 				diamondChange, coinChange, experienceChange);
 		assertTrue(successful);
 		

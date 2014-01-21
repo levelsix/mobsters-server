@@ -33,6 +33,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
@@ -66,7 +67,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //log.info("reqProto=" + reqProto);
 
     //get values sent from the client (the request proto)
-    MinimumUserProto senderProto = reqProto.getSender();
+    MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+    MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
     int userId = senderProto.getUserId();
     List<UserMonsterHealingProto> umhDelete = reqProto.getUmhDeleteList();
     List<UserMonsterHealingProto> umhUpdate = reqProto.getUmhUpdateList();
@@ -83,6 +85,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     int gemCost = gemCostForHealing + gemsForSpeedup;//reqProto.getTotalGemCost();
     Timestamp curTime = new Timestamp((new Date()).getTime());
+    int maxCash = senderResourcesProto.getMaxCash();
 
     Map<Long, UserMonsterHealingProto> deleteMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhDelete);
     Map<Long, UserMonsterHealingProto> updateMap = MonsterStuffUtils.convertIntoUserMonsterIdToUmhpProtoMap(umhUpdate);
@@ -93,7 +96,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     //set some values to send to the client (the response proto)
     HealMonsterResponseProto.Builder resBuilder = HealMonsterResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
+    resBuilder.setSender(senderResourcesProto);
     resBuilder.setStatus(HealMonsterStatus.FAIL_OTHER); //default
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -137,7 +140,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  successful = writeChangesToDb(aUser, userId, cashChange, gemCost, deleteMap,
     	  		updateMap, newMap, gemCostForHealing, money, userMonsterIds, 
     	  		userMonsterIdToExpectedHealth, isSpeedup, gemsForSpeedup, moneyForHealSpeedup,
-    	  		changeMap);
+    	  		changeMap, maxCash);
       }
       
       if (successful) {
@@ -285,7 +288,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Map<Long, UserMonsterHealingProto> protoNewMap, int gemCostForHealing,
 		  Map<String, Integer> money, List<Long> userMonsterIds, 
 		  Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup, int gemsForSpeedup,
-		  Map<String, Integer> moneyForSpeedup, Map<String, Integer> changeMap) {
+		  Map<String, Integer> moneyForSpeedup, Map<String, Integer> changeMap, int maxCash) {
 
 //  	log.info("cashChange=" + cashChange);
 //  	log.info("gemCost=" + gemCost);
@@ -296,11 +299,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //  	log.info("isSpeedup=" + isSpeedup);
 //  	log.info("gemsForSpedup" + gemsForSpeedup);
   	
+  	int oilChange = 0;
+  	int gemChange = -1 * gemCost;
+  	
   	//if checks are here because the changes are 0 if the HealMonsterWaitTimeComplete
   	//feature part of this controller is being processed
   	if (0 != cashChange || 0 != gemCost) {
-  		int oilChange = 0;
-  		int gemChange = -1 * gemCost;
+  		//if user is getting cash back, make sure it doesn't exceed his limit
+  		if (cashChange > 0) {
+  			int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash.
+  			int maxCashUserCanGain = maxCash - curCash;
+  			cashChange = Math.min(oilChange, maxCashUserCanGain);
+  		}
+  		
   		//CHARGE THE USER
   		log.info("user before funds change. u=" + u);
   		int num = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);

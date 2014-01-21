@@ -23,7 +23,7 @@ message PurchaseNormStructureRequestProto {
 	//said five cash. (positive number, server will convert it to negative)
 	optional int32 gemsSpent = 5;
 	
-	//positive means refund, negative means charge user
+	//positive means refund, negative means charge user (will always be negative)
 	optional sint32 resourceChange = 6; 
 	optional ResourceType resourceType = 7 [default = CASH];
 }
@@ -77,7 +77,7 @@ message UpgradeNormStructureRequestProto {
 	//said five cash. (positive number, server will convert it to negative)
 	optional int32 gemsSpent = 4;
 	
-	//positive means refund, negative means charge user
+	//positive means refund, negative means charge user (will always be negative)
 	optional sint32 resourceChange = 5; 
 	optional ResourceType resourceType = 6 [default = CASH];
 }
@@ -165,7 +165,7 @@ message NormStructWaitCompleteResponseProto {
 //------------------------------------------------------------------------------------------
 																						//DONE
 message RetrieveCurrencyFromNormStructureRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	repeated StructRetrieval structRetrievals = 2;
 	
 	message StructRetrieval {
@@ -177,7 +177,7 @@ message RetrieveCurrencyFromNormStructureRequestProto {
 
 																						//DONE
 message RetrieveCurrencyFromNormStructureResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	optional RetrieveCurrencyFromNormStructureStatus status = 2;
 	
 	enum RetrieveCurrencyFromNormStructureStatus {

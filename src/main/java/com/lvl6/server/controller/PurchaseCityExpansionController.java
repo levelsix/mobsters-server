@@ -143,7 +143,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			Map<String, Integer> currencyChange) {
 
 		int coinChange = cost * -1;
-		if (!user.updateRelativeCoinsNaive(coinChange)) {
+		if (!user.updateRelativeCashNaive(coinChange)) {
 			log.error("problem with updating coins purchasing a city expansion");
 
 		} else {

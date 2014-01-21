@@ -69,7 +69,7 @@ message EvolutionFinishedResponseProto {
 //------------------------------------------------------------------------------------------
 
 message SubmitMonsterEnhancementRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	
 	//MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
 	repeated UserEnhancementItemProto ueipDelete = 2;
@@ -89,7 +89,7 @@ message SubmitMonsterEnhancementRequestProto {
 }
 
 message SubmitMonsterEnhancementResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	optional SubmitMonsterEnhancementStatus status = 2;
 	
 
@@ -155,7 +155,7 @@ message UpdateMonsterHealthResponseProto {
 //------------------------------------------------------------------------------------------
 
 message HealMonsterRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	
 	//what user deleted from the queue, the ones the server already knows about
 	repeated UserMonsterHealingProto umhDelete = 2; 
@@ -185,7 +185,7 @@ message HealMonsterRequestProto {
 }
 
 message HealMonsterResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	optional HealMonsterStatus status = 2;
 	
 	enum HealMonsterStatus {
@@ -378,12 +378,12 @@ message CombineUserMonsterPiecesResponseProto {
 //------------------------------------------------------------------------------------------
 
 message SellUserMonsterRequestProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	repeated MinimumUserMonsterSellProto sales = 2;
 }
 
 message SellUserMonsterResponseProto {
-	optional MinimumUserProto sender = 1;
+	optional MinimumUserProtoWithMaxResources sender = 1;
 	optional SellUserMonsterStatus status = 2;
 	
 	enum SellUserMonsterStatus {

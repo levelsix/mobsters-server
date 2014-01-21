@@ -33,6 +33,7 @@ import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.Su
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
@@ -67,7 +68,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //		log.info("reqProto=" + reqProto);
 
 		//get data client sent
-		MinimumUserProto senderProto = reqProto.getSender();
+		MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+		MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
 		List<UserEnhancementItemProto> ueipDelete = reqProto.getUeipDeleteList();
 		List<UserEnhancementItemProto> ueipUpdated = reqProto.getUeipUpdateList();
 		List<UserEnhancementItemProto> ueipNew = reqProto.getUeipNewList();
@@ -77,6 +79,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		//positive means refund, negative means charge user
 		int oilChange = reqProto.getOilChange();
 		Timestamp clientTime = new Timestamp((new Date()).getTime());
+		int maxOil= senderResourcesProto.getMaxOil();
 
 		Map<Long, UserEnhancementItemProto> deleteMap = MonsterStuffUtils.
 				convertIntoUserMonsterIdToUeipProtoMap(ueipDelete);
@@ -88,7 +91,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		
 		//set some values to send to the client (the response proto)
 		SubmitMonsterEnhancementResponseProto.Builder resBuilder = SubmitMonsterEnhancementResponseProto.newBuilder();
-		resBuilder.setSender(senderProto);
+		resBuilder.setSender(senderResourcesProto);
 		resBuilder.setStatus(SubmitMonsterEnhancementStatus.FAIL_OTHER);
 
 		server.lockPlayer(senderProto.getUserId(), getClass().getSimpleName());
@@ -121,7 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 				previousOil = aUser.getOil();
 				previousGems = aUser.getGems();
 				successful = writeChangesToDB(aUser, userId, gemsSpent, oilChange,
-						deleteMap, updateMap, newMap, money);
+						deleteMap, updateMap, newMap, money, maxOil);
 			}
 		
 			if (successful) {
@@ -270,13 +273,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			int oilChange, Map<Long, UserEnhancementItemProto> protoDeleteMap,
 		  Map<Long, UserEnhancementItemProto> protoUpdateMap,
 		  Map<Long, UserEnhancementItemProto> protoNewMap,
-		  Map<String, Integer> money) {
+		  Map<String, Integer> money, int maxOil) {
 
 		//CHARGE THE USER
 		int cashChange = 0;
 		int gemChange = -1 * gemsSpent;
 
 		if (0 != oilChange || 0 != gemsSpent) {
+			//if user is getting oil back, make sure it doesn't exceed his limit
+			if (oilChange > 0) {
+				int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil.
+				int maxOilUserCanGain = maxOil - curOil;
+				oilChange = Math.min(oilChange, maxOilUserCanGain);
+			}
+			
 //			log.info("oilChange=" + oilChange + "\t gemChange=" + gemChange);
 			int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 			if (1 != numChange) {

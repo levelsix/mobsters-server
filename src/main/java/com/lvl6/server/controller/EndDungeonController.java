@@ -30,6 +30,7 @@ import com.lvl6.proto.EventDungeonProto.EndDungeonResponseProto.EndDungeonStatus
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -62,17 +63,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     EndDungeonRequestProto reqProto = ((EndDungeonRequestEvent)event).getEndDungeonRequestProto();
 
     //get values sent from the client (the request proto)
-    MinimumUserProto senderProto = reqProto.getSender();
+    MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+    MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
     int userId = senderProto.getUserId();
     long userTaskId = reqProto.getUserTaskId();
     boolean userWon = reqProto.getUserWon();
     Date currentDate = new Date(reqProto.getClientTime());
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
     boolean firstTimeUserWonTask = reqProto.getFirstTimeUserWonTask();
+    int maxCash = senderResourcesProto.getMaxCash();
 
     //set some values to send to the client (the response proto)
     EndDungeonResponseProto.Builder resBuilder = EndDungeonResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
+    resBuilder.setSender(senderResourcesProto);
     resBuilder.setUserWon(userWon);
     resBuilder.setStatus(EndDungeonStatus.FAIL_OTHER); //default
 
@@ -93,8 +96,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	
     	  ut = userTaskList.get(0);
         previousCash = aUser.getCash();
-    	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime,
-    			  money, protos);
+    	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime, money,
+    	  		protos, maxCash);
     	  
     	  resBuilder.setTaskId(ut.getTaskId());
       }
@@ -171,9 +174,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
 
   private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut, boolean userWon,
-		  Timestamp clientTime, Map<String, Integer> money, List<FullUserMonsterProto> protos) {
+		  Timestamp clientTime, Map<String, Integer> money, List<FullUserMonsterProto> protos,
+		  int maxCash) {
 	  int cashGained = ut.getCashGained();
 	  int expGained = ut.getExpGained();
+	  
+	  int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash
+		int maxCashUserCanGain = maxCash - curCash;
+		cashGained = Math.min(cashGained, maxCashUserCanGain);
+		
 	  
 	  if (userWon) {
 		  //update user cash and experience
