@@ -766,7 +766,8 @@ public class UpdateUtils implements UpdateUtil {
 			Map <String, Object> aRow = new HashMap<String, Object>();
 			
 			aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__USER_ID, userId);
-			aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, mhfu.getMonsterForUserId());
+			long monsterForUserId = mhfu.getMonsterForUserId();
+			aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID, monsterForUserId);
 			
 			Date d = mhfu.getExpectedStartTime();
 			if (null != d) {
@@ -778,6 +779,9 @@ public class UpdateUtils implements UpdateUtil {
 //			d = mhfu.getQueuedTime();
 //			Timestamp queuedTime = new Timestamp(d.getTime());
 //			aRow.put(DBConstants.MONSTER_HEALING_FOR_USER__QUEUED_TIME, queuedTime);
+			int enhancingCost = mhfu.getEnhancingCost();
+			aRow.put(DBConstants.MONSTER_ENHANCING_FOR_USER__ENHANCING_COST, enhancingCost);
+			
 			newRows.add(aRow);
 		}
 		

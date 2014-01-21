@@ -168,6 +168,7 @@ public class DBConstants {
   public static final String MONSTER_ENHANCING_FOR_USER__USER_ID = GENERIC__USER_ID;
   public static final String MONSTER_ENHANCING_FOR_USER__MONSTER_FOR_USER_ID = "monster_for_user_id";
   public static final String MONSTER_ENHANCING_FOR_USER__EXPECTED_START_TIME = "expected_start_time";
+  public static final String MONSTER_ENHANCING_FOR_USER__ENHANCING_COST = "enhancing_cost";
 
   /*MONSTER ENHANCING HISTORY*/
   public static final String MONSTER_ENHANCING_HISTORY__ID = "id";
@@ -180,6 +181,8 @@ public class DBConstants {
   public static final String MONSTER_ENHANCING_HISTORY__TIME_OF_ENTRY = "time_of_entry";
   public static final String MONSTER_ENHANCING_HISTORY__IS_FEEDER = "is_feeder";
   public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_CANCELLED = "enhancing_cancelled";
+  public static final String MONSTER_ENHANCING_HISTORY__ENHANCING_COST = "enhancing_cost";
+
 
   /*MONSTER EVOLVING FOR USER*/
   public static final String MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID = "catalyst_user_monster_id";
@@ -238,7 +241,7 @@ public class DBConstants {
   /*MONSTER HEALING HISTORY*/
   public static final String MONSTER_HEALING_HISTORY__USER_ID = "user_id";
   public static final String MONSTER_HEALING_HISTORY__MONSTER_FOR_USER_ID = "monster_for_user_id";
-  public static final String MONSTER_HEALING_HISTORY__EXPECTED_START_TIME = "expected_start_time";
+  public static final String MONSTER_HEALING_HISTORY__QUEUED_TIME = "queued_time";
   public static final String MONSTER_HEALING_HISTORY__DEQUEUED_TIME = "dequeued_time";
   public static final String MONSTER_HEALING_HISTORY__FINISHED_HEALING = "finished_healing";
 

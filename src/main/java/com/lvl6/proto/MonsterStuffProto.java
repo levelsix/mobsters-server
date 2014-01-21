@@ -4991,6 +4991,10 @@ public final class MonsterStuffProto {
     // optional int64 expectedStartTimeMillis = 2;
     boolean hasExpectedStartTimeMillis();
     long getExpectedStartTimeMillis();
+    
+    // optional int32 enhancingCost = 3;
+    boolean hasEnhancingCost();
+    int getEnhancingCost();
   }
   public static final class UserEnhancementItemProto extends
       com.google.protobuf.GeneratedMessage
@@ -5041,9 +5045,20 @@ public final class MonsterStuffProto {
       return expectedStartTimeMillis_;
     }
     
+    // optional int32 enhancingCost = 3;
+    public static final int ENHANCINGCOST_FIELD_NUMBER = 3;
+    private int enhancingCost_;
+    public boolean hasEnhancingCost() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getEnhancingCost() {
+      return enhancingCost_;
+    }
+    
     private void initFields() {
       userMonsterId_ = 0L;
       expectedStartTimeMillis_ = 0L;
+      enhancingCost_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5063,6 +5078,9 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, expectedStartTimeMillis_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, enhancingCost_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -5079,6 +5097,10 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, expectedStartTimeMillis_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, enhancingCost_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5208,6 +5230,8 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         expectedStartTimeMillis_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
+        enhancingCost_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -5254,6 +5278,10 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000002;
         }
         result.expectedStartTimeMillis_ = expectedStartTimeMillis_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.enhancingCost_ = enhancingCost_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5275,6 +5303,9 @@ public final class MonsterStuffProto {
         }
         if (other.hasExpectedStartTimeMillis()) {
           setExpectedStartTimeMillis(other.getExpectedStartTimeMillis());
+        }
+        if (other.hasEnhancingCost()) {
+          setEnhancingCost(other.getEnhancingCost());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5315,6 +5346,11 @@ public final class MonsterStuffProto {
             case 16: {
               bitField0_ |= 0x00000002;
               expectedStartTimeMillis_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              enhancingCost_ = input.readInt32();
               break;
             }
           }
@@ -5361,6 +5397,27 @@ public final class MonsterStuffProto {
       public Builder clearExpectedStartTimeMillis() {
         bitField0_ = (bitField0_ & ~0x00000002);
         expectedStartTimeMillis_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 enhancingCost = 3;
+      private int enhancingCost_ ;
+      public boolean hasEnhancingCost() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getEnhancingCost() {
+        return enhancingCost_;
+      }
+      public Builder setEnhancingCost(int value) {
+        bitField0_ |= 0x00000004;
+        enhancingCost_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearEnhancingCost() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        enhancingCost_ = 0;
         onChanged();
         return this;
       }
@@ -7436,19 +7493,20 @@ public final class MonsterStuffProto {
       "Id\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6" +
       ".proto.UserEnhancementItemProto\0229\n\007feede" +
       "rs\030\003 \003(\0132(.com.lvl6.proto.UserEnhancemen",
-      "tItemProto\"R\n\030UserEnhancementItemProto\022\025" +
+      "tItemProto\"i\n\030UserEnhancementItemProto\022\025" +
       "\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedStartTi" +
-      "meMillis\030\002 \001(\003\"f\n\032UserMonsterCurrentExpP" +
-      "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expectedE" +
-      "xperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H" +
-      "\n\033MinimumUserMonsterSellProto\022\025\n\ruserMon" +
-      "sterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033User" +
-      "CurrentMonsterTeamProto\022\016\n\006userId\030\001 \001(\005\022" +
-      "9\n\013currentTeam\030\002 \003(\0132$.com.lvl6.proto.Fu" +
-      "llUserMonsterProto\"e\n\031UserMonsterEvoluti",
-      "onProto\022\035\n\025catalystUserMonsterId\030\001 \001(\003\022\026" +
-      "\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(" +
-      "\003B\023B\021MonsterStuffProto"
+      "meMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\"f\n" +
+      "\032UserMonsterCurrentExpProto\022\025\n\ruserMonst" +
+      "erId\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025" +
+      "\n\rexpectedLevel\030\003 \001(\005\"H\n\033MinimumUserMons" +
+      "terSellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\nc" +
+      "ashAmount\030\002 \001(\005\"h\n\033UserCurrentMonsterTea" +
+      "mProto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 " +
+      "\003(\0132$.com.lvl6.proto.FullUserMonsterProt",
+      "o\"e\n\031UserMonsterEvolutionProto\022\035\n\025cataly" +
+      "stUserMonsterId\030\001 \001(\003\022\026\n\016userMonsterIds\030" +
+      "\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003B\023B\021MonsterStuff" +
+      "Proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7500,7 +7558,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_UserEnhancementItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserEnhancementItemProto_descriptor,
-              new java.lang.String[] { "UserMonsterId", "ExpectedStartTimeMillis", },
+              new java.lang.String[] { "UserMonsterId", "ExpectedStartTimeMillis", "EnhancingCost", },
               com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.class,
               com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor =

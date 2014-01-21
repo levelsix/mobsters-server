@@ -493,6 +493,8 @@ public class CreateInfoProtoUtils {
   		ueipb.setExpectedStartTimeMillis(startTime.getTime());
   	}
   	
+  	ueipb.setEnhancingCost(mefu.getEnhancingCost());
+  	
   	return ueipb.build();
   }
 

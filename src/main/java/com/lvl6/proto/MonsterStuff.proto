@@ -116,9 +116,11 @@ message UserEnhancementProto {
 }
 
 message UserEnhancementItemProto {
-	//MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime
+	//MONSTER BEING ENHANCED WILL HAVE NULL FOR expectedStartTime and not have
+	//enhancingCost set or have it set to 0
 	optional int64 userMonsterId = 1;
 	optional int64 expectedStartTimeMillis = 2;
+	optional int32 enhancingCost = 3;
 }
 
 //------------------------------------------------------------------------------------------

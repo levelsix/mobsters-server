@@ -121,9 +121,11 @@ import com.lvl6.utils.utilmethods.StringUtils;
 		//    } catch (SQLException e) {
 		//    	log.error("expected start time might be null userId=" + userId, e);
 		//    }
+		
+		int enhancingCost = rs.getInt(i++);
 
 		MonsterEnhancingForUser userMonster = new MonsterEnhancingForUser(userId,
-				monsterForUserId, expectedStartTime);//, queuedTime);
+				monsterForUserId, expectedStartTime, enhancingCost);//, queuedTime);
 		return userMonster;
 	}
 
