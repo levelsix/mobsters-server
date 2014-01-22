@@ -148,7 +148,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Timestamp clientTime) {
 	  
 	  //update user diamonds
-	  int diamondChange = ControllerConstants.TASK_ACTION__REVIVE_COST;
+	  int diamondChange = -1 * ControllerConstants.TASK_ACTION__REVIVE_COST;
 	  if (!updateUser(u, diamondChange)) {
 		  log.error("unexpected error: could not decrement user's gold by " +
 				  diamondChange);

@@ -85,3 +85,27 @@ message ReviveInDungeonResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+//user can only spend gems to end the cool down timer
+message EndPersistentEventCoolDownTimerRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//if the user is going to speed up the evolution process
+	//(positive number, server will convert it to negative)
+	optional int32 gemsSpent = 2; 
+	
+	optional int32 eventPersistentId = 3;
+}
+
+message EndPersistentEventCoolDownTimerResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional EndPersistentEventCoolDownTimerStatus status = 2;
+	
+	enum EndPersistentEventCoolDownTimerStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_FUNDS = 2;
+		FAIL_OTHER = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------

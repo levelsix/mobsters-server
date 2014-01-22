@@ -43,4 +43,6 @@ public interface DeleteUtil {
   
   public abstract int deleteMonsterEvolvingForUser(long catalystUserMonsterId,
   		long userMonsterIdOne, long userMonsterIdTwo, int userId);
+  
+  public abstract int deleteEventPersistentForUser(int userId, int eventId);
 }

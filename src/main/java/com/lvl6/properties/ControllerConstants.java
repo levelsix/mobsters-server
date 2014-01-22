@@ -58,6 +58,11 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
 	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
 
+	//EVENT PERSISTENT STUFF
+	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
+	
+	//TASK ACTION (MOST LIKELY NOT GOING TO BE USED)
+	public static final int TASK_ACTION__REVIVE_COST = 10;
 	
 	
 	//old aoc constants
@@ -209,7 +214,6 @@ public class ControllerConstants {
   
   //TASK ACTION
 //  public static final int TASK_ACTION__MAX_CITY_RANK = 5;
-  public static final int TASK_ACTION__REVIVE_COST = 10;
   
   //PURCHASE NORM STRUCTURE
   public static final int PURCHASE_NORM_STRUCTURE__MAX_NUM_OF_CERTAIN_STRUCTURE = 3;

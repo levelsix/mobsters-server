@@ -274,4 +274,16 @@ public class DeleteUtils implements DeleteUtil {
 		return numDeleted;
 	}
 	
+	@Override
+	public int deleteEventPersistentForUser(int userId, int eventId) {
+		String tableName = DBConstants.TABLE_EVENT_PERSISTENT_FOR_USER;
+		
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
+		conditionParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID, eventId);
+
+		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
+		return numDeleted;
+	}
+	
 }
