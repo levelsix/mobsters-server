@@ -57,7 +57,7 @@ message BoosterDisplayItemProto {
 	//true means monster, false means gems
 	optional bool isMonster = 2;
 	optional bool isComplete = 3;
-	optional MonsterProto.MonsterQuality quality = 4;
+	optional MonsterProto.MonsterQuality quality = 4 [default = COMMON];
 	optional int32 gemReward = 5;
 	optional int32 quantity = 6;
 }
