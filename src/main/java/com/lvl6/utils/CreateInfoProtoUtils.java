@@ -2,6 +2,7 @@ package com.lvl6.utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,7 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
@@ -71,6 +73,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificatio
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
@@ -1148,7 +1151,8 @@ public class CreateInfoProtoUtils {
     return bldr.build();
   }
 
-  public static MonsterProto createMonsterProto(Monster aMonster) {
+  public static MonsterProto createMonsterProto(Monster aMonster,
+  		Map<Integer, MonsterLevelInfo> levelToInfo) {
     MonsterProto.Builder mpb = MonsterProto.newBuilder();
 
     mpb.setMonsterId(aMonster.getId());
@@ -1218,7 +1222,36 @@ public class CreateInfoProtoUtils {
     int enhanceFeederExp = aMonster.getEnhancingFeederExp();
     mpb.setEnhancingFeederExp(enhanceFeederExp);
     
+    
+    List<MonsterLevelInfoProto> lvlInfoProtos = createMonsterLevelInfoFromInfo(levelToInfo);
+    mpb.addAllLvlInfo(lvlInfoProtos);
     return mpb.build();
+  }
+  
+  public static List<MonsterLevelInfoProto> createMonsterLevelInfoFromInfo(
+  		Map<Integer, MonsterLevelInfo> lvlToInfo) {
+  	
+  	//order the MonsterLevelInfoProto by ascending lvl
+  	Set<Integer> lvls = lvlToInfo.keySet();
+  	List<Integer> ascendingLvls = new ArrayList<Integer>(lvls);
+  	Collections.sort(ascendingLvls);
+
+  	List<MonsterLevelInfoProto> lvlInfoProtos = new ArrayList<MonsterLevelInfoProto>();
+  	for (Integer lvl : ascendingLvls) {
+  		MonsterLevelInfo info = lvlToInfo.get(lvl);
+  		
+  		//create the proto
+  		MonsterLevelInfoProto.Builder mlipb = MonsterLevelInfoProto.newBuilder();
+  		mlipb.setLvl(lvl);
+  		mlipb.setHp(info.getHp());
+  		mlipb.setAttack(info.getAttack());
+  		mlipb.setFeederExp(info.getFeederExp());
+  		mlipb.setCurLvlRequiredExp(info.getCurLvlRequiredExp());
+  		
+  		lvlInfoProtos.add(mlipb.build());
+  	}
+  	
+  	return lvlInfoProtos;
   }
   
   public static UserFacebookInviteForSlotProto createUserFacebookInviteForSlotProtoFromInvite(

@@ -34,6 +34,7 @@ import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
@@ -90,6 +91,7 @@ import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -562,8 +564,8 @@ public class MiscMethods {
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
+    MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
-//    MonsterRewardRetrieveUtils.reload(); //not used
     ProfanityRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
@@ -1278,11 +1280,19 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   		sdpb.addAllTasks(ftp);
   	}
   }
+  //TODO: FIGURE OUT MORE EFFICIENT WAY TO DO THIS IF NEEDED
+  //ONE WAY WOULD BE TO STORE THE MAP OF MONSTER LEVEL INFO DIRECTLY IN THE MONSTER
   private static void setMonsters(Builder sdpb) {
   	//Monsters
   	Map<Integer, Monster> monsters = MonsterRetrieveUtils.getMonsterIdsToMonsters();
   	for (Monster monster : monsters.values()) {
-  		sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster));
+  		
+  		//get the level info for this monster
+  		int monsterId = monster.getId();
+  		Map<Integer, MonsterLevelInfo> monsterLvlInfo = MonsterLevelInfoRetrieveUtils
+  				.getMonsterLevelInfoForMonsterId(monsterId);
+  		
+  		sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster, monsterLvlInfo));
   	}
   }
   private static void setUserLevelStuff(Builder sdpb, int userId) {

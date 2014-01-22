@@ -47,6 +47,9 @@ message MonsterProto {
 	optional int32 enhancingFeederExp = 29;
 	
 	
+	//stores lvl determined hp, attack, exp,  among other things
+	repeated MonsterLevelInfoProto lvlInfo = 30;
+	
 	enum MonsterQuality {
 		COMMON = 1;
 		RARE = 2;
@@ -65,6 +68,17 @@ message MonsterProto {
 		
 		ROCK = 6; //damages everything
 	}
+}
+
+message MonsterLevelInfoProto {
+	optional int32 lvl = 1;
+	optional int32 hp = 2;
+	optional int32 attack = 3;
+	
+	//exp required to get to current level
+	optional int32 curLvlRequiredExp = 4;
+	
+	optional int32 feederExp = 5;
 }
 
 //------------------------------------------------------------------------------------------

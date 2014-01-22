@@ -32,7 +32,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_FOR_USER_DELETED = "monster_for_user_deleted";
   public static final String TABLE_MONSTER_HEALING_FOR_USER = "monster_healing_for_user";
   public static final String TABLE_MONSTER_HEALING_HISTORY = "monster_healing_history";
-  public static final String TABLE_MONSTER_REWARD = "monster_reward";
+  public static final String TABLE_MONSTER_LEVEL_INFO = "monster_level_info";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";

@@ -126,6 +126,16 @@ public final class MonsterStuffProto {
     // optional int32 enhancingFeederExp = 29;
     boolean hasEnhancingFeederExp();
     int getEnhancingFeederExp();
+    
+    // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 30;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> 
+        getLvlInfoList();
+    com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto getLvlInfo(int index);
+    int getLvlInfoCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder> 
+        getLvlInfoOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder getLvlInfoOrBuilder(
+        int index);
   }
   public static final class MonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -781,6 +791,27 @@ public final class MonsterStuffProto {
       return enhancingFeederExp_;
     }
     
+    // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 30;
+    public static final int LVLINFO_FIELD_NUMBER = 30;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> lvlInfo_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> getLvlInfoList() {
+      return lvlInfo_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder> 
+        getLvlInfoOrBuilderList() {
+      return lvlInfo_;
+    }
+    public int getLvlInfoCount() {
+      return lvlInfo_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto getLvlInfo(int index) {
+      return lvlInfo_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder getLvlInfoOrBuilder(
+        int index) {
+      return lvlInfo_.get(index);
+    }
+    
     private void initFields() {
       monsterId_ = 0;
       name_ = "";
@@ -811,6 +842,7 @@ public final class MonsterStuffProto {
       carrotEvolved_ = "";
       description_ = "";
       enhancingFeederExp_ = 0;
+      lvlInfo_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -910,6 +942,9 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x10000000) == 0x10000000)) {
         output.writeInt32(29, enhancingFeederExp_);
+      }
+      for (int i = 0; i < lvlInfo_.size(); i++) {
+        output.writeMessage(30, lvlInfo_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1036,6 +1071,10 @@ public final class MonsterStuffProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(29, enhancingFeederExp_);
       }
+      for (int i = 0; i < lvlInfo_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(30, lvlInfo_.get(i));
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -1152,6 +1191,7 @@ public final class MonsterStuffProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getLvlInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1218,6 +1258,12 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x08000000);
         enhancingFeederExp_ = 0;
         bitField0_ = (bitField0_ & ~0x10000000);
+        if (lvlInfoBuilder_ == null) {
+          lvlInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x20000000);
+        } else {
+          lvlInfoBuilder_.clear();
+        }
         return this;
       }
       
@@ -1372,6 +1418,15 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x10000000;
         }
         result.enhancingFeederExp_ = enhancingFeederExp_;
+        if (lvlInfoBuilder_ == null) {
+          if (((bitField0_ & 0x20000000) == 0x20000000)) {
+            lvlInfo_ = java.util.Collections.unmodifiableList(lvlInfo_);
+            bitField0_ = (bitField0_ & ~0x20000000);
+          }
+          result.lvlInfo_ = lvlInfo_;
+        } else {
+          result.lvlInfo_ = lvlInfoBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1474,6 +1529,32 @@ public final class MonsterStuffProto {
         }
         if (other.hasEnhancingFeederExp()) {
           setEnhancingFeederExp(other.getEnhancingFeederExp());
+        }
+        if (lvlInfoBuilder_ == null) {
+          if (!other.lvlInfo_.isEmpty()) {
+            if (lvlInfo_.isEmpty()) {
+              lvlInfo_ = other.lvlInfo_;
+              bitField0_ = (bitField0_ & ~0x20000000);
+            } else {
+              ensureLvlInfoIsMutable();
+              lvlInfo_.addAll(other.lvlInfo_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.lvlInfo_.isEmpty()) {
+            if (lvlInfoBuilder_.isEmpty()) {
+              lvlInfoBuilder_.dispose();
+              lvlInfoBuilder_ = null;
+              lvlInfo_ = other.lvlInfo_;
+              bitField0_ = (bitField0_ & ~0x20000000);
+              lvlInfoBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getLvlInfoFieldBuilder() : null;
+            } else {
+              lvlInfoBuilder_.addAllMessages(other.lvlInfo_);
+            }
+          }
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1661,6 +1742,12 @@ public final class MonsterStuffProto {
             case 232: {
               bitField0_ |= 0x10000000;
               enhancingFeederExp_ = input.readInt32();
+              break;
+            }
+            case 242: {
+              com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addLvlInfo(subBuilder.buildPartial());
               break;
             }
           }
@@ -2404,6 +2491,192 @@ public final class MonsterStuffProto {
         return this;
       }
       
+      // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 30;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> lvlInfo_ =
+        java.util.Collections.emptyList();
+      private void ensureLvlInfoIsMutable() {
+        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
+          lvlInfo_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto>(lvlInfo_);
+          bitField0_ |= 0x20000000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder> lvlInfoBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> getLvlInfoList() {
+        if (lvlInfoBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(lvlInfo_);
+        } else {
+          return lvlInfoBuilder_.getMessageList();
+        }
+      }
+      public int getLvlInfoCount() {
+        if (lvlInfoBuilder_ == null) {
+          return lvlInfo_.size();
+        } else {
+          return lvlInfoBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto getLvlInfo(int index) {
+        if (lvlInfoBuilder_ == null) {
+          return lvlInfo_.get(index);
+        } else {
+          return lvlInfoBuilder_.getMessage(index);
+        }
+      }
+      public Builder setLvlInfo(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto value) {
+        if (lvlInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLvlInfoIsMutable();
+          lvlInfo_.set(index, value);
+          onChanged();
+        } else {
+          lvlInfoBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setLvlInfo(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder builderForValue) {
+        if (lvlInfoBuilder_ == null) {
+          ensureLvlInfoIsMutable();
+          lvlInfo_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          lvlInfoBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addLvlInfo(com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto value) {
+        if (lvlInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLvlInfoIsMutable();
+          lvlInfo_.add(value);
+          onChanged();
+        } else {
+          lvlInfoBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addLvlInfo(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto value) {
+        if (lvlInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLvlInfoIsMutable();
+          lvlInfo_.add(index, value);
+          onChanged();
+        } else {
+          lvlInfoBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addLvlInfo(
+          com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder builderForValue) {
+        if (lvlInfoBuilder_ == null) {
+          ensureLvlInfoIsMutable();
+          lvlInfo_.add(builderForValue.build());
+          onChanged();
+        } else {
+          lvlInfoBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addLvlInfo(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder builderForValue) {
+        if (lvlInfoBuilder_ == null) {
+          ensureLvlInfoIsMutable();
+          lvlInfo_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          lvlInfoBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllLvlInfo(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> values) {
+        if (lvlInfoBuilder_ == null) {
+          ensureLvlInfoIsMutable();
+          super.addAll(values, lvlInfo_);
+          onChanged();
+        } else {
+          lvlInfoBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearLvlInfo() {
+        if (lvlInfoBuilder_ == null) {
+          lvlInfo_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x20000000);
+          onChanged();
+        } else {
+          lvlInfoBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeLvlInfo(int index) {
+        if (lvlInfoBuilder_ == null) {
+          ensureLvlInfoIsMutable();
+          lvlInfo_.remove(index);
+          onChanged();
+        } else {
+          lvlInfoBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder getLvlInfoBuilder(
+          int index) {
+        return getLvlInfoFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder getLvlInfoOrBuilder(
+          int index) {
+        if (lvlInfoBuilder_ == null) {
+          return lvlInfo_.get(index);  } else {
+          return lvlInfoBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder> 
+           getLvlInfoOrBuilderList() {
+        if (lvlInfoBuilder_ != null) {
+          return lvlInfoBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(lvlInfo_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder addLvlInfoBuilder() {
+        return getLvlInfoFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder addLvlInfoBuilder(
+          int index) {
+        return getLvlInfoFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder> 
+           getLvlInfoBuilderList() {
+        return getLvlInfoFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder> 
+          getLvlInfoFieldBuilder() {
+        if (lvlInfoBuilder_ == null) {
+          lvlInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder>(
+                  lvlInfo_,
+                  ((bitField0_ & 0x20000000) == 0x20000000),
+                  getParentForChildren(),
+                  isClean());
+          lvlInfo_ = null;
+        }
+        return lvlInfoBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MonsterProto)
     }
     
@@ -2413,6 +2686,572 @@ public final class MonsterStuffProto {
     }
     
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MonsterProto)
+  }
+  
+  public interface MonsterLevelInfoProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 lvl = 1;
+    boolean hasLvl();
+    int getLvl();
+    
+    // optional int32 hp = 2;
+    boolean hasHp();
+    int getHp();
+    
+    // optional int32 attack = 3;
+    boolean hasAttack();
+    int getAttack();
+    
+    // optional int32 curLvlRequiredExp = 4;
+    boolean hasCurLvlRequiredExp();
+    int getCurLvlRequiredExp();
+    
+    // optional int32 feederExp = 5;
+    boolean hasFeederExp();
+    int getFeederExp();
+  }
+  public static final class MonsterLevelInfoProto extends
+      com.google.protobuf.GeneratedMessage
+      implements MonsterLevelInfoProtoOrBuilder {
+    // Use MonsterLevelInfoProto.newBuilder() to construct.
+    private MonsterLevelInfoProto(Builder builder) {
+      super(builder);
+    }
+    private MonsterLevelInfoProto(boolean noInit) {}
+    
+    private static final MonsterLevelInfoProto defaultInstance;
+    public static MonsterLevelInfoProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MonsterLevelInfoProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MonsterLevelInfoProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 lvl = 1;
+    public static final int LVL_FIELD_NUMBER = 1;
+    private int lvl_;
+    public boolean hasLvl() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getLvl() {
+      return lvl_;
+    }
+    
+    // optional int32 hp = 2;
+    public static final int HP_FIELD_NUMBER = 2;
+    private int hp_;
+    public boolean hasHp() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getHp() {
+      return hp_;
+    }
+    
+    // optional int32 attack = 3;
+    public static final int ATTACK_FIELD_NUMBER = 3;
+    private int attack_;
+    public boolean hasAttack() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getAttack() {
+      return attack_;
+    }
+    
+    // optional int32 curLvlRequiredExp = 4;
+    public static final int CURLVLREQUIREDEXP_FIELD_NUMBER = 4;
+    private int curLvlRequiredExp_;
+    public boolean hasCurLvlRequiredExp() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getCurLvlRequiredExp() {
+      return curLvlRequiredExp_;
+    }
+    
+    // optional int32 feederExp = 5;
+    public static final int FEEDEREXP_FIELD_NUMBER = 5;
+    private int feederExp_;
+    public boolean hasFeederExp() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getFeederExp() {
+      return feederExp_;
+    }
+    
+    private void initFields() {
+      lvl_ = 0;
+      hp_ = 0;
+      attack_ = 0;
+      curLvlRequiredExp_ = 0;
+      feederExp_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, lvl_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, hp_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, attack_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, curLvlRequiredExp_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, feederExp_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, lvl_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, hp_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, attack_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, curLvlRequiredExp_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, feederExp_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MonsterLevelInfoProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        lvl_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        hp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        attack_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        curLvlRequiredExp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        feederExp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto getDefaultInstanceForType() {
+        return com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto build() {
+        com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto buildPartial() {
+        com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto result = new com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.lvl_ = lvl_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.hp_ = hp_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.attack_ = attack_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.curLvlRequiredExp_ = curLvlRequiredExp_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.feederExp_ = feederExp_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto) {
+          return mergeFrom((com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto other) {
+        if (other == com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.getDefaultInstance()) return this;
+        if (other.hasLvl()) {
+          setLvl(other.getLvl());
+        }
+        if (other.hasHp()) {
+          setHp(other.getHp());
+        }
+        if (other.hasAttack()) {
+          setAttack(other.getAttack());
+        }
+        if (other.hasCurLvlRequiredExp()) {
+          setCurLvlRequiredExp(other.getCurLvlRequiredExp());
+        }
+        if (other.hasFeederExp()) {
+          setFeederExp(other.getFeederExp());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              lvl_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              hp_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              attack_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              curLvlRequiredExp_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              feederExp_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 lvl = 1;
+      private int lvl_ ;
+      public boolean hasLvl() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getLvl() {
+        return lvl_;
+      }
+      public Builder setLvl(int value) {
+        bitField0_ |= 0x00000001;
+        lvl_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLvl() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        lvl_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 hp = 2;
+      private int hp_ ;
+      public boolean hasHp() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getHp() {
+        return hp_;
+      }
+      public Builder setHp(int value) {
+        bitField0_ |= 0x00000002;
+        hp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHp() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        hp_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 attack = 3;
+      private int attack_ ;
+      public boolean hasAttack() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getAttack() {
+        return attack_;
+      }
+      public Builder setAttack(int value) {
+        bitField0_ |= 0x00000004;
+        attack_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAttack() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        attack_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 curLvlRequiredExp = 4;
+      private int curLvlRequiredExp_ ;
+      public boolean hasCurLvlRequiredExp() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getCurLvlRequiredExp() {
+        return curLvlRequiredExp_;
+      }
+      public Builder setCurLvlRequiredExp(int value) {
+        bitField0_ |= 0x00000008;
+        curLvlRequiredExp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCurLvlRequiredExp() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        curLvlRequiredExp_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 feederExp = 5;
+      private int feederExp_ ;
+      public boolean hasFeederExp() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getFeederExp() {
+        return feederExp_;
+      }
+      public Builder setFeederExp(int value) {
+        bitField0_ |= 0x00000010;
+        feederExp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFeederExp() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        feederExp_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MonsterLevelInfoProto)
+    }
+    
+    static {
+      defaultInstance = new MonsterLevelInfoProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MonsterLevelInfoProto)
   }
   
   public interface FullUserMonsterProtoOrBuilder
@@ -7400,6 +8239,11 @@ public final class MonsterStuffProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MonsterProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_MonsterLevelInfoProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -7453,7 +8297,7 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\302\007\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\372\007\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
       "\030\002 \001(\t\022\024\n\014monsterGroup\030\003 \001(\t\022<\n\007quality\030" +
       "\004 \001(\0162+.com.lvl6.proto.MonsterProto.Mons" +
@@ -7473,40 +8317,44 @@ public final class MonsterStuffProto {
       "\n\033numCatalystMonstersRequired\030\033 \001(\005\022\027\n\017c" +
       "arrotRecruited\030\025 \001(\t\022\026\n\016carrotDefeated\030\026" +
       " \001(\t\022\025\n\rcarrotEvolved\030\027 \001(\t\022\023\n\013descripti",
-      "on\030\030 \001(\t\022\032\n\022enhancingFeederExp\030\035 \001(\005\"J\n\016" +
-      "MonsterQuality\022\n\n\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005" +
-      "ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEGENDARY\020\005\"W\n\016Mons" +
-      "terElement\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER" +
-      "\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\022\010\n\004ROCK\020" +
-      "\006\"\345\001\n\024FullUserMonsterProto\022\025\n\ruserMonste" +
-      "rId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003" +
-      " \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005" +
-      " \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tnumPieces" +
-      "\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030\n\020combineSta",
-      "rtTime\030\t \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\"\204\001\n\027Us" +
-      "erMonsterHealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n" +
-      "\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTimeMillis" +
-      "\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010priori" +
-      "ty\030\006 \001(\005\"M\n\035UserMonsterCurrentHealthProt" +
-      "o\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentHealt" +
-      "h\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006user" +
-      "Id\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6" +
-      ".proto.UserEnhancementItemProto\0229\n\007feede" +
-      "rs\030\003 \003(\0132(.com.lvl6.proto.UserEnhancemen",
-      "tItemProto\"i\n\030UserEnhancementItemProto\022\025" +
-      "\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedStartTi" +
-      "meMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\"f\n" +
-      "\032UserMonsterCurrentExpProto\022\025\n\ruserMonst" +
-      "erId\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025" +
-      "\n\rexpectedLevel\030\003 \001(\005\"H\n\033MinimumUserMons" +
-      "terSellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\nc" +
-      "ashAmount\030\002 \001(\005\"h\n\033UserCurrentMonsterTea" +
-      "mProto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 " +
-      "\003(\0132$.com.lvl6.proto.FullUserMonsterProt",
-      "o\"e\n\031UserMonsterEvolutionProto\022\035\n\025cataly" +
-      "stUserMonsterId\030\001 \001(\003\022\026\n\016userMonsterIds\030" +
-      "\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003B\023B\021MonsterStuff" +
-      "Proto"
+      "on\030\030 \001(\t\022\032\n\022enhancingFeederExp\030\035 \001(\005\0226\n\007" +
+      "lvlInfo\030\036 \003(\0132%.com.lvl6.proto.MonsterLe" +
+      "velInfoProto\"J\n\016MonsterQuality\022\n\n\006COMMON" +
+      "\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEG" +
+      "ENDARY\020\005\"W\n\016MonsterElement\022\010\n\004FIRE\020\001\022\t\n\005" +
+      "GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DAR" +
+      "KNESS\020\005\022\010\n\004ROCK\020\006\"n\n\025MonsterLevelInfoPro" +
+      "to\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\016\n\006attack\030\003 " +
+      "\001(\005\022\031\n\021curLvlRequiredExp\030\004 \001(\005\022\021\n\tfeeder" +
+      "Exp\030\005 \001(\005\"\345\001\n\024FullUserMonsterProto\022\025\n\rus",
+      "erMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmon" +
+      "sterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurr" +
+      "entLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tn" +
+      "umPieces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030\n\020co" +
+      "mbineStartTime\030\t \001(\003\022\023\n\013teamSlotNum\030\n \001(" +
+      "\005\"\204\001\n\027UserMonsterHealingProto\022\016\n\006userId\030" +
+      "\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTi" +
+      "meMillis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020" +
+      "\n\010priority\030\006 \001(\005\"M\n\035UserMonsterCurrentHe" +
+      "althProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurr",
+      "entHealth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto" +
+      "\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(." +
+      "com.lvl6.proto.UserEnhancementItemProto\022" +
+      "9\n\007feeders\030\003 \003(\0132(.com.lvl6.proto.UserEn" +
+      "hancementItemProto\"i\n\030UserEnhancementIte" +
+      "mProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expecte" +
+      "dStartTimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030" +
+      "\003 \001(\005\"f\n\032UserMonsterCurrentExpProto\022\025\n\ru" +
+      "serMonsterId\030\001 \001(\003\022\032\n\022expectedExperience" +
+      "\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H\n\033Minimum",
+      "UserMonsterSellProto\022\025\n\ruserMonsterId\030\001 " +
+      "\001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033UserCurrentMo" +
+      "nsterTeamProto\022\016\n\006userId\030\001 \001(\005\0229\n\013curren" +
+      "tTeam\030\002 \003(\0132$.com.lvl6.proto.FullUserMon" +
+      "sterProto\"e\n\031UserMonsterEvolutionProto\022\035" +
+      "\n\025catalystUserMonsterId\030\001 \001(\003\022\026\n\016userMon" +
+      "sterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003B\023B\021Mons" +
+      "terStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7518,11 +8366,19 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_MonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "Element", "BaseHp", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "ElementOneDmg", "ElementTwoDmg", "ElementThreeDmg", "ElementFourDmg", "ElementFiveDmg", "ElementSixDmg", "HpLevelMultiplier", "AttackLevelMultiplier", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "EnhancingFeederExp", },
+              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "Element", "BaseHp", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "ElementOneDmg", "ElementTwoDmg", "ElementThreeDmg", "ElementFourDmg", "ElementFiveDmg", "ElementSixDmg", "HpLevelMultiplier", "AttackLevelMultiplier", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "EnhancingFeederExp", "LvlInfo", },
               com.lvl6.proto.MonsterStuffProto.MonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder.class);
-          internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor =
+          internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor =
             getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_MonsterLevelInfoProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor,
+              new java.lang.String[] { "Lvl", "Hp", "Attack", "CurLvlRequiredExp", "FeederExp", },
+              com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.class,
+              com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder.class);
+          internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor =
+            getDescriptor().getMessageTypes().get(2);
           internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor,
@@ -7530,7 +8386,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor =
-            getDescriptor().getMessageTypes().get(2);
+            getDescriptor().getMessageTypes().get(3);
           internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor,
@@ -7538,7 +8394,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor =
-            getDescriptor().getMessageTypes().get(3);
+            getDescriptor().getMessageTypes().get(4);
           internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor,
@@ -7546,7 +8402,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder.class);
           internal_static_com_lvl6_proto_UserEnhancementProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_com_lvl6_proto_UserEnhancementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserEnhancementProto_descriptor,
@@ -7554,7 +8410,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.class,
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder.class);
           internal_static_com_lvl6_proto_UserEnhancementItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_com_lvl6_proto_UserEnhancementItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserEnhancementItemProto_descriptor,
@@ -7562,7 +8418,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.class,
               com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor,
@@ -7570,7 +8426,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_descriptor,
@@ -7578,7 +8434,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto.class,
               com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto.Builder.class);
           internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_descriptor,
@@ -7586,7 +8442,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.class,
               com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterEvolutionProto_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_com_lvl6_proto_UserMonsterEvolutionProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterEvolutionProto_descriptor,
