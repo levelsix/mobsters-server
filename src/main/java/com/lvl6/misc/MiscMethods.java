@@ -86,7 +86,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
-//import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
@@ -558,7 +558,7 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
 //    ClanBossRetrieveUtils.reload();
 //    ClanBossRewardRetrieveUtils.reload();
-//    EventPersistentRetrieveUtils.reload();
+    EventPersistentRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
@@ -1477,14 +1477,14 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   }
   
   private static void setEvents(Builder sdpb) {
-//  	Map<Integer, EventPersistent> idsToEvents = EventPersistentRetrieveUtils
-//  			.getAllEventIdsToEvents();
-//  	for (Integer eventId: idsToEvents.keySet()) {
-//  		EventPersistent event  = idsToEvents.get(eventId);
-//  		PersistentEventProto eventProto = CreateInfoProtoUtils
-//  				.createPersistentEventProtoFromEvent(event);
-//  		sdpb.addEvents(eventProto);
-//  	}
+  	Map<Integer, EventPersistent> idsToEvents = EventPersistentRetrieveUtils
+  			.getAllEventIdsToEvents();
+  	for (Integer eventId: idsToEvents.keySet()) {
+  		EventPersistent event  = idsToEvents.get(eventId);
+  		PersistentEventProto eventProto = CreateInfoProtoUtils
+  				.createPersistentEventProtoFromEvent(event);
+  		sdpb.addEvents(eventProto);
+  	}
   }
 
 }
