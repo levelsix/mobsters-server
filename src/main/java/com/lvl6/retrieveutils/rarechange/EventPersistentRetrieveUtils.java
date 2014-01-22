@@ -50,35 +50,35 @@ import com.lvl6.utils.DBConnection;
   
   private static void setStaticEventIdsToEvents() {
 	  log.debug("setting static map of id§ to EventPersistent");
-
-	    Connection conn = DBConnection.get().getConnection();
-	    ResultSet rs = null;
-	    try {
-	    	if (conn != null) {
-	    		rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
-
-	    		if (rs != null) {
-	    			try {
-	    				rs.last();
-	    				rs.beforeFirst();
-	    				Map<Integer, EventPersistent> idToEvent = new HashMap<Integer, EventPersistent>();
-	    				while(rs.next()) {  //should only be one
-	    					EventPersistent cec = convertRSRowToCityEventPersistent(rs);
-	    					if (null != cec)
-	    						idToEvent.put(cec.getId(), cec);
-	    				}
-	    				eventIdToEvent = idToEvent;
-	    			} catch (SQLException e) {
-	    				log.error("problem with database call.", e);
-
-	    			}
-	    		}    
-	    	}
-	    } catch (Exception e) {
-	    	log.error("event persistent retrieve db error.", e);
-	    } finally {
-	    	DBConnection.get().close(rs, null, conn);
-	    }
+	  eventIdToEvent = new HashMap<Integer, EventPersistent>();
+//	    Connection conn = DBConnection.get().getConnection();
+//	    ResultSet rs = null;
+//	    try {
+//	    	if (conn != null) {
+//	    		rs = DBConnection.get().selectWholeTable(conn, TABLE_NAME);
+//
+//	    		if (rs != null) {
+//	    			try {
+//	    				rs.last();
+//	    				rs.beforeFirst();
+//	    				Map<Integer, EventPersistent> idToEvent = new HashMap<Integer, EventPersistent>();
+//	    				while(rs.next()) {  //should only be one
+//	    					EventPersistent cec = convertRSRowToCityEventPersistent(rs);
+//	    					if (null != cec)
+//	    						idToEvent.put(cec.getId(), cec);
+//	    				}
+//	    				eventIdToEvent = idToEvent;
+//	    			} catch (SQLException e) {
+//	    				log.error("problem with database call.", e);
+//
+//	    			}
+//	    		}    
+//	    	}
+//	    } catch (Exception e) {
+//	    	log.error("event persistent retrieve db error.", e);
+//	    } finally {
+//	    	DBConnection.get().close(rs, null, conn);
+//	    }
   }
   
   private static EventPersistent convertRSRowToCityEventPersistent(ResultSet rs) throws SQLException {
