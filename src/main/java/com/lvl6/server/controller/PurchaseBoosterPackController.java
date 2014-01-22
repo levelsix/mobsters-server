@@ -348,7 +348,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	currencyChange += gemReward;
   	
   	//update user's money
-  	if (!user.updateRelativeDiamondsNaive(currencyChange)) {
+  	if (!user.updateRelativeGemsNaive(currencyChange)) {
   		log.error("could not change user's money. gemPrice=" + gemPrice + "\t gemReward=" +
   				gemReward + "\t change=" + currencyChange);
   		return false;

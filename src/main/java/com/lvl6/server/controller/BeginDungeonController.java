@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginDungeonRequestEvent;
 import com.lvl6.events.response.BeginDungeonResponseEvent;
+import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStage;
@@ -76,6 +77,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     //if is event, start the cool down timer in event_persistent_for_user
     boolean isEvent = reqProto.getIsEvent();
     int eventId = reqProto.getPersistentEventId();
+    int gemsSpent = reqProto.getGemsSpent();
     
     //set some values to send to the client (the response proto)
     BeginDungeonResponseProto.Builder resBuilder = BeginDungeonResponseProto.newBuilder();
@@ -100,7 +102,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	//determine the specifics for each stage (stored in stageNumsToProtos)
       	//then record specifics in db
     	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap, curTime,
-    			  isEvent, eventId, userTaskIdList, stageNumsToProtos);
+    			  isEvent, eventId, gemsSpent, userTaskIdList, stageNumsToProtos);
       }
       if (successful) {
     	  setResponseBuilder(resBuilder, userTaskIdList, stageNumsToProtos);
@@ -111,10 +113,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       resEvent.setBeginDungeonResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 
-//      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-//          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-//      resEventUpdate.setTag(event.getTag());
-//      server.writeEvent(resEventUpdate);
+      if (0 != gemsSpent) {
+      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+      	resEventUpdate.setTag(event.getTag());
+      	server.writeEvent(resEventUpdate);
+      }
     } catch (Exception e) {
       log.error("exception in BeginDungeonController processEvent", e);
       //don't let the client hang
@@ -235,7 +239,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
 		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, boolean isEvent, int eventId,
-		  List<Long> utIdList, Map<Integer, TaskStageProto> stageNumsToProtos) {
+		  int gemsSpent, List<Long> utIdList, Map<Integer, TaskStageProto> stageNumsToProtos) {
 	  
 	  //local vars storing eventual db data (accounting for multiple monsters in stage)
 	  Map<Integer, List<Integer>> stageNumsToSilvers = new HashMap<Integer, List<Integer>>();
@@ -275,11 +279,27 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
 	  //start the cool down timer if for event
 	  if (isEvent) {
-	  	int numInserted = InsertUtils.get().insertIntoEventPersistentForUser(uId, eventId, clientTime);
+	  	int numInserted = InsertUtils.get().insertIntoUpdateEventPersistentForUser(uId, eventId, clientTime);
 	  	log.info("started cool down timer for (eventId, userId): " + uId + "," + eventId +
 	  			"\t numInserted=" + numInserted);
+
+	  	if (0 != gemsSpent) {
+	  		int gemChange = -1 * gemsSpent;
+	  		boolean success = updateUser(u, gemChange);
+	  		log.info("successfully upgraded user gems to reset event cool down timer? Answer:" + success);
+	  	}
+	  	
 	  }
 	  
+	  return true;
+  }
+  
+  private boolean updateUser(User u, int gemChange) {
+	  if (!u.updateRelativeGemsNaive(gemChange)) {
+		  log.error("unexpected error: problem with updating user gems to delete event cool down timer. gemChange=" +
+				  gemChange + "user=" + u);
+		  return false;
+	  }
 	  return true;
   }
   

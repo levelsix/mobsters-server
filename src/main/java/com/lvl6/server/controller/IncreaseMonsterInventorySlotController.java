@@ -325,7 +325,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	if (IncreaseSlotType.PURCHASE == increaseType) {
   		int cost = -1 * gemCost;
-  		success = aUser.updateRelativeDiamondsNaive(cost);
+  		success = aUser.updateRelativeGemsNaive(cost);
   		
   		if (!success) {
   			log.error("problem with updating user monster inventory slots and diamonds");

@@ -19,6 +19,10 @@ message BeginDungeonRequestProto {
 	//used for PersistentEvent stuff
 	optional bool isEvent = 5;
 	optional int32 persistentEventId = 6;
+	
+	//if the user is going to speed up the persistent event cool down timer
+	//(positive number, server will convert it to negative)
+	optional int32 gemsSpent = 7;
 }
 
 message BeginDungeonResponseProto {
@@ -85,7 +89,7 @@ message ReviveInDungeonResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+/* merged into BeginDungeon event
 //user can only spend gems to end the cool down timer
 message EndPersistentEventCoolDownTimerRequestProto {
 	optional MinimumUserProto sender = 1;
@@ -107,5 +111,4 @@ message EndPersistentEventCoolDownTimerResponseProto {
 		FAIL_OTHER = 3;
 	}
 }
-
-//------------------------------------------------------------------------------------------
+*/

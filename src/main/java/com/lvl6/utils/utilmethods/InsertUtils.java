@@ -944,7 +944,7 @@ public class InsertUtils implements InsertUtil{
 	}
 	
 	@Override
-	public int insertIntoEventPersistentForUser(int userId, int eventId, Timestamp now) {
+	public int insertIntoUpdateEventPersistentForUser(int userId, int eventId, Timestamp now) {
 		String tableName = DBConstants.TABLE_EVENT_PERSISTENT_FOR_USER;
 		
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -952,7 +952,14 @@ public class InsertUtils implements InsertUtil{
 		insertParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID, eventId);
 		insertParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY, now);
 
-		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
-		return numUpdated;
+    Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+    Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
+    absoluteUpdates.put(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY, now);
+    
+
+    int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
+    		insertParams, relativeUpdates, absoluteUpdates);
+    return numInserted;
+		
 	}
 }

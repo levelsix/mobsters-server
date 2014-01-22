@@ -381,7 +381,7 @@ public class User implements Serializable {
 	/*
 	 * used for in app purchases, finishingnormstructbuild, enhancing speedup
 	 */
-	public boolean updateRelativeDiamondsNaive (int diamondChange) {
+	public boolean updateRelativeGemsNaive (int diamondChange) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 

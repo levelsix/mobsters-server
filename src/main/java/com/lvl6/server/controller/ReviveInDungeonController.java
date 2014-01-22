@@ -173,7 +173,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   private boolean updateUser(User u, int diamondChange) {
-	  if (!u.updateRelativeDiamondsNaive(diamondChange)) {
+	  if (!u.updateRelativeGemsNaive(diamondChange)) {
 		  log.error("unexpected error: problem with updating user diamonds for reviving. diamondChange=" +
 				  diamondChange + "user=" + u);
 		  return false;

@@ -197,7 +197,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//if user sped up stuff then charge him
   	if (gemCost > 0) {
   		int gemChange = -1 * gemCost;
-  		if (!aUser.updateRelativeDiamondsNaive(gemChange)) {
+  		if (!aUser.updateRelativeGemsNaive(gemChange)) {
   			log.error("problem with updating user gems for speedup. gemChange=" + gemChange + 
   					"\t userMonsterIds=" + userMonsterIds);
   			return false;

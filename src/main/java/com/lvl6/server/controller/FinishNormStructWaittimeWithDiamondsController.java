@@ -145,7 +145,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   	int gemChange = -1 * gemCost;
   	//update user gems
-  	if (!user.updateRelativeDiamondsNaive(gemChange)) {
+  	if (!user.updateRelativeGemsNaive(gemChange)) {
   		log.error("problem with using diamonds to finish norm struct build. userStruct=" +
   				userStruct + "\t struct=" + struct + "\t gemCost=" + gemChange);
   		return false;

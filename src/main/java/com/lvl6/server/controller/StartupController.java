@@ -1342,7 +1342,7 @@ public class StartupController extends EventController {
       }
     }
     if (key.equals(MiscMethods.gems)) {
-      if (!aUser.updateRelativeDiamondsNaive(value)) {
+      if (!aUser.updateRelativeGemsNaive(value)) {
         log.error("unexpected error: could not give silver bonus of " + value + " to user " + aUser);
         return false;
       } else {// gave user gold

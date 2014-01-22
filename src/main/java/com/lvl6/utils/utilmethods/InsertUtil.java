@@ -134,5 +134,5 @@ public interface InsertUtil {
 	public abstract int insertIntoMonsterEvolvingForUser(int userId, long catalystUserMonsterId,
 			List<Long> userMonsterIds, Timestamp startTime);
 
-	public abstract int insertIntoEventPersistentForUser(int userId, int eventId, Timestamp now);
+	public abstract int insertIntoUpdateEventPersistentForUser(int userId, int eventId, Timestamp now);
 }

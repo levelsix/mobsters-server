@@ -125,7 +125,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 			Map<String, Integer> money, Timestamp clientTime, int gemCost) {
 		if (speedup) {
 			int gemChange = -1 * gemCost;
-			if (!user.updateRelativeDiamondsNaive(gemChange)) {
+			if (!user.updateRelativeGemsNaive(gemChange)) {
 				log.error("problem updating user gems. gemChange=" + gemChange);
 				return false;
 			} else {
