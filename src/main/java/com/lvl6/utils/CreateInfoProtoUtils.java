@@ -1344,7 +1344,7 @@ public class CreateInfoProtoUtils {
   	pepb.setCooldownMinutes(cooldownMinutes);
   	try {
   		EventType typ = EventType.valueOf(eventTypeStr);
-			pepb.setTyp(typ);
+			pepb.setType(typ);
 		} catch (Exception e) {
 			log.error("can't create enum type. eventType=" + eventTypeStr + ".\t event=" + event);
 		}
