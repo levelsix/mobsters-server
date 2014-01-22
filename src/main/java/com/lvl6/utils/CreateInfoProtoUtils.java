@@ -1231,6 +1231,10 @@ public class CreateInfoProtoUtils {
   public static List<MonsterLevelInfoProto> createMonsterLevelInfoFromInfo(
   		Map<Integer, MonsterLevelInfo> lvlToInfo) {
   	
+  	if (null == lvlToInfo || lvlToInfo.isEmpty()) {
+  		return new ArrayList<MonsterLevelInfoProto>();
+  	}
+  	
   	//order the MonsterLevelInfoProto by ascending lvl
   	Set<Integer> lvls = lvlToInfo.keySet();
   	List<Integer> ascendingLvls = new ArrayList<Integer>(lvls);
