@@ -89,9 +89,8 @@ import com.lvl6.utils.DBConnection;
     int eventDurationMinutes = rs.getInt(i++);
     int taskId = rs.getInt(i++);
     int cooldownMinutes = rs.getInt(i++);
-    String eventType = rs.getString(i++);
     
     return new EventPersistent(id, dayOfWeek, startHour, eventDurationMinutes, taskId,
-    		cooldownMinutes, eventType);
+    		cooldownMinutes);
   }
 }

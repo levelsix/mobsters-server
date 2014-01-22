@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class EventPersistent implements Serializable {
 	
-	private static final long serialVersionUID = 4906108473976698980L;
+	private static final long serialVersionUID = 9544541492861697L;
 	private int id;
 	private String dayOfWeek;
 	private int startHour;
@@ -12,12 +12,8 @@ public class EventPersistent implements Serializable {
 	private int taskId;
 	private int cooldownMinutes;
 	
-	//makes it easier to indicate what type of event this is
-	private String eventType;
-
 	public EventPersistent(int id, String dayOfWeek, int startHour,
-			int eventDurationMinutes, int taskId, int cooldownMinutes,
-			String eventType) {
+			int eventDurationMinutes, int taskId, int cooldownMinutes) {
 		super();
 		this.id = id;
 		this.dayOfWeek = dayOfWeek;
@@ -25,7 +21,6 @@ public class EventPersistent implements Serializable {
 		this.eventDurationMinutes = eventDurationMinutes;
 		this.taskId = taskId;
 		this.cooldownMinutes = cooldownMinutes;
-		this.eventType = eventType;
 	}
 
 	public int getId() {
@@ -76,20 +71,15 @@ public class EventPersistent implements Serializable {
 		this.cooldownMinutes = cooldownMinutes;
 	}
 
-	public String getEventType() {
-		return eventType;
-	}
-
-	public void setEventType(String eventType) {
-		this.eventType = eventType;
-	}
-
 	@Override
 	public String toString() {
 		return "EventPersistent [id=" + id + ", dayOfWeek=" + dayOfWeek
 				+ ", startHour=" + startHour + ", eventDurationMinutes="
 				+ eventDurationMinutes + ", taskId=" + taskId + ", cooldownMinutes="
-				+ cooldownMinutes + ", eventType=" + eventType + "]";
+				+ cooldownMinutes + "]";
 	}
+	
+	//makes it easier to indicate what type of event this is
+//	private String eventType;
 		
 }
