@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class EventPersistent implements Serializable {
 	
-	private static final long serialVersionUID = 4906108473976698980L;
+	private static final long serialVersionUID = 1511718617355339151L;
 	private int id;
 	private String dayOfWeek;
 	private int startHour;
@@ -12,10 +12,11 @@ public class EventPersistent implements Serializable {
 	private int taskId;
 	private int cooldownMinutes;
 	private String eventType;
+	private String monsterElement;
 	
 	public EventPersistent(int id, String dayOfWeek, int startHour,
 			int eventDurationMinutes, int taskId, int cooldownMinutes,
-			String eventType) {
+			String eventType, String monsterElement) {
 		super();
 		this.id = id;
 		this.dayOfWeek = dayOfWeek;
@@ -24,6 +25,7 @@ public class EventPersistent implements Serializable {
 		this.taskId = taskId;
 		this.cooldownMinutes = cooldownMinutes;
 		this.eventType = eventType;
+		this.monsterElement = monsterElement;
 	}
 
 	public int getId() {
@@ -82,12 +84,21 @@ public class EventPersistent implements Serializable {
 		this.eventType = eventType;
 	}
 
+	public String getMonsterElement() {
+		return monsterElement;
+	}
+
+	public void setMonsterElement(String monsterElement) {
+		this.monsterElement = monsterElement;
+	}
+
 	@Override
 	public String toString() {
 		return "EventPersistent [id=" + id + ", dayOfWeek=" + dayOfWeek
 				+ ", startHour=" + startHour + ", eventDurationMinutes="
 				+ eventDurationMinutes + ", taskId=" + taskId + ", cooldownMinutes="
-				+ cooldownMinutes + ", eventType=" + eventType + "]";
+				+ cooldownMinutes + ", eventType=" + eventType + ", monsterElement="
+				+ monsterElement + "]";
 	}
-		
+	
 }

@@ -60,6 +60,7 @@ message PersistentEventProto {
 	optional int32 taskId = 5;
 	optional int32 cooldownMinutes = 6;
 	optional EventType type = 7;
+	optional MonsterProto.MonsterElement monsterElement = 8;
 	
 	enum DayOfWeek {
 		SUNDAY = 1;

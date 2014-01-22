@@ -1330,6 +1330,7 @@ public class CreateInfoProtoUtils {
   	int taskId = event.getTaskId();
   	int cooldownMinutes = event.getCooldownMinutes();
   	String eventTypeStr = event.getEventType();
+  	String monsterElem = event.getMonsterElement();
   	
   	pepb.setEventId(eventId);
   	try {
@@ -1338,17 +1339,25 @@ public class CreateInfoProtoUtils {
 		} catch (Exception e) {
 			log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t event=" + event);
 		}
+  	
   	pepb.setStartHour(startHour);
   	pepb.setEventDurationMinutes(eventDurationMinutes);
   	pepb.setTaskId(taskId);
   	pepb.setCooldownMinutes(cooldownMinutes);
+  	
   	try {
   		EventType typ = EventType.valueOf(eventTypeStr);
 			pepb.setType(typ);
 		} catch (Exception e) {
 			log.error("can't create enum type. eventType=" + eventTypeStr + ".\t event=" + event);
 		}
-  	
+  	try {
+  		MonsterElement elem = MonsterElement.valueOf(monsterElem);
+  		pepb.setMonsterElement(elem);
+  	} catch (Exception e) {
+  		log.error("can't create enum type. monster elem=" + monsterElem + 
+  				".\t event=" + event);
+  	}
   	
   	return pepb.build();
   }
