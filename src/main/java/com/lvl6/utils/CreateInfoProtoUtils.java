@@ -102,6 +102,7 @@ import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek;
+import com.lvl6.proto.TaskProto.PersistentEventProto.EventType;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament;
@@ -1328,6 +1329,7 @@ public class CreateInfoProtoUtils {
   	int eventDurationMinutes = event.getEventDurationMinutes();
   	int taskId = event.getTaskId();
   	int cooldownMinutes = event.getCooldownMinutes();
+  	String eventTypeStr = event.getEventType();
   	
   	pepb.setEventId(eventId);
   	try {
@@ -1340,6 +1342,13 @@ public class CreateInfoProtoUtils {
   	pepb.setEventDurationMinutes(eventDurationMinutes);
   	pepb.setTaskId(taskId);
   	pepb.setCooldownMinutes(cooldownMinutes);
+  	try {
+  		EventType typ = EventType.valueOf(eventTypeStr);
+			pepb.setTyp(typ);
+		} catch (Exception e) {
+			log.error("can't create enum type. eventType=" + eventTypeStr + ".\t event=" + event);
+		}
+  	
   	
   	return pepb.build();
   }

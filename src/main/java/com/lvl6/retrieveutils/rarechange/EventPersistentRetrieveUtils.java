@@ -89,7 +89,33 @@ import com.lvl6.utils.DBConnection;
     int eventDurationMinutes = rs.getInt(i++);
     int taskId = rs.getInt(i++);
     int cooldownMinutes = rs.getInt(i++);
+    String eventType = rs.getString(i++);
     
-    return new EventPersistent(id, dayOfWeek, startHour, eventDurationMinutes, taskId, cooldownMinutes);
+    EventPersistent ep = new EventPersistent(id, dayOfWeek, startHour,
+    		eventDurationMinutes, taskId, cooldownMinutes, eventType);
+    
+    if (null != dayOfWeek) {
+    	String newDayOfWeek = dayOfWeek.trim();
+    	newDayOfWeek = newDayOfWeek.toUpperCase();
+    	if (!dayOfWeek.equals(newDayOfWeek)) {
+    		log.error("string for day of week is incorrect. is:" + dayOfWeek +
+    				"\t (if spelled correctly), expected:" + newDayOfWeek +
+    				"\t eventPersistent obj=" + ep);
+    		ep.setDayOfWeek(newDayOfWeek);
+    	}
+    }
+    
+    if (null != eventType) {
+    	String newEventType = eventType.trim();
+    	newEventType = newEventType.toUpperCase();
+    	if (!eventType.equals(newEventType)) {
+    		log.error("string for event type is incorrect. is:" + eventType +
+    				"\t (if spelled correctly), expected:" + newEventType +
+    				"\t eventPersistent obj=" + ep);
+    		ep.setEventType(newEventType);
+    	}
+    }
+    
+    return ep;
   }
 }

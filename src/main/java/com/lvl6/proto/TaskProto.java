@@ -2555,6 +2555,10 @@ public final class TaskProto {
     // optional int32 cooldownMinutes = 6;
     boolean hasCooldownMinutes();
     int getCooldownMinutes();
+    
+    // optional .com.lvl6.proto.PersistentEventProto.EventType typ = 7;
+    boolean hasTyp();
+    com.lvl6.proto.TaskProto.PersistentEventProto.EventType getTyp();
   }
   public static final class PersistentEventProto extends
       com.google.protobuf.GeneratedMessage
@@ -2668,6 +2672,75 @@ public final class TaskProto {
       // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PersistentEventProto.DayOfWeek)
     }
     
+    public enum EventType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      ENHANCE(0, 1),
+      EVOLUTION(1, 2),
+      ;
+      
+      public static final int ENHANCE_VALUE = 1;
+      public static final int EVOLUTION_VALUE = 2;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static EventType valueOf(int value) {
+        switch (value) {
+          case 1: return ENHANCE;
+          case 2: return EVOLUTION;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<EventType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<EventType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<EventType>() {
+              public EventType findValueByNumber(int number) {
+                return EventType.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.TaskProto.PersistentEventProto.getDescriptor().getEnumTypes().get(1);
+      }
+      
+      private static final EventType[] VALUES = {
+        ENHANCE, EVOLUTION, 
+      };
+      
+      public static EventType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private EventType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PersistentEventProto.EventType)
+    }
+    
     private int bitField0_;
     // optional int32 eventId = 1;
     public static final int EVENTID_FIELD_NUMBER = 1;
@@ -2729,6 +2802,16 @@ public final class TaskProto {
       return cooldownMinutes_;
     }
     
+    // optional .com.lvl6.proto.PersistentEventProto.EventType typ = 7;
+    public static final int TYP_FIELD_NUMBER = 7;
+    private com.lvl6.proto.TaskProto.PersistentEventProto.EventType typ_;
+    public boolean hasTyp() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public com.lvl6.proto.TaskProto.PersistentEventProto.EventType getTyp() {
+      return typ_;
+    }
+    
     private void initFields() {
       eventId_ = 0;
       dayOfWeek_ = com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek.MONDAY;
@@ -2736,6 +2819,7 @@ public final class TaskProto {
       eventDurationMinutes_ = 0;
       taskId_ = 0;
       cooldownMinutes_ = 0;
+      typ_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2766,6 +2850,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, cooldownMinutes_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeEnum(7, typ_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -2799,6 +2886,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, cooldownMinutes_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(7, typ_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2936,6 +3027,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         cooldownMinutes_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        typ_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -2998,6 +3091,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000020;
         }
         result.cooldownMinutes_ = cooldownMinutes_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.typ_ = typ_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3031,6 +3128,9 @@ public final class TaskProto {
         }
         if (other.hasCooldownMinutes()) {
           setCooldownMinutes(other.getCooldownMinutes());
+        }
+        if (other.hasTyp()) {
+          setTyp(other.getTyp());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3097,6 +3197,17 @@ public final class TaskProto {
             case 48: {
               bitField0_ |= 0x00000020;
               cooldownMinutes_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.TaskProto.PersistentEventProto.EventType value = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(7, rawValue);
+              } else {
+                bitField0_ |= 0x00000040;
+                typ_ = value;
+              }
               break;
             }
           }
@@ -3234,6 +3345,30 @@ public final class TaskProto {
         return this;
       }
       
+      // optional .com.lvl6.proto.PersistentEventProto.EventType typ = 7;
+      private com.lvl6.proto.TaskProto.PersistentEventProto.EventType typ_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
+      public boolean hasTyp() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public com.lvl6.proto.TaskProto.PersistentEventProto.EventType getTyp() {
+        return typ_;
+      }
+      public Builder setTyp(com.lvl6.proto.TaskProto.PersistentEventProto.EventType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000040;
+        typ_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTyp() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        typ_ = com.lvl6.proto.TaskProto.PersistentEventProto.EventType.ENHANCE;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PersistentEventProto)
     }
     
@@ -3295,15 +3430,17 @@ public final class TaskProto {
       "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\032\n\022puzzle" +
       "PieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\"3\n\013Mon" +
       "sterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004" +
-      "BOSS\020\003\"\255\002\n\024PersistentEventProto\022\017\n\007event" +
+      "BOSS\020\003\"\223\003\n\024PersistentEventProto\022\017\n\007event" +
       "Id\030\001 \001(\005\022A\n\tdayOfWeek\030\002 \001(\0162..com.lvl6.p" +
       "roto.PersistentEventProto.DayOfWeek\022\021\n\ts" +
       "tartHour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004",
       " \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030" +
-      "\006 \001(\005\"g\n\tDayOfWeek\022\n\n\006MONDAY\020\001\022\013\n\007TUESDA" +
-      "Y\020\002\022\r\n\tWEDNESDAY\020\003\022\014\n\010THURSDAY\020\004\022\n\n\006FRID" +
-      "AY\020\005\022\014\n\010SATURDAY\020\006\022\n\n\006SUNDAY\020\007B\013B\tTaskPr" +
-      "oto"
+      "\006 \001(\005\022;\n\003typ\030\007 \001(\0162..com.lvl6.proto.Pers" +
+      "istentEventProto.EventType\"g\n\tDayOfWeek\022" +
+      "\n\n\006MONDAY\020\001\022\013\n\007TUESDAY\020\002\022\r\n\tWEDNESDAY\020\003\022" +
+      "\014\n\010THURSDAY\020\004\022\n\n\006FRIDAY\020\005\022\014\n\010SATURDAY\020\006\022" +
+      "\n\n\006SUNDAY\020\007\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n" +
+      "\tEVOLUTION\020\002B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3347,7 +3484,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_PersistentEventProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PersistentEventProto_descriptor,
-              new java.lang.String[] { "EventId", "DayOfWeek", "StartHour", "EventDurationMinutes", "TaskId", "CooldownMinutes", },
+              new java.lang.String[] { "EventId", "DayOfWeek", "StartHour", "EventDurationMinutes", "TaskId", "CooldownMinutes", "Typ", },
               com.lvl6.proto.TaskProto.PersistentEventProto.class,
               com.lvl6.proto.TaskProto.PersistentEventProto.Builder.class);
           return null;
