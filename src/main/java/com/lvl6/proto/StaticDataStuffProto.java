@@ -165,6 +165,16 @@ public final class StaticDataStuffProto {
         getAllTownHallsOrBuilderList();
     com.lvl6.proto.StructureProto.TownHallProtoOrBuilder getAllTownHallsOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.PersistentEventProto events = 18;
+    java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> 
+        getEventsList();
+    com.lvl6.proto.TaskProto.PersistentEventProto getEvents(int index);
+    int getEventsCount();
+    java.util.List<? extends com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> 
+        getEventsOrBuilderList();
+    com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder getEventsOrBuilder(
+        int index);
   }
   public static final class StaticDataProto extends
       com.google.protobuf.GeneratedMessage
@@ -523,6 +533,27 @@ public final class StaticDataStuffProto {
       return allTownHalls_.get(index);
     }
     
+    // repeated .com.lvl6.proto.PersistentEventProto events = 18;
+    public static final int EVENTS_FIELD_NUMBER = 18;
+    private java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> events_;
+    public java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> getEventsList() {
+      return events_;
+    }
+    public java.util.List<? extends com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> 
+        getEventsOrBuilderList() {
+      return events_;
+    }
+    public int getEventsCount() {
+      return events_.size();
+    }
+    public com.lvl6.proto.TaskProto.PersistentEventProto getEvents(int index) {
+      return events_.get(index);
+    }
+    public com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder getEventsOrBuilder(
+        int index) {
+      return events_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -540,6 +571,7 @@ public final class StaticDataStuffProto {
       allResidences_ = java.util.Collections.emptyList();
       allLabs_ = java.util.Collections.emptyList();
       allTownHalls_ = java.util.Collections.emptyList();
+      events_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -600,6 +632,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < allLabs_.size(); i++) {
         output.writeMessage(17, allLabs_.get(i));
+      }
+      for (int i = 0; i < events_.size(); i++) {
+        output.writeMessage(18, events_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -673,6 +708,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < allLabs_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(17, allLabs_.get(i));
+      }
+      for (int i = 0; i < events_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(18, events_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -806,6 +845,7 @@ public final class StaticDataStuffProto {
           getAllResidencesFieldBuilder();
           getAllLabsFieldBuilder();
           getAllTownHallsFieldBuilder();
+          getEventsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -909,6 +949,12 @@ public final class StaticDataStuffProto {
           bitField0_ = (bitField0_ & ~0x00008000);
         } else {
           allTownHallsBuilder_.clear();
+        }
+        if (eventsBuilder_ == null) {
+          events_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00010000);
+        } else {
+          eventsBuilder_.clear();
         }
         return this;
       }
@@ -1090,6 +1136,15 @@ public final class StaticDataStuffProto {
           result.allTownHalls_ = allTownHalls_;
         } else {
           result.allTownHalls_ = allTownHallsBuilder_.build();
+        }
+        if (eventsBuilder_ == null) {
+          if (((bitField0_ & 0x00010000) == 0x00010000)) {
+            events_ = java.util.Collections.unmodifiableList(events_);
+            bitField0_ = (bitField0_ & ~0x00010000);
+          }
+          result.events_ = events_;
+        } else {
+          result.events_ = eventsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1500,6 +1555,32 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (eventsBuilder_ == null) {
+          if (!other.events_.isEmpty()) {
+            if (events_.isEmpty()) {
+              events_ = other.events_;
+              bitField0_ = (bitField0_ & ~0x00010000);
+            } else {
+              ensureEventsIsMutable();
+              events_.addAll(other.events_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.events_.isEmpty()) {
+            if (eventsBuilder_.isEmpty()) {
+              eventsBuilder_.dispose();
+              eventsBuilder_ = null;
+              events_ = other.events_;
+              bitField0_ = (bitField0_ & ~0x00010000);
+              eventsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getEventsFieldBuilder() : null;
+            } else {
+              eventsBuilder_.addAllMessages(other.events_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1628,6 +1709,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.StructureProto.LabProto.Builder subBuilder = com.lvl6.proto.StructureProto.LabProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addAllLabs(subBuilder.buildPartial());
+              break;
+            }
+            case 146: {
+              com.lvl6.proto.TaskProto.PersistentEventProto.Builder subBuilder = com.lvl6.proto.TaskProto.PersistentEventProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addEvents(subBuilder.buildPartial());
               break;
             }
           }
@@ -4516,6 +4603,192 @@ public final class StaticDataStuffProto {
         return allTownHallsBuilder_;
       }
       
+      // repeated .com.lvl6.proto.PersistentEventProto events = 18;
+      private java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> events_ =
+        java.util.Collections.emptyList();
+      private void ensureEventsIsMutable() {
+        if (!((bitField0_ & 0x00010000) == 0x00010000)) {
+          events_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.PersistentEventProto>(events_);
+          bitField0_ |= 0x00010000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.TaskProto.PersistentEventProto, com.lvl6.proto.TaskProto.PersistentEventProto.Builder, com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> eventsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto> getEventsList() {
+        if (eventsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(events_);
+        } else {
+          return eventsBuilder_.getMessageList();
+        }
+      }
+      public int getEventsCount() {
+        if (eventsBuilder_ == null) {
+          return events_.size();
+        } else {
+          return eventsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.TaskProto.PersistentEventProto getEvents(int index) {
+        if (eventsBuilder_ == null) {
+          return events_.get(index);
+        } else {
+          return eventsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setEvents(
+          int index, com.lvl6.proto.TaskProto.PersistentEventProto value) {
+        if (eventsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEventsIsMutable();
+          events_.set(index, value);
+          onChanged();
+        } else {
+          eventsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setEvents(
+          int index, com.lvl6.proto.TaskProto.PersistentEventProto.Builder builderForValue) {
+        if (eventsBuilder_ == null) {
+          ensureEventsIsMutable();
+          events_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          eventsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addEvents(com.lvl6.proto.TaskProto.PersistentEventProto value) {
+        if (eventsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEventsIsMutable();
+          events_.add(value);
+          onChanged();
+        } else {
+          eventsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addEvents(
+          int index, com.lvl6.proto.TaskProto.PersistentEventProto value) {
+        if (eventsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureEventsIsMutable();
+          events_.add(index, value);
+          onChanged();
+        } else {
+          eventsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addEvents(
+          com.lvl6.proto.TaskProto.PersistentEventProto.Builder builderForValue) {
+        if (eventsBuilder_ == null) {
+          ensureEventsIsMutable();
+          events_.add(builderForValue.build());
+          onChanged();
+        } else {
+          eventsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addEvents(
+          int index, com.lvl6.proto.TaskProto.PersistentEventProto.Builder builderForValue) {
+        if (eventsBuilder_ == null) {
+          ensureEventsIsMutable();
+          events_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          eventsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllEvents(
+          java.lang.Iterable<? extends com.lvl6.proto.TaskProto.PersistentEventProto> values) {
+        if (eventsBuilder_ == null) {
+          ensureEventsIsMutable();
+          super.addAll(values, events_);
+          onChanged();
+        } else {
+          eventsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearEvents() {
+        if (eventsBuilder_ == null) {
+          events_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00010000);
+          onChanged();
+        } else {
+          eventsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeEvents(int index) {
+        if (eventsBuilder_ == null) {
+          ensureEventsIsMutable();
+          events_.remove(index);
+          onChanged();
+        } else {
+          eventsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.TaskProto.PersistentEventProto.Builder getEventsBuilder(
+          int index) {
+        return getEventsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder getEventsOrBuilder(
+          int index) {
+        if (eventsBuilder_ == null) {
+          return events_.get(index);  } else {
+          return eventsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> 
+           getEventsOrBuilderList() {
+        if (eventsBuilder_ != null) {
+          return eventsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(events_);
+        }
+      }
+      public com.lvl6.proto.TaskProto.PersistentEventProto.Builder addEventsBuilder() {
+        return getEventsFieldBuilder().addBuilder(
+            com.lvl6.proto.TaskProto.PersistentEventProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.TaskProto.PersistentEventProto.Builder addEventsBuilder(
+          int index) {
+        return getEventsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.TaskProto.PersistentEventProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.TaskProto.PersistentEventProto.Builder> 
+           getEventsBuilderList() {
+        return getEventsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.TaskProto.PersistentEventProto, com.lvl6.proto.TaskProto.PersistentEventProto.Builder, com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder> 
+          getEventsFieldBuilder() {
+        if (eventsBuilder_ == null) {
+          eventsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.TaskProto.PersistentEventProto, com.lvl6.proto.TaskProto.PersistentEventProto.Builder, com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder>(
+                  events_,
+                  ((bitField0_ & 0x00010000) == 0x00010000),
+                  getParentForChildren(),
+                  isClean());
+          events_ = null;
+        }
+        return eventsBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
     
@@ -4544,7 +4817,7 @@ public final class StaticDataStuffProto {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Boos" +
       "terPackStuff.proto\032\nCity.proto\032\022MonsterS" +
       "tuff.proto\032\013Quest.proto\032\017Structure.proto" +
-      "\032\nTask.proto\032\nUser.proto\"\374\006\n\017StaticDataP" +
+      "\032\nTask.proto\032\nUser.proto\"\262\007\n\017StaticDataP" +
       "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
       "nimumUserProto\022>\n\016expansionCosts\030\002 \003(\0132&" +
       ".com.lvl6.proto.CityExpansionCostProto\0220" +
@@ -4566,8 +4839,9 @@ public final class StaticDataStuffProto {
       "talProto\0225\n\rallResidences\030\017 \003(\0132\036.com.lv" +
       "l6.proto.ResidenceProto\022)\n\007allLabs\030\021 \003(\013" +
       "2\030.com.lvl6.proto.LabProto\0223\n\014allTownHal" +
-      "ls\030\020 \003(\0132\035.com.lvl6.proto.TownHallProtoB" +
-      "\026B\024StaticDataStuffProto"
+      "ls\030\020 \003(\0132\035.com.lvl6.proto.TownHallProto\022" +
+      "4\n\006events\030\022 \003(\0132$.com.lvl6.proto.Persist" +
+      "entEventProtoB\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4579,7 +4853,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "Events", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;

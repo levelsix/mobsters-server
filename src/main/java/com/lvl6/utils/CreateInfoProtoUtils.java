@@ -21,6 +21,7 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
+import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
@@ -96,6 +97,8 @@ import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
+import com.lvl6.proto.TaskProto.PersistentEventProto;
+import com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament;
@@ -1276,6 +1279,32 @@ public class CreateInfoProtoUtils {
   	uepb.addAllUserMonsterIds(userMonsterIds);
   			
   	return uepb.build();
+  }
+  
+  public static PersistentEventProto createPersistentEventProtoFromEvent(
+  		EventPersistent event) {
+  	PersistentEventProto.Builder pepb = PersistentEventProto.newBuilder();
+  	
+  	int eventId = event.getId();
+  	String dayOfWeekStr = event.getDayOfWeek();
+  	int startHour = event.getStartHour();
+  	int eventDurationMinutes = event.getEventDurationMinutes();
+  	int taskId = event.getTaskId();
+  	int cooldownMinutes = event.getCooldownMinutes();
+  	
+  	pepb.setEventId(eventId);
+  	try {
+  		DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayOfWeekStr);
+			pepb.setDayOfWeek(dayOfWeek);
+		} catch (Exception e) {
+			log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t event=" + event);
+		}
+  	pepb.setStartHour(startHour);
+  	pepb.setEventDurationMinutes(eventDurationMinutes);
+  	pepb.setTaskId(taskId);
+  	pepb.setCooldownMinutes(cooldownMinutes);
+  	
+  	return pepb.build();
   }
 
 }

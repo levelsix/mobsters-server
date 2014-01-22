@@ -73,15 +73,14 @@ message StartupResponseProto {
 	//send over all invites where this user is the inviter and the invite is accepted
 	//isRedeemed does not matter
 	repeated UserFacebookInviteForSlotProto invitesFromMeForSlots = 25;
-	
 	optional StaticDataProto staticDataStuffProto = 26;
 	
 	//repeated int32 redeemedQuestIds = 27; //above, after "userQuests = 6"
-	
 	//for each city, the city's boss is hiding in the specified taskId
 	repeated int32 taskIdForCurrentCityBoss = 28;
 	
 	//optional UserEvolutionProto evolution = 29; //defined above, below #21
+	
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;

@@ -30,6 +30,7 @@ import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
 import com.lvl6.info.Dialogue;
+import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
@@ -75,6 +76,7 @@ import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
+import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.StaticUserLevelInfoProto;
@@ -84,6 +86,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
@@ -555,6 +558,7 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
 //    ClanBossRetrieveUtils.reload();
 //    ClanBossRewardRetrieveUtils.reload();
+    EventPersistentRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
@@ -1244,6 +1248,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   	setInProgressAndAvailableQuests(sdpb, userId);
   	setBoosterPackStuff(sdpb);
   	setStructures(sdpb);
+  	setEvents(sdpb);
   	
   	return sdpb.build();
   }
@@ -1469,6 +1474,17 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   		LabProto rgp = CreateInfoProtoUtils.createLabProto(s, sip, srg);
   		sdpb.addAllLabs(rgp);
   	}		
+  }
+  
+  private static void setEvents(Builder sdpb) {
+  	Map<Integer, EventPersistent> idsToEvents = EventPersistentRetrieveUtils
+  			.getAllEventIdsToEvents();
+  	for (Integer eventId: idsToEvents.keySet()) {
+  		EventPersistent event  = idsToEvents.get(eventId);
+  		PersistentEventProto eventProto = CreateInfoProtoUtils
+  				.createPersistentEventProtoFromEvent(event);
+  		sdpb.addEvents(eventProto);
+  	}
   }
 
 }

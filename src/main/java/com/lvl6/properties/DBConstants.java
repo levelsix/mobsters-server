@@ -14,6 +14,7 @@ public class DBConstants {
 	public static final String TABLE_CLANS = "clan";
 	public static final String TABLE_CLAN_CHAT_POST = "clan_chat_post";
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
+	public static final String TABLE_EVENT_PERSISTENT = "event_persistent";
 	public static final String TABLE_EXPANSION_COST = "expansion_cost";
 	public static final String TABLE_EXPANSION_PURCHASE_FOR_USER = "expansion_purchase_for_user";
 	public static final String TABLE_GOLD_SALE = "gold_sale";	
