@@ -35,9 +35,9 @@ public final class MonsterStuffProto {
     boolean hasDisplayName();
     String getDisplayName();
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 7;
-    boolean hasElement();
-    com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getElement();
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 7;
+    boolean hasMonsterElement();
+    com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement();
     
     // optional int32 baseHp = 8;
     boolean hasBaseHp();
@@ -451,14 +451,14 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 7;
-    public static final int ELEMENT_FIELD_NUMBER = 7;
-    private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement element_;
-    public boolean hasElement() {
+    // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 7;
+    public static final int MONSTERELEMENT_FIELD_NUMBER = 7;
+    private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_;
+    public boolean hasMonsterElement() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
-    public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getElement() {
-      return element_;
+    public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement() {
+      return monsterElement_;
     }
     
     // optional int32 baseHp = 8;
@@ -819,7 +819,7 @@ public final class MonsterStuffProto {
       quality_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality.COMMON;
       evolutionLevel_ = 0;
       displayName_ = "";
-      element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
       baseHp_ = 0;
       imagePrefix_ = "";
       numPuzzlePieces_ = 0;
@@ -875,7 +875,7 @@ public final class MonsterStuffProto {
         output.writeBytes(6, getDisplayNameBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeEnum(7, element_.getNumber());
+        output.writeEnum(7, monsterElement_.getNumber());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeInt32(8, baseHp_);
@@ -981,7 +981,7 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(7, element_.getNumber());
+          .computeEnumSize(7, monsterElement_.getNumber());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1212,7 +1212,7 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         displayName_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
         bitField0_ = (bitField0_ & ~0x00000040);
         baseHp_ = 0;
         bitField0_ = (bitField0_ & ~0x00000080);
@@ -1329,7 +1329,7 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        result.element_ = element_;
+        result.monsterElement_ = monsterElement_;
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
@@ -1461,8 +1461,8 @@ public final class MonsterStuffProto {
         if (other.hasDisplayName()) {
           setDisplayName(other.getDisplayName());
         }
-        if (other.hasElement()) {
-          setElement(other.getElement());
+        if (other.hasMonsterElement()) {
+          setMonsterElement(other.getMonsterElement());
         }
         if (other.hasBaseHp()) {
           setBaseHp(other.getBaseHp());
@@ -1630,7 +1630,7 @@ public final class MonsterStuffProto {
                 unknownFields.mergeVarintField(7, rawValue);
               } else {
                 bitField0_ |= 0x00000040;
-                element_ = value;
+                monsterElement_ = value;
               }
               break;
             }
@@ -1930,26 +1930,26 @@ public final class MonsterStuffProto {
         onChanged();
       }
       
-      // optional .com.lvl6.proto.MonsterProto.MonsterElement element = 7;
-      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
-      public boolean hasElement() {
+      // optional .com.lvl6.proto.MonsterProto.MonsterElement monsterElement = 7;
+      private com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+      public boolean hasMonsterElement() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
-      public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getElement() {
-        return element_;
+      public com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement() {
+        return monsterElement_;
       }
-      public Builder setElement(com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value) {
+      public Builder setMonsterElement(com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement value) {
         if (value == null) {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000040;
-        element_ = value;
+        monsterElement_ = value;
         onChanged();
         return this;
       }
-      public Builder clearElement() {
+      public Builder clearMonsterElement() {
         bitField0_ = (bitField0_ & ~0x00000040);
-        element_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
+        monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
         onChanged();
         return this;
       }
@@ -8297,64 +8297,64 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\372\007\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\201\010\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
       "\030\002 \001(\t\022\024\n\014monsterGroup\030\003 \001(\t\022<\n\007quality\030" +
       "\004 \001(\0162+.com.lvl6.proto.MonsterProto.Mons" +
       "terQuality\022\026\n\016evolutionLevel\030\005 \001(\005\022\023\n\013di" +
-      "splayName\030\006 \001(\t\022<\n\007element\030\007 \001(\0162+.com.l" +
-      "vl6.proto.MonsterProto.MonsterElement\022\016\n" +
-      "\006baseHp\030\010 \001(\005\022\023\n\013imagePrefix\030\t \001(\t\022\027\n\017nu" +
-      "mPuzzlePieces\030\n \001(\005\022\036\n\026minutesToCombineP" +
-      "ieces\030\013 \001(\005\022\025\n\relementOneDmg\030\014 \001(\005\022\025\n\rel",
-      "ementTwoDmg\030\r \001(\005\022\027\n\017elementThreeDmg\030\016 \001" +
-      "(\005\022\026\n\016elementFourDmg\030\017 \001(\005\022\026\n\016elementFiv" +
-      "eDmg\030\020 \001(\005\022\025\n\relementSixDmg\030\034 \001(\005\022\031\n\021hpL" +
-      "evelMultiplier\030\021 \001(\002\022\035\n\025attackLevelMulti" +
-      "plier\030\022 \001(\002\022\020\n\010maxLevel\030\023 \001(\005\022\032\n\022evoluti" +
-      "onMonsterId\030\024 \001(\005\022\"\n\032evolutionCatalystMo" +
-      "nsterId\030\031 \001(\005\022\027\n\017minutesToEvolve\030\032 \001(\005\022#" +
-      "\n\033numCatalystMonstersRequired\030\033 \001(\005\022\027\n\017c" +
-      "arrotRecruited\030\025 \001(\t\022\026\n\016carrotDefeated\030\026" +
-      " \001(\t\022\025\n\rcarrotEvolved\030\027 \001(\t\022\023\n\013descripti",
-      "on\030\030 \001(\t\022\032\n\022enhancingFeederExp\030\035 \001(\005\0226\n\007" +
-      "lvlInfo\030\036 \003(\0132%.com.lvl6.proto.MonsterLe" +
-      "velInfoProto\"J\n\016MonsterQuality\022\n\n\006COMMON" +
-      "\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEG" +
-      "ENDARY\020\005\"W\n\016MonsterElement\022\010\n\004FIRE\020\001\022\t\n\005" +
-      "GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DAR" +
-      "KNESS\020\005\022\010\n\004ROCK\020\006\"n\n\025MonsterLevelInfoPro" +
-      "to\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\016\n\006attack\030\003 " +
-      "\001(\005\022\031\n\021curLvlRequiredExp\030\004 \001(\005\022\021\n\tfeeder" +
-      "Exp\030\005 \001(\005\"\345\001\n\024FullUserMonsterProto\022\025\n\rus",
-      "erMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmon" +
-      "sterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurr" +
-      "entLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tn" +
-      "umPieces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030\n\020co" +
-      "mbineStartTime\030\t \001(\003\022\023\n\013teamSlotNum\030\n \001(" +
-      "\005\"\204\001\n\027UserMonsterHealingProto\022\016\n\006userId\030" +
-      "\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTi" +
-      "meMillis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020" +
-      "\n\010priority\030\006 \001(\005\"M\n\035UserMonsterCurrentHe" +
-      "althProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurr",
-      "entHealth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto" +
-      "\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(." +
-      "com.lvl6.proto.UserEnhancementItemProto\022" +
-      "9\n\007feeders\030\003 \003(\0132(.com.lvl6.proto.UserEn" +
-      "hancementItemProto\"i\n\030UserEnhancementIte" +
-      "mProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expecte" +
-      "dStartTimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030" +
-      "\003 \001(\005\"f\n\032UserMonsterCurrentExpProto\022\025\n\ru" +
-      "serMonsterId\030\001 \001(\003\022\032\n\022expectedExperience" +
-      "\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H\n\033Minimum",
-      "UserMonsterSellProto\022\025\n\ruserMonsterId\030\001 " +
-      "\001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033UserCurrentMo" +
-      "nsterTeamProto\022\016\n\006userId\030\001 \001(\005\0229\n\013curren" +
-      "tTeam\030\002 \003(\0132$.com.lvl6.proto.FullUserMon" +
-      "sterProto\"e\n\031UserMonsterEvolutionProto\022\035" +
-      "\n\025catalystUserMonsterId\030\001 \001(\003\022\026\n\016userMon" +
-      "sterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003B\023B\021Mons" +
-      "terStuffProto"
+      "splayName\030\006 \001(\t\022C\n\016monsterElement\030\007 \001(\0162" +
+      "+.com.lvl6.proto.MonsterProto.MonsterEle" +
+      "ment\022\016\n\006baseHp\030\010 \001(\005\022\023\n\013imagePrefix\030\t \001(" +
+      "\t\022\027\n\017numPuzzlePieces\030\n \001(\005\022\036\n\026minutesToC" +
+      "ombinePieces\030\013 \001(\005\022\025\n\relementOneDmg\030\014 \001(",
+      "\005\022\025\n\relementTwoDmg\030\r \001(\005\022\027\n\017elementThree" +
+      "Dmg\030\016 \001(\005\022\026\n\016elementFourDmg\030\017 \001(\005\022\026\n\016ele" +
+      "mentFiveDmg\030\020 \001(\005\022\025\n\relementSixDmg\030\034 \001(\005" +
+      "\022\031\n\021hpLevelMultiplier\030\021 \001(\002\022\035\n\025attackLev" +
+      "elMultiplier\030\022 \001(\002\022\020\n\010maxLevel\030\023 \001(\005\022\032\n\022" +
+      "evolutionMonsterId\030\024 \001(\005\022\"\n\032evolutionCat" +
+      "alystMonsterId\030\031 \001(\005\022\027\n\017minutesToEvolve\030" +
+      "\032 \001(\005\022#\n\033numCatalystMonstersRequired\030\033 \001" +
+      "(\005\022\027\n\017carrotRecruited\030\025 \001(\t\022\026\n\016carrotDef" +
+      "eated\030\026 \001(\t\022\025\n\rcarrotEvolved\030\027 \001(\t\022\023\n\013de",
+      "scription\030\030 \001(\t\022\032\n\022enhancingFeederExp\030\035 " +
+      "\001(\005\0226\n\007lvlInfo\030\036 \003(\0132%.com.lvl6.proto.Mo" +
+      "nsterLevelInfoProto\"J\n\016MonsterQuality\022\n\n" +
+      "\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004" +
+      "\022\r\n\tLEGENDARY\020\005\"W\n\016MonsterElement\022\010\n\004FIR" +
+      "E\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTNING\020\004" +
+      "\022\014\n\010DARKNESS\020\005\022\010\n\004ROCK\020\006\"n\n\025MonsterLevel" +
+      "InfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\016\n\006at" +
+      "tack\030\003 \001(\005\022\031\n\021curLvlRequiredExp\030\004 \001(\005\022\021\n" +
+      "\tfeederExp\030\005 \001(\005\"\345\001\n\024FullUserMonsterProt",
+      "o\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005" +
+      "\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022" +
+      "\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001" +
+      "(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(" +
+      "\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013teamSlotN" +
+      "um\030\n \001(\005\"\204\001\n\027UserMonsterHealingProto\022\016\n\006" +
+      "userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020q" +
+      "ueuedTimeMillis\030\003 \001(\003\022\026\n\016healthProgress\030" +
+      "\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"M\n\035UserMonsterCu" +
+      "rrentHealthProto\022\025\n\ruserMonsterId\030\001 \001(\003\022",
+      "\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhanceme" +
+      "ntProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002" +
+      " \001(\0132(.com.lvl6.proto.UserEnhancementIte" +
+      "mProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.proto" +
+      ".UserEnhancementItemProto\"i\n\030UserEnhance" +
+      "mentItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027" +
+      "expectedStartTimeMillis\030\002 \001(\003\022\025\n\renhanci" +
+      "ngCost\030\003 \001(\005\"f\n\032UserMonsterCurrentExpPro" +
+      "to\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expectedExp" +
+      "erience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H\n\033",
+      "MinimumUserMonsterSellProto\022\025\n\ruserMonst" +
+      "erId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033UserCu" +
+      "rrentMonsterTeamProto\022\016\n\006userId\030\001 \001(\005\0229\n" +
+      "\013currentTeam\030\002 \003(\0132$.com.lvl6.proto.Full" +
+      "UserMonsterProto\"e\n\031UserMonsterEvolution" +
+      "Proto\022\035\n\025catalystUserMonsterId\030\001 \001(\003\022\026\n\016" +
+      "userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003B" +
+      "\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8366,7 +8366,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_MonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "Element", "BaseHp", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "ElementOneDmg", "ElementTwoDmg", "ElementThreeDmg", "ElementFourDmg", "ElementFiveDmg", "ElementSixDmg", "HpLevelMultiplier", "AttackLevelMultiplier", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "EnhancingFeederExp", "LvlInfo", },
+              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "MonsterElement", "BaseHp", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "ElementOneDmg", "ElementTwoDmg", "ElementThreeDmg", "ElementFourDmg", "ElementFiveDmg", "ElementSixDmg", "HpLevelMultiplier", "AttackLevelMultiplier", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "EnhancingFeederExp", "LvlInfo", },
               com.lvl6.proto.MonsterStuffProto.MonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder.class);
           internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor =

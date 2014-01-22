@@ -1171,7 +1171,7 @@ public class CreateInfoProtoUtils {
     
     MonsterElement me = aMonster.getElement();
     if (null != me) {
-    	mpb.setElement(aMonster.getElement());
+    	mpb.setMonsterElement(aMonster.getElement());
     } else{
     	log.error("monster element is null!!!!!! monster=" + aMonster);
     }

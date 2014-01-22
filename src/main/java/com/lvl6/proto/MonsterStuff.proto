@@ -13,7 +13,7 @@ message MonsterProto {
 	optional MonsterQuality quality = 4;
 	optional int32 evolutionLevel = 5;
 	optional string displayName = 6;
-	optional MonsterElement element = 7;
+	optional MonsterElement monsterElement = 7;
 	optional int32 baseHp = 8;
 	optional string imagePrefix = 9;
 	optional int32 numPuzzlePieces = 10;
