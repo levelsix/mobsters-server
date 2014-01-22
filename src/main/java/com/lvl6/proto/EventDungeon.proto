@@ -15,6 +15,10 @@ message BeginDungeonRequestProto {
 	
 	//used for determining if boss spawned
 	optional bool userBeatAllCityTasks = 4;
+	
+	//used for PersistentEvent stuff
+	optional bool isEvent = 5;
+	optional int32 persistentEventId = 6;
 }
 
 message BeginDungeonResponseProto {

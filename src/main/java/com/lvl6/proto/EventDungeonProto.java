@@ -27,6 +27,14 @@ public final class EventDungeonProto {
     // optional bool userBeatAllCityTasks = 4;
     boolean hasUserBeatAllCityTasks();
     boolean getUserBeatAllCityTasks();
+    
+    // optional bool isEvent = 5;
+    boolean hasIsEvent();
+    boolean getIsEvent();
+    
+    // optional int32 persistentEventId = 6;
+    boolean hasPersistentEventId();
+    int getPersistentEventId();
   }
   public static final class BeginDungeonRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -100,11 +108,33 @@ public final class EventDungeonProto {
       return userBeatAllCityTasks_;
     }
     
+    // optional bool isEvent = 5;
+    public static final int ISEVENT_FIELD_NUMBER = 5;
+    private boolean isEvent_;
+    public boolean hasIsEvent() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public boolean getIsEvent() {
+      return isEvent_;
+    }
+    
+    // optional int32 persistentEventId = 6;
+    public static final int PERSISTENTEVENTID_FIELD_NUMBER = 6;
+    private int persistentEventId_;
+    public boolean hasPersistentEventId() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getPersistentEventId() {
+      return persistentEventId_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       clientTime_ = 0L;
       taskId_ = 0;
       userBeatAllCityTasks_ = false;
+      isEvent_ = false;
+      persistentEventId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -130,6 +160,12 @@ public final class EventDungeonProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBool(4, userBeatAllCityTasks_);
       }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBool(5, isEvent_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, persistentEventId_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -154,6 +190,14 @@ public final class EventDungeonProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(4, userBeatAllCityTasks_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, isEvent_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, persistentEventId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -292,6 +336,10 @@ public final class EventDungeonProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         userBeatAllCityTasks_ = false;
         bitField0_ = (bitField0_ & ~0x00000008);
+        isEvent_ = false;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        persistentEventId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -350,6 +398,14 @@ public final class EventDungeonProto {
           to_bitField0_ |= 0x00000008;
         }
         result.userBeatAllCityTasks_ = userBeatAllCityTasks_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.isEvent_ = isEvent_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.persistentEventId_ = persistentEventId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -377,6 +433,12 @@ public final class EventDungeonProto {
         }
         if (other.hasUserBeatAllCityTasks()) {
           setUserBeatAllCityTasks(other.getUserBeatAllCityTasks());
+        }
+        if (other.hasIsEvent()) {
+          setIsEvent(other.getIsEvent());
+        }
+        if (other.hasPersistentEventId()) {
+          setPersistentEventId(other.getPersistentEventId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -431,6 +493,16 @@ public final class EventDungeonProto {
             case 32: {
               bitField0_ |= 0x00000008;
               userBeatAllCityTasks_ = input.readBool();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              isEvent_ = input.readBool();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              persistentEventId_ = input.readInt32();
               break;
             }
           }
@@ -588,6 +660,48 @@ public final class EventDungeonProto {
       public Builder clearUserBeatAllCityTasks() {
         bitField0_ = (bitField0_ & ~0x00000008);
         userBeatAllCityTasks_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool isEvent = 5;
+      private boolean isEvent_ ;
+      public boolean hasIsEvent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public boolean getIsEvent() {
+        return isEvent_;
+      }
+      public Builder setIsEvent(boolean value) {
+        bitField0_ |= 0x00000010;
+        isEvent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsEvent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        isEvent_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 persistentEventId = 6;
+      private int persistentEventId_ ;
+      public boolean hasPersistentEventId() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getPersistentEventId() {
+        return persistentEventId_;
+      }
+      public Builder setPersistentEventId(int value) {
+        bitField0_ |= 0x00000020;
+        persistentEventId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearPersistentEventId() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        persistentEventId_ = 0;
         onChanged();
         return this;
       }
@@ -4345,40 +4459,41 @@ public final class EventDungeonProto {
     java.lang.String[] descriptorData = {
       "\n\022EventDungeon.proto\022\016com.lvl6.proto\032\022Mo" +
       "nsterStuff.proto\032\nTask.proto\032\nUser.proto" +
-      "\"\216\001\n\030BeginDungeonRequestProto\0220\n\006sender\030" +
+      "\"\272\001\n\030BeginDungeonRequestProto\0220\n\006sender\030" +
       "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
       "\022\n\nclientTime\030\002 \001(\003\022\016\n\006taskId\030\003 \001(\005\022\034\n\024u" +
-      "serBeatAllCityTasks\030\004 \001(\010\"\237\002\n\031BeginDunge" +
-      "onResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022+\n\003tsp\030\002 \003(\0132\036" +
-      ".com.lvl6.proto.TaskStageProto\022\022\n\nuserTa" +
-      "skId\030\003 \001(\003\022\016\n\006taskId\030\004 \001(\005\022L\n\006status\030\005 \001",
-      "(\0162<.com.lvl6.proto.BeginDungeonResponse" +
-      "Proto.BeginDungeonStatus\"1\n\022BeginDungeon" +
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\317\001\n\026" +
-      "EndDungeonRequestProto\022@\n\006sender\030\001 \001(\01320" +
-      ".com.lvl6.proto.MinimumUserProtoWithMaxR" +
-      "esources\022\022\n\nuserTaskId\030\002 \001(\003\022\017\n\007userWon\030" +
-      "\003 \001(\010\022\022\n\nclientTime\030\004 \001(\003\022\034\n\024firstTimeUs" +
-      "erWonTask\030\005 \001(\010\022\034\n\024userBeatAllCityTasks\030" +
-      "\006 \001(\010\"\263\002\n\027EndDungeonResponseProto\022@\n\006sen" +
-      "der\030\001 \001(\01320.com.lvl6.proto.MinimumUserPr",
-      "otoWithMaxResources\022H\n\006status\030\002 \001(\01628.co" +
-      "m.lvl6.proto.EndDungeonResponseProto.End" +
-      "DungeonStatus\022:\n\014updatedOrNew\030\003 \003(\0132$.co" +
-      "m.lvl6.proto.FullUserMonsterProto\022\016\n\006tas" +
-      "kId\030\004 \001(\005\022\017\n\007userWon\030\005 \001(\010\"/\n\020EndDungeon" +
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"w\n\033R" +
-      "eviveInDungeonRequestProto\0220\n\006sender\030\001 \001" +
-      "(\0132 .com.lvl6.proto.MinimumUserProto\022\022\n\n" +
-      "userTaskId\030\002 \001(\003\022\022\n\nclientTime\030\003 \001(\003\"\367\001\n" +
-      "\034ReviveInDungeonResponseProto\0220\n\006sender\030",
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "R\n\006status\030\002 \001(\0162B.com.lvl6.proto.ReviveI" +
-      "nDungeonResponseProto.ReviveInDungeonSta" +
-      "tus\"Q\n\025ReviveInDungeonStatus\022\013\n\007SUCCESS\020" +
-      "\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_O" +
-      "THER\020\003B\023B\021EventDungeonProto"
+      "serBeatAllCityTasks\030\004 \001(\010\022\017\n\007isEvent\030\005 \001" +
+      "(\010\022\031\n\021persistentEventId\030\006 \001(\005\"\237\002\n\031BeginD" +
+      "ungeonResponseProto\0220\n\006sender\030\001 \001(\0132 .co" +
+      "m.lvl6.proto.MinimumUserProto\022+\n\003tsp\030\002 \003" +
+      "(\0132\036.com.lvl6.proto.TaskStageProto\022\022\n\nus",
+      "erTaskId\030\003 \001(\003\022\016\n\006taskId\030\004 \001(\005\022L\n\006status" +
+      "\030\005 \001(\0162<.com.lvl6.proto.BeginDungeonResp" +
+      "onseProto.BeginDungeonStatus\"1\n\022BeginDun" +
+      "geonStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"" +
+      "\317\001\n\026EndDungeonRequestProto\022@\n\006sender\030\001 \001" +
+      "(\01320.com.lvl6.proto.MinimumUserProtoWith" +
+      "MaxResources\022\022\n\nuserTaskId\030\002 \001(\003\022\017\n\007user" +
+      "Won\030\003 \001(\010\022\022\n\nclientTime\030\004 \001(\003\022\034\n\024firstTi" +
+      "meUserWonTask\030\005 \001(\010\022\034\n\024userBeatAllCityTa" +
+      "sks\030\006 \001(\010\"\263\002\n\027EndDungeonResponseProto\022@\n",
+      "\006sender\030\001 \001(\01320.com.lvl6.proto.MinimumUs" +
+      "erProtoWithMaxResources\022H\n\006status\030\002 \001(\0162" +
+      "8.com.lvl6.proto.EndDungeonResponseProto" +
+      ".EndDungeonStatus\022:\n\014updatedOrNew\030\003 \003(\0132" +
+      "$.com.lvl6.proto.FullUserMonsterProto\022\016\n" +
+      "\006taskId\030\004 \001(\005\022\017\n\007userWon\030\005 \001(\010\"/\n\020EndDun" +
+      "geonStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"" +
+      "w\n\033ReviveInDungeonRequestProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\022\n\nuserTaskId\030\002 \001(\003\022\022\n\nclientTime\030\003 \001(\003",
+      "\"\367\001\n\034ReviveInDungeonResponseProto\0220\n\006sen" +
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022R\n\006status\030\002 \001(\0162B.com.lvl6.proto.Rev" +
+      "iveInDungeonResponseProto.ReviveInDungeo" +
+      "nStatus\"Q\n\025ReviveInDungeonStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022\016\n\nFA" +
+      "IL_OTHER\020\003B\023B\021EventDungeonProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4390,7 +4505,7 @@ public final class EventDungeonProto {
           internal_static_com_lvl6_proto_BeginDungeonRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BeginDungeonRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "ClientTime", "TaskId", "UserBeatAllCityTasks", },
+              new java.lang.String[] { "Sender", "ClientTime", "TaskId", "UserBeatAllCityTasks", "IsEvent", "PersistentEventId", },
               com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto.class,
               com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto.Builder.class);
           internal_static_com_lvl6_proto_BeginDungeonResponseProto_descriptor =

@@ -73,6 +73,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
     int taskId = reqProto.getTaskId();
 
+    //if is event, start the cool down timer in event_persistent_for_user
+    boolean isEvent = reqProto.getIsEvent();
+    int eventId = reqProto.getPersistentEventId();
+    
     //set some values to send to the client (the response proto)
     BeginDungeonResponseProto.Builder resBuilder = BeginDungeonResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -96,7 +100,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	//determine the specifics for each stage (stored in stageNumsToProtos)
       	//then record specifics in db
     	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap, curTime,
-    			  userTaskIdList, stageNumsToProtos);
+    			  isEvent, eventId, userTaskIdList, stageNumsToProtos);
       }
       if (successful) {
     	  setResponseBuilder(resBuilder, userTaskIdList, stageNumsToProtos);
@@ -230,8 +234,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
-		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, List<Long> utIdList,
-		  Map<Integer, TaskStageProto> stageNumsToProtos) {
+		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, boolean isEvent, int eventId,
+		  List<Long> utIdList, Map<Integer, TaskStageProto> stageNumsToProtos) {
 	  
 	  //local vars storing eventual db data (accounting for multiple monsters in stage)
 	  Map<Integer, List<Integer>> stageNumsToSilvers = new HashMap<Integer, List<Integer>>();
@@ -268,6 +272,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  //send stuff back up to caller
 	  utIdList.add(userTaskId);
 	  stageNumsToProtos.putAll(stageNumsToProtosTemp);
+	  
+	  //start the cool down timer if for event
+	  if (isEvent) {
+	  	int numInserted = InsertUtils.get().insertIntoEventPersistentForUser(uId, eventId, clientTime);
+	  	log.info("started cool down timer for (eventId, userId): " + uId + "," + eventId +
+	  			"\t numInserted=" + numInserted);
+	  }
+	  
 	  return true;
   }
   

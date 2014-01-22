@@ -133,5 +133,6 @@ public interface InsertUtil {
 	//which one is one and which one is two
 	public abstract int insertIntoMonsterEvolvingForUser(int userId, long catalystUserMonsterId,
 			List<Long> userMonsterIds, Timestamp startTime);
-	
+
+	public abstract int insertIntoEventPersistentForUser(int userId, int eventId, Timestamp now);
 }

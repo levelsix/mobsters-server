@@ -928,7 +928,7 @@ public class InsertUtils implements InsertUtil{
 		
 		String tableName = DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER;
 		
-		Map <String, Object> insertParams = new HashMap<String, Object>();
+		Map<String, Object> insertParams = new HashMap<String, Object>();
 		insertParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID,
 				catalystUserMonsterId);
 		insertParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_MONSTER_ID_ONE,
@@ -940,6 +940,19 @@ public class InsertUtils implements InsertUtil{
 
 		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 		
+		return numUpdated;
+	}
+	
+	@Override
+	public int insertIntoEventPersistentForUser(int userId, int eventId, Timestamp now) {
+		String tableName = DBConstants.TABLE_EVENT_PERSISTENT_FOR_USER;
+		
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
+		insertParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID, eventId);
+		insertParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY, now);
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 		return numUpdated;
 	}
 }
