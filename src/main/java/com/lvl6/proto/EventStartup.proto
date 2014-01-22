@@ -81,6 +81,8 @@ message StartupResponseProto {
 	
 	//optional UserEvolutionProto evolution = 29; //defined above, below #21
 	
+	//has the cool down timers for each event for a user
+	repeated UserPersistentEventProto userEvents = 30;
 	
 	
 	//repeated LockBoxEventProto lockBoxEvents = ;

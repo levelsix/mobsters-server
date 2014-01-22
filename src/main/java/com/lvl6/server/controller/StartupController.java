@@ -37,6 +37,7 @@ import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
+import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
@@ -68,11 +69,13 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
+import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
 import com.lvl6.retrieveutils.IAPHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
@@ -210,6 +213,7 @@ public class StartupController extends EventController {
           setFacebookAndExtraSlotsStuff(resBuilder, user);
           setCompletedTasks(resBuilder, user);
           setAllStaticData(resBuilder, user);
+          setEventStuff(resBuilder, user);
           
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
@@ -845,7 +849,17 @@ public class StartupController extends EventController {
   	resBuilder.setStaticDataStuffProto(sdp);
   }
   
-  
+  private void setEventStuff(Builder resBuilder, User user) {
+  	int userId = user.getId();
+  	List<EventPersistentForUser> events = EventPersistentForUserRetrieveUtils
+  			.getUserPersistentEventForUserId(userId);
+  	
+  	for (EventPersistentForUser epfu : events) {
+  		UserPersistentEventProto upep = CreateInfoProtoUtils.createUserPersistentEventProto(epfu);
+  		resBuilder.addUserEvents(upep);
+  	}
+  	
+  }
   
   
   

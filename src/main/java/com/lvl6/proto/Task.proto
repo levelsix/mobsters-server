@@ -77,3 +77,11 @@ message PersistentEventProto {
 		EVOLUTION = 2;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message UserPersistentEventProto {
+	optional int32 userId = 1;
+	optional int32 eventId = 2;
+	optional int64 coolDownStartTime = 3;
+}

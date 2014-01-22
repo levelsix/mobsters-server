@@ -23,6 +23,7 @@ import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
+import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
@@ -105,6 +106,7 @@ import com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.PersistentEventProto.EventType;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
+import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.TournamentStuffProto.MinimumUserProtoWithLevelForTournament;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventRewardProto;
@@ -1360,6 +1362,24 @@ public class CreateInfoProtoUtils {
   	}
   	
   	return pepb.build();
+  }
+  
+  public static UserPersistentEventProto createUserPersistentEventProto(
+  		EventPersistentForUser epfu) {
+  	UserPersistentEventProto.Builder upepb = UserPersistentEventProto.newBuilder();
+  	
+  	int userId = epfu.getUserId();
+  	int eventId = epfu.getEventPersistentId();
+  	Date timeOfEntry = epfu.getTimeOfEntry();
+  	
+  	upepb.setUserId(userId);
+  	upepb.setEventId(eventId);
+  	
+  	if (null != timeOfEntry) {
+  		upepb.setCoolDownStartTime(timeOfEntry.getTime());
+  	}
+  	
+  	return upepb.build();
   }
 
 }
