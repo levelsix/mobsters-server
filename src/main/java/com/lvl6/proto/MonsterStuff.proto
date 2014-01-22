@@ -56,6 +56,8 @@ message MonsterProto {
 		ULTRA = 3;
 		EPIC = 4;
 		LEGENDARY = 5;
+		
+		EVO = 6; //MONSTERS USED FOR EVOLVING
 	}
 	
 	enum MonsterElement {
