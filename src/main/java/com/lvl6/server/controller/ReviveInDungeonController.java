@@ -1,7 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,17 +14,17 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.ReviveInDungeonRequestEvent;
 import com.lvl6.events.response.ReviveInDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
-import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.misc.MiscMethods;
-import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.Builder;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonResponseProto.ReviveInDungeonStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
-import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
+import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -57,6 +56,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int userId = senderProto.getUserId();
     long userTaskId = reqProto.getUserTaskId();
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
+    List<UserMonsterCurrentHealthProto> reviveMeProtoList = reqProto.getReviveMeList();
+    //positive value, need to convert to negative when updating user
+    int gemsSpent = reqProto.getGemsSpent();
 
     //set some values to send to the client (the response proto)
     ReviveInDungeonResponseProto.Builder resBuilder = ReviveInDungeonResponseProto.newBuilder();
@@ -66,19 +68,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-//      int previousSilver = 0;
-//      int previousGold = 0;
+//      int previousGems = 0;
 
-      List<TaskForUserOngoing> userTaskList = new ArrayList<TaskForUserOngoing>();
-      boolean legit = checkLegit(resBuilder, aUser, userId, userTaskId, userTaskList);
+      //will be populated by checkLegit(...);
+      Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
+    	
+//      List<TaskForUserOngoing> userTaskList = new ArrayList<TaskForUserOngoing>();
+      boolean legit = checkLegit(resBuilder, aUser, userId, gemsSpent, userTaskId,
+      		reviveMeProtoList, userMonsterIdToExpectedHealth);//, userTaskList);
 
 
       boolean successful = false;
       if(legit) {
-    	  TaskForUserOngoing ut = userTaskList.get(0);
-//        previousSilver = aUser.getCoins() + aUser.getVaultBalance();
-//        previousGold = aUser.getDiamonds();
-    	  successful = writeChangesToDb(aUser, userId, ut, userTaskId, curTime);
+//    	  TaskForUserOngoing ut = userTaskList.get(0);
+//        previousGems = aUser.getGems();
+    	  successful = writeChangesToDb(aUser, userId, userTaskId, gemsSpent, curTime,
+    	  		userMonsterIdToExpectedHealth);
 //        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
       }
       if (successful) {
@@ -115,23 +120,42 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
    * Return true if user request is valid; false otherwise and set the
    * builder status to the appropriate value.
    */
-  private boolean checkLegit(Builder resBuilder, User u, int userId,
-		  long userTaskId, List<TaskForUserOngoing> userTaskList) {
+  private boolean checkLegit(Builder resBuilder, User u, int userId, int gemsSpent,
+		  long userTaskId, List<UserMonsterCurrentHealthProto> reviveMeProtoList,
+		  Map<Long, Integer> userMonsterIdToExpectedHealth) {//, List<TaskForUserOngoing> userTaskList) {
     if (null == u) {
       log.error("unexpected error: user is null. user=" + u);
       return false;
     }
+//    
+//    //make sure user task exists
+//    TaskForUserOngoing ut = TaskForUserOngoingRetrieveUtils.getUserTaskForId(userTaskId);
+//    if (null == ut) {
+//    	log.error("unexpected error: no user task for id userTaskId=" + userTaskId);
+//    	return false;
+//    }
     
-    //make sure user task exists
-    TaskForUserOngoing ut = TaskForUserOngoingRetrieveUtils.getUserTaskForId(userTaskId);
-    if (null == ut) {
-    	log.error("unexpected error: no user task for id userTaskId=" + userTaskId);
+    //extract the ids so it's easier to get userMonsters from db
+    List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(reviveMeProtoList,
+    		userMonsterIdToExpectedHealth);
+    Map<Long, MonsterForUser> userMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+    		.getSpecificOrAllUserMonstersForUser(userId, userMonsterIds);
+
+    if (null == userMonsters || userMonsters.isEmpty()) {
+    	log.error("unexpected error: userMonsterIds don't exist. ids=" + userMonsterIds);
     	return false;
+    }
+
+    //see if the user has the equips
+    if (userMonsters.size() != reviveMeProtoList.size()) {
+    	log.error("unexpected error: mismatch between user equips client sent and " +
+    			"what is in the db. clientUserMonsterIds=" + userMonsterIds + "\t inDb=" +
+    			userMonsters + "\t continuing the processing");
     }
     
     //make sure user has enough diamonds/gold?
     int userDiamonds = u.getGems();
-    int cost = ControllerConstants.TASK_ACTION__REVIVE_COST;
+    int cost = gemsSpent;
     if (cost > userDiamonds) {
     	log.error("user error: user does not have enough diamonds to revive. " +
     			"cost=" + cost + "\t userDiamonds=" + userDiamonds);
@@ -139,36 +163,49 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	return false;
     }
     
-    userTaskList.add(ut);
+//    userTaskList.add(ut);
     resBuilder.setStatus(ReviveInDungeonStatus.SUCCESS);
     return true;
   }
 
-  private boolean writeChangesToDb(User u, int uId, TaskForUserOngoing ut, long userTaskId, 
-		  Timestamp clientTime) {
+  private boolean writeChangesToDb(User u, int uId, long userTaskId, int gemsSpent,
+  		Timestamp clientTime, Map<Long, Integer> userMonsterIdToExpectedHealth) {
 	  
 	  //update user diamonds
-	  int diamondChange = -1 * ControllerConstants.TASK_ACTION__REVIVE_COST;
-	  if (!updateUser(u, diamondChange)) {
+	  int gemsChange = -1 * gemsSpent;
+	  if (!updateUser(u, gemsChange)) {
 		  log.error("unexpected error: could not decrement user's gold by " +
-				  diamondChange);
+				  gemsChange);
 		  //update num revives for user task
 		  return false;
 	  }
 	  
-	  int numRevives = ut.getNumRevives() + 1;
-	  int numUpdated = UpdateUtils.get().incrementUserTaskNumRevives(userTaskId, numRevives); 
+	  int numRevivesDelta = 1;
+	  int numUpdated = UpdateUtils.get().incrementUserTaskNumRevives(userTaskId, numRevivesDelta); 
 	  if (1 != numUpdated) {
 		  log.error("unexpected error: user_task not updated correctly. Attempting " +
 				  "to give back diamonds. userTaskId=" + userTaskId + "\t numUpdated=" +
 				  numUpdated + "\t user=" + u);
 		  //undo gold charge
-		  if (!updateUser(u, diamondChange)) {
-			  log.error("unexpected error: could not change user's gold by " +
-					  diamondChange);
+		  if (!updateUser(u, -1 * gemsChange)) {
+			  log.error("unexpected error: could not change back user's gems by " +
+					  -1 * gemsChange);
 		  }
 		  return false;
 	  }
+	  
+	  //HEAL THE USER MONSTERS
+	  //replace existing health for these user monsters with new values 
+	  numUpdated = UpdateUtils.get()
+	  		.updateUserMonstersHealth(userMonsterIdToExpectedHealth);
+
+	  if (numUpdated >= userMonsterIdToExpectedHealth.size()) {
+	  	return true;
+	  }
+	  log.warn("unexpected error: not all user equips were updated. " +
+	  		"actual numUpdated=" + numUpdated + "expected: " +
+	  		"userMonsterIdToExpectedHealth=" + userMonsterIdToExpectedHealth);
+	  
 	  return true;
   }
   

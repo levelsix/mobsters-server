@@ -142,7 +142,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	if (numUpdated >= userMonsterIdToExpectedHealth.size()) {
   		return true;
   	}
-  	log.warn("unexpected error: not all user equips were updated. " +
+  	log.warn("unexpected error: not all user monsters were updated. " +
   			"actual numUpdated=" + numUpdated + "expected: " +
   			"userMonsterIdToExpectedHealth=" + userMonsterIdToExpectedHealth);
 	  return true;
