@@ -224,6 +224,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     } else if (resourceType == ResourceType.OIL) {
     	oilChange = resourceChange;
     }
+    
+    if (0 == gemChange && 0 == cashChange && 0 == oilChange) {
+    	log.error("gemChange=" + gemChange + " cashChange=" + cashChange + " oilChange=" +
+    			oilChange + "\t Not purchasing norm struct.");
+    	return false;
+    }
 
     int num = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
     if (1 != num) {
@@ -232,7 +238,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       return false;
     } else {//things went ok
       if (0 != gemChange) {
-        money.put(MiscMethods.gems, gemChange * -1);
+        money.put(MiscMethods.gems, gemChange);
       }
       if (0 != cashChange) {
         money.put(MiscMethods.cash, cashChange);

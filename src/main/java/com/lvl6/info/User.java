@@ -162,85 +162,85 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+//
+//	public boolean updateResetNumbadgesSetdevicetoken(String deviceToken) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.USER__ID, id);
+//
+//		if (deviceToken != null && deviceToken.length() == 0) {
+//			deviceToken = null;
+//		}
+//
+//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+//		absoluteParams.put(DBConstants.USER__NUM_BADGES, 0);
+//		absoluteParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
+//				conditionParams, "and");
+//		if (numUpdated == 1) {
+//			this.numBadges = 0;
+//			this.deviceToken = deviceToken;
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//	public boolean updateRelativeBadge(int badgeChange) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.USER__ID, id);
+//
+//		Map <String, Object> relativeParams = new HashMap<String, Object>();
+//		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
+//				conditionParams, "and");
+//		if (numUpdated == 1) {
+//			this.numBadges += badgeChange;
+//			return true;
+//		}
+//		return false;
+//	}
 
-	public boolean updateResetNumbadgesSetdevicetoken(String deviceToken) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		if (deviceToken != null && deviceToken.length() == 0) {
-			deviceToken = null;
-		}
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__NUM_BADGES, 0);
-		absoluteParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.numBadges = 0;
-			this.deviceToken = deviceToken;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean updateRelativeBadge(int badgeChange) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, null, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.numBadges += badgeChange;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean updateRelativeBadgeAbsoluteLastBattleNotificationTime(int badgeChange, Timestamp newLastBattleNotificationTime) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_BATTLE_NOTIFICATION_TIME, newLastBattleNotificationTime);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.numBadges += badgeChange;
-			this.lastBattleNotificationTime = newLastBattleNotificationTime;
-			return true;
-		}
-		return false;
-	}
-
-
-	public boolean updateRelativeBadgeAbsoluteLastWallPostNotificationTime(int badgeChange, Timestamp newLastWallNotificationTime) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_WALL_POST_NOTIFICATION_TIME, newLastWallNotificationTime);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.numBadges += badgeChange;
-			this.lastBattleNotificationTime = newLastWallNotificationTime;
-			return true;
-		}
-		return false;
-	}
+//	public boolean updateRelativeBadgeAbsoluteLastBattleNotificationTime(int badgeChange, Timestamp newLastBattleNotificationTime) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.USER__ID, id);
+//
+//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+//		absoluteParams.put(DBConstants.USER__LAST_BATTLE_NOTIFICATION_TIME, newLastBattleNotificationTime);
+//
+//		Map <String, Object> relativeParams = new HashMap<String, Object>();
+//		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+//				conditionParams, "and");
+//		if (numUpdated == 1) {
+//			this.numBadges += badgeChange;
+//			this.lastBattleNotificationTime = newLastBattleNotificationTime;
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//
+//	public boolean updateRelativeBadgeAbsoluteLastWallPostNotificationTime(int badgeChange, Timestamp newLastWallNotificationTime) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.USER__ID, id);
+//
+//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+//		absoluteParams.put(DBConstants.USER__LAST_WALL_POST_NOTIFICATION_TIME, newLastWallNotificationTime);
+//
+//		Map <String, Object> relativeParams = new HashMap<String, Object>();
+//		relativeParams.put(DBConstants.USER__NUM_BADGES, badgeChange);
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
+//				conditionParams, "and");
+//		if (numUpdated == 1) {
+//			this.numBadges += badgeChange;
+//			this.lastBattleNotificationTime = newLastWallNotificationTime;
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public boolean updateAbsoluteApsalaridLastloginBadgesNumConsecutiveDaysLoggedIn(String newApsalarId, Timestamp loginTime, 
 			int newBadges, int newNumConsecutiveDaysLoggedIn) {
@@ -694,44 +694,44 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateNameUserTypeUdid(String newName,
-			String newUdid, int relativeDiamondCost) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
+//	public boolean updateNameUserTypeUdid(String newName,
+//			String newUdid, int relativeDiamondCost) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.USER__ID, id);
+//
+//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+//		//if (newUserType != null) absoluteParams.put(DBConstants.USER__TYPE, newUserType.getNumber());
+//		if (newName != null) absoluteParams.put(DBConstants.USER__NAME, newName);
+//		if (newUdid != null) absoluteParams.put(DBConstants.USER__UDID, newUdid);
+//
+//		Map <String, Object> relativeParams = new HashMap<String, Object>();
+//		relativeParams.put(DBConstants.USER__GEMS, relativeDiamondCost);
+//
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+//				relativeParams, absoluteParams, conditionParams, "and");
+//		if (numUpdated == 1) {
+//			//if (newUserType != null) this.type = newUserType;
+//			if (newName != null) this.name = newName;
+//			if (newUdid != null) this.udid = newUdid;
+//			this.gems += relativeDiamondCost;
+//			return true;
+//		}
+//		return false;
+//	}
 
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		//if (newUserType != null) absoluteParams.put(DBConstants.USER__TYPE, newUserType.getNumber());
-		if (newName != null) absoluteParams.put(DBConstants.USER__NAME, newName);
-		if (newUdid != null) absoluteParams.put(DBConstants.USER__UDID, newUdid);
-
-		Map <String, Object> relativeParams = new HashMap<String, Object>();
-		relativeParams.put(DBConstants.USER__GEMS, relativeDiamondCost);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
-				relativeParams, absoluteParams, conditionParams, "and");
-		if (numUpdated == 1) {
-			//if (newUserType != null) this.type = newUserType;
-			if (newName != null) this.name = newName;
-			if (newUdid != null) this.udid = newUdid;
-			this.gems += relativeDiamondCost;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean updateElo(int newElo) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.USER__ID, id);
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__ELO, newElo);
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			this.elo = newElo;
-			return true;
-		}
-		return false;
-	}
+//	public boolean updateElo(int newElo) {
+//		Map <String, Object> conditionParams = new HashMap<String, Object>();
+//		conditionParams.put(DBConstants.USER__ID, id);
+//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+//		absoluteParams.put(DBConstants.USER__ELO, newElo);
+//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
+//				conditionParams, "and");
+//		if (numUpdated == 1) {
+//			this.elo = newElo;
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public boolean updateLastTimeQueued(Date lastTimeQueued) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();

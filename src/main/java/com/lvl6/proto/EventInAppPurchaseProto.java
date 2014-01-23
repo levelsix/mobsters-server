@@ -3004,10 +3004,10 @@ public final class EventInAppPurchaseProto {
   public interface ExchangeGemsForResourcesRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
     
     // optional int32 numGems = 2;
     boolean hasNumGems();
@@ -3054,16 +3054,16 @@ public final class EventInAppPurchaseProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -3108,7 +3108,7 @@ public final class EventInAppPurchaseProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       numGems_ = 0;
       numResources_ = 0;
       resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
@@ -3296,7 +3296,7 @@ public final class EventInAppPurchaseProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -3434,7 +3434,7 @@ public final class EventInAppPurchaseProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -3474,21 +3474,21 @@ public final class EventInAppPurchaseProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -3502,7 +3502,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -3512,12 +3512,12 @@ public final class EventInAppPurchaseProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -3530,7 +3530,7 @@ public final class EventInAppPurchaseProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -3538,12 +3538,12 @@ public final class EventInAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -3551,11 +3551,11 @@ public final class EventInAppPurchaseProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -3665,10 +3665,10 @@ public final class EventInAppPurchaseProto {
   public interface ExchangeGemsForResourcesResponseProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     boolean hasSender();
-    com.lvl6.proto.UserProto.MinimumUserProto getSender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder();
     
     // optional .com.lvl6.proto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus status = 2;
     boolean hasStatus();
@@ -3775,16 +3775,16 @@ public final class EventInAppPurchaseProto {
     }
     
     private int bitField0_;
-    // optional .com.lvl6.proto.MinimumUserProto sender = 1;
+    // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
     public static final int SENDER_FIELD_NUMBER = 1;
-    private com.lvl6.proto.UserProto.MinimumUserProto sender_;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_;
     public boolean hasSender() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
       return sender_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
       return sender_;
     }
     
@@ -3799,7 +3799,7 @@ public final class EventInAppPurchaseProto {
     }
     
     private void initFields() {
-      sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       status_ = com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponseProto.ExchangeGemsForResourcesStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
@@ -3963,7 +3963,7 @@ public final class EventInAppPurchaseProto {
       public Builder clear() {
         super.clear();
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
         } else {
           senderBuilder_.clear();
         }
@@ -4074,7 +4074,7 @@ public final class EventInAppPurchaseProto {
               break;
             }
             case 10: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder();
               if (hasSender()) {
                 subBuilder.mergeFrom(getSender());
               }
@@ -4099,21 +4099,21 @@ public final class EventInAppPurchaseProto {
       
       private int bitField0_;
       
-      // optional .com.lvl6.proto.MinimumUserProto sender = 1;
-      private com.lvl6.proto.UserProto.MinimumUserProto sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.MinimumUserProtoWithMaxResources sender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> senderBuilder_;
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> senderBuilder_;
       public boolean hasSender() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getSender() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources getSender() {
         if (senderBuilder_ == null) {
           return sender_;
         } else {
           return senderBuilder_.getMessage();
         }
       }
-      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder setSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -4127,7 +4127,7 @@ public final class EventInAppPurchaseProto {
         return this;
       }
       public Builder setSender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder builderForValue) {
         if (senderBuilder_ == null) {
           sender_ = builderForValue.build();
           onChanged();
@@ -4137,12 +4137,12 @@ public final class EventInAppPurchaseProto {
         bitField0_ |= 0x00000001;
         return this;
       }
-      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProto value) {
+      public Builder mergeSender(com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources value) {
         if (senderBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001) &&
-              sender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+              sender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance()) {
             sender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(sender_).mergeFrom(value).buildPartial();
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.newBuilder(sender_).mergeFrom(value).buildPartial();
           } else {
             sender_ = value;
           }
@@ -4155,7 +4155,7 @@ public final class EventInAppPurchaseProto {
       }
       public Builder clearSender() {
         if (senderBuilder_ == null) {
-          sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          sender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.getDefaultInstance();
           onChanged();
         } else {
           senderBuilder_.clear();
@@ -4163,12 +4163,12 @@ public final class EventInAppPurchaseProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getSenderBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder getSenderBuilder() {
         bitField0_ |= 0x00000001;
         onChanged();
         return getSenderFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder() {
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder getSenderOrBuilder() {
         if (senderBuilder_ != null) {
           return senderBuilder_.getMessageOrBuilder();
         } else {
@@ -4176,11 +4176,11 @@ public final class EventInAppPurchaseProto {
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder> 
           getSenderFieldBuilder() {
         if (senderBuilder_ == null) {
           senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+              com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResourcesOrBuilder>(
                   sender_,
                   getParentForChildren(),
                   isClean());
@@ -4291,20 +4291,21 @@ public final class EventInAppPurchaseProto {
       "DiamondsType:\nFB_CONNECT\"v\n\026EarnFreeDiam" +
       "ondsStatus\022\013\n\007SUCCESS\020\001\022%\n!CLIENT_TOO_AP" +
       "ART_FROM_SERVER_TIME\020\002\022\030\n\024METHOD_NOT_SUP" +
-      "PORTED\020\003\022\016\n\nOTHER_FAIL\020\004\"\315\001\n$ExchangeGem" +
-      "sForResourcesRequestProto\0220\n\006sender\030\001 \001(",
-      "\0132 .com.lvl6.proto.MinimumUserProto\022\017\n\007n" +
-      "umGems\030\002 \001(\005\022\024\n\014numResources\030\003 \001(\005\0228\n\014re" +
-      "sourceType\030\004 \001(\0162\034.com.lvl6.proto.Resour" +
-      "ceType:\004CASH\022\022\n\nclientTime\030\005 \001(\003\"\232\002\n%Exc" +
-      "hangeGemsForResourcesResponseProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Ex" +
-      "changeGemsForResourcesResponseProto.Exch" +
-      "angeGemsForResourcesStatus\"Y\n\036ExchangeGe" +
-      "msForResourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAI",
-      "L_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003B\031B" +
-      "\027EventInAppPurchaseProto"
+      "PORTED\020\003\022\016\n\nOTHER_FAIL\020\004\"\335\001\n$ExchangeGem" +
+      "sForResourcesRequestProto\022@\n\006sender\030\001 \001(",
+      "\01320.com.lvl6.proto.MinimumUserProtoWithM" +
+      "axResources\022\017\n\007numGems\030\002 \001(\005\022\024\n\014numResou" +
+      "rces\030\003 \001(\005\0228\n\014resourceType\030\004 \001(\0162\034.com.l" +
+      "vl6.proto.ResourceType:\004CASH\022\022\n\nclientTi" +
+      "me\030\005 \001(\003\"\252\002\n%ExchangeGemsForResourcesRes" +
+      "ponseProto\022@\n\006sender\030\001 \001(\01320.com.lvl6.pr" +
+      "oto.MinimumUserProtoWithMaxResources\022d\n\006" +
+      "status\030\002 \001(\0162T.com.lvl6.proto.ExchangeGe" +
+      "msForResourcesResponseProto.ExchangeGems" +
+      "ForResourcesStatus\"Y\n\036ExchangeGemsForRes",
+      "ourcesStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020" +
+      "\002\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\003B\031B\027EventIn" +
+      "AppPurchaseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

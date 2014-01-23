@@ -64,7 +64,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     HealMonsterRequestProto reqProto = ((HealMonsterRequestEvent)event).getHealMonsterRequestProto();
-    //log.info("reqProto=" + reqProto);
+    log.info("reqProto=" + reqProto);
 
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
@@ -290,30 +290,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		  Map<Long, Integer> userMonsterIdsToHealths, boolean isSpeedup, int gemsForSpeedup,
 		  Map<String, Integer> moneyForSpeedup, Map<String, Integer> changeMap, int maxCash) {
 
-//  	log.info("cashChange=" + cashChange);
-//  	log.info("gemCost=" + gemCost);
-//  	log.info("deleteMap=" + protoDeleteMap);
-//  	log.info("updateMap=" + protoUpdateMap);
-//  	log.info("newMap=" + protoNewMap);
-//  	log.info("gemCostForHealing=" + gemCostForHealing);
-//  	log.info("isSpeedup=" + isSpeedup);
-//  	log.info("gemsForSpedup" + gemsForSpeedup);
+  	log.info("cashChange=" + cashChange);
+  	log.info("gemCost=" + gemCost);
+  	log.info("deleteMap=" + protoDeleteMap);
+  	log.info("updateMap=" + protoUpdateMap);
+  	log.info("newMap=" + protoNewMap);
+  	log.info("gemCostForHealing=" + gemCostForHealing);
+  	log.info("isSpeedup=" + isSpeedup);
+  	log.info("gemsForSpedup" + gemsForSpeedup);
   	
   	int oilChange = 0;
   	int gemChange = -1 * gemCost;
   	
+  	//if user is getting cash back, make sure it doesn't exceed his limit
+  	if (cashChange > 0) {
+  		int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash.
+  		log.info("curCash=" + curCash);
+  		int maxCashUserCanGain = maxCash - curCash;
+  		log.info("maxCashUserCanGain=" + maxCashUserCanGain);
+  		cashChange = Math.min(cashChange, maxCashUserCanGain);
+  	}
+  	
   	//if checks are here because the changes are 0 if the HealMonsterWaitTimeComplete
-  	//feature part of this controller is being processed
-  	if (0 != cashChange || 0 != gemCost) {
-  		//if user is getting cash back, make sure it doesn't exceed his limit
-  		if (cashChange > 0) {
-  			int curCash = Math.min(u.getCash(), maxCash); //in case user's cash is more than maxCash.
-  			int maxCashUserCanGain = maxCash - curCash;
-  			cashChange = Math.min(oilChange, maxCashUserCanGain);
-  		}
+  	//feature part of this controller is being processed or if user reached max resources
+  	if (0 != cashChange || 0 != gemChange) {
   		
   		//CHARGE THE USER
-  		log.info("user before funds change. u=" + u);
+  		log.info("user before funds change. u=" + u + "\t cashChange=" + cashChange +
+  				"\t oilChange=" + oilChange + "\t gemChange=" + gemChange);
   		int num = u.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange);
   		log.info("user after funds change. u=" + u);
   		if (num != 1) {

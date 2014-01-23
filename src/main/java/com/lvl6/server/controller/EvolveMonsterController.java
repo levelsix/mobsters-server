@@ -239,6 +239,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		//CHARGE THE USER
 		int cashChange = 0;
 		int gemChange = -1 * gemsSpent;
+		
+		if (0 == gemChange && 0 == oilChange) {
+			log.error("gemchange=" + gemChange + "\t oilChange=" + oilChange + "\t Not evolving.");
+			return false;
+		}
+		
 		int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 		if (1 != numChange) {
 			log.warn("problem with updating user stats: gemChange=" + gemChange

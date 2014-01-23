@@ -279,13 +279,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		int cashChange = 0;
 		int gemChange = -1 * gemsSpent;
 
-		if (0 != oilChange || 0 != gemsSpent) {
-			//if user is getting oil back, make sure it doesn't exceed his limit
-			if (oilChange > 0) {
-				int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil.
-				int maxOilUserCanGain = maxOil - curOil;
-				oilChange = Math.min(oilChange, maxOilUserCanGain);
-			}
+		//if user is getting oil back, make sure it doesn't exceed his limit
+		if (oilChange > 0) {
+			int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil.
+			int maxOilUserCanGain = maxOil - curOil;
+			oilChange = Math.min(oilChange, maxOilUserCanGain);
+		}
+		
+		if (0 != oilChange || 0 != gemChange) {
 			
 //			log.info("oilChange=" + oilChange + "\t gemChange=" + gemChange);
 			int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
