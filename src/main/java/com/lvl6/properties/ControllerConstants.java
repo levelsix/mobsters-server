@@ -61,10 +61,6 @@ public class ControllerConstants {
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 	
-	//TASK ACTION (MOST LIKELY NOT GOING TO BE USED)
-	public static final int TASK_ACTION__REVIVE_COST = 10;
-	
-	
 	//old aoc constants
   public static final int NOT_SET = -1;
   

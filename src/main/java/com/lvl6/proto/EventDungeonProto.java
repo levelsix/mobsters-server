@@ -3390,6 +3390,20 @@ public final class EventDungeonProto {
     // optional int64 clientTime = 3;
     boolean hasClientTime();
     long getClientTime();
+    
+    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto reviveMe = 4;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> 
+        getReviveMeList();
+    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getReviveMe(int index);
+    int getReviveMeCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
+        getReviveMeOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getReviveMeOrBuilder(
+        int index);
+    
+    // optional int32 gemsSpent = 5;
+    boolean hasGemsSpent();
+    int getGemsSpent();
   }
   public static final class ReviveInDungeonRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -3453,10 +3467,43 @@ public final class EventDungeonProto {
       return clientTime_;
     }
     
+    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto reviveMe = 4;
+    public static final int REVIVEME_FIELD_NUMBER = 4;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> reviveMe_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> getReviveMeList() {
+      return reviveMe_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
+        getReviveMeOrBuilderList() {
+      return reviveMe_;
+    }
+    public int getReviveMeCount() {
+      return reviveMe_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getReviveMe(int index) {
+      return reviveMe_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getReviveMeOrBuilder(
+        int index) {
+      return reviveMe_.get(index);
+    }
+    
+    // optional int32 gemsSpent = 5;
+    public static final int GEMSSPENT_FIELD_NUMBER = 5;
+    private int gemsSpent_;
+    public boolean hasGemsSpent() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getGemsSpent() {
+      return gemsSpent_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       userTaskId_ = 0L;
       clientTime_ = 0L;
+      reviveMe_ = java.util.Collections.emptyList();
+      gemsSpent_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3479,6 +3526,12 @@ public final class EventDungeonProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt64(3, clientTime_);
       }
+      for (int i = 0; i < reviveMe_.size(); i++) {
+        output.writeMessage(4, reviveMe_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, gemsSpent_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -3499,6 +3552,14 @@ public final class EventDungeonProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(3, clientTime_);
+      }
+      for (int i = 0; i < reviveMe_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, reviveMe_.get(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, gemsSpent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3617,6 +3678,7 @@ public final class EventDungeonProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getReviveMeFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3635,6 +3697,14 @@ public final class EventDungeonProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000004);
+        if (reviveMeBuilder_ == null) {
+          reviveMe_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          reviveMeBuilder_.clear();
+        }
+        gemsSpent_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -3689,6 +3759,19 @@ public final class EventDungeonProto {
           to_bitField0_ |= 0x00000004;
         }
         result.clientTime_ = clientTime_;
+        if (reviveMeBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            reviveMe_ = java.util.Collections.unmodifiableList(reviveMe_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.reviveMe_ = reviveMe_;
+        } else {
+          result.reviveMe_ = reviveMeBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.gemsSpent_ = gemsSpent_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3713,6 +3796,35 @@ public final class EventDungeonProto {
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
+        }
+        if (reviveMeBuilder_ == null) {
+          if (!other.reviveMe_.isEmpty()) {
+            if (reviveMe_.isEmpty()) {
+              reviveMe_ = other.reviveMe_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureReviveMeIsMutable();
+              reviveMe_.addAll(other.reviveMe_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.reviveMe_.isEmpty()) {
+            if (reviveMeBuilder_.isEmpty()) {
+              reviveMeBuilder_.dispose();
+              reviveMeBuilder_ = null;
+              reviveMe_ = other.reviveMe_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              reviveMeBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getReviveMeFieldBuilder() : null;
+            } else {
+              reviveMeBuilder_.addAllMessages(other.reviveMe_);
+            }
+          }
+        }
+        if (other.hasGemsSpent()) {
+          setGemsSpent(other.getGemsSpent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3762,6 +3874,17 @@ public final class EventDungeonProto {
             case 24: {
               bitField0_ |= 0x00000004;
               clientTime_ = input.readInt64();
+              break;
+            }
+            case 34: {
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addReviveMe(subBuilder.buildPartial());
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              gemsSpent_ = input.readInt32();
               break;
             }
           }
@@ -3898,6 +4021,213 @@ public final class EventDungeonProto {
       public Builder clearClientTime() {
         bitField0_ = (bitField0_ & ~0x00000004);
         clientTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto reviveMe = 4;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> reviveMe_ =
+        java.util.Collections.emptyList();
+      private void ensureReviveMeIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          reviveMe_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto>(reviveMe_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> reviveMeBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> getReviveMeList() {
+        if (reviveMeBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(reviveMe_);
+        } else {
+          return reviveMeBuilder_.getMessageList();
+        }
+      }
+      public int getReviveMeCount() {
+        if (reviveMeBuilder_ == null) {
+          return reviveMe_.size();
+        } else {
+          return reviveMeBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getReviveMe(int index) {
+        if (reviveMeBuilder_ == null) {
+          return reviveMe_.get(index);
+        } else {
+          return reviveMeBuilder_.getMessage(index);
+        }
+      }
+      public Builder setReviveMe(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
+        if (reviveMeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureReviveMeIsMutable();
+          reviveMe_.set(index, value);
+          onChanged();
+        } else {
+          reviveMeBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setReviveMe(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
+        if (reviveMeBuilder_ == null) {
+          ensureReviveMeIsMutable();
+          reviveMe_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          reviveMeBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addReviveMe(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
+        if (reviveMeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureReviveMeIsMutable();
+          reviveMe_.add(value);
+          onChanged();
+        } else {
+          reviveMeBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addReviveMe(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
+        if (reviveMeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureReviveMeIsMutable();
+          reviveMe_.add(index, value);
+          onChanged();
+        } else {
+          reviveMeBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addReviveMe(
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
+        if (reviveMeBuilder_ == null) {
+          ensureReviveMeIsMutable();
+          reviveMe_.add(builderForValue.build());
+          onChanged();
+        } else {
+          reviveMeBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addReviveMe(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
+        if (reviveMeBuilder_ == null) {
+          ensureReviveMeIsMutable();
+          reviveMe_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          reviveMeBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllReviveMe(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> values) {
+        if (reviveMeBuilder_ == null) {
+          ensureReviveMeIsMutable();
+          super.addAll(values, reviveMe_);
+          onChanged();
+        } else {
+          reviveMeBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearReviveMe() {
+        if (reviveMeBuilder_ == null) {
+          reviveMe_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          reviveMeBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeReviveMe(int index) {
+        if (reviveMeBuilder_ == null) {
+          ensureReviveMeIsMutable();
+          reviveMe_.remove(index);
+          onChanged();
+        } else {
+          reviveMeBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder getReviveMeBuilder(
+          int index) {
+        return getReviveMeFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getReviveMeOrBuilder(
+          int index) {
+        if (reviveMeBuilder_ == null) {
+          return reviveMe_.get(index);  } else {
+          return reviveMeBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
+           getReviveMeOrBuilderList() {
+        if (reviveMeBuilder_ != null) {
+          return reviveMeBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(reviveMe_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder addReviveMeBuilder() {
+        return getReviveMeFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder addReviveMeBuilder(
+          int index) {
+        return getReviveMeFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder> 
+           getReviveMeBuilderList() {
+        return getReviveMeFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
+          getReviveMeFieldBuilder() {
+        if (reviveMeBuilder_ == null) {
+          reviveMeBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder>(
+                  reviveMe_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          reviveMe_ = null;
+        }
+        return reviveMeBuilder_;
+      }
+      
+      // optional int32 gemsSpent = 5;
+      private int gemsSpent_ ;
+      public boolean hasGemsSpent() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getGemsSpent() {
+        return gemsSpent_;
+      }
+      public Builder setGemsSpent(int value) {
+        bitField0_ |= 0x00000010;
+        gemsSpent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGemsSpent() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        gemsSpent_ = 0;
         onChanged();
         return this;
       }
@@ -4541,17 +4871,19 @@ public final class EventDungeonProto {
       "updatedOrNew\030\003 \003(\0132$.com.lvl6.proto.Full" +
       "UserMonsterProto\022\016\n\006taskId\030\004 \001(\005\022\017\n\007user" +
       "Won\030\005 \001(\010\"/\n\020EndDungeonStatus\022\013\n\007SUCCESS" +
-      "\020\001\022\016\n\nFAIL_OTHER\020\002\"w\n\033ReviveInDungeonReq" +
-      "uestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro" +
-      "to.MinimumUserProto\022\022\n\nuserTaskId\030\002 \001(\003\022",
-      "\022\n\nclientTime\030\003 \001(\003\"\367\001\n\034ReviveInDungeonR" +
-      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
-      "proto.MinimumUserProto\022R\n\006status\030\002 \001(\0162B" +
-      ".com.lvl6.proto.ReviveInDungeonResponseP" +
-      "roto.ReviveInDungeonStatus\"Q\n\025ReviveInDu" +
-      "ngeonStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_INSUFFI" +
-      "CIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021EventDu" +
-      "ngeonProto"
+      "\020\001\022\016\n\nFAIL_OTHER\020\002\"\313\001\n\033ReviveInDungeonRe" +
+      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
+      "oto.MinimumUserProto\022\022\n\nuserTaskId\030\002 \001(\003",
+      "\022\022\n\nclientTime\030\003 \001(\003\022?\n\010reviveMe\030\004 \003(\0132-" +
+      ".com.lvl6.proto.UserMonsterCurrentHealth" +
+      "Proto\022\021\n\tgemsSpent\030\005 \001(\005\"\367\001\n\034ReviveInDun" +
+      "geonResponseProto\0220\n\006sender\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022R\n\006status\030\002 " +
+      "\001(\0162B.com.lvl6.proto.ReviveInDungeonResp" +
+      "onseProto.ReviveInDungeonStatus\"Q\n\025Reviv" +
+      "eInDungeonStatus\022\013\n\007SUCCESS\020\001\022\033\n\027FAIL_IN" +
+      "SUFFICIENT_FUNDS\020\002\022\016\n\nFAIL_OTHER\020\003B\023B\021Ev" +
+      "entDungeonProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4595,7 +4927,7 @@ public final class EventDungeonProto {
           internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ReviveInDungeonRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "UserTaskId", "ClientTime", },
+              new java.lang.String[] { "Sender", "UserTaskId", "ClientTime", "ReviveMe", "GemsSpent", },
               com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto.class,
               com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto.Builder.class);
           internal_static_com_lvl6_proto_ReviveInDungeonResponseProto_descriptor =

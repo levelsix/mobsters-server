@@ -75,12 +75,18 @@ message MonsterProto {
 message MonsterLevelInfoProto {
 	optional int32 lvl = 1;
 	optional int32 hp = 2;
-	optional int32 attack = 3;
 	
 	//exp required to get to current level
-	optional int32 curLvlRequiredExp = 4;
+	optional int32 curLvlRequiredExp = 3;
+	optional int32 feederExp = 4;
 	
-	optional int32 feederExp = 5;
+	//maybe the monsters can inflict dmg on themselves 
+	optional sint32 fireDmg = 5;
+	optional sint32 grassDmg = 6;
+	optional sint32 waterDmg = 7;
+	optional sint32 lightningDmg = 8;
+	optional sint32 darknessDmg = 9;
+	optional sint32 rockDmg = 10;
 }
 
 //------------------------------------------------------------------------------------------

@@ -1251,9 +1251,14 @@ public class CreateInfoProtoUtils {
   		MonsterLevelInfoProto.Builder mlipb = MonsterLevelInfoProto.newBuilder();
   		mlipb.setLvl(lvl);
   		mlipb.setHp(info.getHp());
-  		mlipb.setAttack(info.getAttack());
-  		mlipb.setFeederExp(info.getFeederExp());
   		mlipb.setCurLvlRequiredExp(info.getCurLvlRequiredExp());
+  		mlipb.setFeederExp(info.getFeederExp());
+  		mlipb.setFireDmg(info.getFireDmg());
+  		mlipb.setGrassDmg(info.getGrassDmg());
+  		mlipb.setWaterDmg(info.getWaterDmg());
+  		mlipb.setLightningDmg(info.getLightningDmg());
+  		mlipb.setDarknessDmg(info.getDarknessDmg());
+  		mlipb.setRockDmg(info.getRockDmg());
   		
   		lvlInfoProtos.add(mlipb.build());
   	}

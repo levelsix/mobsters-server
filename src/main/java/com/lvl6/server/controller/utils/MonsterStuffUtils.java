@@ -104,6 +104,7 @@ public class MonsterStuffUtils {
   	Set<Long> selectedIds = selectedMonsters.keySet();
   	selectedIds = new HashSet<Long>(selectedIds);
   	
+  	log.info("domain=" + domain + "\t selectedMonsters=" + selectedMonsters);
   	for (Long selectedId : selectedIds) {
   		if (domain.contains(selectedId) && keepThingsInDomain) {
   			continue;
@@ -114,7 +115,7 @@ public class MonsterStuffUtils {
   		//since selectedId isn't in the domain and want to keep things in domain
   		//or is in the domain and want to keep things not in domain, remove it
   		Object umhp = selectedMonsters.remove(selectedId);
-  		log.warn("Not retaining. object=" + umhp + "; keepThingsInDomain=" + keepThingsInDomain +
+  		log.warn("Not retaining. object=" + umhp + ", keepThingsInDomain=" + keepThingsInDomain +
   				"; keepThingsNotInDomain=" + keepThingsNotInDomain);
   	}
   }

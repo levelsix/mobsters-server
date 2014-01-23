@@ -142,9 +142,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			int yPosition, boolean isExpanding, int numOfExpansions, int cost,
 			Map<String, Integer> currencyChange) {
 
-		int coinChange = cost * -1;
-		if (!user.updateRelativeCashNaive(coinChange)) {
-			log.error("problem with updating coins purchasing a city expansion");
+		int cashChange = cost * -1;
+		if (!user.updateRelativeCashNaive(cashChange)) {
+			log.error("problem with updating cash purchasing a city expansion");
 
 		} else {
 			//everything went ok
@@ -152,7 +152,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				      xPosition, yPosition, isExpanding)) {
 				log.error("problem with updating user expansion info after purchase");
 			}
-			currencyChange.put(MiscMethods.cash, coinChange);
+			currencyChange.put(MiscMethods.cash, cashChange);
 		}
 	}
 

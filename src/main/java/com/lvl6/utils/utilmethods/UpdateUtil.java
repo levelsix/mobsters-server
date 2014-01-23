@@ -117,7 +117,7 @@ public interface UpdateUtil {
 
   public abstract boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired);
   
-  public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevives);
+  public abstract int incrementUserTaskNumRevives(long userTaskId, int numRevivesDelta);
   
   public abstract int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths); 
   

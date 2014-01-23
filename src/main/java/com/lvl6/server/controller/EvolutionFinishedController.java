@@ -192,7 +192,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			MonsterEvolvingForUser mefu, Map<String, Integer> money,
 			Map<Long, MonsterForUser> idsToUserMonsters, List<MonsterForUser> userMonsters) {
 
-		//CHARGE THE USER
+		//CHARGE THE USER IF HE SPED UP THE EVOLUTION
 		if (0 != gemsSpent) {
 			int oilChange = 0;
 			int cashChange = 0;

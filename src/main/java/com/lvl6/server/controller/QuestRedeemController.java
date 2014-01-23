@@ -208,6 +208,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int maxCashUserCanGain = maxCash - curCash; //this is the max cash the user can gain
   	cashGain = Math.min(maxCashUserCanGain, cashGain);
     
+  	if (0 == gemsGained && 0 == cashGain && 0 == expGained) {
+  		log.info("user does not get any gems, cash, or exp from redeeming quest=" + quest +
+  				" because user is maxed out on resources, and quest doesn't given exp nor gems.");
+  		return;
+  	}
+  	
     if (!user.updateRelativeGemsCashExperienceNaive(gemsGained, cashGain, expGained)) {
       log.error("problem with giving user " + gemsGained + " diamonds, " + cashGain
           + " cash, " + expGained + " exp");

@@ -184,10 +184,13 @@ public class SellUserMonsterController extends EventController {
 		int maxCashUserCanGain = maxCash - curCash;
 		sum = Math.min(sum, maxCashUserCanGain);
 		
-		if (!aUser.updateRelativeCashNaive(sum)) {
-			log.error("error updating user coins by " + sum + " not deleting "
-					+ "userMonstersIdsToCashAmounts=" + userMonsterIdsToCashAmounts);
-			return false;
+		//if user at max resources, user can still delete monster, but won't get any resources
+		if (0 != sum) {
+			if (!aUser.updateRelativeCashNaive(sum)) {
+				log.error("error updating user coins by " + sum + " not deleting "
+						+ "userMonstersIdsToCashAmounts=" + userMonsterIdsToCashAmounts);
+				return false;
+			}
 		}
 
 		// delete the user monsters;

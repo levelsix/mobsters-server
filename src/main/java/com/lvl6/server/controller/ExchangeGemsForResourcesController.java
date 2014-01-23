@@ -23,6 +23,7 @@ import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesResponsePr
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class ExchangeGemsForResourcesController extends EventController {
@@ -47,14 +48,17 @@ import com.lvl6.utils.RetrieveUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     ExchangeGemsForResourcesRequestProto reqProto = ((ExchangeGemsForResourcesRequestEvent)event).getExchangeGemsForResourcesRequestProto();
 
-    MinimumUserProto senderProto = reqProto.getSender();
+    MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
+    MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
     int numGems = reqProto.getNumGems();
     int numResources = reqProto.getNumResources();
     ResourceType resourceType = reqProto.getResourceType();
     Timestamp curTime = new Timestamp(reqProto.getClientTime());
+    int maxCash = senderResourcesProto.getMaxCash();
+    int maxOil = senderResourcesProto.getMaxOil();
 
     Builder resBuilder = ExchangeGemsForResourcesResponseProto.newBuilder();
-    resBuilder.setSender(senderProto);
+    resBuilder.setSender(senderResourcesProto);
     resBuilder.setStatus(ExchangeGemsForResourcesStatus.FAIL_OTHER);
     
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -70,7 +74,8 @@ import com.lvl6.utils.RetrieveUtils;
       	previousCurrency.put(MiscMethods.cash, user.getCash());
       	previousCurrency.put(MiscMethods.oil, user.getOil());
       	previousCurrency.put(MiscMethods.gems, user.getGems());
-      	successful = writeChangesToDb(user, numGems, resourceType, numResources, currencyChange);
+      	successful = writeChangesToDb(user, numGems, resourceType, numResources, maxCash,
+      			maxOil, currencyChange);
       }
       if (successful) {
       	resBuilder.setStatus(ExchangeGemsForResourcesStatus.SUCCESS);
@@ -120,7 +125,7 @@ import com.lvl6.utils.RetrieveUtils;
   }
 
   private boolean writeChangesToDb(User user, int numGems, ResourceType resourceType,
-  		int numResources, Map<String, Integer> currencyChange) {
+  		int numResources, int maxCash, int maxOil, Map<String, Integer> currencyChange) {
   	boolean success = true;
   	log.info("exchanging " + numGems + " gems for " + numResources + " " + 
   			resourceType.name());
@@ -131,8 +136,25 @@ import com.lvl6.utils.RetrieveUtils;
   	
   	if (ResourceType.CASH == resourceType) {
   		cashChange = numResources;
+  		if (numResources > 0) {
+  			int curCash = Math.min(user.getCash(), maxCash); //in case user's cash is more than maxCash.
+  			int maxCashUserCanGain = maxCash - curCash;
+  			cashChange = Math.min(numResources, maxCashUserCanGain);
+  		}
   	} else if (ResourceType.OIL == resourceType) {
   		oilChange = numResources;
+  		if (numResources > 0) {
+  			int curOil = Math.min(user.getOil(), maxOil); //in case user's oil is more than maxOil.
+  			int maxOilUserCanGain = maxOil - curOil;
+  			oilChange = Math.min(numResources, maxOilUserCanGain);
+  		}
+  	}
+  	
+  	if (0 == oilChange && 0 == cashChange) {
+  		log.error("oil and cash (user exchanged) for gems are both 0. oilChange=" +
+  				oilChange + "\t cashChange=" + cashChange + "\t gemChange=" + gemChange +
+  				"\t maxOil=" + maxOil + "\t maxCash=" + maxCash);
+  		return false;
   	}
   	
   	log.info("user before: " + user);
