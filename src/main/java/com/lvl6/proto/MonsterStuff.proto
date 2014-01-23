@@ -80,12 +80,13 @@ message MonsterLevelInfoProto {
 	optional int32 curLvlRequiredExp = 3;
 	optional int32 feederExp = 4;
 	
-	optional int32 fireDmg = 5;
-	optional int32 grassDmg = 6;
-	optional int32 waterDmg = 7;
-	optional int32 lightningDmg = 8;
-	optional int32 darknessDmg = 9;
-	optional int32 rockDmg = 10;
+	//maybe the monsters can inflict dmg on themselves 
+	optional sint32 fireDmg = 5;
+	optional sint32 grassDmg = 6;
+	optional sint32 waterDmg = 7;
+	optional sint32 lightningDmg = 8;
+	optional sint32 darknessDmg = 9;
+	optional sint32 rockDmg = 10;
 }
 
 //------------------------------------------------------------------------------------------
