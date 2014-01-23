@@ -2713,6 +2713,30 @@ public final class MonsterStuffProto {
     // optional int32 feederExp = 5;
     boolean hasFeederExp();
     int getFeederExp();
+    
+    // optional int32 fireDmg = 6;
+    boolean hasFireDmg();
+    int getFireDmg();
+    
+    // optional int32 grassDmg = 7;
+    boolean hasGrassDmg();
+    int getGrassDmg();
+    
+    // optional int32 waterDmg = 8;
+    boolean hasWaterDmg();
+    int getWaterDmg();
+    
+    // optional int32 lightningDmg = 9;
+    boolean hasLightningDmg();
+    int getLightningDmg();
+    
+    // optional int32 darknessDmg = 10;
+    boolean hasDarknessDmg();
+    int getDarknessDmg();
+    
+    // optional int32 rockDmg = 11;
+    boolean hasRockDmg();
+    int getRockDmg();
   }
   public static final class MonsterLevelInfoProto extends
       com.google.protobuf.GeneratedMessage
@@ -2793,12 +2817,78 @@ public final class MonsterStuffProto {
       return feederExp_;
     }
     
+    // optional int32 fireDmg = 6;
+    public static final int FIREDMG_FIELD_NUMBER = 6;
+    private int fireDmg_;
+    public boolean hasFireDmg() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getFireDmg() {
+      return fireDmg_;
+    }
+    
+    // optional int32 grassDmg = 7;
+    public static final int GRASSDMG_FIELD_NUMBER = 7;
+    private int grassDmg_;
+    public boolean hasGrassDmg() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getGrassDmg() {
+      return grassDmg_;
+    }
+    
+    // optional int32 waterDmg = 8;
+    public static final int WATERDMG_FIELD_NUMBER = 8;
+    private int waterDmg_;
+    public boolean hasWaterDmg() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public int getWaterDmg() {
+      return waterDmg_;
+    }
+    
+    // optional int32 lightningDmg = 9;
+    public static final int LIGHTNINGDMG_FIELD_NUMBER = 9;
+    private int lightningDmg_;
+    public boolean hasLightningDmg() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public int getLightningDmg() {
+      return lightningDmg_;
+    }
+    
+    // optional int32 darknessDmg = 10;
+    public static final int DARKNESSDMG_FIELD_NUMBER = 10;
+    private int darknessDmg_;
+    public boolean hasDarknessDmg() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    public int getDarknessDmg() {
+      return darknessDmg_;
+    }
+    
+    // optional int32 rockDmg = 11;
+    public static final int ROCKDMG_FIELD_NUMBER = 11;
+    private int rockDmg_;
+    public boolean hasRockDmg() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    public int getRockDmg() {
+      return rockDmg_;
+    }
+    
     private void initFields() {
       lvl_ = 0;
       hp_ = 0;
       attack_ = 0;
       curLvlRequiredExp_ = 0;
       feederExp_ = 0;
+      fireDmg_ = 0;
+      grassDmg_ = 0;
+      waterDmg_ = 0;
+      lightningDmg_ = 0;
+      darknessDmg_ = 0;
+      rockDmg_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2826,6 +2916,24 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(5, feederExp_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, fireDmg_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, grassDmg_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeInt32(8, waterDmg_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeInt32(9, lightningDmg_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, darknessDmg_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(11, rockDmg_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2855,6 +2963,30 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, feederExp_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, fireDmg_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, grassDmg_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, waterDmg_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, lightningDmg_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, darknessDmg_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, rockDmg_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2990,6 +3122,18 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         feederExp_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        fireDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        grassDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        waterDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        lightningDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        darknessDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        rockDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
       
@@ -3048,6 +3192,30 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00000010;
         }
         result.feederExp_ = feederExp_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.fireDmg_ = fireDmg_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.grassDmg_ = grassDmg_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.waterDmg_ = waterDmg_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.lightningDmg_ = lightningDmg_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.darknessDmg_ = darknessDmg_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.rockDmg_ = rockDmg_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3078,6 +3246,24 @@ public final class MonsterStuffProto {
         }
         if (other.hasFeederExp()) {
           setFeederExp(other.getFeederExp());
+        }
+        if (other.hasFireDmg()) {
+          setFireDmg(other.getFireDmg());
+        }
+        if (other.hasGrassDmg()) {
+          setGrassDmg(other.getGrassDmg());
+        }
+        if (other.hasWaterDmg()) {
+          setWaterDmg(other.getWaterDmg());
+        }
+        if (other.hasLightningDmg()) {
+          setLightningDmg(other.getLightningDmg());
+        }
+        if (other.hasDarknessDmg()) {
+          setDarknessDmg(other.getDarknessDmg());
+        }
+        if (other.hasRockDmg()) {
+          setRockDmg(other.getRockDmg());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -3133,6 +3319,36 @@ public final class MonsterStuffProto {
             case 40: {
               bitField0_ |= 0x00000010;
               feederExp_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              fireDmg_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              grassDmg_ = input.readInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              waterDmg_ = input.readInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              lightningDmg_ = input.readInt32();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              darknessDmg_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              rockDmg_ = input.readInt32();
               break;
             }
           }
@@ -3242,6 +3458,132 @@ public final class MonsterStuffProto {
       public Builder clearFeederExp() {
         bitField0_ = (bitField0_ & ~0x00000010);
         feederExp_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 fireDmg = 6;
+      private int fireDmg_ ;
+      public boolean hasFireDmg() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getFireDmg() {
+        return fireDmg_;
+      }
+      public Builder setFireDmg(int value) {
+        bitField0_ |= 0x00000020;
+        fireDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFireDmg() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        fireDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 grassDmg = 7;
+      private int grassDmg_ ;
+      public boolean hasGrassDmg() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getGrassDmg() {
+        return grassDmg_;
+      }
+      public Builder setGrassDmg(int value) {
+        bitField0_ |= 0x00000040;
+        grassDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGrassDmg() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        grassDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 waterDmg = 8;
+      private int waterDmg_ ;
+      public boolean hasWaterDmg() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public int getWaterDmg() {
+        return waterDmg_;
+      }
+      public Builder setWaterDmg(int value) {
+        bitField0_ |= 0x00000080;
+        waterDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearWaterDmg() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        waterDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 lightningDmg = 9;
+      private int lightningDmg_ ;
+      public boolean hasLightningDmg() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public int getLightningDmg() {
+        return lightningDmg_;
+      }
+      public Builder setLightningDmg(int value) {
+        bitField0_ |= 0x00000100;
+        lightningDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearLightningDmg() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        lightningDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 darknessDmg = 10;
+      private int darknessDmg_ ;
+      public boolean hasDarknessDmg() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public int getDarknessDmg() {
+        return darknessDmg_;
+      }
+      public Builder setDarknessDmg(int value) {
+        bitField0_ |= 0x00000200;
+        darknessDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDarknessDmg() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        darknessDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 rockDmg = 11;
+      private int rockDmg_ ;
+      public boolean hasRockDmg() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public int getRockDmg() {
+        return rockDmg_;
+      }
+      public Builder setRockDmg(int value) {
+        bitField0_ |= 0x00000400;
+        rockDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRockDmg() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        rockDmg_ = 0;
         onChanged();
         return this;
       }
@@ -8326,38 +8668,41 @@ public final class MonsterStuffProto {
       "\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004" +
       "\022\r\n\tLEGENDARY\020\005\022\007\n\003EVO\020\006\"W\n\016MonsterEleme" +
       "nt\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLI" +
-      "GHTNING\020\004\022\014\n\010DARKNESS\020\005\022\010\n\004ROCK\020\006\"n\n\025Mon" +
-      "sterLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 " +
-      "\001(\005\022\016\n\006attack\030\003 \001(\005\022\031\n\021curLvlRequiredExp" +
-      "\030\004 \001(\005\022\021\n\tfeederExp\030\005 \001(\005\"\345\001\n\024FullUserMo",
-      "nsterProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006use" +
-      "rId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentE" +
-      "xp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentH" +
-      "ealth\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComp" +
-      "lete\030\010 \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013" +
-      "teamSlotNum\030\n \001(\005\"\204\001\n\027UserMonsterHealing" +
-      "Proto\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002" +
-      " \001(\003\022\030\n\020queuedTimeMillis\030\003 \001(\003\022\026\n\016health" +
-      "Progress\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"M\n\035User" +
-      "MonsterCurrentHealthProto\022\025\n\ruserMonster",
-      "Id\030\001 \001(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024User" +
-      "EnhancementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013base" +
-      "Monster\030\002 \001(\0132(.com.lvl6.proto.UserEnhan" +
-      "cementItemProto\0229\n\007feeders\030\003 \003(\0132(.com.l" +
-      "vl6.proto.UserEnhancementItemProto\"i\n\030Us" +
-      "erEnhancementItemProto\022\025\n\ruserMonsterId\030" +
-      "\001 \001(\003\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\022\025" +
-      "\n\renhancingCost\030\003 \001(\005\"f\n\032UserMonsterCurr" +
-      "entExpProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022ex" +
-      "pectedExperience\030\002 \001(\005\022\025\n\rexpectedLevel\030",
-      "\003 \001(\005\"H\n\033MinimumUserMonsterSellProto\022\025\n\r" +
-      "userMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"" +
-      "h\n\033UserCurrentMonsterTeamProto\022\016\n\006userId" +
-      "\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl6.p" +
-      "roto.FullUserMonsterProto\"e\n\031UserMonster" +
-      "EvolutionProto\022\035\n\025catalystUserMonsterId\030" +
-      "\001 \001(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTi" +
-      "me\030\003 \001(\003B\023B\021MonsterStuffProto"
+      "GHTNING\020\004\022\014\n\010DARKNESS\020\005\022\010\n\004ROCK\020\006\"\337\001\n\025Mo" +
+      "nsterLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002" +
+      " \001(\005\022\016\n\006attack\030\003 \001(\005\022\031\n\021curLvlRequiredEx" +
+      "p\030\004 \001(\005\022\021\n\tfeederExp\030\005 \001(\005\022\017\n\007fireDmg\030\006 ",
+      "\001(\005\022\020\n\010grassDmg\030\007 \001(\005\022\020\n\010waterDmg\030\010 \001(\005\022" +
+      "\024\n\014lightningDmg\030\t \001(\005\022\023\n\013darknessDmg\030\n \001" +
+      "(\005\022\017\n\007rockDmg\030\013 \001(\005\"\345\001\n\024FullUserMonsterP" +
+      "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 " +
+      "\001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001" +
+      "(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030" +
+      "\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete\030\010" +
+      " \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013teamSl" +
+      "otNum\030\n \001(\005\"\204\001\n\027UserMonsterHealingProto\022" +
+      "\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030",
+      "\n\020queuedTimeMillis\030\003 \001(\003\022\026\n\016healthProgre" +
+      "ss\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"M\n\035UserMonste" +
+      "rCurrentHealthProto\022\025\n\ruserMonsterId\030\001 \001" +
+      "(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhanc" +
+      "ementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonste" +
+      "r\030\002 \001(\0132(.com.lvl6.proto.UserEnhancement" +
+      "ItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.pr" +
+      "oto.UserEnhancementItemProto\"i\n\030UserEnha" +
+      "ncementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022" +
+      "\037\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\renha",
+      "ncingCost\030\003 \001(\005\"f\n\032UserMonsterCurrentExp" +
+      "Proto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expected" +
+      "Experience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"" +
+      "H\n\033MinimumUserMonsterSellProto\022\025\n\ruserMo" +
+      "nsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033Use" +
+      "rCurrentMonsterTeamProto\022\016\n\006userId\030\001 \001(\005" +
+      "\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl6.proto.F" +
+      "ullUserMonsterProto\"e\n\031UserMonsterEvolut" +
+      "ionProto\022\035\n\025catalystUserMonsterId\030\001 \001(\003\022" +
+      "\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001",
+      "(\003B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8377,7 +8722,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_MonsterLevelInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor,
-              new java.lang.String[] { "Lvl", "Hp", "Attack", "CurLvlRequiredExp", "FeederExp", },
+              new java.lang.String[] { "Lvl", "Hp", "Attack", "CurLvlRequiredExp", "FeederExp", "FireDmg", "GrassDmg", "WaterDmg", "LightningDmg", "DarknessDmg", "RockDmg", },
               com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.class,
               com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserMonsterProto_descriptor =
