@@ -61,7 +61,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     EndDungeonRequestProto reqProto = ((EndDungeonRequestEvent)event).getEndDungeonRequestProto();
-
+    log.info("reqProto=" + reqProto);
+    
     //get values sent from the client (the request proto)
     MinimumUserProtoWithMaxResources senderResourcesProto = reqProto.getSender();
     MinimumUserProto senderProto = senderResourcesProto.getMinUserProto();
@@ -84,17 +85,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       int previousCash = 0;
 
-      List<TaskForUserOngoing> userTaskList = new ArrayList<TaskForUserOngoing>();
-      TaskForUserOngoing ut = null;
-      boolean legit = checkLegit(resBuilder, aUser, userId, userTaskId, userTaskList);
+      TaskForUserOngoing ut = TaskForUserOngoingRetrieveUtils.getUserTaskForId(userTaskId);
+      boolean legit = checkLegit(resBuilder, aUser, userId, userTaskId, ut);
 
 
       boolean successful = false;
       Map<String, Integer> money = new HashMap<String, Integer>();
       List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
       if(legit) {
-      	
-    	  ut = userTaskList.get(0);
         previousCash = aUser.getCash();
     	  successful = writeChangesToDb(aUser, userId, ut, userWon, curTime, money,
     	  		protos, maxCash);
@@ -156,19 +154,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    * builder status to the appropriate value.
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId,
-		  long userTaskId, List<TaskForUserOngoing> userTaskList) {
+		  long userTaskId, TaskForUserOngoing ut) {
     if (null == u) {
       log.error("unexpected error: user is null. user=" + u);
       return false;
     }
     
-    TaskForUserOngoing ut = TaskForUserOngoingRetrieveUtils.getUserTaskForId(userTaskId);
     if (null == ut) {
     	log.error("unexpected error: no user task for id userTaskId=" + userTaskId);
     	return false;
     }
     
-    userTaskList.add(ut);
     resBuilder.setStatus(EndDungeonStatus.SUCCESS);
     return true;
   }
@@ -183,8 +179,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		int maxCashUserCanGain = maxCash - curCash;
 		cashGained = Math.min(cashGained, maxCashUserCanGain);
 		
-	  
+	  log.info("user before currency change. " + u);
 	  if (userWon) {
+	  	log.info("user WON DUNGEON!!!!!!!!. ");
 		  //update user cash and experience
 		  if (!updateUser(u, cashGained, expGained, clientTime)) {
 			  return false;
@@ -194,7 +191,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  	}
 		  }
 	  }
-	  
+	  log.info("user after currency change. " + u);
 	  //TODO: MOVE THIS INTO A UTIL METHOD FOR TASK 
 	  //delete from user_task and insert it into user_task_history
 	  long utId = ut.getId();
