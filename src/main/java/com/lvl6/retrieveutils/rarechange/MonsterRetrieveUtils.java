@@ -124,39 +124,25 @@ import com.lvl6.utils.DBConnection;
     int evolutionLevel = rs.getInt(i++);
     String displayName = rs.getString(i++);
     MonsterElement element = MonsterElement.valueOf(rs.getInt(i++));
-    int baseHp = rs.getInt(i++);
     String imagePrefix = rs.getString(i++);
     int numPuzzlePieces = rs.getInt(i++);
     int minutesToCombinePieces = rs.getInt(i++);
-    int elementOneDmg = rs.getInt(i++);
-    int elementTwoDmg = rs.getInt(i++);
-    int elementThreeDmg = rs.getInt(i++);
-    int elementFourDmg = rs.getInt(i++);
-    int elementFiveDmg = rs.getInt(i++);
-    int elementSixDmg = rs.getInt(i++);
-    float hpLevelMultiplier = rs.getFloat(i++);
-    float attackLevelMultiplier = rs.getFloat(i++);
     int maxLevel = rs.getInt(i++);
+
     int evolutionMonsterId = rs.getInt(i++);
+    int evolutionCatalystMonsterId = rs.getInt(i++);
+    int minutesToEvolve = rs.getInt(i++);
+    int numCatalystsRequired = rs.getInt(i++);
 
     String carrotRecruited = rs.getString(i++);
     String carrotDefeated = rs.getString(i++);
     String carrotEvolved = rs.getString(i++);
     String description = rs.getString(i++);
     
-    int requiredEvolvingMonsterId = rs.getInt(i++);
-    int minutesToEvolve = rs.getInt(i++);
-    int numCatalystsRequired = rs.getInt(i++);
-    int enhancingFeederExp = rs.getInt(i++);
-    
     Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
-    		displayName, element, baseHp, imagePrefix, numPuzzlePieces,
-    		minutesToCombinePieces, elementOneDmg, elementTwoDmg, elementThreeDmg,
-    		elementFourDmg, elementFiveDmg, elementSixDmg, hpLevelMultiplier,
-    		attackLevelMultiplier, maxLevel, evolutionMonsterId, carrotRecruited,
-    		carrotDefeated, carrotEvolved, description, requiredEvolvingMonsterId,
-    		minutesToEvolve, numCatalystsRequired, enhancingFeederExp);
-
+    		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
+    		maxLevel, evolutionMonsterId, evolutionCatalystMonsterId, minutesToEvolve,
+    		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved, description);
     return monster;
   }
 }

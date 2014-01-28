@@ -39,95 +39,55 @@ public final class MonsterStuffProto {
     boolean hasMonsterElement();
     com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement getMonsterElement();
     
-    // optional int32 baseHp = 8;
-    boolean hasBaseHp();
-    int getBaseHp();
-    
-    // optional string imagePrefix = 9;
+    // optional string imagePrefix = 8;
     boolean hasImagePrefix();
     String getImagePrefix();
     
-    // optional int32 numPuzzlePieces = 10;
+    // optional int32 numPuzzlePieces = 9;
     boolean hasNumPuzzlePieces();
     int getNumPuzzlePieces();
     
-    // optional int32 minutesToCombinePieces = 11;
+    // optional int32 minutesToCombinePieces = 10;
     boolean hasMinutesToCombinePieces();
     int getMinutesToCombinePieces();
     
-    // optional int32 elementOneDmg = 12;
-    boolean hasElementOneDmg();
-    int getElementOneDmg();
-    
-    // optional int32 elementTwoDmg = 13;
-    boolean hasElementTwoDmg();
-    int getElementTwoDmg();
-    
-    // optional int32 elementThreeDmg = 14;
-    boolean hasElementThreeDmg();
-    int getElementThreeDmg();
-    
-    // optional int32 elementFourDmg = 15;
-    boolean hasElementFourDmg();
-    int getElementFourDmg();
-    
-    // optional int32 elementFiveDmg = 16;
-    boolean hasElementFiveDmg();
-    int getElementFiveDmg();
-    
-    // optional int32 elementSixDmg = 28;
-    boolean hasElementSixDmg();
-    int getElementSixDmg();
-    
-    // optional float hpLevelMultiplier = 17;
-    boolean hasHpLevelMultiplier();
-    float getHpLevelMultiplier();
-    
-    // optional float attackLevelMultiplier = 18;
-    boolean hasAttackLevelMultiplier();
-    float getAttackLevelMultiplier();
-    
-    // optional int32 maxLevel = 19;
+    // optional int32 maxLevel = 11;
     boolean hasMaxLevel();
     int getMaxLevel();
     
-    // optional int32 evolutionMonsterId = 20;
+    // optional int32 evolutionMonsterId = 12;
     boolean hasEvolutionMonsterId();
     int getEvolutionMonsterId();
     
-    // optional int32 evolutionCatalystMonsterId = 25;
+    // optional int32 evolutionCatalystMonsterId = 13;
     boolean hasEvolutionCatalystMonsterId();
     int getEvolutionCatalystMonsterId();
     
-    // optional int32 minutesToEvolve = 26;
+    // optional int32 minutesToEvolve = 14;
     boolean hasMinutesToEvolve();
     int getMinutesToEvolve();
     
-    // optional int32 numCatalystMonstersRequired = 27;
+    // optional int32 numCatalystMonstersRequired = 15;
     boolean hasNumCatalystMonstersRequired();
     int getNumCatalystMonstersRequired();
     
-    // optional string carrotRecruited = 21;
+    // optional string carrotRecruited = 16;
     boolean hasCarrotRecruited();
     String getCarrotRecruited();
     
-    // optional string carrotDefeated = 22;
+    // optional string carrotDefeated = 17;
     boolean hasCarrotDefeated();
     String getCarrotDefeated();
     
-    // optional string carrotEvolved = 23;
+    // optional string carrotEvolved = 18;
     boolean hasCarrotEvolved();
     String getCarrotEvolved();
     
-    // optional string description = 24;
+    // optional string description = 19;
     boolean hasDescription();
     String getDescription();
     
-    // optional int32 enhancingFeederExp = 29;
-    boolean hasEnhancingFeederExp();
-    int getEnhancingFeederExp();
-    
-    // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 30;
+    // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 20;
     java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> 
         getLvlInfoList();
     com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto getLvlInfo(int index);
@@ -464,21 +424,11 @@ public final class MonsterStuffProto {
       return monsterElement_;
     }
     
-    // optional int32 baseHp = 8;
-    public static final int BASEHP_FIELD_NUMBER = 8;
-    private int baseHp_;
-    public boolean hasBaseHp() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    public int getBaseHp() {
-      return baseHp_;
-    }
-    
-    // optional string imagePrefix = 9;
-    public static final int IMAGEPREFIX_FIELD_NUMBER = 9;
+    // optional string imagePrefix = 8;
+    public static final int IMAGEPREFIX_FIELD_NUMBER = 8;
     private java.lang.Object imagePrefix_;
     public boolean hasImagePrefix() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     public String getImagePrefix() {
       java.lang.Object ref = imagePrefix_;
@@ -506,161 +456,81 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional int32 numPuzzlePieces = 10;
-    public static final int NUMPUZZLEPIECES_FIELD_NUMBER = 10;
+    // optional int32 numPuzzlePieces = 9;
+    public static final int NUMPUZZLEPIECES_FIELD_NUMBER = 9;
     private int numPuzzlePieces_;
     public boolean hasNumPuzzlePieces() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000100) == 0x00000100);
     }
     public int getNumPuzzlePieces() {
       return numPuzzlePieces_;
     }
     
-    // optional int32 minutesToCombinePieces = 11;
-    public static final int MINUTESTOCOMBINEPIECES_FIELD_NUMBER = 11;
+    // optional int32 minutesToCombinePieces = 10;
+    public static final int MINUTESTOCOMBINEPIECES_FIELD_NUMBER = 10;
     private int minutesToCombinePieces_;
     public boolean hasMinutesToCombinePieces() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000200) == 0x00000200);
     }
     public int getMinutesToCombinePieces() {
       return minutesToCombinePieces_;
     }
     
-    // optional int32 elementOneDmg = 12;
-    public static final int ELEMENTONEDMG_FIELD_NUMBER = 12;
-    private int elementOneDmg_;
-    public boolean hasElementOneDmg() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
-    }
-    public int getElementOneDmg() {
-      return elementOneDmg_;
-    }
-    
-    // optional int32 elementTwoDmg = 13;
-    public static final int ELEMENTTWODMG_FIELD_NUMBER = 13;
-    private int elementTwoDmg_;
-    public boolean hasElementTwoDmg() {
-      return ((bitField0_ & 0x00001000) == 0x00001000);
-    }
-    public int getElementTwoDmg() {
-      return elementTwoDmg_;
-    }
-    
-    // optional int32 elementThreeDmg = 14;
-    public static final int ELEMENTTHREEDMG_FIELD_NUMBER = 14;
-    private int elementThreeDmg_;
-    public boolean hasElementThreeDmg() {
-      return ((bitField0_ & 0x00002000) == 0x00002000);
-    }
-    public int getElementThreeDmg() {
-      return elementThreeDmg_;
-    }
-    
-    // optional int32 elementFourDmg = 15;
-    public static final int ELEMENTFOURDMG_FIELD_NUMBER = 15;
-    private int elementFourDmg_;
-    public boolean hasElementFourDmg() {
-      return ((bitField0_ & 0x00004000) == 0x00004000);
-    }
-    public int getElementFourDmg() {
-      return elementFourDmg_;
-    }
-    
-    // optional int32 elementFiveDmg = 16;
-    public static final int ELEMENTFIVEDMG_FIELD_NUMBER = 16;
-    private int elementFiveDmg_;
-    public boolean hasElementFiveDmg() {
-      return ((bitField0_ & 0x00008000) == 0x00008000);
-    }
-    public int getElementFiveDmg() {
-      return elementFiveDmg_;
-    }
-    
-    // optional int32 elementSixDmg = 28;
-    public static final int ELEMENTSIXDMG_FIELD_NUMBER = 28;
-    private int elementSixDmg_;
-    public boolean hasElementSixDmg() {
-      return ((bitField0_ & 0x00010000) == 0x00010000);
-    }
-    public int getElementSixDmg() {
-      return elementSixDmg_;
-    }
-    
-    // optional float hpLevelMultiplier = 17;
-    public static final int HPLEVELMULTIPLIER_FIELD_NUMBER = 17;
-    private float hpLevelMultiplier_;
-    public boolean hasHpLevelMultiplier() {
-      return ((bitField0_ & 0x00020000) == 0x00020000);
-    }
-    public float getHpLevelMultiplier() {
-      return hpLevelMultiplier_;
-    }
-    
-    // optional float attackLevelMultiplier = 18;
-    public static final int ATTACKLEVELMULTIPLIER_FIELD_NUMBER = 18;
-    private float attackLevelMultiplier_;
-    public boolean hasAttackLevelMultiplier() {
-      return ((bitField0_ & 0x00040000) == 0x00040000);
-    }
-    public float getAttackLevelMultiplier() {
-      return attackLevelMultiplier_;
-    }
-    
-    // optional int32 maxLevel = 19;
-    public static final int MAXLEVEL_FIELD_NUMBER = 19;
+    // optional int32 maxLevel = 11;
+    public static final int MAXLEVEL_FIELD_NUMBER = 11;
     private int maxLevel_;
     public boolean hasMaxLevel() {
-      return ((bitField0_ & 0x00080000) == 0x00080000);
+      return ((bitField0_ & 0x00000400) == 0x00000400);
     }
     public int getMaxLevel() {
       return maxLevel_;
     }
     
-    // optional int32 evolutionMonsterId = 20;
-    public static final int EVOLUTIONMONSTERID_FIELD_NUMBER = 20;
+    // optional int32 evolutionMonsterId = 12;
+    public static final int EVOLUTIONMONSTERID_FIELD_NUMBER = 12;
     private int evolutionMonsterId_;
     public boolean hasEvolutionMonsterId() {
-      return ((bitField0_ & 0x00100000) == 0x00100000);
+      return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     public int getEvolutionMonsterId() {
       return evolutionMonsterId_;
     }
     
-    // optional int32 evolutionCatalystMonsterId = 25;
-    public static final int EVOLUTIONCATALYSTMONSTERID_FIELD_NUMBER = 25;
+    // optional int32 evolutionCatalystMonsterId = 13;
+    public static final int EVOLUTIONCATALYSTMONSTERID_FIELD_NUMBER = 13;
     private int evolutionCatalystMonsterId_;
     public boolean hasEvolutionCatalystMonsterId() {
-      return ((bitField0_ & 0x00200000) == 0x00200000);
+      return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     public int getEvolutionCatalystMonsterId() {
       return evolutionCatalystMonsterId_;
     }
     
-    // optional int32 minutesToEvolve = 26;
-    public static final int MINUTESTOEVOLVE_FIELD_NUMBER = 26;
+    // optional int32 minutesToEvolve = 14;
+    public static final int MINUTESTOEVOLVE_FIELD_NUMBER = 14;
     private int minutesToEvolve_;
     public boolean hasMinutesToEvolve() {
-      return ((bitField0_ & 0x00400000) == 0x00400000);
+      return ((bitField0_ & 0x00002000) == 0x00002000);
     }
     public int getMinutesToEvolve() {
       return minutesToEvolve_;
     }
     
-    // optional int32 numCatalystMonstersRequired = 27;
-    public static final int NUMCATALYSTMONSTERSREQUIRED_FIELD_NUMBER = 27;
+    // optional int32 numCatalystMonstersRequired = 15;
+    public static final int NUMCATALYSTMONSTERSREQUIRED_FIELD_NUMBER = 15;
     private int numCatalystMonstersRequired_;
     public boolean hasNumCatalystMonstersRequired() {
-      return ((bitField0_ & 0x00800000) == 0x00800000);
+      return ((bitField0_ & 0x00004000) == 0x00004000);
     }
     public int getNumCatalystMonstersRequired() {
       return numCatalystMonstersRequired_;
     }
     
-    // optional string carrotRecruited = 21;
-    public static final int CARROTRECRUITED_FIELD_NUMBER = 21;
+    // optional string carrotRecruited = 16;
+    public static final int CARROTRECRUITED_FIELD_NUMBER = 16;
     private java.lang.Object carrotRecruited_;
     public boolean hasCarrotRecruited() {
-      return ((bitField0_ & 0x01000000) == 0x01000000);
+      return ((bitField0_ & 0x00008000) == 0x00008000);
     }
     public String getCarrotRecruited() {
       java.lang.Object ref = carrotRecruited_;
@@ -688,11 +558,11 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional string carrotDefeated = 22;
-    public static final int CARROTDEFEATED_FIELD_NUMBER = 22;
+    // optional string carrotDefeated = 17;
+    public static final int CARROTDEFEATED_FIELD_NUMBER = 17;
     private java.lang.Object carrotDefeated_;
     public boolean hasCarrotDefeated() {
-      return ((bitField0_ & 0x02000000) == 0x02000000);
+      return ((bitField0_ & 0x00010000) == 0x00010000);
     }
     public String getCarrotDefeated() {
       java.lang.Object ref = carrotDefeated_;
@@ -720,11 +590,11 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional string carrotEvolved = 23;
-    public static final int CARROTEVOLVED_FIELD_NUMBER = 23;
+    // optional string carrotEvolved = 18;
+    public static final int CARROTEVOLVED_FIELD_NUMBER = 18;
     private java.lang.Object carrotEvolved_;
     public boolean hasCarrotEvolved() {
-      return ((bitField0_ & 0x04000000) == 0x04000000);
+      return ((bitField0_ & 0x00020000) == 0x00020000);
     }
     public String getCarrotEvolved() {
       java.lang.Object ref = carrotEvolved_;
@@ -752,11 +622,11 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional string description = 24;
-    public static final int DESCRIPTION_FIELD_NUMBER = 24;
+    // optional string description = 19;
+    public static final int DESCRIPTION_FIELD_NUMBER = 19;
     private java.lang.Object description_;
     public boolean hasDescription() {
-      return ((bitField0_ & 0x08000000) == 0x08000000);
+      return ((bitField0_ & 0x00040000) == 0x00040000);
     }
     public String getDescription() {
       java.lang.Object ref = description_;
@@ -784,18 +654,8 @@ public final class MonsterStuffProto {
       }
     }
     
-    // optional int32 enhancingFeederExp = 29;
-    public static final int ENHANCINGFEEDEREXP_FIELD_NUMBER = 29;
-    private int enhancingFeederExp_;
-    public boolean hasEnhancingFeederExp() {
-      return ((bitField0_ & 0x10000000) == 0x10000000);
-    }
-    public int getEnhancingFeederExp() {
-      return enhancingFeederExp_;
-    }
-    
-    // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 30;
-    public static final int LVLINFO_FIELD_NUMBER = 30;
+    // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 20;
+    public static final int LVLINFO_FIELD_NUMBER = 20;
     private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> lvlInfo_;
     public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> getLvlInfoList() {
       return lvlInfo_;
@@ -823,18 +683,9 @@ public final class MonsterStuffProto {
       evolutionLevel_ = 0;
       displayName_ = "";
       monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
-      baseHp_ = 0;
       imagePrefix_ = "";
       numPuzzlePieces_ = 0;
       minutesToCombinePieces_ = 0;
-      elementOneDmg_ = 0;
-      elementTwoDmg_ = 0;
-      elementThreeDmg_ = 0;
-      elementFourDmg_ = 0;
-      elementFiveDmg_ = 0;
-      elementSixDmg_ = 0;
-      hpLevelMultiplier_ = 0F;
-      attackLevelMultiplier_ = 0F;
       maxLevel_ = 0;
       evolutionMonsterId_ = 0;
       evolutionCatalystMonsterId_ = 0;
@@ -844,7 +695,6 @@ public final class MonsterStuffProto {
       carrotDefeated_ = "";
       carrotEvolved_ = "";
       description_ = "";
-      enhancingFeederExp_ = 0;
       lvlInfo_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
@@ -881,73 +731,43 @@ public final class MonsterStuffProto {
         output.writeEnum(7, monsterElement_.getNumber());
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeInt32(8, baseHp_);
+        output.writeBytes(8, getImagePrefixBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(9, getImagePrefixBytes());
+        output.writeInt32(9, numPuzzlePieces_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeInt32(10, numPuzzlePieces_);
+        output.writeInt32(10, minutesToCombinePieces_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        output.writeInt32(11, minutesToCombinePieces_);
+        output.writeInt32(11, maxLevel_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeInt32(12, elementOneDmg_);
+        output.writeInt32(12, evolutionMonsterId_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeInt32(13, elementTwoDmg_);
+        output.writeInt32(13, evolutionCatalystMonsterId_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
-        output.writeInt32(14, elementThreeDmg_);
+        output.writeInt32(14, minutesToEvolve_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
-        output.writeInt32(15, elementFourDmg_);
+        output.writeInt32(15, numCatalystMonstersRequired_);
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
-        output.writeInt32(16, elementFiveDmg_);
-      }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        output.writeFloat(17, hpLevelMultiplier_);
-      }
-      if (((bitField0_ & 0x00040000) == 0x00040000)) {
-        output.writeFloat(18, attackLevelMultiplier_);
-      }
-      if (((bitField0_ & 0x00080000) == 0x00080000)) {
-        output.writeInt32(19, maxLevel_);
-      }
-      if (((bitField0_ & 0x00100000) == 0x00100000)) {
-        output.writeInt32(20, evolutionMonsterId_);
-      }
-      if (((bitField0_ & 0x01000000) == 0x01000000)) {
-        output.writeBytes(21, getCarrotRecruitedBytes());
-      }
-      if (((bitField0_ & 0x02000000) == 0x02000000)) {
-        output.writeBytes(22, getCarrotDefeatedBytes());
-      }
-      if (((bitField0_ & 0x04000000) == 0x04000000)) {
-        output.writeBytes(23, getCarrotEvolvedBytes());
-      }
-      if (((bitField0_ & 0x08000000) == 0x08000000)) {
-        output.writeBytes(24, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00200000) == 0x00200000)) {
-        output.writeInt32(25, evolutionCatalystMonsterId_);
-      }
-      if (((bitField0_ & 0x00400000) == 0x00400000)) {
-        output.writeInt32(26, minutesToEvolve_);
-      }
-      if (((bitField0_ & 0x00800000) == 0x00800000)) {
-        output.writeInt32(27, numCatalystMonstersRequired_);
+        output.writeBytes(16, getCarrotRecruitedBytes());
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
-        output.writeInt32(28, elementSixDmg_);
+        output.writeBytes(17, getCarrotDefeatedBytes());
       }
-      if (((bitField0_ & 0x10000000) == 0x10000000)) {
-        output.writeInt32(29, enhancingFeederExp_);
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
+        output.writeBytes(18, getCarrotEvolvedBytes());
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        output.writeBytes(19, getDescriptionBytes());
       }
       for (int i = 0; i < lvlInfo_.size(); i++) {
-        output.writeMessage(30, lvlInfo_.get(i));
+        output.writeMessage(20, lvlInfo_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -988,95 +808,55 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, baseHp_);
+          .computeBytesSize(8, getImagePrefixBytes());
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, getImagePrefixBytes());
+          .computeInt32Size(9, numPuzzlePieces_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, numPuzzlePieces_);
+          .computeInt32Size(10, minutesToCombinePieces_);
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, minutesToCombinePieces_);
+          .computeInt32Size(11, maxLevel_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(12, elementOneDmg_);
+          .computeInt32Size(12, evolutionMonsterId_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(13, elementTwoDmg_);
+          .computeInt32Size(13, evolutionCatalystMonsterId_);
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(14, elementThreeDmg_);
+          .computeInt32Size(14, minutesToEvolve_);
       }
       if (((bitField0_ & 0x00004000) == 0x00004000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(15, elementFourDmg_);
+          .computeInt32Size(15, numCatalystMonstersRequired_);
       }
       if (((bitField0_ & 0x00008000) == 0x00008000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(16, elementFiveDmg_);
-      }
-      if (((bitField0_ & 0x00020000) == 0x00020000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(17, hpLevelMultiplier_);
-      }
-      if (((bitField0_ & 0x00040000) == 0x00040000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(18, attackLevelMultiplier_);
-      }
-      if (((bitField0_ & 0x00080000) == 0x00080000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(19, maxLevel_);
-      }
-      if (((bitField0_ & 0x00100000) == 0x00100000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(20, evolutionMonsterId_);
-      }
-      if (((bitField0_ & 0x01000000) == 0x01000000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(21, getCarrotRecruitedBytes());
-      }
-      if (((bitField0_ & 0x02000000) == 0x02000000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(22, getCarrotDefeatedBytes());
-      }
-      if (((bitField0_ & 0x04000000) == 0x04000000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(23, getCarrotEvolvedBytes());
-      }
-      if (((bitField0_ & 0x08000000) == 0x08000000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(24, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00200000) == 0x00200000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(25, evolutionCatalystMonsterId_);
-      }
-      if (((bitField0_ & 0x00400000) == 0x00400000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(26, minutesToEvolve_);
-      }
-      if (((bitField0_ & 0x00800000) == 0x00800000)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(27, numCatalystMonstersRequired_);
+          .computeBytesSize(16, getCarrotRecruitedBytes());
       }
       if (((bitField0_ & 0x00010000) == 0x00010000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(28, elementSixDmg_);
+          .computeBytesSize(17, getCarrotDefeatedBytes());
       }
-      if (((bitField0_ & 0x10000000) == 0x10000000)) {
+      if (((bitField0_ & 0x00020000) == 0x00020000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(29, enhancingFeederExp_);
+          .computeBytesSize(18, getCarrotEvolvedBytes());
+      }
+      if (((bitField0_ & 0x00040000) == 0x00040000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(19, getDescriptionBytes());
       }
       for (int i = 0; i < lvlInfo_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(30, lvlInfo_.get(i));
+          .computeMessageSize(20, lvlInfo_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1217,53 +997,33 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00000020);
         monsterElement_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement.FIRE;
         bitField0_ = (bitField0_ & ~0x00000040);
-        baseHp_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
         imagePrefix_ = "";
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         numPuzzlePieces_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         minutesToCombinePieces_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
-        elementOneDmg_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000800);
-        elementTwoDmg_ = 0;
-        bitField0_ = (bitField0_ & ~0x00001000);
-        elementThreeDmg_ = 0;
-        bitField0_ = (bitField0_ & ~0x00002000);
-        elementFourDmg_ = 0;
-        bitField0_ = (bitField0_ & ~0x00004000);
-        elementFiveDmg_ = 0;
-        bitField0_ = (bitField0_ & ~0x00008000);
-        elementSixDmg_ = 0;
-        bitField0_ = (bitField0_ & ~0x00010000);
-        hpLevelMultiplier_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00020000);
-        attackLevelMultiplier_ = 0F;
-        bitField0_ = (bitField0_ & ~0x00040000);
+        bitField0_ = (bitField0_ & ~0x00000200);
         maxLevel_ = 0;
-        bitField0_ = (bitField0_ & ~0x00080000);
+        bitField0_ = (bitField0_ & ~0x00000400);
         evolutionMonsterId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         evolutionCatalystMonsterId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         minutesToEvolve_ = 0;
-        bitField0_ = (bitField0_ & ~0x00400000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         numCatalystMonstersRequired_ = 0;
-        bitField0_ = (bitField0_ & ~0x00800000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         carrotRecruited_ = "";
-        bitField0_ = (bitField0_ & ~0x01000000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         carrotDefeated_ = "";
-        bitField0_ = (bitField0_ & ~0x02000000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         carrotEvolved_ = "";
-        bitField0_ = (bitField0_ & ~0x04000000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         description_ = "";
-        bitField0_ = (bitField0_ & ~0x08000000);
-        enhancingFeederExp_ = 0;
-        bitField0_ = (bitField0_ & ~0x10000000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         if (lvlInfoBuilder_ == null) {
           lvlInfo_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x20000000);
+          bitField0_ = (bitField0_ & ~0x00080000);
         } else {
           lvlInfoBuilder_.clear();
         }
@@ -1336,95 +1096,55 @@ public final class MonsterStuffProto {
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
         }
-        result.baseHp_ = baseHp_;
+        result.imagePrefix_ = imagePrefix_;
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
           to_bitField0_ |= 0x00000100;
         }
-        result.imagePrefix_ = imagePrefix_;
+        result.numPuzzlePieces_ = numPuzzlePieces_;
         if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000200;
         }
-        result.numPuzzlePieces_ = numPuzzlePieces_;
+        result.minutesToCombinePieces_ = minutesToCombinePieces_;
         if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000400;
         }
-        result.minutesToCombinePieces_ = minutesToCombinePieces_;
+        result.maxLevel_ = maxLevel_;
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        result.elementOneDmg_ = elementOneDmg_;
+        result.evolutionMonsterId_ = evolutionMonsterId_;
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.elementTwoDmg_ = elementTwoDmg_;
+        result.evolutionCatalystMonsterId_ = evolutionCatalystMonsterId_;
         if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
           to_bitField0_ |= 0x00002000;
         }
-        result.elementThreeDmg_ = elementThreeDmg_;
+        result.minutesToEvolve_ = minutesToEvolve_;
         if (((from_bitField0_ & 0x00004000) == 0x00004000)) {
           to_bitField0_ |= 0x00004000;
         }
-        result.elementFourDmg_ = elementFourDmg_;
+        result.numCatalystMonstersRequired_ = numCatalystMonstersRequired_;
         if (((from_bitField0_ & 0x00008000) == 0x00008000)) {
           to_bitField0_ |= 0x00008000;
         }
-        result.elementFiveDmg_ = elementFiveDmg_;
+        result.carrotRecruited_ = carrotRecruited_;
         if (((from_bitField0_ & 0x00010000) == 0x00010000)) {
           to_bitField0_ |= 0x00010000;
         }
-        result.elementSixDmg_ = elementSixDmg_;
+        result.carrotDefeated_ = carrotDefeated_;
         if (((from_bitField0_ & 0x00020000) == 0x00020000)) {
           to_bitField0_ |= 0x00020000;
         }
-        result.hpLevelMultiplier_ = hpLevelMultiplier_;
+        result.carrotEvolved_ = carrotEvolved_;
         if (((from_bitField0_ & 0x00040000) == 0x00040000)) {
           to_bitField0_ |= 0x00040000;
         }
-        result.attackLevelMultiplier_ = attackLevelMultiplier_;
-        if (((from_bitField0_ & 0x00080000) == 0x00080000)) {
-          to_bitField0_ |= 0x00080000;
-        }
-        result.maxLevel_ = maxLevel_;
-        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
-          to_bitField0_ |= 0x00100000;
-        }
-        result.evolutionMonsterId_ = evolutionMonsterId_;
-        if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
-          to_bitField0_ |= 0x00200000;
-        }
-        result.evolutionCatalystMonsterId_ = evolutionCatalystMonsterId_;
-        if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
-          to_bitField0_ |= 0x00400000;
-        }
-        result.minutesToEvolve_ = minutesToEvolve_;
-        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
-          to_bitField0_ |= 0x00800000;
-        }
-        result.numCatalystMonstersRequired_ = numCatalystMonstersRequired_;
-        if (((from_bitField0_ & 0x01000000) == 0x01000000)) {
-          to_bitField0_ |= 0x01000000;
-        }
-        result.carrotRecruited_ = carrotRecruited_;
-        if (((from_bitField0_ & 0x02000000) == 0x02000000)) {
-          to_bitField0_ |= 0x02000000;
-        }
-        result.carrotDefeated_ = carrotDefeated_;
-        if (((from_bitField0_ & 0x04000000) == 0x04000000)) {
-          to_bitField0_ |= 0x04000000;
-        }
-        result.carrotEvolved_ = carrotEvolved_;
-        if (((from_bitField0_ & 0x08000000) == 0x08000000)) {
-          to_bitField0_ |= 0x08000000;
-        }
         result.description_ = description_;
-        if (((from_bitField0_ & 0x10000000) == 0x10000000)) {
-          to_bitField0_ |= 0x10000000;
-        }
-        result.enhancingFeederExp_ = enhancingFeederExp_;
         if (lvlInfoBuilder_ == null) {
-          if (((bitField0_ & 0x20000000) == 0x20000000)) {
+          if (((bitField0_ & 0x00080000) == 0x00080000)) {
             lvlInfo_ = java.util.Collections.unmodifiableList(lvlInfo_);
-            bitField0_ = (bitField0_ & ~0x20000000);
+            bitField0_ = (bitField0_ & ~0x00080000);
           }
           result.lvlInfo_ = lvlInfo_;
         } else {
@@ -1467,9 +1187,6 @@ public final class MonsterStuffProto {
         if (other.hasMonsterElement()) {
           setMonsterElement(other.getMonsterElement());
         }
-        if (other.hasBaseHp()) {
-          setBaseHp(other.getBaseHp());
-        }
         if (other.hasImagePrefix()) {
           setImagePrefix(other.getImagePrefix());
         }
@@ -1478,30 +1195,6 @@ public final class MonsterStuffProto {
         }
         if (other.hasMinutesToCombinePieces()) {
           setMinutesToCombinePieces(other.getMinutesToCombinePieces());
-        }
-        if (other.hasElementOneDmg()) {
-          setElementOneDmg(other.getElementOneDmg());
-        }
-        if (other.hasElementTwoDmg()) {
-          setElementTwoDmg(other.getElementTwoDmg());
-        }
-        if (other.hasElementThreeDmg()) {
-          setElementThreeDmg(other.getElementThreeDmg());
-        }
-        if (other.hasElementFourDmg()) {
-          setElementFourDmg(other.getElementFourDmg());
-        }
-        if (other.hasElementFiveDmg()) {
-          setElementFiveDmg(other.getElementFiveDmg());
-        }
-        if (other.hasElementSixDmg()) {
-          setElementSixDmg(other.getElementSixDmg());
-        }
-        if (other.hasHpLevelMultiplier()) {
-          setHpLevelMultiplier(other.getHpLevelMultiplier());
-        }
-        if (other.hasAttackLevelMultiplier()) {
-          setAttackLevelMultiplier(other.getAttackLevelMultiplier());
         }
         if (other.hasMaxLevel()) {
           setMaxLevel(other.getMaxLevel());
@@ -1530,14 +1223,11 @@ public final class MonsterStuffProto {
         if (other.hasDescription()) {
           setDescription(other.getDescription());
         }
-        if (other.hasEnhancingFeederExp()) {
-          setEnhancingFeederExp(other.getEnhancingFeederExp());
-        }
         if (lvlInfoBuilder_ == null) {
           if (!other.lvlInfo_.isEmpty()) {
             if (lvlInfo_.isEmpty()) {
               lvlInfo_ = other.lvlInfo_;
-              bitField0_ = (bitField0_ & ~0x20000000);
+              bitField0_ = (bitField0_ & ~0x00080000);
             } else {
               ensureLvlInfoIsMutable();
               lvlInfo_.addAll(other.lvlInfo_);
@@ -1550,7 +1240,7 @@ public final class MonsterStuffProto {
               lvlInfoBuilder_.dispose();
               lvlInfoBuilder_ = null;
               lvlInfo_ = other.lvlInfo_;
-              bitField0_ = (bitField0_ & ~0x20000000);
+              bitField0_ = (bitField0_ & ~0x00080000);
               lvlInfoBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getLvlInfoFieldBuilder() : null;
@@ -1637,117 +1327,67 @@ public final class MonsterStuffProto {
               }
               break;
             }
-            case 64: {
+            case 66: {
               bitField0_ |= 0x00000080;
-              baseHp_ = input.readInt32();
+              imagePrefix_ = input.readBytes();
               break;
             }
-            case 74: {
+            case 72: {
               bitField0_ |= 0x00000100;
-              imagePrefix_ = input.readBytes();
+              numPuzzlePieces_ = input.readInt32();
               break;
             }
             case 80: {
               bitField0_ |= 0x00000200;
-              numPuzzlePieces_ = input.readInt32();
+              minutesToCombinePieces_ = input.readInt32();
               break;
             }
             case 88: {
               bitField0_ |= 0x00000400;
-              minutesToCombinePieces_ = input.readInt32();
+              maxLevel_ = input.readInt32();
               break;
             }
             case 96: {
               bitField0_ |= 0x00000800;
-              elementOneDmg_ = input.readInt32();
+              evolutionMonsterId_ = input.readInt32();
               break;
             }
             case 104: {
               bitField0_ |= 0x00001000;
-              elementTwoDmg_ = input.readInt32();
+              evolutionCatalystMonsterId_ = input.readInt32();
               break;
             }
             case 112: {
               bitField0_ |= 0x00002000;
-              elementThreeDmg_ = input.readInt32();
+              minutesToEvolve_ = input.readInt32();
               break;
             }
             case 120: {
               bitField0_ |= 0x00004000;
-              elementFourDmg_ = input.readInt32();
-              break;
-            }
-            case 128: {
-              bitField0_ |= 0x00008000;
-              elementFiveDmg_ = input.readInt32();
-              break;
-            }
-            case 141: {
-              bitField0_ |= 0x00020000;
-              hpLevelMultiplier_ = input.readFloat();
-              break;
-            }
-            case 149: {
-              bitField0_ |= 0x00040000;
-              attackLevelMultiplier_ = input.readFloat();
-              break;
-            }
-            case 152: {
-              bitField0_ |= 0x00080000;
-              maxLevel_ = input.readInt32();
-              break;
-            }
-            case 160: {
-              bitField0_ |= 0x00100000;
-              evolutionMonsterId_ = input.readInt32();
-              break;
-            }
-            case 170: {
-              bitField0_ |= 0x01000000;
-              carrotRecruited_ = input.readBytes();
-              break;
-            }
-            case 178: {
-              bitField0_ |= 0x02000000;
-              carrotDefeated_ = input.readBytes();
-              break;
-            }
-            case 186: {
-              bitField0_ |= 0x04000000;
-              carrotEvolved_ = input.readBytes();
-              break;
-            }
-            case 194: {
-              bitField0_ |= 0x08000000;
-              description_ = input.readBytes();
-              break;
-            }
-            case 200: {
-              bitField0_ |= 0x00200000;
-              evolutionCatalystMonsterId_ = input.readInt32();
-              break;
-            }
-            case 208: {
-              bitField0_ |= 0x00400000;
-              minutesToEvolve_ = input.readInt32();
-              break;
-            }
-            case 216: {
-              bitField0_ |= 0x00800000;
               numCatalystMonstersRequired_ = input.readInt32();
               break;
             }
-            case 224: {
+            case 130: {
+              bitField0_ |= 0x00008000;
+              carrotRecruited_ = input.readBytes();
+              break;
+            }
+            case 138: {
               bitField0_ |= 0x00010000;
-              elementSixDmg_ = input.readInt32();
+              carrotDefeated_ = input.readBytes();
               break;
             }
-            case 232: {
-              bitField0_ |= 0x10000000;
-              enhancingFeederExp_ = input.readInt32();
+            case 146: {
+              bitField0_ |= 0x00020000;
+              carrotEvolved_ = input.readBytes();
               break;
             }
-            case 242: {
+            case 154: {
+              bitField0_ |= 0x00040000;
+              description_ = input.readBytes();
+              break;
+            }
+            case 162: {
               com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addLvlInfo(subBuilder.buildPartial());
@@ -1957,31 +1597,10 @@ public final class MonsterStuffProto {
         return this;
       }
       
-      // optional int32 baseHp = 8;
-      private int baseHp_ ;
-      public boolean hasBaseHp() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      public int getBaseHp() {
-        return baseHp_;
-      }
-      public Builder setBaseHp(int value) {
-        bitField0_ |= 0x00000080;
-        baseHp_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearBaseHp() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        baseHp_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional string imagePrefix = 9;
+      // optional string imagePrefix = 8;
       private java.lang.Object imagePrefix_ = "";
       public boolean hasImagePrefix() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public String getImagePrefix() {
         java.lang.Object ref = imagePrefix_;
@@ -1997,342 +1616,174 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000080;
         imagePrefix_ = value;
         onChanged();
         return this;
       }
       public Builder clearImagePrefix() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         imagePrefix_ = getDefaultInstance().getImagePrefix();
         onChanged();
         return this;
       }
       void setImagePrefix(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000080;
         imagePrefix_ = value;
         onChanged();
       }
       
-      // optional int32 numPuzzlePieces = 10;
+      // optional int32 numPuzzlePieces = 9;
       private int numPuzzlePieces_ ;
       public boolean hasNumPuzzlePieces() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       public int getNumPuzzlePieces() {
         return numPuzzlePieces_;
       }
       public Builder setNumPuzzlePieces(int value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000100;
         numPuzzlePieces_ = value;
         onChanged();
         return this;
       }
       public Builder clearNumPuzzlePieces() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000100);
         numPuzzlePieces_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 minutesToCombinePieces = 11;
+      // optional int32 minutesToCombinePieces = 10;
       private int minutesToCombinePieces_ ;
       public boolean hasMinutesToCombinePieces() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       public int getMinutesToCombinePieces() {
         return minutesToCombinePieces_;
       }
       public Builder setMinutesToCombinePieces(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000200;
         minutesToCombinePieces_ = value;
         onChanged();
         return this;
       }
       public Builder clearMinutesToCombinePieces() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000200);
         minutesToCombinePieces_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 elementOneDmg = 12;
-      private int elementOneDmg_ ;
-      public boolean hasElementOneDmg() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
-      }
-      public int getElementOneDmg() {
-        return elementOneDmg_;
-      }
-      public Builder setElementOneDmg(int value) {
-        bitField0_ |= 0x00000800;
-        elementOneDmg_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearElementOneDmg() {
-        bitField0_ = (bitField0_ & ~0x00000800);
-        elementOneDmg_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 elementTwoDmg = 13;
-      private int elementTwoDmg_ ;
-      public boolean hasElementTwoDmg() {
-        return ((bitField0_ & 0x00001000) == 0x00001000);
-      }
-      public int getElementTwoDmg() {
-        return elementTwoDmg_;
-      }
-      public Builder setElementTwoDmg(int value) {
-        bitField0_ |= 0x00001000;
-        elementTwoDmg_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearElementTwoDmg() {
-        bitField0_ = (bitField0_ & ~0x00001000);
-        elementTwoDmg_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 elementThreeDmg = 14;
-      private int elementThreeDmg_ ;
-      public boolean hasElementThreeDmg() {
-        return ((bitField0_ & 0x00002000) == 0x00002000);
-      }
-      public int getElementThreeDmg() {
-        return elementThreeDmg_;
-      }
-      public Builder setElementThreeDmg(int value) {
-        bitField0_ |= 0x00002000;
-        elementThreeDmg_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearElementThreeDmg() {
-        bitField0_ = (bitField0_ & ~0x00002000);
-        elementThreeDmg_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 elementFourDmg = 15;
-      private int elementFourDmg_ ;
-      public boolean hasElementFourDmg() {
-        return ((bitField0_ & 0x00004000) == 0x00004000);
-      }
-      public int getElementFourDmg() {
-        return elementFourDmg_;
-      }
-      public Builder setElementFourDmg(int value) {
-        bitField0_ |= 0x00004000;
-        elementFourDmg_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearElementFourDmg() {
-        bitField0_ = (bitField0_ & ~0x00004000);
-        elementFourDmg_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 elementFiveDmg = 16;
-      private int elementFiveDmg_ ;
-      public boolean hasElementFiveDmg() {
-        return ((bitField0_ & 0x00008000) == 0x00008000);
-      }
-      public int getElementFiveDmg() {
-        return elementFiveDmg_;
-      }
-      public Builder setElementFiveDmg(int value) {
-        bitField0_ |= 0x00008000;
-        elementFiveDmg_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearElementFiveDmg() {
-        bitField0_ = (bitField0_ & ~0x00008000);
-        elementFiveDmg_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 elementSixDmg = 28;
-      private int elementSixDmg_ ;
-      public boolean hasElementSixDmg() {
-        return ((bitField0_ & 0x00010000) == 0x00010000);
-      }
-      public int getElementSixDmg() {
-        return elementSixDmg_;
-      }
-      public Builder setElementSixDmg(int value) {
-        bitField0_ |= 0x00010000;
-        elementSixDmg_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearElementSixDmg() {
-        bitField0_ = (bitField0_ & ~0x00010000);
-        elementSixDmg_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional float hpLevelMultiplier = 17;
-      private float hpLevelMultiplier_ ;
-      public boolean hasHpLevelMultiplier() {
-        return ((bitField0_ & 0x00020000) == 0x00020000);
-      }
-      public float getHpLevelMultiplier() {
-        return hpLevelMultiplier_;
-      }
-      public Builder setHpLevelMultiplier(float value) {
-        bitField0_ |= 0x00020000;
-        hpLevelMultiplier_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearHpLevelMultiplier() {
-        bitField0_ = (bitField0_ & ~0x00020000);
-        hpLevelMultiplier_ = 0F;
-        onChanged();
-        return this;
-      }
-      
-      // optional float attackLevelMultiplier = 18;
-      private float attackLevelMultiplier_ ;
-      public boolean hasAttackLevelMultiplier() {
-        return ((bitField0_ & 0x00040000) == 0x00040000);
-      }
-      public float getAttackLevelMultiplier() {
-        return attackLevelMultiplier_;
-      }
-      public Builder setAttackLevelMultiplier(float value) {
-        bitField0_ |= 0x00040000;
-        attackLevelMultiplier_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearAttackLevelMultiplier() {
-        bitField0_ = (bitField0_ & ~0x00040000);
-        attackLevelMultiplier_ = 0F;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 maxLevel = 19;
+      // optional int32 maxLevel = 11;
       private int maxLevel_ ;
       public boolean hasMaxLevel() {
-        return ((bitField0_ & 0x00080000) == 0x00080000);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       public int getMaxLevel() {
         return maxLevel_;
       }
       public Builder setMaxLevel(int value) {
-        bitField0_ |= 0x00080000;
+        bitField0_ |= 0x00000400;
         maxLevel_ = value;
         onChanged();
         return this;
       }
       public Builder clearMaxLevel() {
-        bitField0_ = (bitField0_ & ~0x00080000);
+        bitField0_ = (bitField0_ & ~0x00000400);
         maxLevel_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 evolutionMonsterId = 20;
+      // optional int32 evolutionMonsterId = 12;
       private int evolutionMonsterId_ ;
       public boolean hasEvolutionMonsterId() {
-        return ((bitField0_ & 0x00100000) == 0x00100000);
+        return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       public int getEvolutionMonsterId() {
         return evolutionMonsterId_;
       }
       public Builder setEvolutionMonsterId(int value) {
-        bitField0_ |= 0x00100000;
+        bitField0_ |= 0x00000800;
         evolutionMonsterId_ = value;
         onChanged();
         return this;
       }
       public Builder clearEvolutionMonsterId() {
-        bitField0_ = (bitField0_ & ~0x00100000);
+        bitField0_ = (bitField0_ & ~0x00000800);
         evolutionMonsterId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 evolutionCatalystMonsterId = 25;
+      // optional int32 evolutionCatalystMonsterId = 13;
       private int evolutionCatalystMonsterId_ ;
       public boolean hasEvolutionCatalystMonsterId() {
-        return ((bitField0_ & 0x00200000) == 0x00200000);
+        return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       public int getEvolutionCatalystMonsterId() {
         return evolutionCatalystMonsterId_;
       }
       public Builder setEvolutionCatalystMonsterId(int value) {
-        bitField0_ |= 0x00200000;
+        bitField0_ |= 0x00001000;
         evolutionCatalystMonsterId_ = value;
         onChanged();
         return this;
       }
       public Builder clearEvolutionCatalystMonsterId() {
-        bitField0_ = (bitField0_ & ~0x00200000);
+        bitField0_ = (bitField0_ & ~0x00001000);
         evolutionCatalystMonsterId_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 minutesToEvolve = 26;
+      // optional int32 minutesToEvolve = 14;
       private int minutesToEvolve_ ;
       public boolean hasMinutesToEvolve() {
-        return ((bitField0_ & 0x00400000) == 0x00400000);
+        return ((bitField0_ & 0x00002000) == 0x00002000);
       }
       public int getMinutesToEvolve() {
         return minutesToEvolve_;
       }
       public Builder setMinutesToEvolve(int value) {
-        bitField0_ |= 0x00400000;
+        bitField0_ |= 0x00002000;
         minutesToEvolve_ = value;
         onChanged();
         return this;
       }
       public Builder clearMinutesToEvolve() {
-        bitField0_ = (bitField0_ & ~0x00400000);
+        bitField0_ = (bitField0_ & ~0x00002000);
         minutesToEvolve_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int32 numCatalystMonstersRequired = 27;
+      // optional int32 numCatalystMonstersRequired = 15;
       private int numCatalystMonstersRequired_ ;
       public boolean hasNumCatalystMonstersRequired() {
-        return ((bitField0_ & 0x00800000) == 0x00800000);
+        return ((bitField0_ & 0x00004000) == 0x00004000);
       }
       public int getNumCatalystMonstersRequired() {
         return numCatalystMonstersRequired_;
       }
       public Builder setNumCatalystMonstersRequired(int value) {
-        bitField0_ |= 0x00800000;
+        bitField0_ |= 0x00004000;
         numCatalystMonstersRequired_ = value;
         onChanged();
         return this;
       }
       public Builder clearNumCatalystMonstersRequired() {
-        bitField0_ = (bitField0_ & ~0x00800000);
+        bitField0_ = (bitField0_ & ~0x00004000);
         numCatalystMonstersRequired_ = 0;
         onChanged();
         return this;
       }
       
-      // optional string carrotRecruited = 21;
+      // optional string carrotRecruited = 16;
       private java.lang.Object carrotRecruited_ = "";
       public boolean hasCarrotRecruited() {
-        return ((bitField0_ & 0x01000000) == 0x01000000);
+        return ((bitField0_ & 0x00008000) == 0x00008000);
       }
       public String getCarrotRecruited() {
         java.lang.Object ref = carrotRecruited_;
@@ -2348,27 +1799,27 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x01000000;
+  bitField0_ |= 0x00008000;
         carrotRecruited_ = value;
         onChanged();
         return this;
       }
       public Builder clearCarrotRecruited() {
-        bitField0_ = (bitField0_ & ~0x01000000);
+        bitField0_ = (bitField0_ & ~0x00008000);
         carrotRecruited_ = getDefaultInstance().getCarrotRecruited();
         onChanged();
         return this;
       }
       void setCarrotRecruited(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x01000000;
+        bitField0_ |= 0x00008000;
         carrotRecruited_ = value;
         onChanged();
       }
       
-      // optional string carrotDefeated = 22;
+      // optional string carrotDefeated = 17;
       private java.lang.Object carrotDefeated_ = "";
       public boolean hasCarrotDefeated() {
-        return ((bitField0_ & 0x02000000) == 0x02000000);
+        return ((bitField0_ & 0x00010000) == 0x00010000);
       }
       public String getCarrotDefeated() {
         java.lang.Object ref = carrotDefeated_;
@@ -2384,27 +1835,27 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x02000000;
+  bitField0_ |= 0x00010000;
         carrotDefeated_ = value;
         onChanged();
         return this;
       }
       public Builder clearCarrotDefeated() {
-        bitField0_ = (bitField0_ & ~0x02000000);
+        bitField0_ = (bitField0_ & ~0x00010000);
         carrotDefeated_ = getDefaultInstance().getCarrotDefeated();
         onChanged();
         return this;
       }
       void setCarrotDefeated(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x02000000;
+        bitField0_ |= 0x00010000;
         carrotDefeated_ = value;
         onChanged();
       }
       
-      // optional string carrotEvolved = 23;
+      // optional string carrotEvolved = 18;
       private java.lang.Object carrotEvolved_ = "";
       public boolean hasCarrotEvolved() {
-        return ((bitField0_ & 0x04000000) == 0x04000000);
+        return ((bitField0_ & 0x00020000) == 0x00020000);
       }
       public String getCarrotEvolved() {
         java.lang.Object ref = carrotEvolved_;
@@ -2420,27 +1871,27 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x04000000;
+  bitField0_ |= 0x00020000;
         carrotEvolved_ = value;
         onChanged();
         return this;
       }
       public Builder clearCarrotEvolved() {
-        bitField0_ = (bitField0_ & ~0x04000000);
+        bitField0_ = (bitField0_ & ~0x00020000);
         carrotEvolved_ = getDefaultInstance().getCarrotEvolved();
         onChanged();
         return this;
       }
       void setCarrotEvolved(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x04000000;
+        bitField0_ |= 0x00020000;
         carrotEvolved_ = value;
         onChanged();
       }
       
-      // optional string description = 24;
+      // optional string description = 19;
       private java.lang.Object description_ = "";
       public boolean hasDescription() {
-        return ((bitField0_ & 0x08000000) == 0x08000000);
+        return ((bitField0_ & 0x00040000) == 0x00040000);
       }
       public String getDescription() {
         java.lang.Object ref = description_;
@@ -2456,51 +1907,30 @@ public final class MonsterStuffProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x08000000;
+  bitField0_ |= 0x00040000;
         description_ = value;
         onChanged();
         return this;
       }
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x08000000);
+        bitField0_ = (bitField0_ & ~0x00040000);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       void setDescription(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x08000000;
+        bitField0_ |= 0x00040000;
         description_ = value;
         onChanged();
       }
       
-      // optional int32 enhancingFeederExp = 29;
-      private int enhancingFeederExp_ ;
-      public boolean hasEnhancingFeederExp() {
-        return ((bitField0_ & 0x10000000) == 0x10000000);
-      }
-      public int getEnhancingFeederExp() {
-        return enhancingFeederExp_;
-      }
-      public Builder setEnhancingFeederExp(int value) {
-        bitField0_ |= 0x10000000;
-        enhancingFeederExp_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearEnhancingFeederExp() {
-        bitField0_ = (bitField0_ & ~0x10000000);
-        enhancingFeederExp_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 30;
+      // repeated .com.lvl6.proto.MonsterLevelInfoProto lvlInfo = 20;
       private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto> lvlInfo_ =
         java.util.Collections.emptyList();
       private void ensureLvlInfoIsMutable() {
-        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
+        if (!((bitField0_ & 0x00080000) == 0x00080000)) {
           lvlInfo_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto>(lvlInfo_);
-          bitField0_ |= 0x20000000;
+          bitField0_ |= 0x00080000;
          }
       }
       
@@ -2616,7 +2046,7 @@ public final class MonsterStuffProto {
       public Builder clearLvlInfo() {
         if (lvlInfoBuilder_ == null) {
           lvlInfo_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x20000000);
+          bitField0_ = (bitField0_ & ~0x00080000);
           onChanged();
         } else {
           lvlInfoBuilder_.clear();
@@ -2672,7 +2102,7 @@ public final class MonsterStuffProto {
           lvlInfoBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProtoOrBuilder>(
                   lvlInfo_,
-                  ((bitField0_ & 0x20000000) == 0x20000000),
+                  ((bitField0_ & 0x00080000) == 0x00080000),
                   getParentForChildren(),
                   isClean());
           lvlInfo_ = null;
@@ -8585,67 +8015,61 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\212\010\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\226\006\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
       "\030\002 \001(\t\022\024\n\014monsterGroup\030\003 \001(\t\022<\n\007quality\030" +
       "\004 \001(\0162+.com.lvl6.proto.MonsterProto.Mons" +
       "terQuality\022\026\n\016evolutionLevel\030\005 \001(\005\022\023\n\013di" +
       "splayName\030\006 \001(\t\022C\n\016monsterElement\030\007 \001(\0162" +
       "+.com.lvl6.proto.MonsterProto.MonsterEle" +
-      "ment\022\016\n\006baseHp\030\010 \001(\005\022\023\n\013imagePrefix\030\t \001(" +
-      "\t\022\027\n\017numPuzzlePieces\030\n \001(\005\022\036\n\026minutesToC" +
-      "ombinePieces\030\013 \001(\005\022\025\n\relementOneDmg\030\014 \001(",
-      "\005\022\025\n\relementTwoDmg\030\r \001(\005\022\027\n\017elementThree" +
-      "Dmg\030\016 \001(\005\022\026\n\016elementFourDmg\030\017 \001(\005\022\026\n\016ele" +
-      "mentFiveDmg\030\020 \001(\005\022\025\n\relementSixDmg\030\034 \001(\005" +
-      "\022\031\n\021hpLevelMultiplier\030\021 \001(\002\022\035\n\025attackLev" +
-      "elMultiplier\030\022 \001(\002\022\020\n\010maxLevel\030\023 \001(\005\022\032\n\022" +
-      "evolutionMonsterId\030\024 \001(\005\022\"\n\032evolutionCat" +
-      "alystMonsterId\030\031 \001(\005\022\027\n\017minutesToEvolve\030" +
-      "\032 \001(\005\022#\n\033numCatalystMonstersRequired\030\033 \001" +
-      "(\005\022\027\n\017carrotRecruited\030\025 \001(\t\022\026\n\016carrotDef" +
-      "eated\030\026 \001(\t\022\025\n\rcarrotEvolved\030\027 \001(\t\022\023\n\013de",
-      "scription\030\030 \001(\t\022\032\n\022enhancingFeederExp\030\035 " +
-      "\001(\005\0226\n\007lvlInfo\030\036 \003(\0132%.com.lvl6.proto.Mo" +
-      "nsterLevelInfoProto\"S\n\016MonsterQuality\022\n\n" +
-      "\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004" +
-      "\022\r\n\tLEGENDARY\020\005\022\007\n\003EVO\020\006\"W\n\016MonsterEleme" +
-      "nt\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLI" +
-      "GHTNING\020\004\022\014\n\010DARKNESS\020\005\022\010\n\004ROCK\020\006\"\317\001\n\025Mo" +
-      "nsterLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002" +
-      " \001(\005\022\031\n\021curLvlRequiredExp\030\003 \001(\005\022\021\n\tfeede" +
-      "rExp\030\004 \001(\005\022\017\n\007fireDmg\030\005 \001(\021\022\020\n\010grassDmg\030",
-      "\006 \001(\021\022\020\n\010waterDmg\030\007 \001(\021\022\024\n\014lightningDmg\030" +
-      "\010 \001(\021\022\023\n\013darknessDmg\030\t \001(\021\022\017\n\007rockDmg\030\n " +
-      "\001(\021\"\345\001\n\024FullUserMonsterProto\022\025\n\ruserMons" +
-      "terId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId" +
-      "\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurrentLvl" +
-      "\030\005 \001(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tnumPiec" +
-      "es\030\007 \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030\n\020combineS" +
-      "tartTime\030\t \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\"\204\001\n\027" +
-      "UserMonsterHealingProto\022\016\n\006userId\030\001 \001(\005\022" +
-      "\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTimeMill",
-      "is\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010prio" +
-      "rity\030\006 \001(\005\"M\n\035UserMonsterCurrentHealthPr" +
-      "oto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentHea" +
-      "lth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006us" +
-      "erId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com.lv" +
-      "l6.proto.UserEnhancementItemProto\0229\n\007fee" +
-      "ders\030\003 \003(\0132(.com.lvl6.proto.UserEnhancem" +
-      "entItemProto\"i\n\030UserEnhancementItemProto" +
-      "\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedStart" +
-      "TimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\"",
-      "f\n\032UserMonsterCurrentExpProto\022\025\n\ruserMon" +
-      "sterId\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001(\005" +
-      "\022\025\n\rexpectedLevel\030\003 \001(\005\"H\n\033MinimumUserMo" +
-      "nsterSellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n" +
-      "\ncashAmount\030\002 \001(\005\"h\n\033UserCurrentMonsterT" +
-      "eamProto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030" +
-      "\002 \003(\0132$.com.lvl6.proto.FullUserMonsterPr" +
-      "oto\"e\n\031UserMonsterEvolutionProto\022\035\n\025cata" +
-      "lystUserMonsterId\030\001 \001(\003\022\026\n\016userMonsterId" +
-      "s\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003B\023B\021MonsterStu",
-      "ffProto"
+      "ment\022\023\n\013imagePrefix\030\010 \001(\t\022\027\n\017numPuzzlePi" +
+      "eces\030\t \001(\005\022\036\n\026minutesToCombinePieces\030\n \001" +
+      "(\005\022\020\n\010maxLevel\030\013 \001(\005\022\032\n\022evolutionMonster",
+      "Id\030\014 \001(\005\022\"\n\032evolutionCatalystMonsterId\030\r" +
+      " \001(\005\022\027\n\017minutesToEvolve\030\016 \001(\005\022#\n\033numCata" +
+      "lystMonstersRequired\030\017 \001(\005\022\027\n\017carrotRecr" +
+      "uited\030\020 \001(\t\022\026\n\016carrotDefeated\030\021 \001(\t\022\025\n\rc" +
+      "arrotEvolved\030\022 \001(\t\022\023\n\013description\030\023 \001(\t\022" +
+      "6\n\007lvlInfo\030\024 \003(\0132%.com.lvl6.proto.Monste" +
+      "rLevelInfoProto\"S\n\016MonsterQuality\022\n\n\006COM" +
+      "MON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020\004\022\r\n\t" +
+      "LEGENDARY\020\005\022\007\n\003EVO\020\006\"W\n\016MonsterElement\022\010" +
+      "\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tLIGHTN",
+      "ING\020\004\022\014\n\010DARKNESS\020\005\022\010\n\004ROCK\020\006\"\317\001\n\025Monste" +
+      "rLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005" +
+      "\022\031\n\021curLvlRequiredExp\030\003 \001(\005\022\021\n\tfeederExp" +
+      "\030\004 \001(\005\022\017\n\007fireDmg\030\005 \001(\021\022\020\n\010grassDmg\030\006 \001(" +
+      "\021\022\020\n\010waterDmg\030\007 \001(\021\022\024\n\014lightningDmg\030\010 \001(" +
+      "\021\022\023\n\013darknessDmg\030\t \001(\021\022\017\n\007rockDmg\030\n \001(\021\"" +
+      "\345\001\n\024FullUserMonsterProto\022\025\n\ruserMonsterI" +
+      "d\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001" +
+      "(\005\022\022\n\ncurrentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001" +
+      "(\005\022\025\n\rcurrentHealth\030\006 \001(\005\022\021\n\tnumPieces\030\007",
+      " \001(\005\022\022\n\nisComplete\030\010 \001(\010\022\030\n\020combineStart" +
+      "Time\030\t \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\"\204\001\n\027User" +
+      "MonsterHealingProto\022\016\n\006userId\030\001 \001(\005\022\025\n\ru" +
+      "serMonsterId\030\002 \001(\003\022\030\n\020queuedTimeMillis\030\003" +
+      " \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010priority" +
+      "\030\006 \001(\005\"M\n\035UserMonsterCurrentHealthProto\022" +
+      "\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentHealth\030" +
+      "\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006userId" +
+      "\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com.lvl6.p" +
+      "roto.UserEnhancementItemProto\0229\n\007feeders",
+      "\030\003 \003(\0132(.com.lvl6.proto.UserEnhancementI" +
+      "temProto\"i\n\030UserEnhancementItemProto\022\025\n\r" +
+      "userMonsterId\030\001 \001(\003\022\037\n\027expectedStartTime" +
+      "Millis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(\005\"f\n\032U" +
+      "serMonsterCurrentExpProto\022\025\n\ruserMonster" +
+      "Id\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001(\005\022\025\n\r" +
+      "expectedLevel\030\003 \001(\005\"H\n\033MinimumUserMonste" +
+      "rSellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\022\n\ncas" +
+      "hAmount\030\002 \001(\005\"h\n\033UserCurrentMonsterTeamP" +
+      "roto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTeam\030\002 \003(",
+      "\0132$.com.lvl6.proto.FullUserMonsterProto\"" +
+      "e\n\031UserMonsterEvolutionProto\022\035\n\025catalyst" +
+      "UserMonsterId\030\001 \001(\003\022\026\n\016userMonsterIds\030\002 " +
+      "\003(\003\022\021\n\tstartTime\030\003 \001(\003B\023B\021MonsterStuffPr" +
+      "oto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8657,7 +8081,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_MonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "MonsterElement", "BaseHp", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "ElementOneDmg", "ElementTwoDmg", "ElementThreeDmg", "ElementFourDmg", "ElementFiveDmg", "ElementSixDmg", "HpLevelMultiplier", "AttackLevelMultiplier", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "EnhancingFeederExp", "LvlInfo", },
+              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "MonsterElement", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "LvlInfo", },
               com.lvl6.proto.MonsterStuffProto.MonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder.class);
           internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor =

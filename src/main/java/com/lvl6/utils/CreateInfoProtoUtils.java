@@ -1159,16 +1159,17 @@ public class CreateInfoProtoUtils {
     MonsterProto.Builder mpb = MonsterProto.newBuilder();
 
     mpb.setMonsterId(aMonster.getId());
-    mpb.setName(aMonster.getName());
-    String mGroup = aMonster.getMonsterGroup();
-    if (null != mGroup) {
-    	mpb.setMonsterGroup(mGroup);
+    String aStr = aMonster.getName(); 
+    mpb.setName(aStr);
+    aStr = aMonster.getMonsterGroup();
+    if (null != aStr) {
+    	mpb.setMonsterGroup(aStr);
     }
     mpb.setQuality(aMonster.getQuality());
     mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
-    String displayName = aMonster.getDisplayName(); 
-    if (null != displayName) {
-    	mpb.setDisplayName(displayName);
+    aStr = aMonster.getDisplayName(); 
+    if (null != aStr) {
+    	mpb.setDisplayName(aStr);
     }
     
     MonsterElement me = aMonster.getElement();
@@ -1177,53 +1178,41 @@ public class CreateInfoProtoUtils {
     } else{
     	log.error("monster element is null!!!!!! monster=" + aMonster);
     }
-    mpb.setBaseHp(aMonster.getBaseHp());
-    String imagePrefix = aMonster.getImagePrefix(); 
-    if (null != imagePrefix) {
-    	mpb.setImagePrefix(imagePrefix);
+    aStr = aMonster.getImagePrefix(); 
+    if (null != aStr) {
+    	mpb.setImagePrefix(aStr);
     }
     mpb.setNumPuzzlePieces(aMonster.getNumPuzzlePieces());
     mpb.setMinutesToCombinePieces(aMonster.getMinutesToCombinePieces());
-    mpb.setElementOneDmg(aMonster.getElementOneDmg());
-    mpb.setElementTwoDmg(aMonster.getElementTwoDmg());
-    mpb.setElementThreeDmg(aMonster.getElementThreeDmg());
-    mpb.setElementFourDmg(aMonster.getElementFourDmg());
-    mpb.setElementFiveDmg(aMonster.getElementFiveDmg());
-    mpb.setElementSixDmg(aMonster.getElementSixDmg());
-    mpb.setHpLevelMultiplier(aMonster.getHpLevelMultiplier());
-    mpb.setAttackLevelMultiplier(aMonster.getAttackLevelMultiplier());
     mpb.setMaxLevel(aMonster.getMaxLevel());
     
     int evolId = aMonster.getEvolutionMonsterId();
     if (evolId > 0) {
     	mpb.setEvolutionMonsterId(evolId);
     }
-    String carrot = aMonster.getCarrotRecruited();
-    if (null != carrot) {
-    	mpb.setCarrotRecruited(carrot);
+    aStr = aMonster.getCarrotRecruited();
+    if (null != aStr) {
+    	mpb.setCarrotRecruited(aStr);
     }
-    carrot = aMonster.getCarrotDefeated();
-    if (null != carrot) {
-    	mpb.setCarrotDefeated(carrot);
+    aStr = aMonster.getCarrotDefeated();
+    if (null != aStr) {
+    	mpb.setCarrotDefeated(aStr);
     }
-    carrot = aMonster.getCarrotEvolved();
-    if (null != carrot) {
-    	mpb.setCarrotEvolved(carrot);
+    aStr = aMonster.getCarrotEvolved();
+    if (null != aStr) {
+    	mpb.setCarrotEvolved(aStr);
     }
-    String description = aMonster.getDescription();
-    if (null != description) {
-    	mpb.setDescription(description);
+    aStr = aMonster.getDescription();
+    if (null != aStr) {
+    	mpb.setDescription(aStr);
     }
     
     int evolutionCatalystMonsterId = aMonster.getEvolutionCatalystMonsterId();
     mpb.setEvolutionCatalystMonsterId(evolutionCatalystMonsterId);
     int minutesToEvolve = aMonster.getMinutesToEvolve();
     mpb.setMinutesToEvolve(minutesToEvolve);
-    
     int num = aMonster.getNumCatalystsRequired();
     mpb.setNumCatalystMonstersRequired(num);
-    int enhanceFeederExp = aMonster.getEnhancingFeederExp();
-    mpb.setEnhancingFeederExp(enhanceFeederExp);
     
     
     List<MonsterLevelInfoProto> lvlInfoProtos = createMonsterLevelInfoFromInfo(levelToInfo);

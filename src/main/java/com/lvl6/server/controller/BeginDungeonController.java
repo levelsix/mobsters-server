@@ -325,7 +325,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  
 		  //select one monster, at random. This is the ONE monster for this stage
 		  List<TaskStageMonster> taskStageMonsters = 
-				  TaskStageMonsterRetrieveUtils.getTaskStagesForTaskStageId(tsId);
+				  TaskStageMonsterRetrieveUtils.getMonstersForTaskStageId(tsId);
 		  int quantity = 1; //change value to increase monsters spawned
 		  List<TaskStageMonster> spawnedTaskStageMonsters = selectMonsters(taskStageMonsters, rand, quantity);
 		  
@@ -345,6 +345,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				  ts, spawnedTaskStageMonsters, puzzlePiecesDropped,
 				  individualSilvers);
 		  
+		  //NOTE, all the sizes are equal:
+		  //individualSilvers.size() == individualExps.size() == puzzlePiecesDropped.size()
+		  // == spawnedTaskStageMonsters.size()
 		  //update the protos to return to parent function
 		  stageNumsToProtos.put(stageNum, tsp);
 		  stageNumsToSilvers.put(stageNum, individualSilvers);
