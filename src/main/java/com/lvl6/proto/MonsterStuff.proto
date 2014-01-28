@@ -14,41 +14,25 @@ message MonsterProto {
 	optional int32 evolutionLevel = 5;
 	optional string displayName = 6;
 	optional MonsterElement monsterElement = 7;
-	optional int32 baseHp = 8;
-	optional string imagePrefix = 9;
-	optional int32 numPuzzlePieces = 10;
-	optional int32 minutesToCombinePieces = 11;
-	optional int32 elementOneDmg = 12;
-	optional int32 elementTwoDmg = 13;
-	optional int32 elementThreeDmg = 14;
-	optional int32 elementFourDmg = 15;
-	optional int32 elementFiveDmg = 16;
-	optional int32 elementSixDmg = 28;
-	optional float hpLevelMultiplier = 17;
-	optional float attackLevelMultiplier = 18;
-	optional int32 maxLevel = 19;
+	optional string imagePrefix = 8;
+	optional int32 numPuzzlePieces = 9;
+	optional int32 minutesToCombinePieces = 10;
+	optional int32 maxLevel = 11; //aka max enhancing level
 	
 	//what monster this monster evolves into
-	optional int32 evolutionMonsterId = 20;
+	optional int32 evolutionMonsterId = 12;
 	//the monster that is needed in order to evolve this monster
-	optional int32 evolutionCatalystMonsterId = 25;
-	optional int32 minutesToEvolve = 26;
-	optional int32 numCatalystMonstersRequired = 27;
+	optional int32 evolutionCatalystMonsterId = 13;
+	optional int32 minutesToEvolve = 14;
+	optional int32 numCatalystMonstersRequired = 15; //will most likely be 1
 	
-	optional string carrotRecruited = 21;
-	optional string carrotDefeated = 22;
-	optional string carrotEvolved = 23;
-	optional string description = 24; 
-	
-	//optional int32 requiredEvolvingMonsterId = 25; //defined above
-	//optional int32 minutesToEvolve = 26; //defined above
-	//optional int32 numCatalystMonstersRequired = 27; //defined above
-	//optional int32 elementSixDmg = 28; //defined above
-	optional int32 enhancingFeederExp = 29;
-	
+	optional string carrotRecruited = 16;
+	optional string carrotDefeated = 17;
+	optional string carrotEvolved = 18;
+	optional string description = 19; 
 	
 	//stores lvl determined hp, attack, exp,  among other things
-	repeated MonsterLevelInfoProto lvlInfo = 30;
+	repeated MonsterLevelInfoProto lvlInfo = 20;
 	
 	enum MonsterQuality {
 		COMMON = 1;

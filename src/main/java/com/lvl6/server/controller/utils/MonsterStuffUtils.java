@@ -16,12 +16,14 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.TaskStageMonster;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -313,6 +315,11 @@ public class MonsterStuffUtils {
   		Monster monzter, int quantity, Date combineStartTime) {
   	List<MonsterForUser> returnList = new ArrayList<MonsterForUser>();
   	
+  	Map<Integer, MonsterLevelInfo> levelToInfo = MonsterLevelInfoRetrieveUtils
+  			.getMonsterLevelInfoForMonsterId(monzter.getId());
+  	MonsterLevelInfo info = levelToInfo.get(1); //not sure if this is right
+  	
+  	
   	int numPiecesForCompletion = monzter.getNumPuzzlePieces();
   	
   	//TODO: FIGURE OUT IF THESE ARE TEH CORRECT DEFAULT VALUES
@@ -321,7 +328,7 @@ public class MonsterStuffUtils {
   	int monsterId = monzter.getId();
   	int currentExp = 0; //not sure if this is right
   	int currentLvl = 1; //not sure if this is right
-  	int currentHealth = monzter.getBaseHp();
+  	int currentHealth = info.getHp();
   	
   	int teamSlotNum = 0;
   	String sourceOfPieces = "";
@@ -485,11 +492,18 @@ public class MonsterStuffUtils {
   
   public static MonsterForUser createNewUserMonster(int userId, int numPieces,
   		Monster monster, Date now, boolean isComplete) {
-  	int id = 0;
+  	
   	int monsterId = monster.getId();
+  	
+  	Map<Integer, MonsterLevelInfo> levelToInfo = MonsterLevelInfoRetrieveUtils
+  			.getMonsterLevelInfoForMonsterId(monsterId);
+  	MonsterLevelInfo info = levelToInfo.get(1); //not sure if this is right
+  	
+  	
+  	int id = 0;
   	int currentExp = 0;
   	int currentLvl = 1;
-  	int currentHealth = monster.getBaseHp();
+  	int currentHealth = info.getHp();
   	int teamSlotNum = 0;
   	String sourceOfPieces = "";
   	MonsterForUser mfu = new MonsterForUser(id, userId, monsterId, currentExp,

@@ -37,7 +37,8 @@ import com.lvl6.utils.DBConnection;
     return taskStageIdsToTaskStageMonsters;
   }
 
-  public static List<TaskStageMonster> getTaskStagesForTaskStageId(int taskStageId) {
+  //should rename to getMonstersForTaskStageId
+  public static List<TaskStageMonster> getMonstersForTaskStageId(int taskStageId) {
     log.debug("retrieve task stage data for stage " + taskStageId);
     if (taskStageIdsToTaskStageMonsters == null) {
       setStaticTaskStageIdsToTaskStageMonster();      

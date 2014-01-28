@@ -21,14 +21,16 @@ message BoosterPackProto {
 	optional int32 boosterPackId = 1;
 	optional string boosterPackName = 2;
 	optional int32 gemPrice = 3;
-	repeated BoosterItemProto specialItems = 4;
+	repeated BoosterItemProto specialItems = 4; //in the "featured mobsters section"
+												//in the ui
+	
 	
 	optional string listBackgroundImgName = 5;
 	optional string listDescription = 6;
 	optional string navBarImgName = 7;
 	optional string navTitleImgName = 8;
 	optional string machineImgName = 9;
-	repeated BoosterDisplayItemProto displayItems = 10;
+	repeated BoosterDisplayItemProto displayItems = 10; //these go on the bottom
 }
 
 //------------------------------------------------------------------------------------------
