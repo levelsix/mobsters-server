@@ -28,11 +28,13 @@ import com.lvl6.proto.EventMonsterProto.EvolutionFinishedRequestProto;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.Builder;
 import com.lvl6.proto.EventMonsterProto.EvolutionFinishedResponseProto.EvolutionFinishedStatus;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -98,6 +100,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			}
 		
 			if (successful) {
+				MonsterForUser evolvedMfu = evolvedUserMonster.get(0);
+				FullUserMonsterProto fump = CreateInfoProtoUtils
+						.createFullUserMonsterProtoFromUserMonster(evolvedMfu);
+				resBuilder.setEvolvedMonster(fump);
 				resBuilder.setStatus(EvolutionFinishedStatus.SUCCESS);
 			}
 
