@@ -52,7 +52,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	@Override
 	public EventProtocolRequest getEventType() {
-		return EventProtocolRequest.C_EVOLVE_MONSTER_EVENT;
+		return EventProtocolRequest.C_EVOLUTION_FINISHED_EVENT;
 	}
 
 	@Override
