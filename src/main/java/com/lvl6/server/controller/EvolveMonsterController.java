@@ -60,6 +60,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		EvolveMonsterRequestProto reqProto = ((EvolveMonsterRequestEvent)event)
 				.getEvolveMonsterRequestProto();
 
+		log.info("reqProto=" + reqProto); 
+		
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
@@ -74,8 +76,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		Timestamp clientTime = null;
 		
 		if (null != uep) {
+			log.info("uep is not null");
 			catalystUserMonsterId = uep.getCatalystUserMonsterId();
-			evolvingUserMonsterIds = uep.getUserMonsterIdsList();
+			evolvingUserMonsterIds = new ArrayList<Long>(uep.getUserMonsterIdsList());
 			clientTime = new Timestamp(uep.getStartTime());
 		}
 
@@ -109,6 +112,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     		newIds.add(catalystUserMonsterId);
     		newIds.addAll(evolvingUserMonsterIds);
     		existingUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils().getSpecificOrAllUserMonstersForUser(userId, newIds);
+    		log.info("retrieved user monsters. existingUserMonsters=" + existingUserMonsters);
     	}
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, existingUserMonsters, 
 					alreadyEnhancing, alreadyHealing, alreadyEvolving, catalystUserMonsterId,

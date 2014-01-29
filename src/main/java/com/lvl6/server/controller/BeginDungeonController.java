@@ -19,6 +19,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginDungeonRequestEvent;
 import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.QuestMonsterItem;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStage;
@@ -35,6 +36,7 @@ import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
@@ -50,7 +52,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 
   public BeginDungeonController() {
-    numAllocatedThreads = 4;
+    numAllocatedThreads = 8;
   }
 
   @Override
@@ -78,6 +80,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean isEvent = reqProto.getIsEvent();
     int eventId = reqProto.getPersistentEventId();
     int gemsSpent = reqProto.getGemsSpent();
+    List<Integer> questIds = reqProto.getQuestIdsList();
     
     //set some values to send to the client (the response proto)
     BeginDungeonResponseProto.Builder resBuilder = BeginDungeonResponseProto.newBuilder();
@@ -102,7 +105,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	//determine the specifics for each stage (stored in stageNumsToProtos)
       	//then record specifics in db
     	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap, curTime,
-    			  isEvent, eventId, gemsSpent, userTaskIdList, stageNumsToProtos);
+    			  isEvent, eventId, gemsSpent, userTaskIdList, stageNumsToProtos, questIds);
       }
       if (successful) {
     	  setResponseBuilder(resBuilder, userTaskIdList, stageNumsToProtos);
@@ -239,7 +242,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
 		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, boolean isEvent, int eventId,
-		  int gemsSpent, List<Long> utIdList, Map<Integer, TaskStageProto> stageNumsToProtos) {
+		  int gemsSpent, List<Long> utIdList, Map<Integer, TaskStageProto> stageNumsToProtos,
+		  List<Integer> questIds) {
 	  
 	  //local vars storing eventual db data (accounting for multiple monsters in stage)
 	  Map<Integer, List<Integer>> stageNumsToSilvers = new HashMap<Integer, List<Integer>>();
@@ -248,7 +252,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters = new HashMap<Integer, List<TaskStageMonster>>();
 	  
 	  //calculate the SINGLE monster the user fights in each stage
-	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(
+	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(questIds,
 			  tsMap, stageNumsToSilvers, stageNumsToExps,
 			  stageNumsToPuzzlePiecesDropped, stageNumsToTaskStageMonsters);
 	  
@@ -309,7 +313,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   //1a) determine if monster drops a puzzle piece
   //2) create MonsterProto
   //3) create TaskStageProto with the MonsterProto
-  private Map<Integer, TaskStageProto> generateStage (
+  private Map<Integer, TaskStageProto> generateStage(List<Integer> questIds,
   		Map<Integer, TaskStage> tsMap, Map<Integer, List<Integer>> stageNumsToSilvers,
   		Map<Integer, List<Integer>> stageNumsToExps,
 		  Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
@@ -340,10 +344,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  List<Integer> individualExps = calculateExpGained(spawnedTaskStageMonsters);
 		  List<Integer> individualSilvers =  calculateSilverGained(spawnedTaskStageMonsters);
 		  
+		  //if no questIds, then map returned is empty
+		  Map<Integer, List<Integer>> taskStageMonsterIdToItemId = generateItems(
+		  		spawnedTaskStageMonsters, puzzlePiecesDropped, questIds);
+		  
 		  //create the proto
 		  TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(tsId,
-				  ts, spawnedTaskStageMonsters, puzzlePiecesDropped,
-				  individualSilvers);
+				  ts, spawnedTaskStageMonsters, puzzlePiecesDropped, individualSilvers,
+				  taskStageMonsterIdToItemId);
 		  
 		  //NOTE, all the sizes are equal:
 		  //individualSilvers.size() == individualExps.size() == puzzlePiecesDropped.size()
@@ -438,6 +446,73 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  }
 	  return individualSilvers;
   }
+  
+  //an item drops only if a puzzle piece didn't drop.
+  //returns map(taskStageMonsterId, itemId)
+  private Map<Integer, List<Integer>> generateItems(List<TaskStageMonster> taskStageMonsters,
+  		List<Boolean> puzzlePiecesDropped, List<Integer> questIds) {
+  	
+  	Map<Integer, List<Integer>> taskStageMonsterIdToItemId = new HashMap<Integer, List<Integer>>();
+  	//no quest ids means no items (empty map)
+  	if (null == questIds || questIds.isEmpty()) {
+  		return taskStageMonsterIdToItemId; 
+  	}
+  	
+  	for (int index = 0; index < taskStageMonsters.size(); index++) {
+  		TaskStageMonster tsm = taskStageMonsters.get(index);
+  		boolean dropped = puzzlePiecesDropped.get(index);
+  				
+  		if (dropped) {
+  			//since puzzle piece dropped, this monster can't drop anything else
+  			continue;
+  		}
+  		
+  		//determine the item that this monster drops, if any, (-1 means no item drop)
+  		int itemId = generateQuestMonsterItem(questIds, tsm);
+  		int tsmId = tsm.getId();
+  		
+  		//hacky way of accounting for multiple identical task stage monsters that
+  		//can drop one item
+  		if (!taskStageMonsterIdToItemId.containsKey(tsmId)) {
+  			taskStageMonsterIdToItemId.put(tsmId, new ArrayList<Integer>());
+  		}
+  		
+  		List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
+  		itemIds.add(itemId);
+  	}
+  	return taskStageMonsterIdToItemId;
+  }
+  
+  //see if quest id and monster id have an item. if yes, see if it drops. If it drops
+  //return the item id. 
+  //default return -1
+  private int generateQuestMonsterItem(List<Integer> questIds, TaskStageMonster tsm) {
+  	
+  	int monsterId = tsm.getMonsterId();
+  	
+  	for (int questId : questIds) {
+  		
+  		QuestMonsterItem qmi = QuestMonsterItemRetrieveUtils
+  				.getItemForQuestAndMonsterId(questId, monsterId);
+  		
+  		if (null == qmi) {
+  			continue;
+  		}
+  		
+  	  //roll to see if item should drop
+  		if (!qmi.didItemDrop()) {
+  			continue;
+  		}
+  		//since quest and monster have item associated with it and the item "dropped"
+  		//return this
+  		int itemId = qmi.getItemId();
+  		return itemId;
+  	}
+  	
+  	//no item
+  	return -1;
+  }
+   
   
   private void recordStages(long userTaskId, Map<Integer, List<Integer>> stageNumsToSilvers,
   		Map<Integer, List<Integer>> stageNumsToExps,

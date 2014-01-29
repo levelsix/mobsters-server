@@ -43,6 +43,12 @@ message TaskStageMonsterProto {
 	optional bool puzzlePieceDropped = 5;
 	optional int32 level = 6;
 	
+    //NOTE: Some quests have special monsters that spawn, and these special monsters
+    //can drop one item at a time. These items only exist as long as the quest is active.
+    //In the same vein, the special monsters only exist as long as the quest is active.
+    //Either puzzlePieceDropped is true, or this is set to a valid number.
+    optional int32 itemId = 7;
+	
 	enum MonsterType {
 		REGULAR = 1;
 		MINI_BOSS = 2;

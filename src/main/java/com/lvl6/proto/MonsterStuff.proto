@@ -34,6 +34,8 @@ message MonsterProto {
 	//stores lvl determined hp, attack, exp,  among other things
 	repeated MonsterLevelInfoProto lvlInfo = 20;
 	
+	optional int32 evolutionCost = 21;
+	
 	enum MonsterQuality {
 		COMMON = 1;
 		RARE = 2;
@@ -126,7 +128,7 @@ message UserEnhancementItemProto {
 	//enhancingCost set or have it set to 0
 	optional int64 userMonsterId = 1;
 	optional int64 expectedStartTimeMillis = 2;
-	optional int32 enhancingCost = 3;
+	optional int32 enhancingCost = 3; //oil not cash
 }
 
 //------------------------------------------------------------------------------------------

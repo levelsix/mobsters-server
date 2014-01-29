@@ -23,6 +23,8 @@ message BeginDungeonRequestProto {
 	//if the user is going to speed up the persistent event cool down timer
 	//(positive number, server will convert it to negative)
 	optional int32 gemsSpent = 7;
+	
+	repeated int32 questIds = 8;
 }
 
 message BeginDungeonResponseProto {

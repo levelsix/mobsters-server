@@ -7,7 +7,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 
 public class Monster implements Serializable {
 
-	private static final long serialVersionUID = 1965294448405826970L;
+	private static final long serialVersionUID = 3952925405581173817L;
 	
 	private int id;
 	private String name;
@@ -28,6 +28,7 @@ public class Monster implements Serializable {
 	private String carrotDefeated;
 	private String carrotEvolved;
 	private String description;
+	private int evolutionCost; //oil not cash
 	
 	public Monster(int id, String name, String monsterGroup,
 			MonsterQuality quality, int evolutionLevel, String displayName,
@@ -35,7 +36,7 @@ public class Monster implements Serializable {
 			int minutesToCombinePieces, int maxLevel, int evolutionMonsterId,
 			int evolutionCatalystMonsterId, int minutesToEvolve,
 			int numCatalystsRequired, String carrotRecruited, String carrotDefeated,
-			String carrotEvolved, String description) {
+			String carrotEvolved, String description, int evolutionCost) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -56,6 +57,7 @@ public class Monster implements Serializable {
 		this.carrotDefeated = carrotDefeated;
 		this.carrotEvolved = carrotEvolved;
 		this.description = description;
+		this.evolutionCost = evolutionCost;
 	}
 
 	public int getId() {
@@ -210,6 +212,14 @@ public class Monster implements Serializable {
 		this.description = description;
 	}
 
+	public int getEvolutionCost() {
+		return evolutionCost;
+	}
+
+	public void setEvolutionCost(int evolutionCost) {
+		this.evolutionCost = evolutionCost;
+	}
+
 	@Override
 	public String toString() {
 		return "Monster [id=" + id + ", name=" + name + ", monsterGroup="
@@ -223,7 +233,8 @@ public class Monster implements Serializable {
 				+ ", minutesToEvolve=" + minutesToEvolve + ", numCatalystsRequired="
 				+ numCatalystsRequired + ", carrotRecruited=" + carrotRecruited
 				+ ", carrotDefeated=" + carrotDefeated + ", carrotEvolved="
-				+ carrotEvolved + ", description=" + description + "]";
+				+ carrotEvolved + ", description=" + description + ", evolutionCost="
+				+ evolutionCost + "]";
 	}
-
+	
 }
