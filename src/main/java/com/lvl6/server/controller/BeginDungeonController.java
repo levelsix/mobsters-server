@@ -52,7 +52,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 
   public BeginDungeonController() {
-    numAllocatedThreads = 4;
+    numAllocatedThreads = 8;
   }
 
   @Override
@@ -345,7 +345,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  List<Integer> individualSilvers =  calculateSilverGained(spawnedTaskStageMonsters);
 		  
 		  //if no questIds, then map returned is empty
-		  Map<Integer, Integer> taskStageMonsterIdToItemId = generateItems(
+		  Map<Integer, List<Integer>> taskStageMonsterIdToItemId = generateItems(
 		  		spawnedTaskStageMonsters, puzzlePiecesDropped, questIds);
 		  
 		  //create the proto
@@ -449,10 +449,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   //an item drops only if a puzzle piece didn't drop.
   //returns map(taskStageMonsterId, itemId)
-  private Map<Integer, Integer> generateItems(List<TaskStageMonster> taskStageMonsters,
+  private Map<Integer, List<Integer>> generateItems(List<TaskStageMonster> taskStageMonsters,
   		List<Boolean> puzzlePiecesDropped, List<Integer> questIds) {
   	
-  	Map<Integer, Integer> taskStageMonsterIdToItemId = new HashMap<Integer, Integer>();
+  	Map<Integer, List<Integer>> taskStageMonsterIdToItemId = new HashMap<Integer, List<Integer>>();
   	//no quest ids means no items (empty map)
   	if (null == questIds || questIds.isEmpty()) {
   		return taskStageMonsterIdToItemId; 
@@ -463,21 +463,31 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		boolean dropped = puzzlePiecesDropped.get(index);
   				
   		if (dropped) {
+  			//since puzzle piece dropped, this monster can't drop anything else
   			continue;
   		}
   		
-  		generateQuestMonsterItem(questIds, tsm, taskStageMonsterIdToItemId);
+  		//determine the item that this monster drops, if any, (-1 means no item drop)
+  		int itemId = generateQuestMonsterItem(questIds, tsm);
+  		int tsmId = tsm.getId();
+  		
+  		//hacky way of accounting for multiple identical task stage monsters that
+  		//can drop one item
+  		if (!taskStageMonsterIdToItemId.containsKey(tsmId)) {
+  			taskStageMonsterIdToItemId.put(tsmId, new ArrayList<Integer>());
+  		}
+  		
+  		List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
+  		itemIds.add(itemId);
   	}
   	return taskStageMonsterIdToItemId;
   }
   
   //see if quest id and monster id have an item. if yes, see if it drops. If it drops
-  //record it in taskStageMonsterIdToItemId and exit funct. 
-  //default do nothing/exit function
-  private void generateQuestMonsterItem(List<Integer> questIds, TaskStageMonster tsm,
-  		Map<Integer, Integer> taskStageMonsterIdToItemId) {
+  //return the item id. 
+  //default return -1
+  private int generateQuestMonsterItem(List<Integer> questIds, TaskStageMonster tsm) {
   	
-  	int tsmId = tsm.getId();
   	int monsterId = tsm.getMonsterId();
   	
   	for (int questId : questIds) {
@@ -489,15 +499,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			continue;
   		}
   		
+  	  //roll to see if item should drop
   		if (!qmi.didItemDrop()) {
   			continue;
   		}
   		//since quest and monster have item associated with it and the item "dropped"
-  		//record this
+  		//return this
   		int itemId = qmi.getItemId();
-  		taskStageMonsterIdToItemId.put(tsmId, itemId);
-  		return;
+  		return itemId;
   	}
+  	
+  	//no item
+  	return -1;
   }
    
   

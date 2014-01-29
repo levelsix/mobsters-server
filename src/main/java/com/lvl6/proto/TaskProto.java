@@ -1852,7 +1852,7 @@ public final class TaskProto {
     boolean hasLevel();
     int getLevel();
     
-    // optional int32 itemId = 21;
+    // optional int32 itemId = 7;
     boolean hasItemId();
     int getItemId();
   }
@@ -2017,8 +2017,8 @@ public final class TaskProto {
       return level_;
     }
     
-    // optional int32 itemId = 21;
-    public static final int ITEMID_FIELD_NUMBER = 21;
+    // optional int32 itemId = 7;
+    public static final int ITEMID_FIELD_NUMBER = 7;
     private int itemId_;
     public boolean hasItemId() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
@@ -2067,7 +2067,7 @@ public final class TaskProto {
         output.writeInt32(6, level_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(21, itemId_);
+        output.writeInt32(7, itemId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2104,7 +2104,7 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(21, itemId_);
+          .computeInt32Size(7, itemId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2414,7 +2414,7 @@ public final class TaskProto {
               level_ = input.readInt32();
               break;
             }
-            case 168: {
+            case 56: {
               bitField0_ |= 0x00000040;
               itemId_ = input.readInt32();
               break;
@@ -2554,7 +2554,7 @@ public final class TaskProto {
         return this;
       }
       
-      // optional int32 itemId = 21;
+      // optional int32 itemId = 7;
       private int itemId_ ;
       public boolean hasItemId() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
@@ -4009,7 +4009,7 @@ public final class TaskProto {
       "skStageMonsterProto.MonsterType\022\021\n\texpRe" +
       "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\032\n\022puzzle" +
       "PieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\022\016\n\006ite" +
-      "mId\030\025 \001(\005\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
+      "mId\030\007 \001(\005\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
       "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\331\003\n\024PersistentEve" +
       "ntProto\022\017\n\007eventId\030\001 \001(\005\022A\n\tdayOfWeek\030\002 " +
       "\001(\0162..com.lvl6.proto.PersistentEventProt" +

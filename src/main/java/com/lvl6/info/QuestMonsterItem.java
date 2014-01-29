@@ -28,12 +28,12 @@ public class QuestMonsterItem implements Serializable {
 		this.itemDropRate = itemDropRate;
 	}
 //covenience methods--------------------------------------------------------
-	public int getQuestId() {
-		return questId;
-	}
-	
 	public Random getRand() {
 		return rand;
+	}
+	
+	public void setRand(Random rand) {
+		this.rand = rand;
 	}
 	
 	public boolean didItemDrop() {
@@ -47,9 +47,10 @@ public class QuestMonsterItem implements Serializable {
   }
 	
 //end covenience methods--------------------------------------------------------
-
-	public void setRand(Random rand) {
-		this.rand = rand;
+	
+	
+	public int getQuestId() {
+		return questId;
 	}
 
 	public void setQuestId(int questId) {

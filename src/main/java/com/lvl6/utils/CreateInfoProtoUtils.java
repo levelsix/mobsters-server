@@ -1114,7 +1114,7 @@ public class CreateInfoProtoUtils {
   //individualSilvers should always be set, since silver dropped is within a range
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
       List<TaskStageMonster> taskStageMonsters, List<Boolean> puzzlePiecesDropped,
-      List<Integer> individualSilvers, Map<Integer, Integer> taskStageMonsterIdToItemId) {
+      List<Integer> individualSilvers, Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
 
     TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
     if (null == ts) {
@@ -1143,7 +1143,7 @@ public class CreateInfoProtoUtils {
   }
   
   public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
-      int cashReward, boolean pieceDropped, Map<Integer, Integer> taskStageMonsterIdToItemId) {
+      int cashReward, boolean pieceDropped, Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
   	int tsmId = tsm.getMonsterId();
   	
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
@@ -1155,8 +1155,14 @@ public class CreateInfoProtoUtils {
     bldr.setLevel(tsm.getLevel());
     
     if (taskStageMonsterIdToItemId.containsKey(tsmId)) {
-    	int itemId = taskStageMonsterIdToItemId.get(tsmId);
-    	bldr.setItemId(itemId);
+    	//if multiple identical monsters spawned, each one should have a 
+    	//corresponding item id that it drops, could be -1. (-1 means no item drop)
+    	List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
+    	
+    	int itemId = itemIds.remove(0);
+    	if (itemId > 0) {
+    		bldr.setItemId(itemId);
+    	}
     }
     
     return bldr.build();
