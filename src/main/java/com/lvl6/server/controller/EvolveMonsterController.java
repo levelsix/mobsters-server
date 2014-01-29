@@ -78,7 +78,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		if (null != uep) {
 			log.info("uep is not null");
 			catalystUserMonsterId = uep.getCatalystUserMonsterId();
-			evolvingUserMonsterIds = uep.getUserMonsterIdsList();
+			evolvingUserMonsterIds = new ArrayList<Long>(uep.getUserMonsterIdsList());
 			clientTime = new Timestamp(uep.getStartTime());
 		}
 
