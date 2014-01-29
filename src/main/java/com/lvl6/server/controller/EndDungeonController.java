@@ -109,12 +109,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	Map<Integer, Integer> monsterIdToNumPieces = new HashMap<Integer, Integer>();
       	recordStageHistory(tsfuList, monsterIdToNumPieces);
       	
-      	//update user's monsters
-      	String mfusop = ControllerConstants.MFUSOP__END_DUNGEON + taskForUserId;
-      	List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
-      			updateUserMonsters(userId, monsterIdToNumPieces, mfusop, currentDate);
-
-    	  setResponseBuilder(resBuilder, newOrUpdated);
+      	
+      	if (userWon) {
+      		log.info("user won dungeon, awarding the monsters");
+      		//update user's monsters
+      		String mfusop = ControllerConstants.MFUSOP__END_DUNGEON + taskForUserId;
+      		List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
+      				updateUserMonsters(userId, monsterIdToNumPieces, mfusop, currentDate);
+      		setResponseBuilder(resBuilder, newOrUpdated);
+      	}
+      	
       }
       
       EndDungeonResponseEvent resEvent = new EndDungeonResponseEvent(userId);
