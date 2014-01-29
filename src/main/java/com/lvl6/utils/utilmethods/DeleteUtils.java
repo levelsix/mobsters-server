@@ -261,6 +261,8 @@ public class DeleteUtils implements DeleteUtil {
 	@Override
 	public int deleteMonsterEvolvingForUser(long catalystUserMonsterId,
 			long userMonsterIdOne, long userMonsterIdTwo, int userId) {
+		String tableName = DBConstants.TABLE_MONSTER_EVOLVING_FOR_USER;
+		
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__CATALYST_USER_MONSTER_ID,
     		catalystUserMonsterId);
@@ -270,7 +272,7 @@ public class DeleteUtils implements DeleteUtil {
     		userMonsterIdTwo);
 		conditionParams.put(DBConstants.MONSTER_EVOLVING_FOR_USER__USER_ID, userId);
 		
-    int numDeleted = DBConnection.get().deleteRows(DBConstants.TABLE_REFERRAL_CODE_AVAILABLE, conditionParams, "and");
+    int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
 		return numDeleted;
 	}
 	
