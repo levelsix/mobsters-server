@@ -20,6 +20,7 @@ public class DBConstants {
 	public static final String TABLE_EXPANSION_PURCHASE_FOR_USER = "expansion_purchase_for_user";
 	public static final String TABLE_GOLD_SALE = "gold_sale";	
 	public static final String TABLE_IAP_HISTORY = "iap_history";
+	public static final String TABLE_ITEM = "item";
   public static final String TABLE_LOCK_BOX_EVENT = "lock_box_event";
   public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";
   public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
@@ -37,6 +38,7 @@ public class DBConstants {
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
+  public static final String TABLE_QUEST_MONSTER_ITEM = "quest_monster_item";
   public static final String TABLE_REFERRAL = "referral";
   public static final String TABLE_REFERRAL_CODE_AVAILABLE = "referral_code_available";
 	public static final String TABLE_REFERRAL_CODE_GENERATED = "referral_code_generated";

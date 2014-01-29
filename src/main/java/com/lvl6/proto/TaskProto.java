@@ -1851,6 +1851,10 @@ public final class TaskProto {
     // optional int32 level = 6;
     boolean hasLevel();
     int getLevel();
+    
+    // optional int32 itemId = 21;
+    boolean hasItemId();
+    int getItemId();
   }
   public static final class TaskStageMonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -2013,6 +2017,16 @@ public final class TaskProto {
       return level_;
     }
     
+    // optional int32 itemId = 21;
+    public static final int ITEMID_FIELD_NUMBER = 21;
+    private int itemId_;
+    public boolean hasItemId() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getItemId() {
+      return itemId_;
+    }
+    
     private void initFields() {
       monsterId_ = 0;
       monsterType_ = com.lvl6.proto.TaskProto.TaskStageMonsterProto.MonsterType.REGULAR;
@@ -2020,6 +2034,7 @@ public final class TaskProto {
       cashReward_ = 0;
       puzzlePieceDropped_ = false;
       level_ = 0;
+      itemId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -2050,6 +2065,9 @@ public final class TaskProto {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, level_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(21, itemId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -2083,6 +2101,10 @@ public final class TaskProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, level_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(21, itemId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -2220,6 +2242,8 @@ public final class TaskProto {
         bitField0_ = (bitField0_ & ~0x00000010);
         level_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
+        itemId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -2282,6 +2306,10 @@ public final class TaskProto {
           to_bitField0_ |= 0x00000020;
         }
         result.level_ = level_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.itemId_ = itemId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2315,6 +2343,9 @@ public final class TaskProto {
         }
         if (other.hasLevel()) {
           setLevel(other.getLevel());
+        }
+        if (other.hasItemId()) {
+          setItemId(other.getItemId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2381,6 +2412,11 @@ public final class TaskProto {
             case 48: {
               bitField0_ |= 0x00000020;
               level_ = input.readInt32();
+              break;
+            }
+            case 168: {
+              bitField0_ |= 0x00000040;
+              itemId_ = input.readInt32();
               break;
             }
           }
@@ -2514,6 +2550,27 @@ public final class TaskProto {
       public Builder clearLevel() {
         bitField0_ = (bitField0_ & ~0x00000020);
         level_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 itemId = 21;
+      private int itemId_ ;
+      public boolean hasItemId() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getItemId() {
+        return itemId_;
+      }
+      public Builder setItemId(int value) {
+        bitField0_ |= 0x00000040;
+        itemId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearItemId() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        itemId_ = 0;
         onChanged();
         return this;
       }
@@ -3946,28 +4003,28 @@ public final class TaskProto {
       "umWithinCity\030\005 \001(\005\022\032\n\022prerequisiteTaskId" +
       "\030\006 \001(\005\022\033\n\023prerequisiteQuestId\030\007 \001(\005\"M\n\024M" +
       "inimumUserTaskProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006t" +
-      "askId\030\002 \001(\005\022\025\n\rnumTimesActed\030\003 \001(\005\"\371\001\n\025T",
+      "askId\030\002 \001(\005\022\025\n\rnumTimesActed\030\003 \001(\005\"\211\002\n\025T",
       "askStageMonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022" +
       "F\n\013monsterType\030\002 \001(\01621.com.lvl6.proto.Ta" +
       "skStageMonsterProto.MonsterType\022\021\n\texpRe" +
       "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\032\n\022puzzle" +
-      "PieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\"3\n\013Mon" +
-      "sterType\022\013\n\007REGULAR\020\001\022\r\n\tMINI_BOSS\020\002\022\010\n\004" +
-      "BOSS\020\003\"\331\003\n\024PersistentEventProto\022\017\n\007event" +
-      "Id\030\001 \001(\005\022A\n\tdayOfWeek\030\002 \001(\0162..com.lvl6.p" +
-      "roto.PersistentEventProto.DayOfWeek\022\021\n\ts" +
-      "tartHour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004",
-      " \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030" +
-      "\006 \001(\005\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.Per" +
-      "sistentEventProto.EventType\022C\n\016monsterEl" +
-      "ement\030\010 \001(\0162+.com.lvl6.proto.MonsterProt" +
-      "o.MonsterElement\"g\n\tDayOfWeek\022\n\n\006SUNDAY\020" +
-      "\001\022\n\n\006MONDAY\020\002\022\013\n\007TUESDAY\020\003\022\r\n\tWEDNESDAY\020" +
-      "\004\022\014\n\010THURSDAY\020\005\022\n\n\006FRIDAY\020\006\022\014\n\010SATURDAY\020" +
-      "\007\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n\tEVOLUTION" +
-      "\020\002\"V\n\030UserPersistentEventProto\022\016\n\006userId" +
-      "\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coolDownStart",
-      "Time\030\003 \001(\003B\013B\tTaskProto"
+      "PieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\022\016\n\006ite" +
+      "mId\030\025 \001(\005\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
+      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\331\003\n\024PersistentEve" +
+      "ntProto\022\017\n\007eventId\030\001 \001(\005\022A\n\tdayOfWeek\030\002 " +
+      "\001(\0162..com.lvl6.proto.PersistentEventProt" +
+      "o.DayOfWeek\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventD",
+      "urationMinutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017" +
+      "cooldownMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..co" +
+      "m.lvl6.proto.PersistentEventProto.EventT" +
+      "ype\022C\n\016monsterElement\030\010 \001(\0162+.com.lvl6.p" +
+      "roto.MonsterProto.MonsterElement\"g\n\tDayO" +
+      "fWeek\022\n\n\006SUNDAY\020\001\022\n\n\006MONDAY\020\002\022\013\n\007TUESDAY" +
+      "\020\003\022\r\n\tWEDNESDAY\020\004\022\014\n\010THURSDAY\020\005\022\n\n\006FRIDA" +
+      "Y\020\006\022\014\n\010SATURDAY\020\007\"\'\n\tEventType\022\013\n\007ENHANC" +
+      "E\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030UserPersistentEven" +
+      "tProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022",
+      "\031\n\021coolDownStartTime\030\003 \001(\003B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4003,7 +4060,7 @@ public final class TaskProto {
           internal_static_com_lvl6_proto_TaskStageMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TaskStageMonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "MonsterType", "ExpReward", "CashReward", "PuzzlePieceDropped", "Level", },
+              new java.lang.String[] { "MonsterId", "MonsterType", "ExpReward", "CashReward", "PuzzlePieceDropped", "Level", "ItemId", },
               com.lvl6.proto.TaskProto.TaskStageMonsterProto.class,
               com.lvl6.proto.TaskProto.TaskStageMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_PersistentEventProto_descriptor =

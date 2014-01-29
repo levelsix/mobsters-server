@@ -1113,8 +1113,8 @@ public class CreateInfoProtoUtils {
 
   //individualSilvers should always be set, since silver dropped is within a range
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
-      List<TaskStageMonster> taskStageMonsters,
-      List<Boolean> puzzlePiecesDropped, List<Integer> individualSilvers) {
+      List<TaskStageMonster> taskStageMonsters, List<Boolean> puzzlePiecesDropped,
+      List<Integer> individualSilvers, Map<Integer, Integer> taskStageMonsterIdToItemId) {
 
     TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
     if (null == ts) {
@@ -1132,7 +1132,8 @@ public class CreateInfoProtoUtils {
       boolean puzzlePieceDropped = puzzlePiecesDropped.get(i);
       int silverDrop = individualSilvers.get(i);
 
-      TaskStageMonsterProto mp = createTaskStageMonsterProto(tsm, silverDrop, puzzlePieceDropped);
+      TaskStageMonsterProto mp = createTaskStageMonsterProto(tsm, silverDrop,
+      		puzzlePieceDropped, taskStageMonsterIdToItemId);
       mpList.add(mp);
     }
 
@@ -1142,14 +1143,21 @@ public class CreateInfoProtoUtils {
   }
   
   public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
-      int cashReward, boolean pieceDropped) {
+      int cashReward, boolean pieceDropped, Map<Integer, Integer> taskStageMonsterIdToItemId) {
+  	int tsmId = tsm.getMonsterId();
+  	
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
-    bldr.setMonsterId(tsm.getMonsterId());
+    bldr.setMonsterId(tsmId);
     bldr.setMonsterType(tsm.getMonsterType());
     bldr.setCashReward(cashReward);
     bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());
+    
+    if (taskStageMonsterIdToItemId.containsKey(tsmId)) {
+    	int itemId = taskStageMonsterIdToItemId.get(tsmId);
+    	bldr.setItemId(itemId);
+    }
     
     return bldr.build();
   }
@@ -1214,9 +1222,12 @@ public class CreateInfoProtoUtils {
     int num = aMonster.getNumCatalystsRequired();
     mpb.setNumCatalystMonstersRequired(num);
     
-    
     List<MonsterLevelInfoProto> lvlInfoProtos = createMonsterLevelInfoFromInfo(levelToInfo);
     mpb.addAllLvlInfo(lvlInfoProtos);
+    
+    int cost = aMonster.getEvolutionCost();
+    mpb.setEvolutionCost(cost);
+    
     return mpb.build();
   }
   

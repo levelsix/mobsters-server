@@ -39,22 +39,7 @@ public class TaskStageMonster implements Serializable {
     this.chanceToAppear = chanceToAppear;
   }
 
-  public int getLevel() {
-    return level;
-  }
-
-  public void setLevel(int level) {
-    this.level = level;
-  }
-
-  public float getChanceToAppear() {
-    return chanceToAppear;
-  }
-
-  public void setChanceToAppear(float chanceToAppear) {
-    this.chanceToAppear = chanceToAppear;
-  }
-
+  //covenience methods--------------------------------------------------------
   public Random getRand() {
     return rand;
   }
@@ -77,78 +62,95 @@ public class TaskStageMonster implements Serializable {
   }
 
   public boolean didPuzzlePieceDrop() {
-    float randFloat = this.rand.nextFloat();
+    float randFloat = getRand().nextFloat();
     
-    if (randFloat < this.puzzlePieceDropRate) {
+    if (randFloat < getPuzzlePieceDropRate()) {
       return true;
     } else {
       return false;
     }
   }
+  //end covenience methods--------------------------------------------------------
 
-  public int getId() {
-    return id;
-  }
+	public int getId() {
+		return id;
+	}
 
-  public void setId(int id) {
-    this.id = id;
-  }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-  public int getStageId() {
-    return stageId;
-  }
+	public int getStageId() {
+		return stageId;
+	}
 
-  public void setStageId(int stageId) {
-    this.stageId = stageId;
-  }
+	public void setStageId(int stageId) {
+		this.stageId = stageId;
+	}
 
-  public int getMonsterId() {
-    return monsterId;
-  }
+	public int getMonsterId() {
+		return monsterId;
+	}
 
-  public void setMonsterId(int monsterId) {
-    this.monsterId = monsterId;
-  }
+	public void setMonsterId(int monsterId) {
+		this.monsterId = monsterId;
+	}
 
-  public MonsterType getMonsterType() {
-    return monsterType;
-  }
+	public MonsterType getMonsterType() {
+		return monsterType;
+	}
 
-  public void setMonsterType(MonsterType monsterType) {
-    this.monsterType = monsterType;
-  }
+	public void setMonsterType(MonsterType monsterType) {
+		this.monsterType = monsterType;
+	}
 
-  public int getExpReward() {
-    return expReward;
-  }
+	public int getExpReward() {
+		return expReward;
+	}
 
-  public void setExpReward(int expReward) {
-    this.expReward = expReward;
-  }
+	public void setExpReward(int expReward) {
+		this.expReward = expReward;
+	}
 
-  public int getMinCashDrop() {
-    return minCashDrop;
-  }
+	public int getMinCashDrop() {
+		return minCashDrop;
+	}
 
-  public void setMinCashDrop(int minCashDrop) {
-    this.minCashDrop = minCashDrop;
-  }
+	public void setMinCashDrop(int minCashDrop) {
+		this.minCashDrop = minCashDrop;
+	}
 
-  public int getMaxCashDrop() {
-    return maxCashDrop;
-  }
+	public int getMaxCashDrop() {
+		return maxCashDrop;
+	}
 
-  public void setMaxCashDrop(int maxCashDrop) {
-    this.maxCashDrop = maxCashDrop;
-  }
+	public void setMaxCashDrop(int maxCashDrop) {
+		this.maxCashDrop = maxCashDrop;
+	}
 
-  public float getPuzzlePieceDropRate() {
-    return puzzlePieceDropRate;
-  }
+	public float getPuzzlePieceDropRate() {
+		return puzzlePieceDropRate;
+	}
 
-  public void setPuzzlePieceDropRate(float puzzlePieceDropRate) {
-    this.puzzlePieceDropRate = puzzlePieceDropRate;
-  }
+	public void setPuzzlePieceDropRate(float puzzlePieceDropRate) {
+		this.puzzlePieceDropRate = puzzlePieceDropRate;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public float getChanceToAppear() {
+		return chanceToAppear;
+	}
+
+	public void setChanceToAppear(float chanceToAppear) {
+		this.chanceToAppear = chanceToAppear;
+	}
 
 	@Override
   public String toString() {

@@ -139,10 +139,13 @@ import com.lvl6.utils.DBConnection;
     String carrotEvolved = rs.getString(i++);
     String description = rs.getString(i++);
     
+    int evolutionCost = rs.getInt(i++);
+    
     Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
     		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
     		maxLevel, evolutionMonsterId, evolutionCatalystMonsterId, minutesToEvolve,
-    		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved, description);
+    		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved,
+    		description, evolutionCost);
     return monster;
   }
 }
