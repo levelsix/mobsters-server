@@ -200,6 +200,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		if (!hasEnoughOil(resBuilder, u, gemsSpent, oilChange, catalystUserMonsterId, userMonsterIds)) {
 			return false;
 		}
+		
+		if (0 == gemsSpent && 0 == oilChange) {
+			log.error("gemsSpent=" + gemsSpent + "\t oilChange=" + oilChange + "\t Not evolving.");
+			return false;
+		}
 
 		return true;
 	}
@@ -244,11 +249,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		int cashChange = 0;
 		int gemChange = -1 * gemsSpent;
 		
-		if (0 == gemChange && 0 == oilChange) {
-			log.error("gemchange=" + gemChange + "\t oilChange=" + oilChange + "\t Not evolving.");
-			return false;
-		}
-		
 		int numChange = user.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
 		if (1 != numChange) {
 			log.warn("problem with updating user stats: gemChange=" + gemChange
@@ -282,12 +282,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
 		Map<String, String> changeReasonsMap = new HashMap<String, String>();
 		Map<String, String> detailsMap = new HashMap<String, String>();
-		String reasonForChange = ControllerConstants.UCHRFC__ENHANCING;
+		String reasonForChange = ControllerConstants.UCHRFC__EVOLVING;
 		StringBuilder detailSb = new StringBuilder();
 		detailSb.append("(catalystId, userMonsterId, userMonsterId");
 		
 		String oil = MiscMethods.oil;
 		String gems = MiscMethods.gems;
+		
+		if (moneyChange.containsKey(gems)) {
+			reasonForChange = ControllerConstants.UCHRFC__SPED_UP_EVOLUTION;
+		}
 		//maybe shouldn't keep track...oh well, more info hopefully is better than none
 		detailSb.append("(");
 		detailSb.append(catalystUserMonsterId);
