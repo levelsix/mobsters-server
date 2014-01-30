@@ -62,6 +62,26 @@ public class ControllerConstants {
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 	
+	
+	//STRUCTURE FOR USER STUFF
+	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
+	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
+	public static final int STRUCTURE_FOR_USER__OIL_STORAGE_ID = 60;
+	public static final float STRUCTURE_FOR_USER__TOWN_HALL_X_COORD = 10F;
+	public static final float STRUCTURE_FOR_USER__TOWN_HALL_Y_COORD = 10F;
+	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_X_COORD = 13F;
+	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD = 10F;
+	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
+	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//old aoc constants
   public static final int NOT_SET = -1;
   
