@@ -93,23 +93,23 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     UserCreateRequestProto reqProto = ((UserCreateRequestEvent)event).getUserCreateRequestProto();
     String udid = reqProto.getUdid();
     String name = reqProto.getName();
-    String referrerCode = (reqProto.hasReferrerCode()) ? reqProto.getReferrerCode() : null;
-    String deviceToken = (reqProto.hasDeviceToken() && reqProto.getDeviceToken().length() > 0) ? reqProto.getDeviceToken() : null;
+//    String referrerCode = (reqProto.hasReferrerCode()) ? reqProto.getReferrerCode() : null;
+    String deviceToken = "";//(reqProto.hasDeviceToken() && reqProto.getDeviceToken().length() > 0) ? reqProto.getDeviceToken() : null;
     Timestamp createTime = new Timestamp((new Date()).getTime());
     Timestamp timeOfStructPurchase = createTime; //new Timestamp(reqProto.getTimeOfStructPurchase());
     Timestamp timeOfStructBuild = createTime; //new Timestamp(reqProto.getTimeOfStructBuild());
-    CoordinatePair structCoords = new CoordinatePair(reqProto.getStructCoords().getX(), reqProto.getStructCoords().getY());
+//    CoordinatePair structCoords = new CoordinatePair(reqProto.getStructCoords().getX(), reqProto.getStructCoords().getY());
     boolean usedDiamondsToBuild = reqProto.getUsedDiamondsToBuilt();
     String facebookId = reqProto.getFacebookId();
 
 
     UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto.newBuilder();
 
-    User referrer = (referrerCode != null && referrerCode.length() > 0) ? RetrieveUtils.userRetrieveUtils().getUserByReferralCode(referrerCode) : null;;
+//    User referrer = (referrerCode != null && referrerCode.length() > 0) ? RetrieveUtils.userRetrieveUtils().getUserByReferralCode(referrerCode) : null;
 
-    boolean legitUserCreate = checkLegitUserCreate(resBuilder, udid, facebookId, name, 
+    boolean legitUserCreate = true;/*checkLegitUserCreate(resBuilder, udid, facebookId, name, 
        timeOfStructPurchase, timeOfStructBuild, structCoords, 
-        referrer, reqProto.hasReferrerCode());
+        referrer, reqProto.hasReferrerCode());*/
 
     User user = null;
     int userId = ControllerConstants.NOT_SET;
@@ -129,7 +129,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 //      playerCoins = ControllerConstants.TUTORIAL__INIT_COINS + MiscMethods.calculateCoinsGainedFromTutorialTask(taskCompleted) + questTaskCompleted.getMaxCoinsGained() + ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED
 //          - StructureRetrieveUtils.getStructForStructId(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD).getCoinPrice(); 
       playerCoins = 69;
-      if (referrer != null) playerCoins += ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED;
+//      if (referrer != null) playerCoins += ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED;
 
       playerDiamonds = Globals.INITIAL_DIAMONDS();
       if (usedDiamondsToBuild) playerDiamonds -= ControllerConstants.TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT;
@@ -199,16 +199,16 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     if (legitUserCreate && userId > 0) {
       server.lockPlayer(userId, this.getClass().getSimpleName());
       try {
-        writeUserStruct(userId, ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD, timeOfStructPurchase, timeOfStructBuild, structCoords);
+//        writeUserStruct(userId, ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD, timeOfStructPurchase, timeOfStructBuild, structCoords);
         //        writeUserCritstructs(user.getId());
         writeTaskCompleted(user.getId(), taskCompleted);
         writeTaskCompleted(user.getId(), questTaskCompleted);
 //        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), 1, 1)) {
 //          log.error("problem with giving user access to first city (city with id 1)");
 //        }
-        if (referrer != null && user != null) {
-          rewardReferrer(referrer, user);        
-        }
+//        if (referrer != null && user != null) {
+//          rewardReferrer(referrer, user);        
+//        }
         LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
         leaderboard.updateLeaderboardForUser(user);
         
