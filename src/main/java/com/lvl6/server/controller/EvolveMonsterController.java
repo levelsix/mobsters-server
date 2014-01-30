@@ -75,7 +75,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		List<Long> evolvingUserMonsterIds = new ArrayList<Long>();
 		Timestamp clientTime = null;
 		
-		if (null != uep) {
+		if (null != uep && reqProto.hasEvolution()) {
 			log.info("uep is not null");
 			catalystUserMonsterId = uep.getCatalystUserMonsterId();
 			evolvingUserMonsterIds = new ArrayList<Long>(uep.getUserMonsterIdsList());
@@ -107,7 +107,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
     	//just in case uep is null, but most likely not. retrieve all the monsters used
     	//in evolution, just to make sure they exist
-    	if (null != uep) {
+    	if (null != uep && reqProto.hasEvolution()) {
     		Set<Long> newIds = new HashSet<Long>();
     		newIds.add(catalystUserMonsterId);
     		newIds.addAll(evolvingUserMonsterIds);
