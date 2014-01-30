@@ -165,4 +165,3 @@ message UserMonsterEvolutionProto {
 	
 	optional int64 startTime = 3;
 }
-

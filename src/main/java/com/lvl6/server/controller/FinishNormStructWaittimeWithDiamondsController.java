@@ -125,8 +125,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     if (user == null || userStruct == null || struct == null ||
     		userStruct.getUserId() != user.getId() || userStruct.isComplete()) {
       resBuilder.setStatus(FinishNormStructWaittimeStatus.FAIL_OTHER);
-      log.error("something passed in is null. user=" + user + ", userStruct=" + userStruct +
-           ", struct=" + struct + ", struct owner's id=" + userStruct.getUserId());
+      log.error("something passed in is null. user=" + user +
+           ", struct=" + struct + ", struct owner's id=" + userStruct.getUserId() +
+           "\t or user struct is complete. userStruct=" + userStruct);
       return false;
     }
     

@@ -340,6 +340,36 @@ public class InsertUtils implements InsertUtil{
     return userStructId;
   }
 
+  /*
+   * assumptions: all the entries at index i across all the lists, 
+   * they make up the values for one row to insert into user_currency_history
+   */
+  @Override
+  public int insertUserStructs(List<Integer> userIdList, List<Integer> structIdList,
+  		List<Float> xCoordList, List<Float> yCoordList, List<Timestamp> purchaseTimeList,
+  		List<Timestamp> retrievedTimeList, List<Boolean> isComplete) { 
+  	String tablename = DBConstants.TABLE_STRUCTURE_FOR_USER;
+
+  	//did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
+  	Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+  	int numRows = userIdList.size();
+
+  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__USER_ID,
+  			userIdList);														
+  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__STRUCT_ID, structIdList);
+  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__X_COORD, xCoordList);
+  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__Y_COORD, yCoordList);
+  	
+  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__PURCHASE_TIME, purchaseTimeList);
+  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__LAST_RETRIEVED, retrievedTimeList);
+  	insertParams.put(DBConstants.STRUCTURE_FOR_USER__IS_COMPLETE, isComplete);
+
+  	int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
+  			insertParams, numRows);
+
+  	return numInserted;
+  }
+
   /* (non-Javadoc)
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertIAPHistoryElem(org.json.JSONObject, int, com.lvl6.info.User, double)
    */

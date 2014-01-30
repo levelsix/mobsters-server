@@ -46,6 +46,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
 	public static final String UCHRFC__END_TASK = "end task";
 	public static final String UCHRFC__ENHANCING = "enhancing user monsters";
+	public static final String UCHRFC__EVOLVING = "evolving user monsters";
 	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
 	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
 	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
@@ -60,6 +61,26 @@ public class ControllerConstants {
 
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
+	
+	
+	//STRUCTURE FOR USER STUFF
+	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
+	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
+	public static final int STRUCTURE_FOR_USER__OIL_STORAGE_ID = 60;
+	public static final float STRUCTURE_FOR_USER__TOWN_HALL_X_COORD = 10F;
+	public static final float STRUCTURE_FOR_USER__TOWN_HALL_Y_COORD = 10F;
+	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_X_COORD = 13F;
+	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD = 10F;
+	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
+	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//old aoc constants
   public static final int NOT_SET = -1;
@@ -228,7 +249,7 @@ public class ControllerConstants {
   public static final int EARN_FREE_DIAMONDS__FB_CONNECT_REWARD = 10;
 
   //USER CREATE 
-  public static final int USER_CREATE__START_LEVEL = 2;
+  public static final int USER_CREATE__START_LEVEL = 1;
   public static final int USER_CREATE__MIN_NAME_LENGTH = 1;
   public static final int USER_CREATE__MAX_NAME_LENGTH = 15;
   public static final int USER_CREATE__MIN_COIN_REWARD_FOR_REFERRER = 100;

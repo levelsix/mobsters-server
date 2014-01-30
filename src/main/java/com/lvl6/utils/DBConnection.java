@@ -1022,6 +1022,9 @@ public class DBConnection {
 			}
 			query += StringUtils.getListInString(condClauses, condDelim);
 		}
+		
+//		log.info("query=" + query);
+//		log.info("values=" + values);
 
 		int numDeleted = 0;
 		Connection conn = null;

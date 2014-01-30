@@ -61,6 +61,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		EvolutionFinishedRequestProto reqProto = ((EvolutionFinishedRequestEvent)event)
 				.getEvolutionFinishedRequestProto();
+		
+		log.info("reqProto=" + reqProto);
 
 		//get data client sent
 		MinimumUserProto senderProto = reqProto.getSender();
@@ -86,6 +88,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			//retrieve all the monsters used in evolution
     	Map<Long, MonsterForUser> existingUserMonsters = getMonstersUsedInEvolution(userId,
     			evolution);
+    	
+    	log.info("evolution=" + evolution);
+    	log.info("existingUserMonsters=" + existingUserMonsters);
 
 			boolean legitMonster = checkLegit(resBuilder, aUser, userId, evolution,
 					existingUserMonsters, gemsSpent);
@@ -230,7 +235,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		//delete the evolution
 		num = DeleteUtils.get().deleteMonsterEvolvingForUser(catalystUserMonsterId,
-				uMonsterIdOne, uMonsterIdOne, uId);
+				uMonsterIdOne, uMonsterIdTwo, uId);
 		log.info("num evolutions deleted: " + num);
 		
 		//insert the COMPLETE evolved monster into monster for user
@@ -248,6 +253,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			long mfuId = evovlvedMfuId.get(0);
 			evolvedUserMonster.setId(mfuId);
 		}
+		
+		log.info("evolvedUserMonster=" + evolvedUserMonster);
+		log.info("userMonsters=" + userMonsters);
 		
 		return true;
 	}

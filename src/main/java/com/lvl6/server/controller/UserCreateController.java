@@ -1,6 +1,8 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +41,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class UserCreateController extends EventController {
 
@@ -93,23 +96,23 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     UserCreateRequestProto reqProto = ((UserCreateRequestEvent)event).getUserCreateRequestProto();
     String udid = reqProto.getUdid();
     String name = reqProto.getName();
-    String referrerCode = (reqProto.hasReferrerCode()) ? reqProto.getReferrerCode() : null;
-    String deviceToken = (reqProto.hasDeviceToken() && reqProto.getDeviceToken().length() > 0) ? reqProto.getDeviceToken() : null;
+//    String referrerCode = (reqProto.hasReferrerCode()) ? reqProto.getReferrerCode() : null;
+    String deviceToken = "";//(reqProto.hasDeviceToken() && reqProto.getDeviceToken().length() > 0) ? reqProto.getDeviceToken() : null;
     Timestamp createTime = new Timestamp((new Date()).getTime());
     Timestamp timeOfStructPurchase = createTime; //new Timestamp(reqProto.getTimeOfStructPurchase());
     Timestamp timeOfStructBuild = createTime; //new Timestamp(reqProto.getTimeOfStructBuild());
-    CoordinatePair structCoords = new CoordinatePair(reqProto.getStructCoords().getX(), reqProto.getStructCoords().getY());
+//    CoordinatePair structCoords = new CoordinatePair(reqProto.getStructCoords().getX(), reqProto.getStructCoords().getY());
     boolean usedDiamondsToBuild = reqProto.getUsedDiamondsToBuilt();
-    String facebookId = reqProto.getFacebookId();
+    String facebookId = null;//reqProto.getFacebookId();
 
 
     UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto.newBuilder();
 
-    User referrer = (referrerCode != null && referrerCode.length() > 0) ? RetrieveUtils.userRetrieveUtils().getUserByReferralCode(referrerCode) : null;;
+//    User referrer = (referrerCode != null && referrerCode.length() > 0) ? RetrieveUtils.userRetrieveUtils().getUserByReferralCode(referrerCode) : null;
 
-    boolean legitUserCreate = checkLegitUserCreate(resBuilder, udid, facebookId, name, 
+    boolean legitUserCreate = true;/*checkLegitUserCreate(resBuilder, udid, facebookId, name, 
        timeOfStructPurchase, timeOfStructBuild, structCoords, 
-        referrer, reqProto.hasReferrerCode());
+        referrer, reqProto.hasReferrerCode());*/
 
     User user = null;
     int userId = ControllerConstants.NOT_SET;
@@ -125,11 +128,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       questTaskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
 
       //TODO: FIX THESE NUMBERS
-      int playerExp = 19;//taskCompleted.getExpGained() * taskCompleted.getNumForCompletion() + questTaskCompleted.getExpGained() * questTaskCompleted.getNumForCompletion() + ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED;
+      int playerExp = 0;//taskCompleted.getExpGained() * taskCompleted.getNumForCompletion() + questTaskCompleted.getExpGained() * questTaskCompleted.getNumForCompletion() + ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED;
 //      playerCoins = ControllerConstants.TUTORIAL__INIT_COINS + MiscMethods.calculateCoinsGainedFromTutorialTask(taskCompleted) + questTaskCompleted.getMaxCoinsGained() + ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED
 //          - StructureRetrieveUtils.getStructForStructId(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD).getCoinPrice(); 
       playerCoins = 69;
-      if (referrer != null) playerCoins += ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED;
+//      if (referrer != null) playerCoins += ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED;
 
       playerDiamonds = Globals.INITIAL_DIAMONDS();
       if (usedDiamondsToBuild) playerDiamonds -= ControllerConstants.TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT;
@@ -199,16 +202,22 @@ import com.lvl6.utils.utilmethods.InsertUtil;
     if (legitUserCreate && userId > 0) {
       server.lockPlayer(userId, this.getClass().getSimpleName());
       try {
-        writeUserStruct(userId, ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD, timeOfStructPurchase, timeOfStructBuild, structCoords);
+//        writeUserStruct(userId, ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD, timeOfStructPurchase, timeOfStructBuild, structCoords);
         //        writeUserCritstructs(user.getId());
+      	
+      	//TODO: TAKE INTO ACCOUNT PROPERTIES SENT IN BY CLIENT, THIS IS JUST 
+      	//DEFAULT STUFF
+      	writeInitialStructs(userId, createTime);
+      	
+      	
         writeTaskCompleted(user.getId(), taskCompleted);
         writeTaskCompleted(user.getId(), questTaskCompleted);
 //        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), 1, 1)) {
 //          log.error("problem with giving user access to first city (city with id 1)");
 //        }
-        if (referrer != null && user != null) {
-          rewardReferrer(referrer, user);        
-        }
+//        if (referrer != null && user != null) {
+//          rewardReferrer(referrer, user);        
+//        }
         LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
         leaderboard.updateLeaderboardForUser(user);
         
@@ -222,6 +231,38 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       }
     }
     
+  }
+  
+  //NOTE: THIS IS THE DEFAULT STUFF.
+  //TODO: NEED TO DETERMINE THE PROPER VALUES AND STRUCTS TO GIVE THE USER
+  private void writeInitialStructs(int userId, Timestamp purchaseTime) {
+  	log.info("giving user TownHall, CashStorage, OilStorage");
+  	int quantity = 3;
+  	List<Integer> userIdList = Collections.nCopies(quantity, userId);
+  	List<Integer> structIdList = new ArrayList<Integer>();
+  	List<Float> xCoordList = new ArrayList<Float>();
+  	List<Float> yCoordList = new ArrayList<Float>();
+  	List<Timestamp> purchaseTimeList = Collections.nCopies(quantity, purchaseTime);
+  	List<Timestamp> retrievedTimeList = purchaseTimeList;
+  	List<Boolean> isComplete = Collections.nCopies(quantity, true);
+  	
+  	
+  	//order of things: town hall stuff, cash storage stuff, oil storage stuff
+  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_ID);
+  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_ID);
+  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_ID);
+  	
+  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_X_COORD);
+  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_X_COORD);
+  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD);
+  	
+  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_Y_COORD);
+  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD);
+  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD);
+  	
+  	int numInserted = InsertUtils.get().insertUserStructs(userIdList, structIdList,
+  			xCoordList, yCoordList, purchaseTimeList, retrievedTimeList, isComplete);
+  	log.info("num buildings given to user: " + numInserted);
   }
 
   private void writeUserStruct(int userId, int structId, Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild, CoordinatePair structCoords) {
