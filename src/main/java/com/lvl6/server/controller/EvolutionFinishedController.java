@@ -235,7 +235,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		
 		//delete the evolution
 		num = DeleteUtils.get().deleteMonsterEvolvingForUser(catalystUserMonsterId,
-				uMonsterIdOne, uMonsterIdOne, uId);
+				uMonsterIdOne, uMonsterIdTwo, uId);
 		log.info("num evolutions deleted: " + num);
 		
 		//insert the COMPLETE evolved monster into monster for user
