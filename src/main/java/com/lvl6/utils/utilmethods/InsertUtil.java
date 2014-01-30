@@ -43,7 +43,11 @@ public interface InsertUtil {
 	 */
 	public abstract int insertUserStruct(int userId, int structId, CoordinatePair coordinates,
 			Timestamp timeOfPurchase, Timestamp lastRetrievedTime, boolean isComplete);
-
+	
+	public abstract int insertUserStructs(List<Integer> userIdList, List<Integer> structIdList,
+  		List<Float> xCoordList, List<Float> yCoordList, List<Timestamp> purchaseTimeList,
+  		List<Timestamp> retrievedTimeList, List<Boolean> isComplete);
+	
 	public abstract boolean insertIAPHistoryElem(JSONObject appleReceipt,
 			int diamondChange, int coinChange, User user, double cashCost);
 

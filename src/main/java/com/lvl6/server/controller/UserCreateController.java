@@ -1,6 +1,8 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +41,7 @@ import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class UserCreateController extends EventController {
 
@@ -201,6 +204,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       try {
 //        writeUserStruct(userId, ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD, timeOfStructPurchase, timeOfStructBuild, structCoords);
         //        writeUserCritstructs(user.getId());
+      	
+      	//TODO: TAKE INTO ACCOUNT PROPERTIES SENT IN BY CLIENT, THIS IS JUST 
+      	//DEFAULT STUFF
+      	writeInitialStructs(userId, createTime);
+      	
+      	
         writeTaskCompleted(user.getId(), taskCompleted);
         writeTaskCompleted(user.getId(), questTaskCompleted);
 //        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), 1, 1)) {
@@ -222,6 +231,38 @@ import com.lvl6.utils.utilmethods.InsertUtil;
       }
     }
     
+  }
+  
+  //NOTE: THIS IS THE DEFAULT STUFF.
+  //TODO: NEED TO DETERMINE THE PROPER VALUES AND STRUCTS TO GIVE THE USER
+  private void writeInitialStructs(int userId, Timestamp purchaseTime) {
+  	log.info("giving user TownHall, CashStorage, OilStorage");
+  	int quantity = 3;
+  	List<Integer> userIdList = Collections.nCopies(quantity, userId);
+  	List<Integer> structIdList = new ArrayList<Integer>();
+  	List<Float> xCoordList = new ArrayList<Float>();
+  	List<Float> yCoordList = new ArrayList<Float>();
+  	List<Timestamp> purchaseTimeList = Collections.nCopies(quantity, purchaseTime);
+  	List<Timestamp> retrievedTimeList = purchaseTimeList;
+  	List<Boolean> isComplete = Collections.nCopies(quantity, true);
+  	
+  	
+  	//order of things: town hall stuff, cash storage stuff, oil storage stuff
+  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_ID);
+  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_ID);
+  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_ID);
+  	
+  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_X_COORD);
+  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_X_COORD);
+  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD);
+  	
+  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_Y_COORD);
+  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD);
+  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD);
+  	
+  	int numInserted = InsertUtils.get().insertUserStructs(userIdList, structIdList,
+  			xCoordList, yCoordList, purchaseTimeList, retrievedTimeList, isComplete);
+  	log.info("num buildings given to user: " + numInserted);
   }
 
   private void writeUserStruct(int userId, int structId, Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild, CoordinatePair structCoords) {
