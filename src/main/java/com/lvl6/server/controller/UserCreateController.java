@@ -103,7 +103,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     Timestamp timeOfStructBuild = createTime; //new Timestamp(reqProto.getTimeOfStructBuild());
 //    CoordinatePair structCoords = new CoordinatePair(reqProto.getStructCoords().getX(), reqProto.getStructCoords().getY());
     boolean usedDiamondsToBuild = reqProto.getUsedDiamondsToBuilt();
-    String facebookId = reqProto.getFacebookId();
+    String facebookId = null;//reqProto.getFacebookId();
 
 
     UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto.newBuilder();
