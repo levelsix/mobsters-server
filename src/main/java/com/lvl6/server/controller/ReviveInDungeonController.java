@@ -95,10 +95,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       resEvent.setReviveInDungeonResponseProto(resBuilder.build());
       server.writeEvent(resEvent);
 
-      UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-          .createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
-      resEventUpdate.setTag(event.getTag());
-      server.writeEvent(resEventUpdate);
+      if (successful) {
+      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
+      	resEventUpdate.setTag(event.getTag());
+      	server.writeEvent(resEventUpdate);
+      }
     } catch (Exception e) {
       log.error("exception in ReviveInDungeonController processEvent", e);
       //don't let the client hang

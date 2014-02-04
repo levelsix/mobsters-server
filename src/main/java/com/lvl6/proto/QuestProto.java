@@ -129,6 +129,8 @@ public final class QuestProto {
       COLLECT_COINS_FROM_HOME(3, 4),
       BUILD_STRUCT(4, 5),
       UPGRADE_STRUCT(5, 6),
+      MONSTER_APPEAR(6, 7),
+      COLLECT_SPECIAL_ITEM(7, 8),
       ;
       
       public static final int KILL_MONSTER_VALUE = 1;
@@ -137,6 +139,8 @@ public final class QuestProto {
       public static final int COLLECT_COINS_FROM_HOME_VALUE = 4;
       public static final int BUILD_STRUCT_VALUE = 5;
       public static final int UPGRADE_STRUCT_VALUE = 6;
+      public static final int MONSTER_APPEAR_VALUE = 7;
+      public static final int COLLECT_SPECIAL_ITEM_VALUE = 8;
       
       
       public final int getNumber() { return value; }
@@ -149,6 +153,8 @@ public final class QuestProto {
           case 4: return COLLECT_COINS_FROM_HOME;
           case 5: return BUILD_STRUCT;
           case 6: return UPGRADE_STRUCT;
+          case 7: return MONSTER_APPEAR;
+          case 8: return COLLECT_SPECIAL_ITEM;
           default: return null;
         }
       }
@@ -179,7 +185,7 @@ public final class QuestProto {
       }
       
       private static final QuestType[] VALUES = {
-        KILL_MONSTER, DONATE_MONSTER, COMPLETE_TASK, COLLECT_COINS_FROM_HOME, BUILD_STRUCT, UPGRADE_STRUCT, 
+        KILL_MONSTER, DONATE_MONSTER, COMPLETE_TASK, COLLECT_COINS_FROM_HOME, BUILD_STRUCT, UPGRADE_STRUCT, MONSTER_APPEAR, COLLECT_SPECIAL_ITEM, 
       };
       
       public static QuestType valueOf(
@@ -3549,7 +3555,7 @@ public final class QuestProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Quest.proto\022\016com.lvl6.proto\"\223\005\n\016FullQu" +
+      "\n\013Quest.proto\022\016com.lvl6.proto\"\301\005\n\016FullQu" +
       "estProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(" +
       "\005\022\014\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\024\n\014" +
       "doneResponse\030\005 \001(\t\0225\n\016acceptDialogue\030\006 \001" +
@@ -3562,23 +3568,24 @@ public final class QuestProto {
       "\016 \001(\005\022\031\n\021isCompleteMonster\030\017 \001(\010\022\035\n\025ques" +
       "tsRequiredForThis\030\020 \003(\005\022\035\n\025questGiverIma" +
       "geSuffix\030\021 \001(\t\022\020\n\010priority\030\022 \001(\005\022\020\n\010carr" +
-      "otId\030\023 \001(\t\022\025\n\risAchievement\030\024 \001(\010\"\207\001\n\tQu" +
+      "otId\030\023 \001(\t\022\025\n\risAchievement\030\024 \001(\010\"\265\001\n\tQu" +
       "estType\022\020\n\014KILL_MONSTER\020\001\022\022\n\016DONATE_MONS" +
       "TER\020\002\022\021\n\rCOMPLETE_TASK\020\003\022\033\n\027COLLECT_COIN" +
       "S_FROM_HOME\020\004\022\020\n\014BUILD_STRUCT\020\005\022\022\n\016UPGRA" +
-      "DE_STRUCT\020\006\"\351\002\n\rDialogueProto\022G\n\rspeechS" +
-      "egment\030\001 \003(\01320.com.lvl6.proto.DialoguePr" +
-      "oto.SpeechSegmentProto\032\216\002\n\022SpeechSegment",
-      "Proto\022Q\n\007speaker\030\001 \001(\0162@.com.lvl6.proto." +
-      "DialogueProto.SpeechSegmentProto.Dialogu" +
-      "eSpeaker\022\023\n\013speakerText\030\002 \001(\t\"\217\001\n\017Dialog" +
-      "ueSpeaker\022\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTORIAL_G" +
-      "IRL\020\002\022\020\n\014QUESTGIVER_1\020\003\022\020\n\014QUESTGIVER_2\020" +
-      "\004\022\020\n\014QUESTGIVER_3\020\005\022\020\n\014QUESTGIVER_4\020\006\022\020\n" +
-      "\014QUESTGIVER_5\020\007\"o\n\022FullUserQuestProto\022\016\n" +
-      "\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\nisRede" +
-      "emed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010progre" +
-      "ss\030\005 \001(\005B\014B\nQuestProto"
+      "DE_STRUCT\020\006\022\022\n\016MONSTER_APPEAR\020\007\022\030\n\024COLLE" +
+      "CT_SPECIAL_ITEM\020\010\"\351\002\n\rDialogueProto\022G\n\rs" +
+      "peechSegment\030\001 \003(\01320.com.lvl6.proto.Dial",
+      "ogueProto.SpeechSegmentProto\032\216\002\n\022SpeechS" +
+      "egmentProto\022Q\n\007speaker\030\001 \001(\0162@.com.lvl6." +
+      "proto.DialogueProto.SpeechSegmentProto.D" +
+      "ialogueSpeaker\022\023\n\013speakerText\030\002 \001(\t\"\217\001\n\017" +
+      "DialogueSpeaker\022\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTO" +
+      "RIAL_GIRL\020\002\022\020\n\014QUESTGIVER_1\020\003\022\020\n\014QUESTGI" +
+      "VER_2\020\004\022\020\n\014QUESTGIVER_3\020\005\022\020\n\014QUESTGIVER_" +
+      "4\020\006\022\020\n\014QUESTGIVER_5\020\007\"o\n\022FullUserQuestPr" +
+      "oto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\n" +
+      "isRedeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010",
+      "progress\030\005 \001(\005B\014B\nQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

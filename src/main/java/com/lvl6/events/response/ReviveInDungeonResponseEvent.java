@@ -13,7 +13,7 @@ public class ReviveInDungeonResponseEvent extends NormalResponseEvent {
   
   public ReviveInDungeonResponseEvent(int playerId){
     super(playerId);
-    eventType = EventProtocolResponse.S_END_DUNGEON_EVENT;
+    eventType = EventProtocolResponse.S_REVIVE_IN_DUNGEON_EVENT;
   }
   
   @Override

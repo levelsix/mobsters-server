@@ -35,6 +35,17 @@ message FullQuestProto {
      	COLLECT_COINS_FROM_HOME = 4;
      	BUILD_STRUCT = 5;
      	UPGRADE_STRUCT = 6;
+     	
+     	//AFTER USER FINISHES QUEST, SPECIAL MONSTER APPEARS, WHICH USER NEEDS TO KILL
+     	//USED IN PERSISTENT EVENTS (DAILY DUNGEONS)
+     	MONSTER_APPEAR = 7;
+
+		//MONSTERS SPECIFIED IN quest_monster_item_table drop the required item
+		//NOTE: a quest is tied to a city. So if a monster is listed in 
+		//quest_monster_item table then everywhere the aforementioned monster
+		//spawns in the city, the monster has a chance to drop said item.
+     	COLLECT_SPECIAL_ITEM = 8;
+     	
      }
 }
 
