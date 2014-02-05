@@ -23,6 +23,11 @@ public final class EventPvpProto {
     // optional sint32 cashChange = 4;
     boolean hasCashChange();
     int getCashChange();
+    
+    // repeated int32 seenUserIds = 5;
+    java.util.List<java.lang.Integer> getSeenUserIdsList();
+    int getSeenUserIdsCount();
+    int getSeenUserIds(int index);
   }
   public static final class QueueUpRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -86,10 +91,25 @@ public final class EventPvpProto {
       return cashChange_;
     }
     
+    // repeated int32 seenUserIds = 5;
+    public static final int SEENUSERIDS_FIELD_NUMBER = 5;
+    private java.util.List<java.lang.Integer> seenUserIds_;
+    public java.util.List<java.lang.Integer>
+        getSeenUserIdsList() {
+      return seenUserIds_;
+    }
+    public int getSeenUserIdsCount() {
+      return seenUserIds_.size();
+    }
+    public int getSeenUserIds(int index) {
+      return seenUserIds_.get(index);
+    }
+    
     private void initFields() {
       attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       attackerElo_ = 0;
       cashChange_ = 0;
+      seenUserIds_ = java.util.Collections.emptyList();;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -112,6 +132,9 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeSInt32(4, cashChange_);
       }
+      for (int i = 0; i < seenUserIds_.size(); i++) {
+        output.writeInt32(5, seenUserIds_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -132,6 +155,15 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeSInt32Size(4, cashChange_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < seenUserIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeInt32SizeNoTag(seenUserIds_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getSeenUserIdsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -268,6 +300,8 @@ public final class EventPvpProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         cashChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        seenUserIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -322,6 +356,11 @@ public final class EventPvpProto {
           to_bitField0_ |= 0x00000004;
         }
         result.cashChange_ = cashChange_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          seenUserIds_ = java.util.Collections.unmodifiableList(seenUserIds_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.seenUserIds_ = seenUserIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -346,6 +385,16 @@ public final class EventPvpProto {
         }
         if (other.hasCashChange()) {
           setCashChange(other.getCashChange());
+        }
+        if (!other.seenUserIds_.isEmpty()) {
+          if (seenUserIds_.isEmpty()) {
+            seenUserIds_ = other.seenUserIds_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureSeenUserIdsIsMutable();
+            seenUserIds_.addAll(other.seenUserIds_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -395,6 +444,20 @@ public final class EventPvpProto {
             case 32: {
               bitField0_ |= 0x00000004;
               cashChange_ = input.readSInt32();
+              break;
+            }
+            case 40: {
+              ensureSeenUserIdsIsMutable();
+              seenUserIds_.add(input.readInt32());
+              break;
+            }
+            case 42: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              while (input.getBytesUntilLimit() > 0) {
+                addSeenUserIds(input.readInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -531,6 +594,51 @@ public final class EventPvpProto {
       public Builder clearCashChange() {
         bitField0_ = (bitField0_ & ~0x00000004);
         cashChange_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // repeated int32 seenUserIds = 5;
+      private java.util.List<java.lang.Integer> seenUserIds_ = java.util.Collections.emptyList();;
+      private void ensureSeenUserIdsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          seenUserIds_ = new java.util.ArrayList<java.lang.Integer>(seenUserIds_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      public java.util.List<java.lang.Integer>
+          getSeenUserIdsList() {
+        return java.util.Collections.unmodifiableList(seenUserIds_);
+      }
+      public int getSeenUserIdsCount() {
+        return seenUserIds_.size();
+      }
+      public int getSeenUserIds(int index) {
+        return seenUserIds_.get(index);
+      }
+      public Builder setSeenUserIds(
+          int index, int value) {
+        ensureSeenUserIdsIsMutable();
+        seenUserIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addSeenUserIds(int value) {
+        ensureSeenUserIdsIsMutable();
+        seenUserIds_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllSeenUserIds(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureSeenUserIdsIsMutable();
+        super.addAll(values, seenUserIds_);
+        onChanged();
+        return this;
+      }
+      public Builder clearSeenUserIds() {
+        seenUserIds_ = java.util.Collections.emptyList();;
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -1271,17 +1379,17 @@ public final class EventPvpProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\016EventPvp.proto\022\016com.lvl6.proto\032\014Battle" +
-      ".proto\032\nUser.proto\"r\n\023QueueUpRequestProt" +
-      "o\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022\023\n\013attackerElo\030\002 \001(\005\022\022\n\nca" +
-      "shChange\030\004 \001(\021\"\206\002\n\024QueueUpResponseProto\022" +
-      "2\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022.\n\014defenderInfo\030\002 \001(\0132\030.com." +
-      "lvl6.proto.PvpProto\022B\n\006status\030\003 \001(\01622.co" +
-      "m.lvl6.proto.QueueUpResponseProto.QueueU" +
-      "pStatus\"F\n\rQueueUpStatus\022\013\n\007SUCCESS\020\001\022\030\n",
-      "\024FAIL_NOT_ENOUGH_CASH\020\002\022\016\n\nFAIL_OTHER\020\003B" +
-      "\017B\rEventPvpProto"
+      ".proto\032\nUser.proto\"\207\001\n\023QueueUpRequestPro" +
+      "to\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Mi" +
+      "nimumUserProto\022\023\n\013attackerElo\030\002 \001(\005\022\022\n\nc" +
+      "ashChange\030\004 \001(\021\022\023\n\013seenUserIds\030\005 \003(\005\"\206\002\n" +
+      "\024QueueUpResponseProto\0222\n\010attacker\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022.\n\014def" +
+      "enderInfo\030\002 \001(\0132\030.com.lvl6.proto.PvpProt" +
+      "o\022B\n\006status\030\003 \001(\01622.com.lvl6.proto.Queue" +
+      "UpResponseProto.QueueUpStatus\"F\n\rQueueUp",
+      "Status\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_NOT_ENOUGH_C" +
+      "ASH\020\002\022\016\n\nFAIL_OTHER\020\003B\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1293,7 +1401,7 @@ public final class EventPvpProto {
           internal_static_com_lvl6_proto_QueueUpRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QueueUpRequestProto_descriptor,
-              new java.lang.String[] { "Attacker", "AttackerElo", "CashChange", },
+              new java.lang.String[] { "Attacker", "AttackerElo", "CashChange", "SeenUserIds", },
               com.lvl6.proto.EventPvpProto.QueueUpRequestProto.class,
               com.lvl6.proto.EventPvpProto.QueueUpRequestProto.Builder.class);
           internal_static_com_lvl6_proto_QueueUpResponseProto_descriptor =

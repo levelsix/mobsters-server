@@ -27,9 +27,12 @@ message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
 	optional int32 attackerElo = 2;
 
-	//copy pasted from somewhere else, trying to be consistent
+	//copy pasted from somewhere else, trying to be consistent, don't forsee being positive
 	//positive means refund, negative means charge user
 	optional sint32 cashChange = 4;	
+	
+	//these users should not be considered 
+	repeated int32 seenUserIds = 5;
 
 }
 
