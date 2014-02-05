@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
@@ -148,4 +149,6 @@ public interface UpdateUtil {
   
   public abstract int updateRedeemUserFacebookInviteForSlot(Timestamp redeemTime,
   		List<UserFacebookInviteForSlot> redeemedInvites);
+  
+  public abstract int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems);
 }

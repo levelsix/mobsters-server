@@ -21,6 +21,7 @@ public class DBConstants {
 	public static final String TABLE_GOLD_SALE = "gold_sale";	
 	public static final String TABLE_IAP_HISTORY = "iap_history";
 	public static final String TABLE_ITEM = "item";
+	public static final String TABLE_ITEM_FOR_USER = "item_for_user";
   public static final String TABLE_LOCK_BOX_EVENT = "lock_box_event";
   public static final String TABLE_LOCK_BOX_EVENT_FOR_USER = "lock_box_event_for_user";
   public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
@@ -159,6 +160,11 @@ public class DBConstants {
   public static final String IAP_HISTORY__BVRS = "bvrs";
   public static final String IAP_HISTORY__APP_ITEM_ID = "app_item_id";
 
+  /*ITEM FOR USER TABLE*/
+  public static final String ITEM_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String ITEM_FOR_USER__ITEM_ID = "item_id";
+  public static final String ITEM_FOR_USER__QUANTITY = "quantity";
+  
   /*LOCK BOX EVENT FOR USER*/
   public static final String LOCK_BOX_EVENT_FOR_USER__EVENT_ID = "lock_box_event_id";
   public static final String LOCK_BOX_EVENT_FOR_USER__USER_ID = "user_id";
@@ -316,6 +322,7 @@ public class DBConstants {
   public static final String TASK_STAGE_FOR_USER__EXP_GAINED = "exp_gained";
   public static final String TASK_STAGE_FOR_USER__SILVER_GAINED = "silver_gained";
   public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
+  public static final String TASK_STAGE_FOR_USER__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
   
   /*USER TASK STAGE HISTORY TABLE*/
   public static final String TASK_STAGE_HISTORY__ID = "task_stage_for_user_id";
@@ -327,6 +334,7 @@ public class DBConstants {
   public static final String TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";
   public static final String TASK_STAGE_HISTORY__SILVER_GAINED = "silver_gained";
   public static final String TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
+  public static final String TASK_STAGE_HISTORY__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
   
   /*TOURNAMENT EVENT*/
   public static final String TOURNAMENT_EVENT__ID = GENERIC__ID;

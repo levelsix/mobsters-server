@@ -73,15 +73,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		MinimumUserProto attackerProto = reqProto.getAttacker();
 		int attackerId = attackerProto.getUserId();
 		//client keeps adding to this list, prevents already seen users coming up in queue
-		List<Integer> seenUserIds = reqProto.getSeenUserIdsList();
-		long millis = reqProto.getClientTime();
-		Date clientDate = new Date(millis);
-		Timestamp queueTime = new Timestamp(millis);
 		
 		//set some values to send to the client
 		QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto.newBuilder();
 		resBuilder.setAttacker(attackerProto);
-		resBuilder.setStatus(QueueUpStatus.OTHER_FAIL);
+		resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 
 		try {
 			User attacker = RetrieveUtils.userRetrieveUtils().getUserById(attackerId);
@@ -91,30 +87,30 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			//prevent another cost calculation
 			List<Integer> costList = new ArrayList<Integer>();
 			//check if user can search for a player to attack
-			boolean legitQueueUp = checkLegitQueueUp(resBuilder, attacker, seenUserIds,
-					clientDate, queuedOpponentList, costList);
-
-			boolean success = false;
-			if (legitQueueUp) {
-				int cost = costList.get(0);
-				User queuedOpponent = queuedOpponentList.get(0);
-				success = writeChangesToDB(attacker, cost, queueTime, queuedOpponent);
-				
-			}
-			
-			if (success) {
-				//send to the client the player he can attack
-				User queuedOpponent = queuedOpponentList.get(0);
-				MinimumUserProto mup =
-						CreateInfoProtoUtils.createMinimumUserProtoFromUser(queuedOpponent);
-				resBuilder.setDefender(mup);			
-				
-				//set how many coins the user can win
-				int winnings = calculatePossibleCoinWinnings(queuedOpponent);
-				resBuilder.setPossibleCoinReward(winnings);
-			} else {
-				resBuilder.setStatus(QueueUpStatus.OTHER_FAIL);
-			}
+//			boolean legitQueueUp = checkLegitQueueUp(resBuilder, attacker, seenUserIds,
+//					clientDate, queuedOpponentList, costList);
+//
+//			boolean success = false;
+//			if (legitQueueUp) {
+//				int cost = costList.get(0);
+//				User queuedOpponent = queuedOpponentList.get(0);
+//				success = writeChangesToDB(attacker, cost, queueTime, queuedOpponent);
+//				
+//			}
+//			
+//			if (success) {
+//				//send to the client the player he can attack
+//				User queuedOpponent = queuedOpponentList.get(0);
+//				MinimumUserProto mup =
+//						CreateInfoProtoUtils.createMinimumUserProtoFromUser(queuedOpponent);
+//				resBuilder.setDefender(mup);			
+//				
+//				//set how many coins the user can win
+//				int winnings = calculatePossibleCoinWinnings(queuedOpponent);
+//				resBuilder.setPossibleCoinReward(winnings);
+//			} else {
+//				resBuilder.setStatus(QueueUpStatus.OTHER_FAIL);
+//			}
 			
 			//write event to the client
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
@@ -122,20 +118,20 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			resEvent.setQueueUpResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
 			
-			if (success) {
-				//UPDATE CLIENT 
-				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-						.createUpdateClientUserResponseEventAndUpdateLeaderboard(attacker);
-				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
-				
-				//TODO: TRACKING USER CURRENCY CHANGE, AMONG OTHER THINGS
-				
-			}
+//			if (success) {
+//				//UPDATE CLIENT 
+//				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+//						.createUpdateClientUserResponseEventAndUpdateLeaderboard(attacker);
+//				resEventUpdate.setTag(event.getTag());
+//				server.writeEvent(resEventUpdate);
+//				
+//				//TODO: TRACKING USER CURRENCY CHANGE, AMONG OTHER THINGS
+//				
+//			}
       
 		} catch (Exception e) {
 			log.error("exception in QueueUp processEvent", e);
-			resBuilder.setStatus(QueueUpStatus.OTHER_FAIL);
+			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			QueueUpResponseEvent resEvent = new QueueUpResponseEvent(attackerId);
 			resEvent.setTag(event.getTag());
 			resEvent.setQueueUpResponseProto(resBuilder.build());  
@@ -154,7 +150,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		List<User> qList = getUserRetrieveUtils().retrieveCompleteQueueList(
 				attacker, elo, seenUserIds, clientDate);
 
-		if(qList.size()==0) {
+		if(qList.isEmpty()) {
 			return null;
 		}
 		else {
@@ -169,7 +165,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			List<Integer> seenUserIds, Date clientDate, List<User> queuedOpponentList,
 			List<Integer> costList) {
 		if (attacker == null) {
-			resBuilder.setStatus(QueueUpStatus.OTHER_FAIL);
+			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			log.error("problem with QueueUp- attacker is null. attacker is " + attacker);
 			return false;
 		}
@@ -178,17 +174,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		int elo = attacker.getElo();
 		int cost = calculateQueueCost(attacker, elo);
 		if (attacker.getCash() < cost) {
-			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_SILVER);
+			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_CASH);
 			log.error("problem with QueueUp- attacker doesn't have enough silver to search queue");
 			return false;
 		}
 
 		User queuedOpponent = queuedOpponent(attacker, elo, seenUserIds, clientDate);
-		if(queuedOpponent==null) {
-			resBuilder.setStatus(QueueUpStatus.FAIL_CANT_FIND_ANYONE);
-			log.error("no users to match up with");
-			return false;
-		}
 
 		queuedOpponentList.add(queuedOpponent);
 		costList.add(cost);

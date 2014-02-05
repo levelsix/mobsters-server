@@ -573,10 +573,12 @@ import com.lvl6.utils.utilmethods.StringUtils;
     
     //prospective users should have their shield ended before now
     relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
+    //prospective users should not have been queued recently
     Timestamp timestamp2 = new Timestamp(clientTime.getTime() - lastViewedTimeMillisBuffer);
     relativeLessThanConditionParams.put(DBConstants.USER__LAST_TIME_QUEUED, timestamp2);
     
-    String seenUserIdsString = DBConstants.USER__ID + "NOT IN ("; 
+    //some sql injection x)
+    String seenUserIdsString = DBConstants.USER__ID + " NOT IN ("; 
     seenUserIdsString += StringUtils.csvList(seenUserIds) + ") and 1";
     absoluteConditionParams.put(seenUserIdsString, 1);
 

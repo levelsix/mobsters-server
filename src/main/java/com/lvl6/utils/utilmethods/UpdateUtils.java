@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.CoordinatePair;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
@@ -935,4 +936,29 @@ public class UpdateUtils implements UpdateUtil {
 			return numUpdated;
 		}
 
+		@Override
+		public int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems) {
+			String tableName = DBConstants.TABLE_ITEM_FOR_USER;
+			
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			for(Integer itemId : itemIdsToUpdatedItems.keySet()) {
+				ItemForUser ifu = itemIdsToUpdatedItems.get(itemId);
+
+				Map<String, Object> aRow = new HashMap<String, Object>();
+				aRow.put(DBConstants.ITEM_FOR_USER__USER_ID, ifu.getUserId());
+				aRow.put(DBConstants.ITEM_FOR_USER__ITEM_ID, ifu.getItemId());
+				aRow.put(DBConstants.ITEM_FOR_USER__QUANTITY, ifu.getQuantity());
+
+				newRows.add(aRow);
+			}
+
+//			int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
+			//determine which columns should be replaced
+			Set<String> replaceTheseColumns = new HashSet<String>();
+			replaceTheseColumns.add(DBConstants.ITEM_FOR_USER__QUANTITY);
+			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+					tableName, newRows, replaceTheseColumns);
+			
+			return numUpdated;
+		}
 }

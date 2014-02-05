@@ -1,6 +1,7 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Battle.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -8,24 +9,41 @@ package com.lvl6.proto;
 option java_outer_classname = "EventPvpProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
+
+
+// A real or a fake player will be returned by this event.
+// SOME BACKGROUND: 
+// All people that can be attacked will be offline people. The opposite is not true though.
+// All people that can be attacked will not have an active shield.
+// NITTY GRITTY:
+// An ordered set will contain the mapping  elo -> userId
+// Whenever an offline user comes in (StartupRequest) this user will be removed from the set.
+// Whenever someone initiates an attack on an offline user, the offline user will be removed
+// 		from the set.
+// Whenever someone logs out, the user will be placed into the set if he qualifies to be
+//		attacked.
+
 message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
-	repeated int32 seenUserIds = 2;
-	optional int64 clientTime = 3;
-	
+	optional int32 attackerElo = 2;
+
+	//copy pasted from somewhere else, trying to be consistent
+	//positive means refund, negative means charge user
+	optional sint32 cashChange = 4;	
+
 }
 
 message QueueUpResponseProto {
 	optional MinimumUserProto attacker = 1;
-	optional MinimumUserProto defender = 2;
+	optional PvpProto defenderInfo = 2;
 	optional QueueUpStatus status = 3;
-	optional int32 possibleCoinReward = 4;
 
 	enum QueueUpStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		FAIL_NOT_ENOUGH_SILVER = 3;
-		FAIL_CANT_FIND_ANYONE = 4; //DON'T SUBTRACT SILVER
+		FAIL_NOT_ENOUGH_CASH = 2;
+		FAIL_OTHER = 3; //REAL OR FAKE USERS WOULD BE RETURNED, SO THE FAIL WOULD NOT 
+						//BE FOR LACK OF A VICTIM TO ATTACK
+		
 	}
 }
 

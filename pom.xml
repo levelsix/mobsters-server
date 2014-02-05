@@ -119,7 +119,7 @@
 		
 		<lvl6.jedis.host>robot.lvl6.com</lvl6.jedis.host>
 		<lvl6.jedis.auth>L3v3lS!x_K!ngd0m$</lvl6.jedis.auth>
-		<lvl6.jedis.database>0</lvl6.jedis.database>
+		<lvl6.jedis.database>1</lvl6.jedis.database>
 
 		<ec2.instance.size>m1.small</ec2.instance.size>
 		<ec2.instance.count.minimum>4</ec2.instance.count.minimum>

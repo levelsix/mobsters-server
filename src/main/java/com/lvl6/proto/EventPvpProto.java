@@ -16,14 +16,13 @@ public final class EventPvpProto {
     com.lvl6.proto.UserProto.MinimumUserProto getAttacker();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder();
     
-    // repeated int32 seenUserIds = 2;
-    java.util.List<java.lang.Integer> getSeenUserIdsList();
-    int getSeenUserIdsCount();
-    int getSeenUserIds(int index);
+    // optional int32 attackerElo = 2;
+    boolean hasAttackerElo();
+    int getAttackerElo();
     
-    // optional int64 clientTime = 3;
-    boolean hasClientTime();
-    long getClientTime();
+    // optional sint32 cashChange = 4;
+    boolean hasCashChange();
+    int getCashChange();
   }
   public static final class QueueUpRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -67,34 +66,30 @@ public final class EventPvpProto {
       return attacker_;
     }
     
-    // repeated int32 seenUserIds = 2;
-    public static final int SEENUSERIDS_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> seenUserIds_;
-    public java.util.List<java.lang.Integer>
-        getSeenUserIdsList() {
-      return seenUserIds_;
-    }
-    public int getSeenUserIdsCount() {
-      return seenUserIds_.size();
-    }
-    public int getSeenUserIds(int index) {
-      return seenUserIds_.get(index);
-    }
-    
-    // optional int64 clientTime = 3;
-    public static final int CLIENTTIME_FIELD_NUMBER = 3;
-    private long clientTime_;
-    public boolean hasClientTime() {
+    // optional int32 attackerElo = 2;
+    public static final int ATTACKERELO_FIELD_NUMBER = 2;
+    private int attackerElo_;
+    public boolean hasAttackerElo() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public long getClientTime() {
-      return clientTime_;
+    public int getAttackerElo() {
+      return attackerElo_;
+    }
+    
+    // optional sint32 cashChange = 4;
+    public static final int CASHCHANGE_FIELD_NUMBER = 4;
+    private int cashChange_;
+    public boolean hasCashChange() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getCashChange() {
+      return cashChange_;
     }
     
     private void initFields() {
       attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      seenUserIds_ = java.util.Collections.emptyList();;
-      clientTime_ = 0L;
+      attackerElo_ = 0;
+      cashChange_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -111,11 +106,11 @@ public final class EventPvpProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, attacker_);
       }
-      for (int i = 0; i < seenUserIds_.size(); i++) {
-        output.writeInt32(2, seenUserIds_.get(i));
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(3, clientTime_);
+        output.writeInt32(2, attackerElo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeSInt32(4, cashChange_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -130,18 +125,13 @@ public final class EventPvpProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, attacker_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < seenUserIds_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeInt32SizeNoTag(seenUserIds_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getSeenUserIdsList().size();
-      }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, clientTime_);
+          .computeInt32Size(2, attackerElo_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeSInt32Size(4, cashChange_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -274,9 +264,9 @@ public final class EventPvpProto {
           attackerBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        seenUserIds_ = java.util.Collections.emptyList();;
+        attackerElo_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        clientTime_ = 0L;
+        cashChange_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -324,15 +314,14 @@ public final class EventPvpProto {
         } else {
           result.attacker_ = attackerBuilder_.build();
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          seenUserIds_ = java.util.Collections.unmodifiableList(seenUserIds_);
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.seenUserIds_ = seenUserIds_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.clientTime_ = clientTime_;
+        result.attackerElo_ = attackerElo_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.cashChange_ = cashChange_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -352,18 +341,11 @@ public final class EventPvpProto {
         if (other.hasAttacker()) {
           mergeAttacker(other.getAttacker());
         }
-        if (!other.seenUserIds_.isEmpty()) {
-          if (seenUserIds_.isEmpty()) {
-            seenUserIds_ = other.seenUserIds_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureSeenUserIdsIsMutable();
-            seenUserIds_.addAll(other.seenUserIds_);
-          }
-          onChanged();
+        if (other.hasAttackerElo()) {
+          setAttackerElo(other.getAttackerElo());
         }
-        if (other.hasClientTime()) {
-          setClientTime(other.getClientTime());
+        if (other.hasCashChange()) {
+          setCashChange(other.getCashChange());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -406,22 +388,13 @@ public final class EventPvpProto {
               break;
             }
             case 16: {
-              ensureSeenUserIdsIsMutable();
-              seenUserIds_.add(input.readInt32());
+              bitField0_ |= 0x00000002;
+              attackerElo_ = input.readInt32();
               break;
             }
-            case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              while (input.getBytesUntilLimit() > 0) {
-                addSeenUserIds(input.readInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 24: {
+            case 32: {
               bitField0_ |= 0x00000004;
-              clientTime_ = input.readInt64();
+              cashChange_ = input.readSInt32();
               break;
             }
           }
@@ -520,68 +493,44 @@ public final class EventPvpProto {
         return attackerBuilder_;
       }
       
-      // repeated int32 seenUserIds = 2;
-      private java.util.List<java.lang.Integer> seenUserIds_ = java.util.Collections.emptyList();;
-      private void ensureSeenUserIdsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          seenUserIds_ = new java.util.ArrayList<java.lang.Integer>(seenUserIds_);
-          bitField0_ |= 0x00000002;
-         }
+      // optional int32 attackerElo = 2;
+      private int attackerElo_ ;
+      public boolean hasAttackerElo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public java.util.List<java.lang.Integer>
-          getSeenUserIdsList() {
-        return java.util.Collections.unmodifiableList(seenUserIds_);
+      public int getAttackerElo() {
+        return attackerElo_;
       }
-      public int getSeenUserIdsCount() {
-        return seenUserIds_.size();
-      }
-      public int getSeenUserIds(int index) {
-        return seenUserIds_.get(index);
-      }
-      public Builder setSeenUserIds(
-          int index, int value) {
-        ensureSeenUserIdsIsMutable();
-        seenUserIds_.set(index, value);
+      public Builder setAttackerElo(int value) {
+        bitField0_ |= 0x00000002;
+        attackerElo_ = value;
         onChanged();
         return this;
       }
-      public Builder addSeenUserIds(int value) {
-        ensureSeenUserIdsIsMutable();
-        seenUserIds_.add(value);
-        onChanged();
-        return this;
-      }
-      public Builder addAllSeenUserIds(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureSeenUserIdsIsMutable();
-        super.addAll(values, seenUserIds_);
-        onChanged();
-        return this;
-      }
-      public Builder clearSeenUserIds() {
-        seenUserIds_ = java.util.Collections.emptyList();;
+      public Builder clearAttackerElo() {
         bitField0_ = (bitField0_ & ~0x00000002);
+        attackerElo_ = 0;
         onChanged();
         return this;
       }
       
-      // optional int64 clientTime = 3;
-      private long clientTime_ ;
-      public boolean hasClientTime() {
+      // optional sint32 cashChange = 4;
+      private int cashChange_ ;
+      public boolean hasCashChange() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public long getClientTime() {
-        return clientTime_;
+      public int getCashChange() {
+        return cashChange_;
       }
-      public Builder setClientTime(long value) {
+      public Builder setCashChange(int value) {
         bitField0_ |= 0x00000004;
-        clientTime_ = value;
+        cashChange_ = value;
         onChanged();
         return this;
       }
-      public Builder clearClientTime() {
+      public Builder clearCashChange() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        clientTime_ = 0L;
+        cashChange_ = 0;
         onChanged();
         return this;
       }
@@ -605,18 +554,14 @@ public final class EventPvpProto {
     com.lvl6.proto.UserProto.MinimumUserProto getAttacker();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getAttackerOrBuilder();
     
-    // optional .com.lvl6.proto.MinimumUserProto defender = 2;
-    boolean hasDefender();
-    com.lvl6.proto.UserProto.MinimumUserProto getDefender();
-    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder();
+    // optional .com.lvl6.proto.PvpProto defenderInfo = 2;
+    boolean hasDefenderInfo();
+    com.lvl6.proto.BattleProto.PvpProto getDefenderInfo();
+    com.lvl6.proto.BattleProto.PvpProtoOrBuilder getDefenderInfoOrBuilder();
     
     // optional .com.lvl6.proto.QueueUpResponseProto.QueueUpStatus status = 3;
     boolean hasStatus();
     com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus getStatus();
-    
-    // optional int32 possibleCoinReward = 4;
-    boolean hasPossibleCoinReward();
-    int getPossibleCoinReward();
   }
   public static final class QueueUpResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -649,15 +594,13 @@ public final class EventPvpProto {
     public enum QueueUpStatus
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
-      OTHER_FAIL(1, 2),
-      FAIL_NOT_ENOUGH_SILVER(2, 3),
-      FAIL_CANT_FIND_ANYONE(3, 4),
+      FAIL_NOT_ENOUGH_CASH(1, 2),
+      FAIL_OTHER(2, 3),
       ;
       
       public static final int SUCCESS_VALUE = 1;
-      public static final int OTHER_FAIL_VALUE = 2;
-      public static final int FAIL_NOT_ENOUGH_SILVER_VALUE = 3;
-      public static final int FAIL_CANT_FIND_ANYONE_VALUE = 4;
+      public static final int FAIL_NOT_ENOUGH_CASH_VALUE = 2;
+      public static final int FAIL_OTHER_VALUE = 3;
       
       
       public final int getNumber() { return value; }
@@ -665,9 +608,8 @@ public final class EventPvpProto {
       public static QueueUpStatus valueOf(int value) {
         switch (value) {
           case 1: return SUCCESS;
-          case 2: return OTHER_FAIL;
-          case 3: return FAIL_NOT_ENOUGH_SILVER;
-          case 4: return FAIL_CANT_FIND_ANYONE;
+          case 2: return FAIL_NOT_ENOUGH_CASH;
+          case 3: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -698,7 +640,7 @@ public final class EventPvpProto {
       }
       
       private static final QueueUpStatus[] VALUES = {
-        SUCCESS, OTHER_FAIL, FAIL_NOT_ENOUGH_SILVER, FAIL_CANT_FIND_ANYONE, 
+        SUCCESS, FAIL_NOT_ENOUGH_CASH, FAIL_OTHER, 
       };
       
       public static QueueUpStatus valueOf(
@@ -735,17 +677,17 @@ public final class EventPvpProto {
       return attacker_;
     }
     
-    // optional .com.lvl6.proto.MinimumUserProto defender = 2;
-    public static final int DEFENDER_FIELD_NUMBER = 2;
-    private com.lvl6.proto.UserProto.MinimumUserProto defender_;
-    public boolean hasDefender() {
+    // optional .com.lvl6.proto.PvpProto defenderInfo = 2;
+    public static final int DEFENDERINFO_FIELD_NUMBER = 2;
+    private com.lvl6.proto.BattleProto.PvpProto defenderInfo_;
+    public boolean hasDefenderInfo() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
-      return defender_;
+    public com.lvl6.proto.BattleProto.PvpProto getDefenderInfo() {
+      return defenderInfo_;
     }
-    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
-      return defender_;
+    public com.lvl6.proto.BattleProto.PvpProtoOrBuilder getDefenderInfoOrBuilder() {
+      return defenderInfo_;
     }
     
     // optional .com.lvl6.proto.QueueUpResponseProto.QueueUpStatus status = 3;
@@ -758,21 +700,10 @@ public final class EventPvpProto {
       return status_;
     }
     
-    // optional int32 possibleCoinReward = 4;
-    public static final int POSSIBLECOINREWARD_FIELD_NUMBER = 4;
-    private int possibleCoinReward_;
-    public boolean hasPossibleCoinReward() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    public int getPossibleCoinReward() {
-      return possibleCoinReward_;
-    }
-    
     private void initFields() {
       attacker_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      defenderInfo_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus.SUCCESS;
-      possibleCoinReward_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -790,13 +721,10 @@ public final class EventPvpProto {
         output.writeMessage(1, attacker_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, defender_);
+        output.writeMessage(2, defenderInfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, status_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, possibleCoinReward_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -813,15 +741,11 @@ public final class EventPvpProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, defender_);
+          .computeMessageSize(2, defenderInfo_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, status_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, possibleCoinReward_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -940,7 +864,7 @@ public final class EventPvpProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAttackerFieldBuilder();
-          getDefenderFieldBuilder();
+          getDefenderInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -955,16 +879,14 @@ public final class EventPvpProto {
           attackerBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        if (defenderBuilder_ == null) {
-          defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        if (defenderInfoBuilder_ == null) {
+          defenderInfo_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
         } else {
-          defenderBuilder_.clear();
+          defenderInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
         status_ = com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000004);
-        possibleCoinReward_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -1014,19 +936,15 @@ public final class EventPvpProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        if (defenderBuilder_ == null) {
-          result.defender_ = defender_;
+        if (defenderInfoBuilder_ == null) {
+          result.defenderInfo_ = defenderInfo_;
         } else {
-          result.defender_ = defenderBuilder_.build();
+          result.defenderInfo_ = defenderInfoBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
         result.status_ = status_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.possibleCoinReward_ = possibleCoinReward_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1046,14 +964,11 @@ public final class EventPvpProto {
         if (other.hasAttacker()) {
           mergeAttacker(other.getAttacker());
         }
-        if (other.hasDefender()) {
-          mergeDefender(other.getDefender());
+        if (other.hasDefenderInfo()) {
+          mergeDefenderInfo(other.getDefenderInfo());
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
-        }
-        if (other.hasPossibleCoinReward()) {
-          setPossibleCoinReward(other.getPossibleCoinReward());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1096,12 +1011,12 @@ public final class EventPvpProto {
               break;
             }
             case 18: {
-              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
-              if (hasDefender()) {
-                subBuilder.mergeFrom(getDefender());
+              com.lvl6.proto.BattleProto.PvpProto.Builder subBuilder = com.lvl6.proto.BattleProto.PvpProto.newBuilder();
+              if (hasDefenderInfo()) {
+                subBuilder.mergeFrom(getDefenderInfo());
               }
               input.readMessage(subBuilder, extensionRegistry);
-              setDefender(subBuilder.buildPartial());
+              setDefenderInfo(subBuilder.buildPartial());
               break;
             }
             case 24: {
@@ -1113,11 +1028,6 @@ public final class EventPvpProto {
                 bitField0_ |= 0x00000004;
                 status_ = value;
               }
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              possibleCoinReward_ = input.readInt32();
               break;
             }
           }
@@ -1216,94 +1126,94 @@ public final class EventPvpProto {
         return attackerBuilder_;
       }
       
-      // optional .com.lvl6.proto.MinimumUserProto defender = 2;
-      private com.lvl6.proto.UserProto.MinimumUserProto defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      // optional .com.lvl6.proto.PvpProto defenderInfo = 2;
+      private com.lvl6.proto.BattleProto.PvpProto defenderInfo_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> defenderBuilder_;
-      public boolean hasDefender() {
+          com.lvl6.proto.BattleProto.PvpProto, com.lvl6.proto.BattleProto.PvpProto.Builder, com.lvl6.proto.BattleProto.PvpProtoOrBuilder> defenderInfoBuilder_;
+      public boolean hasDefenderInfo() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto getDefender() {
-        if (defenderBuilder_ == null) {
-          return defender_;
+      public com.lvl6.proto.BattleProto.PvpProto getDefenderInfo() {
+        if (defenderInfoBuilder_ == null) {
+          return defenderInfo_;
         } else {
-          return defenderBuilder_.getMessage();
+          return defenderInfoBuilder_.getMessage();
         }
       }
-      public Builder setDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (defenderBuilder_ == null) {
+      public Builder setDefenderInfo(com.lvl6.proto.BattleProto.PvpProto value) {
+        if (defenderInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          defender_ = value;
+          defenderInfo_ = value;
           onChanged();
         } else {
-          defenderBuilder_.setMessage(value);
+          defenderInfoBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000002;
         return this;
       }
-      public Builder setDefender(
-          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
-        if (defenderBuilder_ == null) {
-          defender_ = builderForValue.build();
+      public Builder setDefenderInfo(
+          com.lvl6.proto.BattleProto.PvpProto.Builder builderForValue) {
+        if (defenderInfoBuilder_ == null) {
+          defenderInfo_ = builderForValue.build();
           onChanged();
         } else {
-          defenderBuilder_.setMessage(builderForValue.build());
+          defenderInfoBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000002;
         return this;
       }
-      public Builder mergeDefender(com.lvl6.proto.UserProto.MinimumUserProto value) {
-        if (defenderBuilder_ == null) {
+      public Builder mergeDefenderInfo(com.lvl6.proto.BattleProto.PvpProto value) {
+        if (defenderInfoBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
-              defender_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
-            defender_ =
-              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(defender_).mergeFrom(value).buildPartial();
+              defenderInfo_ != com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance()) {
+            defenderInfo_ =
+              com.lvl6.proto.BattleProto.PvpProto.newBuilder(defenderInfo_).mergeFrom(value).buildPartial();
           } else {
-            defender_ = value;
+            defenderInfo_ = value;
           }
           onChanged();
         } else {
-          defenderBuilder_.mergeFrom(value);
+          defenderInfoBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000002;
         return this;
       }
-      public Builder clearDefender() {
-        if (defenderBuilder_ == null) {
-          defender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      public Builder clearDefenderInfo() {
+        if (defenderInfoBuilder_ == null) {
+          defenderInfo_ = com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
           onChanged();
         } else {
-          defenderBuilder_.clear();
+          defenderInfoBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
-      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getDefenderBuilder() {
+      public com.lvl6.proto.BattleProto.PvpProto.Builder getDefenderInfoBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
-        return getDefenderFieldBuilder().getBuilder();
+        return getDefenderInfoFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getDefenderOrBuilder() {
-        if (defenderBuilder_ != null) {
-          return defenderBuilder_.getMessageOrBuilder();
+      public com.lvl6.proto.BattleProto.PvpProtoOrBuilder getDefenderInfoOrBuilder() {
+        if (defenderInfoBuilder_ != null) {
+          return defenderInfoBuilder_.getMessageOrBuilder();
         } else {
-          return defender_;
+          return defenderInfo_;
         }
       }
       private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
-          getDefenderFieldBuilder() {
-        if (defenderBuilder_ == null) {
-          defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
-                  defender_,
+          com.lvl6.proto.BattleProto.PvpProto, com.lvl6.proto.BattleProto.PvpProto.Builder, com.lvl6.proto.BattleProto.PvpProtoOrBuilder> 
+          getDefenderInfoFieldBuilder() {
+        if (defenderInfoBuilder_ == null) {
+          defenderInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.BattleProto.PvpProto, com.lvl6.proto.BattleProto.PvpProto.Builder, com.lvl6.proto.BattleProto.PvpProtoOrBuilder>(
+                  defenderInfo_,
                   getParentForChildren(),
                   isClean());
-          defender_ = null;
+          defenderInfo_ = null;
         }
-        return defenderBuilder_;
+        return defenderInfoBuilder_;
       }
       
       // optional .com.lvl6.proto.QueueUpResponseProto.QueueUpStatus status = 3;
@@ -1326,27 +1236,6 @@ public final class EventPvpProto {
       public Builder clearStatus() {
         bitField0_ = (bitField0_ & ~0x00000004);
         status_ = com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus.SUCCESS;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 possibleCoinReward = 4;
-      private int possibleCoinReward_ ;
-      public boolean hasPossibleCoinReward() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      public int getPossibleCoinReward() {
-        return possibleCoinReward_;
-      }
-      public Builder setPossibleCoinReward(int value) {
-        bitField0_ |= 0x00000008;
-        possibleCoinReward_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearPossibleCoinReward() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        possibleCoinReward_ = 0;
         onChanged();
         return this;
       }
@@ -1381,19 +1270,18 @@ public final class EventPvpProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016EventPvp.proto\022\016com.lvl6.proto\032\nUser.p" +
-      "roto\"r\n\023QueueUpRequestProto\0222\n\010attacker\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "\023\n\013seenUserIds\030\002 \003(\005\022\022\n\nclientTime\030\003 \001(\003" +
-      "\"\303\002\n\024QueueUpResponseProto\0222\n\010attacker\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\0222\n" +
-      "\010defender\030\002 \001(\0132 .com.lvl6.proto.Minimum" +
-      "UserProto\022B\n\006status\030\003 \001(\01622.com.lvl6.pro" +
-      "to.QueueUpResponseProto.QueueUpStatus\022\032\n" +
-      "\022possibleCoinReward\030\004 \001(\005\"c\n\rQueueUpStat",
-      "us\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002\022\032\n\026FAIL_" +
-      "NOT_ENOUGH_SILVER\020\003\022\031\n\025FAIL_CANT_FIND_AN" +
-      "YONE\020\004B\017B\rEventPvpProto"
+      "\n\016EventPvp.proto\022\016com.lvl6.proto\032\014Battle" +
+      ".proto\032\nUser.proto\"r\n\023QueueUpRequestProt" +
+      "o\0222\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022\023\n\013attackerElo\030\002 \001(\005\022\022\n\nca" +
+      "shChange\030\004 \001(\021\"\206\002\n\024QueueUpResponseProto\022" +
+      "2\n\010attacker\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022.\n\014defenderInfo\030\002 \001(\0132\030.com." +
+      "lvl6.proto.PvpProto\022B\n\006status\030\003 \001(\01622.co" +
+      "m.lvl6.proto.QueueUpResponseProto.QueueU" +
+      "pStatus\"F\n\rQueueUpStatus\022\013\n\007SUCCESS\020\001\022\030\n",
+      "\024FAIL_NOT_ENOUGH_CASH\020\002\022\016\n\nFAIL_OTHER\020\003B" +
+      "\017B\rEventPvpProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1405,7 +1293,7 @@ public final class EventPvpProto {
           internal_static_com_lvl6_proto_QueueUpRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QueueUpRequestProto_descriptor,
-              new java.lang.String[] { "Attacker", "SeenUserIds", "ClientTime", },
+              new java.lang.String[] { "Attacker", "AttackerElo", "CashChange", },
               com.lvl6.proto.EventPvpProto.QueueUpRequestProto.class,
               com.lvl6.proto.EventPvpProto.QueueUpRequestProto.Builder.class);
           internal_static_com_lvl6_proto_QueueUpResponseProto_descriptor =
@@ -1413,7 +1301,7 @@ public final class EventPvpProto {
           internal_static_com_lvl6_proto_QueueUpResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_QueueUpResponseProto_descriptor,
-              new java.lang.String[] { "Attacker", "Defender", "Status", "PossibleCoinReward", },
+              new java.lang.String[] { "Attacker", "DefenderInfo", "Status", },
               com.lvl6.proto.EventPvpProto.QueueUpResponseProto.class,
               com.lvl6.proto.EventPvpProto.QueueUpResponseProto.Builder.class);
           return null;
@@ -1422,6 +1310,7 @@ public final class EventPvpProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.BattleProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
   }
