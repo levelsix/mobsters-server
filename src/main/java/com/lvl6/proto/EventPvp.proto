@@ -27,12 +27,17 @@ message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
 	optional int32 attackerElo = 2;
 
+	//if user needs, say, five more cash, then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 3;
+	
 	//copy pasted from somewhere else, trying to be consistent, don't forsee being positive
 	//positive means refund, negative means charge user
-	optional sint32 cashChange = 4;	
+	optional sint32 cashChange = 4;
 	
 	//these users should not be considered 
 	repeated int32 seenUserIds = 5;
+	optional int64 clientTime = 6;
 
 }
 

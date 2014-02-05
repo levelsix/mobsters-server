@@ -3,8 +3,11 @@ package com.lvl6.server.controller;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +22,12 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.EventMonsterProto.SubmitMonsterEnhancementResponseProto.SubmitMonsterEnhancementStatus;
 import com.lvl6.proto.EventPvpProto.QueueUpRequestProto;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.Builder;
 import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus;
+import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
@@ -72,7 +77,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 		MinimumUserProto attackerProto = reqProto.getAttacker();
 		int attackerId = attackerProto.getUserId();
-		//client keeps adding to this list, prevents already seen users coming up in queue
+		int attackerElo = reqProto.getAttackerElo();
+		//positive means refund, negative means charge user; don't forsee being positive
+		int cashChange = reqProto.getCashChange();
+		List<Integer> seenUserIds = reqProto.getSeenUserIdsList();
+		Set<Integer> uniqSeenUserIds = new HashSet<Integer>(seenUserIds);
+		Date clientDate = new Date(reqProto.getClientTime());
 		
 		//set some values to send to the client
 		QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto.newBuilder();
@@ -84,12 +94,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			
 			//prevent another db call to fetch the defender/victim for the client to attack
 			List<User> queuedOpponentList = new ArrayList<User>();
-			//prevent another cost calculation
-			List<Integer> costList = new ArrayList<Integer>();
+
 			//check if user can search for a player to attack
-//			boolean legitQueueUp = checkLegitQueueUp(resBuilder, attacker, seenUserIds,
-//					clientDate, queuedOpponentList, costList);
-//
+			boolean legitQueueUp = checkLegitQueueUp(resBuilder, attacker, cashChange, clientDate);
+
 //			boolean success = false;
 //			if (legitQueueUp) {
 //				int cost = costList.get(0);
@@ -139,13 +147,6 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		} 
 	}
 
-
-	private int calculateQueueCost(User attacker, int elo) {
-		//TODO: make formula for queue search cost factoring in user lvl and elo
-		return 1000;
-	}
-
-
 	private User queuedOpponent(User attacker, int elo, List<Integer> seenUserIds, Date clientDate) {
 		List<User> qList = getUserRetrieveUtils().retrieveCompleteQueueList(
 				attacker, elo, seenUserIds, clientDate);
@@ -161,9 +162,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	}
 
 
-	private boolean checkLegitQueueUp(Builder resBuilder, User attacker, 
-			List<Integer> seenUserIds, Date clientDate, List<User> queuedOpponentList,
-			List<Integer> costList) {
+	private boolean checkLegitQueueUp(Builder resBuilder, User attacker, int cashChange,
+			Date clientDate) {
 		if (attacker == null) {
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			log.error("problem with QueueUp- attacker is null. attacker is " + attacker);
@@ -171,21 +171,37 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 		
 		//see if user has enough money to find a person to fight
-		int elo = attacker.getElo();
-		int cost = calculateQueueCost(attacker, elo);
-		if (attacker.getCash() < cost) {
-			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_CASH);
-			log.error("problem with QueueUp- attacker doesn't have enough silver to search queue");
-			return false;
-		}
+//		if (!hasEnoughOil(resBuilder, attacker, gemsSpent, cashChange)) {
+//			return false;
+//		}
 
-		User queuedOpponent = queuedOpponent(attacker, elo, seenUserIds, clientDate);
-
-		queuedOpponentList.add(queuedOpponent);
-		costList.add(cost);
+		
+//		User queuedOpponent = queuedOpponent(attacker, elo, seenUserIds, clientDate);
+//
+//		queuedOpponentList.add(queuedOpponent);
 		resBuilder.setStatus(QueueUpStatus.SUCCESS);
 		return true;
 	}
+	
+	private boolean hasEnoughCash(Builder resBuilder, User u, int cashChange,
+			int gemsSpent, Map<Long, UserEnhancementItemProto> deleteMap,
+			Map<Long, UserEnhancementItemProto> updateMap,
+			Map<Long, UserEnhancementItemProto> newMap) {
+		int userOil = u.getOil(); 
+		//positive 'cashChange' means refund, negative means charge user
+		int cost = -1 * cashChange;
+		
+		//if user not spending gems and is just spending cash, check if he has enough
+		if (0 == gemsSpent && userOil < cost) {
+			log.error("user error: user does not have enough oil. userOil=" + userOil +
+					"\t cost=" + cost + "\t deleteMap=" + deleteMap + "\t newMap=" +
+					newMap + "\t updateMap=" + updateMap + "\t user=" + u);
+			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_CASH);
+			return false;
+		}
+		return true;
+	}
+	
 
 	// change user silver value and remove his shield if he has one, since he is
 	// going to attack some one
