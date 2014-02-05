@@ -17,6 +17,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndDungeonRequestEvent;
 import com.lvl6.events.response.EndDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.ItemForUser;
 import com.lvl6.info.TaskForUserOngoing;
 import com.lvl6.info.TaskStageForUser;
 import com.lvl6.info.TaskStageMonster;
@@ -31,6 +32,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
+import com.lvl6.retrieveutils.ItemForUserRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -38,6 +40,7 @@ import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class EndDungeonController extends EventController {
 
@@ -111,12 +114,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	
       	
       	if (userWon) {
-      		log.info("user won dungeon, awarding the monsters");
+      		log.info("user won dungeon, awarding the monsters and items");
       		//update user's monsters
       		String mfusop = ControllerConstants.MFUSOP__END_DUNGEON + taskForUserId;
       		List<FullUserMonsterProto> newOrUpdated = MonsterStuffUtils.
       				updateUserMonsters(userId, monsterIdToNumPieces, mfusop, currentDate);
       		setResponseBuilder(resBuilder, newOrUpdated);
+      		
+//      		//MAYBE NEED TO SEND THESE TO THE CLIENT?
+//      		Map<Integer, ItemForUser> itemIdsToItems = updateUserItems(tsfuList, userId);
+      		
       	}
       	
       }
@@ -253,6 +260,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> cashGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
+  	List<Integer> itemIdDropped = new ArrayList<Integer>();
   	
   	for (int i = 0; i < tsfuList.size(); i++) {
   		TaskStageForUser tsfu = tsfuList.get(i);
@@ -267,6 +275,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		cashGained.add(tsfu.getCashGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
+  		itemIdDropped.add(tsfu.getItemIdDropped());
   		
   		if (!dropped) {
   			//not going to keep track of non dropped monster pieces
@@ -274,6 +283,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		}
   		
   		//since monster piece dropped, update our current stats on monster pieces
+  		//this was done under the assumption that one task stage could have
+  		//more than one task stage monster (otheriwse only the else case would execute)
   		if (taskStageMonsterIdToQuantity.containsKey(taskStageMonsterId)) {
   			//saw this task stage monster id before, increment quantity
   			int quantity = 1 + taskStageMonsterIdToQuantity.get(taskStageMonsterId);
@@ -287,7 +298,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   	int num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, taskStageMonsterIdList, monsterTypes, expGained,
-  			cashGained, monsterPieceDropped);
+  			cashGained, monsterPieceDropped, itemIdDropped);
   	log.info("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + tsfuList);
   	
@@ -327,6 +338,76 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  if (!protos.isEmpty()) {
 	  	resBuilder.addAllUpdatedOrNew(protos);
 	  }
+  }
+  
+  private Map<Integer, ItemForUser> updateUserItems(List<TaskStageForUser> tsfuList,
+  		int userId) {
+  	Map<Integer, Integer> itemIdsToQuantities = getItemsDropped(tsfuList);
+		
+		//retrieve these specific items for the user, so as to update them 
+  	Collection<Integer> itemIds = itemIdsToQuantities.keySet();
+  	
+  	Map<Integer, ItemForUser> itemIdToUserItem = ItemForUserRetrieveUtils
+  			.getSpecificOrAllUserItems(userId, itemIds);
+  	log.info("items user won: " + itemIdsToQuantities);
+  	log.info("existing items before modification: " + itemIdToUserItem);
+  	//update how many items the user has now
+  	
+  	for (Integer itemId : itemIds) {
+  		//get cur amount of items
+
+  		//check base case
+  		if (!itemIdToUserItem.containsKey(itemId)) {
+  			//first time user is getting this item
+  			ItemForUser ifu = new ItemForUser(userId, itemId, 0);
+  			itemIdToUserItem.put(itemId, ifu);
+  		}
+  		
+  		ItemForUser ifu = itemIdToUserItem.get(itemId);
+  		int curAmount = ifu.getQuantity();
+  		
+  		//update it
+  		int delta = itemIdsToQuantities.get(itemId);
+  		curAmount += delta;
+  		ifu.setQuantity(curAmount);
+  	}
+  	
+  	
+  	int numUpdated = UpdateUtils.get().updateUserItems(userId, itemIdToUserItem);
+  	log.info("existing items after modification: " + itemIdToUserItem + "\t numUpdated=" +
+  			numUpdated);
+  	
+  	
+  	return itemIdToUserItem;
+  }
+  
+  
+  //go through list of task stage for user, aggregate all the item ids with non zero
+  //quantities
+  private Map<Integer, Integer> getItemsDropped(List<TaskStageForUser> tsfuList) {
+  	Map<Integer, Integer> itemIdsToQuantities = new HashMap<Integer, Integer>();
+  	
+  	for (TaskStageForUser tsfu : tsfuList) {
+  		//if item dropped, add it in with the others
+  		int itemIdDropped = tsfu.getItemIdDropped();
+  		
+  		if (itemIdDropped <= 0) {
+  			//item didn't drop
+  			continue;
+  		}
+  		
+  		int quantity = 0;
+  		
+  		//if item dropped before, get how much dropped
+  		if (itemIdsToQuantities.containsKey(itemIdDropped)) {
+  			quantity = itemIdsToQuantities.get(itemIdDropped);
+  		}
+  		//update
+  		quantity++;
+  		itemIdsToQuantities.put(itemIdDropped, quantity);
+  	}
+  	
+  	return itemIdsToQuantities;
   }
   
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,

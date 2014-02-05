@@ -92,6 +92,11 @@ public final class QuestProto {
     // optional bool isAchievement = 20;
     boolean hasIsAchievement();
     boolean getIsAchievement();
+    
+    // optional .com.lvl6.proto.CoordinateProto questGiverImgOffset = 21;
+    boolean hasQuestGiverImgOffset();
+    com.lvl6.proto.StructureProto.CoordinateProto getQuestGiverImgOffset();
+    com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getQuestGiverImgOffsetOrBuilder();
   }
   public static final class FullQuestProto extends
       com.google.protobuf.GeneratedMessage
@@ -548,6 +553,19 @@ public final class QuestProto {
       return isAchievement_;
     }
     
+    // optional .com.lvl6.proto.CoordinateProto questGiverImgOffset = 21;
+    public static final int QUESTGIVERIMGOFFSET_FIELD_NUMBER = 21;
+    private com.lvl6.proto.StructureProto.CoordinateProto questGiverImgOffset_;
+    public boolean hasQuestGiverImgOffset() {
+      return ((bitField0_ & 0x00080000) == 0x00080000);
+    }
+    public com.lvl6.proto.StructureProto.CoordinateProto getQuestGiverImgOffset() {
+      return questGiverImgOffset_;
+    }
+    public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getQuestGiverImgOffsetOrBuilder() {
+      return questGiverImgOffset_;
+    }
+    
     private void initFields() {
       questId_ = 0;
       cityId_ = 0;
@@ -569,6 +587,7 @@ public final class QuestProto {
       priority_ = 0;
       carrotId_ = "";
       isAchievement_ = false;
+      questGiverImgOffset_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -641,6 +660,9 @@ public final class QuestProto {
       }
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         output.writeBool(20, isAchievement_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        output.writeMessage(21, questGiverImgOffset_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -735,6 +757,10 @@ public final class QuestProto {
       if (((bitField0_ & 0x00040000) == 0x00040000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(20, isAchievement_);
+      }
+      if (((bitField0_ & 0x00080000) == 0x00080000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(21, questGiverImgOffset_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -853,6 +879,7 @@ public final class QuestProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAcceptDialogueFieldBuilder();
+          getQuestGiverImgOffsetFieldBuilder();
         }
       }
       private static Builder create() {
@@ -905,6 +932,12 @@ public final class QuestProto {
         bitField0_ = (bitField0_ & ~0x00040000);
         isAchievement_ = false;
         bitField0_ = (bitField0_ & ~0x00080000);
+        if (questGiverImgOffsetBuilder_ == null) {
+          questGiverImgOffset_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+        } else {
+          questGiverImgOffsetBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00100000);
         return this;
       }
       
@@ -1028,6 +1061,14 @@ public final class QuestProto {
           to_bitField0_ |= 0x00040000;
         }
         result.isAchievement_ = isAchievement_;
+        if (((from_bitField0_ & 0x00100000) == 0x00100000)) {
+          to_bitField0_ |= 0x00080000;
+        }
+        if (questGiverImgOffsetBuilder_ == null) {
+          result.questGiverImgOffset_ = questGiverImgOffset_;
+        } else {
+          result.questGiverImgOffset_ = questGiverImgOffsetBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1110,6 +1151,9 @@ public final class QuestProto {
         }
         if (other.hasIsAchievement()) {
           setIsAchievement(other.getIsAchievement());
+        }
+        if (other.hasQuestGiverImgOffset()) {
+          mergeQuestGiverImgOffset(other.getQuestGiverImgOffset());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1259,6 +1303,15 @@ public final class QuestProto {
             case 160: {
               bitField0_ |= 0x00080000;
               isAchievement_ = input.readBool();
+              break;
+            }
+            case 170: {
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
+              if (hasQuestGiverImgOffset()) {
+                subBuilder.mergeFrom(getQuestGiverImgOffset());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setQuestGiverImgOffset(subBuilder.buildPartial());
               break;
             }
           }
@@ -1871,6 +1924,96 @@ public final class QuestProto {
         isAchievement_ = false;
         onChanged();
         return this;
+      }
+      
+      // optional .com.lvl6.proto.CoordinateProto questGiverImgOffset = 21;
+      private com.lvl6.proto.StructureProto.CoordinateProto questGiverImgOffset_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> questGiverImgOffsetBuilder_;
+      public boolean hasQuestGiverImgOffset() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProto getQuestGiverImgOffset() {
+        if (questGiverImgOffsetBuilder_ == null) {
+          return questGiverImgOffset_;
+        } else {
+          return questGiverImgOffsetBuilder_.getMessage();
+        }
+      }
+      public Builder setQuestGiverImgOffset(com.lvl6.proto.StructureProto.CoordinateProto value) {
+        if (questGiverImgOffsetBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          questGiverImgOffset_ = value;
+          onChanged();
+        } else {
+          questGiverImgOffsetBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00100000;
+        return this;
+      }
+      public Builder setQuestGiverImgOffset(
+          com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
+        if (questGiverImgOffsetBuilder_ == null) {
+          questGiverImgOffset_ = builderForValue.build();
+          onChanged();
+        } else {
+          questGiverImgOffsetBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00100000;
+        return this;
+      }
+      public Builder mergeQuestGiverImgOffset(com.lvl6.proto.StructureProto.CoordinateProto value) {
+        if (questGiverImgOffsetBuilder_ == null) {
+          if (((bitField0_ & 0x00100000) == 0x00100000) &&
+              questGiverImgOffset_ != com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance()) {
+            questGiverImgOffset_ =
+              com.lvl6.proto.StructureProto.CoordinateProto.newBuilder(questGiverImgOffset_).mergeFrom(value).buildPartial();
+          } else {
+            questGiverImgOffset_ = value;
+          }
+          onChanged();
+        } else {
+          questGiverImgOffsetBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00100000;
+        return this;
+      }
+      public Builder clearQuestGiverImgOffset() {
+        if (questGiverImgOffsetBuilder_ == null) {
+          questGiverImgOffset_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+          onChanged();
+        } else {
+          questGiverImgOffsetBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00100000);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProto.Builder getQuestGiverImgOffsetBuilder() {
+        bitField0_ |= 0x00100000;
+        onChanged();
+        return getQuestGiverImgOffsetFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getQuestGiverImgOffsetOrBuilder() {
+        if (questGiverImgOffsetBuilder_ != null) {
+          return questGiverImgOffsetBuilder_.getMessageOrBuilder();
+        } else {
+          return questGiverImgOffset_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
+          getQuestGiverImgOffsetFieldBuilder() {
+        if (questGiverImgOffsetBuilder_ == null) {
+          questGiverImgOffsetBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
+                  questGiverImgOffset_,
+                  getParentForChildren(),
+                  isClean());
+          questGiverImgOffset_ = null;
+        }
+        return questGiverImgOffsetBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullQuestProto)
@@ -3555,37 +3698,39 @@ public final class QuestProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Quest.proto\022\016com.lvl6.proto\"\301\005\n\016FullQu" +
-      "estProto\022\017\n\007questId\030\001 \001(\005\022\016\n\006cityId\030\002 \001(" +
-      "\005\022\014\n\004name\030\003 \001(\t\022\023\n\013description\030\004 \001(\t\022\024\n\014" +
-      "doneResponse\030\005 \001(\t\0225\n\016acceptDialogue\030\006 \001" +
-      "(\0132\035.com.lvl6.proto.DialogueProto\022;\n\tque" +
-      "stType\030\007 \001(\0162(.com.lvl6.proto.FullQuestP" +
-      "roto.QuestType\022\026\n\016jobDescription\030\010 \001(\t\022\024" +
-      "\n\014staticDataId\030\t \001(\005\022\020\n\010quantity\030\n \001(\005\022\022" +
-      "\n\ncoinReward\030\013 \001(\005\022\025\n\rdiamondReward\030\014 \001(" +
-      "\005\022\021\n\texpReward\030\r \001(\005\022\027\n\017monsterIdReward\030",
-      "\016 \001(\005\022\031\n\021isCompleteMonster\030\017 \001(\010\022\035\n\025ques" +
-      "tsRequiredForThis\030\020 \003(\005\022\035\n\025questGiverIma" +
-      "geSuffix\030\021 \001(\t\022\020\n\010priority\030\022 \001(\005\022\020\n\010carr" +
-      "otId\030\023 \001(\t\022\025\n\risAchievement\030\024 \001(\010\"\265\001\n\tQu" +
-      "estType\022\020\n\014KILL_MONSTER\020\001\022\022\n\016DONATE_MONS" +
-      "TER\020\002\022\021\n\rCOMPLETE_TASK\020\003\022\033\n\027COLLECT_COIN" +
-      "S_FROM_HOME\020\004\022\020\n\014BUILD_STRUCT\020\005\022\022\n\016UPGRA" +
-      "DE_STRUCT\020\006\022\022\n\016MONSTER_APPEAR\020\007\022\030\n\024COLLE" +
-      "CT_SPECIAL_ITEM\020\010\"\351\002\n\rDialogueProto\022G\n\rs" +
-      "peechSegment\030\001 \003(\01320.com.lvl6.proto.Dial",
-      "ogueProto.SpeechSegmentProto\032\216\002\n\022SpeechS" +
-      "egmentProto\022Q\n\007speaker\030\001 \001(\0162@.com.lvl6." +
-      "proto.DialogueProto.SpeechSegmentProto.D" +
-      "ialogueSpeaker\022\023\n\013speakerText\030\002 \001(\t\"\217\001\n\017" +
-      "DialogueSpeaker\022\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTO" +
-      "RIAL_GIRL\020\002\022\020\n\014QUESTGIVER_1\020\003\022\020\n\014QUESTGI" +
-      "VER_2\020\004\022\020\n\014QUESTGIVER_3\020\005\022\020\n\014QUESTGIVER_" +
-      "4\020\006\022\020\n\014QUESTGIVER_5\020\007\"o\n\022FullUserQuestPr" +
-      "oto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\n" +
-      "isRedeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010",
-      "progress\030\005 \001(\005B\014B\nQuestProto"
+      "\n\013Quest.proto\022\016com.lvl6.proto\032\017Structure" +
+      ".proto\"\377\005\n\016FullQuestProto\022\017\n\007questId\030\001 \001" +
+      "(\005\022\016\n\006cityId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\023\n\013desc" +
+      "ription\030\004 \001(\t\022\024\n\014doneResponse\030\005 \001(\t\0225\n\016a" +
+      "cceptDialogue\030\006 \001(\0132\035.com.lvl6.proto.Dia" +
+      "logueProto\022;\n\tquestType\030\007 \001(\0162(.com.lvl6" +
+      ".proto.FullQuestProto.QuestType\022\026\n\016jobDe" +
+      "scription\030\010 \001(\t\022\024\n\014staticDataId\030\t \001(\005\022\020\n" +
+      "\010quantity\030\n \001(\005\022\022\n\ncoinReward\030\013 \001(\005\022\025\n\rd" +
+      "iamondReward\030\014 \001(\005\022\021\n\texpReward\030\r \001(\005\022\027\n",
+      "\017monsterIdReward\030\016 \001(\005\022\031\n\021isCompleteMons" +
+      "ter\030\017 \001(\010\022\035\n\025questsRequiredForThis\030\020 \003(\005" +
+      "\022\035\n\025questGiverImageSuffix\030\021 \001(\t\022\020\n\010prior" +
+      "ity\030\022 \001(\005\022\020\n\010carrotId\030\023 \001(\t\022\025\n\risAchieve" +
+      "ment\030\024 \001(\010\022<\n\023questGiverImgOffset\030\025 \001(\0132" +
+      "\037.com.lvl6.proto.CoordinateProto\"\265\001\n\tQue" +
+      "stType\022\020\n\014KILL_MONSTER\020\001\022\022\n\016DONATE_MONST" +
+      "ER\020\002\022\021\n\rCOMPLETE_TASK\020\003\022\033\n\027COLLECT_COINS" +
+      "_FROM_HOME\020\004\022\020\n\014BUILD_STRUCT\020\005\022\022\n\016UPGRAD" +
+      "E_STRUCT\020\006\022\022\n\016MONSTER_APPEAR\020\007\022\030\n\024COLLEC",
+      "T_SPECIAL_ITEM\020\010\"\351\002\n\rDialogueProto\022G\n\rsp" +
+      "eechSegment\030\001 \003(\01320.com.lvl6.proto.Dialo" +
+      "gueProto.SpeechSegmentProto\032\216\002\n\022SpeechSe" +
+      "gmentProto\022Q\n\007speaker\030\001 \001(\0162@.com.lvl6.p" +
+      "roto.DialogueProto.SpeechSegmentProto.Di" +
+      "alogueSpeaker\022\023\n\013speakerText\030\002 \001(\t\"\217\001\n\017D" +
+      "ialogueSpeaker\022\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTOR" +
+      "IAL_GIRL\020\002\022\020\n\014QUESTGIVER_1\020\003\022\020\n\014QUESTGIV" +
+      "ER_2\020\004\022\020\n\014QUESTGIVER_3\020\005\022\020\n\014QUESTGIVER_4" +
+      "\020\006\022\020\n\014QUESTGIVER_5\020\007\"o\n\022FullUserQuestPro",
+      "to\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\ni" +
+      "sRedeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010p" +
+      "rogress\030\005 \001(\005B\014B\nQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3597,7 +3742,7 @@ public final class QuestProto {
           internal_static_com_lvl6_proto_FullQuestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullQuestProto_descriptor,
-              new java.lang.String[] { "QuestId", "CityId", "Name", "Description", "DoneResponse", "AcceptDialogue", "QuestType", "JobDescription", "StaticDataId", "Quantity", "CoinReward", "DiamondReward", "ExpReward", "MonsterIdReward", "IsCompleteMonster", "QuestsRequiredForThis", "QuestGiverImageSuffix", "Priority", "CarrotId", "IsAchievement", },
+              new java.lang.String[] { "QuestId", "CityId", "Name", "Description", "DoneResponse", "AcceptDialogue", "QuestType", "JobDescription", "StaticDataId", "Quantity", "CoinReward", "DiamondReward", "ExpReward", "MonsterIdReward", "IsCompleteMonster", "QuestsRequiredForThis", "QuestGiverImageSuffix", "Priority", "CarrotId", "IsAchievement", "QuestGiverImgOffset", },
               com.lvl6.proto.QuestProto.FullQuestProto.class,
               com.lvl6.proto.QuestProto.FullQuestProto.Builder.class);
           internal_static_com_lvl6_proto_DialogueProto_descriptor =
@@ -3630,6 +3775,7 @@ public final class QuestProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.StructureProto.getDescriptor(),
         }, assigner);
   }
   

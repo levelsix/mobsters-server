@@ -90,6 +90,12 @@ message FullUserMonsterProto {
 	optional int32 teamSlotNum = 10;
 	//optional string sourceOfPieces = 11;	//not needed for client
 }
+
+message MinimumUserMonsterProto {
+	optional int32 monsterId = 1;
+	optional int32 monsterLvl = 2;
+}
+
 //------------------------------------------------------------------------------------------
 // used in HealMonsterRequestProto
 message UserMonsterHealingProto {
@@ -156,6 +162,7 @@ message UserCurrentMonsterTeamProto {
 }
 
 //------------------------------------------------------------------------------------------
+
 message UserMonsterEvolutionProto {
 	//the monster that is required to combine 2 monsters
 	optional int64 catalystUserMonsterId = 1;
@@ -165,3 +172,4 @@ message UserMonsterEvolutionProto {
 	
 	optional int64 startTime = 3;
 }
+

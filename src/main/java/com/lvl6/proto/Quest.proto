@@ -1,6 +1,8 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Structure.proto";
+
 package com.lvl6.proto;
 
 option java_outer_classname = "QuestProto";
@@ -27,6 +29,7 @@ message FullQuestProto {
      optional int32 priority = 18;
      optional string carrotId = 19;
      optional bool isAchievement = 20;
+     optional CoordinateProto questGiverImgOffset = 21;
      
      enum QuestType {
      	KILL_MONSTER = 1;

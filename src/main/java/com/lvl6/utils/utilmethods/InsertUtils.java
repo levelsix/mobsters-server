@@ -766,9 +766,29 @@ public class InsertUtils implements InsertUtil{
 	@Override
 	public int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
 			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
-			List<Integer> silversGained, List<Boolean> monsterPiecesDropped) {
-		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
+			List<Integer> silversGained, List<Boolean> monsterPiecesDropped,
+			Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
+		//even if a taskStageMonsterId has multiple items, just choose the first one
+		List<Integer> itemIds = new ArrayList<Integer>();
+		
+		for (Integer tsmId : taskStageMonsterIds) {
+			
+			if (!taskStageMonsterIdToItemId.containsKey(tsmId)) {
+				//0 means no item dropped
+				itemIds.add(0);
+				continue;
+			}
+			
+			//task stage monster has an item drop associated with it. Just get first one.
+			List<Integer> tsmItemIds = taskStageMonsterIdToItemId.get(tsmId);
+			if (null != tsmItemIds) {
+				int itemId = tsmItemIds.get(0);
+				itemIds.add(itemId);
+			}
+			
+		}
 
+		String tablename = DBConstants.TABLE_TASK_STAGE_FOR_USER;
     Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
 		int numRows = stageNums.size();
 
@@ -779,6 +799,8 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__EXP_GAINED, expsGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__SILVER_GAINED, silversGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED, itemIds);
+    
     
     
     int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
@@ -790,8 +812,8 @@ public class InsertUtils implements InsertUtil{
 	@Override
 	public int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
 			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> taskStageMonsterIds,
-			List<String> monsterTypes, List<Integer> expsGained, 
-			List<Integer> silversGained, List<Boolean> monsterPiecesDropped) {
+			List<String> monsterTypes, List<Integer> expsGained, List<Integer> silversGained,
+			List<Boolean> monsterPiecesDropped, List<Integer> itemIdDropped) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
 		int numRows = stageNums.size();
 		
@@ -804,6 +826,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expsGained);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__SILVER_GAINED, silversGained);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__ITEM_ID_DROPPED, itemIdDropped);
     
     int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
         insertParams, numRows);

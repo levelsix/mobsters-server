@@ -212,6 +212,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> cashGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
+  	List<Integer> itemIdDropped = new ArrayList<Integer>();
 
   	for (int i = 0; i < taskStages.size(); i++) {
   		TaskStageForUser tsfu = taskStages.get(i);
@@ -226,7 +227,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		cashGained.add(tsfu.getCashGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
-
+  		itemIdDropped.add(tsfu.getItemIdDropped());
+  		
   	}
   	
   	int num = DeleteUtils.get().deleteTaskStagesForUserWithIds(userTaskStageId);
@@ -235,7 +237,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   	num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, taskStageMonsterIdList, monsterTypes, expGained,
-  			cashGained, monsterPieceDropped);
+  			cashGained, monsterPieceDropped, itemIdDropped);
   	log.warn("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + taskStages);
   }
@@ -250,11 +252,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Map<Integer, List<Integer>> stageNumsToExps = new HashMap<Integer, List<Integer>>();
 	  Map<Integer, List<Boolean>> stageNumsToPuzzlePiecesDropped = new HashMap<Integer, List<Boolean>>();
 	  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters = new HashMap<Integer, List<TaskStageMonster>>();
+	  Map<Integer, Map<Integer, List<Integer>>> stageNumsToTaskStageMonsterIdToItemId = 
+	  		new HashMap<Integer, Map<Integer, List<Integer>>>();
 	  
 	  //calculate the SINGLE monster the user fights in each stage
 	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(questIds,
-			  tsMap, stageNumsToSilvers, stageNumsToExps,
-			  stageNumsToPuzzlePiecesDropped, stageNumsToTaskStageMonsters);
+			  tsMap, stageNumsToSilvers, stageNumsToExps, stageNumsToPuzzlePiecesDropped,
+			  stageNumsToTaskStageMonsters, stageNumsToTaskStageMonsterIdToItemId);
 	  
 	  //calculate the exp that the user could gain for this task
 	  int expGained = MiscMethods.sumListsInMap(stageNumsToExps);
@@ -275,7 +279,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
 	  //record into user_task stage table
 	  recordStages(userTaskId, stageNumsToSilvers, stageNumsToExps,
-	  		stageNumsToPuzzlePiecesDropped, stageNumsToTaskStageMonsters);
+	  		stageNumsToPuzzlePiecesDropped, stageNumsToTaskStageMonsters,
+	  		stageNumsToTaskStageMonsterIdToItemId);
 	  
 	  //send stuff back up to caller
 	  utIdList.add(userTaskId);
@@ -317,7 +322,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		Map<Integer, TaskStage> tsMap, Map<Integer, List<Integer>> stageNumsToSilvers,
   		Map<Integer, List<Integer>> stageNumsToExps,
 		  Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
-		  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters) {
+		  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
+		  Map<Integer, Map<Integer, List<Integer>>> stageNumsToTaskStageMonsterIdToItemId) {
 	  Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
 	  Random rand = new Random();
 	  
@@ -362,6 +368,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  stageNumsToExps.put(stageNum, individualExps);
 		  stageNumsToPuzzlePieceDropped.put(stageNum, puzzlePiecesDropped);
 		  stageNumsToTaskStageMonsters.put(stageNum, spawnedTaskStageMonsters);
+		  stageNumsToTaskStageMonsterIdToItemId.put(stageNum, taskStageMonsterIdToItemId);
 	  }
 	  
 	  return stageNumsToProtos;
@@ -517,7 +524,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private void recordStages(long userTaskId, Map<Integer, List<Integer>> stageNumsToSilvers,
   		Map<Integer, List<Integer>> stageNumsToExps,
   		Map<Integer, List<Boolean>> stageNumsToPuzzlePiecesDropped,
-  		Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters) {
+  		Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
+  		Map<Integer, Map<Integer, List<Integer>>> stageNumsToTaskStageMonsterIdToItemId) {
+  	
   	Set<Integer> stageNums = stageNumsToExps.keySet();
 	  List<Integer> stageNumList = new ArrayList<Integer>(stageNums);
 	  Collections.sort(stageNumList);
@@ -537,6 +546,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	List<Integer> expsGained = stageNumsToExps.get(stageNum);
 	  	List<Integer> cashGained = stageNumsToSilvers.get(stageNum);
 	  	List<Boolean> monsterPiecesDropped = stageNumsToPuzzlePiecesDropped.get(stageNum);
+	  	Map<Integer, List<Integer>> taskStageMonsterIdToItemId = 
+	  			stageNumsToTaskStageMonsterIdToItemId.get(stageNum);
 	  	
 	  	int numStageRows = taskStageMonsters.size();
 	  	List<Long> userTaskIds = Collections.nCopies(numStageRows, userTaskId);
@@ -551,7 +562,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	
 	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds,
 	  			repeatedStageNum, taskStageMonsterIds, monsterTypes, expsGained,
-	  			cashGained, monsterPiecesDropped);
+	  			cashGained, monsterPiecesDropped, taskStageMonsterIdToItemId);
 	  	log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
 	  }
   }

@@ -675,11 +675,884 @@ public final class BattleProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserProtoWithBattleHistory)
   }
   
+  public interface PvpProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;
+    boolean hasDefender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getDefender();
+    com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getDefenderOrBuilder();
+    
+    // optional int32 curElo = 2;
+    boolean hasCurElo();
+    int getCurElo();
+    
+    // repeated .com.lvl6.proto.MinimumUserMonsterProto defenderMonsters = 3;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> 
+        getDefenderMonstersList();
+    com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto getDefenderMonsters(int index);
+    int getDefenderMonstersCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder> 
+        getDefenderMonstersOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder getDefenderMonstersOrBuilder(
+        int index);
+    
+    // optional int32 prospectiveCashWinnings = 4;
+    boolean hasProspectiveCashWinnings();
+    int getProspectiveCashWinnings();
+    
+    // optional int32 prospectiveOilWinnings = 5;
+    boolean hasProspectiveOilWinnings();
+    int getProspectiveOilWinnings();
+  }
+  public static final class PvpProto extends
+      com.google.protobuf.GeneratedMessage
+      implements PvpProtoOrBuilder {
+    // Use PvpProto.newBuilder() to construct.
+    private PvpProto(Builder builder) {
+      super(builder);
+    }
+    private PvpProto(boolean noInit) {}
+    
+    private static final PvpProto defaultInstance;
+    public static PvpProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public PvpProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;
+    public static final int DEFENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel defender_;
+    public boolean hasDefender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getDefender() {
+      return defender_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getDefenderOrBuilder() {
+      return defender_;
+    }
+    
+    // optional int32 curElo = 2;
+    public static final int CURELO_FIELD_NUMBER = 2;
+    private int curElo_;
+    public boolean hasCurElo() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getCurElo() {
+      return curElo_;
+    }
+    
+    // repeated .com.lvl6.proto.MinimumUserMonsterProto defenderMonsters = 3;
+    public static final int DEFENDERMONSTERS_FIELD_NUMBER = 3;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> defenderMonsters_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> getDefenderMonstersList() {
+      return defenderMonsters_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder> 
+        getDefenderMonstersOrBuilderList() {
+      return defenderMonsters_;
+    }
+    public int getDefenderMonstersCount() {
+      return defenderMonsters_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto getDefenderMonsters(int index) {
+      return defenderMonsters_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder getDefenderMonstersOrBuilder(
+        int index) {
+      return defenderMonsters_.get(index);
+    }
+    
+    // optional int32 prospectiveCashWinnings = 4;
+    public static final int PROSPECTIVECASHWINNINGS_FIELD_NUMBER = 4;
+    private int prospectiveCashWinnings_;
+    public boolean hasProspectiveCashWinnings() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getProspectiveCashWinnings() {
+      return prospectiveCashWinnings_;
+    }
+    
+    // optional int32 prospectiveOilWinnings = 5;
+    public static final int PROSPECTIVEOILWINNINGS_FIELD_NUMBER = 5;
+    private int prospectiveOilWinnings_;
+    public boolean hasProspectiveOilWinnings() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getProspectiveOilWinnings() {
+      return prospectiveOilWinnings_;
+    }
+    
+    private void initFields() {
+      defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      curElo_ = 0;
+      defenderMonsters_ = java.util.Collections.emptyList();
+      prospectiveCashWinnings_ = 0;
+      prospectiveOilWinnings_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, defender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, curElo_);
+      }
+      for (int i = 0; i < defenderMonsters_.size(); i++) {
+        output.writeMessage(3, defenderMonsters_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, prospectiveCashWinnings_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, prospectiveOilWinnings_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, defender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, curElo_);
+      }
+      for (int i = 0; i < defenderMonsters_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, defenderMonsters_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, prospectiveCashWinnings_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, prospectiveOilWinnings_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.BattleProto.PvpProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.BattleProto.PvpProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.BattleProto.PvpProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.BattleProto.PvpProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.BattleProto.internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.BattleProto.PvpProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getDefenderFieldBuilder();
+          getDefenderMonstersFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (defenderBuilder_ == null) {
+          defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+        } else {
+          defenderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        curElo_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (defenderMonstersBuilder_ == null) {
+          defenderMonsters_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          defenderMonstersBuilder_.clear();
+        }
+        prospectiveCashWinnings_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        prospectiveOilWinnings_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.BattleProto.PvpProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.BattleProto.PvpProto getDefaultInstanceForType() {
+        return com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.BattleProto.PvpProto build() {
+        com.lvl6.proto.BattleProto.PvpProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.BattleProto.PvpProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.BattleProto.PvpProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.BattleProto.PvpProto buildPartial() {
+        com.lvl6.proto.BattleProto.PvpProto result = new com.lvl6.proto.BattleProto.PvpProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (defenderBuilder_ == null) {
+          result.defender_ = defender_;
+        } else {
+          result.defender_ = defenderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.curElo_ = curElo_;
+        if (defenderMonstersBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            defenderMonsters_ = java.util.Collections.unmodifiableList(defenderMonsters_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.defenderMonsters_ = defenderMonsters_;
+        } else {
+          result.defenderMonsters_ = defenderMonstersBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.prospectiveCashWinnings_ = prospectiveCashWinnings_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.prospectiveOilWinnings_ = prospectiveOilWinnings_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.BattleProto.PvpProto) {
+          return mergeFrom((com.lvl6.proto.BattleProto.PvpProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.BattleProto.PvpProto other) {
+        if (other == com.lvl6.proto.BattleProto.PvpProto.getDefaultInstance()) return this;
+        if (other.hasDefender()) {
+          mergeDefender(other.getDefender());
+        }
+        if (other.hasCurElo()) {
+          setCurElo(other.getCurElo());
+        }
+        if (defenderMonstersBuilder_ == null) {
+          if (!other.defenderMonsters_.isEmpty()) {
+            if (defenderMonsters_.isEmpty()) {
+              defenderMonsters_ = other.defenderMonsters_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureDefenderMonstersIsMutable();
+              defenderMonsters_.addAll(other.defenderMonsters_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.defenderMonsters_.isEmpty()) {
+            if (defenderMonstersBuilder_.isEmpty()) {
+              defenderMonstersBuilder_.dispose();
+              defenderMonstersBuilder_ = null;
+              defenderMonsters_ = other.defenderMonsters_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              defenderMonstersBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getDefenderMonstersFieldBuilder() : null;
+            } else {
+              defenderMonstersBuilder_.addAllMessages(other.defenderMonsters_);
+            }
+          }
+        }
+        if (other.hasProspectiveCashWinnings()) {
+          setProspectiveCashWinnings(other.getProspectiveCashWinnings());
+        }
+        if (other.hasProspectiveOilWinnings()) {
+          setProspectiveOilWinnings(other.getProspectiveOilWinnings());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder();
+              if (hasDefender()) {
+                subBuilder.mergeFrom(getDefender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setDefender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              curElo_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addDefenderMonsters(subBuilder.buildPartial());
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              prospectiveCashWinnings_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              prospectiveOilWinnings_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProtoWithLevel defender = 1;
+      private com.lvl6.proto.UserProto.MinimumUserProtoWithLevel defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> defenderBuilder_;
+      public boolean hasDefender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel getDefender() {
+        if (defenderBuilder_ == null) {
+          return defender_;
+        } else {
+          return defenderBuilder_.getMessage();
+        }
+      }
+      public Builder setDefender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+        if (defenderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          defender_ = value;
+          onChanged();
+        } else {
+          defenderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setDefender(
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder builderForValue) {
+        if (defenderBuilder_ == null) {
+          defender_ = builderForValue.build();
+          onChanged();
+        } else {
+          defenderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeDefender(com.lvl6.proto.UserProto.MinimumUserProtoWithLevel value) {
+        if (defenderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              defender_ != com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance()) {
+            defender_ =
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.newBuilder(defender_).mergeFrom(value).buildPartial();
+          } else {
+            defender_ = value;
+          }
+          onChanged();
+        } else {
+          defenderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearDefender() {
+        if (defenderBuilder_ == null) {
+          defender_ = com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.getDefaultInstance();
+          onChanged();
+        } else {
+          defenderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder getDefenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getDefenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder getDefenderOrBuilder() {
+        if (defenderBuilder_ != null) {
+          return defenderBuilder_.getMessageOrBuilder();
+        } else {
+          return defender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder> 
+          getDefenderFieldBuilder() {
+        if (defenderBuilder_ == null) {
+          defenderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProtoWithLevel, com.lvl6.proto.UserProto.MinimumUserProtoWithLevel.Builder, com.lvl6.proto.UserProto.MinimumUserProtoWithLevelOrBuilder>(
+                  defender_,
+                  getParentForChildren(),
+                  isClean());
+          defender_ = null;
+        }
+        return defenderBuilder_;
+      }
+      
+      // optional int32 curElo = 2;
+      private int curElo_ ;
+      public boolean hasCurElo() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getCurElo() {
+        return curElo_;
+      }
+      public Builder setCurElo(int value) {
+        bitField0_ |= 0x00000002;
+        curElo_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCurElo() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        curElo_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // repeated .com.lvl6.proto.MinimumUserMonsterProto defenderMonsters = 3;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> defenderMonsters_ =
+        java.util.Collections.emptyList();
+      private void ensureDefenderMonstersIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          defenderMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto>(defenderMonsters_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder> defenderMonstersBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> getDefenderMonstersList() {
+        if (defenderMonstersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(defenderMonsters_);
+        } else {
+          return defenderMonstersBuilder_.getMessageList();
+        }
+      }
+      public int getDefenderMonstersCount() {
+        if (defenderMonstersBuilder_ == null) {
+          return defenderMonsters_.size();
+        } else {
+          return defenderMonstersBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto getDefenderMonsters(int index) {
+        if (defenderMonstersBuilder_ == null) {
+          return defenderMonsters_.get(index);
+        } else {
+          return defenderMonstersBuilder_.getMessage(index);
+        }
+      }
+      public Builder setDefenderMonsters(
+          int index, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto value) {
+        if (defenderMonstersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDefenderMonstersIsMutable();
+          defenderMonsters_.set(index, value);
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setDefenderMonsters(
+          int index, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder builderForValue) {
+        if (defenderMonstersBuilder_ == null) {
+          ensureDefenderMonstersIsMutable();
+          defenderMonsters_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addDefenderMonsters(com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto value) {
+        if (defenderMonstersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDefenderMonstersIsMutable();
+          defenderMonsters_.add(value);
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addDefenderMonsters(
+          int index, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto value) {
+        if (defenderMonstersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDefenderMonstersIsMutable();
+          defenderMonsters_.add(index, value);
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addDefenderMonsters(
+          com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder builderForValue) {
+        if (defenderMonstersBuilder_ == null) {
+          ensureDefenderMonstersIsMutable();
+          defenderMonsters_.add(builderForValue.build());
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addDefenderMonsters(
+          int index, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder builderForValue) {
+        if (defenderMonstersBuilder_ == null) {
+          ensureDefenderMonstersIsMutable();
+          defenderMonsters_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllDefenderMonsters(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto> values) {
+        if (defenderMonstersBuilder_ == null) {
+          ensureDefenderMonstersIsMutable();
+          super.addAll(values, defenderMonsters_);
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearDefenderMonsters() {
+        if (defenderMonstersBuilder_ == null) {
+          defenderMonsters_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeDefenderMonsters(int index) {
+        if (defenderMonstersBuilder_ == null) {
+          ensureDefenderMonstersIsMutable();
+          defenderMonsters_.remove(index);
+          onChanged();
+        } else {
+          defenderMonstersBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder getDefenderMonstersBuilder(
+          int index) {
+        return getDefenderMonstersFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder getDefenderMonstersOrBuilder(
+          int index) {
+        if (defenderMonstersBuilder_ == null) {
+          return defenderMonsters_.get(index);  } else {
+          return defenderMonstersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder> 
+           getDefenderMonstersOrBuilderList() {
+        if (defenderMonstersBuilder_ != null) {
+          return defenderMonstersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(defenderMonsters_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder addDefenderMonstersBuilder() {
+        return getDefenderMonstersFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder addDefenderMonstersBuilder(
+          int index) {
+        return getDefenderMonstersFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder> 
+           getDefenderMonstersBuilderList() {
+        return getDefenderMonstersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder> 
+          getDefenderMonstersFieldBuilder() {
+        if (defenderMonstersBuilder_ == null) {
+          defenderMonstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder>(
+                  defenderMonsters_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          defenderMonsters_ = null;
+        }
+        return defenderMonstersBuilder_;
+      }
+      
+      // optional int32 prospectiveCashWinnings = 4;
+      private int prospectiveCashWinnings_ ;
+      public boolean hasProspectiveCashWinnings() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getProspectiveCashWinnings() {
+        return prospectiveCashWinnings_;
+      }
+      public Builder setProspectiveCashWinnings(int value) {
+        bitField0_ |= 0x00000008;
+        prospectiveCashWinnings_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearProspectiveCashWinnings() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        prospectiveCashWinnings_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 prospectiveOilWinnings = 5;
+      private int prospectiveOilWinnings_ ;
+      public boolean hasProspectiveOilWinnings() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getProspectiveOilWinnings() {
+        return prospectiveOilWinnings_;
+      }
+      public Builder setProspectiveOilWinnings(int value) {
+        bitField0_ |= 0x00000010;
+        prospectiveOilWinnings_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearProspectiveOilWinnings() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        prospectiveOilWinnings_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.PvpProto)
+    }
+    
+    static {
+      defaultInstance = new PvpProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.PvpProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MinimumUserProtoWithBattleHistory_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_MinimumUserProtoWithBattleHistory_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_PvpProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -689,14 +1562,20 @@ public final class BattleProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Battle.proto\022\016com.lvl6.proto\032\nUser.pro" +
-      "to\"\253\001\n!MinimumUserProtoWithBattleHistory" +
-      "\022H\n\025minUserProtoWithLevel\030\001 \001(\0132).com.lv" +
-      "l6.proto.MinimumUserProtoWithLevel\022\022\n\nba" +
-      "ttlesWon\030\002 \001(\005\022\023\n\013battlesLost\030\003 \001(\005\022\023\n\013b" +
-      "attlesFled\030\004 \001(\005*E\n\014BattleResult\022\020\n\014ATTA" +
-      "CKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACKER" +
-      "_FLEE\020\003B\rB\013BattleProto"
+      "\n\014Battle.proto\022\016com.lvl6.proto\032\022MonsterS" +
+      "tuff.proto\032\nUser.proto\"\253\001\n!MinimumUserPr" +
+      "otoWithBattleHistory\022H\n\025minUserProtoWith" +
+      "Level\030\001 \001(\0132).com.lvl6.proto.MinimumUser" +
+      "ProtoWithLevel\022\022\n\nbattlesWon\030\002 \001(\005\022\023\n\013ba" +
+      "ttlesLost\030\003 \001(\005\022\023\n\013battlesFled\030\004 \001(\005\"\333\001\n" +
+      "\010PvpProto\022;\n\010defender\030\001 \001(\0132).com.lvl6.p" +
+      "roto.MinimumUserProtoWithLevel\022\016\n\006curElo" +
+      "\030\002 \001(\005\022A\n\020defenderMonsters\030\003 \003(\0132\'.com.l" +
+      "vl6.proto.MinimumUserMonsterProto\022\037\n\027pro",
+      "spectiveCashWinnings\030\004 \001(\005\022\036\n\026prospectiv" +
+      "eOilWinnings\030\005 \001(\005*E\n\014BattleResult\022\020\n\014AT" +
+      "TACKER_WIN\020\001\022\020\n\014DEFENDER_WIN\020\002\022\021\n\rATTACK" +
+      "ER_FLEE\020\003B\rB\013BattleProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -711,12 +1590,21 @@ public final class BattleProto {
               new java.lang.String[] { "MinUserProtoWithLevel", "BattlesWon", "BattlesLost", "BattlesFled", },
               com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.class,
               com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory.Builder.class);
+          internal_static_com_lvl6_proto_PvpProto_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_lvl6_proto_PvpProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_PvpProto_descriptor,
+              new java.lang.String[] { "Defender", "CurElo", "DefenderMonsters", "ProspectiveCashWinnings", "ProspectiveOilWinnings", },
+              com.lvl6.proto.BattleProto.PvpProto.class,
+              com.lvl6.proto.BattleProto.PvpProto.Builder.class);
           return null;
         }
       };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.lvl6.proto.MonsterStuffProto.getDescriptor(),
           com.lvl6.proto.UserProto.getDescriptor(),
         }, assigner);
   }

@@ -3880,6 +3880,401 @@ public final class MonsterStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.FullUserMonsterProto)
   }
   
+  public interface MinimumUserMonsterProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 monsterId = 1;
+    boolean hasMonsterId();
+    int getMonsterId();
+    
+    // optional int32 monsterLvl = 2;
+    boolean hasMonsterLvl();
+    int getMonsterLvl();
+  }
+  public static final class MinimumUserMonsterProto extends
+      com.google.protobuf.GeneratedMessage
+      implements MinimumUserMonsterProtoOrBuilder {
+    // Use MinimumUserMonsterProto.newBuilder() to construct.
+    private MinimumUserMonsterProto(Builder builder) {
+      super(builder);
+    }
+    private MinimumUserMonsterProto(boolean noInit) {}
+    
+    private static final MinimumUserMonsterProto defaultInstance;
+    public static MinimumUserMonsterProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MinimumUserMonsterProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MinimumUserMonsterProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 monsterId = 1;
+    public static final int MONSTERID_FIELD_NUMBER = 1;
+    private int monsterId_;
+    public boolean hasMonsterId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getMonsterId() {
+      return monsterId_;
+    }
+    
+    // optional int32 monsterLvl = 2;
+    public static final int MONSTERLVL_FIELD_NUMBER = 2;
+    private int monsterLvl_;
+    public boolean hasMonsterLvl() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getMonsterLvl() {
+      return monsterLvl_;
+    }
+    
+    private void initFields() {
+      monsterId_ = 0;
+      monsterLvl_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, monsterId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, monsterLvl_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, monsterId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, monsterLvl_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MinimumUserMonsterProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        monsterId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        monsterLvl_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto getDefaultInstanceForType() {
+        return com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto build() {
+        com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto buildPartial() {
+        com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto result = new com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.monsterId_ = monsterId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.monsterLvl_ = monsterLvl_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto) {
+          return mergeFrom((com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto other) {
+        if (other == com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.getDefaultInstance()) return this;
+        if (other.hasMonsterId()) {
+          setMonsterId(other.getMonsterId());
+        }
+        if (other.hasMonsterLvl()) {
+          setMonsterLvl(other.getMonsterLvl());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              monsterId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              monsterLvl_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 monsterId = 1;
+      private int monsterId_ ;
+      public boolean hasMonsterId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getMonsterId() {
+        return monsterId_;
+      }
+      public Builder setMonsterId(int value) {
+        bitField0_ |= 0x00000001;
+        monsterId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        monsterId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 monsterLvl = 2;
+      private int monsterLvl_ ;
+      public boolean hasMonsterLvl() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getMonsterLvl() {
+        return monsterLvl_;
+      }
+      public Builder setMonsterLvl(int value) {
+        bitField0_ |= 0x00000002;
+        monsterLvl_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterLvl() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        monsterLvl_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MinimumUserMonsterProto)
+    }
+    
+    static {
+      defaultInstance = new MinimumUserMonsterProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumUserMonsterProto)
+  }
+  
   public interface UserMonsterHealingProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -8024,6 +8419,11 @@ public final class MonsterStuffProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_FullUserMonsterProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_MinimumUserMonsterProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -8104,29 +8504,31 @@ public final class MonsterStuffProto {
       "\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHeal",
       "th\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplet" +
       "e\030\010 \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013tea" +
-      "mSlotNum\030\n \001(\005\"\204\001\n\027UserMonsterHealingPro" +
-      "to\022\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(" +
-      "\003\022\030\n\020queuedTimeMillis\030\003 \001(\003\022\026\n\016healthPro" +
-      "gress\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"M\n\035UserMon" +
-      "sterCurrentHealthProto\022\025\n\ruserMonsterId\030" +
-      "\001 \001(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnh" +
-      "ancementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMon" +
-      "ster\030\002 \001(\0132(.com.lvl6.proto.UserEnhancem",
-      "entItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6" +
-      ".proto.UserEnhancementItemProto\"i\n\030UserE" +
-      "nhancementItemProto\022\025\n\ruserMonsterId\030\001 \001" +
-      "(\003\022\037\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\re" +
-      "nhancingCost\030\003 \001(\005\"f\n\032UserMonsterCurrent" +
-      "ExpProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expec" +
-      "tedExperience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001" +
-      "(\005\"H\n\033MinimumUserMonsterSellProto\022\025\n\ruse" +
-      "rMonsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033" +
-      "UserCurrentMonsterTeamProto\022\016\n\006userId\030\001 ",
-      "\001(\005\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl6.prot" +
-      "o.FullUserMonsterProto\"e\n\031UserMonsterEvo" +
-      "lutionProto\022\035\n\025catalystUserMonsterId\030\001 \001" +
-      "(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030" +
-      "\003 \001(\003B\023B\021MonsterStuffProto"
+      "mSlotNum\030\n \001(\005\"@\n\027MinimumUserMonsterProt" +
+      "o\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005" +
+      "\"\204\001\n\027UserMonsterHealingProto\022\016\n\006userId\030\001" +
+      " \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTim" +
+      "eMillis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n" +
+      "\010priority\030\006 \001(\005\"M\n\035UserMonsterCurrentHea" +
+      "lthProto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurre" +
+      "ntHealth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022",
+      "\016\n\006userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.c" +
+      "om.lvl6.proto.UserEnhancementItemProto\0229" +
+      "\n\007feeders\030\003 \003(\0132(.com.lvl6.proto.UserEnh" +
+      "ancementItemProto\"i\n\030UserEnhancementItem" +
+      "Proto\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expected" +
+      "StartTimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003" +
+      " \001(\005\"f\n\032UserMonsterCurrentExpProto\022\025\n\rus" +
+      "erMonsterId\030\001 \001(\003\022\032\n\022expectedExperience\030" +
+      "\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H\n\033MinimumU" +
+      "serMonsterSellProto\022\025\n\ruserMonsterId\030\001 \001",
+      "(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033UserCurrentMon" +
+      "sterTeamProto\022\016\n\006userId\030\001 \001(\005\0229\n\013current" +
+      "Team\030\002 \003(\0132$.com.lvl6.proto.FullUserMons" +
+      "terProto\"e\n\031UserMonsterEvolutionProto\022\035\n" +
+      "\025catalystUserMonsterId\030\001 \001(\003\022\026\n\016userMons" +
+      "terIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003B\023B\021Monst" +
+      "erStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8157,8 +8559,16 @@ public final class MonsterStuffProto {
               new java.lang.String[] { "UserMonsterId", "UserId", "MonsterId", "CurrentExp", "CurrentLvl", "CurrentHealth", "NumPieces", "IsComplete", "CombineStartTime", "TeamSlotNum", },
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder.class);
-          internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor =
+          internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor =
             getDescriptor().getMessageTypes().get(3);
+          internal_static_com_lvl6_proto_MinimumUserMonsterProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MinimumUserMonsterProto_descriptor,
+              new java.lang.String[] { "MonsterId", "MonsterLvl", },
+              com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.class,
+              com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto.Builder.class);
+          internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor =
+            getDescriptor().getMessageTypes().get(4);
           internal_static_com_lvl6_proto_UserMonsterHealingProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterHealingProto_descriptor,
@@ -8166,7 +8576,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor =
-            getDescriptor().getMessageTypes().get(4);
+            getDescriptor().getMessageTypes().get(5);
           internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterCurrentHealthProto_descriptor,
@@ -8174,7 +8584,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder.class);
           internal_static_com_lvl6_proto_UserEnhancementProto_descriptor =
-            getDescriptor().getMessageTypes().get(5);
+            getDescriptor().getMessageTypes().get(6);
           internal_static_com_lvl6_proto_UserEnhancementProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserEnhancementProto_descriptor,
@@ -8182,7 +8592,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.class,
               com.lvl6.proto.MonsterStuffProto.UserEnhancementProto.Builder.class);
           internal_static_com_lvl6_proto_UserEnhancementItemProto_descriptor =
-            getDescriptor().getMessageTypes().get(6);
+            getDescriptor().getMessageTypes().get(7);
           internal_static_com_lvl6_proto_UserEnhancementItemProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserEnhancementItemProto_descriptor,
@@ -8190,7 +8600,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.class,
               com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor =
-            getDescriptor().getMessageTypes().get(7);
+            getDescriptor().getMessageTypes().get(8);
           internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterCurrentExpProto_descriptor,
@@ -8198,7 +8608,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentExpProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_descriptor =
-            getDescriptor().getMessageTypes().get(8);
+            getDescriptor().getMessageTypes().get(9);
           internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumUserMonsterSellProto_descriptor,
@@ -8206,7 +8616,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto.class,
               com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterSellProto.Builder.class);
           internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_descriptor =
-            getDescriptor().getMessageTypes().get(9);
+            getDescriptor().getMessageTypes().get(10);
           internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserCurrentMonsterTeamProto_descriptor,
@@ -8214,7 +8624,7 @@ public final class MonsterStuffProto {
               com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.class,
               com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder.class);
           internal_static_com_lvl6_proto_UserMonsterEvolutionProto_descriptor =
-            getDescriptor().getMessageTypes().get(10);
+            getDescriptor().getMessageTypes().get(11);
           internal_static_com_lvl6_proto_UserMonsterEvolutionProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserMonsterEvolutionProto_descriptor,
