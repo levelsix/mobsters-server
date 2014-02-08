@@ -102,7 +102,7 @@ public class HazelcastPvpUtil implements InitializingBean {
     	sb.append(DBConstants.TABLE_USER);
     	sb.append(" WHERE ");
     	sb.append(DBConstants.USER__HAS_ACTIVE_SHIELD);
-    	sb.append(" =? AND");
+    	sb.append(" =? AND ");
     	sb.append(DBConstants.USER__SHIELD_END_TIME);
     	sb.append(" < ?;");
     	String query = sb.toString();
@@ -110,6 +110,9 @@ public class HazelcastPvpUtil implements InitializingBean {
     	List<Object> values = new ArrayList<Object>();
     	values.add(false);
     	values.add(now);
+    	
+    	log.info("query=" + query);
+    	log.info("values=" + values);
     	
     	Connection conn = null;
     	ResultSet rs = null;
