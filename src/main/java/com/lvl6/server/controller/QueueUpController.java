@@ -324,6 +324,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		Set<OfflinePvpUser> prospectiveDefenders = getHazelcastPvpUtil()
 				.retrieveOfflinePvpUsers(minElo, maxElo, clientDate); 
 		
+		log.info("users returned from hazelcast pvp util. users=" + prospectiveDefenders);
+		
 		//go through them and select the one that has not been seen yet
 		for (OfflinePvpUser pvpUser : prospectiveDefenders) {
 			int userId = Integer.valueOf(pvpUser.getUserId());
@@ -336,6 +338,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			}
 		}
 
+		log.info("the lucky people who get to be attacked! defenders=" + selectedDefenders);
 		return selectedDefenders;
 	}
 
