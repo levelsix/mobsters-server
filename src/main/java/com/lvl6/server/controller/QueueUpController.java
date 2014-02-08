@@ -301,6 +301,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			
 		}
 		
+		//this is to ensure that elos being searched for are not below 0
+		log.info("minElo before maxing with 0: " + minElo);
+		log.info("minElo before maxing with 0: " + minElo);
+		minElo = Math.max(0, minElo);
+		maxElo = Math.max(0, maxElo);
+		log.info("minElo after maxing with 0: " + minElo);
+		log.info("minElo after maxing with 0: " + minElo);
+		
 //		User defender = null;
 
 		//jedis, redis stuff
