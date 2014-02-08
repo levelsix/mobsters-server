@@ -377,6 +377,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			int defenderId = userIdList.get(index);
 			Map<Long, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(defenderId);
 			
+			if (null == mfuIdsToMonsters || mfuIdsToMonsters.isEmpty()) {
+				log.error("WTF!!!!!!!! user has no monsters!!!!! userId=" + defenderId +
+						"\t will move on to next guy.");
+				continue;
+			}
 			//try to select at most 3 monsters for this user
 			List<MonsterForUser> defenderMonsters = selectMonstersForUser(mfuIdsToMonsters);
 			
