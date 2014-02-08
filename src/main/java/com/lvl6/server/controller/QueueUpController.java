@@ -269,26 +269,33 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 		float randFloat = rand.nextFloat();
 		if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE) {
+			log.info("in first elo category");
 			minElo = firstEloBound;
 			maxElo = secondEloBound;
 			
 		} else if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE) {
+			log.info("in second elo category");
 			minElo = secondEloBound;
 			maxElo = thirdEloBound;
 			
 		} else if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_THREE_PAIRING_CHANCE) {
+			log.info("in third elo category");
 			minElo = thirdEloBound;
 			maxElo = attackerElo;
 			
 		} else if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_FOUR_PAIRING_CHANCE) {
+			log.info("in fourth elo category");
+			
 			minElo = attackerElo;
 			maxElo = fourthEloBound;
 			
 		} else if(randFloat < ControllerConstants.PVP__ELO_CATEGORY_FIVE_PAIRING_CHANCE) {
+			log.info("in fifth elo category");
 			minElo = fourthEloBound;
 			maxElo = fifthEloBound;
 			
 		} else {
+			log.info("in sixth elo category");
 			minElo = fifthEloBound;
 			maxElo = sixthEloBound;
 			
@@ -330,12 +337,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		for (OfflinePvpUser pvpUser : prospectiveDefenders) {
 			int userId = Integer.valueOf(pvpUser.getUserId());
 			
-			if (!seenUserIds.contains(userId)) {
-				//we have a winner!
-				User defender = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-				selectedDefenders.add(defender);
-				userIdList.add(userId);
+			if (seenUserIds.contains(userId)) {
+				continue;
 			}
+
+			//we have a winner!
+			User defender = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+			selectedDefenders.add(defender);
+			userIdList.add(userId);
 		}
 
 		log.info("the lucky people who get to be attacked! defenders=" + selectedDefenders);
