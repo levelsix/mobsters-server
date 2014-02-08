@@ -118,6 +118,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 					//TODO: generate the fake defender and monsters
 					
 				} else {
+					log.info("there are people to attack!");
+					log.info("queuedOpponentIdsList=" + queuedOpponentIdsList);
+					log.info("queuedOpponents:" + queuedOpponents);
 					//get the 3 monsters for each defender: ideally should be equipped, but 
 					//will randomly select if user doesn't have 3 equipped
 					Map<Integer, List<MonsterForUser>> userIdToUserMonsters = 
@@ -135,7 +138,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 							userIdToProspectiveOilReward);
 					
 					resBuilder.addAllDefenderInfoList(pvpProtoList);
+					log.info("pvpProtoList=" + pvpProtoList);
 				}
+				
 				resBuilder.setStatus(QueueUpStatus.SUCCESS);
 				success = true;
 			}
