@@ -57,6 +57,8 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     			.and(e.get(elo).lessThan(maxElo)).and(e.get(elo).greaterThan(minElo));
     	
     	Set<OfflinePvpUser> users = (Set<OfflinePvpUser>) userIdToOfflinePvpUser.values(predicate);
+    	log.info("users:" + users);
+    	
     	return users;
     }
     
