@@ -116,7 +116,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 				
 				if (null == queuedOpponents || queuedOpponents.isEmpty()) {
 					//TODO: generate the fake defender and monsters
-					
+					log.info("no valid users for attacker=" + attacker);
 				} else {
 					log.info("there are people to attack!");
 					log.info("queuedOpponentIdsList=" + queuedOpponentIdsList);
