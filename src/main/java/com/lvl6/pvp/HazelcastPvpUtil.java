@@ -54,7 +54,8 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     	String elo = PvpConstants.OFFLINE_PVP_USER__ELO;
     	EntryObject e = new PredicateBuilder().getEntryObject();
     	Predicate predicate = e.get(shieldEndTime).lessThan(shieldEndTimeBeforeNow)
-    			.and(e.get(elo).lessThan(maxElo)).and(e.get(elo).greaterThan(minElo));
+    			.and(e.get(elo).between(minElo, maxElo));
+//    			.and(e.get(elo).lessThan(maxElo)).and(e.get(elo).greaterThan(minElo));
     	
     	Set<OfflinePvpUser> users = (Set<OfflinePvpUser>) userIdToOfflinePvpUser.values(predicate);
     	log.info("users:" + users);
