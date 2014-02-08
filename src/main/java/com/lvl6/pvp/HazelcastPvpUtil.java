@@ -27,9 +27,13 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
 @Component
-public class HazelcastPvpUtil implements InitializingBean {
+public class HazelcastPvpUtil implements InitializingBean, Serializable {
+	
+	
 
-    private static final Logger log = LoggerFactory.getLogger(HazelcastPvpUtil.class);
+	private static final long serialVersionUID = 7033740347971426291L;
+
+		private static final Logger log = LoggerFactory.getLogger(HazelcastPvpUtil.class);
     
     public static final String OFFLINE_PVP_USER_MAP = "offlinePvpUserMap";
     
