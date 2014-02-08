@@ -1,6 +1,7 @@
 package com.lvl6.pvp;
 
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -196,9 +197,10 @@ public class HazelcastPvpUtil implements InitializingBean {
 
     
     
-    public class OfflinePvpUser {
+    public class OfflinePvpUser implements Serializable {
     	
-    	private String userId;
+			private static final long serialVersionUID = 3459023237592127885L;
+			private String userId;
     	private int elo;
     	private Date shieldEndTime;
     	
