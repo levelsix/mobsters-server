@@ -55,6 +55,7 @@ import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
+import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -74,6 +75,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificatio
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
@@ -459,6 +461,26 @@ public class CreateInfoProtoUtils {
     
     fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
     return fumpb.build();
+  }
+  
+  public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(
+  		Collection<MonsterForUser> userMonsters) {
+  	List<MinimumUserMonsterProto> returnList = new ArrayList<MinimumUserMonsterProto>();
+  	
+  	for (MonsterForUser mfu : userMonsters) {
+  		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
+  		returnList.add(mump);
+  	}
+  	
+  	return returnList;
+  }
+  
+  public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForUser mfu) {
+  	MinimumUserMonsterProto.Builder mump = MinimumUserMonsterProto.newBuilder();
+  	
+  	mump.setMonsterId(mfu.getMonsterId());
+  	mump.setMonsterLvl(mfu.getCurrentLvl());
+  	return mump.build();
   }
   
   public static UserMonsterHealingProto createUserMonsterHealingProtoFromObj(
@@ -1392,5 +1414,40 @@ public class CreateInfoProtoUtils {
   	
   	return upepb.build();
   }
+  
+  public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
+  		Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
+  		Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
+  	List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
+  	
+  	for (User u : queuedOpponents) {
+  		Integer userId = u.getId();
+  		List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
+  		int prospectiveCashWinnings = userIdToCashReward.get(userId);
+  		int prospectiveOilWinnings = userIdToOilReward.get(userId);
+  		
+  		PvpProto pp = createPvpProtoFrom(u, userMonsters, prospectiveCashWinnings, prospectiveOilWinnings);
+  		pvpProtoList.add(pp);
+  	}
+  	return pvpProtoList;
+  }
 
+  public static PvpProto createPvpProtoFrom(User u, Collection<MonsterForUser> userMonsters,
+  		int prospectiveCashWinnings, int prospectiveOilWinnings) {
+  	PvpProto.Builder ppb = PvpProto.newBuilder();
+  	MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevelFromUser(u);
+  	int curElo = u.getElo();
+  	Collection<MinimumUserMonsterProto> defenderMonsters = 
+  			createMinimumUserMonsterProtoList(userMonsters);
+  	
+  	ppb.setDefender(defender);
+  	ppb.setCurElo(curElo);
+  	ppb.addAllDefenderMonsters(defenderMonsters);
+  	ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
+  	ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+  	
+  	return ppb.build();
+  }
+  
+  
 }

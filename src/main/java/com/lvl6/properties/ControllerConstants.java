@@ -37,8 +37,24 @@ public class ControllerConstants {
 	//chats
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 	
-	//pvp
-	public static final int PVP__REQUIRED_MIN_LEVEL = 30;
+	//PVP
+	//user lvl means nothing, since it doesn't indicate much besides maybe how much you played
+	public static final int PVP__REQUIRED_MIN_LEVEL = 30; 
+	//all these pairing chances need to sum to one
+	public static final float PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE = 0.05F;
+	public static final float PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE = 0.15F;
+	public static final float PVP__ELO_CATEGORY_THREE_PAIRING_CHANCE = 0.20F;
+	public static final float PVP__ELO_CATEGORY_FOUR_PAIRING_CHANCE = 0.20F;
+	public static final float PVP__ELO_CATEGORY_FIVE_PAIRING_CHANCE = 0.25F;
+	public static final float PVP__ELO_CATEGORY_SIX_PAIRING_CHANCE = 0.15F;
+	public static final int PVP__ELO_DISTANCE_ONE = 100;
+  public static final int PVP__ELO_DISTANCE_TWO = 200;
+  public static final int PVP__ELO_DISTANCE_THREE = 300;
+  public static final int PVP__NUM_ENEMIES_LIMIT = 100;
+  public static final float PVP__PERCENT_CASH_LOST = 0.25F;
+  public static final float PVP__PERCENT_OIL_LOST = 0.25F;
+  
+  
 	
 	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
 	public static final String UCHRFC__CREATE_CLAN = "created clan";
@@ -73,8 +89,6 @@ public class ControllerConstants {
 	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
-	
-	
 	
 	
 	
