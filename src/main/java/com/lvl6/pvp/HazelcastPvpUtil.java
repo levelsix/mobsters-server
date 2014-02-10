@@ -51,8 +51,8 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 	  public static final String OFFLINE_PVP_USER_MAP = "offlinePvpUserMap";
 	  
 	  
-	  @Autowired
-	  protected ResourceLoader resourceLoader;
+//	  @Autowired
+//	  protected ResourceLoader resourceLoader;
     
     @Autowired
   	protected HazelcastInstance hazel;
@@ -91,24 +91,24 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     }
     
     protected void createRandomNames() {
-    	rand = new Random();
-    	Resource nameFile = getResourceLoader().getResource("classpath:namerulesElven.txt");
-    	
-    	try {
-    		NameGenerator nameGenerator = new NameGenerator(nameFile);
-    		
-    		if (null != nameGenerator) {
-    			log.info("creating random ELVEN NAMES");
-    			for (int i = 0; i < numRandomNames; i++) {
-    				createName(rand, nameGenerator);
-    			}
-    			
-    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
-    		}
-    		
-    	} catch (Exception e) {
-    		log.error("could not create fake user name", e);
-    	}
+//    	rand = new Random();
+//    	Resource nameFile = getResourceLoader().getResource("classpath:namerulesElven.txt");
+//    	
+//    	try {
+//    		NameGenerator nameGenerator = new NameGenerator(nameFile);
+//    		
+//    		if (null != nameGenerator) {
+//    			log.info("creating random ELVEN NAMES");
+//    			for (int i = 0; i < numRandomNames; i++) {
+//    				createName(rand, nameGenerator);
+//    			}
+//    			
+//    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
+//    		}
+//    		
+//    	} catch (Exception e) {
+//    		log.error("could not create fake user name", e);
+//    	}
     }
     
     protected void createName(Random rand, NameGenerator nameGenerator) {
@@ -260,13 +260,13 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     	this.hazel = hazel;
     }
 
-    public ResourceLoader getResourceLoader() {
-			return resourceLoader;
-		}
-
-		public void setResourceLoader(ResourceLoader resourceLoader) {
-			this.resourceLoader = resourceLoader;
-		}
+//    public ResourceLoader getResourceLoader() {
+//			return resourceLoader;
+//		}
+//
+//		public void setResourceLoader(ResourceLoader resourceLoader) {
+//			this.resourceLoader = resourceLoader;
+//		}
     
     
     public class OfflinePvpUser implements Serializable {
