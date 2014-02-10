@@ -8,7 +8,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TextFileResourceLoaderAware implements ResourceLoaderAware, Serializable {
+public class TextFileResourceLoaderAware implements ResourceLoaderAware {
 
 	private static final long serialVersionUID = 7320635945876211445L;
 	private ResourceLoader resourceLoader;
