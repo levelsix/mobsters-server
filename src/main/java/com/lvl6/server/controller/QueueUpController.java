@@ -33,7 +33,7 @@ import com.lvl6.proto.EventPvpProto.QueueUpResponseProto.QueueUpStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
-import com.lvl6.pvp.HazelcastPvpUtil.OfflinePvpUser;
+import com.lvl6.pvp.OfflinePvpUser;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
