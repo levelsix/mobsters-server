@@ -21,6 +21,7 @@ import org.joda.time.Days;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lvl6.events.response.GeneralNotificationResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
@@ -91,9 +92,11 @@ import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
@@ -126,6 +129,19 @@ public class MiscMethods {
   public static final String oil = "oil";
   public static final String boosterPackId = "boosterPackId";
 
+  @Autowired
+  protected static MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils;
+  
+  public static MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtils() {
+		return monsterForPvpRetrieveUtils;
+	}
+
+	public static void setMonsterForPvpRetrieveUtils(
+			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils) {
+		MiscMethods.monsterForPvpRetrieveUtils = monsterForPvpRetrieveUtils;
+	}
+
+  
 
 //  public static float calculateChanceOfSuccessForForge(Equipment equipment, int goalLevel) {
 //    return  (1-equipment.getChanceOfForgeFailureBase()) - 
@@ -161,7 +177,7 @@ public class MiscMethods {
     return null;
   }*/
 
-  public static Dialogue createDialogue(String dialogueBlob) {
+	public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
       StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
 
@@ -564,9 +580,13 @@ public class MiscMethods {
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
+    //TODO: FIGURE OUT BETTER WAY TO RELOAD NON STATIC CLASS DATA
+    getMonsterForPvpRetrieveUtils().reload();
+    
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
+    QuestMonsterItemRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
     StaticUserLevelInfoRetrieveUtils.reload();
