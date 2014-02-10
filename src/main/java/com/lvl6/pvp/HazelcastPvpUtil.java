@@ -17,9 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -88,7 +86,6 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     
     protected void createRandomNames() {
     	rand = new Random();
-    	
     	Resource nameFile = getTextFileResourceLoaderAware().getResource(FILE_OF_RANDOM_NAMES);
     	
     	try {
@@ -99,7 +96,6 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     		}
     		
     		NameGenerator nameGenerator = new NameGenerator(nameFile);
-    		
     		if (null != nameGenerator) {
     			log.info("creating random ELVEN NAMES");
     			for (int i = 0; i < numRandomNames; i++) {
@@ -321,26 +317,5 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 			
     }
     
-		@Component
-    public class TextFileResourceLoaderAware implements ResourceLoaderAware {
-
-    	private ResourceLoader resourceLoader;
-
-    	public TextFileResourceLoaderAware(ResourceLoader resourceLoader) {
-				super();
-				this.resourceLoader = resourceLoader;
-			}
-
-			@Override
-    	public void setResourceLoader(ResourceLoader resourceLoader) {
-    		// TODO Auto-generated method stub
-    		this.resourceLoader = resourceLoader;
-    	}
-
-    	public Resource getResource(String location) {
-    		return resourceLoader.getResource(location);
-    	}
-
-    }
 
 }
