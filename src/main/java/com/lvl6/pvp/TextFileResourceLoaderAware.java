@@ -10,6 +10,11 @@ public class TextFileResourceLoaderAware implements ResourceLoaderAware {
 
 	private ResourceLoader resourceLoader;
 
+	
+	public TextFileResourceLoaderAware() {
+		super();
+	}
+
 	public TextFileResourceLoaderAware(ResourceLoader resourceLoader) {
 		super();
 		this.resourceLoader = resourceLoader;
