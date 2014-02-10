@@ -35,8 +35,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
   
   public static final String MONSTER_FOR_PVP_MAP = "monsterForPvpMap";
   
-  public static final String MONSTER_FOR_PVP__MIN_ELO = "minElo";
-  public static final String MONSTER_FOR_PVP__MAX_ELO = "maxElo";
+  public static final String MONSTER_FOR_PVP__ELO = "elo";
   
   
   
@@ -73,6 +72,8 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
   }
 
   public void reload() {
+  	
+  	log.info("reloading MonsterForPvp data!!!!!!!");
     setStaticIdsToMonsterForPvps();
     
     //this will create the map if it doesn't exist
@@ -86,8 +87,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
   //this is to make queries faster
   protected void addMonsterForPvpIndexes() {
   	//the true is for indicating that there will be ranged queries on this property
-  	idToMonsterForPvp.addIndex(MONSTER_FOR_PVP__MAX_ELO, true);
-  	idToMonsterForPvp.addIndex(MONSTER_FOR_PVP__MIN_ELO, true);
+  	idToMonsterForPvp.addIndex(MONSTER_FOR_PVP__ELO, true);
   	
   }
   
