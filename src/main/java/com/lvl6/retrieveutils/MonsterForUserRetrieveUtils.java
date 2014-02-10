@@ -204,7 +204,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
   	String delimiter = ",";
   	
   	String query = "select * from " + TABLE_NAME + " where ";
-    List <Object> values = new ArrayList<Object>();
+    List<Object> values = new ArrayList<Object>();
 
     //creating a "column in (value1,value2,...,value)" condition, prefer this over
     //chained "or"s  e.g. (column=value1 or column=value2 or...column=value);
@@ -230,6 +230,49 @@ import com.lvl6.utils.utilmethods.StringUtils;
     	DBConnection.get().close(rs, null, conn);
     }
     return incompleteMonsters;
+  }
+  
+  public Map<Integer, Map<Long, MonsterForUser>> getCompleteMonstersForUser(
+  		List<Integer> userIds) {
+  	StringBuilder querySb = new StringBuilder();
+  	
+  	querySb.append("SELECT * FROM ");
+  	querySb.append(TABLE_NAME);
+  	querySb.append(" WHERE ");
+  	querySb.append(DBConstants.MONSTER_FOR_USER__USER_ID);
+  	querySb.append(" IN (");
+  	
+  	int amount = userIds.size();
+  	List<String> questions = Collections.nCopies(amount, "?");
+  	String questionStr = StringUtils.csvList(questions);
+  	querySb.append(questionStr);
+  	querySb.append(") AND ");
+  	
+  	querySb.append(DBConstants.MONSTER_FOR_USER__IS_COMPLETE);
+  	querySb.append(" =?;");
+  	
+  	List<Object> values = new ArrayList<Object>();
+  	values.addAll(userIds);
+  	values.add(true);
+
+    String query = querySb.toString();
+    log.info("query=" + query + "\t values=" + values);
+
+    Connection conn = null;
+    ResultSet rs = null;
+    Map<Integer, Map<Long, MonsterForUser>> userIdsToMfuIdsToMonsters = null;
+    
+    try {
+    	conn = DBConnection.get().getConnection();
+    	rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+    	userIdsToMfuIdsToMonsters = convertRSToUserIdsToMfuIdsToMonsters(rs);
+    } catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+    return userIdsToMfuIdsToMonsters;
+  	
   }
 
   private Map<Integer, List<MonsterForUser>> convertRSToMonsterIdsToMonsterList(
@@ -362,6 +405,38 @@ import com.lvl6.utils.utilmethods.StringUtils;
       }
     }
     return null;
+  }
+  
+  private Map<Integer, Map<Long, MonsterForUser>> convertRSToUserIdsToMfuIdsToMonsters(ResultSet rs) {
+  	Map<Integer, Map<Long, MonsterForUser>> userIdsToMfuIdsToMonsters =
+  			new HashMap<Integer, Map<Long, MonsterForUser>>();
+  	if (rs != null) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			
+  			while(rs.next()) {
+  				MonsterForUser userMonster = convertRSRowToMonster(rs);
+  				if (userMonster == null) {
+  					continue;
+  				}
+  				
+  				int userId = userMonster.getUserId();
+  				//base case where have not seen user before
+  				if (!userIdsToMfuIdsToMonsters.containsKey(userId)) {
+  					Map<Long, MonsterForUser> mfuIdsToMonsters = new HashMap<Long, MonsterForUser>();
+  					userIdsToMfuIdsToMonsters.put(userId, mfuIdsToMonsters);
+  				}
+  				
+  				Map<Long, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(userId);
+  				mfuIdsToMonsters.put(userMonster.getId(), userMonster);
+  			}
+  			
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+  		}
+  	}
+  	return userIdsToMfuIdsToMonsters;
   }
 
   /*

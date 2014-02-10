@@ -29,7 +29,7 @@ message FullQuestProto {
      optional int32 priority = 18;
      optional string carrotId = 19;
      optional bool isAchievement = 20;
-     optional CoordinateProto questGiverImgOffset = 21;
+     optional CoordinateProto questGiverImgOffset = 21; //not used at the moment
      
      enum QuestType {
      	KILL_MONSTER = 1;

@@ -2,6 +2,15 @@ package com.lvl6.pvp;
 
 public class PvpConstants {
 	
+	//hazelcast stuff
+	//these names should match the actual properties (in OfflinePvpUser class) verbatim
+	public static String OFFLINE_PVP_USER__ELO = "elo";
+	public static String OFFLINE_PVP_USER__SHIELD_END_TIME = "shieldEndTime";
+	//these names should match the actual properties (in MonsterForPvp class) verbatim
+	public static String MONSTER_FOR_PVP__ELO = "elo";
+	
+	
+	
 	//key for a set. The name for a set in jedis
 	public static String OFFLINE_USERS_BY_ELO = "offline_users_by_elo";
 	

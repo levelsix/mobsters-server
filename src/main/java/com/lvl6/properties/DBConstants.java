@@ -31,6 +31,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_ENHANCING_HISTORY = "monster_enhancing_history";
   public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";
   public static final String TABLE_MONSTER_EVOLVING_HISTORY = "monster_evolving_history";
+  public static final String TABLE_MONSTER_FOR_PVP = "monster_for_pvp";
   public static final String TABLE_MONSTER_FOR_USER = "monster_for_user";
   public static final String TABLE_MONSTER_FOR_USER_DELETED = "monster_for_user_deleted";
   public static final String TABLE_MONSTER_HEALING_FOR_USER = "monster_healing_for_user";

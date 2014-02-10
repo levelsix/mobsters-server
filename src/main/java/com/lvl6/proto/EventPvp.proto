@@ -43,7 +43,7 @@ message QueueUpRequestProto {
 
 message QueueUpResponseProto {
 	optional MinimumUserProto attacker = 1;
-	optional PvpProto defenderInfo = 2;
+	repeated PvpProto defenderInfoList = 2;
 	optional QueueUpStatus status = 3;
 
 	enum QueueUpStatus {
@@ -51,6 +51,7 @@ message QueueUpResponseProto {
 		FAIL_NOT_ENOUGH_CASH = 2;
 		FAIL_OTHER = 3; //REAL OR FAKE USERS WOULD BE RETURNED, SO THE FAIL WOULD NOT 
 						//BE FOR LACK OF A VICTIM TO ATTACK
+		FAIL_NOT_ENOUGH_GEMS = 4;
 		
 	}
 }

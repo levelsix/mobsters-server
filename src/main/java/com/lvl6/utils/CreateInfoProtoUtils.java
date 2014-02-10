@@ -30,6 +30,7 @@ import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
+import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
@@ -55,6 +56,7 @@ import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
+import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
@@ -74,6 +76,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificatio
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
@@ -459,6 +462,26 @@ public class CreateInfoProtoUtils {
     
     fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
     return fumpb.build();
+  }
+  
+  public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(
+  		Collection<MonsterForUser> userMonsters) {
+  	List<MinimumUserMonsterProto> returnList = new ArrayList<MinimumUserMonsterProto>();
+  	
+  	for (MonsterForUser mfu : userMonsters) {
+  		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
+  		returnList.add(mump);
+  	}
+  	
+  	return returnList;
+  }
+  
+  public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForUser mfu) {
+  	MinimumUserMonsterProto.Builder mump = MinimumUserMonsterProto.newBuilder();
+  	
+  	mump.setMonsterId(mfu.getMonsterId());
+  	mump.setMonsterLvl(mfu.getCurrentLvl());
+  	return mump.build();
   }
   
   public static UserMonsterHealingProto createUserMonsterHealingProtoFromObj(
@@ -1392,5 +1415,91 @@ public class CreateInfoProtoUtils {
   	
   	return upepb.build();
   }
+  
+  public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
+  		Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
+  		Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
+  	List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
+  	
+  	for (User u : queuedOpponents) {
+  		Integer userId = u.getId();
+  		List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
+  		int prospectiveCashWinnings = userIdToCashReward.get(userId);
+  		int prospectiveOilWinnings = userIdToOilReward.get(userId);
+  		
+  		PvpProto pp = createPvpProtoFrom(u, userMonsters, prospectiveCashWinnings, prospectiveOilWinnings);
+  		pvpProtoList.add(pp);
+  	}
+  	return pvpProtoList;
+  }
 
+  public static PvpProto createPvpProtoFrom(User u, Collection<MonsterForUser> userMonsters,
+  		int prospectiveCashWinnings, int prospectiveOilWinnings) {
+  	PvpProto.Builder ppb = PvpProto.newBuilder();
+  	MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevelFromUser(u);
+  	int curElo = u.getElo();
+  	Collection<MinimumUserMonsterProto> defenderMonsters = 
+  			createMinimumUserMonsterProtoList(userMonsters);
+  	
+  	ppb.setDefender(defender);
+  	ppb.setCurElo(curElo);
+  	ppb.addAllDefenderMonsters(defenderMonsters);
+  	ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
+  	ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+  	
+  	return ppb.build();
+  }
+  
+  //this is used to create fake users for PvpProtos
+  public static PvpProto createFakePvpProto(int userId, String name, int lvl, int elo,
+  		int prospectiveCashWinnings, int prospectiveOilWinnings, List<MonsterForPvp> mfpList) {
+  	
+  	//create the fake user
+  	MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
+  	mupb.setUserId(userId);
+  	mupb.setName(name);
+  	MinimumUserProto mup = mupb.build();
+  	
+  	MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel.newBuilder();
+  	mupwlb.setMinUserProto(mup);
+  	mupwlb.setLevel(lvl);
+  	MinimumUserProtoWithLevel mupwl = mupwlb.build();
+  	
+  	//THE ACTUAL PROTO
+  	PvpProto.Builder ppb = PvpProto.newBuilder();
+  	ppb.setDefender(mupwl);
+  	ppb.setCurElo(elo);
+  	//set the defenderMonsters
+  	List<MinimumUserMonsterProto> mumpList = createMinimumUserMonsterProtos(mfpList);
+  	ppb.addAllDefenderMonsters(mumpList);
+  	
+  	ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
+  	ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+  	
+  	return ppb.build();
+  }
+  
+  public static List<MinimumUserMonsterProto> createMinimumUserMonsterProtos(
+  		List<MonsterForPvp> mfpList) {
+  	List<MinimumUserMonsterProto> mumpList = new ArrayList<MinimumUserMonsterProto>();
+  	
+  	for (MonsterForPvp mfp : mfpList) {
+  		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfp);
+  		mumpList.add(mump);
+  	}
+  	
+  	return mumpList;
+  }
+  
+  public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForPvp mfp) {
+  	MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto.newBuilder();
+  	
+  	int id = mfp.getId();
+  	int lvl = mfp.getMonsterLvl();
+  	
+  	mumpb.setMonsterId(id);
+  	mumpb.setMonsterLvl(lvl);
+  	
+  	return mumpb.build();
+  }
 }
