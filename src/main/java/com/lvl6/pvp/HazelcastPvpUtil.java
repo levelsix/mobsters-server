@@ -326,7 +326,12 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 
     	private ResourceLoader resourceLoader;
 
-    	@Override
+    	public TextFileResourceLoaderAware(ResourceLoader resourceLoader) {
+				super();
+				this.resourceLoader = resourceLoader;
+			}
+
+			@Override
     	public void setResourceLoader(ResourceLoader resourceLoader) {
     		// TODO Auto-generated method stub
     		this.resourceLoader = resourceLoader;
