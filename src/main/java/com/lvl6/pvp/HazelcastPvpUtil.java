@@ -82,7 +82,7 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     //REQUIRED INITIALIZING BEAN STUFF
 		@Override
     public void afterPropertiesSet() throws Exception {
-    	createRandomNames();
+//    	createRandomNames();
     	populateOfflinePvpUserMap();
     }
     
