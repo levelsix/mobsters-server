@@ -49,8 +49,8 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 	  public static final String OFFLINE_PVP_USER_MAP = "offlinePvpUserMap";
 	  
 	  
-	  @Autowired
-	  protected TextFileResourceLoaderAware textFileResourceLoaderAware;
+//	  @Autowired
+//	  protected TextFileResourceLoaderAware textFileResourceLoaderAware;
     
     @Autowired
   	protected HazelcastInstance hazel;
@@ -85,29 +85,29 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     }
     
     protected void createRandomNames() {
-    	rand = new Random();
-    	Resource nameFile = getTextFileResourceLoaderAware().getResource(FILE_OF_RANDOM_NAMES);
-    	
-    	try {
-    		//maybe don't need to close, deallocate nameFile?
-    		if (!nameFile.exists()) {
-    			log.error("file with random names does not exist. filePath=" + FILE_OF_RANDOM_NAMES);
-    			return;
-    		}
-    		
-    		NameGenerator nameGenerator = new NameGenerator(nameFile);
-    		if (null != nameGenerator) {
-    			log.info("creating random ELVEN NAMES");
-    			for (int i = 0; i < numRandomNames; i++) {
-    				createName(rand, nameGenerator);
-    			}
-    			
-    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
-    		}
-    		
-    	} catch (Exception e) {
-    		log.error("could not create fake user name", e);
-    	}
+//    	rand = new Random();
+//    	Resource nameFile = getTextFileResourceLoaderAware().getResource(FILE_OF_RANDOM_NAMES);
+//    	
+//    	try {
+//    		//maybe don't need to close, deallocate nameFile?
+//    		if (!nameFile.exists()) {
+//    			log.error("file with random names does not exist. filePath=" + FILE_OF_RANDOM_NAMES);
+//    			return;
+//    		}
+//    		
+//    		NameGenerator nameGenerator = new NameGenerator(nameFile);
+//    		if (null != nameGenerator) {
+//    			log.info("creating random ELVEN NAMES");
+//    			for (int i = 0; i < numRandomNames; i++) {
+//    				createName(rand, nameGenerator);
+//    			}
+//    			
+//    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
+//    		}
+//    		
+//    	} catch (Exception e) {
+//    		log.error("could not create fake user name", e);
+//    	}
     }
     
     protected void createName(Random rand, NameGenerator nameGenerator) {
@@ -260,14 +260,14 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     	this.hazel = hazel;
     }
 
-    public TextFileResourceLoaderAware getTextFileResourceLoaderAware() {
-			return textFileResourceLoaderAware;
-		}
-
-		public void setTextFileResourceLoaderAware(
-				TextFileResourceLoaderAware textFileResourceLoaderAware) {
-			this.textFileResourceLoaderAware = textFileResourceLoaderAware;
-		}
+//    public TextFileResourceLoaderAware getTextFileResourceLoaderAware() {
+//			return textFileResourceLoaderAware;
+//		}
+//
+//		public void setTextFileResourceLoaderAware(
+//				TextFileResourceLoaderAware textFileResourceLoaderAware) {
+//			this.textFileResourceLoaderAware = textFileResourceLoaderAware;
+//		}
 
 
 
