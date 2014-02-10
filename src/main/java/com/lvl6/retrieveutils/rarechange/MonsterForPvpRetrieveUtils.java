@@ -1,6 +1,5 @@
 package com.lvl6.retrieveutils.rarechange;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,9 +25,7 @@ import com.lvl6.pvp.PvpConstants;
 import com.lvl6.utils.DBConnection;
 
 @Component /*@DependsOn("gameServer")*/
-public class MonsterForPvpRetrieveUtils implements InitializingBean, Serializable {
-
-	private static final long serialVersionUID = 445467360729750512L;
+public class MonsterForPvpRetrieveUtils implements InitializingBean {
 
 	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
