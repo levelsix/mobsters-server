@@ -20,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
@@ -46,14 +48,16 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 	  private static Random rand;
 	  private List<String> randomNames;
     
-    
 	  public static final String OFFLINE_PVP_USER_MAP = "offlinePvpUserMap";
+	  
+	  
+	  @Autowired
+	  protected ResourceLoader resourceLoader;
     
     @Autowired
   	protected HazelcastInstance hazel;
 
     protected IMap<String, OfflinePvpUser> userIdToOfflinePvpUser;
-    
     
     
     //METHOD TO ACTUALLY USE IMAP
@@ -80,33 +84,31 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     
     
     
-
-    @Override
+		@Override
     public void afterPropertiesSet() throws Exception {
 //    	createRandomNames();
     	populateOfflinePvpUserMap();
     }
     
     protected void createRandomNames() {
-//    	rand = new Random();
-//    	ApplicationContext context = new FileSystemXmlApplicationContext("target/mobsters-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
-//    	Resource nameFile = context.getResource("classpath:namerulesElven.txt");
-//    	
-//    	try {
-//    		NameGenerator nameGenerator = new NameGenerator(nameFile);
-//    		
-//    		if (null != nameGenerator) {
-//    			log.info("creating random ELVEN NAMES");
-//    			for (int i = 0; i < numRandomNames; i++) {
-//    				createName(rand, nameGenerator);
-//    			}
-//    			
-//    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
-//    		}
-//    		
-//    	} catch (Exception e) {
-//    		log.error("could not create fake user name", e);
-//    	}
+    	rand = new Random();
+    	Resource nameFile = getResourceLoader().getResource("classpath:namerulesElven.txt");
+    	
+    	try {
+    		NameGenerator nameGenerator = new NameGenerator(nameFile);
+    		
+    		if (null != nameGenerator) {
+    			log.info("creating random ELVEN NAMES");
+    			for (int i = 0; i < numRandomNames; i++) {
+    				createName(rand, nameGenerator);
+    			}
+    			
+    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
+    		}
+    		
+    	} catch (Exception e) {
+    		log.error("could not create fake user name", e);
+    	}
     }
     
     protected void createName(Random rand, NameGenerator nameGenerator) {
@@ -258,6 +260,13 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     	this.hazel = hazel;
     }
 
+    public ResourceLoader getResourceLoader() {
+			return resourceLoader;
+		}
+
+		public void setResourceLoader(ResourceLoader resourceLoader) {
+			this.resourceLoader = resourceLoader;
+		}
     
     
     public class OfflinePvpUser implements Serializable {
