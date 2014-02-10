@@ -17,12 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
@@ -42,17 +40,19 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 
 		private static final Logger log = LoggerFactory.getLogger(HazelcastPvpUtil.class);
 
+		//properties for random names
 	  private static int syllablesInName1 = 2;
 	  private static int syllablesInName2 = 3;
 	  private static int numRandomNames = 2000;
 	  private static Random rand;
 	  private List<String> randomNames;
+	  private static final String FILE_OF_RANDOM_NAMES = "classpath:namerulesElven.txt";
     
 	  public static final String OFFLINE_PVP_USER_MAP = "offlinePvpUserMap";
 	  
 	  
-//	  @Autowired
-//	  protected ResourceLoader resourceLoader;
+	  @Autowired
+	  protected TextFileResourceLoaderAware textFileResourceLoaderAware;
     
     @Autowired
   	protected HazelcastInstance hazel;
@@ -78,37 +78,40 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     	
     	return users;
     }
-    
-    
-    
-    
-    
-    
+
+    //REQUIRED INITIALIZING BEAN STUFF
 		@Override
     public void afterPropertiesSet() throws Exception {
-//    	createRandomNames();
+    	createRandomNames();
     	populateOfflinePvpUserMap();
     }
     
     protected void createRandomNames() {
-//    	rand = new Random();
-//    	Resource nameFile = getResourceLoader().getResource("classpath:namerulesElven.txt");
-//    	
-//    	try {
-//    		NameGenerator nameGenerator = new NameGenerator(nameFile);
-//    		
-//    		if (null != nameGenerator) {
-//    			log.info("creating random ELVEN NAMES");
-//    			for (int i = 0; i < numRandomNames; i++) {
-//    				createName(rand, nameGenerator);
-//    			}
-//    			
-//    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
-//    		}
-//    		
-//    	} catch (Exception e) {
-//    		log.error("could not create fake user name", e);
-//    	}
+    	rand = new Random();
+    	
+    	Resource nameFile = getTextFileResourceLoaderAware().getResource(FILE_OF_RANDOM_NAMES);
+    	
+    	try {
+    		//maybe don't need to close, deallocate nameFile?
+    		if (!nameFile.exists()) {
+    			log.error("file with random names does not exist. filePath=" + FILE_OF_RANDOM_NAMES);
+    			return;
+    		}
+    		
+    		NameGenerator nameGenerator = new NameGenerator(nameFile);
+    		
+    		if (null != nameGenerator) {
+    			log.info("creating random ELVEN NAMES");
+    			for (int i = 0; i < numRandomNames; i++) {
+    				createName(rand, nameGenerator);
+    			}
+    			
+    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
+    		}
+    		
+    	} catch (Exception e) {
+    		log.error("could not create fake user name", e);
+    	}
     }
     
     protected void createName(Random rand, NameGenerator nameGenerator) {
@@ -252,6 +255,7 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     
     
     
+    
     public HazelcastInstance getHazel() {
     	return hazel;
     }
@@ -260,16 +264,18 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
     	this.hazel = hazel;
     }
 
-//    public ResourceLoader getResourceLoader() {
-//			return resourceLoader;
-//		}
-//
-//		public void setResourceLoader(ResourceLoader resourceLoader) {
-//			this.resourceLoader = resourceLoader;
-//		}
-    
-    
-    public class OfflinePvpUser implements Serializable {
+    public TextFileResourceLoaderAware getTextFileResourceLoaderAware() {
+			return textFileResourceLoaderAware;
+		}
+
+		public void setTextFileResourceLoaderAware(
+				TextFileResourceLoaderAware textFileResourceLoaderAware) {
+			this.textFileResourceLoaderAware = textFileResourceLoaderAware;
+		}
+
+
+
+		public class OfflinePvpUser implements Serializable {
     	
 			private static final long serialVersionUID = 3459023237592127885L;
 			private String userId;
@@ -313,6 +319,22 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 						+ ", shieldEndTime=" + shieldEndTime + "]";
 			}
 			
+    }
+    
+    public class TextFileResourceLoaderAware implements ResourceLoaderAware {
+
+    	private ResourceLoader resourceLoader;
+
+    	@Override
+    	public void setResourceLoader(ResourceLoader resourceLoader) {
+    		// TODO Auto-generated method stub
+    		this.resourceLoader = resourceLoader;
+    	}
+
+    	public Resource getResource(String location) {
+    		return resourceLoader.getResource(location);
+    	}
+
     }
 
 }
