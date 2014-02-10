@@ -321,6 +321,7 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 			
     }
     
+		@Component
     public class TextFileResourceLoaderAware implements ResourceLoaderAware {
 
     	private ResourceLoader resourceLoader;
