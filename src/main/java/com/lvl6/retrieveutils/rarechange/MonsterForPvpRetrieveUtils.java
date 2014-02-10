@@ -1,10 +1,13 @@
 package com.lvl6.retrieveutils.rarechange;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,14 +17,20 @@ import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
+import com.hazelcast.query.EntryObject;
+import com.hazelcast.query.Predicate;
+import com.hazelcast.query.PredicateBuilder;
 import com.lvl6.info.MonsterForPvp;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.pvp.PvpConstants;
 import com.lvl6.utils.DBConnection;
 
 @Component /*@DependsOn("gameServer")*/
-public class MonsterForPvpRetrieveUtils implements InitializingBean {
+public class MonsterForPvpRetrieveUtils implements InitializingBean, Serializable {
 
-  private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static final long serialVersionUID = 445467360729750512L;
+
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private Map<Integer, MonsterForPvp> idsToMonsterForPvps;
 
@@ -38,6 +47,24 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 	protected HazelcastInstance hazel;
 	
   protected IMap<String, MonsterForPvp> idToMonsterForPvp;
+  
+
+  //METHOD TO ACTUALLY USE IMAP
+  public Set<MonsterForPvp> retrievePvpMonsters(int minElo, int maxElo) {
+  	log.info("querying for people to attack. elo should be between minElo=" +
+  			minElo + ", maxElo=" + maxElo);
+
+  	String elo = PvpConstants.MONSTER_FOR_PVP__ELO;
+  	EntryObject e = new PredicateBuilder().getEntryObject();
+  	Predicate predicate = e.get(elo).between(minElo, maxElo);
+
+  	Set<MonsterForPvp> monsters = (Set<MonsterForPvp>) idToMonsterForPvp.values(predicate);
+  	log.info("users:" + monsters);
+
+  	return monsters;
+  }
+  
+  
 
   @Override
   public void afterPropertiesSet() throws Exception {
@@ -47,7 +74,6 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
   protected void populateMonsterForPvpMap() {
   	reload();
   }
-  
 
   public void reload() {
     setStaticIdsToMonsterForPvps();
@@ -97,6 +123,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 
   private void setStaticIdsToMonsterForPvps() {
     log.debug("setting map of ids to monsters for pvp");
+    Random rand = new Random();
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
@@ -116,6 +143,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 			        if (mfp == null) {
 			          continue;
 			        }
+			        mfp.setRand(rand);
 
 			        int id = mfp.getId();
 			        idsToMonsterForPvpsTemp.put(id, mfp);
@@ -143,12 +171,16 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
     int id = rs.getInt(i++);
     int monsterId = rs.getInt(i++);
     int monsterLvl = rs.getInt(i++);
-    int minElo = rs.getInt(i++);
-    int maxElo = rs.getInt(i++);
+    int elo = rs.getInt(i++);
+    int minCashReward = rs.getInt(i++);
+    int maxCashReward = rs.getInt(i++);
+    int minOilReward = rs.getInt(i++);
+    int maxOilReward = rs.getInt(i++);
     
-    MonsterForPvp taskStage = new MonsterForPvp(id, monsterId, monsterLvl, minElo, maxElo);
+    MonsterForPvp mfp = new MonsterForPvp(id, monsterId, monsterLvl, elo,
+    		minCashReward, maxCashReward, minOilReward, maxOilReward);
         
-    return taskStage;
+    return mfp;
   }
   
   

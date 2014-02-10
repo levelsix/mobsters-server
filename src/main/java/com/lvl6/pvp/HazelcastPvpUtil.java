@@ -10,12 +10,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -24,6 +28,7 @@ import com.hazelcast.query.EntryObject;
 import com.hazelcast.query.Predicate;
 import com.hazelcast.query.PredicateBuilder;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.scriptsjava.generatefakeusers.NameGenerator;
 import com.lvl6.utils.DBConnection;
 
 @Component
@@ -34,8 +39,15 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 	private static final long serialVersionUID = 7033740347971426291L;
 
 		private static final Logger log = LoggerFactory.getLogger(HazelcastPvpUtil.class);
+
+	  private static int syllablesInName1 = 2;
+	  private static int syllablesInName2 = 3;
+	  private static int numRandomNames = 2000;
+	  private static Random rand;
+	  private List<String> randomNames;
     
-    public static final String OFFLINE_PVP_USER_MAP = "offlinePvpUserMap";
+    
+	  public static final String OFFLINE_PVP_USER_MAP = "offlinePvpUserMap";
     
     @Autowired
   	protected HazelcastInstance hazel;
@@ -71,8 +83,54 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+    	createRandomNames();
     	populateOfflinePvpUserMap();
     }
+    
+    protected void createRandomNames() {
+    	rand = new Random();
+    	ApplicationContext context = new FileSystemXmlApplicationContext("target/mobsters-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
+    	Resource nameFile = context.getResource("classpath:namerulesElven.txt");
+    	
+    	try {
+    		NameGenerator nameGenerator = new NameGenerator(nameFile);
+    		
+    		if (null != nameGenerator) {
+    			log.info("creating random ELVEN NAMES");
+    			for (int i = 0; i < numRandomNames; i++) {
+    				createName(rand, nameGenerator);
+    			}
+    			
+    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
+    		}
+    		
+    	} catch (Exception e) {
+    		log.error("could not create fake user name", e);
+    	} finally {
+    		
+    	}
+    }
+    
+    protected void createName(Random rand, NameGenerator nameGenerator) {
+    	int syllablesInName = (Math.random() < .5) ? syllablesInName1 : syllablesInName2;
+    	String name = nameGenerator.compose(syllablesInName);
+    	if (Math.random() < .5) {
+    		name = name.toLowerCase();
+    	}
+      if (Math.random() < .3) {
+      	name = name + (int)(Math.ceil(Math.random() * 98));
+      }
+      randomNames.add(name);
+      
+    }
+
+    public String getRandomName() {
+    	int len = randomNames.size();
+    	int randInt = rand.nextInt(len);
+    	
+    	return randomNames.get(randInt);
+    }
+    
 
     protected void populateOfflinePvpUserMap() {
     	

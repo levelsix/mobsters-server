@@ -20,6 +20,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.QueueUpRequestEvent;
 import com.lvl6.events.response.QueueUpResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
@@ -34,6 +35,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.HazelcastPvpUtil.OfflinePvpUser;
 import com.lvl6.retrieveutils.UserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
@@ -51,6 +53,10 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 	@Autowired
 	protected HazelcastPvpUtil hazelcastPvpUtil;
+	
+	@Autowired
+	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils;
+	
 	
 //	@Autowired
 //	protected PvpUtil pvpUtil;
@@ -81,6 +87,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		QueueUpRequestProto reqProto = ((QueueUpRequestEvent) event)
 				.getQueueUpRequestProto();
+		
+		log.info("reqProto=" + reqProto); 
 
 		MinimumUserProto attackerProto = reqProto.getAttacker();
 		int attackerId = attackerProto.getUserId();
@@ -93,7 +101,11 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		
 		List<Integer> seenUserIds = reqProto.getSeenUserIdsList();
 		Set<Integer> uniqSeenUserIds = new HashSet<Integer>(seenUserIds);
+		//don't want the attacker to see himself
+		uniqSeenUserIds.add(attackerId);
+		
 		Date clientDate = new Date(reqProto.getClientTime());
+		Timestamp clientTime = new Timestamp(clientDate.getTime());
 		
 		//set some values to send to the client
 		QueueUpResponseProto.Builder resBuilder = QueueUpResponseProto.newBuilder();
@@ -108,42 +120,22 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 					gemsSpent, cashChange);
 
 			boolean success = false;
+			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
 			if (legitQueueUp) {
-				//get the users that the attacker will fight
-				List<Integer> queuedOpponentIdsList = new ArrayList<Integer>();
-				List<User> queuedOpponents = getQueuedOpponent(attacker, attackerElo,
-						uniqSeenUserIds, clientDate, queuedOpponentIdsList);
+				setProspectivePvpMatches(resBuilder, attacker, uniqSeenUserIds, clientDate,
+						attackerElo);
 				
-				if (null == queuedOpponents || queuedOpponents.isEmpty()) {
-					//TODO: generate the fake defender and monsters
-					log.info("no valid users for attacker=" + attacker);
-				} else {
-					log.info("there are people to attack!");
-					log.info("queuedOpponentIdsList=" + queuedOpponentIdsList);
-					log.info("queuedOpponents:" + queuedOpponents);
-					//get the 3 monsters for each defender: ideally should be equipped, but 
-					//will randomly select if user doesn't have 3 equipped
-					Map<Integer, List<MonsterForUser>> userIdToUserMonsters = 
-							selectMonstersForUsers(queuedOpponentIdsList);
-					
-					Map<Integer, Integer> userIdToProspectiveCashReward = new HashMap<Integer, Integer>();
-					Map<Integer, Integer> userIdToProspectiveOilReward = new HashMap<Integer, Integer>();
-					
-					calculateCashOilRewards(queuedOpponents, userIdToProspectiveCashReward,
-							userIdToProspectiveOilReward);
-					
-					//create the protos for all this
-					List<PvpProto> pvpProtoList = CreateInfoProtoUtils.createPvpProtos(
-							queuedOpponents, userIdToUserMonsters, userIdToProspectiveCashReward,
-							userIdToProspectiveOilReward);
-					
-					resBuilder.addAllDefenderInfoList(pvpProtoList);
-					log.info("pvpProtoList=" + pvpProtoList);
-				}
-				
+				//update the user
+				success = writeChangesToDB(attacker, gemsSpent, cashChange, clientTime,
+						currencyChange);
+			}				
+
+			if (success) {
 				resBuilder.setStatus(QueueUpStatus.SUCCESS);
-				success = true;
 			}
+			
+			
+			
 //			
 //			if (success) {
 //				//send to the client the player he can attack
@@ -238,23 +230,64 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		}
 		return true;
 	}
-
-	//purpose of userIdList is to prevent another iteration through the return list just
-	//to extract the user ids
-	private List<User> getQueuedOpponent(User attacker, int attackerElo,
-			Set<Integer> seenUserIds, Date clientDate, List<Integer> userIdList) {
-		//inefficient: 5 db calls
-//		List<User> qList = getUserRetrieveUtils().retrieveCompleteQueueList(
-//				attacker, elo, seenUserIds, clientDate);
-//		if(qList.isEmpty()) {
-//			return null;
-//		}
-//		else {
-//			Random rand = new Random();
-//			User queuedOpponent = qList.get(rand.nextInt(qList.size()));
-//			return queuedOpponent;
-//		}
+	
+	private void setProspectivePvpMatches(Builder resBuilder, User attacker,
+			Set<Integer> uniqSeenUserIds, Date clientDate, int attackerElo) {
+	//so as to not recompute elo range
+		List<Integer> minEloList = new ArrayList<Integer>();
+		List<Integer> maxEloList = new ArrayList<Integer>();
+		getMinMaxElo(attackerElo, minEloList, maxEloList);
 		
+		int minElo = minEloList.get(0);
+		int maxElo = maxEloList.get(0);
+		
+		//get the users that the attacker will fight
+		List<Integer> queuedOpponentIdsList = new ArrayList<Integer>();
+		List<User> queuedOpponents = getQueuedOpponent(attacker, attackerElo, minElo,
+				maxElo, uniqSeenUserIds, clientDate, queuedOpponentIdsList);
+		
+		if (null == queuedOpponents || queuedOpponents.isEmpty()) {
+			//TODO: GENERATE THE FAKE DEFENDER AND MONSTERS
+			log.info("no valid users for attacker=" + attacker);
+			log.info("generating fake users.");
+			Set<MonsterForPvp> fakeMonsters = getMonsterForPvpRetrieveUtils().
+					retrievePvpMonsters(minElo, maxElo);
+			
+			//group monsters off by 3; limit the number of groups of 3
+			//NOTE: this is assuming there are more than enough monsters...
+			List<List<MonsterForPvp>> fakeUserMonsters = createFakeUserMonsters(fakeMonsters);
+			List<PvpProto> pvpProtoList = createPvpProtosFromFakeUser(fakeUserMonsters);
+			
+			resBuilder.addAllDefenderInfoList(pvpProtoList);
+			
+		} else {
+			log.info("there are people to attack!");
+			log.info("queuedOpponentIdsList=" + queuedOpponentIdsList);
+			log.info("queuedOpponents:" + queuedOpponents);
+			//get the 3 monsters for each defender: ideally should be equipped, but 
+			//will randomly select if user doesn't have 3 equipped
+			Map<Integer, List<MonsterForUser>> userIdToUserMonsters = 
+					selectMonstersForUsers(queuedOpponentIdsList);
+			
+			Map<Integer, Integer> userIdToProspectiveCashReward = new HashMap<Integer, Integer>();
+			Map<Integer, Integer> userIdToProspectiveOilReward = new HashMap<Integer, Integer>();
+			
+			calculateCashOilRewards(queuedOpponents, userIdToProspectiveCashReward,
+					userIdToProspectiveOilReward);
+			
+			//create the protos for all this
+			List<PvpProto> pvpProtoList = CreateInfoProtoUtils.createPvpProtos(
+					queuedOpponents, userIdToUserMonsters, userIdToProspectiveCashReward,
+					userIdToProspectiveOilReward);
+			
+			resBuilder.addAllDefenderInfoList(pvpProtoList);
+			log.info("pvpProtoList=" + pvpProtoList);
+		}
+		
+	}
+	
+	private void getMinMaxElo(int attackerElo, List<Integer> minEloList, List<Integer> maxEloList) {
+
 		int firstEloBound = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_DISTANCE_THREE);
 		int secondEloBound = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_DISTANCE_TWO);
 		int thirdEloBound = Math.max(0, attackerElo - ControllerConstants.PVP__ELO_DISTANCE_ONE);
@@ -309,7 +342,26 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		log.info("minElo after maxing with 0: " + minElo);
 		log.info("maxElo after maxing with 0: " + maxElo);
 		
-//		User defender = null;
+		minEloList.add(minElo);
+		maxEloList.add(maxElo);
+	}
+
+	//purpose of userIdList is to prevent another iteration through the return list just
+	//to extract the user ids
+	private List<User> getQueuedOpponent(User attacker, int attackerElo, int minElo,
+			int maxElo, Set<Integer> seenUserIds, Date clientDate, List<Integer> userIdList) {
+		//inefficient: 5 db calls
+//		List<User> qList = getUserRetrieveUtils().retrieveCompleteQueueList(
+//				attacker, elo, seenUserIds, clientDate);
+//		if(qList.isEmpty()) {
+//			return null;
+//		}
+//		else {
+//			Random rand = new Random();
+//			User queuedOpponent = qList.get(rand.nextInt(qList.size()));
+//			return queuedOpponent;
+//		}
+		//		User defender = null;
 
 		//jedis, redis stuff
 //		//now having elo range, figure out the offset 
@@ -346,6 +398,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			int userId = Integer.valueOf(pvpUser.getUserId());
 			
 			if (seenUserIds.contains(userId)) {
+				log.info("seen userId=" + userId);
 				continue;
 			}
 
@@ -353,6 +406,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			User defender = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 			selectedDefenders.add(defender);
 			userIdList.add(userId);
+			
+			if (userIdList.size() >= ControllerConstants.PVP__MAX_QUEUE_SIZE) {
+				//don't want to send every eligible victim to user.
+				log.info("reached queue length of " + ControllerConstants.PVP__MAX_QUEUE_SIZE);
+				break;
+			}
 		}
 
 		log.info("the lucky people who get to be attacked! defenders=" + selectedDefenders);
@@ -475,6 +534,36 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		
 	}
 	
+	//separate monsters into groups of three, limit the number of groups of three
+	private List<List<MonsterForPvp>> createFakeUserMonsters(Set<MonsterForPvp> fakeMonsters) {
+		List<List<MonsterForPvp>> fakeUserMonsters = new ArrayList<List<MonsterForPvp>>();
+		
+		//this will contain a group of three monsters
+		List<MonsterForPvp> tempFakeUser = new ArrayList<MonsterForPvp>();
+		
+		for (MonsterForPvp mfp : fakeMonsters) {
+			
+			tempFakeUser.add(mfp);
+			
+			//limit how many monsters can go in a group
+			if (tempFakeUser.size() >= 3) {
+				fakeUserMonsters.add(tempFakeUser);
+				//reset the group of three
+				tempFakeUser = new ArrayList<MonsterForPvp>();
+				
+			}
+			
+			//if the num groups created are more than or equal to the limit of num groups of
+			//three, then exit
+			if (fakeUserMonsters.size() > ControllerConstants.PVP__MAX_QUEUE_SIZE) {
+				break;
+			}
+		}
+		
+		return fakeUserMonsters;
+	}
+	
+	
 	private void calculateCashOilRewards(List<User> queuedOpponents,
 			Map<Integer, Integer> userIdToProspectiveCashReward,
 			Map<Integer, Integer> userIdToProspectiveOilReward) {
@@ -508,28 +597,96 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		return oilLost;
 	}
 	
+	private List<PvpProto> createPvpProtosFromFakeUser(List<List<MonsterForPvp>> fakeUserMonsters) {
+		log.info("creating fake users for pvp!!!!");
+		List<PvpProto> ppList = new ArrayList<PvpProto>();
+		
+		for (List<MonsterForPvp> mons : fakeUserMonsters) {
+			PvpProto user = createFakeUser(mons);
+			ppList.add(user);
+		}
+		
+		log.info("num fake users created: " + ppList.size());
+		return ppList;
+	}
+	
+	//CREATES ONE FAKE USER FOR PVP
+	private PvpProto createFakeUser(List<MonsterForPvp> mfpList) {
+		//to create the fake user, need userId=0, some random name, empty clan
+		//for lvl do something like (elo / 50)
+		//for cur elo avg out the monsters elos
+		
+		List<Integer> cashWinnings = new ArrayList<Integer>();
+		List<Integer> oilWinnings = new ArrayList<Integer>();
+		int avgElo = determineAvgEloAndCashOilReward(mfpList, cashWinnings, oilWinnings);
+		
+		int userId = 0;
+		String randomName = getHazelcastPvpUtil().getRandomName();
+		int lvl = avgElo / ControllerConstants.PVP__PVP_FAKE_USER_LVL_DIVISOR;
+		
+		int prospectiveCashWinnings = cashWinnings.get(0);
+		int prospectiveOilWinnings = oilWinnings.get(0);
+		
+		log.info("fake user created: name=" + randomName + "\t avgElo=" + avgElo + "\t cash=" +
+				prospectiveCashWinnings + "\t oil=" + prospectiveOilWinnings + "\t lvl=" + lvl);
+		
+		PvpProto fakeUser = CreateInfoProtoUtils.createFakePvpProto(userId, randomName, lvl,
+				avgElo, prospectiveCashWinnings, prospectiveOilWinnings, mfpList);
+		return fakeUser;
+	}
+	
+	//assumes the List<MonsterForPvp> mons is not empty
+	private int determineAvgEloAndCashOilReward(List<MonsterForPvp> mons,
+			List<Integer> cashWinnings, List<Integer> oilWinnings) {
+		int avgElo = 0;
+		int prospectiveCashWinnings = 0;
+		int prospectiveOilWinnings = 0;
+		
+		for (MonsterForPvp mon : mons) {
+			avgElo += mon.getElo();
+			
+			prospectiveCashWinnings += mon.getCashDrop();
+			prospectiveOilWinnings += mon.getOilDrop();
+		}
+		
+		avgElo = avgElo / mons.size();
+		cashWinnings.add(prospectiveCashWinnings);
+		oilWinnings.add(prospectiveOilWinnings);
+		
+		return avgElo;
+	}
+	
 	
 	// change user silver value and remove his shield if he has one, since he is
 	// going to attack some one
-	private boolean writeChangesToDB(User attacker, int cost, Timestamp queueTime,
-			User queuedUser) {
+	private boolean writeChangesToDB(User attacker, int gemsSpent, int cashChange, 
+			Timestamp queueTime, Map<String, Integer> money) {
 		
-		boolean success = queuedUser.updateLastTimeQueued(queueTime);
-		if(success) {
-			//only change user shield stuff, no wins, loss flees
-			return attacker.updateRelativeExperienceCoinsBattlesWonBattlesLostFlees (
-					0, -1*cost, 0, 0, 0, queueTime, true, false, false, 0, 0, 0, 0);  
-		}
-		else {
-			log.error("unexpected error: could not update user's last queue time");
+		//CHARGE THE USER
+		int oilChange = 0;
+		int gemChange = -1 * gemsSpent;
+		
+		int numChange = attacker.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
+		if (1 != numChange) {
+			log.error("problem with updating user stats: gemChange=" + gemChange
+					+ ", cashChange=" + cashChange + ", user is " + attacker);
 			return false;
+		} else {
+			//everything went well
+			if (0 != oilChange) {
+				money.put(MiscMethods.cash, cashChange);
+			}
+			if (0 != gemsSpent) {
+				money.put(MiscMethods.gems, gemChange);
+			}
 		}
+		return true;
 	}
 
-	private int calculatePossibleCoinWinnings(User personToBeAttacked) {
-		//TODO: DETERMINE HOW THIS IS CALCULATED
-		return 1000;
-	}
+//	private int calculatePossibleCoinWinnings(User personToBeAttacked) {
+//		//TODO: DETERMINE HOW THIS IS CALCULATED
+//		return 1000;
+//	}
 
 
 	public UserRetrieveUtils getUserRetrieveUtils() {
@@ -556,5 +713,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 	}
 
+	public MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtils() {
+		return monsterForPvpRetrieveUtils;
+	}
+
+	public void setMonsterForPvpRetrieveUtils(
+			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils) {
+		this.monsterForPvpRetrieveUtils = monsterForPvpRetrieveUtils;
+	}
 
 }

@@ -30,6 +30,7 @@ import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
+import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
@@ -1449,5 +1450,56 @@ public class CreateInfoProtoUtils {
   	return ppb.build();
   }
   
+  //this is used to create fake users for PvpProtos
+  public static PvpProto createFakePvpProto(int userId, String name, int lvl, int elo,
+  		int prospectiveCashWinnings, int prospectiveOilWinnings, List<MonsterForPvp> mfpList) {
+  	
+  	//create the fake user
+  	MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
+  	mupb.setUserId(userId);
+  	mupb.setName(name);
+  	MinimumUserProto mup = mupb.build();
+  	
+  	MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel.newBuilder();
+  	mupwlb.setMinUserProto(mup);
+  	mupwlb.setLevel(lvl);
+  	MinimumUserProtoWithLevel mupwl = mupwlb.build();
+  	
+  	//THE ACTUAL PROTO
+  	PvpProto.Builder ppb = PvpProto.newBuilder();
+  	ppb.setDefender(mupwl);
+  	ppb.setCurElo(elo);
+  	//set the defenderMonsters
+  	List<MinimumUserMonsterProto> mumpList = createMinimumUserMonsterProtos(mfpList);
+  	ppb.addAllDefenderMonsters(mumpList);
+  	
+  	ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
+  	ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+  	
+  	return ppb.build();
+  }
   
+  public static List<MinimumUserMonsterProto> createMinimumUserMonsterProtos(
+  		List<MonsterForPvp> mfpList) {
+  	List<MinimumUserMonsterProto> mumpList = new ArrayList<MinimumUserMonsterProto>();
+  	
+  	for (MonsterForPvp mfp : mfpList) {
+  		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfp);
+  		mumpList.add(mump);
+  	}
+  	
+  	return mumpList;
+  }
+  
+  public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForPvp mfp) {
+  	MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto.newBuilder();
+  	
+  	int id = mfp.getId();
+  	int lvl = mfp.getMonsterLvl();
+  	
+  	mumpb.setMonsterId(id);
+  	mumpb.setMonsterLvl(lvl);
+  	
+  	return mumpb.build();
+  }
 }
