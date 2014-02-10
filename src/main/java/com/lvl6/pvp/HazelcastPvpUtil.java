@@ -83,32 +83,30 @@ public class HazelcastPvpUtil implements InitializingBean, Serializable {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-    	createRandomNames();
+//    	createRandomNames();
     	populateOfflinePvpUserMap();
     }
     
     protected void createRandomNames() {
-    	rand = new Random();
-    	ApplicationContext context = new FileSystemXmlApplicationContext("target/mobsters-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
-    	Resource nameFile = context.getResource("classpath:namerulesElven.txt");
-    	
-    	try {
-    		NameGenerator nameGenerator = new NameGenerator(nameFile);
-    		
-    		if (null != nameGenerator) {
-    			log.info("creating random ELVEN NAMES");
-    			for (int i = 0; i < numRandomNames; i++) {
-    				createName(rand, nameGenerator);
-    			}
-    			
-    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
-    		}
-    		
-    	} catch (Exception e) {
-    		log.error("could not create fake user name", e);
-    	} finally {
-    		
-    	}
+//    	rand = new Random();
+//    	ApplicationContext context = new FileSystemXmlApplicationContext("target/mobsters-server-1.0-SNAPSHOT/WEB-INF/spring-application-context.xml");
+//    	Resource nameFile = context.getResource("classpath:namerulesElven.txt");
+//    	
+//    	try {
+//    		NameGenerator nameGenerator = new NameGenerator(nameFile);
+//    		
+//    		if (null != nameGenerator) {
+//    			log.info("creating random ELVEN NAMES");
+//    			for (int i = 0; i < numRandomNames; i++) {
+//    				createName(rand, nameGenerator);
+//    			}
+//    			
+//    			log.info("num rand ELVEN NAMES created:" + randomNames.size());
+//    		}
+//    		
+//    	} catch (Exception e) {
+//    		log.error("could not create fake user name", e);
+//    	}
     }
     
     protected void createName(Random rand, NameGenerator nameGenerator) {
