@@ -95,6 +95,7 @@ public class HazelcastPvpUtil implements InitializingBean {
     			return;
     		}
     		
+    		randomNames = new ArrayList<String>();
     		NameGenerator nameGenerator = new NameGenerator(nameFile);
     		if (null != nameGenerator) {
     			log.info("creating random ELVEN NAMES");
