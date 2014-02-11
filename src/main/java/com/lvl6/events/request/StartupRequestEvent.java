@@ -2,12 +2,17 @@ package com.lvl6.events.request;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.PreDatabaseRequestEvent;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 
 public class StartupRequestEvent extends PreDatabaseRequestEvent{
+
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private StartupRequestProto startupRequestProto;
   
@@ -23,7 +28,7 @@ public class StartupRequestEvent extends PreDatabaseRequestEvent{
       
       udid = startupRequestProto.getUdid();
     } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
+      log.error("startup request exception", e);
     }
   }
 
