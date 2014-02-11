@@ -2,6 +2,9 @@ package com.lvl6.events.request;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
@@ -9,6 +12,8 @@ import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanRequestProt
 
 public class ApproveOrRejectRequestToJoinClanRequestEvent extends RequestEvent {
 
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	
   private ApproveOrRejectRequestToJoinClanRequestProto approveOrRejectRequestToJoinClanRequestProto;
   
   /**
@@ -19,7 +24,7 @@ public class ApproveOrRejectRequestToJoinClanRequestEvent extends RequestEvent {
       approveOrRejectRequestToJoinClanRequestProto = ApproveOrRejectRequestToJoinClanRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = approveOrRejectRequestToJoinClanRequestProto.getSender().getUserId();
     } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
+      log.error("approve or reject request to join clan request exception", e);
     }
   }
 

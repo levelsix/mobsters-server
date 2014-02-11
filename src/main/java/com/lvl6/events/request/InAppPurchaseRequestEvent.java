@@ -2,6 +2,9 @@ package com.lvl6.events.request;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
@@ -9,6 +12,8 @@ import com.lvl6.proto.EventInAppPurchaseProto.InAppPurchaseRequestProto;
 
 public class InAppPurchaseRequestEvent extends RequestEvent {
 
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	
   private InAppPurchaseRequestProto inAppPurchaseRequestProto;
   
   /**
@@ -19,7 +24,7 @@ public class InAppPurchaseRequestEvent extends RequestEvent {
       inAppPurchaseRequestProto = InAppPurchaseRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = inAppPurchaseRequestProto.getSender().getUserId();
     } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
+      log.error("in app purchase request exception", e);
     }
   }
 

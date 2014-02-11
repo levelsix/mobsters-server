@@ -2,6 +2,9 @@ package com.lvl6.events.request;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
@@ -9,6 +12,8 @@ import com.lvl6.proto.EventInAppPurchaseProto.ExchangeGemsForResourcesRequestPro
 
 public class ExchangeGemsForResourcesRequestEvent extends RequestEvent {
 
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	
   private ExchangeGemsForResourcesRequestProto exchangeGemsForResourcesRequestProto;
   
   /**
@@ -19,7 +24,7 @@ public class ExchangeGemsForResourcesRequestEvent extends RequestEvent {
       exchangeGemsForResourcesRequestProto = ExchangeGemsForResourcesRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = exchangeGemsForResourcesRequestProto.getSender().getMinUserProto().getUserId();
     } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
+      log.error("exchange gems for resources request exception", e);
     }
   }
 
