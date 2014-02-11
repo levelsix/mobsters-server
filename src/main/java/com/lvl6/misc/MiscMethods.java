@@ -298,7 +298,7 @@ public class MiscMethods {
         set.absolute(currentRow);
       return rowCount;
     } catch (SQLException e) {
-      e.printStackTrace();
+      log.error("getRowCount error.", e);
       return -1;
     }     
 
