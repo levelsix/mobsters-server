@@ -2,12 +2,17 @@ package com.lvl6.events.request;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.proto.EventDungeonProto.ReviveInDungeonRequestProto;
 
 public class ReviveInDungeonRequestEvent extends RequestEvent {
+
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private ReviveInDungeonRequestProto reviveInDungeonRequestProto;
   
@@ -19,7 +24,7 @@ public class ReviveInDungeonRequestEvent extends RequestEvent {
       reviveInDungeonRequestProto = ReviveInDungeonRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = reviveInDungeonRequestProto.getSender().getUserId();
     } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
+      log.error("revive in dungeon request exception", e);
     }
   }
 

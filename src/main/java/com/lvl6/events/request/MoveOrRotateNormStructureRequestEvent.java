@@ -2,6 +2,9 @@ package com.lvl6.events.request;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.RequestEvent;
@@ -9,6 +12,8 @@ import com.lvl6.proto.EventStructureProto.MoveOrRotateNormStructureRequestProto;
 
 public class MoveOrRotateNormStructureRequestEvent extends RequestEvent {
 
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	
   private MoveOrRotateNormStructureRequestProto moveOrRotateNormStructureRequestProto;
   
   /**
@@ -19,7 +24,7 @@ public class MoveOrRotateNormStructureRequestEvent extends RequestEvent {
       moveOrRotateNormStructureRequestProto = MoveOrRotateNormStructureRequestProto.parseFrom(ByteString.copyFrom(buff));
       playerId = moveOrRotateNormStructureRequestProto.getSender().getUserId();
     } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
+      log.error("move or rotate norm structure request exception", e);
     }
   }
 

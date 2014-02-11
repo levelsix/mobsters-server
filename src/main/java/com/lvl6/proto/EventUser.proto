@@ -109,3 +109,31 @@ message SetFacebookIdResponseProto {
 	}
 }
 	
+
+//------------------------------------------------------------------------------------------
+	
+message UpdateUserCurrencyRequestProto {
+	optional MinimumUserProto sender = 1;
+	
+	//both positive numbers, server will change to negative
+	optional int32 cashSpent = 2;
+	optional int32 oilSpent = 3;
+	optional int32 gemsSpent = 4;
+	
+	optional int64 clientTime = 5;
+}
+
+message UpdateUserCurrencyResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional UpdateUserCurrencyStatus status = 2;
+	
+	
+	enum UpdateUserCurrencyStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		FAIL_INSUFFICIENT_CASH = 3;
+		FAIL_INSUFFICIENT_OIL = 4;
+		FAIL_INSUFFICIENT_GEMS = 5;
+	}
+}
+	

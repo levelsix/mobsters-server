@@ -2,6 +2,9 @@ package com.lvl6.events.request;
 
 import java.nio.ByteBuffer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.lvl6.events.PreDatabaseRequestEvent;
@@ -9,6 +12,8 @@ import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 
 public class UserCreateRequestEvent extends PreDatabaseRequestEvent{
 
+	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	
   private UserCreateRequestProto userCreateRequestProto;
   
   /**
@@ -23,7 +28,7 @@ public class UserCreateRequestEvent extends PreDatabaseRequestEvent{
       
       udid = userCreateRequestProto.getUdid();
     } catch (InvalidProtocolBufferException e) {
-      e.printStackTrace();
+      log.error("user create request exception", e);
     }
   }
 
