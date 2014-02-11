@@ -94,6 +94,7 @@ import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StaticUserLevelInfoRetrieveUtils;
@@ -161,7 +162,7 @@ public class MiscMethods {
     return null;
   }*/
 
-  public static Dialogue createDialogue(String dialogueBlob) {
+	public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
       StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
 
@@ -564,9 +565,13 @@ public class MiscMethods {
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
+    //TODO: FIGURE OUT BETTER WAY TO RELOAD NON STATIC CLASS DATA
+//    getMonsterForPvpRetrieveUtils().reload();
+    
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
+    QuestMonsterItemRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
     StartupStuffRetrieveUtils.reload();
     StaticUserLevelInfoRetrieveUtils.reload();

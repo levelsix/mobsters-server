@@ -1,6 +1,5 @@
 package com.lvl6.retrieveutils.rarechange;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,9 +25,7 @@ import com.lvl6.pvp.PvpConstants;
 import com.lvl6.utils.DBConnection;
 
 @Component /*@DependsOn("gameServer")*/
-public class MonsterForPvpRetrieveUtils implements InitializingBean, Serializable {
-
-	private static final long serialVersionUID = 445467360729750512L;
+public class MonsterForPvpRetrieveUtils implements InitializingBean {
 
 	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
@@ -38,8 +35,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean, Serializabl
   
   public static final String MONSTER_FOR_PVP_MAP = "monsterForPvpMap";
   
-  public static final String MONSTER_FOR_PVP__MIN_ELO = "minElo";
-  public static final String MONSTER_FOR_PVP__MAX_ELO = "maxElo";
+  public static final String MONSTER_FOR_PVP__ELO = "elo";
   
   
   
@@ -76,6 +72,8 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean, Serializabl
   }
 
   public void reload() {
+  	
+  	log.info("reloading MonsterForPvp data!!!!!!!");
     setStaticIdsToMonsterForPvps();
     
     //this will create the map if it doesn't exist
@@ -89,8 +87,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean, Serializabl
   //this is to make queries faster
   protected void addMonsterForPvpIndexes() {
   	//the true is for indicating that there will be ranged queries on this property
-  	idToMonsterForPvp.addIndex(MONSTER_FOR_PVP__MAX_ELO, true);
-  	idToMonsterForPvp.addIndex(MONSTER_FOR_PVP__MIN_ELO, true);
+  	idToMonsterForPvp.addIndex(MONSTER_FOR_PVP__ELO, true);
   	
   }
   
