@@ -56,7 +56,7 @@ import com.lvl6.utils.DBConnection;
   
   public static Structure getPredecessorStructForStructId(int structId) {
   	log.debug("retrieve predecessor struct data for structId " + structId);
-  	if (structIdsToStructs == null) {
+  	if (null == structIdsToStructs) {
       setStaticStructIdsToStructs();      
     }
   	Structure curStruct = structIdsToStructs.get(structId);
@@ -67,6 +67,30 @@ import com.lvl6.utils.DBConnection;
   		return predecessorStruct;
   	}
   	return null;
+  }
+  
+  //RECURSION!!!
+  public static Structure getPredecessorStructForStructIdAndLvl(int structId, int lvl) {
+  	log.debug("retrieve predecessor struct data for structId=" + structId + " and lvl=" + lvl);
+  	if (null == structIdsToStructs) {
+  		setStaticStructIdsToStructs();
+  	}
+  	//base case, structure does not have a predecessor with specified level "lvl"
+  	if (!structIdsToStructs.containsKey(structId)) {
+  		return null;
+  	}
+  	
+  	Structure curStruct = structIdsToStructs.get(structId);
+  	//second base case, we found a structure with specified level "lvl"
+  	int curLvl = curStruct.getLevel();
+  	if (curLvl == lvl) {
+  		return curStruct;
+  	}
+  	
+  	//recursive case, move on to the predecessor and see if its level matches "lvl"
+  	int predecessorStructId = curStruct.getPredecessorStructId();
+  	return getPredecessorStructForStructIdAndLvl(predecessorStructId, lvl);
+  	
   }
 
   private static void setStaticStructIdsToStructs() {

@@ -291,6 +291,7 @@ message IncreaseMonsterInventorySlotResponseProto {
 		FAIL_OTHER = 4;
 		//user struct id/fb lvl not consistent across invites
 		FAIL_INCONSISTENT_INVITE_DATA = 5;
+		FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL = 6;
 	}
 }
 
