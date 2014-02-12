@@ -116,8 +116,15 @@ public class HazelcastPvpUtil implements InitializingBean {
     
     public OfflinePvpUser getOfflinePvpUser(int userId) {
     	String userIdStr = String.valueOf(userId);
+    	if (playersByPlayerId.containsKey(Integer.parseInt(userIdStr))) {
+    		log.info("OfflinePvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
+    	}
+    	
     	if (!userIdToOfflinePvpUser.containsKey(userIdStr)) {
-    		log.warn("trying to access nonexistent OfflinePvpUser with id: " + userIdStr);
+    		if (0 != userId) {
+    			log.warn("trying to access nonexistent OfflinePvpUser with id: " + userIdStr +
+    					" PROBABLY because the user is online");
+    		}
     		return null;
     	} else {
     		return userIdToOfflinePvpUser.get(userIdStr);

@@ -135,6 +135,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    */
   private boolean checkLegit(Builder resBuilder, OfflinePvpUser enemy, int enemyUserId,
   		PvpProto enemyProto, Date curDate) {
+  	
+  	if (0 == enemyUserId) {
+  		//if fake user, just allow this to happen
+  		return true;
+  	}
     if (null == enemy) {
       log.error("unexpected error: enemy is null. enemyUserId=" + enemyUserId + 
       		"\t enemyProto="+ enemyProto);
@@ -161,7 +166,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private void calculateEloChange(int attackerElo, PvpProto defenderProto, 
   		List<Integer> attackerEloChange, List<Integer> defenderEloChange) {
   	
-  	//TODO: calculate the actual values!
+  	//TODO: calculate the actual values! And account for fake users!
   	//case where attacker wins
   	int attackerWinEloChange = attackerElo + 10;
   	int defenderElo = defenderProto.getCurElo();
@@ -213,11 +218,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	// inBattleShieldEndTime to original time before attacker attacked defender
   	//2) attacker wins, in which case defender's shield is activated
 	  
-  	long oldInBattleShieldEndTimeMillis = enemy.getInBattleShieldEndTime().getTime();
-  	Date newInBattleShieldEndTime = new Date(oldInBattleShieldEndTimeMillis + 
-  			ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
-  	enemy.setInBattleShieldEndTime(newInBattleShieldEndTime);
-  	getHazelcastPvpUtil().setOfflinePvpUser(enemy);
+  	//ACCOUNTING FOR FAKE DEFENDERS!
+  	if (0 != defenderId) {
+  		long oldInBattleShieldEndTimeMillis = enemy.getInBattleShieldEndTime().getTime();
+  		Date newInBattleShieldEndTime = new Date(oldInBattleShieldEndTimeMillis + 
+  				ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
+  		enemy.setInBattleShieldEndTime(newInBattleShieldEndTime);
+  		getHazelcastPvpUtil().setOfflinePvpUser(enemy);
+  	}
   	
 	  return true;
   }
