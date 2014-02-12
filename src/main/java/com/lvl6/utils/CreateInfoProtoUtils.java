@@ -374,8 +374,8 @@ public class CreateInfoProtoUtils {
     }
     builder.setElo(u.getElo());
     builder.setRank(u.getRank());
-    if (u.getLastTimeQueued() != null) {
-      builder.setLastTimeQueued(u.getLastTimeQueued().getTime());
+    if (null != u.getInBattleShieldEndTime()) {
+      builder.setInBattleShieldEndTime(u.getInBattleShieldEndTime().getTime());
     }
     builder.setAttacksWon(u.getAttacksWon());
     builder.setDefensesWon(u.getAttacksWon());

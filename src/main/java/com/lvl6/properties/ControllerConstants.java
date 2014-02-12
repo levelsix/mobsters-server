@@ -45,7 +45,8 @@ public class ControllerConstants {
 	//user lvl means nothing, since it doesn't indicate much besides maybe how much you played
 	public static final int PVP__REQUIRED_MIN_LEVEL = 30; 
 	public static final int PVP__MAX_QUEUE_SIZE = 10;
-	public static final int PVP__PVP_FAKE_USER_LVL_DIVISOR = 50;
+	public static final int PVP__FAKE_USER_LVL_DIVISOR = 50;
+	public static final long PVP__MAX_BATTLE_DURATION_MILLIS = 3600000L; //one hour 
 	//all these pairing chances need to sum to one
 	public static final float PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE = 0.05F;
 	public static final float PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE = 0.15F;
@@ -59,7 +60,6 @@ public class ControllerConstants {
   public static final int PVP__NUM_ENEMIES_LIMIT = 100;
   public static final float PVP__PERCENT_CASH_LOST = 0.25F;
   public static final float PVP__PERCENT_OIL_LOST = 0.25F;
-  
   
 	
 	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES

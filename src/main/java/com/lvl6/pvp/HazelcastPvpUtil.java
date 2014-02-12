@@ -1,11 +1,6 @@
 package com.lvl6.pvp;
 
 
-import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -21,23 +16,43 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.ILock;
 import com.hazelcast.core.IMap;
 import com.hazelcast.query.EntryObject;
 import com.hazelcast.query.Predicate;
 import com.hazelcast.query.PredicateBuilder;
-import com.lvl6.properties.DBConstants;
 import com.lvl6.scriptsjava.generatefakeusers.NameGenerator;
-import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.ConnectedPlayer;
 
 @Component
 public class HazelcastPvpUtil implements InitializingBean {
 	
+	public static int LOCK_WAIT_SECONDS = 10;
 	
-//
-//	private static final long serialVersionUID = 7033740347971426291L;
 
 		private static final Logger log = LoggerFactory.getLogger(HazelcastPvpUtil.class);
+		
+		@javax.annotation.Resource(name = "playersByPlayerId")
+		IMap<Integer, ConnectedPlayer> playersByPlayerId;
 
+		public IMap<Integer, ConnectedPlayer> getPlayersByPlayerId() {
+			return playersByPlayerId;
+		}
+
+		public void setPlayersByPlayerId(IMap<Integer, ConnectedPlayer> playersByPlayerId) {
+			this.playersByPlayerId = playersByPlayerId;
+		} 
+		
+		
+		@Autowired
+		protected TextFileResourceLoaderAware textFileResourceLoaderAware;
+		
+		@Autowired
+		protected HazelcastInstance hazel;
+		
+		@Autowired
+		protected OfflinePvpUserRetrieveUtils offlinePvpUserRetrieveUtils;
+		
 		//properties for random names
 	  private static int syllablesInName1 = 2;
 	  private static int syllablesInName2 = 3;
@@ -47,43 +62,99 @@ public class HazelcastPvpUtil implements InitializingBean {
 	  private static final String FILE_OF_RANDOM_NAMES = "classpath:namerulesElven.txt";
     
 	  public static final String OFFLINE_PVP_USER_MAP = "offlinePvpUserMap";
+	  public static final String OFFLINE_PVP_LOCK_NAME = "OfflinePvpLock:";
 	  
-	  
-	  @Autowired
-	  protected TextFileResourceLoaderAware textFileResourceLoaderAware;
-    
-    @Autowired
-  	protected HazelcastInstance hazel;
 
+    
     protected IMap<String, OfflinePvpUser> userIdToOfflinePvpUser;
     
     
     //METHOD TO ACTUALLY USE IMAP
     public Set<OfflinePvpUser> retrieveOfflinePvpUsers(int minElo, int maxElo, 
-    		Date shieldEndTimeBeforeNow) {
+    		Date now) {
     	log.info("querying for people to attack. shieldEndTime should be before now=" +
-    		shieldEndTimeBeforeNow + "\t elo should be between minElo=" + minElo + ", maxElo=" + maxElo);
+    		now + "\t elo should be between minElo=" + minElo + ", maxElo=" + maxElo);
     	
+    	String inBattleShieldEndTime = PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_SHIELD_END_TIME;
     	String shieldEndTime = PvpConstants.OFFLINE_PVP_USER__SHIELD_END_TIME;
     	String elo = PvpConstants.OFFLINE_PVP_USER__ELO;
     	EntryObject e = new PredicateBuilder().getEntryObject();
-    	Predicate predicate = e.get(shieldEndTime).lessThan(shieldEndTimeBeforeNow)
+    	
+    	//the <?, ?> is to prevent a warning from showing up in Eclipse...lol
+    	Predicate<?, ?> predicate = e.get(shieldEndTime).lessThan(now)
+    			.and(e.get(inBattleShieldEndTime).lessThan(now))
     			.and(e.get(elo).between(minElo, maxElo));
-//    			.and(e.get(elo).lessThan(maxElo)).and(e.get(elo).greaterThan(minElo));
     	
     	Set<OfflinePvpUser> users = (Set<OfflinePvpUser>) userIdToOfflinePvpUser.values(predicate);
     	log.info("users:" + users);
     	
     	return users;
     }
+    
+    //for fake users
+    public String getRandomName() {
+    	int len = randomNames.size();
+    	int randInt = rand.nextInt(len);
 
+    	return randomNames.get(randInt);
+    }
+    
+    protected String getPvpLockName(int userId) {
+    	return OFFLINE_PVP_LOCK_NAME + userId;
+    }
+    
+    public ILock getPvpPlayerLock(int userId) {
+    	String lockName = getPvpLockName(userId);
+    			
+    	return hazel.getLock(lockName);
+    }
+    
+    //just to make an opposite to lockPvpPlayer
+    public void unlockPvpPlayer(ILock playerLock) {
+    	playerLock.forceUnlock();
+    }
+    
+    public OfflinePvpUser getOfflinePvpUser(int userId) {
+    	String userIdStr = String.valueOf(userId);
+    	if (!userIdToOfflinePvpUser.containsKey(userIdStr)) {
+    		log.warn("trying to access nonexistent OfflinePvpUser with id: " + userIdStr);
+    		return null;
+    	} else {
+    		return userIdToOfflinePvpUser.get(userIdStr);
+    	}
+    }
+    
+    //if the OfflinePvpUser doesn't exist, then don't save it because
+    //the OfflinePvpUser is probably online now. Otherwise, store the user.
+    public void setOfflinePvpUser(OfflinePvpUser enemy) {
+    	String userIdStr = enemy.getUserId();
+    	
+    	if (!userIdToOfflinePvpUser.containsKey(userIdStr)) {
+    		log.warn("trying to update nonexistent OfflinePvpUser with id: " + userIdStr +
+    				" PROBABLY because the user is online, so not saving");
+    	} else {
+    		OfflinePvpUser existing = userIdToOfflinePvpUser.get(userIdStr);
+    		userIdToOfflinePvpUser.put(userIdStr, enemy);
+    		log.info("updated offlinePvpUser: " + userIdStr + "\t old=" + existing +
+    				"\t new=" + enemy);
+    	}
+    	
+    	if (playersByPlayerId.containsKey(Integer.parseInt(userIdStr))) {
+    		log.info("OfflinePvpUser is online, in ConnectedPlayers map. id=" + userIdStr);
+    	}
+    	
+    }
+    
+    
+    //SETUP STUFF
     //REQUIRED INITIALIZING BEAN STUFF
 		@Override
     public void afterPropertiesSet() throws Exception {
     	createRandomNames();
-    	populateOfflinePvpUserMap();
+    	setupOfflinePvpUserMap();
     }
-    
+		
+		//creates the random names for fake users
     protected void createRandomNames() {
     	rand = new Random();
     	Resource nameFile = getTextFileResourceLoaderAware().getResource(FILE_OF_RANDOM_NAMES);
@@ -124,24 +195,14 @@ public class HazelcastPvpUtil implements InitializingBean {
       
     }
 
-    public String getRandomName() {
-    	int len = randomNames.size();
-    	int randInt = rand.nextInt(len);
-    	
-    	return randomNames.get(randInt);
-    }
-    
-
-    protected void populateOfflinePvpUserMap() {
-    	
-    	
-    	//this will create the map if it doesn't exist
+    protected void setupOfflinePvpUserMap() {
+    	//this will create the map if map doesn't exist
     	userIdToOfflinePvpUser = hazel.getMap(OFFLINE_PVP_USER_MAP);
     	
     	addOfflinePvpUserIndexes();
     	
     	//now we have almost all offline users, put them into the userIdToOfflinePvpUser IMap
-    	Collection<OfflinePvpUser> validUsers = getPvpValidUsers();
+    	Collection<OfflinePvpUser> validUsers = getOfflinePvpUserRetrieveUtils().getPvpValidUsers();
     	if (null != validUsers && !validUsers.isEmpty()) {
     		log.info("populating the IMap with users that can be attacked in pvp. numUsers="
     				+ validUsers.size());
@@ -151,85 +212,6 @@ public class HazelcastPvpUtil implements InitializingBean {
     	}
     	
     }
-    
-    //search entire user table for users who do not have active shields,
-    //but only select certain columns
-    protected Collection<OfflinePvpUser> getPvpValidUsers() {
-    	Timestamp now = new Timestamp((new Date()).getTime());
-    	
-    	StringBuffer sb = new StringBuffer();
-    	sb.append("SELECT ");
-    	sb.append(DBConstants.USER__ID);
-    	sb.append(", ");
-    	sb.append(DBConstants.USER__ELO);
-    	sb.append(", ");
-    	sb.append(DBConstants.USER__SHIELD_END_TIME);
-    	sb.append(" FROM ");
-    	sb.append(DBConstants.TABLE_USER);
-    	sb.append(" WHERE ");
-    	sb.append(DBConstants.USER__HAS_ACTIVE_SHIELD);
-    	sb.append(" =? AND ");
-    	sb.append(DBConstants.USER__SHIELD_END_TIME);
-    	sb.append(" < ?;");
-    	String query = sb.toString();
-    	
-    	List<Object> values = new ArrayList<Object>();
-    	values.add(false);
-    	values.add(now);
-    	
-    	log.info("query=" + query);
-    	log.info("values=" + values);
-    	
-    	Connection conn = null;
-    	ResultSet rs = null;
-    	List<OfflinePvpUser> validUsers = new ArrayList<OfflinePvpUser>();
-    	try {
-    		conn = DBConnection.get().getConnection();
-    		rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
-    		validUsers = convertRSToOfflinePvpUser(rs);
-    	} catch (Exception e) {
-    		log.error("user retrieve db error, in order to populate PvpUsers map.", e);
-    	} finally {
-    		DBConnection.get().close(rs, null, conn);
-    	}
-    	return validUsers;
-    }
-    
-    protected List<OfflinePvpUser> convertRSToOfflinePvpUser(ResultSet rs) {
-    	if (null != rs) {
-    		try {
-    			rs.last();
-    			rs.beforeFirst();
-    			List<OfflinePvpUser> users = new ArrayList<OfflinePvpUser>();
-    			while (rs.next()) {
-    				users.add(convertRSRowToOfflinePvpUser(rs));
-    			}
-    			return users;
-    		} catch (SQLException e) {
-    			log.error("problem with database call, in order to populate PvpUsers map.", e);
-    		}
-    	}
-    	return null;
-    }
-
-    protected OfflinePvpUser convertRSRowToOfflinePvpUser(ResultSet rs) throws SQLException {
-    	int i = 1;
-
-    	String userId = Integer.toString((rs.getInt(i++)));
-    	int elo = rs.getInt(i++);
-
-    	Date shieldEndTime = null;
-    	try {
-    		Timestamp ts = rs.getTimestamp(i++);
-    		if (!rs.wasNull()) {
-    			shieldEndTime = new Date(ts.getTime());
-    		}
-    	} catch (Exception e) {
-    		log.error("db error: shield_end_time not set. user_id=" + userId);
-    	}
-
-    	return new OfflinePvpUser(userId, elo, shieldEndTime);
-    }
 
     protected void addOfflinePvpUserIndexes() {
     	//when specifying what property the index will be on, look at PvpConstants for the
@@ -238,6 +220,7 @@ public class HazelcastPvpUtil implements InitializingBean {
     	//the true is for indicating that there will be ranged queries on this property
     	userIdToOfflinePvpUser.addIndex(PvpConstants.OFFLINE_PVP_USER__ELO, true);
     	userIdToOfflinePvpUser.addIndex(PvpConstants.OFFLINE_PVP_USER__SHIELD_END_TIME, true);
+    	userIdToOfflinePvpUser.addIndex(PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_SHIELD_END_TIME, true);
     }
     
     protected void populateOfflinePvpUserMap(Collection<OfflinePvpUser> validUsers) {
@@ -269,5 +252,15 @@ public class HazelcastPvpUtil implements InitializingBean {
 				TextFileResourceLoaderAware textFileResourceLoaderAware) {
 			this.textFileResourceLoaderAware = textFileResourceLoaderAware;
 		}
+
+		public OfflinePvpUserRetrieveUtils getOfflinePvpUserRetrieveUtils() {
+			return offlinePvpUserRetrieveUtils;
+		}
+
+		public void setOfflinePvpUserRetrieveUtils(
+				OfflinePvpUserRetrieveUtils offlinePvpUserRetrieveUtils) {
+			this.offlinePvpUserRetrieveUtils = offlinePvpUserRetrieveUtils;
+		}
+		
 
 }

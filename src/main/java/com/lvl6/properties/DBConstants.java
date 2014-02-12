@@ -4,7 +4,6 @@ package com.lvl6.properties;
 public class DBConstants {
   /* TABLENAMES*/
 	public static final String TABLE_ALERT_ON_STARTUP = "alert_on_startup";
-	public static final String TABLE_BATTLE_HISTORY = "battle_history";
 	public static final String TABLE_BOOSTER_DISPLAY_ITEM = "booster_display_item";
 	public static final String TABLE_BOOSTER_ITEM = "booster_item";
 	public static final String TABLE_BOOSTER_PACK = "booster_pack";
@@ -38,6 +37,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_HEALING_HISTORY = "monster_healing_history";
   public static final String TABLE_MONSTER_LEVEL_INFO = "monster_level_info";
   public static final String TABLE_PROFANITY = "profanity";
+  public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
   public static final String TABLE_QUEST_MONSTER_ITEM = "quest_monster_item";
@@ -87,17 +87,7 @@ public class DBConstants {
   public static final String AVAILABLE_REFERRAL_CODES__ID = GENERIC__ID;
   public static final String AVAILABLE_REFERRAL_CODES__CODE = "code";
 
-  /*BATTLE HISTORY*/
-  public static final String BATTLE_HISTORY__ATTACKER_ID = "attacker_id";
-  public static final String BATTLE_HISTORY__DEFENDER_ID = "defender_id";
-  public static final String BATTLE_HISTORY__RESULT = "result";
-  public static final String BATTLE_HISTORY__BATTLE_COMPLETE_TIME = "battle_complete_time";
-  public static final String BATTLE_HISTORY__COINS_STOLEN = "coins_stolen";
-  public static final String BATTLE_HISTORY__EQUIP_STOLEN = "equip_stolen";
-  public static final String BATTLE_HISTORY__EXP_GAINED = "exp_gained";
-  public static final String BATTLE_HISTORY__STOLEN_EQUIP_LEVEL = "stolen_equip_level";
-
-  /*BOOSTER PACK PURCHASE HISTORY*/
+   /*BOOSTER PACK PURCHASE HISTORY*/
   public static final String BOOSTER_PACK_PURCHASE_HISTORY__USER_ID = GENERIC__USER_ID;
   public static final String BOOSTER_PACK_PURCHASE_HISTORY__BOOSTER_PACK_ID = "booster_pack_id"; 
   public static final String BOOSTER_PACK_PURCHASE_HISTORY__TIME_OF_PURCHASE = "time_of_purchase";
@@ -262,6 +252,16 @@ public class DBConstants {
   public static final String MONSTER_HEALING_HISTORY__DEQUEUED_TIME = "dequeued_time";
   public static final String MONSTER_HEALING_HISTORY__FINISHED_HEALING = "finished_healing";
 
+  /*PVP BATTLE HISTORY*/
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_ID = "attacker_id";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_ID = "defender_id";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_WIN_ELO_CHANGE = "attacker_win_elo_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_LOSE_ELO_CHANGE = "defender_lose_elo_change";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_LOSE_ELO_CHANGE = "attacker_lose_elo_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_WIN_ELO_CHANGE = "defender_win_elo_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_OLD_IN_BATTLE_SHIELD_END_TIME =
+  		"defender_old_in_battle_shield_end_time";
+
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
   public static final String QUEST_FOR_USER__QUEST_ID = "quest_id";
@@ -399,7 +399,7 @@ public class DBConstants {
   public static final String USER__SHIELD_END_TIME = "shield_end_time";
   public static final String USER__ELO = "elo";
   public static final String USER__RANK = "rank";
-  public static final String USER__LAST_TIME_QUEUED = "last_time_queued";
+  public static final String USER__IN_BATTLE_SHIELD_END_TIME = "in_battle_shield_end_time";
   public static final String USER__ATTACKS_WON = "attacks_won";
   public static final String USER__DEFENSES_WON = "defenses_won";
   public static final String USER__ATTACKS_LOST = "attacks_lost";

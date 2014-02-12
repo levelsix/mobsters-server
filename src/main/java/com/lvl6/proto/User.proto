@@ -109,7 +109,7 @@ message FullUserProto {
 	optional int64 shieldEndTime = 32;
 	optional int32 elo = 33;
 	optional string rank = 34;
-	optional int64 lastTimeQueued = 35; 
+	//optional int64 inBattleShieldEndTime = 35; //defined below 
 	optional int32 attacksWon = 36;
 	optional int32 defensesWon = 37;
 	optional int32 attacksLost = 38;
@@ -130,6 +130,7 @@ message FullUserProto {
 	optional int32 numConsecutiveDaysPlayed = 24;
 	optional int64 lastWallPostNotificationTime = 26;
 	optional string kabamNaid = 27;
+	optional int64 inBattleShieldEndTime = 35;
 	//optional int32 nthExtraSlotsViaFb = 41; //get rid of this
 }
 

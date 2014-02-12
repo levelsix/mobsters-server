@@ -28,7 +28,7 @@ enum BattleResult {
 
 message PvpProto {
 	optional MinimumUserProtoWithLevel defender = 1;
-	optional int32 curElo = 2;
+	optional int32 curElo = 2; //the defender's current elo
 	repeated MinimumUserMonsterProto defenderMonsters = 3;
 	optional int32 prospectiveCashWinnings = 4;
 	optional int32 prospectiveOilWinnings = 5;

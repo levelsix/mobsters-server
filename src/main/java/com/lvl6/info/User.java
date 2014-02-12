@@ -13,7 +13,8 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -1955754690988621207L;
+	private static final long serialVersionUID = 4488424152619091590L;
+	
 	private int id;
 	private String name;
 	private int level;
@@ -50,7 +51,7 @@ public class User implements Serializable {
 	private Date shieldEndTime;
 	private int elo;
 	private String rank;
-	private Date lastTimeQueued;
+	private Date inBattleShieldEndTime;
 	private int attacksWon;
 	private int defensesWon;
 	private int attacksLost;
@@ -69,7 +70,7 @@ public class User implements Serializable {
 			Date lastWallPostNotificationTime, int kabamNaid,
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
 			boolean hasActiveShield, Date shieldEndTime, int elo, String rank,
-			Date lastTimeQueued, int attacksWon, int defensesWon, int attacksLost,
+			Date inBattleShieldEndTime, int attacksWon, int defensesWon, int attacksLost,
 			int defensesLost, String facebookId) {
 		super();
 		this.id = id;
@@ -107,7 +108,7 @@ public class User implements Serializable {
 		this.shieldEndTime = shieldEndTime;
 		this.elo = elo;
 		this.rank = rank;
-		this.lastTimeQueued = lastTimeQueued;
+		this.inBattleShieldEndTime = inBattleShieldEndTime;
 		this.attacksWon = attacksWon;
 		this.defensesWon = defensesWon;
 		this.attacksLost = attacksLost;
@@ -733,15 +734,15 @@ public class User implements Serializable {
 //		return false;
 //	}
 
-	public boolean updateLastTimeQueued(Date lastTimeQueued) {
+	public boolean updateInBattleShieldEndTime(Date inBattleShieldEndTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__LAST_TIME_QUEUED, lastTimeQueued);
+		absoluteParams.put(DBConstants.USER__IN_BATTLE_SHIELD_END_TIME, inBattleShieldEndTime);
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.lastTimeQueued = lastTimeQueued;
+			this.inBattleShieldEndTime = inBattleShieldEndTime;
 			return true;
 		}
 		return false;
@@ -1044,12 +1045,12 @@ public class User implements Serializable {
 		this.rank = rank;
 	}
 
-	public Date getLastTimeQueued() {
-		return lastTimeQueued;
+	public Date getInBattleShieldEndTime() {
+		return inBattleShieldEndTime;
 	}
 
-	public void setLastTimeQueued(Date lastTimeQueued) {
-		this.lastTimeQueued = lastTimeQueued;
+	public void setInBattleShieldEndTime(Date inBattleShieldEndTime) {
+		this.inBattleShieldEndTime = inBattleShieldEndTime;
 	}
 
 	public int getAttacksWon() {
@@ -1113,9 +1114,11 @@ public class User implements Serializable {
 				+ ", numBeginnerSalesPurchased=" + numBeginnerSalesPurchased
 				+ ", hasActiveShield=" + hasActiveShield + ", shieldEndTime="
 				+ shieldEndTime + ", elo=" + elo + ", rank=" + rank
-				+ ", lastTimeQueued=" + lastTimeQueued + ", attacksWon=" + attacksWon
-				+ ", defensesWon=" + defensesWon + ", attacksLost=" + attacksLost
-				+ ", defensesLost=" + defensesLost + ", facebookId=" + facebookId + "]";
+				+ ", inBattleShieldEndTime=" + inBattleShieldEndTime + ", attacksWon="
+				+ attacksWon + ", defensesWon=" + defensesWon + ", attacksLost="
+				+ attacksLost + ", defensesLost=" + defensesLost + ", facebookId="
+				+ facebookId + "]";
 	}
+
 
 }

@@ -15,18 +15,11 @@ option java_outer_classname = "EventPvpProto";
 // SOME BACKGROUND: 
 // All people that can be attacked will be offline people. The opposite is not true though.
 // All people that can be attacked will not have an active shield.
-// NITTY GRITTY:
-// An ordered set will contain the mapping  elo -> userId
-// Whenever an offline user comes in (StartupRequest) this user will be removed from the set.
-// Whenever someone initiates an attack on an offline user, the offline user will be removed
-// 		from the set.
-// Whenever someone logs out, the user will be placed into the set if he qualifies to be
-//		attacked.
-
 message QueueUpRequestProto {
 	optional MinimumUserProto attacker = 1;
 	optional int32 attackerElo = 2;
 
+	/* an EventUser.proto UpdateUserCurrencyEvent will be used instead of this stuff
 	//if user needs, say, five more cash, then user can spend gems to replace
 	//said five cash. (positive number, server will convert it to negative)
 	optional int32 gemsSpent = 3;
@@ -34,6 +27,7 @@ message QueueUpRequestProto {
 	//copy pasted from somewhere else, trying to be consistent, don't forsee being positive
 	//positive means refund, negative means charge user
 	optional sint32 cashChange = 4;
+	*/
 	
 	//these users should not be considered 
 	repeated int32 seenUserIds = 5;
@@ -57,3 +51,27 @@ message QueueUpResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+// Whenever an offline user comes in (StartupRequest) this user will be removed from the
+//	potentialPvpUsers collection.	
+// Whenever someone logs out, the user will be placed into the collection if he qualifies
+//	to be attacked.
+
+message BeginPvpBattleRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 senderElo = 2;
+	optional int64 attackStartTime = 3;
+	
+	//this is the enemy that the user wants to fight
+	optional PvpProto enemy = 4;
+}
+
+message BeginPvpBattleResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional BeginPvpBattleStatus status = 2;
+	
+	enum BeginPvpBattleStatus {
+		SUCCESS = 1;
+		FAIL_ENEMY_UNAVAILABLE = 2;
+		FAIL_OTHER = 3;
+	}
+}
