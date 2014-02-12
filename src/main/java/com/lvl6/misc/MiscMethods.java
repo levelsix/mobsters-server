@@ -384,6 +384,7 @@ public class MiscMethods {
     cb.setMinutesPerGem(ControllerConstants.MINUTES_PER_GEM);
     cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
     cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
+    cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
     
     //set more properties above
 //    BattleConstants battleConstants = BattleConstants.newBuilder()
