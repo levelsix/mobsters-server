@@ -10,6 +10,7 @@ import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.server.ServerMessage;
 
 public class ServerEventHandler implements MessageListener<ServerMessage>, InitializingBean {
@@ -42,6 +43,18 @@ public class ServerEventHandler implements MessageListener<ServerMessage>, Initi
 	public void setTopic(ITopic<ServerMessage> topic) {
 		this.topic = topic;
 	}
+	
+	@Resource
+	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils;
+	
+	public MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtils() {
+		return monsterForPvpRetrieveUtils;
+	}
+	
+	public void setMonsterForPvpRetrieveUtils(
+			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils) {
+		this.monsterForPvpRetrieveUtils = monsterForPvpRetrieveUtils;
+	}
 
 
 	@Override
@@ -51,6 +64,7 @@ public class ServerEventHandler implements MessageListener<ServerMessage>, Initi
 			log.info("Reloading all static data");
 			MiscMethods.reloadAllRareChangeStaticData();
 			getStaticDataReloadDone().publish(ServerMessage.DONE_RELOADING_STATIC_DATA );
+			getMonsterForPvpRetrieveUtils().reload();
 		}
 	}
 
