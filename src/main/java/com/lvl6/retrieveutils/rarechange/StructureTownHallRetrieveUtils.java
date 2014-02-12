@@ -119,9 +119,10 @@ import com.lvl6.utils.DBConnection;
     int numResidences = rs.getInt(i++);
     int numMonsterSlots = rs.getInt(i++);
     int numLabs = rs.getInt(i++);
+    int pvpQueueCashCost = rs.getInt(i++);
     
     return new StructureTownHall(structId, numResourceOneGenerators,
     		numResourceOneStorages, numResourceTwoGenerators, numResourceTwoStorages,
-    		numHospitals, numResidences, numMonsterSlots, numLabs);
+    		numHospitals, numResidences, numMonsterSlots, numLabs, pvpQueueCashCost);
   }
 }
