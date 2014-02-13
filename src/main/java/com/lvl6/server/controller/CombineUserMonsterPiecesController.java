@@ -170,6 +170,13 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		userMonsterIds.addAll(wholeUserMonsterIds);
   	}
   	
+  	if (userMonsterIds.isEmpty()) {
+  		resBuilder.setStatus(CombineUserMonsterPiecesStatus.FAIL_OTHER);
+  		log.error("the user didn't send any userMonsters to complete!.");
+  		return false;
+  	}
+  	
+  	
   	if (gemCost > 0 && userMonsterIds.size() > 1) {
   		//user speeding up combining multiple monsters, can only speed up one
   		log.error("user speeding up combining pieces for multiple monsters can only " +
