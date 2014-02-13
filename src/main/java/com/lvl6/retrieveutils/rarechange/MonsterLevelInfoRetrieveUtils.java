@@ -115,9 +115,10 @@ import com.lvl6.utils.DBConnection;
     int lightningDmg = rs.getInt(i++);
     int darknessDmg = rs.getInt(i++);
     int rockDmg = rs.getInt(i++);
+    int speed = rs.getInt(i++);
     
     MonsterLevelInfo srs = new MonsterLevelInfo(monsterId, level, hp, curLvlRequiredExp,
-    		feederExp, fireDmg, grassDmg, waterDmg, lightningDmg, darknessDmg, rockDmg);
+    		feederExp, fireDmg, grassDmg, waterDmg, lightningDmg, darknessDmg, rockDmg, speed);
     
     return srs;
   }

@@ -288,4 +288,14 @@ public class DeleteUtils implements DeleteUtil {
 		return numDeleted;
 	}
 	
+	@Override
+	public int deletePvpBattleForUser(int attackerId) {
+		String tableName = DBConstants.TABLE_PVP_BATTLE_FOR_USER;
+		
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID, attackerId);
+
+		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
+		return numDeleted;
+	}
 }

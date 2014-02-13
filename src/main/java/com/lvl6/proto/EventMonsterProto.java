@@ -12264,6 +12264,7 @@ public final class EventMonsterProto {
       FAIL_INSUFFICIENT_FACEBOOK_INVITES(2, 3),
       FAIL_OTHER(3, 4),
       FAIL_INCONSISTENT_INVITE_DATA(4, 5),
+      FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL(5, 6),
       ;
       
       public static final int SUCCESS_VALUE = 1;
@@ -12271,6 +12272,7 @@ public final class EventMonsterProto {
       public static final int FAIL_INSUFFICIENT_FACEBOOK_INVITES_VALUE = 3;
       public static final int FAIL_OTHER_VALUE = 4;
       public static final int FAIL_INCONSISTENT_INVITE_DATA_VALUE = 5;
+      public static final int FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL_VALUE = 6;
       
       
       public final int getNumber() { return value; }
@@ -12282,6 +12284,7 @@ public final class EventMonsterProto {
           case 3: return FAIL_INSUFFICIENT_FACEBOOK_INVITES;
           case 4: return FAIL_OTHER;
           case 5: return FAIL_INCONSISTENT_INVITE_DATA;
+          case 6: return FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL;
           default: return null;
         }
       }
@@ -12312,7 +12315,7 @@ public final class EventMonsterProto {
       }
       
       private static final IncreaseMonsterInventorySlotStatus[] VALUES = {
-        SUCCESS, FAIL_INSUFFICIENT_FUNDS, FAIL_INSUFFICIENT_FACEBOOK_INVITES, FAIL_OTHER, FAIL_INCONSISTENT_INVITE_DATA, 
+        SUCCESS, FAIL_INSUFFICIENT_FUNDS, FAIL_INSUFFICIENT_FACEBOOK_INVITES, FAIL_OTHER, FAIL_INCONSISTENT_INVITE_DATA, FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL, 
       };
       
       public static IncreaseMonsterInventorySlotStatus valueOf(
@@ -18948,69 +18951,70 @@ public final class EventMonsterProto {
       "ySlotRequestProto.IncreaseSlotType\022\024\n\014us" +
       "erStructId\030\003 \001(\005\022\036\n\026userFbInviteForSlotI" +
       "ds\030\004 \003(\005\"=\n\020IncreaseSlotType\022\014\n\010PURCHASE" +
-      "\020\001\022\033\n\027REDEEM_FACEBOOK_INVITES\020\002\"\367\002\n)Incr" +
+      "\020\001\022\033\n\027REDEEM_FACEBOOK_INVITES\020\002\"\240\003\n)Incr" +
       "easeMonsterInventorySlotResponseProto\0220\n" +
       "\006sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUs" +
       "erProto\022l\n\006status\030\002 \001(\0162\\.com.lvl6.proto" +
       ".IncreaseMonsterInventorySlotResponsePro" +
-      "to.IncreaseMonsterInventorySlotStatus\"\251\001" +
+      "to.IncreaseMonsterInventorySlotStatus\"\322\001" +
       "\n\"IncreaseMonsterInventorySlotStatus\022\013\n\007",
       "SUCCESS\020\001\022\033\n\027FAIL_INSUFFICIENT_FUNDS\020\002\022&" +
       "\n\"FAIL_INSUFFICIENT_FACEBOOK_INVITES\020\003\022\016" +
       "\n\nFAIL_OTHER\020\004\022!\n\035FAIL_INCONSISTENT_INVI" +
-      "TE_DATA\020\005\"\241\002\n#InviteFbFriendsForSlotsReq" +
-      "uestProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.pro" +
-      "to.MinimumUserProtoWithFacebookId\022\\\n\007inv" +
-      "ites\030\002 \003(\0132K.com.lvl6.proto.InviteFbFrie" +
-      "ndsForSlotsRequestProto.FacebookInviteSt" +
-      "ructure\032\\\n\027FacebookInviteStructure\022\022\n\nfb" +
-      "FriendId\030\001 \001(\t\022\024\n\014userStructId\030\002 \001(\005\022\027\n\017",
-      "userStructFbLvl\030\003 \001(\005\"\314\002\n$InviteFbFriend" +
-      "sForSlotsResponseProto\022>\n\006sender\030\001 \001(\0132." +
-      ".com.lvl6.proto.MinimumUserProtoWithFace" +
-      "bookId\022b\n\006status\030\002 \001(\0162R.com.lvl6.proto." +
-      "InviteFbFriendsForSlotsResponseProto.Inv" +
-      "iteFbFriendsForSlotsStatus\022B\n\ninvitesNew" +
-      "\030\003 \003(\0132..com.lvl6.proto.UserFacebookInvi" +
-      "teForSlotProto\"<\n\035InviteFbFriendsForSlot" +
-      "sStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\243\001\n" +
-      "+AcceptAndRejectFbInviteForSlotsRequestP",
-      "roto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.Mi" +
-      "nimumUserProtoWithFacebookId\022\031\n\021accepted" +
-      "InviteIds\030\002 \003(\005\022\031\n\021rejectedInviteIds\030\003 \003" +
-      "(\005\"\237\003\n,AcceptAndRejectFbInviteForSlotsRe" +
-      "sponseProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.p" +
-      "roto.MinimumUserProtoWithFacebookId\022r\n\006s" +
-      "tatus\030\002 \001(\0162b.com.lvl6.proto.AcceptAndRe" +
-      "jectFbInviteForSlotsResponseProto.Accept" +
-      "AndRejectFbInviteForSlotsStatus\022G\n\017accep" +
-      "tedInvites\030\003 \003(\0132..com.lvl6.proto.UserFa",
-      "cebookInviteForSlotProto\"r\n%AcceptAndRej" +
-      "ectFbInviteForSlotsStatus\022\013\n\007SUCCESS\020\001\022\020" +
-      "\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BEEN_US" +
-      "ED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$CombineUserMons" +
-      "terPiecesRequestProto\0220\n\006sender\030\001 \001(\0132 ." +
-      "com.lvl6.proto.MinimumUserProto\022\026\n\016userM" +
-      "onsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%Com" +
-      "bineUserMonsterPiecesResponseProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.Co",
-      "mbineUserMonsterPiecesResponseProto.Comb" +
-      "ineUserMonsterPiecesStatus\"\205\001\n\036CombineUs" +
-      "erMonsterPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FA" +
-      "IL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_THAN" +
-      "_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTHER" +
-      "\020\004\"\233\001\n\033SellUserMonsterRequestProto\022@\n\006se" +
+      "TE_DATA\020\005\022\'\n#FAIL_STRUCTURE_AT_MAX_FB_IN" +
+      "VITE_LVL\020\006\"\241\002\n#InviteFbFriendsForSlotsRe" +
+      "questProto\022>\n\006sender\030\001 \001(\0132..com.lvl6.pr" +
+      "oto.MinimumUserProtoWithFacebookId\022\\\n\007in" +
+      "vites\030\002 \003(\0132K.com.lvl6.proto.InviteFbFri" +
+      "endsForSlotsRequestProto.FacebookInviteS" +
+      "tructure\032\\\n\027FacebookInviteStructure\022\022\n\nf",
+      "bFriendId\030\001 \001(\t\022\024\n\014userStructId\030\002 \001(\005\022\027\n" +
+      "\017userStructFbLvl\030\003 \001(\005\"\314\002\n$InviteFbFrien" +
+      "dsForSlotsResponseProto\022>\n\006sender\030\001 \001(\0132" +
+      "..com.lvl6.proto.MinimumUserProtoWithFac" +
+      "ebookId\022b\n\006status\030\002 \001(\0162R.com.lvl6.proto" +
+      ".InviteFbFriendsForSlotsResponseProto.In" +
+      "viteFbFriendsForSlotsStatus\022B\n\ninvitesNe" +
+      "w\030\003 \003(\0132..com.lvl6.proto.UserFacebookInv" +
+      "iteForSlotProto\"<\n\035InviteFbFriendsForSlo" +
+      "tsStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\243\001",
+      "\n+AcceptAndRejectFbInviteForSlotsRequest" +
+      "Proto\022>\n\006sender\030\001 \001(\0132..com.lvl6.proto.M" +
+      "inimumUserProtoWithFacebookId\022\031\n\021accepte" +
+      "dInviteIds\030\002 \003(\005\022\031\n\021rejectedInviteIds\030\003 " +
+      "\003(\005\"\237\003\n,AcceptAndRejectFbInviteForSlotsR" +
+      "esponseProto\022>\n\006sender\030\001 \001(\0132..com.lvl6." +
+      "proto.MinimumUserProtoWithFacebookId\022r\n\006" +
+      "status\030\002 \001(\0162b.com.lvl6.proto.AcceptAndR" +
+      "ejectFbInviteForSlotsResponseProto.Accep" +
+      "tAndRejectFbInviteForSlotsStatus\022G\n\017acce",
+      "ptedInvites\030\003 \003(\0132..com.lvl6.proto.UserF" +
+      "acebookInviteForSlotProto\"r\n%AcceptAndRe" +
+      "jectFbInviteForSlotsStatus\022\013\n\007SUCCESS\020\001\022" +
+      "\020\n\014FAIL_EXPIRED\020\002\022\032\n\026FAIL_ALREADY_BEEN_U" +
+      "SED\020\003\022\016\n\nFAIL_OTHER\020\004\"\201\001\n$CombineUserMon" +
+      "sterPiecesRequestProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022\026\n\016user" +
+      "MonsterIds\030\002 \003(\003\022\017\n\007gemCost\030\003 \001(\005\"\307\002\n%Co" +
+      "mbineUserMonsterPiecesResponseProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser",
+      "Proto\022d\n\006status\030\002 \001(\0162T.com.lvl6.proto.C" +
+      "ombineUserMonsterPiecesResponseProto.Com" +
+      "bineUserMonsterPiecesStatus\"\205\001\n\036CombineU" +
+      "serMonsterPiecesStatus\022\013\n\007SUCCESS\020\001\022\032\n\026F" +
+      "AIL_INSUFFUCIENT_GEMS\020\002\022*\n&FAIL_MORE_THA" +
+      "N_ONE_MONSTER_FOR_SPEEDUP\020\003\022\016\n\nFAIL_OTHE" +
+      "R\020\004\"\233\001\n\033SellUserMonsterRequestProto\022@\n\006s" +
+      "ender\030\001 \001(\01320.com.lvl6.proto.MinimumUser" +
+      "ProtoWithMaxResources\022:\n\005sales\030\002 \003(\0132+.c" +
+      "om.lvl6.proto.MinimumUserMonsterSellProt",
+      "o\"\352\001\n\034SellUserMonsterResponseProto\022@\n\006se" +
       "nder\030\001 \001(\01320.com.lvl6.proto.MinimumUserP" +
-      "rotoWithMaxResources\022:\n\005sales\030\002 \003(\0132+.co" +
-      "m.lvl6.proto.MinimumUserMonsterSellProto" +
-      "\"\352\001\n\034SellUserMonsterResponseProto\022@\n\006sen",
-      "der\030\001 \001(\01320.com.lvl6.proto.MinimumUserPr" +
-      "otoWithMaxResources\022R\n\006status\030\002 \001(\0162B.co" +
-      "m.lvl6.proto.SellUserMonsterResponseProt" +
-      "o.SellUserMonsterStatus\"4\n\025SellUserMonst" +
-      "erStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023B" +
-      "\021EventMonsterProto"
+      "rotoWithMaxResources\022R\n\006status\030\002 \001(\0162B.c" +
+      "om.lvl6.proto.SellUserMonsterResponsePro" +
+      "to.SellUserMonsterStatus\"4\n\025SellUserMons" +
+      "terStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\023" +
+      "B\021EventMonsterProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

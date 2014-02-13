@@ -177,9 +177,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     				idsToAcceptedTemp + "\t expectedUserStructId=" + userStructId);
     		return false;
     	}
-  		
-  		//required min num invites depends on the structure
-  		int minNumInvites = getMinNumInvitesFromStruct(sfu);
+    	
+    	//check if user struct is already at its max fb invite lvl, 
+    	int structId = sfu.getStructId();
+    	Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
+    	int structLvl = struct.getLevel();
+    	
+    	int nextUserStructFbInviteLvl = sfu.getFbInviteStructLvl() + 1;
+    	if (nextUserStructFbInviteLvl > structLvl) {
+    		resBuilder.setStatus(IncreaseMonsterInventorySlotStatus.FAIL_STRUCTURE_AT_MAX_FB_INVITE_LVL);
+    		log.error("user struct maxed fb invite lvl. userStruct=" + sfu + "\t struct=" + struct);
+    		return false;
+    	}
+    	
+  		//required min num invites depends on the structure and the UserStructure's fb lvl
+  		int minNumInvites = getMinNumInvitesFromStruct(sfu, structId, nextUserStructFbInviteLvl);
   		//check if user has enough invites to gain a slot
   		int acceptedAmount = idsToAcceptedTemp.size(); 
   		if(acceptedAmount < minNumInvites) {
@@ -248,10 +260,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return prevUserStructId;
   }
   
-  private int getMinNumInvitesFromStruct(StructureForUser sfu) {
+  private int getMinNumInvitesFromStruct(StructureForUser sfu, int structId,
+  		int userStructFbInviteLvl) {
   	//get the structure
-  	int structId = sfu.getStructId();
-  	Structure struct = StructureRetrieveUtils.getStructForStructId(structId);
+  	Structure struct = StructureRetrieveUtils.getPredecessorStructForStructIdAndLvl(
+  			structId, userStructFbInviteLvl);
   	String structType = struct.getStructType();
   	
   	int minNumInvites = -1;
@@ -260,8 +273,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		StructureResidence residence = StructureResidenceRetrieveUtils
   				.getResidenceForStructId(structId);
   		minNumInvites = residence.getNumAcceptedFbInvites();
+  	} else {
+  		log.error("invalid struct type for increasing monster slots. structType=" + structType);
   	}
   	
+  	log.info("getMinNumInvitesFromStruct returns minNumInvites=" + minNumInvites);
   	return minNumInvites;
   }
   
@@ -297,7 +313,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	if (IncreaseSlotType.REDEEM_FACEBOOK_INVITES == increaseType) {
-  		int minNumInvites = getMinNumInvitesFromStruct(sfu);
+  		int structId = sfu.getStructId();
+    	int nextUserStructFbInviteLvl = sfu.getFbInviteStructLvl() + 1;
+  		
+  		int minNumInvites = getMinNumInvitesFromStruct(sfu, structId, nextUserStructFbInviteLvl);
   		//if num accepted invites more than min required, just take the earliest ones
   		List<Integer> inviteIdsTheRest = new ArrayList<Integer>();
   		List<UserFacebookInviteForSlot> nEarliestInvites = nEarliestInvites(

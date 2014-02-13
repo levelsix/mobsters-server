@@ -45,4 +45,6 @@ public interface DeleteUtil {
   		long userMonsterIdOne, long userMonsterIdTwo, int userId);
   
   public abstract int deleteEventPersistentForUser(int userId, int eventId);
+  
+  public abstract int deletePvpBattleForUser(int attackerId);
 }

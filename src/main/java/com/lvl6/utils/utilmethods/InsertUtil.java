@@ -140,4 +140,8 @@ public interface InsertUtil {
 			List<Long> userMonsterIds, Timestamp startTime);
 
 	public abstract int insertIntoUpdateEventPersistentForUser(int userId, int eventId, Timestamp now);
+	
+	public abstract int insertUpdatePvpBattleForUser(int attackerId, int defenderId,
+			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
+			int defenderWinEloChange, Timestamp battleStartTime);
 }

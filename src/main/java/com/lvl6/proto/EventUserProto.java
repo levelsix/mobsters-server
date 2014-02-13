@@ -6197,6 +6197,14 @@ public final class EventUserProto {
     // optional int64 clientTime = 5;
     boolean hasClientTime();
     long getClientTime();
+    
+    // optional string reason = 6;
+    boolean hasReason();
+    String getReason();
+    
+    // optional string details = 7;
+    boolean hasDetails();
+    String getDetails();
   }
   public static final class UpdateUserCurrencyRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -6280,12 +6288,78 @@ public final class EventUserProto {
       return clientTime_;
     }
     
+    // optional string reason = 6;
+    public static final int REASON_FIELD_NUMBER = 6;
+    private java.lang.Object reason_;
+    public boolean hasReason() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public String getReason() {
+      java.lang.Object ref = reason_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          reason_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getReasonBytes() {
+      java.lang.Object ref = reason_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        reason_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string details = 7;
+    public static final int DETAILS_FIELD_NUMBER = 7;
+    private java.lang.Object details_;
+    public boolean hasDetails() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public String getDetails() {
+      java.lang.Object ref = details_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          details_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDetailsBytes() {
+      java.lang.Object ref = details_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        details_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       cashSpent_ = 0;
       oilSpent_ = 0;
       gemsSpent_ = 0;
       clientTime_ = 0L;
+      reason_ = "";
+      details_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -6313,6 +6387,12 @@ public final class EventUserProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(5, clientTime_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getReasonBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getDetailsBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -6342,6 +6422,14 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, clientTime_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getReasonBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getDetailsBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6482,6 +6570,10 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         clientTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000010);
+        reason_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        details_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -6544,6 +6636,14 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000010;
         }
         result.clientTime_ = clientTime_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.reason_ = reason_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.details_ = details_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6574,6 +6674,12 @@ public final class EventUserProto {
         }
         if (other.hasClientTime()) {
           setClientTime(other.getClientTime());
+        }
+        if (other.hasReason()) {
+          setReason(other.getReason());
+        }
+        if (other.hasDetails()) {
+          setDetails(other.getDetails());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6633,6 +6739,16 @@ public final class EventUserProto {
             case 40: {
               bitField0_ |= 0x00000010;
               clientTime_ = input.readInt64();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              reason_ = input.readBytes();
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
+              details_ = input.readBytes();
               break;
             }
           }
@@ -6813,6 +6929,78 @@ public final class EventUserProto {
         clientTime_ = 0L;
         onChanged();
         return this;
+      }
+      
+      // optional string reason = 6;
+      private java.lang.Object reason_ = "";
+      public boolean hasReason() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public String getReason() {
+        java.lang.Object ref = reason_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          reason_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setReason(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        reason_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearReason() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        reason_ = getDefaultInstance().getReason();
+        onChanged();
+        return this;
+      }
+      void setReason(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000020;
+        reason_ = value;
+        onChanged();
+      }
+      
+      // optional string details = 7;
+      private java.lang.Object details_ = "";
+      public boolean hasDetails() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public String getDetails() {
+        java.lang.Object ref = details_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          details_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDetails(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        details_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDetails() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        details_ = getDefaultInstance().getDetails();
+        onChanged();
+        return this;
+      }
+      void setDetails(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000040;
+        details_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UpdateUserCurrencyRequestProto)
@@ -7508,20 +7696,21 @@ public final class EventUserProto {
       "oto.MinimumUserProto\022N\n\006status\030\002 \001(\0162>.c" +
       "om.lvl6.proto.SetFacebookIdResponseProto" +
       ".SetFacebookIdStatus\"2\n\023SetFacebookIdSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\236\001\n\036Upd" +
+      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\277\001\n\036Upd" +
       "ateUserCurrencyRequestProto\0220\n\006sender\030\001 " +
       "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\021\n" +
       "\tcashSpent\030\002 \001(\005\022\020\n\010oilSpent\030\003 \001(\005\022\021\n\tge" +
-      "msSpent\030\004 \001(\005\022\022\n\nclientTime\030\005 \001(\003\"\272\002\n\037Up",
-      "dateUserCurrencyResponseProto\0220\n\006sender\030" +
-      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
-      "X\n\006status\030\002 \001(\0162H.com.lvl6.proto.UpdateU" +
-      "serCurrencyResponseProto.UpdateUserCurre" +
-      "ncyStatus\"\212\001\n\030UpdateUserCurrencyStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSU" +
-      "FFICIENT_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OIL" +
-      "\020\004\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\005B\020B\016EventU" +
-      "serProto"
+      "msSpent\030\004 \001(\005\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006rea",
+      "son\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037UpdateUse" +
+      "rCurrencyResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\022X\n\006stat" +
+      "us\030\002 \001(\0162H.com.lvl6.proto.UpdateUserCurr" +
+      "encyResponseProto.UpdateUserCurrencyStat" +
+      "us\"\212\001\n\030UpdateUserCurrencyStatus\022\013\n\007SUCCE" +
+      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIEN" +
+      "T_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022\032\n\026F" +
+      "AIL_INSUFFICIENT_GEMS\020\005B\020B\016EventUserProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7613,7 +7802,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_UpdateUserCurrencyRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UpdateUserCurrencyRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CashSpent", "OilSpent", "GemsSpent", "ClientTime", },
+              new java.lang.String[] { "Sender", "CashSpent", "OilSpent", "GemsSpent", "ClientTime", "Reason", "Details", },
               com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto.class,
               com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto.Builder.class);
           internal_static_com_lvl6_proto_UpdateUserCurrencyResponseProto_descriptor =

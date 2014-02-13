@@ -2432,6 +2432,10 @@ public final class EventStartupProto {
       // optional float gemsPerResource = 21;
       boolean hasGemsPerResource();
       float getGemsPerResource();
+      
+      // optional float continueBattleGemCostMultiplier = 22;
+      boolean hasContinueBattleGemCostMultiplier();
+      float getContinueBattleGemCostMultiplier();
     }
     public static final class StartupConstants extends
         com.google.protobuf.GeneratedMessage
@@ -5737,6 +5741,16 @@ public final class EventStartupProto {
         return gemsPerResource_;
       }
       
+      // optional float continueBattleGemCostMultiplier = 22;
+      public static final int CONTINUEBATTLEGEMCOSTMULTIPLIER_FIELD_NUMBER = 22;
+      private float continueBattleGemCostMultiplier_;
+      public boolean hasContinueBattleGemCostMultiplier() {
+        return ((bitField0_ & 0x00080000) == 0x00080000);
+      }
+      public float getContinueBattleGemCostMultiplier() {
+        return continueBattleGemCostMultiplier_;
+      }
+      
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -5759,6 +5773,7 @@ public final class EventStartupProto {
         minutesPerGem_ = 0F;
         pvpRequiredMinLvl_ = 0;
         gemsPerResource_ = 0F;
+        continueBattleGemCostMultiplier_ = 0F;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -5834,6 +5849,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00040000) == 0x00040000)) {
           output.writeFloat(21, gemsPerResource_);
+        }
+        if (((bitField0_ & 0x00080000) == 0x00080000)) {
+          output.writeFloat(22, continueBattleGemCostMultiplier_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -5927,6 +5945,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00040000) == 0x00040000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeFloatSize(21, gemsPerResource_);
+        }
+        if (((bitField0_ & 0x00080000) == 0x00080000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeFloatSize(22, continueBattleGemCostMultiplier_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -6134,6 +6156,8 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00080000);
           gemsPerResource_ = 0F;
           bitField0_ = (bitField0_ & ~0x00100000);
+          continueBattleGemCostMultiplier_ = 0F;
+          bitField0_ = (bitField0_ & ~0x00200000);
           return this;
         }
         
@@ -6290,6 +6314,10 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00040000;
           }
           result.gemsPerResource_ = gemsPerResource_;
+          if (((from_bitField0_ & 0x00200000) == 0x00200000)) {
+            to_bitField0_ |= 0x00080000;
+          }
+          result.continueBattleGemCostMultiplier_ = continueBattleGemCostMultiplier_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -6414,6 +6442,9 @@ public final class EventStartupProto {
           }
           if (other.hasGemsPerResource()) {
             setGemsPerResource(other.getGemsPerResource());
+          }
+          if (other.hasContinueBattleGemCostMultiplier()) {
+            setContinueBattleGemCostMultiplier(other.getContinueBattleGemCostMultiplier());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -6575,6 +6606,11 @@ public final class EventStartupProto {
               case 173: {
                 bitField0_ |= 0x00100000;
                 gemsPerResource_ = input.readFloat();
+                break;
+              }
+              case 181: {
+                bitField0_ |= 0x00200000;
+                continueBattleGemCostMultiplier_ = input.readFloat();
                 break;
               }
             }
@@ -7779,6 +7815,27 @@ public final class EventStartupProto {
         public Builder clearGemsPerResource() {
           bitField0_ = (bitField0_ & ~0x00100000);
           gemsPerResource_ = 0F;
+          onChanged();
+          return this;
+        }
+        
+        // optional float continueBattleGemCostMultiplier = 22;
+        private float continueBattleGemCostMultiplier_ ;
+        public boolean hasContinueBattleGemCostMultiplier() {
+          return ((bitField0_ & 0x00200000) == 0x00200000);
+        }
+        public float getContinueBattleGemCostMultiplier() {
+          return continueBattleGemCostMultiplier_;
+        }
+        public Builder setContinueBattleGemCostMultiplier(float value) {
+          bitField0_ |= 0x00200000;
+          continueBattleGemCostMultiplier_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearContinueBattleGemCostMultiplier() {
+          bitField0_ = (bitField0_ & ~0x00200000);
+          continueBattleGemCostMultiplier_ = 0F;
           onChanged();
           return this;
         }
@@ -13231,7 +13288,7 @@ public final class EventStartupProto {
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
       "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbI" +
-      "d\030\007 \001(\t\"\254\036\n\024StartupResponseProto\022\030\n\020serv",
+      "d\030\007 \001(\t\"\325\036\n\024StartupResponseProto\022\030\n\020serv",
       "erTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035.com" +
       ".lvl6.proto.FullUserProto\022I\n\rstartupStat" +
       "us\030\003 \001(\01622.com.lvl6.proto.StartupRespons" +
@@ -13279,7 +13336,7 @@ public final class EventStartupProto {
       "ralNotificationProto\0222\n\010referred\030\001 \001(\0132 " +
       ".com.lvl6.proto.MinimumUserProto\022\023\n\013recr" +
       "uitTime\030\002 \001(\003\022\034\n\024coinsGivenToReferrer\030\003 " +
-      "\001(\005\032\270\016\n\020StartupConstants\022H\n\025inAppPurchas" +
+      "\001(\005\032\341\016\n\020StartupConstants\022H\n\025inAppPurchas" +
       "ePackages\030\001 \003(\0132).com.lvl6.proto.InAppPu" +
       "rchasePackageProto\022\027\n\017maxLevelForUser\030\002 ",
       "\001(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022n\n\025ani" +
@@ -13307,28 +13364,29 @@ public final class EventStartupProto {
       "\022 \001(\0132F.com.lvl6.proto.StartupResponsePr" +
       "oto.StartupConstants.MonsterConstants\022\025\n" +
       "\rminutesPerGem\030\023 \001(\002\022\031\n\021pvpRequiredMinLv" +
-      "l\030\024 \001(\005\022\027\n\017gemsPerResource\030\025 \001(\002\032_\n\031Anim" +
-      "atedSpriteOffsetProto\022\021\n\timageName\030\001 \001(\t" +
-      "\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coordi" +
-      "nateProto\032\232\001\n\rClanConstants\022\035\n\025coinPrice" +
-      "ToCreateClan\030\001 \001(\005\022 \n\030maxCharLengthForCl",
-      "anName\030\002 \001(\005\022\'\n\037maxCharLengthForClanDesc" +
-      "ription\030\003 \001(\005\022\037\n\027maxCharLengthForClanTag" +
-      "\030\004 \001(\005\032c\n\030DownloadableNibConstants\022\022\n\nma" +
-      "pNibName\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t" +
-      "\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023Tournamen" +
-      "tConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014losses" +
-      "Weight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033num" +
-      "HoursToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserMo" +
-      "nsterConstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022" +
-      "!\n\031initialMaxNumMonsterLimit\030\002 \001(\005\032\211\001\n\020M",
-      "onsterConstants\022\032\n\022cashPerHealthPoint\030\001 " +
-      "\001(\002\022#\n\033secondsToHealPerHealthPoint\030\002 \001(\002" +
-      "\022\031\n\021elementalStrength\030\003 \001(\002\022\031\n\021elemental" +
-      "Weakness\030\004 \001(\002\"A\n\014UpdateStatus\022\r\n\tNO_UPD" +
-      "ATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020" +
-      "\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016US" +
-      "ER_NOT_IN_DB\020\002B\023B\021EventStartupProto"
+      "l\030\024 \001(\005\022\027\n\017gemsPerResource\030\025 \001(\002\022\'\n\037cont" +
+      "inueBattleGemCostMultiplier\030\026 \001(\002\032_\n\031Ani" +
+      "matedSpriteOffsetProto\022\021\n\timageName\030\001 \001(" +
+      "\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto.Coord" +
+      "inateProto\032\232\001\n\rClanConstants\022\035\n\025coinPric",
+      "eToCreateClan\030\001 \001(\005\022 \n\030maxCharLengthForC" +
+      "lanName\030\002 \001(\005\022\'\n\037maxCharLengthForClanDes" +
+      "cription\030\003 \001(\005\022\037\n\027maxCharLengthForClanTa" +
+      "g\030\004 \001(\005\032c\n\030DownloadableNibConstants\022\022\n\nm" +
+      "apNibName\030\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(" +
+      "\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023Tourname" +
+      "ntConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014losse" +
+      "sWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033nu" +
+      "mHoursToShowAfterEventEnd\030\004 \001(\005\032R\n\024UserM" +
+      "onsterConstants\022\027\n\017maxNumTeamSlots\030\001 \001(\005",
+      "\022!\n\031initialMaxNumMonsterLimit\030\002 \001(\005\032\211\001\n\020" +
+      "MonsterConstants\022\032\n\022cashPerHealthPoint\030\001" +
+      " \001(\002\022#\n\033secondsToHealPerHealthPoint\030\002 \001(" +
+      "\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031\n\021elementa" +
+      "lWeakness\030\004 \001(\002\"A\n\014UpdateStatus\022\r\n\tNO_UP" +
+      "DATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE" +
+      "\020\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016U" +
+      "SER_NOT_IN_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13372,7 +13430,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "PvpRequiredMinLvl", "GemsPerResource", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "PvpRequiredMinLvl", "GemsPerResource", "ContinueBattleGemCostMultiplier", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =

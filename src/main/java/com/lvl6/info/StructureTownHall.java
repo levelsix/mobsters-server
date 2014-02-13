@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class StructureTownHall implements Serializable {
 
-	private static final long serialVersionUID = 1546077239974628623L;
+	private static final long serialVersionUID = 5154373447990356075L;
 	private int structId;
 	private int numResourceOneGenerators;
 	private int numResourceOneStorages;
@@ -14,12 +14,12 @@ public class StructureTownHall implements Serializable {
 	private int numResidences;
 	private int numMonsterSlots;
 	private int numLabs;
-	
+	private int pvpQueueCashCost;
 	
 	public StructureTownHall(int structId, int numResourceOneGenerators,
 			int numResourceOneStorages, int numResourceTwoGenerators,
 			int numResourceTwoStorages, int numHospitals, int numResidences,
-			int numMonsterSlots, int numLabs) {
+			int numMonsterSlots, int numLabs, int pvpQueueCashCost) {
 		super();
 		this.structId = structId;
 		this.numResourceOneGenerators = numResourceOneGenerators;
@@ -30,98 +30,88 @@ public class StructureTownHall implements Serializable {
 		this.numResidences = numResidences;
 		this.numMonsterSlots = numMonsterSlots;
 		this.numLabs = numLabs;
+		this.pvpQueueCashCost = pvpQueueCashCost;
 	}
-
 
 	public int getStructId() {
 		return structId;
 	}
 
-
 	public void setStructId(int structId) {
 		this.structId = structId;
 	}
-
 
 	public int getNumResourceOneGenerators() {
 		return numResourceOneGenerators;
 	}
 
-
 	public void setNumResourceOneGenerators(int numResourceOneGenerators) {
 		this.numResourceOneGenerators = numResourceOneGenerators;
 	}
-
 
 	public int getNumResourceOneStorages() {
 		return numResourceOneStorages;
 	}
 
-
 	public void setNumResourceOneStorages(int numResourceOneStorages) {
 		this.numResourceOneStorages = numResourceOneStorages;
 	}
-
 
 	public int getNumResourceTwoGenerators() {
 		return numResourceTwoGenerators;
 	}
 
-
 	public void setNumResourceTwoGenerators(int numResourceTwoGenerators) {
 		this.numResourceTwoGenerators = numResourceTwoGenerators;
 	}
-
 
 	public int getNumResourceTwoStorages() {
 		return numResourceTwoStorages;
 	}
 
-
 	public void setNumResourceTwoStorages(int numResourceTwoStorages) {
 		this.numResourceTwoStorages = numResourceTwoStorages;
 	}
-
 
 	public int getNumHospitals() {
 		return numHospitals;
 	}
 
-
 	public void setNumHospitals(int numHospitals) {
 		this.numHospitals = numHospitals;
 	}
-
 
 	public int getNumResidences() {
 		return numResidences;
 	}
 
-
 	public void setNumResidences(int numResidences) {
 		this.numResidences = numResidences;
 	}
-
 
 	public int getNumMonsterSlots() {
 		return numMonsterSlots;
 	}
 
-
 	public void setNumMonsterSlots(int numMonsterSlots) {
 		this.numMonsterSlots = numMonsterSlots;
 	}
-
 
 	public int getNumLabs() {
 		return numLabs;
 	}
 
-
 	public void setNumLabs(int numLabs) {
 		this.numLabs = numLabs;
 	}
 
+	public int getPvpQueueCashCost() {
+		return pvpQueueCashCost;
+	}
+
+	public void setPvpQueueCashCost(int pvpQueueCashCost) {
+		this.pvpQueueCashCost = pvpQueueCashCost;
+	}
 
 	@Override
 	public String toString() {
@@ -131,6 +121,8 @@ public class StructureTownHall implements Serializable {
 				+ ", numResourceTwoGenerators=" + numResourceTwoGenerators
 				+ ", numResourceTwoStorages=" + numResourceTwoStorages
 				+ ", numHospitals=" + numHospitals + ", numResidences=" + numResidences
-				+ ", numMonsterSlots=" + numMonsterSlots + ", numLabs=" + numLabs + "]";
+				+ ", numMonsterSlots=" + numMonsterSlots + ", numLabs=" + numLabs
+				+ ", pvpQueueCashCost=" + pvpQueueCashCost + "]";
 	}
+	
 }

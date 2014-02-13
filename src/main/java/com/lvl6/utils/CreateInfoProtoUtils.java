@@ -374,8 +374,8 @@ public class CreateInfoProtoUtils {
     }
     builder.setElo(u.getElo());
     builder.setRank(u.getRank());
-    if (u.getLastTimeQueued() != null) {
-      builder.setLastTimeQueued(u.getLastTimeQueued().getTime());
+    if (null != u.getInBattleShieldEndTime()) {
+      builder.setInBattleShieldEndTime(u.getInBattleShieldEndTime().getTime());
     }
     builder.setAttacksWon(u.getAttacksWon());
     builder.setDefensesWon(u.getAttacksWon());
@@ -719,6 +719,8 @@ public class CreateInfoProtoUtils {
   	thpb.setNumResidences(sth.getNumResidences());
   	thpb.setNumMonsterSlots(sth.getNumMonsterSlots());
   	thpb.setNumLabs(sth.getNumLabs());
+  	thpb.setPvpQueueCashCost(sth.getPvpQueueCashCost());
+  	
   	
   	return thpb.build();
   }
@@ -1288,7 +1290,7 @@ public class CreateInfoProtoUtils {
   		mlipb.setLightningDmg(info.getLightningDmg());
   		mlipb.setDarknessDmg(info.getDarknessDmg());
   		mlipb.setRockDmg(info.getRockDmg());
-  		
+  		mlipb.setSpeed(info.getSpeed());
   		lvlInfoProtos.add(mlipb.build());
   	}
   	

@@ -274,7 +274,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
     insertParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
     
-    Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+    Map<String, Object> relativeUpdates = null;//new HashMap<String, Object>();
     Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
     absoluteUpdates.put(DBConstants.QUEST_FOR_USER__IS_REDEEMED, false);
     absoluteUpdates.put(DBConstants.QUEST_FOR_USER__PROGRESS, progress);
@@ -523,7 +523,7 @@ public class InsertUtils implements InsertUtil{
     String tablename = DBConstants.TABLE_TOURNAMENT_EVENT_FOR_USER;
     Map<String, Object> insertParams = new HashMap<String, Object>();
     Map<String, Object> relativeUpdates = new HashMap<String, Object>();
-    Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
+    Map<String, Object> absoluteUpdates = null;//new HashMap<String, Object>();
     
     insertParams.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__TOURNAMENT_EVENT_ID, leaderboardEventId);
     insertParams.put(DBConstants.TOURNAMENT_EVENT_FOR_USER__USER_ID, userId);
@@ -1005,7 +1005,7 @@ public class InsertUtils implements InsertUtil{
 		insertParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__EVENT_PERSISTENT_ID, eventId);
 		insertParams.put(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY, now);
 
-    Map<String, Object> relativeUpdates = new HashMap<String, Object>();
+    Map<String, Object> relativeUpdates = null;//new HashMap<String, Object>();
     Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
     absoluteUpdates.put(DBConstants.EVENT_PERSISTENT_FOR_USER__TIME_OF_ENTRY, now);
     
@@ -1014,5 +1014,50 @@ public class InsertUtils implements InsertUtil{
     		insertParams, relativeUpdates, absoluteUpdates);
     return numInserted;
 		
+	}
+	
+	public int insertUpdatePvpBattleForUser(int attackerId, int defenderId,
+			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
+			int defenderWinEloChange, Timestamp battleStartTime) {
+		String tableName = DBConstants.TABLE_PVP_BATTLE_FOR_USER;
+		
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID, attackerId);
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID, defenderId);
+		//elo changes when attacker wins
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE,
+				attackerWinEloChange);
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE,
+				defenderLoseEloChange);
+		
+		//elo changes when attacker loses
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE,
+				attackerLoseEloChange);
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE,
+				defenderWinEloChange);
+				
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME,
+				battleStartTime);
+		
+		Map<String, Object> relativeUpdates = null;//new HashMap<String, Object>();
+		
+		//if row exists already (which it shouldn't, just replace all the values)
+		Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID, defenderId);
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE,
+				attackerWinEloChange);
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE,
+				defenderLoseEloChange);
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE,
+				attackerLoseEloChange);
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE,
+				defenderWinEloChange);
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME,
+				battleStartTime);
+		
+		
+		int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
+    		insertParams, relativeUpdates, absoluteUpdates);
+    return numInserted;
 	}
 }

@@ -95,9 +95,9 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		int attackerElo = reqProto.getAttackerElo();
 		
 		//positive means refund, negative means charge user; don't forsee being positive
-		int gemsSpent = reqProto.getGemsSpent();
+//		int gemsSpent = reqProto.getGemsSpent();
 		//positive means refund, negative means charge user
-		int cashChange = reqProto.getCashChange();
+//		int cashChange = reqProto.getCashChange();
 		
 		List<Integer> seenUserIds = reqProto.getSeenUserIdsList();
 		Set<Integer> uniqSeenUserIds = new HashSet<Integer>(seenUserIds);
@@ -116,8 +116,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			User attacker = RetrieveUtils.userRetrieveUtils().getUserById(attackerId);
 			
 			//check if user can search for a player to attack
-			boolean legitQueueUp = checkLegitQueueUp(resBuilder, attacker, clientDate,
-					gemsSpent, cashChange);
+			boolean legitQueueUp = checkLegitQueueUp(resBuilder, attacker, clientDate);
+					//gemsSpent, cashChange);
 
 			boolean success = false;
 			Map<String, Integer> currencyChange = new HashMap<String, Integer>();
@@ -126,8 +126,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 						attackerElo);
 				
 				//update the user
-				success = writeChangesToDB(attacker, gemsSpent, cashChange, clientTime,
-						currencyChange);
+				success = writeChangesToDB(attacker, clientTime, currencyChange);
+						//gemsSpent, cashChange, clientTime,
 			}				
 
 			if (success) {
@@ -179,8 +179,8 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	}
 	
 
-	private boolean checkLegitQueueUp(Builder resBuilder, User u, Date clientDate,
-			int gemsSpent, int cashChange) {
+	private boolean checkLegitQueueUp(Builder resBuilder, User u, Date clientDate) {
+			//int gemsSpent, int cashChange) {
 		if (null == u) {
 			resBuilder.setStatus(QueueUpStatus.FAIL_OTHER);
 			log.error("problem with QueueUp- attacker is null. user is " + u);
@@ -189,13 +189,13 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 
 		//see if user has enough money to find a person to fight
 		//CHECK MONEY
-		if (!hasEnoughGems(resBuilder, u, gemsSpent, cashChange)) {
-			return false;
-		}
-
-		if (!hasEnoughCash(resBuilder, u, gemsSpent, cashChange)) {
-			return false;
-		}
+//		if (!hasEnoughGems(resBuilder, u, gemsSpent, cashChange)) {
+//			return false;
+//		}
+//
+//		if (!hasEnoughCash(resBuilder, u, gemsSpent, cashChange)) {
+//			return false;
+//		}
 
 		//		User queuedOpponent = queuedOpponent(attacker, elo, seenUserIds, clientDate);
 		//
@@ -204,32 +204,32 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		return true;
 	}
 
-	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent, int cashChange) {
-		int userGems = u.getGems();
-		//if user's aggregate gems is < cost, don't allow transaction
-		if (userGems < gemsSpent) {
-			log.error("user error: user does not have enough gems. userGems=" + userGems +
-					"\t gemsSpent=" + gemsSpent + "\t user=" + u);
-			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_GEMS);
-			return false;
-		}
-		return true;
-	}
-
-	private boolean hasEnoughCash(Builder resBuilder, User u, int gemsSpent, int cashChange) {
-		int userCash = u.getCash(); 
-		//positive 'cashChange' means refund, negative means charge user
-		int cost = -1 * cashChange;
-
-		//if user not spending gems and is just spending cash, check if he has enough
-		if (0 == gemsSpent && userCash < cost) {
-			log.error("user error: user does not have enough cash. userCash=" + userCash +
-					"\t cost=" + cost + "\t user=" + u);
-			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_CASH);
-			return false;
-		}
-		return true;
-	}
+//	private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent, int cashChange) {
+//		int userGems = u.getGems();
+//		//if user's aggregate gems is < cost, don't allow transaction
+//		if (userGems < gemsSpent) {
+//			log.error("user error: user does not have enough gems. userGems=" + userGems +
+//					"\t gemsSpent=" + gemsSpent + "\t user=" + u);
+//			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_GEMS);
+//			return false;
+//		}
+//		return true;
+//	}
+//
+//	private boolean hasEnoughCash(Builder resBuilder, User u, int gemsSpent, int cashChange) {
+//		int userCash = u.getCash(); 
+//		//positive 'cashChange' means refund, negative means charge user
+//		int cost = -1 * cashChange;
+//
+//		//if user not spending gems and is just spending cash, check if he has enough
+//		if (0 == gemsSpent && userCash < cost) {
+//			log.error("user error: user does not have enough cash. userCash=" + userCash +
+//					"\t cost=" + cost + "\t user=" + u);
+//			resBuilder.setStatus(QueueUpStatus.FAIL_NOT_ENOUGH_CASH);
+//			return false;
+//		}
+//		return true;
+//	}
 	
 	private void setProspectivePvpMatches(Builder resBuilder, User attacker,
 			Set<Integer> uniqSeenUserIds, Date clientDate, int attackerElo) {
@@ -622,7 +622,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		
 		int userId = 0;
 		String randomName = getHazelcastPvpUtil().getRandomName();
-		int lvl = avgElo / ControllerConstants.PVP__PVP_FAKE_USER_LVL_DIVISOR;
+		int lvl = avgElo / ControllerConstants.PVP__FAKE_USER_LVL_DIVISOR;
 		
 		int prospectiveCashWinnings = cashWinnings.get(0);
 		int prospectiveOilWinnings = oilWinnings.get(0);
@@ -659,27 +659,27 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 	
 	// change user silver value and remove his shield if he has one, since he is
 	// going to attack some one
-	private boolean writeChangesToDB(User attacker, int gemsSpent, int cashChange, 
+	private boolean writeChangesToDB(User attacker, //int gemsSpent, int cashChange, 
 			Timestamp queueTime, Map<String, Integer> money) {
 		
-		//CHARGE THE USER
-		int oilChange = 0;
-		int gemChange = -1 * gemsSpent;
-		
-		int numChange = attacker.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
-		if (1 != numChange) {
-			log.error("problem with updating user stats: gemChange=" + gemChange
-					+ ", cashChange=" + cashChange + ", user is " + attacker);
-			return false;
-		} else {
-			//everything went well
-			if (0 != oilChange) {
-				money.put(MiscMethods.cash, cashChange);
-			}
-			if (0 != gemsSpent) {
-				money.put(MiscMethods.gems, gemChange);
-			}
-		}
+//		//CHARGE THE USER
+//		int oilChange = 0;
+//		int gemChange = -1 * gemsSpent;
+//		
+//		int numChange = attacker.updateRelativeCashAndOilAndGems(cashChange, oilChange, gemChange); 
+//		if (1 != numChange) {
+//			log.error("problem with updating user stats: gemChange=" + gemChange
+//					+ ", cashChange=" + cashChange + ", user is " + attacker);
+//			return false;
+//		} else {
+//			//everything went well
+//			if (0 != oilChange) {
+//				money.put(MiscMethods.cash, cashChange);
+//			}
+//			if (0 != gemsSpent) {
+//				money.put(MiscMethods.gems, gemChange);
+//			}
+//		}
 		return true;
 	}
 
