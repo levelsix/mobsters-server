@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class MonsterLevelInfo implements Serializable {
 
-	private static final long serialVersionUID = -259260813112191865L;
+	private static final long serialVersionUID = -2163091734236174490L;
+	
 	private int monsterId;
 	private int level;
 	private int hp;
@@ -16,10 +17,11 @@ public class MonsterLevelInfo implements Serializable {
 	private int lightningDmg;
 	private int darknessDmg;
 	private int rockDmg;
+	private int speed;
 	
 	public MonsterLevelInfo(int monsterId, int level, int hp,
 			int curLvlRequiredExp, int feederExp, int fireDmg, int grassDmg,
-			int waterDmg, int lightningDmg, int darknessDmg, int rockDmg) {
+			int waterDmg, int lightningDmg, int darknessDmg, int rockDmg, int speed) {
 		super();
 		this.monsterId = monsterId;
 		this.level = level;
@@ -32,6 +34,7 @@ public class MonsterLevelInfo implements Serializable {
 		this.lightningDmg = lightningDmg;
 		this.darknessDmg = darknessDmg;
 		this.rockDmg = rockDmg;
+		this.speed = speed;
 	}
 
 	public int getMonsterId() {
@@ -122,6 +125,14 @@ public class MonsterLevelInfo implements Serializable {
 		this.rockDmg = rockDmg;
 	}
 
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
 	@Override
 	public String toString() {
 		return "MonsterLevelInfo [monsterId=" + monsterId + ", level=" + level
@@ -129,7 +140,7 @@ public class MonsterLevelInfo implements Serializable {
 				+ ", feederExp=" + feederExp + ", fireDmg=" + fireDmg + ", grassDmg="
 				+ grassDmg + ", waterDmg=" + waterDmg + ", lightningDmg="
 				+ lightningDmg + ", darknessDmg=" + darknessDmg + ", rockDmg="
-				+ rockDmg + "]";
+				+ rockDmg + ", speed=" + speed + "]";
 	}
-	
+
 }

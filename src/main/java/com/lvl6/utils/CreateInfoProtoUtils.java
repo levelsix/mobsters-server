@@ -1290,7 +1290,7 @@ public class CreateInfoProtoUtils {
   		mlipb.setLightningDmg(info.getLightningDmg());
   		mlipb.setDarknessDmg(info.getDarknessDmg());
   		mlipb.setRockDmg(info.getRockDmg());
-  		
+  		mlipb.setSpeed(info.getSpeed());
   		lvlInfoProtos.add(mlipb.build());
   	}
   	

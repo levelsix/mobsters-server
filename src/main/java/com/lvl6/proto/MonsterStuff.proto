@@ -73,6 +73,7 @@ message MonsterLevelInfoProto {
 	optional sint32 lightningDmg = 8;
 	optional sint32 darknessDmg = 9;
 	optional sint32 rockDmg = 10;
+	optional int32 speed = 11;
 }
 
 //------------------------------------------------------------------------------------------
