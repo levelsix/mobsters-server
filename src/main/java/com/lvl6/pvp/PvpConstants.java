@@ -6,7 +6,7 @@ public class PvpConstants {
 	//these names should match the actual properties (in OfflinePvpUser class) verbatim
 	public static String OFFLINE_PVP_USER__ELO = "elo";
 	public static String OFFLINE_PVP_USER__SHIELD_END_TIME = "shieldEndTime";
-	public static String OFFLINE_PVP_USER__IN_BATTLE_SHIELD_END_TIME = "inBattleShieldEndTime";
+	public static String OFFLINE_PVP_USER__IN_BATTLE_END_TIME = "inBattleEndTime";
 	//these names should match the actual properties (in MonsterForPvp class) verbatim
 	public static String MONSTER_FOR_PVP__ELO = "elo";
 	

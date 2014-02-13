@@ -75,7 +75,7 @@ public class HazelcastPvpUtil implements InitializingBean {
     	log.info("querying for people to attack. shieldEndTime should be before now=" +
     		now + "\t elo should be between minElo=" + minElo + ", maxElo=" + maxElo);
     	
-    	String inBattleShieldEndTime = PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_SHIELD_END_TIME;
+    	String inBattleShieldEndTime = PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_END_TIME;
     	String shieldEndTime = PvpConstants.OFFLINE_PVP_USER__SHIELD_END_TIME;
     	String elo = PvpConstants.OFFLINE_PVP_USER__ELO;
     	EntryObject e = new PredicateBuilder().getEntryObject();
@@ -227,7 +227,7 @@ public class HazelcastPvpUtil implements InitializingBean {
     	//the true is for indicating that there will be ranged queries on this property
     	userIdToOfflinePvpUser.addIndex(PvpConstants.OFFLINE_PVP_USER__ELO, true);
     	userIdToOfflinePvpUser.addIndex(PvpConstants.OFFLINE_PVP_USER__SHIELD_END_TIME, true);
-    	userIdToOfflinePvpUser.addIndex(PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_SHIELD_END_TIME, true);
+    	userIdToOfflinePvpUser.addIndex(PvpConstants.OFFLINE_PVP_USER__IN_BATTLE_END_TIME, true);
     }
     
     protected void populateOfflinePvpUserMap(Collection<OfflinePvpUser> validUsers) {

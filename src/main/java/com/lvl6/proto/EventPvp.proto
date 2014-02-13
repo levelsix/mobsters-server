@@ -75,3 +75,54 @@ message BeginPvpBattleResponseProto {
 		FAIL_OTHER = 3;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message EndPvpBattleRequestProto {
+	optional MinimumUserProtoWithMaxResources sender = 1;
+	optional int32 defenderId = 2;
+	
+	//is false if user didn't make a move when ending the battle
+	//(or didn't change monsters? or did "soft close" the app?)
+	//primarily used to not penalize user if the user didn't attack, but might be used
+	//to prevent the user from turning off wifi, playing the game, then allowing game
+	//to be recorded or not by just not recording/counting the battle
+	optional bool userAttacked = 3; 
+	optional bool userWon = 4; //if false, then user lost
+	
+	optional int64 clientTime = 5;
+	
+	//positive means reward attacker. don't forsee being negative 
+	//	however, the values will be negative for the defender,
+	//	attacker's oil will change by "oilChange" and
+	//	defender's oil will change by "-1*oilChange" same with cash
+	//If attacker loses, then these are 0
+	optional int32 oilChange = 6;
+	optional int32 cashChange = 7;
+}
+
+message EndPvpBattleResponseProto {
+	optional MinimumUserProtoWithMaxResources sender = 1;
+	optional int32 defenderId = 2;
+	optional bool attackerAttacked = 3;
+	optional bool attackerWon = 4;
+	
+	/*optional int32 attackerNewRank = ;
+	optional int32 defenderNewRank = ;
+	
+	optional string attackerNewDivision = ;
+	optional string defenderNewDivision = ;
+	
+	optional int32 attackerCurElo = ;
+	optional int32 defenderCurElo = ;*/
+	
+	
+	optional EndPvpBattleStatus status = 9;
+	
+	enum EndPvpBattleStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		FAIL_BATTLE_TOOK_TOO_LONG = 3;
+	}
+}
+

@@ -141,7 +141,7 @@ public interface InsertUtil {
 
 	public abstract int insertIntoUpdateEventPersistentForUser(int userId, int eventId, Timestamp now);
 	
-	public abstract int insertUpdatePvpBattleHistory(int attackerId, int defenderId,
+	public abstract int insertUpdatePvpBattleForUser(int attackerId, int defenderId,
 			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
-			int defenderWinEloChange, Timestamp defenderOldInBattleShieldEndTime);
+			int defenderWinEloChange, Timestamp battleStartTime);
 }

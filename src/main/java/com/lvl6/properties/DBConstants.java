@@ -37,7 +37,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_HEALING_HISTORY = "monster_healing_history";
   public static final String TABLE_MONSTER_LEVEL_INFO = "monster_level_info";
   public static final String TABLE_PROFANITY = "profanity";
-  public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
+  public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
   public static final String TABLE_QUEST_MONSTER_ITEM = "quest_monster_item";
@@ -253,14 +253,13 @@ public class DBConstants {
   public static final String MONSTER_HEALING_HISTORY__FINISHED_HEALING = "finished_healing";
 
   /*PVP BATTLE HISTORY*/
-  public static final String PVP_BATTLE_HISTORY__ATTACKER_ID = "attacker_id";
-  public static final String PVP_BATTLE_HISTORY__DEFENDER_ID = "defender_id";
-  public static final String PVP_BATTLE_HISTORY__ATTACKER_WIN_ELO_CHANGE = "attacker_win_elo_change";
-  public static final String PVP_BATTLE_HISTORY__DEFENDER_LOSE_ELO_CHANGE = "defender_lose_elo_change";
-  public static final String PVP_BATTLE_HISTORY__ATTACKER_LOSE_ELO_CHANGE = "attacker_lose_elo_change";
-  public static final String PVP_BATTLE_HISTORY__DEFENDER_WIN_ELO_CHANGE = "defender_win_elo_change";
-  public static final String PVP_BATTLE_HISTORY__DEFENDER_OLD_IN_BATTLE_SHIELD_END_TIME =
-  		"defender_old_in_battle_shield_end_time";
+  public static final String PVP_BATTLE_FOR_USER__ATTACKER_ID = "attacker_id";
+  public static final String PVP_BATTLE_FOR_USER__DEFENDER_ID = "defender_id";
+  public static final String PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE = "attacker_win_elo_change";
+  public static final String PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE = "defender_lose_elo_change";
+  public static final String PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE = "attacker_lose_elo_change";
+  public static final String PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE = "defender_win_elo_change";
+  public static final String PVP_BATTLE_FOR_USER__BATTLE_START_TIME = "battle_start_time";
 
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;

@@ -720,19 +720,42 @@ public class User implements Serializable {
 //		return false;
 //	}
 
-//	public boolean updateElo(int newElo) {
-//		Map <String, Object> conditionParams = new HashMap<String, Object>();
-//		conditionParams.put(DBConstants.USER__ID, id);
-//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-//		absoluteParams.put(DBConstants.USER__ELO, newElo);
-//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
-//				conditionParams, "and");
-//		if (numUpdated == 1) {
+	public boolean updateEloOilCash(int userId, int eloChange, int oilChange, int cashChange) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		if (0 != eloChange) {
+			relativeParams.put(DBConstants.USER__ELO, eloChange);
+		}
+		if (0 != oilChange) {
+			relativeParams.put(DBConstants.USER__OIL, oilChange);
+		}
+		if (0 != cashChange) {
+			relativeParams.put(DBConstants.USER__CASH, cashChange);
+		}
+		
+		Map<String, Object> absoluteParams = null;//new HashMap<String, Object>();
+		//absoluteParams.put(DBConstants.USER__ELO, newElo);
+		
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
+				absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
 //			this.elo = newElo;
-//			return true;
-//		}
-//		return false;
-//	}
+			if (0 != eloChange) {
+				this.elo += eloChange;
+			}
+			if (0 != oilChange) {
+				this.oil += oilChange;
+			}
+			if (0 != cashChange) {
+				this.cash += cashChange;
+			}
+			return true;
+		}
+		return false;
+	}
 
 	public boolean updateInBattleShieldEndTime(Date inBattleShieldEndTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();

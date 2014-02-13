@@ -6,19 +6,19 @@ import java.util.Date;
 
 public class OfflinePvpUser implements Serializable {
 	
-	private static final long serialVersionUID = 6723168586598615893L;
+	private static final long serialVersionUID = -7603419475310848855L;
 	private String userId;
 	private int elo;
 	private Date shieldEndTime;
-	private Date inBattleShieldEndTime;
+	private Date inBattleEndTime;
 	
 	public OfflinePvpUser(String userId, int elo, Date shieldEndTime,
-			Date inBattleShieldEndTime) {
+			Date inBattleEndTime) {
 		super();
 		this.userId = userId;
 		this.elo = elo;
 		this.shieldEndTime = shieldEndTime;
-		this.inBattleShieldEndTime = inBattleShieldEndTime;
+		this.inBattleEndTime = inBattleEndTime;
 	}
 
 	public String getUserId() {
@@ -45,19 +45,19 @@ public class OfflinePvpUser implements Serializable {
 		this.shieldEndTime = shieldEndTime;
 	}
 
-	public Date getInBattleShieldEndTime() {
-		return inBattleShieldEndTime;
+	public Date getInBattleEndTime() {
+		return inBattleEndTime;
 	}
 
-	public void setInBattleShieldEndTime(Date inBattleShieldEndTime) {
-		this.inBattleShieldEndTime = inBattleShieldEndTime;
+	public void setInBattleEndTime(Date inBattleEndTime) {
+		this.inBattleEndTime = inBattleEndTime;
 	}
 
 	@Override
 	public String toString() {
 		return "OfflinePvpUser [userId=" + userId + ", elo=" + elo
-				+ ", shieldEndTime=" + shieldEndTime + ", inBattleShieldEndTime="
-				+ inBattleShieldEndTime + "]";
+				+ ", shieldEndTime=" + shieldEndTime + ", inBattleEndTime="
+				+ inBattleEndTime + "]";
 	}
 	
 }

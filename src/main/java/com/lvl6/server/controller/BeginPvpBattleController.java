@@ -148,11 +148,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     //check the shield times just to make sure this user is still attackable
     //his shield end times should be in the past
+    //this is possible if another attacker got to this person first
     Date shieldEndTime = enemy.getShieldEndTime();
-    Date inBattleShieldEndTime = enemy.getInBattleShieldEndTime();
+    Date inBattleEndTime = enemy.getInBattleEndTime();
     
     if (shieldEndTime.getTime() > curDate.getTime() ||
-    		inBattleShieldEndTime.getTime() > curDate.getTime()) {
+    		inBattleEndTime.getTime() > curDate.getTime()) {
     	resBuilder.setStatus(BeginPvpBattleStatus.FAIL_ENEMY_UNAVAILABLE); 
     	log.warn("The offline user this client wants to attack has already been atttacked" +
     			" or is being attacked. offlineUser=" + enemy + "\t curDate" + curDate);
@@ -197,13 +198,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	int defenderLoseEloChange = defenderEloChange.get(0);
   	int attackerLoseEloChange = attackerEloChange.get(1);
   	int defenderWinEloChange = defenderEloChange.get(1);
-  	Timestamp defenderOldInBattleShieldEndTime = new Timestamp(
-  			enemy.getInBattleShieldEndTime().getTime());
 
-  	log.info("inserting into PvpBattleHistory");
-  	int numInserted = InsertUtils.get().insertUpdatePvpBattleHistory(attackerId,
+  	log.info("inserting into PvpBattleForUser");
+  	int numInserted = InsertUtils.get().insertUpdatePvpBattleForUser(attackerId,
   			defenderId, attackerWinEloChange, defenderLoseEloChange, attackerLoseEloChange,
-  			defenderWinEloChange, defenderOldInBattleShieldEndTime);
+  			defenderWinEloChange, clientTime);
   			
   	log.info("numInserted (should be 1): " + numInserted); 
   			
@@ -220,10 +219,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
   	//ACCOUNTING FOR FAKE DEFENDERS!
   	if (0 != defenderId) {
-  		long oldInBattleShieldEndTimeMillis = enemy.getInBattleShieldEndTime().getTime();
-  		Date newInBattleShieldEndTime = new Date(oldInBattleShieldEndTimeMillis + 
-  				ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
-  		enemy.setInBattleShieldEndTime(newInBattleShieldEndTime);
+  		//assume that the longest a battle can go for is one hour from now
+  		//so other users can't attack this person for one hour
+  		long nowMillis = clientTime.getTime();
+  		Date newInBattleEndTime = new Date(nowMillis + ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
+  		enemy.setInBattleEndTime(newInBattleEndTime);
   		getHazelcastPvpUtil().setOfflinePvpUser(enemy);
   	}
   	

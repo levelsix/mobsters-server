@@ -1016,44 +1016,44 @@ public class InsertUtils implements InsertUtil{
 		
 	}
 	
-	public int insertUpdatePvpBattleHistory(int attackerId, int defenderId,
+	public int insertUpdatePvpBattleForUser(int attackerId, int defenderId,
 			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
-			int defenderWinEloChange, Timestamp defenderOldInBattleShieldEndTime) {
-		String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
+			int defenderWinEloChange, Timestamp battleStartTime) {
+		String tableName = DBConstants.TABLE_PVP_BATTLE_FOR_USER;
 		
 		Map<String, Object> insertParams = new HashMap<String, Object>();
-		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID, attackerId);
-		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_ID, attackerId);
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID, defenderId);
 		//elo changes when attacker wins
-		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WIN_ELO_CHANGE,
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE,
 				attackerWinEloChange);
-		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_LOSE_ELO_CHANGE,
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE,
 				defenderLoseEloChange);
 		
 		//elo changes when attacker loses
-		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_LOSE_ELO_CHANGE,
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE,
 				attackerLoseEloChange);
-		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_WIN_ELO_CHANGE,
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE,
 				defenderWinEloChange);
 				
-		insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OLD_IN_BATTLE_SHIELD_END_TIME,
-				defenderOldInBattleShieldEndTime);
+		insertParams.put(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME,
+				battleStartTime);
 		
 		Map<String, Object> relativeUpdates = null;//new HashMap<String, Object>();
 		
 		//if row exists already (which it shouldn't, just replace all the values)
 		Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
-		absoluteUpdates.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
-		absoluteUpdates.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WIN_ELO_CHANGE,
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID, defenderId);
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE,
 				attackerWinEloChange);
-		absoluteUpdates.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_LOSE_ELO_CHANGE,
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_LOSE_ELO_CHANGE,
 				defenderLoseEloChange);
-		absoluteUpdates.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_LOSE_ELO_CHANGE,
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE,
 				attackerLoseEloChange);
-		absoluteUpdates.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_WIN_ELO_CHANGE,
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE,
 				defenderWinEloChange);
-		absoluteUpdates.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OLD_IN_BATTLE_SHIELD_END_TIME,
-				defenderOldInBattleShieldEndTime);
+		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__BATTLE_START_TIME,
+				battleStartTime);
 		
 		
 		int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
