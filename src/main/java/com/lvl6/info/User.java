@@ -761,7 +761,7 @@ public class User implements Serializable {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.USER__IN_BATTLE_SHIELD_END_TIME, inBattleShieldEndTime);
+		absoluteParams.put(DBConstants.USER__IN_BATTLE_END_TIME, inBattleShieldEndTime);
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {

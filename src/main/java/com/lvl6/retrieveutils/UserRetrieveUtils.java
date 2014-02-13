@@ -575,7 +575,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     relativeLessThanConditionParams.put(DBConstants.USER__SHIELD_END_TIME, timestamp);
     //prospective users should not have been queued recently
     Timestamp timestamp2 = new Timestamp(clientTime.getTime() - lastViewedTimeMillisBuffer);
-    relativeLessThanConditionParams.put(DBConstants.USER__IN_BATTLE_SHIELD_END_TIME, timestamp2);
+    relativeLessThanConditionParams.put(DBConstants.USER__IN_BATTLE_END_TIME, timestamp2);
     
     //some sql injection x)
     String seenUserIdsString = DBConstants.USER__ID + " NOT IN ("; 

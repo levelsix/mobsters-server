@@ -35,7 +35,7 @@ public class OfflinePvpUserRetrieveUtils {
 		sb.append(", ");
 		sb.append(DBConstants.USER__SHIELD_END_TIME);
 		sb.append(", ");
-		sb.append(DBConstants.USER__IN_BATTLE_SHIELD_END_TIME);
+		sb.append(DBConstants.USER__IN_BATTLE_END_TIME);
 		sb.append(" FROM ");
 		sb.append(DBConstants.TABLE_USER);
 		sb.append(" WHERE ");
