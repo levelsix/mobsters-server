@@ -30,6 +30,9 @@ message StartupRequestProto {				//client will also send ChangeUserLocationReque
      //if this exists, then send facebook user first,
      //then send udid, 
      optional string fbId = 7;
+     
+     //if user is starting up app and the app is not a background process
+     optional bool isFreshRestart = 8;
 }
 
 message StartupResponseProto {

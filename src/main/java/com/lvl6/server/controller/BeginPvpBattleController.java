@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.hazelcast.core.ILock;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginPvpBattleRequestEvent;
 import com.lvl6.events.response.BeginPvpBattleResponseEvent;
@@ -71,45 +69,36 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     BeginPvpBattleResponseEvent resEvent = new BeginPvpBattleResponseEvent(userId);
     resEvent.setTag(event.getTag());
 
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    
     //lock the user that client is going to attack, in order to prevent others from
-    //attacking same guy
-    //TODO: OVERHAUL THIS LOCKING THING AND MIMIC GameServer.java
-    ILock lock = getHazelcastPvpUtil().getPvpPlayerLock(enemyUserId);
-    boolean gotLock = false;
+    //attacking same guy, only lock a real user
+    if (0 != enemyUserId) {
+    	getHazelcastPvpUtil().lockPlayer(enemyUserId, this.getClass().getSimpleName());
+    }
     try {
-    	if (lock.tryLock(HazelcastPvpUtil.LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
-    		gotLock = true;
-    		OfflinePvpUser enemy = getHazelcastPvpUtil().getOfflinePvpUser(enemyUserId);
-    		boolean legit = checkLegit(resBuilder, enemy, enemyUserId, enemyProto, curDate);
-    		
-    		boolean successful = false;
-    		if(legit) {
-    			//since enemy exists, update the OfflinePvpUser's inBattleShieldEndTime
-    			//record that the attacker is attacking the user
-    			//calculateEloChange() will populate attackerEloChange and defenderEloChange
-    			//the first values in both lists will be when attacker wins
-    			//second values will be when attacker loses
-    			List<Integer> attackerEloChange = new ArrayList<Integer>();
-    			List<Integer> defenderEloChange = new ArrayList<Integer>();
-    			calculateEloChange(senderElo, enemyProto, attackerEloChange, defenderEloChange);
-    			
-    			successful = writeChangesToDb(userId, enemyUserId, enemyProto, enemy,
-    					attackerEloChange, defenderEloChange, curTime);
-    		}
-    		
-    		if (successful) {
-    			resBuilder.setStatus(BeginPvpBattleStatus.SUCCESS);
-    		}
-    		
-    	} else {
-    		log.warn("FAILED TO ACQUIRE LOCK FOR OFFLINE USER: " + enemyUserId);
-    		resBuilder.setStatus(BeginPvpBattleStatus.FAIL_ENEMY_UNAVAILABLE);
+    	OfflinePvpUser enemy = getHazelcastPvpUtil().getOfflinePvpUser(enemyUserId);
+    	boolean legit = checkLegit(resBuilder, enemy, enemyUserId, enemyProto, curDate);
+
+    	boolean successful = false;
+    	if(legit) {
+    		//since enemy exists, update the OfflinePvpUser's inBattleShieldEndTime
+    		//record that the attacker is attacking the user
+    		//calculateEloChange() will populate attackerEloChange and defenderEloChange
+    		//the first values in both lists will be when attacker wins
+    		//second values will be when attacker loses
+    		List<Integer> attackerEloChange = new ArrayList<Integer>();
+    		List<Integer> defenderEloChange = new ArrayList<Integer>();
+    		calculateEloChange(senderElo, enemyProto, attackerEloChange, defenderEloChange);
+
+    		successful = writeChangesToDb(userId, enemyUserId, enemyProto, enemy,
+    				attackerEloChange, defenderEloChange, curTime);
     	}
-      
-      resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
+
+    	if (successful) {
+    		resBuilder.setStatus(BeginPvpBattleStatus.SUCCESS);
+    	}
+
+    	resEvent.setBeginPvpBattleResponseProto(resBuilder.build());
+    	server.writeEvent(resEvent);
 
     } catch (Exception e) {
       log.error("exception in BeginPvpBattleController processEvent", e);
@@ -122,9 +111,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       
     } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	if (gotLock) {
-    		getHazelcastPvpUtil().unlockPvpPlayer(lock);
+    	if (0 != enemyUserId) {
+    		//only unlock if real user
+    		getHazelcastPvpUtil().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     	}
     }
   }
@@ -224,7 +213,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		long nowMillis = clientTime.getTime();
   		Date newInBattleEndTime = new Date(nowMillis + ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
   		enemy.setInBattleEndTime(newInBattleEndTime);
-  		getHazelcastPvpUtil().setOfflinePvpUser(enemy);
+  		getHazelcastPvpUtil().updateOfflinePvpUser(enemy);
   	}
   	
 	  return true;
