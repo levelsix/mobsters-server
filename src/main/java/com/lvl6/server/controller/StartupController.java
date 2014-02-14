@@ -911,7 +911,10 @@ public class StartupController extends EventController {
   		//NOTE: this lock ordering might result in a temp deadlock
   		//doesn't reeeally matter if can't penalize defender...
   		
-  		getHazelcastPvpUtil().lockPlayer(defenderId, this.getClass().getSimpleName());
+  		//only lock real users
+  		if (0 != defenderId) {
+  			getHazelcastPvpUtil().lockPlayer(defenderId, this.getClass().getSimpleName());
+  		}
   		try {
   			User defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
   			OfflinePvpUser defenderOpu = getHazelcastPvpUtil().getOfflinePvpUser(defenderId);
@@ -919,10 +922,15 @@ public class StartupController extends EventController {
   			//update attacker
   			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
   			
-  			//update defender, might need to cap defenderElo
-  			defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
-  			int defenderElo = defender.getElo();
-  			defenderOpu.setElo(defenderElo);
+  			//update defender if real, might need to cap defenderElo
+  			if (null != defender) {
+  				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
+  			}
+  			if (null != defenderOpu) { //update if exists
+  				int defenderElo = defender.getElo();
+  				defenderOpu.setElo(defenderElo);
+  				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
+  			}
   			
   			//delete that this battle occurred
   			DeleteUtils.get().deletePvpBattleForUser(userId);
@@ -933,7 +941,9 @@ public class StartupController extends EventController {
   			log.error("tried to penalize, reward attacker, defender respectively. battle=" +
   					battle, e);
   		} finally {
-  			getHazelcastPvpUtil().unlockPlayer(defenderId, this.getClass().getSimpleName());
+  			if (0 != defenderId) {
+  				getHazelcastPvpUtil().unlockPlayer(defenderId, this.getClass().getSimpleName());
+  			}
   		}
   	} catch (Exception e2) {
   		log.error("could not successfully penalize, reward attacker, defender respectively." +
