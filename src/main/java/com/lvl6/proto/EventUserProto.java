@@ -6182,15 +6182,15 @@ public final class EventUserProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional int32 cashSpent = 2;
+    // optional sint32 cashSpent = 2;
     boolean hasCashSpent();
     int getCashSpent();
     
-    // optional int32 oilSpent = 3;
+    // optional sint32 oilSpent = 3;
     boolean hasOilSpent();
     int getOilSpent();
     
-    // optional int32 gemsSpent = 4;
+    // optional sint32 gemsSpent = 4;
     boolean hasGemsSpent();
     int getGemsSpent();
     
@@ -6248,7 +6248,7 @@ public final class EventUserProto {
       return sender_;
     }
     
-    // optional int32 cashSpent = 2;
+    // optional sint32 cashSpent = 2;
     public static final int CASHSPENT_FIELD_NUMBER = 2;
     private int cashSpent_;
     public boolean hasCashSpent() {
@@ -6258,7 +6258,7 @@ public final class EventUserProto {
       return cashSpent_;
     }
     
-    // optional int32 oilSpent = 3;
+    // optional sint32 oilSpent = 3;
     public static final int OILSPENT_FIELD_NUMBER = 3;
     private int oilSpent_;
     public boolean hasOilSpent() {
@@ -6268,7 +6268,7 @@ public final class EventUserProto {
       return oilSpent_;
     }
     
-    // optional int32 gemsSpent = 4;
+    // optional sint32 gemsSpent = 4;
     public static final int GEMSSPENT_FIELD_NUMBER = 4;
     private int gemsSpent_;
     public boolean hasGemsSpent() {
@@ -6377,13 +6377,13 @@ public final class EventUserProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, cashSpent_);
+        output.writeSInt32(2, cashSpent_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, oilSpent_);
+        output.writeSInt32(3, oilSpent_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt32(4, gemsSpent_);
+        output.writeSInt32(4, gemsSpent_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt64(5, clientTime_);
@@ -6409,15 +6409,15 @@ public final class EventUserProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, cashSpent_);
+          .computeSInt32Size(2, cashSpent_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, oilSpent_);
+          .computeSInt32Size(3, oilSpent_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, gemsSpent_);
+          .computeSInt32Size(4, gemsSpent_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
@@ -6723,17 +6723,17 @@ public final class EventUserProto {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              cashSpent_ = input.readInt32();
+              cashSpent_ = input.readSInt32();
               break;
             }
             case 24: {
               bitField0_ |= 0x00000004;
-              oilSpent_ = input.readInt32();
+              oilSpent_ = input.readSInt32();
               break;
             }
             case 32: {
               bitField0_ |= 0x00000008;
-              gemsSpent_ = input.readInt32();
+              gemsSpent_ = input.readSInt32();
               break;
             }
             case 40: {
@@ -6847,7 +6847,7 @@ public final class EventUserProto {
         return senderBuilder_;
       }
       
-      // optional int32 cashSpent = 2;
+      // optional sint32 cashSpent = 2;
       private int cashSpent_ ;
       public boolean hasCashSpent() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -6868,7 +6868,7 @@ public final class EventUserProto {
         return this;
       }
       
-      // optional int32 oilSpent = 3;
+      // optional sint32 oilSpent = 3;
       private int oilSpent_ ;
       public boolean hasOilSpent() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
@@ -6889,7 +6889,7 @@ public final class EventUserProto {
         return this;
       }
       
-      // optional int32 gemsSpent = 4;
+      // optional sint32 gemsSpent = 4;
       private int gemsSpent_ ;
       public boolean hasGemsSpent() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
@@ -7699,8 +7699,8 @@ public final class EventUserProto {
       "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\277\001\n\036Upd" +
       "ateUserCurrencyRequestProto\0220\n\006sender\030\001 " +
       "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\021\n" +
-      "\tcashSpent\030\002 \001(\005\022\020\n\010oilSpent\030\003 \001(\005\022\021\n\tge" +
-      "msSpent\030\004 \001(\005\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006rea",
+      "\tcashSpent\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021\n\tge" +
+      "msSpent\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006rea",
       "son\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037UpdateUse" +
       "rCurrencyResponseProto\0220\n\006sender\030\001 \001(\0132 " +
       ".com.lvl6.proto.MinimumUserProto\022X\n\006stat" +

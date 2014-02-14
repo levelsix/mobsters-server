@@ -1,8 +1,6 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -12,21 +10,17 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateUserCurrencyRequestEvent;
-import com.lvl6.events.response.UpdateUserCurrencyResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.MonsterForUser;
+import com.lvl6.events.response.UpdateUserCurrencyResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class UpdateUserCurrencyController extends EventController {
 
@@ -128,23 +122,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		gemsSpent != Math.abs(gemsSpent)) {
     	log.error("client sent a negative value! all should be positive :(  cashSpent=" +
     			cashSpent + "\t oilSpent=" + oilSpent + "\t gemsSpent=" + gemsSpent);
-    	return false;
+    	if (u.isAdmin()) {
+    		log.info("it's alright. User is admin.");
+    	} else {
+    		return false;
+    	}
     }
     
     //CHECK MONEY
     if (!hasEnoughCash(resBuilder, u, cashSpent)) {
-    	return false;
+    	if (u.isAdmin()) {
+    		log.info("it's alright. User is admin.");
+    	} else {
+    		return false;
+    	}
     }
     
     if (!hasEnoughOil(resBuilder, u, oilSpent)) {
-    	return false;
+    	if (u.isAdmin()) {
+    		log.info("it's alright. User is admin.");
+    	} else {
+    		return false;
+    	}
     }
     
     if (!hasEnoughGems(resBuilder, u, gemsSpent)) {
-    	return false;
+    	if (u.isAdmin()) {
+    		log.info("it's alright. User is admin.");
+    	} else {
+    		return false;
+    	}
     }
     
-    resBuilder.setStatus(UpdateUserCurrencyStatus.SUCCESS);
     return true;
   }
   
@@ -191,11 +200,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   private boolean writeChangesToDb(User u, int uId, int cashSpent, int oilSpent, 
   		int gemsSpent, Timestamp clientTime) {
 	  
-	  //update user diamonds
-	  int gemsChange = -1 * gemsSpent;
-	  int cashChange = -1 * cashSpent;
-	  int oilChange = -1 * oilSpent;
-	  if (!updateUser(u, gemsChange, cashChange, oilSpent)) {
+  	//update user currency
+  	int gemsChange = -1 * Math.abs(gemsSpent);
+  	int cashChange = -1 * Math.abs(cashSpent);
+  	int oilChange = -1 * Math.abs(oilSpent);
+  	
+  	//if user is admin then allow any change
+	  if (u.isAdmin()) {
+	  	gemsChange = gemsSpent;
+	  	cashChange = cashSpent;
+	  	oilChange = oilSpent;
+	  }
+	  
+	  if (!updateUser(u, gemsChange, cashChange, oilChange)) {
 		  log.error("unexpected error: could not decrement user's gems by " +
 				  gemsChange + ", cash by " + cashChange + ", and oil by " + oilChange);
 		  //update num revives for user task
