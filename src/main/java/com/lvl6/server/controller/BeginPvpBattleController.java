@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginPvpBattleRequestEvent;
 import com.lvl6.events.response.BeginPvpBattleResponseEvent;
+import com.lvl6.info.User;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.EventPvpProto.BeginPvpBattleRequestProto;
@@ -24,6 +25,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.OfflinePvpUser;
+import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class BeginPvpBattleController extends EventController {
@@ -214,6 +216,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		Date newInBattleEndTime = new Date(nowMillis + ControllerConstants.PVP__MAX_BATTLE_DURATION_MILLIS);
   		enemy.setInBattleEndTime(newInBattleEndTime);
   		getHazelcastPvpUtil().updateOfflinePvpUser(enemy);
+  		
+  		User defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
+  		defender.updateInBattleEndTime(newInBattleEndTime);
   	}
   	
 	  return true;

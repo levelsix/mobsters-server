@@ -147,6 +147,12 @@ public class HazelcastPvpUtil implements InitializingBean {
     	}
     }
 
+    public void addOfflinePvpUser(OfflinePvpUser userOpu) {
+    	String userIdStr = userOpu.getUserId();
+    	offlinePvpUserMap.put(userIdStr, userOpu);
+    	
+    }
+    
     //if the OfflinePvpUser doesn't exist, then don't save it because
     //the OfflinePvpUser is probably online now. Otherwise, store the user.
     public void updateOfflinePvpUser(OfflinePvpUser enemy) {

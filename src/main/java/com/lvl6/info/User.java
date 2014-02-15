@@ -281,6 +281,41 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+	
+	public boolean updateLastLogoutElo(Timestamp lastLogout, int eloChange) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		if (null != lastLogout) {
+			absoluteParams.put(DBConstants.USER__LAST_LOGOUT, lastLogout);
+		}
+		
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		if (0 != eloChange) {
+			relativeParams.put(DBConstants.USER__ELO, eloChange);
+		}
+		
+		//don't update anything if empty
+		if (absoluteParams.isEmpty() || relativeParams.isEmpty()) {
+			return true;
+		}
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			if (null != lastLogout) {
+				this.lastLogout = lastLogout;
+			}
+			if (0 != eloChange) {
+				this.elo += eloChange;
+			}
+			
+			return true;
+		}
+		return false;
+		
+	}
 
 
 	public boolean updateLevel(int levelChange) {
@@ -757,7 +792,7 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateInBattleShieldEndTime(Date inBattleShieldEndTime) {
+	public boolean updateInBattleEndTime(Date inBattleShieldEndTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
@@ -766,6 +801,27 @@ public class User implements Serializable {
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.inBattleShieldEndTime = inBattleShieldEndTime;
+			return true;
+		}
+		return false;
+	}
+	
+
+	public boolean updateEloInBattleEndTime(int eloChange, Date inBattleEndTime) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__IN_BATTLE_END_TIME, inBattleEndTime);
+		
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		relativeParams.put(DBConstants.USER__ELO, eloChange);
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+			this.elo += eloChange;
+			this.inBattleShieldEndTime = inBattleEndTime;
 			return true;
 		}
 		return false;
