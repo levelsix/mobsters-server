@@ -171,7 +171,9 @@ public class MiscMethods {
 
       try {
         while (st.hasMoreTokens()) {
-          StringTokenizer st2 = new StringTokenizer(st.nextToken(), ".");
+          String tok = st.nextToken();
+          StringTokenizer st2 = new StringTokenizer(tok, ".");
+          log.warn("Token: "+tok);
           if (st2.hasMoreTokens()) {
             Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
             String speaker = st2.nextToken();
