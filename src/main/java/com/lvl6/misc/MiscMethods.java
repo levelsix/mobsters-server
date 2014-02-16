@@ -172,13 +172,15 @@ public class MiscMethods {
       try {
         while (st.hasMoreTokens()) {
           StringTokenizer st2 = new StringTokenizer(st.nextToken(), ".");
-          Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
-          String speaker = st2.nextToken();
-          String speakerText = st.nextToken();
-          if (speakerText != null) {
-            isLeftSides.add(isLeftSide);
-            speakers.add(speaker);
-            speakerTexts.add(speakerText);
+          if (st2.hasMoreTokens()) {
+            Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
+            String speaker = st2.nextToken();
+            String speakerText = st.nextToken();
+            if (speakerText != null) {
+              isLeftSides.add(isLeftSide);
+              speakers.add(speaker);
+              speakerTexts.add(speakerText);
+            }
           }
         }
       } catch (Exception e) {
