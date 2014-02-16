@@ -65,7 +65,6 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Us
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
-import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
