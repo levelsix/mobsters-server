@@ -58,18 +58,9 @@ message DialogueProto {
 	repeated SpeechSegmentProto speechSegment = 1;
 
 	message SpeechSegmentProto {
-		optional DialogueSpeaker speaker = 1;
+		optional string speaker = 1;
 		optional string speakerText = 2;
-		
-		enum DialogueSpeaker {
-			PLAYER_TYPE = 1;
-			TUTORIAL_GIRL = 2;
-			QUESTGIVER_1 = 3;		// Farmer Mitch
-			QUESTGIVER_2 = 4;		// Captain Riz
-			QUESTGIVER_3 = 5;		// Sean The Brave
-			QUESTGIVER_4 = 6;		// Captain Riz
-			QUESTGIVER_5 = 7; 		// Sailor Steve
-		}
+		optional bool isLeftSide = 3;
 	}
 }
 

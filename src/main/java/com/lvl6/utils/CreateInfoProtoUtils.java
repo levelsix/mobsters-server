@@ -302,10 +302,11 @@ public class CreateInfoProtoUtils {
     DialogueProto.Builder dp = DialogueProto.newBuilder();
 
     List<String> speakerTexts = d.getSpeakerTexts();
-    int i = 0;
-    for (DialogueSpeaker speaker : d.getSpeakers()) {
-      dp.addSpeechSegment(SpeechSegmentProto.newBuilder().setSpeaker(speaker).
-          setSpeakerText(speakerTexts.get(i)).build());
+    List<String> speakers = d.getSpeakers();
+    List<Boolean> isLeftSides = d.getIsLeftSides();
+    for (int i = 0; i < speakerTexts.size(); i++) {
+      dp.addSpeechSegment(SpeechSegmentProto.newBuilder().setSpeaker(speakers.get(i)).
+          setSpeakerText(speakerTexts.get(i)).setIsLeftSide(isLeftSides.get(i)).build());
       i++;
     }
     return dp.build();

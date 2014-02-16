@@ -166,14 +166,18 @@ public class MiscMethods {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
       StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
 
-      List<DialogueSpeaker> speakers = new ArrayList<DialogueSpeaker>();
+      List<Boolean> isLeftSides = new ArrayList<Boolean>();
+      List<String> speakers = new ArrayList<String>();
       List<String> speakerTexts = new ArrayList<String>();
 
       try {
         while (st.hasMoreTokens()) {
-          DialogueSpeaker speaker = DialogueSpeaker.valueOf(Integer.parseInt(st.nextToken()));
+          StringTokenizer st2 = new StringTokenizer(st.nextToken(), ".");
+          Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
+          String speaker = st2.nextToken();
           String speakerText = st.nextToken();
           if (speakerText != null) {
+            isLeftSides.add(isLeftSide);
             speakers.add(speaker);
             speakerTexts.add(speakerText);
           }
@@ -181,7 +185,7 @@ public class MiscMethods {
       } catch (Exception e) {
         log.error("problem with creating dialogue object for this dialogueblob: {}", dialogueBlob, e);
       }
-      return new Dialogue(speakers, speakerTexts);
+      return new Dialogue(speakers, speakerTexts, isLeftSides);
     }
     return null;
   }

@@ -3,20 +3,24 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.List;
 
-import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
-
 public class Dialogue implements Serializable {
 
 	private static final long serialVersionUID = -8118069262824842364L;
-	List<DialogueSpeaker> speakers;
+  List<Boolean> isLeftSides;
+	List<String> speakers;
 	List<String> speakerTexts;
 
-	public Dialogue(List<DialogueSpeaker> speakers, List<String> speakerTexts) {
+	public Dialogue(List<String> speakers, List<String> speakerTexts, List<Boolean> isLeftSides) {
 		this.speakers = speakers;
 		this.speakerTexts = speakerTexts;
+		this.isLeftSides = isLeftSides;
 	}
 
-	public List<DialogueSpeaker> getSpeakers() {
+  public List<Boolean> getIsLeftSides() {
+    return isLeftSides;
+  }
+
+	public List<String> getSpeakers() {
 		return speakers;
 	}
 
