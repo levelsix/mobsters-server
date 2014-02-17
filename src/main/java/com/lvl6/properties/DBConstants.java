@@ -26,6 +26,7 @@ public class DBConstants {
   public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
   public static final String TABLE_LOGIN_HISTORY = "login_history";	
   public static final String TABLE_MONSTER = "monster";
+  public static final String TABLE_MONSTER_BATTLE_DIALOGUE = "monster_battle_dialogue";
   public static final String TABLE_MONSTER_ENHANCING_FOR_USER = "monster_enhancing_for_user";
   public static final String TABLE_MONSTER_ENHANCING_HISTORY = "monster_enhancing_history";
   public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";

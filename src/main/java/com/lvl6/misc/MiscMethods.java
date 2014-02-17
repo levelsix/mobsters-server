@@ -34,6 +34,7 @@ import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
@@ -65,6 +66,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Us
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
@@ -91,6 +93,7 @@ import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
@@ -568,7 +571,7 @@ public class MiscMethods {
     LockBoxEventRetrieveUtils.reload();
     //TODO: FIGURE OUT BETTER WAY TO RELOAD NON STATIC CLASS DATA
 //    getMonsterForPvpRetrieveUtils().reload();
-    
+    MonsterBattleDialogueRetrieveUtils.reload();
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
@@ -1257,6 +1260,7 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   	setBoosterPackStuff(sdpb);
   	setStructures(sdpb);
   	setEvents(sdpb);
+  	setMonsterDialogue(sdpb);
   	
   	return sdpb.build();
   }
@@ -1501,6 +1505,23 @@ public static GoldSaleProto createFakeGoldSaleForNewPlayer(User user) {
   				.createPersistentEventProtoFromEvent(event);
   		sdpb.addEvents(eventProto);
   	}
+  }
+  
+  private static void setMonsterDialogue(Builder sdpb) {
+  	Map<Integer, List<MonsterBattleDialogue>> monsterIdToDialogue =
+  			MonsterBattleDialogueRetrieveUtils.getMonsterIdToBattleDialogue();
+  	
+  	List<MonsterBattleDialogueProto> dialogueList = new ArrayList<MonsterBattleDialogueProto>();
+  	for (List<MonsterBattleDialogue> dialogue : monsterIdToDialogue.values()) {
+  		
+  		for (MonsterBattleDialogue mbd : dialogue) {
+  			MonsterBattleDialogueProto dialogueProto = CreateInfoProtoUtils
+  					.createMonsterBattleDialogueProto(mbd);
+  			dialogueList.add(dialogueProto);
+  		}
+  	}
+  	
+  	sdpb.addAllMbds(dialogueList);
   }
 
 }

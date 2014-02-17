@@ -28,6 +28,7 @@ import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForPvp;
@@ -77,6 +78,8 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.An
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
@@ -1503,5 +1506,23 @@ public class CreateInfoProtoUtils {
   	mumpb.setMonsterLvl(lvl);
   	
   	return mumpb.build();
+  }
+  
+  public static MonsterBattleDialogueProto createMonsterBattleDialogueProto(MonsterBattleDialogue mbd) {
+  	MonsterBattleDialogueProto.Builder mbdpb = MonsterBattleDialogueProto.newBuilder();
+  	mbdpb.setMonsterId(mbd.getMonsterId());
+  	
+  	String aStr = mbd.getDialogueType();
+  	try {
+  		DialogueType type = DialogueType.valueOf(aStr);
+  		mbdpb.setDialogueType(type);
+  	} catch (Exception e) {
+  		log.error("could not create DialogueType enum", e);
+  	}
+  	
+  	mbdpb.setDialogue(mbd.getDialogue());
+  	mbdpb.setProbabilityUttered(mbd.getProbabilityUttered());
+  	
+  	return mbdpb.build();
   }
 }
