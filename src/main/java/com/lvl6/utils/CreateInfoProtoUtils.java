@@ -306,7 +306,6 @@ public class CreateInfoProtoUtils {
     for (int i = 0; i < speakerTexts.size(); i++) {
       dp.addSpeechSegment(SpeechSegmentProto.newBuilder().setSpeaker(speakers.get(i)).
           setSpeakerText(speakerTexts.get(i)).setIsLeftSide(isLeftSides.get(i)).build());
-      i++;
     }
     return dp.build();
   }
