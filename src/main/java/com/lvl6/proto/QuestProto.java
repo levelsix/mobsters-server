@@ -2071,13 +2071,17 @@ public final class QuestProto {
     public interface SpeechSegmentProtoOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
       
-      // optional .com.lvl6.proto.DialogueProto.SpeechSegmentProto.DialogueSpeaker speaker = 1;
+      // optional string speaker = 1;
       boolean hasSpeaker();
-      com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker getSpeaker();
+      String getSpeaker();
       
       // optional string speakerText = 2;
       boolean hasSpeakerText();
       String getSpeakerText();
+      
+      // optional bool isLeftSide = 3;
+      boolean hasIsLeftSide();
+      boolean getIsLeftSide();
     }
     public static final class SpeechSegmentProto extends
         com.google.protobuf.GeneratedMessage
@@ -2107,99 +2111,37 @@ public final class QuestProto {
         return com.lvl6.proto.QuestProto.internal_static_com_lvl6_proto_DialogueProto_SpeechSegmentProto_fieldAccessorTable;
       }
       
-      public enum DialogueSpeaker
-          implements com.google.protobuf.ProtocolMessageEnum {
-        PLAYER_TYPE(0, 1),
-        TUTORIAL_GIRL(1, 2),
-        QUESTGIVER_1(2, 3),
-        QUESTGIVER_2(3, 4),
-        QUESTGIVER_3(4, 5),
-        QUESTGIVER_4(5, 6),
-        QUESTGIVER_5(6, 7),
-        ;
-        
-        public static final int PLAYER_TYPE_VALUE = 1;
-        public static final int TUTORIAL_GIRL_VALUE = 2;
-        public static final int QUESTGIVER_1_VALUE = 3;
-        public static final int QUESTGIVER_2_VALUE = 4;
-        public static final int QUESTGIVER_3_VALUE = 5;
-        public static final int QUESTGIVER_4_VALUE = 6;
-        public static final int QUESTGIVER_5_VALUE = 7;
-        
-        
-        public final int getNumber() { return value; }
-        
-        public static DialogueSpeaker valueOf(int value) {
-          switch (value) {
-            case 1: return PLAYER_TYPE;
-            case 2: return TUTORIAL_GIRL;
-            case 3: return QUESTGIVER_1;
-            case 4: return QUESTGIVER_2;
-            case 5: return QUESTGIVER_3;
-            case 6: return QUESTGIVER_4;
-            case 7: return QUESTGIVER_5;
-            default: return null;
-          }
-        }
-        
-        public static com.google.protobuf.Internal.EnumLiteMap<DialogueSpeaker>
-            internalGetValueMap() {
-          return internalValueMap;
-        }
-        private static com.google.protobuf.Internal.EnumLiteMap<DialogueSpeaker>
-            internalValueMap =
-              new com.google.protobuf.Internal.EnumLiteMap<DialogueSpeaker>() {
-                public DialogueSpeaker findValueByNumber(int number) {
-                  return DialogueSpeaker.valueOf(number);
-                }
-              };
-        
-        public final com.google.protobuf.Descriptors.EnumValueDescriptor
-            getValueDescriptor() {
-          return getDescriptor().getValues().get(index);
-        }
-        public final com.google.protobuf.Descriptors.EnumDescriptor
-            getDescriptorForType() {
-          return getDescriptor();
-        }
-        public static final com.google.protobuf.Descriptors.EnumDescriptor
-            getDescriptor() {
-          return com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.getDescriptor().getEnumTypes().get(0);
-        }
-        
-        private static final DialogueSpeaker[] VALUES = {
-          PLAYER_TYPE, TUTORIAL_GIRL, QUESTGIVER_1, QUESTGIVER_2, QUESTGIVER_3, QUESTGIVER_4, QUESTGIVER_5, 
-        };
-        
-        public static DialogueSpeaker valueOf(
-            com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-          if (desc.getType() != getDescriptor()) {
-            throw new java.lang.IllegalArgumentException(
-              "EnumValueDescriptor is not for this type.");
-          }
-          return VALUES[desc.getIndex()];
-        }
-        
-        private final int index;
-        private final int value;
-        
-        private DialogueSpeaker(int index, int value) {
-          this.index = index;
-          this.value = value;
-        }
-        
-        // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DialogueProto.SpeechSegmentProto.DialogueSpeaker)
-      }
-      
       private int bitField0_;
-      // optional .com.lvl6.proto.DialogueProto.SpeechSegmentProto.DialogueSpeaker speaker = 1;
+      // optional string speaker = 1;
       public static final int SPEAKER_FIELD_NUMBER = 1;
-      private com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker speaker_;
+      private java.lang.Object speaker_;
       public boolean hasSpeaker() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker getSpeaker() {
-        return speaker_;
+      public String getSpeaker() {
+        java.lang.Object ref = speaker_;
+        if (ref instanceof String) {
+          return (String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+            speaker_ = s;
+          }
+          return s;
+        }
+      }
+      private com.google.protobuf.ByteString getSpeakerBytes() {
+        java.lang.Object ref = speaker_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          speaker_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
       
       // optional string speakerText = 2;
@@ -2234,9 +2176,20 @@ public final class QuestProto {
         }
       }
       
+      // optional bool isLeftSide = 3;
+      public static final int ISLEFTSIDE_FIELD_NUMBER = 3;
+      private boolean isLeftSide_;
+      public boolean hasIsLeftSide() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public boolean getIsLeftSide() {
+        return isLeftSide_;
+      }
+      
       private void initFields() {
-        speaker_ = com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker.PLAYER_TYPE;
+        speaker_ = "";
         speakerText_ = "";
+        isLeftSide_ = false;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -2251,10 +2204,13 @@ public final class QuestProto {
                           throws java.io.IOException {
         getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeEnum(1, speaker_.getNumber());
+          output.writeBytes(1, getSpeakerBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           output.writeBytes(2, getSpeakerTextBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeBool(3, isLeftSide_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -2267,11 +2223,15 @@ public final class QuestProto {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeEnumSize(1, speaker_.getNumber());
+            .computeBytesSize(1, getSpeakerBytes());
         }
         if (((bitField0_ & 0x00000002) == 0x00000002)) {
           size += com.google.protobuf.CodedOutputStream
             .computeBytesSize(2, getSpeakerTextBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBoolSize(3, isLeftSide_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -2397,10 +2357,12 @@ public final class QuestProto {
         
         public Builder clear() {
           super.clear();
-          speaker_ = com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker.PLAYER_TYPE;
+          speaker_ = "";
           bitField0_ = (bitField0_ & ~0x00000001);
           speakerText_ = "";
           bitField0_ = (bitField0_ & ~0x00000002);
+          isLeftSide_ = false;
+          bitField0_ = (bitField0_ & ~0x00000004);
           return this;
         }
         
@@ -2447,6 +2409,10 @@ public final class QuestProto {
             to_bitField0_ |= 0x00000002;
           }
           result.speakerText_ = speakerText_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.isLeftSide_ = isLeftSide_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -2468,6 +2434,9 @@ public final class QuestProto {
           }
           if (other.hasSpeakerText()) {
             setSpeakerText(other.getSpeakerText());
+          }
+          if (other.hasIsLeftSide()) {
+            setIsLeftSide(other.getIsLeftSide());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -2500,20 +2469,19 @@ public final class QuestProto {
                 }
                 break;
               }
-              case 8: {
-                int rawValue = input.readEnum();
-                com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker value = com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker.valueOf(rawValue);
-                if (value == null) {
-                  unknownFields.mergeVarintField(1, rawValue);
-                } else {
-                  bitField0_ |= 0x00000001;
-                  speaker_ = value;
-                }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                speaker_ = input.readBytes();
                 break;
               }
               case 18: {
                 bitField0_ |= 0x00000002;
                 speakerText_ = input.readBytes();
+                break;
+              }
+              case 24: {
+                bitField0_ |= 0x00000004;
+                isLeftSide_ = input.readBool();
                 break;
               }
             }
@@ -2522,28 +2490,40 @@ public final class QuestProto {
         
         private int bitField0_;
         
-        // optional .com.lvl6.proto.DialogueProto.SpeechSegmentProto.DialogueSpeaker speaker = 1;
-        private com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker speaker_ = com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker.PLAYER_TYPE;
+        // optional string speaker = 1;
+        private java.lang.Object speaker_ = "";
         public boolean hasSpeaker() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
-        public com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker getSpeaker() {
-          return speaker_;
-        }
-        public Builder setSpeaker(com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker value) {
-          if (value == null) {
-            throw new NullPointerException();
+        public String getSpeaker() {
+          java.lang.Object ref = speaker_;
+          if (!(ref instanceof String)) {
+            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            speaker_ = s;
+            return s;
+          } else {
+            return (String) ref;
           }
-          bitField0_ |= 0x00000001;
+        }
+        public Builder setSpeaker(String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
           speaker_ = value;
           onChanged();
           return this;
         }
         public Builder clearSpeaker() {
           bitField0_ = (bitField0_ & ~0x00000001);
-          speaker_ = com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker.PLAYER_TYPE;
+          speaker_ = getDefaultInstance().getSpeaker();
           onChanged();
           return this;
+        }
+        void setSpeaker(com.google.protobuf.ByteString value) {
+          bitField0_ |= 0x00000001;
+          speaker_ = value;
+          onChanged();
         }
         
         // optional string speakerText = 2;
@@ -2580,6 +2560,27 @@ public final class QuestProto {
           bitField0_ |= 0x00000002;
           speakerText_ = value;
           onChanged();
+        }
+        
+        // optional bool isLeftSide = 3;
+        private boolean isLeftSide_ ;
+        public boolean hasIsLeftSide() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public boolean getIsLeftSide() {
+          return isLeftSide_;
+        }
+        public Builder setIsLeftSide(boolean value) {
+          bitField0_ |= 0x00000004;
+          isLeftSide_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearIsLeftSide() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          isLeftSide_ = false;
+          onChanged();
+          return this;
         }
         
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.DialogueProto.SpeechSegmentProto)
@@ -3718,19 +3719,14 @@ public final class QuestProto {
       "ER\020\002\022\021\n\rCOMPLETE_TASK\020\003\022\033\n\027COLLECT_COINS" +
       "_FROM_HOME\020\004\022\020\n\014BUILD_STRUCT\020\005\022\022\n\016UPGRAD" +
       "E_STRUCT\020\006\022\022\n\016MONSTER_APPEAR\020\007\022\030\n\024COLLEC",
-      "T_SPECIAL_ITEM\020\010\"\351\002\n\rDialogueProto\022G\n\rsp" +
+      "T_SPECIAL_ITEM\020\010\"\250\001\n\rDialogueProto\022G\n\rsp" +
       "eechSegment\030\001 \003(\01320.com.lvl6.proto.Dialo" +
-      "gueProto.SpeechSegmentProto\032\216\002\n\022SpeechSe" +
-      "gmentProto\022Q\n\007speaker\030\001 \001(\0162@.com.lvl6.p" +
-      "roto.DialogueProto.SpeechSegmentProto.Di" +
-      "alogueSpeaker\022\023\n\013speakerText\030\002 \001(\t\"\217\001\n\017D" +
-      "ialogueSpeaker\022\017\n\013PLAYER_TYPE\020\001\022\021\n\rTUTOR" +
-      "IAL_GIRL\020\002\022\020\n\014QUESTGIVER_1\020\003\022\020\n\014QUESTGIV" +
-      "ER_2\020\004\022\020\n\014QUESTGIVER_3\020\005\022\020\n\014QUESTGIVER_4" +
-      "\020\006\022\020\n\014QUESTGIVER_5\020\007\"o\n\022FullUserQuestPro",
-      "to\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001(\005\022\022\n\ni" +
-      "sRedeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001(\010\022\020\n\010p" +
-      "rogress\030\005 \001(\005B\014B\nQuestProto"
+      "gueProto.SpeechSegmentProto\032N\n\022SpeechSeg" +
+      "mentProto\022\017\n\007speaker\030\001 \001(\t\022\023\n\013speakerTex" +
+      "t\030\002 \001(\t\022\022\n\nisLeftSide\030\003 \001(\010\"o\n\022FullUserQ" +
+      "uestProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007questId\030\002 \001" +
+      "(\005\022\022\n\nisRedeemed\030\003 \001(\010\022\022\n\nisComplete\030\004 \001" +
+      "(\010\022\020\n\010progress\030\005 \001(\005B\014B\nQuestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3758,7 +3754,7 @@ public final class QuestProto {
           internal_static_com_lvl6_proto_DialogueProto_SpeechSegmentProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_DialogueProto_SpeechSegmentProto_descriptor,
-              new java.lang.String[] { "Speaker", "SpeakerText", },
+              new java.lang.String[] { "Speaker", "SpeakerText", "IsLeftSide", },
               com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.class,
               com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserQuestProto_descriptor =

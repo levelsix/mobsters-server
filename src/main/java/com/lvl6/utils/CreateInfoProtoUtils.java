@@ -90,7 +90,6 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
-import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullQuestProto.QuestType;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
@@ -305,11 +304,11 @@ public class CreateInfoProtoUtils {
     DialogueProto.Builder dp = DialogueProto.newBuilder();
 
     List<String> speakerTexts = d.getSpeakerTexts();
-    int i = 0;
-    for (DialogueSpeaker speaker : d.getSpeakers()) {
-      dp.addSpeechSegment(SpeechSegmentProto.newBuilder().setSpeaker(speaker).
-          setSpeakerText(speakerTexts.get(i)).build());
-      i++;
+    List<String> speakers = d.getSpeakers();
+    List<Boolean> isLeftSides = d.getIsLeftSides();
+    for (int i = 0; i < speakerTexts.size(); i++) {
+      dp.addSpeechSegment(SpeechSegmentProto.newBuilder().setSpeaker(speakers.get(i)).
+          setSpeakerText(speakerTexts.get(i)).setIsLeftSide(isLeftSides.get(i)).build());
     }
     return dp.build();
   }
