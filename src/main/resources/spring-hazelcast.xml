@@ -37,6 +37,7 @@
 
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel"/>
 		
+	<hz:map id="lockMap" name="offlinePvpUserMap" instance-ref="hazel"/>
 		
 	<hz:topic id="serverEvents" name="serverEvents" instance-ref="hazel"/>
 	<hz:topic id="staticDataReloadDone" name="staticDataReloadDone" instance-ref="hazel"/>	

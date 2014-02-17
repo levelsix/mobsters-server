@@ -26,6 +26,7 @@ public class DBConstants {
   public static final String TABLE_LOCK_BOX_ITEM = "lock_box_item";
   public static final String TABLE_LOGIN_HISTORY = "login_history";	
   public static final String TABLE_MONSTER = "monster";
+  public static final String TABLE_MONSTER_BATTLE_DIALOGUE = "monster_battle_dialogue";
   public static final String TABLE_MONSTER_ENHANCING_FOR_USER = "monster_enhancing_for_user";
   public static final String TABLE_MONSTER_ENHANCING_HISTORY = "monster_enhancing_history";
   public static final String TABLE_MONSTER_EVOLVING_FOR_USER = "monster_evolving_for_user";
@@ -398,7 +399,7 @@ public class DBConstants {
   public static final String USER__SHIELD_END_TIME = "shield_end_time";
   public static final String USER__ELO = "elo";
   public static final String USER__RANK = "rank";
-  public static final String USER__IN_BATTLE_SHIELD_END_TIME = "in_battle_shield_end_time";
+  public static final String USER__IN_BATTLE_END_TIME = "in_battle_end_time";
   public static final String USER__ATTACKS_WON = "attacks_won";
   public static final String USER__DEFENSES_WON = "defenses_won";
   public static final String USER__ATTACKS_LOST = "attacks_lost";

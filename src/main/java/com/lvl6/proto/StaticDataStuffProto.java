@@ -175,6 +175,16 @@ public final class StaticDataStuffProto {
         getEventsOrBuilderList();
     com.lvl6.proto.TaskProto.PersistentEventProtoOrBuilder getEventsOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> 
+        getMbdsList();
+    com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto getMbds(int index);
+    int getMbdsCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> 
+        getMbdsOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder getMbdsOrBuilder(
+        int index);
   }
   public static final class StaticDataProto extends
       com.google.protobuf.GeneratedMessage
@@ -554,6 +564,27 @@ public final class StaticDataStuffProto {
       return events_.get(index);
     }
     
+    // repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;
+    public static final int MBDS_FIELD_NUMBER = 19;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> mbds_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> getMbdsList() {
+      return mbds_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> 
+        getMbdsOrBuilderList() {
+      return mbds_;
+    }
+    public int getMbdsCount() {
+      return mbds_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto getMbds(int index) {
+      return mbds_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder getMbdsOrBuilder(
+        int index) {
+      return mbds_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -572,6 +603,7 @@ public final class StaticDataStuffProto {
       allLabs_ = java.util.Collections.emptyList();
       allTownHalls_ = java.util.Collections.emptyList();
       events_ = java.util.Collections.emptyList();
+      mbds_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -635,6 +667,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < events_.size(); i++) {
         output.writeMessage(18, events_.get(i));
+      }
+      for (int i = 0; i < mbds_.size(); i++) {
+        output.writeMessage(19, mbds_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -712,6 +747,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < events_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(18, events_.get(i));
+      }
+      for (int i = 0; i < mbds_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(19, mbds_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -846,6 +885,7 @@ public final class StaticDataStuffProto {
           getAllLabsFieldBuilder();
           getAllTownHallsFieldBuilder();
           getEventsFieldBuilder();
+          getMbdsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -955,6 +995,12 @@ public final class StaticDataStuffProto {
           bitField0_ = (bitField0_ & ~0x00010000);
         } else {
           eventsBuilder_.clear();
+        }
+        if (mbdsBuilder_ == null) {
+          mbds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00020000);
+        } else {
+          mbdsBuilder_.clear();
         }
         return this;
       }
@@ -1145,6 +1191,15 @@ public final class StaticDataStuffProto {
           result.events_ = events_;
         } else {
           result.events_ = eventsBuilder_.build();
+        }
+        if (mbdsBuilder_ == null) {
+          if (((bitField0_ & 0x00020000) == 0x00020000)) {
+            mbds_ = java.util.Collections.unmodifiableList(mbds_);
+            bitField0_ = (bitField0_ & ~0x00020000);
+          }
+          result.mbds_ = mbds_;
+        } else {
+          result.mbds_ = mbdsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1581,6 +1636,32 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (mbdsBuilder_ == null) {
+          if (!other.mbds_.isEmpty()) {
+            if (mbds_.isEmpty()) {
+              mbds_ = other.mbds_;
+              bitField0_ = (bitField0_ & ~0x00020000);
+            } else {
+              ensureMbdsIsMutable();
+              mbds_.addAll(other.mbds_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.mbds_.isEmpty()) {
+            if (mbdsBuilder_.isEmpty()) {
+              mbdsBuilder_.dispose();
+              mbdsBuilder_ = null;
+              mbds_ = other.mbds_;
+              bitField0_ = (bitField0_ & ~0x00020000);
+              mbdsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getMbdsFieldBuilder() : null;
+            } else {
+              mbdsBuilder_.addAllMessages(other.mbds_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1715,6 +1796,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.TaskProto.PersistentEventProto.Builder subBuilder = com.lvl6.proto.TaskProto.PersistentEventProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addEvents(subBuilder.buildPartial());
+              break;
+            }
+            case 154: {
+              com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addMbds(subBuilder.buildPartial());
               break;
             }
           }
@@ -4789,6 +4876,192 @@ public final class StaticDataStuffProto {
         return eventsBuilder_;
       }
       
+      // repeated .com.lvl6.proto.MonsterBattleDialogueProto mbds = 19;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> mbds_ =
+        java.util.Collections.emptyList();
+      private void ensureMbdsIsMutable() {
+        if (!((bitField0_ & 0x00020000) == 0x00020000)) {
+          mbds_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto>(mbds_);
+          bitField0_ |= 0x00020000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> mbdsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> getMbdsList() {
+        if (mbdsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(mbds_);
+        } else {
+          return mbdsBuilder_.getMessageList();
+        }
+      }
+      public int getMbdsCount() {
+        if (mbdsBuilder_ == null) {
+          return mbds_.size();
+        } else {
+          return mbdsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto getMbds(int index) {
+        if (mbdsBuilder_ == null) {
+          return mbds_.get(index);
+        } else {
+          return mbdsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setMbds(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto value) {
+        if (mbdsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMbdsIsMutable();
+          mbds_.set(index, value);
+          onChanged();
+        } else {
+          mbdsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setMbds(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder builderForValue) {
+        if (mbdsBuilder_ == null) {
+          ensureMbdsIsMutable();
+          mbds_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          mbdsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addMbds(com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto value) {
+        if (mbdsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMbdsIsMutable();
+          mbds_.add(value);
+          onChanged();
+        } else {
+          mbdsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addMbds(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto value) {
+        if (mbdsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMbdsIsMutable();
+          mbds_.add(index, value);
+          onChanged();
+        } else {
+          mbdsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addMbds(
+          com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder builderForValue) {
+        if (mbdsBuilder_ == null) {
+          ensureMbdsIsMutable();
+          mbds_.add(builderForValue.build());
+          onChanged();
+        } else {
+          mbdsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addMbds(
+          int index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder builderForValue) {
+        if (mbdsBuilder_ == null) {
+          ensureMbdsIsMutable();
+          mbds_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          mbdsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllMbds(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto> values) {
+        if (mbdsBuilder_ == null) {
+          ensureMbdsIsMutable();
+          super.addAll(values, mbds_);
+          onChanged();
+        } else {
+          mbdsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearMbds() {
+        if (mbdsBuilder_ == null) {
+          mbds_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00020000);
+          onChanged();
+        } else {
+          mbdsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeMbds(int index) {
+        if (mbdsBuilder_ == null) {
+          ensureMbdsIsMutable();
+          mbds_.remove(index);
+          onChanged();
+        } else {
+          mbdsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder getMbdsBuilder(
+          int index) {
+        return getMbdsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder getMbdsOrBuilder(
+          int index) {
+        if (mbdsBuilder_ == null) {
+          return mbds_.get(index);  } else {
+          return mbdsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> 
+           getMbdsOrBuilderList() {
+        if (mbdsBuilder_ != null) {
+          return mbdsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(mbds_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder addMbdsBuilder() {
+        return getMbdsFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder addMbdsBuilder(
+          int index) {
+        return getMbdsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder> 
+           getMbdsBuilderList() {
+        return getMbdsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder> 
+          getMbdsFieldBuilder() {
+        if (mbdsBuilder_ == null) {
+          mbdsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder, com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder>(
+                  mbds_,
+                  ((bitField0_ & 0x00020000) == 0x00020000),
+                  getParentForChildren(),
+                  isClean());
+          mbds_ = null;
+        }
+        return mbdsBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
     
@@ -4817,7 +5090,7 @@ public final class StaticDataStuffProto {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Boos" +
       "terPackStuff.proto\032\nCity.proto\032\022MonsterS" +
       "tuff.proto\032\013Quest.proto\032\017Structure.proto" +
-      "\032\nTask.proto\032\nUser.proto\"\262\007\n\017StaticDataP" +
+      "\032\nTask.proto\032\nUser.proto\"\354\007\n\017StaticDataP" +
       "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
       "nimumUserProto\022>\n\016expansionCosts\030\002 \003(\0132&" +
       ".com.lvl6.proto.CityExpansionCostProto\0220" +
@@ -4841,7 +5114,9 @@ public final class StaticDataStuffProto {
       "2\030.com.lvl6.proto.LabProto\0223\n\014allTownHal" +
       "ls\030\020 \003(\0132\035.com.lvl6.proto.TownHallProto\022" +
       "4\n\006events\030\022 \003(\0132$.com.lvl6.proto.Persist" +
-      "entEventProtoB\026B\024StaticDataStuffProto"
+      "entEventProto\0228\n\004mbds\030\023 \003(\0132*.com.lvl6.p" +
+      "roto.MonsterBattleDialogueProtoB\026B\024Stati" +
+      "cDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4853,7 +5128,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "Events", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "Events", "Mbds", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;

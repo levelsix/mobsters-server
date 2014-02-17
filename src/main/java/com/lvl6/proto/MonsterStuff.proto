@@ -174,3 +174,15 @@ message UserMonsterEvolutionProto {
 	optional int64 startTime = 3;
 }
 
+//------------------------------------------------------------------------------------------
+
+message MonsterBattleDialogueProto {
+	optional int32 monsterId = 1;
+	optional DialogueType dialogueType = 3;
+	optional string dialogue = 2;
+	optional float probabilityUttered = 4; //chance the monster says it
+	
+	enum DialogueType {
+		ENTER_BATTLE = 1;
+	}
+}

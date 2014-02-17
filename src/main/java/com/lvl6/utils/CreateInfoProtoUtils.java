@@ -28,6 +28,7 @@ import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
 import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForPvp;
@@ -77,6 +78,8 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.An
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MinimumUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
@@ -87,7 +90,6 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.QuestProto.DialogueProto;
 import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
-import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto.DialogueSpeaker;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullQuestProto.QuestType;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
@@ -302,11 +304,11 @@ public class CreateInfoProtoUtils {
     DialogueProto.Builder dp = DialogueProto.newBuilder();
 
     List<String> speakerTexts = d.getSpeakerTexts();
-    int i = 0;
-    for (DialogueSpeaker speaker : d.getSpeakers()) {
-      dp.addSpeechSegment(SpeechSegmentProto.newBuilder().setSpeaker(speaker).
-          setSpeakerText(speakerTexts.get(i)).build());
-      i++;
+    List<String> speakers = d.getSpeakers();
+    List<Boolean> isLeftSides = d.getIsLeftSides();
+    for (int i = 0; i < speakerTexts.size(); i++) {
+      dp.addSpeechSegment(SpeechSegmentProto.newBuilder().setSpeaker(speakers.get(i)).
+          setSpeakerText(speakerTexts.get(i)).setIsLeftSide(isLeftSides.get(i)).build());
     }
     return dp.build();
   }
@@ -1503,5 +1505,23 @@ public class CreateInfoProtoUtils {
   	mumpb.setMonsterLvl(lvl);
   	
   	return mumpb.build();
+  }
+  
+  public static MonsterBattleDialogueProto createMonsterBattleDialogueProto(MonsterBattleDialogue mbd) {
+  	MonsterBattleDialogueProto.Builder mbdpb = MonsterBattleDialogueProto.newBuilder();
+  	mbdpb.setMonsterId(mbd.getMonsterId());
+  	
+  	String aStr = mbd.getDialogueType();
+  	try {
+  		DialogueType type = DialogueType.valueOf(aStr);
+  		mbdpb.setDialogueType(type);
+  	} catch (Exception e) {
+  		log.error("could not create DialogueType enum", e);
+  	}
+  	
+  	mbdpb.setDialogue(mbd.getDialogue());
+  	mbdpb.setProbabilityUttered(mbd.getProbabilityUttered());
+  	
+  	return mbdpb.build();
   }
 }

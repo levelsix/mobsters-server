@@ -8460,6 +8460,627 @@ public final class MonsterStuffProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserMonsterEvolutionProto)
   }
   
+  public interface MonsterBattleDialogueProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 monsterId = 1;
+    boolean hasMonsterId();
+    int getMonsterId();
+    
+    // optional .com.lvl6.proto.MonsterBattleDialogueProto.DialogueType dialogueType = 3;
+    boolean hasDialogueType();
+    com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType getDialogueType();
+    
+    // optional string dialogue = 2;
+    boolean hasDialogue();
+    String getDialogue();
+    
+    // optional float probabilityUttered = 4;
+    boolean hasProbabilityUttered();
+    float getProbabilityUttered();
+  }
+  public static final class MonsterBattleDialogueProto extends
+      com.google.protobuf.GeneratedMessage
+      implements MonsterBattleDialogueProtoOrBuilder {
+    // Use MonsterBattleDialogueProto.newBuilder() to construct.
+    private MonsterBattleDialogueProto(Builder builder) {
+      super(builder);
+    }
+    private MonsterBattleDialogueProto(boolean noInit) {}
+    
+    private static final MonsterBattleDialogueProto defaultInstance;
+    public static MonsterBattleDialogueProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MonsterBattleDialogueProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MonsterBattleDialogueProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MonsterBattleDialogueProto_fieldAccessorTable;
+    }
+    
+    public enum DialogueType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      ENTER_BATTLE(0, 1),
+      ;
+      
+      public static final int ENTER_BATTLE_VALUE = 1;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static DialogueType valueOf(int value) {
+        switch (value) {
+          case 1: return ENTER_BATTLE;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<DialogueType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<DialogueType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<DialogueType>() {
+              public DialogueType findValueByNumber(int number) {
+                return DialogueType.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final DialogueType[] VALUES = {
+        ENTER_BATTLE, 
+      };
+      
+      public static DialogueType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private DialogueType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.MonsterBattleDialogueProto.DialogueType)
+    }
+    
+    private int bitField0_;
+    // optional int32 monsterId = 1;
+    public static final int MONSTERID_FIELD_NUMBER = 1;
+    private int monsterId_;
+    public boolean hasMonsterId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getMonsterId() {
+      return monsterId_;
+    }
+    
+    // optional .com.lvl6.proto.MonsterBattleDialogueProto.DialogueType dialogueType = 3;
+    public static final int DIALOGUETYPE_FIELD_NUMBER = 3;
+    private com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType dialogueType_;
+    public boolean hasDialogueType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType getDialogueType() {
+      return dialogueType_;
+    }
+    
+    // optional string dialogue = 2;
+    public static final int DIALOGUE_FIELD_NUMBER = 2;
+    private java.lang.Object dialogue_;
+    public boolean hasDialogue() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public String getDialogue() {
+      java.lang.Object ref = dialogue_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          dialogue_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDialogueBytes() {
+      java.lang.Object ref = dialogue_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        dialogue_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional float probabilityUttered = 4;
+    public static final int PROBABILITYUTTERED_FIELD_NUMBER = 4;
+    private float probabilityUttered_;
+    public boolean hasProbabilityUttered() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public float getProbabilityUttered() {
+      return probabilityUttered_;
+    }
+    
+    private void initFields() {
+      monsterId_ = 0;
+      dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.ENTER_BATTLE;
+      dialogue_ = "";
+      probabilityUttered_ = 0F;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, monsterId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(2, getDialogueBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(3, dialogueType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeFloat(4, probabilityUttered_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, monsterId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getDialogueBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, dialogueType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(4, probabilityUttered_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MonsterBattleDialogueProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.MonsterStuffProto.internal_static_com_lvl6_proto_MonsterBattleDialogueProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        monsterId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.ENTER_BATTLE;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        dialogue_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        probabilityUttered_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto getDefaultInstanceForType() {
+        return com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto build() {
+        com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto buildPartial() {
+        com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto result = new com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.monsterId_ = monsterId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.dialogueType_ = dialogueType_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.dialogue_ = dialogue_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.probabilityUttered_ = probabilityUttered_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto) {
+          return mergeFrom((com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto other) {
+        if (other == com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.getDefaultInstance()) return this;
+        if (other.hasMonsterId()) {
+          setMonsterId(other.getMonsterId());
+        }
+        if (other.hasDialogueType()) {
+          setDialogueType(other.getDialogueType());
+        }
+        if (other.hasDialogue()) {
+          setDialogue(other.getDialogue());
+        }
+        if (other.hasProbabilityUttered()) {
+          setProbabilityUttered(other.getProbabilityUttered());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              monsterId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000004;
+              dialogue_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType value = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                dialogueType_ = value;
+              }
+              break;
+            }
+            case 37: {
+              bitField0_ |= 0x00000008;
+              probabilityUttered_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 monsterId = 1;
+      private int monsterId_ ;
+      public boolean hasMonsterId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getMonsterId() {
+        return monsterId_;
+      }
+      public Builder setMonsterId(int value) {
+        bitField0_ |= 0x00000001;
+        monsterId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        monsterId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.MonsterBattleDialogueProto.DialogueType dialogueType = 3;
+      private com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.ENTER_BATTLE;
+      public boolean hasDialogueType() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType getDialogueType() {
+        return dialogueType_;
+      }
+      public Builder setDialogueType(com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        dialogueType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDialogueType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        dialogueType_ = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType.ENTER_BATTLE;
+        onChanged();
+        return this;
+      }
+      
+      // optional string dialogue = 2;
+      private java.lang.Object dialogue_ = "";
+      public boolean hasDialogue() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public String getDialogue() {
+        java.lang.Object ref = dialogue_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          dialogue_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDialogue(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        dialogue_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDialogue() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        dialogue_ = getDefaultInstance().getDialogue();
+        onChanged();
+        return this;
+      }
+      void setDialogue(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        dialogue_ = value;
+        onChanged();
+      }
+      
+      // optional float probabilityUttered = 4;
+      private float probabilityUttered_ ;
+      public boolean hasProbabilityUttered() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public float getProbabilityUttered() {
+        return probabilityUttered_;
+      }
+      public Builder setProbabilityUttered(float value) {
+        bitField0_ |= 0x00000008;
+        probabilityUttered_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearProbabilityUttered() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        probabilityUttered_ = 0F;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MonsterBattleDialogueProto)
+    }
+    
+    static {
+      defaultInstance = new MonsterBattleDialogueProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MonsterBattleDialogueProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_MonsterProto_descriptor;
   private static
@@ -8520,6 +9141,11 @@ public final class MonsterStuffProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserMonsterEvolutionProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_MonsterBattleDialogueProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_MonsterBattleDialogueProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -8585,7 +9211,12 @@ public final class MonsterStuffProto {
       "to.FullUserMonsterProto\"e\n\031UserMonsterEv" +
       "olutionProto\022\035\n\025catalystUserMonsterId\030\001 " +
       "\001(\003\022\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime" +
-      "\030\003 \001(\003B\023B\021MonsterStuffProto"
+      "\030\003 \001(\003\"\316\001\n\032MonsterBattleDialogueProto\022\021\n" +
+      "\tmonsterId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627" +
+      ".com.lvl6.proto.MonsterBattleDialoguePro" +
+      "to.DialogueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022pro",
+      "babilityUttered\030\004 \001(\002\" \n\014DialogueType\022\020\n" +
+      "\014ENTER_BATTLE\020\001B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8688,6 +9319,14 @@ public final class MonsterStuffProto {
               new java.lang.String[] { "CatalystUserMonsterId", "UserMonsterIds", "StartTime", },
               com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.class,
               com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto.Builder.class);
+          internal_static_com_lvl6_proto_MonsterBattleDialogueProto_descriptor =
+            getDescriptor().getMessageTypes().get(12);
+          internal_static_com_lvl6_proto_MonsterBattleDialogueProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MonsterBattleDialogueProto_descriptor,
+              new java.lang.String[] { "MonsterId", "DialogueType", "Dialogue", "ProbabilityUttered", },
+              com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.class,
+              com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder.class);
           return null;
         }
       };

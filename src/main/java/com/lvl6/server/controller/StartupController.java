@@ -43,6 +43,7 @@ import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.User;
@@ -73,6 +74,8 @@ import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
+import com.lvl6.pvp.HazelcastPvpUtil;
+import com.lvl6.pvp.OfflinePvpUser;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
@@ -83,6 +86,7 @@ import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
+import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -92,6 +96,7 @@ import com.lvl6.server.GameServer;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
+import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component
@@ -141,6 +146,20 @@ public class StartupController extends EventController {
   public void setChatMessages(IList<GroupChatMessageProto> chatMessages) {
     this.chatMessages = chatMessages;
   }
+  
+  @Autowired
+  protected HazelcastPvpUtil hazelcastPvpUtil;
+
+	public HazelcastPvpUtil getHazelcastPvpUtil() {
+		return hazelcastPvpUtil;
+	}
+
+	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
+		this.hazelcastPvpUtil = hazelcastPvpUtil;
+	}
+
+  
+  
 
   @Override
   public RequestEvent createRequestEvent() {
@@ -160,6 +179,7 @@ public class StartupController extends EventController {
     String udid = reqProto.getUdid();
     String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId() : null;
     String fbId = reqProto.getFbId();
+    boolean freshRestart = reqProto.getIsFreshRestart();
 
     StartupResponseProto.Builder resBuilder = StartupResponseProto.newBuilder();
 
@@ -197,7 +217,7 @@ public class StartupController extends EventController {
     	List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
       user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
       if (user != null) {
-        server.lockPlayer(user.getId(), this.getClass().getSimpleName());
+        getHazelcastPvpUtil().lockPlayer(user.getId(), this.getClass().getSimpleName());
         try {
           startupStatus = StartupStatus.USER_IN_DB;
           log.info("No major update... getting user info");
@@ -214,7 +234,8 @@ public class StartupController extends EventController {
           setCompletedTasks(resBuilder, user);
           setAllStaticData(resBuilder, user);
           setEventStuff(resBuilder, user);
-          
+          //if server sees that the user is in a pvp battle, decrement user's elo
+          pvpBattleStuff(user, freshRestart); 
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
@@ -232,7 +253,7 @@ public class StartupController extends EventController {
           log.error("exception in StartupController processEvent", e);
         } finally {
           // server.unlockClanTowersTable();
-          server.unlockPlayer(user.getId(), this.getClass().getSimpleName());
+          getHazelcastPvpUtil().unlockPlayer(user.getId(), this.getClass().getSimpleName());
         }
       } else {
         log.info("tutorial player with udid " + udid);
@@ -857,6 +878,76 @@ public class StartupController extends EventController {
   	for (EventPersistentForUser epfu : events) {
   		UserPersistentEventProto upep = CreateInfoProtoUtils.createUserPersistentEventProto(epfu);
   		resBuilder.addUserEvents(upep);
+  	}
+  	
+  }
+  
+  private void pvpBattleStuff(User user, boolean isFreshRestart) {
+  	//remove this user from the users available to be attacked in pvp
+  	int userId = user.getId();
+  	getHazelcastPvpUtil().removeOfflinePvpUser(userId);
+  	
+  	//if bool isFreshRestart is true, then deduct user's elo by amount specified in
+  	//the table (pvp_battle_for_user), since user auto loses
+  	PvpBattleForUser battle = PvpBattleForUserRetrieveUtils
+  			.getPvpBattleForUserForAttacker(userId);
+  	
+  	if (null == battle) {
+  		return;
+  	}
+  	//capping max elo attacker loses
+  	int eloAttackerLoses = battle.getAttackerLoseEloChange();
+  	if (user.getElo() + eloAttackerLoses < 0) {
+  		eloAttackerLoses = -1 * user.getElo();
+  	}
+  	
+  	int defenderId = battle.getDefenderId();
+  	int eloDefenderWins = battle.getDefenderLoseEloChange();
+  	
+  	//user has unfinished battle, reward defender and penalize attacker
+  	//nested try catch's in order to prevent exception bubbling up, all because of
+  	//some stinkin' elo XP
+  	try {
+  		//NOTE: this lock ordering might result in a temp deadlock
+  		//doesn't reeeally matter if can't penalize defender...
+  		
+  		//only lock real users
+  		if (0 != defenderId) {
+  			getHazelcastPvpUtil().lockPlayer(defenderId, this.getClass().getSimpleName());
+  		}
+  		try {
+  			User defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
+  			OfflinePvpUser defenderOpu = getHazelcastPvpUtil().getOfflinePvpUser(defenderId);
+  			
+  			//update attacker
+  			user.updateEloOilCash(userId, eloAttackerLoses, 0, 0);
+  			
+  			//update defender if real, might need to cap defenderElo
+  			if (null != defender) {
+  				defender.updateEloOilCash(userId, eloDefenderWins, 0, 0);
+  			}
+  			if (null != defenderOpu) { //update if exists
+  				int defenderElo = defender.getElo();
+  				defenderOpu.setElo(defenderElo);
+  				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
+  			}
+  			
+  			//delete that this battle occurred
+  			DeleteUtils.get().deletePvpBattleForUser(userId);
+  			log.info("successfully penalized, rewarded attacker, defender respectively. battle= " +
+  					battle);
+  			
+  		} catch (Exception e){
+  			log.error("tried to penalize, reward attacker, defender respectively. battle=" +
+  					battle, e);
+  		} finally {
+  			if (0 != defenderId) {
+  				getHazelcastPvpUtil().unlockPlayer(defenderId, this.getClass().getSimpleName());
+  			}
+  		}
+  	} catch (Exception e2) {
+  		log.error("could not successfully penalize, reward attacker, defender respectively." +
+  				" battle=" + battle, e2);
   	}
   	
   }

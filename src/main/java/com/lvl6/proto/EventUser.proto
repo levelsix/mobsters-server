@@ -111,14 +111,14 @@ message SetFacebookIdResponseProto {
 	
 
 //------------------------------------------------------------------------------------------
-//this event is mainly to make a user pay for something
+//this event is mainly to make a regular user pay for something, never to give stuff to him
 message UpdateUserCurrencyRequestProto {
 	optional MinimumUserProto sender = 1;
 	
-	//both positive numbers, server will change to negative
-	optional int32 cashSpent = 2;
-	optional int32 oilSpent = 3;
-	optional int32 gemsSpent = 4;
+	//however if user is an admin, use it however you want :)
+	optional sint32 cashSpent = 2;
+	optional sint32 oilSpent = 3;
+	optional sint32 gemsSpent = 4;
 	
 	optional int64 clientTime = 5;
 	

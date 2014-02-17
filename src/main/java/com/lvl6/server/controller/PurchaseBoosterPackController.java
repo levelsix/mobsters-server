@@ -251,13 +251,13 @@ import com.lvl6.utils.utilmethods.StringUtils;
   
   //no arguments are modified
   private List<BoosterItem> determineBoosterItemsUserReceives(int amountUserWantsToPurchase,
-      Map<Integer, BoosterItem> allBoosterItemIdsToBoosterItems) {
+      Map<Integer, BoosterItem> boosterItemIdsToBoosterItemsForPackId) {
     //return value
     List<BoosterItem> itemsUserReceives = new ArrayList<BoosterItem>();
     
-    Collection<BoosterItem> items = allBoosterItemIdsToBoosterItems.values();
+    Collection<BoosterItem> items = boosterItemIdsToBoosterItemsForPackId.values();
     List<BoosterItem> itemsList = new ArrayList<BoosterItem>(items);
-    float sumOfProbabilities = sumProbabilities(allBoosterItemIdsToBoosterItems.values());    
+    float sumOfProbabilities = sumProbabilities(boosterItemIdsToBoosterItemsForPackId.values());    
     
     //selecting items at random with replacement
     for(int purchaseN = 0; purchaseN < amountUserWantsToPurchase; purchaseN++) {

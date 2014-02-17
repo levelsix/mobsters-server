@@ -2,7 +2,6 @@ package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -12,21 +11,17 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UpdateUserCurrencyRequestEvent;
-import com.lvl6.events.response.UpdateUserCurrencyResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.MonsterForUser;
+import com.lvl6.events.response.UpdateUserCurrencyResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyRequestProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
-import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class UpdateUserCurrencyController extends EventController {
 
@@ -60,6 +55,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int oilSpent = reqProto.getOilSpent();
     int gemsSpent = reqProto.getGemsSpent();
     
+    String reason = reqProto.getReason();
+    String details = reqProto.getDetails();
     Timestamp clientTime = new Timestamp(reqProto.getClientTime());
 
     //set some values to send to the client (the response proto)
@@ -70,15 +67,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User aUser = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+      int previousGems = 0;
+      int previousCash = 0;
+      int previousOil = 0;
 
       boolean legit = checkLegit(resBuilder, aUser, userId, cashSpent, oilSpent, gemsSpent);
 
 
       boolean successful = false;
+      Map<String, Integer> currencyChange = new HashMap<String, Integer>();
       if(legit) {
+      	previousGems = aUser.getGems();
+      	previousCash = aUser.getCash();
+      	previousOil = aUser.getOil();
+      	
     	  successful = writeChangesToDb(aUser, userId, cashSpent, oilSpent, gemsSpent,
-    	  		clientTime);
-//        writeToUserCurrencyHistory(aUser, money, curTime, previousSilver, previousGold);
+    	  		clientTime, currencyChange);
       }
       if (successful) {
     	  resBuilder.setStatus(UpdateUserCurrencyStatus.SUCCESS);
@@ -93,8 +97,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
       	resEventUpdate.setTag(event.getTag());
-      	//TODO: KEEP TRACK OF CURRENCY HISTORY
       	server.writeEvent(resEventUpdate);
+      	//TODO: KEEP TRACK OF CURRENCY HISTORY
+      	writeToUserCurrencyHistory(aUser, currencyChange, clientTime, previousGems,
+      			previousCash, previousOil, reason, details);
+      	
       }
     } catch (Exception e) {
       log.error("exception in UpdateUserCurrencyController processEvent", e);
@@ -128,23 +135,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		gemsSpent != Math.abs(gemsSpent)) {
     	log.error("client sent a negative value! all should be positive :(  cashSpent=" +
     			cashSpent + "\t oilSpent=" + oilSpent + "\t gemsSpent=" + gemsSpent);
-    	return false;
+    	if (u.isAdmin()) {
+    		log.info("it's alright. User is admin.");
+    	} else {
+    		return false;
+    	}
     }
     
     //CHECK MONEY
     if (!hasEnoughCash(resBuilder, u, cashSpent)) {
-    	return false;
+    	if (u.isAdmin()) {
+    		log.info("it's alright. User is admin.");
+    	} else {
+    		return false;
+    	}
     }
     
     if (!hasEnoughOil(resBuilder, u, oilSpent)) {
-    	return false;
+    	if (u.isAdmin()) {
+    		log.info("it's alright. User is admin.");
+    	} else {
+    		return false;
+    	}
     }
     
     if (!hasEnoughGems(resBuilder, u, gemsSpent)) {
-    	return false;
+    	if (u.isAdmin()) {
+    		log.info("it's alright. User is admin.");
+    	} else {
+    		return false;
+    	}
     }
     
-    resBuilder.setStatus(UpdateUserCurrencyStatus.SUCCESS);
     return true;
   }
   
@@ -189,17 +211,35 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
 
   private boolean writeChangesToDb(User u, int uId, int cashSpent, int oilSpent, 
-  		int gemsSpent, Timestamp clientTime) {
+  		int gemsSpent, Timestamp clientTime, Map<String, Integer> currencyChange) {
 	  
-	  //update user diamonds
-	  int gemsChange = -1 * gemsSpent;
-	  int cashChange = -1 * cashSpent;
-	  int oilChange = -1 * oilSpent;
-	  if (!updateUser(u, gemsChange, cashChange, oilSpent)) {
+  	//update user currency
+  	int gemsChange = -1 * Math.abs(gemsSpent);
+  	int cashChange = -1 * Math.abs(cashSpent);
+  	int oilChange = -1 * Math.abs(oilSpent);
+  	
+  	//if user is admin then allow any change
+	  if (u.isAdmin()) {
+	  	gemsChange = gemsSpent;
+	  	cashChange = cashSpent;
+	  	oilChange = oilSpent;
+	  }
+	  
+	  if (!updateUser(u, gemsChange, cashChange, oilChange)) {
 		  log.error("unexpected error: could not decrement user's gems by " +
 				  gemsChange + ", cash by " + cashChange + ", and oil by " + oilChange);
 		  //update num revives for user task
 		  return false;
+	  } else {
+	  	if (0 != gemsChange) {
+	  		currencyChange.put(MiscMethods.gems, gemsChange);
+	  	}
+	  	if (0 != cashChange) {
+	  		currencyChange.put(MiscMethods.cash, cashChange);
+	  	}
+	  	if (0 != gemsChange) {
+	  		currencyChange.put(MiscMethods.oil, oilChange);
+	  	}
 	  }
 	  
 	  return true;
@@ -217,21 +257,34 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   }
   
   //TODO: FIX THIS
-  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> money, Timestamp curTime,
-      int previousSilver, int previousGold) {
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    String reasonForChange = ControllerConstants.UCHRFC__BOSS_ACTION;
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//
-//    previousGoldSilver.put(gems, previousGold);
-//    previousGoldSilver.put(cash, previousSilver);
-//    reasonsForChanges.put(gems, reasonForChange);
-//    reasonsForChanges.put(cash, reasonForChange);
-//
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, curTime, money, 
-//        previousGoldSilver, reasonsForChanges);
+  private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> currencyChange,
+  		Timestamp curTime, int previousGems, int previousCash, int previousOil,
+  		String reason, String details) {
+  	int userId = aUser.getId();
+  	
+    Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> detailsMap = new HashMap<String, String>();
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
+    String oil = MiscMethods.oil;
+
+    previousCurrency.put(gems, previousGems);
+    previousCurrency.put(cash, previousCash);
+    previousCurrency.put(oil, previousOil);
+    currentCurrency.put(gems, aUser.getGems());
+    currentCurrency.put(cash, aUser.getCash());
+    currentCurrency.put(oil, aUser.getOil());
+    reasonsForChanges.put(gems, reason);
+    reasonsForChanges.put(cash, reason);
+    reasonsForChanges.put(oil, reason);
+    detailsMap.put(gems, details);
+    detailsMap.put(cash, details);
+    detailsMap.put(oil, details);
+
+    MiscMethods.writeToUserCurrencyOneUser(userId, curTime, currencyChange, 
+        previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
 
   }
 }

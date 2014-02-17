@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.hazelcast.core.ILock;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.EndPvpBattleRequestEvent;
 import com.lvl6.events.response.EndPvpBattleResponseEvent;
@@ -88,89 +86,86 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     List<Integer> userIds = new ArrayList<Integer>();
     userIds.add(attackerId);
     userIds.add(defenderId); //doesn't matter if fake i.e. enemyUserId=0
-//    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     
-    //TODO: OVERHAUL THIS LOCKING THING AND MIMIC GameServer.java
-    //TODO: NEED TO LOCK BOTH PLAYERS
-    ILock lock = getHazelcastPvpUtil().getPvpPlayerLock(defenderId);
-    boolean gotLock = false;
+    //NEED TO LOCK BOTH PLAYERS, well need to lock defender because defender can be online,
+    //Lock attacker because someone might be attacking him while attacker is attacking defender?
+    if (0 != defenderId) {
+    	getHazelcastPvpUtil().lockPlayers(defenderId, attackerId, this.getClass().getSimpleName());
+    	log.info("locked defender and attacker");
+    } else {
+    	//ONLY ATTACKER IF DEFENDER IS FAKE
+    	getHazelcastPvpUtil().lockPlayer(attackerId, this.getClass().getSimpleName());
+    	log.info("locked attacker");
+    }
+    
     try {
-    	User attacker = null;
-    	User defender = null;
-    	boolean successful = false;
-    	
-    	if (lock.tryLock(HazelcastPvpUtil.LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
-    		gotLock = true;
-    		
-    		//get whatever from db
-    		Map<Integer, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-    		attacker = users.get(attackerId);
-    		defender = users.get(defenderId);
-    		PvpBattleForUser pvpBattleInfo = PvpBattleForUserRetrieveUtils
-    				.getPvpBattleForUserForAttacker(attackerId);
-    		
-    		//could be fake user so could be null, enemy could also be null if he is online
-    		//if null then no need to update
-    		OfflinePvpUser defenderOpu = getHazelcastPvpUtil().getOfflinePvpUser(defenderId);
-    		boolean legit = checkLegit(resBuilder, attacker, defender, pvpBattleInfo, curDate);
-    		
-    		if(legit) {
-    			successful = writeChangesToDb(attacker, attackerId, defender, defenderId,
-    					defenderOpu, pvpBattleInfo, oilChange, cashChange, curTime, curDate,
-    					attackerAttacked, attackerWon, attackerMaxOil, attackerMaxCash);
-    		}
-    		
-    		if (successful) {
-    			resBuilder.setStatus(EndPvpBattleStatus.SUCCESS);
-    		}
-    		
-    	} else {
-    		log.warn("FAILED TO ACQUIRE LOCK FOR OFFLINE USER: " + defenderId);
-    		resBuilder.setStatus(EndPvpBattleStatus.FAIL_OTHER);
-    	}
-      
-    	//respond to the attacker
-      resEvent.setEndPvpBattleResponseProto(resBuilder.build());
-      server.writeEvent(resEvent);
-      
-      if (successful) {
-      	//respond to the defender
-      	EndPvpBattleResponseEvent resEventDefender = new EndPvpBattleResponseEvent(defenderId);
-      	resEvent.setTag(0);
-      	resEventDefender.setEndPvpBattleResponseProto(resBuilder.build());
-      	server.writeEvent(resEventDefender);
-      	
-      	//regardless of whether the attacker won, his elo will change
-      	UpdateClientUserResponseEvent resEventUpdate = MiscMethods
-      			.createUpdateClientUserResponseEventAndUpdateLeaderboard(attacker);
-				resEventUpdate.setTag(event.getTag());
-				server.writeEvent(resEventUpdate);
-      	
-				//defender's elo and resources changed only if attacker won, and defender is real
-      	if (attackerWon && null != defender) {
-      		UpdateClientUserResponseEvent resEventUpdateDefender = MiscMethods
-        			.createUpdateClientUserResponseEventAndUpdateLeaderboard(defender);
-  				resEventUpdate.setTag(event.getTag());
-  				server.writeEvent(resEventUpdateDefender);
-      	}
-      	//TODO: TRACK CURRENCY HISTORY
-      }
+    	//get whatever from db
+    	Map<Integer, User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+    	User attacker = users.get(attackerId);
+    	User defender = users.get(defenderId);
+    	PvpBattleForUser pvpBattleInfo = PvpBattleForUserRetrieveUtils
+    			.getPvpBattleForUserForAttacker(attackerId);
 
+    	//could be fake user so could be null, enemy could also be null if he is online
+    	//if null then no need to update
+    	OfflinePvpUser defenderOpu = getHazelcastPvpUtil().getOfflinePvpUser(defenderId);
+    	boolean legit = checkLegit(resBuilder, attacker, defender, pvpBattleInfo, curDate);
+
+    	boolean successful = false;
+    	if(legit) {
+    		successful = writeChangesToDb(attacker, attackerId, defender, defenderId,
+    				defenderOpu, pvpBattleInfo, oilChange, cashChange, curTime, curDate,
+    				attackerAttacked, attackerWon, attackerMaxOil, attackerMaxCash);
+    	}
+
+    	if (successful) {
+    		resBuilder.setStatus(EndPvpBattleStatus.SUCCESS);
+    	}
+
+    	//respond to the attacker
+    	resEvent.setEndPvpBattleResponseProto(resBuilder.build());
+    	server.writeEvent(resEvent);
+
+    	if (successful) {
+    		//respond to the defender
+    		EndPvpBattleResponseEvent resEventDefender = new EndPvpBattleResponseEvent(defenderId);
+    		resEvent.setTag(0);
+    		resEventDefender.setEndPvpBattleResponseProto(resBuilder.build());
+    		server.writeEvent(resEventDefender);
+
+    		//regardless of whether the attacker won, his elo will change
+    		UpdateClientUserResponseEvent resEventUpdate = MiscMethods
+    				.createUpdateClientUserResponseEventAndUpdateLeaderboard(attacker);
+    		resEventUpdate.setTag(event.getTag());
+    		server.writeEvent(resEventUpdate);
+
+    		//defender's elo and resources changed only if attacker won, and defender is real
+    		if (attackerWon && null != defender) {
+    			UpdateClientUserResponseEvent resEventUpdateDefender = MiscMethods
+    					.createUpdateClientUserResponseEventAndUpdateLeaderboard(defender);
+    			resEventUpdate.setTag(event.getTag());
+    			server.writeEvent(resEventUpdateDefender);
+    		}
+    		//TODO: TRACK CURRENCY HISTORY
+    	}
 
     } catch (Exception e) {
-      log.error("exception in EndPvpBattleController processEvent", e);
-      //don't let the client hang
-      try {
-    	  resEvent.setEndPvpBattleResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
-      } catch (Exception e2) {
-    	  log.error("exception2 in EndPvpBattleController processEvent", e);
-      }
-      
+    	log.error("exception in EndPvpBattleController processEvent", e);
+    	//don't let the client hang
+    	try {
+    		resEvent.setEndPvpBattleResponseProto(resBuilder.build());
+    		server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in EndPvpBattleController processEvent", e);
+    	}
+
     } finally {
-//      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	if (gotLock) {
-    		getHazelcastPvpUtil().unlockPvpPlayer(lock);
+    	if (0 != defenderId) {
+    		getHazelcastPvpUtil().unlockPlayers(defenderId, attackerId, this.getClass().getSimpleName());
+    		log.info("unlocked defender and attacker");
+    	} else {
+    		getHazelcastPvpUtil().unlockPlayer(attackerId, this.getClass().getSimpleName());
+    		log.info("unlocked attacker");
     	}
     }
   }
@@ -220,7 +215,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   			//since real player and battle end time is after now, change it to now
   			//so defender can be attackable again
   			defenderOpu.setInBattleEndTime(clientDate);
-  			getHazelcastPvpUtil().setOfflinePvpUser(defenderOpu);
+  			getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
   		}
   	} else {
   		//user attacked so either he won or lost
@@ -231,29 +226,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   		
   		//MAKE SURE THE ATTACKER AND DEFENDER'S ELO DON'T GO BELOW 0
   		//TODO: WHEN MAX ELO IS FIGURED OUT, MAKE SURE ELO DOESN'T GO ABOVE THAT
-  		int attackerEloChange = 0;
-  		int defenderEloChange = 0;
-  		if (attackerWon) {
-  			attackerEloChange = pvpBattleInfo.getAttackerWinEloChange(); //positive value
-  			defenderEloChange = pvpBattleInfo.getDefenderLoseEloChange(); //negative value
-  			
-  			//make sure defender's elo doesn't go below 0
-  			int defenderElo = defender.getElo();
-  			if (defenderElo + defenderEloChange < 0) {
-  				defenderEloChange = defenderElo;
-  			}
-  			
-  		} else {
-  			attackerEloChange = pvpBattleInfo.getAttackerLoseEloChange(); //negative value
-  			defenderEloChange = pvpBattleInfo.getDefenderWinEloChange(); // positive value
-  			
-  			//make sure attacker's elo doesn't go below 0
-  			int attackerElo = attacker.getElo();
-  			if (attackerElo + attackerEloChange < 0) {
-  				attackerEloChange = attackerElo;
-  			}
-  			
-  		}
+  		List<Integer> attackerEloChangeList = new ArrayList<Integer>();
+  		List<Integer> defenderEloChangeList = new ArrayList<Integer>();
+  		getEloChanges(attacker, defender, attackerWon, pvpBattleInfo,
+  				attackerEloChangeList, defenderEloChangeList);
+  		int attackerEloChange = attackerEloChangeList.get(0);
+  		int defenderEloChange = defenderEloChangeList.get(0);
   		
   		//update attacker's cash, oil, elo
   		attacker.updateEloOilCash(attackerId, attackerEloChange, maxAttackerOilChange,
@@ -261,12 +239,16 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   		
   		//defender could be fake user
   		if (null != defender) {
-  			int defenderElo = defender.getElo();
-  			if (defenderElo - defenderEloChange < 0) {
-  				defenderEloChange = defenderElo;
-  			}
   			//since defender is real, update defender's cash, oil, elo
   			defender.updateEloOilCash(defenderId, defenderEloChange, 0, 0);
+
+  			//update the map if the defender exists/is offline
+  			if (null != defenderOpu) {
+  				//need to update the map if he exists
+  				int defenderElo = defender.getElo();
+  				defenderOpu.setElo(defenderElo);
+  				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
+  			}
   		}
   	}
   	
@@ -365,6 +347,42 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   		
   		return -1 * maxCashChange;
   	}
+  }
+  
+  //calculate how much elo changes for the attacker and defender
+  //based on whether the attacker won
+  private void getEloChanges(User attacker, User defender, boolean attackerWon,
+  		PvpBattleForUser pvpBattleInfo, List<Integer> attackerEloChangeList,
+  		List<Integer> defenderEloChangeList) {
+  	//temp variables
+  	int attackerEloChange = 0;
+  	int defenderEloChange = 0;
+  	
+  	if (attackerWon) {
+  		attackerEloChange = pvpBattleInfo.getAttackerWinEloChange(); //positive value
+  		defenderEloChange = pvpBattleInfo.getDefenderLoseEloChange(); //negative value
+
+  		//make sure defender's elo doesn't go below 0
+  		int defenderElo = defender.getElo();
+  		if (defenderElo + defenderEloChange < 0) {
+  			defenderEloChange = -1 * defenderElo;
+  		}
+
+  	} else {
+  		attackerEloChange = pvpBattleInfo.getAttackerLoseEloChange(); //negative value
+  		defenderEloChange = pvpBattleInfo.getDefenderWinEloChange(); // positive value
+
+  		//make sure attacker's elo doesn't go below 0
+  		int attackerElo = attacker.getElo();
+  		if (attackerElo + attackerEloChange < 0) {
+  			attackerEloChange = -1 * attackerElo;
+  		}
+
+  		attackerEloChangeList.add(attackerEloChange);
+  		defenderEloChangeList.add(defenderEloChange);
+  	}
+  	
+  	
   }
 
 

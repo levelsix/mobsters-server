@@ -47,7 +47,11 @@ public class ControllerConstants {
 	public static final int PVP__MAX_QUEUE_SIZE = 10;
 	public static final int PVP__FAKE_USER_LVL_DIVISOR = 50;
 	public static final long PVP__MAX_BATTLE_DURATION_MILLIS = 3600000L; //one hour 
-	//all these pairing chances need to sum to one
+	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
+	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
+	public static final int PVP__ELO_RANGE_ADDEND = 100;
+	//NOT USING ANYMORE
+	//all these pairing chances need to sum to one-----------------------------------------
 	public static final float PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE = 0.05F;
 	public static final float PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE = 0.15F;
 	public static final float PVP__ELO_CATEGORY_THREE_PAIRING_CHANCE = 0.20F;
@@ -58,6 +62,7 @@ public class ControllerConstants {
   public static final int PVP__ELO_DISTANCE_TWO = 200;
   public static final int PVP__ELO_DISTANCE_THREE = 300;
   public static final int PVP__NUM_ENEMIES_LIMIT = 100;
+  //-------------------------------------------------------------------------------------
   public static final float PVP__PERCENT_CASH_LOST = 0.25F;
   public static final float PVP__PERCENT_OIL_LOST = 0.25F;
   
