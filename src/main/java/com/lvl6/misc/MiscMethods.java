@@ -176,9 +176,12 @@ public class MiscMethods {
           log.warn("Token: "+tok);
           if (st2.hasMoreTokens()) {
             Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
+            log.warn("IsLeftSide: "+isLeftSide);
             if (st2.hasMoreTokens()) {
               String speaker = st2.nextToken();
+              log.warn("Speaker: "+speaker);
               String speakerText = st.nextToken();
+              log.warn("Text: "+speakerText);
               if (speakerText != null) {
                 isLeftSides.add(isLeftSide);
                 speakers.add(speaker);
