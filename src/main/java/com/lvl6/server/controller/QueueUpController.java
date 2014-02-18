@@ -253,7 +253,7 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 			pvpProtoList.addAll(pvpProtoListTemp);
 		} 
 		
-		if (null != queuedOpponents) {
+		if (null != queuedOpponents && !queuedOpponents.isEmpty()) {
 			log.info("there are people to attack!");
 			log.info("queuedOpponentIdsList=" + queuedOpponentIdsList);
 			log.info("queuedOpponents:" + queuedOpponents);
@@ -414,10 +414,14 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 				numDefendersNeededSoFar -= 1;
 			}
 		}
-
-		Map<Integer, User> selectedDefendersMap = RetrieveUtils.userRetrieveUtils()
-				.getUsersByIds(userIdList);
-		List<User> selectedDefenders = new ArrayList<User>(selectedDefendersMap.values());
+		
+		
+		List<User> selectedDefenders = new ArrayList<User>();
+		if (!prospectiveDefenders.isEmpty()) {
+			Map<Integer, User> selectedDefendersMap = RetrieveUtils.userRetrieveUtils()
+					.getUsersByIds(userIdList);
+			selectedDefenders.addAll(selectedDefendersMap.values());
+		}
 		
 		log.info("the lucky people who get to be attacked! defenders=" + selectedDefenders);
 		return selectedDefenders;

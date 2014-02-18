@@ -94,8 +94,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       Task aTask = TaskRetrieveUtils.getTaskForTaskId(taskId);
 
       Map<Integer, TaskStage> tsMap = new HashMap<Integer, TaskStage>();
-      boolean legit = checkLegit(resBuilder, aUser, userId, aTask,
-    		  taskId, tsMap);
+      boolean legit = checkLegit(resBuilder, aUser, userId, aTask, taskId, tsMap,
+      		isEvent, eventId, gemsSpent);
 
       List<Long> userTaskIdList = new ArrayList<Long>();
       Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
@@ -144,7 +144,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
    * builder status to the appropriate value.
    */
   private boolean checkLegit(Builder resBuilder, User u, int userId, Task aTask,
-		  int taskId, Map<Integer, TaskStage> tsMap) {
+		  int taskId, Map<Integer, TaskStage> tsMap, boolean isEvent, int eventId,
+		  int gemsSpent) {
     if (null == u || null == aTask) {
       log.error("unexpected error: user or task is null. user=" + u + "\t task="+ aTask);
       return false;
@@ -167,6 +168,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       //DELETE FROM TASK STAGE FOR USER AND PUT IT INTO TASK STAGE HISTORY 
       deleteExistingTaskStagesForUser(userTaskId);
     }
+    
+    //TODO: if event, maybe somehow check if user has enough gems to reset event
+    //right now just relying on user
+//    if (isEvent) {
+//    	if (eventId > 0) {
+//    		
+//    	} else {
+//    		log.error("isEvent set to true but eventId not positive " + "\t eventId=" +
+//    				eventId + "\t gemsSpent=" + gemsSpent);
+//    	}
+//    }
     
     tsMap.putAll(ts);
     resBuilder.setStatus(BeginDungeonStatus.SUCCESS);
