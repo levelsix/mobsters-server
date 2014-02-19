@@ -83,6 +83,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -1262,6 +1263,14 @@ public class CreateInfoProtoUtils {
     
     int cost = aMonster.getEvolutionCost();
     mpb.setEvolutionCost(cost);
+    
+    aStr = aMonster.getAnimationType();
+    try {
+    	AnimationType typ = AnimationType.valueOf(aStr);
+    	mpb.setAttackAnimationType(typ);
+    } catch (Exception e) {
+    	log.error("invalid animation type for monster. type=" + aStr + "\t monster=" + aMonster, e);
+    }
     
     return mpb.build();
   }

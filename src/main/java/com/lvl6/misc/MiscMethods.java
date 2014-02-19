@@ -145,7 +145,6 @@ public class MiscMethods {
         while (st.hasMoreTokens()) {
           String tok = st.nextToken();
           StringTokenizer st2 = new StringTokenizer(tok, ".");
-          log.warn("Token: "+tok);
           if (st2.hasMoreTokens()) {
             Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
             if (st2.hasMoreTokens()) {

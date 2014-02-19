@@ -7,8 +7,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 
 public class Monster implements Serializable {
 
-	private static final long serialVersionUID = 3952925405581173817L;
-	
+	private static final long serialVersionUID = 8257261936373290005L;
 	private int id;
 	private String name;
 	private String monsterGroup;
@@ -29,6 +28,7 @@ public class Monster implements Serializable {
 	private String carrotEvolved;
 	private String description;
 	private int evolutionCost; //oil not cash
+	private String animationType;
 	
 	public Monster(int id, String name, String monsterGroup,
 			MonsterQuality quality, int evolutionLevel, String displayName,
@@ -36,7 +36,8 @@ public class Monster implements Serializable {
 			int minutesToCombinePieces, int maxLevel, int evolutionMonsterId,
 			int evolutionCatalystMonsterId, int minutesToEvolve,
 			int numCatalystsRequired, String carrotRecruited, String carrotDefeated,
-			String carrotEvolved, String description, int evolutionCost) {
+			String carrotEvolved, String description, int evolutionCost,
+			String animationType) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -58,6 +59,7 @@ public class Monster implements Serializable {
 		this.carrotEvolved = carrotEvolved;
 		this.description = description;
 		this.evolutionCost = evolutionCost;
+		this.animationType = animationType;
 	}
 
 	public int getId() {
@@ -220,6 +222,14 @@ public class Monster implements Serializable {
 		this.evolutionCost = evolutionCost;
 	}
 
+	public String getAnimationType() {
+		return animationType;
+	}
+
+	public void setAnimationType(String animationType) {
+		this.animationType = animationType;
+	}
+
 	@Override
 	public String toString() {
 		return "Monster [id=" + id + ", name=" + name + ", monsterGroup="
@@ -234,7 +244,7 @@ public class Monster implements Serializable {
 				+ numCatalystsRequired + ", carrotRecruited=" + carrotRecruited
 				+ ", carrotDefeated=" + carrotDefeated + ", carrotEvolved="
 				+ carrotEvolved + ", description=" + description + ", evolutionCost="
-				+ evolutionCost + "]";
+				+ evolutionCost + ", animationType=" + animationType + "]";
 	}
 	
 }
