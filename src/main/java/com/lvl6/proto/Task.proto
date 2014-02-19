@@ -91,3 +91,18 @@ message UserPersistentEventProto {
 	optional int32 eventId = 2;
 	optional int64 coolDownStartTime = 3;
 }
+
+//------------------------------------------------------------------------------------------
+
+message ClanRaidProto {
+	optional int32 clanRaidId = 1;
+	optional string clanRaidName = 2;
+	optional string activeTitleImgName = 3;
+	optional string activeBackgroundImgName = 4;
+	optional string activeDescription = 5;
+	optional string inactiveMonsterImgName = 6;
+	optional string inactiveDescription = 7;
+	optional string dialogueText = 8;
+	optional string spotlightMonsterImgName = 9;
+}
+

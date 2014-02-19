@@ -185,6 +185,16 @@ public final class StaticDataStuffProto {
         getMbdsOrBuilderList();
     com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProtoOrBuilder getMbdsOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.ClanRaidProto raids = 20;
+    java.util.List<com.lvl6.proto.TaskProto.ClanRaidProto> 
+        getRaidsList();
+    com.lvl6.proto.TaskProto.ClanRaidProto getRaids(int index);
+    int getRaidsCount();
+    java.util.List<? extends com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder> 
+        getRaidsOrBuilderList();
+    com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder getRaidsOrBuilder(
+        int index);
   }
   public static final class StaticDataProto extends
       com.google.protobuf.GeneratedMessage
@@ -585,6 +595,27 @@ public final class StaticDataStuffProto {
       return mbds_.get(index);
     }
     
+    // repeated .com.lvl6.proto.ClanRaidProto raids = 20;
+    public static final int RAIDS_FIELD_NUMBER = 20;
+    private java.util.List<com.lvl6.proto.TaskProto.ClanRaidProto> raids_;
+    public java.util.List<com.lvl6.proto.TaskProto.ClanRaidProto> getRaidsList() {
+      return raids_;
+    }
+    public java.util.List<? extends com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder> 
+        getRaidsOrBuilderList() {
+      return raids_;
+    }
+    public int getRaidsCount() {
+      return raids_.size();
+    }
+    public com.lvl6.proto.TaskProto.ClanRaidProto getRaids(int index) {
+      return raids_.get(index);
+    }
+    public com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder getRaidsOrBuilder(
+        int index) {
+      return raids_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -604,6 +635,7 @@ public final class StaticDataStuffProto {
       allTownHalls_ = java.util.Collections.emptyList();
       events_ = java.util.Collections.emptyList();
       mbds_ = java.util.Collections.emptyList();
+      raids_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -670,6 +702,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < mbds_.size(); i++) {
         output.writeMessage(19, mbds_.get(i));
+      }
+      for (int i = 0; i < raids_.size(); i++) {
+        output.writeMessage(20, raids_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -751,6 +786,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < mbds_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(19, mbds_.get(i));
+      }
+      for (int i = 0; i < raids_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(20, raids_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -886,6 +925,7 @@ public final class StaticDataStuffProto {
           getAllTownHallsFieldBuilder();
           getEventsFieldBuilder();
           getMbdsFieldBuilder();
+          getRaidsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1001,6 +1041,12 @@ public final class StaticDataStuffProto {
           bitField0_ = (bitField0_ & ~0x00020000);
         } else {
           mbdsBuilder_.clear();
+        }
+        if (raidsBuilder_ == null) {
+          raids_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00040000);
+        } else {
+          raidsBuilder_.clear();
         }
         return this;
       }
@@ -1200,6 +1246,15 @@ public final class StaticDataStuffProto {
           result.mbds_ = mbds_;
         } else {
           result.mbds_ = mbdsBuilder_.build();
+        }
+        if (raidsBuilder_ == null) {
+          if (((bitField0_ & 0x00040000) == 0x00040000)) {
+            raids_ = java.util.Collections.unmodifiableList(raids_);
+            bitField0_ = (bitField0_ & ~0x00040000);
+          }
+          result.raids_ = raids_;
+        } else {
+          result.raids_ = raidsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1662,6 +1717,32 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (raidsBuilder_ == null) {
+          if (!other.raids_.isEmpty()) {
+            if (raids_.isEmpty()) {
+              raids_ = other.raids_;
+              bitField0_ = (bitField0_ & ~0x00040000);
+            } else {
+              ensureRaidsIsMutable();
+              raids_.addAll(other.raids_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.raids_.isEmpty()) {
+            if (raidsBuilder_.isEmpty()) {
+              raidsBuilder_.dispose();
+              raidsBuilder_ = null;
+              raids_ = other.raids_;
+              bitField0_ = (bitField0_ & ~0x00040000);
+              raidsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getRaidsFieldBuilder() : null;
+            } else {
+              raidsBuilder_.addAllMessages(other.raids_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1802,6 +1883,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addMbds(subBuilder.buildPartial());
+              break;
+            }
+            case 162: {
+              com.lvl6.proto.TaskProto.ClanRaidProto.Builder subBuilder = com.lvl6.proto.TaskProto.ClanRaidProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addRaids(subBuilder.buildPartial());
               break;
             }
           }
@@ -5062,6 +5149,192 @@ public final class StaticDataStuffProto {
         return mbdsBuilder_;
       }
       
+      // repeated .com.lvl6.proto.ClanRaidProto raids = 20;
+      private java.util.List<com.lvl6.proto.TaskProto.ClanRaidProto> raids_ =
+        java.util.Collections.emptyList();
+      private void ensureRaidsIsMutable() {
+        if (!((bitField0_ & 0x00040000) == 0x00040000)) {
+          raids_ = new java.util.ArrayList<com.lvl6.proto.TaskProto.ClanRaidProto>(raids_);
+          bitField0_ |= 0x00040000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.TaskProto.ClanRaidProto, com.lvl6.proto.TaskProto.ClanRaidProto.Builder, com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder> raidsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.TaskProto.ClanRaidProto> getRaidsList() {
+        if (raidsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(raids_);
+        } else {
+          return raidsBuilder_.getMessageList();
+        }
+      }
+      public int getRaidsCount() {
+        if (raidsBuilder_ == null) {
+          return raids_.size();
+        } else {
+          return raidsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.TaskProto.ClanRaidProto getRaids(int index) {
+        if (raidsBuilder_ == null) {
+          return raids_.get(index);
+        } else {
+          return raidsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setRaids(
+          int index, com.lvl6.proto.TaskProto.ClanRaidProto value) {
+        if (raidsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRaidsIsMutable();
+          raids_.set(index, value);
+          onChanged();
+        } else {
+          raidsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setRaids(
+          int index, com.lvl6.proto.TaskProto.ClanRaidProto.Builder builderForValue) {
+        if (raidsBuilder_ == null) {
+          ensureRaidsIsMutable();
+          raids_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          raidsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addRaids(com.lvl6.proto.TaskProto.ClanRaidProto value) {
+        if (raidsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRaidsIsMutable();
+          raids_.add(value);
+          onChanged();
+        } else {
+          raidsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addRaids(
+          int index, com.lvl6.proto.TaskProto.ClanRaidProto value) {
+        if (raidsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureRaidsIsMutable();
+          raids_.add(index, value);
+          onChanged();
+        } else {
+          raidsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addRaids(
+          com.lvl6.proto.TaskProto.ClanRaidProto.Builder builderForValue) {
+        if (raidsBuilder_ == null) {
+          ensureRaidsIsMutable();
+          raids_.add(builderForValue.build());
+          onChanged();
+        } else {
+          raidsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addRaids(
+          int index, com.lvl6.proto.TaskProto.ClanRaidProto.Builder builderForValue) {
+        if (raidsBuilder_ == null) {
+          ensureRaidsIsMutable();
+          raids_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          raidsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllRaids(
+          java.lang.Iterable<? extends com.lvl6.proto.TaskProto.ClanRaidProto> values) {
+        if (raidsBuilder_ == null) {
+          ensureRaidsIsMutable();
+          super.addAll(values, raids_);
+          onChanged();
+        } else {
+          raidsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearRaids() {
+        if (raidsBuilder_ == null) {
+          raids_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00040000);
+          onChanged();
+        } else {
+          raidsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeRaids(int index) {
+        if (raidsBuilder_ == null) {
+          ensureRaidsIsMutable();
+          raids_.remove(index);
+          onChanged();
+        } else {
+          raidsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.TaskProto.ClanRaidProto.Builder getRaidsBuilder(
+          int index) {
+        return getRaidsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder getRaidsOrBuilder(
+          int index) {
+        if (raidsBuilder_ == null) {
+          return raids_.get(index);  } else {
+          return raidsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder> 
+           getRaidsOrBuilderList() {
+        if (raidsBuilder_ != null) {
+          return raidsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(raids_);
+        }
+      }
+      public com.lvl6.proto.TaskProto.ClanRaidProto.Builder addRaidsBuilder() {
+        return getRaidsFieldBuilder().addBuilder(
+            com.lvl6.proto.TaskProto.ClanRaidProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.TaskProto.ClanRaidProto.Builder addRaidsBuilder(
+          int index) {
+        return getRaidsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.TaskProto.ClanRaidProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.TaskProto.ClanRaidProto.Builder> 
+           getRaidsBuilderList() {
+        return getRaidsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.TaskProto.ClanRaidProto, com.lvl6.proto.TaskProto.ClanRaidProto.Builder, com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder> 
+          getRaidsFieldBuilder() {
+        if (raidsBuilder_ == null) {
+          raidsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.TaskProto.ClanRaidProto, com.lvl6.proto.TaskProto.ClanRaidProto.Builder, com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder>(
+                  raids_,
+                  ((bitField0_ & 0x00040000) == 0x00040000),
+                  getParentForChildren(),
+                  isClean());
+          raids_ = null;
+        }
+        return raidsBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
     
@@ -5090,7 +5363,7 @@ public final class StaticDataStuffProto {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Boos" +
       "terPackStuff.proto\032\nCity.proto\032\022MonsterS" +
       "tuff.proto\032\013Quest.proto\032\017Structure.proto" +
-      "\032\nTask.proto\032\nUser.proto\"\354\007\n\017StaticDataP" +
+      "\032\nTask.proto\032\nUser.proto\"\232\010\n\017StaticDataP" +
       "roto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mi" +
       "nimumUserProto\022>\n\016expansionCosts\030\002 \003(\0132&" +
       ".com.lvl6.proto.CityExpansionCostProto\0220" +
@@ -5115,8 +5388,9 @@ public final class StaticDataStuffProto {
       "ls\030\020 \003(\0132\035.com.lvl6.proto.TownHallProto\022" +
       "4\n\006events\030\022 \003(\0132$.com.lvl6.proto.Persist" +
       "entEventProto\0228\n\004mbds\030\023 \003(\0132*.com.lvl6.p" +
-      "roto.MonsterBattleDialogueProtoB\026B\024Stati" +
-      "cDataStuffProto"
+      "roto.MonsterBattleDialogueProto\022,\n\005raids" +
+      "\030\024 \003(\0132\035.com.lvl6.proto.ClanRaidProtoB\026B",
+      "\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5128,7 +5402,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "Events", "Mbds", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "Events", "Mbds", "Raids", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;

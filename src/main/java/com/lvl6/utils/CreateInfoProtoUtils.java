@@ -20,6 +20,7 @@ import com.lvl6.info.City;
 import com.lvl6.info.CityElement;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
+import com.lvl6.info.ClanRaid;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
@@ -104,6 +105,7 @@ import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TownHallProto;
+import com.lvl6.proto.TaskProto.ClanRaidProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
@@ -1524,4 +1526,53 @@ public class CreateInfoProtoUtils {
   	
   	return mbdpb.build();
   }
+  
+  public static ClanRaidProto createClanRaidProto(ClanRaid clanRaid) {
+  	ClanRaidProto.Builder crpb = ClanRaidProto.newBuilder();
+  	crpb.setClanRaidId(clanRaid.getId());
+  	
+  	String aStr = clanRaid.getClanRaidName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setClanRaidName(aStr);
+  	}
+  	
+  	aStr = clanRaid.getActiveTitleImgName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setActiveTitleImgName(aStr);
+  	}
+  	
+  	aStr = clanRaid.getActiveBackgroundImgName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setActiveBackgroundImgName(aStr);
+  	}
+  	
+  	aStr = clanRaid.getActiveDescription();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setActiveDescription(aStr);
+  	}
+  	
+  	aStr = clanRaid.getInactiveMonsterImgName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setInactiveMonsterImgName(aStr);
+  	}
+  	
+  	aStr = clanRaid.getInactiveDescription();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setInactiveDescription(aStr);
+  	}
+  	
+  	aStr = clanRaid.getDialogueText();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setDialogueText(aStr);
+  	}
+  	
+  	aStr = clanRaid.getSpotlightMonsterImgName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setSpotlightMonsterImgName(aStr);
+  	}
+  	
+  	return crpb.build();
+  }
+  
+  
 }

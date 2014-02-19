@@ -29,6 +29,7 @@ import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
+import com.lvl6.info.ClanRaid;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
@@ -77,6 +78,7 @@ import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
+import com.lvl6.proto.TaskProto.ClanRaidProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
@@ -88,6 +90,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -130,40 +133,6 @@ public class MiscMethods {
   public static final String boosterPackId = "boosterPackId";
 
 
-  //  public static float calculateChanceOfSuccessForForge(Equipment equipment, int goalLevel) {
-  //    return  (1-equipment.getChanceOfForgeFailureBase()) - 
-  //        ((1-equipment.getChanceOfForgeFailureBase()) / (ControllerConstants.FORGE_MAX_EQUIP_LEVEL - 1)) * 
-  //        (goalLevel-2);
-  //  }
-
-  //  public static int calculateDiamondCostToSpeedupForgeWaittime(Equipment equipment, int goalLevel) {
-  //    return (int) Math.max(1, Math.ceil(ControllerConstants.FORGE_SPEEDUP_CONSTANT_A * 
-  //        Math.log(calculateMinutesToFinishForgeAttempt(equipment, goalLevel)) + 
-  //        ControllerConstants.FORGE_SPEEDUP_CONSTANT_B));
-  //  }
-
-  /* public static UserEquip chooseUserEquipWithEquipIdPreferrablyNonEquippedIgnoreLevel(User user, List<UserEquip> userEquipsForEquipId) {
-    if (user == null || userEquipsForEquipId == null || userEquipsForEquipId.size() <= 0) {
-      return null;
-    }
-    if (userEquipsForEquipId.size() == 1) {
-      return userEquipsForEquipId.get(0);
-    }
-    for (UserEquip ue : userEquipsForEquipId) {
-      if (ue != null) {
-        if (ue.getId() >= 1) {
-          if (ue.getId() == user.getWeaponEquippedUserEquipId() || ue.getId() == user.getArmorEquippedUserEquipId()
-              || ue.getId() == user.getAmuletEquippedUserEquipId()) {
-            continue;
-          } else {
-            return ue;
-          }
-        }
-      }
-    }
-    return null;
-  }*/
-
   public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
       StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
@@ -205,24 +174,6 @@ public class MiscMethods {
       returnValue.add(Integer.parseInt(st.nextToken()));
     }
   }
-
-  /*
-   * doesn't check if the user has the equip or not
-   */
-  /*public static boolean checkIfEquipIsEquippableOnUser(Equipment equip, User user) {
-    if (equip == null || user == null) return false;
-
-    //figure out how to implement this
-//    EquipClassType userClass = MiscMethods.getClassTypeFromUserType(user.getType());
-//    if (user.getLevel() >= equip.getMinLevel() && 
-//        (userClass == equip.getClassType() || equip.getClassType() == EquipClassType.ALL_AMULET)) {
-//      return true;
-//    }
-    if (user.getLevel() >= equip.getMinLevel()) {
-    	return true;
-    }
-    return false;
-  }*/
 
   public static String getIPOfPlayer(GameServer server, Integer playerId, String udid) {
     ConnectedPlayer player = null;
@@ -574,6 +525,7 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
     //    ClanBossRetrieveUtils.reload();
     //    ClanBossRewardRetrieveUtils.reload();
+    ClanRaidRetrieveUtils.reload();
     EventPersistentRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
@@ -1270,6 +1222,7 @@ public class MiscMethods {
   	setStructures(sdpb);
   	setEvents(sdpb);
   	setMonsterDialogue(sdpb);
+  	setClanRaid(sdpb);
   	
   	return sdpb.build();
   }
@@ -1533,4 +1486,15 @@ public class MiscMethods {
   	sdpb.addAllMbds(dialogueList);
   }
 
+  private static void setClanRaid(Builder sdpb) {
+  	Map<Integer, ClanRaid> idsToClanRaid = new HashMap<Integer, ClanRaid>();
+  	
+  	List<ClanRaidProto> raidList = new ArrayList<ClanRaidProto>();
+  	for(ClanRaid cr : idsToClanRaid.values()) {
+  		ClanRaidProto crProto = CreateInfoProtoUtils.createClanRaidProto(cr);
+  		raidList.add(crProto);
+  	}
+  	
+  	sdpb.addAllRaids(raidList);
+  }
 }

@@ -3955,6 +3955,1096 @@ public final class TaskProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.UserPersistentEventProto)
   }
   
+  public interface ClanRaidProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 clanRaidId = 1;
+    boolean hasClanRaidId();
+    int getClanRaidId();
+    
+    // optional string clanRaidName = 2;
+    boolean hasClanRaidName();
+    String getClanRaidName();
+    
+    // optional string activeTitleImgName = 3;
+    boolean hasActiveTitleImgName();
+    String getActiveTitleImgName();
+    
+    // optional string activeBackgroundImgName = 4;
+    boolean hasActiveBackgroundImgName();
+    String getActiveBackgroundImgName();
+    
+    // optional string activeDescription = 5;
+    boolean hasActiveDescription();
+    String getActiveDescription();
+    
+    // optional string inactiveMonsterImgName = 6;
+    boolean hasInactiveMonsterImgName();
+    String getInactiveMonsterImgName();
+    
+    // optional string inactiveDescription = 7;
+    boolean hasInactiveDescription();
+    String getInactiveDescription();
+    
+    // optional string dialogueText = 8;
+    boolean hasDialogueText();
+    String getDialogueText();
+    
+    // optional string spotlightMonsterImgName = 9;
+    boolean hasSpotlightMonsterImgName();
+    String getSpotlightMonsterImgName();
+  }
+  public static final class ClanRaidProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ClanRaidProtoOrBuilder {
+    // Use ClanRaidProto.newBuilder() to construct.
+    private ClanRaidProto(Builder builder) {
+      super(builder);
+    }
+    private ClanRaidProto(boolean noInit) {}
+    
+    private static final ClanRaidProto defaultInstance;
+    public static ClanRaidProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ClanRaidProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_ClanRaidProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_ClanRaidProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 clanRaidId = 1;
+    public static final int CLANRAIDID_FIELD_NUMBER = 1;
+    private int clanRaidId_;
+    public boolean hasClanRaidId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getClanRaidId() {
+      return clanRaidId_;
+    }
+    
+    // optional string clanRaidName = 2;
+    public static final int CLANRAIDNAME_FIELD_NUMBER = 2;
+    private java.lang.Object clanRaidName_;
+    public boolean hasClanRaidName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public String getClanRaidName() {
+      java.lang.Object ref = clanRaidName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          clanRaidName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getClanRaidNameBytes() {
+      java.lang.Object ref = clanRaidName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        clanRaidName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string activeTitleImgName = 3;
+    public static final int ACTIVETITLEIMGNAME_FIELD_NUMBER = 3;
+    private java.lang.Object activeTitleImgName_;
+    public boolean hasActiveTitleImgName() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public String getActiveTitleImgName() {
+      java.lang.Object ref = activeTitleImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          activeTitleImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getActiveTitleImgNameBytes() {
+      java.lang.Object ref = activeTitleImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        activeTitleImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string activeBackgroundImgName = 4;
+    public static final int ACTIVEBACKGROUNDIMGNAME_FIELD_NUMBER = 4;
+    private java.lang.Object activeBackgroundImgName_;
+    public boolean hasActiveBackgroundImgName() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getActiveBackgroundImgName() {
+      java.lang.Object ref = activeBackgroundImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          activeBackgroundImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getActiveBackgroundImgNameBytes() {
+      java.lang.Object ref = activeBackgroundImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        activeBackgroundImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string activeDescription = 5;
+    public static final int ACTIVEDESCRIPTION_FIELD_NUMBER = 5;
+    private java.lang.Object activeDescription_;
+    public boolean hasActiveDescription() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getActiveDescription() {
+      java.lang.Object ref = activeDescription_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          activeDescription_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getActiveDescriptionBytes() {
+      java.lang.Object ref = activeDescription_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        activeDescription_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string inactiveMonsterImgName = 6;
+    public static final int INACTIVEMONSTERIMGNAME_FIELD_NUMBER = 6;
+    private java.lang.Object inactiveMonsterImgName_;
+    public boolean hasInactiveMonsterImgName() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public String getInactiveMonsterImgName() {
+      java.lang.Object ref = inactiveMonsterImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          inactiveMonsterImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getInactiveMonsterImgNameBytes() {
+      java.lang.Object ref = inactiveMonsterImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        inactiveMonsterImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string inactiveDescription = 7;
+    public static final int INACTIVEDESCRIPTION_FIELD_NUMBER = 7;
+    private java.lang.Object inactiveDescription_;
+    public boolean hasInactiveDescription() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public String getInactiveDescription() {
+      java.lang.Object ref = inactiveDescription_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          inactiveDescription_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getInactiveDescriptionBytes() {
+      java.lang.Object ref = inactiveDescription_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        inactiveDescription_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string dialogueText = 8;
+    public static final int DIALOGUETEXT_FIELD_NUMBER = 8;
+    private java.lang.Object dialogueText_;
+    public boolean hasDialogueText() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public String getDialogueText() {
+      java.lang.Object ref = dialogueText_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          dialogueText_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDialogueTextBytes() {
+      java.lang.Object ref = dialogueText_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        dialogueText_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string spotlightMonsterImgName = 9;
+    public static final int SPOTLIGHTMONSTERIMGNAME_FIELD_NUMBER = 9;
+    private java.lang.Object spotlightMonsterImgName_;
+    public boolean hasSpotlightMonsterImgName() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public String getSpotlightMonsterImgName() {
+      java.lang.Object ref = spotlightMonsterImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          spotlightMonsterImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getSpotlightMonsterImgNameBytes() {
+      java.lang.Object ref = spotlightMonsterImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        spotlightMonsterImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    private void initFields() {
+      clanRaidId_ = 0;
+      clanRaidName_ = "";
+      activeTitleImgName_ = "";
+      activeBackgroundImgName_ = "";
+      activeDescription_ = "";
+      inactiveMonsterImgName_ = "";
+      inactiveDescription_ = "";
+      dialogueText_ = "";
+      spotlightMonsterImgName_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, clanRaidId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getClanRaidNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getActiveTitleImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getActiveBackgroundImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getActiveDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getInactiveMonsterImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getInactiveDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, getDialogueTextBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(9, getSpotlightMonsterImgNameBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, clanRaidId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getClanRaidNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getActiveTitleImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getActiveBackgroundImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getActiveDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getInactiveMonsterImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getInactiveDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getDialogueTextBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getSpotlightMonsterImgNameBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.TaskProto.ClanRaidProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.TaskProto.ClanRaidProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.TaskProto.ClanRaidProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_ClanRaidProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_ClanRaidProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.TaskProto.ClanRaidProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        clanRaidId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanRaidName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        activeTitleImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        activeBackgroundImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        activeDescription_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        inactiveMonsterImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        inactiveDescription_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        dialogueText_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        spotlightMonsterImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.TaskProto.ClanRaidProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.TaskProto.ClanRaidProto getDefaultInstanceForType() {
+        return com.lvl6.proto.TaskProto.ClanRaidProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.TaskProto.ClanRaidProto build() {
+        com.lvl6.proto.TaskProto.ClanRaidProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.TaskProto.ClanRaidProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.TaskProto.ClanRaidProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.TaskProto.ClanRaidProto buildPartial() {
+        com.lvl6.proto.TaskProto.ClanRaidProto result = new com.lvl6.proto.TaskProto.ClanRaidProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.clanRaidId_ = clanRaidId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.clanRaidName_ = clanRaidName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.activeTitleImgName_ = activeTitleImgName_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.activeBackgroundImgName_ = activeBackgroundImgName_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.activeDescription_ = activeDescription_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.inactiveMonsterImgName_ = inactiveMonsterImgName_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.inactiveDescription_ = inactiveDescription_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.dialogueText_ = dialogueText_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.spotlightMonsterImgName_ = spotlightMonsterImgName_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.TaskProto.ClanRaidProto) {
+          return mergeFrom((com.lvl6.proto.TaskProto.ClanRaidProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.TaskProto.ClanRaidProto other) {
+        if (other == com.lvl6.proto.TaskProto.ClanRaidProto.getDefaultInstance()) return this;
+        if (other.hasClanRaidId()) {
+          setClanRaidId(other.getClanRaidId());
+        }
+        if (other.hasClanRaidName()) {
+          setClanRaidName(other.getClanRaidName());
+        }
+        if (other.hasActiveTitleImgName()) {
+          setActiveTitleImgName(other.getActiveTitleImgName());
+        }
+        if (other.hasActiveBackgroundImgName()) {
+          setActiveBackgroundImgName(other.getActiveBackgroundImgName());
+        }
+        if (other.hasActiveDescription()) {
+          setActiveDescription(other.getActiveDescription());
+        }
+        if (other.hasInactiveMonsterImgName()) {
+          setInactiveMonsterImgName(other.getInactiveMonsterImgName());
+        }
+        if (other.hasInactiveDescription()) {
+          setInactiveDescription(other.getInactiveDescription());
+        }
+        if (other.hasDialogueText()) {
+          setDialogueText(other.getDialogueText());
+        }
+        if (other.hasSpotlightMonsterImgName()) {
+          setSpotlightMonsterImgName(other.getSpotlightMonsterImgName());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              clanRaidId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              clanRaidName_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              activeTitleImgName_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              activeBackgroundImgName_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              activeDescription_ = input.readBytes();
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              inactiveMonsterImgName_ = input.readBytes();
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
+              inactiveDescription_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000080;
+              dialogueText_ = input.readBytes();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
+              spotlightMonsterImgName_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 clanRaidId = 1;
+      private int clanRaidId_ ;
+      public boolean hasClanRaidId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getClanRaidId() {
+        return clanRaidId_;
+      }
+      public Builder setClanRaidId(int value) {
+        bitField0_ |= 0x00000001;
+        clanRaidId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClanRaidId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        clanRaidId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional string clanRaidName = 2;
+      private java.lang.Object clanRaidName_ = "";
+      public boolean hasClanRaidName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public String getClanRaidName() {
+        java.lang.Object ref = clanRaidName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          clanRaidName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setClanRaidName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        clanRaidName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearClanRaidName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        clanRaidName_ = getDefaultInstance().getClanRaidName();
+        onChanged();
+        return this;
+      }
+      void setClanRaidName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        clanRaidName_ = value;
+        onChanged();
+      }
+      
+      // optional string activeTitleImgName = 3;
+      private java.lang.Object activeTitleImgName_ = "";
+      public boolean hasActiveTitleImgName() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public String getActiveTitleImgName() {
+        java.lang.Object ref = activeTitleImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          activeTitleImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setActiveTitleImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        activeTitleImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearActiveTitleImgName() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        activeTitleImgName_ = getDefaultInstance().getActiveTitleImgName();
+        onChanged();
+        return this;
+      }
+      void setActiveTitleImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        activeTitleImgName_ = value;
+        onChanged();
+      }
+      
+      // optional string activeBackgroundImgName = 4;
+      private java.lang.Object activeBackgroundImgName_ = "";
+      public boolean hasActiveBackgroundImgName() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public String getActiveBackgroundImgName() {
+        java.lang.Object ref = activeBackgroundImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          activeBackgroundImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setActiveBackgroundImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        activeBackgroundImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearActiveBackgroundImgName() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        activeBackgroundImgName_ = getDefaultInstance().getActiveBackgroundImgName();
+        onChanged();
+        return this;
+      }
+      void setActiveBackgroundImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000008;
+        activeBackgroundImgName_ = value;
+        onChanged();
+      }
+      
+      // optional string activeDescription = 5;
+      private java.lang.Object activeDescription_ = "";
+      public boolean hasActiveDescription() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getActiveDescription() {
+        java.lang.Object ref = activeDescription_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          activeDescription_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setActiveDescription(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        activeDescription_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearActiveDescription() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        activeDescription_ = getDefaultInstance().getActiveDescription();
+        onChanged();
+        return this;
+      }
+      void setActiveDescription(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        activeDescription_ = value;
+        onChanged();
+      }
+      
+      // optional string inactiveMonsterImgName = 6;
+      private java.lang.Object inactiveMonsterImgName_ = "";
+      public boolean hasInactiveMonsterImgName() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public String getInactiveMonsterImgName() {
+        java.lang.Object ref = inactiveMonsterImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          inactiveMonsterImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setInactiveMonsterImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        inactiveMonsterImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearInactiveMonsterImgName() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        inactiveMonsterImgName_ = getDefaultInstance().getInactiveMonsterImgName();
+        onChanged();
+        return this;
+      }
+      void setInactiveMonsterImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000020;
+        inactiveMonsterImgName_ = value;
+        onChanged();
+      }
+      
+      // optional string inactiveDescription = 7;
+      private java.lang.Object inactiveDescription_ = "";
+      public boolean hasInactiveDescription() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public String getInactiveDescription() {
+        java.lang.Object ref = inactiveDescription_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          inactiveDescription_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setInactiveDescription(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        inactiveDescription_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearInactiveDescription() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        inactiveDescription_ = getDefaultInstance().getInactiveDescription();
+        onChanged();
+        return this;
+      }
+      void setInactiveDescription(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000040;
+        inactiveDescription_ = value;
+        onChanged();
+      }
+      
+      // optional string dialogueText = 8;
+      private java.lang.Object dialogueText_ = "";
+      public boolean hasDialogueText() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public String getDialogueText() {
+        java.lang.Object ref = dialogueText_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          dialogueText_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDialogueText(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        dialogueText_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDialogueText() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        dialogueText_ = getDefaultInstance().getDialogueText();
+        onChanged();
+        return this;
+      }
+      void setDialogueText(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000080;
+        dialogueText_ = value;
+        onChanged();
+      }
+      
+      // optional string spotlightMonsterImgName = 9;
+      private java.lang.Object spotlightMonsterImgName_ = "";
+      public boolean hasSpotlightMonsterImgName() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public String getSpotlightMonsterImgName() {
+        java.lang.Object ref = spotlightMonsterImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          spotlightMonsterImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setSpotlightMonsterImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        spotlightMonsterImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSpotlightMonsterImgName() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        spotlightMonsterImgName_ = getDefaultInstance().getSpotlightMonsterImgName();
+        onChanged();
+        return this;
+      }
+      void setSpotlightMonsterImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000100;
+        spotlightMonsterImgName_ = value;
+        onChanged();
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ClanRaidProto)
+    }
+    
+    static {
+      defaultInstance = new ClanRaidProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ClanRaidProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_TaskStageProto_descriptor;
   private static
@@ -3985,6 +5075,11 @@ public final class TaskProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_UserPersistentEventProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ClanRaidProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ClanRaidProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4024,7 +5119,14 @@ public final class TaskProto {
       "Y\020\006\022\014\n\010SATURDAY\020\007\"\'\n\tEventType\022\013\n\007ENHANC" +
       "E\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030UserPersistentEven" +
       "tProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022",
-      "\031\n\021coolDownStartTime\030\003 \001(\003B\013B\tTaskProto"
+      "\031\n\021coolDownStartTime\030\003 \001(\003\"\205\002\n\rClanRaidP" +
+      "roto\022\022\n\nclanRaidId\030\001 \001(\005\022\024\n\014clanRaidName" +
+      "\030\002 \001(\t\022\032\n\022activeTitleImgName\030\003 \001(\t\022\037\n\027ac" +
+      "tiveBackgroundImgName\030\004 \001(\t\022\031\n\021activeDes" +
+      "cription\030\005 \001(\t\022\036\n\026inactiveMonsterImgName" +
+      "\030\006 \001(\t\022\033\n\023inactiveDescription\030\007 \001(\t\022\024\n\014d" +
+      "ialogueText\030\010 \001(\t\022\037\n\027spotlightMonsterImg" +
+      "Name\030\t \001(\tB\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4079,6 +5181,14 @@ public final class TaskProto {
               new java.lang.String[] { "UserId", "EventId", "CoolDownStartTime", },
               com.lvl6.proto.TaskProto.UserPersistentEventProto.class,
               com.lvl6.proto.TaskProto.UserPersistentEventProto.Builder.class);
+          internal_static_com_lvl6_proto_ClanRaidProto_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_lvl6_proto_ClanRaidProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ClanRaidProto_descriptor,
+              new java.lang.String[] { "ClanRaidId", "ClanRaidName", "ActiveTitleImgName", "ActiveBackgroundImgName", "ActiveDescription", "InactiveMonsterImgName", "InactiveDescription", "DialogueText", "SpotlightMonsterImgName", },
+              com.lvl6.proto.TaskProto.ClanRaidProto.class,
+              com.lvl6.proto.TaskProto.ClanRaidProto.Builder.class);
           return null;
         }
       };
