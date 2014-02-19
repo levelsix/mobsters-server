@@ -61,7 +61,7 @@ message MonsterProto {
 	
 	enum AnimationType {
 		MELEE = 1;
-		RANGE = 2;
+		RANGED = 2;
 	}
 }
 
