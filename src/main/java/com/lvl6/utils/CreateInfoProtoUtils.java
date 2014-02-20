@@ -430,18 +430,23 @@ public class CreateInfoProtoUtils {
   //	}
 
   public static FullClanProto createFullClanProtoFromClan(Clan c) {
-    MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
-    return FullClanProto.newBuilder().setClanId(c.getId()).setName(c.getName())
-        .setOwner(mup).setCreateTime(c.getCreateTime().getTime())
-        .setDescription(c.getDescription()).setTag(c.getTag())
-        .setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
+//    MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
+    FullClanProto.Builder fcpb= FullClanProto.newBuilder();
+    fcpb.setClanId(c.getId());
+    fcpb.setName(c.getName());
+    fcpb.setCreateTime(c.getCreateTime().getTime());
+    fcpb.setDescription(c.getDescription());
+    fcpb.setTag(c.getTag());
+    fcpb.setRequestToJoinRequired(c.isRequestToJoinRequired());
+    
+    return fcpb.build();
   }
 
   public static MinimumClanProto createMinimumClanProtoFromClan(Clan c) {
     MinimumClanProto.Builder mcp = MinimumClanProto.newBuilder();
     mcp.setClanId(c.getId());
     mcp.setName(c.getName());
-    mcp.setOwnerId(c.getOwnerId());
+//    mcp.setOwnerId(c.getOwnerId());
     mcp.setCreateTime(c.getCreateTime().getTime());
     mcp.setDescription(c.getDescription());
     mcp.setTag(c.getTag());

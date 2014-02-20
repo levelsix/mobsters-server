@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.LeaveClanRequestProto;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto;
 import com.lvl6.proto.EventClanProto.LeaveClanResponseProto.Builder;
@@ -83,7 +85,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       int clanId = (user == null) ? 0 : user.getClanId();
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
 
-      boolean legitLeave = checkLegitLeave(resBuilder, user, clan);
+      List<Integer> clanOwnerIdList = new ArrayList<Integer>();
+      boolean legitLeave = checkLegitLeave(resBuilder, user, clan, clanOwnerIdList);
 
       LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
@@ -91,7 +94,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       server.writeClanEvent(resEvent, clan.getId());
 
       if (legitLeave) {
-        writeChangesToDB(user, clan);
+      	int clanOwnerId = clanOwnerIdList.get(0);
+        writeChangesToDB(user, clan, clanOwnerId);
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
@@ -109,11 +113,11 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
   }
 
-  private void writeChangesToDB(User user, Clan clan) {
+  private void writeChangesToDB(User user, Clan clan, int clanOwnerId) {
     int userId = user.getId();
     int clanId = clan.getId();
 
-    if (userId == clan.getOwnerId()) {
+    if (userId == clanOwnerId) {
       List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils().getUserIdsRelatedToClan(clanId);
       deleteClan(clan, userIds, user);
     } else {
@@ -140,7 +144,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
   }
 
-  private boolean checkLegitLeave(Builder resBuilder, User user, Clan clan) {
+  private boolean checkLegitLeave(Builder resBuilder, User user, Clan clan, 
+  		List<Integer> clanOwnerIdList) {
     if (user == null || clan == null) {
       resBuilder.setStatus(LeaveClanStatus.OTHER_FAIL);
       log.error("user is null");
@@ -152,7 +157,17 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       return false;
     }
 
-    if (clan.getOwnerId() == user.getId()) {
+    int clanId = user.getClanId();
+    String status = UserClanStatus.LEADER.toString();
+    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    		.getUserIdsWithStatus(clanId, status);
+    //should just be one id
+    int clanOwnerId = 0;
+    if (null != userIds && !userIds.isEmpty()) {
+    	clanOwnerId = userIds.get(0);
+    }
+    
+    if (clanOwnerId == user.getId()) {
       List<UserClan> userClanMembersInClan = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clan.getId());
       if (userClanMembersInClan.size() > 1) {
         resBuilder.setStatus(LeaveClanStatus.OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
@@ -161,6 +176,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
         return false;
       }
     }
+    
+    clanOwnerIdList.add(clanOwnerId);
     resBuilder.setStatus(LeaveClanStatus.SUCCESS);
     return true;
   }

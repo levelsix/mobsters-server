@@ -1,5 +1,7 @@
 package com.lvl6.server.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -12,6 +14,7 @@ import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.Builder;
@@ -102,7 +105,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       return false;     
     }
     
-    if (clan == null || clan.getOwnerId() != user.getId()) {
+    int clanId = user.getClanId();
+    String status = UserClanStatus.LEADER.toString();
+    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    		.getUserIdsWithStatus(clanId, status);
+    //should just be one id
+    int clanOwnerId = 0;
+    if (null != userIds && !userIds.isEmpty()) {
+    	clanOwnerId = userIds.get(0);
+    }
+    
+    if (clan == null || clanOwnerId != user.getId()) {
       resBuilder.setStatus(TransferClanOwnershipStatus.NOT_OWNER);
       log.error("clan is " + clan + ", and user isn't owner");
       return false;      

@@ -126,10 +126,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("user is " + user + ", requester is " + requester);
       return false;      
     }
-    Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
-    if (clan.getOwnerId() != user.getId()) {
+//    Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
+    int clanId = user.getClanId();
+    String status = UserClanStatus.LEADER.toString();
+    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    		.getUserIdsWithStatus(clanId, status);
+    //should just be one id
+    int clanOwnerId = 0;
+    if (null != userIds && !userIds.isEmpty()) {
+    	clanOwnerId = userIds.get(0);
+    }
+    
+    if (clanOwnerId != user.getId()) {
       resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.NOT_OWNER);
-      log.error("clan owner isn't this guy, clan owner id is " + clan.getOwnerId());
+      log.error("clan owner isn't this guy, clan owner id is " + clanOwnerId);
       return false;      
     }
     //check if requester is already in a clan
@@ -140,7 +150,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	//are deleted later on in writeChangesToDB
     	return false;
     }
-    int clanId = clan.getId();
+    
     UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(requester.getId(), clanId);
     if (uc == null || uc.getStatus() != UserClanStatus.REQUESTING) {
       resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.NOT_A_REQUESTER);

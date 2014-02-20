@@ -108,8 +108,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
           legitCreate = false;
           resBuilder.setStatus(CreateClanStatus.OTHER_FAIL);
         } else {
-        	Clan newClan = new Clan(clanId, user.getId(), clanName,
-        			createTime, description, tag, requestToJoinRequired);
+        	Clan newClan = new Clan(clanId, clanName, createTime, description, tag,
+        			requestToJoinRequired);
           resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(newClan));
         }
       }

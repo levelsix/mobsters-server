@@ -138,6 +138,46 @@ import com.lvl6.utils.DBConnection;
     }
     return userClan;
   }
+  
+  public List<Integer> getUserIdsWithStatus(int clanId, String status) {
+  	TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
+    paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
+    paramsToVals.put(DBConstants.CLAN_FOR_USER__STATUS, status);
+    
+    StringBuilder querySb = new StringBuilder();
+    querySb.append("SELECT ");
+    querySb.append(DBConstants.CLAN_FOR_USER__USER_ID);
+    querySb.append(" FROM ");
+    querySb.append(TABLE_NAME);
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
+    querySb.append("=? AND ");
+    querySb.append(DBConstants.CLAN_FOR_USER__STATUS);
+    querySb.append("=?;");
+    
+    List<Object> values = new ArrayList<Object>();
+    values.add(clanId);
+    values.add(status);
+    
+    String query = querySb.toString();
+    log.info("user clan query=" + query + "\t values=" + values);
+    
+    Connection conn = null;
+		ResultSet rs = null;
+		List<Integer> userIds = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userIds = getUserIdsFromRS(rs);
+		} catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    	userIds = new ArrayList<Integer>();
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+		//should not be null and should be a list object
+    return userIds;
+  }
 
   private UserClan grabUserClanFromRS(ResultSet rs) {
     if (rs != null) {
@@ -182,6 +222,25 @@ import com.lvl6.utils.DBConnection;
       }
     }
     return null;
+  }
+  
+  private List<Integer> getUserIdsFromRS(ResultSet rs) {
+  	if (null != rs) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			List<Integer> userIds = new ArrayList<Integer>();
+  			while (rs.next()) {
+//  				int userId = rs.getInt(DBConstants.CLAN_FOR_USER__USER_ID); 
+  				int userId = rs.getInt(1);//get the first and only column, same thing as above
+  				userIds.add(userId);
+  			}
+  			return userIds;
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+  		}
+  	}
+  	return new ArrayList<Integer>();
   }
 
   //

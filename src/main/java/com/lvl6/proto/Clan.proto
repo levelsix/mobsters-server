@@ -13,7 +13,7 @@ option java_outer_classname = "ClanProto";
 message FullClanProto {
 	optional int32 clanId = 1;
 	optional string name = 2;
-	optional MinimumUserProto owner = 3;
+	//optional MinimumUserProto owner = 3;
 	optional int64 createTime = 4;
 	optional string description = 5;
 	optional string tag = 6;
@@ -24,8 +24,10 @@ message FullClanProto {
 //------------------------------------------------------------------------------------------
 
 enum UserClanStatus {
-	MEMBER = 1;
-	REQUESTING = 2;
+	LEADER = 1;
+	JUNIOR_LEADER = 2; //at the moment, shares with the leader the ability to start a raid
+	REQUESTING = 3;
+	MEMBER = 4;
 }
 
 //------------------------------------------------------------------------------------------

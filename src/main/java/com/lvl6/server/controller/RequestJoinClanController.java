@@ -205,7 +205,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void notifyClan(User aUser, Clan aClan, boolean requestToJoinRequired) {
-    int clanOwnerId = aClan.getOwnerId();
+  	int clanId = aUser.getClanId();
+    String status = UserClanStatus.LEADER.toString();
+    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    		.getUserIdsWithStatus(clanId, status);
+    //should just be one id
+    int clanOwnerId = 0;
+    if (null != userIds && !userIds.isEmpty()) {
+    	clanOwnerId = userIds.get(0);
+    }
     
     int level = aUser.getLevel();
     String requester = aUser.getName();
