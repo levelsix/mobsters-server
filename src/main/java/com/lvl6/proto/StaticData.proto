@@ -3,6 +3,7 @@
 
 import "BoosterPackStuff.proto";
 import "City.proto";
+import "Clan.proto";
 import "MonsterStuff.proto";
 import "Quest.proto";
 import "Structure.proto";
@@ -40,9 +41,11 @@ message StaticDataProto {
 	//repeated LabProto allLabs = 17; //defined above
 	
 	//the daily events where users can gain evolution and enhancement materials
-	repeated PersistentEventProto events = 18;
+	repeated PersistentEventProto persistentEvents = 18;
 	repeated MonsterBattleDialogueProto mbds = 19;
 	
-	repeated ClanRaidProto raids = 20; 
+	//these contains the stages. the stages contain the monsters and the rewards  
+	repeated ClanRaidProto raids = 20;
+	repeated PersistentClanEventProto persistentClanEvents = 21;
 }
 	

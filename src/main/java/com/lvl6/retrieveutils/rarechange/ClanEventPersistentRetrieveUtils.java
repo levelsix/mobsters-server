@@ -11,19 +11,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import com.lvl6.info.EventPersistent;
+import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component @DependsOn("gameServer") public class EventPersistentRetrieveUtils {
+@Component @DependsOn("gameServer") public class ClanEventPersistentRetrieveUtils {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  private static final String TABLE_NAME = DBConstants.TABLE_EVENT_PERSISTENT;
+  private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT;
   
-  private static Map<Integer, EventPersistent> eventIdToEvent;
+  private static Map<Integer, ClanEventPersistent> eventIdToEvent;
   
-  public static Map<Integer, EventPersistent> getAllEventIdsToEvents() {
+  public static Map<Integer, ClanEventPersistent> getAllEventIdsToEvents() {
   	if (null == eventIdToEvent) {
 		  setStaticEventIdsToEvents();
 	  }
@@ -31,13 +31,13 @@ import com.lvl6.utils.DBConnection;
 	  return eventIdToEvent;
   }
 
-  public static EventPersistent getEventById(int id) {
+  public static ClanEventPersistent getEventById(int id) {
 	  if (null == eventIdToEvent) {
 		  setStaticEventIdsToEvents();
 	  }
-	  EventPersistent ep = eventIdToEvent.get(id); 
+	  ClanEventPersistent ep = eventIdToEvent.get(id); 
 	  if (null == ep) {
-	  	log.error("No EventPersistent for id=" + id);
+	  	log.error("No ClanEventPersistent for id=" + id);
 	  }
 	  return ep;
   	}
@@ -49,7 +49,7 @@ import com.lvl6.utils.DBConnection;
   }
   
   private static void setStaticEventIdsToEvents() {
-	  log.debug("setting static map of id to EventPersistent");
+	  log.debug("setting static map of id to ClanEventPersistent");
 
 	    Connection conn = DBConnection.get().getConnection();
 	    ResultSet rs = null;
@@ -61,9 +61,9 @@ import com.lvl6.utils.DBConnection;
 	    			try {
 	    				rs.last();
 	    				rs.beforeFirst();
-	    				Map<Integer, EventPersistent> idToEvent = new HashMap<Integer, EventPersistent>();
-	    				while(rs.next()) {  //should only be one
-	    					EventPersistent cec = convertRSRowToEventPersistent(rs);
+	    				Map<Integer, ClanEventPersistent> idToEvent = new HashMap<Integer, ClanEventPersistent>();
+	    				while(rs.next()) { 
+	    					ClanEventPersistent cec = convertRSRowToClanEventPersistent(rs);
 	    					if (null != cec)
 	    						idToEvent.put(cec.getId(), cec);
 	    				}
@@ -81,19 +81,16 @@ import com.lvl6.utils.DBConnection;
 	    }
   }
   
-  private static EventPersistent convertRSRowToEventPersistent(ResultSet rs) throws SQLException {
+  private static ClanEventPersistent convertRSRowToClanEventPersistent(ResultSet rs) throws SQLException {
     int i = 1;
     int id = rs.getInt(i++);
     String dayOfWeek = rs.getString(i++);
     int startHour = rs.getInt(i++);
     int eventDurationMinutes = rs.getInt(i++);
-    int taskId = rs.getInt(i++);
-    int cooldownMinutes = rs.getInt(i++);
-    String eventType = rs.getString(i++);
-    String monsterElemType = rs.getString(i++);
+    int clanRaidId = rs.getInt(i++);
     
-    EventPersistent ep = new EventPersistent(id, dayOfWeek, startHour,
-    		eventDurationMinutes, taskId, cooldownMinutes, eventType, monsterElemType);
+    ClanEventPersistent ep = new ClanEventPersistent(id, dayOfWeek, startHour,
+    		eventDurationMinutes, clanRaidId);
     
     if (null != dayOfWeek) {
     	String newDayOfWeek = dayOfWeek.trim();
@@ -101,29 +98,8 @@ import com.lvl6.utils.DBConnection;
     	if (!dayOfWeek.equals(newDayOfWeek)) {
     		log.error("string for day of week is incorrect. is: " + dayOfWeek +
     				"\t (if spelled correctly), expected: " + newDayOfWeek +
-    				"\t eventPersistent obj=" + ep);
+    				"\t clanEventPersistent obj=" + ep);
     		ep.setDayOfWeek(newDayOfWeek);
-    	}
-    }
-    
-    if (null != eventType) {
-    	String newEventType = eventType.trim();
-    	newEventType = newEventType.toUpperCase();
-    	if (!eventType.equals(newEventType)) {
-    		log.error("string for event type is incorrect. is: " + eventType +
-    				"\t (if spelled correctly), expected: " + newEventType +
-    				"\t eventPersistent obj=" + ep);
-    		ep.setEventType(newEventType);
-    	}
-    }
-    
-    if (null != monsterElemType) {
-    	String newMonsterElementType = monsterElemType.trim();
-    	newMonsterElementType = newMonsterElementType.toUpperCase();
-    	if (!monsterElemType.equals(newMonsterElementType)) {
-    		log.error("string for monster element type incorrect. is: " + monsterElemType +
-    				"\t (if spelled correctly), expected: " + newMonsterElementType +
-    				"\t eventPersistent obj=" + ep);
     	}
     }
     

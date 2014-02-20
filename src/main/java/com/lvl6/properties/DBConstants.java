@@ -12,8 +12,16 @@ public class DBConstants {
 	public static final String TABLE_CITY_ELEMENT = "city_element";
 	public static final String TABLE_CLANS = "clan";
 	public static final String TABLE_CLAN_CHAT_POST = "clan_chat_post";
+	//EVENT TABLE FOR CLANS
+	public static final String TABLE_CLAN_EVENT_PERSISTENT = "clan_event_persistent";
+	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN = "clan_event_persistent_for_clan";
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
+	//TABLE SPECIFYING WHAT RAIDS THERE ARE, REFERENCED IN   TABLE_CLAN_EVENT_PERSISTENT
 	public static final String TABLE_CLAN_RAID = "clan_raid";
+	public static final String TABLE_CLAN_RAID_STAGE = "clan_raid_stage";
+	public static final String TABLE_CLAN_RAID_STAGE_MONSTER = "clan_raid_stage_monster";
+	public static final String TABLE_CLAN_RAID_STAGE_REWARD = "clan_raid_stage_reward";
 	public static final String TABLE_EVENT_PERSISTENT = "event_persistent";
 	public static final String TABLE_EVENT_PERSISTENT_FOR_USER = "event_persistent_for_user";
 	public static final String TABLE_EXPANSION_COST = "expansion_cost";

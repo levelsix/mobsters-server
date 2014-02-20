@@ -36,7 +36,7 @@ import com.lvl6.utils.DBConnection;
 		return null;
 	}
 
-	public static Map<Integer, ClanRaid> getClanRaidIdsToCities() {
+	public static Map<Integer, ClanRaid> getClanRaidIdsToClanRaids() {
 		log.debug("retrieving all clan raid data");
 		if (clanRaidIdToClanRaid == null) {
 			setStaticClanRaidIdsToClanRaid();

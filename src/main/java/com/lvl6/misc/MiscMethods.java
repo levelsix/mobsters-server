@@ -29,6 +29,7 @@ import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
+import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
@@ -58,6 +59,8 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
+import com.lvl6.proto.ClanProto.ClanRaidProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
@@ -78,7 +81,6 @@ import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
-import com.lvl6.proto.TaskProto.ClanRaidProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
@@ -90,7 +92,11 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -525,6 +531,9 @@ public class MiscMethods {
     //    ClanBossRetrieveUtils.reload();
     //    ClanBossRewardRetrieveUtils.reload();
     ClanRaidRetrieveUtils.reload();
+    ClanRaidStageRetrieveUtils.reload();
+    ClanRaidStageMonsterRetrieveUtils.reload();
+    ClanRaidStageRewardRetrieveUtils.reload();
     EventPersistentRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
@@ -1221,7 +1230,7 @@ public class MiscMethods {
   	setStructures(sdpb);
   	setEvents(sdpb);
   	setMonsterDialogue(sdpb);
-  	setClanRaid(sdpb);
+  	setClanRaidStuff(sdpb);
   	
   	return sdpb.build();
   }
@@ -1464,7 +1473,7 @@ public class MiscMethods {
       EventPersistent event  = idsToEvents.get(eventId);
       PersistentEventProto eventProto = CreateInfoProtoUtils
           .createPersistentEventProtoFromEvent(event);
-      sdpb.addEvents(eventProto);
+      sdpb.addPersistentEvents(eventProto);
     }
   }
   
@@ -1485,15 +1494,25 @@ public class MiscMethods {
   	sdpb.addAllMbds(dialogueList);
   }
 
-  private static void setClanRaid(Builder sdpb) {
-  	Map<Integer, ClanRaid> idsToClanRaid = new HashMap<Integer, ClanRaid>();
-  	
+  private static void setClanRaidStuff(Builder sdpb) {
+  	Map<Integer, ClanRaid> idsToClanRaid = ClanRaidRetrieveUtils.getClanRaidIdsToClanRaids();
   	List<ClanRaidProto> raidList = new ArrayList<ClanRaidProto>();
-  	for(ClanRaid cr : idsToClanRaid.values()) {
+  	for (ClanRaid cr : idsToClanRaid.values()) {
   		ClanRaidProto crProto = CreateInfoProtoUtils.createClanRaidProto(cr);
   		raidList.add(crProto);
   	}
-  	
   	sdpb.addAllRaids(raidList);
+  	
+  	
+  	//protofy clan events
+  	List<PersistentClanEventProto> clanEventProtos = new ArrayList<PersistentClanEventProto>();
+  	Map<Integer, ClanEventPersistent> idsToClanEventPersistent =
+  			ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
+  	for (ClanEventPersistent cep : idsToClanEventPersistent.values()) {
+  		PersistentClanEventProto pcep = CreateInfoProtoUtils.createPersistentClanEventProto(cep);
+  		clanEventProtos.add(pcep);
+  	}
+  	sdpb.addAllPersistentClanEvents(clanEventProtos);
   }
+  
 }

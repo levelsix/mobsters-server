@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "Battle.proto";
+import "Task.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -51,3 +52,69 @@ message MinimumUserProtoForClans {
 }
 
 //------------------------------------------------------------------------------------------
+//this is analogous to a city
+message ClanRaidProto {
+	optional int32 clanRaidId = 1;
+	optional string clanRaidName = 2;
+	optional string activeTitleImgName = 3;
+	optional string activeBackgroundImgName = 4;
+	optional string activeDescription = 5;
+	optional string inactiveMonsterImgName = 6;
+	optional string inactiveDescription = 7;
+	optional string dialogueText = 8;
+	optional string spotlightMonsterImgName = 9;
+	
+	repeated ClanRaidStageProto raidStages = 10;
+}
+
+//this is analogous to a task
+message ClanRaidStageProto {
+//might need some way to specify ordering, which stage goes first for a raid
+	optional int32 clanRaidStageId = 1; //not really sure if needed
+	optional int32 clanRaidId = 2;
+	optional int32 durationMinutes = 3;
+	optional int32 stageNum = 4;
+	
+	//one monster per stage
+	repeated ClanRaidStageMonsterProto monsters = 11;
+	
+	//the possible rewards
+	repeated ClanRaidStageRewardProto possibleRewards = 12;
+}
+
+//this is analogous to task stages and task stage monsters
+//Note: only one of these per stage
+message ClanRaidStageMonsterProto {
+	optional int32 crsmId = 1;
+	//optional int32 clanRaidStageId = 2;
+	optional int32 monsterId = 3;
+}
+
+message ClanRaidStageRewardProto {
+	optional int32 crsrId = 1;
+	//optional int32 clanRaidStageId = 2;
+	optional int32 minOilReward =  3;
+	optional int32 maxOilReward = 4;
+	optional int32 minCashReward = 5;
+	optional int32 maxCashReward = 6;
+	optional int32 monsterId = 7;
+	
+	//optional int32 expectedMonsterReward = 8; //don't think client needs this
+}
+
+//------------------------------------------------------------------------------------------
+
+message PersistentClanEventProto {
+	optional int32 clanEventId = 1;
+	optional DayOfWeek dayOfWeek = 2;
+	optional int32 startHour = 3;
+	optional int32 eventDurationMinutes = 4;
+	optional int32 clanRaidId = 5;
+}
+
+//------------------------------------------------------------------------------------------
+
+
+
+//------------------------------------------------------------------------------------------
+
