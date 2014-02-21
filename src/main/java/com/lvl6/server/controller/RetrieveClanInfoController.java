@@ -112,11 +112,9 @@ import com.lvl6.utils.RetrieveUtils;
 
             //get the users
             Map<Integer, User> usersMap = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIdList);
-            log.info("\t\t\t\t usersMap=" + usersMap);
             //get the monster battle teams for the users
             Map<Integer, List<MonsterForUser>> userIdsToMonsterTeams = RetrieveUtils
             		.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIdList);
-            log.info("\t\t\t\t userIdsToMonsterTeams=" + userIdsToMonsterTeams);
 
             for (UserClan uc : userClans) {
             	int userId = uc.getUserId();
@@ -127,11 +125,9 @@ import com.lvl6.utils.RetrieveUtils;
               
               //create the monster team for this user if possible
               if (userIdsToMonsterTeams.containsKey(userId)) {
-              	log.info("creating monster team proto for user.");
               	List<MonsterForUser> monsterTeam = userIdsToMonsterTeams.get(userId);
               	List<FullUserMonsterProto> proto = CreateInfoProtoUtils
               			.createFullUserMonsterProtoList(monsterTeam);
-              	log.info("\t\t\t userId=" + userId + "\t team=" + monsterTeam + "\t proto=" + proto);
               	
               	//create the user monster team proto via the builder
             		UserCurrentMonsterTeamProto.Builder teamForUser = UserCurrentMonsterTeamProto.newBuilder();
@@ -141,8 +137,6 @@ import com.lvl6.utils.RetrieveUtils;
               }
               
             }
-            log.info("resBuilder=" + resBuilder);
-            log.info("resbuilder.build()=" + resBuilder.build());
             
           }
         } else {

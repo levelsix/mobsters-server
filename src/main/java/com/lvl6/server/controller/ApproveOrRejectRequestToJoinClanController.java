@@ -1,5 +1,6 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -128,9 +129,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
 //    Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
     int clanId = user.getClanId();
-    String status = UserClanStatus.LEADER.toString();
+    List<Integer> statuses = new ArrayList<Integer>();
+    statuses.add(UserClanStatus.LEADER_VALUE);
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
-    		.getUserIdsWithStatus(clanId, status);
+    		.getUserIdsWithStatuses(clanId, statuses);
     //should just be one id
     int clanOwnerId = 0;
     if (null != userIds && !userIds.isEmpty()) {

@@ -12,14 +12,16 @@ public final class ClanProto {
       implements com.google.protobuf.ProtocolMessageEnum {
     LEADER(0, 1),
     JUNIOR_LEADER(1, 2),
-    REQUESTING(2, 3),
+    CAPTAIN(2, 3),
     MEMBER(3, 4),
+    REQUESTING(4, 10),
     ;
     
     public static final int LEADER_VALUE = 1;
     public static final int JUNIOR_LEADER_VALUE = 2;
-    public static final int REQUESTING_VALUE = 3;
+    public static final int CAPTAIN_VALUE = 3;
     public static final int MEMBER_VALUE = 4;
+    public static final int REQUESTING_VALUE = 10;
     
     
     public final int getNumber() { return value; }
@@ -28,8 +30,9 @@ public final class ClanProto {
       switch (value) {
         case 1: return LEADER;
         case 2: return JUNIOR_LEADER;
-        case 3: return REQUESTING;
+        case 3: return CAPTAIN;
         case 4: return MEMBER;
+        case 10: return REQUESTING;
         default: return null;
       }
     }
@@ -60,7 +63,7 @@ public final class ClanProto {
     }
     
     private static final UserClanStatus[] VALUES = {
-      LEADER, JUNIOR_LEADER, REQUESTING, MEMBER, 
+      LEADER, JUNIOR_LEADER, CAPTAIN, MEMBER, REQUESTING, 
     };
     
     public static UserClanStatus valueOf(
@@ -6408,9 +6411,10 @@ public final class ClanProto {
       "lanEventProto\022\023\n\013clanEventId\030\001 \001(\005\022,\n\tda" +
       "yOfWeek\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek" +
       "\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDurationMinu" +
-      "tes\030\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005*K\n\016UserCla" +
-      "nStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\016" +
-      "\n\nREQUESTING\020\003\022\n\n\006MEMBER\020\004B\013B\tClanProto"
+      "tes\030\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005*X\n\016UserCla" +
+      "nStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013" +
+      "\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB",
+      "\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

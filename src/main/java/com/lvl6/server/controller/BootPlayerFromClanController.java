@@ -1,14 +1,11 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -24,31 +21,12 @@ import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerF
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
 @Component @DependsOn("gameServer") public class BootPlayerFromClanController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
-
-  @Resource(name = "outgoingGameEventsHandlerExecutor")
-  protected TaskExecutor executor;
-  public TaskExecutor getExecutor() {
-    return executor;
-  }
-  public void setExecutor(TaskExecutor executor) {
-    this.executor = executor;
-  }
-  @Resource(name = "playersByPlayerId")
-  protected Map<Integer, ConnectedPlayer> playersByPlayerId;
-  public Map<Integer, ConnectedPlayer> getPlayersByPlayerId() {
-    return playersByPlayerId;
-  }
-  public void setPlayersByPlayerId(
-      Map<Integer, ConnectedPlayer> playersByPlayerId) {
-    this.playersByPlayerId = playersByPlayerId;
-  }
 
   public BootPlayerFromClanController() {
     numAllocatedThreads = 4;
@@ -117,9 +95,10 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
     
     int clanId = user.getClanId();
-    String status = UserClanStatus.LEADER.toString();
+    List<Integer> statuses = new ArrayList<Integer>();
+    statuses.add(UserClanStatus.LEADER_VALUE);
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
-    		.getUserIdsWithStatus(clanId, status);
+    		.getUserIdsWithStatuses(clanId, statuses);
     //should just be one id
     int clanOwnerId = 0;
     if (null != userIds && !userIds.isEmpty()) {

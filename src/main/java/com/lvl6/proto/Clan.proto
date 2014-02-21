@@ -25,9 +25,11 @@ message FullClanProto {
 
 enum UserClanStatus {
 	LEADER = 1;
-	JUNIOR_LEADER = 2; //at the moment, shares with the leader the ability to start a raid
-	REQUESTING = 3;
+	JUNIOR_LEADER = 2; //is a leader but can't demote jr leaders or promote to jr leader
+	CAPTAIN = 3; //power is can only start a raid
 	MEMBER = 4;
+	
+	REQUESTING = 10;
 }
 
 //------------------------------------------------------------------------------------------

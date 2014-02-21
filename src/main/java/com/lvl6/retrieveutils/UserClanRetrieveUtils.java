@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
@@ -19,6 +20,7 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.StringUtils;
 
 @Component @DependsOn("gameServer") public class UserClanRetrieveUtils {
 
@@ -139,11 +141,7 @@ import com.lvl6.utils.DBConnection;
     return userClan;
   }
   
-  public List<Integer> getUserIdsWithStatus(int clanId, String status) {
-  	TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
-    paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
-    paramsToVals.put(DBConstants.CLAN_FOR_USER__STATUS, status);
-    
+  public List<Integer> getUserIdsWithStatuses(int clanId, List<Integer> statuses) {
     StringBuilder querySb = new StringBuilder();
     querySb.append("SELECT ");
     querySb.append(DBConstants.CLAN_FOR_USER__USER_ID);
@@ -153,11 +151,17 @@ import com.lvl6.utils.DBConnection;
     querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
     querySb.append("=? AND ");
     querySb.append(DBConstants.CLAN_FOR_USER__STATUS);
-    querySb.append("=?;");
+    querySb.append(" in (");
+    
+    int numQuestionMarks = statuses.size();
+    List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
+    String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils.csvList(questionMarks);
+    querySb.append(questionMarkStr);
+    querySb.append(");");
     
     List<Object> values = new ArrayList<Object>();
     values.add(clanId);
-    values.add(status);
+    values.addAll(statuses);
     
     String query = querySb.toString();
     log.info("user clan query=" + query + "\t values=" + values);

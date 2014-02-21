@@ -19,10 +19,6 @@ public final class UserProto {
     boolean hasName();
     String getName();
     
-    // optional int32 ownerId = 3;
-    boolean hasOwnerId();
-    int getOwnerId();
-    
     // optional int64 createTime = 4;
     boolean hasCreateTime();
     long getCreateTime();
@@ -110,21 +106,11 @@ public final class UserProto {
       }
     }
     
-    // optional int32 ownerId = 3;
-    public static final int OWNERID_FIELD_NUMBER = 3;
-    private int ownerId_;
-    public boolean hasOwnerId() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public int getOwnerId() {
-      return ownerId_;
-    }
-    
     // optional int64 createTime = 4;
     public static final int CREATETIME_FIELD_NUMBER = 4;
     private long createTime_;
     public boolean hasCreateTime() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public long getCreateTime() {
       return createTime_;
@@ -134,7 +120,7 @@ public final class UserProto {
     public static final int DESCRIPTION_FIELD_NUMBER = 5;
     private java.lang.Object description_;
     public boolean hasDescription() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public String getDescription() {
       java.lang.Object ref = description_;
@@ -166,7 +152,7 @@ public final class UserProto {
     public static final int TAG_FIELD_NUMBER = 6;
     private java.lang.Object tag_;
     public boolean hasTag() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public String getTag() {
       java.lang.Object ref = tag_;
@@ -198,7 +184,7 @@ public final class UserProto {
     public static final int REQUESTTOJOINREQUIRED_FIELD_NUMBER = 7;
     private boolean requestToJoinRequired_;
     public boolean hasRequestToJoinRequired() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public boolean getRequestToJoinRequired() {
       return requestToJoinRequired_;
@@ -207,7 +193,6 @@ public final class UserProto {
     private void initFields() {
       clanId_ = 0;
       name_ = "";
-      ownerId_ = 0;
       createTime_ = 0L;
       description_ = "";
       tag_ = "";
@@ -232,18 +217,15 @@ public final class UserProto {
         output.writeBytes(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, ownerId_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(4, createTime_);
       }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeBytes(5, getDescriptionBytes());
       }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeBytes(6, getTagBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBool(7, requestToJoinRequired_);
       }
       getUnknownFields().writeTo(output);
@@ -265,21 +247,17 @@ public final class UserProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, ownerId_);
+          .computeInt64Size(4, createTime_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, createTime_);
+          .computeBytesSize(5, getDescriptionBytes());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, getDescriptionBytes());
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getTagBytes());
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(7, requestToJoinRequired_);
       }
@@ -411,16 +389,14 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        ownerId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
         createTime_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         description_ = "";
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         tag_ = "";
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         requestToJoinRequired_ = false;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -470,21 +446,17 @@ public final class UserProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.ownerId_ = ownerId_;
+        result.createTime_ = createTime_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.createTime_ = createTime_;
+        result.description_ = description_;
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.description_ = description_;
+        result.tag_ = tag_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
-        }
-        result.tag_ = tag_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
         }
         result.requestToJoinRequired_ = requestToJoinRequired_;
         result.bitField0_ = to_bitField0_;
@@ -508,9 +480,6 @@ public final class UserProto {
         }
         if (other.hasName()) {
           setName(other.getName());
-        }
-        if (other.hasOwnerId()) {
-          setOwnerId(other.getOwnerId());
         }
         if (other.hasCreateTime()) {
           setCreateTime(other.getCreateTime());
@@ -565,28 +534,23 @@ public final class UserProto {
               name_ = input.readBytes();
               break;
             }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              ownerId_ = input.readInt32();
-              break;
-            }
             case 32: {
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000004;
               createTime_ = input.readInt64();
               break;
             }
             case 42: {
-              bitField0_ |= 0x00000010;
+              bitField0_ |= 0x00000008;
               description_ = input.readBytes();
               break;
             }
             case 50: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000010;
               tag_ = input.readBytes();
               break;
             }
             case 56: {
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000020;
               requestToJoinRequired_ = input.readBool();
               break;
             }
@@ -653,43 +617,22 @@ public final class UserProto {
         onChanged();
       }
       
-      // optional int32 ownerId = 3;
-      private int ownerId_ ;
-      public boolean hasOwnerId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public int getOwnerId() {
-        return ownerId_;
-      }
-      public Builder setOwnerId(int value) {
-        bitField0_ |= 0x00000004;
-        ownerId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearOwnerId() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        ownerId_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // optional int64 createTime = 4;
       private long createTime_ ;
       public boolean hasCreateTime() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public long getCreateTime() {
         return createTime_;
       }
       public Builder setCreateTime(long value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         createTime_ = value;
         onChanged();
         return this;
       }
       public Builder clearCreateTime() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         createTime_ = 0L;
         onChanged();
         return this;
@@ -698,7 +641,7 @@ public final class UserProto {
       // optional string description = 5;
       private java.lang.Object description_ = "";
       public boolean hasDescription() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public String getDescription() {
         java.lang.Object ref = description_;
@@ -714,19 +657,19 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000010;
+  bitField0_ |= 0x00000008;
         description_ = value;
         onChanged();
         return this;
       }
       public Builder clearDescription() {
-        bitField0_ = (bitField0_ & ~0x00000010);
+        bitField0_ = (bitField0_ & ~0x00000008);
         description_ = getDefaultInstance().getDescription();
         onChanged();
         return this;
       }
       void setDescription(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000010;
+        bitField0_ |= 0x00000008;
         description_ = value;
         onChanged();
       }
@@ -734,7 +677,7 @@ public final class UserProto {
       // optional string tag = 6;
       private java.lang.Object tag_ = "";
       public boolean hasTag() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public String getTag() {
         java.lang.Object ref = tag_;
@@ -750,19 +693,19 @@ public final class UserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000020;
+  bitField0_ |= 0x00000010;
         tag_ = value;
         onChanged();
         return this;
       }
       public Builder clearTag() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         tag_ = getDefaultInstance().getTag();
         onChanged();
         return this;
       }
       void setTag(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         tag_ = value;
         onChanged();
       }
@@ -770,19 +713,19 @@ public final class UserProto {
       // optional bool requestToJoinRequired = 7;
       private boolean requestToJoinRequired_ ;
       public boolean hasRequestToJoinRequired() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public boolean getRequestToJoinRequired() {
         return requestToJoinRequired_;
       }
       public Builder setRequestToJoinRequired(boolean value) {
-        bitField0_ |= 0x00000040;
+        bitField0_ |= 0x00000020;
         requestToJoinRequired_ = value;
         onChanged();
         return this;
       }
       public Builder clearRequestToJoinRequired() {
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000020);
         requestToJoinRequired_ = false;
         onChanged();
         return this;
@@ -7183,54 +7126,54 @@ public final class UserProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\nUser.proto\022\016com.lvl6.proto\"\226\001\n\020Minimum" +
+      "\n\nUser.proto\022\016com.lvl6.proto\"\205\001\n\020Minimum" +
       "ClanProto\022\016\n\006clanId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022" +
-      "\017\n\007ownerId\030\003 \001(\005\022\022\n\ncreateTime\030\004 \001(\003\022\023\n\013" +
-      "description\030\005 \001(\t\022\013\n\003tag\030\006 \001(\t\022\035\n\025reques" +
-      "tToJoinRequired\030\007 \001(\010\"`\n\020MinimumUserProt" +
-      "o\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022.\n\004clan\030" +
-      "\003 \001(\0132 .com.lvl6.proto.MinimumClanProto\"" +
-      "b\n\031MinimumUserProtoWithLevel\0226\n\014minUserP" +
+      "\022\n\ncreateTime\030\004 \001(\003\022\023\n\013description\030\005 \001(\t" +
+      "\022\013\n\003tag\030\006 \001(\t\022\035\n\025requestToJoinRequired\030\007" +
+      " \001(\010\"`\n\020MinimumUserProto\022\016\n\006userId\030\001 \001(\005" +
+      "\022\014\n\004name\030\002 \001(\t\022.\n\004clan\030\003 \001(\0132 .com.lvl6." +
+      "proto.MinimumClanProto\"b\n\031MinimumUserPro" +
+      "toWithLevel\0226\n\014minUserProto\030\001 \001(\0132 .com." +
+      "lvl6.proto.MinimumUserProto\022\r\n\005level\030\002 \001" +
+      "(\005\"l\n\036MinimumUserProtoWithFacebookId\0226\n\014",
+      "minUserProto\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\022\022\n\nfacebookId\030\002 \001(\t\"{\n Mini" +
+      "mumUserProtoWithMaxResources\0226\n\014minUserP" +
       "roto\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\r\n\005level\030\002 \001(\005\"l\n\036MinimumUserProtoW",
-      "ithFacebookId\0226\n\014minUserProto\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022\022\n\nfaceboo" +
-      "kId\030\002 \001(\t\"{\n MinimumUserProtoWithMaxReso" +
-      "urces\0226\n\014minUserProto\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022\017\n\007maxCash\030\002 \001(\005\022\016" +
-      "\n\006maxOil\030\003 \001(\005\"\375\001\n\036UserFacebookInviteFor" +
-      "SlotProto\022\020\n\010inviteId\030\001 \001(\005\022?\n\007inviter\030\002" +
-      " \001(\0132..com.lvl6.proto.MinimumUserProtoWi" +
-      "thFacebookId\022\033\n\023recipientFacebookId\030\003 \001(" +
-      "\t\022\024\n\014timeOfInvite\030\004 \001(\003\022\024\n\014timeAccepted\030",
-      "\005 \001(\003\022\024\n\014userStructId\030\006 \001(\005\022\023\n\013structFbL" +
-      "vl\030\007 \001(\005\022\024\n\014redeemedTime\030\010 \001(\003\"\255\007\n\rFullU" +
-      "serProto\022\016\n\006userId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r" +
-      "\n\005level\030\003 \001(\005\022\014\n\004gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(" +
-      "\005\022\013\n\003oil\030* \001(\005\022\022\n\nexperience\030\006 \001(\005\022\026\n\016ta" +
-      "sksCompleted\030\007 \001(\005\022\022\n\nbattlesWon\030\010 \001(\005\022\023" +
-      "\n\013battlesLost\030\t \001(\005\022\r\n\005flees\030\n \001(\005\022\024\n\014re" +
-      "ferralCode\030\013 \001(\t\022\024\n\014numReferrals\030\014 \001(\005\022\025" +
-      "\n\rlastLoginTime\030\016 \001(\003\022\026\n\016lastLogoutTime\030" +
-      "\017 \001(\003\022\016\n\006isFake\030\023 \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$",
-      "\n\034numCoinsRetrievedFromStructs\030\027 \001(\005\022\"\n\032" +
-      "numOilRetrievedFromStructs\030+ \001(\005\022.\n\004clan" +
-      "\030\031 \001(\0132 .com.lvl6.proto.MinimumClanProto" +
-      "\022\033\n\023hasReceivedfbReward\030\034 \001(\010\022!\n\031numBegi" +
-      "nnerSalesPurchased\030\036 \001(\005\022\027\n\017hasActiveShi" +
-      "eld\030\037 \001(\010\022\025\n\rshieldEndTime\030  \001(\003\022\013\n\003elo\030" +
-      "! \001(\005\022\014\n\004rank\030\" \001(\t\022\022\n\nattacksWon\030$ \001(\005\022" +
-      "\023\n\013defensesWon\030% \001(\005\022\023\n\013attacksLost\030& \001(" +
-      "\005\022\024\n\014defensesLost\030\' \001(\005\022\022\n\nfacebookId\030( " +
-      "\001(\t\022\014\n\004udid\030\r \001(\t\022\023\n\013deviceToken\030\020 \001(\t\022\"",
-      "\n\032lastBattleNotificationTime\030\021 \001(\003\022\021\n\tnu" +
-      "mBadges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021\n\taps" +
-      "alarId\030\026 \001(\005\022 \n\030numConsecutiveDaysPlayed" +
-      "\030\030 \001(\005\022$\n\034lastWallPostNotificationTime\030\032" +
-      " \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\035\n\025inBattleShiel" +
-      "dEndTime\030# \001(\003\"E\n\030StaticUserLevelInfoPro" +
-      "to\022\r\n\005level\030\001 \001(\005\022\032\n\022requiredExperience\030" +
-      "\002 \001(\005B\013B\tUserProto"
+      "roto\022\017\n\007maxCash\030\002 \001(\005\022\016\n\006maxOil\030\003 \001(\005\"\375\001" +
+      "\n\036UserFacebookInviteForSlotProto\022\020\n\010invi" +
+      "teId\030\001 \001(\005\022?\n\007inviter\030\002 \001(\0132..com.lvl6.p" +
+      "roto.MinimumUserProtoWithFacebookId\022\033\n\023r" +
+      "ecipientFacebookId\030\003 \001(\t\022\024\n\014timeOfInvite" +
+      "\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022\024\n\014userStru",
+      "ctId\030\006 \001(\005\022\023\n\013structFbLvl\030\007 \001(\005\022\024\n\014redee" +
+      "medTime\030\010 \001(\003\"\255\007\n\rFullUserProto\022\016\n\006userI" +
+      "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\014\n\004" +
+      "gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022\013\n\003oil\030* \001(\005\022\022\n" +
+      "\nexperience\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001(" +
+      "\005\022\022\n\nbattlesWon\030\010 \001(\005\022\023\n\013battlesLost\030\t \001" +
+      "(\005\022\r\n\005flees\030\n \001(\005\022\024\n\014referralCode\030\013 \001(\t\022" +
+      "\024\n\014numReferrals\030\014 \001(\005\022\025\n\rlastLoginTime\030\016" +
+      " \001(\003\022\026\n\016lastLogoutTime\030\017 \001(\003\022\016\n\006isFake\030\023" +
+      " \001(\010\022\017\n\007isAdmin\030\025 \001(\010\022$\n\034numCoinsRetriev",
+      "edFromStructs\030\027 \001(\005\022\"\n\032numOilRetrievedFr" +
+      "omStructs\030+ \001(\005\022.\n\004clan\030\031 \001(\0132 .com.lvl6" +
+      ".proto.MinimumClanProto\022\033\n\023hasReceivedfb" +
+      "Reward\030\034 \001(\010\022!\n\031numBeginnerSalesPurchase" +
+      "d\030\036 \001(\005\022\027\n\017hasActiveShield\030\037 \001(\010\022\025\n\rshie" +
+      "ldEndTime\030  \001(\003\022\013\n\003elo\030! \001(\005\022\014\n\004rank\030\" \001" +
+      "(\t\022\022\n\nattacksWon\030$ \001(\005\022\023\n\013defensesWon\030% " +
+      "\001(\005\022\023\n\013attacksLost\030& \001(\005\022\024\n\014defensesLost" +
+      "\030\' \001(\005\022\022\n\nfacebookId\030( \001(\t\022\014\n\004udid\030\r \001(\t" +
+      "\022\023\n\013deviceToken\030\020 \001(\t\022\"\n\032lastBattleNotif",
+      "icationTime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\n" +
+      "createTime\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030n" +
+      "umConsecutiveDaysPlayed\030\030 \001(\005\022$\n\034lastWal" +
+      "lPostNotificationTime\030\032 \001(\003\022\021\n\tkabamNaid" +
+      "\030\033 \001(\t\022\035\n\025inBattleShieldEndTime\030# \001(\003\"E\n" +
+      "\030StaticUserLevelInfoProto\022\r\n\005level\030\001 \001(\005" +
+      "\022\032\n\022requiredExperience\030\002 \001(\005B\013B\tUserProt" +
+      "o"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7242,7 +7185,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_MinimumClanProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumClanProto_descriptor,
-              new java.lang.String[] { "ClanId", "Name", "OwnerId", "CreateTime", "Description", "Tag", "RequestToJoinRequired", },
+              new java.lang.String[] { "ClanId", "Name", "CreateTime", "Description", "Tag", "RequestToJoinRequired", },
               com.lvl6.proto.UserProto.MinimumClanProto.class,
               com.lvl6.proto.UserProto.MinimumClanProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumUserProto_descriptor =

@@ -145,8 +145,20 @@ public class CreateInfoProtoUtils {
 
   public static FullClanProtoWithClanSize createFullClanProtoWithClanSize(Clan c) {
     FullClanProto clan = createFullClanProtoFromClan(c);
-    List<UserClan> userClanMembersInClan = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(c.getId());
-    int size = (userClanMembersInClan != null) ? userClanMembersInClan.size() : 0;
+    int clanId = c.getId();
+
+    List<Integer> statuses = new ArrayList<Integer>();
+    statuses.add(UserClanStatus.LEADER_VALUE);
+    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+    statuses.add(UserClanStatus.CAPTAIN_VALUE);
+    statuses.add(UserClanStatus.MEMBER_VALUE);
+    
+    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    		.getUserIdsWithStatuses(clanId, statuses);
+    int size = 0;
+    if (null != userIds) {
+    	size = userIds.size();
+    }
     return FullClanProtoWithClanSize.newBuilder().setClan(clan).setClanSize(size).build();
   }
 
