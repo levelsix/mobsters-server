@@ -141,6 +141,9 @@ import com.lvl6.utils.RetrieveUtils;
               }
               
             }
+            log.info("resBuilder=" + resBuilder);
+            log.info("resbuilder.build()=" + resBuilder.build());
+            
           }
         } else {
           List<Clan> clans = null;
