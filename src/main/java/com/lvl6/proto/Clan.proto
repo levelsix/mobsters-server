@@ -110,7 +110,7 @@ message ClanRaidStageRewardProto {
 
 message PersistentClanEventProto {
 	optional int32 clanEventId = 1;
-	optional DayOfWeek dayOfWeek = 2;
+	optional DayOfWeek dayOfWeek = 2 [default = MONDAY];
 	optional int32 startHour = 3;
 	optional int32 eventDurationMinutes = 4;
 	optional int32 clanRaidId = 5;
