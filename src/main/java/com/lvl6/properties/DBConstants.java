@@ -126,7 +126,21 @@ public class DBConstants {
   public static final String CLAN_CHAT_POST__CLAN_ID = "clan_id";
   public static final String CLAN_CHAT_POST__TIME_OF_POST = "time_of_post";
   public static final String CLAN_CHAT_POST__CONTENT = "content";
-
+  
+  //keeps track of clan's progress in clan raid stage
+  /*CLAN EVENT PERSISTENT FOR CLAN*/
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID = "clan_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
+  //the primary key in clan_raid
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CR_ID = "cr_id";
+  //the primary key in clan_raid_stage
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID = "crs_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_START_TIME = "stage_start_time";
+  //the primary key in clan_raid_stage_monster
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID = "crsm_id";
+  //Used to differentiate attacks across different stage monsters
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME = "stage_monster_start_time";
+  
   /*USER CLANS*/
   public static final String CLAN_FOR_USER__USER_ID = "user_id";
   public static final String CLAN_FOR_USER__CLAN_ID = "clan_id";

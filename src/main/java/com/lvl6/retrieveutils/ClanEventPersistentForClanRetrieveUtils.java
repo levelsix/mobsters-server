@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,33 +24,36 @@ import com.lvl6.utils.DBConnection;
 	private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
 
 
-	public static List<ClanEventPersistentForClan> getUserPersistentEventForUserId(int userId) {
+	public static ClanEventPersistentForClan getPersistentEventForClanId(int clanId) {
 		Connection conn = null;
 		ResultSet rs = null;
-		List<ClanEventPersistentForClan> userPersistentEvent = new ArrayList<ClanEventPersistentForClan>();
+		
+		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
+    absoluteConditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
+     
+		
+		ClanEventPersistentForClan clanPersistentEvent = null;
 		try {
 			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsByUserId(conn, userId, TABLE_NAME);
-			userPersistentEvent = grabUserPersistentEventFromRS(rs);
+			rs = DBConnection.get().selectRowsByUserId(conn, clanId, TABLE_NAME);
+			clanPersistentEvent = grabClanEventPersistentForClanFromRS(rs);
 		} catch (Exception e) {
     	log.error("clan event persistent for clan retrieve db error.", e);
     } finally {
     	DBConnection.get().close(rs, null, conn);
     }
-		return userPersistentEvent;
+		return clanPersistentEvent;
 	}
 
-	private static List<ClanEventPersistentForClan> grabUserPersistentEventFromRS(ResultSet rs) {
+	private static ClanEventPersistentForClan grabClanEventPersistentForClanFromRS(ResultSet rs) {
 		if (rs != null) {
 			try {
 				rs.last();
 				rs.beforeFirst();
-				List<ClanEventPersistentForClan> userCityExpansionDatas = new ArrayList<ClanEventPersistentForClan>();
 				while(rs.next()) {
 					ClanEventPersistentForClan uc = convertRSRowToUserCityExpansionData(rs);
-					userCityExpansionDatas.add(uc);
+					return uc;
 				}
-				return userCityExpansionDatas;
 			} catch (SQLException e) {
 				log.error("problem with database call.", e);
 
@@ -64,21 +67,37 @@ import com.lvl6.utils.DBConnection;
 	 */
 	private static ClanEventPersistentForClan convertRSRowToUserCityExpansionData(ResultSet rs) throws SQLException {
 		int i = 1;
-		int userId = rs.getInt(i++);
-		int eventId = rs.getInt(i++);
+		int clanId = rs.getInt(i++);
+		int clanEventPersistentId = rs.getInt(i++);
 
-		Date timeOfEntry = null;
+		int crId = rs.getInt(i++);
+		int crsId = rs.getInt(i++);
+		
+		Date stageStartTime = null;
 		try {
 			Timestamp ts = rs.getTimestamp(i++);
 			if (!rs.wasNull()) {
-				timeOfEntry = new Date(ts.getTime());
+				stageStartTime = new Date(ts.getTime());
 			}
 		} catch (Exception e) {
-			log.error("time of entry was null?. userId=" + userId + ", eventId=" + eventId +
-					", timeOfEntry=" + timeOfEntry);
+			log.error("stage start time was null?. clanId=" + clanId + ", eventId=" +
+					clanEventPersistentId + ", startTime=" + stageStartTime);
+		}
+		
+		int crsmId = rs.getInt(i++);
+		Date stageMonsterStartTime = null;
+		try {
+			Timestamp ts = rs.getTimestamp(i++);
+			if (!rs.wasNull()) {
+				stageMonsterStartTime = new Date(ts.getTime());
+			}
+		} catch (Exception e) {
+			log.error("stage monster start time was null?. clanId=" + clanId + ", eventId=" +
+					clanEventPersistentId + ", startTime=" + stageMonsterStartTime);
 		}
 
-		return new ClanEventPersistentForClan(userId, eventId, timeOfEntry);
+		return new ClanEventPersistentForClan(clanId, clanEventPersistentId, crId, crsId,
+				stageStartTime, crsmId, stageMonsterStartTime);
 	}
 
 }

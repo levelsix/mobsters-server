@@ -103,7 +103,7 @@ message ClanRaidStageRewardProto {
 	optional int32 maxCashReward = 6;
 	optional int32 monsterId = 7;
 	
-	//optional int32 expectedMonsterReward = 8; //don't think client needs this
+	//optional int32 expectedMonsterRewardQuantity = 8; //don't think client needs this
 }
 
 //------------------------------------------------------------------------------------------
@@ -114,6 +114,19 @@ message PersistentClanEventProto {
 	optional int32 startHour = 3;
 	optional int32 eventDurationMinutes = 4;
 	optional int32 clanRaidId = 5;
+}
+
+//must be sent every time user wants to attack a clan raid stage monster or end a raid
+message PersistentClanEventClanInfoProto {
+	optional int32 clanId = 1;
+	optional int32 clanEventId = 2;
+	optional int32 clanRaidId = 3;
+	optional int32 clanRaidStageId = 4;
+	optional int64 stageStartTime = 5;
+	optional int32 crsmId = 6;
+	
+	//Used to differentiate attacks across different stage monsters
+	optional int64 stageMonsterStartTime = 7;
 }
 
 //------------------------------------------------------------------------------------------

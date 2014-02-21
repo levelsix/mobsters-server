@@ -3,6 +3,7 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.properties.DBConstants;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.DBConnection;
 
 @Component @DependsOn("gameServer") public class ClanEventPersistentRetrieveUtils {
@@ -20,8 +22,54 @@ import com.lvl6.utils.DBConnection;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT;
+  private static String[] dates = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY",
+		"SATURDAY", "SUNDAY"};
   
   private static Map<Integer, ClanEventPersistent> eventIdToEvent;
+  
+
+	//this method assumes that clan raids don't overlap so only one is active at the moment
+	public static Map<Integer, ClanEventPersistent> getActiveClanRaidIdsToEvents(
+			Date curDate, TimeUtils timeUtils) {
+		log.debug("retrieving data for current persistent clan event");
+		if (null == eventIdToEvent) {
+			setStaticEventIdsToEvents();
+		}
+		Map<Integer, ClanEventPersistent> raidIdToEvent = new HashMap<Integer, ClanEventPersistent>();
+		
+		//day of week starts off at 1
+		int dayOfWeek = timeUtils.getDayOfWeekPst(curDate) - 1; 
+		String dow = dates[dayOfWeek];
+		
+		//go through each event and see which ones are active
+		for (ClanEventPersistent cep : eventIdToEvent.values()) {
+			if (!dow.equalsIgnoreCase(cep.getDayOfWeek())) {
+				continue;
+			}
+			
+			//found clan raid that is today, check if correct time
+			int hour = cep.getStartHour();
+			int minutesAddend = cep.getEventDurationMinutes();
+			
+			Date eventStartTime = timeUtils.createPstDateSetHour(hour, 0);
+			if (!timeUtils.isFirstEarlierThanSecond(eventStartTime, curDate)) {
+				//event has not started yet.
+				continue;
+			}
+			
+			//raid started before now, check if ends after now
+			Date eventEndTime = timeUtils.createPstDateSetHour(hour, minutesAddend);
+			if (!timeUtils.isFirstEarlierThanSecond(curDate, eventEndTime)) {
+				//event has ended already.
+				continue;
+			}
+			
+			//current date is in between start and end time for event.
+			int clanRaidId = cep.getClanRaidId();
+			raidIdToEvent.put(clanRaidId, cep);
+		}
+		return raidIdToEvent;
+	}
   
   public static Map<Integer, ClanEventPersistent> getAllEventIdsToEvents() {
   	if (null == eventIdToEvent) {

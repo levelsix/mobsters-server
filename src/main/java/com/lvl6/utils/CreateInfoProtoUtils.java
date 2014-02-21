@@ -21,6 +21,7 @@ import com.lvl6.info.CityElement;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
@@ -81,6 +82,7 @@ import com.lvl6.proto.ClanProto.FullClanProto;
 import com.lvl6.proto.ClanProto.FullClanProtoWithClanSize;
 import com.lvl6.proto.ClanProto.FullUserClanProto;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
+import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
@@ -1686,6 +1688,30 @@ public class CreateInfoProtoUtils {
   	pcepb.setClanRaidId(cep.getClanRaidId());
   	
   	return pcepb.build();
+  }
+  
+  public static PersistentClanEventClanInfoProto createPersistentClanEventClanInfoProto(
+  		ClanEventPersistentForClan cepfc) {
+  	PersistentClanEventClanInfoProto.Builder pcecipb = PersistentClanEventClanInfoProto.newBuilder();
+  	pcecipb.setClanId(cepfc.getClanId());
+  	pcecipb.setClanEventId(cepfc.getClanEventPersistentId());
+  	pcecipb.setClanRaidId(cepfc.getCrId());
+  	
+  	pcecipb.setClanRaidStageId(cepfc.getCrsId());
+  	Date stageStartTime = cepfc.getStageStartTime();
+  	if (null != stageStartTime) {
+  		pcecipb.setStageStartTime(stageStartTime.getTime());
+  	} else {
+  		
+  	}
+  	
+  	pcecipb.setClanRaidStageMonsterId(cepfc.getCrsmId());
+  	Date stageMonsterStartTime = cepfc.getStageMonsterStartTime();
+  	if (null != stageMonsterStartTime) {
+  		pcecipb.setStageMonsterStartTime(stageMonsterStartTime.getTime());
+  	}
+  	
+  	return pcecipb.build();
   }
   
 }

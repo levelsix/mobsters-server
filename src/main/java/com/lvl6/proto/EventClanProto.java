@@ -14836,9 +14836,14 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.MinimumUserProtoForClans getSender();
     com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getSenderOrBuilder();
     
-    // optional int32 raidId = 2;
-    boolean hasRaidId();
-    int getRaidId();
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+    boolean hasEventDetails();
+    com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails();
+    com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder();
+    
+    // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
+    boolean hasStatus();
+    com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus();
   }
   public static final class BeginClanRaidResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -14873,13 +14878,15 @@ public final class EventClanProto {
       SUCCESS(0, 1),
       FAIL_ALREADY_STARTED(1, 2),
       FAIL_NOT_AUTHORIZED(2, 3),
-      FAIL_OTHER(3, 4),
+      FAIL_NO_ACTIVE_CLAN_RAID(3, 4),
+      FAIL_OTHER(4, 5),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_ALREADY_STARTED_VALUE = 2;
       public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
-      public static final int FAIL_OTHER_VALUE = 4;
+      public static final int FAIL_NO_ACTIVE_CLAN_RAID_VALUE = 4;
+      public static final int FAIL_OTHER_VALUE = 5;
       
       
       public final int getNumber() { return value; }
@@ -14889,7 +14896,8 @@ public final class EventClanProto {
           case 1: return SUCCESS;
           case 2: return FAIL_ALREADY_STARTED;
           case 3: return FAIL_NOT_AUTHORIZED;
-          case 4: return FAIL_OTHER;
+          case 4: return FAIL_NO_ACTIVE_CLAN_RAID;
+          case 5: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -14920,7 +14928,7 @@ public final class EventClanProto {
       }
       
       private static final BeginClanRaidStatus[] VALUES = {
-        SUCCESS, FAIL_ALREADY_STARTED, FAIL_NOT_AUTHORIZED, FAIL_OTHER, 
+        SUCCESS, FAIL_ALREADY_STARTED, FAIL_NOT_AUTHORIZED, FAIL_NO_ACTIVE_CLAN_RAID, FAIL_OTHER, 
       };
       
       public static BeginClanRaidStatus valueOf(
@@ -14957,19 +14965,33 @@ public final class EventClanProto {
       return sender_;
     }
     
-    // optional int32 raidId = 2;
-    public static final int RAIDID_FIELD_NUMBER = 2;
-    private int raidId_;
-    public boolean hasRaidId() {
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+    public static final int EVENTDETAILS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_;
+    public boolean hasEventDetails() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public int getRaidId() {
-      return raidId_;
+    public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails() {
+      return eventDetails_;
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder() {
+      return eventDetails_;
+    }
+    
+    // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus status_;
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus() {
+      return status_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
-      raidId_ = 0;
+      eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14987,7 +15009,10 @@ public final class EventClanProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, raidId_);
+        output.writeMessage(2, eventDetails_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -15004,7 +15029,11 @@ public final class EventClanProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, raidId_);
+          .computeMessageSize(2, eventDetails_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15123,6 +15152,7 @@ public final class EventClanProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getEventDetailsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -15137,8 +15167,14 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        raidId_ = 0;
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+        } else {
+          eventDetailsBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -15188,7 +15224,15 @@ public final class EventClanProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.raidId_ = raidId_;
+        if (eventDetailsBuilder_ == null) {
+          result.eventDetails_ = eventDetails_;
+        } else {
+          result.eventDetails_ = eventDetailsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.status_ = status_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15208,8 +15252,11 @@ public final class EventClanProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasRaidId()) {
-          setRaidId(other.getRaidId());
+        if (other.hasEventDetails()) {
+          mergeEventDetails(other.getEventDetails());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15251,9 +15298,24 @@ public final class EventClanProto {
               setSender(subBuilder.buildPartial());
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              raidId_ = input.readInt32();
+            case 18: {
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder subBuilder = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder();
+              if (hasEventDetails()) {
+                subBuilder.mergeFrom(getEventDetails());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setEventDetails(subBuilder.buildPartial());
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus value = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                status_ = value;
+              }
               break;
             }
           }
@@ -15352,23 +15414,116 @@ public final class EventClanProto {
         return senderBuilder_;
       }
       
-      // optional int32 raidId = 2;
-      private int raidId_ ;
-      public boolean hasRaidId() {
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+      private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> eventDetailsBuilder_;
+      public boolean hasEventDetails() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public int getRaidId() {
-        return raidId_;
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails() {
+        if (eventDetailsBuilder_ == null) {
+          return eventDetails_;
+        } else {
+          return eventDetailsBuilder_.getMessage();
+        }
       }
-      public Builder setRaidId(int value) {
+      public Builder setEventDetails(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
+        if (eventDetailsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          eventDetails_ = value;
+          onChanged();
+        } else {
+          eventDetailsBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000002;
-        raidId_ = value;
+        return this;
+      }
+      public Builder setEventDetails(
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder builderForValue) {
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = builderForValue.build();
+          onChanged();
+        } else {
+          eventDetailsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeEventDetails(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
+        if (eventDetailsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              eventDetails_ != com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance()) {
+            eventDetails_ =
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder(eventDetails_).mergeFrom(value).buildPartial();
+          } else {
+            eventDetails_ = value;
+          }
+          onChanged();
+        } else {
+          eventDetailsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearEventDetails() {
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          eventDetailsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder getEventDetailsBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getEventDetailsFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder() {
+        if (eventDetailsBuilder_ != null) {
+          return eventDetailsBuilder_.getMessageOrBuilder();
+        } else {
+          return eventDetails_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> 
+          getEventDetailsFieldBuilder() {
+        if (eventDetailsBuilder_ == null) {
+          eventDetailsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
+                  eventDetails_,
+                  getParentForChildren(),
+                  isClean());
+          eventDetails_ = null;
+        }
+        return eventDetailsBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
+      private com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus() {
+        return status_;
+      }
+      public Builder setStatus(com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
         onChanged();
         return this;
       }
-      public Builder clearRaidId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        raidId_ = 0;
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -15638,13 +15793,17 @@ public final class EventClanProto {
       "\022\017\n\013NOT_IN_CLAN\020\003\022\r\n\tNOT_OWNER\020\004\"v\n\031Begi" +
       "nClanRaidRequestProto\0228\n\006sender\030\001 \001(\0132(." +
       "com.lvl6.proto.MinimumUserProtoForClans\022" +
-      "\017\n\007curTime\030\002 \001(\003\022\016\n\006raidId\030\003 \001(\005\"\315\001\n\032Beg" +
+      "\017\n\007curTime\030\002 \001(\003\022\016\n\006raidId\030\003 \001(\005\"\364\002\n\032Beg" +
       "inClanRaidResponseProto\0228\n\006sender\030\001 \001(\0132" +
       "(.com.lvl6.proto.MinimumUserProtoForClan" +
-      "s\022\016\n\006raidId\030\002 \001(\005\"e\n\023BeginClanRaidStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_ALREADY_STARTED\020\002\022",
-      "\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\016\n\nFAIL_OTHER\020\004" +
-      "B\020B\016EventClanProto"
+      "s\022F\n\014eventDetails\030\002 \001(\01320.com.lvl6.proto" +
+      ".PersistentClanEventClanInfoProto\022N\n\006sta",
+      "tus\030\003 \001(\0162>.com.lvl6.proto.BeginClanRaid" +
+      "ResponseProto.BeginClanRaidStatus\"\203\001\n\023Be" +
+      "ginClanRaidStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_A" +
+      "LREADY_STARTED\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020" +
+      "\003\022\034\n\030FAIL_NO_ACTIVE_CLAN_RAID\020\004\022\016\n\nFAIL_" +
+      "OTHER\020\005B\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15824,7 +15983,7 @@ public final class EventClanProto {
           internal_static_com_lvl6_proto_BeginClanRaidResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "RaidId", },
+              new java.lang.String[] { "Sender", "EventDetails", "Status", },
               com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.class,
               com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.Builder.class);
           return null;

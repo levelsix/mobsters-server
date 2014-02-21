@@ -1060,4 +1060,27 @@ public class InsertUtils implements InsertUtil{
     		insertParams, relativeUpdates, absoluteUpdates);
     return numInserted;
 	}
+	
+	@Override
+	public int insertIntoClanEventPersistentForClan(int clanId, int clanEventPersistentId,
+			int clanRaidId, int clanRaidStageId, Timestamp stageStartTime,
+			int clanRaidStageMonsterId, Timestamp stageMonsterStartTime) {
+		String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
+		
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_EVENT_PERSISTENT_ID,
+				clanEventPersistentId);
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CR_ID, clanRaidId);
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID, clanRaidStageId);
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_START_TIME, 
+				stageStartTime);
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID, clanRaidStageMonsterId);
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME,
+				stageMonsterStartTime);
+
+		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+
+		return numUpdated;
+	}
 }

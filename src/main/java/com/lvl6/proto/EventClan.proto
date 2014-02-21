@@ -249,10 +249,12 @@ message ChangeClanJoinTypeResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//only clan leader sends this. This request initializes the clan raid for the day.
+
+//a clan can only have at max one clan raid/event going on at once.
 message BeginClanRaidRequestProto {
 	optional MinimumUserProtoForClans sender = 1;
 	optional int64 curTime = 2;
+	//Example. If 7 raids and numbered 1-7, raidId is one of these numbers
 	optional int32 raidId = 3;
 	
 }
@@ -261,14 +263,17 @@ message BeginClanRaidRequestProto {
 message BeginClanRaidResponseProto {
 	optional MinimumUserProtoForClans sender = 1;
 	
-	//if 7 raids and numbered 1-7, raidId is one of these numbers
-	optional int32 raidId = 2;
+	//must be sent every time user wants to attack a clan raid stage monster or end a raid
+	optional PersistentClanEventClanInfoProto eventDetails = 2;
+	
+	optional BeginClanRaidStatus status = 3;
 	
 	enum BeginClanRaidStatus {
 		SUCCESS = 1;
 		FAIL_ALREADY_STARTED = 2;
 		FAIL_NOT_AUTHORIZED = 3; //regular members can't start it
-		FAIL_OTHER = 4;
+		FAIL_NO_ACTIVE_CLAN_RAID = 4;
+		FAIL_OTHER = 5;
 	}
 	
 }
