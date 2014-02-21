@@ -1705,7 +1705,7 @@ public class CreateInfoProtoUtils {
   		
   	}
   	
-  	pcecipb.setClanRaidStageMonsterId(cepfc.getCrsmId());
+  	pcecipb.setCrsmId(cepfc.getCrsmId());
   	Date stageMonsterStartTime = cepfc.getStageMonsterStartTime();
   	if (null != stageMonsterStartTime) {
   		pcecipb.setStageMonsterStartTime(stageMonsterStartTime.getTime());
