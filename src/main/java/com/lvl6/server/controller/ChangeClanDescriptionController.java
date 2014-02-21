@@ -1,5 +1,8 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -13,6 +16,7 @@ import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.ChangeClanDescriptionRequestProto;
 import com.lvl6.proto.EventClanProto.ChangeClanDescriptionResponseProto;
 import com.lvl6.proto.EventClanProto.ChangeClanDescriptionResponseProto.Builder;
@@ -100,9 +104,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.error("user not in clan");
       return false;      
     }
-    if (clan.getOwnerId() != user.getId()) {
+    
+    int clanId = user.getClanId();
+    List<Integer> statuses = new ArrayList<Integer>();
+    statuses.add(UserClanStatus.LEADER_VALUE);
+    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    		.getUserIdsWithStatuses(clanId, statuses);
+    //should just be one id
+    int clanOwnerId = 0;
+    if (null != userIds && !userIds.isEmpty()) {
+    	clanOwnerId = userIds.get(0);
+    }
+    
+    if (clanOwnerId != user.getId()) {
       resBuilder.setStatus(ChangeClanDescriptionStatus.NOT_OWNER);
-      log.error("clan owner isn't this guy, clan owner id is " + clan.getOwnerId());
+      log.error("clan owner isn't this guy, clan owner id is " + clanOwnerId);
       return false;      
     }
     resBuilder.setStatus(ChangeClanDescriptionStatus.SUCCESS);

@@ -225,7 +225,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int i = 1;
 
     int id = rs.getInt(i++);
-    int ownerId = rs.getInt(i++);
+//    int ownerId = rs.getInt(i++);
     String name = rs.getString(i++);
     
     Date createTime = null;
@@ -242,7 +242,6 @@ import com.lvl6.utils.utilmethods.StringUtils;
       requestToJoinRequired = true;
     }
     
-    return new Clan(id, ownerId, name, createTime, description,
-    		tag, requestToJoinRequired);
+    return new Clan(id, name, createTime, description, tag, requestToJoinRequired);
   }
 }

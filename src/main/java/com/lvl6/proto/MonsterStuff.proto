@@ -36,6 +36,8 @@ message MonsterProto {
 	
 	optional int32 evolutionCost = 21;
 	
+	optional AnimationType attackAnimationType = 22;
+	
 	enum MonsterQuality {
 		COMMON = 1;
 		RARE = 2;
@@ -55,6 +57,11 @@ message MonsterProto {
 		DARKNESS = 5; //beats lightning
 		
 		ROCK = 6; //damages everything
+	}
+	
+	enum AnimationType {
+		MELEE = 1;
+		RANGED = 2;
 	}
 }
 

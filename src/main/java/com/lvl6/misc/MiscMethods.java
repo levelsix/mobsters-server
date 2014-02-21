@@ -29,6 +29,8 @@ import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
+import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanRaid;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
@@ -57,6 +59,8 @@ import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
+import com.lvl6.proto.ClanProto.ClanRaidProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
@@ -88,6 +92,11 @@ import com.lvl6.retrieveutils.rarechange.BoosterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
@@ -130,40 +139,6 @@ public class MiscMethods {
   public static final String boosterPackId = "boosterPackId";
 
 
-  //  public static float calculateChanceOfSuccessForForge(Equipment equipment, int goalLevel) {
-  //    return  (1-equipment.getChanceOfForgeFailureBase()) - 
-  //        ((1-equipment.getChanceOfForgeFailureBase()) / (ControllerConstants.FORGE_MAX_EQUIP_LEVEL - 1)) * 
-  //        (goalLevel-2);
-  //  }
-
-  //  public static int calculateDiamondCostToSpeedupForgeWaittime(Equipment equipment, int goalLevel) {
-  //    return (int) Math.max(1, Math.ceil(ControllerConstants.FORGE_SPEEDUP_CONSTANT_A * 
-  //        Math.log(calculateMinutesToFinishForgeAttempt(equipment, goalLevel)) + 
-  //        ControllerConstants.FORGE_SPEEDUP_CONSTANT_B));
-  //  }
-
-  /* public static UserEquip chooseUserEquipWithEquipIdPreferrablyNonEquippedIgnoreLevel(User user, List<UserEquip> userEquipsForEquipId) {
-    if (user == null || userEquipsForEquipId == null || userEquipsForEquipId.size() <= 0) {
-      return null;
-    }
-    if (userEquipsForEquipId.size() == 1) {
-      return userEquipsForEquipId.get(0);
-    }
-    for (UserEquip ue : userEquipsForEquipId) {
-      if (ue != null) {
-        if (ue.getId() >= 1) {
-          if (ue.getId() == user.getWeaponEquippedUserEquipId() || ue.getId() == user.getArmorEquippedUserEquipId()
-              || ue.getId() == user.getAmuletEquippedUserEquipId()) {
-            continue;
-          } else {
-            return ue;
-          }
-        }
-      }
-    }
-    return null;
-  }*/
-
   public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
       StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
@@ -176,7 +151,6 @@ public class MiscMethods {
         while (st.hasMoreTokens()) {
           String tok = st.nextToken();
           StringTokenizer st2 = new StringTokenizer(tok, ".");
-          log.warn("Token: "+tok);
           if (st2.hasMoreTokens()) {
             Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
             if (st2.hasMoreTokens()) {
@@ -205,24 +179,6 @@ public class MiscMethods {
       returnValue.add(Integer.parseInt(st.nextToken()));
     }
   }
-
-  /*
-   * doesn't check if the user has the equip or not
-   */
-  /*public static boolean checkIfEquipIsEquippableOnUser(Equipment equip, User user) {
-    if (equip == null || user == null) return false;
-
-    //figure out how to implement this
-//    EquipClassType userClass = MiscMethods.getClassTypeFromUserType(user.getType());
-//    if (user.getLevel() >= equip.getMinLevel() && 
-//        (userClass == equip.getClassType() || equip.getClassType() == EquipClassType.ALL_AMULET)) {
-//      return true;
-//    }
-    if (user.getLevel() >= equip.getMinLevel()) {
-    	return true;
-    }
-    return false;
-  }*/
 
   public static String getIPOfPlayer(GameServer server, Integer playerId, String udid) {
     ConnectedPlayer player = null;
@@ -574,6 +530,10 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
     //    ClanBossRetrieveUtils.reload();
     //    ClanBossRewardRetrieveUtils.reload();
+    ClanRaidRetrieveUtils.reload();
+    ClanRaidStageRetrieveUtils.reload();
+    ClanRaidStageMonsterRetrieveUtils.reload();
+    ClanRaidStageRewardRetrieveUtils.reload();
     EventPersistentRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
@@ -1270,6 +1230,7 @@ public class MiscMethods {
   	setStructures(sdpb);
   	setEvents(sdpb);
   	setMonsterDialogue(sdpb);
+  	setClanRaidStuff(sdpb);
   	
   	return sdpb.build();
   }
@@ -1512,7 +1473,7 @@ public class MiscMethods {
       EventPersistent event  = idsToEvents.get(eventId);
       PersistentEventProto eventProto = CreateInfoProtoUtils
           .createPersistentEventProtoFromEvent(event);
-      sdpb.addEvents(eventProto);
+      sdpb.addPersistentEvents(eventProto);
     }
   }
   
@@ -1533,4 +1494,25 @@ public class MiscMethods {
   	sdpb.addAllMbds(dialogueList);
   }
 
+  private static void setClanRaidStuff(Builder sdpb) {
+  	Map<Integer, ClanRaid> idsToClanRaid = ClanRaidRetrieveUtils.getClanRaidIdsToClanRaids();
+  	List<ClanRaidProto> raidList = new ArrayList<ClanRaidProto>();
+  	for (ClanRaid cr : idsToClanRaid.values()) {
+  		ClanRaidProto crProto = CreateInfoProtoUtils.createClanRaidProto(cr);
+  		raidList.add(crProto);
+  	}
+  	sdpb.addAllRaids(raidList);
+  	
+  	
+  	//protofy clan events
+  	List<PersistentClanEventProto> clanEventProtos = new ArrayList<PersistentClanEventProto>();
+  	Map<Integer, ClanEventPersistent> idsToClanEventPersistent =
+  			ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
+  	for (ClanEventPersistent cep : idsToClanEventPersistent.values()) {
+  		PersistentClanEventProto pcep = CreateInfoProtoUtils.createPersistentClanEventProto(cep);
+  		clanEventProtos.add(pcep);
+  	}
+  	sdpb.addAllPersistentClanEvents(clanEventProtos);
+  }
+  
 }

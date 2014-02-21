@@ -8,6 +8,90 @@ public final class TaskProto {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
+  public enum DayOfWeek
+      implements com.google.protobuf.ProtocolMessageEnum {
+    SUNDAY(0, 1),
+    MONDAY(1, 2),
+    TUESDAY(2, 3),
+    WEDNESDAY(3, 4),
+    THURSDAY(4, 5),
+    FRIDAY(5, 6),
+    SATURDAY(6, 7),
+    ;
+    
+    public static final int SUNDAY_VALUE = 1;
+    public static final int MONDAY_VALUE = 2;
+    public static final int TUESDAY_VALUE = 3;
+    public static final int WEDNESDAY_VALUE = 4;
+    public static final int THURSDAY_VALUE = 5;
+    public static final int FRIDAY_VALUE = 6;
+    public static final int SATURDAY_VALUE = 7;
+    
+    
+    public final int getNumber() { return value; }
+    
+    public static DayOfWeek valueOf(int value) {
+      switch (value) {
+        case 1: return SUNDAY;
+        case 2: return MONDAY;
+        case 3: return TUESDAY;
+        case 4: return WEDNESDAY;
+        case 5: return THURSDAY;
+        case 6: return FRIDAY;
+        case 7: return SATURDAY;
+        default: return null;
+      }
+    }
+    
+    public static com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>() {
+            public DayOfWeek findValueByNumber(int number) {
+              return DayOfWeek.valueOf(number);
+            }
+          };
+    
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.lvl6.proto.TaskProto.getDescriptor().getEnumTypes().get(0);
+    }
+    
+    private static final DayOfWeek[] VALUES = {
+      SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, 
+    };
+    
+    public static DayOfWeek valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+    
+    private final int index;
+    private final int value;
+    
+    private DayOfWeek(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+    
+    // @@protoc_insertion_point(enum_scope:com.lvl6.proto.DayOfWeek)
+  }
+  
   public interface TaskStageProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -2593,9 +2677,9 @@ public final class TaskProto {
     boolean hasEventId();
     int getEventId();
     
-    // optional .com.lvl6.proto.PersistentEventProto.DayOfWeek dayOfWeek = 2;
+    // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2;
     boolean hasDayOfWeek();
-    com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek getDayOfWeek();
+    com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek();
     
     // optional int32 startHour = 3;
     boolean hasStartHour();
@@ -2649,90 +2733,6 @@ public final class TaskProto {
       return com.lvl6.proto.TaskProto.internal_static_com_lvl6_proto_PersistentEventProto_fieldAccessorTable;
     }
     
-    public enum DayOfWeek
-        implements com.google.protobuf.ProtocolMessageEnum {
-      SUNDAY(0, 1),
-      MONDAY(1, 2),
-      TUESDAY(2, 3),
-      WEDNESDAY(3, 4),
-      THURSDAY(4, 5),
-      FRIDAY(5, 6),
-      SATURDAY(6, 7),
-      ;
-      
-      public static final int SUNDAY_VALUE = 1;
-      public static final int MONDAY_VALUE = 2;
-      public static final int TUESDAY_VALUE = 3;
-      public static final int WEDNESDAY_VALUE = 4;
-      public static final int THURSDAY_VALUE = 5;
-      public static final int FRIDAY_VALUE = 6;
-      public static final int SATURDAY_VALUE = 7;
-      
-      
-      public final int getNumber() { return value; }
-      
-      public static DayOfWeek valueOf(int value) {
-        switch (value) {
-          case 1: return SUNDAY;
-          case 2: return MONDAY;
-          case 3: return TUESDAY;
-          case 4: return WEDNESDAY;
-          case 5: return THURSDAY;
-          case 6: return FRIDAY;
-          case 7: return SATURDAY;
-          default: return null;
-        }
-      }
-      
-      public static com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<DayOfWeek>() {
-              public DayOfWeek findValueByNumber(int number) {
-                return DayOfWeek.valueOf(number);
-              }
-            };
-      
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return com.lvl6.proto.TaskProto.PersistentEventProto.getDescriptor().getEnumTypes().get(0);
-      }
-      
-      private static final DayOfWeek[] VALUES = {
-        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, 
-      };
-      
-      public static DayOfWeek valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-      
-      private final int index;
-      private final int value;
-      
-      private DayOfWeek(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-      
-      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.PersistentEventProto.DayOfWeek)
-    }
-    
     public enum EventType
         implements com.google.protobuf.ProtocolMessageEnum {
       ENHANCE(0, 1),
@@ -2775,7 +2775,7 @@ public final class TaskProto {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return com.lvl6.proto.TaskProto.PersistentEventProto.getDescriptor().getEnumTypes().get(1);
+        return com.lvl6.proto.TaskProto.PersistentEventProto.getDescriptor().getEnumTypes().get(0);
       }
       
       private static final EventType[] VALUES = {
@@ -2813,13 +2813,13 @@ public final class TaskProto {
       return eventId_;
     }
     
-    // optional .com.lvl6.proto.PersistentEventProto.DayOfWeek dayOfWeek = 2;
+    // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2;
     public static final int DAYOFWEEK_FIELD_NUMBER = 2;
-    private com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek dayOfWeek_;
+    private com.lvl6.proto.TaskProto.DayOfWeek dayOfWeek_;
     public boolean hasDayOfWeek() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek getDayOfWeek() {
+    public com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek() {
       return dayOfWeek_;
     }
     
@@ -2885,7 +2885,7 @@ public final class TaskProto {
     
     private void initFields() {
       eventId_ = 0;
-      dayOfWeek_ = com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek.SUNDAY;
+      dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.SUNDAY;
       startHour_ = 0;
       eventDurationMinutes_ = 0;
       taskId_ = 0;
@@ -3096,7 +3096,7 @@ public final class TaskProto {
         super.clear();
         eventId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        dayOfWeek_ = com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek.SUNDAY;
+        dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.SUNDAY;
         bitField0_ = (bitField0_ & ~0x00000002);
         startHour_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -3258,7 +3258,7 @@ public final class TaskProto {
             }
             case 16: {
               int rawValue = input.readEnum();
-              com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek value = com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek.valueOf(rawValue);
+              com.lvl6.proto.TaskProto.DayOfWeek value = com.lvl6.proto.TaskProto.DayOfWeek.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
@@ -3336,15 +3336,15 @@ public final class TaskProto {
         return this;
       }
       
-      // optional .com.lvl6.proto.PersistentEventProto.DayOfWeek dayOfWeek = 2;
-      private com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek dayOfWeek_ = com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek.SUNDAY;
+      // optional .com.lvl6.proto.DayOfWeek dayOfWeek = 2;
+      private com.lvl6.proto.TaskProto.DayOfWeek dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.SUNDAY;
       public boolean hasDayOfWeek() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek getDayOfWeek() {
+      public com.lvl6.proto.TaskProto.DayOfWeek getDayOfWeek() {
         return dayOfWeek_;
       }
-      public Builder setDayOfWeek(com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek value) {
+      public Builder setDayOfWeek(com.lvl6.proto.TaskProto.DayOfWeek value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3355,7 +3355,7 @@ public final class TaskProto {
       }
       public Builder clearDayOfWeek() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        dayOfWeek_ = com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek.SUNDAY;
+        dayOfWeek_ = com.lvl6.proto.TaskProto.DayOfWeek.SUNDAY;
         onChanged();
         return this;
       }
@@ -4010,21 +4010,21 @@ public final class TaskProto {
       "ward\030\003 \001(\005\022\022\n\ncashReward\030\004 \001(\005\022\032\n\022puzzle" +
       "PieceDropped\030\005 \001(\010\022\r\n\005level\030\006 \001(\005\022\016\n\006ite" +
       "mId\030\007 \001(\005\"3\n\013MonsterType\022\013\n\007REGULAR\020\001\022\r\n" +
-      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\331\003\n\024PersistentEve" +
-      "ntProto\022\017\n\007eventId\030\001 \001(\005\022A\n\tdayOfWeek\030\002 " +
-      "\001(\0162..com.lvl6.proto.PersistentEventProt" +
-      "o.DayOfWeek\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventD",
-      "urationMinutes\030\004 \001(\005\022\016\n\006taskId\030\005 \001(\005\022\027\n\017" +
-      "cooldownMinutes\030\006 \001(\005\022<\n\004type\030\007 \001(\0162..co" +
-      "m.lvl6.proto.PersistentEventProto.EventT" +
-      "ype\022C\n\016monsterElement\030\010 \001(\0162+.com.lvl6.p" +
-      "roto.MonsterProto.MonsterElement\"g\n\tDayO" +
-      "fWeek\022\n\n\006SUNDAY\020\001\022\n\n\006MONDAY\020\002\022\013\n\007TUESDAY" +
-      "\020\003\022\r\n\tWEDNESDAY\020\004\022\014\n\010THURSDAY\020\005\022\n\n\006FRIDA" +
-      "Y\020\006\022\014\n\010SATURDAY\020\007\"\'\n\tEventType\022\013\n\007ENHANC" +
-      "E\020\001\022\r\n\tEVOLUTION\020\002\"V\n\030UserPersistentEven" +
-      "tProto\022\016\n\006userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022",
-      "\031\n\021coolDownStartTime\030\003 \001(\003B\013B\tTaskProto"
+      "\tMINI_BOSS\020\002\022\010\n\004BOSS\020\003\"\333\002\n\024PersistentEve" +
+      "ntProto\022\017\n\007eventId\030\001 \001(\005\022,\n\tdayOfWeek\030\002 " +
+      "\001(\0162\031.com.lvl6.proto.DayOfWeek\022\021\n\tstartH" +
+      "our\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 \001(\005\022",
+      "\016\n\006taskId\030\005 \001(\005\022\027\n\017cooldownMinutes\030\006 \001(\005" +
+      "\022<\n\004type\030\007 \001(\0162..com.lvl6.proto.Persiste" +
+      "ntEventProto.EventType\022C\n\016monsterElement" +
+      "\030\010 \001(\0162+.com.lvl6.proto.MonsterProto.Mon" +
+      "sterElement\"\'\n\tEventType\022\013\n\007ENHANCE\020\001\022\r\n" +
+      "\tEVOLUTION\020\002\"V\n\030UserPersistentEventProto" +
+      "\022\016\n\006userId\030\001 \001(\005\022\017\n\007eventId\030\002 \001(\005\022\031\n\021coo" +
+      "lDownStartTime\030\003 \001(\003*g\n\tDayOfWeek\022\n\n\006SUN" +
+      "DAY\020\001\022\n\n\006MONDAY\020\002\022\013\n\007TUESDAY\020\003\022\r\n\tWEDNES" +
+      "DAY\020\004\022\014\n\010THURSDAY\020\005\022\n\n\006FRIDAY\020\006\022\014\n\010SATUR",
+      "DAY\020\007B\013B\tTaskProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

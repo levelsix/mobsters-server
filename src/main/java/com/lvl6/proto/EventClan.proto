@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "Clan.proto";
+import "MonsterStuff.proto";
 import "User.proto";
 
 package com.lvl6.proto;
@@ -153,7 +154,7 @@ message RetrieveClanInfoResponseProto {
 	optional int32 clanId = 7;
 	optional string clanName = 8;
 	optional int32 beforeThisClanId = 9;
-	
+	repeated UserCurrentMonsterTeamProto monsterTeams = 10;
 	
 	enum RetrieveClanInfoStatus {
 		SUCCESS = 1;
@@ -248,3 +249,27 @@ message ChangeClanJoinTypeResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+//only clan leader sends this. This request initializes the clan raid for the day.
+message BeginClanRaidRequestProto {
+	optional MinimumUserProtoForClans sender = 1;
+	optional int64 curTime = 2;
+	optional int32 raidId = 3;
+	
+}
+
+	//send to every clan member that raid started
+message BeginClanRaidResponseProto {
+	optional MinimumUserProtoForClans sender = 1;
+	
+	//if 7 raids and numbered 1-7, raidId is one of these numbers
+	optional int32 raidId = 2;
+	
+	enum BeginClanRaidStatus {
+		SUCCESS = 1;
+		FAIL_ALREADY_STARTED = 2;
+		FAIL_NOT_AUTHORIZED = 3; //regular members can't start it
+		FAIL_OTHER = 4;
+	}
+	
+}
+

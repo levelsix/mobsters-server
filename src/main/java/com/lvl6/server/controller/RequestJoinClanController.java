@@ -1,6 +1,7 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -205,7 +206,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
   
   private void notifyClan(User aUser, Clan aClan, boolean requestToJoinRequired) {
-    int clanOwnerId = aClan.getOwnerId();
+  	int clanId = aUser.getClanId();
+    List<Integer> statuses = new ArrayList<Integer>();
+    statuses.add(UserClanStatus.LEADER_VALUE);
+    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    		.getUserIdsWithStatuses(clanId, statuses);
+    //should just be one id
+    int clanOwnerId = 0;
+    if (null != userIds && !userIds.isEmpty()) {
+    	clanOwnerId = userIds.get(0);
+    }
     
     int level = aUser.getLevel();
     String requester = aUser.getName();

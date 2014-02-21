@@ -3,27 +3,27 @@ package com.lvl6.info;
 import java.io.Serializable;
 import java.util.Date;
 
-public class EventPersistentForUser implements Serializable {
+public class ClanEventPersistentForClan implements Serializable {
 	
-	private static final long serialVersionUID = -5875488219039765364L;
-	private int userId;
+	private static final long serialVersionUID = 3321531217790714106L;
+	private int clanId;
   private int eventPersistentId;
-  private Date timeOfEntry; // refers to time user started a daily event
-
-  public EventPersistentForUser(int userId, int eventPersistentId,
+  private Date timeOfEntry; // refers to time clan started a daily event
+  
+	public ClanEventPersistentForClan(int clanId, int eventPersistentId,
 			Date timeOfEntry) {
 		super();
-		this.userId = userId;
+		this.clanId = clanId;
 		this.eventPersistentId = eventPersistentId;
 		this.timeOfEntry = timeOfEntry;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getClanId() {
+		return clanId;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setClanId(int clanId) {
+		this.clanId = clanId;
 	}
 
 	public int getEventPersistentId() {
@@ -44,8 +44,9 @@ public class EventPersistentForUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "EventPersistentForUser [userId=" + userId + ", eventPersistentId="
-				+ eventPersistentId + ", timeOfEntry=" + timeOfEntry + "]";
+		return "ClanEventPersistentForClan [clanId=" + clanId
+				+ ", eventPersistentId=" + eventPersistentId + ", timeOfEntry="
+				+ timeOfEntry + "]";
 	}
  
 }

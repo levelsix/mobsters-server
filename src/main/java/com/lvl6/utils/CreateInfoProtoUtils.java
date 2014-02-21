@@ -20,6 +20,11 @@ import com.lvl6.info.City;
 import com.lvl6.info.CityElement;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
+import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanRaid;
+import com.lvl6.info.ClanRaidStage;
+import com.lvl6.info.ClanRaidStageMonster;
+import com.lvl6.info.ClanRaidStageReward;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
@@ -68,10 +73,15 @@ import com.lvl6.proto.CityProto.CityElementProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.CityProto.FullCityProto;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
+import com.lvl6.proto.ClanProto.ClanRaidProto;
+import com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto;
+import com.lvl6.proto.ClanProto.ClanRaidStageProto;
+import com.lvl6.proto.ClanProto.ClanRaidStageRewardProto;
 import com.lvl6.proto.ClanProto.FullClanProto;
 import com.lvl6.proto.ClanProto.FullClanProtoWithClanSize;
 import com.lvl6.proto.ClanProto.FullUserClanProto;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
+import com.lvl6.proto.ClanProto.PersistentClanEventProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
@@ -82,6 +92,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto.DialogueType;
 import com.lvl6.proto.MonsterStuffProto.MonsterLevelInfoProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -104,10 +115,10 @@ import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TownHallProto;
+import com.lvl6.proto.TaskProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
-import com.lvl6.proto.TaskProto.PersistentEventProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.PersistentEventProto.EventType;
 import com.lvl6.proto.TaskProto.TaskStageMonsterProto;
 import com.lvl6.proto.TaskProto.TaskStageProto;
@@ -122,6 +133,9 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageRetrieveUtils;
 
@@ -131,8 +145,20 @@ public class CreateInfoProtoUtils {
 
   public static FullClanProtoWithClanSize createFullClanProtoWithClanSize(Clan c) {
     FullClanProto clan = createFullClanProtoFromClan(c);
-    List<UserClan> userClanMembersInClan = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(c.getId());
-    int size = (userClanMembersInClan != null) ? userClanMembersInClan.size() : 0;
+    int clanId = c.getId();
+
+    List<Integer> statuses = new ArrayList<Integer>();
+    statuses.add(UserClanStatus.LEADER_VALUE);
+    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
+    statuses.add(UserClanStatus.CAPTAIN_VALUE);
+    statuses.add(UserClanStatus.MEMBER_VALUE);
+    
+    List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
+    		.getUserIdsWithStatuses(clanId, statuses);
+    int size = 0;
+    if (null != userIds) {
+    	size = userIds.size();
+    }
     return FullClanProtoWithClanSize.newBuilder().setClan(clan).setClanSize(size).build();
   }
 
@@ -416,18 +442,23 @@ public class CreateInfoProtoUtils {
   //	}
 
   public static FullClanProto createFullClanProtoFromClan(Clan c) {
-    MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
-    return FullClanProto.newBuilder().setClanId(c.getId()).setName(c.getName())
-        .setOwner(mup).setCreateTime(c.getCreateTime().getTime())
-        .setDescription(c.getDescription()).setTag(c.getTag())
-        .setRequestToJoinRequired(c.isRequestToJoinRequired()).build();
+//    MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
+    FullClanProto.Builder fcpb= FullClanProto.newBuilder();
+    fcpb.setClanId(c.getId());
+    fcpb.setName(c.getName());
+    fcpb.setCreateTime(c.getCreateTime().getTime());
+    fcpb.setDescription(c.getDescription());
+    fcpb.setTag(c.getTag());
+    fcpb.setRequestToJoinRequired(c.isRequestToJoinRequired());
+    
+    return fcpb.build();
   }
 
   public static MinimumClanProto createMinimumClanProtoFromClan(Clan c) {
     MinimumClanProto.Builder mcp = MinimumClanProto.newBuilder();
     mcp.setClanId(c.getId());
     mcp.setName(c.getName());
-    mcp.setOwnerId(c.getOwnerId());
+//    mcp.setOwnerId(c.getOwnerId());
     mcp.setCreateTime(c.getCreateTime().getTime());
     mcp.setDescription(c.getDescription());
     mcp.setTag(c.getTag());
@@ -1261,6 +1292,14 @@ public class CreateInfoProtoUtils {
     int cost = aMonster.getEvolutionCost();
     mpb.setEvolutionCost(cost);
     
+    aStr = aMonster.getAnimationType();
+    try {
+    	AnimationType typ = AnimationType.valueOf(aStr);
+    	mpb.setAttackAnimationType(typ);
+    } catch (Exception e) {
+    	log.error("invalid animation type for monster. type=" + aStr + "\t monster=" + aMonster, e);
+    }
+    
     return mpb.build();
   }
   
@@ -1524,4 +1563,129 @@ public class CreateInfoProtoUtils {
   	
   	return mbdpb.build();
   }
+  
+  public static ClanRaidProto createClanRaidProto(ClanRaid clanRaid) {
+  	ClanRaidProto.Builder crpb = ClanRaidProto.newBuilder();
+  	int clanRaidId = clanRaid.getId();
+  	crpb.setClanRaidId(clanRaidId);
+  	
+  	String aStr = clanRaid.getClanRaidName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setClanRaidName(aStr);
+  	}
+  	
+  	aStr = clanRaid.getActiveTitleImgName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setActiveTitleImgName(aStr);
+  	}
+  	
+  	aStr = clanRaid.getActiveBackgroundImgName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setActiveBackgroundImgName(aStr);
+  	}
+  	
+  	aStr = clanRaid.getActiveDescription();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setActiveDescription(aStr);
+  	}
+  	
+  	aStr = clanRaid.getInactiveMonsterImgName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setInactiveMonsterImgName(aStr);
+  	}
+  	
+  	aStr = clanRaid.getInactiveDescription();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setInactiveDescription(aStr);
+  	}
+  	
+  	aStr = clanRaid.getDialogueText();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setDialogueText(aStr);
+  	}
+  	
+  	aStr = clanRaid.getSpotlightMonsterImgName();
+  	if (null != aStr && !aStr.isEmpty()) {
+  		crpb.setSpotlightMonsterImgName(aStr);
+  	}
+  	
+  	//create the clan raid stage protos
+  	Map<Integer, ClanRaidStage> stages = ClanRaidStageRetrieveUtils
+  			.getClanRaidStagesForClanRaidId(clanRaidId);
+  	for (ClanRaidStage crs : stages.values()) {
+  		ClanRaidStageProto crsp = createClanRaidStageProto(crs); 
+  		crpb.addRaidStages(crsp);
+  	}
+  	
+  	return crpb.build();
+  }
+
+  public static ClanRaidStageProto createClanRaidStageProto(ClanRaidStage crs) {
+  	ClanRaidStageProto.Builder crspb = ClanRaidStageProto.newBuilder();
+  	int clanRaidStageId = crs.getId();
+  	crspb.setClanRaidStageId(clanRaidStageId);
+  	crspb.setClanRaidId(crs.getClanRaidId());
+  	crspb.setDurationMinutes(crs.getDurationMinutes());
+  	crspb.setStageNum(crs.getStageNum());
+  	
+  	//create the monster protos
+  	Map<Integer, ClanRaidStageMonster> monsters = ClanRaidStageMonsterRetrieveUtils
+  			.getClanRaidStageMonstersForClanRaidStageId(clanRaidStageId);
+  	
+  	for (ClanRaidStageMonster crsm : monsters.values()) {
+  		ClanRaidStageMonsterProto crsmp = createClanRaidStageMonsterProto(crsm);
+  		crspb.addMonsters(crsmp);
+  	}
+  	
+  	//create the reward protos
+  	Map<Integer, ClanRaidStageReward> possibleRewards = ClanRaidStageRewardRetrieveUtils
+  			.getClanRaidStageRewardsForClanRaidStageId(clanRaidStageId);
+  	for (ClanRaidStageReward crsr : possibleRewards.values()) {
+  		ClanRaidStageRewardProto crsrp = createClanRaidStageRewardProto(crsr);
+  		crspb.addPossibleRewards(crsrp);
+  	}
+  	
+  	return crspb.build();
+  }
+  
+  public static ClanRaidStageMonsterProto createClanRaidStageMonsterProto(ClanRaidStageMonster crsm) {
+  	ClanRaidStageMonsterProto.Builder crsmpb = ClanRaidStageMonsterProto.newBuilder();
+  	crsmpb.setCrsmId(crsm.getId());
+  	crsmpb.setMonsterId(crsm.getMonsterId());
+  	
+  	return crsmpb.build();
+  }
+  
+  public static ClanRaidStageRewardProto createClanRaidStageRewardProto(ClanRaidStageReward crsr) {
+  	ClanRaidStageRewardProto.Builder crsrpb = ClanRaidStageRewardProto.newBuilder();
+  	crsrpb.setCrsrId(crsr.getId());
+  	crsrpb.setMinOilReward(crsr.getMinOilReward());
+  	crsrpb.setMaxOilReward(crsr.getMaxOilReward());
+  	crsrpb.setMinCashReward(crsr.getMinCashReward());
+  	crsrpb.setMaxCashReward(crsr.getMaxCashReward());
+  	crsrpb.setMonsterId(crsr.getMonsterId());
+  	
+  	return crsrpb.build();
+  }
+  
+  public static PersistentClanEventProto createPersistentClanEventProto(ClanEventPersistent cep) {
+  	PersistentClanEventProto.Builder pcepb = PersistentClanEventProto.newBuilder();
+  	pcepb.setClanEventId(cep.getId());
+  	
+  	String dayOfWeekStr = cep.getDayOfWeek();
+  	try {
+  		DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayOfWeekStr);
+			pcepb.setDayOfWeek(dayOfWeek);
+		} catch (Exception e) {
+			log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t clanEvent=" + cep);
+		}
+  	
+  	
+  	pcepb.setStartHour(cep.getStartHour());
+  	pcepb.setEventDurationMinutes(cep.getEventDurationMinutes());
+  	pcepb.setClanRaidId(cep.getClanRaidId());
+  	
+  	return pcepb.build();
+  }
+  
 }

@@ -15,6 +15,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
 import com.lvl6.events.response.RetrieveClanInfoResponseEvent;
 import com.lvl6.info.Clan;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.properties.ControllerConstants;
@@ -24,6 +25,8 @@ import com.lvl6.proto.EventClanProto.RetrieveClanInfoRequestProto.ClanInfoGrabTy
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RetrieveClanInfoResponseProto.RetrieveClanInfoStatus;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
+import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
@@ -97,20 +100,44 @@ import com.lvl6.utils.RetrieveUtils;
             Set<Integer> userIds = new HashSet<Integer>();
             //this is because clan with 1k+ users overflows buffer when sending to client and need to 
             //include clan owner
-            Clan c = ClanRetrieveUtils.getClanWithId(clanId);
-            int ownerId = c.getOwnerId();
+            //UPDATE: well, the user clan status now specifies whether a person is a leader, so 
+            //owner id in clan is not needed
+//            Clan c = ClanRetrieveUtils.getClanWithId(clanId);
+//            int ownerId = c.getOwnerId();
             for (UserClan uc: userClans) {
               userIds.add(uc.getUserId());
             }
-            userIds.add(ownerId);
+//            userIds.add(ownerId);
             List<Integer> userIdList = new ArrayList<Integer>(userIds);
 
+            //get the users
             Map<Integer, User> usersMap = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIdList);
+            //get the monster battle teams for the users
+            Map<Integer, List<MonsterForUser>> userIdsToMonsterTeams = RetrieveUtils
+            		.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIdList);
 
             for (UserClan uc : userClans) {
-              MinimumUserProtoForClans minUser = CreateInfoProtoUtils.createMinimumUserProtoForClans(usersMap.get(uc.getUserId()), uc.getStatus());
+            	int userId = uc.getUserId();
+            	User u = usersMap.get(userId);
+              MinimumUserProtoForClans minUser = CreateInfoProtoUtils
+              		.createMinimumUserProtoForClans(u, uc.getStatus());
               resBuilder.addMembers(minUser);
+              
+              //create the monster team for this user if possible
+              if (userIdsToMonsterTeams.containsKey(userId)) {
+              	List<MonsterForUser> monsterTeam = userIdsToMonsterTeams.get(userId);
+              	List<FullUserMonsterProto> proto = CreateInfoProtoUtils
+              			.createFullUserMonsterProtoList(monsterTeam);
+              	
+              	//create the user monster team proto via the builder
+            		UserCurrentMonsterTeamProto.Builder teamForUser = UserCurrentMonsterTeamProto.newBuilder();
+            		teamForUser.setUserId(userId);
+            		teamForUser.addAllCurrentTeam(proto);
+            		resBuilder.addMonsterTeams(teamForUser.build());
+              }
+              
             }
+            
           }
         } else {
           List<Clan> clans = null;

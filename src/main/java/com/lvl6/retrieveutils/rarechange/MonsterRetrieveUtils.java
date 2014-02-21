@@ -141,11 +141,23 @@ import com.lvl6.utils.DBConnection;
     
     int evolutionCost = rs.getInt(i++);
     
+    String animationType = rs.getString(i++);
+    
     Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
     		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
     		maxLevel, evolutionMonsterId, evolutionCatalystMonsterId, minutesToEvolve,
     		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved,
-    		description, evolutionCost);
+    		description, evolutionCost, animationType);
+    
+    if (null != animationType) {
+    	String newAnimationType = animationType.trim().toUpperCase();
+    	if (!animationType.equals(newAnimationType)) {
+    		log.error("monster's animation type has whitespace or is uncapitalized. actual=" +
+    				animationType + "\t expected=" + newAnimationType);
+    		monster.setAnimationType(newAnimationType);
+    	}
+    }
+    
     return monster;
   }
 }
