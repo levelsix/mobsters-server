@@ -79,15 +79,15 @@ message ClanRaidStageProto {
 	optional int32 durationMinutes = 3;
 	optional int32 stageNum = 4;
 	
-	//one monster per stage
+	//multiple monsters per stage (all will spawn, unlike task_stage_monsters)
 	repeated ClanRaidStageMonsterProto monsters = 11;
 	
 	//the possible rewards
 	repeated ClanRaidStageRewardProto possibleRewards = 12;
 }
 
-//this is analogous to task stages and task stage monsters
-//Note: only one of these per stage
+//this is analogous to task stage monsters
+//Note: can be multiple monsters for one stage (all will spawn, unlike task_stage_monsters)
 message ClanRaidStageMonsterProto {
 	optional int32 crsmId = 1;
 	//optional int32 clanRaidStageId = 2;
@@ -110,7 +110,7 @@ message ClanRaidStageRewardProto {
 
 message PersistentClanEventProto {
 	optional int32 clanEventId = 1;
-	optional DayOfWeek dayOfWeek = 2;
+	optional DayOfWeek dayOfWeek = 2 [default = MONDAY];
 	optional int32 startHour = 3;
 	optional int32 eventDurationMinutes = 4;
 	optional int32 clanRaidId = 5;
@@ -127,6 +127,18 @@ message PersistentClanEventClanInfoProto {
 	
 	//Used to differentiate attacks across different stage monsters
 	optional int64 stageMonsterStartTime = 7;
+}
+
+message PersistentClanEventUserInfoProto {
+	optional int32 userId = 1;
+	optional int32 clanId = 2;
+	optional int32 crId = 3; //clan_raid_id
+	optional int32 crDmgDone = 4; //damage done for this clan raid
+	optional int32 crsId = 5; //clan_raid_stage_id
+	optional int32 crsDmgDone = 6; //damage done for this clan raid stage
+	optional int32 crsmId = 7; //primary key in clan_raid_stage_monster table 
+	optional int32 crsmDmgDone = 8; 
+	repeated int32 userMonsterIds = 9; 
 }
 
 //------------------------------------------------------------------------------------------

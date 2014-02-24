@@ -2,7 +2,8 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
-//this class is analogous to a task_stage and task_stage_monster combined
+//this class is analogous to task_stage_monster
+//multiple monsters can point to stage (all must spawn)
 public class ClanRaidStageMonster implements Serializable {
 
 	private static final long serialVersionUID = -6377284601865090160L;
