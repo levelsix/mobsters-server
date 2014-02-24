@@ -15,9 +15,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.joda.time.DateMidnight;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -793,12 +790,12 @@ public class MiscMethods {
     return CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(sale);
   }
 
-  public static int dateDifferenceInDays(Date start, Date end) {
-    DateMidnight previous = (new DateTime(start)).toDateMidnight(); //
-    DateMidnight current = (new DateTime(end)).toDateMidnight();
-    int days = Days.daysBetween(previous, current).getDays();
-    return days;
-  }
+//  public static int dateDifferenceInDays(Date start, Date end) {
+//    DateMidnight previous = (new DateTime(start)).toDateMidnight(); //
+//    DateMidnight current = (new DateTime(end)).toDateMidnight();
+//    int days = Days.daysBetween(previous, current).getDays();
+//    return days;
+//  }
 
 
   //  private static List<Integer> getRaritiesCollected(

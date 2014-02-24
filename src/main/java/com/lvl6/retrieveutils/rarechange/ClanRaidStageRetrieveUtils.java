@@ -58,12 +58,39 @@ import com.lvl6.utils.DBConnection;
     if (null == clanRaidIdsToClanRaidStageIdsToClanRaidStages) {
       setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();      
     }
+    //check to see if stages exist for clanRaidId
     if (clanRaidIdsToClanRaidStageIdsToClanRaidStages.containsKey(clanRaidId)) {
     	return clanRaidIdsToClanRaidStageIdsToClanRaidStages.get(clanRaidId);
     } else {
     	log.error("no clan raid stages for clanRaidId=" + clanRaidId);
     	return new HashMap<Integer, ClanRaidStage>();
     }
+  }
+  
+  public static ClanRaidStage getFirstStageForClanRaid(int clanRaidId) {
+  	log.debug("retrieving the first clan raid stage for clanRaidId=" + clanRaidId);
+  	if (null == clanRaidIdsToClanRaidStageIdsToClanRaidStages) {
+      setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();      
+    }
+    //check to see if stages exist for clanRaidId
+  	if (clanRaidIdsToClanRaidStageIdsToClanRaidStages.containsKey(clanRaidId)) {
+    	log.error("no clan raid stages for clanRaidId=" + clanRaidId);
+    	return null;
+    }
+  	Map<Integer, ClanRaidStage> stages = clanRaidIdsToClanRaidStageIdsToClanRaidStages.get(clanRaidId);
+  	
+  	int curLowestStageNum = Integer.MAX_VALUE;
+  	ClanRaidStage crs = null;
+  	for (ClanRaidStage tempCrs : stages.values()) {
+  		int tempStageNum = tempCrs.getStageNum();
+  		
+  		if (tempStageNum < curLowestStageNum) {
+  			curLowestStageNum = tempStageNum;
+  			crs = tempCrs;
+  		}
+  	}
+  	
+  	return crs;
   }
 
 

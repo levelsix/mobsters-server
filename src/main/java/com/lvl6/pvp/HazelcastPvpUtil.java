@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -29,8 +30,9 @@ import com.lvl6.utils.PlayerSet;
 @Component
 public class HazelcastPvpUtil implements InitializingBean {
 	
+	private static final int LOCK_TIMEOUT = 10000;
 	public static int LOCK_WAIT_SECONDS = 10;
-	
+
 
 		private static final Logger log = LoggerFactory.getLogger(HazelcastPvpUtil.class);
 		
@@ -191,6 +193,12 @@ public class HazelcastPvpUtil implements InitializingBean {
     }
     
     
+    
+    
+    
+    
+    
+    
     //LOCKING THINGS. ALL COPIED FROM GameServer.java
     //either returns true or throws exception
     public boolean lockPlayer(int playerId, String lockedByClass) {
@@ -252,6 +260,66 @@ public class HazelcastPvpUtil implements InitializingBean {
   		} else {
   			unlockPlayer(playerId1, fromClass);
   			unlockPlayer(playerId2, fromClass);
+  		}
+  	}
+  	
+  	public boolean lockClan(int clanId) {
+  		log.debug("Locking clan: " + clanId);
+  		if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+  			log.debug("Got lock for clan " + clanId);
+  			lockMap.put(clanLockName(clanId), new Date());
+  			return true;
+  		} else {
+  			log.warn("failed to aquire lock for " + clanLockName(clanId));
+  			return false;
+  			// throw new
+  			// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
+  		}
+  	}
+
+  	public void unlockClan(int clanId) {
+  		log.debug("Unlocking clan: " + clanId);
+  		try {
+  			String clanLockName = clanLockName(clanId);
+  			if (lockMap.isLocked(clanLockName)) {
+  				lockMap.unlock(clanLockName);
+  			}
+  			log.debug("Unlocked clan " + clanId);
+  			if (lockMap.containsKey(clanLockName)) {
+  				lockMap.remove(clanLockName);
+  			}
+  		} catch (Exception e) {
+  			log.error("Error unlocking clan " + clanId, e);
+  		}
+  	}
+
+  	protected String clanLockName(int clanId) {
+  		return "ClanLock: " + clanId;
+  	}
+
+  	// TODO: refactor this into a lockmap wrapper class and make it work for any
+  	// lock
+  	// also consider refactoring playerLocks to use it
+  	@Scheduled(fixedDelay = LOCK_TIMEOUT)
+  	public void clearOldLocks() {
+  		long now = new Date().getTime();
+  		log.debug("Removing stale clan locks");
+  		for (String key : lockMap.keySet()) {
+  			try {
+  				if (key != null && key.contains("ClanLock")) {
+  					long lockTime = lockMap.get(key).getTime();
+  					if (now - lockTime > LOCK_TIMEOUT) {
+  						if (lockMap.isLocked(key)) {
+  							lockMap.forceUnlock(key);
+  						}
+  						lockMap.remove(key);
+  						log.info("Automatically removing timed out lock: " + key);
+  					}
+  				} else {
+  				}
+  			} catch (Exception e) {
+  				log.error("Error removing stale lock for clan " + key, e);
+  			}
   		}
   	}
   	

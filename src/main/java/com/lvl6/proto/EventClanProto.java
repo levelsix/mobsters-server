@@ -14305,6 +14305,10 @@ public final class EventClanProto {
     // optional int32 raidId = 3;
     boolean hasRaidId();
     int getRaidId();
+    
+    // optional bool onlySettingMonsterTeamForRaid = 4;
+    boolean hasOnlySettingMonsterTeamForRaid();
+    boolean getOnlySettingMonsterTeamForRaid();
   }
   public static final class BeginClanRaidRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -14368,10 +14372,21 @@ public final class EventClanProto {
       return raidId_;
     }
     
+    // optional bool onlySettingMonsterTeamForRaid = 4;
+    public static final int ONLYSETTINGMONSTERTEAMFORRAID_FIELD_NUMBER = 4;
+    private boolean onlySettingMonsterTeamForRaid_;
+    public boolean hasOnlySettingMonsterTeamForRaid() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public boolean getOnlySettingMonsterTeamForRaid() {
+      return onlySettingMonsterTeamForRaid_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
       curTime_ = 0L;
       raidId_ = 0;
+      onlySettingMonsterTeamForRaid_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14394,6 +14409,9 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeInt32(3, raidId_);
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBool(4, onlySettingMonsterTeamForRaid_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -14414,6 +14432,10 @@ public final class EventClanProto {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, raidId_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, onlySettingMonsterTeamForRaid_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -14550,6 +14572,8 @@ public final class EventClanProto {
         bitField0_ = (bitField0_ & ~0x00000002);
         raidId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
+        onlySettingMonsterTeamForRaid_ = false;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -14604,6 +14628,10 @@ public final class EventClanProto {
           to_bitField0_ |= 0x00000004;
         }
         result.raidId_ = raidId_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.onlySettingMonsterTeamForRaid_ = onlySettingMonsterTeamForRaid_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -14628,6 +14656,9 @@ public final class EventClanProto {
         }
         if (other.hasRaidId()) {
           setRaidId(other.getRaidId());
+        }
+        if (other.hasOnlySettingMonsterTeamForRaid()) {
+          setOnlySettingMonsterTeamForRaid(other.getOnlySettingMonsterTeamForRaid());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -14677,6 +14708,11 @@ public final class EventClanProto {
             case 24: {
               bitField0_ |= 0x00000004;
               raidId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              onlySettingMonsterTeamForRaid_ = input.readBool();
               break;
             }
           }
@@ -14817,6 +14853,27 @@ public final class EventClanProto {
         return this;
       }
       
+      // optional bool onlySettingMonsterTeamForRaid = 4;
+      private boolean onlySettingMonsterTeamForRaid_ ;
+      public boolean hasOnlySettingMonsterTeamForRaid() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public boolean getOnlySettingMonsterTeamForRaid() {
+        return onlySettingMonsterTeamForRaid_;
+      }
+      public Builder setOnlySettingMonsterTeamForRaid(boolean value) {
+        bitField0_ |= 0x00000008;
+        onlySettingMonsterTeamForRaid_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearOnlySettingMonsterTeamForRaid() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onlySettingMonsterTeamForRaid_ = false;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.BeginClanRaidRequestProto)
     }
     
@@ -14836,9 +14893,14 @@ public final class EventClanProto {
     com.lvl6.proto.ClanProto.MinimumUserProtoForClans getSender();
     com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getSenderOrBuilder();
     
-    // optional int32 raidId = 2;
-    boolean hasRaidId();
-    int getRaidId();
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+    boolean hasEventDetails();
+    com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails();
+    com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder();
+    
+    // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
+    boolean hasStatus();
+    com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus();
   }
   public static final class BeginClanRaidResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -14873,13 +14935,15 @@ public final class EventClanProto {
       SUCCESS(0, 1),
       FAIL_ALREADY_STARTED(1, 2),
       FAIL_NOT_AUTHORIZED(2, 3),
-      FAIL_OTHER(3, 4),
+      FAIL_NO_ACTIVE_CLAN_RAID(3, 4),
+      FAIL_OTHER(4, 5),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_ALREADY_STARTED_VALUE = 2;
       public static final int FAIL_NOT_AUTHORIZED_VALUE = 3;
-      public static final int FAIL_OTHER_VALUE = 4;
+      public static final int FAIL_NO_ACTIVE_CLAN_RAID_VALUE = 4;
+      public static final int FAIL_OTHER_VALUE = 5;
       
       
       public final int getNumber() { return value; }
@@ -14889,7 +14953,8 @@ public final class EventClanProto {
           case 1: return SUCCESS;
           case 2: return FAIL_ALREADY_STARTED;
           case 3: return FAIL_NOT_AUTHORIZED;
-          case 4: return FAIL_OTHER;
+          case 4: return FAIL_NO_ACTIVE_CLAN_RAID;
+          case 5: return FAIL_OTHER;
           default: return null;
         }
       }
@@ -14920,7 +14985,7 @@ public final class EventClanProto {
       }
       
       private static final BeginClanRaidStatus[] VALUES = {
-        SUCCESS, FAIL_ALREADY_STARTED, FAIL_NOT_AUTHORIZED, FAIL_OTHER, 
+        SUCCESS, FAIL_ALREADY_STARTED, FAIL_NOT_AUTHORIZED, FAIL_NO_ACTIVE_CLAN_RAID, FAIL_OTHER, 
       };
       
       public static BeginClanRaidStatus valueOf(
@@ -14957,19 +15022,33 @@ public final class EventClanProto {
       return sender_;
     }
     
-    // optional int32 raidId = 2;
-    public static final int RAIDID_FIELD_NUMBER = 2;
-    private int raidId_;
-    public boolean hasRaidId() {
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+    public static final int EVENTDETAILS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_;
+    public boolean hasEventDetails() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public int getRaidId() {
-      return raidId_;
+    public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails() {
+      return eventDetails_;
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder() {
+      return eventDetails_;
+    }
+    
+    // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus status_;
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus() {
+      return status_;
     }
     
     private void initFields() {
       sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
-      raidId_ = 0;
+      eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+      status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -14987,7 +15066,10 @@ public final class EventClanProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, raidId_);
+        output.writeMessage(2, eventDetails_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, status_.getNumber());
       }
       getUnknownFields().writeTo(output);
     }
@@ -15004,7 +15086,11 @@ public final class EventClanProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, raidId_);
+          .computeMessageSize(2, eventDetails_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -15123,6 +15209,7 @@ public final class EventClanProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getEventDetailsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -15137,8 +15224,14 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        raidId_ = 0;
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+        } else {
+          eventDetailsBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -15188,7 +15281,15 @@ public final class EventClanProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.raidId_ = raidId_;
+        if (eventDetailsBuilder_ == null) {
+          result.eventDetails_ = eventDetails_;
+        } else {
+          result.eventDetails_ = eventDetailsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.status_ = status_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15208,8 +15309,11 @@ public final class EventClanProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasRaidId()) {
-          setRaidId(other.getRaidId());
+        if (other.hasEventDetails()) {
+          mergeEventDetails(other.getEventDetails());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -15251,9 +15355,24 @@ public final class EventClanProto {
               setSender(subBuilder.buildPartial());
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              raidId_ = input.readInt32();
+            case 18: {
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder subBuilder = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder();
+              if (hasEventDetails()) {
+                subBuilder.mergeFrom(getEventDetails());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setEventDetails(subBuilder.buildPartial());
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus value = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                status_ = value;
+              }
               break;
             }
           }
@@ -15352,23 +15471,116 @@ public final class EventClanProto {
         return senderBuilder_;
       }
       
-      // optional int32 raidId = 2;
-      private int raidId_ ;
-      public boolean hasRaidId() {
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+      private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> eventDetailsBuilder_;
+      public boolean hasEventDetails() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public int getRaidId() {
-        return raidId_;
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails() {
+        if (eventDetailsBuilder_ == null) {
+          return eventDetails_;
+        } else {
+          return eventDetailsBuilder_.getMessage();
+        }
       }
-      public Builder setRaidId(int value) {
+      public Builder setEventDetails(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
+        if (eventDetailsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          eventDetails_ = value;
+          onChanged();
+        } else {
+          eventDetailsBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000002;
-        raidId_ = value;
+        return this;
+      }
+      public Builder setEventDetails(
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder builderForValue) {
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = builderForValue.build();
+          onChanged();
+        } else {
+          eventDetailsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeEventDetails(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
+        if (eventDetailsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              eventDetails_ != com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance()) {
+            eventDetails_ =
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder(eventDetails_).mergeFrom(value).buildPartial();
+          } else {
+            eventDetails_ = value;
+          }
+          onChanged();
+        } else {
+          eventDetailsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearEventDetails() {
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          eventDetailsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder getEventDetailsBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getEventDetailsFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder() {
+        if (eventDetailsBuilder_ != null) {
+          return eventDetailsBuilder_.getMessageOrBuilder();
+        } else {
+          return eventDetails_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> 
+          getEventDetailsFieldBuilder() {
+        if (eventDetailsBuilder_ == null) {
+          eventDetailsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
+                  eventDetails_,
+                  getParentForChildren(),
+                  isClean());
+          eventDetails_ = null;
+        }
+        return eventDetailsBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.BeginClanRaidResponseProto.BeginClanRaidStatus status = 3;
+      private com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus getStatus() {
+        return status_;
+      }
+      public Builder setStatus(com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
         onChanged();
         return this;
       }
-      public Builder clearRaidId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        raidId_ = 0;
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus.SUCCESS;
         onChanged();
         return this;
       }
@@ -15382,6 +15594,1525 @@ public final class EventClanProto {
     }
     
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.BeginClanRaidResponseProto)
+  }
+  
+  public interface AttackClanRaidMonsterRequestProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProtoForClans sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.ClanProto.MinimumUserProtoForClans getSender();
+    com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getSenderOrBuilder();
+    
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+    boolean hasEventDetails();
+    com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails();
+    com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder();
+    
+    // optional int32 damageDealt = 3;
+    boolean hasDamageDealt();
+    int getDamageDealt();
+    
+    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto monsterHealths = 4;
+    java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> 
+        getMonsterHealthsList();
+    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getMonsterHealths(int index);
+    int getMonsterHealthsCount();
+    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
+        getMonsterHealthsOrBuilderList();
+    com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getMonsterHealthsOrBuilder(
+        int index);
+  }
+  public static final class AttackClanRaidMonsterRequestProto extends
+      com.google.protobuf.GeneratedMessage
+      implements AttackClanRaidMonsterRequestProtoOrBuilder {
+    // Use AttackClanRaidMonsterRequestProto.newBuilder() to construct.
+    private AttackClanRaidMonsterRequestProto(Builder builder) {
+      super(builder);
+    }
+    private AttackClanRaidMonsterRequestProto(boolean noInit) {}
+    
+    private static final AttackClanRaidMonsterRequestProto defaultInstance;
+    public static AttackClanRaidMonsterRequestProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public AttackClanRaidMonsterRequestProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoForClans sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.ClanProto.MinimumUserProtoForClans sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.ClanProto.MinimumUserProtoForClans getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+    public static final int EVENTDETAILS_FIELD_NUMBER = 2;
+    private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_;
+    public boolean hasEventDetails() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails() {
+      return eventDetails_;
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder() {
+      return eventDetails_;
+    }
+    
+    // optional int32 damageDealt = 3;
+    public static final int DAMAGEDEALT_FIELD_NUMBER = 3;
+    private int damageDealt_;
+    public boolean hasDamageDealt() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getDamageDealt() {
+      return damageDealt_;
+    }
+    
+    // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto monsterHealths = 4;
+    public static final int MONSTERHEALTHS_FIELD_NUMBER = 4;
+    private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> monsterHealths_;
+    public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> getMonsterHealthsList() {
+      return monsterHealths_;
+    }
+    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
+        getMonsterHealthsOrBuilderList() {
+      return monsterHealths_;
+    }
+    public int getMonsterHealthsCount() {
+      return monsterHealths_.size();
+    }
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getMonsterHealths(int index) {
+      return monsterHealths_.get(index);
+    }
+    public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getMonsterHealthsOrBuilder(
+        int index) {
+      return monsterHealths_.get(index);
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
+      eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+      damageDealt_ = 0;
+      monsterHealths_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, eventDetails_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, damageDealt_);
+      }
+      for (int i = 0; i < monsterHealths_.size(); i++) {
+        output.writeMessage(4, monsterHealths_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, eventDetails_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, damageDealt_);
+      }
+      for (int i = 0; i < monsterHealths_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, monsterHealths_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+          getEventDetailsFieldBuilder();
+          getMonsterHealthsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+        } else {
+          eventDetailsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        damageDealt_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (monsterHealthsBuilder_ == null) {
+          monsterHealths_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          monsterHealthsBuilder_.clear();
+        }
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto build() {
+        com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto buildPartial() {
+        com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto result = new com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (eventDetailsBuilder_ == null) {
+          result.eventDetails_ = eventDetails_;
+        } else {
+          result.eventDetails_ = eventDetailsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.damageDealt_ = damageDealt_;
+        if (monsterHealthsBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            monsterHealths_ = java.util.Collections.unmodifiableList(monsterHealths_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.monsterHealths_ = monsterHealths_;
+        } else {
+          result.monsterHealths_ = monsterHealthsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto other) {
+        if (other == com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasEventDetails()) {
+          mergeEventDetails(other.getEventDetails());
+        }
+        if (other.hasDamageDealt()) {
+          setDamageDealt(other.getDamageDealt());
+        }
+        if (monsterHealthsBuilder_ == null) {
+          if (!other.monsterHealths_.isEmpty()) {
+            if (monsterHealths_.isEmpty()) {
+              monsterHealths_ = other.monsterHealths_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureMonsterHealthsIsMutable();
+              monsterHealths_.addAll(other.monsterHealths_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.monsterHealths_.isEmpty()) {
+            if (monsterHealthsBuilder_.isEmpty()) {
+              monsterHealthsBuilder_.dispose();
+              monsterHealthsBuilder_ = null;
+              monsterHealths_ = other.monsterHealths_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              monsterHealthsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getMonsterHealthsFieldBuilder() : null;
+            } else {
+              monsterHealthsBuilder_.addAllMessages(other.monsterHealths_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder subBuilder = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder subBuilder = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder();
+              if (hasEventDetails()) {
+                subBuilder.mergeFrom(getEventDetails());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setEventDetails(subBuilder.buildPartial());
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              damageDealt_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addMonsterHealths(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProtoForClans sender = 1;
+      private com.lvl6.proto.ClanProto.MinimumUserProtoForClans sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.MinimumUserProtoForClans, com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder, com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.ClanProto.MinimumUserProtoForClans getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.ClanProto.MinimumUserProtoForClans value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.ClanProto.MinimumUserProtoForClans value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.ClanProto.MinimumUserProtoForClans.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.MinimumUserProtoForClans, com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder, com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.MinimumUserProtoForClans, com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder, com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto eventDetails = 2;
+      private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> eventDetailsBuilder_;
+      public boolean hasEventDetails() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getEventDetails() {
+        if (eventDetailsBuilder_ == null) {
+          return eventDetails_;
+        } else {
+          return eventDetailsBuilder_.getMessage();
+        }
+      }
+      public Builder setEventDetails(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
+        if (eventDetailsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          eventDetails_ = value;
+          onChanged();
+        } else {
+          eventDetailsBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder setEventDetails(
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder builderForValue) {
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = builderForValue.build();
+          onChanged();
+        } else {
+          eventDetailsBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeEventDetails(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
+        if (eventDetailsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              eventDetails_ != com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance()) {
+            eventDetails_ =
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder(eventDetails_).mergeFrom(value).buildPartial();
+          } else {
+            eventDetails_ = value;
+          }
+          onChanged();
+        } else {
+          eventDetailsBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearEventDetails() {
+        if (eventDetailsBuilder_ == null) {
+          eventDetails_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          eventDetailsBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder getEventDetailsBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getEventDetailsFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getEventDetailsOrBuilder() {
+        if (eventDetailsBuilder_ != null) {
+          return eventDetailsBuilder_.getMessageOrBuilder();
+        } else {
+          return eventDetails_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> 
+          getEventDetailsFieldBuilder() {
+        if (eventDetailsBuilder_ == null) {
+          eventDetailsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
+                  eventDetails_,
+                  getParentForChildren(),
+                  isClean());
+          eventDetails_ = null;
+        }
+        return eventDetailsBuilder_;
+      }
+      
+      // optional int32 damageDealt = 3;
+      private int damageDealt_ ;
+      public boolean hasDamageDealt() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getDamageDealt() {
+        return damageDealt_;
+      }
+      public Builder setDamageDealt(int value) {
+        bitField0_ |= 0x00000004;
+        damageDealt_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDamageDealt() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        damageDealt_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // repeated .com.lvl6.proto.UserMonsterCurrentHealthProto monsterHealths = 4;
+      private java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> monsterHealths_ =
+        java.util.Collections.emptyList();
+      private void ensureMonsterHealthsIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          monsterHealths_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto>(monsterHealths_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> monsterHealthsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> getMonsterHealthsList() {
+        if (monsterHealthsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(monsterHealths_);
+        } else {
+          return monsterHealthsBuilder_.getMessageList();
+        }
+      }
+      public int getMonsterHealthsCount() {
+        if (monsterHealthsBuilder_ == null) {
+          return monsterHealths_.size();
+        } else {
+          return monsterHealthsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto getMonsterHealths(int index) {
+        if (monsterHealthsBuilder_ == null) {
+          return monsterHealths_.get(index);
+        } else {
+          return monsterHealthsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setMonsterHealths(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
+        if (monsterHealthsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMonsterHealthsIsMutable();
+          monsterHealths_.set(index, value);
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setMonsterHealths(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
+        if (monsterHealthsBuilder_ == null) {
+          ensureMonsterHealthsIsMutable();
+          monsterHealths_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addMonsterHealths(com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
+        if (monsterHealthsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMonsterHealthsIsMutable();
+          monsterHealths_.add(value);
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addMonsterHealths(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto value) {
+        if (monsterHealthsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMonsterHealthsIsMutable();
+          monsterHealths_.add(index, value);
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addMonsterHealths(
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
+        if (monsterHealthsBuilder_ == null) {
+          ensureMonsterHealthsIsMutable();
+          monsterHealths_.add(builderForValue.build());
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addMonsterHealths(
+          int index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder builderForValue) {
+        if (monsterHealthsBuilder_ == null) {
+          ensureMonsterHealthsIsMutable();
+          monsterHealths_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllMonsterHealths(
+          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto> values) {
+        if (monsterHealthsBuilder_ == null) {
+          ensureMonsterHealthsIsMutable();
+          super.addAll(values, monsterHealths_);
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearMonsterHealths() {
+        if (monsterHealthsBuilder_ == null) {
+          monsterHealths_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeMonsterHealths(int index) {
+        if (monsterHealthsBuilder_ == null) {
+          ensureMonsterHealthsIsMutable();
+          monsterHealths_.remove(index);
+          onChanged();
+        } else {
+          monsterHealthsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder getMonsterHealthsBuilder(
+          int index) {
+        return getMonsterHealthsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder getMonsterHealthsOrBuilder(
+          int index) {
+        if (monsterHealthsBuilder_ == null) {
+          return monsterHealths_.get(index);  } else {
+          return monsterHealthsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
+           getMonsterHealthsOrBuilderList() {
+        if (monsterHealthsBuilder_ != null) {
+          return monsterHealthsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(monsterHealths_);
+        }
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder addMonsterHealthsBuilder() {
+        return getMonsterHealthsFieldBuilder().addBuilder(
+            com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder addMonsterHealthsBuilder(
+          int index) {
+        return getMonsterHealthsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder> 
+           getMonsterHealthsBuilderList() {
+        return getMonsterHealthsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder> 
+          getMonsterHealthsFieldBuilder() {
+        if (monsterHealthsBuilder_ == null) {
+          monsterHealthsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto.Builder, com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProtoOrBuilder>(
+                  monsterHealths_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          monsterHealths_ = null;
+        }
+        return monsterHealthsBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AttackClanRaidMonsterRequestProto)
+    }
+    
+    static {
+      defaultInstance = new AttackClanRaidMonsterRequestProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AttackClanRaidMonsterRequestProto)
+  }
+  
+  public interface AttackClanRaidMonsterResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .com.lvl6.proto.MinimumUserProtoForClans sender = 1;
+    boolean hasSender();
+    com.lvl6.proto.ClanProto.MinimumUserProtoForClans getSender();
+    com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getSenderOrBuilder();
+    
+    // optional int32 monsterRemainingHp = 2;
+    boolean hasMonsterRemainingHp();
+    int getMonsterRemainingHp();
+    
+    // optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 3;
+    boolean hasStatus();
+    com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus getStatus();
+  }
+  public static final class AttackClanRaidMonsterResponseProto extends
+      com.google.protobuf.GeneratedMessage
+      implements AttackClanRaidMonsterResponseProtoOrBuilder {
+    // Use AttackClanRaidMonsterResponseProto.newBuilder() to construct.
+    private AttackClanRaidMonsterResponseProto(Builder builder) {
+      super(builder);
+    }
+    private AttackClanRaidMonsterResponseProto(boolean noInit) {}
+    
+    private static final AttackClanRaidMonsterResponseProto defaultInstance;
+    public static AttackClanRaidMonsterResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public AttackClanRaidMonsterResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_fieldAccessorTable;
+    }
+    
+    public enum AttackClanRaidMonsterStatus
+        implements com.google.protobuf.ProtocolMessageEnum {
+      SUCCESS(0, 1),
+      FAIL_MONSTER_ALREADY_DEAD(1, 2),
+      FAIL_TIME_EXPIRED(2, 3),
+      FAIL_OTHER(3, 4),
+      ;
+      
+      public static final int SUCCESS_VALUE = 1;
+      public static final int FAIL_MONSTER_ALREADY_DEAD_VALUE = 2;
+      public static final int FAIL_TIME_EXPIRED_VALUE = 3;
+      public static final int FAIL_OTHER_VALUE = 4;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static AttackClanRaidMonsterStatus valueOf(int value) {
+        switch (value) {
+          case 1: return SUCCESS;
+          case 2: return FAIL_MONSTER_ALREADY_DEAD;
+          case 3: return FAIL_TIME_EXPIRED;
+          case 4: return FAIL_OTHER;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<AttackClanRaidMonsterStatus>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<AttackClanRaidMonsterStatus>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<AttackClanRaidMonsterStatus>() {
+              public AttackClanRaidMonsterStatus findValueByNumber(int number) {
+                return AttackClanRaidMonsterStatus.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final AttackClanRaidMonsterStatus[] VALUES = {
+        SUCCESS, FAIL_MONSTER_ALREADY_DEAD, FAIL_TIME_EXPIRED, FAIL_OTHER, 
+      };
+      
+      public static AttackClanRaidMonsterStatus valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private AttackClanRaidMonsterStatus(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus)
+    }
+    
+    private int bitField0_;
+    // optional .com.lvl6.proto.MinimumUserProtoForClans sender = 1;
+    public static final int SENDER_FIELD_NUMBER = 1;
+    private com.lvl6.proto.ClanProto.MinimumUserProtoForClans sender_;
+    public boolean hasSender() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.lvl6.proto.ClanProto.MinimumUserProtoForClans getSender() {
+      return sender_;
+    }
+    public com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getSenderOrBuilder() {
+      return sender_;
+    }
+    
+    // optional int32 monsterRemainingHp = 2;
+    public static final int MONSTERREMAININGHP_FIELD_NUMBER = 2;
+    private int monsterRemainingHp_;
+    public boolean hasMonsterRemainingHp() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public int getMonsterRemainingHp() {
+      return monsterRemainingHp_;
+    }
+    
+    // optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 3;
+    public static final int STATUS_FIELD_NUMBER = 3;
+    private com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status_;
+    public boolean hasStatus() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus getStatus() {
+      return status_;
+    }
+    
+    private void initFields() {
+      sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
+      monsterRemainingHp_ = 0;
+      status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, monsterRemainingHp_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, status_.getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sender_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, monsterRemainingHp_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, status_.getNumber());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSenderFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        monsterRemainingHp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto build() {
+        com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto buildPartial() {
+        com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto result = new com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (senderBuilder_ == null) {
+          result.sender_ = sender_;
+        } else {
+          result.sender_ = senderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.monsterRemainingHp_ = monsterRemainingHp_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.status_ = status_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto other) {
+        if (other == com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.getDefaultInstance()) return this;
+        if (other.hasSender()) {
+          mergeSender(other.getSender());
+        }
+        if (other.hasMonsterRemainingHp()) {
+          setMonsterRemainingHp(other.getMonsterRemainingHp());
+        }
+        if (other.hasStatus()) {
+          setStatus(other.getStatus());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder subBuilder = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.newBuilder();
+              if (hasSender()) {
+                subBuilder.mergeFrom(getSender());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setSender(subBuilder.buildPartial());
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              monsterRemainingHp_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus value = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                status_ = value;
+              }
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .com.lvl6.proto.MinimumUserProtoForClans sender = 1;
+      private com.lvl6.proto.ClanProto.MinimumUserProtoForClans sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.MinimumUserProtoForClans, com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder, com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder> senderBuilder_;
+      public boolean hasSender() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.lvl6.proto.ClanProto.MinimumUserProtoForClans getSender() {
+        if (senderBuilder_ == null) {
+          return sender_;
+        } else {
+          return senderBuilder_.getMessage();
+        }
+      }
+      public Builder setSender(com.lvl6.proto.ClanProto.MinimumUserProtoForClans value) {
+        if (senderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          sender_ = value;
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setSender(
+          com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder builderForValue) {
+        if (senderBuilder_ == null) {
+          sender_ = builderForValue.build();
+          onChanged();
+        } else {
+          senderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeSender(com.lvl6.proto.ClanProto.MinimumUserProtoForClans value) {
+        if (senderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              sender_ != com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance()) {
+            sender_ =
+              com.lvl6.proto.ClanProto.MinimumUserProtoForClans.newBuilder(sender_).mergeFrom(value).buildPartial();
+          } else {
+            sender_ = value;
+          }
+          onChanged();
+        } else {
+          senderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearSender() {
+        if (senderBuilder_ == null) {
+          sender_ = com.lvl6.proto.ClanProto.MinimumUserProtoForClans.getDefaultInstance();
+          onChanged();
+        } else {
+          senderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder getSenderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getSenderFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder getSenderOrBuilder() {
+        if (senderBuilder_ != null) {
+          return senderBuilder_.getMessageOrBuilder();
+        } else {
+          return sender_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.MinimumUserProtoForClans, com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder, com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder> 
+          getSenderFieldBuilder() {
+        if (senderBuilder_ == null) {
+          senderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.MinimumUserProtoForClans, com.lvl6.proto.ClanProto.MinimumUserProtoForClans.Builder, com.lvl6.proto.ClanProto.MinimumUserProtoForClansOrBuilder>(
+                  sender_,
+                  getParentForChildren(),
+                  isClean());
+          sender_ = null;
+        }
+        return senderBuilder_;
+      }
+      
+      // optional int32 monsterRemainingHp = 2;
+      private int monsterRemainingHp_ ;
+      public boolean hasMonsterRemainingHp() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public int getMonsterRemainingHp() {
+        return monsterRemainingHp_;
+      }
+      public Builder setMonsterRemainingHp(int value) {
+        bitField0_ |= 0x00000002;
+        monsterRemainingHp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterRemainingHp() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        monsterRemainingHp_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status = 3;
+      private com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
+      public boolean hasStatus() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus getStatus() {
+        return status_;
+      }
+      public Builder setStatus(com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        status_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearStatus() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        status_ = com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus.SUCCESS;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AttackClanRaidMonsterResponseProto)
+    }
+    
+    static {
+      defaultInstance = new AttackClanRaidMonsterResponseProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AttackClanRaidMonsterResponseProto)
   }
   
   private static com.google.protobuf.Descriptors.Descriptor
@@ -15494,6 +17225,16 @@ public final class EventClanProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_BeginClanRaidResponseProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -15635,16 +17376,36 @@ public final class EventClanProto {
       "to\022;\n\010fullClan\030\004 \001(\0132).com.lvl6.proto.Fu",
       "llClanProtoWithClanSize\"W\n\030ChangeClanJoi" +
       "nTypeStatus\022\013\n\007SUCCESS\020\001\022\016\n\nOTHER_FAIL\020\002" +
-      "\022\017\n\013NOT_IN_CLAN\020\003\022\r\n\tNOT_OWNER\020\004\"v\n\031Begi" +
-      "nClanRaidRequestProto\0228\n\006sender\030\001 \001(\0132(." +
-      "com.lvl6.proto.MinimumUserProtoForClans\022" +
-      "\017\n\007curTime\030\002 \001(\003\022\016\n\006raidId\030\003 \001(\005\"\315\001\n\032Beg" +
+      "\022\017\n\013NOT_IN_CLAN\020\003\022\r\n\tNOT_OWNER\020\004\"\235\001\n\031Beg" +
+      "inClanRaidRequestProto\0228\n\006sender\030\001 \001(\0132(" +
+      ".com.lvl6.proto.MinimumUserProtoForClans" +
+      "\022\017\n\007curTime\030\002 \001(\003\022\016\n\006raidId\030\003 \001(\005\022%\n\035onl" +
+      "ySettingMonsterTeamForRaid\030\004 \001(\010\"\364\002\n\032Beg" +
       "inClanRaidResponseProto\0228\n\006sender\030\001 \001(\0132" +
       "(.com.lvl6.proto.MinimumUserProtoForClan" +
-      "s\022\016\n\006raidId\030\002 \001(\005\"e\n\023BeginClanRaidStatus" +
-      "\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_ALREADY_STARTED\020\002\022",
-      "\027\n\023FAIL_NOT_AUTHORIZED\020\003\022\016\n\nFAIL_OTHER\020\004" +
-      "B\020B\016EventClanProto"
+      "s\022F\n\014eventDetails\030\002 \001(\01320.com.lvl6.proto",
+      ".PersistentClanEventClanInfoProto\022N\n\006sta" +
+      "tus\030\003 \001(\0162>.com.lvl6.proto.BeginClanRaid" +
+      "ResponseProto.BeginClanRaidStatus\"\203\001\n\023Be" +
+      "ginClanRaidStatus\022\013\n\007SUCCESS\020\001\022\030\n\024FAIL_A" +
+      "LREADY_STARTED\020\002\022\027\n\023FAIL_NOT_AUTHORIZED\020" +
+      "\003\022\034\n\030FAIL_NO_ACTIVE_CLAN_RAID\020\004\022\016\n\nFAIL_" +
+      "OTHER\020\005\"\201\002\n!AttackClanRaidMonsterRequest" +
+      "Proto\0228\n\006sender\030\001 \001(\0132(.com.lvl6.proto.M" +
+      "inimumUserProtoForClans\022F\n\014eventDetails\030" +
+      "\002 \001(\01320.com.lvl6.proto.PersistentClanEve",
+      "ntClanInfoProto\022\023\n\013damageDealt\030\003 \001(\005\022E\n\016" +
+      "monsterHealths\030\004 \003(\0132-.com.lvl6.proto.Us" +
+      "erMonsterCurrentHealthProto\"\314\002\n\"AttackCl" +
+      "anRaidMonsterResponseProto\0228\n\006sender\030\001 \001" +
+      "(\0132(.com.lvl6.proto.MinimumUserProtoForC" +
+      "lans\022\032\n\022monsterRemainingHp\030\002 \001(\005\022^\n\006stat" +
+      "us\030\003 \001(\0162N.com.lvl6.proto.AttackClanRaid" +
+      "MonsterResponseProto.AttackClanRaidMonst" +
+      "erStatus\"p\n\033AttackClanRaidMonsterStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\035\n\031FAIL_MONSTER_ALREADY_DEA",
+      "D\020\002\022\025\n\021FAIL_TIME_EXPIRED\020\003\022\016\n\nFAIL_OTHER" +
+      "\020\004B\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15816,7 +17577,7 @@ public final class EventClanProto {
           internal_static_com_lvl6_proto_BeginClanRaidRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BeginClanRaidRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CurTime", "RaidId", },
+              new java.lang.String[] { "Sender", "CurTime", "RaidId", "OnlySettingMonsterTeamForRaid", },
               com.lvl6.proto.EventClanProto.BeginClanRaidRequestProto.class,
               com.lvl6.proto.EventClanProto.BeginClanRaidRequestProto.Builder.class);
           internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor =
@@ -15824,9 +17585,25 @@ public final class EventClanProto {
           internal_static_com_lvl6_proto_BeginClanRaidResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BeginClanRaidResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "RaidId", },
+              new java.lang.String[] { "Sender", "EventDetails", "Status", },
               com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.class,
               com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.Builder.class);
+          internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(22);
+          internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AttackClanRaidMonsterRequestProto_descriptor,
+              new java.lang.String[] { "Sender", "EventDetails", "DamageDealt", "MonsterHealths", },
+              com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto.class,
+              com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto.Builder.class);
+          internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor =
+            getDescriptor().getMessageTypes().get(23);
+          internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_descriptor,
+              new java.lang.String[] { "Sender", "MonsterRemainingHp", "Status", },
+              com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.class,
+              com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.Builder.class);
           return null;
         }
       };

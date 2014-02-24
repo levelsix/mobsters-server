@@ -249,27 +249,67 @@ message ChangeClanJoinTypeResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//only clan leader sends this. This request initializes the clan raid for the day.
+
+//a clan can only have at max one clan raid/event going on at once.
 message BeginClanRaidRequestProto {
 	optional MinimumUserProtoForClans sender = 1;
 	optional int64 curTime = 2;
+	//Example. If 7 raids and numbered 1-7, raidId is one of these numbers
 	optional int32 raidId = 3;
 	
+	//if true then the server won't check if user can begin clan raid, but just
+	//set the monsters the user will use in the raid
+	//if false then server will check if user can begin clan raid and set the
+	//monsters the user will use in the raid
+	optional bool onlySettingMonsterTeamForRaid = 4;
 }
 
 	//send to every clan member that raid started
 message BeginClanRaidResponseProto {
 	optional MinimumUserProtoForClans sender = 1;
 	
-	//if 7 raids and numbered 1-7, raidId is one of these numbers
-	optional int32 raidId = 2;
+	//must be sent every time user wants to attack a clan raid stage monster or end a raid
+	optional PersistentClanEventClanInfoProto eventDetails = 2;
+	
+	optional BeginClanRaidStatus status = 3;
 	
 	enum BeginClanRaidStatus {
 		SUCCESS = 1;
 		FAIL_ALREADY_STARTED = 2;
 		FAIL_NOT_AUTHORIZED = 3; //regular members can't start it
-		FAIL_OTHER = 4;
+		FAIL_NO_ACTIVE_CLAN_RAID = 4;
+		FAIL_OTHER = 5;
 	}
 	
 }
 
+//------------------------------------------------------------------------------------------
+//since we only allow user one monster team in clan raid, this method also sets the 
+//monsters the user will use; a.t.m. server won't check user is using correct monsters
+message AttackClanRaidMonsterRequestProto {
+	optional MinimumUserProtoForClans sender = 1;
+	
+	//must be sent every time user wants to attack a clan raid stage monster or end a raid
+	optional PersistentClanEventClanInfoProto eventDetails = 2;
+	
+	//positive number
+	optional int32 damageDealt = 3;
+	//health of user's monsters
+	repeated UserMonsterCurrentHealthProto monsterHealths = 4;
+	
+}
+
+//will be sent to everyone in the clan
+message AttackClanRaidMonsterResponseProto {
+	optional MinimumUserProtoForClans sender = 1;
+	optional int32 monsterRemainingHp = 2;
+	
+	optional AttackClanRaidMonsterStatus status = 3;
+	
+	enum AttackClanRaidMonsterStatus {
+		SUCCESS = 1;
+		FAIL_MONSTER_ALREADY_DEAD = 2;
+		FAIL_TIME_EXPIRED = 3; //should server check this?
+		FAIL_OTHER = 4;
+	}
+}

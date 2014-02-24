@@ -144,4 +144,8 @@ public interface InsertUtil {
 	public abstract int insertUpdatePvpBattleForUser(int attackerId, int defenderId,
 			int attackerWinEloChange, int defenderLoseEloChange, int attackerLoseEloChange,
 			int defenderWinEloChange, Timestamp battleStartTime);
+	
+	public abstract int insertIntoClanEventPersistentForClan(int clanId,
+			int clanEventPersistentId, int clanRaidId, int clanRaidStageId,
+			Timestamp stageStartTime, int clanRaidStageMonsterId, Timestamp stageMonsterStartTime);
 }
