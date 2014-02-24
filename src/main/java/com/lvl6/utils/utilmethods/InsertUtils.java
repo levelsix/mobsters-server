@@ -1041,7 +1041,7 @@ public class InsertUtils implements InsertUtil{
 		
 		Map<String, Object> relativeUpdates = null;//new HashMap<String, Object>();
 		
-		//if row exists already (which it shouldn't, just replace all the values)
+		//if row exists already (which it shouldn't) just replace all the values
 		Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
 		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__DEFENDER_ID, defenderId);
 		absoluteUpdates.put(DBConstants.PVP_BATTLE_FOR_USER__ATTACKER_WIN_ELO_CHANGE,
@@ -1082,5 +1082,41 @@ public class InsertUtils implements InsertUtil{
 		int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 
 		return numUpdated;
+	}
+	
+	@Override
+	public int insertIntoUpdateMonstersClanEventPersistentForUser(int userId, int clanId,
+			int clanRaidId, List<Integer> userMonsterIds) {
+		String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
+
+		Map<String, Object> insertParams = new HashMap<String, Object>();
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID, clanId);
+		insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CR_ID, clanRaidId);
+
+		Map<String, Object> relativeUpdates = null;//new HashMap<String, Object>();
+		
+		//if row exists already, just replace all the monster id values
+		Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
+		
+		if (userMonsterIds.size() >= 1) {
+			int userMonsterId = userMonsterIds.get(0);
+			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE, userMonsterId);
+			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE, userMonsterId);
+		}
+		if (userMonsterIds.size() >= 2) {
+			int userMonsterId = userMonsterIds.get(1);
+			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO, userMonsterId);
+			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO, userMonsterId);
+		}
+		if (userMonsterIds.size() >= 3) {
+			int userMonsterId = userMonsterIds.get(2);
+			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE, userMonsterId);
+			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE, userMonsterId);
+		}
+		
+		int numInserted = DBConnection.get().insertOnDuplicateKeyUpdate(tableName,
+    		insertParams, relativeUpdates, absoluteUpdates);
+    return numInserted;
 	}
 }
