@@ -966,11 +966,13 @@ public class StartupController extends EventController {
   	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
   			.getPersistentEventForClanId(clanId);
   	
-  	PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
-  			.createPersistentClanEventClanInfoProto(cepfc);
-  	resBuilder.setCurRaidClanInfo(pcecip);
-  	
+  	if (null != cepfc) {
+  		PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
+  				.createPersistentClanEventClanInfoProto(cepfc);
+  		resBuilder.setCurRaidClanInfo(pcecip);
+  	}
   	//get the clan raid information for all the clan users
+  	//shouldn't be null (per the retrieveUtils)
   	Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
   			.getPersistentEventUserInfoForClanId(clanId);
   	
