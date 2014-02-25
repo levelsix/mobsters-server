@@ -1139,6 +1139,16 @@ public final class EventStartupProto {
         getUserEventsOrBuilderList();
     com.lvl6.proto.TaskProto.UserPersistentEventProtoOrBuilder getUserEventsOrBuilder(
         int index);
+    
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto curRaidClanInfo = 31;
+    boolean hasCurRaidClanInfo();
+    com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getCurRaidClanInfo();
+    com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getCurRaidClanInfoOrBuilder();
+    
+    // optional .com.lvl6.proto.PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
+    boolean hasCurRaidClanUserInfo();
+    com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto getCurRaidClanUserInfo();
+    com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder getCurRaidClanUserInfoOrBuilder();
   }
   public static final class StartupResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -8471,6 +8481,32 @@ public final class EventStartupProto {
       return userEvents_.get(index);
     }
     
+    // optional .com.lvl6.proto.PersistentClanEventClanInfoProto curRaidClanInfo = 31;
+    public static final int CURRAIDCLANINFO_FIELD_NUMBER = 31;
+    private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto curRaidClanInfo_;
+    public boolean hasCurRaidClanInfo() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getCurRaidClanInfo() {
+      return curRaidClanInfo_;
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getCurRaidClanInfoOrBuilder() {
+      return curRaidClanInfo_;
+    }
+    
+    // optional .com.lvl6.proto.PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
+    public static final int CURRAIDCLANUSERINFO_FIELD_NUMBER = 32;
+    private com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto curRaidClanUserInfo_;
+    public boolean hasCurRaidClanUserInfo() {
+      return ((bitField0_ & 0x00004000) == 0x00004000);
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto getCurRaidClanUserInfo() {
+      return curRaidClanUserInfo_;
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder getCurRaidClanUserInfoOrBuilder() {
+      return curRaidClanUserInfo_;
+    }
+    
     private void initFields() {
       serverTimeMillis_ = 0L;
       sender_ = com.lvl6.proto.UserProto.FullUserProto.getDefaultInstance();
@@ -8502,6 +8538,8 @@ public final class EventStartupProto {
       staticDataStuffProto_ = com.lvl6.proto.StaticDataStuffProto.StaticDataProto.getDefaultInstance();
       taskIdForCurrentCityBoss_ = java.util.Collections.emptyList();;
       userEvents_ = java.util.Collections.emptyList();
+      curRaidClanInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+      curRaidClanUserInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8604,6 +8642,12 @@ public final class EventStartupProto {
       }
       for (int i = 0; i < userEvents_.size(); i++) {
         output.writeMessage(30, userEvents_.get(i));
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeMessage(31, curRaidClanInfo_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        output.writeMessage(32, curRaidClanUserInfo_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -8754,6 +8798,14 @@ public final class EventStartupProto {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(30, userEvents_.get(i));
       }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(31, curRaidClanInfo_);
+      }
+      if (((bitField0_ & 0x00004000) == 0x00004000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(32, curRaidClanUserInfo_);
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
@@ -8888,6 +8940,8 @@ public final class EventStartupProto {
           getInvitesFromMeForSlotsFieldBuilder();
           getStaticDataStuffProtoFieldBuilder();
           getUserEventsFieldBuilder();
+          getCurRaidClanInfoFieldBuilder();
+          getCurRaidClanUserInfoFieldBuilder();
         }
       }
       private static Builder create() {
@@ -9028,6 +9082,18 @@ public final class EventStartupProto {
         } else {
           userEventsBuilder_.clear();
         }
+        if (curRaidClanInfoBuilder_ == null) {
+          curRaidClanInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+        } else {
+          curRaidClanInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x40000000);
+        if (curRaidClanUserInfoBuilder_ == null) {
+          curRaidClanUserInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.getDefaultInstance();
+        } else {
+          curRaidClanUserInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x80000000);
         return this;
       }
       
@@ -9275,6 +9341,22 @@ public final class EventStartupProto {
           result.userEvents_ = userEvents_;
         } else {
           result.userEvents_ = userEventsBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x40000000) == 0x40000000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        if (curRaidClanInfoBuilder_ == null) {
+          result.curRaidClanInfo_ = curRaidClanInfo_;
+        } else {
+          result.curRaidClanInfo_ = curRaidClanInfoBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x80000000) == 0x80000000)) {
+          to_bitField0_ |= 0x00004000;
+        }
+        if (curRaidClanUserInfoBuilder_ == null) {
+          result.curRaidClanUserInfo_ = curRaidClanUserInfo_;
+        } else {
+          result.curRaidClanUserInfo_ = curRaidClanUserInfoBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -9709,6 +9791,12 @@ public final class EventStartupProto {
             }
           }
         }
+        if (other.hasCurRaidClanInfo()) {
+          mergeCurRaidClanInfo(other.getCurRaidClanInfo());
+        }
+        if (other.hasCurRaidClanUserInfo()) {
+          mergeCurRaidClanUserInfo(other.getCurRaidClanUserInfo());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -9960,6 +10048,24 @@ public final class EventStartupProto {
               com.lvl6.proto.TaskProto.UserPersistentEventProto.Builder subBuilder = com.lvl6.proto.TaskProto.UserPersistentEventProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addUserEvents(subBuilder.buildPartial());
+              break;
+            }
+            case 250: {
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder subBuilder = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder();
+              if (hasCurRaidClanInfo()) {
+                subBuilder.mergeFrom(getCurRaidClanInfo());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setCurRaidClanInfo(subBuilder.buildPartial());
+              break;
+            }
+            case 258: {
+              com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder subBuilder = com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.newBuilder();
+              if (hasCurRaidClanUserInfo()) {
+                subBuilder.mergeFrom(getCurRaidClanUserInfo());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setCurRaidClanUserInfo(subBuilder.buildPartial());
               break;
             }
           }
@@ -13261,6 +13367,186 @@ public final class EventStartupProto {
         return userEventsBuilder_;
       }
       
+      // optional .com.lvl6.proto.PersistentClanEventClanInfoProto curRaidClanInfo = 31;
+      private com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto curRaidClanInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> curRaidClanInfoBuilder_;
+      public boolean hasCurRaidClanInfo() {
+        return ((bitField0_ & 0x40000000) == 0x40000000);
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto getCurRaidClanInfo() {
+        if (curRaidClanInfoBuilder_ == null) {
+          return curRaidClanInfo_;
+        } else {
+          return curRaidClanInfoBuilder_.getMessage();
+        }
+      }
+      public Builder setCurRaidClanInfo(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
+        if (curRaidClanInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          curRaidClanInfo_ = value;
+          onChanged();
+        } else {
+          curRaidClanInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x40000000;
+        return this;
+      }
+      public Builder setCurRaidClanInfo(
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder builderForValue) {
+        if (curRaidClanInfoBuilder_ == null) {
+          curRaidClanInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          curRaidClanInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x40000000;
+        return this;
+      }
+      public Builder mergeCurRaidClanInfo(com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto value) {
+        if (curRaidClanInfoBuilder_ == null) {
+          if (((bitField0_ & 0x40000000) == 0x40000000) &&
+              curRaidClanInfo_ != com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance()) {
+            curRaidClanInfo_ =
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.newBuilder(curRaidClanInfo_).mergeFrom(value).buildPartial();
+          } else {
+            curRaidClanInfo_ = value;
+          }
+          onChanged();
+        } else {
+          curRaidClanInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x40000000;
+        return this;
+      }
+      public Builder clearCurRaidClanInfo() {
+        if (curRaidClanInfoBuilder_ == null) {
+          curRaidClanInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          curRaidClanInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x40000000);
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder getCurRaidClanInfoBuilder() {
+        bitField0_ |= 0x40000000;
+        onChanged();
+        return getCurRaidClanInfoFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder getCurRaidClanInfoOrBuilder() {
+        if (curRaidClanInfoBuilder_ != null) {
+          return curRaidClanInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return curRaidClanInfo_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder> 
+          getCurRaidClanInfoFieldBuilder() {
+        if (curRaidClanInfoBuilder_ == null) {
+          curRaidClanInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProtoOrBuilder>(
+                  curRaidClanInfo_,
+                  getParentForChildren(),
+                  isClean());
+          curRaidClanInfo_ = null;
+        }
+        return curRaidClanInfoBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
+      private com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto curRaidClanUserInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder> curRaidClanUserInfoBuilder_;
+      public boolean hasCurRaidClanUserInfo() {
+        return ((bitField0_ & 0x80000000) == 0x80000000);
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto getCurRaidClanUserInfo() {
+        if (curRaidClanUserInfoBuilder_ == null) {
+          return curRaidClanUserInfo_;
+        } else {
+          return curRaidClanUserInfoBuilder_.getMessage();
+        }
+      }
+      public Builder setCurRaidClanUserInfo(com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto value) {
+        if (curRaidClanUserInfoBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          curRaidClanUserInfo_ = value;
+          onChanged();
+        } else {
+          curRaidClanUserInfoBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x80000000;
+        return this;
+      }
+      public Builder setCurRaidClanUserInfo(
+          com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder builderForValue) {
+        if (curRaidClanUserInfoBuilder_ == null) {
+          curRaidClanUserInfo_ = builderForValue.build();
+          onChanged();
+        } else {
+          curRaidClanUserInfoBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x80000000;
+        return this;
+      }
+      public Builder mergeCurRaidClanUserInfo(com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto value) {
+        if (curRaidClanUserInfoBuilder_ == null) {
+          if (((bitField0_ & 0x80000000) == 0x80000000) &&
+              curRaidClanUserInfo_ != com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.getDefaultInstance()) {
+            curRaidClanUserInfo_ =
+              com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.newBuilder(curRaidClanUserInfo_).mergeFrom(value).buildPartial();
+          } else {
+            curRaidClanUserInfo_ = value;
+          }
+          onChanged();
+        } else {
+          curRaidClanUserInfoBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x80000000;
+        return this;
+      }
+      public Builder clearCurRaidClanUserInfo() {
+        if (curRaidClanUserInfoBuilder_ == null) {
+          curRaidClanUserInfo_ = com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.getDefaultInstance();
+          onChanged();
+        } else {
+          curRaidClanUserInfoBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x80000000);
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder getCurRaidClanUserInfoBuilder() {
+        bitField0_ |= 0x80000000;
+        onChanged();
+        return getCurRaidClanUserInfoFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder getCurRaidClanUserInfoOrBuilder() {
+        if (curRaidClanUserInfoBuilder_ != null) {
+          return curRaidClanUserInfoBuilder_.getMessageOrBuilder();
+        } else {
+          return curRaidClanUserInfo_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder> 
+          getCurRaidClanUserInfoFieldBuilder() {
+        if (curRaidClanUserInfoBuilder_ == null) {
+          curRaidClanUserInfoBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProtoOrBuilder>(
+                  curRaidClanUserInfo_,
+                  getParentForChildren(),
+                  isClean());
+          curRaidClanUserInfo_ = null;
+        }
+        return curRaidClanUserInfoBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto)
     }
     
@@ -13345,7 +13631,7 @@ public final class EventStartupProto {
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
       "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbI" +
-      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\325\036\n\024Star",
+      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\357\037\n\024Star",
       "tupResponseProto\022\030\n\020serverTimeMillis\030\001 \001" +
       "(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.Full" +
       "UserProto\022I\n\rstartupStatus\030\003 \001(\01622.com.l" +
@@ -13387,64 +13673,68 @@ public final class EventStartupProto {
       ".lvl6.proto.StaticDataProto\022 \n\030taskIdFor" +
       "CurrentCityBoss\030\034 \003(\005\022<\n\nuserEvents\030\036 \003(",
       "\0132(.com.lvl6.proto.UserPersistentEventPr" +
-      "oto\032\200\001\n\031AttackedNotificationProto\0222\n\010att" +
-      "acker\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
-      "Proto\022\032\n\022battleCompleteTime\030\002 \001(\003\022\023\n\013coi" +
-      "nsStolen\030\003 \001(\005\032\202\001\n\031ReferralNotificationP" +
-      "roto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n" +
-      "\024coinsGivenToReferrer\030\003 \001(\005\032\341\016\n\020StartupC" +
-      "onstants\022H\n\025inAppPurchasePackages\030\001 \003(\0132" +
-      ").com.lvl6.proto.InAppPurchasePackagePro",
-      "to\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfS" +
-      "ingleStruct\030\003 \001(\005\022n\n\025animatedSpriteOffse" +
-      "ts\030\004 \003(\0132O.com.lvl6.proto.StartupRespons" +
-      "eProto.StartupConstants.AnimatedSpriteOf" +
-      "fsetProto\022\025\n\rminNameLength\030\005 \001(\005\022\025\n\rmaxN" +
-      "ameLength\030\006 \001(\005\022\035\n\025maxLengthOfChatString" +
-      "\030\007 \001(\005\022Z\n\rclanConstants\030\010 \001(\0132C.com.lvl6" +
-      ".proto.StartupResponseProto.StartupConst" +
-      "ants.ClanConstants\022p\n\030downloadableNibCon" +
-      "stants\030\t \001(\0132N.com.lvl6.proto.StartupRes",
-      "ponseProto.StartupConstants.Downloadable" +
-      "NibConstants\022\'\n\037numHoursBeforeReshowingG" +
-      "oldSale\030\n \001(\005\022\036\n\026levelToShowRateUsPopup\030" +
-      "\013 \001(\005\022e\n\022touramentConstants\030\014 \001(\0132I.com." +
-      "lvl6.proto.StartupResponseProto.StartupC" +
-      "onstants.TournamentConstants\022\037\n\027fbConnec" +
-      "tRewardDiamonds\030\r \001(\005\022\023\n\013faqFileName\030\016 \001" +
-      "(\t\022<\n\022adminChatUserProto\030\017 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\022\037\n\027numBeginnerS" +
-      "alesAllowed\030\020 \001(\005\022h\n\024userMonsterConstant",
-      "s\030\021 \001(\0132J.com.lvl6.proto.StartupResponse" +
-      "Proto.StartupConstants.UserMonsterConsta" +
-      "nts\022`\n\020monsterConstants\030\022 \001(\0132F.com.lvl6" +
-      ".proto.StartupResponseProto.StartupConst" +
-      "ants.MonsterConstants\022\025\n\rminutesPerGem\030\023" +
-      " \001(\002\022\031\n\021pvpRequiredMinLvl\030\024 \001(\005\022\027\n\017gemsP" +
-      "erResource\030\025 \001(\002\022\'\n\037continueBattleGemCos" +
-      "tMultiplier\030\026 \001(\002\032_\n\031AnimatedSpriteOffse" +
-      "tProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(" +
-      "\0132\037.com.lvl6.proto.CoordinateProto\032\232\001\n\rC",
-      "lanConstants\022\035\n\025coinPriceToCreateClan\030\001 " +
-      "\001(\005\022 \n\030maxCharLengthForClanName\030\002 \001(\005\022\'\n" +
-      "\037maxCharLengthForClanDescription\030\003 \001(\005\022\037" +
-      "\n\027maxCharLengthForClanTag\030\004 \001(\005\032c\n\030Downl" +
-      "oadableNibConstants\022\022\n\nmapNibName\030\001 \001(\t\022" +
-      "\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShoppeN" +
-      "ibName\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nw" +
-      "insWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n" +
-      "\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowAfte" +
-      "rEventEnd\030\004 \001(\005\032R\n\024UserMonsterConstants\022",
-      "\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMaxNu" +
-      "mMonsterLimit\030\002 \001(\005\032\211\001\n\020MonsterConstants" +
-      "\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsT" +
-      "oHealPerHealthPoint\030\002 \001(\002\022\031\n\021elementalSt" +
-      "rength\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\"" +
-      "A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_" +
-      "UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupSta" +
-      "tus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B" +
-      "\023B\021EventStartupProto"
+      "oto\022I\n\017curRaidClanInfo\030\037 \001(\01320.com.lvl6." +
+      "proto.PersistentClanEventClanInfoProto\022M" +
+      "\n\023curRaidClanUserInfo\030  \001(\01320.com.lvl6.p" +
+      "roto.PersistentClanEventUserInfoProto\032\200\001" +
+      "\n\031AttackedNotificationProto\0222\n\010attacker\030" +
+      "\001 \001(\0132 .com.lvl6.proto.MinimumUserProto\022" +
+      "\032\n\022battleCompleteTime\030\002 \001(\003\022\023\n\013coinsStol" +
+      "en\030\003 \001(\005\032\202\001\n\031ReferralNotificationProto\0222" +
+      "\n\010referred\030\001 \001(\0132 .com.lvl6.proto.Minimu",
+      "mUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034\n\024coins" +
+      "GivenToReferrer\030\003 \001(\005\032\341\016\n\020StartupConstan" +
+      "ts\022H\n\025inAppPurchasePackages\030\001 \003(\0132).com." +
+      "lvl6.proto.InAppPurchasePackageProto\022\027\n\017" +
+      "maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOfSingleS" +
+      "truct\030\003 \001(\005\022n\n\025animatedSpriteOffsets\030\004 \003" +
+      "(\0132O.com.lvl6.proto.StartupResponseProto" +
+      ".StartupConstants.AnimatedSpriteOffsetPr" +
+      "oto\022\025\n\rminNameLength\030\005 \001(\005\022\025\n\rmaxNameLen" +
+      "gth\030\006 \001(\005\022\035\n\025maxLengthOfChatString\030\007 \001(\005",
+      "\022Z\n\rclanConstants\030\010 \001(\0132C.com.lvl6.proto" +
+      ".StartupResponseProto.StartupConstants.C" +
+      "lanConstants\022p\n\030downloadableNibConstants" +
+      "\030\t \001(\0132N.com.lvl6.proto.StartupResponseP" +
+      "roto.StartupConstants.DownloadableNibCon" +
+      "stants\022\'\n\037numHoursBeforeReshowingGoldSal" +
+      "e\030\n \001(\005\022\036\n\026levelToShowRateUsPopup\030\013 \001(\005\022" +
+      "e\n\022touramentConstants\030\014 \001(\0132I.com.lvl6.p" +
+      "roto.StartupResponseProto.StartupConstan" +
+      "ts.TournamentConstants\022\037\n\027fbConnectRewar",
+      "dDiamonds\030\r \001(\005\022\023\n\013faqFileName\030\016 \001(\t\022<\n\022" +
+      "adminChatUserProto\030\017 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\037\n\027numBeginnerSalesAl" +
+      "lowed\030\020 \001(\005\022h\n\024userMonsterConstants\030\021 \001(" +
+      "\0132J.com.lvl6.proto.StartupResponseProto." +
+      "StartupConstants.UserMonsterConstants\022`\n" +
+      "\020monsterConstants\030\022 \001(\0132F.com.lvl6.proto" +
+      ".StartupResponseProto.StartupConstants.M" +
+      "onsterConstants\022\025\n\rminutesPerGem\030\023 \001(\002\022\031" +
+      "\n\021pvpRequiredMinLvl\030\024 \001(\005\022\027\n\017gemsPerReso",
+      "urce\030\025 \001(\002\022\'\n\037continueBattleGemCostMulti" +
+      "plier\030\026 \001(\002\032_\n\031AnimatedSpriteOffsetProto" +
+      "\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.co" +
+      "m.lvl6.proto.CoordinateProto\032\232\001\n\rClanCon" +
+      "stants\022\035\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n" +
+      "\030maxCharLengthForClanName\030\002 \001(\005\022\'\n\037maxCh" +
+      "arLengthForClanDescription\030\003 \001(\005\022\037\n\027maxC" +
+      "harLengthForClanTag\030\004 \001(\005\032c\n\030Downloadabl" +
+      "eNibConstants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020exp" +
+      "ansionNibName\030\002 \001(\t\022\031\n\021goldShoppeNibName",
+      "\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n\nwinsWei" +
+      "ght\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013flees" +
+      "Weight\030\003 \001(\005\022#\n\033numHoursToShowAfterEvent" +
+      "End\030\004 \001(\005\032R\n\024UserMonsterConstants\022\027\n\017max" +
+      "NumTeamSlots\030\001 \001(\005\022!\n\031initialMaxNumMonst" +
+      "erLimit\030\002 \001(\005\032\211\001\n\020MonsterConstants\022\032\n\022ca" +
+      "shPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHealP" +
+      "erHealthPoint\030\002 \001(\002\022\031\n\021elementalStrength" +
+      "\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\"A\n\014Upd" +
+      "ateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE",
+      "\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n" +
+      "\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021Eve" +
+      "ntStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -13464,7 +13754,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_descriptor,
-              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", },
+              new java.lang.String[] { "ServerTimeMillis", "Sender", "StartupStatus", "UpdateStatus", "StartupConstants", "UserQuests", "RedeemedQuestIds", "UserClanInfo", "CompletedTaskIds", "AppStoreURL", "ReviewPageURL", "ReviewPageConfirmationMessage", "PlayerHasBoughtInAppPurchase", "AttackNotifications", "ReferralNotifications", "NoticesToPlayers", "GlobalChats", "ClanChats", "Pcpp", "UsersMonsters", "MonstersHealing", "Enhancements", "Evolution", "RareBoosterPurchases", "KabamNaid", "InvitesToMeForSlots", "InvitesFromMeForSlots", "StaticDataStuffProto", "TaskIdForCurrentCityBoss", "UserEvents", "CurRaidClanInfo", "CurRaidClanUserInfo", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_AttackedNotificationProto_descriptor =

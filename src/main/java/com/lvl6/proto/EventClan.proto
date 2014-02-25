@@ -251,17 +251,16 @@ message ChangeClanJoinTypeResponseProto {
 //------------------------------------------------------------------------------------------
 
 //a clan can only have at max one clan raid/event going on at once.
+//this event used to either begin a clan raid or set a user's monsters
 message BeginClanRaidRequestProto {
 	optional MinimumUserProtoForClans sender = 1;
 	optional int64 curTime = 2;
 	//Example. If 7 raids and numbered 1-7, raidId is one of these numbers
-	optional int32 raidId = 3;
+	optional int32 raidId = 3; //should always be set
 	
-	//if true then the server won't check if user can begin clan raid, but just
-	//set the monsters the user will use in the raid
-	//if false then server will check if user can begin clan raid and set the
-	//monsters the user will use in the raid
-	optional bool onlySettingMonsterTeamForRaid = 4;
+	//either set monsters or begin the clan raid
+	optional bool setMonsterTeamForRaid = 4;
+	repeated int32 userMonsterIds = 5;
 }
 
 	//send to every clan member that raid started
@@ -297,6 +296,18 @@ message AttackClanRaidMonsterRequestProto {
 	//health of user's monsters
 	repeated UserMonsterCurrentHealthProto monsterHealths = 4;
 	
+	//client hints to the server when to check to see if the clan_raid_stage_monster is dead
+	//so as to prevent the server from calculating if the monster is dead after every
+	//one of these events is fired
+	optional bool checkIfMonsterDied = 5;
+	
+	//will be set to true if the monster being attacked is the last monster, but
+	//will not trigger anything on the server unless checkIfMonsterDied is true
+	optional bool monsterIsLastInStage = 6;
+	
+	//will be set to true if the user is in the last stage, but will not trigger
+	//anything on the server unless monsterIsLastInStage and checkIfMonsterDied are true
+	optional bool stageIsLastInRaid = 7;
 }
 
 //will be sent to everyone in the clan

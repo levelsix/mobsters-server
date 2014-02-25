@@ -148,4 +148,7 @@ public interface InsertUtil {
 	public abstract int insertIntoClanEventPersistentForClan(int clanId,
 			int clanEventPersistentId, int clanRaidId, int clanRaidStageId,
 			Timestamp stageStartTime, int clanRaidStageMonsterId, Timestamp stageMonsterStartTime);
+	
+	public abstract int insertIntoUpdateMonstersClanEventPersistentForUser(int userId, int clanId,
+			int clanRaidId, List<Integer> userMonsterIds);
 }

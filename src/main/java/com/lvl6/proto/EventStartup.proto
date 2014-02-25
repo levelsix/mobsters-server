@@ -87,7 +87,11 @@ message StartupResponseProto {
 	//has the cool down timers for each event for a user
 	repeated UserPersistentEventProto userEvents = 30;
 	
+	//current clan raid stats
+	optional PersistentClanEventClanInfoProto curRaidClanInfo = 31;
+	optional PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
 	
+
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
 

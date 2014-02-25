@@ -28,14 +28,14 @@ import com.lvl6.utils.DBConnection;
 		Connection conn = null;
 		ResultSet rs = null;
 		
-		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
+		Map<String, Object> paramsToVals = new HashMap<String, Object>();
+    paramsToVals.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
      
 		
 		ClanEventPersistentForClan clanPersistentEvent = null;
 		try {
 			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsByUserId(conn, clanId, TABLE_NAME);
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
 			clanPersistentEvent = grabClanEventPersistentForClanFromRS(rs);
 		} catch (Exception e) {
     	log.error("clan event persistent for clan retrieve db error.", e);

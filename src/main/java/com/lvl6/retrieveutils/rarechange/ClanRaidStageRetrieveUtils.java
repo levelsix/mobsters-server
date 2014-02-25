@@ -162,8 +162,10 @@ import com.lvl6.utils.DBConnection;
     int clanRaidId = rs.getInt(i++);
     int eventDuration = rs.getInt(i++);
     int stageNum = rs.getInt(i++);
+    String name = rs.getString(i++);
     
-    ClanRaidStage clanRaidStage = new ClanRaidStage(id, clanRaidId, eventDuration, stageNum);
+    ClanRaidStage clanRaidStage = new ClanRaidStage(id, clanRaidId, eventDuration,
+    		stageNum, name);
         
     return clanRaidStage;
   }

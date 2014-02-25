@@ -78,6 +78,7 @@ message ClanRaidStageProto {
 	optional int32 clanRaidId = 2;
 	optional int32 durationMinutes = 3;
 	optional int32 stageNum = 4;
+	optional string name = 5;
 	
 	//multiple monsters per stage (all will spawn, unlike task_stage_monsters)
 	repeated ClanRaidStageMonsterProto monsters = 11;

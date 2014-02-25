@@ -37,6 +37,8 @@ import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
+import com.lvl6.info.ClanEventPersistentForClan;
+import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -57,6 +59,8 @@ import com.lvl6.properties.KabamProperties;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
@@ -77,6 +81,8 @@ import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.OfflinePvpUser;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
+import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
@@ -217,25 +223,28 @@ public class StartupController extends EventController {
     	List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
       user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
       if (user != null) {
-        getHazelcastPvpUtil().lockPlayer(user.getId(), this.getClass().getSimpleName());
+      	int userId = user.getId();
+        getHazelcastPvpUtil().lockPlayer(userId, this.getClass().getSimpleName());
         try {
           startupStatus = StartupStatus.USER_IN_DB;
           log.info("No major update... getting user info");
 //          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
-          setInProgressAndAvailableQuests(resBuilder, user);
-          setUserClanInfos(resBuilder, user);
+          setInProgressAndAvailableQuests(resBuilder, userId);
+          setUserClanInfos(resBuilder, userId);
           setNotifications(resBuilder, user);
-          setNoticesToPlayers(resBuilder, user);
+          setNoticesToPlayers(resBuilder);
           setChatMessages(resBuilder, user);
-          setPrivateChatPosts(resBuilder, user);
-          setUserMonsterStuff(resBuilder, user);
+          setPrivateChatPosts(resBuilder, user, userId);
+          setUserMonsterStuff(resBuilder, userId);
           setBoosterPurchases(resBuilder);
-          setFacebookAndExtraSlotsStuff(resBuilder, user);
-          setCompletedTasks(resBuilder, user);
-          setAllStaticData(resBuilder, user);
-          setEventStuff(resBuilder, user);
+          setFacebookAndExtraSlotsStuff(resBuilder, user, userId);
+          setCompletedTasks(resBuilder, userId);
+          setAllStaticData(resBuilder, userId);
+          setEventStuff(resBuilder, userId);
           //if server sees that the user is in a pvp battle, decrement user's elo
-          pvpBattleStuff(user, freshRestart); 
+          pvpBattleStuff(user, userId, freshRestart); 
+          setClanRaidStuff(resBuilder, user, userId);
+          
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
           setUnhandledForgeAttempts(resBuilder, user);
@@ -351,9 +360,9 @@ public class StartupController extends EventController {
   	return udidUser;
   }
 
-  private void setInProgressAndAvailableQuests(Builder resBuilder, User user) {
+  private void setInProgressAndAvailableQuests(Builder resBuilder, int userId) {
   	  List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
-  	      .getUserQuestsForUser(user.getId());
+  	      .getUserQuestsForUser(userId);
 //  	  log.info("user quests: " + inProgressAndRedeemedUserQuests);
   	  
   	  List<QuestForUser> inProgressQuests = new ArrayList<QuestForUser>();
@@ -380,9 +389,9 @@ public class StartupController extends EventController {
   	  resBuilder.addAllRedeemedQuestIds(redeemedQuestIds);
   }
   
-  private void setUserClanInfos(StartupResponseProto.Builder resBuilder, User user) {
+  private void setUserClanInfos(StartupResponseProto.Builder resBuilder, int userId) {
     List<UserClan> userClans = RetrieveUtils.userClanRetrieveUtils().getUserClansRelatedToUser(
-        user.getId());
+        userId);
     for (UserClan uc : userClans) {
       resBuilder.addUserClanInfo(CreateInfoProtoUtils.createFullUserClanProtoFromUserClan(uc));
     }
@@ -413,7 +422,7 @@ public class StartupController extends EventController {
 //    }
   }
   
-  private void setNoticesToPlayers(Builder resBuilder, User user) {
+  private void setNoticesToPlayers(Builder resBuilder) {
   	List<String> notices = StartupStuffRetrieveUtils.getAllActiveAlerts();
   	if (null != notices) {
   	  for (String notice : notices) {
@@ -478,8 +487,7 @@ public class StartupController extends EventController {
   	  }
   }
 
-  private void setPrivateChatPosts(Builder resBuilder, User aUser) {
-    int userId = aUser.getId();
+  private void setPrivateChatPosts(Builder resBuilder, User aUser, int userId) {
     boolean isRecipient = true;
     Map<Integer, Integer> userIdsToPrivateChatPostIds = null;
     Map<Integer, PrivateChatPost> postIdsToPrivateChatPosts = new HashMap<Integer, PrivateChatPost>();
@@ -629,8 +637,7 @@ public class StartupController extends EventController {
   }
 
 
-  private void setUserMonsterStuff(Builder resBuilder, User user) {
-  	int userId = user.getId();
+  private void setUserMonsterStuff(Builder resBuilder, int userId) {
     List<MonsterForUser> userMonsters= RetrieveUtils.monsterForUserRetrieveUtils()
         .getMonstersForUser(userId);
     
@@ -731,9 +738,8 @@ public class StartupController extends EventController {
     }
   }  
   
-  private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User thisUser) {
+  private void setFacebookAndExtraSlotsStuff(Builder resBuilder, User thisUser, int userId) {
   	//gather up data so as to make only one user retrieval query
-  	int userId = thisUser.getId();
   	
   	//get the invites where this user is the recipient, get unaccepted, hence, unredeemed invites
   	Map<Integer, UserFacebookInviteForSlot> idsToInvitesToMe = new HashMap<Integer, UserFacebookInviteForSlot>();
@@ -857,21 +863,19 @@ public class StartupController extends EventController {
   }
   
   
-  private void setCompletedTasks(Builder resBuilder, User user) {
+  private void setCompletedTasks(Builder resBuilder, int userId) {
   	List<Integer> taskIds = TaskForUserCompletedRetrieveUtils
-  			.getAllTaskIdsForUser(user.getId());
+  			.getAllTaskIdsForUser(userId);
   	resBuilder.addAllCompletedTaskIds(taskIds);
   }
   
-  private void setAllStaticData(Builder resBuilder, User user) {
-  	int userId = user.getId();
+  private void setAllStaticData(Builder resBuilder, int userId) {
   	StaticDataProto sdp = MiscMethods.getAllStaticData(userId);
   	
   	resBuilder.setStaticDataStuffProto(sdp);
   }
   
-  private void setEventStuff(Builder resBuilder, User user) {
-  	int userId = user.getId();
+  private void setEventStuff(Builder resBuilder, int userId) {
   	List<EventPersistentForUser> events = EventPersistentForUserRetrieveUtils
   			.getUserPersistentEventForUserId(userId);
   	
@@ -882,9 +886,8 @@ public class StartupController extends EventController {
   	
   }
   
-  private void pvpBattleStuff(User user, boolean isFreshRestart) {
+  private void pvpBattleStuff(User user, int userId, boolean isFreshRestart) {
   	//remove this user from the users available to be attacked in pvp
-  	int userId = user.getId();
   	getHazelcastPvpUtil().removeOfflinePvpUser(userId);
   	
   	//if bool isFreshRestart is true, then deduct user's elo by amount specified in
@@ -953,6 +956,32 @@ public class StartupController extends EventController {
   }
   
   
+  private void setClanRaidStuff(Builder resBuilder, User user, int userId) {
+  	int clanId = user.getClanId();
+  	
+  	if (clanId <= 0) {
+  		return;
+  	}
+  	//get the clan raid information for the clan
+  	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+  			.getPersistentEventForClanId(clanId);
+  	
+  	if (null != cepfc) {
+  		PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
+  				.createPersistentClanEventClanInfoProto(cepfc);
+  		resBuilder.setCurRaidClanInfo(pcecip);
+  	}
+  	//get the clan raid information for all the clan users
+  	//shouldn't be null (per the retrieveUtils)
+  	Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
+  			.getPersistentEventUserInfoForClanId(clanId);
+  	
+  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+  		PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+  				.createPersistentClanEventUserInfoProto(cepfu);
+  		resBuilder.setCurRaidClanUserInfo(pceuip);
+  	}
+  }
   
   
   
