@@ -3691,6 +3691,10 @@ public final class ClanProto {
     boolean hasStageNum();
     int getStageNum();
     
+    // optional string name = 5;
+    boolean hasName();
+    String getName();
+    
     // repeated .com.lvl6.proto.ClanRaidStageMonsterProto monsters = 11;
     java.util.List<com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto> 
         getMonstersList();
@@ -3780,6 +3784,38 @@ public final class ClanProto {
       return stageNum_;
     }
     
+    // optional string name = 5;
+    public static final int NAME_FIELD_NUMBER = 5;
+    private java.lang.Object name_;
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     // repeated .com.lvl6.proto.ClanRaidStageMonsterProto monsters = 11;
     public static final int MONSTERS_FIELD_NUMBER = 11;
     private java.util.List<com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto> monsters_;
@@ -3827,6 +3863,7 @@ public final class ClanProto {
       clanRaidId_ = 0;
       durationMinutes_ = 0;
       stageNum_ = 0;
+      name_ = "";
       monsters_ = java.util.Collections.emptyList();
       possibleRewards_ = java.util.Collections.emptyList();
     }
@@ -3853,6 +3890,9 @@ public final class ClanProto {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, stageNum_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getNameBytes());
       }
       for (int i = 0; i < monsters_.size(); i++) {
         output.writeMessage(11, monsters_.get(i));
@@ -3884,6 +3924,10 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, stageNum_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getNameBytes());
       }
       for (int i = 0; i < monsters_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -4027,15 +4071,17 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         stageNum_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (monstersBuilder_ == null) {
           monsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
         } else {
           monstersBuilder_.clear();
         }
         if (possibleRewardsBuilder_ == null) {
           possibleRewards_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
         } else {
           possibleRewardsBuilder_.clear();
         }
@@ -4093,19 +4139,23 @@ public final class ClanProto {
           to_bitField0_ |= 0x00000008;
         }
         result.stageNum_ = stageNum_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.name_ = name_;
         if (monstersBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
             monsters_ = java.util.Collections.unmodifiableList(monsters_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.monsters_ = monsters_;
         } else {
           result.monsters_ = monstersBuilder_.build();
         }
         if (possibleRewardsBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
             possibleRewards_ = java.util.Collections.unmodifiableList(possibleRewards_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000040);
           }
           result.possibleRewards_ = possibleRewards_;
         } else {
@@ -4139,11 +4189,14 @@ public final class ClanProto {
         if (other.hasStageNum()) {
           setStageNum(other.getStageNum());
         }
+        if (other.hasName()) {
+          setName(other.getName());
+        }
         if (monstersBuilder_ == null) {
           if (!other.monsters_.isEmpty()) {
             if (monsters_.isEmpty()) {
               monsters_ = other.monsters_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureMonstersIsMutable();
               monsters_.addAll(other.monsters_);
@@ -4156,7 +4209,7 @@ public final class ClanProto {
               monstersBuilder_.dispose();
               monstersBuilder_ = null;
               monsters_ = other.monsters_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
               monstersBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getMonstersFieldBuilder() : null;
@@ -4169,7 +4222,7 @@ public final class ClanProto {
           if (!other.possibleRewards_.isEmpty()) {
             if (possibleRewards_.isEmpty()) {
               possibleRewards_ = other.possibleRewards_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
             } else {
               ensurePossibleRewardsIsMutable();
               possibleRewards_.addAll(other.possibleRewards_);
@@ -4182,7 +4235,7 @@ public final class ClanProto {
               possibleRewardsBuilder_.dispose();
               possibleRewardsBuilder_ = null;
               possibleRewards_ = other.possibleRewards_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000040);
               possibleRewardsBuilder_ = 
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getPossibleRewardsFieldBuilder() : null;
@@ -4240,6 +4293,11 @@ public final class ClanProto {
             case 32: {
               bitField0_ |= 0x00000008;
               stageNum_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              bitField0_ |= 0x00000010;
+              name_ = input.readBytes();
               break;
             }
             case 90: {
@@ -4344,13 +4402,49 @@ public final class ClanProto {
         return this;
       }
       
+      // optional string name = 5;
+      private java.lang.Object name_ = "";
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      void setName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000010;
+        name_ = value;
+        onChanged();
+      }
+      
       // repeated .com.lvl6.proto.ClanRaidStageMonsterProto monsters = 11;
       private java.util.List<com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto> monsters_ =
         java.util.Collections.emptyList();
       private void ensureMonstersIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
           monsters_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto>(monsters_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
          }
       }
       
@@ -4466,7 +4560,7 @@ public final class ClanProto {
       public Builder clearMonsters() {
         if (monstersBuilder_ == null) {
           monsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           monstersBuilder_.clear();
@@ -4522,7 +4616,7 @@ public final class ClanProto {
           monstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto, com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto.Builder, com.lvl6.proto.ClanProto.ClanRaidStageMonsterProtoOrBuilder>(
                   monsters_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
           monsters_ = null;
@@ -4534,9 +4628,9 @@ public final class ClanProto {
       private java.util.List<com.lvl6.proto.ClanProto.ClanRaidStageRewardProto> possibleRewards_ =
         java.util.Collections.emptyList();
       private void ensurePossibleRewardsIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           possibleRewards_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanRaidStageRewardProto>(possibleRewards_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000040;
          }
       }
       
@@ -4652,7 +4746,7 @@ public final class ClanProto {
       public Builder clearPossibleRewards() {
         if (possibleRewardsBuilder_ == null) {
           possibleRewards_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000040);
           onChanged();
         } else {
           possibleRewardsBuilder_.clear();
@@ -4708,7 +4802,7 @@ public final class ClanProto {
           possibleRewardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
               com.lvl6.proto.ClanProto.ClanRaidStageRewardProto, com.lvl6.proto.ClanProto.ClanRaidStageRewardProto.Builder, com.lvl6.proto.ClanProto.ClanRaidStageRewardProtoOrBuilder>(
                   possibleRewards_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           possibleRewards_ = null;
@@ -7931,35 +8025,35 @@ public final class ClanProto {
       "escription\030\007 \001(\t\022\024\n\014dialogueText\030\010 \001(\t\022\037",
       "\n\027spotlightMonsterImgName\030\t \001(\t\0226\n\nraidS" +
       "tages\030\n \003(\0132\".com.lvl6.proto.ClanRaidSta" +
-      "geProto\"\354\001\n\022ClanRaidStageProto\022\027\n\017clanRa" +
+      "geProto\"\372\001\n\022ClanRaidStageProto\022\027\n\017clanRa" +
       "idStageId\030\001 \001(\005\022\022\n\nclanRaidId\030\002 \001(\005\022\027\n\017d" +
-      "urationMinutes\030\003 \001(\005\022\020\n\010stageNum\030\004 \001(\005\022;" +
-      "\n\010monsters\030\013 \003(\0132).com.lvl6.proto.ClanRa" +
-      "idStageMonsterProto\022A\n\017possibleRewards\030\014" +
-      " \003(\0132(.com.lvl6.proto.ClanRaidStageRewar" +
-      "dProto\">\n\031ClanRaidStageMonsterProto\022\016\n\006c" +
-      "rsmId\030\001 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\"\227\001\n\030ClanR",
-      "aidStageRewardProto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014m" +
-      "inOilReward\030\003 \001(\005\022\024\n\014maxOilReward\030\004 \001(\005\022" +
-      "\025\n\rminCashReward\030\005 \001(\005\022\025\n\rmaxCashReward\030" +
-      "\006 \001(\005\022\021\n\tmonsterId\030\007 \001(\005\"\252\001\n\030PersistentC" +
-      "lanEventProto\022\023\n\013clanEventId\030\001 \001(\005\0224\n\tda" +
-      "yOfWeek\030\002 \001(\0162\031.com.lvl6.proto.DayOfWeek" +
-      ":\006MONDAY\022\021\n\tstartHour\030\003 \001(\005\022\034\n\024eventDura" +
-      "tionMinutes\030\004 \001(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\273\001" +
-      "\n PersistentClanEventClanInfoProto\022\016\n\006cl" +
-      "anId\030\001 \001(\005\022\023\n\013clanEventId\030\002 \001(\005\022\022\n\nclanR",
-      "aidId\030\003 \001(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\026\n\016" +
-      "stageStartTime\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025" +
-      "stageMonsterStartTime\030\007 \001(\003\"\303\001\n Persiste" +
-      "ntClanEventUserInfoProto\022\016\n\006userId\030\001 \001(\005" +
-      "\022\016\n\006clanId\030\002 \001(\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgD" +
-      "one\030\004 \001(\005\022\r\n\005crsId\030\005 \001(\005\022\022\n\ncrsDmgDone\030\006" +
-      " \001(\005\022\016\n\006crsmId\030\007 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(" +
-      "\005\022\026\n\016userMonsterIds\030\t \003(\005*X\n\016UserClanSta" +
-      "tus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CA" +
-      "PTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tC",
-      "lanProto"
+      "urationMinutes\030\003 \001(\005\022\020\n\010stageNum\030\004 \001(\005\022\014" +
+      "\n\004name\030\005 \001(\t\022;\n\010monsters\030\013 \003(\0132).com.lvl" +
+      "6.proto.ClanRaidStageMonsterProto\022A\n\017pos" +
+      "sibleRewards\030\014 \003(\0132(.com.lvl6.proto.Clan" +
+      "RaidStageRewardProto\">\n\031ClanRaidStageMon" +
+      "sterProto\022\016\n\006crsmId\030\001 \001(\005\022\021\n\tmonsterId\030\003",
+      " \001(\005\"\227\001\n\030ClanRaidStageRewardProto\022\016\n\006crs" +
+      "rId\030\001 \001(\005\022\024\n\014minOilReward\030\003 \001(\005\022\024\n\014maxOi" +
+      "lReward\030\004 \001(\005\022\025\n\rminCashReward\030\005 \001(\005\022\025\n\r" +
+      "maxCashReward\030\006 \001(\005\022\021\n\tmonsterId\030\007 \001(\005\"\252" +
+      "\001\n\030PersistentClanEventProto\022\023\n\013clanEvent" +
+      "Id\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.p" +
+      "roto.DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(" +
+      "\005\022\034\n\024eventDurationMinutes\030\004 \001(\005\022\022\n\nclanR" +
+      "aidId\030\005 \001(\005\"\273\001\n PersistentClanEventClanI" +
+      "nfoProto\022\016\n\006clanId\030\001 \001(\005\022\023\n\013clanEventId\030",
+      "\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRaidSta" +
+      "geId\030\004 \001(\005\022\026\n\016stageStartTime\030\005 \001(\003\022\016\n\006cr" +
+      "smId\030\006 \001(\005\022\035\n\025stageMonsterStartTime\030\007 \001(" +
+      "\003\"\303\001\n PersistentClanEventUserInfoProto\022\016" +
+      "\n\006userId\030\001 \001(\005\022\016\n\006clanId\030\002 \001(\005\022\014\n\004crId\030\003" +
+      " \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\r\n\005crsId\030\005 \001(\005\022\022" +
+      "\n\ncrsDmgDone\030\006 \001(\005\022\016\n\006crsmId\030\007 \001(\005\022\023\n\013cr" +
+      "smDmgDone\030\010 \001(\005\022\026\n\016userMonsterIds\030\t \003(\005*" +
+      "X\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_" +
+      "LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQ",
+      "UESTING\020\nB\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8011,7 +8105,7 @@ public final class ClanProto {
           internal_static_com_lvl6_proto_ClanRaidStageProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ClanRaidStageProto_descriptor,
-              new java.lang.String[] { "ClanRaidStageId", "ClanRaidId", "DurationMinutes", "StageNum", "Monsters", "PossibleRewards", },
+              new java.lang.String[] { "ClanRaidStageId", "ClanRaidId", "DurationMinutes", "StageNum", "Name", "Monsters", "PossibleRewards", },
               com.lvl6.proto.ClanProto.ClanRaidStageProto.class,
               com.lvl6.proto.ClanProto.ClanRaidStageProto.Builder.class);
           internal_static_com_lvl6_proto_ClanRaidStageMonsterProto_descriptor =

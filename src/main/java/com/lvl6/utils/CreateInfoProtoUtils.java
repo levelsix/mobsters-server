@@ -1632,6 +1632,11 @@ public class CreateInfoProtoUtils {
   	crspb.setDurationMinutes(crs.getDurationMinutes());
   	crspb.setStageNum(crs.getStageNum());
   	
+  	String name = crs.getName();
+  	if (null != name) {
+  		crspb.setName(name);
+  	}
+  	
   	//create the monster protos
   	Map<Integer, ClanRaidStageMonster> monsters = ClanRaidStageMonsterRetrieveUtils
   			.getClanRaidStageMonstersForClanRaidStageId(clanRaidStageId);
