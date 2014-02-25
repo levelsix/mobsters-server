@@ -1703,8 +1703,6 @@ public class CreateInfoProtoUtils {
   	Date stageStartTime = cepfc.getStageStartTime();
   	if (null != stageStartTime) {
   		pcecipb.setStageStartTime(stageStartTime.getTime());
-  	} else {
-  		
   	}
   	
   	pcecipb.setCrsmId(cepfc.getCrsmId());
