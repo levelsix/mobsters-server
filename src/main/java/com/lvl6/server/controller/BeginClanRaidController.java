@@ -200,37 +200,37 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	//user is authorized to start clan raid
     }
     
-    //user can only start raid if an event exists for it, check if event exists,
-    //AT THE MOMENT SHOULD ONLY BE ONE ACTIVE CLAN RAID; no clan raids should overlap
-    Map<Integer, ClanEventPersistent> clanRaidIdToEvent = ClanEventPersistentRetrieveUtils
-    		.getActiveClanRaidIdsToEvents(curDate, timeUtils);
-    if (!clanRaidIdToEvent.containsKey(clanRaidId)) {
-    	resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_ACTIVE_CLAN_RAID);
-    	log.error("clan raid id requested does not exists. " + clanRaidId + "\t user=" + mupfc);
-    	return false;
-    }
-    if (clanRaidIdToEvent.size() > 1) {
-    	log.warn("multiple clan raids and clan raid events overlapping. clanRaidIdToEvent=" +
-    			clanRaidIdToEvent);
-    }
-    
-    //give the event id back to the caller
-    ClanEventPersistent cep = clanRaidIdToEvent.get(clanRaidId);
-    int eventId = cep.getId();
-    clanEventPersistentId.add(eventId);
-
-    //check if the clan already has existing raid information
-    if (!setMonsterTeamForRaid) {
-    	if (!validClanInfo(resBuilder, clanId, clanRaidId, curDate)) {
-    		return false;
-    	}
-    }
-    
-    //Don't think any checks need to be made
-    //(user needs to equip user monsters before beginning raid; checks are done there) 
-    if (setMonsterTeamForRaid) {
-    	
-    }
+//    //user can only start raid if an event exists for it, check if event exists,
+//    //AT THE MOMENT SHOULD ONLY BE ONE ACTIVE CLAN RAID; no clan raids should overlap
+//    Map<Integer, ClanEventPersistent> clanRaidIdToEvent = ClanEventPersistentRetrieveUtils
+//    		.getActiveClanRaidIdsToEvents(curDate, timeUtils);
+//    if (!clanRaidIdToEvent.containsKey(clanRaidId)) {
+//    	resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_ACTIVE_CLAN_RAID);
+//    	log.error("clan raid id requested does not exists. " + clanRaidId + "\t user=" + mupfc);
+//    	return false;
+//    }
+//    if (clanRaidIdToEvent.size() > 1) {
+//    	log.warn("multiple clan raids and clan raid events overlapping. clanRaidIdToEvent=" +
+//    			clanRaidIdToEvent);
+//    }
+//    
+//    //give the event id back to the caller
+//    ClanEventPersistent cep = clanRaidIdToEvent.get(clanRaidId);
+//    int eventId = cep.getId();
+//    clanEventPersistentId.add(eventId);
+//
+//    //check if the clan already has existing raid information
+//    if (!setMonsterTeamForRaid) {
+//    	if (!validClanInfo(resBuilder, clanId, clanRaidId, curDate)) {
+//    		return false;
+//    	}
+//    }
+//    
+//    //Don't think any checks need to be made
+//    //(user needs to equip user monsters before beginning raid; checks are done there) 
+//    if (setMonsterTeamForRaid) {
+//    	
+//    }
     
     return true;
   }
