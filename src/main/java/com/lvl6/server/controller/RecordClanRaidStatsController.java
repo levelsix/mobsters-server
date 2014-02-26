@@ -26,6 +26,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -37,7 +38,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Autowired
   protected HazelcastPvpUtil hazelcastPvpUtil;
   
-  
   protected HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;
 	}
@@ -46,6 +46,19 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 	}
 	
+
+  @Autowired
+  protected Locker locker;
+  
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+
 	@Autowired
 	protected TimeUtils timeUtils;
 
@@ -97,7 +110,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     		new HashMap<Integer, ClanEventPersistentForUser>();
     boolean errorless = true;
     if (0 != clanId) {
-    	getHazelcastPvpUtil().lockClan(clanId);
+    	getLocker().lockClan(clanId);
     }
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
@@ -136,7 +149,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     } finally {
     	
     	if (0 != clanId) {
-      	getHazelcastPvpUtil().unlockClan(clanId);
+      	getLocker().unlockClan(clanId);
       }
     	
     }

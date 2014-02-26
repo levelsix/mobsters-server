@@ -30,6 +30,7 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithMaxResources;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.OfflinePvpUser;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
@@ -40,6 +41,8 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   @Autowired
   protected HazelcastPvpUtil hazelcastPvpUtil;
   
+  @Autowired
+  protected Locker locker;
 
   public EndPvpBattleController() {
     numAllocatedThreads = 7;
@@ -90,11 +93,11 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     //NEED TO LOCK BOTH PLAYERS, well need to lock defender because defender can be online,
     //Lock attacker because someone might be attacking him while attacker is attacking defender?
     if (0 != defenderId) {
-    	getHazelcastPvpUtil().lockPlayers(defenderId, attackerId, this.getClass().getSimpleName());
+    	getLocker().lockPlayers(defenderId, attackerId, this.getClass().getSimpleName());
     	log.info("locked defender and attacker");
     } else {
     	//ONLY ATTACKER IF DEFENDER IS FAKE
-    	getHazelcastPvpUtil().lockPlayer(attackerId, this.getClass().getSimpleName());
+    	getLocker().lockPlayer(attackerId, this.getClass().getSimpleName());
     	log.info("locked attacker");
     }
     
@@ -161,10 +164,10 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
     } finally {
     	if (0 != defenderId) {
-    		getHazelcastPvpUtil().unlockPlayers(defenderId, attackerId, this.getClass().getSimpleName());
+    		getLocker().unlockPlayers(defenderId, attackerId, this.getClass().getSimpleName());
     		log.info("unlocked defender and attacker");
     	} else {
-    		getHazelcastPvpUtil().unlockPlayer(attackerId, this.getClass().getSimpleName());
+    		getLocker().unlockPlayer(attackerId, this.getClass().getSimpleName());
     		log.info("unlocked attacker");
     	}
     }
@@ -392,6 +395,14 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
 	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
   
 }

@@ -30,11 +30,11 @@ import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -45,15 +45,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
   @Autowired
-  protected HazelcastPvpUtil hazelcastPvpUtil;
+  protected Locker locker;
   
   
-  protected HazelcastPvpUtil getHazelcastPvpUtil() {
-		return hazelcastPvpUtil;
+  protected Locker getLocker() {
+		return locker;
 	}
 
-	protected void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
-		this.hazelcastPvpUtil = hazelcastPvpUtil;
+	protected void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 	
 	@Autowired
@@ -111,7 +111,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     if (null != mcp && mcp.hasClanId()) {
     	clanId = mcp.getClanId();
     	if (0 != clanId && !setMonsterTeamForRaid) {
-    		getHazelcastPvpUtil().lockClan(clanId);
+    		getLocker().lockClan(clanId);
     	}
     }
     try {
@@ -161,7 +161,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	//ONLY RELEASE CLAN LOCK IF TRYING TO BEGIN A RAID
     	if (null != mcp && mcp.hasClanId()) {
     		if (0 != clanId && !setMonsterTeamForRaid) {
-    			getHazelcastPvpUtil().unlockClan(clanId);
+    			getLocker().unlockClan(clanId);
     		}
       }
     	

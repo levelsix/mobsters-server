@@ -24,6 +24,7 @@ import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.OfflinePvpUser;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -54,6 +55,8 @@ public class LogoutController extends EventController {
 	@Autowired
   protected HazelcastPvpUtil hazelcastPvpUtil;
   
+	@Autowired
+	protected Locker locker;
 	
 	@Override
 	public RequestEvent createRequestEvent() {
@@ -75,7 +78,7 @@ public class LogoutController extends EventController {
 		Timestamp lastLogout = new Timestamp(new Date().getTime());
 
 		if (userId > 0) {
-			getHazelcastPvpUtil().lockPlayer(userId, this.getClass().getSimpleName());
+			getLocker().lockPlayer(userId, this.getClass().getSimpleName());
 			try {
 				User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
 				if (null != user) {
@@ -114,7 +117,7 @@ public class LogoutController extends EventController {
 			} catch (Exception e) {
 				log.error("exception in updating user logout", e);
 			} finally {
-				getHazelcastPvpUtil().unlockPlayer(userId, this.getClass().getSimpleName());
+				getLocker().unlockPlayer(userId, this.getClass().getSimpleName());
 			}
 		} else {
 			log.error("cannot update last logout because playerid of sender:"+sender.getName()+" is <= 0, it's "	+ userId);
@@ -151,7 +154,7 @@ public class LogoutController extends EventController {
   		
   		//only lock real users
   		if (0 != defenderId) {
-  			getHazelcastPvpUtil().lockPlayer(defenderId, this.getClass().getSimpleName());
+  			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
   		}
   		try {
   			if (0 != defenderId) {
@@ -185,7 +188,7 @@ public class LogoutController extends EventController {
   					battle, e);
   		} finally {
   			if (0 != defenderId) {
-  				getHazelcastPvpUtil().unlockPlayer(defenderId, this.getClass().getSimpleName());
+  				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
   			}
   		}
   	} catch (Exception e2) {
@@ -202,6 +205,14 @@ public class LogoutController extends EventController {
 
 	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 	
 }

@@ -1,12 +1,9 @@
 package com.lvl6.server.controller;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +14,6 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AttackClanRaidMonsterRequestEvent;
 import com.lvl6.events.response.AttackClanRaidMonsterResponseEvent;
-import com.lvl6.events.response.AttackClanRaidMonsterResponseEvent;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanRaidStage;
@@ -25,7 +21,6 @@ import com.lvl6.info.ClanRaidStageMonster;
 import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterRequestProto;
 import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto;
 import com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.AttackClanRaidMonsterStatus;
@@ -34,31 +29,28 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterCurrentHealthProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
-import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
-import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class AttackClanRaidMonsterController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
   
   @Autowired
-  protected HazelcastPvpUtil hazelcastPvpUtil;
+  protected Locker locker;
   
   
-  protected HazelcastPvpUtil getHazelcastPvpUtil() {
-		return hazelcastPvpUtil;
+  protected Locker getLocker() {
+		return locker;
 	}
 
-	protected void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
-		this.hazelcastPvpUtil = hazelcastPvpUtil;
+	protected void setLocker(Locker locker) {
+		this.locker = locker;
 	}
 	
 	@Autowired
@@ -124,7 +116,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     if (null != mcp && mcp.hasClanId()) {
     	clanId = mcp.getClanId();
-    	getHazelcastPvpUtil().lockClan(clanId);
+    	getLocker().lockClan(clanId);
     }
     try {
     	Map<Integer, ClanEventPersistent> clanRaidIdToActiveEvents = ClanEventPersistentRetrieveUtils
@@ -173,7 +165,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     } finally {
     	
     	if (null != mcp && mcp.hasClanId()) {
-      	getHazelcastPvpUtil().unlockClan(clanId);
+      	getLocker().unlockClan(clanId);
       }
     	
     }

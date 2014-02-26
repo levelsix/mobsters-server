@@ -60,7 +60,6 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
-import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
@@ -99,6 +98,7 @@ import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
+import com.lvl6.server.Locker;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -163,11 +163,21 @@ public class StartupController extends EventController {
 	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 	}
+	
+	@Autowired
+	protected Locker locker;
 
-  
-  
+  public Locker getLocker() {
+		return locker;
+	}
 
-  @Override
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+
+	
+	
+	@Override
   public RequestEvent createRequestEvent() {
     return new StartupRequestEvent();
   }
@@ -224,7 +234,7 @@ public class StartupController extends EventController {
       user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
       if (user != null) {
       	int userId = user.getId();
-        getHazelcastPvpUtil().lockPlayer(userId, this.getClass().getSimpleName());
+        getLocker().lockPlayer(userId, this.getClass().getSimpleName());
         try {
           startupStatus = StartupStatus.USER_IN_DB;
           log.info("No major update... getting user info");
@@ -262,7 +272,7 @@ public class StartupController extends EventController {
           log.error("exception in StartupController processEvent", e);
         } finally {
           // server.unlockClanTowersTable();
-          getHazelcastPvpUtil().unlockPlayer(user.getId(), this.getClass().getSimpleName());
+          getLocker().unlockPlayer(user.getId(), this.getClass().getSimpleName());
         }
       } else {
         log.info("tutorial player with udid " + udid);
@@ -916,7 +926,7 @@ public class StartupController extends EventController {
   		
   		//only lock real users
   		if (0 != defenderId) {
-  			getHazelcastPvpUtil().lockPlayer(defenderId, this.getClass().getSimpleName());
+  			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
   		}
   		try {
   			User defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
@@ -945,7 +955,7 @@ public class StartupController extends EventController {
   					battle, e);
   		} finally {
   			if (0 != defenderId) {
-  				getHazelcastPvpUtil().unlockPlayer(defenderId, this.getClass().getSimpleName());
+  				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
   			}
   		}
   	} catch (Exception e2) {
@@ -976,11 +986,11 @@ public class StartupController extends EventController {
   	Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
   			.getPersistentEventUserInfoForClanId(clanId);
   	
-  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-  		PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
-  				.createPersistentClanEventUserInfoProto(cepfu);
-  		resBuilder.setCurRaidClanUserInfo(pceuip);
-  	}
+//  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+//  		PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+//  				.createPersistentClanEventUserInfoProto(cepfu);
+//  		resBuilder.setCurRaidClanUserInfo(pceuip);
+//  	}
   }
   
   
