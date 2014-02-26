@@ -324,3 +324,24 @@ message AttackClanRaidMonsterResponseProto {
 		FAIL_OTHER = 4;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+//sent in order to move all the current clan raid info into history (including clan users' info)
+//if user receives out of date clan raid info (in startup), this event will be sent
+//or if a clan raid stage timer ends
+message RecordClanRaidStatsRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 clanId = 2;
+	optional int64 clientTime = 3;
+}
+
+message RecordClanRaidStatsResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RecordClanRaidStatsStatus status = 2; 
+	
+	enum RecordClanRaidStatsStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}

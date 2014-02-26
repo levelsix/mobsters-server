@@ -8,6 +8,8 @@ import java.util.Map;
 import org.json.JSONObject;
 
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.ClanEventPersistentForClan;
+import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -151,4 +153,16 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoUpdateMonstersClanEventPersistentForUser(int userId, int clanId,
 			int clanRaidId, List<Integer> userMonsterIds);
+	
+	public abstract int insertIntoClanEventPersistentForClanHistory(int clanId,
+			Timestamp timeOfEntry, int clanEventPersistentId, int crId, int crsId,
+			Timestamp stageStartTime, int crsmId, Timestamp stageMonsterStartTime, boolean won);
+	
+	public abstract int insertIntoClanEventPersistentForUserHistory(Integer clanEventId,
+			Timestamp now, Map<Integer, ClanEventPersistentForUser> clanUserInfo);
+	
+	public abstract int insertIntoClanEventPersistentForUserHistoryDetail(
+			Timestamp crsmEndTime, Map<Integer, ClanEventPersistentForUser> clanUserInfo,
+			ClanEventPersistentForClan cepfc);
+	
 }

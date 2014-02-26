@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.AttackClanRaidMonsterRequestEvent;
 import com.lvl6.events.response.AttackClanRaidMonsterResponseEvent;
+import com.lvl6.events.response.AttackClanRaidMonsterResponseEvent;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanRaidStage;
@@ -148,7 +149,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       
     } catch (Exception e) {
-      log.error("exception in AttackClanRaidMonster processEvent", e);
+    	try {
+    	  resBuilder.setStatus(AttackClanRaidMonsterStatus.FAIL_OTHER);
+    	  AttackClanRaidMonsterResponseEvent resEvent = new AttackClanRaidMonsterResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setAttackClanRaidMonsterResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception in AttackClanRaidMonster processEvent", e);
+    	}
     } finally {
     	
     	if (null != mcp && mcp.hasClanId()) {

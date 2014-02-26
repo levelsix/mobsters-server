@@ -152,7 +152,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
       
     } catch (Exception e) {
-      log.error("exception in BeginClanRaid processEvent", e);
+    	try {
+    	  resBuilder.setStatus(BeginClanRaidStatus.FAIL_OTHER);
+    	  BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setBeginClanRaidResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+      } catch (Exception e2) {
+      	log.error("exception in BeginClanRaid processEvent", e);
+      }
     } finally {
     	
     	//ONLY RELEASE CLAN LOCK IF TRYING TO BEGIN A RAID
@@ -212,6 +220,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	}
     }
     
+    //Don't think any checks need to be made
+    //(user needs to equip user monsters before beginning raid; checks are done there) 
     if (setMonsterTeamForRaid) {
     	
     }

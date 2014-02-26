@@ -298,4 +298,36 @@ public class DeleteUtils implements DeleteUtil {
 		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
 		return numDeleted;
 	}
+	
+	@Override
+	public int deleteClanEventPersistentForClan(int clanId) {
+		String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
+		
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
+
+		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
+		return numDeleted;
+	}
+	
+	@Override
+	public int deleteClanEventPersistentForUsers(List<Integer> userIdList) {
+		String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
+		int size = userIdList.size();
+    List<String> questions = Collections.nCopies(size, "?");
+    String questionMarks = StringUtils.csvList(questions);
+    
+		StringBuilder querySb = new StringBuilder();
+		querySb.append("DELETE FROM ");
+		querySb.append(tableName);
+		querySb.append(" WHERE ");
+		querySb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID);
+		querySb.append(" IN (");
+    querySb.append(questionMarks);
+    querySb.append(")");
+    String query = querySb.toString();
+		
+		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, userIdList);
+		return numDeleted;
+	}
 }
