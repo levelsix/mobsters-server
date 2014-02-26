@@ -114,10 +114,10 @@ import com.lvl6.utils.RetrieveUtils;
     // If different, replace it with a new one. Else, do nothing.
     
     
-    if (null != mcp && mcp.hasClanId()) {
-    	clanId = mcp.getClanId();
-    	getLocker().lockClan(clanId);
-    }
+//    if (null != mcp && mcp.hasClanId()) {
+//    	clanId = mcp.getClanId();
+//    	getLocker().lockClan(clanId);
+//    }
     try {
     	Map<Integer, ClanEventPersistent> clanRaidIdToActiveEvents = ClanEventPersistentRetrieveUtils
       		.getActiveClanRaidIdsToEvents(curDate, timeUtils);
@@ -164,9 +164,9 @@ import com.lvl6.utils.RetrieveUtils;
     	}
     } finally {
     	
-    	if (null != mcp && mcp.hasClanId()) {
-      	getLocker().unlockClan(clanId);
-      }
+//    	if (null != mcp && mcp.hasClanId()) {
+//      	getLocker().unlockClan(clanId);
+//      }
     	
     }
   }

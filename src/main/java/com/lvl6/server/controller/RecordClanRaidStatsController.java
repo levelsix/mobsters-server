@@ -109,9 +109,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     Map<Integer, ClanEventPersistentForUser> userIdToClanUserInfo = 
     		new HashMap<Integer, ClanEventPersistentForUser>();
     boolean errorless = true;
-    if (0 != clanId) {
-    	getLocker().lockClan(clanId);
-    }
+//    if (0 != clanId) {
+//    	getLocker().lockClan(clanId);
+//    }
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	clanEvent = ClanEventPersistentForClanRetrieveUtils.getPersistentEventForClanId(clanId);
@@ -148,9 +148,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
     } finally {
     	
-    	if (0 != clanId) {
-      	getLocker().unlockClan(clanId);
-      }
+//    	if (0 != clanId) {
+//      	getLocker().unlockClan(clanId);
+//      }
     	
     }
     
