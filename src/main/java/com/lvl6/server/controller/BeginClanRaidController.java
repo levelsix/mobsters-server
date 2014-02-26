@@ -91,6 +91,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     int userId = senderProto.getUserId();
     MinimumClanProto mcp = senderProto.getClan();
     int clanId = mcp.getClanId();
+    int clanEventPersistentId = reqProto.getClanEventId();
     
     Date curDate = new Date(reqProto.getCurTime());
     Timestamp curTime = new Timestamp(curDate.getTime());
@@ -119,10 +120,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(userId, clanId);
-    	List<Integer> clanEventPersistentIdList = new ArrayList<Integer>();
+//    	List<Integer> clanEventPersistentIdList = new ArrayList<Integer>();
       boolean legitRequest = checkLegitRequest(resBuilder, senderProto, userId,
-      		clanId, uc, clanRaidId, curDate, setMonsterTeamForRaid, userMonsterIds,
-      		clanEventPersistentIdList);
+      		clanId, uc, clanRaidId, curDate, setMonsterTeamForRaid, userMonsterIds);
+      		//, clanEventPersistentIdList);
 
       BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
       resEvent.setTag(event.getTag());
@@ -132,7 +133,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       boolean success = false;
       if (legitRequest) { 
       	log.info("recording in the db that the clan began a clan raid or setting monsters.");
-      	int clanEventPersistentId = clanEventPersistentIdList.get(0);
         success = writeChangesToDB(userId, clanId, clanEventPersistentId, clanRaidId,
         		curTime, setMonsterTeamForRaid, userMonsterIds, clanInfoList);
       }
@@ -180,8 +180,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mupfc,
   		int userId, int clanId, UserClan uc, int clanRaidId, Date curDate,
-  		boolean setMonsterTeamForRaid, List<Integer> userMOnsterIds, 
-  		List<Integer> clanEventPersistentId) {
+  		boolean setMonsterTeamForRaid, List<Integer> userMOnsterIds) {
+  		//, List<Integer> clanEventPersistentId) {
     if (0 == clanId || 0 == clanRaidId || null == uc) {
       log.error("not in clan. user is " + mupfc + "\t or clanRaidId invalid id=" +
       		clanRaidId + "\t or no user clan exists. uc=" + uc);

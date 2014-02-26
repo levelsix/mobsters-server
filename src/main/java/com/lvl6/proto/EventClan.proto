@@ -258,11 +258,14 @@ message BeginClanRaidRequestProto {
 	optional int64 curTime = 2;
 	//Example. If 7 raids and numbered 1-7, raidId is one of these numbers
 	optional int32 raidId = 3; //should always be set
+	optional int32 clanEventId = 7;
 	
 	//either set monsters or begin the clan raid
 	optional bool setMonsterTeamForRaid = 4;
 	repeated int32 userMonsterIds = 5;
 	optional bool isFirstStage = 6; 
+	
+	//optional int32 clanEventId = 7; //set above
 }
 
 	//send to every clan member that raid started
