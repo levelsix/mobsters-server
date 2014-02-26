@@ -251,9 +251,10 @@ message ChangeClanJoinTypeResponseProto {
 //------------------------------------------------------------------------------------------
 
 //a clan can only have at max one clan raid/event going on at once.
-//this event used to either begin a clan raid or set a user's monsters
+//this event used to either begin a clan raid or set a user's monsters OR start 
+//another stage in the raid
 message BeginClanRaidRequestProto {
-	optional MinimumUserProtoForClans sender = 1;
+	optional MinimumUserProto sender = 1;
 	optional int64 curTime = 2;
 	//Example. If 7 raids and numbered 1-7, raidId is one of these numbers
 	optional int32 raidId = 3; //should always be set
@@ -261,11 +262,12 @@ message BeginClanRaidRequestProto {
 	//either set monsters or begin the clan raid
 	optional bool setMonsterTeamForRaid = 4;
 	repeated int32 userMonsterIds = 5;
+	optional bool isFirstStage = 6; 
 }
 
 	//send to every clan member that raid started
 message BeginClanRaidResponseProto {
-	optional MinimumUserProtoForClans sender = 1;
+	optional MinimumUserProto sender = 1;
 	
 	//must be sent every time user wants to attack a clan raid stage monster or end a raid
 	optional PersistentClanEventClanInfoProto eventDetails = 2;
@@ -283,44 +285,70 @@ message BeginClanRaidResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-//since we only allow user one monster team in clan raid, this method also sets the 
-//monsters the user will use; a.t.m. server won't check user is using correct monsters
 message AttackClanRaidMonsterRequestProto {
-	optional MinimumUserProtoForClans sender = 1;
+	optional MinimumUserProto sender = 1;
 	
 	//must be sent every time user wants to attack a clan raid stage monster or end a raid
+	//clan raid stage monster info will be updated when current monster is beaten
 	optional PersistentClanEventClanInfoProto eventDetails = 2;
+	optional int64 clientTime = 3;
 	
 	//positive number
-	optional int32 damageDealt = 3;
+	optional int32 damageDealt = 4;
 	//health of user's monsters
-	repeated UserMonsterCurrentHealthProto monsterHealths = 4;
+	repeated UserMonsterCurrentHealthProto monsterHealths = 5;
 	
 	//client hints to the server when to check to see if the clan_raid_stage_monster is dead
 	//so as to prevent the server from calculating if the monster is dead after every
 	//one of these events is fired
-	optional bool checkIfMonsterDied = 5;
+	optional bool checkIfMonsterDied = 6;
 	
 	//will be set to true if the monster being attacked is the last monster, but
 	//will not trigger anything on the server unless checkIfMonsterDied is true
-	optional bool monsterIsLastInStage = 6;
+	optional bool monsterIsLastInStage = 7;
 	
 	//will be set to true if the user is in the last stage, but will not trigger
 	//anything on the server unless monsterIsLastInStage and checkIfMonsterDied are true
-	optional bool stageIsLastInRaid = 7;
+	optional bool stageIsLastInRaid = 8;
 }
 
 //will be sent to everyone in the clan
 message AttackClanRaidMonsterResponseProto {
-	optional MinimumUserProtoForClans sender = 1;
+	optional MinimumUserProto sender = 1;
 	optional int32 monsterRemainingHp = 2;
 	
-	optional AttackClanRaidMonsterStatus status = 3;
+	//clan raid stage monster info will be updated when current monster is beaten
+	optional PersistentClanEventClanInfoProto eventDetails = 3;
+	
+	optional AttackClanRaidMonsterStatus status = 4;
 	
 	enum AttackClanRaidMonsterStatus {
 		SUCCESS = 1;
-		FAIL_MONSTER_ALREADY_DEAD = 2;
-		FAIL_TIME_EXPIRED = 3; //should server check this?
-		FAIL_OTHER = 4;
+		FAIL_USER_NOT_IN_CLAN = 2;
+		FAIL_MONSTER_ALREADY_DEAD = 3;
+		FAIL_TIME_EXPIRED = 4; //should server check this?
+		FAIL_NO_ACTIVE_CLAN_RAID = 5;
+		FAIL_OTHER = 6;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+//sent in order to move all the current clan raid info into history (including clan users' info)
+//if user receives out of date clan raid info (in startup), this event will be sent
+//or if a clan raid stage timer ends
+message RecordClanRaidStatsRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 clanId = 2;
+	optional int64 clientTime = 3;
+}
+
+message RecordClanRaidStatsResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional RecordClanRaidStatsStatus status = 2; 
+	
+	enum RecordClanRaidStatsStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
 	}
 }

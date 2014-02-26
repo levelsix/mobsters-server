@@ -527,6 +527,7 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
     //    ClanBossRetrieveUtils.reload();
     //    ClanBossRewardRetrieveUtils.reload();
+    ClanEventPersistentRetrieveUtils.reload();
     ClanRaidRetrieveUtils.reload();
     ClanRaidStageRetrieveUtils.reload();
     ClanRaidStageMonsterRetrieveUtils.reload();

@@ -89,7 +89,7 @@ message StartupResponseProto {
 	
 	//current clan raid stats
 	optional PersistentClanEventClanInfoProto curRaidClanInfo = 31;
-	optional PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
+	repeated PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
 	
 
 	//repeated LockBoxEventProto lockBoxEvents = ;

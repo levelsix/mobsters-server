@@ -73,7 +73,7 @@ import com.lvl6.utils.DBConnection;
       setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();      
     }
     //check to see if stages exist for clanRaidId
-  	if (clanRaidIdsToClanRaidStageIdsToClanRaidStages.containsKey(clanRaidId)) {
+  	if (!clanRaidIdsToClanRaidStageIdsToClanRaidStages.containsKey(clanRaidId)) {
     	log.error("no clan raid stages for clanRaidId=" + clanRaidId);
     	return null;
     }

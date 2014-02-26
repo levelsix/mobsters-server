@@ -1661,6 +1661,9 @@ public class CreateInfoProtoUtils {
   	ClanRaidStageMonsterProto.Builder crsmpb = ClanRaidStageMonsterProto.newBuilder();
   	crsmpb.setCrsmId(crsm.getId());
   	crsmpb.setMonsterId(crsm.getMonsterId());
+  	crsmpb.setMonsterHp(crsm.getMonsterHp());
+  	crsmpb.setMinDmg(crsm.getMinDmg());
+  	crsmpb.setMaxDmg(crsm.getMaxDmg());
   	
   	return crsmpb.build();
   }

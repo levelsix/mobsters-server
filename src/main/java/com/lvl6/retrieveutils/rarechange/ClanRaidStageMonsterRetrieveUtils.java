@@ -134,9 +134,12 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(i++);
     int clanRaidStageId = rs.getInt(i++);
     int monsterId = rs.getInt(i++);
+    int monsterHp = rs.getInt(i++);
+    int minDmg = rs.getInt(i++);
+    int maxDmg = rs.getInt(i++);
     
     ClanRaidStageMonster clanRaidStageMonster = new ClanRaidStageMonster(id,
-    		clanRaidStageId, monsterId);
+    		clanRaidStageId, monsterId, monsterHp, minDmg, maxDmg);
 
     return clanRaidStageMonster;
   }

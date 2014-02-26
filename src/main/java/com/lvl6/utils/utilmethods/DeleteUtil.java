@@ -47,4 +47,8 @@ public interface DeleteUtil {
   public abstract int deleteEventPersistentForUser(int userId, int eventId);
   
   public abstract int deletePvpBattleForUser(int attackerId);
+  
+  public abstract int deleteClanEventPersistentForClan(int clanId);
+  
+  public abstract int deleteClanEventPersistentForUsers(List<Integer> userIdList);
 }

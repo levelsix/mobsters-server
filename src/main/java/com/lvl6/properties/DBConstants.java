@@ -14,10 +14,21 @@ public class DBConstants {
 	public static final String TABLE_CLAN_CHAT_POST = "clan_chat_post";
 	//EVENT TABLE FOR CLANS
 	public static final String TABLE_CLAN_EVENT_PERSISTENT = "clan_event_persistent";
+	
 	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN = "clan_event_persistent_for_clan";
+	//HISTORY TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY = "clan_event_persistent_for_clan_history";
+	
 	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER = "clan_event_persistent_for_user";
+	//TABLE CONTAINING CLAN SUMMARIZED DATA REGARDING CLAN EVENTS FOR A USER
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY = "clan_event_persistent_for_user_history";
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL = "clan_event_persistent_for_user_history_detail";
+	
+	//THE REWARDS A USER GETS FOR DOING A CLAN RAID
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD = "clan_event_persistent_user_reward";
+	
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
 	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
 	public static final String TABLE_CLAN_RAID = "clan_raid";
@@ -129,21 +140,28 @@ public class DBConstants {
   public static final String CLAN_CHAT_POST__TIME_OF_POST = "time_of_post";
   public static final String CLAN_CHAT_POST__CONTENT = "content";
   
-  //keeps track of clan's progress in clan raid stage
+  //keeps track of clan's progress in clan raid
   /*CLAN EVENT PERSISTENT FOR CLAN*/
   public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID = "clan_id";
   public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
-  //the primary key in clan_raid
-  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CR_ID = "cr_id";
-  //the primary key in clan_raid_stage
-  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID = "crs_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CR_ID = "cr_id";//the primary key in clan_raid
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID = "crs_id";//the primary key in clan_raid_stage
   public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_START_TIME = "stage_start_time";
-  //the primary key in clan_raid_stage_monster
-  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID = "crsm_id";
-  //Used to differentiate attacks across different stage monsters
-  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME = "stage_monster_start_time";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID = "crsm_id"; //the primary key in clan_raid_stage_monster
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME = "stage_monster_start_time";//Used to differentiate attacks across different stage monsters
   
-  //keeps track of user's progress in clan raid stage
+  //history of clan's clan raid
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CLAN_ID = "clan_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__TIME_OF_ENTRY = "time_of_entry";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CR_ID = "cr_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CRS_ID = "crs_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__STAGE_START_TIME = "stage_start_time";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__CRSM_ID = "crsm_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__STAGE_MONSTER_START_TIME = "stage_monster_start_time";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY__WON = "won";
+  
+  //keeps track of user's progress in clan raid
   /*CLAN EVENT PERSISTENT FOR USER*/
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID = "user_id";
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID = "clan_id";
@@ -156,7 +174,32 @@ public class DBConstants {
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE = "user_monster_id_one";
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO = "user_monster_id_two";
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE = "user_monster_id_three";
+ 
+  //history of user's overall contribution in clan raid
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__USER_ID = "user_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__TIME_OF_ENTRY = "time_of_entry";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__CLAN_ID = "clan_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__CR_ID = "cr_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__CR_DMG_DONE = "cr_dmg_done";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__USER_MONSTER_ID_ONE = "user_monster_id_one";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__USER_MONSTER_ID_TWO = "user_monster_id_two";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__USER_MONSTER_ID_THREE = "user_monster_id_three";
   
+  //history of user's clan raid damage for a monster 
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__USER_ID = GENERIC__USER_ID;
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CRSM_START_TIME = "crsm_start_time";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CLAN_ID = "clan_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CRS_ID = "crs_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CRSM_ID = "crsm_id";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CRSM_DMG_DONE = "crsm_dmg_done";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CRSM_END_TIME = "crsm_end_time";
+  
+  //TODO: FINISH THESE COLUMNS; THIS TABLE STORES THE REWARDS CLAN USERS GET FROM A RAID
+  public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__ID = GENERIC__ID;
+  public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__USER_ID = GENERIC__USER_ID;
+  public static final String CLAN_EVENT_PERSISTENT_USER_REWARD__CLAN_EVENT_PERSISTENT_ID = "clan_event_persistent_id";
   
   /*USER CLANS*/
   public static final String CLAN_FOR_USER__USER_ID = "user_id";

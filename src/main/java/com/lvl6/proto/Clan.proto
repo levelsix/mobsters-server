@@ -53,10 +53,12 @@ message FullClanProtoWithClanSize {
 message MinimumUserProtoForClans {
 	optional MinimumUserProtoWithBattleHistory minUserProto = 1;
 	optional UserClanStatus clanStatus = 2;
+	//optional float raidContribution = 3;
 }
 
 //------------------------------------------------------------------------------------------
 //this is analogous to a city
+//multiple clan raids can be available at the same time
 message ClanRaidProto {
 	optional int32 clanRaidId = 1;
 	optional string clanRaidName = 2;
@@ -93,6 +95,9 @@ message ClanRaidStageMonsterProto {
 	optional int32 crsmId = 1;
 	//optional int32 clanRaidStageId = 2;
 	optional int32 monsterId = 3;
+	optional int32 monsterHp = 4;
+	optional int32 minDmg = 5;
+	optional int32 maxDmg = 6;
 }
 
 message ClanRaidStageRewardProto {
@@ -123,7 +128,13 @@ message PersistentClanEventClanInfoProto {
 	optional int32 clanEventId = 2;
 	optional int32 clanRaidId = 3;
 	optional int32 clanRaidStageId = 4;
+	
+	//once clan is finished with a stage, this will not be set and 
+	//clan raid stage id will be the id of the next stage
 	optional int64 stageStartTime = 5;
+	
+	//when a monster, A, is defeated, this will update to the next monster, B, and
+	//stageMonsterStartTime will update to when A was defeated
 	optional int32 crsmId = 6;
 	
 	//Used to differentiate attacks across different stage monsters

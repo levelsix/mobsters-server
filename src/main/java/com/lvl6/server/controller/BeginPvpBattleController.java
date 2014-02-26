@@ -25,6 +25,7 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.OfflinePvpUser;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -34,6 +35,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Autowired
   protected HazelcastPvpUtil hazelcastPvpUtil;
+  
+  @Autowired
+  protected Locker locker;
   
 
   public BeginPvpBattleController() {
@@ -74,7 +78,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     //lock the user that client is going to attack, in order to prevent others from
     //attacking same guy, only lock a real user
     if (0 != enemyUserId) {
-    	getHazelcastPvpUtil().lockPlayer(enemyUserId, this.getClass().getSimpleName());
+    	getLocker().lockPlayer(enemyUserId, this.getClass().getSimpleName());
     }
     try {
     	OfflinePvpUser enemy = getHazelcastPvpUtil().getOfflinePvpUser(enemyUserId);
@@ -115,7 +119,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     } finally {
     	if (0 != enemyUserId) {
     		//only unlock if real user
-    		getHazelcastPvpUtil().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    		getLocker().unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     	}
     }
   }
@@ -230,6 +234,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
+	}
+
+	public Locker getLocker() {
+		return locker;
+	}
+
+	public void setLocker(Locker locker) {
+		this.locker = locker;
 	}
   
 }
