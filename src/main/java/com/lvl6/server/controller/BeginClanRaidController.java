@@ -234,13 +234,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	//event for the raid exists, now check if clan already started the event
   	ClanEventPersistentForClan raidStartedByClan = ClanEventPersistentForClanRetrieveUtils
   			.getPersistentEventForClanId(clanId);
-  	int raidIdStartedByClan = raidStartedByClan.getCrId();
-  	if (null != raidStartedByClan && raidIdStartedByClan != clanRaidId) {
+  	if (null != raidStartedByClan && raidStartedByClan.getCrId() != clanRaidId) {
   		//TODO:
   		//if clan raid id not the same then, record this (cepfc) in history along with
   		//all the clan users' stuff
 
-  	} else if (null != raidStartedByClan && raidIdStartedByClan == clanRaidId) {
+  	} else if (null != raidStartedByClan && raidStartedByClan.getCrId() == clanRaidId) {
   		//if time clan started the raid is the "same as now" then fail this request
   		//check if the same day of month
   		Date raidStartedByClanDate = raidStartedByClan.getStageStartTime();
