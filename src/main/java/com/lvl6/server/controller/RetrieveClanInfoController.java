@@ -15,6 +15,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
 import com.lvl6.events.response.RetrieveClanInfoResponseEvent;
 import com.lvl6.info.Clan;
+import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
@@ -29,6 +30,7 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -38,7 +40,7 @@ import com.lvl6.utils.RetrieveUtils;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   public RetrieveClanInfoController() {
-    numAllocatedThreads = 4;
+    numAllocatedThreads = 8;
   }
 
   @Override
@@ -115,6 +117,13 @@ import com.lvl6.utils.RetrieveUtils;
             //get the monster battle teams for the users
             Map<Integer, List<MonsterForUser>> userIdsToMonsterTeams = RetrieveUtils
             		.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIdList);
+            
+            //get the clan raid contribution stuff
+//            ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+//            		.getPersistentEventForClanId(clanId);
+//            if (null != cepfc) {
+//            	
+//            }
 
             for (UserClan uc : userClans) {
             	int userId = uc.getUserId();

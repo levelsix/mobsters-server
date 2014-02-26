@@ -6,16 +6,23 @@ import java.io.Serializable;
 //multiple monsters can point to stage (all must spawn)
 public class ClanRaidStageMonster implements Serializable {
 
-	private static final long serialVersionUID = -6377284601865090160L;
+	private static final long serialVersionUID = 6545206961731205658L;
 	private int id;
 	private int clanRaidStageId;
 	private int monsterId;
+	private int monsterHp; //instead of specifying monster level info, specify hp here
+	private int minDmg;
+	private int maxDmg;
 	
-	public ClanRaidStageMonster(int id, int clanRaidStageId, int monsterId) {
+	public ClanRaidStageMonster(int id, int clanRaidStageId, int monsterId,
+			int monsterHp, int minDmg, int maxDmg) {
 		super();
 		this.id = id;
 		this.clanRaidStageId = clanRaidStageId;
 		this.monsterId = monsterId;
+		this.monsterHp = monsterHp;
+		this.minDmg = minDmg;
+		this.maxDmg = maxDmg;
 	}
 
 	public int getId() {
@@ -42,10 +49,35 @@ public class ClanRaidStageMonster implements Serializable {
 		this.monsterId = monsterId;
 	}
 
+	public int getMonsterHp() {
+		return monsterHp;
+	}
+
+	public void setMonsterHp(int monsterHp) {
+		this.monsterHp = monsterHp;
+	}
+
+	public int getMinDmg() {
+		return minDmg;
+	}
+
+	public void setMinDmg(int minDmg) {
+		this.minDmg = minDmg;
+	}
+
+	public int getMaxDmg() {
+		return maxDmg;
+	}
+
+	public void setMaxDmg(int maxDmg) {
+		this.maxDmg = maxDmg;
+	}
+
 	@Override
 	public String toString() {
 		return "ClanRaidStageMonster [id=" + id + ", clanRaidStageId="
-				+ clanRaidStageId + ", monsterId=" + monsterId + "]";
+				+ clanRaidStageId + ", monsterId=" + monsterId + ", monsterHp="
+				+ monsterHp + ", minDmg=" + minDmg + ", maxDmg=" + maxDmg + "]";
 	}
 	
 }

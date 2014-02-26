@@ -4831,6 +4831,18 @@ public final class ClanProto {
     // optional int32 monsterId = 3;
     boolean hasMonsterId();
     int getMonsterId();
+    
+    // optional int32 monsterHp = 4;
+    boolean hasMonsterHp();
+    int getMonsterHp();
+    
+    // optional int32 minDmg = 5;
+    boolean hasMinDmg();
+    int getMinDmg();
+    
+    // optional int32 maxDmg = 6;
+    boolean hasMaxDmg();
+    int getMaxDmg();
   }
   public static final class ClanRaidStageMonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -4881,9 +4893,42 @@ public final class ClanProto {
       return monsterId_;
     }
     
+    // optional int32 monsterHp = 4;
+    public static final int MONSTERHP_FIELD_NUMBER = 4;
+    private int monsterHp_;
+    public boolean hasMonsterHp() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public int getMonsterHp() {
+      return monsterHp_;
+    }
+    
+    // optional int32 minDmg = 5;
+    public static final int MINDMG_FIELD_NUMBER = 5;
+    private int minDmg_;
+    public boolean hasMinDmg() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getMinDmg() {
+      return minDmg_;
+    }
+    
+    // optional int32 maxDmg = 6;
+    public static final int MAXDMG_FIELD_NUMBER = 6;
+    private int maxDmg_;
+    public boolean hasMaxDmg() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getMaxDmg() {
+      return maxDmg_;
+    }
+    
     private void initFields() {
       crsmId_ = 0;
       monsterId_ = 0;
+      monsterHp_ = 0;
+      minDmg_ = 0;
+      maxDmg_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4903,6 +4948,15 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(3, monsterId_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(4, monsterHp_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(5, minDmg_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(6, maxDmg_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -4919,6 +4973,18 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, monsterId_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, monsterHp_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, minDmg_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, maxDmg_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5048,6 +5114,12 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         monsterId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
+        monsterHp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        minDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        maxDmg_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
       
@@ -5094,6 +5166,18 @@ public final class ClanProto {
           to_bitField0_ |= 0x00000002;
         }
         result.monsterId_ = monsterId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.monsterHp_ = monsterHp_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.minDmg_ = minDmg_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.maxDmg_ = maxDmg_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5115,6 +5199,15 @@ public final class ClanProto {
         }
         if (other.hasMonsterId()) {
           setMonsterId(other.getMonsterId());
+        }
+        if (other.hasMonsterHp()) {
+          setMonsterHp(other.getMonsterHp());
+        }
+        if (other.hasMinDmg()) {
+          setMinDmg(other.getMinDmg());
+        }
+        if (other.hasMaxDmg()) {
+          setMaxDmg(other.getMaxDmg());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5155,6 +5248,21 @@ public final class ClanProto {
             case 24: {
               bitField0_ |= 0x00000002;
               monsterId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000004;
+              monsterHp_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000008;
+              minDmg_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000010;
+              maxDmg_ = input.readInt32();
               break;
             }
           }
@@ -5201,6 +5309,69 @@ public final class ClanProto {
       public Builder clearMonsterId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         monsterId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 monsterHp = 4;
+      private int monsterHp_ ;
+      public boolean hasMonsterHp() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getMonsterHp() {
+        return monsterHp_;
+      }
+      public Builder setMonsterHp(int value) {
+        bitField0_ |= 0x00000004;
+        monsterHp_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMonsterHp() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        monsterHp_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 minDmg = 5;
+      private int minDmg_ ;
+      public boolean hasMinDmg() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getMinDmg() {
+        return minDmg_;
+      }
+      public Builder setMinDmg(int value) {
+        bitField0_ |= 0x00000008;
+        minDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMinDmg() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        minDmg_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 maxDmg = 6;
+      private int maxDmg_ ;
+      public boolean hasMaxDmg() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getMaxDmg() {
+        return maxDmg_;
+      }
+      public Builder setMaxDmg(int value) {
+        bitField0_ |= 0x00000010;
+        maxDmg_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMaxDmg() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        maxDmg_ = 0;
         onChanged();
         return this;
       }
@@ -8031,29 +8202,30 @@ public final class ClanProto {
       "\n\004name\030\005 \001(\t\022;\n\010monsters\030\013 \003(\0132).com.lvl" +
       "6.proto.ClanRaidStageMonsterProto\022A\n\017pos" +
       "sibleRewards\030\014 \003(\0132(.com.lvl6.proto.Clan" +
-      "RaidStageRewardProto\">\n\031ClanRaidStageMon" +
+      "RaidStageRewardProto\"q\n\031ClanRaidStageMon" +
       "sterProto\022\016\n\006crsmId\030\001 \001(\005\022\021\n\tmonsterId\030\003",
-      " \001(\005\"\227\001\n\030ClanRaidStageRewardProto\022\016\n\006crs" +
-      "rId\030\001 \001(\005\022\024\n\014minOilReward\030\003 \001(\005\022\024\n\014maxOi" +
-      "lReward\030\004 \001(\005\022\025\n\rminCashReward\030\005 \001(\005\022\025\n\r" +
-      "maxCashReward\030\006 \001(\005\022\021\n\tmonsterId\030\007 \001(\005\"\252" +
-      "\001\n\030PersistentClanEventProto\022\023\n\013clanEvent" +
-      "Id\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031.com.lvl6.p" +
-      "roto.DayOfWeek:\006MONDAY\022\021\n\tstartHour\030\003 \001(" +
-      "\005\022\034\n\024eventDurationMinutes\030\004 \001(\005\022\022\n\nclanR" +
-      "aidId\030\005 \001(\005\"\273\001\n PersistentClanEventClanI" +
-      "nfoProto\022\016\n\006clanId\030\001 \001(\005\022\023\n\013clanEventId\030",
-      "\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017clanRaidSta" +
-      "geId\030\004 \001(\005\022\026\n\016stageStartTime\030\005 \001(\003\022\016\n\006cr" +
-      "smId\030\006 \001(\005\022\035\n\025stageMonsterStartTime\030\007 \001(" +
-      "\003\"\303\001\n PersistentClanEventUserInfoProto\022\016" +
-      "\n\006userId\030\001 \001(\005\022\016\n\006clanId\030\002 \001(\005\022\014\n\004crId\030\003" +
-      " \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\r\n\005crsId\030\005 \001(\005\022\022" +
-      "\n\ncrsDmgDone\030\006 \001(\005\022\016\n\006crsmId\030\007 \001(\005\022\023\n\013cr" +
-      "smDmgDone\030\010 \001(\005\022\026\n\016userMonsterIds\030\t \003(\005*" +
-      "X\n\016UserClanStatus\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_" +
-      "LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQ",
-      "UESTING\020\nB\013B\tClanProto"
+      " \001(\005\022\021\n\tmonsterHp\030\004 \001(\005\022\016\n\006minDmg\030\005 \001(\005\022" +
+      "\016\n\006maxDmg\030\006 \001(\005\"\227\001\n\030ClanRaidStageRewardP" +
+      "roto\022\016\n\006crsrId\030\001 \001(\005\022\024\n\014minOilReward\030\003 \001" +
+      "(\005\022\024\n\014maxOilReward\030\004 \001(\005\022\025\n\rminCashRewar" +
+      "d\030\005 \001(\005\022\025\n\rmaxCashReward\030\006 \001(\005\022\021\n\tmonste" +
+      "rId\030\007 \001(\005\"\252\001\n\030PersistentClanEventProto\022\023" +
+      "\n\013clanEventId\030\001 \001(\005\0224\n\tdayOfWeek\030\002 \001(\0162\031" +
+      ".com.lvl6.proto.DayOfWeek:\006MONDAY\022\021\n\tsta" +
+      "rtHour\030\003 \001(\005\022\034\n\024eventDurationMinutes\030\004 \001" +
+      "(\005\022\022\n\nclanRaidId\030\005 \001(\005\"\273\001\n PersistentCla",
+      "nEventClanInfoProto\022\016\n\006clanId\030\001 \001(\005\022\023\n\013c" +
+      "lanEventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017" +
+      "clanRaidStageId\030\004 \001(\005\022\026\n\016stageStartTime\030" +
+      "\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMonsterSta" +
+      "rtTime\030\007 \001(\003\"\303\001\n PersistentClanEventUser" +
+      "InfoProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006clanId\030\002 \001(" +
+      "\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\r\n\005cr" +
+      "sId\030\005 \001(\005\022\022\n\ncrsDmgDone\030\006 \001(\005\022\016\n\006crsmId\030" +
+      "\007 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(\005\022\026\n\016userMonste" +
+      "rIds\030\t \003(\005*X\n\016UserClanStatus\022\n\n\006LEADER\020\001",
+      "\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMB" +
+      "ER\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8113,7 +8285,7 @@ public final class ClanProto {
           internal_static_com_lvl6_proto_ClanRaidStageMonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ClanRaidStageMonsterProto_descriptor,
-              new java.lang.String[] { "CrsmId", "MonsterId", },
+              new java.lang.String[] { "CrsmId", "MonsterId", "MonsterHp", "MinDmg", "MaxDmg", },
               com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto.class,
               com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto.Builder.class);
           internal_static_com_lvl6_proto_ClanRaidStageRewardProto_descriptor =

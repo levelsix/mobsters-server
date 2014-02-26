@@ -53,6 +53,7 @@ message FullClanProtoWithClanSize {
 message MinimumUserProtoForClans {
 	optional MinimumUserProtoWithBattleHistory minUserProto = 1;
 	optional UserClanStatus clanStatus = 2;
+	//optional float raidContribution = 3;
 }
 
 //------------------------------------------------------------------------------------------
@@ -93,6 +94,9 @@ message ClanRaidStageMonsterProto {
 	optional int32 crsmId = 1;
 	//optional int32 clanRaidStageId = 2;
 	optional int32 monsterId = 3;
+	optional int32 monsterHp = 4;
+	optional int32 minDmg = 5;
+	optional int32 maxDmg = 6;
 }
 
 message ClanRaidStageRewardProto {
