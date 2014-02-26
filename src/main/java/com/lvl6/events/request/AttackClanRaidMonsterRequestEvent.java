@@ -22,8 +22,7 @@ public class AttackClanRaidMonsterRequestEvent extends RequestEvent {
   public void read(ByteBuffer buff) {
     try {
       attackClanRaidMonsterRequestProto = AttackClanRaidMonsterRequestProto.parseFrom(ByteString.copyFrom(buff));
-      playerId = attackClanRaidMonsterRequestProto.getSender().getMinUserProto()
-      		.getMinUserProtoWithLevel().getMinUserProto().getUserId();
+      playerId = attackClanRaidMonsterRequestProto.getSender().getUserId();
     } catch (InvalidProtocolBufferException e) {
       log.error("boot player from clan request exception", e);
     }

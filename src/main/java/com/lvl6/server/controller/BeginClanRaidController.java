@@ -21,7 +21,6 @@ import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
-import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.BeginClanRaidRequestProto;
@@ -31,7 +30,6 @@ import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.UserProto.MinimumUserProtoWithLevel;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
@@ -88,12 +86,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     BeginClanRaidRequestProto reqProto = ((BeginClanRaidRequestEvent)event).getBeginClanRaidRequestProto();
 
-    MinimumUserProtoForClans senderProto = reqProto.getSender();
-    UserClanStatus clanStatus = senderProto.getClanStatus();
-    MinimumUserProtoWithLevel mupwl = senderProto.getMinUserProto().getMinUserProtoWithLevel();
-    MinimumUserProto mup = mupwl.getMinUserProto();
-    int userId = mup.getUserId();
-    MinimumClanProto mcp = mup.getClan();
+    MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
+    MinimumClanProto mcp = senderProto.getClan();
     int clanId = 0;
     
     Date curDate = new Date(reqProto.getCurTime());
@@ -123,8 +118,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	List<Integer> clanEventPersistentIdList = new ArrayList<Integer>();
       boolean legitRequest = checkLegitRequest(resBuilder, senderProto, userId,
-      		clanStatus, clanId, clanRaidId, curDate, setMonsterTeamForRaid,
-      		userMonsterIds, clanEventPersistentIdList);
+      		clanId, clanRaidId, curDate, setMonsterTeamForRaid, userMonsterIds,
+      		clanEventPersistentIdList);
 
       BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
       resEvent.setTag(event.getTag());
@@ -173,8 +168,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
   }
 
-  private boolean checkLegitRequest(Builder resBuilder, MinimumUserProtoForClans mupfc,
-  		int userId, UserClanStatus userClanStatus, int clanId, int clanRaidId, Date curDate,
+  private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mupfc,
+  		int userId, int clanId, int clanRaidId, Date curDate,
   		boolean setMonsterTeamForRaid, List<Integer> userMOnsterIds, 
   		List<Integer> clanEventPersistentId) {
     if (0 == clanId || 0 == clanRaidId) {

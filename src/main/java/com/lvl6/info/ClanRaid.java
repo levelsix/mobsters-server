@@ -2,6 +2,7 @@ package com.lvl6.info;
 
 import java.io.Serializable;
 
+//multiple clan raids can be available at the same time
 public class ClanRaid implements Serializable {
 
 	private static final long serialVersionUID = 3611542670148402997L;
