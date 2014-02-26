@@ -21,6 +21,7 @@ import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
+import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.BeginClanRaidRequestProto;
@@ -89,7 +90,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     MinimumClanProto mcp = senderProto.getClan();
-    int clanId = 0;
+    int clanId = mcp.getClanId();
     
     Date curDate = new Date(reqProto.getCurTime());
     Timestamp curTime = new Timestamp(curDate.getTime());
@@ -116,9 +117,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    }
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+    	UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(userId, clanId);
     	List<Integer> clanEventPersistentIdList = new ArrayList<Integer>();
       boolean legitRequest = checkLegitRequest(resBuilder, senderProto, userId,
-      		clanId, clanRaidId, curDate, setMonsterTeamForRaid, userMonsterIds,
+      		clanId, uc, clanRaidId, curDate, setMonsterTeamForRaid, userMonsterIds,
       		clanEventPersistentIdList);
 
       BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
@@ -169,11 +171,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
 
   private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mupfc,
-  		int userId, int clanId, int clanRaidId, Date curDate,
+  		int userId, int clanId, UserClan uc, int clanRaidId, Date curDate,
   		boolean setMonsterTeamForRaid, List<Integer> userMOnsterIds, 
   		List<Integer> clanEventPersistentId) {
-    if (0 == clanId || 0 == clanRaidId) {
-      log.error("not in clan. user is " + mupfc + ", or clanRaidId invalid id=" + clanRaidId);
+    if (0 == clanId || 0 == clanRaidId || null == uc) {
+      log.error("not in clan. user is " + mupfc + "\t or clanRaidId invalid id=" +
+      		clanRaidId + "\t or no user clan exists. uc=" + uc);
       return false;      
     }
     //only check if user can start raid if he is not setting his monsters
