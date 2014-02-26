@@ -31,13 +31,13 @@ public class PlayerSet implements HazelcastInstanceAware {
 
 	
 	@Resource(name="lockMap")
-	IMap<String, Object> lockMap;
+	IMap<String, Date> lockMap;
 
-	public IMap<String, Object> getLockMap() {
+	public IMap<String, Date> getLockMap() {
 		return lockMap;
 	}
 
-	public void setLockMap(IMap<String, Object> lockMap) {
+	public void setLockMap(IMap<String, Date> lockMap) {
 		this.lockMap = lockMap;
 	}
 	

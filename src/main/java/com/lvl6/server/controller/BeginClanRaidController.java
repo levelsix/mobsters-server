@@ -109,12 +109,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     // If different, replace it with a new one. Else, do nothing.
     
     //ONLY GET CLAN LOCK IF TRYING TO BEGIN A RAID
-//    if (null != mcp && mcp.hasClanId()) {
-//    	clanId = mcp.getClanId();
-//    	if (0 != clanId && !setMonsterTeamForRaid) {
-//    		getLocker().lockClan(clanId);
-//    	}
-//    }
+    if (null != mcp && mcp.hasClanId()) {
+    	clanId = mcp.getClanId();
+    	if (0 != clanId && !setMonsterTeamForRaid) {
+    		getLocker().lockClan(clanId);
+    	}
+    }
     try {
 //      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
     	UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(userId, clanId);
@@ -163,12 +163,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       }
     } finally {
     	
-//    	//ONLY RELEASE CLAN LOCK IF TRYING TO BEGIN A RAID
-//    	if (null != mcp && mcp.hasClanId()) {
-//    		if (0 != clanId && !setMonsterTeamForRaid) {
-//    			getLocker().unlockClan(clanId);
-//    		}
-//      }
+    	//ONLY RELEASE CLAN LOCK IF TRYING TO BEGIN A RAID
+    	if (null != mcp && mcp.hasClanId()) {
+    		if (0 != clanId && !setMonsterTeamForRaid) {
+    			getLocker().unlockClan(clanId);
+    		}
+      }
     	
     }
   }

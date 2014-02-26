@@ -128,7 +128,13 @@ public class Locker {
   		log.debug("Locking clan: " + clanId);
   		if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
   			log.debug("Got lock for clan " + clanId);
-  			lockMap.put(clanLockName(clanId), new Date());
+  			
+  			try {
+  				lockMap.put(clanLockName(clanId), new Date());
+  			} catch (Exception e) {
+  				log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
+  						e.getMessage(), e);
+  			}
   			return true;
   		} else {
   			log.warn("failed to aquire lock for " + clanLockName(clanId));
