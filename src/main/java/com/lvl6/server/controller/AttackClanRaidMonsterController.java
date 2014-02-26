@@ -82,7 +82,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_BEGIN_CLAN_RAID_EVENT;
+    return EventProtocolRequest.C_ATTACK_CLAN_RAID_MONSTER_EVENT;
   }
 
   @Override
