@@ -130,6 +130,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       List<ClanEventPersistentForClan> clanInfoList = new ArrayList<ClanEventPersistentForClan>();
       boolean success = false;
       if (legitRequest) { 
+      	log.info("recording in the db that the clan began a clan raid.");
       	int clanEventPersistentId = clanEventPersistentIdList.get(0);
         success = writeChangesToDB(userId, clanId, clanEventPersistentId, clanRaidId,
         		curTime, setMonsterTeamForRaid, userMonsterIds, clanInfoList);
@@ -140,15 +141,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	PersistentClanEventClanInfoProto eventDetails = CreateInfoProtoUtils
       			.createPersistentClanEventClanInfoProto(cepfc);
       	resBuilder.setEventDetails(eventDetails);
+        resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
       }
       server.writeEvent(resEvent);
       
-      if (legitRequest) {
-      	//only write to the user if the request was valid
+      if (success && !setMonsterTeamForRaid) {
+      	//only write to the user if the request was valid and user is beginning a raid
       	server.writeClanEvent(resEvent, clanId);
       }
       
     } catch (Exception e) {
+    	log.error("exception in BeginClanRaid processEvent", e);
     	try {
     	  resBuilder.setStatus(BeginClanRaidStatus.FAIL_OTHER);
     	  BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
@@ -156,7 +159,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	  resEvent.setBeginClanRaidResponseProto(resBuilder.build());
     	  server.writeEvent(resEvent);
       } catch (Exception e2) {
-      	log.error("exception in BeginClanRaid processEvent", e);
+      	log.error("exception2 in BeginClanRaid processEvent", e);
       }
     } finally {
     	
@@ -224,7 +227,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	
     }
     
-    resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
     return true;
   }
   
@@ -257,6 +259,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		//information on the raid to the history table when event ended.
   		//TODO: So do it now and do it for the clan users' stuff as well
   	}
+  	log.info("valid clan info, can begin raid.");
   	return true;
   }
   
