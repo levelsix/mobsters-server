@@ -113,6 +113,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	clanId = mcp.getClanId();
     	if (0 != clanId && !setMonsterTeamForRaid) {
     		getLocker().lockClan(clanId);
+    		log.info("locked clanId=" + clanId);
     	}
     }
     try {
@@ -130,7 +131,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       List<ClanEventPersistentForClan> clanInfoList = new ArrayList<ClanEventPersistentForClan>();
       boolean success = false;
       if (legitRequest) { 
-      	log.info("recording in the db that the clan began a clan raid.");
+      	log.info("recording in the db that the clan began a clan raid or setting monsters.");
       	int clanEventPersistentId = clanEventPersistentIdList.get(0);
         success = writeChangesToDB(userId, clanId, clanEventPersistentId, clanRaidId,
         		curTime, setMonsterTeamForRaid, userMonsterIds, clanInfoList);
@@ -142,7 +143,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       			.createPersistentClanEventClanInfoProto(cepfc);
       	resBuilder.setEventDetails(eventDetails);
         resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
+        log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
       }
+      
+      log.info("resBuilder=" + resBuilder);
       server.writeEvent(resEvent);
       
       if (success && !setMonsterTeamForRaid) {
@@ -167,6 +171,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	if (null != mcp && mcp.hasClanId()) {
     		if (0 != clanId && !setMonsterTeamForRaid) {
     			getLocker().unlockClan(clanId);
+      		log.info("unlocked clanId=" + clanId);
     		}
       }
     	
@@ -303,7 +308,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		int numInserted = InsertUtils.get().insertIntoClanEventPersistentForClan(clanId,
   				clanEventPersistentId, clanRaidId, clanRaidStageId, curTime, crsmId, curTime);
 
-  		log.info("num rows inserted into clan raid info for user table: " + numInserted);
+  		log.info("num rows inserted into clan raid info for clan table: " + numInserted);
 
   		ClanEventPersistentForClan cepfc = new ClanEventPersistentForClan(clanId,
   				clanEventPersistentId, clanRaidId, clanRaidStageId, curTime, crsmId, curTime);
