@@ -30,7 +30,7 @@ import com.lvl6.utils.DBConnection;
 		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
     absoluteConditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
      
-		
+		log.info("getting ClanEventPersistentForUser for clanId=" + clanId);
     Map<Integer, ClanEventPersistentForUser> userIdToClanPersistentEventUserInfo = null;
 		try {
 			conn = DBConnection.get().getConnection();
