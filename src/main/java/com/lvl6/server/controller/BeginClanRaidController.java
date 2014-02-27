@@ -148,10 +148,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (success && setMonsterTeamForRaid) {
-      	//TODO: figure out if crsId and crsmId is needed in PersistentClanEventUserInfoProto
+      	//crsId and crsmId is not needed in PersistentClanEventUserInfoProto
       	//should already be in the db table 
-      	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
-        		.getPersistentEventForClanId(clanId);
+//      	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+//        		.getPersistentEventForClanId(clanId);
       	
       	int userMonsterIdOne = 0;
       	int userMonsterIdTwo = 0;
@@ -168,7 +168,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	}
       	
       	ClanEventPersistentForUser cepfu = new ClanEventPersistentForUser(userId, clanId,
-      			clanRaidId, 0, cepfc.getCrsId(), 0, cepfc.getCrsmId(), 0, userMonsterIdOne, userMonsterIdTwo,
+      			clanRaidId, 0, 0, 0, 0, 0, userMonsterIdOne, userMonsterIdTwo,
       			userMonsterIdThree);
       	PersistentClanEventUserInfoProto userDetails = CreateInfoProtoUtils
       			.createPersistentClanEventUserInfoProto(cepfu);
