@@ -1728,8 +1728,20 @@ public class CreateInfoProtoUtils {
   	
   	pceuipb.setUserId(cepfu.getUserId());
   	pceuipb.setClanId(cepfu.getClanId());
-  	pceuipb.setCrsmId(cepfu.getCrsmId());
-//  	pceuipb.setTotalDmgDone(cepfu.getTotalDmgDone());
+  	
+  	pceuipb.setCrId(cepfu.getCrId());
+  	pceuipb.setCrDmgDone(cepfu.getCrDmgDone());
+  	
+//  	pceuipb.setCrsId(cepfu.getCrsId());
+  	pceuipb.setCrsDmgDone(cepfu.getCrsDmgDone());
+  	
+//  	pceuipb.setCrsmId(cepfu.getCrsmId());
+  	pceuipb.setCrsmDmgDone(cepfu.getCrsmDmgDone());
+  	
+  	List<Integer> userMonsterIds = new ArrayList<Integer>();
+  	userMonsterIds.add(cepfu.getUserMonsterIdOne());
+  	userMonsterIds.add(cepfu.getUserMonsterIdTwo());
+  	userMonsterIds.add(cepfu.getUserMonsterIdThree());
   	
   	return pceuipb.build();
   }

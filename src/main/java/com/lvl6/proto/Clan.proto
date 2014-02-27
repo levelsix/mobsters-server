@@ -146,9 +146,14 @@ message PersistentClanEventUserInfoProto {
 	optional int32 clanId = 2;
 	optional int32 crId = 3; //clan_raid_id
 	optional int32 crDmgDone = 4; //damage done for this clan raid
-	optional int32 crsId = 5; //clan_raid_stage_id
+	
+	//in PersistentClanEventClanInfoProto, so not needed
+	//optional int32 crsId = 5; //clan_raid_stage_id
+	
 	optional int32 crsDmgDone = 6; //damage done for this clan raid stage
-	optional int32 crsmId = 7; //primary key in clan_raid_stage_monster table 
+	
+	//in PersistentClanEventClanInfoProto, so not needed
+	//optional int32 crsmId = 7; //primary key in clan_raid_stage_monster table 
 	optional int32 crsmDmgDone = 8; 
 	repeated int32 userMonsterIds = 9; 
 }

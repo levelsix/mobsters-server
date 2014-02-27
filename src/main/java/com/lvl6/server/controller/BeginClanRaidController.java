@@ -24,6 +24,7 @@ import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
 import com.lvl6.info.UserClan;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.BeginClanRaidRequestProto;
 import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto;
@@ -139,11 +140,40 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         		curTime, setMonsterTeamForRaid, userMonsterIds, isFirstStage, clanInfoList);
       }
       
-      if (success) {
+      if (success && !setMonsterTeamForRaid) {
       	ClanEventPersistentForClan cepfc = clanInfoList.get(0);
       	PersistentClanEventClanInfoProto eventDetails = CreateInfoProtoUtils
       			.createPersistentClanEventClanInfoProto(cepfc);
       	resBuilder.setEventDetails(eventDetails);
+      }
+      
+      if (success && setMonsterTeamForRaid) {
+      	//TODO: figure out if crsId and crsmId is needed in PersistentClanEventUserInfoProto
+      	//should already be in the db table 
+      	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+        		.getPersistentEventForClanId(clanId);
+      	
+      	int userMonsterIdOne = 0;
+      	int userMonsterIdTwo = 0;
+      	int userMonsterIdThree = 0;
+      	
+      	if (userMonsterIds.size() >= 1) {
+      		userMonsterIdOne = userMonsterIds.get(0);
+      	}
+      	if (userMonsterIds.size() >= 2) {
+      		userMonsterIdTwo = userMonsterIds.get(1);
+      	}
+      	if (userMonsterIds.size() >= 3) {
+      		userMonsterIdThree = userMonsterIds.get(2);
+      	}
+      	
+      	ClanEventPersistentForUser cepfu = new ClanEventPersistentForUser(userId, clanId,
+      			clanRaidId, 0, cepfc.getCrsId(), 0, cepfc.getCrsmId(), 0, userMonsterIdOne, userMonsterIdTwo,
+      			userMonsterIdThree);
+      	PersistentClanEventUserInfoProto userDetails = CreateInfoProtoUtils
+      			.createPersistentClanEventUserInfoProto(cepfu);
+      	resBuilder.setUserDetails(userDetails);
+      	
         resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
         log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
       }
@@ -154,8 +184,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       log.info("resBuilder=" + resBuilder.build());
       server.writeEvent(resEvent);
       
-      if (success && !setMonsterTeamForRaid) {
-      	//only write to the user if the request was valid and user is beginning a raid
+      if (success) {
+      	//only write to the user if the request was valid
       	server.writeClanEvent(resEvent, clanId);
       }
       
@@ -326,7 +356,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		stageMonsterStartTime = new Timestamp(clanEvent.getStageMonsterStartTime().getTime());
   	}
   	boolean won = false;
-  	
+  	 
   	//record whatever is in the ClanEventPersistentForClan
   	int numInserted = InsertUtils.get().insertIntoClanEventPersistentForClanHistory(clanId,
   			now, clanEventPersistentId, crId, crsId, stageStartTime, crsmId,
@@ -363,7 +393,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		int numInserted = InsertUtils.get().insertIntoUpdateMonstersClanEventPersistentForUser(
   				userId, clanId, clanRaidId, userMonsterIds);
   				
-
   		log.info("num rows inserted into clan raid info for user table: " + numInserted);
 
   	} else if (isFirstStage) {

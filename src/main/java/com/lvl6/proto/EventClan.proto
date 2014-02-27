@@ -272,10 +272,13 @@ message BeginClanRaidRequestProto {
 message BeginClanRaidResponseProto {
 	optional MinimumUserProto sender = 1;
 	
+	//in the context of other events
 	//must be sent every time user wants to attack a clan raid stage monster or end a raid
 	optional PersistentClanEventClanInfoProto eventDetails = 2;
 	
 	optional BeginClanRaidStatus status = 3;
+	
+	optional PersistentClanEventUserInfoProto userDetails = 4;
 	
 	enum BeginClanRaidStatus {
 		SUCCESS = 1;
@@ -288,6 +291,10 @@ message BeginClanRaidResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+
+//Every time this request is sent, regardless of the AttackClanRaidMonsterStatus,
+//the user's monsters' healths will change. In a sense, all of these requests will
+//be successful but might not updatate the user's clan raid contribution
 message AttackClanRaidMonsterRequestProto {
 	optional MinimumUserProto sender = 1;
 	
@@ -327,11 +334,10 @@ message AttackClanRaidMonsterResponseProto {
 	
 	enum AttackClanRaidMonsterStatus {
 		SUCCESS = 1;
-		FAIL_USER_NOT_IN_CLAN = 2;
-		FAIL_MONSTER_ALREADY_DEAD = 3;
-		FAIL_TIME_EXPIRED = 4; //should server check this?
-		FAIL_NO_ACTIVE_CLAN_RAID = 5;
-		FAIL_OTHER = 6;
+		SUCCESS_MONSTER_JUST_DIED = 2;
+		FAIL_USER_NOT_IN_CLAN = 3;
+		FAIL_NO_RAID_IN_PROGRESS = 4;
+		FAIL_OTHER = 5;
 	}
 }
 
@@ -340,6 +346,7 @@ message AttackClanRaidMonsterResponseProto {
 //sent in order to move all the current clan raid info into history (including clan users' info)
 //if user receives out of date clan raid info (in startup), this event will be sent
 //or if a clan raid stage timer ends
+//TODO: MAKE SURE THAT IF THE MONSTER IS DEAD THEN DON'T DO ANYTHING
 message RecordClanRaidStatsRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int32 clanId = 2;
@@ -352,6 +359,7 @@ message RecordClanRaidStatsResponseProto {
 	
 	enum RecordClanRaidStatsStatus {
 		SUCCESS = 1;
-		FAIL_OTHER = 2;
+		FAIL_MONSTER_ALREADY_DEAD = 2; //even though time ended, clan still progresses to next stage
+		FAIL_OTHER = 3;
 	}
 }

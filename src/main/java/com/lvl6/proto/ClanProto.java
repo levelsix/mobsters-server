@@ -7284,17 +7284,9 @@ public final class ClanProto {
     boolean hasCrDmgDone();
     int getCrDmgDone();
     
-    // optional int32 crsId = 5;
-    boolean hasCrsId();
-    int getCrsId();
-    
     // optional int32 crsDmgDone = 6;
     boolean hasCrsDmgDone();
     int getCrsDmgDone();
-    
-    // optional int32 crsmId = 7;
-    boolean hasCrsmId();
-    int getCrsmId();
     
     // optional int32 crsmDmgDone = 8;
     boolean hasCrsmDmgDone();
@@ -7374,41 +7366,21 @@ public final class ClanProto {
       return crDmgDone_;
     }
     
-    // optional int32 crsId = 5;
-    public static final int CRSID_FIELD_NUMBER = 5;
-    private int crsId_;
-    public boolean hasCrsId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    public int getCrsId() {
-      return crsId_;
-    }
-    
     // optional int32 crsDmgDone = 6;
     public static final int CRSDMGDONE_FIELD_NUMBER = 6;
     private int crsDmgDone_;
     public boolean hasCrsDmgDone() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public int getCrsDmgDone() {
       return crsDmgDone_;
-    }
-    
-    // optional int32 crsmId = 7;
-    public static final int CRSMID_FIELD_NUMBER = 7;
-    private int crsmId_;
-    public boolean hasCrsmId() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    public int getCrsmId() {
-      return crsmId_;
     }
     
     // optional int32 crsmDmgDone = 8;
     public static final int CRSMDMGDONE_FIELD_NUMBER = 8;
     private int crsmDmgDone_;
     public boolean hasCrsmDmgDone() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public int getCrsmDmgDone() {
       return crsmDmgDone_;
@@ -7433,9 +7405,7 @@ public final class ClanProto {
       clanId_ = 0;
       crId_ = 0;
       crDmgDone_ = 0;
-      crsId_ = 0;
       crsDmgDone_ = 0;
-      crsmId_ = 0;
       crsmDmgDone_ = 0;
       userMonsterIds_ = java.util.Collections.emptyList();;
     }
@@ -7464,15 +7434,9 @@ public final class ClanProto {
         output.writeInt32(4, crDmgDone_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt32(5, crsId_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, crsDmgDone_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeInt32(7, crsmId_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(8, crsmDmgDone_);
       }
       for (int i = 0; i < userMonsterIds_.size(); i++) {
@@ -7505,17 +7469,9 @@ public final class ClanProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, crsId_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(6, crsDmgDone_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(7, crsmId_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(8, crsmDmgDone_);
       }
@@ -7660,16 +7616,12 @@ public final class ClanProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         crDmgDone_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        crsId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
         crsDmgDone_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        crsmId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000040);
+        bitField0_ = (bitField0_ & ~0x00000010);
         crsmDmgDone_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         userMonsterIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -7727,22 +7679,14 @@ public final class ClanProto {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.crsId_ = crsId_;
+        result.crsDmgDone_ = crsDmgDone_;
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.crsDmgDone_ = crsDmgDone_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        result.crsmId_ = crsmId_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
         result.crsmDmgDone_ = crsmDmgDone_;
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           userMonsterIds_ = java.util.Collections.unmodifiableList(userMonsterIds_);
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000040);
         }
         result.userMonsterIds_ = userMonsterIds_;
         result.bitField0_ = to_bitField0_;
@@ -7773,14 +7717,8 @@ public final class ClanProto {
         if (other.hasCrDmgDone()) {
           setCrDmgDone(other.getCrDmgDone());
         }
-        if (other.hasCrsId()) {
-          setCrsId(other.getCrsId());
-        }
         if (other.hasCrsDmgDone()) {
           setCrsDmgDone(other.getCrsDmgDone());
-        }
-        if (other.hasCrsmId()) {
-          setCrsmId(other.getCrsmId());
         }
         if (other.hasCrsmDmgDone()) {
           setCrsmDmgDone(other.getCrsmDmgDone());
@@ -7788,7 +7726,7 @@ public final class ClanProto {
         if (!other.userMonsterIds_.isEmpty()) {
           if (userMonsterIds_.isEmpty()) {
             userMonsterIds_ = other.userMonsterIds_;
-            bitField0_ = (bitField0_ & ~0x00000100);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             ensureUserMonsterIdsIsMutable();
             userMonsterIds_.addAll(other.userMonsterIds_);
@@ -7846,23 +7784,13 @@ public final class ClanProto {
               crDmgDone_ = input.readInt32();
               break;
             }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              crsId_ = input.readInt32();
-              break;
-            }
             case 48: {
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000010;
               crsDmgDone_ = input.readInt32();
               break;
             }
-            case 56: {
-              bitField0_ |= 0x00000040;
-              crsmId_ = input.readInt32();
-              break;
-            }
             case 64: {
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000020;
               crsmDmgDone_ = input.readInt32();
               break;
             }
@@ -7970,65 +7898,23 @@ public final class ClanProto {
         return this;
       }
       
-      // optional int32 crsId = 5;
-      private int crsId_ ;
-      public boolean hasCrsId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      public int getCrsId() {
-        return crsId_;
-      }
-      public Builder setCrsId(int value) {
-        bitField0_ |= 0x00000010;
-        crsId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCrsId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        crsId_ = 0;
-        onChanged();
-        return this;
-      }
-      
       // optional int32 crsDmgDone = 6;
       private int crsDmgDone_ ;
       public boolean hasCrsDmgDone() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getCrsDmgDone() {
         return crsDmgDone_;
       }
       public Builder setCrsDmgDone(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         crsDmgDone_ = value;
         onChanged();
         return this;
       }
       public Builder clearCrsDmgDone() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         crsDmgDone_ = 0;
-        onChanged();
-        return this;
-      }
-      
-      // optional int32 crsmId = 7;
-      private int crsmId_ ;
-      public boolean hasCrsmId() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      public int getCrsmId() {
-        return crsmId_;
-      }
-      public Builder setCrsmId(int value) {
-        bitField0_ |= 0x00000040;
-        crsmId_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearCrsmId() {
-        bitField0_ = (bitField0_ & ~0x00000040);
-        crsmId_ = 0;
         onChanged();
         return this;
       }
@@ -8036,19 +7922,19 @@ public final class ClanProto {
       // optional int32 crsmDmgDone = 8;
       private int crsmDmgDone_ ;
       public boolean hasCrsmDmgDone() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getCrsmDmgDone() {
         return crsmDmgDone_;
       }
       public Builder setCrsmDmgDone(int value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000020;
         crsmDmgDone_ = value;
         onChanged();
         return this;
       }
       public Builder clearCrsmDmgDone() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         crsmDmgDone_ = 0;
         onChanged();
         return this;
@@ -8057,9 +7943,9 @@ public final class ClanProto {
       // repeated int32 userMonsterIds = 9;
       private java.util.List<java.lang.Integer> userMonsterIds_ = java.util.Collections.emptyList();;
       private void ensureUserMonsterIdsIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           userMonsterIds_ = new java.util.ArrayList<java.lang.Integer>(userMonsterIds_);
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000040;
          }
       }
       public java.util.List<java.lang.Integer>
@@ -8094,7 +7980,7 @@ public final class ClanProto {
       }
       public Builder clearUserMonsterIds() {
         userMonsterIds_ = java.util.Collections.emptyList();;
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -8218,14 +8104,14 @@ public final class ClanProto {
       "lanEventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001(\005\022\027\n\017" +
       "clanRaidStageId\030\004 \001(\005\022\026\n\016stageStartTime\030" +
       "\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMonsterSta" +
-      "rtTime\030\007 \001(\003\"\303\001\n PersistentClanEventUser" +
+      "rtTime\030\007 \001(\003\"\244\001\n PersistentClanEventUser" +
       "InfoProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006clanId\030\002 \001(" +
-      "\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\r\n\005cr" +
-      "sId\030\005 \001(\005\022\022\n\ncrsDmgDone\030\006 \001(\005\022\016\n\006crsmId\030" +
-      "\007 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(\005\022\026\n\016userMonste" +
-      "rIds\030\t \003(\005*X\n\016UserClanStatus\022\n\n\006LEADER\020\001",
-      "\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAIN\020\003\022\n\n\006MEMB" +
-      "ER\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanProto"
+      "\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005\022\022\n\ncr" +
+      "sDmgDone\030\006 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(\005\022\026\n\016u" +
+      "serMonsterIds\030\t \003(\005*X\n\016UserClanStatus\022\n\n" +
+      "\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAIN\020",
+      "\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanPro" +
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -8317,7 +8203,7 @@ public final class ClanProto {
           internal_static_com_lvl6_proto_PersistentClanEventUserInfoProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PersistentClanEventUserInfoProto_descriptor,
-              new java.lang.String[] { "UserId", "ClanId", "CrId", "CrDmgDone", "CrsId", "CrsDmgDone", "CrsmId", "CrsmDmgDone", "UserMonsterIds", },
+              new java.lang.String[] { "UserId", "ClanId", "CrId", "CrDmgDone", "CrsDmgDone", "CrsmDmgDone", "UserMonsterIds", },
               com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.class,
               com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto.Builder.class);
           return null;
