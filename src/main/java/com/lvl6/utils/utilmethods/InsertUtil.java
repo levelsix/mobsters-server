@@ -152,7 +152,7 @@ public interface InsertUtil {
 			Timestamp stageStartTime, int clanRaidStageMonsterId, Timestamp stageMonsterStartTime);
 	
 	public abstract int insertIntoUpdateMonstersClanEventPersistentForUser(int userId, int clanId,
-			int clanRaidId, List<Integer> userMonsterIds);
+			int clanRaidId, List<Long> userMonsterIds);
 	
 	public abstract int insertIntoClanEventPersistentForClanHistory(int clanId,
 			Timestamp timeOfEntry, int clanEventPersistentId, int crId, int crsId,

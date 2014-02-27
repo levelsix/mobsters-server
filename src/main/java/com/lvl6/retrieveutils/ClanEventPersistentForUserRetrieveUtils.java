@@ -84,9 +84,9 @@ import com.lvl6.utils.DBConnection;
 		int crsDmgDone = rs.getInt(i++);
 		int crsmId = rs.getInt(i++);
 		int crsmDmgDone = rs.getInt(i++);
-		int userMonsterIdOne = rs.getInt(i++);
-		int userMonsterIdTwo = rs.getInt(i++);
-		int userMonsterIdThree = rs.getInt(i++);
+		long userMonsterIdOne = rs.getLong(i++);
+		long userMonsterIdTwo = rs.getLong(i++);
+		long userMonsterIdThree = rs.getLong(i++);
 		
 		return new ClanEventPersistentForUser(userId, clanId, crId, crDmgDone, crsId,
 				crsDmgDone, crsmId, crsmDmgDone, userMonsterIdOne, userMonsterIdTwo,

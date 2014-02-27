@@ -1723,7 +1723,8 @@ public class CreateInfoProtoUtils {
   }
   
   public static PersistentClanEventUserInfoProto createPersistentClanEventUserInfoProto(
-  		ClanEventPersistentForUser cepfu){
+  		ClanEventPersistentForUser cepfu, Map<Long, MonsterForUser> idsToUserMonsters,
+  		List<FullUserMonsterProto> fumpList){
   	PersistentClanEventUserInfoProto.Builder pceuipb = PersistentClanEventUserInfoProto.newBuilder();
   	
   	pceuipb.setUserId(cepfu.getUserId());
@@ -1738,10 +1739,22 @@ public class CreateInfoProtoUtils {
 //  	pceuipb.setCrsmId(cepfu.getCrsmId());
   	pceuipb.setCrsmDmgDone(cepfu.getCrsmDmgDone());
   	
-  	List<Integer> userMonsterIds = new ArrayList<Integer>();
-  	userMonsterIds.add(cepfu.getUserMonsterIdOne());
-  	userMonsterIds.add(cepfu.getUserMonsterIdTwo());
-  	userMonsterIds.add(cepfu.getUserMonsterIdThree());
+  	if (null == fumpList || fumpList.isEmpty()) {
+  		List<Long> userMonsterIds = cepfu.getUserMonsterIds();
+
+  		for (Long userMonsterId : userMonsterIds) {
+
+  			if (!idsToUserMonsters.containsKey(userMonsterId)) {
+  				//user no longer has this monster
+  				continue;
+  			}
+  			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
+  			FullUserMonsterProto fump = createFullUserMonsterProtoFromUserMonster(mfu);
+  			pceuipb.addUserMonsters(fump);
+  		}
+  	} else {
+  		pceuipb.addAllUserMonsters(fumpList);
+  	}
   	
   	return pceuipb.build();
   }

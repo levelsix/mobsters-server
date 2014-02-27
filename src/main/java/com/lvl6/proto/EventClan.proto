@@ -262,7 +262,7 @@ message BeginClanRaidRequestProto {
 	
 	//either set monsters or begin the clan raid
 	optional bool setMonsterTeamForRaid = 4;
-	repeated int32 userMonsterIds = 5;
+	repeated FullUserMonsterProto userMonsters = 5;
 	optional bool isFirstStage = 6; 
 	
 	//optional int32 clanEventId = 7; //set above
@@ -294,7 +294,8 @@ message BeginClanRaidResponseProto {
 
 //Every time this request is sent, regardless of the AttackClanRaidMonsterStatus,
 //the user's monsters' healths will change. In a sense, all of these requests will
-//be successful but might not updatate the user's clan raid contribution
+//be successful but might not updatate the user's clan raid contribution 
+//(i.e. do damage to the monster)
 message AttackClanRaidMonsterRequestProto {
 	optional MinimumUserProto sender = 1;
 	
@@ -320,6 +321,9 @@ message AttackClanRaidMonsterRequestProto {
 	//will be set to true if the user is in the last stage, but will not trigger
 	//anything on the server unless monsterIsLastInStage and checkIfMonsterDied are true
 	optional bool stageIsLastInRaid = 8;
+	
+	
+	optional FullUserMonsterProto userMonsterThatAttacked = 9;
 }
 
 //will be sent to everyone in the clan

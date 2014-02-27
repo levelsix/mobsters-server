@@ -1,10 +1,12 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClanEventPersistentForUser implements Serializable {
 	
-	private static final long serialVersionUID = 8606755578309108461L;
+	private static final long serialVersionUID = -2606973933800935109L;
 	private int userId;
 	private int clanId;
 	private int crId;
@@ -13,13 +15,13 @@ public class ClanEventPersistentForUser implements Serializable {
 	private int crsDmgDone;
 	private int crsmId;//primary key in clan raid stage monster
 	private int crsmDmgDone;
-	private int userMonsterIdOne;
-	private int userMonsterIdTwo;
-	private int userMonsterIdThree;
+	private long userMonsterIdOne;
+	private long userMonsterIdTwo;
+	private long userMonsterIdThree;
 	
 	public ClanEventPersistentForUser(int userId, int clanId, int crId,
 			int crDmgDone, int crsId, int crsDmgDone, int crsmId, int crsmDmgDone,
-			int userMonsterIdOne, int userMonsterIdTwo, int userMonsterIdThree) {
+			long userMonsterIdOne, long userMonsterIdTwo, long userMonsterIdThree) {
 		super();
 		this.userId = userId;
 		this.clanId = clanId;
@@ -33,6 +35,24 @@ public class ClanEventPersistentForUser implements Serializable {
 		this.userMonsterIdTwo = userMonsterIdTwo;
 		this.userMonsterIdThree = userMonsterIdThree;
 	}
+	
+	//convenience methods
+	public List<Long> getUserMonsterIds() {
+		List<Long> userMonsterIds = new ArrayList<Long>();
+		
+		if (userMonsterIdOne > 0) {
+			userMonsterIds.add(userMonsterIdOne);
+		}
+		if (userMonsterIdTwo > 0) {
+			userMonsterIds.add(userMonsterIdTwo);
+		}
+		if (userMonsterIdThree > 0) {
+			userMonsterIds.add(userMonsterIdThree);
+		}
+		
+		return userMonsterIds;
+	}
+	//---------------------------
 
 	public int getUserId() {
 		return userId;
@@ -98,7 +118,7 @@ public class ClanEventPersistentForUser implements Serializable {
 		this.crsmDmgDone = crsmDmgDone;
 	}
 
-	public int getUserMonsterIdOne() {
+	public long getUserMonsterIdOne() {
 		return userMonsterIdOne;
 	}
 
@@ -106,7 +126,7 @@ public class ClanEventPersistentForUser implements Serializable {
 		this.userMonsterIdOne = userMonsterIdOne;
 	}
 
-	public int getUserMonsterIdTwo() {
+	public long getUserMonsterIdTwo() {
 		return userMonsterIdTwo;
 	}
 
@@ -114,7 +134,7 @@ public class ClanEventPersistentForUser implements Serializable {
 		this.userMonsterIdTwo = userMonsterIdTwo;
 	}
 
-	public int getUserMonsterIdThree() {
+	public long getUserMonsterIdThree() {
 		return userMonsterIdThree;
 	}
 

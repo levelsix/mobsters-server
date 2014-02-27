@@ -30,6 +30,7 @@ import com.lvl6.proto.EventClanProto.BeginClanRaidRequestProto;
 import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto;
 import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.BeginClanRaidStatus;
 import com.lvl6.proto.EventClanProto.BeginClanRaidResponseProto.Builder;
+import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumClanProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -39,6 +40,7 @@ import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -103,7 +105,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int clanRaidId = reqProto.getRaidId(); //not really needed
     
     boolean setMonsterTeamForRaid = reqProto.getSetMonsterTeamForRaid();
-    List<Integer> userMonsterIds = reqProto.getUserMonsterIdsList();
+    List<FullUserMonsterProto> userMonsters = reqProto.getUserMonstersList();
+    List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIds(userMonsters);
     boolean isFirstStage = reqProto.getIsFirstStage();
     
     BeginClanRaidResponseProto.Builder resBuilder = BeginClanRaidResponseProto.newBuilder();
@@ -153,9 +156,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //      	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
 //        		.getPersistentEventForClanId(clanId);
       	
-      	int userMonsterIdOne = 0;
-      	int userMonsterIdTwo = 0;
-      	int userMonsterIdThree = 0;
+      	long userMonsterIdOne = 0;
+      	long userMonsterIdTwo = 0;
+      	long userMonsterIdThree = 0;
       	
       	if (userMonsterIds.size() >= 1) {
       		userMonsterIdOne = userMonsterIds.get(0);
@@ -171,7 +174,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       			clanRaidId, 0, 0, 0, 0, 0, userMonsterIdOne, userMonsterIdTwo,
       			userMonsterIdThree);
       	PersistentClanEventUserInfoProto userDetails = CreateInfoProtoUtils
-      			.createPersistentClanEventUserInfoProto(cepfu);
+      			.createPersistentClanEventUserInfoProto(cepfu, null, userMonsters);
       	resBuilder.setUserDetails(userDetails);
       	
         resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
@@ -387,7 +390,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private boolean writeChangesToDB(int userId, int clanId, int clanEventPersistentId,
   		int clanRaidId, Timestamp curTime, boolean setMonsterTeamForRaid,
-  		List<Integer> userMonsterIds, boolean isFirstStage, List<ClanEventPersistentForClan> clanInfo) {
+  		List<Long> userMonsterIds, boolean isFirstStage, List<ClanEventPersistentForClan> clanInfo) {
   	
   	if (setMonsterTeamForRaid) {
   		int numInserted = InsertUtils.get().insertIntoUpdateMonstersClanEventPersistentForUser(

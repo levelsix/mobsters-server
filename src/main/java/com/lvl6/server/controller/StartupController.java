@@ -60,6 +60,7 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
@@ -985,14 +986,30 @@ public class StartupController extends EventController {
   	//shouldn't be null (per the retrieveUtils)
   	Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
   			.getPersistentEventUserInfoForClanId(clanId);
+  	List<Long> userMonsterIds = getUserMonsterIdsInClanRaid(userIdToCepfu);
   	
-//  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-//  		PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
-//  				.createPersistentClanEventUserInfoProto(cepfu);
-//  		resBuilder.setCurRaidClanUserInfo(pceuip);
-//  	}
+  	//TODO: when retrieving clan info, and user's current teams, maybe query for 
+  	//these monsters as well
+  	Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+  			.getSpecificUserMonsters(userMonsterIds);
+  	
+  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+  		PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+  				.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
+  		resBuilder.addCurRaidClanUserInfo(pceuip);
+  	}
   }
   
+  private List<Long> getUserMonsterIdsInClanRaid(Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+  	List<Long> userMonsterIds = new ArrayList<Long>();
+  	
+  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+  		List<Long> someUserMonsterIds = cepfu.getUserMonsterIds();
+  		userMonsterIds.addAll(someUserMonsterIds);
+  	}
+  	
+  	return userMonsterIds;
+  }
   
   
   

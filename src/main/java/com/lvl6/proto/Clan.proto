@@ -1,6 +1,7 @@
 //BAD!!! DON'T START NAMES WITH NEW OR COPY
 
 import "Battle.proto";
+import "MonsterStuff.proto";
 import "Task.proto";
 import "User.proto";
 
@@ -155,7 +156,7 @@ message PersistentClanEventUserInfoProto {
 	//in PersistentClanEventClanInfoProto, so not needed
 	//optional int32 crsmId = 7; //primary key in clan_raid_stage_monster table 
 	optional int32 crsmDmgDone = 8; 
-	repeated int32 userMonsterIds = 9; 
+	repeated FullUserMonsterProto userMonsters = 9; 
 }
 
 //------------------------------------------------------------------------------------------

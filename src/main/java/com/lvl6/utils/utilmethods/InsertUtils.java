@@ -1088,7 +1088,7 @@ public class InsertUtils implements InsertUtil{
 	
 	@Override
 	public int insertIntoUpdateMonstersClanEventPersistentForUser(int userId, int clanId,
-			int clanRaidId, List<Integer> userMonsterIds) {
+			int clanRaidId, List<Long> userMonsterIds) {
 		String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
 
 		Map<String, Object> insertParams = new HashMap<String, Object>();
@@ -1102,17 +1102,17 @@ public class InsertUtils implements InsertUtil{
 		Map<String, Object> absoluteUpdates = new HashMap<String, Object>();
 		
 		if (userMonsterIds.size() >= 1) {
-			int userMonsterId = userMonsterIds.get(0);
+			long userMonsterId = userMonsterIds.get(0);
 			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE, userMonsterId);
 			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE, userMonsterId);
 		}
 		if (userMonsterIds.size() >= 2) {
-			int userMonsterId = userMonsterIds.get(1);
+			long userMonsterId = userMonsterIds.get(1);
 			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO, userMonsterId);
 			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO, userMonsterId);
 		}
 		if (userMonsterIds.size() >= 3) {
-			int userMonsterId = userMonsterIds.get(2);
+			long userMonsterId = userMonsterIds.get(2);
 			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE, userMonsterId);
 			absoluteUpdates.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE, userMonsterId);
 		}
