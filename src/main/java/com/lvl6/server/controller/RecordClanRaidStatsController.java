@@ -202,13 +202,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			now, clanEventPersistentId, crId, crsId, stageStartTime, crsmId,
   			stageMonsterStartTime, won);
   	
-  	log.info("rows inserted into clan raid info for clan (should be 1): " + numInserted);
+  	//clan_event_persistent_for_clan_history
+  	log.info("rows inserted into clan raid info for clan history (should be 1): " + numInserted);
   	//get all the clan raid info for the users, and then delete them
   	Map<Integer, ClanEventPersistentForUser> clanUserInfo = ClanEventPersistentForUserRetrieveUtils
   			.getPersistentEventUserInfoForClanId(clanId);
   	numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistory(
   			clanEventPersistentId, now, clanUserInfo);
-  	log.info("rows inserted into clan raid info for user (should be 1): " + numInserted);
+  	
+  	//clan_event_persistent_for_user_history
+  	log.info("rows inserted into clan raid info for user history (should be " + 
+				clanUserInfo.size() + "): " + numInserted);
   	
   	
   	//delete clan info for clan raid

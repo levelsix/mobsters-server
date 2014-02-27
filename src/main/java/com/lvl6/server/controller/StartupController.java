@@ -60,6 +60,7 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
@@ -976,23 +977,50 @@ public class StartupController extends EventController {
   	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
   			.getPersistentEventForClanId(clanId);
   	
-  	if (null != cepfc) {
-  		PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
-  				.createPersistentClanEventClanInfoProto(cepfc);
-  		resBuilder.setCurRaidClanInfo(pcecip);
+  	if (null == cepfc) {
+  		log.info("no clan raid stuff existing for clan=" + clanId + "\t user=" + user);
+  		return;
   	}
+  	
+  	PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
+  			.createPersistentClanEventClanInfoProto(cepfc);
+  	resBuilder.setCurRaidClanInfo(pcecip);
+  	
   	//get the clan raid information for all the clan users
   	//shouldn't be null (per the retrieveUtils)
   	Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
   			.getPersistentEventUserInfoForClanId(clanId);
+  	log.info("the users involved in clan raid:" + userIdToCepfu);
   	
-//  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-//  		PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
-//  				.createPersistentClanEventUserInfoProto(cepfu);
-//  		resBuilder.setCurRaidClanUserInfo(pceuip);
-//  	}
+  	if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
+  		log.info("no users involved in clan raid. clanRaid=" + cepfc);
+  		return;
+  	}
+  	
+  	List<Long> userMonsterIds = getUserMonsterIdsInClanRaid(userIdToCepfu);
+  	
+  	//TODO: when retrieving clan info, and user's current teams, maybe query for 
+  	//these monsters as well
+  	Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+  			.getSpecificUserMonsters(userMonsterIds);
+  	
+  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+  		PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+  				.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
+  		resBuilder.addCurRaidClanUserInfo(pceuip);
+  	}
   }
   
+  private List<Long> getUserMonsterIdsInClanRaid(Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+  	List<Long> userMonsterIds = new ArrayList<Long>();
+  	
+  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+  		List<Long> someUserMonsterIds = cepfu.getUserMonsterIds();
+  		userMonsterIds.addAll(someUserMonsterIds);
+  	}
+  	
+  	return userMonsterIds;
+  }
   
   
   

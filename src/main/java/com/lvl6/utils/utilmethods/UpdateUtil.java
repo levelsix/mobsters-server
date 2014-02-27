@@ -151,4 +151,7 @@ public interface UpdateUtil {
   		List<UserFacebookInviteForSlot> redeemedInvites);
   
   public abstract int updateUserItems(int userId, Map<Integer, ItemForUser> itemIdsToUpdatedItems);
+  
+  public abstract int updateClanEventPersistentForClanStageStartTime(int clanId,
+  		Timestamp curTime);
 }

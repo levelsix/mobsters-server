@@ -91,5 +91,37 @@ public class ClanEventPersistentForClan implements Serializable {
 				+ ", crsmId=" + crsmId + ", stageMonsterStartTime="
 				+ stageMonsterStartTime + "]";
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClanEventPersistentForClan other = (ClanEventPersistentForClan) obj;
+		if (clanEventPersistentId != other.clanEventPersistentId)
+			return false;
+		if (clanId != other.clanId)
+			return false;
+		if (crId != other.crId)
+			return false;
+		if (crsId != other.crsId)
+			return false;
+		if (crsmId != other.crsmId)
+			return false;
+		if (stageMonsterStartTime == null) {
+			if (other.stageMonsterStartTime != null)
+				return false;
+		} else if (!stageMonsterStartTime.equals(other.stageMonsterStartTime))
+			return false;
+		if (stageStartTime == null) {
+			if (other.stageStartTime != null)
+				return false;
+		} else if (!stageStartTime.equals(other.stageStartTime))
+			return false;
+		return true;
+	}
 	
 }

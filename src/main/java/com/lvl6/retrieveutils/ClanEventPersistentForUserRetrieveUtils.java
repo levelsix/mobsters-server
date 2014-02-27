@@ -26,15 +26,15 @@ import com.lvl6.utils.DBConnection;
 			int clanId) {
 		Connection conn = null;
 		ResultSet rs = null;
-		
-		Map<String, Object> absoluteConditionParams = new HashMap<String, Object>();
-    absoluteConditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
+
+		Map<String, Object> paramsToVals = new HashMap<String, Object>();
+		paramsToVals.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID, clanId);
      
-		
+		log.info("getting ClanEventPersistentForUser for clanId=" + clanId);
     Map<Integer, ClanEventPersistentForUser> userIdToClanPersistentEventUserInfo = null;
 		try {
 			conn = DBConnection.get().getConnection();
-			rs = DBConnection.get().selectRowsByUserId(conn, clanId, TABLE_NAME);
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
 			userIdToClanPersistentEventUserInfo = grabClanEventPersistentForUserFromRS(rs);
 		} catch (Exception e) {
     	log.error("clan event persistent for user retrieve db error.", e);
@@ -84,9 +84,9 @@ import com.lvl6.utils.DBConnection;
 		int crsDmgDone = rs.getInt(i++);
 		int crsmId = rs.getInt(i++);
 		int crsmDmgDone = rs.getInt(i++);
-		int userMonsterIdOne = rs.getInt(i++);
-		int userMonsterIdTwo = rs.getInt(i++);
-		int userMonsterIdThree = rs.getInt(i++);
+		long userMonsterIdOne = rs.getLong(i++);
+		long userMonsterIdTwo = rs.getLong(i++);
+		long userMonsterIdThree = rs.getLong(i++);
 		
 		return new ClanEventPersistentForUser(userId, clanId, crId, crDmgDone, crsId,
 				crsDmgDone, crsmId, crsmDmgDone, userMonsterIdOne, userMonsterIdTwo,

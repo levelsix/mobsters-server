@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 public class TimeUtils {
   
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+	private static String[] days = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY",
+		"SATURDAY", "SUNDAY", };
 
   public static int NUM_MINUTES_LEEWAY_FOR_CLIENT_TIME = 5;
   public static DateTimeZone PST = DateTimeZone
@@ -54,6 +56,17 @@ public class TimeUtils {
 	  return ldOne.isBefore(ldTwo);
   }
   
+  public int getDayOfWeek(String dayOfWeekName) {
+  	for (int i = 0; i < days.length; i++) {
+  		
+  		String dow = days[i];
+  		if (dow.equals(dayOfWeekName)) {
+  			return i + 1; 
+  		}
+  	}
+  	return 0;
+  }
+  
   public int getDayOfWeekPst(Date d) {
   	DateTime dt = new DateTime(d, PST);
   	return dt.getDayOfWeek();
@@ -64,10 +77,12 @@ public class TimeUtils {
   	return dt.getDayOfMonth();
   }
   
-  public Date createPstDateSetHour(int hour, int minutesAddend) {
-  	DateTime dt = new DateTime(PST);
+  //dayOffset is most likely negative (called from ClanEventPersistentRetrieveUtils.java)
+  public Date createPstDate(Date curDate, int dayOffset, int hour, int minutesAddend) {
+  	DateTime dt = new DateTime(curDate, PST);
   	log.info("nowish in pst (Date form) " + dt.toDate() + "\t (DateTime form) " + dt);
   	MutableDateTime mdt = dt.withTimeAtStartOfDay().toMutableDateTime();
+  	mdt.addDays(dayOffset);
   	mdt.setHourOfDay(hour);
   	mdt.addMinutes(minutesAddend);
   	Date createdDate = mdt.toDate();
@@ -75,4 +90,15 @@ public class TimeUtils {
   	return createdDate;
   }
   
+  public Date createPstDateAddMinutes(Date curDate, int minutesAddend) {
+  	DateTime dt = new DateTime(curDate, PST);
+  	log.info("nowish in pst (Date form) " + dt.toDate() + "\t (DateTime form) " + dt +
+  			"\t originally=" + curDate);
+  	
+  	MutableDateTime mdt = dt.toMutableDateTime();
+  	mdt.addMinutes(minutesAddend);
+  	Date createdDate = mdt.toDate();
+  	log.info("date advanced " + minutesAddend + " minutes. date=" + createdDate);
+  	return createdDate;
+  }
 }

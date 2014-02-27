@@ -1723,13 +1723,44 @@ public class CreateInfoProtoUtils {
   }
   
   public static PersistentClanEventUserInfoProto createPersistentClanEventUserInfoProto(
-  		ClanEventPersistentForUser cepfu){
+  		ClanEventPersistentForUser cepfu, Map<Long, MonsterForUser> idsToUserMonsters,
+  		List<FullUserMonsterProto> fumpList){
   	PersistentClanEventUserInfoProto.Builder pceuipb = PersistentClanEventUserInfoProto.newBuilder();
   	
   	pceuipb.setUserId(cepfu.getUserId());
   	pceuipb.setClanId(cepfu.getClanId());
-  	pceuipb.setCrsmId(cepfu.getCrsmId());
-//  	pceuipb.setTotalDmgDone(cepfu.getTotalDmgDone());
+  	
+  	pceuipb.setCrId(cepfu.getCrId());
+  	pceuipb.setCrDmgDone(cepfu.getCrDmgDone());
+  	
+//  	pceuipb.setCrsId(cepfu.getCrsId());
+  	pceuipb.setCrsDmgDone(cepfu.getCrsDmgDone());
+  	
+//  	pceuipb.setCrsmId(cepfu.getCrsmId());
+  	pceuipb.setCrsmDmgDone(cepfu.getCrsmDmgDone());
+  	
+  	if (null == fumpList || fumpList.isEmpty()) {
+  		List<Long> userMonsterIds = cepfu.getUserMonsterIds();
+
+  		for (Long userMonsterId : userMonsterIds) {
+
+  			if (!idsToUserMonsters.containsKey(userMonsterId)) {
+  				//user no longer has this monster, probably sold
+  				//create fake user monster proto
+  				FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
+  				fumpb.setUserMonsterId(userMonsterId);
+  				
+  				FullUserMonsterProto fump = fumpb.build();
+  				pceuipb.addUserMonsters(fump);
+  				continue;
+  			}
+  			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
+  			FullUserMonsterProto fump = createFullUserMonsterProtoFromUserMonster(mfu);
+  			pceuipb.addUserMonsters(fump);
+  		}
+  	} else {
+  		pceuipb.addAllUserMonsters(fumpList);
+  	}
   	
   	return pceuipb.build();
   }

@@ -134,6 +134,7 @@ public class Locker {
   			} catch (Exception e) {
   				log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
   						e.getMessage(), e);
+  				return false;
   			}
   			return true;
   		} else {

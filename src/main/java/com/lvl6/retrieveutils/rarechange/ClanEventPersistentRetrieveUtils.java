@@ -3,9 +3,12 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,53 +25,79 @@ import com.lvl6.utils.DBConnection;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static final String TABLE_NAME = DBConstants.TABLE_CLAN_EVENT_PERSISTENT;
-  private static String[] dates = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY",
+  private static String[] days = {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY",
 		"SATURDAY", "SUNDAY"};
+  private static Set<String> daysSet;
   
   private static Map<Integer, ClanEventPersistent> eventIdToEvent;
   
 
-	//this method assumes that clan raids don't overlap so only one is active at the moment
-	public static Map<Integer, ClanEventPersistent> getActiveClanRaidIdsToEvents(
+	//clan raids overlap so more than one can be active at the moment
+	public static Map<Integer, ClanEventPersistent> getActiveClanEventIdsToEvents(
 			Date curDate, TimeUtils timeUtils) {
 		log.debug("retrieving data for current persistent clan event");
 		if (null == eventIdToEvent) {
 			setStaticEventIdsToEvents();
 		}
-		Map<Integer, ClanEventPersistent> raidIdToEvent = new HashMap<Integer, ClanEventPersistent>();
+		Map<Integer, ClanEventPersistent> clanEventIdToEvent =
+				new HashMap<Integer, ClanEventPersistent>();
 		
-		//day of week starts off at 1
-		int dayOfWeek = timeUtils.getDayOfWeekPst(curDate) - 1; 
-		String dow = dates[dayOfWeek];
 		
 		//go through each event and see which ones are active
+		//Event is active if today is between the event's start time and end time
 		for (ClanEventPersistent cep : eventIdToEvent.values()) {
-			if (!dow.equalsIgnoreCase(cep.getDayOfWeek())) {
+//			if (!dow.equalsIgnoreCase(cep.getDayOfWeek())) {
+//				continue;
+//			}
+			
+			//check if correct time
+			int eventDayOfWeek = timeUtils.getDayOfWeek(cep.getDayOfWeek());
+			if (eventDayOfWeek <= 0 || eventDayOfWeek >= 8) {
+				log.error("ClanEventPersistent has invalid DayOfWeek. event=" + cep);
+				//days of week go from 1 to 7, with 1 being Monday
 				continue;
 			}
+			int curDayOfWeekPst = timeUtils.getDayOfWeekPst(curDate);
 			
-			//found clan raid that is today, check if correct time
+			//either 0 or negative number
+			int dayOffset = calculateEventStartDayOffset(curDayOfWeekPst, eventDayOfWeek);
 			int hour = cep.getStartHour();
-			int minutesAddend = cep.getEventDurationMinutes();
+			int minutesAddend = 0;
 			
-			Date eventStartTime = timeUtils.createPstDateSetHour(hour, 0);
-			if (!timeUtils.isFirstEarlierThanSecond(eventStartTime, curDate)) {
-				//event has not started yet.
-				continue;
-			}
+			Date eventStartTime = timeUtils.createPstDate(curDate, dayOffset, hour, minutesAddend);
 			
-			//raid started before now, check if ends after now
-			Date eventEndTime = timeUtils.createPstDateSetHour(hour, minutesAddend);
+			minutesAddend = cep.getEventDurationMinutes();
+			Date eventEndTime = timeUtils.createPstDateAddMinutes(eventStartTime, minutesAddend);
+			
+			//eventStartTime is always earlier than curDate, given the way it's calculated
 			if (!timeUtils.isFirstEarlierThanSecond(curDate, eventEndTime)) {
 				//event has ended already.
 				continue;
 			}
 			
 			//current date is in between start and end time for event.
-			int clanRaidId = cep.getClanRaidId();
-			raidIdToEvent.put(clanRaidId, cep);
+//			int clanRaidId = cep.getClanRaidId();
+//			raidIdToEvent.put(clanRaidId, cep);
+			int clanEventId = cep.getId();
+			clanEventIdToEvent.put(clanEventId, cep);
 		}
-		return raidIdToEvent;
+		return clanEventIdToEvent;
+	}
+
+	//ex.
+	// days of the week in numbers are: 1 is Monday and 7 is Sunday.
+	//today is Sunday i.e. curDayOfWeekPst = 7
+	//let's say the event starts Mondays, i.e. 1 (So the event started 6 days ago)
+	//so the day offset should be 6, so the return value should be -6
+	//formula:
+	// {[(curDayOfWeekPst - eventDayOfWeek) + 7] % 7} * -1
+	private static int calculateEventStartDayOffset(int curDayOfWeekPst, int eventDayOfWeek) {
+		int dayDiff = curDayOfWeekPst - eventDayOfWeek;
+		dayDiff = dayDiff + 7;
+		dayDiff = dayDiff % 7;
+		dayDiff = dayDiff * -1;
+		
+		return dayDiff;
 	}
   
   public static Map<Integer, ClanEventPersistent> getAllEventIdsToEvents() {
@@ -93,6 +122,7 @@ import com.lvl6.utils.DBConnection;
 
   
   public static void reload() {
+  	daysSet = new HashSet<String>(Arrays.asList(days));
 	  setStaticEventIdsToEvents();
   }
   
@@ -143,7 +173,7 @@ import com.lvl6.utils.DBConnection;
     if (null != dayOfWeek) {
     	String newDayOfWeek = dayOfWeek.trim();
     	newDayOfWeek = newDayOfWeek.toUpperCase();
-    	if (!dayOfWeek.equals(newDayOfWeek)) {
+    	if (!dayOfWeek.equals(newDayOfWeek) || !daysSet.contains(newDayOfWeek)) {
     		log.error("string for day of week is incorrect. is: " + dayOfWeek +
     				"\t (if spelled correctly), expected: " + newDayOfWeek +
     				"\t clanEventPersistent obj=" + ep);

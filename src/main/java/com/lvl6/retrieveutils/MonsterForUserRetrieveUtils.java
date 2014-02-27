@@ -127,6 +127,44 @@ import com.lvl6.utils.utilmethods.StringUtils;
     }
     return userMonster;
   }
+  
+  public Map<Long, MonsterForUser> getSpecificUserMonsters(List<Long> userMonsterIds) {
+    log.debug("retrieving user monsters for userMonsterIds: " + userMonsterIds);
+    
+    StringBuilder querySb = new StringBuilder();
+    querySb.append("SELECT * FROM ");
+    querySb.append(TABLE_NAME); 
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.MONSTER_FOR_USER__ID);
+    querySb.append(" IN (");
+
+    int amount = userMonsterIds.size();
+    List<String> questions = Collections.nCopies(amount, "?");
+    String questionMarkStr = StringUtils.csvList(questions);
+
+    querySb.append(questionMarkStr);
+    querySb.append(");");
+    
+    List <Object> values = new ArrayList<Object>();
+    values.addAll(userMonsterIds);
+
+    String query = querySb.toString();
+    log.info("query=" + query + "\t values=" + values);
+
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Long, MonsterForUser> userMonsters = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userMonsters = convertRSToUserMonsterIdsToMonsters(rs);
+		} catch (Exception e) {
+    	log.error("monster for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+    return userMonsters;
+  }
 
   
   public Map<Long, MonsterForUser> getSpecificOrAllUserMonstersForUser(int userId,
