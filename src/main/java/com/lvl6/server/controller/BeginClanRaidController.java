@@ -129,9 +129,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       		clanId, uc, clanEventPersistentId, clanRaidId, curDate, curTime, 
       		setMonsterTeamForRaid, isFirstStage);
 
-      BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
-      resEvent.setTag(event.getTag());
-      resEvent.setBeginClanRaidResponseProto(resBuilder.build()); 
 
       List<ClanEventPersistentForClan> clanInfoList = new ArrayList<ClanEventPersistentForClan>();
       boolean success = false;
@@ -151,7 +148,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
       }
       
-      log.info("resBuilder=" + resBuilder);
+      BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
+      resEvent.setTag(event.getTag());
+      resEvent.setBeginClanRaidResponseProto(resBuilder.build()); 
+      log.info("resBuilder=" + resBuilder.build());
       server.writeEvent(resEvent);
       
       if (success && !setMonsterTeamForRaid) {
