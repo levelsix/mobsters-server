@@ -252,7 +252,7 @@ message ChangeClanJoinTypeResponseProto {
 
 //a clan can only have at max one clan raid/event going on at once.
 //this event used to either begin a clan raid or set a user's monsters OR start 
-//another stage in the raid
+//another stage in the raid (just setting the stage start time)
 message BeginClanRaidRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional int64 curTime = 2;
@@ -281,7 +281,7 @@ message BeginClanRaidResponseProto {
 		SUCCESS = 1;
 		FAIL_ALREADY_STARTED = 2;
 		FAIL_NOT_AUTHORIZED = 3; //regular members can't start it
-		FAIL_NO_ACTIVE_CLAN_RAID = 4;
+		FAIL_NO_ACTIVE_CLAN_RAID = 4; //should be EVENT, NOT RAID. Oh well
 		FAIL_OTHER = 5;
 	}
 	

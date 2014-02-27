@@ -961,4 +961,21 @@ public class UpdateUtils implements UpdateUtil {
 			
 			return numUpdated;
 		}
+
+		@Override
+		public int updateClanEventPersistentForClanStageStartTime(int clanId,
+				Timestamp curTime) {
+			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
+			Map <String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
+
+			Map<String, Object> relativeParams = null;
+			Map <String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_START_TIME,
+					curTime);
+
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+					absoluteParams, conditionParams, "and");
+			return numUpdated;
+		}
 }

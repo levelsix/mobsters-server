@@ -120,7 +120,7 @@ import com.lvl6.utils.RetrieveUtils;
 //    }
     try {
     	Map<Integer, ClanEventPersistent> clanRaidIdToActiveEvents = ClanEventPersistentRetrieveUtils
-      		.getActiveClanRaidIdsToEvents(curDate, timeUtils);
+      		.getActiveClanEventIdsToEvents(curDate, timeUtils);
     	
 //      boolean legitRequest = checkLegitRequest(resBuilder, sender, eventDetails,
 //      		checkIfMonsterDied, monsterIsLastInStage, stageIsLastInRaid, userId, clanId,
