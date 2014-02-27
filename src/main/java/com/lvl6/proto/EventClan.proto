@@ -285,6 +285,7 @@ message BeginClanRaidResponseProto {
 		FAIL_ALREADY_STARTED = 2;
 		FAIL_NOT_AUTHORIZED = 3; //regular members can't start it
 		FAIL_NO_ACTIVE_CLAN_RAID = 4; //should be EVENT, NOT RAID. Oh well
+		FAIL_NO_MONSTERS_SENT = 5;
 		FAIL_OTHER = 5;
 	}
 	
@@ -334,7 +335,10 @@ message AttackClanRaidMonsterResponseProto {
 	//clan raid stage monster info will be updated when current monster is beaten
 	optional PersistentClanEventClanInfoProto eventDetails = 3;
 	
+	optional FullUserMonsterProto userMonsterThatAttacked = 5;
 	optional AttackClanRaidMonsterStatus status = 4;
+	//optional FullUserMonsterProto userMonsterThatAttacked = 5; //defined above
+	
 	
 	enum AttackClanRaidMonsterStatus {
 		SUCCESS = 1;
