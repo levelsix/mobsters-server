@@ -286,7 +286,7 @@ message BeginClanRaidResponseProto {
 		FAIL_NOT_AUTHORIZED = 3; //regular members can't start it
 		FAIL_NO_ACTIVE_CLAN_RAID = 4; //should be EVENT, NOT RAID. Oh well
 		FAIL_NO_MONSTERS_SENT = 5;
-		FAIL_OTHER = 5;
+		FAIL_OTHER = 6;
 	}
 	
 }
