@@ -1745,7 +1745,13 @@ public class CreateInfoProtoUtils {
   		for (Long userMonsterId : userMonsterIds) {
 
   			if (!idsToUserMonsters.containsKey(userMonsterId)) {
-  				//user no longer has this monster
+  				//user no longer has this monster, probably sold
+  				//create fake user monster proto
+  				FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
+  				fumpb.setUserMonsterId(userMonsterId);
+  				
+  				FullUserMonsterProto fump = fumpb.build();
+  				pceuipb.addUserMonsters(fump);
   				continue;
   			}
   			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
