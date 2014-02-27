@@ -265,9 +265,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	if (null == raidStartedByClan && isFirstStage) {
   		return true;
   	} else if (null == raidStartedByClan && !isFirstStage) {
-  		log.error("clan has not started a raid/event but client claims clan started one." +
-  				"\t clanId=" + clanId + "\t clanEventId=" + clanEventId + "\t clanRaidId=" +
-  				clanRaidId);
+  		log.error("clan has not started a raid/event (nothing in clan_event_persistent_for_clan)" +
+  				" but client claims clan started one. clanId=" + clanId + "\t clanEventId=" +
+  				clanEventId + "\t clanRaidId=" + clanRaidId + "\t isFirstStage=" + isFirstStage);
   		return false;
   	}
   	
