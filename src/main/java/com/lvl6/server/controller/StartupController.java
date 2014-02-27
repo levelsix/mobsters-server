@@ -977,15 +977,26 @@ public class StartupController extends EventController {
   	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
   			.getPersistentEventForClanId(clanId);
   	
-  	if (null != cepfc) {
-  		PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
-  				.createPersistentClanEventClanInfoProto(cepfc);
-  		resBuilder.setCurRaidClanInfo(pcecip);
+  	if (null == cepfc) {
+  		log.info("no clan raid stuff existing for clan=" + clanId + "\t user=" + user);
+  		return;
   	}
+  	
+  	PersistentClanEventClanInfoProto pcecip = CreateInfoProtoUtils
+  			.createPersistentClanEventClanInfoProto(cepfc);
+  	resBuilder.setCurRaidClanInfo(pcecip);
+  	
   	//get the clan raid information for all the clan users
   	//shouldn't be null (per the retrieveUtils)
   	Map<Integer, ClanEventPersistentForUser> userIdToCepfu = ClanEventPersistentForUserRetrieveUtils
   			.getPersistentEventUserInfoForClanId(clanId);
+  	log.info("the users involved in clan raid:" + userIdToCepfu);
+  	
+  	if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
+  		log.info("no users involved in clan raid. clanRaid=" + cepfc);
+  		return;
+  	}
+  	
   	List<Long> userMonsterIds = getUserMonsterIdsInClanRaid(userIdToCepfu);
   	
   	//TODO: when retrieving clan info, and user's current teams, maybe query for 
