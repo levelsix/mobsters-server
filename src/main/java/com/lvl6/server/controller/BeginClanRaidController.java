@@ -94,6 +94,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   protected void processRequestEvent(RequestEvent event) throws Exception {
     BeginClanRaidRequestProto reqProto = ((BeginClanRaidRequestEvent)event).getBeginClanRaidRequestProto();
 
+    log.info("reqProto=" + reqProto);
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     MinimumClanProto mcp = senderProto.getClan();
@@ -131,7 +132,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(userId, clanId);
       boolean legitRequest = checkLegitRequest(resBuilder, senderProto, userId,
       		clanId, uc, clanEventPersistentId, clanRaidId, curDate, curTime, 
-      		setMonsterTeamForRaid, isFirstStage);
+      		setMonsterTeamForRaid, userMonsterIds, isFirstStage);
 
 
       List<ClanEventPersistentForClan> clanInfoList = new ArrayList<ClanEventPersistentForClan>();
@@ -218,7 +219,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mupfc,
   		int userId, int clanId, UserClan uc, int clanEventId, int clanRaidId, Date curDate,
-  		Timestamp curTime, boolean setMonsterTeamForRaid, boolean isFirstStage) {
+  		Timestamp curTime, boolean setMonsterTeamForRaid, List<Long> userMonsterIds,
+  		boolean isFirstStage) {
     if (0 == clanId || 0 == clanRaidId || null == uc) {
       log.error("not in clan. user is " + mupfc + "\t or clanRaidId invalid id=" +
       		clanRaidId + "\t or no user clan exists. uc=" + uc);
@@ -265,8 +267,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     //Don't think any checks need to be made
     //(user needs to equip user monsters before beginning raid; checks are done there) 
-    if (setMonsterTeamForRaid) {
-    	
+    if (setMonsterTeamForRaid && (null == userMonsterIds || userMonsterIds.isEmpty())) {
+    	resBuilder.setStatus(BeginClanRaidStatus.FAIL_NO_MONSTERS_SENT);
+    	log.error("client did not send any monster ids to set for clan raid.");
+    	return false;
     }
     
     return true;
