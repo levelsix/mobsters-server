@@ -152,6 +152,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
 //      boolean success = false;
       if (legitRequest) {
+      	log.info("legitRequest");
       	clanEvent = clanEventList.get(0);
       	ClanEventPersistentForClan clanEventClientSent = clanEventList.get(1);
         writeChangesToDB(resBuilder, clanId, userId, damageDealt, curTime,
@@ -192,6 +193,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
     } catch (Exception e) {
+    	log.error("exception in AttackClanRaidMonster processEvent", e);
     	errorless = false;
     	try {
     	  resBuilder.setStatus(AttackClanRaidMonsterStatus.FAIL_OTHER);
@@ -200,7 +202,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	  resEvent.setAttackClanRaidMonsterResponseProto(resBuilder.build());
     	  server.writeEvent(resEvent);
     	} catch (Exception e2) {
-    		log.error("exception in AttackClanRaidMonster processEvent", e);
+    		log.error("exception2 in AttackClanRaidMonster processEvent", e);
     	}
     } finally {
     	
@@ -331,6 +333,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		ClanEventPersistentForClan clanEventClientSent, boolean checkIfMonsterDied,
   		boolean monsterIsLastInStage, boolean stageIsLastInRaid,
   		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) throws Exception {
+  	log.info("updating clan raid");
+  	
   	int curCrId = clanEvent.getCrId();
   	int curCrsId = clanEvent.getCrsId();
   	int curCrsmId = clanEvent.getCrsmId();
