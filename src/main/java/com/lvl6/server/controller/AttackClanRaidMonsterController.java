@@ -362,7 +362,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	//if client says so, get all clan users' damages from db and see if monster died
   	if (checkIfMonsterDied) {
-  		monsterDied = checkMonsterDead(clanId, curCrsmId, dmgDealt, userIdToCepfu, newDmgList);
+  		monsterDied = checkMonsterDead(clanId, curCrsId, curCrsmId, dmgDealt,
+  				userIdToCepfu, newDmgList);
   		newDmg = newDmgList.get(0);
   		
   		//regardless of whether monster died, update the user's crsmDmg
@@ -408,7 +409,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	} else if (!monsterDied) {
   		log.info("user did not deal killing blow.");
   		int numUpdated = UpdateUtils.get().updateClanEventPersistentForUserCrsmDmgDone(
-  				userId, newDmg);
+  				userId, newDmg, curCrsId, curCrsmId);
     	log.info("rows updated when user attacked monster. num=" + numUpdated);
     	ClanEventPersistentForUser cepfu = ClanEventPersistentForUserRetrieveUtils
     			.getPersistentEventUserInfoForUserIdClanId(userId, clanId);
@@ -434,7 +435,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   //actually query db for clan users' clan raid info, check if monster is dead,
   //update this user's dmg accordingly
-  private boolean checkMonsterDead(int clanId, int crsmId, int dmgDealt,
+  private boolean checkMonsterDead(int clanId, int crsId, int crsmId, int dmgDealt,
   		Map<Integer, ClanEventPersistentForUser> userIdToCepfu, List<Integer> newDmgList) {
   	ClanRaidStageMonster crsm = ClanRaidStageMonsterRetrieveUtils
   			.getClanRaidStageMonsterForClanRaidStageMonsterId(crsmId);
@@ -443,8 +444,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//shouldn't be null (per the retrieveUtils)
   	Map<Integer, ClanEventPersistentForUser> newUserIdToCepfu =
   			ClanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
+  	
+  	//history purposes and so entries in tables don't look weird (crsId and crsmId=0)
+  	setCrsCrsmId(crsId, crsmId, newUserIdToCepfu);
 
-  	int dmgSoFar = sumDamageDoneToMonster(userIdToCepfu);
+  	int dmgSoFar = sumDamageDoneToMonster(newUserIdToCepfu);
   	int crsmHp = crsm.getMonsterHp();
   	
   	log.info("dmgSoFar=" + dmgSoFar);
@@ -481,6 +485,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	log.info("monsterDied=" + monsterDied);
   	log.info("newUserIdToCepfu=" + userIdToCepfu);
   	return monsterDied;
+  }
+  
+  private void setCrsCrsmId(int crsId, int crsmId,
+  		Map<Integer, ClanEventPersistentForUser> newUserIdToCepfu) {
+  	
+  	for (ClanEventPersistentForUser cepfu : newUserIdToCepfu.values()) {
+  		int cepfuCrsId = cepfu.getCrsId();
+  		if (0 == cepfuCrsId) {
+  			cepfu.setCrsId(crsId);
+  		}
+  		
+  		int cepfuCrsmId = cepfu.getCrsmId();
+  		if (0 == cepfuCrsmId) {
+  			cepfu.setCrsmId(crsmId);
+  		}
+  	}
   }
 
   private int sumDamageDoneToMonster(Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {

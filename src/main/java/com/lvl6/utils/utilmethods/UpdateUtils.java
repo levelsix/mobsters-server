@@ -1099,7 +1099,8 @@ public class UpdateUtils implements UpdateUtil {
 		}
 		
 		@Override
-		public int updateClanEventPersistentForUserCrsmDmgDone(int userId, int dmgDealt) {
+		public int updateClanEventPersistentForUserCrsmDmgDone(int userId, int dmgDealt,
+				int crsId, int crsmId) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
 			Map <String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
@@ -1107,8 +1108,10 @@ public class UpdateUtils implements UpdateUtil {
 			Map <String, Object> relativeParams = new HashMap<String, Object>();
 			relativeParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE,
 					dmgDealt);
-			Map<String, Object> absoluteParams = null;
-
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID, crsId);
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID, crsmId);
+			
 			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
 					absoluteParams, conditionParams, "and");
 			

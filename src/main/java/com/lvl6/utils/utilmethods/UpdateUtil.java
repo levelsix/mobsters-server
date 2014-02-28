@@ -169,5 +169,5 @@ public interface UpdateUtil {
   		int crsmId, Map<Integer, ClanEventPersistentForUser> userIdToCepfu);
   
   public abstract int updateClanEventPersistentForUserCrsmDmgDone(int userId,
-  		int dmgDealt);
+  		int dmgDealt, int crsId, int crsmId);
 }
