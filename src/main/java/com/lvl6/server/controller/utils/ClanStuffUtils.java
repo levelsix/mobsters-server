@@ -17,9 +17,9 @@ public class ClanStuffUtils {
   		PersistentClanEventClanInfoProto pceip) {
   	log.info("creating ClanEventPersistentForClan");
   	
-  	int clanId = pceip.getClanEventId();
+  	int clanId = pceip.getClanId();
   	int clanEventPersistentId = pceip.getClanEventId();
-  	int crId = pceip.getClanEventId();
+  	int crId = pceip.getClanRaidId();
   	int crsId = pceip.getClanRaidStageId();
   	Date stageStartTime = null;
   	long stageStartTimeMillis = pceip.getStageStartTime();
