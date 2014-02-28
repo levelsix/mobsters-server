@@ -124,6 +124,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setStatus(AttackClanRaidMonsterStatus.FAIL_OTHER);
     resBuilder.setSender(sender);
     resBuilder.setUserMonsterThatAttacked(userMonsterThatAttacked);
+    resBuilder.setDmgDealt(damageDealt);
 
     //OUTLINE: 
     //get the clan lock; get the clan raid object for the clan;
@@ -410,6 +411,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 		} else if (!monsterDied) {
 			resBuilder.setStatus(AttackClanRaidMonsterStatus.SUCCESS);
 		}
+  	resBuilder.setDmgDealt(newDmg);
   }
   
   //actually query db for clan users' clan raid info, check if monster is dead,

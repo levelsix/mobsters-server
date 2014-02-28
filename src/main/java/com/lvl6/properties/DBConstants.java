@@ -170,7 +170,7 @@ public class DBConstants {
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__CRS_ID = "crs_id";
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__CRS_DMG_DONE = "crs_dmg_done";
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_ID = "crsm_id";
-  public static final String CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE = "total_dmg_done";
+  public static final String CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE = "crsm_dmg_done";
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_ONE = "user_monster_id_one";
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_TWO = "user_monster_id_two";
   public static final String CLAN_EVENT_PERSISTENT_FOR_USER__USER_MONSTER_ID_THREE = "user_monster_id_three";

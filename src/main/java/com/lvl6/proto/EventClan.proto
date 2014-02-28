@@ -331,7 +331,7 @@ message AttackClanRaidMonsterRequestProto {
 //will be sent to everyone in the clan
 message AttackClanRaidMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 monsterRemainingHp = 2;
+	optional int32 dmgDealt = 2;
 	
 	//this will be what the same info as what is in the db, when current monster is beaten
 	//if clan raid ends, won't send this. Basically, server should always set this
