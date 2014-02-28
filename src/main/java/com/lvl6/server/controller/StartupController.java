@@ -100,6 +100,7 @@ import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
 import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -997,7 +998,7 @@ public class StartupController extends EventController {
   		return;
   	}
   	
-  	List<Long> userMonsterIds = getUserMonsterIdsInClanRaid(userIdToCepfu);
+  	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
   	
   	//TODO: when retrieving clan info, and user's current teams, maybe query for 
   	//these monsters as well
@@ -1010,19 +1011,6 @@ public class StartupController extends EventController {
   		resBuilder.addCurRaidClanUserInfo(pceuip);
   	}
   }
-  
-  private List<Long> getUserMonsterIdsInClanRaid(Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
-  	List<Long> userMonsterIds = new ArrayList<Long>();
-  	
-  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
-  		List<Long> someUserMonsterIds = cepfu.getUserMonsterIds();
-  		userMonsterIds.addAll(someUserMonsterIds);
-  	}
-  	
-  	return userMonsterIds;
-  }
-  
-  
   
   
   

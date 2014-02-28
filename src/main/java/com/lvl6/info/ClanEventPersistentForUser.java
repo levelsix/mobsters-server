@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+//user can have multiple of these (different clanIds)
 public class ClanEventPersistentForUser implements Serializable {
 	
 	private static final long serialVersionUID = -2606973933800935109L;

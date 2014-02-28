@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -154,4 +155,19 @@ public interface UpdateUtil {
   
   public abstract int updateClanEventPersistentForClanStageStartTime(int clanId,
   		Timestamp curTime);
+  
+  public abstract int updateClanEventPersistentForClanGoToNextStage(int clanId,
+  		int crsId, int crsmId);
+  
+  public abstract int updateClanEventPersistentForUserGoToNextStage(int crsId, int crsmId,
+			Map<Integer, ClanEventPersistentForUser> userIdToCepfu);
+  
+  public abstract int updateClanEventPersistentForClanGoToNextMonster(int clanId,
+  		int crsmId, Timestamp curTime);
+  
+  public abstract int updateClanEventPersistentForUsersGoToNextMonster(int crsId,
+  		int crsmId, Map<Integer, ClanEventPersistentForUser> userIdToCepfu);
+  
+  public abstract int updateClanEventPersistentForUserCrsmDmgDone(int userId,
+  		int dmgDealt, int crsId, int crsmId);
 }

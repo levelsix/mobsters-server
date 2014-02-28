@@ -128,8 +128,9 @@ import com.lvl6.utils.RetrieveUtils;
             for (UserClan uc : userClans) {
             	int userId = uc.getUserId();
             	User u = usersMap.get(userId);
+            	//TODO: TODO: FIGURE OUT THIS CLAN RAID CONTRIBUTION FLOAT
               MinimumUserProtoForClans minUser = CreateInfoProtoUtils
-              		.createMinimumUserProtoForClans(u, uc.getStatus());
+              		.createMinimumUserProtoForClans(u, uc.getStatus(), 0F);
               resBuilder.addMembers(minUser);
               
               //create the monster team for this user if possible

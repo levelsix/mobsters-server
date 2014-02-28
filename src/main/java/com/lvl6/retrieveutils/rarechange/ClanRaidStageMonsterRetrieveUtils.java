@@ -3,7 +3,10 @@ package com.lvl6.retrieveutils.rarechange;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -20,9 +23,22 @@ import com.lvl6.utils.DBConnection;
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
   private static Map<Integer, Map<Integer, ClanRaidStageMonster>> clanRaidStageIdsToIdsToMonsters;
+  private static Map<Integer, Map<Integer, ClanRaidStageMonster>> crsIdsToMonsterNumsToMonsters;
   private static Map<Integer, ClanRaidStageMonster> idsToMonsters;
 
   private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE_MONSTER;
+  
+  public static Map<Integer, ClanRaidStageMonster> getMonsterNumsToMonstersForStageId(int crsId) {
+  	log.debug("retrieving all monster num to clan raid stage monster data map");
+    if (clanRaidStageIdsToIdsToMonsters == null) {
+      setStaticClanRaidStageIdsToIdsToMonsters();
+    }
+    if (!crsIdsToMonsterNumsToMonsters.containsKey(crsId)) {
+    	return new HashMap<Integer, ClanRaidStageMonster>();
+    }
+    
+    return crsIdsToMonsterNumsToMonsters.get(crsId);
+  }
 
   public static Map<Integer, Map<Integer, ClanRaidStageMonster>> getClanRaidStageIdsToIdsToMonsters() {
     log.debug("retrieving all clan raid stage monster data map");
@@ -65,7 +81,59 @@ import com.lvl6.utils.DBConnection;
     	return new HashMap<Integer, ClanRaidStageMonster>();
     }
   }
+  
+  public static ClanRaidStageMonster getFirstMonsterForClanRaidStage(int crsId) {
+  	log.debug("retrieving the first clan raid stage monster for crsId=" + crsId);
+  	if (null == clanRaidStageIdsToIdsToMonsters) {
+  		setStaticClanRaidStageIdsToIdsToMonsters();      
+    }
+    //check to see if stages exist for clanRaidId
+  	if (!clanRaidStageIdsToIdsToMonsters.containsKey(crsId)) {
+    	log.error("no clan raid stages monsters for crsId=" + crsId);
+    	return null;
+    }
+  	Map<Integer, ClanRaidStageMonster> monsterNumsToMonsters = 
+  			clanRaidStageIdsToIdsToMonsters.get(crsId);
+  	if (null == monsterNumsToMonsters || monsterNumsToMonsters.isEmpty()) {
+  		log.error("no clan raid stages monsters for clanRaidStageId=" + crsId);
+    	return null;
+  	}
+  	
+  	List<Integer> monsterNumsAsc = new ArrayList<Integer>(monsterNumsToMonsters.keySet());
+  	Collections.sort(monsterNumsAsc);
+  	int firstMonsterNum = monsterNumsAsc.get(0);
+  	
+  	ClanRaidStageMonster crsm = monsterNumsToMonsters.get(firstMonsterNum);
+  	return crsm;
+  }
 
+  public static ClanRaidStageMonster getNextMonsterForClanRaidStageMonsterId(int crsmId, int crsId) {
+  	log.debug("retrieve clan raid stage monster after clan raid stage id " + crsId);
+    if (clanRaidStageIdsToIdsToMonsters == null) {
+      setStaticClanRaidStageIdsToIdsToMonsters();      
+    }
+    
+    if (!idsToMonsters.containsKey(crsmId)) {
+    	log.error("no clan raid stage exists for clanRaidStageId=" + crsId);
+  		return null;
+    }
+    ClanRaidStageMonster curCrsm = idsToMonsters.get(crsmId);
+    int monsterNum = curCrsm.getMonsterNum();
+    
+    Map<Integer, ClanRaidStageMonster> monsterNumToCrsm = crsIdsToMonsterNumsToMonsters
+    		.get(crsId);
+    
+    List<Integer> monsterNumsAsc = new ArrayList<Integer>(monsterNumToCrsm.keySet());
+    Collections.sort(monsterNumsAsc);
+    int index = monsterNumsAsc.indexOf(monsterNum);
+    
+    int indexOfNextMonster = index + 1;
+    if (indexOfNextMonster >= monsterNumsAsc.size()) {
+    	return null;
+    }
+    int monsterNumOfNextMonster = monsterNumsAsc.get(indexOfNextMonster);
+    return monsterNumToCrsm.get(monsterNumOfNextMonster);
+  }
 
   private static void setStaticClanRaidStageIdsToIdsToMonsters() {
     log.debug("setting static map of clanRaidStageIds to monsters");
@@ -80,8 +148,10 @@ import com.lvl6.utils.DBConnection;
 			    try {
 			      rs.last();
 			      rs.beforeFirst();
-			      Map<Integer, Map<Integer, ClanRaidStageMonster>> clanRaidIdsToClanRaidStageMonsterIdsToClanRaidStageMonstersTemp =
+			      Map<Integer, Map<Integer, ClanRaidStageMonster>> crsIdsToCrsmIdsToCrsmTemp =
 			          new HashMap<Integer, Map<Integer, ClanRaidStageMonster>>();
+			      Map<Integer, Map<Integer, ClanRaidStageMonster>> crsIdsToMonsterNumsToMonstersTemp =
+			      		new HashMap<Integer, Map<Integer, ClanRaidStageMonster>>();
 			      Map<Integer, ClanRaidStageMonster> clanRaidStageMonsterIdsToClanRaidStageMonstersTemp =
 			    		  new HashMap<Integer, ClanRaidStageMonster>();
 			      //loop through each row and convert it into a java object
@@ -94,20 +164,29 @@ import com.lvl6.utils.DBConnection;
 			        int clanRaidStageId = clanRaidStageMonster.getClanRaidStageId();
 			        //base case, no key with clanRaid id exists, so create map with
 			        //key: clanRaid id, to value: another map
-			        if (!clanRaidIdsToClanRaidStageMonsterIdsToClanRaidStageMonstersTemp.containsKey(clanRaidStageId)) {
-			          clanRaidIdsToClanRaidStageMonsterIdsToClanRaidStageMonstersTemp.put(clanRaidStageId, new HashMap<Integer, ClanRaidStageMonster>());
+			        if (!crsIdsToCrsmIdsToCrsmTemp.containsKey(clanRaidStageId)) {
+			          crsIdsToCrsmIdsToCrsmTemp.put(clanRaidStageId, new HashMap<Integer, ClanRaidStageMonster>());
+			          crsIdsToMonsterNumsToMonstersTemp.put(clanRaidStageId, new HashMap<Integer, ClanRaidStageMonster>());
 			        }
 
 			        //get map of clanRaid stages related to current clanRaid id
 			        //stick clanRaidStageMonster into the map of ClanRaidStageMonster ids to ClanRaidStageMonster objects
 			        Map<Integer, ClanRaidStageMonster> clanRaidStageMonsterIdsToClanRaidStageMonstersForClanRaidStageMonster =
-			            clanRaidIdsToClanRaidStageMonsterIdsToClanRaidStageMonstersTemp.get(clanRaidStageId);
+			            crsIdsToCrsmIdsToCrsmTemp.get(clanRaidStageId);
 			        
 			        int clanRaidStageMonsterId = clanRaidStageMonster.getId();
 			        clanRaidStageMonsterIdsToClanRaidStageMonstersForClanRaidStageMonster.put(clanRaidStageMonsterId, clanRaidStageMonster);
 			        clanRaidStageMonsterIdsToClanRaidStageMonstersTemp.put(clanRaidStageMonsterId, clanRaidStageMonster);
+			        
+			        //enabling getting monsters in order
+			        Map<Integer, ClanRaidStageMonster> monsterNumsToClanRaidStageMonsters =
+			        		crsIdsToMonsterNumsToMonstersTemp.get(clanRaidStageId);
+			        int monsterNum = clanRaidStageMonster.getMonsterNum();
+			        monsterNumsToClanRaidStageMonsters.put(monsterNum, clanRaidStageMonster);
 			      }
-			      clanRaidStageIdsToIdsToMonsters = clanRaidIdsToClanRaidStageMonsterIdsToClanRaidStageMonstersTemp;
+			      
+			      clanRaidStageIdsToIdsToMonsters = crsIdsToCrsmIdsToCrsmTemp;
+			      crsIdsToMonsterNumsToMonsters = crsIdsToMonsterNumsToMonstersTemp;
 			      idsToMonsters = clanRaidStageMonsterIdsToClanRaidStageMonstersTemp;
 			    } catch (SQLException e) {
 			      log.error("problem with database call.", e);
@@ -137,9 +216,10 @@ import com.lvl6.utils.DBConnection;
     int monsterHp = rs.getInt(i++);
     int minDmg = rs.getInt(i++);
     int maxDmg = rs.getInt(i++);
+    int monsterNum = rs.getInt(i++);
     
     ClanRaidStageMonster clanRaidStageMonster = new ClanRaidStageMonster(id,
-    		clanRaidStageId, monsterId, monsterHp, minDmg, maxDmg);
+    		clanRaidStageId, monsterId, monsterHp, minDmg, maxDmg, monsterNum);
 
     return clanRaidStageMonster;
   }

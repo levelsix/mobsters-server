@@ -14,6 +14,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.ItemForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -973,9 +974,147 @@ public class UpdateUtils implements UpdateUtil {
 			Map <String, Object> absoluteParams = new HashMap<String, Object>();
 			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_START_TIME,
 					curTime);
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME,
+					curTime);
 
 			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
 					absoluteParams, conditionParams, "and");
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateClanEventPersistentForClanGoToNextStage(int clanId, int crsId, int crsmId) {
+			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
+			Map <String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
+
+			Map<String, Object> relativeParams = null;
+			Map <String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID, crsId);
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_START_TIME,
+					null);
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID, crsmId);
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME,
+					crsmId);
+
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+					absoluteParams, conditionParams, "and");
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateClanEventPersistentForUserGoToNextStage(int crsId, int crsmId,
+				Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
+			
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			for(Integer userId : userIdToCepfu.keySet()) {
+				ClanEventPersistentForUser cepfu = userIdToCepfu.get(userId);
+
+				Map<String, Object> aRow = new HashMap<String, Object>();
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID, cepfu.getUserId());
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID, cepfu.getClanId());
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CR_ID, cepfu.getCrId());
+				
+				int newCrDmgDone = cepfu.getCrDmgDone() + cepfu.getCrsDmgDone() +
+						cepfu.getCrsmDmgDone();
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CR_DMG_DONE, newCrDmgDone);
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRS_ID, crsId);
+				
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRS_DMG_DONE, 0);
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_ID, crsmId);
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE, 0);
+
+				newRows.add(aRow);
+			}
+
+			//determine which columns should be replaced
+			Set<String> replaceTheseColumns = new HashSet<String>();
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CR_DMG_DONE);
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRS_ID);
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRS_DMG_DONE);
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_ID);
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE);
+			
+			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+					tableName, newRows, replaceTheseColumns);
+			
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateClanEventPersistentForClanGoToNextMonster(int clanId,
+	  		int crsmId, Timestamp curTime) {
+			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN;
+			Map <String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID, clanId);
+
+			Map<String, Object> relativeParams = null;
+			Map <String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID, crsmId);
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME,
+					curTime);
+
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+					absoluteParams, conditionParams, "and");
+			return numUpdated;
+		}
+
+		@Override
+		public int updateClanEventPersistentForUsersGoToNextMonster(int crsId,
+	  		int crsmId, Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
+			
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			for(Integer userId : userIdToCepfu.keySet()) {
+				ClanEventPersistentForUser cepfu = userIdToCepfu.get(userId);
+
+				Map<String, Object> aRow = new HashMap<String, Object>();
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID, cepfu.getUserId());
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID, cepfu.getClanId());
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CR_ID, cepfu.getCrId());
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CR_DMG_DONE, cepfu.getCrDmgDone());
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRS_ID, crsId);
+				
+				int newCrsDmgDone = cepfu.getCrsDmgDone() + cepfu.getCrsmDmgDone();
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRS_DMG_DONE, newCrsDmgDone);
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_ID, crsmId);
+				aRow.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE, 0);
+
+				newRows.add(aRow);
+			}
+
+//			int numUpdated = DBConnection.get().replaceIntoTableValues(tableName, newRows);
+			//determine which columns should be replaced
+			Set<String> replaceTheseColumns = new HashSet<String>();
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRS_ID);
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRS_DMG_DONE);
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_ID);
+			replaceTheseColumns.add(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE);
+			
+			int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+					tableName, newRows, replaceTheseColumns);
+			
+			return numUpdated;
+		}
+		
+		@Override
+		public int updateClanEventPersistentForUserCrsmDmgDone(int userId, int dmgDealt,
+				int crsId, int crsmId) {
+			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
+			Map <String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
+
+			Map <String, Object> relativeParams = new HashMap<String, Object>();
+			relativeParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE,
+					dmgDealt);
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID, crsId);
+			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID, crsmId);
+			
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+					absoluteParams, conditionParams, "and");
+			
 			return numUpdated;
 		}
 }

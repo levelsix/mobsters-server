@@ -80,25 +80,25 @@ public class TimeUtils {
   //dayOffset is most likely negative (called from ClanEventPersistentRetrieveUtils.java)
   public Date createPstDate(Date curDate, int dayOffset, int hour, int minutesAddend) {
   	DateTime dt = new DateTime(curDate, PST);
-  	log.info("nowish in pst (Date form) " + dt.toDate() + "\t (DateTime form) " + dt);
+//  	log.info("nowish in pst (Date form) " + dt.toDate() + "\t (DateTime form) " + dt);
   	MutableDateTime mdt = dt.withTimeAtStartOfDay().toMutableDateTime();
   	mdt.addDays(dayOffset);
   	mdt.setHourOfDay(hour);
   	mdt.addMinutes(minutesAddend);
   	Date createdDate = mdt.toDate();
-  	log.info("date with hour set: (Date form) " + createdDate);
+//  	log.info("date with hour set: (Date form) " + createdDate);
   	return createdDate;
   }
   
   public Date createPstDateAddMinutes(Date curDate, int minutesAddend) {
   	DateTime dt = new DateTime(curDate, PST);
-  	log.info("nowish in pst (Date form) " + dt.toDate() + "\t (DateTime form) " + dt +
-  			"\t originally=" + curDate);
+//  	log.info("nowish in pst (Date form) " + dt.toDate() + "\t (DateTime form) " + dt +
+//  			"\t originally=" + curDate);
   	
   	MutableDateTime mdt = dt.toMutableDateTime();
   	mdt.addMinutes(minutesAddend);
   	Date createdDate = mdt.toDate();
-  	log.info("date advanced " + minutesAddend + " minutes. date=" + createdDate);
+//  	log.info("date advanced " + minutesAddend + " minutes. date=" + createdDate);
   	return createdDate;
   }
 }

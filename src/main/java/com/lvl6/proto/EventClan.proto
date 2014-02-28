@@ -325,27 +325,37 @@ message AttackClanRaidMonsterRequestProto {
 	
 	
 	optional FullUserMonsterProto userMonsterThatAttacked = 9;
+	
+	//when user attacks, server is going to create a PersistentClanEventUserInfoProto
+	//for this user, so need the team
+	optional UserCurrentMonsterTeamProto userMonsterTeam = 10; 
 }
 
 //will be sent to everyone in the clan
 message AttackClanRaidMonsterResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 monsterRemainingHp = 2;
+	optional int32 dmgDealt = 2;
 	
-	//clan raid stage monster info will be updated when current monster is beaten
+	//this will be what the same info as what is in the db, when current monster is beaten
+	//if clan raid ends, won't send this. Basically, server should always set this
 	optional PersistentClanEventClanInfoProto eventDetails = 3;
 	
+	//this will be what the same info as what is in the db, when current monster is beaten
+	//if clan raid ends, won't send this. Basically, server might not set this
+	repeated PersistentClanEventUserInfoProto clanUsersDetails = 4;
+	
 	optional FullUserMonsterProto userMonsterThatAttacked = 5;
-	optional AttackClanRaidMonsterStatus status = 4;
-	//optional FullUserMonsterProto userMonsterThatAttacked = 5; //defined above
+	optional AttackClanRaidMonsterStatus status = 6;
+	
 	
 	
 	enum AttackClanRaidMonsterStatus {
 		SUCCESS = 1;
 		SUCCESS_MONSTER_JUST_DIED = 2;
 		FAIL_USER_NOT_IN_CLAN = 3;
-		FAIL_NO_RAID_IN_PROGRESS = 4;
-		FAIL_OTHER = 5;
+		FAIL_NO_STAGE_RAID_IN_PROGRESS = 4;
+		FAIL_MONSTER_ALREADY_DEAD = 5;
+		FAIL_OTHER = 6;
 	}
 }
 

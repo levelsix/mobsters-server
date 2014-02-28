@@ -29,7 +29,6 @@ enum UserClanStatus {
 	JUNIOR_LEADER = 2; //is a leader but can't demote jr leaders or promote to jr leader
 	CAPTAIN = 3; //power is can only start a raid
 	MEMBER = 4;
-	
 	REQUESTING = 10;
 }
 
@@ -54,7 +53,7 @@ message FullClanProtoWithClanSize {
 message MinimumUserProtoForClans {
 	optional MinimumUserProtoWithBattleHistory minUserProto = 1;
 	optional UserClanStatus clanStatus = 2;
-	//optional float raidContribution = 3;
+	optional float raidContribution = 3;
 }
 
 //------------------------------------------------------------------------------------------
@@ -156,7 +155,7 @@ message PersistentClanEventUserInfoProto {
 	//in PersistentClanEventClanInfoProto, so not needed
 	//optional int32 crsmId = 7; //primary key in clan_raid_stage_monster table 
 	optional int32 crsmDmgDone = 8; 
-	repeated FullUserMonsterProto userMonsters = 9; 
+	optional UserCurrentMonsterTeamProto userMonsters = 9; 
 }
 
 //------------------------------------------------------------------------------------------

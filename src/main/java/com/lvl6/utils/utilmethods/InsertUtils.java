@@ -1150,8 +1150,8 @@ public class InsertUtils implements InsertUtil{
 
 		//TODO: SAVE CLAN RAID USER HISTORY 
 		@Override
-		public int insertIntoClanEventPersistentForUserHistory(Integer clanEventId, Timestamp now,
-				Map<Integer, ClanEventPersistentForUser> clanUserInfo) {
+		public int insertIntoClanEventPersistentForUserHistory(Integer clanEventId,
+				Timestamp now, Map<Integer, ClanEventPersistentForUser> clanUserInfo) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY;
 			
 			List<Object> userIdList = new ArrayList<Object>();
@@ -1252,7 +1252,7 @@ public class InsertUtils implements InsertUtil{
 					crsmIdList);
 			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CRSM_DMG_DONE,
 					crsmDmgDoneList);
-			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY__USER_MONSTER_ID_THREE,
+			insertParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER_HISTORY_DETAIL__CRSM_END_TIME,
 					crsmEndTimeList);
 			int numRows = clanUserInfo.size();
 			
