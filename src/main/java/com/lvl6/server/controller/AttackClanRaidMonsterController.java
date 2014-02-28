@@ -485,7 +485,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private int sumDamageDoneToMonster(Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
   	int dmgTotal = 0;
+  	log.info("printing the users who attacked in this raid");
   	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+  		log.info("cepfu=" + cepfu);
   		dmgTotal += cepfu.getCrsmDmgDone();
   	}
   	
