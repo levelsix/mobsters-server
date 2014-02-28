@@ -92,6 +92,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     AttackClanRaidMonsterRequestProto reqProto = ((AttackClanRaidMonsterRequestEvent)event).getAttackClanRaidMonsterRequestProto();
+    log.info("reqProto=");
+    log.info(reqProto +"");
 
     MinimumUserProto sender = reqProto.getSender();
     int userId = sender.getUserId();
@@ -288,6 +290,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		boolean monsterIsLastInStage, boolean stageIsLastInRaid,
   		Map<Long, Integer> userMonsterIdToExpectedHealth,
   		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) throws Exception {
+  	
+  	log.info("clanEventInDb=" + clanEvent);
+  	log.info("clanEventClientSent=" + clanEventClientSent);
   	
   	if (null != clanEvent && clanEvent.equals(clanEventClientSent) && 
   			null != clanEvent.getStageStartTime() &&
