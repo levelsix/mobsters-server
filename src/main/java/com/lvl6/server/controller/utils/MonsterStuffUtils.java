@@ -11,6 +11,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -539,6 +540,18 @@ public class MonsterStuffUtils {
   		}
   	}
 
+  	return userMonsterIds;
+  }
+  
+  public static List<Long> getUserMonsterIdsInClanRaid(
+  		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+  	List<Long> userMonsterIds = new ArrayList<Long>();
+  	
+  	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+  		List<Long> someUserMonsterIds = cepfu.getUserMonsterIds();
+  		userMonsterIds.addAll(someUserMonsterIds);
+  	}
+  	
   	return userMonsterIds;
   }
   

@@ -99,6 +99,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterQuality;
+import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementProto;
 import com.lvl6.proto.MonsterStuffProto.UserMonsterEvolutionProto;
@@ -1637,13 +1638,21 @@ public class CreateInfoProtoUtils {
   		crspb.setName(name);
   	}
   	
-  	//create the monster protos
-  	Map<Integer, ClanRaidStageMonster> monsters = ClanRaidStageMonsterRetrieveUtils
-  			.getClanRaidStageMonstersForClanRaidStageId(clanRaidStageId);
+  	//create the monster protos in order
+  	Map<Integer, ClanRaidStageMonster> monsterNumToCrsm = ClanRaidStageMonsterRetrieveUtils
+  			.getMonsterNumsToMonstersForStageId(clanRaidStageId);
   	
-  	for (ClanRaidStageMonster crsm : monsters.values()) {
-  		ClanRaidStageMonsterProto crsmp = createClanRaidStageMonsterProto(crsm);
-  		crspb.addMonsters(crsmp);
+  	if (!monsterNumToCrsm.isEmpty()) {
+
+  		List<Integer> monsterNumsAsc = new ArrayList<Integer>(monsterNumToCrsm.keySet());
+  		Collections.sort(monsterNumsAsc);
+
+  		for (Integer monsterNum : monsterNumsAsc) {
+  			ClanRaidStageMonster crsm = monsterNumToCrsm.get(monsterNum);
+
+  			ClanRaidStageMonsterProto crsmp = createClanRaidStageMonsterProto(crsm);
+  			crspb.addMonsters(crsmp);
+  		}
   	}
   	
   	//create the reward protos
@@ -1726,8 +1735,8 @@ public class CreateInfoProtoUtils {
   		ClanEventPersistentForUser cepfu, Map<Long, MonsterForUser> idsToUserMonsters,
   		List<FullUserMonsterProto> fumpList){
   	PersistentClanEventUserInfoProto.Builder pceuipb = PersistentClanEventUserInfoProto.newBuilder();
-  	
-  	pceuipb.setUserId(cepfu.getUserId());
+  	int userId = cepfu.getUserId();
+  	pceuipb.setUserId(userId);
   	pceuipb.setClanId(cepfu.getClanId());
   	
   	pceuipb.setCrId(cepfu.getCrId());
@@ -1739,6 +1748,9 @@ public class CreateInfoProtoUtils {
 //  	pceuipb.setCrsmId(cepfu.getCrsmId());
   	pceuipb.setCrsmDmgDone(cepfu.getCrsmDmgDone());
   	
+  	UserCurrentMonsterTeamProto.Builder ucmtpb = UserCurrentMonsterTeamProto.newBuilder();
+  	ucmtpb.setUserId(userId);
+  	
   	if (null == fumpList || fumpList.isEmpty()) {
   		List<Long> userMonsterIds = cepfu.getUserMonsterIds();
 
@@ -1749,18 +1761,18 @@ public class CreateInfoProtoUtils {
   				//create fake user monster proto
   				FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
   				fumpb.setUserMonsterId(userMonsterId);
-  				
   				FullUserMonsterProto fump = fumpb.build();
-  				pceuipb.addUserMonsters(fump);
+  				ucmtpb.addCurrentTeam(fump);
   				continue;
   			}
   			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
   			FullUserMonsterProto fump = createFullUserMonsterProtoFromUserMonster(mfu);
-  			pceuipb.addUserMonsters(fump);
+  			ucmtpb.addCurrentTeam(fump);
   		}
   	} else {
-  		pceuipb.addAllUserMonsters(fumpList);
+  		ucmtpb.addAllCurrentTeam(fumpList);
   	}
+  	pceuipb.setUserMonsters(ucmtpb.build());
   	
   	return pceuipb.build();
   }

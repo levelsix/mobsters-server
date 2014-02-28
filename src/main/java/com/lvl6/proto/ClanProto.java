@@ -7349,15 +7349,10 @@ public final class ClanProto {
     boolean hasCrsmDmgDone();
     int getCrsmDmgDone();
     
-    // repeated .com.lvl6.proto.FullUserMonsterProto userMonsters = 9;
-    java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> 
-        getUserMonstersList();
-    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUserMonsters(int index);
-    int getUserMonstersCount();
-    java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-        getUserMonstersOrBuilderList();
-    com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUserMonstersOrBuilder(
-        int index);
+    // optional .com.lvl6.proto.UserCurrentMonsterTeamProto userMonsters = 9;
+    boolean hasUserMonsters();
+    com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto getUserMonsters();
+    com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder getUserMonstersOrBuilder();
   }
   public static final class PersistentClanEventUserInfoProto extends
       com.google.protobuf.GeneratedMessage
@@ -7448,25 +7443,17 @@ public final class ClanProto {
       return crsmDmgDone_;
     }
     
-    // repeated .com.lvl6.proto.FullUserMonsterProto userMonsters = 9;
+    // optional .com.lvl6.proto.UserCurrentMonsterTeamProto userMonsters = 9;
     public static final int USERMONSTERS_FIELD_NUMBER = 9;
-    private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> userMonsters_;
-    public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUserMonstersList() {
+    private com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto userMonsters_;
+    public boolean hasUserMonsters() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto getUserMonsters() {
       return userMonsters_;
     }
-    public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-        getUserMonstersOrBuilderList() {
+    public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder getUserMonstersOrBuilder() {
       return userMonsters_;
-    }
-    public int getUserMonstersCount() {
-      return userMonsters_.size();
-    }
-    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUserMonsters(int index) {
-      return userMonsters_.get(index);
-    }
-    public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUserMonstersOrBuilder(
-        int index) {
-      return userMonsters_.get(index);
     }
     
     private void initFields() {
@@ -7476,7 +7463,7 @@ public final class ClanProto {
       crDmgDone_ = 0;
       crsDmgDone_ = 0;
       crsmDmgDone_ = 0;
-      userMonsters_ = java.util.Collections.emptyList();
+      userMonsters_ = com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7508,8 +7495,8 @@ public final class ClanProto {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(8, crsmDmgDone_);
       }
-      for (int i = 0; i < userMonsters_.size(); i++) {
-        output.writeMessage(9, userMonsters_.get(i));
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(9, userMonsters_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7544,9 +7531,9 @@ public final class ClanProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(8, crsmDmgDone_);
       }
-      for (int i = 0; i < userMonsters_.size(); i++) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(9, userMonsters_.get(i));
+          .computeMessageSize(9, userMonsters_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -7686,11 +7673,11 @@ public final class ClanProto {
         crsmDmgDone_ = 0;
         bitField0_ = (bitField0_ & ~0x00000020);
         if (userMonstersBuilder_ == null) {
-          userMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          userMonsters_ = com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance();
         } else {
           userMonstersBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       
@@ -7753,11 +7740,10 @@ public final class ClanProto {
           to_bitField0_ |= 0x00000020;
         }
         result.crsmDmgDone_ = crsmDmgDone_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
         if (userMonstersBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040)) {
-            userMonsters_ = java.util.Collections.unmodifiableList(userMonsters_);
-            bitField0_ = (bitField0_ & ~0x00000040);
-          }
           result.userMonsters_ = userMonsters_;
         } else {
           result.userMonsters_ = userMonstersBuilder_.build();
@@ -7796,31 +7782,8 @@ public final class ClanProto {
         if (other.hasCrsmDmgDone()) {
           setCrsmDmgDone(other.getCrsmDmgDone());
         }
-        if (userMonstersBuilder_ == null) {
-          if (!other.userMonsters_.isEmpty()) {
-            if (userMonsters_.isEmpty()) {
-              userMonsters_ = other.userMonsters_;
-              bitField0_ = (bitField0_ & ~0x00000040);
-            } else {
-              ensureUserMonstersIsMutable();
-              userMonsters_.addAll(other.userMonsters_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.userMonsters_.isEmpty()) {
-            if (userMonstersBuilder_.isEmpty()) {
-              userMonstersBuilder_.dispose();
-              userMonstersBuilder_ = null;
-              userMonsters_ = other.userMonsters_;
-              bitField0_ = (bitField0_ & ~0x00000040);
-              userMonstersBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getUserMonstersFieldBuilder() : null;
-            } else {
-              userMonstersBuilder_.addAllMessages(other.userMonsters_);
-            }
-          }
+        if (other.hasUserMonsters()) {
+          mergeUserMonsters(other.getUserMonsters());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -7884,9 +7847,12 @@ public final class ClanProto {
               break;
             }
             case 74: {
-              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.newBuilder();
+              com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder subBuilder = com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.newBuilder();
+              if (hasUserMonsters()) {
+                subBuilder.mergeFrom(getUserMonsters());
+              }
               input.readMessage(subBuilder, extensionRegistry);
-              addUserMonsters(subBuilder.buildPartial());
+              setUserMonsters(subBuilder.buildPartial());
               break;
             }
           }
@@ -8021,185 +7987,89 @@ public final class ClanProto {
         return this;
       }
       
-      // repeated .com.lvl6.proto.FullUserMonsterProto userMonsters = 9;
-      private java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> userMonsters_ =
-        java.util.Collections.emptyList();
-      private void ensureUserMonstersIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          userMonsters_ = new java.util.ArrayList<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto>(userMonsters_);
-          bitField0_ |= 0x00000040;
-         }
+      // optional .com.lvl6.proto.UserCurrentMonsterTeamProto userMonsters = 9;
+      private com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto userMonsters_ = com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> userMonstersBuilder_;
+      public boolean hasUserMonsters() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
-      
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> userMonstersBuilder_;
-      
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> getUserMonstersList() {
+      public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto getUserMonsters() {
         if (userMonstersBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(userMonsters_);
+          return userMonsters_;
         } else {
-          return userMonstersBuilder_.getMessageList();
+          return userMonstersBuilder_.getMessage();
         }
       }
-      public int getUserMonstersCount() {
-        if (userMonstersBuilder_ == null) {
-          return userMonsters_.size();
-        } else {
-          return userMonstersBuilder_.getCount();
-        }
-      }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto getUserMonsters(int index) {
-        if (userMonstersBuilder_ == null) {
-          return userMonsters_.get(index);
-        } else {
-          return userMonstersBuilder_.getMessage(index);
-        }
-      }
-      public Builder setUserMonsters(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+      public Builder setUserMonsters(com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto value) {
         if (userMonstersBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureUserMonstersIsMutable();
-          userMonsters_.set(index, value);
+          userMonsters_ = value;
           onChanged();
         } else {
-          userMonstersBuilder_.setMessage(index, value);
+          userMonstersBuilder_.setMessage(value);
         }
+        bitField0_ |= 0x00000040;
         return this;
       }
       public Builder setUserMonsters(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
+          com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder builderForValue) {
         if (userMonstersBuilder_ == null) {
-          ensureUserMonstersIsMutable();
-          userMonsters_.set(index, builderForValue.build());
+          userMonsters_ = builderForValue.build();
           onChanged();
         } else {
-          userMonstersBuilder_.setMessage(index, builderForValue.build());
+          userMonstersBuilder_.setMessage(builderForValue.build());
         }
+        bitField0_ |= 0x00000040;
         return this;
       }
-      public Builder addUserMonsters(com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
+      public Builder mergeUserMonsters(com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto value) {
         if (userMonstersBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              userMonsters_ != com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance()) {
+            userMonsters_ =
+              com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.newBuilder(userMonsters_).mergeFrom(value).buildPartial();
+          } else {
+            userMonsters_ = value;
           }
-          ensureUserMonstersIsMutable();
-          userMonsters_.add(value);
           onChanged();
         } else {
-          userMonstersBuilder_.addMessage(value);
+          userMonstersBuilder_.mergeFrom(value);
         }
-        return this;
-      }
-      public Builder addUserMonsters(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto value) {
-        if (userMonstersBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureUserMonstersIsMutable();
-          userMonsters_.add(index, value);
-          onChanged();
-        } else {
-          userMonstersBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      public Builder addUserMonsters(
-          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
-        if (userMonstersBuilder_ == null) {
-          ensureUserMonstersIsMutable();
-          userMonsters_.add(builderForValue.build());
-          onChanged();
-        } else {
-          userMonstersBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addUserMonsters(
-          int index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder builderForValue) {
-        if (userMonstersBuilder_ == null) {
-          ensureUserMonstersIsMutable();
-          userMonsters_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          userMonstersBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      public Builder addAllUserMonsters(
-          java.lang.Iterable<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto> values) {
-        if (userMonstersBuilder_ == null) {
-          ensureUserMonstersIsMutable();
-          super.addAll(values, userMonsters_);
-          onChanged();
-        } else {
-          userMonstersBuilder_.addAllMessages(values);
-        }
+        bitField0_ |= 0x00000040;
         return this;
       }
       public Builder clearUserMonsters() {
         if (userMonstersBuilder_ == null) {
-          userMonsters_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          userMonsters_ = com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.getDefaultInstance();
           onChanged();
         } else {
           userMonstersBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
-      public Builder removeUserMonsters(int index) {
-        if (userMonstersBuilder_ == null) {
-          ensureUserMonstersIsMutable();
-          userMonsters_.remove(index);
-          onChanged();
-        } else {
-          userMonstersBuilder_.remove(index);
-        }
-        return this;
+      public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder getUserMonstersBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getUserMonstersFieldBuilder().getBuilder();
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder getUserMonstersBuilder(
-          int index) {
-        return getUserMonstersFieldBuilder().getBuilder(index);
-      }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder getUserMonstersOrBuilder(
-          int index) {
-        if (userMonstersBuilder_ == null) {
-          return userMonsters_.get(index);  } else {
-          return userMonstersBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      public java.util.List<? extends com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
-           getUserMonstersOrBuilderList() {
+      public com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder getUserMonstersOrBuilder() {
         if (userMonstersBuilder_ != null) {
-          return userMonstersBuilder_.getMessageOrBuilderList();
+          return userMonstersBuilder_.getMessageOrBuilder();
         } else {
-          return java.util.Collections.unmodifiableList(userMonsters_);
+          return userMonsters_;
         }
       }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUserMonstersBuilder() {
-        return getUserMonstersFieldBuilder().addBuilder(
-            com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
-      }
-      public com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder addUserMonstersBuilder(
-          int index) {
-        return getUserMonstersFieldBuilder().addBuilder(
-            index, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.getDefaultInstance());
-      }
-      public java.util.List<com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder> 
-           getUserMonstersBuilderList() {
-        return getUserMonstersFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilder<
-          com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder> 
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder> 
           getUserMonstersFieldBuilder() {
         if (userMonstersBuilder_ == null) {
-          userMonstersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
-              com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto.Builder, com.lvl6.proto.MonsterStuffProto.FullUserMonsterProtoOrBuilder>(
+          userMonstersBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto.Builder, com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProtoOrBuilder>(
                   userMonsters_,
-                  ((bitField0_ & 0x00000040) == 0x00000040),
                   getParentForChildren(),
                   isClean());
           userMonsters_ = null;
@@ -8327,15 +8197,15 @@ public final class ClanProto {
       "\005\022\023\n\013clanEventId\030\002 \001(\005\022\022\n\nclanRaidId\030\003 \001" +
       "(\005\022\027\n\017clanRaidStageId\030\004 \001(\005\022\026\n\016stageStar" +
       "tTime\030\005 \001(\003\022\016\n\006crsmId\030\006 \001(\005\022\035\n\025stageMons" +
-      "terStartTime\030\007 \001(\003\"\310\001\n PersistentClanEve" +
+      "terStartTime\030\007 \001(\003\"\317\001\n PersistentClanEve" +
       "ntUserInfoProto\022\016\n\006userId\030\001 \001(\005\022\016\n\006clanI" +
       "d\030\002 \001(\005\022\014\n\004crId\030\003 \001(\005\022\021\n\tcrDmgDone\030\004 \001(\005" +
       "\022\022\n\ncrsDmgDone\030\006 \001(\005\022\023\n\013crsmDmgDone\030\010 \001(" +
-      "\005\022:\n\014userMonsters\030\t \003(\0132$.com.lvl6.proto",
-      ".FullUserMonsterProto*X\n\016UserClanStatus\022" +
-      "\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n\007CAPTAI" +
-      "N\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013B\tClanP" +
-      "roto"
+      "\005\022A\n\014userMonsters\030\t \001(\0132+.com.lvl6.proto",
+      ".UserCurrentMonsterTeamProto*X\n\016UserClan" +
+      "Status\022\n\n\006LEADER\020\001\022\021\n\rJUNIOR_LEADER\020\002\022\013\n" +
+      "\007CAPTAIN\020\003\022\n\n\006MEMBER\020\004\022\016\n\nREQUESTING\020\nB\013" +
+      "B\tClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

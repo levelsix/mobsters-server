@@ -207,18 +207,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	//get all the clan raid info for the users, and then delete them
   	Map<Integer, ClanEventPersistentForUser> clanUserInfo = ClanEventPersistentForUserRetrieveUtils
   			.getPersistentEventUserInfoForClanId(clanId);
-  	numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistory(
-  			clanEventPersistentId, now, clanUserInfo);
-  	
-  	//clan_event_persistent_for_user_history
-  	log.info("rows inserted into clan raid info for user history (should be " + 
-				clanUserInfo.size() + "): " + numInserted);
-  	
   	
   	//delete clan info for clan raid
   	DeleteUtils.get().deleteClanEventPersistentForClan(clanId);
   	
   	if (null != clanUserInfo && !clanUserInfo.isEmpty()) {
+  		numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistory(
+  				clanEventPersistentId, now, clanUserInfo);
+  		//clan_event_persistent_for_user_history
+  		log.info("rows inserted into clan raid info for user history (should be " + 
+  				clanUserInfo.size() + "): " + numInserted);
+  		
   		//delete clan user info for clan raid
   		List<Integer> userIdList = new ArrayList<Integer>(clanUserInfo.keySet());
   		DeleteUtils.get().deleteClanEventPersistentForUsers(userIdList);
