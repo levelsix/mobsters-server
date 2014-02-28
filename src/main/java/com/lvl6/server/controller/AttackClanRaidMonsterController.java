@@ -447,6 +447,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	int dmgSoFar = sumDamageDoneToMonster(userIdToCepfu);
   	int crsmHp = crsm.getMonsterHp();
   	
+  	log.info("dmgSoFar=" + dmgSoFar);
+  	log.info("monster's health=" + crsmHp);
+  	log.info("dmgDealt=" + dmgDealt);
+  	
   	//default values if monster isn't dead
   	int newDmgDealt = dmgDealt;
   	boolean monsterDied = false;
@@ -472,6 +476,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	//give caller return values
   	userIdToCepfu.putAll(newUserIdToCepfu);
   	newDmgList.add(newDmgDealt);
+  	
+  	log.info("newDmg=" + newDmgDealt);
+  	log.info("monsterDied=" + monsterDied);
+  	log.info("newUserIdToCepfu=" + userIdToCepfu);
   	return monsterDied;
   }
 
