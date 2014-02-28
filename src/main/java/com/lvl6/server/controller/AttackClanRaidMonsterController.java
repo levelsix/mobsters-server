@@ -254,6 +254,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     ClanEventPersistentForClan eventClientSent = ClanStuffUtils
     		.createClanEventPersistentForClan(eventDetails);
     
+    clanEventList.add(raidStartedByClan);
+    clanEventList.add(eventClientSent);
     //still want to deduct user's monsters' healths
 //    if (null == raidStartedByClan) {
 //    	
@@ -278,8 +280,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 //    	return false;
 //    }
     
-    clanEventList.add(raidStartedByClan);
-    clanEventList.add(eventClientSent);
     
     return true;
   }
