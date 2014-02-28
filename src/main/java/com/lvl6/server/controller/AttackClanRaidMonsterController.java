@@ -224,7 +224,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	if (errorless && null != clanEvent && !userIdToCepfu.isEmpty()) {
     		int numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistoryDetail(
     				curTime, userIdToCepfu, clanEvent);
-    		log.error("num raid detail inserted = " + numInserted + "\t should be " +
+    		log.info("num raid detail inserted = " + numInserted + "\t should be " +
     				userIdToCepfu.size());
     	}
     } catch (Exception e) {
