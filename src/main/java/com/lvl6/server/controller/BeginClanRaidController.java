@@ -152,31 +152,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (success && setMonsterTeamForRaid) {
-      	//crsId and crsmId is not needed in PersistentClanEventUserInfoProto
-      	//should already be in the db table 
-//      	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
-//        		.getPersistentEventForClanId(clanId);
-      	
-      	long userMonsterIdOne = 0;
-      	long userMonsterIdTwo = 0;
-      	long userMonsterIdThree = 0;
-      	
-      	if (userMonsterIds.size() >= 1) {
-      		userMonsterIdOne = userMonsterIds.get(0);
-      	}
-      	if (userMonsterIds.size() >= 2) {
-      		userMonsterIdTwo = userMonsterIds.get(1);
-      	}
-      	if (userMonsterIds.size() >= 3) {
-      		userMonsterIdThree = userMonsterIds.get(2);
-      	}
-      	
-      	ClanEventPersistentForUser cepfu = new ClanEventPersistentForUser(userId, clanId,
-      			clanRaidId, 0, 0, 0, 0, 0, userMonsterIdOne, userMonsterIdTwo,
-      			userMonsterIdThree);
-      	PersistentClanEventUserInfoProto userDetails = CreateInfoProtoUtils
-      			.createPersistentClanEventUserInfoProto(cepfu, null, userMonsters);
-      	resBuilder.setUserDetails(userDetails);
+      	setClanAndUserDetails(resBuilder, userId, clanId, clanRaidId,
+      			userMonsterIds, userMonsters);
       	
         resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
         log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
@@ -431,4 +408,33 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
 
+  
+  private void setClanAndUserDetails(Builder resBuilder, int userId, int clanId,
+  		int clanRaidId, List<Long> userMonsterIds, List<FullUserMonsterProto> userMonsters) {
+  //crsId and crsmId is not needed in PersistentClanEventUserInfoProto
+  	//should already be in the db table 
+//  	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+//    		.getPersistentEventForClanId(clanId);
+  	
+  	long userMonsterIdOne = 0;
+  	long userMonsterIdTwo = 0;
+  	long userMonsterIdThree = 0;
+  	
+  	if (userMonsterIds.size() >= 1) {
+  		userMonsterIdOne = userMonsterIds.get(0);
+  	}
+  	if (userMonsterIds.size() >= 2) {
+  		userMonsterIdTwo = userMonsterIds.get(1);
+  	}
+  	if (userMonsterIds.size() >= 3) {
+  		userMonsterIdThree = userMonsterIds.get(2);
+  	}
+  	
+  	ClanEventPersistentForUser cepfu = new ClanEventPersistentForUser(userId, clanId,
+  			clanRaidId, 0, 0, 0, 0, 0, userMonsterIdOne, userMonsterIdTwo,
+  			userMonsterIdThree);
+  	PersistentClanEventUserInfoProto userDetails = CreateInfoProtoUtils
+  			.createPersistentClanEventUserInfoProto(cepfu, null, userMonsters);
+  	resBuilder.setUserDetails(userDetails);
+  }
 }

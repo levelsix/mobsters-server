@@ -35,7 +35,7 @@ import com.lvl6.utils.DBConnection;
 		try {
 			conn = DBConnection.get().getConnection();
 			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
-			userIdToClanPersistentEventUserInfo = grabClanEventPersistentForUserFromRS(rs);
+			userIdToClanPersistentEventUserInfo = grabClanEventPersistentForClanFromRS(rs);
 		} catch (Exception e) {
     	log.error("clan event persistent for user retrieve db error.", e);
     	userIdToClanPersistentEventUserInfo = new HashMap<Integer, ClanEventPersistentForUser>();
@@ -44,8 +44,32 @@ import com.lvl6.utils.DBConnection;
     }
 		return userIdToClanPersistentEventUserInfo;
 	}
+	
+	public static ClanEventPersistentForUser getPersistentEventUserInfoForUserIdClanId(
+			int userId, int clanId) {
+		Connection conn = null;
+		ResultSet rs = null;
 
-	private static Map<Integer, ClanEventPersistentForUser> grabClanEventPersistentForUserFromRS(
+		Map<String, Object> paramsToVals = new HashMap<String, Object>();
+		paramsToVals.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID, clanId);
+		paramsToVals.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
+		
+     
+		log.info("getting ClanEventPersistentForUser for clanId=" + clanId);
+    ClanEventPersistentForUser clanPersistentEventUserInfo = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectRowsAbsoluteAnd(conn, paramsToVals, TABLE_NAME);
+			clanPersistentEventUserInfo = grabClanEventPersistentForUserFromRS(rs);
+		} catch (Exception e) {
+    	log.error("clan event persistent for user retrieve db error.", e);
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+		return clanPersistentEventUserInfo;
+	}
+
+	private static Map<Integer, ClanEventPersistentForUser> grabClanEventPersistentForClanFromRS(
 			ResultSet rs) {
 		Map<Integer, ClanEventPersistentForUser> userIdToClanPersistentEventUserInfo =
 				new HashMap<Integer, ClanEventPersistentForUser>();
@@ -69,6 +93,26 @@ import com.lvl6.utils.DBConnection;
 			}
 		}
 		return userIdToClanPersistentEventUserInfo;
+	}
+
+	private static ClanEventPersistentForUser grabClanEventPersistentForUserFromRS(
+			ResultSet rs) {
+		if (rs != null) {
+			try {
+				rs.last();
+				rs.beforeFirst();
+				
+				
+				while(rs.next()) {
+					ClanEventPersistentForUser cepfu = convertRSRowToUserCityExpansionData(rs);
+					return cepfu;
+				}
+			} catch (SQLException e) {
+				log.error("problem with database call.", e);
+
+			}
+		}
+		return null;
 	}
 
 	/*

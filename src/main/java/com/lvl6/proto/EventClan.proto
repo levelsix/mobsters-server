@@ -325,7 +325,10 @@ message AttackClanRaidMonsterRequestProto {
 	
 	
 	optional FullUserMonsterProto userMonsterThatAttacked = 9;
-	//repeated UserCurrentMonsterTeamProto userMonsterTeam = 10; //forgot why put this here
+	
+	//when user attacks, server is going to create a PersistentClanEventUserInfoProto
+	//for this user, so need the team
+	optional UserCurrentMonsterTeamProto userMonsterTeam = 10; 
 }
 
 //will be sent to everyone in the clan

@@ -225,9 +225,17 @@ public class CreateInfoProtoUtils {
   	return b.build();
   }
 
-  public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u, UserClanStatus s) {
+  public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
+  		UserClanStatus s, float clanRaidContribution) {
     MinimumUserProtoWithBattleHistory mup = createMinimumUserProtoWithBattleHistory(u);
-    return MinimumUserProtoForClans.newBuilder().setMinUserProto(mup).setClanStatus(s).build();
+    
+    MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
+    mupfcb.setMinUserProto(mup);
+    mupfcb.setClanStatus(s);
+    mupfcb.setRaidContribution(clanRaidContribution);
+    MinimumUserProtoForClans mupfc = mupfcb.build();
+    
+    return mupfc;
   }
 
 
