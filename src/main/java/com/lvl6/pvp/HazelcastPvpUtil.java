@@ -213,10 +213,16 @@ public class HazelcastPvpUtil implements InitializingBean {
     }
 
     protected void setupOfflinePvpUserMap() {
-//    	//this will create the map if map doesn't exist
-//    	userIdToOfflinePvpUser = hazel.getMap(OFFLINE_PVP_USER_MAP);
-    	
-    	addOfflinePvpUserIndexes();
+
+    	//in mvn clean test, error was
+      //Index can only be added before adding entries! Add indexes first and only once then put entries.
+      //so this might be the issue
+    	if (null != offlinePvpUserMap && offlinePvpUserMap.isEmpty()) {
+    		//    	log.info("!!!!!!!!!!!!!!!!!!!!!!!clearing offlinePvpUserMap!!!!!!!!!!!!!!!!!!!!!!!");
+    		//    	offlinePvpUserMap.clear();
+    		log.info("adding indexes to HazelcastPvpUtil.offlinePvpUserMap");
+    		addOfflinePvpUserIndexes();
+    	}
     	
     	//now we have almost all offline users, put them into the userIdToOfflinePvpUser IMap
     	Collection<OfflinePvpUser> validUsers = getOfflinePvpUserRetrieveUtils().getPvpValidUsers();
