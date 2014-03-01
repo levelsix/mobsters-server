@@ -9,7 +9,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -42,6 +45,13 @@ import com.lvl6.utils.DBConnection;
 		Map<Integer, ClanEventPersistent> clanEventIdToEvent =
 				new HashMap<Integer, ClanEventPersistent>();
 		
+		DateTime dt = new DateTime(curDate);
+		log.info("dtNow=" + dt);
+		DateTime pstDt = new DateTime(curDate, DateTimeZone
+  		.forTimeZone(TimeZone.getTimeZone("America/Los_Angeles")));
+		log.info("pstDtNow=" + pstDt);
+		
+		curDate = timeUtils.createPstDateAddMinutes(curDate, 0);
 		
 		//go through each event and see which ones are active
 		//Event is active if today is between the event's start time and end time
@@ -49,7 +59,7 @@ import com.lvl6.utils.DBConnection;
 //			if (!dow.equalsIgnoreCase(cep.getDayOfWeek())) {
 //				continue;
 //			}
-			
+			log.info("cep=" + cep);
 			//check if correct time
 			int eventDayOfWeek = timeUtils.getDayOfWeek(cep.getDayOfWeek());
 			if (eventDayOfWeek <= 0 || eventDayOfWeek >= 8) {
@@ -68,6 +78,9 @@ import com.lvl6.utils.DBConnection;
 			
 			minutesAddend = cep.getEventDurationMinutes();
 			Date eventEndTime = timeUtils.createPstDateAddMinutes(eventStartTime, minutesAddend);
+			
+			log.info("eventStartTime=" + eventStartTime);
+			log.info("eventEndTime=" + eventEndTime);
 			
 			//eventStartTime is always earlier than curDate, given the way it's calculated
 			if (!timeUtils.isFirstEarlierThanSecond(curDate, eventEndTime)) {
