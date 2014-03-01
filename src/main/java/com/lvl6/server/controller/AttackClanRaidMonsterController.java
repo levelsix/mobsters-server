@@ -39,6 +39,7 @@ import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.ClanEventUtil;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -74,7 +75,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setTimeUtils(TimeUtils timeUtils) {
 		this.timeUtils = timeUtils;
 	}
+	
+	@Autowired
+	protected ClanEventUtil clanEventUtil;
+	
+	public ClanEventUtil getClanEventUtil() {
+		return clanEventUtil;
+	}
 
+	public void setClanEventUtil(ClanEventUtil clanEventUtil) {
+		this.clanEventUtil = clanEventUtil;
+	}
+
+	
+	
 	
 	public AttackClanRaidMonsterController() {
     numAllocatedThreads = 4;
@@ -111,14 +125,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<Long, Integer> userMonsterIdToExpectedHealth = new HashMap<Long, Integer>();
     MonsterStuffUtils.getUserMonsterIds(monsterHealthProtos, userMonsterIdToExpectedHealth);
     
-    //client indicates when to begin checking if monster is dead
-    boolean checkIfMonsterDied = reqProto.getCheckIfMonsterDied();
-    //if true and above true (monster is dead), then for clan users, carry over current
-    //crsmDmg over to crsDmg
-    boolean monsterIsLastInStage = reqProto.getMonsterIsLastInStage();
-    //if true and above both true, then for clan users, carry over current crsmDmg over to
-    //crsDmg and resulting crsDmg over to crDmg
-    boolean stageIsLastInRaid = reqProto.getStageIsLastInRaid();
     FullUserMonsterProto userMonsterThatAttacked = reqProto.getUserMonsterThatAttacked();
     UserCurrentMonsterTeamProto userMonsterTeam = reqProto.getUserMonsterTeam();
     
@@ -151,8 +157,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     			new ArrayList<ClanEventPersistentForClan>();
     	
       boolean legitRequest = checkLegitRequest(resBuilder, sender, userId, clanId,
-      		eventDetails, checkIfMonsterDied, monsterIsLastInStage, stageIsLastInRaid,
-      		curDate, clanEventList);
+      		eventDetails, curDate, clanEventList);
 
 
 //      boolean success = false;
@@ -160,9 +165,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	log.info("legitRequest");
       	clanEvent = clanEventList.get(0);
       	ClanEventPersistentForClan clanEventClientSent = clanEventList.get(1);
+      	
+      	//clanEvent might be modified (this will always be sent to the client)
         writeChangesToDB(resBuilder, clanId, userId, damageDealt, curTime, clanEvent,
-        		clanEventClientSent, checkIfMonsterDied, monsterIsLastInStage,
-        		stageIsLastInRaid, userMonsterTeam, userMonsterIdToExpectedHealth,
+        		clanEventClientSent, userMonsterTeam, userMonsterIdToExpectedHealth,
         		userIdToCepfu);
       }
       
@@ -176,8 +182,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (!userIdToCepfu.isEmpty()) {
-      	//whenever server has this information, (when client says monster may be dead)
-      	//send it to the clients
+      	//whenever server has this information send it to the clients
       	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
       	
       	Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
@@ -237,8 +242,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   //want to update user monster healths even if the monster is dead
   private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mup,
-  		int userId, int clanId, PersistentClanEventClanInfoProto eventDetails,
-  		boolean checkIfMonsterDied, boolean monsterIsLastInStage, boolean stageIsLastInRaid,
+  		int userId, int clanId, PersistentClanEventClanInfoProto eventDetails,  		
   		Date curDate, List<ClanEventPersistentForClan> clanEventList) {
   	//check if user is in clan
   	UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(userId, clanId);
@@ -292,8 +296,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   
   private boolean writeChangesToDB(Builder resBuilder, int clanId, int userId,
   		int damageDealt, Timestamp curTime, ClanEventPersistentForClan clanEvent, 
-  		ClanEventPersistentForClan clanEventClientSent, boolean checkIfMonsterDied,
-  		boolean monsterIsLastInStage, boolean stageIsLastInRaid,
+  		ClanEventPersistentForClan clanEventClientSent,
   		UserCurrentMonsterTeamProto ucmtp,
   		Map<Long, Integer> userMonsterIdToExpectedHealth,
   		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) throws Exception {
@@ -305,9 +308,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   			null != clanEvent.getStageStartTime() &&
   			null != clanEvent.getStageMonsterStartTime()) {
   		//this user might have just dealt the killing blow
+  		//clanEvent might be modified if the user dealt the killing blow
   		updateClanRaid(resBuilder, userId, clanId, damageDealt, curTime, clanEvent,
-  				clanEventClientSent, checkIfMonsterDied, monsterIsLastInStage,
-  				stageIsLastInRaid, ucmtp, userIdToCepfu);
+  				clanEventClientSent, ucmtp, userIdToCepfu);
   		
   		
   	} else if (null != clanEvent && clanEvent.equals(clanEventClientSent) && 
@@ -348,8 +351,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   //ClanEventPersistentForClan clanEvent WILL BE UPDATED
   private void updateClanRaid(Builder resBuilder, int userId, int clanId, int dmgDealt,
   		Timestamp curTime, ClanEventPersistentForClan clanEvent,
-  		ClanEventPersistentForClan clanEventClientSent, boolean checkIfMonsterDied,
-  		boolean monsterIsLastInStage, boolean stageIsLastInRaid,
+  		ClanEventPersistentForClan clanEventClientSent,
   		UserCurrentMonsterTeamProto ucmtp,
   		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) throws Exception {
   	log.info("updating clan raid");
@@ -360,43 +362,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	List<Integer> newDmgList = new ArrayList<Integer>();
   	int newDmg = dmgDealt;
-  	boolean monsterDied = false;
-  	
-  	//if client says so, get all clan users' damages from db and see if monster died
-  	if (checkIfMonsterDied) {
-  		monsterDied = checkMonsterDead(clanId, curCrsId, curCrsmId, dmgDealt,
-  				userIdToCepfu, newDmgList);
-  		newDmg = newDmgList.get(0);
-  		
-  		//regardless of whether monster died, update the user's crsmDmg
-  		ClanEventPersistentForUser cepfu = userIdToCepfu.get(userId);
-  		int newCrsmDmgDone = cepfu.getCrsmDmgDone() + newDmg;
-  		cepfu.setCrsmDmgDone(newCrsmDmgDone);
+  	boolean monsterDied = checkMonsterDead(clanId, curCrsId, curCrsmId, dmgDealt,
+  					userIdToCepfu, newDmgList);
+  	newDmg = newDmgList.get(0);
+  	log.info("actual dmg dealt=" + newDmg);
+
+  	if (monsterDied) {
+  		//if monsterDied then get all the clan users' damages
+  		getAllClanUserDmgInfo(userId, clanId, newDmg, userIdToCepfu);
   	}
   	
   	ClanRaidStage nextStage = ClanRaidStageRetrieveUtils.getNextStageForClanRaidStageId(curCrsId, curCrId);
   	ClanRaidStageMonster curStageNextCrsm = ClanRaidStageMonsterRetrieveUtils
   			.getNextMonsterForClanRaidStageMonsterId(curCrsmId, curCrsId);
   	
-  	if (stageIsLastInRaid && monsterIsLastInStage && monsterDied || null == nextStage) {
+  	if (null == nextStage && monsterDied) {
   		log.info("user killed the monster and ended the raid!");
   		//this user just killed the last clan raid monster: this means
   		//put all the clan users' clan raid info into the history table 
-  		if (null == nextStage && !stageIsLastInRaid) {
-  			log.warn("client did not set stageIsLastInRaid. sent stageIsLastInRaid=" +
-  					stageIsLastInRaid + "\t so treating as if clan just won the raid");
-  		}
+  		
   		recordClanRaidVictory(clanId, clanEvent, curTime, userIdToCepfu);
   		//TODO: GIVE OUT THE REWARDS AFTER EVERY STAGE THAT HAS JUST ENDED
   		
   		
-  	} else if (monsterIsLastInStage && monsterDied || null == curStageNextCrsm) {
+  	} else if (null == curStageNextCrsm && monsterDied) {
   		//this user killed last monster in stage, go to the next one
   		log.info("user killed the monster and ended the stage!");
-  		if (null == curStageNextCrsm && !monsterIsLastInStage) {
-  			log.warn("maybe client did not set monsterIsLastInStage. sent monsterIsLastInStage=" +
-  					monsterIsLastInStage + "\t so treating as if clan just won the stage");
-  		}
   		recordClanRaidStageVictory(clanId, nextStage, curTime, clanEvent, userIdToCepfu);
   		//TODO: GIVE OUT THE REWARDS AFTER EVERY STAGE THAT HAS JUST ENDED
   		
@@ -420,6 +411,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
     			.createPersistentClanEventUserInfoProto(cepfu, null, ucmtp.getCurrentTeamList());
     	resBuilder.addClanUsersDetails(pceuip);
+    	
+    	//update the damage for this raid for the clan in hazelcast
+    	boolean replaceCrsmDmg = false;
+  		getClanEventUtil().updateClanIdCrsmDmg(clanId, newDmg, replaceCrsmDmg);
   	}
   	
   	
@@ -435,22 +430,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	resBuilder.setDmgDealt(newDmg);
   }
   
-  //actually query db for clan users' clan raid info, check if monster is dead,
-  //update this user's dmg accordingly
+  //update damage this user dealt accordingly
   private boolean checkMonsterDead(int clanId, int crsId, int crsmId, int dmgDealt,
   		Map<Integer, ClanEventPersistentForUser> userIdToCepfu, List<Integer> newDmgList) {
   	ClanRaidStageMonster crsm = ClanRaidStageMonsterRetrieveUtils
   			.getClanRaidStageMonsterForClanRaidStageMonsterId(crsmId);
   	
-  	//get the clan raid information for all the clan users
-  	//shouldn't be null (per the retrieveUtils)
-  	Map<Integer, ClanEventPersistentForUser> newUserIdToCepfu =
-  			ClanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
-  	
-  	//history purposes and so entries in tables don't look weird (crsId and crsmId=0)
-  	setCrsCrsmId(crsId, crsmId, newUserIdToCepfu);
-
-  	int dmgSoFar = sumDamageDoneToMonster(newUserIdToCepfu);
+  	//userIdToCepfu might actually be populated
+  	int dmgSoFar = getCrsmDmgSoFar(clanId, crsId, crsmId, userIdToCepfu);
   	int crsmHp = crsm.getMonsterHp();
   	
   	log.info("dmgSoFar=" + dmgSoFar);
@@ -480,13 +467,37 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
   	
   	//give caller return values
-  	userIdToCepfu.putAll(newUserIdToCepfu);
   	newDmgList.add(newDmgDealt);
   	
   	log.info("newDmg=" + newDmgDealt);
   	log.info("monsterDied=" + monsterDied);
   	log.info("newUserIdToCepfu=" + userIdToCepfu);
   	return monsterDied;
+  }
+
+  //get clan's crsmDmg from Hazelcast first if somehow fails or is 0 then,
+  //actually query db for clan users' clan raid info, check if monster is dead,
+  //might actually populate userIdToCepfu
+  private int getCrsmDmgSoFar(int clanId, int crsId, int crsmId,
+  		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+  	//get the clan raid information for all the clan users
+  	//shouldn't be null (per the retrieveUtils)
+  	
+  	int dmgSoFar = getClanEventUtil().getCrsmDmgForClanId(clanId);
+  	
+  	if (0 == dmgSoFar) {
+  		Map<Integer, ClanEventPersistentForUser> newUserIdToCepfu =
+  				ClanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
+
+  		//history purposes and so entries in tables don't look weird (crsId and crsmId=0)
+  		setCrsCrsmId(crsId, crsmId, newUserIdToCepfu);
+
+  		dmgSoFar = sumDamageDoneToMonster(newUserIdToCepfu);
+  		
+  		userIdToCepfu.putAll(newUserIdToCepfu);
+  	}
+  	
+  	return dmgSoFar;
   }
   
   private void setCrsCrsmId(int crsId, int crsmId,
@@ -515,6 +526,27 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	return dmgTotal;	
   }
+  
+  
+  private void getAllClanUserDmgInfo(int userId, int clanId, int newDmg,
+  		Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {
+  	
+  	//since monster died, get all clan users' clan raid info, in order to send
+		//to the client
+		if (null == userIdToCepfu || userIdToCepfu.isEmpty()) {
+			//more often than not, don't have it so get it
+			//only case where would have it is ClanEventUtil.java (Hazelcast) doesn't 
+			Map<Integer, ClanEventPersistentForUser> newUserIdToCepfu =
+  				ClanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
+			userIdToCepfu.putAll(newUserIdToCepfu);
+		}
+		
+		//update the user's crsmDmg
+		ClanEventPersistentForUser cepfu = userIdToCepfu.get(userId);
+		int newCrsmDmgDone = cepfu.getCrsmDmgDone() + newDmg;
+		cepfu.setCrsmDmgDone(newCrsmDmgDone);
+  }
+  
   
   private void recordClanRaidVictory(int clanId, ClanEventPersistentForClan clanEvent,
   		Timestamp now, Map<Integer, ClanEventPersistentForUser> userIdToCepfu) {

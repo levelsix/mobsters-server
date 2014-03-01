@@ -58,9 +58,9 @@ public class HazelcastPvpUtil implements InitializingBean {
 		@Autowired
 		protected TextFileResourceLoaderAware textFileResourceLoaderAware;
 		
-		//Used to create a distributed map. Distributed map is seen across all our servers
-		@Autowired
-		protected HazelcastInstance hazel;
+//		//Used to create a distributed map. Distributed map is seen across all our servers
+//		@Autowired
+//		protected HazelcastInstance hazel;
 		
 		//Used to get offline people that can be attacked in pvp
 		@Autowired
@@ -257,15 +257,15 @@ public class HazelcastPvpUtil implements InitializingBean {
     }
     
     
-    
-    
-    public HazelcastInstance getHazel() {
-    	return hazel;
-    }
-    
-    public void setHazel(HazelcastInstance hazel) {
-    	this.hazel = hazel;
-    }
+//    
+//    
+//    public HazelcastInstance getHazel() {
+//    	return hazel;
+//    }
+//    
+//    public void setHazel(HazelcastInstance hazel) {
+//    	this.hazel = hazel;
+//    }
 
     public TextFileResourceLoaderAware getTextFileResourceLoaderAware() {
 			return textFileResourceLoaderAware;

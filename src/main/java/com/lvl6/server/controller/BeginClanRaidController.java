@@ -40,6 +40,7 @@ import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.ClanEventUtil;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -74,8 +75,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setTimeUtils(TimeUtils timeUtils) {
 		this.timeUtils = timeUtils;
 	}
-
 	
+	@Autowired
+	protected ClanEventUtil clanEventUtil;
+	
+	public ClanEventUtil getClanEventUtil() {
+		return clanEventUtil;
+	}
+
+	public void setClanEventUtil(ClanEventUtil clanEventUtil) {
+		this.clanEventUtil = clanEventUtil;
+	}
+	
+	
+
 	public BeginClanRaidController() {
     numAllocatedThreads = 4;
   }
@@ -397,6 +410,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		ClanEventPersistentForClan cepfc = new ClanEventPersistentForClan(clanId,
   				clanEventPersistentId, clanRaidId, clanRaidStageId, curTime, crsmId, curTime);
   		clanInfo.add(cepfc);
+  		
+  		//since beginning the first stage of a clan raide stage, zero out the damage
+  		//for this raid for the clan in hazelcast
+  		getClanEventUtil().updateClanIdCrsmDmg(clanId, 0, true);
+  		
   	} else {
   		log.info("starting another clan raid stage!!!!!!!!!");
   		int numUpdated = UpdateUtils.get().updateClanEventPersistentForClanStageStartTime(

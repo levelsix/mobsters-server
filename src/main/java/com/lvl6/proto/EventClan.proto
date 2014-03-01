@@ -310,6 +310,7 @@ message AttackClanRaidMonsterRequestProto {
 	//health of user's monsters
 	repeated UserMonsterCurrentHealthProto monsterHealths = 5;
 	
+	/* SERVER WILL CALCULATE IF THE MONSTER DIED SO NO NEED FOR CLIENT TELL SERVER TO CHECK
 	//client hints to the server when to check to see if the clan_raid_stage_monster is dead
 	//so as to prevent the server from calculating if the monster is dead after every
 	//one of these events is fired
@@ -322,7 +323,7 @@ message AttackClanRaidMonsterRequestProto {
 	//will be set to true if the user is in the last stage, but will not trigger
 	//anything on the server unless monsterIsLastInStage and checkIfMonsterDied are true
 	optional bool stageIsLastInRaid = 8;
-	
+	*/
 	
 	optional FullUserMonsterProto userMonsterThatAttacked = 9;
 	

@@ -38,6 +38,8 @@
 	<hz:map id="lockMap" name="lockMap" instance-ref="hazel"/>
 		
 	<hz:map id="offlinePvpUserMap" name="offlinePvpUserMap" instance-ref="hazel"/>
+	
+	<hz:map id="clanRaidMonsterDmgMap" name="clanRaidMonsterDmgMap" instance-ref="hazel"/>
 		
 	<hz:topic id="serverEvents" name="serverEvents" instance-ref="hazel"/>
 	<hz:topic id="staticDataReloadDone" name="staticDataReloadDone" instance-ref="hazel"/>	
