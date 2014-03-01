@@ -2,6 +2,7 @@
 
 import "Battle.proto";
 import "MonsterStuff.proto";
+import "Structure.proto";
 import "Task.proto";
 import "User.proto";
 
@@ -156,6 +157,17 @@ message PersistentClanEventUserInfoProto {
 	//optional int32 crsmId = 7; //primary key in clan_raid_stage_monster table 
 	optional int32 crsmDmgDone = 8; 
 	optional UserCurrentMonsterTeamProto userMonsters = 9; 
+}
+
+message PersistentClanEventUserRewardProto {
+	optional int32 rewardId = 1;
+	optional int32 userId = 2;
+	optional int32 crsId = 3;
+	optional int64 crsEndTime = 4;
+	optional ResourceType resourceType = 5 [default = CASH];
+	optional int32 staticDataId = 6; //will most likely be monster id
+	optional int32 quantity = 7;
+	optional int32 clanEventPersistentId = 8;
 }
 
 //------------------------------------------------------------------------------------------

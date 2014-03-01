@@ -147,14 +147,16 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     Map<Integer, ClanEventPersistentForUser> userIdToCepfu = 
     		new HashMap<Integer, ClanEventPersistentForUser>();
     boolean errorless = true;
+    //barring error or request failure (but not attacking dead monster), will always be set
+    List<ClanEventPersistentForClan> clanEventList =
+    		new ArrayList<ClanEventPersistentForClan>();
+    
     if (null != mcp && mcp.hasClanId()) {
     	clanId = mcp.getClanId();
     	getLocker().lockClan(clanId);
     }
     try {
     	//so as to prevent another db read call to get the same information
-    	List<ClanEventPersistentForClan> clanEventList =
-    			new ArrayList<ClanEventPersistentForClan>();
     	
       boolean legitRequest = checkLegitRequest(resBuilder, sender, userId, clanId,
       		eventDetails, curDate, clanEventList);
@@ -166,7 +168,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       	clanEvent = clanEventList.get(0);
       	ClanEventPersistentForClan clanEventClientSent = clanEventList.get(1);
       	
-      	//clanEvent might be modified (this will always be sent to the client)
+      	//clanevent MIGHT BE MODIFIED (this will always be sent to the client)
         writeChangesToDB(resBuilder, clanId, userId, damageDealt, curTime, clanEvent,
         		clanEventClientSent, userMonsterTeam, userMonsterIdToExpectedHealth,
         		userIdToCepfu);
@@ -228,9 +230,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     //not necessary, can just delete this part (purpose is to record in detail, a user's
     //contribution to a clan raid)
     try {
+    	ClanEventPersistentForClan clanEventClientSent = clanEventList.get(1);
     	if (errorless && null != clanEvent && !userIdToCepfu.isEmpty()) {
     		int numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistoryDetail(
-    				curTime, userIdToCepfu, clanEvent);
+    				curTime, userIdToCepfu, clanEventClientSent);
     		log.info("num raid detail inserted = " + numInserted + "\t should be " +
     				userIdToCepfu.size());
     	}
