@@ -176,6 +176,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
       
       if (!userIdToCepfu.isEmpty()) {
+      	//whenever server has this information, (when client says monster may be dead)
+      	//send it to the clients
       	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
       	
       	Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()

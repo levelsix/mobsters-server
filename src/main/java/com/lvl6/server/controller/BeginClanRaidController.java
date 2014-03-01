@@ -144,19 +144,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         		curTime, setMonsterTeamForRaid, userMonsterIds, isFirstStage, clanInfoList);
       }
       
-      if (success && !setMonsterTeamForRaid) {
-      	ClanEventPersistentForClan cepfc = clanInfoList.get(0);
-      	PersistentClanEventClanInfoProto eventDetails = CreateInfoProtoUtils
-      			.createPersistentClanEventClanInfoProto(cepfc);
-      	resBuilder.setEventDetails(eventDetails);
-      }
-      
-      if (success && setMonsterTeamForRaid) {
-      	setClanAndUserDetails(resBuilder, userId, clanId, clanRaidId,
-      			userMonsterIds, userMonsters);
-      	
-        resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
-        log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
+      if (success) {
+      	if (!setMonsterTeamForRaid) {
+      		ClanEventPersistentForClan cepfc = clanInfoList.get(0);
+      		PersistentClanEventClanInfoProto eventDetails = CreateInfoProtoUtils
+      				.createPersistentClanEventClanInfoProto(cepfc);
+      		resBuilder.setEventDetails(eventDetails);
+      	}
+      	if (setMonsterTeamForRaid) {
+      		setClanAndUserDetails(resBuilder, userId, clanId, clanRaidId,
+      				userMonsterIds, userMonsters);
+      	}
+      	resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
+      	log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
       }
       
       BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
