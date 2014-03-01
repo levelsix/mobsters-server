@@ -324,7 +324,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
   
-  //copy pasted from RecordClanRaidStatsController.writeChangesToDB
+  //copy pasted from RecordClanRaidStatsController.writeChangesToD
   private void pushCurrentClanEventDataToHistory(int clanId, Timestamp now,
   		ClanEventPersistentForClan clanEvent) {
   	int clanEventPersistentId = clanEvent.getClanEventPersistentId();
@@ -402,7 +402,10 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		int numUpdated = UpdateUtils.get().updateClanEventPersistentForClanStageStartTime(
   				clanId, curTime);
   		log.info("num rows updated in clan raid info for clan table: " + numUpdated);
-
+  		
+  		ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+  				.getPersistentEventForClanId(clanId);
+  		clanInfo.add(cepfc);
   	}
   	
   	return true;
