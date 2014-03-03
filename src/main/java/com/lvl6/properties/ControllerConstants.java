@@ -223,30 +223,30 @@ public class ControllerConstants {
   //--------------------------------------------------------------------------------------------------------------------------
 
   //TUTORIAL CONSTANTS
-//  public static final double CHARACTERS_ATTACK_DEFENSE_VARIABILITY = 0.67;
-//  public static final String TUTORIAL__INIT_RANK = "bronze";
-//  public static final int TUTORIAL__INIT_COINS = 50;
-//  public static final int TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT = 2; //Because it does not warn the user
-//  public static final String TUTORIAL__FAKE_QUEST_GOOD_NAME = "Preserve the Peace";
-//  public static final String TUTORIAL__FAKE_QUEST_BAD_NAME = "Witness Protection";
-//  public static final String TUTORIAL__FAKE_QUEST_GOOD_ACCEPT_DIALOGUE = "10~good~";
-//  public static final String TUTORIAL__FAKE_QUEST_BAD_ACCEPT_DIALOGUE = "10~bad~";
-//  public static final String TUTORIAL__FAKE_QUEST_GOOD_DESCRIPTION = "Soldier, we are in dire times and we need your help.";
-//  public static final String TUTORIAL__FAKE_QUEST_BAD_DESCRIPTION = "Soldier, we are in dire times and we need your help.";
-//  public static final String TUTORIAL__FAKE_QUEST_GOOD_DONE_RESPONSE = "Simply amazing! Your battle prowess makes our village seem safer already. ";
-//  public static final String TUTORIAL__FAKE_QUEST_BAD_DONE_RESPONSE = "Excellent work soldier. Good to know I have a competent ally watching my back.";
-//  public static final int TUTORIAL__FIRST_TASK_ID = 1;
-//  //in development select any task, doesn't matter for now
-//  public static final int TUTORIAL__FAKE_QUEST_TASK_ID = Globals.IS_SANDBOX() ? 1 : 168;
-//  public static final int TUTORIAL__FAKE_QUEST_ASSET_NUM_WITHIN_CITY = 0;
-//  public static final int TUTORIAL__FAKE_QUEST_COINS_GAINED = 8;
-//  public static final int TUTORIAL__FAKE_QUEST_EXP_GAINED = 4;
-//  public static final int TUTORIAL__FAKE_QUEST_AMULET_LOOT_EQUIP_ID = 5;
-//  public static final int TUTORIAL__FIRST_BATTLE_COIN_GAIN = 5;
-//  public static final int TUTORIAL__FIRST_BATTLE_EXP_GAIN = 1;
-//  public static final int TUTORIAL__FIRST_STRUCT_TO_BUILD = 1;
-//  public static final int TUTORIAL__FIRST_NEUTRAL_CITY_ID = 1;
-//  public static final int TUTORIAL__COST_TO_SPEED_UP_FORGE = 2;
+  public static final double CHARACTERS_ATTACK_DEFENSE_VARIABILITY = 0.67;
+  public static final String TUTORIAL__INIT_RANK = "bronze";
+  public static final int TUTORIAL__INIT_COINS = 50;
+  public static final int TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT = 2; //Because it does not warn the user
+  public static final String TUTORIAL__FAKE_QUEST_GOOD_NAME = "Preserve the Peace";
+  public static final String TUTORIAL__FAKE_QUEST_BAD_NAME = "Witness Protection";
+  public static final String TUTORIAL__FAKE_QUEST_GOOD_ACCEPT_DIALOGUE = "10~good~";
+  public static final String TUTORIAL__FAKE_QUEST_BAD_ACCEPT_DIALOGUE = "10~bad~";
+  public static final String TUTORIAL__FAKE_QUEST_GOOD_DESCRIPTION = "Soldier, we are in dire times and we need your help.";
+  public static final String TUTORIAL__FAKE_QUEST_BAD_DESCRIPTION = "Soldier, we are in dire times and we need your help.";
+  public static final String TUTORIAL__FAKE_QUEST_GOOD_DONE_RESPONSE = "Simply amazing! Your battle prowess makes our village seem safer already. ";
+  public static final String TUTORIAL__FAKE_QUEST_BAD_DONE_RESPONSE = "Excellent work soldier. Good to know I have a competent ally watching my back.";
+  public static final int TUTORIAL__FIRST_TASK_ID = 1;
+  //in development select any task, doesn't matter for now
+  public static final int TUTORIAL__FAKE_QUEST_TASK_ID = Globals.IS_SANDBOX() ? 1 : 168;
+  public static final int TUTORIAL__FAKE_QUEST_ASSET_NUM_WITHIN_CITY = 0;
+  public static final int TUTORIAL__FAKE_QUEST_COINS_GAINED = 8;
+  public static final int TUTORIAL__FAKE_QUEST_EXP_GAINED = 4;
+  public static final int TUTORIAL__FAKE_QUEST_AMULET_LOOT_EQUIP_ID = 5;
+  public static final int TUTORIAL__FIRST_BATTLE_COIN_GAIN = 5;
+  public static final int TUTORIAL__FIRST_BATTLE_EXP_GAIN = 1;
+  public static final int TUTORIAL__FIRST_STRUCT_TO_BUILD = 1;
+  public static final int TUTORIAL__FIRST_NEUTRAL_CITY_ID = 1;
+  public static final int TUTORIAL__COST_TO_SPEED_UP_FORGE = 2;
   
   //STARTUP
   public static final int STARTUP__MAX_NUM_OF_STARTUP_NOTIFICATION_TYPE_TO_SEND = 20;
