@@ -7958,14 +7958,14 @@ public final class EventStartupProto {
       boolean hasCityId();
       int getCityId();
       
-      // repeated .com.lvl6.proto.CityElementProto cityOne = 6;
+      // repeated .com.lvl6.proto.CityElementProto cityOneElements = 6;
       java.util.List<com.lvl6.proto.CityProto.CityElementProto> 
-          getCityOneList();
-      com.lvl6.proto.CityProto.CityElementProto getCityOne(int index);
-      int getCityOneCount();
+          getCityOneElementsList();
+      com.lvl6.proto.CityProto.CityElementProto getCityOneElements(int index);
+      int getCityOneElementsCount();
       java.util.List<? extends com.lvl6.proto.CityProto.CityElementProtoOrBuilder> 
-          getCityOneOrBuilderList();
-      com.lvl6.proto.CityProto.CityElementProtoOrBuilder getCityOneOrBuilder(
+          getCityOneElementsOrBuilderList();
+      com.lvl6.proto.CityProto.CityElementProtoOrBuilder getCityOneElementsOrBuilder(
           int index);
     }
     public static final class TutorialConstants extends
@@ -8062,25 +8062,25 @@ public final class EventStartupProto {
         return cityId_;
       }
       
-      // repeated .com.lvl6.proto.CityElementProto cityOne = 6;
-      public static final int CITYONE_FIELD_NUMBER = 6;
-      private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityOne_;
-      public java.util.List<com.lvl6.proto.CityProto.CityElementProto> getCityOneList() {
-        return cityOne_;
+      // repeated .com.lvl6.proto.CityElementProto cityOneElements = 6;
+      public static final int CITYONEELEMENTS_FIELD_NUMBER = 6;
+      private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityOneElements_;
+      public java.util.List<com.lvl6.proto.CityProto.CityElementProto> getCityOneElementsList() {
+        return cityOneElements_;
       }
       public java.util.List<? extends com.lvl6.proto.CityProto.CityElementProtoOrBuilder> 
-          getCityOneOrBuilderList() {
-        return cityOne_;
+          getCityOneElementsOrBuilderList() {
+        return cityOneElements_;
       }
-      public int getCityOneCount() {
-        return cityOne_.size();
+      public int getCityOneElementsCount() {
+        return cityOneElements_.size();
       }
-      public com.lvl6.proto.CityProto.CityElementProto getCityOne(int index) {
-        return cityOne_.get(index);
+      public com.lvl6.proto.CityProto.CityElementProto getCityOneElements(int index) {
+        return cityOneElements_.get(index);
       }
-      public com.lvl6.proto.CityProto.CityElementProtoOrBuilder getCityOneOrBuilder(
+      public com.lvl6.proto.CityProto.CityElementProtoOrBuilder getCityOneElementsOrBuilder(
           int index) {
-        return cityOne_.get(index);
+        return cityOneElements_.get(index);
       }
       
       private void initFields() {
@@ -8089,7 +8089,7 @@ public final class EventStartupProto {
         tutorialStructures_ = java.util.Collections.emptyList();
         structureIdsToBeBuillt_ = java.util.Collections.emptyList();;
         cityId_ = 0;
-        cityOne_ = java.util.Collections.emptyList();
+        cityOneElements_ = java.util.Collections.emptyList();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -8118,8 +8118,8 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00000004) == 0x00000004)) {
           output.writeInt32(5, cityId_);
         }
-        for (int i = 0; i < cityOne_.size(); i++) {
-          output.writeMessage(6, cityOne_.get(i));
+        for (int i = 0; i < cityOneElements_.size(); i++) {
+          output.writeMessage(6, cityOneElements_.get(i));
         }
         getUnknownFields().writeTo(output);
       }
@@ -8155,9 +8155,9 @@ public final class EventStartupProto {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(5, cityId_);
         }
-        for (int i = 0; i < cityOne_.size(); i++) {
+        for (int i = 0; i < cityOneElements_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(6, cityOne_.get(i));
+            .computeMessageSize(6, cityOneElements_.get(i));
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -8276,7 +8276,7 @@ public final class EventStartupProto {
         private void maybeForceBuilderInitialization() {
           if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
             getTutorialStructuresFieldBuilder();
-            getCityOneFieldBuilder();
+            getCityOneElementsFieldBuilder();
           }
         }
         private static Builder create() {
@@ -8299,11 +8299,11 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000008);
           cityId_ = 0;
           bitField0_ = (bitField0_ & ~0x00000010);
-          if (cityOneBuilder_ == null) {
-            cityOne_ = java.util.Collections.emptyList();
+          if (cityOneElementsBuilder_ == null) {
+            cityOneElements_ = java.util.Collections.emptyList();
             bitField0_ = (bitField0_ & ~0x00000020);
           } else {
-            cityOneBuilder_.clear();
+            cityOneElementsBuilder_.clear();
           }
           return this;
         }
@@ -8369,14 +8369,14 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00000004;
           }
           result.cityId_ = cityId_;
-          if (cityOneBuilder_ == null) {
+          if (cityOneElementsBuilder_ == null) {
             if (((bitField0_ & 0x00000020) == 0x00000020)) {
-              cityOne_ = java.util.Collections.unmodifiableList(cityOne_);
+              cityOneElements_ = java.util.Collections.unmodifiableList(cityOneElements_);
               bitField0_ = (bitField0_ & ~0x00000020);
             }
-            result.cityOne_ = cityOne_;
+            result.cityOneElements_ = cityOneElements_;
           } else {
-            result.cityOne_ = cityOneBuilder_.build();
+            result.cityOneElements_ = cityOneElementsBuilder_.build();
           }
           result.bitField0_ = to_bitField0_;
           onBuilt();
@@ -8439,29 +8439,29 @@ public final class EventStartupProto {
           if (other.hasCityId()) {
             setCityId(other.getCityId());
           }
-          if (cityOneBuilder_ == null) {
-            if (!other.cityOne_.isEmpty()) {
-              if (cityOne_.isEmpty()) {
-                cityOne_ = other.cityOne_;
+          if (cityOneElementsBuilder_ == null) {
+            if (!other.cityOneElements_.isEmpty()) {
+              if (cityOneElements_.isEmpty()) {
+                cityOneElements_ = other.cityOneElements_;
                 bitField0_ = (bitField0_ & ~0x00000020);
               } else {
-                ensureCityOneIsMutable();
-                cityOne_.addAll(other.cityOne_);
+                ensureCityOneElementsIsMutable();
+                cityOneElements_.addAll(other.cityOneElements_);
               }
               onChanged();
             }
           } else {
-            if (!other.cityOne_.isEmpty()) {
-              if (cityOneBuilder_.isEmpty()) {
-                cityOneBuilder_.dispose();
-                cityOneBuilder_ = null;
-                cityOne_ = other.cityOne_;
+            if (!other.cityOneElements_.isEmpty()) {
+              if (cityOneElementsBuilder_.isEmpty()) {
+                cityOneElementsBuilder_.dispose();
+                cityOneElementsBuilder_ = null;
+                cityOneElements_ = other.cityOneElements_;
                 bitField0_ = (bitField0_ & ~0x00000020);
-                cityOneBuilder_ = 
+                cityOneElementsBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                     getCityOneFieldBuilder() : null;
+                     getCityOneElementsFieldBuilder() : null;
               } else {
-                cityOneBuilder_.addAllMessages(other.cityOne_);
+                cityOneElementsBuilder_.addAllMessages(other.cityOneElements_);
               }
             }
           }
@@ -8534,7 +8534,7 @@ public final class EventStartupProto {
               case 50: {
                 com.lvl6.proto.CityProto.CityElementProto.Builder subBuilder = com.lvl6.proto.CityProto.CityElementProto.newBuilder();
                 input.readMessage(subBuilder, extensionRegistry);
-                addCityOne(subBuilder.buildPartial());
+                addCityOneElements(subBuilder.buildPartial());
                 break;
               }
             }
@@ -8837,190 +8837,190 @@ public final class EventStartupProto {
           return this;
         }
         
-        // repeated .com.lvl6.proto.CityElementProto cityOne = 6;
-        private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityOne_ =
+        // repeated .com.lvl6.proto.CityElementProto cityOneElements = 6;
+        private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityOneElements_ =
           java.util.Collections.emptyList();
-        private void ensureCityOneIsMutable() {
+        private void ensureCityOneElementsIsMutable() {
           if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-            cityOne_ = new java.util.ArrayList<com.lvl6.proto.CityProto.CityElementProto>(cityOne_);
+            cityOneElements_ = new java.util.ArrayList<com.lvl6.proto.CityProto.CityElementProto>(cityOneElements_);
             bitField0_ |= 0x00000020;
            }
         }
         
         private com.google.protobuf.RepeatedFieldBuilder<
-            com.lvl6.proto.CityProto.CityElementProto, com.lvl6.proto.CityProto.CityElementProto.Builder, com.lvl6.proto.CityProto.CityElementProtoOrBuilder> cityOneBuilder_;
+            com.lvl6.proto.CityProto.CityElementProto, com.lvl6.proto.CityProto.CityElementProto.Builder, com.lvl6.proto.CityProto.CityElementProtoOrBuilder> cityOneElementsBuilder_;
         
-        public java.util.List<com.lvl6.proto.CityProto.CityElementProto> getCityOneList() {
-          if (cityOneBuilder_ == null) {
-            return java.util.Collections.unmodifiableList(cityOne_);
+        public java.util.List<com.lvl6.proto.CityProto.CityElementProto> getCityOneElementsList() {
+          if (cityOneElementsBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(cityOneElements_);
           } else {
-            return cityOneBuilder_.getMessageList();
+            return cityOneElementsBuilder_.getMessageList();
           }
         }
-        public int getCityOneCount() {
-          if (cityOneBuilder_ == null) {
-            return cityOne_.size();
+        public int getCityOneElementsCount() {
+          if (cityOneElementsBuilder_ == null) {
+            return cityOneElements_.size();
           } else {
-            return cityOneBuilder_.getCount();
+            return cityOneElementsBuilder_.getCount();
           }
         }
-        public com.lvl6.proto.CityProto.CityElementProto getCityOne(int index) {
-          if (cityOneBuilder_ == null) {
-            return cityOne_.get(index);
+        public com.lvl6.proto.CityProto.CityElementProto getCityOneElements(int index) {
+          if (cityOneElementsBuilder_ == null) {
+            return cityOneElements_.get(index);
           } else {
-            return cityOneBuilder_.getMessage(index);
+            return cityOneElementsBuilder_.getMessage(index);
           }
         }
-        public Builder setCityOne(
+        public Builder setCityOneElements(
             int index, com.lvl6.proto.CityProto.CityElementProto value) {
-          if (cityOneBuilder_ == null) {
+          if (cityOneElementsBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureCityOneIsMutable();
-            cityOne_.set(index, value);
+            ensureCityOneElementsIsMutable();
+            cityOneElements_.set(index, value);
             onChanged();
           } else {
-            cityOneBuilder_.setMessage(index, value);
+            cityOneElementsBuilder_.setMessage(index, value);
           }
           return this;
         }
-        public Builder setCityOne(
+        public Builder setCityOneElements(
             int index, com.lvl6.proto.CityProto.CityElementProto.Builder builderForValue) {
-          if (cityOneBuilder_ == null) {
-            ensureCityOneIsMutable();
-            cityOne_.set(index, builderForValue.build());
+          if (cityOneElementsBuilder_ == null) {
+            ensureCityOneElementsIsMutable();
+            cityOneElements_.set(index, builderForValue.build());
             onChanged();
           } else {
-            cityOneBuilder_.setMessage(index, builderForValue.build());
+            cityOneElementsBuilder_.setMessage(index, builderForValue.build());
           }
           return this;
         }
-        public Builder addCityOne(com.lvl6.proto.CityProto.CityElementProto value) {
-          if (cityOneBuilder_ == null) {
+        public Builder addCityOneElements(com.lvl6.proto.CityProto.CityElementProto value) {
+          if (cityOneElementsBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureCityOneIsMutable();
-            cityOne_.add(value);
+            ensureCityOneElementsIsMutable();
+            cityOneElements_.add(value);
             onChanged();
           } else {
-            cityOneBuilder_.addMessage(value);
+            cityOneElementsBuilder_.addMessage(value);
           }
           return this;
         }
-        public Builder addCityOne(
+        public Builder addCityOneElements(
             int index, com.lvl6.proto.CityProto.CityElementProto value) {
-          if (cityOneBuilder_ == null) {
+          if (cityOneElementsBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureCityOneIsMutable();
-            cityOne_.add(index, value);
+            ensureCityOneElementsIsMutable();
+            cityOneElements_.add(index, value);
             onChanged();
           } else {
-            cityOneBuilder_.addMessage(index, value);
+            cityOneElementsBuilder_.addMessage(index, value);
           }
           return this;
         }
-        public Builder addCityOne(
+        public Builder addCityOneElements(
             com.lvl6.proto.CityProto.CityElementProto.Builder builderForValue) {
-          if (cityOneBuilder_ == null) {
-            ensureCityOneIsMutable();
-            cityOne_.add(builderForValue.build());
+          if (cityOneElementsBuilder_ == null) {
+            ensureCityOneElementsIsMutable();
+            cityOneElements_.add(builderForValue.build());
             onChanged();
           } else {
-            cityOneBuilder_.addMessage(builderForValue.build());
+            cityOneElementsBuilder_.addMessage(builderForValue.build());
           }
           return this;
         }
-        public Builder addCityOne(
+        public Builder addCityOneElements(
             int index, com.lvl6.proto.CityProto.CityElementProto.Builder builderForValue) {
-          if (cityOneBuilder_ == null) {
-            ensureCityOneIsMutable();
-            cityOne_.add(index, builderForValue.build());
+          if (cityOneElementsBuilder_ == null) {
+            ensureCityOneElementsIsMutable();
+            cityOneElements_.add(index, builderForValue.build());
             onChanged();
           } else {
-            cityOneBuilder_.addMessage(index, builderForValue.build());
+            cityOneElementsBuilder_.addMessage(index, builderForValue.build());
           }
           return this;
         }
-        public Builder addAllCityOne(
+        public Builder addAllCityOneElements(
             java.lang.Iterable<? extends com.lvl6.proto.CityProto.CityElementProto> values) {
-          if (cityOneBuilder_ == null) {
-            ensureCityOneIsMutable();
-            super.addAll(values, cityOne_);
+          if (cityOneElementsBuilder_ == null) {
+            ensureCityOneElementsIsMutable();
+            super.addAll(values, cityOneElements_);
             onChanged();
           } else {
-            cityOneBuilder_.addAllMessages(values);
+            cityOneElementsBuilder_.addAllMessages(values);
           }
           return this;
         }
-        public Builder clearCityOne() {
-          if (cityOneBuilder_ == null) {
-            cityOne_ = java.util.Collections.emptyList();
+        public Builder clearCityOneElements() {
+          if (cityOneElementsBuilder_ == null) {
+            cityOneElements_ = java.util.Collections.emptyList();
             bitField0_ = (bitField0_ & ~0x00000020);
             onChanged();
           } else {
-            cityOneBuilder_.clear();
+            cityOneElementsBuilder_.clear();
           }
           return this;
         }
-        public Builder removeCityOne(int index) {
-          if (cityOneBuilder_ == null) {
-            ensureCityOneIsMutable();
-            cityOne_.remove(index);
+        public Builder removeCityOneElements(int index) {
+          if (cityOneElementsBuilder_ == null) {
+            ensureCityOneElementsIsMutable();
+            cityOneElements_.remove(index);
             onChanged();
           } else {
-            cityOneBuilder_.remove(index);
+            cityOneElementsBuilder_.remove(index);
           }
           return this;
         }
-        public com.lvl6.proto.CityProto.CityElementProto.Builder getCityOneBuilder(
+        public com.lvl6.proto.CityProto.CityElementProto.Builder getCityOneElementsBuilder(
             int index) {
-          return getCityOneFieldBuilder().getBuilder(index);
+          return getCityOneElementsFieldBuilder().getBuilder(index);
         }
-        public com.lvl6.proto.CityProto.CityElementProtoOrBuilder getCityOneOrBuilder(
+        public com.lvl6.proto.CityProto.CityElementProtoOrBuilder getCityOneElementsOrBuilder(
             int index) {
-          if (cityOneBuilder_ == null) {
-            return cityOne_.get(index);  } else {
-            return cityOneBuilder_.getMessageOrBuilder(index);
+          if (cityOneElementsBuilder_ == null) {
+            return cityOneElements_.get(index);  } else {
+            return cityOneElementsBuilder_.getMessageOrBuilder(index);
           }
         }
         public java.util.List<? extends com.lvl6.proto.CityProto.CityElementProtoOrBuilder> 
-             getCityOneOrBuilderList() {
-          if (cityOneBuilder_ != null) {
-            return cityOneBuilder_.getMessageOrBuilderList();
+             getCityOneElementsOrBuilderList() {
+          if (cityOneElementsBuilder_ != null) {
+            return cityOneElementsBuilder_.getMessageOrBuilderList();
           } else {
-            return java.util.Collections.unmodifiableList(cityOne_);
+            return java.util.Collections.unmodifiableList(cityOneElements_);
           }
         }
-        public com.lvl6.proto.CityProto.CityElementProto.Builder addCityOneBuilder() {
-          return getCityOneFieldBuilder().addBuilder(
+        public com.lvl6.proto.CityProto.CityElementProto.Builder addCityOneElementsBuilder() {
+          return getCityOneElementsFieldBuilder().addBuilder(
               com.lvl6.proto.CityProto.CityElementProto.getDefaultInstance());
         }
-        public com.lvl6.proto.CityProto.CityElementProto.Builder addCityOneBuilder(
+        public com.lvl6.proto.CityProto.CityElementProto.Builder addCityOneElementsBuilder(
             int index) {
-          return getCityOneFieldBuilder().addBuilder(
+          return getCityOneElementsFieldBuilder().addBuilder(
               index, com.lvl6.proto.CityProto.CityElementProto.getDefaultInstance());
         }
         public java.util.List<com.lvl6.proto.CityProto.CityElementProto.Builder> 
-             getCityOneBuilderList() {
-          return getCityOneFieldBuilder().getBuilderList();
+             getCityOneElementsBuilderList() {
+          return getCityOneElementsFieldBuilder().getBuilderList();
         }
         private com.google.protobuf.RepeatedFieldBuilder<
             com.lvl6.proto.CityProto.CityElementProto, com.lvl6.proto.CityProto.CityElementProto.Builder, com.lvl6.proto.CityProto.CityElementProtoOrBuilder> 
-            getCityOneFieldBuilder() {
-          if (cityOneBuilder_ == null) {
-            cityOneBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+            getCityOneElementsFieldBuilder() {
+          if (cityOneElementsBuilder_ == null) {
+            cityOneElementsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.CityProto.CityElementProto, com.lvl6.proto.CityProto.CityElementProto.Builder, com.lvl6.proto.CityProto.CityElementProtoOrBuilder>(
-                    cityOne_,
+                    cityOneElements_,
                     ((bitField0_ & 0x00000020) == 0x00000020),
                     getParentForChildren(),
                     isClean());
-            cityOne_ = null;
+            cityOneElements_ = null;
           }
-          return cityOneBuilder_;
+          return cityOneElementsBuilder_;
         }
         
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.TutorialConstants)
@@ -15017,7 +15017,7 @@ public final class EventStartupProto {
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
       "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbI" +
-      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\257\"\n\024Star",
+      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\267\"\n\024Star",
       "tupResponseProto\022\030\n\020serverTimeMillis\030\001 \001" +
       "(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.Full" +
       "UserProto\022I\n\rstartupStatus\030\003 \001(\01622.com.l" +
@@ -15118,17 +15118,17 @@ public final class EventStartupProto {
       "nsterLimit\030\002 \001(\005\032\211\001\n\020MonsterConstants\022\032\n" +
       "\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHe" +
       "alPerHealthPoint\030\002 \001(\002\022\031\n\021elementalStren",
-      "gth\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\032\352\001\n" +
+      "gth\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\032\362\001\n" +
       "\021TutorialConstants\022\031\n\021startingMonsterId\030" +
       "\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022?\n\022tutoria" +
       "lStructures\030\003 \003(\0132#.com.lvl6.proto.Tutor" +
       "ialStructProto\022\036\n\026structureIdsToBeBuillt" +
-      "\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0221\n\007cityOne\030\006 \003(\0132" +
-      " .com.lvl6.proto.CityElementProto\"A\n\014Upd" +
-      "ateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE" +
-      "\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n" +
-      "\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021Eve",
-      "ntStartupProto"
+      "\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElement" +
+      "s\030\006 \003(\0132 .com.lvl6.proto.CityElementProt" +
+      "o\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINO" +
+      "R_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupS" +
+      "tatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020",
+      "\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15228,7 +15228,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
-              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOne", },
+              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.Builder.class);
           return null;

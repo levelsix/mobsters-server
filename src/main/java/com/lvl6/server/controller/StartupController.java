@@ -65,6 +65,7 @@ import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -278,6 +279,9 @@ public class StartupController extends EventController {
         }
       } else {
         log.info("tutorial player with udid " + udid);
+        
+        TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
+        resBuilder.setTutorialConstants(tc);
 
         boolean userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
         int numOldAccounts = RetrieveUtils.userRetrieveUtils().numAccountsForUDID(udid);
