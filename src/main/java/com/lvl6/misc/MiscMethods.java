@@ -1265,15 +1265,15 @@ public class MiscMethods {
     return newCost;
   }
 
-  public static StaticDataProto getAllStaticData(int userId) {
+  public static StaticDataProto getAllStaticData(int userId, boolean userIdSet) {
   	StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
   	
   	setPlayerCityExpansions(sdpb);
   	setCities(sdpb);
   	setTasks(sdpb);
   	setMonsters(sdpb);
-  	setUserLevelStuff(sdpb, userId);
-  	setInProgressAndAvailableQuests(sdpb, userId);
+  	setUserLevelStuff(sdpb);
+  	setInProgressAndAvailableQuests(sdpb, userId, userIdSet);
   	setBoosterPackStuff(sdpb);
   	setStructures(sdpb);
   	setEvents(sdpb);
@@ -1323,7 +1323,7 @@ public class MiscMethods {
       sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster, monsterLvlInfo));
     }
   }
-  private static void setUserLevelStuff(Builder sdpb, int userId) {
+  private static void setUserLevelStuff(Builder sdpb) {
     //User level stuff
     Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
         StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
@@ -1337,7 +1337,11 @@ public class MiscMethods {
       sdpb.addSlip(slipb.build());
     }
   }
-  private static void setInProgressAndAvailableQuests(Builder sdpb, int userId) {
+  private static void setInProgressAndAvailableQuests(Builder sdpb, int userId,
+  		boolean userIdSet) {
+  	if (!userIdSet) {
+  		return;
+  	}
     List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
         .getUserQuestsForUser(userId);
 

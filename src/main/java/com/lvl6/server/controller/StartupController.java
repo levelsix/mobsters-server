@@ -252,7 +252,7 @@ public class StartupController extends EventController {
           setBoosterPurchases(resBuilder);
           setFacebookAndExtraSlotsStuff(resBuilder, user, userId);
           setCompletedTasks(resBuilder, userId);
-          setAllStaticData(resBuilder, userId);
+          setAllStaticData(resBuilder, userId, true);
           setEventStuff(resBuilder, userId);
           //if server sees that the user is in a pvp battle, decrement user's elo
           pvpBattleStuff(user, userId, freshRestart); 
@@ -282,6 +282,7 @@ public class StartupController extends EventController {
         
         TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
         resBuilder.setTutorialConstants(tc);
+        setAllStaticData(resBuilder, 0, false);
 
         boolean userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
         int numOldAccounts = RetrieveUtils.userRetrieveUtils().numAccountsForUDID(udid);
@@ -885,8 +886,8 @@ public class StartupController extends EventController {
   	resBuilder.addAllCompletedTaskIds(taskIds);
   }
   
-  private void setAllStaticData(Builder resBuilder, int userId) {
-  	StaticDataProto sdp = MiscMethods.getAllStaticData(userId);
+  private void setAllStaticData(Builder resBuilder, int userId, boolean userIdSet) {
+  	StaticDataProto sdp = MiscMethods.getAllStaticData(userId, userIdSet);
   	
   	resBuilder.setStaticDataStuffProto(sdp);
   }
