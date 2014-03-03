@@ -168,3 +168,8 @@ enum StructOrientation {
 
 //------------------------------------------------------------------------------------------
 
+message TutorialStructProto {
+	optional int32 structId = 1;
+	optional CoordinateProto coordinate = 2;
+}
+
