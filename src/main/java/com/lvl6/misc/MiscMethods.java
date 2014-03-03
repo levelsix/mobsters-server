@@ -305,6 +305,11 @@ public class MiscMethods {
   		tcb.addCityOneElements(cep);
   	}
   	
+  	tcb.setCityElementIdForFirstDungeon(
+  			ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON);
+  	tcb.setCityElementIdForSecondDungeon(
+  			ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON);
+  	
   	return tcb.build();
   }
   
