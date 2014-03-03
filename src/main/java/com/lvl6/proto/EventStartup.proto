@@ -187,6 +187,8 @@ message StartupResponseProto {
 		
 		repeated TutorialStructProto tutorialStructures = 3;
 		repeated int32 structureIdsToBeBuillt = 4; //atm: cash printer/vault and oil vault
+		optional int32 cityId = 5;
+		repeated CityElementProto cityOne = 6; //the buildings in the city
 	}
 	
     enum UpdateStatus {
