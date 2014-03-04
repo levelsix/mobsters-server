@@ -89,6 +89,10 @@ public class ControllerConstants {
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 	
+	//CLAN EVENT PERSISTENT
+	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
+	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
+	
 	
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
@@ -110,6 +114,8 @@ public class ControllerConstants {
 	//MONSTER IDS 1 AND 3
 	public static final int TUTORIAL__STARTING_MONSTER_ID = 1;
 	public static final int TUTORIAL__ENEMY_MONSTER_ID = 3;
+	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 7;
+	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 5;
 	
 	//everything at index i goes together
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140};
@@ -136,6 +142,10 @@ public class ControllerConstants {
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
 	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON = 5;
 	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON = 6;
+	
+	
+	
+	
 	
 	
 	

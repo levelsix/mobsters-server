@@ -7939,6 +7939,14 @@ public final class EventStartupProto {
       boolean hasEnemyMonsterId();
       int getEnemyMonsterId();
       
+      // optional int32 enemyBossMonsterId = 9;
+      boolean hasEnemyBossMonsterId();
+      int getEnemyBossMonsterId();
+      
+      // optional int32 markZMonsterId = 10;
+      boolean hasMarkZMonsterId();
+      int getMarkZMonsterId();
+      
       // repeated .com.lvl6.proto.TutorialStructProto tutorialStructures = 3;
       java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> 
           getTutorialStructuresList();
@@ -8025,6 +8033,26 @@ public final class EventStartupProto {
         return enemyMonsterId_;
       }
       
+      // optional int32 enemyBossMonsterId = 9;
+      public static final int ENEMYBOSSMONSTERID_FIELD_NUMBER = 9;
+      private int enemyBossMonsterId_;
+      public boolean hasEnemyBossMonsterId() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public int getEnemyBossMonsterId() {
+        return enemyBossMonsterId_;
+      }
+      
+      // optional int32 markZMonsterId = 10;
+      public static final int MARKZMONSTERID_FIELD_NUMBER = 10;
+      private int markZMonsterId_;
+      public boolean hasMarkZMonsterId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getMarkZMonsterId() {
+        return markZMonsterId_;
+      }
+      
       // repeated .com.lvl6.proto.TutorialStructProto tutorialStructures = 3;
       public static final int TUTORIALSTRUCTURES_FIELD_NUMBER = 3;
       private java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> tutorialStructures_;
@@ -8064,7 +8092,7 @@ public final class EventStartupProto {
       public static final int CITYID_FIELD_NUMBER = 5;
       private int cityId_;
       public boolean hasCityId() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       public int getCityId() {
         return cityId_;
@@ -8095,7 +8123,7 @@ public final class EventStartupProto {
       public static final int CITYELEMENTIDFORFIRSTDUNGEON_FIELD_NUMBER = 7;
       private int cityElementIdForFirstDungeon_;
       public boolean hasCityElementIdForFirstDungeon() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getCityElementIdForFirstDungeon() {
         return cityElementIdForFirstDungeon_;
@@ -8105,7 +8133,7 @@ public final class EventStartupProto {
       public static final int CITYELEMENTIDFORSECONDDUNGEON_FIELD_NUMBER = 8;
       private int cityElementIdForSecondDungeon_;
       public boolean hasCityElementIdForSecondDungeon() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public int getCityElementIdForSecondDungeon() {
         return cityElementIdForSecondDungeon_;
@@ -8114,6 +8142,8 @@ public final class EventStartupProto {
       private void initFields() {
         startingMonsterId_ = 0;
         enemyMonsterId_ = 0;
+        enemyBossMonsterId_ = 0;
+        markZMonsterId_ = 0;
         tutorialStructures_ = java.util.Collections.emptyList();
         structureIdsToBeBuillt_ = java.util.Collections.emptyList();;
         cityId_ = 0;
@@ -8145,17 +8175,23 @@ public final class EventStartupProto {
         for (int i = 0; i < structureIdsToBeBuillt_.size(); i++) {
           output.writeInt32(4, structureIdsToBeBuillt_.get(i));
         }
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
           output.writeInt32(5, cityId_);
         }
         for (int i = 0; i < cityOneElements_.size(); i++) {
           output.writeMessage(6, cityOneElements_.get(i));
         }
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
           output.writeInt32(7, cityElementIdForFirstDungeon_);
         }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           output.writeInt32(8, cityElementIdForSecondDungeon_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeInt32(9, enemyBossMonsterId_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          output.writeInt32(10, markZMonsterId_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -8187,7 +8223,7 @@ public final class EventStartupProto {
           size += dataSize;
           size += 1 * getStructureIdsToBeBuilltList().size();
         }
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(5, cityId_);
         }
@@ -8195,13 +8231,21 @@ public final class EventStartupProto {
           size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(6, cityOneElements_.get(i));
         }
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(7, cityElementIdForFirstDungeon_);
         }
-        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(8, cityElementIdForSecondDungeon_);
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(9, enemyBossMonsterId_);
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(10, markZMonsterId_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -8333,26 +8377,30 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000001);
           enemyMonsterId_ = 0;
           bitField0_ = (bitField0_ & ~0x00000002);
+          enemyBossMonsterId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          markZMonsterId_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000008);
           if (tutorialStructuresBuilder_ == null) {
             tutorialStructures_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000010);
           } else {
             tutorialStructuresBuilder_.clear();
           }
           structureIdsToBeBuillt_ = java.util.Collections.emptyList();;
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000020);
           cityId_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000040);
           if (cityOneElementsBuilder_ == null) {
             cityOneElements_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000080);
           } else {
             cityOneElementsBuilder_.clear();
           }
           cityElementIdForFirstDungeon_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000100);
           cityElementIdForSecondDungeon_ = 0;
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000200);
           return this;
         }
         
@@ -8399,39 +8447,47 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00000002;
           }
           result.enemyMonsterId_ = enemyMonsterId_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.enemyBossMonsterId_ = enemyBossMonsterId_;
+          if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+            to_bitField0_ |= 0x00000008;
+          }
+          result.markZMonsterId_ = markZMonsterId_;
           if (tutorialStructuresBuilder_ == null) {
-            if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            if (((bitField0_ & 0x00000010) == 0x00000010)) {
               tutorialStructures_ = java.util.Collections.unmodifiableList(tutorialStructures_);
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000010);
             }
             result.tutorialStructures_ = tutorialStructures_;
           } else {
             result.tutorialStructures_ = tutorialStructuresBuilder_.build();
           }
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
             structureIdsToBeBuillt_ = java.util.Collections.unmodifiableList(structureIdsToBeBuillt_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.structureIdsToBeBuillt_ = structureIdsToBeBuillt_;
-          if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-            to_bitField0_ |= 0x00000004;
+          if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+            to_bitField0_ |= 0x00000010;
           }
           result.cityId_ = cityId_;
           if (cityOneElementsBuilder_ == null) {
-            if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            if (((bitField0_ & 0x00000080) == 0x00000080)) {
               cityOneElements_ = java.util.Collections.unmodifiableList(cityOneElements_);
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000080);
             }
             result.cityOneElements_ = cityOneElements_;
           } else {
             result.cityOneElements_ = cityOneElementsBuilder_.build();
           }
-          if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-            to_bitField0_ |= 0x00000008;
+          if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+            to_bitField0_ |= 0x00000020;
           }
           result.cityElementIdForFirstDungeon_ = cityElementIdForFirstDungeon_;
-          if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-            to_bitField0_ |= 0x00000010;
+          if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+            to_bitField0_ |= 0x00000040;
           }
           result.cityElementIdForSecondDungeon_ = cityElementIdForSecondDungeon_;
           result.bitField0_ = to_bitField0_;
@@ -8456,11 +8512,17 @@ public final class EventStartupProto {
           if (other.hasEnemyMonsterId()) {
             setEnemyMonsterId(other.getEnemyMonsterId());
           }
+          if (other.hasEnemyBossMonsterId()) {
+            setEnemyBossMonsterId(other.getEnemyBossMonsterId());
+          }
+          if (other.hasMarkZMonsterId()) {
+            setMarkZMonsterId(other.getMarkZMonsterId());
+          }
           if (tutorialStructuresBuilder_ == null) {
             if (!other.tutorialStructures_.isEmpty()) {
               if (tutorialStructures_.isEmpty()) {
                 tutorialStructures_ = other.tutorialStructures_;
-                bitField0_ = (bitField0_ & ~0x00000004);
+                bitField0_ = (bitField0_ & ~0x00000010);
               } else {
                 ensureTutorialStructuresIsMutable();
                 tutorialStructures_.addAll(other.tutorialStructures_);
@@ -8473,7 +8535,7 @@ public final class EventStartupProto {
                 tutorialStructuresBuilder_.dispose();
                 tutorialStructuresBuilder_ = null;
                 tutorialStructures_ = other.tutorialStructures_;
-                bitField0_ = (bitField0_ & ~0x00000004);
+                bitField0_ = (bitField0_ & ~0x00000010);
                 tutorialStructuresBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getTutorialStructuresFieldBuilder() : null;
@@ -8485,7 +8547,7 @@ public final class EventStartupProto {
           if (!other.structureIdsToBeBuillt_.isEmpty()) {
             if (structureIdsToBeBuillt_.isEmpty()) {
               structureIdsToBeBuillt_ = other.structureIdsToBeBuillt_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureStructureIdsToBeBuilltIsMutable();
               structureIdsToBeBuillt_.addAll(other.structureIdsToBeBuillt_);
@@ -8499,7 +8561,7 @@ public final class EventStartupProto {
             if (!other.cityOneElements_.isEmpty()) {
               if (cityOneElements_.isEmpty()) {
                 cityOneElements_ = other.cityOneElements_;
-                bitField0_ = (bitField0_ & ~0x00000020);
+                bitField0_ = (bitField0_ & ~0x00000080);
               } else {
                 ensureCityOneElementsIsMutable();
                 cityOneElements_.addAll(other.cityOneElements_);
@@ -8512,7 +8574,7 @@ public final class EventStartupProto {
                 cityOneElementsBuilder_.dispose();
                 cityOneElementsBuilder_ = null;
                 cityOneElements_ = other.cityOneElements_;
-                bitField0_ = (bitField0_ & ~0x00000020);
+                bitField0_ = (bitField0_ & ~0x00000080);
                 cityOneElementsBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                      getCityOneElementsFieldBuilder() : null;
@@ -8589,7 +8651,7 @@ public final class EventStartupProto {
                 break;
               }
               case 40: {
-                bitField0_ |= 0x00000010;
+                bitField0_ |= 0x00000040;
                 cityId_ = input.readInt32();
                 break;
               }
@@ -8600,13 +8662,23 @@ public final class EventStartupProto {
                 break;
               }
               case 56: {
-                bitField0_ |= 0x00000040;
+                bitField0_ |= 0x00000100;
                 cityElementIdForFirstDungeon_ = input.readInt32();
                 break;
               }
               case 64: {
-                bitField0_ |= 0x00000080;
+                bitField0_ |= 0x00000200;
                 cityElementIdForSecondDungeon_ = input.readInt32();
+                break;
+              }
+              case 72: {
+                bitField0_ |= 0x00000004;
+                enemyBossMonsterId_ = input.readInt32();
+                break;
+              }
+              case 80: {
+                bitField0_ |= 0x00000008;
+                markZMonsterId_ = input.readInt32();
                 break;
               }
             }
@@ -8657,13 +8729,55 @@ public final class EventStartupProto {
           return this;
         }
         
+        // optional int32 enemyBossMonsterId = 9;
+        private int enemyBossMonsterId_ ;
+        public boolean hasEnemyBossMonsterId() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public int getEnemyBossMonsterId() {
+          return enemyBossMonsterId_;
+        }
+        public Builder setEnemyBossMonsterId(int value) {
+          bitField0_ |= 0x00000004;
+          enemyBossMonsterId_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearEnemyBossMonsterId() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          enemyBossMonsterId_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // optional int32 markZMonsterId = 10;
+        private int markZMonsterId_ ;
+        public boolean hasMarkZMonsterId() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        public int getMarkZMonsterId() {
+          return markZMonsterId_;
+        }
+        public Builder setMarkZMonsterId(int value) {
+          bitField0_ |= 0x00000008;
+          markZMonsterId_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearMarkZMonsterId() {
+          bitField0_ = (bitField0_ & ~0x00000008);
+          markZMonsterId_ = 0;
+          onChanged();
+          return this;
+        }
+        
         // repeated .com.lvl6.proto.TutorialStructProto tutorialStructures = 3;
         private java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> tutorialStructures_ =
           java.util.Collections.emptyList();
         private void ensureTutorialStructuresIsMutable() {
-          if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (!((bitField0_ & 0x00000010) == 0x00000010)) {
             tutorialStructures_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.TutorialStructProto>(tutorialStructures_);
-            bitField0_ |= 0x00000004;
+            bitField0_ |= 0x00000010;
            }
         }
         
@@ -8779,7 +8893,7 @@ public final class EventStartupProto {
         public Builder clearTutorialStructures() {
           if (tutorialStructuresBuilder_ == null) {
             tutorialStructures_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000010);
             onChanged();
           } else {
             tutorialStructuresBuilder_.clear();
@@ -8835,7 +8949,7 @@ public final class EventStartupProto {
             tutorialStructuresBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.StructureProto.TutorialStructProto, com.lvl6.proto.StructureProto.TutorialStructProto.Builder, com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder>(
                     tutorialStructures_,
-                    ((bitField0_ & 0x00000004) == 0x00000004),
+                    ((bitField0_ & 0x00000010) == 0x00000010),
                     getParentForChildren(),
                     isClean());
             tutorialStructures_ = null;
@@ -8846,9 +8960,9 @@ public final class EventStartupProto {
         // repeated int32 structureIdsToBeBuillt = 4;
         private java.util.List<java.lang.Integer> structureIdsToBeBuillt_ = java.util.Collections.emptyList();;
         private void ensureStructureIdsToBeBuilltIsMutable() {
-          if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (!((bitField0_ & 0x00000020) == 0x00000020)) {
             structureIdsToBeBuillt_ = new java.util.ArrayList<java.lang.Integer>(structureIdsToBeBuillt_);
-            bitField0_ |= 0x00000008;
+            bitField0_ |= 0x00000020;
            }
         }
         public java.util.List<java.lang.Integer>
@@ -8883,7 +8997,7 @@ public final class EventStartupProto {
         }
         public Builder clearStructureIdsToBeBuillt() {
           structureIdsToBeBuillt_ = java.util.Collections.emptyList();;
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
           return this;
         }
@@ -8891,19 +9005,19 @@ public final class EventStartupProto {
         // optional int32 cityId = 5;
         private int cityId_ ;
         public boolean hasCityId() {
-          return ((bitField0_ & 0x00000010) == 0x00000010);
+          return ((bitField0_ & 0x00000040) == 0x00000040);
         }
         public int getCityId() {
           return cityId_;
         }
         public Builder setCityId(int value) {
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000040;
           cityId_ = value;
           onChanged();
           return this;
         }
         public Builder clearCityId() {
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000040);
           cityId_ = 0;
           onChanged();
           return this;
@@ -8913,9 +9027,9 @@ public final class EventStartupProto {
         private java.util.List<com.lvl6.proto.CityProto.CityElementProto> cityOneElements_ =
           java.util.Collections.emptyList();
         private void ensureCityOneElementsIsMutable() {
-          if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (!((bitField0_ & 0x00000080) == 0x00000080)) {
             cityOneElements_ = new java.util.ArrayList<com.lvl6.proto.CityProto.CityElementProto>(cityOneElements_);
-            bitField0_ |= 0x00000020;
+            bitField0_ |= 0x00000080;
            }
         }
         
@@ -9031,7 +9145,7 @@ public final class EventStartupProto {
         public Builder clearCityOneElements() {
           if (cityOneElementsBuilder_ == null) {
             cityOneElements_ = java.util.Collections.emptyList();
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000080);
             onChanged();
           } else {
             cityOneElementsBuilder_.clear();
@@ -9087,7 +9201,7 @@ public final class EventStartupProto {
             cityOneElementsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.CityProto.CityElementProto, com.lvl6.proto.CityProto.CityElementProto.Builder, com.lvl6.proto.CityProto.CityElementProtoOrBuilder>(
                     cityOneElements_,
-                    ((bitField0_ & 0x00000020) == 0x00000020),
+                    ((bitField0_ & 0x00000080) == 0x00000080),
                     getParentForChildren(),
                     isClean());
             cityOneElements_ = null;
@@ -9098,19 +9212,19 @@ public final class EventStartupProto {
         // optional int32 cityElementIdForFirstDungeon = 7;
         private int cityElementIdForFirstDungeon_ ;
         public boolean hasCityElementIdForFirstDungeon() {
-          return ((bitField0_ & 0x00000040) == 0x00000040);
+          return ((bitField0_ & 0x00000100) == 0x00000100);
         }
         public int getCityElementIdForFirstDungeon() {
           return cityElementIdForFirstDungeon_;
         }
         public Builder setCityElementIdForFirstDungeon(int value) {
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000100;
           cityElementIdForFirstDungeon_ = value;
           onChanged();
           return this;
         }
         public Builder clearCityElementIdForFirstDungeon() {
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000100);
           cityElementIdForFirstDungeon_ = 0;
           onChanged();
           return this;
@@ -9119,19 +9233,19 @@ public final class EventStartupProto {
         // optional int32 cityElementIdForSecondDungeon = 8;
         private int cityElementIdForSecondDungeon_ ;
         public boolean hasCityElementIdForSecondDungeon() {
-          return ((bitField0_ & 0x00000080) == 0x00000080);
+          return ((bitField0_ & 0x00000200) == 0x00000200);
         }
         public int getCityElementIdForSecondDungeon() {
           return cityElementIdForSecondDungeon_;
         }
         public Builder setCityElementIdForSecondDungeon(int value) {
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000200;
           cityElementIdForSecondDungeon_ = value;
           onChanged();
           return this;
         }
         public Builder clearCityElementIdForSecondDungeon() {
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000200);
           cityElementIdForSecondDungeon_ = 0;
           onChanged();
           return this;
@@ -15131,7 +15245,7 @@ public final class EventStartupProto {
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
       "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbI" +
-      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\204#\n\024Star",
+      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\270#\n\024Star",
       "tupResponseProto\022\030\n\020serverTimeMillis\030\001 \001" +
       "(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.Full" +
       "UserProto\022I\n\rstartupStatus\030\003 \001(\01622.com.l" +
@@ -15232,19 +15346,20 @@ public final class EventStartupProto {
       "nsterLimit\030\002 \001(\005\032\211\001\n\020MonsterConstants\022\032\n" +
       "\022cashPerHealthPoint\030\001 \001(\002\022#\n\033secondsToHe" +
       "alPerHealthPoint\030\002 \001(\002\022\031\n\021elementalStren",
-      "gth\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\032\277\002\n" +
+      "gth\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002\032\363\002\n" +
       "\021TutorialConstants\022\031\n\021startingMonsterId\030" +
-      "\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022?\n\022tutoria" +
-      "lStructures\030\003 \003(\0132#.com.lvl6.proto.Tutor" +
-      "ialStructProto\022\036\n\026structureIdsToBeBuillt" +
-      "\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElement" +
-      "s\030\006 \003(\0132 .com.lvl6.proto.CityElementProt" +
-      "o\022$\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022" +
-      "%\n\035cityElementIdForSecondDungeon\030\010 \001(\005\"A" +
-      "\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_U",
-      "PDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStat" +
-      "us\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023" +
-      "B\021EventStartupProto"
+      "\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\032\n\022enemyBo" +
+      "ssMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(" +
+      "\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com.lvl6" +
+      ".proto.TutorialStructProto\022\036\n\026structureI" +
+      "dsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017ci" +
+      "tyOneElements\030\006 \003(\0132 .com.lvl6.proto.Cit" +
+      "yElementProto\022$\n\034cityElementIdForFirstDu" +
+      "ngeon\030\007 \001(\005\022%\n\035cityElementIdForSecondDun",
+      "geon\030\010 \001(\005\"A\n\014UpdateStatus\022\r\n\tNO_UPDATE\020" +
+      "\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n" +
+      "\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_N" +
+      "OT_IN_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15344,7 +15459,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
-              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", },
+              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.Builder.class);
           return null;
