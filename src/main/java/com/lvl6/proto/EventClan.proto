@@ -69,6 +69,10 @@ message RequestJoinClanResponseProto {
 	optional MinimumUserProtoForClans requester = 4;
 	optional MinimumClanProto minClan = 5;
 	optional FullClanProtoWithClanSize fullClan = 6;
+
+	//these are only set if the user joins an open clan, the current raid info	
+	optional PersistentClanEventClanInfoProto eventDetails = 7;
+	repeated PersistentClanEventUserInfoProto clanUsersDetails = 8;
 	
 	enum RequestJoinClanStatus {
 		REQUEST_SUCCESS = 1;
