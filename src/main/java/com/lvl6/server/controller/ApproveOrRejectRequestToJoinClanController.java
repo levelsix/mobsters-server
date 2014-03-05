@@ -1,7 +1,9 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,16 +55,26 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     ApproveOrRejectRequestToJoinClanRequestProto reqProto = ((ApproveOrRejectRequestToJoinClanRequestEvent)event).getApproveOrRejectRequestToJoinClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int requesterId = reqProto.getRequesterId();
     boolean accept = reqProto.getAccept();
 
     ApproveOrRejectRequestToJoinClanResponseProto.Builder resBuilder = ApproveOrRejectRequestToJoinClanResponseProto.newBuilder();
+    resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
     resBuilder.setRequesterId(requesterId);
     resBuilder.setAccept(accept);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    server.lockPlayer(requesterId, this.getClass().getSimpleName());
+    int clanId = 0;
+    if (senderProto.hasClan() && null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
+    
+    if (0 != clanId) {
+    	server.lockClan(clanId);
+    } else {
+    	server.lockPlayers(userId, requesterId, this.getClass().getSimpleName());
+    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       User requester = RetrieveUtils.userRetrieveUtils().getUserById(requesterId);
@@ -83,7 +95,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         server.writeClanEvent(resEvent, user.getClanId());
 
         // Send message to the new guy
-        ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 = new ApproveOrRejectRequestToJoinClanResponseEvent(requesterId);
+        ApproveOrRejectRequestToJoinClanResponseEvent resEvent2 =
+        		new ApproveOrRejectRequestToJoinClanResponseEvent(requesterId);
         resEvent2.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder.build());
         //in case user is not online write an apns
         server.writeAPNSNotificationOrEvent(resEvent2);
@@ -99,9 +112,21 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
     } catch (Exception e) {
       log.error("exception in ApproveOrRejectRequestToJoinClan processEvent", e);
+    	try {
+    	  resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
+    	  ApproveOrRejectRequestToJoinClanResponseEvent resEvent = new ApproveOrRejectRequestToJoinClanResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in ApproveOrRejectRequestToJoinClan processEvent", e);
+    	}
     } finally {
-      server.unlockPlayer(requesterId, this.getClass().getSimpleName());
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		server.unlockClan(clanId);
+    	} else {
+    		server.unlockPlayers(userId, requesterId, this.getClass().getSimpleName());
+    	}
     }
   }
 
@@ -123,7 +148,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean checkLegitDecision(Builder resBuilder, User user, User requester, boolean accept) {
     if (user == null || requester == null) {
-      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
       log.error("user is " + user + ", requester is " + requester);
       return false;      
     }
@@ -131,22 +156,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int clanId = user.getClanId();
     List<Integer> statuses = new ArrayList<Integer>();
     statuses.add(UserClanStatus.LEADER_VALUE);
+    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
     //should just be one id
-    int clanOwnerId = 0;
+    Set<Integer> uniqUserIds = new HashSet<Integer>(); 
     if (null != userIds && !userIds.isEmpty()) {
-    	clanOwnerId = userIds.get(0);
+    	uniqUserIds.addAll(userIds);
     }
     
-    if (clanOwnerId != user.getId()) {
-      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.NOT_OWNER);
-      log.error("clan owner isn't this guy, clan owner id is " + clanOwnerId);
+    int userId = user.getId();
+    if (!uniqUserIds.contains(userId)) {
+      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_NOT_AUTHORIZED);
+      log.error("clan member can't approve clan join request. member=" + user +
+      		"\t requester=" + requester);
       return false;      
     }
     //check if requester is already in a clan
     if (0 < requester.getClanId()) {
-    	resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.ALREADY_IN_A_CLAN);
+    	resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_ALREADY_IN_A_CLAN);
     	log.error("trying to accept a user that is already in a clan");
     	//the other requests in user_clans table that have a status of 2 (requesting to join clan)
     	//are deleted later on in writeChangesToDB
@@ -155,7 +183,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(requester.getId(), clanId);
     if (uc == null || uc.getStatus() != UserClanStatus.REQUESTING) {
-      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.NOT_A_REQUESTER);
+      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_NOT_A_REQUESTER);
       log.error("requester has not requested for clan with id " + user.getClanId());
       return false;
     }
@@ -166,7 +194,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     List<UserClan> ucs = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clanId);
     int maxSize = ControllerConstants.CLAN__MAX_NUM_MEMBERS;
     if (ucs.size() >= maxSize && accept) {
-      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
       log.warn("user error: trying to add user into already full clan with id " + user.getClanId());
       return false;      
     }

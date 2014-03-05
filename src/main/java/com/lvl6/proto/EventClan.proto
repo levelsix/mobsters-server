@@ -47,9 +47,9 @@ message LeaveClanResponseProto {
 	
 	enum LeaveClanStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_IN_CLAN = 3;
-		OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 4;
+		FAIL_OTHER = 2;
+		FAIL_NOT_IN_CLAN = 3;
+		FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 4;
 	}	
 }
 
@@ -98,9 +98,9 @@ message RetractRequestJoinClanResponseProto {
 	
 	enum RetractRequestJoinClanStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		ALREADY_IN_CLAN = 3;
-		DID_NOT_REQUEST = 4;
+		FAIL_OTHER = 2;
+		FAIL_ALREADY_IN_CLAN = 3;
+		FAIL_DID_NOT_REQUEST = 4;
 	}	
 }	
 
@@ -123,10 +123,10 @@ message ApproveOrRejectRequestToJoinClanResponseProto {
 	
 	enum ApproveOrRejectRequestToJoinClanStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_OWNER = 3;
-		NOT_A_REQUESTER = 4;
-		ALREADY_IN_A_CLAN = 5;
+		FAIL_OTHER = 2;
+		FAIL_NOT_AUTHORIZED = 3;
+		FAIL_NOT_A_REQUESTER = 4;
+		FAIL_ALREADY_IN_A_CLAN = 5;
 	}	
 }
 
@@ -181,9 +181,9 @@ message TransferClanOwnershipResponseProto {
 	
 	enum TransferClanOwnershipStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_OWNER = 3;
-		NEW_OWNER_NOT_IN_CLAN = 4;
+		FAIL_OTHER = 2;
+		FAIL_NOT_AUTHORIZED = 3;
+		FAIL_NEW_OWNER_NOT_IN_CLAN = 4;
 	}	
 }
 
@@ -203,10 +203,10 @@ message ChangeClanDescriptionResponseProto {
 	
 	enum ChangeClanDescriptionStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		TOO_LONG = 3;
-		NOT_IN_CLAN = 4;
-		NOT_OWNER = 5;
+		FAIL_OTHER = 2;
+		FAIL_TOO_LONG = 3;
+		FAIL_NOT_IN_CLAN = 4;
+		FAIL_NOT_AUTHORIZED = 5;
 	}	
 }
 
@@ -224,9 +224,9 @@ message BootPlayerFromClanResponseProto {
      
      enum BootPlayerFromClanStatus {
      	SUCCESS = 1;
-     	OTHER_FAIL = 2;
-     	NOT_OWNER_OF_CLAN = 3;
-     	BOOTED_NOT_IN_CLAN = 4;
+     	FAIL_OTHER = 2;
+     	FAIL_NOT_AUTHORIZED = 3;
+     	FAIL_BOOTED_NOT_IN_CLAN = 4;
      }
 }
 
@@ -246,9 +246,9 @@ message ChangeClanJoinTypeResponseProto {
 	
 	enum ChangeClanJoinTypeStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_IN_CLAN = 3;
-		NOT_OWNER = 4;
+		FAIL_OTHER = 2;
+		FAIL_NOT_IN_CLAN = 3;
+		FAIL_NOT_OWNER = 4;
 	}
 }
 

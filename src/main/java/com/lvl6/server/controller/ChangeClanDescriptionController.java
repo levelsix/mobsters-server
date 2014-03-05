@@ -1,7 +1,9 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,12 +53,24 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     ChangeClanDescriptionRequestProto reqProto = ((ChangeClanDescriptionRequestEvent)event).getChangeClanDescriptionRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     String description = reqProto.getDescription();
 
     ChangeClanDescriptionResponseProto.Builder resBuilder = ChangeClanDescriptionResponseProto.newBuilder();
+    resBuilder.setStatus(ChangeClanDescriptionStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    int clanId = 0;
+    
+    if (senderProto.hasClan() && null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
+    
+    if (0 != clanId) {
+    	server.lockClan(clanId);
+    } else {
+    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
@@ -82,25 +96,38 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
     } catch (Exception e) {
       log.error("exception in ChangeClanDescription processEvent", e);
+      try {
+    	  resBuilder.setStatus(ChangeClanDescriptionStatus.FAIL_OTHER);
+    	  ChangeClanDescriptionResponseEvent resEvent = new ChangeClanDescriptionResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setChangeClanDescriptionResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in ChangeClanDescription processEvent", e);
+    	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		server.unlockClan(clanId);
+    	} else {
+    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	}
     }
   }
 
   private boolean checkLegitChange(Builder resBuilder, User user, String description, Clan clan) {
     if (user == null || description == null || description.length() <= 0 || clan == null) {
-      resBuilder.setStatus(ChangeClanDescriptionStatus.OTHER_FAIL);
+      resBuilder.setStatus(ChangeClanDescriptionStatus.FAIL_OTHER);
       log.error("user is " + user + ", description is " + description);
       return false;      
     }
     if (description.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION) {
-      resBuilder.setStatus(ChangeClanDescriptionStatus.TOO_LONG);
+      resBuilder.setStatus(ChangeClanDescriptionStatus.FAIL_TOO_LONG);
       log.error("description is " + description + ", and length of that is " + description.length() + ", max size is " + 
           ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_DESCRIPTION);
       return false;      
     }
     if (user.getClanId() <= 0) {
-      resBuilder.setStatus(ChangeClanDescriptionStatus.NOT_IN_CLAN);
+      resBuilder.setStatus(ChangeClanDescriptionStatus.FAIL_NOT_IN_CLAN);
       log.error("user not in clan");
       return false;      
     }
@@ -108,17 +135,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int clanId = user.getClanId();
     List<Integer> statuses = new ArrayList<Integer>();
     statuses.add(UserClanStatus.LEADER_VALUE);
+    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
-    //should just be one id
-    int clanOwnerId = 0;
+    
+    Set<Integer> uniqUserIds = new HashSet<Integer>(); 
     if (null != userIds && !userIds.isEmpty()) {
-    	clanOwnerId = userIds.get(0);
+    	uniqUserIds.addAll(userIds);
     }
     
-    if (clanOwnerId != user.getId()) {
-      resBuilder.setStatus(ChangeClanDescriptionStatus.NOT_OWNER);
-      log.error("clan owner isn't this guy, clan owner id is " + clanOwnerId);
+    int userId = user.getId();
+    if (!uniqUserIds.contains(userId)) {
+      resBuilder.setStatus(ChangeClanDescriptionStatus.FAIL_NOT_AUTHORIZED);
+      log.error("clan member can't change clan description member=" + user);
       return false;      
     }
     resBuilder.setStatus(ChangeClanDescriptionStatus.SUCCESS);

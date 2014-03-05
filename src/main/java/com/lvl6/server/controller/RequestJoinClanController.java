@@ -72,7 +72,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setClanId(clanId);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    if (0 != clanId) {
+    	server.lockClan(clanId);
+    } else {
+    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
@@ -127,7 +131,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     } catch (Exception e) {
       log.error("exception in RequestJoinClan processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		server.unlockClan(clanId);
+    	} else {
+    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	}
     }
   }
 

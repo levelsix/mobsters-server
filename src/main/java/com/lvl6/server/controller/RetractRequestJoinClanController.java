@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetractRequestJoinClanRequestEvent;
 import com.lvl6.events.response.RetractRequestJoinClanResponseEvent;
+import com.lvl6.events.response.RetractRequestJoinClanResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -15,6 +16,7 @@ import com.lvl6.info.UserClan;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto;
+import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -47,13 +49,19 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     RetractRequestJoinClanRequestProto reqProto = ((RetractRequestJoinClanRequestEvent)event).getRetractRequestJoinClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int clanId = reqProto.getClanId();
 
     RetractRequestJoinClanResponseProto.Builder resBuilder = RetractRequestJoinClanResponseProto.newBuilder();
+    resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
     resBuilder.setClanId(clanId);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    if (0 != clanId) {
+    	server.lockClan(clanId);
+    } else {
+    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
@@ -75,25 +83,38 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       }
     } catch (Exception e) {
       log.error("exception in RetractRequestJoinClan processEvent", e);
+      try {
+    	  resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
+    	  RetractRequestJoinClanResponseEvent resEvent = new RetractRequestJoinClanResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setRetractRequestJoinClanResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in RetractRequestJoinClan processEvent", e);
+    	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		server.unlockClan(clanId);
+    	} else {
+    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	}
     }
   }
 
   private boolean checkLegitRequest(Builder resBuilder, User user, Clan clan) {
     if (user == null || clan == null) {
-      resBuilder.setStatus(RetractRequestJoinClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_OTHER);
       log.error("user is " + user + ", clan is " + clan);
       return false;      
     }
     if (user.getClanId() > 0) {
-      resBuilder.setStatus(RetractRequestJoinClanStatus.ALREADY_IN_CLAN);
+      resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_ALREADY_IN_CLAN);
       log.error("user is already in clan with id " + user.getClanId());
       return false;      
     }
     UserClan uc = RetrieveUtils.userClanRetrieveUtils().getSpecificUserClan(user.getId(), clan.getId());
     if (uc == null || uc.getStatus() != UserClanStatus.REQUESTING) {
-      resBuilder.setStatus(RetractRequestJoinClanStatus.DID_NOT_REQUEST);
+      resBuilder.setStatus(RetractRequestJoinClanStatus.FAIL_DID_NOT_REQUEST);
       log.error("user clan request has not been filed");
       return false;      
     }
