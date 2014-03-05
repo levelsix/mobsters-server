@@ -5,12 +5,16 @@ import java.io.Serializable;
 //this class is analogous to a task
 public class ClanRaidStage implements Serializable {
 
-	private static final long serialVersionUID = 1814200901976400767L;
+	private static final long serialVersionUID = 4353447583250770652L;
 	private int id;
 	private int clanRaidId;
 	private int durationMinutes;
 	private int stageNum;
 	private String name;
+	
+	//sum of all monster healths for this stage
+	//not actually a column in the table
+	private int stageHealth;
 	
 	public ClanRaidStage(int id, int clanRaidId, int durationMinutes,
 			int stageNum, String name) {
@@ -61,12 +65,20 @@ public class ClanRaidStage implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int getStageHealth() {
+		return stageHealth;
+	}
+
+	public void setStageHealth(int stageHealth) {
+		this.stageHealth = stageHealth;
+	}
 
 	@Override
 	public String toString() {
 		return "ClanRaidStage [id=" + id + ", clanRaidId=" + clanRaidId
 				+ ", durationMinutes=" + durationMinutes + ", stageNum=" + stageNum
-				+ ", name=" + name + "]";
+				+ ", name=" + name + ", stageHealth=" + stageHealth + "]";
 	}
-	
+
 }

@@ -115,6 +115,8 @@ message SetFacebookIdResponseProto {
 message UpdateUserCurrencyRequestProto {
 	optional MinimumUserProto sender = 1;
 	
+	//positive numbers which the server will then make negative
+	//server just adds this number to the user's currency
 	//however if user is an admin, use it however you want :)
 	optional sint32 cashSpent = 2;
 	optional sint32 oilSpent = 3;

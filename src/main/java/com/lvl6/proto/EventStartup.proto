@@ -92,7 +92,7 @@ message StartupResponseProto {
 	optional PersistentClanEventClanInfoProto curRaidClanInfo = 31;
 	repeated PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
 
-	//repeated PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;
+	repeated PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;
 	
 	//optional TutorialConstants tutorialConstants = 34; //defined above, below #5
 

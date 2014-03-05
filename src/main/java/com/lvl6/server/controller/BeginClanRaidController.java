@@ -370,8 +370,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	if (null != clanUserInfo && !clanUserInfo.isEmpty()) {
   		//record whatever is in the ClanEventPersistentForUser
-  		numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistory(
-  				clanEventPersistentId, now, clanUserInfo);
+  		numInserted = InsertUtils.get().insertIntoCepfuRaidHistory(clanEventPersistentId,
+  				now, clanUserInfo);
   		log.info("rows inserted into clan raid info for user (should be " + 
   				clanUserInfo.size() + "): " + numInserted);
   		

@@ -18555,6 +18555,617 @@ public final class EventClanProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.AttackClanRaidMonsterResponseProto)
   }
   
+  public interface AwardClanRaidStageRewardResponseProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 crsId = 1;
+    boolean hasCrsId();
+    int getCrsId();
+    
+    // repeated .com.lvl6.proto.PersistentClanEventUserRewardProto allRewards = 2;
+    java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> 
+        getAllRewardsList();
+    com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto getAllRewards(int index);
+    int getAllRewardsCount();
+    java.util.List<? extends com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder> 
+        getAllRewardsOrBuilderList();
+    com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder getAllRewardsOrBuilder(
+        int index);
+  }
+  public static final class AwardClanRaidStageRewardResponseProto extends
+      com.google.protobuf.GeneratedMessage
+      implements AwardClanRaidStageRewardResponseProtoOrBuilder {
+    // Use AwardClanRaidStageRewardResponseProto.newBuilder() to construct.
+    private AwardClanRaidStageRewardResponseProto(Builder builder) {
+      super(builder);
+    }
+    private AwardClanRaidStageRewardResponseProto(boolean noInit) {}
+    
+    private static final AwardClanRaidStageRewardResponseProto defaultInstance;
+    public static AwardClanRaidStageRewardResponseProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public AwardClanRaidStageRewardResponseProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 crsId = 1;
+    public static final int CRSID_FIELD_NUMBER = 1;
+    private int crsId_;
+    public boolean hasCrsId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getCrsId() {
+      return crsId_;
+    }
+    
+    // repeated .com.lvl6.proto.PersistentClanEventUserRewardProto allRewards = 2;
+    public static final int ALLREWARDS_FIELD_NUMBER = 2;
+    private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> allRewards_;
+    public java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> getAllRewardsList() {
+      return allRewards_;
+    }
+    public java.util.List<? extends com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder> 
+        getAllRewardsOrBuilderList() {
+      return allRewards_;
+    }
+    public int getAllRewardsCount() {
+      return allRewards_.size();
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto getAllRewards(int index) {
+      return allRewards_.get(index);
+    }
+    public com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder getAllRewardsOrBuilder(
+        int index) {
+      return allRewards_.get(index);
+    }
+    
+    private void initFields() {
+      crsId_ = 0;
+      allRewards_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, crsId_);
+      }
+      for (int i = 0; i < allRewards_.size(); i++) {
+        output.writeMessage(2, allRewards_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, crsId_);
+      }
+      for (int i = 0; i < allRewards_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, allRewards_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.EventClanProto.internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getAllRewardsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        crsId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (allRewardsBuilder_ == null) {
+          allRewards_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          allRewardsBuilder_.clear();
+        }
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto getDefaultInstanceForType() {
+        return com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto build() {
+        com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto buildPartial() {
+        com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto result = new com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.crsId_ = crsId_;
+        if (allRewardsBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            allRewards_ = java.util.Collections.unmodifiableList(allRewards_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.allRewards_ = allRewards_;
+        } else {
+          result.allRewards_ = allRewardsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto) {
+          return mergeFrom((com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto other) {
+        if (other == com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto.getDefaultInstance()) return this;
+        if (other.hasCrsId()) {
+          setCrsId(other.getCrsId());
+        }
+        if (allRewardsBuilder_ == null) {
+          if (!other.allRewards_.isEmpty()) {
+            if (allRewards_.isEmpty()) {
+              allRewards_ = other.allRewards_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureAllRewardsIsMutable();
+              allRewards_.addAll(other.allRewards_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.allRewards_.isEmpty()) {
+            if (allRewardsBuilder_.isEmpty()) {
+              allRewardsBuilder_.dispose();
+              allRewardsBuilder_ = null;
+              allRewards_ = other.allRewards_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              allRewardsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getAllRewardsFieldBuilder() : null;
+            } else {
+              allRewardsBuilder_.addAllMessages(other.allRewards_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              crsId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder subBuilder = com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addAllRewards(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 crsId = 1;
+      private int crsId_ ;
+      public boolean hasCrsId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getCrsId() {
+        return crsId_;
+      }
+      public Builder setCrsId(int value) {
+        bitField0_ |= 0x00000001;
+        crsId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCrsId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        crsId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // repeated .com.lvl6.proto.PersistentClanEventUserRewardProto allRewards = 2;
+      private java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> allRewards_ =
+        java.util.Collections.emptyList();
+      private void ensureAllRewardsIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          allRewards_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto>(allRewards_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder> allRewardsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> getAllRewardsList() {
+        if (allRewardsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(allRewards_);
+        } else {
+          return allRewardsBuilder_.getMessageList();
+        }
+      }
+      public int getAllRewardsCount() {
+        if (allRewardsBuilder_ == null) {
+          return allRewards_.size();
+        } else {
+          return allRewardsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto getAllRewards(int index) {
+        if (allRewardsBuilder_ == null) {
+          return allRewards_.get(index);
+        } else {
+          return allRewardsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setAllRewards(
+          int index, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto value) {
+        if (allRewardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllRewardsIsMutable();
+          allRewards_.set(index, value);
+          onChanged();
+        } else {
+          allRewardsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setAllRewards(
+          int index, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder builderForValue) {
+        if (allRewardsBuilder_ == null) {
+          ensureAllRewardsIsMutable();
+          allRewards_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          allRewardsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllRewards(com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto value) {
+        if (allRewardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllRewardsIsMutable();
+          allRewards_.add(value);
+          onChanged();
+        } else {
+          allRewardsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addAllRewards(
+          int index, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto value) {
+        if (allRewardsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAllRewardsIsMutable();
+          allRewards_.add(index, value);
+          onChanged();
+        } else {
+          allRewardsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addAllRewards(
+          com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder builderForValue) {
+        if (allRewardsBuilder_ == null) {
+          ensureAllRewardsIsMutable();
+          allRewards_.add(builderForValue.build());
+          onChanged();
+        } else {
+          allRewardsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllRewards(
+          int index, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder builderForValue) {
+        if (allRewardsBuilder_ == null) {
+          ensureAllRewardsIsMutable();
+          allRewards_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          allRewardsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllAllRewards(
+          java.lang.Iterable<? extends com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto> values) {
+        if (allRewardsBuilder_ == null) {
+          ensureAllRewardsIsMutable();
+          super.addAll(values, allRewards_);
+          onChanged();
+        } else {
+          allRewardsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearAllRewards() {
+        if (allRewardsBuilder_ == null) {
+          allRewards_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          allRewardsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeAllRewards(int index) {
+        if (allRewardsBuilder_ == null) {
+          ensureAllRewardsIsMutable();
+          allRewards_.remove(index);
+          onChanged();
+        } else {
+          allRewardsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder getAllRewardsBuilder(
+          int index) {
+        return getAllRewardsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder getAllRewardsOrBuilder(
+          int index) {
+        if (allRewardsBuilder_ == null) {
+          return allRewards_.get(index);  } else {
+          return allRewardsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder> 
+           getAllRewardsOrBuilderList() {
+        if (allRewardsBuilder_ != null) {
+          return allRewardsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(allRewards_);
+        }
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder addAllRewardsBuilder() {
+        return getAllRewardsFieldBuilder().addBuilder(
+            com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder addAllRewardsBuilder(
+          int index) {
+        return getAllRewardsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder> 
+           getAllRewardsBuilderList() {
+        return getAllRewardsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder> 
+          getAllRewardsFieldBuilder() {
+        if (allRewardsBuilder_ == null) {
+          allRewardsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto.Builder, com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProtoOrBuilder>(
+                  allRewards_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          allRewards_ = null;
+        }
+        return allRewardsBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.AwardClanRaidStageRewardResponseProto)
+    }
+    
+    static {
+      defaultInstance = new AwardClanRaidStageRewardResponseProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.AwardClanRaidStageRewardResponseProto)
+  }
+  
   public interface RecordClanRaidStatsRequestProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -19776,6 +20387,11 @@ public final class EventClanProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_AttackClanRaidMonsterResponseProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -19970,17 +20586,20 @@ public final class EventClanProto {
       "TER_JUST_DIED\020\002\022\031\n\025FAIL_USER_NOT_IN_CLAN" +
       "\020\003\022\"\n\036FAIL_NO_STAGE_RAID_IN_PROGRESS\020\004\022\035" +
       "\n\031FAIL_MONSTER_ALREADY_DEAD\020\005\022\016\n\nFAIL_OT" +
-      "HER\020\006\"w\n\037RecordClanRaidStatsRequestProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\016\n\006clanId\030\002 \001(\005\022\022\n\nclientTime" +
-      "\030\003 \001(\003\"\211\002\n RecordClanRaidStatsResponsePr",
-      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
-      "imumUserProto\022Z\n\006status\030\002 \001(\0162J.com.lvl6" +
-      ".proto.RecordClanRaidStatsResponseProto." +
-      "RecordClanRaidStatsStatus\"W\n\031RecordClanR" +
-      "aidStatsStatus\022\013\n\007SUCCESS\020\001\022\035\n\031FAIL_MONS" +
-      "TER_ALREADY_DEAD\020\002\022\016\n\nFAIL_OTHER\020\003B\020B\016Ev" +
-      "entClanProto"
+      "HER\020\006\"~\n%AwardClanRaidStageRewardRespons" +
+      "eProto\022\r\n\005crsId\030\001 \001(\005\022F\n\nallRewards\030\002 \003(" +
+      "\01322.com.lvl6.proto.PersistentClanEventUs" +
+      "erRewardProto\"w\n\037RecordClanRaidStatsRequ",
+      "estProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.prot" +
+      "o.MinimumUserProto\022\016\n\006clanId\030\002 \001(\005\022\022\n\ncl" +
+      "ientTime\030\003 \001(\003\"\211\002\n RecordClanRaidStatsRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022Z\n\006status\030\002 \001(\0162J." +
+      "com.lvl6.proto.RecordClanRaidStatsRespon" +
+      "seProto.RecordClanRaidStatsStatus\"W\n\031Rec" +
+      "ordClanRaidStatsStatus\022\013\n\007SUCCESS\020\001\022\035\n\031F" +
+      "AIL_MONSTER_ALREADY_DEAD\020\002\022\016\n\nFAIL_OTHER" +
+      "\020\003B\020B\016EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -20179,8 +20798,16 @@ public final class EventClanProto {
               new java.lang.String[] { "Sender", "DmgDealt", "EventDetails", "ClanUsersDetails", "UserMonsterThatAttacked", "Status", },
               com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.class,
               com.lvl6.proto.EventClanProto.AttackClanRaidMonsterResponseProto.Builder.class);
-          internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor =
+          internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor =
             getDescriptor().getMessageTypes().get(24);
+          internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_AwardClanRaidStageRewardResponseProto_descriptor,
+              new java.lang.String[] { "CrsId", "AllRewards", },
+              com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto.class,
+              com.lvl6.proto.EventClanProto.AwardClanRaidStageRewardResponseProto.Builder.class);
+          internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor =
+            getDescriptor().getMessageTypes().get(25);
           internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RecordClanRaidStatsRequestProto_descriptor,
@@ -20188,7 +20815,7 @@ public final class EventClanProto {
               com.lvl6.proto.EventClanProto.RecordClanRaidStatsRequestProto.class,
               com.lvl6.proto.EventClanProto.RecordClanRaidStatsRequestProto.Builder.class);
           internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_descriptor =
-            getDescriptor().getMessageTypes().get(25);
+            getDescriptor().getMessageTypes().get(26);
           internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_RecordClanRaidStatsResponseProto_descriptor,

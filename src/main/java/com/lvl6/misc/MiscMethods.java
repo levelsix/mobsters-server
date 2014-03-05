@@ -141,6 +141,11 @@ public class MiscMethods {
   public static final String gems = "gems";
   public static final String oil = "oil";
   public static final String boosterPackId = "boosterPackId";
+  
+  public static final String CASH = "CASH";
+  public static final String OIL = "OIL";
+  public static final String MONSTER = "MONSTER";
+  
 
 
   public static Dialogue createDialogue(String dialogueBlob) {

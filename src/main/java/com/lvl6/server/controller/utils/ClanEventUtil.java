@@ -47,7 +47,6 @@ public class ClanEventUtil implements InitializingBean {
 			return curCrsmDmg;
 		}
 		
-		
 		//method either relatively or absolutely updates a clan's crsmDmg
 		public void updateClanIdCrsmDmg(Integer clanId, Integer crsmDmgDelta,
 				boolean replaceCrsmDmg) {
@@ -74,7 +73,12 @@ public class ClanEventUtil implements InitializingBean {
 				return;
 			}
 			
-			
+		}
+		
+		public void deleteCrsmDmgForClanId(Integer clanId) {
+			String clanIdStr = clanId.toString();
+			clanRaidMonsterDmgMap.remove(clanIdStr);
+			log.info("removed crsmDmg for clanId=" + clanIdStr);
 		}
 		
 		

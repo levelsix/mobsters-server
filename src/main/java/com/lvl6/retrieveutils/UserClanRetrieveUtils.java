@@ -20,7 +20,6 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.utils.DBConnection;
-import com.lvl6.utils.StringUtils;
 
 @Component @DependsOn("gameServer") public class UserClanRetrieveUtils {
 

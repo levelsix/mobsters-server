@@ -1,6 +1,8 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -8,14 +10,15 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetrieveClanInfoRequestEvent;
 import com.lvl6.events.response.RetrieveClanInfoResponseEvent;
+import com.lvl6.info.CepfuRaidHistory;
 import com.lvl6.info.Clan;
-import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
@@ -30,16 +33,28 @@ import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserCurrentMonsterTeamProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
+import com.lvl6.retrieveutils.CepfuRaidHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
 @Component @DependsOn("gameServer") public class RetrieveClanInfoController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected TimeUtils timeUtils;
+  
+  public TimeUtils getTimeUtils() {
+		return timeUtils;
+	}
 
-  public RetrieveClanInfoController() {
+	public void setTimeUtils(TimeUtils timeUtils) {
+		this.timeUtils = timeUtils;
+	}
+
+	public RetrieveClanInfoController() {
     numAllocatedThreads = 8;
   }
 
@@ -118,19 +133,20 @@ import com.lvl6.utils.RetrieveUtils;
             Map<Integer, List<MonsterForUser>> userIdsToMonsterTeams = RetrieveUtils
             		.monsterForUserRetrieveUtils().getUserIdsToMonsterTeamForUserIds(userIdList);
             
+            int nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY;
             //get the clan raid contribution stuff
-//            ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
-//            		.getPersistentEventForClanId(clanId);
-//            if (null != cepfc) {
-//            	
-//            }
+            Map<Date, Map<Integer, CepfuRaidHistory>> timesToUserIdToRaidHistory = 
+            		CepfuRaidHistoryRetrieveUtils.getRaidHistoryForPastNDaysForClan(clanId, nDays, new Date(), timeUtils);
+            Map<Integer, Float> userIdToClanRaidContribution = calculateRaidContribution(
+            		timesToUserIdToRaidHistory);
 
             for (UserClan uc : userClans) {
             	int userId = uc.getUserId();
             	User u = usersMap.get(userId);
-            	//TODO: TODO: FIGURE OUT THIS CLAN RAID CONTRIBUTION FLOAT
+            	
+            	float clanRaidContribution = userIdToClanRaidContribution.get(userId);
               MinimumUserProtoForClans minUser = CreateInfoProtoUtils
-              		.createMinimumUserProtoForClans(u, uc.getStatus(), 0F);
+              		.createMinimumUserProtoForClans(u, uc.getStatus(), clanRaidContribution);
               resBuilder.addMembers(minUser);
               
               //create the monster team for this user if possible
@@ -182,4 +198,70 @@ import com.lvl6.utils.RetrieveUtils;
     resBuilder.setStatus(RetrieveClanInfoStatus.SUCCESS);
     return true;
   }
+  
+  //clan raid contribution is calculated through summing all the clanCrDmg
+  //summing all of a user's crDmg, and taking dividing
+  //sumUserCrDmg by sumClanCrDmg 
+  private Map<Integer, Float> calculateRaidContribution(
+  		Map<Date, Map<Integer, CepfuRaidHistory>> timesToUserIdToRaidHistory) {
+  	log.info("calculating clan raid contribution.");
+  	
+  	//return value
+  	Map<Integer, Float> userIdToContribution = new HashMap<Integer, Float>();
+  	
+  	Map<Integer, Integer> userIdToSumCrDmg = new HashMap<Integer, Integer>();
+  	int sumClanCrDmg = 0;
+  	
+  	//each date represents a raid
+  	for (Date aDate : timesToUserIdToRaidHistory.keySet()) {
+  		Map<Integer, CepfuRaidHistory> userIdToRaidHistory =
+  				timesToUserIdToRaidHistory.get(aDate);
+  		
+  		sumClanCrDmg += getClanAndCrDmgs(userIdToRaidHistory, userIdToSumCrDmg);
+  	}
+  	
+  	for (Integer userId : userIdToSumCrDmg.keySet()) {
+  		int userCrDmg = userIdToSumCrDmg.get(userId);
+  		float contribution = ((float) userCrDmg / (float) sumClanCrDmg);
+  		
+  		userIdToContribution.put(userId, contribution);
+  	}
+  	
+  	log.info("total clan cr dmg=" + sumClanCrDmg + "\t userIdToContribution=" +
+  			userIdToContribution);
+  	
+  	return userIdToContribution;
+  }
+  
+  
+  //returns the cr dmg and computes running sum of user's cr dmgs
+  private int getClanAndCrDmgs(Map<Integer, CepfuRaidHistory> userIdToRaidHistory,
+  		Map<Integer, Integer> userIdToSumCrDmg) {
+  	
+  	int clanCrDmg = 0;//return value
+  	
+		//now for each user in this raid, sum up all their damages
+		for (Integer userId : userIdToRaidHistory.keySet()) {
+			CepfuRaidHistory raidHistory = userIdToRaidHistory.get(userId);
+			
+			//all of the clanCrDmg values for a CepfuRaidHistory are the same
+			clanCrDmg = raidHistory.getClanCrDmg();
+				
+			int userCrDmg = raidHistory.getCrDmgDone();
+			
+			//sum up the damage for this raid with the current running sum for this user
+			//user might not exist in current running sum
+			int userCrDmgSoFar = 0;
+			if (userIdToSumCrDmg.containsKey(userId)) {
+				userCrDmgSoFar = userIdToSumCrDmg.get(userId);
+			}
+			
+			int totalUserCrDmg = userCrDmg + userCrDmgSoFar;
+			
+			userIdToSumCrDmg.put(userId, totalUserCrDmg);
+		}
+		
+		return clanCrDmg;
+  }
+  
 }

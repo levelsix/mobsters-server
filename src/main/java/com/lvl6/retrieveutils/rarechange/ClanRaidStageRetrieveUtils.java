@@ -15,6 +15,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ClanRaidStage;
+import com.lvl6.info.ClanRaidStageMonster;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
 
@@ -27,10 +28,27 @@ import com.lvl6.utils.DBConnection;
   private static Map<Integer, ClanRaidStage> clanRaidStageIdsToClanRaidStages;
 
   private static final String TABLE_NAME = DBConstants.TABLE_CLAN_RAID_STAGE;
+  
+  public static int getClanRaidStageHealthForCrsId(int crsId) {
+  	log.debug("retrieving stage health for crsId=" + crsId);
+  	
+  	if (null == clanRaidStageIdsToClanRaidStages) {
+  		setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();
+  	}
+  	
+  	if (clanRaidStageIdsToClanRaidStages.containsKey(crsId)) {
+	  	ClanRaidStage crs = clanRaidStageIdsToClanRaidStages.get(crsId);
+	  	return crs.getStageHealth();
+	  } else {
+	  	log.error("clan raid stage does not exist. clanRaidStageId=" + crsId);
+	  	return 0;
+	  }
+  	
+  }
 
   public static Map<Integer, Map<Integer, ClanRaidStage>> getClanRaidIdsToClanRaidStageIdsToClanRaidStages() {
     log.debug("retrieving all clan raid stage data map");
-    if (clanRaidIdsToClanRaidStageIdsToClanRaidStages == null) {
+    if (null == clanRaidIdsToClanRaidStageIdsToClanRaidStages) {
       setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();
     }
     return clanRaidIdsToClanRaidStageIdsToClanRaidStages;
@@ -191,6 +209,25 @@ import com.lvl6.utils.DBConnection;
 
   public static void reload() {
     setStaticClanRaidIdsToClanRaidStageIdsToClanRaidStages();
+    setStageHealths();
+  }
+  
+  public static void setStageHealths() {
+  	log.debug("setting the stage health attribute in clan raid stages");
+  	ClanRaidStageMonsterRetrieveUtils.reload();
+  	
+  	for (Integer crsId : clanRaidStageIdsToClanRaidStages.keySet()) {
+  		ClanRaidStage crs = clanRaidStageIdsToClanRaidStages.get(crsId);
+  		
+  		Map<Integer, ClanRaidStageMonster> crsmIdToCrsm = ClanRaidStageMonsterRetrieveUtils
+  				.getClanRaidStageMonstersForClanRaidStageId(crsId);
+  		
+  		int stageHealth = 0;
+  		for (ClanRaidStageMonster crsm : crsmIdToCrsm.values()) {
+  			stageHealth += crsm.getMonsterHp();
+  		}
+			crs.setStageHealth(stageHealth);
+  	}
   }
 
   /*

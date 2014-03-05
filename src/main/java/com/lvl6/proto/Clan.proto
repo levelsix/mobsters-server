@@ -160,14 +160,33 @@ message PersistentClanEventUserInfoProto {
 }
 
 message PersistentClanEventUserRewardProto {
-	optional int32 rewardId = 1;
+	optional int32 rewardId = 1; //when redeeming rewards, these ids should be used
 	optional int32 userId = 2;
-	optional int32 crsId = 3;
+	//optional int32 crsId = 3;
 	optional int64 crsEndTime = 4;
 	optional ResourceType resourceType = 5 [default = CASH];
 	optional int32 staticDataId = 6; //will most likely be monster id
 	optional int32 quantity = 7;
-	optional int32 clanEventPersistentId = 8;
+	//optional int32 clanEventPersistentId = 8;
+	optional int64 timeRedeemed = 9; //not set, null, 0 means not redeemed
+}
+
+//this is stage history for one clan member
+message PersistentClanEventRaidStageHistoryProto {
+	repeated PersistentClanEventUserRewardProto rewards = 1;
+	optional int32 eventId = 2;
+	optional int32 clanRaidId = 3;
+	optional int32 clanRaidStageId = 4;
+	optional int64 crsEndTime = 5;
+	optional int32 crsDmgDone = 6;
+	optional int32 stageHp = 7;
+	
+}
+
+message PersistentClanEventRaidHistoryProto {
+	optional int32 userId = 1;
+	optional int32 crDmg = 2;
+	optional int32 clanCrDmg = 3;
 }
 
 //------------------------------------------------------------------------------------------
