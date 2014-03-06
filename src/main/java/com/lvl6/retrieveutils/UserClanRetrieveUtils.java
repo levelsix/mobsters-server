@@ -322,9 +322,14 @@ import com.lvl6.utils.DBConnection;
     UserClanStatus status = UserClanStatus.valueOf(rs.getInt(i++));
 
     Date requestTime = null;
-    Timestamp ts = rs.getTimestamp(i++);
-    if (!rs.wasNull()) {
-      requestTime = new Date(ts.getTime());
+    try {
+    	Timestamp ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		requestTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("maybe user clan request time was null. userId=" + userId +
+    			"\t clanId=" + clanId, e);
     }
 
 
