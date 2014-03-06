@@ -119,8 +119,8 @@ public class ControllerConstants {
 	
 	//everything at index i goes together
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {12F, 15F, 15F, 11F};
-	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {12F, 15F, 11F, 15F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {11F, 15F, 15F, 11F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 11F, 15F};
 	
 //	public static final int TUTORIAL__EXISTING_BUILDING_ONE = 40;
 //	public static final float TUTORIAL__EXISTING_BUILDING_ONE_X = 12F;
