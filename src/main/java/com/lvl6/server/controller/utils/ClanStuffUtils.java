@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 
 
 public class ClanStuffUtils {
@@ -36,5 +37,26 @@ public class ClanStuffUtils {
   	
   	return new ClanEventPersistentForClan(clanId, clanEventPersistentId, crId, crsId,
   			stageStartTime, crsmId, stageMonsterStartTime);
+  }
+  
+  public static boolean firstUserClanStatusAboveSecond(UserClanStatus first,
+  		UserClanStatus second) {
+  	
+  	if (first.equals(second)) {
+  		return false;
+  	}
+  	if (UserClanStatus.LEADER.equals(second)) {
+  		return false;
+  	}
+  	if (UserClanStatus.MEMBER.equals(first)) {
+  		return false;
+  	}
+  	if (UserClanStatus.CAPTAIN.equals(first) &&
+  			UserClanStatus.JUNIOR_LEADER.equals(second)) {
+  		return false;
+  	}
+  	
+  	return true;
+
   }
 }

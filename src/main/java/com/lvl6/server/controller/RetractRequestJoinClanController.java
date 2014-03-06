@@ -8,20 +8,18 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.RetractRequestJoinClanRequestEvent;
 import com.lvl6.events.response.RetractRequestJoinClanResponseEvent;
-import com.lvl6.events.response.RetractRequestJoinClanResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto;
-import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RetractRequestJoinClanResponseProto.RetractRequestJoinClanStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
-import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -57,11 +55,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setClanId(clanId);
 
-    if (0 != clanId) {
-    	server.lockClan(clanId);
-    } else {
-    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    }
+    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
@@ -93,11 +87,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     		log.error("exception2 in RetractRequestJoinClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
-    		server.unlockClan(clanId);
-    	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	}
+    	server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 

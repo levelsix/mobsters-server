@@ -65,18 +65,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setRequesterId(requesterId);
     resBuilder.setAccept(accept);
 
-    int clanId = 0;
-    if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
-    }
+//    int clanId = 0;
+//    if (senderProto.hasClan() && null != senderProto.getClan()) {
+//    	clanId = senderProto.getClan().getClanId();
+//    }
     
-    if (0 != clanId) {
-    	server.lockClan(clanId);
-    } else {
-    	server.lockPlayers(userId, requesterId, this.getClass().getSimpleName());
-    }
+    server.lockPlayers(userId, requesterId, this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+      User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       User requester = RetrieveUtils.userRetrieveUtils().getUserById(requesterId);
 
       boolean legitDecision = checkLegitDecision(resBuilder, user, requester, accept);
@@ -122,11 +118,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in ApproveOrRejectRequestToJoinClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
-    		server.unlockClan(clanId);
-    	} else {
-    		server.unlockPlayers(userId, requesterId, this.getClass().getSimpleName());
-    	}
+    	server.unlockPlayers(userId, requesterId, this.getClass().getSimpleName());
     }
   }
 

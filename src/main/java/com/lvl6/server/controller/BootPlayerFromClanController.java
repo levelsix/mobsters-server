@@ -13,14 +13,12 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BootPlayerFromClanRequestEvent;
 import com.lvl6.events.response.BootPlayerFromClanResponseEvent;
-import com.lvl6.events.response.BootPlayerFromClanResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.User;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanRequestProto;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto;
-import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerFromClanStatus;
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
@@ -59,19 +57,15 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setPlayerToBoot(playerToBootId);
 
-    int clanId = 0;
+//    int clanId = 0;
+//    
+//    if (senderProto.hasClan() && null != senderProto.getClan()) {
+//    	clanId = senderProto.getClan().getClanId();
+//    }
     
-    if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
-    }
-    
-    if (0 != clanId) {
-    	server.lockClan(clanId);
-    } else {
     //MAYBE SHOULD LOCK THE playerToBootId INSTEAD OF userId
     //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	server.lockPlayer(playerToBootId, this.getClass().getSimpleName());
-    }
+    server.lockPlayer(playerToBootId, this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       User playerToBoot = RetrieveUtils.userRetrieveUtils().getUserById(playerToBootId);
@@ -109,11 +103,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     		log.error("exception2 in BootPlayerFromClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
-    		server.unlockClan(clanId);
-    	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	}
+    	server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
