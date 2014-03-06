@@ -145,7 +145,7 @@ public class ControllerConstants {
 	
 	public static final int TUTORIAL__INIT_CASH = 750;
 	public static final int TUTORIAL__INIT_OIL = 750;
-	public static final int TUTORIAL__INIT_GEMS = 750;
+	public static final int TUTORIAL__INIT_GEMS = 50;
 	
 	
 	
