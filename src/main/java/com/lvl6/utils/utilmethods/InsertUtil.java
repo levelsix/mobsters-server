@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
+import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
@@ -158,11 +159,18 @@ public interface InsertUtil {
 			Timestamp timeOfEntry, int clanEventPersistentId, int crId, int crsId,
 			Timestamp stageStartTime, int crsmId, Timestamp stageMonsterStartTime, boolean won);
 	
-	public abstract int insertIntoClanEventPersistentForUserHistory(Integer clanEventId,
-			Timestamp now, Map<Integer, ClanEventPersistentForUser> clanUserInfo);
+	public abstract int insertIntoCepfuRaidHistory(Integer clanEventId, Timestamp now,
+			Map<Integer, ClanEventPersistentForUser> clanUserInfo);	
 	
-	public abstract int insertIntoClanEventPersistentForUserHistoryDetail(
-			Timestamp crsmEndTime, Map<Integer, ClanEventPersistentForUser> clanUserInfo,
+	public abstract int insertIntoCepfuRaidStageHistory(Integer clanEventId,
+			Timestamp crsStartTime, Timestamp crsEndTime, int stageHp,
+			Map<Integer, ClanEventPersistentForUser> clanUserInfo);
+	
+	public abstract int insertIntoCepfuRaidStageMonsterHistory(Timestamp crsmEndTime,
+			Map<Integer, ClanEventPersistentForUser> clanUserInfo,
 			ClanEventPersistentForClan cepfc);
+	
+	public abstract List<Integer> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
+			Timestamp crsEndTime, int clanEventId, List<ClanEventPersistentUserReward> userRewards);
 	
 }

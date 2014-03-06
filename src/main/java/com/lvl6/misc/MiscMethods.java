@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -26,8 +27,10 @@ import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
+import com.lvl6.info.CityElement;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanRaid;
+import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
@@ -55,6 +58,7 @@ import com.lvl6.properties.Globals;
 import com.lvl6.properties.IAPValues;
 import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
+import com.lvl6.proto.CityProto.CityElementProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
@@ -64,6 +68,7 @@ import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Cl
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventUserProto.UpdateClientUserResponseProto;
 import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
@@ -71,6 +76,7 @@ import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
+import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
@@ -78,6 +84,7 @@ import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.TownHallProto;
+import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.PersistentEventProto;
 import com.lvl6.proto.TournamentStuffProto.TournamentEventProto;
@@ -134,6 +141,11 @@ public class MiscMethods {
   public static final String gems = "gems";
   public static final String oil = "oil";
   public static final String boosterPackId = "boosterPackId";
+  
+  public static final String CASH = "CASH";
+  public static final String OIL = "OIL";
+  public static final String MONSTER = "MONSTER";
+  
 
 
   public static Dialogue createDialogue(String dialogueBlob) {
@@ -267,6 +279,59 @@ public class MiscMethods {
       return -1;
     }     
 
+  }
+  
+  public static TutorialConstants createTutorialConstantsProto() {
+  	TutorialConstants.Builder tcb = TutorialConstants.newBuilder();
+  	
+  	tcb.setStartingMonsterId(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
+  	tcb.setEnemyMonsterId(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID);
+  	
+  	for (int i = 0; i < ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS.length; i++) {
+  		
+  		int structId = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS[i];
+  		float posX = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS[i];
+  		float posY = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS[i];
+  		
+  		TutorialStructProto tsp = createTutorialStructProto(structId, posX, posY);
+  		tcb.addTutorialStructures(tsp);
+  	}
+  	
+  	List<Integer> structureIdsToBeBuilt = 
+  			Arrays.asList(ControllerConstants.TUTORIAL__STRUCTURE_IDS_TO_BUILD);
+  	tcb.addAllStructureIdsToBeBuillt(structureIdsToBeBuilt);
+  	
+  	int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
+  	tcb.setCityId(cityId);
+  	List<CityElement> cityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
+  	for (CityElement ce : cityElements) {
+  		CityElementProto cep = CreateInfoProtoUtils
+  				.createCityElementProtoFromCityElement(ce);
+  		tcb.addCityOneElements(cep);
+  	}
+  	
+  	tcb.setCityElementIdForFirstDungeon(
+  			ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON);
+  	tcb.setCityElementIdForSecondDungeon(
+  			ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON);
+  	tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
+  	tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+  	
+  	tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
+  	tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
+  	tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
+  	return tcb.build();
+  }
+  
+  public static TutorialStructProto createTutorialStructProto(int structId, float posX,
+  		float posY) {
+  	TutorialStructProto.Builder tspb = TutorialStructProto.newBuilder();
+  	
+  	tspb.setStructId(structId);
+  	CoordinatePair cp = new CoordinatePair(posX, posY);
+  	CoordinateProto cpp = CreateInfoProtoUtils.createCoordinateProtoFromCoordinatePair(cp);
+  	tspb.setCoordinate(cpp);
+  	return tspb.build();
   }
 
   public static StartupConstants createStartupConstantsProto() {
@@ -1215,15 +1280,15 @@ public class MiscMethods {
     return newCost;
   }
 
-  public static StaticDataProto getAllStaticData(int userId) {
+  public static StaticDataProto getAllStaticData(int userId, boolean userIdSet) {
   	StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
   	
   	setPlayerCityExpansions(sdpb);
   	setCities(sdpb);
   	setTasks(sdpb);
   	setMonsters(sdpb);
-  	setUserLevelStuff(sdpb, userId);
-  	setInProgressAndAvailableQuests(sdpb, userId);
+  	setUserLevelStuff(sdpb);
+  	setInProgressAndAvailableQuests(sdpb, userId, userIdSet);
   	setBoosterPackStuff(sdpb);
   	setStructures(sdpb);
   	setEvents(sdpb);
@@ -1273,7 +1338,7 @@ public class MiscMethods {
       sdpb.addAllMonsters(CreateInfoProtoUtils.createMonsterProto(monster, monsterLvlInfo));
     }
   }
-  private static void setUserLevelStuff(Builder sdpb, int userId) {
+  private static void setUserLevelStuff(Builder sdpb) {
     //User level stuff
     Map<Integer, StaticUserLevelInfo> levelToStaticUserLevelInfo = 
         StaticUserLevelInfoRetrieveUtils.getAllStaticUserLevelInfo();
@@ -1287,7 +1352,11 @@ public class MiscMethods {
       sdpb.addSlip(slipb.build());
     }
   }
-  private static void setInProgressAndAvailableQuests(Builder sdpb, int userId) {
+  private static void setInProgressAndAvailableQuests(Builder sdpb, int userId,
+  		boolean userIdSet) {
+  	if (!userIdSet) {
+  		return;
+  	}
     List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
         .getUserQuestsForUser(userId);
 

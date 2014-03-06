@@ -7,7 +7,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
@@ -20,7 +22,6 @@ import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.utils.DBConnection;
-import com.lvl6.utils.StringUtils;
 
 @Component @DependsOn("gameServer") public class UserClanRetrieveUtils {
 
@@ -28,6 +29,46 @@ import com.lvl6.utils.StringUtils;
 
   private final String TABLE_NAME = DBConstants.TABLE_CLAN_FOR_USER;
 
+  public Map<Integer, UserClan> getUserClanForUsers(int clanId, List<Integer> userIds) {
+  	StringBuilder querySb = new StringBuilder();
+    querySb.append("SELECT * FROM ");
+    querySb.append(TABLE_NAME);
+    querySb.append(" WHERE ");
+    querySb.append(DBConstants.CLAN_FOR_USER__CLAN_ID);
+    querySb.append("=? AND ");
+    querySb.append(DBConstants.CLAN_FOR_USER__USER_ID);
+    querySb.append(" in (");
+    
+    int numQuestionMarks = userIds.size();
+    List<String> questionMarks = Collections.nCopies(numQuestionMarks, "?");
+    String questionMarkStr = com.lvl6.utils.utilmethods.StringUtils.csvList(questionMarks);
+    querySb.append(questionMarkStr);
+    querySb.append(");");
+    
+    List<Object> values = new ArrayList<Object>();
+    values.add(clanId);
+    values.addAll(userIds);
+    
+    String query = querySb.toString();
+    log.info("user clan query=" + query + "\t values=" + values);
+    
+    Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, UserClan> userIdsToStatuses = null;
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			userIdsToStatuses = convertRSToUserIdsToUserClans(rs);
+		} catch (Exception e) {
+    	log.error("user clan retrieve db error.", e);
+    	userIdsToStatuses = new HashMap<Integer, UserClan>();
+    } finally {
+    	DBConnection.get().close(rs, null, conn);
+    }
+		//should not be null
+    return userIdsToStatuses;
+  }
+  
   public List<UserClan> getUserClanMembersInClan(int clanId) {
     TreeMap <String, Object> paramsToVals = new TreeMap<String, Object>();
     paramsToVals.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
@@ -247,40 +288,29 @@ import com.lvl6.utils.StringUtils;
   	return new ArrayList<Integer>();
   }
 
-  //
-  //  private UserClan convertRSToSingleUserClan(ResultSet rs) {
-  //    if (rs != null) {
-  //      try {
-  //        rs.last();
-  //        rs.beforeFirst();
-  //        while(rs.next()) {
-  //          return convertRSRowToUserClan(rs);
-  //        }
-  //      } catch (SQLException e) {
-  //        log.error("problem with database call.", e);
-  //        
-  //      }
-  //    }
-  //    return null;
-  //  }
-  //
-  //  private List<UserClan> convertRSToUserClans(ResultSet rs) {
-  //    if (rs != null) {
-  //      try {
-  //        rs.last();
-  //        rs.beforeFirst();
-  //        List<UserClan> userClans = new ArrayList<UserClan>();
-  //        while(rs.next()) {
-  //          userClans.add(convertRSRowToUserClan(rs));
-  //        }
-  //        return userClans;
-  //      } catch (SQLException e) {
-  //        log.error("problem with database call.", e);
-  //        
-  //      }
-  //    }
-  //    return null;
-  //  }
+  private Map<Integer, UserClan> convertRSToUserIdsToUserClans(ResultSet rs) {
+  	Map<Integer, UserClan> userIdsToStatuses = new HashMap<Integer, UserClan>();
+  	if (rs != null) {
+  		try {
+  			rs.last();
+  			rs.beforeFirst();
+  			
+  			while(rs.next()) {
+  				UserClan uc = convertRSRowToUserClan(rs);
+  				if (null == uc) {
+  					continue;
+  				}
+  				int userId = uc.getUserId();
+  				userIdsToStatuses.put(userId, uc);
+  				
+  			}
+  		} catch (SQLException e) {
+  			log.error("problem with database call.", e);
+
+  		}
+  	}
+  	return userIdsToStatuses;
+  }
 
   /*
    * assumes the resultset is apprpriately set up. traverses the row it's on.

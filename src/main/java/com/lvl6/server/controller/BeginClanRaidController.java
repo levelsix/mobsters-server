@@ -40,6 +40,7 @@ import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.ClanEventUtil;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -74,8 +75,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 	public void setTimeUtils(TimeUtils timeUtils) {
 		this.timeUtils = timeUtils;
 	}
-
 	
+	@Autowired
+	protected ClanEventUtil clanEventUtil;
+	
+	public ClanEventUtil getClanEventUtil() {
+		return clanEventUtil;
+	}
+
+	public void setClanEventUtil(ClanEventUtil clanEventUtil) {
+		this.clanEventUtil = clanEventUtil;
+	}
+	
+	
+
 	public BeginClanRaidController() {
     numAllocatedThreads = 4;
   }
@@ -144,19 +157,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
         		curTime, setMonsterTeamForRaid, userMonsterIds, isFirstStage, clanInfoList);
       }
       
-      if (success && !setMonsterTeamForRaid) {
-      	ClanEventPersistentForClan cepfc = clanInfoList.get(0);
-      	PersistentClanEventClanInfoProto eventDetails = CreateInfoProtoUtils
-      			.createPersistentClanEventClanInfoProto(cepfc);
-      	resBuilder.setEventDetails(eventDetails);
-      }
-      
-      if (success && setMonsterTeamForRaid) {
-      	setClanAndUserDetails(resBuilder, userId, clanId, clanRaidId,
-      			userMonsterIds, userMonsters);
-      	
-        resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
-        log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
+      if (success) {
+      	if (!setMonsterTeamForRaid) {
+      		ClanEventPersistentForClan cepfc = clanInfoList.get(0);
+      		PersistentClanEventClanInfoProto eventDetails = CreateInfoProtoUtils
+      				.createPersistentClanEventClanInfoProto(cepfc);
+      		resBuilder.setEventDetails(eventDetails);
+      	}
+      	if (setMonsterTeamForRaid) {
+      		setClanAndUserDetails(resBuilder, userId, clanId, clanRaidId,
+      				userMonsterIds, userMonsters);
+      	}
+      	resBuilder.setStatus(BeginClanRaidStatus.SUCCESS);
+      	log.info("BEGIN CLAN RAID EVENT SUCCESS!!!!!!!");
       }
       
       BeginClanRaidResponseEvent resEvent = new BeginClanRaidResponseEvent(userId);
@@ -324,7 +337,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	return true;
   }
   
-  //copy pasted from RecordClanRaidStatsController.writeChangesToDB
+  //copy pasted from RecordClanRaidStatsController.writeChangesToD
   private void pushCurrentClanEventDataToHistory(int clanId, Timestamp now,
   		ClanEventPersistentForClan clanEvent) {
   	int clanEventPersistentId = clanEvent.getClanEventPersistentId();
@@ -357,8 +370,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	
   	if (null != clanUserInfo && !clanUserInfo.isEmpty()) {
   		//record whatever is in the ClanEventPersistentForUser
-  		numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistory(
-  				clanEventPersistentId, now, clanUserInfo);
+  		numInserted = InsertUtils.get().insertIntoCepfuRaidHistory(clanEventPersistentId,
+  				now, clanUserInfo);
   		log.info("rows inserted into clan raid info for user (should be " + 
   				clanUserInfo.size() + "): " + numInserted);
   		
@@ -397,12 +410,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   		ClanEventPersistentForClan cepfc = new ClanEventPersistentForClan(clanId,
   				clanEventPersistentId, clanRaidId, clanRaidStageId, curTime, crsmId, curTime);
   		clanInfo.add(cepfc);
+  		
+  		//since beginning the first stage of a clan raide stage, zero out the damage
+  		//for this raid for the clan in hazelcast
+  		getClanEventUtil().updateClanIdCrsmDmg(clanId, 0, true);
+  		
   	} else {
   		log.info("starting another clan raid stage!!!!!!!!!");
   		int numUpdated = UpdateUtils.get().updateClanEventPersistentForClanStageStartTime(
   				clanId, curTime);
   		log.info("num rows updated in clan raid info for clan table: " + numUpdated);
-
+  		
+  		ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+  				.getPersistentEventForClanId(clanId);
+  		clanInfo.add(cepfc);
   	}
   	
   	return true;

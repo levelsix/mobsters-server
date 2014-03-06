@@ -75,14 +75,26 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     LeaveClanRequestProto reqProto = ((LeaveClanRequestEvent)event).getLeaveClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
 
     LeaveClanResponseProto.Builder resBuilder = LeaveClanResponseProto.newBuilder();
+    resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    int clanId = 0;
+    if (senderProto.hasClan() && null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
+    
+    //maybe should get clan lock instead of locking person
+    
+    if (0 != clanId) {
+    	server.lockClan(clanId);
+    } else {
+    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      int clanId = (user == null) ? 0 : user.getClanId();
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
 
       List<Integer> clanOwnerIdList = new ArrayList<Integer>();
@@ -108,8 +120,21 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       }
     } catch (Exception e) {
       log.error("exception in LeaveClan processEvent", e);
+      try {
+    	  resBuilder.setStatus(LeaveClanStatus.FAIL_OTHER);
+    	  LeaveClanResponseEvent resEvent = new LeaveClanResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setLeaveClanResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in LeaveClan processEvent", e);
+    	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		server.unlockClan(clanId);
+    	} else {
+    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	}
     }
   }
 
@@ -147,12 +172,11 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   private boolean checkLegitLeave(Builder resBuilder, User user, Clan clan, 
   		List<Integer> clanOwnerIdList) {
     if (user == null || clan == null) {
-      resBuilder.setStatus(LeaveClanStatus.OTHER_FAIL);
       log.error("user is null");
       return false;      
     }
     if (user.getClanId() != clan.getId()) {
-      resBuilder.setStatus(LeaveClanStatus.NOT_IN_CLAN);
+      resBuilder.setStatus(LeaveClanStatus.FAIL_NOT_IN_CLAN);
       log.error("user's clan id is " + user.getClanId() + ", clan id is " + clan.getId());
       return false;
     }
@@ -171,7 +195,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     if (clanOwnerId == user.getId()) {
       List<UserClan> userClanMembersInClan = RetrieveUtils.userClanRetrieveUtils().getUserClanMembersInClan(clan.getId());
       if (userClanMembersInClan.size() > 1) {
-        resBuilder.setStatus(LeaveClanStatus.OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
+        resBuilder.setStatus(LeaveClanStatus.FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN);
         log.error("user is owner and he's not alone in clan, can't leave without switching ownership. user clan members are " 
             + userClanMembersInClan);
         return false;

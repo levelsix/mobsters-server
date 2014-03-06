@@ -42,6 +42,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
   @Autowired
 	protected HazelcastInstance hazel;
 	
+  //made this an IMap so I can query for monsters
   protected IMap<String, MonsterForPvp> idToMonsterForPvp;
   
 
@@ -79,7 +80,13 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
     //this will create the map if it doesn't exist
     idToMonsterForPvp = hazel.getMap(MONSTER_FOR_PVP_MAP);
     
-    addMonsterForPvpIndexes();
+    //in mvn clean test, error was
+    //Index can only be added before adding entries! Add indexes first and only once then put entries.
+    //so this might be the issue
+    if (null != idToMonsterForPvp && idToMonsterForPvp.isEmpty()) {
+    	log.info("adding indexes to MonsterForPvpRetrieveUtils.idToMonsterForPvp IMap");
+    	addMonsterForPvpIndexes();
+    }
     
     populateMonsterForPvp();
   }
@@ -153,7 +160,7 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 			  }    
 			}
 		} catch (Exception e) {
-    	log.error("task stage retrieve db error.", e);
+    	log.error("monster for pvp retrieve db error.", e);
     } finally {
     	DBConnection.get().close(rs, null, conn);
     }

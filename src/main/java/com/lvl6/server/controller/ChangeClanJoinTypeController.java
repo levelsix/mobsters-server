@@ -20,8 +20,8 @@ import com.lvl6.proto.EventClanProto.ChangeClanJoinTypeRequestProto;
 import com.lvl6.proto.EventClanProto.ChangeClanJoinTypeResponseProto;
 import com.lvl6.proto.EventClanProto.ChangeClanJoinTypeResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.ChangeClanJoinTypeResponseProto.ChangeClanJoinTypeStatus;
-import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -50,12 +50,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     ChangeClanJoinTypeRequestProto reqProto = ((ChangeClanJoinTypeRequestEvent)event).getChangeClanJoinTypeRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     boolean requestToJoinRequired = reqProto.getRequestToJoinRequired();
 
     ChangeClanJoinTypeResponseProto.Builder resBuilder = ChangeClanJoinTypeResponseProto.newBuilder();
+    resBuilder.setStatus(ChangeClanJoinTypeStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    int clanId = 0;
+    if (senderProto.hasClan() && null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
+    
+    if (0 != clanId) {
+    	server.lockClan(clanId);
+    } else {
+    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
@@ -81,20 +92,32 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       }
     } catch (Exception e) {
       log.error("exception in ChangeClanJoinType processEvent", e);
+      try {
+    	  resBuilder.setStatus(ChangeClanJoinTypeStatus.FAIL_OTHER);
+    	  ChangeClanJoinTypeResponseEvent resEvent = new ChangeClanJoinTypeResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setChangeClanJoinTypeResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in ChangeClanJoinType processEvent", e);
+    	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		server.unlockClan(clanId);
+    	} else {
+    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	}
     }
   }
 
   private boolean checkLegitChange(Builder resBuilder, User user, Clan clan,
       boolean requestToJoinRequired) {
     if (user == null || clan == null) {
-      resBuilder.setStatus(ChangeClanJoinTypeStatus.OTHER_FAIL);
       log.error("user is " + user + ", clan is " + clan);
       return false;      
     }
     if (user.getClanId() <= 0) {
-      resBuilder.setStatus(ChangeClanJoinTypeStatus.NOT_IN_CLAN);
+      resBuilder.setStatus(ChangeClanJoinTypeStatus.FAIL_NOT_IN_CLAN);
       log.error("user not in clan");
       return false;      
     }
@@ -102,6 +125,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     int clanId = user.getClanId();
     List<Integer> statuses = new ArrayList<Integer>();
     statuses.add(UserClanStatus.LEADER_VALUE);
+    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
     //should just be one id
@@ -111,7 +135,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     
     if (clanOwnerId != user.getId()) {
-      resBuilder.setStatus(ChangeClanJoinTypeStatus.NOT_OWNER);
+      resBuilder.setStatus(ChangeClanJoinTypeStatus.FAIL_NOT_OWNER);
       log.error("clan owner isn't this guy, clan owner id is " + clanOwnerId);
       return false;      
     }

@@ -1,7 +1,9 @@
 package com.lvl6.server.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,13 +49,23 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     BootPlayerFromClanRequestProto reqProto = ((BootPlayerFromClanRequestEvent)event).getBootPlayerFromClanRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int playerToBootId = reqProto.getPlayerToBoot();
 
     BootPlayerFromClanResponseProto.Builder resBuilder = BootPlayerFromClanResponseProto.newBuilder();
+    resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
     resBuilder.setPlayerToBoot(playerToBootId);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    int clanId = 0;
+//    
+//    if (senderProto.hasClan() && null != senderProto.getClan()) {
+//    	clanId = senderProto.getClan().getClanId();
+//    }
+    
+    //MAYBE SHOULD LOCK THE playerToBootId INSTEAD OF userId
+    //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    server.lockPlayer(playerToBootId, this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       User playerToBoot = RetrieveUtils.userRetrieveUtils().getUserById(playerToBootId);
@@ -81,15 +93,24 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
       }
     } catch (Exception e) {
       log.error("exception in BootPlayerFromClan processEvent", e);
+      try {
+    	  resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
+    	  BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setBootPlayerFromClanResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in BootPlayerFromClan processEvent", e);
+    	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
   private boolean checkLegitBoot(Builder resBuilder, User user,
       User playerToBoot) {
     if (user == null || playerToBoot == null) {
-      resBuilder.setStatus(BootPlayerFromClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
       log.error("user is " + user + ", playerToBoot is " + playerToBoot);
       return false;      
     }
@@ -97,21 +118,23 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     int clanId = user.getClanId();
     List<Integer> statuses = new ArrayList<Integer>();
     statuses.add(UserClanStatus.LEADER_VALUE);
+    statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
     		.getUserIdsWithStatuses(clanId, statuses);
-    //should just be one id
-    int clanOwnerId = 0;
+    
+    Set<Integer> uniqUserIds = new HashSet<Integer>(); 
     if (null != userIds && !userIds.isEmpty()) {
-    	clanOwnerId = userIds.get(0);
+    	uniqUserIds.addAll(userIds);
     }
     
-    if (clanOwnerId != user.getId()) {
-      resBuilder.setStatus(BootPlayerFromClanStatus.NOT_OWNER_OF_CLAN);
-      log.error("clan owner isn't this guy, clan owner id is " + clanOwnerId);
+    int userId = user.getId();
+    if (!uniqUserIds.contains(userId)) {
+      resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_NOT_AUTHORIZED);
+      log.error("user can't boot player. user=" + user +"\t playerToBoot=" + playerToBoot);
       return false;      
     }
     if (playerToBoot.getClanId() != user.getClanId()) {
-      resBuilder.setStatus(BootPlayerFromClanStatus.BOOTED_NOT_IN_CLAN);
+      resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_BOOTED_NOT_IN_CLAN);
       log.error("playerToBoot is not in user clan. playerToBoot is in " + playerToBoot.getClanId());
       return false;
     }

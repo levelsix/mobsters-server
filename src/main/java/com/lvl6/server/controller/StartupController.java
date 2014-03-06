@@ -35,10 +35,12 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.StartupRequestEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
+import com.lvl6.info.CepfuRaidStageHistory;
 import com.lvl6.info.Clan;
 import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
+import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
@@ -60,11 +62,13 @@ import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupStatus;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.UpdateStatus;
 import com.lvl6.proto.MonsterStuffProto.FullUserMonsterProto;
 import com.lvl6.proto.MonsterStuffProto.UserEnhancementItemProto;
@@ -80,9 +84,11 @@ import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
 import com.lvl6.proto.UserProto.UserFacebookInviteForSlotProto;
 import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.OfflinePvpUser;
+import com.lvl6.retrieveutils.CepfuRaidStageHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.ClanChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
 import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
+import com.lvl6.retrieveutils.ClanEventPersistentUserRewardRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
 import com.lvl6.retrieveutils.EventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.FirstTimeUsersRetrieveUtils;
@@ -101,6 +107,7 @@ import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.spring.AppContext;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -177,8 +184,18 @@ public class StartupController extends EventController {
 		this.locker = locker;
 	}
 
+	@Autowired
+	protected TimeUtils timeUtils;
 	
+	public TimeUtils getTimeUtils() {
+		return timeUtils;
+	}
+
+	public void setTimeUtils(TimeUtils timeUtils) {
+		this.timeUtils = timeUtils;
+	}
 	
+
 	@Override
   public RequestEvent createRequestEvent() {
     return new StartupRequestEvent();
@@ -251,11 +268,11 @@ public class StartupController extends EventController {
           setBoosterPurchases(resBuilder);
           setFacebookAndExtraSlotsStuff(resBuilder, user, userId);
           setCompletedTasks(resBuilder, userId);
-          setAllStaticData(resBuilder, userId);
+          setAllStaticData(resBuilder, userId, true);
           setEventStuff(resBuilder, userId);
           //if server sees that the user is in a pvp battle, decrement user's elo
           pvpBattleStuff(user, userId, freshRestart); 
-          setClanRaidStuff(resBuilder, user, userId);
+          setClanRaidStuff(resBuilder, user, userId, now);
           
           
           setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
@@ -278,6 +295,10 @@ public class StartupController extends EventController {
         }
       } else {
         log.info("tutorial player with udid " + udid);
+        
+        TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
+        resBuilder.setTutorialConstants(tc);
+        setAllStaticData(resBuilder, 0, false);
 
         boolean userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
         int numOldAccounts = RetrieveUtils.userRetrieveUtils().numAccountsForUDID(udid);
@@ -881,8 +902,8 @@ public class StartupController extends EventController {
   	resBuilder.addAllCompletedTaskIds(taskIds);
   }
   
-  private void setAllStaticData(Builder resBuilder, int userId) {
-  	StaticDataProto sdp = MiscMethods.getAllStaticData(userId);
+  private void setAllStaticData(Builder resBuilder, int userId, boolean userIdSet) {
+  	StaticDataProto sdp = MiscMethods.getAllStaticData(userId, userIdSet);
   	
   	resBuilder.setStaticDataStuffProto(sdp);
   }
@@ -968,7 +989,8 @@ public class StartupController extends EventController {
   }
   
   
-  private void setClanRaidStuff(Builder resBuilder, User user, int userId) {
+  private void setClanRaidStuff(Builder resBuilder, User user, int userId, Timestamp now) {
+  	Date nowDate = new Date(now.getTime());
   	int clanId = user.getClanId();
   	
   	if (clanId <= 0) {
@@ -1010,8 +1032,38 @@ public class StartupController extends EventController {
   				.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
   		resBuilder.addCurRaidClanUserInfo(pceuip);
   	}
+  	
+  	setClanRaidHistoryStuff(resBuilder, userId, nowDate);
+  	
   }
   
+  private void setClanRaidHistoryStuff(Builder resBuilder, int userId, Date nowDate) {
+   	
+  	//the raid stage and reward history for past 7 days
+  	int nDays = ControllerConstants.CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY; 
+  	Map<Date, CepfuRaidStageHistory> timesToRaidStageHistory =
+  			CepfuRaidStageHistoryRetrieveUtils.getRaidStageHistoryForPastNDaysForUserId(
+  					userId, nDays, nowDate, timeUtils);
+  	
+  	Map<Date, List<ClanEventPersistentUserReward>> timesToUserRewards =
+  			ClanEventPersistentUserRewardRetrieveUtils.getCepUserRewardForPastNDaysForUserId(
+  					userId, nDays, nowDate, timeUtils);
+  	
+  	//possible for ClanRaidStageHistory to have no rewards if clan didn't beat stage
+  	for (Date aDate : timesToRaidStageHistory.keySet()) {
+  		CepfuRaidStageHistory cepfursh = timesToRaidStageHistory.get(aDate);
+  		List<ClanEventPersistentUserReward> rewards = null; 
+  		
+  		if (timesToUserRewards.containsKey(aDate)) {
+  			rewards = timesToUserRewards.get(aDate);
+  		}
+  		
+  		PersistentClanEventRaidStageHistoryProto stageProto =
+  				CreateInfoProtoUtils.createPersistentClanEventRaidStageHistoryProto(cepfursh, rewards);
+  		
+  		resBuilder.addRaidStageHistory(stageProto);
+  	}
+  }
   
   
   

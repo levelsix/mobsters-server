@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +16,17 @@ import com.lvl6.events.request.RequestJoinClanRequestEvent;
 import com.lvl6.events.response.RequestJoinClanResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
+import com.lvl6.info.ClanEventPersistentForClan;
+import com.lvl6.info.ClanEventPersistentForUser;
+import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.User;
 import com.lvl6.info.UserClan;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.misc.Notification;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
+import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.RequestJoinClanRequestProto;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto;
@@ -28,7 +34,10 @@ import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.RequestJoinClanResponseProto.RequestJoinClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.retrieveutils.ClanEventPersistentForClanRetrieveUtils;
+import com.lvl6.retrieveutils.ClanEventPersistentForUserRetrieveUtils;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.server.controller.utils.MonsterStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -63,7 +72,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setClanId(clanId);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    if (0 != clanId) {
+    	server.lockClan(clanId);
+    } else {
+    	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
@@ -90,6 +103,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (successful) {
         resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(clan));
         resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(clan));
+        sendClanRaidStuff(resBuilder, clan, user);
       }
       RequestJoinClanResponseEvent resEvent = new RequestJoinClanResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
@@ -103,6 +117,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       server.writeEvent(resEvent);
       
       if (successful) {
+      	resBuilder.clearEventDetails(); //could just get rid of this line
+      	resBuilder.clearClanUsersDetails(); //could just get rid of this line
+      	resEvent.setRequestJoinClanResponseProto(resBuilder.build());
         server.writeClanEvent(resEvent, clan.getId());
         
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
@@ -114,7 +131,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     } catch (Exception e) {
       log.error("exception in RequestJoinClan processEvent", e);
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		server.unlockClan(clanId);
+    	} else {
+    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	}
     }
   }
 
@@ -238,6 +259,43 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    aNotification.setGeneralNotificationResponseProto(notificationProto.build());
 //    
 //    server.writeAPNSNotificationOrEvent(aNotification);
+  }
+  
+  private void sendClanRaidStuff(Builder resBuilder, Clan clan, User user) {
+  	if (!RequestJoinClanStatus.JOIN_SUCCESS.equals(resBuilder.getStatus())) {
+  		return;
+  	}
+  	
+  	int clanId = clan.getId();
+  	ClanEventPersistentForClan cepfc = ClanEventPersistentForClanRetrieveUtils
+  			.getPersistentEventForClanId(clanId);
+  	
+  	//send to the user the current clan raid details for the clan
+  	if (null != cepfc) {
+  		PersistentClanEventClanInfoProto updatedEventDetails = CreateInfoProtoUtils
+  				.createPersistentClanEventClanInfoProto(cepfc);
+  		resBuilder.setEventDetails(updatedEventDetails);
+  	}
+  	
+  	Map<Integer, ClanEventPersistentForUser> userIdToCepfu =
+  			ClanEventPersistentForUserRetrieveUtils.getPersistentEventUserInfoForClanId(clanId);
+  	
+  	
+  	//send to the user the current clan raid details for all the users
+  	if (!userIdToCepfu.isEmpty()) {
+    	//whenever server has this information send it to the clients
+    	List<Long> userMonsterIds = MonsterStuffUtils.getUserMonsterIdsInClanRaid(userIdToCepfu);
+    	
+    	Map<Long, MonsterForUser> idsToUserMonsters = RetrieveUtils.monsterForUserRetrieveUtils()
+    			.getSpecificUserMonsters(userMonsterIds);
+    	
+    	for (ClanEventPersistentForUser cepfu : userIdToCepfu.values()) {
+    		PersistentClanEventUserInfoProto pceuip = CreateInfoProtoUtils
+    				.createPersistentClanEventUserInfoProto(cepfu, idsToUserMonsters, null);
+    		resBuilder.addClanUsersDetails(pceuip);
+    	}
+
+  	}
   }
   
 }

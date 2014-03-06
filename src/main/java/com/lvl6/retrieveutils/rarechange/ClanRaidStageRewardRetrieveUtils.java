@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +70,7 @@ import com.lvl6.utils.DBConnection;
 
   private static void setStaticClanRaidIdsToClanRaidStageRewardIdsToClanRaidStageRewards() {
     log.debug("setting static map of clan raid stage ids to rewards");
+    Random rand = new Random();
 
     Connection conn = DBConnection.get().getConnection();
     ResultSet rs = null;
@@ -90,6 +92,7 @@ import com.lvl6.utils.DBConnection;
 			        if (clanRaidStageReward == null) {
 			          continue;
 			        }
+			        clanRaidStageReward.setRand(rand);
 			        
 			        int clanRaidStageId = clanRaidStageReward.getClanRaidStageId();
 			        //base case, no key with clanRaid id exists, so create map with

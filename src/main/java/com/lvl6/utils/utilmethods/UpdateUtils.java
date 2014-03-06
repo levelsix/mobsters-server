@@ -995,7 +995,7 @@ public class UpdateUtils implements UpdateUtil {
 					null);
 			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID, crsmId);
 			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__STAGE_MONSTER_START_TIME,
-					crsmId);
+					null);
 
 			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
 					absoluteParams, conditionParams, "and");

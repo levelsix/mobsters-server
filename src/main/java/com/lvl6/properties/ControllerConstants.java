@@ -89,6 +89,10 @@ public class ControllerConstants {
 	//EVENT PERSISTENT STUFF
 	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
 	
+	//CLAN EVENT PERSISTENT
+	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
+	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
+	
 	
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
@@ -101,6 +105,47 @@ public class ControllerConstants {
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
 	
+	
+	
+	
+	
+	
+	//TUTORIAL CONSTANTS
+	//MONSTER IDS 1 AND 3
+	public static final int TUTORIAL__STARTING_MONSTER_ID = 1;
+	public static final int TUTORIAL__ENEMY_MONSTER_ID = 3;
+	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 7;
+	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 5;
+	
+	//everything at index i goes together
+	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {15F, 11F, 15F, 11F};
+	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {15F, 11F, 11F, 15F};
+	
+//	public static final int TUTORIAL__EXISTING_BUILDING_ONE = 40;
+//	public static final float TUTORIAL__EXISTING_BUILDING_ONE_X = 12F;
+//	public static final float TUTORIAL__EXISTING_BUILDING_ONE_Y = 12F;
+	
+//	public static final int TUTORIAL__EXISTING_BUILDING_TWO = 80;
+//	public static final float TUTORIAL__EXISTING_BUILDING_TWO_X = 15F;
+//	public static final float TUTORIAL__EXISTING_BUILDING_TWO_Y = 15F;
+	
+//	public static final int TUTORIAL__EXISTING_BUILDING_THREE = 120;
+//	public static final float TUTORIAL__EXISTING_BUILDING_THREE_X = 15F;
+//	public static final float TUTORIAL__EXISTING_BUILDING_THREE_Y = 11F;
+	
+//	public static final int TUTORIAL__EXISTING_BUILDING_FOUR = 140;
+//	public static final float TUTORIAL__EXISTING_BUILDING_FOUR_X = 11F;
+//	public static final float TUTORIAL__EXISTING_BUILDING_FOUR_Y = 15F;
+	
+	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
+	public static final int TUTORIAL__CITY_ONE_ID = 1;
+	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON = 5;
+	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON = 6;
+	
+	public static final int TUTORIAL__INIT_CASH = 750;
+	public static final int TUTORIAL__INIT_OIL = 750;
+	public static final int TUTORIAL__INIT_GEMS = 50;
 	
 	
 	

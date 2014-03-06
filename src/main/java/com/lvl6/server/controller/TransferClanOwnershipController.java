@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.TransferClanOwnershipRequestEvent;
 import com.lvl6.events.response.TransferClanOwnershipResponseEvent;
+import com.lvl6.events.response.TransferClanOwnershipResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
 import com.lvl6.info.Clan;
 import com.lvl6.info.User;
@@ -18,6 +19,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipRequestProto;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto;
+import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.TransferClanOwnershipStatus;
 import com.lvl6.proto.UserProto.MinimumUserProto;
@@ -50,9 +52,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     TransferClanOwnershipRequestProto reqProto = ((TransferClanOwnershipRequestEvent)event).getTransferClanOwnershipRequestProto();
 
     MinimumUserProto senderProto = reqProto.getSender();
+    int userId = senderProto.getUserId();
     int newClanOwnerId = reqProto.getNewClanOwnerId();
 
     TransferClanOwnershipResponseProto.Builder resBuilder = TransferClanOwnershipResponseProto.newBuilder();
+    resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -83,6 +87,15 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     } catch (Exception e) {
       log.error("exception in TransferClanOwnership processEvent", e);
+      try {
+    	  resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
+    	  TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(userId);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setTransferClanOwnershipResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in TransferClanOwnership processEvent", e);
+    	}
     } finally {
       server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
@@ -90,18 +103,18 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   private boolean checkLegitTransfer(Builder resBuilder, User user, User newClanOwner, Clan clan) {
     if (user == null || newClanOwner == null) {
-      resBuilder.setStatus(TransferClanOwnershipStatus.OTHER_FAIL);
+      resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
       log.error("user is " + user + ", new clan owner is " + newClanOwner);
       return false;      
     }
     if (user.getClanId() <= 0) {
-      resBuilder.setStatus(TransferClanOwnershipStatus.NOT_OWNER);
+      resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
       log.error("user not in clan. user=" + user);
       return false;      
     }
     
     if (newClanOwner.getClanId() != user.getClanId()) {
-      resBuilder.setStatus(TransferClanOwnershipStatus.NEW_OWNER_NOT_IN_CLAN);
+      resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_NEW_OWNER_NOT_IN_CLAN);
       log.error("new owner not in same clan as user. new owner= " + newClanOwner + ", user is " + user);
       return false;     
     }
@@ -118,7 +131,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
     
     if (clan == null || clanOwnerId != user.getId()) {
-      resBuilder.setStatus(TransferClanOwnershipStatus.NOT_OWNER);
+      resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_NOT_AUTHORIZED);
       log.error("clan is " + clan + ", and user isn't owner");
       return false;      
     }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class StructureTownHall implements Serializable {
 
-	private static final long serialVersionUID = 5154373447990356075L;
+	private static final long serialVersionUID = 3098858652882579526L;
 	private int structId;
 	private int numResourceOneGenerators;
 	private int numResourceOneStorages;
@@ -15,11 +15,13 @@ public class StructureTownHall implements Serializable {
 	private int numMonsterSlots;
 	private int numLabs;
 	private int pvpQueueCashCost;
+	private int resourceCapacity;
 	
 	public StructureTownHall(int structId, int numResourceOneGenerators,
 			int numResourceOneStorages, int numResourceTwoGenerators,
 			int numResourceTwoStorages, int numHospitals, int numResidences,
-			int numMonsterSlots, int numLabs, int pvpQueueCashCost) {
+			int numMonsterSlots, int numLabs, int pvpQueueCashCost,
+			int resourceCapacity) {
 		super();
 		this.structId = structId;
 		this.numResourceOneGenerators = numResourceOneGenerators;
@@ -31,6 +33,7 @@ public class StructureTownHall implements Serializable {
 		this.numMonsterSlots = numMonsterSlots;
 		this.numLabs = numLabs;
 		this.pvpQueueCashCost = pvpQueueCashCost;
+		this.resourceCapacity = resourceCapacity;
 	}
 
 	public int getStructId() {
@@ -113,6 +116,14 @@ public class StructureTownHall implements Serializable {
 		this.pvpQueueCashCost = pvpQueueCashCost;
 	}
 
+	public int getResourceCapacity() {
+		return resourceCapacity;
+	}
+
+	public void setResourceCapacity(int resourceCapacity) {
+		this.resourceCapacity = resourceCapacity;
+	}
+
 	@Override
 	public String toString() {
 		return "StructureTownHall [structId=" + structId
@@ -122,7 +133,8 @@ public class StructureTownHall implements Serializable {
 				+ ", numResourceTwoStorages=" + numResourceTwoStorages
 				+ ", numHospitals=" + numHospitals + ", numResidences=" + numResidences
 				+ ", numMonsterSlots=" + numMonsterSlots + ", numLabs=" + numLabs
-				+ ", pvpQueueCashCost=" + pvpQueueCashCost + "]";
+				+ ", pvpQueueCashCost=" + pvpQueueCashCost + ", resourceCapacity="
+				+ resourceCapacity + "]";
 	}
 	
 }

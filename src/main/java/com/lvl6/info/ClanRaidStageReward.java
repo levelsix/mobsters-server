@@ -1,12 +1,12 @@
 package com.lvl6.info;
 
 import java.io.Serializable;
+import java.util.Random;
 
+//the oil, cash, monster rewards can be set or not set; not mutually exclusive
 public class ClanRaidStageReward implements Serializable {
-	//only oil, cash, or monster stuff may be set at on time. The three are mutually
-	//exclusive
 	
-	private static final long serialVersionUID = -4986817946989780266L;
+	private static final long serialVersionUID = 5751587703340719676L;
 	private int id;
 	private int clanRaidStageId;
 	private int minOilReward;
@@ -14,7 +14,10 @@ public class ClanRaidStageReward implements Serializable {
 	private int minCashReward;
 	private int maxCashReward;
 	private int monsterId;
-	private int expectedMonsterRewardQuantity;
+	private int expectedMonsterRewardQuantity;//also monster drop rate multiplier
+	
+	//not part of the table, just for convenience
+	private Random rand;
 	
 	public ClanRaidStageReward(int id, int clanRaidStageId, int minOilReward,
 			int maxOilReward, int minCashReward, int maxCashReward, int monsterId,
@@ -29,6 +32,43 @@ public class ClanRaidStageReward implements Serializable {
 		this.monsterId = monsterId;
 		this.expectedMonsterRewardQuantity = expectedMonsterRewardQuantity;
 	}
+	
+  //covenience methods--------------------------------------------------------
+  public Random getRand() {
+    return rand;
+  }
+
+  public void setRand(Random rand) {
+    this.rand = rand;
+  }
+  
+  public int getCashDrop() {
+    //example goal: [min,max]=[5, 10], transform range to start at 0.
+    //[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
+    //this means there are (10-5)+1 possible numbers
+    
+    int minMaxDiff = getMaxCashReward() - getMinCashReward();
+    int randCash = rand.nextInt(minMaxDiff + 1); 
+
+    //number generated in [0, max-min] range, but need to transform
+    //back to original range [min, max]. so add min. [0+min, max-min+min]
+    return randCash + getMinCashReward();
+  }
+  
+  public int getOilDrop() {
+    //example goal: [min,max]=[5, 10], transform range to start at 0.
+    //[min-min, max-min] = [0,max-min] = [0,10-5] = [0,5]
+    //this means there are (10-5)+1 possible numbers
+    
+    int minMaxDiff = getMaxOilReward() - getMinOilReward();
+    int randCash = rand.nextInt(minMaxDiff + 1); 
+
+    //number generated in [0, max-min] range, but need to transform
+    //back to original range [min, max]. so add min. [0+min, max-min+min]
+    return randCash + getMinOilReward();
+  }
+  
+  //end covenience methods--------------------------------------------------------
 
 	public int getId() {
 		return id;

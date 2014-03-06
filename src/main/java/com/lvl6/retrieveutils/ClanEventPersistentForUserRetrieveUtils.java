@@ -3,7 +3,10 @@ package com.lvl6.retrieveutils;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.utils.DBConnection;
+import com.lvl6.utils.utilmethods.StringUtils;
 
 @Component @DependsOn("gameServer") public class ClanEventPersistentForUserRetrieveUtils {
 
@@ -68,6 +72,100 @@ import com.lvl6.utils.DBConnection;
     }
 		return clanPersistentEventUserInfo;
 	}
+	
+	public static int getTotalCrsmDmgForClanId(int clanId) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID);
+		sb.append(", SUM(");
+		sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE);
+		sb.append(") FROM ");
+		sb.append(DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER);
+		sb.append(" WHERE ");
+		sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID);
+		sb.append("=? AND ");
+		sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE);
+		sb.append(" IS NOT NULL;");
+		
+		List<Object> values = new ArrayList<Object>();
+		values.add(clanId);
+		
+		String query = sb.toString();
+		log.info("retrieving crsm damage for clan. query=" + query + "\t values=" + values);
+		
+		Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, Integer> clanIdToCrsmDmg = new HashMap<Integer, Integer>();
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			clanIdToCrsmDmg = convertRSToClanIdToCrsmDmg(rs);
+		} catch (Exception e) {
+			log.error("could not retrieve crsm damage.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+		
+		if (clanIdToCrsmDmg.containsKey(clanId)) {
+			return clanIdToCrsmDmg.get(clanId);
+		}
+		return 0;
+	}
+	
+	public static Map<Integer, Integer> getTotalCrsmDmgForClanIds(List<Integer> clanIds) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT DISTINCT(");
+		sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CLAN_ID);
+		sb.append("), SUM(");
+		sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE);
+		sb.append(") FROM ");
+		sb.append(DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER);
+		sb.append(" WHERE ");
+		
+		List<Object> values = new ArrayList<Object>();
+		
+		if (null != clanIds && !clanIds.isEmpty()) {
+			sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID);
+			sb.append(" IN (");
+
+			int amount = clanIds.size();
+			List<String> questions = Collections.nCopies(amount, "?");
+			String questionStr = StringUtils.csvList(questions);
+			sb.append(questionStr);
+			sb.append(") AND ");
+			
+			values.addAll(clanIds);
+		}
+		
+		sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE);
+		sb.append(" IS NOT null AND 1=?  GROUP BY ");
+		sb.append(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CLAN_ID);
+		
+		values.add(1);
+		
+		String query = sb.toString();
+		
+		if (null != clanIds && !clanIds.isEmpty()) {
+			log.info("retrieving crsm damage for clans. query=" + query + "\t values=" + values);
+		} else {
+			log.info("retrieving crsm damage for all clans. query=" + query);
+		}
+		
+		Connection conn = null;
+		ResultSet rs = null;
+		Map<Integer, Integer> clanIdToCrsmDmg = new HashMap<Integer, Integer>();
+		try {
+			conn = DBConnection.get().getConnection();
+			rs = DBConnection.get().selectDirectQueryNaive(conn, query, values);
+			clanIdToCrsmDmg = convertRSToClanIdToCrsmDmg(rs);
+		} catch (Exception e) {
+			log.error("could not retrieve crsm damage.", e);
+		} finally {
+			DBConnection.get().close(rs, null, conn);
+		}
+		
+		return clanIdToCrsmDmg;
+	}
 
 	private static Map<Integer, ClanEventPersistentForUser> grabClanEventPersistentForClanFromRS(
 			ResultSet rs) {
@@ -114,6 +212,37 @@ import com.lvl6.utils.DBConnection;
 		}
 		return null;
 	}
+	
+	private static Map<Integer, Integer> convertRSToClanIdToCrsmDmg(ResultSet rs) {
+		Map<Integer, Integer> clanIdToTotalCrsmDmg = new HashMap<Integer, Integer>();
+		
+		if (rs != null) {
+			try {
+				rs.last();
+				rs.beforeFirst();
+				
+				
+				while(rs.next()) {
+					int clanId = rs.getInt(1); 
+					int crsmDmg = rs.getInt(2);
+					
+					int sumCrsmDmg = 0;
+					
+					if (clanIdToTotalCrsmDmg.containsKey(clanId)) {
+						sumCrsmDmg = clanIdToTotalCrsmDmg.get(clanId);
+					}
+					
+					sumCrsmDmg += crsmDmg;
+					clanIdToTotalCrsmDmg.put(clanId, sumCrsmDmg);
+				}
+			} catch (SQLException e) {
+				log.error("problem with database call.", e);
+
+			}
+		}
+		return clanIdToTotalCrsmDmg;
+	}
+
 
 	/*
 	 * assumes the resultset is apprpriately set up. traverses the row it's on.

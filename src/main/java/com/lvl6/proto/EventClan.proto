@@ -47,9 +47,9 @@ message LeaveClanResponseProto {
 	
 	enum LeaveClanStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_IN_CLAN = 3;
-		OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 4;
+		FAIL_OTHER = 2;
+		FAIL_NOT_IN_CLAN = 3;
+		FAIL_OWNER_OF_CLAN_WITH_OTHERS_STILL_IN = 4;
 	}	
 }
 
@@ -69,6 +69,10 @@ message RequestJoinClanResponseProto {
 	optional MinimumUserProtoForClans requester = 4;
 	optional MinimumClanProto minClan = 5;
 	optional FullClanProtoWithClanSize fullClan = 6;
+
+	//these are only set if the user joins an open clan, the current raid info	
+	optional PersistentClanEventClanInfoProto eventDetails = 7;
+	repeated PersistentClanEventUserInfoProto clanUsersDetails = 8;
 	
 	enum RequestJoinClanStatus {
 		REQUEST_SUCCESS = 1;
@@ -94,9 +98,9 @@ message RetractRequestJoinClanResponseProto {
 	
 	enum RetractRequestJoinClanStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		ALREADY_IN_CLAN = 3;
-		DID_NOT_REQUEST = 4;
+		FAIL_OTHER = 2;
+		FAIL_ALREADY_IN_CLAN = 3;
+		FAIL_DID_NOT_REQUEST = 4;
 	}	
 }	
 
@@ -119,10 +123,10 @@ message ApproveOrRejectRequestToJoinClanResponseProto {
 	
 	enum ApproveOrRejectRequestToJoinClanStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_OWNER = 3;
-		NOT_A_REQUESTER = 4;
-		ALREADY_IN_A_CLAN = 5;
+		FAIL_OTHER = 2;
+		FAIL_NOT_AUTHORIZED = 3;
+		FAIL_NOT_A_REQUESTER = 4;
+		FAIL_ALREADY_IN_A_CLAN = 5;
 	}	
 }
 
@@ -177,9 +181,9 @@ message TransferClanOwnershipResponseProto {
 	
 	enum TransferClanOwnershipStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_OWNER = 3;
-		NEW_OWNER_NOT_IN_CLAN = 4;
+		FAIL_OTHER = 2;
+		FAIL_NOT_AUTHORIZED = 3;
+		FAIL_NEW_OWNER_NOT_IN_CLAN = 4;
 	}	
 }
 
@@ -199,10 +203,10 @@ message ChangeClanDescriptionResponseProto {
 	
 	enum ChangeClanDescriptionStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		TOO_LONG = 3;
-		NOT_IN_CLAN = 4;
-		NOT_OWNER = 5;
+		FAIL_OTHER = 2;
+		FAIL_TOO_LONG = 3;
+		FAIL_NOT_IN_CLAN = 4;
+		FAIL_NOT_AUTHORIZED = 5;
 	}	
 }
 
@@ -220,9 +224,9 @@ message BootPlayerFromClanResponseProto {
      
      enum BootPlayerFromClanStatus {
      	SUCCESS = 1;
-     	OTHER_FAIL = 2;
-     	NOT_OWNER_OF_CLAN = 3;
-     	BOOTED_NOT_IN_CLAN = 4;
+     	FAIL_OTHER = 2;
+     	FAIL_NOT_AUTHORIZED = 3;
+     	FAIL_BOOTED_NOT_IN_CLAN = 4;
      }
 }
 
@@ -242,9 +246,9 @@ message ChangeClanJoinTypeResponseProto {
 	
 	enum ChangeClanJoinTypeStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_IN_CLAN = 3;
-		NOT_OWNER = 4;
+		FAIL_OTHER = 2;
+		FAIL_NOT_IN_CLAN = 3;
+		FAIL_NOT_OWNER = 4;
 	}
 }
 
@@ -310,20 +314,6 @@ message AttackClanRaidMonsterRequestProto {
 	//health of user's monsters
 	repeated UserMonsterCurrentHealthProto monsterHealths = 5;
 	
-	//client hints to the server when to check to see if the clan_raid_stage_monster is dead
-	//so as to prevent the server from calculating if the monster is dead after every
-	//one of these events is fired
-	optional bool checkIfMonsterDied = 6;
-	
-	//will be set to true if the monster being attacked is the last monster, but
-	//will not trigger anything on the server unless checkIfMonsterDied is true
-	optional bool monsterIsLastInStage = 7;
-	
-	//will be set to true if the user is in the last stage, but will not trigger
-	//anything on the server unless monsterIsLastInStage and checkIfMonsterDied are true
-	optional bool stageIsLastInRaid = 8;
-	
-	
 	optional FullUserMonsterProto userMonsterThatAttacked = 9;
 	
 	//when user attacks, server is going to create a PersistentClanEventUserInfoProto
@@ -359,6 +349,12 @@ message AttackClanRaidMonsterResponseProto {
 	}
 }
 
+message AwardClanRaidStageRewardResponseProto {
+	//the rewards for the stage that was just completed
+	optional int32 crsId = 1;
+	repeated PersistentClanEventUserRewardProto allRewards = 2;
+}
+
 //------------------------------------------------------------------------------------------
 
 //sent in order to move all the current clan raid info into history (including clan users' info)
@@ -379,5 +375,28 @@ message RecordClanRaidStatsResponseProto {
 		SUCCESS = 1;
 		FAIL_MONSTER_ALREADY_DEAD = 2; //even though time ended, clan still progresses to next stage
 		FAIL_OTHER = 3;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
+message PromoteDemoteClanMemberRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 victim = 2;
+	optional UserClanStatus userClanStatus = 3 [default = MEMBER];
+}
+
+message PromoteDemoteClanMemberResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 victim = 2;
+	optional UserClanStatus userClanStatus = 3 [default = MEMBER];
+	
+	optional PromoteDemoteClanMemberStatus status = 4;
+	
+	enum PromoteDemoteClanMemberStatus {
+		SUCCESS = 1;
+		FAIL_NOT_IN_CLAN = 2;
+		FAIL_NOT_AUTHORIZED = 3;
+		FAIL_OTHER = 4;		
 	}
 }

@@ -46,6 +46,8 @@ enum ResourceType {
 	CASH = 1;
 	OIL = 2;
 	GEMS = 3;
+	
+	MONSTER = 20;
 }
 
 //------------------------------------------------------------------------------------------
@@ -133,6 +135,9 @@ message TownHallProto {
 	
 	//Cost for seeing one possible enemy to attack for pvp battles.
 	optional int32 pvpQueueCashCost = 10;
+	
+	//how much this town hall can hold
+	optional int32 resourceCapacity = 11;
 }
 
 //------------------------------------------------------------------------------------------
@@ -165,4 +170,9 @@ enum StructOrientation {
 }
 
 //------------------------------------------------------------------------------------------
+
+message TutorialStructProto {
+	optional int32 structId = 1;
+	optional CoordinateProto coordinate = 2;
+}
 

@@ -16,6 +16,8 @@ import com.lvl6.info.AnimatedSpriteOffset;
 import com.lvl6.info.BoosterDisplayItem;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.BoosterPack;
+import com.lvl6.info.CepfuRaidHistory;
+import com.lvl6.info.CepfuRaidStageHistory;
 import com.lvl6.info.City;
 import com.lvl6.info.CityElement;
 import com.lvl6.info.Clan;
@@ -23,6 +25,7 @@ import com.lvl6.info.ClanChatPost;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
+import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
@@ -85,7 +88,10 @@ import com.lvl6.proto.ClanProto.FullUserClanProto;
 import com.lvl6.proto.ClanProto.MinimumUserProtoForClans;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventRaidHistoryProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
+import com.lvl6.proto.ClanProto.PersistentClanEventUserRewardProto;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.ReferralNotificationProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.AnimatedSpriteOffsetProto;
@@ -766,7 +772,7 @@ public class CreateInfoProtoUtils {
   	thpb.setNumMonsterSlots(sth.getNumMonsterSlots());
   	thpb.setNumLabs(sth.getNumLabs());
   	thpb.setPvpQueueCashCost(sth.getPvpQueueCashCost());
-  	
+  	thpb.setResourceCapacity(sth.getResourceCapacity());
   	
   	return thpb.build();
   }
@@ -1783,6 +1789,80 @@ public class CreateInfoProtoUtils {
   	pceuipb.setUserMonsters(ucmtpb.build());
   	
   	return pceuipb.build();
+  }
+  
+  public static PersistentClanEventRaidStageHistoryProto createPersistentClanEventRaidStageHistoryProto(
+  		CepfuRaidStageHistory cepfursh, Collection<ClanEventPersistentUserReward> rewards) {
+  	PersistentClanEventRaidStageHistoryProto.Builder pcershpb =
+  			PersistentClanEventRaidStageHistoryProto.newBuilder();
+  	
+  	if (null != rewards && !rewards.isEmpty()) {
+  		for (ClanEventPersistentUserReward reward : rewards) {
+  			PersistentClanEventUserRewardProto rewardPRoto =
+  					createPersistentClanEventUserRewardProto(reward);
+  			pcershpb.addRewards(rewardPRoto);
+  		}
+  	}
+  	
+  	pcershpb.setEventId(cepfursh.getClanEventPersistentId());
+  	pcershpb.setClanRaidId(cepfursh.getCrId());
+  	pcershpb.setClanRaidId(cepfursh.getCrsId());
+  	
+  	Date endTime = cepfursh.getCrsEndTime();
+  	if (null != endTime) {
+  		pcershpb.setCrsEndTime(endTime.getTime());
+  	}
+  	pcershpb.setCrsDmgDone(cepfursh.getCrsDmgDone());
+  	pcershpb.setStageHp(cepfursh.getStageHealth());
+  	
+  	return pcershpb.build();
+  }
+  
+  public static PersistentClanEventUserRewardProto createPersistentClanEventUserRewardProto(
+  		ClanEventPersistentUserReward reward) {
+  	PersistentClanEventUserRewardProto.Builder pceurpb = PersistentClanEventUserRewardProto.newBuilder();
+  	
+  	pceurpb.setRewardId(reward.getId());
+  	pceurpb.setUserId(reward.getUserId());
+  	
+  	Date crsEndTime = reward.getCrsEndTime();
+  	if (null != crsEndTime) {
+  		pceurpb.setCrsEndTime(crsEndTime.getTime());
+  	}
+  	
+  	String aStr = reward.getResourceType();
+  	
+  	if (null != aStr) {
+  		try {
+  			ResourceType rt = ResourceType.valueOf(aStr);
+  			pceurpb.setResourceType(rt);
+  		} catch(Exception e) {
+  			log.info("maybe resource type null. ClanEventPersistentUserReward=" + reward);
+  		}
+  	}
+  	
+  	int staticDataId = reward.getStaticDataId();
+  	if (0 != staticDataId) {
+  		pceurpb.setStaticDataId(reward.getStaticDataId());
+  	}
+  	pceurpb.setQuantity(reward.getQuantity());
+  	
+  	Date timeRedeemed = reward.getTimeRedeemed();
+  	if (null != timeRedeemed) {
+  		pceurpb.setTimeRedeemed(timeRedeemed.getTime());
+  	}
+  	
+  	return pceurpb.build();
+  }
+  
+  public static PersistentClanEventRaidHistoryProto createPersistentClanEventRaidHistoryProto(
+  		CepfuRaidHistory cepfurh) {
+  	PersistentClanEventRaidHistoryProto.Builder pcerhpb = PersistentClanEventRaidHistoryProto.newBuilder();
+  	pcerhpb.setUserId(cepfurh.getUserId());
+  	pcerhpb.setCrDmg(cepfurh.getCrDmgDone());
+  	pcerhpb.setClanCrDmg(cepfurh.getClanCrDmg());
+  	
+  	return pcerhpb.build();
   }
   
 }

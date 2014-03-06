@@ -41,6 +41,7 @@ message StartupResponseProto {
     optional StartupStatus startupStatus= 3;
     optional UpdateStatus updateStatus= 4;
     optional StartupConstants startupConstants = 5;
+    optional TutorialConstants tutorialConstants = 34;
     
 	//only send the ones that are not redeemed, (incomplete and complete)
 	repeated FullUserQuestProto userQuests = 6;
@@ -90,7 +91,10 @@ message StartupResponseProto {
 	//current clan raid stats
 	optional PersistentClanEventClanInfoProto curRaidClanInfo = 31;
 	repeated PersistentClanEventUserInfoProto curRaidClanUserInfo = 32;
+
+	repeated PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;
 	
+	//optional TutorialConstants tutorialConstants = 34; //defined above, below #5
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
@@ -175,6 +179,29 @@ message StartupResponseProto {
 			optional float elementalStrength = 3;
 			optional float elementalWeakness = 4;
 		}
+	}
+	
+	message TutorialConstants {
+		optional int32 startingMonsterId = 1;
+		optional int32 enemyMonsterId = 2;
+		optional int32 enemyBossMonsterId = 9;
+		optional int32 markZMonsterId = 10;
+		
+		repeated TutorialStructProto tutorialStructures = 3;
+		repeated int32 structureIdsToBeBuillt = 4; //atm: cash printer/vault and oil vault
+		optional int32 cityId = 5;
+		repeated CityElementProto cityOneElements = 6; //the buildings in the city
+		optional int32 cityElementIdForFirstDungeon = 7;
+		optional int32 cityElementIdForSecondDungeon = 8;
+		
+		//optional int32 enemyBossMonsterId = 9; //defined above
+		//optional int32 markZMonsterId = 10; //defined above
+		
+		optional int32 cashInit = 11;
+		optional int32 oilInit = 12;
+		optional int32 gemsInit = 13;
+		 
+		
 	}
 	
     enum UpdateStatus {

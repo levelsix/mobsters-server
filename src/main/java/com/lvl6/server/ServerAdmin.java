@@ -209,7 +209,7 @@ public class ServerAdmin implements MessageListener<ServerMessage> {
 			while (playas.hasNext()) {
 				Integer playa = playas.next();
 				
-				StaticDataProto sdp = MiscMethods.getAllStaticData(playa);
+				StaticDataProto sdp = MiscMethods.getAllStaticData(playa, true);
 				PurgeClientStaticDataResponseEvent pcsd = new PurgeClientStaticDataResponseEvent(playa);
 				PurgeClientStaticDataResponseProto.Builder purgeProto = PurgeClientStaticDataResponseProto.newBuilder();
 				purgeProto.setSenderId(playa);

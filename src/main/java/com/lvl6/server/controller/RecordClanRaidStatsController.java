@@ -154,18 +154,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     	
     }
     
-    //not necessary, can just delete this part (purpose is to record in detail, a user's
-    //contribution to a clan raid)
-    try {
-    	if (errorless && null != clanEvent && !userIdToClanUserInfo.isEmpty()) {
-    		int numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistoryDetail(
-    				now, userIdToClanUserInfo, clanEvent);
-    		log.error("num raid detail inserted = " + numInserted + "\t should be " +
-    				userIdToClanUserInfo.size());
-    	}
-    } catch (Exception e) {
-    	log.warn("could not record more details about clan raid", e);
-    }
+//    //not necessary, can just delete this part (purpose is to record in detail, a user's
+//    //contribution to a clan raid) on the clan raid stage monster level
+//    try {
+//    	if (errorless && null != clanEvent && !userIdToClanUserInfo.isEmpty()) {
+//    		int numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistoryDetail(
+//    				now, userIdToClanUserInfo, clanEvent);
+//    		log.error("num raid detail inserted = " + numInserted + "\t should be " +
+//    				userIdToClanUserInfo.size());
+//    	}
+//    } catch (Exception e) {
+//    	log.warn("could not record more details about clan raid", e);
+//    }
   }
 
   private boolean checkLegitRequest(Builder resBuilder, MinimumUserProto mupfc,
@@ -212,8 +212,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	DeleteUtils.get().deleteClanEventPersistentForClan(clanId);
   	
   	if (null != clanUserInfo && !clanUserInfo.isEmpty()) {
-  		numInserted = InsertUtils.get().insertIntoClanEventPersistentForUserHistory(
-  				clanEventPersistentId, now, clanUserInfo);
+  		numInserted = InsertUtils.get().insertIntoCepfuRaidHistory(clanEventPersistentId,
+  				now, clanUserInfo);
   		//clan_event_persistent_for_user_history
   		log.info("rows inserted into clan raid info for user history (should be " + 
   				clanUserInfo.size() + "): " + numInserted);
