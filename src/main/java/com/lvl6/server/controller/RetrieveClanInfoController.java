@@ -144,7 +144,11 @@ import com.lvl6.utils.RetrieveUtils;
             	int userId = uc.getUserId();
             	User u = usersMap.get(userId);
             	
-            	float clanRaidContribution = userIdToClanRaidContribution.get(userId);
+            	//user might not have a clan raid entry, so
+            	float clanRaidContribution = 0F;
+            	if (userIdToClanRaidContribution.containsKey(userId)) {
+            		clanRaidContribution = userIdToClanRaidContribution.get(userId);
+            	}
               MinimumUserProtoForClans minUser = CreateInfoProtoUtils
               		.createMinimumUserProtoForClans(u, uc.getStatus(), clanRaidContribution);
               resBuilder.addMembers(minUser);
