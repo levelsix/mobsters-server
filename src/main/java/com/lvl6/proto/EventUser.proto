@@ -24,7 +24,11 @@ message UserCreateRequestProto {
      optional int64 timeOfStructBuild = 6;    //isn't used
      optional CoordinateProto structCoords = 7;
      optional bool usedDiamondsToBuilt = 8;
-     optional string facebookId = 9;
+     optional string facebookId = 9; //not used
+     
+     optional int32 cash = 10;
+     optional int32 oil = 11;
+     optional int32 gems = 12;
 }
 
 message UserCreateResponseProto {

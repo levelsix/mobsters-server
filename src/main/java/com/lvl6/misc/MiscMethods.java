@@ -317,6 +317,9 @@ public class MiscMethods {
   	tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
   	tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
   	
+  	tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
+  	tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
+  	tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
   	return tcb.build();
   }
   

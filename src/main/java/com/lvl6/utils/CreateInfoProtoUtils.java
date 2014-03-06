@@ -772,7 +772,7 @@ public class CreateInfoProtoUtils {
   	thpb.setNumMonsterSlots(sth.getNumMonsterSlots());
   	thpb.setNumLabs(sth.getNumLabs());
   	thpb.setPvpQueueCashCost(sth.getPvpQueueCashCost());
-  	
+  	thpb.setResourceCapacity(sth.getResourceCapacity());
   	
   	return thpb.build();
   }

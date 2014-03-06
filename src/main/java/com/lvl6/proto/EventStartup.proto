@@ -196,6 +196,12 @@ message StartupResponseProto {
 		
 		//optional int32 enemyBossMonsterId = 9; //defined above
 		//optional int32 markZMonsterId = 10; //defined above
+		
+		optional int32 cashInit = 11;
+		optional int32 oilInit = 12;
+		optional int32 gemsInit = 13;
+		 
+		
 	}
 	
     enum UpdateStatus {

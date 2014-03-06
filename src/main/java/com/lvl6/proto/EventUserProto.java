@@ -47,6 +47,18 @@ public final class EventUserProto {
     // optional string facebookId = 9;
     boolean hasFacebookId();
     String getFacebookId();
+    
+    // optional int32 cash = 10;
+    boolean hasCash();
+    int getCash();
+    
+    // optional int32 oil = 11;
+    boolean hasOil();
+    int getOil();
+    
+    // optional int32 gems = 12;
+    boolean hasGems();
+    int getGems();
   }
   public static final class UserCreateRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -280,6 +292,36 @@ public final class EventUserProto {
       }
     }
     
+    // optional int32 cash = 10;
+    public static final int CASH_FIELD_NUMBER = 10;
+    private int cash_;
+    public boolean hasCash() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    public int getCash() {
+      return cash_;
+    }
+    
+    // optional int32 oil = 11;
+    public static final int OIL_FIELD_NUMBER = 11;
+    private int oil_;
+    public boolean hasOil() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    public int getOil() {
+      return oil_;
+    }
+    
+    // optional int32 gems = 12;
+    public static final int GEMS_FIELD_NUMBER = 12;
+    private int gems_;
+    public boolean hasGems() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    public int getGems() {
+      return gems_;
+    }
+    
     private void initFields() {
       udid_ = "";
       name_ = "";
@@ -290,6 +332,9 @@ public final class EventUserProto {
       structCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
       usedDiamondsToBuilt_ = false;
       facebookId_ = "";
+      cash_ = 0;
+      oil_ = 0;
+      gems_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -329,6 +374,15 @@ public final class EventUserProto {
       }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         output.writeBytes(9, getFacebookIdBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeInt32(10, cash_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(11, oil_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeInt32(12, gems_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -374,6 +428,18 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getFacebookIdBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(10, cash_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, oil_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, gems_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -522,6 +588,12 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000080);
         facebookId_ = "";
         bitField0_ = (bitField0_ & ~0x00000100);
+        cash_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000200);
+        oil_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        gems_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
       
@@ -600,6 +672,18 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000100;
         }
         result.facebookId_ = facebookId_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.cash_ = cash_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.oil_ = oil_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.gems_ = gems_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -642,6 +726,15 @@ public final class EventUserProto {
         }
         if (other.hasFacebookId()) {
           setFacebookId(other.getFacebookId());
+        }
+        if (other.hasCash()) {
+          setCash(other.getCash());
+        }
+        if (other.hasOil()) {
+          setOil(other.getOil());
+        }
+        if (other.hasGems()) {
+          setGems(other.getGems());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -721,6 +814,21 @@ public final class EventUserProto {
             case 74: {
               bitField0_ |= 0x00000100;
               facebookId_ = input.readBytes();
+              break;
+            }
+            case 80: {
+              bitField0_ |= 0x00000200;
+              cash_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              oil_ = input.readInt32();
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000800;
+              gems_ = input.readInt32();
               break;
             }
           }
@@ -1060,6 +1168,69 @@ public final class EventUserProto {
         bitField0_ |= 0x00000100;
         facebookId_ = value;
         onChanged();
+      }
+      
+      // optional int32 cash = 10;
+      private int cash_ ;
+      public boolean hasCash() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public int getCash() {
+        return cash_;
+      }
+      public Builder setCash(int value) {
+        bitField0_ |= 0x00000200;
+        cash_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCash() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        cash_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 oil = 11;
+      private int oil_ ;
+      public boolean hasOil() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public int getOil() {
+        return oil_;
+      }
+      public Builder setOil(int value) {
+        bitField0_ |= 0x00000400;
+        oil_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearOil() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        oil_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 gems = 12;
+      private int gems_ ;
+      public boolean hasGems() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      public int getGems() {
+        return gems_;
+      }
+      public Builder setGems(int value) {
+        bitField0_ |= 0x00000800;
+        gems_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearGems() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        gems_ = 0;
+        onChanged();
+        return this;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.UserCreateRequestProto)
@@ -7653,64 +7824,65 @@ public final class EventUserProto {
     java.lang.String[] descriptorData = {
       "\n\017EventUser.proto\022\016com.lvl6.proto\032\022Monst" +
       "erStuff.proto\032\017Structure.proto\032\nUser.pro" +
-      "to\"\200\002\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
+      "to\"\251\002\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
       "\001(\t\022\014\n\004name\030\002 \001(\t\022\024\n\014referrerCode\030\003 \001(\t\022" +
       "\023\n\013deviceToken\030\004 \001(\t\022\034\n\024timeOfStructPurc" +
       "hase\030\005 \001(\003\022\031\n\021timeOfStructBuild\030\006 \001(\003\0225\n" +
       "\014structCoords\030\007 \001(\0132\037.com.lvl6.proto.Coo" +
       "rdinateProto\022\033\n\023usedDiamondsToBuilt\030\010 \001(" +
-      "\010\022\022\n\nfacebookId\030\t \001(\t\"\307\002\n\027UserCreateResp" +
-      "onseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.pro",
-      "to.FullUserProto\022H\n\006status\030\002 \001(\01628.com.l" +
-      "vl6.proto.UserCreateResponseProto.UserCr" +
-      "eateStatus\"\262\001\n\020UserCreateStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\025\n\021FAIL_INVALID_NAME\020\002\022&\n\"FAIL_USER" +
-      "_WITH_UDID_ALREADY_EXISTS\020\003\022\033\n\027FAIL_INVA" +
-      "LID_REFER_CODE\020\004\022%\n!FAIL_USER_WITH_FACEB" +
-      "OOK_ID_EXISTS\020\005\022\016\n\nFAIL_OTHER\020\006\"G\n\023Level" +
-      "UpRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
-      "6.proto.MinimumUserProto\"\366\001\n\024LevelUpResp" +
-      "onseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pro",
-      "to.MinimumUserProto\022B\n\006status\030\002 \001(\01622.co" +
-      "m.lvl6.proto.LevelUpResponseProto.LevelU" +
-      "pStatus\"h\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022 \n" +
-      "\034NOT_ENOUGH_EXP_TO_NEXT_LEVEL\020\002\022\030\n\024ALREA" +
-      "DY_AT_MAX_LEVEL\020\003\022\016\n\nOTHER_FAIL\020\004\"\220\001\n#Re" +
-      "trieveUsersForUserIdsRequestProto\0220\n\006sen" +
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\030\n\020requestedUserIds\030\002 \003(\005\022\035\n\025include" +
-      "CurMonsterTeam\030\003 \001(\010\"\315\001\n$RetrieveUsersFo" +
-      "rUserIdsResponseProto\0220\n\006sender\030\001 \001(\0132 .",
-      "com.lvl6.proto.MinimumUserProto\0225\n\016reque" +
-      "stedUsers\030\002 \003(\0132\035.com.lvl6.proto.FullUse" +
-      "rProto\022<\n\007curTeam\030\003 \003(\0132+.com.lvl6.proto" +
-      ".UserCurrentMonsterTeamProto\"F\n\022LogoutRe" +
-      "questProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\"h\n\035UpdateClientUser" +
-      "ResponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6" +
-      ".proto.FullUserProto\022\030\n\020timeOfUserUpdate" +
-      "\030\002 \001(\003\"[\n\031SetFacebookIdRequestProto\0220\n\006s" +
-      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser",
-      "Proto\022\014\n\004fbId\030\002 \001(\t\"\322\001\n\032SetFacebookIdRes" +
+      "\010\022\022\n\nfacebookId\030\t \001(\t\022\014\n\004cash\030\n \001(\005\022\013\n\003o" +
+      "il\030\013 \001(\005\022\014\n\004gems\030\014 \001(\005\"\307\002\n\027UserCreateRes",
+      "ponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.pr" +
+      "oto.FullUserProto\022H\n\006status\030\002 \001(\01628.com." +
+      "lvl6.proto.UserCreateResponseProto.UserC" +
+      "reateStatus\"\262\001\n\020UserCreateStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\025\n\021FAIL_INVALID_NAME\020\002\022&\n\"FAIL_USE" +
+      "R_WITH_UDID_ALREADY_EXISTS\020\003\022\033\n\027FAIL_INV" +
+      "ALID_REFER_CODE\020\004\022%\n!FAIL_USER_WITH_FACE" +
+      "BOOK_ID_EXISTS\020\005\022\016\n\nFAIL_OTHER\020\006\"G\n\023Leve" +
+      "lUpRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
+      "l6.proto.MinimumUserProto\"\366\001\n\024LevelUpRes",
       "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022N\n\006status\030\002 \001(\0162>.c" +
-      "om.lvl6.proto.SetFacebookIdResponseProto" +
-      ".SetFacebookIdStatus\"2\n\023SetFacebookIdSta" +
-      "tus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\277\001\n\036Upd" +
-      "ateUserCurrencyRequestProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\021\n" +
-      "\tcashSpent\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021\n\tge" +
-      "msSpent\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006rea",
-      "son\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037UpdateUse" +
-      "rCurrencyResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\022X\n\006stat" +
-      "us\030\002 \001(\0162H.com.lvl6.proto.UpdateUserCurr" +
-      "encyResponseProto.UpdateUserCurrencyStat" +
-      "us\"\212\001\n\030UpdateUserCurrencyStatus\022\013\n\007SUCCE" +
-      "SS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIEN" +
-      "T_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022\032\n\026F" +
-      "AIL_INSUFFICIENT_GEMS\020\005B\020B\016EventUserProt" +
-      "o"
+      "oto.MinimumUserProto\022B\n\006status\030\002 \001(\01622.c" +
+      "om.lvl6.proto.LevelUpResponseProto.Level" +
+      "UpStatus\"h\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022 " +
+      "\n\034NOT_ENOUGH_EXP_TO_NEXT_LEVEL\020\002\022\030\n\024ALRE" +
+      "ADY_AT_MAX_LEVEL\020\003\022\016\n\nOTHER_FAIL\020\004\"\220\001\n#R" +
+      "etrieveUsersForUserIdsRequestProto\0220\n\006se" +
+      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
+      "roto\022\030\n\020requestedUserIds\030\002 \003(\005\022\035\n\025includ" +
+      "eCurMonsterTeam\030\003 \001(\010\"\315\001\n$RetrieveUsersF",
+      "orUserIdsResponseProto\0220\n\006sender\030\001 \001(\0132 " +
+      ".com.lvl6.proto.MinimumUserProto\0225\n\016requ" +
+      "estedUsers\030\002 \003(\0132\035.com.lvl6.proto.FullUs" +
+      "erProto\022<\n\007curTeam\030\003 \003(\0132+.com.lvl6.prot" +
+      "o.UserCurrentMonsterTeamProto\"F\n\022LogoutR" +
+      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\"h\n\035UpdateClientUse" +
+      "rResponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl" +
+      "6.proto.FullUserProto\022\030\n\020timeOfUserUpdat" +
+      "e\030\002 \001(\003\"[\n\031SetFacebookIdRequestProto\0220\n\006",
+      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
+      "rProto\022\014\n\004fbId\030\002 \001(\t\"\322\001\n\032SetFacebookIdRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022N\n\006status\030\002 \001(\0162>." +
+      "com.lvl6.proto.SetFacebookIdResponseProt" +
+      "o.SetFacebookIdStatus\"2\n\023SetFacebookIdSt" +
+      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\277\001\n\036Up" +
+      "dateUserCurrencyRequestProto\0220\n\006sender\030\001" +
+      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\021" +
+      "\n\tcashSpent\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021\n\tg",
+      "emsSpent\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006re" +
+      "ason\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037UpdateUs" +
+      "erCurrencyResponseProto\0220\n\006sender\030\001 \001(\0132" +
+      " .com.lvl6.proto.MinimumUserProto\022X\n\006sta" +
+      "tus\030\002 \001(\0162H.com.lvl6.proto.UpdateUserCur" +
+      "rencyResponseProto.UpdateUserCurrencySta" +
+      "tus\"\212\001\n\030UpdateUserCurrencyStatus\022\013\n\007SUCC" +
+      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIE" +
+      "NT_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022\032\n\026" +
+      "FAIL_INSUFFICIENT_GEMS\020\005B\020B\016EventUserPro",
+      "to"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7722,7 +7894,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_UserCreateRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserCreateRequestProto_descriptor,
-              new java.lang.String[] { "Udid", "Name", "ReferrerCode", "DeviceToken", "TimeOfStructPurchase", "TimeOfStructBuild", "StructCoords", "UsedDiamondsToBuilt", "FacebookId", },
+              new java.lang.String[] { "Udid", "Name", "ReferrerCode", "DeviceToken", "TimeOfStructPurchase", "TimeOfStructBuild", "StructCoords", "UsedDiamondsToBuilt", "FacebookId", "Cash", "Oil", "Gems", },
               com.lvl6.proto.EventUserProto.UserCreateRequestProto.class,
               com.lvl6.proto.EventUserProto.UserCreateRequestProto.Builder.class);
           internal_static_com_lvl6_proto_UserCreateResponseProto_descriptor =

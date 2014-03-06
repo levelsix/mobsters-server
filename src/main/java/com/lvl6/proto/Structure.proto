@@ -135,6 +135,9 @@ message TownHallProto {
 	
 	//Cost for seeing one possible enemy to attack for pvp battles.
 	optional int32 pvpQueueCashCost = 10;
+	
+	//how much this town hall can hold
+	optional int32 resourceCapacity = 11;
 }
 
 //------------------------------------------------------------------------------------------

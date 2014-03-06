@@ -143,6 +143,9 @@ public class ControllerConstants {
 	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON = 5;
 	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON = 6;
 	
+	public static final int TUTORIAL__INIT_CASH = 750;
+	public static final int TUTORIAL__INIT_OIL = 750;
+	public static final int TUTORIAL__INIT_GEMS = 750;
 	
 	
 	

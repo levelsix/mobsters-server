@@ -7993,6 +7993,18 @@ public final class EventStartupProto {
       // optional int32 cityElementIdForSecondDungeon = 8;
       boolean hasCityElementIdForSecondDungeon();
       int getCityElementIdForSecondDungeon();
+      
+      // optional int32 cashInit = 11;
+      boolean hasCashInit();
+      int getCashInit();
+      
+      // optional int32 oilInit = 12;
+      boolean hasOilInit();
+      int getOilInit();
+      
+      // optional int32 gemsInit = 13;
+      boolean hasGemsInit();
+      int getGemsInit();
     }
     public static final class TutorialConstants extends
         com.google.protobuf.GeneratedMessage
@@ -8149,6 +8161,36 @@ public final class EventStartupProto {
         return cityElementIdForSecondDungeon_;
       }
       
+      // optional int32 cashInit = 11;
+      public static final int CASHINIT_FIELD_NUMBER = 11;
+      private int cashInit_;
+      public boolean hasCashInit() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public int getCashInit() {
+        return cashInit_;
+      }
+      
+      // optional int32 oilInit = 12;
+      public static final int OILINIT_FIELD_NUMBER = 12;
+      private int oilInit_;
+      public boolean hasOilInit() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public int getOilInit() {
+        return oilInit_;
+      }
+      
+      // optional int32 gemsInit = 13;
+      public static final int GEMSINIT_FIELD_NUMBER = 13;
+      private int gemsInit_;
+      public boolean hasGemsInit() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public int getGemsInit() {
+        return gemsInit_;
+      }
+      
       private void initFields() {
         startingMonsterId_ = 0;
         enemyMonsterId_ = 0;
@@ -8160,6 +8202,9 @@ public final class EventStartupProto {
         cityOneElements_ = java.util.Collections.emptyList();
         cityElementIdForFirstDungeon_ = 0;
         cityElementIdForSecondDungeon_ = 0;
+        cashInit_ = 0;
+        oilInit_ = 0;
+        gemsInit_ = 0;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -8202,6 +8247,15 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
           output.writeInt32(10, markZMonsterId_);
+        }
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          output.writeInt32(11, cashInit_);
+        }
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          output.writeInt32(12, oilInit_);
+        }
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          output.writeInt32(13, gemsInit_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -8256,6 +8310,18 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(10, markZMonsterId_);
+        }
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(11, cashInit_);
+        }
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(12, oilInit_);
+        }
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(13, gemsInit_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -8411,6 +8477,12 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000100);
           cityElementIdForSecondDungeon_ = 0;
           bitField0_ = (bitField0_ & ~0x00000200);
+          cashInit_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000400);
+          oilInit_ = 0;
+          bitField0_ = (bitField0_ & ~0x00000800);
+          gemsInit_ = 0;
+          bitField0_ = (bitField0_ & ~0x00001000);
           return this;
         }
         
@@ -8500,6 +8572,18 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00000040;
           }
           result.cityElementIdForSecondDungeon_ = cityElementIdForSecondDungeon_;
+          if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+            to_bitField0_ |= 0x00000080;
+          }
+          result.cashInit_ = cashInit_;
+          if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+            to_bitField0_ |= 0x00000100;
+          }
+          result.oilInit_ = oilInit_;
+          if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+            to_bitField0_ |= 0x00000200;
+          }
+          result.gemsInit_ = gemsInit_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -8599,6 +8683,15 @@ public final class EventStartupProto {
           if (other.hasCityElementIdForSecondDungeon()) {
             setCityElementIdForSecondDungeon(other.getCityElementIdForSecondDungeon());
           }
+          if (other.hasCashInit()) {
+            setCashInit(other.getCashInit());
+          }
+          if (other.hasOilInit()) {
+            setOilInit(other.getOilInit());
+          }
+          if (other.hasGemsInit()) {
+            setGemsInit(other.getGemsInit());
+          }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
         }
@@ -8689,6 +8782,21 @@ public final class EventStartupProto {
               case 80: {
                 bitField0_ |= 0x00000008;
                 markZMonsterId_ = input.readInt32();
+                break;
+              }
+              case 88: {
+                bitField0_ |= 0x00000400;
+                cashInit_ = input.readInt32();
+                break;
+              }
+              case 96: {
+                bitField0_ |= 0x00000800;
+                oilInit_ = input.readInt32();
+                break;
+              }
+              case 104: {
+                bitField0_ |= 0x00001000;
+                gemsInit_ = input.readInt32();
                 break;
               }
             }
@@ -9257,6 +9365,69 @@ public final class EventStartupProto {
         public Builder clearCityElementIdForSecondDungeon() {
           bitField0_ = (bitField0_ & ~0x00000200);
           cityElementIdForSecondDungeon_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // optional int32 cashInit = 11;
+        private int cashInit_ ;
+        public boolean hasCashInit() {
+          return ((bitField0_ & 0x00000400) == 0x00000400);
+        }
+        public int getCashInit() {
+          return cashInit_;
+        }
+        public Builder setCashInit(int value) {
+          bitField0_ |= 0x00000400;
+          cashInit_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearCashInit() {
+          bitField0_ = (bitField0_ & ~0x00000400);
+          cashInit_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // optional int32 oilInit = 12;
+        private int oilInit_ ;
+        public boolean hasOilInit() {
+          return ((bitField0_ & 0x00000800) == 0x00000800);
+        }
+        public int getOilInit() {
+          return oilInit_;
+        }
+        public Builder setOilInit(int value) {
+          bitField0_ |= 0x00000800;
+          oilInit_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearOilInit() {
+          bitField0_ = (bitField0_ & ~0x00000800);
+          oilInit_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // optional int32 gemsInit = 13;
+        private int gemsInit_ ;
+        public boolean hasGemsInit() {
+          return ((bitField0_ & 0x00001000) == 0x00001000);
+        }
+        public int getGemsInit() {
+          return gemsInit_;
+        }
+        public Builder setGemsInit(int value) {
+          bitField0_ |= 0x00001000;
+          gemsInit_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearGemsInit() {
+          bitField0_ = (bitField0_ & ~0x00001000);
+          gemsInit_ = 0;
           onChanged();
           return this;
         }
@@ -15518,7 +15689,7 @@ public final class EventStartupProto {
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
       "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbI" +
-      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\214$\n\024Star",
+      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\301$\n\024Star",
       "tupResponseProto\022\030\n\020serverTimeMillis\030\001 \001" +
       "(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.Full" +
       "UserProto\022I\n\rstartupStatus\030\003 \001(\01622.com.l" +
@@ -15622,7 +15793,7 @@ public final class EventStartupProto {
       "s\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033seconds" +
       "ToHealPerHealthPoint\030\002 \001(\002\022\031\n\021elementalS" +
       "trength\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002" +
-      "\032\363\002\n\021TutorialConstants\022\031\n\021startingMonste" +
+      "\032\250\003\n\021TutorialConstants\022\031\n\021startingMonste" +
       "rId\030\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\032\n\022ene" +
       "myBossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030" +
       "\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com." +
@@ -15631,10 +15802,12 @@ public final class EventStartupProto {
       "\n\017cityOneElements\030\006 \003(\0132 .com.lvl6.proto",
       ".CityElementProto\022$\n\034cityElementIdForFir" +
       "stDungeon\030\007 \001(\005\022%\n\035cityElementIdForSecon" +
-      "dDungeon\030\010 \001(\005\"A\n\014UpdateStatus\022\r\n\tNO_UPD" +
-      "ATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020" +
-      "\003\"3\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016US" +
-      "ER_NOT_IN_DB\020\002B\023B\021EventStartupProto"
+      "dDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilI" +
+      "nit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\"A\n\014UpdateSta" +
+      "tus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014" +
+      "MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_" +
+      "IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStar" +
+      "tupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15734,7 +15907,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
-              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", },
+              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.Builder.class);
           return null;

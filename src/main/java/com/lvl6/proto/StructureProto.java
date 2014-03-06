@@ -4611,6 +4611,10 @@ public final class StructureProto {
     // optional int32 pvpQueueCashCost = 10;
     boolean hasPvpQueueCashCost();
     int getPvpQueueCashCost();
+    
+    // optional int32 resourceCapacity = 11;
+    boolean hasResourceCapacity();
+    int getResourceCapacity();
   }
   public static final class TownHallProto extends
       com.google.protobuf.GeneratedMessage
@@ -4744,6 +4748,16 @@ public final class StructureProto {
       return pvpQueueCashCost_;
     }
     
+    // optional int32 resourceCapacity = 11;
+    public static final int RESOURCECAPACITY_FIELD_NUMBER = 11;
+    private int resourceCapacity_;
+    public boolean hasResourceCapacity() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    public int getResourceCapacity() {
+      return resourceCapacity_;
+    }
+    
     private void initFields() {
       structInfo_ = com.lvl6.proto.StructureProto.StructureInfoProto.getDefaultInstance();
       numResourceOneGenerators_ = 0;
@@ -4755,6 +4769,7 @@ public final class StructureProto {
       numMonsterSlots_ = 0;
       numLabs_ = 0;
       pvpQueueCashCost_ = 0;
+      resourceCapacity_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4797,6 +4812,9 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(10, pvpQueueCashCost_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeInt32(11, resourceCapacity_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4846,6 +4864,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(10, pvpQueueCashCost_);
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, resourceCapacity_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4996,6 +5018,8 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000100);
         pvpQueueCashCost_ = 0;
         bitField0_ = (bitField0_ & ~0x00000200);
+        resourceCapacity_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000400);
         return this;
       }
       
@@ -5078,6 +5102,10 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000200;
         }
         result.pvpQueueCashCost_ = pvpQueueCashCost_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.resourceCapacity_ = resourceCapacity_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5123,6 +5151,9 @@ public final class StructureProto {
         }
         if (other.hasPvpQueueCashCost()) {
           setPvpQueueCashCost(other.getPvpQueueCashCost());
+        }
+        if (other.hasResourceCapacity()) {
+          setResourceCapacity(other.getResourceCapacity());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5207,6 +5238,11 @@ public final class StructureProto {
             case 80: {
               bitField0_ |= 0x00000200;
               pvpQueueCashCost_ = input.readInt32();
+              break;
+            }
+            case 88: {
+              bitField0_ |= 0x00000400;
+              resourceCapacity_ = input.readInt32();
               break;
             }
           }
@@ -5490,6 +5526,27 @@ public final class StructureProto {
       public Builder clearPvpQueueCashCost() {
         bitField0_ = (bitField0_ & ~0x00000200);
         pvpQueueCashCost_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 resourceCapacity = 11;
+      private int resourceCapacity_ ;
+      public boolean hasResourceCapacity() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public int getResourceCapacity() {
+        return resourceCapacity_;
+      }
+      public Builder setResourceCapacity(int value) {
+        bitField0_ |= 0x00000400;
+        resourceCapacity_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearResourceCapacity() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        resourceCapacity_ = 0;
         onChanged();
         return this;
       }
@@ -7363,7 +7420,7 @@ public final class StructureProto {
       "\022\027\n\017numMonsterSlots\030\002 \001(\005\022\034\n\024numBonusMon" +
       "sterSlots\030\003 \001(\005\022\027\n\017numGemsRequired\030\004 \001(\005" +
       "\022\034\n\024numAcceptedFbInvites\030\005 \001(\005\022\026\n\016occupa" +
-      "tionName\030\006 \001(\t\"\274\002\n\rTownHallProto\0226\n\nstru" +
+      "tionName\030\006 \001(\t\"\326\002\n\rTownHallProto\0226\n\nstru" +
       "ctInfo\030\001 \001(\0132\".com.lvl6.proto.StructureI" +
       "nfoProto\022 \n\030numResourceOneGenerators\030\002 \001" +
       "(\005\022\036\n\026numResourceOneStorages\030\003 \001(\005\022 \n\030nu" +
@@ -7371,21 +7428,21 @@ public final class StructureProto {
       "rceTwoStorages\030\005 \001(\005\022\024\n\014numHospitals\030\006 \001",
       "(\005\022\025\n\rnumResidences\030\007 \001(\005\022\027\n\017numMonsterS" +
       "lots\030\010 \001(\005\022\017\n\007numLabs\030\t \001(\005\022\030\n\020pvpQueueC" +
-      "ashCost\030\n \001(\005\"\232\002\n\026FullUserStructureProto" +
-      "\022\024\n\014userStructId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020" +
-      "\n\010structId\030\003 \001(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022" +
-      "\024\n\014purchaseTime\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(" +
-      "\010\0224\n\013coordinates\030\007 \001(\0132\037.com.lvl6.proto." +
-      "CoordinateProto\0226\n\013orientation\030\010 \001(\0162!.c" +
-      "om.lvl6.proto.StructOrientation\022\031\n\021fbInv" +
-      "iteStructLvl\030\t \001(\005\"\'\n\017CoordinateProto\022\t\n",
-      "\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\"\\\n\023TutorialStructPro" +
-      "to\022\020\n\010structId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\013" +
-      "2\037.com.lvl6.proto.CoordinateProto*8\n\014Res" +
-      "ourceType\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013" +
-      "\n\007MONSTER\020\024*3\n\021StructOrientation\022\016\n\nPOSI" +
-      "TION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructurePro" +
-      "to"
+      "ashCost\030\n \001(\005\022\030\n\020resourceCapacity\030\013 \001(\005\"" +
+      "\232\002\n\026FullUserStructureProto\022\024\n\014userStruct" +
+      "Id\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\020\n\010structId\030\003 \001" +
+      "(\005\022\025\n\rlastRetrieved\030\004 \001(\003\022\024\n\014purchaseTim" +
+      "e\030\005 \001(\003\022\022\n\nisComplete\030\006 \001(\010\0224\n\013coordinat" +
+      "es\030\007 \001(\0132\037.com.lvl6.proto.CoordinateProt" +
+      "o\0226\n\013orientation\030\010 \001(\0162!.com.lvl6.proto." +
+      "StructOrientation\022\031\n\021fbInviteStructLvl\030\t",
+      " \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030" +
+      "\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010structId" +
+      "\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.pr" +
+      "oto.CoordinateProto*8\n\014ResourceType\022\010\n\004C" +
+      "ASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*3\n" +
+      "\021StructOrientation\022\016\n\nPOSITION_1\020\001\022\016\n\nPO" +
+      "SITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7445,7 +7502,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_TownHallProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_TownHallProto_descriptor,
-              new java.lang.String[] { "StructInfo", "NumResourceOneGenerators", "NumResourceOneStorages", "NumResourceTwoGenerators", "NumResourceTwoStorages", "NumHospitals", "NumResidences", "NumMonsterSlots", "NumLabs", "PvpQueueCashCost", },
+              new java.lang.String[] { "StructInfo", "NumResourceOneGenerators", "NumResourceOneStorages", "NumResourceTwoGenerators", "NumResourceTwoStorages", "NumHospitals", "NumResidences", "NumMonsterSlots", "NumLabs", "PvpQueueCashCost", "ResourceCapacity", },
               com.lvl6.proto.StructureProto.TownHallProto.class,
               com.lvl6.proto.StructureProto.TownHallProto.Builder.class);
           internal_static_com_lvl6_proto_FullUserStructureProto_descriptor =
