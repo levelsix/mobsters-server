@@ -177,6 +177,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 //    	} else {
 //    		log.error("isEvent set to true but eventId not positive " + "\t eventId=" +
 //    				eventId + "\t gemsSpent=" + gemsSpent);
+//    		return false;
 //    	}
 //    }
     

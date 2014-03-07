@@ -201,7 +201,7 @@ message StartupResponseProto {
 		optional int32 oilInit = 12;
 		optional int32 gemsInit = 13;
 		 
-		
+		optional bool enableFbInvites = 14;	
 	}
 	
     enum UpdateStatus {

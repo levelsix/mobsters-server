@@ -146,7 +146,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_CASH = 750;
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;
-	
+	public static final boolean TUTORIAL__ENABLE_FB_INVITES = false;
 	
 	
 	

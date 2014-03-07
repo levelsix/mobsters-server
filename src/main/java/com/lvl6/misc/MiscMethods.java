@@ -320,6 +320,7 @@ public class MiscMethods {
   	tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
   	tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
   	tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
+  	tcb.setEnableFbInvites(ControllerConstants.TUTORIAL__ENABLE_FB_INVITES);
   	return tcb.build();
   }
   

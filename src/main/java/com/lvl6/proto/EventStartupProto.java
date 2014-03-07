@@ -8005,6 +8005,10 @@ public final class EventStartupProto {
       // optional int32 gemsInit = 13;
       boolean hasGemsInit();
       int getGemsInit();
+      
+      // optional bool enableFbInvites = 14;
+      boolean hasEnableFbInvites();
+      boolean getEnableFbInvites();
     }
     public static final class TutorialConstants extends
         com.google.protobuf.GeneratedMessage
@@ -8191,6 +8195,16 @@ public final class EventStartupProto {
         return gemsInit_;
       }
       
+      // optional bool enableFbInvites = 14;
+      public static final int ENABLEFBINVITES_FIELD_NUMBER = 14;
+      private boolean enableFbInvites_;
+      public boolean hasEnableFbInvites() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public boolean getEnableFbInvites() {
+        return enableFbInvites_;
+      }
+      
       private void initFields() {
         startingMonsterId_ = 0;
         enemyMonsterId_ = 0;
@@ -8205,6 +8219,7 @@ public final class EventStartupProto {
         cashInit_ = 0;
         oilInit_ = 0;
         gemsInit_ = 0;
+        enableFbInvites_ = false;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -8256,6 +8271,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00000200) == 0x00000200)) {
           output.writeInt32(13, gemsInit_);
+        }
+        if (((bitField0_ & 0x00000400) == 0x00000400)) {
+          output.writeBool(14, enableFbInvites_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -8322,6 +8340,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00000200) == 0x00000200)) {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(13, gemsInit_);
+        }
+        if (((bitField0_ & 0x00000400) == 0x00000400)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBoolSize(14, enableFbInvites_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -8483,6 +8505,8 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000800);
           gemsInit_ = 0;
           bitField0_ = (bitField0_ & ~0x00001000);
+          enableFbInvites_ = false;
+          bitField0_ = (bitField0_ & ~0x00002000);
           return this;
         }
         
@@ -8584,6 +8608,10 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00000200;
           }
           result.gemsInit_ = gemsInit_;
+          if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+            to_bitField0_ |= 0x00000400;
+          }
+          result.enableFbInvites_ = enableFbInvites_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -8692,6 +8720,9 @@ public final class EventStartupProto {
           if (other.hasGemsInit()) {
             setGemsInit(other.getGemsInit());
           }
+          if (other.hasEnableFbInvites()) {
+            setEnableFbInvites(other.getEnableFbInvites());
+          }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
         }
@@ -8797,6 +8828,11 @@ public final class EventStartupProto {
               case 104: {
                 bitField0_ |= 0x00001000;
                 gemsInit_ = input.readInt32();
+                break;
+              }
+              case 112: {
+                bitField0_ |= 0x00002000;
+                enableFbInvites_ = input.readBool();
                 break;
               }
             }
@@ -9428,6 +9464,27 @@ public final class EventStartupProto {
         public Builder clearGemsInit() {
           bitField0_ = (bitField0_ & ~0x00001000);
           gemsInit_ = 0;
+          onChanged();
+          return this;
+        }
+        
+        // optional bool enableFbInvites = 14;
+        private boolean enableFbInvites_ ;
+        public boolean hasEnableFbInvites() {
+          return ((bitField0_ & 0x00002000) == 0x00002000);
+        }
+        public boolean getEnableFbInvites() {
+          return enableFbInvites_;
+        }
+        public Builder setEnableFbInvites(boolean value) {
+          bitField0_ |= 0x00002000;
+          enableFbInvites_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearEnableFbInvites() {
+          bitField0_ = (bitField0_ & ~0x00002000);
+          enableFbInvites_ = false;
           onChanged();
           return this;
         }
@@ -15689,7 +15746,7 @@ public final class EventStartupProto {
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
       "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbI" +
-      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\301$\n\024Star",
+      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\332$\n\024Star",
       "tupResponseProto\022\030\n\020serverTimeMillis\030\001 \001" +
       "(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.Full" +
       "UserProto\022I\n\rstartupStatus\030\003 \001(\01622.com.l" +
@@ -15793,7 +15850,7 @@ public final class EventStartupProto {
       "s\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033seconds" +
       "ToHealPerHealthPoint\030\002 \001(\002\022\031\n\021elementalS" +
       "trength\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002" +
-      "\032\250\003\n\021TutorialConstants\022\031\n\021startingMonste" +
+      "\032\301\003\n\021TutorialConstants\022\031\n\021startingMonste" +
       "rId\030\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\032\n\022ene" +
       "myBossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030" +
       "\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com." +
@@ -15803,11 +15860,11 @@ public final class EventStartupProto {
       ".CityElementProto\022$\n\034cityElementIdForFir" +
       "stDungeon\030\007 \001(\005\022%\n\035cityElementIdForSecon" +
       "dDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilI" +
-      "nit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\"A\n\014UpdateSta" +
-      "tus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014" +
-      "MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_" +
-      "IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStar" +
-      "tupProto"
+      "nit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\022\027\n\017enableFbI" +
+      "nvites\030\016 \001(\010\"A\n\014UpdateStatus\022\r\n\tNO_UPDAT" +
+      "E\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"" +
+      "3\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER" +
+      "_NOT_IN_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15907,7 +15964,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
-              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", },
+              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "EnableFbInvites", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.Builder.class);
           return null;
