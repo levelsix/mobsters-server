@@ -68,7 +68,6 @@ message PersistentEventProto {
 	optional EventType type = 7;
 	optional MonsterProto.MonsterElement monsterElement = 8 [default = FIRE];
 	
-	
 	enum EventType {
 		ENHANCE = 1;
 		EVOLUTION = 2;
@@ -92,4 +91,3 @@ message UserPersistentEventProto {
 	optional int32 eventId = 2;
 	optional int64 coolDownStartTime = 3;
 }
-

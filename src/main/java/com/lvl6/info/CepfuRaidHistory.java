@@ -6,6 +6,7 @@ import java.util.Date;
 //user can have multiple of these (different clanIds)
 public class CepfuRaidHistory implements Serializable {
 	
+	private static final long serialVersionUID = -3600025631841826924L;
 	private int userId;
 	private Date timeOfEntry;
 	private int clanId;

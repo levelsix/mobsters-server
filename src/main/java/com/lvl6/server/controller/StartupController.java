@@ -216,8 +216,6 @@ public class StartupController extends EventController {
     String fbId = reqProto.getFbId();
     boolean freshRestart = reqProto.getIsFreshRestart();
 
-    StartupResponseProto.Builder resBuilder = StartupResponseProto.newBuilder();
-
     MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
 
     double tempClientVersionNum = reqProto.getVersionNum() * 10;
@@ -233,6 +231,7 @@ public class StartupController extends EventController {
       updateStatus = UpdateStatus.NO_UPDATE;
     }
 
+    StartupResponseProto.Builder resBuilder = StartupResponseProto.newBuilder();
     resBuilder.setUpdateStatus(updateStatus);
     resBuilder.setAppStoreURL(Globals.APP_STORE_URL());
     resBuilder.setReviewPageURL(Globals.REVIEW_PAGE_URL());

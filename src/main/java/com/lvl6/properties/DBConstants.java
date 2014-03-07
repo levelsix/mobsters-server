@@ -12,31 +12,16 @@ public class DBConstants {
 	public static final String TABLE_CITY_ELEMENT = "city_element";
 	public static final String TABLE_CLANS = "clan";
 	public static final String TABLE_CLAN_CHAT_POST = "clan_chat_post";
-	
-	
-	//TABLE CONTAINING CLAN SUMMARIZED DATA REGARDING CLAN EVENTS FOR A USER
-	public static final String TABLE_CEPFU_RAID_HISTORY = "cepfu_raid_history";
+	public static final String TABLE_CEPFU_RAID_HISTORY = "cepfu_raid_history";	//TABLE CONTAINING CLAN SUMMARIZED DATA REGARDING CLAN EVENTS FOR A USER
 	public static final String TABLE_CEPFU_RAID_STAGE_HISTORY = "cepfu_raid_stage_history";
 	public static final String TABLE_CEPFU_RAID_STAGE_MONSTER_HISTORY = "cepfu_raid_stage_monster_history";
-	
-	//EVENT TABLE FOR CLANS
-	public static final String TABLE_CLAN_EVENT_PERSISTENT = "clan_event_persistent";
-	
-	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
-	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN = "clan_event_persistent_for_clan";
-	//HISTORY TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
-	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY = "clan_event_persistent_for_clan_history";
-	
-	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS FOR A USER
-	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER = "clan_event_persistent_for_user";
-	
-	
-	//THE REWARDS A USER GETS FOR DOING A CLAN RAID
-	public static final String TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD = "clan_event_persistent_user_reward";
+	public static final String TABLE_CLAN_EVENT_PERSISTENT = "clan_event_persistent";//EVENT TABLE FOR CLANS
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN = "clan_event_persistent_for_clan";	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_CLAN_HISTORY = "clan_event_persistent_for_clan_history";//HISTORY TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_FOR_USER = "clan_event_persistent_for_user";	//TABLE CONTAINING CLAN SPECIFIC DATA REGARDING CLAN EVENTS FOR A USER
+	public static final String TABLE_CLAN_EVENT_PERSISTENT_USER_REWARD = "clan_event_persistent_user_reward";	//THE REWARDS A USER GETS FOR DOING A CLAN RAID
 	public static final String TABLE_CLAN_FOR_USER = "clan_for_user";
-	
-	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
-	public static final String TABLE_CLAN_RAID = "clan_raid";
+	public static final String TABLE_CLAN_RAID = "clan_raid";	//TABLE SPECIFYING WHAT RAIDS THERE ARE (ALSO REFERENCED IN  TABLE_CLAN_EVENT_PERSISTENT)
 	public static final String TABLE_CLAN_RAID_STAGE = "clan_raid_stage";
 	public static final String TABLE_CLAN_RAID_STAGE_MONSTER = "clan_raid_stage_monster";
 	public static final String TABLE_CLAN_RAID_STAGE_REWARD = "clan_raid_stage_reward";
