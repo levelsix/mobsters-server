@@ -18,13 +18,9 @@ option java_outer_classname = "EventUserProto";
 message UserCreateRequestProto {
      optional string udid = 1;
      optional string name = 2;
-     optional string referrerCode = 3;
-     optional string deviceToken = 4;
-     optional int64 timeOfStructPurchase = 5; //isn't used
-     optional int64 timeOfStructBuild = 6;    //isn't used
-     optional CoordinateProto structCoords = 7;
-     optional bool usedDiamondsToBuilt = 8;
-     optional string facebookId = 9; //not used
+     optional string deviceToken = 3;
+     optional string facebookId = 4;
+     repeated TutorialStructProto structsJustBuilt = 5;
      
      optional int32 cash = 10;
      optional int32 oil = 11;
@@ -97,7 +93,7 @@ message UpdateClientUserResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
-	
+//will always be used to set a fb id, not delete it	
 message SetFacebookIdRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string fbId = 2;
@@ -110,6 +106,8 @@ message SetFacebookIdResponseProto {
 	enum SetFacebookIdStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
+		FAIL_FB_ID_EXISTS = 3;
+		FAIL_USER_FB_ID_ALREADY_SET = 4;
 	}
 }
 	

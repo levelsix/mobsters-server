@@ -86,7 +86,7 @@ message FullUserProto {
 	optional int32 flees = 10;
 	optional string referralCode = 11;
 	optional int32 numReferrals = 12;
-	//optional string udid = 13; //defined below
+	//optional string udidForHistory = 46; defined below should be 13
 	optional int64 lastLoginTime = 14;
 	optional int64 lastLogoutTime = 15;
 	//optional string deviceToken = 16; //defined below
@@ -119,11 +119,12 @@ message FullUserProto {
 	//optional int32 oil = 42; //defined above
 	//optional int32 numOilRetrievedFromStructs = 43; //defined above
 	//optional bool fbIdSetOnUserCreate = 44; //defined below
-	optional string gameCenterId = 45;
+	optional string gameCenterId = 45;	
+	//optional string udid = 13; defined below, should be 46
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
-	optional string udid = 13;
+	optional string udidForHistory = 46; //should be 13
 	optional string deviceToken = 16;
 	optional int64 lastBattleNotificationTime = 17;
 	optional int32 numBadges = 18;
@@ -135,6 +136,7 @@ message FullUserProto {
 	optional int64 inBattleShieldEndTime = 35;
 	//optional int32 nthExtraSlotsViaFb = 41; //get rid of this
 	optional bool fbIdSetOnUserCreate = 44;
+	optional string udid = 13; //should be 46
 }
 
 //------------------------------------------------------------------------------------------
