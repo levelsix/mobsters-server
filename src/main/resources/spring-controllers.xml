@@ -50,6 +50,7 @@
 	<bean id="nameGeneratorElven" class="com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven" />
 	
 	<bean id="appGlobals" class="com.lvl6.properties.Globals" >
+		<property name="addAllFbFriends" value="${globals.addAllFbFriends}" />
 		<property name="sandbox" value="${globals.isSandbox}" />
 		<property name="iddictionOn" value="${globals.iddictionOn}" />
 		<property name="kabamEnabled" value="${globals.kabamEnabled}" />

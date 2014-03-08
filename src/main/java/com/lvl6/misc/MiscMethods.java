@@ -134,9 +134,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 
 public class MiscMethods {
-
-
-  private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
+	
+	private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
   public static final String cash = "cash";
   public static final String gems = "gems";
   public static final String oil = "oil";
@@ -320,7 +319,6 @@ public class MiscMethods {
   	tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
   	tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
   	tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
-  	tcb.setEnableFbInvites(ControllerConstants.TUTORIAL__ENABLE_FB_INVITES);
   	return tcb.build();
   }
   
@@ -335,7 +333,7 @@ public class MiscMethods {
   	return tspb.build();
   }
 
-  public static StartupConstants createStartupConstantsProto() {
+  public static StartupConstants createStartupConstantsProto(Globals globals) {
     StartupConstants.Builder cb = StartupConstants.newBuilder();
 
     for (String id : IAPValues.iapPackageNames) {
@@ -416,6 +414,8 @@ public class MiscMethods {
     cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
     cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
     cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
+    
+    cb.setAddAllFbFriends(globals.isAddAllFbFriends());
 
     //set more properties above
     //    BattleConstants battleConstants = BattleConstants.newBuilder()

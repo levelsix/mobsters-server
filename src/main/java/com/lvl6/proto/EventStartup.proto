@@ -138,8 +138,10 @@ message StartupResponseProto {
 		optional float minutesPerGem = 19; 
 		optional int32 pvpRequiredMinLvl = 20;
 		optional float gemsPerResource = 21;
+		//(multiplies with cost to heal all battle team monsters while in dungeon)
 		optional float continueBattleGemCostMultiplier = 22;
 		
+		optional bool addAllFbFriends = 23;
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -200,8 +202,7 @@ message StartupResponseProto {
 		optional int32 cashInit = 11;
 		optional int32 oilInit = 12;
 		optional int32 gemsInit = 13;
-		 
-		optional bool enableFbInvites = 14;	
+		 	
 	}
 	
     enum UpdateStatus {

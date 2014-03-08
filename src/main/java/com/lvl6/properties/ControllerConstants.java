@@ -94,6 +94,7 @@ public class ControllerConstants {
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
 	
 	
+
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
@@ -146,7 +147,6 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_CASH = 750;
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;
-	public static final boolean TUTORIAL__ENABLE_FB_INVITES = false;
 	
 	
 	
