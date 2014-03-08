@@ -118,6 +118,8 @@ message FullUserProto {
 	//optional int32 nthExtraSlotsViaFb = 41; //defined below
 	//optional int32 oil = 42; //defined above
 	//optional int32 numOilRetrievedFromStructs = 43; //defined above
+	//optional bool fbIdSetOnUserCreate = 44; //defined below
+	optional string gameCenterId = 45;
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this
@@ -132,6 +134,7 @@ message FullUserProto {
 	optional string kabamNaid = 27;
 	optional int64 inBattleShieldEndTime = 35;
 	//optional int32 nthExtraSlotsViaFb = 41; //get rid of this
+	optional bool fbIdSetOnUserCreate = 44;
 }
 
 //------------------------------------------------------------------------------------------

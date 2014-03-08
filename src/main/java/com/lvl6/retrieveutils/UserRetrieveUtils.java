@@ -724,6 +724,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     String facebookId = rs.getString(i++);
 //    int nthExtraSlotsViaFb = rs.getInt(i++);
     
+    boolean fbIdSetOnUserCreate = rs.getBoolean(i++);
+    String gameCenterId = rs.getString(i++);
+    
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
     		numReferrals, udid, lastLogin, lastLogout, deviceToken,
@@ -732,7 +735,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
     		kabamNaid, hasReceivedfbReward, numBeginnerSalesPurchased,
     		hasActiveShield, shieldEndTime, elo, rank, lastTimeQueued,
-    		attacksWon, defensesWon, attacksLost, defensesLost, facebookId);
+    		attacksWon, defensesWon, attacksLost, defensesLost, facebookId,
+    		fbIdSetOnUserCreate, gameCenterId);
     return user;
   }
  

@@ -13,8 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = 4488424152619091590L;
-	
+	private static final long serialVersionUID = -4300627931840398019L;
 	private int id;
 	private String name;
 	private int level;
@@ -58,6 +57,9 @@ public class User implements Serializable {
 	private int defensesLost;
 	private String facebookId;
 //	private int nthExtraSlotsViaFb;
+	private boolean fbIdSetOnUserCreate;
+	private String gameCenterId;
+
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, int battlesWon, int battlesLost,
@@ -70,8 +72,9 @@ public class User implements Serializable {
 			Date lastWallPostNotificationTime, int kabamNaid,
 			boolean hasReceivedfbReward, int numBeginnerSalesPurchased,
 			boolean hasActiveShield, Date shieldEndTime, int elo, String rank,
-			Date inBattleShieldEndTime, int attacksWon, int defensesWon, int attacksLost,
-			int defensesLost, String facebookId) {
+			Date inBattleShieldEndTime, int attacksWon, int defensesWon,
+			int attacksLost, int defensesLost, String facebookId,
+			boolean fbIdSetOnUserCreate, String gameCenterId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -114,6 +117,8 @@ public class User implements Serializable {
 		this.attacksLost = attacksLost;
 		this.defensesLost = defensesLost;
 		this.facebookId = facebookId;
+		this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
+		this.gameCenterId = gameCenterId;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -163,6 +168,23 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+	
+	public boolean updateGameCenterId(String gameCenterId) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__GAME_CENTER_ID, gameCenterId);
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
+				conditionParams, "and");
+		if (numUpdated == 1) {
+			this.gameCenterId = gameCenterId;
+			return true;
+		}
+		return false;
+	}
+	
 //
 //	public boolean updateResetNumbadgesSetdevicetoken(String deviceToken) {
 //		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -1172,6 +1194,22 @@ public class User implements Serializable {
 		this.facebookId = facebookId;
 	}
 
+	public boolean isFbIdSetOnUserCreate() {
+		return fbIdSetOnUserCreate;
+	}
+
+	public void setFbIdSetOnUserCreate(boolean fbIdSetOnUserCreate) {
+		this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
+	}
+
+	public String getGameCenterId() {
+		return gameCenterId;
+	}
+
+	public void setGameCenterId(String gameCenterId) {
+		this.gameCenterId = gameCenterId;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
@@ -1196,8 +1234,8 @@ public class User implements Serializable {
 				+ ", inBattleShieldEndTime=" + inBattleShieldEndTime + ", attacksWon="
 				+ attacksWon + ", defensesWon=" + defensesWon + ", attacksLost="
 				+ attacksLost + ", defensesLost=" + defensesLost + ", facebookId="
-				+ facebookId + "]";
+				+ facebookId + ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
+				+ ", gameCenterId=" + gameCenterId + "]";
 	}
-
 
 }

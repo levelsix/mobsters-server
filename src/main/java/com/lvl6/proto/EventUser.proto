@@ -148,4 +148,23 @@ message UpdateUserCurrencyResponseProto {
 		FAIL_INSUFFICIENT_GEMS = 5;
 	}
 }
+
+//------------------------------------------------------------------------------------------
+
+message SetGameCenterIdRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional string gameCenterId = 2;
+}
+
+message SetGameCenterIdResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional string gameCenterId = 2;
+	
+	optional SetGameCenterIdStatus status = 3;
+	
+	enum SetGameCenterIdStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
 	
