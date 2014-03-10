@@ -288,6 +288,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	    		", cash=" + cash+ ", oil=" + oil + ", gems=" + gems); 
 	  }
 	  
+	  resBuilder.setStatus(UserCreateStatus.SUCCESS);
 	  return user;
   }
   
