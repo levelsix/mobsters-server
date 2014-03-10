@@ -301,13 +301,17 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   	log.info("giving user TownHall, CashStorage, OilStorage");
   	int quantity = 3;
-  	List<Integer> userIdList = Collections.nCopies(quantity, userId);
+  	List<Integer> userIdList = new ArrayList<Integer>(
+  			Collections.nCopies(quantity, userId));
   	List<Integer> structIdList = new ArrayList<Integer>();
   	List<Float> xCoordList = new ArrayList<Float>();
   	List<Float> yCoordList = new ArrayList<Float>();
-  	List<Timestamp> purchaseTimeList = Collections.nCopies(quantity, purchaseTime);
-  	List<Timestamp> retrievedTimeList = Collections.nCopies(quantity, purchaseTimeOneWeekAgo);
-  	List<Boolean> isComplete = Collections.nCopies(quantity, true);
+  	List<Timestamp> purchaseTimeList = new ArrayList<Timestamp>(
+  			Collections.nCopies(quantity, purchaseTime));
+  	List<Timestamp> retrievedTimeList = new ArrayList<Timestamp>(
+  			Collections.nCopies(quantity, purchaseTimeOneWeekAgo));
+  	List<Boolean> isComplete = new ArrayList<Boolean>(
+  			Collections.nCopies(quantity, true));
   	
   	
   	//order of things: town hall stuff, cash storage stuff, oil storage stuff
