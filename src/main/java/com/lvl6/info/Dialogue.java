@@ -8,11 +8,13 @@ public class Dialogue implements Serializable {
 	private static final long serialVersionUID = -8118069262824842364L;
   List<Boolean> isLeftSides;
 	List<String> speakers;
+  List<String> speakerImages;
 	List<String> speakerTexts;
 
-	public Dialogue(List<String> speakers, List<String> speakerTexts, List<Boolean> isLeftSides) {
+	public Dialogue(List<String> speakers, List<String> speakerImages, List<String> speakerTexts, List<Boolean> isLeftSides) {
 		this.speakers = speakers;
 		this.speakerTexts = speakerTexts;
+		this.speakerImages = speakerImages;
 		this.isLeftSides = isLeftSides;
 	}
 
@@ -20,9 +22,13 @@ public class Dialogue implements Serializable {
     return isLeftSides;
   }
 
-	public List<String> getSpeakers() {
-		return speakers;
-	}
+  public List<String> getSpeakers() {
+    return speakers;
+  }
+
+  public List<String> getSpeakerImages() {
+    return speakerImages;
+  }
 
 	public List<String> getSpeakerTexts() {
 		return speakerTexts;

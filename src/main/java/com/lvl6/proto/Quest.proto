@@ -59,8 +59,9 @@ message DialogueProto {
 
 	message SpeechSegmentProto {
 		optional string speaker = 1;
-		optional string speakerText = 2;
-		optional bool isLeftSide = 3;
+		optional string speakerImage = 2;
+		optional string speakerText = 3;
+		optional bool isLeftSide = 4;
 	}
 }
 
