@@ -309,7 +309,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	Date purchaseDateOneWeekAgo = getTimeUtils().createDateAddDays(purchaseDate, 7);
   	Timestamp purchaseTimeOneWeekAgo = new Timestamp(purchaseDateOneWeekAgo.getTime());
   	
-  	log.info("giving user TownHall, CashStorage, OilStorage");
+  	log.info("giving user buildings");
   	int quantity = 3;
   	List<Integer> userIdList = new ArrayList<Integer>(
   			Collections.nCopies(quantity, userId));
@@ -351,6 +351,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		retrievedTimeList.add(purchaseTime);
   		isComplete.add(true);
   	}
+  	
+  	log.info("userIdList=" + userIdList);
+  	log.info("structIdList=" + structIdList);
+  	log.info("xCoordList=" + xCoordList);
+  	log.info("yCoordList=" + yCoordList);
+  	log.info("purchaseTimeList=" + purchaseTimeList);
+  	log.info("retrievedTimeList=" + retrievedTimeList);
+  	log.info("isComplete=" + isComplete);
+  	
   	
   	int numInserted = InsertUtils.get().insertUserStructs(userIdList, structIdList,
   			xCoordList, yCoordList, purchaseTimeList, retrievedTimeList, isComplete);
