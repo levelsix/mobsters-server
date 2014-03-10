@@ -173,7 +173,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  /*server.lockPlayer(userId, this.getClass().getSimpleName());*/
 			  try {
 			  	//TAKE INTO ACCOUNT THE PROPERTIES SENT IN BY CLIENT
+			  	log.info("writing user structs");
 			  	writeStructs(userId, createTime, structsJustBuilt);
+			  	log.info("writing tasks");
 			    writeTaskCompleted(userId, createTime);
 //			    LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
 //			    leaderboard.updateLeaderboardForUser(user);
@@ -294,6 +296,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	    		", cash=" + cash+ ", oil=" + oil + ", gems=" + gems); 
 	  }
 	  
+	  log.info("created new user=" + user);
 	  resBuilder.setStatus(UserCreateStatus.SUCCESS);
 	  return user;
   }
