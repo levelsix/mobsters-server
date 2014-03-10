@@ -13,7 +13,7 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = -4300627931840398019L;
+	private static final long serialVersionUID = 5859682564351287507L;
 	private int id;
 	private String name;
 	private int level;
@@ -27,7 +27,7 @@ public class User implements Serializable {
 	private int flees;
 	private String referralCode;
 	private int numReferrals;
-	private String udid;
+	private String udidForHistory;
 	private Date lastLogin;
 	private Date lastLogout;
 	private String deviceToken;
@@ -59,11 +59,11 @@ public class User implements Serializable {
 //	private int nthExtraSlotsViaFb;
 	private boolean fbIdSetOnUserCreate;
 	private String gameCenterId;
-
+	private String udid;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, int battlesWon, int battlesLost,
-			int flees, String referralCode, int numReferrals, String udid,
+			int flees, String referralCode, int numReferrals, String udidForHistory,
 			Date lastLogin, Date lastLogout, String deviceToken,
 			Date lastBattleNotificationTime, int numBadges, boolean isFake,
 			Date createTime, boolean isAdmin, String apsalarId,
@@ -74,7 +74,7 @@ public class User implements Serializable {
 			boolean hasActiveShield, Date shieldEndTime, int elo, String rank,
 			Date inBattleShieldEndTime, int attacksWon, int defensesWon,
 			int attacksLost, int defensesLost, String facebookId,
-			boolean fbIdSetOnUserCreate, String gameCenterId) {
+			boolean fbIdSetOnUserCreate, String gameCenterId, String udid) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -89,7 +89,7 @@ public class User implements Serializable {
 		this.flees = flees;
 		this.referralCode = referralCode;
 		this.numReferrals = numReferrals;
-		this.udid = udid;
+		this.udidForHistory = udidForHistory;
 		this.lastLogin = lastLogin;
 		this.lastLogout = lastLogout;
 		this.deviceToken = deviceToken;
@@ -119,6 +119,7 @@ public class User implements Serializable {
 		this.facebookId = facebookId;
 		this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
 		this.gameCenterId = gameCenterId;
+		this.udid = udid;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -137,17 +138,20 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public boolean updateSetFacebookId(String facebookId) {
+	public boolean updateSetFacebookId(String facebookId, boolean fbIdSetOnUserCreate) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
+		absoluteParams.put(DBConstants.USER__FB_ID_SET_ON_USER_CREATE, fbIdSetOnUserCreate);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.facebookId = facebookId;
+			this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
+			
 			return true;
 		}
 		return false;
@@ -970,12 +974,12 @@ public class User implements Serializable {
 		this.numReferrals = numReferrals;
 	}
 
-	public String getUdid() {
-		return udid;
+	public String getUdidForHistory() {
+		return udidForHistory;
 	}
 
-	public void setUdid(String udid) {
-		this.udid = udid;
+	public void setUdidForHistory(String udidForHistory) {
+		this.udidForHistory = udidForHistory;
 	}
 
 	public Date getLastLogin() {
@@ -1210,6 +1214,14 @@ public class User implements Serializable {
 		this.gameCenterId = gameCenterId;
 	}
 
+	public String getUdid() {
+		return udid;
+	}
+
+	public void setUdid(String udid) {
+		this.udid = udid;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
@@ -1217,8 +1229,8 @@ public class User implements Serializable {
 				+ experience + ", tasksCompleted=" + tasksCompleted + ", battlesWon="
 				+ battlesWon + ", battlesLost=" + battlesLost + ", flees=" + flees
 				+ ", referralCode=" + referralCode + ", numReferrals=" + numReferrals
-				+ ", udid=" + udid + ", lastLogin=" + lastLogin + ", lastLogout="
-				+ lastLogout + ", deviceToken=" + deviceToken
+				+ ", udidForHistory=" + udidForHistory + ", lastLogin=" + lastLogin
+				+ ", lastLogout=" + lastLogout + ", deviceToken=" + deviceToken
 				+ ", lastBattleNotificationTime=" + lastBattleNotificationTime
 				+ ", numBadges=" + numBadges + ", isFake=" + isFake + ", createTime="
 				+ createTime + ", isAdmin=" + isAdmin + ", apsalarId=" + apsalarId
@@ -1235,7 +1247,7 @@ public class User implements Serializable {
 				+ attacksWon + ", defensesWon=" + defensesWon + ", attacksLost="
 				+ attacksLost + ", defensesLost=" + defensesLost + ", facebookId="
 				+ facebookId + ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
-				+ ", gameCenterId=" + gameCenterId + "]";
+				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid + "]";
 	}
 
 }

@@ -124,6 +124,47 @@ public class Locker {
   		}
   	}
   	
+  	public boolean lockFbId(String fbId) {
+  		log.debug("Locking fbId: " + fbId);
+  		if (lockMap.tryLock(fbIdLockName(fbId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
+  			log.debug("Got lock for fbId " + fbId);
+  			
+  			try {
+  				lockMap.put(fbIdLockName(fbId), new Date());
+  			} catch (Exception e) {
+  				log.error("locking exception: " + e.getLocalizedMessage() + "\t\t\t" + "\t\t\t" +
+  						e.getMessage(), e);
+  				return false;
+  			}
+  			return true;
+  		} else {
+  			log.warn("failed to aquire lock for " + fbIdLockName(fbId));
+  			return false;
+  			// throw new
+  			// RuntimeException("Unable to obtain lock after "+LOCK_WAIT_SECONDS+" seconds");
+  		}
+  	}
+  	
+  	public void unlockFbId(String fbId) {
+  		log.debug("Unlocking fbId: " + fbId);
+  		try {
+  			String fbIdLockName = fbIdLockName(fbId);
+  			if (lockMap.isLocked(fbIdLockName)) {
+  				lockMap.unlock(fbIdLockName);
+  			}
+  			log.debug("Unlocked fbId " + fbId);
+  			if (lockMap.containsKey(fbIdLockName)) {
+  				lockMap.remove(fbIdLockName);
+  			}
+  		} catch (Exception e) {
+  			log.error("Error unlocking fbId " + fbId, e);
+  		}
+  	}
+
+  	protected String fbIdLockName(String fbId) {
+  		return "FbIdLock: " + fbId;
+  	}
+  	
   	public boolean lockClan(int clanId) {
   		log.debug("Locking clan: " + clanId);
   		if (lockMap.tryLock(clanLockName(clanId), LOCK_WAIT_SECONDS, TimeUnit.SECONDS)) {
@@ -174,7 +215,7 @@ public class Locker {
   		log.debug("Removing stale clan locks");
   		for (String key : lockMap.keySet()) {
   			try {
-  				if (key != null && key.contains("ClanLock")) {
+  				if (key != null && (key.contains("ClanLock") || key.contains("FbIdLock"))) {
   					long lockTime = lockMap.get(key).getTime();
   					if (now - lockTime > LOCK_TIMEOUT) {
   						if (lockMap.isLocked(key)) {

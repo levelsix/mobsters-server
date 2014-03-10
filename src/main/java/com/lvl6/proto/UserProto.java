@@ -3846,9 +3846,9 @@ public final class UserProto {
     boolean hasGameCenterId();
     String getGameCenterId();
     
-    // optional string udid = 13;
-    boolean hasUdid();
-    String getUdid();
+    // optional string udidForHistory = 46;
+    boolean hasUdidForHistory();
+    String getUdidForHistory();
     
     // optional string deviceToken = 16;
     boolean hasDeviceToken();
@@ -3889,6 +3889,10 @@ public final class UserProto {
     // optional bool fbIdSetOnUserCreate = 44;
     boolean hasFbIdSetOnUserCreate();
     boolean getFbIdSetOnUserCreate();
+    
+    // optional string udid = 13;
+    boolean hasUdid();
+    String getUdid();
   }
   public static final class FullUserProto extends
       com.google.protobuf.GeneratedMessage
@@ -4353,14 +4357,14 @@ public final class UserProto {
       }
     }
     
-    // optional string udid = 13;
-    public static final int UDID_FIELD_NUMBER = 13;
-    private java.lang.Object udid_;
-    public boolean hasUdid() {
+    // optional string udidForHistory = 46;
+    public static final int UDIDFORHISTORY_FIELD_NUMBER = 46;
+    private java.lang.Object udidForHistory_;
+    public boolean hasUdidForHistory() {
       return ((bitField1_ & 0x00000001) == 0x00000001);
     }
-    public String getUdid() {
-      java.lang.Object ref = udid_;
+    public String getUdidForHistory() {
+      java.lang.Object ref = udidForHistory_;
       if (ref instanceof String) {
         return (String) ref;
       } else {
@@ -4368,17 +4372,17 @@ public final class UserProto {
             (com.google.protobuf.ByteString) ref;
         String s = bs.toStringUtf8();
         if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          udid_ = s;
+          udidForHistory_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getUdidBytes() {
-      java.lang.Object ref = udid_;
+    private com.google.protobuf.ByteString getUdidForHistoryBytes() {
+      java.lang.Object ref = udidForHistory_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        udid_ = b;
+        udidForHistory_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -4529,6 +4533,38 @@ public final class UserProto {
       return fbIdSetOnUserCreate_;
     }
     
+    // optional string udid = 13;
+    public static final int UDID_FIELD_NUMBER = 13;
+    private java.lang.Object udid_;
+    public boolean hasUdid() {
+      return ((bitField1_ & 0x00000800) == 0x00000800);
+    }
+    public String getUdid() {
+      java.lang.Object ref = udid_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          udid_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getUdidBytes() {
+      java.lang.Object ref = udid_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        udid_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
     private void initFields() {
       userId_ = 0;
       name_ = "";
@@ -4562,7 +4598,7 @@ public final class UserProto {
       defensesLost_ = 0;
       facebookId_ = "";
       gameCenterId_ = "";
-      udid_ = "";
+      udidForHistory_ = "";
       deviceToken_ = "";
       lastBattleNotificationTime_ = 0L;
       numBadges_ = 0;
@@ -4573,6 +4609,7 @@ public final class UserProto {
       kabamNaid_ = "";
       inBattleShieldEndTime_ = 0L;
       fbIdSetOnUserCreate_ = false;
+      udid_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4622,7 +4659,7 @@ public final class UserProto {
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         output.writeInt32(12, numReferrals_);
       }
-      if (((bitField1_ & 0x00000001) == 0x00000001)) {
+      if (((bitField1_ & 0x00000800) == 0x00000800)) {
         output.writeBytes(13, getUdidBytes());
       }
       if (((bitField0_ & 0x00002000) == 0x00002000)) {
@@ -4715,6 +4752,9 @@ public final class UserProto {
       if (((bitField0_ & 0x80000000) == 0x80000000)) {
         output.writeBytes(45, getGameCenterIdBytes());
       }
+      if (((bitField1_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(46, getUdidForHistoryBytes());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -4772,7 +4812,7 @@ public final class UserProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(12, numReferrals_);
       }
-      if (((bitField1_ & 0x00000001) == 0x00000001)) {
+      if (((bitField1_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(13, getUdidBytes());
       }
@@ -4895,6 +4935,10 @@ public final class UserProto {
       if (((bitField0_ & 0x80000000) == 0x80000000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(45, getGameCenterIdBytes());
+      }
+      if (((bitField1_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(46, getUdidForHistoryBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5089,7 +5133,7 @@ public final class UserProto {
         bitField0_ = (bitField0_ & ~0x40000000);
         gameCenterId_ = "";
         bitField0_ = (bitField0_ & ~0x80000000);
-        udid_ = "";
+        udidForHistory_ = "";
         bitField1_ = (bitField1_ & ~0x00000001);
         deviceToken_ = "";
         bitField1_ = (bitField1_ & ~0x00000002);
@@ -5111,6 +5155,8 @@ public final class UserProto {
         bitField1_ = (bitField1_ & ~0x00000200);
         fbIdSetOnUserCreate_ = false;
         bitField1_ = (bitField1_ & ~0x00000400);
+        udid_ = "";
+        bitField1_ = (bitField1_ & ~0x00000800);
         return this;
       }
       
@@ -5286,7 +5332,7 @@ public final class UserProto {
         if (((from_bitField1_ & 0x00000001) == 0x00000001)) {
           to_bitField1_ |= 0x00000001;
         }
-        result.udid_ = udid_;
+        result.udidForHistory_ = udidForHistory_;
         if (((from_bitField1_ & 0x00000002) == 0x00000002)) {
           to_bitField1_ |= 0x00000002;
         }
@@ -5327,6 +5373,10 @@ public final class UserProto {
           to_bitField1_ |= 0x00000400;
         }
         result.fbIdSetOnUserCreate_ = fbIdSetOnUserCreate_;
+        if (((from_bitField1_ & 0x00000800) == 0x00000800)) {
+          to_bitField1_ |= 0x00000800;
+        }
+        result.udid_ = udid_;
         result.bitField0_ = to_bitField0_;
         result.bitField1_ = to_bitField1_;
         onBuilt();
@@ -5440,8 +5490,8 @@ public final class UserProto {
         if (other.hasGameCenterId()) {
           setGameCenterId(other.getGameCenterId());
         }
-        if (other.hasUdid()) {
-          setUdid(other.getUdid());
+        if (other.hasUdidForHistory()) {
+          setUdidForHistory(other.getUdidForHistory());
         }
         if (other.hasDeviceToken()) {
           setDeviceToken(other.getDeviceToken());
@@ -5472,6 +5522,9 @@ public final class UserProto {
         }
         if (other.hasFbIdSetOnUserCreate()) {
           setFbIdSetOnUserCreate(other.getFbIdSetOnUserCreate());
+        }
+        if (other.hasUdid()) {
+          setUdid(other.getUdid());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5565,7 +5618,7 @@ public final class UserProto {
               break;
             }
             case 106: {
-              bitField1_ |= 0x00000001;
+              bitField1_ |= 0x00000800;
               udid_ = input.readBytes();
               break;
             }
@@ -5721,6 +5774,11 @@ public final class UserProto {
             case 362: {
               bitField0_ |= 0x80000000;
               gameCenterId_ = input.readBytes();
+              break;
+            }
+            case 370: {
+              bitField1_ |= 0x00000001;
+              udidForHistory_ = input.readBytes();
               break;
             }
           }
@@ -6546,39 +6604,39 @@ public final class UserProto {
         onChanged();
       }
       
-      // optional string udid = 13;
-      private java.lang.Object udid_ = "";
-      public boolean hasUdid() {
+      // optional string udidForHistory = 46;
+      private java.lang.Object udidForHistory_ = "";
+      public boolean hasUdidForHistory() {
         return ((bitField1_ & 0x00000001) == 0x00000001);
       }
-      public String getUdid() {
-        java.lang.Object ref = udid_;
+      public String getUdidForHistory() {
+        java.lang.Object ref = udidForHistory_;
         if (!(ref instanceof String)) {
           String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          udid_ = s;
+          udidForHistory_ = s;
           return s;
         } else {
           return (String) ref;
         }
       }
-      public Builder setUdid(String value) {
+      public Builder setUdidForHistory(String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField1_ |= 0x00000001;
-        udid_ = value;
+        udidForHistory_ = value;
         onChanged();
         return this;
       }
-      public Builder clearUdid() {
+      public Builder clearUdidForHistory() {
         bitField1_ = (bitField1_ & ~0x00000001);
-        udid_ = getDefaultInstance().getUdid();
+        udidForHistory_ = getDefaultInstance().getUdidForHistory();
         onChanged();
         return this;
       }
-      void setUdid(com.google.protobuf.ByteString value) {
+      void setUdidForHistory(com.google.protobuf.ByteString value) {
         bitField1_ |= 0x00000001;
-        udid_ = value;
+        udidForHistory_ = value;
         onChanged();
       }
       
@@ -6820,6 +6878,42 @@ public final class UserProto {
         fbIdSetOnUserCreate_ = false;
         onChanged();
         return this;
+      }
+      
+      // optional string udid = 13;
+      private java.lang.Object udid_ = "";
+      public boolean hasUdid() {
+        return ((bitField1_ & 0x00000800) == 0x00000800);
+      }
+      public String getUdid() {
+        java.lang.Object ref = udid_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          udid_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setUdid(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField1_ |= 0x00000800;
+        udid_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUdid() {
+        bitField1_ = (bitField1_ & ~0x00000800);
+        udid_ = getDefaultInstance().getUdid();
+        onChanged();
+        return this;
+      }
+      void setUdid(com.google.protobuf.ByteString value) {
+        bitField1_ |= 0x00000800;
+        udid_ = value;
+        onChanged();
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.FullUserProto)
@@ -7298,7 +7392,7 @@ public final class UserProto {
       "ecipientFacebookId\030\003 \001(\t\022\024\n\014timeOfInvite" +
       "\030\004 \001(\003\022\024\n\014timeAccepted\030\005 \001(\003\022\024\n\014userStru",
       "ctId\030\006 \001(\005\022\023\n\013structFbLvl\030\007 \001(\005\022\024\n\014redee" +
-      "medTime\030\010 \001(\003\"\340\007\n\rFullUserProto\022\016\n\006userI" +
+      "medTime\030\010 \001(\003\"\370\007\n\rFullUserProto\022\016\n\006userI" +
       "d\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\014\n\004" +
       "gems\030\004 \001(\005\022\014\n\004cash\030\005 \001(\005\022\013\n\003oil\030* \001(\005\022\022\n" +
       "\nexperience\030\006 \001(\005\022\026\n\016tasksCompleted\030\007 \001(" +
@@ -7316,16 +7410,16 @@ public final class UserProto {
       "(\t\022\022\n\nattacksWon\030$ \001(\005\022\023\n\013defensesWon\030% " +
       "\001(\005\022\023\n\013attacksLost\030& \001(\005\022\024\n\014defensesLost" +
       "\030\' \001(\005\022\022\n\nfacebookId\030( \001(\t\022\024\n\014gameCenter" +
-      "Id\030- \001(\t\022\014\n\004udid\030\r \001(\t\022\023\n\013deviceToken\030\020 ",
-      "\001(\t\022\"\n\032lastBattleNotificationTime\030\021 \001(\003\022" +
-      "\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTime\030\024 \001(\003\022\021" +
-      "\n\tapsalarId\030\026 \001(\005\022 \n\030numConsecutiveDaysP" +
-      "layed\030\030 \001(\005\022$\n\034lastWallPostNotificationT" +
-      "ime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\035\n\025inBattle" +
-      "ShieldEndTime\030# \001(\003\022\033\n\023fbIdSetOnUserCrea" +
-      "te\030, \001(\010\"E\n\030StaticUserLevelInfoProto\022\r\n\005" +
-      "level\030\001 \001(\005\022\032\n\022requiredExperience\030\002 \001(\005B" +
-      "\013B\tUserProto"
+      "Id\030- \001(\t\022\026\n\016udidForHistory\030. \001(\t\022\023\n\013devi",
+      "ceToken\030\020 \001(\t\022\"\n\032lastBattleNotificationT" +
+      "ime\030\021 \001(\003\022\021\n\tnumBadges\030\022 \001(\005\022\022\n\ncreateTi" +
+      "me\030\024 \001(\003\022\021\n\tapsalarId\030\026 \001(\005\022 \n\030numConsec" +
+      "utiveDaysPlayed\030\030 \001(\005\022$\n\034lastWallPostNot" +
+      "ificationTime\030\032 \001(\003\022\021\n\tkabamNaid\030\033 \001(\t\022\035" +
+      "\n\025inBattleShieldEndTime\030# \001(\003\022\033\n\023fbIdSet" +
+      "OnUserCreate\030, \001(\010\022\014\n\004udid\030\r \001(\t\"E\n\030Stat" +
+      "icUserLevelInfoProto\022\r\n\005level\030\001 \001(\005\022\032\n\022r" +
+      "equiredExperience\030\002 \001(\005B\013B\tUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7385,7 +7479,7 @@ public final class UserProto {
           internal_static_com_lvl6_proto_FullUserProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_FullUserProto_descriptor,
-              new java.lang.String[] { "UserId", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "FacebookId", "GameCenterId", "Udid", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "InBattleShieldEndTime", "FbIdSetOnUserCreate", },
+              new java.lang.String[] { "UserId", "Name", "Level", "Gems", "Cash", "Oil", "Experience", "TasksCompleted", "BattlesWon", "BattlesLost", "Flees", "ReferralCode", "NumReferrals", "LastLoginTime", "LastLogoutTime", "IsFake", "IsAdmin", "NumCoinsRetrievedFromStructs", "NumOilRetrievedFromStructs", "Clan", "HasReceivedfbReward", "NumBeginnerSalesPurchased", "HasActiveShield", "ShieldEndTime", "Elo", "Rank", "AttacksWon", "DefensesWon", "AttacksLost", "DefensesLost", "FacebookId", "GameCenterId", "UdidForHistory", "DeviceToken", "LastBattleNotificationTime", "NumBadges", "CreateTime", "ApsalarId", "NumConsecutiveDaysPlayed", "LastWallPostNotificationTime", "KabamNaid", "InBattleShieldEndTime", "FbIdSetOnUserCreate", "Udid", },
               com.lvl6.proto.UserProto.FullUserProto.class,
               com.lvl6.proto.UserProto.FullUserProto.Builder.class);
           internal_static_com_lvl6_proto_StaticUserLevelInfoProto_descriptor =

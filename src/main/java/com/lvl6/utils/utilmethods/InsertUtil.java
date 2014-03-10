@@ -66,10 +66,9 @@ public interface InsertUtil {
 			int coinsGivenToReferrer);
 
 	// returns -1 if error
-	public abstract int insertUser(String udid, String name, String deviceToken,
-			String newReferCode, int level, int experience, int coins, int diamonds,
-			boolean isFake, boolean activateShield, Timestamp createTime, String rank,
-			String facebookId);
+	public abstract int insertUser(String name, String udid, int level, int experience,
+			int cash, int oil, int gems, boolean isFake,  String deviceToken,
+			boolean activateShield, Timestamp createTime, String rank, String facebookId);
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
 
@@ -116,6 +115,9 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoTaskForUserCompleted(int userId, int task,
 			Timestamp timeOfEntry);
+	
+	public abstract int insertIntoTaskForUserCompleted(List<Integer> userIdList,
+			List<Integer> taskIdList, List<Timestamp> timeOfEntryList);
 	
 	public abstract int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
 			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,

@@ -104,4 +104,14 @@ public class TimeUtils {
 //  	log.info("date advanced " + minutesAddend + " minutes. date=" + createdDate);
   	return createdDate;
   }
+  
+  public Date createDateAddDays(Date curDate, int daysAddend) {
+  	DateTime dt = new DateTime(curDate);
+  	
+  	MutableDateTime mdt = dt.toMutableDateTime();
+  	mdt.addDays(daysAddend);
+  	Date createdDate = mdt.toDate();
+  	
+  	return createdDate;
+  }
 }

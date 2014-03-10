@@ -50,8 +50,8 @@ public class ControllerConstants {
 	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
 	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
 	public static final int PVP__ELO_RANGE_ADDEND = 100;
-	//NOT USING ANYMORE
-	//all these pairing chances need to sum to one-----------------------------------------
+	//NOT USING ANYMORE--------------------------------------------------------------------
+	//all these pairing chances need to sum to one
 	public static final float PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE = 0.05F;
 	public static final float PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE = 0.15F;
 	public static final float PVP__ELO_CATEGORY_THREE_PAIRING_CHANCE = 0.20F;
@@ -147,7 +147,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_CASH = 750;
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;
-	
+	public static final String TUTORIAL__INIT_RANK = "bronze";
 	
 	
 	
@@ -238,7 +238,6 @@ public class ControllerConstants {
 
   //TUTORIAL CONSTANTS
   public static final double CHARACTERS_ATTACK_DEFENSE_VARIABILITY = 0.67;
-  public static final String TUTORIAL__INIT_RANK = "bronze";
   public static final int TUTORIAL__INIT_COINS = 50;
   public static final int TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT = 2; //Because it does not warn the user
   public static final String TUTORIAL__FAKE_QUEST_GOOD_NAME = "Preserve the Peace";

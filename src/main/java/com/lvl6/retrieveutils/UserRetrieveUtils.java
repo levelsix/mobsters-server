@@ -618,7 +618,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int flees = rs.getInt(i++);
     String referralCode = rs.getString(i++);
     int numReferrals = rs.getInt(i++);
-    String udid = rs.getString(i++);
+    String udidForHistory = rs.getString(i++);
 
     Timestamp ts;
     Date lastLogin = null;
@@ -723,20 +723,20 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int defensesLost = rs.getInt(i++);
     String facebookId = rs.getString(i++);
 //    int nthExtraSlotsViaFb = rs.getInt(i++);
-    
     boolean fbIdSetOnUserCreate = rs.getBoolean(i++);
     String gameCenterId = rs.getString(i++);
+    String udid = rs.getString(i++);
     
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
-    		numReferrals, udid, lastLogin, lastLogout, deviceToken,
+    		numReferrals, udidForHistory, lastLogin, lastLogout, deviceToken,
     		lastBattleNotificationTime, numBadges, isFake, createTime, isAdmin,
     		apsalarId, numCoinsRetrievedFromStructs, numOilRetrievedFromStructs,
     		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
     		kabamNaid, hasReceivedfbReward, numBeginnerSalesPurchased,
     		hasActiveShield, shieldEndTime, elo, rank, lastTimeQueued,
     		attacksWon, defensesWon, attacksLost, defensesLost, facebookId,
-    		fbIdSetOnUserCreate, gameCenterId);
+    		fbIdSetOnUserCreate, gameCenterId, udid);
     return user;
   }
  

@@ -377,10 +377,10 @@ public class StartupController extends EventController {
   //null
   private User selectUser(List<User> users, String udid, String fbId) {
   	int numUsers = users.size();
-//  	if (numUsers > 2) {
-//  		log.error("there are more than 2 users with the same udid and fbId. udid=" + udid +
-//  				" fbId=" + fbId + " users=" + users);
-//  	}
+  	if (numUsers > 2) {
+  		log.error("(not really error) there are more than 2 users with the same udid and fbId. udid=" +
+  				udid + " fbId=" + fbId + " users=" + users);
+  	}
   	if (1 == numUsers) {
   		return users.get(0);
   	}

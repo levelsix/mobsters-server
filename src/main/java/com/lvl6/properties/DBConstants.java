@@ -469,7 +469,7 @@ public class DBConstants {
   public static final String USER__FLEES = "flees";
   public static final String USER__REFERRAL_CODE = "referral_code";
   public static final String USER__NUM_REFERRALS = "num_referrals";
-  public static final String USER__UDID = "udid";
+  public static final String USER__UDID_FOR_HISTORY = "udid_for_history";
   public static final String USER__LAST_LOGIN = "last_login";
   public static final String USER__LAST_LOGOUT = "last_logout";
   public static final String USER__DEVICE_TOKEN = "device_token";
@@ -499,7 +499,10 @@ public class DBConstants {
   public static final String USER__DEFENSES_LOST = "defenses_lost";
   public static final String USER__FACEBOOK_ID = "facebook_id";
 //  public static final String USER__NTH_EXTRA_SLOTS_VIA_FB = "nth_extra_slots_via_fb";
+  public static final String USER__FB_ID_SET_ON_USER_CREATE = "fb_id_set_on_user_create";
   public static final String USER__GAME_CENTER_ID = "game_center_id";  
+  public static final String USER__UDID = "udid";
+  
   
   /* USER BEFORE TUTORIAL COMPLETION*/
   public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

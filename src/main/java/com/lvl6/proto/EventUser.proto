@@ -33,9 +33,9 @@ message UserCreateResponseProto {
 	
     enum UserCreateStatus {
 		SUCCESS = 1;
-		FAIL_INVALID_NAME = 2;
+		FAIL_INVALID_NAME = 2; //not checking
 		FAIL_USER_WITH_UDID_ALREADY_EXISTS = 3;
-     	FAIL_INVALID_REFER_CODE = 4;
+     	FAIL_INVALID_REFER_CODE = 4; //not checking
      	FAIL_USER_WITH_FACEBOOK_ID_EXISTS = 5;
 		FAIL_OTHER = 6;
 	}  
@@ -97,6 +97,8 @@ message UpdateClientUserResponseProto {
 message SetFacebookIdRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string fbId = 2;
+	
+	optional bool isUserCreate = 3;
 }
 
 message SetFacebookIdResponseProto {

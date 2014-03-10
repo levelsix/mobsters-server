@@ -19,34 +19,23 @@ public final class EventUserProto {
     boolean hasName();
     String getName();
     
-    // optional string referrerCode = 3;
-    boolean hasReferrerCode();
-    String getReferrerCode();
-    
-    // optional string deviceToken = 4;
+    // optional string deviceToken = 3;
     boolean hasDeviceToken();
     String getDeviceToken();
     
-    // optional int64 timeOfStructPurchase = 5;
-    boolean hasTimeOfStructPurchase();
-    long getTimeOfStructPurchase();
-    
-    // optional int64 timeOfStructBuild = 6;
-    boolean hasTimeOfStructBuild();
-    long getTimeOfStructBuild();
-    
-    // optional .com.lvl6.proto.CoordinateProto structCoords = 7;
-    boolean hasStructCoords();
-    com.lvl6.proto.StructureProto.CoordinateProto getStructCoords();
-    com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getStructCoordsOrBuilder();
-    
-    // optional bool usedDiamondsToBuilt = 8;
-    boolean hasUsedDiamondsToBuilt();
-    boolean getUsedDiamondsToBuilt();
-    
-    // optional string facebookId = 9;
+    // optional string facebookId = 4;
     boolean hasFacebookId();
     String getFacebookId();
+    
+    // repeated .com.lvl6.proto.TutorialStructProto structsJustBuilt = 5;
+    java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> 
+        getStructsJustBuiltList();
+    com.lvl6.proto.StructureProto.TutorialStructProto getStructsJustBuilt(int index);
+    int getStructsJustBuiltCount();
+    java.util.List<? extends com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder> 
+        getStructsJustBuiltOrBuilderList();
+    com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder getStructsJustBuiltOrBuilder(
+        int index);
     
     // optional int32 cash = 10;
     boolean hasCash();
@@ -153,43 +142,11 @@ public final class EventUserProto {
       }
     }
     
-    // optional string referrerCode = 3;
-    public static final int REFERRERCODE_FIELD_NUMBER = 3;
-    private java.lang.Object referrerCode_;
-    public boolean hasReferrerCode() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    public String getReferrerCode() {
-      java.lang.Object ref = referrerCode_;
-      if (ref instanceof String) {
-        return (String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
-          referrerCode_ = s;
-        }
-        return s;
-      }
-    }
-    private com.google.protobuf.ByteString getReferrerCodeBytes() {
-      java.lang.Object ref = referrerCode_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
-        referrerCode_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    
-    // optional string deviceToken = 4;
-    public static final int DEVICETOKEN_FIELD_NUMBER = 4;
+    // optional string deviceToken = 3;
+    public static final int DEVICETOKEN_FIELD_NUMBER = 3;
     private java.lang.Object deviceToken_;
     public boolean hasDeviceToken() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     public String getDeviceToken() {
       java.lang.Object ref = deviceToken_;
@@ -217,54 +174,11 @@ public final class EventUserProto {
       }
     }
     
-    // optional int64 timeOfStructPurchase = 5;
-    public static final int TIMEOFSTRUCTPURCHASE_FIELD_NUMBER = 5;
-    private long timeOfStructPurchase_;
-    public boolean hasTimeOfStructPurchase() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    public long getTimeOfStructPurchase() {
-      return timeOfStructPurchase_;
-    }
-    
-    // optional int64 timeOfStructBuild = 6;
-    public static final int TIMEOFSTRUCTBUILD_FIELD_NUMBER = 6;
-    private long timeOfStructBuild_;
-    public boolean hasTimeOfStructBuild() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    public long getTimeOfStructBuild() {
-      return timeOfStructBuild_;
-    }
-    
-    // optional .com.lvl6.proto.CoordinateProto structCoords = 7;
-    public static final int STRUCTCOORDS_FIELD_NUMBER = 7;
-    private com.lvl6.proto.StructureProto.CoordinateProto structCoords_;
-    public boolean hasStructCoords() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    public com.lvl6.proto.StructureProto.CoordinateProto getStructCoords() {
-      return structCoords_;
-    }
-    public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getStructCoordsOrBuilder() {
-      return structCoords_;
-    }
-    
-    // optional bool usedDiamondsToBuilt = 8;
-    public static final int USEDDIAMONDSTOBUILT_FIELD_NUMBER = 8;
-    private boolean usedDiamondsToBuilt_;
-    public boolean hasUsedDiamondsToBuilt() {
-      return ((bitField0_ & 0x00000080) == 0x00000080);
-    }
-    public boolean getUsedDiamondsToBuilt() {
-      return usedDiamondsToBuilt_;
-    }
-    
-    // optional string facebookId = 9;
-    public static final int FACEBOOKID_FIELD_NUMBER = 9;
+    // optional string facebookId = 4;
+    public static final int FACEBOOKID_FIELD_NUMBER = 4;
     private java.lang.Object facebookId_;
     public boolean hasFacebookId() {
-      return ((bitField0_ & 0x00000100) == 0x00000100);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     public String getFacebookId() {
       java.lang.Object ref = facebookId_;
@@ -292,11 +206,32 @@ public final class EventUserProto {
       }
     }
     
+    // repeated .com.lvl6.proto.TutorialStructProto structsJustBuilt = 5;
+    public static final int STRUCTSJUSTBUILT_FIELD_NUMBER = 5;
+    private java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> structsJustBuilt_;
+    public java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> getStructsJustBuiltList() {
+      return structsJustBuilt_;
+    }
+    public java.util.List<? extends com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder> 
+        getStructsJustBuiltOrBuilderList() {
+      return structsJustBuilt_;
+    }
+    public int getStructsJustBuiltCount() {
+      return structsJustBuilt_.size();
+    }
+    public com.lvl6.proto.StructureProto.TutorialStructProto getStructsJustBuilt(int index) {
+      return structsJustBuilt_.get(index);
+    }
+    public com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder getStructsJustBuiltOrBuilder(
+        int index) {
+      return structsJustBuilt_.get(index);
+    }
+    
     // optional int32 cash = 10;
     public static final int CASH_FIELD_NUMBER = 10;
     private int cash_;
     public boolean hasCash() {
-      return ((bitField0_ & 0x00000200) == 0x00000200);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     public int getCash() {
       return cash_;
@@ -306,7 +241,7 @@ public final class EventUserProto {
     public static final int OIL_FIELD_NUMBER = 11;
     private int oil_;
     public boolean hasOil() {
-      return ((bitField0_ & 0x00000400) == 0x00000400);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     public int getOil() {
       return oil_;
@@ -316,7 +251,7 @@ public final class EventUserProto {
     public static final int GEMS_FIELD_NUMBER = 12;
     private int gems_;
     public boolean hasGems() {
-      return ((bitField0_ & 0x00000800) == 0x00000800);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     public int getGems() {
       return gems_;
@@ -325,13 +260,9 @@ public final class EventUserProto {
     private void initFields() {
       udid_ = "";
       name_ = "";
-      referrerCode_ = "";
       deviceToken_ = "";
-      timeOfStructPurchase_ = 0L;
-      timeOfStructBuild_ = 0L;
-      structCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      usedDiamondsToBuilt_ = false;
       facebookId_ = "";
+      structsJustBuilt_ = java.util.Collections.emptyList();
       cash_ = 0;
       oil_ = 0;
       gems_ = 0;
@@ -355,33 +286,21 @@ public final class EventUserProto {
         output.writeBytes(2, getNameBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeBytes(3, getReferrerCodeBytes());
+        output.writeBytes(3, getDeviceTokenBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getDeviceTokenBytes());
+        output.writeBytes(4, getFacebookIdBytes());
+      }
+      for (int i = 0; i < structsJustBuilt_.size(); i++) {
+        output.writeMessage(5, structsJustBuilt_.get(i));
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, timeOfStructPurchase_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt64(6, timeOfStructBuild_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeMessage(7, structCoords_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeBool(8, usedDiamondsToBuilt_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        output.writeBytes(9, getFacebookIdBytes());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
         output.writeInt32(10, cash_);
       }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(11, oil_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt32(12, gems_);
       }
       getUnknownFields().writeTo(output);
@@ -403,41 +322,25 @@ public final class EventUserProto {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getReferrerCodeBytes());
+          .computeBytesSize(3, getDeviceTokenBytes());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getDeviceTokenBytes());
+          .computeBytesSize(4, getFacebookIdBytes());
+      }
+      for (int i = 0; i < structsJustBuilt_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, structsJustBuilt_.get(i));
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, timeOfStructPurchase_);
+          .computeInt32Size(10, cash_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, timeOfStructBuild_);
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, structCoords_);
-      }
-      if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(8, usedDiamondsToBuilt_);
-      }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(9, getFacebookIdBytes());
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(10, cash_);
-      }
-      if (((bitField0_ & 0x00000400) == 0x00000400)) {
-        size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(11, oil_);
       }
-      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(12, gems_);
       }
@@ -557,7 +460,7 @@ public final class EventUserProto {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getStructCoordsFieldBuilder();
+          getStructsJustBuiltFieldBuilder();
         }
       }
       private static Builder create() {
@@ -570,30 +473,22 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        referrerCode_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
         deviceToken_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
-        timeOfStructPurchase_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        timeOfStructBuild_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        if (structCoordsBuilder_ == null) {
-          structCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-        } else {
-          structCoordsBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000040);
-        usedDiamondsToBuilt_ = false;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000004);
         facebookId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (structsJustBuiltBuilder_ == null) {
+          structsJustBuilt_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          structsJustBuiltBuilder_.clear();
+        }
         cash_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000020);
         oil_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000040);
         gems_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
       
@@ -643,45 +538,30 @@ public final class EventUserProto {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.referrerCode_ = referrerCode_;
+        result.deviceToken_ = deviceToken_;
         if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
           to_bitField0_ |= 0x00000008;
         }
-        result.deviceToken_ = deviceToken_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+        result.facebookId_ = facebookId_;
+        if (structsJustBuiltBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            structsJustBuilt_ = java.util.Collections.unmodifiableList(structsJustBuilt_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.structsJustBuilt_ = structsJustBuilt_;
+        } else {
+          result.structsJustBuilt_ = structsJustBuiltBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.timeOfStructPurchase_ = timeOfStructPurchase_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+        result.cash_ = cash_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
         }
-        result.timeOfStructBuild_ = timeOfStructBuild_;
-        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
-          to_bitField0_ |= 0x00000040;
-        }
-        if (structCoordsBuilder_ == null) {
-          result.structCoords_ = structCoords_;
-        } else {
-          result.structCoords_ = structCoordsBuilder_.build();
-        }
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
-          to_bitField0_ |= 0x00000080;
-        }
-        result.usedDiamondsToBuilt_ = usedDiamondsToBuilt_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000100;
-        }
-        result.facebookId_ = facebookId_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
-          to_bitField0_ |= 0x00000200;
-        }
-        result.cash_ = cash_;
-        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
-          to_bitField0_ |= 0x00000400;
-        }
         result.oil_ = oil_;
-        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
-          to_bitField0_ |= 0x00000800;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
         }
         result.gems_ = gems_;
         result.bitField0_ = to_bitField0_;
@@ -706,26 +586,37 @@ public final class EventUserProto {
         if (other.hasName()) {
           setName(other.getName());
         }
-        if (other.hasReferrerCode()) {
-          setReferrerCode(other.getReferrerCode());
-        }
         if (other.hasDeviceToken()) {
           setDeviceToken(other.getDeviceToken());
         }
-        if (other.hasTimeOfStructPurchase()) {
-          setTimeOfStructPurchase(other.getTimeOfStructPurchase());
-        }
-        if (other.hasTimeOfStructBuild()) {
-          setTimeOfStructBuild(other.getTimeOfStructBuild());
-        }
-        if (other.hasStructCoords()) {
-          mergeStructCoords(other.getStructCoords());
-        }
-        if (other.hasUsedDiamondsToBuilt()) {
-          setUsedDiamondsToBuilt(other.getUsedDiamondsToBuilt());
-        }
         if (other.hasFacebookId()) {
           setFacebookId(other.getFacebookId());
+        }
+        if (structsJustBuiltBuilder_ == null) {
+          if (!other.structsJustBuilt_.isEmpty()) {
+            if (structsJustBuilt_.isEmpty()) {
+              structsJustBuilt_ = other.structsJustBuilt_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensureStructsJustBuiltIsMutable();
+              structsJustBuilt_.addAll(other.structsJustBuilt_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.structsJustBuilt_.isEmpty()) {
+            if (structsJustBuiltBuilder_.isEmpty()) {
+              structsJustBuiltBuilder_.dispose();
+              structsJustBuiltBuilder_ = null;
+              structsJustBuilt_ = other.structsJustBuilt_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              structsJustBuiltBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getStructsJustBuiltFieldBuilder() : null;
+            } else {
+              structsJustBuiltBuilder_.addAllMessages(other.structsJustBuilt_);
+            }
+          }
         }
         if (other.hasCash()) {
           setCash(other.getCash());
@@ -779,55 +670,32 @@ public final class EventUserProto {
             }
             case 26: {
               bitField0_ |= 0x00000004;
-              referrerCode_ = input.readBytes();
+              deviceToken_ = input.readBytes();
               break;
             }
             case 34: {
               bitField0_ |= 0x00000008;
-              deviceToken_ = input.readBytes();
-              break;
-            }
-            case 40: {
-              bitField0_ |= 0x00000010;
-              timeOfStructPurchase_ = input.readInt64();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
-              timeOfStructBuild_ = input.readInt64();
-              break;
-            }
-            case 58: {
-              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
-              if (hasStructCoords()) {
-                subBuilder.mergeFrom(getStructCoords());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setStructCoords(subBuilder.buildPartial());
-              break;
-            }
-            case 64: {
-              bitField0_ |= 0x00000080;
-              usedDiamondsToBuilt_ = input.readBool();
-              break;
-            }
-            case 74: {
-              bitField0_ |= 0x00000100;
               facebookId_ = input.readBytes();
               break;
             }
+            case 42: {
+              com.lvl6.proto.StructureProto.TutorialStructProto.Builder subBuilder = com.lvl6.proto.StructureProto.TutorialStructProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addStructsJustBuilt(subBuilder.buildPartial());
+              break;
+            }
             case 80: {
-              bitField0_ |= 0x00000200;
+              bitField0_ |= 0x00000020;
               cash_ = input.readInt32();
               break;
             }
             case 88: {
-              bitField0_ |= 0x00000400;
+              bitField0_ |= 0x00000040;
               oil_ = input.readInt32();
               break;
             }
             case 96: {
-              bitField0_ |= 0x00000800;
+              bitField0_ |= 0x00000080;
               gems_ = input.readInt32();
               break;
             }
@@ -909,46 +777,10 @@ public final class EventUserProto {
         onChanged();
       }
       
-      // optional string referrerCode = 3;
-      private java.lang.Object referrerCode_ = "";
-      public boolean hasReferrerCode() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      public String getReferrerCode() {
-        java.lang.Object ref = referrerCode_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
-          referrerCode_ = s;
-          return s;
-        } else {
-          return (String) ref;
-        }
-      }
-      public Builder setReferrerCode(String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        referrerCode_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearReferrerCode() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        referrerCode_ = getDefaultInstance().getReferrerCode();
-        onChanged();
-        return this;
-      }
-      void setReferrerCode(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000004;
-        referrerCode_ = value;
-        onChanged();
-      }
-      
-      // optional string deviceToken = 4;
+      // optional string deviceToken = 3;
       private java.lang.Object deviceToken_ = "";
       public boolean hasDeviceToken() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       public String getDeviceToken() {
         java.lang.Object ref = deviceToken_;
@@ -964,180 +796,27 @@ public final class EventUserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         deviceToken_ = value;
         onChanged();
         return this;
       }
       public Builder clearDeviceToken() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         deviceToken_ = getDefaultInstance().getDeviceToken();
         onChanged();
         return this;
       }
       void setDeviceToken(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         deviceToken_ = value;
         onChanged();
       }
       
-      // optional int64 timeOfStructPurchase = 5;
-      private long timeOfStructPurchase_ ;
-      public boolean hasTimeOfStructPurchase() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      public long getTimeOfStructPurchase() {
-        return timeOfStructPurchase_;
-      }
-      public Builder setTimeOfStructPurchase(long value) {
-        bitField0_ |= 0x00000010;
-        timeOfStructPurchase_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearTimeOfStructPurchase() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        timeOfStructPurchase_ = 0L;
-        onChanged();
-        return this;
-      }
-      
-      // optional int64 timeOfStructBuild = 6;
-      private long timeOfStructBuild_ ;
-      public boolean hasTimeOfStructBuild() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
-      }
-      public long getTimeOfStructBuild() {
-        return timeOfStructBuild_;
-      }
-      public Builder setTimeOfStructBuild(long value) {
-        bitField0_ |= 0x00000020;
-        timeOfStructBuild_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearTimeOfStructBuild() {
-        bitField0_ = (bitField0_ & ~0x00000020);
-        timeOfStructBuild_ = 0L;
-        onChanged();
-        return this;
-      }
-      
-      // optional .com.lvl6.proto.CoordinateProto structCoords = 7;
-      private com.lvl6.proto.StructureProto.CoordinateProto structCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> structCoordsBuilder_;
-      public boolean hasStructCoords() {
-        return ((bitField0_ & 0x00000040) == 0x00000040);
-      }
-      public com.lvl6.proto.StructureProto.CoordinateProto getStructCoords() {
-        if (structCoordsBuilder_ == null) {
-          return structCoords_;
-        } else {
-          return structCoordsBuilder_.getMessage();
-        }
-      }
-      public Builder setStructCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
-        if (structCoordsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          structCoords_ = value;
-          onChanged();
-        } else {
-          structCoordsBuilder_.setMessage(value);
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      public Builder setStructCoords(
-          com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
-        if (structCoordsBuilder_ == null) {
-          structCoords_ = builderForValue.build();
-          onChanged();
-        } else {
-          structCoordsBuilder_.setMessage(builderForValue.build());
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      public Builder mergeStructCoords(com.lvl6.proto.StructureProto.CoordinateProto value) {
-        if (structCoordsBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040) &&
-              structCoords_ != com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance()) {
-            structCoords_ =
-              com.lvl6.proto.StructureProto.CoordinateProto.newBuilder(structCoords_).mergeFrom(value).buildPartial();
-          } else {
-            structCoords_ = value;
-          }
-          onChanged();
-        } else {
-          structCoordsBuilder_.mergeFrom(value);
-        }
-        bitField0_ |= 0x00000040;
-        return this;
-      }
-      public Builder clearStructCoords() {
-        if (structCoordsBuilder_ == null) {
-          structCoords_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
-          onChanged();
-        } else {
-          structCoordsBuilder_.clear();
-        }
-        bitField0_ = (bitField0_ & ~0x00000040);
-        return this;
-      }
-      public com.lvl6.proto.StructureProto.CoordinateProto.Builder getStructCoordsBuilder() {
-        bitField0_ |= 0x00000040;
-        onChanged();
-        return getStructCoordsFieldBuilder().getBuilder();
-      }
-      public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getStructCoordsOrBuilder() {
-        if (structCoordsBuilder_ != null) {
-          return structCoordsBuilder_.getMessageOrBuilder();
-        } else {
-          return structCoords_;
-        }
-      }
-      private com.google.protobuf.SingleFieldBuilder<
-          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
-          getStructCoordsFieldBuilder() {
-        if (structCoordsBuilder_ == null) {
-          structCoordsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
-                  structCoords_,
-                  getParentForChildren(),
-                  isClean());
-          structCoords_ = null;
-        }
-        return structCoordsBuilder_;
-      }
-      
-      // optional bool usedDiamondsToBuilt = 8;
-      private boolean usedDiamondsToBuilt_ ;
-      public boolean hasUsedDiamondsToBuilt() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
-      }
-      public boolean getUsedDiamondsToBuilt() {
-        return usedDiamondsToBuilt_;
-      }
-      public Builder setUsedDiamondsToBuilt(boolean value) {
-        bitField0_ |= 0x00000080;
-        usedDiamondsToBuilt_ = value;
-        onChanged();
-        return this;
-      }
-      public Builder clearUsedDiamondsToBuilt() {
-        bitField0_ = (bitField0_ & ~0x00000080);
-        usedDiamondsToBuilt_ = false;
-        onChanged();
-        return this;
-      }
-      
-      // optional string facebookId = 9;
+      // optional string facebookId = 4;
       private java.lang.Object facebookId_ = "";
       public boolean hasFacebookId() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       public String getFacebookId() {
         java.lang.Object ref = facebookId_;
@@ -1153,39 +832,225 @@ public final class EventUserProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000008;
         facebookId_ = value;
         onChanged();
         return this;
       }
       public Builder clearFacebookId() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000008);
         facebookId_ = getDefaultInstance().getFacebookId();
         onChanged();
         return this;
       }
       void setFacebookId(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000100;
+        bitField0_ |= 0x00000008;
         facebookId_ = value;
         onChanged();
+      }
+      
+      // repeated .com.lvl6.proto.TutorialStructProto structsJustBuilt = 5;
+      private java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> structsJustBuilt_ =
+        java.util.Collections.emptyList();
+      private void ensureStructsJustBuiltIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          structsJustBuilt_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.TutorialStructProto>(structsJustBuilt_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.TutorialStructProto, com.lvl6.proto.StructureProto.TutorialStructProto.Builder, com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder> structsJustBuiltBuilder_;
+      
+      public java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto> getStructsJustBuiltList() {
+        if (structsJustBuiltBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(structsJustBuilt_);
+        } else {
+          return structsJustBuiltBuilder_.getMessageList();
+        }
+      }
+      public int getStructsJustBuiltCount() {
+        if (structsJustBuiltBuilder_ == null) {
+          return structsJustBuilt_.size();
+        } else {
+          return structsJustBuiltBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.StructureProto.TutorialStructProto getStructsJustBuilt(int index) {
+        if (structsJustBuiltBuilder_ == null) {
+          return structsJustBuilt_.get(index);
+        } else {
+          return structsJustBuiltBuilder_.getMessage(index);
+        }
+      }
+      public Builder setStructsJustBuilt(
+          int index, com.lvl6.proto.StructureProto.TutorialStructProto value) {
+        if (structsJustBuiltBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStructsJustBuiltIsMutable();
+          structsJustBuilt_.set(index, value);
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setStructsJustBuilt(
+          int index, com.lvl6.proto.StructureProto.TutorialStructProto.Builder builderForValue) {
+        if (structsJustBuiltBuilder_ == null) {
+          ensureStructsJustBuiltIsMutable();
+          structsJustBuilt_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addStructsJustBuilt(com.lvl6.proto.StructureProto.TutorialStructProto value) {
+        if (structsJustBuiltBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStructsJustBuiltIsMutable();
+          structsJustBuilt_.add(value);
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addStructsJustBuilt(
+          int index, com.lvl6.proto.StructureProto.TutorialStructProto value) {
+        if (structsJustBuiltBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureStructsJustBuiltIsMutable();
+          structsJustBuilt_.add(index, value);
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addStructsJustBuilt(
+          com.lvl6.proto.StructureProto.TutorialStructProto.Builder builderForValue) {
+        if (structsJustBuiltBuilder_ == null) {
+          ensureStructsJustBuiltIsMutable();
+          structsJustBuilt_.add(builderForValue.build());
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addStructsJustBuilt(
+          int index, com.lvl6.proto.StructureProto.TutorialStructProto.Builder builderForValue) {
+        if (structsJustBuiltBuilder_ == null) {
+          ensureStructsJustBuiltIsMutable();
+          structsJustBuilt_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllStructsJustBuilt(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.TutorialStructProto> values) {
+        if (structsJustBuiltBuilder_ == null) {
+          ensureStructsJustBuiltIsMutable();
+          super.addAll(values, structsJustBuilt_);
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearStructsJustBuilt() {
+        if (structsJustBuiltBuilder_ == null) {
+          structsJustBuilt_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeStructsJustBuilt(int index) {
+        if (structsJustBuiltBuilder_ == null) {
+          ensureStructsJustBuiltIsMutable();
+          structsJustBuilt_.remove(index);
+          onChanged();
+        } else {
+          structsJustBuiltBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.TutorialStructProto.Builder getStructsJustBuiltBuilder(
+          int index) {
+        return getStructsJustBuiltFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder getStructsJustBuiltOrBuilder(
+          int index) {
+        if (structsJustBuiltBuilder_ == null) {
+          return structsJustBuilt_.get(index);  } else {
+          return structsJustBuiltBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder> 
+           getStructsJustBuiltOrBuilderList() {
+        if (structsJustBuiltBuilder_ != null) {
+          return structsJustBuiltBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(structsJustBuilt_);
+        }
+      }
+      public com.lvl6.proto.StructureProto.TutorialStructProto.Builder addStructsJustBuiltBuilder() {
+        return getStructsJustBuiltFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.TutorialStructProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.StructureProto.TutorialStructProto.Builder addStructsJustBuiltBuilder(
+          int index) {
+        return getStructsJustBuiltFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.TutorialStructProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.StructureProto.TutorialStructProto.Builder> 
+           getStructsJustBuiltBuilderList() {
+        return getStructsJustBuiltFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.TutorialStructProto, com.lvl6.proto.StructureProto.TutorialStructProto.Builder, com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder> 
+          getStructsJustBuiltFieldBuilder() {
+        if (structsJustBuiltBuilder_ == null) {
+          structsJustBuiltBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.TutorialStructProto, com.lvl6.proto.StructureProto.TutorialStructProto.Builder, com.lvl6.proto.StructureProto.TutorialStructProtoOrBuilder>(
+                  structsJustBuilt_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          structsJustBuilt_ = null;
+        }
+        return structsJustBuiltBuilder_;
       }
       
       // optional int32 cash = 10;
       private int cash_ ;
       public boolean hasCash() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       public int getCash() {
         return cash_;
       }
       public Builder setCash(int value) {
-        bitField0_ |= 0x00000200;
+        bitField0_ |= 0x00000020;
         cash_ = value;
         onChanged();
         return this;
       }
       public Builder clearCash() {
-        bitField0_ = (bitField0_ & ~0x00000200);
+        bitField0_ = (bitField0_ & ~0x00000020);
         cash_ = 0;
         onChanged();
         return this;
@@ -1194,19 +1059,19 @@ public final class EventUserProto {
       // optional int32 oil = 11;
       private int oil_ ;
       public boolean hasOil() {
-        return ((bitField0_ & 0x00000400) == 0x00000400);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       public int getOil() {
         return oil_;
       }
       public Builder setOil(int value) {
-        bitField0_ |= 0x00000400;
+        bitField0_ |= 0x00000040;
         oil_ = value;
         onChanged();
         return this;
       }
       public Builder clearOil() {
-        bitField0_ = (bitField0_ & ~0x00000400);
+        bitField0_ = (bitField0_ & ~0x00000040);
         oil_ = 0;
         onChanged();
         return this;
@@ -1215,19 +1080,19 @@ public final class EventUserProto {
       // optional int32 gems = 12;
       private int gems_ ;
       public boolean hasGems() {
-        return ((bitField0_ & 0x00000800) == 0x00000800);
+        return ((bitField0_ & 0x00000080) == 0x00000080);
       }
       public int getGems() {
         return gems_;
       }
       public Builder setGems(int value) {
-        bitField0_ |= 0x00000800;
+        bitField0_ |= 0x00000080;
         gems_ = value;
         onChanged();
         return this;
       }
       public Builder clearGems() {
-        bitField0_ = (bitField0_ & ~0x00000800);
+        bitField0_ = (bitField0_ & ~0x00000080);
         gems_ = 0;
         onChanged();
         return this;
@@ -5279,6 +5144,10 @@ public final class EventUserProto {
     // optional string fbId = 2;
     boolean hasFbId();
     String getFbId();
+    
+    // optional bool isUserCreate = 3;
+    boolean hasIsUserCreate();
+    boolean getIsUserCreate();
   }
   public static final class SetFacebookIdRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -5354,9 +5223,20 @@ public final class EventUserProto {
       }
     }
     
+    // optional bool isUserCreate = 3;
+    public static final int ISUSERCREATE_FIELD_NUMBER = 3;
+    private boolean isUserCreate_;
+    public boolean hasIsUserCreate() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public boolean getIsUserCreate() {
+      return isUserCreate_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       fbId_ = "";
+      isUserCreate_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5376,6 +5256,9 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeBytes(2, getFbIdBytes());
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, isUserCreate_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -5392,6 +5275,10 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getFbIdBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, isUserCreate_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -5526,6 +5413,8 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         fbId_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        isUserCreate_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -5576,6 +5465,10 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000002;
         }
         result.fbId_ = fbId_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.isUserCreate_ = isUserCreate_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -5597,6 +5490,9 @@ public final class EventUserProto {
         }
         if (other.hasFbId()) {
           setFbId(other.getFbId());
+        }
+        if (other.hasIsUserCreate()) {
+          setIsUserCreate(other.getIsUserCreate());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -5641,6 +5537,11 @@ public final class EventUserProto {
             case 18: {
               bitField0_ |= 0x00000002;
               fbId_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              isUserCreate_ = input.readBool();
               break;
             }
           }
@@ -5775,6 +5676,27 @@ public final class EventUserProto {
         onChanged();
       }
       
+      // optional bool isUserCreate = 3;
+      private boolean isUserCreate_ ;
+      public boolean hasIsUserCreate() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public boolean getIsUserCreate() {
+        return isUserCreate_;
+      }
+      public Builder setIsUserCreate(boolean value) {
+        bitField0_ |= 0x00000004;
+        isUserCreate_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearIsUserCreate() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        isUserCreate_ = false;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SetFacebookIdRequestProto)
     }
     
@@ -5830,10 +5752,14 @@ public final class EventUserProto {
         implements com.google.protobuf.ProtocolMessageEnum {
       SUCCESS(0, 1),
       FAIL_OTHER(1, 2),
+      FAIL_FB_ID_EXISTS(2, 3),
+      FAIL_USER_FB_ID_ALREADY_SET(3, 4),
       ;
       
       public static final int SUCCESS_VALUE = 1;
       public static final int FAIL_OTHER_VALUE = 2;
+      public static final int FAIL_FB_ID_EXISTS_VALUE = 3;
+      public static final int FAIL_USER_FB_ID_ALREADY_SET_VALUE = 4;
       
       
       public final int getNumber() { return value; }
@@ -5842,6 +5768,8 @@ public final class EventUserProto {
         switch (value) {
           case 1: return SUCCESS;
           case 2: return FAIL_OTHER;
+          case 3: return FAIL_FB_ID_EXISTS;
+          case 4: return FAIL_USER_FB_ID_ALREADY_SET;
           default: return null;
         }
       }
@@ -5872,7 +5800,7 @@ public final class EventUserProto {
       }
       
       private static final SetFacebookIdStatus[] VALUES = {
-        SUCCESS, FAIL_OTHER, 
+        SUCCESS, FAIL_OTHER, FAIL_FB_ID_EXISTS, FAIL_USER_FB_ID_ALREADY_SET, 
       };
       
       public static SetFacebookIdStatus valueOf(
@@ -9005,73 +8933,73 @@ public final class EventUserProto {
     java.lang.String[] descriptorData = {
       "\n\017EventUser.proto\022\016com.lvl6.proto\032\022Monst" +
       "erStuff.proto\032\017Structure.proto\032\nUser.pro" +
-      "to\"\251\002\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
-      "\001(\t\022\014\n\004name\030\002 \001(\t\022\024\n\014referrerCode\030\003 \001(\t\022" +
-      "\023\n\013deviceToken\030\004 \001(\t\022\034\n\024timeOfStructPurc" +
-      "hase\030\005 \001(\003\022\031\n\021timeOfStructBuild\030\006 \001(\003\0225\n" +
-      "\014structCoords\030\007 \001(\0132\037.com.lvl6.proto.Coo" +
-      "rdinateProto\022\033\n\023usedDiamondsToBuilt\030\010 \001(" +
-      "\010\022\022\n\nfacebookId\030\t \001(\t\022\014\n\004cash\030\n \001(\005\022\013\n\003o" +
-      "il\030\013 \001(\005\022\014\n\004gems\030\014 \001(\005\"\307\002\n\027UserCreateRes",
-      "ponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl6.pr" +
-      "oto.FullUserProto\022H\n\006status\030\002 \001(\01628.com." +
-      "lvl6.proto.UserCreateResponseProto.UserC" +
-      "reateStatus\"\262\001\n\020UserCreateStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\025\n\021FAIL_INVALID_NAME\020\002\022&\n\"FAIL_USE" +
-      "R_WITH_UDID_ALREADY_EXISTS\020\003\022\033\n\027FAIL_INV" +
-      "ALID_REFER_CODE\020\004\022%\n!FAIL_USER_WITH_FACE" +
-      "BOOK_ID_EXISTS\020\005\022\016\n\nFAIL_OTHER\020\006\"G\n\023Leve" +
-      "lUpRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\"\366\001\n\024LevelUpRes",
-      "ponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.pr" +
-      "oto.MinimumUserProto\022B\n\006status\030\002 \001(\01622.c" +
-      "om.lvl6.proto.LevelUpResponseProto.Level" +
-      "UpStatus\"h\n\rLevelUpStatus\022\013\n\007SUCCESS\020\001\022 " +
-      "\n\034NOT_ENOUGH_EXP_TO_NEXT_LEVEL\020\002\022\030\n\024ALRE" +
-      "ADY_AT_MAX_LEVEL\020\003\022\016\n\nOTHER_FAIL\020\004\"\220\001\n#R" +
-      "etrieveUsersForUserIdsRequestProto\0220\n\006se" +
-      "nder\030\001 \001(\0132 .com.lvl6.proto.MinimumUserP" +
-      "roto\022\030\n\020requestedUserIds\030\002 \003(\005\022\035\n\025includ" +
-      "eCurMonsterTeam\030\003 \001(\010\"\315\001\n$RetrieveUsersF",
-      "orUserIdsResponseProto\0220\n\006sender\030\001 \001(\0132 " +
-      ".com.lvl6.proto.MinimumUserProto\0225\n\016requ" +
-      "estedUsers\030\002 \003(\0132\035.com.lvl6.proto.FullUs" +
-      "erProto\022<\n\007curTeam\030\003 \003(\0132+.com.lvl6.prot" +
-      "o.UserCurrentMonsterTeamProto\"F\n\022LogoutR" +
-      "equestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\"h\n\035UpdateClientUse" +
-      "rResponseProto\022-\n\006sender\030\001 \001(\0132\035.com.lvl" +
-      "6.proto.FullUserProto\022\030\n\020timeOfUserUpdat" +
-      "e\030\002 \001(\003\"[\n\031SetFacebookIdRequestProto\0220\n\006",
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\014\n\004fbId\030\002 \001(\t\"\322\001\n\032SetFacebookIdRe" +
-      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
-      "roto.MinimumUserProto\022N\n\006status\030\002 \001(\0162>." +
-      "com.lvl6.proto.SetFacebookIdResponseProt" +
-      "o.SetFacebookIdStatus\"2\n\023SetFacebookIdSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\277\001\n\036Up" +
-      "dateUserCurrencyRequestProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022\021" +
-      "\n\tcashSpent\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021\n\tg",
-      "emsSpent\030\004 \001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006re" +
-      "ason\030\006 \001(\t\022\017\n\007details\030\007 \001(\t\"\272\002\n\037UpdateUs" +
-      "erCurrencyResponseProto\0220\n\006sender\030\001 \001(\0132" +
-      " .com.lvl6.proto.MinimumUserProto\022X\n\006sta" +
-      "tus\030\002 \001(\0162H.com.lvl6.proto.UpdateUserCur" +
-      "rencyResponseProto.UpdateUserCurrencySta" +
-      "tus\"\212\001\n\030UpdateUserCurrencyStatus\022\013\n\007SUCC" +
-      "ESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIE" +
-      "NT_CASH\020\003\022\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022\032\n\026" +
-      "FAIL_INSUFFICIENT_GEMS\020\005\"e\n\033SetGameCente",
-      "rIdRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022\024\n\014gameCenterI" +
-      "d\030\002 \001(\t\"\360\001\n\034SetGameCenterIdResponseProto" +
-      "\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minimu" +
-      "mUserProto\022\024\n\014gameCenterId\030\002 \001(\t\022R\n\006stat" +
-      "us\030\003 \001(\0162B.com.lvl6.proto.SetGameCenterI" +
-      "dResponseProto.SetGameCenterIdStatus\"4\n\025" +
-      "SetGameCenterIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFA" +
-      "IL_OTHER\020\002B\020B\016EventUserProto"
+      "to\"\305\001\n\026UserCreateRequestProto\022\014\n\004udid\030\001 " +
+      "\001(\t\022\014\n\004name\030\002 \001(\t\022\023\n\013deviceToken\030\003 \001(\t\022\022" +
+      "\n\nfacebookId\030\004 \001(\t\022=\n\020structsJustBuilt\030\005" +
+      " \003(\0132#.com.lvl6.proto.TutorialStructProt" +
+      "o\022\014\n\004cash\030\n \001(\005\022\013\n\003oil\030\013 \001(\005\022\014\n\004gems\030\014 \001" +
+      "(\005\"\307\002\n\027UserCreateResponseProto\022-\n\006sender" +
+      "\030\001 \001(\0132\035.com.lvl6.proto.FullUserProto\022H\n" +
+      "\006status\030\002 \001(\01628.com.lvl6.proto.UserCreat",
+      "eResponseProto.UserCreateStatus\"\262\001\n\020User" +
+      "CreateStatus\022\013\n\007SUCCESS\020\001\022\025\n\021FAIL_INVALI" +
+      "D_NAME\020\002\022&\n\"FAIL_USER_WITH_UDID_ALREADY_" +
+      "EXISTS\020\003\022\033\n\027FAIL_INVALID_REFER_CODE\020\004\022%\n" +
+      "!FAIL_USER_WITH_FACEBOOK_ID_EXISTS\020\005\022\016\n\n" +
+      "FAIL_OTHER\020\006\"G\n\023LevelUpRequestProto\0220\n\006s" +
+      "ender\030\001 \001(\0132 .com.lvl6.proto.MinimumUser" +
+      "Proto\"\366\001\n\024LevelUpResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022B\n\006status\030\002 \001(\01622.com.lvl6.proto.LevelU",
+      "pResponseProto.LevelUpStatus\"h\n\rLevelUpS" +
+      "tatus\022\013\n\007SUCCESS\020\001\022 \n\034NOT_ENOUGH_EXP_TO_" +
+      "NEXT_LEVEL\020\002\022\030\n\024ALREADY_AT_MAX_LEVEL\020\003\022\016" +
+      "\n\nOTHER_FAIL\020\004\"\220\001\n#RetrieveUsersForUserI" +
+      "dsRequestProto\0220\n\006sender\030\001 \001(\0132 .com.lvl" +
+      "6.proto.MinimumUserProto\022\030\n\020requestedUse" +
+      "rIds\030\002 \003(\005\022\035\n\025includeCurMonsterTeam\030\003 \001(" +
+      "\010\"\315\001\n$RetrieveUsersForUserIdsResponsePro" +
+      "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
+      "mumUserProto\0225\n\016requestedUsers\030\002 \003(\0132\035.c",
+      "om.lvl6.proto.FullUserProto\022<\n\007curTeam\030\003" +
+      " \003(\0132+.com.lvl6.proto.UserCurrentMonster" +
+      "TeamProto\"F\n\022LogoutRequestProto\0220\n\006sende" +
+      "r\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProt" +
+      "o\"h\n\035UpdateClientUserResponseProto\022-\n\006se" +
+      "nder\030\001 \001(\0132\035.com.lvl6.proto.FullUserProt" +
+      "o\022\030\n\020timeOfUserUpdate\030\002 \001(\003\"q\n\031SetFacebo" +
+      "okIdRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
+      "vl6.proto.MinimumUserProto\022\014\n\004fbId\030\002 \001(\t" +
+      "\022\024\n\014isUserCreate\030\003 \001(\010\"\212\002\n\032SetFacebookId",
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022N\n\006status\030\002 \001(\0162" +
+      ">.com.lvl6.proto.SetFacebookIdResponsePr" +
+      "oto.SetFacebookIdStatus\"j\n\023SetFacebookId" +
+      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\025\n\021F" +
+      "AIL_FB_ID_EXISTS\020\003\022\037\n\033FAIL_USER_FB_ID_AL" +
+      "READY_SET\020\004\"\277\001\n\036UpdateUserCurrencyReques" +
+      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
+      "MinimumUserProto\022\021\n\tcashSpent\030\002 \001(\021\022\020\n\010o" +
+      "ilSpent\030\003 \001(\021\022\021\n\tgemsSpent\030\004 \001(\021\022\022\n\nclie",
+      "ntTime\030\005 \001(\003\022\016\n\006reason\030\006 \001(\t\022\017\n\007details\030" +
+      "\007 \001(\t\"\272\002\n\037UpdateUserCurrencyResponseProt" +
+      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
+      "umUserProto\022X\n\006status\030\002 \001(\0162H.com.lvl6.p" +
+      "roto.UpdateUserCurrencyResponseProto.Upd" +
+      "ateUserCurrencyStatus\"\212\001\n\030UpdateUserCurr" +
+      "encyStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022" +
+      "\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022\031\n\025FAIL_INSU" +
+      "FFICIENT_OIL\020\004\022\032\n\026FAIL_INSUFFICIENT_GEMS" +
+      "\020\005\"e\n\033SetGameCenterIdRequestProto\0220\n\006sen",
+      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
+      "oto\022\024\n\014gameCenterId\030\002 \001(\t\"\360\001\n\034SetGameCen" +
+      "terIdResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\024\n\014gameCent" +
+      "erId\030\002 \001(\t\022R\n\006status\030\003 \001(\0162B.com.lvl6.pr" +
+      "oto.SetGameCenterIdResponseProto.SetGame" +
+      "CenterIdStatus\"4\n\025SetGameCenterIdStatus\022" +
+      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventUse" +
+      "rProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9083,7 +9011,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_UserCreateRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserCreateRequestProto_descriptor,
-              new java.lang.String[] { "Udid", "Name", "ReferrerCode", "DeviceToken", "TimeOfStructPurchase", "TimeOfStructBuild", "StructCoords", "UsedDiamondsToBuilt", "FacebookId", "Cash", "Oil", "Gems", },
+              new java.lang.String[] { "Udid", "Name", "DeviceToken", "FacebookId", "StructsJustBuilt", "Cash", "Oil", "Gems", },
               com.lvl6.proto.EventUserProto.UserCreateRequestProto.class,
               com.lvl6.proto.EventUserProto.UserCreateRequestProto.Builder.class);
           internal_static_com_lvl6_proto_UserCreateResponseProto_descriptor =
@@ -9147,7 +9075,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_SetFacebookIdRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_SetFacebookIdRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "FbId", },
+              new java.lang.String[] { "Sender", "FbId", "IsUserCreate", },
               com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto.class,
               com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto.Builder.class);
           internal_static_com_lvl6_proto_SetFacebookIdResponseProto_descriptor =
