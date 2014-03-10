@@ -309,8 +309,11 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	Date purchaseDateOneWeekAgo = getTimeUtils().createDateAddDays(purchaseDate, 7);
   	Timestamp purchaseTimeOneWeekAgo = new Timestamp(purchaseDateOneWeekAgo.getTime());
   	
+  	int[] buildingIds = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS;
+  	float[] xPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS;
+  	float[] yPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS;
   	log.info("giving user buildings");
-  	int quantity = 3;
+  	int quantity = buildingIds.length;
   	List<Integer> userIdList = new ArrayList<Integer>(
   			Collections.nCopies(quantity, userId));
   	List<Integer> structIdList = new ArrayList<Integer>();
@@ -323,9 +326,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Boolean> isComplete = new ArrayList<Boolean>(
   			Collections.nCopies(quantity, true));
   	
-  	int[] buildingIds = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS;
-  	float[] xPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS;
-  	float[] yPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS;
   	for (int i = 0; i < buildingIds.length; i++) {
   		int structId = buildingIds[i];
   		float xCoord = xPositions[i];
