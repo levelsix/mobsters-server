@@ -320,19 +320,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<Boolean> isComplete = new ArrayList<Boolean>(
   			Collections.nCopies(quantity, true));
   	
-  	
-  	//order of things: town hall stuff, cash storage stuff, oil storage stuff
-  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_ID);
-  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_ID);
-  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_ID);
-  	
-  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_X_COORD);
-  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_X_COORD);
-  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD);
-  	
-  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_Y_COORD);
-  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD);
-  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD);
+  	int[] buildingIds = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS;
+  	float[] xPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS;
+  	float[] yPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS;
+  	for (int i = 0; i < buildingIds.length; i++) {
+  		int structId = buildingIds[i];
+  		float xCoord = xPositions[i];
+  		float yCoord = yPositions[i];
+  		
+  		structIdList.add(structId);
+  		xCoordList.add(xCoord);
+  		yCoordList.add(yCoord);
+  	}
   	
   	//giving user the buildings he just created
   	for (TutorialStructProto tsp : structsJustBuilt) {
