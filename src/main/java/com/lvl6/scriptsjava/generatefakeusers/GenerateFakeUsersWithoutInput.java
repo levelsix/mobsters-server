@@ -74,7 +74,8 @@ public class GenerateFakeUsersWithoutInput {
     String facebookId = null;
     if (insertUtils.insertUser(name, null, level, 0, 0, 0, 0, true, null, activateShield,
     		new Timestamp((new Date()).getTime()),
-        ControllerConstants.TUTORIAL__INIT_RANK, facebookId) < 0) {
+        ControllerConstants.TUTORIAL__INIT_RANK, facebookId,
+        new Timestamp((new Date()).getTime())) < 0) {
       System.out.println("error in creating user");
     }
 

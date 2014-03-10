@@ -448,7 +448,7 @@ public class InsertUtils implements InsertUtil{
   @Override
   public int insertUser(String name, String udid, int level, int experience, int cash,
   		int oil, int gems, boolean isFake,  String deviceToken, boolean activateShield,
-  		Timestamp createTime, String rank, String facebookId) {
+  		Timestamp createTime, String rank, String facebookId, Timestamp shieldEndTime) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
@@ -465,6 +465,8 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER__IS_FAKE, isFake);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
     insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
+    insertParams.put(DBConstants.USER__SHIELD_END_TIME, shieldEndTime);
+    insertParams.put(DBConstants.USER__IN_BATTLE_END_TIME, shieldEndTime);
     insertParams.put(DBConstants.USER__RANK, rank);
     
     if (null != facebookId && !facebookId.isEmpty()) {

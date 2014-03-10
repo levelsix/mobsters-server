@@ -123,7 +123,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     String fbId = reqProto.getFacebookId();
     Timestamp createTime = new Timestamp((new Date()).getTime());
     List<TutorialStructProto> structsJustBuilt = reqProto.getStructsJustBuiltList();
-    String facebookId = null;//reqProto.getFacebookId();
+    String facebookId = reqProto.getFacebookId();
     
     //in case user tries hacking, don't let the amount go over tutorial default values
     int cash = Math.min(reqProto.getCash(), ControllerConstants.TUTORIAL__INIT_CASH);
@@ -267,8 +267,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  boolean activateShield = true;
 	  String rank = ControllerConstants.TUTORIAL__INIT_RANK;
 	  
+	  Date createDate = new Date(createTime.getTime());
+	  Date shieldEndDate = getTimeUtils().createDateAddDays(createDate,
+	  		ControllerConstants.PVP__SHIELD_DURATION_DAYS);
+	  Timestamp shieldEndTime = new Timestamp(shieldEndDate.getTime());
+	  
 	  int userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
-	      gems, false, deviceToken, activateShield, createTime, rank, facebookId);
+	      gems, false, deviceToken, activateShield, createTime, rank, facebookId,
+	      shieldEndTime);
 	        
 	  if (userId > 0) {
 	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*/

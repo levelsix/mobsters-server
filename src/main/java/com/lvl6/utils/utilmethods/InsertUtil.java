@@ -68,7 +68,8 @@ public interface InsertUtil {
 	// returns -1 if error
 	public abstract int insertUser(String name, String udid, int level, int experience,
 			int cash, int oil, int gems, boolean isFake,  String deviceToken,
-			boolean activateShield, Timestamp createTime, String rank, String facebookId);
+			boolean activateShield, Timestamp createTime, String rank, String facebookId,
+			Timestamp shieldEndTime);
 
 	public abstract boolean insertLastLoginLastLogoutToUserSessions(int userId, Timestamp loginTime, Timestamp logoutTime); 
 

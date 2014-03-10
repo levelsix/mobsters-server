@@ -13,7 +13,7 @@ public class ControllerConstants {
 	public static final float MINUTES_PER_GEM = 10f;
 	
 	//this multiplies with the cost to heal all monsters on user's battle team
-	//BATTLE, DUNGEON
+	//BATTLE, DUNGEON, TASK
 	public static final float BATTLE__CONTINUE_GEM_COST_MULTIPLIER = 1.2F; 
 	
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
@@ -65,7 +65,7 @@ public class ControllerConstants {
   //-------------------------------------------------------------------------------------
   public static final float PVP__PERCENT_CASH_LOST = 0.25F;
   public static final float PVP__PERCENT_OIL_LOST = 0.25F;
-  
+  public static final int PVP__SHIELD_DURATION_DAYS = 3; 
 	
 	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
 	public static final String UCHRFC__CREATE_CLAN = "created clan";
