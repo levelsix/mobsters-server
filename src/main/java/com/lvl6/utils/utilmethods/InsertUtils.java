@@ -458,14 +458,20 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.USER__OIL, oil);
     insertParams.put(DBConstants.USER__EXPERIENCE, experience);
 //    insertParams.put(DBConstants.USER__REFERRAL_CODE, newReferCode);
-    insertParams.put(DBConstants.USER__UDID, udid);
+    
+    insertParams.put(DBConstants.USER__UDID_FOR_HISTORY, udid);
     insertParams.put(DBConstants.USER__LAST_LOGIN, createTime);
     insertParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
     insertParams.put(DBConstants.USER__IS_FAKE, isFake);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
     insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
     insertParams.put(DBConstants.USER__RANK, rank);
-    insertParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
+    
+    if (null != facebookId && !facebookId.isEmpty()) {
+    	insertParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
+    } else {
+    	insertParams.put(DBConstants.USER__UDID, udid);
+    }
     
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
