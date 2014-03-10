@@ -195,6 +195,18 @@ public class StartupController extends EventController {
 		this.timeUtils = timeUtils;
 	}
 	
+	@Autowired
+	protected Globals globals;
+	
+  public Globals getGlobals() {
+		return globals;
+	}
+
+	public void setGlobals(Globals globals) {
+		this.globals = globals;
+	}
+
+	
 
 	@Override
   public RequestEvent createRequestEvent() {
@@ -365,10 +377,10 @@ public class StartupController extends EventController {
   //null
   private User selectUser(List<User> users, String udid, String fbId) {
   	int numUsers = users.size();
-//  	if (numUsers > 2) {
-//  		log.error("there are more than 2 users with the same udid and fbId. udid=" + udid +
-//  				" fbId=" + fbId + " users=" + users);
-//  	}
+  	if (numUsers > 2) {
+  		log.error("(not really error) there are more than 2 users with the same udid and fbId. udid=" +
+  				udid + " fbId=" + fbId + " users=" + users);
+  	}
   	if (1 == numUsers) {
   		return users.get(0);
   	}
@@ -1702,7 +1714,7 @@ public class StartupController extends EventController {
 //  }
 
   private void setConstants(Builder startupBuilder, StartupStatus startupStatus) {
-    startupBuilder.setStartupConstants(MiscMethods.createStartupConstantsProto());
+    startupBuilder.setStartupConstants(MiscMethods.createStartupConstantsProto(globals));
     if (startupStatus == StartupStatus.USER_NOT_IN_DB) {
       setTutorialConstants(startupBuilder);
     }

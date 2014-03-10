@@ -13,7 +13,7 @@ public class ControllerConstants {
 	public static final float MINUTES_PER_GEM = 10f;
 	
 	//this multiplies with the cost to heal all monsters on user's battle team
-	//BATTLE, DUNGEON
+	//BATTLE, DUNGEON, TASK
 	public static final float BATTLE__CONTINUE_GEM_COST_MULTIPLIER = 1.2F; 
 	
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
@@ -50,8 +50,8 @@ public class ControllerConstants {
 	//USED TO CREATE AN ELO RANGE FROM WHICH TO SELECT AN OPPONENT
 	public static final int PVP__ELO_RANGE_SUBTRAHEND = 100;
 	public static final int PVP__ELO_RANGE_ADDEND = 100;
-	//NOT USING ANYMORE
-	//all these pairing chances need to sum to one-----------------------------------------
+	//NOT USING ANYMORE--------------------------------------------------------------------
+	//all these pairing chances need to sum to one
 	public static final float PVP__ELO_CATEGORY_ONE_PAIRING_CHANCE = 0.05F;
 	public static final float PVP__ELO_CATEGORY_TWO_PAIRING_CHANCE = 0.15F;
 	public static final float PVP__ELO_CATEGORY_THREE_PAIRING_CHANCE = 0.20F;
@@ -65,7 +65,7 @@ public class ControllerConstants {
   //-------------------------------------------------------------------------------------
   public static final float PVP__PERCENT_CASH_LOST = 0.25F;
   public static final float PVP__PERCENT_OIL_LOST = 0.25F;
-  
+  public static final int PVP__SHIELD_DURATION_DAYS = 3; 
 	
 	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
 	public static final String UCHRFC__CREATE_CLAN = "created clan";
@@ -94,6 +94,7 @@ public class ControllerConstants {
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
 	
 	
+
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
@@ -146,8 +147,7 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_CASH = 750;
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;
-	
-	
+	public static final String TUTORIAL__INIT_RANK = "bronze";
 	
 	
 	
@@ -238,7 +238,6 @@ public class ControllerConstants {
 
   //TUTORIAL CONSTANTS
   public static final double CHARACTERS_ATTACK_DEFENSE_VARIABILITY = 0.67;
-  public static final String TUTORIAL__INIT_RANK = "bronze";
   public static final int TUTORIAL__INIT_COINS = 50;
   public static final int TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT = 2; //Because it does not warn the user
   public static final String TUTORIAL__FAKE_QUEST_GOOD_NAME = "Preserve the Peace";

@@ -446,26 +446,34 @@ public class InsertUtils implements InsertUtil{
    * @see com.lvl6.utils.utilmethods.InsertUtil#insertUser(java.lang.String, java.lang.String, com.lvl6.proto.InfoProto.UserType, com.lvl6.info.Location, java.lang.String, java.lang.String, int, int, int, int, int, int, int, int, int, java.lang.Integer, java.lang.Integer, java.lang.Integer, boolean)
    */
   @Override
-  public int insertUser(String udid, String name, String deviceToken,
-  		String newReferCode, int level, int experience, int coins, int diamonds,
-  		boolean isFake, boolean activateShield, Timestamp createTime, String rank,
-  		String facebookId) {
+  public int insertUser(String name, String udid, int level, int experience, int cash,
+  		int oil, int gems, boolean isFake,  String deviceToken, boolean activateShield,
+  		Timestamp createTime, String rank, String facebookId, Timestamp shieldEndTime) {
 
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.USER__NAME, name);
     insertParams.put(DBConstants.USER__LEVEL, level);
-    insertParams.put(DBConstants.USER__GEMS, diamonds);
-    insertParams.put(DBConstants.USER__CASH, coins);
+    insertParams.put(DBConstants.USER__GEMS, gems);
+    insertParams.put(DBConstants.USER__CASH, cash);
+    insertParams.put(DBConstants.USER__OIL, oil);
     insertParams.put(DBConstants.USER__EXPERIENCE, experience);
-    insertParams.put(DBConstants.USER__REFERRAL_CODE, newReferCode);
-    insertParams.put(DBConstants.USER__UDID, udid);
+//    insertParams.put(DBConstants.USER__REFERRAL_CODE, newReferCode);
+    
+    insertParams.put(DBConstants.USER__UDID_FOR_HISTORY, udid);
     insertParams.put(DBConstants.USER__LAST_LOGIN, createTime);
     insertParams.put(DBConstants.USER__DEVICE_TOKEN, deviceToken);
     insertParams.put(DBConstants.USER__IS_FAKE, isFake);
     insertParams.put(DBConstants.USER__CREATE_TIME, createTime);
     insertParams.put(DBConstants.USER__HAS_ACTIVE_SHIELD, activateShield);
+    insertParams.put(DBConstants.USER__SHIELD_END_TIME, shieldEndTime);
+    insertParams.put(DBConstants.USER__IN_BATTLE_END_TIME, shieldEndTime);
     insertParams.put(DBConstants.USER__RANK, rank);
-    insertParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
+    
+    if (null != facebookId && !facebookId.isEmpty()) {
+    	insertParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
+    } else {
+    	insertParams.put(DBConstants.USER__UDID, udid);
+    }
     
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
@@ -764,6 +772,26 @@ public class InsertUtils implements InsertUtil{
   	int numInserted = DBConnection.get().insertIntoTableBasic(
 			  DBConstants.TABLE_TASK_FOR_USER_COMPLETED, insertParams);
 	  return numInserted;
+  }
+  
+  @Override
+  public int insertIntoTaskForUserCompleted(List<Integer> userIdList, List<Integer> taskIdList,
+  		List<Timestamp> timeOfEntryList) {
+  	String tablename = DBConstants.TABLE_TASK_FOR_USER_COMPLETED;
+
+  	//did not add generics because eclipse shows errors like: can't accept  (String, List<Integer>), needs (String, List<Object>)
+  	Map<String, List<?>> insertParams = new HashMap<String, List<?>>();
+  	int numRows = userIdList.size();
+
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__USER_ID,
+  			userIdList);														
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TASK_ID, taskIdList);
+  	insertParams.put(DBConstants.TASK_FOR_USER_COMPLETED__TIME_OF_ENTRY, timeOfEntryList);
+
+  	int numInserted = DBConnection.get().insertIntoTableMultipleRows(tablename, 
+  			insertParams, numRows);
+
+  	return numInserted;
   }
 
 	@Override

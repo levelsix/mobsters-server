@@ -433,6 +433,12 @@ public class CreateInfoProtoUtils {
     if (null != facebookId) {
     	builder.setFacebookId(facebookId);
     }
+    
+    String gameCenterId = u.getGameCenterId();
+    if (null != gameCenterId) {
+    	builder.setGameCenterId(gameCenterId);
+    }
+    
     //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE
 
 

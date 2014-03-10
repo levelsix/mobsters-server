@@ -2523,6 +2523,10 @@ public final class EventStartupProto {
       // optional float continueBattleGemCostMultiplier = 22;
       boolean hasContinueBattleGemCostMultiplier();
       float getContinueBattleGemCostMultiplier();
+      
+      // optional bool addAllFbFriends = 23;
+      boolean hasAddAllFbFriends();
+      boolean getAddAllFbFriends();
     }
     public static final class StartupConstants extends
         com.google.protobuf.GeneratedMessage
@@ -5838,6 +5842,16 @@ public final class EventStartupProto {
         return continueBattleGemCostMultiplier_;
       }
       
+      // optional bool addAllFbFriends = 23;
+      public static final int ADDALLFBFRIENDS_FIELD_NUMBER = 23;
+      private boolean addAllFbFriends_;
+      public boolean hasAddAllFbFriends() {
+        return ((bitField0_ & 0x00100000) == 0x00100000);
+      }
+      public boolean getAddAllFbFriends() {
+        return addAllFbFriends_;
+      }
+      
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -5861,6 +5875,7 @@ public final class EventStartupProto {
         pvpRequiredMinLvl_ = 0;
         gemsPerResource_ = 0F;
         continueBattleGemCostMultiplier_ = 0F;
+        addAllFbFriends_ = false;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -5939,6 +5954,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00080000) == 0x00080000)) {
           output.writeFloat(22, continueBattleGemCostMultiplier_);
+        }
+        if (((bitField0_ & 0x00100000) == 0x00100000)) {
+          output.writeBool(23, addAllFbFriends_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -6036,6 +6054,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00080000) == 0x00080000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeFloatSize(22, continueBattleGemCostMultiplier_);
+        }
+        if (((bitField0_ & 0x00100000) == 0x00100000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBoolSize(23, addAllFbFriends_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -6245,6 +6267,8 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00100000);
           continueBattleGemCostMultiplier_ = 0F;
           bitField0_ = (bitField0_ & ~0x00200000);
+          addAllFbFriends_ = false;
+          bitField0_ = (bitField0_ & ~0x00400000);
           return this;
         }
         
@@ -6405,6 +6429,10 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00080000;
           }
           result.continueBattleGemCostMultiplier_ = continueBattleGemCostMultiplier_;
+          if (((from_bitField0_ & 0x00400000) == 0x00400000)) {
+            to_bitField0_ |= 0x00100000;
+          }
+          result.addAllFbFriends_ = addAllFbFriends_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -6532,6 +6560,9 @@ public final class EventStartupProto {
           }
           if (other.hasContinueBattleGemCostMultiplier()) {
             setContinueBattleGemCostMultiplier(other.getContinueBattleGemCostMultiplier());
+          }
+          if (other.hasAddAllFbFriends()) {
+            setAddAllFbFriends(other.getAddAllFbFriends());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -6698,6 +6729,11 @@ public final class EventStartupProto {
               case 181: {
                 bitField0_ |= 0x00200000;
                 continueBattleGemCostMultiplier_ = input.readFloat();
+                break;
+              }
+              case 184: {
+                bitField0_ |= 0x00400000;
+                addAllFbFriends_ = input.readBool();
                 break;
               }
             }
@@ -7923,6 +7959,27 @@ public final class EventStartupProto {
         public Builder clearContinueBattleGemCostMultiplier() {
           bitField0_ = (bitField0_ & ~0x00200000);
           continueBattleGemCostMultiplier_ = 0F;
+          onChanged();
+          return this;
+        }
+        
+        // optional bool addAllFbFriends = 23;
+        private boolean addAllFbFriends_ ;
+        public boolean hasAddAllFbFriends() {
+          return ((bitField0_ & 0x00400000) == 0x00400000);
+        }
+        public boolean getAddAllFbFriends() {
+          return addAllFbFriends_;
+        }
+        public Builder setAddAllFbFriends(boolean value) {
+          bitField0_ |= 0x00400000;
+          addAllFbFriends_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearAddAllFbFriends() {
+          bitField0_ = (bitField0_ & ~0x00400000);
+          addAllFbFriends_ = false;
           onChanged();
           return this;
         }
@@ -15689,7 +15746,7 @@ public final class EventStartupProto {
       "d\030\001 \001(\t\022\022\n\nversionNum\030\002 \001(\002\022\021\n\tapsalarId" +
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
       "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbI" +
-      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\301$\n\024Star",
+      "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\"\332$\n\024Star",
       "tupResponseProto\022\030\n\020serverTimeMillis\030\001 \001" +
       "(\003\022-\n\006sender\030\002 \001(\0132\035.com.lvl6.proto.Full" +
       "UserProto\022I\n\rstartupStatus\030\003 \001(\01622.com.l" +
@@ -15745,7 +15802,7 @@ public final class EventStartupProto {
       "insStolen\030\003 \001(\005\032\202\001\n\031ReferralNotification" +
       "Proto\0222\n\010referred\030\001 \001(\0132 .com.lvl6.proto" +
       ".MinimumUserProto\022\023\n\013recruitTime\030\002 \001(\003\022\034" +
-      "\n\024coinsGivenToReferrer\030\003 \001(\005\032\341\016\n\020Startup" +
+      "\n\024coinsGivenToReferrer\030\003 \001(\005\032\372\016\n\020Startup" +
       "Constants\022H\n\025inAppPurchasePackages\030\001 \003(\013" +
       "2).com.lvl6.proto.InAppPurchasePackagePr" +
       "oto\022\027\n\017maxLevelForUser\030\002 \001(\005\022\034\n\024maxNumOf" +
@@ -15775,39 +15832,39 @@ public final class EventStartupProto {
       "tants.MonsterConstants\022\025\n\rminutesPerGem\030" +
       "\023 \001(\002\022\031\n\021pvpRequiredMinLvl\030\024 \001(\005\022\027\n\017gems" +
       "PerResource\030\025 \001(\002\022\'\n\037continueBattleGemCo" +
-      "stMultiplier\030\026 \001(\002\032_\n\031AnimatedSpriteOffs" +
-      "etProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSet\030\002 \001" +
-      "(\0132\037.com.lvl6.proto.CoordinateProto\032\232\001\n\r" +
-      "ClanConstants\022\035\n\025coinPriceToCreateClan\030\001" +
-      " \001(\005\022 \n\030maxCharLengthForClanName\030\002 \001(\005\022\'",
-      "\n\037maxCharLengthForClanDescription\030\003 \001(\005\022" +
-      "\037\n\027maxCharLengthForClanTag\030\004 \001(\005\032c\n\030Down" +
-      "loadableNibConstants\022\022\n\nmapNibName\030\001 \001(\t" +
-      "\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldShoppe" +
-      "NibName\030\003 \001(\t\032y\n\023TournamentConstants\022\022\n\n" +
-      "winsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023" +
-      "\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToShowAft" +
-      "erEventEnd\030\004 \001(\005\032R\n\024UserMonsterConstants" +
-      "\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initialMaxN" +
-      "umMonsterLimit\030\002 \001(\005\032\211\001\n\020MonsterConstant",
-      "s\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033seconds" +
-      "ToHealPerHealthPoint\030\002 \001(\002\022\031\n\021elementalS" +
-      "trength\030\003 \001(\002\022\031\n\021elementalWeakness\030\004 \001(\002" +
-      "\032\250\003\n\021TutorialConstants\022\031\n\021startingMonste" +
-      "rId\030\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\032\n\022ene" +
-      "myBossMonsterId\030\t \001(\005\022\026\n\016markZMonsterId\030" +
-      "\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#.com." +
-      "lvl6.proto.TutorialStructProto\022\036\n\026struct" +
-      "ureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229" +
-      "\n\017cityOneElements\030\006 \003(\0132 .com.lvl6.proto",
-      ".CityElementProto\022$\n\034cityElementIdForFir" +
-      "stDungeon\030\007 \001(\005\022%\n\035cityElementIdForSecon" +
-      "dDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilI" +
-      "nit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\"A\n\014UpdateSta" +
-      "tus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014" +
-      "MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\nUSER_" +
-      "IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002B\023B\021EventStar" +
-      "tupProto"
+      "stMultiplier\030\026 \001(\002\022\027\n\017addAllFbFriends\030\027 " +
+      "\001(\010\032_\n\031AnimatedSpriteOffsetProto\022\021\n\timag" +
+      "eName\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.p" +
+      "roto.CoordinateProto\032\232\001\n\rClanConstants\022\035" +
+      "\n\025coinPriceToCreateClan\030\001 \001(\005\022 \n\030maxChar",
+      "LengthForClanName\030\002 \001(\005\022\'\n\037maxCharLength" +
+      "ForClanDescription\030\003 \001(\005\022\037\n\027maxCharLengt" +
+      "hForClanTag\030\004 \001(\005\032c\n\030DownloadableNibCons" +
+      "tants\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNi" +
+      "bName\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y" +
+      "\n\023TournamentConstants\022\022\n\nwinsWeight\030\001 \001(" +
+      "\005\022\024\n\014lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003" +
+      " \001(\005\022#\n\033numHoursToShowAfterEventEnd\030\004 \001(" +
+      "\005\032R\n\024UserMonsterConstants\022\027\n\017maxNumTeamS" +
+      "lots\030\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030",
+      "\002 \001(\005\032\211\001\n\020MonsterConstants\022\032\n\022cashPerHea" +
+      "lthPoint\030\001 \001(\002\022#\n\033secondsToHealPerHealth" +
+      "Point\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031" +
+      "\n\021elementalWeakness\030\004 \001(\002\032\250\003\n\021TutorialCo" +
+      "nstants\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016en" +
+      "emyMonsterId\030\002 \001(\005\022\032\n\022enemyBossMonsterId" +
+      "\030\t \001(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutori" +
+      "alStructures\030\003 \003(\0132#.com.lvl6.proto.Tuto" +
+      "rialStructProto\022\036\n\026structureIdsToBeBuill" +
+      "t\030\004 \003(\005\022\016\n\006cityId\030\005 \001(\005\0229\n\017cityOneElemen",
+      "ts\030\006 \003(\0132 .com.lvl6.proto.CityElementPro" +
+      "to\022$\n\034cityElementIdForFirstDungeon\030\007 \001(\005" +
+      "\022%\n\035cityElementIdForSecondDungeon\030\010 \001(\005\022" +
+      "\020\n\010cashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010ge" +
+      "msInit\030\r \001(\005\"A\n\014UpdateStatus\022\r\n\tNO_UPDAT" +
+      "E\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"" +
+      "3\n\rStartupStatus\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER" +
+      "_NOT_IN_DB\020\002B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -15851,7 +15908,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "PvpRequiredMinLvl", "GemsPerResource", "ContinueBattleGemCostMultiplier", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "PvpRequiredMinLvl", "GemsPerResource", "ContinueBattleGemCostMultiplier", "AddAllFbFriends", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =

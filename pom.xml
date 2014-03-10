@@ -87,6 +87,7 @@
 		<server.ip>0.0.0.0</server.ip>
 		<server.port>10001</server.port>
 
+		<globals.addAllFbFriends>false</globals.addAllFbFriends>
 		<globals.isSandbox>true</globals.isSandbox>
 		<globals.iddictionOn>false</globals.iddictionOn>
 		<globals.kabamEnabled>true</globals.kabamEnabled>

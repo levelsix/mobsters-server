@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -18,28 +20,25 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UserCreateRequestEvent;
 import com.lvl6.events.response.ReferralCodeUsedResponseEvent;
 import com.lvl6.events.response.UserCreateResponseEvent;
-import com.lvl6.info.CoordinatePair;
-import com.lvl6.info.Task;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
-import com.lvl6.properties.Globals;
 import com.lvl6.proto.EventReferralProto.ReferralCodeUsedResponseProto;
 import com.lvl6.proto.EventUserProto.UserCreateRequestProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto.Builder;
 import com.lvl6.proto.EventUserProto.UserCreateResponseProto.UserCreateStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
+import com.lvl6.proto.StructureProto.CoordinateProto;
+import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.UserProto.FullUserProto;
-import com.lvl6.retrieveutils.AvailableReferralCodeRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.server.EventWriter;
-import com.lvl6.spring.AppContext;
+import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
-import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtil;
 import com.lvl6.utils.utilmethods.InsertUtils;
 
@@ -77,7 +76,31 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   }
 
 
-  public UserCreateController() {
+  @Autowired
+  protected Locker locker;
+  
+  
+  protected Locker getLocker() {
+		return locker;
+	}
+
+	protected void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+	
+	@Autowired
+	protected TimeUtils timeUtils;
+	
+
+  public TimeUtils getTimeUtils() {
+		return timeUtils;
+	}
+
+	public void setTimeUtils(TimeUtils timeUtils) {
+		this.timeUtils = timeUtils;
+	}
+
+	public UserCreateController() {
     numAllocatedThreads = 3;
   }
 
@@ -96,251 +119,279 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     UserCreateRequestProto reqProto = ((UserCreateRequestEvent)event).getUserCreateRequestProto();
     String udid = reqProto.getUdid();
     String name = reqProto.getName();
-//    String referrerCode = (reqProto.hasReferrerCode()) ? reqProto.getReferrerCode() : null;
-    String deviceToken = "";//(reqProto.hasDeviceToken() && reqProto.getDeviceToken().length() > 0) ? reqProto.getDeviceToken() : null;
+    String deviceToken = reqProto.getDeviceToken();
+    String fbId = reqProto.getFacebookId();
     Timestamp createTime = new Timestamp((new Date()).getTime());
-    Timestamp timeOfStructPurchase = createTime; //new Timestamp(reqProto.getTimeOfStructPurchase());
-    Timestamp timeOfStructBuild = createTime; //new Timestamp(reqProto.getTimeOfStructBuild());
-//    CoordinatePair structCoords = new CoordinatePair(reqProto.getStructCoords().getX(), reqProto.getStructCoords().getY());
-    boolean usedDiamondsToBuild = reqProto.getUsedDiamondsToBuilt();
-    String facebookId = null;//reqProto.getFacebookId();
-
+    List<TutorialStructProto> structsJustBuilt = reqProto.getStructsJustBuiltList();
+    String facebookId = reqProto.getFacebookId();
+    
+    //in case user tries hacking, don't let the amount go over tutorial default values
+    int cash = Math.min(reqProto.getCash(), ControllerConstants.TUTORIAL__INIT_CASH);
+    int oil = Math.min(reqProto.getOil(), ControllerConstants.TUTORIAL__INIT_OIL);
+    int gems = Math.min(reqProto.getGems(), ControllerConstants.TUTORIAL__INIT_GEMS);
 
     UserCreateResponseProto.Builder resBuilder = UserCreateResponseProto.newBuilder();
-
-//    User referrer = (referrerCode != null && referrerCode.length() > 0) ? RetrieveUtils.userRetrieveUtils().getUserByReferralCode(referrerCode) : null;
-
-    boolean legitUserCreate = true;/*checkLegitUserCreate(resBuilder, udid, facebookId, name, 
-       timeOfStructPurchase, timeOfStructBuild, structCoords, 
-        referrer, reqProto.hasReferrerCode());*/
-
-    User user = null;
-    int userId = ControllerConstants.NOT_SET;
-    Task taskCompleted = null;
-    Task questTaskCompleted = null;
-    int playerCoins = 0;
-    int playerDiamonds = 0;
-
-    if (legitUserCreate) {
-      String newReferCode = grabNewReferCode();
-
-      taskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FIRST_TASK_ID);
-      questTaskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
-
-      //TODO: FIX THESE NUMBERS
-      int playerExp = 0;//taskCompleted.getExpGained() * taskCompleted.getNumForCompletion() + questTaskCompleted.getExpGained() * questTaskCompleted.getNumForCompletion() + ControllerConstants.TUTORIAL__FIRST_BATTLE_EXP_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_EXP_GAINED;
-//      playerCoins = ControllerConstants.TUTORIAL__INIT_COINS + MiscMethods.calculateCoinsGainedFromTutorialTask(taskCompleted) + questTaskCompleted.getMaxCoinsGained() + ControllerConstants.TUTORIAL__FIRST_BATTLE_COIN_GAIN + ControllerConstants.TUTORIAL__FAKE_QUEST_COINS_GAINED
-//          - StructureRetrieveUtils.getStructForStructId(ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD).getCoinPrice(); 
-      playerCoins = 69;
-//      if (referrer != null) playerCoins += ControllerConstants.USER_CREATE__COIN_REWARD_FOR_BEING_REFERRED;
-
-      playerDiamonds = Globals.INITIAL_DIAMONDS();
-      if (usedDiamondsToBuild) playerDiamonds -= ControllerConstants.TUTORIAL__DIAMOND_COST_TO_INSTABUILD_FIRST_STRUCT;
-
-      //automatically subtract cost to guarantee forge during tutorial
-      playerDiamonds -= ControllerConstants.TUTORIAL__COST_TO_SPEED_UP_FORGE;
-      
-      //newbie protection
-      boolean activateShield = true;
-      String rank = ControllerConstants.TUTORIAL__INIT_RANK;
-      
-      userId = insertUtils.insertUser(udid, name, deviceToken,
-          newReferCode, ControllerConstants.USER_CREATE__START_LEVEL, 
-          playerExp, playerCoins, playerDiamonds, false,
-          activateShield, createTime, rank, facebookId);
-            
-      if (userId > 0) {
-        server.lockPlayer(userId, this.getClass().getSimpleName());
-        try {
-          user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
-
-//          Map<EquipType, Integer> userEquipIds = writeUserEquips(user.getId(),
-//        	  equipIds, createTime);
-//          if (!user.updateAbsoluteAllEquipped(userEquipIds.get(EquipType.WEAPON), 
-//              userEquipIds.get(EquipType.ARMOR), userEquipIds.get(EquipType.AMULET))) {
-//            log.error("problem with marking user's equipped userequips, weapon:" + userEquipIds.get(EquipType.WEAPON) +
-//                ", armor: " + userEquipIds.get(EquipType.ARMOR) + ", amulet: " + userEquipIds.get(EquipType.AMULET));
-//          }
-
-          FullUserProto userProto = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
-          resBuilder.setSender(userProto);
-        } catch (Exception e) {
-          log.error("exception in UserCreateController processEvent", e);
-        } finally {
-          server.unlockPlayer(userId, this.getClass().getSimpleName()); 
-        }
-      } else {
-        resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
-        log.error("problem with trying to create user. udid="
-        		+ udid + ", name=" + name + ", deviceToken=" + deviceToken
-        		+ ", newReferCode=" + newReferCode + ", playerExp="
-        		+ playerExp + ", playerCoins=" + playerCoins
-        		+ ", playerDiamonds=" + playerDiamonds); 
-      }
-    }
-
-    UserCreateResponseProto resProto = resBuilder.build();
-    UserCreateResponseEvent resEvent = new UserCreateResponseEvent(udid);
-    resEvent.setTag(event.getTag());
-    resEvent.setUserCreateResponseProto(resProto);
-
-    log.info("Writing event: " + resEvent);
-
-    // Write event directly since EventWriter cannot handle without userId.
-    //    ByteBuffer writeBuffer = ByteBuffer.allocateDirect(Globals.MAX_EVENT_SIZE);
-    //    NIOUtils.prepBuffer(resEvent, writeBuffer);
-
-    server.writePreDBEvent(resEvent, udid);
-
-    if (user != null) {
-      ConnectedPlayer player = server.getPlayerByUdId(udid);
-      player.setPlayerId(user.getId());
-      server.getPlayersByPlayerId().put(user.getId(), player);
-      server.getPlayersPreDatabaseByUDID().remove(udid);
-    }
-
-    if (legitUserCreate && userId > 0) {
-      server.lockPlayer(userId, this.getClass().getSimpleName());
-      try {
-//        writeUserStruct(userId, ControllerConstants.TUTORIAL__FIRST_STRUCT_TO_BUILD, timeOfStructPurchase, timeOfStructBuild, structCoords);
-        //        writeUserCritstructs(user.getId());
-      	
-      	//TODO: TAKE INTO ACCOUNT PROPERTIES SENT IN BY CLIENT, THIS IS JUST 
-      	//DEFAULT STUFF
-      	writeInitialStructs(userId, createTime);
-      	
-      	
-        writeTaskCompleted(user.getId(), taskCompleted);
-        writeTaskCompleted(user.getId(), questTaskCompleted);
-//        if (!UpdateUtils.get().incrementCityRankForUserCity(user.getId(), 1, 1)) {
-//          log.error("problem with giving user access to first city (city with id 1)");
-//        }
-//        if (referrer != null && user != null) {
-//          rewardReferrer(referrer, user);        
-//        }
-        LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
-        leaderboard.updateLeaderboardForUser(user);
-        
-        //CURRENCY CHANGE HISTORY
-        writeToUserCurrencyHistory(user, playerCoins, playerDiamonds);
-        
-      } catch (Exception e) {
-        log.error("exception in UserCreateController processEvent", e);
-      } finally {
-        server.unlockPlayer(userId, this.getClass().getSimpleName()); 
-      }
-    }
+    resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
     
+    boolean gotLock = true;
+    if (null != fbId && !fbId.isEmpty()) {
+    	gotLock = getLocker().lockFbId(fbId);
+    }
+    try {
+			boolean legitUserCreate = checkLegitUserCreate(gotLock, resBuilder, udid,
+					facebookId, name);
+
+			User user = null;
+			int userId = ControllerConstants.NOT_SET;
+
+			if (legitUserCreate) {
+//			  String newReferCode = grabNewReferCode();
+//			  taskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FIRST_TASK_ID);
+//			  questTaskCompleted = TaskRetrieveUtils.getTaskForTaskId(ControllerConstants.TUTORIAL__FAKE_QUEST_TASK_ID);
+
+			  user = writeChangeToDb(resBuilder, name, udid, cash, oil, gems, deviceToken,
+			  		createTime, facebookId);
+			}
+
+			UserCreateResponseProto resProto = resBuilder.build();
+			UserCreateResponseEvent resEvent = new UserCreateResponseEvent(udid);
+			resEvent.setTag(event.getTag());
+			resEvent.setUserCreateResponseProto(resProto);
+			log.info("Writing event: " + resEvent);
+			server.writePreDBEvent(resEvent, udid);
+
+			if (user != null) {
+				//recording that player is online I guess
+				userId = user.getId();
+			  ConnectedPlayer player = server.getPlayerByUdId(udid);
+			  player.setPlayerId(userId);
+			  server.getPlayersByPlayerId().put(userId, player);
+			  server.getPlayersPreDatabaseByUDID().remove(udid);
+			}
+
+			if (legitUserCreate && userId > 0) {
+			  /*server.lockPlayer(userId, this.getClass().getSimpleName());*/
+			  try {
+			  	//TAKE INTO ACCOUNT THE PROPERTIES SENT IN BY CLIENT
+			  	log.info("writing user structs");
+			  	writeStructs(userId, createTime, structsJustBuilt);
+			  	log.info("writing tasks");
+			    writeTaskCompleted(userId, createTime);
+//			    LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
+//			    leaderboard.updateLeaderboardForUser(user);
+			    
+			    //CURRENCY CHANGE HISTORY
+			    writeToUserCurrencyHistory(userId, cash, oil, gems, createTime);
+			    
+			  } catch (Exception e) {
+			    log.error("exception in UserCreateController processEvent", e);
+			  } /*finally {
+			    server.unlockPlayer(userId, this.getClass().getSimpleName()); 
+			  }*/
+			}
+		} catch (Exception e) {
+			log.error("exception in UserCreateController processEvent", e);
+			try {
+    		resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
+    		UserCreateResponseEvent resEvent = new UserCreateResponseEvent(udid);
+    		resEvent.setTag(event.getTag());
+    		resEvent.setUserCreateResponseProto(resBuilder.build());
+    		server.writeEvent(resEvent);
+    	} catch (Exception e2) {
+    		log.error("exception2 in UserCreateController processEvent", e);
+    	}
+		}
   }
   
-  //NOTE: THIS IS THE DEFAULT STUFF.
-  //TODO: NEED TO DETERMINE THE PROPER VALUES AND STRUCTS TO GIVE THE USER
-  private void writeInitialStructs(int userId, Timestamp purchaseTime) {
-  	log.info("giving user TownHall, CashStorage, OilStorage");
-  	int quantity = 3;
-  	List<Integer> userIdList = Collections.nCopies(quantity, userId);
+  private boolean checkLegitUserCreate(boolean gotLock, Builder resBuilder, String udid,
+  		String facebookId, String name) {
+  	List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, facebookId);
+  	
+  	if (!gotLock) {
+  		log.error("did not get fb lock. fbId=" + facebookId + ", udid=" + udid + ", name="
+  				+ name);
+  		return false;
+  	}
+  	
+  	if (null == users || users.isEmpty()) {
+  		return true;
+  	}
+    
+    if (null != facebookId && !facebookId.isEmpty() &&
+    		facebookIdExists(facebookId, users)) {
+    	//check if facebookId is tied to an account
+    	resBuilder.setStatus(UserCreateStatus.FAIL_USER_WITH_FACEBOOK_ID_EXISTS);
+    	log.error("user with facebookId " + facebookId + " already exists. users=" + users);
+    	return false;
+    }
+    if (null != udid && !udid.isEmpty() && udidExists(udid, users)) {
+    	//udid shouldn't be empty
+    	//check if udid is tied to an account
+    	resBuilder.setStatus(UserCreateStatus.FAIL_USER_WITH_UDID_ALREADY_EXISTS);
+    	log.error("user with udid " + udid + " already exists");
+    	return false;
+    }
+    
+//    resBuilder.setStatus(UserCreateStatus.SUCCESS);
+    return true;
+  }
+  
+  private boolean facebookIdExists(String facebookId, List<User> users) {
+    for(User u : users) {
+    	String userFacebookId = u.getFacebookId();
+    	
+    	if (null != userFacebookId && userFacebookId.equals(facebookId)) {
+    		return true;
+    	}
+    }
+    return false;
+  }
+  
+  private boolean udidExists(String udid, List<User> users) {
+    for(User u : users) {
+    	String userUdid = u.getUdid();
+    	
+    	if (null != userUdid && userUdid.equals(udid)) {
+    		return true;
+    	}
+    }
+    return false;
+  }
+  
+  private User writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
+  		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId) {
+  	User user = null;
+  //TODO: FIX THESE NUMBERS
+		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;  
+	  int playerExp = 69;
+	  
+	  //newbie protection
+	  boolean activateShield = true;
+	  String rank = ControllerConstants.TUTORIAL__INIT_RANK;
+	  
+	  Date createDate = new Date(createTime.getTime());
+	  Date shieldEndDate = getTimeUtils().createDateAddDays(createDate,
+	  		ControllerConstants.PVP__SHIELD_DURATION_DAYS);
+	  Timestamp shieldEndTime = new Timestamp(shieldEndDate.getTime());
+	  
+	  int userId = insertUtils.insertUser(name, udid, lvl,  playerExp, cash, oil,
+	      gems, false, deviceToken, activateShield, createTime, rank, facebookId,
+	      shieldEndTime);
+	        
+	  if (userId > 0) {
+	    /*server.lockPlayer(userId, this.getClass().getSimpleName());*/
+	    try {
+	      user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
+	      FullUserProto userProto = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
+	      resBuilder.setSender(userProto);
+	    } catch (Exception e) {
+	      log.error("exception in UserCreateController processEvent", e);
+	    } /*finally {
+	      server.unlockPlayer(userId, this.getClass().getSimpleName()); 
+	    }*/
+	  } else {
+	    resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
+	    log.error("problem with trying to create user. udid=" + udid + ", name=" +
+	    		name + ", deviceToken=" + deviceToken + ", playerExp=" + playerExp +
+	    		", cash=" + cash+ ", oil=" + oil + ", gems=" + gems); 
+	  }
+	  
+	  log.info("created new user=" + user);
+	  resBuilder.setStatus(UserCreateStatus.SUCCESS);
+	  return user;
+  }
+  
+  
+  //THE VALUES AND STRUCTS TO GIVE THE USER
+  private void writeStructs(int userId, Timestamp purchaseTime,
+  		List<TutorialStructProto> structsJustBuilt) {
+  	Date purchaseDate = new Date(purchaseTime.getTime());
+  	Date purchaseDateOneWeekAgo = getTimeUtils().createDateAddDays(purchaseDate, 7);
+  	Timestamp purchaseTimeOneWeekAgo = new Timestamp(purchaseDateOneWeekAgo.getTime());
+  	
+  	int[] buildingIds = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS;
+  	float[] xPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS;
+  	float[] yPositions = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS;
+  	log.info("giving user buildings");
+  	int quantity = buildingIds.length;
+  	List<Integer> userIdList = new ArrayList<Integer>(
+  			Collections.nCopies(quantity, userId));
   	List<Integer> structIdList = new ArrayList<Integer>();
   	List<Float> xCoordList = new ArrayList<Float>();
   	List<Float> yCoordList = new ArrayList<Float>();
-  	List<Timestamp> purchaseTimeList = Collections.nCopies(quantity, purchaseTime);
-  	List<Timestamp> retrievedTimeList = purchaseTimeList;
-  	List<Boolean> isComplete = Collections.nCopies(quantity, true);
+  	List<Timestamp> purchaseTimeList = new ArrayList<Timestamp>(
+  			Collections.nCopies(quantity, purchaseTime));
+  	List<Timestamp> retrievedTimeList = new ArrayList<Timestamp>(
+  			Collections.nCopies(quantity, purchaseTimeOneWeekAgo));
+  	List<Boolean> isComplete = new ArrayList<Boolean>(
+  			Collections.nCopies(quantity, true));
   	
+  	for (int i = 0; i < buildingIds.length; i++) {
+  		int structId = buildingIds[i];
+  		float xCoord = xPositions[i];
+  		float yCoord = yPositions[i];
+  		
+  		structIdList.add(structId);
+  		xCoordList.add(xCoord);
+  		yCoordList.add(yCoord);
+  	}
   	
-  	//order of things: town hall stuff, cash storage stuff, oil storage stuff
-  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_ID);
-  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_ID);
-  	structIdList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_ID);
+  	//giving user the buildings he just created
+  	for (TutorialStructProto tsp : structsJustBuilt) {
+  		int structId = tsp.getStructId();
+  		CoordinateProto cp = tsp.getCoordinate();
+  		float xCoord = cp.getX();
+  		float yCoord = cp.getY();
+  		
+  		userIdList.add(userId);
+  		structIdList.add(structId);
+  		xCoordList.add(xCoord);
+  		yCoordList.add(yCoord);
+  		purchaseTimeList.add(purchaseTime);
+  		retrievedTimeList.add(purchaseTime);
+  		isComplete.add(true);
+  	}
   	
-  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_X_COORD);
-  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_X_COORD);
-  	xCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD);
+  	log.info("userIdList=" + userIdList);
+  	log.info("structIdList=" + structIdList);
+  	log.info("xCoordList=" + xCoordList);
+  	log.info("yCoordList=" + yCoordList);
+  	log.info("purchaseTimeList=" + purchaseTimeList);
+  	log.info("retrievedTimeList=" + retrievedTimeList);
+  	log.info("isComplete=" + isComplete);
   	
-  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__TOWN_HALL_Y_COORD);
-  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD);
-  	yCoordList.add(ControllerConstants.STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD);
   	
   	int numInserted = InsertUtils.get().insertUserStructs(userIdList, structIdList,
   			xCoordList, yCoordList, purchaseTimeList, retrievedTimeList, isComplete);
   	log.info("num buildings given to user: " + numInserted);
   }
 
-  private void writeUserStruct(int userId, int structId, Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild, CoordinatePair structCoords) {
-    if (!insertUtils.insertUserStructJustBuilt(userId, structId, timeOfStructPurchase, timeOfStructBuild, structCoords)) {
-      log.error("problem in giving user the user struct with these properties: userId="
-          + userId + ", structId=" + structId + ", timeOfStructPurchase=" + timeOfStructPurchase
-          + ", timeOfStructBuild=" + timeOfStructBuild + ", structCoords");
-    }
+  private void writeTaskCompleted(int userId, Timestamp createTime) {
+  	List<Integer> taskIdList = new ArrayList<Integer>();
+  	taskIdList.add(ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON);
+  	taskIdList.add(ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON);
+  	
+  	int size = taskIdList.size();
+  	List<Integer> userIdList = Collections.nCopies(size, userId);
+  	List<Timestamp> createTimeList = Collections.nCopies(size, createTime);
+  	
+  	int numInserted = InsertUtils.get().insertIntoTaskForUserCompleted(userIdList,
+  			taskIdList, createTimeList);
+  	log.info("num tasks inserted:" + numInserted + ", should be " + size);
   }
 
-  private void writeTaskCompleted(int userId, Task taskCompleted) {
-  	//TODO: RECORD TASK SOMEHOW
-//    if (taskCompleted != null) {
-//      if (!UpdateUtils.get().incrementTimesCompletedInRankForUserTask(userId, taskCompleted.getId(), taskCompleted.getNumForCompletion())) {
-//        log.error("problem with incrementing number of times user completed task in current rank for task " + taskCompleted.getId()
-//            + " for player " + userId + " by " + taskCompleted.getNumForCompletion());
-//      }
-//    }
-  }
 
-//  private Map<EquipType, Integer> writeUserEquips(int userId, List<Integer> equipIds,
-//	  Timestamp createTime) {
-//    Map <EquipType, Integer> userEquipIds = new HashMap<EquipType, Integer>();
-//    if (equipIds.size() > 0) {
-//      int rustyDaggerId = 1;
-//      String reason = ControllerConstants.UER__USER_CREATED;
-//
-//      for (int i = 0; i < equipIds.size(); i++) {
-//        //since user create, equips should have no enhancement
-//        int forgeLevel = ControllerConstants.DEFAULT_USER_EQUIP_LEVEL;
-//        
-//        //but rusty dagger should be forge level 2
-//        if (equipIds.get(i) == rustyDaggerId) {
-//          forgeLevel = 2;
-//        }
-//        int userEquipId = insertUtils.insertUserEquip(userId, equipIds.get(i),
-//            forgeLevel, ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT,
-//            createTime, reason); 
-//        if (userEquipId < 0) {
-//          log.error("problem with giving user " + userId + " 1 " + equipIds.get(i));
-//        } else {
-//          Equipment equip = EquipmentRetrieveUtils.getEquipmentIdsToEquipment().get(equipIds.get(i));
-//          userEquipIds.put(equip.getType(), userEquipId);
-//        }
+//  private String grabNewReferCode() {
+//    String newReferCode = AvailableReferralCodeRetrieveUtils.getAvailableReferralCode();
+//    if (newReferCode != null && newReferCode.length() > 0) {
+//      while (!DeleteUtils.get().deleteAvailableReferralCode(newReferCode)) {
+//        newReferCode = AvailableReferralCodeRetrieveUtils.getAvailableReferralCode();
 //      }
-//      
-//      if (Globals.IDDICTION_ON()) {
-//        //since user create, equips should have no enhancement
-//        int userEquipId = insertUtils.insertUserEquip(userId, ControllerConstants.IDDICTION__EQUIP_ID, 
-//            ControllerConstants.DEFAULT_USER_EQUIP_LEVEL, ControllerConstants.DEFAULT_USER_EQUIP_ENHANCEMENT_PERCENT,
-//            createTime, reason);
-//        if (userEquipId < 0) {
-//          log.error("problem with giving user iddiction reward to " + userId + " 1 " + ControllerConstants.IDDICTION__EQUIP_ID);
-//        }
-//      }
-//      
-//      return userEquipIds;
+//    } else {
+//      log.error("no refer codes left");
 //    }
-//    return userEquipIds;
+//    return newReferCode;
 //  }
-  //
-  //  private void writeUserCritstructs(int userId) {
-  //    if (!insertUtils.insertAviaryAndCarpenterCoords(userId, ControllerConstants.AVIARY_COORDS, ControllerConstants.CARPENTER_COORDS)) {
-  //      log.error("problem with giving user his critical structs");
-  //    }
-  //  }
-
-  private String grabNewReferCode() {
-    String newReferCode = AvailableReferralCodeRetrieveUtils.getAvailableReferralCode();
-    if (newReferCode != null && newReferCode.length() > 0) {
-      while (!DeleteUtils.get().deleteAvailableReferralCode(newReferCode)) {
-        newReferCode = AvailableReferralCodeRetrieveUtils.getAvailableReferralCode();
-      }
-    } else {
-      log.error("no refer codes left");
-    }
-    return newReferCode;
-  }
 
   private void rewardReferrer(User referrer, User user) {
     if (!referrer.isFake()) {
@@ -374,80 +425,35 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
   }
 
-  private boolean checkLegitUserCreate(Builder resBuilder, String udid, String facebookId,
-      String name, Timestamp timeOfStructPurchase, Timestamp timeOfStructBuild,
-      CoordinatePair coordinatePair, User referrer, boolean hasReferrerCode) {
 
-    if (udid == null || name == null || timeOfStructPurchase == null || coordinatePair == null || timeOfStructBuild == null) {
-      resBuilder.setStatus(UserCreateStatus.FAIL_OTHER);
-      log.error("parameter passed in is null. udid=" + udid + ", name=" + name + ", timeOfStructPurchase=" + timeOfStructPurchase
-          + ", coordinatePair=" + coordinatePair + ", timeOfStructBuild=" + timeOfStructBuild);
-      return false;
-    }
-    if (hasReferrerCode && referrer == null) {
-      resBuilder.setStatus(UserCreateStatus.FAIL_INVALID_REFER_CODE);
-      log.info("refer code passed in is invalid.");
-      return false;
-    }
-    List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, facebookId);
-    User udidUser = null;
-    User fbUser = null;
-    
-    for(User u : users) {
-    	String userUdid = u.getUdid();
-    	String userFacebookId = u.getFacebookId();
-    	
-    	if (null != userUdid && userUdid.equals(udid)) {
-    		udidUser = u;
-    	} else if (null != userFacebookId && userFacebookId.equals(facebookId)) {
-    		fbUser = u;
-    	}
-    }
-    
-    if (null != udidUser) {
-      resBuilder.setStatus(UserCreateStatus.FAIL_USER_WITH_UDID_ALREADY_EXISTS);
-      log.error("user with udid " + udid + " already exists");
-      return false;
-    }
-    if (null != fbUser) {
-      resBuilder.setStatus(UserCreateStatus.FAIL_USER_WITH_FACEBOOK_ID_EXISTS);
-      log.error("user with facebookId " + facebookId + " already exists");
-      return false;
-    }
-    if (name.length() < ControllerConstants.USER_CREATE__MIN_NAME_LENGTH || 
-        name.length() > ControllerConstants.USER_CREATE__MAX_NAME_LENGTH) {
-      resBuilder.setStatus(UserCreateStatus.FAIL_INVALID_NAME);
-      log.error("name length is off. length is " + name.length() + ", should be in between " + ControllerConstants.USER_CREATE__MIN_NAME_LENGTH
-          + " and " + ControllerConstants.USER_CREATE__MAX_NAME_LENGTH);
-      return false;
-    }
+  private void writeToUserCurrencyHistory(int userId, int cash, int oil, int gems,
+  		Timestamp createTime) {
+  	String reasonForChange = ControllerConstants.UCHRFC__USER_CREATED;
 
-    resBuilder.setStatus(UserCreateStatus.SUCCESS);
-    return true;
-  }
+    Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+    Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
+    Map<String, String> reasonsForChanges = new HashMap<String, String>();
+    Map<String, String> detailsMap = new HashMap<String, String>();
+    String gemsStr = MiscMethods.gems;
+    String cashStr = MiscMethods.cash;
+    String oilStr = MiscMethods.oil;
 
-  //TODO: FIX THIS
-  private void writeToUserCurrencyHistory(User aUser, int playerCoins, int playerDiamonds) {
-//    String gems = MiscMethods.gems;
-//    String cash = MiscMethods.cash;
-//    
-//    Timestamp date = new Timestamp(new Date().getTime());
-//    Map<String, Integer> goldSilverChange = new HashMap<String, Integer>();
-//    Map<String, Integer> previousGoldSilver = new HashMap<String, Integer>();
-//    String reasonForChange = ControllerConstants.UCHRFC__USER_CREATED;
-//    Map<String, String> reasonsForChanges = new HashMap<String, String>();
-//    
-//    goldSilverChange.put(gems, playerDiamonds);
-//    goldSilverChange.put(cash, playerCoins);
-//    
-//    previousGoldSilver.put(gems, 0);
-//    previousGoldSilver.put(cash, 0);
-//    
-//    reasonsForChanges.put(gems, reasonForChange);
-//    reasonsForChanges.put(cash, reasonForChange);
-//    
-//    MiscMethods.writeToUserCurrencyOneUserGemsAndOrCash(aUser, date, goldSilverChange,
-//        previousGoldSilver, reasonsForChanges);
+    previousCurrency.put(gemsStr, 0);
+    previousCurrency.put(cashStr, 0);
+    previousCurrency.put(oilStr, 0);
+    currentCurrency.put(gemsStr, gems);
+    currentCurrency.put(cashStr, cash);
+    currentCurrency.put(oilStr, oil);
+    reasonsForChanges.put(gemsStr, reasonForChange);
+    reasonsForChanges.put(cashStr, reasonForChange);
+    reasonsForChanges.put(oilStr, reasonForChange);
+    detailsMap.put(gemsStr, "");
+    detailsMap.put(cashStr, "");
+    detailsMap.put(oilStr, "");
+
+    MiscMethods.writeToUserCurrencyOneUser(userId, createTime, currentCurrency, 
+        previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
+
   }
   //TODO: FIX THIS
   public void writeToUserCurrencyHistoryTwo(User aUser, int coinChange, int previousSilver) {

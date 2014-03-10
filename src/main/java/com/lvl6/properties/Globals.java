@@ -13,6 +13,7 @@ public class Globals {
 	protected boolean kabamEnabled = true;
 	protected boolean offerChartEnabled = false;
 
+	protected boolean addAllFbFriends = false;
 	protected boolean sandbox = true;
 	protected boolean iddictionOn = true;
 	protected float versionNumber = 1.0f;
@@ -99,6 +100,15 @@ public class Globals {
 	public void setSandbox(boolean isSandbox) {
 		this.sandbox = isSandbox;
 	}
+
+	public boolean isAddAllFbFriends() {
+		return addAllFbFriends;
+	}
+
+	public void setAddAllFbFriends(boolean addAllFbFriends) {
+		this.addAllFbFriends = addAllFbFriends;
+	}
+
 
 	/** size of ByteBuffer for reading/writing from channels */
 

@@ -1,5 +1,9 @@
 package com.lvl6.server.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
@@ -12,6 +16,7 @@ import com.lvl6.info.User;
 import com.lvl6.proto.EventUserProto.SetFacebookIdRequestProto;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto;
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus;
+import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.utils.RetrieveUtils;
@@ -41,32 +46,48 @@ import com.lvl6.utils.RetrieveUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     String fbId = reqProto.getFbId();
-    if (fbId != null && fbId.length() == 0) fbId = null;
+    boolean isUserCreate = reqProto.getIsUserCreate();
+    
+    //basically, if fbId is empty make it null
+    if (null != fbId && fbId.isEmpty()) {
+    	fbId = null;
+    }
 
-    SetFacebookIdResponseProto.Builder resBuilder = SetFacebookIdResponseProto.newBuilder();
+    //prepping the arguments to query the db
+    List<String> facebookIds = null;
+    if (null != fbId) {
+    	facebookIds = new ArrayList<String>();
+    	facebookIds.add(fbId);
+    }
+    List<Integer> userIds = new ArrayList<Integer>();
+    userIds.add(userId);
+    
+    
+    Builder resBuilder = SetFacebookIdResponseProto.newBuilder();
+    resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+//      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
+    	Map<Integer, User> userMap = RetrieveUtils.userRetrieveUtils()
+    			.getUsersForFacebookIdsOrUserIds(facebookIds, userIds);
+    	User user = userMap.get(userId);
 
-      if (fbId != null && user != null) { 
-        resBuilder.setStatus(SetFacebookIdStatus.SUCCESS);
-      } else {
-        resBuilder.setStatus(SetFacebookIdStatus.FAIL_OTHER);
+      boolean legit = checkLegitRequest(resBuilder, user, fbId, userMap);
+
+      if (legit) {
+        legit = writeChangesToDb(user, fbId, isUserCreate);
       }
-
+      
+      if (legit) {
+      	resBuilder.setStatus(SetFacebookIdStatus.SUCCESS);
+      }
+      
       SetFacebookIdResponseProto resProto = resBuilder.build();
       SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(senderProto.getUserId());
       resEvent.setSetFacebookIdResponseProto(resProto);
       server.writeEvent(resEvent);
-
-      boolean isDifferent = checkIfNewTokenDifferent(user.getFacebookId(), fbId);
-
-      if (isDifferent) {
-        if (!user.updateSetFacebookId(fbId)) {
-          log.error("problem with setting user's facebook id to " + fbId);
-        }
-      }
+      
     } catch (Exception e) {
     	log.error("exception in SetFacebookIdController processEvent", e);
     	//don't let the client hang
@@ -84,19 +105,44 @@ import com.lvl6.utils.RetrieveUtils;
     }
   }
 
-  private boolean checkIfNewTokenDifferent(String oldToken, String newToken) {
-    boolean oldTokenIsNothing = oldToken == null || oldToken.length() == 0;
-    boolean newTokenIsNothing = newToken == null || newToken.length() == 0;
-    
-    if (oldTokenIsNothing && newTokenIsNothing) {
-      return false;
-    }
-    
-    if (!oldTokenIsNothing && !newTokenIsNothing) {
-      return !oldToken.equals(newToken);
-    }
-    
-    return true;
+  private boolean checkLegitRequest(Builder resBuilder, User user, String newFbId,
+  		Map<Integer, User> userMap) {
+  	if (newFbId == null || newFbId.isEmpty() || user == null) { 
+  		log.error("fbId not set or user is null. fbId='" + newFbId + "'\t user=" + user);
+  		return false;
+  	}
+
+  	String existingFbId = user.getFacebookId();
+  	boolean existingFbIdSet = existingFbId != null && !existingFbId.isEmpty();
+
+  	if (existingFbIdSet) {
+  		log.error("fbId already set for user. existingFbId='" + existingFbId + "'\t user=" +
+  				user + "\t newFbId=" + newFbId);
+  		resBuilder.setStatus(SetFacebookIdStatus.FAIL_USER_FB_ID_ALREADY_SET);
+  		return false;
+  	}
+  	
+  	//fbId is something and user doesn't have fbId
+  	//now check if other users have the newFbId
+  	
+  	if (userMap.size() > 1) {
+  		//queried for a userId and a facebook id
+  		log.error("fbId already taken. fbId='" + newFbId + "'\t usersInDb=" + userMap);
+  		resBuilder.setStatus(SetFacebookIdStatus.FAIL_FB_ID_EXISTS);
+  		return false;
+  	}
+
+  	return true;
+  }
+  
+  private boolean writeChangesToDb(User user, String fbId, boolean isUserCreate) {
+  	
+  	if (!user.updateSetFacebookId(fbId, isUserCreate)) {
+  		log.error("problem with setting user's facebook id to " + fbId);
+  		return false;
+  	}
+  	
+  	return true;
   }
 
 }
