@@ -26,6 +26,16 @@ import com.lvl6.utils.DBConnection;
 
   private static final String TABLE_NAME = DBConstants.TABLE_MONSTER;
 
+  public static MonsterElement getMonsterElementForMonsterId(int monsterId) {
+  	Monster mon = getMonsterForMonsterId(monsterId);
+  	
+  	if (null != mon) {
+  		return mon.getElement();
+  	} else {
+  		return null;
+  	}
+  }
+  
   public static Map<Integer, Monster> getMonsterIdsToMonsters() {
     log.debug("retrieving all monsteres data map");
     if (monsterIdsToMonsters == null) {
