@@ -131,11 +131,19 @@ import com.lvl6.utils.RetrieveUtils;
   		//queried for a userId and a facebook id
   		log.error("fbId already taken. fbId='" + newFbId + "'\t usersInDb=" + userMap);
   		resBuilder.setStatus(SetFacebookIdStatus.FAIL_FB_ID_EXISTS);
-  		
-  		User existing = userMap.get(newFbId);
-  		MinimumUserProto existingProto = CreateInfoProtoUtils
-  				.createMinimumUserProtoFromUser(existing);
-  		resBuilder.setExisting(existingProto);
+
+  		//client wants the user who has the facebook id
+  		for (User u : userMap.values()) {
+  			
+  			if (!newFbId.equals(u.getFacebookId())) {
+  				continue;
+  			}
+  			
+  			MinimumUserProto existingProto = CreateInfoProtoUtils
+  					.createMinimumUserProtoFromUser(u);
+  			resBuilder.setExisting(existingProto);
+  			break;
+  		}
   		
   		return false;
   	}
