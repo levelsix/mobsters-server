@@ -267,9 +267,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private User writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
   		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId) {
   	User user = null;
-  //TODO: FIX THESE NUMBERS
+  	//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;  
-	  int playerExp = 69;
+	  int playerExp = 10;
 	  
 	  //newbie protection
 	  boolean activateShield = true;
