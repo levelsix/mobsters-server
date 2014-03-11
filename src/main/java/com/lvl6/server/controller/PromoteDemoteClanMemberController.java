@@ -49,7 +49,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
-    int victimId = reqProto.getVictim();
+    int victimId = reqProto.getVictimId();
     UserClanStatus newUserClanStatus = reqProto.getUserClanStatus();
     List<Integer> userIds = new ArrayList<Integer>();
     userIds.add(userId);
