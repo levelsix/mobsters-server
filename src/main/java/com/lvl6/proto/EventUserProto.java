@@ -5719,6 +5719,11 @@ public final class EventUserProto {
     // optional .com.lvl6.proto.SetFacebookIdResponseProto.SetFacebookIdStatus status = 2;
     boolean hasStatus();
     com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus getStatus();
+    
+    // optional .com.lvl6.proto.MinimumUserProto existing = 3;
+    boolean hasExisting();
+    com.lvl6.proto.UserProto.MinimumUserProto getExisting();
+    com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getExistingOrBuilder();
   }
   public static final class SetFacebookIdResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -5847,9 +5852,23 @@ public final class EventUserProto {
       return status_;
     }
     
+    // optional .com.lvl6.proto.MinimumUserProto existing = 3;
+    public static final int EXISTING_FIELD_NUMBER = 3;
+    private com.lvl6.proto.UserProto.MinimumUserProto existing_;
+    public boolean hasExisting() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProto getExisting() {
+      return existing_;
+    }
+    public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getExistingOrBuilder() {
+      return existing_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       status_ = com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus.SUCCESS;
+      existing_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -5869,6 +5888,9 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeEnum(2, status_.getNumber());
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, existing_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -5885,6 +5907,10 @@ public final class EventUserProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(2, status_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, existing_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6003,6 +6029,7 @@ public final class EventUserProto {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSenderFieldBuilder();
+          getExistingFieldBuilder();
         }
       }
       private static Builder create() {
@@ -6019,6 +6046,12 @@ public final class EventUserProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         status_ = com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus.SUCCESS;
         bitField0_ = (bitField0_ & ~0x00000002);
+        if (existingBuilder_ == null) {
+          existing_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+        } else {
+          existingBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -6069,6 +6102,14 @@ public final class EventUserProto {
           to_bitField0_ |= 0x00000002;
         }
         result.status_ = status_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (existingBuilder_ == null) {
+          result.existing_ = existing_;
+        } else {
+          result.existing_ = existingBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6090,6 +6131,9 @@ public final class EventUserProto {
         }
         if (other.hasStatus()) {
           setStatus(other.getStatus());
+        }
+        if (other.hasExisting()) {
+          mergeExisting(other.getExisting());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -6140,6 +6184,15 @@ public final class EventUserProto {
                 bitField0_ |= 0x00000002;
                 status_ = value;
               }
+              break;
+            }
+            case 26: {
+              com.lvl6.proto.UserProto.MinimumUserProto.Builder subBuilder = com.lvl6.proto.UserProto.MinimumUserProto.newBuilder();
+              if (hasExisting()) {
+                subBuilder.mergeFrom(getExisting());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setExisting(subBuilder.buildPartial());
               break;
             }
           }
@@ -6260,6 +6313,96 @@ public final class EventUserProto {
         status_ = com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdStatus.SUCCESS;
         onChanged();
         return this;
+      }
+      
+      // optional .com.lvl6.proto.MinimumUserProto existing = 3;
+      private com.lvl6.proto.UserProto.MinimumUserProto existing_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> existingBuilder_;
+      public boolean hasExisting() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto getExisting() {
+        if (existingBuilder_ == null) {
+          return existing_;
+        } else {
+          return existingBuilder_.getMessage();
+        }
+      }
+      public Builder setExisting(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (existingBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          existing_ = value;
+          onChanged();
+        } else {
+          existingBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder setExisting(
+          com.lvl6.proto.UserProto.MinimumUserProto.Builder builderForValue) {
+        if (existingBuilder_ == null) {
+          existing_ = builderForValue.build();
+          onChanged();
+        } else {
+          existingBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder mergeExisting(com.lvl6.proto.UserProto.MinimumUserProto value) {
+        if (existingBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              existing_ != com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance()) {
+            existing_ =
+              com.lvl6.proto.UserProto.MinimumUserProto.newBuilder(existing_).mergeFrom(value).buildPartial();
+          } else {
+            existing_ = value;
+          }
+          onChanged();
+        } else {
+          existingBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder clearExisting() {
+        if (existingBuilder_ == null) {
+          existing_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
+          onChanged();
+        } else {
+          existingBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProto.Builder getExistingBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getExistingFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getExistingOrBuilder() {
+        if (existingBuilder_ != null) {
+          return existingBuilder_.getMessageOrBuilder();
+        } else {
+          return existing_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder> 
+          getExistingFieldBuilder() {
+        if (existingBuilder_ == null) {
+          existingBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.UserProto.MinimumUserProto, com.lvl6.proto.UserProto.MinimumUserProto.Builder, com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder>(
+                  existing_,
+                  getParentForChildren(),
+                  isClean());
+          existing_ = null;
+        }
+        return existingBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.SetFacebookIdResponseProto)
@@ -8970,36 +9113,37 @@ public final class EventUserProto {
       "o\022\030\n\020timeOfUserUpdate\030\002 \001(\003\"q\n\031SetFacebo" +
       "okIdRequestProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
       "vl6.proto.MinimumUserProto\022\014\n\004fbId\030\002 \001(\t" +
-      "\022\024\n\014isUserCreate\030\003 \001(\010\"\212\002\n\032SetFacebookId",
+      "\022\024\n\014isUserCreate\030\003 \001(\010\"\276\002\n\032SetFacebookId",
       "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
       ".proto.MinimumUserProto\022N\n\006status\030\002 \001(\0162" +
       ">.com.lvl6.proto.SetFacebookIdResponsePr" +
-      "oto.SetFacebookIdStatus\"j\n\023SetFacebookId" +
-      "Status\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022\025\n\021F" +
-      "AIL_FB_ID_EXISTS\020\003\022\037\n\033FAIL_USER_FB_ID_AL" +
-      "READY_SET\020\004\"\277\001\n\036UpdateUserCurrencyReques" +
-      "tProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto." +
-      "MinimumUserProto\022\021\n\tcashSpent\030\002 \001(\021\022\020\n\010o" +
-      "ilSpent\030\003 \001(\021\022\021\n\tgemsSpent\030\004 \001(\021\022\022\n\nclie",
-      "ntTime\030\005 \001(\003\022\016\n\006reason\030\006 \001(\t\022\017\n\007details\030" +
-      "\007 \001(\t\"\272\002\n\037UpdateUserCurrencyResponseProt" +
-      "o\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Minim" +
-      "umUserProto\022X\n\006status\030\002 \001(\0162H.com.lvl6.p" +
-      "roto.UpdateUserCurrencyResponseProto.Upd" +
-      "ateUserCurrencyStatus\"\212\001\n\030UpdateUserCurr" +
-      "encyStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\022" +
-      "\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022\031\n\025FAIL_INSU" +
-      "FFICIENT_OIL\020\004\022\032\n\026FAIL_INSUFFICIENT_GEMS" +
-      "\020\005\"e\n\033SetGameCenterIdRequestProto\0220\n\006sen",
-      "der\030\001 \001(\0132 .com.lvl6.proto.MinimumUserPr" +
-      "oto\022\024\n\014gameCenterId\030\002 \001(\t\"\360\001\n\034SetGameCen" +
-      "terIdResponseProto\0220\n\006sender\030\001 \001(\0132 .com" +
-      ".lvl6.proto.MinimumUserProto\022\024\n\014gameCent" +
-      "erId\030\002 \001(\t\022R\n\006status\030\003 \001(\0162B.com.lvl6.pr" +
-      "oto.SetGameCenterIdResponseProto.SetGame" +
-      "CenterIdStatus\"4\n\025SetGameCenterIdStatus\022" +
-      "\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002B\020B\016EventUse" +
-      "rProto"
+      "oto.SetFacebookIdStatus\0222\n\010existing\030\003 \001(" +
+      "\0132 .com.lvl6.proto.MinimumUserProto\"j\n\023S" +
+      "etFacebookIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_" +
+      "OTHER\020\002\022\025\n\021FAIL_FB_ID_EXISTS\020\003\022\037\n\033FAIL_U" +
+      "SER_FB_ID_ALREADY_SET\020\004\"\277\001\n\036UpdateUserCu" +
+      "rrencyRequestProto\0220\n\006sender\030\001 \001(\0132 .com" +
+      ".lvl6.proto.MinimumUserProto\022\021\n\tcashSpen",
+      "t\030\002 \001(\021\022\020\n\010oilSpent\030\003 \001(\021\022\021\n\tgemsSpent\030\004" +
+      " \001(\021\022\022\n\nclientTime\030\005 \001(\003\022\016\n\006reason\030\006 \001(\t" +
+      "\022\017\n\007details\030\007 \001(\t\"\272\002\n\037UpdateUserCurrency" +
+      "ResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6" +
+      ".proto.MinimumUserProto\022X\n\006status\030\002 \001(\0162" +
+      "H.com.lvl6.proto.UpdateUserCurrencyRespo" +
+      "nseProto.UpdateUserCurrencyStatus\"\212\001\n\030Up" +
+      "dateUserCurrencyStatus\022\013\n\007SUCCESS\020\001\022\016\n\nF" +
+      "AIL_OTHER\020\002\022\032\n\026FAIL_INSUFFICIENT_CASH\020\003\022" +
+      "\031\n\025FAIL_INSUFFICIENT_OIL\020\004\022\032\n\026FAIL_INSUF",
+      "FICIENT_GEMS\020\005\"e\n\033SetGameCenterIdRequest" +
+      "Proto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.M" +
+      "inimumUserProto\022\024\n\014gameCenterId\030\002 \001(\t\"\360\001" +
+      "\n\034SetGameCenterIdResponseProto\0220\n\006sender" +
+      "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
+      "\022\024\n\014gameCenterId\030\002 \001(\t\022R\n\006status\030\003 \001(\0162B" +
+      ".com.lvl6.proto.SetGameCenterIdResponseP" +
+      "roto.SetGameCenterIdStatus\"4\n\025SetGameCen" +
+      "terIdStatus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002" +
+      "B\020B\016EventUserProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9083,7 +9227,7 @@ public final class EventUserProto {
           internal_static_com_lvl6_proto_SetFacebookIdResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_SetFacebookIdResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Status", },
+              new java.lang.String[] { "Sender", "Status", "Existing", },
               com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.class,
               com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder.class);
           internal_static_com_lvl6_proto_UpdateUserCurrencyRequestProto_descriptor =

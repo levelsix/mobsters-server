@@ -19,6 +19,7 @@ import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.SetFacebookIdSta
 import com.lvl6.proto.EventUserProto.SetFacebookIdResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
   @Component @DependsOn("gameServer") public class SetFacebookIdController extends EventController {
@@ -129,6 +130,12 @@ import com.lvl6.utils.RetrieveUtils;
   		//queried for a userId and a facebook id
   		log.error("fbId already taken. fbId='" + newFbId + "'\t usersInDb=" + userMap);
   		resBuilder.setStatus(SetFacebookIdStatus.FAIL_FB_ID_EXISTS);
+  		
+  		User existing = userMap.get(newFbId);
+  		MinimumUserProto existingProto = CreateInfoProtoUtils
+  				.createMinimumUserProtoFromUser(existing);
+  		resBuilder.setExisting(existingProto);
+  		
   		return false;
   	}
 
