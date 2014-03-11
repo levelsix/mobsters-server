@@ -20,6 +20,9 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.UserCreateRequestEvent;
 import com.lvl6.events.response.ReferralCodeUsedResponseEvent;
 import com.lvl6.events.response.UserCreateResponseEvent;
+import com.lvl6.info.Monster;
+import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
@@ -33,6 +36,8 @@ import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.UserProto.FullUserProto;
+import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.TimeUtils;
@@ -135,6 +140,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     boolean gotLock = true;
     if (null != fbId && !fbId.isEmpty()) {
+    	//this is to prevent one user on two devices creating account with one fbId
     	gotLock = getLocker().lockFbId(fbId);
     }
     try {
@@ -177,6 +183,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  	writeStructs(userId, createTime, structsJustBuilt);
 			  	log.info("writing tasks");
 			    writeTaskCompleted(userId, createTime);
+			    writeMonsters(userId, createTime, facebookId);
 //			    LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
 //			    leaderboard.updateLeaderboardForUser(user);
 			    
@@ -261,9 +268,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private User writeChangeToDb(Builder resBuilder, String name, String udid, int cash,
   		int oil, int gems, String deviceToken, Timestamp createTime, String facebookId) {
   	User user = null;
-  //TODO: FIX THESE NUMBERS
+  	//TODO: FIX THESE NUMBERS
 		int lvl = ControllerConstants.USER_CREATE__START_LEVEL;  
-	  int playerExp = 69;
+	  int playerExp = 10;
 	  
 	  //newbie protection
 	  boolean activateShield = true;
@@ -306,7 +313,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private void writeStructs(int userId, Timestamp purchaseTime,
   		List<TutorialStructProto> structsJustBuilt) {
   	Date purchaseDate = new Date(purchaseTime.getTime());
-  	Date purchaseDateOneWeekAgo = getTimeUtils().createDateAddDays(purchaseDate, 7);
+  	Date purchaseDateOneWeekAgo = getTimeUtils().createDateAddDays(purchaseDate, -7);
   	Timestamp purchaseTimeOneWeekAgo = new Timestamp(purchaseDateOneWeekAgo.getTime());
   	
   	int[] buildingIds = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS;
@@ -378,6 +385,45 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	int numInserted = InsertUtils.get().insertIntoTaskForUserCompleted(userIdList,
   			taskIdList, createTimeList);
   	log.info("num tasks inserted:" + numInserted + ", should be " + size);
+  }
+  
+  private void writeMonsters(int userId, Timestamp createTime, String fbId) {
+  	String sourceOfPieces = ControllerConstants.MFUSOP__USER_CREATE;
+  	Date createDate = new Date(createTime.getTime());
+  	Date combineStartDate = getTimeUtils().createDateAddDays(createDate, -7);
+  	
+  	List<Integer> monsterIds = new ArrayList<Integer>();
+  	monsterIds.add(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
+  	
+  	if (null != fbId && !fbId.isEmpty()) {
+  		log.info("awarding facebook zucker mucker burger.");
+  		monsterIds.add(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+  	}
+  	
+  	List<MonsterForUser> userMonsters = new ArrayList<MonsterForUser>();
+  	for (int i = 0; i < monsterIds.size(); i++) {
+  		int monsterId = monsterIds.get(i);
+  		int teamSlotNum = i + 1;
+  		
+  		Monster monzter = MonsterRetrieveUtils.getMonsterForMonsterId(monsterId);
+  		Map<Integer, MonsterLevelInfo> info = MonsterLevelInfoRetrieveUtils
+  				.getMonsterLevelInfoForMonsterId(monsterId);
+  		
+  		List<Integer> lvls = new ArrayList<Integer>(info.keySet());
+  		Collections.sort(lvls);
+  		int firstOne = lvls.get(0);
+  		MonsterLevelInfo mli = info.get(firstOne);
+  		
+  		
+  		MonsterForUser mfu = new MonsterForUser(0, userId, monsterId, mli.getCurLvlRequiredExp(),
+  				mli.getLevel(), mli.getHp(), monzter.getNumPuzzlePieces(), true, combineStartDate,
+  				teamSlotNum, sourceOfPieces);
+  		userMonsters.add(mfu);
+  	}
+  	List<Long> ids = InsertUtils.get().insertIntoMonsterForUserReturnIds(userId,
+  			userMonsters, sourceOfPieces, combineStartDate);
+  	
+  	log.info("monsters inserted for userId=" + userId + ", ids=" + ids);
   }
 
 

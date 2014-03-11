@@ -32,11 +32,23 @@ public class ControllerConstants {
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
 	public static final String MFUSOP__QUEST = "questId "; 
 	public static final String MFUSOP__BOOSTER_PACK = "boosterPackId";
+	public static final String MFUSOP__USER_CREATE = "user create";
 	
 	//MFUDR = monster_for_user_delete_reasons
 	public static final String MFUDR__ENHANCING = "enhancing";
 	public static final String MFUDR__QUEST = "quest";
 	public static final String MFUDR__SELL = "sold for cash";
+	
+	
+	//MINI TUTORIAL CONSTANTS
+	public static final int MINI_TUTORIAL__MATCH_THREE_TUTORIAL_ASSET_ID = 5;
+	public static final int MINI_TUTORIAL__FIRST_POWER_UP_TUTORIAL_ASSET_ID = 6;
+	public static final int MINI_TUTORIAL__RAINBOW_TUTORIAL_ASSET_ID = 3;
+	public static final int MINI_TUTORIAL__POWER_UP_COMBO_TUTORIAL_ASSET_ID = 4;
+	public static final int MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID = 1;
+	public static final int MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID = 2;
+	public static final int MINI_TUTORIAL__CITY_ID = 1;
+
 	
 	//chats
 	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
@@ -93,8 +105,6 @@ public class ControllerConstants {
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
 	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
 	
-	
-
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
@@ -105,12 +115,7 @@ public class ControllerConstants {
 	public static final float STRUCTURE_FOR_USER__CASH_STORAGE_Y_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_X_COORD = 10F;
 	public static final float STRUCTURE_FOR_USER__OIL_STORAGE_Y_COORD = 13F;
-	
-	
-	
-	
-	
-	
+		
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
 	public static final int TUTORIAL__STARTING_MONSTER_ID = 1;
