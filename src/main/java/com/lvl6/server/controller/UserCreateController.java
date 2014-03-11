@@ -129,6 +129,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     Timestamp createTime = new Timestamp((new Date()).getTime());
     List<TutorialStructProto> structsJustBuilt = reqProto.getStructsJustBuiltList();
     String facebookId = reqProto.getFacebookId();
+    log.info("now entering sleep mode");
+    Thread.sleep(10000);
+    log.info("exited sleep mode");
     
     //in case user tries hacking, don't let the amount go over tutorial default values
     int cash = Math.min(reqProto.getCash(), ControllerConstants.TUTORIAL__INIT_CASH);
@@ -140,6 +143,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     
     boolean gotLock = true;
     if (null != fbId && !fbId.isEmpty()) {
+    	//this is to prevent one user on two devices creating account with one fbId
     	gotLock = getLocker().lockFbId(fbId);
     }
     try {
