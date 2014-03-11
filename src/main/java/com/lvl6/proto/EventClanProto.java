@@ -21237,9 +21237,9 @@ public final class EventClanProto {
     com.lvl6.proto.UserProto.MinimumUserProto getSender();
     com.lvl6.proto.UserProto.MinimumUserProtoOrBuilder getSenderOrBuilder();
     
-    // optional int32 victim = 2;
-    boolean hasVictim();
-    int getVictim();
+    // optional int32 victimId = 2;
+    boolean hasVictimId();
+    int getVictimId();
     
     // optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];
     boolean hasUserClanStatus();
@@ -21366,14 +21366,14 @@ public final class EventClanProto {
       return sender_;
     }
     
-    // optional int32 victim = 2;
-    public static final int VICTIM_FIELD_NUMBER = 2;
-    private int victim_;
-    public boolean hasVictim() {
+    // optional int32 victimId = 2;
+    public static final int VICTIMID_FIELD_NUMBER = 2;
+    private int victimId_;
+    public boolean hasVictimId() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public int getVictim() {
-      return victim_;
+    public int getVictimId() {
+      return victimId_;
     }
     
     // optional .com.lvl6.proto.UserClanStatus userClanStatus = 3 [default = MEMBER];
@@ -21398,7 +21398,7 @@ public final class EventClanProto {
     
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
-      victim_ = 0;
+      victimId_ = 0;
       userClanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.MEMBER;
       status_ = com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus.SUCCESS;
     }
@@ -21418,7 +21418,7 @@ public final class EventClanProto {
         output.writeMessage(1, sender_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, victim_);
+        output.writeInt32(2, victimId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeEnum(3, userClanStatus_.getNumber());
@@ -21441,7 +21441,7 @@ public final class EventClanProto {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, victim_);
+          .computeInt32Size(2, victimId_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -21582,7 +21582,7 @@ public final class EventClanProto {
           senderBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
-        victim_ = 0;
+        victimId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         userClanStatus_ = com.lvl6.proto.ClanProto.UserClanStatus.MEMBER;
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -21637,7 +21637,7 @@ public final class EventClanProto {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.victim_ = victim_;
+        result.victimId_ = victimId_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -21665,8 +21665,8 @@ public final class EventClanProto {
         if (other.hasSender()) {
           mergeSender(other.getSender());
         }
-        if (other.hasVictim()) {
-          setVictim(other.getVictim());
+        if (other.hasVictimId()) {
+          setVictimId(other.getVictimId());
         }
         if (other.hasUserClanStatus()) {
           setUserClanStatus(other.getUserClanStatus());
@@ -21716,7 +21716,7 @@ public final class EventClanProto {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              victim_ = input.readInt32();
+              victimId_ = input.readInt32();
               break;
             }
             case 24: {
@@ -21837,23 +21837,23 @@ public final class EventClanProto {
         return senderBuilder_;
       }
       
-      // optional int32 victim = 2;
-      private int victim_ ;
-      public boolean hasVictim() {
+      // optional int32 victimId = 2;
+      private int victimId_ ;
+      public boolean hasVictimId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public int getVictim() {
-        return victim_;
+      public int getVictimId() {
+        return victimId_;
       }
-      public Builder setVictim(int value) {
+      public Builder setVictimId(int value) {
         bitField0_ |= 0x00000002;
-        victim_ = value;
+        victimId_ = value;
         onChanged();
         return this;
       }
-      public Builder clearVictim() {
+      public Builder clearVictimId() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        victim_ = 0;
+        victimId_ = 0;
         onChanged();
         return this;
       }
@@ -22270,17 +22270,17 @@ public final class EventClanProto {
       "to\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Mini" +
       "mumUserProto\022\020\n\010victimId\030\002 \001(\005\022>\n\016userCl" +
       "anStatus\030\003 \001(\0162\036.com.lvl6.proto.UserClan" +
-      "Status:\006MEMBER\"\371\002\n$PromoteDemoteClanMemb",
+      "Status:\006MEMBER\"\373\002\n$PromoteDemoteClanMemb",
       "erResponseProto\0220\n\006sender\030\001 \001(\0132 .com.lv" +
-      "l6.proto.MinimumUserProto\022\016\n\006victim\030\002 \001(" +
-      "\005\022>\n\016userClanStatus\030\003 \001(\0162\036.com.lvl6.pro" +
-      "to.UserClanStatus:\006MEMBER\022b\n\006status\030\004 \001(" +
-      "\0162R.com.lvl6.proto.PromoteDemoteClanMemb" +
-      "erResponseProto.PromoteDemoteClanMemberS" +
-      "tatus\"k\n\035PromoteDemoteClanMemberStatus\022\013" +
-      "\n\007SUCCESS\020\001\022\024\n\020FAIL_NOT_IN_CLAN\020\002\022\027\n\023FAI" +
-      "L_NOT_AUTHORIZED\020\003\022\016\n\nFAIL_OTHER\020\004B\020B\016Ev" +
-      "entClanProto"
+      "l6.proto.MinimumUserProto\022\020\n\010victimId\030\002 " +
+      "\001(\005\022>\n\016userClanStatus\030\003 \001(\0162\036.com.lvl6.p" +
+      "roto.UserClanStatus:\006MEMBER\022b\n\006status\030\004 " +
+      "\001(\0162R.com.lvl6.proto.PromoteDemoteClanMe" +
+      "mberResponseProto.PromoteDemoteClanMembe" +
+      "rStatus\"k\n\035PromoteDemoteClanMemberStatus" +
+      "\022\013\n\007SUCCESS\020\001\022\024\n\020FAIL_NOT_IN_CLAN\020\002\022\027\n\023F" +
+      "AIL_NOT_AUTHORIZED\020\003\022\016\n\nFAIL_OTHER\020\004B\020B\016" +
+      "EventClanProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -22516,7 +22516,7 @@ public final class EventClanProto {
           internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_PromoteDemoteClanMemberResponseProto_descriptor,
-              new java.lang.String[] { "Sender", "Victim", "UserClanStatus", "Status", },
+              new java.lang.String[] { "Sender", "VictimId", "UserClanStatus", "Status", },
               com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.class,
               com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.Builder.class);
           return null;

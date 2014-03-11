@@ -58,7 +58,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     PromoteDemoteClanMemberResponseProto.Builder resBuilder = PromoteDemoteClanMemberResponseProto.newBuilder();
     resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    resBuilder.setVictim(victimId);
+    resBuilder.setVictimId(victimId);
     resBuilder.setUserClanStatus(newUserClanStatus);
 
     int clanId = 0;
