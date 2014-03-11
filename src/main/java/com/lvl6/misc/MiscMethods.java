@@ -161,7 +161,7 @@ public class MiscMethods {
         while (st.hasMoreTokens()) {
           String tok = st.nextToken();
           StringTokenizer st2 = new StringTokenizer(tok, ".");
-          if (st2.hasMoreTokens()) {
+          if (st2.countTokens() == 4) {
             Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
             String speaker = st2.nextToken();
             String speakerImage = st2.nextToken();
