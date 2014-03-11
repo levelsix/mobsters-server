@@ -3,16 +3,16 @@ package com.lvl6.events.response;
 import java.nio.ByteBuffer;
 
 import com.google.protobuf.ByteString;
-import com.lvl6.events.PreDatabaseResponseEvent;
+import com.lvl6.events.NormalResponseEvent;
 import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolResponse;
 
-public class ForceLogoutResponseEvent extends PreDatabaseResponseEvent{
+public class ForceLogoutResponseEvent extends NormalResponseEvent{
 
   private ForceLogoutResponseProto forceLogoutResponseProto;
   
-  public ForceLogoutResponseEvent(String udid) {
-    super(udid);
+  public ForceLogoutResponseEvent(int playerId) {
+    super(playerId);
     eventType = EventProtocolResponse.S_FORCE_LOGOUT_EVENT;
   }
   

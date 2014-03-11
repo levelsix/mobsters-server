@@ -246,5 +246,6 @@ message StartupResponseProto {
 //------------------------------------------------------------------------------------------
 //to prevent multiple of the same account being online
 message ForceLogoutResponseProto {
-	optional int64 loginTime = 1; 
+	optional int64 loginTime = 1; //the time the server logs the user in on startup
+	optional int64 previousLoginTime = 2; //last time server logged the user in on startup
 }

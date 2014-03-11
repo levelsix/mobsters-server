@@ -16497,6 +16497,10 @@ public final class EventStartupProto {
     // optional int64 loginTime = 1;
     boolean hasLoginTime();
     long getLoginTime();
+    
+    // optional int64 previousLoginTime = 2;
+    boolean hasPreviousLoginTime();
+    long getPreviousLoginTime();
   }
   public static final class ForceLogoutResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -16537,8 +16541,19 @@ public final class EventStartupProto {
       return loginTime_;
     }
     
+    // optional int64 previousLoginTime = 2;
+    public static final int PREVIOUSLOGINTIME_FIELD_NUMBER = 2;
+    private long previousLoginTime_;
+    public boolean hasPreviousLoginTime() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public long getPreviousLoginTime() {
+      return previousLoginTime_;
+    }
+    
     private void initFields() {
       loginTime_ = 0L;
+      previousLoginTime_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16555,6 +16570,9 @@ public final class EventStartupProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt64(1, loginTime_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, previousLoginTime_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -16567,6 +16585,10 @@ public final class EventStartupProto {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, loginTime_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, previousLoginTime_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -16694,6 +16716,8 @@ public final class EventStartupProto {
         super.clear();
         loginTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000001);
+        previousLoginTime_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       
@@ -16736,6 +16760,10 @@ public final class EventStartupProto {
           to_bitField0_ |= 0x00000001;
         }
         result.loginTime_ = loginTime_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.previousLoginTime_ = previousLoginTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16754,6 +16782,9 @@ public final class EventStartupProto {
         if (other == com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto.getDefaultInstance()) return this;
         if (other.hasLoginTime()) {
           setLoginTime(other.getLoginTime());
+        }
+        if (other.hasPreviousLoginTime()) {
+          setPreviousLoginTime(other.getPreviousLoginTime());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -16791,6 +16822,11 @@ public final class EventStartupProto {
               loginTime_ = input.readInt64();
               break;
             }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              previousLoginTime_ = input.readInt64();
+              break;
+            }
           }
         }
       }
@@ -16814,6 +16850,27 @@ public final class EventStartupProto {
       public Builder clearLoginTime() {
         bitField0_ = (bitField0_ & ~0x00000001);
         loginTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 previousLoginTime = 2;
+      private long previousLoginTime_ ;
+      public boolean hasPreviousLoginTime() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public long getPreviousLoginTime() {
+        return previousLoginTime_;
+      }
+      public Builder setPreviousLoginTime(long value) {
+        bitField0_ |= 0x00000002;
+        previousLoginTime_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearPreviousLoginTime() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        previousLoginTime_ = 0L;
         onChanged();
         return this;
       }
@@ -17043,9 +17100,10 @@ public final class EventStartupProto {
       "\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\"A\n\014Up" +
       "dateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDAT" +
       "E\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016" +
-      "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\"-\n\030Fo" +
+      "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\"H\n\030Fo" +
       "rceLogoutResponseProto\022\021\n\tloginTime\030\001 \001(" +
-      "\003B\023B\021EventStartupProto"
+      "\003\022\031\n\021previousLoginTime\030\002 \001(\003B\023B\021EventSta" +
+      "rtupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -17161,7 +17219,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_ForceLogoutResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor,
-              new java.lang.String[] { "LoginTime", },
+              new java.lang.String[] { "LoginTime", "PreviousLoginTime", },
               com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto.class,
               com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto.Builder.class);
           return null;

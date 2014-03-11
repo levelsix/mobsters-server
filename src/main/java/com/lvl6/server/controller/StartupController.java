@@ -246,13 +246,6 @@ public class StartupController extends EventController {
       updateStatus = UpdateStatus.NO_UPDATE;
     }
     
-    //force other devices on this account to logout
-    ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
-    logoutResponse.setLoginTime(clientTime);
-    ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(udid);
-    logoutEvent.setForceLogoutResponseProto(logoutResponse.build());
-    server.writePreDBEvent(logoutEvent, udid);
-
     StartupResponseProto.Builder resBuilder = StartupResponseProto.newBuilder();
     resBuilder.setUpdateStatus(updateStatus);
     resBuilder.setAppStoreURL(Globals.APP_STORE_URL());
@@ -278,6 +271,15 @@ public class StartupController extends EventController {
 			  	//if can't lock player, exception will be thrown
 			    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
 			    try {
+			    	//force other devices on this account to logout
+			      ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
+			      logoutResponse.setLoginTime(now.getTime());
+			      logoutResponse.setPreviousLoginTime(user.getLastLogin().getTime());
+			      ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(userId);
+			      logoutEvent.setForceLogoutResponseProto(logoutResponse.build());
+			      server.writePreDBEvent(logoutEvent, udid);
+
+			    	
 			      startupStatus = StartupStatus.USER_IN_DB;
 			      log.info("No major update... getting user info");
 //          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
