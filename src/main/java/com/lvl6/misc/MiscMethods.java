@@ -531,10 +531,11 @@ public class MiscMethods {
   	MiniTutorialConstants.Builder mtcb = MiniTutorialConstants.newBuilder();
   	mtcb.setMatchThreeTutorialAssetId(ControllerConstants.MINI_TUTORIAL__MATCH_THREE_TUTORIAL_ASSET_ID);
   	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__FIRST_POWER_UP_TUTORIAL_ASSET_ID);
-  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__RAINBOW_TUTORIAL_ASSET_ID);
-  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__POWER_UP_COMBO_TUTORIAL_ASSET_ID);
-  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID);
-  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID);
+  	mtcb.setRainbowTutorialAssetId(ControllerConstants.MINI_TUTORIAL__RAINBOW_TUTORIAL_ASSET_ID);
+  	mtcb.setPowerUpComboTutorialAssetId(ControllerConstants.MINI_TUTORIAL__POWER_UP_COMBO_TUTORIAL_ASSET_ID);
+  	mtcb.setMonsterDropTutorialAssetId(ControllerConstants.MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID);
+  	mtcb.setElementTutorialAssetId(ControllerConstants.MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID);
+  	mtcb.setCityId(ControllerConstants.MINI_TUTORIAL__CITY_ID);
   	return mtcb.build();
   }
 

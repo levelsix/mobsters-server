@@ -205,6 +205,8 @@ message StartupResponseProto {
 			//teaching different elements
 			optional int32 elementTutorialAssetId = 6;
 			
+			optional int32 cityId = 7;
+			
 		}
 		
 	}
