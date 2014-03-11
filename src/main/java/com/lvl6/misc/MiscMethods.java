@@ -149,6 +149,7 @@ public class MiscMethods {
 
   public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
+      log.info("Blob: "+dialogueBlob+" length: "+dialogueBlob.length());
       StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
 
       List<Boolean> isLeftSides = new ArrayList<Boolean>();
