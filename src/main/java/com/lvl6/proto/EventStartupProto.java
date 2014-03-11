@@ -2584,6 +2584,11 @@ public final class EventStartupProto {
       // optional bool addAllFbFriends = 23;
       boolean hasAddAllFbFriends();
       boolean getAddAllFbFriends();
+      
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts = 24;
+      boolean hasMiniTuts();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants getMiniTuts();
+      com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder getMiniTutsOrBuilder();
     }
     public static final class StartupConstants extends
         com.google.protobuf.GeneratedMessage
@@ -5616,6 +5621,629 @@ public final class EventStartupProto {
         // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MonsterConstants)
       }
       
+      public interface MiniTutorialConstantsOrBuilder
+          extends com.google.protobuf.MessageOrBuilder {
+        
+        // optional int32 matchThreeTutorialAssetId = 1;
+        boolean hasMatchThreeTutorialAssetId();
+        int getMatchThreeTutorialAssetId();
+        
+        // optional int32 firstPowerUpAssetId = 2;
+        boolean hasFirstPowerUpAssetId();
+        int getFirstPowerUpAssetId();
+        
+        // optional int32 rainbowTutorialAssetId = 3;
+        boolean hasRainbowTutorialAssetId();
+        int getRainbowTutorialAssetId();
+        
+        // optional int32 powerUpComboTutorialAssetId = 4;
+        boolean hasPowerUpComboTutorialAssetId();
+        int getPowerUpComboTutorialAssetId();
+        
+        // optional int32 monsterDropTutorialAssetId = 5;
+        boolean hasMonsterDropTutorialAssetId();
+        int getMonsterDropTutorialAssetId();
+        
+        // optional int32 elementTutorialAssetId = 6;
+        boolean hasElementTutorialAssetId();
+        int getElementTutorialAssetId();
+      }
+      public static final class MiniTutorialConstants extends
+          com.google.protobuf.GeneratedMessage
+          implements MiniTutorialConstantsOrBuilder {
+        // Use MiniTutorialConstants.newBuilder() to construct.
+        private MiniTutorialConstants(Builder builder) {
+          super(builder);
+        }
+        private MiniTutorialConstants(boolean noInit) {}
+        
+        private static final MiniTutorialConstants defaultInstance;
+        public static MiniTutorialConstants getDefaultInstance() {
+          return defaultInstance;
+        }
+        
+        public MiniTutorialConstants getDefaultInstanceForType() {
+          return defaultInstance;
+        }
+        
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable;
+        }
+        
+        private int bitField0_;
+        // optional int32 matchThreeTutorialAssetId = 1;
+        public static final int MATCHTHREETUTORIALASSETID_FIELD_NUMBER = 1;
+        private int matchThreeTutorialAssetId_;
+        public boolean hasMatchThreeTutorialAssetId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public int getMatchThreeTutorialAssetId() {
+          return matchThreeTutorialAssetId_;
+        }
+        
+        // optional int32 firstPowerUpAssetId = 2;
+        public static final int FIRSTPOWERUPASSETID_FIELD_NUMBER = 2;
+        private int firstPowerUpAssetId_;
+        public boolean hasFirstPowerUpAssetId() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public int getFirstPowerUpAssetId() {
+          return firstPowerUpAssetId_;
+        }
+        
+        // optional int32 rainbowTutorialAssetId = 3;
+        public static final int RAINBOWTUTORIALASSETID_FIELD_NUMBER = 3;
+        private int rainbowTutorialAssetId_;
+        public boolean hasRainbowTutorialAssetId() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        public int getRainbowTutorialAssetId() {
+          return rainbowTutorialAssetId_;
+        }
+        
+        // optional int32 powerUpComboTutorialAssetId = 4;
+        public static final int POWERUPCOMBOTUTORIALASSETID_FIELD_NUMBER = 4;
+        private int powerUpComboTutorialAssetId_;
+        public boolean hasPowerUpComboTutorialAssetId() {
+          return ((bitField0_ & 0x00000008) == 0x00000008);
+        }
+        public int getPowerUpComboTutorialAssetId() {
+          return powerUpComboTutorialAssetId_;
+        }
+        
+        // optional int32 monsterDropTutorialAssetId = 5;
+        public static final int MONSTERDROPTUTORIALASSETID_FIELD_NUMBER = 5;
+        private int monsterDropTutorialAssetId_;
+        public boolean hasMonsterDropTutorialAssetId() {
+          return ((bitField0_ & 0x00000010) == 0x00000010);
+        }
+        public int getMonsterDropTutorialAssetId() {
+          return monsterDropTutorialAssetId_;
+        }
+        
+        // optional int32 elementTutorialAssetId = 6;
+        public static final int ELEMENTTUTORIALASSETID_FIELD_NUMBER = 6;
+        private int elementTutorialAssetId_;
+        public boolean hasElementTutorialAssetId() {
+          return ((bitField0_ & 0x00000020) == 0x00000020);
+        }
+        public int getElementTutorialAssetId() {
+          return elementTutorialAssetId_;
+        }
+        
+        private void initFields() {
+          matchThreeTutorialAssetId_ = 0;
+          firstPowerUpAssetId_ = 0;
+          rainbowTutorialAssetId_ = 0;
+          powerUpComboTutorialAssetId_ = 0;
+          monsterDropTutorialAssetId_ = 0;
+          elementTutorialAssetId_ = 0;
+        }
+        private byte memoizedIsInitialized = -1;
+        public final boolean isInitialized() {
+          byte isInitialized = memoizedIsInitialized;
+          if (isInitialized != -1) return isInitialized == 1;
+          
+          memoizedIsInitialized = 1;
+          return true;
+        }
+        
+        public void writeTo(com.google.protobuf.CodedOutputStream output)
+                            throws java.io.IOException {
+          getSerializedSize();
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            output.writeInt32(1, matchThreeTutorialAssetId_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            output.writeInt32(2, firstPowerUpAssetId_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            output.writeInt32(3, rainbowTutorialAssetId_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            output.writeInt32(4, powerUpComboTutorialAssetId_);
+          }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            output.writeInt32(5, monsterDropTutorialAssetId_);
+          }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            output.writeInt32(6, elementTutorialAssetId_);
+          }
+          getUnknownFields().writeTo(output);
+        }
+        
+        private int memoizedSerializedSize = -1;
+        public int getSerializedSize() {
+          int size = memoizedSerializedSize;
+          if (size != -1) return size;
+        
+          size = 0;
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(1, matchThreeTutorialAssetId_);
+          }
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(2, firstPowerUpAssetId_);
+          }
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(3, rainbowTutorialAssetId_);
+          }
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(4, powerUpComboTutorialAssetId_);
+          }
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(5, monsterDropTutorialAssetId_);
+          }
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+            size += com.google.protobuf.CodedOutputStream
+              .computeInt32Size(6, elementTutorialAssetId_);
+          }
+          size += getUnknownFields().getSerializedSize();
+          memoizedSerializedSize = size;
+          return size;
+        }
+        
+        private static final long serialVersionUID = 0L;
+        @java.lang.Override
+        protected java.lang.Object writeReplace()
+            throws java.io.ObjectStreamException {
+          return super.writeReplace();
+        }
+        
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return newBuilder().mergeFrom(data, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          Builder builder = newBuilder();
+          if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+            return builder.buildParsed();
+          } else {
+            return null;
+          }
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input).buildParsed();
+        }
+        public static com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          return newBuilder().mergeFrom(input, extensionRegistry)
+                   .buildParsed();
+        }
+        
+        public static Builder newBuilder() { return Builder.create(); }
+        public Builder newBuilderForType() { return newBuilder(); }
+        public static Builder newBuilder(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants prototype) {
+          return newBuilder().mergeFrom(prototype);
+        }
+        public Builder toBuilder() { return newBuilder(this); }
+        
+        @java.lang.Override
+        protected Builder newBuilderForType(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          Builder builder = new Builder(parent);
+          return builder;
+        }
+        public static final class Builder extends
+            com.google.protobuf.GeneratedMessage.Builder<Builder>
+           implements com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder {
+          public static final com.google.protobuf.Descriptors.Descriptor
+              getDescriptor() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor;
+          }
+          
+          protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+              internalGetFieldAccessorTable() {
+            return com.lvl6.proto.EventStartupProto.internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable;
+          }
+          
+          // Construct using com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.newBuilder()
+          private Builder() {
+            maybeForceBuilderInitialization();
+          }
+          
+          private Builder(BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+          }
+          private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+            }
+          }
+          private static Builder create() {
+            return new Builder();
+          }
+          
+          public Builder clear() {
+            super.clear();
+            matchThreeTutorialAssetId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            firstPowerUpAssetId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000002);
+            rainbowTutorialAssetId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000004);
+            powerUpComboTutorialAssetId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000008);
+            monsterDropTutorialAssetId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000010);
+            elementTutorialAssetId_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000020);
+            return this;
+          }
+          
+          public Builder clone() {
+            return create().mergeFrom(buildPartial());
+          }
+          
+          public com.google.protobuf.Descriptors.Descriptor
+              getDescriptorForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDescriptor();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants getDefaultInstanceForType() {
+            return com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance();
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants build() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(result);
+            }
+            return result;
+          }
+          
+          private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants buildParsed()
+              throws com.google.protobuf.InvalidProtocolBufferException {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants result = buildPartial();
+            if (!result.isInitialized()) {
+              throw newUninitializedMessageException(
+                result).asInvalidProtocolBufferException();
+            }
+            return result;
+          }
+          
+          public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants buildPartial() {
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants result = new com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+              to_bitField0_ |= 0x00000001;
+            }
+            result.matchThreeTutorialAssetId_ = matchThreeTutorialAssetId_;
+            if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+              to_bitField0_ |= 0x00000002;
+            }
+            result.firstPowerUpAssetId_ = firstPowerUpAssetId_;
+            if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+              to_bitField0_ |= 0x00000004;
+            }
+            result.rainbowTutorialAssetId_ = rainbowTutorialAssetId_;
+            if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+              to_bitField0_ |= 0x00000008;
+            }
+            result.powerUpComboTutorialAssetId_ = powerUpComboTutorialAssetId_;
+            if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+              to_bitField0_ |= 0x00000010;
+            }
+            result.monsterDropTutorialAssetId_ = monsterDropTutorialAssetId_;
+            if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+              to_bitField0_ |= 0x00000020;
+            }
+            result.elementTutorialAssetId_ = elementTutorialAssetId_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+          }
+          
+          public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants) {
+              return mergeFrom((com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants)other);
+            } else {
+              super.mergeFrom(other);
+              return this;
+            }
+          }
+          
+          public Builder mergeFrom(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants other) {
+            if (other == com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance()) return this;
+            if (other.hasMatchThreeTutorialAssetId()) {
+              setMatchThreeTutorialAssetId(other.getMatchThreeTutorialAssetId());
+            }
+            if (other.hasFirstPowerUpAssetId()) {
+              setFirstPowerUpAssetId(other.getFirstPowerUpAssetId());
+            }
+            if (other.hasRainbowTutorialAssetId()) {
+              setRainbowTutorialAssetId(other.getRainbowTutorialAssetId());
+            }
+            if (other.hasPowerUpComboTutorialAssetId()) {
+              setPowerUpComboTutorialAssetId(other.getPowerUpComboTutorialAssetId());
+            }
+            if (other.hasMonsterDropTutorialAssetId()) {
+              setMonsterDropTutorialAssetId(other.getMonsterDropTutorialAssetId());
+            }
+            if (other.hasElementTutorialAssetId()) {
+              setElementTutorialAssetId(other.getElementTutorialAssetId());
+            }
+            this.mergeUnknownFields(other.getUnknownFields());
+            return this;
+          }
+          
+          public final boolean isInitialized() {
+            return true;
+          }
+          
+          public Builder mergeFrom(
+              com.google.protobuf.CodedInputStream input,
+              com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+              throws java.io.IOException {
+            com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+              com.google.protobuf.UnknownFieldSet.newBuilder(
+                this.getUnknownFields());
+            while (true) {
+              int tag = input.readTag();
+              switch (tag) {
+                case 0:
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                default: {
+                  if (!parseUnknownField(input, unknownFields,
+                                         extensionRegistry, tag)) {
+                    this.setUnknownFields(unknownFields.build());
+                    onChanged();
+                    return this;
+                  }
+                  break;
+                }
+                case 8: {
+                  bitField0_ |= 0x00000001;
+                  matchThreeTutorialAssetId_ = input.readInt32();
+                  break;
+                }
+                case 16: {
+                  bitField0_ |= 0x00000002;
+                  firstPowerUpAssetId_ = input.readInt32();
+                  break;
+                }
+                case 24: {
+                  bitField0_ |= 0x00000004;
+                  rainbowTutorialAssetId_ = input.readInt32();
+                  break;
+                }
+                case 32: {
+                  bitField0_ |= 0x00000008;
+                  powerUpComboTutorialAssetId_ = input.readInt32();
+                  break;
+                }
+                case 40: {
+                  bitField0_ |= 0x00000010;
+                  monsterDropTutorialAssetId_ = input.readInt32();
+                  break;
+                }
+                case 48: {
+                  bitField0_ |= 0x00000020;
+                  elementTutorialAssetId_ = input.readInt32();
+                  break;
+                }
+              }
+            }
+          }
+          
+          private int bitField0_;
+          
+          // optional int32 matchThreeTutorialAssetId = 1;
+          private int matchThreeTutorialAssetId_ ;
+          public boolean hasMatchThreeTutorialAssetId() {
+            return ((bitField0_ & 0x00000001) == 0x00000001);
+          }
+          public int getMatchThreeTutorialAssetId() {
+            return matchThreeTutorialAssetId_;
+          }
+          public Builder setMatchThreeTutorialAssetId(int value) {
+            bitField0_ |= 0x00000001;
+            matchThreeTutorialAssetId_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMatchThreeTutorialAssetId() {
+            bitField0_ = (bitField0_ & ~0x00000001);
+            matchThreeTutorialAssetId_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 firstPowerUpAssetId = 2;
+          private int firstPowerUpAssetId_ ;
+          public boolean hasFirstPowerUpAssetId() {
+            return ((bitField0_ & 0x00000002) == 0x00000002);
+          }
+          public int getFirstPowerUpAssetId() {
+            return firstPowerUpAssetId_;
+          }
+          public Builder setFirstPowerUpAssetId(int value) {
+            bitField0_ |= 0x00000002;
+            firstPowerUpAssetId_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearFirstPowerUpAssetId() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            firstPowerUpAssetId_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 rainbowTutorialAssetId = 3;
+          private int rainbowTutorialAssetId_ ;
+          public boolean hasRainbowTutorialAssetId() {
+            return ((bitField0_ & 0x00000004) == 0x00000004);
+          }
+          public int getRainbowTutorialAssetId() {
+            return rainbowTutorialAssetId_;
+          }
+          public Builder setRainbowTutorialAssetId(int value) {
+            bitField0_ |= 0x00000004;
+            rainbowTutorialAssetId_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearRainbowTutorialAssetId() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            rainbowTutorialAssetId_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 powerUpComboTutorialAssetId = 4;
+          private int powerUpComboTutorialAssetId_ ;
+          public boolean hasPowerUpComboTutorialAssetId() {
+            return ((bitField0_ & 0x00000008) == 0x00000008);
+          }
+          public int getPowerUpComboTutorialAssetId() {
+            return powerUpComboTutorialAssetId_;
+          }
+          public Builder setPowerUpComboTutorialAssetId(int value) {
+            bitField0_ |= 0x00000008;
+            powerUpComboTutorialAssetId_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearPowerUpComboTutorialAssetId() {
+            bitField0_ = (bitField0_ & ~0x00000008);
+            powerUpComboTutorialAssetId_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 monsterDropTutorialAssetId = 5;
+          private int monsterDropTutorialAssetId_ ;
+          public boolean hasMonsterDropTutorialAssetId() {
+            return ((bitField0_ & 0x00000010) == 0x00000010);
+          }
+          public int getMonsterDropTutorialAssetId() {
+            return monsterDropTutorialAssetId_;
+          }
+          public Builder setMonsterDropTutorialAssetId(int value) {
+            bitField0_ |= 0x00000010;
+            monsterDropTutorialAssetId_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearMonsterDropTutorialAssetId() {
+            bitField0_ = (bitField0_ & ~0x00000010);
+            monsterDropTutorialAssetId_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // optional int32 elementTutorialAssetId = 6;
+          private int elementTutorialAssetId_ ;
+          public boolean hasElementTutorialAssetId() {
+            return ((bitField0_ & 0x00000020) == 0x00000020);
+          }
+          public int getElementTutorialAssetId() {
+            return elementTutorialAssetId_;
+          }
+          public Builder setElementTutorialAssetId(int value) {
+            bitField0_ |= 0x00000020;
+            elementTutorialAssetId_ = value;
+            onChanged();
+            return this;
+          }
+          public Builder clearElementTutorialAssetId() {
+            bitField0_ = (bitField0_ & ~0x00000020);
+            elementTutorialAssetId_ = 0;
+            onChanged();
+            return this;
+          }
+          
+          // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants)
+        }
+        
+        static {
+          defaultInstance = new MiniTutorialConstants(true);
+          defaultInstance.initFields();
+        }
+        
+        // @@protoc_insertion_point(class_scope:com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants)
+      }
+      
       private int bitField0_;
       // repeated .com.lvl6.proto.InAppPurchasePackageProto inAppPurchasePackages = 1;
       public static final int INAPPPURCHASEPACKAGES_FIELD_NUMBER = 1;
@@ -5909,6 +6537,19 @@ public final class EventStartupProto {
         return addAllFbFriends_;
       }
       
+      // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts = 24;
+      public static final int MINITUTS_FIELD_NUMBER = 24;
+      private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts_;
+      public boolean hasMiniTuts() {
+        return ((bitField0_ & 0x00200000) == 0x00200000);
+      }
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants getMiniTuts() {
+        return miniTuts_;
+      }
+      public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder getMiniTutsOrBuilder() {
+        return miniTuts_;
+      }
+      
       private void initFields() {
         inAppPurchasePackages_ = java.util.Collections.emptyList();
         maxLevelForUser_ = 0;
@@ -5933,6 +6574,7 @@ public final class EventStartupProto {
         gemsPerResource_ = 0F;
         continueBattleGemCostMultiplier_ = 0F;
         addAllFbFriends_ = false;
+        miniTuts_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -6014,6 +6656,9 @@ public final class EventStartupProto {
         }
         if (((bitField0_ & 0x00100000) == 0x00100000)) {
           output.writeBool(23, addAllFbFriends_);
+        }
+        if (((bitField0_ & 0x00200000) == 0x00200000)) {
+          output.writeMessage(24, miniTuts_);
         }
         getUnknownFields().writeTo(output);
       }
@@ -6115,6 +6760,10 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00100000) == 0x00100000)) {
           size += com.google.protobuf.CodedOutputStream
             .computeBoolSize(23, addAllFbFriends_);
+        }
+        if (((bitField0_ & 0x00200000) == 0x00200000)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(24, miniTuts_);
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -6240,6 +6889,7 @@ public final class EventStartupProto {
             getAdminChatUserProtoFieldBuilder();
             getUserMonsterConstantsFieldBuilder();
             getMonsterConstantsFieldBuilder();
+            getMiniTutsFieldBuilder();
           }
         }
         private static Builder create() {
@@ -6326,6 +6976,12 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00200000);
           addAllFbFriends_ = false;
           bitField0_ = (bitField0_ & ~0x00400000);
+          if (miniTutsBuilder_ == null) {
+            miniTuts_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance();
+          } else {
+            miniTutsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00800000);
           return this;
         }
         
@@ -6490,6 +7146,14 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00100000;
           }
           result.addAllFbFriends_ = addAllFbFriends_;
+          if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
+            to_bitField0_ |= 0x00200000;
+          }
+          if (miniTutsBuilder_ == null) {
+            result.miniTuts_ = miniTuts_;
+          } else {
+            result.miniTuts_ = miniTutsBuilder_.build();
+          }
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -6620,6 +7284,9 @@ public final class EventStartupProto {
           }
           if (other.hasAddAllFbFriends()) {
             setAddAllFbFriends(other.getAddAllFbFriends());
+          }
+          if (other.hasMiniTuts()) {
+            mergeMiniTuts(other.getMiniTuts());
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
@@ -6791,6 +7458,15 @@ public final class EventStartupProto {
               case 184: {
                 bitField0_ |= 0x00400000;
                 addAllFbFriends_ = input.readBool();
+                break;
+              }
+              case 194: {
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder subBuilder = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.newBuilder();
+                if (hasMiniTuts()) {
+                  subBuilder.mergeFrom(getMiniTuts());
+                }
+                input.readMessage(subBuilder, extensionRegistry);
+                setMiniTuts(subBuilder.buildPartial());
                 break;
               }
             }
@@ -8039,6 +8715,96 @@ public final class EventStartupProto {
           addAllFbFriends_ = false;
           onChanged();
           return this;
+        }
+        
+        // optional .com.lvl6.proto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts = 24;
+        private com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants miniTuts_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance();
+        private com.google.protobuf.SingleFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder> miniTutsBuilder_;
+        public boolean hasMiniTuts() {
+          return ((bitField0_ & 0x00800000) == 0x00800000);
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants getMiniTuts() {
+          if (miniTutsBuilder_ == null) {
+            return miniTuts_;
+          } else {
+            return miniTutsBuilder_.getMessage();
+          }
+        }
+        public Builder setMiniTuts(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants value) {
+          if (miniTutsBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            miniTuts_ = value;
+            onChanged();
+          } else {
+            miniTutsBuilder_.setMessage(value);
+          }
+          bitField0_ |= 0x00800000;
+          return this;
+        }
+        public Builder setMiniTuts(
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder builderForValue) {
+          if (miniTutsBuilder_ == null) {
+            miniTuts_ = builderForValue.build();
+            onChanged();
+          } else {
+            miniTutsBuilder_.setMessage(builderForValue.build());
+          }
+          bitField0_ |= 0x00800000;
+          return this;
+        }
+        public Builder mergeMiniTuts(com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants value) {
+          if (miniTutsBuilder_ == null) {
+            if (((bitField0_ & 0x00800000) == 0x00800000) &&
+                miniTuts_ != com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance()) {
+              miniTuts_ =
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.newBuilder(miniTuts_).mergeFrom(value).buildPartial();
+            } else {
+              miniTuts_ = value;
+            }
+            onChanged();
+          } else {
+            miniTutsBuilder_.mergeFrom(value);
+          }
+          bitField0_ |= 0x00800000;
+          return this;
+        }
+        public Builder clearMiniTuts() {
+          if (miniTutsBuilder_ == null) {
+            miniTuts_ = com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.getDefaultInstance();
+            onChanged();
+          } else {
+            miniTutsBuilder_.clear();
+          }
+          bitField0_ = (bitField0_ & ~0x00800000);
+          return this;
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder getMiniTutsBuilder() {
+          bitField0_ |= 0x00800000;
+          onChanged();
+          return getMiniTutsFieldBuilder().getBuilder();
+        }
+        public com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder getMiniTutsOrBuilder() {
+          if (miniTutsBuilder_ != null) {
+            return miniTutsBuilder_.getMessageOrBuilder();
+          } else {
+            return miniTuts_;
+          }
+        }
+        private com.google.protobuf.SingleFieldBuilder<
+            com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder> 
+            getMiniTutsFieldBuilder() {
+          if (miniTutsBuilder_ == null) {
+            miniTutsBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+                com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder, com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstantsOrBuilder>(
+                    miniTuts_,
+                    getParentForChildren(),
+                    isClean());
+            miniTuts_ = null;
+          }
+          return miniTutsBuilder_;
         }
         
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.StartupConstants)
@@ -16119,6 +16885,11 @@ public final class EventStartupProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MonsterConstants_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -16147,7 +16918,7 @@ public final class EventStartupProto {
       "\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t\022\024\n\014advertiser" +
       "Id\030\005 \001(\t\022\027\n\017isForceTutorial\030\006 \001(\010\022\014\n\004fbI" +
       "d\030\007 \001(\t\022\026\n\016isFreshRestart\030\010 \001(\010\022\022\n\nclien",
-      "tTime\030\t \001(\003\"\332$\n\024StartupResponseProto\022\030\n\020" +
+      "tTime\030\t \001(\003\"\234\'\n\024StartupResponseProto\022\030\n\020" +
       "serverTimeMillis\030\001 \001(\003\022-\n\006sender\030\002 \001(\0132\035" +
       ".com.lvl6.proto.FullUserProto\022I\n\rstartup" +
       "Status\030\003 \001(\01622.com.lvl6.proto.StartupRes" +
@@ -16203,7 +16974,7 @@ public final class EventStartupProto {
       "ReferralNotificationProto\0222\n\010referred\030\001 " +
       "\001(\0132 .com.lvl6.proto.MinimumUserProto\022\023\n" +
       "\013recruitTime\030\002 \001(\003\022\034\n\024coinsGivenToReferr" +
-      "er\030\003 \001(\005\032\372\016\n\020StartupConstants\022H\n\025inAppPu" +
+      "er\030\003 \001(\005\032\274\021\n\020StartupConstants\022H\n\025inAppPu" +
       "rchasePackages\030\001 \003(\0132).com.lvl6.proto.In" +
       "AppPurchasePackageProto\022\027\n\017maxLevelForUs" +
       "er\030\002 \001(\005\022\034\n\024maxNumOfSingleStruct\030\003 \001(\005\022n",
@@ -16233,40 +17004,48 @@ public final class EventStartupProto {
       "ts\022\025\n\rminutesPerGem\030\023 \001(\002\022\031\n\021pvpRequired" +
       "MinLvl\030\024 \001(\005\022\027\n\017gemsPerResource\030\025 \001(\002\022\'\n" +
       "\037continueBattleGemCostMultiplier\030\026 \001(\002\022\027" +
-      "\n\017addAllFbFriends\030\027 \001(\010\032_\n\031AnimatedSprit" +
-      "eOffsetProto\022\021\n\timageName\030\001 \001(\t\022/\n\006offSe" +
-      "t\030\002 \001(\0132\037.com.lvl6.proto.CoordinateProto" +
-      "\032\232\001\n\rClanConstants\022\035\n\025coinPriceToCreateC",
-      "lan\030\001 \001(\005\022 \n\030maxCharLengthForClanName\030\002 " +
-      "\001(\005\022\'\n\037maxCharLengthForClanDescription\030\003" +
-      " \001(\005\022\037\n\027maxCharLengthForClanTag\030\004 \001(\005\032c\n" +
-      "\030DownloadableNibConstants\022\022\n\nmapNibName\030" +
-      "\001 \001(\t\022\030\n\020expansionNibName\030\002 \001(\t\022\031\n\021goldS" +
-      "hoppeNibName\030\003 \001(\t\032y\n\023TournamentConstant" +
-      "s\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014lossesWeight\030\002 " +
-      "\001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022#\n\033numHoursToSh" +
-      "owAfterEventEnd\030\004 \001(\005\032R\n\024UserMonsterCons" +
-      "tants\022\027\n\017maxNumTeamSlots\030\001 \001(\005\022!\n\031initia",
-      "lMaxNumMonsterLimit\030\002 \001(\005\032\211\001\n\020MonsterCon" +
-      "stants\022\032\n\022cashPerHealthPoint\030\001 \001(\002\022#\n\033se" +
-      "condsToHealPerHealthPoint\030\002 \001(\002\022\031\n\021eleme" +
-      "ntalStrength\030\003 \001(\002\022\031\n\021elementalWeakness\030" +
-      "\004 \001(\002\032\250\003\n\021TutorialConstants\022\031\n\021startingM" +
-      "onsterId\030\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005\022\032" +
-      "\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZMonst" +
-      "erId\030\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\0132#" +
-      ".com.lvl6.proto.TutorialStructProto\022\036\n\026s" +
-      "tructureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030\005 ",
-      "\001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com.lvl6." +
-      "proto.CityElementProto\022$\n\034cityElementIdF" +
-      "orFirstDungeon\030\007 \001(\005\022%\n\035cityElementIdFor" +
-      "SecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022\017\n" +
-      "\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\"A\n\014Upda" +
-      "teStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020" +
-      "\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016\n\n" +
-      "USER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\"-\n\030Forc" +
-      "eLogoutResponseProto\022\021\n\tloginTime\030\001 \001(\003B" +
-      "\023B\021EventStartupProto"
+      "\n\017addAllFbFriends\030\027 \001(\010\022]\n\010miniTuts\030\030 \001(" +
+      "\0132K.com.lvl6.proto.StartupResponseProto." +
+      "StartupConstants.MiniTutorialConstants\032_" +
+      "\n\031AnimatedSpriteOffsetProto\022\021\n\timageName",
+      "\030\001 \001(\t\022/\n\006offSet\030\002 \001(\0132\037.com.lvl6.proto." +
+      "CoordinateProto\032\232\001\n\rClanConstants\022\035\n\025coi" +
+      "nPriceToCreateClan\030\001 \001(\005\022 \n\030maxCharLengt" +
+      "hForClanName\030\002 \001(\005\022\'\n\037maxCharLengthForCl" +
+      "anDescription\030\003 \001(\005\022\037\n\027maxCharLengthForC" +
+      "lanTag\030\004 \001(\005\032c\n\030DownloadableNibConstants" +
+      "\022\022\n\nmapNibName\030\001 \001(\t\022\030\n\020expansionNibName" +
+      "\030\002 \001(\t\022\031\n\021goldShoppeNibName\030\003 \001(\t\032y\n\023Tou" +
+      "rnamentConstants\022\022\n\nwinsWeight\030\001 \001(\005\022\024\n\014" +
+      "lossesWeight\030\002 \001(\005\022\023\n\013fleesWeight\030\003 \001(\005\022",
+      "#\n\033numHoursToShowAfterEventEnd\030\004 \001(\005\032R\n\024" +
+      "UserMonsterConstants\022\027\n\017maxNumTeamSlots\030" +
+      "\001 \001(\005\022!\n\031initialMaxNumMonsterLimit\030\002 \001(\005" +
+      "\032\211\001\n\020MonsterConstants\022\032\n\022cashPerHealthPo" +
+      "int\030\001 \001(\002\022#\n\033secondsToHealPerHealthPoint" +
+      "\030\002 \001(\002\022\031\n\021elementalStrength\030\003 \001(\002\022\031\n\021ele" +
+      "mentalWeakness\030\004 \001(\002\032\340\001\n\025MiniTutorialCon" +
+      "stants\022!\n\031matchThreeTutorialAssetId\030\001 \001(" +
+      "\005\022\033\n\023firstPowerUpAssetId\030\002 \001(\005\022\036\n\026rainbo" +
+      "wTutorialAssetId\030\003 \001(\005\022#\n\033powerUpComboTu",
+      "torialAssetId\030\004 \001(\005\022\"\n\032monsterDropTutori" +
+      "alAssetId\030\005 \001(\005\022\036\n\026elementTutorialAssetI" +
+      "d\030\006 \001(\005\032\250\003\n\021TutorialConstants\022\031\n\021startin" +
+      "gMonsterId\030\001 \001(\005\022\026\n\016enemyMonsterId\030\002 \001(\005" +
+      "\022\032\n\022enemyBossMonsterId\030\t \001(\005\022\026\n\016markZMon" +
+      "sterId\030\n \001(\005\022?\n\022tutorialStructures\030\003 \003(\013" +
+      "2#.com.lvl6.proto.TutorialStructProto\022\036\n" +
+      "\026structureIdsToBeBuillt\030\004 \003(\005\022\016\n\006cityId\030" +
+      "\005 \001(\005\0229\n\017cityOneElements\030\006 \003(\0132 .com.lvl" +
+      "6.proto.CityElementProto\022$\n\034cityElementI",
+      "dForFirstDungeon\030\007 \001(\005\022%\n\035cityElementIdF" +
+      "orSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 \001(\005\022" +
+      "\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\"A\n\014Up" +
+      "dateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDAT" +
+      "E\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStatus\022\016" +
+      "\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\"-\n\030Fo" +
+      "rceLogoutResponseProto\022\021\n\tloginTime\030\001 \001(" +
+      "\003B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -16310,7 +17089,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor,
-              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "PvpRequiredMinLvl", "GemsPerResource", "ContinueBattleGemCostMultiplier", "AddAllFbFriends", },
+              new java.lang.String[] { "InAppPurchasePackages", "MaxLevelForUser", "MaxNumOfSingleStruct", "AnimatedSpriteOffsets", "MinNameLength", "MaxNameLength", "MaxLengthOfChatString", "ClanConstants", "DownloadableNibConstants", "NumHoursBeforeReshowingGoldSale", "LevelToShowRateUsPopup", "TouramentConstants", "FbConnectRewardDiamonds", "FaqFileName", "AdminChatUserProto", "NumBeginnerSalesAllowed", "UserMonsterConstants", "MonsterConstants", "MinutesPerGem", "PvpRequiredMinLvl", "GemsPerResource", "ContinueBattleGemCostMultiplier", "AddAllFbFriends", "MiniTuts", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_AnimatedSpriteOffsetProto_descriptor =
@@ -16361,6 +17140,14 @@ public final class EventStartupProto {
               new java.lang.String[] { "CashPerHealthPoint", "SecondsToHealPerHealthPoint", "ElementalStrength", "ElementalWeakness", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants.Builder.class);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor =
+            internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_descriptor.getNestedTypes().get(6);
+          internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_StartupResponseProto_StartupConstants_MiniTutorialConstants_descriptor,
+              new java.lang.String[] { "MatchThreeTutorialAssetId", "FirstPowerUpAssetId", "RainbowTutorialAssetId", "PowerUpComboTutorialAssetId", "MonsterDropTutorialAssetId", "ElementTutorialAssetId", },
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.class,
+              com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants.Builder.class);
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor =
             internal_static_com_lvl6_proto_StartupResponseProto_descriptor.getNestedTypes().get(3);
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new

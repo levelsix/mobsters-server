@@ -66,6 +66,7 @@ import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.ClanConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.DownloadableNibConstants;
+import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MiniTutorialConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.MonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.StartupConstants.UserMonsterConstants;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants;
@@ -418,7 +419,9 @@ public class MiscMethods {
     cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
 
     cb.setAddAllFbFriends(globals.isAddAllFbFriends());
-
+    
+    MiniTutorialConstants miniTuts = createMiniTutorialConstantsProto();
+    cb.setMiniTuts(miniTuts);
     //set more properties above
     //    BattleConstants battleConstants = BattleConstants.newBuilder()
     //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
@@ -522,6 +525,17 @@ public class MiscMethods {
     //    cb.setSpeedupConstants(scb.build());
 
     return cb.build();  
+  }
+  
+  public static MiniTutorialConstants createMiniTutorialConstantsProto() {
+  	MiniTutorialConstants.Builder mtcb = MiniTutorialConstants.newBuilder();
+  	mtcb.setMatchThreeTutorialAssetId(ControllerConstants.MINI_TUTORIAL__MATCH_THREE_TUTORIAL_ASSET_ID);
+  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__FIRST_POWER_UP_TUTORIAL_ASSET_ID);
+  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__RAINBOW_TUTORIAL_ASSET_ID);
+  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__POWER_UP_COMBO_TUTORIAL_ASSET_ID);
+  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID);
+  	mtcb.setFirstPowerUpAssetId(ControllerConstants.MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID);
+  	return mtcb.build();
   }
 
   /*public static List<LockBoxEventProto> currentLockBoxEvents() {

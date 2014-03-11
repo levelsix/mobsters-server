@@ -149,6 +149,8 @@ message StartupResponseProto {
 		optional float continueBattleGemCostMultiplier = 22;
 		
 		optional bool addAllFbFriends = 23;
+		optional MiniTutorialConstants miniTuts = 24;
+		
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;
@@ -188,6 +190,23 @@ message StartupResponseProto {
 			optional float elementalStrength = 3;
 			optional float elementalWeakness = 4;
 		}
+		message MiniTutorialConstants {
+			optional int32 matchThreeTutorialAssetId = 1; 
+			optional int32 firstPowerUpAssetId = 2;
+			
+			//creating rainbow orb, connecting 5 in a row 
+			optional int32 rainbowTutorialAssetId = 3; //building id 3
+			
+			optional int32 powerUpComboTutorialAssetId = 4; //building id 4
+			
+			//encompasses equipping monster
+			optional int32 monsterDropTutorialAssetId = 5;
+			
+			//teaching different elements
+			optional int32 elementTutorialAssetId = 6;
+			
+		}
+		
 	}
 	
 	message TutorialConstants {
