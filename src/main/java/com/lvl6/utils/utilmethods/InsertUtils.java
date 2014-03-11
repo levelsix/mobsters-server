@@ -471,8 +471,10 @@ public class InsertUtils implements InsertUtil{
     
     if (null != facebookId && !facebookId.isEmpty()) {
     	insertParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
+    	insertParams.put(DBConstants.USER__FB_ID_SET_ON_USER_CREATE, true);
     } else {
     	insertParams.put(DBConstants.USER__UDID, udid);
+    	insertParams.put(DBConstants.USER__FB_ID_SET_ON_USER_CREATE, false);
     }
     
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
