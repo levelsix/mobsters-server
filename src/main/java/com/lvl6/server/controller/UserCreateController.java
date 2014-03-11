@@ -129,9 +129,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     Timestamp createTime = new Timestamp((new Date()).getTime());
     List<TutorialStructProto> structsJustBuilt = reqProto.getStructsJustBuiltList();
     String facebookId = reqProto.getFacebookId();
-    log.info("now entering sleep mode");
-    Thread.sleep(10000);
-    log.info("exited sleep mode");
     
     //in case user tries hacking, don't let the amount go over tutorial default values
     int cash = Math.min(reqProto.getCash(), ControllerConstants.TUTORIAL__INIT_CASH);
@@ -186,7 +183,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  	writeStructs(userId, createTime, structsJustBuilt);
 			  	log.info("writing tasks");
 			    writeTaskCompleted(userId, createTime);
-			    writeMonsters(userId, createTime);
+			    writeMonsters(userId, createTime, facebookId);
 //			    LeaderBoardUtil leaderboard = AppContext.getApplicationContext().getBean(LeaderBoardUtil.class);
 //			    leaderboard.updateLeaderboardForUser(user);
 			    
@@ -390,14 +387,18 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	log.info("num tasks inserted:" + numInserted + ", should be " + size);
   }
   
-  private void writeMonsters(int userId, Timestamp createTime) {
+  private void writeMonsters(int userId, Timestamp createTime, String fbId) {
   	String sourceOfPieces = ControllerConstants.MFUSOP__USER_CREATE;
   	Date createDate = new Date(createTime.getTime());
   	Date combineStartDate = getTimeUtils().createDateAddDays(createDate, -7);
   	
   	List<Integer> monsterIds = new ArrayList<Integer>();
   	monsterIds.add(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
-  	monsterIds.add(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+  	
+  	if (null != fbId && !fbId.isEmpty()) {
+  		log.info("awarding facebook zucker mucker burger.");
+  		monsterIds.add(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+  	}
   	
   	List<MonsterForUser> userMonsters = new ArrayList<MonsterForUser>();
   	for (int i = 0; i < monsterIds.size(); i++) {
