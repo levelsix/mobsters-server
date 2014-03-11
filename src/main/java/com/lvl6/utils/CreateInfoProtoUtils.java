@@ -163,12 +163,12 @@ public class CreateInfoProtoUtils {
     statuses.add(UserClanStatus.JUNIOR_LEADER_VALUE);
     statuses.add(UserClanStatus.CAPTAIN_VALUE);
     statuses.add(UserClanStatus.MEMBER_VALUE);
-    
+
     List<Integer> userIds = RetrieveUtils.userClanRetrieveUtils()
-    		.getUserIdsWithStatuses(clanId, statuses);
+        .getUserIdsWithStatuses(clanId, statuses);
     int size = 0;
     if (null != userIds) {
-    	size = userIds.size();
+      size = userIds.size();
     }
     return FullClanProtoWithClanSize.newBuilder().setClan(clan).setClanSize(size).build();
   }
@@ -204,7 +204,7 @@ public class CreateInfoProtoUtils {
     builder.setName(u.getName());
     builder.setUserId(u.getId());
     builder.setClan(createMinimumClanProtoFromClan(c));
-    
+
     MinimumUserProtoWithLevel.Builder builderWithLevel = MinimumUserProtoWithLevel.newBuilder();
     builderWithLevel.setMinUserProto(builder.build());
     builderWithLevel.setLevel(u.getLevel());
@@ -218,29 +218,29 @@ public class CreateInfoProtoUtils {
     mupWithLevel.setLevel(u.getLevel());
     return mupWithLevel.build();
   }
-  
+
   public static MinimumUserProtoWithFacebookId createMinimumUserProtoWithFacebookIdFromUser(User u) {
-  	MinimumUserProto mup = createMinimumUserProtoFromUser(u);
-  	MinimumUserProtoWithFacebookId.Builder b = MinimumUserProtoWithFacebookId.newBuilder();
-  	b.setMinUserProto(mup);
-  	String facebookId = u.getFacebookId();
-  	if (null != facebookId) {
-  		b.setFacebookId(facebookId);
-  	}
-  	
-  	return b.build();
+    MinimumUserProto mup = createMinimumUserProtoFromUser(u);
+    MinimumUserProtoWithFacebookId.Builder b = MinimumUserProtoWithFacebookId.newBuilder();
+    b.setMinUserProto(mup);
+    String facebookId = u.getFacebookId();
+    if (null != facebookId) {
+      b.setFacebookId(facebookId);
+    }
+
+    return b.build();
   }
 
   public static MinimumUserProtoForClans createMinimumUserProtoForClans(User u,
-  		UserClanStatus s, float clanRaidContribution) {
+      UserClanStatus s, float clanRaidContribution) {
     MinimumUserProtoWithBattleHistory mup = createMinimumUserProtoWithBattleHistory(u);
-    
+
     MinimumUserProtoForClans.Builder mupfcb = MinimumUserProtoForClans.newBuilder();
     mupfcb.setMinUserProto(mup);
     mupfcb.setClanStatus(s);
     mupfcb.setRaidContribution(clanRaidContribution);
     MinimumUserProtoForClans mupfc = mupfcb.build();
-    
+
     return mupfc;
   }
 
@@ -316,14 +316,14 @@ public class CreateInfoProtoUtils {
     if (acceptDialogue != null) {
       builder.setAcceptDialogue(createDialogueProtoFromDialogue(acceptDialogue));
     }
-    
+
     int qType = quest.getQuestType();
     try {
-			  QuestType qt = QuestType.valueOf(qType);
-			  builder.setQuestType(qt);
-		} catch (Exception e) {
-			log.error("can't create enum type. questType=" + qType + ".\t quest=" + quest);
-		}
+      QuestType qt = QuestType.valueOf(qType);
+      builder.setQuestType(qt);
+    } catch (Exception e) {
+      log.error("can't create enum type. questType=" + qType + ".\t quest=" + quest);
+    }
     builder.setJobDescription(quest.getJobDescription());
     builder.setStaticDataId(quest.getStaticDataId());
     builder.setQuantity(quest.getQuantity());
@@ -339,7 +339,7 @@ public class CreateInfoProtoUtils {
     }
     builder.setCarrotId(quest.getCarrotId());
     builder.setIsAchievement(quest.isAchievement());
-    
+
     return builder.build();
   }
 
@@ -350,10 +350,12 @@ public class CreateInfoProtoUtils {
 
     List<String> speakerTexts = d.getSpeakerTexts();
     List<String> speakers = d.getSpeakers();
+    List<String> speakerImages = d.getSpeakerImages();
     List<Boolean> isLeftSides = d.getIsLeftSides();
     for (int i = 0; i < speakerTexts.size(); i++) {
       dp.addSpeechSegment(SpeechSegmentProto.newBuilder().setSpeaker(speakers.get(i)).
-          setSpeakerText(speakerTexts.get(i)).setIsLeftSide(isLeftSides.get(i)).build());
+          setSpeakerText(speakerTexts.get(i)).setIsLeftSide(isLeftSides.get(i)).
+          setSpeakerImage(speakerImages.get(i)).build());
     }
     return dp.build();
   }
@@ -363,7 +365,7 @@ public class CreateInfoProtoUtils {
     builder.setUserStructId(userStruct.getId());
     builder.setUserId(userStruct.getUserId());
     builder.setStructId(userStruct.getStructId());
-//    builder.setLevel(userStruct.getLevel());
+    //    builder.setLevel(userStruct.getLevel());
     builder.setFbInviteStructLvl(userStruct.getFbInviteStructLvl());
     builder.setIsComplete(userStruct.isComplete());
     builder.setCoordinates(createCoordinateProtoFromCoordinatePair(userStruct.getCoordinates()));
@@ -374,9 +376,9 @@ public class CreateInfoProtoUtils {
     if (userStruct.getLastRetrieved() != null) {
       builder.setLastRetrieved(userStruct.getLastRetrieved().getTime());
     }
-//    if (userStruct.getLastUpgradeTime() != null) {
-//      builder.setLastUpgradeTime(userStruct.getLastUpgradeTime().getTime());
-//    }
+    //    if (userStruct.getLastUpgradeTime() != null) {
+    //      builder.setLastUpgradeTime(userStruct.getLastUpgradeTime().getTime());
+    //    }
     return builder.build();
   }
 
@@ -413,7 +415,7 @@ public class CreateInfoProtoUtils {
       builder.setClan(createMinimumClanProtoFromClan(clan));
     }
     builder.setHasReceivedfbReward(u.isHasReceivedfbReward());
-//    builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
+    //    builder.setNumAdditionalMonsterSlots(u.getNumAdditionalMonsterSlots());
     builder.setNumBeginnerSalesPurchased(u.getNumBeginnerSalesPurchased());
     builder.setHasActiveShield(u.isHasActiveShield());
     if(u.getShieldEndTime() != null) {
@@ -428,17 +430,17 @@ public class CreateInfoProtoUtils {
     builder.setDefensesWon(u.getAttacksWon());
     builder.setAttacksLost(u.getAttacksLost());
     builder.setDefensesLost(u.getDefensesLost());
-    
+
     String facebookId = u.getFacebookId();
     if (null != facebookId) {
-    	builder.setFacebookId(facebookId);
+      builder.setFacebookId(facebookId);
     }
-    
+
     String gameCenterId = u.getGameCenterId();
     if (null != gameCenterId) {
-    	builder.setGameCenterId(gameCenterId);
+      builder.setGameCenterId(gameCenterId);
     }
-    
+
     //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE
 
 
@@ -467,7 +469,7 @@ public class CreateInfoProtoUtils {
   //	}
 
   public static FullClanProto createFullClanProtoFromClan(Clan c) {
-//    MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
+    //    MinimumUserProto mup = createMinimumUserProtoFromUser(RetrieveUtils.userRetrieveUtils().getUserById(c.getOwnerId()));
     FullClanProto.Builder fcpb= FullClanProto.newBuilder();
     fcpb.setClanId(c.getId());
     fcpb.setName(c.getName());
@@ -475,7 +477,7 @@ public class CreateInfoProtoUtils {
     fcpb.setDescription(c.getDescription());
     fcpb.setTag(c.getTag());
     fcpb.setRequestToJoinRequired(c.isRequestToJoinRequired());
-    
+
     return fcpb.build();
   }
 
@@ -483,7 +485,7 @@ public class CreateInfoProtoUtils {
     MinimumClanProto.Builder mcp = MinimumClanProto.newBuilder();
     mcp.setClanId(c.getId());
     mcp.setName(c.getName());
-//    mcp.setOwnerId(c.getOwnerId());
+    //    mcp.setOwnerId(c.getOwnerId());
     mcp.setCreateTime(c.getCreateTime().getTime());
     mcp.setDescription(c.getDescription());
     mcp.setTag(c.getTag());
@@ -491,17 +493,17 @@ public class CreateInfoProtoUtils {
   }
 
   public static List<FullUserMonsterProto> createFullUserMonsterProtoList(
-  		List<MonsterForUser> userMonsters) {
-  	List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
-  	
-  	for (MonsterForUser mfu : userMonsters) {
-  		FullUserMonsterProto ump = createFullUserMonsterProtoFromUserMonster(mfu);
-  		protos.add(ump);
-  	}
-  	
-  	return protos;
+      List<MonsterForUser> userMonsters) {
+    List<FullUserMonsterProto> protos = new ArrayList<FullUserMonsterProto>();
+
+    for (MonsterForUser mfu : userMonsters) {
+      FullUserMonsterProto ump = createFullUserMonsterProtoFromUserMonster(mfu);
+      protos.add(ump);
+    }
+
+    return protos;
   }
-  
+
   public static FullUserMonsterProto createFullUserMonsterProtoFromUserMonster(MonsterForUser mfu) {
     FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
     fumpb.setUserMonsterId(mfu.getId());
@@ -512,109 +514,109 @@ public class CreateInfoProtoUtils {
     fumpb.setCurrentHealth(mfu.getCurrentHealth());
     fumpb.setNumPieces(mfu.getNumPieces());
     fumpb.setIsComplete(mfu.isComplete());
-    
+
     Date combineStartTime = mfu.getCombineStartTime();
     if (null != combineStartTime) {
-    	fumpb.setCombineStartTime(combineStartTime.getTime());
+      fumpb.setCombineStartTime(combineStartTime.getTime());
     }
-    
+
     fumpb.setTeamSlotNum(mfu.getTeamSlotNum());
     return fumpb.build();
   }
-  
+
   public static Collection<MinimumUserMonsterProto> createMinimumUserMonsterProtoList(
-  		Collection<MonsterForUser> userMonsters) {
-  	List<MinimumUserMonsterProto> returnList = new ArrayList<MinimumUserMonsterProto>();
-  	
-  	for (MonsterForUser mfu : userMonsters) {
-  		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
-  		returnList.add(mump);
-  	}
-  	
-  	return returnList;
+      Collection<MonsterForUser> userMonsters) {
+    List<MinimumUserMonsterProto> returnList = new ArrayList<MinimumUserMonsterProto>();
+
+    for (MonsterForUser mfu : userMonsters) {
+      MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfu);
+      returnList.add(mump);
+    }
+
+    return returnList;
   }
-  
+
   public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForUser mfu) {
-  	MinimumUserMonsterProto.Builder mump = MinimumUserMonsterProto.newBuilder();
-  	
-  	mump.setMonsterId(mfu.getMonsterId());
-  	mump.setMonsterLvl(mfu.getCurrentLvl());
-  	return mump.build();
+    MinimumUserMonsterProto.Builder mump = MinimumUserMonsterProto.newBuilder();
+
+    mump.setMonsterId(mfu.getMonsterId());
+    mump.setMonsterLvl(mfu.getCurrentLvl());
+    return mump.build();
   }
-  
+
   public static UserMonsterHealingProto createUserMonsterHealingProtoFromObj(
-  		MonsterHealingForUser mhfu) {
-  	UserMonsterHealingProto.Builder umhpb = UserMonsterHealingProto.newBuilder();
-  	umhpb.setUserId(mhfu.getUserId());
-  	umhpb.setUserMonsterId(mhfu.getMonsterForUserId());
-  	
-  	Date aDate = mhfu.getQueuedTime();
-  	if (null != aDate) {
-  		umhpb.setQueuedTimeMillis(aDate.getTime());
-  	}
-  	
-//  	umhpb.setUserHospitalStructId(mhfu.getUserStructHospitalId());
-  	umhpb.setHealthProgress(mhfu.getHealthProgress());
-  	umhpb.setPriority(mhfu.getPriority());
-  	
-  	return umhpb.build();
+      MonsterHealingForUser mhfu) {
+    UserMonsterHealingProto.Builder umhpb = UserMonsterHealingProto.newBuilder();
+    umhpb.setUserId(mhfu.getUserId());
+    umhpb.setUserMonsterId(mhfu.getMonsterForUserId());
+
+    Date aDate = mhfu.getQueuedTime();
+    if (null != aDate) {
+      umhpb.setQueuedTimeMillis(aDate.getTime());
+    }
+
+    //  	umhpb.setUserHospitalStructId(mhfu.getUserStructHospitalId());
+    umhpb.setHealthProgress(mhfu.getHealthProgress());
+    umhpb.setPriority(mhfu.getPriority());
+
+    return umhpb.build();
   }
-  
+
   public static UserEnhancementProto createUserEnhancementProtoFromObj(
-  		int userId, UserEnhancementItemProto baseMonster, List<UserEnhancementItemProto> feeders) {
-  	
-  	UserEnhancementProto.Builder uepb = UserEnhancementProto.newBuilder();
-  	
-  	uepb.setUserId(userId);
-  	uepb.setBaseMonster(baseMonster);
-  	uepb.addAllFeeders(feeders);
-  	
-  	return uepb.build();
+      int userId, UserEnhancementItemProto baseMonster, List<UserEnhancementItemProto> feeders) {
+
+    UserEnhancementProto.Builder uepb = UserEnhancementProto.newBuilder();
+
+    uepb.setUserId(userId);
+    uepb.setBaseMonster(baseMonster);
+    uepb.addAllFeeders(feeders);
+
+    return uepb.build();
   }
-  
+
   public static UserEnhancementItemProto createUserEnhancementItemProtoFromObj(
-  		MonsterEnhancingForUser mefu) {
-  	
-  	UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();
-  	ueipb.setUserMonsterId(mefu.getMonsterForUserId());
-  	
-  	Date startTime = mefu.getExpectedStartTime();
-  	if (null != startTime) {
-  		ueipb.setExpectedStartTimeMillis(startTime.getTime());
-  	}
-  	
-  	ueipb.setEnhancingCost(mefu.getEnhancingCost());
-  	
-  	return ueipb.build();
+      MonsterEnhancingForUser mefu) {
+
+    UserEnhancementItemProto.Builder ueipb = UserEnhancementItemProto.newBuilder();
+    ueipb.setUserMonsterId(mefu.getMonsterForUserId());
+
+    Date startTime = mefu.getExpectedStartTime();
+    if (null != startTime) {
+      ueipb.setExpectedStartTimeMillis(startTime.getTime());
+    }
+
+    ueipb.setEnhancingCost(mefu.getEnhancingCost());
+
+    return ueipb.build();
   }
 
   public static FullTaskProto createFullTaskProtoFromTask(Task task) {
     String name = task.getGoodName();
     String description = task.getDescription();
-    
+
     FullTaskProto.Builder builder = FullTaskProto.newBuilder();
     builder.setTaskId(task.getId());
     if (null != name) {
-    	builder.setName(name);
+      builder.setName(name);
     }
-    
+
     if (null != description) {
-    	builder.setDescription(description);
+      builder.setDescription(description);
     }
-    
+
     builder.setCityId(task.getCityId());
     builder.setAssetNumWithinCity(task.getAssetNumberWithinCity());
-    
+
     int prerequisiteTaskId = task.getPrerequisiteTaskId();
     if (prerequisiteTaskId > 0) {
-    	builder.setPrerequisiteTaskId(prerequisiteTaskId);
+      builder.setPrerequisiteTaskId(prerequisiteTaskId);
     }
-    
+
     int prerequisiteQuestId = task.getPrerequisiteQuestId();
     if (prerequisiteQuestId > 0) {
-    	builder.setPrerequisiteQuestId(prerequisiteQuestId);
+      builder.setPrerequisiteQuestId(prerequisiteQuestId);
     }
-    
+
     return builder.build();
   }
 
@@ -625,179 +627,179 @@ public class CreateInfoProtoUtils {
   public static StructureInfoProto createStructureInfoProtoFromStructure(Structure s) {
     StructureInfoProto.Builder builder = StructureInfoProto.newBuilder();
     builder.setStructId(s.getId());
-    
+
     String aStr = s.getName();
     if (null != aStr) {
-    	builder.setName(s.getName());
+      builder.setName(s.getName());
     }
-    
+
     builder.setLevel(s.getLevel());
     aStr = s.getStructType();
     try {
-    	StructType st = StructType.valueOf(aStr);
-    	builder.setStructType(st);
+      StructType st = StructType.valueOf(aStr);
+      builder.setStructType(st);
     } catch (Exception e) {
-    	log.error("can't create enum type. structType=" + aStr + ".\t structure=" + s);
+      log.error("can't create enum type. structType=" + aStr + ".\t structure=" + s);
     }
-    
+
     aStr = s.getBuildResourceType();
     try {
-    	ResourceType rt = ResourceType.valueOf(aStr);
-    	builder.setBuildResourceType(rt);
+      ResourceType rt = ResourceType.valueOf(aStr);
+      builder.setBuildResourceType(rt);
     } catch (Exception e) {
-    	log.error("can't create enum type. resourceType=" + aStr + ". structure=" + s);
+      log.error("can't create enum type. resourceType=" + aStr + ". structure=" + s);
     }
-    
+
     builder.setBuildCost(s.getBuildCost());
     builder.setMinutesToBuild(s.getMinutesToBuild());
     builder.setPrerequisiteTownHallLvl(s.getRequiredTownHallLvl());
     builder.setWidth(s.getWidth());
     builder.setHeight(s.getHeight());
-    
+
     if (s.getPredecessorStructId() > 0) {
-    	builder.setPredecessorStructId(s.getPredecessorStructId());
+      builder.setPredecessorStructId(s.getPredecessorStructId());
     }
     if (s.getSuccessorStructId() > 0) {
-    	builder.setSuccessorStructId(s.getSuccessorStructId());
+      builder.setSuccessorStructId(s.getSuccessorStructId());
     }
-    
+
     aStr = s.getImgName();
     if (null != aStr) {
-    	builder.setImgName(aStr);
+      builder.setImgName(aStr);
     }
-    
+
     builder.setImgVerticalPixelOffset(s.getImgVerticalPixelOffset());
-    
+
     aStr = s.getDescription();
     if (null != aStr) {
-    	builder.setDescription(aStr);
+      builder.setDescription(aStr);
     }
-    
+
     aStr = s.getShortDescription();
     if (null != aStr) {
-    	builder.setShortDescription(aStr);
+      builder.setShortDescription(aStr);
     }
-    
+
     return builder.build();
   }
-  
-  public static ResourceGeneratorProto createResourceGeneratorProto(Structure s,
-  		StructureInfoProto sip, StructureResourceGenerator srg) {
-  	if (null == sip) {
-  		sip = createStructureInfoProtoFromStructure(s);
-  	}
-  	
-  	ResourceGeneratorProto.Builder rgpb = ResourceGeneratorProto.newBuilder();
-  	rgpb.setStructInfo(sip);
-  	
-  	String aStr = srg.getResourceTypeGenerated();
-  	try {
-  		ResourceType rt = ResourceType.valueOf(aStr);
-  		rgpb.setResourceType(rt);
-  	} catch (Exception e) {
-  		log.error("can't create enum type. resourceType=" + aStr +
-  				". resourceGenerator=" + srg);
-  	}
 
-  	rgpb.setProductionRate(srg.getProductionRate());
-  	rgpb.setCapacity(srg.getCapacity());
-  	
-  	return rgpb.build();
+  public static ResourceGeneratorProto createResourceGeneratorProto(Structure s,
+      StructureInfoProto sip, StructureResourceGenerator srg) {
+    if (null == sip) {
+      sip = createStructureInfoProtoFromStructure(s);
+    }
+
+    ResourceGeneratorProto.Builder rgpb = ResourceGeneratorProto.newBuilder();
+    rgpb.setStructInfo(sip);
+
+    String aStr = srg.getResourceTypeGenerated();
+    try {
+      ResourceType rt = ResourceType.valueOf(aStr);
+      rgpb.setResourceType(rt);
+    } catch (Exception e) {
+      log.error("can't create enum type. resourceType=" + aStr +
+          ". resourceGenerator=" + srg);
+    }
+
+    rgpb.setProductionRate(srg.getProductionRate());
+    rgpb.setCapacity(srg.getCapacity());
+
+    return rgpb.build();
   }
-  
+
   public static ResourceStorageProto createResourceStorageProto(Structure s,
-  		StructureInfoProto sip,  StructureResourceStorage srs) {
-  	if (null == sip) {
-  		sip = createStructureInfoProtoFromStructure(s);
-  	}
-  	
-  	ResourceStorageProto.Builder rspb = ResourceStorageProto.newBuilder();
-  	rspb.setStructInfo(sip);
-  	
-  	String aStr = srs.getResourceTypeStored();
-  	try {
-  		ResourceType rt = ResourceType.valueOf(aStr);
-  		rspb.setResourceType(rt);
-  	} catch (Exception e) {
-  		log.error("can't create enum type. resourceType=" + aStr +
-  				". resourceStorage=" + srs);
-  	}
-  	
-  	rspb.setCapacity(srs.getCapacity());
-  	
-  	return rspb.build();
+      StructureInfoProto sip,  StructureResourceStorage srs) {
+    if (null == sip) {
+      sip = createStructureInfoProtoFromStructure(s);
+    }
+
+    ResourceStorageProto.Builder rspb = ResourceStorageProto.newBuilder();
+    rspb.setStructInfo(sip);
+
+    String aStr = srs.getResourceTypeStored();
+    try {
+      ResourceType rt = ResourceType.valueOf(aStr);
+      rspb.setResourceType(rt);
+    } catch (Exception e) {
+      log.error("can't create enum type. resourceType=" + aStr +
+          ". resourceStorage=" + srs);
+    }
+
+    rspb.setCapacity(srs.getCapacity());
+
+    return rspb.build();
   }
-  
+
   public static HospitalProto createHospitalProto(Structure s, StructureInfoProto sip,
-  		StructureHospital sh) {
-  	if (null == sip) {
-  		sip = createStructureInfoProtoFromStructure(s);
-  	}
-  	
-  	HospitalProto.Builder hpb = HospitalProto.newBuilder();
-  	hpb.setStructInfo(sip);
-  	hpb.setQueueSize(sh.getQueueSize());
-  	hpb.setHealthPerSecond(sh.getHealthPerSecond());
-  	
-  	return hpb.build();
+      StructureHospital sh) {
+    if (null == sip) {
+      sip = createStructureInfoProtoFromStructure(s);
+    }
+
+    HospitalProto.Builder hpb = HospitalProto.newBuilder();
+    hpb.setStructInfo(sip);
+    hpb.setQueueSize(sh.getQueueSize());
+    hpb.setHealthPerSecond(sh.getHealthPerSecond());
+
+    return hpb.build();
   }
-  
+
   public static ResidenceProto createResidenceProto(Structure s, StructureInfoProto sip,
-  		StructureResidence sr) {
-  	if (null == sip) {
-  		sip = createStructureInfoProtoFromStructure(s);
-  	}
-  	
-  	ResidenceProto.Builder rpb = ResidenceProto.newBuilder();
-  	rpb.setStructInfo(sip);
-  	rpb.setNumMonsterSlots(sr.getNumMonsterSlots());
-  	rpb.setNumBonusMonsterSlots(sr.getNumBonusMonsterSlots());
-  	rpb.setNumGemsRequired(sr.getNumGemsRequired());
-  	rpb.setNumAcceptedFbInvites(sr.getNumAcceptedFbInvites());
-  	String str = sr.getOccupationName();
-  	if (null != str) {
-  		rpb.setOccupationName(str);
-  	}
-  	return rpb.build();
+      StructureResidence sr) {
+    if (null == sip) {
+      sip = createStructureInfoProtoFromStructure(s);
+    }
+
+    ResidenceProto.Builder rpb = ResidenceProto.newBuilder();
+    rpb.setStructInfo(sip);
+    rpb.setNumMonsterSlots(sr.getNumMonsterSlots());
+    rpb.setNumBonusMonsterSlots(sr.getNumBonusMonsterSlots());
+    rpb.setNumGemsRequired(sr.getNumGemsRequired());
+    rpb.setNumAcceptedFbInvites(sr.getNumAcceptedFbInvites());
+    String str = sr.getOccupationName();
+    if (null != str) {
+      rpb.setOccupationName(str);
+    }
+    return rpb.build();
   }
-  
+
   public static TownHallProto createTownHallProto(Structure s, StructureInfoProto sip,
-  		StructureTownHall sth) {
-  	if (null == sip) {
-  		sip = createStructureInfoProtoFromStructure(s);
-  	}
-  	
-  	TownHallProto.Builder thpb = TownHallProto.newBuilder();
-  	thpb.setStructInfo(sip);
-  	thpb.setNumResourceOneGenerators(sth.getNumResourceOneGenerators());
-  	thpb.setNumResourceOneStorages(sth.getNumResourceOneStorages());
-  	thpb.setNumResourceTwoGenerators(sth.getNumResourceTwoGenerators());
-  	thpb.setNumResourceTwoStorages(sth.getNumResourceTwoStorages());
-  	thpb.setNumHospitals(sth.getNumHospitals());
-  	thpb.setNumResidences(sth.getNumResidences());
-  	thpb.setNumMonsterSlots(sth.getNumMonsterSlots());
-  	thpb.setNumLabs(sth.getNumLabs());
-  	thpb.setPvpQueueCashCost(sth.getPvpQueueCashCost());
-  	thpb.setResourceCapacity(sth.getResourceCapacity());
-  	
-  	return thpb.build();
+      StructureTownHall sth) {
+    if (null == sip) {
+      sip = createStructureInfoProtoFromStructure(s);
+    }
+
+    TownHallProto.Builder thpb = TownHallProto.newBuilder();
+    thpb.setStructInfo(sip);
+    thpb.setNumResourceOneGenerators(sth.getNumResourceOneGenerators());
+    thpb.setNumResourceOneStorages(sth.getNumResourceOneStorages());
+    thpb.setNumResourceTwoGenerators(sth.getNumResourceTwoGenerators());
+    thpb.setNumResourceTwoStorages(sth.getNumResourceTwoStorages());
+    thpb.setNumHospitals(sth.getNumHospitals());
+    thpb.setNumResidences(sth.getNumResidences());
+    thpb.setNumMonsterSlots(sth.getNumMonsterSlots());
+    thpb.setNumLabs(sth.getNumLabs());
+    thpb.setPvpQueueCashCost(sth.getPvpQueueCashCost());
+    thpb.setResourceCapacity(sth.getResourceCapacity());
+
+    return thpb.build();
   }
 
   public static LabProto createLabProto(Structure s, StructureInfoProto sip,
-  		StructureLab sl) {
-  	if (null == sip) {
-  		sip = createStructureInfoProtoFromStructure(s);
-  	}
-  	
-  	LabProto.Builder lpb = LabProto.newBuilder();
-  	lpb.setStructInfo(sip);
-  	lpb.setQueueSize(sl.getQueueSize());
-  	lpb.setPointsPerSecond(sl.getPointsPerSecond());
-  	
-  	return lpb.build();
+      StructureLab sl) {
+    if (null == sip) {
+      sip = createStructureInfoProtoFromStructure(s);
+    }
+
+    LabProto.Builder lpb = LabProto.newBuilder();
+    lpb.setStructInfo(sip);
+    lpb.setQueueSize(sl.getQueueSize());
+    lpb.setPointsPerSecond(sl.getPointsPerSecond());
+
+    return lpb.build();
   }
-  
-   public static FullCityProto createFullCityProtoFromCity(City c) {
+
+  public static FullCityProto createFullCityProtoFromCity(City c) {
     FullCityProto.Builder builder = FullCityProto.newBuilder();
     builder.setCityId(c.getId());
     builder.setName(c.getName());
@@ -809,23 +811,23 @@ public class CreateInfoProtoUtils {
         builder.addTaskIds(t.getId());
       }
     }
-    
+
     String roadImgName = c.getRoadImgName();
     if (null != roadImgName) {
-    	builder.setRoadImgName(roadImgName);
+      builder.setRoadImgName(roadImgName);
     }
-    
+
     String mapTmxName = c.getMapTmxName();
     if (null != mapTmxName) {
-    	builder.setMapTmxName(mapTmxName);
+      builder.setMapTmxName(mapTmxName);
     }
-    
+
     builder.setRoadImgCoords(createCoordinateProtoFromCoordinatePair(c.getRoadImgCoords()));
     String atkMapLabelImgName = c.getAttackMapLabelImgName();
     if (null != atkMapLabelImgName) {
-    	builder.setAttackMapLabelImgName(c.getAttackMapLabelImgName());
+      builder.setAttackMapLabelImgName(c.getAttackMapLabelImgName());
     }
-    	
+
     return builder.build();
   }
 
@@ -843,7 +845,7 @@ public class CreateInfoProtoUtils {
         builder.setIsComplete(userQuest.isComplete());
         builder.setProgress(userQuest.getProgress());
         fullUserQuestDataLargeProtos.add(builder.build());
-        
+
       } else {
         log.error("no quest with id " + userQuest.getQuestId() + ", userQuest=" + userQuest);
       }
@@ -859,7 +861,7 @@ public class CreateInfoProtoUtils {
     CityElementProto.Builder builder = CityElementProto.newBuilder();
     builder.setCityId(nce.getCityId());
     builder.setAssetId(nce.getAssetId());
-//    builder.setName(nce.getGoodName());
+    //    builder.setName(nce.getGoodName());
     builder.setType(nce.getType());
     builder.setCoords(createCoordinateProtoFromCoordinatePair(nce.getCoords()));
 
@@ -871,11 +873,11 @@ public class CreateInfoProtoUtils {
     }
     builder.setImgId(nce.getImgGood());
     if (nce.getOrientation() != null) {
-    	builder.setOrientation(nce.getOrientation());
+      builder.setOrientation(nce.getOrientation());
     }
-    
+
     builder.setSpriteCoords(createCoordinateProtoFromCoordinatePair(nce.getSpriteCoords()));
-    
+
     return builder.build();
   }
 
@@ -887,7 +889,7 @@ public class CreateInfoProtoUtils {
     // Truncate time because db truncates it
     long time = p.getTimeOfPost().getTime();
     time = time - time % 1000;
-    
+
     PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
     pcppb.setPrivateChatPostId(p.getId());
     pcppb.setPoster(mupwlPoster);
@@ -901,8 +903,8 @@ public class CreateInfoProtoUtils {
   public static PrivateChatPostProto createPrivateChatPostProtoFromPrivateChatPostAndProtos (
       PrivateChatPost p, MinimumUserProtoWithLevel mupwlPoster,
       MinimumUserProtoWithLevel mupwlRecipient) {
-  	PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
-  	
+    PrivateChatPostProto.Builder pcppb = PrivateChatPostProto.newBuilder();
+
     pcppb.setPrivateChatPostId(p.getId());
     pcppb.setPoster(mupwlPoster);
     pcppb.setRecipient(mupwlRecipient);
@@ -940,7 +942,7 @@ public class CreateInfoProtoUtils {
 
     List<PrivateChatPostProto> pcppList = new ArrayList<PrivateChatPostProto>();
     Map<Integer, MinimumUserProtoWithLevel> userIdToMinimumUserProtoWithLevel =
-    		new HashMap<Integer, MinimumUserProtoWithLevel>();
+        new HashMap<Integer, MinimumUserProtoWithLevel>();
     //construct the minimum user protos for the users that have clans
     //and the clanless users
     createMinimumUserProtosFromClannedAndClanlessUsers(clanIdsToClans, clanIdsToUserIdSet,
@@ -1022,21 +1024,21 @@ public class CreateInfoProtoUtils {
 
   public static GroupChatMessageProto createGroupChatMessageProtoFromClanChatPost(
       ClanChatPost p, User user) {
-  	GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
-  	gcmpb.setSender(createMinimumUserProtoWithLevelFromUser(user));
-  	gcmpb.setTimeOfChat(p.getTimeOfPost().getTime());
-  	gcmpb.setContent(p.getContent());
+    GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
+    gcmpb.setSender(createMinimumUserProtoWithLevelFromUser(user));
+    gcmpb.setTimeOfChat(p.getTimeOfPost().getTime());
+    gcmpb.setContent(p.getContent());
     return gcmpb.build();
   }
 
   public static GroupChatMessageProto createGroupChatMessageProto(long time, MinimumUserProtoWithLevel user, String content, boolean isAdmin, int chatId) {
-  	GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
-  	
-  	gcmpb.setSender(user);
-  	gcmpb.setTimeOfChat(time);
-  	gcmpb.setContent(content);
-  	gcmpb.setIsAdmin(isAdmin);
-  	gcmpb.setChatId(chatId).build();
+    GroupChatMessageProto.Builder gcmpb = GroupChatMessageProto.newBuilder();
+
+    gcmpb.setSender(user);
+    gcmpb.setTimeOfChat(time);
+    gcmpb.setContent(content);
+    gcmpb.setIsAdmin(isAdmin);
+    gcmpb.setChatId(chatId).build();
     return gcmpb.build();
   }
 
@@ -1097,22 +1099,22 @@ public class CreateInfoProtoUtils {
   }
 
   public static BoosterDisplayItemProto createBoosterDisplayItemProto(
-  		BoosterDisplayItem bdi) {
-  	BoosterDisplayItemProto.Builder b = BoosterDisplayItemProto.newBuilder();
-  	
-  	b.setBoosterPackId(bdi.getBoosterPackId());
-  	b.setIsMonster(bdi.isMonster());
-  	b.setIsComplete(bdi.isComplete());
-  	
-  	MonsterQuality mq = bdi.getMonsterQuality();
-  	if (null != mq) {
-  		b.setQuality(mq);
-  	}
-  	
-  	b.setGemReward(bdi.getGemReward());
-  	b.setQuantity(bdi.getQuantity());
-  	
-  	return b.build();
+      BoosterDisplayItem bdi) {
+    BoosterDisplayItemProto.Builder b = BoosterDisplayItemProto.newBuilder();
+
+    b.setBoosterPackId(bdi.getBoosterPackId());
+    b.setIsMonster(bdi.isMonster());
+    b.setIsComplete(bdi.isComplete());
+
+    MonsterQuality mq = bdi.getMonsterQuality();
+    if (null != mq) {
+      b.setQuality(mq);
+    }
+
+    b.setGemReward(bdi.getGemReward());
+    b.setQuantity(bdi.getQuantity());
+
+    return b.build();
   }
 
   public static BoosterItemProto createBoosterItemProto(BoosterItem bi) {
@@ -1130,69 +1132,69 @@ public class CreateInfoProtoUtils {
   }
 
   public static BoosterPackProto createBoosterPackProto(BoosterPack bp,
-  		Collection<BoosterItem> biList, Collection<BoosterDisplayItem> bdiList) {
+      Collection<BoosterItem> biList, Collection<BoosterDisplayItem> bdiList) {
     BoosterPackProto.Builder b = BoosterPackProto.newBuilder();
     b.setBoosterPackId(bp.getId());
-    
+
     String str = bp.getName();
     if (null != str && !str.isEmpty()) {
-    	b.setBoosterPackName(str);
+      b.setBoosterPackName(str);
     }
-    
+
     b.setGemPrice(bp.getGemPrice());
-    
+
     str = bp.getListBackgroundImgName();
     if (null != str && !str.isEmpty()) {
-    	b.setListBackgroundImgName(str);
+      b.setListBackgroundImgName(str);
     }
-    
+
     str = bp.getListDescription();
     if (null != str && !str.isEmpty()) {
-    	b.setListDescription(str);
+      b.setListDescription(str);
     }
-    
+
     str = bp.getNavBarImgName();
     if (null != str && !str.isEmpty()) {
-    	b.setNavBarImgName(str);
+      b.setNavBarImgName(str);
     }
-    
+
     str = bp.getNavTitleImgName();
     if (null != str && !str.isEmpty()) {
-    	b.setNavTitleImgName(str);
+      b.setNavTitleImgName(str);
     }
-    
+
     str = bp.getMachineImgName();
     if (null != str && !str.isEmpty()) {
-    	b.setMachineImgName(str);
+      b.setMachineImgName(str);
     }
-    
-    
+
+
     if (biList != null) {
       for(BoosterItem bi : biList) {
-      	//only want special booster items
-      	if (bi.isSpecial()) {
-      		BoosterItemProto bip = createBoosterItemProto(bi); 
-      		b.addSpecialItems(bip);
-      	}
+        //only want special booster items
+        if (bi.isSpecial()) {
+          BoosterItemProto bip = createBoosterItemProto(bi); 
+          b.addSpecialItems(bip);
+        }
       }
     }
-    
+
     if (null != bdiList) {
-    	for (BoosterDisplayItem bdi : bdiList) {
-    		BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi);
-    		b.addDisplayItems(bdip);
-    	}
+      for (BoosterDisplayItem bdi : bdiList) {
+        BoosterDisplayItemProto bdip = createBoosterDisplayItemProto(bdi);
+        b.addDisplayItems(bdip);
+      }
     }
-    
+
     return b.build();
   }
 
 
-//  public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {
-//    return RareBoosterPurchaseProto.newBuilder().setBooster(createBoosterPackProto(bp, null))
-//        .setUser(createMinimumUserProtoFromUser(u))
-//        .setTimeOfPurchase(d.getTime()).build();
-//  }
+  //  public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {
+  //    return RareBoosterPurchaseProto.newBuilder().setBooster(createBoosterPackProto(bp, null))
+  //        .setUser(createMinimumUserProtoFromUser(u))
+  //        .setTimeOfPurchase(d.getTime()).build();
+  //  }
 
   //individualSilvers should always be set, since silver dropped is within a range
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
@@ -1216,7 +1218,7 @@ public class CreateInfoProtoUtils {
       int silverDrop = individualSilvers.get(i);
 
       TaskStageMonsterProto mp = createTaskStageMonsterProto(tsm, silverDrop,
-      		puzzlePieceDropped, taskStageMonsterIdToItemId);
+          puzzlePieceDropped, taskStageMonsterIdToItemId);
       mpList.add(mp);
     }
 
@@ -1224,11 +1226,11 @@ public class CreateInfoProtoUtils {
 
     return tspb.build();
   }
-  
+
   public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
       int cashReward, boolean pieceDropped, Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
-  	int tsmId = tsm.getMonsterId();
-  	
+    int tsmId = tsm.getMonsterId();
+
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
     bldr.setMonsterId(tsmId);
     bldr.setMonsterType(tsm.getMonsterType());
@@ -1236,23 +1238,23 @@ public class CreateInfoProtoUtils {
     bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());
-    
+
     if (taskStageMonsterIdToItemId.containsKey(tsmId)) {
-    	//if multiple identical monsters spawned, each one should have a 
-    	//corresponding item id that it drops, could be -1. (-1 means no item drop)
-    	List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
-    	
-    	int itemId = itemIds.remove(0);
-    	if (itemId > 0) {
-    		bldr.setItemId(itemId);
-    	}
+      //if multiple identical monsters spawned, each one should have a 
+      //corresponding item id that it drops, could be -1. (-1 means no item drop)
+      List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
+
+      int itemId = itemIds.remove(0);
+      if (itemId > 0) {
+        bldr.setItemId(itemId);
+      }
     }
-    
+
     return bldr.build();
   }
 
   public static MonsterProto createMonsterProto(Monster aMonster,
-  		Map<Integer, MonsterLevelInfo> levelToInfo) {
+      Map<Integer, MonsterLevelInfo> levelToInfo) {
     MonsterProto.Builder mpb = MonsterProto.newBuilder();
 
     mpb.setMonsterId(aMonster.getId());
@@ -1260,615 +1262,615 @@ public class CreateInfoProtoUtils {
     mpb.setName(aStr);
     aStr = aMonster.getMonsterGroup();
     if (null != aStr) {
-    	mpb.setMonsterGroup(aStr);
+      mpb.setMonsterGroup(aStr);
     }
     mpb.setQuality(aMonster.getQuality());
     mpb.setEvolutionLevel(aMonster.getEvolutionLevel());
     aStr = aMonster.getDisplayName(); 
     if (null != aStr) {
-    	mpb.setDisplayName(aStr);
+      mpb.setDisplayName(aStr);
     }
-    
+
     MonsterElement me = aMonster.getElement();
     if (null != me) {
-    	mpb.setMonsterElement(aMonster.getElement());
+      mpb.setMonsterElement(aMonster.getElement());
     } else{
-    	log.error("monster element is null!!!!!! monster=" + aMonster);
+      log.error("monster element is null!!!!!! monster=" + aMonster);
     }
     aStr = aMonster.getImagePrefix(); 
     if (null != aStr) {
-    	mpb.setImagePrefix(aStr);
+      mpb.setImagePrefix(aStr);
     }
     mpb.setNumPuzzlePieces(aMonster.getNumPuzzlePieces());
     mpb.setMinutesToCombinePieces(aMonster.getMinutesToCombinePieces());
     mpb.setMaxLevel(aMonster.getMaxLevel());
-    
+
     int evolId = aMonster.getEvolutionMonsterId();
     if (evolId > 0) {
-    	mpb.setEvolutionMonsterId(evolId);
+      mpb.setEvolutionMonsterId(evolId);
     }
     aStr = aMonster.getCarrotRecruited();
     if (null != aStr) {
-    	mpb.setCarrotRecruited(aStr);
+      mpb.setCarrotRecruited(aStr);
     }
     aStr = aMonster.getCarrotDefeated();
     if (null != aStr) {
-    	mpb.setCarrotDefeated(aStr);
+      mpb.setCarrotDefeated(aStr);
     }
     aStr = aMonster.getCarrotEvolved();
     if (null != aStr) {
-    	mpb.setCarrotEvolved(aStr);
+      mpb.setCarrotEvolved(aStr);
     }
     aStr = aMonster.getDescription();
     if (null != aStr) {
-    	mpb.setDescription(aStr);
+      mpb.setDescription(aStr);
     }
-    
+
     int evolutionCatalystMonsterId = aMonster.getEvolutionCatalystMonsterId();
     mpb.setEvolutionCatalystMonsterId(evolutionCatalystMonsterId);
     int minutesToEvolve = aMonster.getMinutesToEvolve();
     mpb.setMinutesToEvolve(minutesToEvolve);
     int num = aMonster.getNumCatalystsRequired();
     mpb.setNumCatalystMonstersRequired(num);
-    
+
     List<MonsterLevelInfoProto> lvlInfoProtos = createMonsterLevelInfoFromInfo(levelToInfo);
     mpb.addAllLvlInfo(lvlInfoProtos);
-    
+
     int cost = aMonster.getEvolutionCost();
     mpb.setEvolutionCost(cost);
-    
+
     aStr = aMonster.getAnimationType();
     try {
-    	AnimationType typ = AnimationType.valueOf(aStr);
-    	mpb.setAttackAnimationType(typ);
+      AnimationType typ = AnimationType.valueOf(aStr);
+      mpb.setAttackAnimationType(typ);
     } catch (Exception e) {
-    	log.error("invalid animation type for monster. type=" + aStr + "\t monster=" + aMonster, e);
+      log.error("invalid animation type for monster. type=" + aStr + "\t monster=" + aMonster, e);
     }
-    
+
     return mpb.build();
   }
-  
-  public static List<MonsterLevelInfoProto> createMonsterLevelInfoFromInfo(
-  		Map<Integer, MonsterLevelInfo> lvlToInfo) {
-  	
-  	if (null == lvlToInfo || lvlToInfo.isEmpty()) {
-  		return new ArrayList<MonsterLevelInfoProto>();
-  	}
-  	
-  	//order the MonsterLevelInfoProto by ascending lvl
-  	Set<Integer> lvls = lvlToInfo.keySet();
-  	List<Integer> ascendingLvls = new ArrayList<Integer>(lvls);
-  	Collections.sort(ascendingLvls);
 
-  	List<MonsterLevelInfoProto> lvlInfoProtos = new ArrayList<MonsterLevelInfoProto>();
-  	for (Integer lvl : ascendingLvls) {
-  		MonsterLevelInfo info = lvlToInfo.get(lvl);
-  		
-  		//create the proto
-  		MonsterLevelInfoProto.Builder mlipb = MonsterLevelInfoProto.newBuilder();
-  		mlipb.setLvl(lvl);
-  		mlipb.setHp(info.getHp());
-  		mlipb.setCurLvlRequiredExp(info.getCurLvlRequiredExp());
-  		mlipb.setFeederExp(info.getFeederExp());
-  		mlipb.setFireDmg(info.getFireDmg());
-  		mlipb.setGrassDmg(info.getGrassDmg());
-  		mlipb.setWaterDmg(info.getWaterDmg());
-  		mlipb.setLightningDmg(info.getLightningDmg());
-  		mlipb.setDarknessDmg(info.getDarknessDmg());
-  		mlipb.setRockDmg(info.getRockDmg());
-  		mlipb.setSpeed(info.getSpeed());
-  		lvlInfoProtos.add(mlipb.build());
-  	}
-  	
-  	return lvlInfoProtos;
+  public static List<MonsterLevelInfoProto> createMonsterLevelInfoFromInfo(
+      Map<Integer, MonsterLevelInfo> lvlToInfo) {
+
+    if (null == lvlToInfo || lvlToInfo.isEmpty()) {
+      return new ArrayList<MonsterLevelInfoProto>();
+    }
+
+    //order the MonsterLevelInfoProto by ascending lvl
+    Set<Integer> lvls = lvlToInfo.keySet();
+    List<Integer> ascendingLvls = new ArrayList<Integer>(lvls);
+    Collections.sort(ascendingLvls);
+
+    List<MonsterLevelInfoProto> lvlInfoProtos = new ArrayList<MonsterLevelInfoProto>();
+    for (Integer lvl : ascendingLvls) {
+      MonsterLevelInfo info = lvlToInfo.get(lvl);
+
+      //create the proto
+      MonsterLevelInfoProto.Builder mlipb = MonsterLevelInfoProto.newBuilder();
+      mlipb.setLvl(lvl);
+      mlipb.setHp(info.getHp());
+      mlipb.setCurLvlRequiredExp(info.getCurLvlRequiredExp());
+      mlipb.setFeederExp(info.getFeederExp());
+      mlipb.setFireDmg(info.getFireDmg());
+      mlipb.setGrassDmg(info.getGrassDmg());
+      mlipb.setWaterDmg(info.getWaterDmg());
+      mlipb.setLightningDmg(info.getLightningDmg());
+      mlipb.setDarknessDmg(info.getDarknessDmg());
+      mlipb.setRockDmg(info.getRockDmg());
+      mlipb.setSpeed(info.getSpeed());
+      lvlInfoProtos.add(mlipb.build());
+    }
+
+    return lvlInfoProtos;
   }
-  
+
   public static UserFacebookInviteForSlotProto createUserFacebookInviteForSlotProtoFromInvite(
-  		UserFacebookInviteForSlot invite, User inviter, MinimumUserProtoWithFacebookId inviterProto) {
-  	UserFacebookInviteForSlotProto.Builder inviteProtoBuilder =
-  			UserFacebookInviteForSlotProto.newBuilder();
-  	inviteProtoBuilder.setInviteId(invite.getId());
-  	
-  	if (null == inviterProto) {
-  		inviterProto = createMinimumUserProtoWithFacebookIdFromUser(inviter);
-  		
-  	}
-  	
-  	inviteProtoBuilder.setInviter(inviterProto);
-  	inviteProtoBuilder.setRecipientFacebookId(invite.getRecipientFacebookId());
-  	
-  	Date d = invite.getTimeOfInvite();
-  	if (null != d) {
-  		inviteProtoBuilder.setTimeOfInvite(d.getTime());
-  	}
-  	
-  	d = invite.getTimeAccepted();
-  	if (null != d) {
-  		inviteProtoBuilder.setTimeAccepted(d.getTime());
-  	}
-  	
-  	int userStructId = invite.getUserStructId();
-  	inviteProtoBuilder.setUserStructId(userStructId);
-  	
-  	int userStructFbLvl = invite.getUserStructFbLvl();
-  	inviteProtoBuilder.setStructFbLvl(userStructFbLvl);
-  	
-  	d = invite.getTimeRedeemed();
-  	if (null != d) {
-  		inviteProtoBuilder.setRedeemedTime(d.getTime());
-  	}
-  	
-  	return inviteProtoBuilder.build();
+      UserFacebookInviteForSlot invite, User inviter, MinimumUserProtoWithFacebookId inviterProto) {
+    UserFacebookInviteForSlotProto.Builder inviteProtoBuilder =
+        UserFacebookInviteForSlotProto.newBuilder();
+    inviteProtoBuilder.setInviteId(invite.getId());
+
+    if (null == inviterProto) {
+      inviterProto = createMinimumUserProtoWithFacebookIdFromUser(inviter);
+
+    }
+
+    inviteProtoBuilder.setInviter(inviterProto);
+    inviteProtoBuilder.setRecipientFacebookId(invite.getRecipientFacebookId());
+
+    Date d = invite.getTimeOfInvite();
+    if (null != d) {
+      inviteProtoBuilder.setTimeOfInvite(d.getTime());
+    }
+
+    d = invite.getTimeAccepted();
+    if (null != d) {
+      inviteProtoBuilder.setTimeAccepted(d.getTime());
+    }
+
+    int userStructId = invite.getUserStructId();
+    inviteProtoBuilder.setUserStructId(userStructId);
+
+    int userStructFbLvl = invite.getUserStructFbLvl();
+    inviteProtoBuilder.setStructFbLvl(userStructFbLvl);
+
+    d = invite.getTimeRedeemed();
+    if (null != d) {
+      inviteProtoBuilder.setRedeemedTime(d.getTime());
+    }
+
+    return inviteProtoBuilder.build();
   }
-  
+
   public static UserMonsterEvolutionProto createUserEvolutionProtoFromEvolution(
-  		MonsterEvolvingForUser mefu) {
-  	UserMonsterEvolutionProto.Builder uepb = UserMonsterEvolutionProto.newBuilder();
-  	
-  	long catalystUserMonsterId = mefu.getCatalystMonsterForUserId();
-  	long one = mefu.getMonsterForUserIdOne();
-  	long two = mefu.getMonsterForUserIdTwo();
-  	Date startTime = mefu.getStartTime();
-  	
-  	uepb.setCatalystUserMonsterId(catalystUserMonsterId);
-  	
-  	long startTimeMillis = startTime.getTime();
-  	uepb.setStartTime(startTimeMillis);
-  	
-  	List<Long> userMonsterIds = new ArrayList<Long>();
-  	userMonsterIds.add(one);
-  	userMonsterIds.add(two);
-  	uepb.addAllUserMonsterIds(userMonsterIds);
-  			
-  	return uepb.build();
+      MonsterEvolvingForUser mefu) {
+    UserMonsterEvolutionProto.Builder uepb = UserMonsterEvolutionProto.newBuilder();
+
+    long catalystUserMonsterId = mefu.getCatalystMonsterForUserId();
+    long one = mefu.getMonsterForUserIdOne();
+    long two = mefu.getMonsterForUserIdTwo();
+    Date startTime = mefu.getStartTime();
+
+    uepb.setCatalystUserMonsterId(catalystUserMonsterId);
+
+    long startTimeMillis = startTime.getTime();
+    uepb.setStartTime(startTimeMillis);
+
+    List<Long> userMonsterIds = new ArrayList<Long>();
+    userMonsterIds.add(one);
+    userMonsterIds.add(two);
+    uepb.addAllUserMonsterIds(userMonsterIds);
+
+    return uepb.build();
   }
-  
+
   public static PersistentEventProto createPersistentEventProtoFromEvent(
-  		EventPersistent event) {
-  	PersistentEventProto.Builder pepb = PersistentEventProto.newBuilder();
-  	
-  	int eventId = event.getId();
-  	String dayOfWeekStr = event.getDayOfWeek();
-  	int startHour = event.getStartHour();
-  	int eventDurationMinutes = event.getEventDurationMinutes();
-  	int taskId = event.getTaskId();
-  	int cooldownMinutes = event.getCooldownMinutes();
-  	String eventTypeStr = event.getEventType();
-  	String monsterElem = event.getMonsterElement();
-  	
-  	pepb.setEventId(eventId);
-  	try {
-  		DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayOfWeekStr);
-			pepb.setDayOfWeek(dayOfWeek);
-		} catch (Exception e) {
-			log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t event=" + event);
-		}
-  	
-  	pepb.setStartHour(startHour);
-  	pepb.setEventDurationMinutes(eventDurationMinutes);
-  	pepb.setTaskId(taskId);
-  	pepb.setCooldownMinutes(cooldownMinutes);
-  	
-  	try {
-  		EventType typ = EventType.valueOf(eventTypeStr);
-			pepb.setType(typ);
-		} catch (Exception e) {
-			log.error("can't create enum type. eventType=" + eventTypeStr + ".\t event=" + event);
-		}
-  	try {
-  		MonsterElement elem = MonsterElement.valueOf(monsterElem);
-  		pepb.setMonsterElement(elem);
-  	} catch (Exception e) {
-  		log.error("can't create enum type. monster elem=" + monsterElem + 
-  				".\t event=" + event);
-  	}
-  	
-  	return pepb.build();
+      EventPersistent event) {
+    PersistentEventProto.Builder pepb = PersistentEventProto.newBuilder();
+
+    int eventId = event.getId();
+    String dayOfWeekStr = event.getDayOfWeek();
+    int startHour = event.getStartHour();
+    int eventDurationMinutes = event.getEventDurationMinutes();
+    int taskId = event.getTaskId();
+    int cooldownMinutes = event.getCooldownMinutes();
+    String eventTypeStr = event.getEventType();
+    String monsterElem = event.getMonsterElement();
+
+    pepb.setEventId(eventId);
+    try {
+      DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayOfWeekStr);
+      pepb.setDayOfWeek(dayOfWeek);
+    } catch (Exception e) {
+      log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t event=" + event);
+    }
+
+    pepb.setStartHour(startHour);
+    pepb.setEventDurationMinutes(eventDurationMinutes);
+    pepb.setTaskId(taskId);
+    pepb.setCooldownMinutes(cooldownMinutes);
+
+    try {
+      EventType typ = EventType.valueOf(eventTypeStr);
+      pepb.setType(typ);
+    } catch (Exception e) {
+      log.error("can't create enum type. eventType=" + eventTypeStr + ".\t event=" + event);
+    }
+    try {
+      MonsterElement elem = MonsterElement.valueOf(monsterElem);
+      pepb.setMonsterElement(elem);
+    } catch (Exception e) {
+      log.error("can't create enum type. monster elem=" + monsterElem + 
+          ".\t event=" + event);
+    }
+
+    return pepb.build();
   }
-  
+
   public static UserPersistentEventProto createUserPersistentEventProto(
-  		EventPersistentForUser epfu) {
-  	UserPersistentEventProto.Builder upepb = UserPersistentEventProto.newBuilder();
-  	
-  	int userId = epfu.getUserId();
-  	int eventId = epfu.getEventPersistentId();
-  	Date timeOfEntry = epfu.getTimeOfEntry();
-  	
-  	upepb.setUserId(userId);
-  	upepb.setEventId(eventId);
-  	
-  	if (null != timeOfEntry) {
-  		upepb.setCoolDownStartTime(timeOfEntry.getTime());
-  	}
-  	
-  	return upepb.build();
+      EventPersistentForUser epfu) {
+    UserPersistentEventProto.Builder upepb = UserPersistentEventProto.newBuilder();
+
+    int userId = epfu.getUserId();
+    int eventId = epfu.getEventPersistentId();
+    Date timeOfEntry = epfu.getTimeOfEntry();
+
+    upepb.setUserId(userId);
+    upepb.setEventId(eventId);
+
+    if (null != timeOfEntry) {
+      upepb.setCoolDownStartTime(timeOfEntry.getTime());
+    }
+
+    return upepb.build();
   }
-  
+
   public static List<PvpProto> createPvpProtos(List<User> queuedOpponents,
-  		Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
-  		Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
-  	List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
-  	
-  	for (User u : queuedOpponents) {
-  		Integer userId = u.getId();
-  		List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
-  		int prospectiveCashWinnings = userIdToCashReward.get(userId);
-  		int prospectiveOilWinnings = userIdToOilReward.get(userId);
-  		
-  		PvpProto pp = createPvpProtoFrom(u, userMonsters, prospectiveCashWinnings, prospectiveOilWinnings);
-  		pvpProtoList.add(pp);
-  	}
-  	return pvpProtoList;
+      Map<Integer, List<MonsterForUser>> userIdToUserMonsters,
+      Map<Integer, Integer> userIdToCashReward, Map<Integer, Integer> userIdToOilReward) {
+    List<PvpProto> pvpProtoList = new ArrayList<PvpProto>();
+
+    for (User u : queuedOpponents) {
+      Integer userId = u.getId();
+      List<MonsterForUser> userMonsters = userIdToUserMonsters.get(userId);
+      int prospectiveCashWinnings = userIdToCashReward.get(userId);
+      int prospectiveOilWinnings = userIdToOilReward.get(userId);
+
+      PvpProto pp = createPvpProtoFrom(u, userMonsters, prospectiveCashWinnings, prospectiveOilWinnings);
+      pvpProtoList.add(pp);
+    }
+    return pvpProtoList;
   }
 
   public static PvpProto createPvpProtoFrom(User u, Collection<MonsterForUser> userMonsters,
-  		int prospectiveCashWinnings, int prospectiveOilWinnings) {
-  	PvpProto.Builder ppb = PvpProto.newBuilder();
-  	MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevelFromUser(u);
-  	int curElo = u.getElo();
-  	Collection<MinimumUserMonsterProto> defenderMonsters = 
-  			createMinimumUserMonsterProtoList(userMonsters);
-  	
-  	ppb.setDefender(defender);
-  	ppb.setCurElo(curElo);
-  	ppb.addAllDefenderMonsters(defenderMonsters);
-  	ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
-  	ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
-  	
-  	return ppb.build();
+      int prospectiveCashWinnings, int prospectiveOilWinnings) {
+    PvpProto.Builder ppb = PvpProto.newBuilder();
+    MinimumUserProtoWithLevel defender = createMinimumUserProtoWithLevelFromUser(u);
+    int curElo = u.getElo();
+    Collection<MinimumUserMonsterProto> defenderMonsters = 
+        createMinimumUserMonsterProtoList(userMonsters);
+
+    ppb.setDefender(defender);
+    ppb.setCurElo(curElo);
+    ppb.addAllDefenderMonsters(defenderMonsters);
+    ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
+    ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+
+    return ppb.build();
   }
-  
+
   //this is used to create fake users for PvpProtos
   public static PvpProto createFakePvpProto(int userId, String name, int lvl, int elo,
-  		int prospectiveCashWinnings, int prospectiveOilWinnings, List<MonsterForPvp> mfpList) {
-  	
-  	//create the fake user
-  	MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
-  	mupb.setUserId(userId);
-  	mupb.setName(name);
-  	MinimumUserProto mup = mupb.build();
-  	
-  	MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel.newBuilder();
-  	mupwlb.setMinUserProto(mup);
-  	mupwlb.setLevel(lvl);
-  	MinimumUserProtoWithLevel mupwl = mupwlb.build();
-  	
-  	//THE ACTUAL PROTO
-  	PvpProto.Builder ppb = PvpProto.newBuilder();
-  	ppb.setDefender(mupwl);
-  	ppb.setCurElo(elo);
-  	//set the defenderMonsters
-  	List<MinimumUserMonsterProto> mumpList = createMinimumUserMonsterProtos(mfpList);
-  	ppb.addAllDefenderMonsters(mumpList);
-  	
-  	ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
-  	ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
-  	
-  	return ppb.build();
+      int prospectiveCashWinnings, int prospectiveOilWinnings, List<MonsterForPvp> mfpList) {
+
+    //create the fake user
+    MinimumUserProto.Builder mupb = MinimumUserProto.newBuilder();
+    mupb.setUserId(userId);
+    mupb.setName(name);
+    MinimumUserProto mup = mupb.build();
+
+    MinimumUserProtoWithLevel.Builder mupwlb = MinimumUserProtoWithLevel.newBuilder();
+    mupwlb.setMinUserProto(mup);
+    mupwlb.setLevel(lvl);
+    MinimumUserProtoWithLevel mupwl = mupwlb.build();
+
+    //THE ACTUAL PROTO
+    PvpProto.Builder ppb = PvpProto.newBuilder();
+    ppb.setDefender(mupwl);
+    ppb.setCurElo(elo);
+    //set the defenderMonsters
+    List<MinimumUserMonsterProto> mumpList = createMinimumUserMonsterProtos(mfpList);
+    ppb.addAllDefenderMonsters(mumpList);
+
+    ppb.setProspectiveCashWinnings(prospectiveCashWinnings);
+    ppb.setProspectiveOilWinnings(prospectiveOilWinnings);
+
+    return ppb.build();
   }
-  
+
   public static List<MinimumUserMonsterProto> createMinimumUserMonsterProtos(
-  		List<MonsterForPvp> mfpList) {
-  	List<MinimumUserMonsterProto> mumpList = new ArrayList<MinimumUserMonsterProto>();
-  	
-  	for (MonsterForPvp mfp : mfpList) {
-  		MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfp);
-  		mumpList.add(mump);
-  	}
-  	
-  	return mumpList;
+      List<MonsterForPvp> mfpList) {
+    List<MinimumUserMonsterProto> mumpList = new ArrayList<MinimumUserMonsterProto>();
+
+    for (MonsterForPvp mfp : mfpList) {
+      MinimumUserMonsterProto mump = createMinimumUserMonsterProto(mfp);
+      mumpList.add(mump);
+    }
+
+    return mumpList;
   }
-  
+
   public static MinimumUserMonsterProto createMinimumUserMonsterProto(MonsterForPvp mfp) {
-  	MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto.newBuilder();
-  	
-  	int id = mfp.getId();
-  	int lvl = mfp.getMonsterLvl();
-  	
-  	mumpb.setMonsterId(id);
-  	mumpb.setMonsterLvl(lvl);
-  	
-  	return mumpb.build();
+    MinimumUserMonsterProto.Builder mumpb = MinimumUserMonsterProto.newBuilder();
+
+    int id = mfp.getId();
+    int lvl = mfp.getMonsterLvl();
+
+    mumpb.setMonsterId(id);
+    mumpb.setMonsterLvl(lvl);
+
+    return mumpb.build();
   }
-  
+
   public static MonsterBattleDialogueProto createMonsterBattleDialogueProto(MonsterBattleDialogue mbd) {
-  	MonsterBattleDialogueProto.Builder mbdpb = MonsterBattleDialogueProto.newBuilder();
-  	mbdpb.setMonsterId(mbd.getMonsterId());
-  	
-  	String aStr = mbd.getDialogueType();
-  	try {
-  		DialogueType type = DialogueType.valueOf(aStr);
-  		mbdpb.setDialogueType(type);
-  	} catch (Exception e) {
-  		log.error("could not create DialogueType enum", e);
-  	}
-  	
-  	mbdpb.setDialogue(mbd.getDialogue());
-  	mbdpb.setProbabilityUttered(mbd.getProbabilityUttered());
-  	
-  	return mbdpb.build();
+    MonsterBattleDialogueProto.Builder mbdpb = MonsterBattleDialogueProto.newBuilder();
+    mbdpb.setMonsterId(mbd.getMonsterId());
+
+    String aStr = mbd.getDialogueType();
+    try {
+      DialogueType type = DialogueType.valueOf(aStr);
+      mbdpb.setDialogueType(type);
+    } catch (Exception e) {
+      log.error("could not create DialogueType enum", e);
+    }
+
+    mbdpb.setDialogue(mbd.getDialogue());
+    mbdpb.setProbabilityUttered(mbd.getProbabilityUttered());
+
+    return mbdpb.build();
   }
-  
+
   public static ClanRaidProto createClanRaidProto(ClanRaid clanRaid) {
-  	ClanRaidProto.Builder crpb = ClanRaidProto.newBuilder();
-  	int clanRaidId = clanRaid.getId();
-  	crpb.setClanRaidId(clanRaidId);
-  	
-  	String aStr = clanRaid.getClanRaidName();
-  	if (null != aStr && !aStr.isEmpty()) {
-  		crpb.setClanRaidName(aStr);
-  	}
-  	
-  	aStr = clanRaid.getActiveTitleImgName();
-  	if (null != aStr && !aStr.isEmpty()) {
-  		crpb.setActiveTitleImgName(aStr);
-  	}
-  	
-  	aStr = clanRaid.getActiveBackgroundImgName();
-  	if (null != aStr && !aStr.isEmpty()) {
-  		crpb.setActiveBackgroundImgName(aStr);
-  	}
-  	
-  	aStr = clanRaid.getActiveDescription();
-  	if (null != aStr && !aStr.isEmpty()) {
-  		crpb.setActiveDescription(aStr);
-  	}
-  	
-  	aStr = clanRaid.getInactiveMonsterImgName();
-  	if (null != aStr && !aStr.isEmpty()) {
-  		crpb.setInactiveMonsterImgName(aStr);
-  	}
-  	
-  	aStr = clanRaid.getInactiveDescription();
-  	if (null != aStr && !aStr.isEmpty()) {
-  		crpb.setInactiveDescription(aStr);
-  	}
-  	
-  	aStr = clanRaid.getDialogueText();
-  	if (null != aStr && !aStr.isEmpty()) {
-  		crpb.setDialogueText(aStr);
-  	}
-  	
-  	aStr = clanRaid.getSpotlightMonsterImgName();
-  	if (null != aStr && !aStr.isEmpty()) {
-  		crpb.setSpotlightMonsterImgName(aStr);
-  	}
-  	
-  	//create the clan raid stage protos
-  	Map<Integer, ClanRaidStage> stages = ClanRaidStageRetrieveUtils
-  			.getClanRaidStagesForClanRaidId(clanRaidId);
-  	for (ClanRaidStage crs : stages.values()) {
-  		ClanRaidStageProto crsp = createClanRaidStageProto(crs); 
-  		crpb.addRaidStages(crsp);
-  	}
-  	
-  	return crpb.build();
+    ClanRaidProto.Builder crpb = ClanRaidProto.newBuilder();
+    int clanRaidId = clanRaid.getId();
+    crpb.setClanRaidId(clanRaidId);
+
+    String aStr = clanRaid.getClanRaidName();
+    if (null != aStr && !aStr.isEmpty()) {
+      crpb.setClanRaidName(aStr);
+    }
+
+    aStr = clanRaid.getActiveTitleImgName();
+    if (null != aStr && !aStr.isEmpty()) {
+      crpb.setActiveTitleImgName(aStr);
+    }
+
+    aStr = clanRaid.getActiveBackgroundImgName();
+    if (null != aStr && !aStr.isEmpty()) {
+      crpb.setActiveBackgroundImgName(aStr);
+    }
+
+    aStr = clanRaid.getActiveDescription();
+    if (null != aStr && !aStr.isEmpty()) {
+      crpb.setActiveDescription(aStr);
+    }
+
+    aStr = clanRaid.getInactiveMonsterImgName();
+    if (null != aStr && !aStr.isEmpty()) {
+      crpb.setInactiveMonsterImgName(aStr);
+    }
+
+    aStr = clanRaid.getInactiveDescription();
+    if (null != aStr && !aStr.isEmpty()) {
+      crpb.setInactiveDescription(aStr);
+    }
+
+    aStr = clanRaid.getDialogueText();
+    if (null != aStr && !aStr.isEmpty()) {
+      crpb.setDialogueText(aStr);
+    }
+
+    aStr = clanRaid.getSpotlightMonsterImgName();
+    if (null != aStr && !aStr.isEmpty()) {
+      crpb.setSpotlightMonsterImgName(aStr);
+    }
+
+    //create the clan raid stage protos
+    Map<Integer, ClanRaidStage> stages = ClanRaidStageRetrieveUtils
+        .getClanRaidStagesForClanRaidId(clanRaidId);
+    for (ClanRaidStage crs : stages.values()) {
+      ClanRaidStageProto crsp = createClanRaidStageProto(crs); 
+      crpb.addRaidStages(crsp);
+    }
+
+    return crpb.build();
   }
 
   public static ClanRaidStageProto createClanRaidStageProto(ClanRaidStage crs) {
-  	ClanRaidStageProto.Builder crspb = ClanRaidStageProto.newBuilder();
-  	int clanRaidStageId = crs.getId();
-  	crspb.setClanRaidStageId(clanRaidStageId);
-  	crspb.setClanRaidId(crs.getClanRaidId());
-  	crspb.setDurationMinutes(crs.getDurationMinutes());
-  	crspb.setStageNum(crs.getStageNum());
-  	
-  	String name = crs.getName();
-  	if (null != name) {
-  		crspb.setName(name);
-  	}
-  	
-  	//create the monster protos in order
-  	Map<Integer, ClanRaidStageMonster> monsterNumToCrsm = ClanRaidStageMonsterRetrieveUtils
-  			.getMonsterNumsToMonstersForStageId(clanRaidStageId);
-  	
-  	if (!monsterNumToCrsm.isEmpty()) {
+    ClanRaidStageProto.Builder crspb = ClanRaidStageProto.newBuilder();
+    int clanRaidStageId = crs.getId();
+    crspb.setClanRaidStageId(clanRaidStageId);
+    crspb.setClanRaidId(crs.getClanRaidId());
+    crspb.setDurationMinutes(crs.getDurationMinutes());
+    crspb.setStageNum(crs.getStageNum());
 
-  		List<Integer> monsterNumsAsc = new ArrayList<Integer>(monsterNumToCrsm.keySet());
-  		Collections.sort(monsterNumsAsc);
+    String name = crs.getName();
+    if (null != name) {
+      crspb.setName(name);
+    }
 
-  		for (Integer monsterNum : monsterNumsAsc) {
-  			ClanRaidStageMonster crsm = monsterNumToCrsm.get(monsterNum);
+    //create the monster protos in order
+    Map<Integer, ClanRaidStageMonster> monsterNumToCrsm = ClanRaidStageMonsterRetrieveUtils
+        .getMonsterNumsToMonstersForStageId(clanRaidStageId);
 
-  			ClanRaidStageMonsterProto crsmp = createClanRaidStageMonsterProto(crsm);
-  			crspb.addMonsters(crsmp);
-  		}
-  	}
-  	
-  	//create the reward protos
-  	Map<Integer, ClanRaidStageReward> possibleRewards = ClanRaidStageRewardRetrieveUtils
-  			.getClanRaidStageRewardsForClanRaidStageId(clanRaidStageId);
-  	for (ClanRaidStageReward crsr : possibleRewards.values()) {
-  		ClanRaidStageRewardProto crsrp = createClanRaidStageRewardProto(crsr);
-  		crspb.addPossibleRewards(crsrp);
-  	}
-  	
-  	return crspb.build();
+    if (!monsterNumToCrsm.isEmpty()) {
+
+      List<Integer> monsterNumsAsc = new ArrayList<Integer>(monsterNumToCrsm.keySet());
+      Collections.sort(monsterNumsAsc);
+
+      for (Integer monsterNum : monsterNumsAsc) {
+        ClanRaidStageMonster crsm = monsterNumToCrsm.get(monsterNum);
+
+        ClanRaidStageMonsterProto crsmp = createClanRaidStageMonsterProto(crsm);
+        crspb.addMonsters(crsmp);
+      }
+    }
+
+    //create the reward protos
+    Map<Integer, ClanRaidStageReward> possibleRewards = ClanRaidStageRewardRetrieveUtils
+        .getClanRaidStageRewardsForClanRaidStageId(clanRaidStageId);
+    for (ClanRaidStageReward crsr : possibleRewards.values()) {
+      ClanRaidStageRewardProto crsrp = createClanRaidStageRewardProto(crsr);
+      crspb.addPossibleRewards(crsrp);
+    }
+
+    return crspb.build();
   }
-  
+
   public static ClanRaidStageMonsterProto createClanRaidStageMonsterProto(ClanRaidStageMonster crsm) {
-  	ClanRaidStageMonsterProto.Builder crsmpb = ClanRaidStageMonsterProto.newBuilder();
-  	crsmpb.setCrsmId(crsm.getId());
-  	crsmpb.setMonsterId(crsm.getMonsterId());
-  	crsmpb.setMonsterHp(crsm.getMonsterHp());
-  	crsmpb.setMinDmg(crsm.getMinDmg());
-  	crsmpb.setMaxDmg(crsm.getMaxDmg());
-  	
-  	return crsmpb.build();
+    ClanRaidStageMonsterProto.Builder crsmpb = ClanRaidStageMonsterProto.newBuilder();
+    crsmpb.setCrsmId(crsm.getId());
+    crsmpb.setMonsterId(crsm.getMonsterId());
+    crsmpb.setMonsterHp(crsm.getMonsterHp());
+    crsmpb.setMinDmg(crsm.getMinDmg());
+    crsmpb.setMaxDmg(crsm.getMaxDmg());
+
+    return crsmpb.build();
   }
-  
+
   public static ClanRaidStageRewardProto createClanRaidStageRewardProto(ClanRaidStageReward crsr) {
-  	ClanRaidStageRewardProto.Builder crsrpb = ClanRaidStageRewardProto.newBuilder();
-  	crsrpb.setCrsrId(crsr.getId());
-  	crsrpb.setMinOilReward(crsr.getMinOilReward());
-  	crsrpb.setMaxOilReward(crsr.getMaxOilReward());
-  	crsrpb.setMinCashReward(crsr.getMinCashReward());
-  	crsrpb.setMaxCashReward(crsr.getMaxCashReward());
-  	crsrpb.setMonsterId(crsr.getMonsterId());
-  	
-  	return crsrpb.build();
+    ClanRaidStageRewardProto.Builder crsrpb = ClanRaidStageRewardProto.newBuilder();
+    crsrpb.setCrsrId(crsr.getId());
+    crsrpb.setMinOilReward(crsr.getMinOilReward());
+    crsrpb.setMaxOilReward(crsr.getMaxOilReward());
+    crsrpb.setMinCashReward(crsr.getMinCashReward());
+    crsrpb.setMaxCashReward(crsr.getMaxCashReward());
+    crsrpb.setMonsterId(crsr.getMonsterId());
+
+    return crsrpb.build();
   }
-  
+
   public static PersistentClanEventProto createPersistentClanEventProto(ClanEventPersistent cep) {
-  	PersistentClanEventProto.Builder pcepb = PersistentClanEventProto.newBuilder();
-  	pcepb.setClanEventId(cep.getId());
-  	
-  	String dayOfWeekStr = cep.getDayOfWeek();
-  	try {
-  		DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayOfWeekStr);
-			pcepb.setDayOfWeek(dayOfWeek);
-		} catch (Exception e) {
-			log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t clanEvent=" + cep);
-		}
-  	
-  	
-  	pcepb.setStartHour(cep.getStartHour());
-  	pcepb.setEventDurationMinutes(cep.getEventDurationMinutes());
-  	pcepb.setClanRaidId(cep.getClanRaidId());
-  	
-  	return pcepb.build();
+    PersistentClanEventProto.Builder pcepb = PersistentClanEventProto.newBuilder();
+    pcepb.setClanEventId(cep.getId());
+
+    String dayOfWeekStr = cep.getDayOfWeek();
+    try {
+      DayOfWeek dayOfWeek = DayOfWeek.valueOf(dayOfWeekStr);
+      pcepb.setDayOfWeek(dayOfWeek);
+    } catch (Exception e) {
+      log.error("can't create enum type. dayOfWeek=" + dayOfWeekStr + ".\t clanEvent=" + cep);
+    }
+
+
+    pcepb.setStartHour(cep.getStartHour());
+    pcepb.setEventDurationMinutes(cep.getEventDurationMinutes());
+    pcepb.setClanRaidId(cep.getClanRaidId());
+
+    return pcepb.build();
   }
-  
+
   public static PersistentClanEventClanInfoProto createPersistentClanEventClanInfoProto(
-  		ClanEventPersistentForClan cepfc) {
-  	PersistentClanEventClanInfoProto.Builder pcecipb = PersistentClanEventClanInfoProto.newBuilder();
-  	pcecipb.setClanId(cepfc.getClanId());
-  	pcecipb.setClanEventId(cepfc.getClanEventPersistentId());
-  	pcecipb.setClanRaidId(cepfc.getCrId());
-  	
-  	pcecipb.setClanRaidStageId(cepfc.getCrsId());
-  	Date stageStartTime = cepfc.getStageStartTime();
-  	if (null != stageStartTime) {
-  		pcecipb.setStageStartTime(stageStartTime.getTime());
-  	}
-  	
-  	pcecipb.setCrsmId(cepfc.getCrsmId());
-  	Date stageMonsterStartTime = cepfc.getStageMonsterStartTime();
-  	if (null != stageMonsterStartTime) {
-  		pcecipb.setStageMonsterStartTime(stageMonsterStartTime.getTime());
-  	}
-  	
-  	return pcecipb.build();
+      ClanEventPersistentForClan cepfc) {
+    PersistentClanEventClanInfoProto.Builder pcecipb = PersistentClanEventClanInfoProto.newBuilder();
+    pcecipb.setClanId(cepfc.getClanId());
+    pcecipb.setClanEventId(cepfc.getClanEventPersistentId());
+    pcecipb.setClanRaidId(cepfc.getCrId());
+
+    pcecipb.setClanRaidStageId(cepfc.getCrsId());
+    Date stageStartTime = cepfc.getStageStartTime();
+    if (null != stageStartTime) {
+      pcecipb.setStageStartTime(stageStartTime.getTime());
+    }
+
+    pcecipb.setCrsmId(cepfc.getCrsmId());
+    Date stageMonsterStartTime = cepfc.getStageMonsterStartTime();
+    if (null != stageMonsterStartTime) {
+      pcecipb.setStageMonsterStartTime(stageMonsterStartTime.getTime());
+    }
+
+    return pcecipb.build();
   }
-  
+
   public static PersistentClanEventUserInfoProto createPersistentClanEventUserInfoProto(
-  		ClanEventPersistentForUser cepfu, Map<Long, MonsterForUser> idsToUserMonsters,
-  		List<FullUserMonsterProto> fumpList){
-  	PersistentClanEventUserInfoProto.Builder pceuipb = PersistentClanEventUserInfoProto.newBuilder();
-  	int userId = cepfu.getUserId();
-  	pceuipb.setUserId(userId);
-  	pceuipb.setClanId(cepfu.getClanId());
-  	
-  	pceuipb.setCrId(cepfu.getCrId());
-  	pceuipb.setCrDmgDone(cepfu.getCrDmgDone());
-  	
-//  	pceuipb.setCrsId(cepfu.getCrsId());
-  	pceuipb.setCrsDmgDone(cepfu.getCrsDmgDone());
-  	
-//  	pceuipb.setCrsmId(cepfu.getCrsmId());
-  	pceuipb.setCrsmDmgDone(cepfu.getCrsmDmgDone());
-  	
-  	UserCurrentMonsterTeamProto.Builder ucmtpb = UserCurrentMonsterTeamProto.newBuilder();
-  	ucmtpb.setUserId(userId);
-  	
-  	if (null == fumpList || fumpList.isEmpty()) {
-  		List<Long> userMonsterIds = cepfu.getUserMonsterIds();
+      ClanEventPersistentForUser cepfu, Map<Long, MonsterForUser> idsToUserMonsters,
+      List<FullUserMonsterProto> fumpList){
+    PersistentClanEventUserInfoProto.Builder pceuipb = PersistentClanEventUserInfoProto.newBuilder();
+    int userId = cepfu.getUserId();
+    pceuipb.setUserId(userId);
+    pceuipb.setClanId(cepfu.getClanId());
 
-  		for (Long userMonsterId : userMonsterIds) {
+    pceuipb.setCrId(cepfu.getCrId());
+    pceuipb.setCrDmgDone(cepfu.getCrDmgDone());
 
-  			if (!idsToUserMonsters.containsKey(userMonsterId)) {
-  				//user no longer has this monster, probably sold
-  				//create fake user monster proto
-  				FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
-  				fumpb.setUserMonsterId(userMonsterId);
-  				FullUserMonsterProto fump = fumpb.build();
-  				ucmtpb.addCurrentTeam(fump);
-  				continue;
-  			}
-  			MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
-  			FullUserMonsterProto fump = createFullUserMonsterProtoFromUserMonster(mfu);
-  			ucmtpb.addCurrentTeam(fump);
-  		}
-  	} else {
-  		ucmtpb.addAllCurrentTeam(fumpList);
-  	}
-  	pceuipb.setUserMonsters(ucmtpb.build());
-  	
-  	return pceuipb.build();
+    //  	pceuipb.setCrsId(cepfu.getCrsId());
+    pceuipb.setCrsDmgDone(cepfu.getCrsDmgDone());
+
+    //  	pceuipb.setCrsmId(cepfu.getCrsmId());
+    pceuipb.setCrsmDmgDone(cepfu.getCrsmDmgDone());
+
+    UserCurrentMonsterTeamProto.Builder ucmtpb = UserCurrentMonsterTeamProto.newBuilder();
+    ucmtpb.setUserId(userId);
+
+    if (null == fumpList || fumpList.isEmpty()) {
+      List<Long> userMonsterIds = cepfu.getUserMonsterIds();
+
+      for (Long userMonsterId : userMonsterIds) {
+
+        if (!idsToUserMonsters.containsKey(userMonsterId)) {
+          //user no longer has this monster, probably sold
+          //create fake user monster proto
+          FullUserMonsterProto.Builder fumpb = FullUserMonsterProto.newBuilder();
+          fumpb.setUserMonsterId(userMonsterId);
+          FullUserMonsterProto fump = fumpb.build();
+          ucmtpb.addCurrentTeam(fump);
+          continue;
+        }
+        MonsterForUser mfu = idsToUserMonsters.get(userMonsterId);
+        FullUserMonsterProto fump = createFullUserMonsterProtoFromUserMonster(mfu);
+        ucmtpb.addCurrentTeam(fump);
+      }
+    } else {
+      ucmtpb.addAllCurrentTeam(fumpList);
+    }
+    pceuipb.setUserMonsters(ucmtpb.build());
+
+    return pceuipb.build();
   }
-  
+
   public static PersistentClanEventRaidStageHistoryProto createPersistentClanEventRaidStageHistoryProto(
-  		CepfuRaidStageHistory cepfursh, Collection<ClanEventPersistentUserReward> rewards) {
-  	PersistentClanEventRaidStageHistoryProto.Builder pcershpb =
-  			PersistentClanEventRaidStageHistoryProto.newBuilder();
-  	
-  	if (null != rewards && !rewards.isEmpty()) {
-  		for (ClanEventPersistentUserReward reward : rewards) {
-  			PersistentClanEventUserRewardProto rewardPRoto =
-  					createPersistentClanEventUserRewardProto(reward);
-  			pcershpb.addRewards(rewardPRoto);
-  		}
-  	}
-  	
-  	pcershpb.setEventId(cepfursh.getClanEventPersistentId());
-  	pcershpb.setClanRaidId(cepfursh.getCrId());
-  	pcershpb.setClanRaidId(cepfursh.getCrsId());
-  	
-  	Date endTime = cepfursh.getCrsEndTime();
-  	if (null != endTime) {
-  		pcershpb.setCrsEndTime(endTime.getTime());
-  	}
-  	pcershpb.setCrsDmgDone(cepfursh.getCrsDmgDone());
-  	pcershpb.setStageHp(cepfursh.getStageHealth());
-  	
-  	return pcershpb.build();
+      CepfuRaidStageHistory cepfursh, Collection<ClanEventPersistentUserReward> rewards) {
+    PersistentClanEventRaidStageHistoryProto.Builder pcershpb =
+        PersistentClanEventRaidStageHistoryProto.newBuilder();
+
+    if (null != rewards && !rewards.isEmpty()) {
+      for (ClanEventPersistentUserReward reward : rewards) {
+        PersistentClanEventUserRewardProto rewardPRoto =
+            createPersistentClanEventUserRewardProto(reward);
+        pcershpb.addRewards(rewardPRoto);
+      }
+    }
+
+    pcershpb.setEventId(cepfursh.getClanEventPersistentId());
+    pcershpb.setClanRaidId(cepfursh.getCrId());
+    pcershpb.setClanRaidId(cepfursh.getCrsId());
+
+    Date endTime = cepfursh.getCrsEndTime();
+    if (null != endTime) {
+      pcershpb.setCrsEndTime(endTime.getTime());
+    }
+    pcershpb.setCrsDmgDone(cepfursh.getCrsDmgDone());
+    pcershpb.setStageHp(cepfursh.getStageHealth());
+
+    return pcershpb.build();
   }
-  
+
   public static PersistentClanEventUserRewardProto createPersistentClanEventUserRewardProto(
-  		ClanEventPersistentUserReward reward) {
-  	PersistentClanEventUserRewardProto.Builder pceurpb = PersistentClanEventUserRewardProto.newBuilder();
-  	
-  	pceurpb.setRewardId(reward.getId());
-  	pceurpb.setUserId(reward.getUserId());
-  	
-  	Date crsEndTime = reward.getCrsEndTime();
-  	if (null != crsEndTime) {
-  		pceurpb.setCrsEndTime(crsEndTime.getTime());
-  	}
-  	
-  	String aStr = reward.getResourceType();
-  	
-  	if (null != aStr) {
-  		try {
-  			ResourceType rt = ResourceType.valueOf(aStr);
-  			pceurpb.setResourceType(rt);
-  		} catch(Exception e) {
-  			log.info("maybe resource type null. ClanEventPersistentUserReward=" + reward);
-  		}
-  	}
-  	
-  	int staticDataId = reward.getStaticDataId();
-  	if (0 != staticDataId) {
-  		pceurpb.setStaticDataId(reward.getStaticDataId());
-  	}
-  	pceurpb.setQuantity(reward.getQuantity());
-  	
-  	Date timeRedeemed = reward.getTimeRedeemed();
-  	if (null != timeRedeemed) {
-  		pceurpb.setTimeRedeemed(timeRedeemed.getTime());
-  	}
-  	
-  	return pceurpb.build();
+      ClanEventPersistentUserReward reward) {
+    PersistentClanEventUserRewardProto.Builder pceurpb = PersistentClanEventUserRewardProto.newBuilder();
+
+    pceurpb.setRewardId(reward.getId());
+    pceurpb.setUserId(reward.getUserId());
+
+    Date crsEndTime = reward.getCrsEndTime();
+    if (null != crsEndTime) {
+      pceurpb.setCrsEndTime(crsEndTime.getTime());
+    }
+
+    String aStr = reward.getResourceType();
+
+    if (null != aStr) {
+      try {
+        ResourceType rt = ResourceType.valueOf(aStr);
+        pceurpb.setResourceType(rt);
+      } catch(Exception e) {
+        log.info("maybe resource type null. ClanEventPersistentUserReward=" + reward);
+      }
+    }
+
+    int staticDataId = reward.getStaticDataId();
+    if (0 != staticDataId) {
+      pceurpb.setStaticDataId(reward.getStaticDataId());
+    }
+    pceurpb.setQuantity(reward.getQuantity());
+
+    Date timeRedeemed = reward.getTimeRedeemed();
+    if (null != timeRedeemed) {
+      pceurpb.setTimeRedeemed(timeRedeemed.getTime());
+    }
+
+    return pceurpb.build();
   }
-  
+
   public static PersistentClanEventRaidHistoryProto createPersistentClanEventRaidHistoryProto(
-  		CepfuRaidHistory cepfurh) {
-  	PersistentClanEventRaidHistoryProto.Builder pcerhpb = PersistentClanEventRaidHistoryProto.newBuilder();
-  	pcerhpb.setUserId(cepfurh.getUserId());
-  	pcerhpb.setCrDmg(cepfurh.getCrDmgDone());
-  	pcerhpb.setClanCrDmg(cepfurh.getClanCrDmg());
-  	
-  	return pcerhpb.build();
+      CepfuRaidHistory cepfurh) {
+    PersistentClanEventRaidHistoryProto.Builder pcerhpb = PersistentClanEventRaidHistoryProto.newBuilder();
+    pcerhpb.setUserId(cepfurh.getUserId());
+    pcerhpb.setCrDmg(cepfurh.getCrDmgDone());
+    pcerhpb.setClanCrDmg(cepfurh.getClanCrDmg());
+
+    return pcerhpb.build();
   }
-  
+
 }

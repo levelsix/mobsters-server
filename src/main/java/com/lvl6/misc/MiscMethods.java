@@ -134,48 +134,50 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 import com.lvl6.utils.utilmethods.QuestUtils;
 
 public class MiscMethods {
-	
-	private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
+
+  private static final Logger log = LoggerFactory.getLogger(MiscMethods.class);
   public static final String cash = "cash";
   public static final String gems = "gems";
   public static final String oil = "oil";
   public static final String boosterPackId = "boosterPackId";
-  
+
   public static final String CASH = "CASH";
   public static final String OIL = "OIL";
   public static final String MONSTER = "MONSTER";
-  
+
 
 
   public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
+      log.info("Blob: "+dialogueBlob+" length: "+dialogueBlob.length());
       StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
 
       List<Boolean> isLeftSides = new ArrayList<Boolean>();
       List<String> speakers = new ArrayList<String>();
+      List<String> speakerImages = new ArrayList<String>();
       List<String> speakerTexts = new ArrayList<String>();
 
       try {
         while (st.hasMoreTokens()) {
           String tok = st.nextToken();
           StringTokenizer st2 = new StringTokenizer(tok, ".");
-          if (st2.hasMoreTokens()) {
+          if (st2.countTokens() == 4) {
             Boolean isLeftSide = st2.nextToken().toUpperCase().equals("L");
-            if (st2.hasMoreTokens()) {
-              String speaker = st2.nextToken();
-              String speakerText = st.nextToken();
-              if (speakerText != null) {
-                isLeftSides.add(isLeftSide);
-                speakers.add(speaker);
-                speakerTexts.add(speakerText);
-              }
+            String speaker = st2.nextToken();
+            String speakerImage = st2.nextToken();
+            String speakerText = st2.nextToken();
+            if (speakerText != null) {
+              isLeftSides.add(isLeftSide);
+              speakers.add(speaker);
+              speakerImages.add(speakerImage);
+              speakerTexts.add(speakerText);
             }
           }
         }
       } catch (Exception e) {
         log.error("problem with creating dialogue object for this dialogueblob: {}", dialogueBlob, e);
       }
-      return new Dialogue(speakers, speakerTexts, isLeftSides);
+      return new Dialogue(speakers, speakerImages, speakerTexts, isLeftSides);
     }
     return null;
   }
@@ -279,58 +281,58 @@ public class MiscMethods {
     }     
 
   }
-  
+
   public static TutorialConstants createTutorialConstantsProto() {
-  	TutorialConstants.Builder tcb = TutorialConstants.newBuilder();
-  	
-  	tcb.setStartingMonsterId(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
-  	tcb.setEnemyMonsterId(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID);
-  	
-  	for (int i = 0; i < ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS.length; i++) {
-  		
-  		int structId = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS[i];
-  		float posX = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS[i];
-  		float posY = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS[i];
-  		
-  		TutorialStructProto tsp = createTutorialStructProto(structId, posX, posY);
-  		tcb.addTutorialStructures(tsp);
-  	}
-  	
-  	List<Integer> structureIdsToBeBuilt = 
-  			Arrays.asList(ControllerConstants.TUTORIAL__STRUCTURE_IDS_TO_BUILD);
-  	tcb.addAllStructureIdsToBeBuillt(structureIdsToBeBuilt);
-  	
-  	int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
-  	tcb.setCityId(cityId);
-  	List<CityElement> cityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
-  	for (CityElement ce : cityElements) {
-  		CityElementProto cep = CreateInfoProtoUtils
-  				.createCityElementProtoFromCityElement(ce);
-  		tcb.addCityOneElements(cep);
-  	}
-  	
-  	tcb.setCityElementIdForFirstDungeon(
-  			ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON);
-  	tcb.setCityElementIdForSecondDungeon(
-  			ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON);
-  	tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
-  	tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
-  	
-  	tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
-  	tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
-  	tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
-  	return tcb.build();
+    TutorialConstants.Builder tcb = TutorialConstants.newBuilder();
+
+    tcb.setStartingMonsterId(ControllerConstants.TUTORIAL__STARTING_MONSTER_ID);
+    tcb.setEnemyMonsterId(ControllerConstants.TUTORIAL__ENEMY_MONSTER_ID);
+
+    for (int i = 0; i < ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS.length; i++) {
+
+      int structId = ControllerConstants.TUTORIAL__EXISTING_BUILDING_IDS[i];
+      float posX = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS[i];
+      float posY = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS[i];
+
+      TutorialStructProto tsp = createTutorialStructProto(structId, posX, posY);
+      tcb.addTutorialStructures(tsp);
+    }
+
+    List<Integer> structureIdsToBeBuilt = 
+        Arrays.asList(ControllerConstants.TUTORIAL__STRUCTURE_IDS_TO_BUILD);
+    tcb.addAllStructureIdsToBeBuillt(structureIdsToBeBuilt);
+
+    int cityId = ControllerConstants.TUTORIAL__CITY_ONE_ID;
+    tcb.setCityId(cityId);
+    List<CityElement> cityElements = CityElementsRetrieveUtils.getCityElementsForCity(cityId);
+    for (CityElement ce : cityElements) {
+      CityElementProto cep = CreateInfoProtoUtils
+          .createCityElementProtoFromCityElement(ce);
+      tcb.addCityOneElements(cep);
+    }
+
+    tcb.setCityElementIdForFirstDungeon(
+        ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON);
+    tcb.setCityElementIdForSecondDungeon(
+        ControllerConstants.TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON);
+    tcb.setEnemyBossMonsterId(ControllerConstants.TUTORIAL__ENEMY_BOSS_MONSTER_ID);
+    tcb.setMarkZMonsterId(ControllerConstants.TUTORIAL__MARK_Z_MONSTER_ID);
+
+    tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
+    tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
+    tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
+    return tcb.build();
   }
-  
+
   public static TutorialStructProto createTutorialStructProto(int structId, float posX,
-  		float posY) {
-  	TutorialStructProto.Builder tspb = TutorialStructProto.newBuilder();
-  	
-  	tspb.setStructId(structId);
-  	CoordinatePair cp = new CoordinatePair(posX, posY);
-  	CoordinateProto cpp = CreateInfoProtoUtils.createCoordinateProtoFromCoordinatePair(cp);
-  	tspb.setCoordinate(cpp);
-  	return tspb.build();
+      float posY) {
+    TutorialStructProto.Builder tspb = TutorialStructProto.newBuilder();
+
+    tspb.setStructId(structId);
+    CoordinatePair cp = new CoordinatePair(posX, posY);
+    CoordinateProto cpp = CreateInfoProtoUtils.createCoordinateProtoFromCoordinatePair(cp);
+    tspb.setCoordinate(cpp);
+    return tspb.build();
   }
 
   public static StartupConstants createStartupConstantsProto(Globals globals) {
@@ -414,7 +416,7 @@ public class MiscMethods {
     cb.setPvpRequiredMinLvl(ControllerConstants.PVP__REQUIRED_MIN_LEVEL);
     cb.setGemsPerResource(ControllerConstants.GEMS_PER_RESOURCE);
     cb.setContinueBattleGemCostMultiplier(ControllerConstants.BATTLE__CONTINUE_GEM_COST_MULTIPLIER);
-    
+
     cb.setAddAllFbFriends(globals.isAddAllFbFriends());
 
     //set more properties above
@@ -603,7 +605,7 @@ public class MiscMethods {
     GoldSaleRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
     //TODO: FIGURE OUT BETTER WAY TO RELOAD NON STATIC CLASS DATA
-//    getMonsterForPvpRetrieveUtils().reload();
+    //    getMonsterForPvpRetrieveUtils().reload();
     MonsterBattleDialogueRetrieveUtils.reload();
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
@@ -857,12 +859,12 @@ public class MiscMethods {
     return CreateInfoProtoUtils.createGoldSaleProtoFromGoldSale(sale);
   }
 
-//  public static int dateDifferenceInDays(Date start, Date end) {
-//    DateMidnight previous = (new DateTime(start)).toDateMidnight(); //
-//    DateMidnight current = (new DateTime(end)).toDateMidnight();
-//    int days = Days.daysBetween(previous, current).getDays();
-//    return days;
-//  }
+  //  public static int dateDifferenceInDays(Date start, Date end) {
+  //    DateMidnight previous = (new DateTime(start)).toDateMidnight(); //
+  //    DateMidnight current = (new DateTime(end)).toDateMidnight();
+  //    int days = Days.daysBetween(previous, current).getDays();
+  //    return days;
+  //  }
 
 
   //  private static List<Integer> getRaritiesCollected(
@@ -1282,21 +1284,21 @@ public class MiscMethods {
   }
 
   public static StaticDataProto getAllStaticData(int userId, boolean userIdSet) {
-  	StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
-  	
-  	setPlayerCityExpansions(sdpb);
-  	setCities(sdpb);
-  	setTasks(sdpb);
-  	setMonsters(sdpb);
-  	setUserLevelStuff(sdpb);
-  	setInProgressAndAvailableQuests(sdpb, userId, userIdSet);
-  	setBoosterPackStuff(sdpb);
-  	setStructures(sdpb);
-  	setEvents(sdpb);
-  	setMonsterDialogue(sdpb);
-  	setClanRaidStuff(sdpb);
-  	
-  	return sdpb.build();
+    StaticDataProto.Builder sdpb = StaticDataProto.newBuilder();
+
+    setPlayerCityExpansions(sdpb);
+    setCities(sdpb);
+    setTasks(sdpb);
+    setMonsters(sdpb);
+    setUserLevelStuff(sdpb);
+    setInProgressAndAvailableQuests(sdpb, userId, userIdSet);
+    setBoosterPackStuff(sdpb);
+    setStructures(sdpb);
+    setEvents(sdpb);
+    setMonsterDialogue(sdpb);
+    setClanRaidStuff(sdpb);
+
+    return sdpb.build();
   }
   private static void setPlayerCityExpansions(Builder sdpb) {
     //Player city expansions
@@ -1354,10 +1356,10 @@ public class MiscMethods {
     }
   }
   private static void setInProgressAndAvailableQuests(Builder sdpb, int userId,
-  		boolean userIdSet) {
-  	if (!userIdSet) {
-  		return;
-  	}
+      boolean userIdSet) {
+    if (!userIdSet) {
+      return;
+    }
     List<QuestForUser> inProgressAndRedeemedUserQuests = RetrieveUtils.questForUserRetrieveUtils()
         .getUserQuestsForUser(userId);
 
@@ -1544,43 +1546,43 @@ public class MiscMethods {
       sdpb.addPersistentEvents(eventProto);
     }
   }
-  
+
   private static void setMonsterDialogue(Builder sdpb) {
-  	Map<Integer, List<MonsterBattleDialogue>> monsterIdToDialogue =
-  			MonsterBattleDialogueRetrieveUtils.getMonsterIdToBattleDialogue();
-  	
-  	List<MonsterBattleDialogueProto> dialogueList = new ArrayList<MonsterBattleDialogueProto>();
-  	for (List<MonsterBattleDialogue> dialogue : monsterIdToDialogue.values()) {
-  		
-  		for (MonsterBattleDialogue mbd : dialogue) {
-  			MonsterBattleDialogueProto dialogueProto = CreateInfoProtoUtils
-  					.createMonsterBattleDialogueProto(mbd);
-  			dialogueList.add(dialogueProto);
-  		}
-  	}
-  	
-  	sdpb.addAllMbds(dialogueList);
+    Map<Integer, List<MonsterBattleDialogue>> monsterIdToDialogue =
+        MonsterBattleDialogueRetrieveUtils.getMonsterIdToBattleDialogue();
+
+    List<MonsterBattleDialogueProto> dialogueList = new ArrayList<MonsterBattleDialogueProto>();
+    for (List<MonsterBattleDialogue> dialogue : monsterIdToDialogue.values()) {
+
+      for (MonsterBattleDialogue mbd : dialogue) {
+        MonsterBattleDialogueProto dialogueProto = CreateInfoProtoUtils
+            .createMonsterBattleDialogueProto(mbd);
+        dialogueList.add(dialogueProto);
+      }
+    }
+
+    sdpb.addAllMbds(dialogueList);
   }
 
   private static void setClanRaidStuff(Builder sdpb) {
-  	Map<Integer, ClanRaid> idsToClanRaid = ClanRaidRetrieveUtils.getClanRaidIdsToClanRaids();
-  	List<ClanRaidProto> raidList = new ArrayList<ClanRaidProto>();
-  	for (ClanRaid cr : idsToClanRaid.values()) {
-  		ClanRaidProto crProto = CreateInfoProtoUtils.createClanRaidProto(cr);
-  		raidList.add(crProto);
-  	}
-  	sdpb.addAllRaids(raidList);
-  	
-  	
-  	//protofy clan events
-  	List<PersistentClanEventProto> clanEventProtos = new ArrayList<PersistentClanEventProto>();
-  	Map<Integer, ClanEventPersistent> idsToClanEventPersistent =
-  			ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
-  	for (ClanEventPersistent cep : idsToClanEventPersistent.values()) {
-  		PersistentClanEventProto pcep = CreateInfoProtoUtils.createPersistentClanEventProto(cep);
-  		clanEventProtos.add(pcep);
-  	}
-  	sdpb.addAllPersistentClanEvents(clanEventProtos);
+    Map<Integer, ClanRaid> idsToClanRaid = ClanRaidRetrieveUtils.getClanRaidIdsToClanRaids();
+    List<ClanRaidProto> raidList = new ArrayList<ClanRaidProto>();
+    for (ClanRaid cr : idsToClanRaid.values()) {
+      ClanRaidProto crProto = CreateInfoProtoUtils.createClanRaidProto(cr);
+      raidList.add(crProto);
+    }
+    sdpb.addAllRaids(raidList);
+
+
+    //protofy clan events
+    List<PersistentClanEventProto> clanEventProtos = new ArrayList<PersistentClanEventProto>();
+    Map<Integer, ClanEventPersistent> idsToClanEventPersistent =
+        ClanEventPersistentRetrieveUtils .getAllEventIdsToEvents();
+    for (ClanEventPersistent cep : idsToClanEventPersistent.values()) {
+      PersistentClanEventProto pcep = CreateInfoProtoUtils.createPersistentClanEventProto(cep);
+      clanEventProtos.add(pcep);
+    }
+    sdpb.addAllPersistentClanEvents(clanEventProtos);
   }
-  
+
 }
