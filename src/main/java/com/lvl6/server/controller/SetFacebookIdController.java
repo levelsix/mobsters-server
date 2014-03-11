@@ -86,6 +86,7 @@ import com.lvl6.utils.RetrieveUtils;
       
       SetFacebookIdResponseProto resProto = resBuilder.build();
       SetFacebookIdResponseEvent resEvent = new SetFacebookIdResponseEvent(senderProto.getUserId());
+      resEvent.setTag(event.getTag());
       resEvent.setSetFacebookIdResponseProto(resProto);
       server.writeEvent(resEvent);
       
