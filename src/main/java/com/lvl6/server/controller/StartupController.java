@@ -33,6 +33,7 @@ import com.kabam.apiclient.MobileNaidResponse;
 import com.kabam.apiclient.ResponseCode;
 import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.StartupRequestEvent;
+import com.lvl6.events.response.ForceLogoutResponseEvent;
 import com.lvl6.events.response.StartupResponseEvent;
 import com.lvl6.info.BoosterItem;
 import com.lvl6.info.CepfuRaidStageHistory;
@@ -64,6 +65,7 @@ import com.lvl6.proto.ChatProto.PrivateChatPostProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventClanInfoProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventRaidStageHistoryProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventUserInfoProto;
+import com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupRequestProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto;
 import com.lvl6.proto.EventStartupProto.StartupResponseProto.Builder;
@@ -227,6 +229,7 @@ public class StartupController extends EventController {
     String apsalarId = reqProto.hasApsalarId() ? reqProto.getApsalarId() : null;
     String fbId = reqProto.getFbId();
     boolean freshRestart = reqProto.getIsFreshRestart();
+    long clientTime = reqProto.getClientTime();
 
     MiscMethods.setMDCProperties(udid, null, MiscMethods.getIPOfPlayer(server, null, udid));
 
@@ -242,6 +245,13 @@ public class StartupController extends EventController {
     } else {
       updateStatus = UpdateStatus.NO_UPDATE;
     }
+    
+    //force other devices on this account to logout
+    ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
+    logoutResponse.setLoginTime(clientTime);
+    ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(udid);
+    logoutEvent.setForceLogoutResponseProto(logoutResponse.build());
+    server.writePreDBEvent(logoutEvent, udid);
 
     StartupResponseProto.Builder resBuilder = StartupResponseProto.newBuilder();
     resBuilder.setUpdateStatus(updateStatus);
@@ -259,89 +269,104 @@ public class StartupController extends EventController {
 
     int newNumConsecutiveDaysLoggedIn = 0;
 
-    if (updateStatus != UpdateStatus.MAJOR_UPDATE) {
-    	List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
-      user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
-      if (user != null) {
-      	int userId = user.getId();
-        getLocker().lockPlayer(userId, this.getClass().getSimpleName());
-        try {
-          startupStatus = StartupStatus.USER_IN_DB;
-          log.info("No major update... getting user info");
+    try {
+			if (updateStatus != UpdateStatus.MAJOR_UPDATE) {
+				List<User> users = RetrieveUtils.userRetrieveUtils().getUserByUDIDorFbId(udid, fbId);
+			  user = selectUser(users, udid, fbId);//RetrieveUtils.userRetrieveUtils().getUserByUDID(udid);
+			  if (user != null) {
+			  	int userId = user.getId();
+			  	//if can't lock player, exception will be thrown
+			    getLocker().lockPlayer(userId, this.getClass().getSimpleName());
+			    try {
+			      startupStatus = StartupStatus.USER_IN_DB;
+			      log.info("No major update... getting user info");
 //          newNumConsecutiveDaysLoggedIn = setDailyBonusInfo(resBuilder, user, now);
-          setInProgressAndAvailableQuests(resBuilder, userId);
-          setUserClanInfos(resBuilder, userId);
-          setNotifications(resBuilder, user);
-          setNoticesToPlayers(resBuilder);
-          setChatMessages(resBuilder, user);
-          setPrivateChatPosts(resBuilder, user, userId);
-          setUserMonsterStuff(resBuilder, userId);
-          setBoosterPurchases(resBuilder);
-          setFacebookAndExtraSlotsStuff(resBuilder, user, userId);
-          setCompletedTasks(resBuilder, userId);
-          setAllStaticData(resBuilder, userId, true);
-          setEventStuff(resBuilder, userId);
-          //if server sees that the user is in a pvp battle, decrement user's elo
-          pvpBattleStuff(user, userId, freshRestart); 
-          setClanRaidStuff(resBuilder, user, userId, now);
-          
-          
-          setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
-          setUnhandledForgeAttempts(resBuilder, user);
-          setLockBoxEvents(resBuilder, user);
+			      setInProgressAndAvailableQuests(resBuilder, userId);
+			      setUserClanInfos(resBuilder, userId);
+			      setNotifications(resBuilder, user);
+			      setNoticesToPlayers(resBuilder);
+			      setChatMessages(resBuilder, user);
+			      setPrivateChatPosts(resBuilder, user, userId);
+			      setUserMonsterStuff(resBuilder, userId);
+			      setBoosterPurchases(resBuilder);
+			      setFacebookAndExtraSlotsStuff(resBuilder, user, userId);
+			      setCompletedTasks(resBuilder, userId);
+			      setAllStaticData(resBuilder, userId, true);
+			      setEventStuff(resBuilder, userId);
+			      //if server sees that the user is in a pvp battle, decrement user's elo
+			      pvpBattleStuff(user, userId, freshRestart); 
+			      setClanRaidStuff(resBuilder, user, userId, now);
+			      
+			      
+			      setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
+			      setUnhandledForgeAttempts(resBuilder, user);
+			      setLockBoxEvents(resBuilder, user);
 //          setLeaderboardEventStuff(resBuilder);
-          setAllies(resBuilder, user);
+			      setAllies(resBuilder, user);
 //          setAllBosses(resBuilder, user.getType());
 
-          FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
-          resBuilder.setSender(fup);
+			      FullUserProto fup = CreateInfoProtoUtils.createFullUserProtoFromUser(user);
+			      resBuilder.setSender(fup);
 
-          boolean isNewUser = false;
-          InsertUtils.get().insertIntoLoginHistory(udid, user.getId(), now, isLogin, isNewUser);
-        } catch (Exception e) {
-          log.error("exception in StartupController processEvent", e);
-        } finally {
-          // server.unlockClanTowersTable();
-          getLocker().unlockPlayer(user.getId(), this.getClass().getSimpleName());
-        }
-      } else {
-        log.info("tutorial player with udid " + udid);
-        
-        TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
-        resBuilder.setTutorialConstants(tc);
-        setAllStaticData(resBuilder, 0, false);
+			      boolean isNewUser = false;
+			      InsertUtils.get().insertIntoLoginHistory(udid, user.getId(), now, isLogin, isNewUser);
+			    } catch (Exception e) {
+			      log.error("exception in StartupController processEvent", e);
+			    } finally {
+			      // server.unlockClanTowersTable();
+			      getLocker().unlockPlayer(user.getId(), this.getClass().getSimpleName());
+			    }
+			  } else {
+			    log.info("tutorial player with udid " + udid);
+			    
+			    TutorialConstants tc = MiscMethods.createTutorialConstantsProto();
+			    resBuilder.setTutorialConstants(tc);
+			    setAllStaticData(resBuilder, 0, false);
 
-        boolean userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
-        int numOldAccounts = RetrieveUtils.userRetrieveUtils().numAccountsForUDID(udid);
-        boolean alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils.userExistsWithUDID(udid);
-        boolean isFirstTimeUser = false;
-        // log.info("userLoggedIn=" + userLoggedIn + ", numOldAccounts="
-        // + numOldAccounts
-        // + ", alreadyInFirstTimeUsers=" + alreadyInFirstTimeUsers);
-        if (!userLoggedIn && 0 >= numOldAccounts && !alreadyInFirstTimeUsers) {
-          isFirstTimeUser = true;
-        }
-        
-        log.info("\n userLoggedIn=" + userLoggedIn + "\t numOldAccounts=" +
-        		numOldAccounts + "\t alreadyInFirstTimeUsers=" +
-        		alreadyInFirstTimeUsers + "\t isFirstTimeUser=" + isFirstTimeUser);
+			    boolean userLoggedIn = LoginHistoryRetrieveUtils.userLoggedInByUDID(udid);
+			    int numOldAccounts = RetrieveUtils.userRetrieveUtils().numAccountsForUDID(udid);
+			    boolean alreadyInFirstTimeUsers = FirstTimeUsersRetrieveUtils.userExistsWithUDID(udid);
+			    boolean isFirstTimeUser = false;
+			    // log.info("userLoggedIn=" + userLoggedIn + ", numOldAccounts="
+			    // + numOldAccounts
+			    // + ", alreadyInFirstTimeUsers=" + alreadyInFirstTimeUsers);
+			    if (!userLoggedIn && 0 >= numOldAccounts && !alreadyInFirstTimeUsers) {
+			      isFirstTimeUser = true;
+			    }
+			    
+			    log.info("\n userLoggedIn=" + userLoggedIn + "\t numOldAccounts=" +
+			    		numOldAccounts + "\t alreadyInFirstTimeUsers=" +
+			    		alreadyInFirstTimeUsers + "\t isFirstTimeUser=" + isFirstTimeUser);
 
-        if (isFirstTimeUser) {
-          log.info("new player with udid " + udid);
-          InsertUtils.get().insertIntoFirstTimeUsers(udid, null,
-              reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
-        }
-        
-        if (Globals.OFFERCHART_ENABLED() && isFirstTimeUser) {
-          sendOfferChartInstall(now, reqProto.getAdvertiserId());
-        }
+			    if (isFirstTimeUser) {
+			      log.info("new player with udid " + udid);
+			      InsertUtils.get().insertIntoFirstTimeUsers(udid, null,
+			          reqProto.getMacAddress(), reqProto.getAdvertiserId(), now);
+			    }
+			    
+			    if (Globals.OFFERCHART_ENABLED() && isFirstTimeUser) {
+			      sendOfferChartInstall(now, reqProto.getAdvertiserId());
+			    }
 
-        boolean goingThroughTutorial = true;
-        InsertUtils.get().insertIntoLoginHistory(udid, 0, now, isLogin, goingThroughTutorial);
+			    boolean goingThroughTutorial = true;
+			    InsertUtils.get().insertIntoLoginHistory(udid, 0, now, isLogin, goingThroughTutorial);
+			  }
+			  resBuilder.setStartupStatus(startupStatus);
+			  setConstants(resBuilder, startupStatus);
+			}
+		} catch (Exception e) {
+			log.error("exception in StartupController processEvent", e);
+      //don't let the client hang
+      try {
+    	  resBuilder.setUpdateStatus(UpdateStatus.MAJOR_UPDATE); //hack to not allow user to play
+    	  StartupResponseEvent resEvent = new StartupResponseEvent(udid);
+    	  resEvent.setTag(event.getTag());
+    	  resEvent.setStartupResponseProto(resBuilder.build());
+    	  server.writeEvent(resEvent);
+      } catch (Exception e2) {
+    	  log.error("exception2 in UpdateUserCurrencyController processEvent", e);
       }
-      resBuilder.setStartupStatus(startupStatus);
-      setConstants(resBuilder, startupStatus);
-    }
+		}
 
     if (Globals.KABAM_ENABLED()) {
       String naid = retrieveKabamNaid(user, udid, reqProto.getMacAddress(),

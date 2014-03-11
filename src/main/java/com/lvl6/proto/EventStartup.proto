@@ -22,9 +22,9 @@ message StartupRequestProto {				//client will also send ChangeUserLocationReque
      optional string udid = 1;
      optional float versionNum = 2;			//1.0->2.0 critical, 1.0->1.1 minor. server checks db for latest vnum
      optional string apsalarId = 3;
-     optional string macAddress = 4;
+     optional string macAddress = 4;	//don't think is used
      optional string advertiserId = 5;
-     optional bool isForceTutorial = 6;
+     optional bool isForceTutorial = 6; //don't think is used
      
      //check fb then udid
      //if this exists, then send facebook user first,
@@ -33,6 +33,13 @@ message StartupRequestProto {				//client will also send ChangeUserLocationReque
      
      //if user is starting up app and the app is not a background process
      optional bool isFreshRestart = 8;
+     
+     //used to force logout all devices logged onto one account
+     //usage: client generates time, sends to server. All clients on
+     // a user account will get ForceLogout event. If ForceLogout's
+     // loginTime is same as value client generated, don't logout
+     optional int64 clientTime = 9;
+     
 }
 
 message StartupResponseProto {
@@ -218,3 +225,7 @@ message StartupResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+//to prevent multiple of the same account being online
+message ForceLogoutResponseProto {
+	optional int64 loginTime = 1; 
+}

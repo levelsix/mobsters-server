@@ -32,6 +32,7 @@ public class ControllerConstants {
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
 	public static final String MFUSOP__QUEST = "questId "; 
 	public static final String MFUSOP__BOOSTER_PACK = "boosterPackId";
+	public static final String MFUSOP__USER_CREATE = "user create";
 	
 	//MFUDR = monster_for_user_delete_reasons
 	public static final String MFUDR__ENHANCING = "enhancing";
