@@ -61,18 +61,19 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setVictimId(victimId);
     resBuilder.setUserClanStatus(newUserClanStatus);
 
-    int clanId = 0;
-    if (senderProto.hasClan() && null != senderProto.getClan()) {
-    	clanId = senderProto.getClan().getClanId();
-    }
-    
-    if (0 != clanId) {
-    	server.lockClan(clanId);
-    } else {
-    //MAYBE SHOULD ALSO LOCK THE playerToBootId
-    //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	server.lockPlayers(userId, victimId, this.getClass().getSimpleName());
-    }
+    int clanId = senderProto.getClan().getClanId();
+//    int clanId = 0;
+//    if (senderProto.hasClan() && null != senderProto.getClan()) {
+//    	clanId = senderProto.getClan().getClanId();
+//    }
+//    
+//    if (0 != clanId) {
+//    	server.lockClan(clanId);
+//    } else {
+//    //MAYBE SHOULD ALSO LOCK THE playerToBootId
+//    //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    	server.lockPlayers(userId, victimId, this.getClass().getSimpleName());
+//    }
     try {
     	Map<Integer,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
     	Map<Integer, UserClan> userClans = RetrieveUtils.userClanRetrieveUtils()
@@ -122,11 +123,11 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in PromoteDemoteClanMember processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
-    		server.unlockClan(clanId);
-    	} else {
-    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	}
+//    	if (0 != clanId) {
+//    		server.unlockClan(clanId);
+//    	} else {
+//    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+//    	}
     }
   }
 

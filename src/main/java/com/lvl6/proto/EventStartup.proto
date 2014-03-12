@@ -206,7 +206,7 @@ message StartupResponseProto {
 			optional int32 elementTutorialAssetId = 6;
 			
 			optional int32 cityId = 7;
-			
+			optional int32 questIdForCombiningPowerUps = 8;
 		}
 		
 	}

@@ -45,9 +45,10 @@ public class ControllerConstants {
 	public static final int MINI_TUTORIAL__FIRST_POWER_UP_TUTORIAL_ASSET_ID = 6;
 	public static final int MINI_TUTORIAL__RAINBOW_TUTORIAL_ASSET_ID = 3;
 	public static final int MINI_TUTORIAL__POWER_UP_COMBO_TUTORIAL_ASSET_ID = 4;
-	public static final int MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID = 2;
-	public static final int MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID = 1;
+	public static final int MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID = 1;
+	public static final int MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID = 2;
 	public static final int MINI_TUTORIAL__CITY_ID = 1;
+	public static final int MINI_TUTORIAL__QUEST_ID_FOR_COMBINING_POWER_UPS = 1;
 
 	
 	//chats
