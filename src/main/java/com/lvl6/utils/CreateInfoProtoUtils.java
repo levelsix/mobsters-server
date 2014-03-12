@@ -324,7 +324,13 @@ public class CreateInfoProtoUtils {
     } catch (Exception e) {
       log.error("can't create enum type. questType=" + qType + ".\t quest=" + quest);
     }
-    builder.setJobDescription(quest.getJobDescription());
+    
+    String str = quest.getJobDescription();
+    
+    if (null != str && !str.isEmpty()) {
+    	builder.setJobDescription(str);
+    }
+    
     builder.setStaticDataId(quest.getStaticDataId());
     builder.setQuantity(quest.getQuantity());
     builder.setCoinReward(quest.getCoinReward());
@@ -337,7 +343,12 @@ public class CreateInfoProtoUtils {
     if (quest.getPriority() > 0) {
       builder.setPriority(quest.getPriority());
     }
-    builder.setCarrotId(quest.getCarrotId());
+    
+    str = quest.getCarrotId();
+    
+    if (null != str && !str.isEmpty()) {
+    	builder.setCarrotId(str);
+    }
     builder.setIsAchievement(quest.isAchievement());
 
     return builder.build();
