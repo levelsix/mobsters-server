@@ -150,7 +150,6 @@ public class MiscMethods {
 
   public static Dialogue createDialogue(String dialogueBlob) {
     if (dialogueBlob != null && dialogueBlob.length() > 0) { 
-      log.info("Blob: "+dialogueBlob+" length: "+dialogueBlob.length());
       StringTokenizer st = new StringTokenizer(dialogueBlob, "~");
 
       List<Boolean> isLeftSides = new ArrayList<Boolean>();
@@ -536,6 +535,7 @@ public class MiscMethods {
   	mtcb.setMonsterDropTutorialAssetId(ControllerConstants.MINI_TUTORIAL__MONSTER_DROP_TUTORIAL_ASSET_ID);
   	mtcb.setElementTutorialAssetId(ControllerConstants.MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID);
   	mtcb.setCityId(ControllerConstants.MINI_TUTORIAL__CITY_ID);
+  	mtcb.setQuestIdForCombiningPowerUps(ControllerConstants.MINI_TUTORIAL__QUEST_ID_FOR_COMBINING_POWER_UPS);
   	return mtcb.build();
   }
 

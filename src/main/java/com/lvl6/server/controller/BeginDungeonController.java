@@ -19,6 +19,7 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginDungeonRequestEvent;
 import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
+import com.lvl6.info.Monster;
 import com.lvl6.info.QuestMonsterItem;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
@@ -31,11 +32,13 @@ import com.lvl6.proto.EventDungeonProto.BeginDungeonRequestProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.BeginDungeonStatus;
 import com.lvl6.proto.EventDungeonProto.BeginDungeonResponseProto.Builder;
+import com.lvl6.proto.MonsterStuffProto.MonsterProto.MonsterElement;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.TaskProto.TaskStageProto;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.TaskForUserOngoingRetrieveUtils;
 import com.lvl6.retrieveutils.TaskStageForUserRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.TaskStageMonsterRetrieveUtils;
@@ -80,7 +83,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     boolean isEvent = reqProto.getIsEvent();
     int eventId = reqProto.getPersistentEventId();
     int gemsSpent = reqProto.getGemsSpent();
+    
+    //active quests a user has, this is to allow monsters to drop something
+  	//other than a piece of themselves (quest_monster_item)
     List<Integer> questIds = reqProto.getQuestIdsList();
+    
+    //used for element tutorial, client sets what enemy monster element should appear
+  	//and only that one guy should appear (quest tasks should have only one stage in db)	
+    MonsterElement elem = reqProto.getElem();
+    // if not set, then go select monsters at random
+    boolean forceEnemyElem = reqProto.getForceEnemyElem();
     
     //set some values to send to the client (the response proto)
     BeginDungeonResponseProto.Builder resBuilder = BeginDungeonResponseProto.newBuilder();
@@ -105,7 +117,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       	//determine the specifics for each stage (stored in stageNumsToProtos)
       	//then record specifics in db
     	  successful = writeChangesToDb(aUser, userId, aTask, taskId, tsMap, curTime,
-    			  isEvent, eventId, gemsSpent, userTaskIdList, stageNumsToProtos, questIds);
+    			  isEvent, eventId, gemsSpent, userTaskIdList, stageNumsToProtos, questIds,
+    			  elem, forceEnemyElem);
       }
       if (successful) {
     	  setResponseBuilder(resBuilder, userTaskIdList, stageNumsToProtos);
@@ -258,7 +271,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   private boolean writeChangesToDb(User u, int uId, Task t, int tId,
 		  Map<Integer, TaskStage> tsMap, Timestamp clientTime, boolean isEvent, int eventId,
 		  int gemsSpent, List<Long> utIdList, Map<Integer, TaskStageProto> stageNumsToProtos,
-		  List<Integer> questIds) {
+		  List<Integer> questIds, MonsterElement elem, boolean forceEnemyElem) {
 	  
 	  //local vars storing eventual db data (accounting for multiple monsters in stage)
 	  Map<Integer, List<Integer>> stageNumsToSilvers = new HashMap<Integer, List<Integer>>();
@@ -271,7 +284,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  //calculate the SINGLE monster the user fights in each stage
 	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(questIds,
 			  tsMap, stageNumsToSilvers, stageNumsToExps, stageNumsToPuzzlePiecesDropped,
-			  stageNumsToTaskStageMonsters, stageNumsToTaskStageMonsterIdToItemId);
+			  stageNumsToTaskStageMonsters, stageNumsToTaskStageMonsterIdToItemId,
+			  elem, forceEnemyElem);
 	  
 	  //calculate the exp that the user could gain for this task
 	  int expGained = MiscMethods.sumListsInMap(stageNumsToExps);
@@ -336,7 +350,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		Map<Integer, List<Integer>> stageNumsToExps,
 		  Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
 		  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
-		  Map<Integer, Map<Integer, List<Integer>>> stageNumsToTaskStageMonsterIdToItemId) {
+		  Map<Integer, Map<Integer, List<Integer>>> stageNumsToTaskStageMonsterIdToItemId,
+		  MonsterElement elem, boolean forceEnemyElem) {
 	  Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
 	  Random rand = new Random();
 	  
@@ -349,9 +364,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  //select one monster, at random. This is the ONE monster for this stage
 		  List<TaskStageMonster> taskStageMonsters = 
 				  TaskStageMonsterRetrieveUtils.getMonstersForTaskStageId(tsId);
-		  int quantity = 1; //change value to increase monsters spawned
-		  List<TaskStageMonster> spawnedTaskStageMonsters = selectMonsters(taskStageMonsters, rand, quantity);
 		  
+		  List<TaskStageMonster> spawnedTaskStageMonsters = new ArrayList<TaskStageMonster>();
+		  if (forceEnemyElem) {
+		  	 selectElementMonster(taskStageMonsters, elem, spawnedTaskStageMonsters);
+		  }
+		  
+		  if (spawnedTaskStageMonsters.isEmpty()) {
+		  	int quantity = 1; //change value to increase monsters spawned
+		  	selectMonsters(taskStageMonsters, rand, quantity, spawnedTaskStageMonsters);
+		  }
 		  
 		  /*Code below is done such that if more than one monster is generated
 		    above, then user has potential to get the cash and exp from all
@@ -387,11 +409,27 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  return stageNumsToProtos;
   }
   
+  private void selectElementMonster(List<TaskStageMonster> taskStageMonsters,
+  		MonsterElement elem, List<TaskStageMonster> spawnedTaskStageMonsters) {
+  	
+  	for (TaskStageMonster tsm : taskStageMonsters) {
+  		
+  		int monsterId = tsm.getMonsterId();
+  		MonsterElement mon = MonsterRetrieveUtils.getMonsterElementForMonsterId(monsterId);
+  		
+  		if (!elem.equals(mon)) {
+  			continue;
+  		}
+  		log.info("found forced element!! forcedElement=" + elem + "\t monster=" + tsm);
+  		//found element!!!!
+  		spawnedTaskStageMonsters.add(tsm);
+  		return;
+  	}
+  }
+  
   /*picking without replacement*/
-  private List<TaskStageMonster> selectMonsters(List<TaskStageMonster> taskStageMonsters,
-  		Random rand, int quantity) {
-  	//return value
-  	List<TaskStageMonster> selectedTsm = new ArrayList<TaskStageMonster>();
+  private void selectMonsters(List<TaskStageMonster> taskStageMonsters,
+  		Random rand, int quantity, List<TaskStageMonster> spawnedTaskStageMonsters) {
   	
   	int size = taskStageMonsters.size();
   	int quantityWanted = quantity;
@@ -412,7 +450,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		int numLeft = size - i;
   		if (quantityWanted == numLeft) {
   			List<TaskStageMonster> leftOvers = taskStageMonsters.subList(i, size);
-  			selectedTsm.addAll(leftOvers);
+  			spawnedTaskStageMonsters.addAll(leftOvers);
   			break;
   		}
   		
@@ -423,13 +461,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		float normalizedProb = chanceToAppear/sumOfProbabilities;
   		if (normalizedProb > randFloat) {
   			//random number generated falls within this monster's probability window
-  			selectedTsm.add(tsmSoFar);
+  			spawnedTaskStageMonsters.add(tsmSoFar);
   			quantityWanted -= 1;
   		}
   		//selecting without replacement so this guy's probability needs to go
   		sumOfProbabilities -= chanceToAppear;
   	}
-	  return selectedTsm;
+  	
   }
   
   //for a monster, choose the reward to give (monster puzzle piece)

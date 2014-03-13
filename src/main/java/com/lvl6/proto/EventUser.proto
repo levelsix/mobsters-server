@@ -105,6 +105,8 @@ message SetFacebookIdResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional SetFacebookIdStatus status = 2;
 	
+	optional MinimumUserProto existing = 3;
+	
 	enum SetFacebookIdStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;

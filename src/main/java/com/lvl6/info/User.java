@@ -145,13 +145,15 @@ public class User implements Serializable {
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
 		absoluteParams.put(DBConstants.USER__FACEBOOK_ID, facebookId);
 		absoluteParams.put(DBConstants.USER__FB_ID_SET_ON_USER_CREATE, fbIdSetOnUserCreate);
+		
+		absoluteParams.put(DBConstants.USER__UDID, null);
 
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, null, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
 			this.facebookId = facebookId;
 			this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
-			
+			this.udid = null;
 			return true;
 		}
 		return false;

@@ -24,7 +24,16 @@ message BeginDungeonRequestProto {
 	//(positive number, server will convert it to negative)
 	optional int32 gemsSpent = 7;
 	
+	//active quests a user has, this is to allow monsters to drop something
+	//other than a piece of themselves (quest_monster_item)  
 	repeated int32 questIds = 8;
+
+	//used for element tutorial, client sets what enemy monster element should appear
+	//and only that one guy should appear (quest tasks should have only one stage in db)	
+	optional MonsterProto.MonsterElement elem = 9 [default = FIRE];
+	
+	// if not set, then go select monsters at random
+	optional bool forceEnemyElem = 10;
 }
 
 message BeginDungeonResponseProto {
