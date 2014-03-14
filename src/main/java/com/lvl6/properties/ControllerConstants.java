@@ -119,10 +119,10 @@ public class ControllerConstants {
 		
 	//TUTORIAL CONSTANTS
 	//MONSTER IDS 1 AND 3
-	public static final int TUTORIAL__STARTING_MONSTER_ID = 1;
-	public static final int TUTORIAL__ENEMY_MONSTER_ID = 3;
-	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 7;
-	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 5;
+	public static final int TUTORIAL__STARTING_MONSTER_ID = 2000;
+	public static final int TUTORIAL__ENEMY_MONSTER_ID = 2010;
+	public static final int TUTORIAL__ENEMY_BOSS_MONSTER_ID = 11;
+	public static final int TUTORIAL__MARK_Z_MONSTER_ID = 2005;
 	
 	//everything at index i goes together
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140};
