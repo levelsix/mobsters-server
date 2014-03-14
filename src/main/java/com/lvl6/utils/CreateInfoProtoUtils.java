@@ -1270,7 +1270,11 @@ public class CreateInfoProtoUtils {
 
     mpb.setMonsterId(aMonster.getId());
     String aStr = aMonster.getName(); 
-    mpb.setName(aStr);
+    if (null != aStr) {
+    	mpb.setName(aStr);
+    } else {
+    	log.error("monster has no name, aMonster=" + aMonster);
+    }
     aStr = aMonster.getMonsterGroup();
     if (null != aStr) {
       mpb.setMonsterGroup(aStr);

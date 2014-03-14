@@ -364,7 +364,7 @@ public class StartupController extends EventController {
     	  StartupResponseEvent resEvent = new StartupResponseEvent(udid);
     	  resEvent.setTag(event.getTag());
     	  resEvent.setStartupResponseProto(resBuilder.build());
-    	  server.writeEvent(resEvent);
+    	  server.writePreDBEvent(resEvent, udid);
       } catch (Exception e2) {
     	  log.error("exception2 in UpdateUserCurrencyController processEvent", e);
       }
