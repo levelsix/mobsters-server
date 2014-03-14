@@ -37,6 +37,7 @@ message MonsterProto {
 	optional int32 evolutionCost = 21;
 	
 	optional AnimationType attackAnimationType = 22;
+	optional int32 verticalPixelOffset = 23;
 	
 	enum MonsterQuality {
 		COMMON = 1;

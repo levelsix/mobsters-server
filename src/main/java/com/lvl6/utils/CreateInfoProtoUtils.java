@@ -1341,6 +1341,9 @@ public class CreateInfoProtoUtils {
     } catch (Exception e) {
       log.error("invalid animation type for monster. type=" + aStr + "\t monster=" + aMonster, e);
     }
+    
+    int verticalPixelOffset = aMonster.getVerticalPixelOffset();
+    mpb.setVerticalPixelOffset(verticalPixelOffset);
 
     return mpb.build();
   }

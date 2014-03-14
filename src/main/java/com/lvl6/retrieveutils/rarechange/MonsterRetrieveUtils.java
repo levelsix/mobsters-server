@@ -152,12 +152,13 @@ import com.lvl6.utils.DBConnection;
     int evolutionCost = rs.getInt(i++);
     
     String animationType = rs.getString(i++);
+    int verticalPixelOffset = rs.getInt(i++);
     
     Monster monster = new Monster(id, name, monsterGroup, quality, evolutionLevel,
     		displayName, element, imagePrefix, numPuzzlePieces, minutesToCombinePieces,
     		maxLevel, evolutionMonsterId, evolutionCatalystMonsterId, minutesToEvolve,
     		numCatalystsRequired, carrotRecruited, carrotDefeated, carrotEvolved,
-    		description, evolutionCost, animationType);
+    		description, evolutionCost, animationType, verticalPixelOffset);
     
     if (null != animationType) {
     	String newAnimationType = animationType.trim().toUpperCase();
