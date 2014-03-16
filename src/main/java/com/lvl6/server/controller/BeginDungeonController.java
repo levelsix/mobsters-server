@@ -278,13 +278,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  Map<Integer, List<Integer>> stageNumsToExps = new HashMap<Integer, List<Integer>>();
 	  Map<Integer, List<Boolean>> stageNumsToPuzzlePiecesDropped = new HashMap<Integer, List<Boolean>>();
 	  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters = new HashMap<Integer, List<TaskStageMonster>>();
-	  Map<Integer, Map<Integer, List<Integer>>> stageNumsToTaskStageMonsterIdToItemId = 
-	  		new HashMap<Integer, Map<Integer, List<Integer>>>();
+	  Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId = 
+	  		new HashMap<Integer, Map<Integer, Integer>>();
 	  
 	  //calculate the SINGLE monster the user fights in each stage
 	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(questIds,
 			  tsMap, stageNumsToSilvers, stageNumsToExps, stageNumsToPuzzlePiecesDropped,
-			  stageNumsToTaskStageMonsters, stageNumsToTaskStageMonsterIdToItemId,
+			  stageNumsToTaskStageMonsters, stageNumsToTsmIdToItemId,
 			  elem, forceEnemyElem);
 	  
 	  //calculate the exp that the user could gain for this task
@@ -307,7 +307,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  //record into user_task stage table
 	  recordStages(userTaskId, stageNumsToSilvers, stageNumsToExps,
 	  		stageNumsToPuzzlePiecesDropped, stageNumsToTaskStageMonsters,
-	  		stageNumsToTaskStageMonsterIdToItemId);
+	  		stageNumsToTsmIdToItemId);
 	  
 	  //send stuff back up to caller
 	  utIdList.add(userTaskId);
@@ -350,7 +350,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		Map<Integer, List<Integer>> stageNumsToExps,
 		  Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
 		  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
-		  Map<Integer, Map<Integer, List<Integer>>> stageNumsToTaskStageMonsterIdToItemId,
+		  Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId,
 		  MonsterElement elem, boolean forceEnemyElem) {
 	  Map<Integer, TaskStageProto> stageNumsToProtos = new HashMap<Integer, TaskStageProto>();
 	  Random rand = new Random();
@@ -381,13 +381,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		    the monsters including the one above.*/
 		  
 		  //if no questIds, then map returned is empty
-		  Map<Integer, List<Integer>> taskStageMonsterIdToItemId = new HashMap<Integer, List<Integer>>();
-		  generateItems(spawnedTaskStageMonsters, questIds, taskStageMonsterIdToItemId);
+		  //task stage monster id (not task stage monster monster id) can only represent 1
+  		//monster, so no need to worry about dup monsters
+		  Map<Integer, Integer> tsmIdToItemId = new HashMap<Integer, Integer>();
+		  generateItems(spawnedTaskStageMonsters, questIds, tsmIdToItemId);
 		  
 		  //randomly select a reward, IF ANY, that this monster can drop;
 		  //if an item drops puzzle piece does not drop.
 		  List<Boolean> puzzlePiecesDropped = generatePuzzlePieces(spawnedTaskStageMonsters,
-		  		taskStageMonsterIdToItemId);
+		  		tsmIdToItemId);
 		  
 		  List<Integer> individualExps = calculateExpGained(spawnedTaskStageMonsters);
 		  List<Integer> individualSilvers =  calculateSilverGained(spawnedTaskStageMonsters);
@@ -396,10 +398,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  //create the proto
 		  TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(tsId,
 				  ts, spawnedTaskStageMonsters, puzzlePiecesDropped, individualSilvers,
-				  taskStageMonsterIdToItemId);
+				  tsmIdToItemId);
 		  
 		  log.info("task stage proto=" + tsp); 
-		  log.info("after tsp taskStageMonsterIdToItemId=" + taskStageMonsterIdToItemId);
+		  log.info("after tsp taskStageMonsterIdToItemId=" + tsmIdToItemId);
 		  
 		  //NOTE, all the sizes are equal:
 		  //individualSilvers.size() == individualExps.size() == puzzlePiecesDropped.size()
@@ -410,7 +412,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  stageNumsToExps.put(stageNum, individualExps);
 		  stageNumsToPuzzlePieceDropped.put(stageNum, puzzlePiecesDropped);
 		  stageNumsToTaskStageMonsters.put(stageNum, spawnedTaskStageMonsters);
-		  stageNumsToTaskStageMonsterIdToItemId.put(stageNum, taskStageMonsterIdToItemId);
+		  stageNumsToTsmIdToItemId.put(stageNum, tsmIdToItemId);
 	  }
 	  
 	  return stageNumsToProtos;
@@ -479,7 +481,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   //if an item drops puzzle piece does not drop.
   private void generateItems(List<TaskStageMonster> taskStageMonsters,
-  		List<Integer> questIds, Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
+  		List<Integer> questIds, Map<Integer, Integer> tsmIdToItemId) {
   	
   	//no quest ids means no items (empty map)
   	if (null == questIds || questIds.isEmpty()) {
@@ -495,14 +497,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		
   		//hacky way of accounting for multiple identical task stage monsters that
   		//can drop one item
-  		if (!taskStageMonsterIdToItemId.containsKey(tsmId)) {
-  			taskStageMonsterIdToItemId.put(tsmId, new ArrayList<Integer>());
+  		if (tsmIdToItemId.containsKey(tsmId)) {
+  			
   		}
-  		
-  		List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
-  		itemIds.add(itemId);
+  		//task stage monster id (not task stage monster monster id) can only represent 1
+  		//monster
+  		tsmIdToItemId.put(tsmId, itemId);
   	}
-  	log.info("generate items taskStageMonsterIdToItemId=" + taskStageMonsterIdToItemId);
+  	log.info("generate items tsmIdToItemId=" + tsmIdToItemId);
   }
 
   //see if quest id and monster id have an item. if yes, see if it drops. If it drops
@@ -542,16 +544,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   //for a monster, choose the reward to give (monster puzzle piece)
   private List<Boolean> generatePuzzlePieces(List<TaskStageMonster> taskStageMonsters,
-  		Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
+  		Map<Integer, Integer> tsmIdToItemId) {
   	List<Boolean> piecesDropped = new ArrayList<Boolean>();
   	
   	//ostensibly and explicitly preserve ordering in monsterIds
   	for (TaskStageMonster tsm : taskStageMonsters) {
   		int tsmId = tsm.getId();
   		
-  		if (taskStageMonsterIdToItemId.containsKey(tsmId)) {
+  		if (tsmIdToItemId.containsKey(tsmId)) {
   			log.info("not generating monster piece since monster dropped item(s). tsmId=" + tsmId);
-  			log.info("item(s)=" + taskStageMonsterIdToItemId.get(tsmId));
+  			log.info("item(s)=" + tsmIdToItemId.get(tsmId) + "\t tsm=" + tsm);
   			piecesDropped.add(false);
   			continue;
   		}
@@ -589,7 +591,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		Map<Integer, List<Integer>> stageNumsToExps,
   		Map<Integer, List<Boolean>> stageNumsToPuzzlePiecesDropped,
   		Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
-  		Map<Integer, Map<Integer, List<Integer>>> stageNumsToTaskStageMonsterIdToItemId) {
+  		Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId) {
   	
   	Set<Integer> stageNums = stageNumsToExps.keySet();
 	  List<Integer> stageNumList = new ArrayList<Integer>(stageNums);
@@ -610,8 +612,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	List<Integer> expsGained = stageNumsToExps.get(stageNum);
 	  	List<Integer> cashGained = stageNumsToSilvers.get(stageNum);
 	  	List<Boolean> monsterPiecesDropped = stageNumsToPuzzlePiecesDropped.get(stageNum);
-	  	Map<Integer, List<Integer>> taskStageMonsterIdToItemId = 
-	  			stageNumsToTaskStageMonsterIdToItemId.get(stageNum);
+	  	Map<Integer, Integer> tsmIdToItemId = stageNumsToTsmIdToItemId.get(stageNum);
 	  	
 	  	int numStageRows = taskStageMonsters.size();
 	  	List<Long> userTaskIds = Collections.nCopies(numStageRows, userTaskId);
@@ -626,7 +627,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	
 	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds,
 	  			repeatedStageNum, taskStageMonsterIds, monsterTypes, expsGained,
-	  			cashGained, monsterPiecesDropped, taskStageMonsterIdToItemId);
+	  			cashGained, monsterPiecesDropped, tsmIdToItemId);
 	  	log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
 	  }
   }

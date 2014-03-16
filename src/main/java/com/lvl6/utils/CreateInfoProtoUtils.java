@@ -1212,7 +1212,7 @@ public class CreateInfoProtoUtils {
   //individualSilvers should always be set, since silver dropped is within a range
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
       List<TaskStageMonster> taskStageMonsters, List<Boolean> puzzlePiecesDropped,
-      List<Integer> individualSilvers, Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
+      List<Integer> individualSilvers, Map<Integer, Integer> tsmIdToItemId) {
 
     TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
     if (null == ts) {
@@ -1231,7 +1231,7 @@ public class CreateInfoProtoUtils {
       int silverDrop = individualSilvers.get(i);
 
       TaskStageMonsterProto mp = createTaskStageMonsterProto(tsm, silverDrop,
-          puzzlePieceDropped, taskStageMonsterIdToItemId);
+          puzzlePieceDropped, tsmIdToItemId);
       mpList.add(mp);
     }
 
@@ -1241,27 +1241,27 @@ public class CreateInfoProtoUtils {
   }
 
   public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
-      int cashReward, boolean pieceDropped, Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
-    int tsmId = tsm.getMonsterId();
+      int cashReward, boolean pieceDropped, Map<Integer, Integer> tsmIdToItemId) {
+    int tsmMonsterId = tsm.getMonsterId();
 
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
-    bldr.setMonsterId(tsmId);
+    bldr.setMonsterId(tsmMonsterId);
     bldr.setMonsterType(tsm.getMonsterType());
     bldr.setCashReward(cashReward);
     bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());
 
-    if (taskStageMonsterIdToItemId.containsKey(tsmId)) {
+    int tsmId = tsm.getId();
+    if (tsmIdToItemId.containsKey(tsmId)) {
       //if multiple identical monsters spawned, each one should have a 
       //corresponding item id that it drops, could be -1. (-1 means no item drop)
-      List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
+      int itemId = tsmIdToItemId.get(tsmMonsterId);
 
-      int itemId = itemIds.remove(0);
       if (itemId > 0) {
         bldr.setItemId(itemId);
       }
-      log.info("creating tsm. taskStageMonsterIdToItemId=" + taskStageMonsterIdToItemId);
+      log.info("creating tsm. taskStageMonsterIdToItemId=" + tsmIdToItemId);
       log.info("itemId=" + itemId);
       log.info("tsm=" + bldr.build());
     }

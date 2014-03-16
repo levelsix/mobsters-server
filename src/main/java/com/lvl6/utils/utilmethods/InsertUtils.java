@@ -800,24 +800,24 @@ public class InsertUtils implements InsertUtil{
 	public int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
 			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
 			List<Integer> silversGained, List<Boolean> monsterPiecesDropped,
-			Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
+			Map<Integer, Integer> tsmIdToItemId) {
 		//even if a taskStageMonsterId has multiple items, just choose the first one
 		List<Integer> itemIds = new ArrayList<Integer>();
 		
 		for (Integer tsmId : taskStageMonsterIds) {
 			
-			if (!taskStageMonsterIdToItemId.containsKey(tsmId)) {
-				//0 means no item dropped
+			if (!tsmIdToItemId.containsKey(tsmId)) {
+				//0 in db means no item dropped
 				itemIds.add(0);
 				continue;
 			}
 			
-			//task stage monster has an item drop associated with it. Just get first one.
-			List<Integer> tsmItemIds = taskStageMonsterIdToItemId.get(tsmId);
-			if (null != tsmItemIds) {
-				int itemId = tsmItemIds.get(0);
-				itemIds.add(itemId);
+			//task stage monster has an item drop associated with it.
+			int itemId = tsmIdToItemId.get(tsmId);
+			if (-1 == itemId) {
+				itemId = 0;
 			}
+			itemIds.add(itemId);
 			
 		}
 
