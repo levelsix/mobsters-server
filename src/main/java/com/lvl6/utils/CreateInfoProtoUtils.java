@@ -1256,7 +1256,7 @@ public class CreateInfoProtoUtils {
     if (tsmIdToItemId.containsKey(tsmId)) {
       //if multiple identical monsters spawned, each one should have a 
       //corresponding item id that it drops, could be -1. (-1 means no item drop)
-      int itemId = tsmIdToItemId.get(tsmMonsterId);
+      int itemId = tsmIdToItemId.get(tsmId);
 
       if (itemId > 0) {
         bldr.setItemId(itemId);
