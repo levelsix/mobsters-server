@@ -551,7 +551,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	for (TaskStageMonster tsm : taskStageMonsters) {
   		int tsmId = tsm.getId();
   		
-  		if (tsmIdToItemId.containsKey(tsmId)) {
+  		//I think tsmIdToItemId will always contain entry for tsmId...
+  		if (tsmIdToItemId.containsKey(tsmId) && tsmIdToItemId.get(tsmId) > 0) {
   			log.info("not generating monster piece since monster dropped item(s). tsmId=" + tsmId);
   			log.info("item(s)=" + tsmIdToItemId.get(tsmId) + "\t tsm=" + tsm);
   			piecesDropped.add(false);
