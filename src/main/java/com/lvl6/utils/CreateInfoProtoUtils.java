@@ -1261,6 +1261,9 @@ public class CreateInfoProtoUtils {
       if (itemId > 0) {
         bldr.setItemId(itemId);
       }
+      log.info("creating tsm. taskStageMonsterIdToItemId=" + taskStageMonsterIdToItemId);
+      log.info("itemId=" + itemId);
+      log.info("tsm=" + bldr.build());
     }
 
     return bldr.build();

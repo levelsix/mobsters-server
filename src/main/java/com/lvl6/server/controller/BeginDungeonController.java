@@ -399,6 +399,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				  taskStageMonsterIdToItemId);
 		  
 		  log.info("task stage proto=" + tsp); 
+		  log.info("after tsp taskStageMonsterIdToItemId=" + taskStageMonsterIdToItemId);
 		  
 		  //NOTE, all the sizes are equal:
 		  //individualSilvers.size() == individualExps.size() == puzzlePiecesDropped.size()
@@ -501,6 +502,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
   		itemIds.add(itemId);
   	}
+  	log.info("generate items taskStageMonsterIdToItemId=" + taskStageMonsterIdToItemId);
   }
 
   //see if quest id and monster id have an item. if yes, see if it drops. If it drops
