@@ -35,6 +35,7 @@ import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.GoldSale;
+import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterLevelInfo;
@@ -75,6 +76,7 @@ import com.lvl6.proto.InAppPurchaseProto.GoldSaleProto;
 import com.lvl6.proto.InAppPurchaseProto.InAppPurchasePackageProto;
 import com.lvl6.proto.MonsterStuffProto.MonsterBattleDialogueProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
+import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.StructureProto.CoordinateProto;
@@ -105,6 +107,7 @@ import com.lvl6.retrieveutils.rarechange.ClanRaidStageRewardRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.EventPersistentRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ExpansionCostRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
@@ -618,6 +621,7 @@ public class MiscMethods {
     EventPersistentRetrieveUtils.reload();
     ExpansionCostRetrieveUtils.reload();
     GoldSaleRetrieveUtils.reload();
+    ItemRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
     //TODO: FIGURE OUT BETTER WAY TO RELOAD NON STATIC CLASS DATA
     //    getMonsterForPvpRetrieveUtils().reload();
@@ -1312,6 +1316,7 @@ public class MiscMethods {
     setEvents(sdpb);
     setMonsterDialogue(sdpb);
     setClanRaidStuff(sdpb);
+    setItemStuff(sdpb);
 
     return sdpb.build();
   }
@@ -1598,6 +1603,16 @@ public class MiscMethods {
       clanEventProtos.add(pcep);
     }
     sdpb.addAllPersistentClanEvents(clanEventProtos);
+  }
+  
+  private static void setItemStuff(Builder sdpb) {
+  	Map<Integer, Item> itemIdsToItems = ItemRetrieveUtils.getItemIdsToItems();
+  	
+  	for (Item i : itemIdsToItems.values()) {
+  		ItemProto itemProto = CreateInfoProtoUtils.createItemProtoFromItem(i);
+  		sdpb.addItems(itemProto);
+  	}
+  	
   }
 
 }

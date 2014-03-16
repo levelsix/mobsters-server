@@ -205,6 +205,16 @@ public final class StaticDataStuffProto {
         getPersistentClanEventsOrBuilderList();
     com.lvl6.proto.ClanProto.PersistentClanEventProtoOrBuilder getPersistentClanEventsOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.ItemProto items = 22;
+    java.util.List<com.lvl6.proto.QuestProto.ItemProto> 
+        getItemsList();
+    com.lvl6.proto.QuestProto.ItemProto getItems(int index);
+    int getItemsCount();
+    java.util.List<? extends com.lvl6.proto.QuestProto.ItemProtoOrBuilder> 
+        getItemsOrBuilderList();
+    com.lvl6.proto.QuestProto.ItemProtoOrBuilder getItemsOrBuilder(
+        int index);
   }
   public static final class StaticDataProto extends
       com.google.protobuf.GeneratedMessage
@@ -647,6 +657,27 @@ public final class StaticDataStuffProto {
       return persistentClanEvents_.get(index);
     }
     
+    // repeated .com.lvl6.proto.ItemProto items = 22;
+    public static final int ITEMS_FIELD_NUMBER = 22;
+    private java.util.List<com.lvl6.proto.QuestProto.ItemProto> items_;
+    public java.util.List<com.lvl6.proto.QuestProto.ItemProto> getItemsList() {
+      return items_;
+    }
+    public java.util.List<? extends com.lvl6.proto.QuestProto.ItemProtoOrBuilder> 
+        getItemsOrBuilderList() {
+      return items_;
+    }
+    public int getItemsCount() {
+      return items_.size();
+    }
+    public com.lvl6.proto.QuestProto.ItemProto getItems(int index) {
+      return items_.get(index);
+    }
+    public com.lvl6.proto.QuestProto.ItemProtoOrBuilder getItemsOrBuilder(
+        int index) {
+      return items_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -668,6 +699,7 @@ public final class StaticDataStuffProto {
       mbds_ = java.util.Collections.emptyList();
       raids_ = java.util.Collections.emptyList();
       persistentClanEvents_ = java.util.Collections.emptyList();
+      items_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -740,6 +772,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < persistentClanEvents_.size(); i++) {
         output.writeMessage(21, persistentClanEvents_.get(i));
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        output.writeMessage(22, items_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -829,6 +864,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < persistentClanEvents_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(21, persistentClanEvents_.get(i));
+      }
+      for (int i = 0; i < items_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(22, items_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -966,6 +1005,7 @@ public final class StaticDataStuffProto {
           getMbdsFieldBuilder();
           getRaidsFieldBuilder();
           getPersistentClanEventsFieldBuilder();
+          getItemsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1093,6 +1133,12 @@ public final class StaticDataStuffProto {
           bitField0_ = (bitField0_ & ~0x00080000);
         } else {
           persistentClanEventsBuilder_.clear();
+        }
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00100000);
+        } else {
+          itemsBuilder_.clear();
         }
         return this;
       }
@@ -1310,6 +1356,15 @@ public final class StaticDataStuffProto {
           result.persistentClanEvents_ = persistentClanEvents_;
         } else {
           result.persistentClanEvents_ = persistentClanEventsBuilder_.build();
+        }
+        if (itemsBuilder_ == null) {
+          if (((bitField0_ & 0x00100000) == 0x00100000)) {
+            items_ = java.util.Collections.unmodifiableList(items_);
+            bitField0_ = (bitField0_ & ~0x00100000);
+          }
+          result.items_ = items_;
+        } else {
+          result.items_ = itemsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1824,6 +1879,32 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (itemsBuilder_ == null) {
+          if (!other.items_.isEmpty()) {
+            if (items_.isEmpty()) {
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00100000);
+            } else {
+              ensureItemsIsMutable();
+              items_.addAll(other.items_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.items_.isEmpty()) {
+            if (itemsBuilder_.isEmpty()) {
+              itemsBuilder_.dispose();
+              itemsBuilder_ = null;
+              items_ = other.items_;
+              bitField0_ = (bitField0_ & ~0x00100000);
+              itemsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getItemsFieldBuilder() : null;
+            } else {
+              itemsBuilder_.addAllMessages(other.items_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1976,6 +2057,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.ClanProto.PersistentClanEventProto.Builder subBuilder = com.lvl6.proto.ClanProto.PersistentClanEventProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addPersistentClanEvents(subBuilder.buildPartial());
+              break;
+            }
+            case 178: {
+              com.lvl6.proto.QuestProto.ItemProto.Builder subBuilder = com.lvl6.proto.QuestProto.ItemProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addItems(subBuilder.buildPartial());
               break;
             }
           }
@@ -5608,6 +5695,192 @@ public final class StaticDataStuffProto {
         return persistentClanEventsBuilder_;
       }
       
+      // repeated .com.lvl6.proto.ItemProto items = 22;
+      private java.util.List<com.lvl6.proto.QuestProto.ItemProto> items_ =
+        java.util.Collections.emptyList();
+      private void ensureItemsIsMutable() {
+        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
+          items_ = new java.util.ArrayList<com.lvl6.proto.QuestProto.ItemProto>(items_);
+          bitField0_ |= 0x00100000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.ItemProto, com.lvl6.proto.QuestProto.ItemProto.Builder, com.lvl6.proto.QuestProto.ItemProtoOrBuilder> itemsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.QuestProto.ItemProto> getItemsList() {
+        if (itemsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(items_);
+        } else {
+          return itemsBuilder_.getMessageList();
+        }
+      }
+      public int getItemsCount() {
+        if (itemsBuilder_ == null) {
+          return items_.size();
+        } else {
+          return itemsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.QuestProto.ItemProto getItems(int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);
+        } else {
+          return itemsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setItems(
+          int index, com.lvl6.proto.QuestProto.ItemProto value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.set(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setItems(
+          int index, com.lvl6.proto.QuestProto.ItemProto.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addItems(com.lvl6.proto.QuestProto.ItemProto value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addItems(
+          int index, com.lvl6.proto.QuestProto.ItemProto value) {
+        if (itemsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureItemsIsMutable();
+          items_.add(index, value);
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addItems(
+          com.lvl6.proto.QuestProto.ItemProto.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addItems(
+          int index, com.lvl6.proto.QuestProto.ItemProto.Builder builderForValue) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          itemsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllItems(
+          java.lang.Iterable<? extends com.lvl6.proto.QuestProto.ItemProto> values) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          super.addAll(values, items_);
+          onChanged();
+        } else {
+          itemsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearItems() {
+        if (itemsBuilder_ == null) {
+          items_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00100000);
+          onChanged();
+        } else {
+          itemsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeItems(int index) {
+        if (itemsBuilder_ == null) {
+          ensureItemsIsMutable();
+          items_.remove(index);
+          onChanged();
+        } else {
+          itemsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.QuestProto.ItemProto.Builder getItemsBuilder(
+          int index) {
+        return getItemsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.QuestProto.ItemProtoOrBuilder getItemsOrBuilder(
+          int index) {
+        if (itemsBuilder_ == null) {
+          return items_.get(index);  } else {
+          return itemsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.QuestProto.ItemProtoOrBuilder> 
+           getItemsOrBuilderList() {
+        if (itemsBuilder_ != null) {
+          return itemsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(items_);
+        }
+      }
+      public com.lvl6.proto.QuestProto.ItemProto.Builder addItemsBuilder() {
+        return getItemsFieldBuilder().addBuilder(
+            com.lvl6.proto.QuestProto.ItemProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.QuestProto.ItemProto.Builder addItemsBuilder(
+          int index) {
+        return getItemsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.QuestProto.ItemProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.QuestProto.ItemProto.Builder> 
+           getItemsBuilderList() {
+        return getItemsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.QuestProto.ItemProto, com.lvl6.proto.QuestProto.ItemProto.Builder, com.lvl6.proto.QuestProto.ItemProtoOrBuilder> 
+          getItemsFieldBuilder() {
+        if (itemsBuilder_ == null) {
+          itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.QuestProto.ItemProto, com.lvl6.proto.QuestProto.ItemProto.Builder, com.lvl6.proto.QuestProto.ItemProtoOrBuilder>(
+                  items_,
+                  ((bitField0_ & 0x00100000) == 0x00100000),
+                  getParentForChildren(),
+                  isClean());
+          items_ = null;
+        }
+        return itemsBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
     
@@ -5636,7 +5909,7 @@ public final class StaticDataStuffProto {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Boos" +
       "terPackStuff.proto\032\nCity.proto\032\nClan.pro" +
       "to\032\022MonsterStuff.proto\032\013Quest.proto\032\017Str" +
-      "ucture.proto\032\nTask.proto\032\nUser.proto\"\354\010\n" +
+      "ucture.proto\032\nTask.proto\032\nUser.proto\"\226\t\n" +
       "\017StaticDataProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
       "vl6.proto.MinimumUserProto\022>\n\016expansionC" +
       "osts\030\002 \003(\0132&.com.lvl6.proto.CityExpansio" +
@@ -5665,7 +5938,8 @@ public final class StaticDataStuffProto {
       "DialogueProto\022,\n\005raids\030\024 \003(\0132\035.com.lvl6.",
       "proto.ClanRaidProto\022F\n\024persistentClanEve" +
       "nts\030\025 \003(\0132(.com.lvl6.proto.PersistentCla" +
-      "nEventProtoB\026B\024StaticDataStuffProto"
+      "nEventProto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.pr" +
+      "oto.ItemProtoB\026B\024StaticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5677,7 +5951,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;

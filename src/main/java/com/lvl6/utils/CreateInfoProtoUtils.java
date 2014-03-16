@@ -37,6 +37,7 @@ import com.lvl6.info.EventPersistentForUser;
 import com.lvl6.info.ExpansionCost;
 import com.lvl6.info.ExpansionPurchaseForUser;
 import com.lvl6.info.GoldSale;
+import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterEnhancingForUser;
@@ -115,6 +116,7 @@ import com.lvl6.proto.QuestProto.DialogueProto.SpeechSegmentProto;
 import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.FullQuestProto.QuestType;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
+import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
@@ -1889,6 +1891,24 @@ public class CreateInfoProtoUtils {
     pcerhpb.setClanCrDmg(cepfurh.getClanCrDmg());
 
     return pcerhpb.build();
+  }
+  
+  public static ItemProto createItemProtoFromItem(Item item) {
+  	ItemProto.Builder ipb = ItemProto.newBuilder();
+  	
+  	ipb.setItemId(item.getId());
+  	
+  	String str = item.getName();
+  	if (null != str) {
+  		ipb.setName(str);
+  	}
+  	
+  	str = item.getImgName();
+  	if (null != str) {
+  		ipb.setImgName(str);
+  	}
+  	
+  	return ipb.build();
   }
 
 }

@@ -47,5 +47,6 @@ message StaticDataProto {
 	//these contains the stages. the stages contain the monsters and the rewards  
 	repeated ClanRaidProto raids = 20;
 	repeated PersistentClanEventProto persistentClanEvents = 21;
+	repeated ItemProto items = 22;
 }
 	
