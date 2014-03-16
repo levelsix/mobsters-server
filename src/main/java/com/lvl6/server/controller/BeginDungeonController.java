@@ -398,6 +398,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 				  ts, spawnedTaskStageMonsters, puzzlePiecesDropped, individualSilvers,
 				  taskStageMonsterIdToItemId);
 		  
+		  log.info("task stage proto=" + tsp); 
+		  
 		  //NOTE, all the sizes are equal:
 		  //individualSilvers.size() == individualExps.size() == puzzlePiecesDropped.size()
 		  // == spawnedTaskStageMonsters.size()
