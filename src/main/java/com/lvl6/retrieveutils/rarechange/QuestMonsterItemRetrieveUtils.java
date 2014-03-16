@@ -54,14 +54,16 @@ import com.lvl6.utils.DBConnection;
   	return null;
   	
   }
-
-  public static Map<Integer, QuestMonsterItem> getItemsForQuestId(int questId) {
-    log.debug("retrieve quest_monster_item data for questId " + questId);
-    if (questIdsToMonsterIdsToItems == null) {
-      setStaticQuestIdsToMonsterIdsToItems();      
-    }
-    return questIdsToMonsterIdsToItems.get(questId);
-  }
+  
+  //quest will have at most one row in quest_monster_item table.
+  //quest only has one static id table, so only one item.
+//  public static Map<Integer, QuestMonsterItem> getItemsForQuestId(int questId) {
+//    log.debug("retrieve quest_monster_item data for questId " + questId);
+//    if (questIdsToMonsterIdsToItems == null) {
+//      setStaticQuestIdsToMonsterIdsToItems();      
+//    }
+//    return questIdsToMonsterIdsToItems.get(questId);
+//  }
 
 
   private static void setStaticQuestIdsToMonsterIdsToItems() {

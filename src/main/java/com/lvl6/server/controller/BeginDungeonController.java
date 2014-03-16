@@ -371,23 +371,27 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  }
 		  
 		  if (spawnedTaskStageMonsters.isEmpty()) {
-		  	int quantity = 1; //change value to increase monsters spawned
+		  	int quantity = 1; //change value to ensure monster spawned
 		  	selectMonsters(taskStageMonsters, rand, quantity, spawnedTaskStageMonsters);
 		  }
+		  log.info("monster(s) spawned=" + spawnedTaskStageMonsters);
 		  
 		  /*Code below is done such that if more than one monster is generated
 		    above, then user has potential to get the cash and exp from all
 		    the monsters including the one above.*/
 		  
+		  //if no questIds, then map returned is empty
+		  Map<Integer, List<Integer>> taskStageMonsterIdToItemId = new HashMap<Integer, List<Integer>>();
+		  generateItems(spawnedTaskStageMonsters, questIds, taskStageMonsterIdToItemId);
+		  
 		  //randomly select a reward, IF ANY, that this monster can drop;
-		  List<Boolean> puzzlePiecesDropped = generatePuzzlePieces(spawnedTaskStageMonsters);
+		  //if an item drops puzzle piece does not drop.
+		  List<Boolean> puzzlePiecesDropped = generatePuzzlePieces(spawnedTaskStageMonsters,
+		  		taskStageMonsterIdToItemId);
 		  
 		  List<Integer> individualExps = calculateExpGained(spawnedTaskStageMonsters);
 		  List<Integer> individualSilvers =  calculateSilverGained(spawnedTaskStageMonsters);
 		  
-		  //if no questIds, then map returned is empty
-		  Map<Integer, List<Integer>> taskStageMonsterIdToItemId = generateItems(
-		  		spawnedTaskStageMonsters, puzzlePiecesDropped, questIds);
 		  
 		  //create the proto
 		  TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(tsId,
@@ -469,13 +473,85 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	}
   	
   }
+
+  //if an item drops puzzle piece does not drop.
+  private void generateItems(List<TaskStageMonster> taskStageMonsters,
+  		List<Integer> questIds, Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
+  	
+  	//no quest ids means no items (empty map)
+  	if (null == questIds || questIds.isEmpty()) {
+  		return; 
+  	}
+  	
+  	for (int index = 0; index < taskStageMonsters.size(); index++) {
+  		TaskStageMonster tsm = taskStageMonsters.get(index);
+  		
+  		//determine the item that this monster drops, if any, (-1 means no item drop)
+  		int itemId = generateQuestMonsterItem(questIds, tsm);
+  		int tsmId = tsm.getId();
+  		
+  		//hacky way of accounting for multiple identical task stage monsters that
+  		//can drop one item
+  		if (!taskStageMonsterIdToItemId.containsKey(tsmId)) {
+  			taskStageMonsterIdToItemId.put(tsmId, new ArrayList<Integer>());
+  		}
+  		
+  		List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
+  		itemIds.add(itemId);
+  	}
+  }
+
+  //see if quest id and monster id have an item. if yes, see if it drops. If it drops
+  //return the item id. 
+  //default return -1
+  private int generateQuestMonsterItem(List<Integer> questIds, TaskStageMonster tsm) {
+  	
+  	int monsterId = tsm.getMonsterId();
+  	for (int questId : questIds) {
+  		
+  		QuestMonsterItem qmi = QuestMonsterItemRetrieveUtils
+  				.getItemForQuestAndMonsterId(questId, monsterId);
+  		log.info("quest monster item =" + qmi);
+  		
+  		if (null == qmi) {
+  			continue;
+  		}
+  		log.info("item might drop");
+  		
+  	  //roll to see if item should drop
+  		if (!qmi.didItemDrop()) {
+  			log.info("task stage monster didn't drop item. tsm=" + tsm);
+  			continue;
+  		}
+  		//since quest and monster have item associated with it and the item "dropped"
+  		//return this
+  		
+  		int itemId = qmi.getItemId();
+  		log.info("item dropped=" + itemId);
+  		return itemId;
+  	}
+  	
+  	log.info("no quest ids");
+  	//no item
+  	return -1;
+  }
   
   //for a monster, choose the reward to give (monster puzzle piece)
-  private List<Boolean> generatePuzzlePieces(List<TaskStageMonster> taskStageMonsters) {
+  private List<Boolean> generatePuzzlePieces(List<TaskStageMonster> taskStageMonsters,
+  		Map<Integer, List<Integer>> taskStageMonsterIdToItemId) {
   	List<Boolean> piecesDropped = new ArrayList<Boolean>();
   	
   	//ostensibly and explicitly preserve ordering in monsterIds
   	for (TaskStageMonster tsm : taskStageMonsters) {
+  		int tsmId = tsm.getId();
+  		
+  		if (taskStageMonsterIdToItemId.containsKey(tsmId)) {
+  			log.info("not generating monster piece since monster dropped item(s). tsmId=" + tsmId);
+  			log.info("item(s)=" + taskStageMonsterIdToItemId.get(tsmId));
+  			piecesDropped.add(false);
+  			continue;
+  		}
+  		
   		boolean pieceDropped = tsm.didPuzzlePieceDrop();
   		piecesDropped.add(pieceDropped);
   	}
@@ -504,73 +580,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  }
 	  return individualSilvers;
   }
-  
-  //an item drops only if a puzzle piece didn't drop.
-  //returns map(taskStageMonsterId, itemId)
-  private Map<Integer, List<Integer>> generateItems(List<TaskStageMonster> taskStageMonsters,
-  		List<Boolean> puzzlePiecesDropped, List<Integer> questIds) {
-  	
-  	Map<Integer, List<Integer>> taskStageMonsterIdToItemId = new HashMap<Integer, List<Integer>>();
-  	//no quest ids means no items (empty map)
-  	if (null == questIds || questIds.isEmpty()) {
-  		return taskStageMonsterIdToItemId; 
-  	}
-  	
-  	for (int index = 0; index < taskStageMonsters.size(); index++) {
-  		TaskStageMonster tsm = taskStageMonsters.get(index);
-  		boolean dropped = puzzlePiecesDropped.get(index);
-  				
-  		if (dropped) {
-  			//since puzzle piece dropped, this monster can't drop anything else
-  			continue;
-  		}
-  		
-  		//determine the item that this monster drops, if any, (-1 means no item drop)
-  		int itemId = generateQuestMonsterItem(questIds, tsm);
-  		int tsmId = tsm.getId();
-  		
-  		//hacky way of accounting for multiple identical task stage monsters that
-  		//can drop one item
-  		if (!taskStageMonsterIdToItemId.containsKey(tsmId)) {
-  			taskStageMonsterIdToItemId.put(tsmId, new ArrayList<Integer>());
-  		}
-  		
-  		List<Integer> itemIds = taskStageMonsterIdToItemId.get(tsmId);
-  		itemIds.add(itemId);
-  	}
-  	return taskStageMonsterIdToItemId;
-  }
-  
-  //see if quest id and monster id have an item. if yes, see if it drops. If it drops
-  //return the item id. 
-  //default return -1
-  private int generateQuestMonsterItem(List<Integer> questIds, TaskStageMonster tsm) {
-  	
-  	int monsterId = tsm.getMonsterId();
-  	
-  	for (int questId : questIds) {
-  		
-  		QuestMonsterItem qmi = QuestMonsterItemRetrieveUtils
-  				.getItemForQuestAndMonsterId(questId, monsterId);
-  		
-  		if (null == qmi) {
-  			continue;
-  		}
-  		
-  	  //roll to see if item should drop
-  		if (!qmi.didItemDrop()) {
-  			continue;
-  		}
-  		//since quest and monster have item associated with it and the item "dropped"
-  		//return this
-  		int itemId = qmi.getItemId();
-  		return itemId;
-  	}
-  	
-  	//no item
-  	return -1;
-  }
-   
   
   private void recordStages(long userTaskId, Map<Integer, List<Integer>> stageNumsToSilvers,
   		Map<Integer, List<Integer>> stageNumsToExps,
