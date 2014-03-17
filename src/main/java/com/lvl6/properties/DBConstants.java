@@ -386,7 +386,8 @@ public class DBConstants {
   public static final String TASK_FOR_USER_ONGOING__USER_ID = GENERIC__USER_ID;
   public static final String TASK_FOR_USER_ONGOING__TASK_ID = "task_id";
   public static final String TASK_FOR_USER_ONGOING__EXP_GAINED = "exp_gained";
-  public static final String TASK_FOR_USER_ONGOING__SILVER_GAINED = "silver_gained";
+  public static final String TASK_FOR_USER_ONGOING__CASH_GAINED = "cash_gained";
+  public static final String TASK_FOR_USER_ONGOING__OIL_GAINED = "oil_gained";
   public static final String TASK_FOR_USER_ONGOING__NUM_REVIVES = "num_revives";
   public static final String TASK_FOR_USER_ONGOING__START_TIME = "start_time";
 
@@ -400,7 +401,8 @@ public class DBConstants {
   public static final String TASK_HISTORY__USER_ID = GENERIC__USER_ID;
   public static final String TASK_HISTORY__TASK_ID = "task_id";
   public static final String TASK_HISTORY__EXP_GAINED = "exp_gained";
-  public static final String TASK_HISTORY__SILVER_GAINED = "silver_gained";
+  public static final String TASK_HISTORY__CASH_GAINED = "cash_gained";
+  public static final String TASK_HISTORY__OIL_GAINED = "oil_gained";
   public static final String TASK_HISTORY__NUM_REVIVES = "num_revives";
   public static final String TASK_HISTORY__START_TIME = "start_time";
   public static final String TASK_HISTORY__END_TIME = "end_time";
@@ -411,10 +413,13 @@ public class DBConstants {
   public static final String TASK_STAGE_FOR_USER__ID = GENERIC__ID;
   public static final String TASK_STAGE_FOR_USER__TASK_FOR_USER_ID = "task_for_user_id";
   public static final String TASK_STAGE_FOR_USER__STAGE_NUM = "stage_num";
+  //primary key in task stage monster table, if monster id then would be
+  //task stage monster monster id
   public static final String TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID = "task_stage_monster_id";
   public static final String TASK_STAGE_FOR_USER__MONSTER_TYPE = "monster_type";
   public static final String TASK_STAGE_FOR_USER__EXP_GAINED = "exp_gained";
-  public static final String TASK_STAGE_FOR_USER__SILVER_GAINED = "silver_gained";
+  public static final String TASK_STAGE_FOR_USER__CASH_GAINED = "cash_gained";
+  public static final String TASK_STAGE_FOR_USER__OIL_GAINED = "oil_gained";
   public static final String TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_FOR_USER__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
   
@@ -426,7 +431,8 @@ public class DBConstants {
   //not needed since task stage monster now has monster_type
   public static final String TASK_STAGE_HISTORY__MONSTER_TYPE = "monster_type";
   public static final String TASK_STAGE_HISTORY__EXP_GAINED = "exp_gained";
-  public static final String TASK_STAGE_HISTORY__SILVER_GAINED = "silver_gained";
+  public static final String TASK_STAGE_HISTORY__CASH_GAINED = "cash_gained";
+  public static final String TASK_STAGE_HISTORY__OIL_GAINED = "oil_gained";
   public static final String TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED = "monster_piece_dropped";
   public static final String TASK_STAGE_HISTORY__ITEM_ID_DROPPED = "item_id_dropped"; //0 is no item
   

@@ -124,13 +124,16 @@ import com.lvl6.utils.DBConnection;
     int expReward = rs.getInt(i++);
     int minCashDrop = rs.getInt(i++);
     int maxCashDrop = rs.getInt(i++);
+    int minOilDrop = rs.getInt(i++);
+    int maxOilDrop = rs.getInt(i++);
     float puzzlePieceDropRate = rs.getFloat(i++);
     int level = rs.getInt(i++);
     float chanceToAppear = rs.getFloat(i++);
     
-    TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId,
-    		monsterId, monsterType, expReward, minCashDrop, maxCashDrop,
+    TaskStageMonster taskStageMonster = new TaskStageMonster(id, stageId, monsterId,
+    		monsterType, expReward, minCashDrop, maxCashDrop, minOilDrop, maxOilDrop,
     		puzzlePieceDropRate, level, chanceToAppear);
+    
         
     taskStageMonster.setRand(rand);
     return taskStageMonster;

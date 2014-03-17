@@ -391,16 +391,16 @@ public class User implements Serializable {
 	 * used for tasks
 	 *        * user- coins/exp/tasks_completed increase
 	 */
-	public boolean updateRelativeCoinsExpTaskscompleted (
-			int coinChange, int expChange, int tasksCompletedChange,
-			Timestamp clientTime) {
+	public boolean updateRelativeCashOilExpTasksCompleted (int expChange, int cashChange,
+			int oilChange, int tasksCompletedChange, Timestamp clientTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.USER__ID, id);
 
 		Map <String, Object> relativeParams = new HashMap<String, Object>();
 
-		relativeParams.put(DBConstants.USER__CASH, coinChange);
 		relativeParams.put(DBConstants.USER__EXPERIENCE, expChange);
+		relativeParams.put(DBConstants.USER__CASH, cashChange);
+		relativeParams.put(DBConstants.USER__OIL, oilChange);
 		relativeParams.put(DBConstants.USER__TASKS_COMPLETED, tasksCompletedChange);
 
 		Map <String, Object> absoluteParams = new HashMap<String, Object>();
@@ -411,8 +411,9 @@ public class User implements Serializable {
 		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams, absoluteParams, 
 				conditionParams, "and");
 		if (numUpdated == 1) {
-			this.cash += coinChange;
 			this.experience += expChange;
+			this.cash += cashChange;
+			this.oil += oilChange;
 			this.tasksCompleted += tasksCompletedChange;
 			return true;
 		}

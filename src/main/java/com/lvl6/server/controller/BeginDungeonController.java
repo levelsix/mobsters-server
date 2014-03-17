@@ -19,7 +19,6 @@ import com.lvl6.events.RequestEvent;
 import com.lvl6.events.request.BeginDungeonRequestEvent;
 import com.lvl6.events.response.BeginDungeonResponseEvent;
 import com.lvl6.events.response.UpdateClientUserResponseEvent;
-import com.lvl6.info.Monster;
 import com.lvl6.info.QuestMonsterItem;
 import com.lvl6.info.Task;
 import com.lvl6.info.TaskForUserOngoing;
@@ -206,6 +205,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	int taskId = aTaskForUser.getTaskId();
   	int expGained = aTaskForUser.getExpGained();
   	int cashGained = aTaskForUser.getCashGained();
+  	int oilGained = aTaskForUser.getOilGained();
   	int numRevives = aTaskForUser.getNumRevives();
   	Date aDate = aTaskForUser.getStartDate(); //shouldn't null
   	Timestamp startTime = null;
@@ -221,7 +221,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			"\t (should be 1) numDeleted=" + num);
   	//meh, fogedaboudit 
     num = InsertUtils.get().insertIntoTaskHistory(taskForUserId, userId, taskId,
-    		expGained, cashGained, numRevives, startTime, endTime, userWon, cancelled);
+    		expGained, cashGained, oilGained, numRevives, startTime, endTime, userWon, cancelled);
     log.warn("inserted into task_history. taskForUser=" + aTaskForUser +
   			"\t (should be 1) numInserted=" + num);
   }
@@ -237,6 +237,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	List<String> monsterTypes = new ArrayList<String>();
   	List<Integer> expGained = new ArrayList<Integer>();
   	List<Integer> cashGained = new ArrayList<Integer>();
+  	List<Integer> oilGained = new ArrayList<Integer>();
   	List<Boolean> monsterPieceDropped = new ArrayList<Boolean>();
   	List<Integer> itemIdDropped = new ArrayList<Integer>();
 
@@ -251,6 +252,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		monsterTypes.add(tsfu.getMonsterType());
   		expGained.add(tsfu.getExpGained());
   		cashGained.add(tsfu.getCashGained());
+  		oilGained.add(tsfu.getOilGained());
   		boolean dropped = tsfu.isMonsterPieceDropped();
   		monsterPieceDropped.add(dropped);
   		itemIdDropped.add(tsfu.getItemIdDropped());
@@ -263,7 +265,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   	num = InsertUtils.get().insertIntoTaskStageHistory(userTaskStageId,
   			userTaskId, stageNum, taskStageMonsterIdList, monsterTypes, expGained,
-  			cashGained, monsterPieceDropped, itemIdDropped);
+  			cashGained, oilGained, monsterPieceDropped, itemIdDropped);
   	log.warn("num task stage history rows inserted: num=" + num +
   			"taskStageForUser=" + taskStages);
   }
@@ -274,8 +276,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  List<Integer> questIds, MonsterElement elem, boolean forceEnemyElem) {
 	  
 	  //local vars storing eventual db data (accounting for multiple monsters in stage)
-	  Map<Integer, List<Integer>> stageNumsToSilvers = new HashMap<Integer, List<Integer>>();
-	  Map<Integer, List<Integer>> stageNumsToExps = new HashMap<Integer, List<Integer>>();
+  	Map<Integer, List<Integer>> stageNumsToExps = new HashMap<Integer, List<Integer>>();
+  	Map<Integer, List<Integer>> stageNumsToCash = new HashMap<Integer, List<Integer>>();
+  	Map<Integer, List<Integer>> stageNumsToOil = new HashMap<Integer, List<Integer>>();
 	  Map<Integer, List<Boolean>> stageNumsToPuzzlePiecesDropped = new HashMap<Integer, List<Boolean>>();
 	  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters = new HashMap<Integer, List<TaskStageMonster>>();
 	  Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId = 
@@ -283,15 +286,15 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
 	  //calculate the SINGLE monster the user fights in each stage
 	  Map<Integer, TaskStageProto> stageNumsToProtosTemp = generateStage(questIds,
-			  tsMap, stageNumsToSilvers, stageNumsToExps, stageNumsToPuzzlePiecesDropped,
-			  stageNumsToTaskStageMonsters, stageNumsToTsmIdToItemId,
-			  elem, forceEnemyElem);
+			  tsMap, stageNumsToExps, stageNumsToCash, stageNumsToOil,
+			  stageNumsToPuzzlePiecesDropped, stageNumsToTaskStageMonsters,
+			  stageNumsToTsmIdToItemId, elem, forceEnemyElem);
 	  
 	  //calculate the exp that the user could gain for this task
 	  int expGained = MiscMethods.sumListsInMap(stageNumsToExps);
 	  //calculate the cash that the user could gain for this task
-	  int cashGained = MiscMethods.sumListsInMap(stageNumsToSilvers);
-	  
+	  int cashGained = MiscMethods.sumListsInMap(stageNumsToCash);
+	  int oilGained = MiscMethods.sumListsInMap(stageNumsToOil);
 	  //don't know why this is used
 //	  if (!u.updateRelativeCoinsExpTaskscompleted(0, 0, 0, clientTime)) {
 //		  log.error("problem with updating user stats post-task. cashGained="
@@ -302,10 +305,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	  //record into user_task table	  
 	  long userTaskId = InsertUtils.get().insertIntoUserTaskReturnId(uId, tId,
-			  expGained, cashGained, clientTime);
+			  expGained, cashGained, oilGained, clientTime);
 	  
 	  //record into user_task stage table
-	  recordStages(userTaskId, stageNumsToSilvers, stageNumsToExps,
+	  recordStages(userTaskId, stageNumsToExps, stageNumsToCash, stageNumsToOil,
 	  		stageNumsToPuzzlePiecesDropped, stageNumsToTaskStageMonsters,
 	  		stageNumsToTsmIdToItemId);
 	  
@@ -346,9 +349,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   //2) create MonsterProto
   //3) create TaskStageProto with the MonsterProto
   private Map<Integer, TaskStageProto> generateStage(List<Integer> questIds,
-  		Map<Integer, TaskStage> tsMap, Map<Integer, List<Integer>> stageNumsToSilvers,
-  		Map<Integer, List<Integer>> stageNumsToExps,
-		  Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
+  		Map<Integer, TaskStage> tsMap, Map<Integer, List<Integer>> stageNumsToExps,
+  		Map<Integer, List<Integer>> stageNumsToCash,
+  		Map<Integer, List<Integer>> stageNumsToOil,
+  		Map<Integer, List<Boolean>> stageNumsToPuzzlePieceDropped,
 		  Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
 		  Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId,
 		  MonsterElement elem, boolean forceEnemyElem) {
@@ -392,24 +396,26 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 		  		tsmIdToItemId);
 		  
 		  List<Integer> individualExps = calculateExpGained(spawnedTaskStageMonsters);
-		  List<Integer> individualSilvers =  calculateSilverGained(spawnedTaskStageMonsters);
-		  
+		  List<Integer> individualCash = calculateCashGained(spawnedTaskStageMonsters);
+		  List<Integer> individualOil = calculateOilGained(spawnedTaskStageMonsters);
 		  
 		  //create the proto
 		  TaskStageProto tsp = CreateInfoProtoUtils.createTaskStageProto(tsId,
-				  ts, spawnedTaskStageMonsters, puzzlePiecesDropped, individualSilvers,
-				  tsmIdToItemId);
+				  ts, spawnedTaskStageMonsters, puzzlePiecesDropped, individualCash,
+				  individualOil, tsmIdToItemId);
 		  
 		  log.info("task stage proto=" + tsp); 
 		  log.info("after tsp taskStageMonsterIdToItemId=" + tsmIdToItemId);
-		  
+		  log.info("exp, cash, oil. exp=" + individualExps + "\t cash=" + individualCash +
+		  		"\t oil=" + individualOil);
 		  //NOTE, all the sizes are equal:
 		  //individualSilvers.size() == individualExps.size() == puzzlePiecesDropped.size()
 		  // == spawnedTaskStageMonsters.size()
 		  //update the protos to return to parent function
 		  stageNumsToProtos.put(stageNum, tsp);
-		  stageNumsToSilvers.put(stageNum, individualSilvers);
 		  stageNumsToExps.put(stageNum, individualExps);
+		  stageNumsToCash.put(stageNum, individualCash);
+		  stageNumsToOil.put(stageNum, individualOil);
 		  stageNumsToPuzzlePieceDropped.put(stageNum, puzzlePiecesDropped);
 		  stageNumsToTaskStageMonsters.put(stageNum, spawnedTaskStageMonsters);
 		  stageNumsToTsmIdToItemId.put(stageNum, tsmIdToItemId);
@@ -577,23 +583,34 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  return individualExps;
   }
   
-  private List<Integer> calculateSilverGained(List<TaskStageMonster> taskStageMonsters) {
+  private List<Integer> calculateCashGained(List<TaskStageMonster> taskStageMonsters) {
   	
-  	List<Integer> individualSilvers = new ArrayList<Integer>();
+  	List<Integer> individualCash = new ArrayList<Integer>();
   	
 	  for (TaskStageMonster tsm : taskStageMonsters) {
 		  int cashDrop = tsm.getCashDrop(); 
-		  individualSilvers.add(cashDrop);
+		  individualCash.add(cashDrop);
 	  }
-	  return individualSilvers;
+	  return individualCash;
   }
   
-  private void recordStages(long userTaskId, Map<Integer, List<Integer>> stageNumsToSilvers,
-  		Map<Integer, List<Integer>> stageNumsToExps,
+  private List<Integer> calculateOilGained(List<TaskStageMonster> taskStageMonsters) {
+  	List<Integer> individualOil = new ArrayList<Integer>();
+  	
+  	for (TaskStageMonster tsm : taskStageMonsters) {
+  		int oilDrop = tsm.getOilDrop();
+  		individualOil.add(oilDrop);
+  	}
+  	return individualOil;
+  }
+
+  private void recordStages(long userTaskId, Map<Integer, List<Integer>> stageNumsToExps,
+  		Map<Integer, List<Integer>> stageNumsToCash,
+  		Map<Integer, List<Integer>> stageNumsToOil,
   		Map<Integer, List<Boolean>> stageNumsToPuzzlePiecesDropped,
   		Map<Integer, List<TaskStageMonster>> stageNumsToTaskStageMonsters,
   		Map<Integer, Map<Integer, Integer>> stageNumsToTsmIdToItemId) {
-  	
+
   	Set<Integer> stageNums = stageNumsToExps.keySet();
 	  List<Integer> stageNumList = new ArrayList<Integer>(stageNums);
 	  Collections.sort(stageNumList);
@@ -611,7 +628,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	int stageNum = stageNumList.get(i);
 	  	List<TaskStageMonster> taskStageMonsters = stageNumsToTaskStageMonsters.get(stageNum);
 	  	List<Integer> expsGained = stageNumsToExps.get(stageNum);
-	  	List<Integer> cashGained = stageNumsToSilvers.get(stageNum);
+	  	List<Integer> cashGained = stageNumsToCash.get(stageNum);
+	  	List<Integer> oilGained = stageNumsToOil.get(stageNum);
 	  	List<Boolean> monsterPiecesDropped = stageNumsToPuzzlePiecesDropped.get(stageNum);
 	  	Map<Integer, Integer> tsmIdToItemId = stageNumsToTsmIdToItemId.get(stageNum);
 	  	
@@ -619,16 +637,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  	List<Long> userTaskIds = Collections.nCopies(numStageRows, userTaskId);
 	  	List<Integer> repeatedStageNum = Collections.nCopies(numStageRows, stageNum);
 	  	
-	  	List<Integer> taskStageMonsterIds = new ArrayList<Integer>();
+	  	List<Integer> tsmIds = new ArrayList<Integer>();
 	  	List<String> monsterTypes = new ArrayList<String>();
 	  	for (TaskStageMonster tsm : taskStageMonsters) {
-        taskStageMonsterIds.add(tsm.getId());
+        tsmIds.add(tsm.getId());
         monsterTypes.add(tsm.getMonsterType().name());
       }
 	  	
-	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds,
-	  			repeatedStageNum, taskStageMonsterIds, monsterTypes, expsGained,
-	  			cashGained, monsterPiecesDropped, tsmIdToItemId);
+	  	int num = InsertUtils.get().insertIntoUserTaskStage(userTaskIds, repeatedStageNum,
+	  			tsmIds, monsterTypes, expsGained, cashGained, oilGained, monsterPiecesDropped,
+	  			tsmIdToItemId);
 	  	log.info("for stageNum=" + stageNum + ", inserted " + num + " rows.");
 	  }
   }

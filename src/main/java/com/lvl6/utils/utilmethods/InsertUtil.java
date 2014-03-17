@@ -108,10 +108,10 @@ public interface InsertUtil {
 			List<Date> timeOfPosts);
 
 	public abstract long insertIntoUserTaskReturnId(int userId, int taskId, 
-			int expGained, int silverGained, Timestamp startTime); 
+			int expGained, int cashGained, int oilGained, Timestamp startTime); 
 
 	public abstract int insertIntoTaskHistory(long userTaskId, int userId,
-			int taskId, int expGained, int silverGained, int numRevives,
+			int taskId, int expGained, int cashGained, int oilGained,int numRevives,
 			Timestamp startTime, Timestamp endTime, boolean userWon, boolean cancelled);
 	
 	public abstract int insertIntoTaskForUserCompleted(int userId, int task,
@@ -122,13 +122,14 @@ public interface InsertUtil {
 	
 	public abstract int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
 			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
-			List<Integer> silversGained, List<Boolean> monsterPiecesDropped,
+			List<Integer> cashGained, List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
 			Map<Integer, Integer> taskStageMonsterIdToItemId);
 	
 	public abstract int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
-			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> monsterIds,
-			List<String> monsterTypes, List<Integer> expsGained, List<Integer> silversGained,
-			List<Boolean> monsterPiecesDropped, List<Integer> itemIdDropped);
+			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
+			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
+			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
+			List<Integer> itemIdDropped);
 	
 	public abstract List<Long> insertIntoMonsterForUserReturnIds(int userId,
 			List<MonsterForUser> userMonsters, String sourceOfPieces, Date combineStartDate);

@@ -40,6 +40,7 @@ message TaskStageMonsterProto {
 	optional MonsterType monsterType = 2;
 	optional int32 expReward = 3;
 	optional int32 cashReward = 4;
+	optional int32 oilReward = 8;
 	optional bool puzzlePieceDropped = 5;
 	optional int32 level = 6;
 	
@@ -49,6 +50,7 @@ message TaskStageMonsterProto {
     //Either puzzlePieceDropped is true, or this is set to a valid number.
     optional int32 itemId = 7;
 	
+	//optional int32 oilReward = 8; //defined above
 	enum MonsterType {
 		REGULAR = 1;
 		MINI_BOSS = 2;

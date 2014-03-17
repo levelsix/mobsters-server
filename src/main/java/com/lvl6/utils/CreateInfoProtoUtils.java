@@ -1212,7 +1212,8 @@ public class CreateInfoProtoUtils {
   //individualSilvers should always be set, since silver dropped is within a range
   public static TaskStageProto createTaskStageProto (int taskStageId, TaskStage ts,
       List<TaskStageMonster> taskStageMonsters, List<Boolean> puzzlePiecesDropped,
-      List<Integer> individualSilvers, Map<Integer, Integer> tsmIdToItemId) {
+      List<Integer> individualCash, List<Integer> individualOil,
+      Map<Integer, Integer> tsmIdToItemId) {
 
     TaskStageProto.Builder tspb = TaskStageProto.newBuilder();
     if (null == ts) {
@@ -1228,9 +1229,10 @@ public class CreateInfoProtoUtils {
       TaskStageMonster tsm = taskStageMonsters.get(i);
 
       boolean puzzlePieceDropped = puzzlePiecesDropped.get(i);
-      int silverDrop = individualSilvers.get(i);
+      int cashDrop = individualCash.get(i);
+      int oilDrop = individualOil.get(i);
 
-      TaskStageMonsterProto mp = createTaskStageMonsterProto(tsm, silverDrop,
+      TaskStageMonsterProto mp = createTaskStageMonsterProto(tsm, cashDrop, oilDrop,
           puzzlePieceDropped, tsmIdToItemId);
       mpList.add(mp);
     }
@@ -1241,13 +1243,15 @@ public class CreateInfoProtoUtils {
   }
 
   public static TaskStageMonsterProto createTaskStageMonsterProto (TaskStageMonster tsm, 
-      int cashReward, boolean pieceDropped, Map<Integer, Integer> tsmIdToItemId) {
+      int cashReward, int oilReward, boolean pieceDropped,
+      Map<Integer, Integer> tsmIdToItemId) {
     int tsmMonsterId = tsm.getMonsterId();
 
     TaskStageMonsterProto.Builder bldr = TaskStageMonsterProto.newBuilder();
     bldr.setMonsterId(tsmMonsterId);
     bldr.setMonsterType(tsm.getMonsterType());
     bldr.setCashReward(cashReward);
+    bldr.setOilReward(oilReward);
     bldr.setPuzzlePieceDropped(pieceDropped);
     bldr.setExpReward(tsm.getExpReward());
     bldr.setLevel(tsm.getLevel());

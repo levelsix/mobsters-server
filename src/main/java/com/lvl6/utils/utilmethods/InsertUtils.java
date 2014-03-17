@@ -718,7 +718,7 @@ public class InsertUtils implements InsertUtil{
   
   //returns the id
   public long insertIntoUserTaskReturnId(int userId, int taskId, int expGained,
-  		int silverGained, Timestamp startTime) {
+  		int cashGained, int oilGained, Timestamp startTime) {
 	  List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
 	  
 	  //for recording what-dropped in which-stage
@@ -726,7 +726,8 @@ public class InsertUtils implements InsertUtil{
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__USER_ID, userId);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__TASK_ID, taskId);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__EXP_GAINED, expGained);
-	  row.put(DBConstants.TASK_FOR_USER_ONGOING__SILVER_GAINED, silverGained);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__CASH_GAINED, cashGained);
+	  row.put(DBConstants.TASK_FOR_USER_ONGOING__OIL_GAINED, oilGained);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__NUM_REVIVES, 0);
 	  row.put(DBConstants.TASK_FOR_USER_ONGOING__START_TIME, startTime);
 	  newRows.add(row);
@@ -741,8 +742,9 @@ public class InsertUtils implements InsertUtil{
 	  return userTaskId;
   }
   
+  @Override
   public int insertIntoTaskHistory(long userTaskId, int userId, int taskId,
-		  int expGained, int silverGained, int numRevives, Timestamp startTime,
+		  int expGained, int cashGained, int oilGained, int numRevives, Timestamp startTime,
 		  Timestamp endTime, boolean userWon, boolean cancelled) {
 	  Map<String, Object> insertParams = new HashMap<String, Object>();
 	  
@@ -750,7 +752,8 @@ public class InsertUtils implements InsertUtil{
 	  insertParams.put(DBConstants.TASK_HISTORY__USER_ID, userId);
 	  insertParams.put(DBConstants.TASK_HISTORY__TASK_ID, taskId);
 	  insertParams.put(DBConstants.TASK_HISTORY__EXP_GAINED, expGained);
-	  insertParams.put(DBConstants.TASK_HISTORY__SILVER_GAINED, silverGained);
+	  insertParams.put(DBConstants.TASK_HISTORY__CASH_GAINED, cashGained);
+	  insertParams.put(DBConstants.TASK_HISTORY__OIL_GAINED, oilGained);
 	  insertParams.put(DBConstants.TASK_HISTORY__NUM_REVIVES, numRevives);
 	  insertParams.put(DBConstants.TASK_HISTORY__START_TIME, startTime);
 	  insertParams.put(DBConstants.TASK_HISTORY__END_TIME, endTime);
@@ -798,13 +801,13 @@ public class InsertUtils implements InsertUtil{
 
 	@Override
 	public int insertIntoUserTaskStage(List<Long> userTaskIds, List<Integer> stageNums,
-			List<Integer> taskStageMonsterIds, List<String> monsterTypes, List<Integer> expsGained,
-			List<Integer> silversGained, List<Boolean> monsterPiecesDropped,
+			List<Integer> tsmIds, List<String> monsterTypes, List<Integer> expsGained,
+			List<Integer> cashGained, List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
 			Map<Integer, Integer> tsmIdToItemId) {
 		//even if a taskStageMonsterId has multiple items, just choose the first one
 		List<Integer> itemIds = new ArrayList<Integer>();
 		
-		for (Integer tsmId : taskStageMonsterIds) {
+		for (Integer tsmId : tsmIds) {
 			
 			if (!tsmIdToItemId.containsKey(tsmId)) {
 				//0 in db means no item dropped
@@ -827,10 +830,11 @@ public class InsertUtils implements InsertUtil{
 
 		insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_FOR_USER_ID, userTaskIds);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__STAGE_NUM, stageNums);
-    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, taskStageMonsterIds);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__TASK_STAGE_MONSTER_ID, tsmIds);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_TYPE, monsterTypes);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__EXP_GAINED, expsGained);
-    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__SILVER_GAINED, silversGained);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__CASH_GAINED, cashGained);
+    insertParams.put(DBConstants.TASK_STAGE_FOR_USER__OIL_GAINED, oilGained);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
     insertParams.put(DBConstants.TASK_STAGE_FOR_USER__ITEM_ID_DROPPED, itemIds);
     
@@ -844,9 +848,10 @@ public class InsertUtils implements InsertUtil{
 
 	@Override
 	public int insertIntoTaskStageHistory(List<Long> userTaskStageIds,
-			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> taskStageMonsterIds,
-			List<String> monsterTypes, List<Integer> expsGained, List<Integer> silversGained,
-			List<Boolean> monsterPiecesDropped, List<Integer> itemIdDropped) {
+			List<Long> userTaskIds, List<Integer> stageNums, List<Integer> tsmIds,
+			List<String> monsterTypes, List<Integer> expsGained, List<Integer> cashGained,
+			List<Integer> oilGained, List<Boolean> monsterPiecesDropped,
+			List<Integer> itemIdDropped) {
 		String tablename = DBConstants.TABLE_TASK_STAGE_HISTORY;
 		int numRows = stageNums.size();
 		
@@ -854,10 +859,11 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__ID, userTaskStageIds);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_FOR_USER_ID, userTaskIds);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__STAGE_NUM, stageNums);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, taskStageMonsterIds);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__TASK_STAGE_MONSTER_ID, tsmIds);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_TYPE, monsterTypes);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__EXP_GAINED, expsGained);
-    insertParams.put(DBConstants.TASK_STAGE_HISTORY__SILVER_GAINED, silversGained);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__CASH_GAINED, cashGained);
+    insertParams.put(DBConstants.TASK_STAGE_HISTORY__OIL_GAINED, oilGained);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__MONSTER_PIECE_DROPPED, monsterPiecesDropped);
     insertParams.put(DBConstants.TASK_STAGE_HISTORY__ITEM_ID_DROPPED, itemIdDropped);
     
