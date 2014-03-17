@@ -115,9 +115,8 @@ import com.lvl6.utils.DBConnection;
     int id = rs.getInt(i++);
     int taskId = rs.getInt(i++);
     int stageNum = rs.getInt(i++);
-    float equipDropRate = rs.getFloat(i++);
     
-    TaskStage taskStage = new TaskStage(id, taskId, stageNum, equipDropRate);
+    TaskStage taskStage = new TaskStage(id, taskId, stageNum);
         
     return taskStage;
   }
