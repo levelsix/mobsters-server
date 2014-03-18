@@ -215,6 +215,16 @@ public final class StaticDataStuffProto {
         getItemsOrBuilderList();
     com.lvl6.proto.QuestProto.ItemProtoOrBuilder getItemsOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.ObstacleProto obstacles = 23;
+    java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> 
+        getObstaclesList();
+    com.lvl6.proto.StructureProto.ObstacleProto getObstacles(int index);
+    int getObstaclesCount();
+    java.util.List<? extends com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> 
+        getObstaclesOrBuilderList();
+    com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder getObstaclesOrBuilder(
+        int index);
   }
   public static final class StaticDataProto extends
       com.google.protobuf.GeneratedMessage
@@ -678,6 +688,27 @@ public final class StaticDataStuffProto {
       return items_.get(index);
     }
     
+    // repeated .com.lvl6.proto.ObstacleProto obstacles = 23;
+    public static final int OBSTACLES_FIELD_NUMBER = 23;
+    private java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> obstacles_;
+    public java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> getObstaclesList() {
+      return obstacles_;
+    }
+    public java.util.List<? extends com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> 
+        getObstaclesOrBuilderList() {
+      return obstacles_;
+    }
+    public int getObstaclesCount() {
+      return obstacles_.size();
+    }
+    public com.lvl6.proto.StructureProto.ObstacleProto getObstacles(int index) {
+      return obstacles_.get(index);
+    }
+    public com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder getObstaclesOrBuilder(
+        int index) {
+      return obstacles_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -700,6 +731,7 @@ public final class StaticDataStuffProto {
       raids_ = java.util.Collections.emptyList();
       persistentClanEvents_ = java.util.Collections.emptyList();
       items_ = java.util.Collections.emptyList();
+      obstacles_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -775,6 +807,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < items_.size(); i++) {
         output.writeMessage(22, items_.get(i));
+      }
+      for (int i = 0; i < obstacles_.size(); i++) {
+        output.writeMessage(23, obstacles_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -868,6 +903,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < items_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(22, items_.get(i));
+      }
+      for (int i = 0; i < obstacles_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(23, obstacles_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1006,6 +1045,7 @@ public final class StaticDataStuffProto {
           getRaidsFieldBuilder();
           getPersistentClanEventsFieldBuilder();
           getItemsFieldBuilder();
+          getObstaclesFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1139,6 +1179,12 @@ public final class StaticDataStuffProto {
           bitField0_ = (bitField0_ & ~0x00100000);
         } else {
           itemsBuilder_.clear();
+        }
+        if (obstaclesBuilder_ == null) {
+          obstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00200000);
+        } else {
+          obstaclesBuilder_.clear();
         }
         return this;
       }
@@ -1365,6 +1411,15 @@ public final class StaticDataStuffProto {
           result.items_ = items_;
         } else {
           result.items_ = itemsBuilder_.build();
+        }
+        if (obstaclesBuilder_ == null) {
+          if (((bitField0_ & 0x00200000) == 0x00200000)) {
+            obstacles_ = java.util.Collections.unmodifiableList(obstacles_);
+            bitField0_ = (bitField0_ & ~0x00200000);
+          }
+          result.obstacles_ = obstacles_;
+        } else {
+          result.obstacles_ = obstaclesBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1905,6 +1960,32 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (obstaclesBuilder_ == null) {
+          if (!other.obstacles_.isEmpty()) {
+            if (obstacles_.isEmpty()) {
+              obstacles_ = other.obstacles_;
+              bitField0_ = (bitField0_ & ~0x00200000);
+            } else {
+              ensureObstaclesIsMutable();
+              obstacles_.addAll(other.obstacles_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.obstacles_.isEmpty()) {
+            if (obstaclesBuilder_.isEmpty()) {
+              obstaclesBuilder_.dispose();
+              obstaclesBuilder_ = null;
+              obstacles_ = other.obstacles_;
+              bitField0_ = (bitField0_ & ~0x00200000);
+              obstaclesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getObstaclesFieldBuilder() : null;
+            } else {
+              obstaclesBuilder_.addAllMessages(other.obstacles_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -2063,6 +2144,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.QuestProto.ItemProto.Builder subBuilder = com.lvl6.proto.QuestProto.ItemProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addItems(subBuilder.buildPartial());
+              break;
+            }
+            case 186: {
+              com.lvl6.proto.StructureProto.ObstacleProto.Builder subBuilder = com.lvl6.proto.StructureProto.ObstacleProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addObstacles(subBuilder.buildPartial());
               break;
             }
           }
@@ -5881,6 +5968,192 @@ public final class StaticDataStuffProto {
         return itemsBuilder_;
       }
       
+      // repeated .com.lvl6.proto.ObstacleProto obstacles = 23;
+      private java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> obstacles_ =
+        java.util.Collections.emptyList();
+      private void ensureObstaclesIsMutable() {
+        if (!((bitField0_ & 0x00200000) == 0x00200000)) {
+          obstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.ObstacleProto>(obstacles_);
+          bitField0_ |= 0x00200000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.ObstacleProto, com.lvl6.proto.StructureProto.ObstacleProto.Builder, com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> obstaclesBuilder_;
+      
+      public java.util.List<com.lvl6.proto.StructureProto.ObstacleProto> getObstaclesList() {
+        if (obstaclesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(obstacles_);
+        } else {
+          return obstaclesBuilder_.getMessageList();
+        }
+      }
+      public int getObstaclesCount() {
+        if (obstaclesBuilder_ == null) {
+          return obstacles_.size();
+        } else {
+          return obstaclesBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.StructureProto.ObstacleProto getObstacles(int index) {
+        if (obstaclesBuilder_ == null) {
+          return obstacles_.get(index);
+        } else {
+          return obstaclesBuilder_.getMessage(index);
+        }
+      }
+      public Builder setObstacles(
+          int index, com.lvl6.proto.StructureProto.ObstacleProto value) {
+        if (obstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureObstaclesIsMutable();
+          obstacles_.set(index, value);
+          onChanged();
+        } else {
+          obstaclesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setObstacles(
+          int index, com.lvl6.proto.StructureProto.ObstacleProto.Builder builderForValue) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          obstacles_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          obstaclesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addObstacles(com.lvl6.proto.StructureProto.ObstacleProto value) {
+        if (obstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureObstaclesIsMutable();
+          obstacles_.add(value);
+          onChanged();
+        } else {
+          obstaclesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addObstacles(
+          int index, com.lvl6.proto.StructureProto.ObstacleProto value) {
+        if (obstaclesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureObstaclesIsMutable();
+          obstacles_.add(index, value);
+          onChanged();
+        } else {
+          obstaclesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addObstacles(
+          com.lvl6.proto.StructureProto.ObstacleProto.Builder builderForValue) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          obstacles_.add(builderForValue.build());
+          onChanged();
+        } else {
+          obstaclesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addObstacles(
+          int index, com.lvl6.proto.StructureProto.ObstacleProto.Builder builderForValue) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          obstacles_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          obstaclesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllObstacles(
+          java.lang.Iterable<? extends com.lvl6.proto.StructureProto.ObstacleProto> values) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          super.addAll(values, obstacles_);
+          onChanged();
+        } else {
+          obstaclesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearObstacles() {
+        if (obstaclesBuilder_ == null) {
+          obstacles_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00200000);
+          onChanged();
+        } else {
+          obstaclesBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeObstacles(int index) {
+        if (obstaclesBuilder_ == null) {
+          ensureObstaclesIsMutable();
+          obstacles_.remove(index);
+          onChanged();
+        } else {
+          obstaclesBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.ObstacleProto.Builder getObstaclesBuilder(
+          int index) {
+        return getObstaclesFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder getObstaclesOrBuilder(
+          int index) {
+        if (obstaclesBuilder_ == null) {
+          return obstacles_.get(index);  } else {
+          return obstaclesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> 
+           getObstaclesOrBuilderList() {
+        if (obstaclesBuilder_ != null) {
+          return obstaclesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(obstacles_);
+        }
+      }
+      public com.lvl6.proto.StructureProto.ObstacleProto.Builder addObstaclesBuilder() {
+        return getObstaclesFieldBuilder().addBuilder(
+            com.lvl6.proto.StructureProto.ObstacleProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.StructureProto.ObstacleProto.Builder addObstaclesBuilder(
+          int index) {
+        return getObstaclesFieldBuilder().addBuilder(
+            index, com.lvl6.proto.StructureProto.ObstacleProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.StructureProto.ObstacleProto.Builder> 
+           getObstaclesBuilderList() {
+        return getObstaclesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.StructureProto.ObstacleProto, com.lvl6.proto.StructureProto.ObstacleProto.Builder, com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder> 
+          getObstaclesFieldBuilder() {
+        if (obstaclesBuilder_ == null) {
+          obstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.StructureProto.ObstacleProto, com.lvl6.proto.StructureProto.ObstacleProto.Builder, com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder>(
+                  obstacles_,
+                  ((bitField0_ & 0x00200000) == 0x00200000),
+                  getParentForChildren(),
+                  isClean());
+          obstacles_ = null;
+        }
+        return obstaclesBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
     
@@ -5909,7 +6182,7 @@ public final class StaticDataStuffProto {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Boos" +
       "terPackStuff.proto\032\nCity.proto\032\nClan.pro" +
       "to\032\022MonsterStuff.proto\032\013Quest.proto\032\017Str" +
-      "ucture.proto\032\nTask.proto\032\nUser.proto\"\226\t\n" +
+      "ucture.proto\032\nTask.proto\032\nUser.proto\"\310\t\n" +
       "\017StaticDataProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
       "vl6.proto.MinimumUserProto\022>\n\016expansionC" +
       "osts\030\002 \003(\0132&.com.lvl6.proto.CityExpansio" +
@@ -5939,7 +6212,9 @@ public final class StaticDataStuffProto {
       "proto.ClanRaidProto\022F\n\024persistentClanEve" +
       "nts\030\025 \003(\0132(.com.lvl6.proto.PersistentCla" +
       "nEventProto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.pr" +
-      "oto.ItemProtoB\026B\024StaticDataStuffProto"
+      "oto.ItemProto\0220\n\tobstacles\030\027 \003(\0132\035.com.l" +
+      "vl6.proto.ObstacleProtoB\026B\024StaticDataStu" +
+      "ffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -5951,7 +6226,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;

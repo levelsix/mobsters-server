@@ -176,3 +176,19 @@ message TutorialStructProto {
 	optional CoordinateProto coordinate = 2;
 }
 
+//------------------------------------------------------------------------------------------
+//same as CoC's gem generators
+message ObstacleProto {
+	optional int32 obstacleId = 1;
+	optional string name = 2;
+	optional ResourceType removalCostType = 3; //costs cash, oil, or other to remove
+	optional int32 cost = 4;
+	optional int32 secondsToRemove = 5;
+	optional int32 width = 6;
+	optional int32 height = 7;
+	optional string imgName = 8;
+	optional float imgVerticalPixelOffset = 9;
+	optional string description = 10;
+	optional float chanceToAppear = 11;
+}
+

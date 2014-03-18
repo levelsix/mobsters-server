@@ -46,6 +46,7 @@ import com.lvl6.info.MonsterForPvp;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.info.Obstacle;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
@@ -121,6 +122,7 @@ import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
+import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
@@ -1916,6 +1918,44 @@ public class CreateInfoProtoUtils {
   	}
   	
   	return ipb.build();
+  }
+  
+  public static ObstacleProto createObstacleProtoFromObstacle(Obstacle o) {
+  	ObstacleProto.Builder ob = ObstacleProto.newBuilder();
+  	
+  	ob.setObstacleId(o.getId());
+  	String aStr = o.getName();
+  	if (null != aStr) {
+  		ob.setName(aStr);
+  	}
+  	
+  	aStr = o.getRemovalCostType();
+  	try {
+  		ResourceType rt = ResourceType.valueOf(aStr);
+  		ob.setRemovalCostType(rt);
+  	} catch (Exception e) {
+  		log.info("incorrect resource type name in db. name=" + aStr, e);
+  	}
+  	
+  	ob.setCost(o.getCost());
+  	ob.setSecondsToRemove(o.getSecondsToRemove());
+  	ob.setWidth(o.getWidth());
+  	ob.setHeight(o.getHeight());
+  	
+  	aStr = o.getImgName();
+  	if (null != aStr) {
+  		ob.setImgName(aStr);
+  	}
+  	
+  	ob.setImgVerticalPixelOffset(o.getImgVerticalPixelOffset());
+  	
+  	aStr = o.getDescription();
+  	if (null != aStr) {
+  		ob.setDescription(aStr);
+  	}
+  	ob.setChanceToAppear(o.getChanceToAppear());
+  	
+  	return ob.build();
   }
 
 }

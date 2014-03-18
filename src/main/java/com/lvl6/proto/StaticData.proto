@@ -48,5 +48,6 @@ message StaticDataProto {
 	repeated ClanRaidProto raids = 20;
 	repeated PersistentClanEventProto persistentClanEvents = 21;
 	repeated ItemProto items = 22;
+	repeated ObstacleProto obstacles = 23; //might generate gems for user upon removal
 }
 	

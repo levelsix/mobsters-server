@@ -7327,6 +7327,1034 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.TutorialStructProto)
   }
   
+  public interface ObstacleProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 obstacleId = 1;
+    boolean hasObstacleId();
+    int getObstacleId();
+    
+    // optional string name = 2;
+    boolean hasName();
+    String getName();
+    
+    // optional .com.lvl6.proto.ResourceType removalCostType = 3;
+    boolean hasRemovalCostType();
+    com.lvl6.proto.StructureProto.ResourceType getRemovalCostType();
+    
+    // optional int32 cost = 4;
+    boolean hasCost();
+    int getCost();
+    
+    // optional int32 secondsToRemove = 5;
+    boolean hasSecondsToRemove();
+    int getSecondsToRemove();
+    
+    // optional int32 width = 6;
+    boolean hasWidth();
+    int getWidth();
+    
+    // optional int32 height = 7;
+    boolean hasHeight();
+    int getHeight();
+    
+    // optional string imgName = 8;
+    boolean hasImgName();
+    String getImgName();
+    
+    // optional float imgVerticalPixelOffset = 9;
+    boolean hasImgVerticalPixelOffset();
+    float getImgVerticalPixelOffset();
+    
+    // optional string description = 10;
+    boolean hasDescription();
+    String getDescription();
+    
+    // optional float chanceToAppear = 11;
+    boolean hasChanceToAppear();
+    float getChanceToAppear();
+  }
+  public static final class ObstacleProto extends
+      com.google.protobuf.GeneratedMessage
+      implements ObstacleProtoOrBuilder {
+    // Use ObstacleProto.newBuilder() to construct.
+    private ObstacleProto(Builder builder) {
+      super(builder);
+    }
+    private ObstacleProto(boolean noInit) {}
+    
+    private static final ObstacleProto defaultInstance;
+    public static ObstacleProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ObstacleProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ObstacleProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 obstacleId = 1;
+    public static final int OBSTACLEID_FIELD_NUMBER = 1;
+    private int obstacleId_;
+    public boolean hasObstacleId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getObstacleId() {
+      return obstacleId_;
+    }
+    
+    // optional string name = 2;
+    public static final int NAME_FIELD_NUMBER = 2;
+    private java.lang.Object name_;
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional .com.lvl6.proto.ResourceType removalCostType = 3;
+    public static final int REMOVALCOSTTYPE_FIELD_NUMBER = 3;
+    private com.lvl6.proto.StructureProto.ResourceType removalCostType_;
+    public boolean hasRemovalCostType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public com.lvl6.proto.StructureProto.ResourceType getRemovalCostType() {
+      return removalCostType_;
+    }
+    
+    // optional int32 cost = 4;
+    public static final int COST_FIELD_NUMBER = 4;
+    private int cost_;
+    public boolean hasCost() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public int getCost() {
+      return cost_;
+    }
+    
+    // optional int32 secondsToRemove = 5;
+    public static final int SECONDSTOREMOVE_FIELD_NUMBER = 5;
+    private int secondsToRemove_;
+    public boolean hasSecondsToRemove() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public int getSecondsToRemove() {
+      return secondsToRemove_;
+    }
+    
+    // optional int32 width = 6;
+    public static final int WIDTH_FIELD_NUMBER = 6;
+    private int width_;
+    public boolean hasWidth() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getWidth() {
+      return width_;
+    }
+    
+    // optional int32 height = 7;
+    public static final int HEIGHT_FIELD_NUMBER = 7;
+    private int height_;
+    public boolean hasHeight() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    public int getHeight() {
+      return height_;
+    }
+    
+    // optional string imgName = 8;
+    public static final int IMGNAME_FIELD_NUMBER = 8;
+    private java.lang.Object imgName_;
+    public boolean hasImgName() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    public String getImgName() {
+      java.lang.Object ref = imgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          imgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getImgNameBytes() {
+      java.lang.Object ref = imgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        imgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional float imgVerticalPixelOffset = 9;
+    public static final int IMGVERTICALPIXELOFFSET_FIELD_NUMBER = 9;
+    private float imgVerticalPixelOffset_;
+    public boolean hasImgVerticalPixelOffset() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    public float getImgVerticalPixelOffset() {
+      return imgVerticalPixelOffset_;
+    }
+    
+    // optional string description = 10;
+    public static final int DESCRIPTION_FIELD_NUMBER = 10;
+    private java.lang.Object description_;
+    public boolean hasDescription() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    public String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          description_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional float chanceToAppear = 11;
+    public static final int CHANCETOAPPEAR_FIELD_NUMBER = 11;
+    private float chanceToAppear_;
+    public boolean hasChanceToAppear() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    public float getChanceToAppear() {
+      return chanceToAppear_;
+    }
+    
+    private void initFields() {
+      obstacleId_ = 0;
+      name_ = "";
+      removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      cost_ = 0;
+      secondsToRemove_ = 0;
+      width_ = 0;
+      height_ = 0;
+      imgName_ = "";
+      imgVerticalPixelOffset_ = 0F;
+      description_ = "";
+      chanceToAppear_ = 0F;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, obstacleId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, removalCostType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, cost_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt32(5, secondsToRemove_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, width_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeInt32(7, height_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeBytes(8, getImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeFloat(9, imgVerticalPixelOffset_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeBytes(10, getDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeFloat(11, chanceToAppear_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, obstacleId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, removalCostType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, cost_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, secondsToRemove_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, width_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(7, height_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getImgNameBytes());
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(9, imgVerticalPixelOffset_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getDescriptionBytes());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(11, chanceToAppear_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.ObstacleProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.StructureProto.ObstacleProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ObstacleProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.StructureProto.ObstacleProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        obstacleId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        cost_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        secondsToRemove_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        width_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        height_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        imgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        imgVerticalPixelOffset_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        description_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
+        chanceToAppear_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.StructureProto.ObstacleProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.StructureProto.ObstacleProto getDefaultInstanceForType() {
+        return com.lvl6.proto.StructureProto.ObstacleProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.StructureProto.ObstacleProto build() {
+        com.lvl6.proto.StructureProto.ObstacleProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.StructureProto.ObstacleProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.StructureProto.ObstacleProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.StructureProto.ObstacleProto buildPartial() {
+        com.lvl6.proto.StructureProto.ObstacleProto result = new com.lvl6.proto.StructureProto.ObstacleProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.obstacleId_ = obstacleId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.removalCostType_ = removalCostType_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.cost_ = cost_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.secondsToRemove_ = secondsToRemove_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.width_ = width_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.height_ = height_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.imgName_ = imgName_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.imgVerticalPixelOffset_ = imgVerticalPixelOffset_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        result.description_ = description_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        result.chanceToAppear_ = chanceToAppear_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.StructureProto.ObstacleProto) {
+          return mergeFrom((com.lvl6.proto.StructureProto.ObstacleProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.StructureProto.ObstacleProto other) {
+        if (other == com.lvl6.proto.StructureProto.ObstacleProto.getDefaultInstance()) return this;
+        if (other.hasObstacleId()) {
+          setObstacleId(other.getObstacleId());
+        }
+        if (other.hasName()) {
+          setName(other.getName());
+        }
+        if (other.hasRemovalCostType()) {
+          setRemovalCostType(other.getRemovalCostType());
+        }
+        if (other.hasCost()) {
+          setCost(other.getCost());
+        }
+        if (other.hasSecondsToRemove()) {
+          setSecondsToRemove(other.getSecondsToRemove());
+        }
+        if (other.hasWidth()) {
+          setWidth(other.getWidth());
+        }
+        if (other.hasHeight()) {
+          setHeight(other.getHeight());
+        }
+        if (other.hasImgName()) {
+          setImgName(other.getImgName());
+        }
+        if (other.hasImgVerticalPixelOffset()) {
+          setImgVerticalPixelOffset(other.getImgVerticalPixelOffset());
+        }
+        if (other.hasDescription()) {
+          setDescription(other.getDescription());
+        }
+        if (other.hasChanceToAppear()) {
+          setChanceToAppear(other.getChanceToAppear());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              obstacleId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              name_ = input.readBytes();
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.StructureProto.ResourceType value = com.lvl6.proto.StructureProto.ResourceType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                removalCostType_ = value;
+              }
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              cost_ = input.readInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              secondsToRemove_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              width_ = input.readInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              height_ = input.readInt32();
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000080;
+              imgName_ = input.readBytes();
+              break;
+            }
+            case 77: {
+              bitField0_ |= 0x00000100;
+              imgVerticalPixelOffset_ = input.readFloat();
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000200;
+              description_ = input.readBytes();
+              break;
+            }
+            case 93: {
+              bitField0_ |= 0x00000400;
+              chanceToAppear_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 obstacleId = 1;
+      private int obstacleId_ ;
+      public boolean hasObstacleId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getObstacleId() {
+        return obstacleId_;
+      }
+      public Builder setObstacleId(int value) {
+        bitField0_ |= 0x00000001;
+        obstacleId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearObstacleId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        obstacleId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional string name = 2;
+      private java.lang.Object name_ = "";
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      void setName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+      }
+      
+      // optional .com.lvl6.proto.ResourceType removalCostType = 3;
+      private com.lvl6.proto.StructureProto.ResourceType removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      public boolean hasRemovalCostType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public com.lvl6.proto.StructureProto.ResourceType getRemovalCostType() {
+        return removalCostType_;
+      }
+      public Builder setRemovalCostType(com.lvl6.proto.StructureProto.ResourceType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        removalCostType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRemovalCostType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        removalCostType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 cost = 4;
+      private int cost_ ;
+      public boolean hasCost() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public int getCost() {
+        return cost_;
+      }
+      public Builder setCost(int value) {
+        bitField0_ |= 0x00000008;
+        cost_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCost() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        cost_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 secondsToRemove = 5;
+      private int secondsToRemove_ ;
+      public boolean hasSecondsToRemove() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public int getSecondsToRemove() {
+        return secondsToRemove_;
+      }
+      public Builder setSecondsToRemove(int value) {
+        bitField0_ |= 0x00000010;
+        secondsToRemove_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSecondsToRemove() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        secondsToRemove_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 width = 6;
+      private int width_ ;
+      public boolean hasWidth() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getWidth() {
+        return width_;
+      }
+      public Builder setWidth(int value) {
+        bitField0_ |= 0x00000020;
+        width_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearWidth() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        width_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 height = 7;
+      private int height_ ;
+      public boolean hasHeight() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public int getHeight() {
+        return height_;
+      }
+      public Builder setHeight(int value) {
+        bitField0_ |= 0x00000040;
+        height_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHeight() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        height_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional string imgName = 8;
+      private java.lang.Object imgName_ = "";
+      public boolean hasImgName() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public String getImgName() {
+        java.lang.Object ref = imgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          imgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        imgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearImgName() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        imgName_ = getDefaultInstance().getImgName();
+        onChanged();
+        return this;
+      }
+      void setImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000080;
+        imgName_ = value;
+        onChanged();
+      }
+      
+      // optional float imgVerticalPixelOffset = 9;
+      private float imgVerticalPixelOffset_ ;
+      public boolean hasImgVerticalPixelOffset() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public float getImgVerticalPixelOffset() {
+        return imgVerticalPixelOffset_;
+      }
+      public Builder setImgVerticalPixelOffset(float value) {
+        bitField0_ |= 0x00000100;
+        imgVerticalPixelOffset_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearImgVerticalPixelOffset() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        imgVerticalPixelOffset_ = 0F;
+        onChanged();
+        return this;
+      }
+      
+      // optional string description = 10;
+      private java.lang.Object description_ = "";
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      public String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          description_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setDescription(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearDescription() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      void setDescription(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000200;
+        description_ = value;
+        onChanged();
+      }
+      
+      // optional float chanceToAppear = 11;
+      private float chanceToAppear_ ;
+      public boolean hasChanceToAppear() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      public float getChanceToAppear() {
+        return chanceToAppear_;
+      }
+      public Builder setChanceToAppear(float value) {
+        bitField0_ |= 0x00000400;
+        chanceToAppear_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearChanceToAppear() {
+        bitField0_ = (bitField0_ & ~0x00000400);
+        chanceToAppear_ = 0F;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ObstacleProto)
+    }
+    
+    static {
+      defaultInstance = new ObstacleProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.ObstacleProto)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_StructureInfoProto_descriptor;
   private static
@@ -7377,6 +8405,11 @@ public final class StructureProto {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_TutorialStructProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_ObstacleProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -7439,10 +8472,17 @@ public final class StructureProto {
       " \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030" +
       "\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010structId" +
       "\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.pr" +
-      "oto.CoordinateProto*8\n\014ResourceType\022\010\n\004C" +
-      "ASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*3\n" +
-      "\021StructOrientation\022\016\n\nPOSITION_1\020\001\022\016\n\nPO" +
-      "SITION_2\020\002B\020B\016StructureProto"
+      "oto.CoordinateProto\"\214\002\n\rObstacleProto\022\022\n" +
+      "\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017remov" +
+      "alCostType\030\003 \001(\0162\034.com.lvl6.proto.Resour" +
+      "ceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030" +
+      "\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007" +
+      "imgName\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030" +
+      "\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAp",
+      "pear\030\013 \001(\002*8\n\014ResourceType\022\010\n\004CASH\020\001\022\007\n\003" +
+      "OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*3\n\021StructOr" +
+      "ientation\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020" +
+      "\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7529,6 +8569,14 @@ public final class StructureProto {
               new java.lang.String[] { "StructId", "Coordinate", },
               com.lvl6.proto.StructureProto.TutorialStructProto.class,
               com.lvl6.proto.StructureProto.TutorialStructProto.Builder.class);
+          internal_static_com_lvl6_proto_ObstacleProto_descriptor =
+            getDescriptor().getMessageTypes().get(10);
+          internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_ObstacleProto_descriptor,
+              new java.lang.String[] { "ObstacleId", "Name", "RemovalCostType", "Cost", "SecondsToRemove", "Width", "Height", "ImgName", "ImgVerticalPixelOffset", "Description", "ChanceToAppear", },
+              com.lvl6.proto.StructureProto.ObstacleProto.class,
+              com.lvl6.proto.StructureProto.ObstacleProto.Builder.class);
           return null;
         }
       };

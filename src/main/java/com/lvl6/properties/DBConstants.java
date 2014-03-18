@@ -49,6 +49,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_HEALING_FOR_USER = "monster_healing_for_user";
   public static final String TABLE_MONSTER_HEALING_HISTORY = "monster_healing_history";
   public static final String TABLE_MONSTER_LEVEL_INFO = "monster_level_info";
+  public static final String TABLE_OBSTACLE = "obstacle";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
   public static final String TABLE_QUEST = "quest";

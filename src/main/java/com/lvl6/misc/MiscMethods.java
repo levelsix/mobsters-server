@@ -39,6 +39,7 @@ import com.lvl6.info.Item;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterBattleDialogue;
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.info.Obstacle;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.StaticUserLevelInfo;
@@ -82,6 +83,7 @@ import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
+import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
@@ -112,6 +114,7 @@ import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ProfanityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestMonsterItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
@@ -628,6 +631,7 @@ public class MiscMethods {
     MonsterBattleDialogueRetrieveUtils.reload();
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
+    ObstacleRetrieveUtils.reload();
     ProfanityRetrieveUtils.reload();
     QuestMonsterItemRetrieveUtils.reload();
     QuestRetrieveUtils.reload();
@@ -1317,6 +1321,7 @@ public class MiscMethods {
     setMonsterDialogue(sdpb);
     setClanRaidStuff(sdpb);
     setItemStuff(sdpb);
+    setObstacleStuff(sdpb);
 
     return sdpb.build();
   }
@@ -1615,4 +1620,13 @@ public class MiscMethods {
   	
   }
 
+  private static void setObstacleStuff(Builder sdpb) {
+  	Map<Integer, Obstacle> idsToObstacles = ObstacleRetrieveUtils
+  			.getObstacleIdsToObstacles();
+  	
+  	for (Obstacle o : idsToObstacles.values()) {
+  		ObstacleProto op = CreateInfoProtoUtils.createObstacleProtoFromObstacle(o);
+  		sdpb.addObstacles(op);
+  	}
+  }
 }
