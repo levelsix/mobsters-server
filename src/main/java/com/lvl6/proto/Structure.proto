@@ -192,3 +192,14 @@ message ObstacleProto {
 	optional float chanceToAppear = 11;
 }
 
+message UserObstacleProto {
+	optional int64 userObstacleId = 1;
+	optional int32 userId = 2;
+	optional int32 obstacleId = 3;
+	optional CoordinateProto coordinates = 4;
+	optional StructOrientation orientation = 5;
+	optional int64 removalStartTime = 6;
+}
+
+//------------------------------------------------------------------------------------------
+
