@@ -258,7 +258,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   	log.info("deleting from PvpBattleForUser");
   	//need to delete PvpBattleForUser
   	int numDeleted = DeleteUtils.get().deletePvpBattleForUser(attackerId);
-  	log.info("numInserted (should be 1): " + numDeleted); 
+  	log.info("numDeleted (should be 1): " + numDeleted); 
   			
   	
 	  return true;
