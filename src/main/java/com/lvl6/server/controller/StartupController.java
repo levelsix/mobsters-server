@@ -958,8 +958,13 @@ public class StartupController extends EventController {
   }
   
   private void pvpBattleStuff(User user, int userId, boolean isFreshRestart) {
+  	if (!isFreshRestart) {
+  		log.info("not fresh restart, so not deleting pvp battle stuff");
+  		return;
+  	}
+  	
   	//remove this user from the users available to be attacked in pvp
-  	getHazelcastPvpUtil().removeOfflinePvpUser(userId);
+  	//getHazelcastPvpUtil().removeOfflinePvpUser(userId); //online users can be attacked
   	
   	//if bool isFreshRestart is true, then deduct user's elo by amount specified in
   	//the table (pvp_battle_for_user), since user auto loses
