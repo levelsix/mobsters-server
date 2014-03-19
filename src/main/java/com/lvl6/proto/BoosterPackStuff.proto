@@ -8,6 +8,7 @@ package com.lvl6.proto;
 option java_outer_classname = "BoosterPackStuffProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
+//Not used at the moment
 message RareBoosterPurchaseProto {
 	optional MinimumUserProto user = 1;
 	optional BoosterPackProto booster = 2;

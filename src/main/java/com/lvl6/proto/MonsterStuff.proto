@@ -38,6 +38,10 @@ message MonsterProto {
 	
 	optional AnimationType attackAnimationType = 22;
 	optional int32 verticalPixelOffset = 23;
+	optional string atkSoundFile = 24;
+	optional int32 atkSoundAnimationFrame = 25;
+	optional int32 atkAnimationRepeatedFramesStart = 26;
+	optional int32 atkAnimationRepeatedFramesEnd = 27;
 	
 	enum MonsterQuality {
 		COMMON = 1;
@@ -125,6 +129,7 @@ message UserMonsterHealingProto {
 
 //------------------------------------------------------------------------------------------
 // used in UpdateMonsterHealthRequestProto
+// proto not created by server
 message UserMonsterCurrentHealthProto {
 	optional int64 userMonsterId = 1;
 	optional int32 currentHealth = 2; //what the health should be
@@ -150,6 +155,7 @@ message UserEnhancementItemProto {
 
 //when user enhances a monster, it gains "experience" 
 //(before it was termed enhancement or enhancement percentage)
+//proto not created by server
 message UserMonsterCurrentExpProto {
 	optional int64 userMonsterId = 1;
 	optional int32 expectedExperience = 2;
@@ -157,7 +163,7 @@ message UserMonsterCurrentExpProto {
 }
 
 //------------------------------------------------------------------------------------------
-
+//proto not created by server
 message MinimumUserMonsterSellProto {
 	optional int64 userMonsterId = 1;
 	optional int32 cashAmount = 2;

@@ -108,6 +108,22 @@ public final class MonsterStuffProto {
     // optional int32 verticalPixelOffset = 23;
     boolean hasVerticalPixelOffset();
     int getVerticalPixelOffset();
+    
+    // optional string atkSoundFile = 24;
+    boolean hasAtkSoundFile();
+    String getAtkSoundFile();
+    
+    // optional int32 atkSoundAnimationFrame = 25;
+    boolean hasAtkSoundAnimationFrame();
+    int getAtkSoundAnimationFrame();
+    
+    // optional int32 atkAnimationRepeatedFramesStart = 26;
+    boolean hasAtkAnimationRepeatedFramesStart();
+    int getAtkAnimationRepeatedFramesStart();
+    
+    // optional int32 atkAnimationRepeatedFramesEnd = 27;
+    boolean hasAtkAnimationRepeatedFramesEnd();
+    int getAtkAnimationRepeatedFramesEnd();
   }
   public static final class MonsterProto extends
       com.google.protobuf.GeneratedMessage
@@ -786,6 +802,68 @@ public final class MonsterStuffProto {
       return verticalPixelOffset_;
     }
     
+    // optional string atkSoundFile = 24;
+    public static final int ATKSOUNDFILE_FIELD_NUMBER = 24;
+    private java.lang.Object atkSoundFile_;
+    public boolean hasAtkSoundFile() {
+      return ((bitField0_ & 0x00400000) == 0x00400000);
+    }
+    public String getAtkSoundFile() {
+      java.lang.Object ref = atkSoundFile_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          atkSoundFile_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getAtkSoundFileBytes() {
+      java.lang.Object ref = atkSoundFile_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        atkSoundFile_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional int32 atkSoundAnimationFrame = 25;
+    public static final int ATKSOUNDANIMATIONFRAME_FIELD_NUMBER = 25;
+    private int atkSoundAnimationFrame_;
+    public boolean hasAtkSoundAnimationFrame() {
+      return ((bitField0_ & 0x00800000) == 0x00800000);
+    }
+    public int getAtkSoundAnimationFrame() {
+      return atkSoundAnimationFrame_;
+    }
+    
+    // optional int32 atkAnimationRepeatedFramesStart = 26;
+    public static final int ATKANIMATIONREPEATEDFRAMESSTART_FIELD_NUMBER = 26;
+    private int atkAnimationRepeatedFramesStart_;
+    public boolean hasAtkAnimationRepeatedFramesStart() {
+      return ((bitField0_ & 0x01000000) == 0x01000000);
+    }
+    public int getAtkAnimationRepeatedFramesStart() {
+      return atkAnimationRepeatedFramesStart_;
+    }
+    
+    // optional int32 atkAnimationRepeatedFramesEnd = 27;
+    public static final int ATKANIMATIONREPEATEDFRAMESEND_FIELD_NUMBER = 27;
+    private int atkAnimationRepeatedFramesEnd_;
+    public boolean hasAtkAnimationRepeatedFramesEnd() {
+      return ((bitField0_ & 0x02000000) == 0x02000000);
+    }
+    public int getAtkAnimationRepeatedFramesEnd() {
+      return atkAnimationRepeatedFramesEnd_;
+    }
+    
     private void initFields() {
       monsterId_ = 0;
       name_ = "";
@@ -810,6 +888,10 @@ public final class MonsterStuffProto {
       evolutionCost_ = 0;
       attackAnimationType_ = com.lvl6.proto.MonsterStuffProto.MonsterProto.AnimationType.MELEE;
       verticalPixelOffset_ = 0;
+      atkSoundFile_ = "";
+      atkSoundAnimationFrame_ = 0;
+      atkAnimationRepeatedFramesStart_ = 0;
+      atkAnimationRepeatedFramesEnd_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -891,6 +973,18 @@ public final class MonsterStuffProto {
       }
       if (((bitField0_ & 0x00200000) == 0x00200000)) {
         output.writeInt32(23, verticalPixelOffset_);
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        output.writeBytes(24, getAtkSoundFileBytes());
+      }
+      if (((bitField0_ & 0x00800000) == 0x00800000)) {
+        output.writeInt32(25, atkSoundAnimationFrame_);
+      }
+      if (((bitField0_ & 0x01000000) == 0x01000000)) {
+        output.writeInt32(26, atkAnimationRepeatedFramesStart_);
+      }
+      if (((bitField0_ & 0x02000000) == 0x02000000)) {
+        output.writeInt32(27, atkAnimationRepeatedFramesEnd_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -992,6 +1086,22 @@ public final class MonsterStuffProto {
       if (((bitField0_ & 0x00200000) == 0x00200000)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(23, verticalPixelOffset_);
+      }
+      if (((bitField0_ & 0x00400000) == 0x00400000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(24, getAtkSoundFileBytes());
+      }
+      if (((bitField0_ & 0x00800000) == 0x00800000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(25, atkSoundAnimationFrame_);
+      }
+      if (((bitField0_ & 0x01000000) == 0x01000000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(26, atkAnimationRepeatedFramesStart_);
+      }
+      if (((bitField0_ & 0x02000000) == 0x02000000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(27, atkAnimationRepeatedFramesEnd_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1168,6 +1278,14 @@ public final class MonsterStuffProto {
         bitField0_ = (bitField0_ & ~0x00200000);
         verticalPixelOffset_ = 0;
         bitField0_ = (bitField0_ & ~0x00400000);
+        atkSoundFile_ = "";
+        bitField0_ = (bitField0_ & ~0x00800000);
+        atkSoundAnimationFrame_ = 0;
+        bitField0_ = (bitField0_ & ~0x01000000);
+        atkAnimationRepeatedFramesStart_ = 0;
+        bitField0_ = (bitField0_ & ~0x02000000);
+        atkAnimationRepeatedFramesEnd_ = 0;
+        bitField0_ = (bitField0_ & ~0x04000000);
         return this;
       }
       
@@ -1303,6 +1421,22 @@ public final class MonsterStuffProto {
           to_bitField0_ |= 0x00200000;
         }
         result.verticalPixelOffset_ = verticalPixelOffset_;
+        if (((from_bitField0_ & 0x00800000) == 0x00800000)) {
+          to_bitField0_ |= 0x00400000;
+        }
+        result.atkSoundFile_ = atkSoundFile_;
+        if (((from_bitField0_ & 0x01000000) == 0x01000000)) {
+          to_bitField0_ |= 0x00800000;
+        }
+        result.atkSoundAnimationFrame_ = atkSoundAnimationFrame_;
+        if (((from_bitField0_ & 0x02000000) == 0x02000000)) {
+          to_bitField0_ |= 0x01000000;
+        }
+        result.atkAnimationRepeatedFramesStart_ = atkAnimationRepeatedFramesStart_;
+        if (((from_bitField0_ & 0x04000000) == 0x04000000)) {
+          to_bitField0_ |= 0x02000000;
+        }
+        result.atkAnimationRepeatedFramesEnd_ = atkAnimationRepeatedFramesEnd_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1410,6 +1544,18 @@ public final class MonsterStuffProto {
         }
         if (other.hasVerticalPixelOffset()) {
           setVerticalPixelOffset(other.getVerticalPixelOffset());
+        }
+        if (other.hasAtkSoundFile()) {
+          setAtkSoundFile(other.getAtkSoundFile());
+        }
+        if (other.hasAtkSoundAnimationFrame()) {
+          setAtkSoundAnimationFrame(other.getAtkSoundAnimationFrame());
+        }
+        if (other.hasAtkAnimationRepeatedFramesStart()) {
+          setAtkAnimationRepeatedFramesStart(other.getAtkAnimationRepeatedFramesStart());
+        }
+        if (other.hasAtkAnimationRepeatedFramesEnd()) {
+          setAtkAnimationRepeatedFramesEnd(other.getAtkAnimationRepeatedFramesEnd());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1574,6 +1720,26 @@ public final class MonsterStuffProto {
             case 184: {
               bitField0_ |= 0x00400000;
               verticalPixelOffset_ = input.readInt32();
+              break;
+            }
+            case 194: {
+              bitField0_ |= 0x00800000;
+              atkSoundFile_ = input.readBytes();
+              break;
+            }
+            case 200: {
+              bitField0_ |= 0x01000000;
+              atkSoundAnimationFrame_ = input.readInt32();
+              break;
+            }
+            case 208: {
+              bitField0_ |= 0x02000000;
+              atkAnimationRepeatedFramesStart_ = input.readInt32();
+              break;
+            }
+            case 216: {
+              bitField0_ |= 0x04000000;
+              atkAnimationRepeatedFramesEnd_ = input.readInt32();
               break;
             }
           }
@@ -2355,6 +2521,105 @@ public final class MonsterStuffProto {
       public Builder clearVerticalPixelOffset() {
         bitField0_ = (bitField0_ & ~0x00400000);
         verticalPixelOffset_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional string atkSoundFile = 24;
+      private java.lang.Object atkSoundFile_ = "";
+      public boolean hasAtkSoundFile() {
+        return ((bitField0_ & 0x00800000) == 0x00800000);
+      }
+      public String getAtkSoundFile() {
+        java.lang.Object ref = atkSoundFile_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          atkSoundFile_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setAtkSoundFile(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00800000;
+        atkSoundFile_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAtkSoundFile() {
+        bitField0_ = (bitField0_ & ~0x00800000);
+        atkSoundFile_ = getDefaultInstance().getAtkSoundFile();
+        onChanged();
+        return this;
+      }
+      void setAtkSoundFile(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00800000;
+        atkSoundFile_ = value;
+        onChanged();
+      }
+      
+      // optional int32 atkSoundAnimationFrame = 25;
+      private int atkSoundAnimationFrame_ ;
+      public boolean hasAtkSoundAnimationFrame() {
+        return ((bitField0_ & 0x01000000) == 0x01000000);
+      }
+      public int getAtkSoundAnimationFrame() {
+        return atkSoundAnimationFrame_;
+      }
+      public Builder setAtkSoundAnimationFrame(int value) {
+        bitField0_ |= 0x01000000;
+        atkSoundAnimationFrame_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAtkSoundAnimationFrame() {
+        bitField0_ = (bitField0_ & ~0x01000000);
+        atkSoundAnimationFrame_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 atkAnimationRepeatedFramesStart = 26;
+      private int atkAnimationRepeatedFramesStart_ ;
+      public boolean hasAtkAnimationRepeatedFramesStart() {
+        return ((bitField0_ & 0x02000000) == 0x02000000);
+      }
+      public int getAtkAnimationRepeatedFramesStart() {
+        return atkAnimationRepeatedFramesStart_;
+      }
+      public Builder setAtkAnimationRepeatedFramesStart(int value) {
+        bitField0_ |= 0x02000000;
+        atkAnimationRepeatedFramesStart_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAtkAnimationRepeatedFramesStart() {
+        bitField0_ = (bitField0_ & ~0x02000000);
+        atkAnimationRepeatedFramesStart_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 atkAnimationRepeatedFramesEnd = 27;
+      private int atkAnimationRepeatedFramesEnd_ ;
+      public boolean hasAtkAnimationRepeatedFramesEnd() {
+        return ((bitField0_ & 0x04000000) == 0x04000000);
+      }
+      public int getAtkAnimationRepeatedFramesEnd() {
+        return atkAnimationRepeatedFramesEnd_;
+      }
+      public Builder setAtkAnimationRepeatedFramesEnd(int value) {
+        bitField0_ |= 0x04000000;
+        atkAnimationRepeatedFramesEnd_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAtkAnimationRepeatedFramesEnd() {
+        bitField0_ = (bitField0_ & ~0x04000000);
+        atkAnimationRepeatedFramesEnd_ = 0;
         onChanged();
         return this;
       }
@@ -9347,7 +9612,7 @@ public final class MonsterStuffProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\273\007\n" +
+      "\n\022MonsterStuff.proto\022\016com.lvl6.proto\"\301\010\n" +
       "\014MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\014\n\004name" +
       "\030\002 \001(\t\022\024\n\014monsterGroup\030\003 \001(\t\022<\n\007quality\030" +
       "\004 \001(\0162+.com.lvl6.proto.MonsterProto.Mons" +
@@ -9366,53 +9631,56 @@ public final class MonsterStuffProto {
       "rLevelInfoProto\022\025\n\revolutionCost\030\025 \001(\005\022G" +
       "\n\023attackAnimationType\030\026 \001(\0162*.com.lvl6.p" +
       "roto.MonsterProto.AnimationType\022\033\n\023verti" +
-      "calPixelOffset\030\027 \001(\005\"S\n\016MonsterQuality\022\n",
-      "\n\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005ULTRA\020\003\022\010\n\004EPIC\020" +
-      "\004\022\r\n\tLEGENDARY\020\005\022\007\n\003EVO\020\006\"W\n\016MonsterElem" +
-      "ent\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t\n\005WATER\020\003\022\r\n\tL" +
-      "IGHTNING\020\004\022\014\n\010DARKNESS\020\005\022\010\n\004ROCK\020\006\"&\n\rAn" +
-      "imationType\022\t\n\005MELEE\020\001\022\n\n\006RANGED\020\002\"\336\001\n\025M" +
-      "onsterLevelInfoProto\022\013\n\003lvl\030\001 \001(\005\022\n\n\002hp\030" +
-      "\002 \001(\005\022\031\n\021curLvlRequiredExp\030\003 \001(\005\022\021\n\tfeed" +
-      "erExp\030\004 \001(\005\022\017\n\007fireDmg\030\005 \001(\021\022\020\n\010grassDmg" +
-      "\030\006 \001(\021\022\020\n\010waterDmg\030\007 \001(\021\022\024\n\014lightningDmg" +
-      "\030\010 \001(\021\022\023\n\013darknessDmg\030\t \001(\021\022\017\n\007rockDmg\030\n",
-      " \001(\021\022\r\n\005speed\030\013 \001(\005\"\345\001\n\024FullUserMonsterP" +
-      "roto\022\025\n\ruserMonsterId\030\001 \001(\003\022\016\n\006userId\030\002 " +
-      "\001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\ncurrentExp\030\004 \001" +
-      "(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\rcurrentHealth\030" +
-      "\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022\n\nisComplete\030\010" +
-      " \001(\010\022\030\n\020combineStartTime\030\t \001(\003\022\023\n\013teamSl" +
-      "otNum\030\n \001(\005\"@\n\027MinimumUserMonsterProto\022\021" +
-      "\n\tmonsterId\030\001 \001(\005\022\022\n\nmonsterLvl\030\002 \001(\005\"\204\001" +
-      "\n\027UserMonsterHealingProto\022\016\n\006userId\030\001 \001(" +
-      "\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030\n\020queuedTimeMi",
-      "llis\030\003 \001(\003\022\026\n\016healthProgress\030\005 \001(\002\022\020\n\010pr" +
-      "iority\030\006 \001(\005\"M\n\035UserMonsterCurrentHealth" +
-      "Proto\022\025\n\ruserMonsterId\030\001 \001(\003\022\025\n\rcurrentH" +
-      "ealth\030\002 \001(\005\"\240\001\n\024UserEnhancementProto\022\016\n\006" +
-      "userId\030\001 \001(\005\022=\n\013baseMonster\030\002 \001(\0132(.com." +
-      "lvl6.proto.UserEnhancementItemProto\0229\n\007f" +
-      "eeders\030\003 \003(\0132(.com.lvl6.proto.UserEnhanc" +
-      "ementItemProto\"i\n\030UserEnhancementItemPro" +
-      "to\022\025\n\ruserMonsterId\030\001 \001(\003\022\037\n\027expectedSta" +
-      "rtTimeMillis\030\002 \001(\003\022\025\n\renhancingCost\030\003 \001(",
-      "\005\"f\n\032UserMonsterCurrentExpProto\022\025\n\ruserM" +
-      "onsterId\030\001 \001(\003\022\032\n\022expectedExperience\030\002 \001" +
-      "(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"H\n\033MinimumUser" +
-      "MonsterSellProto\022\025\n\ruserMonsterId\030\001 \001(\003\022" +
-      "\022\n\ncashAmount\030\002 \001(\005\"h\n\033UserCurrentMonste" +
-      "rTeamProto\022\016\n\006userId\030\001 \001(\005\0229\n\013currentTea" +
-      "m\030\002 \003(\0132$.com.lvl6.proto.FullUserMonster" +
-      "Proto\"e\n\031UserMonsterEvolutionProto\022\035\n\025ca" +
-      "talystUserMonsterId\030\001 \001(\003\022\026\n\016userMonster" +
-      "Ids\030\002 \003(\003\022\021\n\tstartTime\030\003 \001(\003\"\316\001\n\032Monster",
-      "BattleDialogueProto\022\021\n\tmonsterId\030\001 \001(\005\022M" +
-      "\n\014dialogueType\030\003 \001(\01627.com.lvl6.proto.Mo" +
-      "nsterBattleDialogueProto.DialogueType\022\020\n" +
-      "\010dialogue\030\002 \001(\t\022\032\n\022probabilityUttered\030\004 " +
-      "\001(\002\" \n\014DialogueType\022\020\n\014ENTER_BATTLE\020\001B\023B" +
-      "\021MonsterStuffProto"
+      "calPixelOffset\030\027 \001(\005\022\024\n\014atkSoundFile\030\030 \001",
+      "(\t\022\036\n\026atkSoundAnimationFrame\030\031 \001(\005\022\'\n\037at" +
+      "kAnimationRepeatedFramesStart\030\032 \001(\005\022%\n\035a" +
+      "tkAnimationRepeatedFramesEnd\030\033 \001(\005\"S\n\016Mo" +
+      "nsterQuality\022\n\n\006COMMON\020\001\022\010\n\004RARE\020\002\022\t\n\005UL" +
+      "TRA\020\003\022\010\n\004EPIC\020\004\022\r\n\tLEGENDARY\020\005\022\007\n\003EVO\020\006\"" +
+      "W\n\016MonsterElement\022\010\n\004FIRE\020\001\022\t\n\005GRASS\020\002\022\t" +
+      "\n\005WATER\020\003\022\r\n\tLIGHTNING\020\004\022\014\n\010DARKNESS\020\005\022\010" +
+      "\n\004ROCK\020\006\"&\n\rAnimationType\022\t\n\005MELEE\020\001\022\n\n\006" +
+      "RANGED\020\002\"\336\001\n\025MonsterLevelInfoProto\022\013\n\003lv" +
+      "l\030\001 \001(\005\022\n\n\002hp\030\002 \001(\005\022\031\n\021curLvlRequiredExp",
+      "\030\003 \001(\005\022\021\n\tfeederExp\030\004 \001(\005\022\017\n\007fireDmg\030\005 \001" +
+      "(\021\022\020\n\010grassDmg\030\006 \001(\021\022\020\n\010waterDmg\030\007 \001(\021\022\024" +
+      "\n\014lightningDmg\030\010 \001(\021\022\023\n\013darknessDmg\030\t \001(" +
+      "\021\022\017\n\007rockDmg\030\n \001(\021\022\r\n\005speed\030\013 \001(\005\"\345\001\n\024Fu" +
+      "llUserMonsterProto\022\025\n\ruserMonsterId\030\001 \001(" +
+      "\003\022\016\n\006userId\030\002 \001(\005\022\021\n\tmonsterId\030\003 \001(\005\022\022\n\n" +
+      "currentExp\030\004 \001(\005\022\022\n\ncurrentLvl\030\005 \001(\005\022\025\n\r" +
+      "currentHealth\030\006 \001(\005\022\021\n\tnumPieces\030\007 \001(\005\022\022" +
+      "\n\nisComplete\030\010 \001(\010\022\030\n\020combineStartTime\030\t" +
+      " \001(\003\022\023\n\013teamSlotNum\030\n \001(\005\"@\n\027MinimumUser",
+      "MonsterProto\022\021\n\tmonsterId\030\001 \001(\005\022\022\n\nmonst" +
+      "erLvl\030\002 \001(\005\"\204\001\n\027UserMonsterHealingProto\022" +
+      "\016\n\006userId\030\001 \001(\005\022\025\n\ruserMonsterId\030\002 \001(\003\022\030" +
+      "\n\020queuedTimeMillis\030\003 \001(\003\022\026\n\016healthProgre" +
+      "ss\030\005 \001(\002\022\020\n\010priority\030\006 \001(\005\"M\n\035UserMonste" +
+      "rCurrentHealthProto\022\025\n\ruserMonsterId\030\001 \001" +
+      "(\003\022\025\n\rcurrentHealth\030\002 \001(\005\"\240\001\n\024UserEnhanc" +
+      "ementProto\022\016\n\006userId\030\001 \001(\005\022=\n\013baseMonste" +
+      "r\030\002 \001(\0132(.com.lvl6.proto.UserEnhancement" +
+      "ItemProto\0229\n\007feeders\030\003 \003(\0132(.com.lvl6.pr",
+      "oto.UserEnhancementItemProto\"i\n\030UserEnha" +
+      "ncementItemProto\022\025\n\ruserMonsterId\030\001 \001(\003\022" +
+      "\037\n\027expectedStartTimeMillis\030\002 \001(\003\022\025\n\renha" +
+      "ncingCost\030\003 \001(\005\"f\n\032UserMonsterCurrentExp" +
+      "Proto\022\025\n\ruserMonsterId\030\001 \001(\003\022\032\n\022expected" +
+      "Experience\030\002 \001(\005\022\025\n\rexpectedLevel\030\003 \001(\005\"" +
+      "H\n\033MinimumUserMonsterSellProto\022\025\n\ruserMo" +
+      "nsterId\030\001 \001(\003\022\022\n\ncashAmount\030\002 \001(\005\"h\n\033Use" +
+      "rCurrentMonsterTeamProto\022\016\n\006userId\030\001 \001(\005" +
+      "\0229\n\013currentTeam\030\002 \003(\0132$.com.lvl6.proto.F",
+      "ullUserMonsterProto\"e\n\031UserMonsterEvolut" +
+      "ionProto\022\035\n\025catalystUserMonsterId\030\001 \001(\003\022" +
+      "\026\n\016userMonsterIds\030\002 \003(\003\022\021\n\tstartTime\030\003 \001" +
+      "(\003\"\316\001\n\032MonsterBattleDialogueProto\022\021\n\tmon" +
+      "sterId\030\001 \001(\005\022M\n\014dialogueType\030\003 \001(\01627.com" +
+      ".lvl6.proto.MonsterBattleDialogueProto.D" +
+      "ialogueType\022\020\n\010dialogue\030\002 \001(\t\022\032\n\022probabi" +
+      "lityUttered\030\004 \001(\002\" \n\014DialogueType\022\020\n\014ENT" +
+      "ER_BATTLE\020\001B\023B\021MonsterStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9424,7 +9692,7 @@ public final class MonsterStuffProto {
           internal_static_com_lvl6_proto_MonsterProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MonsterProto_descriptor,
-              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "MonsterElement", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "LvlInfo", "EvolutionCost", "AttackAnimationType", "VerticalPixelOffset", },
+              new java.lang.String[] { "MonsterId", "Name", "MonsterGroup", "Quality", "EvolutionLevel", "DisplayName", "MonsterElement", "ImagePrefix", "NumPuzzlePieces", "MinutesToCombinePieces", "MaxLevel", "EvolutionMonsterId", "EvolutionCatalystMonsterId", "MinutesToEvolve", "NumCatalystMonstersRequired", "CarrotRecruited", "CarrotDefeated", "CarrotEvolved", "Description", "LvlInfo", "EvolutionCost", "AttackAnimationType", "VerticalPixelOffset", "AtkSoundFile", "AtkSoundAnimationFrame", "AtkAnimationRepeatedFramesStart", "AtkAnimationRepeatedFramesEnd", },
               com.lvl6.proto.MonsterStuffProto.MonsterProto.class,
               com.lvl6.proto.MonsterStuffProto.MonsterProto.Builder.class);
           internal_static_com_lvl6_proto_MonsterLevelInfoProto_descriptor =

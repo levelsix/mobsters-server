@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class Structure implements Serializable {
 
-	private static final long serialVersionUID = 5378386129555703159L;
+	private static final long serialVersionUID = -4451649093963941337L;
+	
 	private int id;
 	private String name;
 	private int level;
@@ -19,14 +20,20 @@ public class Structure implements Serializable {
 	private int successorStructId;
 	private String imgName;
 	private float imgVerticalPixelOffset;
+	private float imgHorizontalPixelOffset;
 	private String description;
 	private String shortDescription;
+	private String shadowImgName;
+	private float shadowVerticalOffset;
+	private float shadowHorizontalOffset;
 	
 	public Structure(int id, String name, int level, String structType,
 			String buildResourceType, int buildCost, int minutesToBuild,
 			int requiredTownHallLvl, int width, int height, int predecessorStructId,
 			int successorStructId, String imgName, float imgVerticalPixelOffset,
-			String description, String shortDescription) {
+			float imgHorizontalPixelOffset, String description,
+			String shortDescription, String shadowImgName,
+			float shadowVerticalOffset, float shadowHorizontalOffset) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -42,8 +49,12 @@ public class Structure implements Serializable {
 		this.successorStructId = successorStructId;
 		this.imgName = imgName;
 		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
+		this.imgHorizontalPixelOffset = imgHorizontalPixelOffset;
 		this.description = description;
 		this.shortDescription = shortDescription;
+		this.shadowImgName = shadowImgName;
+		this.shadowVerticalOffset = shadowVerticalOffset;
+		this.shadowHorizontalOffset = shadowHorizontalOffset;
 	}
 
 	public int getId() {
@@ -158,6 +169,14 @@ public class Structure implements Serializable {
 		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
 	}
 
+	public float getImgHorizontalPixelOffset() {
+		return imgHorizontalPixelOffset;
+	}
+
+	public void setImgHorizontalPixelOffset(float imgHorizontalPixelOffset) {
+		this.imgHorizontalPixelOffset = imgHorizontalPixelOffset;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -174,6 +193,30 @@ public class Structure implements Serializable {
 		this.shortDescription = shortDescription;
 	}
 
+	public String getShadowImgName() {
+		return shadowImgName;
+	}
+
+	public void setShadowImgName(String shadowImgName) {
+		this.shadowImgName = shadowImgName;
+	}
+
+	public float getShadowVerticalOffset() {
+		return shadowVerticalOffset;
+	}
+
+	public void setShadowVerticalOffset(float shadowVerticalOffset) {
+		this.shadowVerticalOffset = shadowVerticalOffset;
+	}
+
+	public float getShadowHorizontalOffset() {
+		return shadowHorizontalOffset;
+	}
+
+	public void setShadowHorizontalOffset(float shadowHorizontalOffset) {
+		this.shadowHorizontalOffset = shadowHorizontalOffset;
+	}
+
 	@Override
 	public String toString() {
 		return "Structure [id=" + id + ", name=" + name + ", level=" + level
@@ -183,8 +226,11 @@ public class Structure implements Serializable {
 				+ ", width=" + width + ", height=" + height + ", predecessorStructId="
 				+ predecessorStructId + ", successorStructId=" + successorStructId
 				+ ", imgName=" + imgName + ", imgVerticalPixelOffset="
-				+ imgVerticalPixelOffset + ", description=" + description
-				+ ", shortDescription=" + shortDescription + "]";
+				+ imgVerticalPixelOffset + ", imgHorizontalPixelOffset="
+				+ imgHorizontalPixelOffset + ", description=" + description
+				+ ", shortDescription=" + shortDescription + ", shadowImgName="
+				+ shadowImgName + ", shadowVerticalOffset=" + shadowVerticalOffset
+				+ ", shadowHorizontalOffset=" + shadowHorizontalOffset + "]";
 	}
 	
 }

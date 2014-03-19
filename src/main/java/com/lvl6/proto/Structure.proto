@@ -27,9 +27,14 @@ message StructureInfoProto {
 	
 	optional string imgName = 14;
 	optional float imgVerticalPixelOffset = 15;
+	optional float imgHorizontalPixelOffset = 18;
 	optional string description = 16; //text field in db 
 	optional string shortDescription = 17;  
 	
+	//optional float imgHorizontalPixelOffset = 18; //defined above
+	optional string shadowImgName = 19;
+	optional float shadowVerticalOffset = 20;
+	optional float shadowHorizontalOfffset = 21;
 	
 	enum StructType {
 		RESOURCE_GENERATOR = 1;
