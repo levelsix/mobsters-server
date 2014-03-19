@@ -353,7 +353,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   }
   
   //calculate how much elo changes for the attacker and defender
-  //based on whether the attacker won
+  //based on whether the attacker won, capping min elo at 0 for attacker & defender
   private void getEloChanges(User attacker, User defender, boolean attackerWon,
   		PvpBattleForUser pvpBattleInfo, List<Integer> attackerEloChangeList,
   		List<Integer> defenderEloChangeList) {
@@ -365,10 +365,16 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   		attackerEloChange = pvpBattleInfo.getAttackerWinEloChange(); //positive value
   		defenderEloChange = pvpBattleInfo.getDefenderLoseEloChange(); //negative value
 
-  		//make sure defender's elo doesn't go below 0
-  		int defenderElo = defender.getElo();
-  		if (defenderElo + defenderEloChange < 0) {
-  			defenderEloChange = -1 * defenderElo;
+  		//don't cap fake player's elo
+  		if (null != defender && pvpBattleInfo.getDefenderId() > 0) {
+  			log.info("attacker fought real player. battleInfo=" + pvpBattleInfo);
+  			//make sure defender's elo doesn't go below 0
+  			int defenderElo = defender.getElo();
+  			if (defenderElo + defenderEloChange < 0) {
+  				defenderEloChange = -1 * defenderElo;
+  			}
+  		} else {
+  			log.info("attacker fought fake player. battleInfo=" + pvpBattleInfo);
   		}
 
   	} else {
@@ -381,10 +387,10 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   			attackerEloChange = -1 * attackerElo;
   		}
 
-  		attackerEloChangeList.add(attackerEloChange);
-  		defenderEloChangeList.add(defenderEloChange);
   	}
   	
+  	attackerEloChangeList.add(attackerEloChange);
+  	defenderEloChangeList.add(defenderEloChange);
   	
   }
 
