@@ -55,7 +55,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_BEGIN_PVP_BATTLE_EVENT;
+    return EventProtocolRequest.C_END_PVP_BATTLE_EVENT;
   }
 
   @Override
