@@ -984,7 +984,9 @@ public class CreateInfoProtoUtils {
     mpb.setVerticalPixelOffset(verticalPixelOffset);
     
     String atkSoundFile = aMonster.getAtkSoundFile();
-    mpb.setAtkSoundFile(atkSoundFile);
+    if (null != atkSoundFile) {
+    	mpb.setAtkSoundFile(atkSoundFile);
+    }
     
     int atkSoundAnimationFrame = aMonster.getAtkSoundAnimationFrame();
     mpb.setAtkSoundAnimationFrame(atkSoundAnimationFrame);
