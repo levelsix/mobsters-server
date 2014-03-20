@@ -170,4 +170,7 @@ public interface UpdateUtil {
   
   public abstract int updateClanEventPersistentForUserCrsmDmgDone(int userId,
   		int dmgDealt, int crsId, int crsmId);
+  
+  public abstract int updatePvpBattleHistoryExactRevenge(int historyAttackerId,
+  		int historyDefenderId, Timestamp battleEndTime);
 }

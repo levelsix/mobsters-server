@@ -1102,15 +1102,35 @@ public class UpdateUtils implements UpdateUtil {
 		public int updateClanEventPersistentForUserCrsmDmgDone(int userId, int dmgDealt,
 				int crsId, int crsmId) {
 			String tableName = DBConstants.TABLE_CLAN_EVENT_PERSISTENT_FOR_USER;
-			Map <String, Object> conditionParams = new HashMap<String, Object>();
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
 			conditionParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__USER_ID, userId);
 
-			Map <String, Object> relativeParams = new HashMap<String, Object>();
+			Map<String, Object> relativeParams = new HashMap<String, Object>();
 			relativeParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_USER__CRSM_DMG_DONE,
 					dmgDealt);
 			Map<String, Object> absoluteParams = new HashMap<String, Object>();
 			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRS_ID, crsId);
 			absoluteParams.put(DBConstants.CLAN_EVENT_PERSISTENT_FOR_CLAN__CRSM_ID, crsmId);
+			
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+					absoluteParams, conditionParams, "and");
+			
+			return numUpdated;
+		}
+		
+		@Override
+		public int updatePvpBattleHistoryExactRevenge(int historyAttackerId,
+	  		int historyDefenderId, Timestamp battleEndTime) {
+			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID, historyAttackerId);
+			conditionParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, historyDefenderId);
+			conditionParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME, battleEndTime);
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, true);
+			
+			Map<String, Object> relativeParams = null;
 			
 			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
 					absoluteParams, conditionParams, "and");

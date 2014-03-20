@@ -28,6 +28,7 @@ import com.lvl6.pvp.OfflinePvpUser;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
+import com.lvl6.utils.utilmethods.UpdateUtils;
 
 @Component @DependsOn("gameServer") public class BeginPvpBattleController extends EventController {
 
@@ -57,7 +58,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   @Override
   protected void processRequestEvent(RequestEvent event) throws Exception {
     BeginPvpBattleRequestProto reqProto = ((BeginPvpBattleRequestEvent)event).getBeginPvpBattleRequestProto();
-//    log.info("reqProto=" + reqProto);
+    log.info("reqProto=" + reqProto);
 
     //get values sent from the client (the request proto)
     MinimumUserProto senderProto = reqProto.getSender();
@@ -67,6 +68,13 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     Date curDate = new Date(curTime.getTime());
     PvpProto enemyProto = reqProto.getEnemy();
     int enemyUserId = enemyProto.getDefender().getMinUserProto().getUserId();
+    boolean exactingRevenge = reqProto.getExactingRevenge();
+    long millis = reqProto.getPreviousBattleEndTime();
+    Timestamp previousBattleEndTime = null;
+    
+    if (millis > 0) {
+    	previousBattleEndTime = new Timestamp(reqProto.getPreviousBattleEndTime());
+    }
     
     //set some values to send to the client (the response proto)
     BeginPvpBattleResponseProto.Builder resBuilder = BeginPvpBattleResponseProto.newBuilder();
@@ -95,8 +103,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     		List<Integer> defenderEloChange = new ArrayList<Integer>();
     		calculateEloChange(senderElo, enemyProto, attackerEloChange, defenderEloChange);
 
+    		//if user exacting revenge update the history to say he can't exact revenge anymore
     		successful = writeChangesToDb(userId, enemyUserId, enemyProto, enemy,
-    				attackerEloChange, defenderEloChange, curTime);
+    				attackerEloChange, defenderEloChange, curTime, exactingRevenge, previousBattleEndTime);
     	}
 
     	if (successful) {
@@ -186,7 +195,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	//second values will be when attacker loses
   private boolean writeChangesToDb(int attackerId, int defenderId, PvpProto enemyProto,
 		  OfflinePvpUser enemy, List<Integer> attackerEloChange,
-		  List<Integer> defenderEloChange, Timestamp clientTime) {
+		  List<Integer> defenderEloChange, Timestamp clientTime, boolean exactingRevenge,
+		  Timestamp previousBattleEndTime) {
 	  
 	  //record that attacker is attacking defender
   	int attackerWinEloChange = attackerEloChange.get(0);
@@ -223,9 +233,29 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		
   		User defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
   		defender.updateInBattleEndTime(newInBattleEndTime);
+  		
+  		exactRevenge(attackerId, defenderId, previousBattleEndTime, exactingRevenge);
   	}
   	
 	  return true;
+  }
+  
+  private void exactRevenge(int attackerId, int defenderId, Timestamp prevBattleEndTime,
+  		boolean exactingRevenge) {
+  	if (!exactingRevenge) {
+  		log.info("not exacting revenge");
+  		return;
+  	}
+  	if (null == prevBattleEndTime) {
+  		log.info("not exacting revenge, prevBattleEndTime is null");
+  	}
+  	log.info("exacting revenge");
+  	//need to switch the ids, because when exacting revenge roles are reversed
+  	int historyAttackerId = defenderId;
+  	int historyDefenderId = attackerId;
+  	int numUpdated = UpdateUtils.get().updatePvpBattleHistoryExactRevenge(
+  			historyAttackerId, historyDefenderId, prevBattleEndTime);
+  	log.info("recorded that user exacted revenge. numUpdated (should be 1)=" + numUpdated);
   }
 
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
