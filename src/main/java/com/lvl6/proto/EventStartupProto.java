@@ -16888,6 +16888,10 @@ public final class EventStartupProto {
     // optional int64 previousLoginTime = 2;
     boolean hasPreviousLoginTime();
     long getPreviousLoginTime();
+    
+    // optional int64 timeClientSent = 3;
+    boolean hasTimeClientSent();
+    long getTimeClientSent();
   }
   public static final class ForceLogoutResponseProto extends
       com.google.protobuf.GeneratedMessage
@@ -16938,9 +16942,20 @@ public final class EventStartupProto {
       return previousLoginTime_;
     }
     
+    // optional int64 timeClientSent = 3;
+    public static final int TIMECLIENTSENT_FIELD_NUMBER = 3;
+    private long timeClientSent_;
+    public boolean hasTimeClientSent() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public long getTimeClientSent() {
+      return timeClientSent_;
+    }
+    
     private void initFields() {
       loginTime_ = 0L;
       previousLoginTime_ = 0L;
+      timeClientSent_ = 0L;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -16960,6 +16975,9 @@ public final class EventStartupProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt64(2, previousLoginTime_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, timeClientSent_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -16976,6 +16994,10 @@ public final class EventStartupProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, previousLoginTime_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, timeClientSent_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -17105,6 +17127,8 @@ public final class EventStartupProto {
         bitField0_ = (bitField0_ & ~0x00000001);
         previousLoginTime_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
+        timeClientSent_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -17151,6 +17175,10 @@ public final class EventStartupProto {
           to_bitField0_ |= 0x00000002;
         }
         result.previousLoginTime_ = previousLoginTime_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.timeClientSent_ = timeClientSent_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -17172,6 +17200,9 @@ public final class EventStartupProto {
         }
         if (other.hasPreviousLoginTime()) {
           setPreviousLoginTime(other.getPreviousLoginTime());
+        }
+        if (other.hasTimeClientSent()) {
+          setTimeClientSent(other.getTimeClientSent());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -17212,6 +17243,11 @@ public final class EventStartupProto {
             case 16: {
               bitField0_ |= 0x00000002;
               previousLoginTime_ = input.readInt64();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              timeClientSent_ = input.readInt64();
               break;
             }
           }
@@ -17258,6 +17294,27 @@ public final class EventStartupProto {
       public Builder clearPreviousLoginTime() {
         bitField0_ = (bitField0_ & ~0x00000002);
         previousLoginTime_ = 0L;
+        onChanged();
+        return this;
+      }
+      
+      // optional int64 timeClientSent = 3;
+      private long timeClientSent_ ;
+      public boolean hasTimeClientSent() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public long getTimeClientSent() {
+        return timeClientSent_;
+      }
+      public Builder setTimeClientSent(long value) {
+        bitField0_ |= 0x00000004;
+        timeClientSent_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTimeClientSent() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        timeClientSent_ = 0L;
         onChanged();
         return this;
       }
@@ -17490,10 +17547,10 @@ public final class EventStartupProto {
       "\001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\"A" +
       "\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_U" +
       "PDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStat" +
-      "us\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\"H" +
+      "us\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\"`" +
       "\n\030ForceLogoutResponseProto\022\021\n\tloginTime\030",
-      "\001 \001(\003\022\031\n\021previousLoginTime\030\002 \001(\003B\023B\021Even" +
-      "tStartupProto"
+      "\001 \001(\003\022\031\n\021previousLoginTime\030\002 \001(\003\022\026\n\016time" +
+      "ClientSent\030\003 \001(\003B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -17609,7 +17666,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_ForceLogoutResponseProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor,
-              new java.lang.String[] { "LoginTime", "PreviousLoginTime", },
+              new java.lang.String[] { "LoginTime", "PreviousLoginTime", "TimeClientSent", },
               com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto.class,
               com.lvl6.proto.EventStartupProto.ForceLogoutResponseProto.Builder.class);
           return null;

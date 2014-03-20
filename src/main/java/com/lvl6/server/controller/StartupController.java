@@ -275,6 +275,7 @@ public class StartupController extends EventController {
 			      ForceLogoutResponseProto.Builder logoutResponse = ForceLogoutResponseProto.newBuilder();
 			      logoutResponse.setLoginTime(now.getTime());
 			      logoutResponse.setPreviousLoginTime(user.getLastLogin().getTime());
+			      logoutResponse.setTimeClientSent(clientTime);
 			      ForceLogoutResponseEvent logoutEvent = new ForceLogoutResponseEvent(userId);
 			      logoutEvent.setForceLogoutResponseProto(logoutResponse.build());
 			      server.writePreDBEvent(logoutEvent, udid);
@@ -296,7 +297,7 @@ public class StartupController extends EventController {
 			      setAllStaticData(resBuilder, userId, true);
 			      setEventStuff(resBuilder, userId);
 			      //if server sees that the user is in a pvp battle, decrement user's elo
-			      pvpBattleStuff(user, userId, freshRestart); 
+			      pvpBattleStuff(user, userId, freshRestart, now); 
 			      pvpBattleHistoryStuff(resBuilder, user, userId);
 			      setClanRaidStuff(resBuilder, user, userId, now);
 			      
@@ -956,7 +957,8 @@ public class StartupController extends EventController {
   	
   }
   
-  private void pvpBattleStuff(User user, int userId, boolean isFreshRestart) {
+  private void pvpBattleStuff(User user, int userId, boolean isFreshRestart, Timestamp
+  		battleEndTime) {
   	if (!isFreshRestart) {
   		log.info("not fresh restart, so not deleting pvp battle stuff");
   		return;
@@ -973,6 +975,7 @@ public class StartupController extends EventController {
   	if (null == battle) {
   		return;
   	}
+  	Timestamp battleStartTime = new Timestamp(battle.getBattleStartTime().getTime());
   	//capping max elo attacker loses
   	int eloAttackerLoses = battle.getAttackerLoseEloChange();
   	if (user.getElo() + eloAttackerLoses < 0) {
@@ -1012,11 +1015,16 @@ public class StartupController extends EventController {
   				defenderOpu.setElo(defenderElo);
   				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
   			}
-  			
+  			boolean cancelled = true;
+  			boolean displayToDefender = false;
+  			int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(userId, defenderId,
+  					battleEndTime, battleStartTime, 0, 0, 0, 0, 0, 0, false, cancelled, false,
+  					displayToDefender);
+  			log.info("numInserted into battle history=" + numInserted);
   			//delete that this battle occurred
-  			DeleteUtils.get().deletePvpBattleForUser(userId);
+  			int numDeleted = DeleteUtils.get().deletePvpBattleForUser(userId);
   			log.info("successfully penalized, rewarded attacker and defender respectively. battle= " +
-  					battle);
+  					battle + "\t numDeleted=" + numDeleted);
   			
   		} catch (Exception e){
   			log.error("tried to penalize, reward attacker and defender respectively. battle=" +

@@ -255,4 +255,6 @@ message StartupResponseProto {
 message ForceLogoutResponseProto {
 	optional int64 loginTime = 1; //the time the server logs the user in on startup
 	optional int64 previousLoginTime = 2; //last time server logged the user in on startup
+	
+	optional int64 timeClientSent =3 ;
 }
