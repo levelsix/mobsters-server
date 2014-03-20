@@ -243,7 +243,7 @@ public class CreateInfoProtoUtils {
   	FullUserProto fup = createFullUserProtoFromUser(attacker);
   	phpb.setAttacker(fup);
   	
-  	if (null == userMonsters || userMonsters.isEmpty()) {
+  	if (null != userMonsters && !userMonsters.isEmpty()) {
   		Collection<MinimumUserMonsterProto> attackerMonsters = 
   				createMinimumUserMonsterProtoList(userMonsters);
   		phpb.addAllAttackersMonsters(attackerMonsters);
