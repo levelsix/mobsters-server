@@ -1050,6 +1050,8 @@ public class StartupController extends EventController {
   	List<Integer> attackerIdsList = new ArrayList<Integer>(idsToAttackers.keySet());
   	Map<Integer, List<MonsterForUser>> attackerIdToCurTeam = selectMonstersForUsers(
   			attackerIdsList);
+  	log.info("history monster teams=" + attackerIdToCurTeam);
+  	
   	Map<Integer, Integer> attackerIdsToProspectiveCashWinnings = MiscMethods
   			.calculateCashRewardFromPvpUsers(idsToAttackers);
   	Map<Integer, Integer> attackerIdsToProspectiveOilWinnings = MiscMethods
@@ -1059,6 +1061,7 @@ public class StartupController extends EventController {
   			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
   					attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
   	
+  	log.info("historyProtoList=" + historyProtoList);
   	resBuilder.addAllRecentNBattles(historyProtoList);
   }
   
