@@ -362,7 +362,7 @@ public class StartupController extends EventController {
 			log.error("exception in StartupController processEvent", e);
       //don't let the client hang
       try {
-    	  resBuilder.setUpdateStatus(UpdateStatus.MAJOR_UPDATE); //hack to not allow user to play
+    	  resBuilder.setStartupStatus(StartupStatus.SERVER_IN_MAINTENANCE); //DO NOT allow user to play
     	  StartupResponseEvent resEvent = new StartupResponseEvent(udid);
     	  resEvent.setTag(event.getTag());
     	  resEvent.setStartupResponseProto(resBuilder.build());

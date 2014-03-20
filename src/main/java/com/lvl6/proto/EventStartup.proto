@@ -247,6 +247,7 @@ message StartupResponseProto {
 	enum StartupStatus {
 		USER_IN_DB = 1; 
 		USER_NOT_IN_DB = 2;
+		SERVER_IN_MAINTENANCE = 3;
 	}    
 }
 

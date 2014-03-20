@@ -1341,10 +1341,12 @@ public final class EventStartupProto {
         implements com.google.protobuf.ProtocolMessageEnum {
       USER_IN_DB(0, 1),
       USER_NOT_IN_DB(1, 2),
+      SERVER_IN_MAINTENANCE(2, 3),
       ;
       
       public static final int USER_IN_DB_VALUE = 1;
       public static final int USER_NOT_IN_DB_VALUE = 2;
+      public static final int SERVER_IN_MAINTENANCE_VALUE = 3;
       
       
       public final int getNumber() { return value; }
@@ -1353,6 +1355,7 @@ public final class EventStartupProto {
         switch (value) {
           case 1: return USER_IN_DB;
           case 2: return USER_NOT_IN_DB;
+          case 3: return SERVER_IN_MAINTENANCE;
           default: return null;
         }
       }
@@ -1383,7 +1386,7 @@ public final class EventStartupProto {
       }
       
       private static final StartupStatus[] VALUES = {
-        USER_IN_DB, USER_NOT_IN_DB, 
+        USER_IN_DB, USER_NOT_IN_DB, SERVER_IN_MAINTENANCE, 
       };
       
       public static StartupStatus valueOf(
@@ -17419,7 +17422,7 @@ public final class EventStartupProto {
       "\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t" +
       "\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutoria" +
       "l\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart\030",
-      "\010 \001(\010\022\022\n\nclientTime\030\t \001(\003\"\212(\n\024StartupRes" +
+      "\010 \001(\010\022\022\n\nclientTime\030\t \001(\003\"\245(\n\024StartupRes" +
       "ponseProto\022\030\n\020serverTimeMillis\030\001 \001(\003\022-\n\006" +
       "sender\030\002 \001(\0132\035.com.lvl6.proto.FullUserPr" +
       "oto\022I\n\rstartupStatus\030\003 \001(\01622.com.lvl6.pr" +
@@ -17546,11 +17549,12 @@ public final class EventStartupProto {
       "tIdForSecondDungeon\030\010 \001(\005\022\020\n\010cashInit\030\013 " +
       "\001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsInit\030\r \001(\005\"A" +
       "\n\014UpdateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_U" +
-      "PDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"3\n\rStartupStat" +
-      "us\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\"`" +
-      "\n\030ForceLogoutResponseProto\022\021\n\tloginTime\030",
-      "\001 \001(\003\022\031\n\021previousLoginTime\030\002 \001(\003\022\026\n\016time" +
-      "ClientSent\030\003 \001(\003B\023B\021EventStartupProto"
+      "PDATE\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStat" +
+      "us\022\016\n\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031" +
+      "\n\025SERVER_IN_MAINTENANCE\020\003\"`\n\030ForceLogout",
+      "ResponseProto\022\021\n\tloginTime\030\001 \001(\003\022\031\n\021prev" +
+      "iousLoginTime\030\002 \001(\003\022\026\n\016timeClientSent\030\003 " +
+      "\001(\003B\023B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
