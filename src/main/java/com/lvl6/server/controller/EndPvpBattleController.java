@@ -246,13 +246,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		//need to take into account if defender (online and) spent some cash/oil before
   		//pvp battle ends, defender will not gain resources by winning
   		boolean defenderWon = !attackerWon;
-  		int defenderOilChange = calculateMaxOilChange(defender, defender.getOil(),
-  				oilChange, defenderWon);
-  		int defenderCashChange = calculateMaxCashChange(defender, defender.getCash(),
-  				cashChange, defenderWon);
+  		int defenderOilChange = 0; 
+  		int defenderCashChange = 0;
   		
   		//defender could be fake user
   		if (null != defender) {
+  			defenderOilChange = calculateMaxOilChange(defender, defender.getOil(),
+    				oilChange, defenderWon);
+  			defenderCashChange = calculateMaxCashChange(defender, defender.getCash(),
+    				cashChange, defenderWon);
+  			
   			//since defender is real, update defender's cash, oil, elo
   			defender.updateEloOilCash(defenderId, defenderEloChange, defenderOilChange,
   					defenderCashChange);
