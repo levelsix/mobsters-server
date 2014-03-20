@@ -8,6 +8,7 @@ package com.lvl6.proto;
 option java_outer_classname = "BattleProto";
 //DO NOT USE ID AS THE NAME OF A PROPERTY IN ANY PROTO
 
+///atm, this file is used by EventPvp.proto
 
 message MinimumUserProtoWithBattleHistory {
 	optional MinimumUserProtoWithLevel minUserProtoWithLevel = 1;
@@ -37,6 +38,10 @@ message PvpProto {
 //------------------------------------------------------------------------------------------
 
 message PvpHistoryProto {
+	//to reference a pvp history row, need (attackerId, defenderId, battleEndTime)
+	//if exacting revenge then need to send battle end time
+	optional int64 battleEndTime = 9;
+	
 	optional FullUserProto attacker = 1; //the person who acted as the attacker
 	repeated MinimumUserMonsterProto attackersMonsters = 2; //atm, current monster team
 	optional bool attackerWon = 3;
@@ -47,4 +52,9 @@ message PvpHistoryProto {
 	//revenge info if defender can get revenge on attacker
 	optional int32 prospectiveCashWinnings = 7;
 	optional int32 prospectiveOilWinnings = 8;
+	
+	
+	//optional int64 battleEndTime = 9; //defined above
 }
+
+///atm, this file is used by EventPvp.proto
