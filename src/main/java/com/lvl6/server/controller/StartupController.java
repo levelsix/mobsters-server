@@ -1039,28 +1039,35 @@ public class StartupController extends EventController {
   	//NOTE: AN ATTACKER MIGHT SHOW UP MORE THAN ONCE DUE TO REVENGE
   	List<PvpBattleHistory> historyList = getPvpBattleHistoryRetrieveUtil()
   			.getRecentNBattlesForDefenderId(userId, n);
+  	log.info("historyList=" + historyList);
   	
   	Set<Integer> attackerIds = getPvpBattleHistoryRetrieveUtil()
   			.getAttackerIdsFromHistory(historyList);
+  	log.info("attackerIds=" + attackerIds);
   	
+  	if (null == attackerIds || attackerIds.isEmpty()) {
+  		log.info("no valid 10 pvp battles for user. ");
+  		return;
+  	}
   	//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
   	Map<Integer, User> idsToAttackers = RetrieveUtils.userRetrieveUtils()
   			.getUsersByIds(attackerIds);
-  	
+  	log.info("idsToAttackers=" + idsToAttackers);
+
   	List<Integer> attackerIdsList = new ArrayList<Integer>(idsToAttackers.keySet());
   	Map<Integer, List<MonsterForUser>> attackerIdToCurTeam = selectMonstersForUsers(
   			attackerIdsList);
   	log.info("history monster teams=" + attackerIdToCurTeam);
-  	
+
   	Map<Integer, Integer> attackerIdsToProspectiveCashWinnings = MiscMethods
   			.calculateCashRewardFromPvpUsers(idsToAttackers);
   	Map<Integer, Integer> attackerIdsToProspectiveOilWinnings = MiscMethods
   			.calculateOilRewardFromPvpUsers(idsToAttackers);
-  	
+
   	List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
   			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
   					attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
-  	
+
   	log.info("historyProtoList=" + historyProtoList);
   	resBuilder.addAllRecentNBattles(historyProtoList);
   }
