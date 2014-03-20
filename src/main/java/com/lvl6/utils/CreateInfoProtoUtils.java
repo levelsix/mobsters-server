@@ -48,6 +48,7 @@ import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Obstacle;
 import com.lvl6.info.PrivateChatPost;
+import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.Referral;
@@ -69,6 +70,7 @@ import com.lvl6.info.UserClan;
 import com.lvl6.info.UserFacebookInviteForSlot;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.BattleProto.MinimumUserProtoWithBattleHistory;
+import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BattleProto.PvpProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterDisplayItemProto;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterItemProto;
@@ -232,6 +234,63 @@ public class CreateInfoProtoUtils {
     }
     return pvpProtoList;
   }
+  
+  public static PvpHistoryProto createPvpHistoryProto(User attacker, PvpBattleHistory info,
+  		Collection<MonsterForUser> userMonsters, int prospectiveCashWinnings,
+  		int prospectiveOilWinnings) {
+  	PvpHistoryProto.Builder phpb = PvpHistoryProto.newBuilder();
+  	//there is db call for clan...
+  	FullUserProto fup = createFullUserProtoFromUser(attacker);
+  	phpb.setAttacker(fup);
+  	
+  	if (null == userMonsters || userMonsters.isEmpty()) {
+  		Collection<MinimumUserMonsterProto> attackerMonsters = 
+  				createMinimumUserMonsterProtoList(userMonsters);
+  		phpb.addAllAttackersMonsters(attackerMonsters);
+  	}
+  	
+  	phpb.setAttackerWon(info.isAttackerWon());
+  	
+  	int defenderCashChange = info.getDefenderCashChange();
+  	phpb.setDefenderCashChange(defenderCashChange);
+  	int defenderOilChange = info.getDefenderOilChange();
+  	phpb.setDefenderOilChange(defenderOilChange);
+  	
+  	phpb.setExactedRevenge(info.isExactedRevenge());
+  	
+  	phpb.setProspectiveCashWinnings(prospectiveCashWinnings);
+  	phpb.setProspectiveOilWinnings(prospectiveOilWinnings);
+  	
+  	Date endDate = info.getBattleEndTime();
+  	//endDate should not be null, it's the primary key
+  	phpb.setBattleEndTime(endDate.getTime());
+  	
+  	return phpb.build();
+  }
+  
+  public static List<PvpHistoryProto> createPvpHistoryProto(
+  		List<PvpBattleHistory> historyList, Map<Integer, User> attackerIdsToAttackers,
+  		Map<Integer, List<MonsterForUser>> attackerIdsToUserMonsters,
+  		Map<Integer, Integer> attackerIdsToProspectiveCashWinnings,
+  		Map<Integer, Integer> attackerIdsToProspectiveOilWinnings) {
+  	
+  	List<PvpHistoryProto> phpList = new ArrayList<PvpHistoryProto>();
+  	
+  	for (PvpBattleHistory history: historyList) {
+  		int attackerId = history.getAttackerId();
+  		
+  		User attacker = attackerIdsToAttackers.get(attackerId);
+  		List<MonsterForUser> attackerMonsters = attackerIdsToUserMonsters.get(attackerId);
+  		int prospectiveCashWinnings = attackerIdsToProspectiveCashWinnings.get(attackerId);
+  		int prospectiveOilWinnings = attackerIdsToProspectiveOilWinnings.get(attackerId);
+  		
+  		PvpHistoryProto php = createPvpHistoryProto(attacker, history, attackerMonsters,
+  				prospectiveCashWinnings, prospectiveOilWinnings);
+  		phpList.add(php);
+  	}
+  	return phpList;
+  }
+  
   
   /**BoosterPackStuff.proto****************************************/
   //  public static RareBoosterPurchaseProto createRareBoosterPurchaseProto(BoosterPack bp, User u, Date d) {

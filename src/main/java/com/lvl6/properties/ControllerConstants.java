@@ -15,6 +15,14 @@ public class ControllerConstants {
 	//this multiplies with the cost to heal all monsters on user's battle team
 	//BATTLE, DUNGEON, TASK
 	public static final float BATTLE__CONTINUE_GEM_COST_MULTIPLIER = 1.2F; 
+
+	//CLAN EVENT PERSISTENT
+	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
+	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
+	
+	//EVENT PERSISTENT STUFF
+	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
+	
 	
 	public static final float MONSTER__CASH_PER_HEALTH_POINT = 0.5f;
 	public static final float MONSTER__SECONDS_TO_HEAL_PER_HEALTH_POINT = 2f;
@@ -24,9 +32,6 @@ public class ControllerConstants {
 //	public static final int MONSTER_INVENTORY_SLOTS__INCREMENT_AMOUNT = 5;
 //	public static final int MONSTER_INVENTORY_SLOTS__GEM_PRICE_PER_SLOT = 2;
 //	public static final int MONSTER_INVENTORY_SLOTS__MIN_INVITES_TO_INCREASE_SLOTS = 3;
-	
-	public static final int MONSTER_FOR_USER__MAX_TEAM_SIZE = 3;
-	public static final int MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT = 10;
 	
 	//MFUSOP = monster_for_user_source_of_pieces
 	public static final String MFUSOP__END_DUNGEON = "Task4UserId ";
@@ -38,7 +43,10 @@ public class ControllerConstants {
 	public static final String MFUDR__ENHANCING = "enhancing";
 	public static final String MFUDR__QUEST = "quest";
 	public static final String MFUDR__SELL = "sold for cash";
-	
+
+	//MONSTER FOR USER
+	public static final int MONSTER_FOR_USER__MAX_TEAM_SIZE = 3;
+	public static final int MONSTER_FOR_USER__INITIAL_MAX_NUM_MONSTER_LIMIT = 10;
 	
 	//MINI TUTORIAL CONSTANTS
 	public static final int MINI_TUTORIAL__MATCH_THREE_TUTORIAL_ASSET_ID = 5;
@@ -50,10 +58,6 @@ public class ControllerConstants {
 	public static final int MINI_TUTORIAL__CITY_ID = 1;
 	public static final int MINI_TUTORIAL__QUEST_ID_FOR_COMBINING_POWER_UPS = 1;
 
-	
-	//chats
-	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
-	
 	//PVP
 	//user lvl means nothing, since it doesn't indicate much besides maybe how much you played
 	public static final int PVP__REQUIRED_MIN_LEVEL = 30; 
@@ -79,33 +83,13 @@ public class ControllerConstants {
   public static final float PVP__PERCENT_CASH_LOST = 0.25F;
   public static final float PVP__PERCENT_OIL_LOST = 0.25F;
   public static final int PVP__SHIELD_DURATION_DAYS = 3; 
-	
-	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
-	public static final String UCHRFC__CREATE_CLAN = "created clan";
-	public static final String UCHRFC__CURRENCY_EXCHANGE = "currency exchange";
-	public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
-	public static final String UCHRFC__END_TASK = "end task";
-	public static final String UCHRFC__ENHANCING = "enhancing user monsters";
-	public static final String UCHRFC__EVOLVING = "evolving user monsters";
-	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
-	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
-	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
-	public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
-	public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
-	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
-	public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
-	public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
-	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
-	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
-	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
+  
+  //PVP BATTLE HISTORY
+  public static final int PVP_HISTORY__NUM_RECENT_BATTLES = 10;  
+  
+	//chats
+	public static final int RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP = 150;
 
-	//EVENT PERSISTENT STUFF
-	public static final int EVENT_PERSISTENT__END_COOL_DOWN_TIMER_GEM_COST = 5;
-	
-	//CLAN EVENT PERSISTENT
-	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_HISTORY = 14;
-	public static final int CLAN_EVENT_PERSISTENT__NUM_DAYS_FOR_RAID_STAGE_HISTORY = 7;
-	
 	//STRUCTURE FOR USER STUFF
 	public static final int STRUCTURE_FOR_USER__TOWN_HALL_ID = 120;
 	public static final int STRUCTURE_FOR_USER__CASH_STORAGE_ID = 20;
@@ -154,6 +138,25 @@ public class ControllerConstants {
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;
 	public static final String TUTORIAL__INIT_RANK = "bronze";
+	
+	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
+	public static final String UCHRFC__CREATE_CLAN = "created clan";
+	public static final String UCHRFC__CURRENCY_EXCHANGE = "currency exchange";
+	public static final String UCHRFC__EARN_FREE_DIAMONDS_FB_CONNECT = "connecting to facebook";
+	public static final String UCHRFC__END_TASK = "end task";
+	public static final String UCHRFC__ENHANCING = "enhancing user monsters";
+	public static final String UCHRFC__EVOLVING = "evolving user monsters";
+	public static final String UCHRFC__HEAL_MONSTER_OR_SPED_UP_HEALING = "healing or sped up healing user monsters";
+	public static final String UCHRFC__INCREASE_MONSTER_INVENTORY = "increased user monster inventory";
+	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
+	public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
+	public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
+	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
+	public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
+	public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
+	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
+	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
+	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
 	
 	
 	

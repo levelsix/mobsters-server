@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -202,7 +203,7 @@ import com.lvl6.utils.utilmethods.StringUtils;
     return user;
   }
 
-  public Map<Integer, User> getUsersByIds(List<Integer> userIds) {
+  public Map<Integer, User> getUsersByIds(Collection<Integer> userIds) {
     log.debug("retrieving users with userIds " + userIds);
     
     if (userIds == null || userIds.size() <= 0 ) {

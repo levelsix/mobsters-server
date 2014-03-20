@@ -152,6 +152,57 @@ public class MiscMethods {
   public static final String OIL = "OIL";
   public static final String MONSTER = "MONSTER";
 
+  
+  public static int calculateCashRewardFromPvpUser(User queuedOpponent) {
+		int cash = queuedOpponent.getCash();
+		int cashLost = (int) (ControllerConstants.PVP__PERCENT_CASH_LOST * cash);
+		
+		log.info("amount cash user will lose: " + cashLost + "\t defender=" + queuedOpponent);
+		
+		return cashLost;
+	}
+  
+  //given bunch of users, calculate how much can be stolen from each user
+  public static Map<Integer, Integer> calculateCashRewardFromPvpUsers(
+  		Map<Integer, User> userIdsToUsers) {
+  	
+  	Map<Integer, Integer> userIdToCashReward = new HashMap<Integer, Integer>();
+  	
+  	for (Integer userId : userIdsToUsers.keySet()) {
+  		User user = userIdsToUsers.get(userId);
+  		int cashReward = calculateCashRewardFromPvpUser(user);
+  		
+  		userIdToCashReward.put(userId, cashReward);
+  	}
+  	
+  	return userIdToCashReward;
+  }
+  
+  
+  public static int calculateOilRewardFromPvpUser(User queuedOpponent) {
+		int oil = queuedOpponent.getOil();
+		int oilLost = (int) (ControllerConstants.PVP__PERCENT_OIL_LOST * oil);
+		
+		log.info("amount cash user will lose: " + oilLost + "\t defender=" + queuedOpponent);
+		
+		return oilLost;
+	}
+  
+  //given bunch of users, calculate how much can be stolen from each user
+  public static Map<Integer, Integer> calculateOilRewardFromPvpUsers(
+  		Map<Integer, User> userIdsToUsers) {
+  	
+  	Map<Integer, Integer> userIdToOilReward = new HashMap<Integer, Integer>();
+  	
+  	for (Integer userId : userIdsToUsers.keySet()) {
+  		User user = userIdsToUsers.get(userId);
+  		int cashReward = calculateOilRewardFromPvpUser(user);
+  		
+  		userIdToOilReward.put(userId, cashReward);
+  	}
+  	
+  	return userIdToOilReward;
+  }
 
 
   public static Dialogue createDialogue(String dialogueBlob) {

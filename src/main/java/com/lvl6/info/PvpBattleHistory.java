@@ -21,6 +21,10 @@ public class PvpBattleHistory implements Serializable {
 	private boolean cancelled;
 	private boolean exactedRevenge;
 	
+	public PvpBattleHistory() {
+		super();
+	}
+	
 	public PvpBattleHistory(int attackerId, int defenderId, Date battleEndTime,
 			Date battleStartTime, int attackerEloChange, int defenderEloChange,
 			int attackerCashChange, int defenderCashChange, int attackerOilChange,

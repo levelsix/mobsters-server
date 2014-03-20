@@ -581,30 +581,12 @@ import com.lvl6.utils.utilmethods.InsertUtil;
 		for (User queuedOpponent : queuedOpponents) {
 			int userId = queuedOpponent.getId();
 			
-			int cashReward = calculateCashRewardFromUser(queuedOpponent);
-			int oilReward = calculateOilRewardFromUser(queuedOpponent);
+			int cashReward = MiscMethods.calculateCashRewardFromPvpUser(queuedOpponent);
+			int oilReward = MiscMethods.calculateOilRewardFromPvpUser(queuedOpponent);
 			
 			userIdToProspectiveCashReward.put(userId, cashReward);
 			userIdToProspectiveOilReward.put(userId, oilReward);
 		}
-	}
-	
-	private int calculateCashRewardFromUser(User queuedOpponent) {
-		int cash = queuedOpponent.getCash();
-		int cashLost = (int) (ControllerConstants.PVP__PERCENT_CASH_LOST * cash);
-		
-		log.info("amount cash user will lose: " + cashLost + "\t defender=" + queuedOpponent);
-		
-		return cashLost;
-	}
-
-	private int calculateOilRewardFromUser(User queuedOpponent) {
-		int oil = queuedOpponent.getOil();
-		int oilLost = (int) (ControllerConstants.PVP__PERCENT_OIL_LOST * oil);
-		
-		log.info("amount cash user will lose: " + oilLost + "\t defender=" + queuedOpponent);
-		
-		return oilLost;
 	}
 	
 	private List<PvpProto> createPvpProtosFromFakeUser(List<List<MonsterForPvp>> fakeUserMonsters) {

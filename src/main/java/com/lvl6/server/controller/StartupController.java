@@ -49,6 +49,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
+import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.Quest;
 import com.lvl6.info.QuestForUser;
 import com.lvl6.info.User;
@@ -59,6 +60,7 @@ import com.lvl6.misc.MiscMethods;
 import com.lvl6.properties.ControllerConstants;
 import com.lvl6.properties.Globals;
 import com.lvl6.properties.KabamProperties;
+import com.lvl6.proto.BattleProto.PvpHistoryProto;
 import com.lvl6.proto.BoosterPackStuffProto.RareBoosterPurchaseProto;
 import com.lvl6.proto.ChatProto.GroupChatMessageProto;
 import com.lvl6.proto.ChatProto.PrivateChatPostProto;
@@ -101,11 +103,11 @@ import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
+import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
 import com.lvl6.retrieveutils.TaskForUserCompletedRetrieveUtils;
 import com.lvl6.retrieveutils.UserFacebookInviteForSlotRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.QuestRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.StartupStuffRetrieveUtils;
-import com.lvl6.scriptsjava.generatefakeusers.NameGeneratorElven;
 import com.lvl6.server.GameServer;
 import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.MonsterStuffUtils;
@@ -130,24 +132,11 @@ public class StartupController extends EventController {
     numAllocatedThreads = 3;
   }
 
-  @Autowired
-  protected NameGeneratorElven nameGeneratorElven;
-
-  public NameGeneratorElven getNameGeneratorElven() {
-    return nameGeneratorElven;
-  }
-
-  public void setNameGeneratorElven(NameGeneratorElven nameGeneratorElven) {
-    this.nameGeneratorElven = nameGeneratorElven;
-  }
-
   @Resource(name = "goodEquipsRecievedFromBoosterPacks")
   protected IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks;
-
   public IList<RareBoosterPurchaseProto> getGoodEquipsRecievedFromBoosterPacks() {
     return goodEquipsRecievedFromBoosterPacks;
   }
-
   public void setGoodEquipsRecievedFromBoosterPacks(
       IList<RareBoosterPurchaseProto> goodEquipsRecievedFromBoosterPacks) {
     this.goodEquipsRecievedFromBoosterPacks = goodEquipsRecievedFromBoosterPacks;
@@ -155,61 +144,72 @@ public class StartupController extends EventController {
 
   @Resource(name = "globalChat")
   protected IList<GroupChatMessageProto> chatMessages;
-
   public IList<GroupChatMessageProto> getChatMessages() {
     return chatMessages;
   }
-
   public void setChatMessages(IList<GroupChatMessageProto> chatMessages) {
     this.chatMessages = chatMessages;
   }
   
   @Autowired
   protected HazelcastPvpUtil hazelcastPvpUtil;
-
 	public HazelcastPvpUtil getHazelcastPvpUtil() {
 		return hazelcastPvpUtil;
 	}
-
 	public void setHazelcastPvpUtil(HazelcastPvpUtil hazelcastPvpUtil) {
 		this.hazelcastPvpUtil = hazelcastPvpUtil;
 	}
 	
 	@Autowired
 	protected Locker locker;
-
   public Locker getLocker() {
 		return locker;
 	}
-
 	public void setLocker(Locker locker) {
 		this.locker = locker;
 	}
 
 	@Autowired
 	protected TimeUtils timeUtils;
-	
 	public TimeUtils getTimeUtils() {
 		return timeUtils;
 	}
-
 	public void setTimeUtils(TimeUtils timeUtils) {
 		this.timeUtils = timeUtils;
 	}
 	
 	@Autowired
 	protected Globals globals;
-	
   public Globals getGlobals() {
 		return globals;
 	}
-
 	public void setGlobals(Globals globals) {
 		this.globals = globals;
 	}
 
+	private static final class GroupChatComparator implements Comparator<GroupChatMessageProto> {
+    @Override
+    public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
+      if (o1.getTimeOfChat() < o2.getTimeOfChat()) {
+        return -1;
+      } else if (o1.getTimeOfChat() > o2.getTimeOfChat()) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+  }
 	
-
+	@Autowired
+	protected PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil;
+	public PvpBattleHistoryRetrieveUtil getPvpBattleHistoryRetrieveUtil() {
+		return pvpBattleHistoryRetrieveUtil;
+	}
+	public void setPvpBattleHistoryRetrieveUtil(
+			PvpBattleHistoryRetrieveUtil pvpBattleHistoryRetrieveUtil) {
+		this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
+	}
+	
 	@Override
   public RequestEvent createRequestEvent() {
     return new StartupRequestEvent();
@@ -287,7 +287,7 @@ public class StartupController extends EventController {
 			      setUserClanInfos(resBuilder, userId);
 			      setNotifications(resBuilder, user);
 			      setNoticesToPlayers(resBuilder);
-			      setChatMessages(resBuilder, user);
+			      setGroupChatMessages(resBuilder, user);
 			      setPrivateChatPosts(resBuilder, user, userId);
 			      setUserMonsterStuff(resBuilder, userId);
 			      setBoosterPurchases(resBuilder);
@@ -297,6 +297,7 @@ public class StartupController extends EventController {
 			      setEventStuff(resBuilder, userId);
 			      //if server sees that the user is in a pvp battle, decrement user's elo
 			      pvpBattleStuff(user, userId, freshRestart); 
+			      pvpBattleHistoryStuff(resBuilder, user, userId);
 			      setClanRaidStuff(resBuilder, user, userId, now);
 			      
 			      
@@ -503,42 +504,13 @@ public class StartupController extends EventController {
 
   }
   
-
-
-  
-  
-  private void setChatMessages(StartupResponseProto.Builder resBuilder, User user) {
-  	  if (user.getClanId() > 0) {
-  	    List<ClanChatPost> activeClanChatPosts;
-  	    activeClanChatPosts = ClanChatPostRetrieveUtils.getMostRecentClanChatPostsForClan(
-  	        ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP, user.getClanId());
-  	
-  	    if (activeClanChatPosts != null) {
-  	      if (activeClanChatPosts != null && activeClanChatPosts.size() > 0) {
-  	        List<Integer> userIds = new ArrayList<Integer>();
-  	        for (ClanChatPost p : activeClanChatPosts) {
-  	          userIds.add(p.getPosterId());
-  	        }
-  	        Map<Integer, User> usersByIds = null;
-  	        if (userIds.size() > 0) {
-  	          usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
-  	          for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
-  	            ClanChatPost pwp = activeClanChatPosts.get(i);
-  	            resBuilder.addClanChats(CreateInfoProtoUtils
-  	                .createGroupChatMessageProtoFromClanChatPost(pwp,
-  	                    usersByIds.get(pwp.getPosterId())));
-  	          }
-  	        }
-  	      }
-  	    }
-  	  }
-  	
-  	  Iterator<GroupChatMessageProto> it = chatMessages.iterator();
-  	  List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
-  	  while (it.hasNext()) {
-  	    globalChats.add(it.next());
-  	  }
-  	
+  private void setGroupChatMessages(StartupResponseProto.Builder resBuilder, User user) {
+  	Iterator<GroupChatMessageProto> it = chatMessages.iterator();
+  	List<GroupChatMessageProto> globalChats = new ArrayList<GroupChatMessageProto>();
+  	while (it.hasNext()) {
+  		globalChats.add(it.next());
+  	}
+  	/*
   	  Comparator<GroupChatMessageProto> c = new Comparator<GroupChatMessageProto>() {
   	    @Override
   	    public int compare(GroupChatMessageProto o1, GroupChatMessageProto o2) {
@@ -550,12 +522,38 @@ public class StartupController extends EventController {
   	        return 0;
   	      }
   	    }
-  	  };
-  	  Collections.sort(globalChats, c);
-  	  // Need to add them in reverse order
-  	  for (int i = 0; i < globalChats.size(); i++) {
-  	    resBuilder.addGlobalChats(globalChats.get(i));
-  	  }
+  	  };*/
+  	Collections.sort(globalChats, new GroupChatComparator());
+  	// Need to add them in reverse order
+  	for (int i = 0; i < globalChats.size(); i++) {
+  		resBuilder.addGlobalChats(globalChats.get(i));
+  	}
+
+  	if (user.getClanId() <= 0) {
+  		return;
+  	}
+  	int limit = ControllerConstants.RETRIEVE_PLAYER_WALL_POSTS__NUM_POSTS_CAP;
+  	List<ClanChatPost> activeClanChatPosts = ClanChatPostRetrieveUtils
+  			.getMostRecentClanChatPostsForClan(limit , user.getClanId());
+
+  	if (null == activeClanChatPosts || activeClanChatPosts.isEmpty()) {
+  		return;
+  	}  		
+  	List<Integer> userIds = new ArrayList<Integer>();
+  	for (ClanChatPost p : activeClanChatPosts) {
+  		userIds.add(p.getPosterId());
+  	}
+  	//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
+  	Map<Integer, User> usersByIds = null;
+  	if (userIds.size() > 0) {
+  		usersByIds = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+  		for (int i = activeClanChatPosts.size() - 1; i >= 0; i--) {
+  			ClanChatPost pwp = activeClanChatPosts.get(i);
+  			resBuilder.addClanChats(CreateInfoProtoUtils
+  					.createGroupChatMessageProtoFromClanChatPost(pwp,
+  							usersByIds.get(pwp.getPosterId())));
+  		}
+  	}
   }
 
   private void setPrivateChatPosts(Builder resBuilder, User aUser, int userId) {
@@ -595,10 +593,11 @@ public class StartupController extends EventController {
       List<Integer> userIdList = new ArrayList<Integer>();
       userIdList.addAll(userIdsToPrivateChatPostIds.keySet());
       userIdList.add(userId); //userIdsToPrivateChatPostIds contains userIds other than 'this' userId
+      //!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
       userIdsToUsers = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIdList);
     } else {
       //user did not send any nor received any private chat posts
-      log.error("unexpected error: aggregating private chat post ids returned nothing");
+      log.error("(not really error) aggregating private chat post ids returned nothing, noob user?");
       return;
     }
     if (null == userIdsToUsers || userIdsToUsers.isEmpty() ||
@@ -850,7 +849,7 @@ public class StartupController extends EventController {
   		return;
   	}
   	
-
+  	//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
   	//GET THE USERS
   	Map<Integer, User> idsToUsers = RetrieveUtils.userRetrieveUtils()
   			.getUsersForFacebookIdsOrUserIds(recipientFacebookIds, inviterUserIds);
@@ -991,11 +990,14 @@ public class StartupController extends EventController {
   		//doesn't reeeally matter if can't penalize defender...
   		
   		//only lock real users
-  		if (0 != defenderId) {
-  			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
-  		}
+//  		if (0 != defenderId) {
+//  			getLocker().lockPlayer(defenderId, this.getClass().getSimpleName());
+//  		}
   		try {
-  			User defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
+  			User defender = null;
+  			if (0 != defenderId) {
+  				defender = RetrieveUtils.userRetrieveUtils().getUserById(defenderId);
+  			}
   			OfflinePvpUser defenderOpu = getHazelcastPvpUtil().getOfflinePvpUser(defenderId);
   			
   			//update attacker
@@ -1013,23 +1015,116 @@ public class StartupController extends EventController {
   			
   			//delete that this battle occurred
   			DeleteUtils.get().deletePvpBattleForUser(userId);
-  			log.info("successfully penalized, rewarded attacker, defender respectively. battle= " +
+  			log.info("successfully penalized, rewarded attacker and defender respectively. battle= " +
   					battle);
   			
   		} catch (Exception e){
-  			log.error("tried to penalize, reward attacker, defender respectively. battle=" +
+  			log.error("tried to penalize, reward attacker and defender respectively. battle=" +
   					battle, e);
   		} finally {
-  			if (0 != defenderId) {
-  				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
-  			}
+//  			if (0 != defenderId) {
+//  				getLocker().unlockPlayer(defenderId, this.getClass().getSimpleName());
+//  			}
   		}
   	} catch (Exception e2) {
-  		log.error("could not successfully penalize, reward attacker, defender respectively." +
+  		log.error("could not successfully penalize and reward attacker, defender respectively." +
   				" battle=" + battle, e2);
   	}
   	
   }
+  
+  private void pvpBattleHistoryStuff(Builder resBuilder, User user, int userId) {
+  	int n = ControllerConstants.PVP_HISTORY__NUM_RECENT_BATTLES;
+  	
+  	//NOTE: AN ATTACKER MIGHT SHOW UP MORE THAN ONCE DUE TO REVENGE
+  	List<PvpBattleHistory> historyList = getPvpBattleHistoryRetrieveUtil()
+  			.getRecentNBattlesForDefenderId(userId, n);
+  	
+  	Set<Integer> attackerIds = getPvpBattleHistoryRetrieveUtil()
+  			.getAttackerIdsFromHistory(historyList);
+  	
+  	//!!!!!!!!!!!RETRIEVE BUNCH OF USERS REQUEST
+  	Map<Integer, User> idsToAttackers = RetrieveUtils.userRetrieveUtils()
+  			.getUsersByIds(attackerIds);
+  	
+  	List<Integer> attackerIdsList = new ArrayList<Integer>(idsToAttackers.keySet());
+  	Map<Integer, List<MonsterForUser>> attackerIdToCurTeam = selectMonstersForUsers(
+  			attackerIdsList);
+  	Map<Integer, Integer> attackerIdsToProspectiveCashWinnings = MiscMethods
+  			.calculateCashRewardFromPvpUsers(idsToAttackers);
+  	Map<Integer, Integer> attackerIdsToProspectiveOilWinnings = MiscMethods
+  			.calculateOilRewardFromPvpUsers(idsToAttackers);
+  	
+  	List<PvpHistoryProto> historyProtoList = CreateInfoProtoUtils
+  			.createPvpHistoryProto(historyList, idsToAttackers, attackerIdToCurTeam,
+  					attackerIdsToProspectiveCashWinnings, attackerIdsToProspectiveOilWinnings);
+  	
+  	resBuilder.addAllRecentNBattles(historyProtoList);
+  }
+  
+  //SOOOOOO DISGUSTING.............ALL THIS FUCKING CODE. SO GROSS.
+  //COPIED FROM QueueUpController;
+  //given users, get the 3 monsters for each user
+	private Map<Integer, List<MonsterForUser>> selectMonstersForUsers(
+			List<Integer> userIdList) {
+		
+		//return value
+		Map<Integer, List<MonsterForUser>> userIdsToUserMonsters =
+				new HashMap<Integer, List<MonsterForUser>>();
+		
+		//for all these users, get all their complete monsters
+		Map<Integer, Map<Long, MonsterForUser>> userIdsToMfuIdsToMonsters = RetrieveUtils
+				.monsterForUserRetrieveUtils().getCompleteMonstersForUser(userIdList);
+		
+		
+		for (int index = 0; index < userIdList.size(); index++) {
+			//extract a user's monsters
+			int defenderId = userIdList.get(index);
+			Map<Long, MonsterForUser> mfuIdsToMonsters = userIdsToMfuIdsToMonsters.get(defenderId);
+			
+			if (null == mfuIdsToMonsters || mfuIdsToMonsters.isEmpty()) {
+				log.error("WTF!!!!!!!! user has no monsters!!!!! userId=" + defenderId +
+						"\t will move on to next guy.");
+				continue;
+			}
+			//try to select at most 3 monsters for this user
+			List<MonsterForUser> defenderMonsters = selectMonstersForUser(mfuIdsToMonsters);
+			
+			//if the user still doesn't have 3 monsters, then too bad
+			userIdsToUserMonsters.put(defenderId, defenderMonsters);
+		}
+		
+		return userIdsToUserMonsters;
+	}
+	private List<MonsterForUser> selectMonstersForUser(Map<Long, MonsterForUser> mfuIdsToMonsters) {
+
+		//get all the monsters the user has on a team (at the moment, max is 3)
+		List<MonsterForUser> defenderMonsters = getEquippedMonsters(mfuIdsToMonsters);
+
+		//so users can have no monsters equipped, so just choose one fucking monster for him
+		if (defenderMonsters.isEmpty()) {
+			List<MonsterForUser> randMonsters = new ArrayList<MonsterForUser>(
+					mfuIdsToMonsters.values());
+			defenderMonsters.add(randMonsters.get(0));
+		}
+		
+		return defenderMonsters;
+	}
+	private List<MonsterForUser> getEquippedMonsters(Map<Long, MonsterForUser> userMonsters) {
+		List<MonsterForUser> equipped = new ArrayList<MonsterForUser>();
+		
+		for (MonsterForUser mfu : userMonsters.values()) {
+			if (mfu.getTeamSlotNum() <= 0) {
+				//only want equipped monsters
+				continue;
+			}
+			equipped.add(mfu);
+			
+		}
+		return equipped;
+	}
+
+	
   
   
   private void setClanRaidStuff(Builder resBuilder, User user, int userId, Timestamp now) {
