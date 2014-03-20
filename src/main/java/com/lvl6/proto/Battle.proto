@@ -36,11 +36,15 @@ message PvpProto {
 
 //------------------------------------------------------------------------------------------
 
-message PvpProtoHistory {
-	optional FullUserProto attacker = 1;
-	optional MinimumUserMonsterProto attackersMonsters = 2; //atm, current monster team
-	optional bool exactedRevenge = 3;
-	optional bool attackerWon = 4;
-	optional int32 defenderCashChange = 5;
-	optional int32 defenderOilChange = 6; 
+message PvpHistoryProto {
+	optional FullUserProto attacker = 1; //the person who acted as the attacker
+	repeated MinimumUserMonsterProto attackersMonsters = 2; //atm, current monster team
+	optional bool attackerWon = 3;
+	optional sint32 defenderCashChange = 4;
+	optional sint32 defenderOilChange = 5; 
+	optional bool exactedRevenge = 6; //whether or not the defender attacked the attacker back
+	
+	//revenge info if defender can get revenge on attacker
+	optional int32 prospectiveCashWinnings = 7;
+	optional int32 prospectiveOilWinnings = 8;
 }
