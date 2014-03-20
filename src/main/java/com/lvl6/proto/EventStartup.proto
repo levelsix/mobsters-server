@@ -1,6 +1,7 @@
 //ALL REQUEST PROTOS SHOULD INCLUDE A MinimumUserProto AS optional that represents which client sent it/triggered it 
 //DO NO START PROPERTY METHODS WITH THE WORDS NEW OR COPY
 
+import "Battle.proto";
 import "BoosterPackStuff.proto";
 import "Chat.proto";
 import "City.proto";
@@ -102,6 +103,10 @@ message StartupResponseProto {
 	repeated PersistentClanEventRaidStageHistoryProto raidStageHistory = 33;
 	
 	//optional TutorialConstants tutorialConstants = 34; //defined above, below #5
+
+	//the last n people that have attacked this user in pvp
+	repeated PvpHistoryProto recentNBattles = 35;
+	
 
 	//repeated LockBoxEventProto lockBoxEvents = ;
 	//repeated UserLockBoxEventProto userLockBoxEvents = ;
