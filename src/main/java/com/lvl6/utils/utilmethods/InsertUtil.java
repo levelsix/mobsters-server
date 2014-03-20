@@ -181,5 +181,5 @@ public interface InsertUtil {
 			Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
 			int defenderEloChange, int attackerOilChange, int defenderOilChange,
 			int attackerCashChange, int defenderCashChange, boolean attackerWon,
-			boolean cancelled, boolean gotRevenge);
+			boolean cancelled, boolean gotRevenge, boolean displayToDefender);
 }

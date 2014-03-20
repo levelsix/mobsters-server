@@ -94,6 +94,7 @@ public class PvpBattleHistoryRetrieveUtil {
 		Map<String, Object> equalityConditions = new HashMap<String, Object>();
 		equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
 		equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, false);
+		equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, true);
 		String conditionDelimiter = getQueryConstructionUtil().getAnd();
 
 		//query db, "values" is not used 

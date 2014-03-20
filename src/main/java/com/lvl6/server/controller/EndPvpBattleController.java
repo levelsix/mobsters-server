@@ -31,6 +31,7 @@ import com.lvl6.pvp.HazelcastPvpUtil;
 import com.lvl6.pvp.OfflinePvpUser;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 import com.lvl6.utils.utilmethods.InsertUtils;
@@ -44,6 +45,9 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   
   @Autowired
   protected Locker locker;
+  
+  @Autowired
+  protected TimeUtils timeUtils;
 
   public EndPvpBattleController() {
     numAllocatedThreads = 7;
@@ -117,6 +121,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
     	boolean successful = false;
     	if(legit) {
+    		//it is possible that the defender has a shield, most likely via buying it,
+    		//and less likely some other way, regardless, the user can have a shield
     		successful = writeChangesToDb(attacker, attackerId, defender, defenderId,
     				defenderOpu, pvpBattleInfo, oilChange, cashChange, curTime, curDate,
     				attackerAttacked, attackerWon, attackerMaxOil, attackerMaxCash);
@@ -210,6 +216,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		int defenderId,  OfflinePvpUser defenderOpu, PvpBattleForUser pvpBattleInfo, 
 		  int oilChange, int cashChange, Timestamp clientTime, Date clientDate,
 		  boolean attackerAttacked, boolean attackerWon, int attackerMaxOil, int attackerMaxCash) {
+  	
 	  boolean cancelled = !attackerAttacked;
 	  
   	if (cancelled) {
@@ -224,7 +231,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		}
   		log.info("writing to pvp history that user cancelled battle");
   		writePvpBattleHistory(attackerId, defenderId, clientTime, pvpBattleInfo, 0, 0,
-  				0, 0, 0, 0, attackerWon, cancelled, false);
+  				0, 0, 0, 0, attackerWon, cancelled, false, false);
   	} else {
   		//user attacked so either he won or lost
   		
@@ -248,6 +255,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   		boolean defenderWon = !attackerWon;
   		int defenderOilChange = 0; 
   		int defenderCashChange = 0;
+  		boolean displayToDefender = true;
   		
   		//defender could be fake user
   		if (null != defender) {
@@ -256,17 +264,30 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   			defenderCashChange = calculateMaxCashChange(defender, defender.getCash(),
     				cashChange, defenderWon);
   			
-  			//since defender is real, update defender's cash, oil, elo
-  			defender.updateEloOilCash(defenderId, defenderEloChange, defenderOilChange,
-  					defenderCashChange);
-
-  			//update the map if the defender exists/is offline <----disregard
-  			//  			if (null != defenderOpu) {
-  			int defenderElo = defender.getElo();
-  			defenderOpu.setElo(defenderElo);
-  			//always update, since whole user table is in hazelcast
-  			getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu); 
-  			//  			}
+  			//if DEFENDER HAS SHIELD THEN DEFENDER SHOULD NOT BE PENALIZED, and 
+  			//the history for this battle should have the display_to_defender set to false;
+  			Date inBattleShieldEndTime = defender.getInBattleShieldEndTime();
+  			Date shieldEndTime = defender.getShieldEndTime();
+  			if (getTimeUtils().isFirstEarlierThanSecond(clientDate, shieldEndTime)) {
+  				displayToDefender = false;
+  				log.warn("some how attacker attacked a defender with a shield!! pvpBattleInfo=" +
+  						pvpBattleInfo + "\t attacker=" + attacker + "\t defender=" + defender);
+  				defenderOilChange = 0;
+  				defenderCashChange = 0;
+  				defenderEloChange = 0;
+  				
+  			} else {
+  				//TODO: update defender's cash, oil, elo and shields
+  				if (attackerWon) {
+  					int hoursAddend = ControllerConstants.PVP__LOST_BATTLE_SHIELD_DURATION_HOURS;
+  					shieldEndTime = getTimeUtils().createDateAddHours(clientDate, hoursAddend);
+  					inBattleShieldEndTime = shieldEndTime;
+  				}
+  				defender.updateEloOilCashShields(defenderId, defenderEloChange, defenderOilChange,
+  						defenderCashChange, shieldEndTime, inBattleShieldEndTime);
+  			}
+  			
+  			updateHazelcastUser(defenderOpu, defender);
   		}
   		log.info("writing to pvp history that user finished battle");
   		log.info("attackerEloChange=" + attackerEloChange + "\t defenderEloChange=" +
@@ -275,7 +296,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   				attackerCashChange + "\t defenderCashChange=" + defenderCashChange);
   		writePvpBattleHistory(attackerId, defenderId, clientTime, pvpBattleInfo,
   				attackerEloChange, defenderEloChange, attackerOilChange, defenderOilChange,
-  				attackerCashChange, defenderCashChange, attackerWon, cancelled, false);
+  				attackerCashChange, defenderCashChange, attackerWon, cancelled, false,
+  				displayToDefender);
   	}
   	
   	log.info("deleting from PvpBattleForUser");
@@ -418,17 +440,30 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	
   }
   
+  private void updateHazelcastUser(OfflinePvpUser defenderOpu, User defender) {
+  	//update the map if the defender exists/is offline
+  	if (null != defenderOpu) {
+  		int defenderElo = defender.getElo();
+  		defenderOpu.setElo(defenderElo);
+  		getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu); 
+  		
+  		defenderOpu.setShieldEndTime(defender.getShieldEndTime());
+  		defenderOpu.setInBattleEndTime(defender.getInBattleShieldEndTime());
+  	}
+  }
+  
   private void writePvpBattleHistory(int attackerId, int defenderId, Timestamp endTime,
   		PvpBattleForUser pvpBattleInfo, int attackerEloChange, int defenderEloChange,
   		int attackerOilChange, int defenderOilChange, int attackerCashChange,
-  		int defenderCashChange, boolean attackerWon, boolean cancelled, boolean gotRevenge) {
+  		int defenderCashChange, boolean attackerWon, boolean cancelled, boolean gotRevenge,
+  		boolean displayToDefender) {
   	
   	Date startDate = pvpBattleInfo.getBattleStartTime();
   	Timestamp battleStartTime = new Timestamp(startDate.getTime());
   	int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(attackerId, defenderId,
   			endTime, battleStartTime, attackerEloChange, defenderEloChange,
   			attackerOilChange, defenderOilChange, attackerCashChange, defenderCashChange,
-  			attackerWon, cancelled, gotRevenge);
+  			attackerWon, cancelled, gotRevenge, displayToDefender);
   	log.info("num inserted into history=" + numInserted );
   }
 
@@ -447,6 +482,14 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
 	public void setLocker(Locker locker) {
 		this.locker = locker;
+	}
+
+	public TimeUtils getTimeUtils() {
+		return timeUtils;
+	}
+
+	public void setTimeUtils(TimeUtils timeUtils) {
+		this.timeUtils = timeUtils;
 	}
   
 }

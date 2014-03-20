@@ -1442,7 +1442,7 @@ public class InsertUtils implements InsertUtil{
 				Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
 				int defenderEloChange, int attackerOilChange, int defenderOilChange,
 				int attackerCashChange, int defenderCashChange, boolean attackerWon,
-				boolean cancelled, boolean gotRevenge) {
+				boolean cancelled, boolean gotRevenge, boolean displayToDefender) {
 			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
 			
 			Map <String, Object> insertParams = new HashMap<String, Object>();
@@ -1463,6 +1463,7 @@ public class InsertUtils implements InsertUtil{
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
 			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, displayToDefender);
 
 			int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 			return numUpdated;

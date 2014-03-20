@@ -611,7 +611,7 @@ public class User implements Serializable {
 
 	/*
 	 * used for battles
-	 */
+	 
 	public boolean updateRelativeExperienceCoinsBattlesWonBattlesLostFlees (
 			int experience, int coins, int battlesWon, int battlesLost, int fleesChange,
 			Timestamp clientTime, boolean deactivateShield,
@@ -731,7 +731,7 @@ public class User implements Serializable {
 		} else if (activateShield) {
 			this.shieldEndTime = shieldEndTimeTemp;
 		}
-	}
+	} */
 
 	public boolean updateRelativeDiamondsForFree(int diamondChange, EarnFreeDiamondsType freeDiamondsType) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -855,6 +855,59 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+	
+
+	public boolean updateEloOilCashShields(int userId, int eloChange, int oilChange,
+			int cashChange, Date shieldEndTime, Date inBattleEndTime) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		if (0 != eloChange) {
+			relativeParams.put(DBConstants.USER__ELO, eloChange);
+		}
+		if (0 != oilChange) {
+			relativeParams.put(DBConstants.USER__OIL, oilChange);
+		}
+		if (0 != cashChange) {
+			relativeParams.put(DBConstants.USER__CASH, cashChange);
+		}
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		if (shieldEndTime != getShieldEndTime()) {
+			Timestamp newShieldEndTime = new Timestamp(shieldEndTime.getTime());
+			absoluteParams.put(DBConstants.USER__SHIELD_END_TIME, newShieldEndTime);
+		}
+		if (inBattleEndTime != getInBattleShieldEndTime()) {
+			Timestamp newShieldEndTime = new Timestamp(inBattleEndTime.getTime());
+			absoluteParams.put(DBConstants.USER__IN_BATTLE_END_TIME, newShieldEndTime);
+		}
+		
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
+				absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+//			this.elo = newElo;
+			if (0 != eloChange) {
+				this.elo += eloChange;
+			}
+			if (0 != oilChange) {
+				this.oil += oilChange;
+			}
+			if (0 != cashChange) {
+				this.cash += cashChange;
+			}
+			if (shieldEndTime != getShieldEndTime()) {
+				this.shieldEndTime = shieldEndTime;
+			}
+			if (inBattleEndTime != getInBattleShieldEndTime()) {
+				this.inBattleShieldEndTime = inBattleEndTime;
+			}
+			return true;
+		}
+		return false;
+	}
+
 
 	/*public boolean updateNthExtraSlotsViaFb(int slotChange) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();

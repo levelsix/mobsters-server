@@ -371,6 +371,7 @@ public class DBConstants {
   public static final String PVP_BATTLE_HISTORY__ATTACKER_WON = "attacker_won";
   public static final String PVP_BATTLE_HISTORY__CANCELLED = "cancelled";
   public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
+  public static final String PVP_BATTLE_HISTORY__DISPLAY_TO_USER = "display_to_user";
 
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
