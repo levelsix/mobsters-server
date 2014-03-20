@@ -111,7 +111,7 @@ public class PvpBattleHistoryRetrieveUtil {
 			querySb.append(query);
 			querySb.append(" order by ");
 			querySb.append(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME);
-			querySb.append(" descending limit");
+			querySb.append(" descending limit ");
 			querySb.append(n);
 			
 			query = querySb.toString(); 
