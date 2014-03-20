@@ -176,5 +176,10 @@ public interface InsertUtil {
 	
 	public abstract List<Integer> insertIntoCepUserReward(Timestamp crsStartTime, int crsId,
 			Timestamp crsEndTime, int clanEventId, List<ClanEventPersistentUserReward> userRewards);
-	
+
+	public abstract int insertIntoPvpBattleHistory(int attackerId, int defenderId,
+			Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
+			int defenderEloChange, int attackerOilChange, int defenderOilChange,
+			int attackerCashChange, int defenderCashChange, boolean attackerWon,
+			boolean cancelled, boolean gotRevenge);
 }

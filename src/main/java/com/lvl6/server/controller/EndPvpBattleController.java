@@ -33,6 +33,7 @@ import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.server.Locker;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
+import com.lvl6.utils.utilmethods.InsertUtils;
 
 @Component @DependsOn("gameServer") public class EndPvpBattleController extends EventController {
 
@@ -209,8 +210,9 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   		int defenderId,  OfflinePvpUser defenderOpu, PvpBattleForUser pvpBattleInfo, 
 		  int oilChange, int cashChange, Timestamp clientTime, Date clientDate,
 		  boolean attackerAttacked, boolean attackerWon, int attackerMaxOil, int attackerMaxCash) {
+	  boolean cancelled = !attackerAttacked;
 	  
-  	if (!attackerAttacked) {
+  	if (cancelled) {
   		//this means that the only thing that changes is defenderOpu's inBattleShieldEndTime
   		//just change it so its not in the future
   		
@@ -220,12 +222,11 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   			defenderOpu.setInBattleEndTime(clientDate);
   			getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
   		}
+  		log.info("writing to pvp history that user cancelled battle");
+  		writePvpBattleHistory(attackerId, defenderId, clientTime, pvpBattleInfo, 0, 0,
+  				0, 0, 0, 0, attackerWon, cancelled, false);
   	} else {
   		//user attacked so either he won or lost
-  		//so the defender either loses or gains elo
-  		
-  		int maxAttackerOilChange = calculateMaxOilChange(attacker, attackerMaxOil, oilChange, attackerWon);
-  		int maxAttackerCashChange = calculateMaxCashChange(attacker, attackerMaxCash, cashChange, attackerWon);
   		
   		//MAKE SURE THE ATTACKER AND DEFENDER'S ELO DON'T GO BELOW 0
   		//TODO: WHEN MAX ELO IS FIGURED OUT, MAKE SURE ELO DOESN'T GO ABOVE THAT
@@ -235,24 +236,43 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   				attackerEloChangeList, defenderEloChangeList);
   		int attackerEloChange = attackerEloChangeList.get(0);
   		int defenderEloChange = defenderEloChangeList.get(0);
+  		int attackerOilChange = calculateMaxOilChange(attacker, attackerMaxOil, oilChange, attackerWon);
+  		int attackerCashChange = calculateMaxCashChange(attacker, attackerMaxCash, cashChange, attackerWon);
   		
   		//update attacker's cash, oil, elo
-  		attacker.updateEloOilCash(attackerId, attackerEloChange, maxAttackerOilChange,
-  				maxAttackerCashChange);
+  		attacker.updateEloOilCash(attackerId, attackerEloChange, attackerOilChange,
+  				attackerCashChange);
+  		
+  		//need to take into account if defender (online and) spent some cash/oil before
+  		//pvp battle ends, defender will not gain resources by winning
+  		boolean defenderWon = !attackerWon;
+  		int defenderOilChange = calculateMaxOilChange(defender, defender.getOil(),
+  				oilChange, defenderWon);
+  		int defenderCashChange = calculateMaxCashChange(defender, defender.getCash(),
+  				cashChange, defenderWon);
   		
   		//defender could be fake user
   		if (null != defender) {
   			//since defender is real, update defender's cash, oil, elo
-  			defender.updateEloOilCash(defenderId, defenderEloChange, 0, 0);
+  			defender.updateEloOilCash(defenderId, defenderEloChange, defenderOilChange,
+  					defenderCashChange);
 
-  			//update the map if the defender exists/is offline
-  			if (null != defenderOpu) {
-  				//need to update the map if he exists
-  				int defenderElo = defender.getElo();
-  				defenderOpu.setElo(defenderElo);
-  				getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu);
-  			}
+  			//update the map if the defender exists/is offline <----disregard
+  			//  			if (null != defenderOpu) {
+  			int defenderElo = defender.getElo();
+  			defenderOpu.setElo(defenderElo);
+  			//always update, since whole user table is in hazelcast
+  			getHazelcastPvpUtil().updateOfflinePvpUser(defenderOpu); 
+  			//  			}
   		}
+  		log.info("writing to pvp history that user finished battle");
+  		log.info("attackerEloChange=" + attackerEloChange + "\t defenderEloChange=" +
+  				defenderEloChange + "\t attackerOilChange="+ attackerOilChange +
+  				"\t defenderOilChange=" + defenderOilChange + "\t attackerCashChange=" +
+  				attackerCashChange + "\t defenderCashChange=" + defenderCashChange);
+  		writePvpBattleHistory(attackerId, defenderId, clientTime, pvpBattleInfo,
+  				attackerEloChange, defenderEloChange, attackerOilChange, defenderOilChange,
+  				attackerCashChange, defenderCashChange, attackerWon, cancelled, false);
   	}
   	
   	log.info("deleting from PvpBattleForUser");
@@ -274,10 +294,11 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   	
   	if (userWon) {
   		//if user somehow has more than max oil, first treat user as having max oil,
-  		//figure out the amount he gains (0) and then subtract, the extra oil he had
+  		//figure out the amount he gains (0) and then subtract the extra oil he had
   		int oilLoss = 0;
   		int userOil = user.getOil();
   		if (userOil > maxOil) {
+  			log.info("user has more than the max resources");
   			oilLoss = userOil - maxOil;
   		}
   		
@@ -392,6 +413,20 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
   	attackerEloChangeList.add(attackerEloChange);
   	defenderEloChangeList.add(defenderEloChange);
   	
+  }
+  
+  private void writePvpBattleHistory(int attackerId, int defenderId, Timestamp endTime,
+  		PvpBattleForUser pvpBattleInfo, int attackerEloChange, int defenderEloChange,
+  		int attackerOilChange, int defenderOilChange, int attackerCashChange,
+  		int defenderCashChange, boolean attackerWon, boolean cancelled, boolean gotRevenge) {
+  	
+  	Date startDate = pvpBattleInfo.getBattleStartTime();
+  	Timestamp battleStartTime = new Timestamp(startDate.getTime());
+  	int numInserted = InsertUtils.get().insertIntoPvpBattleHistory(attackerId, defenderId,
+  			endTime, battleStartTime, attackerEloChange, defenderEloChange,
+  			attackerOilChange, defenderOilChange, attackerCashChange, defenderCashChange,
+  			attackerWon, cancelled, gotRevenge);
+  	log.info("num inserted into history=" + numInserted );
   }
 
 

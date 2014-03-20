@@ -1437,4 +1437,34 @@ public class InsertUtils implements InsertUtil{
 			return ids;                                                                      
 		}                                                                                          
 		
+		@Override
+		public int insertIntoPvpBattleHistory(int attackerId, int defenderId,
+				Timestamp battleEndTime, Timestamp battleStartTime, int attackerEloChange,
+				int defenderEloChange, int attackerOilChange, int defenderOilChange,
+				int attackerCashChange, int defenderCashChange, boolean attackerWon,
+				boolean cancelled, boolean gotRevenge) {
+			String tableName = DBConstants.TABLE_PVP_BATTLE_HISTORY;
+			
+			Map <String, Object> insertParams = new HashMap<String, Object>();
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ID, attackerId);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME, battleEndTime);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__BATTLE_START_TIME, battleStartTime);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE, attackerEloChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE, defenderEloChange);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE, attackerCashChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE, defenderCashChange);
+			
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE, attackerOilChange);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE, defenderOilChange);
+
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__ATTACKER_WON, attackerWon);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, cancelled);
+			insertParams.put(DBConstants.PVP_BATTLE_HISTORY__EXACTED_REVENGE, gotRevenge);
+
+			int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
+			return numUpdated;
+		}
 }

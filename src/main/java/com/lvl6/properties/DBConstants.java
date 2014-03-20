@@ -52,6 +52,7 @@ public class DBConstants {
   public static final String TABLE_OBSTACLE = "obstacle";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
+  public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
   public static final String TABLE_QUEST = "quest";
   public static final String TABLE_QUEST_FOR_USER = "quest_for_user";
   public static final String TABLE_QUEST_MONSTER_ITEM = "quest_monster_item";
@@ -355,6 +356,21 @@ public class DBConstants {
   public static final String PVP_BATTLE_FOR_USER__ATTACKER_LOSE_ELO_CHANGE = "attacker_lose_elo_change";
   public static final String PVP_BATTLE_FOR_USER__DEFENDER_WIN_ELO_CHANGE = "defender_win_elo_change";
   public static final String PVP_BATTLE_FOR_USER__BATTLE_START_TIME = "battle_start_time";
+
+  /*PVP BATTLE HISTORY*/
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_ID = "attacker_id";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_ID = "defender_id";
+  public static final String PVP_BATTLE_HISTORY__BATTLE_END_TIME = "battle_end_time";
+  public static final String PVP_BATTLE_HISTORY__BATTLE_START_TIME = "battle_start_time";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_ELO_CHANGE = "attacker_elo_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_ELO_CHANGE = "defender_elo_change";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_CASH_CHANGE = "attacker_cash_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_CASH_CHANGE = "defender_cash_change";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_OIL_CHANGE = "attacker_oil_change";
+  public static final String PVP_BATTLE_HISTORY__DEFENDER_OIL_CHANGE = "defender_oil_change";
+  public static final String PVP_BATTLE_HISTORY__ATTACKER_WON = "attacker_won";
+  public static final String PVP_BATTLE_HISTORY__CANCELLED = "cancelled";
+  public static final String PVP_BATTLE_HISTORY__EXACTED_REVENGE = "exacted_revenge";
 
   /*USER QUESTS TABLE*/
   public static final String QUEST_FOR_USER___USER_ID = GENERIC__USER_ID;
