@@ -5,12 +5,13 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ObstacleForUser;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 
-
+@Component
 public class StructureStuffUtil {
 	
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
