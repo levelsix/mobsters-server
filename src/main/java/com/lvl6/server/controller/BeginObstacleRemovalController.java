@@ -68,7 +68,7 @@ public class BeginObstacleRemovalController extends EventController{
 		int userId = senderProto.getUserId();
 		Timestamp clientTime = new Timestamp(reqProto.getCurTime());
 		int gemsSpent = reqProto.getGemsSpent();
-		int resourceChange = reqProto.getGemsSpent();
+		int resourceChange = reqProto.getResourceChange();
 		ResourceType rt = reqProto.getResourceType();
 		int userObstacleId = reqProto.getUserObstacleId();
 
