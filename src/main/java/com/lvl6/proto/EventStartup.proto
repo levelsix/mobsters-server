@@ -7,12 +7,12 @@ import "Chat.proto";
 import "City.proto";
 import "Clan.proto";
 import "InAppPurchase.proto";
+import "MonsterStuff.proto";
 import "Quest.proto";
 import "StaticData.proto";
 import "Structure.proto";
 import "Task.proto";
 import "User.proto";
-import "MonsterStuff.proto";
 
 package com.lvl6.proto;
 
@@ -237,6 +237,8 @@ message StartupResponseProto {
 		optional int32 cashInit = 11;
 		optional int32 oilInit = 12;
 		optional int32 gemsInit = 13;
+		
+		repeated MinimumObstacleProto initObstacles = 14;
 		 	
 	}
 	
