@@ -51,4 +51,6 @@ public interface DeleteUtil {
   public abstract int deleteClanEventPersistentForClan(int clanId);
   
   public abstract int deleteClanEventPersistentForUsers(List<Integer> userIdList);
+  
+  public abstract int deleteObstacleForUser(int userObstacleId);
 }

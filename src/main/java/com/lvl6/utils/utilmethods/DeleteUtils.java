@@ -330,4 +330,15 @@ public class DeleteUtils implements DeleteUtil {
 		int numDeleted = DBConnection.get().deleteDirectQueryNaive(query, userIdList);
 		return numDeleted;
 	}
+	
+	@Override
+	public int deleteObstacleForUser(int userObstacleId) {
+		String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;
+
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.OBSTACLE_FOR_USER__ID, userObstacleId);
+
+		int numDeleted = DBConnection.get().deleteRows(tableName, conditionParams, "and");
+		return numDeleted;
+	}
 }

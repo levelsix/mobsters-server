@@ -98,7 +98,7 @@ import com.lvl6.utils.RetrieveUtils;
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(aUser);
       	resEventUpdate.setTag(event.getTag());
       	server.writeEvent(resEventUpdate);
-      	//TODO: KEEP TRACK OF CURRENCY HISTORY
+      	
       	writeToUserCurrencyHistory(aUser, currencyChange, clientTime, previousGems,
       			previousCash, previousOil, reason, details);
       	
@@ -256,7 +256,6 @@ import com.lvl6.utils.RetrieveUtils;
 	  return true;
   }
   
-  //TODO: FIX THIS
   private void writeToUserCurrencyHistory(User aUser, Map<String, Integer> currencyChange,
   		Timestamp curTime, int previousGems, int previousCash, int previousOil,
   		String reason, String details) {

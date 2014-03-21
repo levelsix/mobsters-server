@@ -157,6 +157,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";
 	public static final String UCHRFC__SPED_UP_EVOLUTION = "sped up evolving user monster";
 	public static final String UCHRFC__SPED_UP_NORM_STRUCT = "sped up norm stuct";
+	public static final String UCHRFC__SPED_UP_REMOVE_OBSTACLE = "sped up remove obstacle";
 	public static final String UCHRFC__UPGRADE_NORM_STRUCT = "upgrading norm struct";
 	
 	
