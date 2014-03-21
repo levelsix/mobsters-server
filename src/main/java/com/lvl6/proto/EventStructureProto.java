@@ -12771,6 +12771,10 @@ public final class EventStructureProto {
     // optional int32 userObstacleId = 5;
     boolean hasUserObstacleId();
     int getUserObstacleId();
+    
+    // optional bool atMaxObstacles = 6;
+    boolean hasAtMaxObstacles();
+    boolean getAtMaxObstacles();
   }
   public static final class ObstacleRemovalCompleteRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -12854,12 +12858,23 @@ public final class EventStructureProto {
       return userObstacleId_;
     }
     
+    // optional bool atMaxObstacles = 6;
+    public static final int ATMAXOBSTACLES_FIELD_NUMBER = 6;
+    private boolean atMaxObstacles_;
+    public boolean hasAtMaxObstacles() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public boolean getAtMaxObstacles() {
+      return atMaxObstacles_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       curTime_ = 0L;
       speedUp_ = false;
       gemsSpent_ = 0;
       userObstacleId_ = 0;
+      atMaxObstacles_ = false;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -12887,6 +12902,9 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeInt32(5, userObstacleId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBool(6, atMaxObstacles_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -12916,6 +12934,10 @@ public final class EventStructureProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(5, userObstacleId_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, atMaxObstacles_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -13056,6 +13078,8 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         userObstacleId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000010);
+        atMaxObstacles_ = false;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -13118,6 +13142,10 @@ public final class EventStructureProto {
           to_bitField0_ |= 0x00000010;
         }
         result.userObstacleId_ = userObstacleId_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.atMaxObstacles_ = atMaxObstacles_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -13148,6 +13176,9 @@ public final class EventStructureProto {
         }
         if (other.hasUserObstacleId()) {
           setUserObstacleId(other.getUserObstacleId());
+        }
+        if (other.hasAtMaxObstacles()) {
+          setAtMaxObstacles(other.getAtMaxObstacles());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -13207,6 +13238,11 @@ public final class EventStructureProto {
             case 40: {
               bitField0_ |= 0x00000010;
               userObstacleId_ = input.readInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              atMaxObstacles_ = input.readBool();
               break;
             }
           }
@@ -13385,6 +13421,27 @@ public final class EventStructureProto {
       public Builder clearUserObstacleId() {
         bitField0_ = (bitField0_ & ~0x00000010);
         userObstacleId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool atMaxObstacles = 6;
+      private boolean atMaxObstacles_ ;
+      public boolean hasAtMaxObstacles() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public boolean getAtMaxObstacles() {
+        return atMaxObstacles_;
+      }
+      public Builder setAtMaxObstacles(boolean value) {
+        bitField0_ |= 0x00000020;
+        atMaxObstacles_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearAtMaxObstacles() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        atMaxObstacles_ = false;
         onChanged();
         return this;
       }
@@ -14203,19 +14260,19 @@ public final class EventStructureProto {
       "ObstacleRemovalStatus\"u\n\032BeginObstacleRe" +
       "movalStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFI" +
       "CIENT_GEMS\020\002\022\036\n\032FAIL_INSUFFICIENT_RESOUR" +
-      "CE\020\003\022\016\n\nFAIL_OTHER\020\004\"\244\001\n#ObstacleRemoval" +
+      "CE\020\003\022\016\n\nFAIL_OTHER\020\004\"\274\001\n#ObstacleRemoval" +
       "CompleteRequestProto\0220\n\006sender\030\001 \001(\0132 .c" +
       "om.lvl6.proto.MinimumUserProto\022\017\n\007curTim",
       "e\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\tgemsSpent\030\004 " +
-      "\001(\005\022\026\n\016userObstacleId\030\005 \001(\005\"\226\002\n$Obstacle" +
-      "RemovalCompleteResponseProto\0220\n\006sender\030\001" +
-      " \001(\0132 .com.lvl6.proto.MinimumUserProto\022b" +
-      "\n\006status\030\002 \001(\0162R.com.lvl6.proto.Obstacle" +
-      "RemovalCompleteResponseProto.ObstacleRem" +
-      "ovalCompleteStatus\"X\n\035ObstacleRemovalCom" +
-      "pleteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFI" +
-      "CIENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003B\025B\023EventStr" +
-      "uctureProto"
+      "\001(\005\022\026\n\016userObstacleId\030\005 \001(\005\022\026\n\016atMaxObst" +
+      "acles\030\006 \001(\010\"\226\002\n$ObstacleRemovalCompleteR" +
+      "esponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6." +
+      "proto.MinimumUserProto\022b\n\006status\030\002 \001(\0162R" +
+      ".com.lvl6.proto.ObstacleRemovalCompleteR" +
+      "esponseProto.ObstacleRemovalCompleteStat" +
+      "us\"X\n\035ObstacleRemovalCompleteStatus\022\013\n\007S" +
+      "UCCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\016\n\n" +
+      "FAIL_OTHER\020\003B\025B\023EventStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14379,7 +14436,7 @@ public final class EventStructureProto {
           internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ObstacleRemovalCompleteRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CurTime", "SpeedUp", "GemsSpent", "UserObstacleId", },
+              new java.lang.String[] { "Sender", "CurTime", "SpeedUp", "GemsSpent", "UserObstacleId", "AtMaxObstacles", },
               com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto.class,
               com.lvl6.proto.EventStructureProto.ObstacleRemovalCompleteRequestProto.Builder.class);
           internal_static_com_lvl6_proto_ObstacleRemovalCompleteResponseProto_descriptor =

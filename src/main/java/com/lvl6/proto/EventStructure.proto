@@ -273,6 +273,10 @@ message ObstacleRemovalCompleteRequestProto {
 	optional int32 gemsSpent = 4;
 	
 	optional int32 userObstacleId = 5;
+	
+	//if user is at max obstacles and hasn't logged into the game in a while, then
+	//when he clears one, the last spawned time should be when he cleared this obstacle
+	optional bool atMaxObstacles = 6;
 }
 
 message ObstacleRemovalCompleteResponseProto {

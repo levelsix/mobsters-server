@@ -929,6 +929,28 @@ public class User implements Serializable {
 		}
 		return false;
 	}
+	
+	public boolean updateRelativeGemsAndObstacleTime(int gemChange,
+			Timestamp lastObstacleSpawnedTime) {
+		Map <String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map<String, Object> relativeParams = new HashMap<String, Object>();
+		if (gemChange != 0) {
+			relativeParams.put(DBConstants.USER__GEMS, gemChange);
+		}
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, lastObstacleSpawnedTime);
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+			this.gems += gemChange;
+			return true;
+		}
+		return false;
+	}
 
 	/*public boolean updateNthExtraSlotsViaFb(int slotChange) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();

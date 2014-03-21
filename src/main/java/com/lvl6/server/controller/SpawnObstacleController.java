@@ -142,14 +142,10 @@ public class SpawnObstacleController extends EventController{
 	
   private boolean writeChangesToDB(User user, int userId, Timestamp clientTime,
   		List<MinimumObstacleProto> mopList, List<ObstacleForUser> ofuList) {
-
-  	if (!user.updateLastObstacleSpawnedTime(clientTime)) {
-  		log.error("could not update last obstacle spawned time to " + clientTime);
-  		return false;
-  	}
   	//convert the protos to java objects
   	List<ObstacleForUser> ofuListTemp = getStructureStuffUtil()
   			.createObstacleForUserFromUserObstacleProtos(userId, mopList);
+  	log.info("inserting obstacles into obstacle_for_user. ofuListTemp=" + ofuListTemp);
   	
   	//need to get the ids in order to set the objects' ids so client will know how
   	//to reference said objects
@@ -157,6 +153,12 @@ public class SpawnObstacleController extends EventController{
   			userId, ofuListTemp);
   	if (null == ofuIdList || ofuIdList.isEmpty()) {
   		log.error("could not insert into obstacle for user obstacles=" + ofuListTemp);
+  		return false;
+  	}
+
+  	log.info("updating last obstacle spawned time:" + clientTime);
+  	if (!user.updateLastObstacleSpawnedTime(clientTime)) {
+  		log.error("could not update last obstacle spawned time to " + clientTime);
   		return false;
   	}
   	

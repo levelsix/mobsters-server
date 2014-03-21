@@ -68,6 +68,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		boolean speedUp = reqProto.getSpeedUp();
 		int gemCostToSpeedUp = reqProto.getGemsSpent();
 		int userObstacleId = reqProto.getUserObstacleId();
+		boolean atMaxObstacles = reqProto.getAtMaxObstacles();
 
 		ObstacleRemovalCompleteResponseProto.Builder resBuilder = ObstacleRemovalCompleteResponseProto.newBuilder();
 		resBuilder.setSender(senderProto);
@@ -89,7 +90,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 			if (legitExpansionComplete) {
 				previousGems = user.getGems();
 				success = writeChangesToDB(user, userObstacleId, speedUp, gemCostToSpeedUp,
-						clientTime, money);
+						clientTime, atMaxObstacles, money);
 			}
 			
 			ObstacleRemovalCompleteResponseEvent resEvent = new ObstacleRemovalCompleteResponseEvent(senderProto.getUserId());
@@ -97,7 +98,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 			resEvent.setObstacleRemovalCompleteResponseProto(resBuilder.build());  
 			server.writeEvent(resEvent);
 			
-			if (success && speedUp) {
+			if (success && (speedUp || atMaxObstacles)) {
 				UpdateClientUserResponseEvent resEventUpdate = MiscMethods
       			.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
       	resEventUpdate.setTag(event.getTag());
@@ -123,9 +124,18 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 		}
 	}
 	private boolean writeChangesToDB(User user, int ofuId, boolean speedUp, 
-			int gemCost, Timestamp clientTime, Map<String, Integer> money) {
-		if (speedUp) {
-			int gemChange = -1 * gemCost;
+			int gemCost, Timestamp clientTime, boolean atMaxObstacles, Map<String, Integer> money) {
+		int gemChange = -1 * gemCost;
+		if (speedUp && atMaxObstacles) {
+			if (!user.updateRelativeGemsAndObstacleTime(gemChange, clientTime)) {
+				log.error("problem updating user gems. gemChange=" + gemChange);
+				return false;
+			} else {
+				//everything went ok
+				money.put(MiscMethods.gems, gemChange);
+			}
+			
+		} else if (speedUp) {
 			if (!user.updateRelativeGemsNaive(gemChange)) {
 				log.error("problem updating user gems. gemChange=" + gemChange);
 				return false;
@@ -133,7 +143,14 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 				//everything went ok
 				money.put(MiscMethods.gems, gemChange);
 			}
+			
+		} else if (atMaxObstacles) {
+			if (!user.updateLastObstacleSpawnedTime(clientTime)) {
+	  		log.error("could not update last obstacle spawned time to " + clientTime);
+	  		return false;
+	  	}
 		}
+		
 		
 		int numDeleted = DeleteUtils.get().deleteObstacleForUser(ofuId);
 		log.info("(obstacles) numDeleted=" + numDeleted);
