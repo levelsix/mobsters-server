@@ -50,6 +50,7 @@ public class DBConstants {
   public static final String TABLE_MONSTER_HEALING_HISTORY = "monster_healing_history";
   public static final String TABLE_MONSTER_LEVEL_INFO = "monster_level_info";
   public static final String TABLE_OBSTACLE = "obstacle";
+  public static final String TABLE_OBSTACLE_FOR_USER = "obstacle_for_user";
   public static final String TABLE_PROFANITY = "profanity";
   public static final String TABLE_PVP_BATTLE_FOR_USER = "pvp_battle_for_user";
   public static final String TABLE_PVP_BATTLE_HISTORY = "pvp_battle_history";
@@ -347,6 +348,15 @@ public class DBConstants {
   public static final String MONSTER_HEALING_HISTORY__QUEUED_TIME = "queued_time";
   public static final String MONSTER_HEALING_HISTORY__DEQUEUED_TIME = "dequeued_time";
   public static final String MONSTER_HEALING_HISTORY__FINISHED_HEALING = "finished_healing";
+  
+  /*OBSTACLE FOR USER */
+  public static final String OBSTACLE_FOR_USER__ID = GENERIC__ID;
+  public static final String OBSTACLE_FOR_USER__USER_ID = GENERIC__USER_ID;
+  public static final String OBSTACLE_FOR_USER__OBSTACLE_ID = "obstacle_id";
+  public static final String OBSTACLE_FOR_USER__XCOORD = "xcoord";
+  public static final String OBSTACLE_FOR_USER__YCOORD = "ycoord";
+  public static final String OBSTACLE_FOR_USER__REMOVAL_TIME = "removal_time";
+  public static final String OBSTACLE_FOR_USER__ORIENTATION = "orientation";
 
   /*PVP BATTLE HISTORY*/
   public static final String PVP_BATTLE_FOR_USER__ATTACKER_ID = "attacker_id";

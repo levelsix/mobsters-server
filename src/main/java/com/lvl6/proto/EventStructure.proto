@@ -226,6 +226,7 @@ message SpawnObstacleResponseProto {
 	optional MinimumUserProto sender = 1;
 	repeated UserObstacleProto spawnedObstacles = 2;
 	
+	optional SpawnObstacleStatus status = 3;
 	enum SpawnObstacleStatus {
 		SUCCESS = 1;
 		FAIL_OTHER = 2;
@@ -248,6 +249,7 @@ message BeginObstacleRemovalRequestProto {
 
 message BeginObstacleRemovalResponseProto {
 	optional MinimumUserProto sender = 1;
+	optional BeginObstacleRemovalStatus status = 2;
 	
 	enum BeginObstacleRemovalStatus {
 		SUCCESS = 1;
@@ -271,6 +273,7 @@ message ObstacleRemovalCompleteRequestProto {
 
 message ObstacleRemovalCompleteResponseProto {
 	optional MinimumUserProto sender = 1;
+	optional ObstacleRemovalCompleteStatus status = 2;
 	
 	enum ObstacleRemovalCompleteStatus {
 		SUCCESS = 1;
