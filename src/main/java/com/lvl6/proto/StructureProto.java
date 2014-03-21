@@ -9104,9 +9104,9 @@ public final class StructureProto {
   public interface UserObstacleProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
-    // optional int64 userObstacleId = 1;
+    // optional int32 userObstacleId = 1;
     boolean hasUserObstacleId();
-    long getUserObstacleId();
+    int getUserObstacleId();
     
     // optional int32 userId = 2;
     boolean hasUserId();
@@ -9158,13 +9158,13 @@ public final class StructureProto {
     }
     
     private int bitField0_;
-    // optional int64 userObstacleId = 1;
+    // optional int32 userObstacleId = 1;
     public static final int USEROBSTACLEID_FIELD_NUMBER = 1;
-    private long userObstacleId_;
+    private int userObstacleId_;
     public boolean hasUserObstacleId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public long getUserObstacleId() {
+    public int getUserObstacleId() {
       return userObstacleId_;
     }
     
@@ -9222,7 +9222,7 @@ public final class StructureProto {
     }
     
     private void initFields() {
-      userObstacleId_ = 0L;
+      userObstacleId_ = 0;
       userId_ = 0;
       obstacleId_ = 0;
       coordinates_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
@@ -9242,7 +9242,7 @@ public final class StructureProto {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, userObstacleId_);
+        output.writeInt32(1, userObstacleId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, userId_);
@@ -9270,7 +9270,7 @@ public final class StructureProto {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, userObstacleId_);
+          .computeInt32Size(1, userObstacleId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -9417,7 +9417,7 @@ public final class StructureProto {
       
       public Builder clear() {
         super.clear();
-        userObstacleId_ = 0L;
+        userObstacleId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         userId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -9566,7 +9566,7 @@ public final class StructureProto {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              userObstacleId_ = input.readInt64();
+              userObstacleId_ = input.readInt32();
               break;
             }
             case 16: {
@@ -9610,15 +9610,15 @@ public final class StructureProto {
       
       private int bitField0_;
       
-      // optional int64 userObstacleId = 1;
-      private long userObstacleId_ ;
+      // optional int32 userObstacleId = 1;
+      private int userObstacleId_ ;
       public boolean hasUserObstacleId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public long getUserObstacleId() {
+      public int getUserObstacleId() {
         return userObstacleId_;
       }
-      public Builder setUserObstacleId(long value) {
+      public Builder setUserObstacleId(int value) {
         bitField0_ |= 0x00000001;
         userObstacleId_ = value;
         onChanged();
@@ -9626,7 +9626,7 @@ public final class StructureProto {
       }
       public Builder clearUserObstacleId() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        userObstacleId_ = 0L;
+        userObstacleId_ = 0;
         onChanged();
         return this;
       }
@@ -9959,7 +9959,7 @@ public final class StructureProto {
       "pear\030\013 \001(\002\"_\n\024MinimumObstacleProto\022\022\n\nob" +
       "stacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com" +
       ".lvl6.proto.CoordinateProto\"\327\001\n\021UserObst" +
-      "acleProto\022\026\n\016userObstacleId\030\001 \001(\003\022\016\n\006use" +
+      "acleProto\022\026\n\016userObstacleId\030\001 \001(\005\022\016\n\006use" +
       "rId\030\002 \001(\005\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordin" +
       "ates\030\004 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
       "oto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6.prot",
