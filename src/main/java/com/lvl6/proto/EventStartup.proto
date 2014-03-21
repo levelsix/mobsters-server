@@ -106,7 +106,6 @@ message StartupResponseProto {
 
 	//the last n people that have attacked this user in pvp
 	repeated PvpHistoryProto recentNBattles = 35;
-	repeated UserObstacleProto obstacles = 36;
 	
 
 	//repeated LockBoxEventProto lockBoxEvents = ;

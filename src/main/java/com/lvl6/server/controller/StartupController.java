@@ -213,17 +213,6 @@ public class StartupController extends EventController {
 		this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
 	}
 	
-	@Autowired
-	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
-	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
-		return obstacleForUserRetrieveUtil;
-	}
-	public void setObstacleForUserRetrieveUtil(
-			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
-		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
-	}
-	
-	
 	@Override
   public RequestEvent createRequestEvent() {
     return new StartupRequestEvent();
@@ -314,7 +303,6 @@ public class StartupController extends EventController {
 			      pvpBattleStuff(user, userId, freshRestart, now); 
 			      pvpBattleHistoryStuff(resBuilder, user, userId);
 			      setClanRaidStuff(resBuilder, user, userId, now);
-			      setObstacleStuff(resBuilder, userId);
 			      
 			      
 			      setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
@@ -1235,21 +1223,7 @@ public class StartupController extends EventController {
   		resBuilder.addRaidStageHistory(stageProto);
   	}
   }
-  
-  private void setObstacleStuff(Builder resBuilder, int userId) {
-  	List<ObstacleForUser> ofuList = getObstacleForUserRetrieveUtil()
-  			.getUserObstacleForUser(userId);
-  	
-  	if (null == ofuList) {
-  		return;
-  	}
-  	
-  	for (ObstacleForUser ofu : ofuList) {
-  		UserObstacleProto uop = CreateInfoProtoUtils.createUserObstacleProto(ofu);
-  		resBuilder.addObstacles(uop);
-  	}
-  	
-  }
+
   
   
   
