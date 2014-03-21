@@ -117,32 +117,20 @@ public class ControllerConstants {
 	public static final int[] TUTORIAL__EXISTING_BUILDING_IDS = {40, 80, 120, 140};
 	public static final float[] TUTORIAL__EXISTING_BUILDING_X_POS = {17F, 10F, 11F, 15F};
 	public static final float[] TUTORIAL__EXISTING_BUILDING_Y_POS = {11F, 15F, 9F, 15F};
-	
-//	public static final int TUTORIAL__EXISTING_BUILDING_ONE = 40;
-//	public static final float TUTORIAL__EXISTING_BUILDING_ONE_X = 12F;
-//	public static final float TUTORIAL__EXISTING_BUILDING_ONE_Y = 12F;
-	
-//	public static final int TUTORIAL__EXISTING_BUILDING_TWO = 80;
-//	public static final float TUTORIAL__EXISTING_BUILDING_TWO_X = 15F;
-//	public static final float TUTORIAL__EXISTING_BUILDING_TWO_Y = 15F;
-	
-//	public static final int TUTORIAL__EXISTING_BUILDING_THREE = 120;
-//	public static final float TUTORIAL__EXISTING_BUILDING_THREE_X = 15F;
-//	public static final float TUTORIAL__EXISTING_BUILDING_THREE_Y = 11F;
-	
-//	public static final int TUTORIAL__EXISTING_BUILDING_FOUR = 140;
-//	public static final float TUTORIAL__EXISTING_BUILDING_FOUR_X = 11F;
-//	public static final float TUTORIAL__EXISTING_BUILDING_FOUR_Y = 15F;
-	
 	public static final Integer[] TUTORIAL__STRUCTURE_IDS_TO_BUILD = {1, 20, 60};
+	
 	public static final int TUTORIAL__CITY_ONE_ID = 1;
 	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_FIRST_DUNGEON = 5;
 	public static final int TUTORIAL__CITY_ELEMENT_ID_FOR_SECOND_DUNGEON = 6;
-	
 	public static final int TUTORIAL__INIT_CASH = 750;
 	public static final int TUTORIAL__INIT_OIL = 750;
 	public static final int TUTORIAL__INIT_GEMS = 50;
 	public static final String TUTORIAL__INIT_RANK = "bronze";
+	public static final int[] TUTORIAL__INIT_OBSTACLE_ID = {2,2,2, 2, 2, 2,   4,4, 4, 4, 4, 4, 4,   5, 5, 5, 5, 5};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_X =  {4,2,1, 17,21,12,  4,5, 20,15,22,2, 10,  4, 9, 21,22,18};
+	public static final int[] TUTORIAL__INIT_OBSTACLE_Y =  {8,2,20,3, 14,20,  4,19,5, 22,21,13,2,   15,21,2, 9, 20};
+	
+	
 	
 	//USER CURRENCY HISTORY REASON FOR CHANGE     VALUES
 	public static final String UCHRFC__CREATE_CLAN = "created clan";

@@ -30,7 +30,6 @@ import com.lvl6.info.City;
 import com.lvl6.info.CityElement;
 import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanRaid;
-import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
 import com.lvl6.info.ExpansionCost;
@@ -80,9 +79,9 @@ import com.lvl6.proto.QuestProto.FullQuestProto;
 import com.lvl6.proto.QuestProto.ItemProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder;
-import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
+import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
@@ -351,7 +350,7 @@ public class MiscMethods {
       float posX = ControllerConstants.TUTORIAL__EXISTING_BUILDING_X_POS[i];
       float posY = ControllerConstants.TUTORIAL__EXISTING_BUILDING_Y_POS[i];
 
-      TutorialStructProto tsp = createTutorialStructProto(structId, posX, posY);
+      TutorialStructProto tsp = CreateInfoProtoUtils.createTutorialStructProto(structId, posX, posY);
       tcb.addTutorialStructures(tsp);
     }
 
@@ -378,19 +377,21 @@ public class MiscMethods {
     tcb.setCashInit(ControllerConstants.TUTORIAL__INIT_CASH);
     tcb.setOilInit(ControllerConstants.TUTORIAL__INIT_OIL);
     tcb.setGemsInit(ControllerConstants.TUTORIAL__INIT_GEMS);
+    
+    int orientation = 1;
+    for (int i = 0; i < ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID.length; i++) {
+    	int obstacleId = ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID[i];
+    	float posX = ControllerConstants.TUTORIAL__INIT_OBSTACLE_X[i];
+    	float posY = ControllerConstants.TUTORIAL__INIT_OBSTACLE_Y[i];
+    	
+    	MinimumObstacleProto mopb = CreateInfoProtoUtils.createMinimumObstacleProto(
+    			obstacleId, posX, posY, orientation);
+    	tcb.addInitObstacles(mopb);
+    }
+    
     return tcb.build();
   }
 
-  public static TutorialStructProto createTutorialStructProto(int structId, float posX,
-      float posY) {
-    TutorialStructProto.Builder tspb = TutorialStructProto.newBuilder();
-
-    tspb.setStructId(structId);
-    CoordinatePair cp = new CoordinatePair(posX, posY);
-    CoordinateProto cpp = CreateInfoProtoUtils.createCoordinateProtoFromCoordinatePair(cp);
-    tspb.setCoordinate(cpp);
-    return tspb.build();
-  }
 
   public static StartupConstants createStartupConstantsProto(Globals globals) {
     StartupConstants.Builder cb = StartupConstants.newBuilder();

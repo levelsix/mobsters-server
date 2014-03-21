@@ -132,8 +132,10 @@ import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
+import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TownHallProto;
+import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.TaskProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.FullTaskProto;
@@ -1585,6 +1587,17 @@ public class CreateInfoProtoUtils {
   	return cpb.build();
   }
   
+  public static TutorialStructProto createTutorialStructProto(int structId, float posX,
+      float posY) {
+    TutorialStructProto.Builder tspb = TutorialStructProto.newBuilder();
+
+    tspb.setStructId(structId);
+    CoordinatePair cp = new CoordinatePair(posX, posY);
+    CoordinateProto cpp = CreateInfoProtoUtils.createCoordinateProtoFromCoordinatePair(cp);
+    tspb.setCoordinate(cpp);
+    return tspb.build();
+  }
+  
   public static ObstacleProto createObstacleProtoFromObstacle(Obstacle o) {
   	ObstacleProto.Builder ob = ObstacleProto.newBuilder();
   	
@@ -1629,6 +1642,22 @@ public class CreateInfoProtoUtils {
   	ob.setShadowHorizontalOfffset(o.getShadowHorizontalOffset());
   	
   	return ob.build();
+  }
+  
+  public static MinimumObstacleProto createMinimumObstacleProto(int obstacleId,
+  		float posX, float posY, int orientation) {
+  	
+  	MinimumObstacleProto.Builder mopb = MinimumObstacleProto.newBuilder();
+  	mopb.setObstacleId(obstacleId);
+  	
+  	CoordinatePair cp = new CoordinatePair(posX, posY);
+  	CoordinateProto cProto = createCoordinateProtoFromCoordinatePair(cp); 
+  	mopb.setCoordinate(cProto);
+  	
+  	StructOrientation structOrientation = StructOrientation.valueOf(orientation);
+  	mopb.setOrientation(structOrientation);
+  	
+  	return mopb.build();
   }
   
   public static UserObstacleProto createUserObstacleProto(ObstacleForUser ofu) {
