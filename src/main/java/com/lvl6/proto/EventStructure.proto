@@ -220,7 +220,7 @@ message ExpansionWaitCompleteResponseProto {
 message SpawnObstacleRequestProto {
 	optional MinimumUserProto sender = 1;
 	repeated MinimumObstacleProto prospectiveObstacles = 2;
-	
+	optional int64 curTime = 3;
 }
 message SpawnObstacleResponseProto {
 	optional MinimumUserProto sender = 1;

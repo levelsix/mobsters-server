@@ -18,6 +18,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.properties.DBConstants;
 import com.lvl6.properties.IAPValues;
@@ -1469,5 +1470,34 @@ public class InsertUtils implements InsertUtil{
 
 			int numUpdated = DBConnection.get().insertIntoTableBasic(tableName, insertParams);
 			return numUpdated;
+		}
+		
+		@Override
+		public List<Integer> insertIntoObstaclesForUserGetIds(int userId,
+				List<ObstacleForUser> ofuList) {
+			String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;                  
+
+			List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+			
+			for (ObstacleForUser ofu : ofuList) {                               
+				Map<String, Object> newRow = new HashMap<String, Object>();
+				
+				int obstacleId = ofu.getObstacleId();                                           
+				int xcoord = ofu.getXcoord();
+				int ycoord = ofu.getYcoord();
+				String orientation = ofu.getOrientation();                                        
+
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);    
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__OBSTACLE_ID, obstacleId);                                                                   
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__XCOORD, xcoord);      
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__YCOORD, ycoord);                                                                     
+				newRow.put(DBConstants.OBSTACLE_FOR_USER__ORIENTATION, orientation);                                                                   
+				
+				newRows.add(newRow);
+			}                                                                                        
+			List<Integer> ids = DBConnection.get().insertIntoTableBasicReturnIds(tableName,
+					newRows);                        
+
+			return ids;            
 		}
 }

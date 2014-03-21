@@ -13,6 +13,7 @@ import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
 import com.lvl6.info.CoordinatePair;
 import com.lvl6.info.MonsterForUser;
+import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.proto.ClanProto.UserClanStatus;
 
@@ -182,4 +183,7 @@ public interface InsertUtil {
 			int defenderEloChange, int attackerOilChange, int defenderOilChange,
 			int attackerCashChange, int defenderCashChange, boolean attackerWon,
 			boolean cancelled, boolean gotRevenge, boolean displayToDefender);
+	
+	public abstract List<Integer> insertIntoObstaclesForUserGetIds(int userId,
+			List<ObstacleForUser> ofuList);
 }

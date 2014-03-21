@@ -912,6 +912,23 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public boolean updateLastObstacleSpawnedTime(Timestamp lastObstacleSpawnedTime) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+		
+		Map<String, Object> relativeParams = null;
+		
+		Map<String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, lastObstacleSpawnedTime);
+
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER, relativeParams,
+				absoluteParams, conditionParams, "and");
+		if (numUpdated == 1) {
+			this.lastObstacleSpawnedTime = new Date(lastObstacleSpawnedTime.getTime());
+			return true;
+		}
+		return false;
+	}
 
 	/*public boolean updateNthExtraSlotsViaFb(int slotChange) {
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
