@@ -31,7 +31,7 @@ public class StructureStuffUtil {
 			int xcoord = (int) cProto.getX();
 			int ycoord = (int) cProto.getY();
 			
-			String orientation = mop.getOrientation().name();
+			int orientation = mop.getOrientation().getNumber();
 			
 			ObstacleForUser ofu = new ObstacleForUser(0, userId, obstacleId, xcoord, ycoord,
 					null, orientation);

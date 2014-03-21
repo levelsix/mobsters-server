@@ -69,7 +69,7 @@ public class ObstacleForUserRetrieveUtil {
 			ofu.setYcoord(rs.getInt(DBConstants.OBSTACLE_FOR_USER__YCOORD));
 			Timestamp time = rs.getTimestamp(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME);
 			ofu.setRemovalTime(time);
-			ofu.setOrientation(rs.getString(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
+			ofu.setOrientation(rs.getInt(DBConstants.OBSTACLE_FOR_USER__ORIENTATION));
 			return ofu;
 		}        
 	} 

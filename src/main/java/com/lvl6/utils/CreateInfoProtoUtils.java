@@ -1643,12 +1643,12 @@ public class CreateInfoProtoUtils {
   	CoordinateProto cproto = createCoordinateProtoFromCoordinatePair(cp);
   	uopb.setCoordinates(cproto);
   	
-  	String orientationStr = ofu.getOrientation();
+  	int orientation = ofu.getOrientation();
   	try {
-  		StructOrientation so = StructOrientation.valueOf(orientationStr);
+  		StructOrientation so = StructOrientation.valueOf(orientation);
   		uopb.setOrientation(so);
   	} catch (Exception e) {
-  		log.error("incorrect struct orientation name=" + orientationStr);
+  		log.error("incorrect struct orientation value=" + orientation);
   	}
   	
   	Date removalStartTime = ofu.getRemovalTime();

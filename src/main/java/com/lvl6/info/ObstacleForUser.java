@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class ObstacleForUser implements Serializable {
 	
-	private static final long serialVersionUID = -4951893395081957418L;
+	private static final long serialVersionUID = -8692048607699945108L;
 	
 	private int id;
 	private int userId;
@@ -13,14 +13,14 @@ public class ObstacleForUser implements Serializable {
 	private int xcoord;
 	private int ycoord;
 	private Date removalTime;
-	private String orientation;
+	private int orientation;
 	
 	public ObstacleForUser() {
 		super();
 	}
 
 	public ObstacleForUser(int id, int userId, int obstacleId, int xcoord,
-			int ycoord, Date removalTime, String orientation) {
+			int ycoord, Date removalTime, int orientation) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -79,11 +79,11 @@ public class ObstacleForUser implements Serializable {
 		this.removalTime = removalTime;
 	}
 
-	public String getOrientation() {
+	public int getOrientation() {
 		return orientation;
 	}
 
-	public void setOrientation(String orientation) {
+	public void setOrientation(int orientation) {
 		this.orientation = orientation;
 	}
 
