@@ -211,10 +211,12 @@ public class BeginObstacleRemovalController extends EventController{
   		previousCurrency.put(MiscMethods.gems, user.getGems());
   	}
   	if (ResourceType.CASH.equals(rt)) {
+  		log.info("user spent cash.");
   		cashChange = resourceChange;
   		previousCurrency.put(MiscMethods.cash, user.getCash());
   	}
   	if (ResourceType.OIL.equals(rt)) {
+  		log.info("user spent cash.");
   		oilChange = resourceChange;
   		previousCurrency.put(MiscMethods.oil, user.getOil());
   	}
