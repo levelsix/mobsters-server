@@ -34,7 +34,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 	private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
 	public ObstacleRemovalCompleteController() {
-		numAllocatedThreads = 1;
+		numAllocatedThreads = 4;
 	}
 	
 	@Autowired

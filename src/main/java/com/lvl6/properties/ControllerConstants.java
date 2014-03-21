@@ -152,6 +152,7 @@ public class ControllerConstants {
 	public static final String UCHRFC__PURCHASE_NORM_STRUCT = "purchased norm struct";
 	public static final String UCHRFC__PURHCASED_BOOSTER_PACK = "purchased booster pack";
 	public static final String UCHRFC__QUEST_REDEEM = "quest redeemed";
+	public static final String UCHRFC__REMOVE_OBSTACLE = "remove obstacle";
 	public static final String UCHRFC__SOLD_USER_MONSTERS = "sold user monsters";
 	public static final String UCHRFC__SPED_UP_COMBINING_MONSTER = "sped up combining user monster";
 	public static final String UCHRFC__SPED_UP_ENHANCING = "sped up enhancing user monster";

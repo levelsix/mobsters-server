@@ -245,6 +245,8 @@ message BeginObstacleRemovalRequestProto {
 	//positive means refund, negative means charge user (will always be negative)
 	optional sint32 resourceChange = 4; 
 	optional ResourceType resourceType = 5 [default = CASH]; 
+	
+	optional int32 userObstacleId = 6;
 }
 
 message BeginObstacleRemovalResponseProto {

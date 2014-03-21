@@ -77,24 +77,28 @@ public class ObstacleForUserRetrieveUtil {
 	
 	//RETRIEVE QUERIES*********************************************************************
 	public ObstacleForUser getUserObstacleForId(int ofuId) {
-		Map<String, Object> equalityConditions = new HashMap<String, Object>();
-		equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);
-		String conditionDelimiter = getQueryConstructionUtil().getAnd();
+		ObstacleForUser ofu = null;
+		try {
+			Map<String, Object> equalityConditions = new HashMap<String, Object>();
+			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);
+			String conditionDelimiter = getQueryConstructionUtil().getAnd();
 
-		//query db, "values" is not used 
-		//(its purpose is to hold the values that were supposed to be put
-		// into a prepared statement)
-		List<Object> values = null;
-		boolean preparedStatement = false;
-		
-		String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-				TABLE_NAME, equalityConditions, conditionDelimiter, values,
-				preparedStatement);
-		
-		log.info("query=" + query);
-		
-		ObstacleForUser ofu = this.jdbcTemplate.queryForObject(
-				query, new UserObstacleForClientMapper());
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = null;
+			boolean preparedStatement = false;
+
+			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
+					TABLE_NAME, equalityConditions, conditionDelimiter, values,
+					preparedStatement);
+
+			log.info("query=" + query);
+
+			ofu = this.jdbcTemplate.queryForObject(query, new UserObstacleForClientMapper());
+		} catch (Exception e) {
+			log.error("could not retrieve user obstacle for id=" + ofuId, e);
+		}
 		
 		return ofu;
 	}

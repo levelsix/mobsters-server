@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -91,37 +92,41 @@ public class PvpBattleHistoryRetrieveUtil {
 	
 	//RETRIEVE QUERIES*********************************************************************
 	public List<PvpBattleHistory> getRecentNBattlesForDefenderId(int defenderId, int n) {
-		Map<String, Object> equalityConditions = new HashMap<String, Object>();
-		equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
-		equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, false);
-		equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, true);
-		String conditionDelimiter = getQueryConstructionUtil().getAnd();
+		List<PvpBattleHistory> recentNBattles = null;
+		try {
+			Map<String, Object> equalityConditions = new HashMap<String, Object>();
+			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DEFENDER_ID, defenderId);
+			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__CANCELLED, false);
+			equalityConditions.put(DBConstants.PVP_BATTLE_HISTORY__DISPLAY_TO_USER, true);
+			String conditionDelimiter = getQueryConstructionUtil().getAnd();
 
-		//query db, "values" is not used 
-		//(its purpose is to hold the values that were supposed to be put
-		// into a prepared statement)
-		List<Object> values = null;
-		boolean preparedStatement = false;
-		
-		String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
-				TABLE_NAME, equalityConditions, conditionDelimiter, values,
-				preparedStatement);
-		
-		if (n >= 1) {
-			StringBuilder querySb = new StringBuilder();
-			querySb.append(query);
-			querySb.append(" order by ");
-			querySb.append(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME);
-			querySb.append(" desc limit ");
-			querySb.append(n);
-			
-			query = querySb.toString(); 
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = null;
+			boolean preparedStatement = false;
+
+			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
+					TABLE_NAME, equalityConditions, conditionDelimiter, values,
+					preparedStatement);
+
+			if (n >= 1) {
+				StringBuilder querySb = new StringBuilder();
+				querySb.append(query);
+				querySb.append(" order by ");
+				querySb.append(DBConstants.PVP_BATTLE_HISTORY__BATTLE_END_TIME);
+				querySb.append(" desc limit ");
+				querySb.append(n);
+
+				query = querySb.toString(); 
+			}
+			log.info("query=" + query);
+
+			recentNBattles = this.jdbcTemplate.query(query, new PvpBattleHistoryForClientMapper());
+		} catch (Exception e) {
+			log.error("error retrieving pvp_battle_history for defenderId=" + defenderId, e);
+			recentNBattles = new ArrayList<PvpBattleHistory>();
 		}
-		log.info("query=" + query);
-		
-		List<PvpBattleHistory> recentNBattles = this.jdbcTemplate.query(query,
-				new PvpBattleHistoryForClientMapper());
-		
 		return recentNBattles;
 	}
 	

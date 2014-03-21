@@ -173,4 +173,7 @@ public interface UpdateUtil {
   
   public abstract int updatePvpBattleHistoryExactRevenge(int historyAttackerId,
   		int historyDefenderId, Timestamp battleEndTime);
+  
+  public abstract int updateObstacleForUserRemovalTime(int obstacleForUserId,
+  		Timestamp clientTime);
 }

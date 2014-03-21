@@ -11431,6 +11431,10 @@ public final class EventStructureProto {
     // optional .com.lvl6.proto.ResourceType resourceType = 5 [default = CASH];
     boolean hasResourceType();
     com.lvl6.proto.StructureProto.ResourceType getResourceType();
+    
+    // optional int32 userObstacleId = 6;
+    boolean hasUserObstacleId();
+    int getUserObstacleId();
   }
   public static final class BeginObstacleRemovalRequestProto extends
       com.google.protobuf.GeneratedMessage
@@ -11514,12 +11518,23 @@ public final class EventStructureProto {
       return resourceType_;
     }
     
+    // optional int32 userObstacleId = 6;
+    public static final int USEROBSTACLEID_FIELD_NUMBER = 6;
+    private int userObstacleId_;
+    public boolean hasUserObstacleId() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public int getUserObstacleId() {
+      return userObstacleId_;
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       curTime_ = 0L;
       gemsSpent_ = 0;
       resourceChange_ = 0;
       resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+      userObstacleId_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -11547,6 +11562,9 @@ public final class EventStructureProto {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeEnum(5, resourceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt32(6, userObstacleId_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -11576,6 +11594,10 @@ public final class EventStructureProto {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, resourceType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, userObstacleId_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -11716,6 +11738,8 @@ public final class EventStructureProto {
         bitField0_ = (bitField0_ & ~0x00000008);
         resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
         bitField0_ = (bitField0_ & ~0x00000010);
+        userObstacleId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -11778,6 +11802,10 @@ public final class EventStructureProto {
           to_bitField0_ |= 0x00000010;
         }
         result.resourceType_ = resourceType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.userObstacleId_ = userObstacleId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -11808,6 +11836,9 @@ public final class EventStructureProto {
         }
         if (other.hasResourceType()) {
           setResourceType(other.getResourceType());
+        }
+        if (other.hasUserObstacleId()) {
+          setUserObstacleId(other.getUserObstacleId());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -11873,6 +11904,11 @@ public final class EventStructureProto {
                 bitField0_ |= 0x00000010;
                 resourceType_ = value;
               }
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              userObstacleId_ = input.readInt32();
               break;
             }
           }
@@ -12054,6 +12090,27 @@ public final class EventStructureProto {
       public Builder clearResourceType() {
         bitField0_ = (bitField0_ & ~0x00000010);
         resourceType_ = com.lvl6.proto.StructureProto.ResourceType.CASH;
+        onChanged();
+        return this;
+      }
+      
+      // optional int32 userObstacleId = 6;
+      private int userObstacleId_ ;
+      public boolean hasUserObstacleId() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public int getUserObstacleId() {
+        return userObstacleId_;
+      }
+      public Builder setUserObstacleId(int value) {
+        bitField0_ |= 0x00000020;
+        userObstacleId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserObstacleId() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        userObstacleId_ = 0;
         onChanged();
         return this;
       }
@@ -14075,32 +14132,32 @@ public final class EventStructureProto {
       "oto.UserObstacleProto\022N\n\006status\030\003 \001(\0162>." +
       "com.lvl6.proto.SpawnObstacleResponseProt" +
       "o.SpawnObstacleStatus\"2\n\023SpawnObstacleSt" +
-      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\312\001\n Be" +
+      "atus\022\013\n\007SUCCESS\020\001\022\016\n\nFAIL_OTHER\020\002\"\342\001\n Be" +
       "ginObstacleRemovalRequestProto\0220\n\006sender" +
       "\030\001 \001(\0132 .com.lvl6.proto.MinimumUserProto" +
       "\022\017\n\007curTime\030\002 \001(\003\022\021\n\tgemsSpent\030\003 \001(\005\022\026\n\016" +
       "resourceChange\030\004 \001(\021\0228\n\014resourceType\030\005 \001" +
-      "(\0162\034.com.lvl6.proto.ResourceType:\004CASH\"\252" +
-      "\002\n!BeginObstacleRemovalResponseProto\0220\n\006",
-      "sender\030\001 \001(\0132 .com.lvl6.proto.MinimumUse" +
-      "rProto\022\\\n\006status\030\002 \001(\0162L.com.lvl6.proto." +
-      "BeginObstacleRemovalResponseProto.BeginO" +
-      "bstacleRemovalStatus\"u\n\032BeginObstacleRem" +
-      "ovalStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFIC" +
-      "IENT_GEMS\020\002\022\036\n\032FAIL_INSUFFICIENT_RESOURC" +
-      "E\020\003\022\016\n\nFAIL_OTHER\020\004\"\244\001\n#ObstacleRemovalC" +
-      "ompleteRequestProto\0220\n\006sender\030\001 \001(\0132 .co" +
-      "m.lvl6.proto.MinimumUserProto\022\017\n\007curTime" +
-      "\030\002 \001(\003\022\017\n\007speedUp\030\003 \001(\010\022\021\n\tgemsSpent\030\004 \001",
-      "(\005\022\026\n\016userObstacleId\030\005 \001(\005\"\226\002\n$ObstacleR" +
-      "emovalCompleteResponseProto\0220\n\006sender\030\001 " +
-      "\001(\0132 .com.lvl6.proto.MinimumUserProto\022b\n" +
-      "\006status\030\002 \001(\0162R.com.lvl6.proto.ObstacleR" +
-      "emovalCompleteResponseProto.ObstacleRemo" +
-      "valCompleteStatus\"X\n\035ObstacleRemovalComp" +
-      "leteStatus\022\013\n\007SUCCESS\020\001\022\032\n\026FAIL_INSUFFIC" +
-      "IENT_GEMS\020\002\022\016\n\nFAIL_OTHER\020\003B\025B\023EventStru" +
-      "ctureProto"
+      "(\0162\034.com.lvl6.proto.ResourceType:\004CASH\022\026" +
+      "\n\016userObstacleId\030\006 \001(\005\"\252\002\n!BeginObstacle",
+      "RemovalResponseProto\0220\n\006sender\030\001 \001(\0132 .c" +
+      "om.lvl6.proto.MinimumUserProto\022\\\n\006status" +
+      "\030\002 \001(\0162L.com.lvl6.proto.BeginObstacleRem" +
+      "ovalResponseProto.BeginObstacleRemovalSt" +
+      "atus\"u\n\032BeginObstacleRemovalStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\036\n\032F" +
+      "AIL_INSUFFICIENT_RESOURCE\020\003\022\016\n\nFAIL_OTHE" +
+      "R\020\004\"\244\001\n#ObstacleRemovalCompleteRequestPr" +
+      "oto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.proto.Min" +
+      "imumUserProto\022\017\n\007curTime\030\002 \001(\003\022\017\n\007speedU",
+      "p\030\003 \001(\010\022\021\n\tgemsSpent\030\004 \001(\005\022\026\n\016userObstac" +
+      "leId\030\005 \001(\005\"\226\002\n$ObstacleRemovalCompleteRe" +
+      "sponseProto\0220\n\006sender\030\001 \001(\0132 .com.lvl6.p" +
+      "roto.MinimumUserProto\022b\n\006status\030\002 \001(\0162R." +
+      "com.lvl6.proto.ObstacleRemovalCompleteRe" +
+      "sponseProto.ObstacleRemovalCompleteStatu" +
+      "s\"X\n\035ObstacleRemovalCompleteStatus\022\013\n\007SU" +
+      "CCESS\020\001\022\032\n\026FAIL_INSUFFICIENT_GEMS\020\002\022\016\n\nF" +
+      "AIL_OTHER\020\003B\025B\023EventStructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -14248,7 +14305,7 @@ public final class EventStructureProto {
           internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_BeginObstacleRemovalRequestProto_descriptor,
-              new java.lang.String[] { "Sender", "CurTime", "GemsSpent", "ResourceChange", "ResourceType", },
+              new java.lang.String[] { "Sender", "CurTime", "GemsSpent", "ResourceChange", "ResourceType", "UserObstacleId", },
               com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto.class,
               com.lvl6.proto.EventStructureProto.BeginObstacleRemovalRequestProto.Builder.class);
           internal_static_com_lvl6_proto_BeginObstacleRemovalResponseProto_descriptor =

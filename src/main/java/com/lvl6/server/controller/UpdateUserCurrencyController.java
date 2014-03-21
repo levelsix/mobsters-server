@@ -174,7 +174,7 @@ import com.lvl6.utils.RetrieveUtils;
   	int userCash = u.getCash();
   	//if user's aggregate cash is < cost, don't allow transaction
   	if (userCash < cashSpent) {
-  		log.error("user error: user does not have enough oil. userCash=" + userCash +
+  		log.error("user error: user does not have enough cash. userCash=" + userCash +
   				"\t cashSpent=" + cashSpent);
   		resBuilder.setStatus(UpdateUserCurrencyStatus.FAIL_INSUFFICIENT_CASH);
   		return false;
@@ -228,7 +228,6 @@ import com.lvl6.utils.RetrieveUtils;
 	  if (!updateUser(u, gemsChange, cashChange, oilChange)) {
 		  log.error("unexpected error: could not decrement user's gems by " +
 				  gemsChange + ", cash by " + cashChange + ", and oil by " + oilChange);
-		  //update num revives for user task
 		  return false;
 	  } else {
 	  	if (0 != gemsChange) {
@@ -237,7 +236,7 @@ import com.lvl6.utils.RetrieveUtils;
 	  	if (0 != cashChange) {
 	  		currencyChange.put(MiscMethods.cash, cashChange);
 	  	}
-	  	if (0 != gemsChange) {
+	  	if (0 != oilChange) {
 	  		currencyChange.put(MiscMethods.oil, oilChange);
 	  	}
 	  }

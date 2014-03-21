@@ -1137,4 +1137,21 @@ public class UpdateUtils implements UpdateUtil {
 			
 			return numUpdated;
 		}
+		
+		@Override
+		public int updateObstacleForUserRemovalTime(int ofuId, Timestamp clientTime) {
+			String tableName = DBConstants.TABLE_OBSTACLE_FOR_USER;
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.OBSTACLE_FOR_USER__ID, ofuId);
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			absoluteParams.put(DBConstants.OBSTACLE_FOR_USER__REMOVAL_TIME, clientTime);
+			
+			Map<String, Object> relativeParams = null;
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+					absoluteParams, conditionParams, "and");
+			
+			return numUpdated;
+		}
+		
 }
