@@ -386,7 +386,7 @@ public class MiscMethods {
     	
     	MinimumObstacleProto mopb = CreateInfoProtoUtils.createMinimumObstacleProto(
     			obstacleId, posX, posY, orientation);
-    	tcb.addInitObstacles(mopb);
+    	tcb.addTutorialObstacles(mopb);
     }
     
     return tcb.build();

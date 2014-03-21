@@ -9127,14 +9127,14 @@ public final class EventStartupProto {
       boolean hasGemsInit();
       int getGemsInit();
       
-      // repeated .com.lvl6.proto.MinimumObstacleProto initObstacles = 14;
+      // repeated .com.lvl6.proto.MinimumObstacleProto tutorialObstacles = 14;
       java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> 
-          getInitObstaclesList();
-      com.lvl6.proto.StructureProto.MinimumObstacleProto getInitObstacles(int index);
-      int getInitObstaclesCount();
+          getTutorialObstaclesList();
+      com.lvl6.proto.StructureProto.MinimumObstacleProto getTutorialObstacles(int index);
+      int getTutorialObstaclesCount();
       java.util.List<? extends com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> 
-          getInitObstaclesOrBuilderList();
-      com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getInitObstaclesOrBuilder(
+          getTutorialObstaclesOrBuilderList();
+      com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getTutorialObstaclesOrBuilder(
           int index);
     }
     public static final class TutorialConstants extends
@@ -9322,25 +9322,25 @@ public final class EventStartupProto {
         return gemsInit_;
       }
       
-      // repeated .com.lvl6.proto.MinimumObstacleProto initObstacles = 14;
-      public static final int INITOBSTACLES_FIELD_NUMBER = 14;
-      private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> initObstacles_;
-      public java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> getInitObstaclesList() {
-        return initObstacles_;
+      // repeated .com.lvl6.proto.MinimumObstacleProto tutorialObstacles = 14;
+      public static final int TUTORIALOBSTACLES_FIELD_NUMBER = 14;
+      private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> tutorialObstacles_;
+      public java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> getTutorialObstaclesList() {
+        return tutorialObstacles_;
       }
       public java.util.List<? extends com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> 
-          getInitObstaclesOrBuilderList() {
-        return initObstacles_;
+          getTutorialObstaclesOrBuilderList() {
+        return tutorialObstacles_;
       }
-      public int getInitObstaclesCount() {
-        return initObstacles_.size();
+      public int getTutorialObstaclesCount() {
+        return tutorialObstacles_.size();
       }
-      public com.lvl6.proto.StructureProto.MinimumObstacleProto getInitObstacles(int index) {
-        return initObstacles_.get(index);
+      public com.lvl6.proto.StructureProto.MinimumObstacleProto getTutorialObstacles(int index) {
+        return tutorialObstacles_.get(index);
       }
-      public com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getInitObstaclesOrBuilder(
+      public com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getTutorialObstaclesOrBuilder(
           int index) {
-        return initObstacles_.get(index);
+        return tutorialObstacles_.get(index);
       }
       
       private void initFields() {
@@ -9357,7 +9357,7 @@ public final class EventStartupProto {
         cashInit_ = 0;
         oilInit_ = 0;
         gemsInit_ = 0;
-        initObstacles_ = java.util.Collections.emptyList();
+        tutorialObstacles_ = java.util.Collections.emptyList();
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -9410,8 +9410,8 @@ public final class EventStartupProto {
         if (((bitField0_ & 0x00000200) == 0x00000200)) {
           output.writeInt32(13, gemsInit_);
         }
-        for (int i = 0; i < initObstacles_.size(); i++) {
-          output.writeMessage(14, initObstacles_.get(i));
+        for (int i = 0; i < tutorialObstacles_.size(); i++) {
+          output.writeMessage(14, tutorialObstacles_.get(i));
         }
         getUnknownFields().writeTo(output);
       }
@@ -9479,9 +9479,9 @@ public final class EventStartupProto {
           size += com.google.protobuf.CodedOutputStream
             .computeInt32Size(13, gemsInit_);
         }
-        for (int i = 0; i < initObstacles_.size(); i++) {
+        for (int i = 0; i < tutorialObstacles_.size(); i++) {
           size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(14, initObstacles_.get(i));
+            .computeMessageSize(14, tutorialObstacles_.get(i));
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -9601,7 +9601,7 @@ public final class EventStartupProto {
           if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
             getTutorialStructuresFieldBuilder();
             getCityOneElementsFieldBuilder();
-            getInitObstaclesFieldBuilder();
+            getTutorialObstaclesFieldBuilder();
           }
         }
         private static Builder create() {
@@ -9644,11 +9644,11 @@ public final class EventStartupProto {
           bitField0_ = (bitField0_ & ~0x00000800);
           gemsInit_ = 0;
           bitField0_ = (bitField0_ & ~0x00001000);
-          if (initObstaclesBuilder_ == null) {
-            initObstacles_ = java.util.Collections.emptyList();
+          if (tutorialObstaclesBuilder_ == null) {
+            tutorialObstacles_ = java.util.Collections.emptyList();
             bitField0_ = (bitField0_ & ~0x00002000);
           } else {
-            initObstaclesBuilder_.clear();
+            tutorialObstaclesBuilder_.clear();
           }
           return this;
         }
@@ -9751,14 +9751,14 @@ public final class EventStartupProto {
             to_bitField0_ |= 0x00000200;
           }
           result.gemsInit_ = gemsInit_;
-          if (initObstaclesBuilder_ == null) {
+          if (tutorialObstaclesBuilder_ == null) {
             if (((bitField0_ & 0x00002000) == 0x00002000)) {
-              initObstacles_ = java.util.Collections.unmodifiableList(initObstacles_);
+              tutorialObstacles_ = java.util.Collections.unmodifiableList(tutorialObstacles_);
               bitField0_ = (bitField0_ & ~0x00002000);
             }
-            result.initObstacles_ = initObstacles_;
+            result.tutorialObstacles_ = tutorialObstacles_;
           } else {
-            result.initObstacles_ = initObstaclesBuilder_.build();
+            result.tutorialObstacles_ = tutorialObstaclesBuilder_.build();
           }
           result.bitField0_ = to_bitField0_;
           onBuilt();
@@ -9868,29 +9868,29 @@ public final class EventStartupProto {
           if (other.hasGemsInit()) {
             setGemsInit(other.getGemsInit());
           }
-          if (initObstaclesBuilder_ == null) {
-            if (!other.initObstacles_.isEmpty()) {
-              if (initObstacles_.isEmpty()) {
-                initObstacles_ = other.initObstacles_;
+          if (tutorialObstaclesBuilder_ == null) {
+            if (!other.tutorialObstacles_.isEmpty()) {
+              if (tutorialObstacles_.isEmpty()) {
+                tutorialObstacles_ = other.tutorialObstacles_;
                 bitField0_ = (bitField0_ & ~0x00002000);
               } else {
-                ensureInitObstaclesIsMutable();
-                initObstacles_.addAll(other.initObstacles_);
+                ensureTutorialObstaclesIsMutable();
+                tutorialObstacles_.addAll(other.tutorialObstacles_);
               }
               onChanged();
             }
           } else {
-            if (!other.initObstacles_.isEmpty()) {
-              if (initObstaclesBuilder_.isEmpty()) {
-                initObstaclesBuilder_.dispose();
-                initObstaclesBuilder_ = null;
-                initObstacles_ = other.initObstacles_;
+            if (!other.tutorialObstacles_.isEmpty()) {
+              if (tutorialObstaclesBuilder_.isEmpty()) {
+                tutorialObstaclesBuilder_.dispose();
+                tutorialObstaclesBuilder_ = null;
+                tutorialObstacles_ = other.tutorialObstacles_;
                 bitField0_ = (bitField0_ & ~0x00002000);
-                initObstaclesBuilder_ = 
+                tutorialObstaclesBuilder_ = 
                   com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                     getInitObstaclesFieldBuilder() : null;
+                     getTutorialObstaclesFieldBuilder() : null;
               } else {
-                initObstaclesBuilder_.addAllMessages(other.initObstacles_);
+                tutorialObstaclesBuilder_.addAllMessages(other.tutorialObstacles_);
               }
             }
           }
@@ -10004,7 +10004,7 @@ public final class EventStartupProto {
               case 114: {
                 com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder subBuilder = com.lvl6.proto.StructureProto.MinimumObstacleProto.newBuilder();
                 input.readMessage(subBuilder, extensionRegistry);
-                addInitObstacles(subBuilder.buildPartial());
+                addTutorialObstacles(subBuilder.buildPartial());
                 break;
               }
             }
@@ -10640,190 +10640,190 @@ public final class EventStartupProto {
           return this;
         }
         
-        // repeated .com.lvl6.proto.MinimumObstacleProto initObstacles = 14;
-        private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> initObstacles_ =
+        // repeated .com.lvl6.proto.MinimumObstacleProto tutorialObstacles = 14;
+        private java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> tutorialObstacles_ =
           java.util.Collections.emptyList();
-        private void ensureInitObstaclesIsMutable() {
+        private void ensureTutorialObstaclesIsMutable() {
           if (!((bitField0_ & 0x00002000) == 0x00002000)) {
-            initObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MinimumObstacleProto>(initObstacles_);
+            tutorialObstacles_ = new java.util.ArrayList<com.lvl6.proto.StructureProto.MinimumObstacleProto>(tutorialObstacles_);
             bitField0_ |= 0x00002000;
            }
         }
         
         private com.google.protobuf.RepeatedFieldBuilder<
-            com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> initObstaclesBuilder_;
+            com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> tutorialObstaclesBuilder_;
         
-        public java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> getInitObstaclesList() {
-          if (initObstaclesBuilder_ == null) {
-            return java.util.Collections.unmodifiableList(initObstacles_);
+        public java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto> getTutorialObstaclesList() {
+          if (tutorialObstaclesBuilder_ == null) {
+            return java.util.Collections.unmodifiableList(tutorialObstacles_);
           } else {
-            return initObstaclesBuilder_.getMessageList();
+            return tutorialObstaclesBuilder_.getMessageList();
           }
         }
-        public int getInitObstaclesCount() {
-          if (initObstaclesBuilder_ == null) {
-            return initObstacles_.size();
+        public int getTutorialObstaclesCount() {
+          if (tutorialObstaclesBuilder_ == null) {
+            return tutorialObstacles_.size();
           } else {
-            return initObstaclesBuilder_.getCount();
+            return tutorialObstaclesBuilder_.getCount();
           }
         }
-        public com.lvl6.proto.StructureProto.MinimumObstacleProto getInitObstacles(int index) {
-          if (initObstaclesBuilder_ == null) {
-            return initObstacles_.get(index);
+        public com.lvl6.proto.StructureProto.MinimumObstacleProto getTutorialObstacles(int index) {
+          if (tutorialObstaclesBuilder_ == null) {
+            return tutorialObstacles_.get(index);
           } else {
-            return initObstaclesBuilder_.getMessage(index);
+            return tutorialObstaclesBuilder_.getMessage(index);
           }
         }
-        public Builder setInitObstacles(
+        public Builder setTutorialObstacles(
             int index, com.lvl6.proto.StructureProto.MinimumObstacleProto value) {
-          if (initObstaclesBuilder_ == null) {
+          if (tutorialObstaclesBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureInitObstaclesIsMutable();
-            initObstacles_.set(index, value);
+            ensureTutorialObstaclesIsMutable();
+            tutorialObstacles_.set(index, value);
             onChanged();
           } else {
-            initObstaclesBuilder_.setMessage(index, value);
+            tutorialObstaclesBuilder_.setMessage(index, value);
           }
           return this;
         }
-        public Builder setInitObstacles(
+        public Builder setTutorialObstacles(
             int index, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder builderForValue) {
-          if (initObstaclesBuilder_ == null) {
-            ensureInitObstaclesIsMutable();
-            initObstacles_.set(index, builderForValue.build());
+          if (tutorialObstaclesBuilder_ == null) {
+            ensureTutorialObstaclesIsMutable();
+            tutorialObstacles_.set(index, builderForValue.build());
             onChanged();
           } else {
-            initObstaclesBuilder_.setMessage(index, builderForValue.build());
+            tutorialObstaclesBuilder_.setMessage(index, builderForValue.build());
           }
           return this;
         }
-        public Builder addInitObstacles(com.lvl6.proto.StructureProto.MinimumObstacleProto value) {
-          if (initObstaclesBuilder_ == null) {
+        public Builder addTutorialObstacles(com.lvl6.proto.StructureProto.MinimumObstacleProto value) {
+          if (tutorialObstaclesBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureInitObstaclesIsMutable();
-            initObstacles_.add(value);
+            ensureTutorialObstaclesIsMutable();
+            tutorialObstacles_.add(value);
             onChanged();
           } else {
-            initObstaclesBuilder_.addMessage(value);
+            tutorialObstaclesBuilder_.addMessage(value);
           }
           return this;
         }
-        public Builder addInitObstacles(
+        public Builder addTutorialObstacles(
             int index, com.lvl6.proto.StructureProto.MinimumObstacleProto value) {
-          if (initObstaclesBuilder_ == null) {
+          if (tutorialObstaclesBuilder_ == null) {
             if (value == null) {
               throw new NullPointerException();
             }
-            ensureInitObstaclesIsMutable();
-            initObstacles_.add(index, value);
+            ensureTutorialObstaclesIsMutable();
+            tutorialObstacles_.add(index, value);
             onChanged();
           } else {
-            initObstaclesBuilder_.addMessage(index, value);
+            tutorialObstaclesBuilder_.addMessage(index, value);
           }
           return this;
         }
-        public Builder addInitObstacles(
+        public Builder addTutorialObstacles(
             com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder builderForValue) {
-          if (initObstaclesBuilder_ == null) {
-            ensureInitObstaclesIsMutable();
-            initObstacles_.add(builderForValue.build());
+          if (tutorialObstaclesBuilder_ == null) {
+            ensureTutorialObstaclesIsMutable();
+            tutorialObstacles_.add(builderForValue.build());
             onChanged();
           } else {
-            initObstaclesBuilder_.addMessage(builderForValue.build());
+            tutorialObstaclesBuilder_.addMessage(builderForValue.build());
           }
           return this;
         }
-        public Builder addInitObstacles(
+        public Builder addTutorialObstacles(
             int index, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder builderForValue) {
-          if (initObstaclesBuilder_ == null) {
-            ensureInitObstaclesIsMutable();
-            initObstacles_.add(index, builderForValue.build());
+          if (tutorialObstaclesBuilder_ == null) {
+            ensureTutorialObstaclesIsMutable();
+            tutorialObstacles_.add(index, builderForValue.build());
             onChanged();
           } else {
-            initObstaclesBuilder_.addMessage(index, builderForValue.build());
+            tutorialObstaclesBuilder_.addMessage(index, builderForValue.build());
           }
           return this;
         }
-        public Builder addAllInitObstacles(
+        public Builder addAllTutorialObstacles(
             java.lang.Iterable<? extends com.lvl6.proto.StructureProto.MinimumObstacleProto> values) {
-          if (initObstaclesBuilder_ == null) {
-            ensureInitObstaclesIsMutable();
-            super.addAll(values, initObstacles_);
+          if (tutorialObstaclesBuilder_ == null) {
+            ensureTutorialObstaclesIsMutable();
+            super.addAll(values, tutorialObstacles_);
             onChanged();
           } else {
-            initObstaclesBuilder_.addAllMessages(values);
+            tutorialObstaclesBuilder_.addAllMessages(values);
           }
           return this;
         }
-        public Builder clearInitObstacles() {
-          if (initObstaclesBuilder_ == null) {
-            initObstacles_ = java.util.Collections.emptyList();
+        public Builder clearTutorialObstacles() {
+          if (tutorialObstaclesBuilder_ == null) {
+            tutorialObstacles_ = java.util.Collections.emptyList();
             bitField0_ = (bitField0_ & ~0x00002000);
             onChanged();
           } else {
-            initObstaclesBuilder_.clear();
+            tutorialObstaclesBuilder_.clear();
           }
           return this;
         }
-        public Builder removeInitObstacles(int index) {
-          if (initObstaclesBuilder_ == null) {
-            ensureInitObstaclesIsMutable();
-            initObstacles_.remove(index);
+        public Builder removeTutorialObstacles(int index) {
+          if (tutorialObstaclesBuilder_ == null) {
+            ensureTutorialObstaclesIsMutable();
+            tutorialObstacles_.remove(index);
             onChanged();
           } else {
-            initObstaclesBuilder_.remove(index);
+            tutorialObstaclesBuilder_.remove(index);
           }
           return this;
         }
-        public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder getInitObstaclesBuilder(
+        public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder getTutorialObstaclesBuilder(
             int index) {
-          return getInitObstaclesFieldBuilder().getBuilder(index);
+          return getTutorialObstaclesFieldBuilder().getBuilder(index);
         }
-        public com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getInitObstaclesOrBuilder(
+        public com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder getTutorialObstaclesOrBuilder(
             int index) {
-          if (initObstaclesBuilder_ == null) {
-            return initObstacles_.get(index);  } else {
-            return initObstaclesBuilder_.getMessageOrBuilder(index);
+          if (tutorialObstaclesBuilder_ == null) {
+            return tutorialObstacles_.get(index);  } else {
+            return tutorialObstaclesBuilder_.getMessageOrBuilder(index);
           }
         }
         public java.util.List<? extends com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> 
-             getInitObstaclesOrBuilderList() {
-          if (initObstaclesBuilder_ != null) {
-            return initObstaclesBuilder_.getMessageOrBuilderList();
+             getTutorialObstaclesOrBuilderList() {
+          if (tutorialObstaclesBuilder_ != null) {
+            return tutorialObstaclesBuilder_.getMessageOrBuilderList();
           } else {
-            return java.util.Collections.unmodifiableList(initObstacles_);
+            return java.util.Collections.unmodifiableList(tutorialObstacles_);
           }
         }
-        public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder addInitObstaclesBuilder() {
-          return getInitObstaclesFieldBuilder().addBuilder(
+        public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder addTutorialObstaclesBuilder() {
+          return getTutorialObstaclesFieldBuilder().addBuilder(
               com.lvl6.proto.StructureProto.MinimumObstacleProto.getDefaultInstance());
         }
-        public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder addInitObstaclesBuilder(
+        public com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder addTutorialObstaclesBuilder(
             int index) {
-          return getInitObstaclesFieldBuilder().addBuilder(
+          return getTutorialObstaclesFieldBuilder().addBuilder(
               index, com.lvl6.proto.StructureProto.MinimumObstacleProto.getDefaultInstance());
         }
         public java.util.List<com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder> 
-             getInitObstaclesBuilderList() {
-          return getInitObstaclesFieldBuilder().getBuilderList();
+             getTutorialObstaclesBuilderList() {
+          return getTutorialObstaclesFieldBuilder().getBuilderList();
         }
         private com.google.protobuf.RepeatedFieldBuilder<
             com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder> 
-            getInitObstaclesFieldBuilder() {
-          if (initObstaclesBuilder_ == null) {
-            initObstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+            getTutorialObstaclesFieldBuilder() {
+          if (tutorialObstaclesBuilder_ == null) {
+            tutorialObstaclesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
                 com.lvl6.proto.StructureProto.MinimumObstacleProto, com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder, com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder>(
-                    initObstacles_,
+                    tutorialObstacles_,
                     ((bitField0_ & 0x00002000) == 0x00002000),
                     getParentForChildren(),
                     isClean());
-            initObstacles_ = null;
+            tutorialObstacles_ = null;
           }
-          return initObstaclesBuilder_;
+          return tutorialObstaclesBuilder_;
         }
         
         // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StartupResponseProto.TutorialConstants)
@@ -17809,7 +17809,7 @@ public final class EventStartupProto {
       "\002\022\021\n\tapsalarId\030\003 \001(\t\022\022\n\nmacAddress\030\004 \001(\t" +
       "\022\024\n\014advertiserId\030\005 \001(\t\022\027\n\017isForceTutoria" +
       "l\030\006 \001(\010\022\014\n\004fbId\030\007 \001(\t\022\026\n\016isFreshRestart\030",
-      "\010 \001(\010\022\022\n\nclientTime\030\t \001(\003\"\224)\n\024StartupRes" +
+      "\010 \001(\010\022\022\n\nclientTime\030\t \001(\003\"\230)\n\024StartupRes" +
       "ponseProto\022\030\n\020serverTimeMillis\030\001 \001(\003\022-\n\006" +
       "sender\030\002 \001(\0132\035.com.lvl6.proto.FullUserPr" +
       "oto\022I\n\rstartupStatus\030\003 \001(\01622.com.lvl6.pr" +
@@ -17925,7 +17925,7 @@ public final class EventStartupProto {
       "utorialAssetId\030\004 \001(\005\022\"\n\032monsterDropTutor" +
       "ialAssetId\030\005 \001(\005\022\036\n\026elementTutorialAsset" +
       "Id\030\006 \001(\005\022\016\n\006cityId\030\007 \001(\005\022#\n\033questIdForCo" +
-      "mbiningPowerUps\030\010 \001(\005\032\345\003\n\021TutorialConsta" +
+      "mbiningPowerUps\030\010 \001(\005\032\351\003\n\021TutorialConsta" +
       "nts\022\031\n\021startingMonsterId\030\001 \001(\005\022\026\n\016enemyM" +
       "onsterId\030\002 \001(\005\022\032\n\022enemyBossMonsterId\030\t \001" +
       "(\005\022\026\n\016markZMonsterId\030\n \001(\005\022?\n\022tutorialSt",
@@ -17936,15 +17936,15 @@ public final class EventStartupProto {
       "\n\034cityElementIdForFirstDungeon\030\007 \001(\005\022%\n\035" +
       "cityElementIdForSecondDungeon\030\010 \001(\005\022\020\n\010c" +
       "ashInit\030\013 \001(\005\022\017\n\007oilInit\030\014 \001(\005\022\020\n\010gemsIn" +
-      "it\030\r \001(\005\022;\n\rinitObstacles\030\016 \003(\0132$.com.lv" +
-      "l6.proto.MinimumObstacleProto\"A\n\014UpdateS" +
-      "tatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE\020\002\022\020",
-      "\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n\nUSE" +
-      "R_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SERVER_" +
-      "IN_MAINTENANCE\020\003\"`\n\030ForceLogoutResponseP" +
-      "roto\022\021\n\tloginTime\030\001 \001(\003\022\031\n\021previousLogin" +
-      "Time\030\002 \001(\003\022\026\n\016timeClientSent\030\003 \001(\003B\023B\021Ev" +
-      "entStartupProto"
+      "it\030\r \001(\005\022?\n\021tutorialObstacles\030\016 \003(\0132$.co" +
+      "m.lvl6.proto.MinimumObstacleProto\"A\n\014Upd" +
+      "ateStatus\022\r\n\tNO_UPDATE\020\001\022\020\n\014MINOR_UPDATE",
+      "\020\002\022\020\n\014MAJOR_UPDATE\020\003\"N\n\rStartupStatus\022\016\n" +
+      "\nUSER_IN_DB\020\001\022\022\n\016USER_NOT_IN_DB\020\002\022\031\n\025SER" +
+      "VER_IN_MAINTENANCE\020\003\"`\n\030ForceLogoutRespo" +
+      "nseProto\022\021\n\tloginTime\030\001 \001(\003\022\031\n\021previousL" +
+      "oginTime\030\002 \001(\003\022\026\n\016timeClientSent\030\003 \001(\003B\023" +
+      "B\021EventStartupProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -18052,7 +18052,7 @@ public final class EventStartupProto {
           internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StartupResponseProto_TutorialConstants_descriptor,
-              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "InitObstacles", },
+              new java.lang.String[] { "StartingMonsterId", "EnemyMonsterId", "EnemyBossMonsterId", "MarkZMonsterId", "TutorialStructures", "StructureIdsToBeBuillt", "CityId", "CityOneElements", "CityElementIdForFirstDungeon", "CityElementIdForSecondDungeon", "CashInit", "OilInit", "GemsInit", "TutorialObstacles", },
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.class,
               com.lvl6.proto.EventStartupProto.StartupResponseProto.TutorialConstants.Builder.class);
           internal_static_com_lvl6_proto_ForceLogoutResponseProto_descriptor =

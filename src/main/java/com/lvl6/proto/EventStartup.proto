@@ -238,7 +238,7 @@ message StartupResponseProto {
 		optional int32 oilInit = 12;
 		optional int32 gemsInit = 13;
 		
-		repeated MinimumObstacleProto initObstacles = 14;
+		repeated MinimumObstacleProto tutorialObstacles = 14;
 		 	
 	}
 	
