@@ -23,6 +23,7 @@ import com.lvl6.events.response.UserCreateResponseEvent;
 import com.lvl6.info.Monster;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterLevelInfo;
+import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.User;
 import com.lvl6.leaderboards.LeaderBoardUtil;
 import com.lvl6.misc.MiscMethods;
@@ -40,6 +41,7 @@ import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.server.EventWriter;
 import com.lvl6.server.Locker;
+import com.lvl6.server.controller.utils.StructureStuffUtil;
 import com.lvl6.server.controller.utils.TimeUtils;
 import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
@@ -95,14 +97,20 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	
 	@Autowired
 	protected TimeUtils timeUtils;
-	
-
   public TimeUtils getTimeUtils() {
 		return timeUtils;
 	}
-
 	public void setTimeUtils(TimeUtils timeUtils) {
 		this.timeUtils = timeUtils;
+	}
+	
+	@Autowired
+	protected StructureStuffUtil structureStuffUtil;
+	public StructureStuffUtil getStructureStuffUtil() {
+		return structureStuffUtil;
+	}
+	public void setStructureStuffUtil(StructureStuffUtil structureStuffUtil) {
+		this.structureStuffUtil = structureStuffUtil;
 	}
 
 	public UserCreateController() {
@@ -181,6 +189,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 			  	//TAKE INTO ACCOUNT THE PROPERTIES SENT IN BY CLIENT
 			  	log.info("writing user structs");
 			  	writeStructs(userId, createTime, structsJustBuilt);
+			  	writeObstacles(userId);
 			  	log.info("writing tasks");
 			    writeTaskCompleted(userId, createTime);
 			    writeMonsters(userId, createTime, facebookId);
@@ -371,6 +380,16 @@ import com.lvl6.utils.utilmethods.InsertUtils;
   	int numInserted = InsertUtils.get().insertUserStructs(userIdList, structIdList,
   			xCoordList, yCoordList, purchaseTimeList, retrievedTimeList, isComplete);
   	log.info("num buildings given to user: " + numInserted);
+  }
+  
+  private void writeObstacles(int userId) {
+  	List<ObstacleForUser> ofuList = getStructureStuffUtil()
+  			.createTutorialObstacleForUser(userId);
+  	log.info("inserting tutorial obstacles into obstacle_for_user");
+  	List<Integer> ofuIdList = InsertUtils.get().insertIntoObstaclesForUserGetIds(
+  			userId, ofuList);
+  	
+  	log.info("tutorial ofuIdList=" + ofuIdList);
   }
 
   private void writeTaskCompleted(int userId, Timestamp createTime) {

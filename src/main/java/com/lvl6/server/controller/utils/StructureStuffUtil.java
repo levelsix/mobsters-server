@@ -8,8 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.info.ObstacleForUser;
+import com.lvl6.properties.ControllerConstants;
 import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.MinimumObstacleProto;
+import com.lvl6.utils.CreateInfoProtoUtils;
 
 @Component
 public class StructureStuffUtil {
@@ -49,5 +51,21 @@ public class StructureStuffUtil {
 			ofu.setId(id);
 		}
 		
+	}
+	
+	public List<ObstacleForUser> createTutorialObstacleForUser(int userId) {
+		List<ObstacleForUser> ofuList = new ArrayList<ObstacleForUser>();
+		int orientation = 1;
+    for (int i = 0; i < ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID.length; i++) {
+    	int obstacleId = ControllerConstants.TUTORIAL__INIT_OBSTACLE_ID[i];
+    	int posX = ControllerConstants.TUTORIAL__INIT_OBSTACLE_X[i];
+    	int posY = ControllerConstants.TUTORIAL__INIT_OBSTACLE_Y[i];
+    	
+    	ObstacleForUser ofu = new ObstacleForUser(0, userId, obstacleId, posX, posY,
+    			null, orientation);
+    	ofuList.add(ofu);
+    }
+    
+    return ofuList;
 	}
 }
