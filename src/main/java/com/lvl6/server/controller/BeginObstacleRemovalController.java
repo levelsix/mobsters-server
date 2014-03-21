@@ -62,6 +62,7 @@ public class BeginObstacleRemovalController extends EventController{
 	@Override
 	protected void processRequestEvent(RequestEvent event) throws Exception {
 		BeginObstacleRemovalRequestProto reqProto = ((BeginObstacleRemovalRequestEvent)event).getBeginObstacleRemovalRequestProto();
+		log.info("reqProto=" + reqProto);
 
 		MinimumUserProto senderProto = reqProto.getSender();
 		int userId = senderProto.getUserId();
@@ -210,11 +211,11 @@ public class BeginObstacleRemovalController extends EventController{
   		previousCurrency.put(MiscMethods.gems, user.getGems());
   	}
   	if (ResourceType.CASH.equals(rt)) {
-  		cashChange = -1 * Math.abs(resourceChange);
+  		cashChange = resourceChange;
   		previousCurrency.put(MiscMethods.cash, user.getCash());
   	}
   	if (ResourceType.OIL.equals(rt)) {
-  		oilChange = -1 * Math.abs(resourceChange);
+  		oilChange = resourceChange;
   		previousCurrency.put(MiscMethods.oil, user.getOil());
   	}
   	
