@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -101,6 +102,34 @@ public class ObstacleForUserRetrieveUtil {
 		}
 		
 		return ofu;
+	}
+	
+	public List<ObstacleForUser> getUserObstacleForUser(int userId) {
+		List<ObstacleForUser> ofuList = null;
+		try {
+			Map<String, Object> equalityConditions = new HashMap<String, Object>();
+			equalityConditions.put(DBConstants.OBSTACLE_FOR_USER__USER_ID, userId);
+			String conditionDelimiter = getQueryConstructionUtil().getAnd();
+
+			//query db, "values" is not used 
+			//(its purpose is to hold the values that were supposed to be put
+			// into a prepared statement)
+			List<Object> values = null;
+			boolean preparedStatement = false;
+
+			String query = getQueryConstructionUtil().selectRowsQueryEqualityConditions(
+					TABLE_NAME, equalityConditions, conditionDelimiter, values,
+					preparedStatement);
+
+			log.info("query=" + query);
+
+			ofuList = this.jdbcTemplate.query(query, new UserObstacleForClientMapper());
+		} catch (Exception e) {
+			log.error("could not retrieve user obstacle for userId=" + userId, e);
+			ofuList = new ArrayList<ObstacleForUser>();
+		}
+		
+		return ofuList;
 	}
 	
 }

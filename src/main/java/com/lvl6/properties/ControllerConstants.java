@@ -57,6 +57,10 @@ public class ControllerConstants {
 	public static final int MINI_TUTORIAL__ELEMENT_TUTORIAL_ASSET_ID = 2;
 	public static final int MINI_TUTORIAL__CITY_ID = 1;
 	public static final int MINI_TUTORIAL__QUEST_ID_FOR_COMBINING_POWER_UPS = 1;
+	
+	//OBSTACLE CONSTANTS
+	public static final int OBSTACLE__MAX_OBSTACLES = 15;
+	public static final int OBSTACLE__MINUTES_PER_OBSTACLE = 5;
 
 	//PVP
 	//user lvl means nothing, since it doesn't indicate much besides maybe how much you played

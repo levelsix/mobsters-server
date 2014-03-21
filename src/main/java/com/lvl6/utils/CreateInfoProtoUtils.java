@@ -47,6 +47,7 @@ import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
 import com.lvl6.info.MonsterLevelInfo;
 import com.lvl6.info.Obstacle;
+import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleHistory;
 import com.lvl6.info.Quest;
@@ -129,9 +130,11 @@ import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
 import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.ResourceType;
+import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TownHallProto;
+import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.TaskProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.FullTaskProto;
 import com.lvl6.proto.TaskProto.MinimumUserTaskProto;
@@ -1620,6 +1623,34 @@ public class CreateInfoProtoUtils {
   	return ob.build();
   }
   
+  public static UserObstacleProto createUserObstacleProto(ObstacleForUser ofu) {
+  	UserObstacleProto.Builder uopb = UserObstacleProto.newBuilder();
+  	uopb.setUserObstacleId(ofu.getId());
+  	uopb.setUserId(ofu.getUserId());
+  	uopb.setObstacleId(ofu.getObstacleId());
+  	
+  	int x = ofu.getXcoord();
+  	int y = ofu.getYcoord();
+  	CoordinatePair cp = new CoordinatePair(x, y);
+  	CoordinateProto cproto = createCoordinateProtoFromCoordinatePair(cp);
+  	uopb.setCoordinates(cproto);
+  	
+  	String orientationStr = ofu.getOrientation();
+  	try {
+  		StructOrientation so = StructOrientation.valueOf(orientationStr);
+  		uopb.setOrientation(so);
+  	} catch (Exception e) {
+  		log.error("incorrect struct orientation name=" + orientationStr);
+  	}
+  	
+  	Date removalStartTime = ofu.getRemovalTime();
+  	
+  	if (null != removalStartTime) {
+  		uopb.setRemovalStartTime(removalStartTime.getTime());
+  	}
+  	
+  	return uopb.build();
+  }
   
   /**Task.proto*****************************************************/
   //individualCash should always be set, could be 0 or more

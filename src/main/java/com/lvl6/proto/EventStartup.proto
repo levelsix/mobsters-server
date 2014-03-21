@@ -158,7 +158,7 @@ message StartupResponseProto {
 		optional MiniTutorialConstants miniTuts = 24;
 		
 		optional int32 maxObstacles = 25;
-		optional int32 obstaclePerMinute = 26; //minutes it takes to spawn obstacles
+		optional int32 minutesPerObstacle = 26; //minutes it takes to spawn obstacles
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;

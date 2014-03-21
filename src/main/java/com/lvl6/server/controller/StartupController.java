@@ -47,6 +47,7 @@ import com.lvl6.info.MonsterEnhancingForUser;
 import com.lvl6.info.MonsterEvolvingForUser;
 import com.lvl6.info.MonsterForUser;
 import com.lvl6.info.MonsterHealingForUser;
+import com.lvl6.info.ObstacleForUser;
 import com.lvl6.info.PrivateChatPost;
 import com.lvl6.info.PvpBattleForUser;
 import com.lvl6.info.PvpBattleHistory;
@@ -82,6 +83,7 @@ import com.lvl6.proto.MonsterStuffProto.UserMonsterHealingProto;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.QuestProto.FullUserQuestProto;
 import com.lvl6.proto.StaticDataStuffProto.StaticDataProto;
+import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.TaskProto.UserPersistentEventProto;
 import com.lvl6.proto.UserProto.FullUserProto;
 import com.lvl6.proto.UserProto.MinimumUserProtoWithFacebookId;
@@ -101,6 +103,7 @@ import com.lvl6.retrieveutils.LoginHistoryRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEnhancingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterEvolvingForUserRetrieveUtils;
 import com.lvl6.retrieveutils.MonsterHealingForUserRetrieveUtils;
+import com.lvl6.retrieveutils.ObstacleForUserRetrieveUtil;
 import com.lvl6.retrieveutils.PrivateChatPostRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleForUserRetrieveUtils;
 import com.lvl6.retrieveutils.PvpBattleHistoryRetrieveUtil;
@@ -210,6 +213,17 @@ public class StartupController extends EventController {
 		this.pvpBattleHistoryRetrieveUtil = pvpBattleHistoryRetrieveUtil;
 	}
 	
+	@Autowired
+	protected ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil;
+	public ObstacleForUserRetrieveUtil getObstacleForUserRetrieveUtil() {
+		return obstacleForUserRetrieveUtil;
+	}
+	public void setObstacleForUserRetrieveUtil(
+			ObstacleForUserRetrieveUtil obstacleForUserRetrieveUtil) {
+		this.obstacleForUserRetrieveUtil = obstacleForUserRetrieveUtil;
+	}
+	
+	
 	@Override
   public RequestEvent createRequestEvent() {
     return new StartupRequestEvent();
@@ -300,6 +314,7 @@ public class StartupController extends EventController {
 			      pvpBattleStuff(user, userId, freshRestart, now); 
 			      pvpBattleHistoryStuff(resBuilder, user, userId);
 			      setClanRaidStuff(resBuilder, user, userId, now);
+			      setObstacleStuff(resBuilder, userId);
 			      
 			      
 			      setWhetherPlayerCompletedInAppPurchase(resBuilder, user);
@@ -1221,7 +1236,20 @@ public class StartupController extends EventController {
   	}
   }
   
-  
+  private void setObstacleStuff(Builder resBuilder, int userId) {
+  	List<ObstacleForUser> ofuList = getObstacleForUserRetrieveUtil()
+  			.getUserObstacleForUser(userId);
+  	
+  	if (null == ofuList) {
+  		return;
+  	}
+  	
+  	for (ObstacleForUser ofu : ofuList) {
+  		UserObstacleProto uop = CreateInfoProtoUtils.createUserObstacleProto(ofu);
+  		resBuilder.addObstacles(uop);
+  	}
+  	
+  }
   
   
   

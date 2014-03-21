@@ -478,6 +478,9 @@ public class MiscMethods {
     
     MiniTutorialConstants miniTuts = createMiniTutorialConstantsProto();
     cb.setMiniTuts(miniTuts);
+    
+    cb.setMaxObstacles(ControllerConstants.OBSTACLE__MAX_OBSTACLES);
+    cb.setMinutesPerObstacle(ControllerConstants.OBSTACLE__MINUTES_PER_OBSTACLE);
     //set more properties above
     //    BattleConstants battleConstants = BattleConstants.newBuilder()
     //        .setLocationBarMax(ControllerConstants.BATTLE_LOCATION_BAR_MAX)
