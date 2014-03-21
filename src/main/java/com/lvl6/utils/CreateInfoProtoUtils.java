@@ -1620,6 +1620,14 @@ public class CreateInfoProtoUtils {
   	}
   	ob.setChanceToAppear(o.getChanceToAppear());
   	
+  	aStr = o.getShadowImgName();
+  	if (null != aStr) {
+  		ob.setShadowImgName(o.getShadowImgName());
+  	}
+  	
+  	ob.setShadowVerticalOffset(o.getShadowVerticalOffset());
+  	ob.setShadowHorizontalOfffset(o.getShadowHorizontalOffset());
+  	
   	return ob.build();
   }
   
@@ -2014,6 +2022,11 @@ public class CreateInfoProtoUtils {
     String gameCenterId = u.getGameCenterId();
     if (null != gameCenterId) {
       builder.setGameCenterId(gameCenterId);
+    }
+    
+    Date lastObstacleSpawnedTime = u.getLastObstacleSpawnedTime();
+    if (null != lastObstacleSpawnedTime) {
+    	builder.setLastObstacleSpawnedTime(lastObstacleSpawnedTime.getTime());
     }
 
     //ADD NEW COLUMNS ABOVE HERE, NOT BELOW THE IF, ELSE CASE FOR IS FAKE

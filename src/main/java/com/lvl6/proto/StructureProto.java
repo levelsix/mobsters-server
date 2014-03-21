@@ -7638,6 +7638,18 @@ public final class StructureProto {
     // optional float chanceToAppear = 11;
     boolean hasChanceToAppear();
     float getChanceToAppear();
+    
+    // optional string shadowImgName = 12;
+    boolean hasShadowImgName();
+    String getShadowImgName();
+    
+    // optional float shadowVerticalOffset = 13;
+    boolean hasShadowVerticalOffset();
+    float getShadowVerticalOffset();
+    
+    // optional float shadowHorizontalOfffset = 14;
+    boolean hasShadowHorizontalOfffset();
+    float getShadowHorizontalOfffset();
   }
   public static final class ObstacleProto extends
       com.google.protobuf.GeneratedMessage
@@ -7844,6 +7856,58 @@ public final class StructureProto {
       return chanceToAppear_;
     }
     
+    // optional string shadowImgName = 12;
+    public static final int SHADOWIMGNAME_FIELD_NUMBER = 12;
+    private java.lang.Object shadowImgName_;
+    public boolean hasShadowImgName() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    public String getShadowImgName() {
+      java.lang.Object ref = shadowImgName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          shadowImgName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getShadowImgNameBytes() {
+      java.lang.Object ref = shadowImgName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        shadowImgName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional float shadowVerticalOffset = 13;
+    public static final int SHADOWVERTICALOFFSET_FIELD_NUMBER = 13;
+    private float shadowVerticalOffset_;
+    public boolean hasShadowVerticalOffset() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    public float getShadowVerticalOffset() {
+      return shadowVerticalOffset_;
+    }
+    
+    // optional float shadowHorizontalOfffset = 14;
+    public static final int SHADOWHORIZONTALOFFFSET_FIELD_NUMBER = 14;
+    private float shadowHorizontalOfffset_;
+    public boolean hasShadowHorizontalOfffset() {
+      return ((bitField0_ & 0x00002000) == 0x00002000);
+    }
+    public float getShadowHorizontalOfffset() {
+      return shadowHorizontalOfffset_;
+    }
+    
     private void initFields() {
       obstacleId_ = 0;
       name_ = "";
@@ -7856,6 +7920,9 @@ public final class StructureProto {
       imgVerticalPixelOffset_ = 0F;
       description_ = "";
       chanceToAppear_ = 0F;
+      shadowImgName_ = "";
+      shadowVerticalOffset_ = 0F;
+      shadowHorizontalOfffset_ = 0F;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -7901,6 +7968,15 @@ public final class StructureProto {
       }
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         output.writeFloat(11, chanceToAppear_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeBytes(12, getShadowImgNameBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeFloat(13, shadowVerticalOffset_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        output.writeFloat(14, shadowHorizontalOfffset_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -7954,6 +8030,18 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000400) == 0x00000400)) {
         size += com.google.protobuf.CodedOutputStream
           .computeFloatSize(11, chanceToAppear_);
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(12, getShadowImgNameBytes());
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(13, shadowVerticalOffset_);
+      }
+      if (((bitField0_ & 0x00002000) == 0x00002000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(14, shadowHorizontalOfffset_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8101,6 +8189,12 @@ public final class StructureProto {
         bitField0_ = (bitField0_ & ~0x00000200);
         chanceToAppear_ = 0F;
         bitField0_ = (bitField0_ & ~0x00000400);
+        shadowImgName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000800);
+        shadowVerticalOffset_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        shadowHorizontalOfffset_ = 0F;
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
       
@@ -8183,6 +8277,18 @@ public final class StructureProto {
           to_bitField0_ |= 0x00000400;
         }
         result.chanceToAppear_ = chanceToAppear_;
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.shadowImgName_ = shadowImgName_;
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        result.shadowVerticalOffset_ = shadowVerticalOffset_;
+        if (((from_bitField0_ & 0x00002000) == 0x00002000)) {
+          to_bitField0_ |= 0x00002000;
+        }
+        result.shadowHorizontalOfffset_ = shadowHorizontalOfffset_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8231,6 +8337,15 @@ public final class StructureProto {
         }
         if (other.hasChanceToAppear()) {
           setChanceToAppear(other.getChanceToAppear());
+        }
+        if (other.hasShadowImgName()) {
+          setShadowImgName(other.getShadowImgName());
+        }
+        if (other.hasShadowVerticalOffset()) {
+          setShadowVerticalOffset(other.getShadowVerticalOffset());
+        }
+        if (other.hasShadowHorizontalOfffset()) {
+          setShadowHorizontalOfffset(other.getShadowHorizontalOfffset());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8322,6 +8437,21 @@ public final class StructureProto {
             case 93: {
               bitField0_ |= 0x00000400;
               chanceToAppear_ = input.readFloat();
+              break;
+            }
+            case 98: {
+              bitField0_ |= 0x00000800;
+              shadowImgName_ = input.readBytes();
+              break;
+            }
+            case 109: {
+              bitField0_ |= 0x00001000;
+              shadowVerticalOffset_ = input.readFloat();
+              break;
+            }
+            case 117: {
+              bitField0_ |= 0x00002000;
+              shadowHorizontalOfffset_ = input.readFloat();
               break;
             }
           }
@@ -8609,6 +8739,84 @@ public final class StructureProto {
         return this;
       }
       
+      // optional string shadowImgName = 12;
+      private java.lang.Object shadowImgName_ = "";
+      public boolean hasShadowImgName() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      public String getShadowImgName() {
+        java.lang.Object ref = shadowImgName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          shadowImgName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setShadowImgName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000800;
+        shadowImgName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearShadowImgName() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        shadowImgName_ = getDefaultInstance().getShadowImgName();
+        onChanged();
+        return this;
+      }
+      void setShadowImgName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000800;
+        shadowImgName_ = value;
+        onChanged();
+      }
+      
+      // optional float shadowVerticalOffset = 13;
+      private float shadowVerticalOffset_ ;
+      public boolean hasShadowVerticalOffset() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      public float getShadowVerticalOffset() {
+        return shadowVerticalOffset_;
+      }
+      public Builder setShadowVerticalOffset(float value) {
+        bitField0_ |= 0x00001000;
+        shadowVerticalOffset_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearShadowVerticalOffset() {
+        bitField0_ = (bitField0_ & ~0x00001000);
+        shadowVerticalOffset_ = 0F;
+        onChanged();
+        return this;
+      }
+      
+      // optional float shadowHorizontalOfffset = 14;
+      private float shadowHorizontalOfffset_ ;
+      public boolean hasShadowHorizontalOfffset() {
+        return ((bitField0_ & 0x00002000) == 0x00002000);
+      }
+      public float getShadowHorizontalOfffset() {
+        return shadowHorizontalOfffset_;
+      }
+      public Builder setShadowHorizontalOfffset(float value) {
+        bitField0_ |= 0x00002000;
+        shadowHorizontalOfffset_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearShadowHorizontalOfffset() {
+        bitField0_ = (bitField0_ & ~0x00002000);
+        shadowHorizontalOfffset_ = 0F;
+        onChanged();
+        return this;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.ObstacleProto)
     }
     
@@ -8631,6 +8839,10 @@ public final class StructureProto {
     boolean hasCoordinate();
     com.lvl6.proto.StructureProto.CoordinateProto getCoordinate();
     com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordinateOrBuilder();
+    
+    // optional .com.lvl6.proto.StructOrientation orientation = 5;
+    boolean hasOrientation();
+    com.lvl6.proto.StructureProto.StructOrientation getOrientation();
   }
   public static final class MinimumObstacleProto extends
       com.google.protobuf.GeneratedMessage
@@ -8684,9 +8896,20 @@ public final class StructureProto {
       return coordinate_;
     }
     
+    // optional .com.lvl6.proto.StructOrientation orientation = 5;
+    public static final int ORIENTATION_FIELD_NUMBER = 5;
+    private com.lvl6.proto.StructureProto.StructOrientation orientation_;
+    public boolean hasOrientation() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public com.lvl6.proto.StructureProto.StructOrientation getOrientation() {
+      return orientation_;
+    }
+    
     private void initFields() {
       obstacleId_ = 0;
       coordinate_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+      orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -8706,6 +8929,9 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeMessage(2, coordinate_);
       }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(5, orientation_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -8722,6 +8948,10 @@ public final class StructureProto {
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, coordinate_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, orientation_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -8856,6 +9086,8 @@ public final class StructureProto {
           coordinateBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
+        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       
@@ -8906,6 +9138,10 @@ public final class StructureProto {
         } else {
           result.coordinate_ = coordinateBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.orientation_ = orientation_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8927,6 +9163,9 @@ public final class StructureProto {
         }
         if (other.hasCoordinate()) {
           mergeCoordinate(other.getCoordinate());
+        }
+        if (other.hasOrientation()) {
+          setOrientation(other.getOrientation());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -8971,6 +9210,17 @@ public final class StructureProto {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setCoordinate(subBuilder.buildPartial());
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+              com.lvl6.proto.StructureProto.StructOrientation value = com.lvl6.proto.StructureProto.StructOrientation.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(5, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                orientation_ = value;
+              }
               break;
             }
           }
@@ -9088,6 +9338,30 @@ public final class StructureProto {
           coordinate_ = null;
         }
         return coordinateBuilder_;
+      }
+      
+      // optional .com.lvl6.proto.StructOrientation orientation = 5;
+      private com.lvl6.proto.StructureProto.StructOrientation orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+      public boolean hasOrientation() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public com.lvl6.proto.StructureProto.StructOrientation getOrientation() {
+        return orientation_;
+      }
+      public Builder setOrientation(com.lvl6.proto.StructureProto.StructOrientation value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        orientation_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearOrientation() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        orientation_ = com.lvl6.proto.StructureProto.StructOrientation.POSITION_1;
+        onChanged();
+        return this;
       }
       
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MinimumObstacleProto)
@@ -9949,25 +10223,28 @@ public final class StructureProto {
       " \001(\005\"\'\n\017CoordinateProto\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030" +
       "\002 \001(\002\"\\\n\023TutorialStructProto\022\020\n\010structId" +
       "\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com.lvl6.pr" +
-      "oto.CoordinateProto\"\214\002\n\rObstacleProto\022\022\n" +
+      "oto.CoordinateProto\"\342\002\n\rObstacleProto\022\022\n" +
       "\nobstacleId\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\0225\n\017remov" +
       "alCostType\030\003 \001(\0162\034.com.lvl6.proto.Resour" +
       "ceType\022\014\n\004cost\030\004 \001(\005\022\027\n\017secondsToRemove\030",
       "\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007" +
       "imgName\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030" +
       "\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAp" +
-      "pear\030\013 \001(\002\"_\n\024MinimumObstacleProto\022\022\n\nob" +
-      "stacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com" +
-      ".lvl6.proto.CoordinateProto\"\327\001\n\021UserObst" +
-      "acleProto\022\026\n\016userObstacleId\030\001 \001(\005\022\016\n\006use" +
-      "rId\030\002 \001(\005\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordin" +
-      "ates\030\004 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
-      "oto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6.prot",
-      "o.StructOrientation\022\030\n\020removalStartTime\030" +
-      "\006 \001(\003*8\n\014ResourceType\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002" +
-      "\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*3\n\021StructOrienta" +
-      "tion\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016" +
-      "StructureProto"
+      "pear\030\013 \001(\002\022\025\n\rshadowImgName\030\014 \001(\t\022\034\n\024sha" +
+      "dowVerticalOffset\030\r \001(\002\022\037\n\027shadowHorizon" +
+      "talOfffset\030\016 \001(\002\"\227\001\n\024MinimumObstacleProt" +
+      "o\022\022\n\nobstacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(" +
+      "\0132\037.com.lvl6.proto.CoordinateProto\0226\n\013or" +
+      "ientation\030\005 \001(\0162!.com.lvl6.proto.StructO" +
+      "rientation\"\327\001\n\021UserObstacleProto\022\026\n\016user",
+      "ObstacleId\030\001 \001(\005\022\016\n\006userId\030\002 \001(\005\022\022\n\nobst" +
+      "acleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com." +
+      "lvl6.proto.CoordinateProto\0226\n\013orientatio" +
+      "n\030\005 \001(\0162!.com.lvl6.proto.StructOrientati" +
+      "on\022\030\n\020removalStartTime\030\006 \001(\003*8\n\014Resource" +
+      "Type\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MON" +
+      "STER\020\024*3\n\021StructOrientation\022\016\n\nPOSITION_" +
+      "1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -10059,7 +10336,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_ObstacleProto_descriptor,
-              new java.lang.String[] { "ObstacleId", "Name", "RemovalCostType", "Cost", "SecondsToRemove", "Width", "Height", "ImgName", "ImgVerticalPixelOffset", "Description", "ChanceToAppear", },
+              new java.lang.String[] { "ObstacleId", "Name", "RemovalCostType", "Cost", "SecondsToRemove", "Width", "Height", "ImgName", "ImgVerticalPixelOffset", "Description", "ChanceToAppear", "ShadowImgName", "ShadowVerticalOffset", "ShadowHorizontalOfffset", },
               com.lvl6.proto.StructureProto.ObstacleProto.class,
               com.lvl6.proto.StructureProto.ObstacleProto.Builder.class);
           internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor =
@@ -10067,7 +10344,7 @@ public final class StructureProto {
           internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor,
-              new java.lang.String[] { "ObstacleId", "Coordinate", },
+              new java.lang.String[] { "ObstacleId", "Coordinate", "Orientation", },
               com.lvl6.proto.StructureProto.MinimumObstacleProto.class,
               com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder.class);
           internal_static_com_lvl6_proto_UserObstacleProto_descriptor =

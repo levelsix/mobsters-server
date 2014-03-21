@@ -536,7 +536,7 @@ public class DBConstants {
   public static final String USER__FB_ID_SET_ON_USER_CREATE = "fb_id_set_on_user_create";
   public static final String USER__GAME_CENTER_ID = "game_center_id";  
   public static final String USER__UDID = "udid";
-  
+  public static final String USER__LAST_OBSTACLE_SPAWNED_TIME = "last_obstacle_spawned_time";
   
   /* USER BEFORE TUTORIAL COMPLETION*/
   public static final String USER_BEFORE_TUTORIAL_COMPLETION__ID = GENERIC__ID;

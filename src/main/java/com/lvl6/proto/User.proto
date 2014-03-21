@@ -121,6 +121,7 @@ message FullUserProto {
 	//optional bool fbIdSetOnUserCreate = 44; //defined below
 	optional string gameCenterId = 45;	
 	//optional string udid = 13; defined below, should be 46
+	optional int64 lastObstacleSpawnedTime = 47;
 
 	//CreateInfoProtoUtils.java doesn't set these (I can't think of a time the client would need this
 	//consider making other fields like this

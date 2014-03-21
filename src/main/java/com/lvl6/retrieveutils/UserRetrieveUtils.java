@@ -708,14 +708,14 @@ import com.lvl6.utils.utilmethods.StringUtils;
     int elo = rs.getInt(i++);
     String rank = rs.getString(i++);
     
-    Date lastTimeQueued = null;
+    Date inBattleEndTime = null;
     try {
     	ts = rs.getTimestamp(i++);
     	if (!rs.wasNull()) {
-    		lastTimeQueued = new Date(ts.getTime());
+    		inBattleEndTime = new Date(ts.getTime());
     	}
     } catch (Exception e) {
-    	log.error("db error: last_time_queued not set. user_id=" + id);
+    	log.error("db error: in_battle_end_time not set. user_id=" + id);
     }
     
     int attacksWon = rs.getInt(i++);
@@ -727,6 +727,15 @@ import com.lvl6.utils.utilmethods.StringUtils;
     boolean fbIdSetOnUserCreate = rs.getBoolean(i++);
     String gameCenterId = rs.getString(i++);
     String udid = rs.getString(i++);
+    Date lastObstacleSpawnedTime = null;
+    try {
+    	ts = rs.getTimestamp(i++);
+    	if (!rs.wasNull()) {
+    		lastObstacleSpawnedTime = new Date(ts.getTime());
+    	}
+    } catch (Exception e) {
+    	log.error("db error: last_obstacle_spawned_time");
+    }
     
     User user = new User(id, name, level, gems, cash, oil, experience,
     		tasksCompleted, battlesWon, battlesLost, flees, referralCode,
@@ -735,9 +744,9 @@ import com.lvl6.utils.utilmethods.StringUtils;
     		apsalarId, numCoinsRetrievedFromStructs, numOilRetrievedFromStructs,
     		numConsecutiveDaysPlayed, clanId, lastWallPostNotificationTime,
     		kabamNaid, hasReceivedfbReward, numBeginnerSalesPurchased,
-    		hasActiveShield, shieldEndTime, elo, rank, lastTimeQueued,
+    		hasActiveShield, shieldEndTime, elo, rank, inBattleEndTime,
     		attacksWon, defensesWon, attacksLost, defensesLost, facebookId,
-    		fbIdSetOnUserCreate, gameCenterId, udid);
+    		fbIdSetOnUserCreate, gameCenterId, udid, lastObstacleSpawnedTime);
     return user;
   }
  

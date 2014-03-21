@@ -195,11 +195,15 @@ message ObstacleProto {
 	optional float imgVerticalPixelOffset = 9;
 	optional string description = 10;
 	optional float chanceToAppear = 11;
+	optional string shadowImgName = 12;
+	optional float shadowVerticalOffset = 13;
+	optional float shadowHorizontalOfffset = 14;
 }
 
 message MinimumObstacleProto {
 	optional int32 obstacleId = 1;
 	optional CoordinateProto coordinate = 2;
+	optional StructOrientation orientation = 5;
 }
 
 message UserObstacleProto {

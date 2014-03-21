@@ -104,10 +104,14 @@ import com.lvl6.utils.DBConnection;
     float imgVerticalPixelOffset = rs.getFloat(i++);
     String description = rs.getString(i++);
     float chanceToAppear = rs.getFloat(i++);
+    String shadowImgName = rs.getString(i++);
+    float shadowVerticalOffset = rs.getFloat(i++);
+    float shadowHorizontalOffset = rs.getFloat(i++);
     
-    Obstacle obstacle = new Obstacle(id, name, removalCostType, cost,
-    		secondsToRemove, width, height, imgName, imgVerticalPixelOffset,
-    		description, chanceToAppear);
+    
+    Obstacle obstacle = new Obstacle(id, name, removalCostType, cost, secondsToRemove,
+    		width, height, imgName, imgVerticalPixelOffset, description, chanceToAppear,
+    		shadowImgName, shadowVerticalOffset, shadowHorizontalOffset);
     return obstacle;
   }
 }

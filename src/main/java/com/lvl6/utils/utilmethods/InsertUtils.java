@@ -477,6 +477,8 @@ public class InsertUtils implements InsertUtil{
     	insertParams.put(DBConstants.USER__FB_ID_SET_ON_USER_CREATE, false);
     }
     
+    insertParams.put(DBConstants.USER__LAST_OBSTACLE_SPAWNED_TIME, createTime);
+    
     int userId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_USER, insertParams);
     return userId;

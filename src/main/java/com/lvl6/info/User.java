@@ -13,7 +13,8 @@ import com.lvl6.utils.DBConnection;
 
 public class User implements Serializable {
 	
-	private static final long serialVersionUID = 5859682564351287507L;
+	private static final long serialVersionUID = -8217671843800724634L;
+	
 	private int id;
 	private String name;
 	private int level;
@@ -60,6 +61,7 @@ public class User implements Serializable {
 	private boolean fbIdSetOnUserCreate;
 	private String gameCenterId;
 	private String udid;
+	private Date lastObstacleSpawnedTime;
 
 	public User(int id, String name, int level, int gems, int cash, int oil,
 			int experience, int tasksCompleted, int battlesWon, int battlesLost,
@@ -74,7 +76,8 @@ public class User implements Serializable {
 			boolean hasActiveShield, Date shieldEndTime, int elo, String rank,
 			Date inBattleShieldEndTime, int attacksWon, int defensesWon,
 			int attacksLost, int defensesLost, String facebookId,
-			boolean fbIdSetOnUserCreate, String gameCenterId, String udid) {
+			boolean fbIdSetOnUserCreate, String gameCenterId, String udid,
+			Date lastObstacleSpawnedTime) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -120,6 +123,7 @@ public class User implements Serializable {
 		this.fbIdSetOnUserCreate = fbIdSetOnUserCreate;
 		this.gameCenterId = gameCenterId;
 		this.udid = udid;
+		this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
 	}
 
 	public boolean updateSetdevicetoken(String deviceToken) {
@@ -1278,6 +1282,14 @@ public class User implements Serializable {
 		this.udid = udid;
 	}
 
+	public Date getLastObstacleSpawnedTime() {
+		return lastObstacleSpawnedTime;
+	}
+
+	public void setLastObstacleSpawnedTime(Date lastObstacleSpawnedTime) {
+		this.lastObstacleSpawnedTime = lastObstacleSpawnedTime;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", level=" + level + ", gems="
@@ -1303,7 +1315,8 @@ public class User implements Serializable {
 				+ attacksWon + ", defensesWon=" + defensesWon + ", attacksLost="
 				+ attacksLost + ", defensesLost=" + defensesLost + ", facebookId="
 				+ facebookId + ", fbIdSetOnUserCreate=" + fbIdSetOnUserCreate
-				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid + "]";
+				+ ", gameCenterId=" + gameCenterId + ", udid=" + udid
+				+ ", lastObstacleSpawnedTime=" + lastObstacleSpawnedTime + "]";
 	}
 
 }

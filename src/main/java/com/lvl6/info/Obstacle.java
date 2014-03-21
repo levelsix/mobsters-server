@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Obstacle implements Serializable {
 
+	private static final long serialVersionUID = 4770303583975177808L;
+	
 	private int id;
 	private String name;
 	private String removalCostType;
@@ -15,10 +17,15 @@ public class Obstacle implements Serializable {
 	private float imgVerticalPixelOffset;
 	private String description;
 	private float chanceToAppear;
-	
+  String shadowImgName;
+  float shadowVerticalOffset;
+  float shadowHorizontalOffset;
+  
 	public Obstacle(int id, String name, String removalCostType, int cost,
 			int secondsToRemove, int width, int height, String imgName,
-			float imgVerticalPixelOffset, String description, float chanceToAppear) {
+			float imgVerticalPixelOffset, String description, float chanceToAppear,
+			String shadowImgName, float shadowVerticalOffset,
+			float shadowHorizontalOffset) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,6 +38,9 @@ public class Obstacle implements Serializable {
 		this.imgVerticalPixelOffset = imgVerticalPixelOffset;
 		this.description = description;
 		this.chanceToAppear = chanceToAppear;
+		this.shadowImgName = shadowImgName;
+		this.shadowVerticalOffset = shadowVerticalOffset;
+		this.shadowHorizontalOffset = shadowHorizontalOffset;
 	}
 
 	public int getId() {
@@ -121,6 +131,30 @@ public class Obstacle implements Serializable {
 		this.chanceToAppear = chanceToAppear;
 	}
 
+	public String getShadowImgName() {
+		return shadowImgName;
+	}
+
+	public void setShadowImgName(String shadowImgName) {
+		this.shadowImgName = shadowImgName;
+	}
+
+	public float getShadowVerticalOffset() {
+		return shadowVerticalOffset;
+	}
+
+	public void setShadowVerticalOffset(float shadowVerticalOffset) {
+		this.shadowVerticalOffset = shadowVerticalOffset;
+	}
+
+	public float getShadowHorizontalOffset() {
+		return shadowHorizontalOffset;
+	}
+
+	public void setShadowHorizontalOffset(float shadowHorizontalOffset) {
+		this.shadowHorizontalOffset = shadowHorizontalOffset;
+	}
+
 	@Override
 	public String toString() {
 		return "Obstacle [id=" + id + ", name=" + name + ", removalCostType="
@@ -128,7 +162,9 @@ public class Obstacle implements Serializable {
 				+ secondsToRemove + ", width=" + width + ", height=" + height
 				+ ", imgName=" + imgName + ", imgVerticalPixelOffset="
 				+ imgVerticalPixelOffset + ", description=" + description
-				+ ", chanceToAppear=" + chanceToAppear + "]";
+				+ ", chanceToAppear=" + chanceToAppear + ", shadowImgName="
+				+ shadowImgName + ", shadowVerticalOffset=" + shadowVerticalOffset
+				+ ", shadowHorizontalOffset=" + shadowHorizontalOffset + "]";
 	}
 	
 }
