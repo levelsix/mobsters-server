@@ -156,6 +156,8 @@ message StartupResponseProto {
 		optional bool addAllFbFriends = 23;
 		optional MiniTutorialConstants miniTuts = 24;
 		
+		optional int32 maxObstacles = 25;
+		optional int32 obstaclePerMinute = 26; //minutes it takes to spawn obstacles
 		
 		message AnimatedSpriteOffsetProto {
 			optional string imageName = 1;

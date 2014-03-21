@@ -197,6 +197,11 @@ message ObstacleProto {
 	optional float chanceToAppear = 11;
 }
 
+message MinimumObstacleProto {
+	optional int32 obstacleId = 1;
+	optional CoordinateProto coordinate = 2;
+}
+
 message UserObstacleProto {
 	optional int64 userObstacleId = 1;
 	optional int32 userId = 2;

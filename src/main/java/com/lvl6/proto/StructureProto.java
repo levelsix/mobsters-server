@@ -8620,6 +8620,487 @@ public final class StructureProto {
     // @@protoc_insertion_point(class_scope:com.lvl6.proto.ObstacleProto)
   }
   
+  public interface MinimumObstacleProtoOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional int32 obstacleId = 1;
+    boolean hasObstacleId();
+    int getObstacleId();
+    
+    // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
+    boolean hasCoordinate();
+    com.lvl6.proto.StructureProto.CoordinateProto getCoordinate();
+    com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordinateOrBuilder();
+  }
+  public static final class MinimumObstacleProto extends
+      com.google.protobuf.GeneratedMessage
+      implements MinimumObstacleProtoOrBuilder {
+    // Use MinimumObstacleProto.newBuilder() to construct.
+    private MinimumObstacleProto(Builder builder) {
+      super(builder);
+    }
+    private MinimumObstacleProto(boolean noInit) {}
+    
+    private static final MinimumObstacleProto defaultInstance;
+    public static MinimumObstacleProto getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public MinimumObstacleProto getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 obstacleId = 1;
+    public static final int OBSTACLEID_FIELD_NUMBER = 1;
+    private int obstacleId_;
+    public boolean hasObstacleId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getObstacleId() {
+      return obstacleId_;
+    }
+    
+    // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
+    public static final int COORDINATE_FIELD_NUMBER = 2;
+    private com.lvl6.proto.StructureProto.CoordinateProto coordinate_;
+    public boolean hasCoordinate() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.lvl6.proto.StructureProto.CoordinateProto getCoordinate() {
+      return coordinate_;
+    }
+    public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordinateOrBuilder() {
+      return coordinate_;
+    }
+    
+    private void initFields() {
+      obstacleId_ = 0;
+      coordinate_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, obstacleId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, coordinate_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, obstacleId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, coordinate_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.lvl6.proto.StructureProto.MinimumObstacleProto parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.lvl6.proto.StructureProto.MinimumObstacleProto prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.lvl6.proto.StructureProto.MinimumObstacleProtoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.lvl6.proto.StructureProto.internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable;
+      }
+      
+      // Construct using com.lvl6.proto.StructureProto.MinimumObstacleProto.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getCoordinateFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        obstacleId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (coordinateBuilder_ == null) {
+          coordinate_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+        } else {
+          coordinateBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.lvl6.proto.StructureProto.MinimumObstacleProto.getDescriptor();
+      }
+      
+      public com.lvl6.proto.StructureProto.MinimumObstacleProto getDefaultInstanceForType() {
+        return com.lvl6.proto.StructureProto.MinimumObstacleProto.getDefaultInstance();
+      }
+      
+      public com.lvl6.proto.StructureProto.MinimumObstacleProto build() {
+        com.lvl6.proto.StructureProto.MinimumObstacleProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.lvl6.proto.StructureProto.MinimumObstacleProto buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.lvl6.proto.StructureProto.MinimumObstacleProto result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.lvl6.proto.StructureProto.MinimumObstacleProto buildPartial() {
+        com.lvl6.proto.StructureProto.MinimumObstacleProto result = new com.lvl6.proto.StructureProto.MinimumObstacleProto(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.obstacleId_ = obstacleId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (coordinateBuilder_ == null) {
+          result.coordinate_ = coordinate_;
+        } else {
+          result.coordinate_ = coordinateBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.lvl6.proto.StructureProto.MinimumObstacleProto) {
+          return mergeFrom((com.lvl6.proto.StructureProto.MinimumObstacleProto)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.lvl6.proto.StructureProto.MinimumObstacleProto other) {
+        if (other == com.lvl6.proto.StructureProto.MinimumObstacleProto.getDefaultInstance()) return this;
+        if (other.hasObstacleId()) {
+          setObstacleId(other.getObstacleId());
+        }
+        if (other.hasCoordinate()) {
+          mergeCoordinate(other.getCoordinate());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              obstacleId_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              com.lvl6.proto.StructureProto.CoordinateProto.Builder subBuilder = com.lvl6.proto.StructureProto.CoordinateProto.newBuilder();
+              if (hasCoordinate()) {
+                subBuilder.mergeFrom(getCoordinate());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setCoordinate(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 obstacleId = 1;
+      private int obstacleId_ ;
+      public boolean hasObstacleId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getObstacleId() {
+        return obstacleId_;
+      }
+      public Builder setObstacleId(int value) {
+        bitField0_ |= 0x00000001;
+        obstacleId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearObstacleId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        obstacleId_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // optional .com.lvl6.proto.CoordinateProto coordinate = 2;
+      private com.lvl6.proto.StructureProto.CoordinateProto coordinate_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> coordinateBuilder_;
+      public boolean hasCoordinate() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProto getCoordinate() {
+        if (coordinateBuilder_ == null) {
+          return coordinate_;
+        } else {
+          return coordinateBuilder_.getMessage();
+        }
+      }
+      public Builder setCoordinate(com.lvl6.proto.StructureProto.CoordinateProto value) {
+        if (coordinateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          coordinate_ = value;
+          onChanged();
+        } else {
+          coordinateBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder setCoordinate(
+          com.lvl6.proto.StructureProto.CoordinateProto.Builder builderForValue) {
+        if (coordinateBuilder_ == null) {
+          coordinate_ = builderForValue.build();
+          onChanged();
+        } else {
+          coordinateBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeCoordinate(com.lvl6.proto.StructureProto.CoordinateProto value) {
+        if (coordinateBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              coordinate_ != com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance()) {
+            coordinate_ =
+              com.lvl6.proto.StructureProto.CoordinateProto.newBuilder(coordinate_).mergeFrom(value).buildPartial();
+          } else {
+            coordinate_ = value;
+          }
+          onChanged();
+        } else {
+          coordinateBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearCoordinate() {
+        if (coordinateBuilder_ == null) {
+          coordinate_ = com.lvl6.proto.StructureProto.CoordinateProto.getDefaultInstance();
+          onChanged();
+        } else {
+          coordinateBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProto.Builder getCoordinateBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getCoordinateFieldBuilder().getBuilder();
+      }
+      public com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder getCoordinateOrBuilder() {
+        if (coordinateBuilder_ != null) {
+          return coordinateBuilder_.getMessageOrBuilder();
+        } else {
+          return coordinate_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder> 
+          getCoordinateFieldBuilder() {
+        if (coordinateBuilder_ == null) {
+          coordinateBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.lvl6.proto.StructureProto.CoordinateProto, com.lvl6.proto.StructureProto.CoordinateProto.Builder, com.lvl6.proto.StructureProto.CoordinateProtoOrBuilder>(
+                  coordinate_,
+                  getParentForChildren(),
+                  isClean());
+          coordinate_ = null;
+        }
+        return coordinateBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.lvl6.proto.MinimumObstacleProto)
+    }
+    
+    static {
+      defaultInstance = new MinimumObstacleProto(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.lvl6.proto.MinimumObstacleProto)
+  }
+  
   public interface UserObstacleProtoOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
     
@@ -9394,6 +9875,11 @@ public final class StructureProto {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_lvl6_proto_ObstacleProto_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_lvl6_proto_UserObstacleProto_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -9470,15 +9956,18 @@ public final class StructureProto {
       "\005 \001(\005\022\r\n\005width\030\006 \001(\005\022\016\n\006height\030\007 \001(\005\022\017\n\007" +
       "imgName\030\010 \001(\t\022\036\n\026imgVerticalPixelOffset\030" +
       "\t \001(\002\022\023\n\013description\030\n \001(\t\022\026\n\016chanceToAp" +
-      "pear\030\013 \001(\002\"\327\001\n\021UserObstacleProto\022\026\n\016user" +
-      "ObstacleId\030\001 \001(\003\022\016\n\006userId\030\002 \001(\005\022\022\n\nobst" +
-      "acleId\030\003 \001(\005\0224\n\013coordinates\030\004 \001(\0132\037.com." +
-      "lvl6.proto.CoordinateProto\0226\n\013orientatio" +
-      "n\030\005 \001(\0162!.com.lvl6.proto.StructOrientati" +
-      "on\022\030\n\020removalStartTime\030\006 \001(\003*8\n\014Resource" +
-      "Type\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002\022\010\n\004GEMS\020\003\022\013\n\007MON",
-      "STER\020\024*3\n\021StructOrientation\022\016\n\nPOSITION_" +
-      "1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016StructureProto"
+      "pear\030\013 \001(\002\"_\n\024MinimumObstacleProto\022\022\n\nob" +
+      "stacleId\030\001 \001(\005\0223\n\ncoordinate\030\002 \001(\0132\037.com" +
+      ".lvl6.proto.CoordinateProto\"\327\001\n\021UserObst" +
+      "acleProto\022\026\n\016userObstacleId\030\001 \001(\003\022\016\n\006use" +
+      "rId\030\002 \001(\005\022\022\n\nobstacleId\030\003 \001(\005\0224\n\013coordin" +
+      "ates\030\004 \001(\0132\037.com.lvl6.proto.CoordinatePr" +
+      "oto\0226\n\013orientation\030\005 \001(\0162!.com.lvl6.prot",
+      "o.StructOrientation\022\030\n\020removalStartTime\030" +
+      "\006 \001(\003*8\n\014ResourceType\022\010\n\004CASH\020\001\022\007\n\003OIL\020\002" +
+      "\022\010\n\004GEMS\020\003\022\013\n\007MONSTER\020\024*3\n\021StructOrienta" +
+      "tion\022\016\n\nPOSITION_1\020\001\022\016\n\nPOSITION_2\020\002B\020B\016" +
+      "StructureProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9573,8 +10062,16 @@ public final class StructureProto {
               new java.lang.String[] { "ObstacleId", "Name", "RemovalCostType", "Cost", "SecondsToRemove", "Width", "Height", "ImgName", "ImgVerticalPixelOffset", "Description", "ChanceToAppear", },
               com.lvl6.proto.StructureProto.ObstacleProto.class,
               com.lvl6.proto.StructureProto.ObstacleProto.Builder.class);
-          internal_static_com_lvl6_proto_UserObstacleProto_descriptor =
+          internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor =
             getDescriptor().getMessageTypes().get(11);
+          internal_static_com_lvl6_proto_MinimumObstacleProto_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_lvl6_proto_MinimumObstacleProto_descriptor,
+              new java.lang.String[] { "ObstacleId", "Coordinate", },
+              com.lvl6.proto.StructureProto.MinimumObstacleProto.class,
+              com.lvl6.proto.StructureProto.MinimumObstacleProto.Builder.class);
+          internal_static_com_lvl6_proto_UserObstacleProto_descriptor =
+            getDescriptor().getMessageTypes().get(12);
           internal_static_com_lvl6_proto_UserObstacleProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_UserObstacleProto_descriptor,

@@ -83,7 +83,7 @@ message UpgradeNormStructureRequestProto {
 }
 
 																						//DONE
-message UpgradeNormStructureResponseProto {
+message UpgradeNormStructureResponseProto {	
 	optional MinimumUserProto sender = 1;
 	optional UpgradeNormStructureStatus status = 2;
 	
@@ -217,4 +217,64 @@ message ExpansionWaitCompleteResponseProto {
 }
 
 //------------------------------------------------------------------------------------------
+message SpawnObstacleRequestProto {
+	optional MinimumUserProto sender = 1;
+	repeated MinimumObstacleProto prospectiveObstacles = 2;
+	
+}
+message SpawnObstacleResponseProto {
+	optional MinimumUserProto sender = 1;
+	repeated UserObstacleProto spawnedObstacles = 2;
+	
+	enum SpawnObstacleStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+	}
+}
 
+
+message BeginObstacleRemovalRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 curTime = 2;
+	
+	//if user needs, say, five more cash, then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 3;
+	
+	//positive means refund, negative means charge user (will always be negative)
+	optional sint32 resourceChange = 4; 
+	optional ResourceType resourceType = 5 [default = CASH]; 
+}
+
+message BeginObstacleRemovalResponseProto {
+	optional MinimumUserProto sender = 1;
+	
+	enum BeginObstacleRemovalStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_GEMS = 2;
+		FAIL_INSUFFICIENT_RESOURCE = 3;
+		FAIL_OTHER = 4;
+	}
+	
+}
+
+
+message ObstacleRemovalCompleteRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int64 curTime = 2;
+	
+	optional bool speedUp = 3;
+	//if user needs, say, five more cash, then user can spend gems to replace
+	//said five cash. (positive number, server will convert it to negative)
+	optional int32 gemsSpent = 4;
+}
+
+message ObstacleRemovalCompleteResponseProto {
+	optional MinimumUserProto sender = 1;
+	
+	enum ObstacleRemovalCompleteStatus {
+		SUCCESS = 1;
+		FAIL_INSUFFICIENT_GEMS = 2;
+		FAIL_OTHER = 3;
+	}
+}
