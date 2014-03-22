@@ -40,7 +40,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 
   @Override
   public EventProtocolRequest getEventType() {
-    return EventProtocolRequest.C_BOOT_PLAYER_FROM_CLAN_EVENT;
+    return EventProtocolRequest.C_PROMOTE_DEMOTE_CLAN_MEMBER_EVENT;
   }
 
   @Override
@@ -58,7 +58,6 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     PromoteDemoteClanMemberResponseProto.Builder resBuilder = PromoteDemoteClanMemberResponseProto.newBuilder();
     resBuilder.setStatus(PromoteDemoteClanMemberStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    resBuilder.setVictimId(victimId);
     resBuilder.setUserClanStatus(newUserClanStatus);
 
     int clanId = senderProto.getClan().getClanId();
@@ -94,6 +93,8 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       
       if (success) {
         resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
+        User victim = users.get(victimId);
+//        resBuilder.setVictimId();
       }
 
       //write to promoter
