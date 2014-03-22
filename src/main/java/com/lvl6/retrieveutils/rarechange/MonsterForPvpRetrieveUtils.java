@@ -24,7 +24,7 @@ import com.lvl6.properties.DBConstants;
 import com.lvl6.pvp.PvpConstants;
 import com.lvl6.utils.DBConnection;
 
-@Component /*@DependsOn("gameServer")*/
+@Component
 public class MonsterForPvpRetrieveUtils implements InitializingBean {
 
 	private Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
@@ -70,6 +70,11 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
 
   protected void populateMonsterForPvpMap() {
   	reload();
+  }
+  
+  //hacky way of reloading
+  public static void staticReload() {
+  	(new MonsterForPvpRetrieveUtils()).reload();
   }
 
   public void reload() {
