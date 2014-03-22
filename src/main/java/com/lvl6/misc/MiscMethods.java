@@ -678,7 +678,7 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
     //    ClanBossRetrieveUtils.reload();
     //    ClanBossRewardRetrieveUtils.reload();
-    ClanIconRetrieveUtils.staticReload();
+//    ClanIconRetrieveUtils.staticReload();
     ClanEventPersistentRetrieveUtils.reload();
     ClanRaidRetrieveUtils.reload();
     ClanRaidStageRetrieveUtils.reload();
@@ -689,7 +689,7 @@ public class MiscMethods {
     GoldSaleRetrieveUtils.reload();
     ItemRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
-    MonsterForPvpRetrieveUtils.staticReload();
+//    MonsterForPvpRetrieveUtils.staticReload();
     MonsterBattleDialogueRetrieveUtils.reload();
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
@@ -1695,7 +1695,8 @@ public class MiscMethods {
   
   //TODO: rethink how to get all the clan icons
   private static void setClanIconStuff(Builder sdpb) {
-  	Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getAllIcons();
+  	Map<Integer, ClanIcon> clanIconIdsToClanIcons = (new ClanIconRetrieveUtils())
+  			.getClanIconIdsToClanIcons();
   	
   	if (null == clanIconIdsToClanIcons) {
   		return;

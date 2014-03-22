@@ -10,6 +10,7 @@ import com.hazelcast.core.ITopic;
 import com.hazelcast.core.Message;
 import com.hazelcast.core.MessageListener;
 import com.lvl6.misc.MiscMethods;
+import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.server.ServerMessage;
 
@@ -46,14 +47,21 @@ public class ServerEventHandler implements MessageListener<ServerMessage>, Initi
 	
 	@Resource
 	protected MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils;
-	
 	public MonsterForPvpRetrieveUtils getMonsterForPvpRetrieveUtils() {
 		return monsterForPvpRetrieveUtils;
 	}
-	
 	public void setMonsterForPvpRetrieveUtils(
 			MonsterForPvpRetrieveUtils monsterForPvpRetrieveUtils) {
 		this.monsterForPvpRetrieveUtils = monsterForPvpRetrieveUtils;
+	}
+
+	@Resource
+	protected ClanIconRetrieveUtils clanIconRetrieveUtils;
+	public ClanIconRetrieveUtils getClanIconRetrieveUtils() {
+		return clanIconRetrieveUtils;
+	}
+	public void setClanIconRetrieveUtils(ClanIconRetrieveUtils clanIconRetrieveUtils) {
+		this.clanIconRetrieveUtils = clanIconRetrieveUtils;
 	}
 
 
@@ -63,11 +71,16 @@ public class ServerEventHandler implements MessageListener<ServerMessage>, Initi
 		if(msg.getMessageObject().equals(ServerMessage.RELOAD_STATIC_DATA)) {
 			log.info("Reloading all static data");
 			MiscMethods.reloadAllRareChangeStaticData();
+			reloadStaticData();
 			getStaticDataReloadDone().publish(ServerMessage.DONE_RELOADING_STATIC_DATA );
-			getMonsterForPvpRetrieveUtils().reload();
 		}
 	}
 
+	//TODO: FIGURE OUT CLEANER WAY TO DO THIS SETTING STATIC DATA
+	public void reloadStaticData() {
+		getMonsterForPvpRetrieveUtils().reload();
+		getClanIconRetrieveUtils().reload();
+	}
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
