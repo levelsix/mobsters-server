@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +28,7 @@ import com.lvl6.proto.EventClanProto.ApproveOrRejectRequestToJoinClanResponsePro
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -35,10 +37,20 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 @Component @DependsOn("gameServer") public class ApproveOrRejectRequestToJoinClanController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected Locker locker;
+  public Locker getLocker() {
+		return locker;
+	}
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
 
   public ApproveOrRejectRequestToJoinClanController() {
     numAllocatedThreads = 4;
   }
+  
 
   @Override
   public RequestEvent createRequestEvent() {
@@ -62,20 +74,23 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     ApproveOrRejectRequestToJoinClanResponseProto.Builder resBuilder = ApproveOrRejectRequestToJoinClanResponseProto.newBuilder();
     resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    resBuilder.setRequesterId(requesterId);
     resBuilder.setAccept(accept);
 
-//    int clanId = 0;
-//    if (senderProto.hasClan() && null != senderProto.getClan()) {
-//    	clanId = senderProto.getClan().getClanId();
-//    }
+    int clanId = 0;
+    if (senderProto.hasClan() && null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
     
-    server.lockPlayers(userId, requesterId, this.getClass().getSimpleName());
+    boolean lockedClan = false;
+    if (0 != clanId) {
+    	lockedClan = getLocker().lockClan(clanId);
+    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(userId);
       User requester = RetrieveUtils.userRetrieveUtils().getUserById(requesterId);
 
-      boolean legitDecision = checkLegitDecision(resBuilder, user, requester, accept);
+      boolean legitDecision = checkLegitDecision(resBuilder, lockedClan, user, requester,
+      		accept);
       
       if (legitDecision) {
         Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
@@ -88,6 +103,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       resEvent.setApproveOrRejectRequestToJoinClanResponseProto(resBuilder.build());  
 
       if (legitDecision) {
+      	MinimumUserProto requestMup = CreateInfoProtoUtils
+      			.createMinimumUserProtoFromUser(requester);
+      	resBuilder.setRequester(requestMup);
         server.writeClanEvent(resEvent, user.getClanId());
 
         // Send message to the new guy
@@ -118,7 +136,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in ApproveOrRejectRequestToJoinClan processEvent", e);
     	}
     } finally {
-    	server.unlockPlayers(userId, requesterId, this.getClass().getSimpleName());
+      if (0 != clanId) {
+      	getLocker().unlockClan(clanId);
+      }
     }
   }
 
@@ -138,7 +158,14 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     }
   }
 
-  private boolean checkLegitDecision(Builder resBuilder, User user, User requester, boolean accept) {
+  private boolean checkLegitDecision(Builder resBuilder, boolean lockedClan, User user,
+  		User requester, boolean accept) {
+  	
+  	if (!lockedClan) {
+  		log.error("could not get lock for clan.");
+  		return false;
+  	}
+  	
     if (user == null || requester == null) {
       resBuilder.setStatus(ApproveOrRejectRequestToJoinClanStatus.FAIL_OTHER);
       log.error("user is " + user + ", requester is " + requester);
