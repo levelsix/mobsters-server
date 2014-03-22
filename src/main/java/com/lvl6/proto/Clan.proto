@@ -191,7 +191,11 @@ message PersistentClanEventRaidHistoryProto {
 
 //------------------------------------------------------------------------------------------
 
-
+message ClanIconProto {
+	optional int32 clanIconId = 1;
+	optional string imgName = 2;
+	optional bool isAvailable = 3;
+}
 
 //------------------------------------------------------------------------------------------
 
