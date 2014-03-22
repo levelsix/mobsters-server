@@ -42,53 +42,6 @@ public class UpdateUtils implements UpdateUtil {
 
 
 	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserQuestsCoinsretrievedforreq(int, java.util.List, int)
-	 */
-//	@Override
-	/*@Caching(evict={//@CacheEvict(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
-//	public boolean updateUserQuestsCoinsretrievedforreq(int userId, List <Integer> questIds, int coinGain) {
-//		String query = "update " + DBConstants.TABLE_QUEST_FOR_USER + " set " + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ
-//				+ "=" + DBConstants.USER_QUESTS__COINS_RETRIEVED_FOR_REQ + "+? where " 
-//				+ DBConstants.QUEST_FOR_USER___USER_ID + "=? and (";
-//		List<Object> values = new ArrayList<Object>();
-//		values.add(coinGain);
-//		values.add(userId);
-//		List<String> condClauses = new ArrayList<String>();
-//		for (Integer questId : questIds) {
-//			condClauses.add(DBConstants.QUEST_FOR_USER__QUEST_ID + "=?");
-//			values.add(questId);
-//		}
-//		query += StringUtils.getListInString(condClauses, "or") + ")";
-//		int numUpdated = DBConnection.get().updateDirectQueryNaive(query, values);
-//		if (numUpdated == questIds.size()) {
-//			return true;
-//		}
-//		return false;
-//	}
-
-//	@Override
-//	public boolean updateAbsoluteBlacksmithAttemptcompleteTimeofspeedup(int blacksmithId, Date timeOfSpeedup, boolean attemptComplete) {
-//		Map <String, Object> conditionParams = new HashMap<String, Object>();
-//		conditionParams.put(DBConstants.BLACKSMITH__ID, blacksmithId);
-//
-//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-//		absoluteParams.put(DBConstants.BLACKSMITH__ATTEMPT_COMPLETE, attemptComplete);
-//
-//		if (timeOfSpeedup != null) {
-//			absoluteParams.put(DBConstants.BLACKSMITH__TIME_OF_SPEEDUP, timeOfSpeedup);
-//		}
-//
-//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_EVOLUTION, null, absoluteParams, 
-//				conditionParams, "and");
-//		if (numUpdated == 1) {
-//			return true;
-//		}
-//		return false;
-//	}
-
-	/* (non-Javadoc)
 	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateNullifyDeviceTokens(java.util.Set)
 	 */
 	@Override
@@ -129,13 +82,7 @@ public class UpdateUtils implements UpdateUtil {
 	}
 
 
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserQuestIscomplete(int, int)
-	 */
 	@Override
-	/*@Caching(evict={//@CacheEvict(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
 	public boolean updateUserQuestIscomplete(int userId, int questId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
@@ -175,13 +122,7 @@ public class UpdateUtils implements UpdateUtil {
 	/*
 	 * changin orientation
 	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructOrientation(int, com.lvl6.proto.InfoProto.StructOrientation)
-	 */
 	@Override
-	/*@Caching(evict= {
-      //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
-      //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
 	public boolean updateUserStructOrientation(int userStructId,
 			StructOrientation orientation) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -198,61 +139,8 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	/*
-	 * used for setting a questitemtype as completed for a user quest
-	 */
 
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserQuestsSetCompleted(int, int, boolean, boolean)
-	 */
-//	@Override
-	/*@Caching(evict={//@CacheEvict(value="unredeemedAndRedeemedUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="incompleteUserQuestsForUser", key="#userId"),
-      //@CacheEvict(value="unredeemedUserQuestsForUser", key="#userId")})*/
-//	public boolean updateUserQuestsSetCompleted(int userId, int questId, boolean setTasksCompleteTrue, boolean setDefeatTypeJobsCompleteTrue) {
-//		Map <String, Object> conditionParams = new HashMap<String, Object>();
-//		conditionParams.put(DBConstants.QUEST_FOR_USER___USER_ID, userId);
-//		conditionParams.put(DBConstants.QUEST_FOR_USER__QUEST_ID, questId);
-//
-//		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-//		if (setTasksCompleteTrue) {
-//			absoluteParams.put(DBConstants.QUEST_FOR_USER__TASKS_COMPLETE, true); 
-//		}
-//		if (setDefeatTypeJobsCompleteTrue) {
-//			absoluteParams.put(DBConstants.QUEST_FOR_USER__DEFEAT_TYPE_JOBS_COMPLETE, true); 
-//		}
-//
-//		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_QUEST_FOR_USER, null, absoluteParams, 
-//				conditionParams, "and");
-//		if (numUpdated == 1) {
-//			return true;
-//		}
-//		return false;
-//	}
-
-
-
-	/*@Caching(evict= {
-      //@CacheEvict(value ="specificUserEquip", key="#userEquipId"),
-      //@CacheEvict(value="userEquipsForUser", key="#newOwnerId"),
-      //@CacheEvict(value="equipsToUserEquipsForUser", key="#newOwnerId"),
-      //@CacheEvict(value="userEquipsWithEquipId", key="#newOwnerId+':'+#equipId")  
-  })*/
-	public boolean updateUserEquipOwner(long userEquipId, int newOwnerId, String reason) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.MONSTER_FOR_USER__ID, userEquipId);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-		absoluteParams.put(DBConstants.MONSTER_FOR_USER__USER_ID, newOwnerId); 
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_MONSTER_FOR_USER, null, absoluteParams, 
-				conditionParams, "and");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
-	}
-
+	@Override
 	public boolean updateBeginUpgradingUserStruct(int userStructId,
   		int newStructId, Timestamp upgradeTime) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
@@ -410,13 +298,7 @@ public class UpdateUtils implements UpdateUtil {
 	/*
 	 * used for moving user structs
 	 */
-	/* (non-Javadoc)
-	 * @see com.lvl6.utils.utilmethods.UpdateUtil#updateUserStructCoord(int, com.lvl6.info.CoordinatePair)
-	 */
 	@Override
-	/*@Caching(evict= {
-      //@CacheEvict(value="structIdsToUserStructsForUser", allEntries=true),
-      //@CacheEvict(value="specificUserStruct", key="#userStructId")})*/
 	public boolean updateUserStructCoord(int userStructId, CoordinatePair coordinates) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.STRUCTURE_FOR_USER__ID, userStructId);
@@ -454,7 +336,7 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-	@Override
+	/*@Override
 	public boolean updateUsersClanId(Integer clanId, List<Integer> userIds) {
 		String query = "update " + DBConstants.TABLE_USER + " set " + DBConstants.USER__CLAN_ID 
 				+ "=? where (" ;
@@ -471,27 +353,7 @@ public class UpdateUtils implements UpdateUtil {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	//@CacheEvict(value="clanById", key="#clanId")
-	public boolean updateClanOwnerDescriptionForClan(int clanId, int ownerId, String description) {
-		Map <String, Object> conditionParams = new HashMap<String, Object>();
-		conditionParams.put(DBConstants.CLANS__ID, clanId);
-
-		Map <String, Object> absoluteParams = new HashMap<String, Object>();
-//		if (ownerId > 0)
-//			absoluteParams.put(DBConstants.CLANS__OWNER_ID, ownerId);
-		if (description != null)
-			absoluteParams.put(DBConstants.CLANS__DESCRIPTION, description);
-
-		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_CLANS, null, absoluteParams, 
-				conditionParams, "or");
-		if (numUpdated == 1) {
-			return true;
-		}
-		return false;
-	}
+	}*/
 
 	@Override
 	public boolean updateUserClanStatus(int userId, int clanId, UserClanStatus status) {
@@ -510,6 +372,34 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
+	@Override
+	public int updateUserClanStatuses(int clanId, List<Integer> userIdList,
+			List<UserClanStatus> statuses) {
+		String tableName = DBConstants.TABLE_CLAN_FOR_USER;
+		
+		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
+		for(int index = 0; index < userIdList.size(); index++) {
+			int userId = userIdList.get(index);
+			int status = statuses.get(index).getNumber();
+
+			Map<String, Object> aRow = new HashMap<String, Object>();
+			aRow.put(DBConstants.CLAN_FOR_USER__USER_ID, userId);
+			aRow.put(DBConstants.CLAN_FOR_USER__CLAN_ID, clanId);
+			aRow.put(DBConstants.CLAN_FOR_USER__STATUS, status);
+
+			newRows.add(aRow);
+		}
+
+		Set<String> replaceTheseColumns = new HashSet<String>();
+		replaceTheseColumns.add(DBConstants.CLAN_FOR_USER__STATUS);
+		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdateColumnsAbsolute(
+				tableName, newRows, replaceTheseColumns);
+		
+		return numUpdated;
+		
+	}
+	
+	@Override
 	public boolean updateUsersAddDiamonds(List<Integer> userIds, int diamonds) {
 		if (userIds == null || userIds.size() <= 0) return true;
 
@@ -537,6 +427,7 @@ public class UpdateUtils implements UpdateUtil {
 		}
 	}
 
+	@Override
 	public boolean updateLeaderboardEventSetRewardGivenOut(int eventId) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.TOURNAMENT_EVENT__ID, eventId);
@@ -552,29 +443,7 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
-//	//this method replaces existing rows with the same (single/composite) primary key
-//	public boolean updateUserBoosterItemsForOneUser(int userId, 
-//			Map<Integer, Integer> userBoosterItemIdsToQuantities) {
-//		String tableName = DBConstants.TABLE_USER_BOOSTER_ITEMS;
-//		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();
-//		for (Integer biId : userBoosterItemIdsToQuantities.keySet()) {
-//			int newQuantity = userBoosterItemIdsToQuantities.get(biId);
-//			Map<String, Object> row = new HashMap<String, Object>();
-//			row.put(DBConstants.USER_BOOSTER_ITEMS__BOOSTER_ITEM_ID, biId);
-//			row.put(DBConstants.USER_BOOSTER_ITEMS__USER_ID, userId);
-//			row.put(DBConstants.USER_BOOSTER_ITEMS__NUM_COLLECTED, newQuantity);
-//			newRows.add(row);
-//		}
-//
-//		int numInserted = DBConnection.get().replaceIntoTableValues(tableName, newRows);
-//		log.info("num inserted: "+numInserted);
-//		if(userBoosterItemIdsToQuantities.size()*2 >= numInserted) {
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
-
+	@Override
 	public boolean updateClanJoinTypeForClan(int clanId, boolean requestToJoinRequired) {
 		Map <String, Object> conditionParams = new HashMap<String, Object>();
 		conditionParams.put(DBConstants.CLANS__ID, clanId);
@@ -590,6 +459,7 @@ public class UpdateUtils implements UpdateUtil {
 		return false;
 	}
 
+	@Override
 	public int incrementUserTaskNumRevives(long userTaskId, int numRevivesDelta) {
 		String tableName = DBConstants.TABLE_TASK_FOR_USER_ONGOING;
 		Map<String, Object> conditionParams = new HashMap<String, Object>();
@@ -608,6 +478,7 @@ public class UpdateUtils implements UpdateUtil {
 	
 	//if expectedHealths contains the exact same info as userMonsterIdsToHealths
 	//if map isn't set then list is used
+	@Override
 	public int updateUserMonstersHealth(Map<Long, Integer> userMonsterIdsToHealths) {
 		if (null == userMonsterIdsToHealths || userMonsterIdsToHealths.isEmpty()) {
 			return 0;
@@ -650,22 +521,7 @@ public class UpdateUtils implements UpdateUtil {
 		return numUpdated;
 	}
 
-//	public int updateUserAndEquipFail(int userId, int equipId, int failIncrement) {
-//		Map <String, Object> insertParams = new HashMap<String, Object>();
-//
-//		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__USER_ID, userId);
-//		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__MONSTER_ID, equipId);
-//		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS, failIncrement);
-//
-//		Map<String, Object> columnsToUpdate = new HashMap<String, Object>();
-//		insertParams.put(DBConstants.MONSTER_EVOLVING_FAIL_FOR_USER__NUM_FAILS, failIncrement);
-//
-//		int numUpdated = DBConnection.get().insertOnDuplicateKeyUpdate(DBConstants.TABLE_MONSTER_EVOLVING_FAIL_FOR_USER, insertParams, 
-//				columnsToUpdate, null);//DBConstants.USER_CITIES__CURRENT_RANK, increment);
-//
-//		return numUpdated;
-//	}
-	
+	@Override
 	public int updateUserMonsterHealing(int userId, List<MonsterHealingForUser> monsters) {
 		String tableName = DBConstants.TABLE_MONSTER_HEALING_FOR_USER;
 		List<Map<String, Object>> newRows = new ArrayList<Map<String, Object>>();

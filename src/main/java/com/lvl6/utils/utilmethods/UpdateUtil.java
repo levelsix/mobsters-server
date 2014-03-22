@@ -20,49 +20,22 @@ import com.lvl6.proto.StructureProto.StructOrientation;
 
 public interface UpdateUtil {
 
-  /*@Caching(evict = {
-      //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),
-      //@CacheEvict(value = "incompleteUserQuestsForUser", key = "#userId"),
-      //@CacheEvict(value = "unredeemedUserQuestsForUser", key = "#userId") })*/
-//  public abstract boolean updateUserQuestsCoinsretrievedforreq(int userId,
-//      List<Integer> questIds, int coinGain);
-
   public abstract void updateNullifyDeviceTokens(Set<String> deviceTokens);
 
   /*
    * used for collecting a city expansion
    */
   public abstract boolean updateUserCityExpansionData(int userId, int xPosition, int yPosition, boolean isExpanding, Timestamp expandStartTime);
-
-  /*@Caching(evict = {
-      //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),
-      //@CacheEvict(value = "incompleteUserQuestsForUser", key = "#userId"),
-      //@CacheEvict(value = "unredeemedUserQuestsForUser", key = "#userId") })*/
+  
   public abstract boolean updateUserQuestIscomplete(int userId, int questId);
 
-  /*@Caching(evict = {
-      //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),
-      //@CacheEvict(value = "incompleteUserQuestsForUser", key = "#userId"),
-      //@CacheEvict(value = "unredeemedUserQuestsForUser", key = "#userId") })*/
   public abstract boolean updateRedeemQuestForUser(int userId, int questId);
 
   /*
    * changin orientation
    */
-  /*@Caching(evict = {
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
   public abstract boolean updateUserStructOrientation(int userStructId,
       StructOrientation orientation);
-
-  /*@Caching(evict = {
-      //@CacheEvict(value = "unredeemedAndRedeemedUserQuestsForUser", key = "#userId"),
-      //@CacheEvict(value = "incompleteUserQuestsForUser", key = "#userId"),
-      //@CacheEvict(value = "unredeemedUserQuestsForUser", key = "#userId") })*/
-//  public abstract boolean updateUserQuestsSetCompleted(int userId,
-//      int questId, boolean setTasksCompleteTrue,
-//      boolean setDefeatTypeJobsCompleteTrue);
 
   /*
    * used for updating is_complete=true and last_retrieved to purchased_time+minutestogain for a userstruct
@@ -79,10 +52,6 @@ public interface UpdateUtil {
   /*
    * used for updating last retrieved user struct times
    */
-  /*@Caching(evict = {
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
   public abstract boolean updateUserStructsLastretrieved(
       Map<Integer, Timestamp> userStructIdsToLastRetrievedTime,
       Map<Integer, StructureForUser> structIdsToUserStructs);
@@ -95,20 +64,15 @@ public interface UpdateUtil {
   /*
    * used for moving user structs
    */
-  /*@Caching(evict = {
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      ////@CacheEvict(value = "structIdsToUserStructsForUser", allEntries = true),
-      //@CacheEvict(value = "specificUserStruct", key = "#userStructId") })*/
   public abstract boolean updateUserStructCoord(int userStructId,
       CoordinatePair coordinates);
 
-  public abstract boolean updateClanOwnerDescriptionForClan(int clanId, int ownerId, String description);
-
-  public abstract boolean updateUserEquipOwner(long userEquipId, int newOwnerId, String reason);
-  
-  public abstract boolean updateUsersClanId(Integer clanId, List<Integer> userIds);
+  //public abstract boolean updateUsersClanId(Integer clanId, List<Integer> userIds);
 
   public abstract boolean updateUserClanStatus(int userId, int clanId, UserClanStatus status);
+  
+  public abstract int updateUserClanStatuses(int clanId, List<Integer> userIdList,
+			List<UserClanStatus> statuses);
 
   public abstract boolean incrementNumberOfLockBoxesForLockBoxEvent(int userId, int eventId,
       int increment);
