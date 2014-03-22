@@ -184,12 +184,12 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
   	}
 
   	if (isChangeIcon) {
-  		ClanIcon ci = getClanIconRetrieveUtils().getClanIconForId(iconId);
+  		ClanIcon ci = ClanIconRetrieveUtils.getClanIconForId(iconId);
   		if (null == ci) {
   			resBuilder.setStatus(ChangeClanSettingsStatus.FAIL_OTHER);
   			log.warn("no clan icon with id=" + iconId);
   		} else {
-  			//TODO: SET THE CLAN ICON ID
+  			clan.setClanIconId(iconId);
   		}
   	}
   	
