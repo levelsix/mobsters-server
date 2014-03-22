@@ -24,7 +24,6 @@ import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
-import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
