@@ -55,7 +55,7 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     BootPlayerFromClanResponseProto.Builder resBuilder = BootPlayerFromClanResponseProto.newBuilder();
     resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-    resBuilder.setPlayerToBoot(playerToBootId);
+//    resBuilder.setPlayerToBoot(playerToBootId);
 
 //    int clanId = 0;
 //    

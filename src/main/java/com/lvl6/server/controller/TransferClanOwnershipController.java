@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,7 @@ import com.lvl6.proto.EventClanProto.TransferClanOwnershipResponseProto.Transfer
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
+import com.lvl6.server.Locker;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 
@@ -30,8 +32,17 @@ import com.lvl6.utils.RetrieveUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
+  public Locker getLocker() {
+		return locker;
+	}
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+  
   public TransferClanOwnershipController() {
-    numAllocatedThreads = 4;
+    numAllocatedThreads = 2;
   }
 
   @Override
@@ -50,25 +61,36 @@ import com.lvl6.utils.RetrieveUtils;
 
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
-    int newClanOwnerId = reqProto.getNewClanOwnerId();
+    int newClanOwnerId = reqProto.getClanOwnerIdNew();
 
     TransferClanOwnershipResponseProto.Builder resBuilder = TransferClanOwnershipResponseProto.newBuilder();
     resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
-    server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    int clanId = 0;
+    if (senderProto.hasClan() && null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
+    
+    boolean lockedClan = false;
+    if (0 != clanId) {
+    	lockedClan = getLocker().lockClan(clanId);
+    } 
     try {
+    	
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       User newClanOwner = RetrieveUtils.userRetrieveUtils().getUserById(newClanOwnerId);
       Clan clan = ClanRetrieveUtils.getClanWithId(user.getClanId());
       
-      boolean legitTransfer = checkLegitTransfer(resBuilder, user, newClanOwner, clan);
+      boolean legitTransfer = checkLegitTransfer(resBuilder, lockedClan, user, newClanOwner, clan);
 
       if (legitTransfer) {
         writeChangesToDB(user, newClanOwner);
         Clan newClan = ClanRetrieveUtils.getClanWithId(clan.getId());
         resBuilder.setMinClan(CreateInfoProtoUtils.createMinimumClanProtoFromClan(newClan));
         resBuilder.setFullClan(CreateInfoProtoUtils.createFullClanProtoWithClanSize(newClan));
+        MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(newClanOwner);
+        resBuilder.setClanOwnerNew(mup);
       }
       
       TransferClanOwnershipResponseEvent resEvent = new TransferClanOwnershipResponseEvent(senderProto.getUserId());
@@ -94,11 +116,14 @@ import com.lvl6.utils.RetrieveUtils;
     		log.error("exception2 in TransferClanOwnership processEvent", e);
     	}
     } finally {
-      server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		getLocker().unlockClan(clanId);
+    	}
     }
   }
 
-  private boolean checkLegitTransfer(Builder resBuilder, User user, User newClanOwner, Clan clan) {
+  private boolean checkLegitTransfer(Builder resBuilder, boolean lockedClan, User user,
+  		User newClanOwner, Clan clan) {
     if (user == null || newClanOwner == null) {
       resBuilder.setStatus(TransferClanOwnershipStatus.FAIL_OTHER);
       log.error("user is " + user + ", new clan owner is " + newClanOwner);
@@ -138,6 +163,8 @@ import com.lvl6.utils.RetrieveUtils;
 
   //TODO: FIX THIS
   private void writeChangesToDB(User user, User newClanOwner) {
+  	//update clan for user table
+  	
 //    if (!UpdateUtils.get().updateClanOwnerDescriptionForClan(user.getClanId(), newClanOwner.getId(), null)) {
 //      log.error("problem with changing clan owner for clan with id " + user.getClanId() + " from user " + user + " to new owner " + newClanOwner);
 //    }
