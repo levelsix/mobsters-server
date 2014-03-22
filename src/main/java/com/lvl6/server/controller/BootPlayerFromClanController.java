@@ -91,20 +91,26 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
       boolean legitBoot = checkLegitBoot(resBuilder, lockedClan, user, playerToBoot);
 
+      boolean success = false;
+      if (legitBoot) { 
+      	success = writeChangesToDB(user, playerToBoot);
+      }
+      
+      if (success) {
+      	MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(playerToBoot);
+      	resBuilder.setPlayerToBoot(mup);
+      }
+      
       BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
       resEvent.setBootPlayerFromClanResponseProto(resBuilder.build()); 
 
-      if (legitBoot) { 
-      	MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(playerToBoot);
-      	resBuilder.setPlayerToBoot(mup);
-        server.writeClanEvent(resEvent, user.getClanId());
-
+      if (success) {
+      	server.writeClanEvent(resEvent, user.getClanId());
         BootPlayerFromClanResponseEvent resEvent2 = new BootPlayerFromClanResponseEvent(playerToBootId);
         resEvent2.setBootPlayerFromClanResponseProto(resBuilder.build()); //I think this is supposed to be resEvent2 not resEvent
         server.writeEvent(resEvent2);
 
-        writeChangesToDB(user, playerToBoot);
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
@@ -172,13 +178,14 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     return true;
   }
 
-  private void writeChangesToDB(User user, User playerToBoot) {
+  private boolean writeChangesToDB(User user, User playerToBoot) {
     if (!DeleteUtils.get().deleteUserClan(playerToBoot.getId(), playerToBoot.getClanId())) {
       log.error("problem with deleting user clan info for playerToBoot with id " + playerToBoot.getId() + " and clan id " + playerToBoot.getClanId()); 
     }
     if (!playerToBoot.updateRelativeCoinsAbsoluteClan(0, null)) {
       log.error("problem with change playerToBoot " + playerToBoot + " clan id to nothing");
     }
+    return true;
   }
 
 }
