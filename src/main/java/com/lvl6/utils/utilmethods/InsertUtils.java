@@ -488,7 +488,7 @@ public class InsertUtils implements InsertUtil{
 
   @Override
   public int insertClan(String name, Timestamp createTime, String description, String tag,
-      boolean requestToJoinRequired) {
+      boolean requestToJoinRequired, int clanIconId) {
     Map<String, Object> insertParams = new HashMap<String, Object>();
     insertParams.put(DBConstants.CLANS__NAME, name);
 //    insertParams.put(DBConstants.CLANS__OWNER_ID, ownerId);
@@ -496,6 +496,7 @@ public class InsertUtils implements InsertUtil{
     insertParams.put(DBConstants.CLANS__DESCRIPTION, description);
     insertParams.put(DBConstants.CLANS__TAG, tag);
     insertParams.put(DBConstants.CLANS__REQUEST_TO_JOIN_REQUIRED, requestToJoinRequired);
+    insertParams.put(DBConstants.CLANS__CLAN_ICON_ID, clanIconId);
 
     int clanId = DBConnection.get().insertIntoTableBasicReturnId(
         DBConstants.TABLE_CLANS, insertParams);
