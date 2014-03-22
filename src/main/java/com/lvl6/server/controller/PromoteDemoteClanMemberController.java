@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.Builde
 import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.PromoteDemoteClanMemberStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
@@ -29,8 +31,17 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
 @Component @DependsOn("gameServer") public class PromoteDemoteClanMemberController extends EventController {
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
+  
+  @Autowired
+  protected Locker locker;
+  public Locker getLocker() {
+		return locker;
+	}
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
 
-  public PromoteDemoteClanMemberController() {
+	public PromoteDemoteClanMemberController() {
     numAllocatedThreads = 4;
   }
 
@@ -68,7 +79,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     
     boolean lockedClan = false;
     if (0 != clanId) {
-    	lockedClan = server.lockClan(clanId);
+    	lockedClan = getLocker().lockClan(clanId);
     } /*else {
     //MAYBE SHOULD ALSO LOCK THE playerToBootId
     //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
@@ -128,7 +139,7 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     	}
     } finally {
     	if (0 != clanId) {
-    		server.unlockClan(clanId);
+    		getLocker().unlockClan(clanId);
     	} /*else {
     		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     	}*/
