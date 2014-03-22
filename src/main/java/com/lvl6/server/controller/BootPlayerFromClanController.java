@@ -3,10 +3,12 @@ package com.lvl6.server.controller;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,8 @@ import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.BootPlayerF
 import com.lvl6.proto.EventClanProto.BootPlayerFromClanResponseProto.Builder;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
+import com.lvl6.server.Locker;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
 
@@ -30,6 +34,15 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
+  @Autowired
+  protected Locker locker;
+  public Locker getLocker() {
+		return locker;
+	}
+	public void setLocker(Locker locker) {
+		this.locker = locker;
+	}
+	
   public BootPlayerFromClanController() {
     numAllocatedThreads = 4;
   }
@@ -51,32 +64,40 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     MinimumUserProto senderProto = reqProto.getSender();
     int userId = senderProto.getUserId();
     int playerToBootId = reqProto.getPlayerToBoot();
+    List<Integer> userIds = new ArrayList<Integer>();
+    userIds.add(userId);
+    userIds.add(playerToBootId);
 
     BootPlayerFromClanResponseProto.Builder resBuilder = BootPlayerFromClanResponseProto.newBuilder();
     resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
-//    resBuilder.setPlayerToBoot(playerToBootId);
 
-//    int clanId = 0;
-//    
-//    if (senderProto.hasClan() && null != senderProto.getClan()) {
-//    	clanId = senderProto.getClan().getClanId();
-//    }
+    int clanId = 0;
     
+    if (senderProto.hasClan() && null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
+    boolean lockedClan = false;
+    if (0 != clanId) {
+    	lockedClan = getLocker().lockClan(clanId);
+    }
     //MAYBE SHOULD LOCK THE playerToBootId INSTEAD OF userId
     //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    server.lockPlayer(playerToBootId, this.getClass().getSimpleName());
+//    server.lockPlayer(playerToBootId, this.getClass().getSimpleName());
     try {
-      User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
-      User playerToBoot = RetrieveUtils.userRetrieveUtils().getUserById(playerToBootId);
+    	Map<Integer,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
+      User user = users.get(userId);
+      User playerToBoot = users.get(playerToBootId);
 
-      boolean legitBoot = checkLegitBoot(resBuilder, user, playerToBoot);
+      boolean legitBoot = checkLegitBoot(resBuilder, lockedClan, user, playerToBoot);
 
       BootPlayerFromClanResponseEvent resEvent = new BootPlayerFromClanResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
       resEvent.setBootPlayerFromClanResponseProto(resBuilder.build()); 
 
       if (legitBoot) { 
+      	MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(playerToBoot);
+      	resBuilder.setPlayerToBoot(mup);
         server.writeClanEvent(resEvent, user.getClanId());
 
         BootPlayerFromClanResponseEvent resEvent2 = new BootPlayerFromClanResponseEvent(playerToBootId);
@@ -103,12 +124,21 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     		log.error("exception2 in BootPlayerFromClan processEvent", e);
     	}
     } finally {
-    	server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	if (0 != clanId) {
+    		getLocker().unlockClan(clanId);
+    	}
+//    	server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     }
   }
 
-  private boolean checkLegitBoot(Builder resBuilder, User user,
+  private boolean checkLegitBoot(Builder resBuilder, boolean lockedClan, User user,
       User playerToBoot) {
+  	
+  	if (!lockedClan) {
+  		log.error("couldn't obtain clan lock");
+  		return false;
+  	}
+  	
     if (user == null || playerToBoot == null) {
       resBuilder.setStatus(BootPlayerFromClanStatus.FAIL_OTHER);
       log.error("user is " + user + ", playerToBoot is " + playerToBoot);
