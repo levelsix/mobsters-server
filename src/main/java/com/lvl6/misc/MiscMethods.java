@@ -29,6 +29,7 @@ import com.lvl6.info.BoosterPack;
 import com.lvl6.info.City;
 import com.lvl6.info.CityElement;
 import com.lvl6.info.ClanEventPersistent;
+import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.Dialogue;
 import com.lvl6.info.EventPersistent;
@@ -61,6 +62,7 @@ import com.lvl6.properties.MDCKeys;
 import com.lvl6.proto.BoosterPackStuffProto.BoosterPackProto;
 import com.lvl6.proto.CityProto.CityElementProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
+import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.PersistentClanEventProto;
 import com.lvl6.proto.EventChatProto.GeneralNotificationResponseProto;
@@ -101,6 +103,7 @@ import com.lvl6.retrieveutils.rarechange.BoosterPackRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityElementsRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.CityRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanEventPersistentRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.ClanIconRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageMonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ClanRaidStageRetrieveUtils;
@@ -111,6 +114,7 @@ import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
+import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
@@ -674,6 +678,7 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
     //    ClanBossRetrieveUtils.reload();
     //    ClanBossRewardRetrieveUtils.reload();
+    ClanIconRetrieveUtils.staticReload();
     ClanEventPersistentRetrieveUtils.reload();
     ClanRaidRetrieveUtils.reload();
     ClanRaidStageRetrieveUtils.reload();
@@ -684,8 +689,7 @@ public class MiscMethods {
     GoldSaleRetrieveUtils.reload();
     ItemRetrieveUtils.reload();
     LockBoxEventRetrieveUtils.reload();
-    //TODO: FIGURE OUT BETTER WAY TO RELOAD NON STATIC CLASS DATA
-    //    getMonsterForPvpRetrieveUtils().reload();
+    MonsterForPvpRetrieveUtils.staticReload();
     MonsterBattleDialogueRetrieveUtils.reload();
     MonsterLevelInfoRetrieveUtils.reload();
     MonsterRetrieveUtils.reload();
@@ -1380,6 +1384,7 @@ public class MiscMethods {
     setClanRaidStuff(sdpb);
     setItemStuff(sdpb);
     setObstacleStuff(sdpb);
+    setClanIconStuff(sdpb);
 
     return sdpb.build();
   }
@@ -1686,5 +1691,20 @@ public class MiscMethods {
   		ObstacleProto op = CreateInfoProtoUtils.createObstacleProtoFromObstacle(o);
   		sdpb.addObstacles(op);
   	}
+  }
+  
+  //TODO: rethink how to get all the clan icons
+  private static void setClanIconStuff(Builder sdpb) {
+  	Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getAllIcons();
+  	
+  	if (null == clanIconIdsToClanIcons) {
+  		return;
+  	}
+  	
+  	for (ClanIcon ci : clanIconIdsToClanIcons.values()) {
+  		ClanIconProto cip = CreateInfoProtoUtils.createClanIconProtoFromClanIcon(ci);
+  		sdpb.addClanIcons(cip);
+  	}
+  	
   }
 }

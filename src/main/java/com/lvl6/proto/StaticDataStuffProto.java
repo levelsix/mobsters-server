@@ -225,6 +225,16 @@ public final class StaticDataStuffProto {
         getObstaclesOrBuilderList();
     com.lvl6.proto.StructureProto.ObstacleProtoOrBuilder getObstaclesOrBuilder(
         int index);
+    
+    // repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;
+    java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> 
+        getClanIconsList();
+    com.lvl6.proto.ClanProto.ClanIconProto getClanIcons(int index);
+    int getClanIconsCount();
+    java.util.List<? extends com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> 
+        getClanIconsOrBuilderList();
+    com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder getClanIconsOrBuilder(
+        int index);
   }
   public static final class StaticDataProto extends
       com.google.protobuf.GeneratedMessage
@@ -709,6 +719,27 @@ public final class StaticDataStuffProto {
       return obstacles_.get(index);
     }
     
+    // repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;
+    public static final int CLANICONS_FIELD_NUMBER = 24;
+    private java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> clanIcons_;
+    public java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> getClanIconsList() {
+      return clanIcons_;
+    }
+    public java.util.List<? extends com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> 
+        getClanIconsOrBuilderList() {
+      return clanIcons_;
+    }
+    public int getClanIconsCount() {
+      return clanIcons_.size();
+    }
+    public com.lvl6.proto.ClanProto.ClanIconProto getClanIcons(int index) {
+      return clanIcons_.get(index);
+    }
+    public com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder getClanIconsOrBuilder(
+        int index) {
+      return clanIcons_.get(index);
+    }
+    
     private void initFields() {
       sender_ = com.lvl6.proto.UserProto.MinimumUserProto.getDefaultInstance();
       expansionCosts_ = java.util.Collections.emptyList();
@@ -732,6 +763,7 @@ public final class StaticDataStuffProto {
       persistentClanEvents_ = java.util.Collections.emptyList();
       items_ = java.util.Collections.emptyList();
       obstacles_ = java.util.Collections.emptyList();
+      clanIcons_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -810,6 +842,9 @@ public final class StaticDataStuffProto {
       }
       for (int i = 0; i < obstacles_.size(); i++) {
         output.writeMessage(23, obstacles_.get(i));
+      }
+      for (int i = 0; i < clanIcons_.size(); i++) {
+        output.writeMessage(24, clanIcons_.get(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -907,6 +942,10 @@ public final class StaticDataStuffProto {
       for (int i = 0; i < obstacles_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(23, obstacles_.get(i));
+      }
+      for (int i = 0; i < clanIcons_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(24, clanIcons_.get(i));
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1046,6 +1085,7 @@ public final class StaticDataStuffProto {
           getPersistentClanEventsFieldBuilder();
           getItemsFieldBuilder();
           getObstaclesFieldBuilder();
+          getClanIconsFieldBuilder();
         }
       }
       private static Builder create() {
@@ -1185,6 +1225,12 @@ public final class StaticDataStuffProto {
           bitField0_ = (bitField0_ & ~0x00200000);
         } else {
           obstaclesBuilder_.clear();
+        }
+        if (clanIconsBuilder_ == null) {
+          clanIcons_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00400000);
+        } else {
+          clanIconsBuilder_.clear();
         }
         return this;
       }
@@ -1420,6 +1466,15 @@ public final class StaticDataStuffProto {
           result.obstacles_ = obstacles_;
         } else {
           result.obstacles_ = obstaclesBuilder_.build();
+        }
+        if (clanIconsBuilder_ == null) {
+          if (((bitField0_ & 0x00400000) == 0x00400000)) {
+            clanIcons_ = java.util.Collections.unmodifiableList(clanIcons_);
+            bitField0_ = (bitField0_ & ~0x00400000);
+          }
+          result.clanIcons_ = clanIcons_;
+        } else {
+          result.clanIcons_ = clanIconsBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -1986,6 +2041,32 @@ public final class StaticDataStuffProto {
             }
           }
         }
+        if (clanIconsBuilder_ == null) {
+          if (!other.clanIcons_.isEmpty()) {
+            if (clanIcons_.isEmpty()) {
+              clanIcons_ = other.clanIcons_;
+              bitField0_ = (bitField0_ & ~0x00400000);
+            } else {
+              ensureClanIconsIsMutable();
+              clanIcons_.addAll(other.clanIcons_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.clanIcons_.isEmpty()) {
+            if (clanIconsBuilder_.isEmpty()) {
+              clanIconsBuilder_.dispose();
+              clanIconsBuilder_ = null;
+              clanIcons_ = other.clanIcons_;
+              bitField0_ = (bitField0_ & ~0x00400000);
+              clanIconsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getClanIconsFieldBuilder() : null;
+            } else {
+              clanIconsBuilder_.addAllMessages(other.clanIcons_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -2150,6 +2231,12 @@ public final class StaticDataStuffProto {
               com.lvl6.proto.StructureProto.ObstacleProto.Builder subBuilder = com.lvl6.proto.StructureProto.ObstacleProto.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addObstacles(subBuilder.buildPartial());
+              break;
+            }
+            case 194: {
+              com.lvl6.proto.ClanProto.ClanIconProto.Builder subBuilder = com.lvl6.proto.ClanProto.ClanIconProto.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addClanIcons(subBuilder.buildPartial());
               break;
             }
           }
@@ -6154,6 +6241,192 @@ public final class StaticDataStuffProto {
         return obstaclesBuilder_;
       }
       
+      // repeated .com.lvl6.proto.ClanIconProto clanIcons = 24;
+      private java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> clanIcons_ =
+        java.util.Collections.emptyList();
+      private void ensureClanIconsIsMutable() {
+        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
+          clanIcons_ = new java.util.ArrayList<com.lvl6.proto.ClanProto.ClanIconProto>(clanIcons_);
+          bitField0_ |= 0x00400000;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanIconProto, com.lvl6.proto.ClanProto.ClanIconProto.Builder, com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> clanIconsBuilder_;
+      
+      public java.util.List<com.lvl6.proto.ClanProto.ClanIconProto> getClanIconsList() {
+        if (clanIconsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(clanIcons_);
+        } else {
+          return clanIconsBuilder_.getMessageList();
+        }
+      }
+      public int getClanIconsCount() {
+        if (clanIconsBuilder_ == null) {
+          return clanIcons_.size();
+        } else {
+          return clanIconsBuilder_.getCount();
+        }
+      }
+      public com.lvl6.proto.ClanProto.ClanIconProto getClanIcons(int index) {
+        if (clanIconsBuilder_ == null) {
+          return clanIcons_.get(index);
+        } else {
+          return clanIconsBuilder_.getMessage(index);
+        }
+      }
+      public Builder setClanIcons(
+          int index, com.lvl6.proto.ClanProto.ClanIconProto value) {
+        if (clanIconsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanIconsIsMutable();
+          clanIcons_.set(index, value);
+          onChanged();
+        } else {
+          clanIconsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      public Builder setClanIcons(
+          int index, com.lvl6.proto.ClanProto.ClanIconProto.Builder builderForValue) {
+        if (clanIconsBuilder_ == null) {
+          ensureClanIconsIsMutable();
+          clanIcons_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanIconsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addClanIcons(com.lvl6.proto.ClanProto.ClanIconProto value) {
+        if (clanIconsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanIconsIsMutable();
+          clanIcons_.add(value);
+          onChanged();
+        } else {
+          clanIconsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      public Builder addClanIcons(
+          int index, com.lvl6.proto.ClanProto.ClanIconProto value) {
+        if (clanIconsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureClanIconsIsMutable();
+          clanIcons_.add(index, value);
+          onChanged();
+        } else {
+          clanIconsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      public Builder addClanIcons(
+          com.lvl6.proto.ClanProto.ClanIconProto.Builder builderForValue) {
+        if (clanIconsBuilder_ == null) {
+          ensureClanIconsIsMutable();
+          clanIcons_.add(builderForValue.build());
+          onChanged();
+        } else {
+          clanIconsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addClanIcons(
+          int index, com.lvl6.proto.ClanProto.ClanIconProto.Builder builderForValue) {
+        if (clanIconsBuilder_ == null) {
+          ensureClanIconsIsMutable();
+          clanIcons_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          clanIconsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      public Builder addAllClanIcons(
+          java.lang.Iterable<? extends com.lvl6.proto.ClanProto.ClanIconProto> values) {
+        if (clanIconsBuilder_ == null) {
+          ensureClanIconsIsMutable();
+          super.addAll(values, clanIcons_);
+          onChanged();
+        } else {
+          clanIconsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      public Builder clearClanIcons() {
+        if (clanIconsBuilder_ == null) {
+          clanIcons_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00400000);
+          onChanged();
+        } else {
+          clanIconsBuilder_.clear();
+        }
+        return this;
+      }
+      public Builder removeClanIcons(int index) {
+        if (clanIconsBuilder_ == null) {
+          ensureClanIconsIsMutable();
+          clanIcons_.remove(index);
+          onChanged();
+        } else {
+          clanIconsBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.lvl6.proto.ClanProto.ClanIconProto.Builder getClanIconsBuilder(
+          int index) {
+        return getClanIconsFieldBuilder().getBuilder(index);
+      }
+      public com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder getClanIconsOrBuilder(
+          int index) {
+        if (clanIconsBuilder_ == null) {
+          return clanIcons_.get(index);  } else {
+          return clanIconsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> 
+           getClanIconsOrBuilderList() {
+        if (clanIconsBuilder_ != null) {
+          return clanIconsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(clanIcons_);
+        }
+      }
+      public com.lvl6.proto.ClanProto.ClanIconProto.Builder addClanIconsBuilder() {
+        return getClanIconsFieldBuilder().addBuilder(
+            com.lvl6.proto.ClanProto.ClanIconProto.getDefaultInstance());
+      }
+      public com.lvl6.proto.ClanProto.ClanIconProto.Builder addClanIconsBuilder(
+          int index) {
+        return getClanIconsFieldBuilder().addBuilder(
+            index, com.lvl6.proto.ClanProto.ClanIconProto.getDefaultInstance());
+      }
+      public java.util.List<com.lvl6.proto.ClanProto.ClanIconProto.Builder> 
+           getClanIconsBuilderList() {
+        return getClanIconsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.lvl6.proto.ClanProto.ClanIconProto, com.lvl6.proto.ClanProto.ClanIconProto.Builder, com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder> 
+          getClanIconsFieldBuilder() {
+        if (clanIconsBuilder_ == null) {
+          clanIconsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.lvl6.proto.ClanProto.ClanIconProto, com.lvl6.proto.ClanProto.ClanIconProto.Builder, com.lvl6.proto.ClanProto.ClanIconProtoOrBuilder>(
+                  clanIcons_,
+                  ((bitField0_ & 0x00400000) == 0x00400000),
+                  getParentForChildren(),
+                  isClean());
+          clanIcons_ = null;
+        }
+        return clanIconsBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:com.lvl6.proto.StaticDataProto)
     }
     
@@ -6182,7 +6455,7 @@ public final class StaticDataStuffProto {
       "\n\020StaticData.proto\022\016com.lvl6.proto\032\026Boos" +
       "terPackStuff.proto\032\nCity.proto\032\nClan.pro" +
       "to\032\022MonsterStuff.proto\032\013Quest.proto\032\017Str" +
-      "ucture.proto\032\nTask.proto\032\nUser.proto\"\310\t\n" +
+      "ucture.proto\032\nTask.proto\032\nUser.proto\"\372\t\n" +
       "\017StaticDataProto\0220\n\006sender\030\001 \001(\0132 .com.l" +
       "vl6.proto.MinimumUserProto\022>\n\016expansionC" +
       "osts\030\002 \003(\0132&.com.lvl6.proto.CityExpansio" +
@@ -6213,8 +6486,9 @@ public final class StaticDataStuffProto {
       "nts\030\025 \003(\0132(.com.lvl6.proto.PersistentCla" +
       "nEventProto\022(\n\005items\030\026 \003(\0132\031.com.lvl6.pr" +
       "oto.ItemProto\0220\n\tobstacles\030\027 \003(\0132\035.com.l" +
-      "vl6.proto.ObstacleProtoB\026B\024StaticDataStu" +
-      "ffProto"
+      "vl6.proto.ObstacleProto\0220\n\tclanIcons\030\030 \003" +
+      "(\0132\035.com.lvl6.proto.ClanIconProtoB\026B\024Sta" +
+      "ticDataStuffProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6226,7 +6500,7 @@ public final class StaticDataStuffProto {
           internal_static_com_lvl6_proto_StaticDataProto_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_lvl6_proto_StaticDataProto_descriptor,
-              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", },
+              new java.lang.String[] { "Sender", "ExpansionCosts", "AllCities", "AllTasks", "AllMonsters", "Slip", "InProgressQuests", "UnredeemedQuests", "AvailableQuests", "BoosterPacks", "AllGenerators", "AllStorages", "AllHospitals", "AllResidences", "AllLabs", "AllTownHalls", "PersistentEvents", "Mbds", "Raids", "PersistentClanEvents", "Items", "Obstacles", "ClanIcons", },
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.class,
               com.lvl6.proto.StaticDataStuffProto.StaticDataProto.Builder.class);
           return null;

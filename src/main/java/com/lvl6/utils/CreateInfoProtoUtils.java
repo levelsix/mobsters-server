@@ -26,6 +26,7 @@ import com.lvl6.info.ClanEventPersistent;
 import com.lvl6.info.ClanEventPersistentForClan;
 import com.lvl6.info.ClanEventPersistentForUser;
 import com.lvl6.info.ClanEventPersistentUserReward;
+import com.lvl6.info.ClanIcon;
 import com.lvl6.info.ClanRaid;
 import com.lvl6.info.ClanRaidStage;
 import com.lvl6.info.ClanRaidStageMonster;
@@ -83,6 +84,7 @@ import com.lvl6.proto.CityProto.CityElementProto;
 import com.lvl6.proto.CityProto.CityExpansionCostProto;
 import com.lvl6.proto.CityProto.FullCityProto;
 import com.lvl6.proto.CityProto.UserCityExpansionDataProto;
+import com.lvl6.proto.ClanProto.ClanIconProto;
 import com.lvl6.proto.ClanProto.ClanRaidProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageMonsterProto;
 import com.lvl6.proto.ClanProto.ClanRaidStageProto;
@@ -125,6 +127,7 @@ import com.lvl6.proto.StructureProto.CoordinateProto;
 import com.lvl6.proto.StructureProto.FullUserStructureProto;
 import com.lvl6.proto.StructureProto.HospitalProto;
 import com.lvl6.proto.StructureProto.LabProto;
+import com.lvl6.proto.StructureProto.MinimumObstacleProto;
 import com.lvl6.proto.StructureProto.ObstacleProto;
 import com.lvl6.proto.StructureProto.ResidenceProto;
 import com.lvl6.proto.StructureProto.ResourceGeneratorProto;
@@ -132,10 +135,9 @@ import com.lvl6.proto.StructureProto.ResourceStorageProto;
 import com.lvl6.proto.StructureProto.ResourceType;
 import com.lvl6.proto.StructureProto.StructOrientation;
 import com.lvl6.proto.StructureProto.StructureInfoProto;
-import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.StructureProto.StructureInfoProto.StructType;
 import com.lvl6.proto.StructureProto.TownHallProto;
-import com.lvl6.proto.StructureProto.MinimumObstacleProto;
+import com.lvl6.proto.StructureProto.TutorialStructProto;
 import com.lvl6.proto.StructureProto.UserObstacleProto;
 import com.lvl6.proto.TaskProto.DayOfWeek;
 import com.lvl6.proto.TaskProto.FullTaskProto;
@@ -943,6 +945,22 @@ public class CreateInfoProtoUtils {
     pcerhpb.setClanCrDmg(cepfurh.getClanCrDmg());
 
     return pcerhpb.build();
+  }
+  
+  public static ClanIconProto createClanIconProtoFromClanIcon(ClanIcon ci) {
+  	ClanIconProto.Builder cipb = ClanIconProto.newBuilder();
+
+  	int id = ci.getId();
+		String imgName = ci.getImgName();
+		boolean isAvailable = ci.isAvailable();
+		
+		cipb.setClanIconId(id);
+		if (null != imgName) {
+			cipb.setImgName(imgName);
+		}
+		cipb.setIsAvailable(isAvailable);
+		
+  	return cipb.build();
   }
   
   /**InAppPurchase.proto********************************************/
