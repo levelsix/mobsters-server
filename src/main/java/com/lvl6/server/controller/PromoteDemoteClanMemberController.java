@@ -22,6 +22,7 @@ import com.lvl6.proto.EventClanProto.PromoteDemoteClanMemberResponseProto.Promot
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.server.controller.utils.ClanStuffUtils;
+import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.UpdateUtils;
 
@@ -60,25 +61,25 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     resBuilder.setSender(senderProto);
     resBuilder.setUserClanStatus(newUserClanStatus);
 
-    int clanId = senderProto.getClan().getClanId();
-//    int clanId = 0;
-//    if (senderProto.hasClan() && null != senderProto.getClan()) {
-//    	clanId = senderProto.getClan().getClanId();
-//    }
-//    
-//    if (0 != clanId) {
-//    	server.lockClan(clanId);
-//    } else {
-//    //MAYBE SHOULD ALSO LOCK THE playerToBootId
-//    //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-//    	server.lockPlayers(userId, victimId, this.getClass().getSimpleName());
-//    }
+    int clanId = 0;
+    if (senderProto.hasClan() && null != senderProto.getClan()) {
+    	clanId = senderProto.getClan().getClanId();
+    }
+    
+    boolean lockedClan = false;
+    if (0 != clanId) {
+    	lockedClan = server.lockClan(clanId);
+    } /*else {
+    //MAYBE SHOULD ALSO LOCK THE playerToBootId
+    //server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	server.lockPlayers(userId, victimId, this.getClass().getSimpleName());
+    }*/
     try {
     	Map<Integer,User> users = RetrieveUtils.userRetrieveUtils().getUsersByIds(userIds);
     	Map<Integer, UserClan> userClans = RetrieveUtils.userClanRetrieveUtils()
     			.getUserClanForUsers(clanId, userIds);
 
-      boolean legitRequest = checkLegitRequest(resBuilder, userId, victimId,
+      boolean legitRequest = checkLegitRequest(resBuilder, lockedClan, userId, victimId,
       		newUserClanStatus, users, userClans);
 
       boolean success = false;
@@ -94,7 +95,9 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
       if (success) {
         resBuilder.setStatus(PromoteDemoteClanMemberStatus.SUCCESS);
         User victim = users.get(victimId);
-//        resBuilder.setVictimId();
+        
+        MinimumUserProto mup = CreateInfoProtoUtils.createMinimumUserProtoFromUser(victim);
+        resBuilder.setVictim(mup);
       }
 
       //write to promoter
@@ -124,18 +127,22 @@ import com.lvl6.utils.utilmethods.UpdateUtils;
     		log.error("exception2 in PromoteDemoteClanMember processEvent", e);
     	}
     } finally {
-//    	if (0 != clanId) {
-//    		server.unlockClan(clanId);
-//    	} else {
-//    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-//    	}
+    	if (0 != clanId) {
+    		server.unlockClan(clanId);
+    	} /*else {
+    		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
+    	}*/
     }
   }
 
-  private boolean checkLegitRequest(Builder resBuilder, int userId, int victimId,
-  		UserClanStatus newUserClanStatus, Map<Integer, User> userIdsToUsers,
+  private boolean checkLegitRequest(Builder resBuilder, boolean lockedClan, int userId,
+  		int victimId, UserClanStatus newUserClanStatus, Map<Integer, User> userIdsToUsers,
   		Map<Integer, UserClan> userIdsToUserClans) {
   	
+  	if (!lockedClan) {
+  		log.error("couldn't obtain clan lock");
+  		return false;
+  	}
     if (null == userIdsToUsers || userIdsToUsers.size() != 2 ||
     		null == userIdsToUserClans || userIdsToUserClans.size() != 2) {
       log.error("user or userClan objects do not total 2. users=" + userIdsToUsers +
