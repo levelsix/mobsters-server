@@ -431,7 +431,7 @@ message PromoteDemoteClanMemberRequestProto {
 
 message PromoteDemoteClanMemberResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 victimId = 2;
+	optional MinimumUserProtoForClans victim = 2;
 	optional UserClanStatus userClanStatus = 3 [default = MEMBER];
 	
 	optional PromoteDemoteClanMemberStatus status = 4;
