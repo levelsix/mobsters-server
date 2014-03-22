@@ -1154,4 +1154,35 @@ public class UpdateUtils implements UpdateUtil {
 			return numUpdated;
 		}
 		
+		@Override
+		public int updateClan(int clanId, boolean isChangeDescription, String description,
+				boolean isChangeJoinType, boolean requestToJoinRequired, boolean isChangeIcon,
+				int iconId) {
+			
+			String tableName = DBConstants.TABLE_CLANS;
+			
+			Map<String, Object> conditionParams = new HashMap<String, Object>();
+			conditionParams.put(DBConstants.CLANS__ID, clanId);
+			
+			Map<String, Object> absoluteParams = new HashMap<String, Object>();
+			if (isChangeDescription) {
+				absoluteParams.put(DBConstants.CLANS__DESCRIPTION, description);
+				
+			}
+			if (isChangeJoinType) {
+				absoluteParams.put(DBConstants.CLANS__REQUEST_TO_JOIN_REQUIRED, requestToJoinRequired);
+				
+			}
+			if (isChangeIcon) {
+				absoluteParams.put(DBConstants.CLANS__CLAN_ICON_ID, iconId);
+				
+			}
+			
+			Map<String, Object> relativeParams = null;
+			int numUpdated = DBConnection.get().updateTableRows(tableName, relativeParams,
+					absoluteParams, conditionParams, "and");
+			
+			return numUpdated;
+		}
+		
 }

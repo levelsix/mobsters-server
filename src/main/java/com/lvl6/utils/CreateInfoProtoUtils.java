@@ -615,7 +615,8 @@ public class CreateInfoProtoUtils {
     fcpb.setDescription(c.getDescription());
     fcpb.setTag(c.getTag());
     fcpb.setRequestToJoinRequired(c.isRequestToJoinRequired());
-
+    fcpb.setClanIconId(c.getClanIconId());
+    
     return fcpb.build();
   }
 

@@ -176,4 +176,8 @@ public interface UpdateUtil {
   
   public abstract int updateObstacleForUserRemovalTime(int obstacleForUserId,
   		Timestamp clientTime);
+  
+  public abstract int updateClan(int clanId, boolean isChangeDescription,
+  		String description, boolean isChangeJoinType, boolean requestToJoinRequired,
+  		boolean isChangeIcon, int iconId);
 }

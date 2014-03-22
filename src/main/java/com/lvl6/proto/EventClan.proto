@@ -16,22 +16,23 @@ message CreateClanRequestProto {
 	optional string tag = 3;
 	optional bool requestToJoinClanRequired = 4;
 	optional string description = 5;
+	optional int32 clanIconId = 6;
 }
 
 message CreateClanResponseProto {
 	optional MinimumUserProto sender = 1;
 	optional CreateClanStatus status = 2;
-	optional MinimumClanProto clanInfo = 3;
+	optional MinimumClanProto clanInfo = 3;	
 	
 	enum CreateClanStatus {
 		SUCCESS = 1;
-		OTHER_FAIL = 2;
-		NOT_ENOUGH_COINS = 3;
-		NAME_TAKEN = 4;
-		ALREADY_IN_CLAN = 5;
-		INVALID_TAG_LENGTH = 6;
-		TAG_TAKEN = 7;
-	}	
+		FAIL_OTHER = 2;
+		FAIL_NOT_ENOUGH_CASH = 3;
+		FAIL_NAME_TAKEN = 4;
+		FAIL_ALREADY_IN_CLAN = 5;
+		FAIL_INVALID_TAG_LENGTH = 6;
+		FAIL_TAG_TAKEN = 7;
+	}
 }
 
 //------------------------------------------------------------------------------------------
@@ -189,6 +190,48 @@ message TransferClanOwnershipResponseProto {
 
 //------------------------------------------------------------------------------------------
 
+message BootPlayerFromClanRequestProto {
+	optional MinimumUserProto sender = 1;
+	optional int32 playerToBoot = 2;
+}
+
+message BootPlayerFromClanResponseProto {
+     optional MinimumUserProto sender = 1;
+	 optional int32 playerToBoot = 2;
+	 optional BootPlayerFromClanStatus status = 3;
+     
+     enum BootPlayerFromClanStatus {
+     	SUCCESS = 1;
+     	FAIL_OTHER = 2;
+     	FAIL_NOT_AUTHORIZED = 3;
+     	FAIL_BOOTED_NOT_IN_CLAN = 4;
+     }
+}
+
+//------------------------------------------------------------------------------------
+/* MERGED WITH ChangeClanDescription AND ChangeClanIcon
+message ChangeClanJoinTypeRequestProto {
+	//from an open (no request to join necessary) to request to join necessary
+	optional MinimumUserProto sender = 1;
+	optional bool requestToJoinRequired = 2;
+}
+
+message ChangeClanJoinTypeResponseProto {
+	optional MinimumUserProto sender = 1;
+	optional ChangeClanJoinTypeStatus status = 2;
+	optional MinimumClanProto minClan = 3;
+	optional FullClanProtoWithClanSize fullClan = 4;
+	
+	enum ChangeClanJoinTypeStatus {
+		SUCCESS = 1;
+		FAIL_OTHER = 2;
+		FAIL_NOT_IN_CLAN = 3;
+		FAIL_NOT_OWNER = 4;
+	}
+}
+
+//------------------------------------------------------------------------------------------
+
 message ChangeClanDescriptionRequestProto {
 	optional MinimumUserProto sender = 1;
 	optional string description = 2;
@@ -209,47 +252,39 @@ message ChangeClanDescriptionResponseProto {
 		FAIL_NOT_AUTHORIZED = 5;
 	}	
 }
-
+*/
 //------------------------------------------------------------------------------------------
 
-message BootPlayerFromClanRequestProto {
+//cramming change clan description and change clan join type and change clan icon
+//send to all clan members
+message ChangeClanSettingsRequestProto {
 	optional MinimumUserProto sender = 1;
-	optional int32 playerToBoot = 2;
-}
-
-message BootPlayerFromClanResponseProto {
-     optional MinimumUserProto sender = 1;
-	 optional int32 playerToBoot = 2;
-	 optional BootPlayerFromClanStatus status = 3;
-     
-     enum BootPlayerFromClanStatus {
-     	SUCCESS = 1;
-     	FAIL_OTHER = 2;
-     	FAIL_NOT_AUTHORIZED = 3;
-     	FAIL_BOOTED_NOT_IN_CLAN = 4;
-     }
-}
-
-//------------------------------------------------------------------------------------
-
-message ChangeClanJoinTypeRequestProto {
+	
+	optional bool isChangeDescription = 2;
+	optional string descriptionNow = 3;
+	
 	//from an open (no request to join necessary) to request to join necessary
-	optional MinimumUserProto sender = 1;
-	optional bool requestToJoinRequired = 2;
+	optional bool isChangeJoinType = 4;
+	optional bool requestToJoinRequired = 5;
+	
+	optional bool isChangeIcon = 6;
+	optional int32 iconId = 7;
 }
 
-message ChangeClanJoinTypeResponseProto {
+message ChangeClanSettingsResponseProto {
 	optional MinimumUserProto sender = 1;
-	optional ChangeClanJoinTypeStatus status = 2;
+	optional ChangeClanSettingsStatus status = 2;
+	
 	optional MinimumClanProto minClan = 3;
 	optional FullClanProtoWithClanSize fullClan = 4;
 	
-	enum ChangeClanJoinTypeStatus {
-		SUCCESS = 1;
-		FAIL_OTHER = 2;
+	enum ChangeClanSettingsStatus {
+		SUCCESS = 1; //if all requested changes succeed 
+		FAIL_NOT_AUTHORIZED = 2;
 		FAIL_NOT_IN_CLAN = 3;
-		FAIL_NOT_OWNER = 4;
-	}
+		FAIL_OTHER = 4; //if one requested change fails, but server still process all of them
+	}	
+	
 }
 
 //------------------------------------------------------------------------------------------

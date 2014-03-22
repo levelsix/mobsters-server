@@ -37,25 +37,6 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  //For sending messages to online people, NOTIFICATION FEATURE
-  @Resource(name = "outgoingGameEventsHandlerExecutor")
-  protected TaskExecutor executor;
-  public TaskExecutor getExecutor() {
-    return executor;
-  }
-  public void setExecutor(TaskExecutor executor) {
-    this.executor = executor;
-  }
-  @Resource(name = "playersByPlayerId")
-  protected Map<Integer, ConnectedPlayer> playersByPlayerId;
-  public Map<Integer, ConnectedPlayer> getPlayersByPlayerId() {
-    return playersByPlayerId;
-  }
-  public void setPlayersByPlayerId(
-      Map<Integer, ConnectedPlayer> playersByPlayerId) {
-    this.playersByPlayerId = playersByPlayerId;
-  }
-
   public LeaveClanController() {
     numAllocatedThreads = 4;
   }
@@ -87,12 +68,12 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     }
     
     //maybe should get clan lock instead of locking person
-    
-    if (0 != clanId) {
-    	server.lockClan(clanId);
-    } else {
+    //but going to modify user, so lock user. however maybe locking is not necessary
+//    if (0 != clanId) {
+//    	server.lockClan(clanId);
+//    } else {
     	server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    }
+//    }
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Clan clan = ClanRetrieveUtils.getClanWithId(clanId);
@@ -130,11 +111,11 @@ import com.lvl6.utils.utilmethods.DeleteUtils;
     		log.error("exception2 in LeaveClan processEvent", e);
     	}
     } finally {
-    	if (0 != clanId) {
-    		server.unlockClan(clanId);
-    	} else {
+//    	if (0 != clanId) {
+//    		server.unlockClan(clanId);
+//    	} else {
     		server.unlockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
-    	}
+//    	}
     }
   }
 

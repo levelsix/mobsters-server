@@ -72,10 +72,10 @@ public class MonsterForPvpRetrieveUtils implements InitializingBean {
   	reload();
   }
   
-  //hacky way of reloading
-  public static void staticReload() {
-  	(new MonsterForPvpRetrieveUtils()).reload();
-  }
+//  //hacky way of reloading
+//  public static void staticReload() {
+//  	(new MonsterForPvpRetrieveUtils()).reload();
+//  }
 
   public void reload() {
   	

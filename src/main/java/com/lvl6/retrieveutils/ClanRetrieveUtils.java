@@ -241,7 +241,8 @@ import com.lvl6.utils.utilmethods.StringUtils;
       //for legacy clans, they were by default a request to join was required
       requestToJoinRequired = true;
     }
+    int clanIconId = rs.getInt(i++);
     
-    return new Clan(id, name, createTime, description, tag, requestToJoinRequired);
+    return new Clan(id, name, createTime, description, tag, requestToJoinRequired, clanIconId);
   }
 }

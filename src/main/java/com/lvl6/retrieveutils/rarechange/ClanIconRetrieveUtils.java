@@ -67,20 +67,23 @@ public class ClanIconRetrieveUtils {
 	//CONTROLLER LOGIC******************************************************************
 	
 	//RETRIEVE QUERIES*********************************************************************
-  public static Map<Integer, ClanIcon> getAllIcons() {
-  	//TODO: rethink how to set all the clan icons
-  	if (null == clanIconIdsToClanIcons) {
-  		(new ClanIconRetrieveUtils()).reload();
-  	}
-  	
-  	return clanIconIdsToClanIcons;
-  }
-  
   public Map<Integer, ClanIcon> getClanIconIdsToClanIcons() {
   	if (null == clanIconIdsToClanIcons) {
   		setStaticClanIconIdsToClanIcons();
   	}
   	return clanIconIdsToClanIcons;
+  }
+
+  public ClanIcon getClanIconForId(int id) {
+  	if (null == clanIconIdsToClanIcons) {
+  		setStaticClanIconIdsToClanIcons();
+  	}
+  	
+  	if (!clanIconIdsToClanIcons.containsKey(id)) {
+  		log.warn("no clan icon with id=" + id);
+  		return null;
+  	}
+  	return clanIconIdsToClanIcons.get(id);
   }
   
   public Map<Integer, ClanIcon> getClanIconsForIds(Collection<Integer> ids) {
@@ -124,11 +127,6 @@ public class ClanIconRetrieveUtils {
     } catch (Exception e) {
     	log.error("problem retrieving clan icon from db", e);
     }
-  }
-  
-  //TODO: FIGURE OUT BETTER WAY TO RELOAD DATA
-  public static void staticReload() {
-  	(new ClanIconRetrieveUtils()).reload();
   }
 
   public void reload() {

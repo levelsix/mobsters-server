@@ -11,9 +11,10 @@ public class Clan {
 	private String description;
 	private String tag;
 	private boolean requestToJoinRequired;
+	private int clanIconId;
 	
 	public Clan(int id, String name, Date createTime, String description,
-			String tag, boolean requestToJoinRequired) {
+			String tag, boolean requestToJoinRequired, int clanIconId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -21,6 +22,7 @@ public class Clan {
 		this.description = description;
 		this.tag = tag;
 		this.requestToJoinRequired = requestToJoinRequired;
+		this.clanIconId = clanIconId;
 	}
 
 	public int getId() {
@@ -71,11 +73,20 @@ public class Clan {
 		this.requestToJoinRequired = requestToJoinRequired;
 	}
 
+	public int getClanIconId() {
+		return clanIconId;
+	}
+
+	public void setClanIconId(int clanIconId) {
+		this.clanIconId = clanIconId;
+	}
+
 	@Override
 	public String toString() {
 		return "Clan [id=" + id + ", name=" + name + ", createTime=" + createTime
 				+ ", description=" + description + ", tag=" + tag
-				+ ", requestToJoinRequired=" + requestToJoinRequired + "]";
+				+ ", requestToJoinRequired=" + requestToJoinRequired + ", clanIconId="
+				+ clanIconId + "]";
 	}
 	
 }

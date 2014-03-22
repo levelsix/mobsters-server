@@ -89,10 +89,12 @@ import com.lvl6.utils.utilmethods.InsertUtils;
       if (legitRequest) {
         //setting minimum user proto for clans based on clan join type
         if (requestToJoinRequired) {
+        	//clan raid contribution stuff
           MinimumUserProtoForClans mupfc = CreateInfoProtoUtils.createMinimumUserProtoForClans(
               user, UserClanStatus.REQUESTING, 0F);
           resBuilder.setRequester(mupfc);
         } else {
+        	//clan raid contribution stuff
           MinimumUserProtoForClans mupfc = CreateInfoProtoUtils.createMinimumUserProtoForClans(
               user, UserClanStatus.MEMBER, 0F);
           resBuilder.setRequester(mupfc);

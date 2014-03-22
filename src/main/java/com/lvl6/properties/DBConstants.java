@@ -125,6 +125,7 @@ public class DBConstants {
   public static final String CLANS__DESCRIPTION = "description";
   public static final String CLANS__TAG = "tag";
   public static final String CLANS__REQUEST_TO_JOIN_REQUIRED = "request_to_join_required";
+  public static final String CLANS__CLAN_ICON_ID = "clan_icon_id";  
   
   /*CLAN_CHAT_POSTS*/
   public static final String CLAN_CHAT_POST__ID = GENERIC__ID;

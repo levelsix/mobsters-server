@@ -5,12 +5,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Component;
 
 import com.lvl6.events.RequestEvent;
@@ -30,7 +27,6 @@ import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
-import com.lvl6.utils.ConnectedPlayer;
 import com.lvl6.utils.CreateInfoProtoUtils;
 import com.lvl6.utils.RetrieveUtils;
 import com.lvl6.utils.utilmethods.DeleteUtils;
@@ -40,25 +36,6 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private static Logger log = LoggerFactory.getLogger(new Object() { }.getClass().getEnclosingClass());
 
-  //For sending messages to online people, NOTIFICATION FEATURE
-  @Resource(name = "outgoingGameEventsHandlerExecutor")
-  protected TaskExecutor executor;
-  public TaskExecutor getExecutor() {
-	  return executor;
-  }
-  public void setExecutor(TaskExecutor executor) {
-	  this.executor = executor;
-  }
-  @Resource(name = "playersByPlayerId")
-  protected Map<Integer, ConnectedPlayer> playersByPlayerId;
-  public Map<Integer, ConnectedPlayer> getPlayersByPlayerId() {
-	  return playersByPlayerId;
-  }
-  public void setPlayersByPlayerId(
-		  Map<Integer, ConnectedPlayer> playersByPlayerId) {
-	  this.playersByPlayerId = playersByPlayerId;
-  }
-  
   public CreateClanController() {
     numAllocatedThreads = 4;
   }
@@ -82,6 +59,7 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     String tag = reqProto.getTag();
     boolean requestToJoinRequired = reqProto.getRequestToJoinClanRequired();
     String description = reqProto.getDescription();
+    int clanIconId = reqProto.getClanIconId();
     
     CreateClanResponseProto.Builder resBuilder = CreateClanResponseProto.newBuilder();
     resBuilder.setSender(senderProto);
@@ -106,10 +84,10 @@ import com.lvl6.utils.utilmethods.InsertUtils;
             tag, requestToJoinRequired);
         if (clanId <= 0) {
           legitCreate = false;
-          resBuilder.setStatus(CreateClanStatus.OTHER_FAIL);
+          resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
         } else {
         	Clan newClan = new Clan(clanId, clanName, createTime, description, tag,
-        			requestToJoinRequired);
+        			requestToJoinRequired, clanIconId);
           resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(newClan));
         }
       }
@@ -154,41 +132,41 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 
   private boolean checkLegitCreate(Builder resBuilder, User user, String clanName, String tag) {
     if (user == null || clanName == null || clanName.length() <= 0 || tag == null || tag.length() <= 0) {
-      resBuilder.setStatus(CreateClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
       log.error("user is null");
       return false;      
     }
     if (user.getCash() < ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN) {
-      resBuilder.setStatus(CreateClanStatus.NOT_ENOUGH_COINS);
+      resBuilder.setStatus(CreateClanStatus.FAIL_NOT_ENOUGH_CASH);
       log.error("user only has " + user.getCash() + ", needs " + ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN);
       return false;
     }
     if (clanName.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME) {
-      resBuilder.setStatus(CreateClanStatus.OTHER_FAIL);
+      resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
       log.error("clan name " + clanName + " is more than " + ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_NAME + " characters");
       return false;
     }
     
     if (tag.length() > ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG) {
-      resBuilder.setStatus(CreateClanStatus.INVALID_TAG_LENGTH);
+      resBuilder.setStatus(CreateClanStatus.FAIL_INVALID_TAG_LENGTH);
       log.error("clan tag " + tag + " is more than " + ControllerConstants.CREATE_CLAN__MAX_CHAR_LENGTH_FOR_CLAN_TAG + " characters");
       return false;
     }
     
     if (user.getClanId() > 0) {
-      resBuilder.setStatus(CreateClanStatus.ALREADY_IN_CLAN);
+      resBuilder.setStatus(CreateClanStatus.FAIL_ALREADY_IN_CLAN);
       log.error("user already in clan with id " + user.getClanId());
       return false;
     }
     Clan clan = ClanRetrieveUtils.getClanWithNameOrTag(clanName, tag);
     if (clan != null) {
       if (clan.getName().equalsIgnoreCase(clanName)) {
-        resBuilder.setStatus(CreateClanStatus.NAME_TAKEN);
+        resBuilder.setStatus(CreateClanStatus.FAIL_NAME_TAKEN);
         log.error("clan name already taken with name " + clanName);
         return false;
       }
       if (clan.getTag().equalsIgnoreCase(tag)) {
-        resBuilder.setStatus(CreateClanStatus.TAG_TAKEN);
+        resBuilder.setStatus(CreateClanStatus.FAIL_TAG_TAKEN);
         log.error("clan tag already taken with tag " + tag);
         return false;
       }
