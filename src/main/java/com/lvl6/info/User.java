@@ -539,6 +539,36 @@ public class User implements Serializable {
 		return false;
 	}
 
+	public boolean updateGemsCashClan(int gemChange, int cashChange, int clanId) {
+		Map<String, Object> conditionParams = new HashMap<String, Object>();
+		conditionParams.put(DBConstants.USER__ID, id);
+
+		Map <String, Object> relativeParams = new HashMap<String, Object>();
+		if (0 != cashChange) {
+			relativeParams.put(DBConstants.USER__CASH, cashChange);
+		}
+		if (0 != gemChange) {
+			relativeParams.put(DBConstants.USER__GEMS, gemChange);
+		}
+
+		Map <String, Object> absoluteParams = new HashMap<String, Object>();
+		absoluteParams.put(DBConstants.USER__CLAN_ID, clanId);
+		
+		int numUpdated = DBConnection.get().updateTableRows(DBConstants.TABLE_USER,
+				relativeParams, absoluteParams, conditionParams, "and");
+		
+		if (1 == numUpdated) {
+			if (0 != cashChange) {
+				this.cash += cashChange;
+			}
+			if (0 != gemChange) {
+				this.gems += gemChange;
+			}
+			this.clanId = clanId;
+			return true;
+		}
+		return false;
+	}
 
 	public boolean updateRelativeCoinsOilRetrievedFromStructs (int coinChange,
 			int oilChange) {

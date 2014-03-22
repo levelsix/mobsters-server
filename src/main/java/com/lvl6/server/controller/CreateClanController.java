@@ -24,6 +24,7 @@ import com.lvl6.proto.EventClanProto.CreateClanRequestProto;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.Builder;
 import com.lvl6.proto.EventClanProto.CreateClanResponseProto.CreateClanStatus;
+import com.lvl6.proto.EventUserProto.UpdateUserCurrencyResponseProto.UpdateUserCurrencyStatus;
 import com.lvl6.proto.ProtocolsProto.EventProtocolRequest;
 import com.lvl6.proto.UserProto.MinimumUserProto;
 import com.lvl6.retrieveutils.ClanRetrieveUtils;
@@ -64,52 +65,47 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     int cashChange = reqProto.getCashChange();
     
     CreateClanResponseProto.Builder resBuilder = CreateClanResponseProto.newBuilder();
+    resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
     resBuilder.setSender(senderProto);
 
     server.lockPlayer(senderProto.getUserId(), this.getClass().getSimpleName());
     try {
       User user = RetrieveUtils.userRetrieveUtils().getUserById(senderProto.getUserId());
       Timestamp createTime = new Timestamp(new Date().getTime());
-      int previousGold = 0;
       
-      boolean legitCreate = checkLegitCreate(resBuilder, user, clanName, tag);
-
-      int clanId = ControllerConstants.NOT_SET;
+      boolean legitCreate = checkLegitCreate(resBuilder, user, clanName, tag, gemsSpent,
+      		cashChange);
+      
+      boolean success = false;
+      Map<String, Integer> previousCurrency = new HashMap<String, Integer>();
+      Map<String, Integer> currencyChange = new HashMap<String, Integer>();
+      Clan createdClan = new Clan();
       if (legitCreate) {
-      	
-      	//just in case user doesn't input one, set default description
-      	if (null == description || description.isEmpty()) {
-      		description = "Welcome to " + clanName + "!";
-      	}
-      	
-        clanId = InsertUtils.get().insertClan(clanName, createTime, description,
-            tag, requestToJoinRequired, clanIconId);
-        if (clanId <= 0) {
-          legitCreate = false;
-          resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
-        } else {
-        	Clan newClan = new Clan(clanId, clanName, createTime, description, tag,
-        			requestToJoinRequired, clanIconId);
-          resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(newClan));
-        }
+      	previousCurrency.put(MiscMethods.gems, user.getGems());
+      	previousCurrency.put(MiscMethods.cash, user.getCash());
+        success = writeChangesToDB(user, clanName, tag, requestToJoinRequired, description,
+        		clanIconId, createTime, createdClan, gemsSpent, cashChange, currencyChange);
+      }
+      
+      if (success) {
+      	resBuilder.setClanInfo(CreateInfoProtoUtils.createMinimumClanProtoFromClan(createdClan));
+      	resBuilder.setStatus(CreateClanStatus.SUCCESS);
       }
       
       CreateClanResponseEvent resEvent = new CreateClanResponseEvent(senderProto.getUserId());
       resEvent.setTag(event.getTag());
       resEvent.setCreateClanResponseProto(resBuilder.build());  
       server.writeEvent(resEvent);
-      if (legitCreate) {
-        previousGold = user.getGems();
-        
-        Map<String, Integer> money = new HashMap<String, Integer>();
-        writeChangesToDB(user, clanId, money);
+      
+      if (success) {
         UpdateClientUserResponseEvent resEventUpdate = MiscMethods.createUpdateClientUserResponseEventAndUpdateLeaderboard(user);
         resEventUpdate.setTag(event.getTag());
         server.writeEvent(resEventUpdate);
         
         sendGeneralNotification(user.getName(), clanName);
         
-        writeToUserCurrencyHistory(user, createTime, money, previousGold, clanId, clanName);
+        writeToUserCurrencyHistory(user, createdClan, createTime,
+        		currencyChange, previousCurrency);
       }
     } catch (Exception e) {
       log.error("exception in CreateClan processEvent", e);
@@ -118,21 +114,8 @@ import com.lvl6.utils.utilmethods.InsertUtils;
     }
   }
 
-  private void writeChangesToDB(User user, int clanId, Map<String, Integer> money) {
-    int coinChange = -1*ControllerConstants.CREATE_CLAN__COIN_PRICE_TO_CREATE_CLAN;
-    if (!user.updateRelativeCoinsAbsoluteClan(coinChange, clanId)) {
-      log.error("problem with decreasing user diamonds for creating clan");
-    } else {
-      //everything went well
-      money.put(MiscMethods.cash, coinChange);
-    }
-    if (!InsertUtils.get().insertUserClan(user.getId(), clanId, UserClanStatus.MEMBER, new Timestamp(new Date().getTime()))) {
-      log.error("problem with inserting user clan data for user " + user + ", and clan id " + clanId);
-    }
-    DeleteUtils.get().deleteUserClansForUserExceptSpecificClan(user.getId(), clanId);
-  }
-
-  private boolean checkLegitCreate(Builder resBuilder, User user, String clanName, String tag) {
+  private boolean checkLegitCreate(Builder resBuilder, User user, String clanName,
+  		String tag, int gemsSpent, int cashChange) {
     if (user == null || clanName == null || clanName.length() <= 0 || tag == null || tag.length() <= 0) {
       resBuilder.setStatus(CreateClanStatus.FAIL_OTHER);
       log.error("user is null");
@@ -173,8 +156,44 @@ import com.lvl6.utils.utilmethods.InsertUtils;
         return false;
       }
     }
+    
+    //CHECK MONEY
+    if (!hasEnoughCash(resBuilder, user, cashChange)) {
+    		return false;
+    }
+    
+    if (!hasEnoughGems(resBuilder, user, gemsSpent)) {
+    		return false;
+    }
+    
     resBuilder.setStatus(CreateClanStatus.SUCCESS);
     return true;
+  }
+
+  private boolean hasEnoughCash(Builder resBuilder, User u, int cashSpent) {
+  	int userCash = u.getCash();
+  	//if user's aggregate cash is < cost, don't allow transaction
+  	if (userCash < cashSpent) {
+  		log.error("user error: user does not have enough cash. userCash=" + userCash +
+  				"\t cashSpent=" + cashSpent);
+  		resBuilder.setStatus(CreateClanStatus.FAIL_INSUFFICIENT_FUNDS);
+  		return false;
+  	}
+  	
+  	return true;
+  }
+  
+  private boolean hasEnoughGems(Builder resBuilder, User u, int gemsSpent) {
+  	int userGems = u.getGems();
+  	//if user's aggregate gems is < cost, don't allow transaction
+  	if (userGems < gemsSpent) {
+  		log.error("user error: user does not have enough gems. userGems=" + userGems +
+  				"\t gemsSpent=" + gemsSpent);
+  		resBuilder.setStatus(CreateClanStatus.FAIL_INSUFFICIENT_FUNDS);
+  		return false;
+  	}
+  	
+  	return true;
   }
   
   private void sendGeneralNotification (String userName, String clanName) {
@@ -183,28 +202,86 @@ import com.lvl6.utils.utilmethods.InsertUtils;
 	  
 	  MiscMethods.writeGlobalNotification(createClanNotification, server);
   }
-  
-  private void writeToUserCurrencyHistory(User aUser, Timestamp date, Map<String, Integer> money,
-      int previousGems, int clanId, String clanName) {
-  	int userId = aUser.getId();
-  	StringBuilder sb = new StringBuilder();
-  	sb.append("clanId=");
-  	sb.append(clanId);
-  	sb.append(" clanName=");
-  	sb.append(clanName);
-  	String gems = MiscMethods.gems;
-  	String reasonForChange = ControllerConstants.UCHRFC__CREATE_CLAN;
+
+  private boolean writeChangesToDB(User user, String name, String tag,
+  		boolean requestToJoinRequired, String description, int clanIconId,
+  		Timestamp createTime, Clan createdClan, int gemsSpent, int cashChange,
+  		 Map<String, Integer> money) {
   	
-    Map<String, Integer> previousCurrencyMap = new HashMap<String, Integer>();
-    Map<String, Integer> currentCurrencyMap = new HashMap<String, Integer>();
+  	//just in case user doesn't input one, set default description
+  	if (null == description || description.isEmpty()) {
+  		description = "Welcome to " + name + "!";
+  	}
+  	
+  	int clanId = InsertUtils.get().insertClan(name, createTime, description,
+        tag, requestToJoinRequired, clanIconId);
+    if (clanId <= 0) {
+      return false;
+    } else {
+    	setClan(createdClan, clanId, name, createTime, description, tag,
+    			requestToJoinRequired, clanIconId);
+    	log.info("clan=" + createdClan);
+    }
+
+    int gemChange = -1 * Math.abs(gemsSpent);
+    cashChange = -1 * Math.abs(cashChange);
+    if (!user.updateGemsCashClan(gemChange, cashChange, clanId)) {
+      log.error("problem with decreasing user gems, cash for creating clan. gemChange=" +
+      		gemChange + "\t cashChange=" + cashChange);
+    } else {
+    	if (0 != gemsSpent) {
+    		money.put(MiscMethods.gems, gemsSpent);
+    	}
+    	if (0 != cashChange) {
+    		money.put(MiscMethods.cash, cashChange);
+    	}
+    }
+    
+    if (!InsertUtils.get().insertUserClan(user.getId(), clanId, UserClanStatus.LEADER, createTime)) {
+      log.error("problem with inserting user clan data for user " + user + ", and clan id " + clanId);
+    }
+    DeleteUtils.get().deleteUserClansForUserExceptSpecificClan(user.getId(), clanId);
+    
+    return true;
+  }
+  
+  private void setClan(Clan createdClan, int clanId, String name, Timestamp createTime,
+  		String description, String tag, boolean requestToJoinRequired, int clanIconId) {
+  	createdClan.setId(clanId);
+  	createdClan.setName(name);
+  	createdClan.setCreateTime(createTime);
+  	createdClan.setDescription(description);
+  	createdClan.setTag(tag);
+  	createdClan.setRequestToJoinRequired(requestToJoinRequired);
+  	createdClan.setClanIconId(clanIconId);
+  }
+  
+  private void writeToUserCurrencyHistory(User aUser, Clan clan, Timestamp createTime,
+  		Map<String, Integer> currencyChange, Map<String, Integer> previousCurrency) {
+  	int userId = aUser.getId();
+  	String reason = ControllerConstants.UCHRFC__CREATE_CLAN;
+  	StringBuilder detailsSb = new StringBuilder();
+  	detailsSb.append("clanId=");
+  	detailsSb.append(clan.getId());
+  	detailsSb.append(" clanName=");
+  	detailsSb.append(clan.getName());
+  	String details = detailsSb.toString();
+  	
+    Map<String, Integer> currentCurrency = new HashMap<String, Integer>();
     Map<String, String> reasonsForChanges = new HashMap<String, String>();
     Map<String, String> detailsMap = new HashMap<String, String>();
-    detailsMap.put(gems, sb.toString());
-    
-    previousCurrencyMap.put(gems, previousGems);
-    currentCurrencyMap.put(gems, aUser.getGems());
-    reasonsForChanges.put(gems, reasonForChange);
-    MiscMethods.writeToUserCurrencyOneUser(userId, date, money, previousCurrencyMap,
-    		currentCurrencyMap, reasonsForChanges, detailsMap);
+    String gems = MiscMethods.gems;
+    String cash = MiscMethods.cash;
+
+    currentCurrency.put(gems, aUser.getGems());
+    currentCurrency.put(cash, aUser.getCash());
+    reasonsForChanges.put(gems, reason);
+    reasonsForChanges.put(cash, reason);
+    detailsMap.put(gems, details);
+    detailsMap.put(cash, details);
+
+    MiscMethods.writeToUserCurrencyOneUser(userId, createTime, currencyChange, 
+        previousCurrency, currentCurrency, reasonsForChanges, detailsMap);
+
   }
 }

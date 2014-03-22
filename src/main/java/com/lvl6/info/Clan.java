@@ -13,6 +13,10 @@ public class Clan {
 	private boolean requestToJoinRequired;
 	private int clanIconId;
 	
+	public Clan() {
+		super();
+	}
+
 	public Clan(int id, String name, Date createTime, String description,
 			String tag, boolean requestToJoinRequired, int clanIconId) {
 		super();

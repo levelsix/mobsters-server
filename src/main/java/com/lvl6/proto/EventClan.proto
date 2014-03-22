@@ -39,6 +39,7 @@ message CreateClanResponseProto {
 		FAIL_ALREADY_IN_CLAN = 5;
 		FAIL_INVALID_TAG_LENGTH = 6;
 		FAIL_TAG_TAKEN = 7;
+		FAIL_INSUFFICIENT_FUNDS = 8;
 	}
 }
 
