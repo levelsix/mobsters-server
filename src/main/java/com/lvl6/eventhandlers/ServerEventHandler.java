@@ -79,7 +79,6 @@ public class ServerEventHandler implements MessageListener<ServerMessage>, Initi
 	//TODO: FIGURE OUT CLEANER WAY TO DO THIS SETTING STATIC DATA
 	public void reloadStaticData() {
 		getMonsterForPvpRetrieveUtils().reload();
-		getClanIconRetrieveUtils().reload();
 	}
 
 	@Override

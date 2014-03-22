@@ -114,7 +114,6 @@ import com.lvl6.retrieveutils.rarechange.GoldSaleRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ItemRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.LockBoxEventRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterBattleDialogueRetrieveUtils;
-import com.lvl6.retrieveutils.rarechange.MonsterForPvpRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterLevelInfoRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.MonsterRetrieveUtils;
 import com.lvl6.retrieveutils.rarechange.ObstacleRetrieveUtils;
@@ -678,7 +677,7 @@ public class MiscMethods {
     CityRetrieveUtils.reload();
     //    ClanBossRetrieveUtils.reload();
     //    ClanBossRewardRetrieveUtils.reload();
-//    ClanIconRetrieveUtils.staticReload();
+    ClanIconRetrieveUtils.reload();
     ClanEventPersistentRetrieveUtils.reload();
     ClanRaidRetrieveUtils.reload();
     ClanRaidStageRetrieveUtils.reload();
@@ -1693,10 +1692,8 @@ public class MiscMethods {
   	}
   }
   
-  //TODO: rethink how to get all the clan icons
   private static void setClanIconStuff(Builder sdpb) {
-  	Map<Integer, ClanIcon> clanIconIdsToClanIcons = (new ClanIconRetrieveUtils())
-  			.getClanIconIdsToClanIcons();
+  	Map<Integer, ClanIcon> clanIconIdsToClanIcons = ClanIconRetrieveUtils.getClanIconIdsToClanIcons();
   	
   	if (null == clanIconIdsToClanIcons) {
   		return;
